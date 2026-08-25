@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Da Nang 3D - Route Simulator</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"
+    />
+    <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/pmtiles@4/dist/pmtiles.js"></script>
+    <script src="https://unpkg.com/@protomaps/basemaps@5/dist/basemaps.js" crossorigin="anonymous"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        --ink: #172033;
+        --muted: #697386;
+        --panel: rgba(255, 255, 255, 0.94);
+        --blue: #226df6;
+        --blue-dark: #1652c7;
+        --line: #e6e9ef;
+      }
+
+      * { box-sizing: border-box; }
+      html, body, #map { width: 100%; height: 100%; margin: 0; }
+      body { overflow: hidden; background: #dce6f2; color: var(--ink); }
+      button, input { font: inherit; }
+      button { cursor: pointer; }
+
+      #map::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(circle at 60% 30%, rgba(255,255,255,.74), transparent 26%),
+          linear-gradient(145deg, #c8dbed, #edf3f8 62%, #c7d7e7);
+      }
+
+      .topbar {
+        position: fixed;
+        z-index: 10;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .brand, .map-badge {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 44px;
+        padding: 9px 14px;
+        border: 1px solid rgba(255,255,255,.72);
+        border-radius: 14px;
+        background: var(--panel);
+        box-shadow: 0 12px 28px rgba(34, 52, 74, .16);
+        backdrop-filter: blur(12px);
+      }
+
+      .logo {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: linear-gradient(145deg, #2e7cff, #1651cf);
+        color: white;
+        font-weight: 900;
+      }
+
+      .brand strong { font-size: 14px; }
+      .brand small { display: block; color: var(--muted); font-size: 11px; margin-top: 1px; }
+      .map-badge { font-size: 12px; color: #4a566b; }
+      .map-badge i { width: 7px; height: 7px; border-radius: 50%; background: #27b46e; }
+
+      .panel {
+        position: fixed;
+        z-index: 10;
+        top: 78px;
+        left: 16px;
+        width: min(372px, calc(100vw - 32px));
+        padding: 18px;
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 20px 48px rgba(28, 47, 75, .18);
+        backdrop-filter: blur(15px);
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+      }
+
+      .panel h1 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+      .panel > p { margin: 5px 0 16px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+      .field-label {
+        display: block;
+        margin: 12px 0 6px;
+        color: #4b5668;
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+
+      .api-row, .coord-row, .action-row { display: flex; gap: 8px; }
+
+      input {
+        min-width: 0;
+        width: 100%;
+        height: 40px;
+        border: 1px solid #dfe3eb;
+        border-radius: 11px;
+        outline: none;
+        background: #f8f9fb;
+        padding: 0 12px;
+        color: var(--ink);
+        font-size: 12px;
+        transition: .18s ease;
+      }
+
+      input:focus { border-color: #74a2ff; box-shadow: 0 0 0 3px rgba(34,109,246,.12); background: #fff; }
+
+      .btn {
+        height: 40px;
+        flex: none;
+        border: 0;
+        border-radius: 11px;
+        padding: 0 14px;
+        background: #eef1f6;
+        color: #3c4759;
+        font-size: 12px;
+        font-weight: 700;
+        transition: transform .15s ease, background .15s ease, opacity .15s ease;
+      }
+
+      .btn:hover { transform: translateY(-1px); background: #e5e9f0; }
+      .btn:disabled { cursor: not-allowed; opacity: .48; transform: none; }
+      .btn.primary { background: var(--blue); color: #fff; }
+      .btn.primary:hover { background: var(--blue-dark); }
+      .btn.pick { width: 42px; padding: 0; font-size: 13px; }
+      .btn.pick.active { background: #172033; color: white; }
+      .btn.play { flex: 1; }
+      .btn.play:not(:disabled) { background: #172033; color: #fff; }
+      .btn.play:not(:disabled):hover { background: #263650; }
+
+      .point-dot {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        color: white;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .point-dot.a { background: #2f78ff; }
+      .point-dot.b { background: #ff5959; }
+
+      .coord-row + .coord-row { margin-top: 8px; }
+      .action-row { margin-top: 14px; }
+
+      .search-results {
+        display: none;
+        gap: 7px;
+        margin-top: 8px;
+      }
+      .search-results.visible { display: grid; }
+      .search-help {
+        margin: 6px 2px 0;
+        color: #7a8597;
+        font-size: 9px;
+        line-height: 1.4;
+      }
+      .search-result {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 10px;
+        border: 1px solid #e2e6ed;
+        border-radius: 11px;
+        background: #f8f9fb;
+      }
+      .search-result-text { min-width: 0; }
+      .search-result strong,
+      .search-result small {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .search-result strong { font-size: 11px; }
+      .search-result small { margin-top: 2px; color: var(--muted); font-size: 9px; }
+      .result-actions { display: flex; gap: 4px; }
+      .result-actions button {
+        width: 29px;
+        height: 29px;
+        border: 0;
+        border-radius: 8px;
+        color: white;
+        font-size: 10px;
+        font-weight: 850;
+      }
+      .result-actions .set-a { background: #2f78ff; }
+      .result-actions .set-b { background: #ff5959; }
+
+      .status {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        min-height: 34px;
+        margin-top: 13px;
+        padding: 9px 10px;
+        border-radius: 10px;
+        background: #f2f5f9;
+        color: #5d687a;
+        font-size: 11px;
+        line-height: 1.4;
+      }
+
+      .status::before {
+        content: "";
+        flex: none;
+        width: 7px;
+        height: 7px;
+        margin-top: 4px;
+        border-radius: 50%;
+        background: #7f8ba0;
+      }
+      .status.ok::before { background: #24af6b; }
+      .status.error::before { background: #f04d55; }
+      .status.loading::before { background: #f2a928; animation: pulse 1s infinite; }
+
+      .trip-card {
+        display: none;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+      .trip-card.visible { display: grid; }
+      .metric { padding: 8px; border-radius: 10px; background: #f7f8fa; }
+      .metric span { display: block; color: var(--muted); font-size: 9px; text-transform: uppercase; }
+      .metric strong { display: block; margin-top: 3px; font-size: 13px; }
+
+      .hint {
+        position: fixed;
+        z-index: 8;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%);
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        border: 1px solid rgba(255,255,255,.72);
+        border-radius: 999px;
+        background: rgba(22,32,51,.86);
+        padding: 9px 14px;
+        color: white;
+        font-size: 11px;
+        box-shadow: 0 10px 24px rgba(22,32,51,.2);
+        backdrop-filter: blur(12px);
+      }
+
+      .marker-pin {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 3px solid white;
+        border-radius: 50% 50% 50% 10%;
+        transform: rotate(-45deg);
+        box-shadow: 0 5px 14px rgba(22, 32, 51, .32);
+        color: white;
+        font-size: 11px;
+        font-weight: 900;
+      }
+      .marker-pin span { transform: rotate(45deg); }
+      .marker-pin.a { background: #2f78ff; }
+      .marker-pin.b { background: #ff5959; }
+
+      .car-marker {
+        position: relative;
+        width: 22px;
+        height: 42px;
+        border: 2px solid rgba(255,255,255,.95);
+        border-radius: 8px 8px 6px 6px;
+        background: linear-gradient(90deg, #1662dd, #4c9bff 48%, #1760d9);
+        box-shadow: 0 5px 13px rgba(13,42,90,.45);
+        transform-origin: 50% 50%;
+      }
+      .car-marker::before {
+        content: "";
+        position: absolute;
+        top: 7px;
+        left: 3px;
+        right: 3px;
+        height: 9px;
+        border-radius: 3px;
+        background: linear-gradient(#c5ebff, #5791be);
+        box-shadow: 0 17px 0 #96c8e9;
+      }
+      .car-marker::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: 3px;
+        width: 4px;
+        height: 3px;
+        border-radius: 2px;
+        background: #fff7bb;
+        box-shadow: 10px 0 0 #fff7bb;
+      }
+
+      .empty-state {
+        position: fixed;
+        z-index: 5;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+      }
+      .empty-state div {
+        margin-left: min(390px, 26vw);
+        padding: 18px 22px;
+        border: 1px solid rgba(255,255,255,.8);
+        border-radius: 17px;
+        background: rgba(255,255,255,.72);
+        color: #647085;
+        font-size: 13px;
+        text-align: center;
+        box-shadow: 0 16px 38px rgba(42,61,85,.12);
+        backdrop-filter: blur(12px);
+      }
+      .empty-state strong { display: block; margin-bottom: 4px; color: #263247; font-size: 16px; }
+      .empty-state.hidden { display: none; }
+
+      @keyframes pulse { 50% { opacity: .25; } }
+
+      @media (max-width: 700px) {
+        .topbar { top: 10px; left: 10px; right: 10px; }
+        .map-badge { display: none; }
+        .panel { top: 68px; left: 10px; width: calc(100vw - 20px); padding: 15px; max-height: calc(100vh - 136px); overflow-y: auto; }
+        .panel h1 { font-size: 18px; }
+        .hint { bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .empty-state div { margin: 330px 16px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" aria-label="Bản đồ OpenStreetMap Đà Nẵng 3D"></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">ĐN</div>
+        <div><strong>Đà Nẵng 3D Lab</strong><small>Local PMTiles & vehicle simulator</small></div>
+      </div>
+      <div class="map-badge"><i></i> 3D buildings enabled</div>
+    </div>
+
+    <section class="panel" aria-label="Điều khiển mô phỏng">
+      <h1>Mô phỏng hành trình</h1>
+      <p>Bản đồ nền đọc từ dữ liệu Đà Nẵng lưu trong dự án, không cần VietMap API.</p>
+
+      <label class="field-label" for="localMapPath">Dữ liệu bản đồ local</label>
+      <div class="api-row">
+        <input id="localMapPath" value="data/danang.pmtiles" readonly />
+        <button class="btn primary" id="loadMap">Tải lại</button>
+      </div>
+
+      <label class="field-label" for="serviceKey">Service API key (tìm kiếm & chỉ đường)</label>
+      <input id="serviceKey" type="password" autocomplete="off" placeholder="Không bắt buộc; để trống để dùng OSM/OSRM" />
+
+      <label class="field-label" for="addressSearch">Tìm địa điểm theo địa chỉ</label>
+      <div class="api-row">
+        <input id="addressSearch" placeholder="Ví dụ: Cầu Rồng, Đà Nẵng" />
+        <button class="btn" id="searchAddress" disabled>Tìm</button>
+      </div>
+      <p class="search-help">Tìm theo: tên địa điểm • số nhà/đường • phường/xã • thành phố. Thêm “Đà Nẵng” để kết quả chính xác hơn.</p>
+      <div id="searchResults" class="search-results" aria-live="polite"></div>
+
+      <label class="field-label">Điểm bắt đầu / kết thúc</label>
+      <div class="coord-row">
+        <span class="point-dot a">A</span>
+        <input id="startPoint" value="108.224150, 16.075650" aria-label="Tọa độ điểm A" />
+        <button class="btn pick" id="pickA" title="Chọn điểm A trên bản đồ">⌖</button>
+      </div>
+      <div class="coord-row">
+        <span class="point-dot b">B</span>
+        <input id="endPoint" value="108.217400, 16.067250" aria-label="Tọa độ điểm B" />
+        <button class="btn pick" id="pickB" title="Chọn điểm B trên bản đồ">⌖</button>
+      </div>
+
+      <div class="action-row">
+        <button class="btn primary" id="createRoute" disabled>Tạo tuyến</button>
+        <button class="btn play" id="playRoute" disabled>▶ Chạy xe</button>
+        <button class="btn" id="resetRoute" disabled>↺</button>
+      </div>
+
+      <div id="status" class="status loading">Đang tải dữ liệu bản đồ Đà Nẵng…</div>
+      <div id="tripCard" class="trip-card">
+        <div class="metric"><span>Quãng đường</span><strong id="distance">—</strong></div>
+        <div class="metric"><span>Dự kiến</span><strong id="duration">—</strong></div>
+        <div class="metric"><span>Tiến độ</span><strong id="progress">0%</strong></div>
+      </div>
+    </section>
+
+    <div class="empty-state" id="emptyState">
+      <div><strong>Đang mở dữ liệu local</strong>Bản đồ được đọc từ data/danang.pmtiles.</div>
+    </div>
+    <div class="hint" id="hint">Giữ Ctrl + kéo chuột để xoay góc nhìn 3D</div>
+
+    <script>
+      const LOCAL_MAP_URL = "./data/danang.pmtiles";
+      const protocol = new pmtiles.Protocol();
+      maplibregl.addProtocol("pmtiles", protocol.tile);
+
+      const els = {
+        localMapPath: document.getElementById("localMapPath"),
+        serviceKey: document.getElementById("serviceKey"),
+        loadMap: document.getElementById("loadMap"),
+        addressSearch: document.getElementById("addressSearch"),
+        searchAddress: document.getElementById("searchAddress"),
+        searchResults: document.getElementById("searchResults"),
+        startPoint: document.getElementById("startPoint"),
+        endPoint: document.getElementById("endPoint"),
+        pickA: document.getElementById("pickA"),
+        pickB: document.getElementById("pickB"),
+        createRoute: document.getElementById("createRoute"),
+        playRoute: document.getElementById("playRoute"),
+        resetRoute: document.getElementById("resetRoute"),
+        status: document.getElementById("status"),
+        tripCard: document.getElementById("tripCard"),
+        distance: document.getElementById("distance"),
+        duration: document.getElementById("duration"),
+        progress: document.getElementById("progress"),
+        emptyState: document.getElementById("emptyState"),
+        hint: document.getElementById("hint"),
+      };
+
+      let map;
+      let mapReady = false;
+      let picking = null;
+      let markerA;
+      let markerB;
+      let carMarker;
+      let routeCoordinates = [];
+      let routePath = null;
+      let routeIsDemo = false;
+      let animationId = null;
+      let autoStartTimer = null;
+      let animationStartedAt = 0;
+      let pausedProgress = 0;
+      let isPlaying = false;
+      let animationDuration = 18000;
+
+      function setStatus(message, type = "") {
+        els.status.textContent = message;
+        els.status.className = `status ${type}`.trim();
+      }
+
+      function getServiceKey() {
+        return els.serviceKey.value.trim();
+      }
+
+      function parseCoordinate(value) {
+        const parts = value.split(",").map(Number);
+        if (parts.length !== 2 || parts.some((part) => !Number.isFinite(part))) {
+          throw new Error("Tọa độ phải có dạng kinh_độ, vĩ_độ.");
+        }
+        const [lng, lat] = parts;
+        if (lng < -180 || lng > 180 || lat < -90 || lat > 90) {
+          throw new Error("Tọa độ nằm ngoài phạm vi hợp lệ.");
+        }
+        return [lng, lat];
+      }
+
+      function formatCoordinate(coordinate) {
+        return `${coordinate[0].toFixed(6)}, ${coordinate[1].toFixed(6)}`;
+      }
+
+      function markerElement(label, className) {
+        const element = document.createElement("div");
+        element.className = `marker-pin ${className}`;
+        element.innerHTML = `<span>${label}</span>`;
+        return element;
+      }
+
+      function updatePointMarkers() {
+        if (!mapReady) return;
+        const start = parseCoordinate(els.startPoint.value);
+        const end = parseCoordinate(els.endPoint.value);
+
+        if (!markerA) {
+          markerA = new maplibregl.Marker({ element: markerElement("A", "a"), anchor: "bottom" })
+            .setLngLat(start)
+            .addTo(map);
+          markerB = new maplibregl.Marker({ element: markerElement("B", "b"), anchor: "bottom" })
+            .setLngLat(end)
+            .addTo(map);
+        } else {
+          markerA.setLngLat(start);
+          markerB.setLngLat(end);
+        }
+      }
+
+      function add3DBuildings() {
+        if (map.getLayer("3d-buildings")) return;
+        const layers = map.getStyle().layers || [];
+        const labelLayer = layers.find(
+          (layer) => layer.type === "symbol" && layer.layout && layer.layout["text-field"]
+        );
+
+        try {
+          map.addLayer(
+            {
+              id: "3d-buildings",
+              source: "protomaps",
+              "source-layer": "buildings",
+              filter: [
+                "any",
+                ["==", ["get", "kind"], "building"],
+                ["==", ["get", "kind"], "building_part"]
+              ],
+              type: "fill-extrusion",
+              minzoom: 14,
+              paint: {
+                "fill-extrusion-color": [
+                  "interpolate", ["linear"], ["coalesce", ["get", "height"], 8],
+                  0, "#d8dee6", 45, "#aab8c8", 120, "#8295aa"
+                ],
+                "fill-extrusion-height": [
+                  "interpolate", ["linear"], ["zoom"],
+                  14, 0, 14.4, ["coalesce", ["get", "height"], 8]
+                ],
+                "fill-extrusion-base": [
+                  "interpolate", ["linear"], ["zoom"],
+                  14, 0, 14.4, ["coalesce", ["get", "min_height"], 0]
+                ],
+                "fill-extrusion-opacity": 0.88,
+              },
+            },
+            labelLayer ? labelLayer.id : undefined
+          );
+        } catch (error) {
+          console.warn("Không thể thêm lớp tòa nhà 3D:", error);
+          setStatus("Bản đồ đã tải, nhưng style hiện tại không có dữ liệu building 3D.", "error");
+        }
+      }
+
+      function initMap() {
+        stopAnimation(true);
+        if (map) map.remove();
+        mapReady = false;
+        markerA = markerB = carMarker = null;
+        routeCoordinates = [];
+        els.loadMap.disabled = true;
+        setStatus("Đang tải data/danang.pmtiles…", "loading");
+
+        map = new maplibregl.Map({
+          container: "map",
+          style: {
+            version: 8,
+            glyphs: "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
+            sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
+            sources: {
+              protomaps: {
+                type: "vector",
+                url: `pmtiles://${LOCAL_MAP_URL}`,
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              }
+            },
+            layers: basemaps.layers(
+              "protomaps",
+              basemaps.namedFlavor("light"),
+              { lang: "vi" }
+            )
+          },
+          center: [108.2215, 16.0722],
+          zoom: 15.4,
+          pitch: 62,
+          bearing: -24,
+          antialias: true,
+          maxPitch: 80,
+        });
+
+        map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
+        map.addControl(new maplibregl.FullscreenControl(), "bottom-right");
+
+        map.on("load", () => {
+          mapReady = true;
+          els.loadMap.disabled = false;
+          els.createRoute.disabled = false;
+          els.searchAddress.disabled = false;
+          els.resetRoute.disabled = false;
+          els.emptyState.classList.add("hidden");
+          add3DBuildings();
+          updatePointMarkers();
+          setStatus("Bản đồ Đà Nẵng đã đọc từ PMTiles local. Không sử dụng VietMap API để render.", "ok");
+        });
+
+        map.on("click", (event) => {
+          if (!picking) return;
+          const selectedPoint = picking;
+          const coordinate = [event.lngLat.lng, event.lngLat.lat];
+          if (selectedPoint === "A") els.startPoint.value = formatCoordinate(coordinate);
+          if (selectedPoint === "B") els.endPoint.value = formatCoordinate(coordinate);
+          updatePointMarkers();
+          clearRoute();
+          setPicking(null);
+          setStatus(`Đã cập nhật điểm ${selectedPoint}. Bấm Tạo tuyến để tính lại.`, "ok");
+        });
+
+        map.on("error", (event) => {
+          els.loadMap.disabled = false;
+          const message = event?.error?.message || "Không tải được dữ liệu bản đồ.";
+          if (!mapReady) setStatus(`Lỗi dữ liệu bản đồ local: ${message}`, "error");
+        });
+      }
+
+      function setPicking(point) {
+        picking = point;
+        els.pickA.classList.toggle("active", point === "A");
+        els.pickB.classList.toggle("active", point === "B");
+        if (map) map.getCanvas().style.cursor = point ? "crosshair" : "";
+        els.hint.textContent = point
+          ? `Nhấp lên bản đồ để đặt điểm ${point}`
+          : "Giữ Ctrl + kéo chuột để xoay góc nhìn 3D";
+      }
+
+      function extractRouteCoordinates(path, expectedStart) {
+        const points = path?.points;
+        const coordinates = Array.isArray(points)
+          ? points
+          : Array.isArray(points?.coordinates)
+            ? points.coordinates
+            : path?.geometry?.coordinates;
+        if (!Array.isArray(coordinates) || !coordinates.length) {
+          throw new Error("VietMap không trả về danh sách tọa độ của tuyến.");
+        }
+
+        // Route API có thể trả [lat,lng], trong khi GeoJSON dùng [lng,lat].
+        // Chọn thứ tự gần điểm A nhất để luôn vẽ đúng lên bản đồ.
+        const first = coordinates[0];
+        const normalDistance = (first[0] - expectedStart[0]) ** 2 + (first[1] - expectedStart[1]) ** 2;
+        const swappedDistance = (first[1] - expectedStart[0]) ** 2 + (first[0] - expectedStart[1]) ** 2;
+        return swappedDistance < normalDistance
+          ? coordinates.map(([lat, lng]) => [lng, lat])
+          : coordinates;
+      }
+
+      function getApiMessage(data) {
+        if (!data) return "";
+        if (Array.isArray(data.messages)) return data.messages.join(", ");
+        return data.messages || data.message || data.error || data.code || "";
+      }
+
+      async function requestRoute(endpoint, query) {
+        const url = `${endpoint.url}?${query.toString()}${endpoint.extra || ""}`;
+        const response = await fetch(url);
+        const rawBody = await response.text();
+        let data;
+        try {
+          data = rawBody ? JSON.parse(rawBody) : null;
+        } catch {
+          data = null;
+        }
+
+        if (!response.ok) {
+          const detail = getApiMessage(data) || rawBody.slice(0, 160) || `HTTP ${response.status}`;
+          const error = new Error(`${endpoint.label}: HTTP ${response.status} — ${detail}`);
+          error.status = response.status;
+          throw error;
+        }
+        if (data?.code !== "OK" || !data?.paths?.length) {
+          throw new Error(`${endpoint.label}: ${getApiMessage(data) || "không tìm thấy tuyến"}`);
+        }
+        return { data, label: endpoint.label };
+      }
+
+      async function requestOsrmRoute(start, end) {
+        const coordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
+        const query = new URLSearchParams({
+          overview: "full",
+          geometries: "geojson",
+          steps: "false",
+        });
+        const response = await fetch(
+          `https://router.project-osrm.org/route/v1/driving/${coordinates}?${query.toString()}`
+        );
+        const data = await response.json().catch(() => null);
+        if (!response.ok || data?.code !== "Ok" || !data?.routes?.length) {
+          throw new Error(data?.message || data?.code || `HTTP ${response.status}`);
+        }
+        const route = data.routes[0];
+        return {
+          coordinates: route.geometry.coordinates,
+          path: { distance: route.distance, time: route.duration * 1000 },
+        };
+      }
+
+      function renderSearchResults(results) {
+        els.searchResults.replaceChildren();
+        els.searchResults.classList.toggle("visible", results.length > 0);
+
+        for (const result of results.slice(0, 6)) {
+          const item = document.createElement("div");
+          item.className = "search-result";
+
+          const text = document.createElement("div");
+          text.className = "search-result-text";
+          const name = document.createElement("strong");
+          name.textContent = result.name || result.display || "Địa điểm";
+          const address = document.createElement("small");
+          const source = result.source ? ` · ${result.source}` : "";
+          address.textContent = `${result.address || result.display || ""}${source}`;
+          text.append(name, address);
+
+          const actions = document.createElement("div");
+          actions.className = "result-actions";
+          const setA = document.createElement("button");
+          setA.className = "set-a";
+          setA.textContent = "A";
+          setA.title = "Đặt làm điểm bắt đầu";
+          const setB = document.createElement("button");
+          setB.className = "set-b";
+          setB.textContent = "B";
+          setB.title = "Đặt làm điểm kết thúc";
+          setA.addEventListener("click", () => selectSearchResult(result, "A"));
+          setB.addEventListener("click", () => selectSearchResult(result, "B"));
+          actions.append(setA, setB);
+          item.append(text, actions);
+          els.searchResults.append(item);
+        }
+      }
+
+      async function requestPhotonSearch(text, center) {
+        const query = new URLSearchParams({
+          q: text,
+          lat: String(center.lat),
+          lon: String(center.lng),
+          limit: "6",
+        });
+        const response = await fetch(`https://photon.komoot.io/api/?${query.toString()}`);
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !Array.isArray(data?.features)) {
+          throw new Error(data?.message || `HTTP ${response.status}`);
+        }
+
+        return data.features.map((feature) => {
+          const properties = feature.properties || {};
+          const coordinate = feature.geometry?.coordinates || [];
+          const addressParts = [
+            properties.housenumber,
+            properties.street,
+            properties.district,
+            properties.city,
+            properties.state,
+            properties.country,
+          ].filter(Boolean);
+          return {
+            name: properties.name || properties.street || properties.city || "Địa điểm",
+            address: [...new Set(addressParts)].join(", "),
+            display: properties.name || "Địa điểm",
+            lng: Number(coordinate[0]),
+            lat: Number(coordinate[1]),
+            source: `OSM/${properties.osm_value || properties.type || "place"}`,
+          };
+        }).filter((item) => Number.isFinite(item.lng) && Number.isFinite(item.lat));
+      }
+
+      async function searchByAddress() {
+        if (!mapReady) return;
+        const text = els.addressSearch.value.trim();
+        if (text.length < 2) {
+          setStatus("Nhập ít nhất 2 ký tự để tìm địa điểm.", "error");
+          return;
+        }
+        const serviceKey = getServiceKey();
+
+        els.searchAddress.disabled = true;
+        renderSearchResults([]);
+        setStatus("Đang tìm theo tên địa điểm và địa chỉ…", "loading");
+        const center = map.getCenter();
+        const query = new URLSearchParams({
+          apikey: serviceKey,
+          text,
+          focus: `${center.lat},${center.lng}`,
+          display_type: "1",
+        });
+
+        try {
+          let data;
+          let provider = serviceKey ? "VietMap" : "Photon/OpenStreetMap";
+          let vietmapError = null;
+          if (serviceKey) {
+            try {
+              const response = await fetch(`https://maps.vietmap.vn/api/autocomplete/v4?${query.toString()}`);
+              const rawBody = await response.text();
+              try { data = rawBody ? JSON.parse(rawBody) : null; } catch { data = null; }
+              if (!response.ok) {
+                const detail = getApiMessage(data) || rawBody.slice(0, 140) || `HTTP ${response.status}`;
+                throw new Error(`HTTP ${response.status} — ${detail}`);
+              }
+              if (!Array.isArray(data) || !data.length) {
+                throw new Error("không có kết quả phù hợp");
+              }
+              data = data.map((item) => ({ ...item, source: "VietMap" }));
+            } catch (error) {
+              vietmapError = error;
+              provider = "Photon/OpenStreetMap";
+              setStatus("VietMap Search chưa dùng được, đang tìm bằng Photon/OpenStreetMap…", "loading");
+              data = await requestPhotonSearch(text, center);
+            }
+          } else {
+            data = await requestPhotonSearch(text, center);
+          }
+          if (!data.length) throw new Error("Photon/OpenStreetMap không có kết quả phù hợp");
+
+          renderSearchResults(data);
+          setStatus(
+            `Tìm thấy ${data.length} kết quả bằng ${provider}. Chọn A hoặc B ở bên phải địa điểm.${vietmapError ? " VietMap Search hiện chưa truy cập được." : ""}`,
+            "ok"
+          );
+        } catch (error) {
+          const keyHint = String(error.message).includes("423")
+            ? " Key hiện tại là tilemap key hoặc chưa được bật Geocode; hãy nhập Service API key riêng."
+            : "";
+          setStatus(`Không tìm được địa điểm: ${error.message}.${keyHint}`, "error");
+        } finally {
+          els.searchAddress.disabled = false;
+        }
+      }
+
+      async function selectSearchResult(result, target) {
+        const serviceKey = getServiceKey();
+        setStatus(`Đang lấy tọa độ của ${result.name || "địa điểm"}…`, "loading");
+        try {
+          let coordinate;
+          if (Number.isFinite(Number(result.lng)) && Number.isFinite(Number(result.lat))) {
+            coordinate = [Number(result.lng), Number(result.lat)];
+          } else {
+            if (!result.ref_id) throw new Error("Kết quả không có ref_id");
+            const query = new URLSearchParams({ apikey: serviceKey, refid: result.ref_id });
+            const response = await fetch(`https://maps.vietmap.vn/api/place/v4?${query.toString()}`);
+            const rawBody = await response.text();
+            let data = null;
+            try { data = rawBody ? JSON.parse(rawBody) : null; } catch {}
+            if (!response.ok) {
+              throw new Error(getApiMessage(data) || `Place API trả về HTTP ${response.status}`);
+            }
+            const place = data?.data || data;
+            if (!Number.isFinite(Number(place?.lng)) || !Number.isFinite(Number(place?.lat))) {
+              throw new Error("Place API không trả về tọa độ hợp lệ");
+            }
+            coordinate = [Number(place.lng), Number(place.lat)];
+          }
+
+          if (target === "A") els.startPoint.value = formatCoordinate(coordinate);
+          if (target === "B") els.endPoint.value = formatCoordinate(coordinate);
+          updatePointMarkers();
+          clearRoute();
+          map.flyTo({ center: coordinate, zoom: 17, pitch: 58, duration: 900 });
+          setStatus(`Đã đặt ${result.name || "địa điểm"} làm điểm ${target}.`, "ok");
+        } catch (error) {
+          setStatus(`Không lấy được tọa độ địa điểm: ${error.message}`, "error");
+        }
+      }
+
+      function buildDemoRoute(start, end) {
+        const coordinates = [];
+        const dx = end[0] - start[0];
+        const dy = end[1] - start[1];
+        const bend = Math.sqrt(dx * dx + dy * dy) * 0.07;
+        const control = [(start[0] + end[0]) / 2 - dy / Math.max(Math.hypot(dx, dy), 1e-9) * bend,
+          (start[1] + end[1]) / 2 + dx / Math.max(Math.hypot(dx, dy), 1e-9) * bend];
+        for (let index = 0; index <= 80; index++) {
+          const t = index / 80;
+          const inverse = 1 - t;
+          coordinates.push([
+            inverse * inverse * start[0] + 2 * inverse * t * control[0] + t * t * end[0],
+            inverse * inverse * start[1] + 2 * inverse * t * control[1] + t * t * end[1],
+          ]);
+        }
+        const lengths = buildRouteLengths(coordinates);
+        const distance = lengths[lengths.length - 1];
+        return { coordinates, path: { distance, time: distance / 8.33 * 1000 } };
+      }
+
+      async function fetchRoute() {
+        if (!mapReady) return;
+        let start, end;
+        try {
+          start = parseCoordinate(els.startPoint.value);
+          end = parseCoordinate(els.endPoint.value);
+          updatePointMarkers();
+        } catch (error) {
+          setStatus(error.message, "error");
+          return;
+        }
+
+        stopAnimation(true);
+        els.createRoute.disabled = true;
+        els.playRoute.disabled = true;
+        setStatus("Đang gọi Route API v4 và dựng tuyến…", "loading");
+
+        const query = new URLSearchParams({
+          apikey: getServiceKey(),
+          point: `${start[1]},${start[0]}`,
+          points_encoded: "false",
+          vehicle: "car",
+        });
+        query.append("point", `${end[1]},${end[0]}`);
+
+        const endpoints = [
+          { label: "Route v4", url: "https://maps.vietmap.vn/api/route/v4" },
+          { label: "Route v3", url: "https://maps.vietmap.vn/api/route/v3" },
+          { label: "Route v1.1", url: "https://maps.vietmap.vn/api/route", extra: "&api-version=1.1" },
+        ];
+        const errors = [];
+
+        try {
+          let result = null;
+          for (const endpoint of endpoints) {
+            try {
+              setStatus(`Đang thử ${endpoint.label}…`, "loading");
+              result = await requestRoute(endpoint, query);
+              break;
+            } catch (error) {
+              errors.push(error.message);
+            }
+          }
+
+          if (!result) {
+            const locked = errors.some((message) => message.includes("HTTP 423"));
+            try {
+              setStatus("VietMap Routing bị khóa, đang tìm tuyến bám đường bằng OSRM…", "loading");
+              const fallback = await requestOsrmRoute(start, end);
+              routeIsDemo = false;
+              routePath = fallback.path;
+              routeCoordinates = fallback.coordinates;
+              drawRoute(routeCoordinates, false);
+              fitRoute(routeCoordinates);
+              updateTripInfo(routePath);
+              createCar(routeCoordinates[0]);
+              els.playRoute.disabled = false;
+              setStatus(
+                locked
+                  ? "VietMap Routing bị khóa (HTTP 423). Tuyến hiện tại dùng OSRM/OpenStreetMap nên xe đã bám theo đường và đi qua cầu."
+                  : "Đã tạo tuyến bám đường bằng OSRM/OpenStreetMap vì VietMap Route chưa dùng được.",
+                "ok"
+              );
+              scheduleAutoStart();
+            } catch (osrmError) {
+              const demo = buildDemoRoute(start, end);
+              routeIsDemo = true;
+              routePath = demo.path;
+              routeCoordinates = demo.coordinates;
+              drawRoute(routeCoordinates, true);
+              fitRoute(routeCoordinates);
+              updateTripInfo(routePath);
+              createCar(routeCoordinates[0]);
+              els.playRoute.disabled = false;
+              setStatus(
+                `Cả VietMap Routing và OSRM đều chưa dùng được (${osrmError.message}). Đường cam chỉ là nội suy, không phải tuyến đường thật.`,
+                "error"
+              );
+              scheduleAutoStart();
+            }
+            return;
+          }
+
+          routeIsDemo = false;
+          routePath = result.data.paths[0];
+          routeCoordinates = extractRouteCoordinates(routePath, start);
+          drawRoute(routeCoordinates, false);
+          fitRoute(routeCoordinates);
+          updateTripInfo(routePath);
+          createCar(routeCoordinates[0]);
+          els.playRoute.disabled = false;
+          setStatus(`Đã tạo tuyến đường thật bằng ${result.label}. Xe sẽ tự chạy sau một giây.`, "ok");
+          scheduleAutoStart();
+        } catch (error) {
+          clearRoute();
+          setStatus(`Không tạo được tuyến: ${error.message}`, "error");
+        } finally {
+          els.createRoute.disabled = false;
+        }
+      }
+
+      function drawRoute(coordinates, isDemo = false) {
+        const data = {
+          type: "Feature",
+          properties: {},
+          geometry: { type: "LineString", coordinates },
+        };
+
+        if (map.getSource("route")) {
+          map.getSource("route").setData(data);
+          return;
+        }
+
+        map.addSource("route", { type: "geojson", data });
+        map.addLayer({
+          id: "route-casing",
+          type: "line",
+          source: "route",
+          layout: { "line-join": "round", "line-cap": "round" },
+          paint: { "line-color": "rgba(255,255,255,.92)", "line-width": 10 },
+        });
+        map.addLayer({
+          id: "route-line",
+          type: "line",
+          source: "route",
+          layout: { "line-join": "round", "line-cap": "round" },
+          paint: {
+            "line-color": isDemo ? "#f09b32" : "#226df6",
+            "line-width": 6,
+            "line-opacity": .96,
+            ...(isDemo ? { "line-dasharray": [1.2, 1.2] } : {}),
+          },
+        });
+      }
+
+      function fitRoute(coordinates) {
+        const bounds = coordinates.reduce(
+          (current, coordinate) => current.extend(coordinate),
+          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+        );
+        map.fitBounds(bounds, {
+          padding: { top: 100, right: 90, bottom: 90, left: window.innerWidth > 700 ? 420 : 40 },
+          pitch: 58,
+          bearing: -22,
+          maxZoom: 16.5,
+          duration: 1100,
+        });
+      }
+
+      function createCar(coordinate) {
+        if (!carMarker) {
+          const element = document.createElement("div");
+          element.className = "car-marker";
+          carMarker = new maplibregl.Marker({ element, rotationAlignment: "map", pitchAlignment: "map" })
+            .setLngLat(coordinate)
+            .addTo(map);
+        } else {
+          carMarker.setLngLat(coordinate);
+        }
+      }
+
+      function updateTripInfo(path) {
+        const distance = Number(path.distance || 0);
+        const durationMs = Number(path.time || 0);
+        animationDuration = Math.min(45000, Math.max(18000, (distance / 150) * 1000));
+        els.distance.textContent = distance >= 1000
+          ? `${(distance / 1000).toFixed(1)} km`
+          : `${Math.round(distance)} m`;
+        els.duration.textContent = durationMs
+          ? `${Math.max(1, Math.round(durationMs / 60000))} phút`
+          : "—";
+        els.progress.textContent = "0%";
+        els.tripCard.classList.add("visible");
+      }
+
+      function buildRouteLengths(coordinates) {
+        const lengths = [0];
+        for (let index = 1; index < coordinates.length; index++) {
+          lengths.push(lengths[index - 1] + haversine(coordinates[index - 1], coordinates[index]));
+        }
+        return lengths;
+      }
+
+      function haversine(a, b) {
+        const rad = Math.PI / 180;
+        const dLat = (b[1] - a[1]) * rad;
+        const dLng = (b[0] - a[0]) * rad;
+        const lat1 = a[1] * rad;
+        const lat2 = b[1] * rad;
+        const value = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+        return 6371000 * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value));
+      }
+
+      function bearing(a, b) {
+        const rad = Math.PI / 180;
+        const y = Math.sin((b[0] - a[0]) * rad) * Math.cos(b[1] * rad);
+        const x = Math.cos(a[1] * rad) * Math.sin(b[1] * rad) -
+          Math.sin(a[1] * rad) * Math.cos(b[1] * rad) * Math.cos((b[0] - a[0]) * rad);
+        return (Math.atan2(y, x) / rad + 360) % 360;
+      }
+
+      function pointAtProgress(coordinates, lengths, progress) {
+        const target = progress * lengths[lengths.length - 1];
+        let index = 1;
+        while (index < lengths.length && lengths[index] < target) index++;
+        if (index >= lengths.length) return { point: coordinates.at(-1), angle: bearing(coordinates.at(-2), coordinates.at(-1)) };
+        const segment = lengths[index] - lengths[index - 1] || 1;
+        const ratio = (target - lengths[index - 1]) / segment;
+        const from = coordinates[index - 1];
+        const to = coordinates[index];
+        return {
+          point: [from[0] + (to[0] - from[0]) * ratio, from[1] + (to[1] - from[1]) * ratio],
+          angle: bearing(from, to),
+        };
+      }
+
+      function toggleAnimation() {
+        if (!routeCoordinates.length) return;
+        if (isPlaying) {
+          pausedProgress = Math.min(1, (performance.now() - animationStartedAt) / animationDuration);
+          cancelAnimationFrame(animationId);
+          isPlaying = false;
+          els.playRoute.textContent = "▶ Tiếp tục";
+          setStatus("Đã tạm dừng mô phỏng.");
+          return;
+        }
+
+        if (pausedProgress >= 1) pausedProgress = 0;
+        isPlaying = true;
+        animationStartedAt = performance.now() - pausedProgress * animationDuration;
+        els.playRoute.textContent = "Ⅱ Tạm dừng";
+        setStatus("Xe đang di chuyển từ A đến B…", "ok");
+        const lengths = buildRouteLengths(routeCoordinates);
+
+        function frame(now) {
+          const progress = Math.min(1, (now - animationStartedAt) / animationDuration);
+          const current = pointAtProgress(routeCoordinates, lengths, progress);
+          carMarker.setLngLat(current.point).setRotation(current.angle);
+          els.progress.textContent = `${Math.round(progress * 100)}%`;
+
+          if (progress < 1 && isPlaying) {
+            animationId = requestAnimationFrame(frame);
+          } else {
+            isPlaying = false;
+            pausedProgress = 1;
+            els.playRoute.textContent = "↻ Chạy lại";
+            setStatus("Xe đã đến điểm B.", "ok");
+          }
+        }
+        animationId = requestAnimationFrame(frame);
+      }
+
+      function scheduleAutoStart() {
+        clearTimeout(autoStartTimer);
+        const scheduledRoute = routeCoordinates;
+        autoStartTimer = setTimeout(() => {
+          if (routeCoordinates === scheduledRoute && routeCoordinates.length && !isPlaying) {
+            toggleAnimation();
+          }
+        }, 1300);
+      }
+
+      function stopAnimation(resetProgress = false) {
+        clearTimeout(autoStartTimer);
+        cancelAnimationFrame(animationId);
+        isPlaying = false;
+        if (resetProgress) pausedProgress = 0;
+        els.playRoute.textContent = "▶ Chạy xe";
+        els.progress.textContent = `${Math.round(pausedProgress * 100)}%`;
+      }
+
+      function clearRoute() {
+        stopAnimation(true);
+        routeCoordinates = [];
+        routePath = null;
+        routeIsDemo = false;
+        if (carMarker) {
+          carMarker.remove();
+          carMarker = null;
+        }
+        if (mapReady && map.getLayer("route-line")) map.removeLayer("route-line");
+        if (mapReady && map.getLayer("route-casing")) map.removeLayer("route-casing");
+        if (mapReady && map.getSource("route")) map.removeSource("route");
+        els.playRoute.disabled = true;
+        els.tripCard.classList.remove("visible");
+      }
+
+      function resetAll() {
+        clearRoute();
+        els.startPoint.value = "108.224150, 16.075650";
+        els.endPoint.value = "108.217400, 16.067250";
+        updatePointMarkers();
+        map.flyTo({ center: [108.2215, 16.0722], zoom: 15.4, pitch: 62, bearing: -24 });
+        setStatus("Đã đặt lại hai điểm mẫu tại Đà Nẵng.", "ok");
+      }
+
+      els.loadMap.addEventListener("click", initMap);
+      els.searchAddress.addEventListener("click", searchByAddress);
+      els.createRoute.addEventListener("click", fetchRoute);
+      els.playRoute.addEventListener("click", toggleAnimation);
+      els.resetRoute.addEventListener("click", resetAll);
+      els.pickA.addEventListener("click", () => setPicking(picking === "A" ? null : "A"));
+      els.pickB.addEventListener("click", () => setPicking(picking === "B" ? null : "B"));
+      els.startPoint.addEventListener("change", () => { try { updatePointMarkers(); clearRoute(); } catch (error) { setStatus(error.message, "error"); } });
+      els.endPoint.addEventListener("change", () => { try { updatePointMarkers(); clearRoute(); } catch (error) { setStatus(error.message, "error"); } });
+      els.addressSearch.addEventListener("keydown", (event) => { if (event.key === "Enter") searchByAddress(); });
+      initMap();
+    </script>
+  </body>
+</html>
