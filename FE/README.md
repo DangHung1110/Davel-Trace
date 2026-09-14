@@ -1,9 +1,18 @@
-# Frontend
+# Davel Trace Mobile
 
-This directory contains the Flutter mobile application.
+Flutter mobile prototype for the core travel experience:
 
-The first milestone covers the application shell and UI placeholders for:
+- itinerary creation and a sample day plan;
+- an interactive Da Nang map with route and place markers;
+- trip budget and expense tracking.
 
-- itinerary planning;
-- the Da Nang map;
-- expense management.
+## Run locally
+
+Install the Flutter stable SDK, then run:
+
+```powershell
+flutter pub get
+flutter run
+```
+
+The current map screen uses OpenStreetMap raster tiles without an API key. The existing local vector PMTiles archive remains at the repository root and will be integrated into mobile in a dedicated follow-up milestone.
