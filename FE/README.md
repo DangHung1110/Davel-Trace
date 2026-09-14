@@ -15,4 +15,10 @@ flutter pub get
 flutter run
 ```
 
-The current map screen uses OpenStreetMap raster tiles without an API key. The existing local vector PMTiles archive remains at the repository root and will be integrated into mobile in a dedicated follow-up milestone.
+On Flutter Web, the map screen renders the bundled Da Nang vector archive at
+`web/data/danang.pmtiles` with MapLibre and 3D buildings. It does not require a
+VietMap API key. The PMTiles archive is loaded into the browser once per page
+session so Flutter's development server does not need HTTP range support.
+
+Android and iOS currently use the OpenStreetMap raster fallback. Native PMTiles
+integration will be handled in a dedicated follow-up milestone.

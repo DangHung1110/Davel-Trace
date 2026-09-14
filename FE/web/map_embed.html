@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bản đồ 3D Đà Nẵng</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js"></script>
+    <script
+      src="https://unpkg.com/@protomaps/basemaps@5/dist/basemaps.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        background: #dce8ef;
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      #status {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #41516a;
+        box-shadow: 0 10px 30px rgba(18, 33, 58, 0.16);
+        font-size: 14px;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      #status[hidden] {
+        display: none;
+      }
+
+      .maplibregl-ctrl-bottom-left {
+        bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="status">Đang mở bản đồ Đà Nẵng…</div>
+
+    <script>
+      const statusElement = document.getElementById("status");
+
+      function showError(message) {
+        statusElement.textContent = message;
+        statusElement.style.color = "#c43d4b";
+      }
+
+      function add3DBuildings(map) {
+        if (map.getLayer("davel-3d-buildings")) return;
+
+        const layers = map.getStyle().layers || [];
+        const firstLabel = layers.find(
+          (layer) =>
+            layer.type === "symbol" &&
+            layer.layout &&
+            layer.layout["text-field"],
+        );
+
+        map.addLayer(
+          {
+            id: "davel-3d-buildings",
+            source: "protomaps",
+            "source-layer": "buildings",
+            type: "fill-extrusion",
+            minzoom: 14,
+            filter: [
+              "any",
+              ["==", ["get", "kind"], "building"],
+              ["==", ["get", "kind"], "building_part"],
+            ],
+            paint: {
+              "fill-extrusion-color": [
+                "interpolate",
+                ["linear"],
+                ["coalesce", ["get", "height"], 8],
+                0,
+                "#d8dee6",
+                45,
+                "#aab8c8",
+                120,
+                "#8295aa",
+              ],
+              "fill-extrusion-height": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                14,
+                0,
+                14.4,
+                ["coalesce", ["get", "height"], 8],
+              ],
+              "fill-extrusion-base": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                14,
+                0,
+                14.4,
+                ["coalesce", ["get", "min_height"], 0],
+              ],
+              "fill-extrusion-opacity": 0.88,
+            },
+          },
+          firstLabel ? firstLabel.id : undefined,
+        );
+      }
+
+      async function startMap() {
+        try {
+          const response = await fetch("data/danang.pmtiles");
+          if (!response.ok) {
+            throw new Error(`Không đọc được PMTiles (HTTP ${response.status})`);
+          }
+
+          const blob = await response.blob();
+          const file = new File([blob], "danang.pmtiles", {
+            type: "application/vnd.pmtiles",
+          });
+          const archive = new pmtiles.PMTiles(new pmtiles.FileSource(file));
+          const protocol = new pmtiles.Protocol({ metadata: true });
+          protocol.add(archive);
+          maplibregl.addProtocol("pmtiles", protocol.tile);
+
+          const map = new maplibregl.Map({
+            container: "map",
+            center: [108.2215, 16.0722],
+            zoom: 15.4,
+            pitch: 62,
+            bearing: -24,
+            antialias: true,
+            maxPitch: 80,
+            style: {
+              version: 8,
+              glyphs:
+                "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
+              sprite:
+                "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
+              sources: {
+                protomaps: {
+                  type: "vector",
+                  url: "pmtiles://danang.pmtiles",
+                  attribution:
+                    '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                },
+              },
+              layers: basemaps.layers(
+                "protomaps",
+                basemaps.namedFlavor("light"),
+                { lang: "vi" },
+              ),
+            },
+          });
+
+          map.addControl(
+            new maplibregl.NavigationControl({ visualizePitch: true }),
+            "bottom-right",
+          );
+          map.addControl(new maplibregl.FullscreenControl(), "bottom-right");
+
+          map.on("load", () => {
+            add3DBuildings(map);
+            statusElement.hidden = true;
+          });
+          map.on("error", (event) => {
+            console.error("MapLibre error", event.error || event);
+          });
+        } catch (error) {
+          console.error(error);
+          showError(`Không mở được bản đồ local: ${error.message}`);
+        }
+      }
+
+      startMap();
+    </script>
+  </body>
+</html>
