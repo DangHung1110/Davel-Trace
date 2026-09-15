@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
+import '../domain/demo_trip.dart';
 
 class ItineraryScreen extends StatefulWidget {
-  const ItineraryScreen({super.key});
+  const ItineraryScreen({super.key, required this.onPlanGenerated});
+
+  final ValueChanged<List<TripStop>> onPlanGenerated;
 
   @override
   State<ItineraryScreen> createState() => _ItineraryScreenState();
@@ -12,40 +15,46 @@ class ItineraryScreen extends StatefulWidget {
 
 class _ItineraryScreenState extends State<ItineraryScreen> {
   final _interests = <String>{'Ẩm thực', 'Biển'};
+  DateTime _startDate = DateTime(2026, 9, 20);
+  int _dayCount = 1;
+  TripStop _origin = DemoTripData.defaultOrigin;
+  List<TripStop> _activities = DemoTripData.activities;
 
-  static const _activities = [
-    _Activity(
-      time: '07:30',
-      duration: '3 giờ',
-      title: 'Bán đảo Sơn Trà',
-      subtitle: 'Leo núi nhẹ · Ngắm cảnh',
-      icon: Icons.landscape_outlined,
-      color: AppColors.success,
-    ),
-    _Activity(
-      time: '11:30',
-      duration: '1 giờ',
-      title: 'Mì Quảng Bà Mua',
-      subtitle: 'Ăn trưa · 4.5 ★',
-      icon: Icons.restaurant_outlined,
-      color: AppColors.amber,
-    ),
-    _Activity(
-      time: '15:30',
-      duration: '2 giờ 30',
-      title: 'Bãi biển Mỹ Khê',
-      subtitle: 'Tắm biển · Ngắm hoàng hôn',
-      icon: Icons.beach_access_outlined,
-      color: AppColors.blue,
-    ),
-  ];
+  String get _formattedDate =>
+      '${_startDate.day.toString().padLeft(2, '0')}/'
+      '${_startDate.month.toString().padLeft(2, '0')}/${_startDate.year}';
+
+  Future<void> _pickDate() async {
+    final selected = await showDatePicker(
+      context: context,
+      initialDate: _startDate,
+      firstDate: DateTime(2026),
+      lastDate: DateTime(2028),
+    );
+    if (selected != null) setState(() => _startDate = selected);
+  }
 
   void _generatePlan() {
+    final selectedActivities = DemoTripData.activities
+        .where((activity) => _interests.contains(activity.interest))
+        .toList();
+
+    if (selectedActivities.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Hãy chọn ít nhất một sở thích.')),
+      );
+      return;
+    }
+
+    setState(() => _activities = selectedActivities);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Đã tạo lịch trình mẫu cho một ngày ở Đà Nẵng.'),
+      SnackBar(
+        content: Text(
+          'Đã tạo lịch trình mock ${selectedActivities.length} địa điểm.',
+        ),
       ),
     );
+    widget.onPlanGenerated([_origin, ...selectedActivities]);
   }
 
   @override
@@ -66,7 +75,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                 'Lịch trình gợi ý',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              TextButton(onPressed: () {}, child: const Text('Chỉnh sửa')),
+              Text('${_activities.length} địa điểm'),
             ],
           ),
           const SizedBox(height: 8),
@@ -109,7 +118,11 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
           ),
         ),
         IconButton.filledTonal(
-          onPressed: () {},
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Bạn chưa có thông báo mới.')),
+            );
+          },
           icon: const Icon(Icons.notifications_none_rounded),
         ),
       ],
@@ -125,40 +138,61 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 6),
-        const Text('Cho chúng tôi biết thời gian và điều bạn yêu thích.'),
+        const Text('Chọn thông tin để thử tạo lịch trình bằng dữ liệu mock.'),
         const SizedBox(height: 18),
-        const Row(
+        Row(
           children: [
             Expanded(
-              child: TextField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  labelText: 'Ngày bắt đầu',
-                  hintText: '20/09/2026',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+              child: InkWell(
+                key: const Key('start-date-field'),
+                onTap: _pickDate,
+                borderRadius: BorderRadius.circular(14),
+                child: InputDecorator(
+                  decoration: const InputDecoration(
+                    labelText: 'Ngày bắt đầu',
+                    prefixIcon: Icon(Icons.calendar_today_outlined),
+                  ),
+                  child: Text(_formattedDate),
                 ),
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
-              child: TextField(
-                readOnly: true,
-                decoration: InputDecoration(
+              child: DropdownButtonFormField<int>(
+                initialValue: _dayCount,
+                decoration: const InputDecoration(
                   labelText: 'Số ngày',
-                  hintText: '1 ngày',
                   prefixIcon: Icon(Icons.schedule_outlined),
                 ),
+                items: [1, 2, 3]
+                    .map(
+                      (days) => DropdownMenuItem(
+                        value: days,
+                        child: Text('$days ngày'),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) => setState(() => _dayCount = value ?? 1),
               ),
             ),
           ],
         ),
         const SizedBox(height: 12),
-        const TextField(
-          decoration: InputDecoration(
+        DropdownButtonFormField<TripStop>(
+          initialValue: _origin,
+          decoration: const InputDecoration(
             labelText: 'Điểm xuất phát',
-            hintText: 'Khách sạn hoặc vị trí của bạn',
             prefixIcon: Icon(Icons.location_on_outlined),
           ),
+          items: DemoTripData.origins
+              .map(
+                (origin) =>
+                    DropdownMenuItem(value: origin, child: Text(origin.title)),
+              )
+              .toList(),
+          onChanged: (value) {
+            if (value != null) setState(() => _origin = value);
+          },
         ),
         const SizedBox(height: 18),
         const Text(
@@ -191,7 +225,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
             icon: const Icon(Icons.auto_awesome),
             label: const Padding(
               padding: EdgeInsets.symmetric(vertical: 14),
-              child: Text('Tạo lịch trình'),
+              child: Text('Tạo lịch trình & xem bản đồ'),
             ),
           ),
         ),
@@ -203,7 +237,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
 class _TimelineTile extends StatelessWidget {
   const _TimelineTile({required this.activity, required this.isLast});
 
-  final _Activity activity;
+  final TripStop activity;
   final bool isLast;
 
   @override
@@ -270,10 +304,13 @@ class _TimelineTile extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Icon(Icons.more_horiz, color: AppColors.muted),
+                        const Icon(
+                          Icons.check_circle,
+                          color: AppColors.success,
+                        ),
                         const SizedBox(height: 8),
                         Text(
-                          activity.duration,
+                          activity.durationLabel,
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -290,22 +327,4 @@ class _TimelineTile extends StatelessWidget {
       ),
     );
   }
-}
-
-class _Activity {
-  const _Activity({
-    required this.time,
-    required this.duration,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-  });
-
-  final String time;
-  final String duration;
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
 }

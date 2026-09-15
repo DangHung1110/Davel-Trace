@@ -2,23 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../../itinerary/domain/demo_trip.dart';
 import '../../../../theme/app_theme.dart';
 
 class MapCanvas extends StatelessWidget {
-  const MapCanvas({super.key});
+  const MapCanvas({
+    super.key,
+    required this.stops,
+    required this.routeRevision,
+    required this.playRequest,
+  });
 
-  static const _route = [
-    LatLng(16.1066, 108.2770),
-    LatLng(16.0958, 108.2492),
-    LatLng(16.0836, 108.2340),
-    LatLng(16.0680, 108.2441),
-  ];
+  final List<TripStop> stops;
+  final int routeRevision;
+  final int playRequest;
 
   @override
   Widget build(BuildContext context) {
+    final points = stops
+        .map((stop) => LatLng(stop.latitude, stop.longitude))
+        .toList();
     return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(16.0784, 108.2420),
+      options: MapOptions(
+        initialCenter: points.isEmpty
+            ? const LatLng(16.0784, 108.2420)
+            : points.first,
         initialZoom: 13.2,
       ),
       children: [
@@ -29,39 +37,20 @@ class MapCanvas extends StatelessWidget {
         ),
         PolylineLayer(
           polylines: [
-            Polyline(points: _route, color: AppColors.blue, strokeWidth: 5),
+            Polyline(points: points, color: AppColors.blue, strokeWidth: 5),
           ],
         ),
-        const MarkerLayer(
-          markers: [
-            Marker(
-              point: LatLng(16.1066, 108.2770),
-              width: 46,
-              height: 46,
-              child: _PlaceMarker(
-                icon: Icons.landscape,
-                color: AppColors.success,
-              ),
-            ),
-            Marker(
-              point: LatLng(16.0836, 108.2340),
-              width: 46,
-              height: 46,
-              child: _PlaceMarker(
-                icon: Icons.restaurant,
-                color: AppColors.amber,
-              ),
-            ),
-            Marker(
-              point: LatLng(16.0680, 108.2441),
-              width: 46,
-              height: 46,
-              child: _PlaceMarker(
-                icon: Icons.beach_access,
-                color: AppColors.blue,
-              ),
-            ),
-          ],
+        MarkerLayer(
+          markers: stops
+              .map(
+                (stop) => Marker(
+                  point: LatLng(stop.latitude, stop.longitude),
+                  width: 46,
+                  height: 46,
+                  child: _PlaceMarker(icon: stop.icon, color: stop.color),
+                ),
+              )
+              .toList(),
         ),
         const RichAttributionWidget(
           showFlutterMapAttribution: false,

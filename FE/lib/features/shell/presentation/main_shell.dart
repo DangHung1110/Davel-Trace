@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../expenses/presentation/expenses_screen.dart';
+import '../../itinerary/domain/demo_trip.dart';
 import '../../itinerary/presentation/itinerary_screen.dart';
 import '../../map/presentation/map_screen.dart';
 
@@ -12,14 +13,31 @@ class MainShell extends StatefulWidget {
 }
 
 class _MainShellState extends State<MainShell> {
-  static const _pages = [ItineraryScreen(), MapScreen(), ExpensesScreen()];
-
   int _selectedIndex = 0;
+  int _planRevision = 0;
+  List<TripStop> _routeStops = DemoTripData.defaultRoute;
+
+  void _showGeneratedPlan(List<TripStop> stops) {
+    setState(() {
+      _routeStops = stops;
+      _planRevision++;
+      _selectedIndex = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: _pages[_selectedIndex]),
+      body: SafeArea(
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            ItineraryScreen(onPlanGenerated: _showGeneratedPlan),
+            MapScreen(stops: _routeStops, planRevision: _planRevision),
+            const ExpensesScreen(),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) =>

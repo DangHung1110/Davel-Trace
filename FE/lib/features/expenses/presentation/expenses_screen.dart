@@ -37,21 +37,30 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   int get _spent => _expenses.fold(0, (sum, expense) => sum + expense.amount);
 
-  void _addSampleExpense() {
-    setState(() {
-      _expenses.insert(
-        0,
-        const _Expense(
-          'Cà phê ven biển',
-          'Ăn uống',
-          45000,
-          Icons.local_cafe_outlined,
-          AppColors.success,
-        ),
-      );
-    });
+  Future<void> _addExpense() async {
+    final expense = await showDialog<_Expense>(
+      context: context,
+      builder: (dialogContext) => const _AddExpenseDialog(),
+    );
+
+    if (expense == null || !mounted) return;
+
+    setState(() => _expenses.insert(0, expense));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Đã thêm ${expense.title}.')));
+  }
+
+  void _removeExpense(int index) {
+    final removed = _expenses[index];
+    setState(() => _expenses.removeAt(index));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Đã thêm khoản chi mẫu 45.000 ₫.')),
+      SnackBar(
+        content: Text('Đã xóa ${removed.title}.'),
+        action: SnackBarAction(
+          label: 'Hoàn tác',
+          onPressed: () => setState(() => _expenses.insert(index, removed)),
+        ),
+      ),
     );
   }
 
@@ -137,7 +146,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               ),
               FilledButton.tonalIcon(
                 key: const Key('add-expense-button'),
-                onPressed: _addSampleExpense,
+                onPressed: _addExpense,
                 icon: const Icon(Icons.add, size: 18),
                 label: const Text('Thêm'),
               ),
@@ -151,28 +160,56 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 final expense = entry.$2;
                 return Column(
                   children: [
-                    ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 5,
+                    Dismissible(
+                      key: ValueKey(
+                        '${expense.title}-${expense.amount}-$entry',
                       ),
-                      leading: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: expense.color.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(14),
+                      direction: DismissDirection.endToStart,
+                      onDismissed: (_) => _removeExpense(entry.$1),
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 20),
+                        color: AppColors.coral,
+                        child: const Icon(
+                          Icons.delete_outline,
+                          color: Colors.white,
                         ),
-                        child: Icon(expense.icon, color: expense.color),
                       ),
-                      title: Text(
-                        expense.title,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      subtitle: Text(expense.category),
-                      trailing: Text(
-                        _money(expense.amount),
-                        style: const TextStyle(fontWeight: FontWeight.w800),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 5,
+                        ),
+                        leading: Container(
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            color: expense.color.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Icon(expense.icon, color: expense.color),
+                        ),
+                        title: Text(
+                          expense.title,
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        subtitle: Text(expense.category),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              _money(expense.amount),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            IconButton(
+                              tooltip: 'Xóa',
+                              onPressed: () => _removeExpense(entry.$1),
+                              icon: const Icon(Icons.close, size: 18),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     if (entry.$1 != _expenses.length - 1)
@@ -188,8 +225,137 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 }
 
+class _AddExpenseDialog extends StatefulWidget {
+  const _AddExpenseDialog();
+
+  @override
+  State<_AddExpenseDialog> createState() => _AddExpenseDialogState();
+}
+
+class _AddExpenseDialogState extends State<_AddExpenseDialog> {
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  String _category = 'Ăn uống';
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final title = _titleController.text.trim();
+    final amount = int.tryParse(
+      _amountController.text.replaceAll(RegExp(r'[^0-9]'), ''),
+    );
+    if (title.isEmpty || amount == null || amount <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nhập nội dung và số tiền hợp lệ.')),
+      );
+      return;
+    }
+    Navigator.pop(context, _Expense.fromCategory(title, _category, amount));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Thêm khoản chi'),
+      content: SingleChildScrollView(
+        child: SizedBox(
+          width: 360,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                key: const Key('expense-title-field'),
+                controller: _titleController,
+                autofocus: true,
+                decoration: const InputDecoration(
+                  labelText: 'Nội dung',
+                  hintText: 'Ví dụ: Cà phê ven biển',
+                ),
+              ),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                initialValue: _category,
+                decoration: const InputDecoration(labelText: 'Danh mục'),
+                items: ['Ăn uống', 'Di chuyển', 'Vui chơi', 'Khách sạn']
+                    .map(
+                      (value) =>
+                          DropdownMenuItem(value: value, child: Text(value)),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) setState(() => _category = value);
+                },
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                key: const Key('expense-amount-field'),
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submit(),
+                decoration: const InputDecoration(
+                  labelText: 'Số tiền',
+                  suffixText: '₫',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Hủy'),
+        ),
+        FilledButton(
+          key: const Key('save-expense-button'),
+          onPressed: _submit,
+          child: const Text('Thêm'),
+        ),
+      ],
+    );
+  }
+}
+
 class _Expense {
   const _Expense(this.title, this.category, this.amount, this.icon, this.color);
+
+  factory _Expense.fromCategory(String title, String category, int amount) {
+    return switch (category) {
+      'Di chuyển' => _Expense(
+        title,
+        category,
+        amount,
+        Icons.two_wheeler_outlined,
+        AppColors.blue,
+      ),
+      'Vui chơi' => _Expense(
+        title,
+        category,
+        amount,
+        Icons.local_activity_outlined,
+        AppColors.coral,
+      ),
+      'Khách sạn' => _Expense(
+        title,
+        category,
+        amount,
+        Icons.hotel_outlined,
+        AppColors.success,
+      ),
+      _ => _Expense(
+        title,
+        category,
+        amount,
+        Icons.restaurant_outlined,
+        AppColors.amber,
+      ),
+    };
+  }
 
   final String title;
   final String category;
