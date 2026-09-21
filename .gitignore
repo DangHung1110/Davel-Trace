@@ -20,3 +20,7 @@ build/
 *.log
 .DS_Store
 Thumbs.db
+
+# Scratch spec-writing notes (never commit, delete after specs done)
+DavelAgentIdea.txt
+DavelAgentAnswer.txt
