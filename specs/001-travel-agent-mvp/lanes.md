@@ -24,12 +24,22 @@ T007 split 4 file để khỏi conflict: `schemas/trip.py` (C), `schemas/poi.py`
 - **C**: `BE/app/{main.py,routers/**,schemas/**}`, `BE/app/services/{llm,parser,retrieval,rank,context_score,explainer,weather,expenses}.py`, `BE/tests/{contract/**,integration/**}`, `FE/lib/api/**`, `FE/lib/features/**`, `BE/.env.example`.
 - **Chung, chỉ sửa theo luật**: `tasks.md` (chỉ dòng task mình), `lanes.md` (bảng status lane mình).
 
-## Thứ tự chạy
+## Thứ tự chạy (3 lanes SONG SONG được)
 
-1. **Ngày 1 (chung)**: Phase 1+2 theo phân công trên — C dựng skeleton, A seed snapshot, B matrix+gate. Xong mới tách.
-2. **MVP line**: Phase 3→8 (P1). Dừng VALIDATE demo static (S1–S3+S6 + T054/T057).
-3. **P2**: Phase 9–11 (US7 explain → US8 replan → US9 eval) rồi Phase 12 polish.
+1. **Ngày 1 (chung, vẫn song song)**: Phase 1+2 đã chia rời file — C dựng skeleton,
+   A seed snapshot, B matrix+gate. Xong mới tách lanes.
+2. **MVP line (song song toàn phần)**: Phase 3→8 (P1). Dừng VALIDATE demo static.
+3. **P2 (song song)**: Phase 9–11 rồi Phase 12 polish (cần cả 3 xong mới ráp).
 4. **Review gates**: @oracle review ở US1-demo và trước mỗi lane-PR; @verifier đối chiếu spec khi cần.
+
+## Luật STUB (để song song không chờ nhau)
+
+- Lane nào cần đồ lane khác chưa xong → **code theo `contracts/api.md` + schemas
+  đã đóng băng, dùng stub/mock**, KHÔNG ngồi chờ. Ví dụ: B cần file model PATM
+  của A → B code optimizer với hàm `score_transition()` giả trả số cố định;
+  A giao file thật ở phase-PR, B thay 1 dòng là chạy.
+- CẤM viện cớ "đợi lane kia" quá 1 ngày — quá hạn thì stub + ghi vào lanes.md.
+- Tích hợp thật xảy ra ở phase-PR (test S1–S7 bắt stub phải khớp interface thật).
 
 ## Git protocol (chống conflict khi fetch)
 
@@ -41,11 +51,32 @@ git worktree add ..\Davel-Trace-lane-c feat/lane-c-parser-api
 
 - Mỗi ngày: `git fetch origin` + `git pull` (merge, KHÔNG rebase nhánh share).
 - Commit nhỏ, message kèm task ID: `feat: US3 PATM trainer (T029)`.
-- Push lane branch hằng ngày; PR vào `dev` theo phase (không PR thẳng vào nhau).
+- **PR NHỎ, PR SỚM (chống phình): mỗi phase xong → PR ngay vào `dev`, không dồn.**
+  CẤM ôm 2+ phases mới PR. Diff mục tiêu <400 dòng/PR. Không PR lane thẳng vào nhau.
+- **ĐÓNG BĂNG interface sau ngày 1 (chống trôi):** `contracts/api.md` + `schemas/*`
+  xong Phase 2 là chốt. Muốn đổi chữ ký hàm/endpoint/schema: ghi vào bảng dưới +
+  báo 2 lane kia TRƯỚC khi code, không tự đổi.
 - Conflict: vùng file rời nhau nên auto-merge. Nếu dính (chủ yếu `tasks.md`):
   người sở hữu dòng thắng, bên kia apply lại. Không sửa dòng task của lane khác.
 - `tasks.md`: đánh `[X]` ngay khi task xong + test xanh; commit riêng dòng đó.
+  Mỗi sáng pull để thấy `[X]` của lane khác (khỏi hỏi "xong chưa").
 - PR #1 merge trước, lane PRs sau (rebase không cần — merge commit thường).
+
+## Mô hình nhánh: task → lane → dev (stacked)
+
+- Task NHỎ (<nửa ngày, 1 file, trong vùng lane): commit thẳng lên lane branch.
+- Task LỚN (>1 ngày, hoặc rủi ro cao, hoặc agent thực hiện): tách nhánh
+  `task/T029-patm-train` từ lane → xong → merge vào lane → xóa nhánh task.
+- **Cổng task→lane**: test của task xanh + scenario quickstart liên quan pass.
+  Lane phải luôn xanh — lane đỏ thì dừng nhận merge, fix trước.
+- **Cổng lane→dev** (phase-PR): full test lane xanh + @oracle review + update bảng
+  tracking. Diff mục tiêu <400 dòng.
+
+## Interface freeze log (đổi interface ghi vào đây)
+
+| Ngày | Lane | Đổi gì | Ảnh hưởng lane nào | Đã báo chưa |
+|---|---|---|---|---|
+| | | | | |
 
 ## Tracking (update bảng này mỗi PR)
 
