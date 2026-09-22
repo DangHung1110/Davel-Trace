@@ -21,7 +21,8 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
 - [ ] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
 - [ ] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
-- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Google Places API (New): fetch by type/area, normalize to TravelEval JSON schema, supplement visit_duration/intensity/ambience manually, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
+- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Google Places API (New): fetch by type/area, normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
+- [ ] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8)
 - [ ] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
 - [ ] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
 - [ ] T006 [P] FE API client skeleton (`FE/lib/api/client.dart`, base URL config)
@@ -83,10 +84,10 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [ ] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
 - [ ] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
-- [ ] T028 [US3] Pair dataset builder: 500–1000 pairs (1000-rule/600-judge/200-human protocol, swap-check, 30/40/30 balance) in `BE/ml/patm/make_pairs.py` (depends on T003 seed + snapshot scale-up)
+- [ ] T028 [US3] Pair dataset builder: 1,500–2,000 pairs (min viable 500–1,000; protocol 1000-rule/600-judge/200-human, swap-check, 30/40/30 balance) in `BE/ml/patm/make_pairs.py` (depends on T003 seed + T003b snapshot)
 - [ ] T029 [US3] LightGBM RankNet trainer (`BE/ml/patm/train.py`): 5-fold + held-out, export model.txt (depends on T028)
 - [ ] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
-- [ ] T031 [US3] PATM eval test: pairwise accuracy, flip consistency in `BE/tests/unit/test_patm.py`
+- [ ] T031 [US3] PATM eval test: pairwise accuracy, flip consistency, leave-POI-out CV (giấu nguyên 20% POI khỏi train — chứng minh tổng quát hóa trên POI chưa từng thấy) in `BE/tests/unit/test_patm.py`
 
 **Checkpoint**: US3 pipeline scores transitions; optimizer prefers preference order when feasible
 
@@ -183,3 +184,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - Within story: tests FIRST (fail) → models → services → endpoints → integration.
 - Parallel lanes for 3-person team: A = data/eval (T003, T028, T051, Phase 11), B = optimizer/solver (T017, T030, T032, T046), C = parser/API/FE (T014, T020, T037, T054, T055). PATM train (T029) + event clf (T044) run CPU-side anytime after data ready.
 - MVP stop line: Phases 1–8 + T054/T057 (static demo). P2 (9–11) follows.
+
+## Backlog (P3 — sau MVP, không chặn demo)
+
+- [ ] T060 Duration nấc 3: mine temporal expressions từ reviews ("đi 2 tiếng", "cả buổi sáng") + update prior `p50` từ actual activity durations (rule-based, không continual learning — constitution V; xem R8)
