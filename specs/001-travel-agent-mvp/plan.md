@@ -15,13 +15,13 @@ evaluator enforces TravelEval tier-1/2 gates. See `research.md` for decisions.
 ## Technical Context
 
 **Language/Version**: Python 3.11 (BE), Dart/Flutter (FE, existing app)
-**Primary Dependencies**: FastAPI, OR-Tools (CP-SAT), LightGBM, Pydantic, Ollama (Qwen3-14B)
+**Primary Dependencies**: FastAPI, OR-Tools (CP-SAT), LightGBM, Pydantic, Ollama (Qwen3-14B), Open-Meteo
 **Storage**: Versioned JSON snapshot (TravelEval schema) + SQLite runtime; OSRM matrix cache
 **Testing**: pytest; TravelEval deterministic metrics; 30–50 ĐN tests; gold via Approach B
-**Target Platform**: Android/iOS via Flutter; demo BE on MacBook (local, offline-capable)
+**Target Platform**: Android/iOS via Flutter; BE deployed on free tier (Render/Fly.io); local dev on MacBook
 **Project Type**: Mobile app + Python API backend
 **Performance Goals**: parser <10s, itinerary <30s, replan <15s, PATM inference <5ms, CP-SAT timeout 5s
-**Constraints**: Da Nang only; 1–2 days; Vietnamese-only; offline map; no booking/payment; no secrets in code
+**Constraints**: Da Nang only; 1–2 days; Vietnamese-first (English later); offline map; no booking/payment; no secrets in code
 **Scale/Scope**: 100–200 POIs, 30–50 test queries, team 3, deadline 2026-12-15
 
 ## Constitution Check
@@ -33,7 +33,7 @@ evaluator enforces TravelEval tier-1/2 gates. See `research.md` for decisions.
 - III. Test-First: validator/evaluator tasks precede optimizer tuning; bars defined — PASS.
 - IV. Data Provenance: snapshot schema + uncertainty labels + `.env` secrets — PASS.
 - V. Tier Discipline: nấc 1→2→3, no RL/GPU/multi-city/voice/booking — PASS.
-- VI. Mobile Contract: Flutter + FastAPI + latency budgets + offline map — PASS.
+- VI. Mobile Contract: Flutter + FastAPI + free-tier deploy + latency budgets + offline map — PASS.
 
 Post-design re-check: no new violations. Structure extends existing repo (no new projects without need).
 

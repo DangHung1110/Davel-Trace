@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "Personalized Travel Agent là hệ thống lập kế hoạch du lịch cá nhân hóa cho Đà Nẵng: nhận yêu cầu tự nhiên bằng tiếng Việt, gợi ý POI/quán ăn, tối ưu thứ tự hoạt động theo sở thích (không chỉ đường ngắn nhất), kiểm tra tính khả thi, giải thích quyết định, cập nhật lịch khi đổi yêu cầu hoặc gặp sự cố, quản lý chi tiêu trong app, hiển thị trên ứng dụng di động."
+**Input**: User description: "Personalized Travel Agent là hệ thống lập kế hoạch du lịch cá nhân hóa cho Đà Nẵng: nhận yêu cầu tự nhiên bằng tiếng Việt, gợi ý POI/quán ăn, tối ưu thứ tự hoạt động theo sở thích (không chỉ đường ngắn nhất), kiểm tra tính khả thi, giải thích quyết định, cập nhật lịch khi đổi yêu cầu hoặc gặp sự cố, quản lý chi tiêu trong app, hiển thị trên ứng dụng di động Flutter."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -296,16 +296,25 @@ lịch sai bị rớt cổng khả thi, lịch đúng được chấm điểm đ
 - **SC-011**: Xếp lại xong trong 15 giây; lịch đầy đủ trong 30 giây.
 - **SC-012**: ≥90% lời giải thích có bằng chứng từ input/dữ liệu; không claim thiếu căn cứ.
 - **SC-013**: Ngân sách hiển thị khớp chi thực tế đã ghi (sai số do giá ước tính được ghi rõ).
+- **SC-014**: 100% hoạt động đã hoàn thành được giữ nguyên sau replanning.
+- **SC-015**: Replanning hoàn thành trong 15 giây.
+- **SC-016**: Hiển thị ít nhất 1 lý do cho mỗi thay đổi trong replan.
+- **SC-017**: Khi không đáp ứng được ràng buộc, trả lỗi có cấu trúc (không crash).
+- **SC-018**: ≥90% explanation chứa ít nhất 1 evidence từ input hoặc data source.
+- **SC-019**: Không claim địa điểm mở cửa nếu không có dữ liệu xác minh.
 
 ## Assumptions
 
 - MVP 1 thành phố (Đà Nẵng), tối đa 2 ngày; user xác nhận giờ bắt đầu/kết thúc.
-- POI có snapshot kèm nguồn + thời điểm lấy; routing có thể không realtime hoàn toàn.
+- POI data via Google Places API (legal, ~$3.40 cho 200 POIs); bổ sung thủ công các field API thiếu (visit_duration, intensity, ambience).
+- Routing: OSRM snapshot matrix (không dùng VietMap — free, deterministic, offline).
 - Sở thích mềm được nới khi vô nghiệm; ràng buộc cứng không tự nới.
-- Hệ thống hiểu ngôn ngữ không phải nguồn sự thật duy nhất; bộ kiểm tra khả thi chịu trách nhiệm cuối.
+- LLM không phải nguồn sự thật duy nhất; validator chịu trách nhiệm cuối.
 - User có mạng khi cần search/routing; mất mạng dùng cache/snapshot kèm nhãn.
-- Mobile và voice ngoài MVP đầu (mobile là kênh chính ở giai đoạn sau của MVP).
-- Không booking/thanh toán thật; key qua biến môi trường.
+- Mobile (Flutter) là FE chính; BE deploy free tier (Render/Fly.io); local dev trên MacBook.
+- Dynamic replanning là feature thật (không phải demo-only); demo dùng mock GPS thay GPS thật, interface giống hệt.
+- Không booking/thanh toán thật; key qua `.env`.
+- Ngôn ngữ: tiếng Việt trước, tiếng Anh sau (khi ổn định).
 - Benchmark tự động không bắt buộc hỏi clarification; app thực tế được hỏi lại.
 - Thuộc tính cảm tính ("yên tĩnh", "hợp hẹn hò") là suy luận từ review, luôn gắn uncertainty.
 - Đi công tác tắt phạt điểm đã đi; user mới onboarding trước khi gợi ý.

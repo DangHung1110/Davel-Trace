@@ -7,7 +7,7 @@
 
 | Lane | Người | Branch | Tasks | Agent chạy |
 |---|---|---|---|---|
-| A Data & Eval | 1 | `feat/lane-a-data-eval` | T003, T008, T028, T029, T031, T044, T049–T053, T056 | @fixer (scope: file lane A) |
+| A Data & Eval | 1 | `feat/lane-a-data-eval` | T003, T003b, T008, T028, T029, T031, T044, T049–T053, T056 | @fixer (scope: file lane A) |
 | B Optimizer & Solver | 2 | `feat/lane-b-optimizer` | T010, T011, T017–T019, T030, T032+s, T036b, T045, T046, T048 | @fixer (scope: file lane B) |
 | C Parser, API & App | 3 | `feat/lane-c-parser-api` | T001, T002, T004, T005, T007*, T009, T014–T016, T020–T025, T033e, T034–T043, T047, T054, T055, T057–T059 | @fixer (scope: file lane C) |
 
@@ -27,7 +27,7 @@ T007 split 4 file để khỏi conflict: `schemas/trip.py` (C), `schemas/poi.py`
 ## Thứ tự chạy (3 lanes SONG SONG được)
 
 1. **Ngày 1 (chung, vẫn song song)**: Phase 1+2 đã chia rời file — C dựng skeleton,
-   A seed snapshot, B matrix+gate. Xong mới tách lanes.
+   A seed snapshot (7 POIs) + bắt đầu build Google Places snapshot (100–200 POIs), B matrix+gate. Xong mới tách lanes.
 2. **MVP line (song song toàn phần)**: Phase 3→8 (P1). Dừng VALIDATE demo static.
 3. **P2 (song song)**: Phase 9–11 rồi Phase 12 polish (cần cả 3 xong mới ráp).
 4. **Review gates**: @oracle review ở US1-demo và trước mỗi lane-PR; @verifier đối chiếu spec khi cần.

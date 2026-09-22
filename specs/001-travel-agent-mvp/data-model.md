@@ -25,7 +25,7 @@ All entities Pydantic-validated (see `contracts/api.md`).
 - Extra: `cuisine`, `price_range`, `crowd`, `dietary[]`, `reservation` bool, `meal_slots[]`.
 
 ### RouteSegment
-- Fields: `from_id`, `to_id`, `mode`, `km`, `minutes`, `source` (osrm|vietmap|cache), `confidence`, `at`.
+- Fields: `from_id`, `to_id`, `mode`, `km`, `minutes`, `source` (osrm|cache), `confidence`, `at`.
 - Validation: `minutes` MUST come from matrix cache, never haversine-only for feasibility.
 
 ### Activity

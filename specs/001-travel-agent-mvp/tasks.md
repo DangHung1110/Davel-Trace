@@ -21,7 +21,8 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
 - [ ] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
 - [ ] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
-- [ ] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path; no secrets committed)
+- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Google Places API (New): fetch by type/area, normalize to TravelEval JSON schema, supplement visit_duration/intensity/ambience manually, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
+- [ ] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
 - [ ] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
 - [ ] T006 [P] FE API client skeleton (`FE/lib/api/client.dart`, base URL config)
 

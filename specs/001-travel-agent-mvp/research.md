@@ -14,27 +14,27 @@ Prior deep research lives in NotebookLM notebook `PBL6-TravelAgent`
 - **Rationale**: Convex-like loss converges on CPU in seconds at 500–2000 pairs; tabular data fits GBDT; inference <1ms; output feeds optimizer as `q_ij`.
 - **Alternatives considered**: GRPO/RL (rejected: needs A100, unstable on small data — papers); MLP-ONNX (kept as nấc-3 option for on-device); rule weights (nấc-1 bootstrap + fallback).
 
-## R3. Language understanding: local LLM via Ollama
-- **Decision**: Qwen3-14B Q4 primary, Sailor2-8B fallback, JSON mode + temp 0.1 + Pydantic validate + ≤2 retries (closed-loop repair); API only as polish fallback.
-- **Rationale**: 18–24GB MacBook runs 14B at 30–55 tok/s; Vietnamese verified; full stack runs offline for demo reliability; zero API cost for ~600 judge pairs.
-- **Alternatives considered**: API-only (rejected as primary: cost + network dependence at demo); ≤4B local (rejected: drops Vietnamese diacritics); PhoBERT fine-tune for parser (kept as S3 option if offline parser or baseline needed).
+## R3. Language understanding: local LLM primary, API fallback
+- **Decision**: Qwen3-14B Q4 primary (Ollama), Sailor2-8B fallback, JSON mode + temp 0.1 + Pydantic validate + ≤2 retries (closed-loop repair). API (GPT-4o-mini/Gemini Flash) used ONLY for: (a) polish explanation text for demo recording, (b) re-judge ambiguous edge-case pairs. Budget: <5 USD total.
+- **Rationale**: 18–24GB MacBook runs 14B at 30–55 tok/s; Vietnamese verified; full stack runs offline for demo reliability; zero API cost for ~600 judge pairs. API fallback covers quality ceiling for demo polish without locking into paid dependency.
+- **Alternatives considered**: API-only primary (rejected: cost + network dependence at demo); ≤4B local (rejected: drops Vietnamese diacritics); PhoBERT fine-tune for parser (kept as S3 option if offline parser or baseline needed).
 
-## R4. Routing data: OSRM snapshot matrix
-- **Decision**: Precompute/cache N≤200 Da Nang matrix once (40k cells); VietMap only if key holds Routing rights, never load-bearing.
-- **Rationale**: OSRM public demo rate-limits; cached matrix makes optimizer/evaluator deterministic and offline-capable; prior HTTP 423 on VietMap key.
-- **Alternatives considered**: Live VietMap (rejected as primary: 2-month free + ToS limits on bulk caching); haversine-only (rejected: breaks B3 feasibility).
+## R4. Routing data: OSRM snapshot matrix (no VietMap)
+- **Decision**: Precompute/cache N≤200 Da Nang matrix once (40k cells) via OSRM. VietMap NOT used at all.
+- **Rationale**: OSRM is free, deterministic, offline-capable; VietMap free tier expires + ToS limits on bulk caching + prior HTTP 423 issues. Simplifies stack to zero external routing dependencies.
+- **Alternatives considered**: VietMap (rejected: 2-month free, ToS bulk-cache ban, HTTP 423 history); haversine-only (rejected: breaks B3 feasibility); GraphHopper (rejected: more complex than OSRM for same result).
 
-## R5. API + app: FastAPI backend, Flutter frontend
-- **Decision**: New Python package under `BE/`; existing Flutter app gains API client replacing in-memory demo data; `index.html` stays demo/test.
-- **Rationale**: Matches team direction (BE/ reserved, Flutter shell in progress); mobile-first decision N-Q7/H.
-- **Alternatives considered**: New repo (rejected: splits map/routing assets); web-first (rejected: team builds Flutter).
+## R5. API + app: FastAPI backend, Flutter frontend, free-tier hosting
+- **Decision**: New Python package under `BE/`; existing Flutter app gains API client replacing in-memory demo data; `index.html` stays demo/test. BE deployed on free tier (Render/Fly.io) for mobile to call anytime; local dev on MacBook.
+- **Rationale**: Free tier enables real-time mobile demo without local network setup; warm-up 5 min before demo; backup video quay local if venue wifi fails.
+- **Alternatives considered**: Local-only (rejected: mobile can't call localhost across network easily); paid hosting (rejected: unnecessary for MVP); new repo (rejected: splits map/routing assets).
 
 ## R6. Evaluation: TravelEval tiers 1→2, cuts documented
 - **Decision**: Deterministic metrics first (FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE), LLM-judge Profit/BE second; cut human experts/intercity/seasonal queuing; 30–50 ĐN tests; gold via Approach B.
 - **Rationale**: Paper's repo is public and reusable; CN dataset unusable for ĐN so snapshot self-built to TravelEval schema; student-scale effort mapped (tier 1: 1–2 days, tier 2: 1 week).
 - **Alternatives considered**: Full TravelEval replication (rejected: needs experts + CN data); no evaluator (rejected: constitution III).
 
-## R7. POI snapshot: self-built Da Nang 100–200
-- **Decision**: OSM Overpass skeleton + official-site/Foody crawl for hours/prices + agent normalization + 15% human verify, TravelEval JSON schema.
-- **Rationale**: No VN POI dataset exists with hours/prices; Google scraping violates ToS; `DemoTripData` 7 places seed format + first gold test.
-- **Alternatives considered**: Google Maps crawl (rejected: key cost + ToS); manual-only (kept as fallback lane per-person 30–40 POIs).
+## R7. POI snapshot: Google Places API + agent normalization
+- **Decision**: Google Places API (New) for Da Nang POI data (100–200 places); agent normalizes to TravelEval JSON schema; manual supplement for opening hours/duration/price where API data is incomplete.
+- **Rationale**: Google Places has the most complete POI data for Vietnam (names, coordinates, ratings, opening hours, price levels). API is legal and reliable unlike scraping. Cost: ~$0.017/request × 200 = ~$3.40 for initial build.
+- **Alternatives considered**: OSM Overpass (rejected: missing hours/prices/reviews for VN); Foody crawl (rejected: fragile, non-standard); manual-only (kept as supplement for fields Google lacks: visit_duration, physical_intensity, ambience).

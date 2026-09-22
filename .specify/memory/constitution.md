@@ -53,10 +53,13 @@ need network (cached last itinerary + data timestamp shown). Budgets: parser
 
 Python 3.11; FastAPI backend; Flutter frontend (`index.html` stays demo/test
 only); OR-Tools CP-SAT optimizer; LightGBM PATM (pairwise RankNet loss);
-Pydantic validation; pytest; OSRM snapshot route matrix (VietMap only if key
-holds Routing rights); local LLM via Ollama on demo machine (Qwen3-14B primary,
-Sailor2-8B fallback), API only as fallback polish; SQLite/JSON snapshot store
-with seed + config for reproducibility.
+Pydantic validation; pytest; OSRM snapshot route matrix (no VietMap — free,
+deterministic, offline-capable); POI data via Google Places API (legal, reliable,
+~$3.40 for 200 POIs); local LLM via Ollama on demo machine (Qwen3-14B primary,
+Sailor2-8B fallback), API (GPT-4o-mini/Gemini Flash, <5 USD total) only for
+demo polish and edge-case judge; SQLite/JSON snapshot store with seed + config
+for reproducibility; Open-Meteo for weather (free, no key); BE deployed on free
+tier (Render/Fly.io) for mobile access; Vietnamese-first, English later.
 
 ## Development Workflow
 
