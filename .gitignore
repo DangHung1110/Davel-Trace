@@ -24,3 +24,12 @@ Thumbs.db
 # Scratch spec-writing notes (never commit, delete after specs done)
 DavelAgentIdea.txt
 DavelAgentAnswer.txt
+
+# Office scratch docs (idea/status notes, not code — never commit)
+*.docx
+*.xlsx
+~$*.docx
+~$*.xlsx
+
+# Agent-tool-local files (opencode-only wrappers; each provider keeps its own)
+.opencode/
