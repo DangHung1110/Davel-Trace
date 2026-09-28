@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T047 — Review mock GPS feed + demo timeline (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits ad392a8 + 0a405c5). (1) Vùng file: OK — BE/app/services/gps.py + BE/tests/unit/test_gps.py (vùng C) + data/gps/demo_day.json (task đòi timeline file; docstring khai tránh data/snapshots của lane A — đúng); tasks.md chỉ tick 1 dòng T047. (2) Chạy test file: 4/4 OK exit 0 (load monotonic + lat/lon bounds / replay đúng thứ tự + cạn trả None / trigger rain 13:30 / timeline hỏng non-monotonic bị AssertionError); full `pytest BE/tests/`: 72/72 passed exit 0; py_compile cả 2 file exit 0. (3) Interface như GPS thật: next()→{at,lat,lon,trigger?}|None + triggers() + done + load_timeline validate (đủ keys/monotonic/không trùng); docstring chốt hợp đồng RealGpsFeed drop-in sau cắm thật không sửa caller. (4) Timeline đủ demo: 6 điểm monotonic 07:30→17:30, tọa độ ĐN hợp lý (~16.0x/108.2x), 1 trigger rain severity high lúc 13:30 (đúng kịch bản S5 chiều mưa). (5) Tick xứng đáng: T047 đòi mock feed interface + timeline file — giao đủ cả 2. (6) Secret-scan diff ad392a8~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T043 — Review hallucination sweep test (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits b3bbce2 + e728e85). (1) Vùng file: OK — chỉ thêm BE/tests/integration/test_hallucination_sweep.py (vùng C); tasks.md chỉ tick 1 dòng T043. (2) Chạy pytest sweep: 4/4 PASSED (clean pass / ghost 'POI tu che: atlantis' / tên sai 'ten sai' / giờ bịa 'gio tu che: 18:00-22:00'); full `pytest BE/tests/`: 68/68 passed exit 0; py_compile exit 0. (3) Sweep THẬT không mock ảo: inputs tampered cụ thể chạy qua logic sweep() thật (lookup id snapshot, so tên, regex giờ cross-check toàn texts itinerary+claims+facts, cộng validate_plan) — assertions kiểm output thật từng case. NOTE (không FIX): hàm sweep() hiện nằm test-local, chưa có điểm gọi production (ví dụ endpoint evaluate T052) — wiring phase-PR. (4) Tick xứng đáng: T043 đòi cross-check POI names/hours vs snapshot — giao đủ 4 case; 'US7 closed' đúng (T042 builder + T043 sweep xong). (5) Secret-scan diff b3bbce2~1..HEAD: 0 hit. Worktree sạch.
