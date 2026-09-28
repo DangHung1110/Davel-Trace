@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T063-M4 — Review OSM weather labeler v1 + hooks (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits 80828fa + 0b494da). (1) Số THẬT: OSM cache TEMP của coder còn nguyên (danang 590KB + hoian 307KB) — chạy lại test smoke ra đúng ĐN n=2978 indoor 2655 / outdoor 323 (cafe/restaurant-heavy, hợp lý node-only); đếm độc lập HoiAn 1396 khớp note; 5/5 tests xanh, py_compile OK. (2) KHÔNG claim macro-F1: code + doc + test cùng tuyên bố confidence là heuristic chưa calibrate, real eval macro-F1≥0.95 PENDING audit user (test chỉ check giá trị trong {0.9,0.7,0.5}, không đo accuracy) — trung thực. (3) T063 giữ [ ] là ĐÚNG (audit chưa có). (4) Raw/bulk KHÔNG tracked: ls-files .json chỉ artifacts hợp lệ (snapshots, priors, crosswalk, sample hermetic); OSM dumps nằm TEMP ngoài repo. (5) Secret-scan diff: 0 hit. Status sạch (ngoài tmp untracked). Vùng file OK (BE/ml/weather_label/ + test + docs/, task chỉ định).
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T064-M2FIX — Re-review dwell docs/metadata fix (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: re-review fix commit 608325a cho ISSUE M2 (chỉ phạm vi fix). (1) Bảng per-cat ĐẠT: parse 10 dòng bảng docs so field-by-field với JSON (n/confidence/p25/p50/p75) → 0 mismatch, tổng 1136 = JSON, số 511 biến mất; bảng ghi rõ regenerate từ JSON. (2) Meta source ĐẠT: 'gaps 5m..4h' khớp code MAX_GAP_MIN=4h; chữ '12h' còn đúng 1 chỗ là câu chuyện lịch sử method-fix (12h cap cũ → absurd → cap 4h) — đúng ngữ cảnh, không phải lỗi. (3) Test + smoke xanh: duration_prior 4/4 OK, --smoke log-MAE 0.546 khớp, py_compile ngầm qua runs. (4) Không file thừa: ls-files không .txt/.tsv/.zip/full-tmp/quota/raw; status chỉ còn entry track này + tmp untracked. ISSUE M2 đóng (FIX-1 xong); T064 vẫn [ ] đúng (chờ gold eval).
