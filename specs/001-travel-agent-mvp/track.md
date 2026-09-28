@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T024 — Review uncertainty labels + needs_verification (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 2fb5fb3 + a5db0cc). (1) Vùng file: OK — sửa BE/app/services/retrieval.py + test cũ (vùng C) + BE/tests/unit/test_uncertainty.py mới; tasks.md chỉ tick 1 dòng T024. (2) Full `pytest BE/tests/`: 35/35 passed exit 0 (31 cũ + 3 uncertainty + 1 tăng ròng ở retrieval); test mới 3/3; py_compile 3 file exit 0. Router itinerary không vỡ vì key 'candidates' giữ nguyên (integration/contract fixtures verified vẫn xanh). (3) Test cũ update TRUNG THỰC, không pass ảo: case must-visit-unverified-vào-main (luật T015 cũ) được thay bằng 2 case đúng luật T024 mới — verified must-visit giữ candidates + unverified must-visit ra needs_verification kèm flag; cả 2 phía đều assert. (4) FR-013/024/026 đúng: unverified KHÔNG vào candidates (2 tests assertNotIn); reasons 'chua xac minh (FR-013)' / 'must-visit (cho xac minh, ngoai main plan)' + uncertainty list ('poi/gio/rating/tags/gia chua xac minh') — field thiếu gắn nhãn, không dùng làm fact. (5) Tick xứng đáng: T024 đòi unverified excluded from main plan + labels — giao đủ 3 keys (candidates/needs_verification/excluded). (6) Secret-scan diff 2fb5fb3~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T023 — Review context scorer preference→attribute (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 0980f58 + 4f1019f). (1) Vùng file: OK — BE/app/services/context_score.py (vùng C) + BE/tests/unit/test_context_score.py; tasks.md chỉ tick 1 dòng T023. (2) Chạy test file `python BE/tests/unit/test_context_score.py -v`: 4/4 OK exit 0; full `pytest BE/tests/ -q`: 31 passed exit 0; py_compile cả 2 file exit 0. (3) Query mở chạm đúng POI + rule kích hoạt có reason: ['yên tĩnh','hẹn hò','gần biển'] → cove vượt club, fired đủ [quiet, dating, near_sea] mỗi rule có reason; ['sau leo núi, mệt'] → beach vượt hill, recovery fired; không keyword → neutral 0.5 fired rỗng; scores trong [0,1]. Dùng đúng field T022 (ambience/crowd) — tích hợp chéo tốt. (4) Tick xứng đáng: T023 đòi preference→attribute mapping gồm 'yên tĩnh/hẹn hò/sau hiking' — giao đủ 4 rule groups giải thích được + neutral. (5) Secret-scan diff 0980f58~1..HEAD: 0 hit. Worktree sạch.
