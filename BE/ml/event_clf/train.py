@@ -46,6 +46,8 @@ def ngrams(tokens: list[str]) -> list[str]:
 
 
 class Tfidf:
+    # ponytail: hand-rolled TF-IDF instead of scikit-learn/PhoBERT on purpose
+    # (no new deps; 10 short-text classes separate cleanly, see module docstring).
     def __init__(self, max_features: int = 800, min_df: int = 2):
         self.max_features = max_features
         self.min_df = min_df

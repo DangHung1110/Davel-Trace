@@ -28,6 +28,8 @@ import sys
 import unicodedata
 
 CATEGORY_DEFAULTS: dict[str, int] = {
+    # ponytail: nac-1 static defaults on purpose — nac-2 LLM batch (needs the
+    # T003b snapshot) and nac-3 review mining are deferred, see module docstring.
     "landmark": 45,
     "transport": 20,
     "market": 75,
@@ -121,8 +123,7 @@ def main(argv: list[str]) -> int:
             rc = rc or (1 if bad else 0)
         else:
             with open(path, "w", encoding="utf-8") as f:
-                json.dump(data if isinstance(data, list) else data, f,
-                          ensure_ascii=False, indent=2)
+                json.dump(data, f, ensure_ascii=False, indent=2)
                 f.write("\n")
     return rc
 

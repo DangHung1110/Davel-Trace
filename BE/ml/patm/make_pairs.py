@@ -50,27 +50,19 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-try:
-    from BE.ml.patm.rule_score import (  # T027: canonical scorer
-        TIE_MARGIN as _RULE_TIE,
-        explain_transition as _explain,
-        score_transition as _rule_score,
-    )
-    _HAS_RULE_SCORE = True
-except ImportError:  # standalone copy (tests/CI without repo root)
-    _HAS_RULE_SCORE = False
+from BE.common import load_pois  # noqa: E402
+from BE.ml.patm.rule_score import (  # noqa: E402
+    TIE_MARGIN,  # re-exported for callers that used make_pairs.TIE_MARGIN
+    explain_transition as _explain,
+    score_transition as _rule_score,
+)
 
 LABEL_NAMES = {1: "prefer-first", 0: "tie", -1: "prefer-second"}
-TIE_MARGIN = _RULE_TIE if _HAS_RULE_SCORE else 0.15
-
-
-def load_pois(snapshot_dir: str) -> list[dict]:
-    with open(os.path.join(snapshot_dir, "pois.json"), encoding="utf-8") as f:
-        return json.load(f)["pois"]
 
 
 def _legacy_margin(a: dict, b: dict) -> tuple[float, list[str]]:
-    """Pre-T027 inline rules. Kept as fallback + backward-compat oracle."""
+    """Pre-T027 inline rules. Backward-compat oracle asserted by test_rule_score."""
+    # ponytail: no runtime caller — kept only as the T027 backward-compat oracle.
     margin, fired = 0.0, []
     ia, ib = a.get("intensity", 2), b.get("intensity", 2)
     if ia > ib:  # van dong truoc, thu gian sau (spec US3: hiking -> beach)
@@ -96,9 +88,7 @@ def _legacy_margin(a: dict, b: dict) -> tuple[float, list[str]]:
 
 def _rule_margin(a: dict, b: dict) -> tuple[float, list[str]]:
     """Signed margin >0 means a->b beats b->a. Delegates to T027 scorer."""
-    if _HAS_RULE_SCORE:
-        return _rule_score(a, b), _explain(a, b)
-    return _legacy_margin(a, b)
+    return _rule_score(a, b), _explain(a, b)
 
 
 def label_ordered(a: dict, b: dict) -> dict:
@@ -213,6 +203,7 @@ def sample_human(pairs: list[dict], n: int = 200, seed: int = 7) -> list[dict]:
 
 def emit_judge_batch(pois: list[dict], path: str, n: int = 600, seed: int = 7) -> int:
     """Write judge prompts JSONL (both orders per item = swap-check)."""
+    # ponytail: emit-only — the Qwen batch is a deferred manual run (T028).
     rng = random.Random(seed)
     combos = list(itertools.combinations(sorted(pois, key=lambda p: p["poi_id"]), 2))
     rng.shuffle(combos)

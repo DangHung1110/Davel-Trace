@@ -35,6 +35,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.common import load_json, load_pois  # noqa: E402
 from BE.ml.patm.features import FEATURE_NAMES, extract  # T026: real 16 features
 
 
@@ -121,10 +122,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=7)
     args = ap.parse_args(argv)
 
-    with open(os.path.join(args.snapshot, "pois.json"), encoding="utf-8") as f:
-        pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
-    with open(args.pairs, encoding="utf-8") as f:
-        pairs = json.load(f)
+    pois = load_pois(args.snapshot, by_id=True)
+    pairs = load_json(args.pairs)
     X, y, groups, dropped = build_rows(pois, pairs)
     print(f"rows: {len(X)} trainable ({dropped} ties dropped), "
           f"{len(set(groups))} unordered groups, {len(FEATURE_NAMES)} features")
