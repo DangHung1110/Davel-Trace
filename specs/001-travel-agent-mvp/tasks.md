@@ -188,6 +188,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [ ] T062 M1 transition prior (Markov/HMM on Foursquare-NYC/TKY check-ins, public, zero-label): download dataset + category crosswalk to ĐN taxonomy (2–4h manual) → P(category_j|category_i, time-of-day) prior feature on PATM q_ij + optimizer tie-break; eval next-category perplexity/accuracy ≥10% over unigram + ranker ablation +5pp order accuracy (depends on snapshot taxonomy; CPU minutes).
 - [ ] T063 M4 weather-sensitivity labeler (engineering, don't claim novelty): logistic/GBDT on OSM tags+geometry (Overpass ĐN + 1–2 VN cities), 200-POI human audit, calibrated confidence → feeds validator weather gate + explanation evidence (FR-024); eval macro-F1 ≥0.95 indoor/outdoor (CPU seconds).
+- [ ] T064 M2 duration prior (empirical Bayes/GMM on Foursquare dwell): download TKY consecutive same-venue gaps + shrink toward category defaults → replaces nấc-1 constants in optimizer p50 + validator p75 buffer; eval log-MAE ≥10% better than defaults + p25–p75 coverage ≥80% on user spot-check gold (R8); CPU minutes. Depends on user checklist (gold).
 
 ## Dependencies & Execution Order
 
