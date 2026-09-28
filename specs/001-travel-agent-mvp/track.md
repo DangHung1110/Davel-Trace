@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T016 — Review rule ranker nac-1 attribute+context (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 70d3c83 + 63854b7). (1) Vùng file: OK — BE/app/services/rank.py (vùng C) + BE/tests/unit/test_rank.py; tasks.md chỉ tick 1 dòng T016. (2) Chạy test file `python BE/tests/unit/test_rank.py -v`: 4/4 OK exit 0; full `pytest BE/tests/ -q`: 20 passed exit 0; py_compile cả 2 file exit 0. (3) Ranking ĐÚNG: POI đúng gu (cove 0.95) vượt ngược gu (club 0.5) cách biệt; mưa 0.9 phạt outdoor weather_sensitive (dry > wet); WEIGHTS tổng đúng 1.0, toàn không âm, đủ 6 keys; scores trong [0,1]. (4) Reasons giữ cho explainer: score_poi trả {"score", "reasons"[...]} chuỗi VI đọc được (rating cao/mien phi/vua suc/hop gu/hop buoi toi/mua...), rank() bọc {poi_id, score, reasons} sort desc; docstring chốt format giữ nguyên cho T042 tái dùng. (5) Tick xứng đáng: T016 đòi rule ranker attribute + context weights — giao đủ 6 tín hiệu (rating/price/effort/pref_match/time_fit/weather). (6) Secret-scan diff 70d3c83~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T015 — Review POI retrieval hard-filter + candidates (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits ce0b002 + 679bb7a). (1) Vùng file: OK — BE/app/services/retrieval.py (vùng C) + BE/tests/unit/test_retrieval.py; tasks.md chỉ tick 1 dòng T015. (2) Chạy test file `python BE/tests/unit/test_retrieval.py -v`: 6/6 OK exit 0; full `pytest BE/tests/ -q`: 16 passed (llm 6 + parser 4 + retrieval 6) exit 0; py_compile cả 2 file exit 0. (3) Lọc ĐÚNG: must-visit giữ kể cả vi phạm (flag trong reasons, validator FR-031 quyết sau); avoid luôn loại; đóng cửa ngoài window loại (museum out 19:00-22:00, noodle/beach in); vượt budget loại; unverified loại trừ must-visit (FR-013); type-filter qua keyword map VI; mỗi candidate/excluded đều có reasons/reason. (4) Fixture tự chứa GHI RÕ: test docstring 'Fixture-based (no seed in lane C)' + retrieval.py STUB-NOTE 'lane-A snapshot loader T008 wires in at phase-PR' → NOTE tích hợp phase-PR (không FIX, đúng luật STUB lanes.md). (5) Tick xứng đáng: T015 đòi hard-constraint filter + candidate list — giao đủ kèm reasons. (6) Secret-scan diff ce0b002~1..HEAD: 0 hit. Worktree sạch.
