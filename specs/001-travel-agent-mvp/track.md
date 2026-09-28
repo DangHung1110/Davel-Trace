@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T045 — Review state store + delta + preservation (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 7ca9ba5 + 3d892e2). (1) Vùng file: OK — BE/app/services/state.py (mới, vùng B) + BE/tests/unit/test_state.py; tasks.md chỉ tick 1 dòng T045. (2) Chạy test `python BE/tests/unit/test_state.py -v`: 5/5 OK exit 0 — complete() chuyển remaining→completed không bump version; delta đổi remaining giữ completed (drop noodle→cancelled, add museum, version 1→2); drop completed bị bỏ qua + ghi ignored_completed, completed nguyên vẹn; version++ mỗi delta + history đủ; load.unknown → KeyError. py_compile cả 2 file exit 0. (3) Copy-on-write verify ĐỘC LẬP: apply_delta không mutate input (so deep snapshot), mutate output trả về không ảnh hưởng store (load lại sạch), version đúng. (4) Tick xứng đáng: T045 đòi state store + delta + preservation contract — giao đủ (state shape trip_id/version/now/location/completed/cancelled/remaining/history + FR-047 version++/delta-record). (5) Secret-scan diff 7ca9ba5~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T036b — Review replan budget feed tighten-to-actuals (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 87db837 + 2797754). (1) Vùng file: OK — BE/app/services/budget.py (mới, vùng B) + BE/tests/unit/test_budget.py; tasks.md chỉ tick 1 dòng T036. (2) Chạy test `python BE/tests/unit/test_budget.py -v`: 4/4 OK exit 0 — sáng nặng (2.5M>1.5M) siết đúng cơ cấu (allowed 500000, caps cộng đủ 500000, food 300000=500000×1.5/2.5); âm (-200000) → 0 + caps toàn 0 + reason hết ngân sách; nhẹ (200000) không siết chia đều. py_compile cả 2 file exit 0. (3) Output đủ 6 field cho T046 (trip_id/allowed_total/allowed_remaining/per_kind_cap/tightened/reason — test assert đủ); input khớp shape replan_budget() lane-C (trip_id/budget/spent/left/by_kind/alert) — hợp đồng cross-lane nhất quán. (4) T036 tick đủ 2 nửa: '[T036a replan_budget lane C + T036b feed lane B DONE]' [X] — nửa C đã verify ở review T036a lane-c; NOTE merge phase-PR (không FIX, đúng luật lanes). (5) Secret-scan diff 87db837~1..HEAD: 0 hit. Worktree sạch.
