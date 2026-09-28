@@ -50,7 +50,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [ ] T012 [P] [US1] Contract test `POST /v1/parse` in `BE/tests/contract/test_parse.py` (write FIRST, fail)
 - [ ] T013 [P] [US1] Contract test `POST /v1/itinerary` in `BE/tests/contract/test_itinerary.py` (write FIRST, fail)
-- [ ] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
+- [X] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
 - [ ] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
 - [ ] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
 - [ ] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
