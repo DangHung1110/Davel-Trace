@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T019 — Review response builder totals + status + version (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 947d6b2 + d42f564). (1) Vùng file: OK — BE/app/services/response.py đúng vùng B + BE/tests/unit/test_response.py; tasks.md chỉ tick 1 dòng T019. (2) Chạy test `python BE/tests/unit/test_response.py -v`: 4/4 OK exit 0 — totals khớp (60000đ / 3.5km / 220min = visit 210 + travel 10, 1 segment); status phản ánh đúng (pass→4 cổng 1 + violations rỗng; fail VROH→passed False + VROH 0 + violations ['VROH']); version mặc định 1 và giữ version=3 khi replan + created_at. py_compile cả 2 file exit 0. (3) Để dành T032 đúng mực: docstring ghi 'Multi-profile pooling is T032 — this builds ONE plan', signature một optimizer_out + version param cho T046, không lấn multi-profile. (4) Tick xứng đáng: T019 đòi itinerary + totals + constraint status — giao đủ per contracts/api.md. (5) Secret-scan diff 947d6b2~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T018 — Review validator gate + offenders (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 63b8c58 + d754feb). (1) Vùng file: OK — BE/app/services/validator.py đúng vùng B (via gate.py T011) + BE/tests/unit/test_validator.py; tasks.md chỉ tick 1 dòng T018 (depends T011 ghi đủ). (2) Chạy test `python BE/tests/unit/test_validator.py -v`: 6/6 OK exit 0 — good pass 4 checks True; mỗi tamper rớt đúng tên cổng KÈM offender (ghost→FAR['ghost'] / musu 18h→VROH['musu'] / gap 5<10→B3['musu->beach'] / budget 10k→BCS non-empty). py_compile cả 2 file exit 0. (3) Dùng được cho cả optimizer output và evaluator sau: validate() nhận plain dicts không dính optimizer, trả {passed, checks, violations, details} — đúng shape endpoint T052 cần; docstring ghi rõ 2 entry points + STUB-NOTE phase-PR. (4) Bonus CHẠY THẬT: optimize 6 POIs fixture → optimal 6 acts → validate cho passed True, 4 checks True, violations rỗng, details {} (exit 0). (5) Tick xứng đáng: T018 đòi validator gate via gate.py — giao đủ per-gate pass/fail + offender details. (6) Secret-scan diff 63b8c58~1..HEAD: 0 hit. Worktree sạch.
