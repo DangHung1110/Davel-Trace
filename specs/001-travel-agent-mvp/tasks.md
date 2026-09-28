@@ -111,8 +111,8 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [X] T035 [P] [US5] Expense store + routers (`POST /v1/expenses`, summary) per contracts/api.md
 - [ ] T036 [US5] Budget wiring: trip budget → alerts → remaining into replan constraints (depends on T035 + Phase 10) [T036a DONE 2026-09-28 lane C: replan_budget(); T036b replan feed lane B pending]
-- [ ] T037 [US5] FE budget UI (replace in-memory expenses with API) in `FE/lib/features/expenses/`
-- [ ] T038 [US5] Integration test US5 (S6 scenario)
+- [ ] T037 [US5] FE budget UI (replace in-memory expenses with API) in `FE/lib/features/expenses/` [BLOCKED 2026-09-28: FE app only in feat/flutter-mobile-shell (lane-c has README only) + no Flutter SDK on machine — doi human merge/SDK]
+- [X] T038 [US5] Integration test US5 (S6 scenario)
 
 ---
 
