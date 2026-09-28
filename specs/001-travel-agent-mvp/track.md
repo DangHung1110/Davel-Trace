@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T036b — Review replan budget feed tighten-to-actuals (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 87db837 + 2797754). (1) Vùng file: OK — BE/app/services/budget.py (mới, vùng B) + BE/tests/unit/test_budget.py; tasks.md chỉ tick 1 dòng T036. (2) Chạy test `python BE/tests/unit/test_budget.py -v`: 4/4 OK exit 0 — sáng nặng (2.5M>1.5M) siết đúng cơ cấu (allowed 500000, caps cộng đủ 500000, food 300000=500000×1.5/2.5); âm (-200000) → 0 + caps toàn 0 + reason hết ngân sách; nhẹ (200000) không siết chia đều. py_compile cả 2 file exit 0. (3) Output đủ 6 field cho T046 (trip_id/allowed_total/allowed_remaining/per_kind_cap/tightened/reason — test assert đủ); input khớp shape replan_budget() lane-C (trip_id/budget/spent/left/by_kind/alert) — hợp đồng cross-lane nhất quán. (4) T036 tick đủ 2 nửa: '[T036a replan_budget lane C + T036b feed lane B DONE]' [X] — nửa C đã verify ở review T036a lane-c; NOTE merge phase-PR (không FIX, đúng luật lanes). (5) Secret-scan diff 87db837~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T032s — Review plan scorer profit/utility + gate (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 511b3da + 85f4953). (1) Vùng file: OK — thêm score_plan vào BE/app/services/profiles.py (vùng B) + BE/tests/unit/test_score_plan.py mới; tasks.md chỉ thêm note 1 dòng T033. (2) Chạy test `python BE/tests/unit/test_score_plan.py -v`: 4/4 OK exit 0 — utility exp 0.942 > sav 0.828 (preference-heavy → experience top utility); profit sav 4.2 > exp 3.2 (tight budget → savings top profit); gate-fail (VROH 0) → excluded + scores 0.0; pool thật run_profiles → profit winner là savings. py_compile cả 2 file exit 0. (3) T033 GIỮ NGUYÊN [ ] đúng: note '[T032s DONE 2026-09-28 lane B: score_plan in profiles.py; select endpoint = T033e lane C]' — scorer thuộc B xong, select endpoint để C, đúng split lanes.md. (4) Secret-scan diff 511b3da~1..HEAD: 0 hit. Worktree sạch.
