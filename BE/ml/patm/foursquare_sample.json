@@ -1,0 +1,3606 @@
+{
+ "provenance": "Foursquare TSMC2014 NYC+TKY, held-out users (20pct, seed 7), consecutive check-ins gap<=12h, mapped via crosswalk.json",
+ "n": 600,
+ "sample": [
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "cafe",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "landmark",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "cafe",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "nature",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "cafe",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "restaurant",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "nature",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "museum",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "nature",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "cafe",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "cafe",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "nature",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "attraction",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "nature",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "nature",
+   "next": "nature",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "attraction",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "nature",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 0,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "landmark",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "museum",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "nature",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "landmark",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "landmark",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "cafe",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "cafe",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "landmark",
+   "next": "landmark",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "attraction",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "nature",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "museum",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "beach",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "nature",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "cafe",
+   "next": "attraction",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "cafe",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "cafe",
+   "next": "cafe",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "landmark",
+   "next": "cafe",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "landmark",
+   "next": "market",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "attraction",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "museum",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "cafe",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "attraction",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "market",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "attraction",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "attraction",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 0,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "restaurant",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 2,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "cafe",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "nature",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "cafe",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "landmark",
+   "next": "landmark",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 5,
+   "bucket": "sang"
+  },
+  {
+   "prev": "park",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 0,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "museum",
+   "next": "cafe",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "nature",
+   "next": "nature",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "landmark",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "attraction",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "museum",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "museum",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "restaurant",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "park",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "museum",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "nature",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "cafe",
+   "hour": 2,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "restaurant",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 0,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "landmark",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "cafe",
+   "next": "attraction",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "park",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "cafe",
+   "next": "restaurant",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "museum",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "landmark",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "museum",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "landmark",
+   "next": "restaurant",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "nature",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "attraction",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "landmark",
+   "next": "restaurant",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "cafe",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "nature",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "park",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "nature",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "attraction",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "nature",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "cafe",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "cafe",
+   "next": "market",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "attraction",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "cafe",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "restaurant",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "cafe",
+   "next": "restaurant",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "cafe",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "nature",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "park",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "beach",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 0,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "landmark",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "attraction",
+   "next": "landmark",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "restaurant",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "transport",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 10,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "landmark",
+   "hour": 23,
+   "bucket": "toi"
+  },
+  {
+   "prev": "landmark",
+   "next": "landmark",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "nature",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "landmark",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "attraction",
+   "next": "nature",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "nature",
+   "next": "nature",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "restaurant",
+   "next": "attraction",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "park",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "transport",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "museum",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "landmark",
+   "next": "cafe",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "restaurant",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 20,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "market",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "market",
+   "next": "park",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "cafe",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "restaurant",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 15,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 21,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 6,
+   "bucket": "sang"
+  },
+  {
+   "prev": "landmark",
+   "next": "restaurant",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 12,
+   "bucket": "trua"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 13,
+   "bucket": "trua"
+  },
+  {
+   "prev": "market",
+   "next": "market",
+   "hour": 11,
+   "bucket": "trua"
+  },
+  {
+   "prev": "cafe",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "cafe",
+   "next": "attraction",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "market",
+   "next": "attraction",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "attraction",
+   "next": "restaurant",
+   "hour": 8,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 7,
+   "bucket": "sang"
+  },
+  {
+   "prev": "restaurant",
+   "next": "nature",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "restaurant",
+   "next": "restaurant",
+   "hour": 14,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 17,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "attraction",
+   "next": "transport",
+   "hour": 18,
+   "bucket": "toi"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 9,
+   "bucket": "sang"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 22,
+   "bucket": "toi"
+  },
+  {
+   "prev": "nature",
+   "next": "park",
+   "hour": 16,
+   "bucket": "chieu"
+  },
+  {
+   "prev": "transport",
+   "next": "transport",
+   "hour": 19,
+   "bucket": "toi"
+  },
+  {
+   "prev": "restaurant",
+   "next": "market",
+   "hour": 13,
+   "bucket": "trua"
+  }
+ ]
+}

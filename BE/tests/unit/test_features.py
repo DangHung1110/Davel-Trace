@@ -23,10 +23,19 @@ class TestFeatures(unittest.TestCase):
         cls.a = cls.pois["son-tra"]
         cls.b = cls.pois["my-khe"]
 
-    def test_16_features_unique_names(self):
-        self.assertEqual(N_FEATURES, 16)
-        self.assertEqual(len(set(FEATURE_NAMES)), 16)
-        self.assertEqual(len(extract(self.a, self.b)), 16)
+    def test_17_features_unique_names(self):
+        self.assertEqual(N_FEATURES, 17)
+        self.assertEqual(len(set(FEATURE_NAMES)), 17)
+        self.assertEqual(len(extract(self.a, self.b)), 17)
+        self.assertEqual(FEATURE_NAMES[-1], "prior_logp")
+
+    def test_prior_logp_directional_finite(self):
+        from BE.ml.patm.features import FEATURE_NAMES as FN
+        i = list(FN).index("prior_logp")
+        fwd, back = extract(self.a, self.b)[i], extract(self.b, self.a)[i]
+        self.assertTrue(all(abs(v) < 1e6 for v in (fwd, back)))
+        # directional signal exists (not constant across orders)
+        self.assertNotEqual(round(fwd, 6), round(back, 6))
 
     def test_no_absolute_poi_id(self):
         with open(os.path.join("BE", "ml", "patm", "features.py"),

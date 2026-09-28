@@ -1,8 +1,8 @@
-"""Transition feature extractor, 16 features (T026, lane A).
+"""Transition feature extractor, 17 features (T026 + T062 M1, lane A).
 
-Four groups x4 (research R2). Ordered pair (a, b); every feature is
-derived from attributes/user/context — NEVER from absolute POI
-identifiers (the unit test enforces their absence below).
+Four groups x4 (research R2) + M mobility prior. Ordered pair (a, b);
+every feature is derived from attributes/user/context — NEVER from
+absolute POI identifiers (the unit test enforces their absence below).
 
 Groups:
   A attr deltas  F(a)-F(b) ......... d_intensity, d_rating, d_price, d_duration
@@ -10,6 +10,7 @@ Groups:
       x_intensity_drop, x_same_type (symmetric, swap-invariant)
   C user (centered; neutral user = 0) u_pace, u_fitness, u_spending, u_outdoor
   D context .................... c_hour, c_rain, c_daylight_left, c_weekend
+  M mobility (T062, directional) prior_logp = log P(cat(b)|cat(a), bucket)
 
 [*] swap-negating features make flip-consistent models easy; the
 symmetric x_same_type is the documented exception.
@@ -25,10 +26,11 @@ FEATURE_NAMES = (
     "x_meal_after", "x_indoor_buffer", "x_intensity_drop", "x_same_type",
     "u_pace", "u_fitness", "u_spending", "u_outdoor",
     "c_hour", "c_rain", "c_daylight_left", "c_weekend",
+    "prior_logp",
 )
 
 N_FEATURES = len(FEATURE_NAMES)
-assert N_FEATURES == 16
+assert N_FEATURES == 17
 
 FOOD_TYPES = ("restaurant",)
 OUTDOOR_TYPES = ("nature", "beach", "landmark")
@@ -58,12 +60,20 @@ def _outdoor(p: dict) -> float:
 
 def extract(a: dict, b: dict, user: dict | None = None,
             ctx: dict | None = None) -> list[float]:
-    """16 features for ordered transition a -> b."""
+    """17 features for ordered transition a -> b."""
     u = {**DEFAULT_USER, **(user or {})}
     c = {**DEFAULT_CTX, **(ctx or {})}
     ia, ib = _num(a.get("intensity"), 2), _num(b.get("intensity"), 2)
     fa, fb = _is_food(a), _is_food(b)
     sa, sb = _sens(a), _sens(b)
+    try:
+        from BE.ml.patm.estimate_duration import canonical_category
+        from BE.ml.patm.prior import logprob
+        hour = int(_num(c.get("hour"), 9))
+        m_prior = logprob(canonical_category(b.get("type", "")),
+                          canonical_category(a.get("type", "")), hour)
+    except Exception:  # noqa: BLE001 - prior JSON absent in other worktrees
+        m_prior = 0.0
     return [
         # A: attr deltas
         ia - ib,
@@ -86,4 +96,6 @@ def extract(a: dict, b: dict, user: dict | None = None,
         _num(c.get("rain_prob"), 0.0),
         _num(c.get("daylight_left_h"), 8.0) / 12.0,
         1.0 if c.get("is_weekend") else 0.0,
+        # M: mobility prior (directional log-prob)
+        m_prior,
     ]

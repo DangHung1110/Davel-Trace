@@ -14,7 +14,7 @@ Pipeline: pairs (make_pairs.py) -> diff features -> 5-fold CV over groups
 -> held-out eval (pairwise acc + flip consistency) -> export model.txt
 -> metrics JSON next to the model.
 
-Features: T026 `features.py` (16 features, 4 groups), ordered-pair input.
+Features: T026 `features.py` (16) + T062 mobility prior (17th), ordered-pair input.
 User/ctx default to neutral (spec: full-data runs pass real trip context).
 
 Usage:
@@ -36,7 +36,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.common import load_json, load_pois  # noqa: E402
-from BE.ml.patm.features import FEATURE_NAMES, extract  # T026: real 16 features
+from BE.ml.patm.features import FEATURE_NAMES, extract  # T026 + T062 (17 features)
 
 
 def build_rows(pois: dict, pairs: list[dict]) -> tuple[list, list, list]:

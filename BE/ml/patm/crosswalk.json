@@ -1,0 +1,507 @@
+{
+ "_doc": "Foursquare TSMC2014 venue-category -> DN canonical taxonomy (T062 M1). explicit: top categories by check-in volume (hand-reviewed). rules: keyword fallback for the tail (first match wins, ordered). excluded: commute/work/home/civic noise — trajectories SPLIT on these (not tourist transitions). DN canonicals mirror estimate_duration.py (10 keys).",
+ "attraction": [
+  "Movie Theater",
+  "Music Venue",
+  "Arcade",
+  "Event Space",
+  "General Entertainment",
+  "Stadium",
+  "Convention Center",
+  "Plaza",
+  "Concert Hall",
+  "Spa / Massage",
+  "Bowling Alley",
+  "Performing Arts Venue",
+  "Pool"
+ ],
+ "beach": [],
+ "cafe": [
+  "Coffee Shop",
+  "Café"
+ ],
+ "excluded": [
+  "Office",
+  "Home (private)",
+  "Road",
+  "Building",
+  "Residential Building (Apartment / Condo)",
+  "Government Building",
+  "Medical Center",
+  "Bank",
+  "College Academic Building",
+  "University",
+  "Neighborhood",
+  "Hotel",
+  "Drugstore / Pharmacy",
+  "Gym / Fitness Center",
+  "Athletic & Sport",
+  "Moving Target",
+  "City",
+  "Laundry Service",
+  "Student Center",
+  "Community College",
+  "General Travel"
+ ],
+ "landmark": [
+  "Bridge",
+  "Shrine",
+  "Historic Site",
+  "Scenic Lookout",
+  "Harbor / Marina",
+  "Cemetery"
+ ],
+ "market": [
+  "Food & Drink Shop",
+  "Convenience Store",
+  "Electronics Store",
+  "Mall",
+  "Department Store",
+  "Clothing Store",
+  "Miscellaneous Shop",
+  "Bookstore",
+  "Deli / Bodega",
+  "Hobby Shop"
+ ],
+ "museum": [
+  "Library"
+ ],
+ "nature": [
+  "Park",
+  "Other Great Outdoors",
+  "River"
+ ],
+ "park": [
+  "Playground"
+ ],
+ "restaurant": [
+  "Bar",
+  "Ramen /  Noodle House",
+  "Japanese Restaurant",
+  "Fast Food Restaurant",
+  "Chinese Restaurant",
+  "Italian Restaurant",
+  "American Restaurant",
+  "Indian Restaurant",
+  "Restaurant",
+  "Diner",
+  "Pizza Place",
+  "Burger Joint",
+  "BBQ Joint",
+  "Sandwich Place",
+  "Bakery",
+  "Sushi Restaurant",
+  "Steakhouse",
+  "Breakfast Spot",
+  "Tea Room",
+  "Soup Place",
+  "Fried Chicken Joint",
+  "Other Nightlife"
+ ],
+ "rules": [
+  [
+   "coffee",
+   "cafe"
+  ],
+  [
+   "café",
+   "cafe"
+  ],
+  [
+   "tea house",
+   "cafe"
+  ],
+  [
+   "tea room",
+   "restaurant"
+  ],
+  [
+   "breakfast",
+   "restaurant"
+  ],
+  [
+   "steakhouse",
+   "restaurant"
+  ],
+  [
+   "chicken",
+   "restaurant"
+  ],
+  [
+   "soup",
+   "restaurant"
+  ],
+  [
+   "concert",
+   "attraction"
+  ],
+  [
+   "spa",
+   "attraction"
+  ],
+  [
+   "massage",
+   "attraction"
+  ],
+  [
+   "bowling",
+   "attraction"
+  ],
+  [
+   "performing arts",
+   "attraction"
+  ],
+  [
+   "nightlife",
+   "restaurant"
+  ],
+  [
+   "scenic",
+   "landmark"
+  ],
+  [
+   "lookout",
+   "landmark"
+  ],
+  [
+   "historic",
+   "landmark"
+  ],
+  [
+   "cemetery",
+   "landmark"
+  ],
+  [
+   "harbor",
+   "landmark"
+  ],
+  [
+   "marina",
+   "landmark"
+  ],
+  [
+   "river",
+   "nature"
+  ],
+  [
+   "playground",
+   "park"
+  ],
+  [
+   "library",
+   "museum"
+  ],
+  [
+   "gym",
+   "EXCLUDE"
+  ],
+  [
+   "fitness",
+   "EXCLUDE"
+  ],
+  [
+   "athletic",
+   "EXCLUDE"
+  ],
+  [
+   "laundry",
+   "EXCLUDE"
+  ],
+  [
+   "student",
+   "EXCLUDE"
+  ],
+  [
+   "college",
+   "EXCLUDE"
+  ],
+  [
+   "city",
+   "EXCLUDE"
+  ],
+  [
+   "museum",
+   "museum"
+  ],
+  [
+   "gallery",
+   "museum"
+  ],
+  [
+   "aquarium",
+   "museum"
+  ],
+  [
+   "beach",
+   "beach"
+  ],
+  [
+   "park",
+   "park"
+  ],
+  [
+   "garden",
+   "park"
+  ],
+  [
+   "trail",
+   "nature"
+  ],
+  [
+   "campground",
+   "nature"
+  ],
+  [
+   "restaurant",
+   "restaurant"
+  ],
+  [
+   "food",
+   "restaurant"
+  ],
+  [
+   "bar",
+   "restaurant"
+  ],
+  [
+   "bakery",
+   "restaurant"
+  ],
+  [
+   "deli",
+   "restaurant"
+  ],
+  [
+   "diner",
+   "restaurant"
+  ],
+  [
+   "pizza",
+   "restaurant"
+  ],
+  [
+   "burger",
+   "restaurant"
+  ],
+  [
+   "sushi",
+   "restaurant"
+  ],
+  [
+   "ramen",
+   "restaurant"
+  ],
+  [
+   "izakaya",
+   "restaurant"
+  ],
+  [
+   "bistro",
+   "restaurant"
+  ],
+  [
+   "noodle",
+   "restaurant"
+  ],
+  [
+   "pub",
+   "restaurant"
+  ],
+  [
+   "theater",
+   "attraction"
+  ],
+  [
+   "cinema",
+   "attraction"
+  ],
+  [
+   "music",
+   "attraction"
+  ],
+  [
+   "arcade",
+   "attraction"
+  ],
+  [
+   "stadium",
+   "attraction"
+  ],
+  [
+   "entertainment",
+   "attraction"
+  ],
+  [
+   "event",
+   "attraction"
+  ],
+  [
+   "club",
+   "attraction"
+  ],
+  [
+   "casino",
+   "attraction"
+  ],
+  [
+   "theme park",
+   "attraction"
+  ],
+  [
+   "zoo",
+   "attraction"
+  ],
+  [
+   "shop",
+   "market"
+  ],
+  [
+   "store",
+   "market"
+  ],
+  [
+   "mall",
+   "market"
+  ],
+  [
+   "market",
+   "market"
+  ],
+  [
+   "convenience",
+   "market"
+  ],
+  [
+   "pharmacy",
+   "market"
+  ],
+  [
+   "bookstore",
+   "market"
+  ],
+  [
+   "temple",
+   "landmark"
+  ],
+  [
+   "shrine",
+   "landmark"
+  ],
+  [
+   "church",
+   "landmark"
+  ],
+  [
+   "monument",
+   "landmark"
+  ],
+  [
+   "tower",
+   "landmark"
+  ],
+  [
+   "bridge",
+   "landmark"
+  ],
+  [
+   "castle",
+   "landmark"
+  ],
+  [
+   "palace",
+   "landmark"
+  ],
+  [
+   "station",
+   "transport"
+  ],
+  [
+   "subway",
+   "transport"
+  ],
+  [
+   "bus",
+   "transport"
+  ],
+  [
+   "airport",
+   "transport"
+  ],
+  [
+   "rail",
+   "transport"
+  ],
+  [
+   "ferry",
+   "transport"
+  ],
+  [
+   "taxi",
+   "transport"
+  ],
+  [
+   "parking",
+   "transport"
+  ],
+  [
+   "hotel",
+   "EXCLUDE"
+  ],
+  [
+   "hostel",
+   "EXCLUDE"
+  ],
+  [
+   "office",
+   "EXCLUDE"
+  ],
+  [
+   "home",
+   "EXCLUDE"
+  ],
+  [
+   "bank",
+   "EXCLUDE"
+  ],
+  [
+   "hospital",
+   "EXCLUDE"
+  ],
+  [
+   "school",
+   "EXCLUDE"
+  ],
+  [
+   "university",
+   "EXCLUDE"
+  ],
+  [
+   "government",
+   "EXCLUDE"
+  ],
+  [
+   "residential",
+   "EXCLUDE"
+  ],
+  [
+   "building",
+   "EXCLUDE"
+  ],
+  [
+   "neighborhood",
+   "EXCLUDE"
+  ],
+  [
+   "road",
+   "EXCLUDE"
+  ]
+ ],
+ "transport": [
+  "Train Station",
+  "Subway",
+  "Bus Station",
+  "Airport",
+  "Light Rail",
+  "Rest Area"
+ ]
+}
