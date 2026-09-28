@@ -132,7 +132,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Fact/inference-split explanations with uncertainty flags
 **Independent Test**: every decision in sample plan has ≥1 evidenced reason; no unverified claims
 
-- [ ] T042 [US7] Explanation builder (`BE/app/services/explainer.py`): claim+evidence|inference+source per decision
+- [X] T042 [US7] Explanation builder (`BE/app/services/explainer.py`): claim+evidence|inference+source per decision
 - [ ] T043 [US7] Hallucination sweep test (POI names/hours cross-checked vs snapshot)
 
 ---
