@@ -403,6 +403,10 @@
         animationId = requestAnimationFrame(frame);
       }
 
+      function pauseRoute() {
+        cancelAnimationFrame(animationId);
+      }
+
       async function renderTrip(stops, autoPlay = false) {
         if (stops.length < 2) return;
         if (!mapReady) {
@@ -441,6 +445,8 @@
             renderTrip(message.stops || [], Boolean(message.autoPlay));
           } else if (message?.type === "playRoute") {
             playRoute();
+          } else if (message?.type === "pauseRoute") {
+            pauseRoute();
           }
         } catch (error) {
           console.error("Invalid Flutter map message", error);

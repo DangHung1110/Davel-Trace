@@ -14,6 +14,10 @@ class TripStop {
     required this.interest,
     required this.icon,
     required this.color,
+    this.imageUrl = '',
+    this.rating,
+    this.tags = const [],
+    this.priceLabel,
   });
 
   final String id;
@@ -26,6 +30,10 @@ class TripStop {
   final String interest;
   final IconData icon;
   final Color color;
+  final String imageUrl;
+  final double? rating;
+  final List<String> tags;
+  final String? priceLabel;
 
   String get durationLabel {
     final hours = durationMinutes ~/ 60;
@@ -90,6 +98,9 @@ abstract final class DemoTripData {
       interest: 'Thiên nhiên',
       icon: Icons.landscape_outlined,
       color: AppColors.success,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCCldAsl2eKVEJLKV1fQlWeSivHVL6egstGRP_KO1LfuoioOqTeLiQGvqBY83gyLy6X3jcTdNZeW4nstDEiuHkpIhIeGjOI_at-d4AsMzIwQ-76gczTVbNebIIki7Y6KDCs2UhJsZdF5YPHIbFr7093ZqaAhI0vpQjVe9eh9fqGk_lwG0hmf_ysQc0G8ct44FCJh0UOucUzKwvVgZfIBijzS2XcUQq71Y1jk2GKBSpKdM9oYg17M3_n',
+      rating: 4.8,
+      tags: ['Trekking', 'Check-in'],
     ),
     TripStop(
       id: 'mi-quang-ba-mua',
@@ -102,6 +113,10 @@ abstract final class DemoTripData {
       interest: 'Ẩm thực',
       icon: Icons.restaurant_outlined,
       color: AppColors.amber,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6PGW-zGFlwZZsMh0ctGycIEh_mZbfJNki6-qUj5_HVxtm3IqYiPkWXgpLolKpuI3JqpxdJkgcwWcFJnh8LNm40_WQ-2OUd3Ws7sNqm5Y2qwPx1HcVF6n8L5RRYmuAaxf2J0aUiQEGse9QaHm0b-iKupBq-KIQBEGE90nIUM8K9jFBU6zFw8vcsHefaX_7GoEehdLBi9NFtSsRPL3COnVkgwY3y7Wz0ajTj_UtTB93MFRsHL7nYSyM',
+      rating: 4.5,
+      tags: ['Ẩm thực xứ', 'Ăn sáng'],
+      priceLabel: '45k - 65k',
     ),
     TripStop(
       id: 'cham-museum',
@@ -114,6 +129,9 @@ abstract final class DemoTripData {
       interest: 'Văn hóa',
       icon: Icons.museum_outlined,
       color: AppColors.coral,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCXnvDeTWAK8ZNecGqHmrK5xfAIdYKUyBt2N8irdR9AfYbFgdDOVU9yvQ-tA30hW0WAaFjxjyr564RgTH3iyzAQSTGE4DrYvM-Uy5srYR2MazKi6GMqm1nosw0V9jFaH8riVAjg9o61zTsxBSkFmhCpDJBA3l0q-vpJrBE6QZ8slUtCeCzyWpleQRKjYKPZhVsKTi9CWBop8tRNUdLRnX0fH7eK94rW4hqA8n2ertg7lzDVXj6GdHHm',
+      rating: 4.6,
+      tags: ['Điểm tham quan', 'Vé 60k'],
     ),
     TripStop(
       id: 'my-khe',
@@ -126,6 +144,9 @@ abstract final class DemoTripData {
       interest: 'Biển',
       icon: Icons.beach_access_outlined,
       color: AppColors.blue,
+      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9va6fg7FE3PmxCjH5r_xZ2T4vlz__AP7FByqs5aucPGT_5amq5KuQI1gQ4WTj6HSyESWzhFesboa9s_KWn6bHBBaUj_Ni-cbFdFEtKgECweyuHETQFZ-VA8CFz6RBaHgryJE1Kwm8SOeOxugLEKTUY_uyfg414g7VvISUgiiaqQYPwifa_cSix__FFmJ0IHGK6-WxBsc6Vg8i9UlQV-GBMikCxpxS_SU0Lwjj5Pcu8xS1iXoRCkg6',
+      rating: 4.7,
+      tags: ['Biển', 'Miễn phí'],
     ),
   ];
 

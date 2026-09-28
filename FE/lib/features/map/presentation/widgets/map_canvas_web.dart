@@ -13,11 +13,13 @@ class MapCanvas extends StatefulWidget {
     required this.stops,
     required this.routeRevision,
     required this.playRequest,
+    required this.pauseRequest,
   });
 
   final List<TripStop> stops;
   final int routeRevision;
   final int playRequest;
+  final int pauseRequest;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -84,6 +86,8 @@ class _MapCanvasState extends State<MapCanvas> {
       _iframe.src = _mapUrl(autoPlay: true);
     } else if (widget.playRequest != oldWidget.playRequest) {
       _send('playRoute');
+    } else if (widget.pauseRequest != oldWidget.pauseRequest) {
+      _send('pauseRoute');
     }
   }
 

@@ -11,11 +11,13 @@ class MapCanvas extends StatelessWidget {
     required this.stops,
     required this.routeRevision,
     required this.playRequest,
+    required this.pauseRequest,
   });
 
   final List<TripStop> stops;
   final int routeRevision;
   final int playRequest;
+  final int pauseRequest;
 
   @override
   Widget build(BuildContext context) {
