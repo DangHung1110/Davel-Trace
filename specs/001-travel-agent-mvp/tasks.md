@@ -48,15 +48,15 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Vietnamese prompt → structured trip → single feasible 1-day itinerary + reasons
 **Independent Test**: quickstart S1–S3 on seed data
 
-- [ ] T012 [P] [US1] Contract test `POST /v1/parse` in `BE/tests/contract/test_parse.py` (write FIRST, fail)
-- [ ] T013 [P] [US1] Contract test `POST /v1/itinerary` in `BE/tests/contract/test_itinerary.py` (write FIRST, fail)
+- [X] T012 [P] [US1] Contract test `POST /v1/parse` in `BE/tests/contract/test_parse.py` (write FIRST, fail)
+- [X] T013 [P] [US1] Contract test `POST /v1/itinerary` in `BE/tests/contract/test_itinerary.py` (write FIRST, fail)
 - [X] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
 - [X] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
 - [X] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
 - [ ] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
 - [ ] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
 - [ ] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
-- [ ] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
+- [X] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
 - [ ] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
 
 **Checkpoint**: US1 fully functional — fixed Vietnamese prompt yields feasible itinerary on 7-POI seed
