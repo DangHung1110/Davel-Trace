@@ -14,8 +14,8 @@ Pipeline: pairs (make_pairs.py) -> diff features -> 5-fold CV over groups
 -> held-out eval (pairwise acc + flip consistency) -> export model.txt
 -> metrics JSON next to the model.
 
-Feature hook: `_poi_features` is the interim extractor until T026
-`features.py` (16 features) lands — same input (POI dict), swap one line.
+Features: T026 `features.py` (16 features, 4 groups), ordered-pair input.
+User/ctx default to neutral (spec: full-data runs pass real trip context).
 
 Usage:
   python BE/ml/patm/make_pairs.py --snapshot data/snapshots/danang-v1 --n 42 --out /tmp/pairs.json
@@ -28,39 +28,14 @@ import argparse
 import json
 import os
 import random
+import sys
 
-FEATURE_NAMES = (
-    "d_intensity", "d_rating", "d_price", "d_p50",
-    "d_weather_sens", "a_is_food", "b_is_food",
-    "a_outdoor", "b_outdoor", "same_type",
-)
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-
-def _poi_features(p: dict) -> dict:
-    return {
-        "intensity": float(p.get("intensity", 2)),
-        "rating": float(p.get("rating") or 0.0),
-        "price": float(p.get("price_level", 2)),
-        "p50": float((p.get("visit_min") or {}).get("p50", 60)),
-        "weather_sens": 1.0 if p.get("weather_sensitive") else 0.0,
-        "is_food": 1.0 if p.get("type") == "restaurant" else 0.0,
-        "outdoor": 1.0 if p.get("type") in ("nature", "beach", "landmark") else 0.0,
-        "type": p.get("type", ""),
-    }
-
-
-def diff_features(a: dict, b: dict) -> list[float]:
-    fa, fb = _poi_features(a), _poi_features(b)
-    return [
-        fa["intensity"] - fb["intensity"],
-        fa["rating"] - fb["rating"],
-        fa["price"] - fb["price"],
-        fa["p50"] - fb["p50"],
-        fa["weather_sens"] - fb["weather_sens"],
-        fa["is_food"], fb["is_food"],
-        fa["outdoor"], fb["outdoor"],
-        1.0 if fa["type"] == fb["type"] else 0.0,
-    ]
+from BE.ml.patm.features import FEATURE_NAMES, extract  # T026: real 16 features
 
 
 def build_rows(pois: dict, pairs: list[dict]) -> tuple[list, list, list]:
@@ -72,7 +47,7 @@ def build_rows(pois: dict, pairs: list[dict]) -> tuple[list, list, list]:
             dropped_ties += 1
             continue
         a, b = pois[p["first_id"]], pois[p["second_id"]]
-        X.append(diff_features(a, b))
+        X.append(extract(a, b))
         y.append(1 if p["label"] == 1 else 0)
         groups.append("|".join(sorted((p["first_id"], p["second_id"]))))
     return X, y, groups, dropped_ties

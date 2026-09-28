@@ -43,9 +43,25 @@ import itertools
 import json
 import os
 import random
+import sys
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+try:
+    from BE.ml.patm.rule_score import (  # T027: canonical scorer
+        TIE_MARGIN as _RULE_TIE,
+        explain_transition as _explain,
+        score_transition as _rule_score,
+    )
+    _HAS_RULE_SCORE = True
+except ImportError:  # standalone copy (tests/CI without repo root)
+    _HAS_RULE_SCORE = False
 
 LABEL_NAMES = {1: "prefer-first", 0: "tie", -1: "prefer-second"}
-TIE_MARGIN = 0.15
+TIE_MARGIN = _RULE_TIE if _HAS_RULE_SCORE else 0.15
 
 
 def load_pois(snapshot_dir: str) -> list[dict]:
@@ -53,8 +69,8 @@ def load_pois(snapshot_dir: str) -> list[dict]:
         return json.load(f)["pois"]
 
 
-def _rule_margin(a: dict, b: dict) -> tuple[float, list[str]]:
-    """Signed margin >0 means a->b beats b->a. Hook point for T027."""
+def _legacy_margin(a: dict, b: dict) -> tuple[float, list[str]]:
+    """Pre-T027 inline rules. Kept as fallback + backward-compat oracle."""
     margin, fired = 0.0, []
     ia, ib = a.get("intensity", 2), b.get("intensity", 2)
     if ia > ib:  # van dong truoc, thu gian sau (spec US3: hiking -> beach)
@@ -76,6 +92,13 @@ def _rule_margin(a: dict, b: dict) -> tuple[float, list[str]]:
         margin += 0.2
         fired.append("indoor-buffer")
     return margin, fired
+
+
+def _rule_margin(a: dict, b: dict) -> tuple[float, list[str]]:
+    """Signed margin >0 means a->b beats b->a. Delegates to T027 scorer."""
+    if _HAS_RULE_SCORE:
+        return _rule_score(a, b), _explain(a, b)
+    return _legacy_margin(a, b)
 
 
 def label_ordered(a: dict, b: dict) -> dict:
