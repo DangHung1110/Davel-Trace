@@ -1,0 +1,35 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Frontend (future BE/FE split)
+node_modules/
+dist/
+build/
+.next/
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Scratch spec-writing notes (never commit, delete after specs done)
+DavelAgentIdea.txt
+DavelAgentAnswer.txt
+
+# Office scratch docs (idea/status notes, not code — never commit)
+*.docx
+*.xlsx
+~$*.docx
+~$*.xlsx
+
+# Agent-tool-local files (opencode-only wrappers; each provider keeps its own)
+.opencode/
