@@ -1,51 +1,52 @@
 # Spot-check snapshot v1 (15% random seed=42 + outliers p50 lech >60% median category)
+# Them cot indoor/outdoor cho M4-audit: ghi I (trong nha) / O (ngoai troi) / ? (khong chac)
 
-- [ ] CỬA HÀNG ĐIỆN NƯỚC HUY HIỀN | Chợ | hours=['05:00-21:00', '05:00-22:00'] | price=2 | rating=5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Xanh House | Nhà hàng | hours=['09:00-21:00'] | price=2 | rating=4.4 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Hải sản My Hanh Seafood | Nhà hàng hải sản | hours=['09:00-23:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] The Cups Coffee Roastery | Quán cà phê | hours=['06:30-23:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Tiệm Hoa & Nắng - WiWi Coffee | Quán cà phê | hours=['06:00-22:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] HỨA cafe | Quán cà phê | hours=['06:30-22:00'] | price=2 | rating=4.4 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Quán Tuấn Núi (Heo bản - Gà đen) | Nhà hàng | hours=['10:00-23:00'] | price=2 | rating=4.3 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Korea BBQ House | Nhà hàng thịt bò Hàn Quốc | hours=['10:30-23:00', '10:30-23:30'] | price=2 | rating=4.8 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Đà Sơn tâm linh | Bảo tàng | hours=[] | price=2 | rating=3.7 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà Hàng La Luna | Nhà hàng | hours=['10:00-21:00'] | price=2 | rating=4.2 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ hải sản tươi sống biển Thanh Khê | Chợ | hours=['00:00-06:30, 14:30-00:00'] | price=2 | rating=4.2 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Ghềnh Bàng | Thắng cảnh | hours=[] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] XÓM MỚI GARDEN | Nhà hàng Việt Nam | hours=['10:00-22:00'] | price=2 | rating=4.9 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Gyu Sachi - Nhà hàng nướng Nhật Ngưu Hạnh | Nhà hàng Nhật Bản | hours=['10:30-14:00, 16:30-22:30', '10:30-22:30'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Madame Son | Nhà hàng | hours=['17:00-22:00'] | price=2 | rating=4.8 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Moss Coffee Shop 2 | Quán cà phê | hours=['06:30-22:15'] | price=2 | rating=4.6 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Lữ Cafe & Bar | Quán cà phê | hours=['07:30-21:30'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Bãi Biển Thiên Đường | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.3 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ Khuê Mỹ | Chợ | hours=['05:00-19:00'] | price=2 | rating=4.3 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà hàng LoCo | Nhà hàng hải sản | hours=['10:30-22:00'] | price=2 | rating=4.8 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Quán Hải sản Tân Trà Beach | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.4 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] KITE COFFEE & SOUVENIRS | Quán cà phê | hours=['07:30-22:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Bãi biển Sơn Trà | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.8 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Trà Quán Góc Nhà Tụi Mình | Cửa hàng trà truyền thống | hours=['09:00-22:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Bãi Cát Vàng | Bãi biển | hours=[] | price=2 | rating=4 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ đêm Helio - B. Night Market | Chợ đêm | hours=['17:00-23:00'] | price=2 | rating=4.1 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] ChuAn cafe | Quán cà phê | hours=['07:00-18:00'] | price=2 | rating=4.9 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà hàng NHÀ BẾP CHỢ HÀN | Nhà hàng Việt Nam | hours=['09:00-22:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà Hàng Hồ Xanh - Hồ Xanh Restaurant | Nhà hàng | hours=['09:00-22:30'] | price=2 | rating=3.9 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] CaFe Mộc Gia | Quán cà phê | hours=['06:00-22:00'] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà hàng chay Shanti Vegan Đà Nẵng | Nhà hàng | hours=['10:00-14:00, 16:00-21:00'] | price=2 | rating=4.9 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] WONDERLUST - Coffee & Souvenir | Quán cà phê | hours=['08:00-19:30'] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] La’s Cafe | Quán cà phê | hours=['06:30-22:00'] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Đình làng Hải Châu | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Koko House - Nhà Hàng Thịt Nướng Hàn Quốc | Nhà hàng Hàn Quốc | hours=['11:00-14:00, 17:00-22:00'] | price=2 | rating=4.9 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] House Coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.9 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Ibasho Coffee | Quán cà phê | hours=['07:00-22:00'] | price=2 | rating=4.2 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ Non Nước | Chợ | hours=[] | price=2 | rating=4.4 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Voọc Souvenir Coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.1 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] My Casa | Nhà hàng ý | hours=['11:00-22:00'] | price=2 | rating=4.6 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Khu Dừng Chân | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.3 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Khu Căn cứ Cách mạng K20 | Bảo tàng chiến tranh | hours=['08:00-11:00, 13:30-16:30'] | price=2 | rating=4.4 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] 3 Cây Lộc Restaurant | Nhà hàng Việt Nam | hours=['08:00-23:00'] | price=2 | rating=3.9 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] D.coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Nhà Hàng Nhà Bếp Khuê Mỹ | Nhà hàng Việt Nam | hours=['10:00-22:00'] | price=2 | rating=4.7 | dur_p50=0 (median_cat=0) => Dung/Sai/Ghi_chu:
-- [ ] Di tích Đình Hồng Phước | Bảo tàng chiến tranh | hours=[] | price=2 | rating=None | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] BigHome coffee 24/7 | Quán cà phê | hours=[] | price=2 | rating=4.3 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ Hoà Mỹ | Chợ | hours=[] | price=2 | rating=4.5 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
-- [ ] Chợ Thanh Vinh | Chợ nông sản | hours=['05:00-18:00'] | price=2 | rating=3.9 | dur_p50=0 (median_cat=0.0) => Dung/Sai/Ghi_chu:
+- [ ] CỬA HÀNG ĐIỆN NƯỚC HUY HIỀN | Chợ | hours=['05:00-21:00', '05:00-22:00'] | price=2 | rating=5 | dur_p50=90 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Xanh House | Nhà hàng | hours=['09:00-21:00'] | price=2 | rating=4.4 | dur_p50=60 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Hải sản My Hanh Seafood | Nhà hàng hải sản | hours=['09:00-23:00'] | price=2 | rating=4.7 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] The Cups Coffee Roastery | Quán cà phê | hours=['06:30-23:00'] | price=2 | rating=4.7 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Tiệm Hoa & Nắng - WiWi Coffee | Quán cà phê | hours=['06:00-22:00'] | price=2 | rating=4.7 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] HỨA cafe | Quán cà phê | hours=['06:30-22:00'] | price=2 | rating=4.4 | dur_p50=45 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Quán Tuấn Núi (Heo bản - Gà đen) | Nhà hàng | hours=['10:00-23:00'] | price=2 | rating=4.3 | dur_p50=60 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Korea BBQ House | Nhà hàng thịt bò Hàn Quốc | hours=['10:30-23:00', '10:30-23:30'] | price=2 | rating=4.8 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Đà Sơn tâm linh | Bảo tàng | hours=[] | price=2 | rating=3.7 | dur_p50=90 (median_cat=90) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà Hàng La Luna | Nhà hàng | hours=['10:00-21:00'] | price=2 | rating=4.2 | dur_p50=60 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ hải sản tươi sống biển Thanh Khê | Chợ | hours=['00:00-06:30, 14:30-00:00'] | price=2 | rating=4.2 | dur_p50=75 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Ghềnh Bàng | Thắng cảnh | hours=[] | price=2 | rating=4.5 | dur_p50=54 (median_cat=54) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] XÓM MỚI GARDEN | Nhà hàng Việt Nam | hours=['10:00-22:00'] | price=2 | rating=4.9 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Gyu Sachi - Nhà hàng nướng Nhật Ngưu Hạnh | Nhà hàng Nhật Bản | hours=['10:30-14:00, 16:30-22:30', '10:30-22:30'] | price=2 | rating=4.7 | dur_p50=72 (median_cat=72.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Madame Son | Nhà hàng | hours=['17:00-22:00'] | price=2 | rating=4.8 | dur_p50=72 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Moss Coffee Shop 2 | Quán cà phê | hours=['06:30-22:15'] | price=2 | rating=4.6 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Lữ Cafe & Bar | Quán cà phê | hours=['07:30-21:30'] | price=2 | rating=4.7 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Bãi Biển Thiên Đường | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.3 | dur_p50=200 (median_cat=200) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ Khuê Mỹ | Chợ | hours=['05:00-19:00'] | price=2 | rating=4.3 | dur_p50=75 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà hàng LoCo | Nhà hàng hải sản | hours=['10:30-22:00'] | price=2 | rating=4.8 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Quán Hải sản Tân Trà Beach | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.4 | dur_p50=200 (median_cat=200) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] KITE COFFEE & SOUVENIRS | Quán cà phê | hours=['07:30-22:00'] | price=2 | rating=4.7 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Bãi biển Sơn Trà | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.8 | dur_p50=240 (median_cat=200) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Trà Quán Góc Nhà Tụi Mình | Cửa hàng trà truyền thống | hours=['09:00-22:00'] | price=2 | rating=4.7 | dur_p50=90 (median_cat=90) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Bãi Cát Vàng | Bãi biển | hours=[] | price=2 | rating=4 | dur_p50=120 (median_cat=120) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ đêm Helio - B. Night Market | Chợ đêm | hours=['17:00-23:00'] | price=2 | rating=4.1 | dur_p50=75 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] ChuAn cafe | Quán cà phê | hours=['07:00-18:00'] | price=2 | rating=4.9 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà hàng NHÀ BẾP CHỢ HÀN | Nhà hàng Việt Nam | hours=['09:00-22:00'] | price=2 | rating=4.7 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà Hàng Hồ Xanh - Hồ Xanh Restaurant | Nhà hàng | hours=['09:00-22:30'] | price=2 | rating=3.9 | dur_p50=60 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] CaFe Mộc Gia | Quán cà phê | hours=['06:00-22:00'] | price=2 | rating=4.5 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà hàng chay Shanti Vegan Đà Nẵng | Nhà hàng | hours=['10:00-14:00, 16:00-21:00'] | price=2 | rating=4.9 | dur_p50=72 (median_cat=60) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] WONDERLUST - Coffee & Souvenir | Quán cà phê | hours=['08:00-19:30'] | price=2 | rating=4.5 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] La’s Cafe | Quán cà phê | hours=['06:30-22:00'] | price=2 | rating=4.5 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Đình làng Hải Châu | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.5 | dur_p50=240 (median_cat=200) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Koko House - Nhà Hàng Thịt Nướng Hàn Quốc | Nhà hàng Hàn Quốc | hours=['11:00-14:00, 17:00-22:00'] | price=2 | rating=4.9 | dur_p50=72 (median_cat=72.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] House Coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.9 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Ibasho Coffee | Quán cà phê | hours=['07:00-22:00'] | price=2 | rating=4.2 | dur_p50=45 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ Non Nước | Chợ | hours=[] | price=2 | rating=4.4 | dur_p50=75 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Voọc Souvenir Coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.1 | dur_p50=45 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] My Casa | Nhà hàng ý | hours=['11:00-22:00'] | price=2 | rating=4.6 | dur_p50=72 (median_cat=72.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Khu Dừng Chân | Điểm thu hút khách du lịch | hours=[] | price=2 | rating=4.3 | dur_p50=200 (median_cat=200) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Khu Căn cứ Cách mạng K20 | Bảo tàng chiến tranh | hours=['08:00-11:00, 13:30-16:30'] | price=2 | rating=4.4 | dur_p50=90 (median_cat=90.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] 3 Cây Lộc Restaurant | Nhà hàng Việt Nam | hours=['08:00-23:00'] | price=2 | rating=3.9 | dur_p50=60 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] D.coffee | Quán cà phê | hours=['06:00-22:30'] | price=2 | rating=4.5 | dur_p50=54 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Nhà Hàng Nhà Bếp Khuê Mỹ | Nhà hàng Việt Nam | hours=['10:00-22:00'] | price=2 | rating=4.7 | dur_p50=72 (median_cat=72) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Di tích Đình Hồng Phước | Bảo tàng chiến tranh | hours=[] | price=2 | rating=None | dur_p50=90 (median_cat=90.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] BigHome coffee 24/7 | Quán cà phê | hours=[] | price=2 | rating=4.3 | dur_p50=45 (median_cat=54.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ Hoà Mỹ | Chợ | hours=[] | price=2 | rating=4.5 | dur_p50=90 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
+- [ ] Chợ Thanh Vinh | Chợ nông sản | hours=['05:00-18:00'] | price=2 | rating=3.9 | dur_p50=75 (median_cat=75.0) | indoor/outdoor=? => Dung/Sai/Ghi_chu:
