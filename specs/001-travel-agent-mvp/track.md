@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T034 — Review US4 distinctness + selection persistence (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 4d511af + 96b264b). (1) Vùng file: OK — chỉ thêm BE/tests/integration/test_us4_multi.py (vùng C); tasks.md chỉ tick 1 dòng T034. (2) Chạy pytest integration: 3/3 PASSED; full `pytest BE/tests/`: 43/43 passed exit 0; py_compile exit 0. (3) Bao phủ đúng yêu cầu: pipeline leg qua endpoint cho plan feasible đủ 4 cổng; pool 3 plans distinct cả cost {0,50000} + preference {4.65,4.6,4.55} + reasons (3/3 khác nhau); select it-exp → active đúng + giữ đủ 3 plans. NOTE (không FIX): pool distinctness chạy trên STUB mirror shapes T032 (docstring khai báo thay ở phase-PR) — pool thật đã verify distinct ở review T032 lane-b. (4) Tick xứng đáng: T034 đòi distinctness + selection persistence — giao đủ; 'US4 closed' đúng ở tầng service/endpoint, còn merge T032 + wire phase-PR cho orchestrator. (5) Secret-scan diff 4d511af~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T033e — Review select endpoint + in-memory pool (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits a3858eb + 71ced54). (1) Vùng file: OK — BE/app/routers/select.py (mới, vùng C) + main.py (register router) + BE/tests/contract/test_select.py; tasks.md chỉ tick 1 dòng T033. (2) Chạy contract `pytest BE/tests/contract/test_select.py`: 2/2 PASSED — select it-balanced → 200 {active_id} + pool giữ đủ 3 plans; id lạ → 404 {error UNKNOWN_ITINERARY} envelope không crash; full `pytest BE/tests/`: 40/40 passed exit 0. (3) Store in-memory STUB-note rõ: docstring 'state store runtime + version là lane B T045, wire ở phase-PR' + có reset_store() cho tests. (4) T033 tick đủ 2 nửa: '[T032s scorer lane B + T033e select lane C - US4 closed]' — scorer B + select C đều xong. NOTE (không FIX): chữ 'US4 closed' hơi sớm ở góc cross-lane — T034 (integration test US4) còn [ ] và T032 còn [ ] ở worktree này (xong bên lane-b chờ merge); T033 tick tự thân vẫn đúng. (5) Secret-scan diff a3858eb~1..HEAD: 0 hit. Worktree sạch.
