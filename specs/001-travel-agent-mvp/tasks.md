@@ -178,6 +178,12 @@ description: "Task list for Personalized Travel Agent MVP"
 
 ---
 
+## Phase 13: Integration/Wiring PR (blocks S1-real — unblocks when base merge approved)
+
+**Purpose**: Replace all cross-lane STUBs with real wiring on merged base; merge order C→A→B per oracle review 2026-09-28.
+
+- [ ] T061 Wiring PR (owner: orchestrator; B adapter + C routers/endpoints + A seed support): (a) adapter POI/VisitMin/opening-hours→optimizer input + depot decision (add depot node to matrix OR drop depot legs — design call inside task); (b) models.py re-export trip+poi+plan+eval; (c) consolidate helpers into BE/common.py (B/C alias to it, delete dup to_min/in_range/loaders); (d) shared conftest.py seed fixture (migrate C inline fixtures); (e) wire /replan endpoint (C router shell + B replan logic) + inventory missing endpoints (/itinerary/{id}, /weather, /score-transition — add tasks or defer with note); (f) gate.py↔metrics.py single-source convergence; (g) full pytest A+B+C green + S1 seed run green. Depends on lanes merged (C→A→B) + tasks.md resolutions T007/T033/T036 (union per oracle §4) + track.md union.
+
 ## Dependencies & Execution Order
 
 - **Phase 1 → Phase 2** (blocks everything) → **Phases 3–11** in priority order (3–8 P1, 9–11 P2) → **Phase 12**.
