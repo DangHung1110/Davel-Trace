@@ -82,8 +82,8 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Transition scoring (rule nấc-1 → LightGBM nấc-2) + precedence constraints
 **Independent Test**: hiking→beach outscores beach→hiking; pairwise accuracy ≥70%
 
-- [ ] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
-- [ ] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
+- [X] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
+- [X] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
 - [ ] T028 [US3] Pair dataset builder: 1,500–2,000 pairs (min viable 500–1,000; protocol 1000-rule/600-judge/200-human, swap-check, 30/40/30 balance) in `BE/ml/patm/make_pairs.py` (depends on T003 seed + T003b snapshot; owner batch LLM: Bách; human-check: bạn, ≤3 ngày sau batch)
 - [ ] T029 [US3] LightGBM RankNet trainer (`BE/ml/patm/train.py`): 5-fold + held-out, export model.txt (depends on T028)
 - [ ] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
