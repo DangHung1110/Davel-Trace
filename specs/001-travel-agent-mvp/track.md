@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T036a — Review replan_budget remaining + by-kind (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 0a15d43 + a8bb062). (1) Vùng file: OK — thêm replan_budget() vào BE/app/services/expenses.py (vùng C) + BE/tests/unit/test_replan_budget.py mới; tasks.md chỉ thêm note 1 dòng T036. (2) Chạy test mới: 2/2 OK (remaining 3000000/380000/2620000 + alert rỗng; by_kind food/ticket/transport/other đúng số); full `pytest BE/tests/`: 51/51 passed exit 0; py_compile cả 2 file exit 0. (3) summary() cũ nguyên vẹn: diff chỉ append hàm mới ủy thác summary (không sửa dòng cũ), 49 tests cũ vẫn xanh. (4) T036 giữ [ ] là ĐÚNG: note '[T036a DONE 2026-09-28 lane C: replan_budget(); T036b replan feed lane B pending]' — nửa C xong, nửa feed replan chờ lane B, không nhận vơ cả task. (5) Secret-scan diff 0a15d43~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T035 — Review expense store + routers 80/100 alerts (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 35b21b6 + bf91f78). (1) Vùng file: OK — BE/app/services/expenses.py + BE/app/routers/expenses.py + main.py (register) + 2 tests, toàn vùng C; tasks.md chỉ tick 1 dòng T035. (2) Chạy pytest T035: 6/6 PASSED (4 unit + 2 contract); full `pytest BE/tests/`: 49/49 passed exit 0; py_compile 4 file exit 0. (3) Summary cộng đúng (120k+60k+200k=380k, left 2620000/3tr) + alert đúng ngưỡng bao biên (0.8→'80%', 1.0→'100%', dưới→rỗng); POST 201 kèm entry, kind/amount sai → 400 {error BAD_EXPENSE} (không 422); shape khớp contracts/api.md (In trip_id/label/amount/kind, Out budget/spent/left/alert). (4) Store in-memory STUB-note rõ: docstring 'persistent SQLite/JSON store wires in at phase-PR (same function names)' + reset() cho tests. (5) Tick xứng đáng: T035 đòi store + routers per api.md — giao đủ; commit 'US5 opened' (mở, T036 wiring còn lại — không nhận vơ). (6) Secret-scan diff 35b21b6~1..HEAD: 0 hit. Worktree sạch.
