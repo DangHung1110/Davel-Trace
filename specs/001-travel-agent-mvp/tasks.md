@@ -155,7 +155,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Tier-1 deterministic metrics + LLM-judge + 30–50 ĐN tests + Approach-B gold
 **Independent Test**: quickstart S4 (tampered plan fails named gate, no soft scores)
 
-- [ ] T049 [P] [US9] Tier-1 metrics (`BE/eval/metrics.py`): FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE
+- [X] T049 [P] [US9] Tier-1 metrics (`BE/eval/metrics.py`): FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE
 - [ ] T050 [US9] LLM-judge Profit/BE (`BE/eval/judge.py`) + cost log
 - [ ] T051 [US9] Test-suite builder + Approach-B gold generator (`BE/eval/gold/`, 30–50 ĐN queries)
 - [ ] T052 [US9] Evaluator endpoint `POST /v1/evaluate` per contracts/api.md (depends on T049)
