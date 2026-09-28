@@ -48,7 +48,7 @@ class TestParseContract(unittest.TestCase):
         try:
             r = client.post("/v1/parse", json={"text": "đi chơi"})
         finally:
-            parser_svc.llm_gateway.complete_json = self._real
+            parser_svc.llm_gateway.complete_json = TestParseContract._real
         self.assertEqual(r.status_code, 200)
         self.assertEqual(r.json()["needs_clarification"], ["city"])
 
