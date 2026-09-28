@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T008 — Review snapshot loader + validation (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits 3530313 + ad7cd2b). (1) Vùng file: OK — đúng 2 file mới BE/app/services/snapshot.py + BE/tests/unit/test_snapshot.py, tasks.md chỉ tick 1 dòng T008 ([ ]→[X]); không có __init__.py/conftest.py. NOTE: snapshot.py nằm ngoài bảng File ownership lanes.md (A và C đều không liệt kê) nhưng tasks.md T008 ghi đúng path này và lanes.md giao T008 cho lane A → không tính lấn lane, đề nghị orchestrator bổ sung `BE/app/services/snapshot.py` vào vùng A. (2) Test: pytest chưa cài trong env nên chạy đúng cách stdlib của test — `python -m unittest BE.tests.unit.test_snapshot -v` và `python BE/tests/unit/test_snapshot.py`: cả 2 đều 8/8 OK (exit 0); py_compile cả 2 file exit 0. (3) Loader đối chiếu data-model.md (có đủ verified/fetched_at/visit_min): enforce fetched_at ở snapshot-level + per-POI, verified phải bool + verified_pois() loại unverified khỏi main plan (FR-013), schema check fields/tọa độ/visit_min p25<=p50<=p75/dur_source+dur_confidence vocab, matrix check ids khớp + đủ n*n cells + diagonal 0 + off-diagonal >0, lỗi raise ValueError liệt kê hết. (4) Secret-scan diff 3530313~1..HEAD: 0 hit.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST. Orchestrator patch lanes.md ownership (câu NOTE trên) khi rảnh.
+
 ## [2026-09-28] T003/T003b/T003c — Review lane A seed + estimator + fetch script (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: checkout feat/lane-a-data-eval, review diff chore/vibe-setup..HEAD (6 files). (1) Vùng file: OK — BE/ml/data/fetch_apify.py + BE/ml/patm/estimate_duration.py ∈ BE/ml/**, data/snapshots/danang-v1/* ∈ data/snapshots/**, tasks.md chỉ chạm 2 dòng T003/T003c (đúng luật chung). (2) pois.json: dict, 7/7 POIs đủ field bắt buộc (poi_id/name/lat/lon/type/visit_min/dur_source/dur_confidence/source/verified), verified=true cả 7; matrix.json: n=7, ids khớp pois, cells dict đủ 49/49 key `a->b`, missing=0. (3) estimator --check: 7/7 match nac-1 rules exit 0; py_compile cả 2 file py exit 0. (4) fetch script thiếu token: in đúng câu hướng dẫn THIEU APIFY_TOKEN, dừng sạch exit 2, không bulk, không traceback; secret-scan diff: 0 hit; `apify_api_...` chỉ là placeholder trong docstring. (5) tasks.md: T003 [X], T003c [X] kèm note nac-1 DONE/nac-2 pending T003b, T003b giữ [ ] (đúng — chưa bulk).
