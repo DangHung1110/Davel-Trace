@@ -24,8 +24,16 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 import time
 import urllib.request
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from BE.common import load_json, load_pois  # noqa: E402
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "qwen3:14b")
@@ -157,10 +165,8 @@ def main(argv: list[str] | None = None) -> int:
     if not args.pairs:
         print("no --pairs given: live run pending full T003b pairs (see docstring).")
         return 2
-    with open(os.path.join(args.snapshot, "pois.json"), encoding="utf-8") as f:
-        pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
-    with open(args.pairs, encoding="utf-8") as f:
-        pairs = json.load(f)
+    pois = load_pois(args.snapshot, by_id=True)
+    pairs = load_json(args.pairs)
     cost = CostLog(args.cost_log)
     out = judge_batch(pairs, pois, cost=cost)
     if args.out:

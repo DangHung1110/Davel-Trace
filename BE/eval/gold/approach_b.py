@@ -24,16 +24,9 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.common import hhmm as _hh, to_min as _to_min  # noqa: E402
+
 DEFAULT_ORIGIN = "dragon-bridge"
-
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
-
-
-def _hh(m: int) -> str:
-    return f"{m // 60:02d}:{m % 60:02d}"
 
 
 def _overlaps(hours: list[str], ws: int, we: int) -> bool:

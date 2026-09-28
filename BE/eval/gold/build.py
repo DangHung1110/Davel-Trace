@@ -18,6 +18,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.common import load_matrix_cells, load_pois  # noqa: E402
 from BE.eval.gold.approach_b import make_gold  # noqa: E402
 from BE.eval.gold.queries import build_queries  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
@@ -30,12 +31,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default="")
     args = ap.parse_args(argv)
-    with open(os.path.join(args.snapshot, "pois.json"), encoding="utf-8") as f:
-        pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
-    with open(os.path.join(args.snapshot, "matrix.json"), encoding="utf-8") as f:
-        matrix = json.load(f)["cells"]
+    pois = load_pois(args.snapshot, by_id=True)
+    matrix = load_matrix_cells(args.snapshot)
     suite, bad = [], 0
-    for q in build_queries(pois_list(pois), args.n, args.seed):
+    for q in build_queries(list(pois.values()), args.n, args.seed):
         gold = make_gold(q, pois, matrix)
         if gold["itinerary"] is None:
             print(f"  {q['query_id']}: INFEASIBLE ({gold['infeasible']})")
@@ -53,10 +52,6 @@ def main(argv: list[str] | None = None) -> int:
             json.dump(suite, f, ensure_ascii=False, indent=1)
         print(f"wrote -> {args.out}")
     return 1 if bad else 0
-
-
-def pois_list(pois: dict) -> list[dict]:
-    return list(pois.values())
 
 
 if __name__ == "__main__":

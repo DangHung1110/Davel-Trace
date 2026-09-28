@@ -12,6 +12,10 @@ and validates it against `specs/001-travel-agent-mvp/data-model.md`:
 
 Stdlib only (Pydantic schemas are lane C T007; this loader must not wait
 for them — lanes.md STUB rule).
+
+ponytail: hand-rolled field checks below deliberately duplicate the Pydantic
+POI schema; do NOT import `app.schemas.poi` here (keeps this loader
+dependency-free and usable before lane C lands).
 """
 
 from __future__ import annotations

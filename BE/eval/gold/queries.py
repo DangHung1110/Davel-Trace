@@ -20,6 +20,8 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.common import load_pois  # noqa: E402
+
 BUDGETS = [1000000, 3000000, 5000000]
 WINDOWS = [("07:00", "18:00"), ("07:00", "12:00"), ("13:00", "18:00")]
 PREFS_TEXTS = [
@@ -63,8 +65,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default="")
     args = ap.parse_args(argv)
-    with open(os.path.join(args.snapshot, "pois.json"), encoding="utf-8") as f:
-        pois = json.load(f)["pois"]
+    pois = load_pois(args.snapshot)
     queries = build_queries(pois, args.n, args.seed)
     print(f"built {len(queries)} queries (seed {args.seed})")
     for q in queries:

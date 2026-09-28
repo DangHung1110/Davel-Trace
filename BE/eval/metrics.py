@@ -15,15 +15,12 @@ Gate (FR-035, data-model.md): FAR=0, VROH=0, BCS=1, TCS=1, HCS=1.
 
 from __future__ import annotations
 
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
+from BE.common import to_min
 
 
 def _in_range(start: int, end: int, spec: str) -> bool:
     o, c = spec.split("-")
-    o, c = _to_min(o), _to_min(c)
+    o, c = to_min(o), to_min(c)
     if o <= c:
         return o <= start and end <= c
     return start >= o or end <= c  # overnight range
@@ -64,7 +61,7 @@ def vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     for a in acts:
         p = pois.get(a.get("poi_id"), {})
         hours = p.get("opening_hours") or []
-        s, e = _to_min(a["start"]), _to_min(a["end"])
+        s, e = to_min(a["start"]), to_min(a["end"])
         if hours and not any(_in_range(s, e, h) for h in hours):
             bad += 1
     return bad / len(acts)
@@ -87,19 +84,16 @@ def tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     acts = _acts(itinerary)
     if not acts:
         return 0.0
-    ws, we = _to_min(trip["start_time"]), _to_min(trip["end_time"])
+    ws, we = to_min(trip["start_time"]), to_min(trip["end_time"])
     ordered = sorted(acts, key=lambda a: a["start"])
-    if any(_to_min(a["start"]) < ws or _to_min(a["end"]) > we or
-           _to_min(a["end"]) <= _to_min(a["start"]) for a in ordered):
-        ok = 0
-    else:
-        ok = 0
-        for x, y in zip(ordered, ordered[1:]):
-            ok += _to_min(x["end"]) <= _to_min(y["start"])
-        if len(ordered) == 1:
-            return 1.0
-        return ok / (len(ordered) - 1)
-    return 0.0 if len(ordered) == 1 else ok / max(1, len(ordered) - 1)
+    if any(to_min(a["start"]) < ws or to_min(a["end"]) > we or
+           to_min(a["end"]) <= to_min(a["start"]) for a in ordered):
+        return 0.0
+    if len(ordered) == 1:
+        return 1.0
+    ok = sum(to_min(x["end"]) <= to_min(y["start"])
+             for x, y in zip(ordered, ordered[1:]))
+    return ok / (len(ordered) - 1)
 
 
 def hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
@@ -124,7 +118,7 @@ def str_score(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
         return 1.0
     ok = 0
     for x, y in zip(acts, acts[1:]):
-        gap = _to_min(y["start"]) - _to_min(x["end"])
+        gap = to_min(y["start"]) - to_min(x["end"])
         need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
         ok += need is not None and gap >= need
     return ok / (len(acts) - 1)
@@ -132,8 +126,8 @@ def str_score(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
 
 def dtu(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     """Daily Time Utilization = visit minutes / available minutes (0..1)."""
-    total = sum(_to_min(a["end"]) - _to_min(a["start"]) for a in _acts(itinerary))
-    avail = _to_min(trip["end_time"]) - _to_min(trip["start_time"])
+    total = sum(to_min(a["end"]) - to_min(a["start"]) for a in _acts(itinerary))
+    avail = to_min(trip["end_time"]) - to_min(trip["start_time"])
     return max(0.0, min(1.0, total / avail)) if avail > 0 else 0.0
 
 
