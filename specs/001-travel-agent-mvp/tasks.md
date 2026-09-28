@@ -144,7 +144,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [ ] T044 [P] [US8] Event classifier S2 (templates + paraphrase + TF-IDF/LightGBM or PhoBERT, ~8 types)
 - [X] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
-- [ ] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
+- [X] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
 - [ ] T047 [US8] Mock GPS feed interface + timeline file for video demo
 - [ ] T048 [US8] Integration test US8 (S5 scenario)
 
