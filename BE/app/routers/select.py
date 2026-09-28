@@ -7,8 +7,9 @@ Unknown id -> 404 envelope (không crash).
 """
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
+from BE.app.routers import error
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
@@ -36,8 +37,7 @@ def reset_store() -> None:
 @router.post("/itinerary/select")
 def select(body: SelectIn):
     if body.itinerary_id not in _STORE["plans"]:
-        return JSONResponse({"error": "UNKNOWN_ITINERARY",
-                             "message": f"khong co plan {body.itinerary_id}"},
-                            status_code=404)
+        return error("UNKNOWN_ITINERARY",
+                     f"khong co plan {body.itinerary_id}", 404)
     _STORE["active_id"] = body.itinerary_id
     return {"active_id": body.itinerary_id}

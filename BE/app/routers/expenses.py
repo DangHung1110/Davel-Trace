@@ -5,9 +5,9 @@ errors stay in the {error, message} shape per contracts/api.md.
 """
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
+from BE.app.routers import error
 from BE.app.services import expenses as expenses_svc
 
 router = APIRouter(prefix="/v1", tags=["expenses"])
@@ -27,8 +27,7 @@ def log_expense(body: ExpenseIn):
         entry = expenses_svc.add(body.trip_id, body.label, body.amount,
                                  body.kind, body.at)
     except ValueError as e:
-        return JSONResponse({"error": "BAD_EXPENSE", "message": str(e)},
-                            status_code=400)
+        return error("BAD_EXPENSE", str(e), 400)
     return entry
 
 

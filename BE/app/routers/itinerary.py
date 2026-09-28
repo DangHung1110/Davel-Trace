@@ -9,13 +9,14 @@ Snapshot missing -> structured error (no crash). Multi-plan is T032.
 """
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 from BE.app.config import get_settings
+from BE.app.routers import error
 from BE.app.schemas.trip import TripRequest
 from BE.app.services import rank as rank_svc
 from BE.app.services import retrieval as retrieval_svc
+from BE.app.services import to_min
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
@@ -25,26 +26,22 @@ class ItineraryIn(BaseModel):
     profiles: list[str] = ["balanced"]
 
 
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
-
-
 def _hh(m: int) -> str:
     return f"{m // 60:02d}:{m % 60:02d}"
 
 
+# ponytail: lane-B optimizer/validator/responder replaces this stub at phase-PR.
 # --- STUB (lane B T017/T018/T019) — deleted at phase-PR ---
 def _stub_optimize(ranked: list[dict], by_id: dict, cells: dict,
                    trip: TripRequest) -> list[dict]:
-    ws = _to_min(trip.start_time)
+    ws = to_min(trip.start_time)
     acts, cur, prev = [], ws, None
     for r in ranked:
         p = by_id[r["poi_id"]]
         if prev is not None:
             cur += int((cells.get(f"{prev}->{p['poi_id']}", {}) or {}).get("minutes", 0))
         dur = int((p.get("visit_min") or {}).get("p50", 60))
-        if cur + dur > _to_min(trip.end_time):
+        if cur + dur > to_min(trip.end_time):
             break
         hours = p.get("opening_hours", [])
         s = _hh(cur)
@@ -72,7 +69,7 @@ def _stub_respond(acts: list[dict], checks: dict, cells: dict,
                   by_id: dict, trip: TripRequest) -> dict:
     km = sum(float((cells.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("km", 0.0))
              for x, y in zip(acts, acts[1:]))
-    visit = sum(_to_min(a["end"]) - _to_min(a["start"]) for a in acts)
+    visit = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
     travel = sum(int((cells.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes", 0))
                  for x, y in zip(acts, acts[1:]))
     return {"itinerary_id": "it-stub-1", "trip_id": "t1", "version": 1,
@@ -89,9 +86,8 @@ def itinerary(body: ItineraryIn):
     try:
         pois = retrieval_svc.load_pois_json(settings.snapshot_dir + "/pois.json")
     except (FileNotFoundError, NotADirectoryError):
-        return JSONResponse({"error": "SNAPSHOT_MISSING",
-                             "message": f"snapshot dir {settings.snapshot_dir} chua co (doi lane A T003b)"},
-                            status_code=503)
+        return error("SNAPSHOT_MISSING",
+                     f"snapshot dir {settings.snapshot_dir} chua co (doi lane A T003b)", 503)
     trip = body.trip.model_dump()
     user = {"budget": trip["budget"]}
     by_id = {p["poi_id"]: p for p in pois}
@@ -108,13 +104,11 @@ def itinerary(body: ItineraryIn):
         cells = {}
     acts = _stub_optimize(ranked, by_id, cells, body.trip)
     if not acts:
-        return JSONResponse({"error": "NO_FEASIBLE_PLAN",
-                             "message": "khong co lich kha thi, thu noi soft (FR-022)"},
-                            status_code=422)
+        return error("NO_FEASIBLE_PLAN",
+                     "khong co lich kha thi, thu noi soft (FR-022)", 422)
     checks = _stub_validate(acts, body.trip, by_id)
     if not all(checks.values()):
-        return JSONResponse({"error": "NO_FEASIBLE_PLAN",
-                             "message": f"rot cong {[k for k, v in checks.items() if not v]}"},
-                            status_code=422)
+        return error("NO_FEASIBLE_PLAN",
+                     f"rot cong {[k for k, v in checks.items() if not v]}", 422)
     return {"plans": [_stub_respond(acts, checks, cells, by_id, body.trip)],
             "selected": None}
