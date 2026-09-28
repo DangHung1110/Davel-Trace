@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T025 — Review US2 recommend integration (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits ffd84c5 + 0add2d8). (1) Vùng file: OK — chỉ thêm BE/tests/integration/test_us2_recommend.py (vùng C); tasks.md chỉ tick 1 dòng T025. (2) Chạy pytest integration: 3/3 PASSED; full `pytest BE/tests/`: 38/38 passed exit 0; py_compile exit 0. (3) Bao phủ đúng yêu cầu: query 'yên tĩnh/hẹn hò/gần biển' → cove-eat top kèm reasons + fired [quiet, dating, near_sea]; ngược gu (club) điểm thấp hơn; vượt budget (fancy) loại; unverified (shack) ra needs_verification riêng; case rỗng (activities 'bảo tàng') → soften đúng 1 lần có báo cáo softened, hard avoid (club) giữ. (4) Tick xứng đáng + NOTE merge: T025 là integration test khép US2 ở tầng service (T015+T024+T023 ráp lại qua recommend()); T023/T024 đã [X] trong lane-c; T022 hiện [ ] ở worktree này vì xong bên lane-a chưa merge — orchestrator reconcile ở phase-PR (không FIX, đúng luật lanes.md). (5) Secret-scan diff ffd84c5~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T024 — Review uncertainty labels + needs_verification (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 2fb5fb3 + a5db0cc). (1) Vùng file: OK — sửa BE/app/services/retrieval.py + test cũ (vùng C) + BE/tests/unit/test_uncertainty.py mới; tasks.md chỉ tick 1 dòng T024. (2) Full `pytest BE/tests/`: 35/35 passed exit 0 (31 cũ + 3 uncertainty + 1 tăng ròng ở retrieval); test mới 3/3; py_compile 3 file exit 0. Router itinerary không vỡ vì key 'candidates' giữ nguyên (integration/contract fixtures verified vẫn xanh). (3) Test cũ update TRUNG THỰC, không pass ảo: case must-visit-unverified-vào-main (luật T015 cũ) được thay bằng 2 case đúng luật T024 mới — verified must-visit giữ candidates + unverified must-visit ra needs_verification kèm flag; cả 2 phía đều assert. (4) FR-013/024/026 đúng: unverified KHÔNG vào candidates (2 tests assertNotIn); reasons 'chua xac minh (FR-013)' / 'must-visit (cho xac minh, ngoai main plan)' + uncertainty list ('poi/gio/rating/tags/gia chua xac minh') — field thiếu gắn nhãn, không dùng làm fact. (5) Tick xứng đáng: T024 đòi unverified excluded from main plan + labels — giao đủ 3 keys (candidates/needs_verification/excluded). (6) Secret-scan diff 2fb5fb3~1..HEAD: 0 hit. Worktree sạch.
