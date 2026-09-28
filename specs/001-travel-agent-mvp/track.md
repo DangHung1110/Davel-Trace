@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T032s — Review plan scorer profit/utility + gate (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 511b3da + 85f4953). (1) Vùng file: OK — thêm score_plan vào BE/app/services/profiles.py (vùng B) + BE/tests/unit/test_score_plan.py mới; tasks.md chỉ thêm note 1 dòng T033. (2) Chạy test `python BE/tests/unit/test_score_plan.py -v`: 4/4 OK exit 0 — utility exp 0.942 > sav 0.828 (preference-heavy → experience top utility); profit sav 4.2 > exp 3.2 (tight budget → savings top profit); gate-fail (VROH 0) → excluded + scores 0.0; pool thật run_profiles → profit winner là savings. py_compile cả 2 file exit 0. (3) T033 GIỮ NGUYÊN [ ] đúng: note '[T032s DONE 2026-09-28 lane B: score_plan in profiles.py; select endpoint = T033e lane C]' — scorer thuộc B xong, select endpoint để C, đúng split lanes.md. (4) Secret-scan diff 511b3da~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T032 — Review multi-profile runs + solution pool (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits be579df + b789f5d). (1) Vùng file: OK — BE/app/services/profiles.py (mới, vùng B) + BE/tests/unit/test_profiles.py; tasks.md chỉ tick 1 dòng T032. (2) Chạy test `python BE/tests/unit/test_profiles.py -v`: 2/2 OK exit 0; verify độc lập in composition: savings [beach,hill] cost 0 pref 4.65 / balanced [beach,hill,fancy,noodle] cost 550000 pref 4.7 / experience [beach,hill,noodle,fancy] cost 550000 pref 4.7 — ≥2 plans, khác cả composition + cost + reasons (savings rẻ nhất ✓). py_compile cả 2 file exit 0. (3) Mỗi plan qua gate: cả 3 constraint_status 4 cổng 1, dropped rỗng, selected None (select endpoint là lane C T033e — để dành đúng). (4) Tick xứng đáng: T032 đòi multi-profile runs + solution pool — giao đủ 3 weight configs (savings phạt fee / balanced rating / experience rating+intensity) qua optimizer T017 + validate T018; commit ghi 'US4 opened' (mở, không nhận vơ đóng). (5) Secret-scan diff be579df~1..HEAD: 0 hit. Worktree sạch.
