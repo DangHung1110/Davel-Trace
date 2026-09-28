@@ -19,21 +19,19 @@ T030: optional q_ij edge bonuses + W_A+s_A<=W_B precedence (PATM).
 
 from __future__ import annotations
 
-import os
-import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
+from BE.app.services.common import hh
 
 TIMEOUT_S = 5.0
 
 
+# ponytail: STUB dataclasses are a deliberate ceiling — T007 poi/trip
+# schemas are not in this worktree; phase-PR swaps them in, model code
+# untouched. Same field names, shared from here (imported by profiles/replan).
 @dataclass
-class StubPOI:  # STUB (T007 poi.py) — same names, swapped at phase-PR
+class StubPOI:
     poi_id: str
     visit_min: int = 60
     open_min: int = 7 * 60
@@ -42,14 +40,10 @@ class StubPOI:  # STUB (T007 poi.py) — same names, swapped at phase-PR
 
 
 @dataclass
-class StubTrip:  # STUB (T007 trip.py) — same names, swapped at phase-PR
+class StubTrip:
     start_min: int = 7 * 60
     end_min: int = 18 * 60
     origin_id: str = "depot"
-
-
-def _hh(m: int) -> str:
-    return f"{m // 60:02d}:{m % 60:02d}"
 
 
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
@@ -129,8 +123,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             break
         order.append(nxt)
         node_now = nxt
-    acts = [{"poi_id": ids[i - 1], "start": _hh(int(solver.Value(t[i]))),
-             "end": _hh(int(solver.Value(t[i])) + dur[i])} for i in order]
+    acts = [{"poi_id": ids[i - 1], "start": hh(int(solver.Value(t[i]))),
+             "end": hh(int(solver.Value(t[i])) + dur[i])} for i in order]
     return {"status": "optimal" if status == cp_model.OPTIMAL else "feasible-timeout",
             "elapsed_s": round(elapsed, 3),
             "itinerary": {"activities": acts,

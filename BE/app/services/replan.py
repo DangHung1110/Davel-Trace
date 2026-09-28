@@ -12,22 +12,10 @@ still preserved).
 
 from __future__ import annotations
 
-import os
-import sys
-
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-from BE.app.services import state as store  # noqa: E402
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
-from BE.app.services.validator import validate  # noqa: E402
-
-
-def _mm(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
+from BE.app.services import state as store
+from BE.app.services.common import parse_hours, to_min
+from BE.app.services.optimizer import StubPOI, StubTrip, optimize
+from BE.app.services.validator import validate
 
 
 def _event_drops(event: dict, remaining: list[dict], by_id: dict) -> set[str]:
@@ -80,9 +68,9 @@ def replan(state: dict, event: dict, pois: list[dict],
     stub = [StubPOI(pid, int(by_id[pid].get("visit_min", 60)),
                     *_win(by_id[pid], trip, state), 1.0)
             for pid in cand_ids if pid in by_id]
-    start = max(_mm(state.get("now", trip.get("start_time", "07:00"))),
-                _mm(trip.get("start_time", "07:00")))
-    out = optimize(stub, travel2, StubTrip(start, _mm(trip.get("end_time", "18:00"))))
+    start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
+                to_min(trip.get("start_time", "07:00")))
+    out = optimize(stub, travel2, StubTrip(start, to_min(trip.get("end_time", "18:00"))))
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),
@@ -122,9 +110,6 @@ def replan(state: dict, event: dict, pois: list[dict],
 
 
 def _win(p: dict, trip: dict, state: dict) -> tuple[int, int]:
-    hours = p.get("opening_hours", [])
-    if hours:
-        o, c = hours[0].split("-")
-        return _mm(o), _mm(c)
-    return _mm(state.get("now", trip.get("start_time", "07:00"))), \
-        _mm(trip.get("end_time", "18:00"))
+    return (parse_hours(p.get("opening_hours")) or
+            (to_min(state.get("now", trip.get("start_time", "07:00"))),
+             to_min(trip.get("end_time", "18:00"))))

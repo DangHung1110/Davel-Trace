@@ -14,16 +14,10 @@ feasible profile, `selected: None` (select endpoint is lane C T033e).
 
 from __future__ import annotations
 
-import os
-import sys
-
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
-from BE.app.services.validator import validate  # noqa: E402
+from BE.app.services.common import (
+    parse_hours, status_map, to_min, total_fee)
+from BE.app.services.optimizer import StubPOI, StubTrip, optimize
+from BE.app.services.validator import validate
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: phạt nặng chi phí, ưu tiên điểm rẻ",
@@ -39,11 +33,6 @@ def _score(profile: str, p: dict) -> float:
     if profile == "experience":
         return rating + int(p.get("intensity", 2))
     return rating  # balanced
-
-
-def _mm(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
 
 
 def score_plan(plan: dict) -> dict:
@@ -66,16 +55,10 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
-def _hh(m: int) -> str:
-    return f"{m // 60:02d}:{m % 60:02d}"
-
-
 def _win(p: dict, trip: dict) -> tuple[int, int]:
-    hours = p.get("opening_hours", [])
-    if hours:
-        o, c = hours[0].split("-")
-        return _mm(o), _mm(c)
-    return _mm(trip.get("start_time", "07:00")), _mm(trip.get("end_time", "18:00"))
+    return (parse_hours(p.get("opening_hours")) or
+            (to_min(trip.get("start_time", "07:00")),
+             to_min(trip.get("end_time", "18:00"))))
 
 
 def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
@@ -84,6 +67,10 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                                               "experience")) -> dict:
     """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}."""
     plans, dropped = [], []
+    by_id = {p["poi_id"]: p for p in pois}
+    pois_gate = {pid: {"verified": True, "fee": p.get("fee", 0),
+                       "opening_hours": p.get("opening_hours", [])}
+                 for pid, p in by_id.items()}
     for prof in profiles:
         stub = [StubPOI(p["poi_id"], int(p.get("visit_min", 60)),
                         *_win(p, trip), _score(prof, p)) for p in pois]
@@ -92,31 +79,25 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
             dropped.append({"profile": prof, "reason": out.get("reason", "")})
             continue
         acts = out["itinerary"]["activities"]
-        rep = validate({"activities": acts}, trip,
-                       {p["poi_id"]: {"verified": True,
-                                      "fee": p.get("fee", 0),
-                                      "opening_hours": p.get("opening_hours", [])}
-                        for p in pois}, matrix)
+        rep = validate({"activities": acts}, trip, pois_gate, matrix)
         if not rep["passed"]:
             dropped.append({"profile": prof, "reason": str(rep["violations"])})
             continue
-        ratings = [float(next(p for p in pois if p["poi_id"] == a["poi_id"])
-                         .get("rating", 0)) for a in acts]
+        ratings = [float(by_id[a["poi_id"]].get("rating", 0)) for a in acts]
         travel_min = sum(int((matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
                              .get("minutes", 0)) for x, y in zip(acts, acts[1:]))
         plans.append({
             "profile": prof,
             "reason": PROFILE_REASONS[prof],
             "itinerary": {"activities": acts},
-            "total_cost": sum(int(next(p for p in pois if p["poi_id"] == a["poi_id"])
-                                  .get("fee", 0)) for a in acts),
+            "total_cost": total_fee(acts, by_id),
             "travel_min": travel_min,
             "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0,
-            "constraint_status": {k: (1 if v else 0) for k, v in rep["checks"].items()},
+            "constraint_status": status_map(rep["checks"]),
         })
     return {"plans": plans, "dropped": dropped, "selected": None}
 
 
 def _to_trip(trip: dict) -> StubTrip:
-    return StubTrip(_mm(trip.get("start_time", "07:00")),
-                    _mm(trip.get("end_time", "18:00")))
+    return StubTrip(to_min(trip.get("start_time", "07:00")),
+                    to_min(trip.get("end_time", "18:00")))
