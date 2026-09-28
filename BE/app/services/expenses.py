@@ -45,3 +45,15 @@ def summary(trip_id: str) -> dict:
     alert = "100%" if ratio >= 1.0 else ("80%" if ratio >= 0.8 else "")
     return {"budget": budget, "spent": spent, "left": budget - spent,
             "alert": alert}
+
+
+def replan_budget(trip_id: str) -> dict:
+    """Remaining-for-replan (T036a, lane C). Consumed by lane-B T036b:
+    remaining budget + original + spent by kind feed replan constraints
+    (tighten afternoon spend to actuals). Alerts already in summary()."""
+    s = summary(trip_id)
+    by_kind: dict[str, int] = {k: 0 for k in KINDS}
+    for e in _expenses.get(trip_id, []):
+        by_kind[e["kind"]] = by_kind.get(e["kind"], 0) + e["amount"]
+    return {"trip_id": trip_id, "budget": s["budget"], "spent": s["spent"],
+            "left": s["left"], "by_kind": by_kind, "alert": s["alert"]}
