@@ -196,3 +196,7 @@ description: "Task list for Personalized Travel Agent MVP"
 ## Milestone M2 (dwell duration prior — ngoài MVP line)
 
 - [ ] T064 Foursquare-TKY dwell EB-shrinkage duration prior + optimizer/validator hooks (duration_prior.py/json, seed smoke; real eval coverage>=80% + MAE>=10% better PENDING user gold checklist) [WIP 2026-09-28 lane A: n=1136 dwells, posteriors sane, smoke log-MAE 0.546 preliminary; NO tick - see docs/dwell-prior.md]
+
+## Milestone M4 (weather label — ngoài MVP line)
+
+- [ ] T063 OSM tags+geometry + indoor/outdoor labeler + validator/explainer hooks (weather_label/, seed+OSM smoke; real eval macro-F1>=0.95 PENDING user I/O audit) [WIP 2026-09-28 lane A: DN 2978 + HoiAn 1396 elements (TEMP), rules smoke indoor2655/outdoor323, GBDT hook ready; NO tick - see docs/weather-label.md]
