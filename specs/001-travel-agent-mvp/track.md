@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T031-TEST — Review PATM eval test (pairwise/flip/leave-POI-out) (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commit 36865bb, 1 file mới). (1) Vùng file: OK — BE/tests/unit/test_patm.py thuộc vùng A liệt kê đích danh trong lanes.md; commit chỉ 1 file, không chạm tasks.md. (2) Chạy test `python BE/tests/unit/test_patm.py -v`: 3 pass + 1 skip, exit 0; py_compile exit 0. Số liệu khớp review T028: pairwise 38/38 = 1.000, flip 38/38 = 1.000, leave-POI-out train 27 / eval 11 / unseen ['dragon-bridge'] / acc 11/11 / leaked []. (3) Ý nghĩa cho T029: gate model (ranker T029) stub rõ ràng bằng @unittest.skip có lý do 'needs T029 model.txt'; ngưỡng SC-004 >= 70% assert cứng ở cả pairwise và leave-POI-out (assertGreaterEqual 0.70). NOTE trung thực: trên seed rule-generated, scorer==labeler nên 1.000 là tất yếu — docstring đã tự thừa nhận (regression gate chống drift rule); sức phân biệt thật chờ pairs judge/human + model T029. (4) tasks.md: T031 giữ [ ] (đúng — test mới là khung trên seed, T031 chỉ đóng khi có full pairs + model gate xanh). (5) Secret-scan diff 36865bb: 0 hit.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T028-BUILDER — Review pair builder rule protocol + swap-check + judge frame (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commit c29e0e4, 1 file mới). (1) Vùng file: OK — BE/ml/patm/make_pairs.py ∈ BE/ml/**, không chạm tasks.md. (2) Chạy thử trên seed danang-v1 (7 POIs): py_compile exit 0; build --n 42 --seed 7 → 38 pairs (không phải 42: tie pool chỉ 12 < quota 16 nên `pool[:q]` cắt bớt — đúng hành vi kỳ vọng trên seed nhỏ, đủ pool trên snapshot full 100-200 POIs); --check: format 0 errors, balance 31.6/31.6/36.8 so với mục tiêu 30/40/30 (lệch do cắt pool, chấp nhận được ở seed), swap 34 checked / 0 inconsistent / rate 1.0, leave-POI-out train 27 / eval 11 / leaked []. Không leakage: `_rule_margin` chỉ dùng intensity/type/weather_sensitive (không dùng poi_id), check_pairs cấm self-pair, split giấu 20% POI khỏi train. Judge frame + human sampling + collect_judge chỉ là khung (chưa có data Qwen — đúng theo docstring, T028 chưa đóng). (3) tasks.md: T028 giữ [ ] (đúng — còn thiếu snapshot full T003b + batch judge thật; diff tasks.md của commit này rỗng). (4) Secret-scan diff c29e0e4: 0 hit.
