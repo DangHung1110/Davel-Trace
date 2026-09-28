@@ -1,0 +1,78 @@
+"""Gate primitives (T011, lane B). Shared booleans for validator + evaluator.
+
+- FAR: no activity on unknown/unverified POI (FR-013).
+- VROH: no activity outside POI opening hours (SC-006).
+- B3: no Broken transit Buffer — every consecutive transition's gap
+  fits the matrix travel minutes (research R4: haversine-only breaks
+  B3 feasibility, hence T010's no-guess rule).
+- BCS: total cost within budget (SC-008).
+
+Self-contained (lane-B worktree has no BE/eval yet — lanes.md STUB
+rule): formulas mirror lane-A `BE/eval/metrics.py` ratios as booleans;
+validator T018 uses `all_pass()`; evaluator converges at phase-PR.
+Inputs are the same plain dicts as T049 (itinerary/trip/pois/matrix).
+"""
+
+from __future__ import annotations
+
+
+def _to_min(t: str) -> int:
+    h, m = t.split(":")
+    return int(h) * 60 + int(m)
+
+
+def _in_range(start: int, end: int, spec: str) -> bool:
+    o, c = spec.split("-")
+    o, c = _to_min(o), _to_min(c)
+    if o <= c:
+        return o <= start and end <= c
+    return start >= o or end <= c
+
+
+def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
+    """True iff every activity references a known AND verified POI."""
+    acts = itinerary.get("activities", [])
+    return bool(acts) and all(a.get("poi_id") in pois
+                              and pois[a["poi_id"]].get("verified") for a in acts)
+
+
+def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
+    """True iff every activity fits its POI opening hours."""
+    for a in itinerary.get("activities", []):
+        hours = (pois.get(a.get("poi_id"), {}) or {}).get("opening_hours") or []
+        s, e = _to_min(a["start"]), _to_min(a["end"])
+        if hours and not any(_in_range(s, e, h) for h in hours):
+            return False
+    return True
+
+
+def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
+    """True iff every transition gap fits matrix travel minutes (B3=0)."""
+    acts = sorted(itinerary.get("activities", []), key=lambda a: a["start"])
+    for x, y in zip(acts, acts[1:]):
+        gap = _to_min(y["start"]) - _to_min(x["end"])
+        need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
+        if need is None or gap < need:
+            return False
+    return True
+
+
+def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
+    """True iff total cost is within budget."""
+    if "total_cost" in itinerary:
+        cost = int(itinerary["total_cost"])
+    else:
+        cost = sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
+                   for a in itinerary.get("activities", []))
+    return cost <= int(trip.get("budget", 0))
+
+
+CHECKS = (("FAR", check_far), ("VROH", check_vroh),
+          ("B3", check_b3), ("BCS", check_bcs))
+
+
+def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """{"passed": bool, "failed": [names]} — validator T018 entry point."""
+    failed = [name for name, fn in CHECKS
+              if not fn(itinerary, trip, pois, matrix)]
+    return {"passed": not failed, "failed": failed}
