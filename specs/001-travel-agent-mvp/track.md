@@ -29,4 +29,10 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T010+T011 — Review matrix cache-first + gate primitives (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-b (feat/lane-b-optimizer, commits 940129e + 540fbc9 + 0dff36f). (1) Vùng file: OK — BE/app/services/{matrix,gate}.py đúng vùng B liệt kê đích danh trong lanes.md + 2 unit tests của lane; không init/skeleton lane C; tasks.md chỉ tick 2 dòng T010/T011. (2) Chạy 2 test file: test_matrix 5/5 OK + test_gate 6/6 OK, exit 0; py_compile 4 file exit 0. (3) Gate KHÔNG duplicate vô lý: worktree lane-b chưa có BE/eval (xác nhận ls) nên gate.py self-contained đúng luật STUB lanes.md; docstring ghi rõ formulas mirror lane-A metrics + converge ở phase-PR; đối chiếu tay: FAR/VROH/BCS khớp T049 (kể cả edge empty-plan: FAR fail / VROH pass cả 2 phía), B3 = dạng boolean của STR. (4) Miss raise THẬT: verify độc lập trên seed lane-a (read-only) — hit (7, 'cache'), miss ghost-poi raise MatrixMissError kèm message rõ, travel_fit gap hẹp → False; 'haversine' chỉ xuất hiện ở 3 dòng docstring, không có code ước lượng (test_miss_raises_never_guesses assert vắng 6371/radians/asin/math.sin/acos); fetch_osrm là hook raise RuntimeError khi chưa wire coords. (5) Tick xứng đáng: T010 (cache-first + OSRM hook + never-haversine) và T011 (4 booleans cho validator + evaluator) đều là code thuần không đợi data. (6) Secret-scan diff 940129e~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 _(chưa có entry nào)_
