@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T003b-SCRIPT — Review SerpApi fetch quota-guarded + selftest (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits 8168489 + 75918f1; ngoài phạm vi: 2 refactor ponytail trước đó không review ở đây). (1) Vùng file: OK — BE/ml/data/fetch_serpapi.py ∈ BE/ml/** + docs/serpapi-quota.md (doc nhỏ cho đúng task, như tiền lệ README snapshot); tasks.md chỉ thêm note 1 dòng T003b. (2) Chạy `--selftest`: exit 0 — mock 2 searches + 4 details = quota 6 đếm đủ, normalize 4 POIs (verified False + dur_source pending_llm), resume không tốn thêm quota, cap enforce (QuotaExceeded khi chạm cap); py_compile exit 0. Thiếu key: dừng sạch exit 2 kèm hướng dẫn, không bulk. (3) Key qua env SERPAPI_KEY duy nhất (4 refs đều là đọc env/docstring/message); api_key chỉ gắn trên wire, log URL đã redact key; .env qua setdefault không commit. (4) T003b giữ [ ] là ĐÚNG: note pivot ghi rõ 'NO key yet, NO bulk, NO tick' — script + quota-math (30+200=230 ≤ cap 240) xong, bulk đợi key + test-10 + orchestrator duyệt; không có data bulk nào commit (ls-files data/snapshots chỉ 3 file seed v1, status sạch). (5) Secret-scan diff 8168489~1..HEAD: 0 hit.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST. NOTE cho orchestrator: lane C thêm dòng SERPAPI_KEY placeholder vào BE/.env.example ở phase-PR (doc đã nhờ, lane A không đụng file C).
+
 ## [2026-09-28] T022 — Review POI context fields extension (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits b9e5831 + 1fef1ba). (1) Vùng file: OK — BE/app/schemas/poi.py (phần split A) + BE/tests/unit/test_schemas_poi_eval.py của lane; tasks.md chỉ tick 1 dòng T022. (2) Chạy test `python BE/tests/unit/test_schemas_poi_eval.py -v`: 7/7 OK exit 0 (5 cũ + 2 mới T022), seed 7/7 validate; py_compile cả 2 file exit 0. (3) Không vỡ field cũ: crowd/dietary chuyển từ Restaurant lên base POI (kế thừa, không định nghĩa trùng), test_restaurant_extends_poi cũ vẫn xanh; seed cũ thiếu crowd/dietary validate bình thường với defaults ('' / []); field mới có giá trị validate đúng. (4) Tick xứng đáng: T022 đòi ambience/crowd/dietary/pros-cons/source/fetched_at — ambience/pros/cons/source/fetched_at có từ T007, commit này bổ sung đúng 2 mục còn thiếu (crowd/dietary) lên base → đủ bộ. (5) Secret-scan diff b9e5831~1..HEAD: 0 hit. Worktree sạch.
