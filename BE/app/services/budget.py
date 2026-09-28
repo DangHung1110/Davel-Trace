@@ -19,6 +19,8 @@ def tighten_budget(state: dict, trip: dict | None = None) -> dict:
     spent = int(state.get("spent", 0))
     by_kind = dict(state.get("by_kind", {}))
     allowed = max(0, left)
+    # ponytail: "spent over half the budget" is the deliberate tighten
+    # heuristic (morning-heavy); tune with real spend logs, not yet.
     tightened = spent > budget * 0.5 if budget > 0 else False
     if spent > 0:
         caps = {k: round(allowed * v / spent) for k, v in by_kind.items()}

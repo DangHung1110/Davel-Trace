@@ -12,15 +12,7 @@ Inputs are plain POI dicts (type/intensity/rating/tags/...).
 
 from __future__ import annotations
 
-import json
 import os
-import sys
-import time
-
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
 
 MODEL_PATH = os.path.join("BE", "ml", "patm", "model.txt")
 
@@ -70,6 +62,8 @@ def _features(a: dict, b: dict, user: dict | None, ctx: dict | None) -> list[flo
 
 def _rule(a: dict, b: dict) -> float:
     """STUB mirror of lane-A T027 (default user/ctx). Replaced at phase-PR."""
+    # ponytail: no model.txt -> nac-1 rule fallback is the deliberate
+    # offline ceiling; describe() reports which backend answered.
     m = 0.0
     ia, ib = a.get("intensity", 2), b.get("intensity", 2)
     if ia > ib:

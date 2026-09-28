@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import json
 import os
-import urllib.request
 
 
 class MatrixMissError(KeyError):
@@ -57,4 +56,6 @@ class MatrixService:
         Needs POI coords: override `coords(a)` when wiring the snapshot
         loader (T008). Raises RuntimeError when coords are unavailable.
         """
+        # ponytail: networked OSRM backfill is a deliberate ceiling —
+        # offline-first by design; wire coords(T008) to enable it.
         raise RuntimeError("fetch_osrm needs coords wiring (T008 snapshot loader)")

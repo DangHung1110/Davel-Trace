@@ -17,6 +17,8 @@ import copy
 import time
 
 _STORE: dict[str, dict] = {}
+# ponytail: in-memory store is the deliberate ceiling here; phase-PR
+# swaps in the persistent store (T046) without changing this logic.
 
 
 def new_state(trip_id: str, activities: list[dict],
