@@ -17,7 +17,7 @@ Prior deep research lives in NotebookLM notebook `PBL6-TravelAgent`
 ## R3. Language understanding: local LLM primary, API fallback
 - **Decision**: Qwen3-14B Q4 primary (Ollama), Sailor2-8B fallback, JSON mode + temp 0.1 + Pydantic validate + ≤2 retries (closed-loop repair). API (GPT-4o-mini/Gemini Flash) used ONLY for: (a) polish explanation text for demo recording, (b) re-judge ambiguous edge-case pairs. Budget: <5 USD total.
 - **Rationale**: 18–24GB MacBook runs 14B at 30–55 tok/s; Vietnamese verified; full stack runs offline for demo reliability; zero API cost for ~600 judge pairs. API fallback covers quality ceiling for demo polish without locking into paid dependency.
-- **Alternatives considered**: API-only primary (rejected: cost + network dependence at demo); ≤4B local (rejected: drops Vietnamese diacritics); PhoBERT fine-tune for parser (kept as S3 option if offline parser or baseline needed).
+- **Alternatives considered**: API-only primary (rejected: cost + network dependence at demo); ≤4B local (rejected: drops Vietnamese diacritics); small CPU fine-tune allowed since rev 2026-09-28 (intent classifier S3, PhoBERT-base, 300–500 labels — baseline/offline role only; parser stays LLM-primary).
 
 ## R4. Routing data: OSRM snapshot matrix (no VietMap)
 - **Decision**: Precompute/cache N≤200 Da Nang matrix once (40k cells) via OSRM. VietMap NOT used at all.
@@ -34,10 +34,10 @@ Prior deep research lives in NotebookLM notebook `PBL6-TravelAgent`
 - **Rationale**: Paper's repo is public and reusable; CN dataset unusable for ĐN so snapshot self-built to TravelEval schema; student-scale effort mapped (tier 1: 1–2 days, tier 2: 1 week).
 - **Alternatives considered**: Full TravelEval replication (rejected: needs experts + CN data); no evaluator (rejected: constitution III).
 
-## R7. POI snapshot: Apify one-shot + fallback D (grill 2026-09-28)
-- **Decision**: Apify Google-Maps-Scraper actor, free $5/month one-shot (~200 POIs, reviews/enrichment OFF), test 10 POIs trước, ≤2 ngày (T003b). Agent normalizes to TravelEval JSON schema. Fallback D nếu tắc >2 ngày: OSM Overpass skeleton + official-site/Foody crawl + manual (chậm nhưng $0-risk).
-- **Rationale**: Apify matches "crawl once + store" (dataset export allowed, proxy của nó chịu chặn). Google Places API (New) tuy hợp pháp + free caps đủ 200 POI nhưng CẦN thẻ Visa bật billing và CẤM cache (chỉ `place_id` được lưu) — incompatible với repo snapshot plan, deferred làm live-fetch option sau. Old "~$3.40" estimate là giá pre-2025, discarded.
-- **Alternatives considered**: Google Places API New (deferred: Visa friction + no-cache rule); SerpApi free 250 (backup one-shot nếu Apify fail); OSM+manual = fallback D; self-host scraper (rejected: IP-ban risk cao nhất).
+## R7. POI snapshot: SerpApi-details + FSQ-OS volume (rev 2026-09-28, grill-locked)
+- **Decision**: (1) PRIMARY quality fields: SerpApi Google-Maps (free 250 searches/mo, 50/hr, cached searches free) — ~10 list queries per category/district (hl=vi, gl=vn) + details per place_id for top 200–250 POIs (title, gps, rating, price, operating_hours 7-day, phone). One careful run (no reviews/photos engines); (2) VOLUME: Foursquare OS Places (Apache 2.0, monthly Parquet, unlimited bulk) VN-slice + Overture bbox for 1000-POI base + re-crawls; (3) SUPPORT: Geoapify 3k/day no-card (coords/details, unlimited cache) + OpenTripMap 5k/day (landmarks). Apify $5 demoted to backup-2. FORBIDDEN: multi-account quota evasion, review/photo engines on free quota, Foody scrape, Yelp (VN≈0).
+- **Rationale**: SerpApi verified (docs 2026-09-28) to return hours+price+rating; 200 POIs ≈ 210–220 searches fits one month. FSQ-OS covers volume/re-runs legally. Old Apify-first plan kept as fallback only.
+- **Alternatives considered**: Apify one-shot (demoted: $5 cap, gray ToS); Google Places API New (deferred: Visa + no-cache rule); OSM Overpass + manual = fallback D (unchanged).
 
 ## R8. Visit-duration estimation: 3 nấc (không có nguồn public cho VN)
 - **Decision**: Không nguồn nào (Google Places, OSM) cung cấp visit duration cho ĐN → ước tính 3 nấc. **Nấc 1** (P1): category defaults × modifiers (rating ≥4.5 → ×1.2, tag "rộng/lớn" → ×1.3, "check-in/nhẹ" → ×0.7) → `{p25,p50,p75}`, `dur_source=category_rule`, confidence=low. **Nấc 2** (P1): LLM batch (Qwen3-14B qua đêm: name + category + rating + tags + reviews nếu có → JSON `{p25,p50,p75,confidence}`, swap-check hỏi 2 lần, tự loại inconsistent), human verify 15% + toàn bộ outlier (p50 lệch default >50% — moi được POI đặc biệt như Bà Nà 4–6h). **Nấc 3** (P3, sau MVP): mine biểu hiện thời gian trong review ("đi 2 tiếng", "cả buổi sáng") + update prior p50 từ actual activity durations (rule-based, không continual learning — constitution V).

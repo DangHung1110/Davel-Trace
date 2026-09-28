@@ -40,7 +40,9 @@ keys in code (`.env` only, never committed).
 ### V. Simplicity & Tier Discipline
 Build in tiers (nấc 1 rule → nấc 2 trained → nấc 3 scale) and stop at demo-adequate.
 BANNED in MVP: RL/GRPO training, GPU-dependent models, generative next-POI,
-multi-city, voice, booking/payment, receipt OCR. New dependencies require plan
+multi-city, voice, booking/payment, receipt OCR. ALLOWED since rev 2026-09-28:
+small CPU-only fine-tune (e.g. PhoBERT intent classifier S3, ≤500 labels) as
+baseline/offline role only — parser stays LLM-primary. New dependencies require plan
 approval. Scope is Da Nang only until explicitly expanded.
 
 ### VI. Mobile Contract

@@ -21,7 +21,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
 - [ ] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
 - [ ] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
-- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Apify one-shot (free $5, test 10 trước, ≤2 ngày; tắc >2 ngày → fallback Overpass + tay): normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
+- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via SerpApi-details + FSQ-OS volume (rev 2026-09-28): SerpApi free 250/mo — ~10 list queries (hl=vi, gl=vn) + details per place_id top 200–250 (title/gps/rating/price/hours-7day/phone), one careful run (NO reviews/photos engines), cache ON; FSQ-OS Parquet VN-slice + Overture bbox for 1000-POI volume base + re-runs; normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
 - [ ] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8)
 - [ ] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
 - [ ] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
@@ -183,6 +183,11 @@ description: "Task list for Personalized Travel Agent MVP"
 **Purpose**: Replace all cross-lane STUBs with real wiring on merged base; merge order C→A→B per oracle review 2026-09-28.
 
 - [ ] T061 Wiring PR (owner: orchestrator; B adapter + C routers/endpoints + A seed support): (a) adapter POI/VisitMin/opening-hours→optimizer input + depot decision (add depot node to matrix OR drop depot legs — design call inside task); (b) models.py re-export trip+poi+plan+eval; (c) consolidate helpers into BE/common.py (B/C alias to it, delete dup to_min/in_range/loaders); (d) shared conftest.py seed fixture (migrate C inline fixtures); (e) wire /replan endpoint (C router shell + B replan logic) + inventory missing endpoints (/itinerary/{id}, /weather, /score-transition — add tasks or defer with note); (f) gate.py↔metrics.py single-source convergence; (g) full pytest A+B+C green + S1 seed run green. Depends on lanes merged (C→A→B) + tasks.md resolutions T007/T033/T036 (union per oracle §4) + track.md union.
+
+## Phase 14: Second contributions (M1+M4 — after PATM, needs no Apify token)
+
+- [ ] T062 M1 transition prior (Markov/HMM on Foursquare-NYC/TKY check-ins, public, zero-label): download dataset + category crosswalk to ĐN taxonomy (2–4h manual) → P(category_j|category_i, time-of-day) prior feature on PATM q_ij + optimizer tie-break; eval next-category perplexity/accuracy ≥10% over unigram + ranker ablation +5pp order accuracy (depends on snapshot taxonomy; CPU minutes).
+- [ ] T063 M4 weather-sensitivity labeler (engineering, don't claim novelty): logistic/GBDT on OSM tags+geometry (Overpass ĐN + 1–2 VN cities), 200-POI human audit, calibrated confidence → feeds validator weather gate + explanation evidence (FR-024); eval macro-F1 ≥0.95 indoor/outdoor (CPU seconds).
 
 ## Dependencies & Execution Order
 
