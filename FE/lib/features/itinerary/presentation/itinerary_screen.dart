@@ -1,583 +1,1333 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/app_header.dart';
+import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../domain/demo_trip.dart';
 
-class ItineraryScreen extends StatefulWidget {
-  const ItineraryScreen({super.key, required this.onPlanGenerated});
-
-  final ValueChanged<List<TripStop>> onPlanGenerated;
-
-  @override
-  State<ItineraryScreen> createState() => _ItineraryScreenState();
+enum PlannerView {
+  onboarding,
+  planner,
+  clarification,
+  feasibility,
+  comparison,
+  itinerary,
+  poi,
+  replan,
 }
 
-class _ItineraryScreenState extends State<ItineraryScreen> {
-  final _interests = <String>{'Ẩm thực', 'Biển'};
-  DateTime _startDate = DateTime(2026, 9, 20);
-  int _dayCount = 3;
-  TripStop _origin = DemoTripData.defaultOrigin;
-  List<TripStop> _activities = List.of(DemoTripData.activities);
-  final Set<String> _selectedIds = DemoTripData.activities
-      .map((e) => e.id)
-      .toSet();
+class ItineraryScreen extends StatelessWidget {
+  const ItineraryScreen({
+    super.key,
+    required this.view,
+    required this.onViewChanged,
+    required this.onPlanGenerated,
+    required this.onStartTrip,
+  });
 
-  String get _formattedDate =>
-      '${_startDate.day.toString().padLeft(2, '0')}/'
-      '${_startDate.month.toString().padLeft(2, '0')}/${_startDate.year}';
+  final PlannerView view;
+  final ValueChanged<PlannerView> onViewChanged;
+  final ValueChanged<List<TripStop>> onPlanGenerated;
+  final VoidCallback onStartTrip;
 
-  Future<void> _pickDate() async {
-    final selected = await showDatePicker(
-      context: context,
-      initialDate: _startDate,
-      firstDate: DateTime(2026),
-      lastDate: DateTime(2028),
-    );
-    if (selected != null) setState(() => _startDate = selected);
-  }
+  @override
+  Widget build(BuildContext context) => switch (view) {
+    PlannerView.onboarding => _Onboarding(
+      onContinue: () => onViewChanged(PlannerView.planner),
+    ),
+    PlannerView.planner => _Planner(
+      onCreate: () => onViewChanged(PlannerView.clarification),
+      onOpenCached: () => onPlanGenerated(DemoTripData.defaultRoute),
+    ),
+    PlannerView.clarification => _Clarification(
+      onBack: () => onViewChanged(PlannerView.planner),
+      onContinue: () => onViewChanged(PlannerView.feasibility),
+    ),
+    PlannerView.feasibility => _Feasibility(
+      onContinue: () => onViewChanged(PlannerView.comparison),
+    ),
+    PlannerView.comparison => _PlanComparison(
+      onSelect: () => onPlanGenerated(DemoTripData.defaultRoute),
+    ),
+    PlannerView.itinerary => _ItineraryDetail(
+      onOpenPoi: () => onViewChanged(PlannerView.poi),
+      onOpenReplan: () => onViewChanged(PlannerView.replan),
+      onStartTrip: onStartTrip,
+    ),
+    PlannerView.poi => _PoiDetail(
+      onBack: () => onViewChanged(PlannerView.itinerary),
+      onDirections: onStartTrip,
+    ),
+    PlannerView.replan => _Replan(
+      onBack: () => onViewChanged(PlannerView.itinerary),
+      onApply: () => onPlanGenerated(DemoTripData.defaultRoute),
+    ),
+  };
+}
 
-  void _generatePlan() {
-    final selectedActivities = DemoTripData.activities
-        .where(
-          (activity) =>
-              _interests.contains(activity.interest) &&
-              _selectedIds.contains(activity.id),
-        )
-        .toList();
-    if (selectedActivities.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Hãy chọn ít nhất một sở thích và địa điểm.'),
+class _Onboarding extends StatefulWidget {
+  const _Onboarding({required this.onContinue});
+  final VoidCallback onContinue;
+
+  @override
+  State<_Onboarding> createState() => _OnboardingState();
+}
+
+class _OnboardingState extends State<_Onboarding> {
+  String _pace = 'Cân bằng';
+  final _needs = <String>{'Đi bộ vừa phải'};
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    showHeader: false,
+    children: [
+      const SizedBox(height: 18),
+      const _BrandMark(),
+      const SizedBox(height: 30),
+      const _Eyebrow('HỒ SƠ DU LỊCH · 2/5'),
+      const SizedBox(height: 8),
+      Text('Hiểu gu du hành', style: Theme.of(context).textTheme.displaySmall),
+      const SizedBox(height: 8),
+      const Text(
+        'Một vài lựa chọn ngắn giúp lịch trình vừa sức và đúng nhịp của bạn.',
+        style: TextStyle(color: AppColors.muted, height: 1.5),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle('Bạn thích nhịp đi như thế nào?'),
+      const SizedBox(height: 10),
+      ...['Thong thả', 'Cân bằng', 'Khám phá nhiều'].map(
+        (value) => Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: _SelectionTile(
+            title: value,
+            subtitle: switch (value) {
+              'Thong thả' => 'Ít điểm, nhiều thời gian nghỉ',
+              'Cân bằng' => 'Đủ trải nghiệm, vẫn có khoảng thở',
+              _ => 'Tối ưu số điểm trong một ngày',
+            },
+            selected: _pace == value,
+            onTap: () => setState(() => _pace = value),
+          ),
         ),
-      );
-      return;
-    }
-    setState(() => _activities = selectedActivities);
-    widget.onPlanGenerated([_origin, ...selectedActivities]);
+      ),
+      const SizedBox(height: 12),
+      const _SectionTitle('Điều gì cần được ưu tiên?'),
+      const SizedBox(height: 10),
+      Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: ['Đi bộ vừa phải', 'Có thời gian nghỉ', 'Không dậy quá sớm']
+            .map(
+              (value) => FilterChip(
+                selected: _needs.contains(value),
+                label: Text(value),
+                onSelected: (selected) => setState(() {
+                  selected ? _needs.add(value) : _needs.remove(value);
+                }),
+              ),
+            )
+            .toList(),
+      ),
+      const SizedBox(height: 20),
+      const SurfaceCard(
+        color: AppColors.softSurface,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.auto_awesome_rounded, color: AppColors.accent),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Davel sẽ ghi nhớ hồ sơ này và giải thích vì sao từng gợi ý phù hợp.',
+              ),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 22),
+      FilledButton(
+        key: const Key('onboarding-continue-button'),
+        onPressed: widget.onContinue,
+        child: const Text('Lưu hồ sơ & tiếp tục'),
+      ),
+    ],
+  );
+}
+
+class _Planner extends StatefulWidget {
+  const _Planner({required this.onCreate, required this.onOpenCached});
+  final VoidCallback onCreate;
+  final VoidCallback onOpenCached;
+
+  @override
+  State<_Planner> createState() => _PlannerState();
+}
+
+class _PlannerState extends State<_Planner> {
+  final _promptController = TextEditingController(
+    text: 'Một ngày Đà Nẵng có biển, đồ ăn ngon và ngắm cảnh.',
+  );
+  final _interests = <String>{'Biển', 'Ẩm thực'};
+
+  @override
+  void dispose() {
+    _promptController.dispose();
+    super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ColoredBox(
-      color: AppColors.canvas,
-      child: Column(
+  Widget build(BuildContext context) => _Page(
+    section: 'Lập kế hoạch',
+    children: [
+      Row(
         children: [
-          const AppHeader(compact: true),
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(14, 8, 14, 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _PlannerCard(
-                    formattedDate: _formattedDate,
-                    dayCount: _dayCount,
-                    origin: _origin,
-                    interests: _interests,
-                    onPickDate: _pickDate,
-                    onDayChanged: (value) => setState(() => _dayCount = value),
-                    onOriginChanged: (value) => setState(() => _origin = value),
-                    onInterestChanged: (interest, selected) => setState(() {
-                      selected
-                          ? _interests.add(interest)
-                          : _interests.remove(interest);
-                    }),
-                    onGenerate: _generatePlan,
-                  ),
-                  const SizedBox(height: 18),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Lịch trình gợi ý',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      const _TinyPill(label: 'Ngày 1', color: AppColors.sky),
-                      TextButton.icon(
-                        onPressed: () => setState(
-                          () => _activities = _activities.reversed.toList(),
-                        ),
-                        icon: const Icon(Icons.swap_vert_rounded, size: 15),
-                        label: const Text('Sắp xếp'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColors.blue,
-                          minimumSize: Size.zero,
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          textStyle: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  ..._activities.indexed.map(
-                    (entry) => _TimelineTile(
-                      activity: entry.$2,
-                      selected: _selectedIds.contains(entry.$2.id),
-                      isLast: entry.$1 == _activities.length - 1,
-                      onTap: () => setState(() {
-                        final id = entry.$2.id;
-                        _selectedIds.contains(id)
-                            ? _selectedIds.remove(id)
-                            : _selectedIds.add(id);
-                      }),
-                    ),
-                  ),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _Eyebrow('TRỢ LÝ DU LỊCH AI'),
+                const SizedBox(height: 5),
+                Text(
+                  'Đi đâu hôm nay?',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
+            ),
+          ),
+          const _WeatherBadge(),
+        ],
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Kể bằng cách tự nhiên, Davel sẽ hỏi lại khi còn thiếu dữ kiện.',
+      ),
+      const SizedBox(height: 18),
+      TextField(
+        controller: _promptController,
+        minLines: 3,
+        maxLines: 5,
+        decoration: const InputDecoration(
+          labelText: 'Bạn muốn chuyến đi như thế nào?',
+          alignLabelWithHint: true,
+        ),
+      ),
+      const SizedBox(height: 12),
+      const Row(
+        children: [
+          Expanded(
+            child: _InfoField(
+              icon: Icons.schedule_rounded,
+              label: '09:00 · 1 ngày',
+            ),
+          ),
+          SizedBox(width: 8),
+          Expanded(
+            child: _InfoField(icon: Icons.people_outline, label: '2 người'),
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+      const Row(
+        children: [
+          Expanded(
+            child: _InfoField(icon: Icons.near_me_outlined, label: 'Cầu Rồng'),
+          ),
+          SizedBox(width: 8),
+          Expanded(
+            child: _InfoField(
+              icon: Icons.wallet_outlined,
+              label: '4.000.000 ₫',
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _PlannerCard extends StatelessWidget {
-  const _PlannerCard({
-    required this.formattedDate,
-    required this.dayCount,
-    required this.origin,
-    required this.interests,
-    required this.onPickDate,
-    required this.onDayChanged,
-    required this.onOriginChanged,
-    required this.onInterestChanged,
-    required this.onGenerate,
-  });
-
-  final String formattedDate;
-  final int dayCount;
-  final TripStop origin;
-  final Set<String> interests;
-  final VoidCallback onPickDate;
-  final ValueChanged<int> onDayChanged;
-  final ValueChanged<TripStop> onOriginChanged;
-  final void Function(String, bool) onInterestChanged;
-  final VoidCallback onGenerate;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.softSurface,
-        borderRadius: BorderRadius.circular(22),
+      const SizedBox(height: 18),
+      const _SectionTitle('Ưu tiên trải nghiệm'),
+      const SizedBox(height: 8),
+      Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: ['Biển', 'Ẩm thực', 'Thiên nhiên', 'Văn hóa'].map((value) {
+          final selected = _interests.contains(value);
+          return FilterChip(
+            selected: selected,
+            label: Text(value),
+            onSelected: (checked) => setState(() {
+              checked ? _interests.add(value) : _interests.remove(value);
+            }),
+          );
+        }).toList(),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      const SizedBox(height: 20),
+      FilledButton.icon(
+        key: const Key('generate-plan-button'),
+        onPressed: widget.onCreate,
+        icon: const Icon(Icons.auto_awesome_rounded, size: 18),
+        label: const Text('Tạo lịch trình khả thi'),
+      ),
+      const SizedBox(height: 24),
+      Row(
         children: [
-          Row(
+          const Expanded(child: _SectionTitle('Lịch trình gần đây')),
+          TextButton(
+            onPressed: widget.onOpenCached,
+            child: const Text('Mở lại'),
+          ),
+        ],
+      ),
+      SurfaceCard(
+        child: InkWell(
+          onTap: widget.onOpenCached,
+          child: const Row(
             children: [
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.auto_awesome,
-                  color: AppColors.blue,
-                  size: 14,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Expanded(
+              _DateTile(),
+              SizedBox(width: 12),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Davel Trace',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        _TinyPill(label: 'Đề xuất', color: Color(0xFFDDE7FF)),
-                      ],
-                    ),
                     Text(
-                      'Khám phá Đà Nẵng theo cách của bạn',
-                      style: TextStyle(fontSize: 8, color: AppColors.muted),
+                      'Đà Nẵng chậm mà chất',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      '4 điểm · Đã lưu lúc 08:30',
+                      style: TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
               ),
-              IconButton.filled(
-                onPressed: () {},
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: AppColors.blue,
-                ),
-                icon: const Icon(Icons.notifications_none_rounded, size: 17),
-              ),
+              Icon(Icons.chevron_right_rounded),
             ],
           ),
-          const SizedBox(height: 10),
-          const Text(
-            'TRỢ LÝ LẬP TRÌNH AI',
+        ),
+      ),
+    ],
+  );
+}
+
+class _Clarification extends StatefulWidget {
+  const _Clarification({required this.onBack, required this.onContinue});
+  final VoidCallback onBack;
+  final VoidCallback onContinue;
+
+  @override
+  State<_Clarification> createState() => _ClarificationState();
+}
+
+class _ClarificationState extends State<_Clarification> {
+  String _time = '09:00';
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'Làm rõ yêu cầu',
+    leadingBack: widget.onBack,
+    children: [
+      const _Eyebrow('CÒN 1 CÂU HỎI'),
+      const SizedBox(height: 7),
+      Text(
+        'Bạn muốn bắt đầu lúc nào?',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Giờ khởi hành ảnh hưởng trực tiếp tới giờ mở cửa, thời tiết và quãng đường.',
+      ),
+      const SizedBox(height: 20),
+      ...['07:30', '09:00', '14:00'].map(
+        (value) => Padding(
+          padding: const EdgeInsets.only(bottom: 9),
+          child: _SelectionTile(
+            title: value,
+            subtitle: switch (value) {
+              '07:30' => 'Mát hơn, có thể ghé Sơn Trà sớm',
+              '09:00' => 'Cân bằng và phù hợp hồ sơ của bạn',
+              _ => 'Rút gọn lịch trình, ưu tiên biển và ẩm thực',
+            },
+            selected: _time == value,
+            onTap: () => setState(() => _time = value),
+          ),
+        ),
+      ),
+      const SizedBox(height: 12),
+      const SurfaceCard(
+        color: AppColors.softSurface,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Eyebrow('GIẢ ĐỊNH HỆ THỐNG'),
+            SizedBox(height: 8),
+            Text('• Di chuyển bằng xe máy hoặc taxi'),
+            Text('• Không có yêu cầu hỗ trợ tiếp cận đặc biệt'),
+            Text('• Chi phí chưa gồm khách sạn'),
+          ],
+        ),
+      ),
+      const SizedBox(height: 22),
+      FilledButton(
+        key: const Key('clarification-confirm-button'),
+        onPressed: widget.onContinue,
+        child: const Text('Xác nhận & kiểm tra khả thi'),
+      ),
+    ],
+  );
+}
+
+class _Feasibility extends StatelessWidget {
+  const _Feasibility({required this.onContinue});
+  final VoidCallback onContinue;
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'Kiểm tra khả thi',
+    children: [
+      const _Eyebrow('FEASIBILITY GATE'),
+      const SizedBox(height: 7),
+      Text(
+        'Lịch trình đã vượt qua kiểm tra',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Davel chỉ so sánh các phương án sau khi những ràng buộc chính đã hợp lệ.',
+      ),
+      const SizedBox(height: 20),
+      const SurfaceCard(
+        child: Column(
+          children: [
+            _CheckRow(
+              'Hiểu đúng yêu cầu',
+              'Đủ thời gian, ngân sách và sở thích',
+            ),
+            _CheckRow(
+              'Lọc địa điểm phù hợp',
+              '8 ứng viên → 5 địa điểm đạt yêu cầu',
+            ),
+            _CheckRow(
+              'Kiểm tra giờ mở cửa',
+              '4 đã xác minh · 1 cần kiểm tra lại',
+            ),
+            _CheckRow(
+              'Ước lượng đường đi & chi phí',
+              'OSRM · 28 km · trong ngân sách',
+            ),
+            _CheckRow(
+              'Tạo 3 hồ sơ kế hoạch',
+              'Tiết kiệm · Cân bằng · Trải nghiệm',
+              last: true,
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 14),
+      const _Notice(
+        icon: Icons.info_outline_rounded,
+        text: 'Giờ đông khách của Bé Mặn là suy luận từ dữ liệu tham khảo, chưa phải dữ kiện xác minh.',
+      ),
+      const SizedBox(height: 22),
+      FilledButton(
+        key: const Key('feasibility-continue-button'),
+        onPressed: onContinue,
+        child: const Text('Xem 3 phương án'),
+      ),
+    ],
+  );
+}
+
+class _PlanComparison extends StatelessWidget {
+  const _PlanComparison({required this.onSelect});
+  final VoidCallback onSelect;
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'So sánh kế hoạch',
+    children: [
+      const _Eyebrow('3 PHƯƠNG ÁN KHẢ THI'),
+      const SizedBox(height: 7),
+      Text(
+        'Chọn nhịp đi hợp gu',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Mọi phương án đều đáp ứng thời gian, ngân sách và giới hạn di chuyển.',
+      ),
+      const SizedBox(height: 18),
+      const _PlanCard(
+        title: 'Tiết kiệm',
+        description: 'Gọn đường, ưu tiên điểm miễn phí',
+        cost: '2,1 triệu',
+        travel: '19 km',
+        stops: '4 điểm',
+        match: '84%',
+      ),
+      const SizedBox(height: 10),
+      _PlanCard(
+        title: 'Cân bằng',
+        description: 'Đủ biển, ẩm thực và khoảng nghỉ',
+        cost: '3,25 triệu',
+        travel: '24 km',
+        stops: '4 điểm',
+        match: '96%',
+        recommended: true,
+        action: FilledButton(
+          key: const Key('select-balanced-plan-button'),
+          onPressed: onSelect,
+          child: const Text('Chọn phương án này'),
+        ),
+      ),
+      const SizedBox(height: 10),
+      const _PlanCard(
+        title: 'Trải nghiệm',
+        description: 'Thêm điểm check-in và bữa tối nổi bật',
+        cost: '3,85 triệu',
+        travel: '31 km',
+        stops: '5 điểm',
+        match: '90%',
+      ),
+    ],
+  );
+}
+
+class _ItineraryDetail extends StatelessWidget {
+  const _ItineraryDetail({
+    required this.onOpenPoi,
+    required this.onOpenReplan,
+    required this.onStartTrip,
+  });
+  final VoidCallback onOpenPoi;
+  final VoidCallback onOpenReplan;
+  final VoidCallback onStartTrip;
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'Lịch trình ngày 1',
+    children: [
+      Row(
+        children: [
+          Expanded(
+            child: Text(
+              'Đà Nẵng chậm mà chất',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ),
+          IconButton.filledTonal(
+            key: const Key('open-replan-button'),
+            tooltip: 'Lập lại kế hoạch',
+            onPressed: onOpenReplan,
+            icon: const Icon(Icons.tune_rounded),
+          ),
+        ],
+      ),
+      const SizedBox(height: 6),
+      const Text('Chủ nhật, 20/09 · Lưu ngoại tuyến lúc 08:30'),
+      const SizedBox(height: 14),
+      const Row(
+        children: [
+          Expanded(child: _SummaryMetric('3,25tr', 'dự kiến')),
+          SizedBox(width: 8),
+          Expanded(child: _SummaryMetric('24 km', 'di chuyển')),
+          SizedBox(width: 8),
+          Expanded(child: _SummaryMetric('4', 'điểm dừng')),
+        ],
+      ),
+      const SizedBox(height: 12),
+      const _Notice(
+        icon: Icons.wb_sunny_outlined,
+        text: 'Trời nắng 28°C. Sơn Trà phù hợp trước 11:00.',
+      ),
+      const SizedBox(height: 18),
+      ...DemoTripData.activities.indexed.map(
+        (entry) => _TimelineStop(
+          stop: entry.$2,
+          index: entry.$1,
+          isLast: entry.$1 == DemoTripData.activities.length - 1,
+          onTap: entry.$2.id == 'be-man' ? onOpenPoi : null,
+        ),
+      ),
+      const SizedBox(height: 12),
+      FilledButton.icon(
+        key: const Key('start-trip-button'),
+        onPressed: onStartTrip,
+        icon: const Icon(Icons.navigation_rounded),
+        label: const Text('Bắt đầu chuyến đi'),
+      ),
+    ],
+  );
+}
+
+class _PoiDetail extends StatelessWidget {
+  const _PoiDetail({required this.onBack, required this.onDirections});
+  final VoidCallback onBack;
+  final VoidCallback onDirections;
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'Chi tiết địa điểm',
+    leadingBack: onBack,
+    children: [
+      ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Image.network(
+            DemoTripData.beManImage,
+            fit: BoxFit.cover,
+            errorBuilder: (_, error, stack) => const ColoredBox(
+              color: AppColors.sand,
+              child: Icon(
+                Icons.restaurant_rounded,
+                size: 48,
+                color: AppColors.primary,
+              ),
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(height: 16),
+      const Row(
+        children: [
+          Expanded(
+            child: Text(
+              'Hải sản Bé Mặn',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+            ),
+          ),
+          _StatusPill('Tin cậy 92%', AppColors.success),
+        ],
+      ),
+      const SizedBox(height: 6),
+      const Text('Lô 14 Hoàng Sa · Hải sản địa phương · 4,5 ★'),
+      const SizedBox(height: 18),
+      const SurfaceCard(
+        color: AppColors.softSurface,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Eyebrow('VÌ SAO PHÙ HỢP'),
+            SizedBox(height: 7),
+            Text(
+              'Đúng ưu tiên ẩm thực địa phương, gần tuyến ven biển và nằm trong ngân sách.',
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 12),
+      const _FactCard(
+        label: 'ĐÃ XÁC MINH',
+        color: AppColors.success,
+        items: [
+          'Địa chỉ và vị trí bản đồ',
+          'Khoảng giá 250k–450k/người',
+          'Có bãi đỗ xe máy',
+        ],
+      ),
+      const SizedBox(height: 10),
+      const _FactCard(
+        label: 'SUY LUẬN',
+        color: AppColors.warning,
+        items: ['Có thể đông sau 19:00', 'Bàn ngoài trời phụ thuộc thời tiết'],
+      ),
+      const SizedBox(height: 10),
+      const _Notice(
+        icon: Icons.warning_amber_rounded,
+        text: 'Giờ mở cửa có thể thay đổi. Nên gọi trước khi đến.',
+      ),
+      const SizedBox(height: 20),
+      Row(
+        children: [
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.bookmark_border_rounded),
+              label: const Text('Lưu'),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: FilledButton.icon(
+              key: const Key('poi-directions-button'),
+              onPressed: onDirections,
+              icon: const Icon(Icons.directions_rounded),
+              label: const Text('Chỉ đường'),
+            ),
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+class _Replan extends StatefulWidget {
+  const _Replan({required this.onBack, required this.onApply});
+  final VoidCallback onBack;
+  final VoidCallback onApply;
+
+  @override
+  State<_Replan> createState() => _ReplanState();
+}
+
+class _ReplanState extends State<_Replan> {
+  String _reason = 'Mưa bất chợt';
+
+  @override
+  Widget build(BuildContext context) => _Page(
+    section: 'Điều chỉnh chuyến đi',
+    leadingBack: widget.onBack,
+    children: [
+      const _Eyebrow('REPLAN'),
+      const SizedBox(height: 7),
+      Text(
+        'Kế hoạch thay đổi?',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 8),
+      const Text('Chọn tình huống. Davel giữ tối đa những gì vẫn còn hợp lý.'),
+      const SizedBox(height: 16),
+      Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: ['Mưa bất chợt', 'Muốn nghỉ', 'Trễ giờ', 'Thêm địa điểm']
+            .map(
+              (value) => ChoiceChip(
+                selected: _reason == value,
+                label: Text(value),
+                onSelected: (_) => setState(() => _reason = value),
+              ),
+            )
+            .toList(),
+      ),
+      const SizedBox(height: 18),
+      const _ChangeCard(
+        icon: Icons.lock_outline_rounded,
+        title: 'Giữ lại',
+        text: 'Bữa trưa địa phương · Ngân sách 4 triệu',
+        color: AppColors.success,
+      ),
+      const SizedBox(height: 9),
+      const _ChangeCard(
+        icon: Icons.remove_circle_outline,
+        title: 'Bỏ',
+        text: 'Xưởng sách ngoài trời lúc 16:00',
+        color: AppColors.error,
+      ),
+      const SizedBox(height: 9),
+      const _ChangeCard(
+        icon: Icons.swap_horiz_rounded,
+        title: 'Thay thế',
+        text: 'Bảo tàng Chăm · hoạt động trong nhà',
+        color: AppColors.accent,
+      ),
+      const SizedBox(height: 9),
+      const _ChangeCard(
+        icon: Icons.schedule_rounded,
+        title: 'Dời giờ',
+        text: 'Hải sản Bé Mặn → 18:15',
+        color: AppColors.warning,
+      ),
+      const SizedBox(height: 20),
+      FilledButton(
+        key: const Key('apply-replan-button'),
+        onPressed: widget.onApply,
+        child: const Text('Áp dụng kế hoạch mới'),
+      ),
+    ],
+  );
+}
+
+class _Page extends StatelessWidget {
+  const _Page({
+    required this.children,
+    this.section = 'Lịch trình',
+    this.showHeader = true,
+    this.leadingBack,
+  });
+  final List<Widget> children;
+  final String section;
+  final bool showHeader;
+  final VoidCallback? leadingBack;
+
+  @override
+  Widget build(BuildContext context) => ColoredBox(
+    color: AppColors.canvas,
+    child: Column(
+      children: [
+        if (showHeader)
+          AppHeader(
+            compact: true,
+            section: section,
+            trailing: leadingBack == null
+                ? null
+                : IconButton(
+                    onPressed: leadingBack,
+                    icon: const Icon(Icons.arrow_back_rounded),
+                  ),
+          ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 28),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: children,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _BrandMark extends StatelessWidget {
+  const _BrandMark();
+  @override
+  Widget build(BuildContext context) => const Row(
+    children: [
+      CircleAvatar(
+        backgroundColor: AppColors.primary,
+        child: Icon(Icons.route_rounded, color: Colors.white),
+      ),
+      SizedBox(width: 10),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Davel Trace',
             style: TextStyle(
-              fontSize: 8,
-              color: AppColors.blue,
+              color: AppColors.primary,
+              fontSize: 18,
               fontWeight: FontWeight.w800,
             ),
           ),
           Text(
-            'Tạo chuyến đi mới',
-            style: Theme.of(context).textTheme.titleLarge,
+            'Da Nang Planner',
+            style: TextStyle(color: AppColors.muted, fontSize: 11),
           ),
-          const Text(
-            'Chọn thông tin để tạo lịch trình phù hợp.',
-            style: TextStyle(fontSize: 9),
+        ],
+      ),
+    ],
+  );
+}
+
+class _Eyebrow extends StatelessWidget {
+  const _Eyebrow(this.text);
+  final String text;
+  @override
+  Widget build(BuildContext context) => Text(
+    text,
+    style: const TextStyle(
+      color: AppColors.accent,
+      fontSize: 10,
+      fontWeight: FontWeight.w800,
+      letterSpacing: 1.1,
+    ),
+  );
+}
+
+class _SectionTitle extends StatelessWidget {
+  const _SectionTitle(this.text);
+  final String text;
+  @override
+  Widget build(BuildContext context) => Text(
+    text,
+    style: const TextStyle(
+      color: AppColors.ink,
+      fontSize: 14,
+      fontWeight: FontWeight.w800,
+    ),
+  );
+}
+
+class _SelectionTile extends StatelessWidget {
+  const _SelectionTile({
+    required this.title,
+    required this.subtitle,
+    required this.selected,
+    required this.onTap,
+  });
+  final String title;
+  final String subtitle;
+  final bool selected;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) => Material(
+    color: selected ? AppColors.softSurface : AppColors.surface,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+      side: BorderSide(
+        color: selected ? AppColors.primary : AppColors.outline,
+        width: selected ? 1.5 : 1,
+      ),
+    ),
+    child: ListTile(
+      onTap: onTap,
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w800)),
+      subtitle: Text(subtitle),
+      trailing: Icon(
+        selected ? Icons.check_circle_rounded : Icons.circle_outlined,
+        color: selected ? AppColors.primary : AppColors.outline,
+      ),
+    ),
+  );
+}
+
+class _WeatherBadge extends StatelessWidget {
+  const _WeatherBadge();
+  @override
+  Widget build(BuildContext context) => const _StatusPill(
+    '28°C · Nắng',
+    AppColors.warning,
+    icon: Icons.wb_sunny_outlined,
+  );
+}
+
+class _StatusPill extends StatelessWidget {
+  const _StatusPill(this.text, this.color, {this.icon});
+  final String text;
+  final Color color;
+  final IconData? icon;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+    decoration: BoxDecoration(
+      color: color.withValues(alpha: .12),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (icon != null) ...[
+          Icon(icon, size: 13, color: color),
+          const SizedBox(width: 4),
+        ],
+        Text(
+          text,
+          style: TextStyle(
+            color: color,
+            fontSize: 10,
+            fontWeight: FontWeight.w800,
           ),
-          const SizedBox(height: 12),
-          Row(
+        ),
+      ],
+    ),
+  );
+}
+
+class _InfoField extends StatelessWidget {
+  const _InfoField({required this.icon, required this.label});
+  final IconData icon;
+  final String label;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(14),
+      border: Border.all(color: AppColors.outline),
+    ),
+    child: Row(
+      children: [
+        Icon(icon, size: 17, color: AppColors.primary),
+        const SizedBox(width: 7),
+        Expanded(
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _DateTile extends StatelessWidget {
+  const _DateTile();
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 46,
+    padding: const EdgeInsets.symmetric(vertical: 7),
+    decoration: BoxDecoration(
+      color: AppColors.primary,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: const Column(
+      children: [
+        Text(
+          '20',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        Text('TH09', style: TextStyle(color: Colors.white70, fontSize: 9)),
+      ],
+    ),
+  );
+}
+
+class _CheckRow extends StatelessWidget {
+  const _CheckRow(this.title, this.subtitle, {this.last = false});
+  final String title;
+  final String subtitle;
+  final bool last;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    decoration: BoxDecoration(
+      border: last
+          ? null
+          : const Border(bottom: BorderSide(color: AppColors.outline)),
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(
+          Icons.check_circle_rounded,
+          color: AppColors.success,
+          size: 20,
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: InkWell(
-                  key: const Key('start-date-field'),
-                  onTap: onPickDate,
-                  borderRadius: BorderRadius.circular(12),
-                  child: InputDecorator(
-                    decoration: const InputDecoration(
-                      labelText: 'Khởi hành',
-                      prefixIcon: Icon(Icons.calendar_today_outlined, size: 16),
-                    ),
-                    child: Text(
-                      formattedDate,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: AppColors.ink,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Text(subtitle, style: const TextStyle(fontSize: 12)),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _Notice extends StatelessWidget {
+  const _Notice({required this.icon, required this.text});
+  final IconData icon;
+  final String text;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: AppColors.softSurface,
+      borderRadius: BorderRadius.circular(14),
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: AppColors.accent, size: 19),
+        const SizedBox(width: 9),
+        Expanded(child: Text(text, style: const TextStyle(fontSize: 12))),
+      ],
+    ),
+  );
+}
+
+class _PlanCard extends StatelessWidget {
+  const _PlanCard({
+    required this.title,
+    required this.description,
+    required this.cost,
+    required this.travel,
+    required this.stops,
+    required this.match,
+    this.recommended = false,
+    this.action,
+  });
+  final String title;
+  final String description;
+  final String cost;
+  final String travel;
+  final String stops;
+  final String match;
+  final bool recommended;
+  final Widget? action;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(18),
+      border: Border.all(
+        color: recommended ? AppColors.primary : AppColors.outline,
+        width: recommended ? 1.8 : 1,
+      ),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            if (recommended) const _StatusPill('Đề xuất', AppColors.primary),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(description),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(child: _MetricText(cost, 'chi phí')),
+            Expanded(child: _MetricText(travel, 'di chuyển')),
+            Expanded(child: _MetricText(stops, 'dừng')),
+            Expanded(child: _MetricText(match, 'hợp gu')),
+          ],
+        ),
+        if (action != null) ...[
+          const SizedBox(height: 14),
+          SizedBox(width: double.infinity, child: action!),
+        ],
+      ],
+    ),
+  );
+}
+
+class _MetricText extends StatelessWidget {
+  const _MetricText(this.value, this.label);
+  final String value;
+  final String label;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        value,
+        style: const TextStyle(
+          color: AppColors.ink,
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      Text(label, style: const TextStyle(fontSize: 9)),
+    ],
+  );
+}
+
+class _SummaryMetric extends StatelessWidget {
+  const _SummaryMetric(this.value, this.label);
+  final String value;
+  final String label;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(11),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(14),
+      border: Border.all(color: AppColors.outline),
+    ),
+    child: Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(label, style: const TextStyle(fontSize: 10)),
+      ],
+    ),
+  );
+}
+
+class _TimelineStop extends StatelessWidget {
+  const _TimelineStop({
+    required this.stop,
+    required this.index,
+    required this.isLast,
+    this.onTap,
+  });
+  final TripStop stop;
+  final int index;
+  final bool isLast;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context) => IntrinsicHeight(
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(
+          width: 30,
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 12,
+                backgroundColor: AppColors.primary,
+                child: Text(
+                  '${index + 1}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: InputDecorator(
-                  decoration: const InputDecoration(
-                    labelText: 'Thời gian',
-                    prefixIcon: Icon(Icons.schedule_outlined, size: 16),
-                  ),
-                  child: Text(
-                    '$dayCount ngày ${dayCount > 1 ? dayCount - 1 : 0} đêm',
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
+              if (!isLast)
+                Expanded(child: Container(width: 2, color: AppColors.outline)),
+            ],
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: SurfaceCard(
+              padding: const EdgeInsets.all(12),
+              child: InkWell(
+                key: stop.id == 'be-man' ? const Key('open-poi-button') : null,
+                onTap: onTap,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: stop.color.withValues(alpha: .12),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(stop.icon, color: stop.color),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${stop.time} · ${stop.durationLabel}',
+                            style: const TextStyle(
+                              color: AppColors.accent,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            stop.title,
+                            style: const TextStyle(
+                              color: AppColors.ink,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Text(
+                            stop.subtitle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (onTap != null) const Icon(Icons.chevron_right_rounded),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _FactCard extends StatelessWidget {
+  const _FactCard({
+    required this.label,
+    required this.color,
+    required this.items,
+  });
+  final String label;
+  final Color color;
+  final List<String> items;
+  @override
+  Widget build(BuildContext context) => SurfaceCard(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _StatusPill(label, color),
+        const SizedBox(height: 9),
+        ...items.map(
+          (item) => Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Row(
+              children: [
+                Icon(Icons.check_rounded, color: color, size: 16),
+                const SizedBox(width: 7),
+                Expanded(child: Text(item)),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _ChangeCard extends StatelessWidget {
+  const _ChangeCard({
+    required this.icon,
+    required this.title,
+    required this.text,
+    required this.color,
+  });
+  final IconData icon;
+  final String title;
+  final String text;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => SurfaceCard(
+    padding: const EdgeInsets.all(13),
+    child: Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: color.withValues(alpha: .12),
+          child: Icon(icon, color: color, size: 19),
+        ),
+        const SizedBox(width: 11),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                text,
+                style: const TextStyle(
+                  color: AppColors.ink,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          const Text(
-            'Số ngày trải nghiệm',
-            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 6),
-          Row(
-            children: [1, 2, 3, 4].map((day) {
-              final selected = dayCount == day;
-              return Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: day == 4 ? 0 : 6),
-                  child: ChoiceChip(
-                    selected: selected,
-                    showCheckmark: false,
-                    label: SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        day == 4 ? '4+\nngày' : '$day\nngày',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    onSelected: (_) => onDayChanged(day),
-                    selectedColor: AppColors.blue,
-                    backgroundColor: Colors.white,
-                    labelStyle: TextStyle(
-                      color: selected ? Colors.white : AppColors.navy,
-                      fontSize: 9,
-                      height: 1.1,
-                    ),
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 10),
-          DropdownButtonFormField<TripStop>(
-            initialValue: origin,
-            isDense: true,
-            decoration: const InputDecoration(
-              labelText: 'Điểm xuất phát',
-              prefixIcon: Icon(Icons.location_on_outlined, size: 17),
-            ),
-            items: DemoTripData.origins
-                .map(
-                  (item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item.title,
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ),
-                )
-                .toList(),
-            onChanged: (value) {
-              if (value != null) onOriginChanged(value);
-            },
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'Sở thích trải nghiệm (chọn nhiều)',
-            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 6),
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children:
-                const {
-                  'Ẩm thực': Icons.restaurant_outlined,
-                  'Biển': Icons.beach_access_outlined,
-                  'Thiên nhiên': Icons.landscape_outlined,
-                  'Văn hóa': Icons.museum_outlined,
-                }.entries.map((entry) {
-                  final selected = interests.contains(entry.key);
-                  return FilterChip(
-                    selected: selected,
-                    label: Text(entry.key),
-                    avatar: Icon(
-                      entry.value,
-                      size: 13,
-                      color: selected ? Colors.white : AppColors.blue,
-                    ),
-                    onSelected: (value) => onInterestChanged(entry.key, value),
-                    selectedColor: AppColors.blue,
-                    backgroundColor: Colors.white,
-                    labelStyle: TextStyle(
-                      color: selected ? Colors.white : AppColors.navy,
-                    ),
-                    visualDensity: VisualDensity.compact,
-                  );
-                }).toList(),
-          ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              key: const Key('generate-plan-button'),
-              onPressed: onGenerate,
-              icon: const Icon(Icons.auto_awesome, size: 15),
-              label: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 11),
-                child: Text('Tạo lịch trình & xem bản đồ'),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimelineTile extends StatelessWidget {
-  const _TimelineTile({
-    required this.activity,
-    required this.selected,
-    required this.isLast,
-    required this.onTap,
-  });
-
-  final TripStop activity;
-  final bool selected;
-  final bool isLast;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            width: 26,
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: onTap,
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: selected ? AppColors.success : AppColors.outline,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      selected ? Icons.check : Icons.add,
-                      color: Colors.white,
-                      size: 13,
-                    ),
-                  ),
-                ),
-                if (!isLast)
-                  Expanded(
-                    child: Container(width: 2, color: const Color(0xFFD5D9E4)),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 7),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: AppColors.outline),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      _TinyPill(label: activity.time, color: AppColors.sky),
-                      const SizedBox(width: 5),
-                      const Icon(
-                        Icons.schedule,
-                        size: 10,
-                        color: AppColors.muted,
-                      ),
-                      const SizedBox(width: 2),
-                      Text(
-                        activity.durationLabel,
-                        style: const TextStyle(fontSize: 8),
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.star_rounded,
-                        size: 13,
-                        color: AppColors.amber,
-                      ),
-                      Text(
-                        '${activity.rating ?? 4.5}',
-                        style: const TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(width: 3),
-                      const Icon(
-                        Icons.more_vert_rounded,
-                        size: 16,
-                        color: AppColors.muted,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: SizedBox(
-                          width: 62,
-                          height: 58,
-                          child: Image.network(
-                            activity.imageUrl,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, error, stackTrace) => ColoredBox(
-                              color: activity.color.withValues(alpha: .14),
-                              child: Icon(activity.icon, color: activity.color),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 9),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              activity.title,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              activity.subtitle,
-                              style: const TextStyle(fontSize: 8),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 5),
-                            Wrap(
-                              spacing: 4,
-                              runSpacing: 3,
-                              children: [
-                                ...activity.tags.map(
-                                  (tag) => _TinyPill(
-                                    label: tag,
-                                    color: AppColors.softSurface,
-                                  ),
-                                ),
-                                if (activity.priceLabel case final price?)
-                                  _TinyPill(
-                                    label: price,
-                                    color: const Color(0xFFFFF1D8),
-                                  ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TinyPill extends StatelessWidget {
-  const _TinyPill({required this.label, required this.color});
-
-  final String label;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w700),
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }

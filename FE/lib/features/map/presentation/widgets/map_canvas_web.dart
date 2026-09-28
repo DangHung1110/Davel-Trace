@@ -14,12 +14,14 @@ class MapCanvas extends StatefulWidget {
     required this.routeRevision,
     required this.playRequest,
     required this.pauseRequest,
+    required this.locateRequest,
   });
 
   final List<TripStop> stops;
   final int routeRevision;
   final int playRequest;
   final int pauseRequest;
+  final int locateRequest;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -69,6 +71,7 @@ class _MapCanvasState extends State<MapCanvas> {
     _iframe = web.HTMLIFrameElement()
       ..src = _mapUrl(autoPlay: widget.routeRevision > 0)
       ..title = 'Bản đồ 3D Đà Nẵng'
+      ..setAttribute('allow', 'geolocation')
       ..setAttribute('allowfullscreen', 'true')
       ..style.border = '0'
       ..style.width = '100%'
@@ -88,6 +91,9 @@ class _MapCanvasState extends State<MapCanvas> {
       _send('playRoute');
     } else if (widget.pauseRequest != oldWidget.pauseRequest) {
       _send('pauseRoute');
+    }
+    if (widget.locateRequest != oldWidget.locateRequest) {
+      _send('locateUser');
     }
   }
 

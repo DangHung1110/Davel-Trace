@@ -6,9 +6,18 @@ import '../../itinerary/domain/demo_trip.dart';
 import 'widgets/map_canvas.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key, required this.stops, required this.planRevision});
+  const MapScreen({
+    super.key,
+    required this.stops,
+    required this.planRevision,
+    required this.onOpenPoi,
+    required this.onOpenReplan,
+  });
+
   final List<TripStop> stops;
   final int planRevision;
+  final VoidCallback onOpenPoi;
+  final VoidCallback onOpenReplan;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -17,27 +26,20 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   int _playRequest = 0;
   int _pauseRequest = 0;
+  int _locateRequest = 0;
   bool _isPlaying = false;
 
-  int get _activityCount => widget.stops.isEmpty ? 0 : widget.stops.length - 1;
-  int get _visitMinutes =>
-      widget.stops.fold(0, (total, stop) => total + stop.durationMinutes);
-
-  String get _durationLabel {
-    final hours = _visitMinutes ~/ 60;
-    final minutes = _visitMinutes % 60;
-    return minutes == 0 ? '$hours giờ' : '$hours giờ $minutes phút';
-  }
-
-  void _playCar() => setState(() {
+  void _play() => setState(() {
     _playRequest++;
     _isPlaying = true;
   });
 
-  void _pauseCar() => setState(() {
+  void _pause() => setState(() {
     _pauseRequest++;
     _isPlaying = false;
   });
+
+  void _locate() => setState(() => _locateRequest++);
 
   @override
   void didUpdateWidget(covariant MapScreen oldWidget) {
@@ -50,7 +52,16 @@ class _MapScreenState extends State<MapScreen> {
     final nextStop = widget.stops.length > 1 ? widget.stops[1] : null;
     return Column(
       children: [
-        const AppHeader(),
+        AppHeader(
+          compact: true,
+          section: 'Chuyến đi đang diễn ra',
+          trailing: IconButton(
+            key: const Key('open-map-replan-button'),
+            tooltip: 'Điều chỉnh lịch trình',
+            onPressed: widget.onOpenReplan,
+            icon: const Icon(Icons.tune_rounded),
+          ),
+        ),
         Expanded(
           child: Stack(
             children: [
@@ -60,61 +71,50 @@ class _MapScreenState extends State<MapScreen> {
                   routeRevision: widget.planRevision,
                   playRequest: _playRequest,
                   pauseRequest: _pauseRequest,
+                  locateRequest: _locateRequest,
                 ),
               ),
               Positioned(
-                top: 10,
+                top: 12,
                 left: 12,
                 right: 12,
-                child: Material(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  elevation: 3,
-                  shadowColor: const Color(0x22121B2E),
-                  child: TextField(
-                    readOnly: true,
-                    onTap: () => _showStops(context),
-                    style: const TextStyle(fontSize: 11),
-                    decoration: const InputDecoration(
-                      hintText: 'Tìm địa điểm ở Đà Nẵng...',
-                      prefixIcon: Icon(Icons.search_rounded, size: 20),
-                      suffixIcon: Icon(Icons.tune_rounded, size: 19),
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              const Positioned(
-                top: 66,
-                left: 12,
-                child: _MapPill(
-                  icon: Icons.wb_sunny_outlined,
-                  label: '26°C · Nắng nhẹ',
-                ),
-              ),
-              Positioned(
-                top: 66,
-                right: 12,
-                child: _MapPill(
-                  icon: Icons.view_in_ar_outlined,
-                  label: '3D',
-                  onTap: () {},
-                ),
-              ),
-              Positioned(
-                left: 12,
-                right: 12,
-                bottom: 176,
                 child: Row(
                   children: [
-                    const _RouteState(label: 'Đang tải route'),
-                    const SizedBox(width: 5),
-                    const _RouteState(label: 'Đã tạo lộ trình'),
-                    const SizedBox(width: 5),
-                    _RouteState(
-                      label: _isPlaying ? 'Xe đang chạy' : 'Sẵn sàng',
-                      active: _isPlaying,
+                    const _MapPill(
+                      icon: Icons.cloud_off_outlined,
+                      label: 'Offline · 08:30',
+                    ),
+                    const Spacer(),
+                    _RoundMapButton(
+                      key: const Key('locate-user-button'),
+                      icon: Icons.my_location_rounded,
+                      tooltip: 'Vị trí hiện tại',
+                      onPressed: _locate,
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 58,
+                right: 12,
+                child: Column(
+                  children: [
+                    _RoundMapButton(
+                      icon: Icons.add_rounded,
+                      tooltip: 'Phóng to',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 7),
+                    _RoundMapButton(
+                      icon: Icons.remove_rounded,
+                      tooltip: 'Thu nhỏ',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 7),
+                    _RoundMapButton(
+                      icon: Icons.view_in_ar_outlined,
+                      tooltip: 'Bản đồ 3D',
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -122,172 +122,14 @@ class _MapScreenState extends State<MapScreen> {
               Positioned(
                 left: 12,
                 right: 12,
-                bottom: 10,
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x29121B2E),
-                        blurRadius: 25,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            'LỘ TRÌNH NGÀY 1',
-                            style: TextStyle(
-                              fontSize: 8,
-                              color: AppColors.blue,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          Container(
-                            width: 5,
-                            height: 5,
-                            decoration: const BoxDecoration(
-                              color: AppColors.success,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigation_rounded,
-                            size: 12,
-                            color: AppColors.blue,
-                          ),
-                          const SizedBox(width: 3),
-                          const Text(
-                            'GPS Tốt',
-                            style: TextStyle(
-                              fontSize: 8,
-                              color: AppColors.blue,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      const Text(
-                        'Hành trình demo',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 7),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.softSurface,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: [
-                            _Metric(
-                              icon: Icons.pin_drop_outlined,
-                              label: 'Điểm dừng',
-                              value: '$_activityCount điểm',
-                            ),
-                            const _MetricDivider(),
-                            const _Metric(
-                              icon: Icons.route_outlined,
-                              label: 'Quãng đường',
-                              value: '12,4 km',
-                            ),
-                            const _MetricDivider(),
-                            _Metric(
-                              icon: Icons.schedule_outlined,
-                              label: 'Thời gian',
-                              value: _durationLabel,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 7),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.near_me_rounded,
-                            size: 13,
-                            color: AppColors.blue,
-                          ),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: Text(
-                              nextStop == null
-                                  ? 'Chưa có điểm đến'
-                                  : 'Điểm tiếp theo: ${nextStop.title}',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 9,
-                                color: AppColors.deepBlue,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            '2,4 km',
-                            style: TextStyle(
-                              fontSize: 9,
-                              color: AppColors.blue,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: FilledButton.icon(
-                              key: const Key('play-car-button'),
-                              onPressed: widget.stops.length > 1
-                                  ? _playCar
-                                  : null,
-                              style: FilledButton.styleFrom(
-                                backgroundColor: AppColors.success,
-                              ),
-                              icon: Icon(
-                                _isPlaying
-                                    ? Icons.directions_car_filled_rounded
-                                    : Icons.play_arrow_rounded,
-                                size: 17,
-                              ),
-                              label: Text(_isPlaying ? 'Đang chạy' : 'Chạy xe'),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          IconButton.filledTonal(
-                            tooltip: 'Tạm dừng',
-                            onPressed: _isPlaying ? _pauseCar : null,
-                            icon: const Icon(Icons.pause_rounded, size: 18),
-                          ),
-                          const SizedBox(width: 4),
-                          IconButton.filledTonal(
-                            tooltip: 'Chạy lại',
-                            onPressed: widget.stops.length > 1
-                                ? _playCar
-                                : null,
-                            icon: const Icon(Icons.replay_rounded, size: 18),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                bottom: 12,
+                child: _ActiveTripCard(
+                  nextStop: nextStop,
+                  stopCount: widget.stops.isEmpty ? 0 : widget.stops.length - 1,
+                  isPlaying: _isPlaying,
+                  onPlay: widget.stops.length > 1 ? _play : null,
+                  onPause: _isPlaying ? _pause : null,
+                  onOpenPoi: widget.onOpenPoi,
                 ),
               ),
             ],
@@ -296,133 +138,185 @@ class _MapScreenState extends State<MapScreen> {
       ],
     );
   }
-
-  void _showStops(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Các điểm trên tuyến',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              ...widget.stops.indexed.map(
-                (entry) => ListTile(
-                  dense: true,
-                  leading: CircleAvatar(
-                    backgroundColor: entry.$2.color.withValues(alpha: .12),
-                    child: Text(
-                      entry.$1 == 0 ? 'A' : '${entry.$1}',
-                      style: TextStyle(
-                        color: entry.$2.color,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ),
-                  title: Text(entry.$2.title),
-                  subtitle: Text(entry.$2.subtitle),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
 
-class _MapPill extends StatelessWidget {
-  const _MapPill({required this.icon, required this.label, this.onTap});
-  final IconData icon;
-  final String label;
-  final VoidCallback? onTap;
+class _ActiveTripCard extends StatelessWidget {
+  const _ActiveTripCard({
+    required this.nextStop,
+    required this.stopCount,
+    required this.isPlaying,
+    required this.onPlay,
+    required this.onPause,
+    required this.onOpenPoi,
+  });
+
+  final TripStop? nextStop;
+  final int stopCount;
+  final bool isPlaying;
+  final VoidCallback? onPlay;
+  final VoidCallback? onPause;
+  final VoidCallback onOpenPoi;
+
   @override
-  Widget build(BuildContext context) => Material(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(20),
-    elevation: 2,
-    child: InkWell(
-      onTap: onTap,
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(14),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
       borderRadius: BorderRadius.circular(20),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-        child: Row(
+      border: Border.all(color: AppColors.outline),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x26173C35),
+          blurRadius: 24,
+          offset: Offset(0, 8),
+        ),
+      ],
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Row(
           children: [
-            Icon(icon, size: 13, color: AppColors.blue),
-            const SizedBox(width: 4),
             Text(
-              label,
-              style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
+              'ĐANG ĐI · 2/4',
+              style: TextStyle(
+                color: AppColors.accent,
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+                letterSpacing: .8,
+              ),
+            ),
+            Spacer(),
+            Icon(Icons.wb_sunny_outlined, color: AppColors.warning, size: 15),
+            SizedBox(width: 4),
+            Text(
+              '28°C',
+              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
             ),
           ],
         ),
-      ),
-    ),
-  );
-}
-
-class _RouteState extends StatelessWidget {
-  const _RouteState({required this.label, this.active = false});
-  final String label;
-  final bool active;
-  @override
-  Widget build(BuildContext context) => Expanded(
-    child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      decoration: BoxDecoration(
-        color: active
-            ? AppColors.deepBlue
-            : Colors.white.withValues(alpha: .94),
-        borderRadius: BorderRadius.circular(9),
-      ),
-      child: Text(
-        label,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: active ? Colors.white : AppColors.muted,
-          fontSize: 7,
-          fontWeight: FontWeight.w700,
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Container(
+              width: 43,
+              height: 43,
+              decoration: BoxDecoration(
+                color: AppColors.softSurface,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: const Icon(
+                Icons.restaurant_menu_rounded,
+                color: AppColors.primary,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Điểm tiếp theo',
+                    style: TextStyle(fontSize: 10, color: AppColors.muted),
+                  ),
+                  Text(
+                    nextStop?.title ?? 'Chưa có điểm đến',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppColors.ink,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const Text(
+                    '12 phút · 3,2 km',
+                    style: TextStyle(fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: onOpenPoi,
+              icon: const Icon(Icons.chevron_right_rounded),
+            ),
+          ],
         ),
-      ),
+        const SizedBox(height: 9),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppColors.softSurface,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
+              const _Divider(),
+              const _TripMetric(value: '750k', label: 'còn lại'),
+              const _Divider(),
+              const _TripMetric(value: '18:15', label: 'kết thúc'),
+            ],
+          ),
+        ),
+        const SizedBox(height: 9),
+        Row(
+          children: [
+            Expanded(
+              child: FilledButton.icon(
+                key: const Key('play-car-button'),
+                onPressed: onPlay,
+                icon: Icon(
+                  isPlaying
+                      ? Icons.directions_car_filled_rounded
+                      : Icons.play_arrow_rounded,
+                  size: 18,
+                ),
+                label: Text(isPlaying ? 'Đang di chuyển' : 'Mô phỏng tuyến'),
+              ),
+            ),
+            const SizedBox(width: 7),
+            IconButton.filledTonal(
+              tooltip: 'Tạm dừng',
+              onPressed: onPause,
+              icon: const Icon(Icons.pause_rounded),
+            ),
+            const SizedBox(width: 5),
+            IconButton.filledTonal(
+              tooltip: 'Chi tiết địa điểm',
+              onPressed: onOpenPoi,
+              icon: const Icon(Icons.info_outline_rounded),
+            ),
+          ],
+        ),
+      ],
     ),
   );
 }
 
-class _Metric extends StatelessWidget {
-  const _Metric({required this.icon, required this.label, required this.value});
+class _MapPill extends StatelessWidget {
+  const _MapPill({required this.icon, required this.label});
   final IconData icon;
   final String label;
-  final String value;
   @override
-  Widget build(BuildContext context) => Expanded(
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+    decoration: BoxDecoration(
+      color: AppColors.surface.withValues(alpha: .94),
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [BoxShadow(color: Color(0x18173C35), blurRadius: 8)],
+    ),
     child: Row(
       children: [
-        Icon(icon, size: 15, color: AppColors.blue),
+        Icon(icon, color: AppColors.primary, size: 14),
         const SizedBox(width: 5),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(fontSize: 7, color: AppColors.muted),
-              ),
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 9,
-                  fontWeight: FontWeight.w800,
-                ),
-                maxLines: 1,
-              ),
-            ],
+        Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.ink,
+            fontSize: 10,
+            fontWeight: FontWeight.w800,
           ),
         ),
       ],
@@ -430,13 +324,55 @@ class _Metric extends StatelessWidget {
   );
 }
 
-class _MetricDivider extends StatelessWidget {
-  const _MetricDivider();
+class _RoundMapButton extends StatelessWidget {
+  const _RoundMapButton({
+    super.key,
+    required this.icon,
+    required this.tooltip,
+    required this.onPressed,
+  });
+  final IconData icon;
+  final String tooltip;
+  final VoidCallback onPressed;
   @override
-  Widget build(BuildContext context) => Container(
-    width: 1,
-    height: 26,
-    margin: const EdgeInsets.symmetric(horizontal: 5),
-    color: AppColors.outline,
+  Widget build(BuildContext context) => IconButton.filled(
+    tooltip: tooltip,
+    onPressed: onPressed,
+    style: IconButton.styleFrom(
+      backgroundColor: AppColors.surface,
+      foregroundColor: AppColors.primary,
+      shadowColor: const Color(0x28173C35),
+      elevation: 3,
+    ),
+    icon: Icon(icon, size: 19),
   );
+}
+
+class _TripMetric extends StatelessWidget {
+  const _TripMetric({required this.value, required this.label});
+  final String value;
+  final String label;
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.ink,
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        Text(label, style: const TextStyle(fontSize: 9)),
+      ],
+    ),
+  );
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+  @override
+  Widget build(BuildContext context) =>
+      Container(width: 1, height: 24, color: AppColors.outline);
 }

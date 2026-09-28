@@ -17,23 +17,38 @@ class _MainShellState extends State<MainShell> {
   int _selectedIndex = 0;
   int _planRevision = 0;
   List<TripStop> _routeStops = DemoTripData.defaultRoute;
+  PlannerView _plannerView = PlannerView.onboarding;
 
   void _showGeneratedPlan(List<TripStop> stops) {
     setState(() {
       _routeStops = stops;
       _planRevision++;
-      _selectedIndex = 1;
+      _plannerView = PlannerView.itinerary;
     });
   }
+
+  void _showPlanner(PlannerView view) => setState(() {
+    _plannerView = view;
+    _selectedIndex = 0;
+  });
+
+  void _openMap() => setState(() => _selectedIndex = 1);
+
+  void _selectSection(int index) => setState(() {
+    _selectedIndex = index;
+    if (index == 0 && _plannerView == PlannerView.onboarding) {
+      _plannerView = PlannerView.planner;
+    }
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3E8F2),
+      backgroundColor: AppColors.sand,
       body: LayoutBuilder(
         builder: (context, constraints) {
           final appWidth = constraints.maxWidth > 600
-              ? 430.0
+              ? 440.0
               : constraints.maxWidth;
           return SafeArea(
             child: Center(
@@ -50,44 +65,51 @@ class _MainShellState extends State<MainShell> {
                           index: _selectedIndex,
                           children: [
                             ItineraryScreen(
+                              view: _plannerView,
+                              onViewChanged: _showPlanner,
                               onPlanGenerated: _showGeneratedPlan,
+                              onStartTrip: _openMap,
                             ),
                             MapScreen(
                               stops: _routeStops,
                               planRevision: _planRevision,
+                              onOpenPoi: () => _showPlanner(PlannerView.poi),
+                              onOpenReplan: () =>
+                                  _showPlanner(PlannerView.replan),
                             ),
                             const ExpensesScreen(),
                           ],
                         ),
                       ),
-                      NavigationBar(
-                        selectedIndex: _selectedIndex,
-                        onDestinationSelected: (index) =>
-                            setState(() => _selectedIndex = index),
-                        destinations: const [
-                          NavigationDestination(
-                            icon: Icon(Icons.route_outlined, size: 21),
-                            selectedIcon: Icon(Icons.route_rounded, size: 21),
-                            label: 'Lịch trình',
-                          ),
-                          NavigationDestination(
-                            icon: Icon(Icons.map_outlined, size: 21),
-                            selectedIcon: Icon(Icons.map_rounded, size: 21),
-                            label: 'Bản đồ',
-                          ),
-                          NavigationDestination(
-                            icon: Icon(
-                              Icons.account_balance_wallet_outlined,
-                              size: 21,
+                      if (_plannerView != PlannerView.onboarding ||
+                          _selectedIndex != 0)
+                        NavigationBar(
+                          selectedIndex: _selectedIndex,
+                          onDestinationSelected: _selectSection,
+                          destinations: const [
+                            NavigationDestination(
+                              icon: Icon(Icons.route_outlined, size: 21),
+                              selectedIcon: Icon(Icons.route_rounded, size: 21),
+                              label: 'Lịch trình',
                             ),
-                            selectedIcon: Icon(
-                              Icons.account_balance_wallet_rounded,
-                              size: 21,
+                            NavigationDestination(
+                              icon: Icon(Icons.map_outlined, size: 21),
+                              selectedIcon: Icon(Icons.map_rounded, size: 21),
+                              label: 'Bản đồ',
                             ),
-                            label: 'Chi tiêu',
-                          ),
-                        ],
-                      ),
+                            NavigationDestination(
+                              icon: Icon(
+                                Icons.account_balance_wallet_outlined,
+                                size: 21,
+                              ),
+                              selectedIcon: Icon(
+                                Icons.account_balance_wallet_rounded,
+                                size: 21,
+                              ),
+                              label: 'Chi tiêu',
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),

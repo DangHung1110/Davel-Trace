@@ -11,27 +11,34 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  static const _budget = 2000000;
+  static const _budget = 4000000;
   String _selectedCategory = 'Tất cả';
   final List<_Expense> _expenses = [
     const _Expense(
-      'Mì Quảng Bà Mua',
+      'Hải sản Bé Mặn',
       'Ăn uống',
-      120000,
+      750000,
       Icons.restaurant_outlined,
       AppColors.amber,
     ),
     const _Expense(
       'Thuê xe máy',
       'Di chuyển',
-      150000,
+      350000,
       Icons.two_wheeler_outlined,
       AppColors.blue,
     ),
     const _Expense(
-      'Vé tham quan',
+      'Khách sạn ven sông',
+      'Khách sạn',
+      1800000,
+      Icons.hotel_outlined,
+      AppColors.success,
+    ),
+    const _Expense(
+      'Vé & trải nghiệm',
       'Vui chơi',
-      80000,
+      350000,
       Icons.local_activity_outlined,
       AppColors.coral,
     ),
@@ -88,7 +95,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       color: AppColors.canvas,
       child: Column(
         children: [
-          const AppHeader(),
+          const AppHeader(compact: true, section: 'Chi tiêu'),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(14, 12, 14, 8),
@@ -135,14 +142,14 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF0063EF), Color(0xFF246BFD)],
+                        colors: [AppColors.primary, Color(0xFF315B52)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(22),
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0x33246BFD),
+                          color: Color(0x33173C35),
                           blurRadius: 20,
                           offset: Offset(0, 9),
                         ),
@@ -207,7 +214,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             value: spentPercent,
                             backgroundColor: Colors.white24,
                             valueColor: const AlwaysStoppedAnimation(
-                              Color(0xFF8FC7FF),
+                              AppColors.accent,
                             ),
                           ),
                         ),
