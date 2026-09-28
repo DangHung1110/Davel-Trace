@@ -99,7 +99,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Independent Test**: one request → ≥2 feasible plans with distinct scores/reasons
 
 - [X] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`)
-- [ ] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`)
+- [ ] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`) [T032s DONE 2026-09-28 lane B: score_plan in profiles.py; select endpoint = T033e lane C]
 - [ ] T034 [US4] Integration test US4 (distinctness + selection persistence)
 
 ---
