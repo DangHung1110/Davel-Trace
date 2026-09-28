@@ -10,8 +10,10 @@ Free plan: 250 searches/month. Hard cap trong code: **240** (buffer 10).
   districts: Hải Châu, Sơn Trà, Ngũ Hành Sơn, Liên Chiểu, Thanh Khê.
 - Details cho place_id MỚI (search payload đã có rating/hours cho nhiều
   chỗ — details chỉ lấp lỗ hổng): **≤200**.
-- Tổng: 30 + 200 = **230 ≤ 240**. Vòng details tự dừng khi chạm cap;
-  place còn lại deferred, resume an toàn (cache giữ nguyên).
+- **Thực tế bulk 2026-09-28: 30 searches + 20 details lỗi (endpoint sai,
+  đã bỏ) = 50/240.** Search-only từ đó: 333 place_ids → lọc bbox Đà Nẵng
+  (loại 4: Hội An/QN/geocode lỗi) → **329 POIs** (core đủ 327, hours 68%,
+  rating 97%, coords 100%). File: `BE/data/snapshots/danang-v1/pois.json`.
 
 ## Lấy key (5 phút, chưa làm — KHÔNG bulk khi chưa có key)
 
