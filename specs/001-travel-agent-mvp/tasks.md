@@ -174,7 +174,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T056 [P] Radar-chart comparison script (hybrid vs baselines)
 - [ ] T057 Full quickstart.md validation run (S1–S7 green)
 - [ ] T058 Docs: README BE run guide + demo video script (mock GPS timeline + rain scenario)
-- [ ] T059 Security sweep: no secrets, `.env` excluded, logs redacted
+- [X] T059 Security sweep: no secrets, `.env` excluded, logs redacted
 
 ---
 
