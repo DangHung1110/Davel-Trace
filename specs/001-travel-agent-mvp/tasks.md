@@ -24,7 +24,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Apify one-shot (free $5, test 10 trước, ≤2 ngày; tắc >2 ngày → fallback Overpass + tay): normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
 - [ ] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8)
 - [X] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
-- [ ] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
+- [X] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
 - [ ] T006 [P] FE API client skeleton (`FE/lib/api/client.dart`, base URL config)
 
 ---
