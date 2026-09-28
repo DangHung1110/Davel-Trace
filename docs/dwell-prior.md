@@ -7,11 +7,23 @@ Method fixes applied honestly during build:
   categories abstain to nac-1.
 - `đ` NFD trap (same as T003c-N1FILL).
 
-## Posteriors (n=1,136 dwells)
+## Posteriors (regenerated DIRECTLY from duration_prior.json, 2026-09-28)
 
-attraction 119 (high) / restaurant 38 (high) / market 16 (high) /
-museum 58, cafe 62, nature 72, landmark 61 (medium) / park 85 (low) /
-beach + transport: n=0 → nac-1 fallback.
+| category | n | confidence | p25 | p50 | p75 |
+|---|---|---|---|---|---|
+| attraction | 235 | high | 52.6 | 119.0 | 174.4 |
+| beach | 0 | low | 84.0 | 120.0 | 168.0 |
+| cafe | 69 | medium | 24.7 | 62.5 | 158.9 |
+| landmark | 44 | medium | 26.5 | 60.7 | 113.9 |
+| market | 453 | high | 9.0 | 16.2 | 59.0 |
+| museum | 38 | medium | 29.8 | 58.2 | 115.8 |
+| nature | 59 | medium | 37.9 | 72.5 | 161.2 |
+| park | 15 | low | 58.2 | 84.8 | 139.7 |
+| restaurant | 223 | high | 17.2 | 37.9 | 89.2 |
+| transport | 0 | low | 14.0 | 20.0 | 28.0 |
+| TOTAL | **1136** | | | | |
+
+beach + transport n=0 → nac-1 fallback.
 
 Known bias: same-venue double-checkins select short lingerers —
 posteriors run BELOW nac-1 defaults (smoke log-MAE 0.546 on seed 7).
