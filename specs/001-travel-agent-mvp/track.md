@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T043 — Review hallucination sweep test (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits b3bbce2 + e728e85). (1) Vùng file: OK — chỉ thêm BE/tests/integration/test_hallucination_sweep.py (vùng C); tasks.md chỉ tick 1 dòng T043. (2) Chạy pytest sweep: 4/4 PASSED (clean pass / ghost 'POI tu che: atlantis' / tên sai 'ten sai' / giờ bịa 'gio tu che: 18:00-22:00'); full `pytest BE/tests/`: 68/68 passed exit 0; py_compile exit 0. (3) Sweep THẬT không mock ảo: inputs tampered cụ thể chạy qua logic sweep() thật (lookup id snapshot, so tên, regex giờ cross-check toàn texts itinerary+claims+facts, cộng validate_plan) — assertions kiểm output thật từng case. NOTE (không FIX): hàm sweep() hiện nằm test-local, chưa có điểm gọi production (ví dụ endpoint evaluate T052) — wiring phase-PR. (4) Tick xứng đáng: T043 đòi cross-check POI names/hours vs snapshot — giao đủ 4 case; 'US7 closed' đúng (T042 builder + T043 sweep xong). (5) Secret-scan diff b3bbce2~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T042 — Review explanation builder fact/inference-split (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 2de41fe + 0889023). (1) Vùng file: OK — BE/app/services/explainer.py (mới, vùng C) + BE/tests/unit/test_explainer.py; tasks.md chỉ tick 1 dòng T042. (2) Chạy test file: 4/4 OK exit 0; full `pytest BE/tests/`: 64/64 passed exit 0; py_compile cả 2 file exit 0. (3) Fact/inference ĐÚNG: sample plan mỗi decision có facts + inference_marked True, violations rỗng; unverified tự gắn cờ 'chua xac minh — khong phai fact (FR-026)' và qua validate; inference luôn kèm inference_marked; from_ranked cắm trực tiếp shapes {reasons,fired} của rank/context/retrieval (giữ lời hứa format T016). (4) validate_plan bắt thiếu lý do: reason-less → 1 violation FR-023; unverified không cờ (dict tự chế) → 1 violation FR-026. (5) Tick xứng đáng: T042 đòi claim+evidence|inference+source per decision — giao đủ + explain_plan bọc violations; commit 'US7 opened' (mở, T043 sweep còn lại — không nhận vơ). (6) Secret-scan diff 2de41fe~1..HEAD: 0 hit. Worktree sạch.
