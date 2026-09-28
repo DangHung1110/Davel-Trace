@@ -1,0 +1,8 @@
+# BE requirements (T001). Python 3.11. Install: pip install -r BE/requirements.txt
+fastapi
+uvicorn
+ortools
+lightgbm
+pydantic
+pytest
+httpx
