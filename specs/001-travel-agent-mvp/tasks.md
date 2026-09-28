@@ -146,7 +146,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [X] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
 - [X] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
 - [ ] T047 [US8] Mock GPS feed interface + timeline file for video demo
-- [ ] T048 [US8] Integration test US8 (S5 scenario)
+- [X] T048 [US8] Integration test US8 (S5 scenario)
 
 ---
 
