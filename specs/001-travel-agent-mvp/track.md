@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T058 — Review BE run guide + demo script (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits c32bbdd + f461dd3). (1) Lệnh README CHẠY THẬT được — tự verify: `pytest BE/tests -q` → 74 passed đúng số ghi; `uvicorn BE.app.main:app --port 812x` boot được, `GET /v1/health` → đúng `{"status":"ok","snapshot":"danang-v1"}`; POST /v1/expenses dạng `-d "@body.json"` → 201 entry + summary spent/left đúng; requirements đủ 7 deps đã cài (không reinstall mạng, import thực tế qua test/server đủ chứng minh). (2) Demo script đủ 5 scenes (health/parse-VI/multi-plan+select/GPS-rain-replan/budget-alerts) + mục Fallback venue mất mạng (quay full-local sẵn + warm-up 5 phút). (3) Không hướng dẫn sai: README ghi rõ parse cần LLM (không LLM → lỗi transport, không crash) + itinerary cần snapshot lane A (đủ merge mới có); demo prep ghi snapshot + Ollama/API-key điều kiện. (4) Tick xứng đáng: T058 đòi README run guide + demo script (mock GPS timeline + rain scenario) — giao đủ, số liệu đã verify khớp thực tế. (5) Secret-scan diff c32bbdd~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T059 — Review security sweep no-secrets (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 6ee6573 + 11c763a). (1) Vùng file: OK — chỉ thêm BE/tests/unit/test_no_secrets.py (vùng C); tasks.md chỉ tick 1 dòng T059. (2) Chạy test file: 2/2 OK exit 0 (patterns + env excluded); full `pytest BE/tests/`: 74/74 passed exit 0; py_compile exit 0. (3) Sweep THẬT không pass ảo: 7 patterns thật (sk-/AIza/xox/ghp/password=/Bearer dài/credential-URL) quét nội dung `git ls-files` thật (bỏ binary .png/.pmtiles/.exe...), allowlist fakes rõ (test/fake/example/placeholder/xxx/sk-test) áp theo context dòng; fail sẽ in hits. (4) .env excluded + example placeholders verify độc lập: `git check-ignore BE/.env` exit 0, ls-files chỉ có .env.example, GOOGLE_PLACES_KEY/OSRM_BASE_URL trống. (5) Tick xứng đáng: T059 đòi no secrets + .env excluded + logs redacted — patterns bao Bearer/credential-URL (dạng lọt qua log), .env kiểm cả untracked + ignored. (6) Worktree sạch.
