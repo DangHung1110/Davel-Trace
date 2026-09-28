@@ -46,6 +46,26 @@ def _mm(t: str) -> int:
     return int(h) * 60 + int(m)
 
 
+def score_plan(plan: dict) -> dict:
+    """Profit/Utility + gate (T032s, lane B; TravelEval-style).
+
+    profit = preference per million VND (value-for-money; savings wins
+    tight budgets). utility = 0.7 preference/5 + 0.3 route efficiency
+    (1 - travel_min/600; experience wins preference-heavy asks).
+    Gate fail (any constraint_status != 1) -> excluded, scores zeroed.
+    """
+    gate = bool(plan.get("constraint_status")) and all(
+        v == 1 for v in plan["constraint_status"].values())
+    if not gate:
+        return {"profit": 0.0, "utility": 0.0, "gate": False, "excluded": True}
+    pref = float(plan.get("preference", 0.0))
+    profit = pref / (1.0 + float(plan.get("total_cost", 0)) / 1000000.0)
+    route_eff = max(0.0, 1.0 - float(plan.get("travel_min", 0)) / 600.0)
+    utility = 0.7 * (pref / 5.0) + 0.3 * route_eff
+    return {"profit": round(profit, 4), "utility": round(utility, 4),
+            "gate": True, "excluded": False}
+
+
 def _hh(m: int) -> str:
     return f"{m // 60:02d}:{m % 60:02d}"
 
