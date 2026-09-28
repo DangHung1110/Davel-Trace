@@ -9,19 +9,9 @@ this builds ONE plan; `version` threads through replan (T046) later.
 
 from __future__ import annotations
 
-import os
-import sys
 import time
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
+from BE.app.services.common import status_map, to_min, total_fee
 
 
 def build_plan(optimizer_out: dict, validation: dict, trip: dict,
@@ -38,20 +28,17 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
                          "source": "cache"})
         total_km += km
         travel_min += minutes
-    visit_min = sum(_to_min(a["end"]) - _to_min(a["start"]) for a in acts)
-    total_cost = sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
-                     for a in acts)
-    checks = validation.get("checks", {})
+    visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
     return {
         "itinerary_id": itinerary_id,
         "trip_id": trip.get("trip_id", "t1"),
         "version": version,
         "activities": acts,
         "segments": segments,
-        "total_cost": total_cost,
+        "total_cost": total_fee(acts, pois),
         "total_km": round(total_km, 2),
         "total_min": visit_min + travel_min,
-        "constraint_status": {k: (1 if v else 0) for k, v in checks.items()},
+        "constraint_status": status_map(validation.get("checks", {})),
         "violations": validation.get("violations", []),
         "passed": validation.get("passed", False),
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%S"),

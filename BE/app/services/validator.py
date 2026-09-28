@@ -11,20 +11,8 @@ logic. Matrix comes from T010 (dict cells here).
 
 from __future__ import annotations
 
-import os
-import sys
-
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-from BE.app.services.gate import CHECKS  # noqa: E402
-
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
+from BE.app.services.common import in_range, to_min, total_fee
+from BE.app.services.gate import CHECKS
 
 
 def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
@@ -37,28 +25,21 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
         out = []
         for a in acts:
             hours = (pois.get(a.get("poi_id"), {}) or {}).get("opening_hours") or []
-            s, e = _to_min(a["start"]), _to_min(a["end"])
-            hit = False
-            for h in hours:
-                o, c = h.split("-")
-                o, c = _to_min(o), _to_min(c)
-                ok = (o <= s and e <= c) if o <= c else (s >= o or e <= c)
-                hit = hit or ok
-            if hours and not hit:
+            s, e = to_min(a["start"]), to_min(a["end"])
+            if hours and not any(in_range(s, e, h) for h in hours):
                 out.append(a.get("poi_id"))
         return out
     if gate == "B3":
         out = []
         ordered = sorted(acts, key=lambda a: a["start"])
         for x, y in zip(ordered, ordered[1:]):
-            gap = _to_min(y["start"]) - _to_min(x["end"])
+            gap = to_min(y["start"]) - to_min(x["end"])
             need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
             if need is None or gap < need:
                 out.append(f"{x['poi_id']}->{y['poi_id']}")
         return out
     if gate == "BCS":
-        cost = int(itinerary.get("total_cost", sum(
-            int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0)) for a in acts)))
+        cost = int(itinerary.get("total_cost", total_fee(acts, pois)))
         return [] if cost <= int(trip.get("budget", 0)) else [f"cost {cost}"]
     return []
 

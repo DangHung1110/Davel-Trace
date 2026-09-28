@@ -15,18 +15,7 @@ Inputs are the same plain dicts as T049 (itinerary/trip/pois/matrix).
 
 from __future__ import annotations
 
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
-
-
-def _in_range(start: int, end: int, spec: str) -> bool:
-    o, c = spec.split("-")
-    o, c = _to_min(o), _to_min(c)
-    if o <= c:
-        return o <= start and end <= c
-    return start >= o or end <= c
+from BE.app.services.common import in_range, to_min, total_fee
 
 
 def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
@@ -40,8 +29,8 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
     """True iff every activity fits its POI opening hours."""
     for a in itinerary.get("activities", []):
         hours = (pois.get(a.get("poi_id"), {}) or {}).get("opening_hours") or []
-        s, e = _to_min(a["start"]), _to_min(a["end"])
-        if hours and not any(_in_range(s, e, h) for h in hours):
+        s, e = to_min(a["start"]), to_min(a["end"])
+        if hours and not any(in_range(s, e, h) for h in hours):
             return False
     return True
 
@@ -50,7 +39,7 @@ def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
     """True iff every transition gap fits matrix travel minutes (B3=0)."""
     acts = sorted(itinerary.get("activities", []), key=lambda a: a["start"])
     for x, y in zip(acts, acts[1:]):
-        gap = _to_min(y["start"]) - _to_min(x["end"])
+        gap = to_min(y["start"]) - to_min(x["end"])
         need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
         if need is None or gap < need:
             return False
@@ -62,8 +51,7 @@ def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
     if "total_cost" in itinerary:
         cost = int(itinerary["total_cost"])
     else:
-        cost = sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
-                   for a in itinerary.get("activities", []))
+        cost = total_fee(itinerary.get("activities", []), pois)
     return cost <= int(trip.get("budget", 0))
 
 
