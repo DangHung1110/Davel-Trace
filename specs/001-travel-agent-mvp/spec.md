@@ -61,7 +61,7 @@ lịch hệ thống phải giữ thứ tự ưu tiên khi khả thi.
 
 ---
 
-### User Story 4 - Chọn trong nhiều phương án đã chấm điểm (Priority: P1)
+### User Story 4 - Chọn trong nhiều phương án đã chấm điểm (Priority: P1-cuối — sau MVP line)
 
 Thay vì 1 lịch duy nhất, hệ thống trình 2–3 phương án (Tiết kiệm / Cân bằng /
 Trải nghiệm) kèm điểm số và khác biệt; người dùng chọn 1 để chốt.
@@ -78,7 +78,7 @@ có điểm và lý do khác biệt.
 
 ---
 
-### User Story 5 - Quản lý chi tiêu trong chuyến đi (Priority: P1)
+### User Story 5 - Quản lý chi tiêu trong chuyến đi (Priority: P1-cuối — sau MVP line)
 
 Ngân sách đặt lúc lập lịch thành hạn mức; người dùng ghi chi thực tế (ăn/vé/xe);
 app báo số còn lại, cảnh báo 80%/100%, và dùng tiền còn lại cho lần xếp lại sau.
@@ -95,7 +95,7 @@ cảnh báo đúng ngưỡng.
 
 ---
 
-### User Story 6 - Lịch tính đến thời tiết (Priority: P1)
+### User Story 6 - Lịch tính đến thời tiết (Priority: P1-cuối — sau MVP line)
 
 Hệ thống tự lấy nhiệt độ + xác suất mưa Đà Nẵng theo giờ; xếp hoạt động ngoài trời
 tránh nắng/mưa gắt và giải thích ("38°C nên đi biển sáng sớm").
@@ -306,15 +306,17 @@ lịch sai bị rớt cổng khả thi, lịch đúng được chấm điểm đ
 ## Assumptions
 
 - MVP 1 thành phố (Đà Nẵng), tối đa 2 ngày; user xác nhận giờ bắt đầu/kết thúc.
-- POI data via Google Places API (legal, ~$3.40 cho 200 POIs); bổ sung thủ công các field API thiếu (visit_duration, intensity, ambience).
+- POI data via Apify one-shot (free $5, test 10 trước, ≤2 ngày; tắc >2 ngày → fallback Overpass + tay); snapshot lưu local; field thiếu (visit_duration, intensity, ambience) bổ sung thủ công + LLM batch (R8).
 - Routing: OSRM snapshot matrix (không dùng VietMap — free, deterministic, offline).
 - Sở thích mềm được nới khi vô nghiệm; ràng buộc cứng không tự nới.
 - LLM không phải nguồn sự thật duy nhất; validator chịu trách nhiệm cuối.
 - User có mạng khi cần search/routing; mất mạng dùng cache/snapshot kèm nhãn.
-- Mobile (Flutter) là FE chính; BE deploy free tier (Render/Fly.io); local dev trên MacBook.
+- Mobile (Flutter) là FE chính; BE deploy free tier (Render/Fly.io) cho test env; local dev trên MacBook; demo day = full local.
 - Dynamic replanning là feature thật (không phải demo-only); demo dùng mock GPS thay GPS thật, interface giống hệt.
 - Không booking/thanh toán thật; key qua `.env`.
 - Ngôn ngữ: tiếng Việt trước, tiếng Anh sau (khi ổn định).
 - Benchmark tự động không bắt buộc hỏi clarification; app thực tế được hỏi lại.
 - Thuộc tính cảm tính ("yên tĩnh", "hợp hẹn hò") là suy luận từ review, luôn gắn uncertainty.
 - Đi công tác tắt phạt điểm đã đi; user mới onboarding trước khi gợi ý.
+- LLM qua biến môi trường `LLM_PROVIDER=local|api` (local: Ollama Qwen3-14B cho demo; api: GPT-4o-mini/Gemini Flash cho test env, cả đợt <$10).
+- Owners data/judge: Bách cài Ollama + Qwen ngay từ bây giờ, batch 600 cặp chạy đêm sau T003b; human-check 200 cặp trong 3 ngày tiếp theo.

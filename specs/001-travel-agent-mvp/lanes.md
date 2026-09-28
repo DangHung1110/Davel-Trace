@@ -17,6 +17,14 @@ T007 split 4 file để khỏi conflict: `schemas/trip.py` (C), `schemas/poi.py`
 `schemas/plan.py` (B), `schemas/eval.py` (A); `models.py` chỉ re-export (C).
 Đánh `[X]` T007 khi cả 4 xong. (tasks.md giữ nguyên — đây là overlay thực thi.)
 
+## Người mới vào: đọc gì, làm gì (onboarding 10 phút)
+
+1. Đọc `AGENTS.md` (luật repo) → file này (`lanes.md`: mình lane nào, branch nào) → `tasks.md` (task nào còn `[ ]`).
+2. Nhận lane branch (`feat/lane-a/b/c`), tạo worktree riêng, checkout — KHÔNG code trực tiếp trên `dev`/`main`.
+3. Chỉ sửa file trong vùng lane mình (bảng File ownership dưới). Cần file lane khác → báo orchestrator, không tự lấn.
+4. Xong 1 phase → mở PR lane → `dev` (diff <400 dòng), update bảng Tracking + tick `[X]` task trong tasks.md.
+5. Muốn biết ai xong gì: `git pull` mỗi sáng, xem `[X]` trong tasks.md + bảng Tracking — không cần hỏi.
+
 ## File ownership (vùng cấm lấn)
 
 - **A**: `data/snapshots/**`, `BE/ml/**`, `BE/eval/**`, `BE/tests/unit/test_patm.py`, eval tests.
@@ -27,8 +35,8 @@ T007 split 4 file để khỏi conflict: `schemas/trip.py` (C), `schemas/poi.py`
 ## Thứ tự chạy (3 lanes SONG SONG được)
 
 1. **Ngày 1 (chung, vẫn song song)**: Phase 1+2 đã chia rời file — C dựng skeleton,
-   A seed snapshot (7 POIs) + bắt đầu build Google Places snapshot (100–200 POIs), B matrix+gate. Xong mới tách lanes.
-2. **MVP line (song song toàn phần)**: Phase 3→8 (P1). Dừng VALIDATE demo static.
+   A seed snapshot (7 POIs) + bắt đầu build Apify one-shot snapshot (100–200 POIs, ≤2 ngày, fallback Overpass+tay). Xong mới tách lanes.
+2. **MVP line**: US1+US2+US3 + PATM nấc-2 trước (Phase 3–5). US4/5/6 (Phase 6–8) là P1-cuối, làm sau khi MVP line xanh. Dừng VALIDATE demo static.
 3. **P2 (song song)**: Phase 9–11 rồi Phase 12 polish (cần cả 3 xong mới ráp).
 4. **Review gates**: @oracle review ở US1-demo và trước mỗi lane-PR; @verifier đối chiếu spec khi cần.
 

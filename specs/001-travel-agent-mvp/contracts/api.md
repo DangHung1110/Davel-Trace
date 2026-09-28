@@ -37,3 +37,7 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 ## POST /score-transition — PATM (debug/mobile pre-check)
 - In: `{ "a": {poi+ctx}, "b": {poi+ctx}, "user": {...} }`
 - Out: `{ "score": 0.82 }` (<5ms target)
+
+## Env: LLM_PROVIDER (local|api)
+- `local` (mặc định, demo day): parser/judge/explanation qua Ollama `http://localhost:11434` (Qwen3-14B).
+- `api` (test env, BE deploy): qua GPT-4o-mini/Gemini Flash, temp 0.1. Key qua `.env`, không commit.

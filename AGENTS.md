@@ -30,6 +30,10 @@ python server.py --port 8080
 
 - Nhánh tích hợp: `dev`. Nhánh ổn định: `main`.
 - Mọi việc làm trên nhánh riêng (`feat/...`, `fix/...`, `chore/...`), xong mở PR vào `dev`.
+- Làm việc theo lane (3 lanes song song, xem `specs/001-travel-agent-mvp/lanes.md`):
+  nhận lane branch (`feat/lane-a/b/c`), chỉ sửa file trong vùng lane mình,
+  task nhỏ commit thẳng lane, task lớn tách `task/<id>-...` rồi merge vào lane,
+  xong 1 phase mở PR lane → `dev`.
 - **CẤM push trực tiếp lên `main` / `dev`. CẤM force-push. CẤM xóa nhánh remote.**
 - Commit bước nhỏ, message tiếng Anh prefix rõ (`feat:`, `fix:`, `chore:`, `docs:`).
 - Trước khi chạy agent task lớn: tạo checkpoint

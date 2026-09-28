@@ -34,10 +34,10 @@ Prior deep research lives in NotebookLM notebook `PBL6-TravelAgent`
 - **Rationale**: Paper's repo is public and reusable; CN dataset unusable for ĐN so snapshot self-built to TravelEval schema; student-scale effort mapped (tier 1: 1–2 days, tier 2: 1 week).
 - **Alternatives considered**: Full TravelEval replication (rejected: needs experts + CN data); no evaluator (rejected: constitution III).
 
-## R7. POI snapshot: Google Places API + agent normalization
-- **Decision**: Google Places API (New) for Da Nang POI data (100–200 places); agent normalizes to TravelEval JSON schema; manual supplement for opening hours/duration/price where API data is incomplete.
-- **Rationale**: Google Places has the most complete POI data for Vietnam (names, coordinates, ratings, opening hours, price levels). API is legal and reliable unlike scraping. Cost: ~$0.017/request × 200 = ~$3.40 for initial build.
-- **Alternatives considered**: OSM Overpass (rejected: missing hours/prices/reviews for VN); Foody crawl (rejected: fragile, non-standard); manual-only (kept as supplement for fields Google lacks: physical_intensity, ambience).
+## R7. POI snapshot: Apify one-shot + fallback D (grill 2026-09-28)
+- **Decision**: Apify Google-Maps-Scraper actor, free $5/month one-shot (~200 POIs, reviews/enrichment OFF), test 10 POIs trước, ≤2 ngày (T003b). Agent normalizes to TravelEval JSON schema. Fallback D nếu tắc >2 ngày: OSM Overpass skeleton + official-site/Foody crawl + manual (chậm nhưng $0-risk).
+- **Rationale**: Apify matches "crawl once + store" (dataset export allowed, proxy của nó chịu chặn). Google Places API (New) tuy hợp pháp + free caps đủ 200 POI nhưng CẦN thẻ Visa bật billing và CẤM cache (chỉ `place_id` được lưu) — incompatible với repo snapshot plan, deferred làm live-fetch option sau. Old "~$3.40" estimate là giá pre-2025, discarded.
+- **Alternatives considered**: Google Places API New (deferred: Visa friction + no-cache rule); SerpApi free 250 (backup one-shot nếu Apify fail); OSM+manual = fallback D; self-host scraper (rejected: IP-ban risk cao nhất).
 
 ## R8. Visit-duration estimation: 3 nấc (không có nguồn public cho VN)
 - **Decision**: Không nguồn nào (Google Places, OSM) cung cấp visit duration cho ĐN → ước tính 3 nấc. **Nấc 1** (P1): category defaults × modifiers (rating ≥4.5 → ×1.2, tag "rộng/lớn" → ×1.3, "check-in/nhẹ" → ×0.7) → `{p25,p50,p75}`, `dur_source=category_rule`, confidence=low. **Nấc 2** (P1): LLM batch (Qwen3-14B qua đêm: name + category + rating + tags + reviews nếu có → JSON `{p25,p50,p75,confidence}`, swap-check hỏi 2 lần, tự loại inconsistent), human verify 15% + toàn bộ outlier (p50 lệch default >50% — moi được POI đặc biệt như Bà Nà 4–6h). **Nấc 3** (P3, sau MVP): mine biểu hiện thời gian trong review ("đi 2 tiếng", "cả buổi sáng") + update prior p50 từ actual activity durations (rule-based, không continual learning — constitution V).
