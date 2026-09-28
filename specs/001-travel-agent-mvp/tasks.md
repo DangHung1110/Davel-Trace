@@ -70,7 +70,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [ ] T022 [P] [US2] Extend POI schema fields (ambience, crowd, dietary, pros/cons, source, fetched_at)
 - [X] T023 [US2] Context scorer (`BE/app/services/context_score.py`): preference→attribute mapping incl. "yên tĩnh/hẹn hò/sau hiking" rules
-- [ ] T024 [US2] Uncertainty labeling in retrieval output (unverified excluded from main plan)
+- [X] T024 [US2] Uncertainty labeling in retrieval output (unverified excluded from main plan)
 - [ ] T025 [US2] Integration test US2 in `BE/tests/integration/test_us2_recommend.py`
 
 **Checkpoint**: US1 + US2 work independently
