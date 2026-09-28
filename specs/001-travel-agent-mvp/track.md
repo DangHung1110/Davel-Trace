@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T022 — Review POI context fields extension (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits b9e5831 + 1fef1ba). (1) Vùng file: OK — BE/app/schemas/poi.py (phần split A) + BE/tests/unit/test_schemas_poi_eval.py của lane; tasks.md chỉ tick 1 dòng T022. (2) Chạy test `python BE/tests/unit/test_schemas_poi_eval.py -v`: 7/7 OK exit 0 (5 cũ + 2 mới T022), seed 7/7 validate; py_compile cả 2 file exit 0. (3) Không vỡ field cũ: crowd/dietary chuyển từ Restaurant lên base POI (kế thừa, không định nghĩa trùng), test_restaurant_extends_poi cũ vẫn xanh; seed cũ thiếu crowd/dietary validate bình thường với defaults ('' / []); field mới có giá trị validate đúng. (4) Tick xứng đáng: T022 đòi ambience/crowd/dietary/pros-cons/source/fetched_at — ambience/pros/cons/source/fetched_at có từ T007, commit này bổ sung đúng 2 mục còn thiếu (crowd/dietary) lên base → đủ bộ. (5) Secret-scan diff b9e5831~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T007-poi+eval — Review POI/Restaurant + EvaluationRecord schemas (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-a (feat/lane-a-data-eval, commits 86b29dd + 4052dad). (1) Vùng file: OK — BE/app/schemas/{poi,eval}.py đúng phần split T007 của A (lanes.md: trip C / poi+eval A / plan B) + BE/tests/unit/test_schemas_poi_eval.py; trip.py/models.py của C không chạm (grep diff rỗng); tasks.md chỉ thêm note 1 dòng T007. (2) Chạy test `python BE/tests/unit/test_schemas_poi_eval.py -v`: 5/5 OK exit 0, seed POIs validate 7/7; py_compile 3 file exit 0. (3) Field khớp data-model.md dòng 20 từng mục (visit_min p25/p50/p75 + dur_source 4 vocab + dur_confidence + price/intensity 1-3 + ambience/weather_sensitive/pros/cons/source/fetched_at/verified); `pending_llm` thêm có tài liệu là transient seed state, nhất quán với DUR_SOURCES trong snapshot.py; ngữ nghĩa R8 (p50 schedule / p75 buffer / UI '~p25-p75') ghi trong docstring; VisitMin ép p25<=p50<=p75 bằng model_validator, lat/lon/rating/price có bounds. (4) Note T007 rõ: '[A: poi.py+eval.py DONE 2026-09-28 (7/7 seed validate); C: trip done; B: plan.py pending]', giữ [ ] không nhận vơ — đúng luật split T007. (5) Secret-scan diff 86b29dd~1..HEAD: 0 hit. Worktree sạch.
