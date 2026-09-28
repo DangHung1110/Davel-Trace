@@ -33,7 +33,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story
 
-- [ ] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord
+- [ ] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [A: poi.py+eval.py DONE 2026-09-28 (7/7 seed validate); C: trip done; B: plan.py pending]
 - [X] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
 - [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
