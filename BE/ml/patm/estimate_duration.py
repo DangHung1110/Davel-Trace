@@ -30,6 +30,7 @@ import unicodedata
 CATEGORY_DEFAULTS: dict[str, int] = {
     # ponytail: nac-1 static defaults on purpose — nac-2 LLM batch (needs the
     # T003b snapshot) and nac-3 review mining are deferred, see module docstring.
+    # LOCKED by seed (T003 --check 7/7): never change these 7 values.
     "landmark": 45,
     "transport": 20,
     "market": 75,
@@ -37,6 +38,58 @@ CATEGORY_DEFAULTS: dict[str, int] = {
     "restaurant": 60,
     "museum": 90,
     "beach": 120,
+    # Bulk (T003c-N1FILL): SerpApi Vietnamese types need canonical homes.
+    # attraction=200 (Ba Na-scale 3h20 base; nac-2 refines outliers per R8),
+    # park=120, cafe=45. Seed types never hit these (canonical passthrough).
+    "attraction": 200,
+    "park": 120,
+    "cafe": 45,
+}
+
+# Normalized-Vietnamese substring -> canonical. Specific first (dict order).
+CATEGORY_ALIASES: dict[str, str] = {
+    "cong vien giai tri": "attraction",
+    "khu du lich": "attraction",
+    "diem thu hut": "attraction",
+    "thuy cung": "attraction",
+    "so thu": "attraction",
+    "vui choi": "attraction",
+    "thang canh": "landmark",
+    "dia diem lich su": "landmark",
+    "lich su": "landmark",
+    "dien tho": "landmark",
+    "vuon": "park",
+    "cam trai": "nature",
+    "thuong mai": "market",
+    "du thuyen": "landmark",
+    "ho boi": "beach",
+    "be boi": "beach",
+    "khach san": "landmark",
+    "ban dao": "nature",
+    "thac": "nature",
+    "hang dong": "nature",
+    "nui": "nature",
+    "bai bien": "beach",
+    "bao tang": "museum",
+    "cho ": "market",
+    "cho": "market",
+    "sieu thi": "market",
+    "cua hang": "market",
+    "mua sam": "market",
+    "cong vien": "park",
+    "quan ca phe": "cafe",
+    "tra sua": "cafe",
+    "kem": "cafe",
+    "coffee": "cafe",
+    "cafe": "cafe",
+    "nha hang": "restaurant",
+    "quan an": "restaurant",
+    "chua": "landmark",
+    "nha tho": "landmark",
+    "cau": "landmark",
+    "san bay": "transport",
+    "ben xe": "transport",
+    "ga ": "transport",
 }
 
 DEFAULT_P50 = 60
@@ -46,7 +99,8 @@ DUR_CONFIDENCE = "low"
 
 def _norm(s: str) -> str:
     s = unicodedata.normalize("NFD", s.lower())
-    return "".join(c for c in s if unicodedata.category(c) != "Mn")
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.replace("đ", "d")  # đ has no NFD decomposition — map manually
 
 
 def modifiers_for(rating: float | None, tags: list[str]) -> list[str]:
@@ -62,11 +116,23 @@ def modifiers_for(rating: float | None, tags: list[str]) -> list[str]:
     return applied
 
 
+def canonical_category(raw: str) -> str:
+    """Map SerpApi Vietnamese types to canonical keys (passthrough if known)."""
+    if raw in CATEGORY_DEFAULTS:
+        return raw
+    norm = _norm(raw or "")
+    for key, canon in CATEGORY_ALIASES.items():
+        if key in norm:
+            return canon
+    return raw  # unknown -> DEFAULT_P50 in estimate()
+
+
 def estimate(category: str, rating: float | None = None,
              tags: list[str] | None = None) -> dict:
     """Return {p25, p50, p75, dur_source, dur_confidence, applied}."""
     tags = tags or []
-    p50 = float(CATEGORY_DEFAULTS.get(category, DEFAULT_P50))
+    canon = canonical_category(category)
+    p50 = float(CATEGORY_DEFAULTS.get(canon, DEFAULT_P50))
     applied = modifiers_for(rating, tags)
     for rule in applied:
         factor = float(rule.split("x")[1])
