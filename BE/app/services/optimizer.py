@@ -13,6 +13,8 @@ Model (OR-Tools CP-SAT, 5s timeout):
 Returns {"status": optimal|feasible-timeout|infeasible, "itinerary" |
 "reason", ...}. Best-found is returned even on timeout (never empty-
 handed when a feasible prefix exists).
+
+T030: optional q_ij edge bonuses + W_A+s_A<=W_B precedence (PATM).
 """
 
 from __future__ import annotations
@@ -52,7 +54,14 @@ def _hh(m: int) -> str:
 
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, require_all: bool = False,
-             timeout_s: float = TIMEOUT_S) -> dict:
+             timeout_s: float = TIMEOUT_S,
+             edge_scores: dict[tuple[str, str], float] | None = None,
+             precedence: list[tuple[str, str]] | None = None) -> dict:
+    """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
+
+    edge_scores[(a, b)]: bonus added when transition a->b is used.
+    precedence[(A, B)]: when BOTH visited, t[B] >= t[A]+dur[A].
+    """
     from ortools.sat.python import cp_model
 
     ids = [p.poi_id for p in pois]
@@ -92,7 +101,17 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     trip.origin_id if j == 0 else ids[j - 1])
             w = travel.get((a, b), travel.get((b, a), 0))
             m.Add(t[j] >= t[i] + dur[i] + w).OnlyEnforceIf(arc[(i, j)])
-    m.Maximize(sum(int(sco[i] * 1000) * visit[i] for i in range(1, n + 1)))
+    for prec in precedence or []:
+        ia, ib = node.get(prec[0]), node.get(prec[1])
+        if ia is not None and ib is not None:
+            m.Add(t[ib] >= t[ia] + dur[ia]).OnlyEnforceIf(
+                [visit[ia], visit[ib]])
+    obj = sum(int(sco[i] * 1000) * visit[i] for i in range(1, n + 1))
+    for (a, b), q in (edge_scores or {}).items():
+        ia, ib = node.get(a), node.get(b)
+        if ia is not None and ib is not None and ia != ib:
+            obj += int(float(q) * 100) * arc[(ia, ib)]
+    m.Maximize(obj)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout_s
