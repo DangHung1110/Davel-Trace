@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T023 — Review context scorer preference→attribute (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 0980f58 + 4f1019f). (1) Vùng file: OK — BE/app/services/context_score.py (vùng C) + BE/tests/unit/test_context_score.py; tasks.md chỉ tick 1 dòng T023. (2) Chạy test file `python BE/tests/unit/test_context_score.py -v`: 4/4 OK exit 0; full `pytest BE/tests/ -q`: 31 passed exit 0; py_compile cả 2 file exit 0. (3) Query mở chạm đúng POI + rule kích hoạt có reason: ['yên tĩnh','hẹn hò','gần biển'] → cove vượt club, fired đủ [quiet, dating, near_sea] mỗi rule có reason; ['sau leo núi, mệt'] → beach vượt hill, recovery fired; không keyword → neutral 0.5 fired rỗng; scores trong [0,1]. Dùng đúng field T022 (ambience/crowd) — tích hợp chéo tốt. (4) Tick xứng đáng: T023 đòi preference→attribute mapping gồm 'yên tĩnh/hẹn hò/sau hiking' — giao đủ 4 rule groups giải thích được + neutral. (5) Secret-scan diff 0980f58~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T021 — Review US1 S2+S3 e2e + mock-restore fix (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 3327a0a + 0babc64). (1) Vùng file: OK — BE/tests/integration/test_us1_flow.py (mới) + 1 dòng fix trong BE/tests/contract/test_parse.py, toàn vùng C; tasks.md chỉ tick 1 dòng T021. (2) Chạy pytest integration: 3/3 PASSED; full `pytest BE/tests/`: 27/27 passed (24 cũ + 3 mới) exit 0. (3) Bug mock coder tự sửa ĐÚNG và có bao phủ: `self._real` → `TestParseContract._real` trong finally (tránh instance-shadowing khi nhiều test class cùng patch global mock); verify chạy cả 2 thứ tự (integration↔contract) đều 5/5 xanh → không nhiễu chéo, restore sạch. (4) S2+S3 khớp quickstart ở phạm vi stub: S2 parse prompt cố định ra TripRequest đủ slots (city đà-nẵng, budget 3tr); S3 plan ≥2 acts đủ trường (poi_id/start/end/explanation+evidence), không overlap + travel fits, totals + constraint_status 4 cổng 1, clarification khi thiếu city. NOTE (không FIX): quickstart S3 ghi '≥2 plans' thuộc T032 multi-profile — test hiện tại 1 plan stub đã khai báo STUB lane-B trong docstring. (5) Tick xứng đáng: T021 đòi S2+S3 e2e — giao đủ 3 case, US1 khép ở tầng stub. (6) Secret-scan diff 3327a0a~1..HEAD: 0 hit. Worktree sạch.
