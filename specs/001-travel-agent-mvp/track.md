@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T038+T037-note — Review US5 S6 integration + FE blocked note (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 8d64b02 + 71caad1). (1) Vùng file: OK — chỉ thêm BE/tests/integration/test_us5_expense.py (vùng C); tasks.md tick T038 + note T037 (2 dòng US5, không chạm lane khác). (2) Chạy pytest integration: 2/2 PASSED; full `pytest BE/tests/`: 53/53 passed exit 0. (3) S6 khớp quickstart: budget 3tr → log 2.5tr (1.5M+400k+600k qua POST 201) → summary left 500000 + alert '80%' (83% vào band 80% — đúng thiết kế band T035, test comment ghi rõ); replan_budget đủ 6 field + stub_tighten chứng minh handoff shape (allowed 500000, tightened True; STUB-NOTE thay bằng import lane-B thật ở phase-PR). (4) Note T037 BLOCKED rõ lý do: FE app chỉ ở nhánh feat/flutter-mobile-shell (lane-c chỉ có README) + máy không có Flutter SDK → đợi human merge/SDK; giữ [ ] đúng, không treo. (5) Tick T038 xứng đáng: S6 e2e qua endpoint thật. NOTE nhỏ (không FIX): thứ tự commit đảo (tick 8d64b02 trước test 71caad1) — trạng thái cuối đủ cả 2, vô hại. (6) Secret-scan: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T036a — Review replan_budget remaining + by-kind (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 0a15d43 + a8bb062). (1) Vùng file: OK — thêm replan_budget() vào BE/app/services/expenses.py (vùng C) + BE/tests/unit/test_replan_budget.py mới; tasks.md chỉ thêm note 1 dòng T036. (2) Chạy test mới: 2/2 OK (remaining 3000000/380000/2620000 + alert rỗng; by_kind food/ticket/transport/other đúng số); full `pytest BE/tests/`: 51/51 passed exit 0; py_compile cả 2 file exit 0. (3) summary() cũ nguyên vẹn: diff chỉ append hàm mới ủy thác summary (không sửa dòng cũ), 49 tests cũ vẫn xanh. (4) T036 giữ [ ] là ĐÚNG: note '[T036a DONE 2026-09-28 lane C: replan_budget(); T036b replan feed lane B pending]' — nửa C xong, nửa feed replan chờ lane B, không nhận vơ cả task. (5) Secret-scan diff 0a15d43~1..HEAD: 0 hit. Worktree sạch.
