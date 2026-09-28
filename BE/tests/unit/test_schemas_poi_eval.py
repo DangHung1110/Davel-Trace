@@ -53,6 +53,26 @@ class TestSchemasPoiEval(unittest.TestCase):
         with self.assertRaises(ValidationError):
             POI(**raw)
 
+    def test_t022_context_fields(self):
+        raw = {k: v for k, v in self.seed["my-khe"].items()
+               if k in POI.model_fields}
+        for k in ("ambience", "crowd", "dietary", "pros", "cons"):
+            raw.pop(k, None)
+        p = POI(**raw, ambience="thoáng đãng", crowd="vừa phải",
+                dietary=["hải sản"], pros=["hoàng hôn"], cons=["nắng gắt"])
+        self.assertEqual(p.crowd, "vừa phải")
+        self.assertEqual(p.dietary, ["hải sản"])
+        self.assertEqual(p.pros, ["hoàng hôn"])
+
+    def test_backward_compat_old_seed(self):
+        raw = {k: v for k, v in self.seed["son-tra"].items()
+               if k in POI.model_fields}
+        self.assertNotIn("crowd", raw)
+        self.assertNotIn("dietary", raw)
+        p = POI(**raw)  # old seed without new fields still validates
+        self.assertEqual(p.crowd, "")
+        self.assertEqual(p.dietary, [])
+
     def test_evaluation_record_defaults(self):
         rec = EvaluationRecord(itinerary_id="it1", baseline="distance-only",
                                gate={"passed": True, "violations": []})

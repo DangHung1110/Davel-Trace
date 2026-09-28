@@ -43,6 +43,8 @@ class POI(BaseModel):
     tags: list[str] = Field(default_factory=list)
     intensity: int = Field(default=2, ge=1, le=3)
     ambience: str = ""
+    crowd: str = ""
+    dietary: list[str] = Field(default_factory=list)
     weather_sensitive: bool = False
     pros: list[str] = Field(default_factory=list)
     cons: list[str] = Field(default_factory=list)
@@ -54,7 +56,5 @@ class POI(BaseModel):
 class Restaurant(POI):
     cuisine: list[str] = Field(default_factory=list)
     price_range: str = ""
-    crowd: str = ""
-    dietary: list[str] = Field(default_factory=list)
     reservation: bool = False
     meal_slots: list[str] = Field(default_factory=list)
