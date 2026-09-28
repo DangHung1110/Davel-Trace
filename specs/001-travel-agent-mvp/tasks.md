@@ -57,7 +57,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
 - [ ] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
 - [X] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
-- [ ] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
+- [X] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
 
 **Checkpoint**: US1 fully functional — fixed Vietnamese prompt yields feasible itinerary on 7-POI seed
 
