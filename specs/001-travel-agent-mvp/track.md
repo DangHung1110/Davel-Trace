@@ -29,6 +29,12 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T059 — Review security sweep no-secrets (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 6ee6573 + 11c763a). (1) Vùng file: OK — chỉ thêm BE/tests/unit/test_no_secrets.py (vùng C); tasks.md chỉ tick 1 dòng T059. (2) Chạy test file: 2/2 OK exit 0 (patterns + env excluded); full `pytest BE/tests/`: 74/74 passed exit 0; py_compile exit 0. (3) Sweep THẬT không pass ảo: 7 patterns thật (sk-/AIza/xox/ghp/password=/Bearer dài/credential-URL) quét nội dung `git ls-files` thật (bỏ binary .png/.pmtiles/.exe...), allowlist fakes rõ (test/fake/example/placeholder/xxx/sk-test) áp theo context dòng; fail sẽ in hits. (4) .env excluded + example placeholders verify độc lập: `git check-ignore BE/.env` exit 0, ls-files chỉ có .env.example, GOOGLE_PLACES_KEY/OSRM_BASE_URL trống. (5) Tick xứng đáng: T059 đòi no secrets + .env excluded + logs redacted — patterns bao Bearer/credential-URL (dạng lọt qua log), .env kiểm cả untracked + ignored. (6) Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 ## [2026-09-28] T047 — Review mock GPS feed + demo timeline (pane: reviewer)
 - Trạng thái: DONE
 - Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits ad392a8 + 0a405c5). (1) Vùng file: OK — BE/app/services/gps.py + BE/tests/unit/test_gps.py (vùng C) + data/gps/demo_day.json (task đòi timeline file; docstring khai tránh data/snapshots của lane A — đúng); tasks.md chỉ tick 1 dòng T047. (2) Chạy test file: 4/4 OK exit 0 (load monotonic + lat/lon bounds / replay đúng thứ tự + cạn trả None / trigger rain 13:30 / timeline hỏng non-monotonic bị AssertionError); full `pytest BE/tests/`: 72/72 passed exit 0; py_compile cả 2 file exit 0. (3) Interface như GPS thật: next()→{at,lat,lon,trigger?}|None + triggers() + done + load_timeline validate (đủ keys/monotonic/không trùng); docstring chốt hợp đồng RealGpsFeed drop-in sau cắm thật không sửa caller. (4) Timeline đủ demo: 6 điểm monotonic 07:30→17:30, tọa độ ĐN hợp lý (~16.0x/108.2x), 1 trigger rain severity high lúc 13:30 (đúng kịch bản S5 chiều mưa). (5) Tick xứng đáng: T047 đòi mock feed interface + timeline file — giao đủ cả 2. (6) Secret-scan diff ad392a8~1..HEAD: 0 hit. Worktree sạch.
