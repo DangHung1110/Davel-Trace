@@ -57,12 +57,20 @@ class TestRetrieval(unittest.TestCase):
         out = retrieve(TRIP, POIS)
         self.assertNotIn("draft", ids(out, "candidates"))
 
-    def test_must_visit_kept_despite_violation(self):
-        trip = dict(TRIP, must_visit=["draft"], activities=[])
+    def test_must_visit_verified_kept(self):
+        trip = dict(TRIP, must_visit=["beach"], activities=[])
         out = retrieve(trip, POIS)
-        got = [c for c in out["candidates"] if c["poi_id"] == "draft"]
+        got = [c for c in out["candidates"] if c["poi_id"] == "beach"]
         self.assertEqual(len(got), 1)
         self.assertIn("must-visit", str(got[0]["reasons"]))
+
+    def test_must_visit_unverified_outside_main_plan(self):
+        trip = dict(TRIP, must_visit=["draft"], activities=[])
+        out = retrieve(trip, POIS)
+        self.assertNotIn("draft", [c["poi_id"] for c in out["candidates"]])
+        got = [c for c in out["needs_verification"] if c["poi_id"] == "draft"]
+        self.assertEqual(len(got), 1)
+        self.assertTrue(got[0]["must_visit"])
 
     def test_avoid_excluded(self):
         trip = dict(TRIP, avoid=["beach"])
