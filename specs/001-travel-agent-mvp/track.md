@@ -29,4 +29,10 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T001+T002+T004+T007-foundation — Review BE skeleton + pytest layout + config + trip schemas (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: review trong worktree lane-c (feat/lane-c-parser-api, commits 63f9c18 + 5d230bf + 196d292 + 175ce79). (1) Vùng file: OK — 15 files toàn vùng C (BE/app/**, BE/tests/** inits, BE/.env.example, BE/requirements.txt); không chạm file A/B; tasks.md chỉ tick 4 dòng T001/T002/T004/T007. (2) Tự chạy xanh (fastapi 0.133.1/pydantic 2.13.4): import main/config/schemas OK, settings defaults (local/localhost/danang-v1, key rỗng), User/TripRequest defaults OK, TestClient GET /v1/health → 200 {'status':'ok','snapshot':'danang-v1'} (S1); py_compile 4 file exit 0. (3) models.py KHÔNG import module chưa tồn tại: chỉ re-export trip (User/TripRequest), 3 file pending (poi/eval A + plan B) ghi rõ DO-NOT-import trong docstring — đúng luật STUB/split T007 lanes.md. (4) .env.example không secret thật: GOOGLE_PLACES_KEY/OSRM_BASE_URL để trống, còn lại là localhost/defaults. (5) Tick T007 có note foundation rõ: '[foundation DONE 2026-09-28 lane C: trip (User/TripRequest); poi/eval (A) + plan (B) pending]' — không nhận vơ full T007. (6) Secret-scan diff 63f9c18~1..HEAD: 0 hit. Worktree sạch.
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có FIX-REQUEST.
+
 _(chưa có entry nào)_
