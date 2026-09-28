@@ -188,3 +188,7 @@ description: "Task list for Personalized Travel Agent MVP"
 ## Backlog (P3 — sau MVP, không chặn demo)
 
 - [ ] T060 Duration nấc 3: mine temporal expressions từ reviews ("đi 2 tiếng", "cả buổi sáng") + update prior `p50` từ actual activity durations (rule-based, không continual learning — constitution V; xem R8)
+
+## Milestone M1 (mobility prior — ngoài MVP line)
+
+- [ ] T062 Foursquare mobility prior P(cat|cat,bucket) + PATM feature (prior.py/crosswalk/transition_prior.json, features #17, eval vs unigram + ablation) [PARTIAL 2026-09-28 lane A: ppl −10.9% MET / acc +6.0% SHORT / ablation +1.0pp SHORT (+5pp); feature wired, tests green; NO tick — see docs/mobility-prior.md]
