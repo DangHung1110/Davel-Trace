@@ -41,9 +41,10 @@ def complete(state: dict, poi_id: str, at: str = "") -> dict:
     state = copy.deepcopy(state)
     for i, a in enumerate(state["remaining"]):
         if a["poi_id"] == poi_id:
-            done = dict(state["remaining"].pop(i), status="done",
-                        done_at=at or time.strftime("%H:%M"))
+            done_at = at or time.strftime("%H:%M")
+            done = dict(state["remaining"].pop(i), status="done", done_at=done_at)
             state["completed"].append(done)
+            state["now"] = done_at  # rolling horizon advances with progress
             _STORE[state["trip_id"]] = state
             return copy.deepcopy(state)
     raise KeyError(f"{poi_id} not in remaining")

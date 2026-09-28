@@ -69,12 +69,20 @@ def replan(state: dict, event: dict, pois: list[dict],
     cand_ids += [a["poi_id"] if isinstance(a, dict) else a for a in added
                  if (a["poi_id"] if isinstance(a, dict) else a) not in cand_ids]
 
+    # depot legs from the last completed POI (rolling horizon continuity)
+    travel2 = dict(travel)
+    if completed_ids:
+        last = completed_ids[-1]
+        for x in cand_ids:
+            travel2.setdefault(("depot", x),
+                               travel.get((last, x), travel.get((x, last), 0)))
+
     stub = [StubPOI(pid, int(by_id[pid].get("visit_min", 60)),
                     *_win(by_id[pid], trip, state), 1.0)
             for pid in cand_ids if pid in by_id]
     start = max(_mm(state.get("now", trip.get("start_time", "07:00"))),
                 _mm(trip.get("start_time", "07:00")))
-    out = optimize(stub, travel, StubTrip(start, _mm(trip.get("end_time", "18:00"))))
+    out = optimize(stub, travel2, StubTrip(start, _mm(trip.get("end_time", "18:00"))))
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),
