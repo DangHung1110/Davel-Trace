@@ -14,15 +14,9 @@ from __future__ import annotations
 
 import json
 import os
-import sys
-import urllib.request
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-from BE.app.config import Settings, get_settings  # noqa: E402
+from BE.app.config import Settings, get_settings
+from BE.app.services import fetch_json
 
 try:
     from pydantic import BaseModel, ValidationError
@@ -55,9 +49,7 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
 
 
 def _urllib_transport(url: str, headers: dict, body: dict) -> dict:
-    req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=headers)
-    with urllib.request.urlopen(req, timeout=120) as r:
-        data = json.load(r)
+    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=120)
     if "message" in data:  # Ollama shape
         return {"text": data["message"].get("content", "")}
     choices = data.get("choices", [])  # OpenAI-compatible shape

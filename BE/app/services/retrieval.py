@@ -20,13 +20,8 @@ Rules:
 from __future__ import annotations
 
 import json
-import os
-import sys
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
+from BE.app.services import to_min
 
 ACTIVITY_TYPE_MAP = {
     "biển": ["beach"], "tắm": ["beach"], "núi": ["nature"], "leo": ["nature"],
@@ -44,15 +39,10 @@ def load_pois_json(path: str) -> list[dict]:
     return data["pois"] if isinstance(data, dict) else data
 
 
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
-
-
 def _overlaps(hours: list[str], ws: int, we: int) -> bool:
     for h in hours or []:
         o, c = h.split("-")
-        o, c = _to_min(o), _to_min(c)
+        o, c = to_min(o), to_min(c)
         if o <= c and o < we and ws < c:
             return True
         if o > c and (ws < c or o < we):
@@ -88,7 +78,7 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
     """Return {"candidates": [{poi_id, reasons[], uncertainty[]}],
     "needs_verification": [{poi_id, reasons[], uncertainty[], must_visit}],
     "excluded": [{poi_id, reason}]}."""
-    ws, we = _to_min(trip.get("start_time", "07:00")), _to_min(trip.get("end_time", "18:00"))
+    ws, we = to_min(trip.get("start_time", "07:00")), to_min(trip.get("end_time", "18:00"))
     budget = int(trip.get("budget", 0))
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))

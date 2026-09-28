@@ -14,18 +14,10 @@ Contract (spec FR-001..006):
 
 from __future__ import annotations
 
-import os
-import sys
+from pydantic import BaseModel, Field
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
-
-from pydantic import BaseModel, Field  # noqa: E402
-
-from BE.app.schemas.trip import TripRequest  # noqa: E402
-from BE.app.services import llm as llm_gateway  # noqa: E402
+from BE.app.schemas.trip import TripRequest
+from BE.app.services import llm as llm_gateway
 
 DEFAULT_START, DEFAULT_END, DEFAULT_DAYS = "07:00", "18:00", 1
 

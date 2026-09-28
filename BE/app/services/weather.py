@@ -15,16 +15,11 @@ from __future__ import annotations
 
 import json
 import os
-import sys
 import tempfile
 import time
 import urllib.parse
-import urllib.request
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
+from BE.app.services import fetch_json
 
 DANANG_LAT, DANANG_LON = 16.0544, 108.2022
 RAIN_TRIGGER = 0.7
@@ -32,8 +27,7 @@ DEFAULT_CACHE = os.path.join(tempfile.gettempdir(), "travel_weather_cache.json")
 
 
 def _urllib_transport(url: str) -> dict:
-    with urllib.request.urlopen(url, timeout=20) as r:
-        return json.load(r)
+    return fetch_json(url, timeout=20)
 
 
 def fetch_forecast(lat: float = DANANG_LAT, lon: float = DANANG_LON,

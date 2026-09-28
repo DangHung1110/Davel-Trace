@@ -15,6 +15,8 @@ Signals:
 
 from __future__ import annotations
 
+from BE.app.services import to_min
+
 WEIGHTS = {
     "rating": 0.25,
     "price": 0.15,
@@ -23,11 +25,6 @@ WEIGHTS = {
     "time_fit": 0.10,
     "weather": 0.10,
 }
-
-
-def _to_min(t: str) -> int:
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
 
 
 def _words(*parts) -> set[str]:
@@ -71,7 +68,7 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     if hit:
         reasons.append("hop gu: " + ", ".join(sorted(hit)))
 
-    hour = _to_min(ctx.get("hour", "12:00")) // 60 if ":" in str(ctx.get("hour", "")) \
+    hour = to_min(ctx.get("hour", "12:00")) // 60 if ":" in str(ctx.get("hour", "")) \
         else int(ctx.get("hour", 12))
     ptype = poi.get("type", "")
     if hour >= 18 and ptype in ("restaurant", "landmark"):
