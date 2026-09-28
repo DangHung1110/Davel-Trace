@@ -121,9 +121,9 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Open-Meteo fetch/cache, context injection, rain>70% proactive suggestion
 **Independent Test**: mocked rain 80% afternoon → outdoor swapped + reason cited
 
-- [ ] T039 [P] [US6] Weather service (`BE/app/services/weather.py`): fetch, cache, fetched_at label
-- [ ] T040 [US6] Weather→context wiring (weather_id features, explanation lines, rain trigger)
-- [ ] T041 [US6] Integration test US6 with mocked forecast
+- [X] T039 [P] [US6] Weather service (`BE/app/services/weather.py`): fetch, cache, fetched_at label
+- [X] T040 [US6] Weather→context wiring (weather_id features, explanation lines, rain trigger)
+- [X] T041 [US6] Integration test US6 with mocked forecast
 
 ---
 
