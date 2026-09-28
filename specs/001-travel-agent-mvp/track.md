@@ -29,4 +29,10 @@ Mỗi entry:
 
 ## Log
 
+## [2026-09-28] T003/T003b/T003c — Review lane A seed + estimator + fetch script (pane: reviewer)
+- Trạng thái: DONE
+- Làm gì: checkout feat/lane-a-data-eval, review diff chore/vibe-setup..HEAD (6 files). (1) Vùng file: OK — BE/ml/data/fetch_apify.py + BE/ml/patm/estimate_duration.py ∈ BE/ml/**, data/snapshots/danang-v1/* ∈ data/snapshots/**, tasks.md chỉ chạm 2 dòng T003/T003c (đúng luật chung). (2) pois.json: dict, 7/7 POIs đủ field bắt buộc (poi_id/name/lat/lon/type/visit_min/dur_source/dur_confidence/source/verified), verified=true cả 7; matrix.json: n=7, ids khớp pois, cells dict đủ 49/49 key `a->b`, missing=0. (3) estimator --check: 7/7 match nac-1 rules exit 0; py_compile cả 2 file py exit 0. (4) fetch script thiếu token: in đúng câu hướng dẫn THIEU APIFY_TOKEN, dừng sạch exit 2, không bulk, không traceback; secret-scan diff: 0 hit; `apify_api_...` chỉ là placeholder trong docstring. (5) tasks.md: T003 [X], T003c [X] kèm note nac-1 DONE/nac-2 pending T003b, T003b giữ [ ] (đúng — chưa bulk).
+- File đổi: (reviewer) specs/001-travel-agent-mvp/track.md — thêm entry này; không sửa code coder.
+- Cần fix / cần orchestrator quyết: không có. Đề xuất orchestrator: cho merge lane A phase này (diff ~515 dòng, dưới ngưỡng cần tách PR nhỏ hơn nếu tính cả seed JSON) hoặc tiếp tục T003b khi có token.
+
 _(chưa có entry nào)_
