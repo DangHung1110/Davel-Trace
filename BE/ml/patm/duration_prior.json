@@ -1,0 +1,79 @@
+{
+ "shrink_k": 20,
+ "cats": {
+  "restaurant": {
+   "p25": 17.2,
+   "p50": 37.9,
+   "p75": 89.2,
+   "n": 223,
+   "confidence": "high"
+  },
+  "market": {
+   "p25": 9.0,
+   "p50": 16.2,
+   "p75": 59.0,
+   "n": 453,
+   "confidence": "high"
+  },
+  "attraction": {
+   "p25": 52.6,
+   "p50": 119.0,
+   "p75": 174.4,
+   "n": 235,
+   "confidence": "high"
+  },
+  "landmark": {
+   "p25": 26.5,
+   "p50": 60.7,
+   "p75": 113.9,
+   "n": 44,
+   "confidence": "medium"
+  },
+  "park": {
+   "p25": 58.2,
+   "p50": 84.8,
+   "p75": 139.7,
+   "n": 15,
+   "confidence": "low"
+  },
+  "cafe": {
+   "p25": 24.7,
+   "p50": 62.5,
+   "p75": 158.9,
+   "n": 69,
+   "confidence": "medium"
+  },
+  "nature": {
+   "p25": 37.9,
+   "p50": 72.5,
+   "p75": 161.2,
+   "n": 59,
+   "confidence": "medium"
+  },
+  "museum": {
+   "p25": 29.8,
+   "p50": 58.2,
+   "p75": 115.8,
+   "n": 38,
+   "confidence": "medium"
+  },
+  "transport": {
+   "p25": 14.0,
+   "p50": 20.0,
+   "p75": 28.0,
+   "n": 0,
+   "confidence": "low"
+  },
+  "beach": {
+   "p25": 84.0,
+   "p50": 120.0,
+   "p75": 168.0,
+   "n": 0,
+   "confidence": "low"
+  }
+ },
+ "meta": {
+  "n_dwells": 1136,
+  "source": "Foursquare-TKY consecutive same-venue gaps 5m..12h"
+ }
+}
