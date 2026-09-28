@@ -36,8 +36,8 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord
 - [ ] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
-- [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
-- [ ] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
+- [X] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
+- [X] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
 
 **Checkpoint**: Foundation ready — schemas load, seed snapshot validates, matrix serves, LLM gateway returns validated JSON
 
