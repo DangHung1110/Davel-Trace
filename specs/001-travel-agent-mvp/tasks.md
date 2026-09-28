@@ -191,4 +191,8 @@ description: "Task list for Personalized Travel Agent MVP"
 
 ## Milestone M1 (mobility prior — ngoài MVP line)
 
-- [ ] T062 Foursquare mobility prior P(cat|cat,bucket) + PATM feature (prior.py/crosswalk/transition_prior.json, features #17, eval vs unigram + ablation) [PARTIAL 2026-09-28 lane A: ppl −10.9% MET / acc +6.0% SHORT / ablation +1.0pp SHORT (+5pp); feature wired, tests green; NO tick — see docs/mobility-prior.md]
+- [ ] T062 Foursquare mobility prior P(cat|cat,bucket) + PATM feature (prior.py/crosswalk/transition_prior.json, features #17, eval vs unigram + ablation) [PARTIAL 2026-09-28 lane A: ppl −10.9% MET / acc +6.0% SHORT / ablation +1.0pp SHORT (+5pp); feature wired, tests green; NO tick - see docs/mobility-prior.md]
+
+## Milestone M2 (dwell duration prior — ngoài MVP line)
+
+- [ ] T064 Foursquare-TKY dwell EB-shrinkage duration prior + optimizer/validator hooks (duration_prior.py/json, seed smoke; real eval coverage>=80% + MAE>=10% better PENDING user gold checklist) [WIP 2026-09-28 lane A: n=1136 dwells, posteriors sane, smoke log-MAE 0.546 preliminary; NO tick - see docs/dwell-prior.md]
