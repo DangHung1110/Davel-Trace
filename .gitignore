@@ -33,3 +33,6 @@ DavelAgentAnswer.txt
 
 # Agent-tool-local files (opencode-only wrappers; each provider keeps its own)
 .opencode/
+
+# SerpApi fetch resume cache (raw payloads + quota counter, never commit)
+data/snapshots/danang-full-tmp/
