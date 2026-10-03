@@ -13,7 +13,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.eval.metrics import GATE_CHECKS, evaluate  # noqa: E402
+from BE.eval.metrics import GATE_CHECKS, evaluate, vroh  # noqa: E402
 
 SNAPSHOT_DIR = os.path.join("data", "snapshots", "danang-v1")
 
@@ -113,6 +113,36 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual(len(GATE_CHECKS), 5)
         for _, fn, _ in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
+
+    def test_multi_interval_hours_parse(self):
+        def score(activities, hours):
+            return vroh(
+                {"activities": activities}, {},
+                {"poi": {"opening_hours": hours}}, {},
+            )
+
+        multi_interval = ["10:30-14:00, 16:30-22:30"]
+        self.assertAlmostEqual(score([
+            {"poi_id": "poi", "start": "11:00", "end": "12:00"},
+            {"poi_id": "poi", "start": "17:00", "end": "18:00"},
+            {"poi_id": "poi", "start": "15:00", "end": "16:00"},
+        ], multi_interval), 1 / 3)
+
+        overnight_and_daytime = ["22:00-02:00, 08:00-12:00"]
+        self.assertEqual(score([
+            {"poi_id": "poi", "start": "23:00", "end": "01:00"},
+            {"poi_id": "poi", "start": "09:00", "end": "10:00"},
+        ], overnight_and_daytime), 0.0)
+
+        # A single-time fragment is not an interval and is treated as closed.
+        self.assertEqual(score([
+            {"poi_id": "poi", "start": "12:03", "end": "12:04"},
+        ], ["12:03"]), 1.0)
+
+        # An empty hours list continues to mean that no hours constraint exists.
+        self.assertEqual(score([
+            {"poi_id": "poi", "start": "12:03", "end": "12:04"},
+        ], []), 0.0)
 
 
 if __name__ == "__main__":

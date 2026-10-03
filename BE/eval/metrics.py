@@ -62,7 +62,13 @@ def vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
         p = pois.get(a.get("poi_id"), {})
         hours = p.get("opening_hours") or []
         s, e = to_min(a["start"]), to_min(a["end"])
-        if hours and not any(_in_range(s, e, h) for h in hours):
+        if hours and not any(
+            _in_range(s, e, interval.strip())
+            for period in hours
+            for interval in period.split(",")
+            # Incomplete fragments such as "12:03" are closed, not ranges.
+            if interval.count("-") == 1
+        ):
             bad += 1
     return bad / len(acts)
 
