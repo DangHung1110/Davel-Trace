@@ -52,6 +52,40 @@ class TestParseContract(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         self.assertEqual(r.json()["needs_clarification"], ["city"])
 
+    def test_request_validation_uses_error_envelope(self):
+        r = client.post("/v1/parse", json={})
+        self.assertEqual(r.status_code, 422)
+        self.assertEqual(set(r.json()), {"error", "message"})
+        self.assertEqual(r.json()["error"], "VALIDATION_ERROR")
+
+    def test_parser_trip_validation_returns_422_envelope(self):
+        parser_svc.llm_gateway.complete_json = lambda prompt, schema: dict(FULL, days=3)
+        try:
+            r = client.post("/v1/parse", json={"text": "đi Đà Nẵng 3 ngày"})
+        finally:
+            parser_svc.llm_gateway.complete_json = TestParseContract._real
+        self.assertEqual(r.status_code, 422)
+        self.assertEqual(set(r.json()), {"error", "message"})
+        self.assertEqual(r.json()["error"], "VALIDATION_ERROR")
+        self.assertIn("days", r.json()["message"])
+
+    def test_unhandled_errors_use_error_envelope(self):
+        real_parse = parser_svc.parse
+
+        def fail_parse(*args, **kwargs):
+            raise RuntimeError("private failure detail")
+
+        parser_svc.parse = fail_parse
+        try:
+            no_raise_client = TestClient(main_mod.app, raise_server_exceptions=False)
+            r = no_raise_client.post("/v1/parse", json={"text": "đi Đà Nẵng"})
+        finally:
+            parser_svc.parse = real_parse
+        self.assertEqual(r.status_code, 500)
+        self.assertEqual(set(r.json()), {"error", "message"})
+        self.assertEqual(r.json()["error"], "INTERNAL_ERROR")
+        self.assertNotIn("private failure detail", r.text)
+
 
 if __name__ == "__main__":
     unittest.main()

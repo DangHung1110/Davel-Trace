@@ -1,8 +1,8 @@
-"""Contract test POST /v1/itinerary (T013, lane C). Shape per contracts/api.md.
+"""Contract tests for POST /v1/itinerary and the select registration seam.
 
-Uses a tmp snapshot fixture (lane C has no seed): plans[0] carries
-activities + totals + constraint_status + version, selected is None;
-missing snapshot -> SNAPSHOT_MISSING envelope (no crash).
+Candidates are built from the real retrieval service against a temporary
+snapshot. The lane-B profile planner is absent on this branch, so the API
+must return an explicit 501 rather than a rank-order stub.
 """
 
 import json
@@ -10,6 +10,7 @@ import os
 import sys
 import tempfile
 import unittest
+import uuid
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -17,7 +18,9 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from BE.app import main as main_mod  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
+from BE.app.routers import select as select_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
+from BE.app.services import retrieval as retrieval_svc  # noqa: E402
 
 POIS = [
     {"poi_id": "beach", "name": "Beach", "type": "beach", "lat": 16.0,
@@ -38,7 +41,7 @@ CELLS = {"beach->noodle": {"minutes": 10, "km": 3.0},
 TRIP = {"trip_id": "t1", "user_id": "u1", "city": "da-nang",
         "start_time": "07:00", "end_time": "18:00", "days": 1,
         "travelers": 2, "budget": 3000000, "transport": ["motorbike"],
-        "must_visit": [], "avoid": [], "activities": ["biển"],
+        "must_visit": [], "avoid": [], "activities": ["biển", "ăn"],
         "food_prefs": [], "order_prefs": []}
 
 client = TestClient(main_mod.app, raise_server_exceptions=False)
@@ -60,17 +63,80 @@ class TestItineraryContract(unittest.TestCase):
     def tearDownClass(cls):
         itinerary_mod.get_settings = cls._real
 
-    def test_itinerary_shape(self):
-        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": ["balanced"]})
+    def _retrieval_pool(self):
+        pois = retrieval_svc.load_pois_json(os.path.join(self.tmp, "pois.json"))
+        return retrieval_svc.retrieve(TRIP, pois)["candidates"]
+
+    def test_itinerary_router_registered(self):
+        post_paths = {
+            route.path for route in main_mod.app.routes
+            if "POST" in getattr(route, "methods", set())
+        }
+        self.assertIn("/v1/itinerary", post_paths)
+        self.assertIn("/v1/itinerary/select", post_paths)
+
+    def test_three_profiles_yield_three_plans_or_501(self):
+        pool = self._retrieval_pool()
+        self.assertEqual({candidate["poi_id"] for candidate in pool},
+                         {"beach", "noodle"})
+
+        profiles = ["savings", "balanced", "experience"]
+        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": profiles})
+        if r.status_code == 501:
+            body = r.json()
+            self.assertEqual(set(body), {"error", "message"})
+            self.assertEqual(body["error"], "PLANNER_UNAVAILABLE")
+            return
+
         self.assertEqual(r.status_code, 200, r.text)
         body = r.json()
-        self.assertIn("plans", body)
         self.assertIsNone(body["selected"])
-        plan = body["plans"][0]
-        for k in ("itinerary_id", "activities", "total_cost", "total_km",
-                  "total_min", "constraint_status", "version"):
-            self.assertIn(k, plan)
-        self.assertTrue(plan["activities"])
+        self.assertEqual([plan["profile"] for plan in body["plans"]], profiles)
+        self.assertEqual(len({plan["itinerary_id"] for plan in body["plans"]}), 3)
+
+    def test_itinerary_id_not_hardcoded(self):
+        trip_id = "request-trip-uuid-test"
+        requested_profiles = ["savings", "balanced", "experience"]
+        built_profiles = []
+
+        def build_plan(**kwargs):
+            built_profiles.append(kwargs["profile"])
+            return {"activities": [], "total_cost": 0, "total_km": 0,
+                    "total_min": 0, "constraint_status": {}}
+
+        store = select_mod.get_store()
+        old_plans = dict(store["plans"])
+        old_active_id = store["active_id"]
+        old_builder = itinerary_mod._get_plan_builder
+        try:
+            select_mod.reset_store()
+            itinerary_mod._get_plan_builder = lambda: build_plan
+            r = client.post("/v1/itinerary", json={
+                "trip": dict(TRIP, trip_id=trip_id),
+                "profiles": requested_profiles,
+            })
+            self.assertEqual(r.status_code, 200, r.text)
+            self.assertEqual(built_profiles, requested_profiles)
+            plans = r.json()["plans"]
+            self.assertEqual([plan["profile"] for plan in plans], requested_profiles)
+            self.assertEqual(len(plans), len(requested_profiles))
+            itinerary_ids = set()
+            for plan in plans:
+                self.assertEqual(plan["trip_id"], trip_id)
+                self.assertNotEqual(plan["itinerary_id"], "it-stub-1")
+                uuid.UUID(plan["itinerary_id"])
+                itinerary_ids.add(plan["itinerary_id"])
+            self.assertEqual(len(itinerary_ids), len(requested_profiles))
+            self.assertTrue(itinerary_ids.issubset(select_mod.get_store()["plans"]))
+
+            selected = client.post("/v1/itinerary/select", json={
+                "itinerary_id": plans[0]["itinerary_id"]})
+            self.assertEqual(selected.status_code, 200, selected.text)
+            self.assertEqual(selected.json(), {"active_id": plans[0]["itinerary_id"]})
+        finally:
+            itinerary_mod._get_plan_builder = old_builder
+            store["plans"] = old_plans
+            store["active_id"] = old_active_id
 
     def test_missing_snapshot_envelope(self):
         itinerary_mod.get_settings = lambda: Settings(snapshot_dir="/no/such/dir",
@@ -81,6 +147,7 @@ class TestItineraryContract(unittest.TestCase):
             itinerary_mod.get_settings = lambda: Settings(snapshot_dir=self.tmp,
                                                           snapshot_name="test")
         self.assertEqual(r.status_code, 503)
+        self.assertEqual(set(r.json()), {"error", "message"})
         self.assertEqual(r.json()["error"], "SNAPSHOT_MISSING")
 
 

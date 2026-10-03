@@ -26,7 +26,7 @@ class TripSlots(BaseModel):
 
 
 def ok_transport(url, headers, body):
-    assert body["temperature"] == 0.1
+    assert body["options"]["temperature"] == 0.1
     return {"text": '{"city": "da-nang", "days": 2}'}
 
 
@@ -65,6 +65,20 @@ class TestLLM(unittest.TestCase):
         out = complete_json("p", TripSlots, ok_transport, LOCAL)
         self.assertEqual(out, {"city": "da-nang", "days": 2})
 
+    def test_ollama_request_body_has_stream_false_and_json_format(self):
+        seen = {}
+
+        def run(url, headers, body):
+            seen.update(body)
+            return {"text": '{"city": "da-nang", "days": 2}'}
+
+        complete_json("p", TripSlots, run, LOCAL)
+
+        self.assertEqual(seen["stream"], False)
+        self.assertEqual(seen["format"], "json")
+        self.assertEqual(seen["options"], {"temperature": 0.1})
+        self.assertNotIn("temperature", seen)
+
     def test_retry_heals_garbage(self):
         t = flaky_then_ok()
         out = complete_json("p", TripSlots, t, LOCAL)
@@ -101,6 +115,7 @@ class TestLLM(unittest.TestCase):
         self.assertEqual(out["days"], 1)
         self.assertIn("/chat/completions", seen["url"])
         self.assertEqual(seen["headers"]["Authorization"], "Bearer sk-test-fake")
+        self.assertEqual(seen["body"]["temperature"], 0.1)
 
 
 if __name__ == "__main__":

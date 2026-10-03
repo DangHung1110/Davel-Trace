@@ -42,10 +42,14 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
                 {"Content-Type": "application/json",
                  "Authorization": f"Bearer {key}"},
                 {"model": os.environ.get("LLM_API_MODEL", "gpt-4o-mini"),
-                 "response_format": {"type": "json_object"}})
+                 "response_format": {"type": "json_object"},
+                 "temperature": TEMPERATURE})
     return (settings.ollama_url.rstrip("/") + "/api/chat",  # local Ollama
             {"Content-Type": "application/json"},
-            {"model": settings.judge_model})
+            {"model": settings.judge_model,
+             "stream": False,
+             "format": "json",
+             "options": {"temperature": TEMPERATURE}})
 
 
 def _urllib_transport(url: str, headers: dict, body: dict) -> dict:
@@ -78,8 +82,7 @@ def complete_json(prompt: str, schema=None, transport=None,
     settings = settings or get_settings()
     transport = transport or _urllib_transport
     url, headers, extra = _endpoint(settings)
-    body = {**extra, "temperature": TEMPERATURE,
-            "messages": [{"role": "user", "content": prompt}]}
+    body = {**extra, "messages": [{"role": "user", "content": prompt}]}
     last: LLMError = LLMError("transport", "no attempt made")
     for _ in range(MAX_RETRIES + 1):
         try:

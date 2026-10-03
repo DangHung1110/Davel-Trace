@@ -1,10 +1,8 @@
-"""US4 integration (T034, lane C — closes US4). Distinctness + persistence.
+"""US4 multi-profile API boundary using a real retrieval fixture.
 
-1 request -> >=2 feasible plans with distinct scores/reasons; select 1
--> active correct + others kept for compare. Pool built from 3 stub
-profiles (STUB-NOTE: real multi-run pool is lane-B T032, wired at
-phase-PR; shapes here mirror its contract). Pipeline leg via the
-itinerary endpoint on a fixture snapshot proves the flow works.
+The former hand-authored plan pool is removed: lane B's profile optimizer
+is absent here, so the route must return an explicit 501 until that seam is
+available. When present, one request must return one plan per requested profile.
 
 Run: python BE/tests/integration/test_us4_multi.py -v (or pytest)
 """
@@ -22,7 +20,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 from BE.app import main as main_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
-from BE.app.routers import select as select_mod  # noqa: E402
+from BE.app.services import retrieval as retrieval_svc  # noqa: E402
 
 POIS = [
     {"poi_id": "hill", "name": "H", "type": "nature", "lat": 16.1,
@@ -52,25 +50,6 @@ TRIP = {"trip_id": "t1", "user_id": "u1", "city": "da-nang",
         "must_visit": [], "avoid": [], "activities": ["leo núi", "biển"],
         "food_prefs": [], "order_prefs": []}
 
-# STUB pool mirroring lane-B T032 shapes (replaced at phase-PR)
-POOL = [
-    {"itinerary_id": "it-sav", "profile": "savings",
-     "reason": "tiết kiệm: phạt nặng chi phí",
-     "activities": [{"poi_id": "hill"}, {"poi_id": "beach"}],
-     "total_cost": 0, "preference": 4.65,
-     "constraint_status": {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1}},
-    {"itinerary_id": "it-bal", "profile": "balanced",
-     "reason": "cân bằng: tổng rating cao nhất",
-     "activities": [{"poi_id": "hill"}, {"poi_id": "noodle"}],
-     "total_cost": 50000, "preference": 4.6,
-     "constraint_status": {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1}},
-    {"itinerary_id": "it-exp", "profile": "experience",
-     "reason": "trải nghiệm: ưu tiên rating + đậm chất",
-     "activities": [{"poi_id": "beach"}, {"poi_id": "noodle"}],
-     "total_cost": 50000, "preference": 4.55,
-     "constraint_status": {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1}},
-]
-
 client = TestClient(main_mod.app, raise_server_exceptions=False)
 
 
@@ -90,30 +69,22 @@ class TestUS4Multi(unittest.TestCase):
     def tearDownClass(cls):
         itinerary_mod.get_settings = cls._settings
 
-    def test_pipeline_yields_feasible_plan(self):
-        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": ["balanced"]})
+    def test_three_profiles_yield_three_plans_or_501(self):
+        pool = retrieval_svc.retrieve(TRIP, POIS)["candidates"]
+        self.assertEqual({candidate["poi_id"] for candidate in pool},
+                         {"hill", "beach"})
+
+        profiles = ["savings", "balanced", "experience"]
+        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": profiles})
+        if r.status_code == 501:
+            self.assertEqual(set(r.json()), {"error", "message"})
+            self.assertEqual(r.json()["error"], "PLANNER_UNAVAILABLE")
+            return
+
         self.assertEqual(r.status_code, 200, r.text)
-        plan = r.json()["plans"][0]
-        self.assertTrue(plan["activities"])
-        self.assertEqual(set(plan["constraint_status"]), {"FAR", "VROH", "B3", "BCS"})
-
-    def test_pool_distinctness(self):
-        feasible = [p for p in POOL
-                    if all(v == 1 for v in p["constraint_status"].values())]
-        self.assertGreaterEqual(len(feasible), 2)
-        self.assertGreater(len({p["total_cost"] for p in feasible}), 1)
-        self.assertGreater(len({p["preference"] for p in feasible}), 1)
-        self.assertEqual(len({p["reason"] for p in feasible}), len(feasible))
-
-    def test_select_persists_others(self):
-        select_mod.reset_store()
-        select_mod.register(POOL)
-        r = client.post("/v1/itinerary/select", json={"itinerary_id": "it-exp"})
-        self.assertEqual(r.json(), {"active_id": "it-exp"})
-        store = select_mod.get_store()
-        self.assertEqual(store["active_id"], "it-exp")
-        self.assertEqual(sorted(store["plans"]), ["it-bal", "it-exp", "it-sav"])
-        print(f"\n active it-exp kept: {sorted(store['plans'])}")
+        plans = r.json()["plans"]
+        self.assertEqual([plan["profile"] for plan in plans], profiles)
+        self.assertEqual(len(plans), 3)
 
 
 if __name__ == "__main__":

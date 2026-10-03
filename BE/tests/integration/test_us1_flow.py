@@ -1,10 +1,8 @@
-"""US1 seed end-to-end (T021, lane C). quickstart S2+S3 via TestClient.
+"""US1 parser and planning boundary via TestClient.
 
-Fixed prompt -> parse -> retrieval -> rank -> (optimizer/validator
-STUB lane B, kept + stub-noted, replaced at phase-PR) -> response:
-output has required fields (POI, start/end, travel, cost, reasons),
-no time overlap, every activity has >=1 reason; missing-info prompt
--> clarification. Fixture snapshot (lane C has no seed).
+Fixed prompt -> parse -> real retrieval fixture -> explicit planner
+unavailable envelope until lane B's feasibility service is present;
+missing-info prompt -> clarification. Fixture snapshot (lane C has no seed).
 
 Run: python BE/tests/integration/test_us1_flow.py -v  (or pytest)
 """
@@ -23,6 +21,7 @@ from BE.app import main as main_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import parser as parser_svc  # noqa: E402
+from BE.app.services import retrieval as retrieval_svc  # noqa: E402
 
 POIS = [
     {"poi_id": "hill", "name": "Hill", "type": "nature", "lat": 16.1,
@@ -96,13 +95,20 @@ class TestUS1Flow(unittest.TestCase):
         self.assertEqual(trip["budget"], 3000000)
         TestUS1Flow.trip = trip
 
-    def test_s3_plan_feasible_with_reasons(self):
+    def test_s3_planning_boundary(self):
         r = client.post("/v1/parse", json={"text": "cuối tuần đi Đà Nẵng"})
         trip = {k: v for k, v in r.json().items()
                 if k in ("trip_id", "user_id", "city", "start_time", "end_time", "days",
                          "travelers", "budget", "transport", "must_visit", "avoid",
                          "activities", "food_prefs", "order_prefs")}
+        pool = retrieval_svc.retrieve(trip, POIS)["candidates"]
+        self.assertEqual({candidate["poi_id"] for candidate in pool}, {"hill", "beach"})
         r = client.post("/v1/itinerary", json={"trip": trip, "profiles": ["balanced"]})
+        if r.status_code == 501:
+            self.assertEqual(set(r.json()), {"error", "message"})
+            self.assertEqual(r.json()["error"], "PLANNER_UNAVAILABLE")
+            return
+
         self.assertEqual(r.status_code, 200, r.text)
         plan = r.json()["plans"][0]
         acts = plan["activities"]
