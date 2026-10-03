@@ -18,13 +18,13 @@ description: "Task list for Personalized Travel Agent MVP"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
-- [ ] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
+- [X] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
+- [X] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
 - [ ] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
 - [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via Apify one-shot (free $5, test 10 trước, ≤2 ngày; tắc >2 ngày → fallback Overpass + tay): normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
 - [ ] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8)
-- [ ] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
-- [ ] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
+- [X] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
+- [X] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
 - [ ] T006 [P] FE API client skeleton (`FE/lib/api/client.dart`, base URL config)
 
 ---
@@ -33,7 +33,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story
 
-- [ ] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord
+- [X] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [foundation DONE 2026-09-28 lane C: trip (User/TripRequest); poi/eval (A) + plan (B) pending]
 - [ ] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
 - [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
@@ -48,16 +48,16 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Vietnamese prompt → structured trip → single feasible 1-day itinerary + reasons
 **Independent Test**: quickstart S1–S3 on seed data
 
-- [ ] T012 [P] [US1] Contract test `POST /v1/parse` in `BE/tests/contract/test_parse.py` (write FIRST, fail)
-- [ ] T013 [P] [US1] Contract test `POST /v1/itinerary` in `BE/tests/contract/test_itinerary.py` (write FIRST, fail)
-- [ ] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
-- [ ] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
-- [ ] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
+- [X] T012 [P] [US1] Contract test `POST /v1/parse` in `BE/tests/contract/test_parse.py` (write FIRST, fail)
+- [X] T013 [P] [US1] Contract test `POST /v1/itinerary` in `BE/tests/contract/test_itinerary.py` (write FIRST, fail)
+- [X] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
+- [X] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
+- [X] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
 - [ ] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
 - [ ] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
 - [ ] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
-- [ ] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
-- [ ] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
+- [X] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
+- [X] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
 
 **Checkpoint**: US1 fully functional — fixed Vietnamese prompt yields feasible itinerary on 7-POI seed
 
@@ -69,9 +69,9 @@ description: "Task list for Personalized Travel Agent MVP"
 **Independent Test**: "quán yên tĩnh hẹn hò gần biển" returns matching POIs with reasons
 
 - [ ] T022 [P] [US2] Extend POI schema fields (ambience, crowd, dietary, pros/cons, source, fetched_at)
-- [ ] T023 [US2] Context scorer (`BE/app/services/context_score.py`): preference→attribute mapping incl. "yên tĩnh/hẹn hò/sau hiking" rules
-- [ ] T024 [US2] Uncertainty labeling in retrieval output (unverified excluded from main plan)
-- [ ] T025 [US2] Integration test US2 in `BE/tests/integration/test_us2_recommend.py`
+- [X] T023 [US2] Context scorer (`BE/app/services/context_score.py`): preference→attribute mapping incl. "yên tĩnh/hẹn hò/sau hiking" rules
+- [X] T024 [US2] Uncertainty labeling in retrieval output (unverified excluded from main plan)
+- [X] T025 [US2] Integration test US2 in `BE/tests/integration/test_us2_recommend.py`
 
 **Checkpoint**: US1 + US2 work independently
 
@@ -99,8 +99,8 @@ description: "Task list for Personalized Travel Agent MVP"
 **Independent Test**: one request → ≥2 feasible plans with distinct scores/reasons
 
 - [ ] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`)
-- [ ] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`)
-- [ ] T034 [US4] Integration test US4 (distinctness + selection persistence)
+- [X] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`) [T032s scorer lane B + T033e select lane C — US4 closed]
+- [X] T034 [US4] Integration test US4 (distinctness + selection persistence)
 
 ---
 
@@ -109,10 +109,10 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Budget set at planning, expense log, 80%/100% alerts, remaining feeds replan
 **Independent Test**: quickstart S6
 
-- [ ] T035 [P] [US5] Expense store + routers (`POST /v1/expenses`, summary) per contracts/api.md
-- [ ] T036 [US5] Budget wiring: trip budget → alerts → remaining into replan constraints (depends on T035 + Phase 10)
-- [ ] T037 [US5] FE budget UI (replace in-memory expenses with API) in `FE/lib/features/expenses/`
-- [ ] T038 [US5] Integration test US5 (S6 scenario)
+- [X] T035 [P] [US5] Expense store + routers (`POST /v1/expenses`, summary) per contracts/api.md
+- [ ] T036 [US5] Budget wiring: trip budget → alerts → remaining into replan constraints (depends on T035 + Phase 10) [T036a DONE 2026-09-28 lane C: replan_budget(); T036b replan feed lane B pending]
+- [ ] T037 [US5] FE budget UI (replace in-memory expenses with API) in `FE/lib/features/expenses/` [BLOCKED 2026-09-28: FE app only in feat/flutter-mobile-shell (lane-c has README only) + no Flutter SDK on machine — doi human merge/SDK]
+- [X] T038 [US5] Integration test US5 (S6 scenario)
 
 ---
 
@@ -121,9 +121,9 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Open-Meteo fetch/cache, context injection, rain>70% proactive suggestion
 **Independent Test**: mocked rain 80% afternoon → outdoor swapped + reason cited
 
-- [ ] T039 [P] [US6] Weather service (`BE/app/services/weather.py`): fetch, cache, fetched_at label
-- [ ] T040 [US6] Weather→context wiring (weather_id features, explanation lines, rain trigger)
-- [ ] T041 [US6] Integration test US6 with mocked forecast
+- [X] T039 [P] [US6] Weather service (`BE/app/services/weather.py`): fetch, cache, fetched_at label
+- [X] T040 [US6] Weather→context wiring (weather_id features, explanation lines, rain trigger)
+- [X] T041 [US6] Integration test US6 with mocked forecast
 
 ---
 
@@ -132,8 +132,8 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Fact/inference-split explanations with uncertainty flags
 **Independent Test**: every decision in sample plan has ≥1 evidenced reason; no unverified claims
 
-- [ ] T042 [US7] Explanation builder (`BE/app/services/explainer.py`): claim+evidence|inference+source per decision
-- [ ] T043 [US7] Hallucination sweep test (POI names/hours cross-checked vs snapshot)
+- [X] T042 [US7] Explanation builder (`BE/app/services/explainer.py`): claim+evidence|inference+source per decision
+- [X] T043 [US7] Hallucination sweep test (POI names/hours cross-checked vs snapshot)
 
 ---
 
@@ -145,7 +145,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T044 [P] [US8] Event classifier S2 (templates + paraphrase + TF-IDF/LightGBM or PhoBERT, ~8 types)
 - [ ] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
 - [ ] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
-- [ ] T047 [US8] Mock GPS feed interface + timeline file for video demo
+- [X] T047 [US8] Mock GPS feed interface + timeline file for video demo
 - [ ] T048 [US8] Integration test US8 (S5 scenario)
 
 ---
@@ -173,8 +173,8 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T055 [P] Plan cards UI (3 profiles + scores + select) in `FE/lib/features/itinerary/`
 - [ ] T056 [P] Radar-chart comparison script (hybrid vs baselines)
 - [ ] T057 Full quickstart.md validation run (S1–S7 green)
-- [ ] T058 Docs: README BE run guide + demo video script (mock GPS timeline + rain scenario)
-- [ ] T059 Security sweep: no secrets, `.env` excluded, logs redacted
+- [X] T058 Docs: README BE run guide + demo video script (mock GPS timeline + rain scenario)
+- [X] T059 Security sweep: no secrets, `.env` excluded, logs redacted
 
 ---
 
