@@ -75,6 +75,8 @@ Pre-fill 46/49 dòng (rows 4–49) từ review Claude-chat; 3 dòng của user g
   lane A `metrics.py:21` — unpack 3 mảnh (hoặc 1 mảnh với giờ lẻ kiểu `"12:03"`) → `ValueError`.
   Hiện ẩn vì verified=false nên POI bị bỏ qua trước bước đọc giờ; bật verified = retrieve() crash trên 329 POI.
   Fix: tách theo dấu phẩy thành nhiều khoảng trước khi split("-") (1 chỗ/lane) + `test_multi_interval_hours_parse`.
+  DONE 2026-10-03 cả 3 lane (gpt-6-luna#max): A=`81cbb97` (8 tests), B=`569f093` (18 tests incl. suites phụ thuộc),
+  C=`a2acc3d` (8 tests). Worktree tạm đã dọn, về 1 folder.
 - **Backlog data (chưa thành task):** ~25 POI không phải điểm du lịch (tiêm chủng Long Châu, KCN,
   cầu vượt 240', 3 nhà hàng tiệc cưới, thuê xe máy, "Aarohi Media Training"→Bảo tàng,
   VinWonders Nha Trang tọa độ Đà Nẵng); trùng lặp (Mỹ Khê 6 bản/5 bản 240' → optimizer xếp Mỹ Khê 2–3 lần,
