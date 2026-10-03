@@ -41,12 +41,19 @@ def load_pois_json(path: str) -> list[dict]:
 
 def _overlaps(hours: list[str], ws: int, we: int) -> bool:
     for h in hours or []:
-        o, c = h.split("-")
-        o, c = to_min(o), to_min(c)
-        if o <= c and o < we and ws < c:
-            return True
-        if o > c and (ws < c or o < we):
-            return True
+        for interval in h.split(","):
+            if interval.count("-") != 1:
+                # A stray single-time fragment is not an open interval; skip it as closed.
+                continue
+            o, c = (part.strip() for part in interval.split("-"))
+            try:
+                o, c = to_min(o), to_min(c)
+            except ValueError:
+                continue
+            if o <= c and o < we and ws < c:
+                return True
+            if o > c and (ws < c or o < we):
+                return True
     return not hours
 
 

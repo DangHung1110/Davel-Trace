@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.retrieval import retrieve  # noqa: E402
+from BE.app.services.retrieval import _overlaps, retrieve  # noqa: E402
 
 POIS = [
     {"poi_id": "beach", "type": "beach", "fee": 0, "verified": True,
@@ -36,6 +36,16 @@ def ids(result, key):
 
 
 class TestRetrieval(unittest.TestCase):
+    def test_multi_interval_hours_parse(self):
+        hours = ["10:30-14:00, 16:30-22:30"]
+        self.assertTrue(_overlaps(hours, 11 * 60, 12 * 60))
+        self.assertTrue(_overlaps(hours, 17 * 60, 18 * 60))
+        self.assertFalse(_overlaps(hours, 14 * 60, 16 * 60))
+        self.assertTrue(_overlaps(
+            ["09:00-12:00, 22:00-02:00"], 23 * 60, 23 * 60 + 30))
+        self.assertFalse(_overlaps(["12:03"], 12 * 60, 13 * 60))
+        self.assertTrue(_overlaps([], 12 * 60, 13 * 60))
+
     def test_type_filter(self):
         out = retrieve(TRIP, POIS)
         self.assertEqual(ids(out, "candidates"), ["beach", "noodle"])
