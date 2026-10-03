@@ -23,21 +23,40 @@ def hh(m: int) -> str:
     return f"{m // 60:02d}:{m % 60:02d}"
 
 
+def _intervals(spec: str):
+    """Yield (open, close) minutes for every 'HH:MM-HH:MM' in `spec`.
+
+    A single hours element may pack several comma-separated intervals,
+    e.g. "10:30-14:00, 16:30-22:30". Stray single-time fragments (no
+    '-' or malformed) are skipped as closed so bad data cannot raise.
+    """
+    for part in (spec or "").split(","):
+        part = part.strip()
+        if part.count("-") != 1:
+            continue  # stray/malformed time -> treat as closed
+        o, c = part.split("-")
+        yield to_min(o), to_min(c)
+
+
 def in_range(start: int, end: int, spec: str) -> bool:
-    """True iff [start, end] fits an 'HH:MM-HH:MM' window (wraps midnight)."""
-    o, c = spec.split("-")
-    o, c = to_min(o), to_min(c)
-    if o <= c:
-        return o <= start and end <= c
-    return start >= o or end <= c
+    """True iff [start, end] fits any 'HH:MM-HH:MM' window (wraps midnight)."""
+    for o, c in _intervals(spec):
+        if o <= c:
+            if o <= start and end <= c:
+                return True
+        elif start >= o or end <= c:
+            return True
+    return False
 
 
 def parse_hours(hours: list) -> tuple[int, int] | None:
     """First 'HH:MM-HH:MM' opening span as minutes, or None when unset."""
     if not hours:
         return None
-    o, c = hours[0].split("-")
-    return to_min(o), to_min(c)
+    for spec in hours:
+        for o, c in _intervals(spec):
+            return o, c
+    return None
 
 
 def total_fee(acts: list[dict], pois: dict) -> int:
