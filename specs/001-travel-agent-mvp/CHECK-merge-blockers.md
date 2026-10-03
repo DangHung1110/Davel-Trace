@@ -30,6 +30,10 @@ nhãn cặp 100% rule-generated (`make_pairs.py` judge batch mới là scaffold 
 
 ## 3. Severity + fix nhỏ nhất + test tái hiện (mỗi lỗi ≤30 dòng)
 
+STATUS 2026-10-03: DONE hết B1–B4, C5–C6, X9 (3 lane) — xác minh độc lập, test xanh:
+B=`8a77dd7` (60 tests) · C=`922433d` (79 tests) · X9=`81cbb97`/`569f093`/`a2acc3d`.
+Còn lại X7/X8 → wiring PR sau merge (cần cả 2 lane cùng tồn tại, không fix lẻ được).
+
 1. **B1** — `apply_delta` idempotent (dedupe `add` theo `kept`) + `test_replan_twice_no_duplicates`
 2. **X7** — `features.py` (lane A) là source of truth; `scorer.py` xóa copy, import về + `test_scorer_feature_names_match_patm_features`
 3. **B2** — thêm `check_etb` vào `gate.py` CHECKS + `test_plan_ending_after_return_time_fails_ETB`
