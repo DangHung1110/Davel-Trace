@@ -14,17 +14,17 @@ from BE.app.services.replan import replan  # noqa: E402
 
 H = 60
 POIS = [
-    {"poi_id": "hill", "visit_min": 120, "fee": 0, "intensity": 3,
+    {"poi_id": "hill", "verified": True, "visit_min": 120, "fee": 0, "intensity": 3,
      "weather_sensitive": True, "opening_hours": ["05:00-18:00"]},
-    {"poi_id": "beach", "visit_min": 120, "fee": 0, "intensity": 2,
+    {"poi_id": "beach", "verified": True, "visit_min": 120, "fee": 0, "intensity": 2,
      "weather_sensitive": True, "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "museum", "visit_min": 90, "fee": 60000, "intensity": 1,
+    {"poi_id": "museum", "verified": True, "visit_min": 90, "fee": 60000, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:30-17:00"]},
-    {"poi_id": "noodle", "visit_min": 60, "fee": 50000, "intensity": 1,
+    {"poi_id": "noodle", "verified": True, "visit_min": 60, "fee": 50000, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:00-21:00"]},
 ]
 IDS = [p["poi_id"] for p in POIS]
-TRAVEL = {(a, b): 10 for a in IDS for b in IDS if a != b}
+TRAVEL = {(a, b): 10 for a in ["depot"] + IDS for b in IDS if a != b}
 TRIP = {"trip_id": "t1", "budget": 3000000, "avoid": [],
         "start_time": "07:00", "end_time": "18:00"}
 
@@ -49,6 +49,20 @@ class TestReplan(unittest.TestCase):
                          if out["itinerary"]["activities"] else drops)
         print(f"\n rain: mode {out['mode']} v{out['version']} changes {out['changes']}")
 
+    def test_replan_twice_no_duplicates(self):
+        s = fresh_state()
+        event = {"type": "rain", "at": "13:00"}
+        first = replan(s, event, POIS, TRAVEL, TRIP)
+        self.assertEqual(first["mode"], "plan")
+        s2 = store.load("t1")
+        second = replan(s2, event, POIS, TRAVEL, TRIP)
+        self.assertEqual(second["mode"], "plan")
+        s3 = store.load("t1")
+        ids = [a["poi_id"] for a in s3["remaining"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual((s["version"], first["version"], second["version"]),
+                         (1, 2, 3))
+
     def test_hard_conflict_clarifies(self):
         s = fresh_state()
         out = replan(s, {"type": "add_req", "delta": {"must_keep": ["hill"]}},
@@ -70,6 +84,18 @@ class TestReplan(unittest.TestCase):
                       "start_time": "07:00", "end_time": "08:30"})
         self.assertEqual(out["mode"], "no_solution")
         self.assertIn("preserved_completed", out)
+
+    def test_unverified_poi_fails_FAR_in_replan(self):
+        trip = dict(TRIP, trip_id="unverified")
+        state = store.new_state("unverified", [{"poi_id": "draft"}],
+                                "07:00", "depot")
+        draft = {"poi_id": "draft", "verified": False, "visit_min": 60,
+                 "fee": 0, "intensity": 1, "weather_sensitive": False,
+                 "opening_hours": ["07:00-18:00"]}
+        out = replan(state, {"type": "delay"}, [draft],
+                     {("depot", "draft"): 5}, trip)
+        self.assertEqual(out["mode"], "no_solution")
+        self.assertIn("FAR", out["reason"])
 
 
 if __name__ == "__main__":

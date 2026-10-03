@@ -15,6 +15,7 @@ from BE.app.services.gate import (  # noqa: E402
     all_pass,
     check_b3,
     check_bcs,
+    check_etb,
     check_far,
     check_vroh,
 )
@@ -33,7 +34,7 @@ GOOD = {"activities": [
 
 class TestGate(unittest.TestCase):
     def test_good_passes_all(self):
-        for fn in (check_far, check_vroh, check_b3, check_bcs):
+        for fn in (check_far, check_vroh, check_b3, check_bcs, check_etb):
             self.assertTrue(fn(GOOD, TRIP, POIS, MATRIX))
         self.assertEqual(all_pass(GOOD, TRIP, POIS, MATRIX),
                          {"passed": True, "failed": []})
@@ -48,7 +49,7 @@ class TestGate(unittest.TestCase):
         self.assertFalse(check_far(bad, TRIP, POIS, MATRIX))
 
     def test_closed_hours_fails_vroh_only(self):
-        bad = {"activities": [{"poi_id": "musu", "start": "18:00", "end": "19:00"}]}
+        bad = {"activities": [{"poi_id": "musu", "start": "16:30", "end": "17:30"}]}
         self.assertFalse(check_vroh(bad, TRIP, POIS, MATRIX))
         self.assertEqual(all_pass(bad, TRIP, POIS, MATRIX)["failed"], ["VROH"])
 

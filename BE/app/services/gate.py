@@ -6,6 +6,7 @@
   fits the matrix travel minutes (research R4: haversine-only breaks
   B3 feasibility, hence T010's no-guess rule).
 - BCS: total cost within budget (SC-008).
+- ETB: the last activity ends by trip end_time and, when present, return_time.
 
 Self-contained (lane-B worktree has no BE/eval yet — lanes.md STUB
 rule): formulas mirror lane-A `BE/eval/metrics.py` ratios as booleans;
@@ -55,8 +56,19 @@ def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
     return cost <= int(trip.get("budget", 0))
 
 
+def check_etb(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> bool:
+    """True iff the last activity ends by each configured trip deadline."""
+    acts = itinerary.get("activities", [])
+    deadlines = [to_min(value) for value in
+                 (trip.get("end_time"), trip.get("return_time")) if value]
+    if not acts or not deadlines:
+        return True
+    last_end = max(to_min(a["end"]) for a in acts)
+    return last_end <= min(deadlines)
+
+
 CHECKS = (("FAR", check_far), ("VROH", check_vroh),
-          ("B3", check_b3), ("BCS", check_bcs))
+          ("B3", check_b3), ("BCS", check_bcs), ("ETB", check_etb))
 
 
 def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:

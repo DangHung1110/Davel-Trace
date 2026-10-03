@@ -25,7 +25,7 @@ POIS = [
     StubPOI("bridge", visit_min=30, open_min=0, close_min=24 * H, score=1.0),
 ]
 IDS = [p.poi_id for p in POIS]
-TRAVEL = {(a, b): (10 if a != b else 0) for a in IDS for b in IDS}
+TRAVEL = {(a, b): 10 for a in ["depot"] + IDS for b in IDS if a != b}
 TRIP = StubTrip(start_min=7 * H, end_min=18 * H, origin_id="depot")
 
 
@@ -66,11 +66,28 @@ class TestOptimizer(unittest.TestCase):
     def test_infeasible_has_reason(self):
         bad = [StubPOI("x", visit_min=300, open_min=7 * H, close_min=8 * H),
                StubPOI("y", visit_min=300, open_min=9 * H, close_min=10 * H)]
-        t = {(a, b): 120 for a in ("x", "y") for b in ("x", "y") if a != b}
+        t = {("depot", pid): 120 for pid in ("x", "y")}
+        t.update({(a, b): 120 for a in ("x", "y")
+                  for b in ("x", "y") if a != b})
         out = optimize(bad, t, StubTrip(7 * H, 12 * H), require_all=True)
         self.assertEqual(out["status"], "infeasible")
         self.assertTrue(out["reason"])
         self.assertIsNone(out["itinerary"])
+
+    def test_missing_travel_pair_is_infeasible_not_zero(self):
+        poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
+        out = optimize([poi], {("x", "depot"): 0},
+                       StubTrip(7 * H, 12 * H), require_all=True)
+        self.assertEqual(out["status"], "infeasible")
+        self.assertIsNone(out["itinerary"])
+
+    def test_origin_leg_uses_matrix(self):
+        poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
+        out = optimize([poi], {("depot", "x"): 45},
+                       StubTrip(7 * H, 12 * H), require_all=True)
+        self.assertIn(out["status"], ("optimal", "feasible-timeout"))
+        self.assertGreaterEqual(to_min(out["itinerary"]["activities"][0]["start"]),
+                                7 * H + 45)
 
 
 if __name__ == "__main__":

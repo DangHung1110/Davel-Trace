@@ -35,7 +35,7 @@ BY_ID = {"hill": HILL, "beach": BEACH, "noodle": NOODLE}
 POIS = [StubPOI("hill", 120, 5 * H, 12 * H, 1.0),
         StubPOI("beach", 120, 6 * H, 19 * H, 1.0),
         StubPOI("noodle", 60, 7 * H, 21 * H, 1.0)]
-TRAVEL = {(a, b): 10 for a in ("hill", "beach", "noodle")
+TRAVEL = {(a, b): 10 for a in ["depot", "hill", "beach", "noodle"]
           for b in ("hill", "beach", "noodle") if a != b}
 TRIP = StubTrip(7 * H, 18 * H)
 

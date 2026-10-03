@@ -68,7 +68,13 @@ def apply_delta(state: dict, delta: dict) -> dict:
     for a in state["remaining"]:
         if a["poi_id"] in dropped:
             state["cancelled"].append(dict(a, status="cancelled"))
-    state["remaining"] = kept + [dict(a, status="planned") for a in delta.get("add", [])]
+    kept_ids = {a["poi_id"] for a in kept}
+    added = []
+    for a in delta.get("add", []):
+        if a["poi_id"] not in kept_ids:
+            kept_ids.add(a["poi_id"])
+            added.append(dict(a, status="planned"))
+    state["remaining"] = kept + added
     if delta.get("now"):
         state["now"] = delta["now"]
     if delta.get("location"):

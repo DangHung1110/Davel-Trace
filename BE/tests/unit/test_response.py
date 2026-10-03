@@ -44,12 +44,12 @@ class TestResponse(unittest.TestCase):
                           TRIP, POIS, MATRIX)
         self.assertTrue(plan["passed"])
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1})
+                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1})
         self.assertEqual(plan["violations"], [])
 
     def test_failed_status_mirrors(self):
         bad = {"status": "optimal", "itinerary": {"activities": [
-            {"poi_id": "musu", "start": "18:00", "end": "19:00"}]}}
+            {"poi_id": "musu", "start": "16:30", "end": "17:30"}]}}
         plan = build_plan(bad, validate(bad["itinerary"], TRIP, POIS, MATRIX),
                           TRIP, POIS, MATRIX)
         self.assertFalse(plan["passed"])

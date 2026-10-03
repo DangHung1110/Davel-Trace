@@ -62,15 +62,20 @@ def replan(state: dict, event: dict, pois: list[dict],
     if completed_ids:
         last = completed_ids[-1]
         for x in cand_ids:
-            travel2.setdefault(("depot", x),
-                               travel.get((last, x), travel.get((x, last), 0)))
+            leg = travel.get((last, x))
+            if leg is None:
+                travel2.pop(("depot", x), None)
+            else:
+                travel2[("depot", x)] = leg
 
     stub = [StubPOI(pid, int(by_id[pid].get("visit_min", 60)),
                     *_win(by_id[pid], trip, state), 1.0)
             for pid in cand_ids if pid in by_id]
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
                 to_min(trip.get("start_time", "07:00")))
-    out = optimize(stub, travel2, StubTrip(start, to_min(trip.get("end_time", "18:00"))))
+    origin_id = "depot" if completed_ids else trip.get("origin_id", "depot")
+    out = optimize(stub, travel2, StubTrip(
+        start, to_min(trip.get("end_time", "18:00")), origin_id))
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),
@@ -84,7 +89,8 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "changes": [], "version": state["version"]}
     matrix = {f"{a}->{b}": {"minutes": w} for (a, b), w in travel.items()}
     rep = validate({"activities": acts}, trip,
-                   {p["poi_id"]: {"verified": True, "fee": p.get("fee", 0),
+                   {p["poi_id"]: {"verified": p.get("verified", False),
+                                  "fee": p.get("fee", 0),
                                   "opening_hours": p.get("opening_hours", [])}
                     for p in pois}, matrix)
     if acts and not rep["passed"]:

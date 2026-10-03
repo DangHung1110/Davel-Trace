@@ -20,15 +20,15 @@ from BE.app.services.validator import validate  # noqa: E402
 
 H = 60
 POIS = [
-    {"poi_id": "hill", "visit_min": 120, "fee": 0, "intensity": 3,
+    {"poi_id": "hill", "verified": True, "visit_min": 120, "fee": 0, "intensity": 3,
      "weather_sensitive": True, "opening_hours": ["05:00-18:00"]},
-    {"poi_id": "beach", "visit_min": 120, "fee": 0, "intensity": 2,
+    {"poi_id": "beach", "verified": True, "visit_min": 120, "fee": 0, "intensity": 2,
      "weather_sensitive": True, "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "park", "visit_min": 90, "fee": 0, "intensity": 2,
+    {"poi_id": "park", "verified": True, "visit_min": 90, "fee": 0, "intensity": 2,
      "weather_sensitive": True, "opening_hours": ["06:00-20:00"]},
-    {"poi_id": "museum", "visit_min": 90, "fee": 60000, "intensity": 1,
+    {"poi_id": "museum", "verified": True, "visit_min": 90, "fee": 60000, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:30-17:00"]},
-    {"poi_id": "noodle", "visit_min": 60, "fee": 50000, "intensity": 1,
+    {"poi_id": "noodle", "verified": True, "visit_min": 60, "fee": 50000, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:00-21:00"]},
 ]
 IDS = [p["poi_id"] for p in POIS]

@@ -1,7 +1,7 @@
 """Validator gate (T018, lane B). Per-gate pass/fail + violations.
 
 Wraps gate.py (T011) primitives for optimizer output (T017) and, later,
-the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS},
+the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS/ETB},
 "violations": [...], "details": {gate: [offending poi_ids]}}.
 
 STUB-NOTE (as T017): inputs are plain dicts matching the plan schemas;
@@ -41,6 +41,12 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
     if gate == "BCS":
         cost = int(itinerary.get("total_cost", total_fee(acts, pois)))
         return [] if cost <= int(trip.get("budget", 0)) else [f"cost {cost}"]
+    if gate == "ETB" and acts:
+        deadlines = [to_min(value) for value in
+                     (trip.get("end_time"), trip.get("return_time")) if value]
+        last = max(acts, key=lambda a: to_min(a["end"]))
+        if deadlines and to_min(last["end"]) > min(deadlines):
+            return [last.get("poi_id")]
     return []
 
 

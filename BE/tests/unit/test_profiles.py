@@ -15,17 +15,17 @@ from BE.app.services.profiles import run_profiles  # noqa: E402
 
 H = 60
 POIS = [
-    {"poi_id": "fancy", "visit_min": 90, "rating": 5.0, "fee": 500000,
+    {"poi_id": "fancy", "verified": True, "visit_min": 90, "rating": 5.0, "fee": 500000,
      "intensity": 1, "opening_hours": ["10:00-22:00"]},
-    {"poi_id": "hill", "visit_min": 120, "rating": 4.7, "fee": 0,
+    {"poi_id": "hill", "verified": True, "visit_min": 120, "rating": 4.7, "fee": 0,
      "intensity": 3, "opening_hours": ["05:00-18:00"]},
-    {"poi_id": "beach", "visit_min": 120, "rating": 4.6, "fee": 0,
+    {"poi_id": "beach", "verified": True, "visit_min": 120, "rating": 4.6, "fee": 0,
      "intensity": 2, "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "noodle", "visit_min": 60, "rating": 4.5, "fee": 50000,
+    {"poi_id": "noodle", "verified": True, "visit_min": 60, "rating": 4.5, "fee": 50000,
      "intensity": 1, "opening_hours": ["07:00-21:00"]},
 ]
 IDS = [p["poi_id"] for p in POIS]
-TRAVEL = {(a, b): 15 for a in IDS for b in IDS if a != b}
+TRAVEL = {(a, b): 15 for a in ["depot"] + IDS for b in IDS if a != b}
 MATRIX = {f"{a}->{b}": {"minutes": 0 if a == b else 15, "km": 4.0}
           for a in IDS for b in IDS}
 TRIP = {"trip_id": "t1", "budget": 1000000,
@@ -48,7 +48,7 @@ class TestProfiles(unittest.TestCase):
         for p in pool["plans"]:
             self.assertTrue(p["reason"])
             self.assertEqual(p["constraint_status"],
-                             {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1})
+                             {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1})
         print(f"\n pool: {[(p['profile'], p['total_cost'], p['preference']) for p in pool['plans']]}")
 
     def test_savings_cheapest(self):
@@ -56,6 +56,12 @@ class TestProfiles(unittest.TestCase):
         by_prof = {p["profile"]: p for p in pool["plans"]}
         self.assertLessEqual(by_prof["savings"]["total_cost"],
                              by_prof["balanced"]["total_cost"])
+
+    def test_unverified_poi_is_not_accepted(self):
+        draft = dict(POIS[0], verified=False)
+        pool = run_profiles([draft], TRAVEL, TRIP, MATRIX)
+        self.assertEqual(pool["plans"], [])
+        self.assertTrue(all("FAR" in item["reason"] for item in pool["dropped"]))
 
 
 if __name__ == "__main__":

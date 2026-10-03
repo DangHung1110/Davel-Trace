@@ -30,7 +30,7 @@ class TestValidator(unittest.TestCase):
         rep = validate(GOOD, TRIP, POIS, MATRIX)
         self.assertEqual(rep["passed"], True)
         self.assertEqual(rep["violations"], [])
-        self.assertEqual(set(rep["checks"]), {"FAR", "VROH", "B3", "BCS"})
+        self.assertEqual(set(rep["checks"]), {"FAR", "VROH", "B3", "BCS", "ETB"})
         print(f"\n good: {rep['checks']}")
 
     def test_ghost_poi(self):
@@ -40,10 +40,18 @@ class TestValidator(unittest.TestCase):
         self.assertEqual(rep["details"]["FAR"], ["ghost"])
 
     def test_closed_hours(self):
-        bad = {"activities": [{"poi_id": "musu", "start": "18:00", "end": "19:00"}]}
+        bad = {"activities": [{"poi_id": "musu", "start": "16:30", "end": "17:30"}]}
         rep = validate(bad, TRIP, POIS, MATRIX)
         self.assertEqual(rep["violations"], ["VROH"])
         self.assertEqual(rep["details"]["VROH"], ["musu"])
+
+    def test_plan_ending_after_return_time_fails_ETB(self):
+        late = {"activities": [
+            {"poi_id": "beach", "start": "16:30", "end": "17:30"}]}
+        rep = validate(late, dict(TRIP, return_time="17:00"), POIS, MATRIX)
+        self.assertFalse(rep["checks"]["ETB"])
+        self.assertEqual(rep["violations"], ["ETB"])
+        self.assertEqual(rep["details"]["ETB"], ["beach"])
 
     def test_tight_gap(self):
         bad = {"activities": [
@@ -60,7 +68,8 @@ class TestValidator(unittest.TestCase):
 
     def test_optimizer_output_validates(self):
         pois = [StubPOI("musu", 90, 450, 1020, 3.0), StubPOI("beach", 120, 360, 1140, 5.0)]
-        travel = {("musu", "beach"): 10, ("beach", "musu"): 10}
+        travel = {("depot", "musu"): 10, ("depot", "beach"): 10,
+                  ("musu", "beach"): 10, ("beach", "musu"): 10}
         out = optimize(pois, travel, StubTrip(420, 1080))
         self.assertIsNotNone(out["itinerary"])
         full_pois = {**POIS, "musu": {**POIS["musu"]}, "beach": {**POIS["beach"]}}

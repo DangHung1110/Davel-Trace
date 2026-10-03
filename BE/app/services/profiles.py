@@ -68,7 +68,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
     """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}."""
     plans, dropped = [], []
     by_id = {p["poi_id"]: p for p in pois}
-    pois_gate = {pid: {"verified": True, "fee": p.get("fee", 0),
+    pois_gate = {pid: {"verified": p.get("verified", False), "fee": p.get("fee", 0),
                        "opening_hours": p.get("opening_hours", [])}
                  for pid, p in by_id.items()}
     for prof in profiles:

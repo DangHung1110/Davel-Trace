@@ -9,7 +9,7 @@ Model (OR-Tools CP-SAT, 5s timeout):
 - circuit over depot + POIs; self-arc[i][i] == "skip i".
 - t[i] visit start; open[i] <= t[i] <= close[i]-dur[i] iff visited.
 - arc[i][j] => t[j] >= t[i]+dur[i]+travel[i][j]; depot t[0]=trip start.
-- Tmax: all t[i] <= trip end. Objective: max total score of visited.
+- Tmax: every visit finishes by trip end. Objective: max total score of visited.
 Returns {"status": optimal|feasible-timeout|infeasible, "itinerary" |
 "reason", ...}. Best-found is returned even on timeout (never empty-
 handed when a feasible prefix exists).
@@ -86,15 +86,18 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(visit[i] == 1)
         m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
         m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
-        m.Add(t[i] <= tmax).OnlyEnforceIf(visit[i])
+        m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
     for i in range(n + 1):
         for j in range(1, n + 1):  # skip j == 0: return leg must not pin t[0]
             if i == j:
                 continue
             a, b = (trip.origin_id if i == 0 else ids[i - 1],
                     trip.origin_id if j == 0 else ids[j - 1])
-            w = travel.get((a, b), travel.get((b, a), 0))
-            m.Add(t[j] >= t[i] + dur[i] + w).OnlyEnforceIf(arc[(i, j)])
+            w = travel.get((a, b))
+            if w is None:
+                m.Add(arc[(i, j)] == 0)
+            else:
+                m.Add(t[j] >= t[i] + dur[i] + w).OnlyEnforceIf(arc[(i, j)])
     for prec in precedence or []:
         ia, ib = node.get(prec[0]), node.get(prec[1])
         if ia is not None and ib is not None:

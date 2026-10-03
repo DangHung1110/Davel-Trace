@@ -14,14 +14,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services.profiles import run_profiles, score_plan  # noqa: E402
 
-CS1 = {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1}
+CS1 = {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1}
 EXP = {"profile": "experience", "total_cost": 500000, "travel_min": 60,
        "preference": 4.8, "constraint_status": dict(CS1)}
 SAV = {"profile": "savings", "total_cost": 0, "travel_min": 120,
        "preference": 4.2, "constraint_status": dict(CS1)}
 BAD = {"profile": "balanced", "total_cost": 100000, "travel_min": 60,
        "preference": 4.5,
-       "constraint_status": {"FAR": 1, "VROH": 0, "B3": 1, "BCS": 1}}
+        "constraint_status": {"FAR": 1, "VROH": 0, "B3": 1, "BCS": 1, "ETB": 1}}
 
 
 class TestScorePlan(unittest.TestCase):
