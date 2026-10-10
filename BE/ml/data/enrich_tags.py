@@ -1,7 +1,10 @@
 """Smart-tag enrichment v1 (lane A, stdlib only). Taxonomy agreed 2026-10-09.
 
 Groups (stored in poi["smart_tags"], old tags[] untouched):
-  cost:  free | ticketed | expensive   (entry cost)
+  ticket: true | false | null  (entry ticket? null = unknown, never guessed)
+  price_band: cheap | medium | expensive | null (known prices only; rule:
+    price_band set => ticket true. All null until review/quota data lands,
+    except curated Ba Na.)
   space: indoor | outdoor | both        (audit I/O wins, else canonical)
   party: family | couple | solo | group (who it's for)
   time:  sunrise | morning | sunset | night | rain-proof (when)
@@ -45,11 +48,15 @@ SPACE_DEFAULT = {
     "attraction": "both", "market": "both", "landmark": "both",
 }
 
-COST_DEFAULT = {
-    "beach": "free", "nature": "free", "park": "free", "market": "free",
-    "cafe": "free", "restaurant": "free", "lodging": "free",
-    "landmark": "free", "transport": "free",
-    "museum": "ticketed", "attraction": "ticketed",
+# Public-access canonicals: entry is genuinely free (beaches, pagodas,
+# bridges, markets, parks). museum/attraction: ticketed. Food/lodging/
+# transport: no ENTRY ticket (food & room prices are separate — price_band
+# stays null until real data). Unknown canonical: null, never guessed.
+TICKET_DEFAULT = {
+    "museum": True, "attraction": True,
+    "beach": False, "nature": False, "park": False, "landmark": False,
+    "market": False, "cafe": False, "restaurant": False,
+    "lodging": False, "transport": False,
 }
 
 PARTY_DEFAULT = {
@@ -84,10 +91,10 @@ TIME_DEFAULT = {
 # 3rd element (optional): canonicals the entry applies to — blocks false
 # positives like a restaurant named after a market ("Bếp Chợ Hàn").
 CURATED = [
-    ("ba na", {"cost": "expensive", "budget": ["full-day"],
-               "must_go": True}, {"attraction"}),
-    ("bana", {"cost": "expensive", "budget": ["full-day"],
-              "must_go": True}, {"attraction"}),
+    ("ba na", {"ticket": True, "price_band": "expensive",
+               "budget": ["full-day"], "must_go": True}, {"attraction"}),
+    ("bana", {"ticket": True, "price_band": "expensive",
+              "budget": ["full-day"], "must_go": True}, {"attraction"}),
     ("cau rong", {"time": ["sunset", "night"], "must_go": True}, {"landmark"}),
     ("dragon bridge", {"time": ["sunset", "night"]}, {"landmark"}),
     ("my khe", {"must_go": True}, {"beach"}),
@@ -97,8 +104,8 @@ CURATED = [
     ("marble mountain", {"must_go": True}, {"attraction", "landmark"}),
     ("cho han", {"time": ["morning"], "must_go": True}, {"market"}),
     ("han market", {"must_go": True}, {"market"}),
-    ("du thuyen", {"cost": "ticketed", "time": ["night"]}, None),
-    ("cruise", {"cost": "ticketed", "time": ["night"]}, None),
+    ("du thuyen", {"ticket": True, "time": ["night"]}, None),
+    ("cruise", {"ticket": True, "time": ["night"]}, None),
     ("cho dem", {"time": ["night"], "space": "outdoor"}, {"market"}),
     ("night market", {"time": ["night"]}, {"market"}),
     ("son tra", {"budget": ["half-day"]}, {"nature", "landmark", "beach"}),
@@ -121,7 +128,8 @@ def tag_poi(p: dict) -> tuple[dict, str]:
     space = {"I": "indoor", "O": "outdoor", "B": "both"}.get(
         io or "", SPACE_DEFAULT.get(canon, "both"))
     tags = {
-        "cost": COST_DEFAULT.get(canon, "free"),
+        "ticket": TICKET_DEFAULT.get(canon, None),
+        "price_band": None,
         "space": space,
         "party": list(PARTY_DEFAULT.get(canon, ["group"])),
         "time": list(TIME_DEFAULT.get(canon, ["morning"])),
@@ -140,6 +148,9 @@ def tag_poi(p: dict) -> tuple[dict, str]:
                 else:
                     tags[k] = list(v) if isinstance(v, list) else v
             src = "rule_v1+curated"
+    # user rule: known price => ticket exists (future fills honor this too)
+    if tags["price_band"] is not None:
+        tags["ticket"] = True
     return tags, src
 
 
@@ -157,7 +168,8 @@ def main() -> int:
         c = Counter()
         for p in data["pois"]:
             t, _ = tag_poi(p)
-            c["cost:" + t["cost"]] += 1
+            c["ticket:" + str(t["ticket"])] += 1
+            c["price:" + str(t["price_band"])] += 1
             c["space:" + t["space"]] += 1
             c["budget:" + t["budget"][0]] += 1
             for x in t["party"]:

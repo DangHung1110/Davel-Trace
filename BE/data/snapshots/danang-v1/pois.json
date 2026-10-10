@@ -39,7 +39,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -92,7 +93,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -146,7 +148,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -198,7 +201,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -250,7 +254,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -302,7 +307,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -354,7 +360,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -409,7 +416,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -461,7 +469,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -516,7 +525,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -569,7 +579,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -620,7 +631,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -672,7 +684,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -731,7 +744,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -781,7 +795,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -835,7 +850,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -887,7 +903,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -937,7 +954,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -990,7 +1008,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1043,7 +1062,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1104,7 +1124,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1158,7 +1179,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1219,7 +1241,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1273,7 +1296,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1330,7 +1354,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1383,7 +1408,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1438,7 +1464,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1491,7 +1518,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1543,7 +1571,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1596,7 +1625,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1652,7 +1682,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1704,7 +1735,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1756,7 +1788,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1809,7 +1842,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1861,7 +1895,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1913,7 +1948,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -1965,7 +2001,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2017,7 +2054,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2067,7 +2105,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2120,7 +2159,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2173,7 +2213,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2225,7 +2266,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2277,7 +2319,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2330,7 +2373,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2383,7 +2427,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2437,7 +2482,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2491,7 +2537,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2543,7 +2590,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2595,7 +2643,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2647,7 +2696,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2703,7 +2753,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2757,7 +2808,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2812,7 +2864,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2867,7 +2920,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2919,7 +2973,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -2972,7 +3027,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3024,7 +3080,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3076,7 +3133,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3128,7 +3186,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3180,7 +3239,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3232,7 +3292,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3282,7 +3343,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3334,7 +3396,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3386,7 +3449,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3438,7 +3502,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3491,7 +3556,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3543,7 +3609,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3595,7 +3662,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3648,7 +3716,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3700,7 +3769,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3752,7 +3822,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3804,7 +3875,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3856,7 +3928,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3909,7 +3982,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -3961,7 +4035,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4011,7 +4086,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -4058,7 +4134,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4110,7 +4187,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4162,7 +4240,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4214,7 +4293,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4268,7 +4348,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4320,7 +4401,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4372,7 +4454,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4424,7 +4507,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4477,7 +4561,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4529,7 +4614,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4581,7 +4667,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4633,7 +4720,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4685,7 +4773,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4737,7 +4826,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4789,7 +4879,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4842,7 +4933,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4897,7 +4989,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -4949,7 +5042,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -5001,7 +5095,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -5051,7 +5146,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -5099,7 +5195,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -5152,7 +5249,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5203,7 +5301,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5253,7 +5352,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5303,7 +5403,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5353,7 +5454,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5403,7 +5505,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5453,7 +5556,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5503,7 +5607,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5553,7 +5658,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5603,7 +5709,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5653,7 +5760,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5703,7 +5811,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5753,7 +5862,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5804,7 +5914,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5855,7 +5966,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -5905,7 +6017,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -5958,7 +6071,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6008,7 +6122,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6058,7 +6173,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6108,7 +6224,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6158,7 +6275,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6206,7 +6324,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6257,7 +6376,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6307,7 +6427,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6362,7 +6483,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6412,7 +6534,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6462,7 +6585,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6512,7 +6636,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6562,7 +6687,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6615,7 +6741,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6665,7 +6792,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6716,7 +6844,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6766,7 +6895,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6816,7 +6946,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6866,7 +6997,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6917,7 +7049,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -6967,7 +7100,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7017,7 +7151,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7067,7 +7202,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7125,7 +7261,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -7175,7 +7312,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7225,7 +7363,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7275,7 +7414,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7330,7 +7470,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7380,7 +7521,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7430,7 +7572,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7478,7 +7621,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7526,7 +7670,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7578,7 +7723,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7631,7 +7777,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7681,7 +7828,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7731,7 +7879,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7781,7 +7930,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7829,7 +7979,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7877,7 +8028,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7932,7 +8084,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -7982,7 +8135,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8033,7 +8187,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8083,7 +8238,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8134,7 +8290,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8184,7 +8341,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8234,7 +8392,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8284,7 +8443,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8334,7 +8494,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8384,7 +8545,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8434,7 +8596,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8484,7 +8647,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8532,7 +8696,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8582,7 +8747,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8632,7 +8798,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8680,7 +8847,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8728,7 +8896,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8776,7 +8945,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8826,7 +8996,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8876,7 +9047,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8927,7 +9099,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -8977,7 +9150,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9027,7 +9201,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9077,7 +9252,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9127,7 +9303,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9177,7 +9354,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9227,7 +9405,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9277,7 +9456,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9325,7 +9505,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9375,7 +9556,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9425,7 +9607,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9475,7 +9658,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9525,7 +9709,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9575,7 +9760,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9625,7 +9811,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9673,7 +9860,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9724,7 +9912,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9774,7 +9963,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9824,7 +10014,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9872,7 +10063,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9922,7 +10114,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -9972,7 +10165,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -10021,7 +10215,8 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10073,7 +10268,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10126,7 +10322,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10176,7 +10373,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10229,7 +10427,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10282,7 +10481,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10335,7 +10535,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10388,7 +10589,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10439,7 +10641,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -10489,7 +10692,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10540,7 +10744,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10590,7 +10795,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10644,7 +10850,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10696,7 +10903,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10747,7 +10955,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10800,7 +11009,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10850,7 +11060,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -10901,7 +11112,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -10951,7 +11163,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -10997,7 +11210,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -11046,7 +11260,8 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -11096,7 +11311,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11147,7 +11363,8 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -11199,7 +11416,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11251,7 +11469,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -11300,7 +11519,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11350,7 +11570,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "couple",
@@ -11400,7 +11621,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11451,7 +11673,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11502,7 +11725,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -11550,7 +11774,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -11598,7 +11823,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11648,7 +11874,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11698,7 +11925,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11748,7 +11976,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11798,7 +12027,8 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -11848,7 +12078,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11898,7 +12129,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -11944,7 +12176,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -11994,7 +12227,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12044,7 +12278,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -12090,7 +12325,8 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12140,7 +12376,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12190,7 +12427,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12242,7 +12480,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -12292,7 +12531,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -12341,7 +12581,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12393,7 +12634,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12444,7 +12686,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12498,7 +12741,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12548,7 +12792,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "couple",
@@ -12596,7 +12841,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -12645,7 +12891,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "couple",
@@ -12693,7 +12940,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12740,7 +12988,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12790,7 +13039,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -12839,7 +13089,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -12885,7 +13136,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -12935,7 +13187,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -12984,7 +13237,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13034,7 +13288,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -13080,7 +13335,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -13130,7 +13386,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -13181,7 +13438,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -13231,7 +13489,8 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13281,7 +13540,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13330,7 +13590,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13381,7 +13642,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13430,7 +13692,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -13480,7 +13743,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13530,7 +13794,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13582,7 +13847,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -13635,7 +13901,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13689,7 +13956,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13741,7 +14009,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13797,7 +14066,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13847,7 +14117,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13900,7 +14171,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -13953,7 +14225,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14005,7 +14278,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14057,7 +14331,8 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14107,7 +14382,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14157,7 +14433,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14210,7 +14487,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14260,7 +14538,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14310,7 +14589,8 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14360,7 +14640,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14410,7 +14691,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14460,7 +14742,8 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14510,7 +14793,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14562,7 +14846,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14612,7 +14897,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -14662,7 +14948,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -14712,7 +14999,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -14762,7 +15050,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -14814,7 +15103,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14864,7 +15154,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -14914,7 +15205,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -14964,7 +15256,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -15013,7 +15306,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -15062,7 +15356,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15112,7 +15407,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -15164,7 +15460,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15217,7 +15514,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15266,7 +15564,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15317,7 +15616,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15365,7 +15665,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -15413,7 +15714,8 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -15462,7 +15764,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15511,7 +15814,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15561,7 +15865,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15612,7 +15917,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -15661,7 +15967,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15710,7 +16017,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15759,7 +16067,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -15807,7 +16116,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -15858,7 +16168,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15905,7 +16216,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -15954,7 +16266,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -16003,7 +16316,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16050,7 +16364,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16099,7 +16414,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16148,7 +16464,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16197,7 +16514,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16246,7 +16564,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16293,7 +16612,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16340,7 +16660,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -16386,7 +16707,8 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16434,7 +16756,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16479,7 +16802,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -16525,7 +16849,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16572,7 +16897,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16617,7 +16943,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -16665,7 +16992,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -16715,7 +17043,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16765,7 +17094,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16815,7 +17145,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16867,7 +17198,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16919,7 +17251,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -16971,7 +17304,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -17023,7 +17357,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -17075,7 +17410,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -17128,7 +17464,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17179,7 +17516,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17229,7 +17567,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17281,7 +17620,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17331,7 +17671,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17381,7 +17722,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17431,7 +17773,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17485,7 +17828,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17535,7 +17879,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17586,7 +17931,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17636,7 +17982,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17686,7 +18033,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17736,7 +18084,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17786,7 +18135,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "couple",
@@ -17837,7 +18187,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -17885,7 +18236,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -17934,7 +18286,8 @@
       "io_label": null,
       "ws_source": "default_false",
       "smart_tags": {
-        "cost": "free",
+        "ticket": null,
+        "price_band": null,
         "space": "both",
         "party": [
           "group"
@@ -17980,7 +18333,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -18034,7 +18388,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18084,7 +18439,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18135,7 +18491,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18185,7 +18542,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18240,7 +18598,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -18290,7 +18649,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18340,7 +18700,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -18390,7 +18751,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "indoor",
         "party": [
           "family",
@@ -18441,7 +18803,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "ticketed",
+        "ticket": true,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18491,7 +18854,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -18541,7 +18905,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "outdoor",
         "party": [
           "family",
@@ -18593,7 +18958,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
@@ -18642,7 +19008,8 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "cost": "free",
+        "ticket": false,
+        "price_band": null,
         "space": "both",
         "party": [
           "family",
