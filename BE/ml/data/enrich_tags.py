@@ -185,11 +185,13 @@ def apply_price_web(pois: list[dict], snapshot_dir: str) -> dict:
         if not ev:
             continue
         st = p.get("smart_tags", {})
-        st["ticket"] = ev.get("ticket", st.get("ticket"))
         if "price_band" in ev:
             st["price_band"] = ev["price_band"]
-            if ev["price_band"] is not None:  # known price => ticket
-                st["ticket"] = True
+        # explicit ticket verdict wins; price=>ticket only when unstated
+        if "ticket" in ev:
+            st["ticket"] = ev["ticket"]
+        elif st.get("price_band") is not None:
+            st["ticket"] = True
         p["smart_tags"] = st
         if "ticket_vnd" in ev:
             p["ticket_vnd"] = ev["ticket_vnd"]

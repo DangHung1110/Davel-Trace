@@ -10937,7 +10937,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": "cheap",
         "space": "both",
         "party": [
