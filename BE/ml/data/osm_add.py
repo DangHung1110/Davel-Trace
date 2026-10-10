@@ -19,6 +19,7 @@ import datetime
 import json
 import math
 import os
+import re
 import sys
 import unicodedata
 
@@ -109,11 +110,24 @@ def candidates(pois: list[dict], elements: list[dict]):
     return out, skip_hotel
 
 
+def osm_hours_to_schema(raw: str) -> tuple[list[str], str]:
+    """Convert OSM opening_hours ('Mo-Fr 08:00-18:00; Sa 09:00-12:00') to
+    schema ['08:00-18:00', ...] (day info kept in note). Unparseable ->
+    ([], raw) so the caller stores it as evidence only."""
+    times = re.findall(r"(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})", raw or "")
+    seen = list(dict.fromkeys(f"{a}-{b}" for a, b in times))
+    if seen and re.match(r"^[\w\s,;\-:+]+$", raw or ""):
+        return seen, raw
+    return [], raw
+
+
 def to_poi(el, c, la, lo, name, tags) -> dict:
     from BE.ml.data.enrich_snapshot import INTENSITY_DEFAULT, WS_DEFAULT, AUDIT_WS  # noqa
+    oh, oh_raw = osm_hours_to_schema((tags or {}).get("opening_hours", ""))
     p = {"poi_id": f"osm:{el.get('type')}/{el.get('id')}", "name": name,
          "type": VI_TYPE.get(c, c), "lat": la, "lon": lo,
-         "opening_hours": [tags["opening_hours"]] if tags.get("opening_hours") else [],
+         "opening_hours": oh,
+         "hours_source": "osm" if oh else "",
          "price_level": 2, "fee": 0, "rating": None,
          "tags": [VI_TYPE.get(c, c)], "source": "osm/overpass",
          "fetched_at": datetime.date.today().isoformat(), "verified": False}

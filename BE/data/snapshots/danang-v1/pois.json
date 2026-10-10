@@ -1874,7 +1874,7 @@
       "lat": 16.0620191,
       "lon": 108.235918,
       "opening_hours": [
-        "Mo-Su 09:00-22:30"
+        "09:00-22:30"
       ],
       "visit_min": {
         "p25": 42,
@@ -1932,8 +1932,13 @@
         "hours": "Mo-Su 09:00-22:30",
         "name": null
       },
-      "hours_source": "osm",
-      "cat": "restaurant"
+      "hours_source": "osm-converted",
+      "cat": "restaurant",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su 09:00-22:30"
+        ]
+      }
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -8117,7 +8122,7 @@
       "lat": 16.048823,
       "lon": 108.24306469999999,
       "opening_hours": [
-        "24/7"
+        "00:00-23:59"
       ],
       "visit_min": {
         "p25": 38,
@@ -8167,8 +8172,13 @@
         "hours": "24/7",
         "name": "HI4 COFFEE & WORKSPACE"
       },
-      "hours_source": "osm",
-      "cat": "cafe"
+      "hours_source": "osm-converted",
+      "cat": "cafe",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "24/7"
+        ]
+      }
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -8863,7 +8873,7 @@
       "lat": 16.0467126,
       "lon": 108.23551169999999,
       "opening_hours": [
-        "Tu-Su 18:00-22:00"
+        "18:00-22:00"
       ],
       "visit_min": {
         "p25": 31,
@@ -8913,8 +8923,13 @@
         "hours": "Tu-Su 18:00-22:00",
         "name": "Westwood Da Nang"
       },
-      "hours_source": "osm",
-      "cat": "cafe"
+      "hours_source": "osm-converted",
+      "cat": "cafe",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Tu-Su 18:00-22:00"
+        ]
+      }
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -12328,7 +12343,7 @@
       "lat": 16.0780663,
       "lon": 108.2245624,
       "opening_hours": [
-        "Mo-Su 07:00-22:30"
+        "07:00-22:30"
       ],
       "visit_min": {
         "p25": 31,
@@ -12374,7 +12389,10 @@
       "smart_tag_source": "rule_v1+curated",
       "ticket_note": "Bến không vé riêng; giá là giá tour tại bến (từ 200k NL)",
       "web_evidence": {
-        "hours_web": "18:00-22:00"
+        "hours_web": "18:00-22:00",
+        "hours_osm_raw": [
+          "Mo-Su 07:00-22:30"
+        ]
       },
       "osm_evidence": {
         "osm": "node/12433230010",
@@ -12383,7 +12401,7 @@
         "hours": "Mo-Su 07:00-22:30",
         "name": "Luk Lak"
       },
-      "hours_source": "osm",
+      "hours_source": "osm-converted",
       "cat": "landmark"
     },
     {
@@ -12573,7 +12591,7 @@
       "lat": 16.0991295,
       "lon": 108.25506159999999,
       "opening_hours": [
-        "24/7"
+        "00:00-23:59"
       ],
       "visit_min": {
         "p25": 168,
@@ -12625,8 +12643,13 @@
         "hours": "24/7",
         "name": "Sontra Sea Hotel"
       },
-      "hours_source": "osm",
-      "cat": "beach"
+      "hours_source": "osm-converted",
+      "cat": "beach",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "24/7"
+        ]
+      }
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -14944,7 +14967,7 @@
       "lat": 16.0566455,
       "lon": 108.2476348,
       "opening_hours": [
-        "Mo-Su 10:00-23:00"
+        "10:00-23:00"
       ],
       "visit_min": {
         "p25": 168,
@@ -14997,9 +15020,12 @@
         "hours": "Mo-Su 10:00-23:00",
         "name": "43 Town"
       },
-      "hours_source": "osm",
+      "hours_source": "osm-converted",
       "web_evidence": {
-        "hours_web": "bãi công cộng 24h (viet-go.com)"
+        "hours_web": "bãi công cộng 24h (viet-go.com)",
+        "hours_osm_raw": [
+          "Mo-Su 10:00-23:00"
+        ]
       },
       "cat": "attraction"
     },
@@ -20538,7 +20564,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/1335374752",
@@ -20582,7 +20609,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1335374809",
@@ -20626,7 +20654,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1335374818",
@@ -20670,7 +20699,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1335374858",
@@ -20714,7 +20744,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1335374873",
@@ -20758,7 +20789,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1335374895",
@@ -20802,7 +20834,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/1623183649",
@@ -20848,7 +20881,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/2093848429",
@@ -20894,7 +20928,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/2093848431",
@@ -20940,7 +20975,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/2093848443",
@@ -20986,7 +21022,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/2177056870",
@@ -21030,7 +21067,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/3760247201",
@@ -21074,7 +21112,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/3760247202",
@@ -21118,7 +21157,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/3760272162",
@@ -21162,7 +21202,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/3763846156",
@@ -21206,7 +21247,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4005611262",
@@ -21250,7 +21292,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4005611263",
@@ -21294,7 +21337,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4122433690",
@@ -21340,7 +21384,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/4172034499",
@@ -21388,7 +21433,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/4280016689",
@@ -21432,7 +21478,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4294135790",
@@ -21476,7 +21523,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4294139091",
@@ -21520,7 +21568,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4294143691",
@@ -21564,7 +21613,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4294167889",
@@ -21608,7 +21658,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4347089780",
@@ -21656,7 +21707,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "beach"
     },
     {
       "poi_id": "osm:node/4386676224",
@@ -21701,7 +21753,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/4706189591",
@@ -21745,7 +21798,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4741642219",
@@ -21789,7 +21843,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4759000238",
@@ -21835,7 +21890,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
     },
     {
       "poi_id": "osm:node/4845297821",
@@ -21879,7 +21935,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/4924323121",
@@ -21927,7 +21984,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/5273998822",
@@ -21975,7 +22033,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/5273998823",
@@ -21984,7 +22043,7 @@
       "lat": 16.050179,
       "lon": 108.2293814,
       "opening_hours": [
-        "24/7"
+        "00:00-23:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -22025,7 +22084,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "24/7"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/5273999121",
@@ -22073,7 +22139,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/5276547123",
@@ -22121,7 +22188,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/5286977425",
@@ -22169,7 +22237,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/5421670780",
@@ -22213,7 +22282,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/5432701004",
@@ -22257,7 +22327,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/6332518185",
@@ -22301,7 +22372,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/6346486685",
@@ -22349,7 +22421,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/6369465978",
@@ -22393,7 +22466,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/6513792708",
@@ -22437,7 +22511,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/6528451001",
@@ -22485,7 +22560,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/7095169367",
@@ -22529,7 +22605,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "museum"
     },
     {
       "poi_id": "osm:node/7095169369",
@@ -22574,7 +22651,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/7276380289",
@@ -22622,7 +22700,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/7477670190",
@@ -22667,7 +22746,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/7477670191",
@@ -22712,7 +22792,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/8883385553",
@@ -22721,7 +22802,7 @@
       "lat": 15.9256934,
       "lon": 108.2939032,
       "opening_hours": [
-        "24/7"
+        "00:00-23:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -22758,7 +22839,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "museum",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "24/7"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/9921282483",
@@ -22803,7 +22891,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/9921286579",
@@ -22848,7 +22937,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/9921315929",
@@ -22893,7 +22983,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/9921321271",
@@ -22938,7 +23029,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/10154412164",
@@ -22988,7 +23080,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/10303626687",
@@ -23034,7 +23127,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/10303626688",
@@ -23080,7 +23174,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/10603622205",
@@ -23128,7 +23223,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/10709724107",
@@ -23176,7 +23272,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/10709738005",
@@ -23224,7 +23321,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/10709738105",
@@ -23272,7 +23370,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/10723988763",
@@ -23316,7 +23415,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/10892129283",
@@ -23362,7 +23462,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/11161070775",
@@ -23410,7 +23511,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/11359603957",
@@ -23458,7 +23560,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/11427582964",
@@ -23503,7 +23606,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/11533284293",
@@ -23548,7 +23652,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/11629841009",
@@ -23594,7 +23699,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/11629996926",
@@ -23640,7 +23746,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/11630013743",
@@ -23686,7 +23793,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/11762365155",
@@ -23732,7 +23840,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/11832500969",
@@ -23776,7 +23885,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/11888483369",
@@ -23785,7 +23895,7 @@
       "lat": 16.0665465,
       "lon": 108.2422676,
       "opening_hours": [
-        "Mo-Su 05:00-18:00"
+        "05:00-18:00"
       ],
       "price_level": 2,
       "fee": 0,
@@ -23823,7 +23933,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su 05:00-18:00"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/11934169470",
@@ -23832,7 +23949,7 @@
       "lat": 16.0432987,
       "lon": 108.22599,
       "opening_hours": [
-        "Mo-Su 18:00-22:00"
+        "18:00-22:00"
       ],
       "price_level": 2,
       "fee": 0,
@@ -23873,7 +23990,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su 18:00-22:00"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/12333995781",
@@ -23918,7 +24042,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/12404434601",
@@ -23966,7 +24091,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/12603319867",
@@ -24010,7 +24136,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/12701675501",
@@ -24054,7 +24181,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/12811972501",
@@ -24099,7 +24227,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/13008480396",
@@ -24143,7 +24272,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/13040467529",
@@ -24191,7 +24321,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "beach"
     },
     {
       "poi_id": "osm:node/13202605156",
@@ -24200,7 +24331,7 @@
       "lat": 16.0551062,
       "lon": 108.2022603,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24238,7 +24369,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/13293564930",
@@ -24283,7 +24421,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/13301356138",
@@ -24328,7 +24467,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/13484040419",
@@ -24372,7 +24512,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/13542877610",
@@ -24417,7 +24558,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/13542877612",
@@ -24462,7 +24604,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/13677406601",
@@ -24506,7 +24649,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     },
     {
       "poi_id": "osm:node/13687068650",
@@ -24554,7 +24698,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/13734880501",
@@ -24602,7 +24747,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "osm:node/13913398302",
@@ -24646,7 +24792,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "Suối"
     },
     {
       "poi_id": "osm:node/13913400201",
@@ -24690,7 +24837,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "Suối"
     },
     {
       "poi_id": "osm:node/14045110791",
@@ -24699,7 +24847,7 @@
       "lat": 16.0560017,
       "lon": 108.2021613,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24737,7 +24885,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045110792",
@@ -24782,7 +24937,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/14045111563",
@@ -24791,7 +24947,7 @@
       "lat": 16.0561299,
       "lon": 108.2020188,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24829,7 +24985,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045123722",
@@ -24838,7 +25001,7 @@
       "lat": 16.055329,
       "lon": 108.2022741,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24876,7 +25039,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045124561",
@@ -24885,7 +25055,7 @@
       "lat": 16.0559255,
       "lon": 108.202175,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24923,7 +25093,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045130739",
@@ -24932,7 +25109,7 @@
       "lat": 16.0556406,
       "lon": 108.2022206,
       "opening_hours": [
-        "Mo-Su,PH 06:00-00:59"
+        "06:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -24970,7 +25147,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 06:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045136237",
@@ -24979,7 +25163,7 @@
       "lat": 16.0560661,
       "lon": 108.202159,
       "opening_hours": [
-        "Mo-Su,PH 05:00-00:59"
+        "05:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -25017,7 +25201,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 05:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045144381",
@@ -25026,7 +25217,7 @@
       "lat": 16.0558021,
       "lon": 108.2022075,
       "opening_hours": [
-        "Mo-Su,PH 07:00-00:59"
+        "07:00-00:59"
       ],
       "price_level": 2,
       "fee": 0,
@@ -25064,7 +25255,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su,PH 07:00-00:59"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14045145879",
@@ -25109,7 +25307,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "osm:node/14067929701",
@@ -25118,7 +25317,8 @@
       "lat": 16.0524725,
       "lon": 108.2438676,
       "opening_hours": [
-        "Mo-Su 08:00-11:30, 14:00-17:30"
+        "08:00-11:30",
+        "14:00-17:30"
       ],
       "price_level": 2,
       "fee": 0,
@@ -25156,7 +25356,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market",
+      "hours_source": "osm-converted",
+      "web_evidence": {
+        "hours_osm_raw": [
+          "Mo-Su 08:00-11:30, 14:00-17:30"
+        ]
+      }
     },
     {
       "poi_id": "osm:node/14130293535",
@@ -25200,7 +25407,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
     }
   ],
   "enriched_at": "2026-10-10",
