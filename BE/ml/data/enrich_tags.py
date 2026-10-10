@@ -53,11 +53,20 @@ SPACE_DEFAULT = {
 # transport: no ENTRY ticket (food & room prices are separate — price_band
 # stays null until real data). Unknown canonical: null, never guessed.
 TICKET_DEFAULT = {
-    "museum": True, "attraction": True,
+    "museum": True,
     "beach": False, "nature": False, "park": False, "landmark": False,
     "market": False, "cafe": False, "restaurant": False,
-    "lodging": False, "transport": False,
+    "lodging": False, "transport": False, "attraction": False,
 }
+
+# SerpApi dumps beaches/temples/viewpoints into "Điểm thu hút..." (= free),
+# so attraction defaults False; only names signalling a paid service win.
+PAID_NAME_KEYS = (
+    "3d", "paradise", "trickeye", "wonderland", "helio", "food tour",
+    "du thuyen", "cruise", "cano", "lan bien", "diving", "snorkel",
+    "glamping", "safari", "cap treo", "thang may", "ecopark", "suoi hoa",
+    "lai thieu", "mikazuki", "ve ", "ticket",
+)
 
 PARTY_DEFAULT = {
     "beach": ["family", "couple", "group"],
@@ -108,6 +117,9 @@ CURATED = [
     ("cruise", {"ticket": True, "time": ["night"]}, None),
     ("cho dem", {"time": ["night"], "space": "outdoor"}, {"market"}),
     ("night market", {"time": ["night"]}, {"market"}),
+    # SerpApi types real museums as attraction when the name says museum
+    ("bao tang", {"ticket": True}, None),
+    ("museum", {"ticket": True}, None),
     ("son tra", {"budget": ["half-day"]}, {"nature", "landmark", "beach"}),
     ("hai dang", {"time": ["sunset"]}, None),
     ("lighthouse", {"time": ["sunset"]}, None),
@@ -139,6 +151,9 @@ def tag_poi(p: dict) -> tuple[dict, str]:
         tags["time"] = tags["time"] + ["rain-proof"]
     src = "rule_v1"
     nm = _norm(p.get("name", ""))
+    if canon == "attraction" and any(k in nm for k in PAID_NAME_KEYS):
+        tags["ticket"] = True
+        src = "rule_v1+paid-name"
     for key, ov, allowed in CURATED:
         if key in nm and (allowed is None or canon in allowed):
             for k, v in ov.items():

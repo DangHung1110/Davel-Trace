@@ -10215,7 +10215,7 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10268,7 +10268,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10322,7 +10322,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10444,7 +10444,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJqzg43jRncDER6n-M_N_YlnE",
@@ -10481,7 +10481,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10552,7 +10552,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -10589,7 +10589,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10761,7 +10761,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
@@ -10812,7 +10812,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
@@ -10867,7 +10867,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
@@ -10920,7 +10920,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
@@ -10955,7 +10955,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11026,7 +11026,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -11260,7 +11260,7 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "outdoor",
         "party": [
@@ -11328,7 +11328,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -11416,7 +11416,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11519,7 +11519,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11621,7 +11621,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11673,7 +11673,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11823,7 +11823,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11874,7 +11874,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11925,7 +11925,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11976,7 +11976,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12078,7 +12078,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12176,7 +12176,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12227,7 +12227,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12325,7 +12325,7 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12376,7 +12376,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12427,7 +12427,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12581,7 +12581,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12634,7 +12634,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12686,7 +12686,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -12741,7 +12741,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13005,7 +13005,7 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -13136,7 +13136,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13335,7 +13335,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13386,7 +13386,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13438,7 +13438,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13489,7 +13489,7 @@
       "io_label": "O",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "outdoor",
         "party": [
@@ -13918,7 +13918,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
@@ -13973,7 +13973,7 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJMTJR2MsZQjERj9KA5AM9JAA",
@@ -14083,7 +14083,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJcX5KWskZQjERBp15jBCWYKg",
@@ -14188,7 +14188,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -14242,7 +14242,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -14295,7 +14295,7 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+curated"
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -14487,7 +14487,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -14999,7 +14999,7 @@
       "io_label": "I",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -15103,7 +15103,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -15205,7 +15205,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -15356,7 +15356,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -18405,7 +18405,7 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1+paid-name"
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -18439,7 +18439,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -18491,7 +18491,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -18803,7 +18803,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
