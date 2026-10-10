@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 367,
+  "count": 346,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -63,7 +63,8 @@
         "fee": null,
         "hours": "24/7",
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJx6-KGnIXQjER7x-T0zeOlBw",
@@ -124,7 +125,8 @@
         "fee": null,
         "hours": null,
         "name": "Mộc Quán"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJmQmygLwXQjERcZVy8--sIcE",
@@ -186,7 +188,8 @@
         "fee": null,
         "hours": null,
         "name": "Bé Bien"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
@@ -246,7 +249,8 @@
         "fee": null,
         "hours": null,
         "name": "Nhà hàng NHÀ BÊP CHÓ HÀN"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
@@ -299,7 +303,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJUahp7dYZQjERa6ryX2z_stg",
@@ -359,7 +364,8 @@
         "fee": null,
         "hours": null,
         "name": "589 Hoang Dieu"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJi5XzTqsZQjERn5HbwcdvD5Y",
@@ -419,7 +425,8 @@
         "fee": null,
         "hours": null,
         "name": "DivaCoffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJqaQoXYMZQjERX_QzVEAZr_Q",
@@ -482,7 +489,8 @@
         "fee": null,
         "hours": null,
         "name": "Maazi"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk",
@@ -542,7 +550,8 @@
         "fee": null,
         "hours": null,
         "name": "Lady Buddha"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
@@ -605,7 +614,8 @@
         "fee": null,
         "hours": null,
         "name": "Kara Beachside hotel"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
@@ -666,7 +676,8 @@
         "fee": null,
         "hours": null,
         "name": "Hai Cử"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
@@ -731,7 +742,8 @@
       "web_evidence": {
         "hours_web": "Apple Maps Open 24 Hours; ghiendanang.com 'Luôn mở cửa'"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
@@ -791,7 +803,8 @@
         "fee": null,
         "hours": null,
         "name": "My Hanh Seafood"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJH72bVncZQjERoTgax0OjZKY",
@@ -858,7 +871,8 @@
         "fee": null,
         "hours": null,
         "name": "Loco"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
@@ -922,7 +936,8 @@
       "web_evidence": {
         "hours_web": "cùng địa chỉ Bé Ni 2, 228 Võ Nguyên Giáp (Apple Maps 24h)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJJSd-naoZQjERheTI-IEkRrc",
@@ -984,7 +999,8 @@
         "fee": null,
         "hours": null,
         "name": "Quán An Bún Chả Cá"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
@@ -1044,7 +1060,8 @@
         "fee": null,
         "hours": "Mo-Su 10:30-22:00",
         "name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -1102,7 +1119,8 @@
         "fee": null,
         "hours": null,
         "name": "Namaste Omar's Indian Restaurant"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
@@ -1163,7 +1181,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeDiem Nong"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ-VaWslgZQjERwaL3uKR9fB4",
@@ -1224,7 +1243,8 @@
         "fee": null,
         "hours": null,
         "name": "Phinn Cafe"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
@@ -1286,7 +1306,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
@@ -1347,7 +1368,8 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi tự nhiên hoang sơ, không vé/giờ"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -1416,7 +1438,8 @@
         "fee": null,
         "hours": "Th-Tu 11:00-12:00, 13:00-14:00",
         "name": "My Casa"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -1471,7 +1494,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJd2HsN1oXQjER19a79kUNt-U",
@@ -1536,7 +1560,8 @@
         "fee": null,
         "hours": null,
         "name": "Me Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJO0E1hoYXQjER-ML-N1yAGAU",
@@ -1597,7 +1622,8 @@
         "fee": null,
         "hours": null,
         "name": "Phố nướng Tokyo"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJh4MCHBoXQjERA274y4wwup4",
@@ -1660,7 +1686,8 @@
         "fee": null,
         "hours": null,
         "name": "Chicland"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJYahwiHIXQjER0CIGd09pgcg",
@@ -1721,7 +1748,8 @@
         "fee": null,
         "hours": null,
         "name": "미꽝 24 7"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
@@ -1774,7 +1802,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJeTslKdkXQjERPFZeN_Ta-Ek",
@@ -1835,7 +1864,8 @@
         "fee": null,
         "hours": null,
         "name": "PhuongMai Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJeVJaMNUZQjERnRz_bfJ5ex4",
@@ -1902,7 +1932,8 @@
         "hours": "Mo-Su 09:00-22:30",
         "name": null
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -1955,7 +1986,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
@@ -2015,7 +2047,8 @@
         "fee": null,
         "hours": null,
         "name": "Hau Sua & Tom Hum"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
@@ -2076,7 +2109,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJN84BNSQXQjERyy7N3rDXisc",
@@ -2136,7 +2170,8 @@
         "fee": null,
         "hours": null,
         "name": "Them Hai San"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
@@ -2196,7 +2231,8 @@
         "fee": null,
         "hours": null,
         "name": "Wyndham Danang Golden Bay Hotel"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
@@ -2256,7 +2292,8 @@
         "fee": null,
         "hours": null,
         "name": "Jimy"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJF2lrSYgXQjERKBBhFKYlhkg",
@@ -2316,65 +2353,8 @@
         "fee": null,
         "hours": null,
         "name": "Lazeez Indian Restaurant"
-      }
-    },
-    {
-      "poi_id": "ChIJ1ZxjXAAZQjER3EQPJm7z3R4",
-      "name": "79 Trần Hưng Đạo sơn trà",
-      "type": "Nhà hàng",
-      "lat": 16.081701,
-      "lon": 108.22904849999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Nhà hàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/13523283436",
-        "dist_m": 88.4,
-        "fee": null,
-        "hours": null,
-        "name": null
-      }
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
@@ -2435,7 +2415,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJP-VRM2YXQjERbEUrtG6wq9Q",
@@ -2496,7 +2477,8 @@
         "fee": null,
         "hours": null,
         "name": "Dreams Hotel"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -2556,7 +2538,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
@@ -2616,7 +2599,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -2677,7 +2661,8 @@
         "fee": null,
         "hours": "Mo-Su 17:00-21:00",
         "name": "Le Comptoir"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -2738,7 +2723,8 @@
         "fee": null,
         "hours": null,
         "name": "La Luna"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -2800,7 +2786,8 @@
         "fee": null,
         "hours": null,
         "name": "SC Restaurant"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
@@ -2862,7 +2849,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
@@ -2922,7 +2910,8 @@
         "fee": null,
         "hours": null,
         "name": "Non Nuoc"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
@@ -2982,7 +2971,8 @@
         "fee": null,
         "hours": null,
         "name": "Celina"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
@@ -3042,7 +3032,8 @@
         "fee": null,
         "hours": "Mo-Su 10:00-23:00",
         "name": "43 Town"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -3106,7 +3097,8 @@
         "fee": null,
         "hours": null,
         "name": "Bottegas"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJN-vJNV8XQjERNccI4vX2rHY",
@@ -3161,7 +3153,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
@@ -3224,7 +3217,8 @@
         "fee": null,
         "hours": null,
         "name": "Korea BBQ"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJW_ilwg0XQjERQbqRXGggIFE",
@@ -3287,7 +3281,8 @@
         "fee": null,
         "hours": null,
         "name": "Cucina Luca"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -3340,7 +3335,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
@@ -3394,7 +3390,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
@@ -3454,7 +3451,8 @@
         "fee": null,
         "hours": null,
         "name": "Noi Dat"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJYy-g38oQQjER2c931z_dDt4",
@@ -3507,7 +3505,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -3567,7 +3566,8 @@
         "fee": null,
         "hours": null,
         "name": "LyLy Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
@@ -3620,7 +3620,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
@@ -3673,7 +3674,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJYQkmfagfQjER0iIRsKZ0Rcc",
@@ -3724,7 +3726,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJLSyuRcIZQjEReKwhRREzUaQ",
@@ -3784,7 +3787,8 @@
         "fee": null,
         "hours": null,
         "name": "quán nhậu lộc viên"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJgUt949cYQjERTHdMcEeiF2o",
@@ -3844,7 +3848,8 @@
         "fee": null,
         "hours": null,
         "name": "Ca Phe Bibon"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJxQQMGMoYQjER-2IGXb-pTtQ",
@@ -3904,7 +3909,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Trang Le"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
@@ -3965,7 +3971,8 @@
         "fee": null,
         "hours": null,
         "name": "Ca Phe Thanh Huyen"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJVeL2KNYYQjERkTADVXDZcRM",
@@ -4025,7 +4032,8 @@
         "fee": null,
         "hours": "Mo-Su 07:30-22:30",
         "name": "Kua Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
@@ -4085,7 +4093,8 @@
         "fee": null,
         "hours": null,
         "name": "Cafe Kieu Diem"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
@@ -4139,7 +4148,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
@@ -4199,7 +4209,8 @@
         "fee": null,
         "hours": "Mo-Su 07:30-22:30",
         "name": "Kua Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ-7JfLigZQjERZm4r5uDmk5o",
@@ -4259,7 +4270,8 @@
         "fee": null,
         "hours": "Mo-Su 07:30-22:30",
         "name": "Kua Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
@@ -4312,7 +4324,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
@@ -4365,7 +4378,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ_2lhydMZQjERNTX79I86p44",
@@ -4419,7 +4433,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ1eef2IsZQjERjy-_tblqzJs",
@@ -4479,7 +4494,8 @@
         "fee": null,
         "hours": null,
         "name": "Cafe96"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJbVtm0WIfQjER_HG2AYprbcY",
@@ -4527,7 +4543,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJHfEdhhYfQjERVyTonYbRaqk",
@@ -4578,7 +4595,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJGZVxyf0ZQjERBbAyCvPNq7E",
@@ -4638,7 +4656,8 @@
         "fee": null,
         "hours": null,
         "name": "Cafe Mat Trang Xanh"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
@@ -4698,7 +4717,8 @@
         "fee": null,
         "hours": null,
         "name": "Nha Hang Mr.Anh"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
@@ -4758,7 +4778,8 @@
         "fee": null,
         "hours": "Mo-Su 13:00+",
         "name": "Bún Bò Bà Diệu"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
@@ -4820,7 +4841,8 @@
         "fee": null,
         "hours": null,
         "name": "Samdi Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
@@ -4880,7 +4902,8 @@
         "fee": null,
         "hours": null,
         "name": "PhuCoffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -4940,7 +4963,8 @@
         "fee": null,
         "hours": null,
         "name": "J T Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
@@ -5000,7 +5024,8 @@
         "fee": null,
         "hours": null,
         "name": "Hotel Rosa"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
@@ -5054,7 +5079,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJk3haCB4ZQjERA3Fq_IHznLU",
@@ -5114,7 +5140,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Giai Khat Huong Vuon Cau"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
@@ -5174,7 +5201,8 @@
         "fee": null,
         "hours": null,
         "name": "Nhà Hàng Chay & Cà Phê Thúp An"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
@@ -5234,7 +5262,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Vuon Da Bien"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
@@ -5287,7 +5316,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM",
@@ -5347,7 +5377,8 @@
         "fee": null,
         "hours": null,
         "name": "Huy Hoang Hotel"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJFaKh3yhLoTERuh1M_c3paTQ",
@@ -5407,7 +5438,8 @@
         "fee": null,
         "hours": "Mo-Su 05:00-18:00",
         "name": "Sơn"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJY-zHSgQZQjERRoAvxXVcViU",
@@ -5468,7 +5500,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
@@ -5524,7 +5557,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJaeTAGgMZQjER5Hvtuv10j_s",
@@ -5584,7 +5618,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeTi Ti"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
@@ -5637,7 +5672,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJD9pK8qoZQjERsxKiMEPEtnk",
@@ -5691,7 +5727,8 @@
         "fee": null,
         "hours": null,
         "name": "Dai Long hotel"
-      }
+      },
+      "cat": "Địa điểm tổ chức lễ cưới"
     },
     {
       "poi_id": "ChIJH_EMuNcZQjERI1YtG7IGGDo",
@@ -5751,7 +5788,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
@@ -5810,7 +5848,8 @@
         "fee": null,
         "hours": null,
         "name": "Trung Hung Buu Tôa"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
@@ -5869,7 +5908,8 @@
         "fee": null,
         "hours": null,
         "name": "Hero"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJxX--D-oZQjERQ4LzQRoeVXk",
@@ -5927,7 +5967,8 @@
         "fee": null,
         "hours": null,
         "name": "Reply 1988"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
@@ -5985,7 +6026,8 @@
         "fee": null,
         "hours": "Mo-Su 06:30-01:30",
         "name": "Trình cà phê"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
@@ -6043,7 +6085,8 @@
         "fee": null,
         "hours": null,
         "name": "Trung Nguyên Legend"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -6101,7 +6144,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
@@ -6159,7 +6203,8 @@
         "fee": null,
         "hours": null,
         "name": "Nam House"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
@@ -6217,7 +6262,8 @@
         "fee": null,
         "hours": null,
         "name": "Hủ Tiếu Mực"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
@@ -6275,7 +6321,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeNew Life"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
@@ -6333,7 +6380,8 @@
         "fee": null,
         "hours": "Mo-Su 07:00-22:00",
         "name": "Nia Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
@@ -6391,7 +6439,8 @@
         "fee": null,
         "hours": null,
         "name": "Cộng Cà Phê"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
@@ -6449,7 +6498,8 @@
         "fee": null,
         "hours": null,
         "name": "Hoa Tu"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJW4dpfjkYQjERcGpyYomHFO4",
@@ -6507,7 +6557,8 @@
         "fee": null,
         "hours": null,
         "name": "Quán Nga 2"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
@@ -6566,7 +6617,8 @@
         "fee": null,
         "hours": null,
         "name": "I Love Bánh Mì"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -6625,7 +6677,8 @@
         "fee": null,
         "hours": null,
         "name": "No Nee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -6683,7 +6736,8 @@
         "fee": null,
         "hours": null,
         "name": "Piggy"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -6744,7 +6798,8 @@
         "fee": null,
         "hours": "Mo-Su 07:00-18:00",
         "name": "Àla Cafe"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
@@ -6802,7 +6857,8 @@
         "fee": null,
         "hours": null,
         "name": "Quán Nga 2"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -6860,7 +6916,8 @@
         "fee": null,
         "hours": null,
         "name": "Chè Tâm Ý"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
@@ -6918,7 +6975,8 @@
         "fee": null,
         "hours": null,
         "name": "Khâu Cà Phê"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
@@ -6976,7 +7034,8 @@
         "fee": null,
         "hours": null,
         "name": "Pizza-Sandwich-Burger"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -7035,7 +7094,8 @@
         "hours": null,
         "name": null
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -7087,7 +7147,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
@@ -7145,7 +7206,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
@@ -7201,7 +7263,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M",
@@ -7259,7 +7322,8 @@
         "fee": null,
         "hours": null,
         "name": "At Ca Phe"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
@@ -7317,7 +7381,8 @@
         "fee": null,
         "hours": null,
         "name": "Cloud Garden Cafe"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
@@ -7375,7 +7440,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
@@ -7426,7 +7492,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
@@ -7487,7 +7554,8 @@
         "fee": null,
         "hours": null,
         "name": "7 wonders"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
@@ -7538,7 +7606,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
@@ -7597,7 +7666,8 @@
         "fee": null,
         "hours": "Mo-Su 14:00-23:00",
         "name": "A tri"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
@@ -7648,7 +7718,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJsYoIEOIXQjER_5_trbAwgnA",
@@ -7706,7 +7777,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
@@ -7757,7 +7829,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q",
@@ -7809,7 +7882,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
@@ -7860,7 +7934,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
@@ -7911,7 +7986,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
@@ -7962,7 +8038,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
@@ -8030,7 +8107,8 @@
         "fee": null,
         "hours": "Mo-Su 07:30-21:30",
         "name": "SIX ON SIX"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
@@ -8089,7 +8167,8 @@
         "hours": "24/7",
         "name": "HI4 COFFEE & WORKSPACE"
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -8147,7 +8226,8 @@
         "fee": null,
         "hours": null,
         "name": "Phuong"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
@@ -8205,7 +8285,8 @@
         "fee": null,
         "hours": "06:45-22:00",
         "name": "Venus Cafe"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
@@ -8268,7 +8349,8 @@
         "fee": null,
         "hours": "Mo-Su,PH 07:00-23:00",
         "name": "Bread & Butter"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -8326,7 +8408,8 @@
         "fee": null,
         "hours": null,
         "name": "Il Stand"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
@@ -8384,7 +8467,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -8433,7 +8517,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJvb3YtJYXQjERnLJ4-sFfc6A",
@@ -8482,7 +8567,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJO7l-RdwZQjERNj5fr2VyZ9Y",
@@ -8542,7 +8628,8 @@
         "fee": null,
         "hours": null,
         "name": "DNG"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
@@ -8603,7 +8690,8 @@
         "fee": null,
         "hours": null,
         "name": "loving hut - vegan restaurant"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJzeNmTwARQjERLSXizyRKI9g",
@@ -8654,7 +8742,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
@@ -8712,7 +8801,8 @@
         "fee": null,
         "hours": "Mo-Su 07:00-22:00",
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
@@ -8763,7 +8853,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJHaTEwB4ZQjERrE6CMe37byI",
@@ -8822,7 +8913,8 @@
         "hours": "Tu-Su 18:00-22:00",
         "name": "Westwood Da Nang"
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -8887,7 +8979,8 @@
       "web_evidence": {
         "hours_web": "24/7 (monandanang.vn)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -8950,7 +9043,8 @@
         "fee": null,
         "hours": null,
         "name": "Outpost"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
@@ -9008,7 +9102,8 @@
         "fee": null,
         "hours": "Mo-Su 07:30-21:00",
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
@@ -9060,7 +9155,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJk3YrZLoZQjERp5PbcDTftQw",
@@ -9118,7 +9214,8 @@
         "fee": null,
         "hours": null,
         "name": "TuyetAnh Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
@@ -9177,7 +9274,8 @@
         "fee": null,
         "hours": null,
         "name": "Ca Phe Anh Thu"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
@@ -9228,7 +9326,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJPzf25OAYQjERRUv1zSbS49Q",
@@ -9279,7 +9378,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ4Z8gV3cfQjERHH6fTdzj0E8",
@@ -9330,7 +9430,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJn7_3kc8ZQjERBi6T5XvhPko",
@@ -9381,7 +9482,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJa7FkIyUZQjER7VxLENFhuI0",
@@ -9432,7 +9534,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
@@ -9483,7 +9586,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJr-RyTyYfQjERmXNNs1WNyY4",
@@ -9534,7 +9638,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
@@ -9590,7 +9695,8 @@
         "fee": null,
         "hours": null,
         "name": "quán nhậu lộc viên"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
@@ -9641,7 +9747,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ2XROb6EZQjERoqg1HHvwj88",
@@ -9692,7 +9799,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
@@ -9754,7 +9862,8 @@
       "web_evidence": {
         "hours_web": "foody.vn Kiến Cafe 06:00-22:00"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -9810,7 +9919,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Phuong Dong"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
@@ -9859,7 +9969,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
@@ -9917,7 +10028,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Viet Anh"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
@@ -9975,7 +10087,8 @@
         "fee": null,
         "hours": null,
         "name": "LangVan Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJIcLWMlAZQjER1VvH4kJ2aZA",
@@ -10027,7 +10140,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
@@ -10085,7 +10199,8 @@
         "fee": null,
         "hours": null,
         "name": "NewStar Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
@@ -10143,7 +10258,8 @@
         "fee": null,
         "hours": null,
         "name": "Cafe Hen"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJhYuNIQAZQjERoyprw_nC3Ts",
@@ -10201,7 +10317,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeBen"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
@@ -10259,7 +10376,8 @@
         "fee": null,
         "hours": null,
         "name": "HongCoffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -10317,7 +10435,8 @@
         "fee": null,
         "hours": null,
         "name": "Nha me Lanh"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
@@ -10375,7 +10494,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
@@ -10433,7 +10553,8 @@
         "fee": null,
         "hours": null,
         "name": "PhuCoffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
@@ -10489,7 +10610,8 @@
         "fee": null,
         "hours": null,
         "name": "NgocVan Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJuZTrvVoZQjER371drzqC5hk",
@@ -10547,7 +10669,8 @@
         "fee": null,
         "hours": null,
         "name": "Kong Cafe"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
@@ -10605,7 +10728,8 @@
         "fee": null,
         "hours": "Mo-Su 09:00-13:00, 14:00-22:00",
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
@@ -10663,7 +10787,8 @@
         "fee": null,
         "hours": "Mo-Su 10:00-22:00",
         "name": "The Pizza Company"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJzVnvNgAZQjERef60MBfcz8E",
@@ -10721,7 +10846,8 @@
         "fee": null,
         "hours": null,
         "name": "Cafe461"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
@@ -10772,7 +10898,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
@@ -10830,7 +10957,8 @@
         "fee": null,
         "hours": null,
         "name": "1981 Coffee & Tea"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
@@ -10879,7 +11007,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJM2DzGgAZQjERp54q-gVvu-g",
@@ -10931,7 +11060,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8",
@@ -10989,7 +11119,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJXfWk4QYZQjERpQw56WNZ0js",
@@ -11040,7 +11171,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJUf5Hcw8ZQjERsntEedW35TI",
@@ -11102,7 +11234,8 @@
       "web_evidence": {
         "hours_web": "foody.vn Sky Coffee & Tea 06:00-22:00"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJteAgYXsZQjERK6NHlXGXIPI",
@@ -11160,7 +11293,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJfagM2mkZQjER9NTQqfVjnI8",
@@ -11211,7 +11345,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJbbs1ZTQYQjERi3OdfmnRk2g",
@@ -11276,7 +11411,8 @@
       "web_evidence": {
         "hours_web": "hoiandanang.com listing"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -11336,7 +11472,8 @@
         "fee": null,
         "hours": null,
         "name": "Lang Bich hoa Da Nang"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
@@ -11397,7 +11534,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJe8ah9rsZQjER6VQTZMzcGTw",
@@ -11461,7 +11599,8 @@
         "fee": null,
         "hours": null,
         "name": "RuNam"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
@@ -11532,68 +11671,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJqzg43jRncDER6n-M_N_YlnE",
-      "name": "VinWonders Nha Trang",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.074804999999998,
-      "lon": 108.2207766,
-      "opening_hours": [
-        "07:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.6,
-      "tags": [
-        "Điểm thu hút khách du lịch",
-        "Bến du thuyền"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4948013624",
-        "dist_m": 28.4,
-        "fee": null,
-        "hours": null,
-        "name": "Quán An Bún Chả Cá"
-      }
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
@@ -11655,7 +11734,8 @@
         "fee": null,
         "hours": null,
         "name": "Luxury"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -11717,7 +11797,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJzX1dFjAZQjERswowf61V1fk",
@@ -11780,7 +11861,8 @@
       "web_evidence": {
         "hours_web": "quy ước: công viên công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
@@ -11846,7 +11928,8 @@
       "web_evidence": {
         "hours_web": "cầu đi lại tự do 24/7; show lửa-nước T6-CN 21:00 (breezevietnam.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
@@ -11898,7 +11981,8 @@
         ]
       },
       "smart_tag_source": "rule_v1+paid-name",
-      "ticket_note": "Eco park, chưa có bảng giá công khai kiểm chứng được — unknown"
+      "ticket_note": "Eco park, chưa có bảng giá công khai kiểm chứng được — unknown",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
@@ -11957,7 +12041,8 @@
       ],
       "web_evidence": {
         "hours_web": "lều check-in 14:00, out trước 12:00 (khách ngày out trước 17h30)"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
@@ -12027,7 +12112,8 @@
         "fee": null,
         "hours": null,
         "name": "Bún Chả Hà Nội"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
@@ -12094,7 +12180,8 @@
         "fee": null,
         "hours": null,
         "name": "Trung tâm Giải trí Phức hợp Helio Center"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
@@ -12160,7 +12247,8 @@
       "web_evidence": {
         "hours_web": "giờ Bảo tàng ĐN trong khuôn viên; nghỉ T2 (quangthangcatba.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
@@ -12230,7 +12318,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -12294,7 +12383,8 @@
         "hours": "Mo-Su 07:00-22:30",
         "name": "Luk Lak"
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -12352,7 +12442,8 @@
         "fee": null,
         "hours": null,
         "name": "Phú Hồng"
-      }
+      },
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJq3jYbEgYQjERJQhj5oBrT04",
@@ -12408,7 +12499,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "Trung tâm thông tin du lịch"
     },
     {
       "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
@@ -12471,7 +12563,8 @@
       "web_evidence": {
         "hours_web": "quy ước: tuyến đi bộ ven sông mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
@@ -12532,7 +12625,8 @@
         "hours": "24/7",
         "name": "Sontra Sea Hotel"
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -12594,7 +12688,8 @@
       "web_evidence": {
         "hours_web": "đón 05:00-18:00 hằng ngày"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -12652,7 +12747,8 @@
       "web_evidence": {
         "hours_web": "open 24h, free entry (mecrawl.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -12705,7 +12801,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
@@ -12764,7 +12861,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "park"
     },
     {
       "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
@@ -12821,7 +12919,8 @@
       "web_evidence": {
         "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
@@ -12873,7 +12972,8 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "nature"
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -12925,7 +13025,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
@@ -12985,7 +13086,8 @@
         "fee": null,
         "hours": null,
         "name": "Ban Co Peak"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -13043,7 +13145,8 @@
         "hours": null,
         "name": "Son Tra Resort & Spa"
       },
-      "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa"
+      "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa",
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -13099,7 +13202,8 @@
         "fee": null,
         "hours": null,
         "name": "Cementerio militar franco-español de Y Pha Nho"
-      }
+      },
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJPbgJ4DY9QjER7OSjP2_jSC8",
@@ -13156,7 +13260,8 @@
       "web_evidence": {
         "hours_web": "open 24/7 (trip.com); khu quân sự, đường lên giới hạn 07:30-18:30"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
@@ -13220,7 +13325,8 @@
       "web_evidence": {
         "hours_web": "daivietourist.vn (T10-T2: 07:30-17:30)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -13281,7 +13387,8 @@
         "hours": null,
         "name": null
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -13345,7 +13452,8 @@
       "web_evidence": {
         "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -13406,7 +13514,8 @@
         "hours": null,
         "name": null
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
@@ -13470,7 +13579,8 @@
       "web_evidence": {
         "hours_web": "tripbike.net; đồng thuận mia.vn"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ28TlBIYXQjEREqSmOo2kQtU",
@@ -13527,7 +13637,8 @@
         "hours": null,
         "name": "Hotel Huong"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "Sở du lịch thành phố"
     },
     {
       "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
@@ -13591,7 +13702,8 @@
       "web_evidence": {
         "hours_web": "miễn phí, không giới hạn thời gian (daivietourist.vn; danangwander.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJNb8hNAAXQjERaE0LeRW4sy4",
@@ -13655,7 +13767,8 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi công cộng; đường lên giới hạn 07:30-18:30"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -13715,7 +13828,8 @@
       "web_evidence": {
         "hours_web": "quy ước: khu phố du lịch mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "Hiệp hội/Tổ chức"
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -13779,7 +13893,8 @@
       "web_evidence": {
         "hours_web": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -13836,7 +13951,8 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJq7Uto10fQjERQgZQB_w3cBw",
@@ -13893,7 +14009,8 @@
       "web_evidence": {
         "hours_web": "quy ước: công trình ngoài trời check-in tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJgdHMn8gYQjERmEdW2JHUGTw",
@@ -13946,7 +14063,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
@@ -14002,7 +14120,8 @@
       "web_evidence": {
         "hours_web": "quy ước: công viên công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
@@ -14053,7 +14172,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
@@ -14119,7 +14239,8 @@
       "web_evidence": {
         "hours_web": "trip.com; đồng thuận danangtours.com"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
@@ -14184,7 +14305,8 @@
       "web_evidence": {
         "hours_web": "mở cửa 24/7 (intour.com.vn)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
@@ -14239,7 +14361,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
@@ -14288,7 +14411,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "nature"
     },
     {
       "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
@@ -14344,104 +14468,8 @@
       "web_evidence": {
         "hours_web": "quy ước: quảng trường công cộng mở tự do"
       },
-      "hours_source": "web"
-    },
-    {
-      "poi_id": "ChIJU5NSEQUZQjERjlZ76jmxkmM",
-      "name": "Ngôi nhà nhỏ và bãi cỏ xanh mát của chú Anh",
-      "type": "Khu cắm trại",
-      "lat": 16.1073607,
-      "lon": 108.07996419999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 126,
-        "p50": 180,
-        "p75": 252
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Khu cắm trại"
-      ],
-      "intensity": 3,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "couple",
-          "group"
-        ],
-        "time": [
-          "sunrise",
-          "morning"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJo5A6iOchQjERE2Xrxkn5qwY",
-      "name": "Khu Công Nghiệp Liên Chiểu",
-      "type": "Khu thương mại",
-      "lat": 16.1364365,
-      "lon": 108.10765509999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.2,
-      "tags": [
-        "Khu thương mại"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
@@ -14509,7 +14537,8 @@
         "fee": null,
         "hours": null,
         "name": "Red Beach Resort & Spa"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -14559,54 +14588,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJTTiTd5YZQjERj7qgMdLL9w4",
-      "name": "Số 10, khu tđc Đà Sơn 5, Hòa Khánh Nam, Liên Chiểu, Đà Nẵng",
-      "type": "Đại lý du lịch",
-      "lat": 16.049235499999998,
-      "lon": 108.1547014,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Đại lý du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
@@ -14663,7 +14646,8 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi hoang sơ ngoài trời, không cổng vé"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJHxbYrLEfQjER059Ow1OysAY",
@@ -14719,7 +14703,8 @@
       "web_evidence": {
         "hours_web": "quy ước: công viên công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
@@ -14769,7 +14754,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan"
+      "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan",
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJ6xruBrT3cTER3emdI1jkITQ",
@@ -14825,7 +14811,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeThuy Duong"
-      }
+      },
+      "cat": "Trung tâm chăm sóc sức khỏe"
     },
     {
       "poi_id": "ChIJW4o1LAAXQjERL6zRtyWivLk",
@@ -14889,7 +14876,8 @@
       "hours_source": "rule_open_access",
       "web_evidence": {
         "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
@@ -14946,7 +14934,8 @@
       "web_evidence": {
         "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ57G9n8YXQjER3sEGyymJpBg",
@@ -15011,7 +15000,8 @@
       "hours_source": "osm",
       "web_evidence": {
         "hours_web": "bãi công cộng 24h (viet-go.com)"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
@@ -15072,7 +15062,8 @@
         "hours": null,
         "name": "Huy Hoang Hotel"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -15135,7 +15126,8 @@
       "web_evidence": {
         "hours_web": "quy ước: công viên biển công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
@@ -15200,58 +15192,8 @@
       "hours_source": "rule_open_access",
       "web_evidence": {
         "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
-      }
-    },
-    {
-      "poi_id": "ChIJS4pOscgZQjERCwuFFZuSl7k",
-      "name": "Hồ Thanh Khê",
-      "type": "Công viên",
-      "lat": 16.0688118,
-      "lon": 108.1866146,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 101,
-        "p50": 144,
-        "p75": 202
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Công viên"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "sunset"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Nhà thờ tộc, tham quan tự do (chưa verify vé, mặc định free)"
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
@@ -15315,7 +15257,8 @@
       "web_evidence": {
         "hours_web": "suy luận: tượng đài công cộng ngoài trời"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
@@ -15376,7 +15319,8 @@
         "hours": null,
         "name": "Huy Hoang Hotel"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
@@ -15437,7 +15381,8 @@
         "hours": null,
         "name": null
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
@@ -15497,7 +15442,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
@@ -15566,7 +15512,8 @@
         "fee": null,
         "hours": null,
         "name": "Thiếu nữ"
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
@@ -15636,68 +15583,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJMTJR2MsZQjERj9KA5AM9JAA",
-      "name": "PNT International Airport",
-      "type": "Bảo tàng",
-      "lat": 16.0632651,
-      "lon": 108.221789,
-      "opening_hours": [
-        "08:30-11:30, 13:30-16:30, 18:30-21:30"
-      ],
-      "visit_min": {
-        "p25": 76,
-        "p50": 108,
-        "p75": 151
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Bảo tàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Sai type (sân bay gắn Bảo tàng) — unknown, khả năng loại",
-      "osm_evidence": {
-        "osm": "node/5382678421",
-        "dist_m": 49.7,
-        "fee": null,
-        "hours": null,
-        "name": "Nam House"
-      }
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
@@ -15769,66 +15656,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJcX5KWskZQjERBp15jBCWYKg",
-      "name": "Samdi",
-      "type": "Bảo tàng di sản",
-      "lat": 16.058199899999998,
-      "lon": 108.21897179999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.2,
-      "tags": [
-        "Bảo tàng di sản"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Không xác định được địa điểm ở ĐN — unknown, cần làm rõ tên",
-      "osm_evidence": {
-        "osm": "node/11934161570",
-        "dist_m": 32.0,
-        "fee": null,
-        "hours": null,
-        "name": "Dimsum ba thim - dumplings"
-      }
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
@@ -15897,7 +15726,8 @@
         "fee": null,
         "hours": null,
         "name": "Art in Paradise Da Nang 3D Museum"
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -15959,7 +15789,8 @@
         "fee": null,
         "hours": "Mo-Su 09:00-17:00",
         "name": "Bảo tàng Phật giáo"
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -16020,7 +15851,8 @@
         "fee": null,
         "hours": null,
         "name": "Marble Mountains Museum"
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -16081,7 +15913,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -16145,7 +15978,8 @@
       "web_evidence": {
         "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
@@ -16209,7 +16043,8 @@
       "web_evidence": {
         "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com; visitor center ghi 7:00-17:00)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
@@ -16270,7 +16105,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
@@ -16335,7 +16171,8 @@
       "web_evidence": {
         "hours_web": "suy luận: nhà bia ngoài trời, không cổng/vé"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -16387,111 +16224,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Chưa định danh rõ (khu tâm linh Đà Sơn, Liên Chiểu?) — unknown"
-    },
-    {
-      "poi_id": "ChIJHbWDGYsZQjER3bGCc6Ij91A",
-      "name": "Aarohi Media Training",
-      "type": "Bảo tàng",
-      "lat": 16.0764389,
-      "lon": 108.1671993,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Bảo tàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Không phải điểm du lịch (trung tâm đào tạo?) — unknown, khả năng loại"
-    },
-    {
-      "poi_id": "ChIJTwH8nfwZQjER2wJZnnqM-CM",
-      "name": "Thị Hẹ",
-      "type": "Bảo tàng",
-      "lat": 16.0735971,
-      "lon": 108.1519532,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Bảo tàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Tên chưa rõ, không nguồn — unknown, khả năng loại"
+      "ticket_note": "Chưa định danh rõ (khu tâm linh Đà Sơn, Liên Chiểu?) — unknown",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
@@ -16543,7 +16277,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Di tích cách mạng, không bán vé, không giờ niêm yết"
+      "ticket_note": "Di tích cách mạng, không bán vé, không giờ niêm yết",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
@@ -16602,7 +16337,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
@@ -16663,7 +16399,8 @@
         "fee": null,
         "hours": null,
         "name": "Quán Chay XUÂN"
-      }
+      },
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
@@ -16717,7 +16454,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJX_osydwQQjERB-Y6MvLfJmQ",
@@ -16771,7 +16509,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
@@ -16822,7 +16561,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
@@ -16876,7 +16616,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJF7gOWQAXQjER90uCTZIoJII",
@@ -16936,7 +16677,8 @@
         "fee": null,
         "hours": "Mo-Su 10:00-23:00",
         "name": "43 Town"
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
@@ -16990,7 +16732,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
@@ -17047,7 +16790,8 @@
       "web_evidence": {
         "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
@@ -17103,7 +16847,8 @@
       "web_evidence": {
         "hours_web": "quy ước: bãi/công viên công cộng mở tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJnWQc2ZwRQjERfULHaU75hxU",
@@ -17159,7 +16904,8 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi công cộng, không giờ niêm yết"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "park"
     },
     {
       "poi_id": "ChIJ0VM-TgAXQjERZ7yV7hTJrbc",
@@ -17223,7 +16969,8 @@
       "web_evidence": {
         "hours_web": "bãi công cộng 24h (viet-go.com; intour.com.vn 'luôn mở cửa')"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJAT1GIScXQjERAi6vhyCj61s",
@@ -17277,7 +17024,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
@@ -17334,7 +17082,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
@@ -17395,57 +17144,8 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Huy"
-      }
-    },
-    {
-      "poi_id": "ChIJz4tuMfgXQjER9EJAjXQhpJ0",
-      "name": "Chợ Đầu mối Thủy sản Thọ Quang",
-      "type": "Chợ hải sản",
-      "lat": 16.0999989,
-      "lon": 108.24063729999999,
-      "opening_hours": [
-        "00:00-06:00, 12:00-16:00"
-      ],
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.3,
-      "tags": [
-        "Chợ hải sản"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
+      "cat": "market"
     },
     {
       "poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA",
@@ -17505,55 +17205,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJT576gZMXQjERPFUsxBoJmUM",
-      "name": "Chợ hải sản Đà Nẵng",
-      "type": "Người cung cấp thực phẩm",
-      "lat": 16.1042591,
-      "lon": 108.2426641,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Người cung cấp thực phẩm"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "ticket_note": "Tên chung chung; chợ cụ thể có giờ riêng (Mân Thái 15:00-19:30) — chưa gán"
+      "cat": "market"
     },
     {
       "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
@@ -17610,7 +17263,8 @@
         "fee": null,
         "hours": null,
         "name": "Chợ đêm Helio"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -17667,7 +17321,8 @@
         "fee": null,
         "hours": null,
         "name": "The Eden"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
@@ -17724,65 +17379,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJm97BURAZQjERA57TrjPe_Ks",
-      "name": "gia vị cho nhà hàng đà nẵng",
-      "type": "Chợ",
-      "lat": 16.0779964,
-      "lon": 108.21686079999999,
-      "opening_hours": [
-        "07:00-11:00",
-        "07:00-17:00"
-      ],
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Chợ"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/7082259409",
-        "dist_m": 18.8,
-        "fee": null,
-        "hours": null,
-        "name": null
-      }
+      "cat": "market"
     },
     {
       "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
@@ -17841,7 +17439,8 @@
         "fee": null,
         "hours": null,
         "name": "Bà Nam Sea Food"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
@@ -17891,7 +17490,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
@@ -17948,7 +17548,8 @@
         "fee": null,
         "hours": null,
         "name": "Com Tam"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
@@ -18006,7 +17607,8 @@
         "fee": null,
         "hours": null,
         "name": "loving hut - vegan restaurant"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
@@ -18055,7 +17657,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
@@ -18113,55 +17716,8 @@
         "fee": null,
         "hours": null,
         "name": "ACE Coworking Space"
-      }
-    },
-    {
-      "poi_id": "ChIJ-WnfCAARQjER5q7awU-LWT8",
-      "name": "Ban quản lý chợ quận Ngũ Hành Sơn",
-      "type": "Chợ",
-      "lat": 15.994426299999999,
-      "lon": 108.2576572,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Chợ"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
+      "cat": "market"
     },
     {
       "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
@@ -18218,7 +17774,8 @@
         "fee": null,
         "hours": null,
         "name": "Havelli"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJw6DOwZ8QQjERjDMobkQxbF0",
@@ -18268,7 +17825,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
@@ -18316,7 +17874,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
@@ -18373,7 +17932,8 @@
         "fee": null,
         "hours": null,
         "name": "NgocLan Coffee"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
@@ -18423,7 +17983,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
@@ -18473,7 +18034,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
@@ -18523,7 +18085,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
@@ -18571,61 +18134,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJx9e75ikZQjERYo5cxoTG880",
-      "name": "Ban Quản Lý Chợ Quận Liên Chiểu",
-      "type": "Văn phòng chính quyền quận",
-      "lat": 16.0698601,
-      "lon": 108.14983079999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4,
-      "tags": [
-        "Văn phòng chính quyền quận"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
       "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/729406610",
-        "dist_m": 77.9,
-        "fee": null,
-        "hours": null,
-        "name": "Ca Phe 54"
-      }
+      "cat": "market"
     },
     {
       "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
@@ -18687,7 +18197,8 @@
       "web_evidence": {
         "hours_web": "foody.vn Khu Ẩm Thực Chợ Hoà Mỹ 05:00-19:00"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
@@ -18735,7 +18246,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     },
     {
       "poi_id": "ChIJ3c1W2AAfQjERnRKZkrt0AjA",
@@ -18780,204 +18292,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJBaiKwwMZQjERUmIrZ8mdCFU",
-      "name": "Cho Thuê Xe Máy liên chiểu đà nẵng : Gia thành",
-      "type": "Cửa hàng",
-      "lat": 16.0778121,
-      "lon": 108.14934629999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Cửa hàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJMcPq5qshQjER-fmBrRObun4",
-      "name": "Chợ vật tư",
-      "type": "Chợ",
-      "lat": 16.1272651,
-      "lon": 108.1213032,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.6,
-      "tags": [
-        "Chợ"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
-    },
-    {
-      "poi_id": "ChIJ6WPk66cfQjERE1DYeuPjviI",
-      "name": "Liên Chiểu",
-      "type": "unknown",
-      "lat": 16.087358,
-      "lon": 108.0835783,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
       "smart_tag_source": "rule_v1",
-      "web_evidence": {
-        "hours_web": "quy ước: công viên công cộng mở tự do"
-      },
-      "hours_source": "web"
-    },
-    {
-      "poi_id": "ChIJs5YKzUUfQjERIhE54FanYzo",
-      "name": "Vật tư nông nghiệp Hùng Phương",
-      "type": "Chợ",
-      "lat": 16.084457699999998,
-      "lon": 108.0975904,
-      "opening_hours": [
-        "06:00-18:00"
-      ],
-      "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Chợ"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1"
+      "cat": "unknown"
     },
     {
       "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",
@@ -19038,7 +18354,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJI4UNJaMXQjERUVoSyckPe7o",
@@ -19096,65 +18413,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
-    },
-    {
-      "poi_id": "ChIJ8VlQXCcZQjERjXyVGYI9ivo",
-      "name": "Nhà Đất Liên Chiểu",
-      "type": "Nhà hàng",
-      "lat": 16.0689344,
-      "lon": 108.159376,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
       },
-      "dur_source": "pending_llm",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.5,
-      "tags": [
-        "Nhà hàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "quick-stop-30"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/729406903",
-        "dist_m": 95.6,
-        "fee": null,
-        "hours": null,
-        "name": "CaPhe Win"
-      }
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -19214,7 +18474,8 @@
         "fee": null,
         "hours": null,
         "name": "LyLy Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJHUH52YwZQjERC9lBUIqQec4",
@@ -19274,7 +18535,8 @@
         "fee": null,
         "hours": "Mo-Su 05:00-18:00",
         "name": "Sơn"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJy_aOzygZQjERvnOL5s06Zfg",
@@ -19334,7 +18596,8 @@
         "fee": null,
         "hours": "Mo-Su 05:00-18:00",
         "name": "Sơn"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
@@ -19394,7 +18657,8 @@
         "fee": null,
         "hours": null,
         "name": "OnenineCoffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJxyTuNSoZQjERDDwrFT-7IMQ",
@@ -19454,7 +18718,8 @@
         "fee": null,
         "hours": null,
         "name": "Highlands Coffee"
-      }
+      },
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -19513,7 +18778,8 @@
         "fee": null,
         "hours": null,
         "name": "PhoCoffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJxzo3j9EZQjER785qACnbIW0",
@@ -19572,7 +18838,8 @@
         "fee": null,
         "hours": null,
         "name": "Phuc Long"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJZdLv8rkZQjERIhU2VsEsCl4",
@@ -19630,7 +18897,8 @@
         "fee": null,
         "hours": null,
         "name": "Nhà Khách Quân Chủng Phòng Không- Không Quân"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
@@ -19690,7 +18958,8 @@
         "fee": null,
         "hours": "Mo-Sa 06:30-20:30; Su 06:30-15:30",
         "name": "Bao An Macrobiotic"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
@@ -19748,7 +19017,8 @@
         "fee": null,
         "hours": null,
         "name": "Son Tra view"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
@@ -19806,7 +19076,8 @@
         "fee": null,
         "hours": "Mo-Su 06:30-22:00",
         "name": "Mỳ quảng Ông Cảnh"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
@@ -19857,7 +19128,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJKdW4YgAfQjERF1TVangBTwY",
@@ -19912,7 +19184,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ8WgvsE8ZQjERZzNoKTBgM84",
@@ -19970,7 +19243,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeBao Dang"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJr4cXZxUZQjER1gqN7YF0A70",
@@ -20022,7 +19296,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJMQ_j9n0ZQjER6BCkcpQNT8s",
@@ -20080,7 +19355,8 @@
         "fee": null,
         "hours": null,
         "name": "DuyenAnh Coffee"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJwTU11dAZQjERsydZriN8k5M",
@@ -20138,7 +19414,8 @@
         "fee": null,
         "hours": null,
         "name": "CafeKhanh Ly"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
@@ -20196,7 +19473,8 @@
         "fee": null,
         "hours": null,
         "name": "Ikigai"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ5YNM8KoZQjERT-e5n84Og1E",
@@ -20254,7 +19532,8 @@
         "fee": null,
         "hours": null,
         "name": "Molly's"
-      }
+      },
+      "cat": "cafe"
     },
     {
       "poi_id": "ChIJ81xSxbEZQjERJmzlA1ksEVo",
@@ -20319,7 +19598,8 @@
         "fee": null,
         "hours": null,
         "name": "RuNam"
-      }
+      },
+      "cat": "Đại lý du lịch bằng thuyền"
     },
     {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
@@ -20379,61 +19659,8 @@
         "fee": null,
         "hours": null,
         "name": "RuNam"
-      }
-    },
-    {
-      "poi_id": "ChIJbcCUeSYZQjERjHvN92qKB1U",
-      "name": "Trung tâm Y tế Khu vực Liên Chiểu",
-      "type": "Bệnh viện",
-      "lat": 16.0642451,
-      "lon": 108.1555808,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
       },
-      "dur_source": "pending_llm",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 2.4,
-      "tags": [
-        "Bệnh viện"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "quick-stop-30"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/729406829",
-        "dist_m": 96.2,
-        "fee": null,
-        "hours": null,
-        "name": "CafeBao Bao"
-      }
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -20482,7 +19709,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
@@ -20546,7 +19774,8 @@
       "web_evidence": {
         "hours_web": "huvi.ai 07:00-22:00"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -20607,7 +19836,8 @@
         "hours": null,
         "name": null
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
@@ -20666,7 +19896,8 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
@@ -20730,7 +19961,8 @@
       "web_evidence": {
         "hours_web": "NHS 07:00-17:30; vé Âm Phủ riêng 20k (hoiandriver.com)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJA7V4DgoRQjERbXjInwlmAuo",
@@ -20787,7 +20019,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Showroom/xưởng tư nhân, tham quan miễn phí, bán sản phẩm"
+      "ticket_note": "Showroom/xưởng tư nhân, tham quan miễn phí, bán sản phẩm",
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
@@ -20851,7 +20084,8 @@
       "web_evidence": {
         "hours_web": "suy luận theo giờ quần thể NHS (động núi Thủy Sơn)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "landmark"
     },
     {
       "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
@@ -20903,7 +20137,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Vườn tư nhân, không niêm yết vé, liên hệ 0913430429 — unknown"
+      "ticket_note": "Vườn tư nhân, không niêm yết vé, liên hệ 0913430429 — unknown",
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
@@ -20955,7 +20190,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Không nguồn giá vé — unknown"
+      "ticket_note": "Không nguồn giá vé — unknown",
+      "cat": "museum"
     },
     {
       "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
@@ -21020,7 +20256,8 @@
       "web_evidence": {
         "hours_web": "chùa trên núi Thủy Sơn, theo giờ khu NHS (gtrip.vn)"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
@@ -21074,7 +20311,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
@@ -21135,7 +20373,8 @@
         "hours": null,
         "name": "Muoi Bien"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "cat": "beach"
     },
     {
       "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
@@ -21192,7 +20431,8 @@
         "fee": null,
         "hours": "Mo-Su 06:00-23:00",
         "name": "Bún Mắm Vân"
-      }
+      },
+      "cat": "market"
     },
     {
       "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
@@ -21249,8 +20489,10 @@
         "fee": null,
         "hours": null,
         "name": "Huệ Chi"
-      }
+      },
+      "cat": "market"
     }
   ],
-  "enriched_at": "2026-10-10"
+  "enriched_at": "2026-10-10",
+  "pruned_at": "2026-10-10"
 }

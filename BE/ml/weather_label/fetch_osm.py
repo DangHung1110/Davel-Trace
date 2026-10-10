@@ -24,6 +24,10 @@ FILTERS = [  # node-only: light; ways fetched later for shortlisted POIs
     'node["amenity"~"restaurant|cafe|museum|marketplace|place_of_worship|food_court"]',
     'node["historic"]',
     'node["shop"="mall"]',
+    # crawl-bù 2026-10-10 (docs/crawl-osm.md): nature + souvenirs for the
+    # missing mountain/island/beach + shopping coverage
+    'node["natural"~"beach|peak|cave_entrance|spring|waterfall"]',
+    'node["shop"~"mall|department_store|supermarket|gift|souvenir"]',
 ]
 
 
