@@ -225,6 +225,25 @@ def emit_judge_batch(pois: list[dict], path: str, n: int = 600, seed: int = 7) -
     return len(rows)
 
 
+def collect_human(answers_path: str, verify_path: str) -> list[dict]:
+    """Parse human_answers.json [{pair_n, human}] joined with the verify
+    set -> pairs with source=human. human: 1/0/-1."""
+    ans = {r["pair_n"]: r["human"]
+           for r in json.load(open(answers_path, encoding="utf-8"))}
+    pairs: list[dict] = []
+    with open(verify_path, encoding="utf-8") as f:
+        for line in f:
+            row = json.loads(line)
+            if row["pair_n"] in ans and ans[row["pair_n"]] in (1, 0, -1):
+                pairs.append({"pair_id": f"human-{row['pair_n']}",
+                              "first_id": row["first_id"],
+                              "second_id": row["second_id"],
+                              "label": ans[row["pair_n"]], "margin": 0.0,
+                              "source": "human", "rules": ["human-verify"],
+                              "swapped_from": None})
+    return pairs
+
+
 def collect_judge(path: str) -> list[dict]:
     """Parse returned judge JSONL (each line: first_id, second_id, choice)."""
     pairs: list[dict] = []
