@@ -26,8 +26,16 @@ W_MEAL = 0.3
 W_INDOOR = 0.2
 
 
+def _canon(raw: str) -> str:
+    try:
+        from BE.ml.patm.estimate_duration import canonical_category
+        return canonical_category(raw or "")
+    except Exception:  # noqa: BLE001 - other worktrees may lack the module
+        return raw or ""
+
+
 def _is_food(p: dict) -> bool:
-    return p.get("type") == "restaurant"
+    return _canon(p.get("type", "")) == "restaurant"
 
 
 def _sens(p: dict) -> bool:

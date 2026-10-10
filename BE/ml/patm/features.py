@@ -46,8 +46,16 @@ def _num(v, default=0.0) -> float:
         return float(default)
 
 
+def _canon(raw: str) -> str:
+    try:
+        from BE.ml.patm.estimate_duration import canonical_category
+        return canonical_category(raw or "")
+    except Exception:  # noqa: BLE001 - prior JSON absent in other worktrees
+        return raw or ""
+
+
 def _is_food(p: dict) -> float:
-    return 1.0 if p.get("type") in FOOD_TYPES else 0.0
+    return 1.0 if _canon(p.get("type", "")) in FOOD_TYPES else 0.0
 
 
 def _sens(p: dict) -> float:
@@ -55,7 +63,11 @@ def _sens(p: dict) -> float:
 
 
 def _outdoor(p: dict) -> float:
-    return 1.0 if p.get("type") in OUTDOOR_TYPES else 0.0
+    return 1.0 if _canon(p.get("type", "")) in OUTDOOR_TYPES else 0.0
+
+
+def _same_type(a: dict, b: dict) -> float:
+    return 1.0 if _canon(a.get("type", "")) == _canon(b.get("type", "")) else 0.0
 
 
 def extract(a: dict, b: dict, user: dict | None = None,
@@ -85,7 +97,7 @@ def extract(a: dict, b: dict, user: dict | None = None,
         fb - fa,
         (sa * (1.0 - sb)) - (sb * (1.0 - sa)),
         1.0 if ia > ib else (-1.0 if ib > ia else 0.0),
-        1.0 if a.get("type") == b.get("type") else 0.0,
+        _same_type(a, b),
         # C: user centered
         _num(u.get("pace"), 2) - 2.0,
         _num(u.get("fitness"), 2) - 2.0,
