@@ -674,7 +674,9 @@
       "type": "Nhà hàng hải sản",
       "lat": 16.066801599999998,
       "lon": 108.2449953,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 50,
         "p50": 72,
@@ -725,7 +727,11 @@
         "fee": null,
         "hours": null,
         "name": "Bé Ni 2"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "Apple Maps Open 24 Hours; ghiendanang.com 'Luôn mở cửa'"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
@@ -860,7 +866,9 @@
       "type": "Nhà hàng hải sản",
       "lat": 16.085448,
       "lon": 108.221003,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 50,
         "p50": 72,
@@ -910,7 +918,11 @@
         "fee": null,
         "hours": null,
         "name": "HoangOanh Coffee"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "cùng địa chỉ Bé Ni 2, 228 Võ Nguyên Giáp (Apple Maps 24h)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJJSd-naoZQjERheTI-IEkRrc",
@@ -1282,7 +1294,9 @@
       "type": "Nhà hàng Việt Nam",
       "lat": 16.090621,
       "lon": 108.2499868,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 42,
         "p50": 60,
@@ -1329,7 +1343,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: bãi tự nhiên hoang sơ, không vé/giờ"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -8812,7 +8830,9 @@
       "type": "Quán cà phê",
       "lat": 16.009950099999998,
       "lon": 108.2576429,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -8860,7 +8880,14 @@
         "fee": null,
         "hours": null,
         "name": "Cherry coffee"
-      }
+      },
+      "price_sources": [
+        "https://monandanang.vn"
+      ],
+      "web_evidence": {
+        "hours_web": "24/7 (monandanang.vn)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -9673,7 +9700,9 @@
       "type": "Quán cà phê",
       "lat": 16.0899551,
       "lon": 108.1478334,
-      "opening_hours": [],
+      "opening_hours": [
+        "06:00-22:00"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -9721,7 +9750,11 @@
         "fee": null,
         "hours": null,
         "name": "CaPhe Uyen Phuong"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "foody.vn Kiến Cafe 06:00-22:00"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -11015,7 +11048,9 @@
       "type": "Quán cà phê",
       "lat": 16.060863899999998,
       "lon": 108.1849845,
-      "opening_hours": [],
+      "opening_hours": [
+        "06:00-22:00"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -11063,7 +11098,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "foody.vn Sky Coffee & Tea 06:00-22:00"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJteAgYXsZQjERK6NHlXGXIPI",
@@ -11180,7 +11219,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0677019,
       "lon": 108.21924539999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "08:00-18:00"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -11231,7 +11272,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "hoiandanang.com listing"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -11680,7 +11725,9 @@
       "type": "Công viên",
       "lat": 16.0581055,
       "lon": 108.2232435,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -11729,7 +11776,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "quy ước: công viên công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
@@ -11737,7 +11788,9 @@
       "type": "Cầu",
       "lat": 16.0611042,
       "lon": 108.2276926,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -11789,7 +11842,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "cầu đi lại tự do 24/7; show lửa-nước T6-CN 21:00 (breezevietnam.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
@@ -12045,7 +12102,10 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0761821,
       "lon": 108.22163019999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "08:00-11:30",
+        "13:30-16:30"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -12096,7 +12156,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "giờ Bảo tàng ĐN trong khuôn viên; nghỉ T2 (quangthangcatba.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
@@ -12352,7 +12416,9 @@
       "type": "Công viên",
       "lat": 16.0604224,
       "lon": 108.2243312,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -12401,7 +12467,11 @@
         "fee": null,
         "hours": null,
         "name": "Dragon's Tail"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "quy ước: tuyến đi bộ ven sông mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
@@ -12532,7 +12602,9 @@
       "type": "Thắng cảnh",
       "lat": 16.1124336,
       "lon": 108.31163219999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -12576,7 +12648,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "open 24h, free entry (mecrawl.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -12696,7 +12772,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0992375,
       "lon": 108.26492189999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -12739,7 +12817,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
@@ -12960,7 +13042,8 @@
         "fee": null,
         "hours": null,
         "name": "Son Tra Resort & Spa"
-      }
+      },
+      "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa"
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -13024,7 +13107,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.133827999999998,
       "lon": 108.2464926,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -13067,7 +13152,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "open 24/7 (trip.com); khu quân sự, đường lên giới hạn 07:30-18:30"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
@@ -13075,7 +13164,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1351089,
       "lon": 108.24537579999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:30-18:30"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13125,7 +13216,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "daivietourist.vn (T10-T2: 07:30-17:30)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -13194,7 +13289,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1024374,
       "lon": 108.3081448,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13244,7 +13341,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -13313,7 +13414,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1362168,
       "lon": 108.317658,
-      "opening_hours": [],
+      "opening_hours": [
+        "06:00-18:00"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13363,7 +13466,11 @@
         "fee": null,
         "hours": null,
         "name": "Quán Ăn Sân Vườn Trường Mai"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "tripbike.net; đồng thuận mia.vn"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ28TlBIYXQjEREqSmOo2kQtU",
@@ -13428,7 +13535,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0988248,
       "lon": 108.224412,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -13478,7 +13587,11 @@
         "fee": null,
         "hours": null,
         "name": "7 wonders"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "miễn phí, không giới hạn thời gian (daivietourist.vn; danangwander.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJNb8hNAAXQjERaE0LeRW4sy4",
@@ -13486,7 +13599,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0984791,
       "lon": 108.254436,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13536,7 +13651,11 @@
         "fee": null,
         "hours": null,
         "name": "Leon Homestay"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận: bãi công cộng; đường lên giới hạn 07:30-18:30"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -13544,7 +13663,9 @@
       "type": "Hiệp hội/Tổ chức",
       "lat": 16.0503276,
       "lon": 108.24849049999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 50,
         "p50": 72,
@@ -13590,7 +13711,11 @@
         "fee": null,
         "hours": null,
         "name": "Holiday Coffee"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "quy ước: khu phố du lịch mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -13598,7 +13723,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0043801,
       "lon": 108.2627974,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -13648,7 +13775,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -13656,7 +13787,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0027923,
       "lon": 108.2699727,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13699,7 +13832,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: bãi công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJq7Uto10fQjERQgZQB_w3cBw",
@@ -13707,7 +13844,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0935106,
       "lon": 108.0857434,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13750,7 +13889,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: công trình ngoài trời check-in tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJgdHMn8gYQjERmEdW2JHUGTw",
@@ -13811,7 +13954,9 @@
       "type": "Công viên",
       "lat": 16.0720506,
       "lon": 108.15939519999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -13853,7 +13998,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: công viên công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
@@ -13912,7 +14061,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1566197,
       "lon": 108.1093217,
-      "opening_hours": [],
+      "opening_hours": [
+        "08:00-17:00"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -13964,7 +14115,11 @@
         "fee": null,
         "hours": null,
         "name": "Khu Du Lịch Sinh Thái Suối Lương"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "trip.com; đồng thuận danangtours.com"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
@@ -13972,7 +14127,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0801438,
       "lon": 108.059412,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -14023,7 +14180,11 @@
         "fee": null,
         "hours": null,
         "name": "Hồ Hoà Trung"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "mở cửa 24/7 (intour.com.vn)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
@@ -14135,7 +14296,9 @@
       "type": "Công viên",
       "lat": 16.0723277,
       "lon": 108.1589808,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -14177,7 +14340,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: quảng trường công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJU5NSEQUZQjERjlZ76jmxkmM",
@@ -14447,7 +14614,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1904352,
       "lon": 108.1556301,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -14490,7 +14659,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: bãi hoang sơ ngoài trời, không cổng vé"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJHxbYrLEfQjER059Ow1OysAY",
@@ -14498,7 +14671,9 @@
       "type": "Công viên",
       "lat": 16.0891482,
       "lon": 108.1197509,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -14540,7 +14715,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: công viên công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
@@ -14589,7 +14768,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan"
     },
     {
       "poi_id": "ChIJ6xruBrT3cTER3emdI1jkITQ",
@@ -14706,7 +14886,10 @@
         "hours": null,
         "name": "HIGHLANDS COFFEE"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "web_evidence": {
+        "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
+      }
     },
     {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
@@ -14714,7 +14897,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.042512,
       "lon": 108.25170879999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -14757,7 +14942,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ57G9n8YXQjER3sEGyymJpBg",
@@ -14819,7 +15008,10 @@
         "hours": "Mo-Su 10:00-23:00",
         "name": "43 Town"
       },
-      "hours_source": "osm"
+      "hours_source": "osm",
+      "web_evidence": {
+        "hours_web": "bãi công cộng 24h (viet-go.com)"
+      }
     },
     {
       "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
@@ -14888,7 +15080,9 @@
       "type": "Công viên",
       "lat": 16.072789999999998,
       "lon": 108.1918996,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -14937,7 +15131,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "quy ước: công viên biển công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
@@ -14999,7 +15197,10 @@
         "hours": null,
         "name": "HIGHLANDS COFFEE"
       },
-      "hours_source": "rule_open_access"
+      "hours_source": "rule_open_access",
+      "web_evidence": {
+        "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
+      }
     },
     {
       "poi_id": "ChIJS4pOscgZQjERCwuFFZuSl7k",
@@ -15049,7 +15250,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Nhà thờ tộc, tham quan tự do (chưa verify vé, mặc định free)"
     },
     {
       "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
@@ -15057,7 +15259,9 @@
       "type": "Địa điểm lịch sử",
       "lat": 16.0652433,
       "lon": 108.1833896,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -15107,7 +15311,11 @@
         "fee": null,
         "hours": null,
         "name": "Tượng Mẹ Nhu"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận: tượng đài công cộng ngoài trời"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
@@ -15881,7 +16089,9 @@
       "type": "Chùa phật giáo",
       "lat": 16.0041857,
       "lon": 108.26414589999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:00-17:30"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -15931,7 +16141,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
@@ -15939,7 +16153,9 @@
       "type": "Điện thờ",
       "lat": 16.0042813,
       "lon": 108.262067,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:00-17:30"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -15989,7 +16205,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com; visitor center ghi 7:00-17:00)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
@@ -16058,7 +16278,9 @@
       "type": "Bảo tàng lịch sử địa phương",
       "lat": 16.0041752,
       "lon": 108.2522278,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 31,
         "p50": 45,
@@ -16084,7 +16306,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": false,
+        "ticket": true,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -16109,7 +16331,11 @@
         "fee": null,
         "hours": null,
         "name": "Chùa Hương Sơn"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận: nhà bia ngoài trời, không cổng/vé"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -16772,7 +16998,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 15.994815299999999,
       "lon": 108.273776,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -16815,7 +17043,11 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
@@ -16823,7 +17055,9 @@
       "type": "Công viên",
       "lat": 16.0462997,
       "lon": 108.2499976,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -16865,7 +17099,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: bãi/công viên công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJnWQc2ZwRQjERfULHaU75hxU",
@@ -16873,7 +17111,9 @@
       "type": "Công viên",
       "lat": 15.988969399999998,
       "lon": 108.2765196,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -16915,7 +17155,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "suy luận: bãi công cộng, không giờ niêm yết"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJ0VM-TgAXQjERZ7yV7hTJrbc",
@@ -16923,7 +17167,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0470926,
       "lon": 108.24952239999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -16973,7 +17219,11 @@
         "fee": null,
         "hours": null,
         "name": "Muoi Bien"
-      }
+      },
+      "web_evidence": {
+        "hours_web": "bãi công cộng 24h (viet-go.com; intour.com.vn 'luôn mở cửa')"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJAT1GIScXQjERAi6vhyCj61s",
@@ -17302,7 +17552,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Tên chung chung; chợ cụ thể có giờ riêng (Mân Thái 15:00-19:30) — chưa gán"
     },
     {
       "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
@@ -18382,7 +18633,9 @@
       "type": "Chợ",
       "lat": 16.0586913,
       "lon": 108.16977639999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "05:00-19:00"
+      ],
       "visit_min": {
         "p25": 63,
         "p50": 90,
@@ -18430,7 +18683,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "foody.vn Khu Ẩm Thực Chợ Hoà Mỹ 05:00-19:00"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
@@ -18627,7 +18884,9 @@
       "type": "unknown",
       "lat": 16.087358,
       "lon": 108.0835783,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 42,
         "p50": 60,
@@ -18664,7 +18923,11 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "web_evidence": {
+        "hours_web": "quy ước: công viên công cộng mở tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJs5YKzUUfQjERIhE54FanYzo",
@@ -20227,7 +20490,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0594948,
       "lon": 108.1480098,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:00-22:00"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -20259,7 +20524,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": null,
+        "ticket": true,
         "price_band": null,
         "space": "both",
         "party": [
@@ -20277,7 +20542,11 @@
         ]
       },
       "smart_tag_source": "rule_v1+paid-name",
-      "ticket_note": "BBQ/lều/team-building theo gói đoàn, web không niêm yết giá — unknown"
+      "ticket_note": "BBQ/lều/team-building theo gói đoàn, web không niêm yết giá — unknown",
+      "web_evidence": {
+        "hours_web": "huvi.ai 07:00-22:00"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -20405,7 +20674,9 @@
       "type": "Chùa phật giáo",
       "lat": 16.003141,
       "lon": 108.2640577,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:00-17:30"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -20455,7 +20726,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "NHS 07:00-17:30; vé Âm Phủ riêng 20k (hoiandriver.com)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJA7V4DgoRQjERbXjInwlmAuo",
@@ -20520,7 +20795,9 @@
       "type": "Điểm mốc lịch sử",
       "lat": 16.003690799999998,
       "lon": 108.2634844,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:00-17:30"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -20570,7 +20847,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "suy luận theo giờ quần thể NHS (động núi Thủy Sơn)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
@@ -20682,7 +20963,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.003842499999998,
       "lon": 108.2624426,
-      "opening_hours": [],
+      "opening_hours": [
+        "07:30-17:00"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -20733,7 +21016,11 @@
         "fee": null,
         "hours": null,
         "name": null
-      }
+      },
+      "web_evidence": {
+        "hours_web": "chùa trên núi Thủy Sơn, theo giờ khu NHS (gtrip.vn)"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",

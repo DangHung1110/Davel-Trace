@@ -170,8 +170,9 @@ def tag_poi(p: dict) -> tuple[dict, str]:
 
 
 def apply_price_web(pois: list[dict], snapshot_dir: str) -> dict:
-    """Overlay price_web.json (web-verified prices) by exact name.
+    """Overlay price_web.json + hours_web.json (web-verified) by name.
 
+    Name match: exact, then diacritic/case-insensitive, then substring.
     Sets ticket/ticket_vnd/ticket_note/price_band + web_evidence; fills
     opening_hours ONLY when empty. Returns {applied, filled_hours}."""
     path = os.path.join(snapshot_dir, "price_web.json")
@@ -179,9 +180,33 @@ def apply_price_web(pois: list[dict], snapshot_dir: str) -> dict:
         return {"applied": 0, "filled_hours": 0}
     with open(path, encoding="utf-8") as f:
         web = json.load(f)
+    hpath = os.path.join(snapshot_dir, "hours_web.json")
+    if os.path.exists(hpath):
+        with open(hpath, encoding="utf-8") as f:
+            web = {**web, **json.load(f)}
+
+    def _norm(s):
+        import unicodedata
+        s = unicodedata.normalize("NFD", str(s or "").lower())
+        return "".join(c for c in s
+                       if unicodedata.category(c) != "Mn").replace("đ", "d")
+
+    norm_index = {_norm(p.get("name", "")): p["name"] for p in pois}
+
+    def lookup(name):
+        if name in web:
+            return web[name]
+        n = _norm(name)
+        if n in norm_index and norm_index[n] in web:
+            return web[norm_index[n]]
+        for k in web:  # substring fallback for spelling variants
+            if _norm(k) and (_norm(k) in n or n in _norm(k)):
+                return web[k]
+        return None
+
     applied = filled = 0
     for p in pois:
-        ev = web.get(p.get("name", ""))
+        ev = lookup(p.get("name", ""))
         if not ev:
             continue
         st = p.get("smart_tags", {})
