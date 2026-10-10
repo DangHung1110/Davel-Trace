@@ -169,6 +169,44 @@ def tag_poi(p: dict) -> tuple[dict, str]:
     return tags, src
 
 
+def apply_price_web(pois: list[dict], snapshot_dir: str) -> dict:
+    """Overlay price_web.json (web-verified prices) by exact name.
+
+    Sets ticket/ticket_vnd/ticket_note/price_band + web_evidence; fills
+    opening_hours ONLY when empty. Returns {applied, filled_hours}."""
+    path = os.path.join(snapshot_dir, "price_web.json")
+    if not os.path.exists(path):
+        return {"applied": 0, "filled_hours": 0}
+    with open(path, encoding="utf-8") as f:
+        web = json.load(f)
+    applied = filled = 0
+    for p in pois:
+        ev = web.get(p.get("name", ""))
+        if not ev:
+            continue
+        st = p.get("smart_tags", {})
+        st["ticket"] = ev.get("ticket", st.get("ticket"))
+        if "price_band" in ev:
+            st["price_band"] = ev["price_band"]
+            if ev["price_band"] is not None:  # known price => ticket
+                st["ticket"] = True
+        p["smart_tags"] = st
+        if "ticket_vnd" in ev:
+            p["ticket_vnd"] = ev["ticket_vnd"]
+        if ev.get("ticket_note"):
+            p["ticket_note"] = ev["ticket_note"]
+        if ev.get("price_sources"):
+            p["price_sources"] = ev["price_sources"]
+        if ev.get("hours_web"):
+            p.setdefault("web_evidence", {})["hours_web"] = ev["hours_web"]
+        if not p.get("opening_hours") and ev.get("hours_fill"):
+            p["opening_hours"] = ev["hours_fill"]
+            p["hours_source"] = "web"
+            filled += 1
+        applied += 1
+    return {"applied": applied, "filled_hours": filled}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--snapshot", required=True)
@@ -203,9 +241,11 @@ def main() -> int:
             t, src = tag_poi(p)
             p["smart_tags"] = t
             p["smart_tag_source"] = src
+        rep = apply_price_web(data["pois"], args.snapshot)
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"tagged {len(data['pois'])} pois -> {path}")
+        print(f"tagged {len(data['pois'])} pois -> {path} "
+              f"(price_web {rep})")
         return 0
     ap.print_help()
     return 2

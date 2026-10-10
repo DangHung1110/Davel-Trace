@@ -10389,7 +10389,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_note": "Tour 150-200k NL (theo hãng, chưa verify riêng 2Da)",
+      "price_sources": [
+        "https://benduthuyendanang.com/"
+      ],
+      "web_evidence": {
+        "hours_web": "18:00,19:00,20:00,21:00 (40-50p/chuyến)"
+      }
     },
     {
       "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
@@ -10428,7 +10435,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -10444,7 +10451,16 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 60000,
+      "ticket_note": "NL 60k; ĐN thường trú+SV 20k; miễn phí <16t và 3 lễ/năm",
+      "price_sources": [
+        "https://hoiandriver.com/journal/cham-sculpture-museum-da-nang-2026",
+        "https://www.vietnamairlines.com/be/vi/plan-book/travel/travel-guide/bao-tang-dieu-khac-cham-da-nang"
+      ],
+      "web_evidence": {
+        "hours_web": "07:00-17:00"
+      }
     },
     {
       "poi_id": "ChIJqzg43jRncDER6n-M_N_YlnE",
@@ -10535,7 +10551,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10552,7 +10568,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_note": "Chiến dịch TP (passport ẩm thực, tự trả món) + free walking tour tip-based — không vé cố định"
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -10744,7 +10761,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "both",
         "party": [
@@ -10761,7 +10778,8 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_note": "Eco park, chưa có bảng giá công khai kiểm chứng được — unknown"
     },
     {
       "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
@@ -10796,7 +10814,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "medium",
         "space": "both",
         "party": [
           "family",
@@ -10812,7 +10830,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_vnd": 100000,
+      "ticket_note": "Tham quan NL 100k; combo chơi 150k; ăn 150-400k; lều 550-600k; TE<1m3 50k",
+      "price_sources": [
+        "https://glamptrip.vn/place/lai-thieu-glamping-green-world-da-nang/"
+      ],
+      "web_evidence": {
+        "hours_web": "lều check-in 14:00, out trước 12:00 (khách ngày out trước 17h30)"
+      }
     },
     {
       "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
@@ -10851,7 +10877,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -10867,7 +10893,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_vnd": 60000,
+      "ticket_note": "TE T2-T6 60k, T7-CN-lễ 80k; NL 1 phần nước hoặc vé 20k",
+      "price_sources": [
+        "https://thecupscoffee.vn/dd-wonderland/"
+      ],
+      "web_evidence": {
+        "hours_web": "08:00-22:00"
+      }
     },
     {
       "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
@@ -10904,7 +10938,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -10920,7 +10954,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_note": "Vào cổng free; powercard 15-20k; máy lẻ từ 4k; nhà phao 45k",
+      "price_sources": [
+        "https://daivietourist.vn/helio-center-da-nang"
+      ],
+      "web_evidence": {
+        "hours_web": "Play&Kids 16-22h (T2-T6), 17-22h30 (T7-CN); chợ đêm 17h30-22h30"
+      }
     },
     {
       "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
@@ -11010,7 +11051,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -11026,7 +11067,16 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 50000,
+      "ticket_note": "50k/lượt; ĐN thường trú+SV 20k; miễn phí <16t, HS, >=60t VN, NKT (NQ 10/2025)",
+      "price_sources": [
+        "https://danangfantasticity.com/tu-ngay-3-7-bao-tang-da-nang-ap-dung-gia-ve-tham-quan-va-thoi-gian-mo-cua-moi",
+        "https://www.baotangdanang.vn/"
+      ],
+      "web_evidence": {
+        "hours_web": "08:00-17:00"
+      }
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -11060,7 +11110,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -11076,7 +11126,11 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_note": "Bến không vé riêng; giá là giá tour tại bến (từ 200k NL)",
+      "web_evidence": {
+        "hours_web": "18:00-22:00"
+      }
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -11285,7 +11339,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.1059375,
       "lon": 108.2933125,
-      "opening_hours": [],
+      "opening_hours": [
+        "05:00-18:00"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -11312,7 +11368,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "medium",
         "space": "both",
         "party": [
           "family",
@@ -11328,7 +11384,16 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_vnd": 300000,
+      "ticket_note": "Tour1 NL 300k/TE 210k; tour2 NL 400k/TE 280k; vé lẻ ~144k",
+      "price_sources": [
+        "https://tixgo.vn/ve-vui-choi/ve-lan-ngam-san-ho-son-tra"
+      ],
+      "web_evidence": {
+        "hours_web": "đón 05:00-18:00 hằng ngày"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -12962,7 +13027,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0946471,
       "lon": 108.14656989999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -12988,7 +13055,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -13005,7 +13072,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_note": "Cầu đi bộ miễn phí; TÁCH RIÊNG Mikazuki Water Park 365 (350-400k, 9:00-19:00)",
+      "price_sources": [
+        "https://baodautu.vn/da-nang-khanh-thanh-cau-huu-nghi-viet-nam---nhat-ban-d193105.html"
+      ],
+      "web_evidence": {
+        "hours_web": "24/7 tự do"
+      },
+      "hours_source": "web"
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -13902,7 +13977,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -13918,7 +13993,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 20000,
+      "ticket_note": "20k/người; miễn phí HS, >=60t",
+      "price_sources": [
+        "https://vinwonders.com/vi/wonderpedia/news/bao-tang-my-thuat-da-nang/"
+      ],
+      "web_evidence": {
+        "hours_web": "08:00-17:00"
+      }
     },
     {
       "poi_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
@@ -13957,7 +14040,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -13973,7 +14056,15 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 60000,
+      "ticket_note": "Ngoại 60k + 10k chụp ảnh; người Việt miễn phí (nguồn cũ, re-check tại chỗ)",
+      "price_sources": [
+        "https://en.wikipedia.org/wiki/Zone_5_Military_Museum%2C_Danang"
+      ],
+      "web_evidence": {
+        "hours_web": "07:30-10:30, 13:30-16:30 (nghỉ T2, nguồn cũ cần re-check)"
+      }
     },
     {
       "poi_id": "ChIJMTJR2MsZQjERj9KA5AM9JAA",
@@ -14009,7 +14100,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14026,7 +14117,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Sai type (sân bay gắn Bảo tàng) — unknown, khả năng loại"
     },
     {
       "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
@@ -14067,7 +14159,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -14083,7 +14175,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 35000,
+      "ticket_note": "Cơ bản 35k; combo vé+nước 75k; trekking/trà đạo 150-350k",
+      "price_sources": [
+        "https://dongdinhmuseum.com/dat-ve/"
+      ],
+      "web_evidence": {
+        "hours_web": "08:00-17:00"
+      }
     },
     {
       "poi_id": "ChIJcX5KWskZQjERBp15jBCWYKg",
@@ -14117,7 +14217,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14134,7 +14234,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Không xác định được địa điểm ở ĐN — unknown, cần làm rõ tên"
     },
     {
       "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
@@ -14172,7 +14273,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -14188,7 +14289,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 140000,
+      "ticket_note": "VN >1m3: 140k; ngoại NL 200k; TE 1-1m3: 100k; <1m free; KM theo đợt",
+      "price_sources": [
+        "https://gtrip.vn/vietnam-tours/attractions/3d-museum-art-in-paradise"
+      ],
+      "web_evidence": {
+        "hours_web": "09:00-18:00"
+      }
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -14225,7 +14334,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14242,7 +14351,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_note": "Trong chùa Quán Thế Âm, không vé niêm yết, miễn phí/tùy hỷ"
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -14278,7 +14388,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14295,7 +14405,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_note": "BT tư nhân mới (cuối T4), chưa có giá niêm yết — unknown"
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -14331,7 +14442,7 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -14348,7 +14459,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Di tích dâng hương/tự do, không bán vé; đi theo đoàn, liên hệ quản lý"
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -14538,7 +14650,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14555,7 +14667,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Bia ngoài trời, tham quan tự do"
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -14589,7 +14702,7 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "both",
         "party": [
@@ -14606,7 +14719,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Chưa định danh rõ (khu tâm linh Đà Sơn, Liên Chiểu?) — unknown"
     },
     {
       "poi_id": "ChIJHbWDGYsZQjER3bGCc6Ij91A",
@@ -14640,7 +14754,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14657,7 +14771,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Không phải điểm du lịch (trung tâm đào tạo?) — unknown, khả năng loại"
     },
     {
       "poi_id": "ChIJTwH8nfwZQjER2wJZnnqM-CM",
@@ -14691,7 +14806,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14708,7 +14823,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Tên chưa rõ, không nguồn — unknown, khả năng loại"
     },
     {
       "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
@@ -14742,7 +14858,7 @@
       "io_label": "B",
       "ws_source": "audit",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "both",
         "party": [
@@ -14759,7 +14875,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Di tích cách mạng, không bán vé, không giờ niêm yết"
     },
     {
       "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
@@ -14793,7 +14910,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14810,7 +14927,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Nhà thờ tộc, tham quan tự do (chưa verify vé, mặc định free)"
     },
     {
       "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
@@ -14846,7 +14964,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -14863,7 +14981,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Nhà lưu niệm, không bán vé; mở theo liên hệ/đoàn"
     },
     {
       "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
@@ -18188,7 +18307,7 @@
       "ws_source": "default_false",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "medium",
         "space": "both",
         "party": [
           "group"
@@ -18200,7 +18319,15 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_vnd": 150000,
+      "ticket_note": "NL 150k (mô tả từ 120k); TE<1m free; 1-1m3 70% vé NL",
+      "price_sources": [
+        "https://veduthuyen.vn/ve-du-thuyen-song-han/du-thuyen-song-han-my-xuan-du-thuyen-da-nang-ve-dem/"
+      ],
+      "web_evidence": {
+        "hours_web": "4 chuyến tối, 45-50p, quầy vé sau 17h"
+      }
     },
     {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
@@ -18252,7 +18379,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "ticket_note": "Tour thu phí theo hãng (~120-200k, chưa verify riêng Vinh Anh)"
     },
     {
       "poi_id": "ChIJbcCUeSYZQjERjHvN92qKB1U",
@@ -18388,7 +18516,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "both",
         "party": [
@@ -18405,7 +18533,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1+paid-name"
+      "smart_tag_source": "rule_v1+paid-name",
+      "ticket_note": "BBQ/lều/team-building theo gói đoàn, web không niêm yết giá — unknown"
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -18598,7 +18727,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": false,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -18615,7 +18744,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Showroom/xưởng tư nhân, tham quan miễn phí, bán sản phẩm"
     },
     {
       "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
@@ -18700,7 +18830,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -18717,7 +18847,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Vườn tư nhân, không niêm yết vé, liên hệ 0913430429 — unknown"
     },
     {
       "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
@@ -18751,7 +18882,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": true,
+        "ticket": null,
         "price_band": null,
         "space": "indoor",
         "party": [
@@ -18768,7 +18899,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "ticket_note": "Không nguồn giá vé — unknown"
     },
     {
       "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
