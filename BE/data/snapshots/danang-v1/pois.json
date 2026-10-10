@@ -27,14 +27,17 @@
         "Nhà hàng hải sản",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJx6-KGnIXQjER7x-T0zeOlBw",
@@ -59,14 +62,17 @@
         "Nhà hàng hải sản",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJmQmygLwXQjERcZVy8--sIcE",
@@ -92,14 +98,17 @@
         "Nhà cung cấp thực phẩm và đồ uống cho dịch vụ ăn uống",
         "Nơi tổ chức sự kiện"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
@@ -123,14 +132,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
@@ -154,14 +166,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJUahp7dYZQjERa6ryX2z_stg",
@@ -185,14 +200,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJi5XzTqsZQjERn5HbwcdvD5Y",
@@ -216,14 +234,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJqaQoXYMZQjERX_QzVEAZr_Q",
@@ -250,14 +271,17 @@
         "Nhà hàng",
         "Nhà hàng Nam Ấn Độ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk",
@@ -281,14 +305,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
@@ -315,14 +342,17 @@
         "Chợ hải sản",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
@@ -347,14 +377,17 @@
         "Nhà hàng",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
@@ -377,14 +410,17 @@
         "Nhà hàng hải sản",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
@@ -408,14 +444,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJH72bVncZQjERoTgax0OjZKY",
@@ -446,14 +485,17 @@
         "Nhà hàng",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
@@ -475,14 +517,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJJSd-naoZQjERheTI-IEkRrc",
@@ -508,14 +553,17 @@
         "Nhà hàng Nhật Bản",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
@@ -539,14 +587,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -568,14 +619,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
@@ -600,14 +654,17 @@
       "tags": [
         "Nhà hàng Nhật Bản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ-VaWslgZQjERwaL3uKR9fB4",
@@ -632,14 +689,17 @@
         "Nhà hàng món lẩu",
         "Nhà hàng tiệc đứng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
@@ -672,14 +732,17 @@
         "Nhà hàng cơm",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
@@ -705,14 +768,17 @@
         "Nhà điều hành du lịch",
         "Đại lý du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -745,14 +811,17 @@
         "Quầy tapa",
         "Quán rượu"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -778,14 +847,17 @@
         "Quán cà phê",
         "Bến du thuyền"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJd2HsN1oXQjER19a79kUNt-U",
@@ -814,14 +886,17 @@
         "Nhà hàng",
         "Nhà hàng Phương Tây"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJO0E1hoYXQjER-ML-N1yAGAU",
@@ -846,14 +921,17 @@
         "Nhà hàng",
         "Nhà hàng món nướng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJh4MCHBoXQjERA274y4wwup4",
@@ -880,14 +958,17 @@
         "Quán cà phê",
         "Khu ăn uống"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJYahwiHIXQjER0CIGd09pgcg",
@@ -912,14 +993,17 @@
         "Nhà hàng hải sản",
         "Nhà hàng châu Á"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
@@ -943,14 +1027,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJeTslKdkXQjERPFZeN_Ta-Ek",
@@ -975,14 +1062,17 @@
         "Nhà hàng hải sản",
         "Quán ăn nhỏ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJeVJaMNUZQjERnRz_bfJ5ex4",
@@ -1010,14 +1100,17 @@
         "Nhà hàng",
         "Nhà bán buôn hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -1041,14 +1134,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
@@ -1072,14 +1168,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
@@ -1104,14 +1203,17 @@
         "Nhà hàng hải sản",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJN84BNSQXQjERyy7N3rDXisc",
@@ -1135,14 +1237,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
@@ -1166,14 +1271,17 @@
       "tags": [
         "Nhà hàng Pháp"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
@@ -1197,14 +1305,17 @@
       "tags": [
         "Nhà hàng Hàn Quốc"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJF2lrSYgXQjERKBBhFKYlhkg",
@@ -1228,14 +1339,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ1ZxjXAAZQjER3EQPJm7z3R4",
@@ -1257,14 +1371,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
@@ -1289,14 +1406,17 @@
         "Nhà hàng Việt Nam",
         "Nhà hàng gia đình"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJP-VRM2YXQjERbEUrtG6wq9Q",
@@ -1321,14 +1441,17 @@
         "Nhà hàng Việt Nam",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -1352,14 +1475,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
@@ -1383,14 +1509,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -1415,14 +1544,17 @@
         "Nhà hàng Pháp",
         "Nhà hàng Pháp thượng hạng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -1447,14 +1579,17 @@
         "Nhà hàng",
         "Nhà hàng chuyên phục vụ bữa sáng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -1480,14 +1615,17 @@
       "tags": [
         "Nhà hàng cơm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
@@ -1513,14 +1651,17 @@
         "Quán cà phê",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
@@ -1544,14 +1685,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
@@ -1575,14 +1719,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
@@ -1606,14 +1753,17 @@
       "tags": [
         "Nhà hàng Hàn Quốc"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -1641,14 +1791,17 @@
         "Nhà hàng Hàn Quốc",
         "Nhà hàng bít tết"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJN-vJNV8XQjERNccI4vX2rHY",
@@ -1674,14 +1827,17 @@
         "Nhà hàng cao cấp",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
@@ -1708,14 +1864,17 @@
         "Nhà hàng Hàn Quốc",
         "Nhà hàng bít tết"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJW_ilwg0XQjERQbqRXGggIFE",
@@ -1742,14 +1901,17 @@
         "Nhà hàng",
         "Nhà hàng Phương Tây"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -1773,14 +1935,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
@@ -1805,14 +1970,17 @@
         "Nhà hàng",
         "Câu lạc bộ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
@@ -1836,14 +2004,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJYy-g38oQQjER2c931z_dDt4",
@@ -1867,14 +2038,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -1898,14 +2072,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
@@ -1929,14 +2106,17 @@
       "tags": [
         "Nhà hàng món nướng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
@@ -1960,14 +2140,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJYQkmfagfQjER0iIRsKZ0Rcc",
@@ -1989,14 +2172,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJLSyuRcIZQjEReKwhRREzUaQ",
@@ -2020,14 +2206,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJgUt949cYQjERTHdMcEeiF2o",
@@ -2051,14 +2240,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJxQQMGMoYQjER-2IGXb-pTtQ",
@@ -2082,14 +2274,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
@@ -2114,14 +2309,17 @@
         "Nhà hàng",
         "Quán rượu"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJVeL2KNYYQjERkTADVXDZcRM",
@@ -2145,14 +2343,17 @@
       "tags": [
         "Nhà hàng ăn chay"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
@@ -2176,14 +2377,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
@@ -2208,14 +2412,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
@@ -2239,14 +2446,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ-7JfLigZQjERZm4r5uDmk5o",
@@ -2270,14 +2480,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
@@ -2301,14 +2514,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
@@ -2332,14 +2548,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ_2lhydMZQjERNTX79I86p44",
@@ -2364,14 +2583,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ1eef2IsZQjERjy-_tblqzJs",
@@ -2395,14 +2617,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJbVtm0WIfQjER_HG2AYprbcY",
@@ -2424,14 +2649,17 @@
       "tags": [
         "Cửa hàng thịt gà"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHfEdhhYfQjERVyTonYbRaqk",
@@ -2453,14 +2681,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJGZVxyf0ZQjERBbAyCvPNq7E",
@@ -2484,14 +2715,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
@@ -2515,14 +2749,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
@@ -2546,14 +2783,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
@@ -2579,14 +2819,17 @@
         "Quán cà phê",
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
@@ -2610,14 +2853,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -2641,14 +2887,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
@@ -2672,14 +2921,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
@@ -2704,14 +2956,17 @@
         "Nhà hàng",
         "Đại lý cho thuê xe ô tô"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJk3haCB4ZQjERA3Fq_IHznLU",
@@ -2735,14 +2990,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
@@ -2766,14 +3024,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
@@ -2797,14 +3058,17 @@
       "tags": [
         "Nhà hàng Việt Nam"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
@@ -2828,14 +3092,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM",
@@ -2859,14 +3126,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFaKh3yhLoTERuh1M_c3paTQ",
@@ -2890,14 +3160,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJY-zHSgQZQjERRoAvxXVcViU",
@@ -2922,14 +3195,17 @@
         "Nhà hàng",
         "Gian hàng rong"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
@@ -2956,14 +3232,17 @@
         "Dịch vụ cưới hỏi",
         "Địa điểm tổ chức lễ cưới"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJaeTAGgMZQjER5Hvtuv10j_s",
@@ -2987,14 +3266,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
@@ -3018,14 +3300,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJD9pK8qoZQjERsxKiMEPEtnk",
@@ -3054,7 +3339,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJH_EMuNcZQjERI1YtG7IGGDo",
@@ -3078,14 +3366,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
@@ -3110,14 +3401,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
@@ -3142,14 +3436,17 @@
         "Quán cà phê",
         "Cơ sở rang cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJxX--D-oZQjERQ4LzQRoeVXk",
@@ -3173,14 +3470,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
@@ -3204,14 +3504,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
@@ -3235,14 +3538,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -3266,14 +3572,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
@@ -3297,14 +3606,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
@@ -3328,14 +3640,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
@@ -3359,14 +3674,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
@@ -3390,14 +3708,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
@@ -3421,14 +3742,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
@@ -3452,14 +3776,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJW4dpfjkYQjERcGpyYomHFO4",
@@ -3483,14 +3810,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
@@ -3515,14 +3845,17 @@
         "Quán cà phê",
         "Cửa hàng lưu niệm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -3547,14 +3880,17 @@
         "Quán cà phê",
         "Quán cà phê espresso"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -3578,14 +3914,17 @@
       "tags": [
         "Cửa hàng trà truyền thống"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -3612,14 +3951,17 @@
         "Cơ sở rang cà phê",
         "Cửa tiệm bán lẻ trực tiếp"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
@@ -3643,14 +3985,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -3674,14 +4019,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
@@ -3705,14 +4053,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
@@ -3736,14 +4087,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -3765,14 +4119,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -3797,14 +4154,17 @@
         "Quán cà phê",
         "Quán bar"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
@@ -3828,14 +4188,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
@@ -3864,14 +4227,17 @@
         "Cửa hàng trà",
         "Nhà bán buôn trà"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M",
@@ -3895,14 +4261,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
@@ -3926,14 +4295,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
@@ -3957,14 +4329,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
@@ -3988,14 +4363,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
@@ -4022,14 +4400,17 @@
         "Không gian làm việc chia sẻ",
         "Quán cà phê espresso"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
@@ -4053,14 +4434,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
@@ -4085,14 +4469,17 @@
         "Quán cà phê",
         "Cửa hàng cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
@@ -4116,14 +4503,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJsYoIEOIXQjER_5_trbAwgnA",
@@ -4147,14 +4537,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
@@ -4178,14 +4571,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q",
@@ -4210,14 +4606,17 @@
         "Quán cà phê",
         "Trang trại phong lan"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
@@ -4241,14 +4640,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
@@ -4272,14 +4674,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
@@ -4303,14 +4708,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
@@ -4342,14 +4750,17 @@
         "Bữa tối",
         "Nhà hàng phục vụ bữa trưa"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
@@ -4371,14 +4782,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -4402,14 +4816,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
@@ -4433,14 +4850,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
@@ -4469,14 +4889,17 @@
         "Quán cà phê espresso",
         "Quán cà phê internet"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -4500,14 +4923,17 @@
       "tags": [
         "Quán cà phê espresso"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
@@ -4531,14 +4957,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -4560,14 +4989,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJvb3YtJYXQjERnLJ4-sFfc6A",
@@ -4589,14 +5021,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJO7l-RdwZQjERNj5fr2VyZ9Y",
@@ -4622,14 +5057,17 @@
         "Quán cà phê",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
@@ -4656,14 +5094,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJzeNmTwARQjERLSXizyRKI9g",
@@ -4687,14 +5128,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
@@ -4718,14 +5162,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
@@ -4749,14 +5196,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHaTEwB4ZQjERrE6CMe37byI",
@@ -4778,14 +5228,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -4807,14 +5260,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -4843,14 +5299,17 @@
         "Không gian làm việc chia sẻ",
         "Nhà hàng ăn nhanh"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
@@ -4874,14 +5333,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
@@ -4906,14 +5368,17 @@
         "Quán cà phê",
         "Khu ăn uống"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJk3YrZLoZQjERp5PbcDTftQw",
@@ -4937,14 +5402,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
@@ -4969,14 +5437,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
@@ -5000,14 +5471,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJPzf25OAYQjERRUv1zSbS49Q",
@@ -5031,14 +5505,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ4Z8gV3cfQjERHH6fTdzj0E8",
@@ -5062,14 +5539,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJn7_3kc8ZQjERBi6T5XvhPko",
@@ -5093,14 +5573,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJa7FkIyUZQjER7VxLENFhuI0",
@@ -5124,14 +5607,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
@@ -5155,14 +5641,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJr-RyTyYfQjERmXNNs1WNyY4",
@@ -5186,14 +5675,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
@@ -5215,14 +5707,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
@@ -5246,14 +5741,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ2XROb6EZQjERoqg1HHvwj88",
@@ -5277,14 +5775,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
@@ -5306,14 +5807,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -5335,14 +5839,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
@@ -5364,14 +5871,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
@@ -5395,14 +5905,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
@@ -5426,14 +5939,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJIcLWMlAZQjER1VvH4kJ2aZA",
@@ -5458,14 +5974,17 @@
         "Quán cà phê",
         "Vườn thực vật"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
@@ -5489,14 +6008,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
@@ -5520,14 +6042,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJhYuNIQAZQjERoyprw_nC3Ts",
@@ -5551,14 +6076,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
@@ -5582,14 +6110,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -5613,14 +6144,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
@@ -5644,14 +6178,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
@@ -5675,14 +6212,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
@@ -5704,14 +6244,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJuZTrvVoZQjER371drzqC5hk",
@@ -5735,14 +6278,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
@@ -5766,14 +6312,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
@@ -5797,14 +6346,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJzVnvNgAZQjERef60MBfcz8E",
@@ -5828,14 +6380,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
@@ -5859,14 +6414,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
@@ -5890,14 +6448,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
@@ -5919,14 +6480,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJM2DzGgAZQjERp54q-gVvu-g",
@@ -5951,14 +6515,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8",
@@ -5982,14 +6549,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJXfWk4QYZQjERpQw56WNZ0js",
@@ -6013,14 +6583,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJUf5Hcw8ZQjERsntEedW35TI",
@@ -6042,14 +6615,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJteAgYXsZQjERK6NHlXGXIPI",
@@ -6073,14 +6649,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJfagM2mkZQjER9NTQqfVjnI8",
@@ -6104,14 +6683,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJbbs1ZTQYQjERi3OdfmnRk2g",
@@ -6136,12 +6718,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "B",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -6167,12 +6752,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
@@ -6199,12 +6787,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJe8ah9rsZQjER6VQTZMzcGTw",
@@ -6228,12 +6819,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
@@ -6261,12 +6855,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJqzg43jRncDER6n-M_N_YlnE",
@@ -6293,12 +6890,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
@@ -6325,12 +6925,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -6357,12 +6960,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJzX1dFjAZQjERswowf61V1fk",
@@ -6386,12 +6992,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
@@ -6414,14 +7023,17 @@
         "Cầu",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
@@ -6445,12 +7057,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
@@ -6474,12 +7089,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
@@ -6505,14 +7123,17 @@
       "tags": [
         "Sân chơi trong nhà"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
@@ -6538,12 +7159,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
@@ -6568,12 +7192,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
@@ -6600,12 +7227,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -6627,14 +7257,17 @@
       "tags": [
         "Bến du thuyền"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -6658,14 +7291,17 @@
         "Khách sạn nghỉ dưỡng",
         "Căn hộ được phục vụ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJq3jYbEgYQjERJQhj5oBrT04",
@@ -6696,7 +7332,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
@@ -6720,12 +7359,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
@@ -6749,12 +7391,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "O",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -6778,12 +7423,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -6806,14 +7454,17 @@
         "Thắng cảnh",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "O",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -6839,12 +7490,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
@@ -6870,12 +7524,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
@@ -6899,12 +7556,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
@@ -6926,14 +7586,17 @@
       "tags": [
         "Bán đảo"
       ],
-      "intensity": 2,
+      "intensity": 3,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -6959,12 +7622,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
@@ -6990,12 +7656,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -7018,14 +7687,17 @@
         "Khách sạn nghỉ dưỡng",
         "Spa mát xa"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -7047,14 +7719,17 @@
       "tags": [
         "Khách sạn nghỉ dưỡng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJPbgJ4DY9QjER7OSjP2_jSC8",
@@ -7078,12 +7753,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
@@ -7107,12 +7785,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -7136,12 +7817,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -7165,12 +7849,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -7194,12 +7881,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "O",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
@@ -7223,12 +7913,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ28TlBIYXQjEREqSmOo2kQtU",
@@ -7257,7 +7950,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
@@ -7281,12 +7977,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJNb8hNAAXQjERaE0LeRW4sy4",
@@ -7310,12 +8009,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -7344,7 +8046,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -7368,12 +8073,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "B",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -7397,12 +8105,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJq7Uto10fQjERQgZQB_w3cBw",
@@ -7426,12 +8137,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJgdHMn8gYQjERmEdW2JHUGTw",
@@ -7457,12 +8171,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
@@ -7486,12 +8203,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
@@ -7515,12 +8235,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
@@ -7546,12 +8269,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
@@ -7576,12 +8302,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
@@ -7609,12 +8338,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
@@ -7636,14 +8368,17 @@
       "tags": [
         "Khu cắm trại"
       ],
-      "intensity": 2,
+      "intensity": 3,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
@@ -7667,12 +8402,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJU5NSEQUZQjERjlZ76jmxkmM",
@@ -7694,14 +8432,17 @@
       "tags": [
         "Khu cắm trại"
       ],
-      "intensity": 2,
+      "intensity": 3,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJo5A6iOchQjERE2Xrxkn5qwY",
@@ -7723,14 +8464,17 @@
       "tags": [
         "Khu thương mại"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
@@ -7754,12 +8498,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -7783,12 +8530,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJTTiTd5YZQjERj7qgMdLL9w4",
@@ -7817,7 +8567,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
@@ -7841,12 +8594,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHxbYrLEfQjER059Ow1OysAY",
@@ -7870,12 +8626,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
@@ -7897,14 +8656,17 @@
       "tags": [
         "Khách sạn"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ6xruBrT3cTER3emdI1jkITQ",
@@ -7935,7 +8697,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJW4o1LAAXQjERL6zRtyWivLk",
@@ -7959,12 +8724,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
@@ -7988,12 +8756,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ57G9n8YXQjER3sEGyymJpBg",
@@ -8018,12 +8789,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
@@ -8047,12 +8821,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "O",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -8076,12 +8853,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
@@ -8105,12 +8885,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJS4pOscgZQjERCwuFFZuSl7k",
@@ -8134,12 +8917,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
@@ -8161,14 +8947,17 @@
       "tags": [
         "Địa điểm lịch sử"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
@@ -8192,12 +8981,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
@@ -8221,12 +9013,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
@@ -8252,12 +9047,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
@@ -8282,14 +9080,17 @@
         "Bảo tàng nghệ thuật",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
@@ -8315,14 +9116,17 @@
         "Bảo tàng",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJMTJR2MsZQjERj9KA5AM9JAA",
@@ -8346,14 +9150,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
@@ -8381,14 +9188,17 @@
         "Nhà hàng",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJcX5KWskZQjERBp15jBCWYKg",
@@ -8410,14 +9220,17 @@
       "tags": [
         "Bảo tàng di sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
@@ -8442,14 +9255,17 @@
         "Bảo tàng nghệ thuật",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -8474,14 +9290,17 @@
         "Bảo tàng",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -8505,14 +9324,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -8536,14 +9358,17 @@
       "tags": [
         "Bảo tàng chiến tranh"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "B",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -8565,14 +9390,17 @@
       "tags": [
         "Chùa phật giáo"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
@@ -8594,14 +9422,17 @@
       "tags": [
         "Điện thờ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
@@ -8628,12 +9459,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
@@ -8655,14 +9489,17 @@
       "tags": [
         "Bảo tàng lịch sử địa phương"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -8684,14 +9521,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "B",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJHbWDGYsZQjER3bGCc6Ij91A",
@@ -8713,14 +9553,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJTwH8nfwZQjER2wJZnnqM-CM",
@@ -8742,14 +9585,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
@@ -8771,14 +9617,17 @@
       "tags": [
         "Bảo tàng chiến tranh"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "B",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
@@ -8800,14 +9649,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
@@ -8831,14 +9683,17 @@
       "tags": [
         "Bảo tàng di sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
@@ -8862,12 +9717,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJX_osydwQQjERB-Y6MvLfJmQ",
@@ -8891,12 +9749,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
@@ -8925,7 +9786,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
@@ -8949,12 +9813,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJF7gOWQAXQjER90uCTZIoJII",
@@ -8980,12 +9847,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
@@ -9009,12 +9879,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
@@ -9038,12 +9911,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
@@ -9067,12 +9943,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJnWQc2ZwRQjERfULHaU75hxU",
@@ -9096,12 +9975,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ0VM-TgAXQjERZ7yV7hTJrbc",
@@ -9125,12 +10007,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJAT1GIScXQjERAi6vhyCj61s",
@@ -9154,12 +10039,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
@@ -9183,14 +10071,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
@@ -9218,14 +10109,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJz4tuMfgXQjER9EJAjXQhpJ0",
@@ -9249,14 +10143,17 @@
       "tags": [
         "Chợ hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA",
@@ -9282,14 +10179,17 @@
         "Chợ",
         "Điểm thu hút khách du lịch"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJT576gZMXQjERPFUsxBoJmUM",
@@ -9318,7 +10218,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
@@ -9342,14 +10245,17 @@
       "tags": [
         "Chợ đêm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "O",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -9373,14 +10279,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
@@ -9404,14 +10313,17 @@
       "tags": [
         "Trung tâm mua sắm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJm97BURAZQjERA57TrjPe_Ks",
@@ -9436,14 +10348,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
@@ -9469,14 +10384,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
@@ -9500,14 +10418,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
@@ -9531,14 +10452,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
@@ -9562,14 +10486,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
@@ -9591,14 +10518,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
@@ -9623,14 +10553,17 @@
         "Chợ hoa",
         "Văn phòng công ty"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ-WnfCAARQjER5q7awU-LWT8",
@@ -9652,14 +10585,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
@@ -9683,14 +10619,17 @@
       "tags": [
         "Chợ đêm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJw6DOwZ8QQjERjDMobkQxbF0",
@@ -9714,14 +10653,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
@@ -9743,14 +10685,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
@@ -9774,14 +10719,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
@@ -9805,14 +10753,17 @@
       "tags": [
         "Chợ nông sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
@@ -9836,14 +10787,17 @@
       "tags": [
         "Chợ nông sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
@@ -9867,14 +10821,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
@@ -9896,14 +10853,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJx9e75ikZQjERYo5cxoTG880",
@@ -9932,7 +10892,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
@@ -9954,14 +10917,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": "I",
+      "ws_source": "audit"
     },
     {
       "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
@@ -9983,14 +10949,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ3c1W2AAfQjERnRKZkrt0AjA",
@@ -10017,7 +10986,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJBaiKwwMZQjERUmIrZ8mdCFU",
@@ -10039,14 +11011,17 @@
       "tags": [
         "Cửa hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJMcPq5qshQjER-fmBrRObun4",
@@ -10068,14 +11043,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ6WPk66cfQjERE1DYeuPjviI",
@@ -10102,7 +11080,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJs5YKzUUfQjERIhE54FanYzo",
@@ -10126,14 +11107,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",
@@ -10158,14 +11142,17 @@
         "Quán ăn nhỏ",
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJI4UNJaMXQjERUVoSyckPe7o",
@@ -10187,14 +11174,17 @@
       "tags": [
         "Nhà hàng hải sản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ8VlQXCcZQjERjXyVGYI9ivo",
@@ -10216,14 +11206,17 @@
       "tags": [
         "Nhà hàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -10247,14 +11240,17 @@
       "tags": [
         "Quán bia"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHUH52YwZQjERC9lBUIqQec4",
@@ -10278,14 +11274,17 @@
       "tags": [
         "Nhà hàng món lẩu"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJy_aOzygZQjERvnOL5s06Zfg",
@@ -10309,14 +11308,17 @@
       "tags": [
         "Nhà hàng món lẩu"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
@@ -10340,14 +11342,17 @@
       "tags": [
         "Nhà hàng Nhật Bản"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJxyTuNSoZQjERDDwrFT-7IMQ",
@@ -10371,14 +11376,17 @@
       "tags": [
         "Nhà hàng Teppanyaki"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -10403,14 +11411,17 @@
         "Quán cà phê",
         "Cửa hàng kem"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJxzo3j9EZQjER785qACnbIW0",
@@ -10435,14 +11446,17 @@
         "Quán cà phê",
         "Trà trân châu"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJZdLv8rkZQjERIhU2VsEsCl4",
@@ -10466,14 +11480,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
@@ -10499,14 +11516,17 @@
         "Cửa hàng bia",
         "Cửa hàng âm nhạc"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
@@ -10530,14 +11550,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
@@ -10561,14 +11584,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
@@ -10592,14 +11618,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJKdW4YgAfQjERF1TVangBTwY",
@@ -10627,14 +11656,17 @@
         "Quán cà phê internet",
         "Quầy giải khát"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ8WgvsE8ZQjERZzNoKTBgM84",
@@ -10658,14 +11690,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJr4cXZxUZQjER1gqN7YF0A70",
@@ -10690,14 +11725,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJMQ_j9n0ZQjER6BCkcpQNT8s",
@@ -10721,14 +11759,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJwTU11dAZQjERsydZriN8k5M",
@@ -10752,14 +11793,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
@@ -10783,14 +11827,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ5YNM8KoZQjERT-e5n84Og1E",
@@ -10814,14 +11861,17 @@
       "tags": [
         "Quán cà phê"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ81xSxbEZQjERJmzlA1ksEVo",
@@ -10853,7 +11903,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
@@ -10877,14 +11930,17 @@
       "tags": [
         "Bến du thuyền"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJbcCUeSYZQjERjHvN92qKB1U",
@@ -10913,7 +11969,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -10942,7 +12001,10 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "crawl_default",
+      "io_label": null,
+      "ws_source": "default_false"
     },
     {
       "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
@@ -10972,12 +12034,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -11001,12 +12066,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
@@ -11031,12 +12099,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
@@ -11058,14 +12129,17 @@
       "tags": [
         "Chùa phật giáo"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJA7V4DgoRQjERbXjInwlmAuo",
@@ -11092,14 +12166,17 @@
       "tags": [
         "Bảo tàng nghệ thuật"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
@@ -11121,14 +12198,17 @@
       "tags": [
         "Điểm mốc lịch sử"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
@@ -11150,14 +12230,17 @@
       "tags": [
         "Bảo tàng"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
@@ -11179,14 +12262,17 @@
       "tags": [
         "Bảo tàng điêu khắc"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
@@ -11211,12 +12297,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
@@ -11240,12 +12329,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
@@ -11269,12 +12361,15 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
@@ -11298,14 +12393,17 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     },
     {
       "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
@@ -11329,14 +12427,18 @@
       "tags": [
         "Chợ"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false
+      "verified": false,
+      "intensity_source": "canonical_rule",
+      "io_label": null,
+      "ws_source": "canonical_rule"
     }
-  ]
+  ],
+  "enriched_at": "2026-10-10"
 }

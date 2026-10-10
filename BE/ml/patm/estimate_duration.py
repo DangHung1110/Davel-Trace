@@ -83,6 +83,7 @@ CATEGORY_ALIASES: dict[str, str] = {
     "coffee": "cafe",
     "cafe": "cafe",
     "nha hang": "restaurant",
+    "quan bia": "restaurant",
     "quan an": "restaurant",
     "chua": "landmark",
     "nha tho": "landmark",
