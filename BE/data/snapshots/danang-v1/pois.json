@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 346,
+  "count": 449,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -18305,11 +18305,11 @@
         "10:30-13:00, 16:00-20:30"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18365,11 +18365,11 @@
       "lon": 108.2431817,
       "opening_hours": [],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18426,11 +18426,11 @@
         "04:30-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18487,11 +18487,11 @@
         "11:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18548,11 +18548,11 @@
         "11:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18609,11 +18609,11 @@
         "10:00-14:00, 16:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18670,11 +18670,11 @@
         "10:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18731,11 +18731,11 @@
         "07:00-23:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18791,11 +18791,11 @@
         "07:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18851,11 +18851,11 @@
         "07:30-23:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18910,11 +18910,11 @@
         "07:30-00:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -18971,11 +18971,11 @@
         "17:00-23:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19030,11 +19030,11 @@
         "07:00-18:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19089,11 +19089,11 @@
         "06:30-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19141,11 +19141,11 @@
         "06:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19197,11 +19197,11 @@
         "06:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19257,11 +19257,11 @@
         "07:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19309,11 +19309,11 @@
         "07:30-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19368,11 +19368,11 @@
         "06:30-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19427,11 +19427,11 @@
         "07:30-22:30"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19486,11 +19486,11 @@
         "06:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19545,11 +19545,11 @@
         "07:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19611,11 +19611,11 @@
         "17:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19670,11 +19670,11 @@
       "lon": 108.14125759999999,
       "opening_hours": [],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19722,11 +19722,11 @@
         "07:00-22:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19787,11 +19787,11 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19847,11 +19847,11 @@
       "lon": 108.2551427,
       "opening_hours": [],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19909,11 +19909,11 @@
         "07:00-17:30"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -19977,11 +19977,11 @@
         "08:30-18:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20032,11 +20032,11 @@
         "07:00-17:30"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20095,11 +20095,11 @@
       "lon": 108.2722616,
       "opening_hours": [],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20148,11 +20148,11 @@
       "lon": 108.25131169999999,
       "opening_hours": [],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20203,11 +20203,11 @@
         "07:30-17:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20269,11 +20269,11 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 101,
+        "p50": 144,
+        "p75": 202
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20324,11 +20324,11 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 84,
+        "p50": 120,
+        "p75": 168
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20386,11 +20386,11 @@
         "05:30-19:00"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20444,11 +20444,11 @@
         "04:00-18:30"
       ],
       "visit_min": {
-        "p25": 0,
-        "p50": 0,
-        "p75": 0
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
-      "dur_source": "pending_llm",
+      "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -20491,6 +20491,4716 @@
         "name": "Huệ Chi"
       },
       "cat": "market"
+    },
+    {
+      "poi_id": "osm:node/1036552571",
+      "name": "Đèo Hải Vân",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.1874495,
+      "lon": 108.1307217,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374752",
+      "name": "miếu Thần Nông",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2194347,
+      "lon": 108.0465034,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374809",
+      "name": "chùa am Nam Ngư",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2317838,
+      "lon": 108.0864698,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374818",
+      "name": "miếu Ngài Ngư",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2275357,
+      "lon": 108.0929457,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374858",
+      "name": "chùa am thờ Hỏa Xa",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2207265,
+      "lon": 108.0859658,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374873",
+      "name": "chùa An Cư Tây",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2214808,
+      "lon": 108.0409805,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1335374895",
+      "name": "miếu Âm Hồn",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.2258798,
+      "lon": 108.0426078,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/1623183649",
+      "name": "Núi Sơn Trà",
+      "type": "Đỉnh núi",
+      "lat": 16.1195909,
+      "lon": 108.2866498,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated"
+    },
+    {
+      "poi_id": "osm:node/2093848429",
+      "name": "Kim Sơn",
+      "type": "Đỉnh núi",
+      "lat": 15.9997446,
+      "lon": 108.2562213,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/2093848431",
+      "name": "Mộc Sơn",
+      "type": "Đỉnh núi",
+      "lat": 16.0000029,
+      "lon": 108.2621751,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/2093848443",
+      "name": "Thổ Sơn",
+      "type": "Đỉnh núi",
+      "lat": 16.0047612,
+      "lon": 108.255928,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/2177056870",
+      "name": "Thác Tóc Tiên",
+      "type": "Điểm ngắm cảnh",
+      "lat": 16.0244662,
+      "lon": 108.0262303,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm ngắm cảnh"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/3760247201",
+      "name": "chùa Vu Lan",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0520134,
+      "lon": 108.219568,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/3760247202",
+      "name": "chùa Sư Nữ",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0533151,
+      "lon": 108.2195707,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/3760272162",
+      "name": "Chùa Tam Bảo",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0581871,
+      "lon": 108.219347,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/3763846156",
+      "name": "Chùa Pháp Lâm",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0622864,
+      "lon": 108.2155343,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4005611262",
+      "name": "Đền thờ Tiền Hiền làng Lổ Giang",
+      "type": "Cơ sở thờ tự",
+      "lat": 15.9976102,
+      "lon": 108.2121686,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4005611263",
+      "name": "Đình Lổ Giáng",
+      "type": "Cơ sở thờ tự",
+      "lat": 15.9982955,
+      "lon": 108.2124711,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4122433690",
+      "name": "Núi Bà Nà",
+      "type": "Đỉnh núi",
+      "lat": 15.9982174,
+      "lon": 107.9856335,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4172034499",
+      "name": "Non Nuoc Beach",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0205336,
+      "lon": 108.261744,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4280016689",
+      "name": "Chùa Giác Hoàng Viên",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0056157,
+      "lon": 108.2546345,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4294135790",
+      "name": "nhà thờ Phú Thượng",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0463952,
+      "lon": 108.1052579,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4294139091",
+      "name": "nhà thờ An Ngãi Tây",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0681138,
+      "lon": 108.1043896,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4294143691",
+      "name": "Nhà thờ Giáo xứ An Thượng",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0480729,
+      "lon": 108.2408883,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4294167889",
+      "name": "nhà thờ Tùng Sơn",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0609642,
+      "lon": 108.096969,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4347089780",
+      "name": "My An Beach",
+      "type": "Bãi biển",
+      "lat": 16.025095,
+      "lon": 108.2595335,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Bãi biển"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 84,
+        "p50": 120,
+        "p75": 168
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4386676224",
+      "name": "Chợ Miếu Bông",
+      "type": "Chợ",
+      "lat": 15.97989,
+      "lon": 108.2089787,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Chợ"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4706189591",
+      "name": "To Quoc Ghi Cong",
+      "type": "Tượng đài",
+      "lat": 16.023789,
+      "lon": 108.2477299,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Tượng đài"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4741642219",
+      "name": "Public beach",
+      "type": "Điểm ngắm cảnh",
+      "lat": 16.2497715,
+      "lon": 108.075414,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm ngắm cảnh"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4759000238",
+      "name": "Dan Oasis Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0954944,
+      "lon": 108.2520272,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Khách sạn"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4845297821",
+      "name": "Gần núi thần tài",
+      "type": "Cơ sở thờ tự",
+      "lat": 15.9916479,
+      "lon": 108.0720997,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/4924323121",
+      "name": "Fishing Village and Fleet",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.1017543,
+      "lon": 108.2589632,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5273998822",
+      "name": "Cầu Tiên Sơn",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0352694,
+      "lon": 108.2352722,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5273998823",
+      "name": "Cầu Trần Thị Lý",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.050179,
+      "lon": 108.2293814,
+      "opening_hours": [
+        "24/7"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5273999121",
+      "name": "Cầu Thuận Phước",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0948084,
+      "lon": 108.2200134,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5276547123",
+      "name": "Cau Nguyen Van Troi Bridge",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0510888,
+      "lon": 108.2292466,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5286977425",
+      "name": "Núi Thần Tài",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 15.9681262,
+      "lon": 108.0196301,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5421670780",
+      "name": "Chùa An Phước",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0634477,
+      "lon": 108.2315996,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/5432701004",
+      "name": "Nhà thờ Hoà Cường",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0440988,
+      "lon": 108.2097932,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/6332518185",
+      "name": "Miếu Xóm An Mỹ",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0662725,
+      "lon": 108.2306191,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/6346486685",
+      "name": "Cây đa đại thụ",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.1226157,
+      "lon": 108.3316779,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/6369465978",
+      "name": "Vietnamese Mother Statue",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0409333,
+      "lon": 108.2238913,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/6513792708",
+      "name": "Đình Phục Đán",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0745653,
+      "lon": 108.1745698,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/6528451001",
+      "name": "Cây đa Đò Xu",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0276784,
+      "lon": 108.2218873,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/7095169367",
+      "name": "Art Gallery",
+      "type": "Phòng trưng bày",
+      "lat": 16.0857203,
+      "lon": 108.2194277,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Phòng trưng bày"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/7095169369",
+      "name": "Non La",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0857055,
+      "lon": 108.2194606,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/7276380289",
+      "name": "Cầu Sông Hàn",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0721398,
+      "lon": 108.2268106,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/7477670190",
+      "name": "노니판매점",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0894666,
+      "lon": 108.2394816,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/7477670191",
+      "name": "Gio coffee",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0692623,
+      "lon": 108.2376088,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/8883385553",
+      "name": "TASY STUDIO",
+      "type": "Phòng trưng bày",
+      "lat": 15.9256934,
+      "lon": 108.2939032,
+      "opening_hours": [
+        "24/7"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Phòng trưng bày"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/9921282483",
+      "name": "Viet Nam's Delights",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0529199,
+      "lon": 108.2024664,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/9921286579",
+      "name": "Lucky Gift Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0534676,
+      "lon": 108.2030432,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/9921315929",
+      "name": "Lưu Niệm - Đặc Sản",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0526672,
+      "lon": 108.2025006,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/9921321271",
+      "name": "Smile Souvenir Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0525749,
+      "lon": 108.2025122,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10154412164",
+      "name": "Fantasy Park",
+      "type": "Công viên giải trí",
+      "lat": 15.9968339,
+      "lon": 107.9888036,
+      "opening_hours": [
+        "08:30-18:00"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Công viên giải trí"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10303626687",
+      "name": "Núi Phước Tường",
+      "type": "Đỉnh núi",
+      "lat": 16.0277351,
+      "lon": 108.1647027,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10303626688",
+      "name": "Núi Cẩm Khê",
+      "type": "Đỉnh núi",
+      "lat": 16.0349223,
+      "lon": 108.1622001,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10603622205",
+      "name": "Pont main",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0520775,
+      "lon": 108.2156357,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10709724107",
+      "name": "Làng đá mỹ nghệ Non Nước",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0009523,
+      "lon": 108.2666434,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10709738005",
+      "name": "Làng chiếu Cẩm Nê",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 15.9867322,
+      "lon": 108.1772823,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10709738105",
+      "name": "Làng nước mắm Nam Ô",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.1128315,
+      "lon": 108.1300902,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10723988763",
+      "name": "Đài tưởng niệm thảm sát Hà My",
+      "type": "Đài tưởng niệm",
+      "lat": 15.9252377,
+      "lon": 108.3065476,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đài tưởng niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/10892129283",
+      "name": "Núi Đồng Đen",
+      "type": "Đỉnh núi",
+      "lat": 16.1073907,
+      "lon": 108.0386388,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11161070775",
+      "name": "Dragon's Head",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0612476,
+      "lon": 108.2296554,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11359603957",
+      "name": "Chùa Nam Sơn",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 15.9987986,
+      "lon": 108.2051036,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11427582964",
+      "name": "Thai Market",
+      "type": "Chợ",
+      "lat": 15.9963119,
+      "lon": 107.9889349,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Chợ"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11533284293",
+      "name": "Lucky Souvenir Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0522911,
+      "lon": 108.2027385,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11629841009",
+      "name": "Núi Khe Xương",
+      "type": "Đỉnh núi",
+      "lat": 16.0647808,
+      "lon": 107.9641938,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11629996926",
+      "name": "Núi Hải Vân",
+      "type": "Đỉnh núi",
+      "lat": 16.1922104,
+      "lon": 108.136611,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11630013743",
+      "name": "Núi Hoi",
+      "type": "Đỉnh núi",
+      "lat": 16.1836944,
+      "lon": 108.1097027,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11762365155",
+      "name": "Núi Hòng Chan",
+      "type": "Đỉnh núi",
+      "lat": 16.1936801,
+      "lon": 107.9687946,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đỉnh núi"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 3,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11832500969",
+      "name": "Rào chắn",
+      "type": "Điểm ngắm cảnh",
+      "lat": 16.1167482,
+      "lon": 108.3084376,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm ngắm cảnh"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11888483369",
+      "name": "Chợ Phước Mỹ",
+      "type": "Chợ",
+      "lat": 16.0665465,
+      "lon": 108.2422676,
+      "opening_hours": [
+        "Mo-Su 05:00-18:00"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Chợ"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/11934169470",
+      "name": "Queen Cobra",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0432987,
+      "lon": 108.22599,
+      "opening_hours": [
+        "Mo-Su 18:00-22:00"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/12333995781",
+      "name": "Chợ đêm Lê Duẩn",
+      "type": "Chợ",
+      "lat": 16.070751,
+      "lon": 108.2150164,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Chợ"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "night"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated"
+    },
+    {
+      "poi_id": "osm:node/12404434601",
+      "name": "Khu Văn hóa Tâm linh Đà Sơn",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0418575,
+      "lon": 108.1477778,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/12603319867",
+      "name": "Nhà thờ Thanh Bình",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0766615,
+      "lon": 108.2132863,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/12701675501",
+      "name": "Small waterfall",
+      "type": "Điểm ngắm cảnh",
+      "lat": 16.1145234,
+      "lon": 108.2556163,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm ngắm cảnh"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/12811972501",
+      "name": "Mart Souvenir",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.052254,
+      "lon": 108.247414,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13008480396",
+      "name": "Miếu xóm",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.0764344,
+      "lon": 108.2420467,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13040467529",
+      "name": "Bãi Đá",
+      "type": "Bãi biển",
+      "lat": 16.0988527,
+      "lon": 108.3012745,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Bãi biển"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 84,
+        "p50": 120,
+        "p75": 168
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "outdoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "sunrise",
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13202605156",
+      "name": "Lucky Souvenir Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0551062,
+      "lon": 108.2022603,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13293564930",
+      "name": "Himawari",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.063498,
+      "lon": 108.2315886,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13301356138",
+      "name": "Deli Mart",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.053208,
+      "lon": 108.2024232,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13484040419",
+      "name": "Đền Bà Càn Khôn",
+      "type": "Cơ sở thờ tự",
+      "lat": 16.1040207,
+      "lon": 108.2859915,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cơ sở thờ tự"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13542877610",
+      "name": "Deli Mart",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0536855,
+      "lon": 108.2023552,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13542877612",
+      "name": "Lucky Gift Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0530035,
+      "lon": 108.2031119,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13677406601",
+      "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
+      "type": "Đài tưởng niệm",
+      "lat": 16.121001,
+      "lon": 108.2572286,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đài tưởng niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13687068650",
+      "name": "Linh Phong Bảo Tháp",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 15.9980969,
+      "lon": 107.985969,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13734880501",
+      "name": "Tượng Phật Phước Lý",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0405625,
+      "lon": 108.1489375,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13913398302",
+      "name": "Suối Lạc",
+      "type": "Suối",
+      "lat": 16.1076756,
+      "lon": 107.9409322,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Suối"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/13913400201",
+      "name": "Suối Ngọc",
+      "type": "Suối",
+      "lat": 16.1088276,
+      "lon": 107.9459056,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Suối"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045110791",
+      "name": "Lucky Retail",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0560017,
+      "lon": 108.2021613,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045110792",
+      "name": "Lucky Gift Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0547741,
+      "lon": 108.2022835,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045111563",
+      "name": "Lotte Duty Free",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0561299,
+      "lon": 108.2020188,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045123722",
+      "name": "JDV Jalux Duty Free Vietnam",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.055329,
+      "lon": 108.2022741,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045124561",
+      "name": "Lucky Shop Vietnam Gift Shop",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0559255,
+      "lon": 108.202175,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045130739",
+      "name": "Made in Vietnam",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0556406,
+      "lon": 108.2022206,
+      "opening_hours": [
+        "Mo-Su,PH 06:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045136237",
+      "name": "Lotte Duty Free",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0560661,
+      "lon": 108.202159,
+      "opening_hours": [
+        "Mo-Su,PH 05:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045144381",
+      "name": "Viet Nam's Delights",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0558021,
+      "lon": 108.2022075,
+      "opening_hours": [
+        "Mo-Su,PH 07:00-00:59"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14045145879",
+      "name": "Lotte Duty Free",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0563392,
+      "lon": 108.201992,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14067929701",
+      "name": "Bonny handmade",
+      "type": "Cửa hàng quà lưu niệm",
+      "lat": 16.0524725,
+      "lon": 108.2438676,
+      "opening_hours": [
+        "Mo-Su 08:00-11:30, 14:00-17:30"
+      ],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
+    },
+    {
+      "poi_id": "osm:node/14130293535",
+      "name": "Tượng đài Dũng sĩ Điện Ngọc",
+      "type": "Tượng đài",
+      "lat": 15.9555651,
+      "lon": 108.2555759,
+      "opening_hours": [],
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Tượng đài"
+      ],
+      "source": "osm/overpass",
+      "fetched_at": "2026-10-11",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1"
     }
   ],
   "enriched_at": "2026-10-10",
