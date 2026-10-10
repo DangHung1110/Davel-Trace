@@ -56,7 +56,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4430018990",
+        "dist_m": 34.4,
+        "fee": null,
+        "hours": "24/7",
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJx6-KGnIXQjER7x-T0zeOlBw",
@@ -110,7 +117,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7064981285",
+        "dist_m": 12.0,
+        "fee": null,
+        "hours": null,
+        "name": "Mộc Quán"
+      }
     },
     {
       "poi_id": "ChIJmQmygLwXQjERcZVy8--sIcE",
@@ -165,7 +179,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5485496021",
+        "dist_m": 11.0,
+        "fee": null,
+        "hours": null,
+        "name": "Bé Bien"
+      }
     },
     {
       "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
@@ -218,7 +239,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14125298501",
+        "dist_m": 3.0,
+        "fee": null,
+        "hours": null,
+        "name": "Nhà hàng NHÀ BÊP CHÓ HÀN"
+      }
     },
     {
       "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
@@ -324,7 +352,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6362798786",
+        "dist_m": 37.9,
+        "fee": null,
+        "hours": null,
+        "name": "589 Hoang Dieu"
+      }
     },
     {
       "poi_id": "ChIJi5XzTqsZQjERn5HbwcdvD5Y",
@@ -377,7 +412,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406739",
+        "dist_m": 40.7,
+        "fee": null,
+        "hours": null,
+        "name": "DivaCoffee"
+      }
     },
     {
       "poi_id": "ChIJqaQoXYMZQjERX_QzVEAZr_Q",
@@ -433,7 +475,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13917253901",
+        "dist_m": 1.2,
+        "fee": null,
+        "hours": null,
+        "name": "Maazi"
+      }
     },
     {
       "poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk",
@@ -486,7 +535,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11606548802",
+        "dist_m": 59.2,
+        "fee": null,
+        "hours": null,
+        "name": "Lady Buddha"
+      }
     },
     {
       "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
@@ -542,7 +598,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5424056421",
+        "dist_m": 35.5,
+        "fee": null,
+        "hours": null,
+        "name": "Kara Beachside hotel"
+      }
     },
     {
       "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
@@ -596,7 +659,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7095281753",
+        "dist_m": 6.4,
+        "fee": null,
+        "hours": null,
+        "name": "Hai Cử"
+      }
     },
     {
       "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
@@ -648,7 +718,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12372814701",
+        "dist_m": 4.7,
+        "fee": null,
+        "hours": null,
+        "name": "Bé Ni 2"
+      }
     },
     {
       "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
@@ -701,7 +778,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12857894331",
+        "dist_m": 16.7,
+        "fee": null,
+        "hours": null,
+        "name": "My Hanh Seafood"
+      }
     },
     {
       "poi_id": "ChIJH72bVncZQjERoTgax0OjZKY",
@@ -761,7 +845,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12175071924",
+        "dist_m": 4.4,
+        "fee": null,
+        "hours": null,
+        "name": "Loco"
+      }
     },
     {
       "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
@@ -812,7 +903,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406764",
+        "dist_m": 55.1,
+        "fee": null,
+        "hours": null,
+        "name": "HoangOanh Coffee"
+      }
     },
     {
       "poi_id": "ChIJJSd-naoZQjERheTI-IEkRrc",
@@ -867,7 +965,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4948013624",
+        "dist_m": 52.7,
+        "fee": null,
+        "hours": null,
+        "name": "Quán An Bún Chả Cá"
+      }
     },
     {
       "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
@@ -920,7 +1025,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12032859170",
+        "dist_m": 2.4,
+        "fee": null,
+        "hours": "Mo-Su 10:30-22:00",
+        "name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)"
+      }
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -971,7 +1083,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7141021685",
+        "dist_m": 19.1,
+        "fee": null,
+        "hours": null,
+        "name": "Namaste Omar's Indian Restaurant"
+      }
     },
     {
       "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
@@ -1025,7 +1144,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406780",
+        "dist_m": 23.6,
+        "fee": null,
+        "hours": null,
+        "name": "CafeDiem Nong"
+      }
     },
     {
       "poi_id": "ChIJ-VaWslgZQjERwaL3uKR9fB4",
@@ -1079,7 +1205,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12600686584",
+        "dist_m": 19.1,
+        "fee": null,
+        "hours": null,
+        "name": "Phinn Cafe"
+      }
     },
     {
       "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
@@ -1258,7 +1391,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4778581323",
+        "dist_m": 3.9,
+        "fee": null,
+        "hours": "Th-Tu 11:00-12:00, 13:00-14:00",
+        "name": "My Casa"
+      }
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -1371,7 +1511,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5921911585",
+        "dist_m": 19.8,
+        "fee": null,
+        "hours": null,
+        "name": "Me Coffee"
+      }
     },
     {
       "poi_id": "ChIJO0E1hoYXQjER-ML-N1yAGAU",
@@ -1425,7 +1572,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4759752150",
+        "dist_m": 2.7,
+        "fee": null,
+        "hours": null,
+        "name": "Phố nướng Tokyo"
+      }
     },
     {
       "poi_id": "ChIJh4MCHBoXQjERA274y4wwup4",
@@ -1481,7 +1635,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12860787932",
+        "dist_m": 11.4,
+        "fee": null,
+        "hours": null,
+        "name": "Chicland"
+      }
     },
     {
       "poi_id": "ChIJYahwiHIXQjER0CIGd09pgcg",
@@ -1535,7 +1696,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5401407621",
+        "dist_m": 25.8,
+        "fee": null,
+        "hours": null,
+        "name": "미꽝 24 7"
+      }
     },
     {
       "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
@@ -1642,7 +1810,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406473",
+        "dist_m": 96.2,
+        "fee": null,
+        "hours": null,
+        "name": "PhuongMai Coffee"
+      }
     },
     {
       "poi_id": "ChIJeVJaMNUZQjERnRz_bfJ5ex4",
@@ -1650,7 +1825,9 @@
       "type": "Nhà hàng hải sản",
       "lat": 16.0620191,
       "lon": 108.235918,
-      "opening_hours": [],
+      "opening_hours": [
+        "Mo-Su 09:00-22:30"
+      ],
       "visit_min": {
         "p25": 42,
         "p50": 60,
@@ -1699,7 +1876,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6845812585",
+        "dist_m": 42.1,
+        "fee": null,
+        "hours": "Mo-Su 09:00-22:30",
+        "name": null
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -1805,7 +1990,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4351989390",
+        "dist_m": 104.0,
+        "fee": null,
+        "hours": null,
+        "name": "Hau Sua & Tom Hum"
+      }
     },
     {
       "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
@@ -1859,7 +2051,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12385922768",
+        "dist_m": 131.6,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJN84BNSQXQjERyy7N3rDXisc",
@@ -1912,7 +2111,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12833350534",
+        "dist_m": 10.8,
+        "fee": null,
+        "hours": null,
+        "name": "Them Hai San"
+      }
     },
     {
       "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
@@ -1965,7 +2171,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12816183324",
+        "dist_m": 29.5,
+        "fee": null,
+        "hours": null,
+        "name": "Wyndham Danang Golden Bay Hotel"
+      }
     },
     {
       "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
@@ -2018,7 +2231,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/2986079833",
+        "dist_m": 20.6,
+        "fee": null,
+        "hours": null,
+        "name": "Jimy"
+      }
     },
     {
       "poi_id": "ChIJF2lrSYgXQjERKBBhFKYlhkg",
@@ -2071,7 +2291,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11878408547",
+        "dist_m": 3.9,
+        "fee": null,
+        "hours": null,
+        "name": "Lazeez Indian Restaurant"
+      }
     },
     {
       "poi_id": "ChIJ1ZxjXAAZQjER3EQPJm7z3R4",
@@ -2122,7 +2349,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13523283436",
+        "dist_m": 88.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
@@ -2176,7 +2410,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12815918702",
+        "dist_m": 1.7,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJP-VRM2YXQjERbEUrtG6wq9Q",
@@ -2230,7 +2471,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6976178456",
+        "dist_m": 16.4,
+        "fee": null,
+        "hours": null,
+        "name": "Dreams Hotel"
+      }
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -2283,7 +2531,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12814942624",
+        "dist_m": 34.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
@@ -2336,7 +2591,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13687990901",
+        "dist_m": 12.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -2390,7 +2652,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13009347078",
+        "dist_m": 2.7,
+        "fee": null,
+        "hours": "Mo-Su 17:00-21:00",
+        "name": "Le Comptoir"
+      }
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -2444,7 +2713,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4150425790",
+        "dist_m": 1.5,
+        "fee": null,
+        "hours": null,
+        "name": "La Luna"
+      }
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -2499,7 +2775,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11171782637",
+        "dist_m": 2.1,
+        "fee": null,
+        "hours": null,
+        "name": "SC Restaurant"
+      }
     },
     {
       "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
@@ -2554,7 +2837,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12846757601",
+        "dist_m": 9.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
@@ -2607,7 +2897,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12733455142",
+        "dist_m": 134.5,
+        "fee": null,
+        "hours": null,
+        "name": "Non Nuoc"
+      }
     },
     {
       "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
@@ -2660,7 +2957,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12841099498",
+        "dist_m": 29.9,
+        "fee": null,
+        "hours": null,
+        "name": "Celina"
+      }
     },
     {
       "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
@@ -2713,7 +3017,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12830575020",
+        "dist_m": 6.1,
+        "fee": null,
+        "hours": "Mo-Su 10:00-23:00",
+        "name": "43 Town"
+      }
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -2770,7 +3081,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12830575016",
+        "dist_m": 17.1,
+        "fee": null,
+        "hours": null,
+        "name": "Bottegas"
+      }
     },
     {
       "poi_id": "ChIJN-vJNV8XQjERNccI4vX2rHY",
@@ -2881,7 +3199,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12830575038",
+        "dist_m": 7.0,
+        "fee": null,
+        "hours": null,
+        "name": "Korea BBQ"
+      }
     },
     {
       "poi_id": "ChIJW_ilwg0XQjERQbqRXGggIFE",
@@ -2937,7 +3262,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12850675088",
+        "dist_m": 9.3,
+        "fee": null,
+        "hours": null,
+        "name": "Cucina Luca"
+      }
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -3097,7 +3429,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12837179237",
+        "dist_m": 3.2,
+        "fee": null,
+        "hours": null,
+        "name": "Noi Dat"
+      }
     },
     {
       "poi_id": "ChIJYy-g38oQQjER2c931z_dDt4",
@@ -3203,7 +3542,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406585",
+        "dist_m": 88.4,
+        "fee": null,
+        "hours": null,
+        "name": "LyLy Coffee"
+      }
     },
     {
       "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
@@ -3413,7 +3759,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4875985021",
+        "dist_m": 6.2,
+        "fee": null,
+        "hours": null,
+        "name": "quán nhậu lộc viên"
+      }
     },
     {
       "poi_id": "ChIJgUt949cYQjERTHdMcEeiF2o",
@@ -3466,7 +3819,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406958",
+        "dist_m": 30.5,
+        "fee": null,
+        "hours": null,
+        "name": "Ca Phe Bibon"
+      }
     },
     {
       "poi_id": "ChIJxQQMGMoYQjER-2IGXb-pTtQ",
@@ -3519,7 +3879,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406711",
+        "dist_m": 136.8,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Trang Le"
+      }
     },
     {
       "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
@@ -3573,7 +3940,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406500",
+        "dist_m": 86.2,
+        "fee": null,
+        "hours": null,
+        "name": "Ca Phe Thanh Huyen"
+      }
     },
     {
       "poi_id": "ChIJVeL2KNYYQjERkTADVXDZcRM",
@@ -3626,7 +4000,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4449942994",
+        "dist_m": 43.3,
+        "fee": null,
+        "hours": "Mo-Su 07:30-22:30",
+        "name": "Kua Coffee"
+      }
     },
     {
       "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
@@ -3679,7 +4060,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406611",
+        "dist_m": 13.0,
+        "fee": null,
+        "hours": null,
+        "name": "Cafe Kieu Diem"
+      }
     },
     {
       "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
@@ -3786,7 +4174,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4449942994",
+        "dist_m": 89.8,
+        "fee": null,
+        "hours": "Mo-Su 07:30-22:30",
+        "name": "Kua Coffee"
+      }
     },
     {
       "poi_id": "ChIJ-7JfLigZQjERZm4r5uDmk5o",
@@ -3839,7 +4234,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4449942994",
+        "dist_m": 115.2,
+        "fee": null,
+        "hours": "Mo-Su 07:30-22:30",
+        "name": "Kua Coffee"
+      }
     },
     {
       "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
@@ -4052,7 +4454,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406866",
+        "dist_m": 147.6,
+        "fee": null,
+        "hours": null,
+        "name": "Cafe96"
+      }
     },
     {
       "poi_id": "ChIJbVtm0WIfQjER_HG2AYprbcY",
@@ -4204,7 +4613,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406606",
+        "dist_m": 10.5,
+        "fee": null,
+        "hours": null,
+        "name": "Cafe Mat Trang Xanh"
+      }
     },
     {
       "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
@@ -4257,7 +4673,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7222014985",
+        "dist_m": 1.2,
+        "fee": null,
+        "hours": null,
+        "name": "Nha Hang Mr.Anh"
+      }
     },
     {
       "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
@@ -4310,7 +4733,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6147088185",
+        "dist_m": 71.5,
+        "fee": null,
+        "hours": "Mo-Su 13:00+",
+        "name": "Bún Bò Bà Diệu"
+      }
     },
     {
       "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
@@ -4365,7 +4795,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6520610586",
+        "dist_m": 20.1,
+        "fee": null,
+        "hours": null,
+        "name": "Samdi Coffee"
+      }
     },
     {
       "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
@@ -4418,7 +4855,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406664",
+        "dist_m": 108.9,
+        "fee": null,
+        "hours": null,
+        "name": "PhuCoffee"
+      }
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -4471,7 +4915,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406517",
+        "dist_m": 33.0,
+        "fee": null,
+        "hours": null,
+        "name": "J T Coffee"
+      }
     },
     {
       "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
@@ -4524,7 +4975,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12588096502",
+        "dist_m": 59.2,
+        "fee": null,
+        "hours": null,
+        "name": "Hotel Rosa"
+      }
     },
     {
       "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
@@ -4631,7 +5089,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406663",
+        "dist_m": 44.0,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Giai Khat Huong Vuon Cau"
+      }
     },
     {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
@@ -4684,7 +5149,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406420",
+        "dist_m": 13.8,
+        "fee": null,
+        "hours": null,
+        "name": "Nhà Hàng Chay & Cà Phê Thúp An"
+      }
     },
     {
       "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
@@ -4737,7 +5209,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406546",
+        "dist_m": 14.2,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Vuon Da Bien"
+      }
     },
     {
       "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
@@ -4843,7 +5322,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/9921305987",
+        "dist_m": 74.4,
+        "fee": null,
+        "hours": null,
+        "name": "Huy Hoang Hotel"
+      }
     },
     {
       "poi_id": "ChIJFaKh3yhLoTERuh1M_c3paTQ",
@@ -4896,7 +5382,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4301483689",
+        "dist_m": 48.7,
+        "fee": null,
+        "hours": "Mo-Su 05:00-18:00",
+        "name": "Sơn"
+      }
     },
     {
       "poi_id": "ChIJY-zHSgQZQjERRoAvxXVcViU",
@@ -4950,7 +5443,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13447592001",
+        "dist_m": 34.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
@@ -5059,7 +5559,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406812",
+        "dist_m": 100.1,
+        "fee": null,
+        "hours": null,
+        "name": "CafeTi Ti"
+      }
     },
     {
       "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
@@ -5159,7 +5666,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4326820491",
+        "dist_m": 21.1,
+        "fee": null,
+        "hours": null,
+        "name": "Dai Long hotel"
+      }
     },
     {
       "poi_id": "ChIJH_EMuNcZQjERI1YtG7IGGDo",
@@ -5212,7 +5726,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13110723074",
+        "dist_m": 107.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
@@ -5264,7 +5785,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4782540521",
+        "dist_m": 49.5,
+        "fee": null,
+        "hours": null,
+        "name": "Trung Hung Buu Tôa"
+      }
     },
     {
       "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
@@ -5316,7 +5844,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12846757801",
+        "dist_m": 21.4,
+        "fee": null,
+        "hours": null,
+        "name": "Hero"
+      }
     },
     {
       "poi_id": "ChIJxX--D-oZQjERQ4LzQRoeVXk",
@@ -5367,7 +5902,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/10598314706",
+        "dist_m": 1.8,
+        "fee": null,
+        "hours": null,
+        "name": "Reply 1988"
+      }
     },
     {
       "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
@@ -5418,7 +5960,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11665246470",
+        "dist_m": 16.0,
+        "fee": null,
+        "hours": "Mo-Su 06:30-01:30",
+        "name": "Trình cà phê"
+      }
     },
     {
       "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
@@ -5469,7 +6018,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406850",
+        "dist_m": 8.5,
+        "fee": null,
+        "hours": null,
+        "name": "Trung Nguyên Legend"
+      }
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -5520,7 +6076,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6147253586",
+        "dist_m": 62.2,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
@@ -5571,7 +6134,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5382678421",
+        "dist_m": 1.2,
+        "fee": null,
+        "hours": null,
+        "name": "Nam House"
+      }
     },
     {
       "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
@@ -5622,7 +6192,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12418996101",
+        "dist_m": 18.4,
+        "fee": null,
+        "hours": null,
+        "name": "Hủ Tiếu Mực"
+      }
     },
     {
       "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
@@ -5673,7 +6250,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406558",
+        "dist_m": 31.0,
+        "fee": null,
+        "hours": null,
+        "name": "CafeNew Life"
+      }
     },
     {
       "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
@@ -5724,7 +6308,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13744719202",
+        "dist_m": 0.6,
+        "fee": null,
+        "hours": "Mo-Su 07:00-22:00",
+        "name": "Nia Coffee"
+      }
     },
     {
       "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
@@ -5775,7 +6366,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4352240896",
+        "dist_m": 10.4,
+        "fee": null,
+        "hours": null,
+        "name": "Cộng Cà Phê"
+      }
     },
     {
       "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
@@ -5826,7 +6424,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4541170290",
+        "dist_m": 93.5,
+        "fee": null,
+        "hours": null,
+        "name": "Hoa Tu"
+      }
     },
     {
       "poi_id": "ChIJW4dpfjkYQjERcGpyYomHFO4",
@@ -5877,7 +6482,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12615301813",
+        "dist_m": 11.8,
+        "fee": null,
+        "hours": null,
+        "name": "Quán Nga 2"
+      }
     },
     {
       "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
@@ -5929,7 +6541,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7103226688",
+        "dist_m": 9.5,
+        "fee": null,
+        "hours": null,
+        "name": "I Love Bánh Mì"
+      }
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -5981,7 +6600,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/10784775351",
+        "dist_m": 28.3,
+        "fee": null,
+        "hours": null,
+        "name": "No Nee"
+      }
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -6032,7 +6658,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406755",
+        "dist_m": 91.3,
+        "fee": null,
+        "hours": null,
+        "name": "Piggy"
+      }
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -6086,7 +6719,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12609115911",
+        "dist_m": 7.9,
+        "fee": null,
+        "hours": "Mo-Su 07:00-18:00",
+        "name": "Àla Cafe"
+      }
     },
     {
       "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
@@ -6137,7 +6777,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12615301813",
+        "dist_m": 80.6,
+        "fee": null,
+        "hours": null,
+        "name": "Quán Nga 2"
+      }
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -6188,7 +6835,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6357894213",
+        "dist_m": 38.6,
+        "fee": null,
+        "hours": null,
+        "name": "Chè Tâm Ý"
+      }
     },
     {
       "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
@@ -6239,7 +6893,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13288544261",
+        "dist_m": 4.7,
+        "fee": null,
+        "hours": null,
+        "name": "Khâu Cà Phê"
+      }
     },
     {
       "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
@@ -6290,7 +6951,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12856967333",
+        "dist_m": 6.3,
+        "fee": null,
+        "hours": null,
+        "name": "Pizza-Sandwich-Burger"
+      }
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -6298,7 +6966,9 @@
       "type": "Quán cà phê",
       "lat": 16.103067799999998,
       "lon": 108.308106,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -6339,7 +7009,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13110726988",
+        "dist_m": 89.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -6442,7 +7120,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13463837701",
+        "dist_m": 2.3,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
@@ -6549,7 +7234,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14004104302",
+        "dist_m": 8.8,
+        "fee": null,
+        "hours": null,
+        "name": "At Ca Phe"
+      }
     },
     {
       "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
@@ -6600,7 +7292,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/3888955324",
+        "dist_m": 8.0,
+        "fee": null,
+        "hours": null,
+        "name": "Cloud Garden Cafe"
+      }
     },
     {
       "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
@@ -6651,7 +7350,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5295016121",
+        "dist_m": 53.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
@@ -6756,7 +7462,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12815941401",
+        "dist_m": 54.7,
+        "fee": null,
+        "hours": null,
+        "name": "7 wonders"
+      }
     },
     {
       "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
@@ -6859,7 +7572,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5911447385",
+        "dist_m": 20.8,
+        "fee": null,
+        "hours": "Mo-Su 14:00-23:00",
+        "name": "A tri"
+      }
     },
     {
       "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
@@ -6961,7 +7681,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7632660285",
+        "dist_m": 99.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
@@ -7278,7 +8005,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5432960921",
+        "dist_m": 8.0,
+        "fee": null,
+        "hours": "Mo-Su 07:30-21:30",
+        "name": "SIX ON SIX"
+      }
     },
     {
       "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
@@ -7286,7 +8020,9 @@
       "type": "Quán cà phê",
       "lat": 16.048823,
       "lon": 108.24306469999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "24/7"
+      ],
       "visit_min": {
         "p25": 38,
         "p50": 54,
@@ -7327,7 +8063,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12222115201",
+        "dist_m": 6.6,
+        "fee": null,
+        "hours": "24/7",
+        "name": "HI4 COFFEE & WORKSPACE"
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -7378,7 +8122,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12853200242",
+        "dist_m": 8.7,
+        "fee": null,
+        "hours": null,
+        "name": "Phuong"
+      }
     },
     {
       "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
@@ -7429,7 +8180,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6108958606",
+        "dist_m": 6.2,
+        "fee": null,
+        "hours": "06:45-22:00",
+        "name": "Venus Cafe"
+      }
     },
     {
       "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
@@ -7485,7 +8243,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11593457770",
+        "dist_m": 16.4,
+        "fee": null,
+        "hours": "Mo-Su,PH 07:00-23:00",
+        "name": "Bread & Butter"
+      }
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -7536,7 +8301,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12836656109",
+        "dist_m": 13.6,
+        "fee": null,
+        "hours": null,
+        "name": "Il Stand"
+      }
     },
     {
       "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
@@ -7587,7 +8359,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12814942623",
+        "dist_m": 90.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -7738,7 +8517,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12843905562",
+        "dist_m": 9.7,
+        "fee": null,
+        "hours": null,
+        "name": "DNG"
+      }
     },
     {
       "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
@@ -7792,7 +8578,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5658315323",
+        "dist_m": 145.4,
+        "fee": null,
+        "hours": null,
+        "name": "loving hut - vegan restaurant"
+      }
     },
     {
       "poi_id": "ChIJzeNmTwARQjERLSXizyRKI9g",
@@ -7894,7 +8687,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/10801935005",
+        "dist_m": 3.4,
+        "fee": null,
+        "hours": "Mo-Su 07:00-22:00",
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
@@ -7953,7 +8753,9 @@
       "type": "Quán cà phê",
       "lat": 16.0467126,
       "lon": 108.23551169999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "Tu-Su 18:00-22:00"
+      ],
       "visit_min": {
         "p25": 31,
         "p50": 45,
@@ -7994,7 +8796,15 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12918575654",
+        "dist_m": 95.0,
+        "fee": null,
+        "hours": "Tu-Su 18:00-22:00",
+        "name": "Westwood Da Nang"
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -8043,7 +8853,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13671225501",
+        "dist_m": 41.2,
+        "fee": null,
+        "hours": null,
+        "name": "Cherry coffee"
+      }
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -8099,7 +8916,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12839895665",
+        "dist_m": 27.1,
+        "fee": null,
+        "hours": null,
+        "name": "Outpost"
+      }
     },
     {
       "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
@@ -8150,7 +8974,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7218228185",
+        "dist_m": 5.0,
+        "fee": null,
+        "hours": "Mo-Su 07:30-21:00",
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
@@ -8253,7 +9084,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406844",
+        "dist_m": 68.2,
+        "fee": null,
+        "hours": null,
+        "name": "TuyetAnh Coffee"
+      }
     },
     {
       "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
@@ -8305,7 +9143,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406748",
+        "dist_m": 101.3,
+        "fee": null,
+        "hours": null,
+        "name": "Ca Phe Anh Thu"
+      }
     },
     {
       "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
@@ -8711,7 +9556,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4875985021",
+        "dist_m": 92.4,
+        "fee": null,
+        "hours": null,
+        "name": "quán nhậu lộc viên"
+      }
     },
     {
       "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
@@ -8862,7 +9714,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406723",
+        "dist_m": 40.1,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Uyen Phuong"
+      }
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -8911,7 +9770,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406880",
+        "dist_m": 113.2,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Phuong Dong"
+      }
     },
     {
       "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
@@ -9011,7 +9877,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406943",
+        "dist_m": 95.7,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Viet Anh"
+      }
     },
     {
       "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
@@ -9062,7 +9935,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406816",
+        "dist_m": 144.1,
+        "fee": null,
+        "hours": null,
+        "name": "LangVan Coffee"
+      }
     },
     {
       "poi_id": "ChIJIcLWMlAZQjER1VvH4kJ2aZA",
@@ -9165,7 +10045,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406729",
+        "dist_m": 30.0,
+        "fee": null,
+        "hours": null,
+        "name": "NewStar Coffee"
+      }
     },
     {
       "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
@@ -9216,7 +10103,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406767",
+        "dist_m": 46.2,
+        "fee": null,
+        "hours": null,
+        "name": "Cafe Hen"
+      }
     },
     {
       "poi_id": "ChIJhYuNIQAZQjERoyprw_nC3Ts",
@@ -9267,7 +10161,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406628",
+        "dist_m": 31.9,
+        "fee": null,
+        "hours": null,
+        "name": "CafeBen"
+      }
     },
     {
       "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
@@ -9318,7 +10219,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406627",
+        "dist_m": 124.6,
+        "fee": null,
+        "hours": null,
+        "name": "HongCoffee"
+      }
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -9369,7 +10277,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4589383489",
+        "dist_m": 46.3,
+        "fee": null,
+        "hours": null,
+        "name": "Nha me Lanh"
+      }
     },
     {
       "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
@@ -9420,7 +10335,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6570954856",
+        "dist_m": 26.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
@@ -9471,7 +10393,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406664",
+        "dist_m": 126.4,
+        "fee": null,
+        "hours": null,
+        "name": "PhuCoffee"
+      }
     },
     {
       "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
@@ -9520,7 +10449,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406407",
+        "dist_m": 65.7,
+        "fee": null,
+        "hours": null,
+        "name": "NgocVan Coffee"
+      }
     },
     {
       "poi_id": "ChIJuZTrvVoZQjER371drzqC5hk",
@@ -9571,7 +10507,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6348009201",
+        "dist_m": 52.7,
+        "fee": null,
+        "hours": null,
+        "name": "Kong Cafe"
+      }
     },
     {
       "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
@@ -9622,7 +10565,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5622622724",
+        "dist_m": 62.8,
+        "fee": null,
+        "hours": "Mo-Su 09:00-13:00, 14:00-22:00",
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
@@ -9673,7 +10623,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5699718559",
+        "dist_m": 42.3,
+        "fee": null,
+        "hours": "Mo-Su 10:00-22:00",
+        "name": "The Pizza Company"
+      }
     },
     {
       "poi_id": "ChIJzVnvNgAZQjERef60MBfcz8E",
@@ -9724,7 +10681,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406612",
+        "dist_m": 57.2,
+        "fee": null,
+        "hours": null,
+        "name": "Cafe461"
+      }
     },
     {
       "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
@@ -9826,7 +10790,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/8616537417",
+        "dist_m": 5.5,
+        "fee": null,
+        "hours": null,
+        "name": "1981 Coffee & Tea"
+      }
     },
     {
       "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
@@ -9978,7 +10949,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4674226290",
+        "dist_m": 107.0,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJXfWk4QYZQjERpQw56WNZ0js",
@@ -10078,7 +11056,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4674226290",
+        "dist_m": 42.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJteAgYXsZQjERK6NHlXGXIPI",
@@ -10129,7 +11114,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11584401669",
+        "dist_m": 27.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJfagM2mkZQjER9NTQqfVjnI8",
@@ -10232,7 +11224,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4474373189",
+        "dist_m": 97.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -10285,7 +11284,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11176025737",
+        "dist_m": 3.7,
+        "fee": null,
+        "hours": null,
+        "name": "Lang Bich hoa Da Nang"
+      }
     },
     {
       "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
@@ -10339,7 +11345,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6146805188",
+        "dist_m": 55.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJe8ah9rsZQjER6VQTZMzcGTw",
@@ -10396,6 +11409,13 @@
       ],
       "web_evidence": {
         "hours_web": "18:00,19:00,20:00,21:00 (40-50p/chuyến)"
+      },
+      "osm_evidence": {
+        "osm": "node/6172518285",
+        "dist_m": 60.6,
+        "fee": null,
+        "hours": null,
+        "name": "RuNam"
       }
     },
     {
@@ -10460,6 +11480,13 @@
       ],
       "web_evidence": {
         "hours_web": "07:00-17:00"
+      },
+      "osm_evidence": {
+        "osm": "node/4259583469",
+        "dist_m": 123.9,
+        "fee": null,
+        "hours": null,
+        "name": null
       }
     },
     {
@@ -10514,7 +11541,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4948013624",
+        "dist_m": 28.4,
+        "fee": null,
+        "hours": null,
+        "name": "Quán An Bún Chả Cá"
+      }
     },
     {
       "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
@@ -10569,7 +11603,14 @@
         ]
       },
       "smart_tag_source": "rule_v1+paid-name",
-      "ticket_note": "Chiến dịch TP (passport ẩm thực, tự trả món) + free walking tour tip-based — không vé cố định"
+      "ticket_note": "Chiến dịch TP (passport ẩm thực, tự trả món) + free walking tour tip-based — không vé cố định",
+      "osm_evidence": {
+        "osm": "node/2987520841",
+        "dist_m": 2.6,
+        "fee": null,
+        "hours": null,
+        "name": "Luxury"
+      }
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -10624,7 +11665,14 @@
           "must-go"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/5922491427",
+        "dist_m": 19.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJzX1dFjAZQjERswowf61V1fk",
@@ -10674,7 +11722,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13417408401",
+        "dist_m": 10.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
@@ -10727,7 +11782,14 @@
           "must-go"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/11161077288",
+        "dist_m": 60.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
@@ -10901,6 +11963,13 @@
       ],
       "web_evidence": {
         "hours_web": "08:00-22:00"
+      },
+      "osm_evidence": {
+        "osm": "node/5898266285",
+        "dist_m": 8.1,
+        "fee": null,
+        "hours": null,
+        "name": "Bún Chả Hà Nội"
       }
     },
     {
@@ -10961,6 +12030,13 @@
       ],
       "web_evidence": {
         "hours_web": "Play&Kids 16-22h (T2-T6), 17-22h30 (T7-CN); chợ đêm 17h30-22h30"
+      },
+      "osm_evidence": {
+        "osm": "node/4807957148",
+        "dist_m": 19.3,
+        "fee": null,
+        "hours": null,
+        "name": "Trung tâm Giải trí Phức hợp Helio Center"
       }
     },
     {
@@ -11013,7 +12089,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11597875187",
+        "dist_m": 71.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
@@ -11076,6 +12159,13 @@
       ],
       "web_evidence": {
         "hours_web": "08:00-17:00"
+      },
+      "osm_evidence": {
+        "osm": "node/5273999621",
+        "dist_m": 74.6,
+        "fee": null,
+        "hours": null,
+        "name": null
       }
     },
     {
@@ -11084,7 +12174,9 @@
       "type": "Bến du thuyền",
       "lat": 16.0780663,
       "lon": 108.2245624,
-      "opening_hours": [],
+      "opening_hours": [
+        "Mo-Su 07:00-22:30"
+      ],
       "visit_min": {
         "p25": 31,
         "p50": 45,
@@ -11130,7 +12222,15 @@
       "ticket_note": "Bến không vé riêng; giá là giá tour tại bến (từ 200k NL)",
       "web_evidence": {
         "hours_web": "18:00-22:00"
-      }
+      },
+      "osm_evidence": {
+        "osm": "node/12433230010",
+        "dist_m": 116.6,
+        "fee": null,
+        "hours": "Mo-Su 07:00-22:30",
+        "name": "Luk Lak"
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -11181,7 +12281,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6146812885",
+        "dist_m": 0.9,
+        "fee": null,
+        "hours": null,
+        "name": "Phú Hồng"
+      }
     },
     {
       "poi_id": "ChIJq3jYbEgYQjERJQhj5oBrT04",
@@ -11230,7 +12337,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5360449021",
+        "dist_m": 3.0,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
@@ -11280,7 +12394,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11161070774",
+        "dist_m": 89.7,
+        "fee": null,
+        "hours": null,
+        "name": "Dragon's Tail"
+      }
     },
     {
       "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
@@ -11288,7 +12409,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0991295,
       "lon": 108.25506159999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "24/7"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -11331,7 +12454,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12171202636",
+        "dist_m": 63.8,
+        "fee": null,
+        "hours": "24/7",
+        "name": "Sontra Sea Hotel"
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -11550,7 +12681,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11370013269",
+        "dist_m": 69.2,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
@@ -11609,7 +12747,9 @@
       "type": "Bán đảo",
       "lat": 16.1159837,
       "lon": 108.273341,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 126,
         "p50": 180,
@@ -11650,7 +12790,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -11755,7 +12896,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/1538334281",
+        "dist_m": 2.4,
+        "fee": null,
+        "hours": null,
+        "name": "Ban Co Peak"
+      }
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -11805,7 +12953,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/1623183663",
+        "dist_m": 34.6,
+        "fee": null,
+        "hours": null,
+        "name": "Son Tra Resort & Spa"
+      }
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -11854,7 +13009,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6512888885",
+        "dist_m": 18.0,
+        "fee": null,
+        "hours": null,
+        "name": "Cementerio militar franco-español de Y Pha Nho"
+      }
     },
     {
       "poi_id": "ChIJPbgJ4DY9QjER7OSjP2_jSC8",
@@ -11956,7 +13118,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/1538337523",
+        "dist_m": 0.6,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -11964,7 +13133,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.118624399999998,
       "lon": 108.3368715,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -12007,7 +13178,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13588730101",
+        "dist_m": 47.2,
+        "fee": null,
+        "hours": null,
+        "name": null
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -12058,7 +13237,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13110726988",
+        "dist_m": 33.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -12066,7 +13252,9 @@
       "type": "Bãi biển",
       "lat": 16.1425136,
       "lon": 108.23197789999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -12109,7 +13297,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/8041992785",
+        "dist_m": 143.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
@@ -12160,7 +13356,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11128332583",
+        "dist_m": 8.5,
+        "fee": null,
+        "hours": null,
+        "name": "Quán Ăn Sân Vườn Trường Mai"
+      }
     },
     {
       "poi_id": "ChIJ28TlBIYXQjEREqSmOo2kQtU",
@@ -12168,7 +13371,9 @@
       "type": "Sở du lịch thành phố",
       "lat": 16.0729286,
       "lon": 108.2431726,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 42,
         "p50": 60,
@@ -12207,7 +13412,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13786813301",
+        "dist_m": 51.4,
+        "fee": null,
+        "hours": null,
+        "name": "Hotel Huong"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
@@ -12258,7 +13471,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12815941401",
+        "dist_m": 1.7,
+        "fee": null,
+        "hours": null,
+        "name": "7 wonders"
+      }
     },
     {
       "poi_id": "ChIJNb8hNAAXQjERaE0LeRW4sy4",
@@ -12309,7 +13529,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14060594688",
+        "dist_m": 92.8,
+        "fee": null,
+        "hours": null,
+        "name": "Leon Homestay"
+      }
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -12356,7 +13583,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12009157357",
+        "dist_m": 59.9,
+        "fee": null,
+        "hours": null,
+        "name": "Holiday Coffee"
+      }
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -12407,7 +13641,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13525483837",
+        "dist_m": 18.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -12716,7 +13957,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5383428522",
+        "dist_m": 93.4,
+        "fee": null,
+        "hours": null,
+        "name": "Khu Du Lịch Sinh Thái Suối Lương"
+      }
     },
     {
       "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
@@ -12768,7 +14016,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5255590921",
+        "dist_m": 21.7,
+        "fee": null,
+        "hours": null,
+        "name": "Hồ Hoà Trung"
+      }
     },
     {
       "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
@@ -13080,7 +14335,14 @@
       "web_evidence": {
         "hours_web": "24/7 tự do"
       },
-      "hours_source": "web"
+      "hours_source": "web",
+      "osm_evidence": {
+        "osm": "node/4401378391",
+        "dist_m": 43.6,
+        "fee": null,
+        "hours": null,
+        "name": "Red Beach Resort & Spa"
+      }
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -13376,7 +14638,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406583",
+        "dist_m": 26.0,
+        "fee": null,
+        "hours": null,
+        "name": "CafeThuy Duong"
+      }
     },
     {
       "poi_id": "ChIJW4o1LAAXQjERL6zRtyWivLk",
@@ -13384,7 +14653,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.061609699999998,
       "lon": 108.24699749999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13427,7 +14698,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14068778545",
+        "dist_m": 97.5,
+        "fee": null,
+        "hours": null,
+        "name": "HIGHLANDS COFFEE"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
@@ -13486,7 +14765,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0566455,
       "lon": 108.2476348,
-      "opening_hours": [],
+      "opening_hours": [
+        "Mo-Su 10:00-23:00"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -13530,7 +14811,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12830575020",
+        "dist_m": 104.5,
+        "fee": null,
+        "hours": "Mo-Su 10:00-23:00",
+        "name": "43 Town"
+      },
+      "hours_source": "osm"
     },
     {
       "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
@@ -13538,7 +14827,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.0725445,
       "lon": 108.1946026,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 140,
         "p50": 200,
@@ -13581,7 +14872,15 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/9921305987",
+        "dist_m": 85.8,
+        "fee": null,
+        "hours": null,
+        "name": "Huy Hoang Hotel"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -13631,7 +14930,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13110723074",
+        "dist_m": 20.7,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
@@ -13639,7 +14945,9 @@
       "type": "Bãi biển",
       "lat": 16.0616944,
       "lon": 108.24693459999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -13683,7 +14991,15 @@
           "must-go"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/14068778545",
+        "dist_m": 96.6,
+        "fee": null,
+        "hours": null,
+        "name": "HIGHLANDS COFFEE"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJS4pOscgZQjERCwuFFZuSl7k",
@@ -13784,7 +15100,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11555496744",
+        "dist_m": 4.3,
+        "fee": null,
+        "hours": null,
+        "name": "Tượng Mẹ Nhu"
+      }
     },
     {
       "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
@@ -13792,7 +15115,9 @@
       "type": "Câu lạc bộ bãi biển",
       "lat": 16.0726859,
       "lon": 108.19363089999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -13835,7 +15160,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/9921305987",
+        "dist_m": 67.3,
+        "fee": null,
+        "hours": null,
+        "name": "Huy Hoang Hotel"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
@@ -13843,7 +15176,9 @@
       "type": "Bãi biển công cộng",
       "lat": 16.0730213,
       "lon": 108.19042669999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -13886,7 +15221,15 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13110723074",
+        "dist_m": 148.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
@@ -13939,7 +15282,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4674226290",
+        "dist_m": 79.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
@@ -14001,6 +15351,13 @@
       ],
       "web_evidence": {
         "hours_web": "08:00-17:00"
+      },
+      "osm_evidence": {
+        "osm": "node/4294056396",
+        "dist_m": 11.3,
+        "fee": null,
+        "hours": null,
+        "name": "Thiếu nữ"
       }
     },
     {
@@ -14064,6 +15421,13 @@
       ],
       "web_evidence": {
         "hours_web": "07:30-10:30, 13:30-16:30 (nghỉ T2, nguồn cũ cần re-check)"
+      },
+      "osm_evidence": {
+        "osm": "node/13588806796",
+        "dist_m": 29.9,
+        "fee": null,
+        "hours": null,
+        "name": null
       }
     },
     {
@@ -14118,7 +15482,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Sai type (sân bay gắn Bảo tàng) — unknown, khả năng loại"
+      "ticket_note": "Sai type (sân bay gắn Bảo tàng) — unknown, khả năng loại",
+      "osm_evidence": {
+        "osm": "node/5382678421",
+        "dist_m": 49.7,
+        "fee": null,
+        "hours": null,
+        "name": "Nam House"
+      }
     },
     {
       "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
@@ -14183,6 +15554,13 @@
       ],
       "web_evidence": {
         "hours_web": "08:00-17:00"
+      },
+      "osm_evidence": {
+        "osm": "node/9653941217",
+        "dist_m": 15.4,
+        "fee": null,
+        "hours": null,
+        "name": null
       }
     },
     {
@@ -14235,7 +15613,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Không xác định được địa điểm ở ĐN — unknown, cần làm rõ tên"
+      "ticket_note": "Không xác định được địa điểm ở ĐN — unknown, cần làm rõ tên",
+      "osm_evidence": {
+        "osm": "node/11934161570",
+        "dist_m": 32.0,
+        "fee": null,
+        "hours": null,
+        "name": "Dimsum ba thim - dumplings"
+      }
     },
     {
       "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
@@ -14297,6 +15682,13 @@
       ],
       "web_evidence": {
         "hours_web": "09:00-18:00"
+      },
+      "osm_evidence": {
+        "osm": "node/5817580453",
+        "dist_m": 6.3,
+        "fee": null,
+        "hours": null,
+        "name": "Art in Paradise Da Nang 3D Museum"
       }
     },
     {
@@ -14352,7 +15744,14 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "Trong chùa Quán Thế Âm, không vé niêm yết, miễn phí/tùy hỷ"
+      "ticket_note": "Trong chùa Quán Thế Âm, không vé niêm yết, miễn phí/tùy hỷ",
+      "osm_evidence": {
+        "osm": "node/8474743417",
+        "dist_m": 60.1,
+        "fee": null,
+        "hours": "Mo-Su 09:00-17:00",
+        "name": "Bảo tàng Phật giáo"
+      }
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -14406,7 +15805,14 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "BT tư nhân mới (cuối T4), chưa có giá niêm yết — unknown"
+      "ticket_note": "BT tư nhân mới (cuối T4), chưa có giá niêm yết — unknown",
+      "osm_evidence": {
+        "osm": "node/12622064034",
+        "dist_m": 18.9,
+        "fee": null,
+        "hours": null,
+        "name": "Marble Mountains Museum"
+      }
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -14460,7 +15866,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Di tích dâng hương/tự do, không bán vé; đi theo đoàn, liên hệ quản lý"
+      "ticket_note": "Di tích dâng hương/tự do, không bán vé; đi theo đoàn, liên hệ quản lý",
+      "osm_evidence": {
+        "osm": "node/4706198391",
+        "dist_m": 119.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -14511,7 +15924,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13525490015",
+        "dist_m": 18.0,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
@@ -14562,7 +15982,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13525483898",
+        "dist_m": 15.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
@@ -14616,7 +16043,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14075068395",
+        "dist_m": 20.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
@@ -14668,7 +16102,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Bia ngoài trời, tham quan tự do"
+      "ticket_note": "Bia ngoài trời, tham quan tự do",
+      "osm_evidence": {
+        "osm": "node/8616526724",
+        "dist_m": 23.0,
+        "fee": null,
+        "hours": null,
+        "name": "Chùa Hương Sơn"
+      }
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -14928,7 +16369,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Nhà thờ tộc, tham quan tự do (chưa verify vé, mặc định free)"
+      "ticket_note": "Nhà thờ tộc, tham quan tự do (chưa verify vé, mặc định free)",
+      "osm_evidence": {
+        "osm": "node/9921321442",
+        "dist_m": 94.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
@@ -14982,7 +16430,14 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "ticket_note": "Nhà lưu niệm, không bán vé; mở theo liên hệ/đoàn"
+      "ticket_note": "Nhà lưu niệm, không bán vé; mở theo liên hệ/đoàn",
+      "osm_evidence": {
+        "osm": "node/4900701521",
+        "dist_m": 124.3,
+        "fee": null,
+        "hours": null,
+        "name": "Quán Chay XUÂN"
+      }
     },
     {
       "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
@@ -14990,7 +16445,9 @@
       "type": "Bãi biển",
       "lat": 16.0159387,
       "lon": 108.262836,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -15033,7 +16490,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJX_osydwQQjERB-Y6MvLfJmQ",
@@ -15041,7 +16499,9 @@
       "type": "Bãi biển",
       "lat": 15.995533499999999,
       "lon": 108.2738648,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -15084,7 +16544,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
@@ -15143,7 +16604,9 @@
       "type": "Sân bóng chuyền bãi biển",
       "lat": 15.989010899999998,
       "lon": 108.27700879999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -15186,7 +16649,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJF7gOWQAXQjER90uCTZIoJII",
@@ -15239,7 +16703,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12830575020",
+        "dist_m": 71.1,
+        "fee": null,
+        "hours": "Mo-Su 10:00-23:00",
+        "name": "43 Town"
+      }
     },
     {
       "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
@@ -15247,7 +16718,9 @@
       "type": "Bãi biển",
       "lat": 16.0398823,
       "lon": 108.2531363,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 101,
         "p50": 144,
@@ -15290,7 +16763,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
@@ -15492,7 +16966,14 @@
           "full-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7027674985",
+        "dist_m": 81.7,
+        "fee": null,
+        "hours": null,
+        "name": "Muoi Bien"
+      }
     },
     {
       "poi_id": "ChIJAT1GIScXQjERAi6vhyCj61s",
@@ -15500,7 +16981,9 @@
       "type": "Bể bơi công cộng",
       "lat": 16.016553899999998,
       "lon": 108.2636788,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 84,
         "p50": 120,
@@ -15543,7 +17026,8 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
@@ -15593,7 +17077,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4358902889",
+        "dist_m": 62.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
@@ -15647,7 +17138,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406580",
+        "dist_m": 67.8,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Huy"
+      }
     },
     {
       "poi_id": "ChIJz4tuMfgXQjER9EJAjXQhpJ0",
@@ -15750,7 +17248,14 @@
           "must-go"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/6343879185",
+        "dist_m": 70.6,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJT576gZMXQjERPFUsxBoJmUM",
@@ -15847,7 +17352,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/7301996085",
+        "dist_m": 31.4,
+        "fee": null,
+        "hours": null,
+        "name": "Chợ đêm Helio"
+      }
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -15897,7 +17409,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/9921321628",
+        "dist_m": 115.8,
+        "fee": null,
+        "hours": null,
+        "name": "The Eden"
+      }
     },
     {
       "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
@@ -15947,7 +17466,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6146805188",
+        "dist_m": 71.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJm97BURAZQjERA57TrjPe_Ks",
@@ -15998,7 +17524,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7082259409",
+        "dist_m": 18.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
@@ -16050,7 +17583,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/11160818006",
+        "dist_m": 33.9,
+        "fee": null,
+        "hours": null,
+        "name": "Bà Nam Sea Food"
+      }
     },
     {
       "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
@@ -16150,7 +17690,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13525536984",
+        "dist_m": 143.3,
+        "fee": null,
+        "hours": null,
+        "name": "Com Tam"
+      }
     },
     {
       "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
@@ -16201,7 +17748,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5658315323",
+        "dist_m": 120.7,
+        "fee": null,
+        "hours": null,
+        "name": "loving hut - vegan restaurant"
+      }
     },
     {
       "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
@@ -16301,7 +17855,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13294206501",
+        "dist_m": 117.2,
+        "fee": null,
+        "hours": null,
+        "name": "ACE Coworking Space"
+      }
     },
     {
       "poi_id": "ChIJ-WnfCAARQjER5q7awU-LWT8",
@@ -16399,7 +17960,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1+curated"
+      "smart_tag_source": "rule_v1+curated",
+      "osm_evidence": {
+        "osm": "node/14255055501",
+        "dist_m": 25.6,
+        "fee": null,
+        "hours": null,
+        "name": "Havelli"
+      }
     },
     {
       "poi_id": "ChIJw6DOwZ8QQjERjDMobkQxbF0",
@@ -16547,7 +18115,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406727",
+        "dist_m": 65.6,
+        "fee": null,
+        "hours": null,
+        "name": "NgocLan Coffee"
+      }
     },
     {
       "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
@@ -16792,7 +18367,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406610",
+        "dist_m": 77.9,
+        "fee": null,
+        "hours": null,
+        "name": "Ca Phe 54"
+      }
     },
     {
       "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
@@ -16841,7 +18423,14 @@
           "half-day"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14186980402",
+        "dist_m": 42.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
@@ -17179,7 +18768,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13523283436",
+        "dist_m": 71.5,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJI4UNJaMXQjERUVoSyckPe7o",
@@ -17230,7 +18826,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4429017790",
+        "dist_m": 46.0,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJ8VlQXCcZQjERjXyVGYI9ivo",
@@ -17281,7 +18884,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406903",
+        "dist_m": 95.6,
+        "fee": null,
+        "hours": null,
+        "name": "CaPhe Win"
+      }
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -17334,7 +18944,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406585",
+        "dist_m": 73.6,
+        "fee": null,
+        "hours": null,
+        "name": "LyLy Coffee"
+      }
     },
     {
       "poi_id": "ChIJHUH52YwZQjERC9lBUIqQec4",
@@ -17387,7 +19004,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4301483689",
+        "dist_m": 87.0,
+        "fee": null,
+        "hours": "Mo-Su 05:00-18:00",
+        "name": "Sơn"
+      }
     },
     {
       "poi_id": "ChIJy_aOzygZQjERvnOL5s06Zfg",
@@ -17440,7 +19064,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/4301483689",
+        "dist_m": 39.9,
+        "fee": null,
+        "hours": "Mo-Su 05:00-18:00",
+        "name": "Sơn"
+      }
     },
     {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
@@ -17493,7 +19124,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406401",
+        "dist_m": 101.1,
+        "fee": null,
+        "hours": null,
+        "name": "OnenineCoffee"
+      }
     },
     {
       "poi_id": "ChIJxyTuNSoZQjERDDwrFT-7IMQ",
@@ -17546,7 +19184,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6520986631",
+        "dist_m": 89.6,
+        "fee": null,
+        "hours": null,
+        "name": "Highlands Coffee"
+      }
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -17598,7 +19243,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406549",
+        "dist_m": 8.2,
+        "fee": null,
+        "hours": null,
+        "name": "PhoCoffee"
+      }
     },
     {
       "poi_id": "ChIJxzo3j9EZQjER785qACnbIW0",
@@ -17650,7 +19302,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12167609718",
+        "dist_m": 11.2,
+        "fee": null,
+        "hours": null,
+        "name": "Phuc Long"
+      }
     },
     {
       "poi_id": "ChIJZdLv8rkZQjERIhU2VsEsCl4",
@@ -17701,7 +19360,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12920427943",
+        "dist_m": 93.1,
+        "fee": null,
+        "hours": null,
+        "name": "Nhà Khách Quân Chủng Phòng Không- Không Quân"
+      }
     },
     {
       "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
@@ -17754,7 +19420,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5947469393",
+        "dist_m": 48.3,
+        "fee": null,
+        "hours": "Mo-Sa 06:30-20:30; Su 06:30-15:30",
+        "name": "Bao An Macrobiotic"
+      }
     },
     {
       "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
@@ -17805,7 +19478,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12701646101",
+        "dist_m": 10.9,
+        "fee": null,
+        "hours": null,
+        "name": "Son Tra view"
+      }
     },
     {
       "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
@@ -17856,7 +19536,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/11906556370",
+        "dist_m": 24.7,
+        "fee": null,
+        "hours": "Mo-Su 06:30-22:00",
+        "name": "Mỳ quảng Ông Cảnh"
+      }
     },
     {
       "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
@@ -18013,7 +19700,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406410",
+        "dist_m": 19.3,
+        "fee": null,
+        "hours": null,
+        "name": "CafeBao Dang"
+      }
     },
     {
       "poi_id": "ChIJr4cXZxUZQjER1gqN7YF0A70",
@@ -18116,7 +19810,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406672",
+        "dist_m": 80.9,
+        "fee": null,
+        "hours": null,
+        "name": "DuyenAnh Coffee"
+      }
     },
     {
       "poi_id": "ChIJwTU11dAZQjERsydZriN8k5M",
@@ -18167,7 +19868,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406386",
+        "dist_m": 44.2,
+        "fee": null,
+        "hours": null,
+        "name": "CafeKhanh Ly"
+      }
     },
     {
       "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
@@ -18218,7 +19926,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/13368831101",
+        "dist_m": 39.6,
+        "fee": null,
+        "hours": null,
+        "name": "Ikigai"
+      }
     },
     {
       "poi_id": "ChIJ5YNM8KoZQjERT-e5n84Og1E",
@@ -18269,7 +19984,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6570954851",
+        "dist_m": 126.8,
+        "fee": null,
+        "hours": null,
+        "name": "Molly's"
+      }
     },
     {
       "poi_id": "ChIJ81xSxbEZQjERJmzlA1ksEVo",
@@ -18327,6 +20049,13 @@
       ],
       "web_evidence": {
         "hours_web": "4 chuyến tối, 45-50p, quầy vé sau 17h"
+      },
+      "osm_evidence": {
+        "osm": "node/6172518285",
+        "dist_m": 64.4,
+        "fee": null,
+        "hours": null,
+        "name": "RuNam"
       }
     },
     {
@@ -18380,7 +20109,14 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "Tour thu phí theo hãng (~120-200k, chưa verify riêng Vinh Anh)"
+      "ticket_note": "Tour thu phí theo hãng (~120-200k, chưa verify riêng Vinh Anh)",
+      "osm_evidence": {
+        "osm": "node/6172518285",
+        "dist_m": 71.4,
+        "fee": null,
+        "hours": null,
+        "name": "RuNam"
+      }
     },
     {
       "poi_id": "ChIJbcCUeSYZQjERjHvN92qKB1U",
@@ -18427,7 +20163,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/729406829",
+        "dist_m": 96.2,
+        "fee": null,
+        "hours": null,
+        "name": "CafeBao Bao"
+      }
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -18542,7 +20285,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 16.077154999999998,
       "lon": 108.1758898,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -18585,7 +20330,15 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/9921282482",
+        "dist_m": 119.9,
+        "fee": null,
+        "hours": null,
+        "name": null
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
@@ -18637,7 +20390,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/12814942634",
+        "dist_m": 51.0,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
@@ -18688,7 +20448,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/1758586688",
+        "dist_m": 37.1,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJA7V4DgoRQjERbXjInwlmAuo",
@@ -18796,7 +20563,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/1758586699",
+        "dist_m": 6.8,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
@@ -18952,7 +20726,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/14075068395",
+        "dist_m": 22.4,
+        "fee": null,
+        "hours": null,
+        "name": null
+      }
     },
     {
       "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
@@ -18960,7 +20741,9 @@
       "type": "Nhà chòi trên bãi biển",
       "lat": 16.0027942,
       "lon": 108.2697745,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -19003,7 +20786,8 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
@@ -19011,7 +20795,9 @@
       "type": "Câu lạc bộ bãi biển",
       "lat": 16.047601099999998,
       "lon": 108.2502222,
-      "opening_hours": [],
+      "opening_hours": [
+        "00:00-23:59"
+      ],
       "visit_min": {
         "p25": 0,
         "p50": 0,
@@ -19054,7 +20840,15 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/7027674985",
+        "dist_m": 51.2,
+        "fee": null,
+        "hours": null,
+        "name": "Muoi Bien"
+      },
+      "hours_source": "rule_open_access"
     },
     {
       "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
@@ -19104,7 +20898,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/6152685685",
+        "dist_m": 85.8,
+        "fee": null,
+        "hours": "Mo-Su 06:00-23:00",
+        "name": "Bún Mắm Vân"
+      }
     },
     {
       "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
@@ -19154,7 +20955,14 @@
           "quick-stop-30"
         ]
       },
-      "smart_tag_source": "rule_v1"
+      "smart_tag_source": "rule_v1",
+      "osm_evidence": {
+        "osm": "node/5249863421",
+        "dist_m": 145.8,
+        "fee": null,
+        "hours": null,
+        "name": "Huệ Chi"
+      }
     }
   ],
   "enriched_at": "2026-10-10"
