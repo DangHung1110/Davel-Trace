@@ -36,3 +36,19 @@ Free plan: 250 searches/month. Hard cap trong code: **240** (buffer 10).
 `details_params()` trong script dùng `engine=google_maps` + place_id —
 đối chiếu https://serpapi.com/google-maps-api ở lần test-10, sửa 1 chỗ
 nếu sai (mock selftest không phụ thuộc vào nó).
+
+## Crawl policy 2026-10-10 (đóng băng + bù nhóm thiếu)
+
+- **DỪNG hút cafe mới**: snapshot đã 109/367 cafe (30%) — mọi query mới
+  EXCLUDE cafe, chỉ lấy quán rating cao thuộc food-tour đặc sản
+  (mì Quảng, bánh xèo, hải sản, cơm gà).
+- **Crawl bù** (nhóm thiếu, ưu tiên theo thứ tự): tâm linh (chùa Linh Ứng,
+  Tam Thai, đình, nhà thờ), trải nghiệm (Bà Nà — snapshot chưa có,
+  du thuyền sông Hàn, lặn Sơn Trà), ở+đêm (khách sạn/resort ven biển,
+  bar, spa), bảo tàng còn thiếu (3D TrickEye, Non Nước stone memory).
+- Query TV+EN (14): địa điểm du lịch Đà Nẵng, Da Nang attractions,
+  cầu Đà Nẵng check-in, chùa Đà Nẵng, bảo tàng Đà Nẵng, Bà Nà Hills,
+  tour du thuyền sông Hàn, lặn ngắm san hô Sơn Trà, khách sạn view biển
+  Đà Nẵng, spa Đà Nẵng, chợ đêm Đà Nẵng, đặc sản Đà Nẵng (+ EN mirror).
+- Quota còn lại ~190/240: chỉ details cho place_id MỚI thuộc nhóm bù;
+  cafe mới = không details, không thêm.

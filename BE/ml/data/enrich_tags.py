@@ -1,0 +1,188 @@
+"""Smart-tag enrichment v1 (lane A, stdlib only). Taxonomy agreed 2026-10-09.
+
+Groups (stored in poi["smart_tags"], old tags[] untouched):
+  cost:  free | ticketed | expensive   (entry cost)
+  space: indoor | outdoor | both        (audit I/O wins, else canonical)
+  party: family | couple | solo | group (who it's for)
+  time:  sunrise | morning | sunset | night | rain-proof (when)
+  budget: quick-stop-30 | half-day | full-day [+ must-go] (time fund)
+
+Sources: canonical_category + audit io_label + p50 + CURATED name list
+(famous POIs only — everything else rule-derived, confidence low).
+Curated entries are explicit and reviewable; no per-POI web claims.
+
+Usage (repo root):
+  python BE/ml/data/enrich_tags.py --snapshot BE/data/snapshots/danang-v1 --check
+  python BE/ml/data/enrich_tags.py --snapshot BE/data/snapshots/danang-v1 --apply
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import os
+import sys
+import unicodedata
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from BE.ml.patm.estimate_duration import canonical_category  # noqa: E402
+
+
+def _norm(s: str) -> str:
+    s = unicodedata.normalize("NFD", str(s or "").lower())
+    return "".join(c for c in s if unicodedata.category(c) != "Mn").replace("đ", "d")
+
+
+SPACE_DEFAULT = {
+    "cafe": "indoor", "restaurant": "indoor", "museum": "indoor",
+    "lodging": "indoor", "transport": "indoor",
+    "beach": "outdoor", "nature": "outdoor", "park": "outdoor",
+    "attraction": "both", "market": "both", "landmark": "both",
+}
+
+COST_DEFAULT = {
+    "beach": "free", "nature": "free", "park": "free", "market": "free",
+    "cafe": "free", "restaurant": "free", "lodging": "free",
+    "landmark": "free", "transport": "free",
+    "museum": "ticketed", "attraction": "ticketed",
+}
+
+PARTY_DEFAULT = {
+    "beach": ["family", "couple", "group"],
+    "park": ["family", "couple", "group"],
+    "market": ["family", "group"],
+    "cafe": ["couple", "solo"],
+    "restaurant": ["family", "couple", "group"],
+    "museum": ["family", "couple", "solo", "group"],
+    "landmark": ["family", "couple", "solo", "group"],
+    "attraction": ["family", "couple", "solo", "group"],
+    "nature": ["couple", "group"],
+    "lodging": ["family", "couple"],
+    "transport": ["solo", "group"],
+}
+
+TIME_DEFAULT = {
+    "beach": ["sunrise", "morning", "sunset"],
+    "nature": ["sunrise", "morning"],
+    "park": ["morning", "sunset"],
+    "market": ["morning"],
+    "museum": ["morning", "rain-proof"],
+    "attraction": ["morning", "rain-proof"],
+    "landmark": ["morning", "sunset"],
+    "cafe": ["morning", "rain-proof"],
+    "restaurant": ["morning", "night", "rain-proof"],
+    "lodging": ["night", "rain-proof"],
+    "transport": ["morning"],
+}
+
+# norm-name substring -> overrides. Famous POIs only, keep tiny & reviewable.
+# 3rd element (optional): canonicals the entry applies to — blocks false
+# positives like a restaurant named after a market ("Bếp Chợ Hàn").
+CURATED = [
+    ("ba na", {"cost": "expensive", "budget": ["full-day"],
+               "must_go": True}, {"attraction"}),
+    ("bana", {"cost": "expensive", "budget": ["full-day"],
+              "must_go": True}, {"attraction"}),
+    ("cau rong", {"time": ["sunset", "night"], "must_go": True}, {"landmark"}),
+    ("dragon bridge", {"time": ["sunset", "night"]}, {"landmark"}),
+    ("my khe", {"must_go": True}, {"beach"}),
+    ("hoi an", {"must_go": True}, {"attraction", "landmark"}),
+    ("linh ung", {"time": ["morning"], "must_go": True}, {"landmark"}),
+    ("ngu hanh son", {"budget": ["half-day"], "must_go": True}, {"attraction"}),
+    ("marble mountain", {"must_go": True}, {"attraction", "landmark"}),
+    ("cho han", {"time": ["morning"], "must_go": True}, {"market"}),
+    ("han market", {"must_go": True}, {"market"}),
+    ("du thuyen", {"cost": "ticketed", "time": ["night"]}, None),
+    ("cruise", {"cost": "ticketed", "time": ["night"]}, None),
+    ("cho dem", {"time": ["night"], "space": "outdoor"}, {"market"}),
+    ("night market", {"time": ["night"]}, {"market"}),
+    ("son tra", {"budget": ["half-day"]}, {"nature", "landmark", "beach"}),
+    ("hai dang", {"time": ["sunset"]}, None),
+    ("lighthouse", {"time": ["sunset"]}, None),
+]
+
+
+def budget_of(p50: int) -> str:
+    if p50 <= 45:
+        return "quick-stop-30"
+    if p50 <= 150:
+        return "half-day"
+    return "full-day"
+
+
+def tag_poi(p: dict) -> tuple[dict, str]:
+    canon = canonical_category(p.get("type", ""))
+    io = p.get("io_label")
+    space = {"I": "indoor", "O": "outdoor", "B": "both"}.get(
+        io or "", SPACE_DEFAULT.get(canon, "both"))
+    tags = {
+        "cost": COST_DEFAULT.get(canon, "free"),
+        "space": space,
+        "party": list(PARTY_DEFAULT.get(canon, ["group"])),
+        "time": list(TIME_DEFAULT.get(canon, ["morning"])),
+        "budget": [budget_of((p.get("visit_min") or {}).get("p50", 60))],
+    }
+    if space == "indoor" and "rain-proof" not in tags["time"]:
+        tags["time"] = tags["time"] + ["rain-proof"]
+    src = "rule_v1"
+    nm = _norm(p.get("name", ""))
+    for key, ov, allowed in CURATED:
+        if key in nm and (allowed is None or canon in allowed):
+            for k, v in ov.items():
+                if k == "must_go":
+                    if v and "must-go" not in tags["budget"]:
+                        tags["budget"] = tags["budget"] + ["must-go"]
+                else:
+                    tags[k] = list(v) if isinstance(v, list) else v
+            src = "rule_v1+curated"
+    return tags, src
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--snapshot", required=True)
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--apply", action="store_true")
+    args = ap.parse_args()
+    path = os.path.join(args.snapshot, "pois.json")
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    if args.check:
+        from collections import Counter
+        c = Counter()
+        for p in data["pois"]:
+            t, _ = tag_poi(p)
+            c["cost:" + t["cost"]] += 1
+            c["space:" + t["space"]] += 1
+            c["budget:" + t["budget"][0]] += 1
+            for x in t["party"]:
+                c["party:" + x] += 1
+            for x in t["time"]:
+                c["time:" + x] += 1
+        print(f"pois={len(data['pois'])}")
+        for k in sorted(c):
+            print(f"  {k:22s} {c[k]}")
+        must = [p["name"] for p in data["pois"]
+                if "must-go" in tag_poi(p)[0]["budget"]]
+        print(f"must-go={len(must)}:", "; ".join(must[:20]))
+        return 0
+    if args.apply:
+        for p in data["pois"]:
+            t, src = tag_poi(p)
+            p["smart_tags"] = t
+            p["smart_tag_source"] = src
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print(f"tagged {len(data['pois'])} pois -> {path}")
+        return 0
+    ap.print_help()
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
