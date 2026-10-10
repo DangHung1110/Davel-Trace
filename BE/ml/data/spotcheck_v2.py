@@ -66,7 +66,8 @@ def main() -> int:
     for p in pois:
         by_name[_norm(p["name"])].append(p["poi_id"])
         name_of[p["poi_id"]] = p["name"]
-        info_of[p["poi_id"]] = (f"{p['name']} [{p['poi_id'][:8]}] | "
+        src = "mới-OSM" if p["poi_id"].startswith("osm:") else "cũ-crawl"
+        info_of[p["poi_id"]] = (f"{p['name']} [{p['poi_id'][:8]}] ({src}) | "
                                 f"{p.get('type')} ★{p.get('rating')} "
                                 f"{','.join(p.get('opening_hours') or ['no-hours'])}")
     for n, ids in by_name.items():
@@ -74,13 +75,24 @@ def main() -> int:
             flags[f"D1-dup-name:{name_of[ids[0]]}"] = [info_of[i] for i in ids]
     for i, a in enumerate(pois):
         for b in pois[i + 1:]:
-            if hav(a["lat"], a["lon"], b["lat"], b["lon"]) < 100:
+            d = hav(a["lat"], a["lon"], b["lat"], b["lon"])
+            if d < 100:
                 wa, wb = set(_norm(a["name"]).split()), set(_norm(b["name"]).split())
                 if wa & wb and len(wa & wb) >= 2:
+                    def _rich(p):
+                        return (1 if p.get("rating") else 0) + (1 if p.get("opening_hours") else 0) \
+                            + (1 if p.get("verified") else 0) + (1 if p.get("ticket_vnd") else 0)
+
                     def _info(p):
-                        return (f"{p['name']} [{p['poi_id'][:8]}] | {p.get('type')} "
+                        src = "mới-OSM" if p["poi_id"].startswith("osm:") else "cũ-crawl"
+                        return (f"{p['name']} [{p['poi_id'][:8]}] ({src}) | {p.get('type')} "
                                 f"★{p.get('rating')} {','.join(p.get('opening_hours') or ['no-hours'])}")
-                    flags[f"D1-near-dup:{a['name']} / {b['name']}"] = [_info(a), _info(b)]
+
+                    ra, rb = _rich(a), _rich(b)
+                    hint = f"Gợi ý giữ: {a['name']}" if ra > rb else (
+                        f"Gợi ý giữ: {b['name']}" if rb > ra else "Dữ liệu ngang nhau — xem tên/loại")
+                    flags[f"D1-near-dup:{a['name']} / {b['name']} ({d:.0f}m). {hint}."] = [
+                        _info(a), _info(b)]
 
     med: dict[str, float] = {}
     groups: dict[str, list] = defaultdict(list)
