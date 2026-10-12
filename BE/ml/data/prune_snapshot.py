@@ -37,6 +37,7 @@ REMOVALS = {
     # services / offices / civic (not attractions)
     "dia diem to chuc le cuoi": "venue cưới (tiệc cưới dạng nhà hàng thì giữ)",
     "trung tam thong tin du lich": "quầy info, không phải điểm tham quan",
+    "trung tam xuc tien du lich": "cơ quan xúc tiến, không tham quan",
     "so du lich thanh pho": "cơ quan nhà nước",
     "hiep hoi/to chuc": "tổ chức, không tham quan",
     "dai ly du lich": "phòng vé/agency, không phải điểm đến",
@@ -84,6 +85,8 @@ TYPE_FIX = {
     "Trung Tâm Giải Trí Helio": "attraction",
     "Sân chơi trong nhà": "attraction",
     "Khách sạn": "lodging",
+    "Khách Sạn Smile": "lodging",
+    "Nhà Hàng Tiệc Cưới Đại Hỷ": "restaurant",
     "Khách sạn nghỉ dưỡng": "lodging",
     "Lưu trú nhà dân": "lodging",
 }

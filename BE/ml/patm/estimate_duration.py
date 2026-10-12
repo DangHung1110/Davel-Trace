@@ -75,6 +75,7 @@ CATEGORY_ALIASES: dict[str, str] = {
     "resort": "lodging",
     "ban dao": "nature",
     "thac": "nature",
+    "suoi": "nature",
     "hang dong": "nature",
     "nui": "nature",
     "bai bien": "beach",

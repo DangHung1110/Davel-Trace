@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 774,
+  "count": 773,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -5765,7 +5765,7 @@
         "hours": null,
         "name": "Dai Long hotel"
       },
-      "cat": "Địa điểm tổ chức lễ cưới"
+      "cat": "restaurant"
     },
     {
       "poi_id": "ChIJH_EMuNcZQjERI1YtG7IGGDo",
@@ -12528,63 +12528,6 @@
         "name": "Phú Hồng"
       },
       "cat": "lodging"
-    },
-    {
-      "poi_id": "ChIJq3jYbEgYQjERJQhj5oBrT04",
-      "name": "Trung Tâm Xúc Tiến Du Lịch Đà Nẵng",
-      "type": "Trung tâm thông tin du lịch",
-      "lat": 16.0686843,
-      "lon": 108.2244849,
-      "opening_hours": [
-        "07:30-11:30, 13:30-17:30"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.2,
-      "tags": [
-        "Trung tâm thông tin du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/5360449021",
-        "dist_m": 3.0,
-        "fee": null,
-        "hours": null,
-        "name": null
-      },
-      "cat": "Trung tâm thông tin du lịch"
     },
     {
       "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
@@ -25011,19 +24954,21 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "intensity": 2,
+      "intensity": 3,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "default_false",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "outdoor",
         "party": [
+          "couple",
           "group"
         ],
         "time": [
+          "sunrise",
           "morning"
         ],
         "budget": [
@@ -25031,7 +24976,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Suối"
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/13913400201",
@@ -25056,19 +25001,21 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "intensity": 2,
+      "intensity": 3,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "default_false",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "outdoor",
         "party": [
+          "couple",
           "group"
         ],
         "time": [
+          "sunrise",
           "morning"
         ],
         "budget": [
@@ -25076,7 +25023,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Suối"
+      "cat": "nature"
     },
     {
       "poi_id": "osm:node/14045110791",
@@ -33221,7 +33168,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "unknown"
+      "cat": "lodging"
     },
     {
       "poi_id": "ChIJ9--6uKYZQjER5hS7ybSadkc",
