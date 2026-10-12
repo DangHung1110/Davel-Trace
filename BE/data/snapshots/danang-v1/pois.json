@@ -12468,7 +12468,7 @@
         "name": "Luk Lak"
       },
       "hours_source": "osm-converted",
-      "cat": "landmark"
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -19566,7 +19566,7 @@
         "hours": null,
         "name": "RuNam"
       },
-      "cat": "landmark"
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -42751,7 +42751,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Đại lý du lịch bằng thuyền",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -42803,7 +42803,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Đại lý du lịch bằng thuyền",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -42911,7 +42911,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Nhà điều hành du lịch",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -42963,7 +42963,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Đại lý du lịch bằng thuyền",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43015,7 +43015,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Đại lý du lịch bằng thuyền",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43119,7 +43119,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43171,7 +43171,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43223,7 +43223,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43277,7 +43277,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43330,7 +43330,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43382,7 +43382,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43434,7 +43434,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43487,7 +43487,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43542,7 +43542,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43594,7 +43594,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43646,7 +43646,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43701,7 +43701,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43755,7 +43755,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
@@ -43805,7 +43805,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Lớp học nấu ăn",
+      "cat": "attraction",
       "excursion": true
     },
     {
