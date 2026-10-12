@@ -74,6 +74,7 @@ REMOVE_IDS = {
     "ChIJ3c1W2AAfQjERnRKZkrt0AjA",  # chợ Hòa Liên (unknown, dup of rated one)
 }
 TYPE_FIX = {
+    "Du Thuyền Sông Hàn Mỹ Xuân 02": "attraction",
     "Quán Hải sản Tân Trà Beach": "restaurant",
     "Bãi Biển Thiên Đường": "beach",
     "Bãi biển Sơn Trà": "beach",

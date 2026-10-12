@@ -19505,7 +19505,7 @@
         "hours": null,
         "name": "RuNam"
       },
-      "cat": "Đại lý du lịch bằng thuyền"
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
@@ -27081,9 +27081,9 @@
       "tags": [
         "Ridge"
       ],
-      "intensity": 2,
+      "intensity": 3,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -27091,16 +27091,18 @@
       "verified": false,
       "crawl_query": "Bà Nà Hills",
       "intensity_source": "canonical_rule",
-      "ws_source": "default_false",
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "outdoor",
         "party": [
+          "couple",
           "group"
         ],
         "time": [
+          "sunrise",
           "morning"
         ],
         "budget": [
@@ -27108,7 +27110,7 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Ridge"
+      "cat": "nature"
     },
     {
       "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
