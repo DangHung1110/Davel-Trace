@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 773,
+  "count": 770,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -13621,64 +13621,6 @@
       "cat": "attraction"
     },
     {
-      "poi_id": "ChIJ28TlBIYXQjEREqSmOo2kQtU",
-      "name": "Ban Quản lí Bán đảo Sơn Trà và các Bãi biển Du lịch Đà Nẵng",
-      "type": "Sở du lịch thành phố",
-      "lat": 16.0729286,
-      "lon": 108.2431726,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 3.1,
-      "tags": [
-        "Sở du lịch thành phố"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/13786813301",
-        "dist_m": 51.4,
-        "fee": null,
-        "hours": null,
-        "name": "Hotel Huong"
-      },
-      "hours_source": "rule_open_access",
-      "cat": "Sở du lịch thành phố"
-    },
-    {
       "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
       "name": "Công viên Kỳ Quan",
       "type": "Điểm thu hút khách du lịch",
@@ -13867,7 +13809,7 @@
         "hours_web": "quy ước: khu phố du lịch mở tự do"
       },
       "hours_source": "web",
-      "cat": "Hiệp hội/Tổ chức"
+      "cat": "attraction"
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -14796,63 +14738,6 @@
       "smart_tag_source": "rule_v1",
       "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan",
       "cat": "lodging"
-    },
-    {
-      "poi_id": "ChIJ6xruBrT3cTER3emdI1jkITQ",
-      "name": "Tiêm Chủng Long Châu Liên Chiểu",
-      "type": "Trung tâm chăm sóc sức khỏe",
-      "lat": 16.071268099999998,
-      "lon": 108.1490156,
-      "opening_hours": [
-        "07:30-18:30"
-      ],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Trung tâm chăm sóc sức khỏe"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/729406583",
-        "dist_m": 26.0,
-        "fee": null,
-        "hours": null,
-        "name": "CafeThuy Duong"
-      },
-      "cat": "Trung tâm chăm sóc sức khỏe"
     },
     {
       "poi_id": "ChIJW4o1LAAXQjERL6zRtyWivLk",
@@ -18315,52 +18200,6 @@
       "cat": "market",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1"
-    },
-    {
-      "poi_id": "ChIJ3c1W2AAfQjERnRKZkrt0AjA",
-      "name": "chợ Hòa Liên",
-      "type": "unknown",
-      "lat": 16.079586499999998,
-      "lon": 108.0982604,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "unknown"
     },
     {
       "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",

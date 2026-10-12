@@ -66,6 +66,13 @@ REMOVALS = {
 # Short/generic keys: exact-match only (avoid "Hồ Thanh Khê" eating
 # "Nhà thờ Tộc Hồ Thanh Khê", "Liên Chiểu" eating real POIs in that district)
 EXACT_KEYS = {"ho thanh khe", "lien chieu"}
+
+# poi_id removals (dedup resolutions: same-name dup with no data loses)
+REMOVE_IDS = {
+    "ChIJ28TlBIYXQjEREqSmOo2kQtU",  # Ban Quản lí Bán đảo Sơn Trà: admin office
+    "ChIJ6xruBrT3cTER3emdI1jkITQ",  # Tiêm Chủng Long Châu: vaccination clinic
+    "ChIJ3c1W2AAfQjERnRKZkrt0AjA",  # chợ Hòa Liên (unknown, dup of rated one)
+}
 TYPE_FIX = {
     "Quán Hải sản Tân Trà Beach": "restaurant",
     "Bãi Biển Thiên Đường": "beach",
@@ -84,6 +91,7 @@ TYPE_FIX = {
     "DD WONDERLAND": "attraction",
     "Trung Tâm Giải Trí Helio": "attraction",
     "Sân chơi trong nhà": "attraction",
+    "KHU PHỐ DU LỊCH AN THƯỢNG": "attraction",
     "Khách sạn": "lodging",
     "Khách Sạn Smile": "lodging",
     "Nhà Hàng Tiệc Cưới Đại Hỷ": "restaurant",
@@ -100,6 +108,9 @@ def _norm(s: str) -> str:
 def plan(pois: list[dict]):
     drop, fix = [], []
     for p in pois:
+        if p["poi_id"] in REMOVE_IDS:
+            drop.append((p["poi_id"], p["name"], "poi_id denylist (dedup)"))
+            continue
         n = _norm(p.get("name", ""))
         hit = next((k for k in REMOVALS
                     if (n == k if k in EXACT_KEYS else k in n)), None)
