@@ -41,7 +41,7 @@ def main() -> int:
     cards = []
     for p in pois:
         nm = _norm(p.get("name", ""))
-        access = SON_TRA_NOTE if any(k in nm for k in SON_TRA_KEYS) else ""
+        access = p.get("access_note", "")
         vm = p.get("visit_min") or {}
         st = p.get("smart_tags") or {}
         ticket = (f"{p['ticket_vnd']:,}đ".replace(",", ".") if p.get("ticket_vnd")
