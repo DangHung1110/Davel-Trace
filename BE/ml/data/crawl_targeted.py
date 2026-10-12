@@ -48,6 +48,18 @@ GRID_CATS = ["khách sạn", "spa", "quán bar", "chùa", "khu du lịch"]
 GRID_DISTRICTS = ["Hải Châu", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu",
                   "Thanh Khê"]
 
+# Round-4: famous-but-missing (day-trip excursions allowed outside bbox,
+# flagged excursion=true so the optimizer budgets travel time).
+EXCURSION_QUERIES = [
+    "Sun World Asia Park Đà Nẵng",
+    "Mikazuki Water Park 365",
+    "VinWonders Nam Hội An",
+    "Cù Lao Chàm",
+    "Hải Vân Quan",
+    "thuyền thúng Hội An",
+    "cooking class Đà Nẵng",
+]
+
 
 def _norm(s: str) -> str:
     s = unicodedata.normalize("NFD", str(s or "").lower())
@@ -101,6 +113,8 @@ def main() -> int:
     junk_names: list[str] = []
     queries = list(QUERIES) + [f"{c} {d}" for c in GRID_CATS
                                for d in GRID_DISTRICTS]
+    excursion = set(EXCURSION_QUERIES)
+    queries += EXCURSION_QUERIES
     for q in queries:
         params = {"engine": "google_maps", "type": "search",
                   "q": q, "hl": "vi", "gl": "vn"}
@@ -118,9 +132,11 @@ def main() -> int:
             except (TypeError, ValueError):
                 continue
             s, w, n, e = DN_BBOX
+            is_excursion = q in excursion
             if not (s <= la <= n and w <= lo <= e):
-                stats["outside"] += 1
-                continue
+                if not is_excursion:
+                    stats["outside"] += 1
+                    continue
             if pid in by_id:
                 stats["dup_id"] += 1
                 continue
@@ -157,6 +173,9 @@ def main() -> int:
             poi["smart_tags"] = t
             poi["smart_tag_source"] = src
             poi["cat"] = canon
+            if is_excursion:
+                poi["excursion"] = True
+                poi["smart_tags"]["budget"] = ["full-day"]
             data["pois"].append(poi)
             by_id[pid] = poi
             stats["new"] += 1

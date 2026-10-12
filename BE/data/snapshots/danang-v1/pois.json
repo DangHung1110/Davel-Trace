@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 769,
+  "count": 791,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -42650,6 +42650,1163 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "park"
+    },
+    {
+      "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+      "name": "Elsa Spa massage Da Nang ( 엘사 스파 )",
+      "type": "Spa",
+      "lat": 16.0682072,
+      "lon": 108.2232724,
+      "opening_hours": [
+        "08:00-00:00"
+      ],
+      "visit_min": {
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Spa",
+        "Spa mát xa"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "couple",
+          "solo"
+        ],
+        "time": [
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "spa"
+    },
+    {
+      "poi_id": "ChIJrd3YeXENQjERWWbMPMdY2CE",
+      "name": "Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An",
+      "type": "Đại lý du lịch bằng thuyền",
+      "lat": 15.8741873,
+      "lon": 108.3760623,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Đại lý du lịch bằng thuyền"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Đại lý du lịch bằng thuyền",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJ00Fz0rANQjERLadxvkIRXBY",
+      "name": "Thuyền Thúng Tượng Thúy - Coconut Basket Boat Tour Hoi An",
+      "type": "Đại lý du lịch bằng thuyền",
+      "lat": 15.876463999999999,
+      "lon": 108.37354239999999,
+      "opening_hours": [
+        "07:00-17:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Đại lý du lịch bằng thuyền"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Đại lý du lịch bằng thuyền",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJ20P_fAANQjERgFeFcOB6MAs",
+      "name": "Điểm đón khách du lịch thuyền thúng cầu Hói Lăng",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 15.8749556,
+      "lon": 108.3726703,
+      "opening_hours": [
+        "07:00-17:00"
+      ],
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.5,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+      "name": "Rừng Dừa Bảy Mẫu",
+      "type": "Nhà điều hành du lịch",
+      "lat": 15.8782982,
+      "lon": 108.3724553,
+      "opening_hours": [
+        "07:30-18:30"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.2,
+      "tags": [
+        "Nhà điều hành du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Nhà điều hành du lịch",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+      "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+      "type": "Đại lý du lịch bằng thuyền",
+      "lat": 15.874080099999999,
+      "lon": 108.37453749999999,
+      "opening_hours": [
+        "08:00-18:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Đại lý du lịch bằng thuyền"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Đại lý du lịch bằng thuyền",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJT9jHPuANQjERQTnqjbIQIF8",
+      "name": "Thuyền thúng Dũng Thúy",
+      "type": "Đại lý du lịch bằng thuyền",
+      "lat": 15.882222599999999,
+      "lon": 108.36964189999999,
+      "opening_hours": [
+        "08:00-18:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Đại lý du lịch bằng thuyền"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Đại lý du lịch bằng thuyền",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJT1zm9U8NQjERQf5DsBriCgc",
+      "name": "Dịch Vụ Thuyền Thúng Bến Dừa",
+      "type": "Đại lý du lịch",
+      "lat": 15.8801072,
+      "lon": 108.37187809999999,
+      "opening_hours": [
+        "07:00-17:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Đại lý du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "thuyền thúng Hội An",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Đại lý du lịch",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo",
+      "name": "Family Kitchen Da Nang - Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.056936,
+      "lon": 108.23828909999999,
+      "opening_hours": [
+        "09:30-19:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
+      "name": "Danang Summer Cooking and Coffee Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.0559425,
+      "lon": 108.2368906,
+      "opening_hours": [
+        "08:30-20:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJs-NDcgAXQjERHA6tioqOfH4",
+      "name": "Apron Up Cooking Class in Danang",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.042784,
+      "lon": 108.2416465,
+      "opening_hours": [
+        "08:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJYyr_6ogXQjERoXAq8cGEzcI",
+      "name": "Rose Da Nang Coffee Workshop",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.0764987,
+      "lon": 108.2323759,
+      "opening_hours": [
+        "08:00-18:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn",
+        "Quán cà phê",
+        "Trung tâm văn hoá"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+      "name": "Jolie Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.059846,
+      "lon": 108.23531469999999,
+      "opening_hours": [
+        "07:30-19:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn",
+        "Trường dạy nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
+      "name": "Danang Cooking Class - Lá Sen ダナン料理教室",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.0655423,
+      "lon": 108.2304107,
+      "opening_hours": [
+        "08:00-20:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
+      "name": "Da Nang Family Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.039423199999998,
+      "lon": 108.2200943,
+      "opening_hours": [
+        "10:00-12:30, 17:00-19:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+      "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.0193914,
+      "lon": 108.24933879999999,
+      "opening_hours": [
+        "07:00-19:00",
+        "08:00-19:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJ26h5ZAANQjER2otGJosJliA",
+      "name": "Rường House - Cooking Class & Craft Workshop",
+      "type": "Lớp học nấu ăn",
+      "lat": 15.884460899999999,
+      "lon": 108.3673482,
+      "opening_hours": [
+        "07:00-20:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn",
+        "Phòng trưng bày nghệ thuật",
+        "Lớp học vẽ",
+        "Lớp làm đồ gỗ"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJyZOJHa8NQjERSvp9yMenV6Y",
+      "name": "Vinh Vo Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 15.8745064,
+      "lon": 108.3585852,
+      "opening_hours": [
+        "07:00-18:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJx0dBXWYNQjERQzQO18QYhas",
+      "name": "Mimi Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 15.880066099999999,
+      "lon": 108.36589409999999,
+      "opening_hours": [
+        "09:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJddXz2K8PQjER4enhapQvvo8",
+      "name": "Cooking With Jolie In Hoi An – Vietnamese Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 15.890496299999999,
+      "lon": 108.3222299,
+      "opening_hours": [
+        "06:00-19:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Lớp học nấu ăn",
+        "Trường dạy nấu ăn",
+        "Nhà điều hành du lịch",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJmU3hl9WrNTERBUbnSp3g5vs",
+      "name": "Thuan Tinh Island Cooking Tour",
+      "type": "Lớp học nấu ăn",
+      "lat": 15.8741703,
+      "lon": 108.36922519999999,
+      "opening_hours": [
+        "08:00-20:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Lớp học nấu ăn",
+        "Trường dạy nấu ăn",
+        "Đại lý du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "ChIJH1ujCM0XQjERcOl1lB9Ns6k",
+      "name": "Tuyet Pham Cooking Class",
+      "type": "Lớp học nấu ăn",
+      "lat": 16.040971,
+      "lon": 108.245305,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Lớp học nấu ăn"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "crawl_query": "cooking class Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Lớp học nấu ăn",
+      "excursion": true
     }
   ],
   "enriched_at": "2026-10-10",
