@@ -39,7 +39,7 @@ QUERIES = [
     "chợ đêm Đà Nẵng", "bảo tàng Đà Nẵng", "quán mì Quảng Đà Nẵng",
     "hải sản Đà Nẵng", "đặc sản Đà Nẵng",
 ]
-SPECIALTY = ("mi quang", "banh xeo", "hai san", "com ga", "cao lau",
+SPECIALTY = ("mi quang", "my quang", "banh xeo", "hai san", "com ga", "cao lau",
              "bun cha ca", "banh trang", "che ")
 
 

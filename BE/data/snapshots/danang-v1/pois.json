@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 567,
+  "count": 568,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -31780,6 +31780,61 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market"
+    },
+    {
+      "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+      "name": "Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường",
+      "type": "Quán ăn nhỏ",
+      "lat": 16.0161901,
+      "lon": 108.20484259999999,
+      "opening_hours": [
+        "06:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.7,
+      "tags": [
+        "Quán ăn nhỏ"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
     }
   ],
   "enriched_at": "2026-10-10",
