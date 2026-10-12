@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 791,
+  "count": 795,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -43806,6 +43806,221 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "Lớp học nấu ăn",
+      "excursion": true
+    },
+    {
+      "poi_id": "manual:hai-van-quan",
+      "name": "Hải Vân Quan",
+      "type": "Di tích lịch sử",
+      "lat": 16.1877471,
+      "lon": 108.13129,
+      "opening_hours": [],
+      "hours_source": "",
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Di tích lịch sử"
+      ],
+      "source": "manual+web",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "visit_min": {
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "cat": "landmark",
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": true,
+        "price_band": "cheap",
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "quick-stop-30"
+        ]
+      },
+      "smart_tag_source": "manual+web",
+      "ticket_vnd": 70000,
+      "ticket_note": "Vé 70k/người (đồng giá VN + ngoại); di tích 1826 trên đỉnh đèo",
+      "price_sources": [
+        "https://www.vietnambooking.com (vé 70k/người, VN + ngoại)"
+      ]
+    },
+    {
+      "poi_id": "manual:mikazuki-waterpark",
+      "name": "Mikazuki Water Park 365",
+      "type": "Công viên nước",
+      "lat": 16.0950048,
+      "lon": 108.1459926,
+      "opening_hours": [
+        "09:00-19:00"
+      ],
+      "hours_source": "web",
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Công viên nước"
+      ],
+      "source": "manual+web",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "visit_min": {
+        "p25": 84,
+        "p50": 120,
+        "p75": 168
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "cat": "attraction",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": true,
+        "price_band": "medium",
+        "space": "outdoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "manual+web",
+      "ticket_vnd": 350000,
+      "ticket_note": "NL 350k ngày thường/400k cuối tuần; TE 200k/225k",
+      "price_sources": [
+        "https://metittravel.com.vn/bang-gia-ve-mikazuki-2025"
+      ]
+    },
+    {
+      "poi_id": "manual:vinwonders-nam-hoi-an",
+      "name": "VinWonders Nam Hội An",
+      "type": "Công viên giải trí",
+      "lat": 15.7887796,
+      "lon": 108.4107881,
+      "opening_hours": [],
+      "hours_source": "",
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Công viên giải trí"
+      ],
+      "source": "manual+web",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "visit_min": {
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "cat": "attraction",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": true,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": true,
+        "price_band": "expensive",
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "manual+web",
+      "ticket_vnd": 650000,
+      "ticket_note": "NL 650k; TE 100-140cm ~480k (2026, check web trước khi đi)",
+      "price_sources": [
+        "https://vinwonders.com (bảng giá 2026)"
+      ],
+      "excursion": true
+    },
+    {
+      "poi_id": "manual:cu-lao-cham",
+      "name": "Cù Lao Chàm",
+      "type": "Đảo du lịch",
+      "lat": 15.9508587,
+      "lon": 108.5227203,
+      "opening_hours": [],
+      "hours_source": "",
+      "price_level": 2,
+      "fee": 0,
+      "rating": null,
+      "tags": [
+        "Đảo du lịch"
+      ],
+      "source": "manual+web",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "cat": "attraction",
+      "intensity": 2,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "manual+web",
+      "ticket_note": "Đi tour cano từ Cửa Đại/Hội An (giá theo tour, chưa verify số)",
       "excursion": true
     }
   ],
