@@ -45,6 +45,8 @@ CATEGORY_DEFAULTS: dict[str, int] = {
     "park": 120,
     "cafe": 45,
     "lodging": 60,
+    "spa": 90,
+    "bar": 90,
 }
 
 # Normalized-Vietnamese substring -> canonical. Specific first (dict order).
@@ -100,7 +102,16 @@ CATEGORY_ALIASES: dict[str, str] = {
     "cafe": "cafe",
     "nha hang": "restaurant",
     "quan bia": "restaurant",
+    "quan mi": "restaurant",
     "quan an": "restaurant",
+    "spa": "spa",
+    "massage": "spa",
+    "mat xa": "spa",
+    "bar": "bar",
+    "pub": "bar",
+    "ruou": "bar",
+    "cocktail": "bar",
+    "karaoke": "bar",
     "chua": "landmark",
     "nha tho": "landmark",
     "cau": "landmark",

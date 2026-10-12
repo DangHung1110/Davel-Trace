@@ -44,6 +44,7 @@ def _norm(s: str) -> str:
 SPACE_DEFAULT = {
     "cafe": "indoor", "restaurant": "indoor", "museum": "indoor",
     "lodging": "indoor", "transport": "indoor",
+    "spa": "indoor", "bar": "indoor",
     "beach": "outdoor", "nature": "outdoor", "park": "outdoor",
     "attraction": "both", "market": "both", "landmark": "both",
 }
@@ -57,6 +58,7 @@ TICKET_DEFAULT = {
     "beach": False, "nature": False, "park": False, "landmark": False,
     "market": False, "cafe": False, "restaurant": False,
     "lodging": False, "transport": False, "attraction": False,
+    "spa": False, "bar": False,
 }
 
 # SerpApi dumps beaches/temples/viewpoints into "Điểm thu hút..." (= free),
@@ -80,6 +82,8 @@ PARTY_DEFAULT = {
     "nature": ["couple", "group"],
     "lodging": ["family", "couple"],
     "transport": ["solo", "group"],
+    "spa": ["couple", "solo"],
+    "bar": ["couple", "group"],
 }
 
 TIME_DEFAULT = {
@@ -94,6 +98,8 @@ TIME_DEFAULT = {
     "restaurant": ["morning", "night", "rain-proof"],
     "lodging": ["night", "rain-proof"],
     "transport": ["morning"],
+    "spa": ["rain-proof"],
+    "bar": ["night"],
 }
 
 # norm-name substring -> overrides. Famous POIs only, keep tiny & reviewable.

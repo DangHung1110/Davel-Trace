@@ -46,6 +46,8 @@ INTENSITY_DEFAULT = {
     "cafe": 1,
     "transport": 1,
     "lodging": 1,
+    "spa": 1,
+    "bar": 1,
 }
 
 WS_DEFAULT = {
@@ -60,6 +62,8 @@ WS_DEFAULT = {
     "cafe": False,
     "transport": False,
     "lodging": False,
+    "spa": False,
+    "bar": False,
 }
 
 AUDIT_WS = {"I": False, "O": True, "B": True}

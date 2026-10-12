@@ -134,7 +134,8 @@ def main() -> int:
         # D7 unmapped type
         if canon == p.get("type") and canon not in (
                 "landmark", "transport", "market", "nature", "restaurant",
-                "museum", "beach", "attraction", "park", "cafe", "lodging"):
+                "museum", "beach", "attraction", "park", "cafe", "lodging",
+                "spa", "bar"):
             flags["D7-unmapped-type"].append(f"{pid}: {p.get('type')}")
         # D8 generic names
         if len(_norm(p["name"]).split()) <= 1:
