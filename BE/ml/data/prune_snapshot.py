@@ -41,6 +41,7 @@ REMOVALS = {
     "so du lich thanh pho": "cơ quan nhà nước",
     "hiep hoi/to chuc": "tổ chức, không tham quan",
     "dai ly du lich": "phòng vé/agency, không phải điểm đến",
+    "truong sa tourist": "văn phòng điều hành tour, không tham quan",
     "dai ly du lich bang thuyen": "phòng vé/agency (tour đã có POI riêng)",
     "trung tam cham soc suc khoe": "cơ sở y tế",
     "trung tam y te": "cơ sở y tế",

@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 770,
+  "count": 769,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -35426,7 +35426,7 @@
       "tags": [
         "Bác sĩ trị liệu xoa bóp"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
@@ -35436,24 +35436,25 @@
       "verified": false,
       "crawl_query": "spa Liên Chiểu",
       "intensity_source": "canonical_rule",
-      "ws_source": "default_false",
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "indoor",
         "party": [
-          "group"
+          "couple",
+          "solo"
         ],
         "time": [
-          "morning"
+          "rain-proof"
         ],
         "budget": [
           "half-day"
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Bác sĩ trị liệu xoa bóp"
+      "cat": "spa"
     },
     {
       "poi_id": "ChIJNXaMJAAZQjERJxDzvQEO38c",
@@ -35632,7 +35633,7 @@
       "tags": [
         "Thẩm mỹ viện"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
@@ -35642,24 +35643,25 @@
       "verified": false,
       "crawl_query": "spa Liên Chiểu",
       "intensity_source": "canonical_rule",
-      "ws_source": "default_false",
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "indoor",
         "party": [
-          "group"
+          "couple",
+          "solo"
         ],
         "time": [
-          "morning"
+          "rain-proof"
         ],
         "budget": [
           "half-day"
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Thẩm mỹ viện"
+      "cat": "spa"
     },
     {
       "poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10",
@@ -40476,7 +40478,7 @@
       "tags": [
         "Hộp đêm"
       ],
-      "intensity": 2,
+      "intensity": 1,
       "ambience": "",
       "weather_sensitive": false,
       "pros": [],
@@ -40486,24 +40488,26 @@
       "verified": false,
       "crawl_query": "quán bar Thanh Khê",
       "intensity_source": "canonical_rule",
-      "ws_source": "default_false",
+      "ws_source": "canonical_rule",
       "io_label": null,
       "smart_tags": {
-        "ticket": null,
+        "ticket": false,
         "price_band": null,
-        "space": "both",
+        "space": "indoor",
         "party": [
+          "couple",
           "group"
         ],
         "time": [
-          "morning"
+          "night",
+          "rain-proof"
         ],
         "budget": [
           "half-day"
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "Hộp đêm"
+      "cat": "bar"
     },
     {
       "poi_id": "ChIJ2exBne0ZQjERj07NR6zFg4c",
@@ -42491,55 +42495,6 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "park"
-    },
-    {
-      "poi_id": "ChIJV9m8d-QYQjERYULvNWMrfaw",
-      "name": "Truong Sa Tourist Vietnam DMC",
-      "type": "Nhà điều hành du lịch",
-      "lat": 16.0781618,
-      "lon": 108.16583729999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.9,
-      "tags": [
-        "Nhà điều hành du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-12",
-      "verified": false,
-      "crawl_query": "khu du lịch Thanh Khê",
-      "intensity_source": "canonical_rule",
-      "ws_source": "default_false",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "Nhà điều hành du lịch"
     },
     {
       "poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
