@@ -58,6 +58,12 @@ EXCURSION_QUERIES = [
     "Hải Vân Quan",
     "thuyền thúng Hội An",
     "cooking class Đà Nẵng",
+    # exact-name queries return 0 on SerpApi; broader variants:
+    "Asia Park Da Nang",
+    "công viên nước Mikazuki",
+    "VinWonders Hoi An",
+    "đảo Cù Lao Chàm tour",
+    "đèo Hải Vân",
 ]
 
 
