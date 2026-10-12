@@ -220,7 +220,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -250,7 +250,9 @@
         "hours": null,
         "name": "Nhà hàng NHÀ BÊP CHÓ HÀN"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
@@ -774,7 +776,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -804,7 +806,9 @@
         "hours": null,
         "name": "My Hanh Seafood"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJH72bVncZQjERoTgax0OjZKY",
@@ -842,7 +846,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -872,7 +876,9 @@
         "hours": null,
         "name": "Loco"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
@@ -970,7 +976,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -1000,7 +1006,9 @@
         "hours": null,
         "name": "Quán An Bún Chả Cá"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
@@ -1031,7 +1039,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -1061,7 +1069,9 @@
         "hours": "Mo-Su 10:30-22:00",
         "name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -1409,7 +1419,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -1439,7 +1449,9 @@
         "hours": "Th-Tu 11:00-12:00, 13:00-14:00",
         "name": "My Casa"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -2453,7 +2465,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -2483,7 +2495,9 @@
         "hours": null,
         "name": "Dreams Hotel"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -2699,7 +2713,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -2729,7 +2743,9 @@
         "hours": null,
         "name": "La Luna"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -2886,7 +2902,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -2916,7 +2932,9 @@
         "hours": null,
         "name": "Non Nuoc"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
@@ -3008,7 +3026,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -3038,7 +3056,9 @@
         "hours": "Mo-Su 10:00-23:00",
         "name": "43 Town"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -3193,7 +3213,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -3223,7 +3243,9 @@
         "hours": null,
         "name": "Korea BBQ"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJW_ilwg0XQjERQbqRXGggIFE",
@@ -3488,7 +3510,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -3511,7 +3533,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -3824,7 +3848,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -3854,7 +3878,9 @@
         "hours": null,
         "name": "Ca Phe Bibon"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJxQQMGMoYQjER-2IGXb-pTtQ",
@@ -4307,7 +4333,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -4330,7 +4356,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
@@ -4754,7 +4782,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -4784,7 +4812,9 @@
         "hours": "Mo-Su 13:00+",
         "name": "Bún Bò Bà Diệu"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
@@ -4878,7 +4908,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -4908,7 +4938,9 @@
         "hours": null,
         "name": "PhuCoffee"
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -6063,7 +6095,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -6091,7 +6123,9 @@
         "hours": null,
         "name": "Trung Nguyên Legend"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -6595,7 +6629,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -6623,7 +6657,9 @@
         "hours": null,
         "name": "I Love Bánh Mì"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -6655,7 +6691,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -6683,7 +6719,9 @@
         "hours": null,
         "name": "No Nee"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -6714,7 +6752,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -6742,7 +6780,9 @@
         "hours": null,
         "name": "Piggy"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -6835,7 +6875,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -6863,7 +6903,9 @@
         "hours": null,
         "name": "Quán Nga 2"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -7132,7 +7174,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -7153,7 +7195,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
@@ -7477,7 +7521,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -7498,7 +7542,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
@@ -8023,7 +8069,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -8044,7 +8090,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
@@ -8332,7 +8380,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -8360,7 +8408,9 @@
         "hours": "Mo-Su,PH 07:00-23:00",
         "name": "Bread & Butter"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -8450,7 +8500,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -8478,7 +8528,9 @@
         "hours": null,
         "name": null
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -8895,7 +8947,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -8929,7 +8981,9 @@
         "hours_osm_raw": [
           "Tu-Su 18:00-22:00"
         ]
-      }
+      },
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -10135,7 +10189,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -10156,7 +10210,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
@@ -10246,7 +10302,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -10274,7 +10330,9 @@
         "hours": null,
         "name": "Cafe Hen"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJhYuNIQAZQjERoyprw_nC3Ts",
@@ -10364,7 +10422,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -10392,7 +10450,9 @@
         "hours": null,
         "name": "HongCoffee"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -10775,7 +10835,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -10803,7 +10863,9 @@
         "hours": "Mo-Su 10:00-22:00",
         "name": "The Pizza Company"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJzVnvNgAZQjERef60MBfcz8E",
@@ -11340,7 +11402,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -11361,7 +11423,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJbbs1ZTQYQjERi3OdfmnRk2g",
@@ -11393,7 +11457,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "B",
       "ws_source": "audit",
@@ -11427,7 +11491,9 @@
         "hours_web": "hoiandanang.com listing"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -12613,7 +12679,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "O",
       "ws_source": "audit",
@@ -12649,7 +12715,9 @@
         "hours_osm_raw": [
           "24/7"
         ]
-      }
+      },
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -12744,7 +12812,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "O",
       "ws_source": "audit",
@@ -12771,7 +12839,9 @@
         "hours_web": "open 24h, free entry (mecrawl.com)"
       },
       "hours_source": "web",
-      "cat": "landmark"
+      "cat": "landmark",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -13507,7 +13577,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "O",
       "ws_source": "audit",
@@ -13538,7 +13608,9 @@
         "name": null
       },
       "hours_source": "rule_open_access",
-      "cat": "beach"
+      "cat": "beach",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
@@ -13883,7 +13955,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "B",
       "ws_source": "audit",
@@ -13917,7 +13989,9 @@
         "hours_web": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -15058,7 +15132,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "O",
       "ws_source": "audit",
@@ -15089,7 +15163,9 @@
         "name": "Huy Hoang Hotel"
       },
       "hours_source": "rule_open_access",
-      "cat": "beach"
+      "cat": "beach",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -15909,7 +15985,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "B",
       "ws_source": "audit",
@@ -15940,7 +16016,9 @@
         "hours": null,
         "name": null
       },
-      "cat": "landmark"
+      "cat": "landmark",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -16227,7 +16305,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "B",
       "ws_source": "audit",
@@ -16251,7 +16329,9 @@
       },
       "smart_tag_source": "rule_v1",
       "ticket_note": "Chưa định danh rõ (khu tâm linh Đà Sơn, Liên Chiểu?) — unknown",
-      "cat": "landmark"
+      "cat": "landmark",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
@@ -16280,7 +16360,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "B",
       "ws_source": "audit",
@@ -16304,7 +16384,9 @@
       },
       "smart_tag_source": "rule_v1",
       "ticket_note": "Di tích cách mạng, không bán vé, không giờ niêm yết",
-      "cat": "landmark"
+      "cat": "landmark",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
@@ -16565,7 +16647,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -16588,7 +16670,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
@@ -17263,7 +17347,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "O",
       "ws_source": "audit",
@@ -17290,7 +17374,9 @@
         "hours": null,
         "name": "Chợ đêm Helio"
       },
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -17321,7 +17407,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": null,
       "ws_source": "canonical_rule",
@@ -17348,7 +17434,9 @@
         "hours": null,
         "name": "The Eden"
       },
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
@@ -17606,7 +17694,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -17634,7 +17722,9 @@
         "hours": null,
         "name": "loving hut - vegan restaurant"
       },
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
@@ -17663,7 +17753,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -17684,7 +17774,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
@@ -17990,7 +18082,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": null,
       "ws_source": "canonical_rule",
@@ -18010,7 +18102,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
@@ -18192,7 +18286,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": "I",
       "ws_source": "audit",
@@ -18224,7 +18318,9 @@
         "hours_web": "foody.vn Khu Ẩm Thực Chợ Hoà Mỹ 05:00-19:00"
       },
       "hours_source": "web",
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
@@ -18253,7 +18349,7 @@
       "cons": [],
       "source": "serpapi/google-maps",
       "fetched_at": "2026-10-03",
-      "verified": false,
+      "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": null,
       "ws_source": "canonical_rule",
@@ -18273,7 +18369,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "market"
+      "cat": "market",
+      "verified_at": "2026-10-08",
+      "verified_by": "spotcheck-v1"
     },
     {
       "poi_id": "ChIJ3c1W2AAfQjERnRKZkrt0AjA",
