@@ -1322,7 +1322,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 200-600 N ₫)"
+      "price_note": "~600.000đ (payload: 200-600 N ₫)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
@@ -1385,7 +1387,9 @@
       },
       "hours_source": "web",
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~500.000đ (payload: 100-500 N ₫)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -1515,7 +1519,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 1-200.000 ₫)"
+      "price_note": "~200.000đ (payload: 1-200.000 ₫)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJd2HsN1oXQjER19a79kUNt-U",
@@ -7139,7 +7145,9 @@
         "name": "Pizza-Sandwich-Burger"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -7200,7 +7208,9 @@
       },
       "hours_source": "rule_open_access",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -8004,7 +8014,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "cafe"
+      "cat": "cafe",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
@@ -12782,7 +12794,9 @@
         ]
       },
       "verified_at": "2026-10-08",
-      "verified_by": "spotcheck-v1"
+      "verified_by": "spotcheck-v1",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -12845,7 +12859,9 @@
         "hours_web": "đón 05:00-18:00 hằng ngày"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -12906,7 +12922,9 @@
       "hours_source": "web",
       "cat": "landmark",
       "verified_at": "2026-10-08",
-      "verified_by": "spotcheck-v1"
+      "verified_by": "spotcheck-v1",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -13020,7 +13038,9 @@
         "hours": null,
         "name": null
       },
-      "cat": "park"
+      "cat": "park",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
@@ -13078,7 +13098,9 @@
         "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
@@ -13131,7 +13153,9 @@
       },
       "smart_tag_source": "rule_v1+curated",
       "hours_source": "rule_open_access",
-      "cat": "nature"
+      "cat": "nature",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -13184,7 +13208,9 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
@@ -13245,7 +13271,9 @@
         "hours": null,
         "name": "Ban Co Peak"
       },
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -13305,7 +13333,9 @@
       },
       "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa",
       "cat": "lodging",
-      "price_note": "~2.125.000đ (payload: 85 US$)"
+      "price_note": "~2.125.000đ (payload: 85 US$)",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -13362,7 +13392,9 @@
         "hours": null,
         "name": "Cementerio militar franco-español de Y Pha Nho"
       },
-      "cat": "lodging"
+      "cat": "lodging",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJPbgJ4DY9QjER7OSjP2_jSC8",
@@ -13420,7 +13452,9 @@
         "hours_web": "open 24/7 (trip.com); khu quân sự, đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
@@ -13485,7 +13519,9 @@
         "hours_web": "daivietourist.vn (T10-T2: 07:30-17:30)"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -13547,7 +13583,9 @@
         "name": null
       },
       "hours_source": "rule_open_access",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -13612,7 +13650,9 @@
         "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -13871,7 +13911,9 @@
         "hours_web": "suy luận: bãi công cộng; đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "web",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -17506,7 +17548,9 @@
         "hours": null,
         "name": "Bà Nam Sea Food"
       },
-      "cat": "market"
+      "cat": "market",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
@@ -18444,7 +18488,9 @@
         "hours": null,
         "name": null
       },
-      "cat": "restaurant"
+      "cat": "restaurant",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -19053,7 +19099,9 @@
         "hours": null,
         "name": "Son Tra view"
       },
-      "cat": "cafe"
+      "cat": "cafe",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
@@ -20916,7 +20964,9 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "cat": "nature"
+      "cat": "nature",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "osm:node/2093848429",
@@ -21447,7 +21497,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "nature"
+      "cat": "nature",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "osm:node/4172034499",
@@ -22128,7 +22180,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "osm:node/5273998823",
@@ -25620,7 +25674,9 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "cat": "landmark"
+      "cat": "landmark",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0",
@@ -26919,7 +26975,9 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "cat": "landmark"
+      "cat": "landmark",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
@@ -27132,7 +27190,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "landmark"
+      "cat": "landmark",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
@@ -27189,7 +27249,9 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE",
@@ -27240,7 +27302,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "nature"
+      "cat": "nature",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
@@ -28457,7 +28521,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~3.225.000đ (payload: 129 US$)"
+      "price_note": "~3.225.000đ (payload: 129 US$)",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
@@ -30772,7 +30838,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
+      "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
+      "access_source": "sunworld.vn"
     },
     {
       "poi_id": "ChIJeROGTS4ZQjERKlipW2HlSvw",
@@ -34209,7 +34277,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "spa"
+      "cat": "spa",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
@@ -34363,7 +34433,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "spa"
+      "cat": "spa",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJcUs0-1YXQjERDYZBzXC8l24",
@@ -42706,7 +42778,9 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction"
+      "cat": "attraction",
+      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJu1LdzQwZQjER2DSbyyayAbs",
