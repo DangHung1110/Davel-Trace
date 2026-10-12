@@ -1,4 +1,14 @@
-# Da Nang Local PMTiles 3D Route Simulator
+# Davel Trace
+
+## Repository layout
+
+- `FE/`: Flutter mobile application for itinerary planning, map exploration, and expense tracking.
+- `BE/`: reserved backend workspace; implementation is intentionally deferred.
+- Root prototype: the original local PMTiles 3D route simulator used to validate map data and routing.
+
+Development is integrated through the `dev` branch. Feature work should branch from `dev` and follow Conventional Commits in English.
+
+## Da Nang Local PMTiles 3D Route Simulator
 
 Bộ test tĩnh, không framework và không cần build. Chức năng gồm:
 
@@ -40,4 +50,3 @@ File `data/danang.pmtiles` được cắt từ Protomaps/OpenStreetMap build ng�
 ```
 
 PMTiles chứa dữ liệu vector để render. Font và sprite hiện vẫn tải từ CDN Protomaps; muốn chạy hoàn toàn không có Internet thì cần tải thêm các asset này vào dự án. Search và routing cũng là dịch vụ online, tách biệt với bản đồ nền local.
-#
