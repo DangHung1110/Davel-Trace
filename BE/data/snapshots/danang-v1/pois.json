@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 449,
+  "count": 567,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -25507,6 +25507,6279 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+      "name": "Chùa Linh Ứng - Bãi Bụt Sơn Trà",
+      "type": "Chùa phật giáo",
+      "lat": 16.100205499999998,
+      "lon": 108.2778816,
+      "opening_hours": [
+        "06:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Linh Ứng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0",
+      "name": "Cổng Chùa Linh Ứng",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.098909499999998,
+      "lon": 108.27688669999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Linh Ứng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
+    },
+    {
+      "poi_id": "ChIJuaI3VgMZQjER0B4a7LcJ-YA",
+      "name": "Nhà Thờ Giáo Xứ An Hòa",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0527993,
+      "lon": 108.1832792,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJJ2sLdT4YQjERi930NC-XCo0",
+      "name": "Nhà Thờ Giáo Xứ Thanh Đức",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0844223,
+      "lon": 108.220654,
+      "opening_hours": [
+        "04:30-21:00"
+      ],
+      "visit_min": {
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.1,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "quick-stop-30"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJxdBK6SsYQjERYojL_cVEkbs",
+      "name": "Nhà thờ Giáo xứ An Hải",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0692509,
+      "lon": 108.2298069,
+      "opening_hours": [
+        "05:30-06:30, 16:30-17:30",
+        "17:30-18:30"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà thờ Công giáo",
+        "Nhà thờ"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
+      "name": "Nhà thờ Thánh Giuse lao công",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.09207,
+      "lon": 108.2436149,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJs4dg5vceQjERJQ5D9ATvWhU",
+      "name": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0625347,
+      "lon": 108.0960073,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJPdLppX4XQjERnV5xcr28sO0",
+      "name": "Nhà thờ Gia Phước",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0565754,
+      "lon": 108.2425962,
+      "opening_hours": [
+        "05:00-05:30",
+        "05:00-05:30, 17:00-18:00",
+        "05:00-06:00, 17:00-18:00",
+        "18:00-18:30"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJnwKLiE4YQjERMVI0qrqKg1c",
+      "name": "Nhà Thờ Giáo Xứ Tam Tòa",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0717158,
+      "lon": 108.2037948,
+      "opening_hours": [
+        "05:00-06:00, 07:30-08:30, 17:00-18:00",
+        "17:30-18:30"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà thờ Công giáo",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJcw0FdkgYQjERhr14f9cMXK0",
+      "name": "Nhà Thờ Giáo Xứ Nội Hà",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0754663,
+      "lon": 108.2110062,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJaV_Jo8gZQjERtDWMcdLRT1U",
+      "name": "Nhà Thờ Giáo Xứ Hòa Thuận",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0533409,
+      "lon": 108.2187555,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJY3yT3IweQjERnbDRpKk8b3A",
+      "name": "Nhà thờ Phú Thượng",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0507626,
+      "lon": 108.1035191,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJOfpog-EYQjERw_VB4IBkfNI",
+      "name": "Nhà Thờ Giáo Xứ Hòa Minh",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0707634,
+      "lon": 108.1718238,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJ5VTV0hwaQjERYReDb0dJJq8",
+      "name": "Giáo xứ Cồn Dầu",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.015122899999998,
+      "lon": 108.22539479999999,
+      "opening_hours": [
+        "05:00-19:00"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJ3S-Eo0sYQjERo9MhApUI4WQ",
+      "name": "Nhà thờ Chính Trạch",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0684145,
+      "lon": 108.2098224,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJX_rcYHQZQjERQXQ9UxHmHN4",
+      "name": "Nhà Thờ Giáo Xứ Phước Tường",
+      "type": "Nhà thờ Công giáo",
+      "lat": 16.0416211,
+      "lon": 108.18610269999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà thờ Công giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "nhà thờ Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI",
+      "name": "Chùa Bát Nhã",
+      "type": "Chùa phật giáo",
+      "lat": 16.0615456,
+      "lon": 108.2166688,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
+      "name": "Chùa Non Nước",
+      "type": "Chùa phật giáo",
+      "lat": 16.0039557,
+      "lon": 108.26371809999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Chùa phật giáo",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJRZhHIMkZQjERYBH-5S1xKNg",
+      "name": "Chùa Phổ Đà",
+      "type": "Chùa phật giáo",
+      "lat": 16.0559509,
+      "lon": 108.21865559999999,
+      "opening_hours": [
+        "06:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Chùa phật giáo",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+      "name": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
+      "type": "Chùa phật giáo",
+      "lat": 16.0418826,
+      "lon": 108.14825359999999,
+      "opening_hours": [
+        "09:00-17:00"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+      "name": "Chùa Bà Đa",
+      "type": "Chùa phật giáo",
+      "lat": 16.0375656,
+      "lon": 108.2405163,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8",
+      "name": "Thiền Viện Bồ Đề",
+      "type": "Chùa phật giáo",
+      "lat": 16.0654698,
+      "lon": 108.1725438,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo",
+        "Trung tâm thiền"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM",
+      "name": "Chùa Nam Hải",
+      "type": "Chùa phật giáo",
+      "lat": 16.1458905,
+      "lon": 108.12341339999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJASjStc0ZQjERf8hQfCEJ8JA",
+      "name": "Chùa An Long",
+      "type": "Chùa phật giáo",
+      "lat": 16.0597945,
+      "lon": 108.223266,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Chùa phật giáo",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+      "name": "Chùa Linh Ứng - Bà Nà",
+      "type": "Chùa phật giáo",
+      "lat": 15.9971357,
+      "lon": 107.99404419999999,
+      "opening_hours": [
+        "08:00-17:30"
+      ],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day",
+          "must-go"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
+      "name": "Chùa Mỹ Khê",
+      "type": "Chùa phật giáo",
+      "lat": 16.0648242,
+      "lon": 108.2430218,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA",
+      "name": "Chùa Báo Ân",
+      "type": "Chùa phật giáo",
+      "lat": 16.0527503,
+      "lon": 108.2095049,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJrynevMsZQjERzZIGoLZwQ2I",
+      "name": "Chùa Từ Tôn",
+      "type": "Chùa phật giáo",
+      "lat": 16.0603669,
+      "lon": 108.2185076,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Chùa phật giáo"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chùa Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q",
+      "name": "Ba Na Hills",
+      "type": "Thắng cảnh",
+      "lat": 15.9951364,
+      "lon": 107.9961392,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Thắng cảnh",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "Bà Nà Hills",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "sunset"
+        ],
+        "budget": [
+          "quick-stop-30"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "landmark"
+    },
+    {
+      "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
+      "name": "Sun World Bà Nà Hills",
+      "type": "Công viên giải trí",
+      "lat": 16.0265625,
+      "lon": 108.03281249999999,
+      "opening_hours": [
+        "08:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Công viên giải trí",
+        "Công viên giải trí"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "Bà Nà Hills",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": true,
+        "price_band": "expensive",
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day",
+          "must-go"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "attraction"
+    },
+    {
+      "poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE",
+      "name": "Đỉnh Bà Nà",
+      "type": "Ridge",
+      "lat": 16.0014815,
+      "lon": 107.99763,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Ridge"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "Bà Nà Hills",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Ridge"
+    },
+    {
+      "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
+      "name": "Bến Du Thuyền Sông Hàn",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.0503975,
+      "lon": 108.2239238,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "du thuyền sông Hàn",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": true,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "night"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1+curated",
+      "cat": "attraction"
+    },
+    {
+      "poi_id": "ChIJC78Y_XQXQjERnNGlsKERAHs",
+      "name": "Eden Ocean View Đà Nẵng",
+      "type": "Khách sạn",
+      "lat": 16.0509613,
+      "lon": 108.248331,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJKbntMIQXQjERh50f5GwfUm4",
+      "name": "Sunview Beach Hotel",
+      "type": "Khách sạn",
+      "lat": 16.073443,
+      "lon": 108.24252589999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg",
+      "name": "A La Carte Danang Beach",
+      "type": "Khách sạn",
+      "lat": 16.0687309,
+      "lon": 108.244693,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJRZXlI6MZQjERcre1gDV0kFE",
+      "name": "Minh Trường Hotel 1 - Khách sạn view biển Đà Nẵng",
+      "type": "Khách sạn",
+      "lat": 16.0723052,
+      "lon": 108.19748729999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI",
+      "name": "Sala Danang Beach Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0622243,
+      "lon": 108.24518139999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4",
+      "name": "HAIAN Beach Hotel & Spa",
+      "type": "Khách sạn",
+      "lat": 16.0530442,
+      "lon": 108.24752819999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJTQo19YMXQjER1DttYZqjHYo",
+      "name": "Mandila Beach Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0676895,
+      "lon": 108.244886,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJN75cdYQXQjERBUnemtIubGM",
+      "name": "NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.0721006,
+      "lon": 108.2446562,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Quán cà phê",
+        "Trung tâm hội thảo",
+        "Spa sức khỏe",
+        "Nhà hàng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJzbKs7IMXQjERWf_Uz122Ohs",
+      "name": "Diamond Sea Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0664686,
+      "lon": 108.24510719999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJbeO3ddMZQjERzeIxy-6JpYc",
+      "name": "Meliá Vinpearl Danang Riverfront",
+      "type": "Khách sạn",
+      "lat": 16.070832199999998,
+      "lon": 108.22928259999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM",
+      "name": "Minh Toan SAFI Ocean Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0669592,
+      "lon": 108.2449362,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn",
+        "Trung tâm hội thảo",
+        "Nhà hàng",
+        "Spa"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJrxxvlNsXQjERy-eJcpABRJA",
+      "name": "Nhu Minh Plaza Danang Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0698375,
+      "lon": 108.23865289999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJT1sjdYQXQjERSLHKKZsmfdQ",
+      "name": "Paris Deli Danang Beach Hotel",
+      "type": "Khách sạn",
+      "lat": 16.0662858,
+      "lon": 108.2448972,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJW7SBUHoXQjERdpSIWHkCuh0",
+      "name": "Khách sạn Mường Thanh Luxury Đà Nẵng",
+      "type": "Khách sạn lưu trú dài hạn",
+      "lat": 16.0537195,
+      "lon": 108.24733409999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Khách sạn lưu trú dài hạn",
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJUeabB3kXQjERFP2JL7c8YCg",
+      "name": "DLG Hotel Danang",
+      "type": "Khách sạn",
+      "lat": 16.0581945,
+      "lon": 108.24632109999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJJbfHSGUXQjERRXCfzSX3s88",
+      "name": "Holiday Beach Hotel Danang",
+      "type": "Khách sạn",
+      "lat": 16.0494867,
+      "lon": 108.24870539999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "khách sạn view biển Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJWcFCas8QQjERQGJzK8w1ta4",
+      "name": "Hyatt Regency Danang Resort and Spa",
+      "type": "Khách sạn",
+      "lat": 16.0130143,
+      "lon": 108.2641979,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJmZHsE5U9QjERDa3a1CuK3lo",
+      "name": "InterContinental Danang Sun Peninsula Resort",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.1208274,
+      "lon": 108.3062154,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Trung tâm hội thảo",
+        "Nhà hàng cao cấp",
+        "Spa",
+        "Địa điểm tổ chức lễ cưới"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
+      "name": "Da Nang Mikazuki Japanese Resorts & Spa",
+      "type": "Khách sạn",
+      "lat": 16.0934007,
+      "lon": 108.14468749999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
+      "name": "Pullman Danang Beach Resort",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.0405647,
+      "lon": 108.2500872,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Câu lạc bộ bãi biển",
+        "Nơi tổ chức sự kiện",
+        "Câu lạc bộ thể dục",
+        "Khách sạn",
+        "Nhà hàng",
+        "Spa",
+        "Địa điểm tổ chức lễ cưới"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJMTadzMQQQjER29xKIZnnHAU",
+      "name": "Sandy Beach Non Nuoc Resort",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 15.998306999999999,
+      "lon": 108.27130369999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Khách sạn",
+        "Spa"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJqXp39lv2QTERR9U4pFNMD2o",
+      "name": "Mercure Danang French Village Bana Hills",
+      "type": "Khách sạn",
+      "lat": 15.997428,
+      "lon": 107.988292,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
+      "name": "Risemount Premier Resort Đà Nẵng",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.0546179,
+      "lon": 108.2420798,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJjb4Ah-QRQjERFlzALzxOOvo",
+      "name": "Four Seasons Resort The Nam Hai, Hoi An",
+      "type": "Khách sạn",
+      "lat": 15.9289858,
+      "lon": 108.3175102,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn",
+        "Nơi tổ chức sự kiện",
+        "Khách sạn lưu trú dài hạn",
+        "Căn hộ nghỉ dưỡng cho thuê",
+        "Khách sạn nghỉ dưỡng",
+        "Spa",
+        "Biệt thự",
+        "Địa điểm tổ chức lễ cưới",
+        "Trung tâm chăm sóc sức khỏe",
+        "Khách sạn chăm sóc sức khỏe"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJd3RleOYXQjERQQD0TduMYnU",
+      "name": "Olalani Resort & Condotel",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.0297,
+      "lon": 108.25569999999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.9,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Quán bar",
+        "Khu tổ hợp công quản",
+        "Khách sạn lưu trú dài hạn",
+        "Khách sạn",
+        "Nhà hàng",
+        "Spa",
+        "Bể bơi",
+        "Sân quần vợt",
+        "Địa điểm tổ chức lễ cưới"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0",
+      "name": "Meliá Danang Beach Resort",
+      "type": "Khách sạn",
+      "lat": 16.0002912,
+      "lon": 108.2690161,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY",
+      "name": "The Ocean Villas",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 15.9744903,
+      "lon": 108.2801621,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Khu tổ hợp công quản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJY2uJ-ZgRQjEROTUmuLdOGic",
+      "name": "The Five Villas Đà Nẵng",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 15.9759967,
+      "lon": 108.2827866,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Biệt thự nhà vườn",
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJq56yCur3QTERYlOCLaSCVwQ",
+      "name": "Làng Toom Sara Đà Nẵng",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 15.9574226,
+      "lon": 107.9949721,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Khu vực nướng",
+        "Khu cắm trại",
+        "Quán cà phê",
+        "Công viên sinh thái",
+        "Khách sạn",
+        "Nhà hàng",
+        "Nhà điều hành du lịch",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJQT4SLJwRQjERvym-dW5QWJ0",
+      "name": "Shilla Monogram Danang",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 15.9627828,
+      "lon": 108.2888799,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Khách sạn nghỉ dưỡng",
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
+      "name": "TIA Wellness Resort",
+      "type": "Khách sạn nghỉ dưỡng",
+      "lat": 16.031278099999998,
+      "lon": 108.25436429999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Khách sạn nghỉ dưỡng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJEyLB68sQQjER7FTfkhV0_MY",
+      "name": "Danang Marriott Resort & Spa",
+      "type": "Khách sạn",
+      "lat": 16.0069561,
+      "lon": 108.26609619999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Khách sạn"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "resort Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "lodging"
+    },
+    {
+      "poi_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
+      "name": "Panda Spa & Massage",
+      "type": "Spa",
+      "lat": 16.0561522,
+      "lon": 108.24537749999999,
+      "opening_hours": [
+        "09:00-23:45"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa ban ngày",
+        "Spa mặt",
+        "Spa sức khỏe",
+        "Spa đá nóng",
+        "Spa mát xa",
+        "Chuyên gia bấm huyệt",
+        "Cơ sở chăm sóc da"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJp4sb2egXQjERFOFVxrsHiyI",
+      "name": "Luxury Healthy Spa & Massage",
+      "type": "Spa mát xa",
+      "lat": 16.0496665,
+      "lon": 108.24762249999999,
+      "opening_hours": [
+        "09:00-04:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJEwAAALAZQjERyXCN5eSBt1Q",
+      "name": "Jang Mi Spa & Massage",
+      "type": "Spa mát xa",
+      "lat": 16.068642099999998,
+      "lon": 108.24167899999999,
+      "opening_hours": [
+        "09:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Spa mát xa",
+        "Spa ban ngày",
+        "Spa sức khỏe",
+        "Spa đá nóng"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
+      "name": "Q&B Luxury Spa – Massage & Sauna Đà Nẵng",
+      "type": "Spa",
+      "lat": 16.048352899999998,
+      "lon": 108.24229919999999,
+      "opening_hours": [
+        "08:30-04:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa ban ngày",
+        "Phòng mát-xa chân",
+        "Spa mát xa",
+        "Nhà tắm hơi"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
+      "name": "Babylon Spa - Massage Da Nang",
+      "type": "Spa",
+      "lat": 16.0672167,
+      "lon": 108.2441068,
+      "opening_hours": [
+        "09:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa ban ngày",
+        "Spa mặt",
+        "Phòng mát-xa chân",
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJwdZa4eQ7JQwRYcRRBR0ZE24",
+      "name": "Ánh Spa & Massage Đà Nẵng",
+      "type": "Spa mát xa",
+      "lat": 16.0869633,
+      "lon": 108.2468098,
+      "opening_hours": [
+        "09:00-00:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJ076jrJZFj0QRKwm40qhwBWA",
+      "name": "Julius Spa & Massage",
+      "type": "Spa",
+      "lat": 16.0505063,
+      "lon": 108.24451309999999,
+      "opening_hours": [
+        "07:00-02:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa mặt",
+        "Spa đá nóng",
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJNxOlbnIXQjER9DXmYRuiv3Q",
+      "name": "Lee spa & Massage Đà Nẵng",
+      "type": "Spa",
+      "lat": 16.076401699999998,
+      "lon": 108.2440408,
+      "opening_hours": [
+        "10:00-00:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Spa",
+        "Thẩm mỹ viện",
+        "Spa mặt",
+        "Spa sức khỏe",
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
+      "name": "Tigon massa - Spa & Massage Đà Nẵng",
+      "type": "Spa",
+      "lat": 16.0338615,
+      "lon": 108.2239309,
+      "opening_hours": [
+        "09:00-22:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Spa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJXcc22ZcZQjERT47ZqHMl13c",
+      "name": "Charm Spa - Massage Da Nang",
+      "type": "Spa mát xa",
+      "lat": 16.0648698,
+      "lon": 108.2207751,
+      "opening_hours": [
+        "09:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
+      "name": "Babylon Spa Massage Da Nang",
+      "type": "Spa",
+      "lat": 16.0494535,
+      "lon": 108.2455555,
+      "opening_hours": [
+        "09:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
+      "name": "Herbal Spa",
+      "type": "Spa",
+      "lat": 16.069025,
+      "lon": 108.23702639999999,
+      "opening_hours": [
+        "09:00-22:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Spa",
+        "Spa ban ngày",
+        "Spa mặt",
+        "Spa đá nóng",
+        "Spa mát xa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
+      "name": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지",
+      "type": "Spa mát xa",
+      "lat": 16.0622143,
+      "lon": 108.22318779999999,
+      "opening_hours": [
+        "08:30-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa mát xa",
+        "Spa sức khỏe",
+        "Spa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
+      "name": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |",
+      "type": "Spa",
+      "lat": 16.069529,
+      "lon": 108.223822,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Spa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJsyY9JzoYQjERvaNXwl9KJkI",
+      "name": "Spa Massage Sông Hàn",
+      "type": "Spa mát xa",
+      "lat": 16.0779858,
+      "lon": 108.2207504,
+      "opening_hours": [
+        "08:00-23:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Spa mát xa",
+        "Dịch vụ hương liệu pháp",
+        "Phòng mát-xa chân",
+        "Spa sức khỏe",
+        "Spa đá nóng"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa mát xa"
+    },
+    {
+      "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
+      "name": "Rosa Spa & Massage Da Nang",
+      "type": "Spa",
+      "lat": 16.0537034,
+      "lon": 108.2381547,
+      "opening_hours": [
+        "12:00-00:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
+      "name": "OANI SPA",
+      "type": "Spa",
+      "lat": 16.0548417,
+      "lon": 108.24545069999999,
+      "opening_hours": [
+        "09:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Spa",
+        "Spa mặt",
+        "Spa mát xa",
+        "Bác sĩ trị liệu xoa bóp"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "spa massage Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Spa"
+    },
+    {
+      "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
+      "name": "Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng",
+      "type": "Điểm thu hút khách du lịch",
+      "lat": 16.055193,
+      "lon": 108.223694,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Điểm thu hút khách du lịch",
+        "Khu vực đi bộ"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": true,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chợ đêm Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "couple",
+          "solo",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "rain-proof"
+        ],
+        "budget": [
+          "full-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "attraction"
+    },
+    {
+      "poi_id": "ChIJA0bFwKoZQjER--pX5_3_cD0",
+      "name": "Tú Chợ đêm",
+      "type": "Nhà hàng",
+      "lat": 16.0683088,
+      "lon": 108.1490164,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Nhà hàng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "chợ đêm Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
+      "name": "Mỳ Quảng Cô Sáu",
+      "type": "Nhà hàng",
+      "lat": 16.0661787,
+      "lon": 108.2296635,
+      "opening_hours": [
+        "06:30-22:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà hàng",
+        "Quán ăn nhỏ",
+        "Quán mì"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
+      "name": "Mỳ Quảng Hương Quê",
+      "type": "Quán mì",
+      "lat": 16.0634331,
+      "lon": 108.2085142,
+      "opening_hours": [
+        "06:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
+      "name": "Quán Mì Quảng Bà Bích",
+      "type": "Quán mì",
+      "lat": 16.071234999999998,
+      "lon": 108.1501031,
+      "opening_hours": [
+        "05:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.1,
+      "tags": [
+        "Quán mì",
+        "Nhà hàng"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
+      "name": "Mì Quảng Ếch bếp Trang",
+      "type": "Nhà hàng",
+      "lat": 16.062838199999998,
+      "lon": 108.2160468,
+      "opening_hours": [
+        "06:30-22:15"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Nhà hàng",
+        "Quán mì"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g",
+      "name": "Mì Quảng 1A",
+      "type": "Quán mì",
+      "lat": 16.0723938,
+      "lon": 108.21911569999999,
+      "opening_hours": [
+        "06:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJNzbzAwAZQjERynEwf3zOgYE",
+      "name": "Mì Quảng Bếp Quê - Đặc Sản Đà Nẵng",
+      "type": "Quán mì",
+      "lat": 16.048085,
+      "lon": 108.209305,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
+      "name": "Mì Quảng Thi",
+      "type": "Quán mì",
+      "lat": 16.0585457,
+      "lon": 108.2172243,
+      "opening_hours": [
+        "06:00-13:29, 16:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.3,
+      "tags": [
+        "Quán mì",
+        "Nhà hàng"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
+      "name": "Mì Quảng Bà Vị",
+      "type": "Quán mì",
+      "lat": 16.0485586,
+      "lon": 108.2404328,
+      "opening_hours": [
+        "06:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.7,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
+      "name": "Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương",
+      "type": "Quán mì",
+      "lat": 16.0565752,
+      "lon": 108.208438,
+      "opening_hours": [
+        "06:00-21:30"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.8,
+      "tags": [
+        "Quán mì",
+        "Nhà hàng chuyên phục vụ bữa sáng",
+        "Cửa hàng bán đồ ăn nấu sẵn",
+        "Nhà hàng"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJka0rSjkYQjERCmramEII0n4",
+      "name": "Mì Quảng Bà Ngân",
+      "type": "Quán mì",
+      "lat": 16.0808832,
+      "lon": 108.2186344,
+      "opening_hours": [
+        "06:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.8,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJu2GuJRIXQjERzmEF0pBtsgM",
+      "name": "Mì Quảng Bà Vị - Võ Văn Kiệt",
+      "type": "Quán mì",
+      "lat": 16.0625581,
+      "lon": 108.2373329,
+      "opening_hours": [
+        "07:00-23:00",
+        "07:00-23:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+      "name": "Quán mỳ quảng Bà Minh",
+      "type": "Quán mì",
+      "lat": 16.0119467,
+      "lon": 108.2556231,
+      "opening_hours": [
+        "06:00-19:30",
+        "06:30-19:30"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJOxHeFjkYQjERZAilaOR-hJA",
+      "name": "Quán Mì Quảng Bà Năm",
+      "type": "Quán mì",
+      "lat": 16.0795897,
+      "lon": 108.21804069999999,
+      "opening_hours": [
+        "09:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJeROGTS4ZQjERKlipW2HlSvw",
+      "name": "Mì Quảng Nhung",
+      "type": "Quán ăn nhỏ",
+      "lat": 16.0829146,
+      "lon": 108.2131088,
+      "opening_hours": [
+        "06:00-10:00"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.4,
+      "tags": [
+        "Quán ăn nhỏ"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJwYDU9ZwZQjERwliWFVsHlfw",
+      "name": "Mì Quảng Huệ",
+      "type": "Quán mì",
+      "lat": 16.0446941,
+      "lon": 108.21659059999999,
+      "opening_hours": [
+        "06:30-10:30"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.1,
+      "tags": [
+        "Quán mì"
+      ],
+      "intensity": 2,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": null,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "Quán mì"
+    },
+    {
+      "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
+      "name": "Mỳ Quảng Quê Xưa",
+      "type": "Nhà hàng Việt Nam",
+      "lat": 16.046879999999998,
+      "lon": 108.2212191,
+      "opening_hours": [
+        "06:00-22:30"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.2,
+      "tags": [
+        "Nhà hàng Việt Nam"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán mì Quảng Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
+      "name": "Hải Sản Ku Tom Đà Nẵng",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.0657206,
+      "lon": 108.24337229999999,
+      "opening_hours": [
+        "10:00-02:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJkYkOmOMXQjEREz4KLKpwAOE",
+      "name": "Hải sản Năm Đảnh",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.1022967,
+      "lon": 108.2533986,
+      "opening_hours": [
+        "10:00-22:30"
+      ],
+      "visit_min": {
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.1,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJxwczMkkXQjERoo3KDb0ZQKE",
+      "name": "Hải Sản A SÂM",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.1033874,
+      "lon": 108.2565599,
+      "opening_hours": [
+        "08:30-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJe3Ixim4XQjERbbrbMnyhr34",
+      "name": "ĐÀ THÀNH QUÁN",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.0554266,
+      "lon": 108.24402239999999,
+      "opening_hours": [
+        "10:00-02:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
+      "name": "Quán Hải Sản ÔNG MINH",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.0802935,
+      "lon": 108.24663559999999,
+      "opening_hours": [
+        "10:00-02:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Nhà hàng hải sản",
+        "Nhà hàng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJl2GYHgAZQjERp7zmf6CDTXk",
+      "name": "Nhà hàng hải sản Sơn Biển Đông",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.073169,
+      "lon": 108.2016407,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJO_gU03QZQjERdvtWlsIeyOM",
+      "name": "Hải Sản Kim Seafood",
+      "type": "Nhà hàng hải sản",
+      "lat": 16.0621975,
+      "lon": 108.2314873,
+      "opening_hours": [
+        "10:30-23:00"
+      ],
+      "visit_min": {
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.6,
+      "tags": [
+        "Nhà hàng hải sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "hải sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "couple",
+          "group"
+        ],
+        "time": [
+          "morning",
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "restaurant"
+    },
+    {
+      "poi_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
+      "name": "Cửa hàng Đặc Sản Đà Nẵng Làm Quà",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.055322099999998,
+      "lon": 108.24471829999999,
+      "opening_hours": [
+        "07:30-22:30"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản",
+        "Chợ nông sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
+      "name": "Đặc sản Đà Nẵng làm quà - Dương Lê",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0343577,
+      "lon": 108.2224462,
+      "opening_hours": [
+        "08:30-21:00"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản",
+        "Cửa hàng bán thực phẩm sạch",
+        "Điểm thu hút khách du lịch"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8",
+      "name": "Đặc Sản Chả Bò Bà Tâm Đà Nẵng",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0866965,
+      "lon": 108.2192177,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.8,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
+      "name": "Đặc Sản Ngon Đà Nẵng - Đặc Sản Làm Quà shop online",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0810019,
+      "lon": 108.23967359999999,
+      "opening_hours": [
+        "06:30-22:30",
+        "08:00-21:00"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
+      "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.065733599999998,
+      "lon": 108.16955039999999,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJK9EAYgAZQjER_3r0iXAJGLE",
+      "name": "Đặc sản Đà Nẵng Phương Châu",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0588746,
+      "lon": 108.2167922,
+      "opening_hours": [
+        "09:00-22:00"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
+      "name": "Cửa hàng Đặc sản Biển Đà Nẵng",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0559312,
+      "lon": 108.2082236,
+      "opening_hours": [
+        "08:00-20:00"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
+      "name": "Siêu thị Đặc sản Hương Đà",
+      "type": "Cửa hàng lưu niệm",
+      "lat": 16.0636169,
+      "lon": 108.2430895,
+      "opening_hours": [
+        "07:00-22:30",
+        "07:00-23:00"
+      ],
+      "visit_min": {
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 3.8,
+      "tags": [
+        "Cửa hàng lưu niệm"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
+      "name": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.062223799999998,
+      "lon": 108.2376196,
+      "opening_hours": [
+        "07:30-23:00"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản",
+        "Cửa hàng giỏ quà tặng",
+        "Cửa hàng quà tặng",
+        "Cửa hàng thực phẩm thiên nhiên",
+        "Cửa tiệm bán lẻ trực tiếp",
+        "Cửa hàng lưu niệm"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJYcrN5SQaQjERbT7ApRUexlQ",
+      "name": "Đặc sản Đà Nẵng - Bánh khô mè Bà Liễu Mẹ làm quà tặng",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0111587,
+      "lon": 108.2056075,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản",
+        "Tiệc đứng đồ ngọt và món tráng miệng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJg4XJWVkZQjERVOuuY25EzR0",
+      "name": "Chả Bò Bà Yến – Đặc Sản Đà Nẵng Làm Quà",
+      "type": "Cửa hàng bán thực phẩm đặc sản",
+      "lat": 16.0891324,
+      "lon": 108.2326039,
+      "opening_hours": [],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5,
+      "tags": [
+        "Cửa hàng bán thực phẩm đặc sản",
+        "Cửa hàng quà tặng",
+        "Cửa hàng giăm bông",
+        "Nhà hàng Việt Nam"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
+    },
+    {
+      "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
+      "name": "Cô Na - ĐẶC SẢN ĐÀ NẴNG",
+      "type": "Cửa hàng tạp phẩm",
+      "lat": 16.071259299999998,
+      "lon": 108.18855719999999,
+      "opening_hours": [
+        "09:00-12:00, 14:00-19:30"
+      ],
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Cửa hàng tạp phẩm"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "đặc sản Đà Nẵng",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "both",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "market"
     }
   ],
   "enriched_at": "2026-10-10",
