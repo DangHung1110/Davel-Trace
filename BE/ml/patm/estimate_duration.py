@@ -52,6 +52,8 @@ CATEGORY_DEFAULTS: dict[str, int] = {
 # Normalized-Vietnamese substring -> canonical. Specific first (dict order).
 CATEGORY_ALIASES: dict[str, str] = {
     "cong vien giai tri": "attraction",
+    "cong vien nuoc": "attraction",
+    "dao du lich": "attraction",
     "khu du lich": "attraction",
     "diem thu hut": "attraction",
     "thuy cung": "attraction",
