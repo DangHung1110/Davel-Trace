@@ -76,6 +76,7 @@ REMOVE_IDS = {
 }
 TYPE_FIX = {
     "Du Thuyền Sông Hàn Mỹ Xuân 02": "attraction",
+    "Dịch Vụ Thuyền Thúng Bến Dừa": "attraction",
     "Quán Hải sản Tân Trà Beach": "restaurant",
     "Bãi Biển Thiên Đường": "beach",
     "Bãi biển Sơn Trà": "beach",
