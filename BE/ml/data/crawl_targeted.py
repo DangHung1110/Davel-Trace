@@ -42,6 +42,12 @@ QUERIES = [
 SPECIALTY = ("mi quang", "my quang", "banh xeo", "hai san", "com ga", "cao lau",
              "bun cha ca", "banh trang", "che ")
 
+# Round-3 grid: more of the missing groups per district (diminishing
+# returns expected — SerpApi repeats top results across queries).
+GRID_CATS = ["khách sạn", "spa", "quán bar", "chùa", "khu du lịch"]
+GRID_DISTRICTS = ["Hải Châu", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu",
+                  "Thanh Khê"]
+
 
 def _norm(s: str) -> str:
     s = unicodedata.normalize("NFD", str(s or "").lower())
@@ -93,7 +99,9 @@ def main() -> int:
     stats = {"queries": 0, "items": 0, "new": 0, "dup_id": 0,
              "dup_near": 0, "junk": 0, "outside": 0}
     junk_names: list[str] = []
-    for q in QUERIES:
+    queries = list(QUERIES) + [f"{c} {d}" for c in GRID_CATS
+                               for d in GRID_DISTRICTS]
+    for q in queries:
         params = {"engine": "google_maps", "type": "search",
                   "q": q, "hl": "vi", "gl": "vn"}
         payload = cached_or_fetch(raw_path(args.raw, "search2", q),
