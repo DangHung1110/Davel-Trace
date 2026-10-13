@@ -36,3 +36,4 @@ DavelAgentAnswer.txt
 
 # SerpApi fetch resume cache (raw payloads + quota counter, never commit)
 data/snapshots/danang-full-tmp/
+BE/data/raw-round2/
