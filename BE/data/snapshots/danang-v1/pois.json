@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 795,
+  "count": 766,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -5156,68 +5156,6 @@
       "price_note": "~200.000đ (payload: 100-200 N ₫)"
     },
     {
-      "poi_id": "ChIJk3haCB4ZQjERA3Fq_IHznLU",
-      "name": "Texas Chicken AEON MALL Đà Nẵng Thanh Khê",
-      "type": "Nhà hàng",
-      "lat": 16.0668528,
-      "lon": 108.20398519999999,
-      "opening_hours": [
-        "10:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.9,
-      "tags": [
-        "Nhà hàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "medium",
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/729406663",
-        "dist_m": 44.0,
-        "fee": null,
-        "hours": null,
-        "name": "CaPhe Giai Khat Huong Vuon Cau"
-      },
-      "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
-    },
-    {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
       "name": "Nhà Hàng Chay Phúc An",
       "type": "Nhà hàng",
@@ -5458,67 +5396,6 @@
       "cat": "restaurant"
     },
     {
-      "poi_id": "ChIJFaKh3yhLoTERuh1M_c3paTQ",
-      "name": "Som Tum Thai - Aeon Mall Đà Nẵng Thanh Khê",
-      "type": "Nhà hàng",
-      "lat": 16.0667953,
-      "lon": 108.2047705,
-      "opening_hours": [
-        "10:00-22:30"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.4,
-      "tags": [
-        "Nhà hàng"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4301483689",
-        "dist_m": 48.7,
-        "fee": null,
-        "hours": "Mo-Su 05:00-18:00",
-        "name": "Sơn"
-      },
-      "cat": "restaurant"
-    },
-    {
       "poi_id": "ChIJY-zHSgQZQjERRoAvxXVcViU",
       "name": "Be Nhung Restaurant",
       "type": "Nhà hàng",
@@ -5752,61 +5629,6 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "restaurant"
-    },
-    {
-      "poi_id": "ChIJD9pK8qoZQjERsxKiMEPEtnk",
-      "name": "Nhà Hàng Tiệc Cưới Đại Hỷ",
-      "type": "Địa điểm tổ chức lễ cưới",
-      "lat": 16.0623445,
-      "lon": 108.1920804,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.2,
-      "tags": [
-        "Địa điểm tổ chức lễ cưới"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": null,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4326820491",
-        "dist_m": 21.1,
-        "fee": null,
-        "hours": null,
-        "name": "Dai Long hotel"
-      },
       "cat": "restaurant"
     },
     {
@@ -7755,7 +7577,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 3.6,
       "tags": [
         "Quán cà phê",
         "Cửa hàng cà phê"
@@ -11752,71 +11574,6 @@
       "cat": "attraction"
     },
     {
-      "poi_id": "ChIJe8ah9rsZQjER6VQTZMzcGTw",
-      "name": "Du Thuyền Sông Hàn Đà Nẵng (2Da Tickets)",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.079141099999998,
-      "lon": 108.2242785,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.3,
-      "tags": [
-        "Điểm thu hút khách du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": true,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "night"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "Tour 150-200k NL (theo hãng, chưa verify riêng 2Da)",
-      "price_sources": [
-        "https://benduthuyendanang.com/"
-      ],
-      "web_evidence": {
-        "hours_web": "18:00,19:00,20:00,21:00 (40-50p/chuyến)"
-      },
-      "osm_evidence": {
-        "osm": "node/6172518285",
-        "dist_m": 60.6,
-        "fee": null,
-        "hours": null,
-        "name": "RuNam"
-      },
-      "cat": "attraction"
-    },
-    {
       "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
       "name": "Bảo tàng Điêu khắc Chăm Đà Nẵng",
       "type": "Điểm thu hút khách du lịch",
@@ -13849,73 +13606,6 @@
       "cat": "attraction"
     },
     {
-      "poi_id": "ChIJNb8hNAAXQjERaE0LeRW4sy4",
-      "name": "Son Tra Beach",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.0984791,
-      "lon": 108.254436,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.5,
-      "tags": [
-        "Điểm thu hút khách du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/14060594688",
-        "dist_m": 92.8,
-        "fee": null,
-        "hours": null,
-        "name": "Leon Homestay"
-      },
-      "web_evidence": {
-        "hours_web": "suy luận: bãi công cộng; đường lên giới hạn 07:30-18:30"
-      },
-      "hours_source": "web",
-      "cat": "attraction",
-      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
-    },
-    {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
       "name": "KHU PHỐ DU LỊCH AN THƯỢNG",
       "type": "Hiệp hội/Tổ chức",
@@ -14906,71 +14596,6 @@
       "price_note": "~525.000đ (payload: 21 US$)"
     },
     {
-      "poi_id": "ChIJW4o1LAAXQjERL6zRtyWivLk",
-      "name": "Khu du lịch bãi biển Mỹ Khê",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.061609699999998,
-      "lon": 108.24699749999999,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 5,
-      "tags": [
-        "Điểm thu hút khách du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/14068778545",
-        "dist_m": 97.5,
-        "fee": null,
-        "hours": null,
-        "name": "HIGHLANDS COFFEE"
-      },
-      "hours_source": "rule_open_access",
-      "web_evidence": {
-        "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
-      },
-      "cat": "attraction"
-    },
-    {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
       "name": "Bãi tắm hàng dừa Mỹ Khê",
       "type": "Điểm thu hút khách du lịch",
@@ -15026,75 +14651,6 @@
         "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
       },
       "hours_source": "web",
-      "cat": "attraction"
-    },
-    {
-      "poi_id": "ChIJ57G9n8YXQjER3sEGyymJpBg",
-      "name": "My Khe Beach",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.0566455,
-      "lon": 108.2476348,
-      "opening_hours": [
-        "10:00-23:00"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.6,
-      "tags": [
-        "Điểm thu hút khách du lịch",
-        "Văn phòng công ty"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/12830575020",
-        "dist_m": 104.5,
-        "fee": null,
-        "hours": "Mo-Su 10:00-23:00",
-        "name": "43 Town"
-      },
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_web": "bãi công cộng 24h (viet-go.com)",
-        "hours_osm_raw": [
-          "Mo-Su 10:00-23:00"
-        ]
-      },
       "cat": "attraction"
     },
     {
@@ -16724,67 +16280,6 @@
       "cat": "beach"
     },
     {
-      "poi_id": "ChIJF7gOWQAXQjER90uCTZIoJII",
-      "name": "Bãi Tắm Biển Mỹ Khê",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.05651,
-      "lon": 108.2473543,
-      "opening_hours": [
-        "05:30-18:30"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.7,
-      "tags": [
-        "Điểm thu hút khách du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/12830575020",
-        "dist_m": 71.1,
-        "fee": null,
-        "hours": "Mo-Su 10:00-23:00",
-        "name": "43 Town"
-      },
-      "cat": "attraction"
-    },
-    {
       "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
       "name": "Bãi tắm T20",
       "type": "Bãi biển",
@@ -16953,183 +16448,6 @@
       },
       "hours_source": "web",
       "cat": "park"
-    },
-    {
-      "poi_id": "ChIJnWQc2ZwRQjERfULHaU75hxU",
-      "name": "Bãi Tắm Tân Trà",
-      "type": "Công viên",
-      "lat": 15.988969399999998,
-      "lon": 108.2765196,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 101,
-        "p50": 144,
-        "p75": 202
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.5,
-      "tags": [
-        "Công viên"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "sunset"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "web_evidence": {
-        "hours_web": "suy luận: bãi công cộng, không giờ niêm yết"
-      },
-      "hours_source": "web",
-      "cat": "park"
-    },
-    {
-      "poi_id": "ChIJ0VM-TgAXQjERZ7yV7hTJrbc",
-      "name": "Bãi tắm Mỹ Khê",
-      "type": "Điểm thu hút khách du lịch",
-      "lat": 16.0470926,
-      "lon": 108.24952239999999,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.8,
-      "tags": [
-        "Điểm thu hút khách du lịch"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "couple",
-          "solo",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "rain-proof"
-        ],
-        "budget": [
-          "full-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/7027674985",
-        "dist_m": 81.7,
-        "fee": null,
-        "hours": null,
-        "name": "Muoi Bien"
-      },
-      "web_evidence": {
-        "hours_web": "bãi công cộng 24h (viet-go.com; intour.com.vn 'luôn mở cửa')"
-      },
-      "hours_source": "web",
-      "cat": "attraction"
-    },
-    {
-      "poi_id": "ChIJAT1GIScXQjERAi6vhyCj61s",
-      "name": "Bãi Tắm Sơn Thuỷ",
-      "type": "Bể bơi công cộng",
-      "lat": 16.016553899999998,
-      "lon": 108.2636788,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 84,
-        "p50": 120,
-        "p75": 168
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.4,
-      "tags": [
-        "Bể bơi công cộng"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "sunrise",
-          "morning",
-          "sunset"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "hours_source": "rule_open_access",
-      "cat": "beach"
     },
     {
       "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
@@ -18319,57 +17637,6 @@
       "verified_by": "spotcheck-v1"
     },
     {
-      "poi_id": "ChIJhckwZrwfQjER2FgnpzGZyvs",
-      "name": "Chợ Thanh Vinh",
-      "type": "Chợ",
-      "lat": 16.0739704,
-      "lon": 108.13220109999999,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Chợ"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": true,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "verified_at": "2026-10-08",
-      "verified_by": "spotcheck-v1"
-    },
-    {
       "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",
       "name": "Hải sản Châu Sơn 1 (Châu Nga)",
       "type": "Quán ăn nhỏ",
@@ -18430,67 +17697,6 @@
         "name": null
       },
       "cat": "restaurant"
-    },
-    {
-      "poi_id": "ChIJI4UNJaMXQjERUVoSyckPe7o",
-      "name": "Nhà hàng Sơn Trà",
-      "type": "Nhà hàng hải sản",
-      "lat": 16.072552899999998,
-      "lon": 108.2431817,
-      "opening_hours": [],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 3.7,
-      "tags": [
-        "Nhà hàng hải sản"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4429017790",
-        "dist_m": 46.0,
-        "fee": null,
-        "hours": null,
-        "name": null
-      },
-      "cat": "restaurant",
-      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -18555,130 +17761,6 @@
       "price_note": "~400.000đ (payload: 1-400.000 ₫)"
     },
     {
-      "poi_id": "ChIJHUH52YwZQjERC9lBUIqQec4",
-      "name": "Manwah Aeon Mall Thanh Khê",
-      "type": "Nhà hàng món lẩu",
-      "lat": 16.0664709,
-      "lon": 108.2044978,
-      "opening_hours": [
-        "11:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.6,
-      "tags": [
-        "Nhà hàng món lẩu"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "medium",
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4301483689",
-        "dist_m": 87.0,
-        "fee": null,
-        "hours": "Mo-Su 05:00-18:00",
-        "name": "Sơn"
-      },
-      "cat": "restaurant",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
-    },
-    {
-      "poi_id": "ChIJy_aOzygZQjERvnOL5s06Zfg",
-      "name": "CLOUD POT AEON MALL Đà Nẵng",
-      "type": "Nhà hàng món lẩu",
-      "lat": 16.0669046,
-      "lon": 108.20453909999999,
-      "opening_hours": [
-        "11:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.8,
-      "tags": [
-        "Nhà hàng món lẩu"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "medium",
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/4301483689",
-        "dist_m": 39.9,
-        "fee": null,
-        "hours": "Mo-Su 05:00-18:00",
-        "name": "Sơn"
-      },
-      "cat": "restaurant",
-      "price_note": "~400.000đ (payload: 300-400 N ₫)"
-    },
-    {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
       "name": "Sushi Time - 305 Điện Biên Phủ, Đà Nẵng",
       "type": "Nhà hàng Nhật Bản",
@@ -18739,68 +17821,6 @@
       },
       "cat": "restaurant",
       "price_note": "~200.000đ (payload: 100-200 N ₫)"
-    },
-    {
-      "poi_id": "ChIJxyTuNSoZQjERDDwrFT-7IMQ",
-      "name": "Ushi Mania – Japanese Aging Beef & Bar (Aeon Thanh Khê Đà Nẵng)",
-      "type": "Nhà hàng Teppanyaki",
-      "lat": 16.0664695,
-      "lon": 108.2041697,
-      "opening_hours": [
-        "10:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.1,
-      "tags": [
-        "Nhà hàng Teppanyaki"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "medium",
-        "space": "indoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "osm_evidence": {
-        "osm": "node/6520986631",
-        "dist_m": 89.6,
-        "fee": null,
-        "hours": null,
-        "name": "Highlands Coffee"
-      },
-      "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 400-500 N ₫)"
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -19620,72 +18640,6 @@
       "cat": "cafe"
     },
     {
-      "poi_id": "ChIJ81xSxbEZQjERJmzlA1ksEVo",
-      "name": "Du Thuyền Sông Hàn Mỹ Xuân 02",
-      "type": "Đại lý du lịch bằng thuyền",
-      "lat": 16.0790336,
-      "lon": 108.22429149999999,
-      "opening_hours": [
-        "07:00-22:00"
-      ],
-      "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 3.9,
-      "tags": [
-        "Đại lý du lịch bằng thuyền",
-        "Bến du thuyền"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "crawl_default",
-      "io_label": null,
-      "ws_source": "default_false",
-      "smart_tags": {
-        "ticket": true,
-        "price_band": "medium",
-        "space": "both",
-        "party": [
-          "group"
-        ],
-        "time": [
-          "night"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1+curated",
-      "ticket_vnd": 150000,
-      "ticket_note": "NL 150k (mô tả từ 120k); TE<1m free; 1-1m3 70% vé NL",
-      "price_sources": [
-        "https://veduthuyen.vn/ve-du-thuyen-song-han/du-thuyen-song-han-my-xuan-du-thuyen-da-nang-ve-dem/"
-      ],
-      "web_evidence": {
-        "hours_web": "4 chuyến tối, 45-50p, quầy vé sau 17h"
-      },
-      "osm_evidence": {
-        "osm": "node/6172518285",
-        "dist_m": 64.4,
-        "fee": null,
-        "hours": null,
-        "name": "RuNam"
-      },
-      "cat": "attraction"
-    },
-    {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
       "name": "Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river",
       "type": "Bến du thuyền",
@@ -19720,7 +18674,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -19736,7 +18690,7 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "Tour thu phí theo hãng (~120-200k, chưa verify riêng Vinh Anh)",
+      "ticket_note": "Vé ~3 USD (~75k, user verify, chưa chắc chắn)",
       "osm_evidence": {
         "osm": "node/6172518285",
         "dist_m": 71.4,
@@ -19744,7 +18698,8 @@
         "hours": null,
         "name": "RuNam"
       },
-      "cat": "attraction"
+      "cat": "attraction",
+      "ticket_vnd": 75000
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -19837,7 +18792,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": null,
+        "price_band": "cheap",
         "space": "both",
         "party": [
           "family",
@@ -19854,7 +18809,7 @@
         ]
       },
       "smart_tag_source": "rule_v1+paid-name",
-      "ticket_note": "BBQ/lều/team-building theo gói đoàn, web không niêm yết giá — unknown",
+      "ticket_note": "Vé 49-89k (user verify)",
       "web_evidence": {
         "hours_web": "huvi.ai 07:00-22:00"
       },
@@ -23071,103 +22026,11 @@
       "cat": "market"
     },
     {
-      "poi_id": "osm:node/9921286579",
-      "name": "Lucky Gift Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0534676,
-      "lon": 108.2030432,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
       "poi_id": "osm:node/9921315929",
       "name": "Lưu Niệm - Đặc Sản",
       "type": "Cửa hàng quà lưu niệm",
       "lat": 16.0526672,
       "lon": 108.2025006,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
-      "poi_id": "osm:node/9921321271",
-      "name": "Smile Souvenir Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0525749,
-      "lon": 108.2025122,
       "opening_hours": [],
       "price_level": 2,
       "fee": 0,
@@ -23755,52 +22618,6 @@
       "rating": null,
       "tags": [
         "Chợ"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
-      "poi_id": "osm:node/11533284293",
-      "name": "Lucky Souvenir Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0522911,
-      "lon": 108.2027385,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
       ],
       "source": "osm/overpass",
       "fetched_at": "2026-10-11",
@@ -24521,111 +23338,11 @@
       "cat": "beach"
     },
     {
-      "poi_id": "osm:node/13202605156",
-      "name": "Lucky Souvenir Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0551062,
-      "lon": 108.2022603,
-      "opening_hours": [
-        "06:00-00:59"
-      ],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_osm_raw": [
-          "Mo-Su,PH 06:00-00:59"
-        ]
-      }
-    },
-    {
       "poi_id": "osm:node/13293564930",
       "name": "Himawari",
       "type": "Cửa hàng quà lưu niệm",
       "lat": 16.063498,
       "lon": 108.2315886,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
-      "poi_id": "osm:node/13301356138",
-      "name": "Deli Mart",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.053208,
-      "lon": 108.2024232,
       "opening_hours": [],
       "price_level": 2,
       "fee": 0,
@@ -24714,98 +23431,6 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "landmark"
-    },
-    {
-      "poi_id": "osm:node/13542877610",
-      "name": "Deli Mart",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0536855,
-      "lon": 108.2023552,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
-      "poi_id": "osm:node/13542877612",
-      "name": "Lucky Gift Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0530035,
-      "lon": 108.2031119,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
     },
     {
       "poi_id": "osm:node/13677406601",
@@ -25103,214 +23728,6 @@
       }
     },
     {
-      "poi_id": "osm:node/14045110792",
-      "name": "Lucky Gift Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0547741,
-      "lon": 108.2022835,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
-    },
-    {
-      "poi_id": "osm:node/14045111563",
-      "name": "Lotte Duty Free",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0561299,
-      "lon": 108.2020188,
-      "opening_hours": [
-        "06:00-00:59"
-      ],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_osm_raw": [
-          "Mo-Su,PH 06:00-00:59"
-        ]
-      }
-    },
-    {
-      "poi_id": "osm:node/14045123722",
-      "name": "JDV Jalux Duty Free Vietnam",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.055329,
-      "lon": 108.2022741,
-      "opening_hours": [
-        "06:00-00:59"
-      ],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_osm_raw": [
-          "Mo-Su,PH 06:00-00:59"
-        ]
-      }
-    },
-    {
-      "poi_id": "osm:node/14045124561",
-      "name": "Lucky Shop Vietnam Gift Shop",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0559255,
-      "lon": 108.202175,
-      "opening_hours": [
-        "06:00-00:59"
-      ],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_osm_raw": [
-          "Mo-Su,PH 06:00-00:59"
-        ]
-      }
-    },
-    {
       "poi_id": "osm:node/14045130739",
       "name": "Made in Vietnam",
       "type": "Cửa hàng quà lưu niệm",
@@ -25361,60 +23778,6 @@
       "web_evidence": {
         "hours_osm_raw": [
           "Mo-Su,PH 06:00-00:59"
-        ]
-      }
-    },
-    {
-      "poi_id": "osm:node/14045136237",
-      "name": "Lotte Duty Free",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0560661,
-      "lon": 108.202159,
-      "opening_hours": [
-        "05:00-00:59"
-      ],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market",
-      "hours_source": "osm-converted",
-      "web_evidence": {
-        "hours_osm_raw": [
-          "Mo-Su,PH 05:00-00:59"
         ]
       }
     },
@@ -25471,52 +23834,6 @@
           "Mo-Su,PH 07:00-00:59"
         ]
       }
-    },
-    {
-      "poi_id": "osm:node/14045145879",
-      "name": "Lotte Duty Free",
-      "type": "Cửa hàng quà lưu niệm",
-      "lat": 16.0563392,
-      "lon": 108.201992,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Cửa hàng quà lưu niệm"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 1,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "both",
-        "party": [
-          "family",
-          "group"
-        ],
-        "time": [
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "market"
     },
     {
       "poi_id": "osm:node/14067929701",
@@ -44360,6 +42677,55 @@
       "smart_tag_source": "manual+web",
       "ticket_note": "Đi tour cano từ Cửa Đại/Hội An (giá theo tour, chưa verify số)",
       "excursion": true
+    },
+    {
+      "poi_id": "manual:smile-goods-danang",
+      "name": "Smile Goods Danang",
+      "type": "Cửa hàng quà lưu niệm",
+      "cat": "market",
+      "lat": 16.0525749,
+      "lon": 108.2025122,
+      "opening_hours": [
+        "09:00-23:59"
+      ],
+      "hours_source": "user-verify",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 5.0,
+      "tags": [
+        "Cửa hàng quà lưu niệm"
+      ],
+      "intensity": 1,
+      "intensity_source": "canonical_rule",
+      "weather_sensitive": false,
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": null,
+        "space": "indoor",
+        "party": [
+          "family",
+          "group"
+        ],
+        "time": [
+          "morning"
+        ],
+        "budget": [
+          "quick-stop-30"
+        ]
+      },
+      "smart_tag_source": "manual+review",
+      "source": "manual+review",
+      "fetched_at": "2026-10-13",
+      "verified": false,
+      "visit_min": {
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low"
     }
   ],
   "enriched_at": "2026-10-10",
