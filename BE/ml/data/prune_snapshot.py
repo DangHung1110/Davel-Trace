@@ -42,6 +42,13 @@ REMOVALS = {
     "hiep hoi/to chuc": "tổ chức, không tham quan",
     "dai ly du lich": "phòng vé/agency, không phải điểm đến",
     "truong sa tourist": "văn phòng điều hành tour, không tham quan",
+    # airport/HCM souvenir chains (user review 2026-10-13: inside airport,
+    # JDV in HCM, Deli permanently closed, Lucky 1.6★)
+    "lotte duty free": "shop sân bay, user loại",
+    "jdv jalux": "shop sân bay HCM, user loại",
+    "lucky gift": "shop sân bay, user loại",
+    "lucky souvenir": "shop sân bay 1.6★, user loại",
+    "deli mart": "đóng vĩnh viễn, user loại",
     "dai ly du lich bang thuyen": "phòng vé/agency (tour đã có POI riêng)",
     "trung tam cham soc suc khoe": "cơ sở y tế",
     "trung tam y te": "cơ sở y tế",
