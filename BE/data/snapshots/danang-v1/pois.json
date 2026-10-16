@@ -2613,7 +2613,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -2627,7 +2627,8 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -2638,7 +2639,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "user: Muối Biển 100-200k, món đặc biệt 450k+, đồ uống tiền triệu"
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -2676,7 +2677,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -2690,7 +2691,8 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -2701,7 +2703,7 @@
         "name": "Le Comptoir"
       },
       "cat": "restaurant",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "user: Le Comptoir từ 400k"
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -3187,7 +3189,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -3201,11 +3203,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "user: Nén 150-300k"
     },
     {
       "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
@@ -3311,7 +3314,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -3325,7 +3328,8 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -3336,7 +3340,7 @@
         "name": "Cucina Luca"
       },
       "cat": "restaurant",
-      "price_note": "~600.000đ (khoảng 300-900 N ₫)"
+      "price_note": "user: Cucina Luca 180-400k"
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -3545,7 +3549,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -3559,13 +3563,14 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~650.000đ (khoảng 400-900 N ₫)"
+      "price_note": "user: Xanh 150k-1200k, vote medium"
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -11643,7 +11648,8 @@
         "hours": null,
         "name": null
       },
-      "cat": "museum"
+      "cat": "museum",
+      "must_go": true
     },
     {
       "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
@@ -12290,7 +12296,8 @@
         "hours": null,
         "name": null
       },
-      "cat": "museum"
+      "cat": "museum",
+      "must_go": true
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -12682,7 +12689,8 @@
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "must_go": true
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -12913,7 +12921,8 @@
       "hours_source": "rule_open_access",
       "cat": "nature",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "must_go": true
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -13031,7 +13040,8 @@
       },
       "cat": "attraction",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "must_go": true
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -13343,7 +13353,8 @@
       "hours_source": "rule_open_access",
       "cat": "attraction",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "must_go": true
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -15336,7 +15347,8 @@
         "hours": null,
         "name": "Art in Paradise Da Nang 3D Museum"
       },
-      "cat": "museum"
+      "cat": "museum",
+      "must_go": true
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -15461,7 +15473,8 @@
         "hours": null,
         "name": "Marble Mountains Museum"
       },
-      "cat": "museum"
+      "cat": "museum",
+      "must_go": true
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -16645,7 +16658,8 @@
       },
       "cat": "market",
       "verified_at": "2026-10-08",
-      "verified_by": "spotcheck-v1"
+      "verified_by": "spotcheck-v1",
+      "must_go": true
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -18657,7 +18671,8 @@
       },
       "cat": "attraction",
       "ticket_vnd": 75000,
-      "price_note": "user: SAY Beer ~100-300k/người"
+      "price_note": "user: SAY Beer ~100-300k/người",
+      "must_go": true
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -18894,7 +18909,8 @@
         "hours": null,
         "name": null
       },
-      "cat": "attraction"
+      "cat": "attraction",
+      "must_go": true
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
@@ -23907,7 +23923,8 @@
       "smart_tag_source": "rule_v1+curated",
       "cat": "landmark",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "must_go": true
     },
     {
       "poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0",
@@ -36359,11 +36376,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: không rõ tiền bạc"
     },
     {
       "poi_id": "ChIJFdFWDOQZQjERhEwTQhM7XII",
@@ -36413,11 +36431,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: không rõ tiền bạc"
     },
     {
       "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
@@ -36467,11 +36486,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: Giá 120.000 30.000.000"
     },
     {
       "poi_id": "ChIJe8GWJBYXQjERmtVZP78E5oU",
@@ -36575,7 +36595,8 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
@@ -36897,7 +36918,8 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
@@ -37271,7 +37293,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -37283,11 +37305,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "user: Oppa Bar 200-700k"
     },
     {
       "poi_id": "ChIJsztPMVkXQjERooynSorot-0",
@@ -38953,11 +38976,12 @@
         ],
         "budget": [
           "half-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: Không có giá cụ thể đâu cả"
     },
     {
       "poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4",
@@ -42523,7 +42547,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": true,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "both",
         "party": [
           "family",
@@ -42537,7 +42561,8 @@
         ],
         "budget": [
           "full-day"
-        ]
+        ],
+        "band_verified": true
       },
       "smart_tag_source": "manual+web",
       "ticket_vnd": 650000,
@@ -42545,7 +42570,8 @@
       "price_sources": [
         "https://vinwonders.com (bảng giá 2026)"
       ],
-      "excursion": true
+      "excursion": true,
+      "price_note": "user: VinWonders 650k, vote medium"
     },
     {
       "poi_id": "manual:cu-lao-cham",
