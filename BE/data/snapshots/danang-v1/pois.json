@@ -12638,11 +12638,11 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 150,
+        "p50": 210,
+        "p75": 300
       },
-      "dur_source": "category_rule",
+      "dur_source": "human",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
@@ -12688,9 +12688,10 @@
       "cat": "landmark",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
+      "access_note": "Không xuống trail sau 17h (tối, trơn); mùa khô T2-T8; giày trekking bắt buộc",
       "access_source": "mytour.danang.vn",
-      "must_go": true
+      "must_go": true,
+      "dur_note": "web 2026: trek 1km 15-20p xuống + 25-40p lên, chơi 2-3h (tixgo/yourvietnamtravel)"
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -15465,7 +15466,7 @@
         ]
       },
       "smart_tag_source": "rule_v1+curated",
-      "ticket_note": "BT tư nhân mới (cuối T4), chưa có giá niêm yết — unknown",
+      "ticket_note": "vé chưa rõ (bảo tàng mới, mở cửa cuối T4/2025; vietnamtourism/vietnam.vn không niêm yết vé)",
       "osm_evidence": {
         "osm": "node/12622064034",
         "dist_m": 18.9,
@@ -18857,7 +18858,9 @@
       "type": "Điểm thu hút khách du lịch",
       "lat": 15.9987511,
       "lon": 108.2551427,
-      "opening_hours": [],
+      "opening_hours": [
+        "06:00-18:00"
+      ],
       "visit_min": {
         "p25": 168,
         "p50": 240,
@@ -18910,7 +18913,9 @@
         "name": null
       },
       "cat": "attraction",
-      "must_go": true
+      "must_go": true,
+      "hours_source": "rule_temple_default",
+      "hours_note": "giờ ước lượng chùa (sáng-tối); lễ hội Quán Thế Âm 4:00-24:00 (19/2 âm lịch)"
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
