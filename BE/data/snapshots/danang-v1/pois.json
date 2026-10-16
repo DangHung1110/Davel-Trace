@@ -144,7 +144,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -165,7 +165,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -190,7 +190,7 @@
         "name": "Bé Bien"
       },
       "cat": "restaurant",
-      "price_note": "~800.000đ (payload: 200-800 N ₫)"
+      "price_note": "~500.000đ (khoảng 200-800 N ₫)"
     },
     {
       "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
@@ -325,7 +325,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -344,7 +344,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -369,7 +369,7 @@
         "name": "589 Hoang Dieu"
       },
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 200-600 N ₫)"
+      "price_note": "~400.000đ (khoảng 200-600 N ₫)"
     },
     {
       "poi_id": "ChIJi5XzTqsZQjERn5HbwcdvD5Y",
@@ -573,7 +573,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -595,7 +595,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -620,7 +620,7 @@
         "name": "Kara Beachside hotel"
       },
       "cat": "restaurant",
-      "price_note": "~700.000đ (payload: 100-700 N ₫)"
+      "price_note": "~400.000đ (khoảng 100-700 N ₫)"
     },
     {
       "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
@@ -1029,7 +1029,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -1048,7 +1048,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -1075,7 +1075,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -1277,7 +1277,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -1304,7 +1304,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -1322,9 +1322,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 200-600 N ₫)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~400.000đ (khoảng 200-600 N ₫)"
     },
     {
       "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
@@ -1387,9 +1387,9 @@
       },
       "hours_source": "web",
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -1462,7 +1462,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~800.000đ (payload: 300-800 N ₫)"
+      "price_note": "~550.000đ (khoảng 300-800 N ₫)"
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -1519,9 +1519,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 1-200.000 ₫)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~100.000đ (khoảng 1-200.000 ₫)"
     },
     {
       "poi_id": "ChIJd2HsN1oXQjER19a79kUNt-U",
@@ -1909,7 +1909,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -1934,7 +1934,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -1965,7 +1965,7 @@
           "Mo-Su 09:00-22:30"
         ]
       },
-      "price_note": "~700.000đ (payload: 200-700 N ₫)"
+      "price_note": "~450.000đ (khoảng 200-700 N ₫)"
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -2449,7 +2449,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJP-VRM2YXQjERbEUrtG6wq9Q",
@@ -2467,7 +2467,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -2487,7 +2487,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -2514,7 +2514,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -2576,7 +2576,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~400.000đ (payload: 1-400.000 ₫)"
+      "price_note": "~200.000đ (khoảng 1-400.000 ₫)"
     },
     {
       "poi_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
@@ -2594,7 +2594,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -2613,7 +2613,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "family",
@@ -2638,7 +2638,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -2656,7 +2656,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -2676,7 +2676,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "family",
@@ -2701,7 +2701,7 @@
         "name": "Le Comptoir"
       },
       "cat": "restaurant",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -2766,7 +2766,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -2830,7 +2830,7 @@
         "name": "SC Restaurant"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
@@ -2894,7 +2894,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
@@ -3019,7 +3019,7 @@
         "name": "Celina"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
@@ -3083,7 +3083,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~400.000đ (payload: 300-400 N ₫)"
+      "price_note": "~350.000đ (khoảng 300-400 N ₫)"
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -3167,7 +3167,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -3187,7 +3187,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "family",
@@ -3205,7 +3205,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
@@ -3336,7 +3336,7 @@
         "name": "Cucina Luca"
       },
       "cat": "restaurant",
-      "price_note": "~900.000đ (payload: 300-900 N ₫)"
+      "price_note": "~600.000đ (khoảng 300-900 N ₫)"
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -3391,7 +3391,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
@@ -3508,7 +3508,7 @@
         "name": "Noi Dat"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJYy-g38oQQjER2c931z_dDt4",
@@ -3565,7 +3565,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~900.000đ (payload: 400-900 N ₫)"
+      "price_note": "~650.000đ (khoảng 400-900 N ₫)"
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -4782,7 +4782,7 @@
         "name": "Nha Hang Mr.Anh"
       },
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
@@ -4909,7 +4909,7 @@
         "name": "Samdi Coffee"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
@@ -4973,7 +4973,7 @@
       "cat": "restaurant",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -4991,7 +4991,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -5010,7 +5010,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -5035,7 +5035,7 @@
         "name": "J T Coffee"
       },
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
@@ -5097,7 +5097,7 @@
         "name": "Hotel Rosa"
       },
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
@@ -5153,7 +5153,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
@@ -5215,7 +5215,7 @@
         "name": "Nhà Hàng Chay & Cà Phê Thúp An"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
@@ -5277,7 +5277,7 @@
         "name": "CaPhe Vuon Da Bien"
       },
       "cat": "restaurant",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
@@ -5295,7 +5295,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -5314,7 +5314,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -5332,7 +5332,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 200-600 N ₫)"
+      "price_note": "~400.000đ (khoảng 200-600 N ₫)"
     },
     {
       "poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM",
@@ -5456,7 +5456,7 @@
         "name": null
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
@@ -5575,7 +5575,7 @@
         "name": "CafeTi Ti"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
@@ -5709,7 +5709,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -5728,7 +5728,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -5751,7 +5751,7 @@
         "name": "Trung Hung Buu Tôa"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
@@ -5812,7 +5812,7 @@
         "name": "Hero"
       },
       "cat": "cafe",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJxX--D-oZQjERQ4LzQRoeVXk",
@@ -5830,7 +5830,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -5849,7 +5849,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -5872,7 +5872,7 @@
         "name": "Reply 1988"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
@@ -5890,7 +5890,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -5909,7 +5909,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -5932,7 +5932,7 @@
         "name": "Trình cà phê"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
@@ -5950,7 +5950,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -5969,7 +5969,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -5994,7 +5994,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -6012,7 +6012,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -6031,7 +6031,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6054,7 +6054,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
@@ -6072,7 +6072,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -6091,7 +6091,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6114,7 +6114,7 @@
         "name": "Nam House"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
@@ -6132,7 +6132,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -6151,7 +6151,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6174,7 +6174,7 @@
         "name": "Hủ Tiếu Mực"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
@@ -6192,7 +6192,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -6211,7 +6211,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6234,7 +6234,7 @@
         "name": "CafeNew Life"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
@@ -6252,7 +6252,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -6271,7 +6271,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6294,7 +6294,7 @@
         "name": "Nia Coffee"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
@@ -6312,7 +6312,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -6331,7 +6331,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6354,7 +6354,7 @@
         "name": "Cộng Cà Phê"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
@@ -6372,7 +6372,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -6391,7 +6391,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6414,7 +6414,7 @@
         "name": "Hoa Tu"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJW4dpfjkYQjERcGpyYomHFO4",
@@ -6432,7 +6432,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -6451,7 +6451,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6474,7 +6474,7 @@
         "name": "Quán Nga 2"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
@@ -6537,7 +6537,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -6555,7 +6555,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -6575,7 +6575,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6600,7 +6600,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -6618,7 +6618,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -6637,7 +6637,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -6662,7 +6662,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -6681,7 +6681,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -6702,7 +6702,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6725,7 +6725,7 @@
         "name": "Àla Cafe"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
@@ -6743,7 +6743,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -6762,7 +6762,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6787,7 +6787,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -6805,7 +6805,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -6824,7 +6824,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6847,7 +6847,7 @@
         "name": "Chè Tâm Ý"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
@@ -6865,7 +6865,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -6884,7 +6884,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6907,7 +6907,7 @@
         "name": "Khâu Cà Phê"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
@@ -6925,7 +6925,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -6944,7 +6944,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -6967,9 +6967,9 @@
         "name": "Pizza-Sandwich-Burger"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -6987,7 +6987,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -7006,7 +7006,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7030,9 +7030,9 @@
       },
       "hours_source": "rule_open_access",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -7050,7 +7050,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -7070,7 +7070,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7088,7 +7088,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
@@ -7106,7 +7106,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -7125,7 +7125,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7148,7 +7148,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
@@ -7166,7 +7166,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -7190,7 +7190,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7206,7 +7206,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M",
@@ -7224,7 +7224,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -7243,7 +7243,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7266,7 +7266,7 @@
         "name": "At Ca Phe"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
@@ -7284,7 +7284,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -7303,7 +7303,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7326,7 +7326,7 @@
         "name": "Cloud Garden Cafe"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
@@ -7344,7 +7344,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -7363,7 +7363,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7386,7 +7386,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
@@ -7404,7 +7404,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -7423,7 +7423,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7441,7 +7441,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
@@ -7460,7 +7460,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -7481,7 +7481,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7504,7 +7504,7 @@
         "name": "7 wonders"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
@@ -7522,7 +7522,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -7541,7 +7541,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7557,7 +7557,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
@@ -7575,7 +7575,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.6,
       "tags": [
@@ -7595,7 +7595,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7618,7 +7618,7 @@
         "name": "A tri"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
@@ -7636,7 +7636,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -7655,7 +7655,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7671,7 +7671,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJsYoIEOIXQjER_5_trbAwgnA",
@@ -7689,7 +7689,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -7708,7 +7708,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7731,7 +7731,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
@@ -7856,7 +7856,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -7875,7 +7875,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7891,7 +7891,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
@@ -7909,7 +7909,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -7928,7 +7928,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7944,7 +7944,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
@@ -7962,7 +7962,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -7981,7 +7981,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -7999,7 +7999,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
@@ -8069,7 +8069,7 @@
         "name": "SIX ON SIX"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
@@ -8087,7 +8087,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -8106,7 +8106,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8135,7 +8135,7 @@
           "24/7"
         ]
       },
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -8153,7 +8153,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -8172,7 +8172,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8195,7 +8195,7 @@
         "name": "Phuong"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
@@ -8213,7 +8213,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -8232,7 +8232,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8255,7 +8255,7 @@
         "name": "Venus Cafe"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
@@ -8273,7 +8273,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -8297,7 +8297,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8322,7 +8322,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -8340,7 +8340,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -8359,7 +8359,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8382,7 +8382,7 @@
         "name": "Il Stand"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
@@ -8400,7 +8400,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -8419,7 +8419,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8444,7 +8444,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -8510,7 +8510,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -8529,7 +8529,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8545,7 +8545,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJO7l-RdwZQjERNj5fr2VyZ9Y",
@@ -8564,7 +8564,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -8584,7 +8584,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8607,7 +8607,7 @@
         "name": "DNG"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
@@ -8628,7 +8628,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -8647,7 +8647,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8670,7 +8670,7 @@
         "name": "loving hut - vegan restaurant"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJzeNmTwARQjERLSXizyRKI9g",
@@ -8688,7 +8688,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -8707,7 +8707,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8723,7 +8723,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
@@ -8741,7 +8741,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -8760,7 +8760,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8783,7 +8783,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
@@ -8801,7 +8801,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -8820,7 +8820,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8836,7 +8836,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJHaTEwB4ZQjERrE6CMe37byI",
@@ -8854,7 +8854,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -8873,7 +8873,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8904,7 +8904,7 @@
       },
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -8922,7 +8922,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -8941,7 +8941,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -8971,7 +8971,7 @@
       },
       "hours_source": "web",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -8989,7 +8989,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -9013,7 +9013,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9036,7 +9036,7 @@
         "name": "Outpost"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
@@ -9096,7 +9096,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
@@ -9114,7 +9114,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -9134,7 +9134,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9150,7 +9150,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJk3YrZLoZQjERp5PbcDTftQw",
@@ -9168,7 +9168,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -9187,7 +9187,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9210,7 +9210,7 @@
         "name": "TuyetAnh Coffee"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
@@ -9340,7 +9340,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -9359,7 +9359,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9375,7 +9375,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ4Z8gV3cfQjERHH6fTdzj0E8",
@@ -9393,7 +9393,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -9412,7 +9412,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9428,7 +9428,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJn7_3kc8ZQjERBi6T5XvhPko",
@@ -9446,7 +9446,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -9465,7 +9465,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9481,7 +9481,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJa7FkIyUZQjER7VxLENFhuI0",
@@ -9499,7 +9499,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -9518,7 +9518,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9534,7 +9534,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
@@ -9552,7 +9552,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -9571,7 +9571,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9587,7 +9587,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJr-RyTyYfQjERmXNNs1WNyY4",
@@ -9605,7 +9605,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -9624,7 +9624,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9640,7 +9640,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
@@ -9656,7 +9656,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -9675,7 +9675,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9698,7 +9698,7 @@
         "name": "quán nhậu lộc viên"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
@@ -9716,7 +9716,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -9735,7 +9735,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9751,7 +9751,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ2XROb6EZQjERoqg1HHvwj88",
@@ -9769,7 +9769,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -9788,7 +9788,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9804,7 +9804,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
@@ -9822,7 +9822,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -9841,7 +9841,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9868,7 +9868,7 @@
       },
       "hours_source": "web",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -9884,7 +9884,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -9903,7 +9903,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9926,7 +9926,7 @@
         "name": "CaPhe Phuong Dong"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
@@ -9942,7 +9942,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -9961,7 +9961,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -9977,7 +9977,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
@@ -9995,7 +9995,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -10014,7 +10014,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10037,7 +10037,7 @@
         "name": "CaPhe Viet Anh"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
@@ -10114,7 +10114,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -10134,7 +10134,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10152,7 +10152,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
@@ -10290,7 +10290,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -10309,7 +10309,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10332,7 +10332,7 @@
         "name": "CafeBen"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
@@ -10350,7 +10350,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -10369,7 +10369,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10394,7 +10394,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -10412,7 +10412,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -10431,7 +10431,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10454,7 +10454,7 @@
         "name": "Nha me Lanh"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
@@ -10472,7 +10472,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -10491,7 +10491,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10514,7 +10514,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
@@ -10532,7 +10532,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -10551,7 +10551,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10574,7 +10574,7 @@
         "name": "PhuCoffee"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
@@ -10590,7 +10590,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -10609,7 +10609,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10632,7 +10632,7 @@
         "name": "NgocVan Coffee"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJuZTrvVoZQjER371drzqC5hk",
@@ -10650,7 +10650,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -10669,7 +10669,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10692,7 +10692,7 @@
         "name": "Kong Cafe"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
@@ -10710,7 +10710,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -10729,7 +10729,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10752,7 +10752,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
@@ -10831,7 +10831,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -10850,7 +10850,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10873,7 +10873,7 @@
         "name": "Cafe461"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
@@ -10891,7 +10891,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -10910,7 +10910,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10926,7 +10926,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
@@ -10944,7 +10944,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -10963,7 +10963,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -10986,7 +10986,7 @@
         "name": "1981 Coffee & Tea"
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
@@ -11055,7 +11055,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -11074,7 +11074,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -11090,7 +11090,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8",
@@ -11108,7 +11108,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -11127,7 +11127,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -11150,7 +11150,7 @@
         "name": null
       },
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJXfWk4QYZQjERpQw56WNZ0js",
@@ -11168,7 +11168,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -11187,7 +11187,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -11203,7 +11203,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJUf5Hcw8ZQjERsntEedW35TI",
@@ -11343,7 +11343,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -11362,7 +11362,7 @@
       "ws_source": "audit",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -11380,7 +11380,7 @@
       "cat": "cafe",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJbbs1ZTQYQjERi3OdfmnRk2g",
@@ -12418,7 +12418,7 @@
         "name": "Phú Hồng"
       },
       "cat": "lodging",
-      "price_note": "~500.000đ (payload: 20 US$)"
+      "price_note": "~500.000đ (khoảng 20 US$)"
     },
     {
       "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
@@ -13090,9 +13090,9 @@
       },
       "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa",
       "cat": "lodging",
-      "price_note": "~2.125.000đ (payload: 85 US$)",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "price_note": "~2.125.000đ (khoảng 85 US$)"
     },
     {
       "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
@@ -14593,7 +14593,7 @@
       "smart_tag_source": "rule_v1",
       "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan",
       "cat": "lodging",
-      "price_note": "~525.000đ (payload: 21 US$)"
+      "price_note": "~525.000đ (khoảng 21 US$)"
     },
     {
       "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
@@ -17758,7 +17758,7 @@
         "name": "LyLy Coffee"
       },
       "cat": "restaurant",
-      "price_note": "~400.000đ (payload: 1-400.000 ₫)"
+      "price_note": "~200.000đ (khoảng 1-400.000 ₫)"
     },
     {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
@@ -17820,7 +17820,7 @@
         "name": "OnenineCoffee"
       },
       "cat": "restaurant",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -18198,7 +18198,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -18217,7 +18217,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -18233,7 +18233,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJKdW4YgAfQjERF1TVangBTwY",
@@ -25725,7 +25725,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~950.000đ (payload: 38 US$)"
+      "price_note": "~950.000đ (khoảng 38 US$)"
     },
     {
       "poi_id": "ChIJKbntMIQXQjERh50f5GwfUm4",
@@ -25777,7 +25777,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~300.000đ (payload: 12 US$)"
+      "price_note": "~300.000đ (khoảng 12 US$)"
     },
     {
       "poi_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg",
@@ -25829,7 +25829,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.175.000đ (payload: 47 US$)"
+      "price_note": "~1.175.000đ (khoảng 47 US$)"
     },
     {
       "poi_id": "ChIJRZXlI6MZQjERcre1gDV0kFE",
@@ -25881,7 +25881,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~325.000đ (payload: 13 US$)"
+      "price_note": "~325.000đ (khoảng 13 US$)"
     },
     {
       "poi_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI",
@@ -25933,7 +25933,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.075.000đ (payload: 43 US$)"
+      "price_note": "~1.075.000đ (khoảng 43 US$)"
     },
     {
       "poi_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4",
@@ -25985,7 +25985,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~975.000đ (payload: 39 US$)"
+      "price_note": "~975.000đ (khoảng 39 US$)"
     },
     {
       "poi_id": "ChIJTQo19YMXQjER1DttYZqjHYo",
@@ -26037,7 +26037,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~950.000đ (payload: 38 US$)"
+      "price_note": "~950.000đ (khoảng 38 US$)"
     },
     {
       "poi_id": "ChIJN75cdYQXQjERBUnemtIubGM",
@@ -26093,7 +26093,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.000.000đ (payload: 40 US$)"
+      "price_note": "~1.000.000đ (khoảng 40 US$)"
     },
     {
       "poi_id": "ChIJzbKs7IMXQjERWf_Uz122Ohs",
@@ -26145,7 +26145,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~950.000đ (payload: 38 US$)"
+      "price_note": "~950.000đ (khoảng 38 US$)"
     },
     {
       "poi_id": "ChIJbeO3ddMZQjERzeIxy-6JpYc",
@@ -26197,7 +26197,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.450.000đ (payload: 58 US$)"
+      "price_note": "~1.450.000đ (khoảng 58 US$)"
     },
     {
       "poi_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM",
@@ -26252,7 +26252,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.125.000đ (payload: 45 US$)"
+      "price_note": "~1.125.000đ (khoảng 45 US$)"
     },
     {
       "poi_id": "ChIJrxxvlNsXQjERy-eJcpABRJA",
@@ -26304,7 +26304,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~725.000đ (payload: 29 US$)"
+      "price_note": "~725.000đ (khoảng 29 US$)"
     },
     {
       "poi_id": "ChIJT1sjdYQXQjERSLHKKZsmfdQ",
@@ -26356,7 +26356,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~900.000đ (payload: 36 US$)"
+      "price_note": "~900.000đ (khoảng 36 US$)"
     },
     {
       "poi_id": "ChIJW7SBUHoXQjERdpSIWHkCuh0",
@@ -26409,7 +26409,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.025.000đ (payload: 41 US$)"
+      "price_note": "~1.025.000đ (khoảng 41 US$)"
     },
     {
       "poi_id": "ChIJUeabB3kXQjERFP2JL7c8YCg",
@@ -26461,7 +26461,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.175.000đ (payload: 47 US$)"
+      "price_note": "~1.175.000đ (khoảng 47 US$)"
     },
     {
       "poi_id": "ChIJJbfHSGUXQjERRXCfzSX3s88",
@@ -26513,7 +26513,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.025.000đ (payload: 41 US$)"
+      "price_note": "~1.025.000đ (khoảng 41 US$)"
     },
     {
       "poi_id": "ChIJWcFCas8QQjERQGJzK8w1ta4",
@@ -26565,7 +26565,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~4.000.000đ (payload: 160 US$)"
+      "price_note": "~4.000.000đ (khoảng 160 US$)"
     },
     {
       "poi_id": "ChIJmZHsE5U9QjERDa3a1CuK3lo",
@@ -26621,7 +26621,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~11.100.000đ (payload: 444 US$)"
+      "price_note": "~11.100.000đ (khoảng 444 US$)"
     },
     {
       "poi_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
@@ -26673,7 +26673,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~2.775.000đ (payload: 111 US$)"
+      "price_note": "~2.775.000đ (khoảng 111 US$)"
     },
     {
       "poi_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
@@ -26732,7 +26732,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~4.375.000đ (payload: 175 US$)"
+      "price_note": "~4.375.000đ (khoảng 175 US$)"
     },
     {
       "poi_id": "ChIJMTadzMQQQjER29xKIZnnHAU",
@@ -26786,7 +26786,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~750.000đ (payload: 30 US$)"
+      "price_note": "~750.000đ (khoảng 30 US$)"
     },
     {
       "poi_id": "ChIJqXp39lv2QTERR9U4pFNMD2o",
@@ -26838,9 +26838,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~3.225.000đ (payload: 129 US$)",
       "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
-      "access_source": "sunworld.vn"
+      "access_source": "sunworld.vn",
+      "price_note": "~3.225.000đ (khoảng 129 US$)"
     },
     {
       "poi_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
@@ -26893,7 +26893,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~900.000đ (payload: 36 US$)"
+      "price_note": "~900.000đ (khoảng 36 US$)"
     },
     {
       "poi_id": "ChIJjb4Ah-QRQjERFlzALzxOOvo",
@@ -26954,7 +26954,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~22.850.000đ (payload: 914 US$)"
+      "price_note": "~22.850.000đ (khoảng 914 US$)"
     },
     {
       "poi_id": "ChIJd3RleOYXQjERQQD0TduMYnU",
@@ -27015,7 +27015,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.250.000đ (payload: 50 US$)"
+      "price_note": "~1.250.000đ (khoảng 50 US$)"
     },
     {
       "poi_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0",
@@ -27067,7 +27067,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~2.300.000đ (payload: 92 US$)"
+      "price_note": "~2.300.000đ (khoảng 92 US$)"
     },
     {
       "poi_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY",
@@ -27120,7 +27120,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.525.000đ (payload: 61 US$)"
+      "price_note": "~1.525.000đ (khoảng 61 US$)"
     },
     {
       "poi_id": "ChIJY2uJ-ZgRQjEROTUmuLdOGic",
@@ -27174,7 +27174,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~31.650.000đ (payload: 1.266 US$)"
+      "price_note": "~31.650.000đ (khoảng 1.266 US$)"
     },
     {
       "poi_id": "ChIJq56yCur3QTERYlOCLaSCVwQ",
@@ -27234,7 +27234,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.275.000đ (payload: 51 US$)"
+      "price_note": "~1.275.000đ (khoảng 51 US$)"
     },
     {
       "poi_id": "ChIJQT4SLJwRQjERvym-dW5QWJ0",
@@ -27287,7 +27287,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~2.225.000đ (payload: 89 US$)"
+      "price_note": "~2.225.000đ (khoảng 89 US$)"
     },
     {
       "poi_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
@@ -27339,7 +27339,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~9.400.000đ (payload: 376 US$)"
+      "price_note": "~9.400.000đ (khoảng 376 US$)"
     },
     {
       "poi_id": "ChIJEyLB68sQQjER7FTfkhV0_MY",
@@ -27391,7 +27391,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~4.375.000đ (payload: 175 US$)"
+      "price_note": "~4.375.000đ (khoảng 175 US$)"
     },
     {
       "poi_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
@@ -28437,7 +28437,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -28459,7 +28459,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28477,7 +28477,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
@@ -28495,7 +28495,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -28515,7 +28515,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28533,7 +28533,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
@@ -28551,7 +28551,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -28572,7 +28572,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28590,7 +28590,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
@@ -28608,7 +28608,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -28629,7 +28629,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28647,7 +28647,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g",
@@ -28665,7 +28665,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -28685,7 +28685,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28703,7 +28703,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJNzbzAwAZQjERynEwf3zOgYE",
@@ -28719,7 +28719,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -28739,7 +28739,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28757,7 +28757,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
@@ -28775,7 +28775,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -28796,7 +28796,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28814,7 +28814,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
@@ -28832,7 +28832,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -28852,7 +28852,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28870,7 +28870,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
@@ -28888,7 +28888,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -28911,7 +28911,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28929,7 +28929,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJka0rSjkYQjERCmramEII0n4",
@@ -28947,7 +28947,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -28967,7 +28967,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -28985,7 +28985,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJu2GuJRIXQjERzmEF0pBtsgM",
@@ -29004,7 +29004,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -29024,7 +29024,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29042,7 +29042,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
@@ -29061,7 +29061,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -29081,7 +29081,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29099,7 +29099,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJOxHeFjkYQjERZAilaOR-hJA",
@@ -29117,7 +29117,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -29137,7 +29137,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29155,9 +29155,9 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)",
       "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
-      "access_source": "sunworld.vn"
+      "access_source": "sunworld.vn",
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJeROGTS4ZQjERKlipW2HlSvw",
@@ -29175,7 +29175,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -29195,7 +29195,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29213,7 +29213,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJwYDU9ZwZQjERwliWFVsHlfw",
@@ -29231,7 +29231,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -29251,7 +29251,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29269,7 +29269,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
@@ -29287,7 +29287,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -29307,7 +29307,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -29325,7 +29325,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
@@ -29343,7 +29343,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -29363,7 +29363,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -29381,7 +29381,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJkYkOmOMXQjEREz4KLKpwAOE",
@@ -29437,7 +29437,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJxwczMkkXQjERoo3KDb0ZQKE",
@@ -29493,7 +29493,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~300.000đ (payload: 100-300 N ₫)"
+      "price_note": "~200.000đ (khoảng 100-300 N ₫)"
     },
     {
       "poi_id": "ChIJe3Ixim4XQjERbbrbMnyhr34",
@@ -29511,7 +29511,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -29531,7 +29531,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -29549,7 +29549,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
@@ -29621,7 +29621,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -29641,7 +29641,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -29659,7 +29659,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJO_gU03QZQjERdvtWlsIeyOM",
@@ -30362,7 +30362,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -30382,7 +30382,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "family",
@@ -30400,7 +30400,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJ03jTTgAXQjERpVQunmJHv2c",
@@ -30452,7 +30452,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~375.000đ (payload: 15 US$)"
+      "price_note": "~375.000đ (khoảng 15 US$)"
     },
     {
       "poi_id": "ChIJfbl-2sMXQjERKLfkuhtH-BE",
@@ -30505,7 +30505,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.625.000đ (payload: 65 US$)"
+      "price_note": "~1.625.000đ (khoảng 65 US$)"
     },
     {
       "poi_id": "ChIJoSXYBfIXQjERoD3rJE5AWDU",
@@ -30557,7 +30557,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~550.000đ (payload: 22 US$)"
+      "price_note": "~550.000đ (khoảng 22 US$)"
     },
     {
       "poi_id": "ChIJJXm_IjoXQjERqJ9FNnjWpx8",
@@ -30611,7 +30611,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~975.000đ (payload: 39 US$)"
+      "price_note": "~975.000đ (khoảng 39 US$)"
     },
     {
       "poi_id": "ChIJkRSDGIIXQjERdg4lYna_jV0",
@@ -30664,7 +30664,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~750.000đ (payload: 30 US$)"
+      "price_note": "~750.000đ (khoảng 30 US$)"
     },
     {
       "poi_id": "ChIJoWXWNIwXQjERjFwxSEpICZ4",
@@ -30716,7 +30716,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.475.000đ (payload: 59 US$)"
+      "price_note": "~1.475.000đ (khoảng 59 US$)"
     },
     {
       "poi_id": "ChIJu954vu8XQjERQNvn5_8eBE8",
@@ -30768,7 +30768,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~675.000đ (payload: 27 US$)"
+      "price_note": "~675.000đ (khoảng 27 US$)"
     },
     {
       "poi_id": "ChIJS0p9LgcXQjERRnDVDqhYvX4",
@@ -30820,7 +30820,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.400.000đ (payload: 56 US$)"
+      "price_note": "~1.400.000đ (khoảng 56 US$)"
     },
     {
       "poi_id": "ChIJn2uBfeUXQjERvTmGbdnPARE",
@@ -30877,7 +30877,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~775.000đ (payload: 31 US$)"
+      "price_note": "~775.000đ (khoảng 31 US$)"
     },
     {
       "poi_id": "ChIJR4RA3I0XQjERajP7wKxjYu0",
@@ -30929,7 +30929,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~675.000đ (payload: 27 US$)"
+      "price_note": "~675.000đ (khoảng 27 US$)"
     },
     {
       "poi_id": "ChIJXRkLVPUZQjERhjMP_j_cdkQ",
@@ -30981,7 +30981,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~625.000đ (payload: 25 US$)"
+      "price_note": "~625.000đ (khoảng 25 US$)"
     },
     {
       "poi_id": "ChIJq-4rgiMYQjERWeE47TN-W_Q",
@@ -31033,7 +31033,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~150.000đ (payload: 6 US$)"
+      "price_note": "~150.000đ (khoảng 6 US$)"
     },
     {
       "poi_id": "ChIJrW03HQAXQjERLRu5Xd4RvsE",
@@ -31085,7 +31085,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~425.000đ (payload: 17 US$)"
+      "price_note": "~425.000đ (khoảng 17 US$)"
     },
     {
       "poi_id": "ChIJQ-_7No0XQjERrR5A4J2fB9s",
@@ -31137,7 +31137,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~900.000đ (payload: 36 US$)"
+      "price_note": "~900.000đ (khoảng 36 US$)"
     },
     {
       "poi_id": "ChIJJXkD0OcbQjER8aTXsF-pS_Q",
@@ -31189,7 +31189,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~400.000đ (payload: 16 US$)"
+      "price_note": "~400.000đ (khoảng 16 US$)"
     },
     {
       "poi_id": "ChIJQWWv4A8YQjERuqj9zjNqKAc",
@@ -31241,7 +31241,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~1.475.000đ (payload: 59 US$)"
+      "price_note": "~1.475.000đ (khoảng 59 US$)"
     },
     {
       "poi_id": "ChIJ27_WHYQXQjERfwDksZnfqKM",
@@ -31293,7 +31293,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~300.000đ (payload: 12 US$)"
+      "price_note": "~300.000đ (khoảng 12 US$)"
     },
     {
       "poi_id": "ChIJs2LW3rEXQjERAndHSLNX-Rc",
@@ -31345,7 +31345,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~375.000đ (payload: 15 US$)"
+      "price_note": "~375.000đ (khoảng 15 US$)"
     },
     {
       "poi_id": "ChIJpTFl49UYQjERrzeUIxz8NL4",
@@ -31448,7 +31448,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~425.000đ (payload: 17 US$)"
+      "price_note": "~425.000đ (khoảng 17 US$)"
     },
     {
       "poi_id": "ChIJfS4VlKsZQjERPQy1DOvrEa8",
@@ -31500,7 +31500,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~525.000đ (payload: 21 US$)"
+      "price_note": "~525.000đ (khoảng 21 US$)"
     },
     {
       "poi_id": "ChIJM560Qk0YQjERJDvIocFeEIw",
@@ -31552,7 +31552,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~150.000đ (payload: 6 US$)"
+      "price_note": "~150.000đ (khoảng 6 US$)"
     },
     {
       "poi_id": "ChIJVVUC-lEYQjERqdANIT0ShEw",
@@ -31651,7 +31651,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~200.000đ (payload: 8 US$)"
+      "price_note": "~200.000đ (khoảng 8 US$)"
     },
     {
       "poi_id": "ChIJ767Qs08YQjERaSc6TDUM4WQ",
@@ -31703,7 +31703,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~300.000đ (payload: 12 US$)"
+      "price_note": "~300.000đ (khoảng 12 US$)"
     },
     {
       "poi_id": "ChIJgXLzUFEYQjERujTQH477KV0",
@@ -31755,7 +31755,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~600.000đ (payload: 24 US$)"
+      "price_note": "~600.000đ (khoảng 24 US$)"
     },
     {
       "poi_id": "ChIJWVl1NFUYQjERl2v9iNV-6F8",
@@ -31807,7 +31807,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~525.000đ (payload: 21 US$)"
+      "price_note": "~525.000đ (khoảng 21 US$)"
     },
     {
       "poi_id": "ChIJAXvSo5EZQjERNYmexlgFouI",
@@ -31859,7 +31859,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~325.000đ (payload: 13 US$)"
+      "price_note": "~325.000đ (khoảng 13 US$)"
     },
     {
       "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
@@ -31914,7 +31914,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~200.000đ (payload: 8 US$)"
+      "price_note": "~200.000đ (khoảng 8 US$)"
     },
     {
       "poi_id": "ChIJO3oiB7gZQjERONk8CvO8oTM",
@@ -31969,7 +31969,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~175.000đ (payload: 7 US$)"
+      "price_note": "~175.000đ (khoảng 7 US$)"
     },
     {
       "poi_id": "ChIJZxgQeVYYQjERTs3tEgp2lVY",
@@ -32021,7 +32021,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~350.000đ (payload: 14 US$)"
+      "price_note": "~350.000đ (khoảng 14 US$)"
     },
     {
       "poi_id": "ChIJj1wfpTQYQjERyAwSp1WRPpg",
@@ -32073,7 +32073,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~175.000đ (payload: 7 US$)"
+      "price_note": "~175.000đ (khoảng 7 US$)"
     },
     {
       "poi_id": "ChIJAUbRW8wZQjERf0sgTLr3Odo",
@@ -32125,7 +32125,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~275.000đ (payload: 11 US$)"
+      "price_note": "~275.000đ (khoảng 11 US$)"
     },
     {
       "poi_id": "ChIJJQWDpTQYQjER_VEl5Kl8HTY",
@@ -32177,7 +32177,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~300.000đ (payload: 12 US$)"
+      "price_note": "~300.000đ (khoảng 12 US$)"
     },
     {
       "poi_id": "ChIJ6ToOeVYYQjERj8BHGr6OZzc",
@@ -32229,7 +32229,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~275.000đ (payload: 11 US$)"
+      "price_note": "~275.000đ (khoảng 11 US$)"
     },
     {
       "poi_id": "ChIJ67sbOfwZQjERNfKPIKkEdyw",
@@ -32281,7 +32281,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~500.000đ (payload: 20 US$)"
+      "price_note": "~500.000đ (khoảng 20 US$)"
     },
     {
       "poi_id": "ChIJybre1xcZQjERDB05uYRpJBc",
@@ -32333,7 +32333,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~375.000đ (payload: 15 US$)"
+      "price_note": "~375.000đ (khoảng 15 US$)"
     },
     {
       "poi_id": "ChIJCc2lfXgZQjERSUvZYj3RsMw",
@@ -32385,7 +32385,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "lodging",
-      "price_note": "~175.000đ (payload: 7 US$)"
+      "price_note": "~175.000đ (khoảng 7 US$)"
     },
     {
       "poi_id": "ChIJ37FbsJgZQjERQho2DqSzX_Y",
@@ -35961,7 +35961,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJu557PTwYQjERu1jlhJR4LEU",
@@ -36198,7 +36198,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -36220,7 +36220,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -36236,7 +36236,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
@@ -36413,7 +36413,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36433,7 +36433,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -36449,7 +36449,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJFdFWDOQZQjERhEwTQhM7XII",
@@ -36467,7 +36467,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -36487,7 +36487,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -36503,7 +36503,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
@@ -36521,7 +36521,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36541,7 +36541,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -36557,7 +36557,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJe8GWJBYXQjERmtVZP78E5oU",
@@ -36611,7 +36611,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJ5aETx9oZQjERBE0f6BHAbyg",
@@ -36629,67 +36629,11 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.7,
       "tags": [
         "Quán bar"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-12",
-      "verified": false,
-      "crawl_query": "quán bar Sơn Trà",
-      "intensity_source": "canonical_rule",
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "cheap",
-        "space": "indoor",
-        "party": [
-          "couple",
-          "group"
-        ],
-        "time": [
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
-    },
-    {
-      "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
-      "name": "BlackOut Rooftop Bar",
-      "type": "Quán bar",
-      "lat": 16.0807577,
-      "lon": 108.246822,
-      "opening_hours": [
-        "15:00-00:00"
-      ],
-      "visit_min": {
-        "p25": 76,
-        "p50": 108,
-        "p75": 151
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 3,
-      "fee": 0,
-      "rating": 4.9,
-      "tags": [
-        "Quán bar",
-        "Quán bar cocktail",
-        "Nhà hàng"
       ],
       "intensity": 1,
       "ambience": "",
@@ -36721,7 +36665,63 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~800.000đ (payload: 200-800 N ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
+    },
+    {
+      "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
+      "name": "BlackOut Rooftop Bar",
+      "type": "Quán bar",
+      "lat": 16.0807577,
+      "lon": 108.246822,
+      "opening_hours": [
+        "15:00-00:00"
+      ],
+      "visit_min": {
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.9,
+      "tags": [
+        "Quán bar",
+        "Quán bar cocktail",
+        "Nhà hàng"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán bar Sơn Trà",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": "medium",
+        "space": "indoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "bar",
+      "price_note": "~500.000đ (khoảng 200-800 N ₫)"
     },
     {
       "poi_id": "ChIJP0--pEAXQjERoheJMf24gHA",
@@ -36951,7 +36951,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -36971,7 +36971,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -36987,7 +36987,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4",
@@ -37039,7 +37039,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 100-400 N ₫)"
+      "price_note": "~250.000đ (khoảng 100-400 N ₫)"
     },
     {
       "poi_id": "ChIJZ6w1fJgZQjERP9-_TlpgQXM",
@@ -37093,7 +37093,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJkxff_x0XQjERCC_CN8DFt54",
@@ -37149,7 +37149,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJK0J1RXMXQjERPPTldZI_e5c",
@@ -37207,7 +37207,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 100-400 N ₫)"
+      "price_note": "~250.000đ (khoảng 100-400 N ₫)"
     },
     {
       "poi_id": "ChIJdwwwfFoXQjERW6mXtIdB8LU",
@@ -37265,7 +37265,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 1-400.000 ₫)"
+      "price_note": "~200.000đ (khoảng 1-400.000 ₫)"
     },
     {
       "poi_id": "ChIJgaVvkV0XQjERNZYSVEJS_Xo",
@@ -37319,7 +37319,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
@@ -37337,7 +37337,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -37357,7 +37357,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -37373,7 +37373,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJsztPMVkXQjERooynSorot-0",
@@ -37426,7 +37426,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
@@ -37444,7 +37444,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -37464,7 +37464,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -37480,7 +37480,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJpSDE_bUXQjERRvGyIAFWpeE",
@@ -37532,7 +37532,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
@@ -37594,7 +37594,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~500.000đ (payload: 100-500 N ₫)"
+      "price_note": "~300.000đ (khoảng 100-500 N ₫)"
     },
     {
       "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
@@ -37651,7 +37651,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~300.000đ (payload: 100-300 N ₫)"
+      "price_note": "~200.000đ (khoảng 100-300 N ₫)"
     },
     {
       "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
@@ -37761,7 +37761,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA",
@@ -37815,7 +37815,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 100-400 N ₫)"
+      "price_note": "~250.000đ (khoảng 100-400 N ₫)"
     },
     {
       "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
@@ -37928,7 +37928,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 1-400.000 ₫)"
+      "price_note": "~200.000đ (khoảng 1-400.000 ₫)"
     },
     {
       "poi_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
@@ -37983,7 +37983,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 1-400.000 ₫)"
+      "price_note": "~200.000đ (khoảng 1-400.000 ₫)"
     },
     {
       "poi_id": "ChIJw3dqIx8ZQjERxFZPN1A3gew",
@@ -38365,7 +38365,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -38385,7 +38385,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -38401,7 +38401,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJcYos3CkZQjERibEDbcXOpQs",
@@ -38561,7 +38561,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ-WGIA80YQjER8XDqSVShrOE",
@@ -38824,7 +38824,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 100-400 N ₫)"
+      "price_note": "~250.000đ (khoảng 100-400 N ₫)"
     },
     {
       "poi_id": "ChIJs95SfgAZQjERWa0RkAoF0XA",
@@ -38842,7 +38842,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 3.6,
       "tags": [
@@ -38862,7 +38862,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "medium",
+        "price_band": "cheap",
         "space": "indoor",
         "party": [
           "couple",
@@ -38878,7 +38878,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
     },
     {
       "poi_id": "ChIJqRL3QEQZQjER71D0j0o7M7Q",
@@ -38930,7 +38930,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJVde_IrUZQjERJghlJMKJ6v0",
@@ -38948,7 +38948,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -38970,7 +38970,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "family",
@@ -38988,7 +38988,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJQydy2apx34oRnci64Kkdi4U",
@@ -39006,7 +39006,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -39027,7 +39027,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "expensive",
         "space": "indoor",
         "party": [
           "couple",
@@ -39043,7 +39043,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~1.000đ (payload: Trên 1 Tr ₫)"
+      "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)"
     },
     {
       "poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4",
@@ -39096,7 +39096,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "park",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJvyd5GLEZQjERZgKsgMmnnkM",
@@ -39150,7 +39150,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~400.000đ (payload: 300-400 N ₫)"
+      "price_note": "~350.000đ (khoảng 300-400 N ₫)"
     },
     {
       "poi_id": "ChIJ2exBne0ZQjERj07NR6zFg4c",
@@ -39206,7 +39206,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJvcXagjAYQjERCEguUGaxfEc",
@@ -39224,7 +39224,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -39244,7 +39244,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -39260,7 +39260,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~700.000đ (payload: 200-700 N ₫)"
+      "price_note": "~450.000đ (khoảng 200-700 N ₫)"
     },
     {
       "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
@@ -39279,7 +39279,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -39303,7 +39303,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -39319,7 +39319,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJj8OOR1UYQjERdZlR_ysOs4E",
@@ -39373,7 +39373,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJTQuJbKYZQjERAE9fPrQroZw",
@@ -39428,7 +39428,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJ3zTSR1UYQjERxzlJpa-DNHE",
@@ -39482,7 +39482,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~200.000đ (payload: 100-200 N ₫)"
+      "price_note": "~150.000đ (khoảng 100-200 N ₫)"
     },
     {
       "poi_id": "ChIJN_abDNcZQjERmLjyrAo7IPk",
@@ -39538,7 +39538,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "price_note": "~300.000đ (payload: 200-300 N ₫)"
+      "price_note": "~250.000đ (khoảng 200-300 N ₫)"
     },
     {
       "poi_id": "ChIJc2sSdpMZQjERg6ykGdI-3r4",
@@ -39662,7 +39662,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -39682,7 +39682,7 @@
       "io_label": null,
       "smart_tags": {
         "ticket": false,
-        "price_band": "expensive",
+        "price_band": "medium",
         "space": "outdoor",
         "party": [
           "family",
@@ -39699,7 +39699,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "park",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
@@ -39717,11 +39717,72 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.5,
       "tags": [
         "Quán bar karaoke"
+      ],
+      "intensity": 1,
+      "ambience": "",
+      "weather_sensitive": false,
+      "pros": [],
+      "cons": [],
+      "source": "serpapi/google-maps",
+      "fetched_at": "2026-10-12",
+      "verified": false,
+      "crawl_query": "quán bar Thanh Khê",
+      "intensity_source": "canonical_rule",
+      "ws_source": "canonical_rule",
+      "io_label": null,
+      "smart_tags": {
+        "ticket": false,
+        "price_band": "cheap",
+        "space": "indoor",
+        "party": [
+          "couple",
+          "group"
+        ],
+        "time": [
+          "night",
+          "rain-proof"
+        ],
+        "budget": [
+          "half-day"
+        ]
+      },
+      "smart_tag_source": "rule_v1",
+      "cat": "bar",
+      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
+    },
+    {
+      "poi_id": "ChIJkZi7gkcYQjERPd87DaNuhW0",
+      "name": "On The Radio",
+      "type": "Quán bar ca nhạc trực tiếp",
+      "lat": 16.0652451,
+      "lon": 108.2213507,
+      "opening_hours": [
+        "19:00-02:00"
+      ],
+      "visit_min": {
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
+      },
+      "dur_source": "category_rule",
+      "dur_confidence": "low",
+      "price_level": 2,
+      "fee": 0,
+      "rating": 4.7,
+      "tags": [
+        "Quán bar ca nhạc trực tiếp",
+        "Quán bar",
+        "Cửa hàng bia",
+        "Quán bia",
+        "Quán bar cocktail",
+        "Địa điểm ca nhạc trực tiếp",
+        "Điểm thu hút khách du lịch",
+        "Quán rượu"
       ],
       "intensity": 1,
       "ambience": "",
@@ -39753,68 +39814,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "bar",
-      "price_note": "~100.000đ (payload: 1-100.000 ₫)"
-    },
-    {
-      "poi_id": "ChIJkZi7gkcYQjERPd87DaNuhW0",
-      "name": "On The Radio",
-      "type": "Quán bar ca nhạc trực tiếp",
-      "lat": 16.0652451,
-      "lon": 108.2213507,
-      "opening_hours": [
-        "19:00-02:00"
-      ],
-      "visit_min": {
-        "p25": 76,
-        "p50": 108,
-        "p75": 151
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 3,
-      "fee": 0,
-      "rating": 4.7,
-      "tags": [
-        "Quán bar ca nhạc trực tiếp",
-        "Quán bar",
-        "Cửa hàng bia",
-        "Quán bia",
-        "Quán bar cocktail",
-        "Địa điểm ca nhạc trực tiếp",
-        "Điểm thu hút khách du lịch",
-        "Quán rượu"
-      ],
-      "intensity": 1,
-      "ambience": "",
-      "weather_sensitive": false,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-12",
-      "verified": false,
-      "crawl_query": "quán bar Thanh Khê",
-      "intensity_source": "canonical_rule",
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": "expensive",
-        "space": "indoor",
-        "party": [
-          "couple",
-          "group"
-        ],
-        "time": [
-          "night",
-          "rain-proof"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "bar",
-      "price_note": "~600.000đ (payload: 100-600 N ₫)"
+      "price_note": "~350.000đ (khoảng 100-600 N ₫)"
     },
     {
       "poi_id": "ChIJ8ar-PNQXQjERFGGdrbCAQbg",

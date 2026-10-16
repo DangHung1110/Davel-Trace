@@ -116,19 +116,25 @@ button.exp{background:#2563eb;color:#fff;border-color:#2563eb}
 <div id="list">__CARDS__</div>
 <script>
 const ans={};
+const LSKEY='money_review_v2';
+function save(){try{localStorage.setItem(LSKEY,JSON.stringify(ans));}catch(e){}}
 function upd(){document.getElementById('prog').textContent=`Đã tick ${Object.keys(ans).length}/__N__`;}
 document.querySelectorAll('.vote input[type=radio]').forEach(i=>i.addEventListener('change',()=>{
  const c=i.closest('.card');c.querySelectorAll('.vote label').forEach(l=>l.classList.remove('yes'));
  i.closest('label').classList.add('yes');
- ans[c.dataset.n]={key:c.dataset.k,v:i.value,note:c.querySelector('.note').value};upd();}));
+ ans[c.dataset.k]={v:i.value,note:c.querySelector('.note').value};upd();save();}));
 document.querySelectorAll('.note').forEach(t=>t.addEventListener('input',()=>{
- const c=t.closest('.card');if(ans[c.dataset.n])ans[c.dataset.n].note=t.value;}));
+ const c=t.closest('.card');if(ans[c.dataset.k]){ans[c.dataset.k].note=t.value;save();}}));
+(function restore(){let s={};try{s=JSON.parse(localStorage.getItem(LSKEY)||'{}');}catch(e){}
+ for(const [k,v] of Object.entries(s)){const c=document.querySelector(`.card[data-k="${CSS.escape(k)}"]`);if(!c)continue;
+  const r=c.querySelector(`input[value="${v.v}"]`);if(r){r.checked=true;r.closest('label').classList.add('yes');}
+  if(v.note)c.querySelector('.note').value=v.note;ans[k]=v;}upd();})();
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');
  const f=b.dataset.f;document.querySelectorAll('.card').forEach(c=>{
-  c.classList.toggle('hide',f==='todo'&&ans[c.dataset.n]===undefined);});}));
+  c.classList.toggle('hide',f==='todo'&&ans[c.dataset.k]===undefined);});}));
 document.getElementById('exp').addEventListener('click',()=>{
- const out=Object.keys(ans).sort((a,b)=>a-b).map(n=>({idx:+n,...ans[n]}));
+ const out=Object.keys(ans).sort().map(k=>({key:k,...ans[k]}));
  const b=new Blob([JSON.stringify(out)],{type:'application/json'});
  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='money_answers.json';a.click();
  alert(`Đã xuất ${out.length} đáp án. Gửi file money_answers.json lại cho team.`);});

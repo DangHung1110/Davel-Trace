@@ -88,10 +88,15 @@ button.on{background:#18181b;color:#fff}button.exp{background:#2563eb;color:#fff
 </div><div id="list">__CARDS__</div>
 <script>
 const ans={};
+const LSKEY='verify_200_v1';
+function save(){try{localStorage.setItem(LSKEY,JSON.stringify(ans));}catch(e){}}
 function upd(){const n=Object.keys(ans).length;document.getElementById('prog').textContent=`Đã tick ${n}/__N__`;}
 document.querySelectorAll('.vote input').forEach(i=>i.addEventListener('change',()=>{
  const c=i.closest('.card');c.querySelectorAll('.vote label').forEach(l=>l.classList.remove('yes'));
- i.closest('label').classList.add('yes');ans[c.dataset.n]=i.value;upd();}));
+ i.closest('label').classList.add('yes');ans[c.dataset.n]=i.value;upd();save();}));
+(function restore(){let s={};try{s=JSON.parse(localStorage.getItem(LSKEY)||'{}');}catch(e){}
+ for(const [n,v] of Object.entries(s)){const c=document.querySelector(`.card[data-n="${CSS.escape(n)}"]`);if(!c)continue;
+  const r=c.querySelector(`input[value="${v}"]`);if(r){r.checked=true;r.closest('label').classList.add('yes');}ans[n]=v;}upd();})();
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');
  const f=b.dataset.f;document.querySelectorAll('.card').forEach(c=>{

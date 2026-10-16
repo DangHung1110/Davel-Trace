@@ -98,14 +98,20 @@ button.exp{background:#2563eb;color:#fff;border-color:#2563eb}
 <div id="list">__CARDS__</div>
 <script>
 const ans={};
+const LSKEY='geo_review_v1';
+function save(){try{localStorage.setItem(LSKEY,JSON.stringify(ans));}catch(e){}}
 function upd(){let n=0;document.querySelectorAll('.card').forEach(c=>{if(c.querySelectorAll('label.yes').length===3)n++;});document.getElementById('prog').textContent=`Xong ${n}/__N__ POI (đủ 3 ô/điểm)`;}
 document.querySelectorAll('.vote input').forEach(i=>i.addEventListener('change',()=>{
  const v=i.closest('.vote');v.querySelectorAll('label').forEach(l=>l.classList.remove('yes'));
  i.closest('label').classList.add('yes');
  const c=i.closest('.card'),id=c.dataset.n;ans[id]=ans[id]||{};
- ans[id][v.dataset.q]=i.value;ans[id].note=c.querySelector('.note').value;upd();}));
+ ans[id][v.dataset.q]=i.value;ans[id].note=c.querySelector('.note').value;upd();save();}));
 document.querySelectorAll('.note').forEach(t=>t.addEventListener('input',()=>{
- const c=t.closest('.card'),id=c.dataset.n;ans[id]=ans[id]||{};ans[id].note=t.value;}));
+ const c=t.closest('.card'),id=c.dataset.n;ans[id]=ans[id]||{};ans[id].note=t.value;save();}));
+(function restore(){let s={};try{s=JSON.parse(localStorage.getItem(LSKEY)||'{}');}catch(e){}
+ for(const [id,v] of Object.entries(s)){const c=document.querySelector(`.card[data-n="${CSS.escape(id)}"]`);if(!c)continue;
+  for(const q of ['dur','ticket','access']){if(v[q]){const r=c.querySelector(`.vote[data-q="${q}"] input[value="${v[q]}"]`);if(r){r.checked=true;r.closest('label').classList.add('yes');}}}
+  if(v.note)c.querySelector('.note').value=v.note;ans[id]=v;}upd();})();
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');
  const f=b.dataset.f;document.querySelectorAll('.card').forEach(c=>{
