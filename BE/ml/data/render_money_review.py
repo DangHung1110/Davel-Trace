@@ -15,6 +15,7 @@ import argparse
 import html
 import json
 import os
+import re
 import unicodedata
 
 MUST_GO = [
@@ -27,7 +28,18 @@ MUST_GO = [
     "Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river",
     "Đà Nẵng Food Tour", "Bảo tàng 3D Art In Paradise",
 ]
-ADULT_KEYS = ("tiep vien", "hostess", "gai ", "massage rico", "thư giãn a-z")
+ADULT_KEYS = ("tiep vien", "hostess")
+ADULT_PHRASES = ("massage rico", "thư giãn a-z", "thư giãn từ a-z", "tắm tiên",
+                 "bia ôm", "tay vịn")
+
+
+def _adult_hit(name: str) -> bool:
+    n = _norm(name)
+    if any(k in n for k in ADULT_KEYS):
+        # word-ish boundary: avoid "ngai ngu"/"ikigai" false positives
+        return any(re.search(r"(^|[^a-z])" + re.escape(k) + r"([^a-z]|$)", n)
+                   for k in ADULT_KEYS)
+    return any(p in str(name or "").lower() for p in ADULT_PHRASES)
 
 
 def _norm(s: str) -> str:
@@ -50,7 +62,7 @@ def main() -> int:
                           "title": f"{p['name']} — band expensive, giá: {p.get('price_note', p.get('ticket_note', 'chưa rõ giá'))}",
                           "q": "Band giá", "a": "ĐÚNG", "b": "SAI"})
     for p in pois:
-        if any(k in _norm(p["name"]) for k in ADULT_KEYS):
+        if _adult_hit(p["name"]):
             items.append({"grp": "P2-adult", "key": p["poi_id"],
                           "title": f"{p['name']} ({p.get('type')}, ★{p.get('rating')})",
                           "q": "Nội dung người lớn?", "a": "GIỮ", "b": "LOẠI"})
