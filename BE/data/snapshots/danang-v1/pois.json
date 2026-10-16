@@ -2,7 +2,7 @@
   "snapshot": "danang-v1",
   "fetched_at": "2026-10-03",
   "source": "serpapi/google-maps",
-  "count": 766,
+  "count": 764,
   "pois": [
     {
       "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
@@ -10910,7 +10910,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": false,
-        "price_band": "cheap",
+        "price_band": "medium",
         "space": "indoor",
         "party": [
           "couple",
@@ -10926,7 +10926,7 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "cafe",
-      "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
+      "price_note": "user: CẬU CẢ 100-600k/người"
     },
     {
       "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
@@ -12553,7 +12553,8 @@
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
-      "access_source": "mytour.danang.vn"
+      "access_source": "mytour.danang.vn",
+      "parking_note": "user: Nhưng tới tầm 336p thì chắc là khá hiếm đó. Chắc là có vé giữ xe hoặc vào gì đó tôi không rõ"
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -13901,7 +13902,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "beach"
+      "cat": "beach",
+      "parking_note": "user: Chắc là có vé xe hay gì đó"
     },
     {
       "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
@@ -13913,12 +13915,12 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 84,
-        "p50": 120,
-        "p75": 168
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
+      "dur_source": "human",
+      "dur_confidence": "medium",
       "price_level": 2,
       "fee": 0,
       "rating": 4.4,
@@ -13958,7 +13960,8 @@
         "hours_web": "quy ước: công viên công cộng mở tự do"
       },
       "hours_source": "web",
-      "cat": "park"
+      "cat": "park",
+      "dur_note": "user: đi dạo 60-90p"
     },
     {
       "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
@@ -14207,14 +14210,16 @@
       "type": "Khu cắm trại",
       "lat": 16.1377247,
       "lon": 108.03805109999999,
-      "opening_hours": [],
+      "opening_hours": [
+        "06:00-23:30"
+      ],
       "visit_min": {
-        "p25": 126,
-        "p50": 180,
-        "p75": 252
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
+      "dur_source": "human",
+      "dur_confidence": "medium",
       "price_level": 2,
       "fee": 0,
       "rating": 4.6,
@@ -14249,7 +14254,11 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "nature"
+      "cat": "nature",
+      "dur_note": "user: đi dạo 60-90p",
+      "hours_source": "user-verify",
+      "hours_note": "user: mở 6:00-23:30",
+      "access_note": "user: đường vào có gờ cao, nguy hiểm xe gầm thấp"
     },
     {
       "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
@@ -14385,15 +14394,15 @@
       "lon": 108.1318981,
       "opening_hours": [],
       "visit_min": {
-        "p25": 101,
-        "p50": 144,
-        "p75": 202
+        "p25": 77,
+        "p50": 110,
+        "p75": 154
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
+      "dur_source": "human",
+      "dur_confidence": "medium",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.9,
+      "rating": 3.8,
       "tags": [
         "Công viên"
       ],
@@ -14409,7 +14418,7 @@
       "io_label": null,
       "ws_source": "canonical_rule",
       "smart_tags": {
-        "ticket": false,
+        "ticket": null,
         "price_band": null,
         "space": "outdoor",
         "party": [
@@ -14426,7 +14435,10 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "park"
+      "cat": "park",
+      "dur_note": "user: đi dạo 100-120p",
+      "rating_note": "user: 3.8 sao",
+      "ticket_note": "user: vé chưa rõ, có thể có"
     },
     {
       "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
@@ -14485,63 +14497,6 @@
       },
       "hours_source": "web",
       "cat": "attraction"
-    },
-    {
-      "poi_id": "ChIJHxbYrLEfQjER059Ow1OysAY",
-      "name": "Công Viên Cây Xanh",
-      "type": "Công viên",
-      "lat": 16.0891482,
-      "lon": 108.1197509,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
-      "visit_min": {
-        "p25": 101,
-        "p50": 144,
-        "p75": 202
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
-      "rating": 4.5,
-      "tags": [
-        "Công viên"
-      ],
-      "intensity": 2,
-      "ambience": "",
-      "weather_sensitive": true,
-      "pros": [],
-      "cons": [],
-      "source": "serpapi/google-maps",
-      "fetched_at": "2026-10-03",
-      "verified": false,
-      "intensity_source": "canonical_rule",
-      "io_label": null,
-      "ws_source": "canonical_rule",
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "family",
-          "couple",
-          "group"
-        ],
-        "time": [
-          "morning",
-          "sunset"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "web_evidence": {
-        "hours_web": "quy ước: công viên công cộng mở tự do"
-      },
-      "hours_source": "web",
-      "cat": "park"
     },
     {
       "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
@@ -14715,7 +14670,8 @@
       "hours_source": "rule_open_access",
       "cat": "beach",
       "verified_at": "2026-10-08",
-      "verified_by": "spotcheck-v1"
+      "verified_by": "spotcheck-v1",
+      "parking_note": "user: Thường sẽ có vé giữ xe"
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -14972,7 +14928,8 @@
         "name": "Huy Hoang Hotel"
       },
       "hours_source": "rule_open_access",
-      "cat": "beach"
+      "cat": "beach",
+      "parking_note": "user: Chắc là có vé xe"
     },
     {
       "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
@@ -18674,7 +18631,7 @@
       "ws_source": "canonical_rule",
       "smart_tags": {
         "ticket": true,
-        "price_band": "cheap",
+        "price_band": "medium",
         "space": "both",
         "party": [
           "family",
@@ -18699,7 +18656,8 @@
         "name": "RuNam"
       },
       "cat": "attraction",
-      "ticket_vnd": 75000
+      "ticket_vnd": 75000,
+      "price_note": "user: SAY Beer ~100-300k/người"
     },
     {
       "poi_id": "ChIJ_wp3YAAfQjERe_LOfLhrIhA",
@@ -20424,12 +20382,12 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 105,
-        "p50": 150,
-        "p75": 210
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
+      "dur_source": "human",
+      "dur_confidence": "medium",
       "intensity": 3,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
@@ -20454,7 +20412,8 @@
       "smart_tag_source": "rule_v1",
       "cat": "nature",
       "access_note": "Cáp treo ~07:30-21:30 theo tuyến; vé 2026 hiệu lực 3 ngày (sunworld.vn)",
-      "access_source": "sunworld.vn"
+      "access_source": "sunworld.vn",
+      "dur_note": "user: Núi Bà Nà đi từ sáng tới chiều/tối"
     },
     {
       "poi_id": "osm:node/4172034499",
@@ -20797,7 +20756,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "beach"
+      "cat": "beach",
+      "parking_note": "user: có vé xe và mở chắc là cả ngày"
     },
     {
       "poi_id": "osm:node/4386676224",
@@ -22462,53 +22422,6 @@
       "cat": "landmark"
     },
     {
-      "poi_id": "osm:node/10892129283",
-      "name": "Núi Đồng Đen",
-      "type": "Đỉnh núi",
-      "lat": 16.1073907,
-      "lon": 108.0386388,
-      "opening_hours": [],
-      "price_level": 2,
-      "fee": 0,
-      "rating": null,
-      "tags": [
-        "Đỉnh núi"
-      ],
-      "source": "osm/overpass",
-      "fetched_at": "2026-10-11",
-      "verified": false,
-      "visit_min": {
-        "p25": 105,
-        "p50": 150,
-        "p75": 210
-      },
-      "dur_source": "category_rule",
-      "dur_confidence": "low",
-      "intensity": 3,
-      "intensity_source": "canonical_rule",
-      "weather_sensitive": true,
-      "ws_source": "canonical_rule",
-      "io_label": null,
-      "smart_tags": {
-        "ticket": false,
-        "price_band": null,
-        "space": "outdoor",
-        "party": [
-          "couple",
-          "group"
-        ],
-        "time": [
-          "sunrise",
-          "morning"
-        ],
-        "budget": [
-          "half-day"
-        ]
-      },
-      "smart_tag_source": "rule_v1",
-      "cat": "nature"
-    },
-    {
       "poi_id": "osm:node/11161070775",
       "name": "Dragon's Head",
       "type": "Điểm thu hút khách du lịch",
@@ -23335,7 +23248,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "beach"
+      "cat": "beach",
+      "parking_note": "user: sao là 4.1. Mở cả ngày. Bãi Đá Đen là khu vực thiên nhiên công cộng nên thường miễn phí vào cửa, nhưng bạn nên liên hệ Ban Quản lý Sơn Trà qua số hotline địa phương để xác nhận vì có thể có phí nhỏ cho bãi đỗ xe."
     },
     {
       "poi_id": "osm:node/13293564930",
@@ -41201,7 +41115,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "park"
+      "cat": "park",
+      "parking_note": "user: Thường có vé xe, vé vào. Thời lượng thì có thể đi tầm 90p hoặc nhiều nhất là từ sáng tới chiều được luôn nên là cái thời lượng có thể kéo dài hơn nữa"
     },
     {
       "poi_id": "ChIJDYfSGZYZQjERmSERKl2Fj7E",
@@ -41304,7 +41219,8 @@
         ]
       },
       "smart_tag_source": "rule_v1",
-      "cat": "park"
+      "cat": "park",
+      "parking_note": "user: Có vé giữ xe thường là vậy. Này đi dạo tầm 60-90p thôi"
     },
     {
       "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
@@ -41691,7 +41607,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.1,
       "tags": [
         "Đại lý du lịch"
       ],
@@ -41723,7 +41639,8 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "attraction",
-      "excursion": true
+      "excursion": true,
+      "rating_note": "user: 4.1 sao; vào cửa miễn phí, liên hệ BQL Sơn Trà xác nhận phí đỗ xe"
     },
     {
       "poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo",

@@ -29,7 +29,7 @@ REQUIRED_POI_FIELDS = (
     "fetched_at", "verified", "source",
 )
 
-DUR_SOURCES = ("category_rule", "llm", "review_mined", "actual", "pending_llm")
+DUR_SOURCES = ("category_rule", "llm", "review_mined", "actual", "pending_llm", "human")
 DUR_CONFIDENCES = ("low", "medium", "high")
 
 
