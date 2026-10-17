@@ -1,1 +1,8 @@
-{"pairs": 1811, "snapshot_n": 346, "sources": "1000 rule + 633 qwen + 178 human", "cv_acc": 0.767, "held_acc": 0.78, "flip": 0.902, "features_gain": [["d_rating", 1491.807160437107], ["d_intensity", 1187.2409219741821], ["x_meal_after", 717.1614991426468], ["d_duration", 263.4832111597061], ["x_indoor_buffer", 135.05399978160858], ["prior_logp", 74.08580017089844], ["x_same_type", 50.46042013168335], ["d_price", 0.0], ["x_intensity_drop", 0.0], ["u_pace", 0.0], ["u_fitness", 0.0], ["u_spending", 0.0], ["u_outdoor", 0.0], ["c_hour", 0.0], ["c_rain", 0.0], ["c_daylight_left", 0.0], ["c_weekend", 0.0]]}
+{
+  "pairs": 2151,
+  "snapshot_n": 764,
+  "sources": "1000 rule + 973 qwen3-8b + 178 human",
+  "cv_acc": 0.793,
+  "held_acc": 0.777,
+  "flip": 0.728
+}
