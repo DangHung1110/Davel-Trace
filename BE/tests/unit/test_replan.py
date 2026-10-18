@@ -6,9 +6,11 @@ Run from repo root: python BE/tests/unit/test_replan.py -v
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.services import scorer  # noqa: E402
 from BE.app.services import state as store  # noqa: E402
 from BE.app.services.replan import replan  # noqa: E402
 
@@ -96,6 +98,14 @@ class TestReplan(unittest.TestCase):
                      {("depot", "draft"): 5}, trip)
         self.assertEqual(out["mode"], "no_solution")
         self.assertIn("FAR", out["reason"])
+
+    def test_wires_q_ij_into_optimizer(self):
+        s = fresh_state()
+        with mock.patch.object(scorer, "edge_scores",
+                               wraps=scorer.edge_scores) as m:
+            out = replan(s, {"type": "rain", "at": "13:00"}, POIS, TRAVEL, TRIP)
+        self.assertTrue(m.called)
+        self.assertEqual(out["mode"], "plan")
 
 
 if __name__ == "__main__":

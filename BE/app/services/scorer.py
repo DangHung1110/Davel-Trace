@@ -1,11 +1,14 @@
 """Transition scorer: q_ij for the optimizer (T030, lane B). Model or rule.
 
 score_transition(a, b, user, ctx) -> float (positive: a->b preferred).
-Backend: LightGBM BE/ml/patm/model.txt when present (16 features, same
-names as lane-A T026); otherwise nac-1 RULE fallback (stated in
-describe()). STUB-NOTE: rule weights + feature code mirror lane-A
-rule_score.py/features.py (absent in this worktree); phase-PR replaces
-them with imports. Rule path averages microseconds (target <5ms).
+Backend: LightGBM BE/ml/patm/model.txt when present. Features come from
+the lane-A T026+T062 extractor (17 features) when that module is
+importable; the in-file STUB mirror (16 features) is the fallback in a
+clean checkout. A width guard compares the loaded booster's feature count
+against the ACTIVE extractor: on mismatch the scorer falls back to the
+nac-1 RULE instead of crashing (stated in describe()). Rule weights +
+stub feature code mirror lane-A rule_score.py/features.py. Rule path
+averages microseconds (target <5ms).
 
 Inputs are plain POI dicts (type/intensity/rating/tags/...).
 """
@@ -25,6 +28,8 @@ FEATURE_NAMES = (
 
 _bst = None
 _backend = "rule"
+_note = ""
+_lane_cache = None
 
 
 def _num(v, default=0.0) -> float:
@@ -34,8 +39,42 @@ def _num(v, default=0.0) -> float:
         return float(default)
 
 
+def _lane_a_extract():
+    """(extract_fn, width) once: lane-A T026+T062 extractor, else stub 16f.
+
+    Resolved lazily and cached in a module global — feature extraction runs
+    ~n^2 times, the import attempt must not repeat per call.
+    """
+    global _lane_cache
+    if _lane_cache is None:
+        try:
+            from BE.ml.patm.features import FEATURE_NAMES as lane_names
+            from BE.ml.patm.features import extract
+            _lane_cache = (extract, len(lane_names))
+        except Exception:  # noqa: BLE001 - clean checkout has no BE/ml/patm
+            _lane_cache = (None, len(FEATURE_NAMES))
+    return _lane_cache
+
+
+def _norm_poi(p: dict) -> dict:
+    """Tolerate the flat `visit_min: int` shape used by the profile/replan
+    callers; the lane-A extractor expects `{"p50": ...}`. Dicts pass through."""
+    vm = p.get("visit_min")
+    if isinstance(vm, (int, float)):
+        return {**p, "visit_min": {"p50": vm}}
+    return p
+
+
 def _features(a: dict, b: dict, user: dict | None, ctx: dict | None) -> list[float]:
-    """STUB mirror of lane-A T026 extract (16). Replaced at phase-PR."""
+    """Active extractor: lane-A when importable, else the 16f stub mirror."""
+    extract, _n = _lane_a_extract()
+    if extract is not None:
+        return extract(_norm_poi(a), _norm_poi(b), user, ctx)
+    return _stub_features(_norm_poi(a), _norm_poi(b), user, ctx)
+
+
+def _stub_features(a: dict, b: dict, user: dict | None, ctx: dict | None) -> list[float]:
+    """STUB mirror of lane-A T026 extract (16). Used when lane-A is absent."""
     u = {"pace": 2, "fitness": 2, "spending_level": 2, "outdoor_bias": 0.0, **(user or {})}
     c = {"hour": 9, "rain_prob": 0.0, "daylight_left_h": 8.0, "is_weekend": False,
          **(ctx or {})}
@@ -82,22 +121,37 @@ def _rule(a: dict, b: dict) -> float:
 
 
 def _ensure_model(path: str = MODEL_PATH) -> bool:
-    global _bst, _backend
+    global _bst, _backend, _note
     if _bst is not None:
         return True
     if not os.path.exists(path):
         _backend = "rule"
+        _note = f"model file not found: {path}"
         return False
-    import lightgbm as lgb
-    _bst = lgb.Booster(model_file=path)
+    try:
+        import lightgbm as lgb
+        _bst = lgb.Booster(model_file=path)
+    except Exception as exc:  # noqa: BLE001 - never crash: fall back to rule
+        _bst = None
+        _backend = "rule"
+        _note = f"model load failed: {exc}"
+        return False
+    width = _lane_a_extract()[1]
+    if _bst.num_feature() != width:
+        _note = (f"model expects {_bst.num_feature()} features, "
+                 f"extractor gives {width}")
+        _bst = None
+        _backend = "rule"
+        return False
     _backend = "model"
+    _note = ""
     return True
 
 
 def describe() -> dict:
     _ensure_model()
     return {"backend": _backend, "model_path": MODEL_PATH,
-            "n_features": len(FEATURE_NAMES)}
+            "n_features": _lane_a_extract()[1], "note": _note}
 
 
 def score_transition(a: dict, b: dict, user: dict | None = None,

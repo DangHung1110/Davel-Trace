@@ -14,6 +14,7 @@ feasible profile, `selected: None` (select endpoint is lane C T033e).
 
 from __future__ import annotations
 
+from BE.app.services import scorer
 from BE.app.services.common import (
     parse_hours, status_map, to_min, total_fee)
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize
@@ -68,13 +69,14 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
     """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}."""
     plans, dropped = [], []
     by_id = {p["poi_id"]: p for p in pois}
+    q = scorer.edge_scores([p["poi_id"] for p in pois], by_id)
     pois_gate = {pid: {"verified": p.get("verified", False), "fee": p.get("fee", 0),
                        "opening_hours": p.get("opening_hours", [])}
                  for pid, p in by_id.items()}
     for prof in profiles:
         stub = [StubPOI(p["poi_id"], int(p.get("visit_min", 60)),
                         *_win(p, trip), _score(prof, p)) for p in pois]
-        out = optimize(stub, travel, _to_trip(trip))
+        out = optimize(stub, travel, _to_trip(trip), edge_scores=q)
         if out["itinerary"] is None:
             dropped.append({"profile": prof, "reason": out.get("reason", "")})
             continue

@@ -12,6 +12,7 @@ still preserved).
 
 from __future__ import annotations
 
+from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.common import parse_hours, to_min
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize
@@ -74,8 +75,10 @@ def replan(state: dict, event: dict, pois: list[dict],
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
                 to_min(trip.get("start_time", "07:00")))
     origin_id = "depot" if completed_ids else trip.get("origin_id", "depot")
+    q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
     out = optimize(stub, travel2, StubTrip(
-        start, to_min(trip.get("end_time", "18:00")), origin_id))
+        start, to_min(trip.get("end_time", "18:00")), origin_id),
+        edge_scores=q)
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),

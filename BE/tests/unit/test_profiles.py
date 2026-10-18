@@ -8,9 +8,11 @@ Run from repo root: python BE/tests/unit/test_profiles.py -v
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.services import scorer  # noqa: E402
 from BE.app.services.profiles import run_profiles  # noqa: E402
 
 H = 60
@@ -63,6 +65,14 @@ class TestProfiles(unittest.TestCase):
         pool = run_profiles([draft], TRAVEL, TRIP, MATRIX)
         self.assertEqual(pool["plans"], [])
         self.assertTrue(all("FAR" in item["reason"] for item in pool["dropped"]))
+
+    def test_wires_q_ij_into_optimizer(self):
+        with mock.patch.object(scorer, "edge_scores",
+                               wraps=scorer.edge_scores) as m:
+            pool = run_profiles(POIS, TRAVEL, TRIP, MATRIX)
+        self.assertTrue(m.called)
+        self.assertEqual(m.call_args[0][0], IDS)
+        self.assertGreaterEqual(len(pool["plans"]), 2)
 
 
 if __name__ == "__main__":
