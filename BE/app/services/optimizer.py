@@ -46,6 +46,26 @@ class StubTrip:
     origin_id: str = "depot"
 
 
+def travel_from_matrix(matrix, ids=None):
+    """T017 wiring: build optimize()'s travel dict from the cached matrix.
+
+    `matrix` is MatrixService-compatible (needs .ids and .minutes_or_none).
+    Pairs missing from the artifact stay ABSENT (arc forbidden in the model —
+    B3: infeasible stays infeasible, never 0/haversine/estimate). POI-metadata
+    adaptation (visit_min/opening-hours) stays in T061a, not here.
+    """
+    ids = list(matrix.ids) if ids is None else list(ids)
+    travel = {}
+    for a in ids:
+        for b in ids:
+            if a == b:
+                continue
+            m, _src = matrix.minutes_or_none(a, b)
+            if m is not None:
+                travel[(a, b)] = m
+    return travel
+
+
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, require_all: bool = False,
              timeout_s: float = TIMEOUT_S,

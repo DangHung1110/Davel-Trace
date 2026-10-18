@@ -6,6 +6,7 @@ best-found, infeasible (require_all, contradictory windows) has reason.
 Run from repo root: python BE/tests/unit/test_optimizer.py -v
 """
 
+import json
 import os
 import sys
 import time
@@ -13,9 +14,31 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
+from BE.app.services.matrix import MatrixService  # noqa: E402
+from BE.app.services.optimizer import (  # noqa: E402
+    StubPOI, StubTrip, optimize, travel_from_matrix)
 
 H = 60
+_REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
+_REAL_MATRIX = os.path.join(_REPO, "BE", "data", "snapshots", "danang-v1", "matrix.json")
+
+# Real-route fixture (metadata constants lifted from lane A snapshot danang-v1;
+# travel minutes themselves come from the committed OSRM artifact).
+DEPOT = "ChIJ03jTTgAXQjERpVQunmJHv2c"  # Sontra Sea Hotel — trip origin only
+FIXTURE = [  # (poi_id, visit_min p50, open_min, close_min, rating)
+    ("ChIJ5QtSVAAZQjERwKdjEbXi6wk", 72, 540, 1410, 5.0),
+    ("ChIJ8aa8NQAZQjERRM8-aOoNZ30", 72, 0, 1439, 5.0),
+    ("ChIJr_MgSAAZQjERnbnJDAtASZM", 72, 900, 1380, 5.0),
+    ("ChIJo5HJeVg9QjERxLqGaMYHXCw", 54, 420, 1140, 5.0),
+    ("ChIJKSs6ZVYZQjERSuj5bQ10t0M", 54, 390, 1020, 5.0),
+    ("ChIJE4CAepEXQjERg75wrYIZk2Q", 54, 360, 1170, 5.0),
+    ("ChIJM2DzGgAZQjERp54q-gVvu-g", 54, 420, 1140, 5.0),
+    ("ChIJfQr_phEZQjER5leh47CfKTQ", 108, 450, 1050, 5.0),
+    ("ChIJDxZNtxMZQjERJDjAHhQgcEc", 72, 600, 840, 5.0),
+    ("ChIJ8VYU_wQRQjER1lJ6MdGSHjg", 72, 360, 1170, 5.0),
+    ("ChIJg-cynKIXQjERyE7ZIaTaCO8", 144, 0, 1439, 5.0),
+]
+REAL_TRIP = StubTrip(7 * 60, 18 * 60, DEPOT)
 POIS = [
     StubPOI("musu", visit_min=90, open_min=7 * H + 30, close_min=17 * H, score=3.0),
     StubPOI("beach", visit_min=120, open_min=6 * H, close_min=19 * H, score=5.0),
@@ -88,6 +111,77 @@ class TestOptimizer(unittest.TestCase):
         self.assertIn(out["status"], ("optimal", "feasible-timeout"))
         self.assertGreaterEqual(to_min(out["itinerary"]["activities"][0]["start"]),
                                 7 * H + 45)
+
+
+@unittest.skipUnless(os.path.exists(_REAL_MATRIX), "matrix snapshot not built")
+class TestOptimizerRealMatrix(unittest.TestCase):
+    """TOPTW over the committed OSRM MLD artifact (travel minutes, never haversine)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.svc = MatrixService(os.path.dirname(_REAL_MATRIX))
+        with open(_REAL_MATRIX, encoding="utf-8") as f:
+            cls.doc = json.load(f)
+
+    def test_travel_from_matrix_matches_artifact(self):
+        ids = [DEPOT, FIXTURE[0][0], FIXTURE[1][0]]
+        travel = travel_from_matrix(self.svc, ids)
+        self.assertEqual(len(travel), 6)
+        for a in ids:
+            for b in ids:
+                if a == b:
+                    continue
+                cell = int(self.doc["cells"][f"{a}->{b}"]["minutes"])
+                self.assertEqual(travel[(a, b)], cell)
+                self.assertEqual(travel[(a, b)], self.svc.minutes(a, b)[0])
+
+    def test_real_schedule_respects_windows_and_travel(self):
+        stubs = [StubPOI(pid, dur, o, c, r)
+                 for (pid, dur, o, c, r) in FIXTURE]
+        ids = [DEPOT] + [p.poi_id for p in stubs]
+        travel = travel_from_matrix(self.svc, ids)
+        t0 = time.monotonic()
+        out = optimize(stubs, travel, REAL_TRIP)
+        wall = time.monotonic() - t0
+        self.assertIn(out["status"], ("optimal", "feasible-timeout"))
+        acts = out["itinerary"]["activities"]
+        self.assertTrue(acts)
+        self.assertLess(wall, 8.0)
+        by_id = {row[0]: row for row in FIXTURE}
+        visited = [a["poi_id"] for a in acts]
+        self.assertNotIn(DEPOT, visited)
+        prev_id, prev_end = None, None
+        for k, act in enumerate(acts):
+            _, dur, opn, cls_, _ = by_id[act["poi_id"]]
+            s, e = to_min(act["start"]), to_min(act["end"])
+            self.assertGreaterEqual(s, opn)
+            self.assertLessEqual(e, min(cls_, REAL_TRIP.end_min))
+            self.assertEqual(e - s, dur)
+            if k == 0:
+                need = self.svc.minutes(DEPOT, act["poi_id"])[0]
+                self.assertGreaterEqual(s, REAL_TRIP.start_min + need)
+            else:
+                need = self.svc.minutes(prev_id, act["poi_id"])[0]
+                self.assertGreaterEqual(s - prev_end, need)
+            prev_id, prev_end = act["poi_id"], e
+        print(f"\n real matrix {out['status']}: {len(acts)} acts "
+              f"score {out['itinerary']['total_score']} in {wall:.2f}s")
+
+    def test_scale_best_found_within_timeout(self):
+        # 25 candidates is the largest deterministic slice that yields a
+        # best-found itinerary here; all 150 is outside the basic envelope.
+        others = [i for i in self.svc.ids[:25] if i != DEPOT]
+        ids = [DEPOT] + others
+        stubs = [StubPOI(i, 60, 7 * H, 18 * H, 1.0) for i in ids]
+        travel = travel_from_matrix(self.svc, ids)
+        t0 = time.monotonic()
+        out = optimize(stubs, travel, REAL_TRIP)
+        wall = time.monotonic() - t0
+        self.assertIsNotNone(out["itinerary"])
+        self.assertIn(out["status"], ("optimal", "feasible-timeout"))
+        self.assertLess(wall, 8.0)
+        print(f"\n scale {len(ids) - 1} pois {out['status']}: "
+              f"{len(out['itinerary']['activities'])} acts in {wall:.2f}s")
 
 
 if __name__ == "__main__":
