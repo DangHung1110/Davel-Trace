@@ -5,6 +5,11 @@ passed DIRECTLY (STUB-NOTE: lane-A event_clf T044 classifies text into
 events at phase-PR). Completed activities are fixed (T045 contract);
 only remaining is re-optimized (T017), then validated (T018).
 
+Horizon is the ETB hard deadline `_deadline(trip)` = min(end_time,
+return_time): a `return_time` is a hard within-day cap and is NEVER
+silently stretched to end_time (T046). Used for the optimizer's Tmax
+and the opening-hours fallback window.
+
 Modes: plan (new version), clarify (event conflicts a hard constraint
 -> ask priority, state untouched), no_solution (structured, completed
 still preserved).
@@ -17,6 +22,17 @@ from BE.app.services import state as store
 from BE.app.services.common import parse_hours, to_min
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize
 from BE.app.services.validator import validate
+
+
+def _deadline(trip: dict) -> int:
+    """ETB hard within-day deadline: min(end_time, return_time) (T046).
+
+    `return_time` (when set) is a hard cap — the horizon is never
+    silently stretched to `end_time`. Defaults to end_time "18:00".
+    """
+    end = to_min(trip.get("end_time", "18:00"))
+    rt = trip.get("return_time")
+    return min(end, to_min(rt)) if rt else end
 
 
 def _event_drops(event: dict, remaining: list[dict], by_id: dict) -> set[str]:
@@ -76,9 +92,8 @@ def replan(state: dict, event: dict, pois: list[dict],
                 to_min(trip.get("start_time", "07:00")))
     origin_id = "depot" if completed_ids else trip.get("origin_id", "depot")
     q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
-    out = optimize(stub, travel2, StubTrip(
-        start, to_min(trip.get("end_time", "18:00")), origin_id),
-        edge_scores=q)
+    out = optimize(stub, travel2, StubTrip(start, _deadline(trip), origin_id),
+                   edge_scores=q)
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),
@@ -121,4 +136,4 @@ def replan(state: dict, event: dict, pois: list[dict],
 def _win(p: dict, trip: dict, state: dict) -> tuple[int, int]:
     return (parse_hours(p.get("opening_hours")) or
             (to_min(state.get("now", trip.get("start_time", "07:00"))),
-             to_min(trip.get("end_time", "18:00"))))
+             _deadline(trip)))  # fallback window also clamps to the deadline
