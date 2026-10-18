@@ -5,9 +5,9 @@ Contract (spec FR-001..006):
   transport + activity/food/space/pace/fitness/crowd/order preferences.
 - FR-004: separate hard_constraints / soft_prefs / assumptions /
   uncertainties — soft is NEVER copied into hard slots (FR-006).
-- FR-005: missing city -> needs_clarification ["city"] (cannot assume
-  the destination); missing time -> stated default assumption
-  (07:00-18:00, 1 day) recorded in `assumptions`, never silent.
+- FR-005: missing city/budget -> needs clarification; missing time -> stated
+  default assumption (07:00-18:00, 1 day) recorded in `assumptions`, never
+  silent.
 
 `llm_fn` (default llm.complete_json) is injectable for mock tests.
 """
@@ -31,7 +31,7 @@ class TripSlots(BaseModel):
     end_time: str = ""
     days: int = 0
     travelers: int = 0
-    budget: int = 0
+    budget: int | None = None
     transport: list[str] = Field(default_factory=list)
     must_visit: list[str] = Field(default_factory=list)
     avoid: list[str] = Field(default_factory=list)
@@ -47,7 +47,8 @@ PROMPT_TEMPLATE = (
     "Trích xuất yêu cầu du lịch tiếng Việt thành JSON đúng schema, "
     "chỉ trả JSON, không giải thích.\n"
     "Schema: city, date, start_time/end_time (HH:MM), days, travelers, "
-    "budget (VND số nguyên), transport[], must_visit[] (CHỈ khi user nói "
+    "budget (VND số nguyên nếu user nêu, null nếu chưa nêu), transport[], "
+    "must_visit[] (CHỈ khi user nói "
     "bắt buộc/phải ghé), avoid[] (CHỈ khi user nói tránh/không đi), "
     "activities[], food_prefs[], order_prefs[] (cặp [trước, sau]), "
     "hard_constraints[], soft_prefs[] (sở thích mềm, KHÔNG đưa vào "
@@ -64,8 +65,13 @@ def parse(text: str, user_id: str = "u1", llm_fn=None) -> dict:
     llm_fn = llm_fn or llm_gateway.complete_json
     slots = TripSlots(**llm_fn(PROMPT_TEMPLATE.format(text=text), TripSlots))
     assumptions: list[str] = []
+    missing: list[str] = []
     if not slots.city.strip():
-        return {"needs_clarification": ["city"], "assumptions": assumptions,
+        missing.append("city")
+    if slots.budget is None:
+        missing.append("budget")
+    if missing:
+        return {"needs_clarification": missing, "assumptions": assumptions,
                 "soft_prefs": slots.soft_prefs}
     start = slots.start_time or DEFAULT_START
     end = slots.end_time or DEFAULT_END

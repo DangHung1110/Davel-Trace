@@ -52,6 +52,15 @@ class TestParseContract(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         self.assertEqual(r.json()["needs_clarification"], ["city"])
 
+    def test_parse_missing_budget_needs_clarification(self):
+        parser_svc.llm_gateway.complete_json = lambda prompt, schema: dict(FULL, budget=None)
+        try:
+            r = client.post("/v1/parse", json={"text": "đi Đà Nẵng"})
+        finally:
+            parser_svc.llm_gateway.complete_json = TestParseContract._real
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["needs_clarification"], ["budget"])
+
     def test_request_validation_uses_error_envelope(self):
         r = client.post("/v1/parse", json={})
         self.assertEqual(r.status_code, 422)

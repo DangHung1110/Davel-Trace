@@ -22,6 +22,7 @@ FULL = {"city": "Đà Nẵng", "date": "2026-10-03", "start_time": "07:00",
         "hard_constraints": ["ngân sách 3 triệu"], "soft_prefs": ["yên tĩnh"],
         "uncertainties": []}
 NO_CITY = dict(FULL, city="")
+NO_BUDGET = {key: value for key, value in FULL.items() if key != "budget"}
 NO_TIME = dict(FULL, start_time="", end_time="", days=0)
 VAGUE = dict(FULL, must_visit=[], avoid=[], activities=["đi biển"],
              soft_prefs=["thích biển"], hard_constraints=[])
@@ -47,6 +48,15 @@ class TestParser(unittest.TestCase):
         out = parse("đi chơi 2 người 3 triệu", llm_fn=mock(NO_CITY))
         self.assertEqual(out["needs_clarification"], ["city"])
         self.assertNotIn("trip", out)
+
+    def test_missing_budget_clarifies(self):
+        out = parse("đi Đà Nẵng", llm_fn=mock(NO_BUDGET))
+        self.assertEqual(out["needs_clarification"], ["budget"])
+        self.assertNotIn("trip", out)
+
+    def test_zero_budget_is_valid(self):
+        out = parse("đi Đà Nẵng miễn phí", llm_fn=mock(dict(FULL, budget=0)))
+        self.assertEqual(out["trip"].budget, 0)
 
     def test_missing_time_assumes_stated(self):
         out = parse("đi Đà Nẵng 2 người", llm_fn=mock(NO_TIME))
