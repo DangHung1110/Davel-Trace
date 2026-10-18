@@ -13,7 +13,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.eval.metrics import GATE_CHECKS, evaluate, vroh  # noqa: E402
+from BE.eval.metrics import GATE_CHECKS, dtu, evaluate, tcs, vroh  # noqa: E402
 
 SNAPSHOT_DIR = os.path.join("data", "snapshots", "danang-v1")
 
@@ -91,6 +91,39 @@ class TestMetrics(unittest.TestCase):
         rep = evaluate(bad, trip, self.pois, self.matrix)
         self.assertIn("TCS", rep["gate"]["violations"])
         self.assertEqual(rep["soft"], {})
+
+    def test_tcs_uses_earlier_end_or_return_time(self):
+        activity = {"activities": [{"start": "17:00", "end": "18:00"}]}
+        base_trip = {"start_time": "07:00", "end_time": "20:00"}
+
+        # A return before the trip end is the effective deadline.
+        self.assertEqual(tcs(activity, dict(base_trip, return_time="17:30"), {}, {}), 0.0)
+        # A trip end before the return remains the effective deadline.
+        self.assertEqual(
+            tcs(activity, {"start_time": "07:00", "end_time": "17:30",
+                           "return_time": "20:00"}, {}, {}),
+            0.0,
+        )
+        # The deadline is inclusive, and omitting return_time keeps old behavior.
+        self.assertEqual(
+            tcs({"activities": [{"start": "17:00", "end": "17:30"}]},
+                dict(base_trip, return_time="17:30"), {}, {}),
+            1.0,
+        )
+        self.assertEqual(
+            tcs({"activities": [{"start": "17:00", "end": "19:00"}]},
+                base_trip, {}, {}),
+            1.0,
+        )
+
+    def test_dtu_uses_earlier_end_or_return_time(self):
+        itinerary = {"activities": [{"start": "07:00", "end": "09:00"}]}
+        trip = {"start_time": "07:00", "end_time": "20:00", "return_time": "18:00"}
+        self.assertAlmostEqual(dtu(itinerary, trip, {}, {}), 120 / 660)
+        self.assertAlmostEqual(
+            dtu(itinerary, {"start_time": "07:00", "end_time": "20:00"}, {}, {}),
+            120 / 780,
+        )
 
     def test_unknown_poi_fails_far(self):
         bad = {"activities": [{"poi_id": "ghost-poi",

@@ -5,6 +5,7 @@ reuses these primitives via gate.py):
   itinerary: {"activities": [{"poi_id", "start": "HH:MM", "end": "HH:MM",
                "explanation": {"evidence": [...]}}], "total_cost": int (optional)}
   trip: {"budget": int, "start_time": "HH:MM", "end_time": "HH:MM",
+         "return_time": "HH:MM" (optional),
          "must_visit": [ids], "avoid": [ids], "order_prefs": [[a, b], ...]}
   pois: {poi_id: POI snapshot dict} (opening_hours, fee, rating, verified)
   matrix: {"a->b": {"minutes": int}} (OSRM cache; never haversine here)
@@ -28,6 +29,12 @@ def _in_range(start: int, end: int, spec: str) -> bool:
 
 def _acts(itinerary: dict) -> list[dict]:
     return itinerary.get("activities", [])
+
+
+def _trip_deadline(trip: dict) -> int:
+    end = to_min(trip["end_time"])
+    return_time = trip.get("return_time")
+    return min(end, to_min(return_time)) if return_time is not None else end
 
 
 def _cost(itinerary: dict, pois: dict) -> int:
@@ -84,13 +91,13 @@ def bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> int:
 def tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     """Time Constraint Satisfaction: no overlaps, all inside trip window.
 
-    Returns 1.0 iff every activity fits [start_time, end_time] and no two
-    overlap; else the fraction of pairwise-OK adjacencies. Gate needs 1.
+    Returns 1.0 iff every activity fits [start_time, effective deadline] and
+    no two overlap; else the fraction of pairwise-OK adjacencies. Gate needs 1.
     """
     acts = _acts(itinerary)
     if not acts:
         return 0.0
-    ws, we = to_min(trip["start_time"]), to_min(trip["end_time"])
+    ws, we = to_min(trip["start_time"]), _trip_deadline(trip)
     ordered = sorted(acts, key=lambda a: a["start"])
     if any(to_min(a["start"]) < ws or to_min(a["end"]) > we or
            to_min(a["end"]) <= to_min(a["start"]) for a in ordered):
@@ -133,7 +140,7 @@ def str_score(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
 def dtu(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     """Daily Time Utilization = visit minutes / available minutes (0..1)."""
     total = sum(to_min(a["end"]) - to_min(a["start"]) for a in _acts(itinerary))
-    avail = to_min(trip["end_time"]) - to_min(trip["start_time"])
+    avail = _trip_deadline(trip) - to_min(trip["start_time"])
     return max(0.0, min(1.0, total / avail)) if avail > 0 else 0.0
 
 
