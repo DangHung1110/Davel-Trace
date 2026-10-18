@@ -1,0 +1,2 @@
+# Auto-merge append-only logs (union, no conflict markers) — oracle review 2026-09-28.
+specs/001-travel-agent-mvp/track.md merge=union

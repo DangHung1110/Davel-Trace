@@ -25,11 +25,11 @@ T007 split 4 file để khỏi conflict: `schemas/trip.py` (C), `schemas/poi.py`
 4. Xong 1 phase → mở PR lane → `dev` (diff <400 dòng), update bảng Tracking + tick `[X]` task trong tasks.md.
 5. Muốn biết ai xong gì: `git pull` mỗi sáng, xem `[X]` trong tasks.md + bảng Tracking — không cần hỏi.
 
-## File ownership (vùng cấm lấn)
+## File ownership (vùng cấm lấn) — ratified 2026-09-28 per oracle review
 
-- **A**: `data/snapshots/**`, `BE/ml/**`, `BE/eval/**`, `BE/tests/unit/test_patm.py`, eval tests.
-- **B**: `BE/app/services/{matrix,gate,optimizer,validator,response,profiles,state}.py`.
-- **C**: `BE/app/{main.py,routers/**,schemas/**}`, `BE/app/services/{llm,parser,retrieval,rank,context_score,explainer,weather,expenses}.py`, `BE/tests/{contract/**,integration/**}`, `FE/lib/api/**`, `FE/lib/features/**`, `BE/.env.example`.
+- **A**: `data/snapshots/**`, `BE/ml/**`, `BE/eval/**`, `BE/app/services/snapshot.py` (T008-assigned), `BE/common.py` (shared-helper survivor — wiring PR consolidates cross-lane helpers here), `BE/tests/unit/test_patm.py`, eval tests.
+- **B**: `BE/app/services/{matrix,gate,optimizer,validator,response,profiles,state,budget,scorer,replan,common}.py`, `BE/tests/integration/test_us8_replan.py` (ngoại lệ: T048 assigned B dù `tests/integration/**` thuộc C).
+- **C**: `BE/app/{main.py,config.py,requirements.txt,routers/**,schemas/**}`, `BE/app/services/{llm,parser,retrieval,rank,context_score,explainer,weather,expenses,gps}.py`, `BE/tests/{contract/**,integration/**}` (trừ test_us8_replan.py của B), `BE/tests/unit/*` (lane-C unit tests), `FE/lib/api/**`, `FE/lib/features/**`, `BE/.env.example`, `BE/README.md`, `data/gps/`, `docs/demo-script.md`.
 - **Chung, chỉ sửa theo luật**: `tasks.md` (chỉ dòng task mình), `lanes.md` (bảng status lane mình).
 
 ## Thứ tự chạy (3 lanes SONG SONG được)
