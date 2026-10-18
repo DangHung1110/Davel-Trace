@@ -47,6 +47,43 @@ TRIP = {"trip_id": "t1", "user_id": "u1", "city": "da-nang",
 client = TestClient(main_mod.app, raise_server_exceptions=False)
 
 
+def _collect_post_paths(routes, prefix="", seen=None):
+    """Collect POST paths from an app/routes tree, version-agnostically.
+
+    Older FastAPI/Starlette flatten included routers into ``app.routes`` as
+    ``Route`` objects with a concrete ``path``/``methods``. Newer versions
+    (FastAPI>=0.146 / Starlette 1.9) keep them lazy as ``_IncludedRouter``
+    entries where ``path``/``methods`` are ``None`` and the real routes live on
+    ``.original_router.routes`` (with the include prefix on
+    ``.include_context.prefix``). Recurse through both shapes so the assertion
+    keeps checking "a POST route exists" regardless of version.
+    """
+    if seen is None:
+        seen = set()
+    paths = set()
+    for route in routes:
+        if id(route) in seen:
+            continue
+        seen.add(id(route))
+
+        original = getattr(route, "original_router", None)
+        if original is not None:
+            ctx = getattr(route, "include_context", None)
+            nested_prefix = prefix + (getattr(ctx, "prefix", "") or "")
+            paths |= _collect_post_paths(
+                getattr(original, "routes", []), nested_prefix, seen)
+
+        path = getattr(route, "path", None)
+        methods = getattr(route, "methods", None) or set()
+        if path and "POST" in methods:
+            paths.add(prefix + path)
+
+        nested = getattr(route, "routes", None)
+        if nested:
+            paths |= _collect_post_paths(nested, prefix, seen)
+    return paths
+
+
 class TestItineraryContract(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -68,10 +105,13 @@ class TestItineraryContract(unittest.TestCase):
         return retrieval_svc.retrieve(TRIP, pois)["candidates"]
 
     def test_itinerary_router_registered(self):
-        post_paths = {
-            route.path for route in main_mod.app.routes
-            if "POST" in getattr(route, "methods", set())
-        }
+        post_paths = _collect_post_paths(main_mod.app.routes)
+        if not post_paths:
+            # Defensive fallback for shapes we cannot walk directly.
+            post_paths = {
+                path for path, ops in main_mod.app.openapi().get("paths", {}).items()
+                if "post" in ops
+            }
         self.assertIn("/v1/itinerary", post_paths)
         self.assertIn("/v1/itinerary/select", post_paths)
 
