@@ -1,7 +1,7 @@
 """Validator gate (T018, lane B). Per-gate pass/fail + violations.
 
 Wraps gate.py (T011) primitives for optimizer output (T017) and, later,
-the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS/ETB},
+the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS/ETB/TCS/HCS},
 "violations": [...], "details": {gate: [offending poi_ids]}}.
 
 STUB-NOTE (as T017): inputs are plain dicts matching the plan schemas;
@@ -47,11 +47,22 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
         last = max(acts, key=lambda a: to_min(a["end"]))
         if deadlines and to_min(last["end"]) > min(deadlines):
             return [last.get("poi_id")]
+    if gate in ("TCS", "HCS"):
+        mirrors = {
+            "TCS": ("VROH", "B3", "ETB"),
+            "HCS": ("FAR", "VROH", "B3", "BCS", "ETB"),
+        }
+        return list(dict.fromkeys(
+            offender
+            for source in mirrors[gate]
+            for offender in _offenders(source, itinerary, trip, pois, matrix)
+        ))
     return []
 
 
 def validate(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    checks = {name: bool(fn(itinerary, trip, pois, matrix)) for name, fn in CHECKS}
+    checks = {name: fn(itinerary, trip, pois, matrix)["passed"]
+              for name, fn in CHECKS}
     violations = [name for name, ok in checks.items() if not ok]
     return {"passed": not violations, "checks": checks, "violations": violations,
             "details": {name: _offenders(name, itinerary, trip, pois, matrix)

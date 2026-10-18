@@ -44,7 +44,8 @@ class TestResponse(unittest.TestCase):
                           TRIP, POIS, MATRIX)
         self.assertTrue(plan["passed"])
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1})
+                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                          "ETB": 1, "TCS": 1, "HCS": 1})
         self.assertEqual(plan["violations"], [])
 
     def test_failed_status_mirrors(self):
@@ -54,7 +55,9 @@ class TestResponse(unittest.TestCase):
                           TRIP, POIS, MATRIX)
         self.assertFalse(plan["passed"])
         self.assertEqual(plan["constraint_status"]["VROH"], 0)
-        self.assertEqual(plan["violations"], ["VROH"])
+        self.assertEqual(plan["constraint_status"]["TCS"], 0)
+        self.assertEqual(plan["constraint_status"]["HCS"], 0)
+        self.assertEqual(plan["violations"], ["VROH", "TCS", "HCS"])
 
     def test_version_present_and_threaded(self):
         plan = build_plan(OPT, validate(OPT["itinerary"], TRIP, POIS, MATRIX),

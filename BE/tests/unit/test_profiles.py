@@ -48,7 +48,8 @@ class TestProfiles(unittest.TestCase):
         for p in pool["plans"]:
             self.assertTrue(p["reason"])
             self.assertEqual(p["constraint_status"],
-                             {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1})
+                             {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                              "ETB": 1, "TCS": 1, "HCS": 1})
         print(f"\n pool: {[(p['profile'], p['total_cost'], p['preference']) for p in pool['plans']]}")
 
     def test_savings_cheapest(self):
