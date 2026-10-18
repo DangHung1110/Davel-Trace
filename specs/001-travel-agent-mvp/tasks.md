@@ -33,11 +33,11 @@ description: "Task list for Personalized Travel Agent MVP"
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story
 
-- [X] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [foundation DONE 2026-09-28: A poi.py+eval.py (7/7 seed validate); C trip (User/TripRequest); B plan.py pending]
+- [X] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [all lanes DONE 2026-09-28: A poi.py+eval.py (7/7 seed validate); B plan.py; C trip (User/TripRequest) — cho C wire models.py re-export]
 - [X] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
-- [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
-- [ ] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
+- [X] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
+- [X] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
 
 **Checkpoint**: Foundation ready — schemas load, seed snapshot validates, matrix serves, LLM gateway returns validated JSON
 
@@ -53,9 +53,9 @@ description: "Task list for Personalized Travel Agent MVP"
 - [X] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
 - [X] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
 - [X] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
-- [ ] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
-- [ ] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
-- [ ] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
+- [X] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
+- [X] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
+- [X] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
 - [X] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
 - [X] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
 
@@ -86,7 +86,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [X] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
 - [X] T028 [US3] Pair dataset builder: DONE v4 2026-10-17 — 2151 pairs (1000 rule + 973 Qwen3-8B + 178 human), snapshot 764, swap-check clean, leave-POI-out no-leak (pairs: C:/tmp/pairs_v4.json)
 - [X] T029 [US3] LightGBM RankNet trainer: DONE v4 2026-10-17 — CV 0.793 / held 0.777 / flip 0.728, model.txt + MODEL_CARD.md (depends on T028)
-- [ ] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
+- [X] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
 - [X] T031 [US3] PATM eval: DONE v4 2026-10-17 — leave-POI-out train 1371/eval 805 (0 leak), held 0.777, flip 0.728; eval code = make_pairs --check + train.py report (in `BE/tests/unit/test_patm.py` viết test cố định sau)
 
 **Checkpoint**: US3 pipeline scores transitions; optimizer prefers preference order when feasible
@@ -98,8 +98,8 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: 3 profiles (savings/balanced/experience), scored cards, user select
 **Independent Test**: one request → ≥2 feasible plans with distinct scores/reasons
 
-- [ ] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`)
-- [X] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`) [T032s scorer lane B + T033e select lane C — US4 closed]
+- [X] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`)
+- [X] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`) [T032s scorer lane B (score_plan in profiles.py) + T033e select lane C — US4 closed]
 - [X] T034 [US4] Integration test US4 (distinctness + selection persistence)
 
 ---
@@ -110,7 +110,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Independent Test**: quickstart S6
 
 - [X] T035 [P] [US5] Expense store + routers (`POST /v1/expenses`, summary) per contracts/api.md
-- [ ] T036 [US5] Budget wiring: trip budget → alerts → remaining into replan constraints (depends on T035 + Phase 10) [T036a DONE 2026-09-28 lane C: replan_budget(); T036b replan feed lane B pending]
+- [X] T036 [US5] Budget wiring: trip budget → alerts → remaining into replan constraints (depends on T035 + Phase 10) [T036a replan_budget lane C + T036b replan feed lane B DONE]
 - [ ] T037 [US5] FE budget UI (replace in-memory expenses with API) in `FE/lib/features/expenses/` [BLOCKED 2026-09-28: FE app only in feat/flutter-mobile-shell (lane-c has README only) + no Flutter SDK on machine — doi human merge/SDK]
 - [X] T038 [US5] Integration test US5 (S6 scenario)
 
@@ -143,10 +143,10 @@ description: "Task list for Personalized Travel Agent MVP"
 **Independent Test**: quickstart S5 (2 done + rain event → versioned replan)
 
 - [X] T044 [P] [US8] Event classifier S2 (templates + paraphrase + TF-IDF/LightGBM or PhoBERT, ~8 types)
-- [ ] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
-- [ ] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
+- [X] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
+- [X] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
 - [X] T047 [US8] Mock GPS feed interface + timeline file for video demo
-- [ ] T048 [US8] Integration test US8 (S5 scenario)
+- [X] T048 [US8] Integration test US8 (S5 scenario)
 
 ---
 

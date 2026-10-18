@@ -37,3 +37,9 @@ DavelAgentAnswer.txt
 # SerpApi fetch resume cache (raw payloads + quota counter, never commit)
 data/snapshots/danang-full-tmp/
 BE/data/raw-round2/
+
+# OSRM raw data: Geofabrik PBF extracts + MLD/CH graph artifacts
+# (generated once in a tmp dir outside the repo; never commit)
+*.osm.pbf
+*.osrm
+*.osrm.*
