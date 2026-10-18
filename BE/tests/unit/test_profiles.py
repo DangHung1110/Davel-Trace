@@ -13,7 +13,7 @@ from unittest import mock
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services import scorer  # noqa: E402
-from BE.app.services.profiles import run_profiles  # noqa: E402
+from BE.app.services.profiles import run_profiles, score_plan  # noqa: E402
 
 H = 60
 POIS = [
@@ -53,6 +53,18 @@ class TestProfiles(unittest.TestCase):
                              {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
                               "ETB": 1, "TCS": 1, "HCS": 1})
         print(f"\n pool: {[(p['profile'], p['total_cost'], p['preference']) for p in pool['plans']]}")
+
+    def test_plans_carry_t032s_scores(self):
+        pool = run_profiles(POIS, TRAVEL, TRIP, MATRIX)
+        self.assertIsNone(pool["selected"])
+        self.assertGreaterEqual(len(pool["plans"]), 2)
+        for p in pool["plans"]:
+            self.assertIn("scores", p)
+            self.assertEqual(p["scores"], score_plan(dict(p)))
+            self.assertIs(type(p["scores"]["profit"]), float)
+            self.assertIs(type(p["scores"]["utility"]), float)
+            self.assertIs(p["scores"]["gate"], True)
+        print(f"\n scores: {pool['plans'][0]['scores']}")
 
     def test_savings_cheapest(self):
         pool = run_profiles(POIS, TRAVEL, TRIP, MATRIX)

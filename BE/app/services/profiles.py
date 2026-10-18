@@ -7,9 +7,11 @@ POIs stand in for T007 schemas, as T017/T018):
 - experience: rating + intensity (rich experiences first).
 
 Each run -> validate (T018) -> score (total cost, travel time,
-preference = mean rating) + profile reason. Infeasible runs are
-dropped with a note (never returned). Output pool: one plan per
-feasible profile, `selected: None` (select endpoint is lane C T033e).
+preference = mean rating) + profile reason + T032s `scores`
+(profit/utility/gate/excluded). Infeasible runs are dropped with a
+note (never returned). Output pool: one plan per feasible profile,
+each carrying its T032s `scores`; `selected: None` stays the
+contract stub (select endpoint is lane C T033e).
 """
 
 from __future__ import annotations
@@ -66,7 +68,11 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                  trip: dict, matrix: dict,
                  profiles: tuple[str, ...] = ("savings", "balanced",
                                               "experience")) -> dict:
-    """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}."""
+    """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}.
+
+    Each plan entry carries its T032s `scores` (profit/utility/gate/
+    excluded) attached once the entry is complete.
+    """
     plans, dropped = [], []
     by_id = {p["poi_id"]: p for p in pois}
     q = scorer.edge_scores([p["poi_id"] for p in pois], by_id)
@@ -88,7 +94,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
         ratings = [float(by_id[a["poi_id"]].get("rating", 0)) for a in acts]
         travel_min = sum(int((matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
                              .get("minutes", 0)) for x, y in zip(acts, acts[1:]))
-        plans.append({
+        entry = {
             "profile": prof,
             "reason": PROFILE_REASONS[prof],
             "itinerary": {"activities": acts},
@@ -96,7 +102,9 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
             "travel_min": travel_min,
             "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0,
             "constraint_status": status_map(rep["checks"]),
-        })
+        }
+        entry["scores"] = score_plan(entry)  # T032s: attached once complete
+        plans.append(entry)
     return {"plans": plans, "dropped": dropped, "selected": None}
 
 
