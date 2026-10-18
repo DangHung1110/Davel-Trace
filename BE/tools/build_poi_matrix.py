@@ -19,6 +19,15 @@ Docker (data dir OUTSIDE the repo, e.g. TMP):
         -v <tmp>:/data osrm/osrm-backend \
         osrm-routed --algorithm mld --max-table-size 300 /data/vietnam-latest.osrm
 
+Low-RAM hosts (<8 GB free): the whole-Vietnam extract can wedge Docker
+(edge-expanded phase). Cut the Da Nang bbox first (streaming, ~300 MB RAM),
+then run the same extract/partition/customize/routed on the small file:
+    docker run --rm -v <tmp>:/data stefda/osmium-tool \
+        osmium extract -b 107.85,15.72,108.55,16.30 -s complete_ways \
+        -o /data/danang.osm.pbf /data/vietnam-latest.osm.pbf
+    ...same pipeline with /data/danang.osm.pbf -> /data/danang.osrm
+Routing stays inside the bbox; all danang-v1 POIs are well inside it.
+
 B3 FAILURE POLICY: an OSRM failure / unroutable pair is OMITTED from `cells`
 (infeasible — `MatrixService.minutes` raises `MatrixMissError`), NEVER a
 silent 0. `--seed-fallback` fills such holes with the legacy haversine 30 km/h
