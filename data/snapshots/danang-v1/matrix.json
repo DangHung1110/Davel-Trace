@@ -1,0 +1,216 @@
+{
+  "snapshot": "danang-v1",
+  "ids": [
+    "dragon-bridge",
+    "danang-airport",
+    "han-market",
+    "son-tra",
+    "mi-quang-ba-mua",
+    "cham-museum",
+    "my-khe"
+  ],
+  "n": 7,
+  "mode": "motorbike",
+  "method": "haversine_seed_30kmh",
+  "source": "cache",
+  "confidence": "low",
+  "note": "Seed matrix tam thoi cho T003/US1 demo. Ma tran OSRM that se thay o T010/T003b. KHONG dung lam chung cu kha thi ngoai demo.",
+  "cells": {
+    "dragon-bridge->dragon-bridge": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "dragon-bridge->danang-airport": {
+      "km": 3.3,
+      "minutes": 7
+    },
+    "dragon-bridge->han-market": {
+      "km": 0.83,
+      "minutes": 5
+    },
+    "dragon-bridge->son-tra": {
+      "km": 7.33,
+      "minutes": 15
+    },
+    "dragon-bridge->mi-quang-ba-mua": {
+      "km": 1.38,
+      "minutes": 5
+    },
+    "dragon-bridge->cham-museum": {
+      "km": 0.48,
+      "minutes": 5
+    },
+    "dragon-bridge->my-khe": {
+      "km": 2.09,
+      "minutes": 5
+    },
+    "danang-airport->dragon-bridge": {
+      "km": 3.3,
+      "minutes": 7
+    },
+    "danang-airport->danang-airport": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "danang-airport->han-market": {
+      "km": 3.58,
+      "minutes": 7
+    },
+    "danang-airport->son-tra": {
+      "km": 10.61,
+      "minutes": 21
+    },
+    "danang-airport->mi-quang-ba-mua": {
+      "km": 2.93,
+      "minutes": 6
+    },
+    "danang-airport->cham-museum": {
+      "km": 2.88,
+      "minutes": 6
+    },
+    "danang-airport->my-khe": {
+      "km": 5.15,
+      "minutes": 10
+    },
+    "han-market->dragon-bridge": {
+      "km": 0.83,
+      "minutes": 5
+    },
+    "han-market->danang-airport": {
+      "km": 3.58,
+      "minutes": 7
+    },
+    "han-market->han-market": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "han-market->son-tra": {
+      "km": 7.07,
+      "minutes": 14
+    },
+    "han-market->mi-quang-ba-mua": {
+      "km": 0.92,
+      "minutes": 5
+    },
+    "han-market->cham-museum": {
+      "km": 0.87,
+      "minutes": 5
+    },
+    "han-market->my-khe": {
+      "km": 2.54,
+      "minutes": 5
+    },
+    "son-tra->dragon-bridge": {
+      "km": 7.33,
+      "minutes": 15
+    },
+    "son-tra->danang-airport": {
+      "km": 10.61,
+      "minutes": 21
+    },
+    "son-tra->han-market": {
+      "km": 7.07,
+      "minutes": 14
+    },
+    "son-tra->son-tra": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "son-tra->mi-quang-ba-mua": {
+      "km": 7.89,
+      "minutes": 16
+    },
+    "son-tra->cham-museum": {
+      "km": 7.73,
+      "minutes": 15
+    },
+    "son-tra->my-khe": {
+      "km": 6.0,
+      "minutes": 12
+    },
+    "mi-quang-ba-mua->dragon-bridge": {
+      "km": 1.38,
+      "minutes": 5
+    },
+    "mi-quang-ba-mua->danang-airport": {
+      "km": 2.93,
+      "minutes": 6
+    },
+    "mi-quang-ba-mua->han-market": {
+      "km": 0.92,
+      "minutes": 5
+    },
+    "mi-quang-ba-mua->son-tra": {
+      "km": 7.89,
+      "minutes": 16
+    },
+    "mi-quang-ba-mua->mi-quang-ba-mua": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "mi-quang-ba-mua->cham-museum": {
+      "km": 1.04,
+      "minutes": 5
+    },
+    "mi-quang-ba-mua->my-khe": {
+      "km": 3.38,
+      "minutes": 7
+    },
+    "cham-museum->dragon-bridge": {
+      "km": 0.48,
+      "minutes": 5
+    },
+    "cham-museum->danang-airport": {
+      "km": 2.88,
+      "minutes": 6
+    },
+    "cham-museum->han-market": {
+      "km": 0.87,
+      "minutes": 5
+    },
+    "cham-museum->son-tra": {
+      "km": 7.73,
+      "minutes": 15
+    },
+    "cham-museum->mi-quang-ba-mua": {
+      "km": 1.04,
+      "minutes": 5
+    },
+    "cham-museum->cham-museum": {
+      "km": 0.0,
+      "minutes": 0
+    },
+    "cham-museum->my-khe": {
+      "km": 2.57,
+      "minutes": 5
+    },
+    "my-khe->dragon-bridge": {
+      "km": 2.09,
+      "minutes": 5
+    },
+    "my-khe->danang-airport": {
+      "km": 5.15,
+      "minutes": 10
+    },
+    "my-khe->han-market": {
+      "km": 2.54,
+      "minutes": 5
+    },
+    "my-khe->son-tra": {
+      "km": 6.0,
+      "minutes": 12
+    },
+    "my-khe->mi-quang-ba-mua": {
+      "km": 3.38,
+      "minutes": 7
+    },
+    "my-khe->cham-museum": {
+      "km": 2.57,
+      "minutes": 5
+    },
+    "my-khe->my-khe": {
+      "km": 0.0,
+      "minutes": 0
+    }
+  }
+}

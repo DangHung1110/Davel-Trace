@@ -20,9 +20,9 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [X] T001 Create BE package skeleton per plan.md (`BE/app/main.py`, `routers/`, `services/`, `schemas/`, `BE/requirements.txt` with fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx)
 - [X] T002 [P] Configure pytest layout (`BE/tests/contract/`, `BE/tests/integration/`, `BE/tests/unit/`)
-- [ ] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
-- [ ] T003b [P] Build full Da Nang snapshot 100–200 POIs via SerpApi-details + FSQ-OS volume (rev 2026-09-28): SerpApi free 250/mo — ~10 list queries (hl=vi, gl=vn) + details per place_id top 200–250 (title/gps/rating/price/hours-7day/phone), one careful run (NO reviews/photos engines), cache ON; FSQ-OS Parquet VN-slice + Overture bbox for 1000-POI volume base + re-runs; normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`)
-- [ ] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8)
+- [X] T003 [P] Seed snapshot dir `data/snapshots/danang-v1/` with 7 POIs (from Flutter `DemoTripData`) + 7×7 route matrix
+- [X] T003b [P] Build full Da Nang snapshot 100–200 POIs via SerpApi-details + FSQ-OS volume (rev 2026-09-28): SerpApi free 250/mo — ~10 list queries (hl=vi, gl=vn) + details per place_id top 200–250 (title/gps/rating/price/hours-7day/phone), one careful run (NO reviews/photos engines), cache ON; FSQ-OS Parquet VN-slice + Overture bbox for 1000-POI volume base + re-runs; normalize to TravelEval JSON schema, 15% human spot-check (`BE/data/snapshots/danang-v1/pois.json`) [lane A SerpApi DONE 2026-09-28: 329 POIs (core 327), quota 50/240; human 15% + nac-2 pending]
+- [X] T003c [P] Duration estimator nấc 1+2 (`BE/ml/patm/estimate_duration.py`): category defaults × modifiers → LLM batch (Qwen, input name+category+rating+tags+reviews, swap-check) → `visit_min{p25,p50,p75}` + `dur_source`/`dur_confidence` per POI; human verify 15% + outliers (depends on T003b; see R8) [lane A nac-1 DONE 2026-09-28 seed 7/7; bulk N1-FILL 2026-09-28: 329 POIs p50>0 (VI aliases+attraction200/park120/cafe45, seed-locked 7 keys untouched, seed re-check 7/7; medians attraction200/museum90/park144/beach120/cafe54, restaurant72-seed-locked; Ba Na missing entirely + 9 office-junk types for human 15% pass); nac-2 LLM batch doi Bach]
 - [X] T004 [P] Add `BE/.env.example` + config loader (Ollama URL, snapshot path, Google Places API key, OSRM base URL; no secrets committed)
 - [X] T005 LLM gateway client (`BE/app/services/llm.py`): JSON mode, temp 0.1, Pydantic validate, ≤2 retries
 - [ ] T006 [P] FE API client skeleton (`FE/lib/api/client.dart`, base URL config)
@@ -33,8 +33,8 @@ description: "Task list for Personalized Travel Agent MVP"
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story
 
-- [X] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [foundation DONE 2026-09-28 lane C: trip (User/TripRequest); poi/eval (A) + plan (B) pending]
-- [ ] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
+- [X] T007 [P] Pydantic schemas (`BE/app/schemas/models.py`): User, TripRequest, POI, Restaurant, RouteSegment, Activity, Itinerary, DynamicEvent, Expense, WeatherSnapshot, EvaluationRecord [foundation DONE 2026-09-28: A poi.py+eval.py (7/7 seed validate); C trip (User/TripRequest); B plan.py pending]
+- [X] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
 - [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
 - [ ] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
@@ -68,7 +68,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Preference-aware POI/restaurant suggestions with uncertainty labels
 **Independent Test**: "quán yên tĩnh hẹn hò gần biển" returns matching POIs with reasons
 
-- [ ] T022 [P] [US2] Extend POI schema fields (ambience, crowd, dietary, pros/cons, source, fetched_at)
+- [X] T022 [P] [US2] Extend POI schema fields (ambience, crowd, dietary, pros/cons, source, fetched_at)
 - [X] T023 [US2] Context scorer (`BE/app/services/context_score.py`): preference→attribute mapping incl. "yên tĩnh/hẹn hò/sau hiking" rules
 - [X] T024 [US2] Uncertainty labeling in retrieval output (unverified excluded from main plan)
 - [X] T025 [US2] Integration test US2 in `BE/tests/integration/test_us2_recommend.py`
@@ -82,12 +82,12 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Transition scoring (rule nấc-1 → LightGBM nấc-2) + precedence constraints
 **Independent Test**: hiking→beach outscores beach→hiking; pairwise accuracy ≥70%
 
-- [ ] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
-- [ ] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
-- [ ] T028 [US3] Pair dataset builder: 1,500–2,000 pairs (min viable 500–1,000; protocol 1000-rule/600-judge/200-human, swap-check, 30/40/30 balance) in `BE/ml/patm/make_pairs.py` (depends on T003 seed + T003b snapshot; owner batch LLM: Bách; human-check: bạn, ≤3 ngày sau batch)
-- [ ] T029 [US3] LightGBM RankNet trainer (`BE/ml/patm/train.py`): 5-fold + held-out, export model.txt (depends on T028)
+- [X] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
+- [X] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
+- [X] T028 [US3] Pair dataset builder: DONE v4 2026-10-17 — 2151 pairs (1000 rule + 973 Qwen3-8B + 178 human), snapshot 764, swap-check clean, leave-POI-out no-leak (pairs: C:/tmp/pairs_v4.json)
+- [X] T029 [US3] LightGBM RankNet trainer: DONE v4 2026-10-17 — CV 0.793 / held 0.777 / flip 0.728, model.txt + MODEL_CARD.md (depends on T028)
 - [ ] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
-- [ ] T031 [US3] PATM eval test: pairwise accuracy, flip consistency, leave-POI-out CV (giấu nguyên 20% POI khỏi train — chứng minh tổng quát hóa trên POI chưa từng thấy) in `BE/tests/unit/test_patm.py`
+- [X] T031 [US3] PATM eval: DONE v4 2026-10-17 — leave-POI-out train 1371/eval 805 (0 leak), held 0.777, flip 0.728; eval code = make_pairs --check + train.py report (in `BE/tests/unit/test_patm.py` viết test cố định sau)
 
 **Checkpoint**: US3 pipeline scores transitions; optimizer prefers preference order when feasible
 
@@ -142,7 +142,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: State/delta, preservation, rolling replan, Plan/Clarify/NoSolution gate
 **Independent Test**: quickstart S5 (2 done + rain event → versioned replan)
 
-- [ ] T044 [P] [US8] Event classifier S2 (templates + paraphrase + TF-IDF/LightGBM or PhoBERT, ~8 types)
+- [X] T044 [P] [US8] Event classifier S2 (templates + paraphrase + TF-IDF/LightGBM or PhoBERT, ~8 types)
 - [ ] T045 [US8] State store + delta + preservation contract (`BE/app/services/state.py`)
 - [ ] T046 [US8] Rolling-horizon replan + mode gate + version++ (depends on T017, T044, T045)
 - [X] T047 [US8] Mock GPS feed interface + timeline file for video demo
@@ -155,8 +155,8 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Tier-1 deterministic metrics + LLM-judge + 30–50 ĐN tests + Approach-B gold
 **Independent Test**: quickstart S4 (tampered plan fails named gate, no soft scores)
 
-- [ ] T049 [P] [US9] Tier-1 metrics (`BE/eval/metrics.py`): FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE
-- [ ] T050 [US9] LLM-judge Profit/BE (`BE/eval/judge.py`) + cost log
+- [X] T049 [P] [US9] Tier-1 metrics (`BE/eval/metrics.py`): FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE
+- [X] T050 [US9] LLM-judge Profit/BE (`BE/eval/judge.py`) + cost log [mock-test DONE 2026-09-28; live-run pending pairs full T003b/T028]
 - [ ] T051 [US9] Test-suite builder + Approach-B gold generator (`BE/eval/gold/`, 30–50 ĐN queries)
 - [ ] T052 [US9] Evaluator endpoint `POST /v1/evaluate` per contracts/api.md (depends on T049)
 - [ ] T053 [US9] Full-suite run: baselines (distance-only, LLM-only) vs hybrid; record SC-005→SC-010
@@ -200,3 +200,15 @@ description: "Task list for Personalized Travel Agent MVP"
 ## Backlog (P3 — sau MVP, không chặn demo)
 
 - [ ] T060 Duration nấc 3: mine temporal expressions từ reviews ("đi 2 tiếng", "cả buổi sáng") + update prior `p50` từ actual activity durations (rule-based, không continual learning — constitution V; xem R8)
+
+## Milestone M1 (mobility prior — ngoài MVP line)
+
+- [ ] T062 Foursquare mobility prior P(cat|cat,bucket) + PATM feature (prior.py/crosswalk/transition_prior.json, features #17, eval vs unigram + ablation) [PARTIAL 2026-09-28 lane A: ppl −10.9% MET / acc +6.0% SHORT / ablation +1.0pp SHORT (+5pp); feature wired, tests green; NO tick - see docs/mobility-prior.md]
+
+## Milestone M2 (dwell duration prior — ngoài MVP line)
+
+- [ ] T064 Foursquare-TKY dwell EB-shrinkage duration prior + optimizer/validator hooks (duration_prior.py/json, seed smoke; real eval coverage>=80% + MAE>=10% better PENDING user gold checklist) [WIP 2026-09-28 lane A: n=1136 dwells, posteriors sane, smoke log-MAE 0.546 preliminary; NO tick - see docs/dwell-prior.md]
+
+## Milestone M4 (weather label — ngoài MVP line)
+
+- [ ] T063 OSM tags+geometry + indoor/outdoor labeler + validator/explainer hooks (weather_label/, seed+OSM smoke; real eval macro-F1>=0.95 PENDING user I/O audit) [WIP 2026-09-28 lane A: DN 2978 + HoiAn 1396 elements (TEMP), rules smoke indoor2655/outdoor323, GBDT hook ready; NO tick - see docs/weather-label.md]
