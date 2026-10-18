@@ -107,6 +107,7 @@ class TestItineraryContract(unittest.TestCase):
         store = select_mod.get_store()
         old_plans = dict(store["plans"])
         old_active_id = store["active_id"]
+        old_selected = store["selected"]
         old_builder = itinerary_mod._get_plan_builder
         try:
             select_mod.reset_store()
@@ -137,6 +138,7 @@ class TestItineraryContract(unittest.TestCase):
             itinerary_mod._get_plan_builder = old_builder
             store["plans"] = old_plans
             store["active_id"] = old_active_id
+            store["selected"] = old_selected
 
     def test_missing_snapshot_envelope(self):
         itinerary_mod.get_settings = lambda: Settings(snapshot_dir="/no/such/dir",

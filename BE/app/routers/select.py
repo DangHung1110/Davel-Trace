@@ -9,11 +9,11 @@ Unknown id -> 404 envelope (không crash).
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from BE.app.routers import error
+from BE.app.routers import error, gate_stub
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
-_STORE: dict = {"plans": {}, "active_id": None}
+_STORE: dict = {"plans": {}, "active_id": None, "selected": None}
 
 
 class SelectIn(BaseModel):
@@ -32,6 +32,7 @@ def get_store() -> dict:
 def reset_store() -> None:
     _STORE["plans"] = {}
     _STORE["active_id"] = None
+    _STORE["selected"] = None
 
 
 @router.post("/itinerary/select")
@@ -39,5 +40,18 @@ def select(body: SelectIn):
     if body.itinerary_id not in _STORE["plans"]:
         return error("UNKNOWN_ITINERARY",
                      f"khong co plan {body.itinerary_id}", 404)
+
+    plan = _STORE["plans"][body.itinerary_id]
+    # TODO(T033 wiring): attach the full gate context to each pool plan when
+    # the lane-B registry is available in this branch; the stub keeps its API.
+    gate_result = gate_stub.all_pass(
+        plan.get("itinerary", plan), plan.get("trip", {}),
+        plan.get("pois", {}), plan.get("matrix", {}))
+    if not gate_result["passed"]:
+        failed = ", ".join(gate_result["failed"])
+        return error("GATE_FAILED",
+                     f"plan {body.itinerary_id} khong qua cong: {failed}", 422)
+
     _STORE["active_id"] = body.itinerary_id
+    _STORE["selected"] = body.itinerary_id
     return {"active_id": body.itinerary_id}
