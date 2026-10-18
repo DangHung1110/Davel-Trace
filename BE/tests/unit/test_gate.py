@@ -12,6 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.services.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     CHECKS,
     all_pass,
@@ -107,6 +108,64 @@ class TestGate(unittest.TestCase):
         on_deadline = {"activities": [
             {"poi_id": "beach", "start": "16:00", "end": "17:00"}]}
         self.assertTrue(check_etb(on_deadline, return_deadline, POIS, MATRIX)["passed"])
+
+    def test_end_time_only_fails_etb_and_mirrors(self):
+        """No return_time in TRIP: end_time alone is the ETB deadline."""
+        late = {"activities": [
+            {"poi_id": "beach", "start": "17:30", "end": "19:00"}]}
+        self.assertNotIn("return_time", TRIP)
+        self.assertEqual(check_etb(late, TRIP, POIS, MATRIX),
+                         {"passed": False, "score": 0.0})
+        self.assertEqual(all_pass(late, TRIP, POIS, MATRIX)["failed"],
+                         ["ETB", "TCS", "HCS"])
+
+        # Boundary: finishing exactly at end_time is allowed (<=).
+        on_deadline = {"activities": [
+            {"poi_id": "beach", "start": "16:00", "end": "18:00"}]}
+        self.assertEqual(check_etb(on_deadline, TRIP, POIS, MATRIX),
+                         {"passed": True, "score": 1.0})
+
+    def test_etb_vacuous_without_activities(self):
+        """Pins documented behavior: no activities -> ETB passes (nothing late)."""
+        self.assertEqual(check_etb({"activities": []}, TRIP, POIS, MATRIX),
+                         {"passed": True, "score": 1.0})
+
+    def test_far_requires_at_least_one_activity(self):
+        """Pins current semantics: FAR needs a non-empty plan (bool(acts))."""
+        self.assertEqual(check_far({"activities": []}, TRIP, POIS, MATRIX),
+                         {"passed": False, "score": 0.0})
+
+    def test_missing_matrix_cell_fails_b3_and_mirrors(self):
+        """B3: a transition with no matrix cell is infeasible, never 0/estimate."""
+        no_pair = {"beach->musu": {"minutes": 10}}  # musu->beach cell absent
+        self.assertFalse(check_b3(GOOD, TRIP, POIS, no_pair)["passed"])
+        self.assertEqual(all_pass(GOOD, TRIP, POIS, no_pair)["failed"],
+                         ["B3", "TCS", "HCS"])
+
+    def test_bcs_itinerary_total_cost_overrides_fee_sum(self):
+        """Pins: itinerary['total_cost'] wins over the POI fee sum when present."""
+        # Fee-based sum would be 60000 (musu) > budget 10 -> override makes it pass.
+        self.assertEqual(total_fee(GOOD["activities"], POIS), 60000)
+        with_cost = dict(GOOD, total_cost=10)
+        self.assertEqual(check_bcs(with_cost, dict(TRIP, budget=10), POIS, MATRIX),
+                         {"passed": True, "score": 1.0})
+        over_budget = dict(GOOD, total_cost=11)
+        self.assertEqual(check_bcs(over_budget, dict(TRIP, budget=10), POIS, MATRIX),
+                         {"passed": False, "score": 0.0})
+
+    def test_vroh_tolerates_poi_without_opening_hours(self):
+        """Unknown/empty hours are tolerated when the POI is verified."""
+        pois = {**POIS,
+                "nohours": {"verified": True, "fee": 0},
+                "emptyhours": {"verified": True, "fee": 0, "opening_hours": []}}
+        itin = {"activities": [
+            {"poi_id": "nohours", "start": "08:00", "end": "09:00"},
+            {"poi_id": "emptyhours", "start": "10:00", "end": "11:00"}]}
+        matrix = {"nohours->emptyhours": {"minutes": 10}}
+        self.assertEqual(check_vroh(itin, TRIP, pois, matrix),
+                         {"passed": True, "score": 1.0})
+        self.assertEqual(all_pass(itin, TRIP, pois, matrix),
+                         {"passed": True, "failed": []})
 
 
 if __name__ == "__main__":

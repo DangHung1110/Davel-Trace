@@ -75,6 +75,28 @@ class TestValidator(unittest.TestCase):
         self.assertTrue(rep["details"]["BCS"])
         self.assertEqual(rep["details"]["HCS"], rep["details"]["BCS"])
 
+    def test_plan_ending_after_end_time_only_fails_ETB(self):
+        """No return_time: end_time alone is the deadline (mirrors ETB/TCS/HCS)."""
+        late = {"activities": [
+            {"poi_id": "beach", "start": "17:30", "end": "19:00"}]}
+        self.assertNotIn("return_time", TRIP)
+        rep = validate(late, TRIP, POIS, MATRIX)
+        self.assertFalse(rep["checks"]["ETB"])
+        self.assertEqual(rep["violations"], ["ETB", "TCS", "HCS"])
+        self.assertEqual(rep["details"]["ETB"], ["beach"])
+        self.assertEqual(rep["details"]["TCS"], ["beach"])
+        self.assertEqual(rep["details"]["HCS"], ["beach"])
+
+    def test_missing_matrix_cell_fails_B3(self):
+        """A transition with no matrix cell is a B3 violation, never 0/estimate."""
+        no_pair = {"beach->musu": {"minutes": 10}}  # musu->beach cell absent
+        rep = validate(GOOD, TRIP, POIS, no_pair)
+        self.assertFalse(rep["checks"]["B3"])
+        self.assertEqual(rep["violations"], ["B3", "TCS", "HCS"])
+        self.assertEqual(rep["details"]["B3"], ["musu->beach"])
+        self.assertEqual(rep["details"]["TCS"], ["musu->beach"])
+        self.assertEqual(rep["details"]["HCS"], ["musu->beach"])
+
     def test_optimizer_output_validates(self):
         pois = [StubPOI("musu", 90, 450, 1020, 3.0), StubPOI("beach", 120, 360, 1140, 5.0)]
         travel = {("depot", "musu"): 10, ("depot", "beach"): 10,
