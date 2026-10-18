@@ -37,7 +37,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T008 [P] Snapshot loader + validation (`BE/app/services/snapshot.py`): verified flag, fetched_at, TravelEval schema check
 - [ ] T009 [P] Error envelope + logging middleware (`BE/app/main.py`)
 - [ ] T010 Route matrix service (`BE/app/services/matrix.py`): cache lookup first, OSRM fetch hook, never haversine-only for feasibility
-- [ ] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator
+- [X] T011 Gate primitives (`BE/app/services/gate.py`): FAR/VROH/B3/BCS boolean checks used by validator AND evaluator — DONE lane-B (extended to canonical 7 w/ ETB/TCS/HCS + {passed,score}, ef232dc)
 
 **Checkpoint**: Foundation ready — schemas load, seed snapshot validates, matrix serves, LLM gateway returns validated JSON
 
@@ -53,8 +53,8 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T014 [P] [US1] Parser service (`BE/app/services/parser.py`): NL → TripRequest, clarification list on missing slots
 - [ ] T015 [P] [US1] POI retrieval/filter (`BE/app/services/retrieval.py`): hard-constraint filter + candidate list
 - [ ] T016 [P] [US1] Rule ranker nấc-1 (`BE/app/services/rank.py`): attribute + context weights
-- [ ] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010)
-- [ ] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011)
+- [X] T017 [US1] CP-SAT optimizer basic (`BE/app/services/optimizer.py`): OPTW, depot/flow/Tmax/time-window, 5s timeout (depends on T007, T010) — DONE lane-B (36dac9b, 8/8 tests, real-matrix adapter)
+- [X] T018 [US1] Validator gate (`BE/app/services/validator.py`): FAR/VROH/B3/BCS via gate.py (depends on T011) — DONE lane-B (coverage gaps closed 9b72bb3, ETB/B4 fixes in 8a77dd7)
 - [ ] T019 [US1] Response builder (`BE/app/services/response.py`): itinerary + totals + constraint status
 - [ ] T020 [US1] Routers `parse` + `itinerary` (`BE/app/routers/`) per contracts/api.md
 - [ ] T021 [US1] Integration test seed end-to-end in `BE/tests/integration/test_us1_flow.py` (S2+S3)
@@ -86,7 +86,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
 - [ ] T028 [US3] Pair dataset builder: 1,500–2,000 pairs (min viable 500–1,000; protocol 1000-rule/600-judge/200-human, swap-check, 30/40/30 balance) in `BE/ml/patm/make_pairs.py` (depends on T003 seed + T003b snapshot; owner batch LLM: Bách; human-check: bạn, ≤3 ngày sau batch)
 - [ ] T029 [US3] LightGBM RankNet trainer (`BE/ml/patm/train.py`): 5-fold + held-out, export model.txt (depends on T028)
-- [ ] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
+- [X] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029) — DONE lane-B (a37aaea wiring + af14ed9 benchmark, PATM v4)
 - [ ] T031 [US3] PATM eval test: pairwise accuracy, flip consistency, leave-POI-out CV (giấu nguyên 20% POI khỏi train — chứng minh tổng quát hóa trên POI chưa từng thấy) in `BE/tests/unit/test_patm.py`
 
 **Checkpoint**: US3 pipeline scores transitions; optimizer prefers preference order when feasible
@@ -98,7 +98,7 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: 3 profiles (savings/balanced/experience), scored cards, user select
 **Independent Test**: one request → ≥2 feasible plans with distinct scores/reasons
 
-- [ ] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`)
+- [X] T032 [US4] Multi-profile optimizer runs + solution pool (`BE/app/services/profiles.py`) — DONE lane-B (T032s scores attached to pool plans, bce86fa)
 - [ ] T033 [US4] Plan scorer (Profit/Utility + gate) + select endpoint (`POST /v1/itinerary/select`)
 - [ ] T034 [US4] Integration test US4 (distinctness + selection persistence)
 
