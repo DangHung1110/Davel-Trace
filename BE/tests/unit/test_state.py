@@ -55,6 +55,10 @@ class TestState(unittest.TestCase):
         with self.assertRaises(KeyError):
             store.load("nope")
 
+    def test_complete_unknown_poi_raises(self):
+        with self.assertRaises(KeyError):
+            store.complete(self.s, "ghost", "09:00")
+
 
 if __name__ == "__main__":
     unittest.main()
