@@ -33,3 +33,9 @@ DavelAgentAnswer.txt
 
 # Agent-tool-local files (opencode-only wrappers; each provider keeps its own)
 .opencode/
+
+# OSRM raw data: Geofabrik PBF extracts + MLD/CH graph artifacts
+# (generated once in a tmp dir outside the repo; never commit)
+*.osm.pbf
+*.osrm
+*.osrm.*
