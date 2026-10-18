@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from BE.app.services import scorer
 from BE.app.services import state as store
+from BE.app.services.budget import tighten_budget
 from BE.app.services.common import parse_hours, to_min
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize
 from BE.app.services.validator import validate
@@ -53,8 +54,16 @@ def _event_drops(event: dict, remaining: list[dict], by_id: dict) -> set[str]:
 
 
 def replan(state: dict, event: dict, pois: list[dict],
-           travel: dict[tuple[str, str], int], trip: dict) -> dict:
-    """Return {"itinerary" (versioned) | None, "mode", "changes", ...}."""
+           travel: dict[tuple[str, str], int], trip: dict,
+           budget_state: dict | None = None) -> dict:
+    """Return {"itinerary" (versioned) | None, "mode", "changes", ...}.
+
+    `budget_state` is the lane-C raw `replan_budget()` snapshot
+    {trip_id, budget, spent, left, by_kind, alert}; when supplied, the
+    validator gates new activities against `allowed_remaining` (actual
+    funds left), not the trip's original total. `trip`/`budget_state`
+    are never mutated. Omitted -> legacy behavior (trip budget).
+    """
     by_id = {p["poi_id"]: p for p in pois}
     completed_ids = [a["poi_id"] for a in state.get("completed", [])]
     remaining = list(state.get("remaining", []))
@@ -106,7 +115,11 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "preserved_completed": completed_ids,
                 "changes": [], "version": state["version"]}
     matrix = {f"{a}->{b}": {"minutes": w} for (a, b), w in travel.items()}
-    rep = validate({"activities": acts}, trip,
+    effective_trip = trip
+    if budget_state is not None:
+        tight = tighten_budget(budget_state, trip)
+        effective_trip = dict(trip, budget=tight["allowed_remaining"])
+    rep = validate({"activities": acts}, effective_trip,
                    {p["poi_id"]: {"verified": p.get("verified", False),
                                   "fee": p.get("fee", 0),
                                   "opening_hours": p.get("opening_hours", [])}

@@ -167,6 +167,42 @@ class TestReplan(unittest.TestCase):
         print(f"\n return_time: mode {out['mode']} ends "
               f"{[(a['poi_id'], a['end']) for a in acts]} <= 15:00")
 
+    def test_tightened_remaining_budget_rejects_over_budget(self):
+        """T036b: replan validates against actual remaining, not total.
+
+        POI fee 600k > 500k left: with the lane-C snapshot the canonical
+        BCS gate refuses (no_solution); without it the legacy total budget
+        (3M) still admits the same POI (mode plan). Proves the new input,
+        not the old total, triggers refusal, and inputs are not mutated.
+        """
+        poi = {"poi_id": "expensive", "verified": True, "visit_min": 60,
+               "fee": 600000, "intensity": 1, "weather_sensitive": False,
+               "opening_hours": ["07:00-22:00"]}
+        travel = {("depot", "expensive"): 10}
+        trip = {"trip_id": "tight-budget", "budget": 3000000, "avoid": [],
+                "start_time": "07:00", "end_time": "18:00"}
+        budget_state = {"trip_id": "tight-budget", "budget": 3000000,
+                        "spent": 2500000, "left": 500000,
+                        "by_kind": {"food": 2500000, "ticket": 0,
+                                    "transport": 0, "other": 0},
+                        "alert": "80%"}
+
+        def state(tid):
+            return store.new_state(tid, [{"poi_id": "expensive",
+                                          "start": "07:00", "end": "08:00"}],
+                                   "07:00", "depot")
+
+        out = replan(state("tight-budget"), {"type": "delay"}, [poi], travel,
+                     trip, budget_state=budget_state)
+        self.assertEqual(out["mode"], "no_solution")
+        self.assertIn("BCS", out["reason"])
+        self.assertEqual(trip["budget"], 3000000)
+        self.assertEqual(budget_state["left"], 500000)
+
+        legacy = replan(state("legacy-budget"), {"type": "delay"}, [poi],
+                        travel, dict(trip, trip_id="legacy-budget"))
+        self.assertEqual(legacy["mode"], "plan")
+
     @unittest.skipUnless(os.path.exists(MATRIX_JSON)
                          and os.path.exists(POIS_JSON),
                          "real matrix/pois snapshot absent")
