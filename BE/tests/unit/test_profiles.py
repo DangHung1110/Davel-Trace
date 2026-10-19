@@ -101,6 +101,35 @@ class TestProfiles(unittest.TestCase):
         self.assertIn("noodle", ids)
         self.assertTrue(plan["constraint_status"]["HCS"] == 1)
 
+    def test_router_build_plan_scores_are_not_degenerate(self):
+        """T053 fix: scores built through the router seam must distinguish profiles.
+
+        Regression: response.build_plan() did not emit `preference` /
+        `travel_min`, so score_plan() read 0/0 and gave every profile
+        profit=0.0 / utility=0.3. (balanced == experience remains a known
+        limitation; at least savings must differ.)
+        """
+        from BE.app.services.profiles import build_plan
+
+        by_id = {p["poi_id"]: p for p in POIS}
+        ranked = [{"poi_id": pid} for pid in IDS]
+        plans = {prof: build_plan(prof, TRIP, ranked, by_id, MATRIX)
+                 for prof in ("savings", "balanced", "experience")}
+        for prof, plan in plans.items():
+            self.assertGreater(plan["preference"], 0.0, prof)
+            self.assertGreaterEqual(plan["travel_min"], 0, prof)
+            scores = plan["scores"]
+            self.assertIs(scores["gate"], True, prof)
+            self.assertGreater(scores["profit"], 0.0, prof)
+            self.assertGreater(scores["utility"], 0.3, prof)
+        pairs = {(round(p["scores"]["profit"], 4),
+                  round(p["scores"]["utility"], 4))
+                 for p in plans.values()}
+        self.assertGreater(len(pairs), 1,
+                           f"scores collapsed to one value: {pairs}")
+        self.assertNotEqual(plans["savings"]["scores"],
+                            plans["balanced"]["scores"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -29,6 +29,12 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         total_km += km
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
+    # T053 fix: score_plan() reads these two fields directly. Without them
+    # every router-built plan scored profit=0.0/utility=0.3 regardless of
+    # profile, while the run_profiles path looked correct.
+    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating", 0))
+               for a in acts]
+    preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
     return {
         "itinerary_id": itinerary_id,
         "trip_id": trip.get("trip_id", "t1"),
@@ -38,6 +44,8 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         "total_cost": total_fee(acts, pois),
         "total_km": round(total_km, 2),
         "total_min": visit_min + travel_min,
+        "travel_min": travel_min,
+        "preference": preference,
         "constraint_status": status_map(validation.get("checks", {})),
         "violations": validation.get("violations", []),
         "passed": validation.get("passed", False),
