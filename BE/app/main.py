@@ -9,6 +9,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from BE.app.config import get_settings
 from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
+from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
 from BE.app.routers import replan as replan_router
@@ -22,6 +23,7 @@ app.include_router(select_router.router)
 app.include_router(replan_router.router)
 app.include_router(expenses_router.router)
 app.include_router(weather_router.router)
+app.include_router(evaluate_router.router)
 
 
 def _validation_message(errors: list[dict]) -> str:
