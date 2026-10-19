@@ -36,8 +36,8 @@ from BE.app.services.common import hh, parse_hours, to_min
 TIMEOUT_S = 5.0
 
 # T061a: must-go landmarks (snapshot `must_go`) get a small score nudge so
-# they surface first. It is a SOFT signal only — the hard must_visit
-# constraint stays in retrieval/validator (validator HCS), never here.
+# they surface first. This is only a TIE-BREAK; the real guarantee is the
+# HARD `must_visit` argument to optimize() (T053), which pins visit[i] == 1.
 MUST_GO_BONUS = 0.5
 
 
