@@ -21,7 +21,7 @@ pytest BE/tests -q
 - **S3 plan**: `POST /v1/itinerary` with S2 output → ≥2 feasible plans (savings/balanced/experience) each with cost, times, scores, explanations; hiking before beach when preferred.
 - **S4 gate**: tamper one plan (closed POI / over budget) → `POST /v1/evaluate` fails gate with named violation, no quality scores.
 - **S5 replan**: mark 2 activities done, send "trời mưa" event → `POST /v1/replan` keeps done items, replaces outdoor remainder, bumps version.
-- **S6 expense**: set budget 3,000,000 → log 2,500,000 → summary shows 500,000 left + 83% alert.
+- **S6 expense**: set budget 3,000,000 → log 2,500,000 → summary shows 500,000 left + 80% band alert.
 - **S7 PATM**: `POST /v1/score-transition` hiking→beach vs beach→hiking → first scores higher.
 
 ## Expected outcomes
