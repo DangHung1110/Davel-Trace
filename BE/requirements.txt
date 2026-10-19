@@ -1,3 +1,4 @@
+# Python 3.11 backend: AI planner plus migration-driven management API.
 fastapi>=0.115,<0.119
 uvicorn[standard]>=0.30,<0.39
 pydantic>=2.8,<2.12
@@ -5,3 +6,6 @@ SQLAlchemy>=2.0,<2.1
 alembic>=1.13,<1.18
 httpx>=0.27,<0.29
 pytest>=8,<9
+ortools
+lightgbm
+numpy

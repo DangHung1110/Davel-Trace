@@ -10,8 +10,16 @@ from BE.app.models.expense import Expense
 from BE.app.models.trip import Trip
 from BE.app.repositories import expenses as repo
 from BE.app.schemas.expense import ExpenseCreate, ExpenseUpdate
+from BE.app.services import agent_expenses
 
 CATEGORIES = ("food", "ticket", "transport", "other")
+
+# Compatibility seam for the AI planner's in-memory expense context.
+reset = agent_expenses.reset
+set_budget = agent_expenses.set_budget
+add = agent_expenses.add
+summary = agent_expenses.summary
+replan_budget = agent_expenses.replan_budget
 
 
 def build_summary(budget_vnd: int, expenses: Iterable[Any]) -> dict[str, Any]:

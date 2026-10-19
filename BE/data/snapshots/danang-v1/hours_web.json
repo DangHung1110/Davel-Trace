@@ -1,0 +1,291 @@
+{
+ "43 Coffee & Milk Tea": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "24/7 (monandanang.vn)",
+  "price_sources": [
+   "https://monandanang.vn"
+  ]
+ },
+ "Bãi Sủng Cỏ": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: bãi hoang sơ ngoài trời, không cổng vé"
+ },
+ "Bãi Tắm Non Nước": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: bãi công cộng mở tự do"
+ },
+ "Bãi Tắm Tân Trà": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: bãi công cộng, không giờ niêm yết"
+ },
+ "Bãi tắm Mỹ Khê": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "bãi công cộng 24h (viet-go.com; intour.com.vn 'luôn mở cửa')"
+ },
+ "Bãi tắm Nguyễn Thần Hiến": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+ },
+ "Bãi tắm hàng dừa Mỹ Khê": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+ },
+ "Biển Rạng Sơn Trà": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: bãi tự nhiên hoang sơ, không vé/giờ"
+ },
+ "Bé Ni 2": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "Apple Maps Open 24 Hours; ghiendanang.com 'Luôn mở cửa'"
+ },
+ "Cami Riverside Resort": {
+  "ticket_note": "Resort lưu trú; check-in từ 14:00, out đến 12:00 — không phải giờ tham quan"
+ },
+ "Chợ Hoà Mỹ": {
+  "hours_fill": [
+   "05:00-19:00"
+  ],
+  "hours_web": "foody.vn Khu Ẩm Thực Chợ Hoà Mỹ 05:00-19:00"
+ },
+ "Chợ hải sản Đà Nẵng": {
+  "ticket_note": "Tên chung chung; chợ cụ thể có giờ riêng (Mân Thái 15:00-19:30) — chưa gán"
+ },
+ "Cầu Rồng": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "cầu đi lại tự do 24/7; show lửa-nước T6-CN 21:00 (breezevietnam.com)"
+ },
+ "Cổng Chào Khu Công Nghệ Cao": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: công trình ngoài trời check-in tự do"
+ },
+ "Công Viên APEC": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: công viên công cộng mở tự do"
+ },
+ "Công Viên Trung Tâm Hành Chính Liên Chiểu": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: công viên công cộng mở tự do"
+ },
+ "Công Viên Cây Xanh": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: công viên công cộng mở tự do"
+ },
+ "Công viên Kỳ Quan": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "miễn phí, không giới hạn thời gian (daivietourist.vn; danangwander.com)"
+ },
+ "Công viên biển Hà Khê": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: công viên biển công cộng mở tự do"
+ },
+ "Công viên Sao Biển": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: bãi/công viên công cộng mở tự do"
+ },
+ "Di tích Thành Điện Hải": {
+  "hours_fill": [
+   "08:00-11:30",
+   "13:30-16:30"
+  ],
+  "hours_web": "giờ Bảo tàng ĐN trong khuôn viên; nghỉ T2 (quangthangcatba.com)"
+ },
+ "Ghềnh Bàng": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "open 24h, free entry (mecrawl.com)"
+ },
+ "Hồ Hòa Trung": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "mở cửa 24/7 (intour.com.vn)"
+ },
+ "Huyen Khong Cave": {
+  "hours_fill": [
+   "07:00-17:30"
+  ],
+  "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com; visitor center ghi 7:00-17:00)"
+ },
+ "KHU PHỐ DU LỊCH AN THƯỢNG": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: khu phố du lịch mở tự do"
+ },
+ "Khu Dừng Chân": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
+ },
+ "Khu du lịch bãi biển Mỹ Khê": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "bãi công cộng 24h (viet-go.com; cứu hộ Hè 05:00-19:00)"
+ },
+ "Kiến Cafe": {
+  "hours_fill": [
+   "06:00-22:00"
+  ],
+  "hours_web": "foody.vn Kiến Cafe 06:00-22:00"
+ },
+ "My Khe Beach": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "bãi công cộng 24h (viet-go.com)"
+ },
+ "Nhà Vọng Cảnh": {
+  "hours_fill": [
+   "07:30-18:30"
+  ],
+  "hours_web": "daivietourist.vn (T10-T2: 07:30-17:30)"
+ },
+ "Nhà bia Chứng tích Núi Ghềnh": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: nhà bia ngoài trời, không cổng/vé"
+ },
+ "Nhà hàng hải sản .": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "cùng địa chỉ Bé Ni 2, 228 Võ Nguyên Giáp (Apple Maps 24h)"
+ },
+ "Nhất Lâm Thủy Trang Trà": {
+  "hours_fill": [
+   "06:00-18:00"
+  ],
+  "hours_web": "tripbike.net; đồng thuận mia.vn"
+ },
+ "Quảng trường Liên Chiểu": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: quảng trường công cộng mở tự do"
+ },
+ "Quốc Tự Tam Thai": {
+  "hours_fill": [
+   "07:30-17:00"
+  ],
+  "hours_web": "chùa trên núi Thủy Sơn, theo giờ khu NHS (gtrip.vn)"
+ },
+ "Radar Sơn Trà 1": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "open 24/7 (trip.com); khu quân sự, đường lên giới hạn 07:30-18:30"
+ },
+ "Sky coffee": {
+  "hours_fill": [
+   "06:00-22:00"
+  ],
+  "hours_web": "foody.vn Sky Coffee & Tea 06:00-22:00"
+ },
+ "Son Tra Beach": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: bãi công cộng; đường lên giới hạn 07:30-18:30"
+ },
+ "Suối Lương - Hai Van Park": {
+  "hours_fill": [
+   "08:00-17:00"
+  ],
+  "hours_web": "trip.com; đồng thuận danangtours.com"
+ },
+ "Sơn Trà Resort & Spa": {
+  "ticket_note": "Resort lưu trú, không phải điểm tham quan có giờ mở cửa"
+ },
+ "Tượng đài Mẹ Nhu": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: tượng đài công cộng ngoài trời"
+ },
+ "View Ngắm Bình Minh Sơn Trà": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
+ },
+ "Vịnh Sơn Trà": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
+ },
+ "VỌC Glamping": {
+  "hours_fill": [
+   "07:00-22:00"
+  ],
+  "hours_web": "huvi.ai 07:00-22:00"
+ },
+ "Đình làng Hải Châu": {
+  "hours_fill": [
+   "08:00-18:00"
+  ],
+  "hours_web": "hoiandanang.com listing"
+ },
+ "Động Tàng Chơn": {
+  "hours_fill": [
+   "07:00-17:30"
+  ],
+  "hours_web": "giờ quần thể Ngũ Hành Sơn (hoiandriver.com)"
+ },
+ "Động Âm Phủ": {
+  "hours_fill": [
+   "07:00-17:30"
+  ],
+  "hours_web": "NHS 07:00-17:30; vé Âm Phủ riêng 20k (hoiandriver.com)"
+ },
+ "Động Vân Thông": {
+  "hours_fill": [
+   "07:00-17:30"
+  ],
+  "hours_web": "suy luận theo giờ quần thể NHS (động núi Thủy Sơn)"
+ },
+ "Đường hoa Bạch Đằng": {
+  "hours_fill": [
+   "00:00-23:59"
+  ],
+  "hours_web": "quy ước: tuyến đi bộ ven sông mở tự do"
+ }
+}

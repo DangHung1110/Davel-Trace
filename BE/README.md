@@ -1,59 +1,54 @@
-# Davel Trace Management API
+# Backend (FastAPI)
 
-FastAPI backend cho Management MVP: hồ sơ local, chuyến đi Đà Nẵng tối đa hai ngày, lịch thủ công, chi tiêu, POI catalog và route preview.
+Travel-agent API (`/v1/*` per `specs/001-travel-agent-mvp/contracts/api.md`).
+Mọi lệnh dưới đã chạy thật trên máy này (2026-09-28, Python 3.11, Windows).
 
-## Database decision
-
-MVP dùng **SQLite + SQLAlchemy 2 + Alembic code-first** theo project Constitution. PostgreSQL/MySQL chưa được quy định; đổi sang một trong hai cần amendment/PR riêng. ORM models là nguồn schema, còn Alembic revisions là đường tạo/cập nhật DB chính thức.
-
-Database mặc định được sinh tại `BE/data/davel_trace.db`. DBeaver mở file này bằng driver SQLite; không cần host, port, username hay password.
-
-## Setup (PowerShell)
-
-Từ repository root:
+## 1. Cài deps
 
 ```powershell
-py -3.11 -m venv .venv
-& '.\.venv\Scripts\python.exe' -m pip install -r BE\requirements.txt
-& '.\.venv\Scripts\python.exe' -m alembic -c BE\alembic.ini upgrade head
-& '.\.venv\Scripts\python.exe' -m uvicorn BE.app.main:app --reload --host 127.0.0.1 --port 8000
+python -m pip install -r BE/requirements.txt
 ```
 
-API docs: `http://127.0.0.1:8000/docs`
-Health: `http://127.0.0.1:8000/v1/health`
+Gồm: fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx.
 
-## Setup (Git Bash)
-
-```bash
-py -3.11 -m venv .venv
-./.venv/Scripts/python.exe -m pip install -r BE/requirements.txt
-./.venv/Scripts/python.exe -m alembic -c BE/alembic.ini upgrade head
-./.venv/Scripts/python.exe -m uvicorn BE.app.main:app --reload --host 127.0.0.1 --port 8000
-```
-
-## DBeaver
-
-1. Chạy `alembic upgrade head` ít nhất một lần.
-2. Trong DBeaver chọn **New Database Connection → SQLite**.
-3. Database file: đường dẫn tuyệt đối tới `BE/data/davel_trace.db`.
-4. Test Connection → Finish.
-
-Các bảng chính: `user_profiles`, `device_state`, `trips`, `itineraries`, `activities`, `expenses`, `route_segments`, `alembic_version`.
-
-## Environment
-
-Copy `.env.example` thành `.env` nếu muốn override. App không tự đọc `.env`; đặt biến trong shell hoặc dùng tool runner của IDE.
-
-- `DAVEL_DATABASE_URL`: mặc định SQLite file trong repo.
-- `DAVEL_POI_SNAPSHOT`: đường dẫn snapshot POI JSON.
-- `DAVEL_OSRM_BASE_URL`: mặc định public OSRM demo.
-- `DAVEL_ROUTE_TIMEOUT_SECONDS`: mặc định 10 giây.
-- `DAVEL_CORS_ORIGINS`: danh sách origin cố định; localhost/127.0.0.1 với port bất kỳ cũng được phép cho Flutter dev server.
-
-## Test
+## 2. Env (không commit secret)
 
 ```powershell
-& '.\.venv\Scripts\python.exe' -m pytest -q
+copy BE\.env.example BE\.env
 ```
 
-Không commit file `.db`, `.env` hay API key.
+Mặc định chạy ngay không cần sửa: `LLM_PROVIDER=local`
+(Ollama `http://localhost:11434`, demo day). Test env mới cần key
+(`LLM_API_KEY` qua env/BE/.env — KHÔNG commit).
+
+## 3. Chạy BE
+
+```powershell
+python -m uvicorn BE.app.main:app --port 8000
+```
+
+Kiểm tra (đã verify thật):
+
+```powershell
+curl.exe http://localhost:8000/v1/health
+# {"status":"ok","snapshot":"danang-v1"}
+
+curl.exe -X POST http://localhost:8000/v1/expenses `
+  -H "Content-Type: application/json" `
+  -d "@body.json"   # {"trip_id":"t1","label":"Mi Quang","amount":120000,"kind":"food"}
+# -> 201 entry; GET /v1/expenses/summary?trip_id=t1 -> budget/spent/left/alert
+```
+
+Lưu ý: `POST /v1/parse` cần LLM (Ollama local hoặc API key);
+không LLM thì endpoint trả lỗi transport rõ ràng, không crash.
+`POST /v1/itinerary` cần snapshot `data/snapshots/danang-v1/`
+(lane A, đủ lanes merge mới có).
+
+## 4. Test
+
+```powershell
+python -m pytest BE/tests -q
+# 74 passed (lane C; đủ 3 lanes merge thì nhiều hơn)
+```
+
+Unit chạy trực tiếp cũng được: `python BE/tests/unit/test_x.py`.

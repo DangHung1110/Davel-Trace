@@ -9,7 +9,7 @@ from BE.app.schemas.profile import (
     ProfileRead,
     ProfileUpdate,
 )
-from BE.app.services import profiles as service
+from BE.app.services import management_profiles as service
 
 router = APIRouter(prefix="/v1/profiles", tags=["profiles"])
 

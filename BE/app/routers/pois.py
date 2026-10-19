@@ -6,7 +6,7 @@ from fastapi import APIRouter, Query
 from BE.app.config import get_settings
 from BE.app.errors import AppError
 from BE.app.repositories.poi_catalog import PoiCatalog
-from BE.app.schemas.poi import PoiList, PoiSummary
+from BE.app.schemas.management_poi import PoiList, PoiSummary
 
 router = APIRouter(prefix="/v1/pois", tags=["pois"])
 
