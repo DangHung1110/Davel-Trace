@@ -143,9 +143,20 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual(rep["soft"], {})
 
     def test_all_metric_fns_callable(self):
-        self.assertEqual(len(GATE_CHECKS), 5)
-        for _, fn, _ in GATE_CHECKS:
+        # T061f: metrics imports the canonical 7-check registry from gate.py.
+        self.assertEqual([name for name, _ in GATE_CHECKS],
+                         ["FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"])
+        for _, fn in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
+
+    def test_evaluator_and_validator_gate_sets_identical(self):
+        """T061f/X8: gate.py is the one registry; eval imports it verbatim."""
+        from BE.app.services.gate import CHECKS as CANONICAL
+        from BE.app.services.validator import CHECKS as VALIDATOR_CHECKS
+        self.assertIs(GATE_CHECKS, CANONICAL)
+        self.assertIs(VALIDATOR_CHECKS, CANONICAL)
+        self.assertEqual([name for name, _ in GATE_CHECKS],
+                         ["FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"])
 
     def test_multi_interval_hours_parse(self):
         def score(activities, hours):
