@@ -8,9 +8,13 @@ assumptions/soft_prefs/hard_constraints/uncertainties) OR
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+from BE.app.routers import error
 from BE.app.services import parser as parser_svc
+from BE.app.services.llm import LLMError
 
 router = APIRouter(prefix="/v1", tags=["parse"])
+
+LLM_UNAVAILABLE_MESSAGE = "Dich vu AI tam thoi khong san sang, vui long thu lai sau."
 
 
 class ParseIn(BaseModel):
@@ -20,7 +24,10 @@ class ParseIn(BaseModel):
 
 @router.post("/parse")
 def parse(body: ParseIn) -> dict:
-    out = parser_svc.parse(body.text, body.user_id)
+    try:
+        out = parser_svc.parse(body.text, body.user_id)
+    except LLMError:
+        return error("LLM_UNAVAILABLE", LLM_UNAVAILABLE_MESSAGE, 503)
     if "needs_clarification" in out:
         return {"needs_clarification": out["needs_clarification"],
                 "assumptions": out.get("assumptions", []),

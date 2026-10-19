@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from BE.app import main as main_mod  # noqa: E402
 from BE.app.services import parser as parser_svc  # noqa: E402
+from BE.app.services.llm import LLMError  # noqa: E402
 
 FULL = {"city": "Đà Nẵng", "date": "", "start_time": "07:00",
         "end_time": "18:00", "days": 1, "travelers": 2, "budget": 3000000,
@@ -77,6 +78,23 @@ class TestParseContract(unittest.TestCase):
         self.assertEqual(set(r.json()), {"error", "message"})
         self.assertEqual(r.json()["error"], "VALIDATION_ERROR")
         self.assertIn("days", r.json()["message"])
+
+    def test_llm_error_returns_503_envelope(self):
+        parser_svc.llm_gateway.complete_json = lambda prompt, schema: dict(FULL)
+        prev = parser_svc.llm_gateway.complete_json
+
+        def fail_llm(*args, **kwargs):
+            raise LLMError("transport", "connect refused to internal host")
+
+        parser_svc.llm_gateway.complete_json = fail_llm
+        try:
+            r = client.post("/v1/parse", json={"text": "đi Đà Nẵng"})
+        finally:
+            parser_svc.llm_gateway.complete_json = prev
+        self.assertEqual(r.status_code, 503)
+        self.assertEqual(set(r.json()), {"error", "message"})
+        self.assertEqual(r.json()["error"], "LLM_UNAVAILABLE")
+        self.assertNotIn("connect refused", r.text)
 
     def test_unhandled_errors_use_error_envelope(self):
         real_parse = parser_svc.parse
