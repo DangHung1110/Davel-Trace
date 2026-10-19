@@ -11,6 +11,7 @@ from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
+from BE.app.routers import replan as replan_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 
@@ -18,6 +19,7 @@ app = FastAPI(title="Travel Agent BE")
 app.include_router(parse_router.router)
 app.include_router(itinerary_router.router)
 app.include_router(select_router.router)
+app.include_router(replan_router.router)
 app.include_router(expenses_router.router)
 app.include_router(weather_router.router)
 

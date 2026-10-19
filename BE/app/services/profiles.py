@@ -164,6 +164,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan["reason"] = PROFILE_REASONS[prof]
     plan["scores"] = score_plan(plan)
     _attach_explanations(plan, ranked)
+    # T061e: replan context (trip/pois/travel) travels with the stored plan
+    # so POST /replan can rebuild the rolling state; the itinerary router
+    # strips leading-underscore keys from the public response.
+    plan["_context"] = {"trip": trip, "pois": candidates, "travel": travel}
     return plan
 
 

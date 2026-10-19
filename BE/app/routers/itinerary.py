@@ -89,6 +89,10 @@ def itinerary(body: ItineraryIn):
         plan["profile"] = profile
         plans.append(plan)
 
-    # Make every returned itinerary immediately selectable.
+    # Make every returned itinerary immediately selectable. The store keeps
+    # the full plan (incl. T061e `_context` for /replan); the public
+    # response drops leading-underscore keys.
     select_svc.register(plans)
-    return {"plans": plans, "selected": None}
+    public = [{k: v for k, v in plan.items() if not k.startswith("_")}
+              for plan in plans]
+    return {"plans": public, "selected": None}

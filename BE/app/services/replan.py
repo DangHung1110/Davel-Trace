@@ -21,7 +21,8 @@ from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.budget import tighten_budget
 from BE.app.services.common import parse_hours, to_min
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize
+from BE.app.services.optimizer import (
+    StubPOI, StubTrip, optimize, poi_visit_min)
 from BE.app.services.validator import validate
 
 
@@ -94,12 +95,14 @@ def replan(state: dict, event: dict, pois: list[dict],
             else:
                 travel2[("depot", x)] = leg
 
-    stub = [StubPOI(pid, int(by_id[pid].get("visit_min", 60)),
+    stub = [StubPOI(pid, poi_visit_min(by_id[pid]),
                     *_win(by_id[pid], trip, state), 1.0)
             for pid in cand_ids if pid in by_id]
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
                 to_min(trip.get("start_time", "07:00")))
-    origin_id = "depot" if completed_ids else trip.get("origin_id", "depot")
+    # T061a: no completed -> open tour (origin_id None) when the plan has no
+    # depot cell; with completed the rolling horizon anchors on the last one.
+    origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
     q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
     out = optimize(stub, travel2, StubTrip(start, _deadline(trip), origin_id),
                    edge_scores=q)
