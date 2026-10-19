@@ -16,7 +16,7 @@ Groups:
 symmetric x_same_type is the documented exception.
 
 [*] Hook fulfilled: `train.py` interim 10-feature extractor replaced by
-`extract` (same ordered-pair input, 16 outputs).
+`extract` (same ordered-pair input, 17 outputs).
 """
 
 from __future__ import annotations

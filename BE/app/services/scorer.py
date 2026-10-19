@@ -3,8 +3,9 @@
 score_transition(a, b, user, ctx) -> float (positive: a->b preferred).
 Backend: LightGBM BE/ml/patm/model.txt when present. Features come from
 the lane-A T026+T062 extractor (17 features) when that module is
-importable; the in-file STUB mirror (16 features) is the fallback in a
-clean checkout. A width guard compares the loaded booster's feature count
+importable; the in-file STUB mirror (`_STUB_FEATURE_NAMES`, 16 features)
+is the fallback in a clean checkout. A width guard compares the loaded
+booster's feature count
 against the ACTIVE extractor: on mismatch the scorer falls back to the
 nac-1 RULE instead of crashing (stated in describe()). Rule weights +
 stub feature code mirror lane-A rule_score.py/features.py. Rule path
@@ -19,7 +20,7 @@ import os
 
 MODEL_PATH = os.path.join("BE", "ml", "patm", "model.txt")
 
-FEATURE_NAMES = (
+_STUB_FEATURE_NAMES = (
     "d_intensity", "d_rating", "d_price", "d_duration",
     "x_meal_after", "x_indoor_buffer", "x_intensity_drop", "x_same_type",
     "u_pace", "u_fitness", "u_spending", "u_outdoor",
@@ -52,7 +53,7 @@ def _lane_a_extract():
             from BE.ml.patm.features import extract
             _lane_cache = (extract, len(lane_names))
         except Exception:  # noqa: BLE001 - clean checkout has no BE/ml/patm
-            _lane_cache = (None, len(FEATURE_NAMES))
+            _lane_cache = (None, len(_STUB_FEATURE_NAMES))
     return _lane_cache
 
 
