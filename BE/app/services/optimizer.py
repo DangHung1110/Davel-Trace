@@ -136,11 +136,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, require_all: bool = False,
              timeout_s: float = TIMEOUT_S,
              edge_scores: dict[tuple[str, str], float] | None = None,
-             precedence: list[tuple[str, str]] | None = None) -> dict:
+             precedence: list[tuple[str, str]] | None = None,
+             workers: int = 0) -> dict:
     """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
 
     edge_scores[(a, b)]: bonus added when transition a->b is used.
     precedence[(A, B)]: when BOTH visited, t[B] >= t[A]+dur[A].
+    workers: 0 = solver default (wall-clock search, may vary run to run);
+    1 = single deterministic worker, used by the T053 eval harness so a
+    baseline comparison is reproducible.
     """
     from ortools.sat.python import cp_model
 
@@ -206,6 +210,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout_s
+    if workers:
+        solver.parameters.num_search_workers = workers
     t0 = time.monotonic()
     status = solver.Solve(m)
     elapsed = time.monotonic() - t0

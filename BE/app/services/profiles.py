@@ -127,7 +127,7 @@ def _travel_from_cells(cells: dict, ids: list[str]) -> dict:
 
 
 def build_plan(profile: str, trip: dict, ranked: list[dict],
-               pois_by_id: dict, cells: dict) -> dict:
+               pois_by_id: dict, cells: dict, workers: int = 0) -> dict:
     """T020/T032 router seam: one profile -> one real plan dict.
 
     Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
@@ -136,7 +136,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     response (T019) with per-activity explanations (T042).
 
     The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
-    the plan body those fields are attached to.
+    the plan body those fields are attached to. `workers` is forwarded to
+    CP-SAT (0 = default; 1 = deterministic, used by the T053 harness).
     """
     prof = profile if profile in PROFILE_REASONS else "balanced"
     ranked_ids = [r.get("poi_id") for r in ranked]
@@ -150,7 +151,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                             deadline=_deadline(trip))
     q = scorer.edge_scores(ids, pois_by_id)
     out = optimize(stubs, travel, _to_trip(trip, origin_id=None),
-                   edge_scores=q)
+                   edge_scores=q, workers=workers)
 
     acts = (out.get("itinerary") or {}).get("activities", [])
     pois_gate = {pid: {"verified": p.get("verified", False),

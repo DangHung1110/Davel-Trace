@@ -131,6 +131,41 @@ def _place(arrival: int, dur: int, hours: list[str], ws: int, we: int) -> int | 
     return best
 
 
+def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
+                evidence: str = "gold:approach-b") -> tuple[list[dict] | None, str]:
+    """Hours-aware placement of `order` -> (activities, "") or (None, reason).
+
+    Shared by the Approach-B gold generator (T051) and the T053 LLM-only
+    baseline: both hand an ORDER to the same chaining/placement seam, so a
+    baseline planner is compared on its ORDERING, not on a different
+    scheduler. An optional POI whose hours/window never fit is skipped in
+    order; a must_visit that cannot be placed makes the query infeasible.
+    A missing matrix cell fails closed (never a 0-minute edge).
+    """
+    ws, we = _to_min(trip["start_time"]), _to_min(trip["end_time"])
+    must = set(trip.get("must_visit", []))
+    acts, cur, prev = [], ws, None
+    for pid in order:
+        gap = 0 if prev is None else _edge_minutes(matrix, prev, pid)
+        if gap is None:
+            return None, f"missing matrix pair {prev}->{pid}"
+        arrival = cur + gap
+        dur = int(pois[pid]["visit_min"]["p50"])
+        start = _place(arrival, dur, pois[pid].get("opening_hours", []), ws, we)
+        if start is None:
+            if pid in must:
+                return None, f"must_visit {pid} exceeds hours/window"
+            continue
+        acts.append({"poi_id": pid, "start": _hh(start), "end": _hh(start + dur),
+                     "explanation": {"evidence": [evidence]}})
+        prev, cur = pid, start + dur
+    if not acts:
+        return None, "empty"
+    if any(m not in [a["poi_id"] for a in acts] for m in must):
+        return None, "must_visit dropped"
+    return acts, ""
+
+
 def make_gold(query: dict, pois: dict, matrix: dict) -> dict:
     """Return {"query_id", "itinerary" | None, "infeasible": reason or ''}."""
     trip = query["trip"]
@@ -152,30 +187,8 @@ def make_gold(query: dict, pois: dict, matrix: dict) -> dict:
     order = tsp_order(cands, matrix, origin)
     if trip.get("order_prefs"):
         pass  # Approach-B is preference-blind by design (baseline); prefs scored by SSR
-    ws, we = _to_min(trip["start_time"]), _to_min(trip["end_time"])
-    must = set(trip.get("must_visit", []))
-    # hours-aware placement in TSP order; skip unplaceable (must_visit -> infeasible)
-    acts, cur, prev = [], ws, None
-    for pid in order:
-        gap = 0 if prev is None else _edge_minutes(matrix, prev, pid)
-        if gap is None:
-            return {"query_id": query["query_id"], "itinerary": None,
-                    "infeasible": f"missing matrix pair {prev}->{pid}"}
-        arrival = cur + gap
-        dur = int(pois[pid]["visit_min"]["p50"])
-        start = _place(arrival, dur, pois[pid].get("opening_hours", []), ws, we)
-        if start is None:
-            if pid in must:
-                return {"query_id": query["query_id"], "itinerary": None,
-                        "infeasible": f"must_visit {pid} exceeds hours/window"}
-            continue
-        acts.append({"poi_id": pid, "start": _hh(start), "end": _hh(start + dur),
-                     "explanation": {"evidence": ["gold:approach-b"]}})
-        prev, cur = pid, start + dur
-    if not acts:
-        return {"query_id": query["query_id"], "itinerary": None, "infeasible": "empty"}
-    if any(m not in [a["poi_id"] for a in acts] for m in must):
-        return {"query_id": query["query_id"], "itinerary": None,
-                "infeasible": "must_visit dropped"}
+    acts, bad = chain_order(order, trip, pois, matrix)
+    if acts is None:
+        return {"query_id": query["query_id"], "itinerary": None, "infeasible": bad}
     return {"query_id": query["query_id"],
             "itinerary": {"activities": acts}, "infeasible": ""}
