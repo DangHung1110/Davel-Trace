@@ -6,10 +6,13 @@ rule-based-variant data (10 classes). Trains in-process (CPU seconds).
 Run from repo root: python BE/tests/unit/test_event_clf.py -v
 """
 
+import json  # noqa: E402
 import os
+import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -59,6 +62,43 @@ class TestEventClf(unittest.TestCase):
 
     def test_labels_match_spec_types(self):
         self.assertEqual(LABELS, list(EVENT_TYPES))
+
+    def test_train_eval_writes_labels_artifact(self):
+        with open(os.path.join(self.tmp, "labels.json"), encoding="utf-8") as f:
+            self.assertEqual(json.load(f), LABELS)
+
+    def test_predict_uses_saved_labels_not_module_order(self):
+        from BE.ml.event_clf import train as train_mod
+        with mock.patch.object(train_mod, "LABELS", list(reversed(train_mod.LABELS))):
+            # fresh cache: labels.json must win over the patched module order
+            self.assertEqual(
+                predict("trời mưa to quá, tìm chỗ trong nhà đi", self.tmp, _cache={}),
+                "rain")
+
+    def test_predict_legacy_dir_without_labels_falls_back(self):
+        legacy = tempfile.mkdtemp(prefix="evt_legacy_")
+        shutil.copy(os.path.join(self.tmp, "model.txt"),
+                    os.path.join(legacy, "model.txt"))
+        shutil.copy(os.path.join(self.tmp, "vocab.json"),
+                    os.path.join(legacy, "vocab.json"))
+        self.assertEqual(
+            predict("trời mưa to quá, tìm chỗ trong nhà đi", legacy, _cache={}),
+            "rain")
+
+    def test_malformed_or_mismatched_labels_raise(self):
+        broken = tempfile.mkdtemp(prefix="evt_bad_")
+        shutil.copy(os.path.join(self.tmp, "model.txt"),
+                    os.path.join(broken, "model.txt"))
+        shutil.copy(os.path.join(self.tmp, "vocab.json"),
+                    os.path.join(broken, "vocab.json"))
+        for payload in ("not-json", '{"rain": 0}', "[]", '["rain", 1]',
+                        '["rain", "delay"]'):
+            with self.subTest(payload=payload):
+                with open(os.path.join(broken, "labels.json"), "w",
+                          encoding="utf-8") as f:
+                    f.write(payload)
+                with self.assertRaises(ValueError):
+                    predict("trời mưa to quá", broken, _cache={})
 
 
 if __name__ == "__main__":

@@ -156,6 +156,29 @@ def train_eval(texts: list[str], labels: list[str], seed: int,
             "per_class": per_class, "model_dir": model_dir}
 
 
+def _load_labels(model_dir: str) -> list[str]:
+    """Return the class-index order saved with the model.
+
+    labels.json is the source of truth so a retrained/reordered model cannot
+    be mislabelled by module import order. Legacy artifacts without the file
+    fall back to the in-code LABELS.
+    """
+    path = os.path.join(model_dir, "labels.json")
+    if not os.path.exists(path):
+        return list(LABELS)
+    try:
+        with open(path, encoding="utf-8") as f:
+            labels = json.load(f)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"invalid labels artifact {path!r}: {exc}") from exc
+    if (not isinstance(labels, list) or not labels
+            or not all(isinstance(name, str) for name in labels)):
+        raise ValueError(
+            f"invalid labels artifact {path!r}: expected a non-empty list of "
+            f"strings, got {labels!r}")
+    return labels
+
+
 def predict(text: str, model_dir: str, _cache: dict = {}) -> str:
     """Load-once inference for lane B T046 (same artifacts as train)."""
     import numpy as np
@@ -163,9 +186,16 @@ def predict(text: str, model_dir: str, _cache: dict = {}) -> str:
         import lightgbm as lgb
         _cache.update(bst=lgb.Booster(model_file=os.path.join(model_dir, "model.txt")),
                       vec=Tfidf.load(os.path.join(model_dir, "vocab.json")),
+                      labels=_load_labels(model_dir),
                       dir=model_dir)
     probs = _cache["bst"].predict(_cache["vec"].transform([text]))
-    return LABELS[int(np.argmax(probs))]
+    labels = _cache["labels"]
+    n_classes = int(np.asarray(probs).shape[-1])
+    if len(labels) != n_classes:
+        raise ValueError(
+            f"labels artifact class-count mismatch for {model_dir!r}: "
+            f"{len(labels)} labels vs {n_classes} model classes")
+    return labels[int(np.argmax(probs))]
 
 
 def main(argv: list[str] | None = None) -> int:

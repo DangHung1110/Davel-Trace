@@ -9,6 +9,10 @@ Slots {poi}/{time}/{dish}/{amount} are filled from SEED_* lists
 
 from __future__ import annotations
 
+# Canonical disruption taxonomy = exactly these 10 labels, in model
+# class-index order (T053 decision). T044's "~8 types" in tasks.md was a
+# size estimate only; track.md records the reviewed/accepted set as 10.
+# DynamicEvent.type stays open-ended (see data-model.md).
 EVENT_TYPES = (
     "rain", "delay", "drop_poi", "add_req", "tired",
     "closure", "time_change", "traffic", "budget", "lost",
