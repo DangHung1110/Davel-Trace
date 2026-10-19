@@ -177,6 +177,33 @@ class TestItineraryContract(unittest.TestCase):
             store["active_id"] = old_active_id
             store["selected"] = old_selected
 
+    def test_get_itinerary_returns_public_plan(self):
+        """GET /v1/itinerary/{id}: same public shape POST returns (no _keys)."""
+        select_mod.reset_store()
+        plan = {"itinerary_id": "it-get", "profile": "balanced",
+                "trip_id": "t1",
+                "activities": [{"poi_id": "beach", "start": "08:00",
+                                "end": "10:00"}],
+                "total_cost": 0,
+                "_context": {"trip": TRIP, "pois": ["beach"], "travel": {}}}
+        try:
+            select_mod.register([plan])
+            r = client.get("/v1/itinerary/it-get")
+            self.assertEqual(r.status_code, 200, r.text)
+            body = r.json()
+            self.assertEqual(body, {k: v for k, v in plan.items()
+                                    if not k.startswith("_")})
+            self.assertNotIn("_context", body)
+        finally:
+            select_mod.reset_store()
+
+    def test_get_unknown_itinerary_404_envelope(self):
+        select_mod.reset_store()
+        r = client.get("/v1/itinerary/it-ghost")
+        self.assertEqual(r.status_code, 404)
+        self.assertEqual(set(r.json()), {"error", "message"})
+        self.assertEqual(r.json()["error"], "UNKNOWN_ITINERARY")
+
     def test_missing_snapshot_envelope(self):
         itinerary_mod.get_settings = lambda: Settings(snapshot_dir="/no/such/dir",
                                                       snapshot_name="x")

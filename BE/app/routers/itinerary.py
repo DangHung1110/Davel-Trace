@@ -3,6 +3,11 @@
 Retrieval/ranking are lane C; feasibility planning is owned by lane B. Until
 that service is present, the endpoint fails explicitly instead of presenting
 the former rank-order stub as a real itinerary.
+
+GET /v1/itinerary/{id} (contracts/api.md "đọc lịch", offline cache key) reads
+a stored plan back. The body is the same public plan object POST /v1/itinerary
+returns (leading-underscore context keys stripped), so a client can cache the
+POST response and re-read it by id. Unknown id -> 404 envelope.
 """
 
 from __future__ import annotations
@@ -93,6 +98,19 @@ def itinerary(body: ItineraryIn):
     # the full plan (incl. T061e `_context` for /replan); the public
     # response drops leading-underscore keys.
     select_svc.register(plans)
-    public = [{k: v for k, v in plan.items() if not k.startswith("_")}
-              for plan in plans]
+    public = [_public(plan) for plan in plans]
     return {"plans": public, "selected": None}
+
+
+def _public(plan: dict) -> dict:
+    """Plan -> public shape (drop private leading-underscore keys)."""
+    return {k: v for k, v in plan.items() if not k.startswith("_")}
+
+
+@router.get("/itinerary/{itinerary_id}")
+def get_itinerary(itinerary_id: str):
+    plan = select_svc.get_store()["plans"].get(itinerary_id)
+    if plan is None:
+        return error("UNKNOWN_ITINERARY",
+                     f"khong co plan {itinerary_id}", 404)
+    return _public(plan)
