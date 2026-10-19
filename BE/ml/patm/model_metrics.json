@@ -1,0 +1,8 @@
+{
+  "pairs": 2151,
+  "snapshot_n": 764,
+  "sources": "1000 rule + 973 qwen3-8b + 178 human",
+  "cv_acc": 0.793,
+  "held_acc": 0.777,
+  "flip": 0.728
+}

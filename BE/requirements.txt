@@ -1,0 +1,9 @@
+# BE requirements (T001). Python 3.11. Install: pip install -r BE/requirements.txt
+fastapi
+uvicorn
+ortools
+lightgbm
+numpy  # scorer.py uses it directly (transitive via lightgbm today — pin direct per oracle review)
+pydantic
+pytest
+httpx
