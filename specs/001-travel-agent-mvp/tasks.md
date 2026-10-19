@@ -172,7 +172,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [ ] T054 [P] FE API client replaces all in-memory demo data (`FE/lib/api/`, itinerary/map/expenses features)
 - [ ] T055 [P] Plan cards UI (3 profiles + scores + select) in `FE/lib/features/itinerary/`
 - [ ] T056 [P] Radar-chart comparison script (hybrid vs baselines)
-- [ ] T057 Full quickstart.md validation run (S1–S7 green)
+- [ ] T057 Full quickstart.md validation run (S1–S7 green) — NOTE 2026-10-19 (T057 validation, 2 small fixes shipped on `feat/t053-baselines`): (a) router path emitted no `preference`/`travel_min`, collapsing every profile's `score_plan` to profit=0.0/utility=0.3 — fixed in `services/response.py`; (b) unknown `completed` poi_id in POST /replan raised unhandled KeyError -> 500 — now 404 `UNKNOWN_POI` envelope. KNOWN LIMITATIONS, not fixed: balanced and experience produce identical itineraries on the current fixture set (same objective at these fixtures), and `order_prefs` is soft-only (ranking nudge, no hard ordering constraint).
 - [X] T058 Docs: README BE run guide + demo video script (mock GPS timeline + rain scenario)
 - [X] T059 Security sweep: no secrets, `.env` excluded, logs redacted
 
