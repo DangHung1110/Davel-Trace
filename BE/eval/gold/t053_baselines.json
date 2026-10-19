@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-19T16:43:28",
+ "generated_at": "2026-10-19T16:54:05",
  "suite": "BE\\eval\\gold\\t051_scoped_suite.json",
  "snapshot": "BE\\data\\snapshots\\danang-v1",
  "coverage": {
@@ -53,8 +53,8 @@
   },
   "hybrid": {
    "n": 23,
-   "gate_pass": 21,
-   "pass_rate": 0.913,
+   "gate_pass": 23,
+   "pass_rate": 1.0,
    "violations": {
     "FAR": 0,
     "VROH": 0,
@@ -62,12 +62,12 @@
     "BCS": 0,
     "ETB": 0,
     "TCS": 0,
-    "HCS": 2
+    "HCS": 0
    },
    "soft_mean": {
     "STR": 1.0,
-    "DTU": 0.4761,
-    "SSR": 1.0,
+    "DTU": 0.4791,
+    "SSR": 0.9565,
     "CSM": 1.0,
     "EDI": 1.0,
     "AQE": 0.98
@@ -82,7 +82,7 @@
  },
  "recovery": {
   "probed": 23,
-  "ok": 19,
+  "ok": 20,
   "preserved_all": true
  },
  "notes": {
@@ -93,7 +93,7 @@
   "SC-005": {
    "target": ">=90% feasible tasks yield a gate-passing plan",
    "distance_only": 1.0,
-   "hybrid": 0.913,
+   "hybrid": 1.0,
    "pass": true
   },
   "SC-006": {
@@ -127,8 +127,8 @@
   "SC-010": {
    "target": "recovery succeeds >=80% and keeps 100% completed",
    "probed": 23,
-   "recovered": 19,
-   "recovery_rate": 0.8261,
+   "recovered": 20,
+   "recovery_rate": 0.8696,
    "preserved_all": true,
    "pass": true
   }

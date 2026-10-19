@@ -137,7 +137,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              timeout_s: float = TIMEOUT_S,
              edge_scores: dict[tuple[str, str], float] | None = None,
              precedence: list[tuple[str, str]] | None = None,
-             workers: int = 0) -> dict:
+             workers: int = 0,
+             must_visit: list[str] | None = None) -> dict:
     """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
 
     edge_scores[(a, b)]: bonus added when transition a->b is used.
@@ -145,11 +146,24 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     workers: 0 = solver default (wall-clock search, may vary run to run);
     1 = single deterministic worker, used by the T053 eval harness so a
     baseline comparison is reproducible.
+
+    must_visit (T053 bug 2): HARD constraint — every listed POI MUST be in
+    the itinerary (visit[i] == 1), unlike the SOFT MUST_GO_BONUS nudge in
+    poi_to_stub. A must_visit POI outside the candidate set, or one the
+    horizon cannot fit, makes the model infeasible -> honest no_solution
+    rather than a silently must-less plan that fails gate HCS.
     """
     from ortools.sat.python import cp_model
 
     ids = [p.poi_id for p in pois]
     n = len(ids)
+    must_set = set(must_visit or [])
+    missing = sorted(must_set - set(ids))
+    if missing:
+        return {"status": "infeasible",
+                "reason": f"must_visit ngoai candidate: {missing}",
+                "elapsed_s": 0.0, "itinerary": None}
+
     node = {pid: i + 1 for i, pid in enumerate(ids)}  # 0 = depot
     dur = {0: 0, **{node[p.poi_id]: p.visit_min for p in pois}}
     opn = {0: trip.start_min, **{node[p.poi_id]: p.open_min for p in pois}}
@@ -173,6 +187,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         m.Add(arc[(i, i)] == 0).OnlyEnforceIf(visit[i])
         m.Add(arc[(i, i)] == 1).OnlyEnforceIf(visit[i].Not())
         if require_all:
+            m.Add(visit[i] == 1)
+        if ids[i - 1] in must_set:
+            # T053 bug 2: must_visit is HARD (gate HCS), not the soft bonus.
             m.Add(visit[i] == 1)
         m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
         m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])

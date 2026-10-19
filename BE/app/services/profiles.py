@@ -75,7 +75,8 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                  for pid, p in by_id.items()}
     for prof in profiles:
         stub = stubs_from_pois(pois, trip, lambda p: _score(prof, p))
-        out = optimize(stub, travel, _to_trip(trip), edge_scores=q)
+        out = optimize(stub, travel, _to_trip(trip), edge_scores=q,
+                       must_visit=trip.get("must_visit", []))
         if out["itinerary"] is None:
             dropped.append({"profile": prof, "reason": out.get("reason", "")})
             continue
@@ -151,7 +152,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                             deadline=_deadline(trip))
     q = scorer.edge_scores(ids, pois_by_id)
     out = optimize(stubs, travel, _to_trip(trip, origin_id=None),
-                   edge_scores=q, workers=workers)
+                   edge_scores=q, workers=workers,
+                   must_visit=trip.get("must_visit", []))
 
     acts = (out.get("itinerary") or {}).get("activities", [])
     pois_gate = {pid: {"verified": p.get("verified", False),

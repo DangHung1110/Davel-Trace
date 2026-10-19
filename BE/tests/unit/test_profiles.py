@@ -86,6 +86,21 @@ class TestProfiles(unittest.TestCase):
         self.assertEqual(m.call_args[0][0], IDS)
         self.assertGreaterEqual(len(pool["plans"]), 2)
 
+    def test_build_plan_forces_trip_must_visit(self):
+        """T053 bug 2: build_plan wires trip.must_visit as a hard constraint."""
+        from BE.app.services.profiles import build_plan
+
+        by_id = {p["poi_id"]: p for p in POIS}
+        # 07:00-10:00 cannot profitably hold noodle (rating 4.5) next to the
+        # 5.0 fancy; the forced plan must still contain noodle.
+        trip = dict(TRIP, start_time="07:00", end_time="10:00",
+                    must_visit=["noodle"], avoid=[])
+        ranked = [{"poi_id": pid} for pid in IDS]
+        plan = build_plan("balanced", trip, ranked, by_id, MATRIX)
+        ids = [a["poi_id"] for a in plan["activities"]]
+        self.assertIn("noodle", ids)
+        self.assertTrue(plan["constraint_status"]["HCS"] == 1)
+
 
 if __name__ == "__main__":
     unittest.main()

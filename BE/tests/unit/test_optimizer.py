@@ -112,6 +112,36 @@ class TestOptimizer(unittest.TestCase):
         self.assertGreaterEqual(to_min(out["itinerary"]["activities"][0]["start"]),
                                 7 * H + 45)
 
+    # --- T053 bug 2: must_visit is a HARD constraint (gate HCS) ----------
+    def test_must_visit_is_hard_not_soft(self):
+        """A low-score POI the day cannot profitably reach is still forced."""
+        pois = [StubPOI("a", 60, 7 * H, 10 * H, 5.0),
+                StubPOI("b", 60, 7 * H, 10 * H, 4.0),
+                StubPOI("m", 30, 7 * H, 10 * H, 1.0)]
+        ids = [p.poi_id for p in pois]
+        travel = {(x, y): 15 for x in ["depot"] + ids for y in ids if x != y}
+        trip = StubTrip(7 * H, 10 * H, "depot")
+        base = optimize(pois, travel, trip)
+        self.assertNotIn("m", [a["poi_id"]
+                               for a in base["itinerary"]["activities"]])
+        forced = optimize(pois, travel, trip, must_visit=["m"])
+        self.assertIn("m", [a["poi_id"]
+                            for a in forced["itinerary"]["activities"]])
+
+    def test_must_visit_absent_from_candidates_is_infeasible(self):
+        out = optimize(POIS, TRAVEL, TRIP, must_visit=["ghost"])
+        self.assertEqual(out["status"], "infeasible")
+        self.assertIsNone(out["itinerary"])
+        self.assertIn("ghost", out["reason"])
+
+    def test_must_visit_that_cannot_fit_is_infeasible(self):
+        """300 min of visit inside a 60-min window -> honest no_solution."""
+        poi = StubPOI("m", visit_min=300, open_min=7 * H, close_min=8 * H)
+        out = optimize([poi], {("depot", "m"): 10},
+                       StubTrip(7 * H, 12 * H, "depot"), must_visit=["m"])
+        self.assertEqual(out["status"], "infeasible")
+        self.assertIsNone(out["itinerary"])
+
 
 @unittest.skipUnless(os.path.exists(_REAL_MATRIX), "matrix snapshot not built")
 class TestOptimizerRealMatrix(unittest.TestCase):
