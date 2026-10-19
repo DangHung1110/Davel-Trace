@@ -8,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../theme/app_theme.dart';
-import '../../../itinerary/domain/demo_trip.dart';
+import '../map_stop.dart';
 
 class MapCanvas extends StatefulWidget {
   const MapCanvas({
@@ -20,7 +20,7 @@ class MapCanvas extends StatefulWidget {
     required this.locateRequest,
   });
 
-  final List<TripStop> stops;
+  final List<MapStop> stops;
   final int routeRevision;
   final int playRequest;
   final int pauseRequest;
@@ -195,15 +195,16 @@ class _MapCanvasState extends State<MapCanvas> {
               userAgentPackageName: 'com.daveltrace.davel_trace',
               maxNativeZoom: 19,
             ),
-            PolylineLayer(
-              polylines: [
-                Polyline(
-                  points: displayRoute,
-                  color: AppColors.primary,
-                  strokeWidth: 5,
-                ),
-              ],
-            ),
+            if (displayRoute.length >= 2)
+              PolylineLayer(
+                polylines: [
+                  Polyline(
+                    points: displayRoute,
+                    color: AppColors.primary,
+                    strokeWidth: 5,
+                  ),
+                ],
+              ),
             MarkerLayer(
               markers: [
                 ...widget.stops.map(

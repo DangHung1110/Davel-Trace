@@ -1,6 +1,6 @@
 # Data Model: Trip Management MVP
 
-Store: SQLite runtime database managed by SQLAlchemy 2 models and Alembic migrations. POI catalog remains versioned JSON under `data/snapshots/`.
+Store: SQLite runtime database managed by SQLAlchemy 2 models and Alembic migrations. POI catalog remains versioned JSON under `BE/data/snapshots/`.
 
 ## UserProfile
 

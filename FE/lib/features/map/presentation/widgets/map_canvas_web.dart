@@ -5,7 +5,7 @@ import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
-import '../../../itinerary/domain/demo_trip.dart';
+import '../map_stop.dart';
 
 class MapCanvas extends StatefulWidget {
   const MapCanvas({
@@ -17,7 +17,7 @@ class MapCanvas extends StatefulWidget {
     required this.locateRequest,
   });
 
-  final List<TripStop> stops;
+  final List<MapStop> stops;
   final int routeRevision;
   final int playRequest;
   final int pauseRequest;

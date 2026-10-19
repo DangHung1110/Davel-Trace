@@ -2,11 +2,40 @@
 
 ## Repository layout
 
-- `FE/`: Flutter mobile application for itinerary planning, map exploration, and expense tracking.
-- `BE/`: reserved backend workspace; implementation is intentionally deferred.
+- `FE/`: Flutter mobile app cho hồ sơ, chuyến đi/lịch thủ công, map và chi tiêu.
+- `BE/`: FastAPI + SQLAlchemy/Alembic management API.
 - Root prototype: the original local PMTiles 3D route simulator used to validate map data and routing.
 
 Development is integrated through the `dev` branch. Feature work should branch from `dev` and follow Conventional Commits in English.
+
+## Management MVP
+
+Phần app hoàn chỉnh trước AI gồm:
+
+- nhiều hồ sơ local, một hồ sơ đang hoạt động, không yêu cầu đăng nhập;
+- chuyến Đà Nẵng tối đa hai ngày và lịch hoạt động thủ công có reorder/cảnh báo chồng giờ;
+- chi tiêu gắn trực tiếp với chuyến đi, tổng hợp theo nhóm và cảnh báo 80%/100%;
+- POI snapshot dùng chung, map PMTiles hiện có, OSRM và fallback được gắn nhãn trung thực;
+- SQLite code-first qua SQLAlchemy models và Alembic migrations, mở trực tiếp bằng DBeaver.
+
+AI planner, booking/payment, OCR hóa đơn và đồng bộ đa thiết bị chưa thuộc MVP. Boundary `PlannerPort` giữ AI tách khỏi dữ liệu itinerary chính thức để có thể bổ sung sau mà không phá các module quản lý.
+
+Chạy backend từ repository root:
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m alembic -c BE\alembic.ini upgrade head
+& '.\.venv\Scripts\python.exe' -m uvicorn BE.app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Chạy Flutter trên Chrome trong khung điện thoại từ `FE/`:
+
+```powershell
+flutter pub get
+flutter run -d chrome --web-port 5501 `
+  --dart-define=DAVEL_API_BASE_URL=http://127.0.0.1:8000
+```
+
+Xem hướng dẫn chi tiết tại `BE/README.md` và `FE/README.md`.
 
 ## Da Nang Local PMTiles 3D Route Simulator
 

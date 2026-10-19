@@ -1,76 +1,83 @@
+import 'package:davel_trace/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:davel_trace/app.dart';
+import 'support/fake_management_repository.dart';
 
 Future<void> tapKey(WidgetTester tester, String key) async {
   final finder = find.byKey(Key(key));
-  await tester.ensureVisible(finder);
+  if (finder.evaluate().isEmpty) {
+    await tester.scrollUntilVisible(
+      finder,
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+  }
+  await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
   await tester.pump();
   await tester.tap(finder);
-  await tester.pump();
+  await tester.pumpAndSettle();
 }
 
 void main() {
-  testWidgets('opens the Stitch-inspired planner after onboarding', (
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets('creates the first local profile and opens management shell', (
     tester,
   ) async {
-    await tester.pumpWidget(const DavelTraceApp());
-
-    expect(find.text('Hiểu gu du hành'), findsOneWidget);
-    expect(find.byType(NavigationBar), findsNothing);
-
-    await tapKey(tester, 'onboarding-continue-button');
-
-    expect(find.text('Đi đâu hôm nay?'), findsOneWidget);
-    expect(find.byType(NavigationBar), findsOneWidget);
-    expect(find.byKey(const Key('generate-plan-button')), findsOneWidget);
-  });
-
-  testWidgets('clicks through the mock planning flow and opens the map', (
-    tester,
-  ) async {
-    await tester.pumpWidget(const DavelTraceApp());
-    await tapKey(tester, 'onboarding-continue-button');
-
-    await tapKey(tester, 'generate-plan-button');
-    expect(find.text('Bạn muốn bắt đầu lúc nào?'), findsOneWidget);
-
-    await tapKey(tester, 'clarification-confirm-button');
-    expect(find.text('Lịch trình đã vượt qua kiểm tra'), findsOneWidget);
-
-    await tapKey(tester, 'feasibility-continue-button');
-    await tapKey(tester, 'select-balanced-plan-button');
-    expect(find.text('Đà Nẵng chậm mà chất'), findsOneWidget);
-
-    await tapKey(tester, 'start-trip-button');
-
-    expect(find.text('ĐANG ĐI · 2/4'), findsOneWidget);
-    expect(find.byKey(const Key('play-car-button')), findsOneWidget);
-    expect(find.byKey(const Key('locate-user-button')), findsOneWidget);
-  });
-
-  testWidgets('adds an in-memory expense', (tester) async {
-    await tester.pumpWidget(const DavelTraceApp());
-    await tapKey(tester, 'onboarding-continue-button');
-
-    await tester.tap(find.text('Chi tiêu').last);
-    await tester.pump();
-    await tester.tap(find.byKey(const Key('add-expense-button')));
+    final repository = FakeManagementRepository();
+    await tester.pumpWidget(DavelTraceApp(repository: repository));
     await tester.pumpAndSettle();
 
+    expect(find.text('Bắt đầu từ hồ sơ của bạn'), findsOneWidget);
+    await tester.enterText(find.byKey(const Key('profile-name-field')), 'Hùng');
+    await tapKey(tester, 'create-first-profile-button');
+
+    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(find.text('Chưa có chuyến đi'), findsOneWidget);
+    expect(repository.profiles.single.displayName, 'Hùng');
+  });
+
+  testWidgets('creates a trip and adds a manual activity', (tester) async {
+    final repository = FakeManagementRepository(seeded: true);
+    await tester.pumpWidget(DavelTraceApp(repository: repository));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Cuối tuần Đà Nẵng'), findsNWidgets(2));
+    await tapKey(tester, 'add-activity-button');
+    await tester.enterText(
+      find.byKey(const Key('activity-title-field')),
+      'Cầu Rồng',
+    );
+    await tapKey(tester, 'save-activity-button');
+
+    expect(find.text('Cầu Rồng'), findsOneWidget);
+    expect(repository.activities.single.source, 'manual');
+  });
+
+  testWidgets('persists an expense and updates the budget summary', (
+    tester,
+  ) async {
+    final repository = FakeManagementRepository(seeded: true);
+    await tester.pumpWidget(DavelTraceApp(repository: repository));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Chi tiêu').last);
+    await tester.pumpAndSettle();
+    await tapKey(tester, 'add-expense-button');
     await tester.enterText(
       find.byKey(const Key('expense-title-field')),
-      'Cà phê demo',
+      'Mì Quảng',
     );
     await tester.enterText(
       find.byKey(const Key('expense-amount-field')),
       '50000',
     );
-    await tester.tap(find.byKey(const Key('save-expense-button')));
-    await tester.pumpAndSettle();
+    await tapKey(tester, 'save-expense-button');
 
-    expect(find.text('Cà phê demo'), findsOneWidget);
-    expect(find.textContaining('Đã chi 3.300.000 ₫'), findsOneWidget);
+    expect(find.text('Mì Quảng'), findsOneWidget);
+    expect(find.text('50.000 ₫'), findsNWidgets(2));
+    expect(repository.expenses.single.amountVnd, 50000);
   });
 }

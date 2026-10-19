@@ -12,7 +12,7 @@ Deliver a management-first Flutter application backed by a FastAPI modular monol
 
 **Language/Version**: Python 3.11; Dart SDK `^3.13.3`; Flutter app inherited from `codex/stitch-mobile-ui`
 
-**Primary Dependencies**: FastAPI, Uvicorn, Pydantic v2, SQLAlchemy 2.x, Alembic, HTTPX; Flutter `http`, `shared_preferences`, existing `flutter_map`, `geolocator`, `latlong2`, `web`
+**Primary Dependencies**: FastAPI, Uvicorn, Pydantic v2, SQLAlchemy 2.x, Alembic, HTTPX; Flutter `http`, `shared_preferences`, `pointer_interceptor`, existing `flutter_map`, `geolocator`, `latlong2`, `web`
 
 **Storage**: SQLite runtime database at configurable `DATABASE_URL` (default `sqlite:///BE/data/davel_trace.db`) with Alembic migrations; versioned JSON POI snapshot; tracked PMTiles map asset
 
@@ -99,8 +99,9 @@ FE/
 └── test/
 
 data/
-├── danang.pmtiles
-└── snapshots/danang-v1/    # shared POI catalog, not AI-owned
+└── danang.pmtiles
+
+BE/data/snapshots/danang-v1/ # shared POI catalog, not AI-owned
 
 index.html                  # existing prototype remains untouched except integration-safe fixes
 server.py                   # PMTiles byte-range server remains the required map server

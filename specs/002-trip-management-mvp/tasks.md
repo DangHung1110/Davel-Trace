@@ -17,10 +17,10 @@
 
 **Purpose**: Bring the existing Flutter shell into the dev-based feature branch and approve the planned runtime dependencies.
 
-- [ ] T001 Integrate the committed `codex/stitch-mobile-ui` Flutter shell into `FE/` while preserving root `index.html`, `server.py`, `data/danang.pmtiles`, and existing prototype behavior
+- [x] T001 Integrate the committed `codex/stitch-mobile-ui` Flutter shell into `FE/` while preserving root `index.html`, `server.py`, `data/danang.pmtiles`, and existing prototype behavior
 - [ ] T002 Configure Python 3.11 dependencies FastAPI, Uvicorn, Pydantic v2, SQLAlchemy 2.x, Alembic, HTTPX and pytest in `BE/requirements.txt`
 - [ ] T003 [P] Configure Flutter `http` and `shared_preferences` dependencies plus API base URL environment handling in `FE/pubspec.yaml` and `FE/lib/api/api_config.dart`
-- [ ] T004 [P] Import the versioned Da Nang POI catalog files into `data/snapshots/danang-v1/` without modifying `data/danang.pmtiles`
+- [ ] T004 [P] Import the versioned Da Nang POI catalog files into `BE/data/snapshots/danang-v1/` without modifying `data/danang.pmtiles`
 - [ ] T005 Add Python, Flutter and SQLite runtime ignore patterns while preserving intentionally tracked PMTiles executables/assets in `.gitignore`
 
 ---

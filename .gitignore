@@ -9,8 +9,19 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+.pytest_tmp/
+
+# SQLite runtime (schema is recreated from Alembic migrations)
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
 
 # Frontend (future BE/FE split)
+.dart_tool/
+.flutter-sdk/
+.flutter-plugins
+.flutter-plugins-dependencies
 node_modules/
 dist/
 build/

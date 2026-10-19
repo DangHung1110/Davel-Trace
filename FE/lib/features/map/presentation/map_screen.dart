@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../../shared/widgets/app_header.dart';
 import '../../../theme/app_theme.dart';
-import '../../itinerary/domain/demo_trip.dart';
+import '../../management/domain/models.dart';
+import 'map_stop.dart';
 import 'widgets/map_canvas.dart';
 
 class MapScreen extends StatefulWidget {
@@ -10,14 +12,16 @@ class MapScreen extends StatefulWidget {
     super.key,
     required this.stops,
     required this.planRevision,
-    required this.onOpenPoi,
-    required this.onOpenReplan,
+    required this.onOpenItinerary,
+    this.tripTitle,
+    this.routePreview,
   });
 
-  final List<TripStop> stops;
+  final List<MapStop> stops;
   final int planRevision;
-  final VoidCallback onOpenPoi;
-  final VoidCallback onOpenReplan;
+  final VoidCallback onOpenItinerary;
+  final String? tripTitle;
+  final RoutePreviewData? routePreview;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -49,17 +53,17 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final nextStop = widget.stops.length > 1 ? widget.stops[1] : null;
+    final nextStop = widget.stops.isNotEmpty ? widget.stops.first : null;
     return Column(
       children: [
         AppHeader(
           compact: true,
-          section: 'Chuyến đi đang diễn ra',
+          section: widget.tripTitle ?? 'Bản đồ Đà Nẵng',
           trailing: IconButton(
             key: const Key('open-map-replan-button'),
-            tooltip: 'Điều chỉnh lịch trình',
-            onPressed: widget.onOpenReplan,
-            icon: const Icon(Icons.tune_rounded),
+            tooltip: 'Mở lịch trình',
+            onPressed: widget.onOpenItinerary,
+            icon: const Icon(Icons.edit_calendar_outlined),
           ),
         ),
         Expanded(
@@ -78,58 +82,68 @@ class _MapScreenState extends State<MapScreen> {
                 top: 12,
                 left: 12,
                 right: 12,
-                child: Row(
-                  children: [
-                    const _MapPill(
-                      icon: Icons.cloud_off_outlined,
-                      label: 'Offline · 08:30',
-                    ),
-                    const Spacer(),
-                    _RoundMapButton(
-                      key: const Key('locate-user-button'),
-                      icon: Icons.my_location_rounded,
-                      tooltip: 'Vị trí hiện tại',
-                      onPressed: _locate,
-                    ),
-                  ],
+                child: PointerInterceptor(
+                  child: Row(
+                    children: [
+                      _MapPill(
+                        icon: widget.routePreview?.isRealRoute == true
+                            ? Icons.route_rounded
+                            : Icons.offline_bolt_outlined,
+                        label: widget.routePreview?.isRealRoute == true
+                            ? 'OSRM · ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km'
+                            : 'PMTiles local · tuyến dự phòng',
+                      ),
+                      const Spacer(),
+                      _RoundMapButton(
+                        key: const Key('locate-user-button'),
+                        icon: Icons.my_location_rounded,
+                        tooltip: 'Vị trí hiện tại',
+                        onPressed: _locate,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(
                 top: 58,
                 right: 12,
-                child: Column(
-                  children: [
-                    _RoundMapButton(
-                      icon: Icons.add_rounded,
-                      tooltip: 'Phóng to',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(height: 7),
-                    _RoundMapButton(
-                      icon: Icons.remove_rounded,
-                      tooltip: 'Thu nhỏ',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(height: 7),
-                    _RoundMapButton(
-                      icon: Icons.view_in_ar_outlined,
-                      tooltip: 'Bản đồ 3D',
-                      onPressed: () {},
-                    ),
-                  ],
+                child: PointerInterceptor(
+                  child: Column(
+                    children: [
+                      _RoundMapButton(
+                        icon: Icons.add_rounded,
+                        tooltip: 'Phóng to',
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 7),
+                      _RoundMapButton(
+                        icon: Icons.remove_rounded,
+                        tooltip: 'Thu nhỏ',
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 7),
+                      _RoundMapButton(
+                        icon: Icons.view_in_ar_outlined,
+                        tooltip: 'Bản đồ 3D',
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(
                 left: 12,
                 right: 12,
                 bottom: 12,
-                child: _ActiveTripCard(
-                  nextStop: nextStop,
-                  stopCount: widget.stops.isEmpty ? 0 : widget.stops.length - 1,
-                  isPlaying: _isPlaying,
-                  onPlay: widget.stops.length > 1 ? _play : null,
-                  onPause: _isPlaying ? _pause : null,
-                  onOpenPoi: widget.onOpenPoi,
+                child: PointerInterceptor(
+                  child: _ActiveTripCard(
+                    nextStop: nextStop,
+                    stopCount: widget.stops.length,
+                    isPlaying: _isPlaying,
+                    onPlay: widget.stops.length > 1 ? _play : null,
+                    onPause: _isPlaying ? _pause : null,
+                    onOpenPoi: widget.onOpenItinerary,
+                  ),
                 ),
               ),
             ],
@@ -150,7 +164,7 @@ class _ActiveTripCard extends StatelessWidget {
     required this.onOpenPoi,
   });
 
-  final TripStop? nextStop;
+  final MapStop? nextStop;
   final int stopCount;
   final bool isPlaying;
   final VoidCallback? onPlay;
@@ -176,22 +190,22 @@ class _ActiveTripCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        Row(
           children: [
             Text(
-              'ĐANG ĐI · 2/4',
-              style: TextStyle(
+              'LỊCH TUYẾN · $stopCount ĐIỂM',
+              style: const TextStyle(
                 color: AppColors.accent,
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
                 letterSpacing: .8,
               ),
             ),
-            Spacer(),
-            Icon(Icons.wb_sunny_outlined, color: AppColors.warning, size: 15),
-            SizedBox(width: 4),
-            Text(
-              '28°C',
+            const Spacer(),
+            const Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
+            const SizedBox(width: 4),
+            const Text(
+              'Đà Nẵng',
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
             ),
           ],
@@ -230,9 +244,11 @@ class _ActiveTripCard extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  const Text(
-                    '12 phút · 3,2 km',
-                    style: TextStyle(fontSize: 11),
+                  Text(
+                    nextStop == null
+                        ? 'Thêm hoạt động để tạo tuyến'
+                        : '${nextStop!.time} · ${nextStop!.durationMinutes} phút',
+                    style: const TextStyle(fontSize: 11),
                   ),
                 ],
               ),
@@ -254,9 +270,9 @@ class _ActiveTripCard extends StatelessWidget {
             children: [
               _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
               const _Divider(),
-              const _TripMetric(value: '750k', label: 'còn lại'),
+              const _TripMetric(value: 'OSRM', label: 'ưu tiên'),
               const _Divider(),
-              const _TripMetric(value: '18:15', label: 'kết thúc'),
+              const _TripMetric(value: 'PMTiles', label: 'bản đồ'),
             ],
           ),
         ),
