@@ -14,7 +14,6 @@ schemas (T007) swap in without changing this logic.
 from __future__ import annotations
 
 import copy
-import time
 
 _STORE: dict[str, dict] = {}
 # ponytail: in-memory store is the deliberate ceiling here; phase-PR
@@ -39,11 +38,20 @@ def load(trip_id: str) -> dict:
 
 
 def complete(state: dict, poi_id: str, at: str = "") -> dict:
-    """Move a remaining activity to completed (progress, no version bump)."""
+    """Move a remaining activity to completed (progress, no version bump).
+
+    `at` defaults to the activity's SCHEDULED time (`end`, else `start`),
+    never the wall clock: the rolling horizon `now` must be reproducible.
+    Using `time.strftime("%H:%M")` here made replan time-of-day dependent —
+    a 16:49 run left <90 min before an 18:00 deadline, so CP-SAT's optimal
+    tour was legitimately empty and POST /v1/replan returned no_solution
+    for the exact request that planned fine in the morning (T046 flake).
+    Callers with a real completion time still pass it explicitly.
+    """
     state = copy.deepcopy(state)
     for i, a in enumerate(state["remaining"]):
         if a["poi_id"] == poi_id:
-            done_at = at or time.strftime("%H:%M")
+            done_at = at or a.get("end") or a.get("start") or state.get("now", "")
             done = dict(state["remaining"].pop(i), status="done", done_at=done_at)
             state["completed"].append(done)
             state["now"] = done_at  # rolling horizon advances with progress
