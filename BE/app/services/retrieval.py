@@ -19,9 +19,8 @@ Rules:
 
 from __future__ import annotations
 
-import json
-
 from BE.app.services import to_min
+from BE.common import load_json
 
 ACTIVITY_TYPE_MAP = {
     "biển": ["beach"], "tắm": ["beach"], "núi": ["nature"], "leo": ["nature"],
@@ -33,9 +32,8 @@ ACTIVITY_TYPE_MAP = {
 
 
 def load_pois_json(path: str) -> list[dict]:
-    """STUB-NOTE: replaced by lane-A snapshot loader (T008) at phase-PR."""
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
+    """Read a snapshot pois.json (T061c: shares BE.common.load_json)."""
+    data = load_json(path)
     return data["pois"] if isinstance(data, dict) else data
 
 

@@ -7,11 +7,9 @@ from __future__ import annotations
 import json
 import urllib.request
 
-
-def to_min(t: str) -> int:
-    """'HH:MM' -> minutes since midnight. Shared by rank/retrieval/itinerary."""
-    h, m = t.split(":")
-    return int(h) * 60 + int(m)
+# T061c: single implementation in BE/common.py; re-exported here so
+# rank/retrieval import sites stay unchanged.
+from BE.common import to_min  # noqa: F401
 
 
 def fetch_json(url: str, data: bytes | None = None, headers: dict | None = None,

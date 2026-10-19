@@ -16,15 +16,7 @@ Gate (FR-035, data-model.md): FAR=0, VROH=0, BCS=1, TCS=1, HCS=1.
 
 from __future__ import annotations
 
-from BE.common import to_min
-
-
-def _in_range(start: int, end: int, spec: str) -> bool:
-    o, c = spec.split("-")
-    o, c = to_min(o), to_min(c)
-    if o <= c:
-        return o <= start and end <= c
-    return start >= o or end <= c  # overnight range
+from BE.common import in_range, to_min
 
 
 def _acts(itinerary: dict) -> list[dict]:
@@ -69,13 +61,9 @@ def vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
         p = pois.get(a.get("poi_id"), {})
         hours = p.get("opening_hours") or []
         s, e = to_min(a["start"]), to_min(a["end"])
-        if hours and not any(
-            _in_range(s, e, interval.strip())
-            for period in hours
-            for interval in period.split(",")
-            # Incomplete fragments such as "12:03" are closed, not ranges.
-            if interval.count("-") == 1
-        ):
+        # BE.common.in_range splits comma intervals and treats stray
+        # fragments ("12:03") as closed — one shared implementation.
+        if hours and not any(in_range(s, e, h) for h in hours):
             bad += 1
     return bad / len(acts)
 
