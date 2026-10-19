@@ -13,6 +13,7 @@ from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
 from BE.app.routers import replan as replan_router
+from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 
@@ -24,6 +25,7 @@ app.include_router(replan_router.router)
 app.include_router(expenses_router.router)
 app.include_router(weather_router.router)
 app.include_router(evaluate_router.router)
+app.include_router(scorer_router.router)
 
 
 def _validation_message(errors: list[dict]) -> str:
