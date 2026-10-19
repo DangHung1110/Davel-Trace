@@ -1,15 +1,26 @@
-"""Schema re-exports (T007-foundation, lane C).
+"""Schema re-exports (T007 + T061b). One import seam for all four schema files.
 
-Done: trip (User, TripRequest).
-Pending lanes (DO NOT import until those files exist):
-  - schemas/poi.py   (POI, Restaurant) — lane A
-  - schemas/plan.py  (RouteSegment, Activity, Itinerary) — lane B
-  - schemas/eval.py  (DynamicEvent, Expense, WeatherSnapshot,
-                      EvaluationRecord) — lane A
+Lane split (lanes.md): trip.py (C), poi.py (A), plan.py (B), eval.py (A).
+T061b wires the union here now that all four lanes are merged; individual
+files keep their own names, this module is the shared re-export.
+
+ponytail: callers that imported a name from `schemas.models` before the
+merge keep working; new code may import from the specific module.
 """
 
-from BE.app.schemas.trip import TripRequest, User
+from BE.app.schemas.eval import EvaluationRecord
+from BE.app.schemas.plan import Activity, Explanation, Itinerary, RouteSegment
+from BE.app.schemas.poi import (
+    POI, DurConfidence, DurSource, Restaurant, VisitMin)
+from BE.app.schemas.trip import Origin, TripRequest, User
 
-# ponytail: cross-lane re-export kept for lane A/B; delete once all schemas
-# import directly from schemas/trip|poi|plan|eval.
-__all__ = ["TripRequest", "User"]
+__all__ = [
+    # trip (lane C)
+    "User", "Origin", "TripRequest",
+    # poi (lane A)
+    "POI", "Restaurant", "VisitMin", "DurSource", "DurConfidence",
+    # plan (lane B)
+    "RouteSegment", "Activity", "Explanation", "Itinerary",
+    # eval (lane A)
+    "EvaluationRecord",
+]
