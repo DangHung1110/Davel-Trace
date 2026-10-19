@@ -1,8 +1,8 @@
 """US1 parser and planning boundary via TestClient.
 
-Fixed prompt -> parse -> real retrieval fixture -> explicit planner
-unavailable envelope until lane B's feasibility service is present;
-missing-info prompt -> clarification. Fixture snapshot (lane C has no seed).
+Fixed prompt -> parse -> real retrieval fixture -> T061a adapter + lane B
+optimizer (open tour) -> real feasible plan; missing-info prompt ->
+clarification. Fixture snapshot (lane C has no seed).
 
 Run: python BE/tests/integration/test_us1_flow.py -v  (or pytest)
 """
@@ -123,8 +123,10 @@ class TestUS1Flow(unittest.TestCase):
         for k in ("total_cost", "total_km", "total_min", "constraint_status",
                   "version"):
             self.assertIn(k, plan)
+        # T061f: the canonical 7-gate registry (gate.py) owns constraint_status.
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1})
+                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                          "ETB": 1, "TCS": 1, "HCS": 1})
 
     def test_missing_info_clarifies(self):
         parser_svc.llm_gateway.complete_json = lambda prompt, schema: dict(SLOTS, city="")

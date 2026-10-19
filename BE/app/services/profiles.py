@@ -16,10 +16,10 @@ contract stub (select endpoint is lane C T033e).
 
 from __future__ import annotations
 
-from BE.app.services import scorer
-from BE.app.services.common import (
-    parse_hours, status_map, to_min, total_fee)
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize
+from BE.app.services import response, scorer
+from BE.app.services.common import status_map, to_min, total_fee
+from BE.app.services.optimizer import (
+    StubTrip, optimize, stubs_from_pois)
 from BE.app.services.validator import validate
 
 PROFILE_REASONS = {
@@ -30,7 +30,7 @@ PROFILE_REASONS = {
 
 
 def _score(profile: str, p: dict) -> float:
-    rating, fee = float(p.get("rating", 0)), int(p.get("fee", 0))
+    rating, fee = float(p.get("rating") or 0), int(p.get("fee") or 0)
     if profile == "savings":
         return -fee / 10000.0 + rating * 0.1
     if profile == "experience":
@@ -58,12 +58,6 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
-def _win(p: dict, trip: dict) -> tuple[int, int]:
-    return (parse_hours(p.get("opening_hours")) or
-            (to_min(trip.get("start_time", "07:00")),
-             to_min(trip.get("end_time", "18:00"))))
-
-
 def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                  trip: dict, matrix: dict,
                  profiles: tuple[str, ...] = ("savings", "balanced",
@@ -80,8 +74,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                        "opening_hours": p.get("opening_hours", [])}
                  for pid, p in by_id.items()}
     for prof in profiles:
-        stub = [StubPOI(p["poi_id"], int(p.get("visit_min", 60)),
-                        *_win(p, trip), _score(prof, p)) for p in pois]
+        stub = stubs_from_pois(pois, trip, lambda p: _score(prof, p))
         out = optimize(stub, travel, _to_trip(trip), edge_scores=q)
         if out["itinerary"] is None:
             dropped.append({"profile": prof, "reason": out.get("reason", "")})
@@ -108,6 +101,77 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
     return {"plans": plans, "dropped": dropped, "selected": None}
 
 
-def _to_trip(trip: dict) -> StubTrip:
+def _to_trip(trip: dict, origin_id: str | None = "depot") -> StubTrip:
     return StubTrip(to_min(trip.get("start_time", "07:00")),
-                    to_min(trip.get("end_time", "18:00")))
+                    _deadline(trip), origin_id)
+
+
+def _deadline(trip: dict) -> int:
+    """ETB hard within-day deadline: min(end_time, return_time)."""
+    end = to_min(trip.get("end_time", "18:00"))
+    rt = trip.get("return_time")
+    return min(end, to_min(rt)) if rt else end
+
+
+def _travel_from_cells(cells: dict, ids: list[str]) -> dict:
+    """T061a: matrix cells -> {(a,b): minutes}; a missing cell stays ABSENT (B3)."""
+    travel = {}
+    for a in ids:
+        for b in ids:
+            if a == b:
+                continue
+            cell = cells.get(f"{a}->{b}")
+            if cell is not None:
+                travel[(a, b)] = int(cell["minutes"])
+    return travel
+
+
+def build_plan(profile: str, trip: dict, ranked: list[dict],
+               pois_by_id: dict, cells: dict) -> dict:
+    """T020/T032 router seam: one profile -> one real plan dict.
+
+    Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
+    runs the T017 optimizer as an OPEN tour (no depot cell in the seed
+    matrix — see optimizer T061a note), validates (T018) and shapes the
+    response (T019) with per-activity explanations (T042).
+
+    The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
+    the plan body those fields are attached to.
+    """
+    prof = profile if profile in PROFILE_REASONS else "balanced"
+    ranked_ids = [r.get("poi_id") for r in ranked]
+    ids = [pid for pid in ranked_ids if pid in pois_by_id]
+    if not ids:
+        ids = list(pois_by_id)
+    candidates = [pois_by_id[pid] for pid in ids]
+
+    travel = _travel_from_cells(cells, ids)
+    stubs = stubs_from_pois(candidates, trip, lambda p: _score(prof, p),
+                            deadline=_deadline(trip))
+    q = scorer.edge_scores(ids, pois_by_id)
+    out = optimize(stubs, travel, _to_trip(trip, origin_id=None),
+                   edge_scores=q)
+
+    acts = (out.get("itinerary") or {}).get("activities", [])
+    pois_gate = {pid: {"verified": p.get("verified", False),
+                       "fee": p.get("fee", 0),
+                       "opening_hours": p.get("opening_hours", [])}
+                 for pid, p in pois_by_id.items()}
+    rep = validate({"activities": acts}, trip, pois_gate, cells)
+
+    plan = response.build_plan(out, rep, trip, pois_by_id, cells,
+                               version=1, itinerary_id="plan")
+    plan["reason"] = PROFILE_REASONS[prof]
+    plan["scores"] = score_plan(plan)
+    _attach_explanations(plan, ranked)
+    return plan
+
+
+def _attach_explanations(plan: dict, ranked: list[dict]) -> None:
+    """FR-023: every activity carries a grounded explanation (evidence)."""
+    reasons = {r.get("poi_id"): (r.get("reasons") or []) for r in ranked}
+    for act in plan.get("activities", []):
+        pid = act.get("poi_id")
+        evidence = list(reasons.get(pid) or []) or [f"seed:{pid}"]
+        act["explanation"] = {"claim": f"chon {pid}", "evidence": evidence,
+                              "inference": "", "source": "rank"}

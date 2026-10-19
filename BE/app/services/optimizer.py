@@ -14,6 +14,15 @@ Returns {"status": optimal|feasible-timeout|infeasible, "itinerary" |
 "reason", ...}. Best-found is returned even on timeout (never empty-
 handed when a feasible prefix exists).
 
+T061a depot decision: `StubTrip.origin_id` is the depot (hotel). A falsy
+origin (`""`/`None`) selects the OPEN-TOUR variant ("drop depot legs"):
+the origin leg is not modelled, so the first activity may start at
+trip.start_min. Chosen over "add a depot node to the matrix" because the
+committed seed matrix has no depot cell and adding one needs a live OSRM
+call (offline demo) — haversine is banned for feasibility (R4/B3). Every
+INTER-POI transition still comes from the matrix; only the untracked
+origin leg is dropped.
+
 T030: optional q_ij edge bonuses + W_A+s_A<=W_B precedence (PATM).
 """
 
@@ -22,9 +31,14 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass
 
-from BE.app.services.common import hh
+from BE.app.services.common import hh, parse_hours, to_min
 
 TIMEOUT_S = 5.0
+
+# T061a: must-go landmarks (snapshot `must_go`) get a small score nudge so
+# they surface first. It is a SOFT signal only — the hard must_visit
+# constraint stays in retrieval/validator (validator HCS), never here.
+MUST_GO_BONUS = 0.5
 
 
 # ponytail: STUB dataclasses are a deliberate ceiling — T007 poi/trip
@@ -44,6 +58,58 @@ class StubTrip:
     start_min: int = 7 * 60
     end_min: int = 18 * 60
     origin_id: str = "depot"
+
+
+def poi_visit_min(poi: dict) -> int:
+    """T061a adapter: schedule with p50 when the POI carries a VisitMin dict.
+
+    The real snapshot stores `visit_min: {p25,p50,p75}` (R8: schedule p50,
+    gate p75 buffer, UI the range). Legacy fixtures pass a flat int; both
+    are accepted so old tests and live snapshots share one seam.
+    """
+    vm = poi.get("visit_min", 60)
+    if isinstance(vm, dict):
+        return int(vm.get("p50") or vm.get("p25") or 60)
+    return int(vm or 60)
+
+
+def poi_window(poi: dict, trip: dict | None = None,
+               deadline: int | None = None) -> tuple[int, int]:
+    """T061a adapter: opening window in minutes, trip window when unset.
+
+    Opening hours stay authoritative; when a POI has none the trip window
+    `[start_time, deadline]` is used. `deadline` (ETB: min(end, return))
+    wins over end_time when supplied so a horizon never silently stretches.
+    """
+    win = parse_hours(poi.get("opening_hours"))
+    if win is not None:
+        return win
+    start = to_min((trip or {}).get("start_time", "07:00"))
+    if deadline is not None:
+        end = deadline
+    else:
+        end = to_min((trip or {}).get("end_time", "18:00"))
+    return start, end
+
+
+def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
+                deadline: int | None = None) -> StubPOI:
+    """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
+    open_min, close_min = poi_window(poi, trip, deadline)
+    bonus = MUST_GO_BONUS if poi.get("must_go") else 0.0
+    return StubPOI(poi["poi_id"], poi_visit_min(poi), open_min, close_min,
+                   float(score) + bonus)
+
+
+def stubs_from_pois(pois: list[dict], trip: dict | None = None,
+                    score_fn=None, deadline: int | None = None) -> list[StubPOI]:
+    """T061a adapter: adapt a POI list with one score function (or rating)."""
+    def _score(p: dict) -> float:
+        if score_fn is not None:
+            return float(score_fn(p))
+        return float(p.get("rating") or 1.0)
+
+    return [poi_to_stub(p, trip, _score(p), deadline) for p in pois]
 
 
 def travel_from_matrix(matrix, ids=None):
@@ -110,6 +176,14 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     for i in range(n + 1):
         for j in range(1, n + 1):  # skip j == 0: return leg must not pin t[0]
             if i == j:
+                continue
+            if i == 0 and not trip.origin_id:
+                # T061a "drop depot legs": open tour — the origin/hotel leg
+                # is not modelled (seed has no depot node; adding one needs
+                # an OSRM call and haversine is banned for feasibility).
+                # The FIRST activity is therefore free to start at
+                # trip.start_min; inter-POI arcs stay matrix-verified (B3).
+                m.Add(t[j] >= t[i] + dur[i]).OnlyEnforceIf(arc[(i, j)])
                 continue
             a, b = (trip.origin_id if i == 0 else ids[i - 1],
                     trip.origin_id if j == 0 else ids[j - 1])
