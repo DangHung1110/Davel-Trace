@@ -66,6 +66,13 @@ def replan_endpoint(body: ReplanIn):
         pid = item if isinstance(item, str) else item.get("poi_id")
         at = "" if isinstance(item, str) else item.get("at", "")
         if pid:
+            # T053 fix: an unknown/duplicate completed poi_id used to reach
+            # state.complete(), whose KeyError escaped as a 500. Answer with
+            # the contracts/api.md error envelope instead.
+            remaining = {a["poi_id"] for a in st["remaining"]}
+            if pid not in remaining:
+                return error("UNKNOWN_POI",
+                             f"poi {pid} khong co trong itinerary", 404)
             st = store.complete(st, pid, at)
 
     return replan_service(st, body.event, pois, travel, trip,

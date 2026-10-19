@@ -103,6 +103,21 @@ class TestReplanContract(unittest.TestCase):
         self.assertEqual(rr.status_code, 404)
         self.assertEqual(set(rr.json()), {"error", "message"})
 
+    def test_unknown_completed_poi_404_envelope(self):
+        """T053 fix: unknown completed poi_id must not crash as a 500."""
+        select_mod.reset_store()
+        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": ["balanced"]})
+        self.assertEqual(r.status_code, 200, r.text)
+        plan = r.json()["plans"][0]
+        rr = client.post("/v1/replan", json={
+            "itinerary_id": plan["itinerary_id"],
+            "event": {"type": "rain", "at": "13:00"},
+            "completed": ["poi-does-not-exist"],
+        })
+        self.assertEqual(rr.status_code, 404, rr.text)
+        self.assertEqual(set(rr.json()), {"error", "message"})
+        self.assertEqual(rr.json()["error"], "UNKNOWN_POI")
+
 
 if __name__ == "__main__":
     unittest.main()
