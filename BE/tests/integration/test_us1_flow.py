@@ -7,7 +7,6 @@ clarification. Fixture snapshot (lane C has no seed).
 Run: python BE/tests/integration/test_us1_flow.py -v  (or pytest)
 """
 
-import json
 import os
 import sys
 import tempfile
@@ -22,6 +21,7 @@ from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import parser as parser_svc  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.tests import conftest  # noqa: E402
 
 POIS = [
     {"poi_id": "hill", "name": "Hill", "type": "nature", "lat": 16.1,
@@ -70,11 +70,8 @@ def to_min(t: str) -> int:
 class TestUS1Flow(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp = tempfile.mkdtemp(prefix="us1_")
-        with open(os.path.join(cls.tmp, "pois.json"), "w", encoding="utf-8") as f:
-            json.dump({"pois": POIS}, f, ensure_ascii=False)
-        with open(os.path.join(cls.tmp, "matrix.json"), "w", encoding="utf-8") as f:
-            json.dump({"ids": ["hill", "noodle", "beach"], "cells": CELLS}, f)
+        cls.tmp = conftest.write_snapshot(
+            tempfile.mkdtemp(prefix="us1_"), POIS, CELLS)
         cls._llm = parser_svc.llm_gateway.complete_json
         parser_svc.llm_gateway.complete_json = _mock_slots
         cls._settings = itinerary_mod.get_settings

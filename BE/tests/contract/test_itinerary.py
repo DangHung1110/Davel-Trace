@@ -5,7 +5,6 @@ snapshot. The lane-B profile planner is absent on this branch, so the API
 must return an explicit 501 rather than a rank-order stub.
 """
 
-import json
 import os
 import sys
 import tempfile
@@ -21,6 +20,7 @@ from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.routers import select as select_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.tests import conftest  # noqa: E402
 
 POIS = [
     {"poi_id": "beach", "name": "Beach", "type": "beach", "lat": 16.0,
@@ -87,11 +87,8 @@ def _collect_post_paths(routes, prefix="", seen=None):
 class TestItineraryContract(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp = tempfile.mkdtemp(prefix="snap_")
-        with open(os.path.join(cls.tmp, "pois.json"), "w", encoding="utf-8") as f:
-            json.dump({"pois": POIS}, f, ensure_ascii=False)
-        with open(os.path.join(cls.tmp, "matrix.json"), "w", encoding="utf-8") as f:
-            json.dump({"ids": ["beach", "noodle"], "cells": CELLS}, f)
+        cls.tmp = conftest.write_snapshot(
+            tempfile.mkdtemp(prefix="snap_"), POIS, CELLS)
         cls._real = itinerary_mod.get_settings
         itinerary_mod.get_settings = lambda: Settings(snapshot_dir=cls.tmp,
                                                       snapshot_name="test")

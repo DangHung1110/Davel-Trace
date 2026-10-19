@@ -7,11 +7,11 @@ available. When present, one request must return one plan per requested profile.
 Run: python BE/tests/integration/test_us4_multi.py -v (or pytest)
 """
 
-import json
 import os
 import sys
 import tempfile
 import unittest
+
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -21,6 +21,7 @@ from BE.app import main as main_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.tests import conftest  # noqa: E402
 
 POIS = [
     {"poi_id": "hill", "name": "H", "type": "nature", "lat": 16.1,
@@ -56,11 +57,8 @@ client = TestClient(main_mod.app, raise_server_exceptions=False)
 class TestUS4Multi(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp = tempfile.mkdtemp(prefix="us4_")
-        with open(os.path.join(cls.tmp, "pois.json"), "w", encoding="utf-8") as f:
-            json.dump({"pois": POIS}, f, ensure_ascii=False)
-        with open(os.path.join(cls.tmp, "matrix.json"), "w", encoding="utf-8") as f:
-            json.dump({"ids": ["hill", "beach", "noodle"], "cells": CELLS}, f)
+        cls.tmp = conftest.write_snapshot(
+            tempfile.mkdtemp(prefix="us4_"), POIS, CELLS)
         cls._settings = itinerary_mod.get_settings
         itinerary_mod.get_settings = lambda: Settings(snapshot_dir=cls.tmp,
                                                       snapshot_name="us4")
