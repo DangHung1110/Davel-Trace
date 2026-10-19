@@ -1,0 +1,136 @@
+{
+ "generated_at": "2026-10-19T16:43:28",
+ "suite": "BE\\eval\\gold\\t051_scoped_suite.json",
+ "snapshot": "BE\\data\\snapshots\\danang-v1",
+ "coverage": {
+  "total_pois": 764,
+  "verified": 48,
+  "matrix_ids": 150,
+  "eligible": 5,
+  "missing_verified": 43,
+  "eligible_ids": [
+   "ChIJ1yFjaOwZQjERO43leJW7YHk",
+   "ChIJ4UuIQXgXQjERz192UgYuxMU",
+   "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
+   "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
+   "ChIJrfU0w0MRQjERC4PjgT9h3LQ"
+  ]
+ },
+ "feasible": 23,
+ "infeasible": 7,
+ "hybrid": {
+  "profile": "balanced",
+  "transition_backend": {
+   "backend": "model",
+   "model_path": "BE\\ml\\patm\\model.txt",
+   "n_features": 17,
+   "note": ""
+  }
+ },
+ "systems": {
+  "distance-only": {
+   "n": 23,
+   "gate_pass": 23,
+   "pass_rate": 1.0,
+   "violations": {
+    "FAR": 0,
+    "VROH": 0,
+    "B3": 0,
+    "BCS": 0,
+    "ETB": 0,
+    "TCS": 0,
+    "HCS": 0
+   },
+   "soft_mean": {
+    "STR": 1.0,
+    "DTU": 0.3503,
+    "SSR": 1.0,
+    "CSM": 1.0,
+    "EDI": 1.0,
+    "AQE": 0.98
+   },
+   "mean_rating": 4.9
+  },
+  "hybrid": {
+   "n": 23,
+   "gate_pass": 21,
+   "pass_rate": 0.913,
+   "violations": {
+    "FAR": 0,
+    "VROH": 0,
+    "B3": 0,
+    "BCS": 0,
+    "ETB": 0,
+    "TCS": 0,
+    "HCS": 2
+   },
+   "soft_mean": {
+    "STR": 1.0,
+    "DTU": 0.4761,
+    "SSR": 1.0,
+    "CSM": 1.0,
+    "EDI": 1.0,
+    "AQE": 0.98
+   },
+   "mean_rating": 4.9
+  },
+  "llm-only": {
+   "status": "SKIP",
+   "reason": "llm transport: llm failed [transport]: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+   "note": "no live LLM (Ollama/api) reachable; distance-only and hybrid still ran, no numbers fabricated"
+  }
+ },
+ "recovery": {
+  "probed": 23,
+  "ok": 19,
+  "preserved_all": true
+ },
+ "notes": {
+  "zero_fee": "all candidate fees are 0 in the scoped snapshot -> BCS is vacuous: SC-008 is reported but cannot be exercised here (T051 note: T053 must extend fee coverage)",
+  "uniform_ratings": "every eligible POI has the same rating -> SC-009 ratio is 1.0 by construction (undecidable on this pool, not evidence of parity); T053 needs rating/type/fee breadth to measure preference lift"
+ },
+ "sc": {
+  "SC-005": {
+   "target": ">=90% feasible tasks yield a gate-passing plan",
+   "distance_only": 1.0,
+   "hybrid": 0.913,
+   "pass": true
+  },
+  "SC-006": {
+   "target": "opening-hours violations = 0",
+   "distance_only": 0,
+   "hybrid": 0,
+   "pass": true
+  },
+  "SC-007": {
+   "target": "no overlaps / missing travel (B3+TCS violations = 0)",
+   "distance_only": 0,
+   "hybrid": 0,
+   "pass": true
+  },
+  "SC-008": {
+   "target": "budget violations = 0 when budget is a hard constraint",
+   "distance_only": 0,
+   "hybrid": 0,
+   "vacuous": true,
+   "pass": true
+  },
+  "SC-009": {
+   "target": "hybrid taste-fit >= 1.10x shortest-path baseline",
+   "metric": "mean POI rating of the plan (preference proxy)",
+   "distance_only": 4.9,
+   "hybrid": 4.9,
+   "ratio": 1.0,
+   "undecidable": true,
+   "pass": false
+  },
+  "SC-010": {
+   "target": "recovery succeeds >=80% and keeps 100% completed",
+   "probed": 23,
+   "recovered": 19,
+   "recovery_rate": 0.8261,
+   "preserved_all": true,
+   "pass": true
+  }
+ }
+}

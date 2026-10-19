@@ -159,7 +159,7 @@ description: "Task list for Personalized Travel Agent MVP"
 - [X] T050 [US9] LLM-judge Profit/BE (`BE/eval/judge.py`) + cost log [mock-test DONE 2026-09-28; live-run pending pairs full T003b/T028]
 - [X] T051 [US9] Test-suite builder + Approach-B gold generator (`BE/eval/gold/`, 30–50 ĐN queries) — SCOPED-DONE (30 Approach-B queries over 5/764 POIs; 5/48 verified intersect matrix, 43 verified missing matrix; not full gold; fees all 0 so BCS vacuous; T053 must extend matrix/fee/category/duration coverage; SC-010 recovery not represented by static golds)
 - [ ] T052 [US9] Evaluator endpoint `POST /v1/evaluate` per contracts/api.md (depends on T049)
-- [ ] T053 [US9] Full-suite run: baselines (distance-only, LLM-only) vs hybrid; record SC-005→SC-010
+- [ ] T053 [US9] Full-suite run: baselines (distance-only, LLM-only) vs hybrid; record SC-005→SC-010 — PARTIAL 2026-10-19 (harness `BE/eval/baselines.py` + artifact `BE/eval/gold/t053_baselines.json`, 12 unit tests; on the SCOPED T051 suite, 23/30 feasible: distance-only 23/23 gate-pass, hybrid 21/23 (2 HCS = must_visit dropped by the optimizer, a real product gap), LLM-only SKIP (no Ollama/api reachable; no numbers fabricated); SC-005/006/007/010 PASS, SC-008 vacuous (all fees 0), SC-009 undecidable (all eligible POIs rating 4.9 → ratio 1.0 by construction); NOT full-suite: needs matrix/fee/rating coverage on 43 missing verified POIs before SC-008/SC-009 can be claimed)
 
 **Checkpoint**: All user stories independently functional
 
