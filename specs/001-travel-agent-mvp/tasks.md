@@ -157,7 +157,7 @@ description: "Task list for Personalized Travel Agent MVP"
 
 - [X] T049 [P] [US9] Tier-1 metrics (`BE/eval/metrics.py`): FAR/VROH/BCS/TCS/HCS/STR/DTU/SSR/CSM/EDI/AQE
 - [X] T050 [US9] LLM-judge Profit/BE (`BE/eval/judge.py`) + cost log [mock-test DONE 2026-09-28; live-run pending pairs full T003b/T028]
-- [ ] T051 [US9] Test-suite builder + Approach-B gold generator (`BE/eval/gold/`, 30–50 ĐN queries)
+- [X] T051 [US9] Test-suite builder + Approach-B gold generator (`BE/eval/gold/`, 30–50 ĐN queries) — SCOPED-DONE (30 Approach-B queries over 5/764 POIs; 5/48 verified intersect matrix, 43 verified missing matrix; not full gold; fees all 0 so BCS vacuous; T053 must extend matrix/fee/category/duration coverage; SC-010 recovery not represented by static golds)
 - [ ] T052 [US9] Evaluator endpoint `POST /v1/evaluate` per contracts/api.md (depends on T049)
 - [ ] T053 [US9] Full-suite run: baselines (distance-only, LLM-only) vs hybrid; record SC-005→SC-010
 
