@@ -44,6 +44,17 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
                 {"model": os.environ.get("LLM_API_MODEL", "gpt-4o-mini"),
                  "response_format": {"type": "json_object"},
                  "temperature": TEMPERATURE})
+    if settings.llm_provider == "lmstudio":
+        # LM Studio OpenAI-compatible server (default http://127.0.0.1:1234/v1).
+        # It rejects response_format json_object (only json_schema/text),
+        # so rely on prompt + _extract_json tolerance instead.
+        base = os.environ.get("LLM_API_URL", "http://127.0.0.1:1234/v1")
+        key = os.environ.get("LLM_API_KEY", "lm-studio")
+        return (base.rstrip("/") + "/chat/completions",
+                {"Content-Type": "application/json",
+                 "Authorization": f"Bearer {key}"},
+                {"model": os.environ.get("LLM_API_MODEL", "qwen3-8b"),
+                 "temperature": TEMPERATURE})
     return (settings.ollama_url.rstrip("/") + "/api/chat",  # local Ollama
             {"Content-Type": "application/json"},
             {"model": settings.judge_model,
