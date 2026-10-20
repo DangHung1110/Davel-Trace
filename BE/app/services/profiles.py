@@ -85,7 +85,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
         if not rep["passed"]:
             dropped.append({"profile": prof, "reason": str(rep["violations"])})
             continue
-        ratings = [float(by_id[a["poi_id"]].get("rating", 0)) for a in acts]
+        ratings = [float(by_id[a["poi_id"]].get("rating") or 0) for a in acts]
         travel_min = sum(int((matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
                              .get("minutes", 0)) for x, y in zip(acts, acts[1:]))
         entry = {
