@@ -61,13 +61,31 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       color: AppColors.canvas,
       child: Column(
         children: [
-          const AppHeader(compact: true, section: 'Chi tiêu'),
+          const AppHeader(compact: true, section: 'Chi tiêu chuyến đi'),
           Expanded(
             child: trip == null
                 ? const _NoTripExpense()
                 : ListView(
                     padding: const EdgeInsets.fromLTRB(14, 12, 14, 24),
                     children: [
+                      Wrap(
+                        spacing: 7,
+                        runSpacing: 7,
+                        children: [
+                          const Chip(
+                            avatar: Icon(
+                              Icons.calendar_today_outlined,
+                              size: 15,
+                            ),
+                            label: Text('Tất cả'),
+                          ),
+                          Chip(
+                            avatar: const Icon(Icons.route_outlined, size: 15),
+                            label: Text(trip.title),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
                       Text(
                         'Ngân sách chuyến đi',
                         style: Theme.of(context).textTheme.headlineMedium,
@@ -76,33 +94,55 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       Text(trip.title),
                       const SizedBox(height: 14),
                       SurfaceCard(
-                        color: AppColors.primary,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'ĐÃ CHI',
-                              style: TextStyle(
-                                color: Color(0xFFDDE9E4),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: .8,
-                              ),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'TỔNG NGÂN SÁCH CHUYẾN',
+                                    style: TextStyle(
+                                      color: AppColors.muted,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: .8,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.surfaceLow,
+                                    borderRadius: BorderRadius.circular(99),
+                                  ),
+                                  child: Text(
+                                    '${(progress * 100).round()}%',
+                                    style: const TextStyle(
+                                      color: AppColors.secondary,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 5),
                             Text(
-                              moneyVnd(summary.spentVnd),
+                              moneyVnd(summary.budgetVnd),
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppColors.ink,
                                 fontSize: 27,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            const SizedBox(height: 5),
                             Text(
-                              'Còn ${moneyVnd(summary.remainingVnd)} trên ${moneyVnd(summary.budgetVnd)}',
+                              'Đã chi ${moneyVnd(summary.spentVnd)}',
                               style: const TextStyle(
-                                color: Color(0xFFDDE9E4),
+                                color: AppColors.muted,
                                 fontSize: 11,
                               ),
                             ),
@@ -111,13 +151,20 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               value: progress,
                               minHeight: 7,
                               borderRadius: BorderRadius.circular(8),
-                              backgroundColor: const Color(0xFF31564F),
+                              backgroundColor: AppColors.surfaceHigh,
                               color: summary.alert == '100'
-                                  ? AppColors.coral
-                                  : const Color(0xFFE9CFAF),
+                                  ? AppColors.error
+                                  : AppColors.secondary,
                             ),
                           ],
                         ),
+                      ),
+                      const SizedBox(height: 10),
+                      _BudgetMetrics(
+                        remainingVnd: summary.remainingVnd,
+                        averageVnd: state.expenses.isEmpty
+                            ? 0
+                            : summary.spentVnd ~/ state.expenses.length,
                       ),
                       if (summary.alert != 'none') ...[
                         const SizedBox(height: 10),
@@ -170,7 +217,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Khoản chi',
+                              'Chi tiết khoản chi',
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
@@ -292,6 +339,76 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
     );
   }
+}
+
+class _BudgetMetrics extends StatelessWidget {
+  const _BudgetMetrics({required this.remainingVnd, required this.averageVnd});
+
+  final int remainingVnd;
+  final int averageVnd;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: _BudgetMetric(
+          label: 'Còn lại',
+          value: moneyVnd(remainingVnd),
+          tint: AppColors.sand,
+          valueColor: AppColors.primary,
+        ),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: _BudgetMetric(
+          label: 'Chi trung bình',
+          value: moneyVnd(averageVnd),
+          tint: const Color(0xFFFFF1E3),
+          valueColor: AppColors.secondary,
+        ),
+      ),
+    ],
+  );
+}
+
+class _BudgetMetric extends StatelessWidget {
+  const _BudgetMetric({
+    required this.label,
+    required this.value,
+    required this.tint,
+    required this.valueColor,
+  });
+
+  final String label;
+  final String value;
+  final Color tint;
+  final Color valueColor;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(13),
+    decoration: BoxDecoration(
+      color: tint,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 10)),
+        const SizedBox(height: 3),
+        Text(
+          value,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: valueColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _NoTripExpense extends StatelessWidget {

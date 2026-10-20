@@ -213,18 +213,14 @@ class ProfileOnboarding extends StatelessWidget {
     child: SafeArea(
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 440),
+          constraints: const BoxConstraints(maxWidth: 390),
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 28, 20, 24),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
             children: [
-              const Icon(
-                Icons.explore_outlined,
-                size: 46,
-                color: AppColors.primary,
-              ),
-              const SizedBox(height: 22),
+              const _DaNangHero(),
+              const SizedBox(height: 16),
               const Text(
-                'DAVEL TRACE · MANAGEMENT MVP',
+                'ĐÀ NẴNG GO',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.accent,
@@ -235,16 +231,48 @@ class ProfileOnboarding extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Bắt đầu từ hồ sơ của bạn',
+                'Khám phá Đà Nẵng',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(height: 8),
               const Text(
-                'Tạo hồ sơ local để quản lý chuyến đi, lịch thủ công và chi tiêu. Không cần đăng nhập.',
+                'Lên kế hoạch chuyến đi hoàn hảo cùng trợ lý du lịch của bạn.',
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 22),
+              const SizedBox(height: 16),
+              const SurfaceCard(
+                padding: EdgeInsets.all(14),
+                child: Column(
+                  children: [
+                    _WelcomeFeature(
+                      icon: Icons.auto_awesome_outlined,
+                      title: 'Lịch trình thông minh',
+                      subtitle: 'Quản lý lịch thủ công; AI sẽ được nối ở giai đoạn sau.',
+                    ),
+                    SizedBox(height: 12),
+                    _WelcomeFeature(
+                      icon: Icons.map_outlined,
+                      title: 'Bản đồ & tuyến đường',
+                      subtitle:
+                          'PMTiles Đà Nẵng, vị trí hiện tại và tuyến OSRM.',
+                    ),
+                    SizedBox(height: 12),
+                    _WelcomeFeature(
+                      icon: Icons.account_balance_wallet_outlined,
+                      title: 'Quản lý chi tiêu',
+                      subtitle:
+                          'Theo dõi ngân sách và cảnh báo theo chuyến đi.',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                'Tạo hồ sơ trên thiết bị',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
               SurfaceCard(
                 child: ProfileEditor(
                   key: ProfileEditor.inlineKey,
@@ -271,13 +299,130 @@ class ProfileOnboarding extends StatelessWidget {
                           }
                         }
                       },
-                child: Text(busy ? 'Đang lưu…' : 'Tạo hồ sơ & tiếp tục'),
+                child: Text(busy ? 'Đang lưu…' : 'Bắt đầu  →'),
               ),
             ],
           ),
         ),
       ),
     ),
+  );
+}
+
+class _DaNangHero extends StatelessWidget {
+  const _DaNangHero();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    height: 190,
+    clipBehavior: Clip.antiAlias,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(28),
+      gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color(0xFFFFC995), Color(0xFF9ADDD9), Color(0xFF4DB4C0)],
+      ),
+    ),
+    child: Stack(
+      children: [
+        const Positioned(
+          top: 16,
+          left: 0,
+          right: 0,
+          child: Text(
+            'Khám phá Đà Nẵng',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.primaryDark,
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+        Positioned(
+          left: -18,
+          bottom: 45,
+          child: Icon(
+            Icons.landscape_rounded,
+            size: 150,
+            color: AppColors.primary.withValues(alpha: .72),
+          ),
+        ),
+        const Positioned(
+          right: 24,
+          bottom: 48,
+          child: Icon(
+            Icons.location_city_rounded,
+            size: 72,
+            color: Color(0xBFFFFFFF),
+          ),
+        ),
+        Positioned(
+          left: -24,
+          right: -24,
+          bottom: -38,
+          child: Container(
+            height: 94,
+            decoration: const BoxDecoration(
+              color: Color(0xFFEAFBFA),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.elliptical(220, 48),
+              ),
+            ),
+          ),
+        ),
+        const Positioned(
+          right: 66,
+          bottom: 30,
+          child: Icon(Icons.waves_rounded, size: 76, color: Color(0xFF2BA7B6)),
+        ),
+      ],
+    ),
+  );
+}
+
+class _WelcomeFeature extends StatelessWidget {
+  const _WelcomeFeature({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        width: 38,
+        height: 38,
+        decoration: const BoxDecoration(
+          color: AppColors.sand,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: AppColors.primary, size: 20),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: AppColors.ink,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Text(subtitle, style: const TextStyle(fontSize: 11)),
+          ],
+        ),
+      ),
+    ],
   );
 }
 

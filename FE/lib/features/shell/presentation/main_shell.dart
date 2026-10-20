@@ -35,28 +35,36 @@ class _MainShellState extends State<MainShell> {
         .map(MapStop.fromActivity)
         .toList();
     return Scaffold(
-      backgroundColor: AppColors.sand,
+      backgroundColor: AppColors.surfaceHigh,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final appWidth = constraints.maxWidth > 600
-              ? 440.0
-              : constraints.maxWidth;
+          final isDesktopPreview = constraints.maxWidth > 600;
+          final appWidth = isDesktopPreview ? 390.0 : constraints.maxWidth;
+          final appHeight = isDesktopPreview && constraints.maxHeight > 876
+              ? 844.0
+              : constraints.maxHeight;
           return SafeArea(
             child: Center(
               child: SizedBox(
                 width: appWidth,
-                height: constraints.maxHeight,
+                height: appHeight,
                 child: Material(
                   color: AppColors.canvas,
-                  elevation: constraints.maxWidth > 600 ? 10 : 0,
+                  elevation: isDesktopPreview ? 14 : 0,
                   clipBehavior: Clip.antiAlias,
-                  borderRadius: constraints.maxWidth > 600
-                      ? BorderRadius.circular(26)
+                  borderRadius: isDesktopPreview
+                      ? BorderRadius.circular(32)
                       : BorderRadius.zero,
                   child: Column(
                     children: [
                       if (state.isMutating)
                         const LinearProgressIndicator(minHeight: 2),
+                      if (state.errorMessage != null &&
+                          state.profiles.isNotEmpty)
+                        _StaleDataBanner(
+                          message: state.errorMessage!,
+                          onRetry: state.refresh,
+                        ),
                       Expanded(
                         child: IndexedStack(
                           index: _selectedIndex,
@@ -111,7 +119,7 @@ class _MainShellState extends State<MainShell> {
                           NavigationDestination(
                             icon: Icon(Icons.person_outline_rounded, size: 21),
                             selectedIcon: Icon(Icons.person_rounded, size: 21),
-                            label: 'Hồ sơ',
+                            label: 'Cá nhân',
                           ),
                         ],
                       ),
@@ -125,4 +133,47 @@ class _MainShellState extends State<MainShell> {
       ),
     );
   }
+}
+
+class _StaleDataBanner extends StatelessWidget {
+  const _StaleDataBanner({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) => Material(
+    key: const Key('stale-data-error-banner'),
+    color: const Color(0xFFFFF7ED),
+    child: Padding(
+      padding: const EdgeInsets.fromLTRB(14, 8, 8, 8),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.cloud_off_outlined,
+            color: AppColors.warning,
+            size: 18,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '$message Dữ liệu gần nhất vẫn được giữ.',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: AppColors.ink,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          TextButton(
+            key: const Key('retry-stale-data-button'),
+            onPressed: onRetry,
+            child: const Text('Thử lại'),
+          ),
+        ],
+      ),
+    ),
+  );
 }

@@ -103,7 +103,7 @@ class ItineraryScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    'ĐÀ NẴNG · LỊCH THỦ CÔNG',
+                                    'ĐÀ NẴNG · HÀNH TRÌNH CỦA BẠN',
                                     style: TextStyle(
                                       color: AppColors.accent,
                                       fontSize: 10,
@@ -146,6 +146,10 @@ class ItineraryScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         _TripSelector(state: state),
+                        const SizedBox(height: 12),
+                        _TripInsightRow(
+                          remainingVnd: state.expenseSummary.remainingVnd,
+                        ),
                         const SizedBox(height: 12),
                         SurfaceCard(
                           color: AppColors.primary,
@@ -221,7 +225,7 @@ class ItineraryScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'Các hoạt động',
+                                'Điểm nhấn trong ngày',
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
@@ -341,6 +345,7 @@ class _TripSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DropdownButtonFormField<String>(
     key: const Key('trip-switcher'),
+    isExpanded: true,
     initialValue: state.activeTrip!.id,
     decoration: const InputDecoration(
       labelText: 'Chuyến đi đang quản lý',
@@ -357,6 +362,94 @@ class _TripSelector extends StatelessWidget {
             if (id == null || id == state.activeTrip!.id) return;
             state.selectTrip(state.trips.firstWhere((trip) => trip.id == id));
           },
+  );
+}
+
+class _TripInsightRow extends StatelessWidget {
+  const _TripInsightRow({required this.remainingVnd});
+
+  final int remainingVnd;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      const Expanded(
+        child: _InsightPill(
+          icon: Icons.wb_sunny_outlined,
+          iconColor: AppColors.secondary,
+          title: '28°C',
+          subtitle: 'Trời ấm, có gió',
+        ),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: _InsightPill(
+          icon: Icons.account_balance_wallet_outlined,
+          iconColor: AppColors.primary,
+          title: moneyVnd(remainingVnd),
+          subtitle: 'Ngân sách còn lại',
+        ),
+      ),
+    ],
+  );
+}
+
+class _InsightPill extends StatelessWidget {
+  const _InsightPill({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(18),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x0D006A6A),
+          blurRadius: 12,
+          offset: Offset(0, 4),
+        ),
+      ],
+    ),
+    child: Row(
+      children: [
+        Icon(icon, size: 19, color: iconColor),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppColors.ink,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Text(
+                subtitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 9),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
   );
 }
 
@@ -401,90 +494,158 @@ class _ActivityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 9),
-    child: SurfaceCard(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 38,
-            height: 38,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: AppColors.sand,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              '${index + 1}',
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w800,
+    padding: const EdgeInsets.only(bottom: 10),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 20,
+          child: Column(
+            children: [
+              Container(
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(
+                  color: index == 0 ? AppColors.secondary : AppColors.primary,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.surface, width: 3),
+                  boxShadow: const [
+                    BoxShadow(color: Color(0x33006A6A), blurRadius: 3),
+                  ],
+                ),
               ),
-            ),
+              Container(width: 2, height: 104, color: AppColors.sand),
+            ],
           ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
+        ),
+        const SizedBox(width: 4),
+        Expanded(
+          child: SurfaceCard(
+            padding: const EdgeInsets.all(10),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  activity.title,
-                  style: const TextStyle(
-                    color: AppColors.ink,
-                    fontWeight: FontWeight.w800,
+                Container(
+                  width: 72,
+                  height: 82,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: index.isEven
+                          ? const [Color(0xFFB9E5E4), Color(0xFF5AAEAA)]
+                          : const [Color(0xFFFFD9B0), Color(0xFFD97706)],
+                    ),
+                  ),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Icon(
+                          _activityIcon(activity.category),
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                      Positioned(
+                        top: 7,
+                        left: 7,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(99),
+                          ),
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 3),
-                Text(
-                  '${_clock(activity.startAt)}–${_clock(activity.endAt)} · ${moneyVnd(activity.estimatedCostVnd)}',
-                  style: const TextStyle(fontSize: 11),
-                ),
-                if (activity.notes.isNotEmpty)
-                  Text(
-                    activity.notes,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 11),
+                const SizedBox(width: 11),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${_clock(activity.startAt)} · ${activity.category.toUpperCase()}',
+                        style: const TextStyle(
+                          color: AppColors.secondary,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        activity.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        activity.notes.isEmpty
+                            ? '${_clock(activity.startAt)}–${_clock(activity.endAt)}'
+                            : activity.notes,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              moneyVnd(activity.estimatedCostVnd),
+                              style: const TextStyle(
+                                color: AppColors.muted,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          _MiniIcon(
+                            icon: Icons.arrow_upward_rounded,
+                            tooltip: 'Đưa lên',
+                            onPressed: busy ? null : onMoveUp,
+                          ),
+                          _MiniIcon(
+                            icon: Icons.arrow_downward_rounded,
+                            tooltip: 'Đưa xuống',
+                            onPressed: busy ? null : onMoveDown,
+                          ),
+                          _MiniIcon(
+                            icon: Icons.edit_outlined,
+                            tooltip: 'Sửa',
+                            onPressed: busy ? null : onEdit,
+                          ),
+                          _MiniIcon(
+                            icon: Icons.delete_outline,
+                            tooltip: 'Xóa',
+                            onPressed: busy ? null : onDelete,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    _MiniIcon(
-                      icon: Icons.arrow_upward_rounded,
-                      tooltip: 'Đưa lên',
-                      onPressed: busy ? null : onMoveUp,
-                    ),
-                    _MiniIcon(
-                      icon: Icons.arrow_downward_rounded,
-                      tooltip: 'Đưa xuống',
-                      onPressed: busy ? null : onMoveDown,
-                    ),
-                    _MiniIcon(
-                      icon: Icons.edit_outlined,
-                      tooltip: 'Sửa',
-                      onPressed: busy ? null : onEdit,
-                    ),
-                    _MiniIcon(
-                      icon: Icons.delete_outline,
-                      tooltip: 'Xóa',
-                      onPressed: busy ? null : onDelete,
-                    ),
-                  ],
                 ),
               ],
             ),
           ),
-          if (activity.poiId != null)
-            const Tooltip(
-              message: 'Từ POI catalog',
-              child: Icon(
-                Icons.verified_outlined,
-                size: 17,
-                color: AppColors.success,
-              ),
-            ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -501,12 +662,21 @@ class _MiniIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IconButton(
+    constraints: const BoxConstraints.tightFor(width: 27, height: 30),
+    padding: EdgeInsets.zero,
     visualDensity: VisualDensity.compact,
     tooltip: tooltip,
     onPressed: onPressed,
     icon: Icon(icon, size: 18),
   );
 }
+
+IconData _activityIcon(String category) => switch (category) {
+  'food' => Icons.restaurant_rounded,
+  'transport' => Icons.directions_bike_rounded,
+  'ticket' => Icons.local_activity_rounded,
+  _ => Icons.place_rounded,
+};
 
 class TripEditor extends StatefulWidget {
   const TripEditor({super.key, this.trip});

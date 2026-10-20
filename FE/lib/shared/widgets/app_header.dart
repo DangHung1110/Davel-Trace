@@ -19,10 +19,7 @@ class AppHeader extends StatelessWidget {
     return Container(
       height: compact ? 56 : 64,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: AppColors.outline)),
-      ),
+      decoration: const BoxDecoration(color: AppColors.surface),
       child: Row(
         children: [
           Container(
@@ -30,7 +27,7 @@ class AppHeader extends StatelessWidget {
             height: 34,
             decoration: BoxDecoration(
               color: AppColors.primary,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(17),
             ),
             child: const Icon(
               Icons.route_rounded,
@@ -48,13 +45,13 @@ class AppHeader extends StatelessWidget {
                   'Davel Trace',
                   style: TextStyle(
                     color: AppColors.primary,
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w800,
                     letterSpacing: -.2,
                   ),
                 ),
                 Text(
-                  'Đà Nẵng · $section',
+                  section,
                   style: const TextStyle(
                     color: AppColors.muted,
                     fontSize: 10,

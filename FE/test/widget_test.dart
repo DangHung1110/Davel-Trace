@@ -30,8 +30,14 @@ void main() {
     await tester.pumpWidget(DavelTraceApp(repository: repository));
     await tester.pumpAndSettle();
 
-    expect(find.text('Bắt đầu từ hồ sơ của bạn'), findsOneWidget);
-    await tester.enterText(find.byKey(const Key('profile-name-field')), 'Hùng');
+    expect(find.text('ĐÀ NẴNG GO'), findsOneWidget);
+    final profileName = find.byKey(const Key('profile-name-field'));
+    await tester.scrollUntilVisible(
+      profileName,
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.enterText(profileName, 'Hùng');
     await tapKey(tester, 'create-first-profile-button');
 
     expect(find.byType(NavigationBar), findsOneWidget);
@@ -76,7 +82,13 @@ void main() {
     );
     await tapKey(tester, 'save-expense-button');
 
-    expect(find.text('Mì Quảng'), findsOneWidget);
+    final expenseLabel = find.text('Mì Quảng');
+    await tester.scrollUntilVisible(
+      expenseLabel,
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(expenseLabel, findsOneWidget);
     expect(find.text('50.000 ₫'), findsNWidgets(2));
     expect(repository.expenses.single.amountVnd, 50000);
   });

@@ -1,6 +1,6 @@
 # Davel Trace Mobile
 
-Flutter Management MVP theo phong cách Stitch **Quiet Coastal Atlas**. App quản lý hồ sơ local, chuyến đi, lịch thủ công và chi tiêu; AI planner được để sau qua boundary riêng và không ghi trực tiếp vào itinerary.
+Flutter Management MVP theo hệ thiết kế Stitch **Sơn Trà Breeze**: teal `#006A6A`, amber `#D97706`, nền slate sáng, thẻ bo tròn Material 3 và typography Be Vietnam Pro. App quản lý hồ sơ local, chuyến đi, lịch thủ công và chi tiêu; AI planner được để sau qua boundary riêng và không ghi trực tiếp vào itinerary.
 
 ## Chạy trên laptop trong khung mobile
 
@@ -20,7 +20,7 @@ flutter run -d chrome --web-port 5501 \
   --dart-define=DAVEL_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-UI tự giới hạn ở chiều rộng 440 px trên màn hình lớn, nên Chrome hiển thị như một điện thoại ngay trên laptop. Có thể mở DevTools → Toggle device toolbar nếu muốn mô phỏng kích thước máy cụ thể.
+UI tự giới hạn ở chiều rộng **390 px** (cao tối đa 844 px) trên màn hình lớn, nên Chrome hiển thị như một điện thoại ngay trên laptop. Có thể mở DevTools → Toggle device toolbar nếu muốn mô phỏng kích thước máy cụ thể.
 
 Nếu Flutter chưa có trong PATH, thay `flutter` bằng đường dẫn đầy đủ đến `flutter.bat`. Trong Git Bash, ví dụ:
 

@@ -18,10 +18,10 @@
 **Purpose**: Bring the existing Flutter shell into the dev-based feature branch and approve the planned runtime dependencies.
 
 - [x] T001 Integrate the committed `codex/stitch-mobile-ui` Flutter shell into `FE/` while preserving root `index.html`, `server.py`, `data/danang.pmtiles`, and existing prototype behavior
-- [ ] T002 Configure Python 3.11 dependencies FastAPI, Uvicorn, Pydantic v2, SQLAlchemy 2.x, Alembic, HTTPX and pytest in `BE/requirements.txt`
-- [ ] T003 [P] Configure Flutter `http` and `shared_preferences` dependencies plus API base URL environment handling in `FE/pubspec.yaml` and `FE/lib/api/api_config.dart`
-- [ ] T004 [P] Import the versioned Da Nang POI catalog files into `BE/data/snapshots/danang-v1/` without modifying `data/danang.pmtiles`
-- [ ] T005 Add Python, Flutter and SQLite runtime ignore patterns while preserving intentionally tracked PMTiles executables/assets in `.gitignore`
+- [x] T002 Configure Python 3.11 dependencies FastAPI, Uvicorn, Pydantic v2, SQLAlchemy 2.x, Alembic, HTTPX and pytest in `BE/requirements.txt`
+- [x] T003 [P] Configure Flutter `http` and `shared_preferences` dependencies plus API base URL environment handling in `FE/pubspec.yaml` and `FE/lib/api/api_config.dart`
+- [x] T004 [P] Import the versioned Da Nang POI catalog files into `BE/data/snapshots/danang-v1/` without modifying `data/danang.pmtiles`
+- [x] T005 Add Python, Flutter and SQLite runtime ignore patterns while preserving intentionally tracked PMTiles executables/assets in `.gitignore`
 
 ---
 
@@ -31,16 +31,16 @@
 
 **⚠️ CRITICAL**: No user story work begins until this phase passes.
 
-- [ ] T006 [P] Write failing API health/error-envelope contract tests in `BE/tests/contract/test_health_errors.py`
-- [ ] T007 [P] Write failing blank-database Alembic upgrade/downgrade smoke test in `BE/tests/integration/test_migrations.py`
-- [ ] T008 Implement typed settings and configurable default `sqlite:///BE/data/davel_trace.db` in `BE/app/config.py`
-- [ ] T009 Implement SQLAlchemy engine/session factory with SQLite foreign keys enabled in `BE/app/database.py`
-- [ ] T010 Configure Alembic with ORM `Base.metadata` in `BE/alembic.ini`, `BE/migrations/env.py`, and `BE/migrations/script.py.mako`
-- [ ] T011 Implement structured API errors, validation handlers and CORS middleware in `BE/app/errors.py` and `BE/app/main.py`
-- [ ] T012 Implement FastAPI/Uvicorn entrypoint and health readiness response in `BE/run.py` and `BE/app/main.py`
-- [ ] T013 [P] Implement typed API response/error parsing in `FE/lib/api/api_client.dart` and `FE/lib/api/api_exception.dart`
-- [ ] T014 Implement framework-native app state and dependency injection seam in `FE/lib/app/app_state.dart` and `FE/lib/app/app_scope.dart`
-- [ ] T015 Run foundational tests and make `BE/tests/contract/test_health_errors.py` plus `BE/tests/integration/test_migrations.py` pass
+- [x] T006 [P] Write failing API health/error-envelope contract tests in `BE/tests/contract/test_health_errors.py`
+- [x] T007 [P] Write failing blank-database Alembic upgrade/downgrade smoke test in `BE/tests/integration/test_migrations.py`
+- [x] T008 Implement typed settings and configurable default `sqlite:///BE/data/davel_trace.db` in `BE/app/config.py`
+- [x] T009 Implement SQLAlchemy engine/session factory with SQLite foreign keys enabled in `BE/app/database.py`
+- [x] T010 Configure Alembic with ORM `Base.metadata` in `BE/alembic.ini`, `BE/migrations/env.py`, and `BE/migrations/script.py.mako`
+- [x] T011 Implement structured API errors, validation handlers and CORS middleware in `BE/app/errors.py` and `BE/app/main.py`
+- [x] T012 Implement FastAPI/Uvicorn entrypoint and health readiness response in `BE/run.py` and `BE/app/main.py`
+- [x] T013 [P] Implement typed API response/error parsing in `FE/lib/api/api_client.dart` and `FE/lib/api/api_exception.dart`
+- [x] T014 Implement framework-native app state and dependency injection seam in `FE/lib/app/app_state.dart` and `FE/lib/app/app_scope.dart`
+- [x] T015 Run foundational tests and make `BE/tests/contract/test_health_errors.py` plus `BE/tests/integration/test_migrations.py` pass
 
 **Checkpoint**: A blank SQLite database is migration-ready, API error semantics are stable, and Flutter can call the API through one client.
 
@@ -54,21 +54,21 @@
 
 ### Tests for User Story 1
 
-- [ ] T016 [P] [US1] Write failing profile CRUD/version/delete-confirmation contract tests in `BE/tests/contract/test_profiles_api.py`
-- [ ] T017 [P] [US1] Write failing profile persistence/restart integration test in `BE/tests/integration/test_profile_persistence.py`
-- [ ] T018 [P] [US1] Write failing Flutter profile loading/empty/error/form widget tests in `FE/test/features/profiles/profile_flow_test.dart`
+- [x] T016 [P] [US1] Write failing profile CRUD/version/delete-confirmation contract tests in `BE/tests/contract/test_profiles_api.py`
+- [x] T017 [P] [US1] Write failing profile persistence/restart integration test in `BE/tests/integration/test_profile_persistence.py`
+- [x] T018 [P] [US1] Write failing Flutter profile loading/empty/error/form widget tests in `FE/test/features/profiles/profile_flow_test.dart`
 
 ### Implementation for User Story 1
 
-- [ ] T019 [US1] Implement `UserProfile` fields (`display_name` 1–80, ranges 1–3, structured preferences, version ≥1) and singleton `DeviceState` ORM models in `BE/app/models/profile.py`
-- [ ] T020 [US1] Implement profile Pydantic schemas and trimmed/range validation in `BE/app/schemas/profile.py`
-- [ ] T021 [US1] Implement profile repository/service transactions, optimistic version checks and dependent-count confirmation in `BE/app/repositories/profiles.py` and `BE/app/services/profiles.py`
-- [ ] T022 [US1] Implement profile CRUD and active-profile endpoints from the contract in `BE/app/routers/profiles.py` and wire them in `BE/app/main.py`
-- [ ] T023 [US1] Add initial code-first schema migration for `user_profiles` and `device_state` in `BE/migrations/versions/0001_management_schema.py`
-- [ ] T024 [US1] Implement pure Flutter profile domain models/repository in `FE/lib/features/profiles/domain/profile.dart` and `FE/lib/features/profiles/data/profile_repository.dart`
-- [ ] T025 [US1] Implement profile picker, empty/loading/error states and create/edit/delete-confirmation forms in `FE/lib/features/profiles/presentation/profile_screen.dart`
-- [ ] T026 [US1] Wire active-profile restoration into app startup and shell navigation in `FE/lib/app/app_state.dart` and `FE/lib/features/shell/presentation/main_shell.dart`
-- [ ] T027 [US1] Run and pass profile backend and Flutter widget tests
+- [x] T019 [US1] Implement `UserProfile` fields (`display_name` 1–80, ranges 1–3, structured preferences, version ≥1) and singleton `DeviceState` ORM models in `BE/app/models/profile.py`
+- [x] T020 [US1] Implement profile Pydantic schemas and trimmed/range validation in `BE/app/schemas/profile.py`
+- [x] T021 [US1] Implement profile repository/service transactions, optimistic version checks and dependent-count confirmation in `BE/app/repositories/profiles.py` and `BE/app/services/profiles.py`
+- [x] T022 [US1] Implement profile CRUD and active-profile endpoints from the contract in `BE/app/routers/profiles.py` and wire them in `BE/app/main.py`
+- [x] T023 [US1] Add initial code-first schema migration for `user_profiles` and `device_state` in `BE/migrations/versions/0001_management_schema.py`
+- [x] T024 [US1] Implement pure Flutter profile domain models/repository in `FE/lib/features/profiles/domain/profile.dart` and `FE/lib/features/profiles/data/profile_repository.dart`
+- [x] T025 [US1] Implement profile picker, empty/loading/error states and create/edit/delete-confirmation forms in `FE/lib/features/profiles/presentation/profile_screen.dart`
+- [x] T026 [US1] Wire active-profile restoration into app startup and shell navigation in `FE/lib/app/app_state.dart` and `FE/lib/features/shell/presentation/main_shell.dart`
+- [x] T027 [US1] Run and pass profile backend and Flutter widget tests
 
 **Checkpoint**: User Story 1 works independently with durable profile state.
 
@@ -82,24 +82,24 @@
 
 ### Tests for User Story 2
 
-- [ ] T028 [P] [US2] Write failing trip CRUD/date/version/delete contract tests in `BE/tests/contract/test_trips_api.py`
-- [ ] T029 [P] [US2] Write failing activity add/edit/delete/reorder/overlap contract tests in `BE/tests/contract/test_itinerary_api.py`
-- [ ] T030 [P] [US2] Write failing trip-itinerary restart/cascade integration test in `BE/tests/integration/test_trip_persistence.py`
-- [ ] T031 [P] [US2] Write failing Flutter trip and itinerary management widget tests in `FE/test/features/trips/trip_flow_test.dart`
+- [x] T028 [P] [US2] Write failing trip CRUD/date/version/delete contract tests in `BE/tests/contract/test_trips_api.py`
+- [x] T029 [P] [US2] Write failing activity add/edit/delete/reorder/overlap contract tests in `BE/tests/contract/test_itinerary_api.py`
+- [x] T030 [P] [US2] Write failing trip-itinerary restart/cascade integration test in `BE/tests/integration/test_trip_persistence.py`
+- [x] T031 [P] [US2] Write failing Flutter trip and itinerary management widget tests in `FE/test/features/trips/trip_flow_test.dart`
 
 ### Implementation for User Story 2
 
-- [ ] T032 [US2] Implement Trip (`city=da-nang`, ≤2 days, budget ≥0, travelers ≥1, version ≥1), Itinerary and Activity ORM models with unique order and cascades in `BE/app/models/trip.py`
-- [ ] T033 [US2] Implement trip/activity schemas, coordinate/date/time validation and overlap warning shape in `BE/app/schemas/trip.py`
-- [ ] T034 [US2] Implement trip repository/service CRUD and optimistic concurrency in `BE/app/repositories/trips.py` and `BE/app/services/trips.py`
-- [ ] T035 [US2] Implement manual itinerary service that increments itinerary version exactly once per mutation and invalidates route cache, plus a disabled future proposal port in `BE/app/services/itineraries.py` and `BE/app/services/planner.py`
-- [ ] T036 [US2] Implement trips and activity/reorder REST endpoints in `BE/app/routers/trips.py` and `BE/app/routers/itineraries.py`
-- [ ] T037 [US2] Add code-first `0002_trip_itinerary.py` migration with `trips`, `itineraries`, `activities` constraints and indexes in `BE/migrations/versions/`
-- [ ] T038 [US2] Replace UI-coupled demo domain data with pure Trip/Itinerary/Activity models and presentation mappers in `FE/lib/features/trips/domain/` and `FE/lib/features/itinerary/domain/`
-- [ ] T039 [US2] Implement typed trip/itinerary repositories in `FE/lib/features/trips/data/trip_repository.dart` and `FE/lib/features/itinerary/data/itinerary_repository.dart`
-- [ ] T040 [US2] Implement trip list/create/edit/delete-confirmation UI with loading/empty/error/retry states in `FE/lib/features/trips/presentation/`
-- [ ] T041 [US2] Convert the Stitch itinerary screen from fixed demo data to add/edit/delete/reorder manual activities while preserving visual style in `FE/lib/features/itinerary/presentation/itinerary_screen.dart`
-- [ ] T042 [US2] Run and pass trip/itinerary backend and Flutter widget tests
+- [x] T032 [US2] Implement Trip (`city=da-nang`, ≤2 days, budget ≥0, travelers ≥1, version ≥1), Itinerary and Activity ORM models with unique order and cascades in `BE/app/models/trip.py`
+- [x] T033 [US2] Implement trip/activity schemas, coordinate/date/time validation and overlap warning shape in `BE/app/schemas/trip.py`
+- [x] T034 [US2] Implement trip repository/service CRUD and optimistic concurrency in `BE/app/repositories/trips.py` and `BE/app/services/trips.py`
+- [x] T035 [US2] Implement manual itinerary service that increments itinerary version exactly once per mutation and invalidates route cache, plus a disabled future proposal port in `BE/app/services/itineraries.py` and `BE/app/services/planner.py`
+- [x] T036 [US2] Implement trips and activity/reorder REST endpoints in `BE/app/routers/trips.py` and `BE/app/routers/itineraries.py`
+- [x] T037 [US2] Add code-first `0002_trip_itinerary.py` migration with `trips`, `itineraries`, `activities` constraints and indexes in `BE/migrations/versions/`
+- [x] T038 [US2] Replace UI-coupled demo domain data with pure Trip/Itinerary/Activity models and presentation mappers in `FE/lib/features/trips/domain/` and `FE/lib/features/itinerary/domain/`
+- [x] T039 [US2] Implement typed trip/itinerary repositories in `FE/lib/features/trips/data/trip_repository.dart` and `FE/lib/features/itinerary/data/itinerary_repository.dart`
+- [x] T040 [US2] Implement trip list/create/edit/delete-confirmation UI with loading/empty/error/retry states in `FE/lib/features/trips/presentation/`
+- [x] T041 [US2] Convert the Stitch itinerary screen from fixed demo data to add/edit/delete/reorder manual activities while preserving visual style in `FE/lib/features/itinerary/presentation/itinerary_screen.dart`
+- [x] T042 [US2] Run and pass trip/itinerary backend and Flutter widget tests
 
 **Checkpoint**: User Story 2 provides a useful AI-free manual itinerary manager.
 
@@ -113,21 +113,21 @@
 
 ### Tests for User Story 3
 
-- [ ] T043 [P] [US3] Write failing expense CRUD/version/validation contract tests in `BE/tests/contract/test_expenses_api.py`
-- [ ] T044 [P] [US3] Write failing exact summary/80%/100%/negative-remaining unit tests in `BE/tests/unit/test_expense_summary.py`
-- [ ] T045 [P] [US3] Write failing expense persistence and trip-cascade integration test in `BE/tests/integration/test_expense_persistence.py`
-- [ ] T046 [P] [US3] Write failing Flutter expense loading/empty/form/edit/delete/alert widget tests in `FE/test/features/expenses/expense_flow_test.dart`
+- [x] T043 [P] [US3] Write failing expense CRUD/version/validation contract tests in `BE/tests/contract/test_expenses_api.py`
+- [x] T044 [P] [US3] Write failing exact summary/80%/100%/negative-remaining unit tests in `BE/tests/unit/test_expense_summary.py`
+- [x] T045 [P] [US3] Write failing expense persistence and trip-cascade integration test in `BE/tests/integration/test_expense_persistence.py`
+- [x] T046 [P] [US3] Write failing Flutter expense loading/empty/form/edit/delete/alert widget tests in `FE/test/features/expenses/expense_flow_test.dart`
 
 ### Implementation for User Story 3
 
-- [ ] T047 [US3] Implement Expense ORM model (`amount_vnd` integer ≥0; category `food|ticket|transport|other`; version ≥1) owned by Trip in `BE/app/models/expense.py`
-- [ ] T048 [US3] Implement expense schemas and summary response in `BE/app/schemas/expense.py`
-- [ ] T049 [US3] Implement transactional expense CRUD, optimistic concurrency and exact category/threshold summaries in `BE/app/repositories/expenses.py` and `BE/app/services/expenses.py`
-- [ ] T050 [US3] Implement nested expense endpoints and compatibility summary alias in `BE/app/routers/expenses.py`
-- [ ] T051 [US3] Add code-first `0003_expenses.py` migration with expense checks and trip/category/time indexes in `BE/migrations/versions/`
-- [ ] T052 [US3] Implement Flutter expense models/repository in `FE/lib/features/expenses/domain/expense.dart` and `FE/lib/features/expenses/data/expense_repository.dart`
-- [ ] T053 [US3] Replace the fixed expense demo with persistent add/edit/delete, category totals and 80%/100% UI states in `FE/lib/features/expenses/presentation/expenses_screen.dart`
-- [ ] T054 [US3] Run and pass expense backend and Flutter widget tests
+- [x] T047 [US3] Implement Expense ORM model (`amount_vnd` integer ≥0; category `food|ticket|transport|other`; version ≥1) owned by Trip in `BE/app/models/expense.py`
+- [x] T048 [US3] Implement expense schemas and summary response in `BE/app/schemas/expense.py`
+- [x] T049 [US3] Implement transactional expense CRUD, optimistic concurrency and exact category/threshold summaries in `BE/app/repositories/expenses.py` and `BE/app/services/expenses.py`
+- [x] T050 [US3] Implement nested expense endpoints and compatibility summary alias in `BE/app/routers/expenses.py`
+- [x] T051 [US3] Add code-first `0003_expenses.py` migration with expense checks and trip/category/time indexes in `BE/migrations/versions/`
+- [x] T052 [US3] Implement Flutter expense models/repository in `FE/lib/features/expenses/domain/expense.dart` and `FE/lib/features/expenses/data/expense_repository.dart`
+- [x] T053 [US3] Replace the fixed expense demo with persistent add/edit/delete, category totals and 80%/100% UI states in `FE/lib/features/expenses/presentation/expenses_screen.dart`
+- [x] T054 [US3] Run and pass expense backend and Flutter widget tests
 
 **Checkpoint**: User Story 3 delivers durable, exact trip budget management.
 
@@ -141,19 +141,19 @@
 
 ### Tests for User Story 4
 
-- [ ] T055 [P] [US4] Write failing POI query/verified/default/limit contract tests in `BE/tests/contract/test_pois_api.py`
-- [ ] T056 [P] [US4] Write failing OSRM success/timeout/fallback truthfulness tests in `BE/tests/unit/test_routes.py`
-- [ ] T057 [P] [US4] Write failing Flutter map model/route-source widget tests in `FE/test/features/map/map_management_test.dart`
+- [x] T055 [P] [US4] Write failing POI query/verified/default/limit contract tests in `BE/tests/contract/test_pois_api.py`
+- [x] T056 [P] [US4] Write failing OSRM success/timeout/fallback truthfulness tests in `BE/tests/unit/test_routes.py`
+- [x] T057 [P] [US4] Write failing Flutter map model/route-source widget tests in `FE/test/features/map/map_management_test.dart`
 
 ### Implementation for User Story 4
 
-- [ ] T058 [US4] Implement versioned JSON POI catalog repository with normalized Vietnamese search in `BE/app/repositories/poi_catalog.py`
-- [ ] T059 [US4] Implement POI search/detail schemas and endpoints in `BE/app/schemas/poi.py` and `BE/app/routers/pois.py`
-- [ ] T060 [US4] Implement OSRM route service with 10-second timeout and explicit display-only fallback in `BE/app/services/routes.py`
-- [ ] T061 [US4] Implement RouteSegment ORM/cache and route preview endpoint for 2–10 ordered activities in `BE/app/models/route.py`, `BE/app/schemas/route.py`, and `BE/app/routers/routes.py`
-- [ ] T062 [US4] Add code-first `0004_route_segments.py` migration with route segment tables/indexes in `BE/migrations/versions/`
-- [ ] T063 [US4] Connect saved itinerary activities, location-denied behavior and route source/warning to the existing Flutter map in `FE/lib/features/map/`
-- [ ] T064 [US4] Run and pass POI/route backend and Flutter map tests
+- [x] T058 [US4] Implement versioned JSON POI catalog repository with normalized Vietnamese search in `BE/app/repositories/poi_catalog.py`
+- [x] T059 [US4] Implement POI search/detail schemas and endpoints in `BE/app/schemas/poi.py` and `BE/app/routers/pois.py`
+- [x] T060 [US4] Implement OSRM route service with 10-second timeout and explicit display-only fallback in `BE/app/services/routes.py`
+- [x] T061 [US4] Implement RouteSegment ORM/cache and route preview endpoint for 2–10 ordered activities in `BE/app/models/route.py`, `BE/app/schemas/route.py`, and `BE/app/routers/routes.py`
+- [x] T062 [US4] Add code-first `0004_route_segments.py` migration with route segment tables/indexes in `BE/migrations/versions/`
+- [x] T063 [US4] Connect saved itinerary activities, location-denied behavior and route source/warning to the existing Flutter map in `FE/lib/features/map/`
+- [x] T064 [US4] Run and pass POI/route backend and Flutter map tests
 
 **Checkpoint**: User Story 4 reuses PMTiles/OSRM with explicit source truthfulness.
 
@@ -167,15 +167,15 @@
 
 ### Tests for User Story 5
 
-- [ ] T065 [P] [US5] Write failing full management restart journey test in `BE/tests/integration/test_management_journey.py`
-- [ ] T066 [P] [US5] Write failing Flutter app startup/cache/API-retry widget test in `FE/test/app/app_recovery_test.dart`
+- [x] T065 [P] [US5] Write failing full management restart journey test in `BE/tests/integration/test_management_journey.py`
+- [x] T066 [P] [US5] Write failing Flutter app startup/cache/API-retry widget test in `FE/test/app/app_recovery_test.dart`
 
 ### Implementation for User Story 5
 
-- [ ] T067 [US5] Implement local active-profile and last-success metadata cache in `FE/lib/app/local_preferences.dart`
-- [ ] T068 [US5] Implement consistent async loading/empty/error/retry surfaces in `FE/lib/shared/widgets/async_state_view.dart` and adopt them across management screens
-- [ ] T069 [US5] Add API retry/reload handling that preserves already-loaded state in `FE/lib/app/app_state.dart`
-- [ ] T070 [US5] Run and pass the full restart/recovery backend and Flutter tests
+- [x] T067 [US5] Implement local active-profile and last-success metadata cache in `FE/lib/app/local_preferences.dart`
+- [x] T068 [US5] Implement consistent async loading/empty/error/retry surfaces in `FE/lib/shared/widgets/async_state_view.dart` and adopt them across management screens
+- [x] T069 [US5] Add API retry/reload handling that preserves already-loaded state in `FE/lib/app/app_state.dart`
+- [x] T070 [US5] Run and pass the full restart/recovery backend and Flutter tests
 
 **Checkpoint**: All five stories work together and retain data through restart/failure.
 
@@ -185,14 +185,14 @@
 
 **Purpose**: Complete documentation, migration, security and regression evidence required for PR.
 
-- [ ] T071 [P] Update backend setup, migration, environment and DBeaver guidance in `BE/README.md` and `.env.example`
-- [ ] T072 [P] Update Flutter laptop/mobile-viewport run instructions and API configuration in `FE/README.md`
-- [ ] T073 [P] Update root architecture/run commands without replacing the required `python server.py` prototype instructions in `README.md`
-- [ ] T074 Validate a clean Alembic upgrade, schema visibility and foreign-key cascades against a temporary SQLite database per `specs/002-trip-management-mvp/quickstart.md`
-- [ ] T075 Run complete `pytest`, `flutter analyze`, `flutter test` and Flutter web build suites
-- [ ] T076 Run root prototype smoke test for map, A/B search, route and play/pause without severe console errors
-- [ ] T077 Review secrets, generated database files, dependency scope, error logs and `git diff --check` before commit
-- [ ] T078 Mark completed tasks, run `$speckit.converge`, and append/complete any remaining convergence tasks in `specs/002-trip-management-mvp/tasks.md`
+- [x] T071 [P] Update backend setup, migration, environment and DBeaver guidance in `BE/README.md` and `.env.example`
+- [x] T072 [P] Update Flutter laptop/mobile-viewport run instructions and API configuration in `FE/README.md`
+- [x] T073 [P] Update root architecture/run commands without replacing the required `python server.py` prototype instructions in `README.md`
+- [x] T074 Validate a clean Alembic upgrade, schema visibility and foreign-key cascades against a temporary SQLite database per `specs/002-trip-management-mvp/quickstart.md`
+- [x] T075 Run complete `pytest`, `flutter analyze`, `flutter test` and Flutter web build suites
+- [x] T076 Run root prototype smoke test for map, A/B search, route and play/pause without severe console errors
+- [x] T077 Review secrets, generated database files, dependency scope, error logs and `git diff --check` before commit
+- [x] T078 Mark completed tasks, run `$speckit.converge`, and append/complete any remaining convergence tasks in `specs/002-trip-management-mvp/tasks.md`
 
 ---
 
@@ -230,3 +230,9 @@
 - Runtime `.db`, SQLite journal/WAL, secrets and generated build output must not be committed.
 - Do not merge or rewrite AI lane branches; consume only the shared POI snapshot and stable contracts needed by this feature.
 - Do not delete or ignore `data/danang.pmtiles` or tracked `pmtiles.exe`.
+
+## Phase 9: Convergence
+
+- [x] T079 Surface a non-blocking API error and retry action while preserving already-loaded management data per FR-026 and US5/AC2 (partial)
+- [x] T080 Document management migrations, the default SQLite connection string, and DBeaver setup in `BE/README.md` per plan:T071 (partial)
+- [x] T081 Align Flutter laptop-preview documentation with the Sơn Trà Breeze Stitch theme and 390 px frame in `FE/README.md` per plan:T072 (partial)
