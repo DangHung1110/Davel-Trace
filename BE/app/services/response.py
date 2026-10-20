@@ -32,7 +32,7 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
     # T053 fix: score_plan() reads these two fields directly. Without them
     # every router-built plan scored profit=0.0/utility=0.3 regardless of
     # profile, while the run_profiles path looked correct.
-    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating", 0))
+    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
                for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
     return {
