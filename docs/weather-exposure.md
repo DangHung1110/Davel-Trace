@@ -57,15 +57,51 @@ Emitted by `BE/ml/data/enrich_snapshot.py --apply` to
 
 | field | distinct | entropy (bits) | notable buckets |
 |---|---|---|---|
-| `outdoor_exposure` | 11 | 3.0292 | 0.05:129, 0.2:163, 0.55:91, 0.6:90, 0.65:49, 0.9:16, 0.95:18 |
-| `sun_exposure` | 9 | 1.8257 | 0.05:445, 0.55:181, 0.8:16, 0.95:13 |
-| `wind_exposure` | 9 | 2.3021 | 0.1:352, 0.45:140, 0.75:16, 0.95:18 |
+| `outdoor_exposure` | 11 | 3.0461 | 0.05:129, 0.2:156, 0.55:90, 0.6:90, 0.65:49, 0.9:16, 0.95:18 |
+| `sun_exposure` | 10 | 1.8374 | 0.05:445, 0.55:180, 0.8:16, 0.95:13 |
+| `wind_exposure` | 9 | 2.3349 | 0.1:338, 0.45:140, 0.75:16, 0.95:18 |
 | `rain_cover` | 3 | 1.1943 | enclosed:481, mixed:235, open:48 |
 
 No new field collapses to a single value. `covered` / `unknown` rain_cover do
-not occur on this snapshot because it currently has **no linked OSM
-rain-protection evidence**; those buckets are exercised by unit tests and will
-appear once OSM evidence is joined.
+not occur on this snapshot because linked OSM evidence currently yields no
+rain-shelter tags; those buckets are exercised by unit tests.
+
+## QA follow-up fixes (T063b-2)
+
+An independent 40-POI audit (`%TEMP%\t063_qa.md`) scored the committed `space`
+labels at **28/40 (70.0%) strict**. The labeler now fixes:
+
+1. **Diacritic false positives.** Matching is token-based on the
+   accent-preserving Vietnamese name, with `_ACCENT_GUARD` for ambiguous
+   single syllables: `Đào` (address) no longer hits `đảo` (island), `Cậu` no
+   longer hits `cầu` (bridge), `sống` (fresh) no longer hits `sông` (river).
+   A venue keyword now beats a descriptive outdoor word in business names, so
+   `Coffee ... Lý Đạo Thành`, `Cà phê Cậu Út` and `Seavitel Beach Hotel` stay
+   indoor instead of abstaining.
+2. **OSM path now fires.** `--osm-cache` joins a raw Overpass export by
+   exact folded-name match only (never proximity). The Da Nang cache
+   (`C:\tmp\osm\danang.json`, kept in TEMP per `fetch_osm.py`) links 18 POIs;
+   15 get `space_source=osm` (previously 0/764).
+3. **Compound names.** Pagodas/churches → `both` (courtyard + hall), beer
+   gardens → `both`, market halls (`chợ`) → `both`.
+4. **Decisive landmark/beach names.** `bãi tắm`, `memorial`, `đài tưởng niệm`,
+   `tượng đài` resolve to `outdoor` instead of the old ambiguous-canonical
+   abstention.
+
+Re-scoring the same QA sample against the new labels: **40/40 strict (100%)**,
+up from 28/40. This is a small-sample diagnostic, not a calibrated accuracy
+claim.
+
+Snapshot `space` distribution before → after the follow-up:
+
+| space | before | after |
+|---|---|---|
+| indoor | 553 (72.4%) | 501 (65.6%) |
+| both | 5 (0.7%) | 105 (13.7%) |
+| outdoor | 86 (11.3%) | 91 (11.9%) |
+| unknown | 120 (15.7%) | 67 (8.8%) |
+
+`space_source`: name 467, canonical 236, audit 46, **osm 15** (was 0).
 
 ## PATM features
 
@@ -93,19 +129,20 @@ appear once OSM evidence is joined.
 |---|---|---|---|---|
 | committed model (before) | 17 | 0.793 | 0.777 | 0.728 |
 | re-run old extractor, same pairs (fair baseline) | 17 | 0.787 | 0.777 | 0.739 |
-| **after retrain** | **21** | **0.782** | **0.777** | **0.736** |
+| after first retrain (pre-QA labels) | 21 | 0.782 | 0.777 | 0.736 |
+| **after QA label fixes + retrain** | **21** | **0.785** | **0.786** | **0.730** |
 
-Honest reading: **the new exposure features do not improve pairwise accuracy**
-(cv −0.005 vs fair baseline, held flat) and flip consistency is slightly below
-the fair re-run (−0.003) though above the committed model (+0.008). The
-exposure attributes add signal diversity but the current pairs dataset does not
-convert it into better ordering. No claim of improvement is made.
+Honest reading: the QA label fixes buy **+0.009 held-out accuracy** over both
+17-feature baselines, while 5-fold CV is 0.002 below the fair baseline and flip
+consistency is 0.009 below it (above the committed model by 0.002). This is a
+mixed, small-sample result — no improvement claim beyond held-out accuracy.
 
 ## Reproduction
 
 ```powershell
-$env:PYTHONPATH='BE'
-python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 --apply
+$env:PYTHONPATH='.'
+python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 `
+    --osm-cache C:\tmp\osm\danang.json --apply
 python BE/ml/patm/train.py --pairs C:\tmp\pairs_v4.json `
     --snapshot BE/data/snapshots/danang-v1 --model-out BE/ml/patm/model.txt
 python -m unittest discover -s BE/tests -t BE
@@ -115,9 +152,12 @@ python -m unittest discover -s BE/tests -t BE
 
 - Floats are rule anchors; they are not measured irradiance/wind and are not
   calibrated against human labels.
-- The snapshot has no linked OSM rain evidence yet, so `rain_cover` is driven
-  by type defaults in practice and `covered`/`unknown` are unobserved.
+- OSM evidence is joined only on exact folded-name matches: 18 linked, 15
+  sourced. Proximity-only matches are deliberately rejected, so 151 nearby
+  elements stay unused; rain cover is still type-default driven in practice.
+- The QA re-score is n=40; the 100% figure has a wide confidence interval and
+  is not a population accuracy estimate.
 - Coverage is uneven: 445/764 POIs sit at `sun_exposure=0.05` (indoor preset),
   so entropy is modest even though the field no longer collapses.
 - The retrain overwrote `BE/ml/patm/model.txt` and `model_metrics.json`; the
-  17-feature model remains recoverable from git history at `932a0e1`.
+  original 17-feature model remains recoverable from git at `932a0e1`.

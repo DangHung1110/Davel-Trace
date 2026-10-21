@@ -318,7 +318,10 @@
       "space_evidence": [
         "audit=indoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=indoor vs osm={'label': 'indoor', 'source': 'osm', 'conf': 0.7, 'evidence': 'OSM node/14125298501 indoor category tags', 'priority': 1, 'conflict': False}",
+        "audit=indoor vs name=both"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -586,7 +589,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -594,7 +597,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -612,11 +615,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -627,10 +630,10 @@
         "name": "Maazi"
       },
       "cat": "restaurant",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "OSM node/13917253901 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -908,7 +911,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -916,7 +919,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -934,11 +937,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -953,10 +956,10 @@
       },
       "hours_source": "web",
       "cat": "restaurant",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "OSM node/12372814701 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -1874,7 +1877,9 @@
       "space_evidence": [
         "audit=indoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=indoor vs osm={'label': 'indoor', 'source': 'osm', 'conf': 0.7, 'evidence': 'OSM node/4778581323 indoor category tags', 'priority': 1, 'conflict': False}"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -2715,11 +2720,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_canonical",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "outdoor",
+        "space": "indoor",
         "party": [
           "family",
           "couple",
@@ -2748,10 +2753,10 @@
         "name": null
       },
       "cat": "restaurant",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "canonical",
+      "space_confidence": 0.4,
       "space_evidence": [
-        "name outdoor keyword(s) song"
+        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -2786,7 +2791,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -2794,7 +2799,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -2812,11 +2817,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -2827,10 +2832,10 @@
         "name": "Them Hai San"
       },
       "cat": "restaurant",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "OSM node/12833350534 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -3429,7 +3434,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -3437,7 +3442,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
@@ -3456,11 +3461,11 @@
         ],
         "band_verified": true,
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -3472,10 +3477,10 @@
       },
       "cat": "restaurant",
       "price_note": "user: Le Comptoir từ 400k",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "OSM node/13009347078 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -4250,7 +4255,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -4258,7 +4263,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
@@ -4277,11 +4282,11 @@
         ],
         "band_verified": true,
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -4293,10 +4298,10 @@
       },
       "cat": "restaurant",
       "price_note": "user: Cucina Luca 180-400k",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "OSM node/12850675088 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -4405,7 +4410,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -4417,7 +4422,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple",
@@ -4440,13 +4445,11 @@
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) restaurant beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (restaurant) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -6164,7 +6167,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
@@ -6182,11 +6185,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.15,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -6198,9 +6201,10 @@
       },
       "cat": "restaurant",
       "price_note": "~300.000đ (khoảng 100-500 N ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/7222014985 indoor category tags",
         "name indoor keyword(s) nha hang"
       ],
       "space_conflict": [],
@@ -7660,7 +7664,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
@@ -7676,11 +7680,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -7692,9 +7696,10 @@
       },
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/11665246470 indoor category tags",
         "name indoor keyword(s) ca phe"
       ],
       "space_conflict": [],
@@ -7967,7 +7972,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -7979,7 +7984,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "solo"
@@ -8008,13 +8013,11 @@
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name indoor keyword(s) ca phe"
       ],
-      "space_conflict": [
-        "name has indoor (ca phe) + outdoor (cau) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -8125,7 +8128,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -8133,11 +8136,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
-        "space": "indoor",
+        "space": "both",
         "party": [
           "couple",
           "solo"
@@ -8149,11 +8152,11 @@
           "quick-stop-30"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
-        "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
-        "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "outdoor_exposure": 0.5,
+        "sun_exposure": 0.45,
+        "wind_exposure": 0.45,
+        "rain_cover": "mixed",
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -8165,9 +8168,10 @@
       },
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
+        "OSM node/13744719202 explicit indoor+outdoor evidence (element)",
         "name indoor keyword(s) coffee"
       ],
       "space_conflict": [],
@@ -8211,7 +8215,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
@@ -8227,11 +8231,11 @@
           "quick-stop-30"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -8243,9 +8247,10 @@
       },
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/4352240896 indoor category tags",
         "name indoor keyword(s) ca phe"
       ],
       "space_conflict": [],
@@ -9398,7 +9403,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
@@ -9414,11 +9419,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -9430,9 +9435,10 @@
       },
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/14004104302 indoor category tags",
         "name indoor keyword(s) ca phe"
       ],
       "space_conflict": [],
@@ -10149,7 +10155,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -10161,7 +10167,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "solo"
@@ -10184,13 +10190,11 @@
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name indoor keyword(s) coffee"
       ],
-      "space_conflict": [
-        "name has indoor (coffee) + outdoor (dao) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -10535,7 +10539,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
@@ -10551,11 +10555,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -10573,9 +10577,10 @@
         ]
       },
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/12222115201 indoor category tags",
         "name indoor keyword(s) coffee"
       ],
       "space_conflict": [],
@@ -11389,7 +11394,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
@@ -11405,11 +11410,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -11421,9 +11426,10 @@
       },
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/10801935005 indoor category tags",
         "name indoor keyword(s) cafe"
       ],
       "space_conflict": [],
@@ -11793,7 +11799,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
@@ -11809,11 +11815,11 @@
           "half-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.2,
+        "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -11825,9 +11831,10 @@
       },
       "cat": "cafe",
       "price_note": "~150.000đ (khoảng 100-200 N ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/7218228185 indoor category tags",
         "name indoor keyword(s) cafe"
       ],
       "space_conflict": [],
@@ -12516,7 +12523,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -12528,7 +12535,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "cheap",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "solo"
@@ -12550,13 +12557,11 @@
       "cat": "cafe",
       "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) cafe beat descriptive outdoor keyword(s) nui -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (cafe) + outdoor (nui) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -15013,7 +15018,8 @@
       "rain_protection_confidence": 0.4,
       "rain_protection_evidence": [
         "no linked OSM rain-protection evidence -> unknown",
-        "abstained: absent evidence is not proof of no cover"
+        "abstained: absent evidence is not proof of no cover",
+        "ambiguous OSM tag(s) tourism=attraction -> no space inference"
       ]
     },
     {
@@ -15049,11 +15055,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -15082,10 +15088,10 @@
         "name": null
       },
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -17020,7 +17026,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
@@ -17038,9 +17044,9 @@
         "rain_protection": "unknown",
         "outdoor_exposure": 0.1,
         "sun_exposure": 0.05,
-        "wind_exposure": 0.1,
+        "wind_exposure": 0.05,
         "rain_cover": "enclosed",
-        "exposure_source": "type"
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -17055,9 +17061,10 @@
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "price_note": "~2.125.000đ (khoảng 85 US$)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "osm",
+      "space_confidence": 0.8,
       "space_evidence": [
+        "OSM node/1623183663 indoor category tags",
         "name indoor keyword(s) resort, spa"
       ],
       "space_conflict": [],
@@ -17925,11 +17932,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -17955,10 +17962,10 @@
       },
       "hours_source": "web",
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -18077,7 +18084,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -18105,10 +18112,10 @@
       "smart_tag_source": "rule_v1",
       "cat": "beach",
       "parking_note": "user: Chắc là có vé xe hay gì đó",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=beach -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -18377,7 +18384,7 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -18385,11 +18392,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_osm",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple",
@@ -18403,11 +18410,11 @@
           "full-day"
         ],
         "rain_protection": "unknown",
-        "outdoor_exposure": 0.55,
-        "sun_exposure": 0.55,
-        "wind_exposure": 0.45,
-        "rain_cover": "mixed",
-        "exposure_source": "type"
+        "outdoor_exposure": 0.1,
+        "sun_exposure": 0.05,
+        "wind_exposure": 0.05,
+        "rain_cover": "enclosed",
+        "exposure_source": "osm"
       },
       "smart_tag_source": "rule_v1",
       "osm_evidence": {
@@ -18422,10 +18429,10 @@
       },
       "hours_source": "web",
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "osm",
+      "space_confidence": 0.7,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "OSM node/5255590921 indoor category tags"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -19001,11 +19008,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -19031,10 +19038,10 @@
       },
       "hours_source": "web",
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -19329,11 +19336,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -19367,10 +19374,10 @@
       },
       "hours_source": "web",
       "cat": "landmark",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=landmark is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) tuong dai"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -19413,7 +19420,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -19449,10 +19456,10 @@
       "hours_source": "rule_open_access",
       "cat": "beach",
       "parking_note": "user: Chắc là có vé xe",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=beach -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -20262,7 +20269,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -20299,7 +20306,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -20728,7 +20735,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -20740,7 +20747,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -20773,7 +20780,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -20896,7 +20903,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -20924,10 +20931,10 @@
       "smart_tag_source": "rule_v1",
       "hours_source": "rule_open_access",
       "cat": "beach",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=beach -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21193,7 +21200,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -21221,10 +21228,10 @@
       "smart_tag_source": "rule_v1",
       "hours_source": "rule_open_access",
       "cat": "beach",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=beach -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21267,11 +21274,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -21297,10 +21304,10 @@
       },
       "hours_source": "web",
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21419,11 +21426,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21450,10 +21457,10 @@
         "name": null
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21500,11 +21507,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21531,10 +21538,10 @@
         "name": "CaPhe Huy"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21579,11 +21586,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21611,10 +21618,10 @@
         "name": null
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21696,7 +21703,9 @@
       "space_evidence": [
         "audit=outdoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=outdoor vs name=both"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -21743,7 +21752,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "outdoor",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21775,7 +21784,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name outdoor keyword(s) song"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21818,11 +21827,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21849,10 +21858,10 @@
         "name": null
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21897,11 +21906,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -21930,10 +21939,10 @@
       "cat": "market",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -21977,11 +21986,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22001,10 +22010,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22047,11 +22056,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22078,10 +22087,10 @@
         "name": "Com Tam"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22162,7 +22171,9 @@
       "space_evidence": [
         "audit=indoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=indoor vs name=both"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -22233,7 +22244,9 @@
       "space_evidence": [
         "audit=indoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=indoor vs name=both"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -22353,11 +22366,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22384,10 +22397,10 @@
         "name": "Havelli"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22431,11 +22444,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22455,10 +22468,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22499,11 +22512,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22523,10 +22536,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22569,11 +22582,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22600,10 +22613,10 @@
         "name": "NgocLan Coffee"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22646,11 +22659,11 @@
       "verified": true,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22672,10 +22685,10 @@
       "cat": "market",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22718,11 +22731,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22742,10 +22755,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22788,11 +22801,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22812,10 +22825,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22856,11 +22869,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -22880,10 +22893,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -22968,7 +22981,9 @@
       "space_evidence": [
         "audit=indoor (human audit wins)"
       ],
-      "space_conflict": [],
+      "space_conflict": [
+        "audit=indoor vs name=both"
+      ],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -24480,7 +24495,7 @@
       "smart_tags": {
         "ticket": true,
         "price_band": "cheap",
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -24510,7 +24525,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (nha hang, ca phe, khach san) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (cho) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -24626,7 +24641,7 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -24638,7 +24653,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -24673,7 +24688,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -24720,7 +24735,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -24757,7 +24772,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25107,7 +25122,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -25143,7 +25158,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25260,7 +25275,7 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
@@ -25295,10 +25310,10 @@
       },
       "hours_source": "rule_open_access",
       "cat": "beach",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=beach -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) bai tam"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25341,11 +25356,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -25372,10 +25387,10 @@
         "name": "Bún Mắm Vân"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25419,11 +25434,11 @@
       "verified": false,
       "intensity_source": "canonical_rule",
       "io_label": null,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -25450,10 +25465,10 @@
         "name": "Huệ Chi"
       },
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25624,13 +25639,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -25656,7 +25671,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25760,13 +25775,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -25792,7 +25807,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -25828,13 +25843,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -25860,7 +25875,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26298,13 +26313,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26330,7 +26345,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26366,13 +26381,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26398,7 +26413,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26434,13 +26449,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26466,7 +26481,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26502,13 +26517,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26534,7 +26549,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26842,13 +26857,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26874,7 +26889,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26910,13 +26925,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -26942,7 +26957,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -26978,13 +26993,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -27010,7 +27025,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -27046,13 +27061,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -27078,7 +27093,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -27114,13 +27129,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -27146,7 +27161,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -27252,12 +27267,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -27277,10 +27292,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -27322,7 +27337,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -27348,7 +27363,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical cat=landmark is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "canonical type/tags (tuong dai) -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -27997,13 +28012,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -28029,7 +28044,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -28065,13 +28080,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -28097,7 +28112,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -29475,12 +29490,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -29503,10 +29518,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "landmark",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=landmark is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) dai tuong niem"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -29609,13 +29624,13 @@
       "dur_confidence": "low",
       "intensity": 2,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -29640,7 +29655,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -29682,7 +29697,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -29705,7 +29720,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "canonical type/tags (cho) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -30077,12 +30092,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -30108,10 +30123,10 @@
           "Mo-Su 05:00-18:00"
         ]
       },
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -30223,12 +30238,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -30248,10 +30263,10 @@
       },
       "smart_tag_source": "rule_v1+curated",
       "cat": "market",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=market is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -30355,13 +30370,13 @@
       "dur_confidence": "low",
       "intensity": 1,
       "intensity_source": "canonical_rule",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -30387,7 +30402,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -30827,12 +30842,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -30855,10 +30870,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "landmark",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=landmark is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) memorial"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31454,12 +31469,12 @@
       "intensity": 1,
       "intensity_source": "canonical_rule",
       "weather_sensitive": true,
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "outdoor",
         "party": [
           "family",
           "couple",
@@ -31482,10 +31497,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "landmark",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=landmark is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name outdoor keyword(s) tuong dai"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31520,7 +31535,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31533,7 +31548,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31561,7 +31576,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31594,7 +31609,7 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31607,7 +31622,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31632,7 +31647,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31665,7 +31680,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31678,7 +31693,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31704,7 +31719,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31739,7 +31754,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31752,7 +31767,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31778,7 +31793,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31815,7 +31830,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31828,7 +31843,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31854,7 +31869,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31887,7 +31902,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31900,7 +31915,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31926,7 +31941,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -31959,7 +31974,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -31972,7 +31987,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -31998,7 +32013,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32036,7 +32051,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32049,7 +32064,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32075,7 +32090,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32112,7 +32127,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32125,7 +32140,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32151,7 +32166,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32184,7 +32199,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32197,7 +32212,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32223,7 +32238,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32256,7 +32271,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32269,7 +32284,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32295,7 +32310,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32328,7 +32343,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32341,7 +32356,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32367,7 +32382,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32400,7 +32415,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32413,7 +32428,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32439,7 +32454,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32487,7 +32502,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32513,7 +32528,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (nha tho) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (nha tho) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32546,7 +32561,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32559,7 +32574,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32585,7 +32600,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32618,7 +32633,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32631,7 +32646,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32657,7 +32672,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) nha tho"
+        "name compound keyword(s) nha tho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32690,7 +32705,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32703,7 +32718,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32729,7 +32744,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32763,7 +32778,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32776,7 +32791,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32802,7 +32817,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32838,7 +32853,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32851,7 +32866,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32877,7 +32892,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32912,7 +32927,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32925,7 +32940,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -32951,7 +32966,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -32984,7 +32999,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -32997,7 +33012,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33023,7 +33038,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33070,7 +33085,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33096,7 +33111,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33129,7 +33144,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33142,7 +33157,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33168,7 +33183,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33202,7 +33217,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33215,7 +33230,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33241,7 +33256,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33276,7 +33291,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33289,7 +33304,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33317,7 +33332,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33350,7 +33365,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33363,7 +33378,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33389,7 +33404,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33422,7 +33437,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33435,7 +33450,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33461,7 +33476,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33494,7 +33509,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33507,7 +33522,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -33533,7 +33548,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -33931,7 +33946,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -33944,7 +33959,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -33966,13 +33981,11 @@
       "cat": "lodging",
       "price_note": "~300.000đ (khoảng 12 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34143,7 +34156,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34156,7 +34169,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34178,13 +34191,11 @@
       "cat": "lodging",
       "price_note": "~1.075.000đ (khoảng 43 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34215,7 +34226,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34228,7 +34239,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34250,13 +34261,11 @@
       "cat": "lodging",
       "price_note": "~975.000đ (khoảng 39 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel, spa beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel, spa) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34287,7 +34296,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34300,7 +34309,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34322,13 +34331,11 @@
       "cat": "lodging",
       "price_note": "~950.000đ (khoảng 38 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34646,7 +34653,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34659,7 +34666,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34681,13 +34688,11 @@
       "cat": "lodging",
       "price_note": "~725.000đ (khoảng 29 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) plaza -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (plaza) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34718,7 +34723,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34731,7 +34736,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34753,13 +34758,11 @@
       "cat": "lodging",
       "price_note": "~900.000đ (khoảng 36 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -34931,7 +34934,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -34944,7 +34947,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -34966,13 +34969,11 @@
       "cat": "lodging",
       "price_note": "~1.025.000đ (khoảng 41 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -35224,7 +35225,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -35237,7 +35238,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -35259,13 +35260,11 @@
       "cat": "lodging",
       "price_note": "~4.375.000đ (khoảng 175 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) resort beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (resort) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -35298,7 +35297,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -35311,7 +35310,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -35333,13 +35332,11 @@
       "cat": "lodging",
       "price_note": "~750.000đ (khoảng 30 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) resort beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (resort) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -35671,7 +35668,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -35684,7 +35681,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "expensive",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -35706,13 +35703,11 @@
       "cat": "lodging",
       "price_note": "~2.300.000đ (khoảng 92 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) resort beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (resort) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -37177,7 +37172,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -37190,7 +37185,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "solo"
@@ -37209,13 +37204,11 @@
       "smart_tag_source": "rule_v1",
       "cat": "spa",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) spa beat descriptive outdoor keyword(s) song -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (spa) + outdoor (song) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -37396,12 +37389,12 @@
       "verified": false,
       "crawl_query": "chợ đêm Đà Nẵng",
       "intensity_source": "canonical_rule",
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -37423,10 +37416,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "attraction",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=attraction is ambiguous -> unknown [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -37468,12 +37461,12 @@
       "verified": false,
       "crawl_query": "chợ đêm Đà Nẵng",
       "intensity_source": "canonical_rule",
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -37495,10 +37488,10 @@
       },
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name compound keyword(s) cho -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -41022,7 +41015,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -41035,7 +41028,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -41057,13 +41050,11 @@
       "cat": "lodging",
       "price_note": "~425.000đ (khoảng 17 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -41304,7 +41295,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -41317,7 +41308,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "family",
           "couple"
@@ -41339,13 +41330,11 @@
       "cat": "lodging",
       "price_note": "~300.000đ (khoảng 12 US$)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (hotel) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -46311,7 +46300,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -46324,7 +46313,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "solo"
@@ -46343,13 +46332,11 @@
       "smart_tag_source": "rule_v1",
       "cat": "spa",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name indoor keyword(s) spa"
       ],
-      "space_conflict": [
-        "name has indoor (spa) + outdoor (dao) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -48610,7 +48597,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -48623,7 +48610,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "group"
@@ -48644,13 +48631,11 @@
       "smart_tag_source": "rule_v1",
       "cat": "bar",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) restaurant, bar beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (restaurant, bar) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -49701,7 +49686,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -49714,7 +49699,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "group"
@@ -49736,13 +49721,11 @@
       "cat": "bar",
       "price_note": "~300.000đ (khoảng 100-500 N ₫)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) bar beat descriptive outdoor keyword(s) beach -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (bar) + outdoor (beach) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -50218,7 +50201,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": true,
+      "weather_sensitive": false,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -50231,7 +50214,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "unknown",
+        "space": "indoor",
         "party": [
           "couple",
           "group"
@@ -50253,13 +50236,11 @@
       "cat": "bar",
       "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
       "space_source": "name",
-      "space_confidence": 0.3,
+      "space_confidence": 0.6,
       "space_evidence": [
-        "name keywords conflict -> unknown"
+        "name venue keyword(s) karaoke beat descriptive outdoor keyword(s) song -> indoor"
       ],
-      "space_conflict": [
-        "name has indoor (karaoke) + outdoor (song) keywords"
-      ],
+      "space_conflict": [],
       "rain_protection": "unknown",
       "rain_protection_source": "unknown",
       "rain_protection_confidence": 0.4,
@@ -50501,7 +50482,7 @@
       ],
       "intensity": 2,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -50514,7 +50495,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -50539,7 +50520,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) coffee"
+        "name compound keyword(s) beer garden -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -50940,7 +50921,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "group"
@@ -50963,7 +50944,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (bar, karaoke) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (cho) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -51867,12 +51848,12 @@
       "verified": false,
       "crawl_query": "quán bar Thanh Khê",
       "intensity_source": "canonical_rule",
-      "ws_source": "classifier_canonical",
+      "ws_source": "classifier_name",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -51895,10 +51876,10 @@
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
       "price_note": "~250.000đ (khoảng 200-300 N ₫)",
-      "space_source": "canonical",
-      "space_confidence": 0.4,
+      "space_source": "name",
+      "space_confidence": 0.6,
       "space_evidence": [
-        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "name compound keyword(s) beer garden -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52307,12 +52288,12 @@
       "verified": false,
       "crawl_query": "quán bar Thanh Khê",
       "intensity_source": "canonical_rule",
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_canonical",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
         "price_band": "medium",
-        "space": "outdoor",
+        "space": "indoor",
         "party": [
           "family",
           "couple",
@@ -52335,10 +52316,10 @@
       "smart_tag_source": "rule_v1",
       "cat": "restaurant",
       "price_note": "~250.000đ (khoảng 200-300 N ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "canonical",
+      "space_confidence": 0.4,
       "space_evidence": [
-        "name outdoor keyword(s) cau"
+        "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52523,7 +52504,7 @@
       "verified": false,
       "crawl_query": "quán bar Thanh Khê",
       "intensity_source": "canonical_rule",
-      "ws_source": "classifier_name",
+      "ws_source": "classifier_canonical",
       "io_label": null,
       "smart_tags": {
         "ticket": false,
@@ -52551,10 +52532,10 @@
       "smart_tag_source": "rule_v1",
       "cat": "park",
       "price_note": "~350.000đ (khoảng 100-600 N ₫)",
-      "space_source": "name",
-      "space_confidence": 0.6,
+      "space_source": "canonical",
+      "space_confidence": 0.4,
       "space_evidence": [
-        "name outdoor keyword(s) cau"
+        "canonical cat=park -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52754,7 +52735,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -52780,7 +52761,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52828,7 +52809,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -52854,7 +52835,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52900,7 +52881,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -52926,7 +52907,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -52959,7 +52940,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -52972,7 +52953,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -52998,7 +52979,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53031,7 +53012,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53044,7 +53025,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53070,7 +53051,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53103,7 +53084,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53116,7 +53097,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53142,7 +53123,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53175,7 +53156,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53188,7 +53169,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53214,7 +53195,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53247,7 +53228,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53260,7 +53241,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53286,7 +53267,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53321,7 +53302,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53334,7 +53315,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53360,7 +53341,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53393,7 +53374,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53406,7 +53387,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53432,7 +53413,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53465,7 +53446,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53478,7 +53459,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53504,7 +53485,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53537,7 +53518,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53550,7 +53531,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53576,7 +53557,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53622,7 +53603,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53648,7 +53629,7 @@
       "space_source": "canonical",
       "space_confidence": 0.4,
       "space_evidence": [
-        "canonical type/tags (chua) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+        "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53681,7 +53662,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53694,7 +53675,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53720,7 +53701,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53753,7 +53734,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53766,7 +53747,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53792,7 +53773,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53825,7 +53806,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53838,7 +53819,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53864,7 +53845,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53897,7 +53878,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53910,7 +53891,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -53936,7 +53917,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -53969,7 +53950,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -53982,7 +53963,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -54008,7 +53989,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -54041,7 +54022,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -54054,7 +54035,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -54080,7 +54061,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -54113,7 +54094,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -54126,7 +54107,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -54152,7 +54133,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
@@ -54187,7 +54168,7 @@
       ],
       "intensity": 1,
       "ambience": "",
-      "weather_sensitive": false,
+      "weather_sensitive": true,
       "pros": [],
       "cons": [],
       "source": "serpapi/google-maps",
@@ -54200,7 +54181,7 @@
       "smart_tags": {
         "ticket": false,
         "price_band": null,
-        "space": "indoor",
+        "space": "both",
         "party": [
           "family",
           "couple",
@@ -54226,7 +54207,7 @@
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
-        "name indoor keyword(s) chua"
+        "name compound keyword(s) chua -> both"
       ],
       "space_conflict": [],
       "rain_protection": "unknown",
