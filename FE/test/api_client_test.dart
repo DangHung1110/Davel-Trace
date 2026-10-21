@@ -192,6 +192,42 @@ void main() {
     client.close();
   });
 
+  test('itinerary prefers BE preference key over legacy preference_score',
+      () async {
+    Future<Itinerary> decode(Map<String, Object?> plan) async {
+      final client = ApiClient(
+        baseUrl: 'http://be.test/v1',
+        httpClient: MockClient((request) async {
+          return http.Response(
+            jsonEncode(<String, Object?>{
+              'selected': null,
+              'plans': <Object?>[plan],
+            }),
+            200,
+          );
+        }),
+      );
+      final result = await client.createItinerary(
+        trip: TripRequest(),
+        profiles: const <String>['balanced'],
+      );
+      client.close();
+      return result.plans.single;
+    }
+
+    final current = await decode(<String, Object?>{
+      'itinerary_id': 'it-1',
+      'preference': 3.8,
+    });
+    expect(current.preferenceScore, 3.8);
+
+    final legacy = await decode(<String, Object?>{
+      'itinerary_id': 'it-2',
+      'preference_score': 2.5,
+    });
+    expect(legacy.preferenceScore, 2.5);
+  });
+
   test('non-2xx envelope becomes a typed ApiException', () async {
     final client = ApiClient(
       baseUrl: 'http://be.test/v1',

@@ -62,6 +62,13 @@ class ApiClient {
   void close() => _http.close();
 
   // ---------------------------------------------------------------------------
+  // 0. GET /health (liveness + snapshot identity)
+  // ---------------------------------------------------------------------------
+
+  /// Service liveness. Returns `{status, snapshot}`.
+  Future<Map<String, Object?>> health() => _get('/health');
+
+  // ---------------------------------------------------------------------------
   // 1. POST /parse
   // ---------------------------------------------------------------------------
 
@@ -112,11 +119,16 @@ class ApiClient {
   Future<ReplanResult> replan({
     required String itineraryId,
     required Map<String, Object?> event,
+    List<String> completed = const <String>[],
   }) async {
-    final json = await _post('/replan', <String, Object?>{
+    final body = <String, Object?>{
       'itinerary_id': itineraryId,
       'event': event,
-    });
+    };
+    if (completed.isNotEmpty) {
+      body['completed'] = completed;
+    }
+    final json = await _post('/replan', body);
     return ReplanResult.fromJson(json);
   }
 
@@ -689,7 +701,9 @@ class Itinerary {
       totalKm: _asDouble(source['total_km']),
       totalMin: _asInt(source['total_min']),
       constraintStatus: _asObjectMap(source['constraint_status']),
-      preferenceScore: _asDouble(source['preference_score']),
+      preferenceScore: _asDouble(
+        source['preference'] ?? source['preference_score'],
+      ),
       explanation: _asList(source['explanation'])
           .map((item) => Explanation.fromJson(_asMap(item)))
           .toList(growable: false),
