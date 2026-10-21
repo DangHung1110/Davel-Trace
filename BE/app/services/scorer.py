@@ -2,7 +2,7 @@
 
 score_transition(a, b, user, ctx) -> float (positive: a->b preferred).
 Backend: LightGBM BE/ml/patm/model.txt when present. Features come from
-the lane-A T026+T062 extractor (17 features) when that module is
+the lane-A T026+T062+T063b extractor (21 features) when that module is
 importable; the in-file STUB mirror (`_STUB_FEATURE_NAMES`, 16 features)
 is the fallback in a clean checkout. A width guard compares the loaded
 booster's feature count

@@ -1,8 +1,8 @@
 {
-  "pairs": 2151,
-  "snapshot_n": 764,
-  "sources": "1000 rule + 973 qwen3-8b + 178 human",
-  "cv_acc": 0.793,
-  "held_acc": 0.777,
-  "flip": 0.728
+  "cv_acc": 0.7818758682779194,
+  "cv_folds": 5,
+  "held_acc": 0.7768115942028986,
+  "held_n": 345,
+  "flip_consistency": 0.736231884057971,
+  "model": "BE/ml/patm/model.txt"
 }
