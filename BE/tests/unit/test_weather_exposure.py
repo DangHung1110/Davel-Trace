@@ -26,8 +26,10 @@ sys.path.insert(0, REPO_ROOT)
 from BE.ml.data.enrich_snapshot import (  # noqa: E402
     EXPOSURE_JSON,
     EXPOSURE_MD,
+    build_osm_by_poi,
     enrich,
     exposure_distribution,
+    load_osm_cache,
     parse_audit,
     write_reports,
 )
@@ -109,6 +111,54 @@ class TestDeriveExposure(unittest.TestCase):
                 self.assertLessEqual(exp[key], 1.0, (case, key))
             self.assertIn(exp["rain_cover"],
                           ("enclosed", "covered", "mixed", "open", "unknown"))
+
+
+class TestOsmCacheJoin(unittest.TestCase):
+    def _write_cache(self, directory: str, payload) -> str:
+        path = os.path.join(directory, "osm.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False)
+        return path
+
+    def test_join_requires_name_match_not_proximity(self):
+        pois = [
+            {"poi_id": "a", "name": "Bãi biển Mỹ Khê", "cat": "beach",
+             "osm_evidence": {"osm": "node/1", "dist_m": 8.0}},
+            {"poi_id": "b", "name": "Chợ Hàn", "cat": "market",
+             "osm_evidence": {"osm": "node/2", "dist_m": 9.0}},
+        ]
+        elements = [
+            {"type": "node", "id": 1, "tags": {"name": "Bãi biển Mỹ Khê",
+                                               "natural": "beach"}},
+            {"type": "node", "id": 2, "tags": {"name": "CaPhe Huy",
+                                               "amenity": "cafe"}},
+        ]
+        by_poi = build_osm_by_poi(pois, elements)
+        self.assertEqual(set(by_poi), {"a"})
+        self.assertTrue(by_poi["a"]["name_linked"])
+
+    def test_osm_space_path_fires_with_cache(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = self._write_cache(tmp, {"elements": [
+                {"type": "node", "id": 1,
+                 "tags": {"name": "Bãi biển Mỹ Khê", "natural": "beach"}},
+            ]})
+            elements = load_osm_cache(cache)
+        pois = [{"poi_id": "a", "name": "Bãi biển Mỹ Khê", "cat": "beach",
+                 "osm_evidence": {"osm": "node/1"}}]
+        report = enrich(pois, {}, build_osm_by_poi(pois, elements))
+        self.assertEqual(pois[0]["space_source"], "osm")
+        self.assertEqual(report["space_sources"].get("osm"), 1)
+        self.assertEqual(report["osm_evidence_linked"], 1)
+
+    def test_cache_accepts_bare_element_list(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = self._write_cache(tmp, [
+                {"type": "node", "id": 7, "tags": {"natural": "beach"}},
+            ])
+            elements = load_osm_cache(cache)
+        self.assertEqual(len(elements), 1)
+        self.assertEqual(elements[0]["id"], 7)
 
 
 class TestSnapshotExposureDistribution(unittest.TestCase):

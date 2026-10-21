@@ -236,7 +236,6 @@ class TestSpaceRules(unittest.TestCase):
 
     def test_ambiguous_attraction_market_landmark_are_unknown(self):
         for name, cat in (("Điểm tham quan", "attraction"),
-                          ("Chợ Hàn", "market"),
                           ("Landmark Đà Nẵng", "landmark")):
             r = sample(name=name, cat=cat)
             self.assertEqual((r["space"], r["space_source"]),
@@ -244,6 +243,10 @@ class TestSpaceRules(unittest.TestCase):
             self.assertEqual(r["space_confidence"], 0.4)
             self.assertEqual(r["rain_protection"], "unknown")
             self.assertTrue(r["weather_sensitive"])
+
+        # A market hall is roofed but open-sided: both, never unknown/outdoor.
+        r = sample(name="Chợ Hàn", cat="market")
+        self.assertEqual((r["space"], r["space_source"]), ("both", "name"))
 
     def test_no_blanket_indoor_default(self):
         r = classify_poi({})
@@ -279,6 +282,56 @@ class TestSpaceRules(unittest.TestCase):
                          osm=osm({"covered": "yes"}, typ="node"))
         self.assertEqual((r["space"], r["rain_protection"]),
                          ("both", "sheltered"))
+
+
+class TestVietnameseNameMatching(unittest.TestCase):
+    """QA regressions: accent-only look-alikes and compound/brand names."""
+
+    def test_address_and_brand_words_do_not_flip_cafes_or_hotels(self):
+        cases = (
+            ("Coffee Trà, 51 Lý Đạo Thành, Mân Thái", "cafe"),
+            ("Tiệm cà phê Cậu Út", "cafe"),
+            ("Seavitel Beach Hotel - DaNang", "lodging"),
+        )
+        for name, cat in cases:
+            r = sample(name=name, cat=cat)
+            self.assertEqual((r["space"], r["space_source"]),
+                             ("indoor", "name"), name)
+
+    def test_fresh_vs_river_and_market_hall(self):
+        r = sample(name="Chợ hải sản tươi sống biển Thanh Khê", cat="market")
+        self.assertEqual((r["space"], r["space_source"]), ("both", "name"))
+        self.assertEqual(r["space_confidence"], 0.6)
+
+    def test_beer_garden_is_both(self):
+        r = sample(name="MÊ Ê Ê Beer Garden - 316 Hà Huy Tập", cat="bar")
+        self.assertEqual((r["space"], r["space_source"]), ("both", "name"))
+
+    def test_pagoda_and_church_compounds_are_both(self):
+        for name, cat in (("Chùa An Long", "landmark"),
+                          ("Nhà Thờ Giáo Xứ Hòa Thuận", "landmark"),
+                          ("Chùa Hương Sơn", "landmark")):
+            r = sample(name=name, cat=cat)
+            self.assertEqual((r["space"], r["space_source"]),
+                             ("both", "name"), name)
+
+    def test_decisive_landmark_and_beach_names(self):
+        for name, cat, want in (
+                ("Bãi Tắm Non Nước", "attraction", "outdoor"),
+                ("Memorial to the victims of Flight 229", "landmark", "outdoor"),
+                ("Tượng đài Dũng sĩ Điện Ngọc", "landmark", "outdoor")):
+            r = sample(name=name, cat=cat)
+            self.assertEqual((r["space"], r["space_source"]),
+                             (want, "name"), name)
+
+    def test_accent_guard_is_not_fooled_by_unaccented_lookalikes(self):
+        from BE.ml.weather_label.labeler import _has_kw  # noqa: PLC0415
+        self.assertTrue(_has_kw("Đảo Cù Lao Chàm", "dao"))
+        self.assertFalse(_has_kw("51 Lý Đạo Thành", "dao"))
+        self.assertTrue(_has_kw("Cầu Rồng", "cau"))
+        self.assertFalse(_has_kw("Tiệm cà phê Cậu Út", "cau"))
+        self.assertTrue(_has_kw("Sông Hàn", "song"))
+        self.assertFalse(_has_kw("hải sản tươi sống", "song"))
 
 
 class TestConflict(unittest.TestCase):

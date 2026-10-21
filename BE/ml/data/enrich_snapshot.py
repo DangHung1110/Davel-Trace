@@ -23,7 +23,10 @@ CLI
 ---
   python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 --check
   python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 \
-      --osm-json path/to/osm_by_poi.json --apply
+      --osm-cache %TEMP%/opencode/osm/danang.json --apply
+
+``--osm-cache`` joins a raw Overpass export (name-matched only) so the OSM
+evidence path can actually fire; ``--osm-json`` remains for prebuilt maps.
 
 ``--check`` is read-only.  ``--apply`` writes ``pois.json``,
 ``RELABEL_REPORT.json``, ``RELABEL_REPORT.md``, ``weather_review_200.json``,
@@ -48,7 +51,11 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from BE.ml.weather_label.labeler import EXPOSURE_FIELDS, classify_poi  # noqa: E402
+from BE.ml.weather_label.labeler import (  # noqa: E402
+    EXPOSURE_FIELDS,
+    classify_poi,
+    fold_text,
+)
 
 TOOL_VERSION = "t063b-weather-exposure-v1"
 REVIEW_LIMIT = 200
@@ -396,6 +403,7 @@ def enrich(pois: list[dict], audit: dict[str, str],
         "total": len(pois),
         "audit_labels": n_audit,
         "preserved_audit": n_preserved_audit,
+        "osm_evidence_linked": len(osm_by_poi or {}),
         "space_transitions": dict(sorted(transitions.items())),
         "rain_transitions": dict(sorted(rain_transitions.items())),
         "space_sources": dict(sorted(sources.items())),
@@ -518,6 +526,56 @@ def parse_osm_json(path: str) -> dict:
     return by_poi
 
 
+def load_osm_cache(path: str) -> list[dict]:
+    """Load a raw Overpass export (``{"elements": [...]}`` or a list)."""
+    with open(path, encoding="utf-8") as f:
+        raw = json.load(f)
+    if isinstance(raw, dict):
+        elements = raw.get("elements", [])
+    elif isinstance(raw, list):
+        elements = raw
+    else:
+        raise ValueError("--osm-cache must contain OSM elements")
+    return [el for el in elements if isinstance(el, dict)]
+
+
+def build_osm_by_poi(pois: list[dict], elements: list[dict]) -> dict:
+    """Join raw OSM elements to POIs by the snapshot's matched OSM ref.
+
+    Linking is accepted ONLY on an exact folded-name match.  The snapshot's
+    ``osm_evidence`` is distance-only, and proximity alone must never be
+    treated as evidence (e.g. a market matched to a nearby cafe).  Elements
+    without tags are ignored.
+    """
+    index = {}
+    for el in elements:
+        if el.get("id") is None:
+            continue
+        index[f"{el.get('type', 'node')}/{el['id']}"] = el
+
+    by_poi: dict = {}
+    for poi in pois:
+        if not isinstance(poi, dict):
+            continue
+        evidence = poi.get("osm_evidence")
+        ref = evidence.get("osm") if isinstance(evidence, dict) else None
+        el = index.get(ref)
+        if not isinstance(el, dict):
+            continue
+        tags = el.get("tags")
+        if not isinstance(tags, dict) or not tags:
+            continue
+        poi_name = fold_text(poi.get("name", ""))
+        osm_names = {fold_text(tags.get(key))
+                     for key in ("name", "name:en", "alt_name",
+                                 "official_name")
+                     if tags.get(key)}
+        if not poi_name or poi_name not in osm_names:
+            continue
+        by_poi[poi.get("poi_id")] = {"element": el, "name_linked": True}
+    return by_poi
+
+
 def write_reports(snapshot: str, report: dict,
                   generated_at: str) -> dict:
     """Write the relabel report, review rows and exposure distribution."""
@@ -568,7 +626,8 @@ def apply_snapshot(snapshot: str, audit: dict[str, str],
 def _print_check(report: dict) -> None:
     print(f"tool={report['tool_version']} total={report['total']} "
           f"audit_labels={report['audit_labels']} "
-          f"preserved_audit={report['preserved_audit']}")
+          f"preserved_audit={report['preserved_audit']} "
+          f"osm_evidence_linked={report['osm_evidence_linked']}")
     print("space transitions:")
     for key, value in report["space_transitions"].items():
         print(f"  {key}: {value}")
@@ -599,6 +658,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--snapshot", required=True)
     ap.add_argument("--osm-json")
+    ap.add_argument("--osm-cache")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--apply", action="store_true")
@@ -610,7 +670,15 @@ def main(argv: list[str] | None = None) -> int:
         data = json.load(f)
     audit = parse_audit(os.path.join(snapshot, "SPOT_CHECK.md"))
     osm_by_poi = parse_osm_json(args.osm_json) if args.osm_json else None
-    print(f"pois={len(data['pois'])} audit_labels={len(audit)}")
+    if args.osm_cache:
+        elements = load_osm_cache(args.osm_cache)
+        joined = build_osm_by_poi(data["pois"], elements)
+        if not osm_by_poi:
+            osm_by_poi = joined
+        else:
+            osm_by_poi = {**joined, **osm_by_poi}
+    print(f"pois={len(data['pois'])} audit_labels={len(audit)} "
+          f"osm_evidence={len(osm_by_poi or {})}")
 
     if args.check:
         # Dry run: never mutate the loaded snapshot or write reports.

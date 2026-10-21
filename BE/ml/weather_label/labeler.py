@@ -220,6 +220,11 @@ def _norm(s: str) -> str:
     return "".join(c for c in s if unicodedata.category(c) != "Mn").replace("đ", "d")
 
 
+def fold_text(s: str) -> str:
+    """Public alias of the accent-folding normalizer (name joins)."""
+    return _norm(s)
+
+
 def featurize(el: dict, dn_category: str = "") -> dict:
     """Feature dict for one OSM element (+ optional DN category)."""
     tags = el.get("tags", {}) if isinstance(el, dict) else {}
@@ -293,10 +298,11 @@ _NAME_INDOOR = (
     "gallery", "aquarium", "nha hat",
 )
 _NAME_OUTDOOR = (
-    "bai bien", "beach", "cong vien", "park", "nui", "mountain", "dao", "island",
-    "thac", "waterfall", "quang truong", "square", "plaza", "cau", "bridge",
-    "song", "river", "rung", "forest", "deo", "pass", "duong dao", "promenade",
-    "ben tau", "hang dong", "cave",
+    "bai bien", "bai tam", "beach", "cong vien", "park", "nui", "mountain",
+    "dao", "island", "thac", "waterfall", "quang truong", "square", "plaza",
+    "cau", "bridge", "song", "river", "rung", "forest", "deo", "pass",
+    "duong dao", "promenade", "ben tau", "hang dong", "cave", "memorial",
+    "dai tuong niem", "tuong dai",
 )
 _NAME_SUN_ONLY = (
     "pergola", "gian hoa", "parasol", "sun shade", "sun shelter", "umbrella",
@@ -305,6 +311,12 @@ _NAME_SUN_ONLY = (
 _NAME_AMBIGUOUS = (
     "diem tham quan", "khu du lich", "tham quan", "attraction", "landmark",
     "market", "cho dem", "cho dau moi",
+)
+#: Names that denote a compound with both indoor and outdoor visit space.
+#: Checked before indoor/outdoor so a pagoda/church/beer garden is not forced
+#: into a single space.
+_NAME_BOTH = (
+    "chua", "nha tho", "beer garden", "bia san vuon", "san vuon bia", "cho",
 )
 
 # Canonical snapshot categories (`poi["cat"]`).
@@ -360,10 +372,61 @@ def _as_bool(value) -> bool:
     return str(value).strip().lower() in {"yes", "true", "1", "y"}
 
 
+def _tokenize(text: str) -> list[tuple[str, str]]:
+    """Vietnamese-aware tokens as (NFC lowercase raw, accent-folded).
+
+    Keeping the raw token lets the matcher reject accent-only look-alikes such
+    as ``Đào`` (address) vs ``đảo`` (island) or ``sống`` (fresh) vs ``sông``
+    (river) that plain diacritic stripping would conflate.
+    """
+    raw_text = unicodedata.normalize("NFC", str(text or "").lower())
+    return [(m.group(0), _norm(m.group(0)))
+            for m in re.finditer(r"[^\W_]+", raw_text, re.UNICODE)]
+
+
+#: For single-word keywords whose folded form is ambiguous in Vietnamese,
+#: only these accented spellings may match.  Unaccented input still matches.
+_ACCENT_GUARD = {
+    "dao": {"đảo"},       # island, not Đào (address/person)
+    "cau": {"cầu"},       # bridge, not cậu/cấu
+    "song": {"sông"},     # river, not sống (fresh/live)
+    "bien": {"biển"},     # sea, not biên (border)
+    "nui": {"núi"},       # mountain, not nữa
+    "chua": {"chùa"},     # pagoda, not chứa/chua (sour)
+    "cho": {"chợ"},       # market, not cho (give)
+    "thac": {"thác"},     # waterfall, not thách
+    "suoi": {"suối"},     # stream, not suôi
+    "deo": {"đèo"},       # pass, not dẻo
+    "ho": {"hồ"},         # lake, not hô/hó
+    "dinh": {"đình"},     # communal house
+    "den": {"đền"},       # temple/shrine
+}
+
+
+def _accent_ok(raw: str, folded: str) -> bool:
+    allowed = _ACCENT_GUARD.get(folded)
+    if not allowed:
+        return True
+    return raw == folded or raw in allowed
+
+
 def _has_kw(text: str, kw: str) -> bool:
-    if " " in kw:
-        return kw in text
-    return re.search(r"(?<![a-z0-9])" + re.escape(kw) + r"(?![a-z0-9])", text) is not None
+    """Match a folded keyword against Vietnamese-aware word tokens.
+
+    Multi-word keywords match a contiguous folded token sequence; single-word
+    keywords additionally pass :func:`_accent_ok`.
+    """
+    kw_tokens = [t for t in _norm(kw).split() if t]
+    if not kw_tokens:
+        return False
+    tokens = _tokenize(text)
+    folded = [f for _, f in tokens]
+    if len(kw_tokens) == 1:
+        key = kw_tokens[0]
+        return any(f == key and _accent_ok(raw, f) for raw, f in tokens)
+    width = len(kw_tokens)
+    return any(folded[i:i + width] == kw_tokens
+               for i in range(len(folded) - width + 1))
 
 
 def _hit(text: str, words) -> list[str]:
@@ -376,7 +439,8 @@ def _tag_dict(el: dict) -> dict:
 
 
 def _poi_name(poi: dict) -> str:
-    return _norm(poi.get("name") or poi.get("name_en") or "")
+    """Original (accent-preserving) name, used for Vietnamese-aware matching."""
+    return str(poi.get("name") or poi.get("name_en") or "")
 
 
 def _poi_anchor(poi: dict) -> tuple[float | None, float | None]:
@@ -721,7 +785,7 @@ def _scan_osm_rain(poi: dict, el: dict, meta: dict):
             f"OSM {osm_ref} {detail} ({location})", priority=3))
 
     sun_only = _sun_only_evidence(tags)
-    sun_name_hits = _hit(_norm(tags.get("name", "")), _NAME_SUN_ONLY)
+    sun_name_hits = _hit(str(tags.get("name", "")), _NAME_SUN_ONLY)
     sun_only.extend(f"name={hit}" for hit in sun_name_hits)
 
     sheltered_notes = []
@@ -816,6 +880,7 @@ def _analyse_name(poi: dict) -> dict:
     name = _poi_name(poi)
     indoor = _hit(name, _NAME_INDOOR)
     outdoor = _hit(name, _NAME_OUTDOOR)
+    both = _hit(name, _NAME_BOTH)
     sun = _hit(name, _NAME_SUN_ONLY)
     ambiguous = _hit(name, _NAME_AMBIGUOUS)
 
@@ -830,13 +895,18 @@ def _analyse_name(poi: dict) -> dict:
     evidence: list[str] = []
     conflicts: list[str] = []
 
-    if indoor and outdoor:
-        space = "unknown"
-        conf = CONF_CONFLICT
-        conflicts.append(
-            f"name has indoor ({', '.join(indoor)}) + outdoor "
-            f"({', '.join(outdoor)}) keywords")
-        evidence.append("name keywords conflict -> unknown")
+    if both:
+        space = "both"
+        evidence.append(f"name compound keyword(s) {', '.join(both)} -> both")
+    elif indoor and outdoor:
+        # A venue/establishment keyword names the visit space; an outdoor word
+        # in a business name (address `Đào`, brand `Beach Hotel`, proper name
+        # `Cầu Út`) is context, not a second space.  This is what used to turn
+        # clear cafes/hotels into `unknown`.
+        space = "indoor"
+        evidence.append(
+            f"name venue keyword(s) {', '.join(indoor)} beat descriptive "
+            f"outdoor keyword(s) {', '.join(outdoor)} -> indoor")
     elif indoor:
         space = "indoor"
         evidence.append(f"name indoor keyword(s) {', '.join(indoor)}")
@@ -860,6 +930,7 @@ def _canonical_hint(text: str) -> dict:
     return {
         "indoor": _hit(text, _NAME_INDOOR),
         "outdoor": _hit(text, _NAME_OUTDOOR),
+        "both": _hit(text, _NAME_BOTH),
         "ambiguous": _hit(text, _NAME_AMBIGUOUS),
     }
 
@@ -872,7 +943,7 @@ def _analyse_canonical(poi: dict) -> dict:
         parts.extend(str(t) for t in tags)
     elif isinstance(tags, dict):
         parts.extend(str(v) for v in tags.values())
-    text = _norm(" | ".join(str(p) for p in parts if p))
+    text = " | ".join(str(p) for p in parts if p)
     hint = _canonical_hint(text)
 
     space = "unknown"
@@ -887,16 +958,24 @@ def _analyse_canonical(poi: dict) -> dict:
         source_hint = f"canonical cat={cat}"
     elif cat in _CAT_AMBIGUOUS:
         # An otherwise-clear type may still resolve an ambiguous category
-        # (e.g. cat=attraction + type=Bãi biển).
-        if hint["indoor"] and not hint["outdoor"]:
+        # (e.g. cat=attraction + type=Bãi biển, cat=landmark + Tượng đài).
+        if hint["both"]:
+            space = "both"
+            source_hint = f"canonical type/tags ({', '.join(hint['both'])})"
+        elif hint["indoor"]:
+            # A venue keyword (cafe/hotel/pagoda compound...) decides, even if
+            # an outdoor word also appears in the type.
             space = "indoor"
             source_hint = f"canonical type/tags ({', '.join(hint['indoor'])})"
-        elif hint["outdoor"] and not hint["indoor"]:
+        elif hint["outdoor"]:
             space = "outdoor"
             source_hint = f"canonical type/tags ({', '.join(hint['outdoor'])})"
         else:
             space = "unknown"
             evidence = f"canonical cat={cat} is ambiguous -> unknown"
+    elif hint["both"]:
+        space = "both"
+        source_hint = f"canonical type/tags ({', '.join(hint['both'])})"
     elif hint["indoor"] and not hint["outdoor"] and not hint["ambiguous"]:
         space = "indoor"
         source_hint = f"canonical type/tags ({', '.join(hint['indoor'])})"
