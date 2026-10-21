@@ -689,7 +689,9 @@ class Itinerary {
       totalKm: _asDouble(source['total_km']),
       totalMin: _asInt(source['total_min']),
       constraintStatus: _asObjectMap(source['constraint_status']),
-      preferenceScore: _asDouble(source['preference_score']),
+      preferenceScore: _asDouble(
+        source['preference'] ?? source['preference_score'],
+      ),
       explanation: _asList(source['explanation'])
           .map((item) => Explanation.fromJson(_asMap(item)))
           .toList(growable: false),

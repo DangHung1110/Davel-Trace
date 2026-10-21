@@ -192,6 +192,45 @@ void main() {
     client.close();
   });
 
+  test('itinerary reads preference with preference_score fallback', () async {
+    final client = ApiClient(
+      baseUrl: 'http://be.test/v1',
+      httpClient: MockClient((request) async {
+        expect(request.method, 'POST');
+        expect(request.url.toString(), 'http://be.test/v1/itinerary');
+        return http.Response(
+          jsonEncode(<String, Object?>{
+            'selected': null,
+            'plans': <Object?>[
+              <String, Object?>{'itinerary_id': 'new', 'preference': 4.7},
+              <String, Object?>{
+                'itinerary_id': 'legacy',
+                'preference_score': 3.9,
+              },
+              <String, Object?>{
+                'itinerary_id': 'both',
+                'preference': 4.1,
+                'preference_score': 9.9,
+              },
+            ],
+          }),
+          200,
+        );
+      }),
+    );
+
+    final result = await client.createItinerary(
+      trip: TripRequest(),
+      profiles: const <String>['balanced'],
+    );
+
+    expect(result.plans[0].preferenceScore, 4.7);
+    expect(result.plans[1].preferenceScore, 3.9);
+    expect(result.plans[2].preferenceScore, 4.1);
+
+    client.close();
+  });
+
   test('non-2xx envelope becomes a typed ApiException', () async {
     final client = ApiClient(
       baseUrl: 'http://be.test/v1',
