@@ -8,6 +8,13 @@ Two layers live here:
   and audit-safe.  It accepts an optional human I/O/B audit + optional OSM
   element/geometry evidence and returns auditable space/rain fields.
 
+Additionally (T063b) `classify_poi` derives continuous exposure attributes
+(`outdoor_exposure`, `sun_exposure`, `wind_exposure`, `rain_cover`) with the
+precedence human audit > OSM evidence > canonical type default > unknown.  The
+old categorical `space`/`rain_protection` fields stay for compatibility, but
+the continuous fields are the signal PATM features consume.  Their 0..1 values
+are coarse rule anchors, NOT calibrated measurements.
+
 Confidence is a HEURISTIC, UNCALIBRATED rule strength -- NOT a probability and
 NOT an accuracy claim.  The real eval (macro-F1 >= 0.95 on human I/O/B labels)
 is still PENDING; no GBDT is trained or required by this module.
@@ -51,6 +58,132 @@ CONF_OSM = 0.7
 CONF_NAME = 0.6
 CONF_CANONICAL = 0.4
 CONF_CONFLICT = 0.3
+
+# ---------------------------------------------------------------------------
+# Continuous exposure attributes (T063b)
+# ---------------------------------------------------------------------------
+#: smart_tags fields replacing the dead low-variance space/rain labels as the
+#: signal PATM consumes.  The floats are coarse 0 (sheltered/none) .. 1 (fully
+#: exposed) ANCHORS, not measurements: no calibration claim is made.
+EXPOSURE_FIELDS = ("outdoor_exposure", "sun_exposure", "wind_exposure",
+                   "rain_cover")
+RAIN_COVER_LABELS = ("enclosed", "covered", "mixed", "open", "unknown")
+
+#: Canonical category -> (outdoor, sun, wind, rain_cover) coarse preset.
+#: Mixed-use categories (attraction/landmark/market) stay intermediate: they
+#: are never forced indoor or fully open.
+TYPE_EXPOSURE = {
+    "beach": (0.95, 0.95, 0.95, "open"),
+    "nature": (0.9, 0.8, 0.75, "open"),
+    "park": (0.85, 0.75, 0.6, "open"),
+    "landmark": (0.6, 0.55, 0.5, "mixed"),
+    "attraction": (0.55, 0.55, 0.45, "mixed"),
+    "market": (0.65, 0.5, 0.45, "mixed"),
+    "transport": (0.5, 0.5, 0.6, "mixed"),
+    "museum": (0.05, 0.05, 0.05, "enclosed"),
+    "restaurant": (0.15, 0.15, 0.15, "enclosed"),
+    "cafe": (0.2, 0.2, 0.2, "enclosed"),
+    "bar": (0.2, 0.15, 0.15, "enclosed"),
+    "spa": (0.05, 0.05, 0.05, "enclosed"),
+    "lodging": (0.1, 0.1, 0.1, "enclosed"),
+    "shop": (0.05, 0.05, 0.05, "enclosed"),
+}
+
+#: Coarse presets for the three evidence tiers.  "unknown" keeps the neutral
+#: 0.5 floats (a float cannot encode absence) and rain_cover="unknown".
+_AUDIT_EXPOSURE = {
+    "indoor": (0.05, 0.0, 0.0, "enclosed"),
+    "both": (0.5, 0.4, 0.4, "mixed"),
+    "outdoor": (0.95, 0.9, 0.95, "open"),
+}
+_OSM_SPACE_EXPOSURE = {
+    "indoor": (0.1, 0.05, 0.05, "enclosed"),
+    "both": (0.5, 0.45, 0.45, "mixed"),
+    "outdoor": (0.9, 0.85, 0.85, "open"),
+}
+_OSM_RAIN_EXPOSURE = {
+    "enclosed": (0.1, 0.05, 0.05, "enclosed"),
+    "sheltered": (0.7, 0.35, 0.45, "covered"),
+    "none": (0.9, 0.85, 0.85, "open"),
+}
+_OSM_RAIN_COVER = {"enclosed": "enclosed", "sheltered": "covered",
+                   "none": "open"}
+_NEUTRAL_EXPOSURE = (0.5, 0.5, 0.5, "unknown")
+
+
+def _resolve_exposure(tier: tuple) -> dict:
+    outdoor, sun, wind, rain = tier
+    return {"outdoor_exposure": round(float(outdoor), 3),
+            "sun_exposure": round(float(sun), 3),
+            "wind_exposure": round(float(wind), 3),
+            "rain_cover": rain}
+
+
+def type_exposure(cat: str) -> dict:
+    """Coarse exposure preset for a canonical category.
+
+    Used as the ``type default`` tier by :func:`derive_exposure` and by PATM
+    features when a POI has not been enriched yet.  Unknown categories return
+    the neutral 0.5/``unknown`` preset.
+    """
+    preset = TYPE_EXPOSURE.get(str(cat or "").strip().lower())
+    return _resolve_exposure(preset or _NEUTRAL_EXPOSURE)
+
+
+def derive_exposure(*, audit_space: str | None = None,
+                    osm_space: str | None = None,
+                    osm_rain: str | None = None,
+                    cat: str = "") -> dict:
+    """Derive continuous exposure attributes with a strict precedence.
+
+    ``human audit > OSM evidence > canonical type default > unknown``.
+
+    * ``outdoor_exposure`` / ``sun_exposure`` / ``wind_exposure`` are floats in
+      [0, 1]; ``unknown`` maps to the neutral 0.5 (a float cannot encode
+      absence).
+    * ``rain_cover`` is categorical: enclosed | covered | mixed | open |
+      unknown.
+    * Mixed-use categories (attraction/landmark/market) get intermediate
+      values; they are never forced indoor.
+    * ``rain_cover`` in {enclosed, covered} caps sun/wind exposure, because a
+      roof blocks both.
+    """
+    source = "unknown"
+    audit_space = str(audit_space or "").strip().lower()
+    osm_space = str(osm_space or "").strip().lower()
+    osm_rain = str(osm_rain or "").strip().lower()
+
+    if audit_space in _AUDIT_EXPOSURE:
+        base = _resolve_exposure(_AUDIT_EXPOSURE[audit_space])
+        source = "audit"
+    elif osm_space in _OSM_SPACE_EXPOSURE:
+        base = _resolve_exposure(_OSM_SPACE_EXPOSURE[osm_space])
+        source = "osm"
+    elif osm_rain in _OSM_RAIN_EXPOSURE:
+        base = _resolve_exposure(_OSM_RAIN_EXPOSURE[osm_rain])
+        source = "osm"
+    else:
+        preset = TYPE_EXPOSURE.get(str(cat or "").strip().lower())
+        if preset is None:
+            base = _resolve_exposure(_NEUTRAL_EXPOSURE)
+        else:
+            base = _resolve_exposure(preset)
+            source = "type"
+
+    # OSM rain evidence sharpens rain_cover unless a human audit already spoke.
+    if source != "audit" and osm_rain in _OSM_RAIN_COVER:
+        base["rain_cover"] = _OSM_RAIN_COVER[osm_rain]
+        source = "osm"
+
+    if base["rain_cover"] == "enclosed":
+        base["sun_exposure"] = min(base["sun_exposure"], 0.05)
+        base["wind_exposure"] = min(base["wind_exposure"], 0.1)
+    elif base["rain_cover"] == "covered":
+        base["sun_exposure"] = min(base["sun_exposure"], 0.25)
+        base["wind_exposure"] = min(base["wind_exposure"], 0.35)
+
+    return {**base, "exposure_source": source}
+
 
 _RAIN_PRIORITY = {"enclosed": 3, "sheltered": 2, "none": 1, "unknown": 0}
 _SOURCE_PRIORITY = {"audit": 4, "osm": 3, "name": 2, "canonical": 1, "unknown": 0}
@@ -850,7 +983,9 @@ def classify_poi(poi: dict, audit=None, osm=None, *, human_label=None,
         ``space``, ``space_source``, ``space_confidence``, ``space_evidence``,
         ``space_conflict``, ``rain_protection``, ``rain_protection_source``,
         ``rain_protection_confidence``, ``rain_protection_evidence``,
-        ``weather_sensitive`` and ``confidence_kind``.
+        ``weather_sensitive``, ``confidence_kind`` and the continuous
+        exposure fields ``outdoor_exposure``, ``sun_exposure``,
+        ``wind_exposure``, ``rain_cover`` plus ``exposure_source``.
 
     Confidence is HEURISTIC and UNCALIBRATED, not a probability.
     """
@@ -962,6 +1097,14 @@ def classify_poi(poi: dict, audit=None, osm=None, *, human_label=None,
             f"audit {audit_space} does not encode rain protection")
     rain_evidence.extend(rain_notes)
 
+    exposure = derive_exposure(
+        audit_space=audit_space,
+        osm_space=(osm_space or {}).get("label") if isinstance(osm_space, dict)
+        else None,
+        osm_rain=rain["label"] if rain["source"] == "osm" else None,
+        cat=canon_res["cat"],
+    )
+
     # Derived conservative weather sensitivity.
     if audit_space:
         weather_sensitive = audit_space != "indoor"
@@ -980,6 +1123,7 @@ def classify_poi(poi: dict, audit=None, osm=None, *, human_label=None,
         "rain_protection_evidence": rain_evidence,
         "weather_sensitive": bool(weather_sensitive),
         "confidence_kind": "heuristic_uncalibrated",
+        **exposure,
     }
 
 

@@ -118,7 +118,8 @@ class TestClassifyPoiSchema(unittest.TestCase):
             "space", "space_source", "space_confidence", "space_evidence",
             "space_conflict", "rain_protection", "rain_protection_source",
             "rain_protection_confidence", "rain_protection_evidence",
-            "weather_sensitive", "confidence_kind",
+            "weather_sensitive", "confidence_kind", "outdoor_exposure",
+            "sun_exposure", "wind_exposure", "rain_cover", "exposure_source",
         ):
             self.assertIn(key, r)
         self.assertIn(r["space"], ("indoor", "outdoor", "both", "unknown"))

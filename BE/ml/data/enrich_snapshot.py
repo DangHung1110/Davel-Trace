@@ -13,6 +13,9 @@ For every POI it:
 3. Stores classifier provenance (space/rain source, confidence, evidence,
    conflict) and updates ``smart_tags.space`` / ``smart_tags.rain_protection``.
    The legacy ``rain-proof`` time tag is removed.
+4. Writes the continuous T063b exposure attributes
+   (``outdoor_exposure``/``sun_exposure``/``wind_exposure``/``rain_cover``)
+   and an exposure distribution report with distinct counts + entropy.
 
 It deliberately does **not** modify intensity, duration, price or party tags.
 
@@ -23,8 +26,9 @@ CLI
       --osm-json path/to/osm_by_poi.json --apply
 
 ``--check`` is read-only.  ``--apply`` writes ``pois.json``,
-``RELABEL_REPORT.json``, ``RELABEL_REPORT.md`` and ``weather_review_200.json``
-into the snapshot directory.
+``RELABEL_REPORT.json``, ``RELABEL_REPORT.md``, ``weather_review_200.json``,
+``EXPOSURE_DISTRIBUTION.json`` and ``EXPOSURE_DISTRIBUTION.md`` into the
+snapshot directory.
 """
 
 from __future__ import annotations
@@ -32,6 +36,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import os
 import re
 import sys
@@ -43,13 +48,15 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from BE.ml.weather_label.labeler import classify_poi  # noqa: E402
+from BE.ml.weather_label.labeler import EXPOSURE_FIELDS, classify_poi  # noqa: E402
 
-TOOL_VERSION = "t063-weather-wiring-v1"
+TOOL_VERSION = "t063b-weather-exposure-v1"
 REVIEW_LIMIT = 200
 REVIEW_FILENAME = "weather_review_200.json"
 REPORT_JSON = "RELABEL_REPORT.json"
 REPORT_MD = "RELABEL_REPORT.md"
+EXPOSURE_JSON = "EXPOSURE_DISTRIBUTION.json"
+EXPOSURE_MD = "EXPOSURE_DISTRIBUTION.md"
 
 # Canonical -> (intensity, weather_sensitive).  These remain for the other
 # data-build helpers that import them; ``enrich()`` itself no longer writes
@@ -158,6 +165,48 @@ def _confidence_key(value) -> str:
         return str(value)
 
 
+def _exposure_key(value) -> str:
+    if value is None:
+        return "missing"
+    if isinstance(value, bool):
+        return str(value)
+    if isinstance(value, (int, float)):
+        return str(round(float(value), 3))
+    return str(value)
+
+
+def _entropy(counts: Counter) -> float:
+    """Shannon entropy in bits over the observed value buckets."""
+    total = sum(counts.values())
+    if total <= 0:
+        return 0.0
+    return round(-sum((count / total) * math.log2(count / total)
+                      for count in counts.values() if count), 4)
+
+
+def exposure_distribution(pois: list[dict]) -> dict:
+    """Per-field distinct count + entropy + histogram for the T063b fields.
+
+    A field with ``distinct <= 1`` (entropy 0) is dead signal; the companion
+    unit test fails if any new exposure field collapses on the snapshot.
+    """
+    out: dict = {}
+    for field in EXPOSURE_FIELDS:
+        counts: Counter = Counter()
+        for poi in pois:
+            if not isinstance(poi, dict):
+                continue
+            st = poi.get("smart_tags")
+            value = st.get(field) if isinstance(st, dict) else None
+            counts[_exposure_key(value)] += 1
+        out[field] = {
+            "distinct": len(counts),
+            "entropy_bits": _entropy(counts),
+            "values": dict(sorted(counts.items())),
+        }
+    return out
+
+
 def _priority(poi: dict, old_space: str, new_space: str) -> int:
     """Deterministic review ranking: changed outdoor first, rest last."""
     changed = old_space != new_space
@@ -232,8 +281,9 @@ def enrich(pois: list[dict], audit: dict[str, str],
            osm_by_poi: dict | None = None) -> dict:
     """Apply the T063 classifier to every POI in place.
 
-    Only weather fields and ``smart_tags.space``/``rain_protection``/``time``
-    are changed.  Returns a deterministic report used by the CLI and tests.
+    Only weather fields, ``smart_tags.space``/``rain_protection``/``time`` and
+    the T063b exposure fields are changed.  Returns a deterministic report used
+    by the CLI and tests.
     """
     transitions: Counter = Counter()
     sources: Counter = Counter()
@@ -288,6 +338,9 @@ def enrich(pois: list[dict], audit: dict[str, str],
 
         st["space"] = new_space
         st["rain_protection"] = new_rain
+        for field in EXPOSURE_FIELDS:
+            st[field] = result[field]
+        st["exposure_source"] = result["exposure_source"]
         time_tags = st.get("time")
         if isinstance(time_tags, (list, tuple)):
             st["time"] = [t for t in time_tags if t != "rain-proof"]
@@ -348,6 +401,7 @@ def enrich(pois: list[dict], audit: dict[str, str],
         "space_sources": dict(sorted(sources.items())),
         "space_confidence": dict(sorted(confidences.items())),
         "rain_distribution": dict(sorted(rain_dist.items())),
+        "exposure_distribution": exposure_distribution(pois),
         "conflict_ids": conflict_ids,
         "changed": changed,
         "changed_ids": [item["poi_id"] for item in changed],
@@ -426,6 +480,34 @@ def _markdown_report(report: dict, generated_at: str) -> str:
     return "\n".join(lines)
 
 
+def _exposure_markdown(report: dict, generated_at: str) -> str:
+    dist = report.get("exposure_distribution", {})
+    lines = [
+        "# Weather exposure distribution (T063b)",
+        "",
+        f"- Tool version: `{report.get('tool_version', TOOL_VERSION)}`",
+        f"- Generated (UTC): {generated_at}",
+        f"- POIs: {report.get('total', 0)}",
+        "- Values are coarse rule anchors (0 = sheltered/none, 1 = fully "
+        "exposed), not calibrated measurements.",
+        "",
+        "## Field summary",
+        "",
+        "| field | distinct | entropy (bits) |",
+        "|---|---|---|",
+    ]
+    for field in EXPOSURE_FIELDS:
+        stats = dist.get(field, {})
+        lines.append(f"| {field} | {stats.get('distinct', 0)} | "
+                     f"{stats.get('entropy_bits', 0.0)} |")
+    lines.append("")
+    for field in EXPOSURE_FIELDS:
+        stats = dist.get(field, {})
+        lines.extend(_md_count_table(f"{field} values",
+                                     stats.get("values", {})))
+    return "\n".join(lines)
+
+
 def parse_osm_json(path: str) -> dict:
     """Load ``{"by_poi": {poi_id: [elements...]}}`` (flat dict tolerated)."""
     with open(path, encoding="utf-8") as f:
@@ -438,10 +520,12 @@ def parse_osm_json(path: str) -> dict:
 
 def write_reports(snapshot: str, report: dict,
                   generated_at: str) -> dict:
-    """Write RELABEL_REPORT.json/.md and weather_review_200.json."""
+    """Write the relabel report, review rows and exposure distribution."""
     json_path = os.path.join(snapshot, REPORT_JSON)
     md_path = os.path.join(snapshot, REPORT_MD)
     review_path = os.path.join(snapshot, REVIEW_FILENAME)
+    exposure_json = os.path.join(snapshot, EXPOSURE_JSON)
+    exposure_md = os.path.join(snapshot, EXPOSURE_MD)
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
@@ -450,8 +534,16 @@ def write_reports(snapshot: str, report: dict,
     with open(review_path, "w", encoding="utf-8") as f:
         json.dump(report.get("review_rows", []), f,
                   ensure_ascii=False, indent=2)
+    with open(exposure_json, "w", encoding="utf-8") as f:
+        json.dump({"generated_at": generated_at,
+                   "exposure_distribution":
+                       report.get("exposure_distribution", {})},
+                  f, ensure_ascii=False, indent=2)
+    with open(exposure_md, "w", encoding="utf-8") as f:
+        f.write(_exposure_markdown(report, generated_at))
     return {"report_json": json_path, "report_md": md_path,
-            "review_json": review_path}
+            "review_json": review_path,
+            "exposure_json": exposure_json, "exposure_md": exposure_md}
 
 
 def apply_snapshot(snapshot: str, audit: dict[str, str],
@@ -488,6 +580,11 @@ def _print_check(report: dict) -> None:
                                            ensure_ascii=False, sort_keys=True))
     print("rain transitions:", json.dumps(report["rain_transitions"],
                                            ensure_ascii=False, sort_keys=True))
+    print("exposure distribution:")
+    for field, stats in report.get("exposure_distribution", {}).items():
+        print(f"  {field}: distinct={stats['distinct']} "
+              f"entropy={stats['entropy_bits']} "
+              f"values={json.dumps(stats['values'], ensure_ascii=False, sort_keys=True)}")
     conflicts = report["conflict_ids"]
     print(f"conflict_ids ({len(conflicts)}): "
           f"{', '.join(str(c) for c in conflicts[:30])}"
