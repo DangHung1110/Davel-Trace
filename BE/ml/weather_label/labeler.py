@@ -9,11 +9,12 @@ Two layers live here:
   element/geometry evidence and returns auditable space/rain fields.
 
 Additionally (T063b) `classify_poi` derives continuous exposure attributes
-(`outdoor_exposure`, `sun_exposure`, `wind_exposure`, `rain_cover`) with the
-precedence human audit > OSM evidence > canonical type default > unknown.  The
-old categorical `space`/`rain_protection` fields stay for compatibility, but
-the continuous fields are the signal PATM features consume.  Their 0..1 values
-are coarse rule anchors, NOT calibrated measurements.
+(`outdoor_exposure`, `sun_exposure`, `wind_exposure`, `rain_cover`) from its
+final `space` decision. Unknown space stays missing rather than receiving a
+fabricated neutral exposure. The old categorical `space`/`rain_protection`
+fields stay for compatibility, but the continuous fields are the signal PATM
+features consume. Their 0..1 values are coarse rule anchors, NOT calibrated
+measurements.
 
 Confidence is a HEURISTIC, UNCALIBRATED rule strength -- NOT a probability and
 NOT an accuracy claim.  The real eval (macro-F1 >= 0.95 on human I/O/B labels)
@@ -69,9 +70,8 @@ EXPOSURE_FIELDS = ("outdoor_exposure", "sun_exposure", "wind_exposure",
                    "rain_cover")
 RAIN_COVER_LABELS = ("enclosed", "covered", "mixed", "open", "unknown")
 
-#: Canonical category -> (outdoor, sun, wind, rain_cover) coarse preset.
-#: Mixed-use categories (attraction/landmark/market) stay intermediate: they
-#: are never forced indoor or fully open.
+#: Canonical category -> coarse PATM prior for POIs not yet classified.
+#: Snapshot labels derive their exposure from the committed space decision.
 TYPE_EXPOSURE = {
     "beach": (0.95, 0.95, 0.95, "open"),
     "nature": (0.9, 0.8, 0.75, "open"),
@@ -89,8 +89,8 @@ TYPE_EXPOSURE = {
     "shop": (0.05, 0.05, 0.05, "enclosed"),
 }
 
-#: Coarse presets for the three evidence tiers.  "unknown" keeps the neutral
-#: 0.5 floats (a float cannot encode absence) and rain_cover="unknown".
+#: Coarse presets for the three evidence tiers.  Abstentions use None floats
+#: and rain_cover="unknown"; the feature extractor can apply a type prior.
 _AUDIT_EXPOSURE = {
     "indoor": (0.05, 0.0, 0.0, "enclosed"),
     "both": (0.5, 0.4, 0.4, "mixed"),
@@ -110,6 +110,40 @@ _OSM_RAIN_COVER = {"enclosed": "enclosed", "sheltered": "covered",
                    "none": "open"}
 _NEUTRAL_EXPOSURE = (0.5, 0.5, 0.5, "unknown")
 
+#: T063b-3 single-decision table.  ``space`` is decided once, then rain cover
+#: and the float anchors follow from it.  A missing/abstained label stays
+#: genuinely missing: ``None`` floats + ``rain_cover=unknown``.  This is what
+#: lets downstream models treat "unknown" as a missing indicator instead of a
+#: fake neutral 0.5 that silently encodes a guess.
+_UNKNOWN_EXPOSURE = {
+    "outdoor_exposure": None,
+    "sun_exposure": None,
+    "wind_exposure": None,
+    "rain_cover": "unknown",
+}
+
+#: Default rain cover by committed space.  ``outdoor`` can never be
+#: ``enclosed``; ``indoor`` is always enclosed.
+_SPACE_RAIN_COVER = {"indoor": "enclosed", "outdoor": "open", "both": "mixed"}
+_RAIN_COVER_FROM_OSM = {"enclosed": "enclosed", "sheltered": "covered",
+                        "none": "open"}
+#: Rain cover values that are physically compatible with each space.
+_SPACE_ALLOWED_RAIN = {
+    "indoor": {"enclosed", "covered"},
+    "outdoor": {"open", "covered", "mixed"},
+    "both": {"mixed", "covered", "open"},
+}
+#: Category nuance for the indoor anchors (never above 0.2).
+_CAT_INDOOR_OUTDOOR = {
+    "museum": 0.05, "spa": 0.05, "shop": 0.05, "lodging": 0.1,
+    "restaurant": 0.15, "cafe": 0.2, "bar": 0.2,
+}
+#: Category nuance for the outdoor anchors (all >= 0.55).
+_CAT_OUTDOOR_OUTDOOR = {
+    "beach": 0.95, "nature": 0.9, "park": 0.85, "landmark": 0.7,
+    "attraction": 0.75, "market": 0.75, "transport": 0.55,
+}
+
 
 def _resolve_exposure(tier: tuple) -> dict:
     outdoor, sun, wind, rain = tier
@@ -122,67 +156,123 @@ def _resolve_exposure(tier: tuple) -> dict:
 def type_exposure(cat: str) -> dict:
     """Coarse exposure preset for a canonical category.
 
-    Used as the ``type default`` tier by :func:`derive_exposure` and by PATM
-    features when a POI has not been enriched yet.  Unknown categories return
-    the neutral 0.5/``unknown`` preset.
+    This is the coarse PRIOR used by PATM features when a POI has not been
+    enriched yet.  It is not the snapshot decision: ``classify_poi`` derives
+    all exposure fields from the committed ``space`` via
+    :func:`exposure_for_space`.
     """
     preset = TYPE_EXPOSURE.get(str(cat or "").strip().lower())
     return _resolve_exposure(preset or _NEUTRAL_EXPOSURE)
 
 
+def exposure_for_space(space: str, *, cat: str = "", rooftop: bool = False,
+                       osm_rain: str | None = None,
+                       source: str = "canonical") -> dict:
+    """Derive rain cover AND float anchors from ONE committed space decision.
+
+    Guarantees encoded here (and asserted by the snapshot validator):
+
+    * ``space=outdoor`` never pairs with ``rain_cover=enclosed``.
+    * ``space=unknown`` returns ``None`` floats and ``rain_cover=unknown``.
+    * indoor anchors are <= 0.2, outdoor anchors >= 0.55, rooftop ``both``
+      anchors >= 0.6.
+    * linked OSM rain evidence sharpens ``rain_cover`` only when it is
+      compatible with the committed space.
+    """
+    space = str(space or "").strip().lower()
+    if space not in _SPACE_RAIN_COVER:
+        return {**_UNKNOWN_EXPOSURE, "exposure_source": source or "unknown"}
+
+    cat = str(cat or "").strip().lower()
+    rain = _SPACE_RAIN_COVER[space]
+    if rooftop and space == "both":
+        rain = "mixed"
+
+    mapped = _RAIN_COVER_FROM_OSM.get(str(osm_rain or "").strip().lower())
+    if mapped and mapped in _SPACE_ALLOWED_RAIN[space]:
+        rain = mapped
+
+    if space == "indoor":
+        out = min(_CAT_INDOOR_OUTDOOR.get(cat, 0.15), 0.2)
+        sun = min(out, 0.1)
+        wind = min(out, 0.1)
+    elif space == "outdoor":
+        out = _CAT_OUTDOOR_OUTDOOR.get(cat, 0.9)
+        if rooftop:
+            out = max(out, 0.6)
+        if rain == "covered":
+            out = min(out, 0.7)
+        elif rain == "mixed":
+            out = min(out, 0.8)
+        sun = out
+        wind = out
+    else:  # both
+        out = 0.65 if rooftop else 0.55
+        if cat in _CAT_OUTDOOR_OUTDOOR:
+            out = 0.6
+        if rain == "covered":
+            out = min(out, 0.6)
+        sun = round(out * 0.8, 3)
+        wind = round(out * 0.8, 3)
+
+    # A roof caps sun/wind regardless of the space anchor.
+    if rain == "enclosed":
+        out = min(out, 0.1)
+        sun = min(sun, 0.05)
+        wind = min(wind, 0.1)
+    elif rain == "covered":
+        sun = min(sun, 0.3)
+        wind = min(wind, 0.4)
+
+    return {"outdoor_exposure": round(float(out), 3),
+            "sun_exposure": round(float(sun), 3),
+            "wind_exposure": round(float(wind), 3),
+            "rain_cover": rain,
+            "exposure_source": source or "canonical"}
+
+
 def derive_exposure(*, audit_space: str | None = None,
                     osm_space: str | None = None,
                     osm_rain: str | None = None,
-                    cat: str = "") -> dict:
-    """Derive continuous exposure attributes with a strict precedence.
+                    cat: str = "", space: str | None = None,
+                    rooftop: bool = False) -> dict:
+    """Derive exposure attributes.
 
-    ``human audit > OSM evidence > canonical type default > unknown``.
+    When a final ``space`` is supplied (the snapshot path) all fields come
+    from :func:`exposure_for_space` -- one decision, no independent guesses.
 
-    * ``outdoor_exposure`` / ``sun_exposure`` / ``wind_exposure`` are floats in
-      [0, 1]; ``unknown`` maps to the neutral 0.5 (a float cannot encode
-      absence).
-    * ``rain_cover`` is categorical: enclosed | covered | mixed | open |
-      unknown.
-    * Mixed-use categories (attraction/landmark/market) get intermediate
-      values; they are never forced indoor.
-    * ``rain_cover`` in {enclosed, covered} caps sun/wind exposure, because a
-      roof blocks both.
+    The legacy evidence-only form (``audit_space``/``osm_space``/``osm_rain``)
+    is kept for callers/tests that have no committed space: it maps the
+    evidence to a space first, then uses the same single-decision function.
+    A pure ``cat`` lookup remains a coarse type prior only.
     """
-    source = "unknown"
-    audit_space = str(audit_space or "").strip().lower()
-    osm_space = str(osm_space or "").strip().lower()
-    osm_rain = str(osm_rain or "").strip().lower()
-
-    if audit_space in _AUDIT_EXPOSURE:
-        base = _resolve_exposure(_AUDIT_EXPOSURE[audit_space])
+    source = "canonical"
+    chosen = str(space or "").strip().lower()
+    if chosen in _SPACE_RAIN_COVER:
+        source = "explicit"
+    elif chosen == "unknown":
+        return {**_UNKNOWN_EXPOSURE, "exposure_source": "unknown"}
+    elif str(audit_space or "").strip().lower() in _AUDIT_EXPOSURE:
+        chosen = str(audit_space).strip().lower()
         source = "audit"
-    elif osm_space in _OSM_SPACE_EXPOSURE:
-        base = _resolve_exposure(_OSM_SPACE_EXPOSURE[osm_space])
+    elif str(osm_space or "").strip().lower() in _OSM_SPACE_EXPOSURE:
+        chosen = str(osm_space).strip().lower()
         source = "osm"
-    elif osm_rain in _OSM_RAIN_EXPOSURE:
-        base = _resolve_exposure(_OSM_RAIN_EXPOSURE[osm_rain])
+    elif str(osm_rain or "").strip().lower() in _RAIN_COVER_FROM_OSM:
+        rain_space = {"enclosed": "indoor", "sheltered": "both",
+                      "none": "outdoor"}
+        chosen = rain_space[str(osm_rain).strip().lower()]
         source = "osm"
     else:
+        # Legacy coarse type tier (no decisive space evidence).
         preset = TYPE_EXPOSURE.get(str(cat or "").strip().lower())
         if preset is None:
-            base = _resolve_exposure(_NEUTRAL_EXPOSURE)
-        else:
-            base = _resolve_exposure(preset)
-            source = "type"
+            return {**_UNKNOWN_EXPOSURE, "exposure_source": "unknown"}
+        return {**_resolve_exposure(preset), "exposure_source": "type"}
 
-    # OSM rain evidence sharpens rain_cover unless a human audit already spoke.
-    if source != "audit" and osm_rain in _OSM_RAIN_COVER:
-        base["rain_cover"] = _OSM_RAIN_COVER[osm_rain]
-        source = "osm"
+    return exposure_for_space(chosen, cat=cat, rooftop=rooftop,
+                              osm_rain=osm_rain, source=source)
 
-    if base["rain_cover"] == "enclosed":
-        base["sun_exposure"] = min(base["sun_exposure"], 0.05)
-        base["wind_exposure"] = min(base["wind_exposure"], 0.1)
-    elif base["rain_cover"] == "covered":
-        base["sun_exposure"] = min(base["sun_exposure"], 0.25)
-        base["wind_exposure"] = min(base["wind_exposure"], 0.35)
-
-    return {**base, "exposure_source": source}
 
 
 _RAIN_PRIORITY = {"enclosed": 3, "sheltered": 2, "none": 1, "unknown": 0}
@@ -296,6 +386,8 @@ _NAME_INDOOR = (
     "trung tam thuong mai", "sieu thi", "supermarket", "rap chieu phim",
     "cinema", "thu vien", "library", "spa", "karaoke", "cua hang", "shop",
     "gallery", "aquarium", "nha hat",
+    # T063b-3: decisive indoor evidence in type/name (QA bug 1).
+    "trong nha", "indoor", "may lanh", "lop hoc nau an", "cooking class",
 )
 _NAME_OUTDOOR = (
     "bai bien", "bai tam", "beach", "cong vien", "park", "nui", "mountain",
@@ -303,6 +395,12 @@ _NAME_OUTDOOR = (
     "cau", "bridge", "song", "river", "rung", "forest", "deo", "pass",
     "duong dao", "promenade", "ben tau", "hang dong", "cave", "memorial",
     "dai tuong niem", "tuong dai",
+    # T063b-3: decisive open-air / water / monument evidence (QA bug 1).
+    "cano", "du thuyen", "thuyen", "tau", "lan bien", "ngam san ho", "san ho",
+    "dragon head", "dau rong", "viewpoint", "ngam canh", "binh minh",
+    "hai dang", "vinh", "mui", "hon", "bai", "cay da", "cong chao", "lang",
+    "thang canh", "suoi", "sinh thai", "thap", "tuong", "village", "ben",
+    "nha vong canh", "view ngam", "ban co", "dong",
 )
 _NAME_SUN_ONLY = (
     "pergola", "gian hoa", "parasol", "sun shade", "sun shelter", "umbrella",
@@ -317,6 +415,18 @@ _NAME_AMBIGUOUS = (
 #: into a single space.
 _NAME_BOTH = (
     "chua", "nha tho", "beer garden", "bia san vuon", "san vuon bia", "cho",
+    # T063b-3: compound/heritage visit space (QA bug 1).  Checked before the
+    # single-space keywords so a temple/relic compound is not forced indoor.
+    "mieu", "den tho", "co so tho tu", "di tich", "trung tam vui choi",
+    "khu vui choi", "tam linh", "lang nghe", "dinh",
+)
+
+#: Rooftop / sky / terrace / open-seating venue cues (QA bug 2).  These venues
+#: have both a covered lounge and an open deck, so they commit ``both`` with
+#: mixed/open cover and elevated outdoor exposure -- never ``indoor``.
+_NAME_ROOFTOP = (
+    "rooftop", "roof top", "roof garden", "sky bar", "skybar", "sky lounge",
+    "terrace", "san thuong", "outdoor seating", "ngoai troi",
 )
 
 # Canonical snapshot categories (`poi["cat"]`).
@@ -398,8 +508,21 @@ _ACCENT_GUARD = {
     "suoi": {"suối"},     # stream, not suôi
     "deo": {"đèo"},       # pass, not dẻo
     "ho": {"hồ"},         # lake, not hô/hó
-    "dinh": {"đình"},     # communal house
+    "dinh": {"đình"},     # communal house, not định
     "den": {"đền"},       # temple/shrine
+    # T063b-3 decisive outdoor evidence: only the accented form counts so
+    # ordinary Vietnamese words are not flipped to "outdoor".
+    "bai": {"bãi"},       # beach/yard, not bài (lesson)
+    "mui": {"mũi"},       # cape, not mùi (smell)
+    "vinh": {"vịnh"},     # bay, not vinh (honour)
+    "hon": {"hòn"},       # islet, not hơn/hồn
+    "thuyen": {"thuyền"},  # boat
+    "tau": {"tàu"},       # boat/train
+    "ben": {"bến"},       # wharf, not bên (side)
+    "lang": {"làng", "lăng"},  # village / mausoleum
+    "dong": {"động"},     # cave, not đồng (field)
+    "thap": {"tháp"},     # tower/stupa
+    "tuong": {"tượng"},   # statue, not tưởng (think)
 }
 
 
@@ -881,6 +1004,7 @@ def _analyse_name(poi: dict) -> dict:
     indoor = _hit(name, _NAME_INDOOR)
     outdoor = _hit(name, _NAME_OUTDOOR)
     both = _hit(name, _NAME_BOTH)
+    rooftop = _hit(name, _NAME_ROOFTOP)
     sun = _hit(name, _NAME_SUN_ONLY)
     ambiguous = _hit(name, _NAME_AMBIGUOUS)
 
@@ -895,7 +1019,12 @@ def _analyse_name(poi: dict) -> dict:
     evidence: list[str] = []
     conflicts: list[str] = []
 
-    if both:
+    if rooftop:
+        # A rooftop/sky/terrace venue has a covered lounge plus an open deck.
+        space = "both"
+        evidence.append(
+            f"name rooftop/terrace keyword(s) {', '.join(rooftop)} -> both")
+    elif both:
         space = "both"
         evidence.append(f"name compound keyword(s) {', '.join(both)} -> both")
     elif indoor and outdoor:
@@ -926,11 +1055,22 @@ def _analyse_name(poi: dict) -> dict:
     }
 
 
-def _canonical_hint(text: str) -> dict:
-    return {
+def _rooftop_hits(poi: dict) -> list[str]:
+    """Rooftop/sky/terrace cue hits across name, type and tags."""
+    parts = [_poi_name(poi), poi.get("type", "")]
+    tags = poi.get("tags", [])
+    if isinstance(tags, list):
+        parts.extend(str(t) for t in tags)
+    elif isinstance(tags, dict):
+        parts.extend(str(v) for v in tags.values())
+    return _hit(" | ".join(str(p) for p in parts if p), _NAME_ROOFTOP)
+
+
+def _canonical_hint(text: str) -> dict:    return {
         "indoor": _hit(text, _NAME_INDOOR),
         "outdoor": _hit(text, _NAME_OUTDOOR),
         "both": _hit(text, _NAME_BOTH),
+        "rooftop": _hit(text, _NAME_ROOFTOP),
         "ambiguous": _hit(text, _NAME_AMBIGUOUS),
     }
 
@@ -950,7 +1090,11 @@ def _analyse_canonical(poi: dict) -> dict:
     evidence = ""
     source_hint = ""
 
-    if cat in _CAT_INDOOR:
+    if hint["rooftop"]:
+        # Rooftop/sky/terrace type or tag cue: covered + open deck.
+        space = "both"
+        source_hint = f"canonical rooftop cue ({', '.join(hint['rooftop'])})"
+    elif cat in _CAT_INDOOR:
         space = "indoor"
         source_hint = f"canonical cat={cat}"
     elif cat in _CAT_OUTDOOR:
@@ -1177,9 +1321,8 @@ def classify_poi(poi: dict, audit=None, osm=None, *, human_label=None,
     rain_evidence.extend(rain_notes)
 
     exposure = derive_exposure(
-        audit_space=audit_space,
-        osm_space=(osm_space or {}).get("label") if isinstance(osm_space, dict)
-        else None,
+        space=space,
+        rooftop=bool(_rooftop_hits(poi)),
         osm_rain=rain["label"] if rain["source"] == "osm" else None,
         cat=canon_res["cat"],
     )

@@ -203,6 +203,28 @@ class TestAuditPrecedence(unittest.TestCase):
 
 
 class TestSpaceRules(unittest.TestCase):
+    def test_committed_space_drives_exposure(self):
+        indoor = classify_poi(poi(
+            name="DD WONDERLAND", typ="Sân chơi trong nhà",
+            cat="attraction"))
+        self.assertEqual(indoor["space"], "indoor")
+        self.assertLessEqual(indoor["outdoor_exposure"], 0.2)
+        self.assertEqual(indoor["rain_cover"], "enclosed")
+
+        rooftop = classify_poi(poi(
+            name="Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers",
+            typ="Quán bar", cat="bar"))
+        self.assertEqual(rooftop["space"], "both")
+        self.assertGreaterEqual(rooftop["outdoor_exposure"], 0.6)
+        self.assertNotEqual(rooftop["rain_cover"], "enclosed")
+
+        unknown = classify_poi(poi(name="Unclassified venue",
+                                   cat="attraction"))
+        self.assertEqual(unknown["space"], "unknown")
+        self.assertEqual(unknown["rain_cover"], "unknown")
+        for field in ("outdoor_exposure", "sun_exposure", "wind_exposure"):
+            self.assertIsNone(unknown[field], field)
+
     def test_osmand_name_agree_outdoor_open(self):
         p = poi(name="Bãi biển Mỹ Khê", cat="beach")
         r = classify_poi(p, osm=osm({"natural": "beach"}))

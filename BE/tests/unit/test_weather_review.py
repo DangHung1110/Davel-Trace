@@ -141,6 +141,21 @@ class TestWeatherReview(unittest.TestCase):
         self.assertIn("new Blob([JSON.stringify(saved", doc)
         self.assertIn("download", doc)
 
+    def test_blind_mode_hides_model_output_and_uses_private_storage(self):
+        rows = _sample_rows()
+        doc = render_html(rows, blind=True)
+        self.assertIn("(blind)", doc)
+        self.assertNotIn("<h4>Nhãn cũ</h4>", doc)
+        self.assertNotIn("<h4>Đề xuất mới</h4>", doc)
+        self.assertNotIn("space_evidence", doc)
+        self.assertIn(f"{LS_KEY}_blind", doc)
+        self.assertIn("weather_review_blind_decisions.json", doc)
+        exported_rows = _extract_rows(doc)
+        allowed = {"poi_id", "name", "type", "lat", "lon"}
+        self.assertTrue(all(set(row) <= allowed for row in exported_rows))
+        self.assertNotIn("old_space", doc)
+        self.assertNotIn("suggested_space", doc)
+
     def test_html_escaping(self):
         rows = [
             {

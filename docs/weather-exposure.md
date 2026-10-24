@@ -29,22 +29,27 @@ compatibility):
 | `wind_exposure` | float 0..1 | 0 = wind-protected, 1 = fully wind-exposed |
 | `rain_cover` | enum | enclosed \| covered \| mixed \| open \| unknown |
 
-Floats are coarse rule **anchors**, not calibrated measurements. `unknown`
-numeric evidence maps to the neutral `0.5` (a float cannot encode absence);
-`rain_cover` keeps an explicit `unknown`.
+Floats are coarse rule **anchors**, not calibrated measurements. When the
+space decision is `unknown`, snapshot floats are `null` and `rain_cover` is
+`unknown`; PATM may use its category prior when it consumes a missing value.
 
 ### Precedence
 
-`human audit > OSM evidence > canonical type default > unknown`
+One committed space decision (`human audit > linked OSM > name > canonical
+type`) drives all four exposure fields. Unknown remains missing instead of
+being changed into a neutral-looking exposure score.
 
 - Audit `I/O/B` maps to `indoor` (0.05/0/0, enclosed), `both`
   (0.5/0.4/0.4, mixed), `outdoor` (0.95/0.9/0.95, open).
 - Linked OSM `space` evidence maps indoor/both/outdoor; linked OSM rain
   evidence (`enclosed`/`sheltered`/`none`) sharpens `rain_cover` to
   enclosed/covered/open.
-- Mixed-use categories (`attraction`, `landmark`, `market`) stay intermediate
-  (`rain_cover=mixed`, `outdoor_exposure` 0.55–0.65); they are never forced
-  indoor.
+- Mixed-use categories (`attraction`, `landmark`, `market`) are resolved from
+  type/name evidence when available; otherwise they remain unknown. Rooftop
+  and sky-bar cues resolve to `both` with outdoor exposure, not an indoor bar
+  category prior.
+- An `outdoor` space can never have `rain_cover=enclosed`; `unknown` space has
+  three missing exposure floats and `rain_cover=unknown`.
 - `rain_cover` in {enclosed, covered} caps sun/wind exposure (a roof blocks
   both).
 - `rain_protection` keeps its old evidence-only semantics (audit alone does not
@@ -57,14 +62,15 @@ Emitted by `BE/ml/data/enrich_snapshot.py --apply` to
 
 | field | distinct | entropy (bits) | notable buckets |
 |---|---|---|---|
-| `outdoor_exposure` | 11 | 3.0461 | 0.05:129, 0.2:156, 0.55:90, 0.6:90, 0.65:49, 0.9:16, 0.95:18 |
-| `sun_exposure` | 10 | 1.8374 | 0.05:445, 0.55:180, 0.8:16, 0.95:13 |
-| `wind_exposure` | 9 | 2.3349 | 0.1:338, 0.45:140, 0.75:16, 0.95:18 |
-| `rain_cover` | 3 | 1.1943 | enclosed:481, mixed:235, open:48 |
+| `outdoor_exposure` | 11 | 2.2315 | 0.1:412, 0.6:110, 0.75:56, missing:11 |
+| `sun_exposure` | 10 | 1.7890 | 0.05:501, 0.48:110, 0.75:56, missing:11 |
+| `wind_exposure` | 11 | 2.2315 | 0.1:412, 0.48:110, 0.75:56, missing:11 |
+| `rain_cover` | 4 | 1.3446 | enclosed:501, mixed:121, open:131, unknown:11 |
 
-No new field collapses to a single value. `covered` / `unknown` rain_cover do
-not occur on this snapshot because linked OSM evidence currently yields no
-rain-shelter tags; those buckets are exercised by unit tests.
+The current snapshot has 501 indoor, 131 outdoor, 121 both, and 11 unknown
+POIs. All 11 unknowns have missing exposure floats, and there are no
+`outdoor`/`enclosed` contradictions. No linked OSM rain-shelter tags were
+found; the `covered` case is exercised by unit tests.
 
 ## QA follow-up fixes (T063b-2)
 
@@ -88,20 +94,37 @@ labels at **28/40 (70.0%) strict**. The labeler now fixes:
    `tượng đài` resolve to `outdoor` instead of the old ambiguous-canonical
    abstention.
 
-Re-scoring the same QA sample against the new labels: **40/40 strict (100%)**,
-up from 28/40. This is a small-sample diagnostic, not a calibrated accuracy
-claim.
+The reported 40/40 re-score used the same seed-42 examples that informed the
+rules, so it is a tuning result and **not** a generalization estimate. A
+separate blind seed-777 sample with no overlap scored 29/40 (72.5%) strict;
+excluding seven borderline cases gives 90% under the broader rubric. Treat
+72.5% as the strict result. The seed-42/seed-777 sample manifests are not in
+this repo, so those two QA scores are recorded from the operator's report.
 
 Snapshot `space` distribution before → after the follow-up:
 
 | space | before | after |
 |---|---|---|
 | indoor | 553 (72.4%) | 501 (65.6%) |
-| both | 5 (0.7%) | 105 (13.7%) |
-| outdoor | 86 (11.3%) | 91 (11.9%) |
-| unknown | 120 (15.7%) | 67 (8.8%) |
+| both | 5 (0.7%) | 121 (15.8%) |
+| outdoor | 86 (11.3%) | 131 (17.1%) |
+| unknown | 120 (15.7%) | 11 (1.4%) |
 
-`space_source`: name 467, canonical 236, audit 46, **osm 15** (was 0).
+Current `space_source`: name 531, canonical 172, audit 46, **osm 15** (was 0).
+The current checks catch DD WONDERLAND as indoor and Marine Sky Bar as both;
+exposure now follows those final space decisions.
+
+The blind audit pages were regenerated after the system fixes. The 200-row review page is a priority sample for manual cleanup;
+`weather_label_qa_seed999_blind.html` is a deterministic 40-POI sample from
+the full snapshot. The exported audit contains 181/200 review labels and
+38/40 QA labels. Seven QA POIs overlap the review sample, with all seven
+answers agreeing. On the 31 answered non-overlap QA POIs, 27 (87.1%) agree
+with the frozen pre-audit labels. This is agreement with the prior classifier,
+not independently adjudicated ground-truth accuracy. The exports plus final adjudications contain 213 unique decisions; 212 labels
+remain in the snapshot after one labeled POI was removed. The reviewer removed
+19 POIs total, finalized the four QA disagreements, classified VỌC Glamping as
+outdoor, and corrected three names and two viewpoint categories. See
+`BE/data/snapshots/danang-v1/WEATHER_AUDIT_RECONCILIATION.md` for details.
 
 ## PATM features
 
@@ -131,11 +154,12 @@ Snapshot `space` distribution before → after the follow-up:
 | re-run old extractor, same pairs (fair baseline) | 17 | 0.787 | 0.777 | 0.739 |
 | after first retrain (pre-QA labels) | 21 | 0.782 | 0.777 | 0.736 |
 | **after QA label fixes + retrain** | **21** | **0.785** | **0.786** | **0.730** |
+| after space/exposure consistency fix + retrain | 21 | 0.786 | 0.765 | 0.765 |
 
-Honest reading: the QA label fixes buy **+0.009 held-out accuracy** over both
-17-feature baselines, while 5-fold CV is 0.002 below the fair baseline and flip
-consistency is 0.009 below it (above the committed model by 0.002). This is a
-mixed, small-sample result — no improvement claim beyond held-out accuracy.
+The latest retrain improves flip consistency to 0.765, but held-out accuracy
+is 0.012 below the fair 17-feature baseline. The model result does not show an
+overall gain; the system fix addresses label consistency. Do not treat model
+metrics as proof that the human-facing labels are accurate.
 
 ## Reproduction
 
@@ -146,7 +170,16 @@ python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 `
 python BE/ml/patm/train.py --pairs C:\tmp\pairs_v4.json `
     --snapshot BE/data/snapshots/danang-v1 --model-out BE/ml/patm/model.txt
 python -m unittest discover -s BE/tests -t BE
+python -m BE.ml.weather_label.render_review --input `
+    BE/data/snapshots/danang-v1/weather_review_200.json --blind
+python -m BE.ml.weather_label.render_review --snapshot `
+    BE/data/snapshots/danang-v1 --blind --seed 999 --limit 40
 ```
+
+After choosing labels in the blind page, export JSON and pass it back to the
+snapshot tool with `--audit-json <downloaded-file> --check`; use `--apply`
+after reviewing the dry-run output. Choices are joined by stable `poi_id` and
+override earlier labels for those reviewed POIs.
 
 ## Risks / limitations
 
@@ -155,8 +188,9 @@ python -m unittest discover -s BE/tests -t BE
 - OSM evidence is joined only on exact folded-name matches: 18 linked, 15
   sourced. Proximity-only matches are deliberately rejected, so 151 nearby
   elements stay unused; rain cover is still type-default driven in practice.
-- The QA re-score is n=40; the 100% figure has a wide confidence interval and
-  is not a population accuracy estimate.
+- QA seed-999 has 31 answered non-overlap rows after excluding seven repeated
+  POIs and two blanks. Its 27/31 agreement is a small-sample comparison with
+  frozen predictions, not a gold-standard accuracy estimate.
 - Coverage is uneven: 445/764 POIs sit at `sun_exposure=0.05` (indoor preset),
   so entropy is modest even though the field no longer collapses.
 - The retrain overwrote `BE/ml/patm/model.txt` and `model_metrics.json`; the

@@ -30,6 +30,7 @@ from BE.ml.data.enrich_snapshot import (  # noqa: E402
     enrich,
     exposure_distribution,
     load_osm_cache,
+    merge_audit_decisions,
     parse_audit,
     write_reports,
 )
@@ -91,12 +92,12 @@ class TestDeriveExposure(unittest.TestCase):
         self.assertEqual(open_["rain_cover"], "open")
         self.assertGreaterEqual(open_["outdoor_exposure"], 0.85)
 
-    def test_unknown_is_neutral_not_collapsed(self):
+    def test_unknown_is_missing_not_neutral(self):
         exp = derive_exposure(cat="unmapped-category")
         self.assertEqual(exp["exposure_source"], "unknown")
         self.assertEqual(exp["rain_cover"], "unknown")
         for key in FLOAT_FIELDS:
-            self.assertEqual(exp[key], 0.5)
+            self.assertIsNone(exp[key])
 
     def test_floats_in_unit_interval(self):
         cases = [
@@ -114,6 +115,13 @@ class TestDeriveExposure(unittest.TestCase):
 
 
 class TestOsmCacheJoin(unittest.TestCase):
+    def test_blind_audit_export_overrides_by_poi_id(self):
+        pois = [{"poi_id": "p1", "name": "POI one"}]
+        merged = merge_audit_decisions(
+            pois, {"POI one": "I"}, {"p1": "outdoor"})
+        self.assertEqual(merged["POI one"], "O")
+        self.assertEqual(merged["p1"], "O")
+
     def _write_cache(self, directory: str, payload) -> str:
         path = os.path.join(directory, "osm.json")
         with open(path, "w", encoding="utf-8") as f:
@@ -177,7 +185,14 @@ class TestSnapshotExposureDistribution(unittest.TestCase):
             for field in EXPOSURE_FIELDS:
                 self.assertIn(field, st, poi.get("poi_id"))
             for field in FLOAT_FIELDS:
-                self.assertIsInstance(st[field], float, poi.get("poi_id"))
+                if st.get("space") == "unknown":
+                    self.assertIsNone(st[field], poi.get("poi_id"))
+                else:
+                    self.assertIsInstance(st[field], float, poi.get("poi_id"))
+            if st.get("space") == "unknown":
+                self.assertEqual(st["rain_cover"], "unknown", poi.get("poi_id"))
+            if st.get("space") == "outdoor":
+                self.assertNotEqual(st["rain_cover"], "enclosed", poi.get("poi_id"))
 
     def test_no_new_field_collapses_to_one_value(self):
         dist = self.report["exposure_distribution"]

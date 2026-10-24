@@ -37,6 +37,7 @@ import argparse
 import html
 import json
 import os
+import random
 from typing import Any
 
 
@@ -113,7 +114,7 @@ def _row_flag(conflict: bool, old_space: Any, suggested_space: Any) -> tuple[str
     return ("giữ nguyên", "ok")
 
 
-def _render_card(row: dict, index: int) -> str:
+def _render_card(row: dict, index: int, *, blind: bool = False) -> str:
     """Render one POI card."""
     poi_id = row["poi_id"]
     name = row.get("name", "")
@@ -138,6 +139,18 @@ def _render_card(row: dict, index: int) -> str:
             coords_text = f"{float(lat):.6f}, {float(lon):.6f}"
         except (TypeError, ValueError):
             coords_text = f"{lat}, {lon}"
+
+    if blind:
+        return f"""<div class='card' data-poi-id='{_esc(poi_id)}'>
+<h3>#{index}. {_esc(name)}</h3>
+<div class='dist'>Loại: {_esc(poi_type)} · Tọa độ: {_esc(coords_text)}{_map_link(lat, lon)}</div>
+<div class='vote' data-poi='{_esc(poi_id)}'>
+  <label><input type='checkbox' class='choice' data-poi='{_esc(poi_id)}' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='{_esc(poi_id)}' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='{_esc(poi_id)}' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='{_esc(poi_id)}'>Xác nhận</button>
+</div>"""
 
     return f"""<div class='card' data-poi-id='{_esc(poi_id)}' data-old='{_esc(_norm(old_space))}'>
 <h3>#{index}. {_esc(name)} <span class='flag {flag_class}'>{_esc(flag_text)}</span></h3>
@@ -180,15 +193,34 @@ def _json_for_script(rows: list[dict]) -> str:
     return data
 
 
-def render_html(rows: list[dict]) -> str:
+def render_html(rows: list[dict], *, blind: bool = False,
+                storage_key: str | None = None) -> str:
     """Return a complete standalone HTML review page for ``rows``."""
     rows = [dict(r) for r in rows]
-    cards = "".join(_render_card(row, i + 1) for i, row in enumerate(rows))
-    json_data = _json_for_script(rows)
+    cards = "".join(_render_card(row, i + 1, blind=blind)
+                    for i, row in enumerate(rows))
+    script_rows = ([{key: row.get(key) for key in
+                     ("poi_id", "name", "type", "lat", "lon")}
+                    for row in rows] if blind else rows)
+    json_data = _json_for_script(script_rows)
+    ls_key = storage_key or (f"{LS_KEY}_blind" if blind else LS_KEY)
+    title = "Kiểm tra nhãn thời tiết T063 (blind)" if blind else "Kiểm tra nhãn thời tiết T063"
+    filters = ("<button data-f=\"all\" class=\"on\">Tất cả</button>"
+               "<button data-f=\"todo\">Chưa xác nhận</button>" if blind else
+               "<button data-f=\"all\" class=\"on\">Tất cả</button>"
+               "<button data-f=\"todo\">Chưa xác nhận</button>"
+               "<button data-f=\"old-indoor\">Cũ trong nhà</button>"
+               "<button data-f=\"old-outdoor\">Cũ ngoài trời</button>"
+               "<button data-f=\"old-both\">Cũ cả hai</button>"
+               "<button data-f=\"old-unknown\">Cũ chưa rõ</button>")
+    intro = ("<p>Nhãn cũ và dự đoán của hệ thống được ẩn trong lượt audit này.</p>"
+             if blind else "")
+    download_name = ("weather_review_blind_decisions.json" if blind
+                     else "weather_review_decisions.json")
 
     return f"""<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kiểm tra nhãn thời tiết T063</title>
+<title>{title}</title>
 <style>
 body{{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:900px;margin:0 auto;padding:12px;background:#f4f4f5;color:#18181b}}
 .bar{{position:sticky;top:0;background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px 14px;margin-bottom:12px;z-index:5;box-shadow:0 2px 6px rgba(0,0,0,.05)}}
@@ -224,19 +256,14 @@ a{{color:#2563eb}}
 @media(max-width:640px){{.cols{{grid-template-columns:1fr}}}}
 </style></head><body>
 <div class="bar"><b id="prog">Đã xác nhận 0/{len(rows)}</b><br>
-<button data-f="all" class="on">Tất cả</button>
-<button data-f="todo">Chưa xác nhận</button>
-<button data-f="old-indoor">Cũ trong nhà</button>
-<button data-f="old-outdoor">Cũ ngoài trời</button>
-<button data-f="old-both">Cũ cả hai</button>
-<button data-f="old-unknown">Cũ chưa rõ</button>
+{filters}{intro}
 <button class="exp" id="exp">Xuất đáp án (JSON)</button>
 </div>
 <div id="list">{cards}</div>
 <script type="application/json" id="rows-data">{json_data}</script>
 <script>
 (function(){{
-  const LS_KEY = {json.dumps(LS_KEY)};
+  const LS_KEY = {json.dumps(ls_key)};
   let saved = {{}};
   try {{ saved = JSON.parse(localStorage.getItem(LS_KEY) || '{{}}'); }} catch(e) {{}}
   const rows = JSON.parse(document.getElementById('rows-data').textContent);
@@ -336,7 +363,7 @@ a{{color:#2563eb}}
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'weather_review_decisions.json';
+    a.download = {json.dumps(download_name)};
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -352,32 +379,56 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Build the standalone T063 weather-label human audit HTML.",
     )
-    parser.add_argument(
-        "--input",
-        required=True,
-        help="Path to a JSON file containing the review rows.",
-    )
-    parser.add_argument(
-        "--output",
-        default="BE/data/snapshots/danang-v1/weather_label_review_200.html",
-        help="Path for the generated standalone HTML file (default: %(default)s).",
-    )
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--input", help="JSON file containing review rows.")
+    source.add_argument("--snapshot", help="Snapshot directory containing pois.json.")
+    parser.add_argument("--blind", action="store_true",
+                        help="Hide old and suggested labels from the reviewer.")
+    parser.add_argument("--seed", type=int, default=999,
+                        help="Deterministic sample seed (default: 999).")
+    parser.add_argument("--limit", type=int,
+                        help="Randomly sample this many rows.")
+    parser.add_argument("--storage-key",
+                        help="Separate local review state for this audit page.")
+    parser.add_argument("--output", help="Path for the generated HTML file.")
     args = parser.parse_args(argv)
 
-    with open(args.input, "r", encoding="utf-8") as f:
-        rows = json.load(f)
+    if args.snapshot:
+        with open(os.path.join(args.snapshot, "pois.json"), "r", encoding="utf-8") as f:
+            pois = json.load(f)["pois"]
+        rows = [{key: p.get(key) for key in
+                 ("poi_id", "name", "type", "lat", "lon")}
+                for p in pois]
+    else:
+        with open(args.input, "r", encoding="utf-8") as f:
+            rows = json.load(f)
     if not isinstance(rows, list):
-        raise SystemExit("Input JSON must be a list of row objects.")
+        raise SystemExit("Input must be a list of row objects.")
+    if args.limit is not None:
+        if args.limit < 1:
+            raise SystemExit("--limit must be positive")
+        rows = random.Random(args.seed).sample(rows, min(args.limit, len(rows)))
 
-    html_doc = render_html(rows)
+    storage_key = args.storage_key
+    if args.blind and storage_key is None:
+        suffix = f"seed_{args.seed}" if args.snapshot else "input"
+        storage_key = f"{LS_KEY}_blind_{suffix}"
+    html_doc = render_html(rows, blind=args.blind, storage_key=storage_key)
 
-    out_dir = os.path.dirname(os.path.abspath(args.output))
+    output = args.output or (
+        "BE/data/snapshots/danang-v1/weather_label_qa_seed999_blind.html"
+        if args.snapshot and args.blind else
+        "BE/data/snapshots/danang-v1/weather_label_review_200_blind.html"
+        if args.blind else
+        "BE/data/snapshots/danang-v1/weather_label_review_200.html"
+    )
+    out_dir = os.path.dirname(os.path.abspath(output))
     if out_dir:
         os.makedirs(out_dir, exist_ok=True)
-    with open(args.output, "w", encoding="utf-8") as f:
+    with open(output, "w", encoding="utf-8") as f:
         f.write(html_doc)
 
-    print(f"Wrote {len(rows)} POI cards to {args.output}")
+    print(f"Wrote {len(rows)} POI cards to {output}")
     return 0
 
 

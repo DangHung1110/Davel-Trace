@@ -125,6 +125,24 @@ def parse_audit(path: str) -> dict[str, str]:
     return out
 
 
+def merge_audit_decisions(pois: list[dict], audit: dict[str, str],
+                          decisions: dict[str, str]) -> dict[str, str]:
+    """Merge exported blind-review choices by POI id and name."""
+    merged = dict(audit)
+    for poi in pois:
+        if not isinstance(poi, dict):
+            continue
+        pid = poi.get("poi_id")
+        raw = decisions.get(str(pid))
+        label = _AUDIT_ALIASES.get(str(raw or "").strip().upper())
+        if label:
+            name = poi.get("name")
+            if name:
+                merged[name] = label
+            merged[str(pid)] = label
+    return merged
+
+
 def _as_audit_label(raw) -> str | None:
     if raw is None:
         return None
@@ -659,6 +677,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--snapshot", required=True)
     ap.add_argument("--osm-json")
     ap.add_argument("--osm-cache")
+    ap.add_argument("--audit-json",
+                     help="Blind review export JSON keyed by poi_id.")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--apply", action="store_true")
@@ -669,6 +689,12 @@ def main(argv: list[str] | None = None) -> int:
     with open(pois_path, encoding="utf-8") as f:
         data = json.load(f)
     audit = parse_audit(os.path.join(snapshot, "SPOT_CHECK.md"))
+    if args.audit_json:
+        with open(args.audit_json, encoding="utf-8") as f:
+            decisions = json.load(f)
+        if not isinstance(decisions, dict):
+            raise SystemExit("Audit decision JSON must be an object keyed by poi_id.")
+        audit = merge_audit_decisions(data["pois"], audit, decisions)
     osm_by_poi = parse_osm_json(args.osm_json) if args.osm_json else None
     if args.osm_cache:
         elements = load_osm_cache(args.osm_cache)
