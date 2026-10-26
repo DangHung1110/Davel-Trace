@@ -1,8 +1,11 @@
-# M4 weather labeler (T063, lane A) — NO TICK (audit pending)
+# M4 weather labeler (T063, lane A) — manual review reconciled; gold eval pending
 
 > Confidence in this module is a **heuristic rule strength**, not a calibrated
-> probability and not an accuracy claim. The real eval (macro-F1 >= 0.95 on
-> human I/O/B labels) is still **PENDING** the manual audit. No GBDT is trained
+> probability and not an accuracy claim. Manual review for the current
+> snapshot has been reconciled (212 reviewed labels retained); four ambiguous
+> POIs remain unknown. A separate gold-standard generalization evaluation
+> (macro-F1 >= 0.95 on independently adjudicated human I/O/B labels) is still
+> **PENDING**. Review agreement is not an accuracy score. No GBDT is trained
 > or required by the current classifier.
 
 ## OSM data (TEMP only, never committed)

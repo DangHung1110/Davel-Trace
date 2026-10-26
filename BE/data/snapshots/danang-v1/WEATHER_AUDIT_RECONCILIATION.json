@@ -173,6 +173,32 @@
       "both": 109,
       "unknown": 4
     },
+    "space_unknown_review": [
+      {
+        "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
+        "name": "Nhất Lâm Thủy Trang Trà",
+        "candidate": "outdoor_unless_substantial_indoor_space_confirmed",
+        "status": "pending_manual_signoff"
+      },
+      {
+        "poi_id": "osm:node/10603622205",
+        "name": "Pont main",
+        "candidate": "keep_unknown_until_identity_verified",
+        "status": "identity_unclear"
+      },
+      {
+        "poi_id": "osm:node/11161070775",
+        "name": "Dragon's Head",
+        "candidate": "outdoor",
+        "status": "pending_manual_signoff"
+      },
+      {
+        "poi_id": "osm:node/11934169470",
+        "name": "Queen Cobra",
+        "candidate": "outdoor",
+        "status": "pending_manual_signoff"
+      }
+    ],
     "rain_cover": {
       "enclosed": 504,
       "mixed": 109,
@@ -188,18 +214,14 @@
     "matrix": {
       "expected_top_n": 150,
       "cached_ids": 150,
-      "stale_ids": [
-        "ChIJK9EAYgAZQjER_3r0iXAJGLE",
-        "ChIJbVtm0WIfQjER_HG2AYprbcY",
-        "ChIJg4XJWVkZQjERVOuuY25EzR0"
-      ],
-      "missing_ids": [
-        "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
-        "ChIJ7fA2ROsZQjERuQWylV-XvDg",
-        "ChIJ80QCWQAXQjER9Wfb-KFGetQ"
-      ],
-      "status": "needs_osrm_rebuild",
-      "osrm_local_available": false
+      "stale_ids": [],
+      "missing_ids": [],
+      "status": "rebuilt_osrm_full",
+      "osrm_local_available": true,
+      "built_at": "2026-10-27",
+      "source": "osrm",
+      "cells": 22500,
+      "haversine_seed": 0
     }
   }
 }

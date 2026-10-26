@@ -1,5 +1,14 @@
 # Weather exposure attributes (T063b)
 
+> **Current data status (2026-10-27):** the final `danang-v1` snapshot has 745
+> POIs after manual review; `space` is indoor 504, outdoor 128, both 109,
+> unknown 4. The top-150 route matrix is rebuilt with 22,500/22,500 OSRM
+> cells. See
+> [`WEATHER_AUDIT_RECONCILIATION.md`](../BE/data/snapshots/danang-v1/WEATHER_AUDIT_RECONCILIATION.md)
+> and [`EXPOSURE_DISTRIBUTION.md`](../BE/data/snapshots/danang-v1/EXPOSURE_DISTRIBUTION.md)
+> for the final snapshot. Historical counts and model metrics below describe
+> earlier 764-POI runs and are retained as experiment history.
+
 Replaces the dead low-variance weather labels with continuous exposure
 attributes and wires them into the PATM transition features. Numbers below are
 from the `danang-v1` snapshot (764 POIs) and `C:\tmp\pairs_v4.json` (2151 pairs,
@@ -67,10 +76,12 @@ Emitted by `BE/ml/data/enrich_snapshot.py --apply` to
 | `wind_exposure` | 11 | 2.2315 | 0.1:412, 0.48:110, 0.75:56, missing:11 |
 | `rain_cover` | 4 | 1.3446 | enclosed:501, mixed:121, open:131, unknown:11 |
 
-The current snapshot has 501 indoor, 131 outdoor, 121 both, and 11 unknown
-POIs. All 11 unknowns have missing exposure floats, and there are no
-`outdoor`/`enclosed` contradictions. No linked OSM rain-shelter tags were
-found; the `covered` case is exercised by unit tests.
+At this historical generation, the 764-POI snapshot had 501 indoor, 131
+outdoor, 121 both, and 11 unknown POIs. The final audited snapshot counts are
+listed at the top of this document and in `EXPOSURE_DISTRIBUTION.md`. Unknown
+POIs retain missing exposure floats; no `outdoor`/`enclosed` contradictions
+are allowed. No linked OSM rain-shelter tags were found; the `covered` case is
+exercised by unit tests.
 
 ## QA follow-up fixes (T063b-2)
 
@@ -110,9 +121,10 @@ Snapshot `space` distribution before → after the follow-up:
 | outdoor | 86 (11.3%) | 131 (17.1%) |
 | unknown | 120 (15.7%) | 11 (1.4%) |
 
-Current `space_source`: name 531, canonical 172, audit 46, **osm 15** (was 0).
+Final snapshot `space_source`: name 440, audit 248, canonical 42, OSM 15.
 The current checks catch DD WONDERLAND as indoor and Marine Sky Bar as both;
-exposure now follows those final space decisions.
+exposure now follows those final space decisions. Four ambiguous POIs remain
+unknown pending manual review; see the reconciliation report for their names.
 
 The blind audit pages were regenerated after the system fixes. The 200-row review page is a priority sample for manual cleanup;
 `weather_label_qa_seed999_blind.html` is a deterministic 40-POI sample from
