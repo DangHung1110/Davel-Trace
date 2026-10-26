@@ -1,8 +1,8 @@
 # Weather exposure attributes (T063b)
 
-> **Current data status (2026-10-27):** the final `danang-v1` snapshot has 745
-> POIs after manual review; `space` is indoor 504, outdoor 128, both 109,
-> unknown 4. The top-150 route matrix is rebuilt with 22,500/22,500 OSRM
+> **Current data status (2026-10-27):** the final `danang-v1` snapshot has 742
+> POIs after manual review; `space` is indoor 504, outdoor 129, both 109,
+> unknown 0. The top-150 route matrix is rebuilt with 22,500/22,500 OSRM
 > cells. See
 > [`WEATHER_AUDIT_RECONCILIATION.md`](../BE/data/snapshots/danang-v1/WEATHER_AUDIT_RECONCILIATION.md)
 > and [`EXPOSURE_DISTRIBUTION.md`](../BE/data/snapshots/danang-v1/EXPOSURE_DISTRIBUTION.md)
@@ -121,10 +121,11 @@ Snapshot `space` distribution before → after the follow-up:
 | outdoor | 86 (11.3%) | 131 (17.1%) |
 | unknown | 120 (15.7%) | 11 (1.4%) |
 
-Final snapshot `space_source`: name 440, audit 248, canonical 42, OSM 15.
+Final snapshot `space_source`: name 439, audit 250, canonical 38, OSM 15.
 The current checks catch DD WONDERLAND as indoor and Marine Sky Bar as both;
-exposure now follows those final space decisions. Four ambiguous POIs remain
-unknown pending manual review; see the reconciliation report for their names.
+exposure now follows those final space decisions. The final snapshot has no
+unknown `space` labels; see the reconciliation report for removals and the
+user-confirmed Nhất Lâm Thủy Trang Trà outdoor label.
 
 The blind audit pages were regenerated after the system fixes. The 200-row review page is a priority sample for manual cleanup;
 `weather_label_qa_seed999_blind.html` is a deterministic 40-POI sample from
@@ -167,11 +168,14 @@ outdoor, and corrected three names and two viewpoint categories. See
 | after first retrain (pre-QA labels) | 21 | 0.782 | 0.777 | 0.736 |
 | **after QA label fixes + retrain** | **21** | **0.785** | **0.786** | **0.730** |
 | after space/exposure consistency fix + retrain | 21 | 0.786 | 0.765 | 0.765 |
+| **final 742-POI snapshot, filtered pairs** | **21** | **0.770** | **0.773** | **0.776** |
 
-The latest retrain improves flip consistency to 0.765, but held-out accuracy
-is 0.012 below the fair 17-feature baseline. The model result does not show an
-overall gain; the system fix addresses label consistency. Do not treat model
-metrics as proof that the human-facing labels are accurate.
+The final retrain uses `C:\tmp\pairs_v4_final.json`: 2,028 of the original
+2,151 pairs remain after removing the 123 rows that reference deleted POIs;
+1,596 rows are trainable after ties are dropped. The resulting held-out score
+is 0.008 above the prior 742/764-era model run, while CV is 0.016 lower. These
+mixed-source pair metrics (rule, LLM and human) are not a weather-label
+accuracy measure; do not treat them as proof that POI labels are correct.
 
 ## Reproduction
 
@@ -179,7 +183,7 @@ metrics as proof that the human-facing labels are accurate.
 $env:PYTHONPATH='.'
 python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 `
     --osm-cache C:\tmp\osm\danang.json --apply
-python BE/ml/patm/train.py --pairs C:\tmp\pairs_v4.json `
+python BE/ml/patm/train.py --pairs C:\tmp\pairs_v4_final.json `
     --snapshot BE/data/snapshots/danang-v1 --model-out BE/ml/patm/model.txt
 python -m unittest discover -s BE/tests -t BE
 python -m BE.ml.weather_label.render_review --input `

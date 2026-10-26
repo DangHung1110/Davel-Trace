@@ -2,8 +2,8 @@
 
 > Confidence in this module is a **heuristic rule strength**, not a calibrated
 > probability and not an accuracy claim. Manual review for the current
-> snapshot has been reconciled (212 reviewed labels retained); four ambiguous
-> POIs remain unknown. A separate gold-standard generalization evaluation
+> snapshot has been reconciled (213 reviewed labels retained); no POIs remain
+> `space=unknown`. A separate gold-standard generalization evaluation
 > (macro-F1 >= 0.95 on independently adjudicated human I/O/B labels) is still
 > **PENDING**. Review agreement is not an accuracy score. No GBDT is trained
 > or required by the current classifier.
@@ -149,16 +149,16 @@ When a non-audit space conflict is preserved, rain confidence is capped at
 These numbers encode rule strength only. They must not be reported as
 probabilities or used as a calibrated accuracy claim.
 
-## Wiring (phase-PR, STUB-note)
+## Snapshot wiring (implemented)
 
-`weather_evidence()` strings → lane-B validator weather gate (T018 ext)
-+ lane-C explainer (T042). `classify_poi` is ready for later snapshot wiring;
-this step deliberately does **not** edit `enrich_snapshot.py`, snapshots,
-HTML or any other files.
+`enrich_snapshot.py` applies `classify_poi` to the snapshot, preserves human
+I/O/B decisions, and writes exposure distributions and review rows. The final
+snapshot has 742 POIs and 250 audit-sourced labels.
 
-## Pending real eval (user I/O audit)
+## Remaining evaluation gap (independent blind QA)
 
-Macro-F1 ≥ 0.95 on audited indoor/outdoor labels. NO accuracy claim until then.
-The 46 existing audited POI labels must be preserved when snapshot wiring lands;
-their audit values are returned with confidence `1.0` and any conflict kept as
+The target is macro-F1 ≥ 0.95 on independently adjudicated indoor/outdoor
+labels. The recorded blind seed-777 strict result is 29/40 (72.5%), so the
+target is not met and the audit agreement is not an accuracy claim. The 250
+current audit labels are preserved with confidence `1.0`; any conflict remains
 metadata. Rain-protection R1/R2 labels have no human ground truth yet.

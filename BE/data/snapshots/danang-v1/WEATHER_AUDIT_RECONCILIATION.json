@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-26",
+  "generated_at": "2026-10-27",
   "snapshot_before": 764,
-  "snapshot_after": 745,
+  "snapshot_after": 742,
   "review_200": {
     "sample_size": 200,
     "answered": 181,
@@ -48,7 +48,7 @@
       ]
     ]
   },
-  "unique_manual_labels_applied": 212,
+  "unique_manual_labels_applied": 214,
   "removed_pois": [
     [
       "ChIJ9fqsdOcZQjERZcIMEHw3HtY",
@@ -125,6 +125,18 @@
     [
       "osm:node/11832500969",
       "Rào chắn"
+    ],
+    [
+      "osm:node/10603622205",
+      "Pont main"
+    ],
+    [
+      "osm:node/11161070775",
+      "Dragon's Head"
+    ],
+    [
+      "osm:node/11934169470",
+      "Queen Cobra"
     ]
   ],
   "renamed_pois": {
@@ -158,54 +170,39 @@
     "ChIJlxydWJEZQjER5GSMuHJHtak": {
       "label": "outdoor",
       "poi_name": "VỌC Glamping"
+    },
+    "ChIJwandNwA9QjERWjnwsYXsQrk": {
+      "label": "outdoor",
+      "poi_name": "Nhất Lâm Thủy Trang Trà",
+      "decision_source": "user-confirmed"
+    },
+    "ChIJL1GKWJYZQjERLrEGqlK2kwQ": {
+      "label": "outdoor",
+      "poi_name": "Cầu Rồng",
+      "decision_source": "user-confirmed-existing-poi"
     }
   },
-  "removed_count": 19,
-  "unique_decisions_total": 213,
-  "unique_labels_retained": 212,
+  "removed_count": 22,
+  "unique_decisions_total": 215,
+  "unique_labels_retained": 214,
   "final_snapshot_qc": {
-    "pois": 745,
-    "unique_poi_ids": 745,
-    "removed_since_optimizer_snapshot": 19,
+    "pois": 742,
+    "unique_poi_ids": 742,
+    "removed_since_optimizer_snapshot": 22,
     "space": {
       "indoor": 504,
-      "outdoor": 128,
+      "outdoor": 129,
       "both": 109,
-      "unknown": 4
+      "unknown": 0
     },
-    "space_unknown_review": [
-      {
-        "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
-        "name": "Nhất Lâm Thủy Trang Trà",
-        "candidate": "outdoor_unless_substantial_indoor_space_confirmed",
-        "status": "pending_manual_signoff"
-      },
-      {
-        "poi_id": "osm:node/10603622205",
-        "name": "Pont main",
-        "candidate": "keep_unknown_until_identity_verified",
-        "status": "identity_unclear"
-      },
-      {
-        "poi_id": "osm:node/11161070775",
-        "name": "Dragon's Head",
-        "candidate": "outdoor",
-        "status": "pending_manual_signoff"
-      },
-      {
-        "poi_id": "osm:node/11934169470",
-        "name": "Queen Cobra",
-        "candidate": "outdoor",
-        "status": "pending_manual_signoff"
-      }
-    ],
+    "space_unknown_review": [],
     "rain_cover": {
       "enclosed": 504,
       "mixed": 109,
-      "open": 128,
-      "unknown": 4
+      "open": 129,
+      "unknown": 0
     },
-    "rain_protection_unknown": 745,
+    "rain_protection_unknown": 742,
     "enrichment_without_osm_cache": {
       "apply_safe": false,
       "read_only_changes": 2,
@@ -222,6 +219,39 @@
       "source": "osrm",
       "cells": 22500,
       "haversine_seed": 0
+    },
+    "space_source": {
+      "name": 439,
+      "audit": 250,
+      "canonical": 38,
+      "osm": 15
+    },
+    "enrichment_with_osm_cache": {
+      "applied": true,
+      "osm_evidence_linked": 18,
+      "cache": "C:/tmp/osm/danang.json"
+    },
+    "pair_training": {
+      "source": "C:/tmp/pairs_v4.json",
+      "filtered_output": "C:/tmp/pairs_v4_final.json",
+      "source_pairs": 2151,
+      "removed_pairs_referencing_deleted_pois": 123,
+      "final_pairs": 2028,
+      "tie_pairs": 432,
+      "trainable_rows": 1596,
+      "source_counts": {
+        "rule": 944,
+        "llm": 934,
+        "human": 150
+      },
+      "features": 21,
+      "seed": 7,
+      "metrics": {
+        "cv_acc": 0.7699320244,
+        "held_acc": 0.7731343284,
+        "held_n": 335,
+        "flip_consistency": 0.776119403
+      }
     }
   }
 }

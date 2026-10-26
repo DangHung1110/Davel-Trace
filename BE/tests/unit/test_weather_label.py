@@ -4,8 +4,8 @@ Covers the legacy v1 rules and the v2 pure snapshot-POI classifier
 (`classify_poi`): audit precedence/conflicts, OSM R1 vs R2 evidence,
 geometry/name linking, sun-only abstention, and weather_sensitive derivation.
 
-Confidence is a HEURISTIC rule strength, NOT calibrated.  The real eval
-(macro-F1 >= 0.95) remains PENDING the human I/O/B audit.
+Confidence is a HEURISTIC rule strength, NOT calibrated.  The independent
+gold-standard eval (macro-F1 >= 0.95) remains pending after the human audit.
 
 Run from repo root: python BE/tests/unit/test_weather_label.py -v
 """
@@ -191,7 +191,7 @@ class TestAuditPrecedence(unittest.TestCase):
         with open(SNAPSHOT, encoding="utf-8") as snapshot_file:
             pois = json.load(snapshot_file)["pois"]
         audited = [p for p in pois if p.get("space_source") == "audit"]
-        self.assertEqual(len(audited), 248)
+        self.assertEqual(len(audited), 250)
         expected = {"I": ("indoor", False), "O": ("outdoor", True),
                     "B": ("both", True)}
         for p in audited:

@@ -1,63 +1,57 @@
 {
-  "generated_at": "2026-10-24",
-  "tool_version": "t063b-weather-exposure-v1",
-  "total": 745,
+  "generated_at": "2026-10-26",
   "exposure_distribution": {
     "outdoor_exposure": {
-      "distinct": 10,
-      "entropy_bits": 2.1322,
+      "distinct": 9,
+      "entropy_bits": 2.0974,
       "values": {
         "0.05": 86,
         "0.1": 418,
         "0.55": 10,
         "0.6": 99,
         "0.7": 20,
-        "0.75": 56,
+        "0.75": 57,
         "0.85": 11,
         "0.9": 25,
-        "0.95": 16,
-        "missing": 4
+        "0.95": 16
       }
     },
     "sun_exposure": {
-      "distinct": 9,
-      "entropy_bits": 1.6862,
+      "distinct": 8,
+      "entropy_bits": 1.6496,
       "values": {
         "0.05": 504,
         "0.44": 10,
         "0.48": 99,
         "0.7": 20,
-        "0.75": 56,
+        "0.75": 57,
         "0.85": 11,
         "0.9": 25,
-        "0.95": 16,
-        "missing": 4
+        "0.95": 16
       }
     },
     "wind_exposure": {
-      "distinct": 10,
-      "entropy_bits": 2.1322,
+      "distinct": 9,
+      "entropy_bits": 2.0974,
       "values": {
         "0.05": 86,
         "0.1": 418,
         "0.44": 10,
         "0.48": 99,
         "0.7": 20,
-        "0.75": 56,
+        "0.75": 57,
         "0.85": 11,
         "0.9": 25,
-        "0.95": 16,
-        "missing": 4
+        "0.95": 16
       }
     },
     "rain_cover": {
-      "distinct": 4,
-      "entropy_bits": 1.2642,
+      "distinct": 3,
+      "entropy_bits": 1.2243,
       "values": {
         "enclosed": 504,
         "mixed": 109,
-        "open": 128,
-        "unknown": 4
+        "open": 129
       }
     }
   }

@@ -3,7 +3,7 @@
 Run from repo root:
     python -m unittest BE.tests.unit.test_weather_enrichment -v
 
-Covers audit preservation (the 46 existing labels), old->new transitions,
+Covers audit preservation (the 250 current snapshot audit labels), old->new transitions,
 legacy rain-proof removal, party/time preservation, dry-run immutability,
 idempotent apply and the 200-row deterministic review helper.
 """
@@ -95,9 +95,9 @@ class TestAuditPreservation(unittest.TestCase):
         report = enrich(pois, audit)
 
         audited = [p for p in pois if p.get("space_source") == "audit"]
-        self.assertEqual(len(audited), 248)
-        self.assertEqual(report["audit_labels"], 248)
-        self.assertEqual(report["preserved_audit"], 248)
+        self.assertEqual(len(audited), 250)
+        self.assertEqual(report["audit_labels"], 250)
+        self.assertEqual(report["preserved_audit"], 250)
 
         for p in audited:
             space, weather = AUDIT_EXPECTED[p["io_label"]]
