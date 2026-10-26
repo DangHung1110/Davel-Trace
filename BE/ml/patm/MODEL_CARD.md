@@ -1,38 +1,51 @@
-# PATM Model Card — v4 (2026-10-17)
+# PATM Model Card — v5 (2026-10-27)
 
-Pairwise Attraction Transition Model: LightGBM pairwise ranker, 17 features
-(`BE/ml/patm/features.py`), predicts P(first POI before second | context).
+Pairwise Attraction Transition Model: LightGBM pairwise classifier with 21
+ordered-pair features. It predicts whether `first_id` should precede
+`second_id` under the encoded transition preferences; it is not an end-to-end
+itinerary generator.
 
-## Training data (T028)
+## Training data
 
-- Snapshot `BE/data/snapshots/danang-v1`, n=764 POIs, 752 covered by pairs.
-- 2151 pairs: 1000 rule + 973 Qwen3-8B local-judge + 178 human-verify.
-  (25 stale pairs referencing review-dropped POIs removed.)
-- Balance prefer-first/tie/prefer-second = 45.6 / 21.3 / 33.0
-  (LLM judges vote decisive more often than the 30/40/30 rule target).
-- Swap-check on stored pairs: 0 inconsistent. Leave-POI-out split:
-  train 1371 / eval 805, 0 leaked.
+- Snapshot: `BE/data/snapshots/danang-v1`, 742 POIs.
+- Versioned pair file: `BE/ml/patm/pairs_v4_final.json`, 2,028 records after
+  removing 123 records that reference POIs removed from the final snapshot.
+- Source rows: 944 rule, 934 LLM-judge, 150 human. The human subset contains
+  150 distinct unordered comparisons (51 prefer first, 57 prefer second,
+  42 tie); it is 50 short of the original 200-human-pair target.
+- 1,596 rows are used for training after dropping 432 ties. Rule and LLM
+  labels are weak supervision; they are not human gold labels.
+- Rebuild pair format check: 0 errors; leave-POI-out split check reports
+  train 1,302 / eval 726 with no POI leakage.
 
-## Metrics (T029/T031)
+## Metrics
 
-- 5-fold CV accuracy: **0.793** (ties excluded from training rows)
-- Held-out accuracy: **0.777** (n=345)
-- Flip consistency (mirror-pair agreement): **0.728**
-- Top features by gain: d_rating, d_intensity, x_meal_after, d_duration,
-  x_indoor_buffer, prior_logp. Price/context/user-profile features ≈ 0
-  (no user signal in lane A; context features activate in lane B wiring).
+Latest full-data training (`train.py`, seed 7):
+
+- 5-fold pair-group CV accuracy: **0.770**.
+- Pair-group held-out accuracy: **0.773** (n=335).
+- Flip consistency: **0.776**.
+
+These group splits prevent mirrored pair leakage but do not prevent the same
+POI from appearing in both train and held-out pairs. See the separate
+leave-POI-out human evaluation in `lpo_metrics.json` before making a
+generalization claim. Pair metrics against weak labels are not user-satisfaction
+or itinerary-quality metrics.
 
 ## Known limits
 
-- Flip 0.728 < v3 0.902: LLM labels on 440 new POIs are noisier and ties
-  are dropped at train time, so the model under-learns symmetry.
-  Follow-up (lane B): keep ties at 0.5 sample weight + temperature
-  calibration before optimizer wiring (T030).
-- 12 POIs have no pairs (long tail); they fall back to rule_score.
-- ticket=null on 21 POIs, hours missing on ~50: optimizer must treat as
-  unconstrained, never as closed/free.
+- Human comparison coverage is limited to 150 distinct pairs; a blind
+  evaluation split is smaller still. Collect more human judgments before
+  treating the score as a stable estimate.
+- Ties are dropped during binary model training; the model has no explicit
+  tie prediction.
+- Long-tail POIs without pair coverage fall back to `rule_score`.
+- These results validate transition ordering only. Feasibility, route quality,
+  weather correctness, and end-to-end itinerary quality use separate gates.
 
 ## Artifacts
 
-- `model.txt` (this version), metrics in `model_metrics.json`
-- pairs: `C:/tmp/pairs_v4.json` (rebuildable via make_pairs + judge batch)
+- Model: `BE/ml/patm/model.txt`; metrics: `BE/ml/patm/model_metrics.json`.
+- Training pairs: `BE/ml/patm/pairs_v4_final.json`.
+- Pair construction/evaluation tools: `make_pairs.py`, `train.py`,
+  `evaluate.py`.

@@ -2,7 +2,7 @@
 
 > Confidence in this module is a **heuristic rule strength**, not a calibrated
 > probability and not an accuracy claim. Manual review for the current
-> snapshot has been reconciled (213 reviewed labels retained); no POIs remain
+> snapshot has been reconciled (214 reviewed labels retained); no POIs remain
 > `space=unknown`. A separate gold-standard generalization evaluation
 > (macro-F1 >= 0.95 on independently adjudicated human I/O/B labels) is still
 > **PENDING**. Review agreement is not an accuracy score. No GBDT is trained
