@@ -86,7 +86,7 @@ def _read_bytes(path: str) -> bytes:
 
 
 class TestAuditPreservation(unittest.TestCase):
-    def test_46_snapshot_audit_labels_are_exact(self):
+    def test_snapshot_audit_labels_are_exact(self):
         if not os.path.exists(POIS_PATH):
             self.skipTest("snapshot absent")
         with open(POIS_PATH, encoding="utf-8") as f:
@@ -94,10 +94,10 @@ class TestAuditPreservation(unittest.TestCase):
         audit = parse_audit(SPOT_CHECK)
         report = enrich(pois, audit)
 
-        audited = [p for p in pois if p.get("io_label") in AUDIT_EXPECTED]
-        self.assertEqual(len(audited), 46)
-        self.assertEqual(report["audit_labels"], 46)
-        self.assertEqual(report["preserved_audit"], 46)
+        audited = [p for p in pois if p.get("space_source") == "audit"]
+        self.assertEqual(len(audited), 248)
+        self.assertEqual(report["audit_labels"], 248)
+        self.assertEqual(report["preserved_audit"], 248)
 
         for p in audited:
             space, weather = AUDIT_EXPECTED[p["io_label"]]

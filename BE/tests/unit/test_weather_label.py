@@ -190,12 +190,15 @@ class TestAuditPrecedence(unittest.TestCase):
             self.skipTest("snapshot absent")
         with open(SNAPSHOT, encoding="utf-8") as snapshot_file:
             pois = json.load(snapshot_file)["pois"]
-        audited = [p for p in pois if p.get("io_label") in ("I", "O", "B")]
-        self.assertEqual(len(audited), 46)
+        audited = [p for p in pois if p.get("space_source") == "audit"]
+        self.assertEqual(len(audited), 248)
         expected = {"I": ("indoor", False), "O": ("outdoor", True),
                     "B": ("both", True)}
         for p in audited:
-            space, weather = expected[p["io_label"]]
+            label = str(p["io_label"]).upper()
+            if label not in expected:
+                label = {"INDOOR": "I", "OUTDOOR": "O", "BOTH": "B"}[label]
+            space, weather = expected[label]
             r = classify_poi(p)
             self.assertEqual(r["space"], space)
             self.assertEqual(r["space_confidence"], 1.0)

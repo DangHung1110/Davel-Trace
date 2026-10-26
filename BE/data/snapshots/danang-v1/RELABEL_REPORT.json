@@ -1,4 +1,7 @@
 {
+  "report_status": "historical_pre_final_snapshot",
+  "final_snapshot_total": 745,
+  "final_report": "WEATHER_AUDIT_RECONCILIATION.json",
   "tool_version": "t063b-weather-exposure-v1",
   "total": 764,
   "audit_labels": 46,

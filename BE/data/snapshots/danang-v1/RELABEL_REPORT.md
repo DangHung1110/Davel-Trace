@@ -1,5 +1,7 @@
 # T063 weather relabel report
 
+> Historical run against the 764-POI pre-audit snapshot. For final 745-POI counts, see `WEATHER_AUDIT_RECONCILIATION.md` and `EXPOSURE_DISTRIBUTION.md`.
+
 - Tool version: `t063b-weather-exposure-v1`
 - Generated (UTC): 2026-10-21
 - POIs: 764

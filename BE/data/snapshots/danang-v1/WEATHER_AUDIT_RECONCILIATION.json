@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24",
+  "generated_at": "2026-10-26",
   "snapshot_before": 764,
   "snapshot_after": 745,
   "review_200": {
@@ -162,5 +162,44 @@
   },
   "removed_count": 19,
   "unique_decisions_total": 213,
-  "unique_labels_retained": 212
+  "unique_labels_retained": 212,
+  "final_snapshot_qc": {
+    "pois": 745,
+    "unique_poi_ids": 745,
+    "removed_since_optimizer_snapshot": 19,
+    "space": {
+      "indoor": 504,
+      "outdoor": 128,
+      "both": 109,
+      "unknown": 4
+    },
+    "rain_cover": {
+      "enclosed": 504,
+      "mixed": 109,
+      "open": 128,
+      "unknown": 4
+    },
+    "rain_protection_unknown": 745,
+    "enrichment_without_osm_cache": {
+      "apply_safe": false,
+      "read_only_changes": 2,
+      "osm_evidence_linked": 0
+    },
+    "matrix": {
+      "expected_top_n": 150,
+      "cached_ids": 150,
+      "stale_ids": [
+        "ChIJK9EAYgAZQjER_3r0iXAJGLE",
+        "ChIJbVtm0WIfQjER_HG2AYprbcY",
+        "ChIJg4XJWVkZQjERVOuuY25EzR0"
+      ],
+      "missing_ids": [
+        "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
+        "ChIJ7fA2ROsZQjERuQWylV-XvDg",
+        "ChIJ80QCWQAXQjER9Wfb-KFGetQ"
+      ],
+      "status": "needs_osrm_rebuild",
+      "osrm_local_available": false
+    }
+  }
 }
