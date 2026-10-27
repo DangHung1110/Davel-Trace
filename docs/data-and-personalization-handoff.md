@@ -3,7 +3,7 @@
 Updated: 2026-10-27  
 Repository: `Davel-Trace`  
 Branch: `feat/data-quality-integration`  
-Last pushed commit: `ab11e4f` — `feat: add POI-disjoint human PATM evaluation`
+Branch checkpoint before this review: `852d873` — `docs: capture data and personalization handoff`
 
 This note captures the current data/model state and the agreed next steps so a
 new session can continue without reconstructing the full chat.
@@ -40,8 +40,11 @@ separate:
   `BE/ml/patm/pairs_v4_final.json`: 2,028 rows (944 rule, 934 LLM-judge, 150
   human), with 123 rows referencing removed POIs excluded. Current snapshot:
   742 POIs. The 150 human rows represent 150 distinct unordered comparisons:
-  51 prefer-first, 57 prefer-second, 42 tie; 50 short of the original 200-pair
-  target.
+  51 prefer-first, 57 prefer-second, 42 tie (108 decisive). Retire or explicitly
+  revise the old target of 200 total comparisons. A new target of 150 decisive
+  comparisons would require 42 additional decisive labels. Do not assume all
+  50 vs the old target were lost POIs: the previous v4 card recorded 178 human
+  rows, and the current filtered set has 150 (28 fewer).
 - Added `BE/ml/patm/evaluate.py` and `BE/ml/patm/lpo_metrics.json` for a
   leave-POI-out evaluation on human-labeled comparisons. Seed 7: 1,302 pair
   rows in train, 1,020 decisive model rows after dropping 282 ties; held-out
@@ -62,13 +65,15 @@ separate:
   fitness, and must-avoid. `User` also describes `party_type`, `trip_purpose`,
   `long_prefs`, and visited history.
 - `BE/app/schemas/trip.py` has a partial `User` schema (`spending_level`,
-  `pace`, `fitness`, `food_prefs`, `must_avoid`) but supplies defaults. In the
-  inspected repo, no user profile persistence/onboarding router or required
-  five-answer gate was found. Therefore the schema/spec exist; the complete
-  onboarding-to-planner flow does not.
-- `BE/app/services/rank.py` consumes budget, fitness, food preferences, and
-  activities. PATM has user features (`pace`, `fitness`, `spending_level`,
-  `outdoor_bias`) in `BE/ml/patm/features.py`.
+  `pace`, `fitness`, `food_prefs`, `must_avoid`) but supplies defaults and lacks
+  `outdoor_bias`. In the inspected repo, no user profile persistence/onboarding
+  router or required five-answer gate was found. Therefore the schema/spec
+  exist; the complete onboarding-to-planner flow does not.
+- `BE/app/services/rank.py` accepts `user` and `ctx` dictionaries and can score
+  budget, fitness, food preferences, activities, and context. However,
+  `BE/app/routers/itinerary.py` currently calls it with only `{"budget": ...}`
+  as the user object. PATM has user features (`pace`, `fitness`,
+  `spending_level`, `outdoor_bias`) in `BE/ml/patm/features.py`.
 - Important limitation: current PATM training rows are created with neutral
   user/context defaults (`train.py` calls `extract(a, b)`); the trained model
   has not learned conditional preference effects from the current pair file.
@@ -83,27 +88,25 @@ separate:
    avoidances hard; treat taste/interest answers as weighted soft preferences.
    Do not enumerate every Cartesian combination. Use a few understandable
    archetypes plus independent option values/multi-selects.
-2. **Create profile-conditioned pair examples.** Each record needs the two POI
-   ids, label, source, user preference vector, and relevant context (at least
-   hour/rain). Sample across POI categories and profiles. Keep rule, LLM, and
-   human labels marked separately; mirrored orders must share a group. Existing
-   human data can be retained as the human subset, but is currently only 150
-   comparisons.
-3. **Wire the conditional features through training/evaluation.** Pass profile
-   and context into `extract(a, b, user, ctx)` in the builder/trainer/evaluator.
-   Evaluate per profile and on POIs excluded from training; compare to the rule
-   baseline and disclose the human sample size. A quick initial target could be
-   4–6 archetypes x ~100 diverse base comparisons, then expand based on blind
-   results; this is a starting design, not a claim that synthetic labels are
-   gold truth.
-4. **Add the BE preference contract in parallel.** Persist/accept the onboarding
-   profile and pass it to ranking/PATM. Keep rule-based fallback while the
-   model is being validated; do not block API integration on claiming a perfect
-   model.
-5. **Close the data gates.** Apply all latest weather audit changes, regenerate
+2. **Run a small conditioned-data pilot and wire training together.** Start
+   with 2–3 clearly distinct archetypes on a shared set of about 50 diverse
+   POI pairs, so profile effects can be compared on the same pairs. This is a
+   pipeline/signal pilot, not enough data for stable per-profile accuracy.
+   Store the preference vector and context on each pair; pass both to
+   `extract(a, b, user, ctx)` in training and evaluation. Keep genuine ties when
+   the labeler sees no meaningful ordering; do not force directional labels to
+   improve binary class balance. Prefer sampling pairs likely to show a
+   meaningful profile distinction, and report the tie rate.
+3. **Add the BE preference contract and wire it end to end.** Persist/accept the
+   onboarding profile, merge it with trip-level overrides, and pass all
+   relevant fields from `itinerary.py` into ranking/PATM. The `rank()` function
+   signature already accepts user/context; current router wiring passes only
+   budget. Keep rule-based fallback while the model is validated.
+4. **Close the data gates.** Apply all latest weather audit changes, regenerate
    the final enriched snapshot, run consistency checks and a fresh blind QA
-   seed; separately decide whether to collect the missing 50 human pair labels
-   to meet the stated 200 target or formally revise that target.
+   seed. Retire the old 200-total-pair target; if the new baseline is 150
+   decisive human comparisons, collect 42 more decisive labels (the current set
+   has 108), without suppressing genuine ties.
 
 ## Constraints and clean handoff
 
