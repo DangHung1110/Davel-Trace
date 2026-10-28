@@ -46,6 +46,7 @@ from BE.app.schemas.trip import TripRequest
 from BE.app.services import pool as pool_svc
 from BE.app.services import profile_filter
 from BE.app.services import rank as rank_svc
+from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
 from BE.app.services import trip_ctx
@@ -361,7 +362,51 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     out = {"plans": public, "selected": None}
     if pool_stats is not None:
         out["solution_pool"] = pool_stats
+    # Shadow LLM ranker (Hướng 3): log-only, never on the response path.
+    # Default OFF keeps the old behaviour and adds zero latency; when ON the
+    # daemon thread may still be running after this response is returned.
+    if os.environ.get("RANKER_SHADOW", "0") == "1":
+        try:
+            ranker_svc.spawn_shadow(
+                query=_shadow_query(trip), plans=public,
+                reference=_shadow_reference(public, by_id))
+        except Exception:  # pragma: no cover - spawn_shadow itself never raises
+            pass
     return out
+
+
+def _shadow_query(trip: dict) -> dict:
+    """Request facts for the ranker prompt (no user ids, no secrets)."""
+    keys = ("city", "days", "start_time", "end_time", "budget", "travelers",
+            "transport", "activities", "food_prefs", "must_visit", "avoid")
+    return {k: trip[k] for k in keys if trip.get(k) not in (None, "", [])}
+
+
+def _shadow_reference(plans: list[dict], by_id: dict) -> list[dict]:
+    """Solver verdicts + POI facts per plan for the ranker's reference block."""
+    refs = []
+    for index, plan in enumerate(plans):
+        pois = []
+        for act in plan.get("activities") or []:
+            poi = by_id.get(act.get("poi_id")) or {}
+            pois.append({"poi_id": act.get("poi_id"),
+                         "type": poi.get("type"),
+                         "price_level": poi.get("price_level"),
+                         "fee": poi.get("fee"),
+                         "rating": poi.get("rating"),
+                         "intensity": poi.get("intensity")})
+        refs.append({
+            "plan_id": plan.get("itinerary_id") or index,
+            "feasible": (bool(plan.get("passed", True))
+                         and not (plan.get("violations") or [])),
+            "cost": plan.get("total_cost"),
+            "violations": plan.get("violations") or [],
+            "soft_violations": plan.get("soft_violations") or [],
+            "travel_min": plan.get("travel_min"),
+            "preference": plan.get("preference"),
+            "pois": pois,
+        })
+    return refs
 
 
 def _guarantee_fields(report: dict | None) -> dict:

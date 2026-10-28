@@ -7,17 +7,29 @@ the same definitions.
 
 Rules
 -----
-- A2 (soft): two `restaurant` POIs less than 2.5h apart (START to START),
-  regardless of meal-slot labels -> split meal. Pair penalty on the edge
-  (folded into `scorer.edge_scores`) plus a plan-level issue; the optimizer
-  also carries a pairwise A2 objective term (gate A1 only guards the hard
-  slot boundary, so 10:49 vs 11:00 slips past it).
-- B1 (soft): two consecutive same-type POIs -> edge penalty. Exempt pairs:
-  cafe->cafe (morning coffee hopping) and viewpoint->sunset_view.
-- B2 (soft): more than two same-type POIs in one day -> increasing penalty
-  (the third costs one step, the fourth two steps, ...).
-- E2 (soft): `bar`/`nightlife` starting before 17:00 -> rank time_fit
+- A2 (soft, ACTIVE/canonical meal spacing): two `restaurant` POIs less than
+  2.5h apart (START to START), regardless of meal-slot labels -> split meal.
+  Pair penalty on the edge (folded into `scorer.edge_scores`) plus a
+  plan-level issue; the optimizer also carries a pairwise A2 objective term
+  (gate A1 only guards the hard slot boundary, so 10:49 vs 11:00 slips past
+  it). A2 is the ONE owner of "two meals too close in time"; B1's same-type
+  term is folded into the same restaurant edge, not a second rule.
+- B1 (soft, DEPRECATED as an independent rule): the old "two consecutive
+  same-type POIs" edge penalty. It is the soft mirror of the HARD
+  NO_CONSECUTIVE rule, so NO_CONSECUTIVE is canonical; B1 survives only as
+  the edge-weight term the optimizer reads (see `gate.RULE_FREEZE`).
+- B2 (soft, DEPRECATED as an independent rule): "more than two same-type
+  POIs in one day". The hard day-level caps own counting now: CATEGORY_CAP
+  (non-food, cap 1) and CAFE_CAP (cafe, cap 2). B2 survives only as a
+  report-only penalty for the types those caps deliberately exclude
+  (`gate.RULE_FREEZE`).
+- E2 (soft, ACTIVE): `bar`/`nightlife` starting before 17:00 -> rank time_fit
   penalty (a bar in the morning is a semantic absurdity, not a hard error).
+
+Freeze note: rule status (active / deprecated + canonical owner + reason) is
+declared once in `gate.RULE_FREEZE`; this module never deletes a rule on its
+own, it only marks the deprecated ones here and keeps their numbers stable so
+scoring/ranking does not shift.
 
 HARD sequence rules (they live in `gate.py`, the primitives here):
 - CAFE_CAP: one cafe per day by default. A second cafe is allowed only when
@@ -33,14 +45,16 @@ HARD sequence rules (they live in `gate.py`, the primitives here):
   are exempt (A1 + CAFE_CAP own them). `is_capped_category` /
   `category_allowed` are the shared primitives: the gate check, the
   optimizer constraint and the greedy seed all read them.
-- NO_CONSECUTIVE: two back-to-back POIs of the same category are HARD. No
-  exemptions (the old B1 cafe->cafe morning exemption only survives as a
-  soft edge penalty; adjacency is now a broken plan, not a taste choice).
-- NO_ADJACENT_FOOD: two consecutive `restaurant` POIs are HARD, whatever the
-  cuisine (BBQ -> vegan included). This is stricter than NO_CONSECUTIVE in
-  intent (it keys on "food", not on the full category) even though both read
-  `poi_category`; keeping it separate means the rule survives if a future
-  category split gives restaurants sub-categories.
+- NO_CONSECUTIVE (canonical): two back-to-back POIs of the same category are
+  HARD. No exemptions (the old B1 cafe->cafe morning exemption only survives
+  as a soft edge penalty; adjacency is now a broken plan, not a taste choice).
+  `same_category_edges` is the ONE adjacency scan: the gate check, the
+  validator offender list and B1 all read it.
+- NO_ADJACENT_FOOD (deprecated, subsumed by NO_CONSECUTIVE): "no two
+  consecutive `restaurant` POIs, whatever the cuisine". It is a strict subset
+  of NO_CONSECUTIVE (both read `poi_category`), so it stays in the registry
+  as a naming/compat layer computed by `same_category_edges(..., only=
+  "restaurant")`, not as a second predicate.
 - REST_FOLLOWS_LUNCH: the siesta window START is the lunch restaurant's END
   time (no fixed 13:00 anchor). Length by pace (60/45/30 min); a late lunch
   (> 15:00) shrinks it to fit the day, never below REST_MIN_FLOOR (20 min).
@@ -268,8 +282,34 @@ def cafe_cap(profile: dict | None) -> int:
 
 
 def is_restaurant(poi: dict | None) -> bool:
-    """NO_ADJACENT_FOOD: any restaurant, whatever its cuisine."""
+    """NO_ADJACENT_FOOD / A1 view: any restaurant, whatever its cuisine."""
     return poi_category(poi) == "restaurant"
+
+
+def same_category_edges(activities: list[dict] | None, pois: dict,
+                        only: str | None = None) -> list[tuple[dict, dict]]:
+    """Canonical "back-to-back POIs of the same category" scan.
+
+    ONE implementation for NO_CONSECUTIVE (hard), its deprecated subset
+    NO_ADJACENT_FOOD (`only="restaurant"`) and the soft B1 edge penalty, so a
+    future change to what "adjacent" means cannot drift between them.
+
+    `activities` are taken in START order (the caller passes them unordered);
+    a missing category is never "the same". `only` narrows the scan to one
+    category without changing the definition of adjacency.
+    Returns the offending (left, right) activity pairs.
+    """
+    acts = sorted(activities or [], key=lambda a: a.get("start", ""))
+    out: list[tuple[dict, dict]] = []
+    for x, y in zip(acts, acts[1:]):
+        left = poi_category(pois.get(x.get("poi_id")))
+        right = poi_category(pois.get(y.get("poi_id")))
+        if not left or left != right:
+            continue
+        if only is not None and left != only:
+            continue
+        out.append((x, y))
+    return out
 
 
 def lunch_activity(activities: list[dict], pois: dict) -> dict | None:
@@ -360,7 +400,9 @@ def edge_penalty(a: dict | None, b: dict | None,
     if ca and ca == cb and (ca, cb) not in EXEMPT_SAME_TYPE:
         penalty = -SAME_TYPE_PENALTY
         if ca == "restaurant":
-            penalty -= RESTAURANT_PAIR_PENALTY  # A2: back-to-back meals
+            # A2 owns meal spacing; the deprecated B1 same-type term is folded
+            # into this ONE restaurant-edge weight (one rule, one number).
+            penalty -= RESTAURANT_PAIR_PENALTY
     state = (ctx or {}).get("edge_state") or {}
     if state:
         satiety = float(state.get("satiety") or 0.0)
@@ -403,17 +445,24 @@ def plan_penalties(activities: list[dict], pois: dict,
                 })
         previous = act
 
-    # B1: consecutive same type, exempt pairs skipped.
-    for (x, cx), (y, cy) in zip(zip(acts, cats), zip(acts[1:], cats[1:])):
-        if cx and cx == cy and (cx, cy) not in EXEMPT_SAME_TYPE:
-            penalty += SAME_TYPE_PENALTY
-            issues.append({
-                "rule": "B1",
-                "poi_ids": [x["poi_id"], y["poi_id"]],
-                "detail": f"2 diem cung loai '{cx}' lien tiep",
-            })
+    # B1 (DEPRECATED as an independent rule; the soft mirror of the HARD
+    # NO_CONSECUTIVE): consecutive same type, exempt pairs skipped. It reads
+    # the same adjacency scan as the gate so the two can never disagree.
+    for x, y in same_category_edges(acts, pois):
+        pair = (poi_category(pois.get(x.get("poi_id"))),
+                poi_category(pois.get(y.get("poi_id"))))
+        if pair in EXEMPT_SAME_TYPE:
+            continue
+        penalty += SAME_TYPE_PENALTY
+        issues.append({
+            "rule": "B1",
+            "poi_ids": [x["poi_id"], y["poi_id"]],
+            "detail": f"2 diem cung loai '{pair[0]}' lien tiep",
+        })
 
-    # B2: more than two of one type in a day -> increasing penalty.
+    # B2 (DEPRECATED as an independent rule): CATEGORY_CAP/CAFE_CAP own the
+    # day-level caps; this survives only as a report-only penalty for the
+    # types they exclude.
     for cat, count in Counter(c for c in cats if c).items():
         if count > TYPE_LIMIT:
             extra = count - TYPE_LIMIT

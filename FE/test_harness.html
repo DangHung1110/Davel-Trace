@@ -40,11 +40,13 @@
 <button onclick="doItin(['experience'])">Trai nghiem</button>
 <button onclick="doItin(['savings','balanced','experience'])"><b>So sanh 3 profile</b></button>
 <div id="itinBox"></div>
+<button onclick="doAccept()">Chốt plan này</button>
 <pre id="itinOut">...</pre>
 <script>
 const BE = "http://127.0.0.1:8000";
 const PROFILE_KEY = "davel_profile";
 let lastTrip = null;
+let lastItin = null;  // plans + trip of the LAST /v1/itinerary response (for "Chốt plan")
 
 // Profile từ FE/onboard.html (localStorage). Không có thì bỏ qua.
 function loadProfile(){
@@ -282,6 +284,37 @@ async function renderPlans(plans, trip){
   box.appendChild(table);
 }
 
+async function doAccept(){
+  const el = document.getElementById("itinOut");
+  if(!lastItin || !lastItin.plans || !lastItin.plans.length){
+    el.textContent = "Chua co plan nao — bam 'So sanh 3 profile' truoc.";
+    return;
+  }
+  const plans = lastItin.plans;
+  const raw = prompt("Chot plan nao? (index 0.." + (plans.length - 1) + ")", "0");
+  if(raw === null) return;  // huy
+  const idx = Number(raw);
+  if(!Number.isInteger(idx) || idx < 0 || idx >= plans.length){
+    el.textContent = "LOI: index khong hop le (" + raw + "), can 0.." + (plans.length - 1);
+    return;
+  }
+  const picked = plans[idx];
+  try{
+    const {status, json} = await call("/v1/accept", {
+      query: document.getElementById("txt").value,
+      profile: picked.profile || "",
+      plans,
+      picked_index: idx,
+    });
+    if(json && json.ok){
+      el.textContent = "Da chot plan #" + idx + " (" + (picked.profile || "?") + ") — tong "
+        + json.n + " dong trong accepted_days.jsonl";
+    }else{
+      el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 2000);
+    }
+  }catch(e){ el.textContent = "LOI: " + e; }
+}
+
 async function doItin(profiles){
   const el = document.getElementById("itinOut");
   if(!lastTrip){ el.textContent = "Hay Parse truoc de co TripRequest."; return; }
@@ -291,6 +324,7 @@ async function doItin(profiles){
   try{
     const {status, json} = await call("/v1/itinerary", {trip, profiles});
     if(!json.plans){ el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 2000); return; }
+    lastItin = {plans: json.plans, trip};
     await renderPlans(json.plans, trip);
 
     let out = "HTTP " + status + ", " + json.plans.length + " plans\n";

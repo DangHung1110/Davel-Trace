@@ -14,8 +14,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
+    ACTIVE_RULES,
     CHECKS,
+    DEPRECATED_RULES,
     HARD_CHECKS,
+    RULE_FREEZE,
     SOFT_CHECKS,
     all_pass,
     check_a1,
@@ -26,9 +29,14 @@ from BE.app.services.gate import (  # noqa: E402
     check_far,
     check_hcs,
     check_no_adjacent_food,
+    check_no_consecutive,
     check_rest_follows_lunch,
     check_tcs,
     check_vroh,
+    freeze_drift,
+    freeze_report,
+    report,
+    rest_rule_violation,
 )
 
 POIS = {
@@ -409,6 +417,158 @@ class TestNoAdjacentFoodAndRest(unittest.TestCase):
             {"poi_id": "museum", "start": "09:00", "end": "10:00"}]}
         self.assertTrue(check_rest_follows_lunch(itin, TRIP, self.POIS,
                                                  self.MATRIX)["passed"])
+
+
+class TestRuleFreeze(unittest.TestCase):
+    """Hướng 1: ONE canonical rule per group, duplicates deprecated not deleted.
+
+    The registry is the audit surface; these tests pin the invariants that
+    keep the overlap from growing back.
+    """
+
+    def test_every_gate_check_is_registered(self):
+        names = [name for name, _ in CHECKS]
+        self.assertEqual([n for n in names if n not in RULE_FREEZE], [])
+        for name, meta in RULE_FREEZE.items():
+            self.assertIn(meta["status"], {"active", "deprecated"}, name)
+            self.assertTrue(meta["reason"], name)
+            self.assertIn("family", meta, name)
+
+    def test_soft_rules_are_registered_in_the_same_registry(self):
+        # A2/B1/B2/E2 live in soft_rules.py but their status is declared once.
+        for name in ("A2", "B1", "B2", "E2"):
+            self.assertIn(name, RULE_FREEZE)
+
+    def test_one_active_owner_per_family_and_deprecated_names_it(self):
+        families = freeze_report()["families"]
+        for family, members in families.items():
+            owners = [n for n in members if RULE_FREEZE[n]["status"] == "active"]
+            self.assertTrue(owners, f"{family} has no canonical rule")
+            for name in members:
+                if RULE_FREEZE[name]["status"] != "deprecated":
+                    self.assertIsNone(RULE_FREEZE[name]["canonical"], name)
+                    continue
+                canonical = RULE_FREEZE[name]["canonical"]
+                canonical = ((canonical,) if isinstance(canonical, str)
+                             else tuple(canonical or ()))
+                self.assertTrue(canonical, f"{name} deprecated without an owner")
+                for owner in canonical:
+                    self.assertIn(owner, members, f"{name} -> {owner} cross-family")
+                    self.assertEqual(RULE_FREEZE[owner]["status"], "active",
+                                     f"{name} points at a non-active owner")
+
+    def test_deprecated_registry_is_explicit(self):
+        self.assertEqual(set(DEPRECATED_RULES),
+                         {"NO_ADJACENT_FOOD", "B1", "B2"})
+        self.assertEqual(RULE_FREEZE["NO_ADJACENT_FOOD"]["canonical"],
+                         "NO_CONSECUTIVE")
+        self.assertIn("NO_ADJACENT_FOOD", [n for n, _ in CHECKS])
+        self.assertIn("NO_ADJACENT_FOOD", ACTIVE_RULES + DEPRECATED_RULES)
+
+    def test_deprecated_rule_never_fires_without_its_canonical_rule(self):
+        """The strict-subset invariant: NO_ADJACENT_FOOD implies NO_CONSECUTIVE."""
+        fixtures = [
+            (GOOD, TRIP, POIS, MATRIX),
+            ({"activities": [{"poi_id": "ghost", "start": "08:00", "end": "09:00"}]},
+             TRIP, POIS, MATRIX),
+            ({"activities": [{"poi_id": "musu", "start": "16:30", "end": "17:30"}]},
+             TRIP, POIS, MATRIX),
+            # bbq -> vegan: adjacent restaurants.
+            ({"activities": [
+                {"poi_id": "lunch-a", "start": "11:30", "end": "12:30"},
+                {"poi_id": "lunch-b", "start": "12:40", "end": "13:40"}]},
+             TRIP, EAT_POIS, EAT_MATRIX),
+        ]
+        for itin, trip, pois, matrix in fixtures:
+            self.assertEqual(freeze_drift(itin, trip, pois, matrix), [])
+            adjacent = check_no_adjacent_food(itin, trip, pois, matrix)["passed"]
+            if not adjacent:
+                self.assertFalse(
+                    check_no_consecutive(itin, trip, pois, matrix)["passed"])
+
+    def test_report_surfaces_deprecated_failures_additively(self):
+        itin = {"activities": [
+            {"poi_id": "lunch-a", "start": "11:30", "end": "12:30"},
+            {"poi_id": "lunch-b", "start": "12:40", "end": "13:40"}]}
+        rep = report(itin, TRIP, EAT_POIS, EAT_MATRIX)
+        self.assertFalse(rep["passed"])
+        for name in ("A1", "NO_CONSECUTIVE", "NO_ADJACENT_FOOD", "HCS"):
+            self.assertIn(name, rep["failed"])
+        # Deprecated names stay in `failed` (compat) but are called out.
+        self.assertEqual(rep["deprecated_failed"], ["NO_ADJACENT_FOOD"])
+        self.assertEqual(set(rep), {"passed", "failed", "soft_failed",
+                                    "deprecated_failed", "score",
+                                    "checks", "scores"})
+
+    def test_report_deprecated_failed_is_empty_when_all_pass(self):
+        self.assertEqual(report(GOOD, TRIP, POIS, MATRIX)["deprecated_failed"],
+                         [])
+
+
+class TestRestRuleSingleDefinition(unittest.TestCase):
+    """REST_FOLLOWS_LUNCH: gate score and validator offenders share one fn."""
+
+    POIS = TestNoAdjacentFoodAndRest.POIS
+    MATRIX = TestNoAdjacentFoodAndRest.MATRIX
+    PROFILE = {"party_type": "solo", "pace": 2}
+
+    def test_vacuous_cases_return_none(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        no_lunch = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"}]}
+        # No profile -> legacy plan, no rest need.
+        self.assertIsNone(rest_rule_violation(no_lunch, TRIP, self.POIS))
+        # Morning half-day: the trip cannot hold a lunch window.
+        self.assertIsNone(rest_rule_violation(
+            no_lunch, dict(TRIP, end_time="10:30", profile=self.PROFILE),
+            self.POIS))
+
+    def test_good_plan_returns_none(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        good = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"},
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"}]}
+        self.assertIsNone(rest_rule_violation(good, trip, self.POIS))
+
+    def test_missing_lunch_and_bad_window_are_structural(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        no_lunch = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"}]}
+        reason, offenders = rest_rule_violation(no_lunch, trip, self.POIS)
+        self.assertTrue(reason)
+        self.assertEqual(offenders, [])
+
+        wrong_len = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"}],
+            "rest": {"start": "12:30", "end": "13:00"}}  # 30 != pace 45
+        reason, offenders = rest_rule_violation(wrong_len, trip, self.POIS)
+        self.assertTrue(reason)
+        self.assertEqual(offenders, [])
+
+    def test_overlap_returns_the_offending_ids(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        inside = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"},
+            {"poi_id": "cafe", "start": "12:45", "end": "13:00"}]}
+        reason, offenders = rest_rule_violation(inside, trip, self.POIS)
+        self.assertEqual(reason, "")  # window is right; only the overlap is wrong
+        self.assertEqual(offenders, ["cafe"])
+        self.assertFalse(check_rest_follows_lunch(
+            inside, trip, self.POIS, self.MATRIX)["passed"])
+
+    def test_structural_failure_scores_zero_even_with_overlap(self):
+        """Pins the old score: a wrong window is 0.0, not a ratio."""
+        trip = dict(TRIP, profile=self.PROFILE)
+        wrong_len = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"},
+            {"poi_id": "cafe", "start": "12:45", "end": "13:00"}],
+            "rest": {"start": "12:30", "end": "13:00"}}  # 30 != pace 45
+        reason, offenders = rest_rule_violation(wrong_len, trip, self.POIS)
+        self.assertTrue(reason)
+        self.assertEqual(offenders, ["cafe"])
+        self.assertEqual(check_rest_follows_lunch(
+            wrong_len, trip, self.POIS, self.MATRIX),
+            {"passed": False, "score": 0.0})
 
 
 if __name__ == "__main__":

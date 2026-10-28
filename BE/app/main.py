@@ -8,6 +8,7 @@ from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from BE.app.config import get_settings
+from BE.app.routers import accept as accept_router
 from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
 from BE.app.routers import evaluate as evaluate_router
@@ -42,6 +43,8 @@ app.include_router(scorer_router.router)
 app.include_router(review_router.router)
 # NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
 app.include_router(repair_router.router)
+# NOTE(test-local): append-only "Chốt plan" log for future weight-learning.
+app.include_router(accept_router.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

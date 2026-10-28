@@ -170,5 +170,61 @@ class TestRestFollowsLunch(unittest.TestCase):
         self.assertIsNone(soft_rules.rest_span(acts, POIS, self.PROFILE, 18 * 60))
 
 
+class TestSameCategoryEdges(unittest.TestCase):
+    """ONE adjacency scan behind NO_CONSECUTIVE / NO_ADJACENT_FOOD / B1."""
+
+    def test_scan_is_start_ordered_and_categorical(self):
+        acts = [act("beach", "10:00", "11:00"), act("beach", "08:00", "09:00")]
+        pairs = soft_rules.same_category_edges(acts, POIS)
+        self.assertEqual([(x["start"], y["start"]) for x, y in pairs],
+                         [("08:00", "10:00")])
+
+    def test_only_narrows_to_one_category(self):
+        acts = [act("beach", "08:00", "09:00"), act("beach", "09:30", "10:30"),
+                act("r1", "11:30", "12:30"), act("r2", "13:30", "14:30")]
+        self.assertEqual(len(soft_rules.same_category_edges(acts, POIS)), 2)
+        restaurants = soft_rules.same_category_edges(acts, POIS, only="restaurant")
+        self.assertEqual([(x["poi_id"], y["poi_id"]) for x, y in restaurants],
+                         [("r1", "r2")])
+
+    def test_missing_category_is_never_the_same(self):
+        unknown = {"a": {"poi_id": "a"}, "b": {"poi_id": "b"}}
+        acts = [act("a", "08:00", "09:00"), act("b", "10:00", "11:00")]
+        self.assertEqual(soft_rules.same_category_edges(acts, unknown), [])
+
+    def test_b1_reports_the_same_pairs_as_the_scan(self):
+        acts = [act("beach", "10:00", "11:00"), act("beach", "08:00", "09:00"),
+                act("r1", "12:00", "13:00")]
+        b1 = [i for i in soft_rules.plan_penalties(acts, POIS)["issues"]
+              if i["rule"] == "B1"]
+        scanned = [tuple(x["poi_id"] for x in pair)
+                   for pair in soft_rules.same_category_edges(acts, POIS)]
+        self.assertEqual([tuple(i["poi_ids"]) for i in b1], scanned)
+
+
+class TestRuleFreezeStatus(unittest.TestCase):
+    """Soft rules declare their status in the ONE registry (`gate.RULE_FREEZE`)."""
+
+    def test_declared_status_matches_the_soft_layer_docs(self):
+        from BE.app.services.gate import RULE_FREEZE
+
+        self.assertEqual(RULE_FREEZE["A2"]["status"], "active")
+        self.assertEqual(RULE_FREEZE["E2"]["status"], "active")
+        self.assertEqual(RULE_FREEZE["B1"]["status"], "deprecated")
+        self.assertEqual(RULE_FREEZE["B1"]["canonical"], "NO_CONSECUTIVE")
+        self.assertEqual(RULE_FREEZE["B2"]["status"], "deprecated")
+        self.assertEqual(tuple(RULE_FREEZE["B2"]["canonical"]),
+                         ("CATEGORY_CAP", "CAFE_CAP"))
+
+    def test_deprecated_soft_penalties_still_compute_the_same_numbers(self):
+        """Deprecation is a label, not a behaviour change (numbers frozen)."""
+        three = [act("cafe1", "07:00", "07:45"), act("cafe2", "08:00", "08:45"),
+                 act("cafe3", "09:00", "09:45")]
+        report = soft_rules.plan_penalties(three, POIS)
+        # 2 exempt cafe->cafe edges, B2 charges one step for the 3rd cafe.
+        self.assertEqual(report["penalty"], soft_rules.TYPE_PENALTY_STEP)
+        self.assertIn("B2", [i["rule"] for i in report["issues"]])
+
+
 if __name__ == "__main__":
     unittest.main()

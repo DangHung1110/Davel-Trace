@@ -30,3 +30,4 @@ Nhánh chức năng, không worktree. Không push thẳng main/dev. Không commi
 - Harness hiện tên POI (thay id) — nhét vào lane PR.
 - Nợ biết rõ: quán hải sản chưa thắng quán 4.9 (taste vào node optimizer — lát 2); viewpoint pool thiếu; review LLM nondeterministic ở lỗi nhẹ (bảo đảm bằng gate); parse flake đã giảm chưa hết hẳn (bấm lại là qua).
 - Paper related-work: /tmp/llm_itinerary_papers.md, diversity_papers.md, novelty_papers.md, meal_state_papers.md, stable_planning_papers.md
+- Wave-2 deep dives: /tmp/inverse_opt_deep_dive.md (fit weight: BT 150 pairs → Chow 40+ ngày → full IO), /tmp/judge_rerank_calibration.md (ranker shadow: swap-consistency ≥0.85, top-1 agreement ≥75%, veto ≤ baseline, promote sau 2 tuần n≥200)
