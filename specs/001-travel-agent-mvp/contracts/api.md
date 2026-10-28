@@ -10,8 +10,9 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 
 ## POST /itinerary — TripRequest → plans
 - In: `{ "trip": {TripRequest}, "profiles": ["savings", "balanced", "experience"] }`
-- Out: `{ "plans": [{Itinerary + scores + explanations}], "selected": null }`
+- Out: `{ "plans": [{Itinerary + scores + explanations}], "selected": null, "softened": [...] }`
 - Rule: every plan passed feasibility gate; ≥2 plans when feasible.
+- Rule: `softened` rỗng khi lọc đủ ràng buộc; khi `activities` làm rỗng danh sách POI thì bỏ lọc loại một lần (giữ avoid/xác minh/ngân sách/giờ) và ghi lại ở đây (FR-006, FR-022).
 
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`
