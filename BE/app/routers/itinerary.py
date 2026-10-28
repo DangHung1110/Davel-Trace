@@ -75,7 +75,7 @@ def itinerary(body: ItineraryIn):
 
     trip = body.trip.model_dump()
     by_id = {p["poi_id"]: p for p in pois}
-    retrieval = retrieval_svc.retrieve(trip, pois)
+    retrieval = retrieval_svc.retrieve_softened(trip, pois)
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
     ranked = rank_svc.rank(
         [by_id[poi_id] for poi_id in candidate_ids],
@@ -99,7 +99,7 @@ def itinerary(body: ItineraryIn):
     # response drops leading-underscore keys.
     select_svc.register(plans)
     public = [_public(plan) for plan in plans]
-    return {"plans": public, "selected": None}
+    return {"plans": public, "selected": None, "softened": retrieval["softened"]}
 
 
 def _public(plan: dict) -> dict:
