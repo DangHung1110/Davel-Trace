@@ -84,7 +84,7 @@ git worktree add ..\Davel-Trace-lane-c feat/lane-c-parser-api
 
 | Ngày | Lane | Đổi gì | Ảnh hưởng lane nào | Đã báo chưa |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-28 | C | `POST /itinerary` thêm `softened`; `retrieve()` thêm `unmatched_activities`, lọc theo `cat` | FE (trường mới, không bắt buộc đọc); A `eval/baselines` gọi `retrieve()` (khóa cũ giữ nguyên) | chưa |
 
 ## Tracking (update bảng này mỗi PR)
 
