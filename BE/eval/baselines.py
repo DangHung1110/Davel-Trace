@@ -54,6 +54,14 @@ HYBRID_PROFILE = "balanced"
 # different optima. The harness pins one worker so a published SC table is
 # reproducible; the product endpoint keeps the solver default (0).
 EVAL_WORKERS = 1
+# A single worker is still not enough: the plain 5 s WALL-CLOCK budget stops
+# wherever the machine got to, so a busier run can land on another incumbent
+# (test_baselines.test_run_is_deterministic caught exactly that). The eval
+# path therefore budgets DETERMINISTIC time (OR-Tools work units) instead: the
+# same query does the same work on every run. The wall clock is only a safety
+# cap so a bad instance cannot hang the suite.
+EVAL_DETERMINISTIC_TIME = 1.5
+EVAL_WALL_SAFETY_S = 60.0
 ZERO_FEE_NOTE = ("all candidate fees are 0 in the scoped snapshot -> BCS is "
                  "vacuous: SC-008 is reported but cannot be exercised here "
                  "(T051 note: T053 must extend fee coverage)")
@@ -72,8 +80,16 @@ def distance_only_itinerary(record: dict) -> dict | None:
 
 def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
                      cells: dict, profile: str = HYBRID_PROFILE,
-                     workers: int = EVAL_WORKERS) -> dict:
-    """Real app pipeline: retrieval -> rank -> profiles.build_plan (hybrid)."""
+                     workers: int = EVAL_WORKERS,
+                     deterministic_time: float | None = EVAL_DETERMINISTIC_TIME
+                     ) -> dict:
+    """Real app pipeline: retrieval -> rank -> profiles.build_plan (hybrid).
+
+    `deterministic_time` replaces the wall-clock search budget with an
+    OR-Tools work-unit budget: a wall clock stops wherever the machine got to,
+    so the same query could return a different incumbent on a busier run (the
+    published SC table must not drift). The wall clock stays as a safety cap.
+    """
     from BE.app.services import profiles, rank, retrieval
 
     trip = record["trip"]
@@ -82,7 +98,10 @@ def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
     ranked = rank.rank([by_id[i] for i in cids], {"budget": trip["budget"]},
                        {"trip": trip, "hour": trip.get("start_time", "07:00")})
     plan = profiles.build_plan(profile, trip, ranked, by_id, cells,
-                               workers=workers)
+                               workers=workers,
+                               timeout_s=EVAL_WALL_SAFETY_S if
+                               deterministic_time is not None else None,
+                               deterministic_time=deterministic_time)
     return {"activities": plan.get("activities", []),
             "total_cost": plan.get("total_cost")}
 

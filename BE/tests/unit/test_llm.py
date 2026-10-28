@@ -57,6 +57,12 @@ def bad_schema(url, headers, body):
     return {"text": '{"city": "da-nang"}'}  # missing days
 
 
+def blank_ints_transport(url, headers, body):
+    """qwen3 quirk: empty strings where the schema wants numbers."""
+    return {"text": '{"city": "da-nang", "days": "", "travelers": "", '
+                    '"budget": "3000000"}'}
+
+
 LOCAL = Settings(llm_provider="local", ollama_url="http://x:11434")
 
 
@@ -99,6 +105,19 @@ class TestLLM(unittest.TestCase):
         with self.assertRaises(LLMError) as cm:
             complete_json("p", TripSlots, bad_schema, LOCAL)
         self.assertEqual(cm.exception.reason, "schema")
+
+    def test_parser_schema_normalises_blank_ints_before_validation(self):
+        """Live regression: travelers "" must not retry 3x -> 503.
+
+        `complete_json` validates against the Pydantic schema BEFORE `parse`
+        can normalise the dict, so the schema itself must accept blanks.
+        """
+        from BE.app.services.parser import TripSlots as ParserSlots
+
+        out = complete_json("p", ParserSlots, blank_ints_transport, LOCAL)
+        self.assertIsNone(out["travelers"])
+        self.assertIsNone(out["days"])
+        self.assertEqual(out["budget"], 3000000)
 
     def test_api_provider_uses_env_key(self):
         seen = {}

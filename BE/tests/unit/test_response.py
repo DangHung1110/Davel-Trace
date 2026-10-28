@@ -45,7 +45,10 @@ class TestResponse(unittest.TestCase):
         self.assertTrue(plan["passed"])
         self.assertEqual(plan["constraint_status"],
                          {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
-                          "ETB": 1, "TCS": 1, "HCS": 1})
+                          "ETB": 1, "A1": 1, "CAFE_CAP": 1,
+                          "CATEGORY_CAP": 1,
+                          "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,
+                          "REST_FOLLOWS_LUNCH": 1, "TCS": 1, "HCS": 1})
         self.assertEqual(plan["violations"], [])
 
     def test_failed_status_mirrors(self):

@@ -143,9 +143,13 @@ class TestMetrics(unittest.TestCase):
         self.assertEqual(rep["soft"], {})
 
     def test_all_metric_fns_callable(self):
-        # T061f: metrics imports the canonical 7-check registry from gate.py.
+        # T061f: metrics imports the canonical registry from gate.py (F1 is
+        # the new SOFT quota; it is present here but not gate fail-closed).
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"])
+                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                          "CATEGORY_CAP", "NO_CONSECUTIVE",
+                          "NO_ADJACENT_FOOD",
+                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
         for _, fn in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
 
@@ -156,7 +160,10 @@ class TestMetrics(unittest.TestCase):
         self.assertIs(GATE_CHECKS, CANONICAL)
         self.assertIs(VALIDATOR_CHECKS, CANONICAL)
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"])
+                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                          "CATEGORY_CAP", "NO_CONSECUTIVE",
+                          "NO_ADJACENT_FOOD",
+                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
 
     def test_multi_interval_hours_parse(self):
         def score(activities, hours):

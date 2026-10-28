@@ -15,12 +15,18 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.app.services.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     CHECKS,
+    HARD_CHECKS,
+    SOFT_CHECKS,
     all_pass,
+    check_a1,
     check_b3,
     check_bcs,
     check_etb,
+    check_f1,
     check_far,
     check_hcs,
+    check_no_adjacent_food,
+    check_rest_follows_lunch,
     check_tcs,
     check_vroh,
 )
@@ -36,18 +42,52 @@ GOOD = {"activities": [
     {"poi_id": "musu", "start": "08:00", "end": "09:30"},
     {"poi_id": "beach", "start": "10:00", "end": "12:00"}]}
 
+# A1 (meal-slot rule) fixtures: `cat` is the snapshot's English category,
+# `type` the Vietnamese label; older fixtures only carry `type`.
+EAT_POIS = {
+    "lunch-a": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+                "type": "restaurant"},
+    "lunch-b": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+                "type": "restaurant"},
+    "dinner": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+               "type": "restaurant"},
+    "seafood": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+                "cat": "restaurant", "type": "Nhà hàng hải sản"},
+    "cafe-a": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+               "type": "cafe"},
+    "cafe-b": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+               "type": "cafe"},
+    "dessert": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+                "type": "dessert"},
+}
+EAT_IDS = list(EAT_POIS)
+EAT_MATRIX = {f"{a}->{b}": {"minutes": 10}
+              for a in EAT_IDS for b in EAT_IDS if a != b}
+
 
 class TestGate(unittest.TestCase):
-    def test_good_passes_all(self):
-        for _, fn in CHECKS:
+    def test_good_passes_all_hard_gates(self):
+        # F1 (soft) legitimately fails on this fixture: it has no category
+        # data, so neither the food nor the sightseeing half can be met.
+        for name, fn in HARD_CHECKS:
             self.assertEqual(fn(GOOD, TRIP, POIS, MATRIX),
-                             {"passed": True, "score": 1.0})
+                             {"passed": True, "score": 1.0}, name)
+        self.assertEqual(check_f1(GOOD, TRIP, POIS, MATRIX),
+                         {"passed": False, "score": 0.0})
         self.assertEqual(all_pass(GOOD, TRIP, POIS, MATRIX),
                          {"passed": True, "failed": []})
 
+    def test_soft_registry_membership(self):
+        self.assertEqual(SOFT_CHECKS, frozenset({"F1"}))
+        self.assertNotIn("F1", [name for name, _ in HARD_CHECKS])
+        self.assertEqual(len(HARD_CHECKS), len(CHECKS) - len(SOFT_CHECKS))
+
     def test_registry_and_result_shape_are_canonical(self):
         self.assertEqual([name for name, _ in CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"])
+                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                          "CATEGORY_CAP", "NO_CONSECUTIVE",
+                          "NO_ADJACENT_FOOD",
+                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
         for _, fn in CHECKS:
             result = fn(GOOD, TRIP, POIS, MATRIX)
             self.assertEqual(set(result), {"passed", "score"})
@@ -166,6 +206,209 @@ class TestGate(unittest.TestCase):
                          {"passed": True, "score": 1.0})
         self.assertEqual(all_pass(itin, TRIP, pois, matrix),
                          {"passed": True, "failed": []})
+
+    # --- A1: one restaurant per meal slot (hard, data-quality pass) -------
+
+    def test_a1_two_restaurants_same_lunch_slot_fails(self):
+        itin = {"activities": [
+            {"poi_id": "lunch-a", "start": "11:10", "end": "12:10"},
+            {"poi_id": "lunch-b", "start": "12:20", "end": "13:20"}]}
+        self.assertFalse(check_a1(itin, TRIP, EAT_POIS, EAT_MATRIX)["passed"])
+        # Two back-to-back restaurants are also NO_CONSECUTIVE and (stricter)
+        # NO_ADJACENT_FOOD offenders.
+        self.assertEqual(all_pass(itin, TRIP, EAT_POIS, EAT_MATRIX)["failed"],
+                         ["A1", "NO_CONSECUTIVE", "NO_ADJACENT_FOOD", "HCS"])
+
+    def test_a1_one_restaurant_per_slot_passes(self):
+        itin = {"activities": [
+            {"poi_id": "lunch-a", "start": "11:30", "end": "12:30"},
+            {"poi_id": "dinner", "start": "18:00", "end": "19:00"}]}
+        self.assertEqual(check_a1(itin, TRIP, EAT_POIS, EAT_MATRIX),
+                         {"passed": True, "score": 1.0})
+
+    def test_a1_only_restaurant_type_counts(self):
+        """Cafes and dessert shops in the slot do not count as a meal."""
+        itin = {"activities": [
+            {"poi_id": "cafe-a", "start": "11:10", "end": "12:00"},
+            {"poi_id": "cafe-b", "start": "12:05", "end": "13:00"},
+            {"poi_id": "dessert", "start": "13:05", "end": "13:30"},
+            {"poi_id": "lunch-a", "start": "13:35", "end": "14:00"}]}
+        self.assertEqual(check_a1(itin, TRIP, EAT_POIS, EAT_MATRIX)["passed"], True)
+
+    def test_a1_snapshot_category_field_is_understood(self):
+        """`cat: restaurant` (with a Vietnamese `type`) is still a meal."""
+        itin = {"activities": [
+            {"poi_id": "lunch-a", "start": "12:00", "end": "13:00"},
+            {"poi_id": "seafood", "start": "13:05", "end": "14:05"}]}
+        self.assertFalse(check_a1(itin, TRIP, EAT_POIS, EAT_MATRIX)["passed"])
+
+    def test_a1_start_time_keys_the_slot(self):
+        """11:30 + 14:00 starts are different slots (14:00 is not lunch)."""
+        itin = {"activities": [
+            {"poi_id": "lunch-a", "start": "11:30", "end": "12:30"},
+            {"poi_id": "lunch-b", "start": "14:00", "end": "15:00"}]}
+        self.assertEqual(check_a1(itin, TRIP, EAT_POIS, EAT_MATRIX)["passed"], True)
+        dinner = {"activities": [
+            {"poi_id": "dinner", "start": "17:30", "end": "18:30"},
+            {"poi_id": "seafood", "start": "19:00", "end": "20:00"}]}
+        self.assertFalse(check_a1(dinner, TRIP, EAT_POIS, EAT_MATRIX)["passed"])
+
+
+# F1 (SOFT category quota): at least 1 food AND 1 culture/nature/sightseeing.
+F1_POIS = {
+    "rest": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+             "cat": "restaurant", "type": "Nhà hàng"},
+    "cafe": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+             "cat": "cafe", "type": "Quán cà phê"},
+    "museum": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+               "cat": "museum", "type": "Bảo tàng"},
+    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"],
+              "type": "beach"},  # legacy fixture: no `cat`, type fallback
+    "spa": {"verified": True, "fee": 0, "opening_hours": ["06:00-23:00"],
+            "cat": "spa", "type": "Spa"},
+}
+F1_IDS = list(F1_POIS)
+F1_MATRIX = {f"{a}->{b}": {"minutes": 10}
+             for a in F1_IDS for b in F1_IDS if a != b}
+
+
+def _acts(*ids):
+    return {"activities": [{"poi_id": pid, "start": f"{8 + 2 * i:02d}:00",
+                            "end": f"{9 + 2 * i:02d}:00"}
+                           for i, pid in enumerate(ids)]}
+
+
+class TestF1CategoryQuota(unittest.TestCase):
+    def test_f1_all_food_day_fails_soft(self):
+        rep = check_f1(_acts("rest", "cafe"), TRIP, F1_POIS, F1_MATRIX)
+        self.assertEqual(rep, {"passed": False, "score": 0.5})
+
+    def test_f1_all_sightseeing_day_fails_soft(self):
+        rep = check_f1(_acts("museum", "beach"), TRIP, F1_POIS, F1_MATRIX)
+        self.assertEqual(rep, {"passed": False, "score": 0.5})
+
+    def test_f1_food_plus_sightseeing_passes(self):
+        self.assertEqual(
+            check_f1(_acts("rest", "museum"), TRIP, F1_POIS, F1_MATRIX),
+            {"passed": True, "score": 1.0})
+
+    def test_f1_type_fallback_counts_as_sightseeing(self):
+        """Legacy POIs only carry `type`: beach still satisfies the quota."""
+        self.assertEqual(
+            check_f1(_acts("cafe", "beach"), TRIP, F1_POIS, F1_MATRIX),
+            {"passed": True, "score": 1.0})
+
+    def test_f1_spa_alone_is_neither_half(self):
+        self.assertEqual(
+            check_f1(_acts("spa"), TRIP, F1_POIS, F1_MATRIX),
+            {"passed": False, "score": 0.0})
+
+    def test_f1_empty_plan_is_vacuously_ok(self):
+        """FAR owns the non-empty rule; F1 does not double-report it."""
+        self.assertEqual(check_f1({"activities": []}, TRIP, F1_POIS, F1_MATRIX),
+                         {"passed": True, "score": 1.0})
+
+    def test_f1_never_fail_closes_hard_gates(self):
+        """An all-food day still passes all_pass (F1 is SOFT)."""
+        trip = dict(TRIP, budget=3000000)
+        self.assertEqual(all_pass(_acts("rest", "cafe"), trip, F1_POIS, F1_MATRIX),
+                         {"passed": True, "failed": []})
+
+
+class TestNoAdjacentFoodAndRest(unittest.TestCase):
+    """TWO user-mandated HARD rules: no adjacent restaurants (any cuisine),
+    and the siesta starts at the lunch restaurant's END."""
+
+    POIS = {
+        "bbq": {"verified": True, "fee": 0,
+                "opening_hours": ["06:00-23:00"], "cat": "restaurant",
+                "type": "Nhà hàng BBQ"},
+        "vegan": {"verified": True, "fee": 0,
+                  "opening_hours": ["06:00-23:00"], "cat": "restaurant",
+                  "type": "Nhà hàng chay"},
+        "museum": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "museum"},
+        "cafe": {"verified": True, "fee": 0,
+                 "opening_hours": ["06:00-23:00"], "cat": "cafe"},
+    }
+    MATRIX = {f"{a}->{b}": {"minutes": 10}
+              for a in POIS for b in POIS if a != b}
+    PROFILE = {"party_type": "solo", "pace": 2, "fitness": 2}
+
+    def test_bbq_then_vegan_is_a_violation(self):
+        itin = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"},
+            {"poi_id": "vegan", "start": "12:40", "end": "13:40"}]}
+        self.assertFalse(check_no_adjacent_food(itin, TRIP, self.POIS,
+                                                self.MATRIX)["passed"])
+        self.assertEqual(check_no_adjacent_food(
+            itin, TRIP, self.POIS, self.MATRIX)["score"], 0.0)
+
+    def test_two_restaurants_with_a_stop_between_pass(self):
+        itin = {"activities": [
+            {"poi_id": "bbq", "start": "08:00", "end": "09:00"},
+            {"poi_id": "museum", "start": "09:10", "end": "10:10"},
+            {"poi_id": "vegan", "start": "11:30", "end": "12:30"}]}
+        self.assertTrue(check_no_adjacent_food(itin, TRIP, self.POIS,
+                                               self.MATRIX)["passed"])
+
+    def test_rest_starts_at_lunch_end_and_blocks_pois(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        good = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"},
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"},
+            {"poi_id": "cafe", "start": "13:15", "end": "13:45"}]}
+        self.assertTrue(check_rest_follows_lunch(good, trip, self.POIS,
+                                                 self.MATRIX)["passed"])
+        # 12:45 sits inside [12:30, 13:15) -> offender.
+        bad = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"},
+            {"poi_id": "cafe", "start": "12:45", "end": "13:00"}]}
+        self.assertFalse(check_rest_follows_lunch(bad, trip, self.POIS,
+                                                  self.MATRIX)["passed"])
+
+    def test_rest_without_lunch_fails(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        no_lunch = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"}]}
+        self.assertFalse(check_rest_follows_lunch(no_lunch, trip, self.POIS,
+                                                  self.MATRIX)["passed"])
+
+    def test_late_lunch_rest_is_shortened_but_blocks_nothing_after(self):
+        """Lunch ends 15:10, trip ends 15:40 -> 30-min rest (45 requested)."""
+        trip = dict(TRIP, end_time="15:40", profile=self.PROFILE)
+        late = {"activities": [
+            {"poi_id": "bbq", "start": "12:50", "end": "15:10"},
+            {"poi_id": "museum", "start": "15:40", "end": "15:50"}]}
+        self.assertTrue(check_rest_follows_lunch(late, trip, self.POIS,
+                                                 self.MATRIX)["passed"])
+        inside = {"activities": [
+            {"poi_id": "bbq", "start": "12:50", "end": "15:10"},
+            {"poi_id": "museum", "start": "15:20", "end": "15:30"}]}
+        self.assertFalse(check_rest_follows_lunch(inside, trip, self.POIS,
+                                                  self.MATRIX)["passed"])
+
+    def test_declared_rest_start_within_15_minutes_is_allowed(self):
+        trip = dict(TRIP, profile=self.PROFILE)
+        itin = {"activities": [
+            {"poi_id": "bbq", "start": "11:30", "end": "12:30"}],
+            "rest": {"start": "12:40", "end": "13:25"}}
+        self.assertTrue(check_rest_follows_lunch(itin, trip, self.POIS,
+                                                 self.MATRIX)["passed"])
+        too_late = {"activities": itin["activities"],
+                    "rest": {"start": "12:50", "end": "13:35"}}
+        self.assertFalse(check_rest_follows_lunch(too_late, trip, self.POIS,
+                                                  self.MATRIX)["passed"])
+        wrong_len = {"activities": itin["activities"],
+                     "rest": {"start": "12:30", "end": "13:00"}}
+        self.assertFalse(check_rest_follows_lunch(wrong_len, trip, self.POIS,
+                                                  self.MATRIX)["passed"])
+
+    def test_legacy_plan_without_profile_is_vacuous(self):
+        itin = {"activities": [
+            {"poi_id": "museum", "start": "09:00", "end": "10:00"}]}
+        self.assertTrue(check_rest_follows_lunch(itin, TRIP, self.POIS,
+                                                 self.MATRIX)["passed"])
 
 
 if __name__ == "__main__":

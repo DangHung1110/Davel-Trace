@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import os
 
+from BE.app.services.soft_rules import edge_penalty
+
 MODEL_PATH = os.path.join("BE", "ml", "patm", "model.txt")
 
 _STUB_FEATURE_NAMES = (
@@ -166,6 +168,15 @@ def score_transition(a: dict, b: dict, user: dict | None = None,
 
 def edge_scores(ids: list[str], by_id: dict, user: dict | None = None,
                 ctx: dict | None = None) -> dict[tuple[str, str], float]:
-    """q_ij for every ordered pair (optimizer T017 input)."""
-    return {(a, b): score_transition(by_id[a], by_id[b], user, ctx)
+    """q_ij for every ordered pair (optimizer T017 input).
+
+    TASK-2 soft layer: A2 (back-to-back restaurants) and B1 (same-type
+    neighbours, cafe->cafe / viewpoint->sunset_view exempt) subtract a small
+    pair penalty from the learned/rule transition score.
+    state layer: when `ctx` carries the trip context, `edge_penalty` also
+    applies the satiety-aware food transition (trip_ctx.edge_state), so a
+    still-full traveler is nudged away from another meal.
+    """
+    return {(a, b): round(score_transition(by_id[a], by_id[b], user, ctx)
+                          + edge_penalty(by_id[a], by_id[b], ctx), 4)
             for a in ids for b in ids if a != b}

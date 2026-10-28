@@ -140,8 +140,14 @@ class TestBaselines(unittest.TestCase):
     def test_zero_fee_snapshot_marks_sc008_vacuous(self):
         self.assertTrue(self.report["sc"]["SC-008"]["vacuous"])
         self.assertIn("zero_fee", self.report["notes"])
-        self.assertTrue(self.report["sc"]["SC-009"]["undecidable"])
-        self.assertIn("uniform_ratings", self.report["notes"])
+        sc9 = self.report["sc"]["SC-009"]
+        if "uniform_ratings" in self.report["notes"]:
+            # A uniform pool cannot discriminate taste: undecidable, not equal.
+            self.assertTrue(sc9["undecidable"])
+        else:
+            # Expanded matrix pool has real rating spread -> a real ratio.
+            self.assertFalse(sc9["undecidable"])
+            self.assertIsNotNone(sc9["ratio"])
 
     def test_recovery_probe_counts_only_multiactivity_plans(self):
         rec = self.report["recovery"]
@@ -169,7 +175,13 @@ class TestBaselines(unittest.TestCase):
         self.assertEqual(report["infeasible"], 7)
         self.assertEqual(report["systems"]["distance-only"]["n"], 23)
         self.assertEqual(report["systems"]["hybrid"]["n"], 23)
-        self.assertEqual(report["coverage"]["eligible"], 5)
+        # The suite's gold was built on the original 5-POI pool; the expansion
+        # (verified POIs appended to the matrix) makes every verified POI
+        # eligible, so coverage must equal the verified count, not stay at 5.
+        self.assertGreaterEqual(report["coverage"]["eligible"], 5)
+        self.assertEqual(report["coverage"]["eligible"],
+                         report["coverage"]["verified"])
+        self.assertEqual(report["coverage"]["missing_verified"], 0)
 
 
 if __name__ == "__main__":

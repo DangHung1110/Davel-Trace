@@ -6,7 +6,7 @@ state store runtime + version là lane B T045, wire ở phase-PR).
 Unknown id -> 404 envelope (không crash).
 
 T061 wiring: the former `gate_stub` always passed; select now runs the
-canonical lane-B registry (`BE.app.services.gate.CHECKS`, 7 checks) over
+canonical lane-B registry (`BE.app.services.gate.CHECKS`, 9 checks) over
 the plan's real context. Plans built by POST /v1/itinerary carry
 `_context = {trip, pois, travel}`; that context is normalised into the
 shared `(itinerary, trip, pois, matrix)` plain-dict shape `gate.py` reads.
@@ -76,21 +76,17 @@ def _gate_inputs(plan: dict):
 
 
 def evaluate_plan(plan: dict) -> dict | None:
-    """Real gate report for one plan: {passed, failed, score, checks, scores}.
+    """Real gate report for one plan (gate.report over the plan context).
 
-    `score` is the finite mean of the seven canonical check scores in [0, 1].
+    `failed` is the HARD fail list (select is fail-closed on it); soft checks
+    (F1) land in `soft_failed` and never block selection.
     Returns None when the plan has no gate context to evaluate.
     """
     inputs = _gate_inputs(plan)
     if inputs is None:
         return None
     itinerary, trip, pois, matrix = inputs
-    results = {name: fn(itinerary, trip, pois, matrix) for name, fn in gate.CHECKS}
-    failed = [name for name, res in results.items() if not res["passed"]]
-    score = round(sum(res["score"] for res in results.values()) / len(results), 4)
-    return {"passed": not failed, "failed": failed, "score": score,
-            "checks": {name: res["passed"] for name, res in results.items()},
-            "scores": {name: res["score"] for name, res in results.items()}}
+    return gate.report(itinerary, trip, pois, matrix)
 
 
 @router.post("/itinerary/select")

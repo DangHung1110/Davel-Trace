@@ -12,6 +12,13 @@ from __future__ import annotations
 import time
 
 from BE.app.services.common import status_map, to_min, total_fee
+from BE.app.services.gate import SOFT_CHECKS
+
+
+def _hard_checks(validation: dict) -> dict:
+    """F1 (soft) stays out of constraint_status: it never fail-closes."""
+    return {name: ok for name, ok in validation.get("checks", {}).items()
+            if name not in SOFT_CHECKS}
 
 
 def build_plan(optimizer_out: dict, validation: dict, trip: dict,
@@ -32,7 +39,7 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
     # T053 fix: score_plan() reads these two fields directly. Without them
     # every router-built plan scored profit=0.0/utility=0.3 regardless of
     # profile, while the run_profiles path looked correct.
-    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating", 0))
+    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
                for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
     return {
@@ -46,8 +53,9 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         "total_min": visit_min + travel_min,
         "travel_min": travel_min,
         "preference": preference,
-        "constraint_status": status_map(validation.get("checks", {})),
+        "constraint_status": status_map(_hard_checks(validation)),
         "violations": validation.get("violations", []),
+        "soft_violations": validation.get("soft_violations", []),
         "passed": validation.get("passed", False),
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
     }

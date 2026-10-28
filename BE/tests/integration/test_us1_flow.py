@@ -11,6 +11,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -21,6 +22,7 @@ from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import parser as parser_svc  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.app.services import trip_ctx  # noqa: E402
 from BE.tests import conftest  # noqa: E402
 
 POIS = [
@@ -100,7 +102,10 @@ class TestUS1Flow(unittest.TestCase):
                          "activities", "food_prefs", "order_prefs")}
         pool = retrieval_svc.retrieve(trip, POIS)["candidates"]
         self.assertEqual({candidate["poi_id"] for candidate in pool}, {"hill", "beach"})
-        r = client.post("/v1/itinerary", json={"trip": trip, "profiles": ["balanced"]})
+        with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",
+                               side_effect=RuntimeError("offline test")):
+            r = client.post("/v1/itinerary",
+                            json={"trip": trip, "profiles": ["balanced"]})
         if r.status_code == 501:
             self.assertEqual(set(r.json()), {"error", "message"})
             self.assertEqual(r.json()["error"], "PLANNER_UNAVAILABLE")
@@ -120,10 +125,15 @@ class TestUS1Flow(unittest.TestCase):
         for k in ("total_cost", "total_km", "total_min", "constraint_status",
                   "version"):
             self.assertIn(k, plan)
-        # T061f: the canonical 7-gate registry (gate.py) owns constraint_status.
+        # T061f: the canonical registry (gate.py) owns constraint_status,
+        # including the hard sequence rules (CAFE_CAP/NO_CONSECUTIVE/
+        # NO_ADJACENT_FOOD) and REST_FOLLOWS_LUNCH (vacuous without a profile).
         self.assertEqual(plan["constraint_status"],
                          {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
-                          "ETB": 1, "TCS": 1, "HCS": 1})
+                          "ETB": 1, "A1": 1, "CAFE_CAP": 1,
+                          "CATEGORY_CAP": 1,
+                          "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,
+                          "REST_FOLLOWS_LUNCH": 1, "TCS": 1, "HCS": 1})
 
     def test_missing_info_clarifies(self):
         parser_svc.llm_gateway.complete_json = lambda prompt, schema: dict(SLOTS, city="")
