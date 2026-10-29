@@ -131,21 +131,22 @@ def _ensure_model(path: str = MODEL_PATH) -> bool:
         _backend = "rule"
         _note = f"model file not found: {path}"
         return False
+    # Validate into a local, publish last: profiles plan in parallel threads,
+    # so a half-checked booster must never be visible through `_bst`.
     try:
         import lightgbm as lgb
-        _bst = lgb.Booster(model_file=path)
+        booster = lgb.Booster(model_file=path)
     except Exception as exc:  # noqa: BLE001 - never crash: fall back to rule
-        _bst = None
         _backend = "rule"
         _note = f"model load failed: {exc}"
         return False
     width = _lane_a_extract()[1]
-    if _bst.num_feature() != width:
-        _note = (f"model expects {_bst.num_feature()} features, "
+    if booster.num_feature() != width:
+        _note = (f"model expects {booster.num_feature()} features, "
                  f"extractor gives {width}")
-        _bst = None
         _backend = "rule"
         return False
+    _bst = booster
     _backend = "model"
     _note = ""
     return True
@@ -176,7 +177,18 @@ def edge_scores(ids: list[str], by_id: dict, user: dict | None = None,
     state layer: when `ctx` carries the trip context, `edge_penalty` also
     applies the satiety-aware food transition (trip_ctx.edge_state), so a
     still-full traveler is nudged away from another meal.
+
+    The model scores all n*(n-1) pairs in ONE batched predict (same values as
+    `score_transition` per pair): per-pair predict calls cost ~4 s per profile
+    at 116 candidates and serialise the parallel profile solves on the GIL.
     """
-    return {(a, b): round(score_transition(by_id[a], by_id[b], user, ctx)
-                          + edge_penalty(by_id[a], by_id[b], ctx), 4)
-            for a in ids for b in ids if a != b}
+    pairs = [(a, b) for a in ids for b in ids if a != b]
+    if pairs and _ensure_model():
+        import numpy as np
+        x = np.array([_features(by_id[a], by_id[b], user, ctx)
+                      for a, b in pairs], dtype=float)
+        learned = [float(v - 0.5) for v in _bst.predict(x)]
+    else:
+        learned = [_rule(by_id[a], by_id[b]) for a, b in pairs]
+    return {(a, b): round(score + edge_penalty(by_id[a], by_id[b], ctx), 4)
+            for (a, b), score in zip(pairs, learned)}
