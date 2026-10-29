@@ -10,9 +10,12 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 
 ## POST /itinerary — TripRequest → plans
 - In: `{ "trip": {TripRequest}, "profiles": ["savings", "balanced", "experience"] }`
-- Out: `{ "plans": [{Itinerary + scores + explanations}], "selected": null, "softened": [...] }`
+- Out: `{ "plans": [{Itinerary + scores + explanations + activity_match}], "selected": null, "retrieval": {...} }`
 - Rule: every plan passed feasibility gate; ≥2 plans when feasible.
-- Rule: `softened` rỗng khi lọc đủ ràng buộc; khi `activities` làm rỗng danh sách POI thì bỏ lọc loại một lần (giữ avoid/xác minh/ngân sách/giờ) và ghi lại ở đây (FR-006, FR-022).
+- Rule (FR-006, FR-022): `activities` không bao giờ lọc bớt POI. Mỗi hoạt động hiểu được thành ràng buộc "ít nhất 1 điểm thuộc nhóm loại đó" cho bộ giải; không xếp được thì bỏ ràng buộc đó và cảnh báo. Mỗi plan có `activity_match: [{activity, categories, status}]`, `status` ∈ `met` / `unmet` / `no_verified_poi` / `not_understood`.
+- Rule (FR-013, FR-024): `retrieval = { candidates, needs_verification_total, needs_verification: [{poi_id, name, cat, must_visit, reasons, uncertainty}] (tối đa 20, must_visit trước), excluded: {lý do: số POI}, unmatched_activities }`.
+- Rule: pool rỗng sau bộ lọc cứng → plan rỗng `passed: false`, `infeasible_by.rule = "EMPTY_POOL"`; không bao giờ lấy toàn bộ snapshot thay thế.
+- Rule: `constraint_status` có thêm cổng cứng `PROFILE_SAFE` (dị ứng / must_avoid / khả năng đi lại của hồ sơ, kiểm lại trên plan cuối).
 
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`

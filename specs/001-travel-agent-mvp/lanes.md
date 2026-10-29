@@ -85,6 +85,7 @@ git worktree add ..\Davel-Trace-lane-c feat/lane-c-parser-api
 | Ngày | Lane | Đổi gì | Ảnh hưởng lane nào | Đã báo chưa |
 |---|---|---|---|---|
 | 2026-10-28 | C | `POST /itinerary` thêm `softened`; `retrieve()` thêm `unmatched_activities`, lọc theo `cat` | FE (trường mới, không bắt buộc đọc); A `eval/baselines` gọi `retrieve()` (khóa cũ giữ nguyên) | chưa |
+| 2026-10-29 | B+C | Thay dòng trên: bỏ `softened`; `retrieve()` KHÔNG lọc theo activity nữa (thêm `activity_requirements` → `required_any`); `POST /itinerary` thêm `retrieval` + `activity_match` mỗi plan; `build_plan` bỏ fallback lấy toàn bộ POI (`EMPTY_POOL`); gate thêm `PROFILE_SAFE` (registry 15 cổng) | FE (trường mới); A `eval` đọc `gate.CHECKS` (tự có cổng mới), `eval/baselines` gọi `retrieve()` sẽ thấy pool rộng hơn khi có activities | chưa |
 
 ## Tracking (update bảng này mỗi PR)
 
