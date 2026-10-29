@@ -106,6 +106,10 @@ def load_pois(snapshot_dir: str, by_id: bool = False):
     return {p["poi_id"]: p for p in pois} if by_id else pois
 
 
-def load_matrix_cells(snapshot_dir: str) -> dict:
-    """Read <snapshot_dir>/matrix.json -> cells dict."""
-    return load_json(os.path.join(snapshot_dir, "matrix.json"))["cells"]
+def load_matrix_cells(snapshot_dir: str):
+    """<snapshot_dir>/matrix.json -> cells Mapping (legacy dict or dense-v1).
+
+    Raises FileNotFoundError like before when the snapshot has no matrix.
+    """
+    from BE.app.services.matrix import load_matrix_doc
+    return load_matrix_doc(os.path.join(snapshot_dir, "matrix.json"))["cells"]

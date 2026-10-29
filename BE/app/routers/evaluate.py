@@ -24,6 +24,7 @@ from pydantic import BaseModel
 
 from BE.app.config import get_settings
 from BE.app.routers import error
+from BE.app.services import matrix as matrix_svc
 from BE.eval.metrics import evaluate as tier1_evaluate
 
 router = APIRouter(prefix="/v1", tags=["evaluate"])
@@ -41,12 +42,7 @@ def load_eval_context(snapshot_dir: str) -> tuple[dict, dict] | None:
             pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
     except (FileNotFoundError, NotADirectoryError):
         return None
-    try:
-        with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
-            cells = json.load(f).get("cells", {})
-    except (FileNotFoundError, NotADirectoryError):
-        cells = {}
-    return pois, cells
+    return pois, matrix_svc.load_cells(snapshot_dir)
 
 
 @router.post("/evaluate")

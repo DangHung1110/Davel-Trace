@@ -6,7 +6,6 @@ best-found, infeasible (require_all, contradictory windows) has reason.
 Run from repo root: python BE/tests/unit/test_optimizer.py -v
 """
 
-import json
 import os
 import sys
 import time
@@ -14,7 +13,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import MatrixService  # noqa: E402
+from BE.app.services.matrix import MatrixService, load_matrix_doc  # noqa: E402
 from BE.app.services.optimizer import (  # noqa: E402
     StubPOI, StubTrip, optimize, travel_from_matrix)
 
@@ -339,8 +338,7 @@ class TestOptimizerRealMatrix(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.svc = MatrixService(os.path.dirname(_REAL_MATRIX))
-        with open(_REAL_MATRIX, encoding="utf-8") as f:
-            cls.doc = json.load(f)
+        cls.doc = load_matrix_doc(_REAL_MATRIX)  # dense-v1 since Phase 3
 
     def test_travel_from_matrix_matches_artifact(self):
         ids = [DEPOT, FIXTURE[0][0], FIXTURE[1][0]]

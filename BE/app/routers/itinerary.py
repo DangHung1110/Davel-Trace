@@ -38,7 +38,6 @@ an objective within the run-to-run noise of the sequential search.
 from __future__ import annotations
 
 import importlib
-import json
 import os
 from concurrent.futures import ThreadPoolExecutor
 from uuid import uuid4
@@ -50,6 +49,7 @@ from BE.app.config import get_settings
 from BE.app.routers import error
 from BE.app.routers import select as select_svc
 from BE.app.schemas.trip import TripRequest
+from BE.app.services import matrix as matrix_svc
 from BE.app.services import pool as pool_svc
 from BE.app.services import profile_filter
 from BE.app.services import rank as rank_svc
@@ -112,12 +112,9 @@ def _solver_workers(n_profiles: int) -> int:
     return max(1, (os.cpu_count() or 1) // n_profiles)
 
 
-def _load_cells(snapshot_dir: str) -> dict:
-    try:
-        with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
-            return json.load(f).get("cells", {})
-    except (FileNotFoundError, NotADirectoryError):
-        return {}
+def _load_cells(snapshot_dir: str):
+    """Matrix cells (legacy or dense), parsed once per file version."""
+    return matrix_svc.load_cells(snapshot_dir)
 
 
 @router.post("/itinerary")

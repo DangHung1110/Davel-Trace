@@ -23,6 +23,8 @@ from __future__ import annotations
 import json
 import os
 
+from BE.app.services.matrix import load_matrix_doc
+
 REQUIRED_POI_FIELDS = (
     "poi_id", "name", "type", "lat", "lon",
     "visit_min", "dur_source", "dur_confidence",
@@ -98,8 +100,7 @@ def verified_pois(data: dict) -> list[dict]:
 
 def load_matrix(snapshot_dir: str, ids: list[str]) -> dict:
     """Load + validate matrix.json cells against POI ids; raise ValueError."""
-    with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
-        matrix = json.load(f)
+    matrix = load_matrix_doc(os.path.join(snapshot_dir, "matrix.json"))
     errors: list[str] = []
     if matrix.get("ids") != ids:
         errors.append("matrix ids differ from snapshot POI ids")
