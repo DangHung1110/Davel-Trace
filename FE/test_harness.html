@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Davel-Trace TEST HARNESS (local, khong commit)</title>
+<title>Davel-Trace planner evidence harness</title>
 <style>
   body{font-family:system-ui,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px}
   textarea{width:100%;height:70px} button{padding:8px 16px;margin:6px 6px 6px 0;cursor:pointer}
@@ -39,8 +39,11 @@
 <button onclick="doItin(['balanced'])">Can bang</button>
 <button onclick="doItin(['experience'])">Trai nghiem</button>
 <button onclick="doItin(['savings','balanced','experience'])"><b>So sanh 3 profile</b></button>
+<button onclick="doItin(['savings','balanced','experience'], true)"><b>5 phuong an kha thi</b></button>
+<button onclick="loadReadiness()">Doc readiness</button>
 <div id="itinBox"></div>
 <pre id="itinOut">...</pre>
+<pre id="readinessOut">Readiness: chua doc</pre>
 <script>
 const BE = "http://127.0.0.1:8000";
 const PROFILE_KEY = "davel_profile";
@@ -62,6 +65,31 @@ async function call(path, body){
   const r = await fetch(BE + path, {method:"POST",
     headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
   return {status: r.status, json: await r.json()};
+}
+
+async function loadReadiness(){
+  const el = document.getElementById("readinessOut");
+  try{
+    const r = await fetch(BE + "/v1/planning/readiness");
+    const j = await r.json();
+    el.textContent = "HTTP " + r.status + "\n" + JSON.stringify(j, null, 2);
+  }catch(e){ el.textContent = "LOI readiness: " + e; }
+}
+
+async function acceptPlan(plan, target){
+  target.textContent = "dang chot...";
+  const key = "harness-" + plan.itinerary_id + "-" + Date.now();
+  try{
+    const {status, json} = await call("/v1/itinerary/select", {
+      itinerary_id: plan.itinerary_id, idempotency_key: key
+    });
+    const accepted = json.acceptance || {};
+    target.className = status === 200 ? "ok" : "err";
+    target.textContent = status === 200
+      ? "Da luu: " + (accepted.acceptance_id || "?")
+      : "HTTP " + status + ": " + (json.message || json.error || "loi");
+    await loadReadiness();
+  }catch(e){ target.className = "err"; target.textContent = "LOI: " + e; }
 }
 
 async function doParse(){
@@ -247,7 +275,7 @@ async function renderPlans(plans, trip){
   table.className = "cmp";
   const head = document.createElement("tr");
   for(const label of ["Hồ sơ", "Số điểm", "Km", "Chi phí (đ)",
-                      "Qua cổng", "Vi phạm", "Reward", "Điểm mềm", "Review"]){
+                      "Qua cổng", "5 cổng", "Vi phạm", "Reward", "Điểm mềm", "Review / Chốt"]){
     const th = document.createElement("th");
     th.textContent = label;
     head.appendChild(th);
@@ -264,6 +292,9 @@ async function renderPlans(plans, trip){
     tr.appendChild(cell(Number(plan.total_cost || 0).toLocaleString("vi-VN")));
     tr.appendChild(cell(gate.passed === true ? "✔ đạt" : "✘ hỏng",
                         gate.passed === true ? "ok" : "err"));
+    const families = (plan.gate && plan.gate.families) || {};
+    tr.appendChild(cell(Object.entries(families).map(([name, value]) =>
+      name + ":" + (value.passed ? "OK" : "FAIL")).join(" · ") || "—"));
     tr.appendChild(cell((gate.violations || []).join(", ") || "—"));
     tr.appendChild(cell(String(ev.reward != null ? ev.reward : "?")));
     tr.appendChild(cell(softSummary(ev.soft)));
@@ -276,24 +307,34 @@ async function renderPlans(plans, trip){
     repairBtn.textContent = "Repair";
     repairBtn.onclick = () => doRepair(plan, box);
     action.appendChild(repairBtn);
+    const acceptBtn = document.createElement("button");
+    acceptBtn.textContent = "Chot";
+    const accepted = document.createElement("div");
+    acceptBtn.onclick = () => acceptPlan(plan, accepted);
+    action.appendChild(acceptBtn);
+    action.appendChild(accepted);
     tr.appendChild(action);
     table.appendChild(tr);
   }
   box.appendChild(table);
 }
 
-async function doItin(profiles){
+async function doItin(profiles, diverse=false){
   const el = document.getElementById("itinOut");
   if(!lastTrip){ el.textContent = "Hay Parse truoc de co TripRequest."; return; }
   const trip = tripFromParse(lastTrip);
   document.getElementById("itinBox").innerHTML = "";
   el.textContent = "dang lap lich (" + profiles.join(",") + ")...";
   try{
-    const {status, json} = await call("/v1/itinerary", {trip, profiles});
+    const {status, json} = await call("/v1/itinerary" + (diverse ? "?diverse=true" : ""), {trip, profiles});
     if(!json.plans){ el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 2000); return; }
     await renderPlans(json.plans, trip);
 
     let out = "HTTP " + status + ", " + json.plans.length + " plans\n";
+    if(json.solution_pool){
+      out += "target=" + json.solution_pool.target + " returned=" + json.solution_pool.returned
+        + " shortage=" + (json.solution_pool.shortage_reason || "none") + "\n";
+    }
     out += "profile đính kèm: " + (trip.profile ? JSON.stringify(trip.profile) : "(không có)") + "\n";
     for(const p of json.plans){
       const acts = (p.activities || []).map(a => a.poi_id + " " + a.start + "-" + a.end).join("\n    ");
