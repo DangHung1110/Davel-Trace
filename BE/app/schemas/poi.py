@@ -37,7 +37,8 @@ class POI(BaseModel):
     visit_min: VisitMin
     dur_source: DurSource = "category_rule"
     dur_confidence: DurConfidence = "low"
-    price_level: int = Field(default=2, ge=1, le=3)
+    # null = no price evidence (planner assumes the middle band, BE.common)
+    price_level: int | None = Field(default=None, ge=1, le=3)
     fee: int = Field(default=0, ge=0)
     rating: float | None = Field(default=None, ge=0, le=5)
     tags: list[str] = Field(default_factory=list)

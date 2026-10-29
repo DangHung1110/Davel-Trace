@@ -20,7 +20,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -102,7 +102,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -269,7 +269,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -354,7 +354,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -512,7 +512,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -594,7 +594,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -676,7 +676,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -841,7 +841,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -923,7 +923,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -1009,7 +1009,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -1091,7 +1091,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -1180,7 +1180,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -1264,7 +1264,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -1428,7 +1428,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -1508,7 +1508,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -1590,7 +1590,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -1750,9 +1750,7 @@
       "type": "Nhà hàng Việt Nam",
       "lat": 16.090621,
       "lon": 108.2499868,
-      "opening_hours": [
-        "00:00-23:59"
-      ],
+      "opening_hours": [],
       "visit_min": {
         "p25": 42,
         "p50": 60,
@@ -1808,7 +1806,7 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi tự nhiên hoang sơ, không vé/giờ"
       },
-      "hours_source": "web",
+      "hours_source": "inferred_dropped",
       "cat": "restaurant",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
@@ -2020,7 +2018,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -2106,7 +2104,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -2189,7 +2187,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -2274,7 +2272,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -2357,7 +2355,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -2431,7 +2429,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -2608,7 +2606,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -2682,7 +2680,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -2763,7 +2761,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -2845,7 +2843,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -2926,7 +2924,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -3010,7 +3008,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -3091,7 +3089,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -3422,7 +3420,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -3505,7 +3503,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -3841,7 +3839,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -4088,7 +4086,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -4175,7 +4173,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -4253,7 +4251,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -4337,7 +4335,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -4499,7 +4497,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -4657,7 +4655,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -4734,7 +4732,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -4815,7 +4813,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -4889,7 +4887,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -4962,7 +4960,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -5035,7 +5033,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -5117,7 +5115,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -5199,7 +5197,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -5280,7 +5278,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -5363,7 +5361,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -5445,7 +5443,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -5528,7 +5526,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -5603,7 +5601,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -5685,7 +5683,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -5767,7 +5765,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -5844,7 +5842,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -5920,7 +5918,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -5995,7 +5993,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -6077,7 +6075,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -6242,7 +6240,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -6973,7 +6971,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -7136,7 +7134,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -7295,7 +7293,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -7370,7 +7368,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -8655,9 +8653,9 @@
         "09:00-22:00"
       ],
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -9922,9 +9920,9 @@
         "06:30-20:00"
       ],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -10163,7 +10161,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -10235,7 +10233,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -11111,7 +11109,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -12135,7 +12133,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -12215,7 +12213,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -13254,7 +13252,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -13408,7 +13406,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -13487,7 +13485,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -14203,7 +14201,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -14363,7 +14361,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 1,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -14514,7 +14512,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -14807,7 +14805,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -14890,7 +14888,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -15037,13 +15035,13 @@
         "08:00-18:00"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -15130,7 +15128,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -15211,7 +15209,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -15288,14 +15286,14 @@
         "07:00-17:00"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 60000,
       "rating": 4.2,
       "tags": [
         "Điểm thu hút khách du lịch",
@@ -15387,7 +15385,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -15471,7 +15469,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -15555,7 +15553,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -15640,7 +15638,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -15727,7 +15725,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.5,
       "tags": [
@@ -15801,7 +15799,7 @@
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
-      "fee": 0,
+      "fee": 100000,
       "rating": 3.7,
       "tags": [
         "Điểm thu hút khách du lịch"
@@ -15878,14 +15876,14 @@
         "09:00-22:00"
       ],
       "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 60000,
       "rating": 4.2,
       "tags": [
         "Sân chơi trong nhà"
@@ -15972,7 +15970,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -16052,8 +16050,7 @@
       "lat": 16.0761821,
       "lon": 108.22163019999999,
       "opening_hours": [
-        "08:00-11:30",
-        "13:30-16:30"
+        "08:00-11:30, 13:30-16:30"
       ],
       "visit_min": {
         "p25": 140,
@@ -16062,7 +16059,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -16145,14 +16142,14 @@
         "08:00-17:00"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 50000,
       "rating": 4.3,
       "tags": [
         "Điểm thu hút khách du lịch",
@@ -16237,13 +16234,13 @@
         "07:00-22:30"
       ],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -16323,9 +16320,9 @@
       "lon": 108.22291,
       "opening_hours": [],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -16410,7 +16407,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -16490,13 +16487,13 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 101,
+        "p50": 144,
+        "p75": 202
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -16588,7 +16585,7 @@
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
-      "fee": 0,
+      "fee": 300000,
       "rating": 4.4,
       "tags": [
         "Điểm thu hút khách du lịch"
@@ -16671,7 +16668,7 @@
       },
       "dur_source": "human",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -16756,7 +16753,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -16830,7 +16827,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -16914,7 +16911,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -16958,7 +16955,7 @@
       "web_evidence": {
         "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
@@ -16995,7 +16992,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -17073,7 +17070,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -17150,7 +17147,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -17227,9 +17224,9 @@
       "lon": 108.295063,
       "opening_hours": [],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -17308,13 +17305,13 @@
       "lon": 108.21988139999999,
       "opening_hours": [],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -17394,7 +17391,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -17475,7 +17472,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -17565,7 +17562,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -17651,7 +17648,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -17702,7 +17699,7 @@
       "web_evidence": {
         "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
@@ -17737,7 +17734,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -17821,7 +17818,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -17907,7 +17904,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -17986,13 +17983,13 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -18073,7 +18070,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -18124,7 +18121,7 @@
       "web_evidence": {
         "hours_web": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "verified_at": "2026-10-08",
       "verified_by": "spotcheck-v1",
@@ -18159,7 +18156,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -18203,7 +18200,7 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi công cộng mở tự do"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "space_source": "name",
       "space_confidence": 0.6,
@@ -18237,7 +18234,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -18313,7 +18310,7 @@
       },
       "dur_source": "human",
       "dur_confidence": "medium",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -18388,7 +18385,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -18462,7 +18459,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -18550,7 +18547,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -18638,7 +18635,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -18714,7 +18711,7 @@
       },
       "dur_source": "human",
       "dur_confidence": "medium",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -18792,7 +18789,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -18862,13 +18859,13 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -18955,7 +18952,7 @@
       },
       "dur_source": "human",
       "dur_confidence": "medium",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -19030,7 +19027,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -19074,7 +19071,7 @@
       "web_evidence": {
         "hours_web": "suy luận: bãi hoang sơ ngoài trời, không cổng vé"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "space_source": "audit",
       "space_confidence": 1.0,
@@ -19101,9 +19098,9 @@
       "lon": 108.1185764,
       "opening_hours": [],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -19179,7 +19176,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -19223,7 +19220,7 @@
       "web_evidence": {
         "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "space_source": "name",
       "space_confidence": 0.6,
@@ -19251,13 +19248,13 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 84,
+        "p50": 120,
+        "p75": 168
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -19341,7 +19338,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -19426,7 +19423,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -19513,7 +19510,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -19565,7 +19562,7 @@
       "web_evidence": {
         "hours_web": "suy luận: tượng đài công cộng ngoài trời"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "landmark",
       "space_source": "name",
       "space_confidence": 0.6,
@@ -19599,7 +19596,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -19681,7 +19678,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -19764,7 +19761,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -19847,8 +19844,8 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 20000,
       "rating": 4.5,
       "tags": [
         "Bảo tàng nghệ thuật",
@@ -19931,14 +19928,14 @@
         "08:00-12:00, 14:00-16:30"
       ],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 60000,
       "rating": 4.3,
       "tags": [
         "Bảo tàng lịch sử",
@@ -20028,8 +20025,8 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 35000,
       "rating": 4.2,
       "tags": [
         "Bảo tàng nghệ thuật",
@@ -20123,7 +20120,7 @@
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
-      "fee": 0,
+      "fee": 140000,
       "rating": 4.4,
       "tags": [
         "Bảo tàng nghệ thuật",
@@ -20213,7 +20210,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -20296,7 +20293,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -20373,13 +20370,13 @@
         "08:00-11:00, 13:30-16:30"
       ],
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -20462,7 +20459,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -20549,7 +20546,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -20635,7 +20632,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -20712,13 +20709,13 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -20770,7 +20767,7 @@
       "web_evidence": {
         "hours_web": "suy luận: nhà bia ngoài trời, không cổng/vé"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "museum",
       "space_source": "audit",
       "space_confidence": 1.0,
@@ -20795,13 +20792,13 @@
       "lon": 108.15382969999999,
       "opening_hours": [],
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -20869,13 +20866,13 @@
       "lon": 108.1196229,
       "opening_hours": [],
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -20949,7 +20946,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -21029,7 +21026,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -21110,7 +21107,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -21186,7 +21183,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -21254,13 +21251,13 @@
       "lon": 108.27714019999999,
       "opening_hours": [],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -21337,7 +21334,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -21411,7 +21408,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -21487,7 +21484,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -21531,7 +21528,7 @@
       "web_evidence": {
         "hours_web": "suy luận: phân khu bãi Mỹ Khê mở tự do"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "attraction",
       "space_source": "name",
       "space_confidence": 0.6,
@@ -21565,7 +21562,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -21644,7 +21641,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -21727,7 +21724,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -21806,7 +21803,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -21886,7 +21883,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -21970,7 +21967,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -22049,7 +22046,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -22131,7 +22128,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -22213,7 +22210,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -22285,7 +22282,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -22364,7 +22361,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -22438,13 +22435,13 @@
       "lon": 108.257204,
       "opening_hours": [],
       "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -22519,7 +22516,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -22599,7 +22596,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -22677,7 +22674,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -22747,7 +22744,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -22817,7 +22814,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -22896,7 +22893,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -22968,7 +22965,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -23040,7 +23037,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -23110,7 +23107,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -23180,7 +23177,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -23266,7 +23263,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -23513,7 +23510,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -23592,7 +23589,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -23672,7 +23669,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -23751,7 +23748,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -23832,7 +23829,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -23914,7 +23911,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -24066,7 +24063,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -24142,7 +24139,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4,
       "tags": [
@@ -24223,7 +24220,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -24295,7 +24292,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -24374,7 +24371,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -24453,7 +24450,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -24532,7 +24529,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -24605,14 +24602,14 @@
         "17:00-22:00"
       ],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
-      "fee": 0,
+      "fee": 75000,
       "rating": 4.6,
       "tags": [
         "Bến du thuyền"
@@ -24694,7 +24691,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 1,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -24778,7 +24775,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -24854,13 +24851,13 @@
         "06:00-18:00"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -24945,7 +24942,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -25032,7 +25029,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -25084,7 +25081,7 @@
       "web_evidence": {
         "hours_web": "suy luận theo giờ quần thể NHS (động núi Thủy Sơn)"
       },
-      "hours_source": "web",
+      "hours_source": "inferred",
       "cat": "landmark",
       "space_source": "audit",
       "space_confidence": 1.0,
@@ -25117,7 +25114,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -25189,7 +25186,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -25263,7 +25260,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -25350,7 +25347,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -25424,7 +25421,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.9,
       "tags": [
@@ -25507,7 +25504,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -25587,7 +25584,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -25657,7 +25654,7 @@
       "lat": 16.1874495,
       "lon": 108.1307217,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -25724,7 +25721,7 @@
       "lat": 16.2317838,
       "lon": 108.0864698,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -25734,9 +25731,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -25792,7 +25789,7 @@
       "lat": 16.2207265,
       "lon": 108.0859658,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -25802,9 +25799,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -25860,7 +25857,7 @@
       "lat": 16.2214808,
       "lon": 108.0409805,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -25870,9 +25867,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -25928,7 +25925,7 @@
       "lat": 16.1195909,
       "lon": 108.2866498,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -25996,7 +25993,7 @@
       "lat": 15.9997446,
       "lon": 108.2562213,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26062,7 +26059,7 @@
       "lat": 16.0000029,
       "lon": 108.2621751,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26128,7 +26125,7 @@
       "lat": 16.0047612,
       "lon": 108.255928,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26194,7 +26191,7 @@
       "lat": 16.0244662,
       "lon": 108.0262303,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26204,9 +26201,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26262,7 +26259,7 @@
       "lat": 16.0520134,
       "lon": 108.219568,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26272,9 +26269,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26330,7 +26327,7 @@
       "lat": 16.0533151,
       "lon": 108.2195707,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26340,9 +26337,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26398,7 +26395,7 @@
       "lat": 16.0581871,
       "lon": 108.219347,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26408,9 +26405,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26466,7 +26463,7 @@
       "lat": 16.0622864,
       "lon": 108.2155343,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26476,9 +26473,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26534,7 +26531,7 @@
       "lat": 15.9976102,
       "lon": 108.2121686,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26544,9 +26541,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26605,7 +26602,7 @@
       "lat": 15.9982955,
       "lon": 108.2124711,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26615,9 +26612,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26676,7 +26673,7 @@
       "lat": 15.9982174,
       "lon": 107.9856335,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26745,7 +26742,7 @@
       "lat": 16.0205336,
       "lon": 108.261744,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26812,7 +26809,7 @@
       "lat": 16.0056157,
       "lon": 108.2546345,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26822,9 +26819,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26880,7 +26877,7 @@
       "lat": 16.0463952,
       "lon": 108.1052579,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26890,9 +26887,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -26948,7 +26945,7 @@
       "lat": 16.0681138,
       "lon": 108.1043896,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -26958,9 +26955,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27016,7 +27013,7 @@
       "lat": 16.0480729,
       "lon": 108.2408883,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27026,9 +27023,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27084,7 +27081,7 @@
       "lat": 16.0609642,
       "lon": 108.096969,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27094,9 +27091,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27152,7 +27149,7 @@
       "lat": 16.025095,
       "lon": 108.2595335,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27221,7 +27218,7 @@
       "lat": 15.97989,
       "lon": 108.2089787,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27286,7 +27283,7 @@
       "lat": 16.023789,
       "lon": 108.2477299,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27296,9 +27293,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27354,7 +27351,7 @@
       "lat": 16.2497715,
       "lon": 108.075414,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27364,9 +27361,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27422,7 +27419,7 @@
       "lat": 16.0954944,
       "lon": 108.2520272,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27487,7 +27484,7 @@
       "lat": 15.9916479,
       "lon": 108.0720997,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27497,9 +27494,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27555,7 +27552,7 @@
       "lat": 16.1017543,
       "lon": 108.2589632,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27623,7 +27620,7 @@
       "lat": 16.0352694,
       "lon": 108.2352722,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27633,9 +27630,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27694,7 +27691,7 @@
       "opening_hours": [
         "00:00-23:59"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27704,9 +27701,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27769,7 +27766,7 @@
       "lat": 16.0948084,
       "lon": 108.2200134,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27779,9 +27776,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -27836,7 +27833,7 @@
       "lat": 16.0510888,
       "lon": 108.2292466,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27903,7 +27900,7 @@
       "lat": 15.9681262,
       "lon": 108.0196301,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27970,7 +27967,7 @@
       "lat": 16.0634477,
       "lon": 108.2315996,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -27980,9 +27977,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -28038,7 +28035,7 @@
       "lat": 16.0440988,
       "lon": 108.2097932,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28048,9 +28045,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -28106,7 +28103,7 @@
       "lat": 16.1226157,
       "lon": 108.3316779,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28174,7 +28171,7 @@
       "lat": 16.0276784,
       "lon": 108.2218873,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28242,7 +28239,7 @@
       "lat": 16.0857203,
       "lon": 108.2194277,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28252,9 +28249,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -28309,7 +28306,7 @@
       "lat": 16.0857055,
       "lon": 108.2194606,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28374,7 +28371,7 @@
       "lat": 16.0721398,
       "lon": 108.2268106,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28384,9 +28381,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -28441,7 +28438,7 @@
       "lat": 16.0894666,
       "lon": 108.2394816,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28506,7 +28503,7 @@
       "lat": 16.0692623,
       "lon": 108.2376088,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28573,7 +28570,7 @@
       "opening_hours": [
         "00:00-23:59"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28583,9 +28580,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -28646,7 +28643,7 @@
       "lat": 16.0529199,
       "lon": 108.2024664,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28711,7 +28708,7 @@
       "lat": 16.0526672,
       "lon": 108.2025006,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28778,7 +28775,7 @@
       "opening_hours": [
         "08:30-18:00"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28847,7 +28844,7 @@
       "lat": 16.0277351,
       "lon": 108.1647027,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28913,7 +28910,7 @@
       "lat": 16.0349223,
       "lon": 108.1622001,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -28979,7 +28976,7 @@
       "lat": 16.0009523,
       "lon": 108.2666434,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29047,7 +29044,7 @@
       "lat": 15.9867322,
       "lon": 108.1772823,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29115,7 +29112,7 @@
       "lat": 16.1128315,
       "lon": 108.1300902,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29183,7 +29180,7 @@
       "lat": 15.9252377,
       "lon": 108.3065476,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29193,9 +29190,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -29251,7 +29248,7 @@
       "lat": 15.9987986,
       "lon": 108.2051036,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29261,9 +29258,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -29318,7 +29315,7 @@
       "lat": 15.9963119,
       "lon": 107.9889349,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29384,7 +29381,7 @@
       "lat": 16.0647808,
       "lon": 107.9641938,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29450,7 +29447,7 @@
       "lat": 16.1922104,
       "lon": 108.136611,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29516,7 +29513,7 @@
       "lat": 16.1836944,
       "lon": 108.1097027,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29582,7 +29579,7 @@
       "lat": 16.1936801,
       "lon": 107.9687946,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29650,7 +29647,7 @@
       "opening_hours": [
         "05:00-18:00"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29723,7 +29720,7 @@
       "lat": 16.070751,
       "lon": 108.2150164,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29789,7 +29786,7 @@
       "lat": 16.0418575,
       "lon": 108.1477778,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29857,7 +29854,7 @@
       "lat": 16.0766615,
       "lon": 108.2132863,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29867,9 +29864,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -29925,7 +29922,7 @@
       "lat": 16.1145234,
       "lon": 108.2556163,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -29935,9 +29932,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -29993,7 +29990,7 @@
       "lat": 16.052254,
       "lon": 108.247414,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30058,7 +30055,7 @@
       "lat": 16.0988527,
       "lon": 108.3012745,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30127,7 +30124,7 @@
       "lat": 16.063498,
       "lon": 108.2315886,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30192,7 +30189,7 @@
       "lat": 16.1040207,
       "lon": 108.2859915,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30202,9 +30199,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -30261,7 +30258,7 @@
       "lat": 16.121001,
       "lon": 108.2572286,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30271,9 +30268,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -30329,7 +30326,7 @@
       "lat": 15.9980969,
       "lon": 107.985969,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30397,7 +30394,7 @@
       "lat": 16.0405625,
       "lon": 108.1489375,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30465,7 +30462,7 @@
       "lat": 16.1076756,
       "lon": 107.9409322,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30475,9 +30472,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -30531,7 +30528,7 @@
       "lat": 16.1088276,
       "lon": 107.9459056,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30541,9 +30538,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -30600,7 +30597,7 @@
       "opening_hours": [
         "06:00-00:59"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30675,7 +30672,7 @@
       "opening_hours": [
         "06:00-00:59"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30750,7 +30747,7 @@
       "opening_hours": [
         "07:00-00:59"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30821,10 +30818,9 @@
       "lat": 16.0524725,
       "lon": 108.2438676,
       "opening_hours": [
-        "08:00-11:30",
-        "14:00-17:30"
+        "08:00-11:30, 14:00-17:30"
       ],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30898,7 +30894,7 @@
       "lat": 15.9555651,
       "lon": 108.2555759,
       "opening_hours": [],
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -30908,9 +30904,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -30975,7 +30971,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -31051,7 +31047,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -31122,7 +31118,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -31196,7 +31192,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -31273,7 +31269,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -31348,7 +31344,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -31420,7 +31416,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -31497,7 +31493,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -31574,7 +31570,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -31649,7 +31645,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -31721,7 +31717,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -31793,7 +31789,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -31865,7 +31861,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -31939,7 +31935,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -32014,7 +32010,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32086,7 +32082,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -32158,7 +32154,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32230,7 +32226,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -32305,7 +32301,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -32382,7 +32378,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -32456,7 +32452,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32528,7 +32524,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32601,7 +32597,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32673,7 +32669,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -32748,7 +32744,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -32824,7 +32820,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -32896,7 +32892,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -32968,7 +32964,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -33040,7 +33036,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -33118,7 +33114,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": 3,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -33187,13 +33183,13 @@
       "lon": 107.99763,
       "opening_hours": [],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 126,
+        "p50": 180,
+        "p75": 252
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -33266,7 +33262,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -35639,7 +35635,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -35718,7 +35714,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -35789,7 +35785,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -35863,7 +35859,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -35938,7 +35934,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36013,7 +36009,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -36084,7 +36080,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36158,7 +36154,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -36231,7 +36227,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -36302,7 +36298,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36373,7 +36369,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36445,7 +36441,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -36520,7 +36516,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36591,7 +36587,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -36660,7 +36656,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -36735,7 +36731,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36806,7 +36802,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -36878,7 +36874,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -36954,7 +36950,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -38571,7 +38567,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -38720,7 +38716,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -38796,7 +38792,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -38870,7 +38866,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -38944,7 +38940,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -39017,7 +39013,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -39088,7 +39084,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -39159,7 +39155,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -39231,7 +39227,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.8,
       "tags": [
@@ -39304,7 +39300,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -39383,7 +39379,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -40802,7 +40798,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -41082,7 +41078,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.2,
       "tags": [],
@@ -42207,7 +42203,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -42279,7 +42275,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42348,7 +42344,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -42419,7 +42415,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42488,7 +42484,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -42557,7 +42553,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42626,7 +42622,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42697,7 +42693,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42768,7 +42764,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -42839,7 +42835,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -42910,7 +42906,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -42981,7 +42977,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43052,7 +43048,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43121,7 +43117,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -43192,7 +43188,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43262,7 +43258,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -43334,7 +43330,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43403,7 +43399,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -43477,7 +43473,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -43549,7 +43545,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -43620,7 +43616,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43689,7 +43685,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -43760,7 +43756,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -43833,7 +43829,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -43902,7 +43898,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -43973,7 +43969,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44042,7 +44038,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44113,7 +44109,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44184,7 +44180,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44255,7 +44251,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44324,7 +44320,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -44389,13 +44385,13 @@
         "08:00-22:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44464,7 +44460,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44535,7 +44531,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44604,7 +44600,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44668,13 +44664,13 @@
         "08:30-20:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44741,7 +44737,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -44810,7 +44806,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -44879,7 +44875,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -44948,7 +44944,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45018,7 +45014,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45088,7 +45084,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45157,7 +45153,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -45228,7 +45224,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -45299,7 +45295,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -45370,7 +45366,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -45441,7 +45437,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45508,7 +45504,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45577,7 +45573,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45648,7 +45644,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -45717,7 +45713,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -45790,7 +45786,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -45864,7 +45860,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -45936,7 +45932,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46010,7 +46006,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -46081,7 +46077,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46155,7 +46151,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -46226,7 +46222,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -46297,7 +46293,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46369,7 +46365,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46443,7 +46439,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -46515,7 +46511,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -46593,7 +46589,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -46664,7 +46660,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46737,7 +46733,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -46810,7 +46806,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -46882,7 +46878,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -47031,7 +47027,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -47106,7 +47102,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -47177,7 +47173,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -47255,7 +47251,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -47405,7 +47401,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -47476,7 +47472,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -47549,7 +47545,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -48081,7 +48077,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -48156,7 +48152,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -48227,7 +48223,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -48298,7 +48294,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -48906,7 +48902,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 3,
+      "price_level": 2,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -49358,7 +49354,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -49583,7 +49579,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -49810,7 +49806,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -49881,7 +49877,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -49951,7 +49947,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -50020,7 +50016,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -50093,7 +50089,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.6,
       "tags": [
@@ -50162,7 +50158,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -50234,7 +50230,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.7,
       "tags": [
@@ -50380,7 +50376,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -50451,7 +50447,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -50598,7 +50594,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -50669,7 +50665,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.4,
       "tags": [
@@ -50740,7 +50736,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -50813,7 +50809,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -51323,9 +51319,9 @@
         "15:00-03:00"
       ],
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -51932,7 +51928,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -52004,7 +52000,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -52310,7 +52306,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -52388,7 +52384,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -52463,7 +52459,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -52535,7 +52531,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -52607,7 +52603,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -52679,7 +52675,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -52751,7 +52747,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -52825,7 +52821,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -52899,7 +52895,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -52972,7 +52968,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -53044,7 +53040,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -53116,7 +53112,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -53189,7 +53185,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -53261,7 +53257,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -53333,7 +53329,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -53405,7 +53401,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -53477,7 +53473,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -53549,7 +53545,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -53621,7 +53617,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -53695,7 +53691,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -53769,7 +53765,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -53841,7 +53837,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.6,
       "tags": [
@@ -53912,7 +53908,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.4,
       "tags": [
@@ -53984,7 +53980,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -54053,7 +54049,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.7,
       "tags": [
@@ -54127,7 +54123,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -54191,13 +54187,13 @@
       "lon": 108.3760623,
       "opening_hours": [],
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.3,
       "tags": [
@@ -54263,13 +54259,13 @@
         "07:00-17:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54341,7 +54337,7 @@
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 3.5,
       "tags": [
@@ -54411,13 +54407,13 @@
         "07:30-18:30"
       ],
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.2,
       "tags": [
@@ -54482,13 +54478,13 @@
         "08:00-18:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54553,13 +54549,13 @@
         "08:00-18:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.5,
       "tags": [
@@ -54625,13 +54621,13 @@
         "07:00-17:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.1,
       "tags": [
@@ -54698,13 +54694,13 @@
         "09:30-19:30"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54770,13 +54766,13 @@
         "08:30-20:30"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54841,13 +54837,13 @@
         "08:00-21:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54913,13 +54909,13 @@
         "08:00-18:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -54986,13 +54982,13 @@
         "07:30-19:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55059,13 +55055,13 @@
         "08:00-20:30"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.8,
       "tags": [
@@ -55131,13 +55127,13 @@
         "10:00-12:30, 17:00-19:30"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55204,13 +55200,13 @@
         "08:00-19:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55275,13 +55271,13 @@
         "07:00-20:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55350,13 +55346,13 @@
         "07:00-18:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55422,13 +55418,13 @@
         "09:00-22:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55494,13 +55490,13 @@
         "06:00-19:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5,
       "tags": [
@@ -55569,13 +55565,13 @@
         "08:00-20:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 4.9,
       "tags": [
@@ -55640,13 +55636,13 @@
       "lon": 108.245305,
       "opening_hours": [],
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -55710,8 +55706,8 @@
       "lon": 108.13129,
       "opening_hours": [],
       "hours_source": "",
-      "price_level": 2,
-      "fee": 0,
+      "price_level": 1,
+      "fee": 70000,
       "rating": null,
       "tags": [
         "Di tích lịch sử"
@@ -55788,7 +55784,7 @@
       ],
       "hours_source": "web",
       "price_level": 2,
-      "fee": 0,
+      "fee": 350000,
       "rating": null,
       "tags": [
         "Công viên nước"
@@ -55797,9 +55793,9 @@
       "fetched_at": "2026-10-13",
       "verified": true,
       "visit_min": {
-        "p25": 84,
-        "p50": 120,
-        "p75": 168
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -55863,7 +55859,7 @@
       "opening_hours": [],
       "hours_source": "",
       "price_level": 2,
-      "fee": 0,
+      "fee": 650000,
       "rating": null,
       "tags": [
         "Công viên giải trí"
@@ -55938,7 +55934,7 @@
       "lon": 108.5227203,
       "opening_hours": [],
       "hours_source": "",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": null,
       "tags": [
@@ -55948,9 +55944,9 @@
       "fetched_at": "2026-10-13",
       "verified": false,
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 140,
+        "p50": 200,
+        "p75": 280
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -56008,7 +56004,7 @@
         "09:00-23:59"
       ],
       "hours_source": "user-verify",
-      "price_level": 2,
+      "price_level": null,
       "fee": 0,
       "rating": 5.0,
       "tags": [

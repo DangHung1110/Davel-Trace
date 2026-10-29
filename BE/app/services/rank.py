@@ -32,6 +32,7 @@ from __future__ import annotations
 from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
+from BE.common import price_level_of
 
 WEIGHTS = {
     "rating": 0.22,
@@ -110,11 +111,10 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     fee = int(poi.get("fee", 0))
     parts["price"] = _clamp(1.0 - fee / budget) if budget > 0 else 0.0
     # Onboarding spending level: align the POI price band with what the party
-    # wants to spend (1 budget / 2 mid / 3 high). No price_level -> fee only.
-    level = poi.get("price_level")
-    if level is not None:
-        gap = abs(_int(level, 2) - _int(user.get("spending_level"), 2))
-        parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
+    # wants to spend (1 budget / 2 mid / 3 high). Unknown price (null) counts as
+    # the middle band (`UNKNOWN_PRICE_LEVEL`), so missing data is never a bonus.
+    gap = abs(price_level_of(poi) - _int(user.get("spending_level"), 2))
+    parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
     if fee == 0:
         reasons.append("mien phi")
 

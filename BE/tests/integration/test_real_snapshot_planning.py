@@ -101,7 +101,9 @@ class TestRealSnapshotPlanning(unittest.TestCase):
         self.assert_honest(plan)
 
     def test_empty_pool_is_empty_plan(self):
-        _, plan = self.plan(activities=["tắm biển"], start_time="23:00",
+        # 30 minutes: shorter than every verified visit (min p50 45), so no
+        # stop fits. (23:00-23:50 now fits a 45-minute 24/7 bridge.)
+        _, plan = self.plan(activities=["tắm biển"], start_time="23:20",
                             end_time="23:50",
                             profile=dict(COUPLE, allergy=["hải sản"]))
         self.assertFalse(plan["passed"])

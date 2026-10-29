@@ -41,7 +41,8 @@ def main() -> int:
              "lat": m["lat"], "lon": m["lon"],
              "opening_hours": m.get("opening_hours", []),
              "hours_source": m.get("hours_source", ""),
-             "price_level": 2, "fee": 0, "rating": m.get("rating"),
+             "price_level": None, "fee": m.get("ticket_vnd") or 0,
+             "rating": m.get("rating"),
              "tags": [m["type"]], "source": "manual+web",
              "fetched_at": datetime.date.today().isoformat(),
              "verified": False}

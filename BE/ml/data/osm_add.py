@@ -128,7 +128,7 @@ def to_poi(el, c, la, lo, name, tags) -> dict:
          "type": VI_TYPE.get(c, c), "lat": la, "lon": lo,
          "opening_hours": oh,
          "hours_source": "osm" if oh else "",
-         "price_level": 2, "fee": 0, "rating": None,
+         "price_level": None, "fee": 0, "rating": None,
          "tags": [VI_TYPE.get(c, c)], "source": "osm/overpass",
          "fetched_at": datetime.date.today().isoformat(), "verified": False}
     enrich_poi(p)

@@ -181,7 +181,7 @@ def normalize(place_id: str, search_item: dict) -> dict:
         "opening_hours": parse_hours(search_item.get("operating_hours")),
         "visit_min": {"p25": 0, "p50": 0, "p75": 0},  # nac-2 fills later
         "dur_source": "pending_llm", "dur_confidence": "low",
-        "price_level": 2, "fee": 0,
+        "price_level": None, "fee": 0,  # null until a real price (normalize_fields)
         "rating": rating,
         "tags": cats,
         "intensity": 2, "ambience": "", "weather_sensitive": False,

@@ -165,7 +165,11 @@ def uncertainty(p: dict) -> list[str]:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
         labels.append("tags chua xac minh")
-    if int(p.get("fee", 0)) == 0 and poi_category(p) in PAID_CATS:
+    # Spend unknown: a paid group with no price band, or a ticketed POI whose
+    # ticket price never landed in `fee`.
+    ticketed = (p.get("smart_tags") or {}).get("ticket") is True
+    if ((poi_category(p) in PAID_CATS and p.get("price_level") is None)
+            or (ticketed and not int(p.get("fee") or 0))):
         labels.append("gia chua xac minh")
     return labels
 

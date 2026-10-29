@@ -137,9 +137,13 @@ class TestBaselines(unittest.TestCase):
             self.assertAlmostEqual(
                 sc["SC-009"]["pass"], sc["SC-009"]["ratio"] >= 1.10)
 
-    def test_zero_fee_snapshot_marks_sc008_vacuous(self):
-        self.assertTrue(self.report["sc"]["SC-008"]["vacuous"])
-        self.assertIn("zero_fee", self.report["notes"])
+    def test_sc008_vacuous_only_when_every_fee_is_zero(self):
+        # Derived, not pinned: tickets now land in `fee` (normalize_fields),
+        # so SC-008 is exercised whenever a scoped candidate has a price.
+        sc8 = self.report["sc"]["SC-008"]
+        self.assertEqual(sc8["vacuous"], "zero_fee" in self.report["notes"])
+        if not sc8["vacuous"]:
+            self.assertTrue(any(int(p.get("fee") or 0) > 0 for p in self.pois_list))
         sc9 = self.report["sc"]["SC-009"]
         if "uniform_ratings" in self.report["notes"]:
             # A uniform pool cannot discriminate taste: undecidable, not equal.

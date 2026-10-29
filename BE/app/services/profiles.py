@@ -42,6 +42,7 @@ from BE.app.services.gate import SOFT_CHECKS
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, StubTrip, optimize, stubs_from_pois)
 from BE.app.services.validator import validate
+from BE.common import price_level_of
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -232,7 +233,7 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     rating, fee = float(p.get("rating") or 0), int(p.get("fee") or 0)
     if profile == "savings":
         cat = soft_rules.poi_category(p)
-        price_level = int(p.get("price_level") or 1)
+        price_level = price_level_of(p)  # null = unknown -> middle band
         fee_weight = SAVINGS_FEE_UNIT
         if budget is not None and 0 < float(budget) < TIGHT_BUDGET_VND:
             fee_weight = fee_weight / SAVINGS_TIGHT_FEE_MULTIPLIER
