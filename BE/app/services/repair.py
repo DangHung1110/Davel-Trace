@@ -91,6 +91,12 @@ def _f1_target(acts: list[dict], pois: dict, trip: dict,
     return min(pool, key=lambda a: ranks.get(a.get("poi_id"), 0.0)), want
 
 
+def _mentions(text: str, term: str) -> bool:
+    """Whole-word mention: "bar" is not in "barbecue", "an" not in "văn"."""
+    return bool(term) and re.search(
+        r"(?<!\w)" + re.escape(term) + r"(?!\w)", text) is not None
+
+
 def _named_target(issue: dict, acts: list[dict], pois: dict,
                   ranks: dict) -> dict | None:
     """Lowest-ranked activity whose POI/type/category the issue mentions."""
@@ -98,15 +104,15 @@ def _named_target(issue: dict, acts: list[dict], pois: dict,
     by_rank = sorted(acts, key=lambda a: ranks.get(a.get("poi_id"), 0.0))
     for act in by_rank:
         name = str(pois.get(act.get("poi_id"), {}).get("name") or "").strip().lower()
-        if name and name in text:
+        if _mentions(text, name):
             return act
     for act in by_rank:
         poi = pois.get(act.get("poi_id"), {})
         cat = poi_category(poi)
-        if cat and cat in text:
+        if _mentions(text, cat):
             return act
         kind = str(poi.get("type") or "").strip().lower()
-        if kind and kind in text:
+        if _mentions(text, kind):
             return act
     # Token overlap (e.g. "ăn chay" -> "Nhà hàng chay ..."): ignore generic
     # venue words so "nhà hàng"/"quán" never match every food POI.

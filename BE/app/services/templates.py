@@ -34,6 +34,8 @@ required counts relax; the archetype bans and the rest lock stay hard).
 
 from __future__ import annotations
 
+import re
+
 from BE.app.services.profile_filter import fold
 from BE.app.services.soft_rules import (
     FOOD_CATEGORIES,
@@ -139,14 +141,15 @@ NO_LIMITS = {
 }
 
 # Folded party-type hints (see profile_filter.fold: "gia đình" -> "gia dinh").
-FAMILY_HINTS = ("family", "gia dinh", "kid", "child", "tre em", "con nho",
-                "elder", "senior", "bo me")
+FAMILY_HINTS = ("family", "gia dinh", "kid", "child", "children", "tre em",
+                "con nho", "elder", "elderly", "senior", "bo me")
 FRIENDS_HINTS = ("friend", "ban be", "group", "nhom", "team", "dong nghiep",
                  "company", "hoi ban")
 COUPLE_HINTS = ("couple", "cap doi", "honeymoon", "trang mat", "partner",
                 "nguoi yeu", "doi")
 
-FAST_ACTIVITY_HINTS = ("nightlife", "bar", "pub", "club", "party", "tiec")
+FAST_ACTIVITY_HINTS = ("nightlife", "bar", "pub", "club", "party", "parties",
+                       "tiec")
 CALM_ACCESSIBILITY = frozenset({"wheelchair", "stroller", "low_walking",
                                 "no_stairs", "low walking", "no stairs"})
 
@@ -159,7 +162,12 @@ def _int(value, default: int = 2) -> int:
 
 
 def _has(text: str, hints: tuple[str, ...]) -> bool:
-    return any(hint in text for hint in hints)
+    """Whole-word hint in folded text: "_"/"-" split words and a plural
+    s/es is fine ("family_with_kids", "friends"), but "bar" never fires on
+    "barbecue" nor "pub" on "public"."""
+    words = re.sub(r"[_\-/]+", " ", text or "")
+    return any(re.search(r"(?<!\w)" + re.escape(hint) + r"(?:s|es)?(?!\w)", words)
+               for hint in hints)
 
 
 def select_template(profile: dict | None) -> str:

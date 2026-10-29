@@ -147,6 +147,16 @@ def _match_terms(terms, text: str, folded: str) -> str | None:
     return None
 
 
+def has_word(text: str, words) -> bool:
+    """Whole-word `words` hit in an already-folded `text` (never substring:
+    "bar" must not fire on "barbecue", "pub" on "public")."""
+    for word in words:
+        pattern = _pattern(fold(str(word or "")))
+        if pattern is not None and pattern.search(text or ""):
+            return True
+    return False
+
+
 def terms_for(term: str, groups: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
     """Expand a user term through its group table (unknown term = itself)."""
     raw = str(term or "").strip()
@@ -216,6 +226,22 @@ def cuisine_classes(text: str) -> set[str]:
     for name, terms in CUISINE_CLASSES.items():
         if _match_terms(terms, str(text or "").lower(), folded):
             found.add(name)
+    return found
+
+
+def cuisine_terms(text: str) -> list[str]:
+    """Cuisine words named in free text ("ăn hải sản" -> ["hải sản"]).
+
+    Lets a food wish that arrived as an activity reach the taste bonus the
+    same way a `food_prefs` entry does.
+    """
+    raw = str(text or "").lower()
+    folded = fold(raw)
+    found: list[str] = []
+    for terms in CUISINE_CLASSES.values():
+        hit = _match_terms(terms, raw, folded)
+        if hit and hit not in found:
+            found.append(hit)
     return found
 
 

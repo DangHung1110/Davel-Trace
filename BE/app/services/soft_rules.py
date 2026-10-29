@@ -78,7 +78,7 @@ from __future__ import annotations
 
 from collections import Counter
 
-from BE.app.services.profile_filter import fold
+from BE.app.services.profile_filter import fold, has_word
 from BE.common import to_min
 
 # Meal slots (minutes since midnight): lunch 11:00-14:00, dinner 17:00-21:00.
@@ -273,7 +273,7 @@ def cafe_need(profile: dict | None) -> bool:
     prefs = list(profile.get("food_prefs") or []) + list(
         profile.get("activities") or [])
     text = fold(" ".join(str(item) for item in prefs))
-    return any(word in text for word in CAFE_NEED_WORDS)
+    return has_word(text, CAFE_NEED_WORDS)
 
 
 def cafe_cap(profile: dict | None) -> int:
