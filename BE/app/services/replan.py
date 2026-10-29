@@ -23,6 +23,7 @@ from BE.app.services.budget import tighten_budget
 from BE.app.services.common import parse_hours, to_min
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
+from BE.app.services.soft_rules import CATEGORY_DAILY_CAP, cafe_cap
 from BE.app.services.validator import validate
 
 
@@ -105,7 +106,13 @@ def replan(state: dict, event: dict, pois: list[dict],
     origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
     q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
     out = optimize(stub, travel2, StubTrip(start, _deadline(trip), origin_id),
-                   edge_scores=q)
+                   edge_scores=q,
+                   # Universal HARD caps the gate checks: a replanned day must
+                   # not end up with two markets / two cafes just because the
+                   # rolling horizon re-optimised from scratch.
+                   category_cap=CATEGORY_DAILY_CAP,
+                   cafe_cap=None if not trip.get("profile")
+                   else cafe_cap(trip.get("profile")))
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),

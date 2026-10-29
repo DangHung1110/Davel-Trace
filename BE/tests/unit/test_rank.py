@@ -39,7 +39,7 @@ class TestRank(unittest.TestCase):
         self.assertTrue(all(v >= 0 for v in WEIGHTS.values()))
         self.assertAlmostEqual(sum(WEIGHTS.values()), 1.0)
         self.assertEqual(set(WEIGHTS),
-                         {"rating", "price", "effort", "pref_match",
+                         {"rating", "price", "effort", "pref_match", "taste",
                           "time_fit", "weather"})
 
     def test_scores_bounded_with_reasons(self):
@@ -54,6 +54,49 @@ class TestRank(unittest.TestCase):
         wet = score_poi(DATING_QUIET_SEA, USER,
                         {**CTX, "rain_prob": 0.9})["score"]
         self.assertGreater(dry, wet)
+
+    def test_e2_nightlife_before_17h_is_penalized(self):
+        """E2: a bar in the morning loses time_fit vs the same bar at night."""
+        bar = {"poi_id": "bar", "cat": "bar", "type": "Quán bar", "fee": 0,
+               "rating": 4.6, "intensity": 2, "tags": ["bar"], "ambience": ""}
+        morning = score_poi(bar, {}, {"hour": "09:00"})
+        evening = score_poi(bar, {}, {"hour": "19:00"})
+        self.assertLess(morning["score"], evening["score"])
+        self.assertIn("bar/ nightlife truoc 17h", " | ".join(morning["reasons"]))
+
+    def test_c1_food_prefs_raise_taste_match(self):
+        """C1: rank reads food_prefs (the router now forwards them)."""
+        seafood = {"poi_id": "sea", "cat": "restaurant",
+                   "type": "Nhà hàng hải sản", "fee": 0, "rating": 4.5,
+                   "intensity": 1, "tags": ["Nhà hàng hải sản", "Hải sản"],
+                   "ambience": ""}
+        plain = {"poi_id": "plain", "cat": "restaurant",
+                 "type": "Nhà hàng chay", "fee": 0, "rating": 4.5,
+                 "intensity": 1, "tags": ["Nhà hàng chay"], "ambience": ""}
+        user = {"food_prefs": ["hải sản"]}
+        ctx = {"hour": "12:00"}
+        self.assertGreater(score_poi(seafood, user, ctx)["score"],
+                           score_poi(plain, user, ctx)["score"])
+
+    def test_onboarding_outdoor_bias_moves_outdoor_pois(self):
+        """Profile outdoor_bias (-1..1) is consumed: + prefers, - avoids."""
+        beach = {"poi_id": "beach", "cat": "beach", "type": "Bãi biển",
+                 "fee": 0, "rating": 4.5, "intensity": 1,
+                 "weather_sensitive": True, "tags": ["biển"]}
+        ctx = {"hour": "09:00"}
+        self.assertGreater(score_poi(beach, {"outdoor_bias": 1.0}, ctx)["score"],
+                           score_poi(beach, {"outdoor_bias": -1.0}, ctx)["score"])
+        self.assertGreater(score_poi(beach, {"outdoor_bias": 1.0}, ctx)["score"],
+                           score_poi(beach, {}, ctx)["score"])
+
+    def test_onboarding_spending_level_aligns_price_band(self):
+        cheap = {"poi_id": "cheap", "cat": "restaurant", "type": "Nhà hàng",
+                 "fee": 0, "rating": 4.5, "intensity": 1, "price_level": 1,
+                 "tags": []}
+        ctx = {"hour": "12:00"}
+        budget_user = score_poi(cheap, {"spending_level": 1}, ctx)["score"]
+        luxury_user = score_poi(cheap, {"spending_level": 3}, ctx)["score"]
+        self.assertGreater(budget_user, luxury_user)
 
 
 if __name__ == "__main__":

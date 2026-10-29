@@ -1,6 +1,6 @@
 """Tier-1 deterministic metrics (T049, lane A; converged at T061f). No LLM.
 
-T061f single-source: the seven gate checks live in `BE.app.services.gate`
+T061f single-source: the concrete gate checks live in `BE.app.services.gate`
 (`CHECKS`) and are imported here; this module no longer carries copies of
 the FAR/VROH/B3/BCS/ETB/TCS/HCS formulas. The public metric wrappers below
 read the canonical `score` (compliance in [0,1]); `evaluate` reads `passed`.
@@ -21,6 +21,7 @@ from __future__ import annotations
 
 from BE.app.services.gate import (
     CHECKS as GATE_CHECKS,
+    SOFT_CHECKS,
     check_b3,
     check_bcs,
     check_far,
@@ -115,9 +116,15 @@ def aqe(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
 
 
 def evaluate(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Gate first (named violations), soft scores only when passed."""
+    """Gate first (named HARD violations), soft scores only when passed.
+
+    F1 lives in the shared registry but is a SOFT quota: it is deliberately
+    excluded from `gate.violations` (contract shape stays 2 keys) so an
+    all-food day still gets soft scores.
+    """
     violations = [name for name, fn in GATE_CHECKS
-                  if not fn(itinerary, trip, pois, matrix)["passed"]]
+                  if name not in SOFT_CHECKS
+                  and not fn(itinerary, trip, pois, matrix)["passed"]]
     gate = {"passed": not violations, "violations": violations}
     soft: dict = {}
     if gate["passed"]:

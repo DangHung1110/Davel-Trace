@@ -30,6 +30,8 @@ class Settings:
     snapshot_name: str = "danang-v1"
     google_places_key: str = ""
     osrm_base_url: str = ""
+    acceptance_db_path: str = os.path.join("BE", "data", "accepted_plans.db")
+    shadow_judge_rate: float = 0.0
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -44,8 +46,24 @@ class Settings:
                                          os.path.basename(snap.rstrip("/\\")) or "danang-v1"),
             google_places_key=os.environ.get("GOOGLE_PLACES_KEY", ""),
             osrm_base_url=os.environ.get("OSRM_BASE_URL", ""),
+            acceptance_db_path=os.environ.get(
+                "ACCEPTANCE_DB_PATH",
+                os.path.join("BE", "data", "accepted_plans.db"),
+            ),
+            shadow_judge_rate=_shadow_rate(
+                os.environ.get("SHADOW_JUDGE_RATE", "0")
+            ),
         )
 
 
 def get_settings() -> Settings:
     return Settings.from_env()
+
+
+def _shadow_rate(raw: str) -> float:
+    """Parse a 0..0.10 canary rate; invalid/unsafe values disable it."""
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        return 0.0
+    return value if 0.0 <= value <= 0.10 else 0.0

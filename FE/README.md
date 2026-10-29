@@ -1,9 +1,46 @@
-# Frontend
+# Flutter mobile — Davel Trace
 
-This directory contains the Flutter mobile application.
+Ứng dụng mobile chính của dự án, theo phong cách **Sơn Trà Breeze**: teal
+`#006A6A`, amber `#D97706`, nền trắng/slate, Material 3 bo tròn và ít màu.
 
-The first milestone covers the application shell and UI placeholders for:
+Luồng demo đã nối:
 
-- itinerary planning;
-- the Da Nang map;
-- expense management.
+- lịch trình quản lý và các phương án planner;
+- chốt phương án live vào SQLite backend;
+- PMTiles Đà Nẵng, route/location và cảnh báo fallback;
+- chi tiêu/ngân sách;
+- hồ sơ du khách;
+- seeded/stale/live state được gắn nhãn rõ ràng.
+
+Trên desktop, app tự nằm trong khung điện thoại logic 390×844. Trên viewport
+mobile, app dùng toàn màn hình.
+
+## Chạy trên laptop
+
+Từ repo root (PowerShell):
+
+```powershell
+& '.\.flutter-sdk\bin\flutter.bat' pub get --directory FE
+& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+```
+
+Git Bash:
+
+```bash
+./.flutter-sdk/bin/flutter.bat run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+```
+
+Không dùng cú pháp PowerShell `$env:...` hoặc `&` trong Git Bash.
+
+## Kiểm tra
+
+```powershell
+& '.\.flutter-sdk\bin\flutter.bat' analyze FE
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' test
+& '..\.flutter-sdk\bin\flutter.bat' build web --release
+Pop-Location
+```
+
+`FE/onboard.html` và `FE/test_harness.html` vẫn là công cụ kiểm tra API nhanh;
+Flutter là frontend demo chính.

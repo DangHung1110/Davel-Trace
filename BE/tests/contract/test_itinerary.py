@@ -131,14 +131,63 @@ class TestItineraryContract(unittest.TestCase):
         self.assertEqual([plan["profile"] for plan in body["plans"]], profiles)
         self.assertEqual(len({plan["itinerary_id"] for plan in body["plans"]}), 3)
 
+    def test_default_profiles_are_three_structural_objectives(self):
+        """Omitting `profiles` must return savings+balanced+experience."""
+        from BE.app.routers.itinerary import ItineraryIn
+        from BE.app.schemas.trip import TripRequest
+
+        self.assertEqual(
+            ItineraryIn(trip=TripRequest(**TRIP)).profiles,
+            ["savings", "balanced", "experience"])
+
+        built_profiles = []
+
+        def build_plan(**kwargs):
+            profile = kwargs["profile"]
+            built_profiles.append(profile)
+            activities = {
+                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
+                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
+                "experience": [
+                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
+                ],
+            }[profile]
+            return {"activities": activities,
+                    "total_cost": 0, "total_km": 0,
+                    "total_min": 0, "constraint_status": {}}
+
+        old_builder = itinerary_mod._get_plan_builder
+        try:
+            itinerary_mod._get_plan_builder = lambda: build_plan
+            r = client.post("/v1/itinerary", json={"trip": TRIP})
+            self.assertEqual(r.status_code, 200, r.text)
+            self.assertEqual(built_profiles,
+                             ["savings", "balanced", "experience"])
+            plans = r.json()["plans"]
+            self.assertEqual([p["profile"] for p in plans],
+                             ["savings", "balanced", "experience"])
+        finally:
+            itinerary_mod._get_plan_builder = old_builder
+
     def test_itinerary_id_not_hardcoded(self):
         trip_id = "request-trip-uuid-test"
         requested_profiles = ["savings", "balanced", "experience"]
         built_profiles = []
 
         def build_plan(**kwargs):
-            built_profiles.append(kwargs["profile"])
-            return {"activities": [], "total_cost": 0, "total_km": 0,
+            profile = kwargs["profile"]
+            built_profiles.append(profile)
+            activities = {
+                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
+                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
+                "experience": [
+                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
+                ],
+            }[profile]
+            return {"activities": activities,
+                    "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
         store = select_mod.get_store()

@@ -11,6 +11,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
@@ -21,6 +22,7 @@ from BE.app import main as main_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.app.services import trip_ctx  # noqa: E402
 from BE.tests import conftest  # noqa: E402
 
 POIS = [
@@ -73,7 +75,10 @@ class TestUS4Multi(unittest.TestCase):
                          {"hill", "beach"})
 
         profiles = ["savings", "balanced", "experience"]
-        r = client.post("/v1/itinerary", json={"trip": TRIP, "profiles": profiles})
+        with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",
+                               side_effect=RuntimeError("offline test")):
+            r = client.post("/v1/itinerary",
+                            json={"trip": TRIP, "profiles": profiles})
         if r.status_code == 501:
             self.assertEqual(set(r.json()), {"error", "message"})
             self.assertEqual(r.json()["error"], "PLANNER_UNAVAILABLE")

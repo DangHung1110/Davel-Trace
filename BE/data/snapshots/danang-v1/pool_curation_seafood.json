@@ -1,0 +1,310 @@
+{
+ "tag": "seafood",
+ "generated_at": "2026-10-27T14:00:16",
+ "snapshot": "danang-v1",
+ "provider": "api",
+ "model": "qwen3-8b",
+ "profile": {
+  "food_prefs": [
+   "hải sản"
+  ],
+  "activities": [],
+  "must_avoid": [],
+  "budget": 2000000,
+  "start_time": "07:00",
+  "end_time": "18:00"
+ },
+ "candidate_count": 47,
+ "decisions": {
+  "ChIJqSwlvMkZQjERE_9aVr3pkes": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJfagM2mkZQjER9NTQqfVjnI8": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJwUTwp4IZQjERHfo3HZIYvzo": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJlU7ZlygfQjERs_tFa6tFx-s": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJO56jTAARQjEREYLpKFOB1DA": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJbbs1ZTQYQjERi3OdfmnRk2g": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJrfU0w0MRQjERC4PjgT9h3LQ": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ2_OVwmIZQjERrNNkMMg-gk4": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJz_cDrLoRQjERy7ZIG8Mj5-E": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJz0Od5IUXQjERmAV9JgLRqm8": {
+   "keep": false,
+   "drop": true,
+   "reason": "quán ăn chay, không khớp hải sản"
+  },
+  "ChIJJ66EjfQRQjERrmpQQcYTgq8": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJrVOLzgUXQjERRuyvUi8WxkQ": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJP-VRM2YXQjERbEUrtG6wq9Q": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJYy-g38oQQjER2c931z_dDt4": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJt1wLHjEYQjEREA1YGZU2yOc": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJIcLWMlAZQjER1VvH4kJ2aZA": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJqaaYAdIiQjERGuZHElpvurA": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJoeH5ukkZQjERxUlcUbKA-XE": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJW0KcgfI9QjERJpkPfjssyfo": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJTXOYPFQXQjERGWO0Jf095tw": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJJZ47gFgZQjERvHYpZqPp0lU": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJf8tFWf0XQjERNR0V2Xki5zQ": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJP1Uz6i0ZQjERfy-rpM1cGWc": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ97eYL8YQQjER8HxFGKLiQec": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJrcgyp-wZQjERNqpo6xe5Ogw": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJFad1TFAXQjERE9B6U1THHT4": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJH72bVncZQjERoTgax0OjZKY": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJQRIRJDIYQjER4JvYKu_Qnak": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJV9qvhLoZQjERX5RrjGA07mM": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJgUt949cYQjERTHdMcEeiF2o": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ9yzkbH0ZQjERDhPDi_ITcmM": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJz4Y1XCcZQjERzg9AZYfOGH8": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ7bDAtv8YQjERj0Fj9FcnHgA": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ4UuIQXgXQjERz192UgYuxMU": {
+   "keep": false,
+   "drop": true,
+   "reason": "quán ăn chay, không khớp hải sản"
+  },
+  "ChIJRaHks2wXQjERVMrWhffmRXw": {
+   "keep": false,
+   "drop": true,
+   "reason": "thịt nướng Hàn Quốc, không khớp hải sản"
+  },
+  "ChIJudsANu4XQjERbLKxjXDLHtU": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJM5BHkDAZQjERYlaJyu15KFg": {
+   "keep": false,
+   "drop": true,
+   "reason": "thịt nướng Hàn Quốc, không khớp hải sản"
+  },
+  "ChIJBcr6kegZQjER2nCllYpT_Qc": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJhZI15EcYQjERBq1kypqtqtc": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJrcJ8wVwRQjERJF58LAQEO-I": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ1yFjaOwZQjERO43leJW7YHk": {
+   "keep": false,
+   "drop": true,
+   "reason": "Nhà hàng chay, không khớp hải sản"
+  },
+  "ChIJJSd-naoZQjERheTI-IEkRrc": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJ37F4OvoZQjERcSRyXX_s91c": {
+   "keep": false,
+   "drop": true,
+   "reason": "Nhà hàng chay, không khớp hải sản"
+  },
+  "ChIJ34pDfgA9QjERzXhUIjmZbso": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJodkOVL8fQjERGwRf5tBRLvI": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  },
+  "ChIJhRHxyd4XQjERPVL2Kw_eqdw": {
+   "keep": true,
+   "drop": false,
+   "reason": "khong bi flag (LLM chi liet ke diem loai)"
+  }
+ },
+ "drops": [
+  {
+   "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
+   "name": "My Casa",
+   "type": "Nhà hàng ý",
+   "cat": "restaurant",
+   "reason": "quán ăn chay, không khớp hải sản"
+  },
+  {
+   "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
+   "name": "Koko House - Nhà Hàng Thịt Nướng Hàn Quốc",
+   "type": "Nhà hàng Hàn Quốc",
+   "cat": "restaurant",
+   "reason": "quán ăn chay, không khớp hải sản"
+  },
+  {
+   "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
+   "name": "Korea BBQ House",
+   "type": "Nhà hàng thịt bò Hàn Quốc",
+   "cat": "restaurant",
+   "reason": "thịt nướng Hàn Quốc, không khớp hải sản"
+  },
+  {
+   "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
+   "name": "Quán Tuấn Núi (Heo bản - Gà đen)",
+   "type": "Nhà hàng",
+   "cat": "restaurant",
+   "reason": "thịt nướng Hàn Quốc, không khớp hải sản"
+  },
+  {
+   "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
+   "name": "Nhà hàng chay Shanti Vegan Đà Nẵng",
+   "type": "Nhà hàng",
+   "cat": "restaurant",
+   "reason": "Nhà hàng chay, không khớp hải sản"
+  },
+  {
+   "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
+   "name": "Nhà Hàng Hồ Xanh - Hồ Xanh Restaurant",
+   "type": "Nhà hàng",
+   "cat": "restaurant",
+   "reason": "Nhà hàng chay, không khớp hải sản"
+  }
+ ],
+ "unknown_ids": [
+  "ChIJN7eYL8YQQjER8HxFGKLiQec"
+ ],
+ "missing_ids": [],
+ "response_shape": "drop_list",
+ "kept": 41,
+ "dropped": 6,
+ "elapsed_ms": 46186,
+ "applied": false,
+ "note": "offline curation evidence only; nothing is auto-applied to the snapshot or the request path",
+ "prompt_version": "curate_pool.v2"
+}

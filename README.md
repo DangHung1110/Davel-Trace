@@ -1,5 +1,14 @@
 # Da Nang Local PMTiles 3D Route Simulator
 
+Repository hiện có ba bề mặt demo dùng chung dữ liệu Đà Nẵng:
+
+- Prototype bản đồ tĩnh ở thư mục gốc (`index.html` + `server.py`).
+- FastAPI planner/evidence trong `BE/`: phương án khả thi, năm nhóm hard gate,
+  accepted-plan log SQLite, shadow calibration và readiness cho các giai đoạn
+  học sau này.
+- Flutter mobile trong `FE/`: khung điện thoại 390×844 chạy ngay trên laptop,
+  PMTiles local, lịch trình, chi tiêu, hồ sơ và planner live/offline trung thực.
+
 Bộ test tĩnh, không framework và không cần build. Chức năng gồm:
 
 - Render bản đồ Đà Nẵng từ `data/danang.pmtiles`, không cần VietMap API key.
@@ -24,6 +33,29 @@ python server.py
 Không dùng `python -m http.server` cho file PMTiles vì server mặc định không trả HTTP byte ranges. `server.py` trong dự án đã hỗ trợ `206 Partial Content`.
 
 Sau đó mở `http://localhost:5500`. Bản đồ tự tải từ file local, không cần nhập API key.
+
+## Demo mobile trên laptop
+
+Mở terminal PowerShell thứ nhất:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
+```
+
+Mở terminal PowerShell thứ hai:
+
+```powershell
+& '.\.flutter-sdk\bin\flutter.bat' pub get --directory FE
+& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+```
+
+App tự căn giữa trong khung điện thoại khi chạy trên màn hình laptop. Nếu BE
+chưa chạy, app vẫn mở dữ liệu demo và ghi rõ rằng lựa chọn chưa được lưu lên
+server. Hướng dẫn/test đầy đủ: `specs/003-stable-planning-roadmap/quickstart.md`.
+
+Accepted plan được tạo code-first tại `BE/data/accepted_plans.db`. Trong
+DBeaver chọn driver SQLite và mở trực tiếp file này; không có username,
+password, host hay port.
 
 Ô **Service API key** chỉ dùng cho Search/Place/Route của VietMap và có thể để trống. Khi để trống, tìm kiếm dùng Photon/OpenStreetMap và chỉ đường dùng OSRM.
 

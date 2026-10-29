@@ -51,7 +51,10 @@ class TestProfiles(unittest.TestCase):
             self.assertTrue(p["reason"])
             self.assertEqual(p["constraint_status"],
                              {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
-                              "ETB": 1, "TCS": 1, "HCS": 1})
+                              "ETB": 1, "A1": 1, "CAFE_CAP": 1,
+                              "CATEGORY_CAP": 1,
+                              "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,
+                              "REST_FOLLOWS_LUNCH": 1, "TCS": 1, "HCS": 1})
         print(f"\n pool: {[(p['profile'], p['total_cost'], p['preference']) for p in pool['plans']]}")
 
     def test_plans_carry_t032s_scores(self):

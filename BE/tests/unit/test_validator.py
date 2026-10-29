@@ -30,8 +30,15 @@ class TestValidator(unittest.TestCase):
         rep = validate(GOOD, TRIP, POIS, MATRIX)
         self.assertEqual(rep["passed"], True)
         self.assertEqual(rep["violations"], [])
+        # The fixture has no category data, so the SOFT F1 quota is listed
+        # separately and never fail-closes.
+        self.assertEqual(rep["soft_violations"], ["F1"])
+        self.assertEqual(rep["details"]["F1"], ["musu", "beach"])
         self.assertEqual(set(rep["checks"]),
-                         {"FAR", "VROH", "B3", "BCS", "ETB", "TCS", "HCS"})
+                         {"FAR", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP", "CATEGORY_CAP", "NO_CONSECUTIVE",
+                          "NO_ADJACENT_FOOD",
+                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"})
         print(f"\n good: {rep['checks']}")
 
     def test_ghost_poi(self):
@@ -106,6 +113,78 @@ class TestValidator(unittest.TestCase):
         full_pois = {**POIS, "musu": {**POIS["musu"]}, "beach": {**POIS["beach"]}}
         rep = validate(out["itinerary"], TRIP, full_pois, MATRIX)
         self.assertTrue(rep["passed"], rep)
+
+    def test_a1_offenders_list_every_restaurant_in_the_slot(self):
+        """Two restaurants at lunch -> both A1 offenders; HCS mirrors both."""
+        restaurant = {"verified": True, "fee": 0,
+                      "opening_hours": ["06:00-23:00"], "type": "restaurant"}
+        pois = {"r1": restaurant, "r2": restaurant}
+        matrix = {"r1->r2": {"minutes": 10}}
+        bad = {"activities": [
+            {"poi_id": "r1", "start": "11:15", "end": "12:15"},
+            {"poi_id": "r2", "start": "12:25", "end": "13:25"}]}
+        rep = validate(bad, TRIP, pois, matrix)
+        self.assertEqual(rep["violations"],
+                         ["A1", "NO_CONSECUTIVE", "NO_ADJACENT_FOOD", "HCS"])
+        self.assertEqual(rep["details"]["A1"], ["r1", "r2"])
+        self.assertEqual(rep["details"]["NO_CONSECUTIVE"], ["r1->r2"])
+        self.assertEqual(rep["details"]["NO_ADJACENT_FOOD"], ["r1->r2"])
+        self.assertEqual(rep["details"]["HCS"], ["r1", "r2", "r1->r2"])
+        self.assertTrue(rep["checks"]["TCS"])  # TCS is the time mirror, not A1
+
+    def test_f1_all_food_day_is_listed_but_soft(self):
+        """F1 offenders are reported under soft_violations, plan passes."""
+        pois = {
+            "r1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "restaurant"},
+            "c1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "cafe"},
+        }
+        matrix = {"r1->c1": {"minutes": 10}}
+        all_food = {"activities": [
+            {"poi_id": "r1", "start": "08:00", "end": "09:00"},
+            {"poi_id": "c1", "start": "09:10", "end": "10:00"}]}
+        rep = validate(all_food, TRIP, pois, matrix)
+        self.assertTrue(rep["passed"])
+        self.assertEqual(rep["violations"], [])
+        self.assertEqual(rep["soft_violations"], ["F1"])
+        self.assertEqual(rep["details"]["F1"], ["r1", "c1"])
+        self.assertFalse(rep["checks"]["F1"])
+
+    def test_f1_food_plus_sightseeing_passes(self):
+        pois = {
+            "r1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "restaurant"},
+            "m1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "museum"},
+        }
+        matrix = {"r1->m1": {"minutes": 10}}
+        mixed = {"activities": [
+            {"poi_id": "r1", "start": "08:00", "end": "09:00"},
+            {"poi_id": "m1", "start": "09:10", "end": "10:00"}]}
+        rep = validate(mixed, TRIP, pois, matrix)
+        self.assertTrue(rep["passed"])
+        self.assertEqual(rep["soft_violations"], [])
+        self.assertTrue(rep["checks"]["F1"])
+
+
+    def test_rest_gate_reports_the_poi_inside_the_siesta(self):
+        """REST_FOLLOWS_LUNCH offender = the activity inside lunch+rest."""
+        pois = {
+            "r1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "restaurant"},
+            "c1": {"verified": True, "fee": 0,
+                   "opening_hours": ["06:00-23:00"], "cat": "cafe"},
+        }
+        matrix = {"r1->c1": {"minutes": 5}}
+        trip = dict(TRIP, profile={"party_type": "solo", "pace": 2})
+        itin = {"activities": [
+            {"poi_id": "r1", "start": "11:30", "end": "12:30"},
+            {"poi_id": "c1", "start": "12:45", "end": "13:00"}]}
+        rep = validate(itin, trip, pois, matrix)
+        self.assertEqual(rep["violations"], ["REST_FOLLOWS_LUNCH", "HCS"])
+        self.assertEqual(rep["details"]["REST_FOLLOWS_LUNCH"], ["c1"])
+        self.assertEqual(rep["details"]["HCS"], ["c1"])
 
 
 if __name__ == "__main__":

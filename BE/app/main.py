@@ -3,6 +3,7 @@
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -12,12 +13,24 @@ from BE.app.routers import expenses as expenses_router
 from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
+from BE.app.routers import planning_evidence as planning_evidence_router
 from BE.app.routers import replan as replan_router
+from BE.app.routers import repair as repair_router
+from BE.app.routers import review as review_router
 from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 
 app = FastAPI(title="Travel Agent BE")
+# NOTE(test-local, DO NOT COMMIT as-is): allow-all CORS so the local
+# harness page (served on another port) can call the API. Restrict to
+# app origins before any PR.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(parse_router.router)
 app.include_router(itinerary_router.router)
 app.include_router(select_router.router)
@@ -26,6 +39,11 @@ app.include_router(expenses_router.router)
 app.include_router(weather_router.router)
 app.include_router(evaluate_router.router)
 app.include_router(scorer_router.router)
+# NOTE(test-local): semantic LLM review for the local test harness only.
+app.include_router(review_router.router)
+# NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
+app.include_router(repair_router.router)
+app.include_router(planning_evidence_router.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

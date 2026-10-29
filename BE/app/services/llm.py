@@ -42,8 +42,10 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
                 {"Content-Type": "application/json",
                  "Authorization": f"Bearer {key}"},
                 {"model": os.environ.get("LLM_API_MODEL", "gpt-4o-mini"),
-                 "response_format": {"type": "json_object"},
-                 "temperature": TEMPERATURE})
+                  # NOTE(test-local): LM Studio rejects
+                  # response_format json_object; prompt + _extract_json
+                  # already enforce/parse JSON, so omit it.
+                  "temperature": TEMPERATURE})
     return (settings.ollama_url.rstrip("/") + "/api/chat",  # local Ollama
             {"Content-Type": "application/json"},
             {"model": settings.judge_model,
@@ -52,8 +54,9 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
              "options": {"temperature": TEMPERATURE}})
 
 
-def _urllib_transport(url: str, headers: dict, body: dict) -> dict:
-    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=120)
+def _urllib_transport(url: str, headers: dict, body: dict,
+                      timeout_s: float = 120) -> dict:
+    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=timeout_s)
     if "message" in data:  # Ollama shape
         return {"text": data["message"].get("content", "")}
     choices = data.get("choices", [])  # OpenAI-compatible shape
@@ -76,11 +79,18 @@ def _extract_json(text: str) -> dict:
 
 
 def complete_json(prompt: str, schema=None, transport=None,
-                  settings: Settings | None = None) -> dict:
+                  settings: Settings | None = None,
+                  timeout_s: float = 120) -> dict:
     """Prompt -> validated dict. `schema`: pydantic model (optional but
-    recommended). Raises LLMError(reason=transport|bad_json|schema)."""
+    recommended). Raises LLMError(reason=transport|bad_json|schema).
+
+    `timeout_s` is forwarded to the default HTTP transport: the request path
+    uses the 120 s default, offline batch tools (curate_pool) may pass more
+    for a small local model that needs minutes for a long JSON answer.
+    """
     settings = settings or get_settings()
-    transport = transport or _urllib_transport
+    transport = transport or (
+        lambda url, headers, body: _urllib_transport(url, headers, body, timeout_s))
     url, headers, extra = _endpoint(settings)
     body = {**extra, "messages": [{"role": "user", "content": prompt}]}
     last: LLMError = LLMError("transport", "no attempt made")

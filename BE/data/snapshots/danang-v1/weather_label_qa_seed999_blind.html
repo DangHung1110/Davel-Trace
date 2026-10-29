@@ -1,0 +1,514 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kiểm tra nhãn thời tiết T063 (blind)</title>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:900px;margin:0 auto;padding:12px;background:#f4f4f5;color:#18181b}
+.bar{position:sticky;top:0;background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px 14px;margin-bottom:12px;z-index:5;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.bar b{font-size:18px}
+button{margin:4px 6px 4px 0;padding:8px 14px;border-radius:8px;border:1px solid #bbb;background:#fff;cursor:pointer}
+button.on{background:#18181b;color:#fff}
+button.exp{background:#2563eb;color:#fff;border-color:#2563eb}
+button.confirm{margin-top:10px;border-color:#16a34a;color:#16a34a}
+button.confirm.confirmed{background:#16a34a;color:#fff}
+.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:14px;margin-bottom:12px}
+.card.confirmed{border-color:#16a34a}
+.card h3{margin:0 0 8px;font-size:16px}
+.flag{border-radius:6px;padding:1px 8px;font-size:12px}
+.flag.ok{background:#bbf7d0}
+.flag.warn{background:#fed7aa}
+.flag.conflict{background:#fecaca;color:#991b1b}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.poi{border:1px solid #e4e4e7;border-radius:8px;padding:8px}
+.poi h4{margin:0 0 6px;font-size:14px;color:#52525b}
+.r{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:3px 0;border-bottom:1px dashed #eee}
+.r span{color:#71717a;flex-shrink:0}
+.r b{text-align:right;font-weight:600}
+.r b .conf{font-weight:400;color:#71717a}
+.ev{margin:4px 0 0;padding-left:16px;font-size:12px;color:#52525b}
+.ev li{margin-bottom:2px}
+.dist{text-align:center;color:#71717a;font-size:13px;margin:8px 0}
+.vote{display:flex;gap:8px;margin-top:10px}
+.vote label{flex:1;text-align:center;border:2px solid #d4d4d8;border-radius:8px;padding:8px;cursor:pointer;font-weight:600}
+.vote input{display:none}
+.vote label.on{border-color:#16a34a;background:#f0fdf4;color:#166534}
+.hide{display:none}
+a{color:#2563eb}
+@media(max-width:640px){.cols{grid-template-columns:1fr}}
+</style></head><body>
+<div class="bar"><b id="prog">Đã xác nhận 0/40</b><br>
+<button data-f="all" class="on">Tất cả</button><button data-f="todo">Chưa xác nhận</button><p>Nhãn cũ và dự đoán của hệ thống được ẩn trong lượt audit này.</p>
+<button class="exp" id="exp">Xuất đáp án (JSON)</button>
+</div>
+<div id="list"><div class='card' data-poi-id='ChIJswSHXgAZQjERZnVL4je3PG4'>
+<h3>#1. SAY Beer</h3>
+<div class='dist'>Loại: Quán bia sân vườn · Tọa độ: 16.061365, 108.191902 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0613647&mlon=108.1919021#map=17/16.0613647/108.1919021'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJswSHXgAZQjERZnVL4je3PG4'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJswSHXgAZQjERZnVL4je3PG4' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJswSHXgAZQjERZnVL4je3PG4' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJswSHXgAZQjERZnVL4je3PG4' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJswSHXgAZQjERZnVL4je3PG4'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJK5AaRBYZQjER9AALhERmND8'>
+<h3>#2. Nhà hàng chay Hoa Sen</h3>
+<div class='dist'>Loại: Nhà hàng · Tọa độ: 16.068859, 108.195885 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0688595&mlon=108.1958847#map=17/16.0688595/108.1958847'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJK5AaRBYZQjER9AALhERmND8'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJK5AaRBYZQjER9AALhERmND8' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJK5AaRBYZQjER9AALhERmND8' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJK5AaRBYZQjER9AALhERmND8' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJK5AaRBYZQjER9AALhERmND8'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ66IiIgAXQjERK0P0RUVMuWM'>
+<h3>#3. Van Ly Spa &amp; Massage</h3>
+<div class='dist'>Loại: Spa mát xa · Tọa độ: 16.095559, 108.245379 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.095558999999998&mlon=108.24537939999999#map=17/16.095558999999998/108.24537939999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ66IiIgAXQjERK0P0RUVMuWM'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ66IiIgAXQjERK0P0RUVMuWM' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ66IiIgAXQjERK0P0RUVMuWM' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ66IiIgAXQjERK0P0RUVMuWM' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ66IiIgAXQjERK0P0RUVMuWM'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJzYULZMgRQjERYRTCyEgKZUY'>
+<h3>#4. AURA SPA-Massage-Nails-Hair Wash &amp; Relaxation In Da Nang</h3>
+<div class='dist'>Loại: Spa · Tọa độ: 15.993645, 108.268244 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=15.9936454&mlon=108.26824409999999#map=17/15.9936454/108.26824409999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJzYULZMgRQjERYRTCyEgKZUY'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzYULZMgRQjERYRTCyEgKZUY' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzYULZMgRQjERYRTCyEgKZUY' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzYULZMgRQjERYRTCyEgKZUY' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJzYULZMgRQjERYRTCyEgKZUY'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJJXkD0OcbQjER8aTXsF-pS_Q'>
+<h3>#5. Nguyen Gia Hotel</h3>
+<div class='dist'>Loại: Khách sạn · Tọa độ: 16.095246, 108.251796 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0952463&mlon=108.2517956#map=17/16.0952463/108.2517956'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJJXkD0OcbQjER8aTXsF-pS_Q'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJXkD0OcbQjER8aTXsF-pS_Q' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJXkD0OcbQjER8aTXsF-pS_Q' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJXkD0OcbQjER8aTXsF-pS_Q' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJJXkD0OcbQjER8aTXsF-pS_Q'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ14kOf8kZQjERrdrrQPpiZKA'>
+<h3>#6. Mì Quảng Thi</h3>
+<div class='dist'>Loại: Quán mì · Tọa độ: 16.058546, 108.217224 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0585457&mlon=108.2172243#map=17/16.0585457/108.2172243'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ14kOf8kZQjERrdrrQPpiZKA'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ14kOf8kZQjERrdrrQPpiZKA' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ14kOf8kZQjERrdrrQPpiZKA' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ14kOf8kZQjERrdrrQPpiZKA' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ14kOf8kZQjERrdrrQPpiZKA'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ6UAZeAAZQjERzK3T81riZmo'>
+<h3>#7. Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng</h3>
+<div class='dist'>Loại: Điểm thu hút khách du lịch · Tọa độ: 16.055193, 108.223694 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.055193&mlon=108.223694#map=17/16.055193/108.223694'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ6UAZeAAZQjERzK3T81riZmo'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ6UAZeAAZQjERzK3T81riZmo' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ6UAZeAAZQjERzK3T81riZmo' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ6UAZeAAZQjERzK3T81riZmo' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ6UAZeAAZQjERzK3T81riZmo'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJzTsg_GQXQjERpsLoJSWJHmU'>
+<h3>#8. Venus Coffee</h3>
+<div class='dist'>Loại: Quán cà phê · Tọa độ: 16.048164, 108.246348 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.048163799999998&mlon=108.2463477#map=17/16.048163799999998/108.2463477'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJzTsg_GQXQjERpsLoJSWJHmU'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzTsg_GQXQjERpsLoJSWJHmU' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzTsg_GQXQjERpsLoJSWJHmU' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJzTsg_GQXQjERpsLoJSWJHmU' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJzTsg_GQXQjERpsLoJSWJHmU'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJgaVvkV0XQjERNZYSVEJS_Xo'>
+<h3>#9. Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers</h3>
+<div class='dist'>Loại: Quán bar · Tọa độ: 16.049681, 108.247753 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0496805&mlon=108.24775269999999#map=17/16.0496805/108.24775269999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJgaVvkV0XQjERNZYSVEJS_Xo'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJgaVvkV0XQjERNZYSVEJS_Xo' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJgaVvkV0XQjERNZYSVEJS_Xo' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJgaVvkV0XQjERNZYSVEJS_Xo' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJgaVvkV0XQjERNZYSVEJS_Xo'>Xác nhận</button>
+</div><div class='card' data-poi-id='osm:node/1335374752'>
+<h3>#10. miếu Thần Nông</h3>
+<div class='dist'>Loại: Cơ sở thờ tự · Tọa độ: 16.219435, 108.046503 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.2194347&mlon=108.0465034#map=17/16.2194347/108.0465034'>Xem bản đồ</a></div>
+<div class='vote' data-poi='osm:node/1335374752'>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/1335374752' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/1335374752' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/1335374752' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='osm:node/1335374752'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJkxff_x0XQjERCC_CN8DFt54'>
+<h3>#11. The Craftsman Cocktail Bar</h3>
+<div class='dist'>Loại: Quán bar cocktail · Tọa độ: 16.046467, 108.246859 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0464666&mlon=108.2468585#map=17/16.0464666/108.2468585'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJkxff_x0XQjERCC_CN8DFt54'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJkxff_x0XQjERCC_CN8DFt54' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJkxff_x0XQjERCC_CN8DFt54' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJkxff_x0XQjERCC_CN8DFt54' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJkxff_x0XQjERCC_CN8DFt54'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJZ6w1fJgZQjERP9-_TlpgQXM'>
+<h3>#12. Lagoon Rooftop - Dragon Bridge Fire Show</h3>
+<div class='dist'>Loại: Quán bar · Tọa độ: 16.060462, 108.231422 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.060461699999998&mlon=108.23142159999999#map=17/16.060461699999998/108.23142159999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJZ6w1fJgZQjERP9-_TlpgQXM'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJZ6w1fJgZQjERP9-_TlpgQXM' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJZ6w1fJgZQjERP9-_TlpgQXM' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJZ6w1fJgZQjERP9-_TlpgQXM' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJZ6w1fJgZQjERP9-_TlpgQXM'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJTahQxcwZQjERrNKa5emQFC4'>
+<h3>#13. NAM house Cafe (Egg Coffee)</h3>
+<div class='dist'>Loại: Quán cà phê · Tọa độ: 16.063327, 108.222239 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0633271&mlon=108.2222391#map=17/16.0633271/108.2222391'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJTahQxcwZQjERrNKa5emQFC4'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJTahQxcwZQjERrNKa5emQFC4' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJTahQxcwZQjERrNKa5emQFC4' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJTahQxcwZQjERrNKa5emQFC4' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJTahQxcwZQjERrNKa5emQFC4'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJdwwwfFoXQjERW6mXtIdB8LU'>
+<h3>#14. The Original Shamrock Sports Bar Da Nang 🇮🇪 since 2019</h3>
+<div class='dist'>Loại: Bar thể thao · Tọa độ: 16.050955, 108.246360 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0509546&mlon=108.2463602#map=17/16.0509546/108.2463602'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJdwwwfFoXQjERW6mXtIdB8LU'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJdwwwfFoXQjERW6mXtIdB8LU' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJdwwwfFoXQjERW6mXtIdB8LU' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJdwwwfFoXQjERW6mXtIdB8LU' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJdwwwfFoXQjERW6mXtIdB8LU'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJu6FQjzUYQjER39TMpgQVRUs'>
+<h3>#15. Chợ Cồn</h3>
+<div class='dist'>Loại: Điểm thu hút khách du lịch · Tọa độ: 16.067793, 108.214483 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0677927&mlon=108.21448339999999#map=17/16.0677927/108.21448339999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJu6FQjzUYQjER39TMpgQVRUs'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJu6FQjzUYQjER39TMpgQVRUs' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJu6FQjzUYQjER39TMpgQVRUs' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJu6FQjzUYQjER39TMpgQVRUs' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJu6FQjzUYQjER39TMpgQVRUs'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJVWyt-r8ZQjERVMHwS2CscbI'>
+<h3>#16. CA Liên Chiểu</h3>
+<div class='dist'>Loại: Quán cà phê · Tọa độ: 16.070455, 108.153541 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.070454899999998&mlon=108.15354149999999#map=17/16.070454899999998/108.15354149999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJVWyt-r8ZQjERVMHwS2CscbI'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJVWyt-r8ZQjERVMHwS2CscbI' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJVWyt-r8ZQjERVMHwS2CscbI' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJVWyt-r8ZQjERVMHwS2CscbI' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJVWyt-r8ZQjERVMHwS2CscbI'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJEzuDsG8XQjERz7a51RnJnvU'>
+<h3>#17. Công viên Sao Biển</h3>
+<div class='dist'>Loại: Công viên · Tọa độ: 16.046300, 108.249998 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0462997&mlon=108.2499976#map=17/16.0462997/108.2499976'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJEzuDsG8XQjERz7a51RnJnvU'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJEzuDsG8XQjERz7a51RnJnvU' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJEzuDsG8XQjERz7a51RnJnvU' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJEzuDsG8XQjERz7a51RnJnvU' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJEzuDsG8XQjERz7a51RnJnvU'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJD_KLo4cZQjERpAAtPY2TsIM'>
+<h3>#18. Spa &amp; Massage Đà Nẵng</h3>
+<div class='dist'>Loại: Spa sức khỏe · Tọa độ: 16.013938, 108.262187 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0139375&mlon=108.2621875#map=17/16.0139375/108.2621875'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJD_KLo4cZQjERpAAtPY2TsIM'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJD_KLo4cZQjERpAAtPY2TsIM' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJD_KLo4cZQjERpAAtPY2TsIM' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJD_KLo4cZQjERpAAtPY2TsIM' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJD_KLo4cZQjERpAAtPY2TsIM'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJd8h2AyoRQjERNWCSTs1L1jU'>
+<h3>#19. Vive Océane - Beach Club &amp; Restaurant</h3>
+<div class='dist'>Loại: Nhà hàng · Tọa độ: 16.014092, 108.263913 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.014091699999998&mlon=108.26391319999999#map=17/16.014091699999998/108.26391319999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJd8h2AyoRQjERNWCSTs1L1jU'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd8h2AyoRQjERNWCSTs1L1jU' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd8h2AyoRQjERNWCSTs1L1jU' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd8h2AyoRQjERNWCSTs1L1jU' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJd8h2AyoRQjERNWCSTs1L1jU'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ8Z0D7KURQjERUPd36goDH90'>
+<h3>#20. Chùa Tam Tôn</h3>
+<div class='dist'>Loại: Chùa phật giáo · Tọa độ: 16.003952, 108.262145 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0039522&mlon=108.2621446#map=17/16.0039522/108.2621446'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ8Z0D7KURQjERUPd36goDH90'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ8Z0D7KURQjERUPd36goDH90' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ8Z0D7KURQjERUPd36goDH90' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ8Z0D7KURQjERUPd36goDH90' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ8Z0D7KURQjERUPd36goDH90'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJWe_7hboQQjERxap-mizn-ZY'>
+<h3>#21. Nhà bia Chứng tích Núi Ghềnh</h3>
+<div class='dist'>Loại: Bảo tàng lịch sử địa phương · Tọa độ: 16.004175, 108.252228 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0041752&mlon=108.2522278#map=17/16.0041752/108.2522278'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJWe_7hboQQjERxap-mizn-ZY'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJWe_7hboQQjERxap-mizn-ZY' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJWe_7hboQQjERxap-mizn-ZY' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJWe_7hboQQjERxap-mizn-ZY' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJWe_7hboQQjERxap-mizn-ZY'>Xác nhận</button>
+</div><div class='card' data-poi-id='osm:node/13913400201'>
+<h3>#22. Suối Ngọc</h3>
+<div class='dist'>Loại: Suối · Tọa độ: 16.108828, 107.945906 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.1088276&mlon=107.9459056#map=17/16.1088276/107.9459056'>Xem bản đồ</a></div>
+<div class='vote' data-poi='osm:node/13913400201'>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/13913400201' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/13913400201' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/13913400201' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='osm:node/13913400201'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ86LzsaUhQjERGxE6itCeBCY'>
+<h3>#23. Suối Lương - Hai Van Park</h3>
+<div class='dist'>Loại: Điểm thu hút khách du lịch · Tọa độ: 16.156620, 108.109322 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.1566197&mlon=108.1093217#map=17/16.1566197/108.1093217'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ86LzsaUhQjERGxE6itCeBCY'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ86LzsaUhQjERGxE6itCeBCY' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ86LzsaUhQjERGxE6itCeBCY' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ86LzsaUhQjERGxE6itCeBCY' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ86LzsaUhQjERGxE6itCeBCY'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJwRzh0c0ZQjERSqm3HPF_Gi4'>
+<h3>#24. T&amp;V Lounge Bar</h3>
+<div class='dist'>Loại: Quán bar · Tọa độ: 16.069055, 108.236965 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0690545&mlon=108.236965#map=17/16.0690545/108.236965'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJwRzh0c0ZQjERSqm3HPF_Gi4'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJwRzh0c0ZQjERSqm3HPF_Gi4' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJwRzh0c0ZQjERSqm3HPF_Gi4' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJwRzh0c0ZQjERSqm3HPF_Gi4' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJwRzh0c0ZQjERSqm3HPF_Gi4'>Xác nhận</button>
+</div><div class='card' data-poi-id='osm:node/14067929701'>
+<h3>#25. Bonny handmade</h3>
+<div class='dist'>Loại: Cửa hàng quà lưu niệm · Tọa độ: 16.052473, 108.243868 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0524725&mlon=108.2438676#map=17/16.0524725/108.2438676'>Xem bản đồ</a></div>
+<div class='vote' data-poi='osm:node/14067929701'>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/14067929701' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/14067929701' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/14067929701' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='osm:node/14067929701'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJGZVxyf0ZQjERBbAyCvPNq7E'>
+<h3>#26. Tiệm nướng An - Lẩu và nướng sân vườn Đà Nẵng</h3>
+<div class='dist'>Loại: Nhà hàng Việt Nam · Tọa độ: 16.062743, 108.156689 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0627429&mlon=108.156689#map=17/16.0627429/108.156689'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJGZVxyf0ZQjERBbAyCvPNq7E'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJGZVxyf0ZQjERBbAyCvPNq7E' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJGZVxyf0ZQjERBbAyCvPNq7E' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJGZVxyf0ZQjERBbAyCvPNq7E' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJGZVxyf0ZQjERBbAyCvPNq7E'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJeaPwiDUYQjERt4yUm81Oqi8'>
+<h3>#27. Khu Ẩm Thực Chợ Cồn -식사 공간</h3>
+<div class='dist'>Loại: Trung tâm mua sắm · Tọa độ: 16.067836, 108.214908 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0678356&mlon=108.21490759999999#map=17/16.0678356/108.21490759999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJeaPwiDUYQjERt4yUm81Oqi8'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJeaPwiDUYQjERt4yUm81Oqi8' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJeaPwiDUYQjERt4yUm81Oqi8' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJeaPwiDUYQjERt4yUm81Oqi8' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJeaPwiDUYQjERt4yUm81Oqi8'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJd2HsN1oXQjER19a79kUNt-U'>
+<h3>#28. The Temptation French Restaurant Da Nang</h3>
+<div class='dist'>Loại: Nhà hàng Pháp · Tọa độ: 16.073456, 108.243127 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0734565&mlon=108.2431275#map=17/16.0734565/108.2431275'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJd2HsN1oXQjER19a79kUNt-U'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd2HsN1oXQjER19a79kUNt-U' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd2HsN1oXQjER19a79kUNt-U' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJd2HsN1oXQjER19a79kUNt-U' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJd2HsN1oXQjER19a79kUNt-U'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ5xkIv7EZQjERDZQIupNo09w'>
+<h3>#29. Bến Du Thuyền Đà Nẵng</h3>
+<div class='dist'>Loại: Bến du thuyền · Tọa độ: 16.078066, 108.224562 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0780663&mlon=108.2245624#map=17/16.0780663/108.2245624'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ5xkIv7EZQjERDZQIupNo09w'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ5xkIv7EZQjERDZQIupNo09w' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ5xkIv7EZQjERDZQIupNo09w' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ5xkIv7EZQjERDZQIupNo09w' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ5xkIv7EZQjERDZQIupNo09w'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJh73ojOMXQjERtV8NNHwmrO4'>
+<h3>#30. Karaoke Thao</h3>
+<div class='dist'>Loại: Quán bar karaoke · Tọa độ: 16.101217, 108.253953 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.1012174&mlon=108.25395259999999#map=17/16.1012174/108.25395259999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJh73ojOMXQjERtV8NNHwmrO4'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJh73ojOMXQjERtV8NNHwmrO4' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJh73ojOMXQjERtV8NNHwmrO4' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJh73ojOMXQjERtV8NNHwmrO4' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJh73ojOMXQjERtV8NNHwmrO4'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJy0rCqNkXQjERksI84rfTy5k'>
+<h3>#31. Hải Sản Ku Tom Đà Nẵng</h3>
+<div class='dist'>Loại: Nhà hàng hải sản · Tọa độ: 16.065721, 108.243372 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0657206&mlon=108.24337229999999#map=17/16.0657206/108.24337229999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJy0rCqNkXQjERksI84rfTy5k'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJy0rCqNkXQjERksI84rfTy5k' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJy0rCqNkXQjERksI84rfTy5k' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJy0rCqNkXQjERksI84rfTy5k' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJy0rCqNkXQjERksI84rfTy5k'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJLVK-0XI9QjER5-Q0ZZoz5wE'>
+<h3>#32. Bán đảo Sơn Trà</h3>
+<div class='dist'>Loại: Bán đảo · Tọa độ: 16.115984, 108.273341 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.1159837&mlon=108.273341#map=17/16.1159837/108.273341'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJLVK-0XI9QjER5-Q0ZZoz5wE'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJLVK-0XI9QjER5-Q0ZZoz5wE' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJLVK-0XI9QjER5-Q0ZZoz5wE' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJLVK-0XI9QjER5-Q0ZZoz5wE' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJLVK-0XI9QjER5-Q0ZZoz5wE'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJbbs1ZTQYQjERi3OdfmnRk2g'>
+<h3>#33. Đình làng Hải Châu</h3>
+<div class='dist'>Loại: Điểm thu hút khách du lịch · Tọa độ: 16.067702, 108.219245 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0677019&mlon=108.21924539999999#map=17/16.0677019/108.21924539999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJbbs1ZTQYQjERi3OdfmnRk2g'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJbbs1ZTQYQjERi3OdfmnRk2g' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJbbs1ZTQYQjERi3OdfmnRk2g' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJbbs1ZTQYQjERi3OdfmnRk2g' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJbbs1ZTQYQjERi3OdfmnRk2g'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJs95SfgAZQjERWa0RkAoF0XA'>
+<h3>#34. City Box - Music Box</h3>
+<div class='dist'>Loại: Quán bar karaoke · Tọa độ: 16.077605, 108.148267 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0776048&mlon=108.1482671#map=17/16.0776048/108.1482671'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJs95SfgAZQjERWa0RkAoF0XA'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJs95SfgAZQjERWa0RkAoF0XA' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJs95SfgAZQjERWa0RkAoF0XA' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJs95SfgAZQjERWa0RkAoF0XA' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJs95SfgAZQjERWa0RkAoF0XA'>Xác nhận</button>
+</div><div class='card' data-poi-id='osm:node/3760272162'>
+<h3>#35. Chùa Tam Bảo</h3>
+<div class='dist'>Loại: Cơ sở thờ tự · Tọa độ: 16.058187, 108.219347 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0581871&mlon=108.219347#map=17/16.0581871/108.219347'>Xem bản đồ</a></div>
+<div class='vote' data-poi='osm:node/3760272162'>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/3760272162' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/3760272162' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='osm:node/3760272162' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='osm:node/3760272162'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJIcLWMlAZQjER1VvH4kJ2aZA'>
+<h3>#36. La’s Cafe</h3>
+<div class='dist'>Loại: Quán cà phê · Tọa độ: 16.019828, 108.222237 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.019828399999998&mlon=108.22223729999999#map=17/16.019828399999998/108.22223729999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJIcLWMlAZQjER1VvH4kJ2aZA'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJIcLWMlAZQjER1VvH4kJ2aZA' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJIcLWMlAZQjER1VvH4kJ2aZA' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJIcLWMlAZQjER1VvH4kJ2aZA' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJIcLWMlAZQjER1VvH4kJ2aZA'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJY-zHSgQZQjERRoAvxXVcViU'>
+<h3>#37. Be Nhung Restaurant</h3>
+<div class='dist'>Loại: Nhà hàng · Tọa độ: 16.057072, 108.184115 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.057072299999998&mlon=108.1841149#map=17/16.057072299999998/108.1841149'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJY-zHSgQZQjERRoAvxXVcViU'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJY-zHSgQZQjERRoAvxXVcViU' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJY-zHSgQZQjERRoAvxXVcViU' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJY-zHSgQZQjERRoAvxXVcViU' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJY-zHSgQZQjERRoAvxXVcViU'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJJQWDpTQYQjER_VEl5Kl8HTY'>
+<h3>#38. Central Hotel &amp; Spa</h3>
+<div class='dist'>Loại: Khách sạn nghỉ dưỡng · Tọa độ: 16.065208, 108.219417 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0652083&mlon=108.21941749999999#map=17/16.0652083/108.21941749999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJJQWDpTQYQjER_VEl5Kl8HTY'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJQWDpTQYQjER_VEl5Kl8HTY' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJQWDpTQYQjER_VEl5Kl8HTY' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJJQWDpTQYQjER_VEl5Kl8HTY' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJJQWDpTQYQjER_VEl5Kl8HTY'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJacuaCgAfQjERmRXLEMbkPJM'>
+<h3>#39. An Mộc Spa</h3>
+<div class='dist'>Loại: Spa · Tọa độ: 16.100617, 108.097940 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.1006171&mlon=108.09794049999999#map=17/16.1006171/108.09794049999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJacuaCgAfQjERmRXLEMbkPJM'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJacuaCgAfQjERmRXLEMbkPJM' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJacuaCgAfQjERmRXLEMbkPJM' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJacuaCgAfQjERmRXLEMbkPJM' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJacuaCgAfQjERmRXLEMbkPJM'>Xác nhận</button>
+</div><div class='card' data-poi-id='ChIJ7fA2ROsZQjERuQWylV-XvDg'>
+<h3>#40. Panda Spa &amp; Massage</h3>
+<div class='dist'>Loại: Spa · Tọa độ: 16.056152, 108.245377 · <a target='_blank' rel='noopener' href='https://www.openstreetmap.org/?mlat=16.0561522&mlon=108.24537749999999#map=17/16.0561522/108.24537749999999'>Xem bản đồ</a></div>
+<div class='vote' data-poi='ChIJ7fA2ROsZQjERuQWylV-XvDg'>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ7fA2ROsZQjERuQWylV-XvDg' value='indoor'>Trong nhà</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ7fA2ROsZQjERuQWylV-XvDg' value='outdoor'>Ngoài trời</label>
+  <label><input type='checkbox' class='choice' data-poi='ChIJ7fA2ROsZQjERuQWylV-XvDg' value='both'>Cả hai</label>
+</div>
+<button class='confirm' data-poi='ChIJ7fA2ROsZQjERuQWylV-XvDg'>Xác nhận</button>
+</div></div>
+<script type="application/json" id="rows-data">[{"poi_id":"ChIJswSHXgAZQjERZnVL4je3PG4","name":"SAY Beer","type":"Quán bia sân vườn","lat":16.0613647,"lon":108.1919021},{"poi_id":"ChIJK5AaRBYZQjER9AALhERmND8","name":"Nhà hàng chay Hoa Sen","type":"Nhà hàng","lat":16.0688595,"lon":108.1958847},{"poi_id":"ChIJ66IiIgAXQjERK0P0RUVMuWM","name":"Van Ly Spa \u0026 Massage","type":"Spa mát xa","lat":16.095558999999998,"lon":108.24537939999999},{"poi_id":"ChIJzYULZMgRQjERYRTCyEgKZUY","name":"AURA SPA-Massage-Nails-Hair Wash \u0026 Relaxation In Da Nang","type":"Spa","lat":15.9936454,"lon":108.26824409999999},{"poi_id":"ChIJJXkD0OcbQjER8aTXsF-pS_Q","name":"Nguyen Gia Hotel","type":"Khách sạn","lat":16.0952463,"lon":108.2517956},{"poi_id":"ChIJ14kOf8kZQjERrdrrQPpiZKA","name":"Mì Quảng Thi","type":"Quán mì","lat":16.0585457,"lon":108.2172243},{"poi_id":"ChIJ6UAZeAAZQjERzK3T81riZmo","name":"Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng","type":"Điểm thu hút khách du lịch","lat":16.055193,"lon":108.223694},{"poi_id":"ChIJzTsg_GQXQjERpsLoJSWJHmU","name":"Venus Coffee","type":"Quán cà phê","lat":16.048163799999998,"lon":108.2463477},{"poi_id":"ChIJgaVvkV0XQjERNZYSVEJS_Xo","name":"Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers","type":"Quán bar","lat":16.0496805,"lon":108.24775269999999},{"poi_id":"osm:node/1335374752","name":"miếu Thần Nông","type":"Cơ sở thờ tự","lat":16.2194347,"lon":108.0465034},{"poi_id":"ChIJkxff_x0XQjERCC_CN8DFt54","name":"The Craftsman Cocktail Bar","type":"Quán bar cocktail","lat":16.0464666,"lon":108.2468585},{"poi_id":"ChIJZ6w1fJgZQjERP9-_TlpgQXM","name":"Lagoon Rooftop - Dragon Bridge Fire Show","type":"Quán bar","lat":16.060461699999998,"lon":108.23142159999999},{"poi_id":"ChIJTahQxcwZQjERrNKa5emQFC4","name":"NAM house Cafe (Egg Coffee)","type":"Quán cà phê","lat":16.0633271,"lon":108.2222391},{"poi_id":"ChIJdwwwfFoXQjERW6mXtIdB8LU","name":"The Original Shamrock Sports Bar Da Nang 🇮🇪 since 2019","type":"Bar thể thao","lat":16.0509546,"lon":108.2463602},{"poi_id":"ChIJu6FQjzUYQjER39TMpgQVRUs","name":"Chợ Cồn","type":"Điểm thu hút khách du lịch","lat":16.0677927,"lon":108.21448339999999},{"poi_id":"ChIJVWyt-r8ZQjERVMHwS2CscbI","name":"CA Liên Chiểu","type":"Quán cà phê","lat":16.070454899999998,"lon":108.15354149999999},{"poi_id":"ChIJEzuDsG8XQjERz7a51RnJnvU","name":"Công viên Sao Biển","type":"Công viên","lat":16.0462997,"lon":108.2499976},{"poi_id":"ChIJD_KLo4cZQjERpAAtPY2TsIM","name":"Spa \u0026 Massage Đà Nẵng","type":"Spa sức khỏe","lat":16.0139375,"lon":108.2621875},{"poi_id":"ChIJd8h2AyoRQjERNWCSTs1L1jU","name":"Vive Océane - Beach Club \u0026 Restaurant","type":"Nhà hàng","lat":16.014091699999998,"lon":108.26391319999999},{"poi_id":"ChIJ8Z0D7KURQjERUPd36goDH90","name":"Chùa Tam Tôn","type":"Chùa phật giáo","lat":16.0039522,"lon":108.2621446},{"poi_id":"ChIJWe_7hboQQjERxap-mizn-ZY","name":"Nhà bia Chứng tích Núi Ghềnh","type":"Bảo tàng lịch sử địa phương","lat":16.0041752,"lon":108.2522278},{"poi_id":"osm:node/13913400201","name":"Suối Ngọc","type":"Suối","lat":16.1088276,"lon":107.9459056},{"poi_id":"ChIJ86LzsaUhQjERGxE6itCeBCY","name":"Suối Lương - Hai Van Park","type":"Điểm thu hút khách du lịch","lat":16.1566197,"lon":108.1093217},{"poi_id":"ChIJwRzh0c0ZQjERSqm3HPF_Gi4","name":"T\u0026V Lounge Bar","type":"Quán bar","lat":16.0690545,"lon":108.236965},{"poi_id":"osm:node/14067929701","name":"Bonny handmade","type":"Cửa hàng quà lưu niệm","lat":16.0524725,"lon":108.2438676},{"poi_id":"ChIJGZVxyf0ZQjERBbAyCvPNq7E","name":"Tiệm nướng An - Lẩu và nướng sân vườn Đà Nẵng","type":"Nhà hàng Việt Nam","lat":16.0627429,"lon":108.156689},{"poi_id":"ChIJeaPwiDUYQjERt4yUm81Oqi8","name":"Khu Ẩm Thực Chợ Cồn -식사 공간","type":"Trung tâm mua sắm","lat":16.0678356,"lon":108.21490759999999},{"poi_id":"ChIJd2HsN1oXQjER19a79kUNt-U","name":"The Temptation French Restaurant Da Nang","type":"Nhà hàng Pháp","lat":16.0734565,"lon":108.2431275},{"poi_id":"ChIJ5xkIv7EZQjERDZQIupNo09w","name":"Bến Du Thuyền Đà Nẵng","type":"Bến du thuyền","lat":16.0780663,"lon":108.2245624},{"poi_id":"ChIJh73ojOMXQjERtV8NNHwmrO4","name":"Karaoke Thao","type":"Quán bar karaoke","lat":16.1012174,"lon":108.25395259999999},{"poi_id":"ChIJy0rCqNkXQjERksI84rfTy5k","name":"Hải Sản Ku Tom Đà Nẵng","type":"Nhà hàng hải sản","lat":16.0657206,"lon":108.24337229999999},{"poi_id":"ChIJLVK-0XI9QjER5-Q0ZZoz5wE","name":"Bán đảo Sơn Trà","type":"Bán đảo","lat":16.1159837,"lon":108.273341},{"poi_id":"ChIJbbs1ZTQYQjERi3OdfmnRk2g","name":"Đình làng Hải Châu","type":"Điểm thu hút khách du lịch","lat":16.0677019,"lon":108.21924539999999},{"poi_id":"ChIJs95SfgAZQjERWa0RkAoF0XA","name":"City Box - Music Box","type":"Quán bar karaoke","lat":16.0776048,"lon":108.1482671},{"poi_id":"osm:node/3760272162","name":"Chùa Tam Bảo","type":"Cơ sở thờ tự","lat":16.0581871,"lon":108.219347},{"poi_id":"ChIJIcLWMlAZQjER1VvH4kJ2aZA","name":"La’s Cafe","type":"Quán cà phê","lat":16.019828399999998,"lon":108.22223729999999},{"poi_id":"ChIJY-zHSgQZQjERRoAvxXVcViU","name":"Be Nhung Restaurant","type":"Nhà hàng","lat":16.057072299999998,"lon":108.1841149},{"poi_id":"ChIJJQWDpTQYQjER_VEl5Kl8HTY","name":"Central Hotel \u0026 Spa","type":"Khách sạn nghỉ dưỡng","lat":16.0652083,"lon":108.21941749999999},{"poi_id":"ChIJacuaCgAfQjERmRXLEMbkPJM","name":"An Mộc Spa","type":"Spa","lat":16.1006171,"lon":108.09794049999999},{"poi_id":"ChIJ7fA2ROsZQjERuQWylV-XvDg","name":"Panda Spa \u0026 Massage","type":"Spa","lat":16.0561522,"lon":108.24537749999999}]</script>
+<script>
+(function(){
+  const LS_KEY = "weather_label_review_decisions_blind_seed_999";
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch(e) {}
+  const rows = JSON.parse(document.getElementById('rows-data').textContent);
+  const total = rows.length;
+  const list = document.getElementById('list');
+  const prog = document.getElementById('prog');
+
+  function save() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); }
+    catch (e) { /* file:// or private mode may block storage */ }
+  }
+  function updateProgress() { prog.textContent = 'Đã xác nhận ' + Object.keys(saved).length + '/' + total; }
+  function markConfirmed(poiId) {
+    const card = list.querySelector('.card[data-poi-id="' + CSS.escape(String(poiId)) + '"]');
+    if (!card) return;
+    card.classList.add('confirmed');
+    const btn = card.querySelector('button.confirm');
+    if (btn) { btn.textContent = 'Đã xác nhận'; btn.classList.add('confirmed'); }
+  }
+  function unmarkConfirmed(poiId) {
+    const card = list.querySelector('.card[data-poi-id="' + CSS.escape(String(poiId)) + '"]');
+    if (!card) return;
+    card.classList.remove('confirmed');
+    const btn = card.querySelector('button.confirm');
+    if (btn) { btn.textContent = 'Xác nhận'; btn.classList.remove('confirmed'); }
+  }
+
+  list.addEventListener('change', function(e) {
+    const cb = e.target.closest('.choice');
+    if (!cb) return;
+    const wrap = cb.closest('.vote');
+    if (cb.checked) {
+      wrap.querySelectorAll('.choice').forEach(function(sib) {
+        if (sib !== cb) { sib.checked = false; sib.closest('label').classList.remove('on'); }
+      });
+      cb.closest('label').classList.add('on');
+    } else {
+      cb.closest('label').classList.remove('on');
+    }
+    const poiId = cb.dataset.poi;
+    if (saved[poiId]) {
+      delete saved[poiId];
+      save();
+      updateProgress();
+      unmarkConfirmed(poiId);
+    }
+  });
+
+  list.addEventListener('click', function(e) {
+    const btn = e.target.closest('button.confirm');
+    if (!btn) return;
+    const poiId = btn.dataset.poi;
+    const wrap = list.querySelector('.vote[data-poi="' + CSS.escape(String(poiId)) + '"]');
+    const checked = wrap && wrap.querySelector('.choice:checked');
+    if (!checked) { alert('Vui lòng chọn một nhãn không gian.'); return; }
+    saved[poiId] = checked.value;
+    save();
+    updateProgress();
+    markConfirmed(poiId);
+  });
+
+  const filterBtns = document.querySelectorAll('.bar button[data-f]');
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      const f = btn.dataset.f;
+      list.querySelectorAll('.card').forEach(function(card) {
+        let show = false;
+        if (f === 'all') show = true;
+        else if (f === 'todo') show = !saved[card.dataset.poiId];
+        else if (f === 'old-indoor') show = card.dataset.old === 'indoor';
+        else if (f === 'old-outdoor') show = card.dataset.old === 'outdoor';
+        else if (f === 'old-both') show = card.dataset.old === 'both';
+        else if (f === 'old-unknown') show = !card.dataset.old || card.dataset.old === 'unknown';
+        card.classList.toggle('hide', !show);
+      });
+    });
+  });
+
+  list.querySelectorAll('.card').forEach(function(card) {
+    const poiId = card.dataset.poiId;
+    const val = saved[poiId];
+    if (val) {
+      const cb = card.querySelector('.choice[value="' + CSS.escape(String(val)) + '"]');
+      if (cb) {
+        cb.checked = true;
+        cb.closest('label').classList.add('on');
+        markConfirmed(poiId);
+      }
+    }
+  });
+  updateProgress();
+
+  document.getElementById('exp').addEventListener('click', function() {
+    const blob = new Blob([JSON.stringify(saved, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "weather_review_blind_decisions.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+})();
+</script>
+</body></html>

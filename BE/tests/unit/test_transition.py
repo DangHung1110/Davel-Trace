@@ -64,7 +64,7 @@ class TestTransition(unittest.TestCase):
         self.assertIsInstance(s, float)
         expected = "model" if LANE_A_OK and os.path.exists(scorer.MODEL_PATH) else "rule"
         self.assertEqual(scorer.describe()["backend"], expected)
-        self.assertEqual(scorer.describe()["n_features"], 17 if LANE_A_OK else 16)
+        self.assertEqual(scorer.describe()["n_features"], 21 if LANE_A_OK else 16)
 
     def test_rule_path_fast(self):
         saved = (scorer._bst, scorer._backend, scorer._note)
