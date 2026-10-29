@@ -44,6 +44,7 @@ from BE.app.routers import error
 from BE.app.routers import select as select_svc
 from BE.app.schemas.trip import TripRequest
 from BE.app.services import pool as pool_svc
+from BE.app.services import gate as gate_svc
 from BE.app.services import profile_filter
 from BE.app.services import rank as rank_svc
 from BE.app.services import retrieval as retrieval_svc
@@ -58,9 +59,9 @@ router = APIRouter(prefix="/v1", tags=["itinerary"])
 MAX_FILTER_WARNINGS = 30
 
 # Diverse mode (?diverse=true): solutions enumerated per profile, plans returned.
-# N=8 matches the "N>=8 where feasible" requirement; MMR returns 3.
-DIVERSE_POOL = 8
-DIVERSE_K = 3
+# Enumerate enough feasible members for the roadmap's five-option target.
+DIVERSE_POOL = 12
+DIVERSE_K = 5
 
 # On-demand replacement pool for the cross-option Jaccard guarantee. Only a
 # conflicting profile pays for enumeration; 5 members is enough to find a
@@ -290,6 +291,25 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             for member, q in zip(members, qs):
                 member["_quality"] = q
                 merged.append(member)
+        # Ordered POI sequences are the public duplicate identity. Remove
+        # duplicates before MMR so a sparse pool is reported honestly instead
+        # of padding the five-option target.
+        unique_merged = []
+        seen_sequences = set()
+        for member in merged:
+            sequence = tuple(
+                activity.get("poi_id")
+                for activity in member.get("activities") or []
+                if activity.get("poi_id")
+            )
+            if not sequence:
+                sequence = tuple(sorted(pool_svc.poi_set(member)))
+            if sequence in seen_sequences:
+                continue
+            seen_sequences.add(sequence)
+            unique_merged.append(member)
+        duplicates_removed = len(merged) - len(unique_merged)
+        merged = unique_merged
         picked = pool_svc.mmr_select(
             merged, k=DIVERSE_K, qualities=[m["_quality"] for m in merged])
         # USER DECISION: the returned options must be genuinely different, in
@@ -312,6 +332,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                  for p in raw), 3)},
             picked, len(merged))
         pool_stats.update(_guarantee_fields(guarantee))
+        pool_stats["duplicates_removed"] = duplicates_removed
         plans = []
         previous: list[dict] = []
         for rank, member in enumerate(picked, start=1):
@@ -353,13 +374,41 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                 report_items, len(plans))
             pool_stats.update(_guarantee_fields(guarantee))
 
+    # Add one deterministic, selection-time-compatible gate view to each
+    # public option. Real optimizer plans must pass; failed members are
+    # removed rather than exposed as selectable alternatives.
+    selectable = []
+    for deterministic_rank, plan in enumerate(plans, start=1):
+        gate_report = gate_svc.family_report(plan, trip, by_id, cells)
+        if not gate_report["passed"]:
+            continue
+        plan["deterministic_rank"] = deterministic_rank
+        plan["deterministic_score"] = round(
+            pool_svc.plan_quality(plan), 4
+        )
+        plan["gate"] = gate_report
+        plan["data_version"] = settings.snapshot_name
+        plan["shadow"] = {"status": "disabled", "authoritative": False}
+        selectable.append(plan)
+    plans = selectable
+
     # Make every returned itinerary immediately selectable. The store keeps
     # the full plan (incl. T061e `_context` for /replan); the public
     # response drops leading-underscore keys.
     select_svc.register(plans)
     public = [_public(plan) for plan in plans]
-    out = {"plans": public, "selected": None}
+    out = {"plans": public, "selected": None,
+           "shadow": {"status": "disabled", "authoritative": False}}
     if pool_stats is not None:
+        target = DIVERSE_K if diverse else len(body.profiles)
+        returned = len(public)
+        shortage = None
+        if returned < target:
+            shortage = ("duplicates_removed"
+                        if pool_stats.get("duplicates_removed") else
+                        "insufficient_feasible_supply")
+        pool_stats.update({"target": target, "returned": returned,
+                           "shortage_reason": shortage})
         out["solution_pool"] = pool_stats
     return out
 

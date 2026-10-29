@@ -13,6 +13,7 @@ from BE.app.routers import expenses as expenses_router
 from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
+from BE.app.routers import planning_evidence as planning_evidence_router
 from BE.app.routers import replan as replan_router
 from BE.app.routers import repair as repair_router
 from BE.app.routers import review as review_router
@@ -42,6 +43,7 @@ app.include_router(scorer_router.router)
 app.include_router(review_router.router)
 # NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
 app.include_router(repair_router.router)
+app.include_router(planning_evidence_router.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

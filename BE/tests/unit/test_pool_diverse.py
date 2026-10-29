@@ -236,22 +236,24 @@ class TestDiverseEndpoint(unittest.TestCase):
         for plan in body["plans"]:
             self.assertNotIn("solution_pool", plan)
 
-    def test_diverse_returns_three_pairwise_different_plans(self):
+    def test_diverse_returns_five_pairwise_different_plans(self):
         r = self._post(True)
         self.assertEqual(r.status_code, 200, r.text)
         body = r.json()
         plans = body["plans"]
-        self.assertEqual(len(plans), 3, [p.get("diverse_rank") for p in plans])
+        self.assertEqual(len(plans), 5, [p.get("diverse_rank") for p in plans])
+        self.assertEqual(body["solution_pool"]["target"], 5)
+        self.assertEqual(body["solution_pool"]["returned"], 5)
         sets = [frozenset(a["poi_id"] for a in p["activities"]) for p in plans]
-        for i in range(3):
-            for j in range(i + 1, 3):
+        for i in range(5):
+            for j in range(i + 1, 5):
                 dist = pool_svc.jaccard_distance(sets[i], sets[j])
                 self.assertGreater(dist, 0.0,
                                    f"plans {i}/{j} are the same POI set")
         pool = body["solution_pool"]
-        self.assertGreaterEqual(pool["size"], 3)
+        self.assertGreaterEqual(pool["size"], 5)
         self.assertEqual(pool["band"], 0.95)
-        self.assertEqual(len(pool["pairwise_distances"]), 3)
+        self.assertEqual(len(pool["pairwise_distances"]), 10)
         ranks = []
         for plan in plans:
             self.assertTrue(plan["passed"], plan["violations"])
@@ -260,7 +262,7 @@ class TestDiverseEndpoint(unittest.TestCase):
             self.assertIsNotNone(mmr)
             self.assertLessEqual(mmr["similarity"], 1.0)
             ranks.append(plan["diverse_rank"])
-        self.assertEqual(sorted(ranks), [1, 2, 3])
+        self.assertEqual(sorted(ranks), [1, 2, 3, 4, 5])
         # The first pick has nothing to be similar to.
         first = next(p for p in plans if p["diverse_rank"] == 1)
         self.assertEqual(first["solution_pool"]["mmr"]["similarity"], 0.0)

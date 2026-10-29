@@ -367,6 +367,19 @@ SOFT_CHECKS = frozenset({"F1"})
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
 
+# Product-facing grouping only. The detailed registry above remains the one
+# source of formulas used by validator/evaluator/selection.
+FAMILY_CHECKS = (
+    ("temporal", ("VROH", "ETB", "TCS")),
+    ("financial", ("BCS",)),
+    ("movement", ("B3",)),
+    ("safety_data", ("FAR",)),
+    ("traveler_constraints", (
+        "A1", "CAFE_CAP", "CATEGORY_CAP", "NO_CONSECUTIVE",
+        "NO_ADJACENT_FOOD", "REST_FOLLOWS_LUNCH", "HCS",
+    )),
+)
+
 
 def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Compatibility summary over HARD checks: {"passed", "failed"}.
@@ -399,4 +412,39 @@ def report(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
                        / len(results), 4),
         "checks": {name: res["passed"] for name, res in results.items()},
         "scores": {name: res["score"] for name, res in results.items()},
+    }
+
+
+def family_report(itinerary: dict, trip: dict, pois: dict,
+                  matrix: dict) -> dict:
+    """Five-family view derived from the canonical detailed gate report."""
+    detailed = report(itinerary, trip, pois, matrix)
+    families = {}
+    for family, names in FAMILY_CHECKS:
+        checks = [
+            {
+                "check": name,
+                "passed": bool(detailed["checks"][name]),
+                "score": float(detailed["scores"][name]),
+            }
+            for name in names
+        ]
+        families[family] = {
+            "passed": all(item["passed"] for item in checks),
+            "score": round(min((item["score"] for item in checks),
+                               default=1.0), 4),
+            "checks": checks,
+        }
+    failed_families = [
+        name for name, value in families.items() if not value["passed"]
+    ]
+    return {
+        "passed": not failed_families,
+        "failed_families": failed_families,
+        "families": families,
+        "failed": detailed["failed"],
+        "soft_failed": detailed["soft_failed"],
+        "score": detailed["score"],
+        "checks": detailed["checks"],
+        "scores": detailed["scores"],
     }

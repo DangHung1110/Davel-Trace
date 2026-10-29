@@ -143,8 +143,18 @@ class TestItineraryContract(unittest.TestCase):
         built_profiles = []
 
         def build_plan(**kwargs):
-            built_profiles.append(kwargs["profile"])
-            return {"activities": [], "total_cost": 0, "total_km": 0,
+            profile = kwargs["profile"]
+            built_profiles.append(profile)
+            activities = {
+                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
+                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
+                "experience": [
+                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
+                ],
+            }[profile]
+            return {"activities": activities,
+                    "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
         old_builder = itinerary_mod._get_plan_builder
@@ -166,8 +176,18 @@ class TestItineraryContract(unittest.TestCase):
         built_profiles = []
 
         def build_plan(**kwargs):
-            built_profiles.append(kwargs["profile"])
-            return {"activities": [], "total_cost": 0, "total_km": 0,
+            profile = kwargs["profile"]
+            built_profiles.append(profile)
+            activities = {
+                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
+                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
+                "experience": [
+                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
+                ],
+            }[profile]
+            return {"activities": activities,
+                    "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
         store = select_mod.get_store()

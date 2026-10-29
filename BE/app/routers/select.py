@@ -16,11 +16,15 @@ plans, e.g. injectable test builders) — never fabricate a gate failure.
 
 from __future__ import annotations
 
-from fastapi import APIRouter
-from pydantic import BaseModel
+from uuid import uuid4
 
+from fastapi import APIRouter
+from pydantic import BaseModel, Field
+
+from BE.app.config import get_settings
 from BE.app.routers import error
 from BE.app.services import gate
+from BE.app.services.acceptance_store import AcceptanceStore
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
@@ -29,6 +33,9 @@ _STORE: dict = {"plans": {}, "active_id": None, "selected": None, "gate": None}
 
 class SelectIn(BaseModel):
     itinerary_id: str
+    idempotency_key: str | None = Field(default=None, min_length=8,
+                                        max_length=128)
+    parent_acceptance_id: str | None = None
 
 
 def register(plans: list[dict]) -> None:
@@ -86,7 +93,34 @@ def evaluate_plan(plan: dict) -> dict | None:
     if inputs is None:
         return None
     itinerary, trip, pois, matrix = inputs
-    return gate.report(itinerary, trip, pois, matrix)
+    return gate.family_report(itinerary, trip, pois, matrix)
+
+
+def _public_plan(plan: dict) -> dict:
+    return {key: value for key, value in plan.items()
+            if not key.startswith("_")}
+
+
+def _save_acceptance(plan: dict, report: dict, body: SelectIn) -> dict:
+    settings = get_settings()
+    ctx = plan.get("_context") or {}
+    request = ctx.get("trip") or plan.get("trip") or {
+        "trip_id": plan.get("trip_id", "")
+    }
+    key = body.idempotency_key or f"legacy-{uuid4()}"
+    return AcceptanceStore(settings.acceptance_db_path).save_acceptance(
+        idempotency_key=key,
+        itinerary_id=body.itinerary_id,
+        trip_id=str(plan.get("trip_id") or request.get("trip_id") or ""),
+        parent_acceptance_id=body.parent_acceptance_id,
+        data_version=str(plan.get("data_version") or settings.snapshot_name),
+        request=request,
+        plan=_public_plan(plan),
+        gate=report or plan.get("gate") or {"passed": True},
+        deterministic_rank=plan.get("deterministic_rank"),
+        deterministic_score=plan.get("deterministic_score"),
+        shadow_observation_id=(plan.get("shadow") or {}).get("observation_id"),
+    )
 
 
 @router.post("/itinerary/select")
@@ -95,13 +129,35 @@ def select(body: SelectIn):
         return error("UNKNOWN_ITINERARY",
                      f"khong co plan {body.itinerary_id}", 404)
 
-    report = evaluate_plan(_STORE["plans"][body.itinerary_id])
+    plan = _STORE["plans"][body.itinerary_id]
+    report = evaluate_plan(plan)
     if report is not None and not report["passed"]:
         failed = ", ".join(report["failed"])
         return error("GATE_FAILED",
                      f"plan {body.itinerary_id} khong qua cong: {failed}", 422)
 
+    # Persistence is part of selection. Save first, then activate; a failed
+    # local database write must not claim that a durable choice succeeded.
+    try:
+        acceptance = _save_acceptance(
+            plan, report or plan.get("gate") or {"passed": True}, body)
+    except (OSError, ValueError) as exc:
+        return error("ACCEPTANCE_STORE_ERROR", str(exc), 503)
+
     _STORE["active_id"] = body.itinerary_id
     _STORE["selected"] = body.itinerary_id
     _STORE["gate"] = report
-    return {"active_id": body.itinerary_id}
+    if body.idempotency_key is None:
+        # Exact legacy response shape; the server-generated key still creates
+        # an immutable record for roadmap data capture.
+        return {"active_id": body.itinerary_id}
+    return {
+        "active_id": body.itinerary_id,
+        "acceptance": {
+            key: acceptance.get(key)
+            for key in (
+                "acceptance_id", "itinerary_id", "trip_id", "selected_at",
+                "schema_version", "data_version", "parent_acceptance_id",
+            )
+        },
+    }
