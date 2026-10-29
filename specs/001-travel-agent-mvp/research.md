@@ -23,6 +23,7 @@ Prior deep research lives in NotebookLM notebook `PBL6-TravelAgent`
 - **Decision**: Precompute/cache N≤200 Da Nang matrix once (40k cells) via OSRM. VietMap NOT used at all.
 - **Rationale**: OSRM is free, deterministic, offline-capable; VietMap free tier expires + ToS limits on bulk caching + prior HTTP 423 issues. Simplifies stack to zero external routing dependencies.
 - **Alternatives considered**: VietMap (rejected: 2-month free, ToS bulk-cache ban, HTTP 423 history); haversine-only (rejected: breaks B3 feasibility); GraphHopper (rejected: more complex than OSRM for same result).
+- **Amendment 2026-10-29 (Phase 3)**: the matrix is a MOTORBIKE matrix for every snapshot POI (742, `dense-v1`), built from `BE/tools/osrm/motorbike.lua` (OSRM v5.27.1 car profile + motorcycle access, no motorway, no national-route tunnels, alleys allowed). VietMap is still not a runtime or cached routing source; it is used OFFLINE only as the reference for calibration (`BE/tools/calibrate_matrix.py`, 50 sampled pairs per run; the per-pair answers are kept as evaluation evidence in `BE/data/snapshots/danang-v1/`). Result: time MAPE 22.3% with the prior speeds -> 7.8% calibrated (distance MAPE 3.5%).
 
 ## R5. API + app: FastAPI backend, Flutter frontend, free-tier hosting
 - **Decision**: New Python package under `BE/`; existing Flutter app gains API client replacing in-memory demo data; `index.html` stays demo/test. BE deployed on free tier (Render/Fly.io) for mobile to call anytime; local dev on MacBook.
