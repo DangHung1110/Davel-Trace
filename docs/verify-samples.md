@@ -224,3 +224,71 @@ nguồn và mức tin, và không được suy luận (ví dụ 3.2). Cách tự
 | **C. Người** | mâu thuẫn giữa nguồn; thời lượng ngoài trần; giá vé điểm tham quan không có nguồn; loại "không phải điểm đến" | | trang duyệt có ô sửa giờ, giá, loại, thời lượng |
 
 Nhóm A chiếm phần lớn lỗi planner thấy trong mục 3, và không cần gọi thêm dịch vụ ngoài nào.
+
+## 6. Kết quả nhóm A (đã làm)
+
+Tool `BE/ml/data/normalize_fields.py` áp các luật tất định lên `pois.json`. Mọi luật là hàm thuần của
+dữ liệu có sẵn: không gọi nguồn ngoài, không đoán giá trị. Chạy lại không đổi gì thêm. Test
+`test_normalize_fields.py` fail nếu snapshot còn dòng chưa chuẩn hoá.
+
+| Luật | 742 POI | 410 verified |
+|---|---|---|
+| `fee` ← `ticket_vnd` | 13 | 7 |
+| `price_level` suy từ `price_band` (rẻ 1, trung bình 2, đắt 3) | sửa 17 dòng lệch, 466 → `null` | 13, 239 → `null` |
+| Giờ "suy luận" → `hours_source: inferred` | 10, bỏ 1 (Biển Rạng Sơn Trà) | 8, bỏ 1 |
+| Các ca trong ngày từ web/OSM gộp vào một phần tử | 2 | 2 |
+| Thời lượng tính theo `cat` thay vì loại gốc của Google | 85 | 18 |
+
+Một số thời lượng sau khi sửa:
+
+- Bảo tàng Chăm 200 → 90 phút.
+- Bãi Biển Thiên Đường 200 → 120 phút, khớp đúng con số người duyệt đề xuất.
+- Cầu Trần Thị Lý 200 → 45 phút.
+- Đình làng Hải Châu 240 → 54 phút.
+
+Planner:
+
+- **Đọc giờ** (`BE/common.open_windows`):
+  - Khung qua nửa đêm được kéo sang ngày hôm sau.
+  - Mỗi ca trong ngày là một khung riêng, và optimizer chọn một trong các khung.
+  - Các biến thể theo ngày trong tuần được lấy giao, tức chỉ giữ giờ mở ở mọi biến thể.
+- **POI thiếu giờ** không còn bị coi là mở suốt chuyến. Planner dùng **khung an toàn đo từ dữ liệu**: các
+  khung giờ mà ≥ 90% POI cùng nhóm (có giờ từ nguồn thật) đang mở.
+
+  | Nhóm | Khung an toàn |
+  |---|---|
+  | Tham quan (gộp 7 loại, n=89) | 09:00–17:00 |
+  | Cà phê | 07:30–19:30 |
+  | Spa | 10:00–19:30 |
+  | Quán ăn | 17:00–21:00 |
+  | Bar | 19:30–23:45 |
+  | Chợ | không có khung nào đạt 90% (chợ sáng lẫn chợ đêm) → **không xếp** cho tới khi có giờ thật |
+
+  Lệnh `normalize_fields.py --safe-hours` in lại bảng này, và test fail nếu bảng trong code lệch khỏi dữ
+  liệu. Optimizer, replan và repair cùng đọc bảng này. Dữ liệu thì vẫn để trống giờ.
+- **Mức giá `null`** được coi là mức trung bình (`UNKNOWN_PRICE_LEVEL = 2`), nên thứ hạng không đổi so
+  với trước. Retrieval gắn nhãn "gia chua xac minh".
+- Các bước crawl (`fetch_serpapi`, `osm_add`, `manual_add`) và `enrich_tags` không còn ghi số 2 giả hay giờ
+  suy luận dưới nhãn "web".
+
+E2E trên 9 kịch bản (trước → sau):
+
+- Mọi plan đều pass, và không điểm dừng nào nằm ngoài giờ mở cửa.
+- Kịch bản bar buổi tối: mong muốn đạt 2/3 → **3/3**.
+- Chi phí vé bắt đầu xuất hiện (3D Art 140k, Mỹ thuật 20k); trước đó luôn là 0.
+- p50 vẫn 5.9s.
+
+Còn lại cho người (không tự động hoá được):
+
+- 4 POI Google có các biến thể giờ không giao nhau, nên planner không xếp được: The South Coffee, Nhà thờ
+  Giáo xứ An Hải, Nhà thờ Gia Phước, The Craftsman Cocktail Bar.
+- Biển Rạng Sơn Trà đã bị bỏ giờ suy luận, nên cần giờ thật. Chợ Non Nước chưa có giờ nên chưa xếp được.
+- Vịnh Sơn Trà và View Ngắm Bình Minh Sơn Trà: chính ghi chú nói đường lên chỉ mở 07:30–18:30, nhưng lại
+  được điền 24/7.
+- Thời lượng theo luật vẫn chỉ là ước lượng (`dur_confidence: low`), ví dụ shop đặc sản 90 phút, du thuyền
+  240 phút.
+- 2 POI verified chưa biết có vé hay không (Non Nuoc Stone Carving Memory Museum, Đà Sơn tâm linh), nên
+  planner vẫn coi là miễn phí.
+- Luật auto của Cường so thời lượng với trung vị của nhóm, nên khi thời lượng thay đổi, kết quả cũng đổi.
+  Chạy lại thử: cờ "thời lượng bất thường" giảm từ 23 xuống 4, nhưng sẽ có **7 POI chưa verify tự qua**
+  (du thuyền, lớp nấu ăn, thuyền thúng...). Tôi không bật cờ verify cho chúng.
