@@ -292,3 +292,64 @@ Còn lại cho người (không tự động hoá được):
 - Luật auto của Cường so thời lượng với trung vị của nhóm, nên khi thời lượng thay đổi, kết quả cũng đổi.
   Chạy lại thử: cờ "thời lượng bất thường" giảm từ 23 xuống 4, nhưng sẽ có **7 POI chưa verify tự qua**
   (du thuyền, lớp nấu ăn, thuyền thúng...). Tôi không bật cờ verify cho chúng.
+
+## 7. Tầng 1: đối chiếu OSM (đã làm)
+
+Tool `BE/ml/data/osm_crosscheck.py` ghi kết quả ra `osm_crosscheck.json` và `OSM_CROSSCHECK.md` trong snapshot.
+Tool không sửa `pois.json` và không đụng cờ `verified`. Chạy mất 4 giây trên extract OSM ngày 28/10/2026, gồm
+9.265 đối tượng có tên.
+
+Luật ghép:
+
+- Đo khoảng cách tới **hình học** của đối tượng OSM, tối đa 150 m. Bãi biển là một đường dài, nên đo tới
+  tâm sẽ sai.
+- Tên được bỏ dấu, bỏ từ chung ("bãi biển", "beach") và bỏ phần địa chỉ phía sau ("- 58 Ông Ích Đường").
+- Hai tên phải trùng hẳn, hoặc chung ≥ 2 chữ theo **đúng thứ tự**, trong đó có ít nhất một chữ riêng (không
+  phải địa danh, tên món hay từ chỉ loại). Nhờ vậy:
+  - "Trà Sơn Quán" ≠ "Son Tra Viewpoint" (khác thứ tự);
+  - "Bãi tắm Sao Biển" ≠ "Nhà thờ Đức Mẹ Sao Biển" (chỉ chung một chữ);
+  - "Mỳ Quảng Quê Xưa" ≠ "My Quang Restaurant" (chỉ chung tên món).
+- Loại hình: tag chung chung (`tourism=attraction`, `shop=*`) chỉ được dùng để xác nhận, không bao giờ tạo
+  mâu thuẫn. Khi tag cụ thể mâu thuẫn với loại hình của POI thì chính phép ghép đáng nghi, nên "tồn tại"
+  vẫn chỉ được tính là một nguồn.
+- POI vốn lấy từ OSM được ghi `same_source`: không tự xác nhận chính mình.
+
+Kết quả trên 410 POI verified (6 POI lấy từ OSM được tính riêng):
+
+| Trường | Xác nhận | Mâu thuẫn | Một nguồn |
+|---|---|---|---|
+| Tồn tại, vị trí | 102 | 0 | 302 |
+| Loại hình | 97 | 4 | 303 |
+| Giờ | 15 | 8 | 369 (thêm 8 thiếu, 1 chỉ OSM có) |
+
+OSM phủ được **47% nhóm tham quan** (37/79) nhưng chỉ **18% quán xá** (53/301 nhà hàng, cà phê, bar, spa).
+
+**Độ tin, đo trên 48 dòng có nhãn người** (`SPOT_CHECK.md`):
+
+- 12 dòng được OSM xác nhận tồn tại và loại hình: **0 dòng sai ở hai trường này**. 2 trong số đó người
+  đánh "Sai", nhưng vì thời lượng và trùng lặp, là những thứ OSM không kiểm.
+- 3 lỗi loại hình người tìm thấy đều **không** được OSM xác nhận, nên luật "≥ 2 nguồn" sẽ không cho chúng
+  qua.
+- Độ phủ trên các dòng đúng: 11/38 (29%).
+- Mẫu còn nhỏ: với 0/12 dòng sai, cận trên của khoảng tin cậy 95% vẫn khoảng 24%. Gate thật vẫn cần mẫu 50
+  POI có 2 người duyệt.
+
+Những điểm mới cần người xử lý (đầy đủ trong `OSM_CROSSCHECK.md`):
+
+- **Loại hình:**
+  - Bãi Sủng Cỏ và Bãi Tắm Non Nước đang gắn `attraction`, nhưng OSM ghi là bãi biển.
+  - Lagoon Rooftop (bar hay nhà hàng) và Cucina Luca (nhà hàng hay cà phê) lệch nhẹ.
+- **Trùng lặp:**
+  - Bãi Tắm Non Nước và Bãi biển Non Nước là cùng một bãi, và cả hai đều đã verify.
+  - Cổng Chùa Linh Ứng là một phần của Chùa Linh Ứng.
+  - Chùa Không Tên có thể trùng Khu Văn hoá Tâm linh Đà Sơn.
+- **Giờ lệch quá 30 phút (8 POI):**
+  - Maia Beach Bar: dữ liệu ghi 07:00–01:00, OSM ghi 16:00–23:00.
+  - Bảo tàng 3D Art: dữ liệu ghi đóng cửa 18:00, OSM ghi 22:00.
+- **Ngày nghỉ mà dữ liệu của mình không có:** theo OSM, Bảo tàng Hồ Chí Minh nghỉ thứ Hai và thứ Sáu.
+- **Giờ chỉ OSM có:** The Craftsman Cocktail Bar (OSM: 18:00–02:00). Đây là một trong 4 POI planner chưa
+  xếp được.
+
+Kết luận: OSM là nguồn thứ hai đáng tin, vì không có lần xác nhận sai nào trong mẫu. Nhưng OSM chỉ phủ khoảng
+một phần tư số POI verified: tốt với nhóm tham quan, yếu với quán xá. Quán xá cần một nguồn thứ hai khác
+(VietMap Place hoặc Google), và việc đó cần bạn duyệt chi phí.
