@@ -108,7 +108,7 @@
 - [x] T032 Run root `python server.py` smoke checks for HTTP 200 shell and HTTP 206 PMTiles range, then manually verify map/search A-B/route/play-pause availability.
 - [x] T033 Execute every command/scenario in `specs/003-stable-planning-roadmap/quickstart.md`, record actual results, scan tracked changes for secrets and runtime artifacts, and review the final diff.
 - [x] T034 Run `/speckit.converge`; append and implement any missing tasks until the result is `CONVERGED`.
-- [ ] T035 Commit in professional English-prefixed logical steps, push `feat/stable-planning-roadmap`, and open a PR to `dev` with spec/change/test evidence and no direct push to protected branches.
+- [x] T035 Commit in professional English-prefixed logical steps, push `feat/stable-planning-roadmap`, and open a PR to `dev` with spec/change/test evidence and no direct push to protected branches.
 
 ---
 

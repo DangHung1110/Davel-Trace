@@ -33,3 +33,4 @@ Validated on 2026-10-29 from `feat/stable-planning-roadmap`.
 - No learned weights or accepted-day RAG is enabled below the documented
   evidence thresholds.
 - No provider secret is added; provider keys remain environment-driven.
+- Delivery PR: <https://github.com/DangHung1110/Davel-Trace/pull/8>
