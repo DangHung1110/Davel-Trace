@@ -13,7 +13,9 @@ alias. New code should import from `BE.common` directly.
 from __future__ import annotations
 
 from BE.common import (  # noqa: F401  (re-exported seam)
+    BAND_MIDPOINT,
     deadline,
+    effective_fee,
     hh,
     hhmm,
     in_range,
@@ -27,4 +29,5 @@ from BE.common import (  # noqa: F401  (re-exported seam)
 __all__ = [
     "to_min", "hh", "hhmm", "in_range", "parse_hours",
     "total_fee", "plan_cost", "deadline", "status_map",
+    "effective_fee", "BAND_MIDPOINT",
 ]

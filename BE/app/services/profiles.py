@@ -25,6 +25,7 @@ stub (select endpoint is lane C T033e).
 from __future__ import annotations
 
 import math
+import os
 from collections import Counter
 
 from BE.app.services import (
@@ -111,6 +112,155 @@ DIVERSITY_WEIGHT_BY_PROFILE = {
 # BBQ joint for a seafood profile (pinned in test_taste_scoring.py). A clash
 # costs the same, so a 4.9 vegan-only kitchen loses to a 4.2 seafood place.
 TASTE_WEIGHT = 0.20
+
+# --- D2 step 3 (N3): cheap candidate cap before the O(n^2) scorer/CP-SAT ----
+# The fallback/large pool (n=742) makes scorer.edge_scores ~550k pairs and the
+# CP-SAT model ~552k arcs *3 profiles per request (minutes). A cheap rank
+# pre-filter keeps the top K candidates. The cap is per-category BALANCED so a
+# broad food-heavy pool cannot eat every slot and starve museum/park/beach,
+# which would silently make CATEGORY_CAP/CAFE_CAP plans infeasible.
+# Override with CANDIDATE_CAP (env) or build_plan(candidate_cap=...).
+CANDIDATE_CAP_DEFAULT = 80
+CANDIDATE_CAP_ENV = "CANDIDATE_CAP"
+
+
+def candidate_cap_limit() -> int:
+    """Top-K limit: valid `CANDIDATE_CAP` env override, else the default."""
+    raw = os.environ.get(CANDIDATE_CAP_ENV)
+    if raw is None or str(raw).strip() == "":
+        return CANDIDATE_CAP_DEFAULT
+    try:
+        value = int(str(raw).strip())
+    except (TypeError, ValueError):
+        return CANDIDATE_CAP_DEFAULT
+    return value if value > 0 else CANDIDATE_CAP_DEFAULT
+
+
+def cap_candidates(candidates: list[dict], ranked: list[dict] | None = None,
+                   cap: int | None = None,
+                   must_visit: list[str] | tuple[str, ...] = ()
+                   ) -> tuple[list[dict], dict]:
+    """Cheap rank pre-filter: top-`cap`, balanced across categories.
+
+    Why this shape: the scorer is O(n^2) and CP-SAT builds an arc per ordered
+    pair, so a 742-POI fallback pool is minutes per profile. Ranking is already
+    cheap; capping the list BEFORE the scorer/model is the only safe place.
+
+    Selection order:
+    1. `must_visit` is pinned (a capped-away must-visit would make the model
+       honestly infeasible for no reason), even if that pushes the result
+       above K; `stats["after"]` reports the real size.
+    2. The remaining candidates are bucketed by canonical category and taken
+       round-robin, best rank first inside each bucket. Every category keeps
+       its best item(s), so rare museum/park/beach rows survive a
+       restaurant-heavy pool and CATEGORY_CAP/CAFE_CAP plans stay feasible.
+       A single category can never consume the whole cap.
+
+    Rank score is the cheap `rank` stage output (`{"poi_id", "score"}`); the
+    list position is the tie-break, so a caller that passes rank-ordered rows
+    without `score` still gets the same behaviour.
+
+    Returns (selected, stats). `stats["capped_from_n"]` is the pre-cap size
+    when capping happened (None otherwise) and `stats["cap"]` is the requested
+    K, so the response can report it. A pool at or below K is returned
+    unchanged (same objects, same order).
+    """
+    cap_value = candidate_cap_limit() if cap is None else max(1, int(cap))
+    total = len(candidates)
+    stats = {
+        "cap": cap_value,
+        "before": total,
+        "after": total,
+        "capped": False,
+        "capped_from_n": None,
+        "pinned_must_visit": 0,
+        "categories": {},
+    }
+    if total <= cap_value:
+        return list(candidates), stats
+
+    rank_pos: dict[str, int] = {}
+    rank_score: dict[str, float | None] = {}
+    for pos, row in enumerate(ranked or []):
+        pid = row.get("poi_id")
+        if pid is None or pid in rank_pos:
+            continue
+        rank_pos[pid] = pos
+        score = row.get("score")
+        if score is not None:
+            try:
+                rank_score[pid] = float(score)
+            except (TypeError, ValueError):
+                rank_score[pid] = None
+        else:
+            rank_score[pid] = None
+
+    def _key(item: tuple[int, dict]) -> tuple[int, float, int]:
+        idx, poi = item
+        pid = poi.get("poi_id")
+        pos = rank_pos.get(pid, idx)
+        score = rank_score.get(pid)
+        if score is None:
+            # No cheap score: keep the caller's rank order.
+            return (1, 0.0, pos)
+        return (0, -score, pos)
+
+    ordered = sorted(enumerate(candidates), key=_key)
+    must_ids = set(must_visit or ())
+    pinned = [poi for _idx, poi in ordered
+              if poi.get("poi_id") in must_ids]
+    buckets: dict[str, list[dict]] = {}
+    cat_order: list[str] = []
+    for _idx, poi in ordered:
+        if poi.get("poi_id") in must_ids:
+            continue
+        cat = soft_rules.poi_category(poi) or ""
+        if cat not in buckets:
+            # First sighting = this category's best-ranked member, so the
+            # round-robin order is by category strength (restaurant/cafe
+            # usually first), never alphabetical starvation.
+            buckets[cat] = []
+            cat_order.append(cat)
+        buckets[cat].append(poi)
+
+    selected = list(pinned)
+    # Round-robin over categories: each pass gives every category one more
+    # slot, so rare categories keep their best item before a big category can
+    # fill the cap alone.
+    while len(selected) < cap_value:
+        added = False
+        for cat in cat_order:
+            bucket = buckets[cat]
+            if not bucket:
+                continue
+            if len(selected) >= cap_value:
+                break
+            selected.append(bucket.pop(0))
+            added = True
+        if not added:
+            break
+
+    counts: dict[str, int] = {}
+    for poi in selected:
+        cat = soft_rules.poi_category(poi) or ""
+        counts[cat] = counts.get(cat, 0) + 1
+    stats.update(
+        after=len(selected),
+        capped=True,
+        capped_from_n=total,
+        pinned_must_visit=len(pinned),
+        categories=counts,
+    )
+    return selected, stats
+
+
+def cap_warning(stats: dict) -> str | None:
+    """Human-readable cap note for plan warnings (None when uncapped)."""
+    if not stats.get("capped"):
+        return None
+    return (f"giam pool ung vien {stats['before']} -> {stats['after']} "
+            f"(top-{stats['cap']} theo rank, giu can bang loai; "
+            "CANDIDATE_CAP)")
 
 
 def _clamp01(value: float) -> float:
@@ -283,6 +433,23 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
+def _gate_poi(poi: dict) -> dict:
+    """The slice of a POI the gate/BCS sees.
+
+    Money fields are passed through verbatim (`ticket_vnd`, `smart_tags`) on
+    top of the legacy `fee`: `validator`/`check_bcs` price a plan with
+    `plan_cost` -> `total_fee` -> `effective_fee`, so a projection that only
+    carried `fee` made every band-priced POI look free and the internal BCS
+    disagreed with `/v1/evaluate` for the very same plan.
+    """
+    return {"verified": poi.get("verified", False),
+            "fee": poi.get("fee", 0),
+            "ticket_vnd": poi.get("ticket_vnd"),
+            "smart_tags": poi.get("smart_tags") or {},
+            "opening_hours": poi.get("opening_hours", []),
+            "type": poi.get("type", ""), "cat": poi.get("cat", "")}
+
+
 def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                  trip: dict, matrix: dict,
                  profiles: tuple[str, ...] = ("savings", "balanced",
@@ -305,11 +472,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
               if trip.get("profile") else templates.NO_LIMITS)
     rest_after_lunch = (limits.get("rest_minutes")
                         if limits.get("rest_after_lunch") else None)
-    pois_gate = {pid: {"verified": p.get("verified", False), "fee": p.get("fee", 0),
-                       "opening_hours": p.get("opening_hours", []),
-                       # A1 (meal-slot rule) needs the category.
-                       "type": p.get("type", ""), "cat": p.get("cat", "")}
-                 for pid, p in by_id.items()}
+    pois_gate = {pid: _gate_poi(p) for pid, p in by_id.items()}
     for prof in profiles:
         stub = stubs_from_pois(
             pois, trip,
@@ -394,7 +557,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                pool_band: float = POOL_DEFAULT_BAND,
                pool_timeout_s: float | None = None,
                timeout_s: float | None = None,
-               deterministic_time: float | None = None) -> dict:
+               deterministic_time: float | None = None,
+               candidate_cap: int | None = None) -> dict:
     """T020/T032 router seam: one profile -> one real plan dict.
 
     Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
@@ -441,6 +605,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     - `timeout_s` / `deterministic_time` are forwarded to CP-SAT. The eval
       harness passes a deterministic budget so a published comparison is
       reproducible; the endpoint keeps the wall-clock default.
+    - `candidate_cap` (D2 step 3, N3) caps the ranked pool to top-K BEFORE the
+      O(n^2) scorer and CP-SAT model. It is per-category balanced (so a
+      restaurant-heavy pool cannot eat every slot) and writes
+      `candidate_pool` + a warning into the plan. `None` reads the
+      `CANDIDATE_CAP` env var, then the 80 default. A pool at/below K is
+      untouched.
 
     The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
     the plan body those fields are attached to. `workers` is forwarded to
@@ -461,12 +631,43 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     ranked_ids = [r.get("poi_id") for r in ranked]
     ids = [pid for pid in ranked_ids if pid in pois_by_id]
     if not ids:
-        ids = list(pois_by_id)
+        # B2 fail-closed. The old `ids = list(pois_by_id)` fallback shipped the
+        # WHOLE snapshot: unverified rows and rows the hard profile filter
+        # (allergy/must_avoid/accessibility) or the bare trip `avoid` dropped.
+        # Rebuild a verified-only pool, re-apply every hard veto (the router
+        # passes an unfiltered by_id, so a direct caller is covered too) and
+        # only then plan. Still empty -> honest empty plan, never a wrong one.
+        avoid = set(trip.get("avoid") or [])
+        pool = [p for p in pois_by_id.values() if p.get("verified")]
+        pool, _ = profile_filter.hard_filter(pool, trip.get("profile") or {})
+        ids = [p["poi_id"] for p in pool if p["poi_id"] not in avoid]
+        if not ids:
+            plan = _assemble(
+                [], {"itinerary": None, "reason": "khong con POI da xac minh"},
+                trip, pois_by_id, cells, ranked, tpl_name, limits, 0,
+                soft_rules.cafe_cap(trip.get("profile")), ctx, prof, [], {})
+            plan["infeasible_by"] = {
+                "rule": "NO_VERIFIED_POOL",
+                "label": "pool da xac minh rong (verified + ho so + avoid)",
+            }
+            plan.setdefault("warnings", []).insert(
+                0,
+                "khong xep duoc lich: khong con diem nao da xac minh va "
+                "khong bi ho so/avoid loai (fail-closed, khong fallback toan bo)")
+            return plan
     candidates = [pois_by_id[pid] for pid in ids]
 
     # Template hard bans: nightlife/spa for a family day, trek for a calm one.
     if tpl_name:
         candidates = [p for p in candidates if templates.allows(p, tpl_name)]
+
+    # D2 step 3 (N3): cheap rank pre-filter BEFORE the O(n^2) scorer and the
+    # CP-SAT model. Per-category balanced + must_visit pinned (see
+    # cap_candidates); a pool at/below K is returned unchanged.
+    cap_limit = (candidate_cap_limit() if candidate_cap is None
+                 else max(1, int(candidate_cap)))
+    candidates, cap_stats = cap_candidates(
+        candidates, ranked, cap_limit, trip.get("must_visit") or [])
     ids = [p["poi_id"] for p in candidates]
 
     travel = _travel_from_cells(cells, ids)
@@ -607,6 +808,16 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
+    # D2 step 3 diagnostics: K is always reported; a real trim also gets a
+    # warning so a caller can see WHY a 742-row pool became a plan over 80.
+    plan["candidate_pool"] = cap_stats
+    note = cap_warning(cap_stats)
+    if note:
+        plan.setdefault("warnings", []).insert(0, note)
+    # CP-SAT timeout guard: never hide a best-so-far solve behind a silent
+    # feasible plan; the optimizer names it (CP_SAT_TIMEOUT*).
+    if out.get("warnings"):
+        plan.setdefault("warnings", []).extend(out["warnings"])
     if out.get("itinerary") is None:
         culprit = _diagnose(list(templates.attempts(limits))[-1])
         if culprit:
@@ -639,6 +850,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 continue
             member["profile"] = profile
             member["_objective"] = float(item.get("objective") or 0.0)
+            # Same cap evidence on pool members: diverse mode may return one
+            # of these directly, so the K used must travel with it.
+            member["candidate_pool"] = cap_stats
+            note = cap_warning(cap_stats)
+            if note:
+                member.setdefault("warnings", []).insert(0, note)
             built.append(member)
         plan["_pool_plans"] = built
         stats = dict(out.get("pool_stats") or {})
@@ -669,11 +886,7 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     if (ctx or {}).get("dynamic_state"):
         for act in acts:
             act["state"] = trip_ctx.compact_state(ctx, to_min(act["start"]))
-    pois_gate = {pid: {"verified": p.get("verified", False),
-                       "fee": p.get("fee", 0),
-                       "opening_hours": p.get("opening_hours", []),
-                       "type": p.get("type", ""), "cat": p.get("cat", "")}
-                 for pid, p in pois_by_id.items()}
+    pois_gate = {pid: _gate_poi(p) for pid, p in pois_by_id.items()}
     # The plan's rest window is evidence, not a hidden assumption: pass it to
     # the gate so REST_FOLLOWS_LUNCH checks the window the client will see
     # (start within 15 min of lunch end, exact pace length, no POI inside).

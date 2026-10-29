@@ -175,6 +175,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
 
     retrieval = retrieval_svc.retrieve(trip, pois)
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
+    # B4/FR-013: the retrieval explanation used to be computed and thrown
+    # away. Keep it for the response (harness shows "cần xác minh").
+    needs_verification, excluded = _explain_retrieval(retrieval, by_id)
     # Trip context (dynamic state): live weather for the trip hours + the
     # conditional meal rhythm + the hourly traveler state. It closes the
     # rank rain_prob dead branch (rain_at per hour, max over the trip) and
@@ -218,6 +221,13 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         base_warnings.append(
             f"... va {len(verified_drops) - MAX_FILTER_WARNINGS} POI khac")
     base_warnings += retired_warnings
+    # FR-031: an unverified must-visit cannot enter the main plan; say so
+    # explicitly instead of silently dropping it.
+    for entry in needs_verification:
+        if entry["must_visit"]:
+            base_warnings.append(
+                f"must-visit '{entry.get('name') or entry['poi_id']}' "
+                "chua xac minh: khong dua vao lich chinh, can xac minh")
     if ctx.get("weather_source") == "none":
         base_warnings.append(
             "khong lay duoc du bao thoi tiet, dung nhiet do gia dinh "
@@ -359,7 +369,11 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     # response drops leading-underscore keys.
     select_svc.register(plans)
     public = [_public(plan) for plan in plans]
-    out = {"plans": public, "selected": None}
+    out = {"plans": public, "selected": None,
+           # B4: honesty payload — unverified POIs and per-POI exclusion
+           # reasons are part of the response, not just of a discarded dict.
+           "needs_verification": needs_verification,
+           "excluded": excluded}
     if pool_stats is not None:
         out["solution_pool"] = pool_stats
     # Shadow LLM ranker (Hướng 3): log-only, never on the response path.
@@ -421,6 +435,32 @@ def _guarantee_fields(report: dict | None) -> dict:
         "replaced": report.get("replaced", []),
         "exhausted": report.get("exhausted", []),
     }
+
+
+def _explain_retrieval(retrieval: dict, by_id: dict) -> tuple[list[dict], list[dict]]:
+    """FR-013/FR-024 (B4): retrieval explanation -> public response lists.
+
+    `needs_verification` keeps the retrieval reasons + uncertainty labels and
+    the FR-031 must-visit flag; `excluded` keeps one reason per POI. Names are
+    added for the UI only (facts from the snapshot, no invention).
+    """
+    def _name(pid) -> str | None:
+        return (by_id.get(pid) or {}).get("name")
+
+    needs = []
+    for entry in retrieval.get("needs_verification") or []:
+        needs.append({
+            "poi_id": entry.get("poi_id"),
+            "name": _name(entry.get("poi_id")),
+            "must_visit": bool(entry.get("must_visit")),
+            "reasons": list(entry.get("reasons") or []),
+            "uncertainty": list(entry.get("uncertainty") or []),
+        })
+    excluded = [{"poi_id": item.get("poi_id"),
+                 "name": _name(item.get("poi_id")),
+                 "reason": item.get("reason")}
+                for item in retrieval.get("excluded") or []]
+    return needs, excluded
 
 
 def _merge_lists(*values) -> list[str]:

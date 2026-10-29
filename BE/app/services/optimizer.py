@@ -72,6 +72,9 @@ from BE.app.services.soft_rules import (
 )
 
 TIMEOUT_S = 5.0
+# A guard against a caller passing None/negative: CP-SAT must always have a
+# wall-clock ceiling, so one profile solve can never run unbounded.
+MIN_TIMEOUT_S = 0.05
 
 # T061a: must-go landmarks (snapshot `must_go`) get a small score nudge so
 # they surface first. This is only a TIE-BREAK; the real guarantee is the
@@ -541,6 +544,12 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     """
     from ortools.sat.python import cp_model
 
+    # Wall-clock guard: always hand CP-SAT a positive ceiling (the router's
+    # default path forwards None, and a direct caller may pass None/<=0).
+    if timeout_s is None:
+        timeout_s = TIMEOUT_S
+    timeout_s = max(MIN_TIMEOUT_S, float(timeout_s))
+
     if int(solution_pool) > 1:
         # One pool = several full solves (fresh model each member): delegate
         # before building anything, so the single-plan path stays untouched.
@@ -560,7 +569,11 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         lunch_required=lunch_required,
                         state_bands=state_bands, state_score=state_score,
                         category_cap=category_cap, state_weight=state_weight,
-                        diversity_weight=diversity_weight))
+                        diversity_weight=diversity_weight,
+                        # Previously dropped on the pool path: every member
+                        # must keep the deterministic budget, not only the
+                        # first argmax solve.
+                        deterministic_time=deterministic_time))
 
     overhead = STOP_OVERHEAD_MIN if overhead_min is None else int(overhead_min)
     ids = [p.poi_id for p in pois]
@@ -901,7 +914,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 m.AddHint(arc[(i, i)], 1)
 
     solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = timeout_s
+    # HARD wall-clock guard on every solve: even a pathological model returns
+    # within `timeout_s` with its best-so-far (or a named no-solution timeout).
+    solver.parameters.max_time_in_seconds = float(timeout_s)
     if deterministic_time is not None:
         # Deterministic budget: the search stops after the same amount of WORK
         # on every run (single worker), so two eval runs cannot disagree just
@@ -914,7 +929,19 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     status = solver.Solve(m)
     elapsed = time.monotonic() - t0
     name = solver.StatusName(status)
+    # FEASIBLE / UNKNOWN both mean "the search stopped at the limit". FEASIBLE
+    # has a best-so-far; UNKNOWN found nothing before the budget. Name either
+    # explicitly — never crash, never pretend it was proved infeasible.
+    timed_out = status in (cp_model.FEASIBLE, cp_model.UNKNOWN)
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        if status == cp_model.UNKNOWN:
+            return {"status": "infeasible",
+                    "reason": (f"het gio {elapsed:.2f}s truoc khi tim duoc "
+                               f"nghiem ({name})"),
+                    "elapsed_s": round(elapsed, 3), "itinerary": None,
+                    "timed_out": True,
+                    "warnings": [f"CP_SAT_TIMEOUT_NO_SOLUTION: khong tim "
+                                 f"duoc nghiem trong {float(timeout_s):.2f}s"]}
         return {"status": "infeasible", "reason": f"solver {name}",
                 "elapsed_s": round(elapsed, 3), "itinerary": None}
     def _take() -> tuple[list[int], list[dict]]:
@@ -932,24 +959,38 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 for i in order]
         return order, acts
 
-    order, acts = _take()
+    try:
+        order, acts = _take()
+    except (StopIteration, ValueError) as exc:  # defensive: never crash
+        return {"status": "infeasible",
+                "reason": f"khong doc duoc nghiem CP-SAT: {exc}",
+                "elapsed_s": round(elapsed, 3), "itinerary": None}
     objective = solver.ObjectiveValue()
-    return {"status": "optimal" if status == cp_model.OPTIMAL else "feasible-timeout",
-            "elapsed_s": round(elapsed, 3),
-            "itinerary": {"activities": acts,
-                          "total_score": round(sum(sco[i] for i in order), 3),
-                          "total_min": (int(solver.Value(t[order[-1]]))
-                                        + dur[order[-1]] - trip.start_min) if order else 0},
-            "objective": objective,
-            "pool": [{"activities": acts, "objective": round(objective, 3),
-                      "poi_ids": [a["poi_id"] for a in acts]}],
-            "pool_stats": {"requested": max(1, int(solution_pool)), "found": 1,
-                           "band": float(pool_band),
-                           "best_objective": round(objective, 3),
-                           "floor_objective": round(objective, 3),
-                           "best_status": ("optimal" if status == cp_model.OPTIMAL
-                                           else "feasible-timeout"),
-                           "elapsed_s": 0.0}}
+    result = {"status": ("optimal" if status == cp_model.OPTIMAL
+                         else "feasible-timeout"),
+              "elapsed_s": round(elapsed, 3),
+              "itinerary": {"activities": acts,
+                            "total_score": round(sum(sco[i] for i in order), 3),
+                            "total_min": (int(solver.Value(t[order[-1]]))
+                                          + dur[order[-1]] - trip.start_min) if order else 0},
+              "objective": objective,
+              "pool": [{"activities": acts, "objective": round(objective, 3),
+                        "poi_ids": [a["poi_id"] for a in acts]}],
+              "pool_stats": {"requested": max(1, int(solution_pool)), "found": 1,
+                             "band": float(pool_band),
+                             "best_objective": round(objective, 3),
+                             "floor_objective": round(objective, 3),
+                             "best_status": ("optimal" if status == cp_model.OPTIMAL
+                                             else "feasible-timeout"),
+                             "elapsed_s": 0.0}}
+    if timed_out:
+        # Best-so-far is returned, but the caller must be able to tell that the
+        # search was cut off rather than optimised to completion.
+        result["timed_out"] = True
+        result["warnings"] = [
+            f"CP_SAT_TIMEOUT: dung sau {elapsed:.2f}s (gioi han "
+            f"{float(timeout_s):.2f}s) - tra nghiem tot nhat"]
+    return result
 
 
 def _pool_search(pois: list[StubPOI], travel: dict, trip: StubTrip,

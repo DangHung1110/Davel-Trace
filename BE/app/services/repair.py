@@ -32,8 +32,15 @@ from collections import Counter
 
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
-from BE.app.services.common import in_range, status_map, to_min, total_fee
+from BE.app.services.common import (
+    effective_fee,
+    in_range,
+    status_map,
+    to_min,
+    total_fee,
+)
 from BE.app.services.gate import SOFT_CHECKS, check_f1
+from BE.app.services.profile_filter import _match_terms, fold
 from BE.app.services.soft_rules import (
     RESTAURANT_PAIR_MAX_GAP,
     is_food,
@@ -95,18 +102,21 @@ def _named_target(issue: dict, acts: list[dict], pois: dict,
                   ranks: dict) -> dict | None:
     """Lowest-ranked activity whose POI/type/category the issue mentions."""
     text = f"{issue.get('issue', '')} {issue.get('suggestion', '')}".lower()
+    folded = fold(text)
     by_rank = sorted(acts, key=lambda a: ranks.get(a.get("poi_id"), 0.0))
     for act in by_rank:
         name = str(pois.get(act.get("poi_id"), {}).get("name") or "").strip().lower()
-        if name and name in text:
+        # Whole-name match (B3): "Bãi Đá" must not be picked out of
+        # "bãi đáy..." and a category word must be a word, not a fragment.
+        if name and _match_terms((name,), text, folded) is not None:
             return act
     for act in by_rank:
         poi = pois.get(act.get("poi_id"), {})
         cat = poi_category(poi)
-        if cat and cat in text:
+        if cat and _match_terms((cat,), text, folded) is not None:
             return act
         kind = str(poi.get("type") or "").strip().lower()
-        if kind and kind in text:
+        if kind and _match_terms((kind,), text, folded) is not None:
             return act
     # Token overlap (e.g. "ăn chay" -> "Nhà hàng chay ..."): ignore generic
     # venue words so "nhà hàng"/"quán" never match every food POI.
@@ -175,7 +185,9 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
     prev = acts[index - 1]["poi_id"] if index > 0 else None
     nxt = acts[index + 1]["poi_id"] if index + 1 < len(acts) else None
     budget = int(trip.get("budget", 0))
-    other_fee = sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
+    # B5: BCS is computed from effective fees, so the pre-filter must use the
+    # same money (an unknown price contributes 0 here and never blocks).
+    other_fee = sum(effective_fee(pois.get(a.get("poi_id"))) or 0
                     for i, a in enumerate(acts) if i != index)
     out = []
     for poi in pool:
@@ -195,7 +207,7 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
             continue
         if nxt and not matrix.get(f"{pid}->{nxt}"):
             continue
-        if budget and other_fee + int(poi.get("fee", 0) or 0) > budget:
+        if budget and other_fee + (effective_fee(poi) or 0) > budget:
             continue
         out.append({"score": rank_svc.score_poi(poi, user, ctx)["score"],
                     "poi": poi})

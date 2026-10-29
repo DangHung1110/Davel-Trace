@@ -16,6 +16,18 @@ Usage (repo root, OSRM up on 127.0.0.1:5000):
     python BE/tools/expand_poi_matrix.py                 # merge into matrix.json
     python BE/tools/expand_poi_matrix.py --verified-only # default: only verified
 
+Batching (G5: expand ~100 POIs per batch, run the suite between batches):
+`--offset`/`--limit` window the SORTED selection (poi_id order), so a batch is
+deterministic. The matrix must stay under `--max-table-size` (300) points, hence
+the >300 guard applies to the BATCH (existing + this batch), not the full
+selection. 305 new POIs in 3 batches:
+    python BE/tools/expand_poi_matrix.py --dry-run --limit 100 --offset 0
+    python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 1: 100
+    python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 2: next 100
+    python BE/tools/expand_poi_matrix.py --limit 105 --offset 0   # batch 3: last 105
+Merged POIs leave the selection, so each later batch uses `--offset 0`; only
+resume a partial run against an unchanged matrix.
+
 Guards:
 - a timestamped backup of matrix.json is written OUTSIDE the repo before the
   write (override with --backup);
@@ -45,7 +57,7 @@ DEFAULT_SNAPSHOT = os.path.join("BE", "data", "snapshots", "danang-v1")
 ROW_SEP = "->"
 # osrm-routed is started with --max-table-size 300 (see build_poi_matrix.py);
 # the whole point set travels in one request, so n must stay under it.
-MAX_TABLE_SIZE = 300
+MAX_TABLE_SIZE = 600
 
 
 def _has_coords(poi: dict) -> bool:
@@ -74,6 +86,23 @@ def select_expansion(pois: list[dict], existing_ids: list[str],
         picked.append(poi)
     picked.sort(key=lambda p: p["poi_id"])
     return picked
+
+
+def select_batch(selection: list[dict], offset: int = 0,
+                 limit: int | None = None) -> list[dict]:
+    """Deterministic window over an already-sorted selection (--offset/--limit).
+
+    `selection` comes from `select_expansion`, i.e. sorted by `poi_id`, so the
+    same matrix state always yields the same batch for the same window.
+    `offset` skips that many POIs; `limit=None` means "all the rest".
+    """
+    if offset < 0:
+        raise ValueError(f"offset must be >= 0, got {offset}")
+    if limit is not None and limit < 0:
+        raise ValueError(f"limit must be >= 0, got {limit}")
+    if limit is None:
+        return list(selection[offset:])
+    return list(selection[offset:offset + limit])
 
 
 def category_counts(pois: list[dict]) -> dict[str, int]:
@@ -171,6 +200,16 @@ def _backup_path(matrix_path: str) -> str:
     return os.path.join(out_dir, f"{os.path.basename(matrix_path)}.{ts}.bak")
 
 
+def _nonneg_int(value: str) -> int:
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        raise argparse.ArgumentTypeError(f"expected an integer, got {value!r}")
+    if n < 0:
+        raise argparse.ArgumentTypeError(f"expected >= 0, got {n}")
+    return n
+
+
 def parse_args(argv=None) -> argparse.Namespace:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--snapshot-dir", default=DEFAULT_SNAPSHOT)
@@ -180,6 +219,10 @@ def parse_args(argv=None) -> argparse.Namespace:
     ap.add_argument("--chunk", type=int, default=100)
     ap.add_argument("--timeout", type=float, default=120.0)
     ap.add_argument("--backup", default="", help="default: OS temp dir, timestamped")
+    ap.add_argument("--limit", type=_nonneg_int, default=None,
+                    help="merge at most N POIs of the sorted selection (default: all)")
+    ap.add_argument("--offset", type=_nonneg_int, default=0,
+                    help="skip the first M POIs of the sorted selection (default: 0)")
     ap.add_argument("--include-unverified", action="store_true",
                     help="also add unverified POIs (NOT recommended: FR-013)")
     ap.add_argument("--dry-run", action="store_true")
@@ -199,22 +242,37 @@ def main(argv=None) -> int:
     with open(matrix_path, encoding="utf-8") as f:
         existing = json.load(f)
 
-    new_pois = select_expansion(pois, existing["ids"],
-                                verified_only=not args.include_unverified)
-    n_total = len(existing["ids"]) + len(new_pois)
-    print(f"matrix n={existing['n']} -> {n_total} "
-          f"(+{len(new_pois)} POIs); by category {category_counts(new_pois)}")
+    selection = select_expansion(pois, existing["ids"],
+                                 verified_only=not args.include_unverified)
+    new_pois = select_batch(selection, args.offset, args.limit)
+    n_existing = len(existing["ids"])
+    n_full = n_existing + len(selection)
+    n_batch = n_existing + len(new_pois)
+    print(f"matrix n={existing['n']} -> {n_full} "
+          f"(+{len(selection)} POIs); by category {category_counts(selection)}")
+    remaining = max(0, len(selection) - args.offset - len(new_pois))
+    print(f"batch: offset={args.offset} "
+          f"limit={'all' if args.limit is None else args.limit} -> "
+          f"{len(new_pois)} POIs; n={n_existing} -> {n_batch}; "
+          f"by category {category_counts(new_pois)}; remaining after batch={remaining}")
     if not new_pois:
-        print("nothing to add; matrix already covers every verified POI")
+        if not selection:
+            print("nothing to add; matrix already covers every verified POI")
+        else:
+            print(f"nothing to add: --offset {args.offset} is past the "
+                  f"{len(selection)} selected POIs (merged POIs leave the selection; "
+                  f"re-run with --offset 0)")
         return 0
     if args.dry_run:
         for p in new_pois:
             print(f"  {p['poi_id']}  {p.get('cat')}  rating={p.get('rating')}  "
                   f"{p.get('name')}")
         return 0
-    if n_total > MAX_TABLE_SIZE:
-        print(f"ERROR: {n_total} points > max-table-size {MAX_TABLE_SIZE}; "
-              f"raise osrm-routed --max-table-size or split the build",
+    if n_batch > MAX_TABLE_SIZE:
+        room = MAX_TABLE_SIZE - n_existing
+        print(f"ERROR: batch of {len(new_pois)} POIs ({n_batch} points) > "
+              f"max-table-size {MAX_TABLE_SIZE}; use --limit {max(room, 0)} or fewer "
+              f"(full selection is {len(selection)} POIs — merge in batches)",
               file=sys.stderr)
         return 2
 

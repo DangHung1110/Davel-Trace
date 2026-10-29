@@ -112,6 +112,55 @@ function softSummary(soft){
   return Object.entries(soft).map(([k, v]) => k + " " + v).join(" · ");
 }
 
+// B5: "giá chưa xác minh" is an uncertainty label, never "miễn phí".
+function priceLabel(plan){
+  const unknown = (plan && plan.price_uncertainty) || [];
+  const cost = Number((plan && plan.total_cost) || 0).toLocaleString("vi-VN");
+  return unknown.length ? cost + " (+" + unknown.length + " điểm chưa rõ giá)" : cost;
+}
+
+// B4/FR-013/FR-024: unverified POIs + per-POI exclusion reasons from response.
+const NV_LIMIT = 40;
+
+function div(text, cls){
+  const el = document.createElement("div");
+  if(cls) el.className = cls;
+  el.textContent = text;
+  return el;
+}
+
+function renderVerification(json, box){
+  const nv = json.needs_verification || [];
+  const ex = json.excluded || [];
+  const sec = document.createElement("div");
+  sec.className = "review";
+  const h = document.createElement("h4");
+  h.textContent = "Cần xác minh — " + nv.length + " POI (không vào lịch chính)";
+  sec.appendChild(h);
+  if(!nv.length) sec.appendChild(div("(không có POI nào cần xác minh)", "ok"));
+  for(const n of nv.slice(0, NV_LIMIT)){
+    const line = (n.must_visit ? "[MUST-VISIT] " : "") + (n.name || n.poi_id)
+      + " — " + ((n.reasons || []).join("; ") || "chua xac minh");
+    sec.appendChild(div(line + ((n.uncertainty || []).length
+      ? " · chưa rõ: " + n.uncertainty.join(", ") : ""), n.must_visit ? "warn" : ""));
+  }
+  if(nv.length > NV_LIMIT){
+    sec.appendChild(div("... và " + (nv.length - NV_LIMIT) + " điểm khác"));
+  }
+  const h2 = document.createElement("h4");
+  h2.textContent = "Bị loại — " + ex.length + " POI (kèm lý do)";
+  sec.appendChild(h2);
+  if(!ex.length) sec.appendChild(div("(không có)", "ok"));
+  for(const e of ex.slice(0, NV_LIMIT)){
+    sec.appendChild(div((e.name || e.poi_id) + " — " + (e.reason || "?")));
+  }
+  if(ex.length > NV_LIMIT){
+    sec.appendChild(div("... và " + (ex.length - NV_LIMIT) + " điểm khác"));
+  }
+  box.appendChild(sec);
+  return sec;
+}
+
 async function evaluatePlan(plan, trip){
   try{
     const {json} = await call("/v1/evaluate", {itinerary: plan, trip});
@@ -263,7 +312,8 @@ async function renderPlans(plans, trip){
     tr.appendChild(cell(plan.profile || "?"));
     tr.appendChild(cell(String((plan.activities || []).length)));
     tr.appendChild(cell(String(plan.total_km != null ? plan.total_km : "?")));
-    tr.appendChild(cell(Number(plan.total_cost || 0).toLocaleString("vi-VN")));
+    tr.appendChild(cell(priceLabel(plan),
+                        (plan.price_uncertainty || []).length ? "warn" : ""));
     tr.appendChild(cell(gate.passed === true ? "✔ đạt" : "✘ hỏng",
                         gate.passed === true ? "ok" : "err"));
     tr.appendChild(cell((gate.violations || []).join(", ") || "—"));
@@ -326,11 +376,14 @@ async function doItin(profiles){
     if(!json.plans){ el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 2000); return; }
     lastItin = {plans: json.plans, trip};
     await renderPlans(json.plans, trip);
+    renderVerification(json, document.getElementById("itinBox"));
 
     let out = "HTTP " + status + ", " + json.plans.length + " plans\n";
     out += "profile đính kèm: " + (trip.profile ? JSON.stringify(trip.profile) : "(không có)") + "\n";
     for(const p of json.plans){
-      const acts = (p.activities || []).map(a => a.poi_id + " " + a.start + "-" + a.end).join("\n    ");
+      const unknownIds = new Set(((p.price_uncertainty) || []).map(u => u.poi_id));
+      const acts = (p.activities || []).map(a => a.poi_id + " " + a.start + "-" + a.end
+        + (unknownIds.has(a.poi_id) ? " [giá chưa xác minh]" : "")).join("\n    ");
       out += "\n== " + p.profile + " == cost=" + p.total_cost + " km=" + p.total_km
         + " min=" + p.total_min + " pref=" + p.preference + "\n";
       if(p.warnings) out += "  WARNINGS: " + p.warnings.join(" | ") + "\n";
@@ -342,6 +395,8 @@ async function doItin(profiles){
       }
       out += "  activities (" + (p.activities || []).length + "):\n    " + (acts || "(rong)") + "\n";
     }
+    out += "\ncan xac minh: " + (json.needs_verification || []).length
+      + " POI · bi loai: " + (json.excluded || []).length + " POI (xem bang ben tren)";
     el.textContent = out;
   }catch(e){ el.textContent = "LOI: " + e; }
 }

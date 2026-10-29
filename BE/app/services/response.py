@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import time
 
-from BE.app.services.common import status_map, to_min, total_fee
+from BE.app.services.common import effective_fee, status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS
 
 
@@ -42,6 +42,11 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
     ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
                for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
+    # B5: total_cost sums KNOWN effective fees only; every POI whose price is
+    # unknown travels as an uncertainty label (FR-024/FR-026), never as "free".
+    unknown_prices = [{"poi_id": a["poi_id"], "label": "gia chua xac minh"}
+                      for a in acts
+                      if effective_fee(pois.get(a["poi_id"])) is None]
     return {
         "itinerary_id": itinerary_id,
         "trip_id": trip.get("trip_id", "t1"),
@@ -49,6 +54,7 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         "activities": acts,
         "segments": segments,
         "total_cost": total_fee(acts, pois),
+        "price_uncertainty": unknown_prices,
         "total_km": round(total_km, 2),
         "total_min": visit_min + travel_min,
         "travel_min": travel_min,

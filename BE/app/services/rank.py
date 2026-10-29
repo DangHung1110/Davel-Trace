@@ -31,6 +31,7 @@ from __future__ import annotations
 
 from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
+from BE.app.services.common import effective_fee
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
 
 WEIGHTS = {
@@ -107,15 +108,23 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         reasons.append(f"rating cao {rating}")
 
     budget = int(user.get("budget", (ctx.get("trip") or {}).get("budget", 3000000)))
-    fee = int(poi.get("fee", 0))
-    parts["price"] = _clamp(1.0 - fee / budget) if budget > 0 else 0.0
+    # B5: use the KNOWN effective fee (ticket_vnd -> price_band midpoint ->
+    # legacy fee). None means "price unknown": it contributes nothing to the
+    # fee-share term (neutral scoring default) and is labelled uncertain —
+    # never "mien phi", which was a false fact on all 742 fee-less POIs
+    # (FR-026). price_level spending-fit below is unchanged.
+    fee = effective_fee(poi)
+    parts["price"] = _clamp(1.0 - (fee or 0) / budget) if budget > 0 else 0.0
     # Onboarding spending level: align the POI price band with what the party
     # wants to spend (1 budget / 2 mid / 3 high). No price_level -> fee only.
     level = poi.get("price_level")
     if level is not None:
         gap = abs(_int(level, 2) - _int(user.get("spending_level"), 2))
         parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
-    if fee == 0:
+    if fee is None:
+        reasons.append("gia chua xac minh")
+    elif fee == 0:
+        # Only an explicit ticket_vnd = 0 reaches this branch (verified free).
         reasons.append("mien phi")
 
     fitness = int(user.get("fitness", 2))

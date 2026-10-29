@@ -14,20 +14,33 @@ Rules:
 - must_visit + verified -> candidates (violations flagged).
 - must_visit + unverified -> needs_verification (flagged, NOT main plan).
 - other unverified -> needs_verification (reason "chua xac minh").
-- type/budget/hours filters apply to candidates as before.
+- type/budget/hours filters apply to candidates as before; the type match
+  compares the canonical English category (`soft_rules.poi_category`) — the
+  snapshot `type` is a free Vietnamese label and must never be compared with
+  the English keys of `ACTIVITY_TYPE_MAP`.
 """
 
 from __future__ import annotations
 
-from BE.app.services import to_min
+from BE.app.services import soft_rules, to_min
+from BE.app.services.common import effective_fee
+from BE.app.services.profile_filter import _match_terms, fold
 from BE.common import load_json
 
+# User activity keyword -> canonical English category (soft_rules.poi_category).
+# Keys are matched as WHOLE words/phrases (B3: a bare substring let "ăn" hit
+# "văn hóa" and "cầu" hit "yêu cầu"); values are canonical categories so the
+# type filter compares English to English and never a Vietnamese `type`
+# against an English key (B1).
 ACTIVITY_TYPE_MAP = {
     "biển": ["beach"], "tắm": ["beach"], "núi": ["nature"], "leo": ["nature"],
     "ăn": ["restaurant"], "mì": ["restaurant"], "quán": ["restaurant", "market"],
     "văn hóa": ["museum"], "bảo tàng": ["museum"], "lịch sử": ["museum"],
     "chợ": ["market"], "mua sắm": ["market"], "check-in": ["landmark"],
-    "cầu": ["landmark"],
+    # Bare "cầu" is too ambiguous in Vietnamese ("yêu cầu", "cầu nguyện"):
+    # bridges are named instead (Cầu Rồng is the landmark, the rest are
+    # attractions in the snapshot).
+    "cầu rồng": ["landmark"], "cầu sông hàn": ["attraction"],
 }
 
 
@@ -56,12 +69,18 @@ def _overlaps(hours: list[str], ws: int, we: int) -> bool:
 
 
 def wanted_types(activities: list[str]) -> set[str]:
+    """Canonical English categories asked for by free-form Vietnamese activities.
+
+    Matching is word-boundary/phrase based (profile_filter semantics), so
+    "văn hóa" never contributes "restaurant" through the substring "ăn".
+    """
     out: set[str] = set()
     for a in activities or []:
-        low = a.lower()
-        for kw, types in ACTIVITY_TYPE_MAP.items():
-            if kw in low:
-                out.update(types)
+        low = str(a or "").lower()
+        folded = fold(low)
+        for kw, cats in ACTIVITY_TYPE_MAP.items():
+            if _match_terms((kw,), low, folded) is not None:
+                out.update(cats)
     return out
 
 
@@ -74,7 +93,8 @@ def uncertainty(p: dict) -> list[str]:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
         labels.append("tags chua xac minh")
-    if int(p.get("fee", 0)) == 0 and p.get("type") == "restaurant":
+    if (int(p.get("fee", 0)) == 0
+            and soft_rules.poi_category(p) == "restaurant"):
         labels.append("gia chua xac minh")
     return labels
 
@@ -109,10 +129,14 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
             candidates.append({"poi_id": pid, "reasons": reasons,
                                "uncertainty": uncertainty(p)})
             continue
-        if types and p.get("type") not in types:
+        if types and soft_rules.poi_category(p) not in types:
             excluded.append({"poi_id": pid, "reason": "khong khop loai hoat dong"})
             continue
-        if int(p.get("fee", 0)) > budget:
+        # B5: a POI only eats budget when its price is actually KNOWN
+        # (ticket_vnd -> price_band midpoint -> legacy fee). Unknown price is
+        # not "free" (no false fact) but also cannot block on a guess.
+        fee = effective_fee(p)
+        if fee is not None and fee > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
         if not _overlaps(p.get("opening_hours", []), ws, we):

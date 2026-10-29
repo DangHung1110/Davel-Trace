@@ -70,10 +70,52 @@ def parse_hours(hours: list | None) -> tuple[int, int] | None:
     return None
 
 
+# B5 (FULL-AUDIT): money bands -> typical per-person spend. Thresholds mirror
+# `BE/ml/data/price_from_raw.py` `band()` (cheap <100k, medium <=500k,
+# expensive >500k); the midpoint is the "what a visitor actually pays" figure,
+# matching the ingest rule that bands a menu by its midpoint, not its ceiling.
+BAND_MIDPOINT = {"cheap": 100_000, "medium": 300_000, "expensive": 700_000}
+
+
+def effective_fee(poi: dict | None) -> int | None:
+    """Known spend for one POI in VND, or None when the price is unknown.
+
+    Order:
+    1. `ticket_vnd` — web-verified entry ticket, kept verbatim (0 = really free);
+    2. `smart_tags.price_band` — cheap/medium/expensive -> BAND_MIDPOINT;
+    3. a non-zero legacy `fee` — explicit data (fixtures, older snapshots);
+    4. otherwise None = "giá chưa xác minh" (FR-024/FR-026 uncertainty).
+
+    A missing/zero `fee` is UNKNOWN, never "miễn phí": the old `fee = 0`
+    default made all 742 snapshot POIs look free, so the budget filter, the
+    BCS gate and `total_cost` were all vacuous (FULL-AUDIT B5).
+    """
+    if not poi:
+        return None
+    ticket = poi.get("ticket_vnd")
+    if ticket is not None:
+        try:
+            return int(ticket)
+        except (TypeError, ValueError):
+            return None
+    band = (poi.get("smart_tags") or {}).get("price_band")
+    if band in BAND_MIDPOINT:
+        return BAND_MIDPOINT[band]
+    try:
+        fee = int(poi.get("fee") or 0)
+    except (TypeError, ValueError):
+        fee = 0
+    return fee if fee > 0 else None
+
+
 def total_fee(acts: list[dict], pois: dict) -> int:
-    """Sum of POI fees for the activities (unknown POI/fee -> 0)."""
-    return sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
-               for a in acts)
+    """Sum of KNOWN effective fees (unknown price adds 0, never assumed free)."""
+    total = 0
+    for a in acts:
+        fee = effective_fee(pois.get(a.get("poi_id")))
+        if fee is not None:
+            total += fee
+    return total
 
 
 def plan_cost(itinerary: dict, pois: dict) -> int:

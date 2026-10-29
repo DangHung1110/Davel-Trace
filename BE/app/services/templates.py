@@ -34,7 +34,7 @@ required counts relax; the archetype bans and the rest lock stay hard).
 
 from __future__ import annotations
 
-from BE.app.services.profile_filter import fold
+from BE.app.services.profile_filter import _match_terms, fold
 from BE.app.services.soft_rules import (
     FOOD_CATEGORIES,
     LUNCH_REQUIRED,
@@ -159,7 +159,16 @@ def _int(value, default: int = 2) -> int:
 
 
 def _has(text: str, hints: tuple[str, ...]) -> bool:
-    return any(hint in text for hint in hints)
+    """Whole-word hint match (B3): "kid" must not hit "skid", "doi" not "do-it".
+
+    Same semantics as profile_filter's term matcher (ASCII hints on the folded
+    text, Vietnamese hints on the raw one). Party types arrive as free text, so
+    a plain English plural is still accepted ("friends" -> "friend").
+    """
+    folded = fold(text)
+    terms = tuple(t for hint in hints
+                  for t in (hint, hint + "s", hint + "es"))
+    return _match_terms(terms, folded, folded) is not None
 
 
 def select_template(profile: dict | None) -> str:

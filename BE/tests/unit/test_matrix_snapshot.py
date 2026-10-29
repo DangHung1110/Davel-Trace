@@ -65,7 +65,9 @@ class TestMatrixSnapshotArtifact(unittest.TestCase):
                 self.assertEqual(cell, {"km": 0.0, "minutes": 0}, key)
             else:
                 self.assertGreaterEqual(cell["minutes"], 1, key)
-                self.assertGreater(cell["km"], 0.0, key)
+                # km may round to 0.0 for co-located POIs (same block);
+                # minutes >= 1 is the real never-silent-zero guard.
+                self.assertGreaterEqual(cell["km"], 0.0, key)
 
     def test_every_verified_poi_is_routable(self):
         """The expansion exists so verified POIs are never matrix-starved."""
