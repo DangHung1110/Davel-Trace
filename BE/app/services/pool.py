@@ -225,7 +225,8 @@ def enforce_pairwise(plans: list[dict], ceiling: float = MAX_PAIRWISE_JACCARD,
 
     For every pair above the ceiling, the LOWER-QUALITY plan is replaced with
     the next MMR pick from its own solution pool (`_pool_plans`, or lazily
-    built by `refill(plan)`). Replacement candidates are taken in MMR order
+    built by `refill(plan, others)`, where `others` are the plans currently
+    kept beside it). Replacement candidates are taken in MMR order
     (quality first) and the first one that satisfies the ceiling against ALL
     other kept plans wins. A plan that cannot be replaced is kept as the
     best-effort least-similar option and reported (`exhausted`), so the
@@ -256,8 +257,9 @@ def enforce_pairwise(plans: list[dict], ceiling: float = MAX_PAIRWISE_JACCARD,
             idx = max(i, j)  # deterministic tie-break: replace the later one
         alternatives = list(current[idx].get("_pool_plans") or [])
         if refill is not None:
+            others = [current[k] for k in range(len(current)) if k != idx]
             try:
-                alternatives += list(refill(current[idx]) or [])
+                alternatives += list(refill(current[idx], others) or [])
             except Exception:  # noqa: BLE001 - never lose the whole response
                 alternatives = alternatives
         ordered = _mmr_candidates(alternatives)

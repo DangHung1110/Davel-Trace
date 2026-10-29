@@ -152,8 +152,10 @@ class TestItineraryContract(unittest.TestCase):
             itinerary_mod._get_plan_builder = lambda: build_plan
             r = client.post("/v1/itinerary", json={"trip": TRIP})
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles,
-                             ["savings", "balanced", "experience"])
+            # Profiles solve in parallel: build order is free, the
+            # response order is not.
+            self.assertCountEqual(built_profiles,
+                                  ["savings", "balanced", "experience"])
             plans = r.json()["plans"]
             self.assertEqual([p["profile"] for p in plans],
                              ["savings", "balanced", "experience"])
@@ -183,7 +185,7 @@ class TestItineraryContract(unittest.TestCase):
                 "profiles": requested_profiles,
             })
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles, requested_profiles)
+            self.assertCountEqual(built_profiles, requested_profiles)
             plans = r.json()["plans"]
             self.assertEqual([plan["profile"] for plan in plans], requested_profiles)
             self.assertEqual(len(plans), len(requested_profiles))

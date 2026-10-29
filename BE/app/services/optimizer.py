@@ -56,6 +56,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
+from fractions import Fraction
 
 from BE.app.services.common import hh, parse_hours, to_min
 from BE.app.services.soft_rules import (
@@ -462,6 +463,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              pool_band: float = POOL_DEFAULT_BAND,
              pool_timeout_s: float | None = None,
              forbidden_sets: list[frozenset[str]] | None = None,
+             distinct_from: list[frozenset[str]] | None = None,
+             distinct_ceiling: float = 0.6,
              deterministic_time: float | None = None) -> dict:
     """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
 
@@ -527,6 +530,11 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     a POI set that must NOT be visited again: one nogood
     `sum(visit) <= |S|-1` per set, built into a FRESH model, never bolted onto
     a solved one.
+    distinct_from/distinct_ceiling: cross-option guarantee (router refill).
+    The returned POI set A must satisfy Jaccard(A, S) <= `distinct_ceiling`
+    for every S, i.e. |A&S| <= J*(|A|+|S|-|A&S|), which is LINEAR in the visit
+    booleans: (q+p)*|A&S| <= p*(|A|+|S|) with J = p/q exact. One solve
+    replaces enumerating a pool and hoping a member clears the ceiling.
     deterministic_time: optional deterministic search budget (OR-Tools work
     units, single-worker). The T053 eval harness uses it instead of the plain
     wall clock so a published comparison is byte-reproducible: a wall-clock
@@ -560,7 +568,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         lunch_required=lunch_required,
                         state_bands=state_bands, state_score=state_score,
                         category_cap=category_cap, state_weight=state_weight,
-                        diversity_weight=diversity_weight))
+                        diversity_weight=diversity_weight,
+                        distinct_from=distinct_from,
+                        distinct_ceiling=distinct_ceiling))
 
     overhead = STOP_OVERHEAD_MIN if overhead_min is None else int(overhead_min)
     ids = [p.poi_id for p in pois]
@@ -692,6 +702,18 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         nodes = [node[pid] for pid in forbidden if pid in node]
         if len(nodes) == len(forbidden) and nodes:
             m.Add(sum(visit[i] for i in nodes) <= len(nodes) - 1)
+
+    # Cross-option Jaccard ceiling (see docstring): a POI of S outside this
+    # candidate list can never be shared, it only grows the union.
+    if distinct_from:
+        ceiling = Fraction(distinct_ceiling).limit_denominator(100)
+        p, q = ceiling.numerator, ceiling.denominator
+        visited = sum(visit[i] for i in range(1, n + 1))
+        for other in distinct_from:
+            nodes = [node[pid] for pid in other if pid in node]
+            if nodes:
+                m.Add((q + p) * sum(visit[i] for i in nodes)
+                      <= p * (visited + len(other)))
 
     # gate NO_CONSECUTIVE (HARD): no arc between two same-category POIs.
     if no_consecutive:

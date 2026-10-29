@@ -100,6 +100,17 @@ DIVERSITY_WEIGHT_BY_PROFILE = {
     "experience": 2.5,
 }
 
+# Solver candidate cap (Phase 2). CP-SAT finds no first solution inside the
+# 5 s budget at ~190 nodes (4 workers, parallel profiles), so every ladder
+# rung times out and a request takes ~50 s. Measured on 193 verified POIs,
+# 7 scenarios: uncapped max 51.5 s, 1 failed plan, utility 0.905; K=60/80/
+# 100/120 all 0 failed, 18/18 wishes met, utility 0.953-0.963, max 5.4-6.4 s.
+# 80 leaves room for score-driven picks once the category floor fills up.
+# Each profile keeps its OWN best candidates (savings keeps the cheap ones),
+# with a per-category floor so a wished/required category never disappears.
+MAX_SOLVER_CANDIDATES = 80
+CANDIDATE_FLOOR_PER_CATEGORY = 3
+
 # Additive taste bonus for onboarding food prefs, as a fraction of the TOP POI
 # score in the candidate pool (so savings ~0.5 and balanced ~5 keep the same
 # meaning; one knob stays one knob). Applied to the optimizer node score, not
@@ -435,6 +446,33 @@ def _gate_view(p: dict) -> dict:
     return view
 
 
+def _cap_candidates(candidates: list[dict], score, must: list[str],
+                    limit: int = MAX_SOLVER_CANDIDATES,
+                    floor: int = CANDIDATE_FLOOR_PER_CATEGORY) -> list[dict]:
+    """Stratified top-K for the solver, in the incoming (rank) order.
+
+    Kept: every must_visit, the `floor` best of every category (so a wished
+    beach or the lunch restaurants survive), then the best by `score` up to
+    `limit`. A pool at or under the limit is returned unchanged.
+    """
+    if len(candidates) <= limit:
+        return candidates
+    best = sorted(candidates, key=lambda p: -score(p))
+    must_ids = set(must)
+    kept = {p["poi_id"] for p in candidates if p["poi_id"] in must_ids}
+    per_cat: Counter = Counter()
+    for poi in best:
+        cat = soft_rules.poi_category(poi)
+        if per_cat[cat] < floor:
+            per_cat[cat] += 1
+            kept.add(poi["poi_id"])
+    for poi in best:
+        if len(kept) >= limit:
+            break
+        kept.add(poi["poi_id"])
+    return [p for p in candidates if p["poi_id"] in kept]
+
+
 def _travel_from_cells(cells: dict, ids: list[str]) -> dict:
     """T061a: matrix cells -> {(a,b): minutes}; a missing cell stays ABSENT (B3)."""
     travel = {}
@@ -455,7 +493,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                pool_band: float = POOL_DEFAULT_BAND,
                pool_timeout_s: float | None = None,
                timeout_s: float | None = None,
-               deterministic_time: float | None = None) -> dict:
+               deterministic_time: float | None = None,
+               distinct_from: list[frozenset[str]] | None = None,
+               max_rung: int | None = None) -> dict:
     """T020/T032 router seam: one profile -> one real plan dict.
 
     Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
@@ -502,6 +542,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     - `timeout_s` / `deterministic_time` are forwarded to CP-SAT. The eval
       harness passes a deterministic budget so a published comparison is
       reproducible; the endpoint keeps the wall-clock default.
+    - `distinct_from` (router refill): every returned day must keep POI-set
+      Jaccard <= pool.MAX_PAIRWISE_JACCARD to each of these sets, as a HARD
+      solver constraint. `max_rung` caps the ladder at the rung the replaced
+      plan used (private `_rung`), so an alternative never drops a wish or a
+      template rule the original kept. No infeasibility diagnosis runs in
+      that mode: the caller only wants a plan or nothing.
 
     The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
     the plan body those fields are attached to. `workers` is forwarded to
@@ -568,6 +614,14 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
         return base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
 
+    capped = _cap_candidates(candidates, _score_with_taste,
+                             list(trip.get("must_visit") or []))
+    if len(capped) < len(candidates):
+        candidates = capped
+        ids = [p["poi_id"] for p in candidates]
+        keep = set(ids)
+        travel = {pair: minutes for pair, minutes in travel.items()
+                  if pair[0] in keep and pair[1] in keep}
     stubs = stubs_from_pois(candidates, trip, _score_with_taste,
                             deadline=_deadline(trip))
     q = _profile_edges(prof, scorer.edge_scores(ids, pois_by_id, ctx=ctx),
@@ -589,12 +643,19 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # Ladder: full template -> drop pace/required counts -> drop max too.
     out: dict = {"itinerary": None, "reason": "khong co ung vien"}
     relaxed_step = 0
+    rung_used = None
     solver_opts = {}
     if timeout_s is not None:
         solver_opts["timeout_s"] = float(timeout_s)
     if deterministic_time is not None:
         solver_opts["deterministic_time"] = float(deterministic_time)
-    for step, limits_try in _ladder(limits, act_groups):
+    if distinct_from:
+        solver_opts["distinct_from"] = list(distinct_from)
+        solver_opts["distinct_ceiling"] = pool_svc.MAX_PAIRWISE_JACCARD
+    rungs = _ladder(limits, act_groups)
+    if max_rung is not None:
+        rungs = rungs[:max_rung + 1]
+    for rung, (step, limits_try) in enumerate(rungs):
         out = optimize(stubs, travel, _to_trip(trip, origin_id=None),
                        edge_scores=q, workers=workers, must_visit=must,
                        min_stops=limits_try["min_stops"],
@@ -617,6 +678,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                        **solver_opts)
         if out.get("itinerary") is not None:
             relaxed_step = step
+            rung_used = rung
             break
 
     def _diagnose(base_limits: dict) -> dict | None:
@@ -690,7 +752,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
-    if out.get("itinerary") is None:
+    if rung_used is not None:
+        plan["_rung"] = rung_used
+    if out.get("itinerary") is None and not distinct_from:
         culprit = _diagnose(list(templates.attempts(limits))[-1])
         if culprit:
             plan["infeasible_by"] = culprit

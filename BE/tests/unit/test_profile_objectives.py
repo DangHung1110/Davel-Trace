@@ -185,12 +185,12 @@ class TestJaccardGuarantee(unittest.TestCase):
         b = _plan("b", ["1", "2", "3", "4", "z"], 0.4)
         c = _plan("c", ["m", "n", "o", "p", "q"], 0.8)
 
-        def refill(plan):
-            calls.append(plan["profile"])
+        def refill(plan, others):
+            calls.append((plan["profile"], [o["profile"] for o in others]))
             return [_plan("b", ["6", "7", "8", "9", "y"], 0.7)]
 
         out, report = pool_svc.enforce_pairwise([a, b, c], refill=refill)
-        self.assertEqual(calls, ["b"])
+        self.assertEqual(calls, [("b", ["a", "c"])])
         self.assertTrue(report["satisfied"], report)
         self.assertIn("y", {act["poi_id"] for act in out[1]["activities"]})
 

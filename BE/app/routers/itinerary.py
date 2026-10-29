@@ -25,8 +25,14 @@ USER DECISION (default contract): `profiles` may be omitted, in which case the
 three structural objectives (savings/balanced/experience) are returned. In
 BOTH modes the final plans are checked pairwise: a pair whose POI-set Jaccard
 exceeds `pool.MAX_PAIRWISE_JACCARD` (0.6) loses its lower-quality plan, which
-is replaced by the next MMR pick from its own solution pool. The distances and
-replacement evidence travel in `solution_pool`.
+is re-solved ONCE with that ceiling as a hard constraint against the plans it
+must differ from. The distances and replacement evidence travel in
+`solution_pool`.
+
+Latency (Phase 2): the profiles are independent CP-SAT solves that release
+the GIL, so they run in parallel, each on its share of the CPU cores. On the
+742-POI snapshot that is p50 ~5.3 s instead of ~15.5 s for three profiles, at
+an objective within the run-to-run noise of the sequential search.
 """
 
 from __future__ import annotations
@@ -34,6 +40,7 @@ from __future__ import annotations
 import importlib
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from uuid import uuid4
 
 from fastapi import APIRouter
@@ -66,14 +73,11 @@ MAX_NEEDS_VERIFICATION = 20
 DIVERSE_POOL = 8
 DIVERSE_K = 3
 
-# On-demand replacement pool for the cross-option Jaccard guarantee. Only a
-# conflicting profile pays for enumeration; 5 members is enough to find a
-# genuinely different day without spending the full 25 s default budget.
-ALT_POOL = 5
-# The first pool solve can consume the profile's wall-clock budget, so give the
-# enumeration room for 2-3 nogood re-solves (each capped at 5 s internally).
-ALT_POOL_TIMEOUT_S = 15.0
-ALT_FIRST_SOLVE_S = 3.0
+# Cross-option Jaccard guarantee: a conflicting profile is re-solved once with
+# the ceiling as a hard constraint (the old 5-member pool enumeration took
+# ~18 s). Measured on the 742-POI snapshot, 24 constrained re-solves: 2 s and
+# 3 s give the same mean utility (0.928 vs 0.927), all passing, so 2 s.
+DISTINCT_SOLVE_S = 2.0
 
 
 class ItineraryIn(BaseModel):
@@ -95,6 +99,17 @@ def _get_plan_builder():
         raise
     builder = getattr(profiles_svc, "build_plan", None)
     return builder if callable(builder) else None
+
+
+def _solver_workers(n_profiles: int) -> int:
+    """CP-SAT workers per profile when `n_profiles` solve at once.
+
+    0 keeps the solver default (all cores) for a single solve; parallel solves
+    split the cores instead of oversubscribing them 3x.
+    """
+    if n_profiles <= 1:
+        return 0
+    return max(1, (os.cpu_count() or 1) // n_profiles)
 
 
 def _load_cells(snapshot_dir: str) -> dict:
@@ -248,33 +263,42 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         return plan
 
     def build_one(profile_name: str, pool_size: int = 1,
-                  pool_timeout_s: float | None = None,
-                  timeout_s: float | None = None) -> dict:
+                  timeout_s: float | None = None, workers: int = 0,
+                  **extra) -> dict:
         plan = dict(builder(profile=profile_name, trip=trip, ranked=ranked,
                             pois_by_id=allowed_by_id, cells=cells,
                             template=tpl_name,
                             ctx=ctx, pool_size=pool_size,
-                            pool_timeout_s=pool_timeout_s,
-                            timeout_s=timeout_s))
+                            timeout_s=timeout_s, workers=workers, **extra))
         plan["profile"] = profile_name
         return plan
 
-    raw = [build_one(name,
-                     DIVERSE_POOL if diverse and index == 0 else 1)
-           for index, name in enumerate(body.profiles)]
+    # Independent solves -> parallel; `map` keeps the requested order.
+    workers = _solver_workers(len(body.profiles))
+    jobs = [(name, DIVERSE_POOL if diverse and index == 0 else 1)
+            for index, name in enumerate(body.profiles)]
+    with ThreadPoolExecutor(max_workers=max(1, len(jobs))) as executor:
+        raw = list(executor.map(
+            lambda job: build_one(job[0], job[1], workers=workers), jobs))
 
-    def refill(plan: dict) -> list[dict]:
-        """Lazily enumerate this profile's solution pool for a replacement.
+    def refill(plan: dict, others: list[dict]) -> list[dict]:
+        """Re-solve this profile with Jaccard <= ceiling to every kept plan.
 
-        Only called when a pair exceeds the Jaccard ceiling, so the common
-        case does not pay for 3x enumeration.
+        Only called when a pair exceeds the ceiling. The ladder stops at the
+        rung the replaced plan used, so the alternative keeps every wish and
+        template rule the original kept; no plan (or a failing one) means
+        "no alternative" and the guarantee reports the pair as exhausted.
         """
         profile_name = plan.get("profile")
-        if profile_name not in body.profiles:
+        if profile_name not in body.profiles or plan.get("_rung") is None:
             return []
-        fresh = build_one(profile_name, ALT_POOL, ALT_POOL_TIMEOUT_S,
-                          timeout_s=ALT_FIRST_SOLVE_S)
-        return [dict(alt) for alt in (fresh.get("_pool_plans") or [])]
+        fresh = build_one(
+            profile_name, timeout_s=DISTINCT_SOLVE_S,
+            distinct_from=[frozenset(pool_svc.poi_set(o)) for o in others],
+            max_rung=plan["_rung"])
+        if not fresh.get("activities") or not fresh.get("passed"):
+            return []
+        return [fresh]
 
     guarantee = None
     pool_stats = None
@@ -305,7 +329,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         # ceiling; replace the loser from the same merged pool.
         picked, guarantee = pool_svc.enforce_pairwise(
             picked, pool_svc.MAX_PAIRWISE_JACCARD,
-            refill=lambda _plan: merged)
+            refill=lambda _plan, _others: merged)
         first_stats = (raw[0].get("solution_pool") or {}) if raw else {}
         pool_stats = pool_svc.pool_report(
             {"found": len(merged), "in_band": len(merged),
