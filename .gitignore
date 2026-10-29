@@ -9,12 +9,20 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+BE/.pytest_*/
+BE/data/*.db
+BE/data/*.db-*
 
 # Frontend (future BE/FE split)
 node_modules/
 dist/
 build/
 .next/
+.flutter-sdk/
+FE/.dart_tool/
+FE/.flutter-plugins
+FE/.flutter-plugins-dependencies
+FE/.packages
 
 # Logs & OS
 *.log

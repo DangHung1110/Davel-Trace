@@ -16,6 +16,10 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`
 
+Stable-planning addendum: client mới gửi thêm `idempotency_key` để nhận
+acceptance summary; client cũ giữ nguyên response trên nhưng server vẫn lưu
+accepted-plan evidence. Xem `specs/003-stable-planning-roadmap/contracts/api.md`.
+
 ## POST /replan — disruption → new version
 - In: `{ "itinerary_id": "...", "event": {DynamicEvent} }`
 - Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...] }`
