@@ -1,14 +1,28 @@
-"""Build the OSRM travel-time matrix for the top-N snapshot POIs (T010b, lane B).
+"""Build the OSRM travel-time matrix for snapshot POIs (T010b, lane B; Phase 3).
 
-Pulls `https://download.geofabrik.de/asia/vietnam-latest.osm.pbf`, preprocesses
-it with osrm-extract/partition/customize (MLD — see docker note below), then
-queries the local osrm-routed `/table` service and writes `matrix.json` next to
+Queries a local osrm-routed `/table` service and writes `matrix.json` next to
 the snapshot's `pois.json` (the location `MatrixService` loads from).
 
-Usage (repo root; server up — never commit OSRM data, see .gitignore):
+Phase 3 (motorbike, every POI at once):
+    BE/tools/osrm/build_osrm.sh <data_dir>                   # graph + osrm-meta.json
+    docker run ... osrm-routed --max-table-size 1000 ...     # printed by the script
+    python BE/tools/build_poi_matrix.py --all \
+        --osrm-meta <data_dir>/osrm-meta.json --osrm-url http://127.0.0.1:5001
+
+Every POI with coordinates is routed (unverified ones too: FAR still keeps
+them out of plans, so verifying a POI later needs no matrix rebuild). The
+file is written in the dense `dense-v1` format (~5 MB for 742 POIs instead of
+~47 MB as `"a->b"` cells); `--format legacy` keeps the old shape. Requests
+are chunked by source so sources x destinations stays within osrm-routed's
+`--max-table-size` squared (OSRM's TooBig rule); pass the server's value via
+`--max-table-size`.
+
+Other usage (repo root; server up — never commit OSRM data, see .gitignore):
     python BE/tools/build_poi_matrix.py                      # top-150 by rating
     python BE/tools/build_poi_matrix.py --top 50 --out tmp/m.json
     python BE/tools/build_poi_matrix.py --dry-run            # selection only
+
+Legacy notes (car profile, kept for reference):
 
 Docker (data dir OUTSIDE the repo, e.g. TMP):
     docker run --rm -v <tmp>:/data osrm/osrm-backend \
@@ -49,6 +63,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__f
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.app.services.matrix import DENSE_FORMAT, dense_document  # noqa: E402
 from BE.app.services.osrm_client import OsrmClient, OsrmTableError  # noqa: E402
 
 DEFAULT_URL = "http://127.0.0.1:5000"
@@ -87,9 +102,30 @@ def select_top(pois: list[dict], top: int) -> list[dict]:
     return picked
 
 
+def select_all(pois: list[dict]) -> list[dict]:
+    """Every POI with coordinates, in snapshot order; ids must be unique."""
+    picked = [p for p in pois
+              if isinstance(p.get("lat"), (int, float))
+              and isinstance(p.get("lon"), (int, float))]
+    ids = [p["poi_id"] for p in picked]
+    if len(set(ids)) != len(ids):
+        raise ValueError("duplicate poi_id in snapshot")
+    return picked
+
+
+def safe_chunk(n: int, max_table_size: int, requested: int) -> int:
+    """Sources per request so sources x n <= max_table_size ** 2 (TooBig)."""
+    limit = max_table_size * max_table_size // max(1, n)
+    if limit < 1:
+        raise ValueError(f"{n} destinations exceed --max-table-size "
+                         f"{max_table_size} even one source at a time")
+    return max(1, min(requested, limit))
+
+
 def build(picked: list[dict], *, client: OsrmClient, snapshot: str,
           seed_fallback: bool = False, osrm_url: str = DEFAULT_URL,
-          pairs_total: int | None = None) -> dict:
+          pairs_total: int | None = None, osrm_meta: dict | None = None,
+          top_by: str = "rating") -> dict:
     """Query OSRM for all pairs and assemble the matrix document (pure)."""
     points = [(p["poi_id"], float(p["lat"]), float(p["lon"])) for p in picked]
     cells, stats = client.table(points)
@@ -120,18 +156,22 @@ def build(picked: list[dict], *, client: OsrmClient, snapshot: str,
             cells_out[f"{a_id}->{b_id}"] = {"km": cell["km"],
                                             "minutes": cell["minutes"]}
 
+    # Only what was actually built is claimed: without --osrm-meta the
+    # profile is unknown (the old file said "motorbike" over a car graph).
+    meta = dict(osrm_meta or {})
     doc = {
         "snapshot": snapshot,
         "ids": [pid for pid, _lat, _lon in points],
         "n": len(points),
-        "top_by": "rating",
-        "mode": "motorbike",
+        "top_by": top_by,
+        "mode": meta.get("mode", "unspecified"),
         "method": "osrm_table_mld",
         "generated_by": "BE/tools/build_poi_matrix.py",
         "source": "mixed" if mixed else "osrm",
         "confidence": "low" if mixed else "high",
         "osrm_base_url": osrm_url,
-        "extract": "vietnam-latest.osm.pbf (Geofabrik), MLD car profile",
+        "extract": meta.get("extract", "unspecified (pass --osrm-meta)"),
+        "osrm": meta,
         "built_at": date.today().isoformat(),
         "coverage": {"pairs_total": total,
                      "cells": len(cells),
@@ -148,15 +188,49 @@ def build(picked: list[dict], *, client: OsrmClient, snapshot: str,
     return doc
 
 
+def write_matrix(path: str, doc: dict, *, dense: bool) -> None:
+    """Write the matrix; dense rows go one per line (readable git diffs)."""
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    if not dense:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(doc, f, ensure_ascii=False, indent=1, sort_keys=False)
+            f.write("\n")
+        return
+    meta = {k: v for k, v in doc.items() if k != "cells"}
+    full = dense_document(doc["ids"], doc["cells"], meta)
+    lines = ["{"]
+    for key, value in full.items():
+        if key in ("minutes", "km"):
+            continue
+        lines.append(f" {json.dumps(key)}: "
+                     f"{json.dumps(value, ensure_ascii=False)},")
+    for key in ("minutes", "km"):
+        rows = [json.dumps(row, separators=(",", ":")) for row in full[key]]
+        lines.append(f' "{key}": [')
+        lines.append(",\n".join(f"  {row}" for row in rows))
+        lines.append(" ]," if key == "minutes" else " ]")
+    lines.append("}")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
 def parse_args(argv=None) -> argparse.Namespace:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--pois", default=os.path.join("BE", "data", "snapshots", "danang-v1", "pois.json"))
     ap.add_argument("--out", default="", help="default: <pois dir>/matrix.json")
     ap.add_argument("--snapshot", default="", help="default: <pois dir> basename")
     ap.add_argument("--top", type=int, default=150)
+    ap.add_argument("--all", action="store_true",
+                    help="every POI with coordinates (Phase 3), ignores --top")
     ap.add_argument("--osrm-url", default=DEFAULT_URL)
+    ap.add_argument("--osrm-meta", default="",
+                    help="osrm-meta.json written by BE/tools/osrm/build_osrm.sh")
     ap.add_argument("--chunk", type=int, default=100,
-                    help="sources per /table request (<= osrm-routed --max-table-size)")
+                    help="max sources per /table request")
+    ap.add_argument("--max-table-size", type=int, default=300,
+                    help="osrm-routed --max-table-size (caps the chunk)")
+    ap.add_argument("--format", choices=("dense", "legacy"), default="dense",
+                    help="dense-v1 (default) or the legacy \"a->b\" cells")
     ap.add_argument("--timeout", type=float, default=60.0)
     ap.add_argument("--seed-fallback", action="store_true",
                     help="fill OSRM holes with labelled haversine seed (B3: last resort)")
@@ -177,17 +251,25 @@ def main(argv=None) -> int:
     out = args.out or os.path.join(pois_dir, "matrix.json")
     with open(args.pois, encoding="utf-8") as f:
         data = json.load(f)
-    picked = select_top(data["pois"], args.top)
-    print(f"selected top-{len(picked)}/{len(data['pois'])} POIs by rating "
-          f"(snapshot {snapshot}) -> {out}")
+    picked = (select_all(data["pois"]) if args.all
+              else select_top(data["pois"], args.top))
+    label = "all" if args.all else f"top-{len(picked)} by rating"
+    print(f"selected {len(picked)}/{len(data['pois'])} POIs ({label}, "
+          f"snapshot {snapshot}) -> {out}")
     if args.dry_run:
         for p in picked:
             print(f"  {p['poi_id']}  rating={p.get('rating')}  {p['name'][:50]}")
         return 0
 
-    client = OsrmClient(args.osrm_url, chunk=args.chunk, timeout_s=args.timeout)
+    meta = {}
+    if args.osrm_meta:
+        with open(args.osrm_meta, encoding="utf-8") as f:
+            meta = json.load(f)
+    chunk = safe_chunk(len(picked), args.max_table_size, args.chunk)
+    client = OsrmClient(args.osrm_url, chunk=chunk, timeout_s=args.timeout)
     doc = build(picked, client=client, snapshot=snapshot, seed_fallback=args.seed_fallback,
-                osrm_url=args.osrm_url)
+                osrm_url=args.osrm_url, osrm_meta=meta,
+                top_by="all" if args.all else "rating")
     cov = doc["coverage"]
     total = cov["pairs_total"]
     if cov["osrm"] == 0:  # nothing came from OSRM: server down / wrong URL
@@ -199,11 +281,13 @@ def main(argv=None) -> int:
               f"(never 0, B3); failed_requests={doc['stats']['failed_requests']} "
               f"failed_shards={doc['stats']['failed_shards']} "
               f"last_error={doc['stats']['last_error']}")
-    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, indent=1, sort_keys=False)
-        f.write("\n")
-    print(f"wrote {out}: n={doc['n']} cells={len(doc['cells'])}/{total} "
+    dense = args.format == "dense" and doc["source"] == "osrm"
+    if args.format == "dense" and not dense:
+        print("NOTE: haversine-filled cells carry a per-cell source; writing the "
+              "legacy format")
+    write_matrix(out, doc, dense=dense)
+    print(f"wrote {out} ({DENSE_FORMAT if dense else 'legacy'}): n={doc['n']} "
+          f"cells={len(doc['cells'])}/{total} "
           f"osrm={cov['osrm']} haversine_seed={cov['haversine_seed']} "
           f"infeasible={cov['infeasible']} -> source={doc['source']}")
     ratio = (total - cov["infeasible"]) / total if total else 0.0

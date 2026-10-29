@@ -158,6 +158,65 @@ class TestMain(unittest.TestCase):
         self.assertFalse(os.path.exists(out))
 
 
+class TestPhase3(unittest.TestCase):
+    """--all, TooBig-safe chunking, honest metadata, dense output."""
+
+    def test_select_all_keeps_snapshot_order_and_needs_coords(self):
+        self.assertEqual([p["poi_id"] for p in bpm.select_all(POIS)],
+                         ["a", "b", "c", "d"])
+        with self.assertRaises(ValueError):
+            bpm.select_all(POIS[:2] + [dict(POIS[0])])
+
+    def test_safe_chunk_matches_osrm_toobig_rule(self):
+        # Measured on osrm-routed v5.27.1 --max-table-size 300 with the 742
+        # POIs: 121 sources OK (89,782 cells), 122 TooBig (90,524 > 300^2).
+        self.assertEqual(bpm.safe_chunk(742, 300, 500), 121)
+        self.assertEqual(bpm.safe_chunk(742, 300, 100), 100)
+        self.assertEqual(bpm.safe_chunk(742, 1000, 742), 742)
+        with self.assertRaises(ValueError):
+            bpm.safe_chunk(100, 5, 10)  # 1 x 100 > 25
+
+    def test_mode_only_claimed_from_osrm_meta(self):
+        picked = bpm.select_top(POIS, 3)
+        bare = bpm.build(picked, client=FakeClient(), snapshot="s")
+        self.assertEqual(bare["mode"], "unspecified")
+        meta = {"mode": "motorbike", "extract": "x.osm.pbf",
+                "profile_sha256": "abc"}
+        doc = bpm.build(picked, client=FakeClient(), snapshot="s",
+                        osrm_meta=meta, top_by="all")
+        self.assertEqual((doc["mode"], doc["extract"], doc["top_by"]),
+                         ("motorbike", "x.osm.pbf", "all"))
+        self.assertEqual(doc["osrm"], meta)
+
+    def test_main_all_writes_dense_and_round_trips(self):
+        tmp = tempfile.mkdtemp(prefix="mx3_")
+        meta_path = os.path.join(tmp, "osrm-meta.json")
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump({"mode": "motorbike"}, f)
+        code, out = TestMain().run_main(
+            FakeClient(holes=[("a", "b")]),
+            extra=("--all", "--osrm-meta", meta_path, "--min-coverage", "0.9"))
+        self.assertEqual(code, 0)
+        with open(out, encoding="utf-8") as f:
+            raw = json.load(f)
+        self.assertEqual(raw["format"], "dense-v1")
+        self.assertEqual(raw["ids"], ["a", "b", "c", "d"])
+        self.assertIsNone(raw["minutes"][0][1])  # hole stays a hole (B3)
+        self.assertEqual(raw["mode"], "motorbike")
+        svc = MatrixService(os.path.dirname(out))
+        self.assertEqual(svc.minutes("a", "c"), (7, "osrm"))
+        self.assertEqual(svc.minutes_or_none("a", "b"), (None, "infeasible"))
+
+    def test_seed_fallback_falls_back_to_legacy_format(self):
+        code, out = TestMain().run_main(
+            FakeClient(holes=[("a", "b")]), extra=("--seed-fallback",))
+        self.assertEqual(code, 0)
+        with open(out, encoding="utf-8") as f:
+            raw = json.load(f)
+        self.assertNotIn("format", raw)
+        self.assertEqual(raw["cells"]["a->b"]["source"], "haversine_seed")
+
+
 class TestSeedCell(unittest.TestCase):
     def test_seed_cell_matches_legacy_formula(self):
         cell = bpm.seed_cell(16.0, 108.0, 16.0, 108.1)

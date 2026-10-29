@@ -186,6 +186,21 @@ class TestMain(unittest.TestCase):
             epm.OsrmClient = real
         self.assertEqual(again, 0)
 
+    def test_dense_matrix_is_rebuilt_not_appended(self):
+        tmp = tempfile.mkdtemp(prefix="mxexd_")
+        pois_path = os.path.join(tmp, "pois.json")
+        matrix_path = os.path.join(tmp, "matrix.json")
+        with open(pois_path, "w", encoding="utf-8") as f:
+            json.dump({"pois": POIS}, f)
+        with open(matrix_path, "w", encoding="utf-8") as f:
+            json.dump({"format": "dense-v1", "ids": ["a"], "n": 1,
+                       "minutes": [[0]], "km": [[0.0]]}, f)
+        before = os.path.getmtime(matrix_path)
+        code = epm.main(["--pois", pois_path, "--matrix", matrix_path,
+                         "--backup", os.path.join(tmp, "b.json")])
+        self.assertEqual(code, 2)
+        self.assertEqual(os.path.getmtime(matrix_path), before)
+
 
 if __name__ == "__main__":
     unittest.main()

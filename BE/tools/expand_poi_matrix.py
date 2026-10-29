@@ -38,6 +38,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__f
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.app.services.matrix import DENSE_FORMAT  # noqa: E402
 from BE.app.services.osrm_client import OsrmClient  # noqa: E402
 
 DEFAULT_URL = "http://127.0.0.1:5000"
@@ -198,6 +199,12 @@ def main(argv=None) -> int:
         pois = json.load(f)["pois"]
     with open(matrix_path, encoding="utf-8") as f:
         existing = json.load(f)
+    if existing.get("format") == DENSE_FORMAT:
+        # Phase 3: a dense matrix already covers every POI with coordinates;
+        # a new POI means a new snapshot, and the full rebuild takes seconds.
+        print("ERROR: dense matrix; rebuild with BE/tools/build_poi_matrix.py "
+              "--all instead of appending", file=sys.stderr)
+        return 2
 
     new_pois = select_expansion(pois, existing["ids"],
                                 verified_only=not args.include_unverified)
