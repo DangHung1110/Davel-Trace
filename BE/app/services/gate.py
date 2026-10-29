@@ -6,6 +6,11 @@ Every check returns the canonical shape ``{"passed": bool, "score": float}``
 with a finite score in [0, 1]:
 - FAR: no activity on unknown/unverified POI (FR-013); score = verified
   ratio.
+- PROFILE_SAFE: no activity violates the onboarding profile's hard filter
+  (allergy / must_avoid / accessibility, `profile_filter.drop_reason`). The
+  router drops those POIs before planning; this re-checks the final plan so a
+  planner path that skips the pre-filter can never ship an allergen.
+  No profile filter -> passes vacuously. score = safe activity ratio.
 - VROH: no activity outside POI opening hours (SC-006); score = compliant
   ratio.
 - B3: no broken transit buffer — every consecutive transition's gap fits
@@ -50,8 +55,8 @@ with a finite score in [0, 1]:
   and never fail-closes (score = satisfied halves / 2).
 - TCS: time mirror — VROH/B3/ETB all pass AND no overlap AND every
   activity fits [start_time, deadline].
-- HCS: hard mirror — the concrete gates (incl. A1, CAFE_CAP, CATEGORY_CAP,
-  NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH) pass AND must_visit
+- HCS: hard mirror — the concrete gates (incl. PROFILE_SAFE, A1, CAFE_CAP,
+  CATEGORY_CAP, NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH) pass AND must_visit
   present AND avoid absent. Soft checks (F1) are NOT mirrored. The deprecated
   NO_ADJACENT_FOOD stays in the mirror only as the compat view of
   NO_CONSECUTIVE (see `RULE_FREEZE`); it adds no constraint of its own.
@@ -87,6 +92,7 @@ from BE.app.services.soft_rules import (
     rest_span,
     same_category_edges,
 )
+from BE.app.services.profile_filter import drop_reason
 from BE.common import deadline, in_range, plan_cost, to_min
 
 EPS = 1e-9
@@ -113,6 +119,19 @@ def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     bad = sum(1 for a in acts
               if a.get("poi_id") not in pois
               or not (pois.get(a["poi_id"]) or {}).get("verified"))
+    return _result(bad == 0, 1.0 - bad / len(acts))
+
+
+def check_profile_safe(itinerary: dict, trip: dict, pois: dict,
+                       matrix: dict) -> dict:
+    """Pass iff no activity hits the profile's allergy/must_avoid/access rule."""
+    profile = trip.get("profile") or {}
+    acts = itinerary.get("activities", [])
+    if not acts or not any(profile.get(k) for k in
+                           ("allergy", "must_avoid", "accessibility")):
+        return _result(True, 1.0)
+    bad = sum(1 for a in acts
+              if drop_reason(pois.get(a.get("poi_id")) or {}, profile))
     return _result(bad == 0, 1.0 - bad / len(acts))
 
 
@@ -371,7 +390,7 @@ def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Hard mirror: concrete gates (incl. A1/CAFE_CAP/sequence/rest) + HCS."""
     if not all(check(itinerary, trip, pois, matrix)["passed"]
-               for check in (check_far, check_vroh, check_b3,
+               for check in (check_far, check_profile_safe, check_vroh, check_b3,
                              check_bcs, check_etb, check_a1,
                              check_cafe_cap, check_category_cap,
                              check_no_consecutive,
@@ -386,7 +405,8 @@ def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(True)
 
 
-CHECKS = (("FAR", check_far), ("VROH", check_vroh),
+CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
+          ("VROH", check_vroh),
           ("B3", check_b3), ("BCS", check_bcs), ("ETB", check_etb),
           ("A1", check_a1), ("CAFE_CAP", check_cafe_cap),
           ("CATEGORY_CAP", check_category_cap),
@@ -422,6 +442,11 @@ RULE_FREEZE: dict[str, dict] = {
         "status": "active", "canonical": None, "family": "safety",
         "reason": "unknown/unverified POI is unsafe; hard safety gate, "
                   "kept untouched",
+    },
+    "PROFILE_SAFE": {
+        "status": "active", "canonical": None, "family": "safety",
+        "reason": "allergy/must_avoid/accessibility re-checked on the final "
+                  "plan (defence in depth behind profile_filter.hard_filter)",
     },
     "VROH": {
         "status": "active", "canonical": None, "family": "hours",

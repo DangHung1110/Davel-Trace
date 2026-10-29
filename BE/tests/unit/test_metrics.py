@@ -146,7 +146,8 @@ class TestMetrics(unittest.TestCase):
         # T061f: metrics imports the canonical registry from gate.py (F1 is
         # the new SOFT quota; it is present here but not gate fail-closed).
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
                           "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
@@ -160,7 +161,8 @@ class TestMetrics(unittest.TestCase):
         self.assertIs(GATE_CHECKS, CANONICAL)
         self.assertIs(VALIDATOR_CHECKS, CANONICAL)
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
                           "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])

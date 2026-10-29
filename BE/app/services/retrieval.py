@@ -15,14 +15,20 @@ Rules:
 - must_visit + unverified -> needs_verification (flagged, NOT main plan).
 - other unverified -> needs_verification (reason "chua xac minh").
 - lodging/transport -> excluded unless must_visit (not a day activity).
-- type/budget/hours filters apply to candidates as before.
+- budget/hours filters apply to candidates as before.
 
-Activity filter compares the canonical group `cat` (lane-A enum in
-pois.json; seed POIs without `cat` fall back to canonical_category(type)),
-never the raw SerpApi `type`. Activity text is NFC-normalised and matched
-whole-word, longest phrase first; a matched phrase is consumed so its
-sub-words cannot match again ("yêu cầu" never reads as "cầu"). Multi-word
-phrases also match without diacritics ("tam bien").
+Activities are a soft preference (FR-006/FR-022) and NEVER an exclusion
+filter: dropping every non-matching POI also dropped the restaurants a day
+needs, so "tắm biển" gave an infeasible (no lunch) or one-stop plan.
+`activity_requirements` turns them into optimizer `required_any` groups
+("at least one beach") that the planner may relax with a warning.
+
+Activities match the canonical group `cat` (lane-A enum in pois.json; seed
+POIs without `cat` fall back to canonical_category(type)), never the raw
+SerpApi `type`. Activity text is NFC-normalised and matched whole-word,
+longest phrase first; a matched phrase is consumed so its sub-words cannot
+match again ("yêu cầu" never reads as "cầu"). Multi-word phrases also match
+without diacritics ("tam bien").
 """
 
 from __future__ import annotations
@@ -65,7 +71,9 @@ ACTIVITY_TYPE_MAP = {
     "lịch sử": ["museum", "landmark"],
     "check-in": ["landmark"], "cầu": ["landmark"], "chùa": ["landmark"],
     "nhà thờ": ["landmark"], "đền": ["landmark"], "đình": ["landmark"],
-    "ngắm cảnh": ["landmark"], "chụp ảnh": ["landmark"], "sống ảo": ["landmark"],
+    "ngắm cảnh": ["landmark", "viewpoint"], "chụp ảnh": ["landmark"],
+    "sống ảo": ["landmark"], "ngắm hoàng hôn": ["viewpoint", "beach"],
+    "ngắm bình minh": ["beach", "viewpoint"], "đài quan sát": ["viewpoint"],
     "di tích": ["landmark"], "tâm linh": ["landmark"],
     "vui chơi": ["attraction"], "công viên giải trí": ["attraction"],
     "công viên nước": ["attraction"], "thủy cung": ["attraction"],
@@ -197,16 +205,13 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if cat in NON_ACTIVITY_CATS:
             excluded.append({"poi_id": pid, "reason": "khong phai hoat dong"})
             continue
-        if types and cat not in types:
-            excluded.append({"poi_id": pid, "reason": "khong khop loai hoat dong"})
-            continue
         if int(p.get("fee", 0)) > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
         if not _overlaps(p.get("opening_hours", []), ws, we):
             excluded.append({"poi_id": pid, "reason": "dong cua trong khung gio"})
             continue
-        reasons.append(f"khop loai {cat}")
+        reasons.append(f"khop hoat dong {cat}" if cat in types else f"loai {cat}")
         candidates.append({"poi_id": pid, "reasons": reasons,
                            "uncertainty": uncertainty(p)})
     return {"candidates": candidates, "needs_verification": needs_verification,
@@ -214,16 +219,33 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
             "unmatched_activities": [a for a in activities if not match_activity(a)]}
 
 
-def retrieve_softened(trip: dict, pois: list[dict]) -> dict:
-    """FR-006/FR-022: activities are a soft pref. When they empty the pool,
-    drop them once and say so; avoid/verified/budget/hours stay hard.
-    Only when the type filter actually ran: unmatched activities filter
-    nothing, so an empty pool there is caused by a hard constraint."""
-    out = retrieve(trip, pois)
-    out["softened"] = []
-    if not out["candidates"] and wanted_types(trip.get("activities")):
-        unmatched = out["unmatched_activities"]
-        out = retrieve(dict(trip, activities=[]), pois)
-        out["unmatched_activities"] = unmatched
-        out["softened"] = ["activities (bo loc loai, giu avoid+budget)"]
-    return out
+def activity_requirements(activities: list[str], pool: list[dict]
+                          ) -> tuple[list[dict], list[dict]]:
+    """Trip activities -> (`required_any` groups, per-activity report).
+
+    One group per understood activity: "at least one stop of these
+    categories", restricted to categories the pool actually has, so a wish
+    with no verified POI never costs a solver run. Report statuses:
+    "required" (group emitted; the planner later marks it met/relaxed),
+    "no_verified_poi" (understood, nothing in the pool), "not_understood".
+    """
+    have = {poi_category(p) for p in pool}
+    groups: list[dict] = []
+    report: list[dict] = []
+    for activity in activities or []:
+        cats = sorted(match_activity(activity) - NON_ACTIVITY_CATS)
+        if not cats:
+            report.append({"activity": activity, "categories": [],
+                           "status": "not_understood"})
+            continue
+        usable = [c for c in cats if c in have]
+        if not usable:
+            report.append({"activity": activity, "categories": cats,
+                           "status": "no_verified_poi"})
+            continue
+        report.append({"activity": activity, "categories": usable,
+                       "status": "required"})
+        group = {"count": 1, "categories": usable}
+        if group not in groups:
+            groups.append(group)
+    return groups, report

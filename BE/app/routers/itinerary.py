@@ -57,6 +57,9 @@ router = APIRouter(prefix="/v1", tags=["itinerary"])
 # Assumption-style warnings: verified hard-filter drops are listed, capped so a
 # broad allergy does not turn the plan response into a 200-line changelog.
 MAX_FILTER_WARNINGS = 30
+# FR-013 "can xac minh" list in the response: enough to act on, not the
+# whole unverified snapshot (~700 POIs today).
+MAX_NEEDS_VERIFICATION = 20
 
 # Diverse mode (?diverse=true): solutions enumerated per profile, plans returned.
 # N=8 matches the "N>=8 where feasible" requirement; MMR returns 3.
@@ -138,6 +141,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     # reported as an assumption-style warning; missing tags never crash.
     pois, profile_drops = profile_filter.hard_filter(pois, profile)
     dropped_ids = {d["poi_id"] for d in profile_drops}
+    # The planner only ever sees what survived the hard filter; `by_id`
+    # (full snapshot) stays for drop reporting and must_visit name lookup.
+    allowed_by_id = {p["poi_id"]: p for p in pois}
 
     # Day template V1: one of three hard archetypes, selected from the profile.
     # Only an explicitly onboarded request gets one; a legacy client that never
@@ -245,7 +251,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                   pool_timeout_s: float | None = None,
                   timeout_s: float | None = None) -> dict:
         plan = dict(builder(profile=profile_name, trip=trip, ranked=ranked,
-                            pois_by_id=by_id, cells=cells, template=tpl_name,
+                            pois_by_id=allowed_by_id, cells=cells,
+                            template=tpl_name,
                             ctx=ctx, pool_size=pool_size,
                             pool_timeout_s=pool_timeout_s,
                             timeout_s=timeout_s))
@@ -359,7 +366,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     # response drops leading-underscore keys.
     select_svc.register(plans)
     public = [_public(plan) for plan in plans]
-    out = {"plans": public, "selected": None}
+    out = {"plans": public, "selected": None,
+           "retrieval": _retrieval_report(retrieval, by_id,
+                                          trip.get("activities") or [])}
     if pool_stats is not None:
         out["solution_pool"] = pool_stats
     # Shadow LLM ranker (Hướng 3): log-only, never on the response path.
@@ -373,6 +382,42 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         except Exception:  # pragma: no cover - spawn_shadow itself never raises
             pass
     return out
+
+
+def _retrieval_report(retrieval: dict, by_id: dict,
+                      activities: list[str]) -> dict:
+    """FR-013/FR-024: what retrieval kept out of the plan, and why.
+
+    `needs_verification` lists unverified POIs as "can xac minh" (must_visit
+    first, then those matching a requested activity, then by rating), capped
+    at MAX_NEEDS_VERIFICATION; `excluded` counts verified drops per reason.
+    """
+    wanted = retrieval_svc.wanted_types(activities)
+
+    def order(entry: dict) -> tuple:
+        poi = by_id.get(entry["poi_id"]) or {}
+        return (not entry.get("must_visit"),
+                retrieval_svc.poi_category(poi) not in wanted,
+                -float(poi.get("rating") or 0))
+
+    pending = sorted(retrieval["needs_verification"], key=order)
+    excluded: dict[str, int] = {}
+    for entry in retrieval["excluded"]:
+        excluded[entry["reason"]] = excluded.get(entry["reason"], 0) + 1
+    return {
+        "candidates": len(retrieval["candidates"]),
+        "needs_verification_total": len(pending),
+        "needs_verification": [
+            {"poi_id": e["poi_id"],
+             "name": (by_id.get(e["poi_id"]) or {}).get("name", ""),
+             "cat": retrieval_svc.poi_category(by_id.get(e["poi_id"]) or {}),
+             "must_visit": bool(e.get("must_visit")),
+             "reasons": e.get("reasons") or [],
+             "uncertainty": e.get("uncertainty") or []}
+            for e in pending[:MAX_NEEDS_VERIFICATION]],
+        "excluded": excluded,
+        "unmatched_activities": retrieval.get("unmatched_activities") or [],
+    }
 
 
 def _shadow_query(trip: dict) -> dict:

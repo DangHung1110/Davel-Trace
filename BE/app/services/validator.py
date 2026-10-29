@@ -1,7 +1,7 @@
 """Validator gate (T018, lane B). Per-gate pass/fail + violations.
 
 Wraps gate.py (T011) primitives for optimizer output (T017) and, later,
-the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS/ETB/A1/
+the evaluator endpoint (T052): {"passed", "checks": {FAR/PROFILE_SAFE/VROH/B3/BCS/ETB/A1/
 CAFE_CAP/NO_CONSECUTIVE/NO_ADJACENT_FOOD/REST_FOLLOWS_LUNCH/F1/TCS/HCS},
 "violations": [...], "soft_violations": [...], "details": {gate:
 [offending poi_ids]}}.
@@ -34,6 +34,7 @@ from BE.app.services.gate import (
     check_cafe_cap,
     rest_rule_violation,
 )
+from BE.app.services.profile_filter import drop_reason
 from BE.app.services.soft_rules import (
     CATEGORY_DAILY_CAP,
     NON_FOOD_CAPPED,
@@ -51,6 +52,10 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
     if gate == "FAR":
         return [a.get("poi_id") for a in acts
                 if a.get("poi_id") not in pois or not pois[a["poi_id"]].get("verified")]
+    if gate == "PROFILE_SAFE":
+        profile = trip.get("profile") or {}
+        return [a.get("poi_id") for a in acts
+                if drop_reason(pois.get(a.get("poi_id")) or {}, profile)]
     if gate == "VROH":
         out = []
         for a in acts:

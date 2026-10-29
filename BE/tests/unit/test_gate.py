@@ -30,6 +30,7 @@ from BE.app.services.gate import (  # noqa: E402
     check_hcs,
     check_no_adjacent_food,
     check_no_consecutive,
+    check_profile_safe,
     check_rest_follows_lunch,
     check_tcs,
     check_vroh,
@@ -92,7 +93,8 @@ class TestGate(unittest.TestCase):
 
     def test_registry_and_result_shape_are_canonical(self):
         self.assertEqual([name for name, _ in CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB",
+                          "A1", "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
                           "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
@@ -503,6 +505,46 @@ class TestRuleFreeze(unittest.TestCase):
     def test_report_deprecated_failed_is_empty_when_all_pass(self):
         self.assertEqual(report(GOOD, TRIP, POIS, MATRIX)["deprecated_failed"],
                          [])
+
+
+class TestProfileSafe(unittest.TestCase):
+    """PROFILE_SAFE re-checks the onboarding hard filter on the final plan."""
+
+    SEAFOOD = {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"],
+               "cat": "restaurant", "tags": ["Nhà hàng hải sản"]}
+    PLAN = {"activities": [{"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                           {"poi_id": "sea", "start": "11:30", "end": "12:30"}]}
+
+    def _pois(self):
+        return {**POIS, "sea": self.SEAFOOD}
+
+    def test_allergen_fails_and_hcs_mirrors_it(self):
+        trip = dict(TRIP, profile={"allergy": ["hải sản"]})
+        res = check_profile_safe(self.PLAN, trip, self._pois(), MATRIX)
+        self.assertFalse(res["passed"])
+        self.assertAlmostEqual(res["score"], 0.5)
+        self.assertFalse(check_hcs(self.PLAN, trip, self._pois(), MATRIX)["passed"])
+        self.assertIn("PROFILE_SAFE", report(self.PLAN, trip, self._pois(), MATRIX)["failed"])
+
+    def test_no_profile_filter_passes(self):
+        for trip in (TRIP, dict(TRIP, profile={"party_type": "couple"})):
+            self.assertTrue(check_profile_safe(self.PLAN, trip, self._pois(),
+                                               MATRIX)["passed"])
+
+    def test_must_avoid_and_accessibility(self):
+        bar = {"verified": True, "fee": 0, "opening_hours": [], "cat": "bar",
+               "tags": ["quán bar"], "intensity": 1}
+        plan = {"activities": [{"poi_id": "bar", "start": "20:00", "end": "21:00"}]}
+        trip = dict(TRIP, profile={"must_avoid": ["nightlife"]})
+        self.assertFalse(check_profile_safe(plan, trip, {"bar": bar}, MATRIX)["passed"])
+        trek = {"verified": True, "cat": "nature", "intensity": 3}
+        plan = {"activities": [{"poi_id": "trek", "start": "08:00", "end": "10:00"}]}
+        trip = dict(TRIP, profile={"accessibility": ["wheelchair"]})
+        self.assertFalse(check_profile_safe(plan, trip, {"trek": trek}, MATRIX)["passed"])
+
+    def test_registered_as_active_safety_rule(self):
+        self.assertEqual(RULE_FREEZE["PROFILE_SAFE"]["family"], "safety")
+        self.assertIn("PROFILE_SAFE", [name for name, _ in HARD_CHECKS])
 
 
 class TestRestRuleSingleDefinition(unittest.TestCase):

@@ -31,6 +31,7 @@ from BE.app.services import (
     pool as pool_svc,
     profile_filter,
     response,
+    retrieval,
     scorer,
     soft_rules,
     templates,
@@ -305,11 +306,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
               if trip.get("profile") else templates.NO_LIMITS)
     rest_after_lunch = (limits.get("rest_minutes")
                         if limits.get("rest_after_lunch") else None)
-    pois_gate = {pid: {"verified": p.get("verified", False), "fee": p.get("fee", 0),
-                       "opening_hours": p.get("opening_hours", []),
-                       # A1 (meal-slot rule) needs the category.
-                       "type": p.get("type", ""), "cat": p.get("cat", "")}
-                 for pid, p in by_id.items()}
+    pois_gate = {pid: _gate_view(p) for pid, p in by_id.items()}
     for prof in profiles:
         stub = stubs_from_pois(
             pois, trip,
@@ -372,6 +369,70 @@ def _deadline(trip: dict) -> int:
     end = to_min(trip.get("end_time", "18:00"))
     rt = trip.get("return_time")
     return min(end, to_min(rt)) if rt else end
+
+
+def _ladder(limits: dict, act_groups: list[dict]) -> list[tuple[int, dict]]:
+    """Template ladder with the trip's activity groups riding along.
+
+    The user's own wishes outrank the template's inferred counts: every
+    template rung is tried WITH the activity groups first, and only when none
+    fits are the wishes dropped (the plan then reports them as unmet).
+    Returns (template_step, limits) pairs so `relaxed_step` keeps its meaning;
+    a rung identical to an earlier one (legacy NO_LIMITS) is not re-solved.
+    """
+    plain = list(enumerate(templates.attempts(limits)))
+    wished = [(step, {**rung, "required_any": list(rung["required_any"]) + act_groups})
+              for step, rung in plain] if act_groups else []
+    out: list[tuple[int, dict]] = []
+    for step, rung in wished + plain:
+        if all(rung != seen for _, seen in out):
+            out.append((step, rung))
+    return out
+
+
+def _activity_match(acts: list[dict], report: list[dict],
+                    pois_by_id: dict) -> list[dict]:
+    """Per-activity outcome on THIS plan: "required" becomes met/unmet."""
+    cats = {soft_rules.poi_category(pois_by_id.get(a.get("poi_id"), {}))
+            for a in acts}
+    out = []
+    for entry in report:
+        entry = dict(entry)
+        if entry["status"] == "required":
+            entry["status"] = ("met" if cats & set(entry["categories"])
+                               else "unmet")
+        out.append(entry)
+    return out
+
+
+def _activity_warnings(match: list[dict]) -> list[str]:
+    """Assumption-style lines for activities the plan could not honour."""
+    lines = []
+    for entry in match:
+        cats = ", ".join(entry["categories"])
+        if entry["status"] == "unmet":
+            lines.append(f"khong xep duoc hoat dong '{entry['activity']}' ({cats}) "
+                         "cung rang buoc cung, da bo yeu cau nay")
+        elif entry["status"] == "no_verified_poi":
+            lines.append(f"chua co diem {cats} da xac minh cho hoat dong "
+                         f"'{entry['activity']}'")
+        elif entry["status"] == "not_understood":
+            lines.append(f"chua hieu hoat dong '{entry['activity']}', bo qua")
+    return lines
+
+
+# What the gate registry reads off a POI: FAR/BCS/VROH, the category for
+# A1/caps, and the PROFILE_SAFE haystack (tags/cuisine/ambience/smart_tags/
+# intensity, the same fields profile_filter.hard_filter matched).
+_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity")
+
+
+def _gate_view(p: dict) -> dict:
+    view = {"verified": p.get("verified", False), "fee": p.get("fee", 0),
+            "opening_hours": p.get("opening_hours", []),
+            "type": p.get("type", ""), "cat": p.get("cat", "")}
+    view.update({k: p[k] for k in _GATE_EXTRA if k in p})
+    return view
 
 
 def _travel_from_cells(cells: dict, ids: list[str]) -> dict:
@@ -458,16 +519,34 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     limits = (templates.template_constraints(tpl_name, trip) if tpl_name
               else templates.universal_constraints(trip))
 
+    # Fail closed: the pool is exactly the ranked (verified, hard-filtered)
+    # candidates. An empty pool is an honest empty plan, never "every POI"
+    # (that fallback re-admitted unverified and allergy-dropped POIs).
     ranked_ids = [r.get("poi_id") for r in ranked]
-    ids = [pid for pid in ranked_ids if pid in pois_by_id]
-    if not ids:
-        ids = list(pois_by_id)
-    candidates = [pois_by_id[pid] for pid in ids]
+    candidates = [pois_by_id[pid] for pid in ranked_ids if pid in pois_by_id]
 
     # Template hard bans: nightlife/spa for a family day, trek for a calm one.
     if tpl_name:
         candidates = [p for p in candidates if templates.allows(p, tpl_name)]
     ids = [p["poi_id"] for p in candidates]
+
+    # Activities -> "at least one stop of these categories" (FR-006: a
+    # preference the ladder may relax with a warning, never a pool filter).
+    act_groups, act_report = retrieval.activity_requirements(
+        trip.get("activities") or [], candidates)
+
+    if not candidates:
+        plan = _assemble([], {"itinerary": None,
+                              "reason": "khong co POI da xac minh nao qua bo loc"},
+                         trip, pois_by_id, cells, ranked, tpl_name, limits, 0,
+                         soft_rules.cafe_cap(trip.get("profile") or {}), ctx,
+                         prof, candidates, {})
+        plan["infeasible_by"] = {"rule": "EMPTY_POOL",
+                                 "label": "pool rong sau bo loc cung"}
+        plan["activity_match"] = act_report
+        plan["warnings"] = (list(plan.get("warnings") or [])
+                            + _activity_warnings(act_report))
+        return plan
 
     travel = _travel_from_cells(cells, ids)
     profile_data = trip.get("profile") or {}
@@ -480,6 +559,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
     prefs = list(profile_data.get("food_prefs") or []) or list(
         trip.get("food_prefs") or [])
+    # A food wish phrased as an activity ("ăn hải sản") is a taste pref too.
+    for activity in trip.get("activities") or []:
+        prefs += [t for t in profile_filter.cuisine_terms(activity)
+                  if t not in prefs]
 
     def _score_with_taste(poi: dict) -> float:
         unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
@@ -511,7 +594,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         solver_opts["timeout_s"] = float(timeout_s)
     if deterministic_time is not None:
         solver_opts["deterministic_time"] = float(deterministic_time)
-    for step, limits_try in enumerate(templates.attempts(limits)):
+    for step, limits_try in _ladder(limits, act_groups):
         out = optimize(stubs, travel, _to_trip(trip, origin_id=None),
                        edge_scores=q, workers=workers, must_visit=must,
                        min_stops=limits_try["min_stops"],
@@ -625,6 +708,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 plan.setdefault("warnings", []).insert(0, (
                     f"khong xep duoc lich: {culprit['label']} lam vo nghiem "
                     "(khong tu noi long)"))
+    plan["activity_match"] = _activity_match(acts, act_report, pois_by_id)
+    warnings = _activity_warnings(plan["activity_match"])
+    if warnings:
+        plan["warnings"] = list(plan.get("warnings") or []) + warnings
     # Solution pool: every member is a full plan (costs/gate/explanations), so
     # the router can return one directly. A member that fails validation is
     # dropped (defensive: model constraints and gate should agree).
@@ -638,6 +725,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 dropped += 1
                 continue
             member["profile"] = profile
+            member["activity_match"] = _activity_match(
+                item["activities"], act_report, pois_by_id)
             member["_objective"] = float(item.get("objective") or 0.0)
             built.append(member)
         plan["_pool_plans"] = built
@@ -669,11 +758,7 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     if (ctx or {}).get("dynamic_state"):
         for act in acts:
             act["state"] = trip_ctx.compact_state(ctx, to_min(act["start"]))
-    pois_gate = {pid: {"verified": p.get("verified", False),
-                       "fee": p.get("fee", 0),
-                       "opening_hours": p.get("opening_hours", []),
-                       "type": p.get("type", ""), "cat": p.get("cat", "")}
-                 for pid, p in pois_by_id.items()}
+    pois_gate = {pid: _gate_view(p) for pid, p in pois_by_id.items()}
     # The plan's rest window is evidence, not a hidden assumption: pass it to
     # the gate so REST_FOLLOWS_LUNCH checks the window the client will see
     # (start within 15 min of lunch end, exact pace length, no POI inside).

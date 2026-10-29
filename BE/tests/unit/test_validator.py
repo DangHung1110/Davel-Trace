@@ -36,7 +36,7 @@ class TestValidator(unittest.TestCase):
         self.assertEqual(rep["soft_violations"], ["F1"])
         self.assertEqual(rep["details"]["F1"], ["musu", "beach"])
         self.assertEqual(set(rep["checks"]),
-                         {"FAR", "VROH", "B3", "BCS", "ETB", "A1",
+                         {"FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
                           "CAFE_CAP", "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
                           "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"})

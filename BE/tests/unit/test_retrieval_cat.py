@@ -1,8 +1,9 @@
-"""Unit test for the activity filter on canonical `cat` (lane C).
+"""Unit test for activity matching on canonical `cat` (lane C).
 
 Covers: cat beats raw Vietnamese type, whole-word match, longest phrase
 first, no-diacritic/NFD input, lodging/transport not activities,
-unmatched activities reported, soften-once wrapper, real-snapshot coverage.
+activities never exclude a POI (they become `required_any` groups),
+unmatched activities reported, real-snapshot coverage.
 
 Run from repo root: python BE/tests/unit/test_retrieval_cat.py -v
 """
@@ -15,8 +16,8 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services.retrieval import (  # noqa: E402
-    ACTIVITY_TYPE_MAP, NON_ACTIVITY_CATS, load_pois_json, match_activity,
-    retrieve, retrieve_softened, uncertainty)
+    ACTIVITY_TYPE_MAP, NON_ACTIVITY_CATS, activity_requirements, load_pois_json,
+    match_activity, retrieve, uncertainty)
 
 POIS = [
     {"poi_id": "son-tra-beach", "type": "Điểm thu hút khách du lịch", "cat": "beach",
@@ -63,10 +64,14 @@ class TestActivityText(unittest.TestCase):
 
 
 class TestCatFilter(unittest.TestCase):
-    def test_cat_not_raw_type(self):
+    def test_activity_never_excludes(self):
+        # Regression: "tắm biển" used to drop every non-beach POI, restaurants
+        # included, so a profile day had no lunch and was infeasible.
         out = retrieve(dict(TRIP, activities=["tắm biển"]), POIS)
-        self.assertEqual(ids(out, "candidates"), ["son-tra-beach"])
-        self.assertIn("khop loai beach", out["candidates"][0]["reasons"])
+        self.assertEqual(ids(out, "candidates"), ["cafe", "pagoda", "son-tra-beach"])
+        reasons = {c["poi_id"]: c["reasons"] for c in out["candidates"]}
+        self.assertIn("khop hoat dong beach", reasons["son-tra-beach"])
+        self.assertIn("loai cafe", reasons["cafe"])
 
     def test_lodging_not_activity_unless_must_visit(self):
         out = retrieve(TRIP, POIS)
@@ -79,24 +84,37 @@ class TestCatFilter(unittest.TestCase):
     def test_unmatched_activities_reported(self):
         out = retrieve(dict(TRIP, activities=["đi chơi", "đi cà phê"]), POIS)
         self.assertEqual(out["unmatched_activities"], ["đi chơi"])
-        self.assertEqual(ids(out, "candidates"), ["cafe"])
+        self.assertEqual(ids(out, "candidates"), ["cafe", "pagoda", "son-tra-beach"])
 
-    def test_softened_once_keeps_hard(self):
-        trip = dict(TRIP, activities=["bảo tàng"], avoid=["cafe"])
-        self.assertEqual(retrieve(trip, POIS)["candidates"], [])
-        out = retrieve_softened(trip, POIS)
-        self.assertEqual(out["softened"], ["activities (bo loc loai, giu avoid+budget)"])
-        self.assertEqual(ids(out, "candidates"), ["pagoda", "son-tra-beach"])
-        self.assertEqual(retrieve_softened(dict(trip, activities=["chùa"]), POIS)["softened"],
-                         [])
-
-    def test_unmatched_activity_never_softened(self):
-        trip = dict(TRIP, activities=["đi chơi"], avoid=["son-tra-beach"],
+    def test_hard_filters_still_hard(self):
+        trip = dict(TRIP, activities=["bảo tàng"], avoid=["cafe"],
                     start_time="23:00", end_time="23:30")
-        out = retrieve_softened(trip, POIS)
-        self.assertEqual(out["candidates"], [])
-        self.assertEqual(out["softened"], [])
-        self.assertEqual(out["unmatched_activities"], ["đi chơi"])
+        out = retrieve(trip, POIS)
+        self.assertEqual(ids(out, "candidates"), ["son-tra-beach"])
+        self.assertIn({"poi_id": "cafe", "reason": "avoid"}, out["excluded"])
+        self.assertIn({"poi_id": "pagoda", "reason": "dong cua trong khung gio"},
+                      out["excluded"])
+
+
+class TestActivityRequirements(unittest.TestCase):
+    def test_groups_only_for_categories_in_pool(self):
+        groups, report = activity_requirements(
+            ["tắm biển", "bảo tàng", "đi chơi", "lịch sử"], POIS)
+        self.assertEqual(groups, [{"count": 1, "categories": ["beach"]},
+                                  {"count": 1, "categories": ["landmark"]}])
+        self.assertEqual([(r["activity"], r["status"]) for r in report],
+                         [("tắm biển", "required"), ("bảo tàng", "no_verified_poi"),
+                          ("đi chơi", "not_understood"), ("lịch sử", "required")])
+        self.assertEqual(report[1]["categories"], ["museum"])
+
+    def test_duplicate_groups_collapse(self):
+        groups, _ = activity_requirements(["tắm biển", "đi biển"], POIS)
+        self.assertEqual(groups, [{"count": 1, "categories": ["beach"]}])
+
+    def test_lodging_never_required(self):
+        groups, report = activity_requirements(["khách sạn"], POIS)
+        self.assertEqual(groups, [])
+        self.assertEqual(report[0]["status"], "not_understood")
 
     def test_paid_group_price_label(self):
         self.assertIn("gia chua xac minh", uncertainty(POIS[1]))

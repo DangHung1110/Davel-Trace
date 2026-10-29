@@ -2,8 +2,9 @@
 
 "quán yên tĩnh hẹn hò gần biển" via retrieval (T015+T024) +
 context_score (T023): matching POIs (food/space/budget) with reasons;
-unverified aside; empty strict query -> soften SOFT prefs once, report
-what softened, NEVER drop hard constraints (avoid/budget).
+unverified aside; activities never empty the pool (they are a soft
+preference, not a filter), and hard constraints (avoid/budget) are never
+dropped.
 
 Run: python BE/tests/integration/test_us2_recommend.py -v (or pytest)
 """
@@ -84,14 +85,14 @@ class TestUS2Recommend(unittest.TestCase):
         self.assertEqual([c["poi_id"] for c in rec["needs_verification"]],
                          ["shack"])
 
-    def test_empty_softens_soft_keeps_hard(self):
+    def test_unmet_activity_keeps_pool_and_hard(self):
         trip = dict(TRIP, activities=["bảo tàng"], avoid=["club"])
         rec = recommend(trip, POIS, PREFS)
         self.assertIsNotNone(rec["top"])
-        self.assertEqual(rec["softened"], ["activities (bo loc loai, giu avoid+budget)"])
+        self.assertEqual(rec["softened"], [])  # nothing to soften any more
         ordered = [r["poi_id"] for r in rec["ranked"]]
         self.assertNotIn("club", ordered)  # hard avoid kept
-        print(f"\n softened: {rec['softened']} top: {rec['top']['poi_id']}")
+        self.assertNotIn("fancy", ordered)  # hard budget kept
 
 
 if __name__ == "__main__":
