@@ -32,7 +32,7 @@ from collections import Counter
 
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
-from BE.app.services.common import in_range, status_map, to_min, total_fee
+from BE.app.services.common import status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS, check_f1
 from BE.app.services.soft_rules import (
     RESTAURANT_PAIR_MAX_GAP,
@@ -41,6 +41,7 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.app.services.validator import validate
+from BE.common import poi_open_windows
 
 MAX_ROUNDS = 2
 ACTIONABLE = ("high", "medium")
@@ -210,9 +211,11 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
 
 
 def _fits_slot(poi: dict, start: int, end: int) -> bool:
-    """Same slot only: opening hours must cover [start, end] (unset = ok)."""
-    hours = poi.get("opening_hours") or []
-    return not hours or any(in_range(start, end, h) for h in hours)
+    """Same slot only: a window of `poi_open_windows` (the optimizer's view:
+    real hours, else the category's safe hours) covers [start, end]; a POI
+    with neither is ok."""
+    wins = poi_open_windows(poi)
+    return wins is None or any(lo <= start and end <= hi for lo, hi in wins)
 
 
 def _gate_pois(pois: dict, pool: list[dict]) -> dict:

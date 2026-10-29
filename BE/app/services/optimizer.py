@@ -58,7 +58,7 @@ import time
 from dataclasses import dataclass
 from fractions import Fraction
 
-from BE.app.services.common import hh, parse_hours, to_min
+from BE.app.services.common import hh, to_min
 from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
@@ -71,6 +71,7 @@ from BE.app.services.soft_rules import (
     category_allowed,
     poi_category,
 )
+from BE.common import poi_open_windows
 
 TIMEOUT_S = 5.0
 
@@ -126,6 +127,13 @@ class StubPOI:
     restaurant: bool = False  # gate A1: <=1 restaurant per meal slot
     category: str = ""        # TASK-1: canonical category (cat/type); "" = legacy
     intensity: int = 2        # day-template effort ceiling (1..3)
+    # Several opening windows (lunch + dinner service); () = the single
+    # [open_min, close_min]. open/close then hold the envelope.
+    windows: tuple[tuple[int, int], ...] = ()
+
+
+def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
+    return poi.windows or ((poi.open_min, poi.close_min),)
 
 
 @dataclass
@@ -148,36 +156,48 @@ def poi_visit_min(poi: dict) -> int:
     return int(vm or 60)
 
 
-def poi_window(poi: dict, trip: dict | None = None,
-               deadline: int | None = None) -> tuple[int, int]:
-    """T061a adapter: opening window in minutes, trip window when unset.
+def poi_windows(poi: dict, trip: dict | None = None,
+                deadline: int | None = None) -> list[tuple[int, int]]:
+    """T061a adapter: opening windows in minutes, trip window when unset.
 
-    Opening hours stay authoritative; when a POI has none the trip window
-    `[start_time, deadline]` is used. `deadline` (ETB: min(end, return))
-    wins over end_time when supplied so a horizon never silently stretches.
+    Opening hours stay authoritative (`open_windows`: overnight spans and
+    every service of the day, intersected across weekday variants); a POI
+    with none takes its category's measured SAFE_HOURS. Only a POI with
+    neither (no hours, no `cat`) uses the trip window `[start_time,
+    deadline]`; `deadline` (ETB: min(end, return)) wins over end_time when
+    supplied so a horizon never silently stretches. No safe time gives
+    [(0, 0)]: nothing fits.
     """
-    win = parse_hours(poi.get("opening_hours"))
-    if win is not None:
-        return win
+    wins = poi_open_windows(poi)
+    if wins is not None:
+        return wins or [(0, 0)]
     start = to_min((trip or {}).get("start_time", "07:00"))
     if deadline is not None:
         end = deadline
     else:
         end = to_min((trip or {}).get("end_time", "18:00"))
-    return start, end
+    return [(start, end)]
+
+
+def poi_window(poi: dict, trip: dict | None = None,
+               deadline: int | None = None) -> tuple[int, int]:
+    """Envelope of `poi_windows`: first opening to last closing."""
+    wins = poi_windows(poi, trip, deadline)
+    return wins[0][0], wins[-1][1]
 
 
 def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                 deadline: int | None = None) -> StubPOI:
     """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
-    open_min, close_min = poi_window(poi, trip, deadline)
+    wins = poi_windows(poi, trip, deadline)
     bonus = MUST_GO_BONUS if poi.get("must_go") else 0.0
     category = poi_category(poi)
-    return StubPOI(poi["poi_id"], poi_visit_min(poi), open_min, close_min,
+    return StubPOI(poi["poi_id"], poi_visit_min(poi), wins[0][0], wins[-1][1],
                    float(score) + bonus,
                    restaurant=category == "restaurant",
                    category=category,
-                   intensity=int(poi.get("intensity") or 2))
+                   intensity=int(poi.get("intensity") or 2),
+                   windows=tuple(wins) if len(wins) > 1 else ())
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -225,24 +245,26 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
         if need is None:
             return None  # B3: no matrix leg -> cannot be visited
         leg = need
-    start = max(clock + leg, poi.open_min)
-    # Locked rest window (day templates): the stop must finish before it or
-    # start after it â€” never overlap.
-    if blocked_window:
-        lo, hi = blocked_window
-        if start < hi and start + poi.visit_min > lo:
-            start = max(start, hi)
-    slot = _meal_slot_min(start) if poi.restaurant else None
-    if slot is not None and slot in used_slots:
-        shifted = max(start, MEAL_SLOTS[slot][1])  # after the slot ends
-        if shifted + poi.visit_min <= min(poi.close_min, trip.end_min):
-            start = shifted
-            slot = _meal_slot_min(start)
-    if slot is not None and slot in used_slots:
-        return None  # A1: another restaurant already owns this meal slot
-    if start + poi.visit_min > min(poi.close_min, trip.end_min):
-        return None
-    return start, leg, slot
+    for open_min, close_min in _windows(poi):  # earliest window that fits
+        close = min(close_min, trip.end_min)
+        start = max(clock + leg, open_min)
+        # Locked rest window (day templates): the stop must finish before it or
+        # start after it â€” never overlap.
+        if blocked_window:
+            lo, hi = blocked_window
+            if start < hi and start + poi.visit_min > lo:
+                start = max(start, hi)
+        slot = _meal_slot_min(start) if poi.restaurant else None
+        if slot is not None and slot in used_slots:
+            shifted = max(start, MEAL_SLOTS[slot][1])  # after the slot ends
+            if shifted + poi.visit_min <= close:
+                start = shifted
+                slot = _meal_slot_min(start)
+        if slot is not None and slot in used_slots:
+            continue  # A1: another restaurant already owns this meal slot
+        if start + poi.visit_min <= close:
+            return start, leg, slot
+    return None
 
 
 def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
@@ -609,8 +631,19 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         if ids[i - 1] in must_set:
             # T053 bug 2: must_visit is HARD (gate HCS), not the soft bonus.
             m.Add(visit[i] == 1)
-        m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
-        m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
+        wins = _windows(pois[i - 1])
+        if len(wins) == 1:
+            m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
+            m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
+        else:
+            # Lunch + dinner service: a visit sits inside exactly one window.
+            picks = []
+            for k, (lo, hi) in enumerate(wins):
+                pick = m.NewBoolVar(f"win_{i}_{k}")
+                m.Add(lo <= t[i]).OnlyEnforceIf(pick)
+                m.Add(t[i] <= hi - dur[i]).OnlyEnforceIf(pick)
+                picks.append(pick)
+            m.Add(sum(picks) == visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].

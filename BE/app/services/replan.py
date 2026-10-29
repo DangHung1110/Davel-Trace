@@ -20,11 +20,12 @@ from __future__ import annotations
 from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.budget import tighten_budget
-from BE.app.services.common import parse_hours, to_min
+from BE.app.services.common import to_min
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
 from BE.app.services.soft_rules import CATEGORY_DAILY_CAP, cafe_cap
 from BE.app.services.validator import validate
+from BE.common import poi_open_windows
 
 
 def _deadline(trip: dict) -> int:
@@ -157,6 +158,8 @@ def replan(state: dict, event: dict, pois: list[dict],
 
 
 def _win(p: dict, trip: dict, state: dict) -> tuple[int, int]:
-    return (parse_hours(p.get("opening_hours")) or
-            (to_min(state.get("now", trip.get("start_time", "07:00"))),
-             _deadline(trip)))  # fallback window also clamps to the deadline
+    wins = poi_open_windows(p)  # real hours, else the category's safe hours
+    if wins is not None:
+        return wins[0] if wins else (0, 0)
+    return (to_min(state.get("now", trip.get("start_time", "07:00"))),
+            _deadline(trip))  # fallback window also clamps to the deadline

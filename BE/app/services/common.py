@@ -1,7 +1,7 @@
 """Lane-B service helper names -> BE/common.py (T061c consolidation).
 
-The implementations (to_min/hh/in_range/parse_hours/total_fee/status_map)
-used to be copy-pasted here and in eval/metrics.py. T061c keeps ONE
+The implementations (to_min/hh/in_range/open_windows/parse_hours/total_fee/
+status_map) used to be copy-pasted here and in eval/metrics.py. T061c keeps ONE
 implementation in `BE/common.py`; this module re-exports the names lane-B
 services (gate, validator, optimizer, profiles, response, replan) import,
 so their call sites are untouched.
@@ -17,6 +17,7 @@ from BE.common import (  # noqa: F401  (re-exported seam)
     hh,
     hhmm,
     in_range,
+    open_windows,
     parse_hours,
     plan_cost,
     status_map,
@@ -25,6 +26,6 @@ from BE.common import (  # noqa: F401  (re-exported seam)
 )
 
 __all__ = [
-    "to_min", "hh", "hhmm", "in_range", "parse_hours",
+    "to_min", "hh", "hhmm", "in_range", "open_windows", "parse_hours",
     "total_fee", "plan_cost", "deadline", "status_map",
 ]
