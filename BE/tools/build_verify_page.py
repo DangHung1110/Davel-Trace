@@ -196,7 +196,10 @@ def _osm_view(xc: dict | None, pois: dict) -> dict | None:
         "fields": xc.get("fields") or {},
         "osm": match.get("osm"), "url": osm_url(match.get("osm")),
         "name": match.get("name"), "dist_m": match.get("dist_m"),
-        "cats": (xc.get("evidence") or {}).get("osm_categories") or [],
+        "matched_name": match.get("matched_name"),
+        # the OSM tags themselves, not the categories derived from them
+        "tags": [f"{k}={v}" for k, v in sorted((match.get("tags") or {}).items())
+                 if k not in ("opening_hours", "fee")],
         "hours_raw": hours.get("osm_raw"), "closed": hours.get("osm_closed_days") or [],
         "dups": [pois[d]["name"] for d in xc.get("duplicate_of") or [] if d in pois],
     }
@@ -256,6 +259,13 @@ def card(poi: dict, *, pois: dict, xc: dict | None, decision: str, hard=(), queu
         "web_evidence": web_evidence, "osm": _osm_view(xc, pois),
     })
     return row
+
+
+def load_drafts(snapshot: Path) -> dict[str, dict]:
+    """review_drafts.jsonl: suggestions (verdict, edits, evidence) a reviewer
+    confirms or overrides on the page. Never applied on their own."""
+    path = snapshot / "review_drafts.jsonl"
+    return {d["poi_id"]: d for d in _load_jsonl(path)} if path.is_file() else {}
 
 
 def _load(snapshot: Path) -> tuple[dict, list[dict], dict]:
@@ -321,7 +331,12 @@ def build_rows(snapshot: Path) -> tuple[list[dict], dict]:
         return (stage, rank, cat, row["name"].lower())
 
     rows.sort(key=sort_key)
+    drafts = load_drafts(snapshot)
+    for row in rows:
+        if row["poi_id"] in drafts:
+            row["draft"] = {k: v for k, v in drafts[row["poi_id"]].items() if k != "poi_id"}
     meta = _meta("review", pois_doc, poi_list, rows, snapshot,
+                 drafts=sum(1 for r in rows if "draft" in r),
                  queue_hash=canonical_hash(sorted(queue, key=lambda q: q["poi_id"])),
                  queue_total=len(queue), queue_excluded=excluded,
                  recheck=sum(1 for r in rows if r["decision"] == "recheck"),
@@ -479,6 +494,10 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   .chip .tag{display:inline-block;font:600 12px/1.5 ui-monospace,Consolas,monospace;border-radius:6px;padding:1px 7px;background:var(--warn-bg);color:var(--warn);border:1px solid #f0dca4;margin-right:7px;vertical-align:top}
   .chip.hard .tag{background:var(--fail-bg);color:var(--fail);border-color:#f3c7c7}
   .chip .hint{font-size:13px;color:#3d4a58}
+  .draft{margin:10px 0 0;padding:10px 12px;background:#f3f0fb;border:1px solid #ddd3f3;border-radius:8px;font-size:13.5px}
+  .draft .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:#5b4a8a;margin-bottom:6px}
+  .draft .sv{font-weight:700}
+  .vbtn.sugg:not(.on){border:2px dashed #7c5cc4}
   .osm{margin:10px 0 0;padding:10px 12px;background:#f5f9f6;border:1px solid #d5e8dc;border-radius:8px;font-size:13.5px}
   .osm .st{display:inline-block;font:600 11.5px/1.6 ui-monospace,Consolas,monospace;border-radius:6px;padding:0 6px;margin:0 6px 4px 0;border:1px solid var(--line);background:#fff}
   .osm .st.confirmed{color:var(--ok);border-color:#bfe6d2;background:var(--ok-bg)}
@@ -749,7 +768,9 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---------- edits ---------- */
   function normHours(text) {
-    var t = String(text || "").trim();
+    // Google Maps copies use "–"/"—" and "h": accept them as plain "-" / ":".
+    var t = String(text || "").trim().replace(/[‒-―−~]/g, "-")
+      .replace(/(\d)\s*h\s*(\d{2})/gi, "$1:$2").replace(/;/g, ",");
     if (!t) return null;
     if (!HOURS_RE.test(t)) return false;
     var ok = true;
@@ -794,6 +815,30 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     return { edits: out, bad: bad };
   }
 
+  function draftBlock(row) {
+    var d = row.draft;
+    if (!d) return "";
+    var g = d.google || {};
+    var lines = ['<span class="sv">Gợi ý: ' + esc(VLABEL[d.suggest] || d.suggest) + "</span> — " + esc(d.note || "")];
+    var facts = [];
+    if (g.status) facts.push("<b>" + esc(g.status) + "</b>");
+    if (g.name && g.name !== row.name) facts.push("tên trên Google: <b>" + esc(g.name) + "</b>");
+    if (g.rating) facts.push(esc(g.rating) + "★ (" + esc(g.reviews) + " đánh giá)");
+    if (g.category) facts.push(esc(String(g.category).replace(/·$/, "")));
+    if (facts.length) lines.push("Google Maps: " + facts.join(" · "));
+    if (g.hours && g.hours.length) {
+      var spans = g.hours.map(function (h) { return h.slice(h.indexOf(",") + 1).replace(/ đến /g, "–"); });
+      var same = g.hours.length === 7 && spans.every(function (x) { return x === spans[0]; });
+      lines.push('Giờ Google: <span class="mono">' + esc(same ? "mọi ngày " + spans[0]
+        : g.hours.map(function (h) { return h.replace(/ đến /g, "–"); }).join(" | ")) + "</span>");
+    }
+    var keys = Object.keys(d.edits || {});
+    if (keys.length) lines.push("Đã điền sẵn vào ô sửa: " + esc(keys.map(function (k) {
+      var v = d.edits[k]; return k + " = " + (Array.isArray(v) ? v.join(", ") : v); }).join("; ")));
+    return '<div class="draft"><div class="ttl">Gợi ý, tra Google Maps ngày ' + esc(d.checked_at || "") +
+      " — bấm nút để xác nhận</div>" + lines.join("<br>") + "</div>";
+  }
+
   function osmBlock(row) {
     var o = row.osm;
     if (!o) return "";
@@ -804,8 +849,9 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     var lines = [];
     if (o.osm) {
       lines.push("Khớp <b>" + esc(o.name) + "</b> cách " + esc(o.dist_m) + " m" +
-        (o.url ? ' · <a href="' + esc(o.url) + '" target="_blank" rel="noopener">OSM ↗</a>' : "") +
-        (o.cats && o.cats.length ? ' · tag gợi ý: <span class="mono">' + esc(o.cats.join(", ")) + "</span>" : ""));
+        (o.matched_name && o.matched_name !== o.name ? " (qua tên phụ <b>" + esc(o.matched_name) + "</b>)" : "") +
+        (o.url ? ' · <a href="' + esc(o.url) + '" target="_blank" rel="noopener">OSM ↗</a>' : ""));
+      if (o.tags && o.tags.length) lines.push('Tag OSM: <span class="mono">' + esc(o.tags.join(", ")) + "</span>");
     } else {
       lines.push('<span class="note">Không tìm thấy đối tượng OSM cùng tên trong 150 m (chỉ có 1 nguồn).</span>');
     }
@@ -898,8 +944,10 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     if (row.decision === "recheck") badges += '<span class="badge recheck">đã verified · đang có trong plan</span>';
     if (!SAMPLE && META.priority_cats.indexOf(row.cat) !== -1) badges += '<span class="badge prio">ưu tiên</span>';
 
+    var sugg = row.draft ? row.draft.suggest : null;
     var buttons = VERDICTS.map(function (k) {
-      return '<button class="btn vbtn ' + k + (v && v.verdict === k ? " on" : "") + '" type="button" data-verdict="' + k + '">' + VLABEL[k] + "</button>";
+      return '<button class="btn vbtn ' + k + (v && v.verdict === k ? " on" : "") + (sugg === k ? " sugg" : "") +
+        '" type="button" data-verdict="' + k + '"' + (sugg === k ? ' title="Gợi ý"' : "") + ">" + VLABEL[k] + "</button>";
     }).join("");
 
     return '<article class="' + cls + '" id="row-' + idx + '" data-id="' + esc(row.poi_id) + '">' +
@@ -917,7 +965,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
           '<div><span class="k">Toạ độ</span><span class="mono">' + fmtCoord(row.lat) + ", " + fmtCoord(row.lon) + "</span>" +
             (url ? ' · <a href="' + url + '" target="_blank" rel="noopener">Google Maps ↗</a>' : "") + "</div>" +
         "</div>" +
-        reasons + (SAMPLE ? "" : osmBlock(row)) + sib +
+        reasons + (SAMPLE ? "" : draftBlock(row) + osmBlock(row)) + sib +
         (extras.length ? '<div class="extra">' + extras.join("") + "</div>" : "") +
         (SAMPLE ? "" : editBlock(row)) +
         '<div class="actions">' + buttons +
@@ -930,6 +978,15 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     var parts = [];
     DATA.forEach(function (row, idx) {
       byId[row.poi_id] = { row: row, idx: idx };
+      // a draft pre-fills the edit fields once; the reviewer's own input wins
+      if (row.draft && row.draft.edits && Object.keys(row.draft.edits).length &&
+          !(state.verdicts[row.poi_id] && state.verdicts[row.poi_id].raw)) {
+        entry(row.poi_id).raw = {};
+        Object.keys(row.draft.edits).forEach(function (k) {
+          var val = row.draft.edits[k];
+          state.verdicts[row.poi_id].raw[k] = Array.isArray(val) ? val.join(", ") : String(val);
+        });
+      }
       parts.push(renderCard(row, idx));
     });
     $("list").innerHTML = parts.join("");
@@ -1059,6 +1116,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         reviewer: state.reviewer || "", ts: v.ts || new Date().toISOString(),
         page: META.mode, page_hash: META.page_hash, row_hash: row.row_hash
       };
+      if (row.draft) line.draft_by = row.draft.by + "@" + row.draft.checked_at;
       if (SAMPLE) {
         if (v.verdict === "sai") line.flags = (v.flags || []).slice();
       } else {

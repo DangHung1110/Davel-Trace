@@ -180,8 +180,9 @@ def apply_one(poi: dict, decision: dict, today: str) -> None:
     review = poi.setdefault("review", {"by": []})
     review["verdict"] = decision["verdict"]
     review["by"] = review.get("by", []) + [
-        {"reviewer": g["reviewer"].strip(), "ts": g["ts"], "note": g.get("note") or "",
-         "file": g["_file"]} for g in decision["lines"]]
+        dict({"reviewer": g["reviewer"].strip(), "ts": g["ts"], "note": g.get("note") or "",
+              "file": g["_file"]}, **({"draft_by": g["draft_by"]} if g.get("draft_by") else {}))
+        for g in decision["lines"]]
     if edits:
         review["edits"] = sorted(set(review.get("edits", [])) | set(edits))
 

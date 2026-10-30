@@ -107,6 +107,19 @@ class TestReviewPage(unittest.TestCase):
         self.assertNotEqual(bvp.row_hash(a), bvp.row_hash(b))
         self.assertEqual(bvp.row_hash(a), bvp.row_hash(c))
 
+    def test_drafts_ride_along_without_changing_the_page_hash(self):
+        _, before = bvp.build_rows(self.snap)
+        draft = {"poi_id": "museum", "suggest": "dung", "edits": {"cat": "museum"},
+                 "note": "x", "by": "claude-google-maps", "checked_at": "2026-10-30"}
+        (self.snap / "review_drafts.jsonl").write_text(json.dumps(draft) + "\n",
+                                                       encoding="utf-8")
+        rows, after = bvp.build_rows(self.snap)
+        by_id = {r["poi_id"]: r for r in rows}
+        self.assertEqual(by_id["museum"]["draft"]["suggest"], "dung")
+        self.assertNotIn("draft", by_id["market"])
+        self.assertEqual(after["drafts"], 1)
+        self.assertEqual(before["page_hash"], after["page_hash"])
+
     def test_render_is_safe(self):
         rows, meta = bvp.build_rows(self.snap)
         rows[0]["name"] = "</script><b>x"
@@ -184,8 +197,8 @@ class TestIngest(unittest.TestCase):
     def test_apply_edits_and_rejection_sticks(self):
         h = bvp.row_hash(self.pois["pagoda"])
         plan = self.plan([
-            line("pagoda", row_hash=h, edits={"opening_hours": ["07:00-17:30"],
-                                              "visit_p50": 30}),
+            line("pagoda", row_hash=h, draft_by="claude@2026-10-30",
+                 edits={"opening_hours": ["07:00-17:30"], "visit_p50": 30}),
             line("museum", verdict="loai"),
         ])
         for pid, decision in plan["apply"].items():
@@ -199,6 +212,7 @@ class TestIngest(unittest.TestCase):
         self.assertEqual(pagoda["dur_source"], "human")
         self.assertFalse(museum["verified"])
         self.assertNotIn("verified_by", museum)
+        self.assertEqual(pagoda["review"]["by"][0]["draft_by"], "claude@2026-10-30")
         verdicts = {v["poi_id"]: v["decision"] for v in sv.build_plan(list(self.pois.values()))[0]}
         self.assertEqual(verdicts["museum"], sv.HUMAN_REJECTED)
         # the same lines again are a no-op
