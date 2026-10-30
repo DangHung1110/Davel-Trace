@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.ml.data import ingest_verdicts as ing  # noqa: E402
 from BE.ml.data import spotcheck_v2 as sv  # noqa: E402
 from BE.ml.data.verify_precision import cohen_kappa, score, wilson  # noqa: E402
+from BE.tools import build_review_report as report  # noqa: E402
 from BE.tools import build_verify_page as bvp  # noqa: E402
 
 SNAPSHOT = Path(__file__).resolve().parents[2] / "data" / "snapshots" / "danang-v1"
@@ -100,6 +101,18 @@ class TestReviewPage(unittest.TestCase):
         self.assertNotIn("duration_outlier", by_id["pagoda"]["queue"])
         self.assertEqual(by_id["museum"]["osm"]["url"], "https://www.openstreetmap.org/node/42")
 
+    def test_reviewed_rows_leave_until_their_data_changes(self):
+        pois = copy.deepcopy(FIXTURE)
+        market = pois[1]
+        market["review"] = {"verdict": "dung", "row_hash": bvp.row_hash(market)}
+        write_snapshot(self.tmp.name, pois=pois)
+        ids = [r["poi_id"] for r in bvp.build_rows(self.snap)[0]]
+        self.assertNotIn("market", ids)
+        market["lat"] = 16.0  # moved after the review, still without hours
+        write_snapshot(self.tmp.name, pois=pois)
+        ids = [r["poi_id"] for r in bvp.build_rows(self.snap)[0]]
+        self.assertIn("market", ids)
+
     def test_row_hash_tracks_shown_fields(self):
         a = copy.deepcopy(FIXTURE[0])
         b = dict(a, opening_hours=["08:00-17:00"])
@@ -164,8 +177,14 @@ class TestSample(unittest.TestCase):
     def test_real_snapshot_builds(self):
         rows, meta = bvp.build_rows(SNAPSHOT)
         self.assertFalse([r for r in rows if r["cat"] in bvp.EXCLUDED_CATS])
-        self.assertGreater(meta["recheck"], 0)
         self.assertTrue(all(r["row_hash"] for r in rows))
+        # a POI reviewed "dung" on today's data is never listed again
+        pois = {p["poi_id"]: p for p in json.loads(
+            (SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]}
+        for row in rows:
+            review = pois[row["poi_id"]].get("review") or {}
+            self.assertFalse(review.get("verdict") == "dung" and
+                             review.get("row_hash") == row["row_hash"], row["poi_id"])
 
 
 def line(pid, verdict="dung", reviewer="Lan", ts="2026-10-30T01:00:00Z", **kw):
@@ -234,6 +253,32 @@ class TestIngest(unittest.TestCase):
         again = self.plan([line("pagoda", row_hash=h), line("museum", verdict="loai")])
         self.assertEqual(again["apply"], {})
         self.assertEqual({r["reason"] for r in again["rejected"]}, {"already applied"})
+
+    def test_agent_lines_name_the_agent(self):
+        agent = "claude-google-maps-v1"
+        plan = ing.plan_ingest([("f.jsonl", i, l, "") for i, l in enumerate([
+            line("pagoda", reviewer=agent, edits={"opening_hours": ["07:00-17:30"],
+                                                  "price_band": "cheap"}),
+            line("cafe1", reviewer=agent, edits={"visit_p50": 40}),
+        ], 1)], self.pois, agent=True)
+        self.assertEqual([r["poi_id"] for r in plan["rejected"]], ["cafe1"])
+        ing.apply_one(self.pois["pagoda"], plan["apply"]["pagoda"], "2026-10-30", agent)
+        pagoda = self.pois["pagoda"]
+        self.assertEqual((pagoda["verified_by"], pagoda["hours_source"]), (agent, agent))
+        self.assertEqual(pagoda["smart_tags"]["price_band"], "cheap")
+
+
+class TestReport(unittest.TestCase):
+    def test_real_report_lists_every_review_card(self):
+        rows = report.report_rows(SNAPSHOT)
+        self.assertEqual(len(rows), len(bvp.load_drafts(SNAPSHOT)))
+        for row in rows:
+            if row["verdict"] == "dung":
+                self.assertTrue(row["verified"], row["poi_id"])
+            if not row["hours"] and row["safe"]:
+                self.assertNotIn(row["cat"], {"lodging", "transport"})
+        page = report.render(rows, "danang-v1")
+        self.assertNotIn("</script><", page.split("<script>")[1].split("</script>")[0])
 
 
 class TestPrecision(unittest.TestCase):

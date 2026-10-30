@@ -8,7 +8,9 @@ and can be emailed):
     1. recheck: VERIFIED POIs the planner already uses that a second source or
        a data rule flags (OSM category/hours conflict, OSM duplicate, hours
        with no common window, inferred or missing hours, unknown ticket, not
-       a destination). Shown first: they are in plans today.
+       a destination). Shown first: they are in plans today. A POI already
+       reviewed "dung" is left out until its reviewed fields change
+       (``review.row_hash``, written by the ingest).
     2. queue: ``auto_verify_queue.jsonl`` rows (spotcheck_v2 could not decide),
        lodging/transport dropped (retrieval never plans them), sightseeing
        first. The file fixes which rows; their reasons are re-judged with
@@ -303,6 +305,9 @@ def build_rows(snapshot: Path) -> tuple[list[dict], dict]:
     for poi in poi_list:
         if not poi.get("verified") or poi.get("cat") in EXCLUDED_CATS:
             continue
+        review = poi.get("review") or {}
+        if review.get("verdict") == "dung" and review.get("row_hash") == row_hash(poi):
+            continue  # reviewed with these flags; back only if the data changes
         reasons = recheck_reasons(poi, xc.get(poi["poi_id"]))
         if reasons:
             rows.append(card(poi, pois=pois, xc=xc.get(poi["poi_id"]), decision="recheck",

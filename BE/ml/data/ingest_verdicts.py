@@ -20,6 +20,11 @@ agreeing reviewers who typed different values for one field drop that edit.
 A line already applied (same reviewer and ts in `review`) is skipped, so a
 re-run is a no-op. Every applied line is appended to review_log.jsonl.
 
+Lines written by an agent, not a person, are ingested with --verified-by
+(e.g. claude-google-maps-v1): `verified_by` and the `hours_source` of edited
+hours then name the agent instead of human-review-v1 / "human", and a
+visit_p50 edit is rejected (dur_source "human" would claim a person).
+
   python BE/ml/data/ingest_verdicts.py --snapshot BE/data/snapshots/danang-v1 \\
       verify_verdicts_review_20261030_Lan.jsonl [more.jsonl] [--apply]
 """
@@ -79,7 +84,7 @@ def already_applied(poi: dict, line: dict) -> bool:
                for r in review.get("by", []))
 
 
-def check_line(line: dict, pois: dict) -> str | None:
+def check_line(line: dict, pois: dict, agent: bool = False) -> str | None:
     """Rejection reason, or None when the line can be used."""
     if line.get("page") == "sample":
         return "sample page (score with verify_precision.py)"
@@ -95,6 +100,8 @@ def check_line(line: dict, pois: dict) -> str | None:
     errors = edit_errors(line.get("edits", {}))
     if errors:
         return "; ".join(errors)
+    if agent and "visit_p50" in (line.get("edits") or {}):
+        return "visit_p50 edit from an agent (durations are set by people)"
     if already_applied(poi, line):
         return "already applied"
     if line.get("row_hash") and line["row_hash"] != row_hash(poi):
@@ -117,11 +124,11 @@ def read_lines(paths: list[str]) -> list[tuple[str, int, dict | None, str]]:
     return out
 
 
-def plan_ingest(lines, pois: dict) -> dict:
+def plan_ingest(lines, pois: dict, agent: bool = False) -> dict:
     """Decide what to apply. Pure: reads `pois`, never writes it."""
     rejected, accepted = [], []
     for path, n, line, err in lines:
-        reason = err or check_line(line, pois)
+        reason = err or check_line(line, pois, agent)
         if reason:
             rejected.append({"file": os.path.basename(path), "line": n,
                              "poi_id": (line or {}).get("poi_id"), "reason": reason})
@@ -154,11 +161,11 @@ def plan_ingest(lines, pois: dict) -> dict:
             "dropped_edits": dropped_edits}
 
 
-def apply_one(poi: dict, decision: dict, today: str) -> None:
+def apply_one(poi: dict, decision: dict, today: str, verified_by: str = VERIFIED_BY) -> None:
     edits = decision["edits"]
     if "opening_hours" in edits:
         poi["opening_hours"] = edits["opening_hours"]
-        poi["hours_source"] = "human"
+        poi["hours_source"] = "human" if verified_by == VERIFIED_BY else verified_by
     if "cat" in edits:
         poi["cat"] = edits["cat"]
     if "visit_p50" in edits:
@@ -175,7 +182,7 @@ def apply_one(poi: dict, decision: dict, today: str) -> None:
         tags["price_band"] = edits["price_band"]
         tags["band_verified"] = True
     if decision["verdict"] == "dung":
-        poi["verified"], poi["verified_by"], poi["verified_at"] = True, VERIFIED_BY, today
+        poi["verified"], poi["verified_by"], poi["verified_at"] = True, verified_by, today
     else:
         poi["verified"] = False
         poi.pop("verified_by", None)
@@ -195,12 +202,15 @@ def main(argv=None) -> int:
     ap.add_argument("--snapshot", required=True)
     ap.add_argument("files", nargs="+", help="verify_verdicts_review_*.jsonl")
     ap.add_argument("--apply", action="store_true", help="write pois.json (default: dry run)")
+    ap.add_argument("--verified-by", default=VERIFIED_BY,
+                    help="label for lines written by an agent, e.g. claude-google-maps-v1")
     args = ap.parse_args(argv)
+    agent = args.verified_by != VERIFIED_BY
     path = os.path.join(args.snapshot, "pois.json")
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
     pois = {p["poi_id"]: p for p in data["pois"]}
-    plan = plan_ingest(read_lines(args.files), pois)
+    plan = plan_ingest(read_lines(args.files), pois, agent)
 
     verdicts = Counter(d["verdict"] for d in plan["apply"].values())
     edits = Counter(k for d in plan["apply"].values() for k in d["edits"])
@@ -221,8 +231,12 @@ def main(argv=None) -> int:
 
     today = datetime.date.today().isoformat()
     for pid, decision in plan["apply"].items():
-        apply_one(pois[pid], decision, today)
+        apply_one(pois[pid], decision, today, args.verified_by)
     normalized = normalize(data["pois"])
+    # what the reviewed card looks like now: the review page re-lists a
+    # reviewed POI only when these fields change again
+    for pid in plan["apply"]:
+        pois[pid]["review"]["row_hash"] = row_hash(pois[pid])
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     log_path = os.path.join(args.snapshot, "review_log.jsonl")
