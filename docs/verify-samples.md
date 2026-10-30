@@ -353,3 +353,93 @@ Những điểm mới cần người xử lý (đầy đủ trong `OSM_CROSSCHEC
 Kết luận: OSM là nguồn thứ hai đáng tin, vì không có lần xác nhận sai nào trong mẫu. Nhưng OSM chỉ phủ khoảng
 một phần tư số POI verified: tốt với nhóm tham quan, yếu với quán xá. Quán xá cần một nguồn thứ hai khác
 (VietMap Place hoặc Google), và việc đó cần bạn duyệt chi phí.
+
+## 8. Tool duyệt, ingest và đo độ chính xác (đã làm)
+
+### Trang duyệt `FE/verify_review.html`
+
+Dựng bằng `BE/tools/build_verify_page.py`, phát triển tiếp từ tool của Cường. Định dạng export cũ vẫn giữ, chỉ
+thêm trường mới.
+
+- **289 dòng, chia hai nhóm:**
+  - **33 POI đã verify nhưng bị gắn cờ, đưa lên đầu.** Các POI này đang được xếp vào lịch, nhưng OSM hoặc
+    luật dữ liệu báo có vấn đề: lệch loại hình, lệch giờ, trùng, giờ suy luận, thiếu giờ, chưa biết có vé,
+    hoặc có thể không phải điểm đến.
+  - **256 dòng hàng đợi:** đã bỏ 76 lodging. Nhóm tham quan được đưa lên trước.
+- **Lý do của hàng đợi được chấm lại trên dữ liệu hiện tại.** File queue cũ chỉ quyết định POI nào cần người
+  duyệt. Sau bước chuẩn hoá, cờ "thời lượng bất thường" giảm từ 23 xuống 4.
+- **Mỗi thẻ có khối đối chiếu OSM:** trạng thái từng trường, đối tượng khớp, link OSM, giờ và ngày nghỉ theo OSM.
+- **Có ô sửa:** giờ, loại hình, thời lượng, giá vé, mức giá. Ô nào sai định dạng thì bị tô đỏ và chặn xuất file.
+  Trên trang cũng hiện khung giờ an toàn mà planner dùng khi POI thiếu giờ.
+- **Hash không còn phụ thuộc hệ điều hành:** hash được tính trên JSON đã chuẩn hoá. Mỗi dòng xuất ra có
+  `row_hash`.
+
+### Ingest `BE/ml/data/ingest_verdicts.py`
+
+Mặc định chạy thử, không ghi gì. Khi dùng `--apply`:
+
+- **"Đúng":** bật `verified`, ghi nguồn `human-review-v1`, và áp các giá trị đã sửa (nguồn `human`).
+- **"LOẠI":** tắt `verified`. Luật auto của Cường sẽ không bao giờ tự cho POI đó qua lại (`human_rejected`).
+- **Từ chối cả dòng, không áp một nửa,** khi:
+  - sai định dạng hoặc thiếu tên người duyệt;
+  - dòng đến từ trang mẫu;
+  - `row_hash` lệch với dữ liệu hiện tại, tức dữ liệu đã đổi sau khi tạo trang.
+- **Hai người khác ý về "Đúng/LOẠI":** không áp, chỉ báo cáo. Nếu cùng ý nhưng nhập giá trị khác nhau cho một
+  trường thì bỏ trường đó.
+- **Chạy lại không đổi gì.** Mọi dòng đã áp được ghi vào `review_log.jsonl`.
+- Nên ingest file của mọi người duyệt trong **cùng một lần chạy**.
+
+### Mẫu đo độ chính xác `FE/verify_sample.html` + `BE/ml/data/verify_precision.py`
+
+- Mẫu gồm 80 POI rút ngẫu nhiên, phân tầng theo loại hình, từ 362 POI do máy tự verify (seed 20261030).
+- **Duyệt kiểu mù:** trang không hiện lý do của máy hay kết quả OSM. Người duyệt chấm "Đúng" hoặc "Sai", và
+  tick trường bị sai.
+- Tool chấm điểm tính:
+  - precision của từng người;
+  - **precision chặt**: chỉ tính đúng khi mọi người chấm đều nói "Đúng";
+  - khoảng tin cậy Wilson và hệ số đồng thuận Cohen's κ;
+  - các trường hay sai nhất.
+- **Vì sao 80 mà không phải 50:** với cổng ≥ 95% và cận dưới ≥ 90%, mẫu 50 không được sai dòng nào (sai 1 dòng
+  thì cận dưới còn 89.5%). Số lỗi tối đa vẫn qua cổng theo cỡ mẫu:
+
+  | Cỡ mẫu | 50 | 60 | 80 | 100 |
+  |---|---|---|---|---|
+  | Số lỗi tối đa | 0 | 1 | 2 | 4 |
+
+### Quy trình cho người duyệt
+
+1. Mở `FE/verify_review.html` (bấm đúp là mở, không cần mạng). Duyệt nhóm "đã verified, cần xem lại" trước,
+   rồi đến hàng đợi. Nhập tên, rồi bấm **Xuất JSONL**.
+2. Hai người mở `FE/verify_sample.html` và chấm **riêng**, mỗi người xuất một file.
+3. Người phụ trách chạy:
+   - `python BE/ml/data/ingest_verdicts.py --snapshot BE/data/snapshots/danang-v1 <các file review>`, xem báo
+     cáo, rồi chạy lại với `--apply`.
+   - `python BE/ml/data/verify_precision.py --snapshot BE/data/snapshots/danang-v1 <2 file mẫu>`.
+4. Nếu precision chặt không qua cổng: không tắt cả đợt auto, mà tắt có chọn lọc các dòng chỉ có một nguồn
+   hoặc đang mâu thuẫn.
+
+Tool cần Python 3.10 trở lên. `python3` mặc định của macOS là 3.9.
+
+### Nguồn thứ hai cho quán xá: đã thử VietMap, không dùng được
+
+Thử 50 request VietMap Search v4 trên quán xá đã verify:
+
+| Nhóm | Số quán | Ghép được (tên khớp, ≤ 150 m) | Toạ độ trùng Google (< 1 m) | Còn lại |
+|---|---|---|---|---|
+| Chưa có OSM xác nhận | 40 | 19 | 13 | lệch 2–12 m |
+| OSM đã xác nhận (đối chứng) | 10 | 2 | 2 | – |
+
+VietMap chỉ có tên, địa chỉ và mã loại; không có giờ hay rating. Quan trọng hơn, toạ độ gần như sao y Google:
+13/21 trùng tới dưới 1 m, phần còn lại lệch không quá 12 m. Như vậy VietMap không phải nguồn độc lập; dùng nó
+để "xác nhận" sẽ chỉ là Google tự xác nhận chính mình. **Kết luận: không chạy đủ 700 request.** Quán xá vẫn
+cần người duyệt, qua trang review và mẫu đo precision. Repo chỉ ghi số liệu tổng hợp, không lưu câu trả lời
+thô của VietMap.
+
+### "Rating ảo": chưa làm được, cần key
+
+Cách sửa (trung bình Bayes theo số review) đã mô tả ở mục 4, nhưng cần số review, mà số này chỉ có từ Google:
+
+- `.env` hiện chỉ có `VIETMAP_API_KEY`, chưa có `SERPAPI_KEY`.
+- Gói miễn phí của SerpApi cho 250 lượt search mỗi tháng. Mỗi lượt search trả về khoảng 20 quán kèm số review,
+  nên chạy lại kế hoạch query cũ (khoảng 30–60 lượt) là phủ được phần lớn POI. Tra từng POI theo `place_id` thì
+  tốn 410 lượt, vượt quota miễn phí.
