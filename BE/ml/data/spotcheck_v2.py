@@ -85,6 +85,8 @@ AUTO_PASS = "auto_pass"
 QUEUE = "queue"
 FAIL = "fail"
 ALREADY = "already_verified"
+# A human said LOẠI (ingest_verdicts.py): never auto-pass it back.
+HUMAN_REJECTED = "human_rejected"
 
 
 def _norm(s: str) -> str:
@@ -290,16 +292,18 @@ def judge_poi(poi: dict, ctx: SnapshotContext) -> dict:
 
 
 def build_plan(pois: list[dict]) -> tuple[list[dict], SnapshotContext]:
-    """Judge every row; already-verified rows are skipped (never re-audited)."""
+    """Judge every row; already-verified and human-rejected rows are skipped
+    (never re-audited)."""
     ctx = SnapshotContext(pois)
     plan: list[dict] = []
     for poi in pois:
-        if poi.get("verified") is True:
+        rejected = (poi.get("review") or {}).get("verdict") == "loai"
+        if poi.get("verified") is True or rejected:
             plan.append({
                 "poi_id": str(poi.get("poi_id") or ""),
                 "name": str(poi.get("name") or ""),
                 "cat": str(poi.get("cat") or ""),
-                "decision": ALREADY,
+                "decision": HUMAN_REJECTED if rejected else ALREADY,
                 "hard": [],
                 "queue": [],
                 "siblings": [],
@@ -499,7 +503,7 @@ def print_applier(summary: dict, *, applied: bool, flipped: int,
     print(f"mode={mode} criteria=docs/verify-criteria.md")
     print(f"unverified={d[AUTO_PASS] + d[QUEUE] + d[FAIL]} "
           f"auto_pass={d[AUTO_PASS]} queue={d[QUEUE]} fail={d[FAIL]} "
-          f"already_verified={d[ALREADY]}")
+          f"already_verified={d[ALREADY]} human_rejected={d[HUMAN_REJECTED]}")
     print("by cat (auto_pass/queue/fail):")
     for cat in sorted(summary["by_cat"]):
         c = summary["by_cat"][cat]
