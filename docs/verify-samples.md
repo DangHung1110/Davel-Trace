@@ -466,3 +466,63 @@ Ngoài ra, trên mỗi thẻ:
 
 - Khối OSM giờ hiện tag OSM thật, kèm tên phụ đã khớp (ví dụ "Chùa Không Tên"), thay cho danh sách loại hình suy ra.
 - Ô giờ nhận cả dấu gạch dài khi dán từ Google Maps ("09:00–18:00").
+
+## 10. Gợi ý tra Google Maps cho 254 POI trong hàng đợi (30/10/2026)
+
+Mục 9 mới có gợi ý cho 33 POI cần xem lại. Đợt này phủ nốt 254 POI trong hàng đợi. Giờ cả 289 thẻ trên
+`FE/verify_review.html` đều có gợi ý, nằm trong `review_drafts.jsonl` (35 dòng cũ + 254 dòng mới).
+
+Cách tra:
+
+- **180 POI có `place_id`**: mở thẳng trang địa điểm, giống mục 9.
+- **74 POI từ OSM hoặc nhập tay** (không có `place_id`): tìm theo tên quanh tọa độ POI. Một kết quả được tính là
+  khớp khi tên trùng hoặc chứa tên kia, và cách POI không quá 300 m. Khi Google trả về danh sách, chỉ tính tên trùng
+  hẳn: "Chùa An Phước" không được khớp với "Chùa Phước An".
+- Mỗi dòng ghi lại bằng chứng: tên, rating, số đánh giá, loại hình, giờ từng ngày, trạng thái; với POI tìm theo tên
+  thì thêm khoảng cách và danh sách kết quả.
+
+| Gợi ý | Số POI | Gồm |
+|---|---|---|
+| Đúng | 166 | điền sẵn giờ cho 21 POI (giờ thiếu hoặc khác Google), sửa loại hình 4 POI (Chùa Nam Sơn, Cầu Sông Hàn, Cầu Thuận Phước → `landmark`; SAY Beer → `bar`) |
+| LOẠI | 48 | xem bảng dưới |
+| Bỏ qua (bạn quyết) | 40 | xem bảng dưới |
+
+Các gợi ý LOẠI:
+
+| Lý do | Số | POI |
+|---|---|---|
+| Đóng cửa | 5 | vĩnh viễn: DA NANG DOWNTOWN, GREEN COFFEE. Tạm thời: Chùa Phước Lộc, Blues Q Coffee, New World Spa |
+| Google đã gỡ listing | 1 | Chợ Đêm An Thượng: mã cũ không mở ra địa điểm nào; tìm theo tên chỉ ra khu phố và một nhà hàng |
+| Trùng | 10 | Ba Na Hills, Núi Bà Nà (trùng Sun World Bà Nà Hills); Đèo Hải Vân, Núi Hải Vân (trùng Hải Vân Quan); bản OSM của nhà thờ Phú Thượng và Tùng Sơn; Non Nuoc Beach; một bản Viet Nam's Delights; Chùa Làng Thanh Khê bản 0 đánh giá; thuyền thúng "rừng dừa hội an" |
+| Tên OSM chung chung | 8 | Public beach, Small waterfall, Art Gallery, Gần núi thần tài, To Quoc Ghi Cong, Lưu Niệm - Đặc Sản, Mart Souvenir, 노니판매점 |
+| Không phải điểm tham quan | 4 | 2 am thờ bên đường; Public Beach Access; Cầu Tiên Sơn (cầu giao thông) |
+| Google xếp không phải điểm đến | 3 | ANGEL LOUNGE, Maju (quán bar tiếp viên nữ); RAIN MUSIC BOX (cho thuê thiết bị karaoke) |
+| Quán, dịch vụ dưới 5 đánh giá | 15 | 13 quán/spa 5,0★ từ 1–4 lượt, Bến Du Thuyền Sông Hàn, TASY STUDIO (cửa hàng tranh, bị gắn loại bảo tàng) |
+| Quán OSM không có trên Google | 1 | Gio coffee |
+| Nhà thờ chỉ có giờ lễ | 1 | Nhà thờ Giáo xứ An Thượng (cùng cách xử lý như mục 9) |
+
+Các gợi ý Bỏ qua, chia theo việc cần làm:
+
+| Cần gì | Số | POI |
+|---|---|---|
+| Nhóm quyết chính sách | 11 | 6 phòng karaoke (có gợi ý karaoke cho khách du lịch không); 4 điểm nằm trong khu Sun World Bà Nà (Đỉnh Bà Nà, Linh Phong Bảo Tháp, Thác Tóc Tiên, Thai Market): gộp vào Sun World hay giữ riêng; VinWonders Nam Hội An nằm ngoài khung Đà Nẵng |
+| Điền thứ Google Maps không có | 6 | giá vé: Sun World Bà Nà Hills, VỌC Glamping, Nhà bia Núi Ghềnh. Giờ: phố đi bộ Bạch Đằng, Son Tra Viewpoint (thực ra là quán cà phê, đã điền sẵn `cafe`). Tọa độ: Smile Goods lệch 4,8 km |
+| Chỉ có trên OSM, Google không có | 12 | 6 núi nhỏ, Suối Ngọc, Chùa An Phước, chùa Sư Nữ, nhà thờ An Ngãi Tây, đài tưởng niệm chuyến bay 229, Làng chiếu Cẩm Nê |
+| Chưa đủ bằng chứng | 11 | Kim Sơn, Mộc Sơn, Thổ Sơn (núi nhỏ cạnh Thủy Sơn); Núi Thần Tài (điểm thật là công viên suối khoáng); có thể trùng: KDL Sinh thái Nam Ô, Quảng trường Liên Chiểu; Tuyet Pham Cooking Class (0 đánh giá); Fishing Village, Chợ Miếu Bông, Himawari, Non La |
+
+Quy tắc về giờ:
+
+- Giờ được điền khi POI chưa có giờ, hoặc giờ đang có khác Google.
+- Google ghi "mở cả ngày" thì chỉ điền `00:00-23:59` cho landmark, park, nature, beach và viewpoint. Với quán, spa
+  và dịch vụ, 24/24 thường là giá trị mặc định chủ quán để lại, nên không điền và planner dùng giờ an toàn của nhóm.
+- Ô giờ không ghi được ngày nghỉ. Ngày Google ghi nghỉ bị bỏ ra và được nêu trong ghi chú. Chợ Khái Tây nghỉ T2–T4
+  nên không điền giờ.
+- Giờ qua đêm vô lý của điểm tham quan bị bỏ (Hải Vân Quan, CN 07:00–05:30).
+- Cầu Sông Hàn: Google ghi 08:00–20:00, nhưng cầu công cộng thì điền cả ngày.
+
+Phụ phẩm của đợt tra:
+
+- Đã có số đánh giá Google cho 212 POI trong hàng đợi (ô `google.reviews` của từng dòng nháp).
+- Trong 73 POI rating 5,0, có 32 POI dưới 20 đánh giá. Đây đúng là vấn đề "rating ảo" Cường nêu.
+- Số đánh giá mới có cho POI trong hàng đợi, chưa có cho 410 POI đã verify, nên việc crawl lại số review (mục 8)
+  vẫn cần làm.
