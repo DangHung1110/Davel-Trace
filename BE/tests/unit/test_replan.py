@@ -16,6 +16,7 @@ from BE.app.services import state as store  # noqa: E402
 from BE.app.services.common import to_min  # noqa: E402
 from BE.app.services.matrix import MatrixService  # noqa: E402
 from BE.app.services.optimizer import travel_from_matrix  # noqa: E402
+from BE.app.services.profiles import MAX_SOLVER_CANDIDATES  # noqa: E402
 from BE.app.services.replan import replan  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
@@ -210,9 +211,10 @@ class TestReplan(unittest.TestCase):
         """T046/B1/B3 on the real danang-v1 matrix: two replans, v1->2->3.
 
         Candidates are the snapshot POIs that are `verified` (only these pass
-        the canonical FAR gate; unverified candidates force no_solution). With
-        just 5 verified POIs the full set is used (~6-8 slice not reachable);
-        size chosen so the remaining pool is deterministically feasible.
+        the canonical FAR gate; unverified candidates force no_solution),
+        capped like a real plan's `_context.pois` (MAX_SOLVER_CANDIDATES):
+        the whole verified set (573 after the Phase 4 review) is no pool the
+        app ever hands the solver, and it runs out of solver time.
         """
         svc = MatrixService(SNAPSHOT_DIR)
         with open(POIS_JSON, encoding="utf-8") as fh:
@@ -230,6 +232,7 @@ class TestReplan(unittest.TestCase):
                     "opening_hours": p.get("opening_hours") or []}
 
         cand = [i for i in svc.ids if i in by and by[i].get("verified")]
+        cand = cand[:MAX_SOLVER_CANDIDATES]
         self.assertGreaterEqual(len(cand), 4)
         pois = [mk(i) for i in cand]
         travel = travel_from_matrix(svc, [DEPOT] + cand)

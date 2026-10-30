@@ -529,3 +529,82 @@ Phụ phẩm của đợt tra:
 - Trong 73 POI rating 5,0, có 32 POI dưới 20 đánh giá. Đây đúng là vấn đề "rating ảo" Cường nêu.
 - Số đánh giá mới có cho POI trong hàng đợi, chưa có cho 410 POI đã verify, nên việc crawl lại số review (mục 8)
   vẫn cần làm.
+
+## 11. Claude tự duyệt 289 thẻ (30/10/2026)
+
+Theo yêu cầu, Claude duyệt thay người cả 289 thẻ trên trang duyệt:
+
+- **196 Đúng, 92 LOẠI.**
+- **1 để lại:** Son Tra Viewpoint là quán cà phê, không nguồn nào có giờ mở cửa.
+
+Kết quả đã ghi vào `pois.json`. Số POI đã verify giờ là **573/742**:
+
+| Ai verify | Số POI |
+|---|---|
+| auto-verify-v1 | 335 |
+| spotcheck-v1 | 42 |
+| claude-google-maps-v1 | 196 |
+
+**Nguồn gốc được ghi rõ, không trộn với người duyệt:**
+
+- File kết quả là `verdicts/verify_verdicts_review_20261030_claude.jsonl`, cùng định dạng file xuất của trang duyệt. File được ingest với
+  `--verified-by claude-google-maps-v1`.
+- POI Đúng mang `verified_by = claude-google-maps-v1`, không phải `human-review-v1`.
+- Giờ do đợt này điền mang `hours_source = claude-google-maps-v1`.
+- Từng dòng đã áp dụng nằm trong `review_log.jsonl`.
+- Ingest từ chối việc agent sửa thời lượng, vì `dur_source = human` sẽ ngụ ý là người nhập. Thời lượng chỉ được tính
+  lại theo loại hình khi loại hình được sửa, ví dụ Bãi Sủng Cỏ: 240 → 144 phút.
+
+**Giờ mở cửa:**
+
+- Lấy theo Google Maps, tra ngày 30/10. Nơi có giờ khác nhau theo ngày được điền khung chung của mọi ngày.
+- **77 POI Google không có giờ** (chủ yếu chùa, nhà thờ) được để trống, không bịa. Planner dùng giờ an toàn đo được
+  của nhóm, ví dụ điểm tham quan 09:00–17:00.
+- Tra web thêm 2 điểm:
+  - Phố đi bộ Bạch Đằng 18:00–24:00. Đây là khung chung của các nguồn: phần lớn ghi 15:00–24:00, một nguồn ghi 18:00–24:00.
+  - Động Vân Thông 07:00–17:30, theo giờ của khu Ngũ Hành Sơn.
+- Bãi biển công cộng: 00:00–23:59. Trước đó giá trị này chỉ là suy luận.
+
+**Mức giá** (mỗi người: Rẻ < 100k, Trung bình 100–500k, Đắt > 500k): 116 Rẻ, 65 Trung bình, 15 Đắt. Đây là ước lượng
+theo loại hình, chưa phải giá thực tế của từng nơi:
+
+| Mức giá | Loại |
+|---|---|
+| Rẻ | chùa, nhà thờ, biển, núi, công viên, bảo tàng nhỏ (miễn phí hoặc vé thấp); chợ; quán cà phê |
+| Trung bình | thuyền thúng, du thuyền, spa, bar, cửa hàng đặc sản, nhà hàng hải sản |
+| Đắt | lớp nấu ăn, Sun World Bà Nà, Cù Lao Chàm, VinWonders (vé 650k) |
+
+Mức giá có sẵn được giữ nguyên, trừ khi giá vé mâu thuẫn với nó.
+
+**Các quyết định chính sách Claude đã chọn.** Muốn đổi thì duyệt lại POI đó:
+
+- 6 phòng karaoke: LOẠI, vì không phải điểm đến cho khách du lịch.
+- 4 điểm nằm trong Sun World Bà Nà (Đỉnh Bà Nà, Linh Phong Bảo Tháp, Thác Tóc Tiên, Thai Market): LOẠI, gộp vào Sun
+  World. Chùa Linh Ứng – Bà Nà đã verify từ trước nên vẫn giữ; chỗ này chưa nhất quán.
+- VinWonders Nam Hội An: Đúng, dù nằm ngoài khung Đà Nẵng.
+- Điểm chỉ có trên OSM mà Google không có: LOẠI.
+- Quán, dịch vụ có dưới 5 đánh giá: LOẠI.
+- 2 cặp trùng được xác nhận qua địa chỉ trên Google:
+  - KDL Sinh thái Nam Ô trùng Nam Ô Heritage;
+  - Quảng trường Liên Chiểu trùng Công viên TT Hành Chính Liên Chiểu.
+
+**Thay đổi trong tool:**
+
+- Khi ingest, ghi `review.row_hash`. Trang duyệt bỏ qua POI đã được duyệt Đúng cho tới khi các trường đã duyệt thay đổi.
+  Không có thay đổi này, 118 POI vừa duyệt (còn cờ thiếu giờ hoặc chưa có giá vé) sẽ quay lại trang. Trang duyệt giờ
+  còn 1 thẻ.
+- Trang mẫu blind (80 POI) **không** được build lại, để không làm mất tiến độ chấm. 7 POI trong mẫu nằm trong nhóm vừa
+  duyệt. Trang mẫu vẫn hiện dữ liệu lúc máy verify, nên vẫn đo đúng độ chính xác của auto-verify.
+- Trang báo cáo mới `FE/verify_result.html` (`python BE/tools/build_review_report.py`): một dòng cho mỗi thẻ, gồm
+  kết quả, ghi chú, phần đã sửa, giờ và nguồn giờ (hoặc giờ an toàn đang dùng), thời lượng, mức giá, rating. Có lọc
+  theo kết quả, loại hình, mức giá và có giờ hay không. Chạy lại sau mỗi lần ingest.
+- Giờ an toàn của spa đo lại thành 09:30–19:30 (trước là 10:00–19:30), vì vài spa vừa có giờ thật từ Google. Các
+  nhóm khác không đổi.
+- Test replan trên dữ liệu thật giới hạn ứng viên bằng `MAX_SOLVER_CANDIDATES` (80), giống danh sách mà app thật đưa
+  cho bộ giải. Trước đây test đưa toàn bộ POI đã verify vào; với 573 POI, bộ giải hết thời gian.
+
+**Còn lại cho người:**
+
+- Trang mẫu blind vẫn cần 2 người chấm, vì nó đo độ chính xác độc lập nên Claude không chấm.
+- Giá vé thực tế chưa điền: Sun World, VỌC Glamping và các điểm có vé khác.
+- Son Tra Viewpoint: điền giờ quán, đổi loại hình thành `cafe`.
