@@ -54,9 +54,12 @@ def edit_errors(edits) -> list[str]:
         return ["edits is not an object"]
     errors = [f"unknown edit {k}" for k in edits if k not in EDIT_FIELDS]
     hours = edits.get("opening_hours")
+    # sessions of one day must not overlap: "07:00-17:30, 07:00-17:00" is two
+    # weekday variants typed into one field, and day_spans would merge them
     if hours is not None and not (
             isinstance(hours, list) and hours and
-            all(isinstance(h, str) and HOURS_RE.match(h) and day_spans(h) for h in hours)):
+            all(isinstance(h, str) and HOURS_RE.match(h) and
+                len(day_spans(h)) == h.count(",") + 1 for h in hours)):
         errors.append(f"bad opening_hours {hours!r}")
     if "cat" in edits and edits["cat"] not in KNOWN_CATS:
         errors.append(f"bad cat {edits['cat']!r}")

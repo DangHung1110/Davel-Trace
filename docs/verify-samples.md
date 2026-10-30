@@ -515,6 +515,9 @@ Quy tắc về giờ:
 - Giờ được điền khi POI chưa có giờ, hoặc giờ đang có khác Google.
 - Google ghi "mở cả ngày" thì chỉ điền `00:00-23:59` cho landmark, park, nature, beach và viewpoint. Với quán, spa
   và dịch vụ, 24/24 thường là giá trị mặc định chủ quán để lại, nên không điền và planner dùng giờ an toàn của nhóm.
+- Ô giờ chỉ có một khung dùng cho mọi ngày; dấu phẩy trong ô nghĩa là nhiều ca trong cùng một ngày. Nơi có giờ khác
+  nhau theo ngày được điền khung chung của mọi ngày, ví dụ VinWonders điền 09:00–18:00 dù T7, CN mở tới 19:00. Trang
+  duyệt và ingest đều báo sai khi các ca trong một ngày chồng nhau (vd. "07:00-17:30, 07:00-17:00").
 - Ô giờ không ghi được ngày nghỉ. Ngày Google ghi nghỉ bị bỏ ra và được nêu trong ghi chú. Chợ Khái Tây nghỉ T2–T4
   nên không điền giờ.
 - Giờ qua đêm vô lý của điểm tham quan bị bỏ (Hải Vân Quan, CN 07:00–05:30).

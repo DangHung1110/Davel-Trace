@@ -784,6 +784,12 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       if (ends[0] === ends[1]) ok = false;
       return ends[0] + "-" + ends[1];
     });
+    // sessions of one day must not overlap (two weekday variants typed with a comma)
+    var mins = spans.map(function (s) {
+      var m = s.split("-").map(function (x) { var hm = x.split(":"); return Number(hm[0]) * 60 + Number(hm[1]); });
+      return [m[0], m[1] > m[0] ? m[1] : m[1] + 1440];
+    }).sort(function (a, b) { return a[0] - b[0]; });
+    for (var i = 1; i < mins.length; i++) if (mins[i][0] <= mins[i - 1][1]) ok = false;
     return ok ? [spans.join(", ")] : false;
   }
   function intIn(text, lo, hi) {

@@ -120,6 +120,19 @@ class TestReviewPage(unittest.TestCase):
         self.assertEqual(after["drafts"], 1)
         self.assertEqual(before["page_hash"], after["page_hash"])
 
+    def test_committed_drafts_fit_the_edit_fields(self):
+        pois = {p["poi_id"] for p in json.loads(
+            (SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]}
+        drafts = bvp.load_drafts(SNAPSHOT)
+        self.assertTrue(drafts)
+        for pid, draft in drafts.items():
+            self.assertIn(pid, pois)
+            self.assertIn(draft["suggest"], {"dung", "loai", "skip"})
+            self.assertEqual(ing.edit_errors(draft["edits"]), [], pid)
+            # the page has one hours field where "," separates sessions of a
+            # day, so a draft can only prefill one window list for every day
+            self.assertLessEqual(len(draft["edits"].get("opening_hours", [])), 1, pid)
+
     def test_render_is_safe(self):
         rows, meta = bvp.build_rows(self.snap)
         rows[0]["name"] = "</script><b>x"
@@ -177,11 +190,13 @@ class TestIngest(unittest.TestCase):
             line("pagoda", reviewer=""),
             line("pagoda", page="sample"),
             line("pagoda", edits={"opening_hours": ["7h-17h"]}),
+            # two weekday variants typed as two sessions of one day
+            line("pagoda", edits={"opening_hours": ["07:00-17:30, 07:00-17:00"]}),
             line("pagoda", edits={"visit_p50": 2}),
             line("pagoda", row_hash="000000000000"),
         ])
         self.assertEqual(plan["apply"], {})
-        self.assertEqual(len(plan["rejected"]), 7)
+        self.assertEqual(len(plan["rejected"]), 8)
         self.assertIn("stale", plan["rejected"][-1]["reason"])
 
     def test_conflicts_and_dropped_edits(self):
