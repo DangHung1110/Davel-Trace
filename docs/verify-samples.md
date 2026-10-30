@@ -443,3 +443,26 @@ Cách sửa (trung bình Bayes theo số review) đã mô tả ở mục 4, như
 - Gói miễn phí của SerpApi cho 250 lượt search mỗi tháng. Mỗi lượt search trả về khoảng 20 quán kèm số review,
   nên chạy lại kế hoạch query cũ (khoảng 30–60 lượt) là phủ được phần lớn POI. Tra từng POI theo `place_id` thì
   tốn 410 lượt, vượt quota miễn phí.
+
+## 9. Gợi ý tra Google Maps cho 33 POI cần xem lại (30/10/2026)
+
+Claude đã tra Google Maps cho 33 POI đã verify nhưng bị gắn cờ, và 2 POI trùng của chúng trong hàng đợi. Nguồn tra
+là trang địa điểm mở bằng `place_id`. Kết quả nằm trong `BE/data/snapshots/danang-v1/review_drafts.jsonl`
+(35 dòng) và hiện ngay trên thẻ của trang duyệt. Mỗi thẻ có:
+
+- gợi ý Đúng, LOẠI hoặc Bỏ qua kèm lý do;
+- bằng chứng Google: tên, rating, số đánh giá, loại, giờ theo từng ngày, trạng thái đóng cửa;
+- các giá trị nên sửa, đã được điền sẵn vào ô sửa.
+
+**Gợi ý không tự áp dụng.** Người duyệt vẫn phải bấm nút; dòng xuất ra ghi thêm `draft_by` để biết đã có gợi ý.
+
+| Gợi ý | Số POI | Ví dụ |
+|---|---|---|
+| Đúng | 23 | phần lớn khớp Google; OSM cũ (Maia Beach Bar, Ông Minh, 3D Art); 3 bãi sửa loại hình thành `beach`; Trình cà phê đóng 23:00 |
+| LOẠI | 10 | Đình Hồng Phước **đóng vĩnh viễn**; Shop Hoa Tươi **không còn trên Google**; The South Coffee **đã đổi tên** thành Little HaNoi; 2 nhà thờ giáo xứ chỉ có giờ lễ; 4 bản trùng (Đà Sơn ×2, Non Nước, Cổng Chùa Linh Ứng); Khu Dừng Chân |
+| Bỏ qua (bạn quyết) | 2 | shop đặc sản "shop online" có cửa hàng thật; Quán Hải sản Tân Trà Beach bị Google xếp loại "Điểm thu hút" |
+
+Ngoài ra, trên mỗi thẻ:
+
+- Khối OSM giờ hiện tag OSM thật, kèm tên phụ đã khớp (ví dụ "Chùa Không Tên"), thay cho danh sách loại hình suy ra.
+- Ô giờ nhận cả dấu gạch dài khi dán từ Google Maps ("09:00–18:00").
