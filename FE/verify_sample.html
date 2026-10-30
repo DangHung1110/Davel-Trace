@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mẫu đo độ chính xác · danang-v1 · Davel-Trace</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --card:#ffffff; --ink:#121a24; --muted:#5c6b7a;
+    --line:#dde4ec; --brand:#0f6ab4; --brand-ink:#0a4f87;
+    --ok:#137a4b; --ok-bg:#e6f6ee; --no:#b3261e; --no-bg:#fdeceb;
+    --skip:#6b7280; --skip-bg:#eef1f4; --warn:#8a5a00; --warn-bg:#fff4d6;
+    --fail:#7f1d1d; --fail-bg:#fbe3e3;
+    --radius:10px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:15px/1.55 "Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 18px 80px}
+  header.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:var(--shadow)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:12px 18px 10px}
+  .top-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:15px;letter-spacing:.2px}
+  .brand span{color:var(--muted);font-weight:500}
+  .spacer{flex:1 1 auto}
+  .rev{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+  .rev input{border:1px solid var(--line);border-radius:7px;padding:6px 9px;font:inherit;font-size:13px;width:150px;background:#fff;color:var(--ink)}
+  .bar-row{display:flex;align-items:center;gap:12px;margin-top:9px;flex-wrap:wrap}
+  .bar{flex:1 1 240px;height:9px;background:#e3e9f0;border-radius:99px;overflow:hidden;min-width:160px}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#0f6ab4,#25a06b);transition:width .18s ease}
+  .counts{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .counts b{color:var(--ink)}
+  .btn{
+    appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:8px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:600;
+    cursor:pointer;transition:background .12s,border-color .12s,transform .06s;
+  }
+  .btn:hover{background:#f7f9fb;border-color:#c7d2de}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .btn.primary:hover{background:var(--brand-ink);border-color:var(--brand-ink)}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:18px 0;box-shadow:var(--shadow)}
+  .intro summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+  .intro summary::-webkit-details-marker{display:none}
+  .intro summary::before{content:"▸";color:var(--muted);font-size:12px;transition:transform .15s}
+  .intro[open] summary::before{transform:rotate(90deg)}
+  .intro .body{padding:0 18px 18px;border-top:1px solid var(--line);margin-top:2px}
+  .intro h3{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:16px 0 7px}
+  .intro ol,.intro ul{margin:0;padding-left:20px}
+  .intro li{margin:4px 0}
+  .crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:8px 0 0}
+  .crit div{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13.5px}
+  .crit b{display:block;margin-bottom:2px}
+  .note{font-size:13px;color:var(--muted)}
+  .callout{background:var(--warn-bg);border:1px solid #f0dca4;border-radius:8px;padding:10px 12px;font-size:13.5px;margin-top:12px}
+  .filters{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;box-shadow:var(--shadow);margin-bottom:14px}
+  .filters label{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+  .filters select,.filters input[type=search]{
+    border:1px solid var(--line);border-radius:7px;padding:6px 9px;font:inherit;font-size:13.5px;background:#fff;color:var(--ink);
+  }
+  .filters input[type=search]{min-width:210px}
+  .filters .chk{flex-direction:row;align-items:center;gap:6px;font-size:13.5px;color:var(--ink)}
+  .filters .chk input{width:15px;height:15px}
+  .hits{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .card{background:var(--card);border:1px solid var(--line);border-left:5px solid #c9d4e0;border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);scroll-margin-top:96px}
+  .card.v-dung{border-left-color:var(--ok)}
+  .card.v-loai,.card.v-sai{border-left-color:var(--no)}
+  .card.v-skip{border-left-color:#9aa6b2}
+  .card.hide{display:none}
+  .card h2{font-size:17px;line-height:1.3;margin:0 0 3px;font-weight:700;word-break:break-word}
+  .card .pid{font:11.5px/1.4 ui-monospace,Consolas,monospace;color:#8b98a6;word-break:break-all}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 0}
+  .badge{font-size:11.5px;font-weight:700;letter-spacing:.2px;border-radius:99px;padding:2px 9px;background:#eef2f6;color:#41505f;border:1px solid #e0e7ef}
+  .badge.cat{background:#eaf3fb;color:#0a4f87;border-color:#cfe4f5}
+  .badge.prio{background:var(--warn-bg);color:var(--warn);border-color:#f0dca4}
+  .badge.fail{background:var(--fail-bg);color:var(--fail);border-color:#f3c7c7}
+  .badge.ok{background:var(--ok-bg);color:var(--ok);border-color:#bfe6d2}
+  .badge.recheck{background:#fdeceb;color:var(--no);border-color:#f3c7c7}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px 18px;margin:11px 0 0;font-size:13.5px}
+  .grid .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;display:block}
+  .mono{font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
+  .reasons{margin:12px 0 0;padding:10px 12px;background:#fbfcfd;border:1px solid var(--line);border-radius:8px}
+  .reasons .ttl,.osm .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:7px}
+  .chip{display:block;margin:0 0 7px}
+  .chip:last-child{margin-bottom:0}
+  .chip .tag{display:inline-block;font:600 12px/1.5 ui-monospace,Consolas,monospace;border-radius:6px;padding:1px 7px;background:var(--warn-bg);color:var(--warn);border:1px solid #f0dca4;margin-right:7px;vertical-align:top}
+  .chip.hard .tag{background:var(--fail-bg);color:var(--fail);border-color:#f3c7c7}
+  .chip .hint{font-size:13px;color:#3d4a58}
+  .osm{margin:10px 0 0;padding:10px 12px;background:#f5f9f6;border:1px solid #d5e8dc;border-radius:8px;font-size:13.5px}
+  .osm .st{display:inline-block;font:600 11.5px/1.6 ui-monospace,Consolas,monospace;border-radius:6px;padding:0 6px;margin:0 6px 4px 0;border:1px solid var(--line);background:#fff}
+  .osm .st.confirmed{color:var(--ok);border-color:#bfe6d2;background:var(--ok-bg)}
+  .osm .st.conflict{color:var(--no);border-color:#f3c7c7;background:var(--no-bg)}
+  .osm .st.osm_only{color:var(--warn);border-color:#f0dca4;background:var(--warn-bg)}
+  .siblings{margin:10px 0 0;padding:10px 12px;background:#f8fafc;border:1px dashed #cfd9e3;border-radius:8px;font-size:13.5px}
+  .siblings .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
+  .siblings ul{margin:0;padding-left:18px}
+  .siblings li{margin:2px 0}
+  .extra{margin:9px 0 0;font-size:13px;color:#3d4a58}
+  .extra .k{color:var(--muted);font-weight:600}
+  .edit{margin:11px 0 0;border:1px solid var(--line);border-radius:8px;background:#fbfcfd}
+  .edit summary{cursor:pointer;padding:8px 12px;font-size:13px;font-weight:600;color:var(--brand)}
+  .edit .eg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 14px;padding:4px 12px 12px}
+  .edit label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}
+  .edit input,.edit select{border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:13.5px;background:#fff;color:var(--ink)}
+  .edit input.bad{border-color:var(--no);background:var(--no-bg)}
+  .edit .changed{font-size:12px;color:var(--warn);padding:0 12px 10px}
+  .flags{display:none;flex-wrap:wrap;gap:6px 14px;margin-top:9px;font-size:13px}
+  .card.v-sai .flags{display:flex}
+  .flags label{display:flex;gap:5px;align-items:center}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+  .vbtn{min-width:86px}
+  .vbtn.dung.on{background:var(--ok);border-color:var(--ok);color:#fff}
+  .vbtn.loai.on,.vbtn.sai.on{background:var(--no);border-color:var(--no);color:#fff}
+  .vbtn.skip.on{background:var(--skip);border-color:var(--skip);color:#fff}
+  .vbtn.dung:hover:not(.on){background:var(--ok-bg);border-color:#bfe6d2;color:var(--ok)}
+  .vbtn.loai:hover:not(.on),.vbtn.sai:hover:not(.on){background:var(--no-bg);border-color:#f3c7c7;color:var(--no)}
+  .actions .note-in{flex:1 1 260px;min-width:200px}
+  .actions textarea{
+    width:100%;border:1px solid var(--line);border-radius:7px;padding:6px 9px;font:inherit;font-size:13px;
+    resize:vertical;min-height:34px;background:#fff;color:var(--ink);
+  }
+  .actions textarea:focus,.filters select:focus,.filters input:focus,.rev input:focus,.edit input:focus,.edit select:focus{outline:2px solid #bcdaf3;outline-offset:1px}
+  .empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:28px;text-align:center;color:var(--muted)}
+  footer{margin-top:22px;font-size:12px;color:#8b98a6;line-height:1.7;text-align:center}
+  .toast{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(12px);
+    background:#121a24;color:#fff;padding:10px 16px;border-radius:9px;font-size:13.5px;
+    opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:50;max-width:90vw;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hide{display:none!important}
+  @media (max-width:640px){
+    .top-inner{padding:10px 12px 9px}
+    .wrap{padding:0 12px 70px}
+    .rev input{width:120px}
+    .actions .note-in{flex-basis:100%}
+    .grid{grid-template-columns:1fr 1fr}
+  }
+  @media print{
+    header.top,.filters,.actions,.intro,.edit{display:none!important}
+    .card{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="top-row">
+      <div class="brand">Mẫu đo độ chính xác <span>· danang-v1 · 2026-10-30</span></div>
+      <div class="spacer"></div>
+      <div class="rev">
+        <label for="reviewer">Người duyệt</label>
+        <input id="reviewer" type="text" placeholder="Tên của bạn" autocomplete="off">
+      </div>
+      <button class="btn primary" id="export" type="button">Xuất JSONL</button>
+    </div>
+    <div class="bar-row">
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barfill"></i></div>
+      <div class="counts" id="counts">Đã làm <b>0</b>/80</div>
+      <div class="counts" id="breakdown"></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <details class="intro" open>
+    <summary>Việc cần làm &amp; tiêu chí (đọc 1 lần, ~2 phút)</summary>
+    <div class="body">
+<h3>1. Việc cần làm (đo độ chính xác của đợt tự verify)</h3>
+<ol>
+  <li>Mỗi thẻ là một POI <b>đã được máy bật verified</b>, rút ngẫu nhiên theo loại hình. Trang cố ý <u>không</u>
+    hiện lý do của máy hay kết quả OSM, để bạn chấm độc lập.</li>
+  <li>Mở Google Maps, kiểm: còn tồn tại, đúng vị trí, đúng loại hình, giờ đúng, thời lượng hợp lý, giá/vé hợp lý,
+    không trùng điểm khác, là điểm đến cho khách du lịch.</li>
+  <li>Tất cả đều ổn: <b>Đúng</b>. Có ít nhất một chỗ sai: <b>Sai</b> và tick chỗ sai. Không đủ căn cứ: <b>Bỏ qua</b>.</li>
+  <li><b>Hai người chấm riêng</b>, không bàn với nhau trước khi xuất file — độ đồng thuận giữa hai người cũng được đo.</li>
+</ol>
+<div class="callout"><b>Gate:</b> đợt tự verify chỉ được tin khi độ chính xác ≥ 95% và cận dưới khoảng tin cậy ≥ 90%
+  (<code>python BE/ml/data/verify_precision.py file1.jsonl file2.jsonl</code>).</div>
+<h3>2. Xuất file</h3>
+<ol><li>Nhập tên, bấm <b>Xuất JSONL</b>: <code>verify_verdicts_sample_YYYYMMDD_&lt;tên&gt;.jsonl</code>, gửi lại.</li></ol>
+</div>
+  </details>
+
+  <div class="filters">
+    <label>Category
+      <select id="f-cat"><option value="">Tất cả</option></select>
+    </label>
+    <label class="review-only">Nhóm
+      <select id="f-stage"><option value="">Tất cả</option><option value="recheck">Đã verified, cần xem lại</option><option value="queue">Hàng chờ</option></select>
+    </label>
+    <label class="review-only">Lý do
+      <select id="f-reason"><option value="">Tất cả</option></select>
+    </label>
+    <label>Tìm kiếm
+      <input id="f-q" type="search" placeholder="tên, type, poi_id, ghi chú…" autocomplete="off">
+    </label>
+    <label class="chk"><input id="f-todo" type="checkbox"> Chỉ chưa xử lý</label>
+    <button class="btn ghost" id="f-reset" type="button">Xoá lọc</button>
+    <div class="hits" id="hits"></div>
+  </div>
+
+  <div id="list"></div>
+  <div class="empty hide" id="empty">Không có dòng nào khớp bộ lọc.</div>
+
+  <footer>
+    Snapshot <b>danang-v1</b> · page hash <span class="mono">aa24a77b679b5911</span> · tạo 2026-10-30 · 80 dòng<br>
+    Tiến độ lưu tại key <span class="mono" id="storekey"></span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="application/json" id="verify-data">[{"poi_id":"ChIJ8cqHGTMYQjERU0gT5dridKc","row_hash":"d88c3f90927e","name":"Nhà hàng Hai Cử","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["10:00-21:00"],"safe_hours":["17:00-21:00"],"rating":3.9,"lat":16.065718999999998,"lon":108.2225285,"ticket_vnd":null,"price_band":null,"dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng","Nhà hàng Việt Nam"],"decision":"sample"},{"poi_id":"ChIJiaXn52YXQjERbd2jnJ1Xmg0","row_hash":"15f48aa71c81","name":"Quán cà phê Sáu Trên Sáu","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["07:30-21:00"],"safe_hours":["17:00-21:00"],"rating":4.7,"lat":16.0432336,"lon":108.2442276,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng","Khu vực phục vụ bia","Quán ăn nhỏ","Nhà hàng chuyên phục vụ bữa sáng","Nhà hàng chuyên phục vụ bữa nửa buổi"],"decision":"sample"},{"poi_id":"ChIJQydy2apx34oRnci64Kkdi4U","row_hash":"0fa03a95d511","name":"For You Club","cat":"bar","type":"Quán bar","address":null,"hours":["20:00-03:00"],"safe_hours":["19:30-23:45"],"rating":4.8,"lat":16.0566025,"lon":108.22273039999999,"ticket_vnd":null,"price_band":"expensive","dur_p50":108,"dur_source":"category_rule","tags":["Quán bar","Hộp đêm"],"decision":"sample"},{"poi_id":"ChIJR4XhE3sXQjERBfL8sHnu-JQ","row_hash":"2582fcedcb4a","name":"H Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:00-22:00"],"safe_hours":["07:30-19:30"],"rating":4.6,"lat":16.0492429,"lon":108.2446288,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê","Nhà hàng chuyên phục vụ bữa sáng","Cơ sở rang cà phê","Cửa hàng cà phê","Không gian làm việc chia sẻ"],"decision":"sample"},{"poi_id":"ChIJyVQ3iwoXQjERNILX5sPCUKA","row_hash":"ad74e33d4221","name":"Section 30","cat":"bar","type":"Quán rượu","address":null,"hours":["16:00-01:00"],"safe_hours":["19:30-23:45"],"rating":4.7,"lat":16.051266,"lon":108.24619179999999,"ticket_vnd":null,"price_band":"medium","dur_p50":108,"dur_source":"category_rule","tags":["Quán rượu","Quán cà phê","Nhà hàng","Bar thể thao"],"decision":"sample"},{"poi_id":"ChIJCeQZ-jkZQjERaXJSI0ZDWXw","row_hash":"ab4522203920","name":"CHÙA KHÔNG TÊN ĐÀ NẴNG","cat":"landmark","type":"Chùa phật giáo","address":null,"hours":["09:00-17:00"],"safe_hours":["09:00-17:00"],"rating":4.8,"lat":16.0418826,"lon":108.14825359999999,"ticket_vnd":null,"price_band":null,"dur_p50":54,"dur_source":"category_rule","tags":["Chùa phật giáo"],"decision":"sample"},{"poi_id":"ChIJC0W3bjoYQjERVBMskQcoQck","row_hash":"1daa1331cfb7","name":"Di tích Thành Điện Hải","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["08:00-11:30, 13:30-16:30"],"safe_hours":["09:00-17:00"],"rating":4.3,"lat":16.0761821,"lon":108.22163019999999,"ticket_vnd":null,"price_band":null,"dur_p50":200,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch","Pháo đài"],"decision":"sample"},{"poi_id":"ChIJIaxebnoXQjERNETM7bT3ewg","row_hash":"989a52ec173e","name":"Bãi tắm T20","cat":"beach","type":"Bãi biển","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":4.5,"lat":16.0398823,"lon":108.2531363,"ticket_vnd":null,"price_band":null,"dur_p50":144,"dur_source":"category_rule","tags":["Bãi biển"],"decision":"sample"},{"poi_id":"ChIJxwczMkkXQjERoo3KDb0ZQKE","row_hash":"139aea2d2350","name":"Hải Sản A SÂM","cat":"restaurant","type":"Nhà hàng hải sản","address":null,"hours":["08:30-23:00"],"safe_hours":["17:00-21:00"],"rating":4.8,"lat":16.1033874,"lon":108.2565599,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng hải sản"],"decision":"sample"},{"poi_id":"ChIJHZakNa8ZQjERWNFToM16eB4","row_hash":"cc9b6fd3d49e","name":"Chùa Linh Ứng - Bãi Bụt Sơn Trà","cat":"landmark","type":"Chùa phật giáo","address":null,"hours":["06:00-21:00"],"safe_hours":["09:00-17:00"],"rating":4.5,"lat":16.100205499999998,"lon":108.2778816,"ticket_vnd":null,"price_band":null,"dur_p50":54,"dur_source":"category_rule","tags":["Chùa phật giáo"],"decision":"sample"},{"poi_id":"ChIJFawIPfcXQjERz77xoR3B6Ag","row_hash":"cb370dede5f2","name":"Nhà hàng Ngon Thị Hoa","cat":"restaurant","type":"Nhà hàng Việt Nam","address":null,"hours":["06:00-22:00"],"safe_hours":["17:00-21:00"],"rating":4.4,"lat":16.048904399999998,"lon":108.2458626,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng Việt Nam","Quán cà phê","Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJZ9UJGQQZQjERFL90XKMPBGk","row_hash":"f162beabc12e","name":"Hồ Bơi Thanh Khê","cat":"beach","type":"Hồ bơi","address":null,"hours":["06:00-22:00"],"safe_hours":["09:00-17:00"],"rating":4,"lat":16.0606956,"lon":108.1839267,"ticket_vnd":null,"price_band":null,"dur_p50":120,"dur_source":"category_rule","tags":["Hồ bơi"],"decision":"sample"},{"poi_id":"ChIJ701Bqt8XQjERf9oQmmJJRE8","row_hash":"0f90a0275737","name":"Regal Healthy Spa","cat":"spa","type":"Spa mát xa","address":null,"hours":["09:00-23:30"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.0528111,"lon":108.2459105,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa mát xa","Tiệm chăm sóc móng","Cửa hàng tắm hơi"],"decision":"sample"},{"poi_id":"ChIJN_abDNcZQjERmLjyrAo7IPk","row_hash":"b3fdd1bbdee0","name":"CẬU ẤM BEER CHILL","cat":"restaurant","type":"Quán bia","address":null,"hours":["16:00-03:00"],"safe_hours":["17:00-21:00"],"rating":4.5,"lat":16.0650224,"lon":108.20246979999999,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Quán bia"],"decision":"sample"},{"poi_id":"ChIJTQuJbKYZQjERAE9fPrQroZw","row_hash":"33deb53a526d","name":"Drink Đi","cat":"bar","type":"Quán bar","address":null,"hours":["16:30-03:30"],"safe_hours":["19:30-23:45"],"rating":4.2,"lat":16.0730565,"lon":108.187935,"ticket_vnd":null,"price_band":"medium","dur_p50":90,"dur_source":"category_rule","tags":["Quán bar","Nhà hàng Việt Nam"],"decision":"sample"},{"poi_id":"ChIJsSD2e3kfQjER2d_jnMVrKZ4","row_hash":"509766f9e0d8","name":"Quán nhậu A bảy","cat":"restaurant","type":"Quán bia","address":null,"hours":["09:00-23:00"],"safe_hours":["17:00-21:00"],"rating":4.4,"lat":16.0905284,"lon":108.11396119999999,"ticket_vnd":null,"price_band":null,"dur_p50":60,"dur_source":"category_rule","tags":["Quán bia"],"decision":"sample"},{"poi_id":"ChIJXYpw5DMXQjERzS8ce1U5Z3M","row_hash":"7a584f347a6a","name":"Lá sen Spa","cat":"spa","type":"Spa","address":null,"hours":["09:00-23:00"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.0487061,"lon":108.2455019,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa","Spa mát xa"],"decision":"sample"},{"poi_id":"ChIJFXuefgA9QjERTm9u0hlzWcs","row_hash":"50c53a0a91a6","name":"View Sơn Trà về đêm","cat":"viewpoint","type":"Điểm ngắm cảnh","address":null,"hours":["17:00-23:00"],"safe_hours":["09:00-17:00"],"rating":4.8,"lat":16.109185999999998,"lon":108.25187,"ticket_vnd":null,"price_band":null,"dur_p50":54,"dur_source":"category_rule","tags":["Điểm ngắm cảnh"],"decision":"sample"},{"poi_id":"ChIJI4oSjdE9QjERlXMiA630YKs","row_hash":"debcd3ecd0be","name":"Hải đăng Tiên Sa","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["05:00-21:00"],"safe_hours":["09:00-17:00"],"rating":4.3,"lat":16.1396875,"lon":108.3220625,"ticket_vnd":null,"price_band":null,"dur_p50":200,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJXcc22ZcZQjERT47ZqHMl13c","row_hash":"0f0f88a67fa5","name":"Charm Spa - Massage Da Nang","cat":"spa","type":"Spa mát xa","address":null,"hours":["09:00-23:00"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.0648698,"lon":108.2207751,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa mát xa"],"decision":"sample"},{"poi_id":"ChIJVWhfuoYZQjERiqzzyK-rRko","row_hash":"aef39260d5c3","name":"Kiến Cafe","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:00-22:00"],"safe_hours":["07:30-19:30"],"rating":4.7,"lat":16.0899551,"lon":108.1478334,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"osm:node/14045110791","row_hash":"f335ff897fba","name":"Lucky Retail","cat":"market","type":"Cửa hàng quà lưu niệm","address":null,"hours":["06:00-00:59"],"safe_hours":[],"rating":null,"lat":16.0560017,"lon":108.2021613,"ticket_vnd":null,"price_band":null,"dur_p50":75,"dur_source":"category_rule","tags":["Cửa hàng quà lưu niệm"],"decision":"sample"},{"poi_id":"ChIJd47MOrUQQjERkE6lCjR2874","row_hash":"ec1884add4c7","name":"Quán Ngũ Hành","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["10:30-23:00"],"safe_hours":["17:00-21:00"],"rating":4.2,"lat":16.014318,"lon":108.259045,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng"],"decision":"sample"},{"poi_id":"osm:node/14045130739","row_hash":"75bc8c0c5af9","name":"Made in Vietnam","cat":"market","type":"Cửa hàng quà lưu niệm","address":null,"hours":["06:00-00:59"],"safe_hours":[],"rating":null,"lat":16.0556406,"lon":108.2022206,"ticket_vnd":null,"price_band":null,"dur_p50":75,"dur_source":"category_rule","tags":["Cửa hàng quà lưu niệm"],"decision":"sample"},{"poi_id":"ChIJZ6w1fJgZQjERP9-_TlpgQXM","row_hash":"e7bdb7285856","name":"Lagoon Rooftop - Dragon Bridge Fire Show","cat":"bar","type":"Quán bar","address":null,"hours":["16:30-23:30"],"safe_hours":["19:30-23:45"],"rating":4.2,"lat":16.060461699999998,"lon":108.23142159999999,"ticket_vnd":null,"price_band":"medium","dur_p50":90,"dur_source":"category_rule","tags":["Quán bar"],"decision":"sample"},{"poi_id":"ChIJgaVvkV0XQjERNZYSVEJS_Xo","row_hash":"7a7b87546ca5","name":"Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers","cat":"bar","type":"Quán bar","address":null,"hours":["17:00-00:00"],"safe_hours":["19:30-23:45"],"rating":4.9,"lat":16.0496805,"lon":108.24775269999999,"ticket_vnd":null,"price_band":"medium","dur_p50":108,"dur_source":"category_rule","tags":["Quán bar"],"decision":"sample"},{"poi_id":"ChIJL1GKWJYZQjERLrEGqlK2kwQ","row_hash":"442b2a86e512","name":"Cầu Rồng","cat":"landmark","type":"Cầu","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":4.5,"lat":16.0611042,"lon":108.2276926,"ticket_vnd":null,"price_band":null,"dur_p50":54,"dur_source":"category_rule","tags":["Cầu","Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJIRqUZWgZQjERwaNywpofxfk","row_hash":"fc60210409d5","name":"Nhà Hàng LÀNG HẢI SẢN","cat":"restaurant","type":"Nhà hàng hải sản","address":null,"hours":["08:00-23:00"],"safe_hours":["17:00-21:00"],"rating":4.1,"lat":16.0721599,"lon":108.1954981,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng hải sản"],"decision":"sample"},{"poi_id":"ChIJsyY9JzoYQjERvaNXwl9KJkI","row_hash":"ef8977d6123f","name":"Spa Massage Sông Hàn","cat":"spa","type":"Spa mát xa","address":null,"hours":["08:00-23:30"],"safe_hours":["10:00-19:30"],"rating":4.9,"lat":16.0779858,"lon":108.2207504,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa mát xa","Dịch vụ hương liệu pháp","Phòng mát-xa chân","Spa sức khỏe","Spa đá nóng"],"decision":"sample"},{"poi_id":"osm:node/14067929701","row_hash":"a980013e6de5","name":"Bonny handmade","cat":"market","type":"Cửa hàng quà lưu niệm","address":null,"hours":["08:00-11:30, 14:00-17:30"],"safe_hours":[],"rating":null,"lat":16.0524725,"lon":108.2438676,"ticket_vnd":null,"price_band":null,"dur_p50":75,"dur_source":"category_rule","tags":["Cửa hàng quà lưu niệm"],"decision":"sample"},{"poi_id":"ChIJH4d2i1YYQjERFSA6rKn_Pos","row_hash":"e0824dab57af","name":"Nhà hàng Phú Mỹ Thành","cat":"restaurant","type":"Nhà hàng Việt Nam","address":null,"hours":["08:00-21:30"],"safe_hours":["17:00-21:00"],"rating":4.1,"lat":16.0763618,"lon":108.2074803,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng Việt Nam"],"decision":"sample"},{"poi_id":"ChIJhYuNIQAZQjERoyprw_nC3Ts","row_hash":"ebef48cf4665","name":"Mew Roastery - Specialty Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:30-17:30"],"safe_hours":["07:30-19:30"],"rating":4.9,"lat":16.0644194,"lon":108.2141479,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJIZrPSy8ZQjERGZsE8IgrSnk","row_hash":"2c346f5415b2","name":"FM Garden Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:30-22:30"],"safe_hours":["07:30-19:30"],"rating":4.1,"lat":16.0640207,"lon":108.15347829999999,"ticket_vnd":null,"price_band":"cheap","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJ3ZNy2BkZQjERkAqpwnkat3o","row_hash":"e11b83aa79c2","name":"Bê Thui Thiên 2","cat":"restaurant","type":"Quán bia","address":null,"hours":["04:30-22:00"],"safe_hours":["17:00-21:00"],"rating":4.8,"lat":16.0839993,"lon":108.145292,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Quán bia"],"decision":"sample"},{"poi_id":"ChIJ82_sTbkQQjERQ5jmVkoovic","row_hash":"e1d1badb609d","name":"Bảo Tàng Văn Hóa Phật Giáo","cat":"museum","type":"Bảo tàng","address":null,"hours":["08:00-18:00"],"safe_hours":["09:00-17:00"],"rating":4.8,"lat":15.998929299999999,"lon":108.2547934,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Bảo tàng","Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJxxumO4QZQjERqrQlIwbE8cA","row_hash":"27885fdd7ccf","name":"Buffalo beer & coffee","cat":"restaurant","type":"Quán bia","address":null,"hours":["07:00-12:00, 17:00-00:00"],"safe_hours":["17:00-21:00"],"rating":4.8,"lat":16.0639042,"lon":108.22004129999999,"ticket_vnd":null,"price_band":null,"dur_p50":72,"dur_source":"category_rule","tags":["Quán bia"],"decision":"sample"},{"poi_id":"ChIJOQ-obAARQjERQ4kQhqErSkw","row_hash":"25ca1313716f","name":"Bãi tắm Nguyễn Thần Hiến","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":4.4,"lat":15.994815299999999,"lon":108.273776,"ticket_vnd":null,"price_band":null,"dur_p50":200,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJQwork9IXQjERVcF8a6VWq5I","row_hash":"35da019d68ac","name":"Maia Beach Bar","cat":"bar","type":"Quán bar","address":null,"hours":["07:00-01:00"],"safe_hours":["19:30-23:45"],"rating":4.7,"lat":16.0516973,"lon":108.2486229,"ticket_vnd":null,"price_band":"medium","dur_p50":108,"dur_source":"category_rule","tags":["Quán bar","Sân bóng chuyền bãi biển","Quán cà phê","Địa điểm ca nhạc trực tiếp","Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJHz8ambQZQjERjEFJ-wJ-9EE","row_hash":"1ff2d41f4533","name":"Mỳ Quảng Hương Quê","cat":"restaurant","type":"Quán mì","address":null,"hours":["06:00-21:00"],"safe_hours":["17:00-21:00"],"rating":4.4,"lat":16.0634331,"lon":108.2085142,"ticket_vnd":null,"price_band":"cheap","dur_p50":60,"dur_source":"category_rule","tags":["Quán mì"],"decision":"sample"},{"poi_id":"ChIJBTwySgAZQjERS5kel5Caf00","row_hash":"81053b476b4f","name":"Hội Vũ Spa","cat":"spa","type":"Spa","address":null,"hours":["09:00-20:00"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.067127199999998,"lon":108.19160939999999,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa","Phòng tập thể dục"],"decision":"sample"},{"poi_id":"ChIJkxff_x0XQjERCC_CN8DFt54","row_hash":"b5c730c5a385","name":"The Craftsman Cocktail Bar","cat":"bar","type":"Quán bar cocktail","address":null,"hours":["00:30-01:00","00:30-01:00, 19:30-00:00","19:30-00:00"],"safe_hours":["19:30-23:45"],"rating":4.7,"lat":16.0464666,"lon":108.2468585,"ticket_vnd":null,"price_band":"medium","dur_p50":108,"dur_source":"category_rule","tags":["Quán bar cocktail"],"decision":"sample"},{"poi_id":"ChIJA-NYRUwXQjER4pvBUQyoo8U","row_hash":"38f0c8419b2a","name":"The Sense Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:00-19:00"],"safe_hours":["07:30-19:30"],"rating":4.8,"lat":16.037240399999998,"lon":108.24706859999999,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJeROGTS4ZQjERKlipW2HlSvw","row_hash":"e93f7b6af161","name":"Mì Quảng Nhung","cat":"restaurant","type":"Quán ăn nhỏ","address":null,"hours":["06:00-10:00"],"safe_hours":["17:00-21:00"],"rating":4.4,"lat":16.0829146,"lon":108.2131088,"ticket_vnd":null,"price_band":"cheap","dur_p50":60,"dur_source":"category_rule","tags":["Quán ăn nhỏ"],"decision":"sample"},{"poi_id":"ChIJY-zHSgQZQjERRoAvxXVcViU","row_hash":"ef45347d5ee1","name":"Be Nhung Restaurant","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["12:30-23:00"],"safe_hours":["17:00-21:00"],"rating":4.2,"lat":16.057072299999998,"lon":108.1841149,"ticket_vnd":null,"price_band":"medium","dur_p50":78,"dur_source":"category_rule","tags":["Nhà hàng","Gian hàng rong"],"decision":"sample"},{"poi_id":"ChIJXeXlix8ZQjERx9QsmNqx6_U","row_hash":"a703234530b6","name":"[91cc] 91 Concept Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:00-22:30"],"safe_hours":["07:30-19:30"],"rating":4.8,"lat":16.0662557,"lon":108.2204201,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJzYULZMgRQjERYRTCyEgKZUY","row_hash":"557d1455a959","name":"AURA SPA-Massage-Nails-Hair Wash & Relaxation In Da Nang","cat":"spa","type":"Spa","address":null,"hours":["09:00-22:00"],"safe_hours":["10:00-19:30"],"rating":4.9,"lat":15.9936454,"lon":108.26824409999999,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa","Spa sức khỏe","Spa đá nóng"],"decision":"sample"},{"poi_id":"ChIJ3xT1QS4ZQjER8qV4HPop8io","row_hash":"b3bcbf3e10a8","name":"Nhà Hàng Chay Phúc An","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["10:00-21:30"],"safe_hours":["17:00-21:00"],"rating":4.7,"lat":16.0737281,"lon":108.2032435,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJN-vJNV8XQjERNccI4vX2rHY","row_hash":"dfbafc2717d1","name":"Nén Restaurant","cat":"restaurant","type":"Nhà hàng cao cấp","address":null,"hours":["10:30-14:00, 17:30-20:45","17:30-20:45"],"safe_hours":["17:00-21:00"],"rating":4.4,"lat":16.0346026,"lon":108.2395581,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng cao cấp","Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJkYkOmOMXQjEREz4KLKpwAOE","row_hash":"c95dfe69910b","name":"Hải sản Năm Đảnh","cat":"restaurant","type":"Nhà hàng hải sản","address":null,"hours":["10:00-22:30"],"safe_hours":["17:00-21:00"],"rating":4.1,"lat":16.1022967,"lon":108.2533986,"ticket_vnd":null,"price_band":"medium","dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng hải sản"],"decision":"sample"},{"poi_id":"ChIJZdLv8rkZQjERIhU2VsEsCl4","row_hash":"f6cfc34176b9","name":"Ngã Coffee & Desserts","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:30-23:00"],"safe_hours":["07:30-19:30"],"rating":4.7,"lat":16.0523825,"lon":108.2062471,"ticket_vnd":null,"price_band":null,"dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"osm:node/5273998823","row_hash":"4af86e7f028e","name":"Cầu Trần Thị Lý","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":null,"lat":16.050179,"lon":108.2293814,"ticket_vnd":null,"price_band":null,"dur_p50":45,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJaQNtm9IfQjERhfrVRYqgA1M","row_hash":"460f4705c3d7","name":"Hồ Hòa Trung","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":4.4,"lat":16.0801438,"lon":108.059412,"ticket_vnd":null,"price_band":null,"dur_p50":200,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch","Khu cắm trại"],"decision":"sample"},{"poi_id":"ChIJe3Ixim4XQjERbbrbMnyhr34","row_hash":"e94bb6926c88","name":"ĐÀ THÀNH QUÁN","cat":"restaurant","type":"Nhà hàng hải sản","address":null,"hours":["10:00-02:00"],"safe_hours":["17:00-21:00"],"rating":4.8,"lat":16.0554266,"lon":108.24402239999999,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng hải sản"],"decision":"sample"},{"poi_id":"ChIJ2yr5edIYQjER5_9326fLFA0","row_hash":"fca775c579bb","name":"Cafe The Light","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:00-22:00"],"safe_hours":["07:30-19:30"],"rating":3.8,"lat":16.081595699999998,"lon":108.1466846,"ticket_vnd":null,"price_band":null,"dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJQdpSMREZQjEReHEkMWcVwbw","row_hash":"d5a2885dc944","name":"Dazzling Cocktail Bar","cat":"bar","type":"Quán bar cocktail","address":null,"hours":["19:00-01:00"],"safe_hours":["19:30-23:45"],"rating":4.9,"lat":16.0745504,"lon":108.2200568,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Quán bar cocktail"],"decision":"sample"},{"poi_id":"ChIJr-RyTyYfQjERmXNNs1WNyY4","row_hash":"603550e1b751","name":"cafe phố núi","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:00-21:30"],"safe_hours":["07:30-19:30"],"rating":4.1,"lat":16.076283,"lon":108.1291127,"ticket_vnd":null,"price_band":"cheap","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJxzo3j9EZQjER785qACnbIW0","row_hash":"b1a1bc9afa56","name":"P Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:00-22:00"],"safe_hours":["07:30-19:30"],"rating":4.4,"lat":16.0607465,"lon":108.2206633,"ticket_vnd":null,"price_band":null,"dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê","Trà trân châu"],"decision":"sample"},{"poi_id":"ChIJzeNmTwARQjERLSXizyRKI9g","row_hash":"8c9af481a69c","name":"FORD 1619 CAFE - FPT Ngũ Hành Sơn","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:00-22:00"],"safe_hours":["07:30-19:30"],"rating":4.6,"lat":15.981960099999998,"lon":108.25232709999999,"ticket_vnd":null,"price_band":"cheap","dur_p50":54,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJi5XzTqsZQjERn5HbwcdvD5Y","row_hash":"9c51de914d5a","name":"Cơm nhà vui","cat":"restaurant","type":"Nhà hàng Việt Nam","address":null,"hours":["10:00-22:00"],"safe_hours":["17:00-21:00"],"rating":4.8,"lat":16.0566182,"lon":108.22206709999999,"ticket_vnd":null,"price_band":null,"dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng Việt Nam"],"decision":"sample"},{"poi_id":"ChIJlZA7YgEZQjERwBfzBwsUo18","row_hash":"2d2c0ce10b10","name":"Đặc sản Đà Nẵng làm quà - Dương Lê","cat":"market","type":"Cửa hàng bán thực phẩm đặc sản","address":null,"hours":["08:30-21:00"],"safe_hours":[],"rating":4.7,"lat":16.0343577,"lon":108.2224462,"ticket_vnd":null,"price_band":null,"dur_p50":90,"dur_source":"category_rule","tags":["Cửa hàng bán thực phẩm đặc sản","Cửa hàng bán thực phẩm sạch","Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJaa7lANcXQjERmT3kgV5U7uA","row_hash":"979bbe9311a5","name":"Bảo tàng Đồng Đình","cat":"museum","type":"Bảo tàng nghệ thuật","address":null,"hours":["07:30-18:00"],"safe_hours":["09:00-17:00"],"rating":4.2,"lat":16.1011538,"lon":108.2753793,"ticket_vnd":35000,"price_band":"cheap","dur_p50":90,"dur_source":"category_rule","tags":["Bảo tàng nghệ thuật","Quán cà phê","Khu bảo tồn thiên nhiên","Nhà hàng","Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJCyoHH4kZQjERX3hJiiMqhyk","row_hash":"1ca9e9eff3c9","name":"Đường hoa Bạch Đằng","cat":"park","type":"Công viên","address":null,"hours":["00:00-23:59"],"safe_hours":["09:00-17:00"],"rating":4.7,"lat":16.0604224,"lon":108.2243312,"ticket_vnd":null,"price_band":null,"dur_p50":144,"dur_source":"category_rule","tags":["Công viên"],"decision":"sample"},{"poi_id":"ChIJyy6atVM9QjER3q1j566SMPg","row_hash":"f9c808f9a00d","name":"Trà Sơn Quán","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["08:00-22:00"],"safe_hours":["17:00-21:00"],"rating":4,"lat":16.1072305,"lon":108.2525349,"ticket_vnd":null,"price_band":null,"dur_p50":60,"dur_source":"category_rule","tags":["Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJ7fA2ROsZQjERuQWylV-XvDg","row_hash":"38ce84f91d13","name":"Panda Spa & Massage","cat":"spa","type":"Spa","address":null,"hours":["09:00-23:45"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.0561522,"lon":108.24537749999999,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa","Spa ban ngày","Spa mặt","Spa sức khỏe","Spa đá nóng"],"decision":"sample"},{"poi_id":"ChIJs95SfgAZQjERWa0RkAoF0XA","row_hash":"c8d2457893bf","name":"City Box - Music Box","cat":"bar","type":"Quán bar karaoke","address":null,"hours":["09:00-05:00"],"safe_hours":["19:30-23:45"],"rating":3.6,"lat":16.0776048,"lon":108.1482671,"ticket_vnd":null,"price_band":"cheap","dur_p50":90,"dur_source":"category_rule","tags":["Quán bar karaoke"],"decision":"sample"},{"poi_id":"ChIJH1TU7PsYQjER-jhAtZLdLMc","row_hash":"d35de84d58a3","name":"Bonjour Coffee","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:00-22:00"],"safe_hours":["07:30-19:30"],"rating":4.2,"lat":16.073940099999998,"lon":108.182912,"ticket_vnd":null,"price_band":"medium","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJGSKUUwCLQTERr0Je7WP5Xqc","row_hash":"5bda4b3b9b69","name":"Khu du lịch Bến Nam Yên","cat":"nature","type":"Khu cắm trại","address":null,"hours":["06:00-23:30"],"safe_hours":["09:00-17:00"],"rating":4.6,"lat":16.1377247,"lon":108.03805109999999,"ticket_vnd":null,"price_band":null,"dur_p50":75,"dur_source":"human","tags":["Khu cắm trại"],"decision":"sample"},{"poi_id":"ChIJMQ_j9n0ZQjER6BCkcpQNT8s","row_hash":"eeabd26eff76","name":"MOR CÀ PHÊ","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:30-22:00"],"safe_hours":["07:30-19:30"],"rating":4.4,"lat":16.0583208,"lon":108.2070073,"ticket_vnd":null,"price_band":null,"dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJ08DIzjY9QjER4ldy4JXZBLA","row_hash":"88f671f160d8","name":"Nhà Vọng Cảnh","cat":"attraction","type":"Điểm thu hút khách du lịch","address":null,"hours":["07:30-18:30"],"safe_hours":["09:00-17:00"],"rating":4.5,"lat":16.1351089,"lon":108.24537579999999,"ticket_vnd":null,"price_band":null,"dur_p50":240,"dur_source":"category_rule","tags":["Điểm thu hút khách du lịch"],"decision":"sample"},{"poi_id":"ChIJLeqV3_cXQjERH0Dq1Mte6_w","row_hash":"4d8c15c95681","name":"Son Tra Retreat - Garden Lounge & Eatery","cat":"restaurant","type":"Nhà hàng","address":null,"hours":["09:00-22:00","09:30-22:00"],"safe_hours":["17:00-21:00"],"rating":4.9,"lat":16.1037247,"lon":108.2640959,"ticket_vnd":null,"price_band":"medium","dur_p50":72,"dur_source":"category_rule","tags":["Nhà hàng","Quán bar","Quán bia sân vườn","Quán cà phê","Quán bar cocktail"],"decision":"sample"},{"poi_id":"ChIJRQDAiMIZQjERgrBd-ERmO-k","row_hash":"2f4660cf7ec9","name":"Tigon massa - Spa & Massage Đà Nẵng","cat":"spa","type":"Spa","address":null,"hours":["09:00-22:30"],"safe_hours":["10:00-19:30"],"rating":4.5,"lat":16.0338615,"lon":108.2239309,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa"],"decision":"sample"},{"poi_id":"ChIJi0bpGjIYQjERRodYRF89PH8","row_hash":"c2e437460a15","name":"Cộng Cà Phê","cat":"cafe","type":"Quán cà phê","address":null,"hours":["07:00-23:30"],"safe_hours":["07:30-19:30"],"rating":4.1,"lat":16.0690486,"lon":108.2248767,"ticket_vnd":null,"price_band":"cheap","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"},{"poi_id":"ChIJ80QCWQAXQjER9Wfb-KFGetQ","row_hash":"c44e78332b91","name":"Rosa Spa & Massage Da Nang","cat":"spa","type":"Spa","address":null,"hours":["12:00-00:00"],"safe_hours":["10:00-19:30"],"rating":4.8,"lat":16.0537034,"lon":108.2381547,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa"],"decision":"sample"},{"poi_id":"ChIJ2eEwIrEZQjERmUcku_xN6pw","row_hash":"cd77bb2fb233","name":"Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương","cat":"restaurant","type":"Quán mì","address":null,"hours":["06:00-21:30"],"safe_hours":["17:00-21:00"],"rating":3.8,"lat":16.0565752,"lon":108.208438,"ticket_vnd":null,"price_band":"cheap","dur_p50":60,"dur_source":"category_rule","tags":["Quán mì","Nhà hàng chuyên phục vụ bữa sáng","Cửa hàng bán đồ ăn nấu sẵn","Nhà hàng"],"decision":"sample"},{"poi_id":"ChIJJS-cJ58XQjERxgFIfN6CjJ0","row_hash":"e50a9d1d6390","name":"Trung Nguyên Legend Café","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:30-20:00"],"safe_hours":["07:30-19:30"],"rating":3.6,"lat":16.1032923,"lon":108.2576502,"ticket_vnd":null,"price_band":"cheap","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê","Cửa hàng cà phê"],"decision":"sample"},{"poi_id":"ChIJs9Tdb7kfQjERg5O07vnwsww","row_hash":"b98261a2f401","name":"Nàng Thir Spa ở Hòa Khánh","cat":"spa","type":"Spa","address":null,"hours":["08:30-22:00"],"safe_hours":["10:00-19:30"],"rating":4.9,"lat":16.0737393,"lon":108.1376457,"ticket_vnd":null,"price_band":null,"dur_p50":108,"dur_source":"category_rule","tags":["Spa"],"decision":"sample"},{"poi_id":"ChIJaX09zkgYQjERCtro2DeADN0","row_hash":"431506000ce8","name":"Chùa Thuận Thành","cat":"landmark","type":"Chùa phật giáo","address":null,"hours":["05:00-21:00"],"safe_hours":["09:00-17:00"],"rating":4.3,"lat":16.0744137,"lon":108.2085853,"ticket_vnd":null,"price_band":null,"dur_p50":45,"dur_source":"category_rule","tags":["Chùa phật giáo"],"decision":"sample"},{"poi_id":"ChIJCd3q4FQXQjERF640iRTpb7I","row_hash":"47cdf009f0f8","name":"Mystery Bar & Lounge","cat":"bar","type":"Quán bar","address":null,"hours":["19:30-03:00"],"safe_hours":["19:30-23:45"],"rating":4.3,"lat":16.0687551,"lon":108.24229229999999,"ticket_vnd":null,"price_band":null,"dur_p50":90,"dur_source":"category_rule","tags":["Quán bar"],"decision":"sample"},{"poi_id":"ChIJw6DOwZ8QQjERjDMobkQxbF0","row_hash":"250bdf9e054d","name":"Chợ Bình Kỳ","cat":"market","type":"Chợ","address":null,"hours":["05:00-16:30"],"safe_hours":[],"rating":3.8,"lat":15.9931538,"lon":108.23893249999999,"ticket_vnd":null,"price_band":null,"dur_p50":75,"dur_source":"category_rule","tags":["Chợ"],"decision":"sample"},{"poi_id":"ChIJAWgMydkZQjER-MpvKFLjoqs","row_hash":"dfb7bc20c4bf","name":"Tiệm cà phê Cậu Út","cat":"cafe","type":"Quán cà phê","address":null,"hours":["06:30-23:00"],"safe_hours":["07:30-19:30"],"rating":4.3,"lat":16.0639814,"lon":108.22240719999999,"ticket_vnd":null,"price_band":"cheap","dur_p50":45,"dur_source":"category_rule","tags":["Quán cà phê"],"decision":"sample"}]</script>
+<script type="application/json" id="verify-meta">{"mode":"sample","snapshot":"danang-v1","fetched_at":"2026-10-03","generated":"2026-10-30","page_hash":"aa24a77b679b5911","poi_total":742,"priority_cats":["landmark","attraction","nature","park","museum","beach","viewpoint"],"cats":["restaurant","cafe","bar","spa","market","attraction","landmark","museum","beach","nature","park","viewpoint","lodging","transport"],"price_bands":["cheap","medium","expensive"],"flags":["exists","location","category","hours","duration","price","duplicate","not_destination"],"seed":20261030,"population":362,"strata":{"attraction":[6,28],"bar":[10,47],"beach":[2,8],"cafe":[16,74],"landmark":[4,19],"market":[5,22],"museum":[2,8],"nature":[1,2],"park":[1,6],"restaurant":[22,99],"spa":[10,48],"viewpoint":[1,1]},"sample_of":"auto-verify-v1"}</script>
+<script>
+(function () {
+  "use strict";
+
+  var DATA = JSON.parse(document.getElementById("verify-data").textContent);
+  var META = JSON.parse(document.getElementById("verify-meta").textContent);
+  var SAMPLE = META.mode === "sample";
+  var VERDICTS = SAMPLE ? ["dung", "sai", "skip"] : ["dung", "loai", "skip"];
+  var VLABEL = { dung: "Đúng", loai: "LOẠI", sai: "Sai", skip: "Bỏ qua" };
+  var STORE_KEY = "davel-trace-verify:" + META.mode + ":" + META.snapshot + ":" + META.page_hash;
+  var REASON_LABEL = {
+    hours_missing: "Thiếu giờ mở cửa",
+    rating_perfect: "Rating 5.0 tuyệt đối",
+    near_duplicate: "Nghi trùng gần (<100 m)",
+    duplicate_name: "Trùng tên",
+    duration_outlier: "Thời lượng lệch bất thường",
+    name_generic: "Tên chung chung / 1 token",
+    ticket_unverified: "Giá vé chưa xác minh",
+    type_unmapped: "Type không map được",
+    type_cat_mismatch: "Type lệch category",
+    coords_outside_bbox: "Toạ độ ngoài Đà Nẵng",
+    coords_missing: "Thiếu toạ độ",
+    name_missing: "Thiếu tên",
+    source_missing: "Thiếu nguồn",
+    type_missing: "Thiếu type",
+    cat_missing: "Thiếu category",
+    cat_unknown: "Category lạ",
+    duplicate_poi_id: "Trùng poi_id",
+    hours_format_invalid: "Giờ sai format",
+    hours_out_of_range: "Giờ ngoài 00:00–23:59",
+    hours_zero_length: "Giờ bắt đầu = kết thúc",
+    osm_category_conflict: "OSM ghi loại hình khác",
+    osm_hours_conflict: "Giờ lệch OSM > 30 phút",
+    osm_hours_only: "Chỉ OSM có giờ dùng được",
+    osm_duplicate: "Trùng POI khác (cùng đối tượng OSM)",
+    hours_no_common_window: "Các ngày không có giờ mở chung",
+    hours_inferred: "Giờ là suy luận",
+    hours_inferred_dropped: "Giờ suy luận đã bị bỏ",
+    ticket_unknown: "Chưa biết có vé không",
+    not_destination: "Có thể không phải điểm đến",
+    structure_only: "Máy hết cờ sau chuẩn hoá"
+  };
+  var REASON_HINT = {
+    hours_missing: "Kiểm giờ thật trên Google Maps/website rồi nhập vào ô Giờ. Không có giờ: planner dùng khung an toàn của nhóm (xem dưới), chợ thì không xếp.",
+    rating_perfect: "5.0 tuyệt đối thường do ít review hoặc review ảo — mở Maps xem số lượng review.",
+    near_duplicate: "So với sibling bên dưới (tên + khoảng cách). Nếu là cùng một chỗ: giữ 1, LOẠI phần còn lại.",
+    duplicate_name: "Trùng tên sau chuẩn hoá — xác nhận có phải cùng một điểm hay 2 chi nhánh khác nhau.",
+    duration_outlier: "p50 lệch >60% median của category. Nếu vô lý, nhập thời lượng đúng vào ô Thời lượng.",
+    name_generic: "Tên 1 token hoặc quá chung, dễ junk/trùng. Kiểm tên thật, nếu là quán nhỏ không phải điểm du lịch thì LOẠI.",
+    ticket_unverified: "Có thể có vé nhưng chưa xác minh. Nếu là điểm thu vé, nhập giá vé người lớn vào ô Giá vé.",
+    type_unmapped: "Nhãn type thô không map được sang 14 category. Chọn đúng Loại hình trước khi Đúng.",
+    type_cat_mismatch: "Type và cat lệch nhau. Xem tên thật rồi chọn đúng Loại hình.",
+    coords_outside_bbox: "Toạ độ nằm ngoài bbox cũ. Từ 1/7/2025 Hội An thuộc TP Đà Nẵng: điểm ở Hội An vẫn có thể giữ.",
+    coords_missing: "Không có toạ độ → không dùng được cho route. LOẠI.",
+    name_missing: "Không có tên → LOẠI.",
+    source_missing: "Không có nguồn → LOẠI nếu không xác minh được.",
+    type_missing: "Thiếu type → chọn Loại hình.",
+    cat_missing: "Thiếu category → chọn Loại hình.",
+    cat_unknown: "Category ngoài 14 nhóm → chọn Loại hình hoặc LOẠI.",
+    duplicate_poi_id: "poi_id lặp trong snapshot — báo lại người ingest, không tự sửa.",
+    hours_format_invalid: "Chuỗi giờ không khớp HH:MM-HH:MM → nhập lại giờ.",
+    hours_out_of_range: "Giờ ngoài 00:00–23:59 → nhập lại giờ.",
+    hours_zero_length: "Giờ bắt đầu trùng giờ kết thúc → nhập lại giờ.",
+    osm_category_conflict: "OpenStreetMap ghi loại hình khác (xem khối OSM). Bên nào đúng? Sửa Loại hình nếu cần.",
+    osm_hours_conflict: "Giờ của mình và của OSM lệch hơn 30 phút. Kiểm Google Maps, nhập giờ đúng.",
+    osm_hours_only: "Giờ của mình không dùng được, OSM có giờ (xem khối OSM). Kiểm rồi nhập giờ.",
+    osm_duplicate: "Hai POI cùng trỏ vào một đối tượng OSM. Nếu là cùng một chỗ: giữ 1, LOẠI cái còn lại.",
+    hours_no_common_window: "Các biến thể giờ theo ngày không có giờ nào mở chung, planner không xếp được. Nhập giờ thường ngày.",
+    hours_inferred: "Giờ được suy ra (\"suy luận\"), không có nguồn. Kiểm và nhập giờ thật nếu khác.",
+    hours_inferred_dropped: "Giờ suy luận sai loại (vd quán ăn bị coi là bãi biển) đã bị bỏ. Nhập giờ thật.",
+    ticket_unknown: "Điểm tham quan chưa rõ có thu vé không. Có vé: nhập giá vé; miễn phí: nhập 0.",
+    not_destination: "Tên/tag giống văn phòng, shop online, dịch vụ giao hàng. Không phải điểm đến cho khách thì LOẠI.",
+    structure_only: "Sau khi chuẩn hoá thời lượng, luật máy không còn cờ nào — nhưng luật chỉ kiểm cấu trúc. Kiểm như mọi dòng khác."
+  };
+  var FLAG_LABEL = {
+    exists: "Không tồn tại / đã đóng", location: "Sai vị trí", category: "Sai loại hình",
+    hours: "Sai giờ", duration: "Thời lượng vô lý", price: "Sai giá / vé",
+    duplicate: "Trùng điểm khác", not_destination: "Không phải điểm đến"
+  };
+  var OSM_FIELD = { exists: "tồn tại", location: "vị trí", category: "loại hình", hours: "giờ" };
+  var CAT_LABEL = {
+    restaurant: "Nhà hàng", cafe: "Cà phê", attraction: "Điểm tham quan", landmark: "Di tích",
+    spa: "Spa", lodging: "Lưu trú", bar: "Bar", market: "Chợ", beach: "Biển",
+    nature: "Thiên nhiên", museum: "Bảo tàng", park: "Công viên", viewpoint: "Ngắm cảnh",
+    transport: "Giao thông"
+  };
+  var BAND_LABEL = { cheap: "Rẻ (< 100k/người)", medium: "Trung bình (100–500k)", expensive: "Đắt (> 500k)" };
+  var HOURS_RE = /^\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2}(\s*,\s*\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2})*$/;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function fmtCoord(v) { return (typeof v === "number" && isFinite(v)) ? v.toFixed(6) : "—"; }
+  function mapsUrl(row) {
+    if (typeof row.lat !== "number" || typeof row.lon !== "number") return "";
+    return "https://www.google.com/maps/search/?api=1&query=" + row.lat + "," + row.lon;
+  }
+  function reasonLabel(key) { return REASON_LABEL[key] || key; }
+  function catLabel(cat) { return CAT_LABEL[cat] ? CAT_LABEL[cat] + " (" + cat + ")" : (cat || "—"); }
+  function money(v) { return typeof v === "number" ? v.toLocaleString("vi-VN") + " đ" : "—"; }
+
+  var state = loadState();
+  var byId = {};
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return { reviewer: "", verdicts: {} };
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== "object") return { reviewer: "", verdicts: {} };
+      return {
+        reviewer: typeof parsed.reviewer === "string" ? parsed.reviewer : "",
+        verdicts: parsed.verdicts && typeof parsed.verdicts === "object" ? parsed.verdicts : {}
+      };
+    } catch (e) {
+      return { reviewer: "", verdicts: {} };
+    }
+  }
+  var saveTimer = null;
+  function saveNow() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+    catch (e) { toast("Không lưu được tiến độ (localStorage bị chặn)."); }
+  }
+  function saveSoon() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { saveTimer = null; saveNow(); }, 250);
+  }
+  function toast(msg) {
+    var el = $("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.classList.remove("show"); }, 3200);
+  }
+  function entry(poiId) {
+    if (!state.verdicts[poiId]) state.verdicts[poiId] = { verdict: null, note: "", ts: "" };
+    return state.verdicts[poiId];
+  }
+
+  function verdictOf(row) {
+    var v = state.verdicts[row.poi_id];
+    return v && VERDICTS.indexOf(v.verdict) !== -1 ? v : null;
+  }
+
+  function reasonsOf(row) {
+    var out = [];
+    (row.hard || []).forEach(function (r) { out.push({ key: r, hard: true }); });
+    (row.queue || []).forEach(function (r) { out.push({ key: r, hard: false }); });
+    return out;
+  }
+
+  /* ---------- edits ---------- */
+  function normHours(text) {
+    var t = String(text || "").trim();
+    if (!t) return null;
+    if (!HOURS_RE.test(t)) return false;
+    var ok = true;
+    var spans = t.split(",").map(function (part) {
+      var ends = part.split("-").map(function (x) {
+        var hm = x.trim().split(":");
+        var h = Number(hm[0]), m = Number(hm[1]);
+        if (h > 24 || m > 59 || (h === 24 && m > 0)) ok = false;
+        return (h < 10 ? "0" : "") + h + ":" + hm[1];
+      });
+      if (ends[0] === ends[1]) ok = false;
+      return ends[0] + "-" + ends[1];
+    });
+    return ok ? [spans.join(", ")] : false;
+  }
+  function intIn(text, lo, hi) {
+    var t = String(text || "").trim();
+    if (!t) return null;
+    if (!/^\d+$/.test(t)) return false;
+    var n = Number(t);
+    return n >= lo && n <= hi ? n : false;
+  }
+  // field -> parsed value (null = unchanged, false = invalid)
+  function parseEdit(field, raw) {
+    if (field === "opening_hours") return normHours(raw);
+    if (field === "visit_p50") return intIn(raw, 5, 600);
+    if (field === "ticket_vnd") return intIn(raw, 0, 5000000);
+    return raw ? raw : null;  // cat, price_band selects
+  }
+  function editsOf(poiId) {
+    var v = state.verdicts[poiId];
+    var raw = (v && v.raw) || {};
+    var row = byId[poiId] ? byId[poiId].row : {};
+    var current = { opening_hours: JSON.stringify(row.hours || []), cat: row.cat,
+                    visit_p50: row.dur_p50, ticket_vnd: row.ticket_vnd, price_band: row.price_band };
+    var out = {}, bad = [];
+    Object.keys(raw).forEach(function (f) {
+      var val = parseEdit(f, raw[f]);
+      if (val === false) bad.push(f);
+      else if (val !== null && (f === "opening_hours" ? JSON.stringify(val) : val) !== current[f]) out[f] = val;
+    });
+    return { edits: out, bad: bad };
+  }
+
+  function osmBlock(row) {
+    var o = row.osm;
+    if (!o) return "";
+    var st = Object.keys(OSM_FIELD).map(function (f) {
+      var s = (o.fields || {})[f] || "—";
+      return '<span class="st ' + esc(s) + '">' + esc(OSM_FIELD[f]) + ": " + esc(s) + "</span>";
+    }).join("");
+    var lines = [];
+    if (o.osm) {
+      lines.push("Khớp <b>" + esc(o.name) + "</b> cách " + esc(o.dist_m) + " m" +
+        (o.url ? ' · <a href="' + esc(o.url) + '" target="_blank" rel="noopener">OSM ↗</a>' : "") +
+        (o.cats && o.cats.length ? ' · tag gợi ý: <span class="mono">' + esc(o.cats.join(", ")) + "</span>" : ""));
+    } else {
+      lines.push('<span class="note">Không tìm thấy đối tượng OSM cùng tên trong 150 m (chỉ có 1 nguồn).</span>');
+    }
+    if (o.hours_raw) lines.push("Giờ OSM: <span class=\"mono\">" + esc(o.hours_raw) + "</span>" +
+      (o.closed && o.closed.length ? " · nghỉ: " + esc(o.closed.join(", ")) : ""));
+    if (o.dups && o.dups.length) lines.push("Cùng đối tượng OSM với: <b>" + esc(o.dups.join(" · ")) + "</b>");
+    return '<div class="osm"><div class="ttl">Đối chiếu OpenStreetMap</div>' + st + "<div>" + lines.join("<br>") + "</div></div>";
+  }
+
+  function editBlock(row) {
+    var v = state.verdicts[row.poi_id];
+    var raw = (v && v.raw) || {};
+    var catOpts = '<option value="">— giữ: ' + esc(catLabel(row.cat)) + " —</option>" +
+      META.cats.map(function (c) {
+        return '<option value="' + c + '"' + (raw.cat === c ? " selected" : "") + ">" + esc(catLabel(c)) + "</option>";
+      }).join("");
+    var bandOpts = '<option value="">— giữ: ' + esc(row.price_band ? BAND_LABEL[row.price_band] : "chưa có") + " —</option>" +
+      META.price_bands.map(function (b) {
+        return '<option value="' + b + '"' + (raw.price_band === b ? " selected" : "") + ">" + esc(BAND_LABEL[b]) + "</option>";
+      }).join("");
+    function inp(field, ph, type) {
+      return '<input data-f="' + field + '" type="' + (type || "text") + '" placeholder="' + esc(ph) +
+        '" value="' + esc(raw[field] || "") + '" autocomplete="off">';
+    }
+    var open = Object.keys(raw).some(function (k) { return raw[k]; });
+    return '<details class="edit"' + (open ? " open" : "") + "><summary>Sửa dữ liệu (để trống = giữ nguyên)</summary>" +
+      '<div class="eg">' +
+        "<label>Giờ mở cửa (HH:MM-HH:MM, nhiều ca cách bằng dấu phẩy)" +
+          inp("opening_hours", row.hours.length ? row.hours.join(" · ") : "vd 07:00-11:30, 13:30-17:00") + "</label>" +
+        '<label>Loại hình<select data-f="cat">' + catOpts + "</select></label>" +
+        "<label>Thời lượng ghé (phút)" + inp("visit_p50", row.dur_p50 ? "hiện " + row.dur_p50 : "vd 60", "text") + "</label>" +
+        "<label>Giá vé người lớn (đ, miễn phí = 0)" + inp("ticket_vnd", typeof row.ticket_vnd === "number" ? "hiện " + row.ticket_vnd : "vd 60000", "text") + "</label>" +
+        '<label>Mức giá<select data-f="price_band">' + bandOpts + "</select></label>" +
+      "</div>" + '<div class="changed" data-changed></div></details>';
+  }
+
+  function flagBlock(row) {
+    var v = state.verdicts[row.poi_id];
+    var on = (v && v.flags) || [];
+    return '<div class="flags"><span class="note">Sai ở đâu?</span>' + META.flags.map(function (f) {
+      return '<label><input type="checkbox" data-flag="' + f + '"' + (on.indexOf(f) !== -1 ? " checked" : "") + ">" + esc(FLAG_LABEL[f]) + "</label>";
+    }).join("") + "</div>";
+  }
+
+  function renderCard(row, idx) {
+    var v = verdictOf(row);
+    var cls = "card" + (v ? " v-" + v.verdict : "");
+    var url = mapsUrl(row);
+    var hours = row.hours && row.hours.length ? row.hours.join(" · ") : null;
+    var safe = !hours && row.safe_hours ? (row.safe_hours.length ? row.safe_hours.join(", ") : "không có — chưa xếp được") : null;
+
+    var reasons = "";
+    if (!SAMPLE) {
+      var rs = reasonsOf(row);
+      reasons = rs.length ? '<div class="reasons"><div class="ttl">' + (row.decision === "recheck" ? "Vì sao cần xem lại" : "Lý do bị queue — cần kiểm gì") + "</div>" +
+        rs.map(function (r) {
+          return '<div class="chip' + (r.hard ? " hard" : "") + '">' +
+            '<span class="tag">' + esc(r.key) + "</span>" +
+            '<span class="hint"><b>' + esc(reasonLabel(r.key)) + ":</b> " +
+            esc(REASON_HINT[r.key] || "Máy không tự quyết được — cần người xem.") + "</span></div>";
+        }).join("") + "</div>" : "";
+    }
+
+    var sib = "";
+    if (row.siblings && row.siblings.length) {
+      sib = '<div class="siblings"><div class="ttl">Sibling nghi trùng (' + row.siblings.length + ")</div><ul>" +
+        row.siblings.map(function (s) {
+          var extra = [];
+          if (s.dist_m != null) extra.push("≈ " + s.dist_m + " m");
+          if (s.cat) extra.push(esc(s.cat));
+          if (s.hours && s.hours.length) extra.push("giờ: " + esc(s.hours.join(" · ")));
+          if (s.verified) extra.push("đã verified");
+          var link = (typeof s.lat === "number" && typeof s.lon === "number")
+            ? ' · <a href="https://www.google.com/maps/search/?api=1&query=' + s.lat + "," + s.lon + '" target="_blank" rel="noopener">Maps</a>'
+            : "";
+          return "<li><b>" + esc(s.name) + "</b>" +
+            (extra.length ? ' <span class="note">(' + extra.join(" · ") + ")</span>" : "") + link +
+            '<br><span class="pid">' + esc(s.poi_id) + "</span></li>";
+        }).join("") + "</ul></div>";
+    }
+
+    var extras = [];
+    if (row.access_note) extras.push('<div><span class="k">Ghi chú truy cập:</span> ' + esc(row.access_note) + "</div>");
+    if (row.hours_note) extras.push('<div><span class="k">Ghi chú giờ:</span> ' + esc(row.hours_note) + "</div>");
+    if (row.hours_source) extras.push('<div><span class="k">Nguồn giờ:</span> ' + esc(row.hours_source) + "</div>");
+    if (row.web_evidence) extras.push('<div><span class="k">Bằng chứng web:</span> ' + esc(row.web_evidence) + "</div>");
+
+    var badges = '<span class="badge cat">' + esc(catLabel(row.cat)) + "</span>";
+    if (row.decision === "fail") badges += '<span class="badge fail">FAIL · vi phạm cứng</span>';
+    if (row.decision === "recheck") badges += '<span class="badge recheck">đã verified · đang có trong plan</span>';
+    if (!SAMPLE && META.priority_cats.indexOf(row.cat) !== -1) badges += '<span class="badge prio">ưu tiên</span>';
+
+    var buttons = VERDICTS.map(function (k) {
+      return '<button class="btn vbtn ' + k + (v && v.verdict === k ? " on" : "") + '" type="button" data-verdict="' + k + '">' + VLABEL[k] + "</button>";
+    }).join("");
+
+    return '<article class="' + cls + '" id="row-' + idx + '" data-id="' + esc(row.poi_id) + '">' +
+        "<h2>" + esc(row.name || "(không tên)") + "</h2>" +
+        '<div class="pid">' + esc(row.poi_id) + "</div>" +
+        '<div class="badges">' + badges + "</div>" +
+        '<div class="grid">' +
+          '<div><span class="k">Giờ mở cửa</span>' + (hours ? esc(hours) : '<span class="note">— (thiếu)' +
+            (safe ? " · planner dùng khung an toàn: " + esc(safe) : "") + "</span>") + "</div>" +
+          '<div><span class="k">Thời lượng ghé</span>' + (row.dur_p50 ? esc(row.dur_p50) + " phút" +
+            (row.dur_source === "human" ? " (người nhập)" : ' <span class="note">(ước lượng theo loại)</span>') : "—") + "</div>" +
+          '<div><span class="k">Vé / mức giá</span>' + money(row.ticket_vnd) + " · " + esc(row.price_band ? BAND_LABEL[row.price_band] : "chưa có mức giá") + "</div>" +
+          '<div><span class="k">Rating</span>' + (typeof row.rating === "number" ? row.rating.toFixed(1) : "—") + "</div>" +
+          '<div><span class="k">Type (nhãn thô)</span>' + esc(row.type || "—") + "</div>" +
+          '<div><span class="k">Toạ độ</span><span class="mono">' + fmtCoord(row.lat) + ", " + fmtCoord(row.lon) + "</span>" +
+            (url ? ' · <a href="' + url + '" target="_blank" rel="noopener">Google Maps ↗</a>' : "") + "</div>" +
+        "</div>" +
+        reasons + (SAMPLE ? "" : osmBlock(row)) + sib +
+        (extras.length ? '<div class="extra">' + extras.join("") + "</div>" : "") +
+        (SAMPLE ? "" : editBlock(row)) +
+        '<div class="actions">' + buttons +
+          '<div class="note-in"><textarea rows="1" placeholder="Ghi chú (tuỳ chọn) — vd: trùng quán bên cạnh, giờ lấy từ Maps…" aria-label="Ghi chú cho ' + esc(row.name) + '">' + esc(v ? v.note || "" : (state.verdicts[row.poi_id] || {}).note || "") + "</textarea></div>" +
+        "</div>" + (SAMPLE ? flagBlock(row) : "") +
+      "</article>";
+  }
+
+  function buildList() {
+    var parts = [];
+    DATA.forEach(function (row, idx) {
+      byId[row.poi_id] = { row: row, idx: idx };
+      parts.push(renderCard(row, idx));
+    });
+    $("list").innerHTML = parts.join("");
+    DATA.forEach(function (row) { refreshEdits(row.poi_id); });
+  }
+
+  function cardOf(poiId) {
+    var e = byId[poiId];
+    return e ? document.getElementById("row-" + e.idx) : null;
+  }
+
+  function setVerdict(poiId, verdict) {
+    var cur = entry(poiId);
+    var card = cardOf(poiId);
+    var textarea = card ? card.querySelector("textarea") : null;
+    if (textarea) cur.note = textarea.value;
+    cur.verdict = cur.verdict === verdict ? null : verdict;
+    cur.ts = new Date().toISOString();
+    saveNow();
+    updateCardUI(poiId);
+    updateProgress();
+    applyFilters();
+  }
+
+  function updateCardUI(poiId) {
+    var e = byId[poiId];
+    var card = cardOf(poiId);
+    if (!e || !card) return;
+    var v = verdictOf(e.row);
+    VERDICTS.forEach(function (k) { card.classList.toggle("v-" + k, !!v && v.verdict === k); });
+    card.querySelectorAll(".vbtn").forEach(function (b) {
+      b.classList.toggle("on", !!v && b.getAttribute("data-verdict") === v.verdict);
+    });
+  }
+
+  function refreshEdits(poiId) {
+    var card = cardOf(poiId);
+    if (!card || SAMPLE) return;
+    var parsed = editsOf(poiId);
+    card.querySelectorAll("[data-f]").forEach(function (el) {
+      el.classList.toggle("bad", parsed.bad.indexOf(el.getAttribute("data-f")) !== -1);
+    });
+    var keys = Object.keys(parsed.edits);
+    var box = card.querySelector("[data-changed]");
+    if (box) box.textContent = parsed.bad.length ? "Ô đỏ chưa đúng định dạng — sửa trước khi xuất."
+      : (keys.length ? "Sẽ ghi: " + keys.join(", ") : "");
+  }
+
+  function updateProgress() {
+    var n = {};
+    VERDICTS.forEach(function (k) { n[k] = 0; });
+    DATA.forEach(function (row) {
+      var v = verdictOf(row);
+      if (v) n[v.verdict]++;
+    });
+    var done = VERDICTS.reduce(function (s, k) { return s + n[k]; }, 0);
+    var total = DATA.length;
+    var pct = total ? Math.round(done / total * 100) : 0;
+    $("barfill").style.width = pct + "%";
+    $("bar").setAttribute("aria-valuenow", String(pct));
+    $("counts").innerHTML = "Đã làm <b>" + done + "</b>/" + total + " (" + pct + "%)";
+    $("breakdown").textContent = VERDICTS.map(function (k) { return VLABEL[k] + " " + n[k]; }).join(" · ");
+  }
+
+  function updateHits() {
+    var visible = document.querySelectorAll("#list .card:not(.hide)").length;
+    $("hits").textContent = "Hiện " + visible + "/" + DATA.length;
+    $("empty").classList.toggle("hide", visible !== 0);
+  }
+
+  function applyFilters() {
+    var cat = $("f-cat").value;
+    var stage = $("f-stage").value;
+    var reason = $("f-reason").value;
+    var q = $("f-q").value.trim().toLowerCase();
+    var todoOnly = $("f-todo").checked;
+    DATA.forEach(function (row, idx) {
+      var card = document.getElementById("row-" + idx);
+      if (!card) return;
+      var ok = true;
+      if (cat && row.cat !== cat) ok = false;
+      if (ok && stage && (stage === "recheck") !== (row.decision === "recheck")) ok = false;
+      if (ok && reason && (row.hard || []).concat(row.queue || []).indexOf(reason) === -1) ok = false;
+      if (ok && todoOnly && verdictOf(row)) ok = false;
+      if (ok && q) {
+        var v = state.verdicts[row.poi_id];
+        var hay = [row.name, row.type, row.poi_id, row.cat, row.source || "", (v && v.note) || ""]
+          .join(" ").toLowerCase();
+        if (hay.indexOf(q) === -1) ok = false;
+      }
+      card.classList.toggle("hide", !ok);
+    });
+    updateHits();
+  }
+
+  function fillFilters() {
+    var cats = {}, reasons = {};
+    DATA.forEach(function (row) {
+      cats[row.cat] = (cats[row.cat] || 0) + 1;
+      (row.hard || []).concat(row.queue || []).forEach(function (r) { reasons[r] = (reasons[r] || 0) + 1; });
+    });
+    var catSel = $("f-cat");
+    Object.keys(cats).sort().forEach(function (cat) {
+      var o = document.createElement("option");
+      o.value = cat;
+      o.textContent = (CAT_LABEL[cat] || cat) + " — " + cats[cat];
+      catSel.appendChild(o);
+    });
+    var rSel = $("f-reason");
+    Object.keys(reasons).sort(function (a, b) { return reasons[b] - reasons[a]; }).forEach(function (r) {
+      var o = document.createElement("option");
+      o.value = r;
+      o.textContent = reasonLabel(r) + " — " + reasons[r];
+      rSel.appendChild(o);
+    });
+    if (SAMPLE) document.querySelectorAll(".review-only").forEach(function (el) { el.classList.add("hide"); });
+  }
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function exportJsonl() {
+    var rows = [], bad = [];
+    DATA.forEach(function (row) {
+      var v = verdictOf(row);
+      if (!v || v.verdict === "skip") return;
+      var line = {
+        poi_id: row.poi_id, verdict: v.verdict, note: v.note || "",
+        reviewer: state.reviewer || "", ts: v.ts || new Date().toISOString(),
+        page: META.mode, page_hash: META.page_hash, row_hash: row.row_hash
+      };
+      if (SAMPLE) {
+        if (v.verdict === "sai") line.flags = (v.flags || []).slice();
+      } else {
+        var parsed = editsOf(row.poi_id);
+        if (parsed.bad.length) { bad.push(row.name); return; }
+        if (Object.keys(parsed.edits).length) line.edits = parsed.edits;
+      }
+      rows.push(line);
+    });
+    if (bad.length) {
+      toast("Còn " + bad.length + " thẻ có ô sửa sai định dạng (vd " + bad[0] + "). Sửa rồi xuất lại.");
+      return;
+    }
+    if (!state.reviewer.trim()) {
+      toast("Nhập tên người duyệt ở góc trên trước khi xuất.");
+      $("reviewer").focus();
+      return;
+    }
+    if (!rows.length) {
+      toast("Chưa có dòng nào để xuất. (Bỏ qua không được xuất.)");
+      return;
+    }
+    var now = new Date();
+    var name = "verify_verdicts_" + META.mode + "_" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) +
+      "_" + state.reviewer.trim().replace(/[^A-Za-z0-9_-]+/g, "") + ".jsonl";
+    var text = rows.map(function (r) { return JSON.stringify(r); }).join("\n") + "\n";
+    var blob = new Blob([text], { type: "application/x-ndjson;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      URL.revokeObjectURL(a.href);
+      a.remove();
+    }, 1500);
+    toast("Đã xuất " + rows.length + " dòng → " + name);
+  }
+
+  /* ---------- wiring ---------- */
+  $("reviewer").value = state.reviewer || "";
+  $("reviewer").addEventListener("input", function () {
+    state.reviewer = this.value;
+    saveSoon();
+  });
+  $("export").addEventListener("click", exportJsonl);
+
+  $("list").addEventListener("click", function (ev) {
+    var btn = ev.target.closest(".vbtn");
+    if (!btn) return;
+    var card = btn.closest(".card");
+    if (card) setVerdict(card.getAttribute("data-id"), btn.getAttribute("data-verdict"));
+  });
+  $("list").addEventListener("input", function (ev) {
+    var card = ev.target.closest(".card");
+    if (!card) return;
+    var id = card.getAttribute("data-id");
+    var cur = entry(id);
+    if (ev.target.tagName === "TEXTAREA") {
+      cur.note = ev.target.value;
+    } else if (ev.target.hasAttribute("data-f")) {
+      cur.raw = cur.raw || {};
+      cur.raw[ev.target.getAttribute("data-f")] = ev.target.value;
+      refreshEdits(id);
+    } else if (ev.target.hasAttribute("data-flag")) {
+      var f = ev.target.getAttribute("data-flag");
+      cur.flags = (cur.flags || []).filter(function (x) { return x !== f; });
+      if (ev.target.checked) cur.flags.push(f);
+    }
+    saveSoon();
+  });
+  $("list").addEventListener("change", function (ev) {
+    if (ev.target.tagName === "SELECT" || ev.target.type === "checkbox") {
+      ev.target.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  });
+
+  ["f-cat", "f-stage", "f-reason", "f-q", "f-todo"].forEach(function (id) {
+    $(id).addEventListener("input", applyFilters);
+    $(id).addEventListener("change", applyFilters);
+  });
+  $("f-reset").addEventListener("click", function () {
+    ["f-cat", "f-stage", "f-reason", "f-q"].forEach(function (id) { $(id).value = ""; });
+    $("f-todo").checked = false;
+    applyFilters();
+  });
+
+  $("storekey").textContent = STORE_KEY;
+  buildList();
+  fillFilters();
+  updateProgress();
+  applyFilters();
+  if (Object.keys(state.verdicts).length) {
+    toast("Đã khôi phục tiến độ đã lưu cho trang này.");
+  }
+})();
+</script>
+</body>
+</html>

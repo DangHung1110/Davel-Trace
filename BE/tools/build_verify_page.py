@@ -1,48 +1,56 @@
 #!/usr/bin/env python3
-"""Build a self-contained human-review page for the auto-verify queue.
+"""Build the self-contained human-review pages for POI verification.
 
-Reads
------
-BE/data/snapshots/<snapshot>/pois.json          (full POI details)
-BE/data/snapshots/<snapshot>/auto_verify_queue.jsonl
-                                                (rows: poi_id, name, cat,
-                                                 decision, hard, queue, siblings)
+One template, two pages (stdlib only: no CDN, no fetch, opens from file://
+and can be emailed):
 
-Writes
-------
-FE/verify_review.html   -- single file, no CDN, no fetch, no build step.
-                           Opens by double-click (file://) and can be emailed.
+``--mode review`` (default) -> FE/verify_review.html
+    1. recheck: VERIFIED POIs the planner already uses that a second source or
+       a data rule flags (OSM category/hours conflict, OSM duplicate, hours
+       with no common window, inferred or missing hours, unknown ticket, not
+       a destination). Shown first: they are in plans today.
+    2. queue: ``auto_verify_queue.jsonl`` rows (spotcheck_v2 could not decide),
+       lodging/transport dropped (retrieval never plans them), sightseeing
+       first. The file fixes which rows; their reasons are re-judged with
+       spotcheck_v2 on today's data.
+    Every card shows the OSM cross-check (``osm_crosscheck.json``) and has
+    edit fields for hours, category, visit p50, ticket and price band.
 
-Export format produced by the page (consumed by a future ingest lane)
----------------------------------------------------------------------
-The "Xuất JSONL" button downloads ``verify_verdicts_YYYYMMDD.jsonl``
-(UTF-8, no BOM, one JSON object per line, LF line ending)::
+``--mode sample --size 80 --seed N`` -> FE/verify_sample.html
+    A blind, category-stratified random sample of auto-verified POIs for the
+    precision gate: no machine verdict, reason or OSM status is shown. Two
+    reviewers grade it independently; ``BE/ml/data/verify_precision.py``
+    scores the two files. 80 rows, not 50: the gate (>= 95% with a Wilson
+    lower bound >= 90%) tolerates 0 errors in 50 rows but 2 in 80.
 
-    {"poi_id": "ChIJ...", "verdict": "dung", "note": "", "reviewer": "Lan", "ts": "2026-10-29T14:03:11.482Z"}
-    {"poi_id": "ChIJ...", "verdict": "loai", "note": "trùng quán bên cạnh", "reviewer": "Lan", "ts": "2026-10-29T14:04:02.010Z"}
+Export format (``verify_verdicts_<page>_YYYYMMDD.jsonl``)
+--------------------------------------------------------
+UTF-8, no BOM, LF, one JSON object per line::
 
-Field contract (stable; ingest must reject anything else):
+    {"poi_id": "ChIJ...", "verdict": "dung", "note": "", "reviewer": "Lan",
+     "ts": "2026-10-29T14:03:11.482Z", "page": "review", "page_hash": "...",
+     "row_hash": "...", "edits": {"opening_hours": ["07:00-17:00"]}}
 
-- ``poi_id``   str  -- key of ``pois.json`` / queue row. Unique per line.
-- ``verdict``  str  -- exactly ``"dung"`` (keep + may mark verified) or
-                      ``"loai"`` (drop from pool). **Rows skipped in the UI
-                      ("Bỏ qua") are NOT exported.**
-- ``note``     str  -- free text, ``""`` when empty. May contain newlines;
-                      JSON-escaped, so the line stays one physical line.
-- ``reviewer`` str  -- name typed in the page header, ``""`` if not filled.
-- ``ts``       str  -- ISO-8601 UTC timestamp (``datetime.isoformat()`` with
-                      trailing ``Z``) captured when the verdict was clicked.
+- ``verdict``: review page ``"dung"`` (keep, mark verified) or ``"loai"``
+  (drop from the pool); sample page ``"dung"`` or ``"sai"`` plus ``flags``
+  (the wrong fields: exists, location, category, hours, duration, price,
+  duplicate, not_destination). Rows skipped in the UI ("Bỏ qua") are NOT
+  exported.
+- ``note`` / ``reviewer`` / ``ts``: free text, the name typed in the header,
+  ISO-8601 UTC time of the verdict.
+- ``row_hash``: hash of the POI fields the card showed. The ingest
+  (``BE/ml/data/ingest_verdicts.py``) rejects a line whose POI changed since.
+- ``edits`` (review page, optional): only fields the reviewer changed:
+  ``opening_hours`` [str], ``cat`` str, ``visit_p50`` int minutes,
+  ``ticket_vnd`` int VND, ``price_band`` cheap|medium|expensive.
 
-Lines are emitted in page (priority) order, i.e. fail rows first, then
-museum/park/bar/spa/nature/viewpoint, then the rest alphabetically. The file
-name date is the reviewer's local date at export time. Ingest should treat
-``poi_id`` as the idempotency key: last line wins if a file contains dupes.
+Hashes are taken over parsed, canonical JSON, never raw file bytes: a page
+built on Windows (CRLF) and one built on macOS (LF) agree.
 
-Usage (PowerShell, from repo root)::
+Usage (from repo root)::
 
     python BE/tools/build_verify_page.py
-    python BE/tools/build_verify_page.py --snapshot BE/data/snapshots/danang-v1 \\
-        --out FE/verify_review.html
+    python BE/tools/build_verify_page.py --mode sample --size 80 --seed 20261030
 
 Stdlib only, Python 3.10+.
 """
@@ -50,20 +58,45 @@ Stdlib only, Python 3.10+.
 from __future__ import annotations
 
 import argparse
+import datetime
 import hashlib
 import json
 import math
+import random
+import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SNAPSHOT = REPO_ROOT / "BE" / "data" / "snapshots" / "danang-v1"
-DEFAULT_OUT = REPO_ROOT / "FE" / "verify_review.html"
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
-# Categories at 0 verified rows (docs/verify-criteria.md §7) get reviewed
-# first so capacity planning can start from them.
-PRIORITY_CATS = ["museum", "park", "bar", "spa", "nature", "viewpoint"]
+from BE.common import SAFE_HOURS, hours_group, open_windows  # noqa: E402
+from BE.ml.data.spotcheck_v2 import build_plan as spotcheck_plan  # noqa: E402
+
+DEFAULT_SNAPSHOT = REPO_ROOT / "BE" / "data" / "snapshots" / "danang-v1"
+DEFAULT_OUT = {"review": REPO_ROOT / "FE" / "verify_review.html",
+               "sample": REPO_ROOT / "FE" / "verify_sample.html"}
+
+# Sightseeing first (docs/verify-proposal.md 6.4): bar/spa already got most
+# of their rows from the auto batch.
+PRIORITY_CATS = ["landmark", "attraction", "nature", "park", "museum", "beach",
+                 "viewpoint"]
+# retrieval.NON_ACTIVITY_CATS: never planned, so never worth a review.
+EXCLUDED_CATS = {"lodging", "transport"}
+KNOWN_CATS = ["restaurant", "cafe", "bar", "spa", "market", "attraction", "landmark",
+              "museum", "beach", "nature", "park", "viewpoint", "lodging", "transport"]
+PRICE_BANDS = ["cheap", "medium", "expensive"]
+TICKET_CATS = {"museum", "attraction", "landmark"}
+NOT_DESTINATION = re.compile(r"\bonline\b|giao hàng|điện hoa", re.I)
+SAMPLE_VERIFIED_BY = "auto-verify-v1"
+SAMPLE_FLAGS = ["exists", "location", "category", "hours", "duration", "price",
+                "duplicate", "not_destination"]
+# The POI fields a card shows: a change to any of them invalidates a verdict.
+REVIEWED_FIELDS = ("name", "cat", "type", "lat", "lon", "opening_hours", "visit_min",
+                   "ticket_vnd")
 
 
 def _load_json(path: Path) -> Any:
@@ -85,6 +118,18 @@ def _load_jsonl(path: Path) -> list[dict]:
     return rows
 
 
+def canonical_hash(value: Any, length: int = 16) -> str:
+    """sha256 of canonical JSON (sorted keys, no whitespace): OS-independent."""
+    text = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:length]
+
+
+def row_hash(poi: dict) -> str:
+    view = {k: poi.get(k) for k in REVIEWED_FIELDS}
+    view["price_band"] = (poi.get("smart_tags") or {}).get("price_band")
+    return canonical_hash(view, 12)
+
+
 def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     r = 6371008.8
     p1, p2 = math.radians(lat1), math.radians(lat2)
@@ -102,114 +147,239 @@ def _first(mapping: dict, *keys: str) -> Any:
     return None
 
 
-def build_rows(snapshot: Path) -> tuple[list[dict], dict]:
-    pois_doc = _load_json(snapshot / "pois.json")
-    poi_list = pois_doc.get("pois", [])
-    pois = {p["poi_id"]: p for p in poi_list}
-    queue_path = snapshot / "auto_verify_queue.jsonl"
-    queue = _load_jsonl(queue_path)
+def osm_url(osm_id: str | None) -> str:
+    """openstreetmap.org link for an osmium type_id (n/w id, a = 2*way or 2*rel+1)."""
+    m = re.fullmatch(r"([nwra])(\d+)", str(osm_id or ""))
+    if not m:
+        return ""
+    kind, num = m.group(1), int(m.group(2))
+    if kind == "a":
+        kind, num = ("w", num // 2) if num % 2 == 0 else ("r", (num - 1) // 2)
+    return f"https://www.openstreetmap.org/{ {'n': 'node', 'w': 'way', 'r': 'relation'}[kind]}/{num}"
 
+
+def recheck_reasons(poi: dict, xc: dict | None) -> list[str]:
+    """Why a VERIFIED POI still needs a human ([] = nothing flagged)."""
+    out: list[str] = []
+    fields = (xc or {}).get("fields", {})
+    if fields.get("category") == "conflict":
+        out.append("osm_category_conflict")
+    if fields.get("hours") == "conflict":
+        out.append("osm_hours_conflict")
+    if fields.get("hours") == "osm_only":
+        out.append("osm_hours_only")
+    if (xc or {}).get("duplicate_of"):
+        out.append("osm_duplicate")
+    hours, source = poi.get("opening_hours") or [], poi.get("hours_source")
+    if source == "inferred_dropped":
+        out.append("hours_inferred_dropped")
+    elif not hours:
+        out.append("hours_missing")
+    elif open_windows(hours) == []:
+        out.append("hours_no_common_window")
+    if source == "inferred":
+        out.append("hours_inferred")
+    if poi.get("cat") in TICKET_CATS and (poi.get("smart_tags") or {}).get("ticket") is None:
+        out.append("ticket_unknown")
+    if "Văn phòng công ty" in " ".join(poi.get("tags") or []) or \
+            NOT_DESTINATION.search(poi.get("name") or ""):
+        out.append("not_destination")
+    return out
+
+
+def _osm_view(xc: dict | None, pois: dict) -> dict | None:
+    if not xc:
+        return None
+    match = xc.get("match") or {}
+    hours = (xc.get("evidence") or {}).get("hours") or {}
+    return {
+        "fields": xc.get("fields") or {},
+        "osm": match.get("osm"), "url": osm_url(match.get("osm")),
+        "name": match.get("name"), "dist_m": match.get("dist_m"),
+        "cats": (xc.get("evidence") or {}).get("osm_categories") or [],
+        "hours_raw": hours.get("osm_raw"), "closed": hours.get("osm_closed_days") or [],
+        "dups": [pois[d]["name"] for d in xc.get("duplicate_of") or [] if d in pois],
+    }
+
+
+def _siblings(poi: dict, ids: list[str], pois: dict) -> list[dict]:
+    out = []
+    for sid in ids:
+        sib = pois.get(sid)
+        if not sib:
+            out.append({"poi_id": sid, "name": sid, "cat": "", "dist_m": None})
+            continue
+        dist = None
+        if all(isinstance(poi.get(k), (int, float)) for k in ("lat", "lon")) and all(
+                isinstance(sib.get(k), (int, float)) for k in ("lat", "lon")):
+            dist = round(haversine_m(poi["lat"], poi["lon"], sib["lat"], sib["lon"]), 1)
+        out.append({"poi_id": sid, "name": sib.get("name") or sid, "cat": sib.get("cat") or "",
+                    "dist_m": dist, "hours": list(sib.get("opening_hours") or []),
+                    "lat": sib.get("lat"), "lon": sib.get("lon"),
+                    "verified": bool(sib.get("verified"))})
+    return out
+
+
+def card(poi: dict, *, pois: dict, xc: dict | None, decision: str, hard=(), queue=(),
+         siblings=(), blind: bool = False) -> dict:
+    """One card's data. `blind` (sample page) drops every machine signal."""
+    web_evidence = poi.get("web_evidence")
+    if isinstance(web_evidence, dict):
+        web_evidence = "; ".join(f"{k}: {v}" for k, v in web_evidence.items() if v)
+    elif not isinstance(web_evidence, str):
+        web_evidence = None
+    visit = poi.get("visit_min") if isinstance(poi.get("visit_min"), dict) else {}
+    group = hours_group(poi.get("cat") or "")
+    row = {
+        "poi_id": poi["poi_id"], "row_hash": row_hash(poi),
+        "name": poi.get("name") or "", "cat": poi.get("cat") or "",
+        "type": poi.get("type") or "",
+        "address": _first(poi, "address", "addr", "formatted_address"),
+        "hours": list(poi.get("opening_hours") or []),
+        "safe_hours": SAFE_HOURS.get(group) if group else None,
+        "rating": poi.get("rating"), "lat": poi.get("lat"), "lon": poi.get("lon"),
+        "ticket_vnd": poi.get("ticket_vnd"),
+        "price_band": (poi.get("smart_tags") or {}).get("price_band"),
+        "dur_p50": visit.get("p50"), "dur_source": poi.get("dur_source") or "",
+        "tags": list(poi.get("tags") or [])[:5], "decision": decision,
+    }
+    if blind:
+        return row
+    row.update({
+        "hours_note": poi.get("hours_note") or "",
+        "hours_source": poi.get("hours_source") or "",
+        "source": poi.get("source") or "",
+        "verified": bool(poi.get("verified")), "verified_by": poi.get("verified_by") or "",
+        "hard": list(hard), "queue": list(queue),
+        "siblings": _siblings(poi, list(siblings), pois),
+        "access_note": poi.get("access_note") or "",
+        "web_evidence": web_evidence, "osm": _osm_view(xc, pois),
+    })
+    return row
+
+
+def _load(snapshot: Path) -> tuple[dict, list[dict], dict]:
+    pois_doc = _load_json(snapshot / "pois.json")
+    xc_path = snapshot / "osm_crosscheck.json"
+    xc = _load_json(xc_path)["pois"] if xc_path.is_file() else {}
+    return pois_doc, pois_doc.get("pois", []), xc
+
+
+def _meta(mode: str, pois_doc: dict, poi_list: list[dict], rows: list[dict],
+          snapshot: Path, **extra) -> dict:
+    return {
+        "mode": mode,
+        "snapshot": pois_doc.get("snapshot") or snapshot.name,
+        "fetched_at": pois_doc.get("fetched_at") or "",
+        "generated": datetime.date.today().isoformat(),
+        "page_hash": canonical_hash([[r["poi_id"], r["row_hash"]] for r in rows]),
+        "poi_total": len(poi_list), "priority_cats": PRIORITY_CATS,
+        "cats": KNOWN_CATS, "price_bands": PRICE_BANDS, "flags": SAMPLE_FLAGS,
+        **extra,
+    }
+
+
+def build_rows(snapshot: Path) -> tuple[list[dict], dict]:
+    """Review page: recheck rows (verified, flagged) then the queue."""
+    pois_doc, poi_list, xc = _load(snapshot)
+    pois = {p["poi_id"]: p for p in poi_list}
+    queue = _load_jsonl(snapshot / "auto_verify_queue.jsonl")
     missing = [q["poi_id"] for q in queue if q["poi_id"] not in pois]
     if missing:
         raise SystemExit(
-            f"{len(missing)} queue rows have no POI in pois.json, e.g. {missing[:3]}"
-        )
+            f"{len(missing)} queue rows have no POI in pois.json, e.g. {missing[:3]}")
 
     rows: list[dict] = []
+    for poi in poi_list:
+        if not poi.get("verified") or poi.get("cat") in EXCLUDED_CATS:
+            continue
+        reasons = recheck_reasons(poi, xc.get(poi["poi_id"]))
+        if reasons:
+            rows.append(card(poi, pois=pois, xc=xc.get(poi["poi_id"]), decision="recheck",
+                             queue=reasons))
+    # The queue file fixes WHICH rows need a human; the reasons are re-judged
+    # on today's data (normalize_fields changed durations after the file).
+    live = {v["poi_id"]: v for v in spotcheck_plan(poi_list)[0]}
+    excluded = 0
     for item in queue:
         poi = pois[item["poi_id"]]
-        hard = list(item.get("hard") or [])
-        soft = list(item.get("queue") or [])
-        siblings = []
-        for sid in item.get("siblings") or []:
-            sib = pois.get(sid)
-            if not sib:
-                siblings.append({"poi_id": sid, "name": sid, "cat": "", "dist_m": None})
-                continue
-            dist = None
-            if all(isinstance(poi.get(k), (int, float)) for k in ("lat", "lon")) and all(
-                isinstance(sib.get(k), (int, float)) for k in ("lat", "lon")
-            ):
-                dist = round(
-                    haversine_m(poi["lat"], poi["lon"], sib["lat"], sib["lon"]), 1
-                )
-            siblings.append(
-                {
-                    "poi_id": sid,
-                    "name": sib.get("name") or sid,
-                    "cat": sib.get("cat") or "",
-                    "dist_m": dist,
-                    "hours": list(sib.get("opening_hours") or []),
-                    "lat": sib.get("lat"),
-                    "lon": sib.get("lon"),
-                    "verified": bool(sib.get("verified")),
-                }
-            )
-
-        web_evidence = poi.get("web_evidence")
-        if isinstance(web_evidence, dict):
-            web_evidence = "; ".join(f"{k}: {v}" for k, v in web_evidence.items() if v)
-        elif not isinstance(web_evidence, str):
-            web_evidence = None
-
-        visit = poi.get("visit_min") if isinstance(poi.get("visit_min"), dict) else {}
-        rows.append(
-            {
-                "poi_id": item["poi_id"],
-                "name": item.get("name") or poi.get("name") or "",
-                "cat": item.get("cat") or poi.get("cat") or "",
-                "type": poi.get("type") or "",
-                "address": _first(poi, "address", "addr", "formatted_address"),
-                "hours": list(poi.get("opening_hours") or []),
-                "hours_note": poi.get("hours_note") or "",
-                "hours_source": poi.get("hours_source") or "",
-                "rating": poi.get("rating"),
-                "source": poi.get("source") or "",
-                "lat": poi.get("lat"),
-                "lon": poi.get("lon"),
-                "verified": bool(poi.get("verified")),
-                "verified_by": poi.get("verified_by") or "",
-                "decision": item.get("decision") or "queue",
-                "hard": hard,
-                "queue": soft,
-                "siblings": siblings,
-                "access_note": poi.get("access_note") or "",
-                "ticket_vnd": poi.get("ticket_vnd"),
-                "dur_p50": visit.get("p50"),
-                "web_evidence": web_evidence,
-                "tags": list(poi.get("tags") or [])[:5],
-            }
-        )
+        if poi.get("cat") in EXCLUDED_CATS or poi.get("verified") or \
+                (poi.get("review") or {}).get("verdict") == "loai":
+            excluded += 1
+            continue
+        verdict = live.get(item["poi_id"], item)
+        hard, soft = verdict.get("hard") or [], verdict.get("queue") or []
+        rows.append(card(poi, pois=pois, xc=xc.get(poi["poi_id"]),
+                         decision="fail" if hard else "queue", hard=hard,
+                         queue=soft or ([] if hard else ["structure_only"]),
+                         siblings=verdict.get("siblings") or []))
 
     def sort_key(row: dict) -> tuple:
         cat = row["cat"]
         rank = PRIORITY_CATS.index(cat) if cat in PRIORITY_CATS else len(PRIORITY_CATS)
-        return (
-            0 if row["decision"] == "fail" else 1,
-            rank,
-            cat,
-            row["name"].lower(),
-        )
+        stage = {"fail": 0, "recheck": 1}.get(row["decision"], 2)
+        return (stage, rank, cat, row["name"].lower())
 
     rows.sort(key=sort_key)
+    meta = _meta("review", pois_doc, poi_list, rows, snapshot,
+                 queue_hash=canonical_hash(sorted(queue, key=lambda q: q["poi_id"])),
+                 queue_total=len(queue), queue_excluded=excluded,
+                 recheck=sum(1 for r in rows if r["decision"] == "recheck"),
+                 osm_crosscheck=bool(xc))
+    return rows, meta
 
-    meta = {
-        "snapshot": pois_doc.get("snapshot") or snapshot.name,
-        "fetched_at": pois_doc.get("fetched_at") or "",
-        "generated": __import__("datetime").date.today().isoformat(),
-        "queue_hash": hashlib.sha256(queue_path.read_bytes()).hexdigest()[:16],
-        "queue_total": len(queue),
-        "poi_total": len(poi_list),
-        "priority_cats": PRIORITY_CATS,
-    }
+
+def allocate(sizes: dict[str, int], n: int) -> dict[str, int]:
+    """Proportional stratified allocation, >= 1 per non-empty stratum,
+    largest remainder; never more than a stratum holds."""
+    total = sum(sizes.values())
+    if total == 0 or n <= 0:
+        return {k: 0 for k in sizes}
+    n = min(n, total)
+    quota = {k: n * v / total for k, v in sizes.items()}
+    out = {k: min(v, max(1, math.floor(quota[k]))) for k, v in sizes.items() if v}
+    while sum(out.values()) > n:  # the >=1 floor overshot: trim the largest
+        k = max(out, key=lambda c: (out[c] - quota[c], out[c]))
+        out[k] -= 1
+    for k in sorted(out, key=lambda c: (quota[c] - out[c], c), reverse=True):
+        if sum(out.values()) >= n:
+            break
+        if out[k] < sizes[k]:
+            out[k] += 1
+    while sum(out.values()) < n:  # every stratum full at its quota: top up
+        k = max((c for c in out if out[c] < sizes[c]), key=lambda c: sizes[c] - out[c])
+        out[k] += 1
+    return out
+
+
+def build_sample(snapshot: Path, size: int, seed: int) -> tuple[list[dict], dict]:
+    """Sample page: blind, category-stratified draw from auto-verified POIs."""
+    pois_doc, poi_list, _ = _load(snapshot)
+    pois = {p["poi_id"]: p for p in poi_list}
+    strata: dict[str, list[dict]] = defaultdict(list)
+    for poi in poi_list:
+        if poi.get("verified") and poi.get("verified_by") == SAMPLE_VERIFIED_BY:
+            strata[poi.get("cat") or ""].append(poi)
+    plan = allocate({k: len(v) for k, v in strata.items()}, size)
+    rng = random.Random(seed)
+    picked: list[dict] = []
+    for cat in sorted(strata):
+        members = sorted(strata[cat], key=lambda p: p["poi_id"])
+        picked += rng.sample(members, plan.get(cat, 0))
+    rng.shuffle(picked)  # no category runs: reviewers judge each row cold
+    rows = [card(p, pois=pois, xc=None, decision="sample", blind=True) for p in picked]
+    meta = _meta("sample", pois_doc, poi_list, rows, snapshot, seed=seed,
+                 population=sum(len(v) for v in strata.values()),
+                 strata={k: [plan.get(k, 0), len(v)] for k, v in sorted(strata.items())},
+                 sample_of=SAMPLE_VERIFIED_BY)
     return rows, meta
 
 
 def _script_json(payload: Any) -> str:
     """JSON safe to inline inside a <script type="application/json"> block."""
     text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-    return text.replace("</", "<\\/").replace("\u2028", "\\u2028").replace(
-        "\u2029", "\\u2029"
+    return text.replace("</", "<\\/").replace(" ", "\\u2028").replace(
+        " ", "\\u2029"
     )
 
 
@@ -218,7 +388,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Duyệt POI · __SNAPSHOT__ · Davel-Trace</title>
+<title>__TITLE__ · __SNAPSHOT__ · Davel-Trace</title>
 <style>
   :root{
     --bg:#f4f6f8; --card:#ffffff; --ink:#121a24; --muted:#5c6b7a;
@@ -287,7 +457,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   .hits{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
   .card{background:var(--card);border:1px solid var(--line);border-left:5px solid #c9d4e0;border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);scroll-margin-top:96px}
   .card.v-dung{border-left-color:var(--ok)}
-  .card.v-loai{border-left-color:var(--no)}
+  .card.v-loai,.card.v-sai{border-left-color:var(--no)}
   .card.v-skip{border-left-color:#9aa6b2}
   .card.hide{display:none}
   .card h2{font-size:17px;line-height:1.3;margin:0 0 3px;font-weight:700;word-break:break-word}
@@ -298,35 +468,51 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   .badge.prio{background:var(--warn-bg);color:var(--warn);border-color:#f0dca4}
   .badge.fail{background:var(--fail-bg);color:var(--fail);border-color:#f3c7c7}
   .badge.ok{background:var(--ok-bg);color:var(--ok);border-color:#bfe6d2}
+  .badge.recheck{background:#fdeceb;color:var(--no);border-color:#f3c7c7}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px 18px;margin:11px 0 0;font-size:13.5px}
   .grid .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;display:block}
   .mono{font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
   .reasons{margin:12px 0 0;padding:10px 12px;background:#fbfcfd;border:1px solid var(--line);border-radius:8px}
-  .reasons .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:7px}
+  .reasons .ttl,.osm .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:7px}
   .chip{display:block;margin:0 0 7px}
   .chip:last-child{margin-bottom:0}
   .chip .tag{display:inline-block;font:600 12px/1.5 ui-monospace,Consolas,monospace;border-radius:6px;padding:1px 7px;background:var(--warn-bg);color:var(--warn);border:1px solid #f0dca4;margin-right:7px;vertical-align:top}
   .chip.hard .tag{background:var(--fail-bg);color:var(--fail);border-color:#f3c7c7}
   .chip .hint{font-size:13px;color:#3d4a58}
+  .osm{margin:10px 0 0;padding:10px 12px;background:#f5f9f6;border:1px solid #d5e8dc;border-radius:8px;font-size:13.5px}
+  .osm .st{display:inline-block;font:600 11.5px/1.6 ui-monospace,Consolas,monospace;border-radius:6px;padding:0 6px;margin:0 6px 4px 0;border:1px solid var(--line);background:#fff}
+  .osm .st.confirmed{color:var(--ok);border-color:#bfe6d2;background:var(--ok-bg)}
+  .osm .st.conflict{color:var(--no);border-color:#f3c7c7;background:var(--no-bg)}
+  .osm .st.osm_only{color:var(--warn);border-color:#f0dca4;background:var(--warn-bg)}
   .siblings{margin:10px 0 0;padding:10px 12px;background:#f8fafc;border:1px dashed #cfd9e3;border-radius:8px;font-size:13.5px}
   .siblings .ttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
   .siblings ul{margin:0;padding-left:18px}
   .siblings li{margin:2px 0}
   .extra{margin:9px 0 0;font-size:13px;color:#3d4a58}
   .extra .k{color:var(--muted);font-weight:600}
+  .edit{margin:11px 0 0;border:1px solid var(--line);border-radius:8px;background:#fbfcfd}
+  .edit summary{cursor:pointer;padding:8px 12px;font-size:13px;font-weight:600;color:var(--brand)}
+  .edit .eg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 14px;padding:4px 12px 12px}
+  .edit label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}
+  .edit input,.edit select{border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:13.5px;background:#fff;color:var(--ink)}
+  .edit input.bad{border-color:var(--no);background:var(--no-bg)}
+  .edit .changed{font-size:12px;color:var(--warn);padding:0 12px 10px}
+  .flags{display:none;flex-wrap:wrap;gap:6px 14px;margin-top:9px;font-size:13px}
+  .card.v-sai .flags{display:flex}
+  .flags label{display:flex;gap:5px;align-items:center}
   .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
   .vbtn{min-width:86px}
   .vbtn.dung.on{background:var(--ok);border-color:var(--ok);color:#fff}
-  .vbtn.loai.on{background:var(--no);border-color:var(--no);color:#fff}
+  .vbtn.loai.on,.vbtn.sai.on{background:var(--no);border-color:var(--no);color:#fff}
   .vbtn.skip.on{background:var(--skip);border-color:var(--skip);color:#fff}
   .vbtn.dung:hover:not(.on){background:var(--ok-bg);border-color:#bfe6d2;color:var(--ok)}
-  .vbtn.loai:hover:not(.on){background:var(--no-bg);border-color:#f3c7c7;color:var(--no)}
+  .vbtn.loai:hover:not(.on),.vbtn.sai:hover:not(.on){background:var(--no-bg);border-color:#f3c7c7;color:var(--no)}
   .actions .note-in{flex:1 1 260px;min-width:200px}
   .actions textarea{
     width:100%;border:1px solid var(--line);border-radius:7px;padding:6px 9px;font:inherit;font-size:13px;
     resize:vertical;min-height:34px;background:#fff;color:var(--ink);
   }
-  .actions textarea:focus,.filters select:focus,.filters input:focus,.rev input:focus{outline:2px solid #bcdaf3;outline-offset:1px}
+  .actions textarea:focus,.filters select:focus,.filters input:focus,.rev input:focus,.edit input:focus,.edit select:focus{outline:2px solid #bcdaf3;outline-offset:1px}
   .empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:28px;text-align:center;color:var(--muted)}
   footer{margin-top:22px;font-size:12px;color:#8b98a6;line-height:1.7;text-align:center}
   .toast{
@@ -335,6 +521,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:50;max-width:90vw;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hide{display:none!important}
   @media (max-width:640px){
     .top-inner{padding:10px 12px 9px}
     .wrap{padding:0 12px 70px}
@@ -343,7 +530,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     .grid{grid-template-columns:1fr 1fr}
   }
   @media print{
-    header.top,.filters,.actions,.intro{display:none!important}
+    header.top,.filters,.actions,.intro,.edit{display:none!important}
     .card{break-inside:avoid;box-shadow:none}
     body{background:#fff}
   }
@@ -353,7 +540,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <header class="top">
   <div class="top-inner">
     <div class="top-row">
-      <div class="brand">Duyệt POI <span>· __SNAPSHOT__ · __GENERATED__</span></div>
+      <div class="brand">__TITLE__ <span>· __SNAPSHOT__ · __GENERATED__</span></div>
       <div class="spacer"></div>
       <div class="rev">
         <label for="reviewer">Người duyệt</label>
@@ -364,7 +551,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="bar-row">
       <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barfill"></i></div>
       <div class="counts" id="counts">Đã làm <b>0</b>/__TOTAL__</div>
-      <div class="counts" id="breakdown">Dung 0 · LOẠI 0 · Bỏ qua 0</div>
+      <div class="counts" id="breakdown"></div>
     </div>
   </div>
 </header>
@@ -372,42 +559,17 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <div class="wrap">
   <details class="intro" open>
     <summary>Việc cần làm &amp; tiêu chí (đọc 1 lần, ~2 phút)</summary>
-    <div class="body">
-      <h3>1. Việc cần làm</h3>
-      <ol>
-        <li>Mỗi thẻ là <b>một POI bị máy đẩy vào hàng chờ</b> (không tự bật <code>verified=true</code>). Đọc tên, loại hình, giờ, toạ độ; mở <b>Google Maps</b> khi cần đối chiếu ngoài đời.</li>
-        <li>Bấm <b>Dung</b> nếu điểm này giữ được trong pool; <b>LOẠI</b> nếu không phải điểm du lịch / sai quá nặng / trùng; <b>Bỏ qua</b> nếu chưa đủ căn cứ — dòng Bỏ qua <u>không</u> được xuất file.</li>
-        <li>Ghi chú ngắn khi quyết định không hiển nhiên (vd: "trùng quán bên cạnh", "giờ chỉ là ước lượng"). Bấm lại nút đang chọn để bỏ đánh dấu.</li>
-        <li>Tiến độ tự lưu trong trình duyệt này (localStorage) — đóng tab mở lại vẫn còn, miễn là cùng file + cùng snapshot.</li>
-      </ol>
-
-      <h3>2. Tiêu chí ngắn gọn (chi tiết: <code>docs/verify-criteria.md</code>)</h3>
-      <div class="crit">
-        <div><b>Địa chỉ / toạ độ</b>Nằm trong Đà Nẵng (bbox 15.80–16.35 N, 107.75–108.55 E) và đúng chỗ trên bản đồ. Snapshot <u>không có field địa chỉ</u> — phải xem link Maps.</div>
-        <div><b>Giờ mở cửa</b>Đọc được, giờ hợp lệ, qua đêm vẫn OK (vd 11:00-00:00). Máy chỉ kiểm format, <u>không</u> kiểm POI có mở đúng giờ đó không.</div>
-        <div><b>Tên &amp; loại hình</b>Tên đúng là điểm du lịch, không phải cửa hàng điện nước; <code>type</code> phải khớp <code>cat</code> (bảng refinement ở mục 3.1 của criteria).</div>
-        <div><b>Có trùng không</b>Trùng tên đã chuẩn hoá, hoặc cặp &lt;100 m có ≥2 token tên chung → xem siblings, chọn giữ 1 hoặc LOẠI.</div>
-      </div>
-      <div class="callout">
-        <b>Thứ tự ưu tiên mặc định:</b> <code>museum · park · bar · spa · nature · viewpoint</code> (nhóm đang 0 verified, mở được capacity plan ngay) lên trước, sau đó các category còn lại; dòng <b>fail</b> (vi phạm cứng) luôn nằm đầu.
-        <br><b>Nhắc lại:</b> <code>verified=true</code> chỉ có nghĩa "cấu trúc đủ tin để planner dùng", <u>không</u> xác nhận type/giá/rating đúng ngoài đời. Đừng Dung chỉ để đủ số.
-      </div>
-
-      <h3>3. Xuất file &amp; gửi lại</h3>
-      <ol>
-        <li>Bấm <b>Xuất JSONL</b> ở góc trên. File tải về tên <code>verify_verdicts_YYYYMMDD.jsonl</code>.</li>
-        <li>Mỗi dòng đã quyết định là 1 JSON: <code>{"poi_id","verdict":"dung"|"loai","note","reviewer","ts"}</code>. Mỗi POI tối đa 1 dòng; dòng Bỏ qua không có trong file.</li>
-        <li>Gửi lại file đó kèm tên snapshot <code>__SNAPSHOT__</code> (và ngày review) cho người phụ trách ingest — <u>không</u> sửa tay <code>pois.json</code>.</li>
-      </ol>
-      <p class="note">File này tự chứa: mở bằng double-click, không cần mạng, không cần server. Chỉ link Google Maps là ra ngoài.</p>
-    </div>
+    <div class="body">__INTRO__</div>
   </details>
 
   <div class="filters">
     <label>Category
       <select id="f-cat"><option value="">Tất cả</option></select>
     </label>
-    <label>Lý do
+    <label class="review-only">Nhóm
+      <select id="f-stage"><option value="">Tất cả</option><option value="recheck">Đã verified, cần xem lại</option><option value="queue">Hàng chờ</option></select>
+    </label>
+    <label class="review-only">Lý do
       <select id="f-reason"><option value="">Tất cả</option></select>
     </label>
     <label>Tìm kiếm
@@ -422,7 +584,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   <div class="empty hide" id="empty">Không có dòng nào khớp bộ lọc.</div>
 
   <footer>
-    Snapshot <b>__SNAPSHOT__</b> · queue hash <span class="mono">__HASH__</span> · tạo __GENERATED__ · __TOTAL__ dòng<br>
+    Snapshot <b>__SNAPSHOT__</b> · page hash <span class="mono">__HASH__</span> · tạo __GENERATED__ · __TOTAL__ dòng<br>
     Tiến độ lưu tại key <span class="mono" id="storekey"></span>
   </footer>
 </div>
@@ -437,7 +599,10 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 
   var DATA = JSON.parse(document.getElementById("verify-data").textContent);
   var META = JSON.parse(document.getElementById("verify-meta").textContent);
-  var STORE_KEY = "davel-trace-verify:" + META.snapshot + ":" + META.queue_hash + ":" + META.generated;
+  var SAMPLE = META.mode === "sample";
+  var VERDICTS = SAMPLE ? ["dung", "sai", "skip"] : ["dung", "loai", "skip"];
+  var VLABEL = { dung: "Đúng", loai: "LOẠI", sai: "Sai", skip: "Bỏ qua" };
+  var STORE_KEY = "davel-trace-verify:" + META.mode + ":" + META.snapshot + ":" + META.page_hash;
   var REASON_LABEL = {
     hours_missing: "Thiếu giờ mở cửa",
     rating_perfect: "Rating 5.0 tuyệt đối",
@@ -458,36 +623,64 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     duplicate_poi_id: "Trùng poi_id",
     hours_format_invalid: "Giờ sai format",
     hours_out_of_range: "Giờ ngoài 00:00–23:59",
-    hours_zero_length: "Giờ bắt đầu = kết thúc"
+    hours_zero_length: "Giờ bắt đầu = kết thúc",
+    osm_category_conflict: "OSM ghi loại hình khác",
+    osm_hours_conflict: "Giờ lệch OSM > 30 phút",
+    osm_hours_only: "Chỉ OSM có giờ dùng được",
+    osm_duplicate: "Trùng POI khác (cùng đối tượng OSM)",
+    hours_no_common_window: "Các ngày không có giờ mở chung",
+    hours_inferred: "Giờ là suy luận",
+    hours_inferred_dropped: "Giờ suy luận đã bị bỏ",
+    ticket_unknown: "Chưa biết có vé không",
+    not_destination: "Có thể không phải điểm đến",
+    structure_only: "Máy hết cờ sau chuẩn hoá"
   };
   var REASON_HINT = {
-    hours_missing: "Kiểm giờ thật trên Google Maps/website. Không rõ thì Bỏ qua hoặc ghi chú, đừng đoán.",
+    hours_missing: "Kiểm giờ thật trên Google Maps/website rồi nhập vào ô Giờ. Không có giờ: planner dùng khung an toàn của nhóm (xem dưới), chợ thì không xếp.",
     rating_perfect: "5.0 tuyệt đối thường do ít review hoặc review ảo — mở Maps xem số lượng review.",
     near_duplicate: "So với sibling bên dưới (tên + khoảng cách). Nếu là cùng một chỗ: giữ 1, LOẠI phần còn lại.",
     duplicate_name: "Trùng tên sau chuẩn hoá — xác nhận có phải cùng một điểm hay 2 chi nhánh khác nhau.",
-    duration_outlier: "p50 lệch >60% median của category. Chỉ là cảnh báo mềm; cân nhắc khi planner dùng để chia lịch.",
+    duration_outlier: "p50 lệch >60% median của category. Nếu vô lý, nhập thời lượng đúng vào ô Thời lượng.",
     name_generic: "Tên 1 token hoặc quá chung, dễ junk/trùng. Kiểm tên thật, nếu là quán nhỏ không phải điểm du lịch thì LOẠI.",
-    ticket_unverified: "Có thể có vé/giá nhưng chưa xác minh (fee toàn snapshot = 0). Nếu là điểm thu vé, ghi chú giá.",
-    type_unmapped: "Nhãn type thô không map được sang 14 category. Kiểm loại hình thật trước khi Dung.",
-    type_cat_mismatch: "Type và cat lệch nhau (ngoài bảng refinement). Một trong hai field sai — xem tên thật.",
-    coords_outside_bbox: "Toạ độ nằm ngoài Đà Nẵng → gần như chắc chắn LOẠI (vd VinWonders Nam Hội An ở Quảng Nam).",
-    coords_missing: "Không có toạ độ → không dùng được cho route. Sửa dữ liệu hoặc LOẠI.",
-    name_missing: "Không có tên → LOẠI hoặc bổ sung tên.",
-    source_missing: "Không có nguồn → không truy vết được. LOẠI nếu không xác minh được.",
-    type_missing: "Thiếu type → kiểm loại hình rồi bổ sung.",
-    cat_missing: "Thiếu category → kiểm loại hình rồi bổ sung.",
-    cat_unknown: "Category ngoài 14 nhóm planner biết → sửa cat hoặc LOẠI.",
+    ticket_unverified: "Có thể có vé nhưng chưa xác minh. Nếu là điểm thu vé, nhập giá vé người lớn vào ô Giá vé.",
+    type_unmapped: "Nhãn type thô không map được sang 14 category. Chọn đúng Loại hình trước khi Đúng.",
+    type_cat_mismatch: "Type và cat lệch nhau. Xem tên thật rồi chọn đúng Loại hình.",
+    coords_outside_bbox: "Toạ độ nằm ngoài bbox cũ. Từ 1/7/2025 Hội An thuộc TP Đà Nẵng: điểm ở Hội An vẫn có thể giữ.",
+    coords_missing: "Không có toạ độ → không dùng được cho route. LOẠI.",
+    name_missing: "Không có tên → LOẠI.",
+    source_missing: "Không có nguồn → LOẠI nếu không xác minh được.",
+    type_missing: "Thiếu type → chọn Loại hình.",
+    cat_missing: "Thiếu category → chọn Loại hình.",
+    cat_unknown: "Category ngoài 14 nhóm → chọn Loại hình hoặc LOẠI.",
     duplicate_poi_id: "poi_id lặp trong snapshot — báo lại người ingest, không tự sửa.",
-    hours_format_invalid: "Chuỗi giờ không khớp HH:MM-HH:MM → sửa giờ, hoặc LOẠI nếu không tìm được giờ.",
-    hours_out_of_range: "Giờ ngoài 00:00–23:59 → sửa giờ.",
-    hours_zero_length: "Giờ bắt đầu trùng giờ kết thúc → sửa giờ."
+    hours_format_invalid: "Chuỗi giờ không khớp HH:MM-HH:MM → nhập lại giờ.",
+    hours_out_of_range: "Giờ ngoài 00:00–23:59 → nhập lại giờ.",
+    hours_zero_length: "Giờ bắt đầu trùng giờ kết thúc → nhập lại giờ.",
+    osm_category_conflict: "OpenStreetMap ghi loại hình khác (xem khối OSM). Bên nào đúng? Sửa Loại hình nếu cần.",
+    osm_hours_conflict: "Giờ của mình và của OSM lệch hơn 30 phút. Kiểm Google Maps, nhập giờ đúng.",
+    osm_hours_only: "Giờ của mình không dùng được, OSM có giờ (xem khối OSM). Kiểm rồi nhập giờ.",
+    osm_duplicate: "Hai POI cùng trỏ vào một đối tượng OSM. Nếu là cùng một chỗ: giữ 1, LOẠI cái còn lại.",
+    hours_no_common_window: "Các biến thể giờ theo ngày không có giờ nào mở chung, planner không xếp được. Nhập giờ thường ngày.",
+    hours_inferred: "Giờ được suy ra (\"suy luận\"), không có nguồn. Kiểm và nhập giờ thật nếu khác.",
+    hours_inferred_dropped: "Giờ suy luận sai loại (vd quán ăn bị coi là bãi biển) đã bị bỏ. Nhập giờ thật.",
+    ticket_unknown: "Điểm tham quan chưa rõ có thu vé không. Có vé: nhập giá vé; miễn phí: nhập 0.",
+    not_destination: "Tên/tag giống văn phòng, shop online, dịch vụ giao hàng. Không phải điểm đến cho khách thì LOẠI.",
+    structure_only: "Sau khi chuẩn hoá thời lượng, luật máy không còn cờ nào — nhưng luật chỉ kiểm cấu trúc. Kiểm như mọi dòng khác."
   };
+  var FLAG_LABEL = {
+    exists: "Không tồn tại / đã đóng", location: "Sai vị trí", category: "Sai loại hình",
+    hours: "Sai giờ", duration: "Thời lượng vô lý", price: "Sai giá / vé",
+    duplicate: "Trùng điểm khác", not_destination: "Không phải điểm đến"
+  };
+  var OSM_FIELD = { exists: "tồn tại", location: "vị trí", category: "loại hình", hours: "giờ" };
   var CAT_LABEL = {
     restaurant: "Nhà hàng", cafe: "Cà phê", attraction: "Điểm tham quan", landmark: "Di tích",
     spa: "Spa", lodging: "Lưu trú", bar: "Bar", market: "Chợ", beach: "Biển",
     nature: "Thiên nhiên", museum: "Bảo tàng", park: "Công viên", viewpoint: "Ngắm cảnh",
     transport: "Giao thông"
   };
+  var BAND_LABEL = { cheap: "Rẻ (< 100k/người)", medium: "Trung bình (100–500k)", expensive: "Đắt (> 500k)" };
+  var HOURS_RE = /^\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2}(\s*,\s*\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2})*$/;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -502,6 +695,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   }
   function reasonLabel(key) { return REASON_LABEL[key] || key; }
   function catLabel(cat) { return CAT_LABEL[cat] ? CAT_LABEL[cat] + " (" + cat + ")" : (cat || "—"); }
+  function money(v) { return typeof v === "number" ? v.toLocaleString("vi-VN") + " đ" : "—"; }
 
   var state = loadState();
   var byId = {};
@@ -534,20 +728,126 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     el.textContent = msg;
     el.classList.add("show");
     clearTimeout(toast._t);
-    toast._t = setTimeout(function () { el.classList.remove("show"); }, 2600);
+    toast._t = setTimeout(function () { el.classList.remove("show"); }, 3200);
+  }
+  function entry(poiId) {
+    if (!state.verdicts[poiId]) state.verdicts[poiId] = { verdict: null, note: "", ts: "" };
+    return state.verdicts[poiId];
   }
 
   function verdictOf(row) {
     var v = state.verdicts[row.poi_id];
-    return v && (v.verdict === "dung" || v.verdict === "loai" || v.verdict === "skip") ? v : null;
+    return v && VERDICTS.indexOf(v.verdict) !== -1 ? v : null;
   }
 
   function reasonsOf(row) {
     var out = [];
-    row.hard.forEach(function (r) { out.push({ key: r, hard: true }); });
-    row.queue.forEach(function (r) { out.push({ key: r, hard: false }); });
-    if (!out.length) out.push({ key: "unknown", hard: false });
+    (row.hard || []).forEach(function (r) { out.push({ key: r, hard: true }); });
+    (row.queue || []).forEach(function (r) { out.push({ key: r, hard: false }); });
     return out;
+  }
+
+  /* ---------- edits ---------- */
+  function normHours(text) {
+    var t = String(text || "").trim();
+    if (!t) return null;
+    if (!HOURS_RE.test(t)) return false;
+    var ok = true;
+    var spans = t.split(",").map(function (part) {
+      var ends = part.split("-").map(function (x) {
+        var hm = x.trim().split(":");
+        var h = Number(hm[0]), m = Number(hm[1]);
+        if (h > 24 || m > 59 || (h === 24 && m > 0)) ok = false;
+        return (h < 10 ? "0" : "") + h + ":" + hm[1];
+      });
+      if (ends[0] === ends[1]) ok = false;
+      return ends[0] + "-" + ends[1];
+    });
+    return ok ? [spans.join(", ")] : false;
+  }
+  function intIn(text, lo, hi) {
+    var t = String(text || "").trim();
+    if (!t) return null;
+    if (!/^\d+$/.test(t)) return false;
+    var n = Number(t);
+    return n >= lo && n <= hi ? n : false;
+  }
+  // field -> parsed value (null = unchanged, false = invalid)
+  function parseEdit(field, raw) {
+    if (field === "opening_hours") return normHours(raw);
+    if (field === "visit_p50") return intIn(raw, 5, 600);
+    if (field === "ticket_vnd") return intIn(raw, 0, 5000000);
+    return raw ? raw : null;  // cat, price_band selects
+  }
+  function editsOf(poiId) {
+    var v = state.verdicts[poiId];
+    var raw = (v && v.raw) || {};
+    var row = byId[poiId] ? byId[poiId].row : {};
+    var current = { opening_hours: JSON.stringify(row.hours || []), cat: row.cat,
+                    visit_p50: row.dur_p50, ticket_vnd: row.ticket_vnd, price_band: row.price_band };
+    var out = {}, bad = [];
+    Object.keys(raw).forEach(function (f) {
+      var val = parseEdit(f, raw[f]);
+      if (val === false) bad.push(f);
+      else if (val !== null && (f === "opening_hours" ? JSON.stringify(val) : val) !== current[f]) out[f] = val;
+    });
+    return { edits: out, bad: bad };
+  }
+
+  function osmBlock(row) {
+    var o = row.osm;
+    if (!o) return "";
+    var st = Object.keys(OSM_FIELD).map(function (f) {
+      var s = (o.fields || {})[f] || "—";
+      return '<span class="st ' + esc(s) + '">' + esc(OSM_FIELD[f]) + ": " + esc(s) + "</span>";
+    }).join("");
+    var lines = [];
+    if (o.osm) {
+      lines.push("Khớp <b>" + esc(o.name) + "</b> cách " + esc(o.dist_m) + " m" +
+        (o.url ? ' · <a href="' + esc(o.url) + '" target="_blank" rel="noopener">OSM ↗</a>' : "") +
+        (o.cats && o.cats.length ? ' · tag gợi ý: <span class="mono">' + esc(o.cats.join(", ")) + "</span>" : ""));
+    } else {
+      lines.push('<span class="note">Không tìm thấy đối tượng OSM cùng tên trong 150 m (chỉ có 1 nguồn).</span>');
+    }
+    if (o.hours_raw) lines.push("Giờ OSM: <span class=\"mono\">" + esc(o.hours_raw) + "</span>" +
+      (o.closed && o.closed.length ? " · nghỉ: " + esc(o.closed.join(", ")) : ""));
+    if (o.dups && o.dups.length) lines.push("Cùng đối tượng OSM với: <b>" + esc(o.dups.join(" · ")) + "</b>");
+    return '<div class="osm"><div class="ttl">Đối chiếu OpenStreetMap</div>' + st + "<div>" + lines.join("<br>") + "</div></div>";
+  }
+
+  function editBlock(row) {
+    var v = state.verdicts[row.poi_id];
+    var raw = (v && v.raw) || {};
+    var catOpts = '<option value="">— giữ: ' + esc(catLabel(row.cat)) + " —</option>" +
+      META.cats.map(function (c) {
+        return '<option value="' + c + '"' + (raw.cat === c ? " selected" : "") + ">" + esc(catLabel(c)) + "</option>";
+      }).join("");
+    var bandOpts = '<option value="">— giữ: ' + esc(row.price_band ? BAND_LABEL[row.price_band] : "chưa có") + " —</option>" +
+      META.price_bands.map(function (b) {
+        return '<option value="' + b + '"' + (raw.price_band === b ? " selected" : "") + ">" + esc(BAND_LABEL[b]) + "</option>";
+      }).join("");
+    function inp(field, ph, type) {
+      return '<input data-f="' + field + '" type="' + (type || "text") + '" placeholder="' + esc(ph) +
+        '" value="' + esc(raw[field] || "") + '" autocomplete="off">';
+    }
+    var open = Object.keys(raw).some(function (k) { return raw[k]; });
+    return '<details class="edit"' + (open ? " open" : "") + "><summary>Sửa dữ liệu (để trống = giữ nguyên)</summary>" +
+      '<div class="eg">' +
+        "<label>Giờ mở cửa (HH:MM-HH:MM, nhiều ca cách bằng dấu phẩy)" +
+          inp("opening_hours", row.hours.length ? row.hours.join(" · ") : "vd 07:00-11:30, 13:30-17:00") + "</label>" +
+        '<label>Loại hình<select data-f="cat">' + catOpts + "</select></label>" +
+        "<label>Thời lượng ghé (phút)" + inp("visit_p50", row.dur_p50 ? "hiện " + row.dur_p50 : "vd 60", "text") + "</label>" +
+        "<label>Giá vé người lớn (đ, miễn phí = 0)" + inp("ticket_vnd", typeof row.ticket_vnd === "number" ? "hiện " + row.ticket_vnd : "vd 60000", "text") + "</label>" +
+        '<label>Mức giá<select data-f="price_band">' + bandOpts + "</select></label>" +
+      "</div>" + '<div class="changed" data-changed></div></details>';
+  }
+
+  function flagBlock(row) {
+    var v = state.verdicts[row.poi_id];
+    var on = (v && v.flags) || [];
+    return '<div class="flags"><span class="note">Sai ở đâu?</span>' + META.flags.map(function (f) {
+      return '<label><input type="checkbox" data-flag="' + f + '"' + (on.indexOf(f) !== -1 ? " checked" : "") + ">" + esc(FLAG_LABEL[f]) + "</label>";
+    }).join("") + "</div>";
   }
 
   function renderCard(row, idx) {
@@ -555,12 +855,19 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     var cls = "card" + (v ? " v-" + v.verdict : "");
     var url = mapsUrl(row);
     var hours = row.hours && row.hours.length ? row.hours.join(" · ") : null;
-    var reasons = reasonsOf(row).map(function (r) {
-      return '<div class="chip' + (r.hard ? " hard" : "") + '">' +
-        '<span class="tag">' + esc(r.key) + "</span>" +
-        '<span class="hint"><b>' + esc(reasonLabel(r.key)) + ":</b> " +
-        esc(REASON_HINT[r.key] || "Máy không tự quyết được — cần người xem.") + "</span></div>";
-    }).join("");
+    var safe = !hours && row.safe_hours ? (row.safe_hours.length ? row.safe_hours.join(", ") : "không có — chưa xếp được") : null;
+
+    var reasons = "";
+    if (!SAMPLE) {
+      var rs = reasonsOf(row);
+      reasons = rs.length ? '<div class="reasons"><div class="ttl">' + (row.decision === "recheck" ? "Vì sao cần xem lại" : "Lý do bị queue — cần kiểm gì") + "</div>" +
+        rs.map(function (r) {
+          return '<div class="chip' + (r.hard ? " hard" : "") + '">' +
+            '<span class="tag">' + esc(r.key) + "</span>" +
+            '<span class="hint"><b>' + esc(reasonLabel(r.key)) + ":</b> " +
+            esc(REASON_HINT[r.key] || "Máy không tự quyết được — cần người xem.") + "</span></div>";
+        }).join("") + "</div>" : "";
+    }
 
     var sib = "";
     if (row.siblings && row.siblings.length) {
@@ -585,39 +892,38 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     if (row.hours_note) extras.push('<div><span class="k">Ghi chú giờ:</span> ' + esc(row.hours_note) + "</div>");
     if (row.hours_source) extras.push('<div><span class="k">Nguồn giờ:</span> ' + esc(row.hours_source) + "</div>");
     if (row.web_evidence) extras.push('<div><span class="k">Bằng chứng web:</span> ' + esc(row.web_evidence) + "</div>");
-    if (typeof row.ticket_vnd === "number") extras.push('<div><span class="k">Vé:</span> ' + row.ticket_vnd.toLocaleString("vi-VN") + " đ</div>");
-    if (typeof row.dur_p50 === "number") extras.push('<div><span class="k">Thời lượng gợi ý p50:</span> ' + row.dur_p50 + " phút</div>");
 
     var badges = '<span class="badge cat">' + esc(catLabel(row.cat)) + "</span>";
     if (row.decision === "fail") badges += '<span class="badge fail">FAIL · vi phạm cứng</span>';
-    if (META.priority_cats.indexOf(row.cat) !== -1) badges += '<span class="badge prio">ưu tiên</span>';
-    if (row.verified) badges += '<span class="badge ok">đã verified (' + esc(row.verified_by || "?") + ")</span>";
+    if (row.decision === "recheck") badges += '<span class="badge recheck">đã verified · đang có trong plan</span>';
+    if (!SAMPLE && META.priority_cats.indexOf(row.cat) !== -1) badges += '<span class="badge prio">ưu tiên</span>';
 
-    var html =
-      '<article class="' + cls + '" id="row-' + idx + '" data-id="' + esc(row.poi_id) + '">' +
-        '<h2>' + esc(row.name || "(không tên)") + "</h2>" +
+    var buttons = VERDICTS.map(function (k) {
+      return '<button class="btn vbtn ' + k + (v && v.verdict === k ? " on" : "") + '" type="button" data-verdict="' + k + '">' + VLABEL[k] + "</button>";
+    }).join("");
+
+    return '<article class="' + cls + '" id="row-' + idx + '" data-id="' + esc(row.poi_id) + '">' +
+        "<h2>" + esc(row.name || "(không tên)") + "</h2>" +
         '<div class="pid">' + esc(row.poi_id) + "</div>" +
         '<div class="badges">' + badges + "</div>" +
         '<div class="grid">' +
-          '<div><span class="k">Địa chỉ</span>' + (row.address ? esc(row.address) : '<span class="note">snapshot không có field địa chỉ — đối chiếu qua Maps</span>') + "</div>" +
-          '<div><span class="k">Giờ mở cửa</span>' + (hours ? esc(hours) : '<span class="note">— (thiếu)</span>') + "</div>" +
+          '<div><span class="k">Giờ mở cửa</span>' + (hours ? esc(hours) : '<span class="note">— (thiếu)' +
+            (safe ? " · planner dùng khung an toàn: " + esc(safe) : "") + "</span>") + "</div>" +
+          '<div><span class="k">Thời lượng ghé</span>' + (row.dur_p50 ? esc(row.dur_p50) + " phút" +
+            (row.dur_source === "human" ? " (người nhập)" : ' <span class="note">(ước lượng theo loại)</span>') : "—") + "</div>" +
+          '<div><span class="k">Vé / mức giá</span>' + money(row.ticket_vnd) + " · " + esc(row.price_band ? BAND_LABEL[row.price_band] : "chưa có mức giá") + "</div>" +
           '<div><span class="k">Rating</span>' + (typeof row.rating === "number" ? row.rating.toFixed(1) : "—") + "</div>" +
           '<div><span class="k">Type (nhãn thô)</span>' + esc(row.type || "—") + "</div>" +
-          '<div><span class="k">Nguồn</span>' + esc(row.source || "—") + "</div>" +
           '<div><span class="k">Toạ độ</span><span class="mono">' + fmtCoord(row.lat) + ", " + fmtCoord(row.lon) + "</span>" +
             (url ? ' · <a href="' + url + '" target="_blank" rel="noopener">Google Maps ↗</a>' : "") + "</div>" +
         "</div>" +
-        '<div class="reasons"><div class="ttl">Lý do bị queue — cần kiểm gì</div>' + reasons + "</div>" +
-        sib +
+        reasons + (SAMPLE ? "" : osmBlock(row)) + sib +
         (extras.length ? '<div class="extra">' + extras.join("") + "</div>" : "") +
-        '<div class="actions">' +
-          '<button class="btn vbtn dung' + (v && v.verdict === "dung" ? " on" : "") + '" type="button" data-verdict="dung">Dung</button>' +
-          '<button class="btn vbtn loai' + (v && v.verdict === "loai" ? " on" : "") + '" type="button" data-verdict="loai">LOẠI</button>' +
-          '<button class="btn vbtn skip' + (v && v.verdict === "skip" ? " on" : "") + '" type="button" data-verdict="skip">Bỏ qua</button>' +
-          '<div class="note-in"><textarea rows="1" placeholder="Ghi chú (tuỳ chọn) — vd: trùng quán bên cạnh, giờ ước lượng…" aria-label="Ghi chú cho ' + esc(row.name) + '">' + esc(v ? v.note || "" : "") + "</textarea></div>" +
-        "</div>" +
+        (SAMPLE ? "" : editBlock(row)) +
+        '<div class="actions">' + buttons +
+          '<div class="note-in"><textarea rows="1" placeholder="Ghi chú (tuỳ chọn) — vd: trùng quán bên cạnh, giờ lấy từ Maps…" aria-label="Ghi chú cho ' + esc(row.name) + '">' + esc(v ? v.note || "" : (state.verdicts[row.poi_id] || {}).note || "") + "</textarea></div>" +
+        "</div>" + (SAMPLE ? flagBlock(row) : "") +
       "</article>";
-    return html;
   }
 
   function buildList() {
@@ -627,61 +933,65 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       parts.push(renderCard(row, idx));
     });
     $("list").innerHTML = parts.join("");
+    DATA.forEach(function (row) { refreshEdits(row.poi_id); });
+  }
+
+  function cardOf(poiId) {
+    var e = byId[poiId];
+    return e ? document.getElementById("row-" + e.idx) : null;
   }
 
   function setVerdict(poiId, verdict) {
-    var cur = state.verdicts[poiId];
-    var card = document.querySelector('[data-id="' + CSS.escape(poiId) + '"]');
+    var cur = entry(poiId);
+    var card = cardOf(poiId);
     var textarea = card ? card.querySelector("textarea") : null;
-    if (cur && cur.verdict === verdict) {
-      // Un-toggling keeps a typed note (as a pending, un-decided entry).
-      var keepNote = textarea ? textarea.value : (cur.note || "");
-      if (keepNote) {
-        state.verdicts[poiId] = { verdict: null, note: keepNote, ts: new Date().toISOString() };
-      } else {
-        delete state.verdicts[poiId];
-      }
-    } else {
-      state.verdicts[poiId] = {
-        verdict: verdict,
-        note: cur ? cur.note || "" : (textarea ? textarea.value : ""),
-        ts: new Date().toISOString()
-      };
-      if (textarea) state.verdicts[poiId].note = textarea.value;
-    }
+    if (textarea) cur.note = textarea.value;
+    cur.verdict = cur.verdict === verdict ? null : verdict;
+    cur.ts = new Date().toISOString();
     saveNow();
     updateCardUI(poiId);
     updateProgress();
-    updateHits();
+    applyFilters();
   }
 
   function updateCardUI(poiId) {
-    var entry = byId[poiId];
-    if (!entry) return;
-    var card = document.getElementById("row-" + entry.idx);
-    if (!card) return;
-    var v = verdictOf(entry.row);
-    card.classList.toggle("v-dung", !!v && v.verdict === "dung");
-    card.classList.toggle("v-loai", !!v && v.verdict === "loai");
-    card.classList.toggle("v-skip", !!v && v.verdict === "skip");
+    var e = byId[poiId];
+    var card = cardOf(poiId);
+    if (!e || !card) return;
+    var v = verdictOf(e.row);
+    VERDICTS.forEach(function (k) { card.classList.toggle("v-" + k, !!v && v.verdict === k); });
     card.querySelectorAll(".vbtn").forEach(function (b) {
       b.classList.toggle("on", !!v && b.getAttribute("data-verdict") === v.verdict);
     });
   }
 
-  function updateProgress() {
-    var n = { dung: 0, loai: 0, skip: 0 };
-    DATA.forEach(function (row) {
-      var v = state.verdicts[row.poi_id];
-      if (v && n[v.verdict] != null) n[v.verdict]++;
+  function refreshEdits(poiId) {
+    var card = cardOf(poiId);
+    if (!card || SAMPLE) return;
+    var parsed = editsOf(poiId);
+    card.querySelectorAll("[data-f]").forEach(function (el) {
+      el.classList.toggle("bad", parsed.bad.indexOf(el.getAttribute("data-f")) !== -1);
     });
-    var done = n.dung + n.loai + n.skip;
+    var keys = Object.keys(parsed.edits);
+    var box = card.querySelector("[data-changed]");
+    if (box) box.textContent = parsed.bad.length ? "Ô đỏ chưa đúng định dạng — sửa trước khi xuất."
+      : (keys.length ? "Sẽ ghi: " + keys.join(", ") : "");
+  }
+
+  function updateProgress() {
+    var n = {};
+    VERDICTS.forEach(function (k) { n[k] = 0; });
+    DATA.forEach(function (row) {
+      var v = verdictOf(row);
+      if (v) n[v.verdict]++;
+    });
+    var done = VERDICTS.reduce(function (s, k) { return s + n[k]; }, 0);
     var total = DATA.length;
     var pct = total ? Math.round(done / total * 100) : 0;
     $("barfill").style.width = pct + "%";
     $("bar").setAttribute("aria-valuenow", String(pct));
-    $("counts").innerHTML = "Đã làm <b>" + done + "</b>/" + total + " (" + pct + "%) · xuất được " + (n.dung + n.loai);
-    $("breakdown").textContent = "Dung " + n.dung + " · LOẠI " + n.loai + " · Bỏ qua " + n.skip;
+    $("counts").innerHTML = "Đã làm <b>" + done + "</b>/" + total + " (" + pct + "%)";
+    $("breakdown").textContent = VERDICTS.map(function (k) { return VLABEL[k] + " " + n[k]; }).join(" · ");
   }
 
   function updateHits() {
@@ -692,6 +1002,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 
   function applyFilters() {
     var cat = $("f-cat").value;
+    var stage = $("f-stage").value;
     var reason = $("f-reason").value;
     var q = $("f-q").value.trim().toLowerCase();
     var todoOnly = $("f-todo").checked;
@@ -700,14 +1011,12 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       if (!card) return;
       var ok = true;
       if (cat && row.cat !== cat) ok = false;
-      if (ok && reason) {
-        var keys = row.hard.concat(row.queue);
-        if (keys.indexOf(reason) === -1) ok = false;
-      }
+      if (ok && stage && (stage === "recheck") !== (row.decision === "recheck")) ok = false;
+      if (ok && reason && (row.hard || []).concat(row.queue || []).indexOf(reason) === -1) ok = false;
       if (ok && todoOnly && verdictOf(row)) ok = false;
       if (ok && q) {
         var v = state.verdicts[row.poi_id];
-        var hay = [row.name, row.type, row.poi_id, row.cat, row.source, (v && v.note) || ""]
+        var hay = [row.name, row.type, row.poi_id, row.cat, row.source || "", (v && v.note) || ""]
           .join(" ").toLowerCase();
         if (hay.indexOf(q) === -1) ok = false;
       }
@@ -720,7 +1029,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     var cats = {}, reasons = {};
     DATA.forEach(function (row) {
       cats[row.cat] = (cats[row.cat] || 0) + 1;
-      row.hard.concat(row.queue).forEach(function (r) { reasons[r] = (reasons[r] || 0) + 1; });
+      (row.hard || []).concat(row.queue || []).forEach(function (r) { reasons[r] = (reasons[r] || 0) + 1; });
     });
     var catSel = $("f-cat");
     Object.keys(cats).sort().forEach(function (cat) {
@@ -736,28 +1045,45 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       o.textContent = reasonLabel(r) + " — " + reasons[r];
       rSel.appendChild(o);
     });
+    if (SAMPLE) document.querySelectorAll(".review-only").forEach(function (el) { el.classList.add("hide"); });
   }
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function exportJsonl() {
-    var rows = [];
+    var rows = [], bad = [];
     DATA.forEach(function (row) {
-      var v = state.verdicts[row.poi_id];
-      if (!v || (v.verdict !== "dung" && v.verdict !== "loai")) return;
-      rows.push({
-        poi_id: row.poi_id,
-        verdict: v.verdict,
-        note: v.note || "",
-        reviewer: state.reviewer || "",
-        ts: v.ts || new Date().toISOString()
-      });
+      var v = verdictOf(row);
+      if (!v || v.verdict === "skip") return;
+      var line = {
+        poi_id: row.poi_id, verdict: v.verdict, note: v.note || "",
+        reviewer: state.reviewer || "", ts: v.ts || new Date().toISOString(),
+        page: META.mode, page_hash: META.page_hash, row_hash: row.row_hash
+      };
+      if (SAMPLE) {
+        if (v.verdict === "sai") line.flags = (v.flags || []).slice();
+      } else {
+        var parsed = editsOf(row.poi_id);
+        if (parsed.bad.length) { bad.push(row.name); return; }
+        if (Object.keys(parsed.edits).length) line.edits = parsed.edits;
+      }
+      rows.push(line);
     });
+    if (bad.length) {
+      toast("Còn " + bad.length + " thẻ có ô sửa sai định dạng (vd " + bad[0] + "). Sửa rồi xuất lại.");
+      return;
+    }
+    if (!state.reviewer.trim()) {
+      toast("Nhập tên người duyệt ở góc trên trước khi xuất.");
+      $("reviewer").focus();
+      return;
+    }
     if (!rows.length) {
-      toast("Chưa có dòng nào Dung/LOẠI để xuất. (Bỏ qua không được xuất.)");
+      toast("Chưa có dòng nào để xuất. (Bỏ qua không được xuất.)");
       return;
     }
     var now = new Date();
-    var name = "verify_verdicts_" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + ".jsonl";
+    var name = "verify_verdicts_" + META.mode + "_" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) +
+      "_" + state.reviewer.trim().replace(/[^A-Za-z0-9_-]+/g, "") + ".jsonl";
     var text = rows.map(function (r) { return JSON.stringify(r); }).join("\n") + "\n";
     var blob = new Blob([text], { type: "application/x-ndjson;charset=utf-8" });
     var a = document.createElement("a");
@@ -769,10 +1095,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       URL.revokeObjectURL(a.href);
       a.remove();
     }, 1500);
-    var skipped = Object.keys(state.verdicts).filter(function (k) {
-      return state.verdicts[k] && state.verdicts[k].verdict === "skip";
-    }).length;
-    toast("Đã xuất " + rows.length + " dòng → " + name + (skipped ? " (bỏ qua " + skipped + " dòng Bỏ qua)" : ""));
+    toast("Đã xuất " + rows.length + " dòng → " + name);
   }
 
   /* ---------- wiring ---------- */
@@ -787,34 +1110,38 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     var btn = ev.target.closest(".vbtn");
     if (!btn) return;
     var card = btn.closest(".card");
-    if (!card) return;
-    setVerdict(card.getAttribute("data-id"), btn.getAttribute("data-verdict"));
+    if (card) setVerdict(card.getAttribute("data-id"), btn.getAttribute("data-verdict"));
   });
   $("list").addEventListener("input", function (ev) {
-    if (ev.target.tagName !== "TEXTAREA") return;
     var card = ev.target.closest(".card");
     if (!card) return;
     var id = card.getAttribute("data-id");
-    var cur = state.verdicts[id];
-    if (cur) {
+    var cur = entry(id);
+    if (ev.target.tagName === "TEXTAREA") {
       cur.note = ev.target.value;
-      cur.ts = new Date().toISOString();
-    } else {
-      // Keep notes typed before a verdict: stash as pending, applied on click.
-      state.verdicts[id] = { verdict: null, note: ev.target.value, ts: new Date().toISOString() };
+    } else if (ev.target.hasAttribute("data-f")) {
+      cur.raw = cur.raw || {};
+      cur.raw[ev.target.getAttribute("data-f")] = ev.target.value;
+      refreshEdits(id);
+    } else if (ev.target.hasAttribute("data-flag")) {
+      var f = ev.target.getAttribute("data-flag");
+      cur.flags = (cur.flags || []).filter(function (x) { return x !== f; });
+      if (ev.target.checked) cur.flags.push(f);
     }
     saveSoon();
-    if ($("f-q").value.trim()) applyFilters();
+  });
+  $("list").addEventListener("change", function (ev) {
+    if (ev.target.tagName === "SELECT" || ev.target.type === "checkbox") {
+      ev.target.dispatchEvent(new Event("input", { bubbles: true }));
+    }
   });
 
-  ["f-cat", "f-reason", "f-q", "f-todo"].forEach(function (id) {
+  ["f-cat", "f-stage", "f-reason", "f-q", "f-todo"].forEach(function (id) {
     $(id).addEventListener("input", applyFilters);
     $(id).addEventListener("change", applyFilters);
   });
   $("f-reset").addEventListener("click", function () {
-    $("f-cat").value = "";
-    $("f-reason").value = "";
-    $("f-q").value = "";
+    ["f-cat", "f-stage", "f-reason", "f-q"].forEach(function (id) { $(id).value = ""; });
     $("f-todo").checked = false;
     applyFilters();
   });
@@ -825,7 +1152,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   updateProgress();
   applyFilters();
   if (Object.keys(state.verdicts).length) {
-    toast("Đã khôi phục tiến độ đã lưu cho snapshot này.");
+    toast("Đã khôi phục tiến độ đã lưu cho trang này.");
   }
 })();
 </script>
@@ -833,14 +1160,63 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 </html>
 """
 
+INTRO = {
+    "review": """
+<h3>1. Việc cần làm</h3>
+<ol>
+  <li><b>Nhóm "đã verified, cần xem lại"</b> (lên đầu): POI planner <u>đang xếp vào lịch</u> nhưng OpenStreetMap
+    hoặc luật dữ liệu báo có vấn đề (loại hình lệch, giờ lệch, trùng, giờ suy luận…). Xem khối lý do + khối OSM.</li>
+  <li><b>Nhóm hàng chờ</b>: POI máy chưa tự quyết được. Lưu trú đã được bỏ khỏi trang (planner không xếp lưu trú).</li>
+  <li>Bấm <b>Đúng</b> nếu giữ được trong pool (POI hàng chờ sẽ được bật <code>verified</code>);
+    <b>LOẠI</b> nếu không phải điểm đến / sai nặng / trùng (POI đã verified sẽ bị tắt);
+    <b>Bỏ qua</b> nếu chưa đủ căn cứ — dòng Bỏ qua <u>không</u> được xuất.</li>
+  <li>Thấy dữ liệu sai thì mở <b>"Sửa dữ liệu"</b> và nhập giá trị đúng: giờ, loại hình, thời lượng, giá vé, mức giá.
+    Để trống = giữ nguyên. Ô sai định dạng sẽ đỏ và chặn xuất file.</li>
+  <li>Tiến độ tự lưu trong trình duyệt (localStorage), theo đúng file + đúng dữ liệu.</li>
+</ol>
+<h3>2. Tiêu chí ngắn gọn (chi tiết: <code>docs/verify-criteria.md</code>, <code>docs/verify-samples.md</code>)</h3>
+<div class="crit">
+  <div><b>Tồn tại &amp; vị trí</b>Mở Google Maps: điểm còn hoạt động và đúng chỗ. Từ 1/7/2025 Hội An thuộc TP Đà Nẵng.</div>
+  <div><b>Giờ mở cửa</b>Nhập giờ thường ngày, nhiều ca cách bằng dấu phẩy (vd <code>10:30-14:00, 17:00-22:00</code>). Qua đêm vẫn được (<code>18:00-02:00</code>).</div>
+  <div><b>Loại hình</b>Bãi biển là <code>beach</code>, không phải <code>attraction</code>; đình/chùa/cầu là <code>landmark</code>.</div>
+  <div><b>Thời lượng</b>Thời gian một khách thường ở lại (đình làng ~30 phút, bảo tàng ~90 phút). Số đang hiện là ước lượng theo loại.</div>
+</div>
+<div class="callout"><b>Nhắc lại:</b> mỗi dòng xuất ra có <code>row_hash</code>. Nếu dữ liệu POI đổi sau khi tạo trang,
+  tool ingest sẽ từ chối dòng đó thay vì ghi đè. Đừng Đúng chỉ để đủ số.</div>
+<h3>3. Xuất file &amp; gửi lại</h3>
+<ol>
+  <li>Nhập tên ở góc trên, bấm <b>Xuất JSONL</b>: tải về <code>verify_verdicts_review_YYYYMMDD_&lt;tên&gt;.jsonl</code>.</li>
+  <li>Gửi file cho người phụ trách ingest (<code>python BE/ml/data/ingest_verdicts.py</code>) — <u>không</u> sửa tay <code>pois.json</code>.</li>
+</ol>
+""",
+    "sample": """
+<h3>1. Việc cần làm (đo độ chính xác của đợt tự verify)</h3>
+<ol>
+  <li>Mỗi thẻ là một POI <b>đã được máy bật verified</b>, rút ngẫu nhiên theo loại hình. Trang cố ý <u>không</u>
+    hiện lý do của máy hay kết quả OSM, để bạn chấm độc lập.</li>
+  <li>Mở Google Maps, kiểm: còn tồn tại, đúng vị trí, đúng loại hình, giờ đúng, thời lượng hợp lý, giá/vé hợp lý,
+    không trùng điểm khác, là điểm đến cho khách du lịch.</li>
+  <li>Tất cả đều ổn: <b>Đúng</b>. Có ít nhất một chỗ sai: <b>Sai</b> và tick chỗ sai. Không đủ căn cứ: <b>Bỏ qua</b>.</li>
+  <li><b>Hai người chấm riêng</b>, không bàn với nhau trước khi xuất file — độ đồng thuận giữa hai người cũng được đo.</li>
+</ol>
+<div class="callout"><b>Gate:</b> đợt tự verify chỉ được tin khi độ chính xác ≥ 95% và cận dưới khoảng tin cậy ≥ 90%
+  (<code>python BE/ml/data/verify_precision.py file1.jsonl file2.jsonl</code>).</div>
+<h3>2. Xuất file</h3>
+<ol><li>Nhập tên, bấm <b>Xuất JSONL</b>: <code>verify_verdicts_sample_YYYYMMDD_&lt;tên&gt;.jsonl</code>, gửi lại.</li></ol>
+""",
+}
+TITLE = {"review": "Duyệt POI", "sample": "Mẫu đo độ chính xác"}
+
 
 def render(rows: list[dict], meta: dict) -> str:
     html = PAGE_TEMPLATE
     html = html.replace("__DATA__", _script_json(rows))
     html = html.replace("__META__", _script_json(meta))
+    html = html.replace("__INTRO__", INTRO[meta["mode"]])
+    html = html.replace("__TITLE__", TITLE[meta["mode"]])
     html = html.replace("__SNAPSHOT__", _esc_html(meta["snapshot"]))
     html = html.replace("__GENERATED__", _esc_html(meta["generated"]))
-    html = html.replace("__HASH__", _esc_html(meta["queue_hash"]))
+    html = html.replace("__HASH__", _esc_html(meta["page_hash"]))
     html = html.replace("__TOTAL__", str(len(rows)))
     return html
 
@@ -858,30 +1234,42 @@ def _esc_html(value: Any) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--snapshot", type=Path, default=DEFAULT_SNAPSHOT)
-    parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--mode", choices=("review", "sample"), default="review")
+    parser.add_argument("--size", type=int, default=80, help="sample size (--mode sample)")
+    parser.add_argument("--seed", type=int, default=20261030, help="sample seed (--mode sample)")
+    parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args(argv)
 
     snapshot = args.snapshot
     if not (snapshot / "pois.json").is_file():
         raise SystemExit(f"missing {snapshot / 'pois.json'}")
-    if not (snapshot / "auto_verify_queue.jsonl").is_file():
-        raise SystemExit(f"missing {snapshot / 'auto_verify_queue.jsonl'}")
-
-    rows, meta = build_rows(snapshot)
-    html = render(rows, meta)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(html, encoding="utf-8", newline="\n")
+    if args.mode == "review":
+        if not (snapshot / "auto_verify_queue.jsonl").is_file():
+            raise SystemExit(f"missing {snapshot / 'auto_verify_queue.jsonl'}")
+        rows, meta = build_rows(snapshot)
+    else:
+        rows, meta = build_sample(snapshot, args.size, args.seed)
+    out = args.out or DEFAULT_OUT[args.mode]
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(render(rows, meta), encoding="utf-8", newline="\n")
 
     counts: dict[str, int] = {}
     reasons: dict[str, int] = {}
     for row in rows:
         counts[row["cat"]] = counts.get(row["cat"], 0) + 1
-        for key in row["hard"] + row["queue"]:
+        for key in row.get("hard", []) + row.get("queue", []):
             reasons[key] = reasons.get(key, 0) + 1
-    print(f"wrote {args.out} ({args.out.stat().st_size:,} bytes)")
-    print(f"rows={len(rows)} snapshot={meta['snapshot']} queue_hash={meta['queue_hash']}")
+    print(f"wrote {out} ({out.stat().st_size:,} bytes)")
+    print(f"mode={args.mode} rows={len(rows)} snapshot={meta['snapshot']} "
+          f"page_hash={meta['page_hash']}")
+    if args.mode == "review":
+        print(f"recheck={meta['recheck']} queue_hash={meta['queue_hash']} "
+              f"queue_excluded={meta['queue_excluded']}")
+    else:
+        print(f"population={meta['population']} seed={meta['seed']} strata={meta['strata']}")
     print("cats: " + ", ".join(f"{k}={v}" for k, v in sorted(counts.items())))
-    print("reasons: " + ", ".join(f"{k}={v}" for k, v in sorted(reasons.items())))
+    if reasons:
+        print("reasons: " + ", ".join(f"{k}={v}" for k, v in sorted(reasons.items())))
     return 0
 
 
