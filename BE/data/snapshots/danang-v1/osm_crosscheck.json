@@ -69,6 +69,7 @@
    },
    "match": {
     "dist_m": 63.6,
+    "matched_name": "Chùa Quán Thế Âm",
     "name": "Chùa Quán Thế Âm",
     "osm": "n2093848428",
     "score": 1.0,
@@ -92,6 +93,7 @@
    },
    "match": {
     "dist_m": 4.7,
+    "matched_name": "Khâu Cà Phê",
     "name": "Khâu Cà Phê",
     "osm": "n13288544261",
     "score": 1.0,
@@ -140,6 +142,7 @@
    },
    "match": {
     "dist_m": 10.7,
+    "matched_name": "Sontra Sea Hotel",
     "name": "Sontra Sea Hotel",
     "osm": "n12171202636",
     "score": 1.0,
@@ -193,6 +196,7 @@
    },
    "match": {
     "dist_m": 8.1,
+    "matched_name": "Mi Quang Thi 251",
     "name": "Mi Quang Thi 251",
     "osm": "n5983039285",
     "score": 1.0,
@@ -365,6 +369,7 @@
    },
    "match": {
     "dist_m": 6.3,
+    "matched_name": "My Quang Ba Mua",
     "name": "My Quang Ba Mua",
     "osm": "n6466304585",
     "score": 1.0,
@@ -394,6 +399,7 @@
    },
    "match": {
     "dist_m": 16.0,
+    "matched_name": "Trình cà phê",
     "name": "Trình cà phê",
     "osm": "n11665246470",
     "score": 1.0,
@@ -443,6 +449,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Ngũ Hành Sơn",
     "name": "Ngũ Hành Sơn",
     "osm": "a17104697",
     "score": 1.0,
@@ -476,6 +483,7 @@
    },
    "match": {
     "dist_m": 15.6,
+    "matched_name": "Chợ Chiều",
     "name": "Chợ Chiều",
     "osm": "w1551522688",
     "score": 1.0,
@@ -618,6 +626,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi biển Mỹ Khê",
     "name": "Bãi biển Mỹ Khê",
     "osm": "a38001329",
     "score": 1.0,
@@ -681,6 +690,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Nhà thờ Giáo xứ Cồn Dầu",
     "name": "Nhà thờ Giáo xứ Cồn Dầu",
     "osm": "a2749265582",
     "score": 1.0,
@@ -784,6 +794,7 @@
    },
    "match": {
     "dist_m": 31.7,
+    "matched_name": "Huy Hoang Hotel",
     "name": "Huy Hoang Hotel",
     "osm": "n9921305987",
     "score": 1.0,
@@ -835,6 +846,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Herbal Spa",
     "name": "Herbal Spa",
     "osm": "a2557006070",
     "score": 1.0,
@@ -879,6 +891,7 @@
    },
    "match": {
     "dist_m": 10.9,
+    "matched_name": "Regal Healthy Spa",
     "name": "Regal Healthy Spa",
     "osm": "n12870331350",
     "score": 1.0,
@@ -913,6 +926,7 @@
    },
    "match": {
     "dist_m": 2.5,
+    "matched_name": "Bảo tàng Mỹ thuật Đà Nẵng",
     "name": "Bảo tàng Mỹ thuật Đà Nẵng",
     "osm": "w759913076",
     "score": 1.0,
@@ -936,6 +950,7 @@
    },
    "match": {
     "dist_m": 2.1,
+    "matched_name": "SC Restaurant",
     "name": "SC Restaurant",
     "osm": "n11171782637",
     "score": 1.0,
@@ -958,6 +973,7 @@
    },
    "match": {
     "dist_m": 10.3,
+    "matched_name": "N pub",
     "name": "N pub",
     "osm": "n11672301169",
     "score": 1.0,
@@ -990,6 +1006,7 @@
    },
    "match": {
     "dist_m": 4.2,
+    "matched_name": "Panda Spa",
     "name": "Panda Spa",
     "osm": "n12169174294",
     "score": 1.0,
@@ -1021,6 +1038,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "XLIII Specialty Coffee",
     "name": "XLIII Specialty Coffee",
     "osm": "a2362664026",
     "score": 1.0,
@@ -1062,6 +1080,7 @@
    },
    "match": {
     "dist_m": 59.8,
+    "matched_name": "Bảo tàng Phật giáo",
     "name": "Bảo tàng Phật giáo",
     "osm": "n8474743417",
     "score": 1.0,
@@ -1101,6 +1120,7 @@
    },
    "match": {
     "dist_m": 93.1,
+    "matched_name": "Khu Du Lịch Sinh Thái Suối Lương",
     "name": "Khu Du Lịch Sinh Thái Suối Lương",
     "osm": "n5383428522",
     "score": 1.0,
@@ -1155,6 +1175,7 @@
    },
    "match": {
     "dist_m": 5.6,
+    "matched_name": "Minh Toan Safi Ocean",
     "name": "Minh Toan Safi Ocean",
     "osm": "w1243635505",
     "score": 1.0,
@@ -1179,6 +1200,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Tam Tôn",
     "name": "Chùa Tam Tôn",
     "osm": "a1254766894",
     "score": 1.0,
@@ -1224,6 +1246,7 @@
    },
    "match": {
     "dist_m": 0.9,
+    "matched_name": "Tháp Xá Lợi",
     "name": "Tháp Xá Lợi",
     "osm": "a973406114",
     "score": 1.0,
@@ -1250,6 +1273,7 @@
    },
    "match": {
     "dist_m": 30.7,
+    "matched_name": "Huyen Khong Cave",
     "name": "Huyen Khong Cave",
     "osm": "n1758586757",
     "score": 1.0,
@@ -1272,6 +1296,7 @@
    },
    "match": {
     "dist_m": 6.4,
+    "matched_name": "Hai Cử",
     "name": "Hai Cử",
     "osm": "n7095281753",
     "score": 1.0,
@@ -1314,6 +1339,7 @@
    },
    "match": {
     "dist_m": 12.2,
+    "matched_name": "Ocean Star",
     "name": "Ocean Star",
     "osm": "n13545986805",
     "score": 1.0,
@@ -1356,6 +1382,7 @@
    },
    "match": {
     "dist_m": 1.5,
+    "matched_name": "La Luna",
     "name": "La Luna",
     "osm": "n4150425790",
     "score": 1.0,
@@ -1469,6 +1496,7 @@
    },
    "match": {
     "dist_m": 36.5,
+    "matched_name": "Long Hoa Pagoda",
     "name": "Long Hoa Pagoda",
     "osm": "n2093848444",
     "score": 0.67,
@@ -1493,6 +1521,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa An Long",
     "name": "Chùa An Long",
     "osm": "a2750056008",
     "score": 1.0,
@@ -1583,6 +1612,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Đêm Sơn Trà",
     "name": "Chợ Đêm Sơn Trà",
     "osm": "a3112724392",
     "score": 1.0,
@@ -1619,6 +1649,7 @@
    },
    "match": {
     "dist_m": 2.4,
+    "matched_name": "Đỉnh Bàn Cờ",
     "name": "Ban Co Peak",
     "osm": "n1538334281",
     "score": 1.0,
@@ -1678,6 +1709,7 @@
    },
    "match": {
     "dist_m": 6.9,
+    "matched_name": "Ông Minh",
     "name": "Ông Minh",
     "osm": "n4352303490",
     "score": 1.0,
@@ -1717,6 +1749,7 @@
    },
    "match": {
     "dist_m": 31.4,
+    "matched_name": "Chợ đêm Helio",
     "name": "Chợ đêm Helio",
     "osm": "n7301996085",
     "score": 1.0,
@@ -1741,6 +1774,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Thành Điện Hải",
     "name": "Thành Điện Hải",
     "osm": "a237218386",
     "score": 1.0,
@@ -1794,6 +1828,7 @@
    },
    "match": {
     "dist_m": 19.6,
+    "matched_name": "Chùa Linh Ứng",
     "name": "Chùa Linh Ứng",
     "osm": "w746227054",
     "score": 1.0,
@@ -1847,6 +1882,7 @@
    },
    "match": {
     "dist_m": 51.0,
+    "matched_name": "Chùa Không Tên",
     "name": "Khu Văn hóa Tâm linh Đà Sơn",
     "osm": "n12404434601",
     "score": 1.0,
@@ -1940,6 +1976,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Hàn",
     "name": "Chợ Hàn",
     "osm": "a409771806",
     "score": 1.0,
@@ -2074,6 +2111,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Danang Marriott Resort & Spa",
     "name": "Danang Marriott Resort & Spa",
     "osm": "a328666200",
     "score": 1.0,
@@ -2103,6 +2141,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bảo tàng Đà Nẵng",
     "name": "Bảo tàng Đà Nẵng",
     "osm": "a2737198722",
     "score": 1.0,
@@ -2128,6 +2167,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Golden Meat House",
     "name": "Golden Meat House",
     "osm": "a2629369014",
     "score": 1.0,
@@ -2213,6 +2253,7 @@
    },
    "match": {
     "dist_m": 4.3,
+    "matched_name": "Tượng Mẹ Nhu",
     "name": "Tượng Mẹ Nhu",
     "osm": "n11555496744",
     "score": 1.0,
@@ -2237,6 +2278,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Khuê Mỹ",
     "name": "Chợ Khuê Mỹ",
     "osm": "a2153432486",
     "score": 1.0,
@@ -2361,6 +2403,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Rừng đặc dụng Bà Nà - Núi Chúa",
     "name": "Rừng đặc dụng Bà Nà - Núi Chúa",
     "osm": "a26259173",
     "score": 0.67,
@@ -2383,6 +2426,7 @@
    },
    "match": {
     "dist_m": 36.4,
+    "matched_name": "phú mỹ thành nhà hàng",
     "name": "phú mỹ thành nhà hàng",
     "osm": "n4860107522",
     "score": 1.0,
@@ -2415,6 +2459,7 @@
    },
    "match": {
     "dist_m": 4.4,
+    "matched_name": "Loco",
     "name": "Loco",
     "osm": "n12175071924",
     "score": 1.0,
@@ -2454,6 +2499,7 @@
    },
    "match": {
     "dist_m": 99.9,
+    "matched_name": "Mì Quảng Ếch",
     "name": "Mì Quảng Ếch",
     "osm": "n5116302323",
     "score": 1.0,
@@ -2481,6 +2527,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Linh Ứng",
     "name": "Chùa Linh Ứng",
     "osm": "a973406098",
     "score": 1.0,
@@ -2576,6 +2623,7 @@
    },
    "match": {
     "dist_m": 0.8,
+    "matched_name": "Hải đăng Tiên Sa",
     "name": "Hải đăng Tiên Sa",
     "osm": "w1263650800",
     "score": 1.0,
@@ -2701,6 +2749,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "A La Carte Danang Beach",
     "name": "A La Carte Danang Beach",
     "osm": "a1144435080",
     "score": 1.0,
@@ -2804,6 +2853,7 @@
    },
    "match": {
     "dist_m": 73.9,
+    "matched_name": "Holiday Coffee",
     "name": "Holiday Coffee",
     "osm": "n12009157357",
     "score": 1.0,
@@ -2826,6 +2876,7 @@
    },
    "match": {
     "dist_m": 3.2,
+    "matched_name": "Noi Dat",
     "name": "Noi Dat",
     "osm": "n12837179237",
     "score": 1.0,
@@ -2848,6 +2899,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Meliá Danang Beach Resort",
     "name": "Meliá Danang Beach Resort",
     "osm": "a1027412540",
     "score": 1.0,
@@ -2870,6 +2922,7 @@
    },
    "match": {
     "dist_m": 3.2,
+    "matched_name": "Funky Donkey",
     "name": "Funky Donkey",
     "osm": "n13546014230",
     "score": 1.0,
@@ -2893,6 +2946,7 @@
    },
    "match": {
     "dist_m": 19.2,
+    "matched_name": "Trung tâm Giải trí Phức hợp Helio Center",
     "name": "Trung tâm Giải trí Phức hợp Helio Center",
     "osm": "n4807957148",
     "score": 1.0,
@@ -2936,6 +2990,7 @@
    },
    "match": {
     "dist_m": 8.8,
+    "matched_name": "At Ca Phe",
     "name": "At Ca Phe",
     "osm": "n14004104302",
     "score": 1.0,
@@ -3015,6 +3070,7 @@
    },
    "match": {
     "dist_m": 5.0,
+    "matched_name": "The Hideout Café",
     "name": "The Hideout Café",
     "osm": "n7218228185",
     "score": 1.0,
@@ -3058,6 +3114,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Pullman Beach Resort",
     "name": "Pullman Beach Resort",
     "osm": "a237228580",
     "score": 1.0,
@@ -3086,6 +3143,7 @@
    },
    "match": {
     "dist_m": 139.2,
+    "matched_name": "Thuỷ Sơn",
     "name": "Thuỷ Sơn",
     "osm": "n1758586662",
     "score": 1.0,
@@ -3132,6 +3190,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cầu Rồng",
     "name": "Cầu Rồng",
     "osm": "a1389663852",
     "score": 1.0,
@@ -3186,6 +3245,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bảo tàng Nghệ thuật Điêu khắc Chăm Đà Nẵng",
     "name": "Bảo tàng Nghệ thuật Điêu khắc Chăm Đà Nẵng",
     "osm": "a605744376",
     "score": 1.0,
@@ -3277,6 +3337,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Sandy Beach Non Nuoc Resort",
     "name": "Sandy Beach Non Nuoc Resort",
     "osm": "a328666178",
     "score": 1.0,
@@ -3321,6 +3382,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Sala Danang Beach Hotel",
     "name": "Sala Danang Beach Hotel",
     "osm": "a2100318122",
     "score": 1.0,
@@ -3364,6 +3426,7 @@
    },
    "match": {
     "dist_m": 20.1,
+    "matched_name": "Nalod",
     "name": "Nalod",
     "osm": "n12860787933",
     "score": 1.0,
@@ -3386,6 +3449,7 @@
    },
    "match": {
     "dist_m": 10.7,
+    "matched_name": "Them Hai San",
     "name": "Them Hai San",
     "osm": "n12833350534",
     "score": 1.0,
@@ -3450,6 +3514,7 @@
    },
    "match": {
     "dist_m": 11.2,
+    "matched_name": "Dong Tang Chon",
     "name": "Dong Tang Chon",
     "osm": "n5922491535",
     "score": 1.0,
@@ -3492,6 +3557,7 @@
    },
    "match": {
     "dist_m": 2.7,
+    "matched_name": "Phố nướng Tokyo",
     "name": "Phố nướng Tokyo",
     "osm": "n4759752150",
     "score": 1.0,
@@ -3516,6 +3582,7 @@
    },
    "match": {
     "dist_m": 16.2,
+    "matched_name": "Van Thong Cave",
     "name": "Van Thong Cave",
     "osm": "n1758586716",
     "score": 0.67,
@@ -3548,6 +3615,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Non Nước",
     "name": "Chợ Non Nước",
     "osm": "a2652648434",
     "score": 1.0,
@@ -3590,6 +3658,7 @@
    },
    "match": {
     "dist_m": 9.7,
+    "matched_name": "DNG",
     "name": "DNG",
     "osm": "n12843905562",
     "score": 1.0,
@@ -3613,6 +3682,7 @@
    },
    "match": {
     "dist_m": 8.6,
+    "matched_name": "Thai Son Pagoda",
     "name": "Thai Son Pagoda",
     "osm": "n2093848430",
     "score": 0.67,
@@ -3666,6 +3736,7 @@
    },
    "match": {
     "dist_m": 13.2,
+    "matched_name": "Kim Seafood",
     "name": "Kim Seafood",
     "osm": "n13290069643",
     "score": 1.0,
@@ -3709,6 +3780,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Giáo xứ Hoà Minh",
     "name": "Giáo xứ Hoà Minh",
     "osm": "a1668967616",
     "score": 1.0,
@@ -3745,6 +3817,7 @@
    },
    "match": {
     "dist_m": 16.9,
+    "matched_name": "Động Âm Phủ",
     "name": "Động Âm Phủ",
     "osm": "n1758586686",
     "score": 1.0,
@@ -3770,6 +3843,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ An Hải Đông",
     "name": "Chợ An Hải Đông",
     "osm": "a1560933580",
     "score": 1.0,
@@ -3813,6 +3887,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ An Hải Bắc",
     "name": "Chợ An Hải Bắc",
     "osm": "a3103024498",
     "score": 1.0,
@@ -3835,6 +3910,7 @@
    },
    "match": {
     "dist_m": 3.0,
+    "matched_name": "Nhà hàng NHÀ BÊP CHÓ HÀN",
     "name": "Nhà hàng NHÀ BÊP CHÓ HÀN",
     "osm": "n14125298501",
     "score": 1.0,
@@ -3895,6 +3971,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đài Radar Sơn Trà",
     "name": "Đài Radar Sơn Trà",
     "osm": "a959061412",
     "score": 1.0,
@@ -3939,6 +4016,7 @@
    },
    "match": {
     "dist_m": 11.0,
+    "matched_name": "Monarque Hotel",
     "name": "Monarque Hotel",
     "osm": "w693394241",
     "score": 1.0,
@@ -3972,6 +4050,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Risemount Premier Resort",
     "name": "Risemount Premier Resort",
     "osm": "a2628654972",
     "score": 1.0,
@@ -4004,6 +4083,7 @@
    },
    "match": {
     "dist_m": 19.8,
+    "matched_name": "Wonderlust",
     "name": "Wonderlust",
     "osm": "n6171881586",
     "score": 1.0,
@@ -4026,6 +4106,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Shilla Monogram",
     "name": "Shilla Monogram",
     "osm": "a2255310592",
     "score": 1.0,
@@ -4078,6 +4159,7 @@
    },
    "match": {
     "dist_m": 21.7,
+    "matched_name": "Wyndham Danang Golden Bay Hotel",
     "name": "Wyndham Danang Golden Bay Hotel",
     "osm": "n12816183324",
     "score": 1.0,
@@ -4137,6 +4219,7 @@
    },
    "match": {
     "dist_m": 19.9,
+    "matched_name": "Maia",
     "name": "Maia",
     "osm": "n10747475499",
     "score": 1.0,
@@ -4271,6 +4354,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Phổ Đà",
     "name": "Chùa Phổ Đà",
     "osm": "a2652883872",
     "score": 1.0,
@@ -4294,6 +4378,7 @@
    },
    "match": {
     "dist_m": 7.0,
+    "matched_name": "Korea BBQ",
     "name": "Korea BBQ",
     "osm": "n12830575038",
     "score": 1.0,
@@ -4316,6 +4401,7 @@
    },
    "match": {
     "dist_m": 34.5,
+    "matched_name": "Son Tra Resort & Spa",
     "name": "Son Tra Resort & Spa",
     "osm": "n1623183663",
     "score": 1.0,
@@ -4338,6 +4424,7 @@
    },
    "match": {
     "dist_m": 9.2,
+    "matched_name": "Radisson",
     "name": "Radisson",
     "osm": "n10314394709",
     "score": 1.0,
@@ -4402,6 +4489,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Paris Deli Danang Beach Hotel",
     "name": "Paris Deli Danang Beach Hotel",
     "osm": "a2487271030",
     "score": 1.0,
@@ -4445,6 +4533,7 @@
    },
    "match": {
     "dist_m": 24.3,
+    "matched_name": "Mandila Beach",
     "name": "Mandila Beach",
     "osm": "n12860787931",
     "score": 1.0,
@@ -4487,6 +4576,7 @@
    },
    "match": {
     "dist_m": 1.2,
+    "matched_name": "Nam House",
     "name": "Nam House",
     "osm": "n5382678421",
     "score": 1.0,
@@ -4556,6 +4646,7 @@
    },
    "match": {
     "dist_m": 0.6,
+    "matched_name": "Nia Coffee",
     "name": "Nia Coffee",
     "osm": "n13744719202",
     "score": 1.0,
@@ -4581,6 +4672,7 @@
    },
    "match": {
     "dist_m": 20.2,
+    "matched_name": "DLG Hotel",
     "name": "DLG Hotel",
     "osm": "w693369267",
     "score": 1.0,
@@ -4634,6 +4726,7 @@
    },
    "match": {
     "dist_m": 5.5,
+    "matched_name": "Chevy",
     "name": "Chevy",
     "osm": "n12168408874",
     "score": 1.0,
@@ -4686,6 +4779,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi Sủng Cỏ",
     "name": "Bãi Sủng Cỏ",
     "osm": "a2830144430",
     "score": 1.0,
@@ -4738,6 +4832,7 @@
    },
    "match": {
     "dist_m": 1.2,
+    "matched_name": "Nha Hang Mr.Anh",
     "name": "Nha Hang Mr.Anh",
     "osm": "n7222014985",
     "score": 1.0,
@@ -4790,6 +4885,7 @@
    },
    "match": {
     "dist_m": 108.4,
+    "matched_name": "Long Hoa Vegetarian",
     "name": "Long Hoa Vegetarian",
     "osm": "n5074763621",
     "score": 0.67,
@@ -4854,6 +4950,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Haian Beach Hotel & Spa",
     "name": "Haian Beach Hotel & Spa",
     "osm": "a1386116318",
     "score": 1.0,
@@ -4907,6 +5004,7 @@
    },
    "match": {
     "dist_m": 17.4,
+    "matched_name": "Dai Long hotel",
     "name": "Dai Long hotel",
     "osm": "n4326820491",
     "score": 1.0,
@@ -4951,6 +5049,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Hòa Khánh Nam",
     "name": "Chợ Hòa Khánh Nam",
     "osm": "a3103045384",
     "score": 1.0,
@@ -4974,6 +5073,7 @@
    },
    "match": {
     "dist_m": 9.2,
+    "matched_name": "Cucina Luca",
     "name": "Cucina Luca",
     "osm": "n12850675088",
     "score": 1.0,
@@ -5012,6 +5112,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Hyatt Regency Danang Resort and Spa",
     "name": "Hyatt Regency Danang Resort and Spa",
     "osm": "a328666172",
     "score": 1.0,
@@ -5062,6 +5163,7 @@
    },
    "match": {
     "dist_m": 1.9,
+    "matched_name": "Mi Quang 1A",
     "name": "Mi Quang 1A",
     "osm": "n4430077491",
     "score": 1.0,
@@ -5128,6 +5230,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi tắm Non Nước",
     "name": "Bãi tắm Non Nước",
     "osm": "a2409801648",
     "score": 1.0,
@@ -5172,6 +5275,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Thanh Bình",
     "name": "Chợ Thanh Bình",
     "osm": "a2652469982",
     "score": 1.0,
@@ -5205,6 +5309,7 @@
    },
    "match": {
     "dist_m": 8.7,
+    "matched_name": "2AM Coffee",
     "name": "2AM Coffee",
     "osm": "n12615300356",
     "score": 1.0,
@@ -5349,6 +5454,7 @@
    },
    "match": {
     "dist_m": 44.1,
+    "matched_name": "Hồ Công viên 29 tháng 3",
     "name": "Hồ Công viên 29 tháng 3",
     "osm": "w420019435",
     "score": 1.0,
@@ -5401,6 +5507,7 @@
    },
    "match": {
     "dist_m": 8.2,
+    "matched_name": "Lagoon Rooftop",
     "name": "Lagoon Rooftop",
     "osm": "n10875270605",
     "score": 1.0,
@@ -5473,6 +5580,7 @@
    },
    "match": {
     "dist_m": 104.2,
+    "matched_name": "Bãi biển Tiên Sa",
     "name": "Bãi biển Tiên Sa",
     "osm": "w630377259",
     "score": 1.0,
@@ -5557,6 +5665,7 @@
    },
    "match": {
     "dist_m": 4.0,
+    "matched_name": "Hồ Hòa Trung",
     "name": "Hồ Hòa Trung",
     "osm": "a17060375",
     "score": 1.0,
@@ -5580,6 +5689,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Báo Ân",
     "name": "Chùa Báo Ân",
     "osm": "a2659379780",
     "score": 1.0,
@@ -5614,6 +5724,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Thuận Thành",
     "name": "Chùa Thuận Thành",
     "osm": "a2844888168",
     "score": 1.0,
@@ -5698,6 +5809,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Mân Thái",
     "name": "Chợ Mân Thái",
     "osm": "a2153432464",
     "score": 1.0,
@@ -5732,6 +5844,7 @@
    },
    "match": {
     "dist_m": 24.7,
+    "matched_name": "Meliá Vinpearl Danang Riverfront",
     "name": "Meliá Vinpearl Danang Riverfront",
     "osm": "w1050249359",
     "score": 1.0,
@@ -5812,6 +5925,7 @@
    },
    "match": {
     "dist_m": 19.3,
+    "matched_name": "3D Art in Paradise DaNang",
     "name": "3D Art in Paradise DaNang",
     "osm": "n5281441021",
     "score": 1.0,
@@ -5845,6 +5959,7 @@
    },
    "match": {
     "dist_m": 5.1,
+    "matched_name": "Filling Station",
     "name": "Filling Station",
     "osm": "n9934745717",
     "score": 1.0,
@@ -5917,6 +6032,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Olalani Resort & Condotel",
     "name": "Olalani Resort & Condotel",
     "osm": "a328666174",
     "score": 1.0,
@@ -5986,6 +6102,7 @@
    },
    "match": {
     "dist_m": 0.9,
+    "matched_name": "Shamrock Sports Bar Da Nang",
     "name": "Shamrock Sports Bar Da Nang",
     "osm": "n6627633488",
     "score": 1.0,
@@ -6019,6 +6136,7 @@
    },
    "match": {
     "dist_m": 3.7,
+    "matched_name": "Da Thanh Quan",
     "name": "Da Thanh Quan",
     "osm": "n12169278140",
     "score": 1.0,
@@ -6049,6 +6167,7 @@
    },
    "match": {
     "dist_m": 6.6,
+    "matched_name": "HI4 COFFEE & WORKSPACE",
     "name": "HI4 COFFEE & WORKSPACE",
     "osm": "n12222115201",
     "score": 1.0,
@@ -6178,6 +6297,7 @@
    },
    "match": {
     "dist_m": 20.8,
+    "matched_name": "Avenis",
     "name": "Avenis",
     "osm": "n13020264601",
     "score": 1.0,
@@ -6233,6 +6353,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Peninsula Hotel Danang",
     "name": "Peninsula Hotel Danang",
     "osm": "a2559115390",
     "score": 1.0,
@@ -6306,6 +6427,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Hòa Khánh",
     "name": "Chợ Hòa Khánh",
     "osm": "a2652558066",
     "score": 1.0,
@@ -6345,6 +6467,7 @@
    },
    "match": {
     "dist_m": 6.9,
+    "matched_name": "Mỳ Quảng Cô Sáu",
     "name": "Mỳ Quảng Cô Sáu",
     "osm": "n12337003901",
     "score": 1.0,
@@ -6515,6 +6638,7 @@
    },
    "match": {
     "dist_m": 3.4,
+    "matched_name": "J Cafe",
     "name": "J Cafe",
     "osm": "n10801935005",
     "score": 1.0,
@@ -6538,6 +6662,7 @@
    },
    "match": {
     "dist_m": 8.7,
+    "matched_name": "Phuong",
     "name": "Phuong",
     "osm": "n12853200242",
     "score": 1.0,
@@ -6570,6 +6695,7 @@
    },
    "match": {
     "dist_m": 10.4,
+    "matched_name": "Cộng Cà Phê",
     "name": "Cộng Cà Phê",
     "osm": "n4352240896",
     "score": 1.0,
@@ -6669,6 +6795,7 @@
    },
    "match": {
     "dist_m": 2.4,
+    "matched_name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)",
     "name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)",
     "osm": "n12032859170",
     "score": 1.0,
@@ -6692,6 +6819,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Four Seasons Resort",
     "name": "Four Seasons Resort",
     "osm": "a324145234",
     "score": 1.0,
@@ -6726,6 +6854,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Pavilion Hotel",
     "name": "Pavilion Hotel",
     "osm": "a1386683898",
     "score": 1.0,
@@ -6759,6 +6888,7 @@
    },
    "match": {
     "dist_m": 6.4,
+    "matched_name": "Nam Danh",
     "name": "Nam Danh",
     "osm": "n7141021585",
     "score": 1.0,
@@ -6807,6 +6937,7 @@
    },
    "match": {
     "dist_m": 3.7,
+    "matched_name": "Lang Bich hoa Da Nang",
     "name": "Lang Bich hoa Da Nang",
     "osm": "n11176025737",
     "score": 1.0,
@@ -6835,6 +6966,7 @@
    },
    "match": {
     "dist_m": 18.1,
+    "matched_name": "The Craftsman Cocktail Bar",
     "name": "The Craftsman Cocktail Bar",
     "osm": "n7016543285",
     "score": 1.0,
@@ -6948,6 +7080,7 @@
    },
    "match": {
     "dist_m": 5.6,
+    "matched_name": "OM Tea & Coffee",
     "name": "OM Tea & Coffee",
     "osm": "n14285427701",
     "score": 1.0,
@@ -7010,6 +7143,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "InterContinental Danang Sun Peninsula Resort",
     "name": "InterContinental Danang Sun Peninsula Resort",
     "osm": "a720227118",
     "score": 1.0,
@@ -7052,6 +7186,7 @@
    },
    "match": {
     "dist_m": 12.2,
+    "matched_name": "The Code",
     "name": "The Code",
     "osm": "n7712584625",
     "score": 1.0,
@@ -7095,6 +7230,7 @@
    },
    "match": {
     "dist_m": 133.1,
+    "matched_name": "Linh Son Pagoda",
     "name": "Linh Son Pagoda",
     "osm": "n2093848426",
     "score": 0.67,
@@ -7182,6 +7318,7 @@
    },
    "match": {
     "dist_m": 21.3,
+    "matched_name": "Bảo tàng Hồ Chí Minh - Chi nhánh Quân khu 5,",
     "name": "Bảo tàng Hồ Chí Minh - Chi nhánh Quân khu 5,",
     "osm": "w1481663042",
     "score": 1.0,
@@ -7219,6 +7356,7 @@
    },
    "match": {
     "dist_m": 1.2,
+    "matched_name": "Hilton Garden Inn Da Nang",
     "name": "Hilton Garden Inn Da Nang",
     "osm": "w1279557691",
     "score": 1.0,
@@ -7262,6 +7400,7 @@
    },
    "match": {
     "dist_m": 4.8,
+    "matched_name": "Babylon",
     "name": "Babylon",
     "osm": "n12839895661",
     "score": 1.0,
@@ -7354,6 +7493,7 @@
    },
    "match": {
     "dist_m": 10.7,
+    "matched_name": "Corner Pub",
     "name": "Corner Pub",
     "osm": "n11119032905",
     "score": 1.0,
@@ -7446,6 +7586,7 @@
    },
    "match": {
     "dist_m": 10.5,
+    "matched_name": "Boulevard",
     "name": "Boulevard",
     "osm": "n4166771189",
     "score": 1.0,
@@ -7478,6 +7619,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Hòa Mỹ",
     "name": "Chợ Hòa Mỹ",
     "osm": "a3103045382",
     "score": 1.0,
@@ -7530,6 +7672,7 @@
    },
    "match": {
     "dist_m": 1.2,
+    "matched_name": "Maazi",
     "name": "Maazi",
     "osm": "n13917253901",
     "score": 1.0,
@@ -7552,6 +7695,7 @@
    },
    "match": {
     "dist_m": 1.1,
+    "matched_name": "Cat Vang Beach",
     "name": "Cat Vang Beach",
     "osm": "a2531481642",
     "score": 1.0,
@@ -7624,6 +7768,7 @@
    },
    "match": {
     "dist_m": 14.5,
+    "matched_name": "Bãi Biển Sơn Trà",
     "name": "Bãi Biển Sơn Trà",
     "osm": "n12647208262",
     "score": 1.0,
@@ -7646,6 +7791,7 @@
    },
    "match": {
     "dist_m": 18.3,
+    "matched_name": "Seavitel",
     "name": "Seavitel",
     "osm": "n12860787941",
     "score": 1.0,
@@ -7769,6 +7915,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Từ Tôn",
     "name": "Chùa Từ Tôn",
     "osm": "a2652890158",
     "score": 1.0,
@@ -7894,6 +8041,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chúa Bà Đa",
     "name": "Chúa Bà Đa",
     "osm": "a2494979860",
     "score": 1.0,
@@ -7956,6 +8104,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi biển Tân Trà",
     "name": "Bãi biển Tân Trà",
     "osm": "a2410783898",
     "score": 1.0,
@@ -7978,6 +8127,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "The Ocean Villas",
     "name": "The Ocean Resort",
     "osm": "a1098380286",
     "score": 1.0,
@@ -8021,6 +8171,7 @@
    },
    "match": {
     "dist_m": 19.0,
+    "matched_name": "Ngã ba Huế",
     "name": "Ngã ba Huế",
     "osm": "w694593926",
     "score": 1.0,
@@ -8053,6 +8204,7 @@
    },
    "match": {
     "dist_m": 26.8,
+    "matched_name": "New phuong dong",
     "name": "New phuong dong",
     "osm": "n4725852293",
     "score": 1.0,
@@ -8078,6 +8230,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi tắm Non Nước",
     "name": "Bãi tắm Non Nước",
     "osm": "a2409801648",
     "score": 1.0,
@@ -8117,6 +8270,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Cồn",
     "name": "Chợ Cồn",
     "osm": "a409581978",
     "score": 1.0,
@@ -8140,6 +8294,7 @@
    },
    "match": {
     "dist_m": 19.1,
+    "matched_name": "Grand Gold",
     "name": "Grand Gold",
     "osm": "n12171117113",
     "score": 1.0,
@@ -8236,6 +8391,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Linh Ứng",
     "name": "Chùa Linh Ứng",
     "osm": "a973406098",
     "score": 1.0,
@@ -8260,6 +8416,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Mỹ Khê",
     "name": "Chùa Mỹ Khê",
     "osm": "a2559112552",
     "score": 1.0,
@@ -8284,6 +8441,7 @@
    },
    "match": {
     "dist_m": 0.6,
+    "matched_name": "Cầu vượt Mikazuki",
     "name": "Cầu vượt Mikazuki",
     "osm": "w1186365451",
     "score": 1.0,
@@ -8403,6 +8561,7 @@
    },
    "match": {
     "dist_m": 2.7,
+    "matched_name": "Le Comptoir",
     "name": "Le Comptoir",
     "osm": "n13009347078",
     "score": 1.0,
@@ -8556,6 +8715,7 @@
    },
    "match": {
     "dist_m": 11.9,
+    "matched_name": "Mộc Seafood",
     "name": "Mộc Quán",
     "osm": "n7064981285",
     "score": 1.0,
@@ -8629,6 +8789,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Nhà thờ Giáo xứ An Hải",
     "name": "Nhà thờ Giáo xứ An Hải",
     "osm": "a1386766668",
     "score": 1.0,
@@ -8713,6 +8874,7 @@
    },
    "match": {
     "dist_m": 4.7,
+    "matched_name": "Bé Ni 2",
     "name": "Bé Ni 2",
     "osm": "n12372814701",
     "score": 1.0,
@@ -8733,6 +8895,7 @@
    },
    "match": {
     "dist_m": 108.0,
+    "matched_name": "Failyland of Ba Na Hills",
     "name": "Failyland of Ba Na Hills",
     "osm": "n14136161565",
     "score": 0.75,
@@ -8755,6 +8918,7 @@
    },
    "match": {
     "dist_m": 10.5,
+    "matched_name": "Nguon Spa",
     "name": "Nguon Spa",
     "osm": "n12839895658",
     "score": 1.0,
@@ -8777,6 +8941,7 @@
    },
    "match": {
     "dist_m": 4.5,
+    "matched_name": "Section 30",
     "name": "Section 30",
     "osm": "n10902657909",
     "score": 1.0,
@@ -8800,6 +8965,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Rừng đặc dụng Bà Nà - Núi Chúa",
     "name": "Rừng đặc dụng Bà Nà - Núi Chúa",
     "osm": "a26259173",
     "score": 0.67,
@@ -8833,6 +8999,7 @@
    },
    "match": {
     "dist_m": 62.6,
+    "matched_name": "Chùa Hương Sơn",
     "name": "Chùa Hương Sơn",
     "osm": "n8616526724",
     "score": 1.0,
@@ -8866,6 +9033,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Bồ Đề",
     "name": "Chùa Bồ Đề",
     "osm": "a744622164",
     "score": 0.67,
@@ -8920,6 +9088,7 @@
    },
    "match": {
     "dist_m": 3.9,
+    "matched_name": "My Casa",
     "name": "My Casa",
     "osm": "n4778581323",
     "score": 1.0,
@@ -8943,6 +9112,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Tia Wellness Resort",
     "name": "Tia Wellness Resort",
     "osm": "a328666158",
     "score": 1.0,
@@ -9012,6 +9182,7 @@
    },
    "match": {
     "dist_m": 6.2,
+    "matched_name": "Venus Cafe",
     "name": "Venus Cafe",
     "osm": "n6108958606",
     "score": 1.0,
@@ -9045,6 +9216,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Công Viên APEC",
     "name": "Công Viên APEC",
     "osm": "a1351208708",
     "score": 1.0,
@@ -9099,6 +9271,7 @@
    },
    "match": {
     "dist_m": 7.0,
+    "matched_name": "Diamond Sea",
     "name": "Diamond Sea",
     "osm": "w1243635507",
     "score": 1.0,
@@ -9133,6 +9306,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cù Lao Chàm",
     "name": "Cù Lao Chàm",
     "osm": "a20709711",
     "score": 1.0,
@@ -9161,6 +9335,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Hải Vân Quan",
     "name": "Hải Vân Quan",
     "osm": "a932836694",
     "score": 1.0,
@@ -9205,6 +9380,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "VinWonders Nam Hội An",
     "name": "VinWonders Nam Hội An",
     "osm": "a1564763248",
     "score": 1.0,
@@ -9231,6 +9407,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Fantasy Park",
     "name": "Fantasy Park",
     "osm": "n10154412164",
     "score": 1.0,
@@ -9250,6 +9427,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Phước Tường",
     "name": "Núi Phước Tường",
     "osm": "n10303626687",
     "score": 1.0,
@@ -9268,6 +9446,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Cẩm Khê",
     "name": "Núi Cẩm Khê",
     "osm": "n10303626688",
     "score": 1.0,
@@ -9286,6 +9465,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đèo Hải Vân",
     "name": "Đèo Hải Vân",
     "osm": "n1036552571",
     "score": 1.0,
@@ -9304,6 +9484,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Làng đá mỹ nghệ Non Nước",
     "name": "Làng đá mỹ nghệ Non Nước",
     "osm": "n10709724107",
     "score": 1.0,
@@ -9322,6 +9503,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Làng chiếu Cẩm Nê",
     "name": "Làng chiếu Cẩm Nê",
     "osm": "n10709738005",
     "score": 1.0,
@@ -9340,6 +9522,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Làng nước mắm Nam Ô",
     "name": "Làng nước mắm Nam Ô",
     "osm": "n10709738105",
     "score": 1.0,
@@ -9358,6 +9541,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đài tưởng niệm thảm sát Hà My",
     "name": "Đài tưởng niệm thảm sát Hà My",
     "osm": "n10723988763",
     "score": 1.0,
@@ -9376,6 +9560,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Nam Sơn",
     "name": "Chùa Nam Sơn",
     "osm": "n11359603957",
     "score": 1.0,
@@ -9395,6 +9580,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Thai Market",
     "name": "Thai Market",
     "osm": "n11427582964",
     "score": 1.0,
@@ -9413,6 +9599,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Khe Xương",
     "name": "Núi Khe Xương",
     "osm": "n11629841009",
     "score": 1.0,
@@ -9431,6 +9618,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Hải Vân",
     "name": "Núi Hải Vân",
     "osm": "n11629996926",
     "score": 1.0,
@@ -9449,6 +9637,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Hoi",
     "name": "Núi Hoi",
     "osm": "n11630013743",
     "score": 1.0,
@@ -9467,6 +9656,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Hòng Chan",
     "name": "Núi Hòng Chan",
     "osm": "n11762365155",
     "score": 1.0,
@@ -9485,6 +9675,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Phước Mỹ",
     "name": "Chợ Phước Mỹ",
     "osm": "n11888483369",
     "score": 1.0,
@@ -9504,6 +9695,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ đêm Lê Duẩn",
     "name": "Chợ đêm Lê Duẩn",
     "osm": "n12333995781",
     "score": 1.0,
@@ -9525,6 +9717,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Khu Văn hóa Tâm linh Đà Sơn",
     "name": "Khu Văn hóa Tâm linh Đà Sơn",
     "osm": "n12404434601",
     "score": 1.0,
@@ -9545,6 +9738,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Nhà thờ Thanh Bình",
     "name": "Nhà thờ Thanh Bình",
     "osm": "n12603319867",
     "score": 1.0,
@@ -9564,6 +9758,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Small waterfall",
     "name": "Small waterfall",
     "osm": "n12701675501",
     "score": 1.0,
@@ -9582,6 +9777,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Mart Souvenir",
     "name": "Mart Souvenir",
     "osm": "n12811972501",
     "score": 1.0,
@@ -9600,6 +9796,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bãi Đá",
     "name": "Bãi Đá",
     "osm": "n13040467529",
     "score": 1.0,
@@ -9618,6 +9815,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Himawari",
     "name": "Himawari",
     "osm": "n13293564930",
     "score": 1.0,
@@ -9636,6 +9834,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "chùa am Nam Ngư",
     "name": "chùa am Nam Ngư",
     "osm": "n1335374809",
     "score": 1.0,
@@ -9654,6 +9853,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "chùa am thờ Hỏa Xa",
     "name": "chùa am thờ Hỏa Xa",
     "osm": "n1335374858",
     "score": 1.0,
@@ -9672,6 +9872,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "chùa An Cư Tây",
     "name": "chùa An Cư Tây",
     "osm": "n1335374873",
     "score": 1.0,
@@ -9690,6 +9891,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đền Bà Càn Khôn",
     "name": "Đền Bà Càn Khôn",
     "osm": "n13484040419",
     "score": 1.0,
@@ -9709,6 +9911,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
     "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
     "osm": "n13677406601",
     "score": 1.0,
@@ -9727,6 +9930,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Linh Phong Bảo Tháp",
     "name": "Linh Phong Bảo Tháp",
     "osm": "n13687068650",
     "score": 1.0,
@@ -9749,6 +9953,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Tượng Phật Phước Lý",
     "name": "Tượng Phật Phước Lý",
     "osm": "n13734880501",
     "score": 1.0,
@@ -9770,6 +9975,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Suối Lạc",
     "name": "Suối Lạc",
     "osm": "n13913398302",
     "score": 1.0,
@@ -9788,6 +9994,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Suối Ngọc",
     "name": "Suối Ngọc",
     "osm": "n13913400201",
     "score": 1.0,
@@ -9806,6 +10013,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Lucky Retail",
     "name": "Lucky Retail",
     "osm": "n14045110791",
     "score": 1.0,
@@ -9825,6 +10033,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Made in Vietnam",
     "name": "Made in Vietnam",
     "osm": "n14045130739",
     "score": 1.0,
@@ -9844,6 +10053,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Viet Nam's Delights",
     "name": "Viet Nam's Delights",
     "osm": "n14045144381",
     "score": 1.0,
@@ -9863,6 +10073,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Bonny handmade",
     "name": "Bonny handmade",
     "osm": "n14067929701",
     "score": 1.0,
@@ -9882,6 +10093,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Tượng đài Dũng sĩ Điện Ngọc",
     "name": "Tượng đài Dũng sĩ Điện Ngọc",
     "osm": "n14130293535",
     "score": 1.0,
@@ -9900,6 +10112,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Sơn Trà",
     "name": "Núi Sơn Trà",
     "osm": "n1623183649",
     "score": 1.0,
@@ -9918,6 +10131,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Kim Sơn",
     "name": "Kim Sơn",
     "osm": "n2093848429",
     "score": 1.0,
@@ -9936,6 +10150,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Mộc Sơn",
     "name": "Mộc Sơn",
     "osm": "n2093848431",
     "score": 1.0,
@@ -9954,6 +10169,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Thổ Sơn",
     "name": "Thổ Sơn",
     "osm": "n2093848443",
     "score": 1.0,
@@ -9972,6 +10188,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Thác Tóc Tiên",
     "name": "Thác Tóc Tiên",
     "osm": "n2177056870",
     "score": 1.0,
@@ -9990,6 +10207,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "chùa Vu Lan",
     "name": "chùa Vu Lan",
     "osm": "n3760247201",
     "score": 1.0,
@@ -10009,6 +10227,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "chùa Sư Nữ",
     "name": "chùa Sư Nữ",
     "osm": "n3760247202",
     "score": 1.0,
@@ -10028,6 +10247,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Tam Bảo",
     "name": "Chùa Tam Bảo",
     "osm": "n3760272162",
     "score": 1.0,
@@ -10047,6 +10267,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Pháp Lâm",
     "name": "Chùa Pháp Lâm",
     "osm": "n3763846156",
     "score": 1.0,
@@ -10066,6 +10287,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đền thờ Tiền Hiền làng Lổ Giang",
     "name": "Đền thờ Tiền Hiền làng Lổ Giang",
     "osm": "n4005611262",
     "score": 1.0,
@@ -10084,6 +10306,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Đình Lổ Giáng",
     "name": "Đình Lổ Giáng",
     "osm": "n4005611263",
     "score": 1.0,
@@ -10102,6 +10325,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Bà Nà",
     "name": "Núi Bà Nà",
     "osm": "n4122433690",
     "score": 1.0,
@@ -10120,6 +10344,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Non Nuoc Beach",
     "name": "Non Nuoc Beach",
     "osm": "n4172034499",
     "score": 1.0,
@@ -10139,6 +10364,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa Giác Hoàng Viên",
     "name": "Chùa Giác Hoàng Viên",
     "osm": "n4280016689",
     "score": 1.0,
@@ -10157,6 +10383,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "nhà thờ Phú Thượng",
     "name": "nhà thờ Phú Thượng",
     "osm": "n4294135790",
     "score": 1.0,
@@ -10175,6 +10402,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "nhà thờ An Ngãi Tây",
     "name": "nhà thờ An Ngãi Tây",
     "osm": "n4294139091",
     "score": 1.0,
@@ -10193,6 +10421,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Nhà thờ Giáo xứ An Thượng",
     "name": "Nhà thờ Giáo xứ An Thượng",
     "osm": "n4294143691",
     "score": 1.0,
@@ -10212,6 +10441,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "nhà thờ Tùng Sơn",
     "name": "nhà thờ Tùng Sơn",
     "osm": "n4294167889",
     "score": 1.0,
@@ -10230,6 +10460,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "My An Beach",
     "name": "My An Beach",
     "osm": "n4347089780",
     "score": 1.0,
@@ -10248,6 +10479,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chợ Miếu Bông",
     "name": "Chợ Miếu Bông",
     "osm": "n4386676224",
     "score": 1.0,
@@ -10266,6 +10498,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "To Quoc Ghi Cong",
     "name": "To Quoc Ghi Cong",
     "osm": "n4706189591",
     "score": 1.0,
@@ -10284,6 +10517,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Public beach",
     "name": "Public beach",
     "osm": "n4741642219",
     "score": 1.0,
@@ -10302,6 +10536,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Dan Oasis Hotel",
     "name": "Dan Oasis Hotel",
     "osm": "n4759000238",
     "score": 1.0,
@@ -10320,6 +10555,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Gần núi thần tài",
     "name": "Gần núi thần tài",
     "osm": "n4845297821",
     "score": 1.0,
@@ -10338,6 +10574,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Fishing Village and Fleet",
     "name": "Fishing Village and Fleet",
     "osm": "n4924323121",
     "score": 1.0,
@@ -10356,6 +10593,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cầu Tiên Sơn",
     "name": "Cầu Tiên Sơn",
     "osm": "n5273998822",
     "score": 1.0,
@@ -10374,6 +10612,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cầu Trần Thị Lý",
     "name": "Cầu Trần Thị Lý",
     "osm": "a1389555428",
     "score": 1.0,
@@ -10392,6 +10631,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cầu Thuận Phước",
     "name": "Cầu Thuận Phước",
     "osm": "a2739099420",
     "score": 1.0,
@@ -10410,6 +10650,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cau Nguyen Van Troi Bridge",
     "name": "Cau Nguyen Van Troi Bridge",
     "osm": "n5276547123",
     "score": 1.0,
@@ -10428,6 +10669,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Núi Thần Tài",
     "name": "Núi Thần Tài",
     "osm": "n5286977425",
     "score": 1.0,
@@ -10446,6 +10688,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Chùa An Phước",
     "name": "Chùa An Phước",
     "osm": "n5421670780",
     "score": 1.0,
@@ -10465,6 +10708,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Nhà thờ Hoà Cường",
     "name": "Nhà thờ Hoà Cường",
     "osm": "n5432701004",
     "score": 1.0,
@@ -10484,6 +10728,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cây đa đại thụ",
     "name": "Cây đa đại thụ",
     "osm": "n6346486685",
     "score": 1.0,
@@ -10502,6 +10747,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cây đa Đò Xu",
     "name": "Cây đa Đò Xu",
     "osm": "n6528451001",
     "score": 1.0,
@@ -10521,6 +10767,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Art Gallery",
     "name": "Art Gallery",
     "osm": "n7095169367",
     "score": 1.0,
@@ -10539,6 +10786,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Non La",
     "name": "Non La",
     "osm": "n7095169369",
     "score": 1.0,
@@ -10557,6 +10805,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Cầu Sông Hàn",
     "name": "Cầu Sông Hàn",
     "osm": "n7276380289",
     "score": 1.0,
@@ -10575,6 +10824,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "노니판매점",
     "name": "노니판매점",
     "osm": "n7477670190",
     "score": 1.0,
@@ -10593,6 +10843,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Gio coffee",
     "name": "Gio coffee",
     "osm": "n7477670191",
     "score": 1.0,
@@ -10611,6 +10862,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "TASY STUDIO",
     "name": "TASY STUDIO",
     "osm": "n8883385553",
     "score": 1.0,
@@ -10630,6 +10882,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Viet Nam's Delights",
     "name": "Viet Nam's Delights",
     "osm": "n9921282483",
     "score": 1.0,
@@ -10648,6 +10901,7 @@
    },
    "match": {
     "dist_m": 0.0,
+    "matched_name": "Lưu Niệm - Đặc Sản",
     "name": "Lưu Niệm - Đặc Sản",
     "osm": "n9921315929",
     "score": 1.0,

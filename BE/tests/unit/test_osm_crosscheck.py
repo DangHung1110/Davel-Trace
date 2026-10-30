@@ -126,6 +126,10 @@ class TestCrosscheck(unittest.TestCase):
                     point(16.0603, 108.2233)),
             feature("n3", "Bãi Sủng Cỏ", {"natural": "beach"}, point(16.12, 108.30)),
             feature("n4", "Chợ Đêm", {"amenity": "marketplace"}, point(16.10, 108.25)),
+            feature("n5", "Khu Văn hóa Tâm linh Đà Sơn",
+                    {"amenity": "place_of_worship",
+                     "alt_name": "Chùa Không Tên;Chùa Không Tên Đà Sơn"},
+                    point(16.0418, 108.1478)),
         ]
         self.features = load_features(lines)
 
@@ -145,7 +149,11 @@ class TestCrosscheck(unittest.TestCase):
             {"poi_id": "far", "name": "Bảo tàng Điêu khắc Chăm", "cat": "museum",
              "lat": 16.07, "lon": 108.2233, "opening_hours": []},
         ]
+        pois.append({"poi_id": "pagoda", "name": "CHÙA KHÔNG TÊN ĐÀ NẴNG", "cat": "landmark",
+                     "lat": 16.0418, "lon": 108.1482, "opening_hours": []})
         rows = crosscheck(pois, self.features)
+        # an alt_name list is split, and the card can say which name matched
+        self.assertEqual(rows["pagoda"]["match"]["matched_name"], "Chùa Không Tên")
         self.assertEqual(rows["beach"]["fields"]["exists"], "confirmed")
         self.assertEqual(rows["beach"]["duplicate_of"], ["beach2"])
         self.assertEqual(rows["museum"]["fields"],

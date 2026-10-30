@@ -357,7 +357,9 @@ def load_features(lines) -> list[dict]:
             continue
         feature = json.loads(line)
         tags = feature.get("properties") or {}
-        names = [tags[k] for k in NAME_KEYS if tags.get(k)]
+        # OSM packs several values in one tag ("Chùa Không Tên;Chùa Đà Sơn")
+        names = [part.strip() for k in NAME_KEYS if tags.get(k)
+                 for part in str(tags[k]).split(";") if part.strip()]
         geometry = feature.get("geometry") or {}
         if not names or not geometry.get("coordinates"):
             continue
@@ -402,8 +404,11 @@ def best_match(poi: dict, features: list[dict], grid: dict) -> dict | None:
             if k in {"amenity", "tourism", "shop", "leisure", "historic", "natural",
                      "religion", "place", "bridge", "man_made", "building", "fee",
                      "opening_hours"}}
-    return {"osm": f["id"], "name": f["names"][0], "dist_m": round(d, 1),
-            "score": round(score, 2), "tags": keep}
+    # the variant that matched ("Chùa Không Tên" is an alt_name of "Khu Văn
+    # hóa Tâm linh Đà Sơn"): reviewers see why two names were paired
+    matched = max(f["names"], key=lambda n: name_score(poi.get("name", ""), [n]))
+    return {"osm": f["id"], "name": f["names"][0], "matched_name": matched,
+            "dist_m": round(d, 1), "score": round(score, 2), "tags": keep}
 
 
 def check_poi(poi: dict, match: dict | None) -> dict:
