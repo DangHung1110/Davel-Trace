@@ -278,7 +278,11 @@ class TestReport(unittest.TestCase):
             if not row["hours"] and row["safe"]:
                 self.assertNotIn(row["cat"], {"lodging", "transport"})
         page = report.render(rows, "danang-v1")
-        self.assertNotIn("</script><", page.split("<script>")[1].split("</script>")[0])
+        script = page.split("<script>")[1].split("</script>")[0]
+        self.assertNotIn("</script><", script)
+        # the export's newline is the two characters \n, not a line break
+        # inside a JS string (a SyntaxError that kills the whole page)
+        self.assertIn('+ "\\n"]', script)
 
 
 class TestPrecision(unittest.TestCase):

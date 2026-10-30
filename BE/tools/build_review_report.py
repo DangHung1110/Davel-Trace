@@ -4,7 +4,8 @@ One row per POI on the review page (the ids in review_drafts.jsonl): the
 verdict and note from review_log.jsonl, the edits applied, and the POI as it
 is now in pois.json (cat, hours and their source, duration, price band,
 rating, who verified it). Search box and filters, no editing: decisions are
-made on FE/verify_review.html and applied by ingest_verdicts.py.
+made on FE/verify_review.html and applied by ingest_verdicts.py. "Xuất JSON"
+downloads the rows the filters show (e.g. only the kept POIs).
 
 Usage (from repo root, after an ingest)::
 
@@ -110,6 +111,7 @@ PAGE = """<!doctype html>
   <select id="band"><option value="">Mọi mức giá</option></select>
   <select id="hrs"><option value="">Mọi giờ</option><option value="has">Có giờ</option>
     <option value="safe">Dùng giờ an toàn</option></select>
+  <button class="chip" id="exp" type="button">Xuất JSON</button>
   <span class="count" id="count"></span>
 </div></header>
 <main><table><thead><tr><th>Kết quả</th><th>Tên</th><th>Loại</th><th>Giờ mở cửa</th>
@@ -118,7 +120,7 @@ PAGE = """<!doctype html>
 <script>
 (function () {
   var DATA = __DATA__, BAND = __BANDS__, VERD = __VERDICTS__;
-  var state = { v: "", q: "", cat: "", band: "", hrs: "" };
+  var state = { v: "", q: "", cat: "", band: "", hrs: "" }, shown = [];
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var cats = {}, bands = {};
@@ -136,6 +138,7 @@ PAGE = """<!doctype html>
   }
   function render() {
     var q = state.q.toLowerCase(), out = [], n = 0;
+    shown = [];
     DATA.forEach(function (r) {
       var v = r.verdict || "none";
       if (state.v && v !== state.v) return;
@@ -145,6 +148,7 @@ PAGE = """<!doctype html>
       if (state.hrs === "safe" && r.hours) return;
       if (q && (r.name + " " + r.note).toLowerCase().indexOf(q) < 0) return;
       n++;
+      shown.push(r);
       var maps = "https://www.google.com/maps/search/?api=1&query=" + r.lat + "," + r.lon;
       out.push("<tr><td class='v " + v + "'>" + esc(VERD[r.verdict || ""]) + "</td>" +
         "<td><a href='" + maps + "' target='_blank' rel='noopener'>" + esc(r.name) + "</a>" +
@@ -163,6 +167,16 @@ PAGE = """<!doctype html>
     state.v = b.getAttribute("data-v");
     [].forEach.call(document.querySelectorAll("#vf .chip"), function (x) { x.classList.toggle("on", x === b); });
     render();
+  });
+  document.getElementById("exp").addEventListener("click", function () {
+    var d = new Date(), pad = function (x) { return (x < 10 ? "0" : "") + x; };
+    var tag = { dung: "dung", loai: "loai", none: "chua-duyet" }[state.v] || "tat-ca";
+    var blob = new Blob([JSON.stringify(shown, null, 2) + "\\n"], { type: "application/json;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "verify_result_" + tag + "_" + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   });
   document.getElementById("q").addEventListener("input", function (e) { state.q = e.target.value; render(); });
   ["cat", "band", "hrs"].forEach(function (id) {
