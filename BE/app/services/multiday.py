@@ -22,9 +22,10 @@ from __future__ import annotations
 import datetime
 
 from BE.app.services import profiles
-from BE.common import effective_fee, party_size
+from BE.common import BAND_FEE_VND, effective_fee, party_size
 
 DAY_FIELDS = ("total_cost", "total_km", "total_min", "travel_min")
+DAY_FLOOR_PER_PERSON = 2 * BAND_FEE_VND["cheap"]  # lunch and dinner at the cheapest band
 
 
 def day_date(date: str, offset: int) -> str:
@@ -56,8 +57,12 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
     for index in range(days):
         left = days - index
         today = must if pack_first or left == 1 else must[::left]
+        # An even share first. A named place may cost more than that: then this day may
+        # take more, but the days after it still eat.
+        spare = remaining - (left - 1) * DAY_FLOOR_PER_PERSON * party_size(trip) if remaining is not None else 0
         budgets = ([None] if remaining is None
-                   else [remaining // left, remaining] if left > 1 else [remaining])
+                   else list(dict.fromkeys([remaining // left, max(remaining // left, spare), remaining]))
+                   if left > 1 else [remaining])
         for budget in budgets:
             day_trip = {**trip, "days": 1, "date": day_date(trip.get("date"), index),
                         "must_visit": today, "activities": wishes}
