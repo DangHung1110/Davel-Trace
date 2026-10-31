@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-10-31T12:31:56",
+ "generated_at": "2026-10-31T23:02:50",
  "suite": "BE/eval/gold/t051_scoped_suite.json",
  "snapshot": "BE/data/snapshots/danang-v1",
  "coverage": {
-  "total_pois": 742,
-  "verified": 541,
-  "matrix_ids": 742,
-  "eligible": 541,
+  "total_pois": 750,
+  "verified": 549,
+  "matrix_ids": 750,
+  "eligible": 549,
   "missing_verified": 0,
   "eligible_ids": [
    "ChIJ-7JfLigZQjERZm4r5uDmk5o",
@@ -517,9 +517,17 @@
    "ChIJzYloKSQaQjERN9-d8WZyCQo",
    "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
    "ChIJzeNmTwARQjERLSXizyRKI9g",
+   "manual:bai-tam-pham-van-dong",
+   "manual:banh-xeo-ba-duong",
+   "manual:be-man",
+   "manual:ca-chep-hoa-rong",
+   "manual:cau-tinh-yeu",
    "manual:cu-lao-cham",
+   "manual:golden-pine",
    "manual:hai-van-quan",
    "manual:mikazuki-waterpark",
+   "manual:nha-tho-con-ga",
+   "manual:sky36",
    "manual:vinwonders-nam-hoi-an",
    "osm:node/10709724107",
    "osm:node/10709738105",
@@ -552,13 +560,13 @@
    "osm:node/7276380289"
   ]
  },
- "feasible": 27,
- "infeasible": 3,
+ "feasible": 26,
+ "infeasible": 4,
  "hybrid": {
   "profile": "balanced",
   "wishes": {
-   "met": 18,
-   "total": 28
+   "met": 19,
+   "total": 27
   },
   "transition_backend": {
    "backend": "rule",
@@ -569,8 +577,8 @@
  },
  "systems": {
   "distance-only": {
-   "n": 27,
-   "gate_pass": 27,
+   "n": 26,
+   "gate_pass": 26,
    "pass_rate": 1.0,
    "violations": {
     "FAR": 0,
@@ -586,22 +594,24 @@
     "NO_ADJACENT_FOOD": 0,
     "REST_FOLLOWS_LUNCH": 0,
     "F1": 0,
+    "TIME_FIT": 0,
+    "DINNER": 0,
     "TCS": 0,
     "HCS": 0
    },
    "soft_mean": {
     "STR": 1.0,
-    "DTU": 0.67,
-    "SSR": 0.8889,
-    "CSM": 0.629,
+    "DTU": 0.6748,
+    "SSR": 1.0,
+    "CSM": 0.5134,
     "EDI": 1.0,
-    "AQE": 0.9077
+    "AQE": 0.9027
    },
-   "mean_rating": 4.498
+   "mean_rating": 4.4863
   },
   "hybrid": {
-   "n": 27,
-   "gate_pass": 27,
+   "n": 26,
+   "gate_pass": 26,
    "pass_rate": 1.0,
    "violations": {
     "FAR": 0,
@@ -617,18 +627,20 @@
     "NO_ADJACENT_FOOD": 0,
     "REST_FOLLOWS_LUNCH": 0,
     "F1": 0,
+    "TIME_FIT": 0,
+    "DINNER": 0,
     "TCS": 0,
     "HCS": 0
    },
    "soft_mean": {
     "STR": 1.0,
-    "DTU": 0.7096,
-    "SSR": 0.7407,
-    "CSM": 0.6938,
+    "DTU": 0.7539,
+    "SSR": 1.0,
+    "CSM": 0.5967,
     "EDI": 1.0,
-    "AQE": 0.9157
+    "AQE": 0.912
    },
-   "mean_rating": 4.5757
+   "mean_rating": 4.5519
   },
   "llm-only": {
    "status": "SKIP",
@@ -637,8 +649,8 @@
   }
  },
  "recovery": {
-  "probed": 27,
-  "ok": 27,
+  "probed": 26,
+  "ok": 26,
   "preserved_all": true
  },
  "notes": {},
@@ -671,31 +683,31 @@
   "SC-009": {
    "target": "hybrid taste-fit >= 1.10x shortest-path baseline",
    "metric": "mean trusted rating of the plan (preference proxy)",
-   "distance_only": 4.498,
-   "hybrid": 4.5757,
-   "ratio": 1.0173,
+   "distance_only": 4.4863,
+   "hybrid": 4.5519,
+   "ratio": 1.0146,
    "undecidable": false,
    "pass": false
   },
   "SC-010": {
    "target": "recovery succeeds >=80% and keeps 100% completed",
-   "probed": 27,
-   "recovered": 27,
+   "probed": 26,
+   "recovered": 26,
    "recovery_rate": 1.0,
    "preserved_all": true,
    "pass": true
   }
  },
  "two_day": {
-  "n": 9,
-  "gate_pass": 9,
-  "both_days": 9,
+  "n": 7,
+  "gate_pass": 7,
+  "both_days": 7,
   "repeated_pois": 0,
   "over_budget": 0,
-  "mean_stops_per_day": 5.83,
+  "mean_stops_per_day": 7.0,
   "wishes": {
    "met": 7,
-   "total": 9
+   "total": 7
   }
  }
 }

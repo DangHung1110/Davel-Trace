@@ -51,9 +51,9 @@ class TestBaselines(unittest.TestCase):
         cls.report = B.run(SUITE, SNAPSHOT, llm_complete=_fake_llm(),
                            limit=cls.SLICE)
 
-    def test_suite_shape_is_27_of_30(self):
+    def test_suite_shape_is_26_of_30(self):
         self.assertEqual(len(self.suite), 30)
-        self.assertEqual(len(self.feasible), 27)
+        self.assertEqual(len(self.feasible), 26)
         for rec in self.suite:
             self.assertIn("trip", rec)
             self.assertIn("query_id", rec)

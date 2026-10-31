@@ -83,7 +83,7 @@ def distance_only_itinerary(record: dict) -> dict | None:
 
 def hybrid_trip(record: dict) -> dict:
     """The trip the app would plan: the query's trip + its onboarding profile."""
-    return {**record["trip"], "profile": record.get("profile") or {}}
+    return {**record["trip"], "profile": record.get("profile") or {}, "meals": True}
 
 
 def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,

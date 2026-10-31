@@ -5,8 +5,9 @@ tests), "trip": {budget, travelers, start/end_time, must_visit, avoid,
 order_prefs, activities}, "profile"}. `profile` stays outside the trip: with a
 profile the gate adds the day rules (lunch, caps), which only the hybrid run
 plans for; the distance-only gold is judged on the core gate.
-must_visit picks are POIs that can fit the query's window, so a query is
-infeasible only when the plan really cannot hold them.
+must_visit picks are POIs that can fit the query's window and that the party's day
+template allows (the router drops the others with a warning, before planning), so a
+query is infeasible only when the plan really cannot hold them.
 30-50 queries full run LATER on the full T003b snapshot; seed trials use
 a handful. Deterministic on (seed, n).
 """
@@ -26,6 +27,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.schemas.trip import TripProfile  # noqa: E402
+from BE.app.services import templates  # noqa: E402
 from BE.common import load_pois, poi_open_windows, to_min  # noqa: E402
 
 BUDGETS = [1000000, 3000000, 5000000]
@@ -66,7 +68,11 @@ def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
     queries = []
     for i in range(n):
         budget, (ws, we) = combos[i % len(combos)]
-        fit = sorted(p["poi_id"] for p in verified if _fits_window(p, ws, we))
+        profile = TripProfile(**PROFILES[i % len(PROFILES)]).model_dump()
+        day = templates.select_template(profile)
+        fit = sorted(p["poi_id"] for p in verified
+                     if _fits_window(p, ws, we) and templates.allows(p, day)
+                     and p.get("plan_tier") != "excluded")
         must = rng.sample(fit, k=min(2, len(fit))) if i % 2 == 0 else []
         avoid = rng.sample([x for x in ids if x not in must],
                            k=1 if len(ids) - len(must) > 2 else 0)
@@ -81,7 +87,7 @@ def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
             "trip": {"budget": budget, "travelers": people, "start_time": ws, "end_time": we,
                      "must_visit": must, "avoid": avoid, "order_prefs": order,
                      "activities": LIKE_ACTIVITIES[like]},
-            "profile": TripProfile(**PROFILES[i % len(PROFILES)]).model_dump(),
+            "profile": profile,
         })
     return queries
 
