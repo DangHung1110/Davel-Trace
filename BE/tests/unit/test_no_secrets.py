@@ -15,6 +15,9 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.core.config import Settings
+from BE.app.core.logging import redact
+
 REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
 
 PATTERNS = [
@@ -37,6 +40,18 @@ def tracked_files() -> list[str]:
 
 
 class TestNoSecrets(unittest.TestCase):
+    def test_config_and_log_redaction(self):
+        secret = "not-a-live-secret"
+        url = f"postgresql+psycopg://davel:{secret}@localhost/davel_trace"
+        settings = Settings(
+            app_mode="production",
+            database_url=url,
+            allowed_origins="https://app.example",
+            _env_file=None,
+        )
+        self.assertNotIn(secret, repr(settings))
+        self.assertNotIn(secret, redact(url))
+
     def test_no_secret_patterns(self):
         hits = []
         for f in tracked_files():

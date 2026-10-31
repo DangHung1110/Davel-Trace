@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+from contextlib import contextmanager
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SEED_DIR = os.path.join(REPO_ROOT, "data", "snapshots", "danang-v1")
@@ -60,6 +61,57 @@ except ImportError:  # pragma: no cover - clean checkout without pytest
     pytest = None
 
 if pytest is not None:
+    @pytest.fixture
+    def isolated_settings(monkeypatch, tmp_path):
+        """Create Settings without reading the developer's local BE/.env."""
+        from BE.app.core.config import Settings
+
+        def factory(**overrides):
+            values = {
+                "app_mode": "test",
+                "snapshot_dir": str(tmp_path),
+                "acceptance_db_path": str(tmp_path / "acceptance.db"),
+                "_env_file": None,
+                **overrides,
+            }
+            return Settings(**values)
+
+        return factory
+
+    @pytest.fixture
+    def temporary_environment(monkeypatch):
+        @contextmanager
+        def apply(**values):
+            original = {key: os.environ.get(key) for key in values}
+            for key, value in values.items():
+                if value is None:
+                    monkeypatch.delenv(key, raising=False)
+                else:
+                    monkeypatch.setenv(key, str(value))
+            try:
+                yield
+            finally:
+                for key, value in original.items():
+                    if value is None:
+                        monkeypatch.delenv(key, raising=False)
+                    else:
+                        monkeypatch.setenv(key, value)
+
+        return apply
+
+    @pytest.fixture
+    def correlation_id():
+        return "test-correlation-0001"
+
+    @pytest.fixture
+    def postgres_database_url():
+        from BE.app.core.config import get_settings
+
+        url = get_settings().database_url
+        if not url:
+            pytest.skip("DATABASE_URL is required for PostgreSQL integration")
+        return url
+
     @pytest.fixture
     def seed():
         """(pois, cells) from the locked 7-POI seed snapshot."""

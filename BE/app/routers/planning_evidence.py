@@ -8,18 +8,18 @@ from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
 from BE.app.config import get_settings
+from BE.app.modules.planning_evidence.api import create_planning_evidence_service
 from BE.app.routers import error
 from BE.app.routers import select as select_router
 from BE.app.services import llm
-from BE.app.services.acceptance_store import AcceptanceStore
 from BE.app.services.planning_readiness import build_readiness
 from BE.app.services.shadow_rank import evaluate
 
 router = APIRouter(prefix="/v1", tags=["planning-evidence"])
 
 
-def _store() -> AcceptanceStore:
-    return AcceptanceStore(get_settings().acceptance_db_path)
+def _store():
+    return create_planning_evidence_service(get_settings())
 
 
 class ShadowIn(BaseModel):

@@ -20,11 +20,12 @@ from uuid import uuid4
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
+from sqlalchemy.exc import SQLAlchemyError
 
 from BE.app.config import get_settings
+from BE.app.modules.planning_evidence.api import create_planning_evidence_service
 from BE.app.routers import error
 from BE.app.services import gate
-from BE.app.services.acceptance_store import AcceptanceStore
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
@@ -108,7 +109,7 @@ def _save_acceptance(plan: dict, report: dict, body: SelectIn) -> dict:
         "trip_id": plan.get("trip_id", "")
     }
     key = body.idempotency_key or f"legacy-{uuid4()}"
-    return AcceptanceStore(settings.acceptance_db_path).save_acceptance(
+    return create_planning_evidence_service(settings).save_acceptance(
         idempotency_key=key,
         itinerary_id=body.itinerary_id,
         trip_id=str(plan.get("trip_id") or request.get("trip_id") or ""),
@@ -141,8 +142,12 @@ def select(body: SelectIn):
     try:
         acceptance = _save_acceptance(
             plan, report or plan.get("gate") or {"passed": True}, body)
-    except (OSError, ValueError) as exc:
-        return error("ACCEPTANCE_STORE_ERROR", str(exc), 503)
+    except (OSError, ValueError, RuntimeError, SQLAlchemyError):
+        return error(
+            "ACCEPTANCE_STORE_ERROR",
+            "khong the luu lua chon vao kho du lieu",
+            503,
+        )
 
     _STORE["active_id"] = body.itinerary_id
     _STORE["selected"] = body.itinerary_id
