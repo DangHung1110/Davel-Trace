@@ -6,7 +6,7 @@
 Luồng demo đã nối:
 
 - lịch trình quản lý và các phương án planner;
-- chốt phương án live vào SQLite backend;
+- chốt phương án live vào PostgreSQL backend;
 - PMTiles Đà Nẵng, route/location và cảnh báo fallback;
 - chi tiêu/ngân sách;
 - hồ sơ du khách;
@@ -16,6 +16,11 @@ Trên desktop, app tự nằm trong khung điện thoại logic 390×844. Trên 
 mobile, app dùng toàn màn hình.
 
 ## Chạy trên laptop
+
+Project dùng Flutter stable 3.47.5. Trên máy phát triển hiện tại, `.flutter-sdk`
+trỏ đến SDK dùng chung ở `D:\ToolCache\flutter-3.47.5\flutter`; không copy SDK
+vào từng worktree. Chỉ cần Chrome để demo web, chưa cần Android emulator hay
+điện thoại thật.
 
 Từ repo root (PowerShell):
 

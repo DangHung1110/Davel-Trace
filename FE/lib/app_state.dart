@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import 'api/api_client.dart';
-import 'api/api_exception.dart';
+import 'core/errors/api_exception.dart';
+import 'core/networking/api_client.dart';
 import 'features/management/data/management_repository.dart';
 import 'features/management/domain/models.dart';
 import 'features/planning/data/planning_repository.dart';

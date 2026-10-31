@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
 import '../../../theme/app_theme.dart';
-import '../../expenses/presentation/expenses_screen.dart';
-import '../../itinerary/presentation/itinerary_screen.dart';
-import '../../map/presentation/map_screen.dart';
-import '../../map/presentation/map_stop.dart';
-import '../../profile/presentation/profile_screen.dart';
+import '../../expenses/expenses.dart';
+import '../../itinerary/itinerary.dart';
+import '../../map/map.dart';
+import '../../profile/profile.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key, required this.state});
