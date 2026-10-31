@@ -76,7 +76,8 @@ def str_score(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
 def dtu(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     """Daily Time Utilization = visit minutes / available minutes (0..1)."""
     total = sum(to_min(a["end"]) - to_min(a["start"]) for a in _acts(itinerary))
-    avail = deadline(trip) - to_min(trip["start_time"])
+    days = len({a.get("day") for a in _acts(itinerary)}) or 1
+    avail = (deadline(trip) - to_min(trip["start_time"])) * days
     return max(0.0, min(1.0, total / avail)) if avail > 0 else 0.0
 
 
@@ -86,7 +87,7 @@ def ssr(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     if not prefs:
         return 1.0
     pos = {a.get("poi_id"): i for i, a in
-           enumerate(sorted(_acts(itinerary), key=lambda a: a["start"]))}
+           enumerate(sorted(_acts(itinerary), key=lambda a: (a.get("day") or 1, a["start"])))}
     ok = sum(a in pos and b in pos and pos[a] < pos[b] for a, b in prefs)
     return ok / len(prefs)
 
