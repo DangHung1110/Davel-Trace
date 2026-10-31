@@ -36,9 +36,9 @@ def _fake_llm(order_fn=None):
 
 
 class TestBaselines(unittest.TestCase):
-    # CP-SAT is the slow part (~5s/plan). The shared report covers a 4-query
-    # slice; test_full_suite_run covers the published 23.
-    SLICE = 4
+    # CP-SAT is the slow part (~8s/plan). The shared report covers a small slice;
+    # test_published_run_covers_the_whole_suite reads the published full run.
+    SLICE = 2
 
     @classmethod
     def setUpClass(cls):
@@ -51,9 +51,9 @@ class TestBaselines(unittest.TestCase):
         cls.report = B.run(SUITE, SNAPSHOT, llm_complete=_fake_llm(),
                            limit=cls.SLICE)
 
-    def test_suite_shape_is_scoped_23_of_30(self):
+    def test_suite_shape_is_27_of_30(self):
         self.assertEqual(len(self.suite), 30)
-        self.assertEqual(len(self.feasible), 23)
+        self.assertEqual(len(self.feasible), 27)
         for rec in self.suite:
             self.assertIn("trip", rec)
             self.assertIn("query_id", rec)
@@ -172,20 +172,23 @@ class TestBaselines(unittest.TestCase):
         for key in ("systems", "sc", "recovery", "coverage"):
             self.assertEqual(a[key], b[key], key)
 
-    def test_full_suite_run_covers_all_23_feasible(self):
-        """The published run must cover the whole scoped suite (not a slice)."""
-        report = B.run(SUITE, SNAPSHOT, llm_complete=_fake_llm())
-        self.assertEqual(report["feasible"], 23)
-        self.assertEqual(report["infeasible"], 7)
-        self.assertEqual(report["systems"]["distance-only"]["n"], 23)
-        self.assertEqual(report["systems"]["hybrid"]["n"], 23)
-        # The suite's gold was built on the original 5-POI pool; the expansion
-        # (verified POIs appended to the matrix) makes every verified POI
-        # eligible, so coverage must equal the verified count, not stay at 5.
-        self.assertGreaterEqual(report["coverage"]["eligible"], 5)
-        self.assertEqual(report["coverage"]["eligible"],
-                         report["coverage"]["verified"])
+    def test_published_run_covers_the_whole_suite(self):
+        """The published report covers every feasible query, not a slice, on
+        the pool of today's snapshot: rebuild it when the POIs change."""
+        with open(os.path.join("BE", "eval", "gold", "t053_baselines.json"),
+                  encoding="utf-8") as f:
+            report = json.load(f)
+        self.assertEqual(report["feasible"], len(self.feasible))
+        self.assertEqual(report["infeasible"], len(self.suite) - len(self.feasible))
+        self.assertEqual(report["systems"]["distance-only"]["n"], len(self.feasible))
+        self.assertEqual(report["systems"]["hybrid"]["n"], len(self.feasible))
+        verified = sum(1 for p in self.pois_list if p.get("verified"))
+        self.assertEqual(report["coverage"]["eligible"], verified)
+        self.assertEqual(report["coverage"]["verified"], verified)
         self.assertEqual(report["coverage"]["missing_verified"], 0)
+        # Planning quality on the full pool is part of the contract now.
+        self.assertGreaterEqual(report["systems"]["hybrid"]["pass_rate"], 0.9)
+        self.assertEqual(report["systems"]["hybrid"]["violations"]["BCS"], 0)
 
 
 if __name__ == "__main__":

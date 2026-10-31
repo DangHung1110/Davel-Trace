@@ -1,7 +1,12 @@
 """Test-suite query builder (T051-BUILDER, lane A). Deterministic ĐN queries.
 
 Query = {"query_id", "prefs_text" (Vietnamese NL, for future parser
-tests), "trip": {budget, start/end_time, must_visit, avoid, order_prefs}}.
+tests), "trip": {budget, travelers, start/end_time, must_visit, avoid,
+order_prefs, activities}, "profile"}. `profile` stays outside the trip: with a
+profile the gate adds the day rules (lunch, caps), which only the hybrid run
+plans for; the distance-only gold is judged on the core gate.
+must_visit picks are POIs that can fit the query's window, so a query is
+infeasible only when the plan really cannot hold them.
 30-50 queries full run LATER on the full T003b snapshot; seed trials use
 a handful. Deterministic on (seed, n).
 """
@@ -20,7 +25,8 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from BE.common import load_pois  # noqa: E402
+from BE.app.schemas.trip import TripProfile  # noqa: E402
+from BE.common import load_pois, poi_open_windows, to_min  # noqa: E402
 
 BUDGETS = [1000000, 3000000, 5000000]
 WINDOWS = [("07:00", "18:00"), ("07:00", "12:00"), ("13:00", "18:00")]
@@ -32,28 +38,50 @@ PREFS_TEXTS = [
 LIKES = ["biển và hải sản", "leo núi rồi đi biển", "văn hóa và ẩm thực",
          "check-in trung tâm", "yên tĩnh hẹn hò"]
 BUDGET_TEXT = {1000000: "1 triệu", 3000000: "3 triệu", 5000000: "5 triệu"}
+LIKE_ACTIVITIES = {"biển và hải sản": ["tắm biển", "hải sản"],
+                   "leo núi rồi đi biển": ["leo núi", "tắm biển"],
+                   "văn hóa và ẩm thực": ["bảo tàng"],
+                   "check-in trung tâm": [], "yên tĩnh hẹn hò": []}
+PROFILES = [{"party_type": "couple", "pace": 2, "fitness": 2},
+            {"party_type": "family", "pace": 1, "fitness": 1},
+            {"party_type": "friends", "pace": 3, "fitness": 3}]
+
+
+def _fits_window(poi: dict, ws: str, we: str) -> bool:
+    """Open long enough in the window, and short enough to leave room for others."""
+    start, end = to_min(ws), to_min(we)
+    dur = int((poi.get("visit_min") or {}).get("p50") or 60)
+    windows = poi_open_windows(poi)
+    if dur > (end - start) / 3:
+        return False
+    return windows is None or any(max(o, start) + dur <= min(c, end) for o, c in windows)
 
 
 def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
     rng = random.Random(seed)
-    ids = sorted(p["poi_id"] for p in pois if p.get("verified"))
+    verified = [p for p in pois if p.get("verified")]
+    ids = sorted(p["poi_id"] for p in verified)
     combos = list(itertools.product(BUDGETS, WINDOWS))
     rng.shuffle(combos)
     queries = []
     for i in range(n):
         budget, (ws, we) = combos[i % len(combos)]
-        must = rng.sample(ids, k=min(2, len(ids))) if i % 2 == 0 else []
+        fit = sorted(p["poi_id"] for p in verified if _fits_window(p, ws, we))
+        must = rng.sample(fit, k=min(2, len(fit))) if i % 2 == 0 else []
         avoid = rng.sample([x for x in ids if x not in must],
                            k=1 if len(ids) - len(must) > 2 else 0)
         order = [[must[0], must[1]]] if len(must) == 2 else []
         like = LIKES[i % len(LIKES)]
+        template, people = rng.choice(PREFS_TEXTS), rng.choice([1, 2, 4])
         queries.append({
             "query_id": f"q{i + 1:02d}",
-            "prefs_text": rng.choice(PREFS_TEXTS).format(
-                n=rng.choice([1, 2, 4]), budget_text=BUDGET_TEXT[budget], like=like,
+            "prefs_text": template.format(
+                n=people, budget_text=BUDGET_TEXT[budget], like=like,
                 window_text=f"từ {ws} đến {we}"),
-            "trip": {"budget": budget, "start_time": ws, "end_time": we,
-                     "must_visit": must, "avoid": avoid, "order_prefs": order},
+            "trip": {"budget": budget, "travelers": people, "start_time": ws, "end_time": we,
+                     "must_visit": must, "avoid": avoid, "order_prefs": order,
+                     "activities": LIKE_ACTIVITIES[like]},
+            "profile": TripProfile(**PROFILES[i % len(PROFILES)]).model_dump(),
         })
     return queries
 

@@ -1,8 +1,8 @@
 """T053 full-suite run: baselines vs hybrid on the T051 gold (lane A). No LLM
 in scoring; the tier-1 evaluator (`BE/eval/metrics.evaluate`) is the judge.
 
-Three planners over the SAME scoped gold queries (T051: 30 Approach-B
-queries over the 5/764 matrix-covered verified POIs; 23 feasible):
+Three planners over the SAME gold queries (T051: 30 Approach-B queries over
+the verified, matrix-covered POIs):
 
 - distance-only baseline: the T051 Approach-B gold itself (OR-Tools TSP on
   real OSRM minutes, preference-blind). It is the shortest-path reference
@@ -42,7 +42,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.services.gate import CHECKS as GATE_CHECKS  # noqa: E402
-from BE.common import load_json, load_matrix_cells, load_pois  # noqa: E402
+from BE.common import effective_fee, load_json, load_matrix_cells, load_pois, trusted_rating  # noqa: E402
 from BE.eval.gold.approach_b import chain_order, filter_pois  # noqa: E402
 from BE.eval.gold.build import coverage_summary, eligible_ids  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
@@ -59,10 +59,12 @@ EVAL_WORKERS = 1
 # (test_baselines.test_run_is_deterministic caught exactly that). The eval
 # path therefore budgets DETERMINISTIC time (OR-Tools work units) instead: the
 # same query does the same work on every run. The wall clock is only a safety
-# cap so a bad instance cannot hang the suite.
-EVAL_DETERMINISTIC_TIME = 1.5
+# cap so a bad instance cannot hang the suite. Measured on the 30 queries, 80
+# candidates, one worker: plans solved 9/27 at 1.5, 24/27 at 3, 25/27 at 5, 27/27
+# at 8 (about 8 s a query). Below that the run scores the budget, not the planner.
+EVAL_DETERMINISTIC_TIME = 8.0
 EVAL_WALL_SAFETY_S = 60.0
-ZERO_FEE_NOTE = ("all candidate fees are 0 in the scoped snapshot -> BCS is "
+ZERO_FEE_NOTE = ("all candidate fees are 0 in this snapshot -> BCS is "
                  "vacuous: SC-008 is reported but cannot be exercised here "
                  "(T051 note: T053 must extend fee coverage)")
 
@@ -76,6 +78,11 @@ class LLMUnavailable(RuntimeError):
 def distance_only_itinerary(record: dict) -> dict | None:
     """The T051 Approach-B gold IS the distance-only (shortest-path) plan."""
     return record.get("itinerary")
+
+
+def hybrid_trip(record: dict) -> dict:
+    """The trip the app would plan: the query's trip + its onboarding profile."""
+    return {**record["trip"], "profile": record.get("profile") or {}}
 
 
 def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
@@ -92,7 +99,7 @@ def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
     """
     from BE.app.services import profiles, rank, retrieval
 
-    trip = record["trip"]
+    trip = hybrid_trip(record)
     found = retrieval.retrieve(trip, pois_list)
     cids = [c["poi_id"] for c in found["candidates"]]
     ranked = rank.rank([by_id[i] for i in cids], {"budget": trip["budget"]},
@@ -103,7 +110,8 @@ def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
                                deterministic_time is not None else None,
                                deterministic_time=deterministic_time)
     return {"activities": plan.get("activities", []),
-            "total_cost": plan.get("total_cost")}
+            "total_cost": plan.get("total_cost"),
+            "activity_match": plan.get("activity_match") or []}
 
 
 def llm_order_prompt(record: dict, cand_ids: list[str], by_id: dict) -> str:
@@ -250,7 +258,7 @@ def _sc_table(dist: dict, hyb: dict, recovery: dict, zero_fee: bool,
     # A uniform-rating pool cannot discriminate preference: the ratio is then
     # 1.0 by construction, so SC-009 is "undecidable here", not "proven equal".
     s009 = {"target": "hybrid taste-fit >= 1.10x shortest-path baseline",
-            "metric": "mean POI rating of the plan (preference proxy)",
+            "metric": "mean trusted rating of the plan (preference proxy)",
             "distance_only": d_fit, "hybrid": h_fit,
             "ratio": round(ratio, 4) if ratio is not None else None,
             "undecidable": uniform_ratings,
@@ -273,7 +281,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
     """Run distance-only + hybrid + (LLM-only or SKIP) -> report dict.
 
     `limit` caps the number of feasible queries (smoke runs / tests); the
-    published run leaves it None to cover the whole scoped suite.
+    published run leaves it None to cover the whole suite.
     """
     suite = load_json(suite_path)
     pois_list = load_pois(snapshot_dir)
@@ -292,7 +300,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         dr = {"_ratings": _ratings(d["activities"], by_id),
               **evaluate(d, rec["trip"], by_id, matrix)}
         hr = {"_ratings": _ratings(h["activities"], by_id),
-              **evaluate(h, rec["trip"], by_id, matrix)}
+              **evaluate(h, hybrid_trip(rec), by_id, matrix)}
         dist_reports.append(dr)
         hyb_reports.append(hr)
         hyb_plans.append(h)
@@ -327,8 +335,8 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         preserved_all = preserved_all and probe["preserved"]
     recovery = {"probed": probed, "ok": ok, "preserved_all": preserved_all}
 
-    zero_fee = all(int(p.get("fee", 0)) == 0 for pid in eligible
-                   for p in [by_id[pid]])
+    zero_fee = all(not effective_fee(by_id[pid]) for pid in eligible)
+    wishes = [m["status"] for h in hyb_plans for m in h.get("activity_match", [])]
     ratings = {by_id[pid].get("rating") for pid in eligible}
     uniform_ratings = len(ratings) == 1
     report = {
@@ -337,7 +345,8 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         "coverage": coverage,
         "feasible": len(feasible),
         "infeasible": len(suite) - len(feasible),
-        "hybrid": {"profile": profile},
+        "hybrid": {"profile": profile,
+                   "wishes": {"met": wishes.count("met"), "total": len(wishes)}},
         "systems": {"distance-only": dist, "hybrid": hyb, "llm-only": llm},
         "recovery": recovery,
         "notes": _notes(zero_fee, uniform_ratings),
@@ -362,9 +371,9 @@ def _notes(zero_fee: bool, uniform_ratings: bool) -> dict:
 def _ratings(activities: list[dict], by_id: dict) -> list[float]:
     out = []
     for a in activities:
-        r = by_id.get(a.get("poi_id"), {}).get("rating")
-        if r is not None:
-            out.append(float(r))
+        poi = by_id.get(a.get("poi_id"), {})
+        if poi.get("rating") is not None:
+            out.append(trusted_rating(poi))
     return out
 
 
@@ -378,7 +387,7 @@ def _attach_backends(report: dict) -> None:
 
 def _print_report(report: dict) -> None:
     cov = report["coverage"]
-    print(f"coverage (SCOPED): {cov['eligible']}/{cov['total_pois']} eligible "
+    print(f"coverage: {cov['eligible']}/{cov['total_pois']} eligible "
           f"({cov['eligible']}/{cov['verified']} verified intersect matrix)")
     print(f"feasible {report['feasible']} / infeasible {report['infeasible']}")
     for name, m in report["systems"].items():
