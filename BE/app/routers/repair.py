@@ -34,6 +34,7 @@ from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import review as review_router
 from BE.app.routers import select as select_svc
 from BE.app.services import repair as repair_svc
+from BE.app.routers.itinerary import _retrieval_report
 from BE.app.services import retrieval as retrieval_svc
 
 router = APIRouter(prefix="/v1", tags=["repair"])
@@ -58,7 +59,7 @@ def _as_index(raw) -> dict:
 
 
 def _resolve(body: RepairIn):
-    """(plan, trip, pois_by_id, pool, matrix) or an error response."""
+    """(plan, trip, pois_by_id, pool, matrix, retrieval report) or an error response."""
     plan = body.plan
     if plan is None:
         if not body.itinerary_id:
@@ -82,26 +83,29 @@ def _resolve(body: RepairIn):
                            f"snapshot dir {snapshot_dir} chua co", 503)
     pois_by_id, cells = loaded
 
+    try:
+        all_pois = retrieval_svc.load_pois_json(
+            os.path.join(snapshot_dir, "pois.json"))
+    except (FileNotFoundError, NotADirectoryError):
+        all_pois = list(pois_by_id.values())
+    found = retrieval_svc.retrieve(trip, all_pois)
+    # FR-013/FR-024: the same report as POST /v1/itinerary.
+    report = _retrieval_report(found, pois_by_id, trip.get("activities") or [])
+
     raw_pool = ctx.get("pois") or plan.get("pois")
     if raw_pool:
         pool = list(pois_by_id.get(p.get("poi_id"), p) for p in _as_index(raw_pool).values())
     else:
         # No stored candidate pool: reproduce the router's retrieval seam so
         # the repair can only choose POIs the planner could have chosen.
-        try:
-            all_pois = retrieval_svc.load_pois_json(
-                os.path.join(snapshot_dir, "pois.json"))
-        except (FileNotFoundError, NotADirectoryError):
-            all_pois = list(pois_by_id.values())
-        candidate_ids = {c["poi_id"]
-                         for c in retrieval_svc.retrieve(trip, all_pois)["candidates"]}
+        candidate_ids = {c["poi_id"] for c in found["candidates"]}
         pool = [p for p in all_pois if p.get("poi_id") in candidate_ids]
 
     travel = ctx.get("travel")
     matrix = (_matrix_from_travel(travel)
               if isinstance(travel, dict) and travel
               else plan.get("matrix") or cells)
-    return (plan, trip, pois_by_id, pool, matrix), None
+    return (plan, trip, pois_by_id, pool, matrix, report), None
 
 
 @router.post("/repair")
@@ -109,7 +113,7 @@ def repair(body: RepairIn):
     resolved, err = _resolve(body)
     if err is not None:
         return err
-    plan, trip, pois_by_id, pool, matrix = resolved
+    plan, trip, pois_by_id, pool, matrix, report = resolved
 
     try:
         result = repair_svc.repair_plan(
@@ -118,8 +122,8 @@ def repair(body: RepairIn):
         )
     except Exception as exc:  # noqa: BLE001 - never 500 the harness
         return {"plan": {k: v for k, v in plan.items() if not k.startswith("_")},
-                "rounds": 0, "repairs": [], "gate": None,
+                "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
                 "note": f"REPAIR_UNAVAILABLE: {type(exc).__name__}"}
 
     repaired = {k: v for k, v in result["plan"].items() if not k.startswith("_")}
-    return {**result, "plan": repaired}
+    return {**result, "plan": repaired, "retrieval": report}

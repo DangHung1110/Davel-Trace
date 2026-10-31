@@ -37,7 +37,7 @@ import re
 import unicodedata
 
 from BE.app.services import to_min
-from BE.common import load_json
+from BE.common import effective_fee, load_json, party_size
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -180,6 +180,7 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
     "excluded": [{poi_id, reason}], "unmatched_activities": [str]}."""
     ws, we = to_min(trip.get("start_time", "07:00")), to_min(trip.get("end_time", "18:00"))
     budget = int(trip.get("budget", 0))
+    party = party_size(trip)
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))
     activities = trip.get("activities", []) or []
@@ -209,7 +210,7 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if cat in NON_ACTIVITY_CATS:
             excluded.append({"poi_id": pid, "reason": "khong phai hoat dong"})
             continue
-        if int(p.get("fee", 0)) > budget:
+        if (effective_fee(p) or 0) * party > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
         if not _overlaps(p.get("opening_hours", []), ws, we):

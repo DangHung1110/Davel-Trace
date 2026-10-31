@@ -93,7 +93,7 @@ from BE.app.services.soft_rules import (
     same_category_edges,
 )
 from BE.app.services.profile_filter import drop_reason
-from BE.common import deadline, in_range, plan_cost, to_min
+from BE.common import deadline, in_range, party_size, plan_cost, to_min
 
 EPS = 1e-9
 
@@ -165,7 +165,7 @@ def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff total cost is within budget (one formula, both sides)."""
-    cost = plan_cost(itinerary, pois)
+    cost = plan_cost(itinerary, pois, party_size(trip))
     return _result(cost <= int(trip.get("budget", 0)))
 
 

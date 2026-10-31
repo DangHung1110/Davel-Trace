@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from BE.app.config import get_settings
+from BE.app.config import Settings, get_settings
 from BE.app.routers import accept as accept_router
 from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
@@ -21,30 +21,33 @@ from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 
+# Local dev pages (harness, Flutter web) run on any localhost port.
+LOCAL_ORIGIN_REGEX = r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$"
+PUBLIC_ROUTERS = (parse_router, itinerary_router, select_router, replan_router,
+                  expenses_router, weather_router, evaluate_router, scorer_router)
+# Local test harness only: semantic LLM review, the bounded LLM-guided repair
+# loop, and the append-only "Chốt plan" log for future weight-learning.
+LOCAL_ROUTERS = (review_router, repair_router, accept_router)
+
+
+def configure(app: FastAPI, settings: Settings) -> None:
+    """CORS + routers. A production deploy only answers its own origins."""
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=list(settings.cors_origins),
+        allow_origin_regex=None if settings.is_production else LOCAL_ORIGIN_REGEX,
+        allow_methods=["GET", "POST"],
+        allow_headers=["Content-Type"],
+    )
+    for module in PUBLIC_ROUTERS:
+        app.include_router(module.router)
+    if not settings.is_production:
+        for module in LOCAL_ROUTERS:
+            app.include_router(module.router)
+
+
 app = FastAPI(title="Travel Agent BE")
-# NOTE(test-local, DO NOT COMMIT as-is): allow-all CORS so the local
-# harness page (served on another port) can call the API. Restrict to
-# app origins before any PR.
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-app.include_router(parse_router.router)
-app.include_router(itinerary_router.router)
-app.include_router(select_router.router)
-app.include_router(replan_router.router)
-app.include_router(expenses_router.router)
-app.include_router(weather_router.router)
-app.include_router(evaluate_router.router)
-app.include_router(scorer_router.router)
-# NOTE(test-local): semantic LLM review for the local test harness only.
-app.include_router(review_router.router)
-# NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
-app.include_router(repair_router.router)
-# NOTE(test-local): append-only "Chốt plan" log for future weight-learning.
-app.include_router(accept_router.router)
+configure(app, get_settings())
 
 
 def _validation_message(errors: list[dict]) -> str:

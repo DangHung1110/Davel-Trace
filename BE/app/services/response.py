@@ -11,9 +11,9 @@ from __future__ import annotations
 
 import time
 
-from BE.app.services.common import status_map, to_min, total_fee
+from BE.app.services.common import party_size, status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS
-from BE.common import trusted_rating
+from BE.common import fee_is_estimate, trusted_rating
 
 
 def _hard_checks(validation: dict) -> dict:
@@ -48,7 +48,9 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         "version": version,
         "activities": acts,
         "segments": segments,
-        "total_cost": total_fee(acts, pois),
+        "total_cost": total_fee(acts, pois, party_size(trip)),
+        # FR-026: part of total_cost comes from price bands, not real prices.
+        "cost_estimated": any(fee_is_estimate(pois.get(a["poi_id"]) or {}) for a in acts),
         "total_km": round(total_km, 2),
         "total_min": visit_min + travel_min,
         "travel_min": travel_min,

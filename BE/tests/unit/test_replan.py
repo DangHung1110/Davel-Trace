@@ -72,6 +72,17 @@ class TestReplan(unittest.TestCase):
                          if out["itinerary"]["activities"] else drops)
         print(f"\n rain: mode {out['mode']} v{out['version']} changes {out['changes']}")
 
+    def test_a_done_must_visit_does_not_block_a_replan(self):
+        out = replan(fresh_state(), {"type": "rain", "at": "13:00"}, POIS, TRAVEL,
+                     {**TRIP, "must_visit": ["hill"]})
+        self.assertEqual(out["mode"], "plan")
+
+    def test_a_must_visit_still_to_do_binds(self):
+        out = replan(fresh_state(), {"type": "rain", "at": "13:00"}, POIS, TRAVEL,
+                     {**TRIP, "must_visit": ["museum"]})
+        self.assertEqual(out["mode"], "no_solution")
+        self.assertIn("HCS", out["reason"])
+
     def test_replan_twice_no_duplicates(self):
         s = fresh_state()
         event = {"type": "rain", "at": "13:00"}

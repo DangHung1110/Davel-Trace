@@ -93,6 +93,21 @@ class TestRealSnapshotPlanning(unittest.TestCase):
         for poi in self.stops(plan):
             self.assertGreaterEqual(poi.get("review_count") or 0, FEW_REVIEWS, poi["name"])
 
+    def test_budget_is_real(self):
+        # Every price was 0, so this gate could not fail and restaurants were "free".
+        _, roomy = self.plan(profile=COUPLE, budget=3000000, travelers=2)
+        self.assertTrue(roomy["passed"], roomy.get("violations"))
+        self.assertGreater(roomy["total_cost"], 0)
+        self.assertTrue(roomy["cost_estimated"])
+        _, tight = self.plan(profile=COUPLE, budget=600000, travelers=2)
+        self.assertTrue(tight["passed"], tight.get("violations"))
+        self.assertLessEqual(tight["total_cost"], 600000)
+
+    def test_no_money_for_lunch_is_reported_not_hidden(self):
+        _, plan = self.plan(profile=COUPLE, budget=0, travelers=2)
+        self.assertEqual(plan["activities"], [])
+        self.assertTrue(plan.get("warnings"))
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))
