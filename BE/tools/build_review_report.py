@@ -1,11 +1,12 @@
 """Build a read-only report of the reviewed POIs (Phase 4).
 
-One row per POI on the review page (the ids in review_drafts.jsonl): the
-verdict and note from review_log.jsonl, the edits applied, and the POI as it
-is now in pois.json (cat, hours and their source, duration, price band,
-rating, who verified it). Search box and filters, no editing: decisions are
-made on FE/verify_review.html and applied by ingest_verdicts.py. "Xuất JSON"
-downloads the rows the filters show (e.g. only the kept POIs).
+One row per reviewed POI (the ids in review_drafts.jsonl, then any other id in
+review_log.jsonl): the verdict and note from review_log.jsonl, the edits
+applied, and the POI as it is now in pois.json (cat, hours and their source,
+duration, price band, rating, who verified it). Search box and filters, no
+editing: decisions are made on FE/verify_review.html or written by an agent
+and applied by ingest_verdicts.py. "Xuất JSON" downloads the rows the filters
+show (e.g. only the kept POIs).
 
 Usage (from repo root, after an ingest)::
 
@@ -47,6 +48,7 @@ def report_rows(snapshot: Path) -> list[dict]:
     last = {}
     for entry in _jsonl(snapshot / "review_log.jsonl"):
         last[entry["poi_id"]] = entry  # the latest applied line wins
+    ids += [pid for pid in last if pid not in set(ids)]  # reviewed without a draft
     rows = []
     for pid in ids:
         poi, entry = pois[pid], last.get(pid) or {}

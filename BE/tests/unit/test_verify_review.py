@@ -271,7 +271,13 @@ class TestIngest(unittest.TestCase):
 class TestReport(unittest.TestCase):
     def test_real_report_lists_every_review_card(self):
         rows = report.report_rows(SNAPSHOT)
-        self.assertEqual(len(rows), len(bvp.load_drafts(SNAPSHOT)))
+        ids = [row["poi_id"] for row in rows]
+        self.assertEqual(len(ids), len(set(ids)))
+        # every draft card, plus the POIs reviewed without a draft
+        self.assertLessEqual(set(bvp.load_drafts(SNAPSHOT)), set(ids))
+        logged = [json.loads(x) for x in
+                  (SNAPSHOT / "review_log.jsonl").read_text(encoding="utf-8").splitlines() if x.strip()]
+        self.assertLessEqual({e["poi_id"] for e in logged}, set(ids))
         for row in rows:
             if row["verdict"] == "dung":
                 self.assertTrue(row["verified"], row["poi_id"])
