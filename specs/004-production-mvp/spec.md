@@ -1,10 +1,10 @@
 # Feature Specification: Davel Trace Complete Product MVP
 
-**Feature Branch**: `feat/complete-product-spec`
+**Feature Branch**: `feat/product-platform`
 
 **Created**: 2026-10-29
 
-**Status**: Draft
+**Status**: Portfolio baseline — delivered through incremental feature specs
 
 **Input**: User description: "Deliver a complete, production-oriented Davel Trace application with full management capabilities, durable shared data, a laptop-runnable mobile experience, and clean seams for adding AI itinerary recommendations later."
 
@@ -13,6 +13,8 @@
 Davel Trace is a Vietnamese-first travel companion for planning and managing a Da Nang trip from one place. A traveler can create an account, maintain travel preferences, organize trips and daily activities, compare only feasible itinerary alternatives, use the local Da Nang map and route guidance, track budget and expenses, and recover their data on another authorized device. Operators can curate the POI catalog and inspect operational evidence without editing user-owned records silently.
 
 This feature converts the current demonstrator into a complete product MVP. Demo-only, in-memory, and device-local repositories remain useful for explicit showcase or offline modes, but they are not accepted as the authoritative store for signed-in users.
+
+Implementation is intentionally split into independently reviewable increments. This document remains the product-wide source of scope and success criteria; [increments.md](./increments.md) defines delivery order, and each increment receives its own Spec Kit specification, plan, tasks, tests, and PR.
 
 ## Scope
 

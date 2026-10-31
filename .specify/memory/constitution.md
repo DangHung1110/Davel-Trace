@@ -1,12 +1,3 @@
-<!-- Sync Impact Report (scratch — remove before commit):
-Version change: 0.0.0 (template) → 1.0.0 (initial ratification)
-Added sections: I. Feasibility-First, II. Spec-Driven Development, III. Test-First,
-IV. Data Provenance & Honesty, V. Simplicity & Tier Discipline, VI. Mobile Contract,
-Technology Constraints, Development Workflow, Governance
-Removed sections: none (initial)
-Follow-up TODOs: none
--->
-
 # Personalized Travel Agent Constitution
 
 ## Core Principles
@@ -59,23 +50,38 @@ Pydantic validation; pytest; OSRM snapshot route matrix (no VietMap — free,
 deterministic, offline-capable); POI data via Google Places API (legal, reliable,
 ~$3.40 for 200 POIs); local LLM via Ollama on demo machine (Qwen3-14B primary,
 Sailor2-8B fallback), API (GPT-4o-mini/Gemini Flash, <5 USD total) only for
-demo polish and edge-case judge; SQLite/JSON snapshot store with seed + config
-for reproducibility; Open-Meteo for weather (free, no key); BE deployed on free
-tier (Render/Fly.io) for mobile access; Vietnamese-first, English later.
+demo polish and edge-case judge; PostgreSQL is the authoritative operational
+store for accounts, profiles, trips, expenses, itinerary versions, acceptance
+evidence and audit records; SQLAlchemy 2 models and reviewed Alembic migrations
+govern schema changes; versioned JSON/PMTiles remain authoritative planning
+snapshots; SQLite MAY be used only for isolated tests or explicitly labeled
+demo/offline caches and MUST NOT be the production source of truth; Open-Meteo
+provides weather (free, no key); secrets remain outside Git; Vietnamese-first,
+English later.
 
 ## Development Workflow
 
-Branches `feat/*, fix/*, chore/*` → PR into `dev`; `main` is stable. Direct
-pushes to `main`/`dev`, force-pushes, and remote branch deletions are FORBIDDEN.
-Checkpoint (`wip: checkpoint before agent run` + push) before large agent runs.
-Reviews MUST verify constitution compliance. Definition of Done lives in
-`AGENTS.md` and MUST all hold before merge.
+Branches `feat/*`, `fix/*`, `chore/*`, `task/*`, and `release/*` merge through
+reviewed PRs into `dev`; `main` is stable. Product-scale work MUST be divided
+into independently testable Spec Kit increments and MUST NOT use a big-bang
+rewrite. Direct pushes to `main`/`dev` and force-pushes are FORBIDDEN.
+
+Remote branch deletion is forbidden by default. It MAY occur only after an
+explicit repository-owner request, exact remote-ref verification, confirmation
+that all required commits are reachable from another named branch or tag, and
+closure or retargeting of the associated PR. The deletion and surviving ref
+MUST be reported. Checkpoint (`wip: checkpoint before agent run` + push) before
+large agent runs. Reviews MUST verify constitution compliance. Definition of
+Done lives in `AGENTS.md` and MUST all hold before merge.
 
 ## Governance
 
 This constitution supersedes all other practices on conflict. Amendments require
 a PR, team review, and a version bump (MAJOR: principle removal/redefinition;
-MINOR: new principle/section; PATCH: wording). Complexity beyond these
-principles MUST be justified in the PR. Runtime guidance: `AGENTS.md`.
+MINOR: new principle/section; PATCH: wording). A request to retire a remote
+branch is effective only when made by the repository owner and when the
+preservation evidence required by Development Workflow has been verified.
+Complexity beyond these principles MUST be justified in the PR. Runtime
+guidance: `AGENTS.md`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-09-21 | **Last Amended**: 2026-09-21
+**Version**: 2.0.0 | **Ratified**: 2026-09-21 | **Last Amended**: 2026-10-29
