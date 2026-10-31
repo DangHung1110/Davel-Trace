@@ -18,7 +18,7 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 - Rule: ngày đi qua khung 17:30–20:30 có bữa tối như bữa trưa; tiền hoặc giờ không đủ thì bỏ bữa tối kèm cảnh báo. Cổng mềm `DINNER` và `TIME_FIT` (điểm xếp đúng thời điểm trong ngày theo loại) có trong `constraint_status`, không làm rớt plan; `must_visit` không bị chấm `TIME_FIT`.
 - Rule: điểm `must_visit` không vừa ở thời lượng thường dùng được xếp ở thời lượng ngắn nhất thường gặp (p25) kèm cảnh báo.
 - Rule: POI có `plan_tier`: `main` vào lịch mặc định; `local` chỉ khi mong muốn cần và nhóm `main` không đủ; `wish_only` chỉ khi có mong muốn đúng điểm đó; `excluded` không tự vào lịch. `must_visit` bỏ qua `plan_tier`.
-- Rule: cùng một yêu cầu cho cùng một lịch trên mọi máy và mọi mức tải (bộ giải 1 luồng, giới hạn theo khối lượng tính toán, không theo đồng hồ). Trừ khi dự báo thời tiết đổi, vì thời tiết là đầu vào của lịch.
+- Rule: trên cùng một máy và cùng bản cài đặt, cùng một yêu cầu cho cùng một lịch ở mọi mức tải (bộ giải 1 luồng, giới hạn theo khối lượng tính toán, không theo đồng hồ). Mới đo trên một máy: máy khác có thể cho lịch khác nếu khác phiên bản bộ giải, hoặc nạp được mô hình PATM mà máy đo không nạp được. Dự báo thời tiết đổi thì lịch cũng có thể đổi.
 - Rule (FR-013, FR-024): `retrieval = { candidates, needs_verification_total, needs_verification: [{poi_id, name, cat, must_visit, reasons, uncertainty}] (tối đa 20, must_visit trước), excluded: {lý do: số POI}, unmatched_activities }`.
 - Rule: pool rỗng sau bộ lọc cứng → plan rỗng `passed: false`, `infeasible_by.rule = "EMPTY_POOL"`; không bao giờ lấy toàn bộ snapshot thay thế.
 - Rule: `constraint_status` có thêm cổng cứng `PROFILE_SAFE` (dị ứng / must_avoid / khả năng đi lại của hồ sơ, kiểm lại trên plan cuối).

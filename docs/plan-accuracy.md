@@ -117,7 +117,7 @@ Thử nghiệm trên 30 lịch, 10 yêu cầu, 4 cấu hình chạy cùng lúc n
 
 Một luồng thì lời giải ban đầu (`_greedy_hint`) rất quan trọng: lời giải sai thứ tự hoặc vượt ngân sách có thể khiến cả lượt không ra lịch. Nay nó giữ chỗ cho điểm khách chọn theo đúng thứ tự, cho hai bữa, cho mong muốn, cả tiền lẫn giờ.
 
-Thời tiết là đầu vào của lịch: dự báo đổi thì lịch có thể đổi.
+Phép đo này chạy trên một máy, cùng bản cài đặt. Máy khác có thể cho lịch khác nếu khác phiên bản bộ giải hoặc nạp được mô hình PATM (xem Giới hạn). Thời tiết là đầu vào của lịch: dự báo đổi thì lịch có thể đổi.
 
 ### 10. Người thật chấm
 
@@ -143,6 +143,8 @@ Nguồn giá vé, các nguồn không khớp nhau nên đây là mức tham kh�
 ## Giới hạn
 
 - Quy tắc chấm và khung giờ do Claude đặt. Con số phản ánh các quy tắc đó, chưa phải cảm nhận của khách.
+- Mọi số đo chạy bằng luật chấm chuyển tiếp dự phòng, không phải mô hình PATM, vì máy đo thiếu libomp nên không nạp được lightgbm (`scorer.describe()` trả `backend: rule`). Máy nạp được mô hình sẽ cho lịch khác và cần đo lại.
+- Khi đo lập lịch, dự báo thời tiết bị tắt, nên ảnh hưởng của thời tiết thật lên lịch chưa được đo.
 - 8 điểm mới chưa có đường đi OSRM: ma trận mượn hàng của điểm gần nhất cộng đoạn ngắn tới đó (`coverage.estimated_ids`). Kiểm tra trên 111 điểm có OSRM cách điểm gần nhất dưới 0,6 km: sai số trung vị 1 phút, p90 2 phút.
 - 8 điểm mới chưa đối chiếu OSM vì không có file `pbf` trên máy (`osm_crosscheck.json` ghi `not_run`).
 - Chỉ 23 điểm có thời lượng từ Google; 137 điểm đã xác minh chưa có giờ theo thứ.
