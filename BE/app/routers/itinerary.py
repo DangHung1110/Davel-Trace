@@ -52,6 +52,8 @@ from BE.app.schemas.trip import TripRequest
 from BE.app.services import matrix as matrix_svc
 from BE.app.services import pool as pool_svc
 from BE.app.services import profile_filter
+from BE.app.services import gate as gate_svc
+from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
 from BE.common import effective_fee
 from BE.app.services import ranker as ranker_svc
@@ -263,11 +265,20 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     def build_one(profile_name: str, pool_size: int = 1,
                   timeout_s: float | None = None, workers: int = 0,
                   **extra) -> dict:
-        plan = dict(builder(profile=profile_name, trip=trip, ranked=ranked,
-                            pois_by_id=allowed_by_id, cells=cells,
-                            template=tpl_name,
-                            ctx=ctx, pool_size=pool_size,
-                            timeout_s=timeout_s, workers=workers, **extra))
+        def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
+            # A solution pool is one day's alternatives: a longer trip plans argmax days.
+            several = day_trip is not trip
+            return dict(builder(
+                profile=profile_name, trip=day_trip,
+                ranked=[r for r in ranked if r.get("poi_id") not in used],
+                pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=ctx,
+                pool_size=1 if several else pool_size,
+                timeout_s=timeout_s, workers=workers,
+                **({"diagnose": diagnose} if several else {}), **extra))
+
+        plan = dict(multiday.build_trip(
+            solve, trip,
+            lambda itinerary, whole: gate_svc.report(itinerary, whole, allowed_by_id, cells)))
         plan["profile"] = profile_name
         return plan
 

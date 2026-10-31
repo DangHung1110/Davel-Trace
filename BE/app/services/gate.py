@@ -73,6 +73,8 @@ from the canonical implementation, so it can never disagree with it.
 
 from __future__ import annotations
 
+import functools
+
 from BE.app.services.soft_rules import (
     CAFE_DEFAULT_CAP,
     CAFE_MAX_CAP,
@@ -109,6 +111,26 @@ def _result(passed: bool, score: float | None = None) -> dict:
 
 def _ordered(itinerary: dict) -> list[dict]:
     return sorted(itinerary.get("activities", []), key=lambda a: a["start"])
+
+
+def split_days(itinerary: dict) -> list[dict]:
+    """One itinerary per `day` (multiday.py); a one-day plan is returned as it is."""
+    days: dict = {}
+    for act in itinerary.get("activities", []):
+        days.setdefault(act.get("day"), []).append(act)
+    if len(days) <= 1:
+        return [itinerary]
+    return [{**itinerary, "activities": days[day]} for day in sorted(days, key=lambda d: d or 0)]
+
+
+def _per_day(check):
+    """A rule of one day: on a longer trip every day must pass it on its own
+    (clock times repeat across days, and each day has its own caps and lunch)."""
+    @functools.wraps(check)
+    def wrapped(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+        results = [check(day, trip, pois, matrix) for day in split_days(itinerary)]
+        return _result(all(r["passed"] for r in results), min(r["score"] for r in results))
+    return wrapped
 
 
 def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
@@ -149,6 +171,7 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(bad == 0, 1.0 - bad / len(acts))
 
 
+@_per_day
 def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff each gap fits matrix travel time; score = compliant ratio."""
     acts = _ordered(itinerary)
@@ -178,6 +201,7 @@ def check_etb(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(last_end <= deadline(trip))
 
 
+@_per_day
 def check_a1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff at most one restaurant sits inside each meal slot.
 
@@ -197,6 +221,7 @@ def check_a1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(over == 0, 1.0 - over / total if total else 1.0)
 
 
+@_per_day
 def check_cafe_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """HARD cafe quota: 1/day; 2 only split across dayparts with a cafe need.
 
@@ -219,6 +244,7 @@ def check_cafe_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dic
     return _result(False, min(1.0, CAFE_DEFAULT_CAP / count))
 
 
+@_per_day
 def check_category_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """HARD daily category cap: at most ONE non-food POI per category.
 
@@ -246,6 +272,7 @@ def check_category_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) ->
     return _result(over == 0, 1.0 - over / total)
 
 
+@_per_day
 def check_no_consecutive(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """CANONICAL adjacency rule: no two back-to-back POIs of the same category.
 
@@ -262,6 +289,7 @@ def check_no_consecutive(itinerary: dict, trip: dict, pois: dict, matrix: dict) 
     return _result(bad == 0, 1.0 - bad / (len(acts) - 1))
 
 
+@_per_day
 def check_no_adjacent_food(itinerary: dict, trip: dict, pois: dict,
                            matrix: dict) -> dict:
     """DEPRECATED (kept for named reporting): adjacent restaurants.
@@ -330,6 +358,7 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     return ("", offenders)
 
 
+@_per_day
 def check_rest_follows_lunch(itinerary: dict, trip: dict, pois: dict,
                              matrix: dict) -> dict:
     """HARD: the siesta exists and starts at the lunch restaurant's end.
@@ -353,6 +382,7 @@ def check_rest_follows_lunch(itinerary: dict, trip: dict, pois: dict,
     return _result(False, 1.0 - len(offenders) / others if others else 1.0)
 
 
+@_per_day
 def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """SOFT category quota: >=1 food AND >=1 sightseeing per day.
 
@@ -370,6 +400,7 @@ def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(met == 2, met / 2.0)
 
 
+@_per_day
 def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Time mirror: VROH/B3/ETB + no overlap + inside [start, deadline]."""
     if not all(check(itinerary, trip, pois, matrix)["passed"]
@@ -397,7 +428,10 @@ def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
                              check_no_adjacent_food, check_rest_follows_lunch)):
         return _result(False)
     ids = [a.get("poi_id") for a in itinerary.get("activities", [])]
-    if any(m in ids for m in trip.get("avoid", [])):
+    if any(m in ids for m in trip.get("avoid", [])) or len(ids) != len(set(ids)):
+        return _result(False)
+    # FR-020: a trip of N days is N days of stops, not one day and a promise.
+    if len(split_days(itinerary)) < int(trip.get("days") or 1):
         return _result(False)
     must = trip.get("must_visit", [])
     if must and not all(m in ids for m in must):
