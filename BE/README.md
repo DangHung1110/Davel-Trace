@@ -28,7 +28,7 @@ trình duyệt từ các origin đó và tắt các router chỉ dùng cho test 
 (local) API nhận mọi cổng của `localhost` và `127.0.0.1`.
 
 Trên máy deploy, đo độ trễ bằng `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1` (mục tiêu p95
-dưới 8 giây).
+dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày).
 
 ```powershell
 python -m uvicorn BE.app.main:app --port 8000

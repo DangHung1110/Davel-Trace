@@ -758,7 +758,7 @@ hoặc Chợ đêm Helio. Khi request không có hồ sơ, lịch trước đó 
 - 39 POI `attraction` còn lại (sau mục 14) vẫn 200–240 phút. Phần lớn đúng là hoạt động dài (lớp nấu ăn, công viên giải
   trí, thuyền thúng, khu sinh thái), nên chưa cần đổi quy tắc.
 - Lịch trải nghiệm đôi khi vẫn chọn điểm rất ít đánh giá, ví dụ Nhà bia Chứng tích Núi Ghềnh (4 đánh giá).
-- Yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày: phần lập lịch không đọc `days` (FR-020).
+- Yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày: phần lập lịch không đọc `days` (FR-020). Đã sửa sau đó, xem `docs/phase-5.md` mục 7.
 - Lịch có hồ sơ có bữa trưa 11:00–13:00 nhưng thường không có bữa tối. Lịch không có hồ sơ không bắt buộc bữa trưa.
 - Số đo gold chưa build lại nên chưa có con số so sánh chất lượng trước và sau (Phase 5).
 

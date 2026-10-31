@@ -62,12 +62,13 @@ Kết quả trên 541 POI, 30 truy vấn, 27 truy vấn khả thi (`BE/eval/gold
 | SC-007 | 0 chồng giờ, 0 thiếu đường đi | 0 | 0 | Đạt |
 | SC-008 | 0 vi phạm ngân sách (nay đã có giá thật) | 0 | 0 | Đạt |
 | SC-009 | Hybrid gấp 1,10 lần theo rating | 4,498 | 4,576 (gấp 1,017) | **Chưa đạt** |
-| SC-010 | Khôi phục được ít nhất 80%, giữ 100% điểm đã đi | | 23/27 = 85%, giữ 100% | Đạt |
+| SC-010 | Khôi phục được ít nhất 80%, giữ 100% điểm đã đi | | 27/27, giữ 100% (mục 7) | Đạt |
 
 - **SC-009:** rating đã điều chỉnh gần như nằm trong khoảng 4,0–4,9, và lịch chỉ theo khoảng cách cũng được 4,5, nên gấp 1,10 lần thì gần như
   không thể đạt. Cần đổi thước đo, ví dụ thêm độ nổi tiếng hoặc mức khớp sở thích, thay vì chỉnh để qua.
-- **SC-010:** gold mới làm lộ một lỗi thật: sau khi đã đi xong một điểm bắt buộc, mọi lần replan đều trượt cổng, vì điểm đó không còn trong
-  phần lịch còn lại. Đã sửa, từ 20/27 lên 23/27. Còn 4 lần chưa khôi phục được, chưa điều tra.
+- **SC-010:** số 23/27 đo lần đầu là đo trên truy vấn không có hồ sơ, trong khi lịch có hồ sơ thì replan luôn thất bại (mục 7). Sửa lỗi đó rồi đo đúng
+  với hồ sơ được 18/27. 9 lần còn lại do mưa bỏ nhà hàng trưa ngoài trời (6), mưa bỏ điểm bắt buộc (2), và nhà hàng có hai ca (1). Sửa nốt thì được
+  27/27. Phép đo này chỉ thử một sự cố: trời mưa sau điểm đầu tiên.
 - **Mong muốn của người dùng:** hybrid đáp ứng 18/28 hoạt động được yêu cầu. Phần còn lại bị nới với cảnh báo, nhiều truy vấn chỉ có khung giờ nửa ngày.
 - **LLM-only:** bỏ qua vì máy không có LLM chạy local. Không có số nào bị suy đoán.
 - **Model chuyển tiếp:** các số trên dùng quy tắc dự phòng vì máy này thiếu libomp cho lightgbm. Máy có libomp có thể cho số khác một chút.
@@ -91,7 +92,42 @@ trung vị 5,62 giây, p95 5,77 giây, tối đa 6,27 giây, không lịch nào 
 ## 6. Còn lại
 
 - Đo độ trễ trên máy deploy.
-- SC-009: đổi thước đo. SC-010: xem 4/27 lần còn chưa khôi phục được.
-- Yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày, vì phần lập lịch không đọc `days` (FR-020).
+- SC-009: đổi thước đo.
+- Repair (`/v1/repair`, chỉ dùng ở trang test local) chưa hỗ trợ lịch nhiều ngày: trả nguyên lịch kèm `note`.
 - Cầu Rồng chưa vào lịch mặc định. Lịch có hồ sơ thường không có bữa tối.
 - Rút mẫu blind mới từ 541 POI để người kiểm độc lập (`docs/verify-samples.md` mục 12).
+
+## 7. Lịch 2 ngày (FR-020)
+
+Trước đây yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày, vì phần lập lịch không đọc `days`. `BE/app/services/multiday.py` giải từng ngày một rồi gộp thành
+một lịch. Lịch 1 ngày đi thẳng vào bộ giải, dạng trả về không đổi.
+
+| Nội dung | Cách làm |
+|---|---|
+| Không lặp điểm | Ngày sau loại các điểm ngày trước đã dùng |
+| Ngân sách | Mỗi ngày được tiêu phần chia đều của số tiền còn lại. Không đủ thì thử lại với toàn bộ số còn lại |
+| Điểm bắt buộc | Chia đều cho các ngày, vì mỗi ngày chỉ có một điểm mỗi loại. Nếu không được thì xếp hết vào ngày đầu |
+| Mong muốn hoạt động | Ngày sau chỉ phải đáp ứng những gì ngày trước chưa đáp ứng |
+| Cổng kiểm | Luật trong ngày chạy riêng từng ngày; ngân sách và điểm bắt buộc tính cả chuyến; thiếu ngày hoặc lặp điểm thì trượt `HCS` |
+| Xếp lại khi có sự cố | Chỉ xếp lại một ngày (`day`, mặc định ngày đầu còn điểm chưa đi); các ngày khác giữ nguyên |
+
+Phần trả về: mỗi phần tử `activities` và `segments` có `day`, và có thêm `days` tóm tắt từng ngày (`specs/001-travel-agent-mvp/contracts/api.md`).
+
+**Kết quả** trên 9 truy vấn cả ngày đầu tiên của bộ gold, hỏi lại với 2 ngày: 9/9 qua cổng kiểm, 9/9 đủ hai ngày, không lặp điểm, không vượt ngân sách, trung bình
+5,83 điểm mỗi ngày, đáp ứng 7/9 mong muốn. Độ trễ 14 request, mỗi request 3 lịch, máy 12 nhân: trung vị 10,9 giây, p95 11,3 giây (mục tiêu của spec
+là 30 giây).
+
+Khi không đủ tiền cho cả hai ngày, lịch trả về `passed: false` và cảnh báo "chi xep duoc 1/2 ngay", không âm thầm bỏ ngày.
+
+**Lỗi cũ phát hiện khi làm phần này**, đều đã sửa và có test:
+
+- **Replan luôn thất bại với lịch có hồ sơ người dùng, kể cả lịch 1 ngày.** Cổng kiểm không thấy loại hình nên không thấy bữa trưa, và bộ giải không biết luật
+  bữa trưa, nghỉ trưa. Giờ replan kiểm cả ngày, tính cả các điểm đã đi. Trễ quá 13:00 mà chưa ăn trưa thì không còn làm hỏng cả ngày.
+- Trời mưa làm bỏ luôn nhà hàng trưa ngoài trời: giờ tìm nhà hàng trong nhà thay thế, không có thì giữ nhà hàng cũ.
+- Trời mưa hoặc mệt không còn tự bỏ điểm bắt buộc. Người dùng chủ động bỏ hoặc địa điểm đóng cửa thì vẫn bỏ được.
+- Nhà hàng có hai ca mở cửa: replan trước đây chỉ đọc ca đầu.
+- Điểm đã đi được tính vào ngân sách khi replan.
+- Danh sách 80 ứng viên giữ cả các điểm vượt phần tiền của ngày, làm mất chỗ của quán rẻ, nên lịch ngân sách thấp không xếp được bữa trưa.
+
+**Giới hạn:** dự báo thời tiết chưa theo ngày, nên ngày 2 dùng cùng dự báo với ngày 1. Giờ mở cửa cũng chưa theo thứ trong tuần. Repair chưa hỗ trợ
+nhiều ngày.
