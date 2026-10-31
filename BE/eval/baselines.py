@@ -64,6 +64,7 @@ EVAL_WORKERS = 1
 # at 8 (about 8 s a query). Below that the run scores the budget, not the planner.
 EVAL_DETERMINISTIC_TIME = 8.0
 EVAL_WALL_SAFETY_S = 60.0
+TWO_DAY_QUERIES = 9
 ZERO_FEE_NOTE = ("all candidate fees are 0 in this snapshot -> BCS is "
                  "vacuous: SC-008 is reported but cannot be exercised here "
                  "(T051 note: T053 must extend fee coverage)")
@@ -97,21 +98,28 @@ def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
     so the same query could return a different incumbent on a busier run (the
     published SC table must not drift). The wall clock stays as a safety cap.
     """
-    from BE.app.services import profiles, rank, retrieval
+    from BE.app.services import gate, multiday, profiles, rank, retrieval
 
     trip = hybrid_trip(record)
     found = retrieval.retrieve(trip, pois_list)
     cids = [c["poi_id"] for c in found["candidates"]]
     ranked = rank.rank([by_id[i] for i in cids], {"budget": trip["budget"]},
                        {"trip": trip, "hour": trip.get("start_time", "07:00")})
-    plan = profiles.build_plan(profile, trip, ranked, by_id, cells,
-                               workers=workers,
-                               timeout_s=EVAL_WALL_SAFETY_S if
-                               deterministic_time is not None else None,
-                               deterministic_time=deterministic_time)
+
+    def solve(day_trip: dict, used: frozenset, _diagnose: bool) -> dict:
+        return profiles.build_plan(profile, day_trip,
+                                   [r for r in ranked if r["poi_id"] not in used],
+                                   by_id, cells, workers=workers,
+                                   timeout_s=EVAL_WALL_SAFETY_S if
+                                   deterministic_time is not None else None,
+                                   deterministic_time=deterministic_time)
+
+    plan = multiday.build_trip(
+        solve, trip, lambda itinerary, whole: gate.report(itinerary, whole, by_id, cells))
     return {"activities": plan.get("activities", []),
             "total_cost": plan.get("total_cost"),
-            "activity_match": plan.get("activity_match") or []}
+            "activity_match": plan.get("activity_match") or [],
+            "_context": plan.get("_context") or {}}
 
 
 def llm_order_prompt(record: dict, cand_ids: list[str], by_id: dict) -> str:
@@ -179,19 +187,20 @@ def default_complete(prompt: str) -> dict:
 # --- SC-010 recovery probe -------------------------------------------------
 
 def recovery_probe(record: dict, activities: list[dict], pois: dict,
-                   matrix: dict) -> dict:
+                   matrix: dict, context: dict | None = None) -> dict:
     """Rain incident after the first activity: does a plan survive intact?
 
     SC-010: recovery succeeds (a NEW versioned feasible plan) AND every
     completed activity is preserved. Probes only plans with >=2 activities
-    (a 1-activity plan has nothing left to replan).
+    (a 1-activity plan has nothing left to replan). `context` is what the app
+    stores with a plan (candidates + legs), so the probe replans like POST /replan.
     """
     if len(activities) < 2:
         return {"ok": None, "reason": "fewer than 2 activities"}
     from BE.app.services import replan as replan_svc
     from BE.app.services import state as store
 
-    trip = record["trip"]
+    trip = hybrid_trip(record)
     state = store.new_state("t053-probe", activities,
                             start_time=trip.get("start_time", "07:00"))
     done = activities[:1]
@@ -203,8 +212,10 @@ def recovery_probe(record: dict, activities: list[dict], pois: dict,
             cell = matrix.get(f"{a['poi_id']}->{b['poi_id']}")
             if a["poi_id"] != b["poi_id"] and cell is not None:
                 travel[(a["poi_id"], b["poi_id"])] = int(cell["minutes"])
+    context = context or {}
     res = replan_svc.replan(state, {"type": "rain", "text": "troi mua"},
-                            list(pois.values()), travel, trip)
+                            context.get("pois") or list(pois.values()),
+                            context.get("travel") or travel, trip)
     done_ids = [a["poi_id"] for a in done]
     preserved = all(pid in res.get("preserved_completed", []) for pid in done_ids)
     ok = (res.get("mode") == "plan" and res.get("itinerary") is not None
@@ -327,7 +338,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
     ok = probed = 0
     preserved_all = True
     for rec, h in zip(feasible, hyb_plans):
-        probe = recovery_probe(rec, h["activities"], by_id, matrix)
+        probe = recovery_probe(rec, h["activities"], by_id, matrix, h.get("_context"))
         if probe["ok"] is None:
             continue
         probed += 1
@@ -385,6 +396,40 @@ def _attach_backends(report: dict) -> None:
         pass
 
 
+def run_two_day(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
+                profile: str = HYBRID_PROFILE, limit: int = TWO_DAY_QUERIES) -> dict:
+    """FR-020: the first full-day queries of the suite, asked for 2 days.
+
+    Reads the plan through the same evaluator as the 1-day systems, plus what
+    only a longer trip can get wrong: a day left empty and a POI used twice.
+    """
+    suite = load_json(suite_path)
+    pois_list = load_pois(snapshot_dir)
+    by_id = {p["poi_id"]: p for p in pois_list}
+    matrix = load_matrix_cells(snapshot_dir)
+    full_days = [r for r in suite if r.get("itinerary")
+                 and r["trip"]["start_time"] == "07:00" and r["trip"]["end_time"] == "18:00"]
+    passed, both_days, repeats, over_budget, stops = 0, 0, 0, 0, []
+    wishes: list[str] = []
+    for rec in full_days[:limit]:
+        record = {**rec, "trip": {**rec["trip"], "days": 2}}
+        plan = hybrid_itinerary(record, pois_list, by_id, matrix, profile)
+        acts = plan["activities"]
+        report = evaluate(plan, hybrid_trip(record), by_id, matrix)
+        passed += report["gate"]["passed"]
+        days = {a.get("day") for a in acts}
+        both_days += days == {1, 2}
+        repeats += len(acts) - len({a["poi_id"] for a in acts})
+        over_budget += int(plan.get("total_cost") or 0) > record["trip"]["budget"]
+        stops += [sum(a.get("day") == day for a in acts) for day in (1, 2)]
+        wishes += [m["status"] for m in plan["activity_match"]]
+    n = min(limit, len(full_days))
+    return {"n": n, "gate_pass": passed, "both_days": both_days, "repeated_pois": repeats,
+            "over_budget": over_budget,
+            "mean_stops_per_day": round(sum(stops) / len(stops), 2) if stops else 0.0,
+            "wishes": {"met": wishes.count("met"), "total": len(wishes)}}
+
+
 def _print_report(report: dict) -> None:
     cov = report["coverage"]
     print(f"coverage: {cov['eligible']}/{cov['total_pois']} eligible "
@@ -416,7 +461,9 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     report = run(args.suite, args.snapshot, profile=args.profile,
                  limit=args.limit)
+    report["two_day"] = run_two_day(args.suite, args.snapshot, args.profile)
     _print_report(report)
+    print(f"two days: {report['two_day']}")
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=1)

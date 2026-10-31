@@ -76,7 +76,7 @@ def _activities(plan: dict) -> list[dict]:
     acts = plan.get("activities")
     if acts is None:
         acts = (plan.get("itinerary") or {}).get("activities") or []
-    return sorted(acts, key=lambda a: a.get("start", ""))
+    return sorted(acts, key=lambda a: (a.get("day") or 1, a.get("start", "")))
 
 
 def _food_prefs(plan: dict) -> list[str]:
@@ -118,7 +118,8 @@ def plan_lines(plan: dict, pois: dict) -> list[str]:
         poi = pois.get(act.get("poi_id"), {})
         name = poi.get("name") or act.get("poi_id")
         kind = poi.get("cat") or poi.get("type") or "?"
-        lines.append(f"- {act.get('start')}-{act.get('end')}: {name} ({kind})")
+        day = f"Ngày {act['day']}, " if act.get("day") else ""
+        lines.append(f"- {day}{act.get('start')}-{act.get('end')}: {name} ({kind})")
     return lines
 
 

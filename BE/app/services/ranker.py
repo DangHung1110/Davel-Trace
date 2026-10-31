@@ -136,6 +136,8 @@ def _render_plan(plan: dict, ref: dict | None = None) -> str:
     for n, act in enumerate(plan.get("activities") or [], start=1):
         fact = facts.get(act.get("poi_id"), {})
         bits = [f"POI-{n}", f"{act.get('start', '?')}-{act.get('end', '?')}"]
+        if act.get("day"):
+            bits.insert(1, f"ngay {act['day']}")
         for key in ("type", "price_level", "fee", "rating"):
             if fact.get(key) is not None:
                 bits.append(f"{key}={fact[key]}")

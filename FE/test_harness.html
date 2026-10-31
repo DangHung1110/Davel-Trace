@@ -182,7 +182,7 @@ async function doRepair(plan, box){
     body.appendChild(gateLine);
 
     const acts = ((json.plan && json.plan.activities) || [])
-      .map(a => a.start + "-" + a.end + " " + a.poi_id).join("\n");
+      .map(a => (a.day ? "ngay " + a.day + " " : "") + a.start + "-" + a.end + " " + a.poi_id).join("\n");
     const pre = document.createElement("pre");
     pre.textContent = "plan sau repair:\n" + (acts || "(rong)");
     body.appendChild(pre);
@@ -261,7 +261,7 @@ async function renderPlans(plans, trip){
     const gate = ev.gate || {};
     const tr = document.createElement("tr");
     tr.appendChild(cell(plan.profile || "?"));
-    tr.appendChild(cell(String((plan.activities || []).length)));
+    tr.appendChild(cell((plan.activities || []).length + (plan.days ? " / " + plan.days.length + " ngày" : "")));
     tr.appendChild(cell(String(plan.total_km != null ? plan.total_km : "?")));
     tr.appendChild(cell(Number(plan.total_cost || 0).toLocaleString("vi-VN")));
     tr.appendChild(cell(gate.passed === true ? "✔ đạt" : "✘ hỏng",
@@ -330,7 +330,7 @@ async function doItin(profiles){
     let out = "HTTP " + status + ", " + json.plans.length + " plans\n";
     out += "profile đính kèm: " + (trip.profile ? JSON.stringify(trip.profile) : "(không có)") + "\n";
     for(const p of json.plans){
-      const acts = (p.activities || []).map(a => a.poi_id + " " + a.start + "-" + a.end).join("\n    ");
+      const acts = (p.activities || []).map(a => (a.day ? "ngay " + a.day + " " : "") + a.poi_id + " " + a.start + "-" + a.end).join("\n    ");
       out += "\n== " + p.profile + " == cost=" + p.total_cost + " km=" + p.total_km
         + " min=" + p.total_min + " pref=" + p.preference + "\n";
       if(p.warnings) out += "  WARNINGS: " + p.warnings.join(" | ") + "\n";

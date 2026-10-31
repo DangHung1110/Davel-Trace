@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T11:33:53",
+ "generated_at": "2026-10-31T12:31:56",
  "suite": "BE/eval/gold/t051_scoped_suite.json",
  "snapshot": "BE/data/snapshots/danang-v1",
  "coverage": {
@@ -638,7 +638,7 @@
  },
  "recovery": {
   "probed": 27,
-  "ok": 23,
+  "ok": 27,
   "preserved_all": true
  },
  "notes": {},
@@ -680,10 +680,22 @@
   "SC-010": {
    "target": "recovery succeeds >=80% and keeps 100% completed",
    "probed": 27,
-   "recovered": 23,
-   "recovery_rate": 0.8519,
+   "recovered": 27,
+   "recovery_rate": 1.0,
    "preserved_all": true,
    "pass": true
+  }
+ },
+ "two_day": {
+  "n": 9,
+  "gate_pass": 9,
+  "both_days": 9,
+  "repeated_pois": 0,
+  "over_budget": 0,
+  "mean_stops_per_day": 5.83,
+  "wishes": {
+   "met": 7,
+   "total": 9
   }
  }
 }

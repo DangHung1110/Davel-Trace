@@ -20,12 +20,21 @@ from __future__ import annotations
 from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.budget import tighten_budget
-from BE.app.services.common import party_size, to_min
+from BE.app.services.common import hh, party_size, to_min, total_fee
+from BE.app.services.gate import check_profile_safe
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
-from BE.app.services.soft_rules import CATEGORY_DAILY_CAP, cafe_cap
+from BE.app.services.profiles import _gate_view
+from BE.app.services.soft_rules import (
+    CATEGORY_DAILY_CAP, cafe_cap, lunch_activity, poi_category, rest_span)
+from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
-from BE.common import effective_fee, poi_open_windows
+from BE.common import effective_fee, poi_open_windows, trusted_rating
+
+
+# Lunch has to start by then (gate REST_FOLLOWS_LUNCH).
+LUNCH_LATEST_MIN = 13 * 60
+LUNCH_SUBSTITUTES = 5
 
 
 def _deadline(trip: dict) -> int:
@@ -81,10 +90,59 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "changes": [], "version": state["version"]}
 
     drops = _event_drops(event, remaining, by_id) - set(completed_ids)
+    # Rain or tiredness never cancels what the traveler insisted on; only an
+    # explicit drop or a closure can.
+    held_must = set()
+    if event.get("type") in ("rain", "tired"):
+        held_must = drops & set(trip.get("must_visit", []))
+        drops -= held_must
     added = list(event.get("delta", {}).get("add", []))
     cand_ids = [a["poi_id"] for a in remaining if a["poi_id"] not in drops]
     cand_ids += [a["poi_id"] if isinstance(a, dict) else a for a in added
                  if (a["poi_id"] if isinstance(a, dict) else a) not in cand_ids]
+
+    # The gate judges the whole day, what is done included: lunch and the caps may
+    # already be behind us. What is done is paid, so only the rest is budgeted.
+    done = list(state.get("completed", []))
+    party = party_size(trip)
+    done_cost = total_fee(done, by_id, party)
+    allowed = None if trip.get("budget") is None else max(0, int(trip["budget"]) - done_cost)
+    if budget_state is not None:
+        allowed = tighten_budget(budget_state, trip)["allowed_remaining"]
+    max_fee = None if allowed is None else allowed // party
+    gate_trip = trip if allowed is None else dict(trip, budget=allowed + done_cost)
+    start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
+                to_min(trip.get("start_time", "07:00")))
+    # Lunch: still to come (the solver places it and keeps the rest after it), done
+    # (keep the rest clear), or missed: a delay past the window must not make the
+    # day unplannable, so the day rules that need a lunch are dropped.
+    limits = universal_constraints(trip)
+    lunch_done = lunch_activity(sorted(done, key=lambda a: a["start"]), by_id) is not None
+    lunch_missed = bool(limits["lunch_required"]) and not lunch_done and start >= LUNCH_LATEST_MIN
+    plan_lunch = bool(limits["lunch_required"]) and not lunch_done and not lunch_missed
+    blocked = None
+    if lunch_done and limits["rest_after_lunch"]:
+        span = rest_span(done, by_id, trip["profile"], _deadline(trip))
+        blocked = (span["start"], span["end"]) if span else None
+    if lunch_missed:
+        gate_trip = {k: v for k, v in gate_trip.items() if k != "profile"}
+
+    # The event took the only restaurant (an open-air lunch in the rain): a day
+    # still needs a lunch, so offer the best dry ones, else keep the dropped one.
+    substitutes: list[str] = []
+    if plan_lunch and not any(poi_category(by_id.get(pid)) == "restaurant" for pid in cand_ids):
+        taken = {*cand_ids, *completed_ids, *drops}
+        dry = sorted((p for p in pois
+                      if p["poi_id"] not in taken and p.get("verified")
+                      and poi_category(p) == "restaurant" and not p.get("weather_sensitive")
+                      and (max_fee is None or (effective_fee(p) or 0) <= max_fee)),
+                     key=lambda p: -trusted_rating(p))
+        substitutes = [p["poi_id"] for p in dry[:LUNCH_SUBSTITUTES]]
+        if not substitutes:
+            held = {pid for pid in drops if poi_category(by_id.get(pid)) == "restaurant"}
+            drops -= held
+            cand_ids += sorted(held)
+        cand_ids += substitutes
 
     # depot legs from the last completed POI (rolling horizon continuity)
     travel2 = dict(travel)
@@ -97,18 +155,9 @@ def replan(state: dict, event: dict, pois: list[dict],
             else:
                 travel2[("depot", x)] = leg
 
-    stub = [StubPOI(pid, poi_visit_min(by_id[pid]),
-                    *_win(by_id[pid], trip, state), 1.0,
-                    fee=effective_fee(by_id[pid]) or 0)
+    stub = [_stub(by_id[pid], trip, state,
+                  trusted_rating(by_id[pid]) / 5 if pid in substitutes else 1.0)
             for pid in cand_ids if pid in by_id]
-    effective_trip = trip
-    if budget_state is not None:
-        tight = tighten_budget(budget_state, trip)
-        effective_trip = dict(trip, budget=tight["allowed_remaining"])
-    max_fee = (None if effective_trip.get("budget") is None
-               else int(effective_trip["budget"]) // party_size(trip))
-    start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
-                to_min(trip.get("start_time", "07:00")))
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
     origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
@@ -121,6 +170,11 @@ def replan(state: dict, event: dict, pois: list[dict],
                    category_cap=CATEGORY_DAILY_CAP,
                    cafe_cap=None if not trip.get("profile")
                    else cafe_cap(trip.get("profile")),
+                   no_consecutive=True, no_adjacent_food=True,
+                   must_visit=[m for m in trip.get("must_visit", []) if m in cand_ids],
+                   lunch_required=plan_lunch,
+                   rest_after_lunch=limits["rest_minutes"] if plan_lunch else None,
+                   blocked_window=blocked,
                    max_fee=max_fee)
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
@@ -136,26 +190,33 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "preserved_completed": completed_ids,
                 "changes": [], "version": state["version"]}
     matrix = {f"{a}->{b}": {"minutes": w} for (a, b), w in travel.items()}
-    # A must_visit already done is not in the remaining plan; HCS would otherwise
-    # fail every replan after it.
-    open_must = [m for m in effective_trip.get("must_visit", []) if m not in completed_ids]
-    rep = validate({"activities": acts}, {**effective_trip, "must_visit": open_must},
-                   {p["poi_id"]: {"verified": p.get("verified", False),
-                                  "fee": effective_fee(p) or 0,
-                                  "opening_hours": p.get("opening_hours", [])}
-                    for p in pois}, matrix)
-    if acts and not rep["passed"]:
+    pois_gate = {p["poi_id"]: _gate_view(p) for p in pois}
+    # What is done is a fact: only the day rules read it, not its hours or its legs.
+    done_ids = [a["poi_id"] for a in done]
+    for pid in done_ids:
+        if pid in pois_gate:
+            pois_gate[pid] = {**pois_gate[pid], "opening_hours": ["00:00-23:59"]}
+    matrix.update({f"{a}->{b}": {"minutes": 0} for a in done_ids for b in done_ids if a != b})
+    whole_day = {"activities": [*done, *acts]}
+    rep = validate(whole_day, gate_trip, pois_gate, matrix)
+    violations = list(rep["violations"])
+    if lunch_missed and not check_profile_safe(whole_day, trip, pois_gate, matrix)["passed"]:
+        violations.append("PROFILE_SAFE")
+    if acts and violations:
         return {"itinerary": None, "mode": "no_solution",
-                "reason": f"rot cong {rep['violations']}",
+                "reason": f"rot cong {violations}",
                 "preserved_completed": completed_ids,
                 "changes": [], "version": state["version"]}
 
     changes = [{"action": "keep", "poi_id": pid} for pid in completed_ids]
+    changes += [{"action": "keep", "poi_id": pid, "reason": "diem bat buoc"}
+                for pid in sorted(held_must)]
     changes += [{"action": "drop", "poi_id": pid,
                  "reason": event.get("type", "event")} for pid in sorted(drops)]
     new_ids = [a["poi_id"] for a in acts]
-    changes += [{"action": "add", "poi_id": pid} for pid in new_ids
-                if pid not in [a["poi_id"] for a in remaining]]
+    changes += [{"action": "add", "poi_id": pid,
+                 "reason": "thay nha hang bi bo" if pid in substitutes else "theo yeu cau"}
+                for pid in new_ids if pid not in [a["poi_id"] for a in remaining]]
     new_state = store.apply_delta(dict(state), {"drop": sorted(drops),
                                                 "add": [{"poi_id": a["poi_id"],
                                                          "start": a["start"],
@@ -166,9 +227,18 @@ def replan(state: dict, event: dict, pois: list[dict],
             "preserved_completed": completed_ids}
 
 
+def _stub(p: dict, trip: dict, state: dict, score: float) -> StubPOI:
+    wins = poi_open_windows(p) or []
+    category = poi_category(p)
+    return StubPOI(p["poi_id"], poi_visit_min(p), *_win(p, trip, state), score,
+                   restaurant=category == "restaurant", category=category,
+                   fee=effective_fee(p) or 0,
+                   windows=tuple(wins) if len(wins) > 1 else ())
+
+
 def _win(p: dict, trip: dict, state: dict) -> tuple[int, int]:
     wins = poi_open_windows(p)  # real hours, else the category's safe hours
     if wins is not None:
-        return wins[0] if wins else (0, 0)
+        return (wins[0][0], wins[-1][1]) if wins else (0, 0)
     return (to_min(state.get("now", trip.get("start_time", "07:00"))),
             _deadline(trip))  # fallback window also clamps to the deadline

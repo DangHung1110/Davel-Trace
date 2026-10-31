@@ -108,6 +108,75 @@ class TestRealSnapshotPlanning(unittest.TestCase):
         self.assertEqual(plan["activities"], [])
         self.assertTrue(plan.get("warnings"))
 
+    def test_two_days_are_two_days(self):
+        # FR-020: the planner never read `days`, so this returned one day.
+        out, plan = self.plan(profile=COUPLE, days=2, budget=4000000, travelers=2,
+                              date="2026-11-14", activities=["tắm biển", "bảo tàng"])
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        by_day = {1: [], 2: []}
+        for act in plan["activities"]:
+            by_day[act["day"]].append(act["poi_id"])
+        self.assertGreaterEqual(len(by_day[1]), 4)
+        self.assertGreaterEqual(len(by_day[2]), 4)
+        self.assertFalse(set(by_day[1]) & set(by_day[2]))
+        self.assertEqual([d["date"] for d in plan["days"]], ["2026-11-14", "2026-11-15"])
+        self.assertEqual(plan["total_cost"], sum(d["total_cost"] for d in plan["days"]))
+        self.assertLessEqual(plan["total_cost"], 4000000)
+        self.assertEqual({m["status"] for m in plan["activity_match"]}, {"met"})
+        self.assert_honest(plan)
+        # Each day holds its own lunch.
+        for day in by_day:
+            cats = [poi_category(self.pois[pid]) for pid in by_day[day]]
+            self.assertIn("restaurant", cats)
+
+    def test_two_days_on_a_low_budget(self):
+        # The candidate cap used to keep dear places the day's share cannot pay for.
+        for profile in ("savings", "balanced", "experience"):
+            with self.subTest(profile=profile):
+                body = {"trip": {"start_time": "08:00", "end_time": "20:00", "days": 2,
+                                 "budget": 600000, "profile": COUPLE, "activities": ["chùa"]},
+                        "profiles": [profile]}
+                with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",
+                                       side_effect=RuntimeError("offline test")):
+                    plan = client.post("/v1/itinerary", json=body).json()["plans"][0]
+                self.assertTrue(plan["passed"], plan.get("warnings"))
+                self.assertLessEqual(plan["total_cost"], 600000)
+
+    def test_two_days_too_little_money_says_so(self):
+        _, plan = self.plan(profile=COUPLE, days=2, budget=100000, travelers=2)
+        self.assertFalse(plan["passed"])
+        self.assertIn("HCS", plan["violations"])
+        self.assertTrue(any("1/2 ngay" in w for w in plan["warnings"]))
+
+    def test_two_day_plan_can_be_selected_and_replanned(self):
+        _, plan = self.plan(profile=COUPLE, days=2, budget=4000000, travelers=2)
+        pid = plan["itinerary_id"]
+        self.assertEqual(client.post("/v1/itinerary/select",
+                                     json={"itinerary_id": pid}).status_code, 200)
+        day_one = [a["poi_id"] for a in plan["activities"] if a["day"] == 1]
+        day_two = [a["poi_id"] for a in plan["activities"] if a["day"] == 2]
+        out = client.post("/v1/replan", json={"itinerary_id": pid, "event": {"type": "rain"},
+                                              "completed": day_one[:1]}).json()
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        self.assertEqual(out["day"], 1)
+        self.assertEqual(out["preserved_completed"], day_one[:1])
+        kept = [a["poi_id"] for a in out["itinerary"]["activities"] if a["day"] == 2]
+        self.assertEqual(kept, day_two)  # the other day comes back unchanged
+        # Day 1 done: the replan moves on to day 2 by itself.
+        out = client.post("/v1/replan", json={"itinerary_id": pid, "event": {"type": "delay"},
+                                              "completed": day_one}).json()
+        self.assertEqual(out["day"], 2)
+        missing = client.post("/v1/replan", json={"itinerary_id": pid, "event": {}, "day": 9})
+        self.assertEqual(missing.status_code, 404)
+
+    def test_replan_works_for_a_plan_with_a_profile(self):
+        # Every onboarded plan failed here: the replan gate could not see the lunch.
+        _, plan = self.plan(profile=COUPLE)
+        first = plan["activities"][0]["poi_id"]
+        out = client.post("/v1/replan", json={"itinerary_id": plan["itinerary_id"],
+                                              "event": {"type": "rain"}, "completed": [first]}).json()
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))

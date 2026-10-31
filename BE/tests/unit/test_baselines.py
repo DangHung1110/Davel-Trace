@@ -189,6 +189,15 @@ class TestBaselines(unittest.TestCase):
         # Planning quality on the full pool is part of the contract now.
         self.assertGreaterEqual(report["systems"]["hybrid"]["pass_rate"], 0.9)
         self.assertEqual(report["systems"]["hybrid"]["violations"]["BCS"], 0)
+        # FR-020: every 2-day query got two days, no POI twice, inside the budget.
+        two_day = report["two_day"]
+        self.assertGreater(two_day["n"], 0)
+        self.assertEqual(two_day["gate_pass"], two_day["n"])
+        self.assertEqual(two_day["both_days"], two_day["n"])
+        self.assertEqual(two_day["repeated_pois"], 0)
+        self.assertEqual(two_day["over_budget"], 0)
+        # Replans read the plan's profile and context, like POST /v1/replan.
+        self.assertTrue(report["sc"]["SC-010"]["pass"])
 
 
 if __name__ == "__main__":

@@ -525,7 +525,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                timeout_s: float | None = None,
                deterministic_time: float | None = None,
                distinct_from: list[frozenset[str]] | None = None,
-               max_rung: int | None = None) -> dict:
+               max_rung: int | None = None,
+               diagnose: bool = True) -> dict:
     """T020/T032 router seam: one profile -> one real plan dict.
 
     Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
@@ -577,7 +578,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
       solver constraint. `max_rung` caps the ladder at the rung the replaced
       plan used (private `_rung`), so an alternative never drops a wish or a
       template rule the original kept. No infeasibility diagnosis runs in
-      that mode: the caller only wants a plan or nothing.
+      that mode: the caller only wants a plan or nothing. `diagnose=False` skips
+      it too, for a caller that will try again.
 
     The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
     the plan body those fields are attached to. `workers` is forwarded to
@@ -604,6 +606,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # Template hard bans: nightlife/spa for a family day, trek for a calm one.
     if tpl_name:
         candidates = [p for p in candidates if templates.allows(p, tpl_name)]
+    # What the budget can never pay for must not take a place from what it can:
+    # the candidate cap keeps the best of each category, whatever they cost.
+    ceiling = _max_fee(trip)
+    if ceiling is not None:
+        candidates = [p for p in candidates if (effective_fee(p) or 0) <= ceiling
+                      or p["poi_id"] in (trip.get("must_visit") or [])]
     ids = [p["poi_id"] for p in candidates]
 
     # Activities -> "at least one stop of these categories" (FR-006: a
@@ -790,7 +798,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                      candidates, travel)
     if rung_used is not None:
         plan["_rung"] = rung_used
-    if out.get("itinerary") is None and not distinct_from:
+    if out.get("itinerary") is None and not distinct_from and diagnose:
         culprit = _diagnose(list(templates.attempts(limits))[-1])
         if culprit:
             plan["infeasible_by"] = culprit
