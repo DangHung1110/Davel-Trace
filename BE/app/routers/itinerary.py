@@ -106,8 +106,9 @@ def _get_plan_builder():
 
 
 # One worker and a budget of WORK, not seconds: the same request gets the same plan
-# on any machine at any load, a request costs 3 threads instead of a core each, and
-# a busy server answers later instead of running out of time and returning nothing.
+# at any load (measured on one machine; another solver build or a loaded PATM model may
+# differ), a request costs 3 threads instead of a core each, and a busy server answers
+# later instead of running out of time and returning nothing.
 # Measured on 7 scenarios at 5 s wall on 4 workers: 4/21 plans repeated, 43 CPU s a
 # request; at 6 work units on 1 worker: 21/21 repeated, 18 CPU s, same stops and rating.
 PLAN_WORKERS = 1
