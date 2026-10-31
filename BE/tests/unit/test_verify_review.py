@@ -16,6 +16,7 @@ import os
 import sys
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
@@ -23,6 +24,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.ml.data import ingest_verdicts as ing  # noqa: E402
 from BE.ml.data import spotcheck_v2 as sv  # noqa: E402
 from BE.ml.data.verify_precision import cohen_kappa, score, wilson  # noqa: E402
+from BE.common import SIGHTSEEING_CATS  # noqa: E402
 from BE.tools import build_review_report as report  # noqa: E402
 from BE.tools import build_verify_page as bvp  # noqa: E402
 
@@ -289,6 +291,20 @@ class TestReport(unittest.TestCase):
         # the export's newline is the two characters \n, not a line break
         # inside a JS string (a SyntaxError that kills the whole page)
         self.assertIn('+ "\\n"]', script)
+
+
+class TestPhase4Gate(unittest.TestCase):
+    def test_real_snapshot_meets_the_gate(self):
+        """At least 300 verified POIs with a matrix row, at least 5 in every
+        activity category, or a wish like "ngắm hoàng hôn" finds nothing."""
+        pois = json.loads((SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]
+        matrix = json.loads((SNAPSHOT / "matrix.json").read_text(encoding="utf-8"))
+        verified = [p for p in pois if p.get("verified") and p["poi_id"] in set(matrix["ids"])]
+        self.assertGreaterEqual(len(verified), 300)
+        counts = Counter(p.get("cat") for p in verified)
+        short = {cat: counts[cat] for cat in (*SIGHTSEEING_CATS, "restaurant", "cafe", "bar", "spa", "market")
+                 if counts[cat] < 5}
+        self.assertEqual(short, {})
 
 
 class TestPrecision(unittest.TestCase):

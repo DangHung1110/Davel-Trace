@@ -664,7 +664,7 @@ Thủy Sơn là điểm chính; sau đợt này điểm chính của cụm là P
 
 | POI | Loại hình | Thời lượng (phút) |
 |---|---|---|
-| Đỉnh Bàn Cờ, Nhà Vọng Cảnh, Mũi Nghê | attraction → landmark | 240 → 54 |
+| Đỉnh Bàn Cờ, Nhà Vọng Cảnh, Mũi Nghê (mục 14 chuyển tiếp sang `viewpoint`) | attraction → landmark | 240 → 54 |
 | Quốc Tự Tam Thai | attraction → landmark | 240 → 54 |
 | Hải đăng Tiên Sa, Radar Sơn Trà 1 | attraction → landmark | 200 → 45 |
 | Đình làng Hải Châu, Chùa Quán Thế Âm, Cầu vượt đi bộ Mikazuki | attraction → landmark | 54, không đổi |
@@ -674,8 +674,8 @@ Thủy Sơn là điểm chính; sau đợt này điểm chính của cụm là P
 | CẬU CẢ – 37 Điện Biên Phủ | park → restaurant | 120 → 60 |
 | View Sơn Trà về đêm | viewpoint → cafe | 54, không đổi |
 
-Các điểm ngắm cảnh trên Sơn Trà dùng `landmark`, không dùng `viewpoint`: `viewpoint` không có thời lượng mặc định riêng
-nên quy tắc đọc `type`, mà `type` của các điểm này là "Điểm thu hút khách du lịch", tức vẫn 200–240 phút.
+Các điểm ngắm cảnh trên Sơn Trà tạm dùng `landmark`: lúc đó `viewpoint` chưa có thời lượng mặc định riêng nên quy tắc đọc
+`type`, mà `type` của các điểm này là "Điểm thu hút khách du lịch", tức vẫn 200–240 phút. Mục 14 đã xử lý việc này.
 
 Còn **48 POI `attraction` verified, tất cả 200–240 phút**. Quy tắc này chưa đổi, vẫn chờ chủ dự án quyết.
 
@@ -722,8 +722,8 @@ Còn **48 POI `attraction` verified, tất cả 200–240 phút**. Quy tắc nà
 - Thời lượng theo quy tắc tính lại cho 28 POI verified, vì quy tắc nhân 1,2 khi rating từ 4,5.
 - Sửa loại hình 8 POI đang bị tính 200–240 phút (`verdicts/verify_verdicts_cats_20261031_claude.jsonl`):
   - thành `market`: Chợ Cồn, Phố đi bộ – chợ đêm Bạch Đằng;
-  - thành `landmark`: View Ngắm Bình Minh Sơn Trà, Vịnh Sơn Trà, Làng Bích họa, Tượng Phật Phước Lý, Cầu Nguyễn Văn Trỗi,
-    Cây đa Đò Xu.
+  - thành `landmark`: Làng Bích họa, Tượng Phật Phước Lý, Cầu Nguyễn Văn Trỗi, Cây đa Đò Xu, cùng View Ngắm Bình Minh Sơn
+    Trà và Vịnh Sơn Trà (mục 14 chuyển tiếp sang `viewpoint`).
 
 **Planner:**
 
@@ -755,9 +755,43 @@ hoặc Chợ đêm Helio. Khi request không có hồ sơ, lịch trước đó 
 **Còn lại:**
 
 - Cầu Rồng chưa vào lịch mặc định: mỗi ngày chỉ có một `landmark`, và Chùa Linh Ứng điểm cao hơn.
-- 40 POI `attraction` còn lại vẫn 200–240 phút. Phần lớn đúng là hoạt động dài (lớp nấu ăn, công viên giải trí, thuyền
-  thúng, khu sinh thái), nên chưa cần đổi quy tắc.
+- 39 POI `attraction` còn lại (sau mục 14) vẫn 200–240 phút. Phần lớn đúng là hoạt động dài (lớp nấu ăn, công viên giải
+  trí, thuyền thúng, khu sinh thái), nên chưa cần đổi quy tắc.
 - Lịch trải nghiệm đôi khi vẫn chọn điểm rất ít đánh giá, ví dụ Nhà bia Chứng tích Núi Ghềnh (4 đánh giá).
 - Yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày: phần lập lịch không đọc `days` (FR-020).
 - Lịch có hồ sơ có bữa trưa 11:00–13:00 nhưng thường không có bữa tối. Lịch không có hồ sơ không bắt buộc bữa trưa.
 - Số đo gold chưa build lại nên chưa có con số so sánh chất lượng trước và sau (Phase 5).
+
+## 14. Đạt tiêu chí Phase 4 (31/10/2026)
+
+Tiêu chí Phase 4: ít nhất 300 POI vừa verify vừa có matrix, mỗi loại hình ít nhất 5 POI. Trước mục này `viewpoint` có 0 POI và
+`nature` có 4 POI, nên chưa đạt.
+
+- `viewpoint` có thời lượng mặc định riêng là 45 phút (`CATEGORY_DEFAULTS`, cùng mức với `landmark`). Trước đó quy tắc đọc
+  `type` của POI, nên một điểm ngắm cảnh có `type` "Điểm thu hút khách du lịch" bị tính 200–240 phút. `duration_prior.json`
+  thêm dòng tương ứng với `n = 0`, đúng như `build` sẽ sinh ra.
+- Chuyển sang `viewpoint` (`verdicts/verify_verdicts_gate_20261031_claude.jsonl`): Đỉnh Bàn Cờ, Nhà Vọng Cảnh, Radar Sơn Trà
+  1, Mũi Nghê, View Ngắm Bình Minh Sơn Trà, Vịnh Sơn Trà. Thời lượng 45–54 phút, không đổi so với lúc là `landmark`.
+- Chuyển Hồ Hòa Trung sang `nature`: hồ tự nhiên, Google xếp "Khu cắm trại". Thời lượng 200 → 150 phút.
+
+| Loại hình | POI verified |
+|---|---|
+| restaurant | 121 |
+| cafe | 104 |
+| landmark | 73 |
+| spa | 70 |
+| bar | 47 |
+| attraction | 39 |
+| market | 35 |
+| beach | 18 |
+| museum | 13 |
+| park | 10 |
+| viewpoint | 6 |
+| nature | 5 |
+
+**Đạt: 541 POI verified, tất cả có matrix, mọi loại hình từ 5 POI trở lên.** Test `TestPhase4Gate` giữ tiêu chí này trên
+snapshot thật.
+
+Khác kế hoạch ban đầu: Phase 4 dự kiến người duyệt, hoặc ít nhất 2 nguồn độc lập khớp nhau. Thực tế Claude duyệt chủ yếu dựa
+trên Google Maps, theo yêu cầu của chủ dự án, nên chưa có POI nào do người duyệt và độ chính xác chưa được đo độc lập (xem
+mục 12).

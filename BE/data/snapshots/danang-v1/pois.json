@@ -20701,7 +20701,7 @@
         "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
       },
       "hours_source": "inferred",
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -20735,6 +20735,13 @@
             "note": "Sửa loại hình attraction → landmark (là điểm ngắm cảnh): 240 phút là thời lượng của điểm tham quan dài.",
             "file": "verify_verdicts_cats_20261031_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-31"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -20742,7 +20749,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "7b544a3b88e7"
+        "row_hash": "4943ed16b2dc"
       },
       "review_count": 90
     },
@@ -21003,7 +21010,7 @@
         "hours": null,
         "name": "Ban Co Peak"
       },
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "must_go": true,
@@ -21031,6 +21038,13 @@
             "note": "Còn trên Google (4,6★, 4513 đánh giá). Giờ khớp Google. Sửa loại hình attraction → landmark (là điểm ngắm cảnh trên Sơn Trà). Mức giá: Rẻ (vào cửa miễn phí).",
             "file": "verify_verdicts_old_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -21038,7 +21052,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "47ef86e4b723"
+        "row_hash": "b2f3b0ef9013"
       },
       "review_count": 4513
     },
@@ -21263,7 +21277,7 @@
         "hours_web": "open 24/7 (trip.com); khu quân sự, đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "web",
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -21290,6 +21304,13 @@
             "note": "Còn trên Google (4,4★, 160 đánh giá). Giờ khớp Google. Sửa loại hình attraction → landmark (là điểm ngắm cảnh trên Sơn Trà). Mức giá: Rẻ (vào cửa miễn phí).",
             "file": "verify_verdicts_old_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -21297,7 +21318,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "a47452cddf08"
+        "row_hash": "970fb09e0ce4"
       },
       "review_count": 160
     },
@@ -21370,7 +21391,7 @@
         "hours_web": "daivietourist.vn (T10-T2: 07:30-17:30)"
       },
       "hours_source": "web",
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -21399,6 +21420,13 @@
             "note": "Còn trên Google (4,5★, 1143 đánh giá). Google ghi mở 24/24 (thường là giá trị mặc định): giữ giờ đang có. Sửa loại hình attraction → landmark (là điểm ngắm cảnh trên Sơn Trà). Mức giá: Rẻ (vào cửa miễn phí).",
             "file": "verify_verdicts_old_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -21406,7 +21434,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "996fe18a7dd0"
+        "row_hash": "0dcb1f883793"
       },
       "review_count": 1143
     },
@@ -21476,7 +21504,7 @@
         "name": null
       },
       "hours_source": "rule_open_access",
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "must_go": true,
@@ -21504,6 +21532,13 @@
             "note": "Còn trên Google (4,6★, 394 đánh giá). Google không có giờ; giữ 00:00-23:59 (nguồn: rule_open_access). Sửa loại hình attraction → landmark (là mũi đất ngắm cảnh trên Sơn Trà). Mức giá: Rẻ (vào cửa miễn phí).",
             "file": "verify_verdicts_old_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -21511,7 +21546,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "5cd5e47f94de"
+        "row_hash": "4fed9432597f"
       },
       "review_count": 394
     },
@@ -21584,7 +21619,7 @@
         "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "inferred",
-      "cat": "landmark",
+      "cat": "viewpoint",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -21618,6 +21653,13 @@
             "note": "Sửa loại hình attraction → landmark (là điểm ngắm cảnh): 240 phút là thời lượng của điểm tham quan dài.",
             "file": "verify_verdicts_cats_20261031_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-31"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình landmark → viewpoint (điểm ngắm cảnh trên Sơn Trà; nhóm viewpoint đã có thời lượng mặc định riêng).",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
@@ -21625,7 +21667,7 @@
           "cat",
           "price_band"
         ],
-        "row_hash": "0ce0db349db5"
+        "row_hash": "ef7275573d8d"
       },
       "review_count": 98
     },
@@ -22628,9 +22670,9 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 105,
+        "p50": 150,
+        "p75": 210
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -22688,7 +22730,7 @@
         "hours_web": "mở cửa 24/7 (intour.com.vn)"
       },
       "hours_source": "web",
-      "cat": "attraction",
+      "cat": "nature",
       "space_source": "osm",
       "space_confidence": 0.7,
       "space_evidence": [
@@ -22712,13 +22754,21 @@
             "note": "Còn trên Google (4,4★, 216 đánh giá). Google không có giờ; giữ 00:00-23:59 (nguồn: web). Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_old_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:40:48.000Z",
+            "note": "Sửa loại hình attraction → nature (hồ tự nhiên, Google xếp 'Khu cắm trại').",
+            "file": "verify_verdicts_gate_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "c18feb9cf167"
+        "row_hash": "fa310a05fbb3"
       },
       "review_count": 216
     },
