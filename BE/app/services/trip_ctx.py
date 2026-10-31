@@ -103,7 +103,7 @@ EVENING_SOCIAL = 1.15
 LATE_HEAVY = 0.5
 
 OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
-REST_CATEGORIES = frozenset({"cafe", "spa", "museum", "landmark"})
+REST_CATEGORIES = frozenset({"cafe", "spa", "museum", "landmark", "temple"})
 DESSERT_WORDS = ("dessert", "che", "banh ngot", "kem", "sweet")
 TREK_WORDS = ("trek", "hike", "adventure", "thac", "nui", "leo")
 
