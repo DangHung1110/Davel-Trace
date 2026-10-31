@@ -54,7 +54,9 @@ for _a in COST_POIS:
     for _b in COST_POIS:
         if _a["poi_id"] == _b["poi_id"]:
             continue
-        _m = 5 if (_a["poi_id"] in NEAR and _b["poi_id"] in NEAR) else 40
+        # A ride the rating-first plan takes for a better dinner; 40 min each way
+        # is not worth 0.7 stars to any profile now that travel counts.
+        _m = 5 if (_a["poi_id"] in NEAR and _b["poi_id"] in NEAR) else 12
         COST_CELLS[f"{_a['poi_id']}->{_b['poi_id']}"] = {
             "minutes": _m, "km": _m / 10}
 COST_BY_ID = {p["poi_id"]: p for p in COST_POIS}
