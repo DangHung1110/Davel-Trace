@@ -1,4 +1,4 @@
-"""POST /v1/itinerary latency on a snapshot: median, p95, max (Phase 2 gate: p95 < 8 s).
+"""POST /v1/itinerary latency on a snapshot: median, p95, max (Phase 2 gate: p95 < 8 s a day).
 
 Runs the real pipeline in-process with the 3 default plans per request, so it
 measures planning and not the network. Weather is mocked offline: a slow
@@ -6,7 +6,7 @@ forecast API would otherwise count as planner latency. Run it on the deploy
 machine: the earlier numbers come from a 12-core laptop.
 
 Usage (repo root):
-  python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1 [--rounds 3]
+  python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1 [--rounds 3] [--days 2]
 
 Exits 1 when a plan fails or p95 misses the gate.
 """
@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--snapshot", required=True)
     parser.add_argument("--rounds", type=int, default=3)
+    parser.add_argument("--days", type=int, default=1, choices=(1, 2))
     args = parser.parse_args(argv)
 
     from fastapi.testclient import TestClient
@@ -71,14 +72,16 @@ def main(argv: list[str] | None = None) -> int:
         for _ in range(args.rounds):
             for scenario in SCENARIOS:
                 started = time.perf_counter()
-                response = client.post("/v1/itinerary", json={"trip": {**BASE, **scenario}})
+                response = client.post("/v1/itinerary",
+                                       json={"trip": {**BASE, **scenario, "days": args.days}})
                 seconds.append(time.perf_counter() - started)
                 plans = response.json().get("plans") if response.status_code == 200 else None
                 failed += not plans or not all(plan.get("passed") for plan in plans)
     report = summarize(seconds)
-    ok = not failed and report["p95_s"] < GATE_P95_S
-    print(f"{report} failed={failed} cores={os.cpu_count()} "
-          f"gate p95<{GATE_P95_S:g}s: {'PASS' if ok else 'FAIL'}")
+    gate_s = GATE_P95_S * args.days  # one solve per day
+    ok = not failed and report["p95_s"] < gate_s
+    print(f"{report} days={args.days} failed={failed} cores={os.cpu_count()} "
+          f"gate p95<{gate_s:g}s: {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1
 
 
