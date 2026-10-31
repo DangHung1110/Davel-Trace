@@ -26,7 +26,8 @@ from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
 from BE.app.services.profiles import _gate_view
 from BE.app.services.soft_rules import (
-    CATEGORY_DAILY_CAP, cafe_cap, lunch_activity, poi_category, rest_span)
+    CATEGORY_DAILY_CAP, MEAL_SLOTS, cafe_cap, clip_to_time_fit, lunch_activity, poi_category,
+    rest_span, time_fit_windows)
 from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
 from BE.common import effective_fee, poi_open_windows, trusted_rating
@@ -35,6 +36,10 @@ from BE.common import effective_fee, poi_open_windows, trusted_rating
 # Lunch has to start by then (gate REST_FOLLOWS_LUNCH).
 LUNCH_LATEST_MIN = 13 * 60
 LUNCH_SUBSTITUTES = 5
+# One worker on a budget of work, like /v1/itinerary: the same incident on the same
+# plan gets the same answer, and these small solves finish far inside the budget.
+REPLAN_WORKERS = 1
+REPLAN_DETERMINISTIC_TIME = 2.0
 
 
 def _deadline(trip: dict) -> int:
@@ -155,15 +160,23 @@ def replan(state: dict, event: dict, pois: list[dict],
             else:
                 travel2[("depot", x)] = leg
 
+    named = set(trip.get("must_visit", []))
     stub = [_stub(by_id[pid], trip, state,
-                  trusted_rating(by_id[pid]) / 5 if pid in substitutes else 1.0)
+                  trusted_rating(by_id[pid]) / 5 if pid in substitutes else 1.0,
+                  named=pid in named, lunch_done=lunch_done)
             for pid in cand_ids if pid in by_id]
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
     origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
     q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
+    # The gate reads the whole day: what comes next must not repeat what was just done.
+    last_done = max(done, key=lambda a: a["start"]) if done else None
+    last_cat = poi_category(by_id.get(last_done["poi_id"])) if last_done else ""
+    not_first = {pid for pid in cand_ids if pid in by_id and last_cat
+                 and poi_category(by_id[pid]) == last_cat}
     out = optimize(stub, travel2, StubTrip(start, _deadline(trip), origin_id),
-                   edge_scores=q,
+                   edge_scores=q, workers=REPLAN_WORKERS,
+                   deterministic_time=REPLAN_DETERMINISTIC_TIME, not_first=not_first,
                    # Universal HARD caps the gate checks: a replanned day must
                    # not end up with two markets / two cafes just because the
                    # rolling horizon re-optimised from scratch.
@@ -227,18 +240,23 @@ def replan(state: dict, event: dict, pois: list[dict],
             "preserved_completed": completed_ids}
 
 
-def _stub(p: dict, trip: dict, state: dict, score: float) -> StubPOI:
-    wins = poi_open_windows(p) or []
+def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
+          lunch_done: bool = False) -> StubPOI:
+    """A stop keeps the hours it makes sense at, as the plan did, unless the traveller
+    named it. With lunch behind us a restaurant left in the day is dinner: moved up
+    next to lunch it would fail the gate and cost the whole replan."""
+    wins = poi_open_windows(p)  # real hours, else the category's safe hours
     category = poi_category(p)
-    return StubPOI(p["poi_id"], poi_visit_min(p), *_win(p, trip, state), score,
+    if wins and not named:
+        wins = clip_to_time_fit(p, wins)
+    if wins and lunch_done and category == "restaurant":
+        floor = MEAL_SLOTS[1][0] if time_fit_windows(p) else MEAL_SLOTS[0][1]
+        wins = [(max(lo, floor), hi) for lo, hi in wins if hi > floor]
+    if wins is None:  # the fallback window also clamps to the deadline
+        span = (to_min(state.get("now", trip.get("start_time", "07:00"))), _deadline(trip))
+    else:
+        span = (wins[0][0], wins[-1][1]) if wins else (0, 0)
+    return StubPOI(p["poi_id"], poi_visit_min(p), *span, score,
                    restaurant=category == "restaurant", category=category,
                    fee=effective_fee(p) or 0,
-                   windows=tuple(wins) if len(wins) > 1 else ())
-
-
-def _win(p: dict, trip: dict, state: dict) -> tuple[int, int]:
-    wins = poi_open_windows(p)  # real hours, else the category's safe hours
-    if wins is not None:
-        return (wins[0][0], wins[-1][1]) if wins else (0, 0)
-    return (to_min(state.get("now", trip.get("start_time", "07:00"))),
-            _deadline(trip))  # fallback window also clamps to the deadline
+                   windows=tuple(wins) if wins and len(wins) > 1 else ())
