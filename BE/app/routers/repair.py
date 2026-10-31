@@ -115,6 +115,11 @@ def repair(body: RepairIn):
         return err
     plan, trip, pois_by_id, pool, matrix, report = resolved
 
+    if plan.get("days"):
+        return {"plan": {k: v for k, v in plan.items() if not k.startswith("_")},
+                "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
+                "note": "REPAIR_ONE_DAY: repair chi ho tro lich 1 ngay"}
+
     try:
         result = repair_svc.repair_plan(
             plan, trip, pois_by_id, matrix, pool,

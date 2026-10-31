@@ -17,13 +17,16 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 - Rule: pool rỗng sau bộ lọc cứng → plan rỗng `passed: false`, `infeasible_by.rule = "EMPTY_POOL"`; không bao giờ lấy toàn bộ snapshot thay thế.
 - Rule: `constraint_status` có thêm cổng cứng `PROFILE_SAFE` (dị ứng / must_avoid / khả năng đi lại của hồ sơ, kiểm lại trên plan cuối).
 
+- Rule (FR-020): `trip.days = 2` trả một plan cho cả chuyến. Mỗi phần tử `activities` và `segments` có `day` (1, 2); `days = [{day, date, stops, total_cost, total_km, total_min, travel_min, cost_estimated, passed, violations, template, soft_penalties}]`. Không điểm nào lặp giữa các ngày; `total_cost` và `passed` tính cho cả chuyến. Không xếp đủ số ngày → `passed: false` kèm cảnh báo. `days = 1` giữ nguyên dạng cũ (không có `day`, `days`).
+
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`
 
 ## POST /replan — disruption → new version
-- In: `{ "itinerary_id": "...", "event": {DynamicEvent} }`
-- Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...] }`
+- In: `{ "itinerary_id": "...", "event": {DynamicEvent}, "completed": [...], "day": 2 }`
+- Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...], "day": 2 }`
 - Rule: completed activities preserved; version++.
+- Rule (FR-020): plan nhiều ngày chỉ xếp lại một ngày: `day`, mặc định là ngày đầu tiên còn điểm chưa đi. Các ngày khác trả về nguyên vẹn. Ngày không có trong plan → 404 `UNKNOWN_DAY`.
 
 ## GET /itinerary/{id} — đọc lịch (offline cache key)
 
