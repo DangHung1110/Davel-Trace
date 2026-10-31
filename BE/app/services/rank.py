@@ -29,20 +29,27 @@ Signals:
 
 from __future__ import annotations
 
+import math
+
 from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
 from BE.common import BAND_FEE_VND, FEW_REVIEWS, effective_fee, price_level_of, trusted_rating
 
 WEIGHTS = {
-    "rating": 0.22,
-    "price": 0.12,
-    "effort": 0.10,
-    "pref_match": 0.16,
-    "taste": 0.18,
-    "time_fit": 0.10,
-    "weather": 0.12,
+    "rating": 0.20,
+    "price": 0.10,
+    "effort": 0.08,
+    "pref_match": 0.15,
+    "taste": 0.15,
+    "time_fit": 0.08,
+    "weather": 0.09,
+    "fame": 0.15,
 }
+# Reviews that count as fully known (Google Maps, Đà Nẵng): 30,000 is Chợ Hàn or
+# Ngũ Hành Sơn. The rating alone ranked a 4.8 from 12 reviews over both: a shrunk
+# rating still says "probably good", never "people come here".
+FAME_FULL_REVIEWS = 30_000
 
 # Taste component mapping: the signed unit from profile_filter.taste_score
 # (-1 clash .. +1 full match) lands on [0, 1] around the neutral 0.5, so a
@@ -103,6 +110,10 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     parts: dict[str, float] = {}
 
     parts["rating"] = max(0.0, min(1.0, trusted_rating(poi) / 5.0))
+    reviews = poi.get("review_count")
+    # Unknown count (fixtures, fresh crawls) is the middle: never a bonus or a cost.
+    parts["fame"] = (0.5 if reviews is None
+                     else _clamp(math.log10(1 + int(reviews)) / math.log10(1 + FAME_FULL_REVIEWS)))
     rating = float(poi.get("rating") or 0.0)
     if rating >= 4.5 and (poi.get("review_count") is None
                           or poi["review_count"] >= FEW_REVIEWS):
@@ -166,7 +177,7 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         # E2: a bar/nightlife stop in the morning is a semantic mismatch.
         parts["time_fit"] = 0.1
         reasons.append("bar/ nightlife truoc 17h")
-    elif hour >= 18 and ptype in ("restaurant", "landmark"):
+    elif hour >= 18 and ptype in ("restaurant", "landmark", "temple"):
         parts["time_fit"] = 1.0
         reasons.append("hop buoi toi")
     elif 11 <= hour <= 14 and ptype == "restaurant":
