@@ -116,6 +116,11 @@ REST_DEFAULT_MIN = 45
 REST_MIN_FLOOR = 20                        # never shrink below this
 REST_LATE_LUNCH = 15 * 60                  # lunch ending after 15:00 -> shrink
 REST_START_TOLERANCE = 15                  # gate: rest may start <=15 min late
+# Dinner: a restaurant starting in this window, on a day that covers the meal.
+# The start window is wider than the paper one so a 20:00 end still fits a dinner.
+DINNER_REQUIRED = (17 * 60 + 30, 20 * 60 + 30)
+DINNER_MIN_END = 19 * 60 + 30              # a day ending earlier has no room for it
+DINNER_LATEST_START = 18 * 60              # ... and one starting later already ate
 
 
 # F1 (soft category quota): a day needs at least one food stop and at least
@@ -124,7 +129,7 @@ REST_START_TOLERANCE = 15                  # gate: rest may start <=15 min late
 # `bar`/`spa`/`lodging`/`transport` are neither: they cannot satisfy variety.
 FOOD_CATEGORIES = frozenset({"restaurant", "cafe"})
 SIGHTSEEING_CATEGORIES = frozenset({
-    "attraction", "landmark", "museum", "park",
+    "attraction", "landmark", "museum", "park", "temple",
     "beach", "viewpoint", "nature",
 })
 
@@ -150,7 +155,7 @@ EDGE_FOOD_HUNGRY_BONUS = 0.05
 # `bar`/`spa`/`lodging`/`transport` are deliberately NOT capped here (they are
 # not "sights" and the profile/archetype bans already govern them).
 NON_FOOD_CAPPED = frozenset({
-    "market", "landmark", "beach", "attraction", "temple", "museum", "park",
+    "market", "shop", "landmark", "beach", "attraction", "temple", "museum", "park",
     "viewpoint",
 })
 CATEGORY_DAILY_CAP = 1          # >1 of a capped category in one day = HARD
@@ -223,6 +228,70 @@ def meal_slots(trip: dict | None) -> list[dict]:
 def meal_window_present(trip: dict | None, name: str) -> bool:
     """True when the trip covers enough of that meal window."""
     return any(s["name"] == name for s in meal_slots(trip))
+
+
+def covers_dinner(trip: dict | None) -> bool:
+    """Does this day run through dinner? A meal must be possible inside it."""
+    trip = trip or {}
+    return (to_min(trip.get("end_time") or "18:00") >= DINNER_MIN_END
+            and to_min(trip.get("start_time") or "07:00") <= DINNER_LATEST_START)
+
+
+# --- when a stop makes sense (TIME_FIT) ------------------------------------
+# On top of when a place is OPEN: a restaurant at 16:00, a beach in the midday
+# sun, a pagoda at 20:00 are open and still wrong. Each entry lists the windows a
+# whole visit must fit inside, on the same clock as `open_windows`.
+_EVENING = 26 * 60
+_ALL_DAY = ((5 * 60, _EVENING),)
+_MEALS = ((10 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
+_EATERY = ((6 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
+_DAYLIGHT = ((5 * 60, 18 * 60 + 15),)
+_NOT_MIDDAY = ((5 * 60, 11 * 60 + 30), (14 * 60 + 30, 21 * 60))
+TIME_FIT_BY_CAT = {
+    "restaurant": _MEALS,
+    "bar": ((16 * 60 + 30, _EVENING),),
+    "beach": ((5 * 60, 11 * 60 + 30), (15 * 60, 18 * 60 + 30)),
+    "viewpoint": _DAYLIGHT,
+    "nature": ((5 * 60 + 30, 18 * 60),),
+    "park": _NOT_MIDDAY,
+    "temple": ((5 * 60, 18 * 60),),
+    "market": ((5 * 60, 11 * 60 + 30), (14 * 60, 22 * 60)),
+    "landmark": ((6 * 60, 22 * 60 + 30),),
+}
+TIME_FIT_BY_SUBCAT = {
+    "eatery": _EATERY,
+    "sunrise": ((5 * 60, 9 * 60 + 30),),
+    "sunset": ((15 * 60, 19 * 60),),
+    "night_market": ((17 * 60, _EVENING),),
+    "church": ((5 * 60, 18 * 60),),
+}
+
+
+def time_fit_windows(poi: dict | None) -> tuple | None:
+    """Windows a visit must fit, None = any time it is open.
+
+    Only a POI of the reviewed snapshot carries a rule (`plan_tier` marks it): a
+    plain `cat` on a test fixture or a fresh crawl says too little to forbid an hour.
+    """
+    poi = poi or {}
+    if "plan_tier" not in poi:
+        return None
+    return TIME_FIT_BY_SUBCAT.get(poi.get("subcat")) or TIME_FIT_BY_CAT.get(poi_category(poi))
+
+
+def fits_time_of_day(poi: dict | None, start: int, end: int) -> bool:
+    """Gate TIME_FIT: does this visit lie inside the POI's sensible hours?"""
+    windows = time_fit_windows(poi)
+    return windows is None or any(lo <= start and end <= hi for lo, hi in windows)
+
+
+def clip_to_time_fit(poi: dict | None, windows: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    """Opening windows cut down to the sensible hours; [] = no sensible time today."""
+    fit = time_fit_windows(poi)
+    if fit is None:
+        return windows
+    return [(max(a, lo), min(b, hi)) for a, b in windows for lo, hi in fit
+            if max(a, lo) < min(b, hi)]
 
 
 def is_food(poi: dict | None) -> bool:

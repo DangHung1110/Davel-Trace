@@ -39,7 +39,7 @@ class TestValidator(unittest.TestCase):
                          {"FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
                           "CAFE_CAP", "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"})
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"})
         print(f"\n good: {rep['checks']}")
 
     def test_ghost_poi(self):
