@@ -36,7 +36,7 @@ class TestActivityRequirement(unittest.TestCase):
         self.assertIn("restaurant", _cats(plan))
         self.assertEqual(plan["activity_match"],
                          [{"activity": "tắm biển", "categories": ["beach"],
-                           "status": "met"}])
+                           "status": "met", "poi_id": "beach1"}])
 
     def test_wish_not_in_pool_reported(self):
         ranked = [r for r in RANKED if r["poi_id"] != "mus1"]
@@ -47,7 +47,7 @@ class TestActivityRequirement(unittest.TestCase):
         self.assertEqual([m["status"] for m in plan["activity_match"]],
                          ["no_verified_poi", "not_understood"])
         warnings = " | ".join(plan.get("warnings") or [])
-        self.assertIn("chua co diem museum da xac minh", warnings)
+        self.assertIn("chua co diem da xac minh phu hop voi hoat dong 'bảo tàng'", warnings)
         self.assertIn("chua hieu hoat dong 'đi chơi'", warnings)
 
     def test_unreachable_wish_relaxed_not_fatal(self):

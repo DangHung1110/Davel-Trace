@@ -41,10 +41,22 @@ class TestEffectiveFee(unittest.TestCase):
         self.assertEqual(effective_fee(poi("landmark", "cheap")), 0)
 
     def test_a_cheap_museum_or_a_ticketed_temple_is_not_free(self):
-        self.assertEqual(effective_fee(poi("museum", "cheap")), 50000)
-        ticketed = poi("landmark", "cheap")
-        ticketed["smart_tags"]["ticket"] = True
-        self.assertEqual(effective_fee(ticketed), 50000)
+        unknown = poi("museum", "cheap")
+        del unknown["smart_tags"]["ticket"]
+        self.assertEqual(effective_fee(unknown), 50000)
+        for cat in ("landmark", "temple"):
+            ticketed = poi(cat, "cheap")
+            ticketed["smart_tags"]["ticket"] = True
+            self.assertEqual(effective_fee(ticketed), 50000)
+
+    def test_a_museum_that_sells_no_ticket_is_free(self):
+        self.assertEqual(effective_fee(poi("museum", "cheap")), 0)
+        self.assertEqual(effective_fee(poi("temple", "cheap")), 0)
+
+    def test_band_prices_follow_the_kind_of_place(self):
+        self.assertEqual(effective_fee(poi("cafe", "medium")), 100000)
+        self.assertEqual(effective_fee(poi("bar", "expensive")), 400000)
+        self.assertEqual(effective_fee(poi("shop", "medium")), 100000)
 
     def test_no_band_is_unknown_not_free(self):
         self.assertIsNone(effective_fee({"cat": "restaurant", "fee": 0, "smart_tags": {}}))

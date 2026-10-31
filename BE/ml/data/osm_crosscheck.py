@@ -96,11 +96,11 @@ TAG_CATS = {
     ("amenity", "bar"): {"bar"}, ("amenity", "pub"): {"bar"},
     ("amenity", "nightclub"): {"bar"}, ("amenity", "biergarten"): {"bar"},
     ("amenity", "marketplace"): {"market"},
-    ("amenity", "place_of_worship"): {"landmark", "attraction"},
+    ("amenity", "place_of_worship"): {"temple", "landmark", "attraction"},
     ("amenity", "spa"): {"spa"}, ("leisure", "spa"): {"spa"},
     ("shop", "massage"): {"spa"}, ("shop", "beauty"): {"spa"},
     ("shop", "hairdresser"): {"spa"}, ("amenity", "public_bath"): {"spa"},
-    ("shop", "*"): {"market"},
+    ("shop", "*"): {"market", "shop"},
     ("tourism", "museum"): {"museum"}, ("tourism", "gallery"): {"museum"},
     ("tourism", "attraction"): SIGHT, ("tourism", "viewpoint"): {"viewpoint", "landmark",
                                                                "nature", "attraction"},
@@ -109,7 +109,7 @@ TAG_CATS = {
     ("tourism", "hotel"): {"lodging"}, ("tourism", "guest_house"): {"lodging"},
     ("tourism", "hostel"): {"lodging"}, ("tourism", "resort"): {"lodging"},
     ("tourism", "apartment"): {"lodging"}, ("tourism", "motel"): {"lodging"},
-    ("historic", "*"): {"landmark", "attraction", "museum"},
+    ("historic", "*"): {"landmark", "attraction", "museum", "temple"},
     ("leisure", "park"): {"park"}, ("leisure", "garden"): {"park"},
     ("leisure", "water_park"): {"attraction"}, ("leisure", "amusement_arcade"): {"attraction"},
     ("leisure", "beach_resort"): {"beach", "lodging"},
@@ -120,7 +120,7 @@ TAG_CATS = {
     ("bridge", "*"): {"landmark", "attraction"},
     ("man_made", "bridge"): {"landmark", "attraction"},
     ("man_made", "lighthouse"): {"landmark", "attraction", "viewpoint"},
-    ("building", "*"): {"landmark", "attraction"},
+    ("building", "*"): {"landmark", "attraction", "temple"},
 }
 # Tags any kind of place may carry (a famous restaurant is a tourism
 # attraction, a museum runs a shop): they confirm a category, never refute it.

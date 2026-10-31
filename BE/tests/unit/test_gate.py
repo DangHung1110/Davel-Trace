@@ -87,7 +87,7 @@ class TestGate(unittest.TestCase):
                          {"passed": True, "failed": []})
 
     def test_soft_registry_membership(self):
-        self.assertEqual(SOFT_CHECKS, frozenset({"F1"}))
+        self.assertEqual(SOFT_CHECKS, frozenset({"F1", "TIME_FIT", "DINNER"}))
         self.assertNotIn("F1", [name for name, _ in HARD_CHECKS])
         self.assertEqual(len(HARD_CHECKS), len(CHECKS) - len(SOFT_CHECKS))
 
@@ -97,7 +97,7 @@ class TestGate(unittest.TestCase):
                           "A1", "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
         for _, fn in CHECKS:
             result = fn(GOOD, TRIP, POIS, MATRIX)
             self.assertEqual(set(result), {"passed", "score"})

@@ -88,10 +88,10 @@ PRIORITY_CATS = ["landmark", "attraction", "nature", "park", "museum", "beach",
                  "viewpoint"]
 # retrieval.NON_ACTIVITY_CATS: never planned, so never worth a review.
 EXCLUDED_CATS = {"lodging", "transport"}
-KNOWN_CATS = ["restaurant", "cafe", "bar", "spa", "market", "attraction", "landmark",
-              "museum", "beach", "nature", "park", "viewpoint", "lodging", "transport"]
+KNOWN_CATS = ["restaurant", "cafe", "bar", "spa", "market", "shop", "attraction", "landmark",
+              "temple", "museum", "beach", "nature", "park", "viewpoint", "lodging", "transport"]
 PRICE_BANDS = ["cheap", "medium", "expensive"]
-TICKET_CATS = {"museum", "attraction", "landmark"}
+TICKET_CATS = {"museum", "attraction", "landmark", "temple"}
 NOT_DESTINATION = re.compile(r"\bonline\b|giao hàng|điện hoa", re.I)
 SAMPLE_VERIFIED_BY = "auto-verify-v1"
 SAMPLE_FLAGS = ["exists", "location", "category", "hours", "duration", "price",
@@ -699,6 +699,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   var OSM_FIELD = { exists: "tồn tại", location: "vị trí", category: "loại hình", hours: "giờ" };
   var CAT_LABEL = {
     restaurant: "Nhà hàng", cafe: "Cà phê", attraction: "Điểm tham quan", landmark: "Di tích",
+    temple: "Chùa, nhà thờ", shop: "Cửa hàng",
     spa: "Spa", lodging: "Lưu trú", bar: "Bar", market: "Chợ", beach: "Biển",
     nature: "Thiên nhiên", museum: "Bảo tàng", park: "Công viên", viewpoint: "Ngắm cảnh",
     transport: "Giao thông"
@@ -1247,7 +1248,7 @@ INTRO = {
 <div class="crit">
   <div><b>Tồn tại &amp; vị trí</b>Mở Google Maps: điểm còn hoạt động và đúng chỗ. Từ 1/7/2025 Hội An thuộc TP Đà Nẵng.</div>
   <div><b>Giờ mở cửa</b>Nhập giờ thường ngày, nhiều ca cách bằng dấu phẩy (vd <code>10:30-14:00, 17:00-22:00</code>). Qua đêm vẫn được (<code>18:00-02:00</code>).</div>
-  <div><b>Loại hình</b>Bãi biển là <code>beach</code>, không phải <code>attraction</code>; đình/chùa/cầu là <code>landmark</code>.</div>
+  <div><b>Loại hình</b>Bãi biển là <code>beach</code>, không phải <code>attraction</code>; đình/chùa/nhà thờ là <code>temple</code>, cầu/tượng là <code>landmark</code>, cửa hàng quà là <code>shop</code>.</div>
   <div><b>Thời lượng</b>Thời gian một khách thường ở lại (đình làng ~30 phút, bảo tàng ~90 phút). Số đang hiện là ước lượng theo loại.</div>
 </div>
 <div class="callout"><b>Nhắc lại:</b> mỗi dòng xuất ra có <code>row_hash</code>. Nếu dữ liệu POI đổi sau khi tạo trang,

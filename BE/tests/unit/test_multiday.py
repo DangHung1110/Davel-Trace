@@ -113,14 +113,21 @@ class TestTwoDays(unittest.TestCase):
         # Half for day 1, then all that day 1 left.
         self.assertEqual([c["trip"]["budget"] for c in solver.calls], [500000, 800000])
 
-    def test_a_tight_share_retries_with_all_that_is_left(self):
+    def test_a_tight_share_retries_but_keeps_the_next_days_meals(self):
         solver = FakeSolver(POOL, fee=300000)
         plan, _ = self.plan(solver, budget=700000)
         self.assertEqual(solver.calls[0]["trip"]["budget"], 350000)
         self.assertFalse(solver.calls[0]["diagnose"])
-        self.assertEqual(solver.calls[1]["trip"]["budget"], 700000)
-        self.assertTrue(solver.calls[1]["diagnose"])
+        self.assertEqual(solver.calls[1]["trip"]["budget"], 600000)  # 100k stays for day 2
+        self.assertFalse(solver.calls[1]["diagnose"])
         self.assertFalse(plan["passed"])  # 2 stops at 300k leave 100k: day 2 cannot be planned
+
+    def test_the_last_try_of_a_day_spends_all_and_explains_itself(self):
+        solver = FakeSolver(POOL, fee=300000)
+        self.plan(solver, budget=650000)
+        self.assertEqual([c["trip"]["budget"] for c in solver.calls[:2]], [325000, 550000])
+        self.assertEqual(solver.calls[2]["trip"]["budget"], 650000)
+        self.assertTrue(solver.calls[2]["diagnose"])
 
     def test_a_day_that_cannot_be_planned_is_reported(self):
         plan, _ = self.plan(FakeSolver(POOL, fee=450000), budget=900000)

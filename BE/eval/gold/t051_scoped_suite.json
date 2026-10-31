@@ -8,16 +8,16 @@
    "start_time": "07:00",
    "end_time": "12:00",
    "must_visit": [
-    "ChIJfQNjLMYQQjERo1m_A0X8aLE",
-    "osm:node/4280016689"
+    "ChIJcVJkUPcXQjERsA8_dfySw5E",
+    "ChIJz4Y1XCcZQjERzg9AZYfOGH8"
    ],
    "avoid": [
     "ChIJ7fA2ROsZQjERuQWylV-XvDg"
    ],
    "order_prefs": [
     [
-     "ChIJfQNjLMYQQjERo1m_A0X8aLE",
-     "osm:node/4280016689"
+     "ChIJcVJkUPcXQjERsA8_dfySw5E",
+     "ChIJz4Y1XCcZQjERzg9AZYfOGH8"
     ]
    ],
    "activities": [
@@ -39,10 +39,43 @@
    "must_avoid": [],
    "transport": []
   },
-  "itinerary": null,
-  "infeasible": "must_visit ChIJfQNjLMYQQjERo1m_A0X8aLE breaks a day rule",
-  "gate": null,
-  "soft": null
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+     "start": "08:30",
+     "end": "10:00",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
+     "start": "10:16",
+     "end": "11:56",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.633,
+   "SSR": 1.0,
+   "CSM": 0.86,
+   "EDI": 1.0,
+   "AQE": 0.87
+  }
  },
  {
   "query_id": "q02",
@@ -79,9 +112,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM",
-     "start": "09:30",
-     "end": "11:18",
+     "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
+     "start": "15:00",
+     "end": "16:30",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -89,9 +122,9 @@
      }
     },
     {
-     "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
-     "start": "17:00",
-     "end": "18:00",
+     "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
+     "start": "16:32",
+     "end": "17:32",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -107,11 +140,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.255,
+   "DTU": 0.227,
    "SSR": 1.0,
-   "CSM": 0.76,
+   "CSM": 0.9,
    "EDI": 1.0,
-   "AQE": 0.92
+   "AQE": 0.93
   }
  },
  {
@@ -123,16 +156,16 @@
    "start_time": "07:00",
    "end_time": "12:00",
    "must_visit": [
-    "ChIJkatEeMwZQjERnAUKgmrbNgQ",
-    "ChIJ8WgvsE8ZQjERZzNoKTBgM84"
+    "ChIJXcc22ZcZQjERT47ZqHMl13c",
+    "ChIJ5RkjQCUZQjERDtUHgOu7k10"
    ],
    "avoid": [
     "ChIJV5uGxecXQjERLhaOZuWV6tA"
    ],
    "order_prefs": [
     [
-     "ChIJkatEeMwZQjERnAUKgmrbNgQ",
-     "ChIJ8WgvsE8ZQjERZzNoKTBgM84"
+     "ChIJXcc22ZcZQjERT47ZqHMl13c",
+     "ChIJ5RkjQCUZQjERDtUHgOu7k10"
     ]
    ],
    "activities": [
@@ -153,53 +186,10 @@
    "must_avoid": [],
    "transport": []
   },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
-     "start": "08:00",
-     "end": "08:45",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ8WgvsE8ZQjERZzNoKTBgM84",
-     "start": "09:03",
-     "end": "09:48",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
-     "start": "09:49",
-     "end": "10:49",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.5,
-   "SSR": 1.0,
-   "CSM": 0.72,
-   "EDI": 1.0,
-   "AQE": 0.8
-  }
+  "itinerary": null,
+  "infeasible": "must_visit ChIJXcc22ZcZQjERT47ZqHMl13c exceeds hours/window",
+  "gate": null,
+  "soft": null
  },
  {
   "query_id": "q04",
@@ -233,9 +223,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
-     "start": "07:00",
-     "end": "07:54",
+     "poi_id": "ChIJg85mY5EZQjERXv4xH_p-_MI",
+     "start": "09:00",
+     "end": "10:30",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -243,29 +233,9 @@
      }
     },
     {
-     "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
-     "start": "07:55",
-     "end": "09:07",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "osm:node/3760272162",
-     "start": "09:08",
-     "end": "10:02",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
-     "start": "10:03",
-     "end": "11:03",
+     "poi_id": "ChIJwTU11dAZQjERsydZriN8k5M",
+     "start": "10:32",
+     "end": "11:32",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -281,11 +251,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.8,
+   "DTU": 0.5,
    "SSR": 1.0,
-   "CSM": 0.467,
+   "CSM": 0.533,
    "EDI": 1.0,
-   "AQE": 0.925
+   "AQE": 0.89
   }
  },
  {
@@ -297,16 +267,16 @@
    "start_time": "07:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJ8cqHGTMYQjERU0gT5dridKc",
-    "ChIJGSKUUwCLQTERr0Je7WP5Xqc"
+    "ChIJBSN7ys4XQjERD_WWhQb2XXk",
+    "ChIJKSs6ZVYZQjERSuj5bQ10t0M"
    ],
    "avoid": [
     "ChIJ86LzsaUhQjERGxE6itCeBCY"
    ],
    "order_prefs": [
     [
-     "ChIJ8cqHGTMYQjERU0gT5dridKc",
-     "ChIJGSKUUwCLQTERr0Je7WP5Xqc"
+     "ChIJBSN7ys4XQjERD_WWhQb2XXk",
+     "ChIJKSs6ZVYZQjERSuj5bQ10t0M"
     ]
    ],
    "activities": []
@@ -326,7 +296,7 @@
    "transport": []
   },
   "itinerary": null,
-  "infeasible": "must_visit ChIJ8cqHGTMYQjERU0gT5dridKc exceeds budget",
+  "infeasible": "must_visit ChIJBSN7ys4XQjERD_WWhQb2XXk breaks a day rule",
   "gate": null,
   "soft": null
  },
@@ -365,9 +335,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
+     "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
      "start": "13:00",
-     "end": "14:00",
+     "end": "14:30",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -375,9 +345,9 @@
      }
     },
     {
-     "poi_id": "osm:node/3760247201",
-     "start": "14:02",
-     "end": "14:56",
+     "poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM",
+     "start": "14:31",
+     "end": "16:01",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -385,19 +355,9 @@
      }
     },
     {
-     "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
-     "start": "14:57",
-     "end": "15:42",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
-     "start": "15:47",
-     "end": "17:35",
+     "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
+     "start": "16:05",
+     "end": "17:20",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -413,11 +373,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.89,
+   "DTU": 0.85,
    "SSR": 1.0,
-   "CSM": 0.92,
+   "CSM": 0.852,
    "EDI": 1.0,
-   "AQE": 0.905
+   "AQE": 0.94
   }
  },
  {
@@ -430,7 +390,7 @@
    "end_time": "18:00",
    "must_visit": [
     "ChIJ2y5L4dQNQjERxeSLc68fbrw",
-    "ChIJd8h2AyoRQjERNWCSTs1L1jU"
+    "ChIJqWGIf00ZQjER4BkCiBYX8mU"
    ],
    "avoid": [
     "ChIJHz8ambQZQjERjEFJ-wJ-9EE"
@@ -438,7 +398,7 @@
    "order_prefs": [
     [
      "ChIJ2y5L4dQNQjERxeSLc68fbrw",
-     "ChIJd8h2AyoRQjERNWCSTs1L1jU"
+     "ChIJqWGIf00ZQjER4BkCiBYX8mU"
     ]
    ],
    "activities": [
@@ -465,7 +425,7 @@
     {
      "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
      "start": "07:00",
-     "end": "10:20",
+     "end": "08:30",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -473,9 +433,9 @@
      }
     },
     {
-     "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
-     "start": "11:00",
-     "end": "12:12",
+     "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
+     "start": "09:30",
+     "end": "10:10",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -483,9 +443,9 @@
      }
     },
     {
-     "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
-     "start": "12:13",
-     "end": "14:01",
+     "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
+     "start": "10:13",
+     "end": "11:13",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -493,9 +453,9 @@
      }
     },
     {
-     "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
-     "start": "14:02",
-     "end": "16:02",
+     "poi_id": "ChIJ46gfxSkZQjERgT9OU08ssF4",
+     "start": "11:15",
+     "end": "12:45",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -503,9 +463,9 @@
      }
     },
     {
-     "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
-     "start": "16:03",
-     "end": "17:03",
+     "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
+     "start": "15:00",
+     "end": "16:15",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -513,9 +473,9 @@
      }
     },
     {
-     "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
-     "start": "17:04",
-     "end": "17:58",
+     "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
+     "start": "16:20",
+     "end": "17:50",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -531,11 +491,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.93,
+   "DTU": 0.674,
    "SSR": 1.0,
-   "CSM": 0.333,
+   "CSM": 0.307,
    "EDI": 1.0,
-   "AQE": 0.91
+   "AQE": 0.89
   }
  },
  {
@@ -572,29 +532,39 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
-     "start": "13:00",
-     "end": "14:48",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
-     "start": "14:49",
-     "end": "16:19",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
      "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
-     "start": "16:22",
-     "end": "17:22",
+     "start": "13:00",
+     "end": "14:15",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
+     "start": "14:18",
+     "end": "15:48",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+     "start": "15:54",
+     "end": "16:34",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJIcLWMlAZQjER1VvH4kJ2aZA",
+     "start": "16:40",
+     "end": "17:40",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -610,11 +580,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.86,
+   "DTU": 0.883,
    "SSR": 1.0,
-   "CSM": 0.1,
+   "CSM": 0.3,
    "EDI": 1.0,
-   "AQE": 0.887
+   "AQE": 0.84
   }
  },
  {
@@ -626,16 +596,16 @@
    "start_time": "13:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJxQEDEgAZQjERJtu-CtBIya8",
-    "ChIJVWhfuoYZQjERiqzzyK-rRko"
+    "ChIJgxcYKLsZQjERlmvsGGeXidw",
+    "ChIJNQWGShUZQjER71TXPpJW4Xs"
    ],
    "avoid": [
-    "ChIJNXaMJAAZQjERJxDzvQEO38c"
+    "ChIJN_abDNcZQjERmLjyrAo7IPk"
    ],
    "order_prefs": [
     [
-     "ChIJxQEDEgAZQjERJtu-CtBIya8",
-     "ChIJVWhfuoYZQjERiqzzyK-rRko"
+     "ChIJgxcYKLsZQjERlmvsGGeXidw",
+     "ChIJNQWGShUZQjER71TXPpJW4Xs"
     ]
    ],
    "activities": []
@@ -657,9 +627,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
+     "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
      "start": "13:00",
-     "end": "13:54",
+     "end": "14:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -667,9 +637,29 @@
      }
     },
     {
-     "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
-     "start": "16:00",
-     "end": "17:12",
+     "poi_id": "ChIJNQWGShUZQjER71TXPpJW4Xs",
+     "start": "14:05",
+     "end": "15:35",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
+     "start": "15:38",
+     "end": "16:18",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJM1DTVHkZQjERDW1JNclcAtw",
+     "start": "16:19",
+     "end": "17:49",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -685,11 +675,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.42,
-   "SSR": 0.0,
-   "CSM": 0.533,
+   "DTU": 0.933,
+   "SSR": 1.0,
+   "CSM": 0.067,
    "EDI": 1.0,
-   "AQE": 0.95
+   "AQE": 0.9
   }
  },
  {
@@ -724,9 +714,29 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJT9jHPuANQjERQTnqjbIQIF8",
-     "start": "08:00",
-     "end": "12:00",
+     "poi_id": "ChIJfagM2mkZQjER9NTQqfVjnI8",
+     "start": "07:00",
+     "end": "08:00",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJBTwySgAZQjERS5kel5Caf00",
+     "start": "09:00",
+     "end": "10:30",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
+     "start": "10:31",
+     "end": "11:46",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -742,9 +752,9 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.8,
+   "DTU": 0.75,
    "SSR": 1.0,
-   "CSM": 0.7,
+   "CSM": 0.35,
    "EDI": 1.0,
    "AQE": 0.9
   }
@@ -758,16 +768,16 @@
    "start_time": "07:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJcw0FdkgYQjERhr14f9cMXK0",
-    "ChIJr-RyTyYfQjERmXNNs1WNyY4"
+    "ChIJp91wYRgZQjER9Yry1HWPhW8",
+    "osm:node/12333995781"
    ],
    "avoid": [
     "ChIJ8VYU_wQRQjER1lJ6MdGSHjg"
    ],
    "order_prefs": [
     [
-     "ChIJcw0FdkgYQjERhr14f9cMXK0",
-     "ChIJr-RyTyYfQjERmXNNs1WNyY4"
+     "ChIJp91wYRgZQjER9Yry1HWPhW8",
+     "osm:node/12333995781"
     ]
    ],
    "activities": [
@@ -789,93 +799,10 @@
    "must_avoid": [],
    "transport": []
   },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJcw0FdkgYQjERhr14f9cMXK0",
-     "start": "08:30",
-     "end": "09:24",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJr-RyTyYfQjERmXNNs1WNyY4",
-     "start": "09:45",
-     "end": "10:30",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
-     "start": "10:31",
-     "end": "11:46",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJs9Tdb7kfQjERg5O07vnwsww",
-     "start": "11:47",
-     "end": "13:35",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
-     "start": "13:38",
-     "end": "14:38",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ1dsj5MQZQjERbgyzx94Lv20",
-     "start": "14:39",
-     "end": "16:27",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
-     "start": "16:31",
-     "end": "17:43",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.791,
-   "SSR": 1.0,
-   "CSM": 0.79,
-   "EDI": 1.0,
-   "AQE": 0.906
-  }
+  "itinerary": null,
+  "infeasible": "must_visit ChIJp91wYRgZQjER9Yry1HWPhW8 exceeds hours/window",
+  "gate": null,
+  "soft": null
  },
  {
   "query_id": "q12",
@@ -912,9 +839,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
+     "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
      "start": "07:00",
-     "end": "07:54",
+     "end": "08:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -922,9 +849,9 @@
      }
     },
     {
-     "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
-     "start": "07:55",
-     "end": "09:07",
+     "poi_id": "osm:node/5273999121",
+     "start": "08:06",
+     "end": "08:26",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -932,9 +859,9 @@
      }
     },
     {
-     "poi_id": "osm:node/3760272162",
-     "start": "09:08",
-     "end": "10:02",
+     "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
+     "start": "09:30",
+     "end": "10:45",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -942,9 +869,9 @@
      }
     },
     {
-     "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
-     "start": "10:03",
-     "end": "11:03",
+     "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
+     "start": "10:46",
+     "end": "11:31",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -960,11 +887,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.8,
+   "DTU": 0.667,
    "SSR": 1.0,
-   "CSM": 0.68,
+   "CSM": 0.72,
    "EDI": 1.0,
-   "AQE": 0.925
+   "AQE": 0.88
   }
  },
  {
@@ -976,16 +903,16 @@
    "start_time": "07:00",
    "end_time": "12:00",
    "must_visit": [
-    "ChIJy0rCqNkXQjERksI84rfTy5k",
-    "ChIJlZdRA3AZQjERGSBb-UXUMZw"
+    "ChIJuzoag4EXQjERm__A5Whnw5I",
+    "ChIJhbtaILkXQjER88acd2hTeAA"
    ],
    "avoid": [
     "ChIJdwwwfFoXQjERW6mXtIdB8LU"
    ],
    "order_prefs": [
     [
-     "ChIJy0rCqNkXQjERksI84rfTy5k",
-     "ChIJlZdRA3AZQjERGSBb-UXUMZw"
+     "ChIJuzoag4EXQjERm__A5Whnw5I",
+     "ChIJhbtaILkXQjER88acd2hTeAA"
     ]
    ],
    "activities": [
@@ -1009,9 +936,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
-     "start": "09:00",
-     "end": "10:12",
+     "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
+     "start": "08:30",
+     "end": "09:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1019,9 +946,19 @@
      }
     },
     {
-     "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
-     "start": "10:31",
-     "end": "11:16",
+     "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
+     "start": "09:03",
+     "end": "10:03",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJvWLgr6cXQjER3bVwhb1OVrs",
+     "start": "10:05",
+     "end": "11:35",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1037,11 +974,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.39,
+   "DTU": 0.6,
    "SSR": 1.0,
    "CSM": 0.533,
    "EDI": 1.0,
-   "AQE": 0.9
+   "AQE": 0.96
   }
  },
  {
@@ -1076,9 +1013,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
-     "start": "10:00",
-     "end": "11:12",
+     "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
+     "start": "10:30",
+     "end": "11:45",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1086,18 +1023,8 @@
      }
     },
     {
-     "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
-     "start": "11:14",
-     "end": "12:08",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
-     "start": "12:11",
+     "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
+     "start": "11:46",
      "end": "13:26",
      "explanation": {
       "evidence": [
@@ -1106,9 +1033,9 @@
      }
     },
     {
-     "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
+     "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
      "start": "13:30",
-     "end": "15:54",
+     "end": "14:20",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1116,9 +1043,29 @@
      }
     },
     {
-     "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
-     "start": "15:59",
-     "end": "17:29",
+     "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
+     "start": "14:21",
+     "end": "15:21",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+     "start": "15:22",
+     "end": "16:52",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
+     "start": "16:55",
+     "end": "17:55",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1136,30 +1083,30 @@
    "STR": 1.0,
    "DTU": 0.659,
    "SSR": 1.0,
-   "CSM": 0.1,
+   "CSM": 0.12,
    "EDI": 1.0,
-   "AQE": 0.908
+   "AQE": 0.877
   }
  },
  {
   "query_id": "q15",
-  "prefs_text": "cuối tuần đi Đà Nẵng 4 người 5 triệu thích yên tĩnh hẹn hò",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 5 triệu",
   "trip": {
    "budget": 5000000,
-   "travelers": 4,
+   "travelers": 1,
    "start_time": "13:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJOyXC4H0XQjERpm2T2xpZcwU",
-    "ChIJJYpRy_YXQjERoyNzmnL2f-E"
+    "ChIJIypBnTAZQjERLPJvLObGXPc",
+    "ChIJz4Y1XCcZQjERzg9AZYfOGH8"
    ],
    "avoid": [
-    "ChIJVWyt-r8ZQjERVMHwS2CscbI"
+    "ChIJNXaMJAAZQjERJxDzvQEO38c"
    ],
    "order_prefs": [
     [
-     "ChIJOyXC4H0XQjERpm2T2xpZcwU",
-     "ChIJJYpRy_YXQjERoyNzmnL2f-E"
+     "ChIJIypBnTAZQjERLPJvLObGXPc",
+     "ChIJz4Y1XCcZQjERzg9AZYfOGH8"
     ]
    ],
    "activities": []
@@ -1181,9 +1128,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
+     "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
      "start": "13:00",
-     "end": "14:15",
+     "end": "14:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1191,9 +1138,9 @@
      }
     },
     {
-     "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
-     "start": "14:24",
-     "end": "15:18",
+     "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
+     "start": "14:08",
+     "end": "15:48",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1201,18 +1148,8 @@
      }
     },
     {
-     "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
-     "start": "15:19",
-     "end": "16:49",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
-     "start": "17:00",
+     "poi_id": "ChIJTQuJbKYZQjERAE9fPrQroZw",
+     "start": "16:30",
      "end": "18:00",
      "explanation": {
       "evidence": [
@@ -1229,11 +1166,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.93,
+   "DTU": 0.833,
    "SSR": 1.0,
-   "CSM": 0.608,
+   "CSM": 0.95,
    "EDI": 1.0,
-   "AQE": 0.87
+   "AQE": 0.86
   }
  },
  {
@@ -1246,7 +1183,7 @@
    "end_time": "18:00",
    "must_visit": [],
    "avoid": [
-    "ChIJbbs1ZTQYQjERi3OdfmnRk2g"
+    "ChIJA8a2aLcQQjER5mciBxvjUVs"
    ],
    "order_prefs": [],
    "activities": [
@@ -1271,381 +1208,7 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
-     "start": "07:00",
-     "end": "07:54",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
-     "start": "07:55",
-     "end": "09:55",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
-     "start": "09:56",
-     "end": "11:08",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJYyr_6ogXQjERoXAq8cGEzcI",
-     "start": "11:17",
-     "end": "15:17",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
-     "start": "15:21",
-     "end": "16:33",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "osm:node/5273999121",
-     "start": "16:44",
-     "end": "17:38",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.927,
-   "SSR": 1.0,
-   "CSM": 0.533,
-   "EDI": 1.0,
-   "AQE": 0.917
-  }
- },
- {
-  "query_id": "q17",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 1 triệu",
-  "trip": {
-   "budget": 1000000,
-   "travelers": 1,
-   "start_time": "13:00",
-   "end_time": "18:00",
-   "must_visit": [
-    "ChIJYahwiHIXQjER0CIGd09pgcg",
-    "ChIJjUOBqjgZQjER7IrYE9R52A8"
-   ],
-   "avoid": [
-    "ChIJ_2lhydMZQjERNTX79I86p44"
-   ],
-   "order_prefs": [
-    [
-     "ChIJYahwiHIXQjER0CIGd09pgcg",
-     "ChIJjUOBqjgZQjER7IrYE9R52A8"
-    ]
-   ],
-   "activities": [
-    "leo núi",
-    "tắm biển"
-   ]
-  },
-  "profile": {
-   "party_type": "family",
-   "trip_purpose": "leisure",
-   "spending_level": 2,
-   "pace": 1,
-   "fitness": 1,
-   "food_prefs": [],
-   "allergy": [],
-   "activities": [],
-   "outdoor_bias": 0.0,
-   "accessibility": [],
-   "must_avoid": [],
-   "transport": []
-  },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
-     "start": "13:00",
-     "end": "13:54",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJYahwiHIXQjER0CIGd09pgcg",
-     "start": "16:00",
-     "end": "17:12",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.42,
-   "SSR": 0.0,
-   "CSM": 0.65,
-   "EDI": 1.0,
-   "AQE": 0.96
-  }
- },
- {
-  "query_id": "q18",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 3 triệu",
-  "trip": {
-   "budget": 3000000,
-   "travelers": 2,
-   "start_time": "13:00",
-   "end_time": "18:00",
-   "must_visit": [],
-   "avoid": [
-    "ChIJFYLgeggZQjERgwxGcK7JcpQ"
-   ],
-   "order_prefs": [],
-   "activities": [
-    "bảo tàng"
-   ]
-  },
-  "profile": {
-   "party_type": "friends",
-   "trip_purpose": "leisure",
-   "spending_level": 2,
-   "pace": 3,
-   "fitness": 3,
-   "food_prefs": [],
-   "allergy": [],
-   "activities": [],
-   "outdoor_bias": 0.0,
-   "accessibility": [],
-   "must_avoid": [],
-   "transport": []
-  },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
-     "start": "13:00",
-     "end": "14:12",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
-     "start": "16:00",
-     "end": "17:48",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.6,
-   "SSR": 1.0,
-   "CSM": 0.6,
-   "EDI": 1.0,
-   "AQE": 0.95
-  }
- },
- {
-  "query_id": "q19",
-  "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 1 triệu, ưu tiên check-in trung tâm",
-  "trip": {
-   "budget": 1000000,
-   "travelers": 2,
-   "start_time": "07:00",
-   "end_time": "12:00",
-   "must_visit": [
-    "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
-    "ChIJcx8dydYYQjERMG39tIgHP1Y"
-   ],
-   "avoid": [
-    "ChIJK5AaRBYZQjER9AALhERmND8"
-   ],
-   "order_prefs": [
-    [
-     "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
-     "ChIJcx8dydYYQjERMG39tIgHP1Y"
-    ]
-   ],
-   "activities": []
-  },
-  "profile": {
-   "party_type": "couple",
-   "trip_purpose": "leisure",
-   "spending_level": 2,
-   "pace": 2,
-   "fitness": 2,
-   "food_prefs": [],
-   "allergy": [],
-   "activities": [],
-   "outdoor_bias": 0.0,
-   "accessibility": [],
-   "must_avoid": [],
-   "transport": []
-  },
-  "itinerary": null,
-  "infeasible": "must_visit ChIJJS-cJ58XQjERxgFIfN6CjJ0 breaks a day rule",
-  "gate": null,
-  "soft": null
- },
- {
-  "query_id": "q20",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 5 triệu",
-  "trip": {
-   "budget": 5000000,
-   "travelers": 1,
-   "start_time": "07:00",
-   "end_time": "18:00",
-   "must_visit": [],
-   "avoid": [
-    "ChIJ55nxA9MZQjERNOaUcyvyXxg"
-   ],
-   "order_prefs": [],
-   "activities": []
-  },
-  "profile": {
-   "party_type": "family",
-   "trip_purpose": "leisure",
-   "spending_level": 2,
-   "pace": 1,
-   "fitness": 1,
-   "food_prefs": [],
-   "allergy": [],
-   "activities": [],
-   "outdoor_bias": 0.0,
-   "accessibility": [],
-   "must_avoid": [],
-   "transport": []
-  },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM",
-     "start": "09:30",
-     "end": "11:18",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
-     "start": "17:00",
-     "end": "18:00",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.255,
-   "SSR": 1.0,
-   "CSM": 0.88,
-   "EDI": 1.0,
-   "AQE": 0.92
-  }
- },
- {
-  "query_id": "q21",
-  "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 5 triệu, ưu tiên biển và hải sản",
-  "trip": {
-   "budget": 5000000,
-   "travelers": 4,
-   "start_time": "07:00",
-   "end_time": "12:00",
-   "must_visit": [
-    "osm:node/11888483369",
-    "osm:node/3760247201"
-   ],
-   "avoid": [
-    "ChIJdwwwfFoXQjERW6mXtIdB8LU"
-   ],
-   "order_prefs": [
-    [
-     "osm:node/11888483369",
-     "osm:node/3760247201"
-    ]
-   ],
-   "activities": [
-    "tắm biển",
-    "hải sản"
-   ]
-  },
-  "profile": {
-   "party_type": "friends",
-   "trip_purpose": "leisure",
-   "spending_level": 2,
-   "pace": 3,
-   "fitness": 3,
-   "food_prefs": [],
-   "allergy": [],
-   "activities": [],
-   "outdoor_bias": 0.0,
-   "accessibility": [],
-   "must_avoid": [],
-   "transport": []
-  },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "osm:node/11888483369",
+     "poi_id": "ChIJcbN8RKEXQjERd0H0haMdx4Y",
      "start": "07:00",
      "end": "08:30",
      "explanation": {
@@ -1655,9 +1218,9 @@
      }
     },
     {
-     "poi_id": "osm:node/3760247201",
-     "start": "08:38",
-     "end": "09:32",
+     "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
+     "start": "08:31",
+     "end": "09:31",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1665,9 +1228,9 @@
      }
     },
     {
-     "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
+     "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
      "start": "09:33",
-     "end": "10:18",
+     "end": "10:13",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1675,9 +1238,29 @@
      }
     },
     {
-     "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
-     "start": "10:22",
-     "end": "11:34",
+     "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
+     "start": "10:14",
+     "end": "11:44",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+     "start": "14:00",
+     "end": "15:30",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
+     "start": "15:31",
+     "end": "17:01",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1693,24 +1276,481 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.87,
+   "DTU": 0.697,
    "SSR": 1.0,
-   "CSM": 0.68,
+   "CSM": 0.367,
    "EDI": 1.0,
-   "AQE": 0.935
+   "AQE": 0.883
+  }
+ },
+ {
+  "query_id": "q17",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 1 triệu",
+  "trip": {
+   "budget": 1000000,
+   "travelers": 2,
+   "start_time": "13:00",
+   "end_time": "18:00",
+   "must_visit": [
+    "ChIJr_-_LCgZQjERRByqB18J3Ls",
+    "ChIJnZoMTbkQQjERwzvvHqGlb4E"
+   ],
+   "avoid": [
+    "ChIJgySoNs8YQjERfMLXuOeJ940"
+   ],
+   "order_prefs": [
+    [
+     "ChIJr_-_LCgZQjERRByqB18J3Ls",
+     "ChIJnZoMTbkQQjERwzvvHqGlb4E"
+    ]
+   ],
+   "activities": [
+    "leo núi",
+    "tắm biển"
+   ]
+  },
+  "profile": {
+   "party_type": "family",
+   "trip_purpose": "leisure",
+   "spending_level": 2,
+   "pace": 1,
+   "fitness": 1,
+   "food_prefs": [],
+   "allergy": [],
+   "activities": [],
+   "outdoor_bias": 0.0,
+   "accessibility": [],
+   "must_avoid": [],
+   "transport": []
+  },
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
+     "start": "13:00",
+     "end": "14:15",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJnZoMTbkQQjERwzvvHqGlb4E",
+     "start": "14:51",
+     "end": "15:21",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
+     "start": "15:22",
+     "end": "16:22",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
+     "start": "16:27",
+     "end": "17:27",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+     "start": "17:28",
+     "end": "17:58",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.85,
+   "SSR": 1.0,
+   "CSM": 0.2,
+   "EDI": 1.0,
+   "AQE": 0.94
+  }
+ },
+ {
+  "query_id": "q18",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 3 triệu",
+  "trip": {
+   "budget": 3000000,
+   "travelers": 1,
+   "start_time": "13:00",
+   "end_time": "18:00",
+   "must_visit": [],
+   "avoid": [
+    "ChIJZdLv8rkZQjERIhU2VsEsCl4"
+   ],
+   "order_prefs": [],
+   "activities": [
+    "bảo tàng"
+   ]
+  },
+  "profile": {
+   "party_type": "friends",
+   "trip_purpose": "leisure",
+   "spending_level": 2,
+   "pace": 3,
+   "fitness": 3,
+   "food_prefs": [],
+   "allergy": [],
+   "activities": [],
+   "outdoor_bias": 0.0,
+   "accessibility": [],
+   "must_avoid": [],
+   "transport": []
+  },
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJe3Ixim4XQjERbbrbMnyhr34",
+     "start": "13:00",
+     "end": "14:15",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
+     "start": "16:00",
+     "end": "17:30",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.55,
+   "SSR": 1.0,
+   "CSM": 0.833,
+   "EDI": 1.0,
+   "AQE": 0.95
+  }
+ },
+ {
+  "query_id": "q19",
+  "prefs_text": "cuối tuần đi Đà Nẵng 2 người 1 triệu thích check-in trung tâm",
+  "trip": {
+   "budget": 1000000,
+   "travelers": 2,
+   "start_time": "07:00",
+   "end_time": "12:00",
+   "must_visit": [
+    "ChIJCyoHH4kZQjERX3hJiiMqhyk",
+    "ChIJt1wLHjEYQjEREA1YGZU2yOc"
+   ],
+   "avoid": [
+    "ChIJs9Tdb7kfQjERg5O07vnwsww"
+   ],
+   "order_prefs": [
+    [
+     "ChIJCyoHH4kZQjERX3hJiiMqhyk",
+     "ChIJt1wLHjEYQjEREA1YGZU2yOc"
+    ]
+   ],
+   "activities": []
+  },
+  "profile": {
+   "party_type": "couple",
+   "trip_purpose": "leisure",
+   "spending_level": 2,
+   "pace": 2,
+   "fitness": 2,
+   "food_prefs": [],
+   "allergy": [],
+   "activities": [],
+   "outdoor_bias": 0.0,
+   "accessibility": [],
+   "must_avoid": [],
+   "transport": []
+  },
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
+     "start": "07:00",
+     "end": "07:30",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
+     "start": "09:00",
+     "end": "10:00",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
+     "start": "10:01",
+     "end": "11:01",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g",
+     "start": "11:02",
+     "end": "11:42",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.633,
+   "SSR": 1.0,
+   "CSM": 0.76,
+   "EDI": 1.0,
+   "AQE": 0.9
+  }
+ },
+ {
+  "query_id": "q20",
+  "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 5 triệu, ưu tiên yên tĩnh hẹn hò",
+  "trip": {
+   "budget": 5000000,
+   "travelers": 2,
+   "start_time": "07:00",
+   "end_time": "18:00",
+   "must_visit": [],
+   "avoid": [
+    "ChIJK4sVPc0ZQjERdGROWQ8MMg4"
+   ],
+   "order_prefs": [],
+   "activities": []
+  },
+  "profile": {
+   "party_type": "family",
+   "trip_purpose": "leisure",
+   "spending_level": 2,
+   "pace": 1,
+   "fitness": 1,
+   "food_prefs": [],
+   "allergy": [],
+   "activities": [],
+   "outdoor_bias": 0.0,
+   "accessibility": [],
+   "must_avoid": [],
+   "transport": []
+  },
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
+     "start": "07:00",
+     "end": "08:00",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
+     "start": "08:04",
+     "end": "09:34",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ_2lhydMZQjERNTX79I86p44",
+     "start": "13:00",
+     "end": "14:15",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
+     "start": "14:19",
+     "end": "14:39",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
+     "start": "14:43",
+     "end": "15:58",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ46gfxSkZQjERgT9OU08ssF4",
+     "start": "16:02",
+     "end": "17:32",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.621,
+   "SSR": 1.0,
+   "CSM": 0.5,
+   "EDI": 1.0,
+   "AQE": 0.9
+  }
+ },
+ {
+  "query_id": "q21",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 5 triệu",
+  "trip": {
+   "budget": 5000000,
+   "travelers": 4,
+   "start_time": "07:00",
+   "end_time": "12:00",
+   "must_visit": [
+    "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+    "ChIJuaI3VgMZQjER0B4a7LcJ-YA"
+   ],
+   "avoid": [
+    "ChIJ9wcVkY0ZQjERC4hzT7DwUcg"
+   ],
+   "order_prefs": [
+    [
+     "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+     "ChIJuaI3VgMZQjER0B4a7LcJ-YA"
+    ]
+   ],
+   "activities": [
+    "tắm biển",
+    "hải sản"
+   ]
+  },
+  "profile": {
+   "party_type": "friends",
+   "trip_purpose": "leisure",
+   "spending_level": 2,
+   "pace": 3,
+   "fitness": 3,
+   "food_prefs": [],
+   "allergy": [],
+   "activities": [],
+   "outdoor_bias": 0.0,
+   "accessibility": [],
+   "must_avoid": [],
+   "transport": []
+  },
+  "itinerary": {
+   "activities": [
+    {
+     "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+     "start": "10:00",
+     "end": "11:15",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJuaI3VgMZQjER0B4a7LcJ-YA",
+     "start": "11:39",
+     "end": "11:59",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    }
+   ]
+  },
+  "infeasible": "",
+  "gate": {
+   "passed": true,
+   "violations": []
+  },
+  "soft": {
+   "STR": 1.0,
+   "DTU": 0.317,
+   "SSR": 1.0,
+   "CSM": 0.76,
+   "EDI": 1.0,
+   "AQE": 0.93
   }
  },
  {
   "query_id": "q22",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 3 triệu",
+  "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 3 triệu, ưu tiên leo núi rồi đi biển",
   "trip": {
    "budget": 3000000,
-   "travelers": 2,
+   "travelers": 4,
    "start_time": "07:00",
    "end_time": "12:00",
    "must_visit": [],
    "avoid": [
-    "ChIJhbtaILkXQjER88acd2hTeAA"
+    "ChIJdwwwfFoXQjERW6mXtIdB8LU"
    ],
    "order_prefs": [],
    "activities": [
@@ -1735,9 +1775,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
-     "start": "07:00",
-     "end": "07:54",
+     "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
+     "start": "08:30",
+     "end": "09:20",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1745,29 +1785,9 @@
      }
     },
     {
-     "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
-     "start": "07:55",
-     "end": "09:07",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "osm:node/3760272162",
-     "start": "09:08",
-     "end": "10:02",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
-     "start": "10:03",
-     "end": "11:03",
+     "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
+     "start": "10:00",
+     "end": "11:15",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1783,32 +1803,32 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.8,
+   "DTU": 0.417,
    "SSR": 1.0,
-   "CSM": 0.733,
+   "CSM": 0.6,
    "EDI": 1.0,
-   "AQE": 0.925
+   "AQE": 0.87
   }
  },
  {
   "query_id": "q23",
-  "prefs_text": "cuối tuần đi Đà Nẵng 1 người 1 triệu thích văn hóa và ẩm thực",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 1 triệu",
   "trip": {
    "budget": 1000000,
-   "travelers": 1,
+   "travelers": 2,
    "start_time": "07:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJeaPwiDUYQjERt4yUm81Oqi8",
-    "ChIJw4WrdmsZQjERRCJKWvRJHtI"
+    "ChIJV_BGLtAZQjERD9LS1cvwDwg",
+    "ChIJsdeOrV8XQjER8weQ8Az-w5c"
    ],
    "avoid": [
-    "ChIJwYDU9ZwZQjERwliWFVsHlfw"
+    "manual:be-man"
    ],
    "order_prefs": [
     [
-     "ChIJeaPwiDUYQjERt4yUm81Oqi8",
-     "ChIJw4WrdmsZQjERRCJKWvRJHtI"
+     "ChIJV_BGLtAZQjERD9LS1cvwDwg",
+     "ChIJsdeOrV8XQjER8weQ8Az-w5c"
     ]
    ],
    "activities": [
@@ -1832,9 +1852,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
-     "start": "15:00",
-     "end": "16:15",
+     "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
+     "start": "10:30",
+     "end": "11:45",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1842,9 +1862,29 @@
      }
     },
     {
-     "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-     "start": "16:30",
-     "end": "17:24",
+     "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+     "start": "11:57",
+     "end": "12:27",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
+     "start": "12:32",
+     "end": "14:12",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJY_iyslwXQjERFoDw4waR2Sg",
+     "start": "14:13",
+     "end": "15:43",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1860,24 +1900,24 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.195,
+   "DTU": 0.447,
    "SSR": 1.0,
-   "CSM": 0.9,
+   "CSM": 0.0,
    "EDI": 1.0,
-   "AQE": 0.91
+   "AQE": 0.945
   }
  },
  {
   "query_id": "q24",
-  "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 5 triệu, ưu tiên check-in trung tâm",
+  "prefs_text": "cuối tuần đi Đà Nẵng 2 người 5 triệu thích check-in trung tâm",
   "trip": {
    "budget": 5000000,
-   "travelers": 4,
+   "travelers": 2,
    "start_time": "13:00",
    "end_time": "18:00",
    "must_visit": [],
    "avoid": [
-    "ChIJXeXlix8ZQjERx9QsmNqx6_U"
+    "ChIJ8cqHGTMYQjERU0gT5dridKc"
    ],
    "order_prefs": [],
    "activities": []
@@ -1899,9 +1939,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
+     "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
      "start": "13:00",
-     "end": "14:00",
+     "end": "14:15",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1909,9 +1949,9 @@
      }
     },
     {
-     "poi_id": "osm:node/3760247201",
-     "start": "14:02",
-     "end": "14:56",
+     "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
+     "start": "14:16",
+     "end": "15:46",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1919,19 +1959,19 @@
      }
     },
     {
-     "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
-     "start": "14:57",
-     "end": "15:42",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
+     "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
      "start": "15:47",
-     "end": "17:35",
+     "end": "17:27",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+     "start": "17:29",
+     "end": "17:59",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -1947,32 +1987,32 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.89,
+   "DTU": 0.983,
    "SSR": 1.0,
-   "CSM": 0.68,
+   "CSM": 0.74,
    "EDI": 1.0,
-   "AQE": 0.905
+   "AQE": 0.94
   }
  },
  {
   "query_id": "q25",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 3 triệu",
+  "prefs_text": "cuối tuần đi Đà Nẵng 4 người 3 triệu thích yên tĩnh hẹn hò",
   "trip": {
    "budget": 3000000,
    "travelers": 4,
    "start_time": "07:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJlxydWJEZQjER5GSMuHJHtak",
-    "ChIJ4UuIQXgXQjERz192UgYuxMU"
+    "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
+    "manual:hai-van-quan"
    ],
    "avoid": [
-    "ChIJ86LzsaUhQjERGxE6itCeBCY"
+    "ChIJ8WgvsE8ZQjERZzNoKTBgM84"
    ],
    "order_prefs": [
     [
-     "ChIJlxydWJEZQjER5GSMuHJHtak",
-     "ChIJ4UuIQXgXQjERz192UgYuxMU"
+     "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
+     "manual:hai-van-quan"
     ]
    ],
    "activities": []
@@ -1994,9 +2034,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
+     "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
      "start": "07:00",
-     "end": "10:20",
+     "end": "08:15",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2004,9 +2044,9 @@
      }
     },
     {
-     "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
-     "start": "11:00",
-     "end": "12:12",
+     "poi_id": "manual:hai-van-quan",
+     "start": "08:48",
+     "end": "09:28",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2014,9 +2054,9 @@
      }
     },
     {
-     "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
-     "start": "12:14",
-     "end": "13:08",
+     "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
+     "start": "09:51",
+     "end": "12:51",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2024,19 +2064,9 @@
      }
     },
     {
-     "poi_id": "ChIJp4sb2egXQjERFOFVxrsHiyI",
-     "start": "13:09",
-     "end": "14:57",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
-     "start": "14:58",
-     "end": "16:58",
+     "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
+     "start": "13:12",
+     "end": "14:12",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2052,11 +2082,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.839,
+   "DTU": 0.538,
    "SSR": 1.0,
-   "CSM": 0.067,
+   "CSM": 0.04,
    "EDI": 1.0,
-   "AQE": 0.904
+   "AQE": 0.895
   }
  },
  {
@@ -2094,9 +2124,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+     "poi_id": "osm:node/5273999121",
      "start": "13:00",
-     "end": "13:54",
+     "end": "13:20",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2104,9 +2134,9 @@
      }
     },
     {
-     "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
-     "start": "13:57",
-     "end": "14:51",
+     "poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M",
+     "start": "13:24",
+     "end": "14:24",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2114,9 +2144,29 @@
      }
     },
     {
-     "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
-     "start": "14:53",
-     "end": "17:17",
+     "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+     "start": "14:28",
+     "end": "15:58",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
+     "start": "16:05",
+     "end": "16:50",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
+     "start": "17:03",
+     "end": "17:43",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2132,32 +2182,32 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.84,
+   "DTU": 0.85,
    "SSR": 1.0,
-   "CSM": 0.8,
+   "CSM": 0.04,
    "EDI": 1.0,
-   "AQE": 0.953
+   "AQE": 0.912
   }
  },
  {
   "query_id": "q27",
-  "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 3 triệu",
+  "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 3 triệu, ưu tiên leo núi rồi đi biển",
   "trip": {
    "budget": 3000000,
-   "travelers": 2,
+   "travelers": 4,
    "start_time": "13:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJjSsrUvMZQjERM248I6ifNB8",
-    "ChIJSwMjjYEXQjERBbThTSOPeKY"
+    "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
+    "manual:nha-tho-con-ga"
    ],
    "avoid": [
-    "ChIJp5h-DjMYQjERTMBHOnlub0o"
+    "ChIJvWxNwnsXQjERKAEy50FwlnI"
    ],
    "order_prefs": [
     [
-     "ChIJjSsrUvMZQjERM248I6ifNB8",
-     "ChIJSwMjjYEXQjERBbThTSOPeKY"
+     "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
+     "manual:nha-tho-con-ga"
     ]
    ],
    "activities": [
@@ -2182,9 +2232,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
+     "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
      "start": "13:00",
-     "end": "14:15",
+     "end": "14:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2192,9 +2242,9 @@
      }
     },
     {
-     "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
-     "start": "16:00",
-     "end": "17:00",
+     "poi_id": "manual:nha-tho-con-ga",
+     "start": "14:02",
+     "end": "14:22",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2202,9 +2252,39 @@
      }
     },
     {
-     "poi_id": "ChIJa7FkIyUZQjER7VxLENFhuI0",
-     "start": "17:03",
-     "end": "17:48",
+     "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+     "start": "14:25",
+     "end": "15:05",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
+     "start": "15:06",
+     "end": "16:06",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJCyoHH4kZQjERX3hJiiMqhyk",
+     "start": "16:08",
+     "end": "16:38",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
+     "start": "16:44",
+     "end": "17:24",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2220,16 +2300,16 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.6,
-   "SSR": 0.0,
-   "CSM": 0.567,
+   "DTU": 0.833,
+   "SSR": 1.0,
+   "CSM": 0.787,
    "EDI": 1.0,
-   "AQE": 0.827
+   "AQE": 0.877
   }
  },
  {
   "query_id": "q28",
-  "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 1 triệu, ưu tiên văn hóa và ẩm thực",
+  "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 1 triệu",
   "trip": {
    "budget": 1000000,
    "travelers": 2,
@@ -2237,7 +2317,7 @@
    "end_time": "12:00",
    "must_visit": [],
    "avoid": [
-    "ChIJ2eFWbrcXQjERkMR0z_5VhM0"
+    "ChIJp4lxrJsZQjERdBDtWzWyHJU"
    ],
    "order_prefs": [],
    "activities": [
@@ -2261,9 +2341,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
-     "start": "08:30",
-     "end": "10:18",
+     "poi_id": "ChIJh4MCHBoXQjERA274y4wwup4",
+     "start": "07:00",
+     "end": "08:15",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2271,9 +2351,9 @@
      }
     },
     {
-     "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
-     "start": "10:19",
-     "end": "11:13",
+     "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
+     "start": "08:18",
+     "end": "09:18",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2281,9 +2361,19 @@
      }
     },
     {
-     "poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY",
-     "start": "11:14",
-     "end": "11:59",
+     "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
+     "start": "09:23",
+     "end": "11:03",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
+     "start": "11:04",
+     "end": "11:34",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2299,32 +2389,32 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.69,
+   "DTU": 0.883,
    "SSR": 1.0,
-   "CSM": 0.8,
+   "CSM": 0.3,
    "EDI": 1.0,
-   "AQE": 0.927
+   "AQE": 0.935
   }
  },
  {
   "query_id": "q29",
-  "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 5 triệu, ưu tiên check-in trung tâm",
+  "prefs_text": "cuối tuần đi Đà Nẵng 4 người 5 triệu thích check-in trung tâm",
   "trip": {
    "budget": 5000000,
-   "travelers": 1,
+   "travelers": 4,
    "start_time": "07:00",
    "end_time": "18:00",
    "must_visit": [
-    "ChIJBVHLh_gXQjER0MFnoSFsh4A",
-    "ChIJgdHMn8gYQjERmEdW2JHUGTw"
+    "ChIJ1eef2IsZQjERjy-_tblqzJs",
+    "ChIJfb2A754ZQjERwntwhqY2_nQ"
    ],
    "avoid": [
-    "ChIJFYLgeggZQjERgwxGcK7JcpQ"
+    "ChIJjUOBqjgZQjER7IrYE9R52A8"
    ],
    "order_prefs": [
     [
-     "ChIJBVHLh_gXQjER0MFnoSFsh4A",
-     "ChIJgdHMn8gYQjERmEdW2JHUGTw"
+     "ChIJ1eef2IsZQjERjy-_tblqzJs",
+     "ChIJfb2A754ZQjERwntwhqY2_nQ"
     ]
    ],
    "activities": []
@@ -2343,63 +2433,10 @@
    "must_avoid": [],
    "transport": []
   },
-  "itinerary": {
-   "activities": [
-    {
-     "poi_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
-     "start": "10:00",
-     "end": "11:12",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJgdHMn8gYQjERmEdW2JHUGTw",
-     "start": "11:37",
-     "end": "13:37",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
-     "start": "16:00",
-     "end": "17:00",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    },
-    {
-     "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
-     "start": "17:02",
-     "end": "17:47",
-     "explanation": {
-      "evidence": [
-       "gold:approach-b"
-      ]
-     }
-    }
-   ]
-  },
-  "infeasible": "",
-  "gate": {
-   "passed": true,
-   "violations": []
-  },
-  "soft": {
-   "STR": 1.0,
-   "DTU": 0.45,
-   "SSR": 1.0,
-   "CSM": 0.87,
-   "EDI": 1.0,
-   "AQE": 0.815
-  }
+  "itinerary": null,
+  "infeasible": "must_visit ChIJ1eef2IsZQjERjy-_tblqzJs breaks a day rule",
+  "gate": null,
+  "soft": null
  },
  {
   "query_id": "q30",
@@ -2411,7 +2448,7 @@
    "end_time": "12:00",
    "must_visit": [],
    "avoid": [
-    "ChIJQydy2apx34oRnci64Kkdi4U"
+    "ChIJFXuefgA9QjERTm9u0hlzWcs"
    ],
    "order_prefs": [],
    "activities": []
@@ -2433,9 +2470,9 @@
   "itinerary": {
    "activities": [
     {
-     "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
-     "start": "08:00",
-     "end": "08:45",
+     "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
+     "start": "07:00",
+     "end": "08:00",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2443,9 +2480,9 @@
      }
     },
     {
-     "poi_id": "ChIJ5xGrdQAXQjERUKN8BeMLPJo",
-     "start": "09:00",
-     "end": "10:48",
+     "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
+     "start": "08:03",
+     "end": "08:23",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2453,9 +2490,19 @@
      }
     },
     {
-     "poi_id": "ChIJvb3YtJYXQjERnLJ4-sFfc6A",
-     "start": "10:49",
-     "end": "11:43",
+     "poi_id": "ChIJaeTAGgMZQjER5Hvtuv10j_s",
+     "start": "09:30",
+     "end": "10:45",
+     "explanation": {
+      "evidence": [
+       "gold:approach-b"
+      ]
+     }
+    },
+    {
+     "poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
+     "start": "10:52",
+     "end": "11:52",
      "explanation": {
       "evidence": [
        "gold:approach-b"
@@ -2471,11 +2518,11 @@
   },
   "soft": {
    "STR": 1.0,
-   "DTU": 0.69,
+   "DTU": 0.717,
    "SSR": 1.0,
-   "CSM": 0.98,
+   "CSM": 0.93,
    "EDI": 1.0,
-   "AQE": 0.953
+   "AQE": 0.855
   }
  }
 ]

@@ -100,8 +100,8 @@ class TestActivityRequirements(unittest.TestCase):
     def test_groups_only_for_categories_in_pool(self):
         groups, report = activity_requirements(
             ["tắm biển", "bảo tàng", "đi chơi", "lịch sử"], POIS)
-        self.assertEqual(groups, [{"count": 1, "categories": ["beach"]},
-                                  {"count": 1, "categories": ["landmark"]}])
+        self.assertEqual(groups, [{"count": 1, "categories": ["beach"], "poi_ids": ["son-tra-beach"]},
+                                  {"count": 1, "categories": ["landmark"], "poi_ids": ["pagoda"]}])
         self.assertEqual([(r["activity"], r["status"]) for r in report],
                          [("tắm biển", "required"), ("bảo tàng", "no_verified_poi"),
                           ("đi chơi", "not_understood"), ("lịch sử", "required")])
@@ -109,7 +109,7 @@ class TestActivityRequirements(unittest.TestCase):
 
     def test_duplicate_groups_collapse(self):
         groups, _ = activity_requirements(["tắm biển", "đi biển"], POIS)
-        self.assertEqual(groups, [{"count": 1, "categories": ["beach"]}])
+        self.assertEqual(groups, [{"count": 1, "categories": ["beach"], "poi_ids": ["son-tra-beach"]}])
 
     def test_lodging_never_required(self):
         groups, report = activity_requirements(["khách sạn"], POIS)

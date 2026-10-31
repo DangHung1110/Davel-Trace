@@ -53,6 +53,10 @@ with a finite score in [0, 1]:
   that is all food is semantically poor, not infeasible: F1 is in the
   registry but listed in `SOFT_CHECKS`, so it reports a violation/penalty
   and never fail-closes (score = satisfied halves / 2).
+- TIME_FIT (SOFT): every stop sits at an hour it makes sense (a restaurant at a
+  meal, a beach out of the midday sun, a pagoda before dark), on top of being open.
+  A must_visit is the traveller's own choice and is not judged.
+- DINNER (SOFT): a planned day that runs through dinner has a restaurant for it.
 - TCS: time mirror — VROH/B3/ETB all pass AND no overlap AND every
   activity fits [start_time, deadline].
 - HCS: hard mirror — the concrete gates (incl. PROFILE_SAFE, A1, CAFE_CAP,
@@ -79,12 +83,15 @@ from BE.app.services.soft_rules import (
     CAFE_DEFAULT_CAP,
     CAFE_MAX_CAP,
     CATEGORY_DAILY_CAP,
+    DINNER_REQUIRED,
     MEAL_SLOTS,
     NON_FOOD_CAPPED,
     REST_START_TOLERANCE,
     cafe_daypart,
     cafe_need,
+    covers_dinner,
     effective_rest,
+    fits_time_of_day,
     is_food,
     is_sightseeing,
     lunch_activity,
@@ -164,9 +171,10 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
         return _result(True, 1.0)
     bad = 0
     for a in acts:
-        hours = (pois.get(a.get("poi_id"), {}) or {}).get("opening_hours") or []
+        poi = pois.get(a.get("poi_id"), {}) or {}
+        hours = poi.get("opening_hours") or []
         s, e = to_min(a["start"]), to_min(a["end"])
-        if hours and not any(in_range(s, e, h) for h in hours):
+        if poi.get("closed_today") or (hours and not any(in_range(s, e, h) for h in hours)):
             bad += 1
     return _result(bad == 0, 1.0 - bad / len(acts))
 
@@ -400,6 +408,28 @@ def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(met == 2, met / 2.0)
 
 
+def check_time_fit(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """SOFT: every stop the planner chose sits at an hour it makes sense."""
+    acts = [a for a in itinerary.get("activities", [])
+            if a.get("poi_id") not in (trip.get("must_visit") or [])]
+    if not acts:
+        return _result(True, 1.0)
+    bad = sum(1 for a in acts if not fits_time_of_day(pois.get(a.get("poi_id")),
+                                                      to_min(a["start"]), to_min(a["end"])))
+    return _result(bad == 0, 1.0 - bad / len(acts))
+
+
+@_per_day
+def check_dinner(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """SOFT: a planned day (`meals`) that runs through dinner has one."""
+    acts = itinerary.get("activities", [])
+    if not acts or not trip.get("meals") or not covers_dinner(trip):
+        return _result(True, 1.0)
+    return _result(any(poi_category(pois.get(a.get("poi_id"), {})) == "restaurant"
+                       and DINNER_REQUIRED[0] <= to_min(a["start"]) < DINNER_REQUIRED[1]
+                       for a in acts))
+
+
 @_per_day
 def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Time mirror: VROH/B3/ETB + no overlap + inside [start, deadline]."""
@@ -447,11 +477,12 @@ CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
           ("NO_CONSECUTIVE", check_no_consecutive),
           ("NO_ADJACENT_FOOD", check_no_adjacent_food),
           ("REST_FOLLOWS_LUNCH", check_rest_follows_lunch),
-          ("F1", check_f1), ("TCS", check_tcs), ("HCS", check_hcs))
+          ("F1", check_f1), ("TIME_FIT", check_time_fit), ("DINNER", check_dinner),
+          ("TCS", check_tcs), ("HCS", check_hcs))
 
-# F1 is a quality quota, not feasibility: it is reported but never
+# F1, TIME_FIT and DINNER are quality, not feasibility: they are reported but never
 # fail-closes a plan (SOFT severity, test-local). Everything else is hard.
-SOFT_CHECKS = frozenset({"F1"})
+SOFT_CHECKS = frozenset({"F1", "TIME_FIT", "DINNER"})
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
 
@@ -549,6 +580,16 @@ RULE_FREEZE: dict[str, dict] = {
         "status": "active", "canonical": None, "family": "variety",
         "reason": ">=1 food AND >=1 sightseeing per day; SOFT (reported, "
                   "never fail-closes)",
+    },
+    "TIME_FIT": {
+        "status": "active", "canonical": None, "family": "time-fit",
+        "reason": "a stop at an hour it makes sense, by category; SOFT (the "
+                  "solver windows own it, the ladder may relax it for a wish)",
+    },
+    "DINNER": {
+        "status": "active", "canonical": None, "family": "meal-slot",
+        "reason": "a planned day through dinner has one; SOFT (the ladder drops "
+                  "it, with a warning, when money or hours cannot hold it)",
     },
     "A2": {
         "status": "active", "canonical": None, "family": "meal-spacing",

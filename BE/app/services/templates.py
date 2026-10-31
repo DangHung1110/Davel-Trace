@@ -34,6 +34,7 @@ required counts relax; the archetype bans and the rest lock stay hard).
 
 from __future__ import annotations
 
+import math
 import re
 
 from BE.app.services.profile_filter import fold
@@ -43,17 +44,23 @@ from BE.app.services.soft_rules import (
     REST_DEFAULT_MIN,
     REST_MIN_BY_PACE,
     SIGHTSEEING_CATEGORIES,
+    covers_dinner,
     meal_window_present,
 )
 from BE.common import to_min
 
 MARKET = frozenset({"market"})
-CULTURE = frozenset({"museum", "landmark", "attraction"})
+CULTURE = frozenset({"museum", "landmark", "attraction", "temple"})
 # Every snapshot activity category (lodging/transport are not activities).
 ALL_ACTIVITY = frozenset({
-    "restaurant", "cafe", "market", "attraction", "landmark", "museum",
-    "beach", "nature", "park", "viewpoint", "bar", "nightlife", "spa",
+    "restaurant", "cafe", "market", "shop", "attraction", "landmark", "museum",
+    "temple", "beach", "nature", "park", "viewpoint", "bar", "nightlife", "spa",
 })
+# `pace_stops` describes a day of this many hours; a longer day holds more stops
+# (a 12-hour day with lunch, rest and dinner is not a 6-stop day).
+TEMPLATE_DAY_HOURS = 10
+# Stops per hour of a day with no profile, so a day cannot be crammed either.
+DEFAULT_STOPS_PER_HOUR = 0.65
 
 DAY_TEMPLATES: dict[str, dict] = {
     "family-slow": {
@@ -137,6 +144,7 @@ NO_LIMITS = {
     "max_intensity": None,
     "allowed_categories": None,
     "lunch_required": False,
+    "dinner_required": False,
     "rest_minutes": None,
 }
 
@@ -245,6 +253,33 @@ def lunch_required(trip: dict | None = None) -> bool:
     return _lunch_fits_horizon(trip)
 
 
+def dinner_required(trip: dict | None = None) -> bool:
+    """A planned day that runs through dinner has one (the router sets `meals`)."""
+    trip = trip or {}
+    return bool(trip.get("meals")) and covers_dinner(trip)
+
+
+def _day_hours(trip: dict) -> float:
+    end = min(to_min(trip.get("end_time", "18:00")),
+              to_min(trip.get("return_time") or trip.get("end_time", "18:00")))
+    return max(0.0, (end - to_min(trip.get("start_time", "07:00"))) / 60)
+
+
+def _scaled_max_stops(base: int, trip: dict) -> int:
+    """Pace band top for this day: only a day longer than the template's grows it,
+    and only for a planned request (a direct caller keeps the template's number)."""
+    if not trip.get("meals"):
+        return base
+    return max(base, round(base * _day_hours(trip) / TEMPLATE_DAY_HOURS))
+
+
+def _scaled_min_stops(base: int, trip: dict) -> int:
+    """Pace band bottom for this day: half a day is not asked for a whole day's stops."""
+    if not trip.get("meals"):
+        return base
+    return min(base, max(1, math.ceil(base * _day_hours(trip) / TEMPLATE_DAY_HOURS)))
+
+
 def template_constraints(name: str, trip: dict | None = None) -> dict:
     """Template -> concrete optimizer inputs, trimmed to the trip horizon.
 
@@ -266,8 +301,8 @@ def template_constraints(name: str, trip: dict | None = None) -> dict:
                     for _label, cats in template["required_groups"]]
     return {
         "template": name,
-        "min_stops": template["pace_stops"][0],
-        "max_stops": template["pace_stops"][1],
+        "min_stops": _scaled_min_stops(template["pace_stops"][0], trip),
+        "max_stops": _scaled_max_stops(template["pace_stops"][1], trip),
         "required_any": required_any,
         "blocked_window": None,  # no fixed clock anchor: rest follows lunch
         "rest_after_lunch": needs_lunch,
@@ -275,6 +310,7 @@ def template_constraints(name: str, trip: dict | None = None) -> dict:
         "max_intensity": template.get("max_intensity"),
         "allowed_categories": frozenset(template["allowed_categories"]),
         "lunch_required": needs_lunch,
+        "dinner_required": dinner_required(trip),
         "rest_minutes": rest_minutes,
     }
 
@@ -282,13 +318,18 @@ def template_constraints(name: str, trip: dict | None = None) -> dict:
 def universal_constraints(trip: dict | None = None) -> dict:
     """Human needs for a custom profile that does not pick an archetype.
 
-    No bans, no pace band, no late end: only the lunch + rest window every
-    plan gets (rest starts at lunch end, length by pace). A profile-less
-    request stays fully legacy (NO_LIMITS).
+    No bans, no late end: the meals and the rest window every plan gets (rest
+    starts at lunch end, length by pace). A planned request (`meals`, set by the
+    router) with no profile still eats and is not crammed, but has no rest lock; a
+    direct caller with neither stays fully legacy (NO_LIMITS).
     """
     trip = trip or {}
     limits = dict(NO_LIMITS)
+    limits["dinner_required"] = dinner_required(trip)
+    if trip.get("meals"):
+        limits["max_stops"] = max(1, round(_day_hours(trip) * DEFAULT_STOPS_PER_HOUR))
     if not (trip.get("profile") or {}):
+        limits["lunch_required"] = bool(trip.get("meals")) and _lunch_fits_horizon(trip)
         return limits
     needs_lunch = lunch_required(trip)
     limits["lunch_required"] = needs_lunch
@@ -309,6 +350,15 @@ def allows(poi: dict | None, template_name: str) -> bool:
     if ceiling is not None and _int(poi.get("intensity"), 2) > ceiling:
         return False
     return True
+
+
+def allows_wished(poi: dict | None, template_name: str, profile: dict | None) -> bool:
+    """An explicit wish lifts the archetype's taste (a calm couple who asks to climb
+    a hill climbs it) but not what the party can do: effort stays within fitness + 1."""
+    poi = poi or {}
+    ceiling = DAY_TEMPLATES[template_name].get("max_intensity")
+    fitness = _int((profile or {}).get("fitness"), 2)
+    return ceiling is None or _int(poi.get("intensity"), 2) <= max(ceiling, fitness + 1)
 
 
 def attempts(constraints: dict) -> list[dict]:

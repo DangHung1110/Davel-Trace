@@ -79,8 +79,9 @@ DIVERSE_K = 3
 # Cross-option Jaccard guarantee: a conflicting profile is re-solved once with
 # the ceiling as a hard constraint (the old 5-member pool enumeration took
 # ~18 s). Measured on the 742-POI snapshot, 24 constrained re-solves: 2 s and
-# 3 s give the same mean utility (0.928 vs 0.927), all passing, so 2 s.
-DISTINCT_SOLVE_S = 2.0
+# 3 s give the same mean utility (0.928 vs 0.927), all passing, so a short budget;
+# in work units, so a busy machine cannot change which plan comes back.
+DISTINCT_DETERMINISTIC_TIME = 3.0
 
 
 class ItineraryIn(BaseModel):
@@ -104,15 +105,15 @@ def _get_plan_builder():
     return builder if callable(builder) else None
 
 
-def _solver_workers(n_profiles: int) -> int:
-    """CP-SAT workers per profile when `n_profiles` solve at once.
-
-    0 keeps the solver default (all cores) for a single solve; parallel solves
-    split the cores instead of oversubscribing them 3x.
-    """
-    if n_profiles <= 1:
-        return 0
-    return max(1, (os.cpu_count() or 1) // n_profiles)
+# One worker and a budget of WORK, not seconds: the same request gets the same plan
+# on any machine at any load, a request costs 3 threads instead of a core each, and
+# a busy server answers later instead of running out of time and returning nothing.
+# Measured on 7 scenarios at 5 s wall on 4 workers: 4/21 plans repeated, 43 CPU s a
+# request; at 6 work units on 1 worker: 21/21 repeated, 18 CPU s, same stops and rating.
+PLAN_WORKERS = 1
+PLAN_DETERMINISTIC_TIME = 8.0
+# Only a last guard for an overloaded machine; it should never be what stops a solve.
+PLAN_WALL_LIMIT_S = 60.0
 
 
 def _load_cells(snapshot_dir: str):
@@ -148,6 +149,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                      "dich vu lap lich lane B chua kha dung tren branch nay", 501)
 
     trip = body.trip.model_dump()
+    trip["meals"] = True  # a planned day eats: lunch and dinner when it covers them
     profile = trip.get("profile") or {}
     by_id = {p["poi_id"]: p for p in pois}
 
@@ -263,8 +265,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         return plan
 
     def build_one(profile_name: str, pool_size: int = 1,
-                  timeout_s: float | None = None, workers: int = 0,
-                  **extra) -> dict:
+                  deterministic_time: float = PLAN_DETERMINISTIC_TIME, **extra) -> dict:
         def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
             # A solution pool is one day's alternatives: a longer trip plans argmax days.
             several = day_trip is not trip
@@ -273,7 +274,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                 ranked=[r for r in ranked if r.get("poi_id") not in used],
                 pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=ctx,
                 pool_size=1 if several else pool_size,
-                timeout_s=timeout_s, workers=workers,
+                timeout_s=PLAN_WALL_LIMIT_S, workers=PLAN_WORKERS,
+                deterministic_time=deterministic_time,
                 **({"diagnose": diagnose} if several else {}), **extra))
 
         plan = dict(multiday.build_trip(
@@ -283,12 +285,10 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         return plan
 
     # Independent solves -> parallel; `map` keeps the requested order.
-    workers = _solver_workers(len(body.profiles))
     jobs = [(name, DIVERSE_POOL if diverse and index == 0 else 1)
             for index, name in enumerate(body.profiles)]
     with ThreadPoolExecutor(max_workers=max(1, len(jobs))) as executor:
-        raw = list(executor.map(
-            lambda job: build_one(job[0], job[1], workers=workers), jobs))
+        raw = list(executor.map(lambda job: build_one(job[0], job[1]), jobs))
 
     def refill(plan: dict, others: list[dict]) -> list[dict]:
         """Re-solve this profile with Jaccard <= ceiling to every kept plan.
@@ -302,7 +302,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         if profile_name not in body.profiles or plan.get("_rung") is None:
             return []
         fresh = build_one(
-            profile_name, timeout_s=DISTINCT_SOLVE_S,
+            profile_name, deterministic_time=DISTINCT_DETERMINISTIC_TIME,
             distinct_from=[frozenset(pool_svc.poi_set(o)) for o in others],
             max_rung=plan["_rung"])
         if not fresh.get("activities") or not fresh.get("passed"):

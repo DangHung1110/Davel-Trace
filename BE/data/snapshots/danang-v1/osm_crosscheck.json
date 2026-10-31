@@ -58,7 +58,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -381,7 +382,7 @@
   "ChIJ2eFWbrcXQjERkMR0z_5VhM0": {
    "evidence": {
     "hours": {
-     "envelope_gap_min": 120,
+     "envelope_gap_min": 150,
      "osm_raw": "Mo-Su 06:30-01:30",
      "osm_windows": [
       "06:30-01:30"
@@ -438,6 +439,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -679,7 +681,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -808,7 +811,7 @@
    "fields": {
     "category": "single",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": null
@@ -835,7 +838,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "spa"
+     "spa",
+     "temple"
     ]
    },
    "fields": {
@@ -915,7 +919,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "museum"
+     "museum",
+     "temple"
     ]
    },
    "fields": {
@@ -1027,7 +1032,8 @@
     "osm_categories": [
      "attraction",
      "cafe",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1109,6 +1115,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -1164,7 +1171,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -1189,7 +1197,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1235,7 +1244,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1266,10 +1276,10 @@
     ]
    },
    "fields": {
-    "category": "confirmed",
-    "exists": "confirmed",
+    "category": "conflict",
+    "exists": "single",
     "hours": "single",
-    "location": "confirmed"
+    "location": "single"
    },
    "match": {
     "dist_m": 30.7,
@@ -1485,7 +1495,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1510,7 +1521,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1738,6 +1750,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -1763,7 +1776,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "museum"
+     "museum",
+     "temple"
     ]
    },
    "fields": {
@@ -1817,7 +1831,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -1871,6 +1886,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -1965,7 +1981,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "temple"
     ]
    },
    "fields": {
@@ -2082,7 +2099,7 @@
    "fields": {
     "category": "single",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": null
@@ -2156,7 +2173,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "restaurant"
+     "restaurant",
+     "temple"
     ]
    },
    "fields": {
@@ -2242,7 +2260,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "museum"
+     "museum",
+     "temple"
     ]
    },
    "fields": {
@@ -2267,7 +2286,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "temple"
     ]
    },
    "fields": {
@@ -2516,7 +2536,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -2612,6 +2633,7 @@
     "osm_categories": [
      "attraction",
      "landmark",
+     "temple",
      "viewpoint"
     ]
    },
@@ -2738,7 +2760,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -3132,6 +3155,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -3179,6 +3203,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -3371,7 +3396,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -3507,10 +3533,10 @@
     ]
    },
    "fields": {
-    "category": "confirmed",
-    "exists": "confirmed",
+    "category": "conflict",
+    "exists": "single",
     "hours": "single",
-    "location": "confirmed"
+    "location": "single"
    },
    "match": {
     "dist_m": 11.2,
@@ -3671,7 +3697,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -3769,7 +3796,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -3810,10 +3838,10 @@
     ]
    },
    "fields": {
-    "category": "confirmed",
-    "exists": "confirmed",
+    "category": "conflict",
+    "exists": "single",
     "hours": "single",
-    "location": "confirmed"
+    "location": "single"
    },
    "match": {
     "dist_m": 16.9,
@@ -3832,7 +3860,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "temple"
     ]
    },
    "fields": {
@@ -4005,7 +4034,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -4343,7 +4373,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -4478,7 +4509,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -4661,7 +4693,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -4772,10 +4805,10 @@
     ]
    },
    "fields": {
-    "category": "conflict",
-    "exists": "single",
+    "category": "confirmed",
+    "exists": "confirmed",
     "hours": "single",
-    "location": "single"
+    "location": "confirmed"
    },
    "match": {
     "dist_m": 0.0,
@@ -4939,7 +4972,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -5038,7 +5072,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "temple"
     ]
    },
    "fields": {
@@ -5264,7 +5299,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "temple"
     ]
    },
    "fields": {
@@ -5678,7 +5714,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -5713,7 +5750,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -5833,7 +5871,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -5914,7 +5953,8 @@
      ]
     },
     "osm_categories": [
-     "market"
+     "market",
+     "shop"
     ]
    },
    "fields": {
@@ -6342,7 +6382,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -6843,7 +6884,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -6926,6 +6968,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -6949,6 +6992,7 @@
   "ChIJkxff_x0XQjERCC_CN8DFt54": {
    "evidence": {
     "hours": {
+     "envelope_gap_min": 120,
      "osm_raw": "Mo-Su 18:00-02:00",
      "osm_windows": [
       "18:00-02:00"
@@ -6961,7 +7005,7 @@
    "fields": {
     "category": "confirmed",
     "exists": "confirmed",
-    "hours": "osm_only",
+    "hours": "conflict",
     "location": "confirmed"
    },
    "match": {
@@ -7219,13 +7263,14 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
     "category": "confirmed",
     "exists": "confirmed",
-    "hours": "missing",
+    "hours": "single",
     "location": "confirmed"
    },
    "match": {
@@ -7307,7 +7352,9 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "market"
+     "market",
+     "shop",
+     "temple"
     ]
    },
    "fields": {
@@ -7345,7 +7392,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -7904,7 +7952,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -7961,7 +8010,7 @@
    "fields": {
     "category": "single",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": null
@@ -8030,13 +8079,14 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
     "category": "confirmed",
     "exists": "confirmed",
-    "hours": "missing",
+    "hours": "single",
     "location": "confirmed"
    },
    "match": {
@@ -8166,7 +8216,7 @@
    "fields": {
     "category": "conflict",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": {
@@ -8259,6 +8309,7 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
@@ -8348,7 +8399,7 @@
    "fields": {
     "category": "single",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": null
@@ -8380,7 +8431,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -8405,7 +8457,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -8525,7 +8578,7 @@
    "fields": {
     "category": "single",
     "exists": "single",
-    "hours": "missing",
+    "hours": "single",
     "location": "single"
    },
    "match": null
@@ -8778,7 +8831,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -8988,7 +9042,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -9022,7 +9077,8 @@
    "evidence": {
     "osm_categories": [
      "attraction",
-     "landmark"
+     "landmark",
+     "temple"
     ]
    },
    "fields": {
@@ -9260,7 +9316,8 @@
     "osm_categories": [
      "attraction",
      "landmark",
-     "lodging"
+     "lodging",
+     "temple"
     ]
    },
    "fields": {
@@ -9283,6 +9340,66 @@
   },
   "ChIJzeNmTwARQjERLSXizyRKI9g": {
    "evidence": {},
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "single",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:bai-tam-pham-van-dong": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "single",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:banh-xeo-ba-duong": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "single",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:be-man": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "missing",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:ca-chep-hoa-rong": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "single",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:cau-tinh-yeu": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
    "fields": {
     "category": "single",
     "exists": "single",
@@ -9315,6 +9432,18 @@
     }
    }
   },
+  "manual:golden-pine": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "missing",
+    "location": "single"
+   },
+   "match": null
+  },
   "manual:hai-van-quan": {
    "evidence": {
     "osm_categories": [
@@ -9324,13 +9453,14 @@
      "museum",
      "nature",
      "park",
+     "temple",
      "viewpoint"
     ]
    },
    "fields": {
     "category": "confirmed",
     "exists": "confirmed",
-    "hours": "missing",
+    "hours": "single",
     "location": "confirmed"
    },
    "match": {
@@ -9355,6 +9485,30 @@
    },
    "match": null
   },
+  "manual:nha-tho-con-ga": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "missing",
+    "location": "single"
+   },
+   "match": null
+  },
+  "manual:sky36": {
+   "evidence": {
+    "not_run": "added after the OSM run; re-run osm_crosscheck with the pbf"
+   },
+   "fields": {
+    "category": "single",
+    "exists": "single",
+    "hours": "missing",
+    "location": "single"
+   },
+   "match": null
+  },
   "manual:smile-goods-danang": {
    "evidence": {},
    "fields": {
@@ -9375,7 +9529,7 @@
    "fields": {
     "category": "confirmed",
     "exists": "confirmed",
-    "hours": "missing",
+    "hours": "single",
     "location": "confirmed"
    },
    "match": {
@@ -9555,7 +9709,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -9690,7 +9844,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -9791,7 +9945,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10064,11 +10218,20 @@
    }
   },
   "osm:node/14067929701": {
-   "evidence": {},
+   "evidence": {
+    "hours": {
+     "envelope_gap_min": 360,
+     "osm_raw": "Mo-Su 08:00-11:30, 14:00-17:30",
+     "osm_windows": [
+      "08:00-11:30",
+      "14:00-17:30"
+     ]
+    }
+   },
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "same_source",
+    "hours": "conflict",
     "location": "same_source"
    },
    "match": {
@@ -10088,7 +10251,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10202,7 +10365,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10242,7 +10405,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10262,7 +10425,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10455,7 +10618,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10607,7 +10770,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "same_source",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10626,7 +10789,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10703,7 +10866,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10800,7 +10963,7 @@
    "fields": {
     "category": "same_source",
     "exists": "same_source",
-    "hours": "missing",
+    "hours": "single",
     "location": "same_source"
    },
    "match": {
@@ -10916,27 +11079,27 @@
    "duplicates": 8,
    "exists_by_cat": {
     "attraction": {
-     "confirmed": 17,
-     "same_source": 19,
-     "single": 51
+     "confirmed": 9,
+     "same_source": 12,
+     "single": 39
     },
     "bar": {
      "confirmed": 10,
-     "single": 59
+     "single": 62
     },
     "beach": {
-     "confirmed": 5,
+     "confirmed": 6,
      "same_source": 2,
-     "single": 9
+     "single": 13
     },
     "cafe": {
      "confirmed": 17,
      "single": 91
     },
     "landmark": {
-     "confirmed": 28,
-     "same_source": 26,
-     "single": 31
+     "confirmed": 11,
+     "same_source": 22,
+     "single": 13
     },
     "lodging": {
      "confirmed": 37,
@@ -10944,143 +11107,166 @@
      "single": 38
     },
     "market": {
-     "confirmed": 13,
-     "same_source": 15,
-     "single": 21
+     "confirmed": 14,
+     "same_source": 13,
+     "single": 13
     },
     "museum": {
      "confirmed": 6,
      "same_source": 2,
-     "single": 7
+     "single": 4
     },
     "nature": {
-     "confirmed": 1,
+     "confirmed": 2,
      "same_source": 13,
      "single": 2
     },
     "park": {
      "confirmed": 1,
-     "single": 13
+     "single": 12
     },
     "restaurant": {
      "confirmed": 28,
-     "single": 100
+     "single": 103
+    },
+    "shop": {
+     "same_source": 2,
+     "single": 9
     },
     "spa": {
      "confirmed": 5,
      "single": 72
     },
+    "temple": {
+     "confirmed": 18,
+     "same_source": 11,
+     "single": 29
+    },
     "viewpoint": {
-     "single": 2
+     "confirmed": 2,
+     "single": 6
     }
    },
    "fields": {
     "category": {
-     "confirmed": 159,
-     "conflict": 8,
+     "confirmed": 157,
+     "conflict": 10,
      "same_source": 78,
-     "single": 497
+     "single": 505
     },
     "exists": {
-     "confirmed": 168,
+     "confirmed": 166,
      "same_source": 78,
-     "single": 496
+     "single": 506
     },
     "hours": {
      "confirmed": 16,
-     "conflict": 8,
-     "missing": 244,
-     "osm_only": 4,
-     "same_source": 12,
-     "single": 458
+     "conflict": 10,
+     "missing": 227,
+     "osm_only": 3,
+     "same_source": 10,
+     "single": 484
     },
     "location": {
-     "confirmed": 168,
+     "confirmed": 166,
      "same_source": 78,
-     "single": 496
+     "single": 506
     }
    },
-   "pois": 742
+   "pois": 750
   },
   "verified": {
-   "duplicates": 4,
+   "duplicates": 3,
    "exists_by_cat": {
     "attraction": {
-     "confirmed": 11,
+     "confirmed": 6,
      "same_source": 2,
-     "single": 17
+     "single": 31
     },
     "bar": {
-     "confirmed": 8,
+     "confirmed": 10,
      "single": 39
     },
     "beach": {
-     "confirmed": 4,
-     "single": 7
+     "confirmed": 6,
+     "same_source": 2,
+     "single": 11
     },
     "cafe": {
-     "confirmed": 13,
-     "single": 77
+     "confirmed": 16,
+     "single": 87
     },
     "landmark": {
-     "confirmed": 15,
-     "single": 8
+     "confirmed": 7,
+     "same_source": 8,
+     "single": 6
     },
     "market": {
-     "confirmed": 12,
-     "same_source": 4,
-     "single": 12
+     "confirmed": 13,
+     "same_source": 2,
+     "single": 9
     },
     "museum": {
      "confirmed": 6,
-     "single": 2
+     "single": 4
     },
     "nature": {
+     "confirmed": 1,
+     "same_source": 2,
      "single": 2
     },
     "park": {
      "confirmed": 1,
-     "single": 5
+     "single": 9
     },
     "restaurant": {
      "confirmed": 27,
-     "single": 89
+     "single": 96
+    },
+    "shop": {
+     "same_source": 2,
+     "single": 9
     },
     "spa": {
      "confirmed": 5,
-     "single": 43
+     "single": 65
+    },
+    "temple": {
+     "confirmed": 18,
+     "same_source": 11,
+     "single": 29
     },
     "viewpoint": {
-     "single": 1
+     "confirmed": 2,
+     "single": 5
     }
    },
    "fields": {
     "category": {
-     "confirmed": 97,
-     "conflict": 4,
-     "same_source": 6,
-     "single": 303
+     "confirmed": 112,
+     "conflict": 7,
+     "same_source": 29,
+     "single": 401
     },
     "exists": {
-     "confirmed": 102,
-     "same_source": 6,
-     "single": 302
+     "confirmed": 118,
+     "same_source": 29,
+     "single": 402
     },
     "hours": {
      "confirmed": 15,
-     "conflict": 8,
-     "missing": 8,
-     "osm_only": 1,
-     "same_source": 9,
-     "single": 369
+     "conflict": 10,
+     "missing": 82,
+     "same_source": 7,
+     "single": 435
     },
     "location": {
-     "confirmed": 102,
-     "same_source": 6,
-     "single": 302
+     "confirmed": 118,
+     "same_source": 29,
+     "single": 402
     }
    },
-   "pois": 410
+   "pois": 549
   }
  }
 }

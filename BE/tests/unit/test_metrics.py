@@ -150,7 +150,7 @@ class TestMetrics(unittest.TestCase):
                           "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
         for _, fn in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
 
@@ -165,7 +165,7 @@ class TestMetrics(unittest.TestCase):
                           "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
 
     def test_multi_interval_hours_parse(self):
         def score(activities, hours):

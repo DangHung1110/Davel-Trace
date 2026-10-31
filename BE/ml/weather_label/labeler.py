@@ -77,6 +77,7 @@ TYPE_EXPOSURE = {
     "nature": (0.9, 0.8, 0.75, "open"),
     "park": (0.85, 0.75, 0.6, "open"),
     "landmark": (0.6, 0.55, 0.5, "mixed"),
+    "temple": (0.6, 0.55, 0.5, "mixed"),
     "attraction": (0.55, 0.55, 0.45, "mixed"),
     "market": (0.65, 0.5, 0.45, "mixed"),
     "transport": (0.5, 0.5, 0.6, "mixed"),
@@ -140,7 +141,7 @@ _CAT_INDOOR_OUTDOOR = {
 }
 #: Category nuance for the outdoor anchors (all >= 0.55).
 _CAT_OUTDOOR_OUTDOOR = {
-    "beach": 0.95, "nature": 0.9, "park": 0.85, "landmark": 0.7,
+    "beach": 0.95, "nature": 0.9, "park": 0.85, "landmark": 0.7, "temple": 0.7,
     "attraction": 0.75, "market": 0.75, "transport": 0.55,
 }
 
@@ -432,7 +433,7 @@ _NAME_ROOFTOP = (
 # Canonical snapshot categories (`poi["cat"]`).
 _CAT_INDOOR = {"restaurant", "cafe", "bar", "spa", "lodging", "museum", "shop"}
 _CAT_OUTDOOR = {"beach", "nature", "park"}
-_CAT_AMBIGUOUS = {"landmark", "attraction", "market"}
+_CAT_AMBIGUOUS = {"landmark", "attraction", "market", "temple"}
 
 # OSM tag categories.
 _OSM_INDOOR = {

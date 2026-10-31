@@ -13,6 +13,7 @@ ponytail: only genuinely repeated glue lives here. Domain schemas stay in
 
 from __future__ import annotations
 
+import datetime
 import json
 import os
 from typing import Any
@@ -111,7 +112,7 @@ def open_windows(hours: list | None) -> list[tuple[int, int]] | None:
 # real hours land. Other groups (lodging, transport) keep the trip window.
 SAFE_HOURS_SHARE = 0.9
 SIGHTSEEING_CATS = ("attraction", "beach", "landmark", "museum", "nature", "park",
-                    "viewpoint")
+                    "temple", "viewpoint")
 SAFE_HOURS: dict[str, list[str]] = {
     "bar": ["19:30-23:45"],
     "cafe": ["07:30-19:30"],
@@ -126,6 +127,8 @@ def hours_group(cat: str) -> str:
     """SAFE_HOURS key of a category ("" when it has no assumed hours)."""
     if cat in SIGHTSEEING_CATS:
         return "sightseeing"
+    if cat == "shop":  # measured with the markets: both were one category
+        return "market"
     return cat if cat in ("restaurant", "cafe", "bar", "spa", "market") else ""
 
 
@@ -133,8 +136,11 @@ def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     """`open_windows` of the POI's hours, else of its group's SAFE_HOURS.
 
     None = neither (the caller keeps its default, e.g. the trip window for a
-    legacy fixture without `cat`); [] = no time is safe to schedule.
+    legacy fixture without `cat`); [] = no time is safe to schedule, which is
+    also a POI closed on the trip's date (`poi_on_date`).
     """
+    if poi.get("closed_today"):
+        return []
     wins = open_windows(poi.get("opening_hours"))
     if wins is not None:
         return wins
@@ -142,6 +148,34 @@ def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     if safe is None:
         return None
     return open_windows(safe) or []
+
+
+def weekday_of(date: str | None) -> int | None:
+    """Monday = 0, as `hours_by_day` is stored; None without a usable ISO date."""
+    try:
+        return datetime.date.fromisoformat(date or "").weekday()
+    except ValueError:
+        return None
+
+
+def poi_on_date(poi: dict, date: str | None) -> dict:
+    """The POI as it is on that date: that weekday's hours, or `closed_today`.
+
+    Everything downstream reads `opening_hours`, so this one projection is the
+    whole weekday logic. No date or no weekly table leaves the POI as it is
+    (`open_windows` then takes what every variant of the week agrees on).
+    """
+    day = weekday_of(date)
+    week = poi.get("hours_by_day")
+    if day is None or not week:
+        return poi
+    today = week[day]
+    return {**poi, "opening_hours": [today] if today else [], "closed_today": not today}
+
+
+def closed_weekdays(poi: dict) -> list[int]:
+    """Weekdays (Monday = 0) the weekly table says the POI is closed."""
+    return [day for day, hours in enumerate(poi.get("hours_by_day") or []) if not hours]
 
 
 def parse_hours(hours: list | None) -> tuple[int, int] | None:
@@ -193,8 +227,17 @@ def trusted_rating(poi: dict) -> float:
 # What one person spends at a POI with no known ticket: the middle of its price
 # band (BE/ml/data/price_from_raw.py: under 100k, 100-500k, over 500k per person).
 BAND_FEE_VND = {"cheap": 50_000, "medium": 300_000, "expensive": 700_000}
+# The band is one scale for a meal. A drink or a small purchase in the same band
+# costs far less: 300k for a coffee was the visible error of the old table.
+BAND_FEE_BY_CAT = {
+    "cafe": {"medium": 100_000, "expensive": 200_000},
+    "bar": {"medium": 200_000, "expensive": 400_000},
+    "shop": {"medium": 100_000, "expensive": 200_000},
+}
 # Open access: a cheap band here means free to enter, not a cheap meal.
-FREE_ENTRY_CATS = frozenset({"beach", "landmark", "nature", "park", "viewpoint"})
+FREE_ENTRY_CATS = frozenset({"beach", "landmark", "nature", "park", "temple", "viewpoint"})
+# A place the review found no ticket for costs nothing to enter, whatever its band.
+NO_TICKET_FREE_CATS = FREE_ENTRY_CATS | {"museum"}
 
 
 def effective_fee(poi: dict) -> int | None:
@@ -208,10 +251,12 @@ def effective_fee(poi: dict) -> int | None:
     tags = poi.get("smart_tags")
     if fee > 0 or tags is None:
         return fee
-    band = tags.get("price_band")
-    if band == "cheap" and poi.get("cat") in FREE_ENTRY_CATS and tags.get("ticket") is not True:
+    band, cat = tags.get("price_band"), poi.get("cat")
+    if band == "cheap" and cat in FREE_ENTRY_CATS and tags.get("ticket") is not True:
         return 0
-    return BAND_FEE_VND.get(band)
+    if cat in NO_TICKET_FREE_CATS and tags.get("ticket") is False:
+        return 0
+    return BAND_FEE_BY_CAT.get(cat, {}).get(band) or BAND_FEE_VND.get(band)
 
 
 def fee_is_estimate(poi: dict) -> bool:
