@@ -92,15 +92,14 @@ class TestDistinctSolve(unittest.TestCase):
         self.assertEqual(len(calls), 1)
 
 
-class TestSolverWorkers(unittest.TestCase):
-    def test_single_profile_keeps_solver_default(self):
-        self.assertEqual(itinerary_mod._solver_workers(1), 0)
-
-    def test_parallel_profiles_split_the_cores(self):
-        with mock.patch.object(itinerary_mod.os, "cpu_count", return_value=12):
-            self.assertEqual(itinerary_mod._solver_workers(3), 4)
-        with mock.patch.object(itinerary_mod.os, "cpu_count", return_value=2):
-            self.assertEqual(itinerary_mod._solver_workers(3), 1)
+class TestSolverBudget(unittest.TestCase):
+    def test_plans_are_decided_by_work_not_by_the_clock(self):
+        self.assertEqual(itinerary_mod.PLAN_WORKERS, 1)
+        self.assertGreater(itinerary_mod.PLAN_DETERMINISTIC_TIME, 0)
+        self.assertGreater(itinerary_mod.DISTINCT_DETERMINISTIC_TIME, 0)
+        # The wall limit is a guard for an overloaded machine, far past the budget.
+        self.assertGreater(itinerary_mod.PLAN_WALL_LIMIT_S,
+                           5 * itinerary_mod.PLAN_DETERMINISTIC_TIME)
 
 
 class TestRouterParallelRefill(unittest.TestCase):
@@ -147,8 +146,9 @@ class TestRouterParallelRefill(unittest.TestCase):
         first = [c for c in self.calls if c.get("distinct_from") is None]
         refills = [c for c in self.calls if c.get("distinct_from") is not None]
         self.assertEqual(len(first), 3)
-        self.assertEqual({c["workers"] for c in first},
-                         {itinerary_mod._solver_workers(3)})
+        self.assertEqual({c["workers"] for c in first}, {itinerary_mod.PLAN_WORKERS})
+        self.assertEqual({c["deterministic_time"] for c in first},
+                         {itinerary_mod.PLAN_DETERMINISTIC_TIME})
         # The two losers (balanced, experience) are re-solved once each,
         # against the plans kept beside them at that moment.
         self.assertEqual([c["profile"] for c in refills],
@@ -159,7 +159,8 @@ class TestRouterParallelRefill(unittest.TestCase):
                          [frozenset("abcde"), frozenset("fghij")])
         for call in refills:
             self.assertEqual(call["max_rung"], 0)
-            self.assertEqual(call["timeout_s"], itinerary_mod.DISTINCT_SOLVE_S)
+            self.assertEqual(call["deterministic_time"], itinerary_mod.DISTINCT_DETERMINISTIC_TIME)
+            self.assertEqual(call["timeout_s"], itinerary_mod.PLAN_WALL_LIMIT_S)
         self.assertEqual(len(r.json()["solution_pool"]["replaced"]), 2)
 
 
@@ -208,8 +209,8 @@ class TestCandidateCap(unittest.TestCase):
     def test_build_plan_solves_on_the_capped_pool(self):
         seen, real_cap, real_opt = {}, profiles_mod._cap_candidates, profiles_mod.optimize
 
-        def cap(candidates, score, must):
-            out = real_cap(candidates, score, must, limit=6, floor=0)
+        def cap(candidates, score, must, **kwargs):
+            out = real_cap(candidates, score, must, limit=6, floor=0, **kwargs)
             seen["capped"] = {p["poi_id"] for p in out}
             return out
 
