@@ -6,7 +6,9 @@ every option, so every profile stays a plan a human can actually do):
 
 - savings  -> COST-FIRST: minimise fee + travel (avg matrix leg), reward
               free/nature/market stops, respect a tight budget harder.
-- balanced -> RATING-FIRST: maximise the rating sum (the previous behaviour).
+- balanced -> RATING-FIRST: maximise the sum of trusted ratings (raw rating
+              shrunk by its review count, BE.common.trusted_rating) plus a
+              fame term, so the day is made of places people actually know.
 - experience -> NOVELTY-FIRST: Vargas-style novelty (low popularity, rare
               category/tag, high fit) + a dominant category-spread term, so
               the day is composed of POIs the rating-first plan skips.
@@ -42,12 +44,13 @@ from BE.app.services.gate import SOFT_CHECKS
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, StubTrip, optimize, stubs_from_pois)
 from BE.app.services.validator import validate
-from BE.common import price_level_of
+from BE.common import price_level_of, trusted_rating
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
                "miễn phí/thiên nhiên/chợ",
-    "balanced": "cân bằng: tổng rating cao nhất trong ràng buộc",
+    "balanced": "cân bằng: ưu tiên điểm được đánh giá cao và nhiều người biết, "
+                "trong ràng buộc",
     "experience": "trải nghiệm: ưu tiên điểm độc đáo + trải đều loại hình "
                   "(chịu chi trong ngân sách)",
 }
@@ -79,6 +82,14 @@ SAVINGS_CHEAP_CATEGORY_BONUS = 0.10  # nature/market/park/beach when free
 SAVINGS_CATEGORIES = frozenset({"nature", "market", "park", "beach"})
 TIGHT_BUDGET_VND = 1_000_000      # under this, every fee VND counts double
 SAVINGS_TIGHT_FEE_MULTIPLIER = 2.0
+
+# --- balanced: rating-first ------------------------------------------------
+# Ten times the Google reviews are worth this many rating points. Trusted rating
+# alone still prefers a 4.8 with 24 reviews to a 4.2 with 8,287 (Bảo tàng Chăm) and
+# a 4.8 with 1,466 to a 4.5 with 16,325 (Chùa Linh Ứng). On 4 sample days of
+# danang-v1, 0.4 brought those in while a 3.5 star place with 5,000 reviews
+# still loses to a 4.9 with 200 (0.2 kept the lesser-known picks).
+BALANCED_FAME_WEIGHT = 0.4
 
 # --- experience: novelty-first --------------------------------------------
 # Vargas-style novelty: fit * (low popularity + rare category + rare tags).
@@ -156,7 +167,7 @@ def novelty_scores(pois: list[dict]) -> dict[str, float]:
         for tag in {str(t).strip().lower() for t in (p.get("tags") or [])
                     if str(t).strip()}:
             tag_freq[tag] += 1
-    ratings = [float(p.get("rating") or 0.0) for p in pool]
+    ratings = [trusted_rating(p) for p in pool]
     lo, hi = min(ratings), max(ratings)
 
     def _tag_rarity(p: dict) -> float:
@@ -171,7 +182,7 @@ def novelty_scores(pois: list[dict]) -> dict[str, float]:
     out: dict[str, float] = {}
     for p in pool:
         cat = soft_rules.poi_category(p)
-        rating = float(p.get("rating") or 0.0)
+        rating = trusted_rating(p)
         fit = _clamp01((rating - EXPERIENCE_FIT_FLOOR) / EXPERIENCE_FIT_SPAN)
         popularity = ((rating - lo) / (hi - lo)) if hi > lo else 0.5
         if p.get("must_go"):
@@ -225,12 +236,12 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     """Node score for one profile (see module docstring).
 
     savings: absolute cost minimisation (fee + travel), not a tie-break.
-    balanced: the previous rating sum, constraints respected.
+    balanced: trusted rating + fame, constraints respected.
     experience: novelty-first with a dominant category-spread term in the
     optimizer (`DIVERSITY_WEIGHT_BY_PROFILE`); the node score itself is
     novelty + a small rating/fit term.
     """
-    rating, fee = float(p.get("rating") or 0), int(p.get("fee") or 0)
+    rating, fee = trusted_rating(p), int(p.get("fee") or 0)
     if profile == "savings":
         cat = soft_rules.poi_category(p)
         price_level = price_level_of(p)  # null = unknown -> middle band
@@ -250,7 +261,9 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
         nov = float((novelty or {}).get(p.get("poi_id"), 0.0))
         return round(rating * EXPERIENCE_RATING_WEIGHT
                      + nov * EXPERIENCE_NOVELTY_WEIGHT, 4)
-    return rating  # balanced: rating-first
+    # balanced: rating-first
+    fame = math.log10(1 + int(p.get("review_count") or 0))
+    return round(rating + BALANCED_FAME_WEIGHT * fame, 4)
 
 
 def plan_diversity(activities: list[dict], pois: list[dict],
@@ -350,7 +363,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
         if not rep["passed"]:
             dropped.append({"profile": prof, "reason": str(rep["violations"])})
             continue
-        ratings = [float(by_id[a["poi_id"]].get("rating") or 0) for a in acts]
+        ratings = [trusted_rating(by_id[a["poi_id"]]) for a in acts]
         travel_min = sum(int((matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
                              .get("minutes", 0)) for x, y in zip(acts, acts[1:]))
         entry = {

@@ -696,3 +696,68 @@ Còn **48 POI `attraction` verified, tất cả 200–240 phút**. Quy tắc nà
   Claude. 73/80 POI trong mẫu đã qua đợt này, 6 POI bị LOẠI.
 - **541 POI verified hiện chưa có người kiểm tra độc lập.** Muốn đo độ chính xác của đợt Claude thì cần rút mẫu blind mới
   từ nhãn `claude-google-maps-v1`.
+
+## 13. Xếp hạng theo số đánh giá (31/10/2026)
+
+**Vấn đề:** lịch cân bằng chọn tổng rating cao nhất, mà dữ liệu chưa có số đánh giá. Đợt duyệt ở mục 11 và 12 thêm nhiều
+điểm 5★ ít người biết vào danh sách, nên lịch thử toàn các điểm đó và bỏ qua các điểm nổi tiếng:
+
+| | Điểm | Rating | Số đánh giá |
+|---|---|---|---|
+| Được chọn | Tượng Phật Đá Phan Sơn | 5★ | 2 |
+| Được chọn | Tiệm Cafe Thổ | 5★ | 8 |
+| Được chọn | Chùa Hải An | 5★ | 13 |
+| Không được chọn | Chùa Linh Ứng – Bãi Bụt | 4,5★ | 16.325 |
+| Không được chọn | Bãi biển Mỹ Khê | 4,7★ | 4.741 |
+| Không được chọn | Ngũ Hành Sơn | 4,4★ | 43.388 |
+
+**Dữ liệu:**
+
+- Thêm trường `review_count` lấy từ các lần tra Google Maps ngày 30/10: 614/742 POI, trong đó 533/541 POI verified.
+- `rating` cập nhật theo cùng lần đọc, để số sao và số đánh giá khớp nhau: đổi 79 POI verified, trong đó 25 POI trước đây
+  trống (VinWonders, Hải Vân Quan, Cầu Sông Hàn...).
+- 8 POI verified không có cả hai số: Cù Lao Chàm, Cầu Trần Thị Lý, Cầu Nguyễn Văn Trỗi, Cây đa Đò Xu, Làng đá mỹ nghệ
+  Non Nước, Làng nước mắm Nam Ô, My An Beach, Đền thờ Tiền Hiền Lổ Giang. Không có rating thì điểm rating là 0, nên các
+  điểm này rất khó vào lịch nếu người dùng không chỉ định. Riêng Cù Lao Chàm nên bổ sung số liệu.
+- Thời lượng theo quy tắc tính lại cho 28 POI verified, vì quy tắc nhân 1,2 khi rating từ 4,5.
+- Sửa loại hình 8 POI đang bị tính 200–240 phút (`verdicts/verify_verdicts_cats_20261031_claude.jsonl`):
+  - thành `market`: Chợ Cồn, Phố đi bộ – chợ đêm Bạch Đằng;
+  - thành `landmark`: View Ngắm Bình Minh Sơn Trà, Vịnh Sơn Trà, Làng Bích họa, Tượng Phật Phước Lý, Cầu Nguyễn Văn Trỗi,
+    Cây đa Đò Xu.
+
+**Planner:**
+
+- `BE.common.trusted_rating` thay rating thô khi tính điểm: `(số đánh giá × rating + 200 × 4,5) / (số đánh giá + 200)`.
+  4,5 gần rating trung bình của POI verified (4,56); 200 gần số đánh giá trung vị (216). POI không có `review_count`
+  (fixture, dữ liệu mới crawl) vẫn dùng rating thô.
+- Lịch cân bằng cộng thêm `0,4 × log10(1 + số đánh giá)`: số đánh giá gấp 10 lần đáng 0,4 sao. Trọng số này cân tay trên 4
+  ngày mẫu (0,2 vẫn giữ các điểm ít người biết) và thay được khi hướng 4 của roadmap có dữ liệu. Một điểm 3,5★ với 5.000
+  đánh giá vẫn thua điểm 4,9★ với 200 đánh giá.
+- Lịch tiết kiệm và trải nghiệm cũng dùng `trusted_rating`, không có phần cộng độ nổi tiếng.
+- `preference` của lịch là trung bình `trusted_rating`.
+- Lý do "rating cao" chỉ hiện khi có từ 20 đánh giá.
+- Giữ nguyên: rating hiển thị cho người dùng và đầu vào của model chuyển tiếp (`scorer.py`), vì model học trên rating thô.
+
+**Kết quả** (cặp đôi, 1 ngày, lịch cân bằng, không nêu sở thích):
+
+| Trước (số đánh giá) | Sau (số đánh giá) |
+|---|---|
+| Công viên hồ Ngọc Anh (3) | Ngũ Hành Sơn (43.388) |
+| Cửa hàng Đặc sản Biển (10) | Xóm Mới Garden (10.262) |
+| Xóm Mới Garden (10.262) | Bảo tàng 3D Art (3.447) |
+| Bảo tàng Văn Hóa Phật Giáo (24) | Chùa Linh Ứng – Bãi Bụt (16.325) |
+| Chùa Quán Thế Âm (1.466) | Vigift (1.263) |
+| Mây coffee (584) | Trình cà phê (7.849) |
+
+Bộ giải chạy nhiều luồng nên kết quả có thể đổi giữa các lần chạy: các lần khác có Bãi biển Mỹ Khê, Bảo tàng Điêu khắc Chăm
+hoặc Chợ đêm Helio. Khi request không có hồ sơ, lịch trước đó còn tệ hơn: gần như toàn điểm 5★ từ 2–13 đánh giá.
+
+**Còn lại:**
+
+- Cầu Rồng chưa vào lịch mặc định: mỗi ngày chỉ có một `landmark`, và Chùa Linh Ứng điểm cao hơn.
+- 40 POI `attraction` còn lại vẫn 200–240 phút. Phần lớn đúng là hoạt động dài (lớp nấu ăn, công viên giải trí, thuyền
+  thúng, khu sinh thái), nên chưa cần đổi quy tắc.
+- Lịch trải nghiệm đôi khi vẫn chọn điểm rất ít đánh giá, ví dụ Nhà bia Chứng tích Núi Ghềnh (4 đánh giá).
+- Yêu cầu 2 ngày vẫn chỉ ra lịch 1 ngày: phần lập lịch không đọc `days` (FR-020).
+- Lịch có hồ sơ có bữa trưa 11:00–13:00 nhưng thường không có bữa tối. Lịch không có hồ sơ không bắt buộc bữa trưa.
+- Số đo gold chưa build lại nên chưa có con số so sánh chất lượng trước và sau (Phase 5).

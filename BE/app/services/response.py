@@ -13,6 +13,7 @@ import time
 
 from BE.app.services.common import status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS
+from BE.common import trusted_rating
 
 
 def _hard_checks(validation: dict) -> dict:
@@ -39,8 +40,7 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
     # T053 fix: score_plan() reads these two fields directly. Without them
     # every router-built plan scored profit=0.0/utility=0.3 regardless of
     # profile, while the run_profiles path looked correct.
-    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
-               for a in acts]
+    ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
     return {
         "itinerary_id": itinerary_id,

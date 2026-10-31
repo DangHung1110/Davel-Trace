@@ -20,6 +20,7 @@ import time
 import urllib.parse
 
 from BE.app.services import fetch_json
+from BE.common import trusted_rating
 
 DANANG_LAT, DANANG_LON = 16.0544, 108.2022
 RAIN_TRIGGER = 0.7
@@ -71,7 +72,7 @@ def rain_at(forecast: dict, hour: str) -> float:
 
 
 def _indoor_score(p: dict) -> float:
-    return float(p.get("rating") or 0.0) - (1.0 if p.get("weather_sensitive") else 0.0)
+    return trusted_rating(p) - (1.0 if p.get("weather_sensitive") else 0.0)
 
 
 def apply_weather(activities: list[dict], by_id: dict,

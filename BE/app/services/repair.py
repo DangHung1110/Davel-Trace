@@ -41,7 +41,7 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.app.services.validator import validate
-from BE.common import poi_open_windows
+from BE.common import poi_open_windows, trusted_rating
 
 MAX_ROUNDS = 2
 ACTIONABLE = ("high", "medium")
@@ -260,8 +260,7 @@ def _refresh(plan: dict, acts: list[dict], trip: dict, pois: dict,
         total_km += km
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
-    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
-               for a in acts]
+    ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
     out["segments"] = segments
     out["total_cost"] = total_fee(acts, pois)
     out["total_km"] = round(total_km, 2)

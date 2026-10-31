@@ -14,6 +14,8 @@ No-keyword-match -> neutral 0.5, fired empty. Stdlib only.
 
 from __future__ import annotations
 
+from BE.common import trusted_rating
+
 RECOVERY_TYPES = ("beach", "massage", "cafe", "restaurant")
 QUIET_AMBIENCE = ("yên tĩnh", "tĩnh lặng", "tĩnh")
 QUIET_CROWD = ("vắng", "vừa phải", "ít người")
@@ -46,7 +48,7 @@ def score_context(poi: dict, prefs=None, ctx: dict | None = None) -> dict:
 
     if _has(want, "hẹn hò", "lãng mạn", "romantic"):
         amb = str(poi.get("ambience", "")).lower()
-        rating = float(poi.get("rating") or 0.0)
+        rating = trusted_rating(poi)
         s = (0.6 if _has(amb, *DATING_AMBIENCE) else 0.2) + \
             (0.4 if rating >= 4.5 else rating / 5.0 * 0.4)
         fired.append({"rule": "dating", "reason": f"ambience {poi.get('ambience')} + rating {rating}"})

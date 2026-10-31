@@ -6,7 +6,7 @@ PATM nac-2 (T029 model) replaces these weights later; the reasons
 format stays (explainer T042 reuses it).
 
 Signals:
-- attr: rating/5, price fit (fee share of budget), effort fit
+- attr: trusted rating/5, price fit (fee share of budget), effort fit
   (intensity vs fitness), weather-safe base.
 - ctx: keyword match user prefs vs tags/type/cuisine/ambience,
   time-of-day (evening prefers food/landmark, midday avoids outdoor),
@@ -32,7 +32,7 @@ from __future__ import annotations
 from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
-from BE.common import price_level_of
+from BE.common import FEW_REVIEWS, price_level_of, trusted_rating
 
 WEIGHTS = {
     "rating": 0.22,
@@ -102,9 +102,10 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     reasons: list[str] = []
     parts: dict[str, float] = {}
 
+    parts["rating"] = max(0.0, min(1.0, trusted_rating(poi) / 5.0))
     rating = float(poi.get("rating") or 0.0)
-    parts["rating"] = max(0.0, min(1.0, rating / 5.0))
-    if rating >= 4.5:
+    if rating >= 4.5 and (poi.get("review_count") is None
+                          or poi["review_count"] >= FEW_REVIEWS):
         reasons.append(f"rating cao {rating}")
 
     budget = int(user.get("budget", (ctx.get("trip") or {}).get("budget", 3000000)))

@@ -168,6 +168,28 @@ def price_level_of(poi: dict) -> int:
     return UNKNOWN_PRICE_LEVEL if level is None else int(level)
 
 
+# Rating shrunk towards the pool by its review count (a Bayesian average): a 5.0
+# from 2 reviews says little, a 4.9 from 10,000 says a lot. Scoring on the raw
+# rating fills a rating-first day with the least-known 5.0 places. The prior sits
+# near the verified pool's mean rating, its weight near their median review count
+# (4.56 and 216 on danang-v1, Google Maps 30/10/2026).
+RATING_PRIOR = 4.5
+RATING_PRIOR_REVIEWS = 200
+# Below this a rating is an anecdote, not evidence (never "rating cao").
+FEW_REVIEWS = 20
+
+
+def trusted_rating(poi: dict) -> float:
+    """Rating to score on: the raw rating when the review count is unknown
+    (fixtures, fresh crawls); no rating stays 0, not the prior."""
+    rating = float(poi.get("rating") or 0.0)
+    reviews = poi.get("review_count")
+    if not rating or reviews is None:
+        return rating
+    return round((reviews * rating + RATING_PRIOR_REVIEWS * RATING_PRIOR)
+                 / (reviews + RATING_PRIOR_REVIEWS), 3)
+
+
 def total_fee(acts: list[dict], pois: dict) -> int:
     """Sum of POI fees for the activities (unknown POI/fee -> 0)."""
     return sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))

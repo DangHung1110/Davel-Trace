@@ -71,7 +71,7 @@ from BE.app.services.soft_rules import (
     category_allowed,
     poi_category,
 )
-from BE.common import poi_open_windows
+from BE.common import poi_open_windows, trusted_rating
 
 TIMEOUT_S = 5.0
 
@@ -206,7 +206,7 @@ def stubs_from_pois(pois: list[dict], trip: dict | None = None,
     def _score(p: dict) -> float:
         if score_fn is not None:
             return float(score_fn(p))
-        return float(p.get("rating") or 1.0)
+        return trusted_rating(p) or 1.0
 
     return [poi_to_stub(p, trip, _score(p), deadline) for p in pois]
 

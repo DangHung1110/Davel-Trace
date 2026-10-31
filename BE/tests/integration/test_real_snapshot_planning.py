@@ -33,6 +33,7 @@ from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import profile_filter, trip_ctx  # noqa: E402
 from BE.app.services.retrieval import load_pois_json  # noqa: E402
 from BE.app.services.soft_rules import poi_category  # noqa: E402
+from BE.common import FEW_REVIEWS  # noqa: E402
 
 SNAPSHOT = os.path.join(os.path.dirname(__file__), "..", "..", "data",
                         "snapshots", "danang-v1")
@@ -84,6 +85,13 @@ class TestRealSnapshotPlanning(unittest.TestCase):
         self.assertGreaterEqual(len(cats), 4)
         self.assertEqual(plan["activity_match"][0]["status"], "met")
         self.assert_honest(plan)
+
+    def test_balanced_day_is_made_of_places_people_know(self):
+        # Scoring on the raw rating filled this day with 5.0s from 2-13 reviews.
+        _, plan = self.plan(profile=COUPLE)
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        for poi in self.stops(plan):
+            self.assertGreaterEqual(poi.get("review_count") or 0, FEW_REVIEWS, poi["name"])
 
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
