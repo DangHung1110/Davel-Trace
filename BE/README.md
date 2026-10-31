@@ -23,6 +23,13 @@ Mặc định chạy ngay không cần sửa: `LLM_PROVIDER=local`
 
 ## 3. Chạy BE
 
+Khi deploy, đặt `APP_ENV=production` và `CORS_ORIGINS=<origin của app>` (cách nhau bằng dấu phẩy). Khi đó API chỉ nhận
+trình duyệt từ các origin đó và tắt các router chỉ dùng cho test local (`/v1/review`, `/v1/repair`, `/v1/accept`). Mặc định
+(local) API nhận mọi cổng của `localhost` và `127.0.0.1`.
+
+Trên máy deploy, đo độ trễ bằng `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1` (mục tiêu p95
+dưới 8 giây).
+
 ```powershell
 python -m uvicorn BE.app.main:app --port 8000
 ```
