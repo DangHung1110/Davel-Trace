@@ -72,7 +72,10 @@ class TestRepairApi(unittest.TestCase):
         self.assertEqual(r.status_code, 200, r.text)
         body = r.json()
         self.assertEqual(set(body), {"plan", "rounds", "repairs", "gate",
-                                     "review_ms"})
+                                     "review_ms", "retrieval"})
+        # FR-013/FR-024: what retrieval kept out reaches the client here too.
+        self.assertIn("needs_verification", body["retrieval"])
+        self.assertIn("excluded", body["retrieval"])
         ids = [a["poi_id"] for a in body["plan"]["activities"]]
         self.assertIn("museum", ids)
         self.assertEqual(body["rounds"], 2)
