@@ -29,6 +29,15 @@ SerpApi `type`. Activity text is NFC-normalised and matched whole-word,
 longest phrase first; a matched phrase is consumed so its sub-words cannot
 match again ("yêu cầu" never reads as "cầu"). Multi-word phrases also match
 without diacritics ("tam bien").
+
+A category alone is too wide for most wishes: a noodle shop is a restaurant but
+not "hải sản", a statue is a landmark but not "chùa". `ACTIVITY_WORDS` narrows a
+wish to the POIs whose name, type or tags say so, and a plan only counts as
+meeting the wish when one of THOSE POIs is in it.
+
+`plan_tier` (BE/tools/fix_poi_accuracy.py) keeps the places no traveller would look
+for out of a default plan: `local` and `wish_only` POIs come up only when a wish
+asks for them, `excluded` ones only as a must_visit.
 """
 
 from __future__ import annotations
@@ -37,6 +46,7 @@ import re
 import unicodedata
 
 from BE.app.services import to_min
+from BE.app.services.profile_filter import fold
 from BE.common import effective_fee, load_json, party_size
 from BE.ml.patm.estimate_duration import canonical_category
 
@@ -50,9 +60,11 @@ ACTIVITY_TYPE_MAP = {
     "suối": ["nature"], "đèo": ["nature"], "hang động": ["nature"],
     "cắm trại": ["nature"], "thiên nhiên": ["nature"], "bán đảo": ["nature"],
     "ăn": ["restaurant"], "nhà hàng": ["restaurant"], "hải sản": ["restaurant"],
-    "mì": ["restaurant"], "bún": ["restaurant"], "phở": ["restaurant"],
+    "mì": ["restaurant"], "mì quảng": ["restaurant"], "mỳ quảng": ["restaurant"],
+    "bún": ["restaurant"], "phở": ["restaurant"], "bánh xèo": ["restaurant"],
+    "lẩu": ["restaurant"], "đồ nướng": ["restaurant"], "ăn chay": ["restaurant"],
     "ẩm thực": ["restaurant"], "buffet": ["restaurant"],
-    "đặc sản": ["restaurant", "market"],
+    "đặc sản": ["restaurant", "shop"],
     "quán": ["restaurant", "cafe", "bar"], "quán ăn": ["restaurant"],
     "quán cà phê": ["cafe"], "quán bar": ["bar"], "quán bia": ["bar"],
     "quán nhậu": ["bar"],
@@ -63,18 +75,19 @@ ACTIVITY_TYPE_MAP = {
     "hộp đêm": ["bar"], "nhạc sống": ["bar"],
     "spa": ["spa"], "massage": ["spa"], "mát xa": ["spa"], "xông hơi": ["spa"],
     "gội đầu": ["spa"], "làm nail": ["spa"],
-    "chợ": ["market"], "mua sắm": ["market"], "shopping": ["market"],
-    "quà": ["market"], "lưu niệm": ["market"], "siêu thị": ["market"],
-    "trung tâm thương mại": ["market"],
+    "chợ": ["market"], "chợ đêm": ["market"], "mua sắm": ["market", "shop"],
+    "shopping": ["market", "shop"], "quà": ["shop"], "lưu niệm": ["shop"],
+    "siêu thị": ["shop", "market"], "trung tâm thương mại": ["market", "shop"],
     "văn hóa": ["museum"], "bảo tàng": ["museum"], "triển lãm": ["museum"],
     "nghệ thuật": ["museum"], "phòng trưng bày": ["museum"],
-    "lịch sử": ["museum", "landmark"],
-    "check-in": ["landmark"], "cầu": ["landmark"], "chùa": ["landmark"],
-    "nhà thờ": ["landmark"], "đền": ["landmark"], "đình": ["landmark"],
-    "ngắm cảnh": ["landmark", "viewpoint"], "chụp ảnh": ["landmark"],
-    "sống ảo": ["landmark"], "ngắm hoàng hôn": ["viewpoint", "beach"],
-    "ngắm bình minh": ["beach", "viewpoint"], "đài quan sát": ["viewpoint"],
-    "di tích": ["landmark"], "tâm linh": ["landmark"],
+    "lịch sử": ["museum", "landmark", "temple"],
+    "check-in": ["landmark", "viewpoint"], "cầu": ["landmark"], "chùa": ["temple"],
+    "nhà thờ": ["temple"], "đền": ["temple"], "đình": ["temple"],
+    "ngắm cảnh": ["landmark", "viewpoint"], "chụp ảnh": ["landmark", "viewpoint"],
+    "sống ảo": ["landmark", "viewpoint"], "ngắm hoàng hôn": ["viewpoint", "beach"],
+    "hoàng hôn": ["viewpoint", "beach"], "ngắm bình minh": ["beach", "viewpoint"],
+    "bình minh": ["beach", "viewpoint"], "đài quan sát": ["viewpoint"],
+    "di tích": ["landmark", "temple"], "tâm linh": ["temple"],
     "vui chơi": ["attraction"], "công viên giải trí": ["attraction"],
     "công viên nước": ["attraction"], "thủy cung": ["attraction"],
     "cáp treo": ["attraction"], "du thuyền": ["attraction"],
@@ -86,6 +99,43 @@ ACTIVITY_TYPE_MAP = {
 }
 NON_ACTIVITY_CATS = {"lodging", "transport"}
 PAID_CATS = {"restaurant", "cafe", "bar", "spa"}
+_HILL_WORDS = ("núi", "bán đảo", "đỉnh", "đèo", "ngũ hành sơn")
+# Wishes narrower than their category: words the POI's name, type or tags must hold
+# (`_has_word`). A phrase not listed here takes the whole category.
+ACTIVITY_WORDS = {
+    "hải sản": ("hải sản", "seafood", "ốc", "cua biển", "tôm hùm", "ghẹ"),
+    "mì": ("mì", "mỳ", "noodle"), "mì quảng": ("mì quảng", "mỳ quảng"),
+    "mỳ quảng": ("mì quảng", "mỳ quảng"), "bún": ("bún",), "phở": ("phở",),
+    "bánh xèo": ("bánh xèo",), "lẩu": ("lẩu", "hot pot", "hotpot"),
+    "đồ nướng": ("nướng", "bbq", "yakiniku"), "ăn chay": ("chay", "vegan", "vegetarian"),
+    "buffet": ("buffet",), "đặc sản": ("đặc sản", "speciality", "specialty"),
+    "quà": ("quà", "lưu niệm", "souvenir", "handmade", "gift"),
+    "lưu niệm": ("lưu niệm", "souvenir", "quà", "handmade", "gift"),
+    "chợ đêm": ("chợ đêm", "night market"),
+    "bảo tàng": ("bảo tàng", "museum"), "chùa": ("chùa", "thiền viện", "quốc tự", "pagoda", "tu viện"),
+    "nhà thờ": ("nhà thờ", "giáo xứ", "church"), "đền": ("đền",), "đình": ("đình",),
+    "cầu": ("cầu", "bridge"), "tâm linh": ("chùa", "thiền viện", "quốc tự", "pagoda", "đền"),
+    "núi": _HILL_WORDS, "leo núi": _HILL_WORDS, "leo": _HILL_WORDS,
+    "trekking": _HILL_WORDS + ("suối",),
+    "thác": ("thác",), "suối": ("suối",), "đèo": ("đèo",), "rừng": ("rừng", "bán đảo"),
+    "hang động": ("hang động", "cave", "ngũ hành sơn"), "cắm trại": ("cắm trại", "glamping", "camping"),
+    "bán đảo": ("bán đảo", "sơn trà"),
+    "công viên nước": ("công viên nước", "water park"), "cáp treo": ("bà nà", "cáp treo"),
+    "du thuyền": ("du thuyền", "cruise"), "đi thuyền": ("thuyền",),
+    "thuyền thúng": ("thúng",), "thủy cung": ("thủy cung", "aquarium"),
+    "nấu ăn": ("nấu ăn", "cooking"), "lặn": ("lặn", "san hô", "diving"),
+}
+# Hiking also counts on a viewpoint or attraction that IS a hill climb; the caves
+# of Ngũ Hành Sơn are inside that one attraction.
+ACTIVITY_EXTRA_CATS = {"núi": ["viewpoint", "attraction"], "leo núi": ["viewpoint", "attraction"],
+                       "leo": ["viewpoint", "attraction"], "trekking": ["viewpoint", "attraction"],
+                       "hang động": ["attraction"]}
+# Wishes that only mean something at an hour: the stop must start inside this window
+# (minutes), or the wish is reported unmet. A sunset at nine in the morning is none.
+_SUNSET, _SUNRISE = (16 * 60, 18 * 60), (5 * 60, 7 * 60)
+ACTIVITY_START = {"ngắm hoàng hôn": _SUNSET, "hoàng hôn": _SUNSET,
+                  "ngắm bình minh": _SUNRISE, "bình minh": _SUNRISE}
+_WISH_TIERS = {"local", "wish_only"}
 
 
 def load_pois_json(path: str) -> list[dict]:
@@ -156,6 +206,61 @@ def wanted_types(activities: list[str]) -> set[str]:
     return out
 
 
+def _wish_rule(text: str) -> tuple[set[str], tuple[str, ...]]:
+    """One activity -> (categories, folded words narrowing them; () = any POI)."""
+    rest = " ".join(unicodedata.normalize("NFC", text).lower().split())
+    cats: set[str] = set()
+    words: list[str] = []
+    for ph in _PHRASES:
+        hit, rest = _consume(rest, ph)
+        if hit and ACTIVITY_TYPE_MAP[ph]:
+            cats.update(ACTIVITY_TYPE_MAP[ph])
+            cats.update(ACTIVITY_EXTRA_CATS.get(ph, []))
+            words.extend(ACTIVITY_WORDS.get(ph, ()))
+    return cats or match_activity(text), tuple(words)
+
+
+def _wish_start(text: str) -> list[int] | None:
+    rest = " ".join(unicodedata.normalize("NFC", text).lower().split())
+    for phrase, span in ACTIVITY_START.items():
+        if _consume(rest, phrase)[0]:
+            return list(span)
+    return None
+
+
+def _poi_words(poi: dict) -> tuple[str, str]:
+    """Name, type and tags as spaced lower-case words: (accented, folded)."""
+    parts = [str(poi.get("name") or ""), str(poi.get("type") or "")]
+    parts += [str(t) for t in poi.get("tags") or []]
+    text = unicodedata.normalize("NFC", " ".join(parts)).lower()
+    spaced = " ".join(re.sub(r"[^\w/ ]+", " ", text).split())
+    return f" {spaced} ", f" {fold(spaced)} "
+
+
+def _has_word(word: str, accented: str, folded: str) -> bool:
+    """One syllable must match with its accents: folded, "phố" reads as "phở" and
+    "cửa hàng" as a crab. A phrase is long enough to match a name typed without them."""
+    if " " in word:
+        return f" {fold(word)} " in folded
+    return f" {word} " in accented
+
+
+def poi_fits_wish(poi: dict, text: str) -> bool:
+    """Is this POI really what the activity asks for, not just the same category?"""
+    cats, words = _wish_rule(text)
+    if poi_category(poi) not in cats - NON_ACTIVITY_CATS:
+        return False
+    if not words:
+        return True
+    accented, folded = _poi_words(poi)
+    return any(_has_word(word, accented, folded) for word in words)
+
+
+def wish_ids(activities: list[str], pois: list[dict]) -> list[str]:
+    """The POIs some activity of the trip really asks for."""
+    return [p["poi_id"] for p in pois if any(poi_fits_wish(p, a) for a in activities or [])]
+
+
 def uncertainty(p: dict) -> list[str]:
     """FR-024/FR-026 labels for unverified fields (never used as fact)."""
     labels = []
@@ -210,6 +315,13 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if cat in NON_ACTIVITY_CATS:
             excluded.append({"poi_id": pid, "reason": "khong phai hoat dong"})
             continue
+        tier = p.get("plan_tier")
+        if tier == "excluded":
+            excluded.append({"poi_id": pid, "reason": p.get("plan_tier_reason") or "khong xep vao lich"})
+            continue
+        if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in activities):
+            excluded.append({"poi_id": pid, "reason": "chi xep khi duoc yeu cau"})
+            continue
         if (effective_fee(p) or 0) * party > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
@@ -224,17 +336,22 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
             "unmatched_activities": [a for a in activities if not match_activity(a)]}
 
 
-def activity_requirements(activities: list[str], pool: list[dict]
+def activity_requirements(activities: list[str], pool: list[dict],
+                          banned: list[dict] | None = None,
+                          unaffordable: list[dict] | None = None,
+                          horizon: tuple[int, int] | None = None
                           ) -> tuple[list[dict], list[dict]]:
     """Trip activities -> (`required_any` groups, per-activity report).
 
-    One group per understood activity: "at least one stop of these
-    categories", restricted to categories the pool actually has, so a wish
-    with no verified POI never costs a solver run. Report statuses:
-    "required" (group emitted; the planner later marks it met/relaxed),
-    "no_verified_poi" (understood, nothing in the pool), "not_understood".
+    One group per understood activity: "at least one of THESE POIs", the ones
+    that really fit the wish, so a wish with no matching POI never costs a solver
+    run. `banned` is what the day's profile took out of the pool and `unaffordable`
+    what the budget did: a wish only they could meet is reported as such, not as
+    missing data. Report statuses: "required" (group emitted; the planner later marks
+    it met/relaxed), "blocked_by_profile", "over_budget", "no_verified_poi"
+    (understood, nothing fits), "outside_trip_hours" (a sunrise on a day that starts
+    at eight), "not_understood".
     """
-    have = {poi_category(p) for p in pool}
     groups: list[dict] = []
     report: list[dict] = []
     for activity in activities or []:
@@ -243,14 +360,23 @@ def activity_requirements(activities: list[str], pool: list[dict]
             report.append({"activity": activity, "categories": [],
                            "status": "not_understood"})
             continue
-        usable = [c for c in cats if c in have]
-        if not usable:
-            report.append({"activity": activity, "categories": cats,
-                           "status": "no_verified_poi"})
+        ids = [p["poi_id"] for p in pool if poi_fits_wish(p, activity)]
+        if not ids:
+            status = ("blocked_by_profile" if any(poi_fits_wish(p, activity) for p in banned or [])
+                      else "over_budget" if any(poi_fits_wish(p, activity) for p in unaffordable or [])
+                      else "no_verified_poi")
+            report.append({"activity": activity, "categories": cats, "status": status})
             continue
+        usable = sorted({poi_category(p) for p in pool if p["poi_id"] in set(ids)})
+        start = _wish_start(activity)
+        if start and horizon and (start[1] <= horizon[0] or start[0] >= horizon[1]):
+            report.append({"activity": activity, "categories": cats, "status": "outside_trip_hours",
+                           "start_between": start})
+            continue
+        timed = {"start_between": start} if start else {}
         report.append({"activity": activity, "categories": usable,
-                       "status": "required"})
-        group = {"count": 1, "categories": usable}
+                       "status": "required", "poi_ids": ids, **timed})
+        group = {"count": 1, "categories": usable, "poi_ids": ids, **timed}
         if group not in groups:
             groups.append(group)
     return groups, report

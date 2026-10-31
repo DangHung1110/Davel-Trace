@@ -67,7 +67,7 @@ AVOID_GROUPS: dict[str, tuple[str, ...]] = {
     "spa": ("spa", "massage", "mát xa"),
     "beach": ("biển", "beach", "bãi biển"),
     "market": ("chợ", "market"),
-    "shopping": ("mua sắm", "shopping", "chợ", "market"),
+    "shopping": ("mua sắm", "shopping", "chợ", "market", "shop", "cửa hàng"),
     "crowd": ("đông", "ồn ào", "crowded", "crowd"),
 }
 # "trek"/"adventure" is also an effort class: high-intensity outdoor POIs are
