@@ -49,6 +49,9 @@ CATEGORY_DEFAULTS: dict[str, int] = {
     "lodging": 60,
     "spa": 90,
     "bar": 90,
+    # A stop to look at the view, like a landmark. Without a default of its own
+    # the raw type decided: "Điểm thu hút khách du lịch" gave 200-240 minutes.
+    "viewpoint": 45,
 }
 
 # Normalized-Vietnamese substring -> canonical. Specific first (dict order).
@@ -202,7 +205,7 @@ def duration_category(poi: dict) -> str:
     The raw Google type alone mislabels many POIs ("Điểm thu hút khách du
     lịch" on museums and beaches gave 200 minutes); `cat` is the relabelled
     canonical category. Raw type stays the fallback for fresh crawls and for
-    a `cat` with no default of its own (viewpoint).
+    a `cat` with no default of its own.
     """
     category = poi.get("cat")
     if category not in CATEGORY_DEFAULTS:

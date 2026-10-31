@@ -91,6 +91,13 @@
    "p75": 126.0,
    "n": 0,
    "confidence": "low"
+  },
+  "viewpoint": {
+   "p25": 31.5,
+   "p50": 45.0,
+   "p75": 63.0,
+   "n": 0,
+   "confidence": "low"
   }
  },
  "meta": {

@@ -94,7 +94,9 @@ class TestRules(unittest.TestCase):
         self.assertEqual(duration_category({"cat": "attraction", "name": "Đỉnh Bàn Cờ"}),
                          "attraction")
         self.assertEqual(duration_category({"cat": "viewpoint", "name": "View",
-                                            "type": "Điểm ngắm cảnh"}), "Điểm ngắm cảnh")
+                                            "type": "Điểm thu hút khách du lịch"}), "viewpoint")
+        self.assertEqual(duration_category({"name": "Mới crawl", "type": "Điểm ngắm cảnh"}),
+                         "Điểm ngắm cảnh")
 
     def test_idempotent(self):
         pois = [poi(cat="museum", ticket_vnd=50000, smart_tags={"price_band": "cheap"},
