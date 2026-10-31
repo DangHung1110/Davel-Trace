@@ -136,7 +136,10 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "preserved_completed": completed_ids,
                 "changes": [], "version": state["version"]}
     matrix = {f"{a}->{b}": {"minutes": w} for (a, b), w in travel.items()}
-    rep = validate({"activities": acts}, effective_trip,
+    # A must_visit already done is not in the remaining plan; HCS would otherwise
+    # fail every replan after it.
+    open_must = [m for m in effective_trip.get("must_visit", []) if m not in completed_ids]
+    rep = validate({"activities": acts}, {**effective_trip, "must_visit": open_must},
                    {p["poi_id"]: {"verified": p.get("verified", False),
                                   "fee": effective_fee(p) or 0,
                                   "opening_hours": p.get("opening_hours", [])}
