@@ -63,7 +63,8 @@ def report_rows(snapshot: Path) -> list[dict]:
             "safe": ", ".join(safe) if safe is not None and not hours else "",
             "p50": (poi.get("visit_min") or {}).get("p50"), "dur_source": poi.get("dur_source"),
             "band": tags.get("price_band"), "ticket": poi.get("ticket_vnd"),
-            "rating": poi.get("rating"), "verified": bool(poi.get("verified")),
+            "rating": poi.get("rating"), "reviews": poi.get("review_count"),
+            "verified": bool(poi.get("verified")),
             "verified_by": poi.get("verified_by") or "", "lat": poi.get("lat"), "lon": poi.get("lon"),
         })
     return rows
@@ -158,7 +159,7 @@ PAGE = """<!doctype html>
         "<td class='n'>" + esc(r.cat) + "</td><td>" + hoursCell(r) + "</td>" +
         "<td class='n'>" + (r.p50 ? esc(r.p50) + " phút" : "—") + "<div class='muted'>" + esc(r.dur_source === "human" ? "người nhập" : "theo loại") + "</div></td>" +
         "<td class='n'>" + esc(BAND[r.band] || "—") + (r.ticket ? "<div class='muted'>vé " + esc(r.ticket.toLocaleString("vi-VN")) + "đ</div>" : "") + "</td>" +
-        "<td>" + esc(r.rating == null ? "—" : r.rating) + "</td>" +
+        "<td>" + esc(r.rating == null ? "—" : r.rating) + (r.reviews == null ? "" : " (" + esc(r.reviews) + ")") + "</td>" +
         "<td class='note'>" + r.edits.map(function (e) { return "<span class='ed'>" + esc(e) + "</span>"; }).join("") + esc(r.note) + "</td></tr>");
     });
     document.getElementById("rows").innerHTML = out.join("");

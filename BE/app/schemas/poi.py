@@ -41,6 +41,8 @@ class POI(BaseModel):
     price_level: int | None = Field(default=None, ge=1, le=3)
     fee: int = Field(default=0, ge=0)
     rating: float | None = Field(default=None, ge=0, le=5)
+    # null = unknown (BE.common.trusted_rating then scores on the raw rating)
+    review_count: int | None = Field(default=None, ge=0)
     tags: list[str] = Field(default_factory=list)
     intensity: int = Field(default=2, ge=1, le=3)
     ambience: str = ""

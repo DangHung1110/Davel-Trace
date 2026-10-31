@@ -101,7 +101,8 @@
           "price_band"
         ],
         "row_hash": "421375455f1c"
-      }
+      },
+      "review_count": 3207
     },
     {
       "poi_id": "ChIJx6-KGnIXQjER7x-T0zeOlBw",
@@ -200,7 +201,8 @@
           "price_band"
         ],
         "row_hash": "fb41d331875b"
-      }
+      },
+      "review_count": 32045
     },
     {
       "poi_id": "ChIJmQmygLwXQjERcZVy8--sIcE",
@@ -220,7 +222,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.8,
       "tags": [
         "Nhà hàng hải sản",
         "Nhà cung cấp thực phẩm và đồ uống cho dịch vụ ăn uống",
@@ -302,7 +304,8 @@
           "price_band"
         ],
         "row_hash": "fd4dee378313"
-      }
+      },
+      "review_count": 5518
     },
     {
       "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
@@ -404,7 +407,8 @@
           "price_band"
         ],
         "row_hash": "53d79822ad25"
-      }
+      },
+      "review_count": 6026
     },
     {
       "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
@@ -496,7 +500,8 @@
           "price_band"
         ],
         "row_hash": "f8d09d42b0fc"
-      }
+      },
+      "review_count": 186
     },
     {
       "poi_id": "ChIJUahp7dYZQjERa6ryX2z_stg",
@@ -596,7 +601,8 @@
           "price_band"
         ],
         "row_hash": "f4dfbb0f8014"
-      }
+      },
+      "review_count": 164
     },
     {
       "poi_id": "ChIJi5XzTqsZQjERn5HbwcdvD5Y",
@@ -695,7 +701,8 @@
           "price_band"
         ],
         "row_hash": "10667d46e898"
-      }
+      },
+      "review_count": 2202
     },
     {
       "poi_id": "ChIJqaQoXYMZQjERX_QzVEAZr_Q",
@@ -796,7 +803,8 @@
           "price_band"
         ],
         "row_hash": "c4bd93c82fc3"
-      }
+      },
+      "review_count": 4754
     },
     {
       "poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk",
@@ -889,7 +897,8 @@
         ],
         "verdict": "loai",
         "row_hash": "45e24b2056e8"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
@@ -991,7 +1000,8 @@
           "price_band"
         ],
         "row_hash": "e88964e6de54"
-      }
+      },
+      "review_count": 3892
     },
     {
       "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
@@ -1011,7 +1021,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 3.9,
+      "rating": 4.0,
       "tags": [
         "Nhà hàng",
         "Nhà hàng Việt Nam"
@@ -1090,7 +1100,8 @@
           "price_band"
         ],
         "row_hash": "66e760b44dcf"
-      }
+      },
+      "review_count": 500
     },
     {
       "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
@@ -1194,7 +1205,8 @@
           "price_band"
         ],
         "row_hash": "9944e12b7aaa"
-      }
+      },
+      "review_count": 14863
     },
     {
       "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
@@ -1206,15 +1218,15 @@
         "09:00-23:00"
       ],
       "visit_min": {
-        "p25": 50,
-        "p50": 72,
-        "p75": 101
+        "p25": 42,
+        "p50": 60,
+        "p75": 84
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.4,
       "tags": [
         "Nhà hàng hải sản"
       ],
@@ -1292,8 +1304,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "5b2a34bd0b4a"
-      }
+        "row_hash": "6388567f4b6b"
+      },
+      "review_count": 4050
     },
     {
       "poi_id": "ChIJH72bVncZQjERoTgax0OjZKY",
@@ -1399,7 +1412,8 @@
           "price_band"
         ],
         "row_hash": "fe2dd5b415f7"
-      }
+      },
+      "review_count": 4502
     },
     {
       "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
@@ -1495,7 +1509,8 @@
         ],
         "verdict": "loai",
         "row_hash": "d8fe0e9c2925"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJJSd-naoZQjERheTI-IEkRrc",
@@ -1596,7 +1611,8 @@
           "price_band"
         ],
         "row_hash": "89addd035cd7"
-      }
+      },
+      "review_count": 676
     },
     {
       "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
@@ -1696,7 +1712,8 @@
           "price_band"
         ],
         "row_hash": "c9eae41db957"
-      }
+      },
+      "review_count": 10262
     },
     {
       "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
@@ -1786,7 +1803,8 @@
         ],
         "verdict": "loai",
         "row_hash": "d49673d8eae8"
-      }
+      },
+      "review_count": 4
     },
     {
       "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
@@ -1886,7 +1904,8 @@
           "price_band"
         ],
         "row_hash": "4e7796940e97"
-      }
+      },
+      "review_count": 3592
     },
     {
       "poi_id": "ChIJ-VaWslgZQjERwaL3uKR9fB4",
@@ -1986,7 +2005,8 @@
           "price_band"
         ],
         "row_hash": "a47a6adf73be"
-      }
+      },
+      "review_count": 1596
     },
     {
       "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
@@ -2090,7 +2110,8 @@
           "price_band"
         ],
         "row_hash": "4d8c15c95681"
-      }
+      },
+      "review_count": 1206
     },
     {
       "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
@@ -2190,7 +2211,8 @@
           "price_band"
         ],
         "row_hash": "3699fb096ea2"
-      }
+      },
+      "review_count": 1104
     },
     {
       "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
@@ -2301,7 +2323,8 @@
           "price_band"
         ],
         "row_hash": "3a93b7b3332b"
-      }
+      },
+      "review_count": 2177
     },
     {
       "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
@@ -2398,7 +2421,8 @@
           "price_band"
         ],
         "row_hash": "30f9aba1831b"
-      }
+      },
+      "review_count": 4046
     },
     {
       "poi_id": "ChIJd2HsN1oXQjER19a79kUNt-U",
@@ -2502,7 +2526,8 @@
           "price_band"
         ],
         "row_hash": "3bfb2022313c"
-      }
+      },
+      "review_count": 806
     },
     {
       "poi_id": "ChIJO0E1hoYXQjER-ML-N1yAGAU",
@@ -2602,7 +2627,8 @@
           "price_band"
         ],
         "row_hash": "509403f18b73"
-      }
+      },
+      "review_count": 2762
     },
     {
       "poi_id": "ChIJh4MCHBoXQjERA274y4wwup4",
@@ -2704,7 +2730,8 @@
           "price_band"
         ],
         "row_hash": "2dca989409fc"
-      }
+      },
+      "review_count": 2656
     },
     {
       "poi_id": "ChIJYahwiHIXQjER0CIGd09pgcg",
@@ -2804,7 +2831,8 @@
           "price_band"
         ],
         "row_hash": "9a1429eef3d5"
-      }
+      },
+      "review_count": 4099
     },
     {
       "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
@@ -2816,15 +2844,15 @@
         "09:30-23:00"
       ],
       "visit_min": {
-        "p25": 42,
-        "p50": 60,
-        "p75": 84
+        "p25": 50,
+        "p50": 72,
+        "p75": 101
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.4,
+      "rating": 4.5,
       "tags": [
         "Nhà hàng Việt Nam"
       ],
@@ -2894,8 +2922,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "49926070b88b"
-      }
+        "row_hash": "c0050c5257bd"
+      },
+      "review_count": 1242
     },
     {
       "poi_id": "ChIJeTslKdkXQjERPFZeN_Ta-Ek",
@@ -2995,7 +3024,8 @@
           "price_band"
         ],
         "row_hash": "5188e13fe87b"
-      }
+      },
+      "review_count": 384
     },
     {
       "poi_id": "ChIJeVJaMNUZQjERnRz_bfJ5ex4",
@@ -3106,7 +3136,8 @@
           "price_band"
         ],
         "row_hash": "5ebbdcc4a0c5"
-      }
+      },
+      "review_count": 3010
     },
     {
       "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
@@ -3197,7 +3228,8 @@
           "price_band"
         ],
         "row_hash": "049e7444ece4"
-      }
+      },
+      "review_count": 271
     },
     {
       "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
@@ -3295,7 +3327,8 @@
           "price_band"
         ],
         "row_hash": "b2c8a846d7e6"
-      }
+      },
+      "review_count": 172
     },
     {
       "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
@@ -3394,7 +3427,8 @@
           "price_band"
         ],
         "row_hash": "d2b2ba461ce5"
-      }
+      },
+      "review_count": 2778
     },
     {
       "poi_id": "ChIJN84BNSQXQjERyy7N3rDXisc",
@@ -3492,7 +3526,8 @@
           "price_band"
         ],
         "row_hash": "1a35b3b36abe"
-      }
+      },
+      "review_count": 10415
     },
     {
       "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
@@ -3593,7 +3628,8 @@
           "price_band"
         ],
         "row_hash": "bb7930f3b1df"
-      }
+      },
+      "review_count": 595
     },
     {
       "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
@@ -3691,7 +3727,8 @@
           "price_band"
         ],
         "row_hash": "85754cc83392"
-      }
+      },
+      "review_count": 922
     },
     {
       "poi_id": "ChIJF2lrSYgXQjERKBBhFKYlhkg",
@@ -3789,7 +3826,8 @@
           "price_band"
         ],
         "row_hash": "f41b9ad0570c"
-      }
+      },
+      "review_count": 751
     },
     {
       "poi_id": "ChIJRVOgcgAXQjER7lPiR_QvAdQ",
@@ -3809,7 +3847,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.9,
+      "rating": 4.8,
       "tags": [
         "Nhà hàng Việt Nam",
         "Nhà hàng gia đình"
@@ -3889,7 +3927,8 @@
           "price_band"
         ],
         "row_hash": "6f070e54cdd2"
-      }
+      },
+      "review_count": 213
     },
     {
       "poi_id": "ChIJP-VRM2YXQjERbEUrtG6wq9Q",
@@ -3909,7 +3948,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Nhà hàng Việt Nam",
         "Nhà hàng"
@@ -3990,7 +4029,8 @@
           "price_band"
         ],
         "row_hash": "16de69bf1079"
-      }
+      },
+      "review_count": 5630
     },
     {
       "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
@@ -4090,7 +4130,8 @@
           "price_band"
         ],
         "row_hash": "ec1884add4c7"
-      }
+      },
+      "review_count": 306
     },
     {
       "poi_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
@@ -4189,7 +4230,8 @@
           "price_band"
         ],
         "row_hash": "07db01647963"
-      }
+      },
+      "review_count": 3807
     },
     {
       "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
@@ -4289,7 +4331,8 @@
           "price_band"
         ],
         "row_hash": "dadd5fda30bc"
-      }
+      },
+      "review_count": 2477
     },
     {
       "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
@@ -4390,7 +4433,8 @@
           "price_band"
         ],
         "row_hash": "26cc48e882ab"
-      }
+      },
+      "review_count": 1161
     },
     {
       "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
@@ -4491,7 +4535,8 @@
           "price_band"
         ],
         "row_hash": "adca51e46148"
-      }
+      },
+      "review_count": 321
     },
     {
       "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
@@ -4592,7 +4637,8 @@
           "price_band"
         ],
         "row_hash": "cb370dede5f2"
-      }
+      },
+      "review_count": 1845
     },
     {
       "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
@@ -4691,7 +4737,8 @@
           "price_band"
         ],
         "row_hash": "e4d9e3adc2ca"
-      }
+      },
+      "review_count": 64
     },
     {
       "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
@@ -4790,7 +4837,8 @@
           "price_band"
         ],
         "row_hash": "3b2133a22245"
-      }
+      },
+      "review_count": 1724
     },
     {
       "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
@@ -4890,7 +4938,8 @@
           "price_band"
         ],
         "row_hash": "012bb68c0f11"
-      }
+      },
+      "review_count": 2250
     },
     {
       "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
@@ -4993,7 +5042,8 @@
           "price_band"
         ],
         "row_hash": "7504391dbd93"
-      }
+      },
+      "review_count": 4083
     },
     {
       "poi_id": "ChIJN-vJNV8XQjERNccI4vX2rHY",
@@ -5087,7 +5137,8 @@
           "price_band"
         ],
         "row_hash": "d8d55228319f"
-      }
+      },
+      "review_count": 434
     },
     {
       "poi_id": "ChIJRaHks2wXQjERVMrWhffmRXw",
@@ -5189,7 +5240,8 @@
           "price_band"
         ],
         "row_hash": "edb087f7cfd1"
-      }
+      },
+      "review_count": 3617
     },
     {
       "poi_id": "ChIJW_ilwg0XQjERQbqRXGggIFE",
@@ -5291,7 +5343,8 @@
           "price_band"
         ],
         "row_hash": "8515f0f16cb8"
-      }
+      },
+      "review_count": 504
     },
     {
       "poi_id": "ChIJhcB00uoQQjERjQEm4m6FatM",
@@ -5384,7 +5437,8 @@
           "price_band"
         ],
         "row_hash": "7840f7e16069"
-      }
+      },
+      "review_count": 390
     },
     {
       "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
@@ -5477,7 +5531,8 @@
           "price_band"
         ],
         "row_hash": "b4160abf82c3"
-      }
+      },
+      "review_count": 195
     },
     {
       "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
@@ -5576,7 +5631,8 @@
           "price_band"
         ],
         "row_hash": "3fc5cf22112b"
-      }
+      },
+      "review_count": 627
     },
     {
       "poi_id": "ChIJYy-g38oQQjER2c931z_dDt4",
@@ -5669,7 +5725,8 @@
           "price_band"
         ],
         "row_hash": "d00799a0c9c1"
-      }
+      },
+      "review_count": 147
     },
     {
       "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
@@ -5767,7 +5824,8 @@
           "price_band"
         ],
         "row_hash": "80ae6bc67172"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
@@ -5858,7 +5916,8 @@
           "price_band"
         ],
         "row_hash": "b351d8feccbe"
-      }
+      },
+      "review_count": 437
     },
     {
       "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
@@ -5950,7 +6009,8 @@
           "price_band"
         ],
         "row_hash": "5f58ab462990"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJYQkmfagfQjER0iIRsKZ0Rcc",
@@ -5968,7 +6028,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.9,
+      "rating": 4.8,
       "tags": [
         "Nhà hàng"
       ],
@@ -6040,7 +6100,8 @@
           "price_band"
         ],
         "row_hash": "1f225eec4786"
-      }
+      },
+      "review_count": 28
     },
     {
       "poi_id": "ChIJLSyuRcIZQjEReKwhRREzUaQ",
@@ -6139,7 +6200,8 @@
           "price_band"
         ],
         "row_hash": "a1b6da5923d9"
-      }
+      },
+      "review_count": 128
     },
     {
       "poi_id": "ChIJgUt949cYQjERTHdMcEeiF2o",
@@ -6238,7 +6300,8 @@
           "price_band"
         ],
         "row_hash": "d85c16df498c"
-      }
+      },
+      "review_count": 347
     },
     {
       "poi_id": "ChIJxQQMGMoYQjER-2IGXb-pTtQ",
@@ -6336,7 +6399,8 @@
           "price_band"
         ],
         "row_hash": "4c96bc84844d"
-      }
+      },
+      "review_count": 132
     },
     {
       "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
@@ -6436,7 +6500,8 @@
           "price_band"
         ],
         "row_hash": "1b6f4f5338a8"
-      }
+      },
+      "review_count": 474
     },
     {
       "poi_id": "ChIJVeL2KNYYQjERkTADVXDZcRM",
@@ -6535,7 +6600,8 @@
           "price_band"
         ],
         "row_hash": "ca1f7ee9921e"
-      }
+      },
+      "review_count": 204
     },
     {
       "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
@@ -6634,7 +6700,8 @@
           "price_band"
         ],
         "row_hash": "f89ee04c002a"
-      }
+      },
+      "review_count": 216
     },
     {
       "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
@@ -6727,7 +6794,8 @@
           "price_band"
         ],
         "row_hash": "65d4f216db9a"
-      }
+      },
+      "review_count": 222
     },
     {
       "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
@@ -6826,7 +6894,8 @@
           "price_band"
         ],
         "row_hash": "394269c1857e"
-      }
+      },
+      "review_count": 93
     },
     {
       "poi_id": "ChIJ-7JfLigZQjERZm4r5uDmk5o",
@@ -6925,7 +6994,8 @@
           "price_band"
         ],
         "row_hash": "e96cc296d43c"
-      }
+      },
+      "review_count": 258
     },
     {
       "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
@@ -7019,7 +7089,8 @@
           "price_band"
         ],
         "row_hash": "4cb06fd2f4f1"
-      }
+      },
+      "review_count": 83
     },
     {
       "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
@@ -7039,7 +7110,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.3,
+      "rating": 4.2,
       "tags": [
         "Nhà hàng"
       ],
@@ -7111,7 +7182,8 @@
           "price_band"
         ],
         "row_hash": "4c1935d5b77a"
-      }
+      },
+      "review_count": 198
     },
     {
       "poi_id": "ChIJ_2lhydMZQjERNTX79I86p44",
@@ -7204,7 +7276,8 @@
           "price_band"
         ],
         "row_hash": "120c4fccd8d5"
-      }
+      },
+      "review_count": 479
     },
     {
       "poi_id": "ChIJ1eef2IsZQjERjy-_tblqzJs",
@@ -7303,7 +7376,8 @@
           "price_band"
         ],
         "row_hash": "be16e43ec90d"
-      }
+      },
+      "review_count": 157
     },
     {
       "poi_id": "ChIJGZVxyf0ZQjERBbAyCvPNq7E",
@@ -7323,7 +7397,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.2,
+      "rating": 4.1,
       "tags": [
         "Nhà hàng Việt Nam"
       ],
@@ -7402,7 +7476,8 @@
           "price_band"
         ],
         "row_hash": "e29cf90aa62b"
-      }
+      },
+      "review_count": 221
     },
     {
       "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
@@ -7502,7 +7577,8 @@
           "price_band"
         ],
         "row_hash": "c722ff340dda"
-      }
+      },
+      "review_count": 1540
     },
     {
       "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
@@ -7601,7 +7677,8 @@
           "price_band"
         ],
         "row_hash": "7c6c3f28e4ba"
-      }
+      },
+      "review_count": 597
     },
     {
       "poi_id": "ChIJI85kEAAZQjERpstMFkP60mc",
@@ -7703,7 +7780,8 @@
           "price_band"
         ],
         "row_hash": "4c447b9c2574"
-      }
+      },
+      "review_count": 2134
     },
     {
       "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
@@ -7803,7 +7881,8 @@
           "price_band"
         ],
         "row_hash": "6cd9ee99edce"
-      }
+      },
+      "review_count": 199
     },
     {
       "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
@@ -7903,7 +7982,8 @@
           "price_band"
         ],
         "row_hash": "f3286c376003"
-      }
+      },
+      "review_count": 88
     },
     {
       "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
@@ -7996,7 +8076,8 @@
         ],
         "verdict": "loai",
         "row_hash": "d1ca0013f629"
-      }
+      },
+      "review_count": 712
     },
     {
       "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
@@ -8090,7 +8171,8 @@
           "price_band"
         ],
         "row_hash": "0ec0cf64ff1b"
-      }
+      },
+      "review_count": 98
     },
     {
       "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
@@ -8189,7 +8271,8 @@
           "price_band"
         ],
         "row_hash": "b3bcbf3e10a8"
-      }
+      },
+      "review_count": 430
     },
     {
       "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
@@ -8282,7 +8365,8 @@
         ],
         "verdict": "loai",
         "row_hash": "e0824dab57af"
-      }
+      },
+      "review_count": 316
     },
     {
       "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
@@ -8374,7 +8458,8 @@
           "price_band"
         ],
         "row_hash": "fc60210409d5"
-      }
+      },
+      "review_count": 387
     },
     {
       "poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM",
@@ -8472,7 +8557,8 @@
           "price_band"
         ],
         "row_hash": "c466d1ec5742"
-      }
+      },
+      "review_count": 6
     },
     {
       "poi_id": "ChIJY-zHSgQZQjERRoAvxXVcViU",
@@ -8573,7 +8659,8 @@
           "price_band"
         ],
         "row_hash": "ef45347d5ee1"
-      }
+      },
+      "review_count": 38
     },
     {
       "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
@@ -8661,7 +8748,8 @@
         ],
         "verdict": "loai",
         "row_hash": "efee85b9d55e"
-      }
+      },
+      "review_count": 421
     },
     {
       "poi_id": "ChIJaeTAGgMZQjER5Hvtuv10j_s",
@@ -8760,7 +8848,8 @@
           "price_band"
         ],
         "row_hash": "8f5ae9887713"
-      }
+      },
+      "review_count": 113
     },
     {
       "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
@@ -8846,7 +8935,8 @@
         ],
         "verdict": "loai",
         "row_hash": "ae36e053bba1"
-      }
+      },
+      "review_count": 275
     },
     {
       "poi_id": "ChIJH_EMuNcZQjERI1YtG7IGGDo",
@@ -8945,7 +9035,8 @@
           "price_band"
         ],
         "row_hash": "85d20201aead"
-      }
+      },
+      "review_count": 199
     },
     {
       "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
@@ -9043,7 +9134,8 @@
           "price_band"
         ],
         "row_hash": "2fd9c37fce5a"
-      }
+      },
+      "review_count": 331
     },
     {
       "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
@@ -9141,7 +9233,8 @@
           "price_band"
         ],
         "row_hash": "9cc058c2b284"
-      }
+      },
+      "review_count": 10326
     },
     {
       "poi_id": "ChIJxX--D-oZQjERQ4LzQRoeVXk",
@@ -9240,7 +9333,8 @@
           "price_band"
         ],
         "row_hash": "b02ff22366f9"
-      }
+      },
+      "review_count": 1074
     },
     {
       "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
@@ -9340,7 +9434,8 @@
           "price_band"
         ],
         "row_hash": "5d6bc33c7e08"
-      }
+      },
+      "review_count": 7849
     },
     {
       "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
@@ -9440,7 +9535,8 @@
           "price_band"
         ],
         "row_hash": "a7ef052e39e4"
-      }
+      },
+      "review_count": 347
     },
     {
       "poi_id": "ChIJWXGFjDcYQjER0LvTZMZvBn0",
@@ -9460,7 +9556,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.5,
       "tags": [
         "Quán cà phê"
       ],
@@ -9537,7 +9633,8 @@
           "price_band"
         ],
         "row_hash": "b1fcf3289685"
-      }
+      },
+      "review_count": 95
     },
     {
       "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
@@ -9635,7 +9732,8 @@
           "price_band"
         ],
         "row_hash": "0b14029517f6"
-      }
+      },
+      "review_count": 1952
     },
     {
       "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
@@ -9732,7 +9830,8 @@
           "price_band"
         ],
         "row_hash": "dfb7bc20c4bf"
-      }
+      },
+      "review_count": 247
     },
     {
       "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
@@ -9752,7 +9851,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Quán cà phê"
       ],
@@ -9829,7 +9928,8 @@
           "price_band"
         ],
         "row_hash": "c52aeeaa6247"
-      }
+      },
+      "review_count": 181
     },
     {
       "poi_id": "ChIJUdH0Q88ZQjER0AoQ8Pbil28",
@@ -9927,7 +10027,8 @@
           "price_band"
         ],
         "row_hash": "69d41915b8e2"
-      }
+      },
+      "review_count": 2491
     },
     {
       "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
@@ -10025,7 +10126,8 @@
           "price_band"
         ],
         "row_hash": "c2e437460a15"
-      }
+      },
+      "review_count": 10218
     },
     {
       "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
@@ -10122,7 +10224,8 @@
           "price_band"
         ],
         "row_hash": "cbd9c43c5dbc"
-      }
+      },
+      "review_count": 44
     },
     {
       "poi_id": "ChIJW4dpfjkYQjERcGpyYomHFO4",
@@ -10219,7 +10322,8 @@
           "price_band"
         ],
         "row_hash": "bfd22432a16f"
-      }
+      },
+      "review_count": 121
     },
     {
       "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
@@ -10318,7 +10422,8 @@
           "price_band"
         ],
         "row_hash": "8e8fcdf68d77"
-      }
+      },
+      "review_count": 1567
     },
     {
       "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
@@ -10417,7 +10522,8 @@
           "price_band"
         ],
         "row_hash": "c559cf2db3c4"
-      }
+      },
+      "review_count": 353
     },
     {
       "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
@@ -10515,7 +10621,8 @@
           "price_band"
         ],
         "row_hash": "2830d0bea7a9"
-      }
+      },
+      "review_count": 529
     },
     {
       "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
@@ -10615,7 +10722,8 @@
           "price_band"
         ],
         "row_hash": "676e623d6ba0"
-      }
+      },
+      "review_count": 888
     },
     {
       "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
@@ -10713,7 +10821,8 @@
           "price_band"
         ],
         "row_hash": "8ead41af3ae4"
-      }
+      },
+      "review_count": 135
     },
     {
       "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
@@ -10810,7 +10919,8 @@
           "price_band"
         ],
         "row_hash": "a703234530b6"
-      }
+      },
+      "review_count": 339
     },
     {
       "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
@@ -10907,7 +11017,8 @@
           "price_band"
         ],
         "row_hash": "80ed8b8b758f"
-      }
+      },
+      "review_count": 275
     },
     {
       "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
@@ -11006,7 +11117,8 @@
           "price_band"
         ],
         "row_hash": "630b3cbb01d7"
-      }
+      },
+      "review_count": 105
     },
     {
       "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
@@ -11088,7 +11200,8 @@
         "no linked OSM rain-protection evidence -> unknown",
         "abstained: absent evidence is not proof of no cover",
         "audit outdoor does not encode rain protection"
-      ]
+      ],
+      "review_count": 203
     },
     {
       "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
@@ -11180,7 +11293,8 @@
           "price_band"
         ],
         "row_hash": "f00b1c655acd"
-      }
+      },
+      "review_count": 85
     },
     {
       "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
@@ -11277,7 +11391,8 @@
           "price_band"
         ],
         "row_hash": "3434b8e03dbd"
-      }
+      },
+      "review_count": 584
     },
     {
       "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
@@ -11372,7 +11487,8 @@
           "price_band"
         ],
         "row_hash": "7034cf63d7fd"
-      }
+      },
+      "review_count": 318
     },
     {
       "poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M",
@@ -11470,7 +11586,8 @@
           "price_band"
         ],
         "row_hash": "3303008f1418"
-      }
+      },
+      "review_count": 88
     },
     {
       "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
@@ -11567,7 +11684,8 @@
           "price_band"
         ],
         "row_hash": "aec5babb1bb7"
-      }
+      },
+      "review_count": 1615
     },
     {
       "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
@@ -11664,7 +11782,8 @@
           "price_band"
         ],
         "row_hash": "9624dd02de2a"
-      }
+      },
+      "review_count": 728
     },
     {
       "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
@@ -11684,7 +11803,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.8,
       "tags": [
         "Quán cà phê"
       ],
@@ -11755,7 +11874,8 @@
           "price_band"
         ],
         "row_hash": "f20abcd548a8"
-      }
+      },
+      "review_count": 146
     },
     {
       "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
@@ -11776,7 +11896,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.5,
       "tags": [
         "Quán cà phê",
         "Không gian làm việc chia sẻ",
@@ -11855,7 +11975,8 @@
           "price_band"
         ],
         "row_hash": "e44e4241ea26"
-      }
+      },
+      "review_count": 141
     },
     {
       "poi_id": "ChIJjUOBqjgZQjER7IrYE9R52A8",
@@ -11945,7 +12066,8 @@
           "price_band"
         ],
         "row_hash": "26ff40b1b524"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
@@ -11957,15 +12079,15 @@
         "06:30-20:00"
       ],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 3.6,
+      "rating": 5.0,
       "tags": [
         "Quán cà phê",
         "Cửa hàng cà phê"
@@ -12042,8 +12164,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "e50a9d1d6390"
-      }
+        "row_hash": "45e1b79ba336"
+      },
+      "review_count": 158
     },
     {
       "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
@@ -12134,7 +12257,8 @@
           "price_band"
         ],
         "row_hash": "84ce45606d64"
-      }
+      },
+      "review_count": 99
     },
     {
       "poi_id": "ChIJsYoIEOIXQjER_5_trbAwgnA",
@@ -12231,7 +12355,8 @@
           "price_band"
         ],
         "row_hash": "a679b6748d1e"
-      }
+      },
+      "review_count": 227
     },
     {
       "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
@@ -12320,7 +12445,8 @@
           "price_band"
         ],
         "row_hash": "55d2f337f721"
-      }
+      },
+      "review_count": 11
     },
     {
       "poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q",
@@ -12406,7 +12532,8 @@
         ],
         "verdict": "loai",
         "row_hash": "19ff487a0be9"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
@@ -12496,7 +12623,8 @@
           "price_band"
         ],
         "row_hash": "e63a9889c75b"
-      }
+      },
+      "review_count": 38
     },
     {
       "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
@@ -12586,7 +12714,8 @@
           "price_band"
         ],
         "row_hash": "a8d8bfa4324d"
-      }
+      },
+      "review_count": 38
     },
     {
       "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
@@ -12677,7 +12806,8 @@
           "price_band"
         ],
         "row_hash": "d88ef455c313"
-      }
+      },
+      "review_count": 443
     },
     {
       "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
@@ -12784,7 +12914,8 @@
           "price_band"
         ],
         "row_hash": "15f48aa71c81"
-      }
+      },
+      "review_count": 2801
     },
     {
       "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
@@ -12888,7 +13019,8 @@
           "price_band"
         ],
         "row_hash": "dbe4e585d04b"
-      }
+      },
+      "review_count": 2200
     },
     {
       "poi_id": "ChIJhbtaILkXQjER88acd2hTeAA",
@@ -12985,7 +13117,8 @@
           "price_band"
         ],
         "row_hash": "d0c200d00e7c"
-      }
+      },
+      "review_count": 889
     },
     {
       "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
@@ -13083,7 +13216,8 @@
           "price_band"
         ],
         "row_hash": "60392a027b78"
-      }
+      },
+      "review_count": 472
     },
     {
       "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
@@ -13103,7 +13237,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Quán cà phê",
         "Cơ sở rang cà phê",
@@ -13186,7 +13320,8 @@
           "price_band"
         ],
         "row_hash": "ebd85cae682e"
-      }
+      },
+      "review_count": 3714
     },
     {
       "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
@@ -13283,7 +13418,8 @@
           "price_band"
         ],
         "row_hash": "85330d72c733"
-      }
+      },
+      "review_count": 246
     },
     {
       "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
@@ -13381,7 +13517,8 @@
           "price_band"
         ],
         "row_hash": "8cf0978eb4e8"
-      }
+      },
+      "review_count": 48
     },
     {
       "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
@@ -13468,7 +13605,8 @@
           "price_band"
         ],
         "row_hash": "1fa9d4773258"
-      }
+      },
+      "review_count": 8
     },
     {
       "poi_id": "ChIJvb3YtJYXQjERnLJ4-sFfc6A",
@@ -13556,7 +13694,8 @@
           "price_band"
         ],
         "row_hash": "3996a85713ce"
-      }
+      },
+      "review_count": 70
     },
     {
       "poi_id": "ChIJO7l-RdwZQjERNj5fr2VyZ9Y",
@@ -13655,7 +13794,8 @@
           "price_band"
         ],
         "row_hash": "dd6eeaa49688"
-      }
+      },
+      "review_count": 889
     },
     {
       "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
@@ -13749,7 +13889,8 @@
         ],
         "verdict": "loai",
         "row_hash": "32a5d06d4771"
-      }
+      },
+      "review_count": 58
     },
     {
       "poi_id": "ChIJzeNmTwARQjERLSXizyRKI9g",
@@ -13769,7 +13910,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.7,
       "tags": [
         "Quán cà phê"
       ],
@@ -13839,7 +13980,8 @@
           "price_band"
         ],
         "row_hash": "8c9af481a69c"
-      }
+      },
+      "review_count": 39
     },
     {
       "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
@@ -13937,7 +14079,8 @@
           "price_band"
         ],
         "row_hash": "986599c4113f"
-      }
+      },
+      "review_count": 186
     },
     {
       "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
@@ -14027,7 +14170,8 @@
           "price_band"
         ],
         "row_hash": "38f0c8419b2a"
-      }
+      },
+      "review_count": 319
     },
     {
       "poi_id": "ChIJHaTEwB4ZQjERrE6CMe37byI",
@@ -14131,7 +14275,8 @@
           "price_band"
         ],
         "row_hash": "d9c2bad6c465"
-      }
+      },
+      "review_count": 207
     },
     {
       "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
@@ -14235,7 +14380,8 @@
           "price_band"
         ],
         "row_hash": "4c9800b1c24e"
-      }
+      },
+      "review_count": 65
     },
     {
       "poi_id": "ChIJR4XhE3sXQjERBfL8sHnu-JQ",
@@ -14339,7 +14485,8 @@
           "price_band"
         ],
         "row_hash": "7a9423131f0a"
-      }
+      },
+      "review_count": 935
     },
     {
       "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
@@ -14437,7 +14584,8 @@
           "price_band"
         ],
         "row_hash": "866268720347"
-      }
+      },
+      "review_count": 1235
     },
     {
       "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
@@ -14528,7 +14676,8 @@
           "price_band"
         ],
         "row_hash": "f3c6a4a4b14c"
-      }
+      },
+      "review_count": 497
     },
     {
       "poi_id": "ChIJk3YrZLoZQjERp5PbcDTftQw",
@@ -14625,7 +14774,8 @@
           "price_band"
         ],
         "row_hash": "65b3968bb35a"
-      }
+      },
+      "review_count": 410
     },
     {
       "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
@@ -14723,7 +14873,8 @@
           "price_band"
         ],
         "row_hash": "9dee1e056cf1"
-      }
+      },
+      "review_count": 76
     },
     {
       "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
@@ -14812,7 +14963,8 @@
           "price_band"
         ],
         "row_hash": "895562483bd1"
-      }
+      },
+      "review_count": 35
     },
     {
       "poi_id": "ChIJPzf25OAYQjERRUv1zSbS49Q",
@@ -14902,7 +15054,8 @@
           "price_band"
         ],
         "row_hash": "9c490bd7195a"
-      }
+      },
+      "review_count": 37
     },
     {
       "poi_id": "ChIJ4Z8gV3cfQjERHH6fTdzj0E8",
@@ -14992,7 +15145,8 @@
           "price_band"
         ],
         "row_hash": "d65dc9c22d8a"
-      }
+      },
+      "review_count": 153
     },
     {
       "poi_id": "ChIJn7_3kc8ZQjERBi6T5XvhPko",
@@ -15082,7 +15236,8 @@
           "price_band"
         ],
         "row_hash": "46b269871cfe"
-      }
+      },
+      "review_count": 604
     },
     {
       "poi_id": "ChIJa7FkIyUZQjER7VxLENFhuI0",
@@ -15172,7 +15327,8 @@
           "price_band"
         ],
         "row_hash": "f84d90a78482"
-      }
+      },
+      "review_count": 659
     },
     {
       "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
@@ -15262,7 +15418,8 @@
           "price_band"
         ],
         "row_hash": "8231f47f9f89"
-      }
+      },
+      "review_count": 200
     },
     {
       "poi_id": "ChIJr-RyTyYfQjERmXNNs1WNyY4",
@@ -15352,7 +15509,8 @@
           "price_band"
         ],
         "row_hash": "603550e1b751"
-      }
+      },
+      "review_count": 97
     },
     {
       "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
@@ -15447,7 +15605,8 @@
           "price_band"
         ],
         "row_hash": "0fd55f91f0c3"
-      }
+      },
+      "review_count": 26
     },
     {
       "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
@@ -15537,7 +15696,8 @@
           "price_band"
         ],
         "row_hash": "dc1a4a2c7662"
-      }
+      },
+      "review_count": 124
     },
     {
       "poi_id": "ChIJ2XROb6EZQjERoqg1HHvwj88",
@@ -15627,7 +15787,8 @@
           "price_band"
         ],
         "row_hash": "59b491bce7d0"
-      }
+      },
+      "review_count": 73
     },
     {
       "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
@@ -15728,7 +15889,8 @@
           "price_band"
         ],
         "row_hash": "aef39260d5c3"
-      }
+      },
+      "review_count": 40
     },
     {
       "poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU",
@@ -15823,7 +15985,8 @@
           "price_band"
         ],
         "row_hash": "55a6c7b627a3"
-      }
+      },
+      "review_count": 53
     },
     {
       "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
@@ -15911,7 +16074,8 @@
           "price_band"
         ],
         "row_hash": "62a1b209aa79"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
@@ -16008,7 +16172,8 @@
           "price_band"
         ],
         "row_hash": "2c346f5415b2"
-      }
+      },
+      "review_count": 219
     },
     {
       "poi_id": "ChIJcx8dydYYQjERMG39tIgHP1Y",
@@ -16104,7 +16269,8 @@
           "price_band"
         ],
         "row_hash": "029d352ca9ba"
-      }
+      },
+      "review_count": 37
     },
     {
       "poi_id": "ChIJIcLWMlAZQjER1VvH4kJ2aZA",
@@ -16196,7 +16362,8 @@
           "price_band"
         ],
         "row_hash": "b17254bcd601"
-      }
+      },
+      "review_count": 595
     },
     {
       "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
@@ -16292,7 +16459,8 @@
           "price_band"
         ],
         "row_hash": "b89683f7bd88"
-      }
+      },
+      "review_count": 239
     },
     {
       "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
@@ -16389,7 +16557,8 @@
           "price_band"
         ],
         "row_hash": "dfb57ddf7309"
-      }
+      },
+      "review_count": 37
     },
     {
       "poi_id": "ChIJhYuNIQAZQjERoyprw_nC3Ts",
@@ -16486,7 +16655,8 @@
           "price_band"
         ],
         "row_hash": "ebef48cf4665"
-      }
+      },
+      "review_count": 169
     },
     {
       "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
@@ -16578,7 +16748,8 @@
         ],
         "verdict": "loai",
         "row_hash": "4e5f84fe705c"
-      }
+      },
+      "review_count": 185
     },
     {
       "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
@@ -16675,7 +16846,8 @@
           "price_band"
         ],
         "row_hash": "6464de5c8bed"
-      }
+      },
+      "review_count": 615
     },
     {
       "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
@@ -16773,7 +16945,8 @@
           "price_band"
         ],
         "row_hash": "b5a2d03bcde6"
-      }
+      },
+      "review_count": 626
     },
     {
       "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
@@ -16793,7 +16966,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.2,
+      "rating": 4.3,
       "tags": [
         "Quán cà phê"
       ],
@@ -16870,7 +17043,8 @@
           "price_band"
         ],
         "row_hash": "7854425c9f19"
-      }
+      },
+      "review_count": 339
     },
     {
       "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
@@ -16965,7 +17139,8 @@
           "price_band"
         ],
         "row_hash": "61534d065395"
-      }
+      },
+      "review_count": 94
     },
     {
       "poi_id": "ChIJuZTrvVoZQjER371drzqC5hk",
@@ -16985,7 +17160,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.8,
+      "rating": 4.7,
       "tags": [
         "Quán cà phê"
       ],
@@ -17062,7 +17237,8 @@
           "price_band"
         ],
         "row_hash": "9789ff320597"
-      }
+      },
+      "review_count": 40
     },
     {
       "poi_id": "ChIJg1iLwaoZQjERDQOM5N0IZdM",
@@ -17159,7 +17335,8 @@
           "price_band"
         ],
         "row_hash": "1737aefefcb7"
-      }
+      },
+      "review_count": 247
     },
     {
       "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
@@ -17256,7 +17433,8 @@
           "price_band"
         ],
         "row_hash": "28ad053d880c"
-      }
+      },
+      "review_count": 11
     },
     {
       "poi_id": "ChIJzVnvNgAZQjERef60MBfcz8E",
@@ -17268,15 +17446,15 @@
         "06:30-22:30"
       ],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.5,
+      "rating": 4.4,
       "tags": [
         "Quán cà phê"
       ],
@@ -17352,8 +17530,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "250246e218ec"
-      }
+        "row_hash": "ca7e1253ca42"
+      },
+      "review_count": 137
     },
     {
       "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
@@ -17443,7 +17622,8 @@
           "price_band"
         ],
         "row_hash": "d35de84d58a3"
-      }
+      },
+      "review_count": 107
     },
     {
       "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
@@ -17534,7 +17714,8 @@
         ],
         "verdict": "loai",
         "row_hash": "6f778af7f38e"
-      }
+      },
+      "review_count": 262
     },
     {
       "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
@@ -17615,7 +17796,8 @@
         ],
         "verdict": "loai",
         "row_hash": "ee83e890f1a7"
-      }
+      },
+      "review_count": 38
     },
     {
       "poi_id": "ChIJM2DzGgAZQjERp54q-gVvu-g",
@@ -17706,7 +17888,8 @@
           "price_band"
         ],
         "row_hash": "07f1cc8feee1"
-      }
+      },
+      "review_count": 102
     },
     {
       "poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8",
@@ -17803,7 +17986,8 @@
           "price_band"
         ],
         "row_hash": "656bd6bdff74"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJXfWk4QYZQjERpQw56WNZ0js",
@@ -17893,7 +18077,8 @@
           "price_band"
         ],
         "row_hash": "0eb65124f9f8"
-      }
+      },
+      "review_count": 86
     },
     {
       "poi_id": "ChIJUf5Hcw8ZQjERsntEedW35TI",
@@ -17993,7 +18178,8 @@
           "price_band"
         ],
         "row_hash": "eae4720854dc"
-      }
+      },
+      "review_count": 26
     },
     {
       "poi_id": "ChIJteAgYXsZQjERK6NHlXGXIPI",
@@ -18089,7 +18275,8 @@
           "price_band"
         ],
         "row_hash": "06aea30bd7fb"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJfagM2mkZQjER9NTQqfVjnI8",
@@ -18180,7 +18367,8 @@
           "price_band"
         ],
         "row_hash": "0e90c46c5376"
-      }
+      },
+      "review_count": 33
     },
     {
       "poi_id": "ChIJbbs1ZTQYQjERi3OdfmnRk2g",
@@ -18285,7 +18473,8 @@
           "price_band"
         ],
         "row_hash": "5060eed0b6be"
-      }
+      },
+      "review_count": 65
     },
     {
       "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
@@ -18297,9 +18486,9 @@
         "08:00-21:30"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -18352,7 +18541,7 @@
         "hours": null,
         "name": "Lang Bich hoa Da Nang"
       },
-      "cat": "attraction",
+      "cat": "landmark",
       "space_source": "audit",
       "space_confidence": 1.0,
       "space_evidence": [
@@ -18369,7 +18558,7 @@
         "ambiguous OSM tag(s) tourism=attraction -> no space inference"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -18378,14 +18567,23 @@
             "note": "Còn trên Google (3,9★, 896 đánh giá). Khác với 'La Bonne Café Đà Nẵng' cách 96 m (hai cơ sở riêng), giữ cả hai. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là làng bích họa, đi bộ xem tranh): 200 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "b11cf697a2a4"
-      }
+        "row_hash": "44fd59ec35f2"
+      },
+      "review_count": 896
     },
     {
       "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
@@ -18397,9 +18595,9 @@
         "07:00-19:00"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -18453,7 +18651,7 @@
         "hours": null,
         "name": null
       },
-      "cat": "attraction",
+      "cat": "market",
       "space_source": "audit",
       "space_confidence": 1.0,
       "space_evidence": [
@@ -18471,7 +18669,7 @@
         "audit indoor does not encode rain protection"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -18480,14 +18678,23 @@
             "note": "Còn trên Google (4,3★, 23415 đánh giá). Khác với 'Khu Ẩm Thực Chợ Cồn -식사 공간' cách 46 m (hai cơ sở riêng), giữ cả hai. Mức giá: Rẻ (theo loại (chợ)).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → market (là chợ): 200 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "d9b128dcf356"
-      }
+        "row_hash": "b4acfbde7ad7"
+      },
+      "review_count": 23415
     },
     {
       "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
@@ -18597,7 +18804,8 @@
           "price_band"
         ],
         "row_hash": "359272a69ebc"
-      }
+      },
+      "review_count": 8287
     },
     {
       "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
@@ -18692,7 +18900,8 @@
         ],
         "verdict": "loai",
         "row_hash": "4bbf40ac7ea4"
-      }
+      },
+      "review_count": 118
     },
     {
       "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
@@ -18793,7 +19002,8 @@
           "price_band"
         ],
         "row_hash": "c1f75516bf9a"
-      }
+      },
+      "review_count": 43388
     },
     {
       "poi_id": "ChIJzX1dFjAZQjERswowf61V1fk",
@@ -18895,7 +19105,8 @@
           "price_band"
         ],
         "row_hash": "a4ab70c17492"
-      }
+      },
+      "review_count": 1917
     },
     {
       "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
@@ -19001,7 +19212,8 @@
           "price_band"
         ],
         "row_hash": "82182ad7dffa"
-      }
+      },
+      "review_count": 9870
     },
     {
       "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
@@ -19093,7 +19305,8 @@
           "price_band"
         ],
         "row_hash": "8abdaf74e868"
-      }
+      },
+      "review_count": 151
     },
     {
       "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
@@ -19192,7 +19405,8 @@
           "price_band"
         ],
         "row_hash": "dd3767c73dd8"
-      }
+      },
+      "review_count": 237
     },
     {
       "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
@@ -19301,7 +19515,8 @@
           "price_band"
         ],
         "row_hash": "0ac2a3e9aa21"
-      }
+      },
+      "review_count": 433
     },
     {
       "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
@@ -19321,7 +19536,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.3,
+      "rating": 4.2,
       "tags": [
         "Trung tâm vui chơi giải trí"
       ],
@@ -19407,7 +19622,8 @@
           "price_band"
         ],
         "row_hash": "f84fb27f1bc1"
-      }
+      },
+      "review_count": 3211
     },
     {
       "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
@@ -19507,7 +19723,8 @@
         ],
         "verdict": "loai",
         "row_hash": "1daa1331cfb7"
-      }
+      },
+      "review_count": 72
     },
     {
       "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
@@ -19527,7 +19744,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 50000,
-      "rating": 4.3,
+      "rating": 4.2,
       "tags": [
         "Điểm thu hút khách du lịch",
         "Bảo tàng lịch sử"
@@ -19616,7 +19833,8 @@
           "price_band"
         ],
         "row_hash": "382f0258ad0e"
-      }
+      },
+      "review_count": 3638
     },
     {
       "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
@@ -19723,7 +19941,8 @@
           "price_band"
         ],
         "row_hash": "26c7642665c1"
-      }
+      },
+      "review_count": 100
     },
     {
       "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
@@ -19822,7 +20041,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.8,
       "tags": [
         "Công viên"
       ],
@@ -19905,7 +20124,8 @@
           "price_band"
         ],
         "row_hash": "2fb87d1727fc"
-      }
+      },
+      "review_count": 108
     },
     {
       "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
@@ -20013,7 +20233,8 @@
           "price_band"
         ],
         "row_hash": "d5565ed85b1b"
-      }
+      },
+      "review_count": 447
     },
     {
       "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
@@ -20116,7 +20337,8 @@
           "price_band"
         ],
         "row_hash": "93acf3769f43"
-      }
+      },
+      "review_count": 39
     },
     {
       "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
@@ -20218,7 +20440,8 @@
           "price_band"
         ],
         "row_hash": "95a797d0202d"
-      }
+      },
+      "review_count": 1166
     },
     {
       "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
@@ -20311,7 +20534,8 @@
           "price_band"
         ],
         "row_hash": "1ef66b2adc8f"
-      }
+      },
+      "review_count": 278
     },
     {
       "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
@@ -20412,7 +20636,8 @@
           "price_band"
         ],
         "row_hash": "4e44e4a153f2"
-      }
+      },
+      "review_count": 773
     },
     {
       "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
@@ -20424,9 +20649,9 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -20476,7 +20701,7 @@
         "hours_web": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
       },
       "hours_source": "inferred",
-      "cat": "attraction",
+      "cat": "landmark",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -20494,7 +20719,7 @@
         "audit outdoor does not encode rain protection"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -20503,14 +20728,23 @@
             "note": "Google ghi mở cả ngày. Ghi chú cũ nói đường lên giới hạn 07:30–18:30; muốn chặt thì nhập 07:30-18:30. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là điểm ngắm cảnh): 240 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "e3e264bdb214"
-      }
+        "row_hash": "7b544a3b88e7"
+      },
+      "review_count": 90
     },
     {
       "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
@@ -20605,7 +20839,8 @@
           "price_band"
         ],
         "row_hash": "ce03f4439d93"
-      }
+      },
+      "review_count": 1141
     },
     {
       "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
@@ -20700,7 +20935,8 @@
           "price_band"
         ],
         "row_hash": "cccb7a960674"
-      }
+      },
+      "review_count": 474
     },
     {
       "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
@@ -20803,7 +21039,8 @@
           "price_band"
         ],
         "row_hash": "47ef86e4b723"
-      }
+      },
+      "review_count": 4513
     },
     {
       "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
@@ -21061,7 +21298,8 @@
           "price_band"
         ],
         "row_hash": "a47452cddf08"
-      }
+      },
+      "review_count": 160
     },
     {
       "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
@@ -21169,7 +21407,8 @@
           "price_band"
         ],
         "row_hash": "996fe18a7dd0"
-      }
+      },
+      "review_count": 1143
     },
     {
       "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
@@ -21189,7 +21428,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.5,
+      "rating": 4.6,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -21273,7 +21512,8 @@
           "price_band"
         ],
         "row_hash": "5cd5e47f94de"
-      }
+      },
+      "review_count": 394
     },
     {
       "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
@@ -21285,9 +21525,9 @@
         "00:00-23:59"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -21344,7 +21584,7 @@
         "hours_web": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
       },
       "hours_source": "inferred",
-      "cat": "attraction",
+      "cat": "landmark",
       "access_note": "Đường lên bán đảo giới hạn 07:30-18:30 (T10-T2: 07:30-17:30, mytour.danang.vn)",
       "access_source": "mytour.danang.vn",
       "space_source": "audit",
@@ -21362,7 +21602,7 @@
         "audit outdoor does not encode rain protection"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -21371,14 +21611,23 @@
             "note": "Còn trên Google (4,8★, 98 đánh giá). Google ghi mở 24/24 (thường là giá trị mặc định): không điền; giữ giờ đang có. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là điểm ngắm cảnh): 240 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "4d9049a13bdb"
-      }
+        "row_hash": "0ce0db349db5"
+      },
+      "review_count": 98
     },
     {
       "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
@@ -21480,7 +21729,8 @@
           "price_band"
         ],
         "row_hash": "f12fb720dfca"
-      }
+      },
+      "review_count": 148
     },
     {
       "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
@@ -21583,7 +21833,8 @@
           "price_band"
         ],
         "row_hash": "eeafba3124ae"
-      }
+      },
+      "review_count": 39
     },
     {
       "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
@@ -21686,7 +21937,8 @@
           "price_band"
         ],
         "row_hash": "b9af4e26af66"
-      }
+      },
+      "review_count": 1461
     },
     {
       "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
@@ -21786,7 +22038,8 @@
           "price_band"
         ],
         "row_hash": "e3c7067df850"
-      }
+      },
+      "review_count": 60
     },
     {
       "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
@@ -21883,7 +22136,8 @@
         ],
         "verdict": "loai",
         "row_hash": "7cdf77d04791"
-      }
+      },
+      "review_count": 24
     },
     {
       "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
@@ -21972,7 +22226,8 @@
         ],
         "verdict": "loai",
         "row_hash": "bcf636dbd500"
-      }
+      },
+      "review_count": 189
     },
     {
       "poi_id": "ChIJgdHMn8gYQjERmEdW2JHUGTw",
@@ -22065,7 +22320,8 @@
           "price_band"
         ],
         "row_hash": "b909cd2110f0"
-      }
+      },
+      "review_count": 388
     },
     {
       "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
@@ -22161,7 +22417,8 @@
           "price_band"
         ],
         "row_hash": "ae30c622d5ee"
-      }
+      },
+      "review_count": 93
     },
     {
       "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
@@ -22252,7 +22509,8 @@
           "price_band"
         ],
         "row_hash": "fa9470bccec6"
-      }
+      },
+      "review_count": 31
     },
     {
       "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
@@ -22357,7 +22615,8 @@
           "price_band"
         ],
         "row_hash": "7cbdec35aa3b"
-      }
+      },
+      "review_count": 1733
     },
     {
       "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
@@ -22460,7 +22719,8 @@
           "price_band"
         ],
         "row_hash": "c18feb9cf167"
-      }
+      },
+      "review_count": 216
     },
     {
       "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
@@ -22549,7 +22809,8 @@
         ],
         "verdict": "loai",
         "row_hash": "c370ff143f02"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
@@ -22644,7 +22905,8 @@
           "price_band"
         ],
         "row_hash": "a7113642fe71"
-      }
+      },
+      "review_count": 9
     },
     {
       "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
@@ -22733,7 +22995,8 @@
         ],
         "verdict": "loai",
         "row_hash": "2ed71a57e6e2"
-      }
+      },
+      "review_count": 15
     },
     {
       "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
@@ -22840,7 +23103,8 @@
           "price_band"
         ],
         "row_hash": "f102e95c9cd6"
-      }
+      },
+      "review_count": 375
     },
     {
       "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
@@ -22858,7 +23122,7 @@
       "dur_confidence": "medium",
       "price_level": null,
       "fee": 0,
-      "rating": 3.8,
+      "rating": 4.7,
       "tags": [
         "Công viên"
       ],
@@ -22926,7 +23190,8 @@
         ],
         "verdict": "loai",
         "row_hash": "4f9995744f4b"
-      }
+      },
+      "review_count": 25
     },
     {
       "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
@@ -22946,7 +23211,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.5,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -23024,7 +23289,8 @@
           "price_band"
         ],
         "row_hash": "99c0c5e06ce1"
-      }
+      },
+      "review_count": 39
     },
     {
       "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
@@ -23114,7 +23380,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.9,
+      "rating": 4.8,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -23191,7 +23457,8 @@
           "price_band"
         ],
         "row_hash": "a40cf1743a2b"
-      }
+      },
+      "review_count": 214
     },
     {
       "poi_id": "ChIJz4Y1XCcZQjERzg9AZYfOGH8",
@@ -23292,7 +23559,8 @@
           "price_band"
         ],
         "row_hash": "9e3cdb6eabd9"
-      }
+      },
+      "review_count": 62
     },
     {
       "poi_id": "ChIJNUwPk-cZQjERgxIYcjgmCyU",
@@ -23394,7 +23662,8 @@
           "price_band"
         ],
         "row_hash": "5711ee82c4d4"
-      }
+      },
+      "review_count": 234
     },
     {
       "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
@@ -23499,7 +23768,8 @@
           "price_band"
         ],
         "row_hash": "e217e76351dd"
-      }
+      },
+      "review_count": 4741
     },
     {
       "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
@@ -23602,7 +23872,8 @@
           "price_band"
         ],
         "row_hash": "795f8fadacb4"
-      }
+      },
+      "review_count": 2133
     },
     {
       "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
@@ -23622,7 +23893,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.5,
       "tags": [
         "Câu lạc bộ bãi biển"
       ],
@@ -23704,7 +23975,8 @@
           "price_band"
         ],
         "row_hash": "a2c52af5d719"
-      }
+      },
+      "review_count": 36
     },
     {
       "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
@@ -23804,7 +24076,8 @@
           "price_band"
         ],
         "row_hash": "569e18b00dff"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
@@ -23898,7 +24171,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f162beabc12e"
-      }
+      },
+      "review_count": 53
     },
     {
       "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
@@ -24005,7 +24279,8 @@
           "price_band"
         ],
         "row_hash": "a970b8efb745"
-      }
+      },
+      "review_count": 1684
     },
     {
       "poi_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
@@ -24113,7 +24388,8 @@
           "price_band"
         ],
         "row_hash": "054ea4818f19"
-      }
+      },
+      "review_count": 1632
     },
     {
       "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
@@ -24224,7 +24500,8 @@
           "price_band"
         ],
         "row_hash": "979bbe9311a5"
-      }
+      },
+      "review_count": 1205
     },
     {
       "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
@@ -24332,7 +24609,8 @@
           "price_band"
         ],
         "row_hash": "be2f2ac5c943"
-      }
+      },
+      "review_count": 3447
     },
     {
       "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
@@ -24432,7 +24710,8 @@
           "price_band"
         ],
         "row_hash": "b2306e6ca635"
-      }
+      },
+      "review_count": 24
     },
     {
       "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
@@ -24532,7 +24811,8 @@
           "price_band"
         ],
         "row_hash": "13c82ef83bfe"
-      }
+      },
+      "review_count": 22
     },
     {
       "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
@@ -24632,7 +24912,8 @@
           "price_band"
         ],
         "row_hash": "326eacbc47ce"
-      }
+      },
+      "review_count": 208
     },
     {
       "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
@@ -24736,7 +25017,8 @@
           "price_band"
         ],
         "row_hash": "7c043340dd08"
-      }
+      },
+      "review_count": 13
     },
     {
       "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
@@ -24839,7 +25121,8 @@
           "price_band"
         ],
         "row_hash": "29a2522c300a"
-      }
+      },
+      "review_count": 54
     },
     {
       "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
@@ -24933,7 +25216,8 @@
         ],
         "verdict": "loai",
         "row_hash": "8a320c221d95"
-      }
+      },
+      "review_count": 144
     },
     {
       "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
@@ -25037,7 +25321,8 @@
           "price_band"
         ],
         "row_hash": "c5b30656130e"
-      }
+      },
+      "review_count": 4
     },
     {
       "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
@@ -25122,7 +25407,8 @@
         ],
         "verdict": "loai",
         "row_hash": "03eec385239e"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
@@ -25304,7 +25590,8 @@
           "price_band"
         ],
         "row_hash": "1f93210b7c70"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
@@ -25404,7 +25691,8 @@
           "price_band"
         ],
         "row_hash": "bf6cbf042e1f"
-      }
+      },
+      "review_count": 12
     },
     {
       "poi_id": "ChIJzQu--DUXQjERBw1iz5k5GlE",
@@ -25498,7 +25786,8 @@
           "price_band"
         ],
         "row_hash": "2a6c1f9bff02"
-      }
+      },
+      "review_count": 340
     },
     {
       "poi_id": "ChIJX_osydwQQjERB-Y6MvLfJmQ",
@@ -25592,7 +25881,8 @@
           "price_band"
         ],
         "row_hash": "70a965c0addb"
-      }
+      },
+      "review_count": 232
     },
     {
       "poi_id": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
@@ -25684,7 +25974,8 @@
           "price_band"
         ],
         "row_hash": "2b12a4ea16b6"
-      }
+      },
+      "review_count": 83
     },
     {
       "poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
@@ -25778,7 +26069,8 @@
           "price_band"
         ],
         "row_hash": "45fb55faddd4"
-      }
+      },
+      "review_count": 35
     },
     {
       "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
@@ -25872,7 +26164,8 @@
           "price_band"
         ],
         "row_hash": "0d26b216ab88"
-      }
+      },
+      "review_count": 150
     },
     {
       "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
@@ -25969,7 +26262,8 @@
           "price_band"
         ],
         "row_hash": "a906bf2bcc54"
-      }
+      },
+      "review_count": 11
     },
     {
       "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
@@ -26065,7 +26359,8 @@
           "price_band"
         ],
         "row_hash": "1a1329de8aab"
-      }
+      },
+      "review_count": 31
     },
     {
       "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
@@ -26161,7 +26456,8 @@
           "price_band"
         ],
         "row_hash": "9b15665c0c1e"
-      }
+      },
+      "review_count": 642
     },
     {
       "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
@@ -26261,7 +26557,8 @@
           "price_band"
         ],
         "row_hash": "4ce833dc8366"
-      }
+      },
+      "review_count": 43
     },
     {
       "poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA",
@@ -26360,7 +26657,8 @@
           "price_band"
         ],
         "row_hash": "605d5d432020"
-      }
+      },
+      "review_count": 46073
     },
     {
       "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
@@ -26461,7 +26759,8 @@
           "price_band"
         ],
         "row_hash": "dd8032f27433"
-      }
+      },
+      "review_count": 5867
     },
     {
       "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
@@ -26557,7 +26856,8 @@
           "price_band"
         ],
         "row_hash": "9260d9e6e5c5"
-      }
+      },
+      "review_count": 58
     },
     {
       "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
@@ -26656,7 +26956,8 @@
           "price_band"
         ],
         "row_hash": "1a05a4f42f7c"
-      }
+      },
+      "review_count": 132
     },
     {
       "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
@@ -26678,7 +26979,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 3.7,
+      "rating": 3.6,
       "tags": [
         "Chợ"
       ],
@@ -26757,7 +27058,8 @@
           "price_band"
         ],
         "row_hash": "6e375cbcdf04"
-      }
+      },
+      "review_count": 2158
     },
     {
       "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
@@ -26846,7 +27148,8 @@
           "price_band"
         ],
         "row_hash": "bf0cbf7b66e0"
-      }
+      },
+      "review_count": 1050
     },
     {
       "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
@@ -26942,7 +27245,8 @@
           "price_band"
         ],
         "row_hash": "78be1ac759fc"
-      }
+      },
+      "review_count": 765
     },
     {
       "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
@@ -27045,15 +27349,15 @@
       "lon": 108.257204,
       "opening_hours": [],
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 52,
+        "p50": 75,
+        "p75": 105
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.5,
+      "rating": 4.4,
       "tags": [
         "Chợ"
       ],
@@ -27124,8 +27428,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "27678da99da1"
-      }
+        "row_hash": "3f74f35c0d1c"
+      },
+      "review_count": 146
     },
     {
       "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
@@ -27396,7 +27701,8 @@
           "price_band"
         ],
         "row_hash": "f8d4a42612ed"
-      }
+      },
+      "review_count": 190
     },
     {
       "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
@@ -27414,7 +27720,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.1,
+      "rating": 4.2,
       "tags": [
         "Chợ"
       ],
@@ -27483,7 +27789,8 @@
           "price_band"
         ],
         "row_hash": "bc404cf8a34b"
-      }
+      },
+      "review_count": 108
     },
     {
       "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
@@ -27579,7 +27886,8 @@
           "price_band"
         ],
         "row_hash": "929c7ce38045"
-      }
+      },
+      "review_count": 783
     },
     {
       "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
@@ -27668,7 +27976,8 @@
           "price_band"
         ],
         "row_hash": "8d8335057413"
-      }
+      },
+      "review_count": 411
     },
     {
       "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
@@ -27757,7 +28066,8 @@
           "price_band"
         ],
         "row_hash": "cdd3445c590a"
-      }
+      },
+      "review_count": 205
     },
     {
       "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
@@ -27846,7 +28156,8 @@
           "price_band"
         ],
         "row_hash": "158fe870d2d5"
-      }
+      },
+      "review_count": 98
     },
     {
       "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
@@ -27933,7 +28244,8 @@
           "price_band"
         ],
         "row_hash": "a054ecd004f8"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
@@ -28036,7 +28348,8 @@
           "price_band"
         ],
         "row_hash": "c63ace5e3eca"
-      }
+      },
+      "review_count": 148
     },
     {
       "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",
@@ -28136,7 +28449,8 @@
           "price_band"
         ],
         "row_hash": "87428f47a93c"
-      }
+      },
+      "review_count": 795
     },
     {
       "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
@@ -28236,7 +28550,8 @@
           "price_band"
         ],
         "row_hash": "e11b83aa79c2"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc",
@@ -28256,7 +28571,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.9,
       "tags": [
         "Nhà hàng Nhật Bản"
       ],
@@ -28336,7 +28651,8 @@
           "price_band"
         ],
         "row_hash": "43db18c1dcfc"
-      }
+      },
+      "review_count": 866
     },
     {
       "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
@@ -28434,7 +28750,8 @@
           "price_band"
         ],
         "row_hash": "19d63347f4c7"
-      }
+      },
+      "review_count": 1602
     },
     {
       "poi_id": "ChIJxzo3j9EZQjER785qACnbIW0",
@@ -28446,15 +28763,15 @@
         "07:00-22:00"
       ],
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.4,
+      "rating": 4.5,
       "tags": [
         "Quán cà phê",
         "Trà trân châu"
@@ -28530,8 +28847,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "7a7778ef74f7"
-      }
+        "row_hash": "e02d6f6aaf22"
+      },
+      "review_count": 1019
     },
     {
       "poi_id": "ChIJZdLv8rkZQjERIhU2VsEsCl4",
@@ -28627,7 +28945,8 @@
           "price_band"
         ],
         "row_hash": "4366aa3d1451"
-      }
+      },
+      "review_count": 271
     },
     {
       "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
@@ -28725,7 +29044,8 @@
           "price_band"
         ],
         "row_hash": "d3cba19f70ee"
-      }
+      },
+      "review_count": 355
     },
     {
       "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
@@ -28825,7 +29145,8 @@
           "price_band"
         ],
         "row_hash": "f29065829ab2"
-      }
+      },
+      "review_count": 13
     },
     {
       "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
@@ -28921,7 +29242,8 @@
           "price_band"
         ],
         "row_hash": "45af7ab477bf"
-      }
+      },
+      "review_count": 851
     },
     {
       "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
@@ -29011,7 +29333,8 @@
           "price_band"
         ],
         "row_hash": "8cbee36ba0db"
-      }
+      },
+      "review_count": 51
     },
     {
       "poi_id": "ChIJKdW4YgAfQjERF1TVangBTwY",
@@ -29031,7 +29354,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.3,
+      "rating": 4.4,
       "tags": [
         "Quán cà phê",
         "Trà trân châu",
@@ -29104,7 +29427,8 @@
           "price_band"
         ],
         "row_hash": "673aa7e6b798"
-      }
+      },
+      "review_count": 180
     },
     {
       "poi_id": "ChIJ8WgvsE8ZQjERZzNoKTBgM84",
@@ -29124,7 +29448,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4,
+      "rating": 4.1,
       "tags": [
         "Quán cà phê"
       ],
@@ -29201,7 +29525,8 @@
           "price_band"
         ],
         "row_hash": "274cfa0e4691"
-      }
+      },
+      "review_count": 161
     },
     {
       "poi_id": "ChIJr4cXZxUZQjER1gqN7YF0A70",
@@ -29222,7 +29547,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Quán cà phê"
       ],
@@ -29291,7 +29616,8 @@
           "price_band"
         ],
         "row_hash": "5fba5bf12f94"
-      }
+      },
+      "review_count": 150
     },
     {
       "poi_id": "ChIJMQ_j9n0ZQjER6BCkcpQNT8s",
@@ -29389,7 +29715,8 @@
           "price_band"
         ],
         "row_hash": "f1339c8fd2e6"
-      }
+      },
+      "review_count": 223
     },
     {
       "poi_id": "ChIJwTU11dAZQjERsydZriN8k5M",
@@ -29409,7 +29736,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.5,
       "tags": [
         "Quán cà phê"
       ],
@@ -29485,7 +29812,8 @@
           "price_band"
         ],
         "row_hash": "2243571080b7"
-      }
+      },
+      "review_count": 90
     },
     {
       "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
@@ -29581,7 +29909,8 @@
           "price_band"
         ],
         "row_hash": "6031afc48f19"
-      }
+      },
+      "review_count": 727
     },
     {
       "poi_id": "ChIJ5YNM8KoZQjERT-e5n84Og1E",
@@ -29677,7 +30006,8 @@
           "price_band"
         ],
         "row_hash": "b8f061e7711b"
-      }
+      },
+      "review_count": 74
     },
     {
       "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
@@ -29779,7 +30109,8 @@
           "price_band"
         ],
         "row_hash": "e22711194580"
-      }
+      },
+      "review_count": 159
     },
     {
       "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
@@ -29882,7 +30213,8 @@
           "price_band"
         ],
         "row_hash": "0d9f48bec335"
-      }
+      },
+      "review_count": 271
     },
     {
       "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
@@ -29902,7 +30234,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.3,
+      "rating": 4.1,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -29983,7 +30315,8 @@
           "price_band"
         ],
         "row_hash": "0e01389e2496"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
@@ -30086,7 +30419,8 @@
           "price_band"
         ],
         "row_hash": "4e98766b934c"
-      }
+      },
+      "review_count": 1466
     },
     {
       "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
@@ -30190,7 +30524,8 @@
           "price_band"
         ],
         "row_hash": "df997882a535"
-      }
+      },
+      "review_count": 177
     },
     {
       "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
@@ -30202,15 +30537,15 @@
         "07:00-17:30"
       ],
       "visit_min": {
-        "p25": 38,
-        "p50": 54,
-        "p75": 76
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.5,
+      "rating": 4.4,
       "tags": [
         "Điểm mốc lịch sử"
       ],
@@ -30294,8 +30629,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "d49f33f66e8a"
-      }
+        "row_hash": "12486f31b51b"
+      },
+      "review_count": 34
     },
     {
       "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
@@ -30386,7 +30722,8 @@
           "price_band"
         ],
         "row_hash": "a8685a34cd18"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
@@ -30477,7 +30814,8 @@
           "price_band"
         ],
         "row_hash": "9862f02e700a"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
@@ -30582,7 +30920,8 @@
           "price_band"
         ],
         "row_hash": "6b2dfa515e97"
-      }
+      },
+      "review_count": 224
     },
     {
       "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
@@ -30669,7 +31008,8 @@
         ],
         "verdict": "loai",
         "row_hash": "3093f25af558"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
@@ -30689,7 +31029,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 3.9,
+      "rating": 3.8,
       "tags": [
         "Câu lạc bộ bãi biển"
       ],
@@ -30770,7 +31110,8 @@
           "price_band"
         ],
         "row_hash": "07835c39b875"
-      }
+      },
+      "review_count": 26
     },
     {
       "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
@@ -30867,7 +31208,8 @@
           "price_band"
         ],
         "row_hash": "9610fc21a241"
-      }
+      },
+      "review_count": 228
     },
     {
       "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
@@ -30887,7 +31229,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 3.8,
+      "rating": 3.9,
       "tags": [
         "Chợ"
       ],
@@ -30963,7 +31305,8 @@
           "price_band"
         ],
         "row_hash": "ceeabf561e54"
-      }
+      },
+      "review_count": 401
     },
     {
       "poi_id": "osm:node/1036552571",
@@ -30974,7 +31317,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -30982,9 +31325,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -31043,7 +31386,8 @@
         ],
         "verdict": "loai",
         "row_hash": "d54b63b107d6"
-      }
+      },
+      "review_count": 2435
     },
     {
       "poi_id": "osm:node/1335374809",
@@ -31135,7 +31479,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -31143,9 +31487,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -31205,7 +31549,8 @@
         ],
         "verdict": "loai",
         "row_hash": "8be7c55b181c"
-      }
+      },
+      "review_count": 114
     },
     {
       "poi_id": "osm:node/1335374873",
@@ -31216,7 +31561,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -31224,9 +31569,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -31291,8 +31636,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "14b50bea5688"
-      }
+        "row_hash": "4aae659d92ea"
+      },
+      "review_count": 7
     },
     {
       "poi_id": "osm:node/1623183649",
@@ -31303,7 +31649,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.3,
       "tags": [
         "Đỉnh núi"
       ],
@@ -31379,7 +31725,8 @@
           "price_band"
         ],
         "row_hash": "c05e2738598e"
-      }
+      },
+      "review_count": 350
     },
     {
       "poi_id": "osm:node/2093848429",
@@ -31627,7 +31974,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.3,
       "tags": [
         "Điểm ngắm cảnh"
       ],
@@ -31697,7 +32044,8 @@
         ],
         "verdict": "loai",
         "row_hash": "22ad745aa25a"
-      }
+      },
+      "review_count": 155
     },
     {
       "poi_id": "osm:node/3760247201",
@@ -31710,7 +32058,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.8,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -31718,9 +32066,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -31787,8 +32135,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "8d7743f335d5"
-      }
+        "row_hash": "7c93295e26f3"
+      },
+      "review_count": 5
     },
     {
       "poi_id": "osm:node/3760247202",
@@ -31882,7 +32231,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -31890,9 +32239,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -31959,8 +32308,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "d07ed1565adc"
-      }
+        "row_hash": "f04ce70cc35f"
+      },
+      "review_count": 175
     },
     {
       "poi_id": "osm:node/3763846156",
@@ -31973,7 +32323,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.6,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -31981,9 +32331,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32050,8 +32400,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "3b64db7750c3"
-      }
+        "row_hash": "0a0a41f20526"
+      },
+      "review_count": 640
     },
     {
       "poi_id": "osm:node/4005611262",
@@ -32152,7 +32503,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.8,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -32160,9 +32511,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32230,8 +32581,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "223ad7cbd55c"
-      }
+        "row_hash": "e853f1392093"
+      },
+      "review_count": 16
     },
     {
       "poi_id": "osm:node/4122433690",
@@ -32324,7 +32676,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.4,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -32393,7 +32745,8 @@
         ],
         "verdict": "loai",
         "row_hash": "ea99ce5a52d6"
-      }
+      },
+      "review_count": 232
     },
     {
       "poi_id": "osm:node/4280016689",
@@ -32404,7 +32757,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.5,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -32412,9 +32765,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32479,8 +32832,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "aa5e706c9d69"
-      }
+        "row_hash": "9afdd330fad3"
+      },
+      "review_count": 15
     },
     {
       "poi_id": "osm:node/4294135790",
@@ -32491,7 +32845,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.5,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -32499,9 +32853,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32561,7 +32915,8 @@
         ],
         "verdict": "loai",
         "row_hash": "3b1bdce7560f"
-      }
+      },
+      "review_count": 158
     },
     {
       "poi_id": "osm:node/4294139091",
@@ -32653,7 +33008,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -32661,9 +33016,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32723,7 +33078,8 @@
         ],
         "verdict": "loai",
         "row_hash": "fcbd1846980d"
-      }
+      },
+      "review_count": 380
     },
     {
       "poi_id": "osm:node/4294167889",
@@ -32734,7 +33090,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -32742,9 +33098,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -32804,7 +33160,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f08b100bb5d6"
-      }
+      },
+      "review_count": 63
     },
     {
       "poi_id": "osm:node/4347089780",
@@ -33554,7 +33911,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.6,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -33562,9 +33919,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -33631,8 +33988,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "f785efe2da3c"
-      }
+        "row_hash": "d12b5659e057"
+      },
+      "review_count": 785
     },
     {
       "poi_id": "osm:node/5276547123",
@@ -33651,9 +34009,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -33687,7 +34045,7 @@
         "band_verified": true
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction",
+      "cat": "landmark",
       "space_source": "name",
       "space_confidence": 0.6,
       "space_evidence": [
@@ -33702,7 +34060,7 @@
         "abstained: absent evidence is not proof of no cover"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -33711,13 +34069,21 @@
             "note": "Google có 'Nguyen Van Troi Bridge' trong kết quả tìm quanh tọa độ (không có chi tiết). Google không có giờ; giữ trống = dùng giờ an toàn của nhóm. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là cây cầu): 200 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "1f23bc3e6470"
+        "row_hash": "3f58e4d0e202"
       }
     },
     {
@@ -33892,7 +34258,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -33900,9 +34266,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -33969,8 +34335,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "74e6ba654df3"
-      }
+        "row_hash": "e2c2123bb707"
+      },
+      "review_count": 281
     },
     {
       "poi_id": "osm:node/6346486685",
@@ -34070,9 +34437,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 31,
+        "p50": 45,
+        "p75": 63
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -34106,7 +34473,7 @@
         "band_verified": true
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction",
+      "cat": "landmark",
       "space_source": "audit",
       "space_confidence": 1.0,
       "space_evidence": [
@@ -34122,7 +34489,7 @@
         "audit outdoor does not encode rain protection"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -34131,13 +34498,21 @@
             "note": "Google có 'Cây Đa Đò Xu' trong kết quả tìm quanh tọa độ (không có chi tiết). Google không có giờ; giữ trống = dùng giờ an toàn của nhóm. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là một cây đa): 200 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "2710faa88974"
+        "row_hash": "1494afaad49d"
       }
     },
     {
@@ -34309,7 +34684,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.6,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -34317,9 +34692,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -34386,8 +34761,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "3eaef9daad03"
-      }
+        "row_hash": "ebeb7ed37f47"
+      },
+      "review_count": 4930
     },
     {
       "poi_id": "osm:node/7477670190",
@@ -34556,7 +34932,7 @@
       ],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 5.0,
       "tags": [
         "Phòng trưng bày"
       ],
@@ -34564,9 +34940,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 63,
-        "p50": 90,
-        "p75": 126
+        "p25": 76,
+        "p50": 108,
+        "p75": 151
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -34631,7 +35007,8 @@
         ],
         "verdict": "loai",
         "row_hash": "28a21e594d3a"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "osm:node/9921282483",
@@ -34642,7 +35019,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 3.3,
       "tags": [
         "Cửa hàng quà lưu niệm"
       ],
@@ -34709,7 +35086,8 @@
         ],
         "verdict": "loai",
         "row_hash": "6da1bb65b983"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "osm:node/9921315929",
@@ -35293,7 +35671,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.8,
       "tags": [
         "Đài tưởng niệm"
       ],
@@ -35301,9 +35679,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -35368,8 +35746,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "fe731384e623"
-      }
+        "row_hash": "f832c189e42a"
+      },
+      "review_count": 48
     },
     {
       "poi_id": "osm:node/11359603957",
@@ -35382,7 +35761,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -35390,9 +35769,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -35459,8 +35838,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "a5085d2bca93"
-      }
+        "row_hash": "66c1262010e6"
+      },
+      "review_count": 1930
     },
     {
       "poi_id": "osm:node/11427582964",
@@ -35550,7 +35930,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Đỉnh núi"
       ],
@@ -35558,9 +35938,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 105,
-        "p50": 150,
-        "p75": 210
+        "p25": 126,
+        "p50": 180,
+        "p75": 252
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -35618,7 +35998,8 @@
         ],
         "verdict": "loai",
         "row_hash": "1fd3f9e89cb7"
-      }
+      },
+      "review_count": 22
     },
     {
       "poi_id": "osm:node/11629996926",
@@ -35629,7 +36010,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Đỉnh núi"
       ],
@@ -35637,9 +36018,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 105,
-        "p50": 150,
-        "p75": 210
+        "p25": 126,
+        "p50": 180,
+        "p75": 252
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -35697,7 +36078,8 @@
         ],
         "verdict": "loai",
         "row_hash": "2c180540674d"
-      }
+      },
+      "review_count": 2435
     },
     {
       "poi_id": "osm:node/11630013743",
@@ -35868,7 +36250,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.8,
       "tags": [
         "Chợ"
       ],
@@ -35876,9 +36258,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -35946,8 +36328,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "45938b596bba"
-      }
+        "row_hash": "8b17c3e4a654"
+      },
+      "review_count": 12
     },
     {
       "poi_id": "osm:node/12333995781",
@@ -35960,7 +36343,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 3.9,
       "tags": [
         "Chợ"
       ],
@@ -36036,7 +36419,8 @@
           "price_band"
         ],
         "row_hash": "3206d6c93087"
-      }
+      },
+      "review_count": 101
     },
     {
       "poi_id": "osm:node/12404434601",
@@ -36128,7 +36512,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.6,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -36136,9 +36520,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -36203,8 +36587,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "c5e385c27b03"
-      }
+        "row_hash": "7907f0d9f5ca"
+      },
+      "review_count": 98
     },
     {
       "poi_id": "osm:node/12701675501",
@@ -36376,7 +36761,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.1,
       "tags": [
         "Bãi biển"
       ],
@@ -36455,7 +36840,8 @@
           "price_band"
         ],
         "row_hash": "40f898f90030"
-      }
+      },
+      "review_count": 1049
     },
     {
       "poi_id": "osm:node/13293564930",
@@ -36544,7 +36930,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.7,
       "tags": [
         "Cơ sở thờ tự"
       ],
@@ -36552,9 +36938,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -36620,8 +37006,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "92184adc9f7f"
-      }
+        "row_hash": "0cfe41538144"
+      },
+      "review_count": 16
     },
     {
       "poi_id": "osm:node/13677406601",
@@ -36713,7 +37100,7 @@
       "opening_hours": [],
       "price_level": null,
       "fee": 0,
-      "rating": null,
+      "rating": 4.8,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -36721,9 +37108,9 @@
       "fetched_at": "2026-10-11",
       "verified": false,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -36783,7 +37170,8 @@
         ],
         "verdict": "loai",
         "row_hash": "76ec428e9853"
-      }
+      },
+      "review_count": 34
     },
     {
       "poi_id": "osm:node/13734880501",
@@ -36794,7 +37182,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.5,
       "tags": [
         "Điểm thu hút khách du lịch"
       ],
@@ -36802,9 +37190,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -36838,7 +37226,7 @@
         "band_verified": true
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction",
+      "cat": "landmark",
       "space_source": "audit",
       "space_confidence": 1.0,
       "space_evidence": [
@@ -36854,7 +37242,7 @@
         "audit outdoor does not encode rain protection"
       ],
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -36863,14 +37251,23 @@
             "note": "Còn trên Google (4,5★, 36 đánh giá), cách 7 m, tên Google: 'Tượng Phật - Phước Lý'. Google không có giờ; giữ trống = dùng giờ an toàn của nhóm. Mức giá: Rẻ (mặc định cho attraction).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → landmark (là tượng Phật): 240 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "price_band"
         ],
-        "row_hash": "989572a193ec"
-      }
+        "row_hash": "bfffccbb0af9"
+      },
+      "review_count": 36
     },
     {
       "poi_id": "osm:node/13913398302",
@@ -36881,7 +37278,7 @@
       "opening_hours": [],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.9,
       "tags": [
         "Suối"
       ],
@@ -36889,9 +37286,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 105,
-        "p50": 150,
-        "p75": 210
+        "p25": 126,
+        "p50": 180,
+        "p75": 252
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -36954,8 +37351,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "13703306638a"
-      }
+        "row_hash": "aaeae0dbc941"
+      },
+      "review_count": 32
     },
     {
       "poi_id": "osm:node/13913400201",
@@ -37220,7 +37618,7 @@
       ],
       "price_level": 2,
       "fee": 0,
-      "rating": null,
+      "rating": 3.3,
       "tags": [
         "Cửa hàng quà lưu niệm"
       ],
@@ -37299,7 +37697,8 @@
           "price_band"
         ],
         "row_hash": "fd25baf78524"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "osm:node/14067929701",
@@ -37312,7 +37711,7 @@
       ],
       "price_level": 2,
       "fee": 0,
-      "rating": null,
+      "rating": 4.9,
       "tags": [
         "Cửa hàng quà lưu niệm"
       ],
@@ -37320,9 +37719,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 52,
-        "p50": 75,
-        "p75": 105
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -37392,8 +37791,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "78ecbb0e14c5"
-      }
+        "row_hash": "8c902222c69b"
+      },
+      "review_count": 21
     },
     {
       "poi_id": "osm:node/14130293535",
@@ -37406,7 +37806,7 @@
       ],
       "price_level": 1,
       "fee": 0,
-      "rating": null,
+      "rating": 4.5,
       "tags": [
         "Tượng đài"
       ],
@@ -37414,9 +37814,9 @@
       "fetched_at": "2026-10-11",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -37483,8 +37883,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "ae79ac84dca9"
-      }
+        "row_hash": "118d18be540b"
+      },
+      "review_count": 92
     },
     {
       "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
@@ -37579,7 +37980,8 @@
           "price_band"
         ],
         "row_hash": "e513b88462f7"
-      }
+      },
+      "review_count": 16325
     },
     {
       "poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0",
@@ -37758,7 +38160,8 @@
           "price_band"
         ],
         "row_hash": "d4c5078b8e95"
-      }
+      },
+      "review_count": 55
     },
     {
       "poi_id": "ChIJJ2sLdT4YQjERi930NC-XCo0",
@@ -37778,7 +38181,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 4.1,
+      "rating": 4.2,
       "tags": [
         "Nhà thờ Công giáo"
       ],
@@ -37851,7 +38254,8 @@
           "price_band"
         ],
         "row_hash": "79ae07c20c2c"
-      }
+      },
+      "review_count": 149
     },
     {
       "poi_id": "ChIJxdBK6SsYQjERYojL_cVEkbs",
@@ -37940,7 +38344,8 @@
         ],
         "verdict": "loai",
         "row_hash": "68ee6cd8f410"
-      }
+      },
+      "review_count": 177
     },
     {
       "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
@@ -38031,7 +38436,8 @@
           "price_band"
         ],
         "row_hash": "cff75ae45001"
-      }
+      },
+      "review_count": 51
     },
     {
       "poi_id": "ChIJs4dg5vceQjERJQ5D9ATvWhU",
@@ -38126,7 +38532,8 @@
           "price_band"
         ],
         "row_hash": "882446d3e288"
-      }
+      },
+      "review_count": 63
     },
     {
       "poi_id": "ChIJPdLppX4XQjERnV5xcr28sO0",
@@ -38216,7 +38623,8 @@
         ],
         "verdict": "loai",
         "row_hash": "1e99b6c762d9"
-      }
+      },
+      "review_count": 64
     },
     {
       "poi_id": "ChIJnwKLiE4YQjERMVI0qrqKg1c",
@@ -38305,7 +38713,8 @@
         ],
         "verdict": "loai",
         "row_hash": "08721b8a66a4"
-      }
+      },
+      "review_count": 213
     },
     {
       "poi_id": "ChIJcw0FdkgYQjERhr14f9cMXK0",
@@ -38396,7 +38805,8 @@
           "price_band"
         ],
         "row_hash": "cc66add8a500"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJaV_Jo8gZQjERtDWMcdLRT1U",
@@ -38487,7 +38897,8 @@
           "price_band"
         ],
         "row_hash": "00bca43e8b84"
-      }
+      },
+      "review_count": 51
     },
     {
       "poi_id": "ChIJY3yT3IweQjERnbDRpKk8b3A",
@@ -38578,7 +38989,8 @@
           "price_band"
         ],
         "row_hash": "df8d65e73457"
-      }
+      },
+      "review_count": 158
     },
     {
       "poi_id": "ChIJOfpog-EYQjERw_VB4IBkfNI",
@@ -38669,7 +39081,8 @@
           "price_band"
         ],
         "row_hash": "1a246f417f96"
-      }
+      },
+      "review_count": 92
     },
     {
       "poi_id": "ChIJ5VTV0hwaQjERYReDb0dJJq8",
@@ -38763,7 +39176,8 @@
           "price_band"
         ],
         "row_hash": "7ed5a9a8060a"
-      }
+      },
+      "review_count": 126
     },
     {
       "poi_id": "ChIJ3S-Eo0sYQjERo9MhApUI4WQ",
@@ -38854,7 +39268,8 @@
           "price_band"
         ],
         "row_hash": "4e2e345990e4"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJX_rcYHQZQjERQXQ9UxHmHN4",
@@ -38945,7 +39360,8 @@
           "price_band"
         ],
         "row_hash": "4190f4533b76"
-      }
+      },
+      "review_count": 102
     },
     {
       "poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI",
@@ -39040,7 +39456,8 @@
           "price_band"
         ],
         "row_hash": "ff6f6716103a"
-      }
+      },
+      "review_count": 388
     },
     {
       "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
@@ -39132,7 +39549,8 @@
           "price_band"
         ],
         "row_hash": "27b624a05060"
-      }
+      },
+      "review_count": 4733
     },
     {
       "poi_id": "ChIJRZhHIMkZQjERYBH-5S1xKNg",
@@ -39226,7 +39644,8 @@
           "price_band"
         ],
         "row_hash": "142f92c9d9b0"
-      }
+      },
+      "review_count": 194
     },
     {
       "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
@@ -39319,7 +39738,8 @@
           "price_band"
         ],
         "row_hash": "881e432cab26"
-      }
+      },
+      "review_count": 79
     },
     {
       "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
@@ -39414,7 +39834,8 @@
           "price_band"
         ],
         "row_hash": "9a67bdc12e89"
-      }
+      },
+      "review_count": 254
     },
     {
       "poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8",
@@ -39506,7 +39927,8 @@
           "price_band"
         ],
         "row_hash": "5d6d26118e8a"
-      }
+      },
+      "review_count": 521
     },
     {
       "poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM",
@@ -39597,7 +40019,8 @@
           "price_band"
         ],
         "row_hash": "033a9459bc6d"
-      }
+      },
+      "review_count": 93
     },
     {
       "poi_id": "ChIJASjStc0ZQjERf8hQfCEJ8JA",
@@ -39689,7 +40112,8 @@
           "price_band"
         ],
         "row_hash": "a764a5f1a184"
-      }
+      },
+      "review_count": 146
     },
     {
       "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
@@ -39778,7 +40202,8 @@
         ],
         "verdict": "loai",
         "row_hash": "5f1bda7950b8"
-      }
+      },
+      "review_count": 157
     },
     {
       "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
@@ -39869,7 +40294,8 @@
           "price_band"
         ],
         "row_hash": "c5d2f186ecf8"
-      }
+      },
+      "review_count": 124
     },
     {
       "poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA",
@@ -39960,7 +40386,8 @@
           "price_band"
         ],
         "row_hash": "c6406d5b78d9"
-      }
+      },
+      "review_count": 71
     },
     {
       "poi_id": "ChIJrynevMsZQjERzZIGoLZwQ2I",
@@ -40051,7 +40478,8 @@
           "price_band"
         ],
         "row_hash": "54fbf794901e"
-      }
+      },
+      "review_count": 32
     },
     {
       "poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q",
@@ -40140,7 +40568,8 @@
         ],
         "verdict": "loai",
         "row_hash": "8c041d4f4051"
-      }
+      },
+      "review_count": 105020
     },
     {
       "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
@@ -40236,7 +40665,8 @@
           "price_band"
         ],
         "row_hash": "4fdd9c64b9c8"
-      }
+      },
+      "review_count": 73057
     },
     {
       "poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE",
@@ -40322,7 +40752,8 @@
         ],
         "verdict": "loai",
         "row_hash": "e7785769e18d"
-      }
+      },
+      "review_count": 113
     },
     {
       "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
@@ -40406,7 +40837,8 @@
         ],
         "verdict": "loai",
         "row_hash": "5adeb6f0a9ed"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJC78Y_XQXQjERnNGlsKERAHs",
@@ -42802,7 +43234,8 @@
           "price_band"
         ],
         "row_hash": "d719a5663dc2"
-      }
+      },
+      "review_count": 3045
     },
     {
       "poi_id": "ChIJp4sb2egXQjERFOFVxrsHiyI",
@@ -42890,7 +43323,8 @@
           "price_band"
         ],
         "row_hash": "d1b06554709d"
-      }
+      },
+      "review_count": 4706
     },
     {
       "poi_id": "ChIJEwAAALAZQjERyXCN5eSBt1Q",
@@ -42981,7 +43415,8 @@
           "price_band"
         ],
         "row_hash": "bab965c9cef0"
-      }
+      },
+      "review_count": 8796
     },
     {
       "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
@@ -43073,7 +43508,8 @@
           "price_band"
         ],
         "row_hash": "8cf36816fc35"
-      }
+      },
+      "review_count": 245
     },
     {
       "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
@@ -43165,7 +43601,8 @@
           "price_band"
         ],
         "row_hash": "1e30d4d095dc"
-      }
+      },
+      "review_count": 4824
     },
     {
       "poi_id": "ChIJwdZa4eQ7JQwRYcRRBR0ZE24",
@@ -43253,7 +43690,8 @@
           "price_band"
         ],
         "row_hash": "fa18233d9130"
-      }
+      },
+      "review_count": 246
     },
     {
       "poi_id": "ChIJ076jrJZFj0QRKwm40qhwBWA",
@@ -43344,7 +43782,8 @@
           "price_band"
         ],
         "row_hash": "8a9270074f1c"
-      }
+      },
+      "review_count": 2980
     },
     {
       "poi_id": "ChIJNxOlbnIXQjER9DXmYRuiv3Q",
@@ -43364,7 +43803,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.9,
       "tags": [
         "Spa",
         "Thẩm mỹ viện",
@@ -43436,7 +43875,8 @@
           "price_band"
         ],
         "row_hash": "2c81c45e8106"
-      }
+      },
+      "review_count": 129
     },
     {
       "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
@@ -43524,7 +43964,8 @@
           "price_band"
         ],
         "row_hash": "68dac41440c4"
-      }
+      },
+      "review_count": 1545
     },
     {
       "poi_id": "ChIJXcc22ZcZQjERT47ZqHMl13c",
@@ -43612,7 +44053,8 @@
           "price_band"
         ],
         "row_hash": "bfa4f07cdbf2"
-      }
+      },
+      "review_count": 943
     },
     {
       "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
@@ -43701,7 +44143,8 @@
           "price_band"
         ],
         "row_hash": "f18a90363c6a"
-      }
+      },
+      "review_count": 1792
     },
     {
       "poi_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
@@ -43793,7 +44236,8 @@
           "price_band"
         ],
         "row_hash": "a1238a44fa8b"
-      }
+      },
+      "review_count": 7864
     },
     {
       "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
@@ -43883,7 +44327,8 @@
           "price_band"
         ],
         "row_hash": "33ae0af07487"
-      }
+      },
+      "review_count": 1476
     },
     {
       "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
@@ -43901,7 +44346,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.6,
+      "rating": 4.7,
       "tags": [
         "Spa"
       ],
@@ -43969,7 +44414,8 @@
           "price_band"
         ],
         "row_hash": "b9b1a3b5f7fc"
-      }
+      },
+      "review_count": 157
     },
     {
       "poi_id": "ChIJsyY9JzoYQjERvaNXwl9KJkI",
@@ -44061,7 +44507,8 @@
           "price_band"
         ],
         "row_hash": "9021daf7ea4c"
-      }
+      },
+      "review_count": 1877
     },
     {
       "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
@@ -44149,7 +44596,8 @@
           "price_band"
         ],
         "row_hash": "8547bc770880"
-      }
+      },
+      "review_count": 546
     },
     {
       "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
@@ -44240,7 +44688,8 @@
           "price_band"
         ],
         "row_hash": "dc276010c4bc"
-      }
+      },
+      "review_count": 1487
     },
     {
       "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
@@ -44252,9 +44701,9 @@
         "18:00-00:00"
       ],
       "visit_min": {
-        "p25": 168,
-        "p50": 240,
-        "p75": 336
+        "p25": 63,
+        "p50": 90,
+        "p75": 126
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -44302,7 +44751,7 @@
         "band_verified": true
       },
       "smart_tag_source": "rule_v1",
-      "cat": "attraction",
+      "cat": "market",
       "space_source": "audit",
       "space_confidence": 1.0,
       "space_evidence": [
@@ -44322,7 +44771,7 @@
       ],
       "hours_source": "claude-google-maps-v1",
       "verified_by": "claude-google-maps-v1",
-      "verified_at": "2026-10-30",
+      "verified_at": "2026-10-31",
       "review": {
         "by": [
           {
@@ -44331,15 +44780,24 @@
             "note": "Google không có giờ. Báo và trang du lịch ghi 15:00–24:00 hoặc 18:00–24:00 mỗi ngày: điền khung chung 18:00–24:00. Mức giá: Rẻ (theo loại (chợ)).",
             "file": "verify_verdicts_review_20261030_claude.jsonl",
             "draft_by": "claude-google-maps@2026-10-30"
+          },
+          {
+            "reviewer": "claude-google-maps",
+            "ts": "2026-10-31T03:23:07.000Z",
+            "note": "Sửa loại hình attraction → market (là phố đi bộ kiêm chợ đêm): 240 phút là thời lượng của điểm tham quan dài.",
+            "file": "verify_verdicts_cats_20261031_claude.jsonl",
+            "draft_by": "claude-google-maps@2026-10-31"
           }
         ],
         "verdict": "dung",
         "edits": [
+          "cat",
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "316159b299e4"
-      }
+        "row_hash": "518239dd6e42"
+      },
+      "review_count": 219
     },
     {
       "poi_id": "ChIJA0bFwKoZQjER--pX5_3_cD0",
@@ -44430,7 +44888,8 @@
           "price_band"
         ],
         "row_hash": "407fbc0ce7cf"
-      }
+      },
+      "review_count": 25
     },
     {
       "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
@@ -44526,7 +44985,8 @@
           "price_band"
         ],
         "row_hash": "a201dfe4cbed"
-      }
+      },
+      "review_count": 1912
     },
     {
       "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
@@ -44620,7 +45080,8 @@
           "price_band"
         ],
         "row_hash": "1ff2d41f4533"
-      }
+      },
+      "review_count": 613
     },
     {
       "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
@@ -44715,7 +45176,8 @@
           "price_band"
         ],
         "row_hash": "fd8fc8df3b71"
-      }
+      },
+      "review_count": 1382
     },
     {
       "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
@@ -44810,7 +45272,8 @@
           "price_band"
         ],
         "row_hash": "69745af028cc"
-      }
+      },
+      "review_count": 3283
     },
     {
       "poi_id": "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g",
@@ -44904,7 +45367,8 @@
           "price_band"
         ],
         "row_hash": "4ddfbb762969"
-      }
+      },
+      "review_count": 2187
     },
     {
       "poi_id": "ChIJNzbzAwAZQjERynEwf3zOgYE",
@@ -44996,7 +45460,8 @@
           "price_band"
         ],
         "row_hash": "9c228f0ec6b5"
-      }
+      },
+      "review_count": 56
     },
     {
       "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
@@ -45091,7 +45556,8 @@
           "price_band"
         ],
         "row_hash": "dd2faad03aac"
-      }
+      },
+      "review_count": 368
     },
     {
       "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
@@ -45185,7 +45651,8 @@
           "price_band"
         ],
         "row_hash": "49db1e621f90"
-      }
+      },
+      "review_count": 826
     },
     {
       "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
@@ -45282,7 +45749,8 @@
           "price_band"
         ],
         "row_hash": "cd77bb2fb233"
-      }
+      },
+      "review_count": 1739
     },
     {
       "poi_id": "ChIJka0rSjkYQjERCmramEII0n4",
@@ -45376,7 +45844,8 @@
           "price_band"
         ],
         "row_hash": "bcef6a8993ee"
-      }
+      },
+      "review_count": 259
     },
     {
       "poi_id": "ChIJu2GuJRIXQjERzmEF0pBtsgM",
@@ -45470,7 +45939,8 @@
           "price_band"
         ],
         "row_hash": "d79d0f465701"
-      }
+      },
+      "review_count": 176
     },
     {
       "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
@@ -45565,7 +46035,8 @@
           "price_band"
         ],
         "row_hash": "b6d790cf7f4a"
-      }
+      },
+      "review_count": 543
     },
     {
       "poi_id": "ChIJOxHeFjkYQjERZAilaOR-hJA",
@@ -45661,7 +46132,8 @@
           "price_band"
         ],
         "row_hash": "eb8d4df814c4"
-      }
+      },
+      "review_count": 27
     },
     {
       "poi_id": "ChIJeROGTS4ZQjERKlipW2HlSvw",
@@ -45755,7 +46227,8 @@
           "price_band"
         ],
         "row_hash": "e93f7b6af161"
-      }
+      },
+      "review_count": 271
     },
     {
       "poi_id": "ChIJwYDU9ZwZQjERwliWFVsHlfw",
@@ -45848,7 +46321,8 @@
           "price_band"
         ],
         "row_hash": "348e6d2e4d76"
-      }
+      },
+      "review_count": 130
     },
     {
       "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
@@ -45942,7 +46416,8 @@
           "price_band"
         ],
         "row_hash": "357cf4b98327"
-      }
+      },
+      "review_count": 1904
     },
     {
       "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
@@ -46038,7 +46513,8 @@
           "price_band"
         ],
         "row_hash": "9ee3b0b7ffa6"
-      }
+      },
+      "review_count": 3719
     },
     {
       "poi_id": "ChIJkYkOmOMXQjEREz4KLKpwAOE",
@@ -46132,7 +46608,8 @@
           "price_band"
         ],
         "row_hash": "c95dfe69910b"
-      }
+      },
+      "review_count": 7020
     },
     {
       "poi_id": "ChIJxwczMkkXQjERoo3KDb0ZQKE",
@@ -46225,7 +46702,8 @@
           "price_band"
         ],
         "row_hash": "139aea2d2350"
-      }
+      },
+      "review_count": 534
     },
     {
       "poi_id": "ChIJe3Ixim4XQjERbbrbMnyhr34",
@@ -46319,7 +46797,8 @@
           "price_band"
         ],
         "row_hash": "e94bb6926c88"
-      }
+      },
+      "review_count": 2864
     },
     {
       "poi_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
@@ -46413,7 +46892,8 @@
           "price_band"
         ],
         "row_hash": "e3edd511d967"
-      }
+      },
+      "review_count": 2062
     },
     {
       "poi_id": "ChIJl2GYHgAZQjERp7zmf6CDTXk",
@@ -46504,7 +46984,8 @@
           "price_band"
         ],
         "row_hash": "a0042db7636c"
-      }
+      },
+      "review_count": 205
     },
     {
       "poi_id": "ChIJO_gU03QZQjERdvtWlsIeyOM",
@@ -46597,7 +47078,8 @@
           "price_band"
         ],
         "row_hash": "a69e48e8569b"
-      }
+      },
+      "review_count": 638
     },
     {
       "poi_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
@@ -46688,7 +47170,8 @@
           "price_band"
         ],
         "row_hash": "c499d6c6d3b3"
-      }
+      },
+      "review_count": 203
     },
     {
       "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
@@ -46781,7 +47264,8 @@
           "price_band"
         ],
         "row_hash": "c3d17ef09f44"
-      }
+      },
+      "review_count": 108
     },
     {
       "poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8",
@@ -46870,7 +47354,8 @@
           "price_band"
         ],
         "row_hash": "cb5755fe3a30"
-      }
+      },
+      "review_count": 49
     },
     {
       "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
@@ -46961,7 +47446,8 @@
           "price_band"
         ],
         "row_hash": "2bcadcc4640c"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
@@ -47049,7 +47535,8 @@
           "price_band"
         ],
         "row_hash": "230276bee9ef"
-      }
+      },
+      "review_count": 12
     },
     {
       "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
@@ -47139,7 +47626,8 @@
           "price_band"
         ],
         "row_hash": "69386210ffde"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
@@ -47230,7 +47718,8 @@
           "price_band"
         ],
         "row_hash": "6d4b2ae14966"
-      }
+      },
+      "review_count": 823
     },
     {
       "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
@@ -47326,7 +47815,8 @@
           "price_band"
         ],
         "row_hash": "99692fd0eb1c"
-      }
+      },
+      "review_count": 1263
     },
     {
       "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
@@ -47417,7 +47907,8 @@
           "price_band"
         ],
         "row_hash": "083bd3145d9b"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
@@ -47510,7 +48001,8 @@
           "price_band"
         ],
         "row_hash": "a386d89ae052"
-      }
+      },
+      "review_count": 290
     },
     {
       "poi_id": "ChIJ03jTTgAXQjERpVQunmJHv2c",
@@ -50275,7 +50767,8 @@
           "price_band"
         ],
         "row_hash": "275a0fd21125"
-      }
+      },
+      "review_count": 653
     },
     {
       "poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM",
@@ -50361,7 +50854,8 @@
           "price_band"
         ],
         "row_hash": "76b82af7aa7d"
-      }
+      },
+      "review_count": 512
     },
     {
       "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
@@ -50449,7 +50943,8 @@
           "price_band"
         ],
         "row_hash": "eefdabb81aaa"
-      }
+      },
+      "review_count": 1794
     },
     {
       "poi_id": "ChIJKZK2FcoZQjER8f6Uft81Mvg",
@@ -50539,7 +51034,8 @@
           "price_band"
         ],
         "row_hash": "c1633b2939d7"
-      }
+      },
+      "review_count": 97
     },
     {
       "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
@@ -50557,7 +51053,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.9,
+      "rating": 4.8,
       "tags": [
         "Spa"
       ],
@@ -50625,7 +51121,8 @@
           "price_band"
         ],
         "row_hash": "a4502cb2508b"
-      }
+      },
+      "review_count": 79
     },
     {
       "poi_id": "ChIJ9ZTWZwAXQjERn99h6ziS_2c",
@@ -50713,7 +51210,8 @@
           "price_band"
         ],
         "row_hash": "cb456b2043bc"
-      }
+      },
+      "review_count": 210
     },
     {
       "poi_id": "ChIJz3rG-N0XQjERVs2Zo-BWxwQ",
@@ -50805,7 +51303,8 @@
           "price_band"
         ],
         "row_hash": "a4f8266d9231"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJcUs0-1YXQjERDYZBzXC8l24",
@@ -50893,7 +51392,8 @@
           "price_band"
         ],
         "row_hash": "c2748882df05"
-      }
+      },
+      "review_count": 88
     },
     {
       "poi_id": "ChIJVbx5NwAXQjERS9yRLPkJZ_I",
@@ -50985,7 +51485,8 @@
           "price_band"
         ],
         "row_hash": "995051cd9dc1"
-      }
+      },
+      "review_count": 35
     },
     {
       "poi_id": "ChIJr3x17yAXQjER8gIQveo92QM",
@@ -51073,7 +51574,8 @@
           "price_band"
         ],
         "row_hash": "9e9d27cdf882"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJ_QZY3EMXQjERjA5RvSnV9AM",
@@ -51093,7 +51595,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Spa"
       ],
@@ -51161,7 +51663,8 @@
           "price_band"
         ],
         "row_hash": "464245981f70"
-      }
+      },
+      "review_count": 864
     },
     {
       "poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM",
@@ -51250,7 +51753,8 @@
           "price_band"
         ],
         "row_hash": "1991c3381e47"
-      }
+      },
+      "review_count": 89
     },
     {
       "poi_id": "ChIJpSoTPgAXQjERcs8hSdrolKM",
@@ -51339,7 +51843,8 @@
           "price_band"
         ],
         "row_hash": "a6ef3f3d5aa1"
-      }
+      },
+      "review_count": 74
     },
     {
       "poi_id": "ChIJJRnwO4UXQjERO5XPs69YCmM",
@@ -51427,7 +51932,8 @@
           "price_band"
         ],
         "row_hash": "c51753346ce3"
-      }
+      },
+      "review_count": 696
     },
     {
       "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
@@ -51516,7 +52022,8 @@
           "price_band"
         ],
         "row_hash": "9095f2da9a65"
-      }
+      },
+      "review_count": 286
     },
     {
       "poi_id": "ChIJXYpw5DMXQjERzS8ce1U5Z3M",
@@ -51605,7 +52112,8 @@
           "price_band"
         ],
         "row_hash": "676fe816830b"
-      }
+      },
+      "review_count": 958
     },
     {
       "poi_id": "ChIJ5xGrdQAXQjERUKN8BeMLPJo",
@@ -51693,7 +52201,8 @@
           "price_band"
         ],
         "row_hash": "6bb29e1d3fe6"
-      }
+      },
+      "review_count": 49
     },
     {
       "poi_id": "ChIJzYULZMgRQjERYRTCyEgKZUY",
@@ -51784,7 +52293,8 @@
           "price_band"
         ],
         "row_hash": "912d960e07ff"
-      }
+      },
+      "review_count": 324
     },
     {
       "poi_id": "ChIJyUfZ9fAZQjERIMtiBaxkTko",
@@ -51872,7 +52382,8 @@
           "price_band"
         ],
         "row_hash": "3cc3340a312b"
-      }
+      },
+      "review_count": 8863
     },
     {
       "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
@@ -51961,7 +52472,8 @@
           "price_band"
         ],
         "row_hash": "e42fe626201e"
-      }
+      },
+      "review_count": 133
     },
     {
       "poi_id": "ChIJK_ogWgARQjERnLylibgoTpw",
@@ -52051,7 +52563,8 @@
           "price_band"
         ],
         "row_hash": "97d3fd87a0bf"
-      }
+      },
+      "review_count": 24
     },
     {
       "poi_id": "ChIJvWLgr6cXQjER3bVwhb1OVrs",
@@ -52139,7 +52652,8 @@
           "price_band"
         ],
         "row_hash": "2fe74e9c33cf"
-      }
+      },
+      "review_count": 574
     },
     {
       "poi_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
@@ -52229,7 +52743,8 @@
           "price_band"
         ],
         "row_hash": "03fc560dd684"
-      }
+      },
+      "review_count": 3528
     },
     {
       "poi_id": "ChIJmwtSJxYXQjERqyw4BIsIRV4",
@@ -52317,7 +52832,8 @@
           "price_band"
         ],
         "row_hash": "182051af8dc8"
-      }
+      },
+      "review_count": 319
     },
     {
       "poi_id": "ChIJc2zPTQAXQjERn0HeQzam084",
@@ -52407,7 +52923,8 @@
           "price_band"
         ],
         "row_hash": "d5f61b2fd260"
-      }
+      },
+      "review_count": 169
     },
     {
       "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
@@ -52495,7 +53012,8 @@
           "price_band"
         ],
         "row_hash": "be0098e3612a"
-      }
+      },
+      "review_count": 21
     },
     {
       "poi_id": "ChIJWd2LBrkZQjER4hLHO81ipK0",
@@ -52577,7 +53095,8 @@
         ],
         "verdict": "loai",
         "row_hash": "b3937c2273c0"
-      }
+      },
+      "review_count": 97
     },
     {
       "poi_id": "ChIJs9Tdb7kfQjERg5O07vnwsww",
@@ -52665,7 +53184,8 @@
           "price_band"
         ],
         "row_hash": "0a87849ca804"
-      }
+      },
+      "review_count": 22
     },
     {
       "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
@@ -52753,7 +53273,8 @@
           "price_band"
         ],
         "row_hash": "14b3dbcc9d44"
-      }
+      },
+      "review_count": 57
     },
     {
       "poi_id": "ChIJzRc5EgIZQjERKvXOUUpbcKA",
@@ -52841,7 +53362,8 @@
           "price_band"
         ],
         "row_hash": "d5a16489a6ff"
-      }
+      },
+      "review_count": 16
     },
     {
       "poi_id": "ChIJ46gfxSkZQjERgT9OU08ssF4",
@@ -52929,7 +53451,8 @@
           "price_band"
         ],
         "row_hash": "59f10d851901"
-      }
+      },
+      "review_count": 41
     },
     {
       "poi_id": "ChIJu9TGuzEZQjERolkiV2-wyQQ",
@@ -53017,7 +53540,8 @@
           "price_band"
         ],
         "row_hash": "c901110d6a39"
-      }
+      },
+      "review_count": 15
     },
     {
       "poi_id": "ChIJNXaMJAAZQjERJxDzvQEO38c",
@@ -53105,7 +53629,8 @@
           "price_band"
         ],
         "row_hash": "850cb744746f"
-      }
+      },
+      "review_count": 15
     },
     {
       "poi_id": "ChIJeYxRAo8ZQjERawBcqjOhTRQ",
@@ -53193,7 +53718,8 @@
           "price_band"
         ],
         "row_hash": "dd319c6e0368"
-      }
+      },
+      "review_count": 382
     },
     {
       "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
@@ -53273,7 +53799,8 @@
         ],
         "verdict": "loai",
         "row_hash": "1fdd083dc6ea"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJ66onuEIZQjERJcc014sju08",
@@ -53362,7 +53889,8 @@
           "price_band"
         ],
         "row_hash": "fd62c2878def"
-      }
+      },
+      "review_count": 15
     },
     {
       "poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10",
@@ -53448,7 +53976,8 @@
           "price_band"
         ],
         "row_hash": "7bc417e945d7"
-      }
+      },
+      "review_count": 9
     },
     {
       "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
@@ -53536,7 +54065,8 @@
           "price_band"
         ],
         "row_hash": "9ffe652cef62"
-      }
+      },
+      "review_count": 7
     },
     {
       "poi_id": "ChIJYU-cVQAXQjERxfDy3td5_ac",
@@ -53616,7 +54146,8 @@
         ],
         "verdict": "loai",
         "row_hash": "57799b7f86ee"
-      }
+      },
+      "review_count": 31
     },
     {
       "poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM",
@@ -53699,7 +54230,8 @@
         ],
         "verdict": "loai",
         "row_hash": "af7fcc1b6a1f"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJw2G2IwAfQjERGAvvbDnKLHM",
@@ -53781,7 +54313,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f1bc2df71475"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJ1dsj5MQZQjERbgyzx94Lv20",
@@ -53870,7 +54403,8 @@
           "price_band"
         ],
         "row_hash": "3cad46529773"
-      }
+      },
+      "review_count": 162
     },
     {
       "poi_id": "ChIJd-PzSQAfQjERdmCtpw8ajB4",
@@ -53958,7 +54492,8 @@
           "price_band"
         ],
         "row_hash": "47d89f90d389"
-      }
+      },
+      "review_count": 18
     },
     {
       "poi_id": "ChIJy2xEfdgZQjER-EpNiwxo5Y0",
@@ -54046,7 +54581,8 @@
           "price_band"
         ],
         "row_hash": "0750a5855544"
-      }
+      },
+      "review_count": 474
     },
     {
       "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
@@ -54128,7 +54664,8 @@
         ],
         "verdict": "loai",
         "row_hash": "c1f37cab8a37"
-      }
+      },
+      "review_count": 39
     },
     {
       "poi_id": "ChIJ9wcVkY0ZQjERC4hzT7DwUcg",
@@ -54216,7 +54753,8 @@
           "price_band"
         ],
         "row_hash": "5b94967e7ebe"
-      }
+      },
+      "review_count": 34
     },
     {
       "poi_id": "ChIJqTDc25cZQjERd6ed4Iho8A8",
@@ -54304,7 +54842,8 @@
           "price_band"
         ],
         "row_hash": "cd80634a3c42"
-      }
+      },
+      "review_count": 72
     },
     {
       "poi_id": "ChIJPQ-OSwAZQjER0Zu4X6NlQds",
@@ -54322,7 +54861,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.9,
       "tags": [
         "Spa mát xa"
       ],
@@ -54390,7 +54929,8 @@
           "price_band"
         ],
         "row_hash": "a6c6dea7e3ca"
-      }
+      },
+      "review_count": 46
     },
     {
       "poi_id": "ChIJQTe2HAAZQjERkD1J_cP6aSw",
@@ -54480,7 +55020,8 @@
           "price_band"
         ],
         "row_hash": "db90144bc280"
-      }
+      },
+      "review_count": 189
     },
     {
       "poi_id": "ChIJOXHZFwAZQjERnjc1WCNMaeU",
@@ -54568,7 +55109,8 @@
           "price_band"
         ],
         "row_hash": "13cde2cca1d6"
-      }
+      },
+      "review_count": 16
     },
     {
       "poi_id": "ChIJNQWGShUZQjER71TXPpJW4Xs",
@@ -54658,7 +55200,8 @@
           "price_band"
         ],
         "row_hash": "9d8cbbaef5cd"
-      }
+      },
+      "review_count": 19
     },
     {
       "poi_id": "ChIJG9IOepAXQjER3x9UnxFxJ7w",
@@ -54749,7 +55292,8 @@
           "price_band"
         ],
         "row_hash": "143a9cbfe4cd"
-      }
+      },
+      "review_count": 24
     },
     {
       "poi_id": "ChIJBTwySgAZQjERS5kel5Caf00",
@@ -54838,7 +55382,8 @@
           "price_band"
         ],
         "row_hash": "4764895294fa"
-      }
+      },
+      "review_count": 106
     },
     {
       "poi_id": "ChIJFVqYCKsZQjERv29XM5331mU",
@@ -54929,7 +55474,8 @@
           "price_band"
         ],
         "row_hash": "4c2c1af0bdad"
-      }
+      },
+      "review_count": 137
     },
     {
       "poi_id": "ChIJfzqqXwAZQjERWQ7zRsTU8Zk",
@@ -54949,7 +55495,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.8,
+      "rating": 4.6,
       "tags": [
         "Spa"
       ],
@@ -55017,7 +55563,8 @@
           "price_band"
         ],
         "row_hash": "d04f0832a1c3"
-      }
+      },
+      "review_count": 23
     },
     {
       "poi_id": "ChIJAZKjQVIZQjERmZdYEcKV5Go",
@@ -55108,7 +55655,8 @@
           "price_band"
         ],
         "row_hash": "286044f8a088"
-      }
+      },
+      "review_count": 55
     },
     {
       "poi_id": "ChIJg85mY5EZQjERXv4xH_p-_MI",
@@ -55128,7 +55676,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.3,
+      "rating": 4.4,
       "tags": [
         "Spa"
       ],
@@ -55196,7 +55744,8 @@
           "price_band"
         ],
         "row_hash": "4c82d58c4ad4"
-      }
+      },
+      "review_count": 114
     },
     {
       "poi_id": "ChIJC1S7VAAZQjERFItFlyewDHY",
@@ -55367,7 +55916,8 @@
           "price_band"
         ],
         "row_hash": "1700f58fed15"
-      }
+      },
+      "review_count": 420
     },
     {
       "poi_id": "ChIJSYpfiOcZQjERYKZX_AdStPY",
@@ -55460,7 +56010,8 @@
           "price_band"
         ],
         "row_hash": "cb458b9bac7e"
-      }
+      },
+      "review_count": 356
     },
     {
       "poi_id": "ChIJueQn3rsZQjERgU81knCQmOQ",
@@ -55549,7 +56100,8 @@
           "price_band"
         ],
         "row_hash": "7f96a90b35af"
-      }
+      },
+      "review_count": 23
     },
     {
       "poi_id": "ChIJp5h-DjMYQjERTMBHOnlub0o",
@@ -55644,7 +56196,8 @@
           "price_band"
         ],
         "row_hash": "be2f7cbb1914"
-      }
+      },
+      "review_count": 3880
     },
     {
       "poi_id": "ChIJZVLi0gEZQjERl6s0h2bqoK0",
@@ -55664,7 +56217,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.9,
       "tags": [
         "Quán bar cocktail"
       ],
@@ -55734,7 +56287,8 @@
           "price_band"
         ],
         "row_hash": "3e5fb7f4b47c"
-      }
+      },
+      "review_count": 417
     },
     {
       "poi_id": "ChIJYTdcRmIZQjERpxIQp-G8HQ4",
@@ -55824,7 +56378,8 @@
           "price_band"
         ],
         "row_hash": "99e1140b023f"
-      }
+      },
+      "review_count": 1597
     },
     {
       "poi_id": "ChIJQdpSMREZQjEReHEkMWcVwbw",
@@ -55914,7 +56469,8 @@
           "price_band"
         ],
         "row_hash": "eb75fa57db6d"
-      }
+      },
+      "review_count": 101
     },
     {
       "poi_id": "ChIJW5KDTQAZQjERJXJQMoz2YJo",
@@ -55999,7 +56555,8 @@
         ],
         "verdict": "loai",
         "row_hash": "d68fc7a1ccaf"
-      }
+      },
+      "review_count": 626
     },
     {
       "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
@@ -56091,7 +56648,8 @@
           "price_band"
         ],
         "row_hash": "e2963694db05"
-      }
+      },
+      "review_count": 121
     },
     {
       "poi_id": "ChIJh8C0GlYXQjERhjmDp-ik-Uc",
@@ -56182,7 +56740,8 @@
           "price_band"
         ],
         "row_hash": "6cd622e95e96"
-      }
+      },
+      "review_count": 624
     },
     {
       "poi_id": "ChIJu557PTwYQjERu1jlhJR4LEU",
@@ -56274,7 +56833,8 @@
           "price_band"
         ],
         "row_hash": "7618ea4c2426"
-      }
+      },
+      "review_count": 2318
     },
     {
       "poi_id": "ChIJ6e7t67oZQjERLcf4KcgElEc",
@@ -56358,7 +56918,8 @@
         ],
         "verdict": "loai",
         "row_hash": "492c99ecd1d8"
-      }
+      },
+      "review_count": 929
     },
     {
       "poi_id": "ChIJn9Kkxh4ZQjERgDXEcvzD4nI",
@@ -56453,7 +57014,8 @@
           "price_band"
         ],
         "row_hash": "1fcfff93fe4c"
-      }
+      },
+      "review_count": 121
     },
     {
       "poi_id": "ChIJp4lxrJsZQjERdBDtWzWyHJU",
@@ -56473,7 +57035,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.8,
+      "rating": 4.7,
       "tags": [
         "Quán bar"
       ],
@@ -56544,7 +57106,8 @@
           "price_band"
         ],
         "row_hash": "4b27041e76f8"
-      }
+      },
+      "review_count": 70
     },
     {
       "poi_id": "ChIJYZuMDnEZQjERrftd297ekRM",
@@ -56637,7 +57200,8 @@
           "price_band"
         ],
         "row_hash": "8b09baf158d9"
-      }
+      },
+      "review_count": 829
     },
     {
       "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
@@ -56727,7 +57291,8 @@
           "price_band"
         ],
         "row_hash": "acfc32b279ac"
-      }
+      },
+      "review_count": 1321
     },
     {
       "poi_id": "ChIJEXMOHVMXQjER479UZE7C59c",
@@ -56817,7 +57382,8 @@
           "price_band"
         ],
         "row_hash": "8d3d05268ac2"
-      }
+      },
+      "review_count": 226
     },
     {
       "poi_id": "ChIJZQZGM-MZQjERm_6vbq_fWzo",
@@ -56910,7 +57476,8 @@
           "price_band"
         ],
         "row_hash": "e1d1e234a6aa"
-      }
+      },
+      "review_count": 197
     },
     {
       "poi_id": "ChIJwRzh0c0ZQjERSqm3HPF_Gi4",
@@ -57002,7 +57569,8 @@
           "price_band"
         ],
         "row_hash": "bcdc9872ad17"
-      }
+      },
+      "review_count": 624
     },
     {
       "poi_id": "ChIJFdFWDOQZQjERhEwTQhM7XII",
@@ -57089,7 +57657,8 @@
         ],
         "verdict": "loai",
         "row_hash": "4959f089cb55"
-      }
+      },
+      "review_count": 451
     },
     {
       "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
@@ -57180,7 +57749,8 @@
           "price_band"
         ],
         "row_hash": "bfb67fe4edee"
-      }
+      },
+      "review_count": 219
     },
     {
       "poi_id": "ChIJe8GWJBYXQjERmtVZP78E5oU",
@@ -57271,7 +57841,8 @@
           "price_band"
         ],
         "row_hash": "a6b7401af472"
-      }
+      },
+      "review_count": 42
     },
     {
       "poi_id": "ChIJ5aETx9oZQjERBE0f6BHAbyg",
@@ -57363,7 +57934,8 @@
           "price_band"
         ],
         "row_hash": "85adca562731"
-      }
+      },
+      "review_count": 184
     },
     {
       "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
@@ -57459,7 +58031,8 @@
           "price_band"
         ],
         "row_hash": "e1fe13fcb86b"
-      }
+      },
+      "review_count": 133
     },
     {
       "poi_id": "ChIJP0--pEAXQjERoheJMf24gHA",
@@ -57551,7 +58124,8 @@
           "price_band"
         ],
         "row_hash": "56554de0677b"
-      }
+      },
+      "review_count": 3895
     },
     {
       "poi_id": "ChIJCd3q4FQXQjERF640iRTpb7I",
@@ -57641,7 +58215,8 @@
           "price_band"
         ],
         "row_hash": "80723ca80e12"
-      }
+      },
+      "review_count": 189
     },
     {
       "poi_id": "ChIJx3fy4TgZQjER5y-HN2wBNl4",
@@ -57729,7 +58304,8 @@
           "price_band"
         ],
         "row_hash": "c995de7b65db"
-      }
+      },
+      "review_count": 36
     },
     {
       "poi_id": "ChIJZ5ZGlCsZQjER95guGn5ybGo",
@@ -57813,7 +58389,8 @@
         ],
         "verdict": "loai",
         "row_hash": "5ee096d2e1fa"
-      }
+      },
+      "review_count": 14
     },
     {
       "poi_id": "ChIJdac9auQYQjERbldnY0G9R9c",
@@ -57905,7 +58482,8 @@
           "price_band"
         ],
         "row_hash": "5cec4f863fec"
-      }
+      },
+      "review_count": 96
     },
     {
       "poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4",
@@ -57989,7 +58567,8 @@
         ],
         "verdict": "loai",
         "row_hash": "bbff0e3d423e"
-      }
+      },
+      "review_count": 111
     },
     {
       "poi_id": "ChIJZ6w1fJgZQjERP9-_TlpgQXM",
@@ -58083,7 +58662,8 @@
           "price_band"
         ],
         "row_hash": "e7bdb7285856"
-      }
+      },
+      "review_count": 191
     },
     {
       "poi_id": "ChIJkxff_x0XQjERCC_CN8DFt54",
@@ -58177,7 +58757,8 @@
           "price_band"
         ],
         "row_hash": "91921797e0ab"
-      }
+      },
+      "review_count": 605
     },
     {
       "poi_id": "ChIJK0J1RXMXQjERPPTldZI_e5c",
@@ -58272,7 +58853,8 @@
           "price_band"
         ],
         "row_hash": "8f01c83d9d47"
-      }
+      },
+      "review_count": 545
     },
     {
       "poi_id": "ChIJdwwwfFoXQjERW6mXtIdB8LU",
@@ -58293,7 +58875,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Bar thể thao",
         "Quán bar có trò ném phi tiêu",
@@ -58368,7 +58950,8 @@
           "price_band"
         ],
         "row_hash": "879e82e11fcd"
-      }
+      },
+      "review_count": 1135
     },
     {
       "poi_id": "ChIJgaVvkV0XQjERNZYSVEJS_Xo",
@@ -58462,7 +59045,8 @@
           "price_band"
         ],
         "row_hash": "7a7b87546ca5"
-      }
+      },
+      "review_count": 452
     },
     {
       "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
@@ -58553,7 +59137,8 @@
           "price_band"
         ],
         "row_hash": "eed05fe8e135"
-      }
+      },
+      "review_count": 66
     },
     {
       "poi_id": "ChIJsztPMVkXQjERooynSorot-0",
@@ -58646,7 +59231,8 @@
           "price_band"
         ],
         "row_hash": "7c91f826c551"
-      }
+      },
+      "review_count": 173
     },
     {
       "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
@@ -58737,7 +59323,8 @@
           "price_band"
         ],
         "row_hash": "0f0ebe9ee3d3"
-      }
+      },
+      "review_count": 238
     },
     {
       "poi_id": "ChIJpSDE_bUXQjERRvGyIAFWpeE",
@@ -58826,7 +59413,8 @@
           "price_band"
         ],
         "row_hash": "1a37df0f7c65"
-      }
+      },
+      "review_count": 289
     },
     {
       "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
@@ -58925,7 +59513,8 @@
           "price_band"
         ],
         "row_hash": "35da019d68ac"
-      }
+      },
+      "review_count": 5403
     },
     {
       "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
@@ -59019,7 +59608,8 @@
           "price_band"
         ],
         "row_hash": "ad74e33d4221"
-      }
+      },
+      "review_count": 1371
     },
     {
       "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
@@ -59110,7 +59700,8 @@
           "price_band"
         ],
         "row_hash": "fc07fde4838c"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJcbN8RKEXQjERd0H0haMdx4Y",
@@ -59205,7 +59796,8 @@
           "price_band"
         ],
         "row_hash": "db47fb8bd762"
-      }
+      },
+      "review_count": 742
     },
     {
       "poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA",
@@ -59297,7 +59889,8 @@
           "price_band"
         ],
         "row_hash": "af5573dac39b"
-      }
+      },
+      "review_count": 655
     },
     {
       "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
@@ -59381,7 +59974,8 @@
         ],
         "verdict": "loai",
         "row_hash": "0141734ab682"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJY_iyslwXQjERFoDw4waR2Sg",
@@ -59479,7 +60073,8 @@
           "price_band"
         ],
         "row_hash": "901d91664439"
-      }
+      },
+      "review_count": 471
     },
     {
       "poi_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
@@ -59565,7 +60160,8 @@
         ],
         "verdict": "loai",
         "row_hash": "b89320c985d5"
-      }
+      },
+      "review_count": 88
     },
     {
       "poi_id": "ChIJw3dqIx8ZQjERxFZPN1A3gew",
@@ -59649,7 +60245,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f3da3162b064"
-      }
+      },
+      "review_count": 4
     },
     {
       "poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60",
@@ -59732,7 +60329,8 @@
         ],
         "verdict": "loai",
         "row_hash": "01512b90a543"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJmd-xKSoZQjERr8BS2agMkCI",
@@ -59814,7 +60412,8 @@
         ],
         "verdict": "loai",
         "row_hash": "bd6b84718413"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJFXRrR0wZQjERNl4jMD9QNFI",
@@ -59900,7 +60499,8 @@
         ],
         "verdict": "loai",
         "row_hash": "4431e04fdca6"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJOean5VUZQjERMWDUmGdTpJQ",
@@ -59982,7 +60582,8 @@
         ],
         "verdict": "loai",
         "row_hash": "134ea142ea27"
-      }
+      },
+      "review_count": 47
     },
     {
       "poi_id": "ChIJVS4QEX8fQjERk1vVwmP0Rk8",
@@ -60067,7 +60668,8 @@
         ],
         "verdict": "loai",
         "row_hash": "0af5b98d561a"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJWTRb5NcYQjER6mJOuNl06k8",
@@ -60156,7 +60758,8 @@
           "price_band"
         ],
         "row_hash": "11dd3ecf9014"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJG1WCi2UXQjER9CxEvEOoEpw",
@@ -60247,7 +60850,8 @@
           "price_band"
         ],
         "row_hash": "be6d90389545"
-      }
+      },
+      "review_count": 2418
     },
     {
       "poi_id": "ChIJcYos3CkZQjERibEDbcXOpQs",
@@ -60331,7 +60935,8 @@
         ],
         "verdict": "loai",
         "row_hash": "1c5b2737226d"
-      }
+      },
+      "review_count": 5
     },
     {
       "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
@@ -60351,7 +60956,7 @@
       "dur_confidence": "low",
       "price_level": null,
       "fee": 0,
-      "rating": 5,
+      "rating": 4.6,
       "tags": [
         "Dịch vụ cho thuê thiết bị karaoke",
         "Quán bar karaoke"
@@ -60417,7 +61022,8 @@
         ],
         "verdict": "loai",
         "row_hash": "60a17966290f"
-      }
+      },
+      "review_count": 9
     },
     {
       "poi_id": "ChIJR7_4DdYYQjERUNxW7r51REs",
@@ -60502,7 +61108,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f8c4fe366097"
-      }
+      },
+      "review_count": 20
     },
     {
       "poi_id": "ChIJ-WGIA80YQjER8XDqSVShrOE",
@@ -60586,7 +61193,8 @@
         ],
         "verdict": "loai",
         "row_hash": "f0ec7eb1d6d8"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJP1XHPQAZQjERinsxWb2Ga0A",
@@ -60604,7 +61212,7 @@
       "dur_confidence": "low",
       "price_level": null,
       "fee": 0,
-      "rating": 3.4,
+      "rating": 4.3,
       "tags": [
         "Quán bar karaoke"
       ],
@@ -60668,7 +61276,8 @@
         ],
         "verdict": "loai",
         "row_hash": "7a63f02bd3dd"
-      }
+      },
+      "review_count": 6
     },
     {
       "poi_id": "ChIJsSD2e3kfQjER2d_jnMVrKZ4",
@@ -60688,7 +61297,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.4,
+      "rating": 3.8,
       "tags": [
         "Quán bia"
       ],
@@ -60760,7 +61369,8 @@
           "price_band"
         ],
         "row_hash": "38b9e7a5d04a"
-      }
+      },
+      "review_count": 6
     },
     {
       "poi_id": "ChIJcTnFX6QfQjERgmN3buOe9AQ",
@@ -60843,7 +61453,8 @@
         ],
         "verdict": "loai",
         "row_hash": "7b19e46a1f02"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJuQL2IN4YQjERYHan1mFjMdA",
@@ -60927,7 +61538,8 @@
         ],
         "verdict": "loai",
         "row_hash": "b3d4f6a90eef"
-      }
+      },
+      "review_count": 223
     },
     {
       "poi_id": "ChIJs95SfgAZQjERWa0RkAoF0XA",
@@ -60947,7 +61559,7 @@
       "dur_confidence": "low",
       "price_level": 1,
       "fee": 0,
-      "rating": 3.6,
+      "rating": 3.7,
       "tags": [
         "Quán bar karaoke"
       ],
@@ -61013,7 +61625,8 @@
         ],
         "verdict": "loai",
         "row_hash": "c8d2457893bf"
-      }
+      },
+      "review_count": 44
     },
     {
       "poi_id": "ChIJqRL3QEQZQjER71D0j0o7M7Q",
@@ -61096,7 +61709,8 @@
         ],
         "verdict": "loai",
         "row_hash": "6a1b07849d32"
-      }
+      },
+      "review_count": 19
     },
     {
       "poi_id": "ChIJVde_IrUZQjERJghlJMKJ6v0",
@@ -61191,7 +61805,8 @@
           "price_band"
         ],
         "row_hash": "cd0be906769e"
-      }
+      },
+      "review_count": 458
     },
     {
       "poi_id": "ChIJQydy2apx34oRnci64Kkdi4U",
@@ -61284,7 +61899,8 @@
           "price_band"
         ],
         "row_hash": "0fa03a95d511"
-      }
+      },
+      "review_count": 2150
     },
     {
       "poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4",
@@ -61377,7 +61993,8 @@
           "price_band"
         ],
         "row_hash": "2450b782f0f6"
-      }
+      },
+      "review_count": 10
     },
     {
       "poi_id": "ChIJvyd5GLEZQjERZgKsgMmnnkM",
@@ -61468,7 +62085,8 @@
           "price_band"
         ],
         "row_hash": "5dd8c361c4ee"
-      }
+      },
+      "review_count": 222
     },
     {
       "poi_id": "ChIJ2exBne0ZQjERj07NR6zFg4c",
@@ -61561,7 +62179,8 @@
           "price_band"
         ],
         "row_hash": "0f6a4e3b9a98"
-      }
+      },
+      "review_count": 117
     },
     {
       "poi_id": "ChIJvcXagjAYQjERCEguUGaxfEc",
@@ -61652,7 +62271,8 @@
           "price_band"
         ],
         "row_hash": "e3678b931cdb"
-      }
+      },
+      "review_count": 348
     },
     {
       "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
@@ -61749,7 +62369,8 @@
           "price_band"
         ],
         "row_hash": "14d6a8fc1db5"
-      }
+      },
+      "review_count": 1992
     },
     {
       "poi_id": "ChIJj8OOR1UYQjERdZlR_ysOs4E",
@@ -61834,7 +62455,8 @@
         ],
         "verdict": "loai",
         "row_hash": "c956ca2885aa"
-      }
+      },
+      "review_count": 259
     },
     {
       "poi_id": "ChIJTQuJbKYZQjERAE9fPrQroZw",
@@ -61927,7 +62549,8 @@
           "price_band"
         ],
         "row_hash": "33deb53a526d"
-      }
+      },
+      "review_count": 96
     },
     {
       "poi_id": "ChIJ3zTSR1UYQjERxzlJpa-DNHE",
@@ -62012,7 +62635,8 @@
         ],
         "verdict": "loai",
         "row_hash": "406aaca84a5f"
-      }
+      },
+      "review_count": 172
     },
     {
       "poi_id": "ChIJN_abDNcZQjERmLjyrAo7IPk",
@@ -62106,7 +62730,8 @@
           "price_band"
         ],
         "row_hash": "b3fdd1bbdee0"
-      }
+      },
+      "review_count": 208
     },
     {
       "poi_id": "ChIJc2sSdpMZQjERg6ykGdI-3r4",
@@ -62191,7 +62816,8 @@
         ],
         "verdict": "loai",
         "row_hash": "8993c908fdc4"
-      }
+      },
+      "review_count": 2
     },
     {
       "poi_id": "ChIJMZtZVeQZQjERchri-_Wa9C8",
@@ -62281,7 +62907,8 @@
           "price_band"
         ],
         "row_hash": "3825ae0f4e69"
-      }
+      },
+      "review_count": 7
     },
     {
       "poi_id": "ChIJObG9DvoZQjER1tqakgkbUno",
@@ -62301,7 +62928,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.4,
+      "rating": 4.3,
       "tags": [
         "Quán bia sân vườn"
       ],
@@ -62376,7 +63003,8 @@
           "price_band"
         ],
         "row_hash": "ee79b442c894"
-      }
+      },
+      "review_count": 314
     },
     {
       "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
@@ -62461,7 +63089,8 @@
         ],
         "verdict": "loai",
         "row_hash": "9c66ee07e732"
-      }
+      },
+      "review_count": 26
     },
     {
       "poi_id": "ChIJkZi7gkcYQjERPd87DaNuhW0",
@@ -62481,7 +63110,7 @@
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.7,
+      "rating": 4.6,
       "tags": [
         "Quán bar ca nhạc trực tiếp",
         "Quán bar",
@@ -62560,7 +63189,8 @@
           "price_band"
         ],
         "row_hash": "70467f1e0a78"
-      }
+      },
+      "review_count": 4518
     },
     {
       "poi_id": "ChIJ8ar-PNQXQjERFGGdrbCAQbg",
@@ -62649,7 +63279,8 @@
         ],
         "verdict": "loai",
         "row_hash": "2bd17d233d9d"
-      }
+      },
+      "review_count": 212
     },
     {
       "poi_id": "ChIJabEOcucXQjER-8MNU9FNODw",
@@ -62737,7 +63368,8 @@
         ],
         "verdict": "loai",
         "row_hash": "5e654eb19b15"
-      }
+      },
+      "review_count": 4812
     },
     {
       "poi_id": "ChIJnZoMTbkQQjERwzvvHqGlb4E",
@@ -62832,7 +63464,8 @@
           "price_band"
         ],
         "row_hash": "7b57ffc5ce14"
-      }
+      },
+      "review_count": 15
     },
     {
       "poi_id": "ChIJyaniiLoQQjERI3aW6z5atCc",
@@ -62923,7 +63556,8 @@
           "price_band"
         ],
         "row_hash": "7c040464f57c"
-      }
+      },
+      "review_count": 84
     },
     {
       "poi_id": "ChIJO9OcO7kQQjERuGR5zEtpfu8",
@@ -63014,7 +63648,8 @@
           "price_band"
         ],
         "row_hash": "b5b381ddd916"
-      }
+      },
+      "review_count": 24
     },
     {
       "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
@@ -63105,7 +63740,8 @@
           "price_band"
         ],
         "row_hash": "08110cbf19cd"
-      }
+      },
+      "review_count": 16
     },
     {
       "poi_id": "ChIJvexouL4QQjERy0qt57A0GX4",
@@ -63196,7 +63832,8 @@
           "price_band"
         ],
         "row_hash": "ea66d64ea3ec"
-      }
+      },
+      "review_count": 18
     },
     {
       "poi_id": "ChIJA8a2aLcQQjER5mciBxvjUVs",
@@ -63289,7 +63926,8 @@
           "price_band"
         ],
         "row_hash": "ca12e952fb67"
-      }
+      },
+      "review_count": 87
     },
     {
       "poi_id": "ChIJ8Z0D7KURQjERUPd36goDH90",
@@ -63381,7 +64019,8 @@
           "price_band"
         ],
         "row_hash": "32c9a0e9b252"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJLX9s7EUbQjERdsy67X5-NrE",
@@ -63472,7 +64111,8 @@
           "price_band"
         ],
         "row_hash": "b07a460bc244"
-      }
+      },
+      "review_count": 13
     },
     {
       "poi_id": "ChIJf_LKvbkbQjERSVrbzxU6Nuc",
@@ -63563,7 +64203,8 @@
           "price_band"
         ],
         "row_hash": "d018cd2adf6e"
-      }
+      },
+      "review_count": 12
     },
     {
       "poi_id": "ChIJ8VqGDeYRQjERVEkumiIa714",
@@ -63655,7 +64296,8 @@
           "price_band"
         ],
         "row_hash": "a7e575791eb1"
-      }
+      },
+      "review_count": 14
     },
     {
       "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
@@ -63746,7 +64388,8 @@
           "price_band"
         ],
         "row_hash": "d7b8070417a0"
-      }
+      },
+      "review_count": 26
     },
     {
       "poi_id": "ChIJo2Yyix8ZQjERmG7AHQkOpIo",
@@ -63831,7 +64474,8 @@
         ],
         "verdict": "loai",
         "row_hash": "2a5baeb01d5f"
-      }
+      },
+      "review_count": 14
     },
     {
       "poi_id": "ChIJKcik9OQYQjERKZ21jblRTVc",
@@ -63922,7 +64566,8 @@
           "price_band"
         ],
         "row_hash": "56ef1949c207"
-      }
+      },
+      "review_count": 13
     },
     {
       "poi_id": "ChIJl21Hd_4YQjERF980f9HS9Cc",
@@ -64013,7 +64658,8 @@
           "price_band"
         ],
         "row_hash": "ec71f025a4cf"
-      }
+      },
+      "review_count": 5
     },
     {
       "poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY",
@@ -64104,7 +64750,8 @@
           "price_band"
         ],
         "row_hash": "9f13feac8620"
-      }
+      },
+      "review_count": 23
     },
     {
       "poi_id": "ChIJp3BwHgsZQjERzQZfxwNQNmE",
@@ -64280,7 +64927,8 @@
           "price_band"
         ],
         "row_hash": "1107a691c7aa"
-      }
+      },
+      "review_count": 17
     },
     {
       "poi_id": "ChIJaX09zkgYQjERCtro2DeADN0",
@@ -64373,7 +65021,8 @@
           "price_band"
         ],
         "row_hash": "bb07405b47f5"
-      }
+      },
+      "review_count": 33
     },
     {
       "poi_id": "ChIJF8yRoecZQjERdDBeBdSRD-Y",
@@ -64458,7 +65107,8 @@
         ],
         "verdict": "loai",
         "row_hash": "a60f48acc7c3"
-      }
+      },
+      "review_count": 11913
     },
     {
       "poi_id": "ChIJu1LdzQwZQjER2DSbyyayAbs",
@@ -64552,7 +65202,8 @@
           "price_band"
         ],
         "row_hash": "407f947359cc"
-      }
+      },
+      "review_count": 244
     },
     {
       "poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
@@ -64643,7 +65294,8 @@
           "price_band"
         ],
         "row_hash": "dd4b447a1b06"
-      }
+      },
+      "review_count": 378
     },
     {
       "poi_id": "ChIJDYfSGZYZQjERmSERKl2Fj7E",
@@ -64807,7 +65459,8 @@
           "price_band"
         ],
         "row_hash": "5788b9330a71"
-      }
+      },
+      "review_count": 3
     },
     {
       "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
@@ -64896,7 +65549,8 @@
           "price_band"
         ],
         "row_hash": "f604d2464896"
-      }
+      },
+      "review_count": 1131
     },
     {
       "poi_id": "ChIJrd3YeXENQjERWWbMPMdY2CE",
@@ -64985,7 +65639,8 @@
           "price_band"
         ],
         "row_hash": "ea16827d4a05"
-      }
+      },
+      "review_count": 37
     },
     {
       "poi_id": "ChIJ00Fz0rANQjERLadxvkIRXBY",
@@ -65076,7 +65731,8 @@
           "price_band"
         ],
         "row_hash": "c8b804d5d325"
-      }
+      },
+      "review_count": 222
     },
     {
       "poi_id": "ChIJ20P_fAANQjERgFeFcOB6MAs",
@@ -65169,7 +65825,8 @@
           "price_band"
         ],
         "row_hash": "c990b0e9b578"
-      }
+      },
+      "review_count": 11
     },
     {
       "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
@@ -65259,7 +65916,8 @@
           "price_band"
         ],
         "row_hash": "afe3464e7f70"
-      }
+      },
+      "review_count": 591
     },
     {
       "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
@@ -65343,7 +66001,8 @@
         ],
         "verdict": "loai",
         "row_hash": "6c493fbc5dc1"
-      }
+      },
+      "review_count": 1
     },
     {
       "poi_id": "ChIJT9jHPuANQjERQTnqjbIQIF8",
@@ -65434,7 +66093,8 @@
           "price_band"
         ],
         "row_hash": "7812aa3bfec8"
-      }
+      },
+      "review_count": 30
     },
     {
       "poi_id": "ChIJT1zm9U8NQjERQf5DsBriCgc",
@@ -65446,15 +66106,15 @@
         "07:00-17:00"
       ],
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
       "price_level": 2,
       "fee": 0,
-      "rating": 4.1,
+      "rating": 5.0,
       "tags": [
         "Đại lý du lịch"
       ],
@@ -65525,8 +66185,9 @@
         "edits": [
           "price_band"
         ],
-        "row_hash": "ac0ee81ec3db"
-      }
+        "row_hash": "a04812935301"
+      },
+      "review_count": 102
     },
     {
       "poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo",
@@ -65617,7 +66278,8 @@
           "price_band"
         ],
         "row_hash": "eed190814129"
-      }
+      },
+      "review_count": 70
     },
     {
       "poi_id": "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
@@ -65707,7 +66369,8 @@
           "price_band"
         ],
         "row_hash": "ab8179114cd0"
-      }
+      },
+      "review_count": 380
     },
     {
       "poi_id": "ChIJs-NDcgAXQjERHA6tioqOfH4",
@@ -65798,7 +66461,8 @@
           "price_band"
         ],
         "row_hash": "d2426abdcecc"
-      }
+      },
+      "review_count": 433
     },
     {
       "poi_id": "ChIJYyr_6ogXQjERoXAq8cGEzcI",
@@ -65890,7 +66554,8 @@
           "price_band"
         ],
         "row_hash": "5fda40f40870"
-      }
+      },
+      "review_count": 1446
     },
     {
       "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
@@ -65982,7 +66647,8 @@
           "price_band"
         ],
         "row_hash": "00cefcc81a5e"
-      }
+      },
+      "review_count": 846
     },
     {
       "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
@@ -66073,7 +66739,8 @@
           "price_band"
         ],
         "row_hash": "20f70e71d4c7"
-      }
+      },
+      "review_count": 23
     },
     {
       "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
@@ -66164,7 +66831,8 @@
           "price_band"
         ],
         "row_hash": "9bdb43afe7c4"
-      }
+      },
+      "review_count": 145
     },
     {
       "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
@@ -66255,7 +66923,8 @@
           "price_band"
         ],
         "row_hash": "735e4d1fdb2f"
-      }
+      },
+      "review_count": 28
     },
     {
       "poi_id": "ChIJ26h5ZAANQjER2otGJosJliA",
@@ -66349,7 +67018,8 @@
           "price_band"
         ],
         "row_hash": "adae8a3f75ca"
-      }
+      },
+      "review_count": 20
     },
     {
       "poi_id": "ChIJyZOJHa8NQjERSvp9yMenV6Y",
@@ -66440,7 +67110,8 @@
           "price_band"
         ],
         "row_hash": "835cb4ed5a3d"
-      }
+      },
+      "review_count": 499
     },
     {
       "poi_id": "ChIJx0dBXWYNQjERQzQO18QYhas",
@@ -66531,7 +67202,8 @@
           "price_band"
         ],
         "row_hash": "779dca436a46"
-      }
+      },
+      "review_count": 1052
     },
     {
       "poi_id": "ChIJddXz2K8PQjER4enhapQvvo8",
@@ -66625,7 +67297,8 @@
           "price_band"
         ],
         "row_hash": "59dec8164c45"
-      }
+      },
+      "review_count": 423
     },
     {
       "poi_id": "ChIJmU3hl9WrNTERBUbnSp3g5vs",
@@ -66717,7 +67390,8 @@
           "price_band"
         ],
         "row_hash": "2ffa89e7b5f8"
-      }
+      },
+      "review_count": 133
     },
     {
       "poi_id": "ChIJH1ujCM0XQjERcOl1lB9Ns6k",
@@ -66814,7 +67488,7 @@
       "hours_source": "claude-google-maps-v1",
       "price_level": 1,
       "fee": 70000,
-      "rating": null,
+      "rating": 4.6,
       "tags": [
         "Di tích lịch sử"
       ],
@@ -66822,9 +67496,9 @@
       "fetched_at": "2026-10-13",
       "verified": true,
       "visit_min": {
-        "p25": 31,
-        "p50": 45,
-        "p75": 63
+        "p25": 38,
+        "p50": 54,
+        "p75": 76
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -66896,8 +67570,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "b25562f272bd"
-      }
+        "row_hash": "7073f23c0e7a"
+      },
+      "review_count": 4239
     },
     {
       "poi_id": "manual:mikazuki-waterpark",
@@ -66911,7 +67586,7 @@
       "hours_source": "web",
       "price_level": 2,
       "fee": 350000,
-      "rating": null,
+      "rating": 4.2,
       "tags": [
         "Công viên nước"
       ],
@@ -66991,7 +67666,8 @@
           "price_band"
         ],
         "row_hash": "0643cbfe0b50"
-      }
+      },
+      "review_count": 3457
     },
     {
       "poi_id": "manual:vinwonders-nam-hoi-an",
@@ -67005,7 +67681,7 @@
       "hours_source": "claude-google-maps-v1",
       "price_level": 3,
       "fee": 650000,
-      "rating": null,
+      "rating": 4.9,
       "tags": [
         "Công viên giải trí"
       ],
@@ -67013,9 +67689,9 @@
       "fetched_at": "2026-10-13",
       "verified": true,
       "visit_min": {
-        "p25": 140,
-        "p50": 200,
-        "p75": 280
+        "p25": 168,
+        "p50": 240,
+        "p75": 336
       },
       "dur_source": "category_rule",
       "dur_confidence": "low",
@@ -67087,8 +67763,9 @@
           "opening_hours",
           "price_band"
         ],
-        "row_hash": "3ebd5a774a12"
-      }
+        "row_hash": "2996bcec39bb"
+      },
+      "review_count": 17276
     },
     {
       "poi_id": "manual:cu-lao-cham",
@@ -67189,7 +67866,7 @@
       "hours_source": "user-verify",
       "price_level": null,
       "fee": 0,
-      "rating": 5.0,
+      "rating": 4.6,
       "tags": [
         "Cửa hàng quà lưu niệm"
       ],
@@ -67255,7 +67932,8 @@
         ],
         "verdict": "loai",
         "row_hash": "ad00dbeabc0c"
-      }
+      },
+      "review_count": 19
     }
   ],
   "enriched_at": "2026-10-26",
