@@ -1,6 +1,9 @@
 """Config loader (T004, lane C). Env + optional BE/.env file, stdlib only.
 
 LLM_PROVIDER=local (default, Ollama demo day) | api (test env).
+APP_ENV=production closes what only local testing needs: CORS from localhost
+and the review/repair/accept routers. CORS_ORIGINS lists the deployed app's
+origins, comma-separated.
 No secrets are committed: copy BE/.env.example -> BE/.env (gitignored).
 """
 
@@ -30,6 +33,12 @@ class Settings:
     snapshot_name: str = "danang-v1"
     google_places_key: str = ""
     osrm_base_url: str = ""
+    app_env: str = "local"
+    cors_origins: tuple[str, ...] = ()
+
+    @property
+    def is_production(self) -> bool:
+        return self.app_env == "production"
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -44,6 +53,10 @@ class Settings:
                                          os.path.basename(snap.rstrip("/\\")) or "danang-v1"),
             google_places_key=os.environ.get("GOOGLE_PLACES_KEY", ""),
             osrm_base_url=os.environ.get("OSRM_BASE_URL", ""),
+            app_env=os.environ.get("APP_ENV", "local"),
+            cors_origins=tuple(origin.strip() for origin
+                               in os.environ.get("CORS_ORIGINS", "").split(",")
+                               if origin.strip()),
         )
 
 
