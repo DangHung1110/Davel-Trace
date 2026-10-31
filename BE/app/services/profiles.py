@@ -604,6 +604,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # Template hard bans: nightlife/spa for a family day, trek for a calm one.
     if tpl_name:
         candidates = [p for p in candidates if templates.allows(p, tpl_name)]
+    # What the budget can never pay for must not take a place from what it can:
+    # the candidate cap keeps the best of each category, whatever they cost.
+    ceiling = _max_fee(trip)
+    if ceiling is not None:
+        candidates = [p for p in candidates if (effective_fee(p) or 0) <= ceiling
+                      or p["poi_id"] in (trip.get("must_visit") or [])]
     ids = [p["poi_id"] for p in candidates]
 
     # Activities -> "at least one stop of these categories" (FR-006: a
