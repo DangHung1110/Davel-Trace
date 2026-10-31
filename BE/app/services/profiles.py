@@ -397,6 +397,14 @@ def _max_fee(trip: dict) -> int | None:
     return None if budget is None else int(budget) // party_size(trip)
 
 
+def _within_budget(out: dict, stubs: list, trip: dict) -> bool:
+    """Does this optimizer result respect the trip's fee ceiling?"""
+    fees = {stub.poi_id: stub.fee for stub in stubs}
+    ceiling = _max_fee(trip)
+    return ceiling is None or sum(fees.get(a["poi_id"], 0)
+                                  for a in out["itinerary"]["activities"]) <= ceiling
+
+
 def _deadline(trip: dict) -> int:
     """ETB hard within-day deadline: min(end_time, return_time)."""
     end = to_min(trip.get("end_time", "18:00"))
@@ -757,6 +765,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 category_cap=override.pop("category_cap", category_cap),
                 max_fee=override.pop("max_fee", _max_fee(trip)))
             if probe.get("itinerary") is not None:
+                if name == "BUDGET" and _within_budget(probe, stubs, trip):
+                    continue  # it fits the budget: the solver only ran out of time
                 culprit = {"rule": name, "label": label}
                 if name == "CATEGORY_CAP":
                     # WHICH category needed a second stop? The uncapped probe
