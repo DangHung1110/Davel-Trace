@@ -29,7 +29,7 @@ from BE.app.services.gate import (
     check_tcs,
     check_vroh,
 )
-from BE.common import deadline, plan_cost, to_min
+from BE.common import deadline, party_size, plan_cost, to_min
 
 __all__ = ["GATE_CHECKS", "evaluate", "far", "vroh", "bcs", "tcs", "hcs",
            "str_score", "dtu", "ssr", "csm", "edi", "aqe"]
@@ -96,7 +96,7 @@ def csm(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:
     budget = int(trip.get("budget", 0))
     if budget <= 0:
         return 0.0
-    return max(0.0, min(1.0, 1.0 - plan_cost(itinerary, pois) / budget))
+    return max(0.0, min(1.0, 1.0 - plan_cost(itinerary, pois, party_size(trip)) / budget))
 
 
 def edi(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> float:

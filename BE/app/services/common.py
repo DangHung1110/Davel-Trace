@@ -19,6 +19,7 @@ from BE.common import (  # noqa: F401  (re-exported seam)
     in_range,
     open_windows,
     parse_hours,
+    party_size,
     plan_cost,
     status_map,
     to_min,
@@ -27,5 +28,5 @@ from BE.common import (  # noqa: F401  (re-exported seam)
 
 __all__ = [
     "to_min", "hh", "hhmm", "in_range", "open_windows", "parse_hours",
-    "total_fee", "plan_cost", "deadline", "status_map",
+    "total_fee", "plan_cost", "party_size", "deadline", "status_map",
 ]

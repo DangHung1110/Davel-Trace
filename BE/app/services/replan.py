@@ -20,12 +20,12 @@ from __future__ import annotations
 from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.budget import tighten_budget
-from BE.app.services.common import to_min
+from BE.app.services.common import party_size, to_min
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
 from BE.app.services.soft_rules import CATEGORY_DAILY_CAP, cafe_cap
 from BE.app.services.validator import validate
-from BE.common import poi_open_windows
+from BE.common import effective_fee, poi_open_windows
 
 
 def _deadline(trip: dict) -> int:
@@ -98,8 +98,15 @@ def replan(state: dict, event: dict, pois: list[dict],
                 travel2[("depot", x)] = leg
 
     stub = [StubPOI(pid, poi_visit_min(by_id[pid]),
-                    *_win(by_id[pid], trip, state), 1.0)
+                    *_win(by_id[pid], trip, state), 1.0,
+                    fee=effective_fee(by_id[pid]) or 0)
             for pid in cand_ids if pid in by_id]
+    effective_trip = trip
+    if budget_state is not None:
+        tight = tighten_budget(budget_state, trip)
+        effective_trip = dict(trip, budget=tight["allowed_remaining"])
+    max_fee = (None if effective_trip.get("budget") is None
+               else int(effective_trip["budget"]) // party_size(trip))
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
                 to_min(trip.get("start_time", "07:00")))
     # T061a: no completed -> open tour (origin_id None) when the plan has no
@@ -113,7 +120,8 @@ def replan(state: dict, event: dict, pois: list[dict],
                    # rolling horizon re-optimised from scratch.
                    category_cap=CATEGORY_DAILY_CAP,
                    cafe_cap=None if not trip.get("profile")
-                   else cafe_cap(trip.get("profile")))
+                   else cafe_cap(trip.get("profile")),
+                   max_fee=max_fee)
     if out["itinerary"] is None and cand_ids:
         return {"itinerary": None, "mode": "no_solution",
                 "reason": out.get("reason", "vo nghiem"),
@@ -121,18 +129,16 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "changes": [], "version": state["version"]}
     acts = out["itinerary"]["activities"] if out["itinerary"] else []
     if not acts and cand_ids:
+        over_budget = max_fee is not None and any(s.fee > max_fee for s in stub)
         return {"itinerary": None, "mode": "no_solution",
-                "reason": "khong xep duoc remaining nao",
+                "reason": ("khong xep duoc remaining nao trong ngan sach con lai (BCS)"
+                           if over_budget else "khong xep duoc remaining nao"),
                 "preserved_completed": completed_ids,
                 "changes": [], "version": state["version"]}
     matrix = {f"{a}->{b}": {"minutes": w} for (a, b), w in travel.items()}
-    effective_trip = trip
-    if budget_state is not None:
-        tight = tighten_budget(budget_state, trip)
-        effective_trip = dict(trip, budget=tight["allowed_remaining"])
     rep = validate({"activities": acts}, effective_trip,
                    {p["poi_id"]: {"verified": p.get("verified", False),
-                                  "fee": p.get("fee", 0),
+                                  "fee": effective_fee(p) or 0,
                                   "opening_hours": p.get("opening_hours", [])}
                     for p in pois}, matrix)
     if acts and not rep["passed"]:

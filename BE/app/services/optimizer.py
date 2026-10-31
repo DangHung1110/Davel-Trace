@@ -71,7 +71,7 @@ from BE.app.services.soft_rules import (
     category_allowed,
     poi_category,
 )
-from BE.common import poi_open_windows, trusted_rating
+from BE.common import effective_fee, poi_open_windows, trusted_rating
 
 TIMEOUT_S = 5.0
 
@@ -130,6 +130,7 @@ class StubPOI:
     # Several opening windows (lunch + dinner service); () = the single
     # [open_min, close_min]. open/close then hold the envelope.
     windows: tuple[tuple[int, int], ...] = ()
+    fee: int = 0              # VND per person (gate BCS, `max_fee`)
 
 
 def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
@@ -197,7 +198,8 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    restaurant=category == "restaurant",
                    category=category,
                    intensity=int(poi.get("intensity") or 2),
-                   windows=tuple(wins) if len(wins) > 1 else ())
+                   windows=tuple(wins) if len(wins) > 1 else (),
+                   fee=effective_fee(poi) or 0)
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -487,7 +489,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              forbidden_sets: list[frozenset[str]] | None = None,
              distinct_from: list[frozenset[str]] | None = None,
              distinct_ceiling: float = 0.6,
-             deterministic_time: float | None = None) -> dict:
+             deterministic_time: float | None = None,
+             max_fee: int | None = None) -> dict:
     """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
 
     edge_scores[(a, b)]: bonus added when transition a->b is used.
@@ -497,6 +500,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     baseline comparison is reproducible.
     overhead_min: TASK-2 breathing room between stops (default
     `STOP_OVERHEAD_MIN`; 0 restores the old dense schedule, tests only).
+    max_fee: HARD ceiling on the fee sum per person (gate BCS, SC-008), so a
+    plan is never built over budget and then thrown away by the gate.
 
     Day-template inputs (all optional, None = legacy behaviour):
     min_stops/max_stops: pace band on the number of visited POIs.
@@ -592,7 +597,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         category_cap=category_cap, state_weight=state_weight,
                         diversity_weight=diversity_weight,
                         distinct_from=distinct_from,
-                        distinct_ceiling=distinct_ceiling))
+                        distinct_ceiling=distinct_ceiling, max_fee=max_fee))
 
     overhead = STOP_OVERHEAD_MIN if overhead_min is None else int(overhead_min)
     ids = [p.poi_id for p in pois]
@@ -645,6 +650,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 picks.append(pick)
             m.Add(sum(picks) == visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
+    if max_fee is not None:
+        m.Add(sum(pois[i - 1].fee * visit[i] for i in range(1, n + 1)) <= int(max_fee))
+
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].
     slot_hits: dict[int, list] = {}

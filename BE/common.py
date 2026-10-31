@@ -190,17 +190,52 @@ def trusted_rating(poi: dict) -> float:
                  / (reviews + RATING_PRIOR_REVIEWS), 3)
 
 
-def total_fee(acts: list[dict], pois: dict) -> int:
-    """Sum of POI fees for the activities (unknown POI/fee -> 0)."""
-    return sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
-               for a in acts)
+# What one person spends at a POI with no known ticket: the middle of its price
+# band (BE/ml/data/price_from_raw.py: under 100k, 100-500k, over 500k per person).
+BAND_FEE_VND = {"cheap": 50_000, "medium": 300_000, "expensive": 700_000}
+# Open access: a cheap band here means free to enter, not a cheap meal.
+FREE_ENTRY_CATS = frozenset({"beach", "landmark", "nature", "park", "viewpoint"})
 
 
-def plan_cost(itinerary: dict, pois: dict) -> int:
-    """Itinerary cost: explicit `total_cost` wins, else the POI fee sum."""
+def effective_fee(poi: dict) -> int | None:
+    """VND one person spends here: the ticket, else the middle of the price band,
+    0 for an open-access place with no ticket. None = price unknown, never "free".
+    A POI with no smart_tags (fixtures) has no band to read and keeps its `fee`."""
+    ticket = poi.get("ticket_vnd")
+    if isinstance(ticket, int):
+        return ticket
+    fee = int(poi.get("fee") or 0)
+    tags = poi.get("smart_tags")
+    if fee > 0 or tags is None:
+        return fee
+    band = tags.get("price_band")
+    if band == "cheap" and poi.get("cat") in FREE_ENTRY_CATS and tags.get("ticket") is not True:
+        return 0
+    return BAND_FEE_VND.get(band)
+
+
+def fee_is_estimate(poi: dict) -> bool:
+    """True when `effective_fee` comes from the price band, not from a real price."""
+    return bool(effective_fee(poi)) and not isinstance(poi.get("ticket_vnd"), int) \
+        and not int(poi.get("fee") or 0)
+
+
+def party_size(trip: dict) -> int:
+    """People the budget covers (POI prices are per person)."""
+    return max(1, int(trip.get("travelers") or 1))
+
+
+def total_fee(acts: list[dict], pois: dict, travelers: int = 1) -> int:
+    """What the party spends at these stops (unknown POI or price counts 0)."""
+    return travelers * sum(effective_fee(pois.get(a.get("poi_id"), {}) or {}) or 0
+                           for a in acts)
+
+
+def plan_cost(itinerary: dict, pois: dict, travelers: int = 1) -> int:
+    """Itinerary cost: explicit `total_cost` wins, else what the party spends."""
     if "total_cost" in itinerary:
         return int(itinerary["total_cost"])
-    return total_fee(itinerary.get("activities", []), pois)
+    return total_fee(itinerary.get("activities", []), pois, travelers)
 
 
 def deadline(trip: dict, default: str = "18:00") -> int:

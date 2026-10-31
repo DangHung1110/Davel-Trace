@@ -39,12 +39,12 @@ from BE.app.services import (
     templates,
     trip_ctx,
 )
-from BE.app.services.common import hh, status_map, to_min, total_fee
+from BE.app.services.common import hh, party_size, status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, StubTrip, optimize, stubs_from_pois)
 from BE.app.services.validator import validate
-from BE.common import price_level_of, trusted_rating
+from BE.common import effective_fee, price_level_of, trusted_rating
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -241,7 +241,8 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     optimizer (`DIVERSITY_WEIGHT_BY_PROFILE`); the node score itself is
     novelty + a small rating/fit term.
     """
-    rating, fee = trusted_rating(p), int(p.get("fee") or 0)
+    rating, known_fee = trusted_rating(p), effective_fee(p)
+    fee = known_fee or 0
     if profile == "savings":
         cat = soft_rules.poi_category(p)
         price_level = price_level_of(p)  # null = unknown -> middle band
@@ -252,7 +253,7 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
         score -= avg_leg * SAVINGS_TRAVEL_WEIGHT
         score -= max(0, price_level - 1) * SAVINGS_PRICE_LEVEL_PENALTY
         score += rating * SAVINGS_RATING_WEIGHT
-        if fee == 0:
+        if known_fee == 0:
             score += SAVINGS_FREE_BONUS
             if cat in SAVINGS_CATEGORIES:
                 score += SAVINGS_CHEAP_CATEGORY_BONUS
@@ -347,7 +348,8 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
                        lunch_required=bool(limits.get("lunch_required")),
                        rest_after_lunch=rest_after_lunch,
                        category_cap=soft_rules.CATEGORY_DAILY_CAP,
-                       diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof))
+                       diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
+                       max_fee=_max_fee(trip))
         if out["itinerary"] is None:
             dropped.append({"profile": prof, "reason": out.get("reason", "")})
             continue
@@ -370,7 +372,7 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
             "profile": prof,
             "reason": PROFILE_REASONS[prof],
             "itinerary": {"activities": acts},
-            "total_cost": total_fee(acts, by_id),
+            "total_cost": total_fee(acts, by_id, party_size(trip)),
             "travel_min": travel_min,
             "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0,
             "constraint_status": status_map(
@@ -387,6 +389,12 @@ def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
 def _to_trip(trip: dict, origin_id: str | None = "depot") -> StubTrip:
     return StubTrip(to_min(trip.get("start_time", "07:00")),
                     _deadline(trip), origin_id)
+
+
+def _max_fee(trip: dict) -> int | None:
+    """Gate BCS as a per-person fee ceiling for the solver (no budget -> none)."""
+    budget = trip.get("budget")
+    return None if budget is None else int(budget) // party_size(trip)
 
 
 def _deadline(trip: dict) -> int:
@@ -449,7 +457,7 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # What the gate registry reads off a POI: FAR/BCS/VROH, the category for
 # A1/caps, and the PROFILE_SAFE haystack (tags/cuisine/ambience/smart_tags/
 # intensity, the same fields profile_filter.hard_filter matched).
-_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity")
+_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "ticket_vnd")
 
 
 def _gate_view(p: dict) -> dict:
@@ -687,6 +695,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                        state_score=state_scores,
                        category_cap=category_cap,
                        diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
+                       max_fee=_max_fee(trip),
                        solution_pool=pool_size, pool_band=pool_band,
                        pool_timeout_s=pool_timeout_s,
                        **solver_opts)
@@ -707,6 +716,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         widen the cap silently (the cap stays; the plan stays empty).
         """
         trials = (
+            ("BUDGET", "ngan sach khong du cho cac diem bat buoc",
+             {"max_fee": None}),
             ("CATEGORY_CAP",
              "cap HARD 1 diem/loai/ngay (market/landmark/beach/attraction/"
              "temple/museum/park/viewpoint)", {"category_cap": None}),
@@ -743,7 +754,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 lunch_required=override.pop(
                     "lunch_required", bool(base_limits.get("lunch_required"))),
                 state_bands=state_bands, state_score=state_scores,
-                category_cap=override.pop("category_cap", category_cap))
+                category_cap=override.pop("category_cap", category_cap),
+                max_fee=override.pop("max_fee", _max_fee(trip)))
             if probe.get("itinerary") is not None:
                 culprit = {"rule": name, "label": label}
                 if name == "CATEGORY_CAP":
@@ -864,6 +876,8 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     plan["template"] = _template_report(tpl_name, limits, acts, relaxed_step,
                                        pois_by_id, cafe_cap, trip)
     warnings = []
+    if plan.get("cost_estimated"):
+        warnings.append("chi phi la uoc tinh theo muc gia, chua phai gia that")
     rest = (plan.get("template") or {}).get("rest_block") or {}
     if rest.get("shrunk"):
         warnings.append(

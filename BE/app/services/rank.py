@@ -32,7 +32,7 @@ from __future__ import annotations
 from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
-from BE.common import FEW_REVIEWS, price_level_of, trusted_rating
+from BE.common import BAND_FEE_VND, FEW_REVIEWS, effective_fee, price_level_of, trusted_rating
 
 WEIGHTS = {
     "rating": 0.22,
@@ -109,15 +109,19 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         reasons.append(f"rating cao {rating}")
 
     budget = int(user.get("budget", (ctx.get("trip") or {}).get("budget", 3000000)))
-    fee = int(poi.get("fee", 0))
+    known_fee = effective_fee(poi)
+    # Unknown price counts as the middle band, like `price_level_of` below.
+    fee = BAND_FEE_VND["medium"] if known_fee is None else known_fee
     parts["price"] = _clamp(1.0 - fee / budget) if budget > 0 else 0.0
     # Onboarding spending level: align the POI price band with what the party
     # wants to spend (1 budget / 2 mid / 3 high). Unknown price (null) counts as
     # the middle band (`UNKNOWN_PRICE_LEVEL`), so missing data is never a bonus.
     gap = abs(price_level_of(poi) - _int(user.get("spending_level"), 2))
     parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
-    if fee == 0:
+    if known_fee == 0:
         reasons.append("mien phi")
+    elif known_fee is None:
+        reasons.append("gia chua ro")
 
     fitness = int(user.get("fitness", 2))
     gap = abs(int(poi.get("intensity", 2)) - fitness)

@@ -32,7 +32,7 @@ from collections import Counter
 
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
-from BE.app.services.common import status_map, to_min, total_fee
+from BE.app.services.common import party_size, status_map, to_min, total_fee
 from BE.app.services.gate import SOFT_CHECKS, check_f1
 from BE.app.services.soft_rules import (
     RESTAURANT_PAIR_MAX_GAP,
@@ -41,7 +41,7 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.app.services.validator import validate
-from BE.common import poi_open_windows, trusted_rating
+from BE.common import effective_fee, poi_open_windows, trusted_rating
 
 MAX_ROUNDS = 2
 ACTIONABLE = ("high", "medium")
@@ -182,8 +182,8 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
     prev = acts[index - 1]["poi_id"] if index > 0 else None
     nxt = acts[index + 1]["poi_id"] if index + 1 < len(acts) else None
     budget = int(trip.get("budget", 0))
-    other_fee = sum(int((pois.get(a.get("poi_id"), {}) or {}).get("fee", 0))
-                    for i, a in enumerate(acts) if i != index)
+    party = party_size(trip)
+    other_fee = total_fee([a for i, a in enumerate(acts) if i != index], pois, party)
     out = []
     for poi in pool:
         pid = poi.get("poi_id")
@@ -202,7 +202,7 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
             continue
         if nxt and not matrix.get(f"{pid}->{nxt}"):
             continue
-        if budget and other_fee + int(poi.get("fee", 0) or 0) > budget:
+        if budget and other_fee + (effective_fee(poi) or 0) * party > budget:
             continue
         out.append({"score": rank_svc.score_poi(poi, user, ctx)["score"],
                     "poi": poi})
@@ -262,7 +262,7 @@ def _refresh(plan: dict, acts: list[dict], trip: dict, pois: dict,
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
     ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
     out["segments"] = segments
-    out["total_cost"] = total_fee(acts, pois)
+    out["total_cost"] = total_fee(acts, pois, party_size(trip))
     out["total_km"] = round(total_km, 2)
     out["travel_min"] = travel_min
     out["total_min"] = visit_min + travel_min
