@@ -559,7 +559,7 @@ Kết quả đã ghi vào `pois.json`. Số POI đã verify giờ là **573/742*
 
 - Lấy theo Google Maps, tra ngày 30/10. Nơi có giờ khác nhau theo ngày được điền khung chung của mọi ngày.
 - **77 POI Google không có giờ** (chủ yếu chùa, nhà thờ) được để trống, không bịa. Planner dùng giờ an toàn đo được
-  của nhóm, ví dụ điểm tham quan 09:00–17:00.
+  của nhóm, ví dụ điểm tham quan 09:00–17:00 (mục 12 đo lại thành 08:30–17:00).
 - Tra web thêm 2 điểm:
   - Phố đi bộ Bạch Đằng 18:00–24:00. Đây là khung chung của các nguồn: phần lớn ghi 15:00–24:00, một nguồn ghi 18:00–24:00.
   - Động Vân Thông 07:00–17:30, theo giờ của khu Ngũ Hành Sơn.
@@ -580,7 +580,7 @@ Mức giá có sẵn được giữ nguyên, trừ khi giá vé mâu thuẫn v�
 
 - 6 phòng karaoke: LOẠI, vì không phải điểm đến cho khách du lịch.
 - 4 điểm nằm trong Sun World Bà Nà (Đỉnh Bà Nà, Linh Phong Bảo Tháp, Thác Tóc Tiên, Thai Market): LOẠI, gộp vào Sun
-  World. Chùa Linh Ứng – Bà Nà đã verify từ trước nên vẫn giữ; chỗ này chưa nhất quán.
+  World. Chùa Linh Ứng – Bà Nà được xử lý cùng cách ở mục 12.
 - VinWonders Nam Hội An: Đúng, dù nằm ngoài khung Đà Nẵng.
 - Điểm chỉ có trên OSM mà Google không có: LOẠI.
 - Quán, dịch vụ có dưới 5 đánh giá: LOẠI.
@@ -608,3 +608,91 @@ Mức giá có sẵn được giữ nguyên, trừ khi giá vé mâu thuẫn v�
 - Trang mẫu blind vẫn cần 2 người chấm, vì nó đo độ chính xác độc lập nên Claude không chấm.
 - Giá vé thực tế chưa điền: Sun World, VỌC Glamping và các điểm có vé khác.
 - Son Tra Viewpoint: điền giờ quán, đổi loại hình thành `cafe`.
+
+## 12. Claude tự duyệt 377 POI đã verify từ trước (30–31/10/2026)
+
+Theo yêu cầu, Claude duyệt nốt các POI đã verify trước Phase 4 (335 `auto-verify-v1`, 42 `spotcheck-v1`), cùng quy tắc
+với mục 11: tra Google Maps từng điểm, xác định giờ, xét đóng cửa, trùng, không phải điểm đến và điền mức giá. Không
+tra giá vé cụ thể. File kết quả: `verdicts/verify_verdicts_old_20261030_claude.jsonl`. POI giữ lại mang nhãn
+`claude-google-maps-v1`.
+
+**Kết quả: 345 Đúng, 32 LOẠI.** Số POI verified giờ là **541/742**, tất cả mang nhãn `claude-google-maps-v1`. Toàn bộ 665
+POI đã duyệt (mục 11 và mục này) xem được trên `FE/verify_result.html`.
+
+| Lý do LOẠI | Số POI | POI |
+|---|---|---|
+| Phòng karaoke (chính sách) | 8 | Karaoke Next Top Luxury, Song Ca, Alô, Smile Idol, Phương Trí, Sao Mai, CAMEL 2; City Box |
+| Nằm trong khu đã có POI chính, hoặc trùng | 5 | Fantasy Park, Chùa Linh Ứng – Bà Nà (Sun World); Tượng Quan Thế Âm, Tháp Xá Lợi (Chùa Linh Ứng Bãi Bụt); Hòn Thủy Sơn (Ngũ Hành Sơn) |
+| Trung tâm tiệc cưới, hội nghị (chính sách) | 4 | Hưng Gia Trần, Phú Mỹ Thành, MIKADO, Minh Chau Palace |
+| Tạm thời đóng cửa | 3 | Ibasho Coffee, 2AM Coffee, Di tích Thành Điện Hải |
+| Dưới 5 đánh giá | 3 | The PILL Bar & Club, KDL Thuỷ Vân Sơn, Glow Spa Thanh Khê |
+| Cơ sở nặn mụn (chính sách) | 2 | Spa Nặn Mụn Liên Chiểu, Trạm spa nặn mụn |
+| Không có trên Google | 2 | Lucky Retail, Made in Vietnam |
+| Quán có tiếp viên (chính sách) | 1 | YUMI Counter & Lounge |
+| Đơn vị tổ chức tour, không phải điểm đến (chính sách) | 1 | Đà Nẵng Food Tour |
+| Hồ bơi trong sân vận động (chính sách) | 1 | Hồ Bơi Thanh Khê |
+| Chỉ có giờ lễ | 1 | Nhà Thờ Giáo Xứ Tam Tòa |
+| Google chỉ có ghim địa chỉ | 1 | Chợ Khuê Mỹ |
+
+Tỉ lệ LOẠI của `auto-verify-v1` là 30/335 (9,0%), của `spotcheck-v1` là 2/42. Trong 32 POI có 15 POI là lỗi dữ liệu và
+17 POI là quyết định chính sách. Đây là đánh giá của Claude, không thay cho số đo độc lập từ trang mẫu blind.
+
+Cụm Ngũ Hành Sơn vẫn giữ các động và chùa (Động Âm Phủ, Huyền Không, Tàng Chơn, Quốc Tự Tam Thai) vì là các điểm riêng có
+tên, khách ghé lần lượt. Muốn gộp thì duyệt lại các POI đó. Ghi chú của Kim Sơn, Mộc Sơn, Thổ Sơn ở mục 11 còn nhắc Hòn
+Thủy Sơn là điểm chính; sau đợt này điểm chính của cụm là POI Ngũ Hành Sơn.
+
+**Giờ mở cửa** (345 POI giữ lại; 370 POI tra theo `place_id`, 7 POI tra theo tên):
+
+| Tình trạng so với Google | Số POI |
+|---|---|
+| Khớp | 306 |
+| Khác, đã sửa theo Google | 8 |
+| Google không có giờ, giữ giá trị đang có (nguồn web, suy luận) | 21 |
+| Google ghi mở 24/24, không điền vì thường là giá trị mặc định | 9 |
+| Cầu Trần Thị Lý: cầu công cộng, mở cả ngày | 1 |
+
+- 8 POI sửa giờ: Bé Ni 2, Reply 1988, KITE Coffee, H Coffee, MOR Cà Phê, Hải Sản Ku Tom, Harmony Haven Spa, Bonny
+  handmade. MOR đóng cửa 19:30, không phải 22:00.
+- Bonny handmade còn 09:00–11:30 vì chủ nhật chỉ mở buổi sáng và ô giờ chỉ ghi được khung chung của mọi ngày.
+- Nhà Vọng Cảnh và Chùa Quán Thế Âm: Google ghi 24/24, giữ khung ban ngày đang có.
+- 17 quán để bảng giờ sau nút "Xem thêm giờ", lần tra đầu không đọc được nên tra lại có bấm nút. Đã rà cùng lỗi trên 63
+  POI không giờ của mục 11: 39 POI Google không có giờ, 24 POI Google ghi 24/24. Không POI nào bị sót giờ thật.
+- Giờ an toàn của nhóm tham quan đo lại thành 08:30–17:00 (trước là 09:00–17:00), vì dữ liệu giờ thay đổi sau đợt này.
+  Các nhóm khác không đổi.
+
+**Sửa loại hình** (14 POI). Thời lượng tính lại theo quy tắc:
+
+| POI | Loại hình | Thời lượng (phút) |
+|---|---|---|
+| Đỉnh Bàn Cờ, Nhà Vọng Cảnh, Mũi Nghê | attraction → landmark | 240 → 54 |
+| Quốc Tự Tam Thai | attraction → landmark | 240 → 54 |
+| Hải đăng Tiên Sa, Radar Sơn Trà 1 | attraction → landmark | 200 → 45 |
+| Đình làng Hải Châu, Chùa Quán Thế Âm, Cầu vượt đi bộ Mikazuki | attraction → landmark | 54, không đổi |
+| Cầu Trần Thị Lý | attraction → landmark | 45, không đổi |
+| Công viên Kỳ Quan | attraction → park | 200 → 120 |
+| Bãi biển Nguyễn Tất Thành | attraction → beach | 200 → 120 |
+| CẬU CẢ – 37 Điện Biên Phủ | park → restaurant | 120 → 60 |
+| View Sơn Trà về đêm | viewpoint → cafe | 54, không đổi |
+
+Các điểm ngắm cảnh trên Sơn Trà dùng `landmark`, không dùng `viewpoint`: `viewpoint` không có thời lượng mặc định riêng
+nên quy tắc đọc `type`, mà `type` của các điểm này là "Điểm thu hút khách du lịch", tức vẫn 200–240 phút.
+
+Còn **48 POI `attraction` verified, tất cả 200–240 phút**. Quy tắc này chưa đổi, vẫn chờ chủ dự án quyết.
+
+**Mức giá:** 173 Trung bình, 166 Rẻ, 6 Đắt, trong đó 195 POI trước đây chưa có. Đây là ước lượng theo loại hình như mục 11.
+
+- Chỉ 6 POI có khoảng giá theo người trên Google, đã dùng khoảng đó.
+- Bỏ qua con số đơn lẻ trên Google (726.530 ₫ ở Bảo tàng Đà Nẵng, 845.344 ₫ ở Suối Lương): đó là giá phòng hoặc giá của đối
+  tác bán vé, không phải giá theo người.
+- Mức giá có sẵn chỉ đổi 1 POI: Nén Restaurant từ Trung bình lên Đắt, vì Google xếp "Nhà hàng cao cấp".
+
+**Thay đổi trong tool:** `FE/verify_result.html` giờ liệt kê cả POI duyệt mà không có thẻ nháp (lấy thêm id từ
+`review_log.jsonl`), nên có đủ 666 dòng: 541 Đúng, 124 LOẠI, 1 chưa duyệt.
+
+**Cần biết:**
+
+- Không còn POI `auto-verify-v1`, nên `build_verify_page.py --mode sample` không còn POI nào để rút mẫu. Trang mẫu đã commit
+  không build lại và vẫn chấm được: nó hiện dữ liệu lúc máy verify, nên đo độ chính xác của auto-verify cũ, không đo đợt
+  Claude. 73/80 POI trong mẫu đã qua đợt này, 6 POI bị LOẠI.
+- **541 POI verified hiện chưa có người kiểm tra độc lập.** Muốn đo độ chính xác của đợt Claude thì cần rút mẫu blind mới
+  từ nhãn `claude-google-maps-v1`.

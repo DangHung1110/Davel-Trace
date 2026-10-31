@@ -117,7 +117,7 @@ SAFE_HOURS: dict[str, list[str]] = {
     "cafe": ["07:30-19:30"],
     "market": [],
     "restaurant": ["17:00-21:00"],
-    "sightseeing": ["09:00-17:00"],
+    "sightseeing": ["08:30-17:00"],
     "spa": ["09:30-19:30"],
 }
 

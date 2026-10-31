@@ -122,7 +122,7 @@ class TestSnapshotNormalised(unittest.TestCase):
 class TestSafeHours(unittest.TestCase):
     def test_missing_hours_take_the_group_window(self):
         pagoda = {"cat": "landmark", "opening_hours": []}
-        self.assertEqual(poi_open_windows(pagoda), [(to_min("09:00"), to_min("17:00"))])
+        self.assertEqual(poi_open_windows(pagoda), [(to_min("08:30"), to_min("17:00"))])
         self.assertEqual(poi_open_windows({"cat": "market"}), [])
         self.assertIsNone(poi_open_windows({"cat": "lodging"}))
         self.assertIsNone(poi_open_windows({"poi_id": "fixture"}))
