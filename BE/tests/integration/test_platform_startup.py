@@ -23,6 +23,7 @@ def test_production_database_failure_is_not_ready(tmp_path) -> None:
         database_url="postgresql+psycopg://none:none@127.0.0.1:1/none",
         allowed_origins="https://app.example",
         snapshot_dir=str(tmp_path),
+        identity_dev_outbox_enabled=False,
         _env_file=None,
     )
     result = build_readiness(settings, correlation_id="test-correlation")
@@ -40,9 +41,10 @@ def test_schema_behind_or_ahead_is_never_reported_ready(tmp_path, monkeypatch) -
         database_url="postgresql+psycopg://davel:test@localhost/davel_trace",
         allowed_origins="https://app.example",
         snapshot_dir=str(tmp_path),
+        identity_dev_outbox_enabled=False,
         _env_file=None,
     )
-    for current, head in (("004_999", "005_001"), ("006_001", "005_001")):
+    for current, head in (("005_001", "006_001"), ("007_001", "006_001")):
         monkeypatch.setattr(
             "BE.app.core.health.inspect_database",
             lambda _url, current=current, head=head: {

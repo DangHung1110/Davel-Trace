@@ -34,6 +34,11 @@ class Settings(BaseSettings):
     osrm_base_url: str = ""
     acceptance_db_path: str = os.path.join("BE", "data", "accepted_plans.db")
     shadow_judge_rate: float = 0.0
+    identity_dev_outbox_enabled: bool = False
+    identity_access_ttl_minutes: int = Field(default=15, ge=5, le=60)
+    identity_refresh_ttl_days: int = Field(default=30, ge=1, le=90)
+    identity_verification_ttl_hours: int = Field(default=24, ge=1, le=72)
+    identity_recovery_ttl_minutes: int = Field(default=30, ge=10, le=120)
 
     @field_validator("shadow_judge_rate", mode="before")
     @classmethod
@@ -56,6 +61,8 @@ class Settings(BaseSettings):
                 os.path.basename(self.snapshot_dir.rstrip("/\\")) or "danang-v1"
             )
         if self.app_mode is AppMode.production:
+            if self.identity_dev_outbox_enabled:
+                raise ValueError("IDENTITY_DEV_OUTBOX_ENABLED is forbidden in production")
             if not self.database_url:
                 raise ValueError("DATABASE_URL is required in production mode")
             if not self.database_url.startswith("postgresql+psycopg://"):

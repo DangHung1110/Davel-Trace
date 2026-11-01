@@ -29,6 +29,8 @@ from BE.app.routers import review as review_router
 from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
+from BE.app.modules.identity import api as identity_api
+from BE.app.modules.identity.service import IdentityError
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -59,6 +61,7 @@ app.include_router(review_router.router)
 # NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
 app.include_router(repair_router.router)
 app.include_router(planning_evidence_router.router)
+app.include_router(identity_api.router)
 
 
 def _validation_message(errors: list[dict]) -> str:
@@ -96,6 +99,11 @@ async def http_exception_handler(
 async def unhandled_exception_handler(request: Request, exc: Exception):
     logger.exception("unhandled request failure")
     return error("INTERNAL_ERROR", "loi noi bo", 500)
+
+
+@app.exception_handler(IdentityError)
+async def identity_error_handler(request: Request, exc: IdentityError):
+    return identity_api.identity_error_response(exc)
 
 
 @app.get("/v1/health")
