@@ -507,11 +507,59 @@ class TestRetrievalTiers(unittest.TestCase):
         self.assertEqual(self.ids(activities=["chùa"]), ["local", "main"])
         self.assertEqual(self.ids(activities=["cáp treo"]), ["main", "wish"])
 
+    def test_local_stays_out_while_the_main_tier_has_enough(self):
+        pois = [poi(f"main{i}", "temple", name=f"Chùa M{i}", plan_tier="main") for i in range(3)]
+        pois.append(poi("lane", "temple", name="Chùa Xóm", plan_tier="local"))
+        got = retrieve({**self.TRIP, "activities": ["chùa"]}, pois)
+        self.assertNotIn("lane", [c["poi_id"] for c in got["candidates"]])
+
+    def test_a_main_place_shut_or_too_dear_does_not_count_as_enough(self):
+        pois = [poi(f"main{i}", "temple", name=f"Chùa M{i}", plan_tier="main") for i in range(2)]
+        pois.append(poi("shut", "temple", name="Chùa Đóng", plan_tier="main", hours=("04:00-05:00",)))
+        pois.append(poi("lane", "temple", name="Chùa Xóm", plan_tier="local"))
+        got = retrieve({**self.TRIP, "activities": ["chùa"]}, pois)
+        self.assertIn("lane", [c["poi_id"] for c in got["candidates"]])
+
     def test_excluded_never_comes_up_by_itself(self):
         self.assertNotIn("clinic", self.ids(activities=["spa"]))
 
     def test_a_named_place_always_does(self):
         self.assertIn("clinic", self.ids(must_visit=["clinic"]))
+
+
+class TestFallbackRule(unittest.TestCase):
+    def test_the_meal_rule_reads_the_category_not_the_label(self):
+        # The data says "Quán mì", never "restaurant": the rule must still fire.
+        from BE.app.services.scorer import _rule
+        market = {"cat": "market", "type": "Chợ", "intensity": 2}
+        noodles = {"cat": "restaurant", "type": "Quán mì", "intensity": 2}
+        self.assertEqual(_rule(market, noodles), 0.3)
+        self.assertEqual(_rule(noodles, market), -0.3)
+
+
+class TestUnverifiedNamedPlace(unittest.TestCase):
+    def test_it_is_reported_and_the_rest_of_the_day_is_planned(self):
+        from unittest import mock
+        from fastapi.testclient import TestClient
+        from BE.app import main as main_mod
+        from BE.app.config import Settings
+        from BE.app.routers import itinerary as itinerary_mod
+        from BE.app.services import trip_ctx
+        pois = json.loads((SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]
+        unverified = next(p for p in pois if not p.get("verified") and p.get("cat") != "lodging")
+        settings = Settings(snapshot_dir=str(SNAPSHOT), snapshot_name=SNAPSHOT.name)
+        trip = {"start_time": "08:00", "end_time": "20:00", "budget": 3_000_000, "days": 1,
+                "must_visit": [unverified["poi_id"]]}
+        with mock.patch.object(itinerary_mod, "get_settings", lambda: settings), \
+                mock.patch.object(itinerary_mod, "PLAN_DETERMINISTIC_TIME", 1.0), \
+                mock.patch.object(trip_ctx.weather_svc, "fetch_forecast", side_effect=RuntimeError("offline")):
+            body = TestClient(main_mod.app).post("/v1/itinerary", json={"trip": trip, "profiles": ["balanced"]}).json()
+        plan = body["plans"][0]
+        self.assertTrue(plan["activities"], plan.get("warnings"))
+        self.assertNotIn(unverified["poi_id"], [a["poi_id"] for a in plan["activities"]])
+        self.assertTrue(any("chua xac minh" in w for w in plan["warnings"]), plan["warnings"])
+        first = body["retrieval"]["needs_verification"][0]
+        self.assertEqual((first["poi_id"], first["must_visit"]), (unverified["poi_id"], True))
 
 
 class TestRanking(unittest.TestCase):

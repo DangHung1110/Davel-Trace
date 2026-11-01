@@ -244,8 +244,32 @@ def collect_human(answers_path: str, verify_path: str) -> list[dict]:
     return pairs
 
 
+def drop_self_contradictions(pairs: list[dict]) -> tuple[list[dict], int]:
+    """Drop LLM pairs whose two orders disagree, return (kept, pairs dropped).
+
+    The judge is asked both orders. An answer that follows the order of the
+    question ("whichever is named first") says nothing about the places: 129 of
+    466 pairs in v4. A pair asked in one order only cannot be checked and stays.
+    """
+    orders: dict[frozenset, list[dict]] = {}
+    for pair in pairs:
+        if pair.get("source") == "llm":
+            orders.setdefault(frozenset((pair["first_id"], pair["second_id"])), []).append(pair)
+    bad = set()
+    for key, rows in orders.items():
+        if len(rows) == 2:
+            a, b = rows
+            same_order = a["first_id"] == b["first_id"]
+            if a["label"] != (b["label"] if same_order else -b["label"]):
+                bad.add(key)
+    kept = [p for p in pairs if p.get("source") != "llm"
+            or frozenset((p["first_id"], p["second_id"])) not in bad]
+    return kept, len(bad)
+
+
 def collect_judge(path: str) -> list[dict]:
-    """Parse returned judge JSONL (each line: first_id, second_id, choice)."""
+    """Parse returned judge JSONL (each line: first_id, second_id, choice),
+    without the pairs the judge answered both ways."""
     pairs: list[dict] = []
     with open(path, encoding="utf-8") as f:
         for i, line in enumerate(f):
@@ -255,7 +279,7 @@ def collect_judge(path: str) -> list[dict]:
                           "second_id": row["second_id"], "label": label,
                           "margin": 0.0, "source": "llm", "rules": ["llm-judge"],
                           "swapped_from": None})
-    return pairs
+    return drop_self_contradictions(pairs)[0]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -266,8 +290,17 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", default="")
     ap.add_argument("--check", default="")
     ap.add_argument("--emit-judge-batch", default="")
+    ap.add_argument("--drop-contradictions", nargs=2, metavar=("IN", "OUT"),
+                    help="rewrite a pair file without self-contradicting LLM pairs")
     args = ap.parse_args(argv)
 
+    if args.drop_contradictions:
+        with open(args.drop_contradictions[0], encoding="utf-8") as f:
+            kept, dropped = drop_self_contradictions(json.load(f))
+        with open(args.drop_contradictions[1], "w", encoding="utf-8") as f:
+            json.dump(kept, f, ensure_ascii=False)
+        print(f"dropped {dropped} self-contradicting LLM pairs, {len(kept)} rows left")
+        return 0
     if args.check:
         with open(args.check, encoding="utf-8") as f:
             pairs = json.load(f)
