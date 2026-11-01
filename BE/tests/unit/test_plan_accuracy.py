@@ -514,6 +514,31 @@ class TestRetrievalTiers(unittest.TestCase):
         self.assertIn("clinic", self.ids(must_visit=["clinic"]))
 
 
+class TestUnverifiedNamedPlace(unittest.TestCase):
+    def test_it_is_reported_and_the_rest_of_the_day_is_planned(self):
+        from unittest import mock
+        from fastapi.testclient import TestClient
+        from BE.app import main as main_mod
+        from BE.app.config import Settings
+        from BE.app.routers import itinerary as itinerary_mod
+        from BE.app.services import trip_ctx
+        pois = json.loads((SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]
+        unverified = next(p for p in pois if not p.get("verified") and p.get("cat") != "lodging")
+        settings = Settings(snapshot_dir=str(SNAPSHOT), snapshot_name=SNAPSHOT.name)
+        trip = {"start_time": "08:00", "end_time": "20:00", "budget": 3_000_000, "days": 1,
+                "must_visit": [unverified["poi_id"]]}
+        with mock.patch.object(itinerary_mod, "get_settings", lambda: settings), \
+                mock.patch.object(itinerary_mod, "PLAN_DETERMINISTIC_TIME", 1.0), \
+                mock.patch.object(trip_ctx.weather_svc, "fetch_forecast", side_effect=RuntimeError("offline")):
+            body = TestClient(main_mod.app).post("/v1/itinerary", json={"trip": trip, "profiles": ["balanced"]}).json()
+        plan = body["plans"][0]
+        self.assertTrue(plan["activities"], plan.get("warnings"))
+        self.assertNotIn(unverified["poi_id"], [a["poi_id"] for a in plan["activities"]])
+        self.assertTrue(any("chua xac minh" in w for w in plan["warnings"]), plan["warnings"])
+        first = body["retrieval"]["needs_verification"][0]
+        self.assertEqual((first["poi_id"], first["must_visit"]), (unverified["poi_id"], True))
+
+
 class TestRanking(unittest.TestCase):
     def test_a_known_place_ranks_above_an_unknown_one_of_the_same_rating(self):
         known = poi("a", "attraction", rating=4.5, reviews=30_000)
