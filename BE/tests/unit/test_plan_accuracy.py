@@ -527,6 +527,16 @@ class TestRetrievalTiers(unittest.TestCase):
         self.assertIn("clinic", self.ids(must_visit=["clinic"]))
 
 
+class TestFallbackRule(unittest.TestCase):
+    def test_the_meal_rule_reads_the_category_not_the_label(self):
+        # The data says "Quán mì", never "restaurant": the rule must still fire.
+        from BE.app.services.scorer import _rule
+        market = {"cat": "market", "type": "Chợ", "intensity": 2}
+        noodles = {"cat": "restaurant", "type": "Quán mì", "intensity": 2}
+        self.assertEqual(_rule(market, noodles), 0.3)
+        self.assertEqual(_rule(noodles, market), -0.3)
+
+
 class TestUnverifiedNamedPlace(unittest.TestCase):
     def test_it_is_reported_and_the_rest_of_the_day_is_planned(self):
         from unittest import mock

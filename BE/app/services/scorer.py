@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import os
 
-from BE.app.services.soft_rules import edge_penalty
+from BE.app.services.soft_rules import edge_penalty, poi_category
 
 MODEL_PATH = os.path.join("BE", "ml", "patm", "model.txt")
 
@@ -112,9 +112,10 @@ def _rule(a: dict, b: dict) -> float:
         m += 0.5
     elif ib > ia:
         m -= 0.5
-    if a.get("type") != "restaurant" and b.get("type") == "restaurant":
+    food_a, food_b = poi_category(a) == "restaurant", poi_category(b) == "restaurant"
+    if food_b and not food_a:
         m += 0.3
-    elif b.get("type") != "restaurant" and a.get("type") == "restaurant":
+    elif food_a and not food_b:
         m -= 0.3
     if a.get("weather_sensitive") and not b.get("weather_sensitive"):
         m -= 0.2
