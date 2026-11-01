@@ -4,13 +4,16 @@ import 'app_state.dart';
 import 'features/management/data/demo_management_repository.dart';
 import 'features/management/data/management_repository.dart';
 import 'features/profile/presentation/profile_screen.dart';
+import 'features/auth/application/auth_controller.dart';
+import 'features/auth/presentation/auth_gate.dart';
 import 'features/shell/presentation/main_shell.dart';
 import 'shared/widgets/async_state_view.dart';
 import 'theme/app_theme.dart';
 
 class DavelTraceApp extends StatefulWidget {
-  const DavelTraceApp({super.key, this.repository});
+  const DavelTraceApp({super.key, this.repository, this.authController});
   final ManagementRepository? repository;
+  final AuthController? authController;
 
   @override
   State<DavelTraceApp> createState() => _DavelTraceAppState();
@@ -18,17 +21,23 @@ class DavelTraceApp extends StatefulWidget {
 
 class _DavelTraceAppState extends State<DavelTraceApp> {
   late final AppState _state;
+  AuthController? _auth;
 
   @override
   void initState() {
     super.initState();
     _state = AppState(widget.repository ?? DemoManagementRepository());
     _state.initialize();
+    if (widget.repository == null || widget.authController != null) {
+      _auth = widget.authController ?? AuthController();
+      _auth!.initialize();
+    }
   }
 
   @override
   void dispose() {
     _state.dispose();
+    _auth?.dispose();
     super.dispose();
   }
 
@@ -39,7 +48,12 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
       title: 'Davel Trace',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: _Root(state: _state),
+      home: _auth == null
+          ? _Root(state: _state)
+          : AuthGate(
+              controller: _auth!,
+              child: _Root(state: _state),
+            ),
     ),
   );
 }

@@ -13,6 +13,8 @@ class ApiClient {
 
   final http.Client _client;
   final String _baseUrl;
+  String? accessToken;
+  Future<String?> Function()? onUnauthorized;
 
   String? _header(Map<String, String> headers, String name) {
     final wanted = name.toLowerCase();
@@ -42,6 +44,7 @@ class ApiClient {
     String path, {
     Map<String, String>? query,
     Object? body,
+    bool retried = false,
   }) async {
     final uri = Uri.parse('$_baseUrl$path').replace(queryParameters: query);
     final correlationId = CorrelationId.create();
@@ -51,6 +54,7 @@ class ApiClient {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-Correlation-ID': correlationId,
+        if (accessToken != null) 'Authorization': 'Bearer $accessToken',
       };
       response = switch (method) {
         'GET' => await _client.get(uri, headers: headers),
@@ -86,6 +90,17 @@ class ApiClient {
       payload = jsonDecode(utf8.decode(response.bodyBytes));
     } catch (_) {
       payload = null;
+    }
+    if (response.statusCode == 401 &&
+        !retried &&
+        method == 'GET' &&
+        onUnauthorized != null &&
+        path != '/v1/auth/refresh') {
+      final replacement = await onUnauthorized!();
+      if (replacement != null) {
+        accessToken = replacement;
+        return _send(method, path, query: query, body: body, retried: true);
+      }
     }
     if (response.statusCode < 200 || response.statusCode >= 300) {
       final map = payload is Map<String, dynamic> ? payload : null;

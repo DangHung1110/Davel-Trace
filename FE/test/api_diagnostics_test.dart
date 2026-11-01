@@ -67,4 +67,28 @@ void main() {
       ),
     );
   });
+
+  test('refreshes once and retries an idempotent protected request', () async {
+    var calls = 0;
+    String? retriedAuthorization;
+    final client = MockClient((request) async {
+      calls += 1;
+      if (calls == 1) {
+        return http.Response('{"error":"AUTHENTICATION_REQUIRED"}', 401);
+      }
+      retriedAuthorization = request.headers['Authorization'];
+      return http.Response(
+        '{"ok":true}',
+        200,
+        headers: {'Content-Type': 'application/json'},
+      );
+    });
+    final api = ApiClient(client: client, baseUrl: 'http://example.test')
+      ..accessToken = 'expired'
+      ..onUnauthorized = () async => 'renewed';
+
+    expect(await api.get('/v1/account/me'), {'ok': true});
+    expect(calls, 2);
+    expect(retriedAuthorization, 'Bearer renewed');
+  });
 }
