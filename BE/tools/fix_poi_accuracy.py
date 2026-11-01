@@ -502,7 +502,7 @@ def main(argv=None) -> int:
     have = {p["poi_id"] for p in pois}
     created = [new_poi(spec, pois) for spec in NEW_POIS if spec["poi_id"] not in have]
     pois.extend(created)
-    data["count"] = int(data.get("count") or 0) + len(created)
+    data["count"] = len(pois)
 
     weeks = load_weeks(args.lookups) if args.lookups else {}
     changed = {"cat": 0, "visit_min": 0, "tier": 0, "hours_by_day": 0, "ticket": 0}
