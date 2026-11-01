@@ -1,10 +1,10 @@
 # Feature Specification: Product Platform Foundation
 
-**Feature Branch**: `feat/product-platform`
+**Feature Branch**: `task/005-platform-foundation` (PR target: `feat/product-platform`)
 
 **Created**: 2026-10-29
 
-**Status**: Draft
+**Status**: Approved for student-project implementation
 
 **Input**: User description: "Refactor the existing backend and frontend into a clean professional structure, establish durable production data and incremental delivery, and preserve all working planner, map and mobile demo behavior."
 
@@ -39,7 +39,7 @@ A developer can initialize, upgrade, seed, back up and restore the shared produc
 
 1. **Given** an empty authoritative store, **When** initialization runs, **Then** the expected schema version exists and the operation is repeatable.
 2. **Given** records were committed successfully, **When** backend and data services restart, **Then** the same records and relationships remain available.
-3. **Given** the immediately previous supported schema, **When** upgrade runs, **Then** data is preserved and the new version is recorded.
+3. **Given** an empty store or an earlier supported schema when one exists, **When** initialization or upgrade runs, **Then** data is preserved and the current version is recorded.
 4. **Given** an interrupted or failed schema change, **When** the service recovers, **Then** it does not report a partially upgraded state as healthy.
 5. **Given** a verified backup, **When** it is restored into an empty environment, **Then** integrity checks and representative product reads succeed.
 
@@ -146,7 +146,7 @@ A developer or operator can correlate a failing mobile action with backend and d
 
 - **FR-008**: Production records MUST use one shared authoritative store and MUST NOT rely on process memory or device-local demo state as the source of truth.
 - **FR-009**: The authoritative schema MUST have an explicit version and repeatable initialization path.
-- **FR-010**: Every schema change MUST have a forward upgrade path from the immediately previous supported version.
+- **FR-010**: The initial schema MUST be repeatably creatable from an empty store; every later schema change MUST have a forward upgrade path from the immediately previous supported version.
 - **FR-011**: Failed schema changes MUST not be reported as successfully applied.
 - **FR-012**: Authoritative writes MUST be atomic at product-defined consistency boundaries.
 - **FR-013**: Stable identifiers and required relationships MUST remain valid across restart, upgrade, backup and restore.
@@ -172,7 +172,7 @@ A developer or operator can correlate a failing mobile action with backend and d
 
 - **FR-028**: Existing planner, feasibility gate, selection, review, repair, replan, map, search, route and playback flows MUST have regression evidence before structural code is moved.
 - **FR-029**: A refactor step MUST be small enough to review and revert without discarding unrelated feature work.
-- **FR-030**: Existing accepted-plan and catalog data versions MUST remain readable through the documented compatibility period.
+- **FR-030**: Existing accepted-plan and catalog data versions MUST remain readable until all known callers have migrated and the documented adapter-removal regression checks pass, at minimum through the itinerary-lifecycle increment.
 - **FR-031**: Generated artifacts and runtime data MUST be ignored without ignoring intentionally tracked PMTiles or platform source.
 - **FR-032**: A refactor MUST preserve explicit seeded, live, stale, offline and failed product states.
 - **FR-033**: Removing a legacy entry point MUST wait until all known callers and tests use the replacement.
@@ -215,19 +215,19 @@ A developer or operator can correlate a failing mobile action with backend and d
 
 - **SC-001**: A new contributor completes documented local setup and reaches a healthy backend plus mobile demo within 20 minutes, excluding dependency download time.
 - **SC-002**: Required configuration mistakes are identified correctly in 100% of configuration fixtures without exposing their values.
-- **SC-003**: Representative authoritative records survive 100 consecutive backend restart tests without loss or duplication.
-- **SC-004**: An empty environment and the immediately previous supported schema both reach the current schema successfully in automated tests.
+- **SC-003**: Representative authoritative records survive three consecutive process restart checks without loss or duplication.
+- **SC-004**: An empty environment reaches the current schema repeatably; after the first later schema revision is introduced, the immediately previous supported schema also reaches current successfully.
 - **SC-005**: Failed upgrade tests leave 0 partially healthy schema states.
 - **SC-006**: Backup/restore tests reproduce all representative identifiers, relationships and record counts exactly.
 - **SC-007**: Existing backend regression, Flutter widget, root map and manual mobile smoke suites pass after every completed refactor slice.
 - **SC-008**: No prohibited capability dependency cycle exists in automated architecture checks.
-- **SC-009**: At least 90% of sampled business-rule changes touch one owning capability plus approved shared contracts only.
+- **SC-009**: Profile, trip, expense, planning and map behavior each have one documented owner, and automated checks report no forbidden dependency cycle among implemented modules.
 - **SC-010**: Demo and production writes are correctly distinguished in 100% of mode-isolation tests.
 - **SC-011**: A failed production authoritative write is never reported as local persisted success.
 - **SC-012**: All defined client/backend error scenarios carry a correlation identifier and stable error category.
 - **SC-013**: No committed file, health output or captured ordinary log contains a live credential or private connection value.
 - **SC-014**: PMTiles range, search A/B, route fallback and vehicle play/pause remain demonstrable after the foundation increment.
-- **SC-015**: A contributor unfamiliar with the refactor locates the owner of profile, trip, expense, planning and map behavior correctly in at least 9 of 10 test prompts.
+- **SC-015**: The ownership guide identifies the source and test location for profile, trip, expense, planning and map behavior without requiring inspection of unrelated modules.
 
 ## Assumptions
 
@@ -239,6 +239,7 @@ A developer or operator can correlate a failing mobile action with backend and d
 - The foundation is delivered by incremental moves, not a repository-wide rename or rewrite in one commit.
 - Optional route, weather, email and AI providers may be unavailable locally without making the core backend unhealthy.
 - Existing public contracts remain compatible during this increment unless a separately reviewed versioned change is required.
+- This is a student project: deterministic functional, migration, security and regression checks are required, while load/stress testing and formal human-subject usability studies are outside this increment.
 
 ## Dependencies
 

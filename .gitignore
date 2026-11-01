@@ -12,6 +12,12 @@ venv/
 BE/.pytest_*/
 BE/data/*.db
 BE/data/*.db-*
+BE/data/exports/
+backups/
+*.dump
+*.backup
+*.backup.json
+*.restore.json
 
 # Frontend (future BE/FE split)
 node_modules/
@@ -28,6 +34,10 @@ FE/.packages
 *.log
 .DS_Store
 Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
 
 # Scratch spec-writing notes (never commit, delete after specs done)
 DavelAgentIdea.txt

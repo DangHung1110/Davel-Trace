@@ -1,0 +1,32 @@
+name: davel-trace-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    pull_policy: missing
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-davel_trace}
+      POSTGRES_USER: ${POSTGRES_USER:-davel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in BE/.env}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - davel_postgres_data:/var/lib/postgresql/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    stop_grace_period: 20s
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "${POSTGRES_USER:-davel}" -d "${POSTGRES_DB:-davel_trace}"
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+
+volumes:
+  davel_postgres_data:

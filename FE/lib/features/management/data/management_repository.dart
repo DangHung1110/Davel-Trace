@@ -1,4 +1,4 @@
-import '../../../api/api_client.dart';
+import '../../../core/networking/api_client.dart';
 import '../domain/models.dart';
 
 abstract interface class ManagementRepository {

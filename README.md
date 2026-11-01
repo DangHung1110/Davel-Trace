@@ -3,9 +3,8 @@
 Repository hiện có ba bề mặt demo dùng chung dữ liệu Đà Nẵng:
 
 - Prototype bản đồ tĩnh ở thư mục gốc (`index.html` + `server.py`).
-- FastAPI planner/evidence trong `BE/`: phương án khả thi, năm nhóm hard gate,
-  accepted-plan log SQLite, shadow calibration và readiness cho các giai đoạn
-  học sau này.
+- FastAPI planner/platform trong `BE/`: phương án khả thi, hard gate,
+  PostgreSQL code-first, shadow calibration và readiness theo component.
 - Flutter mobile trong `FE/`: khung điện thoại 390×844 chạy ngay trên laptop,
   PMTiles local, lịch trình, chi tiêu, hồ sơ và planner live/offline trung thực.
 
@@ -39,6 +38,8 @@ Sau đó mở `http://localhost:5500`. Bản đồ tự tải từ file local, k
 Mở terminal PowerShell thứ nhất:
 
 ```powershell
+docker compose --env-file BE/.env up -d postgres
+.\.venv\Scripts\python.exe -m alembic -c BE\alembic.ini upgrade head
 .\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -52,10 +53,12 @@ Mở terminal PowerShell thứ hai:
 App tự căn giữa trong khung điện thoại khi chạy trên màn hình laptop. Nếu BE
 chưa chạy, app vẫn mở dữ liệu demo và ghi rõ rằng lựa chọn chưa được lưu lên
 server. Hướng dẫn/test đầy đủ: `specs/003-stable-planning-roadmap/quickstart.md`.
+Hướng dẫn platform/PostgreSQL đầy đủ:
+`specs/005-platform-foundation/quickstart.md`.
 
-Accepted plan được tạo code-first tại `BE/data/accepted_plans.db`. Trong
-DBeaver chọn driver SQLite và mở trực tiếp file này; không có username,
-password, host hay port.
+PostgreSQL local dùng host `127.0.0.1`, port `5432`, database `davel_trace`,
+username `davel`; password lấy từ `BE/.env`. Compose dùng một volume chung,
+image Alpine có sẵn và log rotation để không nhân dung lượng theo worktree.
 
 Ô **Service API key** chỉ dùng cho Search/Place/Route của VietMap và có thể để trống. Khi để trống, tìm kiếm dùng Photon/OpenStreetMap và chỉ đường dùng OSRM.
 

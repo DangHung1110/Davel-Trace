@@ -7,3 +7,7 @@ numpy  # scorer.py uses it directly (transitive via lightgbm today — pin direc
 pydantic
 pytest
 httpx
+sqlalchemy>=2.0,<2.2
+alembic>=1.13,<2
+psycopg[binary]>=3.2,<4
+pydantic-settings>=2.6,<3
