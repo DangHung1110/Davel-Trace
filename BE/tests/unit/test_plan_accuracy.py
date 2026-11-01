@@ -507,6 +507,19 @@ class TestRetrievalTiers(unittest.TestCase):
         self.assertEqual(self.ids(activities=["chùa"]), ["local", "main"])
         self.assertEqual(self.ids(activities=["cáp treo"]), ["main", "wish"])
 
+    def test_local_stays_out_while_the_main_tier_has_enough(self):
+        pois = [poi(f"main{i}", "temple", name=f"Chùa M{i}", plan_tier="main") for i in range(3)]
+        pois.append(poi("lane", "temple", name="Chùa Xóm", plan_tier="local"))
+        got = retrieve({**self.TRIP, "activities": ["chùa"]}, pois)
+        self.assertNotIn("lane", [c["poi_id"] for c in got["candidates"]])
+
+    def test_a_main_place_shut_or_too_dear_does_not_count_as_enough(self):
+        pois = [poi(f"main{i}", "temple", name=f"Chùa M{i}", plan_tier="main") for i in range(2)]
+        pois.append(poi("shut", "temple", name="Chùa Đóng", plan_tier="main", hours=("04:00-05:00",)))
+        pois.append(poi("lane", "temple", name="Chùa Xóm", plan_tier="local"))
+        got = retrieve({**self.TRIP, "activities": ["chùa"]}, pois)
+        self.assertIn("lane", [c["poi_id"] for c in got["candidates"]])
+
     def test_excluded_never_comes_up_by_itself(self):
         self.assertNotIn("clinic", self.ids(activities=["spa"]))
 

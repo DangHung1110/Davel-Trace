@@ -44,6 +44,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from functools import lru_cache
 
 from BE.app.services import to_min
 from BE.app.services.profile_filter import fold
@@ -136,6 +137,9 @@ _SUNSET, _SUNRISE = (16 * 60, 18 * 60), (5 * 60, 7 * 60)
 ACTIVITY_START = {"ngắm hoàng hôn": _SUNSET, "hoàng hôn": _SUNSET,
                   "ngắm bình minh": _SUNRISE, "bình minh": _SUNRISE}
 _WISH_TIERS = {"local", "wish_only"}
+# A wish opens the local tier only where fewer main POIs than this can serve it: with
+# a dozen known pagodas, asking for "chùa" does not mean the one down the lane.
+WISH_ENOUGH_MAIN = 3
 
 
 def load_pois_json(path: str) -> list[dict]:
@@ -206,7 +210,8 @@ def wanted_types(activities: list[str]) -> set[str]:
     return out
 
 
-def _wish_rule(text: str) -> tuple[set[str], tuple[str, ...]]:
+@lru_cache(maxsize=256)
+def _wish_rule(text: str) -> tuple[frozenset[str], tuple[str, ...]]:
     """One activity -> (categories, folded words narrowing them; () = any POI)."""
     rest = " ".join(unicodedata.normalize("NFC", text).lower().split())
     cats: set[str] = set()
@@ -217,7 +222,7 @@ def _wish_rule(text: str) -> tuple[set[str], tuple[str, ...]]:
             cats.update(ACTIVITY_TYPE_MAP[ph])
             cats.update(ACTIVITY_EXTRA_CATS.get(ph, []))
             words.extend(ACTIVITY_WORDS.get(ph, ()))
-    return cats or match_activity(text), tuple(words)
+    return frozenset(cats or match_activity(text)), tuple(words)
 
 
 def _wish_start(text: str) -> list[int] | None:
@@ -291,6 +296,14 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
     activities = trip.get("activities", []) or []
     types = wanted_types(activities)
     candidates, needs_verification, excluded = [], [], []
+
+    def within_trip(p: dict) -> bool:
+        return (effective_fee(p) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
+
+    usable_main = [p for p in pois if p.get("verified") and p.get("plan_tier") == "main"
+                   and p.get("poi_id") not in avoid and within_trip(p)]
+    short_of_main = [a for a in activities
+                     if sum(poi_fits_wish(p, a) for p in usable_main) < WISH_ENOUGH_MAIN]
     for p in pois:
         pid = p.get("poi_id")
         if pid in avoid:
@@ -319,7 +332,8 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if tier == "excluded":
             excluded.append({"poi_id": pid, "reason": p.get("plan_tier_reason") or "khong xep vao lich"})
             continue
-        if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in activities):
+        opened_by = short_of_main if tier == "local" else activities
+        if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in opened_by):
             excluded.append({"poi_id": pid, "reason": "chi xep khi duoc yeu cau"})
             continue
         if (effective_fee(p) or 0) * party > budget:
