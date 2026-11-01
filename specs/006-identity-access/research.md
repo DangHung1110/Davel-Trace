@@ -34,9 +34,9 @@
 
 ## Abuse limiting
 
-**Decision**: Store bounded fixed-window counters in PostgreSQL keyed by a one-way digest of purpose plus normalized identity and client address. Apply limits to registration resend, login, verification, recovery, and refresh.
+**Decision**: For this student increment, use bounded in-process fixed-window counters keyed by a one-way digest of purpose plus normalized identity. Keep the limiter behind the identity service so a later deployed environment can replace it with shared PostgreSQL/Redis enforcement without changing API contracts.
 
-**Rationale**: This works across restarts and multiple backend processes without Redis. The scale is small and cleanup can piggyback on the purge maintenance command.
+**Rationale**: This provides basic abuse protection for the single-process laptop demo without a new service or durable security state. Strong multi-worker abuse controls are intentionally deferred from the learning-project gate.
 
 **Alternatives considered**: Process memory loses state on restart and differs between workers; Redis is unnecessary infrastructure for this student MVP; client-only throttling is bypassable.
 

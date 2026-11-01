@@ -12,7 +12,7 @@ Add a durable identity capability to the existing modular FastAPI/PostgreSQL bac
 
 **Language/Version**: Python 3.11 backend; Dart 3.13 / Flutter 3.47 client
 
-**Primary Dependencies**: FastAPI, Pydantic 2, SQLAlchemy 2, Alembic, psycopg 3; `pwdlib[argon2]` for password hashing; Flutter `http`, `shared_preferences`, and `flutter_secure_storage`
+**Primary Dependencies**: FastAPI, Pydantic 2, SQLAlchemy 2, Alembic, psycopg 3; `pwdlib[argon2]` for password hashing; Flutter `http`, `shared_preferences`, and `flutter_secure_storage` 11.x (compatible with the existing geolocator dependency)
 
 **Storage**: PostgreSQL 16 is authoritative; tokens are stored only as SHA-256 hashes; device credentials use platform secure storage; demo delivery secrets exist only in process memory
 
@@ -103,6 +103,7 @@ BE/
 │       ├── __init__.py
 │       ├── api.py
 │       ├── application.py
+│       ├── service.py
 │       ├── domain.py
 │       ├── infrastructure.py
 │       ├── security.py

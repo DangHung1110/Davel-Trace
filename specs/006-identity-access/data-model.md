@@ -57,10 +57,6 @@ Shared table for `verify_email`, `recover_password`, and `cancel_deletion` actio
 
 Account reference, encoded password hash, and replacement time. The current hash is compared before reset; retention is bounded to the current and most recent prior entry for MVP.
 
-## SecurityRateLimit
-
-Composite key `(purpose, subject_digest, window_started_at)` with attempt count and expiry. Subject digest contains no raw email or client address. Expired windows are removable by maintenance.
-
 ## AccountLifecycleEvent
 
 Append-only row containing event UUID, account reference or anonymized subject reference, event type, actor reference when applicable, UTC time, correlation identifier, and safe metadata. It never stores email, credentials, action values, or provider bodies.
