@@ -16,8 +16,8 @@
 
 | Order | Spec | Deliverable | Independent demo | Status |
 |---:|---|---|---|---|
-| 1 | `005-platform-foundation` | Durable shared data foundation, migrations, configuration, observability, professional BE/FE module boundaries, compatibility safety | Start the complete local stack, apply schema changes, seed demo data, restart, and verify existing planner/mobile flows still work | Spec ready |
-| 2 | `006-identity-access` | Registration, verification, login, recovery, roles, sessions, account lifecycle | Register and sign in on two sessions; revoke and recover securely | Pending specification |
+| 1 | `005-platform-foundation` | Durable shared data foundation, migrations, configuration, observability, professional BE/FE module boundaries, compatibility safety | Start the complete local stack, apply schema changes, seed demo data, restart, and verify existing planner/mobile flows still work | Complete — PR #11 merged |
+| 2 | `006-identity-access` | Registration, verification, login, recovery, roles, sessions, account lifecycle | Register and sign in on two sessions; revoke and recover securely | In progress |
 | 3 | `007-profile-trip-management` | Persistent profile, preferences, trip/day/activity CRUD, archive/restore | Create a multi-day trip, reopen after restart, edit activities, archive and restore | Pending specification |
 | 4 | `008-expense-budget` | Persistent budgets, expenses, summaries, alerts, audit and export | Add/edit/delete expenses across days; totals survive restart and match export | Pending specification |
 | 5 | `009-poi-map-routing` | Versioned POIs, search/details, PMTiles, real/fallback route and geolocation states | Search and add a POI, render local map, preview route, play/pause | Pending specification |
