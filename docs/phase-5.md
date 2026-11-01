@@ -129,5 +129,5 @@ Khi không đủ tiền cho cả hai ngày, lịch trả về `passed: false` v�
 - Điểm đã đi được tính vào ngân sách khi replan.
 - Danh sách 80 ứng viên giữ cả các điểm vượt phần tiền của ngày, làm mất chỗ của quán rẻ, nên lịch ngân sách thấp không xếp được bữa trưa.
 
-**Giới hạn:** dự báo thời tiết chưa theo ngày, nên ngày 2 dùng cùng dự báo với ngày 1. Giờ mở cửa cũng chưa theo thứ trong tuần. Repair chưa hỗ trợ
+**Giới hạn:** dự báo thời tiết chưa theo ngày, nên ngày 2 dùng cùng dự báo với ngày 1. Giờ mở cửa theo thứ đã có từ `docs/plan-accuracy.md`. Repair chưa hỗ trợ
 nhiều ngày.

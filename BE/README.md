@@ -11,6 +11,10 @@ python -m pip install -r BE/requirements.txt
 
 Gồm: fastapi, uvicorn, ortools, lightgbm, pydantic, pytest, httpx.
 
+Trên macOS, lightgbm cần libomp (`brew install libomp`). Thiếu nó thì mô hình PATM
+không nạp được và lập lịch tự dùng luật dự phòng, không báo lỗi, lịch sẽ khác
+(`scorer.describe()` cho biết đang dùng gì).
+
 ## 2. Env (không commit secret)
 
 ```powershell
