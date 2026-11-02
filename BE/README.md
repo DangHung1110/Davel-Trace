@@ -52,14 +52,13 @@ curl.exe -X POST http://localhost:8000/v1/expenses `
 
 Lưu ý: `POST /v1/parse` cần LLM (Ollama local hoặc API key);
 không LLM thì endpoint trả lỗi transport rõ ràng, không crash.
-`POST /v1/itinerary` cần snapshot `data/snapshots/danang-v1/`
-(lane A, đủ lanes merge mới có).
+`POST /v1/itinerary` đọc snapshot ở `SNAPSHOT_DIR`: mặc định là bộ 7 POI mẫu
+`data/snapshots/danang-v1/`, dữ liệu thật ở `BE/data/snapshots/danang-v1`.
 
 ## 4. Test
 
 ```powershell
 python -m pytest BE/tests -q
-# 74 passed (lane C; đủ 3 lanes merge thì nhiều hơn)
 ```
 
 Unit chạy trực tiếp cũng được: `python BE/tests/unit/test_x.py`.

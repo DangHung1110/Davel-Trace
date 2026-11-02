@@ -1,5 +1,9 @@
 # Mẫu dữ liệu verify: 1 POI đã verify và các POI chưa hoàn chỉnh
 
+> Ghi chú 02/11/2026: các script chạy một lần, form duyệt và file `verdicts/` nhắc tới dưới đây đã gỡ khỏi
+> nhánh; verdict vẫn ở `review_log.jsonl`, kết quả ở `pois.json`, trang `FE/verify_*.html` sinh lại theo `FE/README.md`.
+> Bản gốc: `git show de7e0be:<đường dẫn>`.
+
 Ngày: 29/10/2026. Nhánh: `task/stable-p4-verify-data`. Dữ liệu: `BE/data/snapshots/danang-v1/pois.json`
 (410 POI `verified=true`: 362 `auto-verify-v1`, 48 `spotcheck-v1`). Đọc kèm `docs/verify-proposal.md`.
 

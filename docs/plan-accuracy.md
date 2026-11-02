@@ -79,7 +79,7 @@ Các khung này do Claude đặt theo thói quen du lịch, chưa có dữ liệ
 
 ### 5. Làm sạch loại điểm
 
-`BE/tools/fix_poi_accuracy.py`, chạy lại nhiều lần vẫn ra cùng kết quả, đổi 71 nhãn loại:
+`BE/tools/fix_poi_accuracy.py` (đã gỡ sau khi chạy xong, xem `git show de7e0be:BE/tools/fix_poi_accuracy.py`), đổi 71 nhãn loại:
 
 - Tách `temple` (chùa, nhà thờ, đền, đình: 58 điểm) khỏi `landmark`, tách `shop` (cửa hàng quà: 11 điểm) khỏi `market`. Một ngày nay có thể có cả cầu và chùa.
 - `plan_tier` trên 549 điểm đã xác minh: `main` 386 (lịch mặc định), `local` 110 (chỉ khi một mong muốn có dưới 3 điểm `main` dùng được), `wish_only` 41 (đi cả ngày, lớp học, cửa hàng quà: chỉ khi khách hỏi), `excluded` 12 (phòng khám, các hang nằm trong Ngũ Hành Sơn, nơi phải liên hệ trước).
@@ -170,13 +170,7 @@ Chỉ 51/204 lịch có cùng tập điểm, trung bình hai bên trùng 61%. M�
 
 ## Dữ liệu sau bước sửa
 
-750 POI, 549 đã xác minh. Chạy lại công cụ:
-
-```bash
-python BE/tools/fix_poi_accuracy.py --lookups .claude/verify-old-wip
-```
-
-`--lookups` là thư mục tra Google đã lưu trên máy, không có trong git. Không có thư mục đó thì `hours_by_day` giữ nguyên.
+750 POI, 549 đã xác minh. Kết quả nằm trong `pois.json`. Công cụ đã gỡ khỏi nhánh, lấy lại bằng `git show de7e0be:BE/tools/fix_poi_accuracy.py`; nó cần `--lookups` là thư mục tra Google đã lưu trên máy, không có trong git.
 
 Nguồn giá vé, các nguồn không khớp nhau nên đây là mức tham khảo:
 

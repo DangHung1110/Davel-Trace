@@ -89,8 +89,7 @@ def held_to(stub, span: list[int]):
 
 def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_min: int,
                overhead: int, rest_minutes: int | None = None, late_end_min: int | None = None,
-               precedence: list | None = None, no_consecutive: bool = True,
-               fixed_first: str | None = None) -> list[dict] | None:
+               precedence: list | None = None) -> list[dict] | None:
     """The stops in their shortest legal order with new clock times, None when the
     search cannot even rebuild the solver's own day (the caller keeps that one)."""
     ids = [a["poi_id"] for a in acts]
@@ -119,13 +118,11 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
         for pid in ids:
             if pid in used or not before[pid] <= used:
                 continue
-            if not order and fixed_first and pid != fixed_first:
-                continue
             nodes += 1
             stub = stubs[pid]
             leg = 0
             if prev is not None:
-                if no_consecutive and stub.category and stub.category == stubs[prev].category:
+                if stub.category and stub.category == stubs[prev].category:
                     continue
                 if stub.restaurant and stubs[prev].restaurant:
                     continue
