@@ -43,8 +43,8 @@ modified here.
 from __future__ import annotations
 
 from BE.app.services import weather as weather_svc
-from BE.app.services.soft_rules import meal_slots, poi_category
-from BE.common import to_min
+from BE.app.services.soft_rules import meal_slots, pace_of, poi_category
+from BE.common import clamp01, hhmm, to_float, to_min
 
 # --- paper windows ---------------------------------------------------------
 # MEAL_WINDOWS / MIN_MEAL_OVERLAP / meal_slots / meal_window_present live in
@@ -104,34 +104,12 @@ DESSERT_WORDS = ("dessert", "che", "banh ngot", "kem", "sweet")
 TREK_WORDS = ("trek", "hike", "adventure", "thac", "nui", "leo")
 
 
-def _clamp(value: float, lo: float = 0.0, hi: float = 1.0) -> float:
-    return max(lo, min(hi, float(value)))
-
-
-def _float(value, default: float = 0.0) -> float:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return float(default)
-
-
-def hh(minutes: int) -> str:
-    return f"{int(minutes) // 60:02d}:{int(minutes) % 60:02d}"
-
-
 def _trip_start(trip: dict) -> int:
     return to_min((trip or {}).get("start_time") or "07:00")
 
 
 def _trip_end(trip: dict) -> int:
     return to_min((trip or {}).get("end_time") or "18:00")
-
-
-def _pace(profile: dict | None) -> int:
-    try:
-        return min(3, max(1, int((profile or {}).get("pace") or 2)))
-    except (TypeError, ValueError):
-        return 2
 
 
 # --------------------------------------------------------------------------
@@ -172,15 +150,15 @@ def _forecast_hour(forecast: dict | None, minutes: int) -> dict | None:
 def temp_at(ctx: dict | None, minutes: int) -> float:
     entry = _forecast_hour((ctx or {}).get("_forecast"), minutes)
     if entry is None:
-        return _float((ctx or {}).get("temp_c"), DEFAULT_TEMP_C)
-    return _float(entry.get("temp_c"), DEFAULT_TEMP_C)
+        return to_float((ctx or {}).get("temp_c"), DEFAULT_TEMP_C)
+    return to_float(entry.get("temp_c"), DEFAULT_TEMP_C)
 
 
 def rain_at_hour(ctx: dict | None, minutes: int) -> float:
     entry = _forecast_hour((ctx or {}).get("_forecast"), minutes)
     if entry is None:
-        return _float((ctx or {}).get("rain_prob"), 0.0)
-    return _float(entry.get("rain_prob"), 0.0)
+        return to_float((ctx or {}).get("rain_prob"), 0.0)
+    return to_float(entry.get("rain_prob"), 0.0)
 
 
 def solar_factor(minutes: int) -> float:
@@ -215,7 +193,7 @@ def _exposure(poi: dict) -> float:
     tags = (poi or {}).get("smart_tags") or {}
     value = tags.get("outdoor_exposure")
     if isinstance(value, (int, float)):
-        return _clamp(value)
+        return clamp01(value)
     if (poi or {}).get("weather_sensitive"):
         return 0.75
     return 1.0 if poi_category(poi) in OUTDOOR_CATEGORIES else 0.1
@@ -239,9 +217,9 @@ def satiety_at(minutes: int, trip: dict | None, slots: list[dict] | None = None
     if not ends:
         # No heavy meal has ended yet: the traveler left shortly after eating.
         elapsed = max(0, int(minutes) - _trip_start(trip or {}))
-        return _clamp(SATIETY_AT_START * 0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
+        return clamp01(SATIETY_AT_START * 0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
     elapsed = max(0, int(minutes) - max(ends))
-    return _clamp(0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
+    return clamp01(0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
 
 
 def fatigue_at(minutes: int, trip: dict | None, profile: dict | None,
@@ -250,12 +228,12 @@ def fatigue_at(minutes: int, trip: dict | None, profile: dict | None,
     minutes = int(minutes)
     start = _trip_start(trip or {})
     elapsed_h = max(0.0, (minutes - start) / 60.0)
-    walked = elapsed_h * WALK_MIN_PER_HOUR[_pace(profile)]
+    walked = elapsed_h * WALK_MIN_PER_HOUR[pace_of(profile)]
     if MIDDAY[0] <= minutes <= MIDDAY[1]:
-        walked *= 1.0 + HEAT_FATIGUE_BOOST * _clamp(heat)
+        walked *= 1.0 + HEAT_FATIGUE_BOOST * clamp01(heat)
     if minutes > DIP_WINDOW[0]:
         walked += DIP_FATIGUE_STEP
-    return _clamp(walked / FATIGUE_REF_MIN)
+    return clamp01(walked / FATIGUE_REF_MIN)
 
 
 def state_at(minutes: int, trip: dict | None = None,
@@ -274,7 +252,7 @@ def state_at(minutes: int, trip: dict | None = None,
     late = minutes >= HEAVY_CUTOFF
     return {
         "minute": minutes,
-        "hour": hh(minutes),
+        "hour": hhmm(minutes),
         "daypart": daypart(minutes),
         "satiety": round(satiety, 3),
         "fatigue": round(fatigue, 3),
@@ -314,9 +292,9 @@ def poi_multiplier(poi: dict, state: dict,
     trek = cat in {"nature", "beach"} and (
         int(poi.get("intensity") or 2) >= 2 or exposure >= 0.7
         or any(w in words for w in TREK_WORDS))
-    satiety = _float(state.get("satiety"))
-    fatigue = _float(state.get("fatigue"))
-    stress = _float(state.get("heat_effective",
+    satiety = to_float(state.get("satiety"))
+    fatigue = to_float(state.get("fatigue"))
+    stress = to_float(state.get("heat_effective",
                               state.get("heat_stress")))
     # A stop inside the breakfast window IS breakfast (the prior "ate before
     # leaving" must not suppress the one meal the day still needs).
@@ -415,7 +393,7 @@ def build(trip: dict | None, profile: dict | None = None,
     start, end = _trip_start(trip), _trip_end(trip)
     hours = list(range(start, end + 1, 60))
     hourly = [{
-        "at": hh(m),
+        "at": hhmm(m),
         "temp_c": round(temp_at({"_forecast": forecast}, m), 1),
         "rain_prob": round(rain_at_hour({"_forecast": forecast}, m), 3),
     } for m in hours]
@@ -502,15 +480,15 @@ def plan_report(ctx: dict | None) -> dict:
     trip = ctx.get("trip") or {}
     bands = optimizer_state(ctx, [])[0]
     return {
-        "meal_slots": [{"name": s["name"], "start": hh(s["start"]),
-                        "end": hh(s["end"]), "heavy": s["heavy"]}
+        "meal_slots": [{"name": s["name"], "start": hhmm(s["start"]),
+                        "end": hhmm(s["end"]), "heavy": s["heavy"]}
                        for s in ctx.get("meal_slots") or []],
         "temp_c": ctx.get("temp_c"),
         "rain_prob": ctx.get("rain_prob"),
         "heat_band": ctx.get("heat_band"),
         "weather_source": ctx.get("weather_source"),
         "weather_stale": bool(ctx.get("weather_stale")),
-        "bands": [{"start": hh(lo), "end": hh(hi),
+        "bands": [{"start": hhmm(lo), "end": hhmm(hi),
                    "state": state_at((lo + hi) // 2, trip,
                                      ctx.get("profile"), ctx)}
                   for lo, hi in bands],

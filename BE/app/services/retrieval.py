@@ -46,9 +46,8 @@ import re
 import unicodedata
 from functools import lru_cache
 
-from BE.app.services import to_min
 from BE.app.services.profile_filter import fold
-from BE.common import effective_fee, load_json, party_size
+from BE.common import effective_fee, load_json, party_size, to_min
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only

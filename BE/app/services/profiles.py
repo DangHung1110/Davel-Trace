@@ -41,12 +41,12 @@ from BE.app.services import (
     templates,
     trip_ctx,
 )
-from BE.app.services.common import hh, party_size, to_min
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_short, stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
-    closed_weekdays, effective_fee, poi_on_date, price_level_of, trusted_rating, weekday_of)
+    clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
+    price_level_of, to_min, trusted_rating, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -163,10 +163,6 @@ AGAINST_REASONS = frozenset({
 })
 
 
-def _clamp01(value: float) -> float:
-    return max(0.0, min(1.0, float(value)))
-
-
 def novelty_scores(pois: list[dict]) -> dict[str, float]:
     """Vargas-style novelty in [0, 1] for every POI in a candidate pool.
 
@@ -209,7 +205,7 @@ def novelty_scores(pois: list[dict]) -> dict[str, float]:
     for p in pool:
         cat = soft_rules.poi_category(p)
         rating = trusted_rating(p)
-        fit = _clamp01((rating - EXPERIENCE_FIT_FLOOR) / EXPERIENCE_FIT_SPAN)
+        fit = clamp01((rating - EXPERIENCE_FIT_FLOOR) / EXPERIENCE_FIT_SPAN)
         popularity = ((rating - lo) / (hi - lo)) if hi > lo else 0.5
         if p.get("must_go"):
             popularity = min(1.0, popularity + 0.25)
@@ -217,7 +213,7 @@ def novelty_scores(pois: list[dict]) -> dict[str, float]:
         novelty = fit * (0.55 * (1.0 - popularity)
                          + 0.30 * cat_rarity
                          + 0.15 * _tag_rarity(p))
-        out[p["poi_id"]] = round(_clamp01(novelty), 4)
+        out[p["poi_id"]] = round(clamp01(novelty), 4)
     return out
 
 
@@ -339,7 +335,7 @@ def score_plan(plan: dict) -> dict:
 
 def _to_trip(trip: dict) -> StubTrip:
     """Open tour: the seed matrix has no depot cell (optimizer T061a)."""
-    return StubTrip(to_min(trip.get("start_time", "07:00")), _deadline(trip), None)
+    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip), None)
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -354,13 +350,6 @@ def _within_budget(out: dict, stubs: list, trip: dict) -> bool:
     ceiling = _max_fee(trip)
     return ceiling is None or sum(fees.get(a["poi_id"], 0)
                                   for a in out["itinerary"]["activities"]) <= ceiling
-
-
-def _deadline(trip: dict) -> int:
-    """ETB hard within-day deadline: min(end_time, return_time)."""
-    end = to_min(trip.get("end_time", "18:00"))
-    rt = trip.get("return_time")
-    return min(end, to_min(rt)) if rt else end
 
 
 def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
@@ -430,7 +419,7 @@ def _activity_warnings(match: list[dict]) -> list[str]:
                          "cung rang buoc cung, da bo yeu cau nay")
         elif entry["status"] == "outside_trip_hours":
             lines.append(f"'{entry['activity']}' chi co y nghia trong khung "
-                         f"{hh(entry['start_between'][0])}-{hh(entry['start_between'][1])}, "
+                         f"{hhmm(entry['start_between'][0])}-{hhmm(entry['start_between'][1])}, "
                          "ngoai khung gio cua chuyen di")
         elif entry["status"] == "over_budget":
             lines.append(f"ngan sach khong du cho hoat dong '{entry['activity']}'")
@@ -640,7 +629,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # preference the ladder may relax with a warning, never a pool filter).
     act_groups, act_report = retrieval.activity_requirements(
         activities, candidates, banned, unaffordable,
-        horizon=(to_min(trip.get("start_time", "07:00")), _deadline(trip)))
+        horizon=(to_min(trip.get("start_time", "07:00")), deadline(trip)))
 
     if not candidates:
         plan = _assemble([], {"itinerary": None,
@@ -687,9 +676,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # also use that freedom when nothing else fits it (`_ladder`).
     must_ids = set(trip.get("must_visit") or [])
     stubs = stubs_from_pois(candidates, trip, _score_with_taste,
-                            deadline=_deadline(trip), any_hour_ids=must_ids)
+                            deadline=deadline(trip), any_hour_ids=must_ids)
     wish_ids = {pid for group in act_groups for pid in group.get("poi_ids") or []}
-    wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=_deadline(trip),
+    wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=deadline(trip),
                                   any_hour_ids=must_ids | wish_ids) if wish_ids else stubs)
     q = _profile_edges(prof, scorer.edge_scores(ids, pois_by_id, ctx=ctx),
                        travel)
@@ -913,8 +902,8 @@ def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) ->
     profile_data = trip.get("profile") or {}
     if not (limits.get("rest_after_lunch") and profile_data):
         return None
-    span = soft_rules.rest_span(acts, pois_by_id, profile_data, _deadline(trip))
-    return {"start": hh(span["start"]), "end": hh(span["end"])} if span else None
+    span = soft_rules.rest_span(acts, pois_by_id, profile_data, deadline(trip))
+    return {"start": hhmm(span["start"]), "end": hhmm(span["end"])} if span else None
 
 
 def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: dict,
@@ -931,7 +920,7 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
             if act["poi_id"] in group["poi_ids"] and span[0] <= to_min(act["start"]) < span[1]:
                 by_id[act["poi_id"]] = route_order.held_to(by_id[act["poi_id"]], span)
     better = route_order.best_order(
-        acts, by_id, travel, to_min(trip.get("start_time", "07:00")), _deadline(trip),
+        acts, by_id, travel, to_min(trip.get("start_time", "07:00")), deadline(trip),
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
         late_end_min=limits.get("late_end_min"), precedence=order_prefs)
@@ -1048,16 +1037,16 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
     rest, rest_ok = None, None
     rest_locked = bool(limits.get("rest_after_lunch"))
     span = (soft_rules.rest_span(acts, pois or {}, profile,
-                                 _deadline(trip or {}))
+                                 deadline(trip or {}))
             if rest_locked and profile else None)
     if span:
         rest = {
-            "start": hh(span["start"]),
-            "end": hh(span["end"]),
+            "start": hhmm(span["start"]),
+            "end": hhmm(span["end"]),
             "minutes": span["minutes"],
             "requested_minutes": span["requested_minutes"],
             "shrunk": span["shrunk"],
-            "lunch_end": hh(span["lunch_end"]),
+            "lunch_end": hhmm(span["lunch_end"]),
             "lunch_poi_id": span["lunch_poi_id"],
             "label": "nghi trua (sau bua trua, theo nhip)",
         }
@@ -1074,19 +1063,11 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
          and 11 * 60 <= to_min(a["start"]) < 13 * 60),
         None,
     ) if acts else None
-    if name is None:
-        return {"name": None, "label": "", "slots": [], "rest_block": rest,
-                "rest_locked": rest_locked, "rest_ok": rest_ok,
-                "lunch_required": bool(limits.get("lunch_required")),
-                "lunch_restaurant": lunch,
-                "cafe_cap": cafe_cap,
-                "stops": len(acts), "pace_stops": [],
-                "relaxed_step": relaxed_step}
-    template = templates.DAY_TEMPLATES[name]
+    template = templates.DAY_TEMPLATES.get(name) or {}
     return {
         "name": name,
-        "label": template["label"],
-        "slots": template["slots"],
+        "label": template.get("label", ""),
+        "slots": template.get("slots", []),
         "rest_block": rest,
         "rest_locked": rest_locked,
         "rest_ok": rest_ok,
@@ -1094,7 +1075,7 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
         "lunch_restaurant": lunch,
         "cafe_cap": cafe_cap,
         "stops": len(acts),
-        "pace_stops": list(template["pace_stops"]),
+        "pace_stops": list(template.get("pace_stops", ())),
         "relaxed_step": relaxed_step,
     }
 

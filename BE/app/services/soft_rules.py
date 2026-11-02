@@ -198,13 +198,16 @@ def category_allowed(category: str, used: dict[str, int] | None,
     return int((used or {}).get(cat, 0)) < int(cap)
 
 
-def meal_slot(start: str) -> int | None:
-    """Index of the meal slot containing `start`, or None outside slots."""
-    minutes = to_min(start)
+def meal_slot_at(minutes: int) -> int | None:
+    """Index of the meal slot containing this minute, or None outside slots."""
     for idx, (lo, hi) in enumerate(MEAL_SLOTS):
         if lo <= minutes < hi:
             return idx
     return None
+
+
+def meal_slot(start: str) -> int | None:
+    return meal_slot_at(to_min(start))
 
 
 def meal_slots(trip: dict | None) -> list[dict]:
@@ -304,12 +307,15 @@ def is_sightseeing(poi: dict | None) -> bool:
 
 
 def cafe_daypart(start: str) -> str | None:
+    return cafe_daypart_at(to_min(start))
+
+
+def cafe_daypart_at(minutes: int) -> str | None:
     """CAFE_CAP daypart of a cafe start: "morning" (<11:00) / "afternoon"
     (>13:00), else None (the 11:00-13:00 window is not a valid 2nd-cafe slot).
 
     Keyed by activity START, like the meal slots (gate A1).
     """
-    minutes = to_min(start)
     if minutes < CAFE_MORNING_END:
         return "morning"
     if minutes > CAFE_AFTERNOON_START:
@@ -317,7 +323,7 @@ def cafe_daypart(start: str) -> str | None:
     return None
 
 
-def _pace(profile: dict) -> int:
+def pace_of(profile: dict | None) -> int:
     try:
         pace = int((profile or {}).get("pace") or 2)
     except (TypeError, ValueError):
@@ -332,7 +338,7 @@ def cafe_need(profile: dict | None) -> bool:
     must not grant itself a second cafe from POI names.
     """
     profile = profile or {}
-    if _pace(profile) >= CAFE_FAST_PACE:
+    if pace_of(profile) >= CAFE_FAST_PACE:
         return True
     prefs = list(profile.get("food_prefs") or []) + list(
         profile.get("activities") or [])
@@ -400,7 +406,7 @@ def rest_minutes(profile: dict | None, lunch_end: int | None = None,
     (`deadline - lunch_end`) so the plan is not forced past its horizon,
     with REST_MIN_FLOOR as the hard floor. The shrink is reported by callers.
     """
-    pace = _pace(profile)
+    pace = pace_of(profile)
     length = REST_MIN_BY_PACE[pace]
     if lunch_end is not None and lunch_end > REST_LATE_LUNCH:
         if deadline is None:
@@ -422,7 +428,7 @@ def rest_span(activities: list[dict], pois: dict, profile: dict | None,
     if lunch is None:
         return None
     lunch_end = to_min(lunch.get("end"))
-    requested = REST_MIN_BY_PACE[_pace(profile)]
+    requested = REST_MIN_BY_PACE[pace_of(profile)]
     minutes = rest_minutes(profile, lunch_end, deadline)
     return {
         "start": lunch_end,

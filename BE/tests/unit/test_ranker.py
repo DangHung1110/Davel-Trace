@@ -303,8 +303,7 @@ class TestRouterShadowOff(unittest.TestCase):
                 "total_min": 0, "constraint_status": {}}
 
     def _post(self):
-        with mock.patch.object(self.itinerary_mod, "_get_plan_builder",
-                               return_value=self._builder):
+        with mock.patch.object(self.itinerary_mod, "build_plan", self._builder):
             return self.client.post("/v1/itinerary", json={"trip": self.TRIP})
 
     @staticmethod

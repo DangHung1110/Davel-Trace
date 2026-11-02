@@ -18,25 +18,18 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from BE.app.services.common import hh, to_min
+from BE.common import hhmm, to_min
 from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MORNING_END,
     DINNER_REQUIRED,
     LUNCH_REQUIRED,
-    MEAL_SLOTS,
+    meal_slot_at,
 )
 
 # Order search budget in visited nodes. Nine stops are searched exhaustively once
 # the windows prune them; a count, not a clock, so the same plan comes back.
 MAX_NODES = 150_000
-
-
-def _meal_slot(minutes: int) -> int | None:
-    for index, (lo, hi) in enumerate(MEAL_SLOTS):
-        if lo <= minutes < hi:
-            return index
-    return None
 
 
 def _role(stub, start: int, cafes: int) -> str | None:
@@ -147,7 +140,7 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
             if placed is None or (roles[pid] and placed[0] > _last_start(roles[pid], placed[1], stub.visit_min)):
                 continue
             start = placed[0]
-            slot = _meal_slot(start) if stub.restaurant else None
+            slot = meal_slot_at(start) if stub.restaurant else None
             if slot is not None and slot in slots:
                 continue
             finish = start + stub.visit_min
@@ -204,5 +197,5 @@ def _close_gaps(order: list, stubs: dict, roles: dict, travel: dict, overhead: i
             limit = starts[i] + stub.visit_max
             room = starts[i + 1] - legs[i] if i + 1 < len(order) else limit
             end = max(end, min(limit, room, close))
-        out.append({"poi_id": pid, "start": hh(starts[i]), "end": hh(end)})
+        out.append({"poi_id": pid, "start": hhmm(starts[i]), "end": hhmm(end)})
     return out

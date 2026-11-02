@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services import scorer  # noqa: E402
 from BE.app.services import state as store  # noqa: E402
-from BE.app.services.common import to_min  # noqa: E402
+from BE.common import to_min  # noqa: E402
 from BE.app.services.matrix import load_matrix_doc  # noqa: E402
 from BE.app.services.profiles import MAX_SOLVER_CANDIDATES, _travel_from_cells  # noqa: E402
 from BE.app.services.replan import replan  # noqa: E402

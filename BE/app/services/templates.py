@@ -46,7 +46,7 @@ from BE.app.services.soft_rules import (
     covers_dinner,
     meal_window_present,
 )
-from BE.common import to_min
+from BE.common import deadline, to_int, to_min
 
 MARKET = frozenset({"market"})
 CULTURE = frozenset({"museum", "landmark", "attraction", "temple"})
@@ -161,13 +161,6 @@ CALM_ACCESSIBILITY = frozenset({"wheelchair", "stroller", "low_walking",
                                 "no_stairs", "low walking", "no stairs"})
 
 
-def _int(value, default: int = 2) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return default
-
-
 def _has(text: str, hints: tuple[str, ...]) -> bool:
     """Whole-word hint in folded text: "_"/"-" split words and a plural
     s/es is fine ("family_with_kids", "friends"), but "bar" never fires on
@@ -198,8 +191,8 @@ def select_template(profile: dict | None) -> str:
     if _has(party, COUPLE_HINTS):
         return "couple-calm"
 
-    pace = _int(profile.get("pace"), 2)
-    fitness = _int(profile.get("fitness"), 2)
+    pace = to_int(profile.get("pace"), 2)
+    fitness = to_int(profile.get("fitness"), 2)
     accessibility = [fold(str(a)) for a in profile.get("accessibility") or []]
     if any(a in CALM_ACCESSIBILITY for a in accessibility):
         pace = min(pace, 2)
@@ -217,7 +210,7 @@ def _profile_pace(trip: dict | None) -> int | None:
     profile = (trip or {}).get("profile") or {}
     if profile.get("pace") is None:
         return None
-    return min(3, max(1, _int(profile.get("pace"), 2)))
+    return min(3, max(1, to_int(profile.get("pace"), 2)))
 
 
 def _rest_length(name: str, trip: dict | None = None) -> int:
@@ -259,9 +252,7 @@ def dinner_required(trip: dict | None = None) -> bool:
 
 
 def _day_hours(trip: dict) -> float:
-    end = min(to_min(trip.get("end_time", "18:00")),
-              to_min(trip.get("return_time") or trip.get("end_time", "18:00")))
-    return max(0.0, (end - to_min(trip.get("start_time", "07:00"))) / 60)
+    return max(0.0, (deadline(trip) - to_min(trip.get("start_time", "07:00"))) / 60)
 
 
 def _scaled_max_stops(base: int, trip: dict) -> int:
@@ -346,7 +337,7 @@ def allows(poi: dict | None, template_name: str) -> bool:
     if category and category not in template["allowed_categories"]:
         return False
     ceiling = template.get("max_intensity")
-    if ceiling is not None and _int(poi.get("intensity"), 2) > ceiling:
+    if ceiling is not None and to_int(poi.get("intensity"), 2) > ceiling:
         return False
     return True
 
@@ -356,8 +347,8 @@ def allows_wished(poi: dict | None, template_name: str, profile: dict | None) ->
     a hill climbs it) but not what the party can do: effort stays within fitness + 1."""
     poi = poi or {}
     ceiling = DAY_TEMPLATES[template_name].get("max_intensity")
-    fitness = _int((profile or {}).get("fitness"), 2)
-    return ceiling is None or _int(poi.get("intensity"), 2) <= max(ceiling, fitness + 1)
+    fitness = to_int((profile or {}).get("fitness"), 2)
+    return ceiling is None or to_int(poi.get("intensity"), 2) <= max(ceiling, fitness + 1)
 
 
 def attempts(constraints: dict) -> list[dict]:

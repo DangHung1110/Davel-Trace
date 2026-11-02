@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.common import total_fee  # noqa: E402
+from BE.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     ACTIVE_RULES,
     CHECKS,

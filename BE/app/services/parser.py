@@ -29,9 +29,7 @@ class TripSlots(BaseModel):
     date: str = ""
     start_time: str = ""
     end_time: str = ""
-    # Optional ints: qwen3 sometimes emits "" for a missing number. Normalise
-    # that to None BEFORE validation so the existing defaults apply instead of
-    # failing the whole parse three times and returning 503.
+    # Optional ints: qwen3 sometimes emits "" for a missing number.
     days: int | None = None
     travelers: int | None = None
     budget: int | None = None
@@ -48,11 +46,9 @@ class TripSlots(BaseModel):
     @field_validator("days", "travelers", "budget", mode="before")
     @classmethod
     def _blank_int(cls, value):
-        """Gateway-boundary guard: qwen3 sends "" for a missing number.
-
-        `llm.complete_json` validates the model response against this schema
-        BEFORE `parse` sees it, so the same normalisation must live here too:
-        otherwise the gateway retries 3x and returns 503 (the live bug).
+        """"" or an unparseable number -> None, so the defaults apply (budget None
+        still asks for clarification) instead of a schema error that retries the
+        LLM and ends in a 503. "3000000" -> 3000000.
         """
         if isinstance(value, str):
             value = value.strip()
@@ -65,22 +61,15 @@ class TripSlots(BaseModel):
         return value
 
 
-_INT_SLOTS = ("days", "travelers", "budget")
 _STR_SLOTS = ("city", "date", "start_time", "end_time")
 _LIST_SLOTS = ("transport", "must_visit", "avoid", "activities", "food_prefs",
                "hard_constraints", "soft_prefs", "uncertainties")
 
 
 def _normalize_slots(raw) -> dict:
-    """Pre-validate the LLM dict (qwen3 emits "" where a number is expected).
+    """Strip the strings of the LLM dict, drop empty list items.
 
-    - "" / null for days/travelers/budget -> None (TripSlots defaults then
-      apply; budget None still asks for clarification, days/travelers fall
-      back to 1/2 in `parse`).
-    - numeric strings -> int ("3000000" -> 3000000).
-    - an unparseable number -> None, i.e. the same fail-open default instead
-      of a schema error that would retry the LLM and end in a 503.
-    - strings are stripped, list items are stripped and empties dropped.
+    Numbers are `TripSlots._blank_int`'s: it also runs behind the LLM gateway.
     """
     if not isinstance(raw, dict):
         return raw
@@ -89,17 +78,6 @@ def _normalize_slots(raw) -> dict:
         value = out.get(key)
         if isinstance(value, str):
             out[key] = value.strip()
-    for key in _INT_SLOTS:
-        value = out.get(key)
-        if isinstance(value, str):
-            value = value.strip()
-        if value is None or value == "":
-            out[key] = None
-            continue
-        try:
-            out[key] = int(value)
-        except (TypeError, ValueError):
-            out[key] = None
     for key in _LIST_SLOTS:
         value = out.get(key)
         if not isinstance(value, list):

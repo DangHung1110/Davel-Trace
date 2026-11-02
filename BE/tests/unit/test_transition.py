@@ -1,8 +1,7 @@
 """Unit test for transition scorer + precedence wiring (T030, closes US3).
 
 - score form (float) + rule-path speed (<5ms mean over 200 calls).
-- env-aware source: lane-A T026+T062 extractor + v4 model -> "model";
-  a clean checkout (no BE/ml/patm) -> "rule" with the 16f stub.
+- source: the extractor + the model file -> "model", else the rule.
 - model path works (micro LightGBM trained to TEMP in-test).
 - real v4 model scores a finite q_ij when present.
 - precedence respected: hiking->beach order wins when both feasible;
@@ -23,16 +22,6 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.app.services import scorer  # noqa: E402
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
 
-
-def _lane_a_ok() -> bool:
-    try:
-        from BE.ml.patm.features import extract  # noqa: F401
-        return True
-    except Exception:  # noqa: BLE001 - clean checkout has no BE/ml/patm
-        return False
-
-
-LANE_A_OK = _lane_a_ok()
 
 H = 60
 HILL = {"poi_id": "hill", "type": "nature", "intensity": 3, "rating": 4.7,
@@ -62,9 +51,9 @@ class TestTransition(unittest.TestCase):
     def test_score_form_and_source(self):
         s = scorer.score_transition(HILL, BEACH)
         self.assertIsInstance(s, float)
-        expected = "model" if LANE_A_OK and os.path.exists(scorer.MODEL_PATH) else "rule"
+        expected = "model" if os.path.exists(scorer.MODEL_PATH) else "rule"
         self.assertEqual(scorer.describe()["backend"], expected)
-        self.assertEqual(scorer.describe()["n_features"], 21 if LANE_A_OK else 16)
+        self.assertEqual(scorer.describe()["n_features"], 21)
 
     def test_rule_path_fast(self):
         saved = (scorer._bst, scorer._backend, scorer._note)
@@ -83,7 +72,7 @@ class TestTransition(unittest.TestCase):
     def test_model_path(self):
         import lightgbm as lgb
         import numpy as np
-        width = scorer._lane_a_extract()[1]
+        width = len(scorer.FEATURE_NAMES)
         tmp = os.path.join(tempfile.mkdtemp(prefix="sc_"), "model.txt")
         X = np.array([[scorer._features(HILL, BEACH, None, None)],
                       [scorer._features(BEACH, HILL, None, None)]] * 10,
@@ -95,8 +84,7 @@ class TestTransition(unittest.TestCase):
         self.assertIsInstance(s, float)
         scorer._bst, scorer._backend, scorer._note = None, "rule", ""  # reset global
 
-    @unittest.skipUnless(os.path.exists(scorer.MODEL_PATH) and LANE_A_OK,
-                         "v4 model or lane-A extractor not present")
+    @unittest.skipUnless(os.path.exists(scorer.MODEL_PATH), "model file not present")
     def test_real_v4_model(self):
         scorer._bst, scorer._backend, scorer._note = None, "rule", ""
         try:

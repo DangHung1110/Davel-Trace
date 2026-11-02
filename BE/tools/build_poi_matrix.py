@@ -1,7 +1,7 @@
 """Build the OSRM travel-time matrix for snapshot POIs (T010b, lane B; Phase 3).
 
 Queries a local osrm-routed `/table` service and writes `matrix.json` next to
-the snapshot's `pois.json` (the location `MatrixService` loads from).
+the snapshot's `pois.json` (the location `load_cells` reads from).
 
 Phase 3 (motorbike, every POI at once):
     BE/tools/osrm/build_osrm.sh <data_dir>                   # graph + osrm-meta.json
@@ -43,7 +43,7 @@ then run the same extract/partition/customize/routed on the small file:
 Routing stays inside the bbox; all danang-v1 POIs are well inside it.
 
 B3 FAILURE POLICY: an OSRM failure / unroutable pair is OMITTED from `cells`
-(infeasible — `MatrixService.minutes` raises `MatrixMissError`), NEVER a
+(infeasible: the cell stays absent), NEVER a
 silent 0. `--seed-fallback` fills such holes with the legacy haversine 30 km/h
 seed (step 5 min) labelled per-cell `source: "haversine_seed"` + confidence
 `low`; pass it only when a consumer cannot represent infeasible holes
@@ -64,7 +64,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.services.matrix import DENSE_FORMAT, dense_document  # noqa: E402
-from BE.app.services.osrm_client import OsrmClient, OsrmTableError  # noqa: E402
+from BE.app.services.osrm_client import OsrmClient  # noqa: E402
 
 DEFAULT_URL = "http://127.0.0.1:5000"
 SEED_KMH = 30.0  # legacy seed speed (data/snapshots/danang-v1/README.md)

@@ -27,7 +27,7 @@ logic. Matrix comes from T010 (dict cells here).
 
 from __future__ import annotations
 
-from BE.app.services.common import deadline, in_range, party_size, plan_cost, to_min
+from BE.common import deadline, in_range, party_size, plan_cost, to_min
 from BE.app.services.gate import (
     CHECKS,
     SOFT_CHECKS,

@@ -58,7 +58,6 @@ import time
 from dataclasses import dataclass
 from fractions import Fraction
 
-from BE.app.services.common import hh, to_min
 from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
@@ -68,11 +67,13 @@ from BE.app.services.soft_rules import (
     MEAL_SLOTS,
     NON_FOOD_CAPPED,
     RESTAURANT_PAIR_MAX_GAP,
+    cafe_daypart_at,
     category_allowed,
     clip_to_time_fit,
+    meal_slot_at,
     poi_category,
 )
-from BE.common import effective_fee, poi_open_windows, trusted_rating
+from BE.common import effective_fee, hhmm, poi_open_windows, to_min, trusted_rating
 
 TIMEOUT_S = 5.0
 
@@ -259,12 +260,12 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
             lo, hi = blocked_window
             if start < hi and start + poi.visit_min > lo:
                 start = max(start, hi)
-        slot = _meal_slot_min(start) if poi.restaurant else None
+        slot = meal_slot_at(start) if poi.restaurant else None
         if slot is not None and slot in used_slots:
             shifted = max(start, MEAL_SLOTS[slot][1])  # after the slot ends
             if shifted + poi.visit_min <= close:
                 start = shifted
-                slot = _meal_slot_min(start)
+                slot = meal_slot_at(start)
         if slot is not None and slot in used_slots:
             continue  # A1: another restaurant already owns this meal slot
         if start + poi.visit_min <= close:
@@ -364,9 +365,9 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 return True
             if len(cafe_starts) == 1:
                 # A 2nd cafe only across dayparts (same rule as the model).
-                return (cafe_daypart_min(start) is None
-                        or cafe_daypart_min(start)
-                        == cafe_daypart_min(cafe_starts[0]))
+                return (cafe_daypart_at(start) is None
+                        or cafe_daypart_at(start)
+                        == cafe_daypart_at(cafe_starts[0]))
         return False
 
     def _order_blocks(poi_id: str) -> bool:
@@ -494,23 +495,6 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         previous_food = poi.restaurant
         clock = _clock_after(poi, start)
     return [] if must_left else hint
-
-
-def cafe_daypart_min(minutes: int) -> str | None:
-    """Daypart of a cafe start in minutes (mirrors soft_rules.cafe_daypart)."""
-    if minutes < CAFE_MORNING_END:
-        return "morning"
-    if minutes > CAFE_AFTERNOON_START:
-        return "afternoon"
-    return None
-
-
-def _meal_slot_min(minutes: int) -> int | None:
-    """Meal-slot index for a start in minutes (mirrors soft_rules.meal_slot)."""
-    for idx, (lo, hi) in enumerate(MEAL_SLOTS):
-        if lo <= minutes < hi:
-            return idx
-    return None
 
 
 def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
@@ -1083,8 +1067,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 break
             order.append(nxt)
             node_now = nxt
-        acts = [{"poi_id": ids[i - 1], "start": hh(int(solver.Value(t[i]))),
-                 "end": hh(int(solver.Value(t[i])) + dur[i])}
+        acts = [{"poi_id": ids[i - 1], "start": hhmm(int(solver.Value(t[i]))),
+                 "end": hhmm(int(solver.Value(t[i])) + dur[i])}
                 for i in order]
         return order, acts
 

@@ -15,16 +15,14 @@ from __future__ import annotations
 import json
 import os
 
+from pydantic import ValidationError
+
 from BE.app.config import Settings, get_settings
 from BE.app.services import fetch_json
 
-try:
-    from pydantic import BaseModel, ValidationError
-except ImportError:  # pragma: no cover
-    BaseModel, ValidationError = None, Exception
-
 MAX_RETRIES = 2
 TEMPERATURE = 0.1
+TIMEOUT_S = 120
 
 
 class LLMError(RuntimeError):
@@ -54,9 +52,8 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
              "options": {"temperature": TEMPERATURE}})
 
 
-def _urllib_transport(url: str, headers: dict, body: dict,
-                      timeout_s: float = 120) -> dict:
-    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=timeout_s)
+def _urllib_transport(url: str, headers: dict, body: dict) -> dict:
+    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=TIMEOUT_S)
     if "message" in data:  # Ollama shape
         return {"text": data["message"].get("content", "")}
     choices = data.get("choices", [])  # OpenAI-compatible shape
@@ -79,19 +76,12 @@ def _extract_json(text: str) -> dict:
 
 
 def complete_json(prompt: str, schema=None, transport=None,
-                  settings: Settings | None = None,
-                  timeout_s: float = 120) -> dict:
+                  settings: Settings | None = None) -> dict:
     """Prompt -> validated dict. `schema`: pydantic model (optional but
     recommended). Raises LLMError(reason=transport|bad_json|schema).
-
-    `timeout_s` is forwarded to the default HTTP transport: the request path
-    uses the 120 s default, offline batch tools (curate_pool) may pass more
-    for a small local model that needs minutes for a long JSON answer.
     """
-    settings = settings or get_settings()
-    transport = transport or (
-        lambda url, headers, body: _urllib_transport(url, headers, body, timeout_s))
-    url, headers, extra = _endpoint(settings)
+    transport = transport or _urllib_transport
+    url, headers, extra = _endpoint(settings or get_settings())
     body = {**extra, "messages": [{"role": "user", "content": prompt}]}
     last: LLMError = LLMError("transport", "no attempt made")
     for _ in range(MAX_RETRIES + 1):
@@ -105,7 +95,7 @@ def complete_json(prompt: str, schema=None, transport=None,
         except ValueError as e:
             last = LLMError("bad_json", str(e))
             continue
-        if schema is not None and BaseModel is not None and issubclass(schema, BaseModel):
+        if schema is not None:
             try:
                 return schema(**obj).model_dump()
             except ValidationError as e:

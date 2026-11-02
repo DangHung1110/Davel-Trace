@@ -130,8 +130,7 @@ class TestRouterParallelRefill(unittest.TestCase):
 
     def test_conflicts_are_resolved_by_constrained_resolves(self):
         client = TestClient(main_mod.app)
-        with mock.patch.object(itinerary_mod, "_get_plan_builder",
-                               return_value=self._builder):
+        with mock.patch.object(itinerary_mod, "build_plan", self._builder):
             r = client.post("/v1/itinerary", json={"trip": self.TRIP})
         self.assertEqual(r.status_code, 200, r.text)
         plans = r.json()["plans"]

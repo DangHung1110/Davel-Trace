@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.common import in_range, parse_hours, to_min  # noqa: E402
+from BE.common import in_range, parse_hours, to_min  # noqa: E402
 
 
 class TestCommonHours(unittest.TestCase):
