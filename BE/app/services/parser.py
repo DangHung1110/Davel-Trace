@@ -113,8 +113,7 @@ PROMPT_TEMPLATE = (
     "TUYỆT ĐỐI KHÔNG cho món ăn/sở thích vào must_visit. must_visit chỉ "
     "chứa TÊN ĐỊA ĐIỂM CỤ THỂ user nêu (ví dụ 'Cầu Rồng', 'chợ Cồn').\n"
     "Câu: {text}\n"
-    "/no_think"  # NOTE(test-local): tat thinking mode cua qwen3 (cham,
-    # treo timeout). Xoa khi dung model khac.
+    "/no_think"  # tat thinking mode cua qwen3 (cham, treo timeout)
 )
 
 

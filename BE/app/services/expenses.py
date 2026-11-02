@@ -1,8 +1,7 @@
-"""Expense store (T035, lane C). In-memory; STUB-NOTE: persistent
-SQLite/JSON store wires in at phase-PR (same function names).
+"""Expense store (T035, lane C). In-memory.
 
 kinds: food|ticket|transport|other (data-model.md). Alerts at 80%/100%
-of trip budget (default 3,000,000 when unset — matches contracts/api.md
+of trip budget (default 3,000,000 when unset, matches contracts/api.md
 example; set_budget overrides).
 """
 

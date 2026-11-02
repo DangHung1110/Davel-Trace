@@ -101,7 +101,7 @@ class TestTransition(unittest.TestCase):
 
     def test_precedence_hill_before_beach(self):
         q = scorer.edge_scores(["hill", "beach", "noodle"], BY_ID)
-        out = optimize(POIS, TRAVEL, TRIP, require_all=False,
+        out = optimize(POIS, TRAVEL, TRIP,
                        edge_scores={**q, ("hill", "beach"): 5.0},
                        precedence=[("hill", "beach")])
         order = order_of(out)

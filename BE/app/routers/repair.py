@@ -1,4 +1,4 @@
-"""POST /v1/repair (NOTE(test-local), do NOT PR as-is).
+"""POST /v1/repair (local test router, off in production).
 
 LLM-guided semantic repair with a bounded loop (max 2 rounds):
 

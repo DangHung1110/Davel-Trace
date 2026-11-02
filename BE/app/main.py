@@ -1,5 +1,4 @@
-"""FastAPI entry (T001 + T020, lane C). Health + routers. Error envelope
-+ logging centralize in T009."""
+"""FastAPI entry: CORS, routers, the error envelope, health."""
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError

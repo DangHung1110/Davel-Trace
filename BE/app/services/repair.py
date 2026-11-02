@@ -1,4 +1,4 @@
-"""LLM-guided, gate-checked plan repair (test-local; max 2 rounds).
+"""LLM-guided, gate-checked plan repair (max 2 rounds).
 
 Why: the deterministic gate can prove a plan is *feasible*, and the narrow
 LLM review can point at plans that are semantically poor (all-food day,

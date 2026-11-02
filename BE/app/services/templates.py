@@ -11,9 +11,7 @@ solver-locked rest window that STARTS at that restaurant's END time (60 min
 at pace 1, 45 at pace 2, 30 at pace 3) and shrinks to fit a late lunch, never
 below 20 min. There is no fixed 13:00 anchor any more; the model pins the
 window to the chosen lunch activity. At most one dinner restaurant is still
-enforced by gate A1. Adding an explicit `rest_after_lunch` input to the
-optimizer is the same mechanism the family template used to have
-(`blocked_window`), now tied to the lunch variable instead of a clock.
+enforced by gate A1.
 
 - A `family-slow`: 5-6 stops, a locked rest block right after lunch (no
   trek/adventure (nature excluded, intensity <= 2, no nightlife)).
@@ -137,7 +135,6 @@ NO_LIMITS = {
     "min_stops": None,
     "max_stops": None,
     "required_any": [],
-    "blocked_window": None,
     "rest_after_lunch": False,
     "late_end_min": None,
     "max_intensity": None,
@@ -294,7 +291,6 @@ def template_constraints(name: str, trip: dict | None = None) -> dict:
         "min_stops": _scaled_min_stops(template["pace_stops"][0], trip),
         "max_stops": _scaled_max_stops(template["pace_stops"][1], trip),
         "required_any": required_any,
-        "blocked_window": None,  # no fixed clock anchor: rest follows lunch
         "rest_after_lunch": needs_lunch,
         "late_end_min": late_end,
         "max_intensity": template.get("max_intensity"),

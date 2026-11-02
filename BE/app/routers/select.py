@@ -1,17 +1,11 @@
 """POST /v1/itinerary/select (T033e, lane C — closes US4). Chốt plan.
 
-In: {"itinerary_id"}. Out: {"active_id"}. Plan được chọn thành lịch
-chính, các plans khác giữ lại để so sánh (STUB-NOTE: in-memory store;
-state store runtime + version là lane B T045, wire ở phase-PR).
-Unknown id -> 404 envelope (không crash).
+In: {"itinerary_id"}. Out: {"active_id"}. Plan được chọn thành lịch chính, các plans
+khác giữ lại để so sánh (in-memory store). Unknown id -> 404 envelope.
 
-T061 wiring: the former `gate_stub` always passed; select now runs the
-canonical lane-B registry (`BE.app.services.gate.CHECKS`, 9 checks) over
-the plan's real context. Plans built by POST /v1/itinerary carry
-`_context = {trip, pois, travel}`; that context is normalised into the
-shared `(itinerary, trip, pois, matrix)` plain-dict shape `gate.py` reads.
-A plan whose context cannot be rebuilt is left selectable (legacy/stub
-plans, e.g. injectable test builders) — never fabricate a gate failure.
+Select runs the canonical gate (`gate.report`) over the plan's real context: plans built
+by POST /v1/itinerary carry `_context = {trip, pois, travel}`. A plan whose context cannot
+be rebuilt (injected test builders) stays selectable: a gate failure is never fabricated.
 """
 
 from __future__ import annotations

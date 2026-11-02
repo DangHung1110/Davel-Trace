@@ -31,6 +31,12 @@ DavelAgentAnswer.txt
 ~$*.docx
 ~$*.xlsx
 
+# Review pages built by BE/tools (see FE/README.md)
+FE/plan_review.html
+FE/verify_review.html
+FE/verify_sample.html
+FE/verify_result.html
+
 # Agent-tool-local files (opencode-only wrappers; each provider keeps its own)
 .opencode/
 

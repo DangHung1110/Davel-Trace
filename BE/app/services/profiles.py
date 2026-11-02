@@ -19,9 +19,7 @@ the three options are genuinely different days, not three reorderings.
 
 Each run -> validate (T018) -> score (total cost, travel time,
 preference = mean rating) + profile reason + T032s `scores`
-(profit/utility/gate/excluded) + a `diversity` report. Infeasible runs are
-dropped with a note (never returned). `selected: None` stays the contract
-stub (select endpoint is lane C T033e).
+(profit/utility/gate/excluded) + a `diversity` report.
 """
 
 from __future__ import annotations
@@ -42,7 +40,7 @@ from BE.app.services import (
     trip_ctx,
 )
 from BE.app.services.optimizer import (
-    POOL_DEFAULT_BAND, STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_short, stubs_from_pois)
+    STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_short, stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
@@ -502,70 +500,42 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                pois_by_id: dict, cells: dict, workers: int = 0,
                template: str | None = None, ctx: dict | None = None,
                pool_size: int = 1,
-               pool_band: float = POOL_DEFAULT_BAND,
-               pool_timeout_s: float | None = None,
                timeout_s: float | None = None,
                deterministic_time: float | None = None,
                distinct_from: list[frozenset[str]] | None = None,
                max_rung: int | None = None,
                diagnose: bool = True) -> dict:
-    """T020/T032 router seam: one profile -> one real plan dict.
+    """One profile -> one real plan dict (POST /v1/itinerary and the eval).
 
-    Called by POST /v1/itinerary. Adapts the ranked candidate POIs (T061a),
-    runs the T017 optimizer as an OPEN tour (no depot cell in the seed
-    matrix — see optimizer T061a note), validates (T018) and shapes the
-    response (T019) with per-activity explanations (T042).
+    Adapts the ranked candidate POIs, runs the optimizer as an OPEN tour, validates and
+    shapes the response with per-activity explanations. The endpoint owns
+    `itinerary_id`/`trip_id`/`profile`; this returns the body they are attached to.
 
-    Onboarding wiring (profile templates):
-    - `template` may be passed explicitly by the router (one of the three
-      names, or "" for a legacy request). When it is None, a template is
-      derived from `trip["profile"]` only if that profile is present — so the
-      eval baselines and older callers keep the exact previous behaviour.
-    - A template's hard bans (allowed categories, intensity ceiling) filter
-      the candidate list BEFORE the solver, and its pace band / required
-      categories / locked rest window / late end constrain the model. A small
-      pool relaxes stop-count/required counts (reported), never the bans.
-    - `food_prefs` add a SIGNED additive taste bonus to each optimizer node
-      score (see TASTE_WEIGHT and profile_filter.taste_score): +1 for a full
-      match, -1 for an exclusive cuisine clash, 0 for a non-food POI. It is
-      large enough to beat a ~0.4 rating gap, so taste wins a slot against a
-      higher-rated mismatch instead of only re-ordering the rank list.
-    - `ctx` (trip_ctx.build, optional) turns on the DYNAMIC STATE soft layer:
-      the transition scorer gets the satiety-aware food penalty and the
-      CP-SAT objective gets per-band state multipliers, so a beach is not
-      placed in the 14:00 dip and a restaurant is not stacked right after
-      lunch. It also attaches `user_state` evidence and per-activity state
-      to the plan. Passing no ctx keeps the exact previous planning output.
-    - Universal human needs are solver constraints for EVERY profile (and for
-      a custom profile with no archetype): exactly one lunch restaurant in
-      11:00-13:00, a rest window STARTING at that lunch's END (60/45/30 min by
-      pace, shrunk to fit a late lunch with a 20-min floor), at most one
-      dinner restaurant (gate A1), the cafe quota (gate CAFE_CAP), at most ONE
-      non-food POI per category per day (gate CATEGORY_CAP), no consecutive
-      same-category stops (NO_CONSECUTIVE) and no adjacent restaurants of any
-      cuisine (NO_ADJACENT_FOOD).
-      These never relax: an infeasible pool returns an honest empty plan plus
-      a warning naming the constraint, never a silently broken schedule.
-    - `pool_size` (>1) asks the optimizer for a solution pool inside
-      `pool_band` * OPT; every member is built into a full plan and attached
-      privately as `_pool_plans` (the router's diverse mode MMR-selects from
-      it, and the default-mode Jaccard guarantee lazily refills from it).
-      `pool_timeout_s` caps the enumeration; `solution_pool` on the public
-      plan carries the enumeration stats.
-    - `timeout_s` / `deterministic_time` are forwarded to CP-SAT. The eval
-      harness passes a deterministic budget so a published comparison is
-      reproducible; the endpoint keeps the wall-clock default.
-    - `distinct_from` (router refill): every returned day must keep POI-set
-      Jaccard <= pool.MAX_PAIRWISE_JACCARD to each of these sets, as a HARD
-      solver constraint. `max_rung` caps the ladder at the rung the replaced
-      plan used (private `_rung`), so an alternative never drops a wish or a
-      template rule the original kept. No infeasibility diagnosis runs in
-      that mode: the caller only wants a plan or nothing. `diagnose=False` skips
-      it too, for a caller that will try again.
-
-    The endpoint still owns `itinerary_id`/`trip_id`/`profile`; this returns
-    the plan body those fields are attached to. `workers` is forwarded to
-    CP-SAT (0 = default; 1 = deterministic, used by the T053 harness).
+    - `template`: one of the three names, or "" for a request with no onboarding; None
+      derives it from `trip["profile"]` when there is one. Its hard bans (allowed
+      categories, intensity ceiling) filter the candidates BEFORE the solver, its pace
+      band / required categories / late end constrain the model. A small pool relaxes
+      stop and required counts (reported), never the bans.
+    - `food_prefs` add a SIGNED taste bonus to each node score (`TASTE_WEIGHT`,
+      `profile_filter.taste_score`): enough to beat a ~0.4 rating gap, so taste wins a
+      slot instead of only re-ordering the rank list.
+    - `ctx` (`trip_ctx.build`) turns on the dynamic state layer: a satiety-aware food
+      penalty in the transition scores and per-band multipliers in the objective, with
+      `user_state` evidence on the plan. No ctx keeps the plain planning output.
+    - Universal human needs are solver constraints for EVERY profile: exactly one lunch
+      restaurant in 11:00-13:00, a rest window STARTING at its END (60/45/30 min by pace,
+      shrunk to fit a late lunch, floor 20), at most one dinner restaurant, the cafe
+      quota, one non-food POI per category a day, no consecutive same-category stops. They
+      never relax: an infeasible pool is an honest empty plan plus a warning naming the
+      constraint, never a silently broken schedule.
+    - `pool_size` > 1 asks for a solution pool; every member is built into a full plan
+      and attached privately as `_pool_plans` (the router's diverse mode picks from it).
+    - `timeout_s` / `deterministic_time` / `workers` go to CP-SAT.
+    - `distinct_from` (router refill): every returned day keeps POI-set Jaccard <=
+      `pool.MAX_PAIRWISE_JACCARD` to these sets, a HARD constraint. `max_rung` caps the
+      ladder at the rung the replaced plan used (private `_rung`), so an alternative never
+      drops a wish or a template rule the original kept. No infeasibility diagnosis runs
+      in that mode, nor with `diagnose=False`, for a caller that will try again.
     """
     prof = profile if profile in PROFILE_REASONS else "balanced"
     # Everything below sees the POIs as they are on this date: that weekday's hours,
@@ -725,7 +695,6 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                        min_stops=limits_try["min_stops"],
                        max_stops=limits_try["max_stops"],
                        required_any=limits_try["required_any"],
-                       blocked_window=limits_try["blocked_window"],
                        rest_after_lunch=(limits_try.get("rest_minutes")
                                          if limits_try.get(
                                              "rest_after_lunch") else None),
@@ -739,8 +708,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                        category_cap=category_cap,
                        diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
                        max_fee=_max_fee(trip),
-                       solution_pool=pool_size, pool_band=pool_band,
-                       pool_timeout_s=pool_timeout_s,
+                       solution_pool=pool_size,
                        **solver_opts)
         if out.get("itinerary") is not None:
             relaxed_step = step
@@ -791,7 +759,6 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 max_stops=override.pop("max_stops", base_limits["max_stops"]),
                 required_any=override.pop("required_any",
                                           base_limits["required_any"]),
-                blocked_window=base_limits["blocked_window"],
                 rest_after_lunch=override.pop(
                     "rest_after_lunch",
                     base_limits.get("rest_minutes")

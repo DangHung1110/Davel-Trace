@@ -1,7 +1,7 @@
 """Unit test for CP-SAT optimizer (T017). Fixture POIs/matrix (no lane data).
 
 Covers: feasible schedule respects windows/gaps, timeout still returns
-best-found, infeasible (require_all, contradictory windows) has reason.
+best-found, infeasible (must_visit, contradictory windows) has reason.
 
 Run from repo root: python BE/tests/unit/test_optimizer.py -v
 """
@@ -10,6 +10,7 @@ import os
 import sys
 import time
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -91,7 +92,7 @@ class TestOptimizer(unittest.TestCase):
         t = {("depot", pid): 120 for pid in ("x", "y")}
         t.update({(a, b): 120 for a in ("x", "y")
                   for b in ("x", "y") if a != b})
-        out = optimize(bad, t, StubTrip(7 * H, 12 * H), require_all=True)
+        out = optimize(bad, t, StubTrip(7 * H, 12 * H), must_visit=["x", "y"])
         self.assertEqual(out["status"], "infeasible")
         self.assertTrue(out["reason"])
         self.assertIsNone(out["itinerary"])
@@ -99,14 +100,14 @@ class TestOptimizer(unittest.TestCase):
     def test_missing_travel_pair_is_infeasible_not_zero(self):
         poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
         out = optimize([poi], {("x", "depot"): 0},
-                       StubTrip(7 * H, 12 * H), require_all=True)
+                       StubTrip(7 * H, 12 * H), must_visit=["x"])
         self.assertEqual(out["status"], "infeasible")
         self.assertIsNone(out["itinerary"])
 
     def test_origin_leg_uses_matrix(self):
         poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
         out = optimize([poi], {("depot", "x"): 45},
-                       StubTrip(7 * H, 12 * H), require_all=True)
+                       StubTrip(7 * H, 12 * H), must_visit=["x"])
         self.assertIn(out["status"], ("optimal", "feasible-timeout"))
         self.assertGreaterEqual(to_min(out["itinerary"]["activities"][0]["start"]),
                                 7 * H + 45)
@@ -253,7 +254,8 @@ class TestPacing(unittest.TestCase):
     def test_pacing_caps_stops_per_day(self):
         from BE.app.services import optimizer as opt
         pois, travel, trip = self._fixture()
-        dense = opt.optimize(pois, travel, trip, workers=1, overhead_min=0)
+        with mock.patch.object(opt, "STOP_OVERHEAD_MIN", 0):
+            dense = opt.optimize(pois, travel, trip, workers=1)
         paced = opt.optimize(pois, travel, trip, workers=1)
         n_dense = len(dense["itinerary"]["activities"])
         n_paced = len(paced["itinerary"]["activities"])

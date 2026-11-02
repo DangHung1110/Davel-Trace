@@ -4,7 +4,7 @@ In (contracts/api.md): {"itinerary_id": "...", "event": {DynamicEvent}}.
 Out: {"itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution",
 "changes": [...]}. Rule: completed activities preserved; version++.
 
-The lane-B rolling-horizon service (`BE.app.services.replan.replan`) owns
+The rolling-horizon service (`BE.app.services.replan.replan`) owns
 the logic; this shell rebuilds the trip state from the stored plan and
 exposes it. Two optional fields keep the demo usable without inventing a
 new contract: `completed` (mark done items before replanning, so the

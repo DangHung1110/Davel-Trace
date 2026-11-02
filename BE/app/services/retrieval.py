@@ -1,8 +1,5 @@
 """POI retrieval/filter (T015 + T024, lane C). Hard filter + uncertainty.
 
-Reads pois.json directly with json stdlib (STUB-NOTE: lane-A snapshot
-loader T008 wires in at phase-PR — same schema, swap one line).
-
 FR-013: unverified POIs are EXCLUDED from the main plan
 (`candidates`); they are listed separately under `needs_verification`
 ("can xac minh"), must-visit flagged (validator decides per FR-031).
@@ -23,7 +20,7 @@ needs, so "tắm biển" gave an infeasible (no lunch) or one-stop plan.
 `activity_requirements` turns them into optimizer `required_any` groups
 ("at least one beach") that the planner may relax with a warning.
 
-Activities match the canonical group `cat` (lane-A enum in pois.json; seed
+Activities match the canonical group `cat` (enum in pois.json; seed
 POIs without `cat` fall back to canonical_category(type)), never the raw
 SerpApi `type`. Activity text is NFC-normalised and matched whole-word,
 longest phrase first; a matched phrase is consumed so its sub-words cannot

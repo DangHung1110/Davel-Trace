@@ -1,10 +1,6 @@
 """Response builder (T019, lane B). Optimizer output + validator result
 -> POST /itinerary plan per contracts/api.md: itinerary + totals
 (total cost/km/minutes) + constraint status + version.
-
-STUB-NOTE (as T017/T018): plain-dict inputs matching the plan schemas;
-phase-PR swaps the real schemas in. Multi-profile pooling is T032 —
-this builds ONE plan; `version` threads through replan (T046) later.
 """
 
 from __future__ import annotations

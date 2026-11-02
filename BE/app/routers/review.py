@@ -1,4 +1,4 @@
-"""POST /v1/review (NOTE(test-local), do NOT PR as-is). LLM layer-3 review.
+"""POST /v1/review (local test router, off in production). LLM layer-3 review.
 
 The deterministic gate (A1/FAR/...) catches arithmetic and hard feasibility;
 this endpoint asks the local LLM for the *semantic* absurdities the rules

@@ -40,9 +40,8 @@ def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
                 {"Content-Type": "application/json",
                  "Authorization": f"Bearer {key}"},
                 {"model": os.environ.get("LLM_API_MODEL", "gpt-4o-mini"),
-                  # NOTE(test-local): LM Studio rejects
-                  # response_format json_object; prompt + _extract_json
-                  # already enforce/parse JSON, so omit it.
+                  # LM Studio rejects response_format json_object; the prompt
+                  # and _extract_json already enforce/parse JSON, so omit it.
                   "temperature": TEMPERATURE})
     return (settings.ollama_url.rstrip("/") + "/api/chat",  # local Ollama
             {"Content-Type": "application/json"},

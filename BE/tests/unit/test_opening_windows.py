@@ -81,7 +81,7 @@ class TestOptimizerWindows(unittest.TestCase):
         bar = poi_to_stub({"poi_id": "bar", "cat": "bar", "visit_min": {"p50": 90},
                            "opening_hours": ["19:30-03:00"]})
         out = optimize([bar], {("depot", "bar"): 10}, StubTrip(18 * H, 23 * H),
-                       require_all=True)
+                       must_visit=["bar"])
         self.assertIn(out["status"], ("optimal", "feasible-timeout"))
         self.assertGreaterEqual(m(out["itinerary"]["activities"][0]["start"]), m("19:30"))
 
@@ -89,7 +89,7 @@ class TestOptimizerWindows(unittest.TestCase):
         cafe = StubPOI("cafe", visit_min=60, open_min=15 * H, close_min=17 * H,
                        windows=((15 * H, 16 * H), (19 * H, 21 * H)))
         out = optimize([cafe], {("depot", "cafe"): 10}, StubTrip(16 * H + 30, 21 * H),
-                       require_all=True)
+                       must_visit=["cafe"])
         self.assertIn(out["status"], ("optimal", "feasible-timeout"))
         self.assertGreaterEqual(m(out["itinerary"]["activities"][0]["start"]), 19 * H)
 
@@ -97,7 +97,7 @@ class TestOptimizerWindows(unittest.TestCase):
         cafe = StubPOI("cafe", visit_min=60, open_min=10 * H, close_min=20 * H,
                        windows=((10 * H, 12 * H), (18 * H, 20 * H)))
         out = optimize([cafe], {("depot", "cafe"): 10}, StubTrip(13 * H, 17 * H),
-                       require_all=True)
+                       must_visit=["cafe"])
         self.assertEqual(out["status"], "infeasible")
 
     def test_greedy_hint_takes_the_next_window(self):
