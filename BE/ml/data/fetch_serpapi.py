@@ -106,14 +106,6 @@ def search_params(category: str, district: str) -> dict:
             "q": f"{category} {district} Đà Nẵng", "hl": "vi", "gl": "vn"}
 
 
-def details_params(place_id: str) -> dict:
-    # DOCUMENTATION ONLY — live-verified 2026-09-28 that SerpApi
-    # google_maps does NOT serve place details this way (returns
-    # "Google hasn't returned any results"). Kept so nobody retries it.
-    # run() normalizes from the (rich) search payload instead.
-    return {"engine": "google_maps", "q": place_id, "hl": "vi", "gl": "vn"}
-
-
 def raw_path(raw_dir: str, kind: str, key: str) -> str:
     safe = "".join(c if c.isalnum() else "_" for c in key)[:80]
     return os.path.join(raw_dir, kind, safe + ".json")

@@ -37,9 +37,7 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         total_km += km
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
-    # T053 fix: score_plan() reads these two fields directly. Without them
-    # every router-built plan scored profit=0.0/utility=0.3 regardless of
-    # profile, while the run_profiles path looked correct.
+    # score_plan() reads these two fields directly.
     ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
     return {

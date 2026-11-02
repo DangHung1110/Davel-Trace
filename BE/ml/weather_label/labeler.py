@@ -49,8 +49,6 @@ import unicodedata
 # Shared constants
 # ---------------------------------------------------------------------------
 
-SPACE_LABELS = ("indoor", "outdoor", "both", "unknown")
-RAIN_LABELS = ("enclosed", "sheltered", "none", "unknown")
 
 #: Heuristic tiers.  These are rule strengths, not calibrated probabilities.
 CONF_AUDIT = 1.0
@@ -68,7 +66,6 @@ CONF_CONFLICT = 0.3
 #: exposed) ANCHORS, not measurements: no calibration claim is made.
 EXPOSURE_FIELDS = ("outdoor_exposure", "sun_exposure", "wind_exposure",
                    "rain_cover")
-RAIN_COVER_LABELS = ("enclosed", "covered", "mixed", "open", "unknown")
 
 #: Canonical category -> coarse PATM prior for POIs not yet classified.
 #: Snapshot labels derive their exposure from the committed space decision.
@@ -102,13 +99,6 @@ _OSM_SPACE_EXPOSURE = {
     "both": (0.5, 0.45, 0.45, "mixed"),
     "outdoor": (0.9, 0.85, 0.85, "open"),
 }
-_OSM_RAIN_EXPOSURE = {
-    "enclosed": (0.1, 0.05, 0.05, "enclosed"),
-    "sheltered": (0.7, 0.35, 0.45, "covered"),
-    "none": (0.9, 0.85, 0.85, "open"),
-}
-_OSM_RAIN_COVER = {"enclosed": "enclosed", "sheltered": "covered",
-                   "none": "open"}
 _NEUTRAL_EXPOSURE = (0.5, 0.5, 0.5, "unknown")
 
 #: T063b-3 single-decision table.  ``space`` is decided once, then rain cover
@@ -273,7 +263,6 @@ def derive_exposure(*, audit_space: str | None = None,
 
     return exposure_for_space(chosen, cat=cat, rooftop=rooftop,
                               osm_rain=osm_rain, source=source)
-
 
 
 _RAIN_PRIORITY = {"enclosed": 3, "sheltered": 2, "none": 1, "unknown": 0}

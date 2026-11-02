@@ -22,7 +22,7 @@ from BE import common  # noqa: E402
 from BE.app.routers import evaluate as evaluate_router  # noqa: E402
 from BE.app.services import matrix as matrix_mod  # noqa: E402
 from BE.app.services.matrix import (  # noqa: E402
-    DENSE_FORMAT, DenseCells, MatrixService, dense_document, load_cells,
+    DENSE_FORMAT, DenseCells, dense_document, load_cells,
     load_matrix_doc)
 
 IDS = ["a", "b", "c"]
@@ -136,11 +136,6 @@ class TestConsumersReadDense(unittest.TestCase):
         _write(cls.dir, _dense_doc())
         with open(os.path.join(cls.dir, "pois.json"), "w", encoding="utf-8") as f:
             json.dump({"pois": [{"poi_id": pid} for pid in IDS]}, f)
-
-    def test_matrix_service(self):
-        svc = MatrixService(self.dir)
-        self.assertEqual(svc.minutes("a", "b"), (5, "osrm"))
-        self.assertEqual(svc.minutes_or_none("a", "c"), (None, "infeasible"))
 
     def test_common_and_evaluate_router(self):
         self.assertEqual(common.load_matrix_cells(self.dir)["b->c"]["minutes"], 7)

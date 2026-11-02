@@ -209,7 +209,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
     # Trip context (dynamic state): live weather for the trip hours + the
     # conditional meal rhythm + the hourly traveler state. It closes the
-    # rank rain_prob dead branch (rain_at per hour, max over the trip) and
+    # rank rain_prob dead branch (rain per hour, max over the trip) and
     # feeds the satiety/fatigue/heat/dip/evening rules. Built even without a
     # profile (weather/time are universal) but only a profile turns on the
     # state multipliers (dynamic_state), so legacy requests stay identical.

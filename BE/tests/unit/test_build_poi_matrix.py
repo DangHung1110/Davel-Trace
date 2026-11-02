@@ -2,7 +2,7 @@
 
 Asserts: top-N selection by rating, strict B3 output (holes omitted, never 0),
 labelled haversine fallback (`--seed-fallback`), coverage counts, and that the
-produced file round-trips through `MatrixService`.
+produced file round-trips through `load_cells`.
 
 Run from repo root: python BE/tests/unit/test_build_poi_matrix.py -v
 """
@@ -15,7 +15,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import MatrixMissError, MatrixService  # noqa: E402
+from BE.app.services.matrix import load_cells  # noqa: E402
 from BE.tools import build_poi_matrix as bpm  # noqa: E402
 
 POIS = [
@@ -119,12 +119,9 @@ class TestBuild(unittest.TestCase):
                         snapshot="danang-v1")
         with open(os.path.join(tmp, "matrix.json"), "w", encoding="utf-8") as f:
             json.dump(doc, f)
-        svc = MatrixService(tmp)
-        self.assertEqual(svc.minutes("a", "c"), (7, "osrm"))
-        self.assertEqual(svc.minutes("a", "a"), (0, "cache"))
-        with self.assertRaises(MatrixMissError):
-            svc.minutes("a", "b")  # hole = infeasible, loud
-        self.assertEqual(svc.minutes_or_none("a", "b"), (None, "infeasible"))
+        cells = load_cells(tmp)
+        self.assertEqual(cells["a->c"]["minutes"], 7)
+        self.assertIsNone(cells.get("a->b"))  # hole = infeasible
 
 
 class TestMain(unittest.TestCase):
@@ -203,9 +200,9 @@ class TestPhase3(unittest.TestCase):
         self.assertEqual(raw["ids"], ["a", "b", "c", "d"])
         self.assertIsNone(raw["minutes"][0][1])  # hole stays a hole (B3)
         self.assertEqual(raw["mode"], "motorbike")
-        svc = MatrixService(os.path.dirname(out))
-        self.assertEqual(svc.minutes("a", "c"), (7, "osrm"))
-        self.assertEqual(svc.minutes_or_none("a", "b"), (None, "infeasible"))
+        cells = load_cells(os.path.dirname(out))
+        self.assertEqual(cells["a->c"]["minutes"], 7)
+        self.assertIsNone(cells.get("a->b"))
 
     def test_seed_fallback_falls_back_to_legacy_format(self):
         code, out = TestMain().run_main(

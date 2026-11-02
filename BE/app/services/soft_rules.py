@@ -242,7 +242,6 @@ def covers_dinner(trip: dict | None) -> bool:
 # sun, a pagoda at 20:00 are open and still wrong. Each entry lists the windows a
 # whole visit must fit inside, on the same clock as `open_windows`.
 _EVENING = 26 * 60
-_ALL_DAY = ((5 * 60, _EVENING),)
 _MEALS = ((10 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
 _EATERY = ((6 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
 _DAYLIGHT = ((5 * 60, 18 * 60 + 15),)
@@ -302,10 +301,6 @@ def is_food(poi: dict | None) -> bool:
 def is_sightseeing(poi: dict | None) -> bool:
     """F1: culture/nature/sightseeing categories (the non-food half)."""
     return poi_category(poi) in SIGHTSEEING_CATEGORIES
-
-
-def in_nightlife_type(poi: dict | None) -> bool:
-    return poi_category(poi) in NIGHT_TYPES
 
 
 def cafe_daypart(start: str) -> str | None:
@@ -452,8 +447,6 @@ def effective_rest(span: dict | None, declared: dict | None) -> dict | None:
     return {**span, "start": start, "end": end, "minutes": end - start}
 
 
-
-
 def edge_penalty(a: dict | None, b: dict | None,
                  ctx: dict | None = None) -> float:
     """A2 + B1 pair penalty (<= 0) for the transition a -> b.
@@ -483,7 +476,6 @@ def edge_penalty(a: dict | None, b: dict | None,
         elif cb in FOOD_CATEGORIES and satiety > 0.6:
             penalty -= EDGE_FOOD_FULL_CAFE_PENALTY
     return round(penalty, 3)
-
 
 
 def plan_penalties(activities: list[dict], pois: dict,

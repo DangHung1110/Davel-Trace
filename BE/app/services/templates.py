@@ -40,7 +40,6 @@ import re
 from BE.app.services.profile_filter import fold
 from BE.app.services.soft_rules import (
     FOOD_CATEGORIES,
-    LUNCH_REQUIRED,
     REST_DEFAULT_MIN,
     REST_MIN_BY_PACE,
     SIGHTSEEING_CATEGORIES,

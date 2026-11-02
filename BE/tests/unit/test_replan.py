@@ -14,9 +14,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.app.services import scorer  # noqa: E402
 from BE.app.services import state as store  # noqa: E402
 from BE.app.services.common import to_min  # noqa: E402
-from BE.app.services.matrix import MatrixService  # noqa: E402
-from BE.app.services.optimizer import travel_from_matrix  # noqa: E402
-from BE.app.services.profiles import MAX_SOLVER_CANDIDATES  # noqa: E402
+from BE.app.services.matrix import load_matrix_doc  # noqa: E402
+from BE.app.services.profiles import MAX_SOLVER_CANDIDATES, _travel_from_cells  # noqa: E402
 from BE.app.services.replan import replan  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
@@ -333,7 +332,7 @@ class TestReplan(unittest.TestCase):
         the whole verified set (573 after the Phase 4 review) is no pool the
         app ever hands the solver, and it runs out of solver time.
         """
-        svc = MatrixService(SNAPSHOT_DIR)
+        doc = load_matrix_doc(MATRIX_JSON)
         with open(POIS_JSON, encoding="utf-8") as fh:
             raw = json.load(fh)["pois"]
         by = {p["poi_id"]: p for p in raw}
@@ -348,11 +347,11 @@ class TestReplan(unittest.TestCase):
                     "rating": p.get("rating", 0),
                     "opening_hours": p.get("opening_hours") or []}
 
-        cand = [i for i in svc.ids if i in by and by[i].get("verified")]
+        cand = [i for i in doc["ids"] if i in by and by[i].get("verified")]
         cand = cand[:MAX_SOLVER_CANDIDATES]
         self.assertGreaterEqual(len(cand), 4)
         pois = [mk(i) for i in cand]
-        travel = travel_from_matrix(svc, [DEPOT] + cand)
+        travel = _travel_from_cells(doc["cells"], [DEPOT] + cand)
         trip = {"trip_id": "real", "budget": 5000000, "avoid": [],
                 "start_time": "07:00", "end_time": "18:00"}
         state_acts = [{"poi_id": cand[0], "start": "07:30", "end": "09:30"},
@@ -381,7 +380,7 @@ class TestReplan(unittest.TestCase):
         self.assertTrue(set(a["poi_id"] for a in acts) <= set(cand))
         ordered = sorted(acts, key=lambda a: to_min(a["start"]))
         for x, y in zip(ordered, ordered[1:]):  # B3: gap >= real minutes
-            need = svc.minutes(x["poi_id"], y["poi_id"])[0]
+            need = doc["cells"][f"{x['poi_id']}->{y['poi_id']}"]["minutes"]
             self.assertGreaterEqual(to_min(y["start"]) - to_min(x["end"]), need)
         print(f"\n real: v{s['version']}->{first['version']}->{second['version']}"
               f" remaining {len(remaining)} unique, acts "

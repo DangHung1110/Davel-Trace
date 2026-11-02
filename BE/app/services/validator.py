@@ -39,7 +39,6 @@ from BE.app.services.soft_rules import (
     CATEGORY_DAILY_CAP,
     NON_FOOD_CAPPED,
     is_food,
-    is_sightseeing,
     meal_slot,
     poi_category,
     same_category_edges,

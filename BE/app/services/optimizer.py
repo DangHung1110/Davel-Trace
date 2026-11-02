@@ -63,7 +63,6 @@ from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
     CAFE_MORNING_END,
-    CATEGORY_DAILY_CAP,
     DINNER_REQUIRED,
     LUNCH_REQUIRED,
     MEAL_SLOTS,
@@ -209,13 +208,6 @@ def poi_windows(poi: dict, trip: dict | None = None,
     return [(start, end)]
 
 
-def poi_window(poi: dict, trip: dict | None = None,
-               deadline: int | None = None) -> tuple[int, int]:
-    """Envelope of `poi_windows`: first opening to last closing."""
-    wins = poi_windows(poi, trip, deadline)
-    return wins[0][0], wins[-1][1]
-
-
 def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                 deadline: int | None = None, any_hour: bool = False) -> StubPOI:
     """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
@@ -242,26 +234,6 @@ def stubs_from_pois(pois: list[dict], trip: dict | None = None,
 
     named = any_hour_ids or set()
     return [poi_to_stub(p, trip, _score(p), deadline, p["poi_id"] in named) for p in pois]
-
-
-def travel_from_matrix(matrix, ids=None):
-    """T017 wiring: build optimize()'s travel dict from the cached matrix.
-
-    `matrix` is MatrixService-compatible (needs .ids and .minutes_or_none).
-    Pairs missing from the artifact stay ABSENT (arc forbidden in the model â€”
-    B3: infeasible stays infeasible, never 0/haversine/estimate). POI-metadata
-    adaptation (visit_min/opening-hours) stays in T061a, not here.
-    """
-    ids = list(matrix.ids) if ids is None else list(ids)
-    travel = {}
-    for a in ids:
-        for b in ids:
-            if a == b:
-                continue
-            m, _src = matrix.minutes_or_none(a, b)
-            if m is not None:
-                travel[(a, b)] = m
-    return travel
 
 
 def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,

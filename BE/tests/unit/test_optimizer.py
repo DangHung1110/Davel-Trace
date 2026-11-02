@@ -13,9 +13,9 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import MatrixService, load_matrix_doc  # noqa: E402
-from BE.app.services.optimizer import (  # noqa: E402
-    StubPOI, StubTrip, optimize, travel_from_matrix)
+from BE.app.services.matrix import load_matrix_doc  # noqa: E402
+from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
+from BE.app.services.profiles import _travel_from_cells  # noqa: E402
 
 H = 60
 _REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
@@ -337,26 +337,14 @@ class TestOptimizerRealMatrix(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.svc = MatrixService(os.path.dirname(_REAL_MATRIX))
         cls.doc = load_matrix_doc(_REAL_MATRIX)  # dense-v1 since Phase 3
-
-    def test_travel_from_matrix_matches_artifact(self):
-        ids = [DEPOT, FIXTURE[0][0], FIXTURE[1][0]]
-        travel = travel_from_matrix(self.svc, ids)
-        self.assertEqual(len(travel), 6)
-        for a in ids:
-            for b in ids:
-                if a == b:
-                    continue
-                cell = int(self.doc["cells"][f"{a}->{b}"]["minutes"])
-                self.assertEqual(travel[(a, b)], cell)
-                self.assertEqual(travel[(a, b)], self.svc.minutes(a, b)[0])
+        cls.cells = cls.doc["cells"]
 
     def test_real_schedule_respects_windows_and_travel(self):
         stubs = [StubPOI(pid, dur, o, c, r)
                  for (pid, dur, o, c, r) in FIXTURE]
         ids = [DEPOT] + [p.poi_id for p in stubs]
-        travel = travel_from_matrix(self.svc, ids)
+        travel = _travel_from_cells(self.cells, ids)
         t0 = time.monotonic()
         out = optimize(stubs, travel, REAL_TRIP)
         wall = time.monotonic() - t0
@@ -375,10 +363,10 @@ class TestOptimizerRealMatrix(unittest.TestCase):
             self.assertLessEqual(e, min(cls_, REAL_TRIP.end_min))
             self.assertEqual(e - s, dur)
             if k == 0:
-                need = self.svc.minutes(DEPOT, act["poi_id"])[0]
+                need = self.cells[f"{DEPOT}->{act['poi_id']}"]["minutes"]
                 self.assertGreaterEqual(s, REAL_TRIP.start_min + need)
             else:
-                need = self.svc.minutes(prev_id, act["poi_id"])[0]
+                need = self.cells[f"{prev_id}->{act['poi_id']}"]["minutes"]
                 self.assertGreaterEqual(s - prev_end, need)
             prev_id, prev_end = act["poi_id"], e
         print(f"\n real matrix {out['status']}: {len(acts)} acts "
@@ -387,10 +375,10 @@ class TestOptimizerRealMatrix(unittest.TestCase):
     def test_scale_best_found_within_timeout(self):
         # 25 candidates is the largest deterministic slice that yields a
         # best-found itinerary here; all 150 is outside the basic envelope.
-        others = [i for i in self.svc.ids[:25] if i != DEPOT]
+        others = [i for i in self.doc["ids"][:25] if i != DEPOT]
         ids = [DEPOT] + others
         stubs = [StubPOI(i, 60, 7 * H, 18 * H, 1.0) for i in ids]
-        travel = travel_from_matrix(self.svc, ids)
+        travel = _travel_from_cells(self.cells, ids)
         t0 = time.monotonic()
         out = optimize(stubs, travel, REAL_TRIP)
         wall = time.monotonic() - t0

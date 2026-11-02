@@ -41,8 +41,7 @@ from BE.app.services import (
     templates,
     trip_ctx,
 )
-from BE.app.services.common import hh, party_size, status_map, to_min, total_fee
-from BE.app.services.gate import SOFT_CHECKS
+from BE.app.services.common import hh, party_size, to_min
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_short, stubs_from_pois)
 from BE.app.services.validator import validate
@@ -338,85 +337,9 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
-def run_profiles(pois: list[dict], travel: dict[tuple[str, str], int],
-                 trip: dict, matrix: dict,
-                 profiles: tuple[str, ...] = ("savings", "balanced",
-                                              "experience")) -> dict:
-    """Run each profile; return {"plans": [...], "dropped": [...], "selected": None}.
-
-    Each plan entry carries its T032s `scores` (profit/utility/gate/
-    excluded) attached once the entry is complete.
-    """
-    plans, dropped = [], []
-    by_id = {p["poi_id"]: p for p in pois}
-    ids = [p["poi_id"] for p in pois]
-    nov = novelty_scores(pois)
-    budget = trip.get("budget")
-    q_all = scorer.edge_scores(ids, by_id)
-    # Universal human needs apply whenever the request carries an onboarding
-    # profile (same seam as build_plan); a profile-less eval baseline stays
-    # legacy. The rest window follows the lunch activity's end.
-    limits = (templates.universal_constraints(trip)
-              if trip.get("profile") else templates.NO_LIMITS)
-    rest_after_lunch = (limits.get("rest_minutes")
-                        if limits.get("rest_after_lunch") else None)
-    pois_gate = {pid: _gate_view(p) for pid, p in by_id.items()}
-    for prof in profiles:
-        stub = stubs_from_pois(
-            pois, trip,
-            lambda p: _score(prof, p, novelty=nov,
-                             avg_leg=_avg_leg(travel, p["poi_id"], ids),
-                             budget=budget))
-        out = optimize(stub, travel, _to_trip(trip),
-                       edge_scores=_profile_edges(prof, q_all, travel),
-                       must_visit=trip.get("must_visit", []),
-                       # Same hard caps the gate enforces (eval path parity).
-                       cafe_cap=soft_rules.cafe_cap(trip.get("profile")),
-                       no_consecutive=True, no_adjacent_food=True,
-                       lunch_required=bool(limits.get("lunch_required")),
-                       rest_after_lunch=rest_after_lunch,
-                       category_cap=soft_rules.CATEGORY_DAILY_CAP,
-                       diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
-                       max_fee=_max_fee(trip))
-        if out["itinerary"] is None:
-            dropped.append({"profile": prof, "reason": out.get("reason", "")})
-            continue
-        acts = out["itinerary"]["activities"]
-        checked = {"activities": acts}
-        if rest_after_lunch and trip.get("profile"):
-            span = soft_rules.rest_span(acts, by_id, trip["profile"],
-                                        _deadline(trip))
-            if span:
-                checked["rest"] = {"start": hh(span["start"]),
-                                   "end": hh(span["end"])}
-        rep = validate(checked, trip, pois_gate, matrix)
-        if not rep["passed"]:
-            dropped.append({"profile": prof, "reason": str(rep["violations"])})
-            continue
-        ratings = [trusted_rating(by_id[a["poi_id"]]) for a in acts]
-        travel_min = sum(int((matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
-                             .get("minutes", 0)) for x, y in zip(acts, acts[1:]))
-        entry = {
-            "profile": prof,
-            "reason": PROFILE_REASONS[prof],
-            "itinerary": {"activities": acts},
-            "total_cost": total_fee(acts, by_id, party_size(trip)),
-            "travel_min": travel_min,
-            "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0,
-            "constraint_status": status_map(
-                {name: ok for name, ok in rep["checks"].items()
-                 if name not in SOFT_CHECKS}),
-            "soft_violations": rep.get("soft_violations", []),
-        }
-        entry["diversity"] = plan_diversity(acts, pois, prof)
-        entry["scores"] = score_plan(entry)  # T032s: attached once complete
-        plans.append(entry)
-    return {"plans": plans, "dropped": dropped, "selected": None}
-
-
-def _to_trip(trip: dict, origin_id: str | None = "depot") -> StubTrip:
-    return StubTrip(to_min(trip.get("start_time", "07:00")),
-                    _deadline(trip), origin_id)
+def _to_trip(trip: dict) -> StubTrip:
+    """Open tour: the seed matrix has no depot cell (optimizer T061a)."""
+    return StubTrip(to_min(trip.get("start_time", "07:00")), _deadline(trip), None)
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -807,7 +730,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     stubs_used = stubs
     for rung, (step, limits_try, kind) in enumerate(rungs):
         stubs_try = stubs_by_kind[kind]
-        out = optimize(stubs_try, travel, _to_trip(trip, origin_id=None),
+        out = optimize(stubs_try, travel, _to_trip(trip),
                        edge_scores=q, workers=workers, must_visit=must,
                        precedence=order_prefs,
                        min_stops=limits_try["min_stops"],
@@ -868,7 +791,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         )
         for name, label, override in trials:
             probe = optimize(
-                stubs, travel, _to_trip(trip, origin_id=None), edge_scores=q,
+                stubs, travel, _to_trip(trip), edge_scores=q,
                 workers=workers,
                 timeout_s=(DIAGNOSE_TIMEOUT_S if deterministic_time is None
                            else DIAGNOSE_WALL_GUARD_S),
@@ -1038,7 +961,6 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     Shared by the argmax plan and every solution-pool member, so a diverse
     response can never show a plan that was not validated the same way.
     """
-    profile_data = trip.get("profile") or {}
     # Dynamic state evidence: per-activity state at its planned START, so a
     # client/reviewer can see WHY a stop sits at that hour (satiety, heat,
     # dip). Only an onboarding/state context adds these keys.

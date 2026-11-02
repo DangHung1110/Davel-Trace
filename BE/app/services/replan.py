@@ -18,8 +18,7 @@ from __future__ import annotations
 
 from BE.app.services import scorer
 from BE.app.services import state as store
-from BE.app.services.budget import tighten_budget
-from BE.app.services.common import hh, party_size, to_min, total_fee
+from BE.app.services.common import party_size, to_min, total_fee
 from BE.app.services.gate import check_profile_safe
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
@@ -74,11 +73,10 @@ def replan(state: dict, event: dict, pois: list[dict],
            budget_state: dict | None = None) -> dict:
     """Return {"itinerary" (versioned) | None, "mode", "changes", ...}.
 
-    `budget_state` is the lane-C raw `replan_budget()` snapshot
-    {trip_id, budget, spent, left, by_kind, alert}; when supplied, the
-    validator gates new activities against `allowed_remaining` (actual
-    funds left), not the trip's original total. `trip`/`budget_state`
-    are never mutated. Omitted -> legacy behavior (trip budget).
+    `budget_state` is the expense summary (GET /v1/expenses/summary); when
+    supplied, new activities are gated against its `left` (actual funds left),
+    not the trip's original total. `trip`/`budget_state` are never mutated.
+    Omitted -> the trip budget.
     """
     by_id = {p["poi_id"]: p for p in pois}
     completed_ids = [a["poi_id"] for a in state.get("completed", [])]
@@ -111,8 +109,8 @@ def replan(state: dict, event: dict, pois: list[dict],
     party = party_size(trip)
     done_cost = total_fee(done, by_id, party)
     allowed = None if trip.get("budget") is None else max(0, int(trip["budget"]) - done_cost)
-    if budget_state is not None:
-        allowed = tighten_budget(budget_state, trip)["allowed_remaining"]
+    if budget_state is not None:  # what is really left; overspent means nothing is
+        allowed = max(0, int(budget_state.get("left", 0)))
     max_fee = None if allowed is None else allowed // party
     gate_trip = trip if allowed is None else dict(trip, budget=allowed + done_cost)
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),

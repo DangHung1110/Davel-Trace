@@ -3,7 +3,6 @@
 Run from repo root: python BE/tests/unit/test_weather.py -v
 """
 
-import json
 import os
 import sys
 import tempfile
@@ -11,7 +10,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.weather import apply_weather, fetch_forecast, rain_at  # noqa: E402
+from BE.app.services.weather import fetch_forecast  # noqa: E402
 
 HOURS = [f"2026-10-03T{h:02d}:00" for h in range(24)]
 RAIN = [0.0] * 24
@@ -51,22 +50,6 @@ class TestWeather(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             fetch_forecast(transport=down_transport,
                            cache_path=os.path.join(self.cache + ".missing"))
-
-    def test_rain_at_hour(self):
-        RAIN[15] = 0.8
-        try:
-            snap = fetch_forecast(transport=mock_transport, cache_path=self.cache)
-            self.assertEqual(rain_at(snap, "15:30"), 0.8)
-            self.assertEqual(rain_at(snap, "09:00"), 0.0)
-        finally:
-            RAIN[15] = 0.0
-
-    def test_no_swap_when_dry(self):
-        snap = fetch_forecast(transport=mock_transport, cache_path=self.cache)
-        by_id = {"beach": {"poi_id": "beach", "name": "Beach", "weather_sensitive": True}}
-        out = apply_weather([{"poi_id": "beach", "start": "15:30"}], by_id, snap)
-        self.assertEqual(out["swaps"], [])
-        self.assertEqual(len(out["activities"]), 1)
 
 
 if __name__ == "__main__":

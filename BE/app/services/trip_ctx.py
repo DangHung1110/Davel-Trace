@@ -43,11 +43,7 @@ modified here.
 from __future__ import annotations
 
 from BE.app.services import weather as weather_svc
-from BE.app.services.soft_rules import (
-    meal_slots,
-    meal_window_present,
-    poi_category,
-)
+from BE.app.services.soft_rules import meal_slots, poi_category
 from BE.common import to_min
 
 # --- paper windows ---------------------------------------------------------
@@ -164,7 +160,7 @@ def _short_transport(url: str) -> dict:
 
 
 def _forecast_hour(forecast: dict | None, minutes: int) -> dict | None:
-    """Hourly entry for a local hour (matches HH, like weather.rain_at)."""
+    """Hourly entry for a local hour (matches HH)."""
     hh_int = int(minutes) // 60
     for entry in (forecast or {}).get("hourly", []):
         at = str(entry.get("at") or "")

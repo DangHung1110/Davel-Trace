@@ -104,8 +104,6 @@ from BE.app.services.soft_rules import (
 from BE.app.services.profile_filter import drop_reason
 from BE.common import deadline, in_range, party_size, plan_cost, to_min
 
-EPS = 1e-9
-
 
 def _result(passed: bool, score: float | None = None) -> dict:
     """Canonical gate result: passed is a real bool, score a finite float."""
@@ -662,17 +660,6 @@ def freeze_drift(itinerary: dict, trip: dict, pois: dict,
             continue
         drift.append(name)
     return drift
-
-
-def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Compatibility summary over HARD checks: {"passed", "failed"}.
-
-    Soft checks (F1) are surfaced by `validator.validate` under
-    `soft_violations`, deliberately not here.
-    """
-    failed = [name for name, fn in HARD_CHECKS
-              if not fn(itinerary, trip, pois, matrix)["passed"]]
-    return {"passed": not failed, "failed": failed}
 
 
 def report(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
