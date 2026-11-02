@@ -545,7 +545,7 @@ def main(argv: list[str] | None = None) -> int:
         description="Spot-check snapshot + optional auto-verify applier.")
     ap.add_argument("--snapshot", required=True)
     ap.add_argument("--review-out", default="",
-                    help="write a REVIEW_V2-style tick file here")
+                    help="write a tick file for human review here")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--apply-flag", dest="apply", action="store_true",
                       help="flip verified=true for auto-pass rows only")

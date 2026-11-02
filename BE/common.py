@@ -225,7 +225,7 @@ def trusted_rating(poi: dict) -> float:
 
 
 # What one person spends at a POI with no known ticket: the middle of its price
-# band (BE/ml/data/price_from_raw.py: under 100k, 100-500k, over 500k per person).
+# band (under 100k, 100-500k, over 500k per person).
 BAND_FEE_VND = {"cheap": 50_000, "medium": 300_000, "expensive": 700_000}
 # The band is one scale for a meal. A drink or a small purchase in the same band
 # costs far less: 300k for a coffee was the visible error of the old table.

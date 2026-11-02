@@ -35,7 +35,7 @@ not "hải sản", a statue is a landmark but not "chùa". `ACTIVITY_WORDS` narr
 wish to the POIs whose name, type or tags say so, and a plan only counts as
 meeting the wish when one of THOSE POIs is in it.
 
-`plan_tier` (BE/tools/fix_poi_accuracy.py) keeps the places no traveller would look
+`plan_tier` (a field of pois.json) keeps the places no traveller would look
 for out of a default plan: `local` and `wish_only` POIs come up only when a wish
 asks for them, `excluded` ones only as a must_visit.
 """
