@@ -23,6 +23,11 @@ _EVIDENCE_TABLES = (
     "shadow_observations",
     "import_runs",
     "seed_runs",
+    "accounts",
+    "role_assignments",
+    "identity_sessions",
+    "one_time_actions",
+    "export_requests",
 )
 
 
@@ -52,6 +57,12 @@ def collect_database_evidence(database_url: str) -> dict:
                         "ORDER BY observation_id LIMIT 1"
                     )
                 ).scalar_one_or_none(),
+                "account_id": connection.execute(
+                    text("SELECT CAST(account_id AS TEXT) FROM accounts ORDER BY account_id LIMIT 1")
+                ).scalar_one_or_none(),
+                "session_id": connection.execute(
+                    text("SELECT CAST(session_id AS TEXT) FROM identity_sessions ORDER BY session_id LIMIT 1")
+                ).scalar_one_or_none(),
             }
             relationship_row = connection.execute(
                 text(
@@ -73,6 +84,18 @@ def collect_database_evidence(database_url: str) -> dict:
                     "itinerary_id": None,
                 }
             )
+            identity_row = connection.execute(
+                text(
+                    "SELECT CAST(a.account_id AS TEXT) AS account_id, "
+                    "CAST(s.session_id AS TEXT) AS session_id, r.role "
+                    "FROM accounts a LEFT JOIN identity_sessions s ON s.account_id = a.account_id "
+                    "LEFT JOIN role_assignments r ON r.account_id = a.account_id "
+                    "ORDER BY a.account_id LIMIT 1"
+                )
+            ).mappings().first()
+            relationships["identity"] = dict(identity_row) if identity_row else {
+                "account_id": None, "session_id": None, "role": None,
+            }
         return {
             "schema_revision": revision,
             "counts": counts,

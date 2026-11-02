@@ -71,10 +71,25 @@ Password: giá trị POSTGRES_PASSWORD local
 ```
 
 Các bảng nền tảng: `alembic_version`, `acceptance_records`,
-`shadow_observations`, `import_runs`, `seed_runs`. Nhấn Test Connection rồi
-Finish; không cần mở trực tiếp file SQLite nữa.
+`shadow_observations`, `import_runs`, `seed_runs`. Identity ở revision
+`006_001` thêm `accounts`, `role_assignments`, `identity_sessions`,
+`one_time_actions`, `export_requests` và audit events. Các cột password/token
+chỉ chứa hash. Nhấn Test Connection rồi Finish; không cần mở SQLite.
 
-## 5. Import, seed, backup và restore proof
+## 5. Demo đăng ký và đăng nhập
+
+Trong `BE/.env`, bật hộp thư local chỉ cho demo:
+
+```text
+IDENTITY_DEV_OUTBOX_ENABLED=true
+```
+
+Production mode từ chối cấu hình này. Khởi động API bằng lệnh mục 3, sau đó
+Flutter có thể đăng ký, lấy mã xác thực qua màn hình “hộp thư phát triển”, đăng
+nhập, quản lý phiên, khôi phục mật khẩu, export và yêu cầu xóa tài khoản. Không
+có mã nào được ghi vào log hoặc database dạng plaintext.
+
+## 6. Import, seed, backup và restore proof
 
 ```powershell
 # Import SQLite cũ, chạy lặp lại không nhân bản bản ghi
@@ -101,10 +116,10 @@ Finish; không cần mở trực tiếp file SQLite nữa.
 
 Không đặt archive trong repo hoặc Docker volume. Manifest không chứa password.
 
-## 6. Test
+## 7. Test
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest BE\tests -q
 ```
 
-Chi tiết end-to-end và Git Bash: `specs/005-platform-foundation/quickstart.md`.
+Chi tiết identity: `specs/006-identity-access/quickstart.md`.

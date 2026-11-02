@@ -5,6 +5,8 @@
 
 Luồng demo đã nối:
 
+- đăng ký, xác thực email demo, đăng nhập, refresh và quản lý phiên;
+- khôi phục mật khẩu, export và yêu cầu xóa tài khoản;
 - lịch trình quản lý và các phương án planner;
 - chốt phương án live vào PostgreSQL backend;
 - PMTiles Đà Nẵng, route/location và cảnh báo fallback;
@@ -26,13 +28,13 @@ Từ repo root (PowerShell):
 
 ```powershell
 & '.\.flutter-sdk\bin\flutter.bat' pub get --directory FE
-& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
 ```
 
 Git Bash:
 
 ```bash
-./.flutter-sdk/bin/flutter.bat run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+./.flutter-sdk/bin/flutter.bat run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
 ```
 
 Không dùng cú pháp PowerShell `$env:...` hoặc `&` trong Git Bash.

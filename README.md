@@ -76,3 +76,19 @@ File `data/danang.pmtiles` được cắt từ Protomaps/OpenStreetMap build ng�
 
 PMTiles chứa dữ liệu vector để render. Font và sprite hiện vẫn tải từ CDN Protomaps; muốn chạy hoàn toàn không có Internet thì cần tải thêm các asset này vào dự án. Search và routing cũng là dịch vụ online, tách biệt với bản đồ nền local.
 #
+# Product platform demo (Flutter + FastAPI)
+
+The complete product work is developed incrementally on `feat/product-platform`.
+Identity/access revision `006_001` adds PostgreSQL accounts, verification,
+login/session control, recovery, export and deletion while keeping AI optional.
+
+```powershell
+docker compose --env-file BE/.env up -d postgres
+.\.venv\Scripts\python.exe -m alembic -c BE\alembic.ini upgrade head
+.\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
+& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+```
+
+For the local verification/recovery inbox set
+`IDENTITY_DEV_OUTBOX_ENABLED=true` in ignored `BE/.env`. See
+`specs/006-identity-access/quickstart.md` for the full demo and DBeaver guide.
