@@ -1,9 +1,8 @@
 """Rolling-horizon replan + mode gate + version++ (T046, lane B).
 
-replan(state, event, pois, travel, trip): event is a DynamicEvent dict
-passed DIRECTLY (STUB-NOTE: lane-A event_clf T044 classifies text into
-events at phase-PR). Completed activities are fixed (T045 contract);
-only remaining is re-optimized (T017), then validated (T018).
+replan(state, event, pois, travel, trip): event is a DynamicEvent dict.
+Completed activities are fixed (T045 contract); only remaining is
+re-optimized (T017), then validated (T018).
 
 Horizon is the ETB hard deadline `_deadline(trip)` = min(end_time,
 return_time): a `return_time` is a hard within-day cap and is NEVER

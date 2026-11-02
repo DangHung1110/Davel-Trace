@@ -5,10 +5,6 @@ and JSON/snapshot reads that were duplicated across `eval/`, `ml/` and the
 app services. `BE.app.services.common` re-exports these names, so lane B/C
 callers keep their imports while a single implementation lives here.
 No config, no classes, no third-party imports (DoD).
-
-ponytail: only genuinely repeated glue lives here. Domain schemas stay in
-`app/schemas/` and validated snapshot loading stays in
-`app/services/snapshot.py` (intentionally stricter, stdlib-only).
 """
 
 from __future__ import annotations

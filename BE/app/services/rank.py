@@ -3,7 +3,7 @@
 score_poi(poi, user, ctx) -> {"score": 0..1, "reasons": [...]}.
 WEIGHTS sum to 1, all non-negative (unit test enforces sanity).
 PATM nac-2 (T029 model) replaces these weights later; the reasons
-format stays (explainer T042 reuses it).
+format stays.
 
 Signals:
 - attr: trusted rating/5, price fit (fee share of budget), effort fit

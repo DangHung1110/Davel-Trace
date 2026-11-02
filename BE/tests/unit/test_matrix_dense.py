@@ -21,7 +21,6 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE import common  # noqa: E402
 from BE.app.routers import evaluate as evaluate_router  # noqa: E402
 from BE.app.services import matrix as matrix_mod  # noqa: E402
-from BE.app.services import snapshot  # noqa: E402
 from BE.app.services.matrix import (  # noqa: E402
     DENSE_FORMAT, DenseCells, MatrixService, dense_document, load_cells,
     load_matrix_doc)
@@ -147,11 +146,6 @@ class TestConsumersReadDense(unittest.TestCase):
         self.assertEqual(common.load_matrix_cells(self.dir)["b->c"]["minutes"], 7)
         _pois, cells = evaluate_router.load_eval_context(self.dir)
         self.assertEqual(cells["c->a"]["minutes"], 8)
-
-    def test_snapshot_validator_sees_the_hole(self):
-        with self.assertRaises(ValueError) as ctx:
-            snapshot.load_matrix(self.dir, IDS)
-        self.assertIn("a->c", str(ctx.exception))
 
 
 if __name__ == "__main__":

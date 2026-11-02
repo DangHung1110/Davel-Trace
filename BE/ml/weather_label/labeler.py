@@ -358,22 +358,6 @@ def label_element(el: dict, dn_category: str = "") -> dict:
     return {**label(feat), "features": feat}
 
 
-def weather_evidence(poi_name: str, result: dict) -> list[str]:
-    """Evidence strings for validator/explainer wiring (phase-PR)."""
-    return [f"{poi_name}: {result['label']} ({result['rule']}, "
-            f"conf {result['confidence']})"]
-
-
-def train_gbdt(X, y, seed: int = 7):
-    """Legacy GBDT hook.  NOT used by `classify_poi`; no training in this step."""
-    import lightgbm as lgb
-    import numpy as np
-    dtr = lgb.Dataset(np.array(X, dtype=float), np.array(y, dtype=float))
-    return lgb.train({"objective": "binary", "verbosity": -1, "seed": seed,
-                      "min_data_in_leaf": 5, "num_leaves": 15},
-                     dtr, num_boost_round=100)
-
-
 # ---------------------------------------------------------------------------
 # v2 snapshot-POI classifier
 # ---------------------------------------------------------------------------
@@ -1348,7 +1332,3 @@ def classify_poi(poi: dict, audit=None, osm=None, *, human_label=None,
         "confidence_kind": "heuristic_uncalibrated",
         **exposure,
     }
-
-
-# Alias with the "snapshot" wording used by later wiring specs.
-classify_snapshot_poi = classify_poi
