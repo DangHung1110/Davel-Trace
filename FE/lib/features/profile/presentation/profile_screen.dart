@@ -80,11 +80,15 @@ class ProfileScreen extends StatelessWidget {
           AppHeader(
             compact: true,
             section: 'Hồ sơ',
-            trailing: IconButton(
-              tooltip: 'Thêm hồ sơ',
-              onPressed: state.isMutating ? null : () => _openEditor(context),
-              icon: const Icon(Icons.person_add_alt_1_outlined),
-            ),
+            trailing: state.isDemoManagement
+                ? IconButton(
+                    tooltip: 'Thêm hồ sơ',
+                    onPressed: state.isMutating
+                        ? null
+                        : () => _openEditor(context),
+                    icon: const Icon(Icons.person_add_alt_1_outlined),
+                  )
+                : null,
           ),
           Expanded(
             child: ListView(
@@ -95,8 +99,10 @@ class ProfileScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Hồ sơ local giúp tách chuyến đi cho nhiều người dùng trên cùng thiết bị.',
+                Text(
+                  state.isDemoManagement
+                      ? 'Hồ sơ local giúp tách chuyến đi cho nhiều người dùng trên cùng thiết bị.'
+                      : 'Hồ sơ này được lưu an toàn cùng tài khoản đang đăng nhập.',
                 ),
                 const SizedBox(height: 18),
                 if (state.profiles.length > 1) ...[
@@ -164,6 +170,24 @@ class ProfileScreen extends StatelessWidget {
                             ? 'Chưa đặt'
                             : profile.foodPreferences.join(', '),
                       ),
+                      _ProfileRow(
+                        label: 'Cần tránh',
+                        value: profile.mustAvoid.isEmpty
+                            ? 'Không có'
+                            : profile.mustAvoid.join(', '),
+                      ),
+                      _ProfileRow(
+                        label: 'Dị ứng',
+                        value: profile.allergies.isEmpty
+                            ? 'Không có'
+                            : profile.allergies.join(', '),
+                      ),
+                      _ProfileRow(
+                        label: 'Hỗ trợ',
+                        value: profile.accessibilityNeeds.isEmpty
+                            ? 'Không có'
+                            : profile.accessibilityNeeds.join(', '),
+                      ),
                     ],
                   ),
                 ),
@@ -179,22 +203,31 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
                   key: const Key('offline-reset-action'),
-                  onPressed: state.isMutating ? null : state.resetDemoPlanning,
+                  onPressed: state.isMutating
+                      ? null
+                      : state.isDemoManagement
+                      ? state.resetDemoPlanning
+                      : state.resetActiveProfile,
                   icon: const Icon(Icons.restart_alt_rounded),
-                  label: const Text('Dùng lại dữ liệu demo'),
+                  label: Text(
+                    state.isDemoManagement
+                        ? 'Dùng lại dữ liệu demo'
+                        : 'Đặt lại tùy chọn mềm',
+                  ),
                 ),
                 const SizedBox(height: 8),
-                TextButton.icon(
-                  onPressed: state.isMutating ? null : () => _delete(context),
-                  icon: const Icon(
-                    Icons.delete_outline,
-                    color: AppColors.error,
+                if (state.isDemoManagement)
+                  TextButton.icon(
+                    onPressed: state.isMutating ? null : () => _delete(context),
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: AppColors.error,
+                    ),
+                    label: const Text(
+                      'Xóa hồ sơ',
+                      style: TextStyle(color: AppColors.error),
+                    ),
                   ),
-                  label: const Text(
-                    'Xóa hồ sơ',
-                    style: TextStyle(color: AppColors.error),
-                  ),
-                ),
               ],
             ),
           ),
@@ -449,6 +482,11 @@ class ProfileEditorState extends State<ProfileEditor> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _name;
   late final TextEditingController _food;
+  late final TextEditingController _activities;
+  late final TextEditingController _transport;
+  late final TextEditingController _avoid;
+  late final TextEditingController _allergies;
+  late final TextEditingController _accessibility;
   late String _party;
   late String _purpose;
   late double _pace;
@@ -462,6 +500,19 @@ class ProfileEditorState extends State<ProfileEditor> {
     _food = TextEditingController(
       text: profile?.foodPreferences.join(', ') ?? '',
     );
+    _activities = TextEditingController(
+      text: profile?.preferredActivities.join(', ') ?? '',
+    );
+    _transport = TextEditingController(
+      text: profile?.usualTransport.join(', ') ?? '',
+    );
+    _avoid = TextEditingController(text: profile?.mustAvoid.join(', ') ?? '');
+    _allergies = TextEditingController(
+      text: profile?.allergies.join(', ') ?? '',
+    );
+    _accessibility = TextEditingController(
+      text: profile?.accessibilityNeeds.join(', ') ?? '',
+    );
     _party = profile?.partyType ?? 'solo';
     _purpose = profile?.tripPurpose ?? 'leisure';
     _pace = (profile?.pace ?? 2).toDouble();
@@ -472,6 +523,11 @@ class ProfileEditorState extends State<ProfileEditor> {
   void dispose() {
     _name.dispose();
     _food.dispose();
+    _activities.dispose();
+    _transport.dispose();
+    _avoid.dispose();
+    _allergies.dispose();
+    _accessibility.dispose();
     super.dispose();
   }
 
@@ -490,7 +546,11 @@ class ProfileEditorState extends State<ProfileEditor> {
           .map((item) => item.trim())
           .where((item) => item.isNotEmpty)
           .toList(),
-      'must_avoid': <String>[],
+      'preferred_activities': _csv(_activities.text),
+      'usual_transport': _csv(_transport.text),
+      'must_avoid': _csv(_avoid.text),
+      'allergies': _csv(_allergies.text),
+      'accessibility_needs': _csv(_accessibility.text),
     };
   }
 
@@ -549,6 +609,51 @@ class ProfileEditorState extends State<ProfileEditor> {
               hintText: 'mì Quảng, hải sản',
             ),
           ),
+          if (!widget.inline) ...[
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _activities,
+              decoration: const InputDecoration(
+                labelText: 'Hoạt động yêu thích',
+                hintText: 'biển, bảo tàng, ẩm thực',
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _transport,
+              decoration: const InputDecoration(
+                labelText: 'Phương tiện thường dùng',
+                hintText: 'xe máy, taxi, đi bộ',
+              ),
+            ),
+            const SizedBox(height: 14),
+            const Text(
+              'Ràng buộc bắt buộc',
+              style: TextStyle(
+                color: AppColors.error,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: _avoid,
+              decoration: const InputDecoration(
+                labelText: 'Những điều cần tránh',
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _allergies,
+              decoration: const InputDecoration(labelText: 'Dị ứng'),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _accessibility,
+              decoration: const InputDecoration(
+                labelText: 'Nhu cầu hỗ trợ tiếp cận',
+              ),
+            ),
+          ],
           const SizedBox(height: 10),
           Text(
             'Nhịp đi · ${_pace.round()}/3',
@@ -652,6 +757,12 @@ String _purpose(String value) => switch (value) {
   'business' => 'Công tác',
   _ => 'Nghỉ dưỡng',
 };
+
+List<String> _csv(String value) => value
+    .split(',')
+    .map((item) => item.trim())
+    .where((item) => item.isNotEmpty)
+    .toList();
 
 void _showError(BuildContext context, String? message) {
   ScaffoldMessenger.of(context).showSnackBar(

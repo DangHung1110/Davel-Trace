@@ -10,6 +10,10 @@ class UserProfile {
     required this.foodPreferences,
     required this.mustAvoid,
     required this.version,
+    this.preferredActivities = const [],
+    this.usualTransport = const [],
+    this.allergies = const [],
+    this.accessibilityNeeds = const [],
   });
 
   final String id;
@@ -21,6 +25,10 @@ class UserProfile {
   final int fitness;
   final List<String> foodPreferences;
   final List<String> mustAvoid;
+  final List<String> preferredActivities;
+  final List<String> usualTransport;
+  final List<String> allergies;
+  final List<String> accessibilityNeeds;
   final int version;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
@@ -35,6 +43,16 @@ class UserProfile {
       json['food_preferences'] as List? ?? const [],
     ),
     mustAvoid: List<String>.from(json['must_avoid'] as List? ?? const []),
+    preferredActivities: List<String>.from(
+      json['preferred_activities'] as List? ?? const [],
+    ),
+    usualTransport: List<String>.from(
+      json['usual_transport'] as List? ?? const [],
+    ),
+    allergies: List<String>.from(json['allergies'] as List? ?? const []),
+    accessibilityNeeds: List<String>.from(
+      json['accessibility_needs'] as List? ?? const [],
+    ),
     version: json['version'] as int,
   );
 }
@@ -70,16 +88,28 @@ class Trip {
 
   factory Trip.fromJson(Map<String, dynamic> json) => Trip(
     id: json['id'] as String,
-    profileId: json['profile_id'] as String,
+    profileId:
+        json['profile_id'] as String? ??
+        json['owner_id'] as String? ??
+        'account',
     title: json['title'] as String,
     startDate: DateTime.parse(json['start_date'] as String),
     endDate: DateTime.parse(json['end_date'] as String),
     dayStart: json['day_start'] as String,
     dayEnd: json['day_end'] as String,
-    travelers: json['travelers'] as int,
-    budgetVnd: json['budget_vnd'] as int,
-    transport: json['transport'] as String,
-    status: json['status'] as String,
+    travelers: json['travelers'] as int? ?? json['traveler_count'] as int,
+    budgetVnd:
+        json['budget_vnd'] as int? ??
+        (json['indicative_budget'] as num?)?.round() ??
+        0,
+    transport:
+        json['transport'] as String? ??
+        json['preferred_transport'] as String? ??
+        'mixed',
+    status:
+        json['status'] as String? ??
+        json['lifecycle_state'] as String? ??
+        'available',
     version: json['version'] as int,
   );
 }
@@ -99,6 +129,7 @@ class ActivityItem {
     required this.source,
     required this.version,
     this.poiId,
+    this.progressState = 'planned',
   });
 
   final String id;
@@ -114,6 +145,7 @@ class ActivityItem {
   final int estimatedCostVnd;
   final String source;
   final int version;
+  final String progressState;
 
   factory ActivityItem.fromJson(Map<String, dynamic> json) => ActivityItem(
     id: json['id'] as String,
@@ -129,6 +161,10 @@ class ActivityItem {
     estimatedCostVnd: json['estimated_cost_vnd'] as int,
     source: json['source'] as String,
     version: json['version'] as int,
+    progressState:
+        json['progress_state'] as String? ??
+        json['status'] as String? ??
+        'planned',
   );
 }
 

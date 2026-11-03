@@ -12,6 +12,7 @@ class DemoManagementRepository implements ManagementRepository {
 
   final profiles = <UserProfile>[];
   final trips = <Trip>[];
+  final archivedTrips = <Trip>[];
   final activities = <ActivityItem>[];
   final expenses = <ExpenseItem>[];
   String? activeProfileId = 'profile-demo';
@@ -147,6 +148,16 @@ class DemoManagementRepository implements ManagementRepository {
       mustAvoid: List<String>.from(
         data['must_avoid'] as List? ?? old.mustAvoid,
       ),
+      preferredActivities: List<String>.from(
+        data['preferred_activities'] as List? ?? old.preferredActivities,
+      ),
+      usualTransport: List<String>.from(
+        data['usual_transport'] as List? ?? old.usualTransport,
+      ),
+      allergies: List<String>.from(data['allergies'] as List? ?? old.allergies),
+      accessibilityNeeds: List<String>.from(
+        data['accessibility_needs'] as List? ?? old.accessibilityNeeds,
+      ),
       version: old.version + 1,
     );
     profiles[profiles.indexOf(old)] = item;
@@ -154,13 +165,26 @@ class DemoManagementRepository implements ManagementRepository {
   }
 
   @override
+  Future<UserProfile> resetProfile(UserProfile profile) async =>
+      updateProfile(profile.id, {
+        'food_preferences': <String>[],
+        'preferred_activities': <String>[],
+        'usual_transport': <String>[],
+        'pace': 2,
+        'fitness': 2,
+        'spending_level': 2,
+      });
+
+  @override
   Future<void> setActiveProfile(String id) async => activeProfileId = id;
   @override
   Future<void> deleteProfile(UserProfile profile) async =>
       profiles.remove(profile);
   @override
-  Future<List<Trip>> listTrips(String profileId) async =>
-      trips.where((item) => item.profileId == profileId).toList();
+  Future<List<Trip>> listTrips(String profileId, {String? state}) async =>
+      (state == 'archived' ? archivedTrips : trips)
+          .where((item) => item.profileId == profileId)
+          .toList();
   @override
   Future<Trip> createTrip(Map<String, dynamic> data) async {
     final item = _trip(
@@ -177,6 +201,20 @@ class DemoManagementRepository implements ManagementRepository {
       trips.firstWhere((item) => item.id == id);
   @override
   Future<void> deleteTrip(Trip trip) async => trips.remove(trip);
+  @override
+  Future<Trip> archiveTrip(Trip trip) async {
+    trips.remove(trip);
+    archivedTrips.add(trip);
+    return trip;
+  }
+
+  @override
+  Future<Trip> restoreTrip(Trip trip) async {
+    archivedTrips.remove(trip);
+    trips.add(trip);
+    return trip;
+  }
+
   @override
   Future<(Trip, ItineraryData, ExpenseSummaryData)> getTrip(String id) async =>
       (trips.firstWhere((item) => item.id == id), itinerary, summary);
@@ -210,7 +248,34 @@ class DemoManagementRepository implements ManagementRepository {
   Future<ItineraryData> updateActivity(
     String id,
     Map<String, dynamic> data,
-  ) async => itinerary;
+  ) async {
+    final old = activities.firstWhere((item) => item.id == id);
+    final updated = ActivityItem(
+      id: old.id,
+      position: old.position,
+      poiId: old.poiId,
+      title: data['title'] as String? ?? old.title,
+      notes: data['notes'] as String? ?? old.notes,
+      latitude: old.latitude,
+      longitude: old.longitude,
+      startAt: data['start_at'] == null
+          ? old.startAt
+          : DateTime.parse(data['start_at'] as String),
+      endAt: data['end_at'] == null
+          ? old.endAt
+          : DateTime.parse(data['end_at'] as String),
+      category: data['category'] as String? ?? old.category,
+      estimatedCostVnd:
+          data['estimated_cost_vnd'] as int? ?? old.estimatedCostVnd,
+      source: old.source,
+      version: old.version + 1,
+      progressState: data['progress_state'] as String? ?? old.progressState,
+    );
+    activities[activities.indexOf(old)] = updated;
+    itineraryVersion++;
+    return itinerary;
+  }
+
   @override
   Future<ItineraryData> deleteActivity(
     ActivityItem activity,

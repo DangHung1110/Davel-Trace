@@ -6,9 +6,15 @@ import 'sign_in_screen.dart';
 import 'verify_screen.dart';
 
 class AuthGate extends StatelessWidget {
-  const AuthGate({super.key, required this.controller, required this.child});
+  const AuthGate({
+    super.key,
+    required this.controller,
+    required this.child,
+    this.authenticatedChild,
+  });
   final AuthController controller;
   final Widget child;
+  final Widget? authenticatedChild;
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
@@ -32,7 +38,7 @@ class AuthGate extends StatelessWidget {
                   leading: const Icon(Icons.verified_user_outlined),
                   title: Text(controller.account?.email ?? 'Tài khoản'),
                   subtitle: const Text(
-                    'Đã đăng nhập · dữ liệu quản lý hiện vẫn là demo',
+                    'Đã đăng nhập · hồ sơ và chuyến đi được lưu trên tài khoản',
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.manage_accounts_outlined),
@@ -45,7 +51,7 @@ class AuthGate extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: child),
+            Expanded(child: authenticatedChild ?? child),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
+import '../../../core/errors/api_exception.dart';
 import '../../../shared/widgets/app_header.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
@@ -32,6 +33,19 @@ class ItineraryScreen extends StatelessWidget {
       } else {
         await state.updateActiveTrip(data);
       }
+    } on ApiException catch (error) {
+      if (trip != null &&
+          error.code == 'DATE_REDUCTION_CONFIRMATION_REQUIRED' &&
+          context.mounted &&
+          await _confirm(
+            context,
+            'Xóa các ngày bị rút ngắn?',
+            'Các hoạt động trong những ngày bị loại khỏi chuyến đi sẽ bị xóa.',
+          )) {
+        await state.updateActiveTrip(data, confirmRemovedDays: true);
+        return;
+      }
+      if (context.mounted) _error(context, state.errorMessage);
     } catch (_) {
       if (context.mounted) _error(context, state.errorMessage);
     }
@@ -60,7 +74,7 @@ class ItineraryScreen extends StatelessWidget {
     if (!await _confirm(
       context,
       'Xóa chuyến đi?',
-      'Lịch trình và chi tiêu của chuyến này cũng sẽ bị xóa.',
+      'Chuyến đi sẽ vào thùng rác và có thể khôi phục trong 30 ngày.',
     )) {
       return;
     }
@@ -71,10 +85,26 @@ class ItineraryScreen extends StatelessWidget {
     }
   }
 
+  Future<void> _archiveTrip(BuildContext context) async {
+    if (!await _confirm(
+      context,
+      'Lưu trữ chuyến đi?',
+      'Dữ liệu ngày và hoạt động vẫn được giữ nguyên.',
+    )) {
+      return;
+    }
+    try {
+      await state.archiveActiveTrip();
+    } catch (_) {
+      if (context.mounted) _error(context, state.errorMessage);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final trip = state.activeTrip;
     final itinerary = state.itinerary;
+    final dayActivities = state.activitiesForSelectedDay;
     return ColoredBox(
       color: AppColors.canvas,
       child: Column(
@@ -91,7 +121,7 @@ class ItineraryScreen extends StatelessWidget {
           ),
           Expanded(
             child: trip == null
-                ? _NoTrip(onCreate: () => _tripEditor(context))
+                ? _NoTrip(state: state, onCreate: () => _tripEditor(context))
                 : RefreshIndicator(
                     onRefresh: state.refresh,
                     child: ListView(
@@ -131,11 +161,25 @@ class ItineraryScreen extends StatelessWidget {
                                 if (value == 'delete') {
                                   _deleteTrip(context);
                                 }
+                                if (value == 'archive') {
+                                  _archiveTrip(context);
+                                }
+                                if (value == 'clear') {
+                                  state.clearActiveTrip();
+                                }
                               },
                               itemBuilder: (_) => const [
                                 PopupMenuItem(
                                   value: 'edit',
                                   child: Text('Sửa chuyến đi'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'clear',
+                                  child: Text('Bỏ chọn chuyến đang dùng'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'archive',
+                                  child: Text('Lưu trữ chuyến đi'),
                                 ),
                                 PopupMenuItem(
                                   value: 'delete',
@@ -147,6 +191,11 @@ class ItineraryScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         _TripSelector(state: state),
+                        if (state.archivedTrips.isNotEmpty ||
+                            state.deletedTrips.isNotEmpty) ...[
+                          const SizedBox(height: 8),
+                          _LifecycleTrips(state: state),
+                        ],
                         const SizedBox(height: 12),
                         _PlanningPanel(state: state),
                         const SizedBox(height: 12),
@@ -224,6 +273,10 @@ class ItineraryScreen extends StatelessWidget {
                           ),
                         ],
                         const SizedBox(height: 18),
+                        if (state.tripDates.length > 1) ...[
+                          _DaySelector(state: state),
+                          const SizedBox(height: 14),
+                        ],
                         Row(
                           children: [
                             Expanded(
@@ -242,10 +295,10 @@ class ItineraryScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 9),
-                        if (itinerary == null || itinerary.activities.isEmpty)
+                        if (itinerary == null || dayActivities.isEmpty)
                           const _EmptyActivities()
                         else
-                          ...itinerary.activities.indexed.map(
+                          ...dayActivities.indexed.map(
                             (entry) => _ActivityTile(
                               activity: entry.$2,
                               index: entry.$1,
@@ -268,14 +321,15 @@ class ItineraryScreen extends StatelessWidget {
                                   }
                                 }
                               },
+                              onStatus: (status) =>
+                                  state.setActivityStatus(entry.$2, status),
                               onMoveUp: entry.$1 == 0
                                   ? null
                                   : () => state.moveActivity(
                                       entry.$1,
                                       entry.$1 - 1,
                                     ),
-                              onMoveDown:
-                                  entry.$1 == itinerary.activities.length - 1
+                              onMoveDown: entry.$1 == dayActivities.length - 1
                                   ? null
                                   : () => state.moveActivity(
                                       entry.$1,
@@ -472,7 +526,8 @@ class _AlternativeCard extends StatelessWidget {
 }
 
 class _NoTrip extends StatelessWidget {
-  const _NoTrip({required this.onCreate});
+  const _NoTrip({required this.state, required this.onCreate});
+  final AppState state;
   final VoidCallback onCreate;
 
   @override
@@ -493,8 +548,10 @@ class _NoTrip extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 6),
-          const Text(
-            'Tạo chuyến Đà Nẵng một hoặc hai ngày, sau đó tự thêm hoạt động.',
+          Text(
+            state.trips.isEmpty
+                ? 'Tạo chuyến Đà Nẵng, sau đó tự thêm hoạt động theo từng ngày.'
+                : 'Chọn một chuyến có sẵn để tiếp tục quản lý.',
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 18),
@@ -502,9 +559,78 @@ class _NoTrip extends StatelessWidget {
             key: const Key('empty-create-trip-button'),
             onPressed: onCreate,
             icon: const Icon(Icons.add_rounded),
-            label: const Text('Tạo chuyến đầu tiên'),
+            label: Text(
+              state.trips.isEmpty ? 'Tạo chuyến đầu tiên' : 'Tạo chuyến mới',
+            ),
           ),
+          if (state.trips.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            ...state.trips.map(
+              (trip) => ListTile(
+                title: Text(trip.title),
+                subtitle: Text(
+                  '${_shortDate(trip.startDate)} → ${_shortDate(trip.endDate)}',
+                ),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => state.selectTrip(trip),
+              ),
+            ),
+          ],
+          if (state.archivedTrips.isNotEmpty ||
+              state.deletedTrips.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            _LifecycleTrips(state: state),
+          ],
         ],
+      ),
+    ),
+  );
+}
+
+class _LifecycleTrips extends StatelessWidget {
+  const _LifecycleTrips({required this.state});
+
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) => OutlinedButton.icon(
+    icon: const Icon(Icons.inventory_2_outlined),
+    label: Text(
+      'Đã lưu trữ / đã xóa (${state.archivedTrips.length + state.deletedTrips.length})',
+    ),
+    onPressed: () => showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) => SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+          children: [
+            Text(
+              'Khôi phục chuyến đi',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 8),
+            for (final trip in [...state.archivedTrips, ...state.deletedTrips])
+              ListTile(
+                title: Text(trip.title),
+                subtitle: Text(
+                  state.deletedTrips.any((item) => item.id == trip.id)
+                      ? 'Trong thùng rác'
+                      : 'Đã lưu trữ',
+                ),
+                trailing: TextButton(
+                  onPressed: state.isMutating
+                      ? null
+                      : () async {
+                          await state.restoreTrip(trip);
+                          if (sheetContext.mounted) Navigator.pop(sheetContext);
+                        },
+                  child: const Text('Khôi phục'),
+                ),
+              ),
+          ],
+        ),
       ),
     ),
   );
@@ -534,6 +660,33 @@ class _TripSelector extends StatelessWidget {
             if (id == null || id == state.activeTrip!.id) return;
             state.selectTrip(state.trips.firstWhere((trip) => trip.id == id));
           },
+  );
+}
+
+class _DaySelector extends StatelessWidget {
+  const _DaySelector({required this.state});
+
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    height: 42,
+    child: ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: state.tripDates.length,
+      separatorBuilder: (_, _) => const SizedBox(width: 8),
+      itemBuilder: (_, index) {
+        final date = state.tripDates[index];
+        final selected =
+            state.selectedTripDate != null &&
+            DateUtils.isSameDay(state.selectedTripDate, date);
+        return ChoiceChip(
+          selected: selected,
+          label: Text('Ngày ${index + 1} · ${_shortDate(date)}'),
+          onSelected: (_) => state.selectTripDate(date),
+        );
+      },
+    ),
   );
 }
 
@@ -654,6 +807,7 @@ class _ActivityTile extends StatelessWidget {
     required this.onDelete,
     required this.onMoveUp,
     required this.onMoveDown,
+    required this.onStatus,
   });
 
   final ActivityItem activity;
@@ -663,6 +817,7 @@ class _ActivityTile extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback? onMoveUp;
   final VoidCallback? onMoveDown;
+  final ValueChanged<String> onStatus;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -786,6 +941,37 @@ class _ActivityTile extends StatelessWidget {
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
                               ),
+                            ),
+                          ),
+                          PopupMenuButton<String>(
+                            tooltip: 'Trạng thái hoạt động',
+                            enabled: !busy,
+                            initialValue: activity.progressState,
+                            onSelected: onStatus,
+                            itemBuilder: (_) => const [
+                              PopupMenuItem(
+                                value: 'planned',
+                                child: Text('Đã lên kế hoạch'),
+                              ),
+                              PopupMenuItem(
+                                value: 'completed',
+                                child: Text('Đã hoàn thành'),
+                              ),
+                              PopupMenuItem(
+                                value: 'skipped',
+                                child: Text('Đã bỏ qua'),
+                              ),
+                            ],
+                            child: Icon(
+                              activity.progressState == 'completed'
+                                  ? Icons.check_circle_rounded
+                                  : activity.progressState == 'skipped'
+                                  ? Icons.cancel_outlined
+                                  : Icons.schedule_rounded,
+                              size: 19,
+                              color: activity.progressState == 'completed'
+                                  ? AppColors.primary
+                                  : AppColors.muted,
                             ),
                           ),
                           _MiniIcon(
@@ -1093,7 +1279,10 @@ class _ActivityEditorState extends State<ActivityEditor> {
   void _save() {
     if (!_formKey.currentState!.validate()) return;
     final parts = _time.text.split(':');
-    final tripDate = widget.state.activeTrip!.startDate;
+    final tripDate =
+        widget.activity?.startAt ??
+        widget.state.selectedTripDate ??
+        widget.state.activeTrip!.startDate;
     final start = DateTime(
       tripDate.year,
       tripDate.month,

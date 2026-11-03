@@ -21,14 +21,19 @@ class AppState extends ChangeNotifier {
   final LocalPreferences preferences;
   final PlanningRepository planningRepository;
 
+  bool get isDemoManagement => repository is! HttpManagementRepository;
+
   bool isLoading = true;
   bool isMutating = false;
   String? errorMessage;
   List<UserProfile> profiles = [];
   UserProfile? activeProfile;
   List<Trip> trips = [];
+  List<Trip> archivedTrips = [];
+  List<Trip> deletedTrips = [];
   Trip? activeTrip;
   ItineraryData? itinerary;
+  DateTime? selectedTripDate;
   List<ExpenseItem> expenses = [];
   ExpenseSummaryData expenseSummary = ExpenseSummaryData.empty;
   List<PoiItem> pois = [];
@@ -77,14 +82,30 @@ class AppState extends ChangeNotifier {
     final profile = activeProfile;
     if (profile == null) return;
     trips = await repository.listTrips(profile.id);
+    if (repository is HttpManagementRepository) {
+      final lifecycle = await Future.wait([
+        repository.listTrips(profile.id, state: 'archived'),
+        repository.listTrips(profile.id, state: 'deleted'),
+      ]);
+      archivedTrips = lifecycle[0];
+      deletedTrips = lifecycle[1];
+    } else {
+      archivedTrips = await repository.listTrips(profile.id, state: 'archived');
+      deletedTrips = [];
+    }
     Trip? selected;
-    final wanted = selectId ?? activeTrip?.id;
+    final liveActive = repository is HttpManagementRepository
+        ? (repository as HttpManagementRepository).activeTripId
+        : null;
+    final wanted = selectId ?? activeTrip?.id ?? liveActive;
     if (wanted != null) {
       for (final trip in trips) {
         if (trip.id == wanted) selected = trip;
       }
     }
-    selected ??= selectFirst ? trips.firstOrNull : null;
+    selected ??= selectFirst && repository is! HttpManagementRepository
+        ? trips.firstOrNull
+        : null;
     if (selected == null) {
       _clearTripData(keepTrips: true);
     } else {
@@ -97,22 +118,53 @@ class AppState extends ChangeNotifier {
     activeTrip = detail.$1;
     itinerary = detail.$2;
     expenseSummary = detail.$3;
-    final expenseData = await repository.listExpenses(id);
-    expenses = expenseData.$1;
-    expenseSummary = expenseData.$2;
+    try {
+      final expenseData = await repository.listExpenses(id);
+      expenses = expenseData.$1;
+      expenseSummary = expenseData.$2;
+    } on ApiException catch (error) {
+      if (error.statusCode != 404) rethrow;
+      expenses = [];
+      expenseSummary = ExpenseSummaryData(
+        budgetVnd: activeTrip!.budgetVnd,
+        spentVnd: 0,
+        remainingVnd: activeTrip!.budgetVnd,
+        byCategory: const {},
+        alert: 'none',
+      );
+    }
     routePreview = null;
+    final selected = selectedTripDate;
+    selectedTripDate =
+        selected != null &&
+            !selected.isBefore(activeTrip!.startDate) &&
+            !selected.isAfter(activeTrip!.endDate)
+        ? selected
+        : activeTrip!.startDate;
   }
 
   void _clearTripData({bool keepTrips = false}) {
     if (!keepTrips) trips = [];
     activeTrip = null;
     itinerary = null;
+    selectedTripDate = null;
     expenses = [];
     expenseSummary = ExpenseSummaryData.empty;
     routePreview = null;
   }
 
   Future<void> refresh() => initialize();
+
+  void clearForSignOut() {
+    profiles = [];
+    activeProfile = null;
+    archivedTrips = [];
+    deletedTrips = [];
+    _clearTripData();
+    errorMessage = null;
+    isLoading = true;
+    notifyListeners();
+  }
 
   Future<T> _mutate<T>(Future<T> Function() action) async {
     isMutating = true;
@@ -148,6 +200,14 @@ class AppState extends ChangeNotifier {
         activeProfile = updated;
       });
 
+  Future<void> resetActiveProfile() => _mutate(() async {
+    final updated = await repository.resetProfile(activeProfile!);
+    profiles = [
+      for (final item in profiles) item.id == updated.id ? updated : item,
+    ];
+    activeProfile = updated;
+  });
+
   Future<void> selectProfile(UserProfile profile) => _mutate(() async {
     await repository.setActiveProfile(profile.id);
     activeProfile = profile;
@@ -174,30 +234,74 @@ class AppState extends ChangeNotifier {
       'profile_id': activeProfile!.id,
       'city': 'da-nang',
     });
+    if (repository is HttpManagementRepository) {
+      await (repository as HttpManagementRepository).setActiveTrip(created);
+    }
     await _loadTrips(selectId: created.id);
   });
 
-  Future<void> updateActiveTrip(Map<String, dynamic> data) => _mutate(() async {
+  Future<void> updateActiveTrip(
+    Map<String, dynamic> data, {
+    bool confirmRemovedDays = false,
+  }) => _mutate(() async {
     final trip = activeTrip!;
     final updated = await repository.updateTrip(trip.id, {
       ...data,
       'version': trip.version,
+      'confirm_removed_days': confirmRemovedDays,
     });
     activeTrip = updated;
     trips = [for (final item in trips) item.id == updated.id ? updated : item];
   });
 
-  Future<void> selectTrip(Trip trip) => _mutate(() => _loadTripDetail(trip.id));
+  Future<void> selectTrip(Trip trip) => _mutate(() async {
+    if (repository is HttpManagementRepository) {
+      await (repository as HttpManagementRepository).setActiveTrip(trip);
+    }
+    await _loadTripDetail(trip.id);
+  });
+
+  Future<void> clearActiveTrip() => _mutate(() async {
+    if (repository is HttpManagementRepository) {
+      await (repository as HttpManagementRepository).setActiveTrip(null);
+    }
+    _clearTripData(keepTrips: true);
+  });
+
+  Future<void> archiveActiveTrip() => _mutate(() async {
+    final trip = activeTrip!;
+    final archived = await repository.archiveTrip(trip);
+    trips = trips.where((item) => item.id != trip.id).toList();
+    archivedTrips = [archived, ...archivedTrips];
+    _clearTripData(keepTrips: true);
+  });
+
+  Future<void> restoreTrip(Trip trip) => _mutate(() async {
+    final restored = await repository.restoreTrip(trip);
+    archivedTrips = archivedTrips.where((item) => item.id != trip.id).toList();
+    deletedTrips = deletedTrips.where((item) => item.id != trip.id).toList();
+    trips = [restored, ...trips];
+  });
 
   Future<void> deleteActiveTrip() => _mutate(() async {
     final trip = activeTrip!;
     await repository.deleteTrip(trip);
+    if (repository is HttpManagementRepository) {
+      (repository as HttpManagementRepository).activeTripId = null;
+    }
     trips = trips.where((item) => item.id != trip.id).toList();
-    final next = trips.firstOrNull;
-    if (next == null) {
+    deletedTrips = repository is HttpManagementRepository
+        ? await repository.listTrips(activeProfile!.id, state: 'deleted')
+        : [trip, ...deletedTrips];
+    if (repository is HttpManagementRepository) {
       _clearTripData(keepTrips: true);
     } else {
-      await _loadTripDetail(next.id);
+      final next = trips.firstOrNull;
+      if (next == null) {
+        _clearTripData(keepTrips: true);
+      } else {
+        await _loadTripDetail(next.id);
+      }
     }
   });
 
@@ -224,9 +328,18 @@ class AppState extends ChangeNotifier {
     routePreview = null;
   });
 
+  Future<void> setActivityStatus(ActivityItem activity, String status) =>
+      _mutate(() async {
+        itinerary = await repository.updateActivity(activity.id, {
+          'version': activity.version,
+          'trip_id': activeTrip!.id,
+          'progress_state': status,
+        });
+      });
+
   Future<void> moveActivity(int from, int to) => _mutate(() async {
     final current = itinerary!;
-    final activities = [...current.activities];
+    final activities = [...activitiesForSelectedDay];
     final item = activities.removeAt(from);
     activities.insert(to, item);
     itinerary = await repository.reorderActivities(
@@ -236,6 +349,33 @@ class AppState extends ChangeNotifier {
     );
     routePreview = null;
   });
+
+  List<ActivityItem> get activitiesForSelectedDay {
+    final date = selectedTripDate;
+    if (date == null) return itinerary?.activities ?? const [];
+    return (itinerary?.activities ?? const <ActivityItem>[])
+        .where(
+          (item) =>
+              item.startAt.year == date.year &&
+              item.startAt.month == date.month &&
+              item.startAt.day == date.day,
+        )
+        .toList();
+  }
+
+  List<DateTime> get tripDates {
+    final trip = activeTrip;
+    if (trip == null) return const [];
+    return List.generate(
+      trip.endDate.difference(trip.startDate).inDays + 1,
+      (index) => trip.startDate.add(Duration(days: index)),
+    );
+  }
+
+  void selectTripDate(DateTime date) {
+    selectedTripDate = date;
+    notifyListeners();
+  }
 
   Future<List<PoiItem>> searchPois(String query) async {
     try {
