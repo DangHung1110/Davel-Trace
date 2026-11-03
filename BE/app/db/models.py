@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, time, timezone
+from decimal import Decimal
 from typing import Any
 from uuid import UUID, uuid4
 
@@ -10,12 +11,15 @@ from sqlalchemy import (
     JSON,
     Boolean,
     CheckConstraint,
+    Date,
     DateTime,
     Float,
     ForeignKey,
     Index,
     Integer,
+    Numeric,
     String,
+    Time,
     UniqueConstraint,
     Uuid,
 )
@@ -301,3 +305,135 @@ class ExportRequestModel(Base):
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     correlation_id: Mapped[str] = mapped_column(String(64), nullable=False)
     error_code: Mapped[str | None] = mapped_column(String(64))
+
+
+class TravelerProfileModel(Base):
+    __tablename__ = "traveler_profiles"
+    __table_args__ = (CheckConstraint("version > 0", name="traveler_profile_version_positive"),)
+
+    account_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="CASCADE"), primary_key=True)
+    display_name: Mapped[str] = mapped_column(String(120), nullable=False)
+    party_type: Mapped[str] = mapped_column(String(32), nullable=False, default="solo")
+    trip_purpose: Mapped[str] = mapped_column(String(32), nullable=False, default="leisure")
+    pace: Mapped[int] = mapped_column(Integer, nullable=False, default=2)
+    fitness: Mapped[int] = mapped_column(Integer, nullable=False, default=2)
+    spending_style: Mapped[str] = mapped_column(String(32), nullable=False, default="balanced")
+    food_preferences: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    preferred_activities: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    usual_transport: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    must_avoid: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    allergies: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    accessibility_needs: Mapped[list[str]] = mapped_column(JSON_VALUE, nullable=False, default=list)
+    onboarding_complete: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class TripModel(Base):
+    __tablename__ = "trips"
+    __table_args__ = (
+        CheckConstraint("traveler_count BETWEEN 1 AND 20", name="trip_traveler_count_valid"),
+        CheckConstraint("end_date >= start_date", name="trip_date_order_valid"),
+        CheckConstraint("version > 0", name="trip_version_positive"),
+        CheckConstraint("lifecycle_state IN ('available','archived','deleted','purged')", name="trip_lifecycle_valid"),
+        Index("ix_trips_owner_lifecycle_updated", "account_id", "lifecycle_state", "updated_at"),
+    )
+
+    trip_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    account_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="CASCADE"), nullable=False, index=True)
+    title: Mapped[str] = mapped_column(String(160), nullable=False)
+    destination: Mapped[str] = mapped_column(String(64), nullable=False, default="da_nang")
+    start_date: Mapped[date] = mapped_column(Date, nullable=False)
+    end_date: Mapped[date] = mapped_column(Date, nullable=False)
+    traveler_count: Mapped[int] = mapped_column(Integer, nullable=False)
+    progress_state: Mapped[str] = mapped_column(String(24), nullable=False, default="draft")
+    lifecycle_state: Mapped[str] = mapped_column(String(24), nullable=False, default="available")
+    review_state: Mapped[str] = mapped_column(String(24), nullable=False, default="current")
+    indicative_budget: Mapped[Decimal | None] = mapped_column(Numeric(14, 2))
+    currency: Mapped[str] = mapped_column(String(3), nullable=False, default="VND")
+    preferred_transport: Mapped[str] = mapped_column(String(32), nullable=False, default="mixed")
+    day_start: Mapped[time] = mapped_column(Time, nullable=False)
+    day_end: Mapped[time] = mapped_column(Time, nullable=False)
+    notes: Mapped[str] = mapped_column(String(2000), nullable=False, default="")
+    profile_version: Mapped[int] = mapped_column(Integer, nullable=False)
+    profile_snapshot: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    preference_overrides: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False, default=dict)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    purge_after: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class TripDayModel(Base):
+    __tablename__ = "trip_days"
+    __table_args__ = (
+        UniqueConstraint("trip_id", "local_date", name="uq_trip_days_trip_date"),
+        UniqueConstraint("trip_id", "position", name="uq_trip_days_trip_position"),
+        CheckConstraint("position >= 0", name="trip_day_position_non_negative"),
+    )
+    day_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    trip_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="CASCADE"), nullable=False, index=True)
+    local_date: Mapped[date] = mapped_column(Date, nullable=False)
+    position: Mapped[int] = mapped_column(Integer, nullable=False)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class TripActivityModel(Base):
+    __tablename__ = "trip_activities"
+    __table_args__ = (UniqueConstraint("day_id", "position"), CheckConstraint("position >= 0", name="trip_activity_position_non_negative"), CheckConstraint("progress_state IN ('planned','completed','skipped')", name="trip_activity_progress_valid"))
+    activity_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    day_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("trip_days.day_id", ondelete="CASCADE"), nullable=False, index=True)
+    kind: Mapped[str] = mapped_column(String(24), nullable=False, default="custom")
+    poi_id: Mapped[str | None] = mapped_column(String(128))
+    title: Mapped[str] = mapped_column(String(200), nullable=False)
+    start_time: Mapped[time | None] = mapped_column(Time)
+    end_time: Mapped[time | None] = mapped_column(Time)
+    duration_minutes: Mapped[int | None] = mapped_column(Integer)
+    estimated_cost: Mapped[Decimal | None] = mapped_column(Numeric(14, 2))
+    currency: Mapped[str] = mapped_column(String(3), nullable=False, default="VND")
+    progress_state: Mapped[str] = mapped_column(String(24), nullable=False, default="planned")
+    position: Mapped[int] = mapped_column(Integer, nullable=False)
+    notes: Mapped[str] = mapped_column(String(2000), nullable=False, default="")
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class ActiveTripSelectionModel(Base):
+    __tablename__ = "active_trip_selections"
+    account_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="CASCADE"), primary_key=True)
+    trip_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="SET NULL"), unique=True)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class MutationReceiptModel(Base):
+    __tablename__ = "mutation_receipts"
+    __table_args__ = (UniqueConstraint("account_id", "operation", "resource_scope", "key_hash"),)
+    receipt_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    account_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="CASCADE"), nullable=False)
+    operation: Mapped[str] = mapped_column(String(64), nullable=False)
+    resource_scope: Mapped[str] = mapped_column(String(128), nullable=False, default="root")
+    key_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    request_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
+    result_resource_id: Mapped[str | None] = mapped_column(String(128))
+    response_status: Mapped[int] = mapped_column(Integer, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
+class TripLifecycleEventModel(Base):
+    __tablename__ = "trip_lifecycle_events"
+    event_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    trip_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True, index=True)
+    account_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True, index=True)
+    event_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    outcome: Mapped[str] = mapped_column(String(32), nullable=False)
+    correlation_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    metadata_json: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False, default=dict)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)

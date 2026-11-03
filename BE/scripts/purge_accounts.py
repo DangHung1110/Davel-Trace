@@ -15,6 +15,13 @@ from BE.app.db.models import (
     OneTimeActionModel,
     PasswordHistoryModel,
     RoleAssignmentModel,
+    ActiveTripSelectionModel,
+    MutationReceiptModel,
+    TravelerProfileModel,
+    TripActivityModel,
+    TripDayModel,
+    TripLifecycleEventModel,
+    TripModel,
 )
 from BE.app.db.session import session_scope
 from BE.app.modules.identity.service import now_utc
@@ -40,6 +47,33 @@ def purge_due_accounts() -> int:
         ).with_for_update()))
         for account in accounts:
             account_id = account.account_id
+            trip_ids = select(TripModel.trip_id).where(
+                TripModel.account_id == account_id
+            )
+            day_ids = select(TripDayModel.day_id).where(
+                TripDayModel.trip_id.in_(trip_ids)
+            )
+            session.execute(delete(TripActivityModel).where(
+                TripActivityModel.day_id.in_(day_ids)
+            ))
+            session.execute(delete(TripDayModel).where(
+                TripDayModel.trip_id.in_(trip_ids)
+            ))
+            session.execute(delete(ActiveTripSelectionModel).where(
+                ActiveTripSelectionModel.account_id == account_id
+            ))
+            session.execute(delete(MutationReceiptModel).where(
+                MutationReceiptModel.account_id == account_id
+            ))
+            session.execute(delete(TripModel).where(
+                TripModel.account_id == account_id
+            ))
+            session.execute(delete(TravelerProfileModel).where(
+                TravelerProfileModel.account_id == account_id
+            ))
+            session.execute(delete(TripLifecycleEventModel).where(
+                TripLifecycleEventModel.account_id == account_id
+            ))
             for model in (IdentitySessionModel, OneTimeActionModel,
                           PasswordHistoryModel, RoleAssignmentModel,
                           ExportRequestModel):

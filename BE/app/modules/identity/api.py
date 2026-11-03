@@ -13,6 +13,7 @@ from BE.app.core.request_context import get_correlation_id
 from BE.app.modules.identity.service import IdentityError, IdentityService, now_utc
 from BE.app.modules.identity.delivery import development_outbox
 from BE.app.modules.identity.domain import Principal
+from BE.app.modules.identity.dependencies import current_principal
 from BE.app.modules.identity.security import normalize_email
 
 
@@ -63,9 +64,7 @@ def service() -> IdentityService:
 
 
 def principal(authorization: str | None = Header(default=None)) -> Principal:
-    if not authorization or not authorization.lower().startswith("bearer "):
-        raise IdentityError("AUTHENTICATION_REQUIRED", "Bạn cần đăng nhập.", 401)
-    return service().principal(authorization.split(" ", 1)[1].strip(), get_correlation_id())
+    return current_principal(authorization)
 
 
 def identity_error_response(exc: IdentityError) -> JSONResponse:
