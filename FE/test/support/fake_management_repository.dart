@@ -67,6 +67,9 @@ class FakeManagementRepository implements ManagementRepository {
       remainingVnd: budget - spent,
       byCategory: {},
       alert: spent >= budget && spent > 0 ? '100' : 'none',
+      averageVnd: expenses.isEmpty ? 0 : spent ~/ expenses.length,
+      entryCount: expenses.length,
+      utilizationPercent: budget == 0 ? 0 : spent / budget * 100,
     );
   }
 
@@ -286,7 +289,19 @@ class FakeManagementRepository implements ManagementRepository {
     String id,
     Map<String, dynamic> data,
   ) async {
-    final item = expenses.firstWhere((expense) => expense.id == id);
+    final old = expenses.firstWhere((expense) => expense.id == id);
+    final item = ExpenseItem(
+      id: old.id,
+      label: data['label'] as String? ?? old.label,
+      amountVnd: data['amount_vnd'] as int? ?? old.amountVnd,
+      category: data['category'] as String? ?? old.category,
+      spentAt: data['spent_at'] == null
+          ? old.spentAt
+          : DateTime.parse(data['spent_at'] as String),
+      notes: data['notes'] as String? ?? old.notes,
+      version: old.version + 1,
+    );
+    expenses[expenses.indexOf(old)] = item;
     return (item, summary);
   }
 
@@ -295,6 +310,28 @@ class FakeManagementRepository implements ManagementRepository {
     expenses.remove(expense);
     return summary;
   }
+
+  @override
+  Future<Map<String, dynamic>> exportExpenses(
+    String tripId, {
+    String? date,
+    String? category,
+  }) async => {
+    'schema_version': 1,
+    'trip_id': tripId,
+    'items': [
+      for (final item in expenses)
+        if (category == null || category == item.category)
+          {
+            'id': item.id,
+            'label': item.label,
+            'amount_vnd': item.amountVnd,
+            'category': item.category,
+            'spent_at': item.spentAt.toIso8601String(),
+          },
+    ],
+    'summary': {'spent_vnd': summary.spentVnd},
+  };
 
   @override
   Future<List<PoiItem>> searchPois(String query) async => const [

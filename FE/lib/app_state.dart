@@ -394,9 +394,6 @@ class AppState extends ChangeNotifier {
     required Map<String, dynamic> data,
   }) => _mutate(() async {
     if (existing == null) {
-      if (demoSource == DemoSource.live) {
-        await planningRepository.logExpense(activeTrip!.id, data);
-      }
       final result = await repository.addExpense(activeTrip!.id, data);
       expenses = [result.$1, ...expenses];
       expenseSummary = result.$2;
@@ -416,6 +413,25 @@ class AppState extends ChangeNotifier {
     expenseSummary = await repository.deleteExpense(expense);
     expenses = expenses.where((item) => item.id != expense.id).toList();
   });
+
+  Future<Map<String, dynamic>> exportExpenses({
+    String? date,
+    String? category,
+  }) async {
+    final trip = activeTrip;
+    if (trip == null) return const {};
+    try {
+      return await repository.exportExpenses(
+        trip.id,
+        date: date,
+        category: category,
+      );
+    } catch (error) {
+      errorMessage = _message(error);
+      notifyListeners();
+      rethrow;
+    }
+  }
 
   Future<void> loadRoutePreview() async {
     final activities = itinerary?.activities ?? const <ActivityItem>[];
