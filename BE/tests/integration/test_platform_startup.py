@@ -44,7 +44,7 @@ def test_schema_behind_or_ahead_is_never_reported_ready(tmp_path, monkeypatch) -
         identity_dev_outbox_enabled=False,
         _env_file=None,
     )
-    for current, head in (("005_001", "006_001"), ("007_001", "006_001")):
+    for current, head in (("006_001", "007_001"), ("008_001", "007_001")):
         monkeypatch.setattr(
             "BE.app.core.health.inspect_database",
             lambda _url, current=current, head=head: {

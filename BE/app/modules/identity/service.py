@@ -22,6 +22,10 @@ from BE.app.db.models import (
     PasswordHistoryModel,
     RoleAssignmentModel,
     SecurityAuditEventModel,
+    TravelerProfileModel,
+    TripActivityModel,
+    TripDayModel,
+    TripModel,
 )
 from BE.app.db.session import session_scope
 from BE.app.modules.identity.delivery import development_outbox
@@ -39,6 +43,86 @@ from BE.app.modules.identity.security import (
 
 def now_utc() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _owned_product_export(session, account_id: UUID) -> dict:
+    """Serialize durable profile/trip data without importing product modules."""
+    profile = session.get(TravelerProfileModel, account_id)
+    profile_payload = None
+    if profile:
+        profile_payload = {
+            "display_name": profile.display_name,
+            "party_type": profile.party_type,
+            "trip_purpose": profile.trip_purpose,
+            "pace": profile.pace,
+            "fitness": profile.fitness,
+            "spending_style": profile.spending_style,
+            "food_preferences": list(profile.food_preferences),
+            "preferred_activities": list(profile.preferred_activities),
+            "usual_transport": list(profile.usual_transport),
+            "must_avoid": list(profile.must_avoid),
+            "allergies": list(profile.allergies),
+            "accessibility_needs": list(profile.accessibility_needs),
+            "version": profile.version,
+            "created_at": profile.created_at.isoformat(),
+            "updated_at": profile.updated_at.isoformat(),
+        }
+    trips_payload = []
+    trips = session.scalars(select(TripModel).where(
+        TripModel.account_id == account_id
+    ).order_by(TripModel.created_at, TripModel.trip_id))
+    for trip in trips:
+        days_payload = []
+        days = session.scalars(select(TripDayModel).where(
+            TripDayModel.trip_id == trip.trip_id
+        ).order_by(TripDayModel.position))
+        for day in days:
+            activities = session.scalars(select(TripActivityModel).where(
+                TripActivityModel.day_id == day.day_id
+            ).order_by(TripActivityModel.position))
+            days_payload.append({
+                "id": str(day.day_id),
+                "date": day.local_date.isoformat(),
+                "position": day.position,
+                "version": day.version,
+                "activities": [{
+                    "id": str(item.activity_id),
+                    "kind": item.kind,
+                    "poi_id": item.poi_id,
+                    "title": item.title,
+                    "start_time": item.start_time.isoformat() if item.start_time else None,
+                    "end_time": item.end_time.isoformat() if item.end_time else None,
+                    "duration_minutes": item.duration_minutes,
+                    "estimated_cost": str(item.estimated_cost) if item.estimated_cost is not None else None,
+                    "currency": item.currency,
+                    "progress_state": item.progress_state,
+                    "position": item.position,
+                    "notes": item.notes,
+                    "version": item.version,
+                } for item in activities],
+            })
+        trips_payload.append({
+            "id": str(trip.trip_id),
+            "title": trip.title,
+            "destination": trip.destination,
+            "start_date": trip.start_date.isoformat(),
+            "end_date": trip.end_date.isoformat(),
+            "traveler_count": trip.traveler_count,
+            "lifecycle_state": trip.lifecycle_state,
+            "indicative_budget": str(trip.indicative_budget) if trip.indicative_budget is not None else None,
+            "currency": trip.currency,
+            "preferred_transport": trip.preferred_transport,
+            "day_start": trip.day_start.isoformat(),
+            "day_end": trip.day_end.isoformat(),
+            "notes": trip.notes,
+            "profile_snapshot": trip.profile_snapshot,
+            "preference_overrides": trip.preference_overrides,
+            "version": trip.version,
+            "created_at": trip.created_at.isoformat(),
+            "updated_at": trip.updated_at.isoformat(),
+            "days": days_payload,
+        })
+    return {"profile": profile_payload, "trips": trips_payload}
 
 
 class _RateLimiter:
@@ -365,6 +449,7 @@ class IdentityService:
             payload = {
                 "schema_version": 1,
                 "account": account_public(account, repo.roles(account.account_id)),
+                "product_data": _owned_product_export(session, account.account_id),
                 "exported_at": now_utc().isoformat(),
             }
             canonical = json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")

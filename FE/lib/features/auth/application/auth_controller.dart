@@ -39,6 +39,7 @@ class AuthController extends ChangeNotifier {
     }
     try {
       await _accept(await repository.refresh(token));
+      notifyListeners();
     } catch (_) {
       await sessionStore.clear();
       repository.setAccessToken(null);

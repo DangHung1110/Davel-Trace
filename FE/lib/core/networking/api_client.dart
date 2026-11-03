@@ -24,26 +24,42 @@ class ApiClient {
     return null;
   }
 
-  Future<dynamic> get(String path, {Map<String, String>? query}) =>
-      _send('GET', path, query: query);
+  Future<dynamic> get(
+    String path, {
+    Map<String, String>? query,
+    Map<String, String>? headers,
+  }) => _send('GET', path, query: query, extraHeaders: headers);
 
-  Future<dynamic> post(String path, {Object? body}) =>
-      _send('POST', path, body: body);
+  Future<dynamic> post(
+    String path, {
+    Object? body,
+    Map<String, String>? headers,
+  }) => _send('POST', path, body: body, extraHeaders: headers);
 
-  Future<dynamic> patch(String path, {Object? body}) =>
-      _send('PATCH', path, body: body);
+  Future<dynamic> patch(
+    String path, {
+    Object? body,
+    Map<String, String>? headers,
+  }) => _send('PATCH', path, body: body, extraHeaders: headers);
 
-  Future<dynamic> put(String path, {Object? body}) =>
-      _send('PUT', path, body: body);
+  Future<dynamic> put(
+    String path, {
+    Object? body,
+    Map<String, String>? headers,
+  }) => _send('PUT', path, body: body, extraHeaders: headers);
 
-  Future<dynamic> delete(String path, {Map<String, String>? query}) =>
-      _send('DELETE', path, query: query);
+  Future<dynamic> delete(
+    String path, {
+    Map<String, String>? query,
+    Map<String, String>? headers,
+  }) => _send('DELETE', path, query: query, extraHeaders: headers);
 
   Future<dynamic> _send(
     String method,
     String path, {
     Map<String, String>? query,
     Object? body,
+    Map<String, String>? extraHeaders,
     bool retried = false,
   }) async {
     final uri = Uri.parse('$_baseUrl$path').replace(queryParameters: query);
@@ -55,6 +71,7 @@ class ApiClient {
         'Content-Type': 'application/json',
         'X-Correlation-ID': correlationId,
         if (accessToken != null) 'Authorization': 'Bearer $accessToken',
+        ...?extraHeaders,
       };
       response = switch (method) {
         'GET' => await _client.get(uri, headers: headers),
@@ -99,7 +116,14 @@ class ApiClient {
       final replacement = await onUnauthorized!();
       if (replacement != null) {
         accessToken = replacement;
-        return _send(method, path, query: query, body: body, retried: true);
+        return _send(
+          method,
+          path,
+          query: query,
+          body: body,
+          extraHeaders: extraHeaders,
+          retried: true,
+        );
       }
     }
     if (response.statusCode < 200 || response.statusCode >= 300) {

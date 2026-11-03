@@ -116,6 +116,17 @@ class FakeManagementRepository implements ManagementRepository {
   }
 
   @override
+  Future<UserProfile> resetProfile(UserProfile profile) async =>
+      updateProfile(profile.id, {
+        'food_preferences': <String>[],
+        'preferred_activities': <String>[],
+        'usual_transport': <String>[],
+        'pace': 2,
+        'fitness': 2,
+        'spending_level': 2,
+      });
+
+  @override
   Future<void> setActiveProfile(String id) async => activeProfileId = id;
 
   @override
@@ -124,7 +135,7 @@ class FakeManagementRepository implements ManagementRepository {
   }
 
   @override
-  Future<List<Trip>> listTrips(String profileId) async =>
+  Future<List<Trip>> listTrips(String profileId, {String? state}) async =>
       trips.where((trip) => trip.profileId == profileId).toList();
 
   @override
@@ -174,6 +185,18 @@ class FakeManagementRepository implements ManagementRepository {
 
   @override
   Future<void> deleteTrip(Trip trip) async => trips.remove(trip);
+
+  @override
+  Future<Trip> archiveTrip(Trip trip) async {
+    trips.remove(trip);
+    return trip;
+  }
+
+  @override
+  Future<Trip> restoreTrip(Trip trip) async {
+    if (!trips.any((item) => item.id == trip.id)) trips.add(trip);
+    return trip;
+  }
 
   @override
   Future<(Trip, ItineraryData, ExpenseSummaryData)> getTrip(String id) async =>

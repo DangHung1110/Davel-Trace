@@ -31,6 +31,7 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     final state = widget.state;
     final stops = (state.itinerary?.activities ?? const [])
+        .where((activity) => activity.poiId != null)
         .map(MapStop.fromActivity)
         .toList();
     return Scaffold(

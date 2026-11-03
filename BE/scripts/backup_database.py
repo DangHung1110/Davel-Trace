@@ -28,6 +28,11 @@ _EVIDENCE_TABLES = (
     "identity_sessions",
     "one_time_actions",
     "export_requests",
+    "traveler_profiles",
+    "trips",
+    "trip_days",
+    "trip_activities",
+    "active_trip_selections",
 )
 
 
@@ -95,6 +100,25 @@ def collect_database_evidence(database_url: str) -> dict:
             ).mappings().first()
             relationships["identity"] = dict(identity_row) if identity_row else {
                 "account_id": None, "session_id": None, "role": None,
+            }
+            product_row = connection.execute(
+                text(
+                    "SELECT CAST(p.account_id AS TEXT) AS profile_account_id, "
+                    "CAST(t.trip_id AS TEXT) AS trip_id, "
+                    "CAST(d.day_id AS TEXT) AS day_id, "
+                    "CAST(x.activity_id AS TEXT) AS activity_id "
+                    "FROM traveler_profiles p "
+                    "LEFT JOIN trips t ON t.account_id = p.account_id "
+                    "LEFT JOIN trip_days d ON d.trip_id = t.trip_id "
+                    "LEFT JOIN trip_activities x ON x.day_id = d.day_id "
+                    "ORDER BY p.account_id, t.trip_id, d.position, x.position LIMIT 1"
+                )
+            ).mappings().first()
+            relationships["product"] = dict(product_row) if product_row else {
+                "profile_account_id": None,
+                "trip_id": None,
+                "day_id": None,
+                "activity_id": None,
             }
         return {
             "schema_revision": revision,
