@@ -50,6 +50,7 @@ from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
 from BE.app.services import trip_ctx
+from BE.app.services.explain import explain_retrieval
 from BE.app.services.optimizer import POOL_DEFAULT_BAND
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
@@ -177,7 +178,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
     # B4/FR-013: the retrieval explanation used to be computed and thrown
     # away. Keep it for the response (harness shows "cần xác minh").
-    needs_verification, excluded = _explain_retrieval(retrieval, by_id)
+    needs_verification, excluded = explain_retrieval(retrieval, by_id)
     # Trip context (dynamic state): live weather for the trip hours + the
     # conditional meal rhythm + the hourly traveler state. It closes the
     # rank rain_prob dead branch (rain_at per hour, max over the trip) and
@@ -406,7 +407,11 @@ def _shadow_reference(plans: list[dict], by_id: dict) -> list[dict]:
             pois.append({"poi_id": act.get("poi_id"),
                          "type": poi.get("type"),
                          "price_level": poi.get("price_level"),
-                         "fee": poi.get("fee"),
+                         # B5 v2: tag-only money — the band is the price
+                         # truth; deprecated `ticket_vnd` / legacy `fee` never
+                         # reach the shadow ranker prompt.
+                         "price_band": (poi.get("smart_tags") or {}).get("price_band"),
+                         "free_entry": poi.get("free_entry") is True,
                          "rating": poi.get("rating"),
                          "intensity": poi.get("intensity")})
         refs.append({
@@ -435,32 +440,6 @@ def _guarantee_fields(report: dict | None) -> dict:
         "replaced": report.get("replaced", []),
         "exhausted": report.get("exhausted", []),
     }
-
-
-def _explain_retrieval(retrieval: dict, by_id: dict) -> tuple[list[dict], list[dict]]:
-    """FR-013/FR-024 (B4): retrieval explanation -> public response lists.
-
-    `needs_verification` keeps the retrieval reasons + uncertainty labels and
-    the FR-031 must-visit flag; `excluded` keeps one reason per POI. Names are
-    added for the UI only (facts from the snapshot, no invention).
-    """
-    def _name(pid) -> str | None:
-        return (by_id.get(pid) or {}).get("name")
-
-    needs = []
-    for entry in retrieval.get("needs_verification") or []:
-        needs.append({
-            "poi_id": entry.get("poi_id"),
-            "name": _name(entry.get("poi_id")),
-            "must_visit": bool(entry.get("must_visit")),
-            "reasons": list(entry.get("reasons") or []),
-            "uncertainty": list(entry.get("uncertainty") or []),
-        })
-    excluded = [{"poi_id": item.get("poi_id"),
-                 "name": _name(item.get("poi_id")),
-                 "reason": item.get("reason")}
-                for item in retrieval.get("excluded") or []]
-    return needs, excluded
 
 
 def _merge_lists(*values) -> list[str]:

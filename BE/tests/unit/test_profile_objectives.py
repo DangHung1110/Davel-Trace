@@ -30,21 +30,29 @@ from BE.app.services.profiles import (  # noqa: E402
 )
 
 
-def _poi(pid, cat, rating, fee=0, price_level=1, visit=45,
+def _poi(pid, cat, rating, band=None, free=False, price_level=1, visit=45,
          hours=("06:00-23:59",)):
-    return {"poi_id": pid, "name": pid, "cat": cat, "type": cat,
-            "opening_hours": list(hours), "visit_min": visit,
-            "fee": fee, "rating": rating, "price_level": price_level,
-            "tags": [cat], "intensity": 1, "verified": True}
+    # B5 v2 (tag-only money): `price_band` is the price truth; `free_entry` is
+    # the only explicit "miễn phí". Deprecated `ticket_vnd` / legacy `fee` are
+    # never set here, and an absent band means "unknown" (no free bonus).
+    poi = {"poi_id": pid, "name": pid, "cat": cat, "type": cat,
+           "opening_hours": list(hours), "visit_min": visit,
+           "rating": rating, "price_level": price_level,
+           "tags": [cat], "intensity": 1, "verified": True}
+    if band is not None:
+        poi["smart_tags"] = {"price_band": band}
+    if free:
+        poi["free_entry"] = True
+    return poi
 
 
 # Cost fixture: one expensive high-rated cluster, one cheap compact cluster.
 COST_POIS = [
-    _poi("exp", "restaurant", 4.9, 500_000, 3),
-    _poi("cheap", "restaurant", 4.2, 0, 1),
-    _poi("fancy", "attraction", 4.8, 300_000, 3),
+    _poi("exp", "restaurant", 4.9, band="expensive", price_level=3),
+    _poi("cheap", "restaurant", 4.2, free=True, price_level=1),
+    _poi("fancy", "attraction", 4.8, band="expensive", price_level=3),
     _poi("mkt", "market", 4.3),
-    _poi("cafe", "cafe", 4.5, 0, 2),
+    _poi("cafe", "cafe", 4.5, price_level=2),
     _poi("beach", "beach", 4.4),
     _poi("park", "park", 4.1),
 ]
@@ -131,6 +139,20 @@ class TestStructuralObjectives(unittest.TestCase):
         # Category spread is dominant for experience, neutral for the rest.
         self.assertGreater(DIVERSITY_WEIGHT_BY_PROFILE["experience"], 2.0)
         self.assertEqual(DIVERSITY_WEIGHT_BY_PROFILE["balanced"], 1.0)
+
+    def test_savings_denies_free_bonus_to_unknown_price(self):
+        """JOB 2 gap: an unknown band is NOT free; only `free_entry` earns it."""
+        unknown = _poi("unknown", "cafe", 4.5)
+        free = _poi("free", "cafe", 4.5, free=True)
+        s_unknown = _score("savings", unknown, avg_leg=0,
+                           budget=COST_TRIP["budget"])
+        s_free = _score("savings", free, avg_leg=0,
+                        budget=COST_TRIP["budget"])
+        self.assertLess(s_unknown, s_free)
+        # Unknown also beats an expensive band on cost (charged 0, no bonus).
+        expensive = _poi("exp2", "cafe", 4.5, band="expensive")
+        self.assertGreater(s_unknown, _score("savings", expensive, avg_leg=0,
+                                             budget=COST_TRIP["budget"]))
 
     def test_plan_diversity_reports_categories_and_novelty(self):
         acts = [{"poi_id": "beach"}, {"poi_id": "cafe"}, {"poi_id": "beach"}]

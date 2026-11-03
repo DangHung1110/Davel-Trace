@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services import scorer  # noqa: E402
 from BE.app.services import state as store  # noqa: E402
+from BE.app.services import replan as replan_mod  # noqa: E402
 from BE.app.services.common import to_min  # noqa: E402
 from BE.app.services.matrix import MatrixService  # noqa: E402
 from BE.app.services.optimizer import travel_from_matrix  # noqa: E402
@@ -21,13 +22,15 @@ from BE.app.services.validator import validate  # noqa: E402
 
 H = 60
 POIS = [
-    {"poi_id": "hill", "verified": True, "visit_min": 120, "fee": 0, "intensity": 3,
-     "weather_sensitive": True, "opening_hours": ["05:00-18:00"]},
-    {"poi_id": "beach", "verified": True, "visit_min": 120, "fee": 0, "intensity": 2,
-     "weather_sensitive": True, "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "museum", "verified": True, "visit_min": 90, "fee": 60000, "intensity": 1,
+    {"poi_id": "hill", "verified": True, "visit_min": 120, "free_entry": True,
+     "intensity": 3, "weather_sensitive": True, "opening_hours": ["05:00-18:00"]},
+    {"poi_id": "beach", "verified": True, "visit_min": 120, "free_entry": True,
+     "intensity": 2, "weather_sensitive": True, "opening_hours": ["00:00-23:59"]},
+    {"poi_id": "museum", "verified": True, "visit_min": 90,
+     "smart_tags": {"price_band": "cheap"}, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:30-17:00"]},
-    {"poi_id": "noodle", "verified": True, "visit_min": 60, "fee": 50000, "intensity": 1,
+    {"poi_id": "noodle", "verified": True, "visit_min": 60,
+     "smart_tags": {"price_band": "cheap"}, "intensity": 1,
      "weather_sensitive": False, "opening_hours": ["07:00-21:00"]},
 ]
 IDS = [p["poi_id"] for p in POIS]
@@ -41,7 +44,7 @@ TRIP = {"trip_id": "t1", "budget": 3000000, "avoid": [],
 # difference observable (a 18:00 horizon overshoots 15:00, a 15:00 horizon
 # does not). `delay` drops nothing, so it stays in play.
 DEADLINE_POI = {"poi_id": "lakeside", "verified": True, "visit_min": 150,
-                "fee": 0, "intensity": 2, "weather_sensitive": False,
+                "free_entry": True, "intensity": 2, "weather_sensitive": False,
                 "opening_hours": ["06:00-19:00"]}
 
 REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
@@ -95,9 +98,9 @@ class TestReplan(unittest.TestCase):
 
     def test_infeasible_no_solution(self):
         s = store.new_state("t9", [{"poi_id": "a", "start": "07:00", "end": "08:00"}])
-        pois = [{"poi_id": "a", "visit_min": 300, "fee": 0, "intensity": 1,
+        pois = [{"poi_id": "a", "visit_min": 300, "intensity": 1,
                  "weather_sensitive": False, "opening_hours": ["07:00-08:00"]},
-                {"poi_id": "b", "visit_min": 300, "fee": 0, "intensity": 1,
+                {"poi_id": "b", "visit_min": 300, "intensity": 1,
                  "weather_sensitive": False, "opening_hours": ["09:00-10:00"]}]
         travel = {("a", "b"): 120, ("b", "a"): 120}
         out = replan(s, {"type": "delay", "delta": {"must_keep_all": True}},
@@ -112,7 +115,7 @@ class TestReplan(unittest.TestCase):
         state = store.new_state("unverified", [{"poi_id": "draft"}],
                                 "07:00", "depot")
         draft = {"poi_id": "draft", "verified": False, "visit_min": 60,
-                 "fee": 0, "intensity": 1, "weather_sensitive": False,
+                 "intensity": 1, "weather_sensitive": False,
                  "opening_hours": ["07:00-18:00"]}
         out = replan(state, {"type": "delay"}, [draft],
                      {("depot", "draft"): 5}, trip)
@@ -156,7 +159,9 @@ class TestReplan(unittest.TestCase):
             self.assertLessEqual(to_min(a["end"]), to_min("15:00"))
 
         # canonical validator (with return_time) passes on completed + new
-        by_id = {p["poi_id"]: {"verified": p["verified"], "fee": p["fee"],
+        by_id = {p["poi_id"]: {"verified": p["verified"],
+                               "free_entry": p.get("free_entry") is True,
+                               "smart_tags": p.get("smart_tags") or {},
                                "opening_hours": p["opening_hours"]} for p in pois}
         matrix = {f"{a}->{b}": {"minutes": 0 if a == b else 10}
                   for a in ids for b in ids}
@@ -176,7 +181,8 @@ class TestReplan(unittest.TestCase):
         not the old total, triggers refusal, and inputs are not mutated.
         """
         poi = {"poi_id": "expensive", "verified": True, "visit_min": 60,
-               "fee": 600000, "intensity": 1, "weather_sensitive": False,
+               "smart_tags": {"price_band": "expensive"}, "intensity": 1,
+               "weather_sensitive": False,
                "opening_hours": ["07:00-22:00"]}
         travel = {("depot", "expensive"): 10}
         trip = {"trip_id": "tight-budget", "budget": 3000000, "avoid": [],
@@ -203,6 +209,46 @@ class TestReplan(unittest.TestCase):
                         travel, dict(trip, trip_id="legacy-budget"))
         self.assertEqual(legacy["mode"], "plan")
 
+    def test_big_pool_is_capped_before_the_solver(self):
+        """N3: a replan over a large pool pre-filters to CANDIDATE_CAP.
+
+        `replan` used to re-optimize the whole remaining snapshot (O(n^2) arcs,
+        CP-SAT timeout -> false no_solution). It now calls `cap_candidates`
+        with the same limit as `build_plan`; the spy captures the real stats.
+        The solver is stubbed so this test pins the cap seam, not CP-SAT.
+        """
+        from BE.app.services.profiles import candidate_cap_limit
+
+        big = [{"poi_id": f"p{i}", "verified": True, "visit_min": 30,
+                "intensity": 1, "weather_sensitive": False,
+                "opening_hours": ["07:00-18:00"]} for i in range(90)]
+        ids = [p["poi_id"] for p in big]
+        travel = {(a, b): 5 for a in ["depot"] + ids for b in ids if a != b}
+        state = store.new_state(
+            "cap", [{"poi_id": p["poi_id"], "start": "07:00", "end": "07:30"}
+                    for p in big], "07:00", "depot")
+        seen = {}
+        real_cap = replan_mod.cap_candidates
+
+        def spy(candidates, ranked, cap, must_visit):
+            selected, stats = real_cap(candidates, ranked, cap, must_visit)
+            seen["stats"] = stats
+            seen["selected"] = selected
+            return selected, stats
+
+        with mock.patch.object(replan_mod, "cap_candidates", side_effect=spy), \
+                mock.patch.object(replan_mod, "optimize",
+                                  return_value={"itinerary": None,
+                                                "reason": "stub"}):
+            out = replan(state, {"type": "delay"}, big, travel,
+                         dict(TRIP, trip_id="cap"))
+        self.assertEqual(out["mode"], "no_solution")
+        stats = seen["stats"]
+        self.assertTrue(stats["capped"], stats)
+        self.assertEqual(stats["before"], len(big))
+        self.assertLessEqual(len(seen["selected"]), candidate_cap_limit())
+        self.assertLessEqual(stats["after"], candidate_cap_limit())
+
     @unittest.skipUnless(os.path.exists(MATRIX_JSON)
                          and os.path.exists(POIS_JSON),
                          "real matrix/pois snapshot absent")
@@ -211,8 +257,10 @@ class TestReplan(unittest.TestCase):
 
         Candidates are the snapshot POIs that are `verified` (only these pass
         the canonical FAR gate; unverified candidates force no_solution). With
-        just 5 verified POIs the full set is used (~6-8 slice not reachable);
-        size chosen so the remaining pool is deterministically feasible.
+        only a handful of verified POIs in this fixture the full set is used
+        (the 410-candidate cap is not reachable here, so this test does NOT
+        pin cap behaviour — see test_replan_caps_big_pool); size chosen so the
+        remaining pool is deterministically feasible.
         """
         svc = MatrixService(SNAPSHOT_DIR)
         with open(POIS_JSON, encoding="utf-8") as fh:
@@ -223,7 +271,8 @@ class TestReplan(unittest.TestCase):
             p, vm = by[pid], (by[pid].get("visit_min") or {})
             return {"poi_id": pid, "verified": True,
                     "visit_min": int(vm.get("p50") or 60),
-                    "fee": int(p.get("fee") or 0),
+                    "free_entry": p.get("free_entry") is True,
+                    "smart_tags": p.get("smart_tags") or {},
                     "intensity": p.get("intensity", 2),
                     "weather_sensitive": bool(p.get("weather_sensitive")),
                     "rating": p.get("rating", 0),

@@ -164,10 +164,12 @@ class TestGateProjectionMoney(unittest.TestCase):
         base = {"verified": True, "opening_hours": ["06:00-23:00"],
                 "cat": "museum", "type": "museum", "visit_min": 30}
         return [
-            {**base, "poi_id": "ticket", "ticket_vnd": 60000},
+            {**base, "poi_id": "cheap",
+             "smart_tags": {"price_band": "cheap"}},
             {**base, "poi_id": "band",
              "smart_tags": {"price_band": "medium"}},
-            {**base, "poi_id": "legacy", "fee": 50000},
+            # Deprecated money fields: kept in data, must contribute NOTHING.
+            {**base, "poi_id": "legacy", "fee": 50000, "ticket_vnd": 60000},
             {**base, "poi_id": "unknown"},
         ]
 
@@ -178,9 +180,9 @@ class TestGateProjectionMoney(unittest.TestCase):
         gate = {p["poi_id"]: profiles._gate_poi(p) for p in pois}
         by_id = {p["poi_id"]: p for p in pois}
         itinerary = {"activities": acts}
-        # 60k ticket + 300k medium band + 50k legacy + unknown (0 counted).
-        self.assertEqual(total_fee(acts, by_id), 410000)
-        self.assertEqual(plan_cost(itinerary, gate), 410000)
+        # 100k cheap + 300k medium + legacy (ignored) + unknown (0 counted).
+        self.assertEqual(total_fee(acts, by_id), 400_000)
+        self.assertEqual(plan_cost(itinerary, gate), 400_000)
         # The old projection priced everything at 0.
         self.assertNotEqual(plan_cost(itinerary, gate), 0)
 

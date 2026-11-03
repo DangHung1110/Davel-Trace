@@ -136,9 +136,11 @@ def _render_plan(plan: dict, ref: dict | None = None) -> str:
     for n, act in enumerate(plan.get("activities") or [], start=1):
         fact = facts.get(act.get("poi_id"), {})
         bits = [f"POI-{n}", f"{act.get('start', '?')}-{act.get('end', '?')}"]
-        for key in ("type", "price_level", "fee", "rating"):
+        for key in ("type", "price_level", "price_band", "rating"):
             if fact.get(key) is not None:
                 bits.append(f"{key}={fact[key]}")
+        if fact.get("free_entry") is True:
+            bits.append("free_entry=true")
         if fact.get("intensity") is not None:
             bits.append(f"intensity={fact['intensity']}")
         lines.append(" | ".join(str(b) for b in bits))
@@ -292,8 +294,8 @@ def rank(query, plans: list[dict], llm_fn, reference=None, *,
              "swap_consistency": float, "model_ver": str}.
     `reference` is the caller's solver verdict per plan (list aligned by
     index, or dict keyed by index/plan id): {feasible, cost, violations,
-    soft_violations, travel_min, pois:[{poi_id, type, price_level, fee,
-    rating, intensity}]}.
+    soft_violations, travel_min, pois:[{poi_id, type, price_level, price_band,
+    free_entry, rating, intensity}]}.
     """
     if llm_fn is None:
         raise ValueError("rank requires an llm_fn")

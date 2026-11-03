@@ -70,42 +70,43 @@ def parse_hours(hours: list | None) -> tuple[int, int] | None:
     return None
 
 
-# B5 (FULL-AUDIT): money bands -> typical per-person spend. Thresholds mirror
-# `BE/ml/data/price_from_raw.py` `band()` (cheap <100k, medium <=500k,
-# expensive >500k); the midpoint is the "what a visitor actually pays" figure,
-# matching the ingest rule that bands a menu by its midpoint, not its ceiling.
+# B5 (FULL-AUDIT v2, TAG-ONLY money): price band -> typical per-person spend.
+# Thresholds mirror `BE/ml/data/price_from_raw.py` `band()` (cheap <100k,
+# medium <=500k, expensive >500k); the midpoint is the "what a visitor
+# actually pays" figure, matching the ingest rule that bands a menu by its
+# midpoint, not its ceiling.
+#
+# PRODUCT DECISION (2026-10-29): the band IS the price truth. Chasing exact
+# VND per ticket was dropped as too costly/error-prone, so `ticket_vnd` is
+# DEPRECATED data (field kept, never read at runtime) and the legacy `fee`
+# field is likewise unread. A genuinely free POI sets `free_entry: true`
+# (there is no `free` band in the enum); band missing + no `free_entry`
+# means "giá chưa xác minh" (unknown, NOT free).
 BAND_MIDPOINT = {"cheap": 100_000, "medium": 300_000, "expensive": 700_000}
 
 
 def effective_fee(poi: dict | None) -> int | None:
     """Known spend for one POI in VND, or None when the price is unknown.
 
-    Order:
-    1. `ticket_vnd` — web-verified entry ticket, kept verbatim (0 = really free);
+    Order (tag-only v2):
+    1. `free_entry is True` — explicit "miễn phí" -> 0;
     2. `smart_tags.price_band` — cheap/medium/expensive -> BAND_MIDPOINT;
-    3. a non-zero legacy `fee` — explicit data (fixtures, older snapshots);
-    4. otherwise None = "giá chưa xác minh" (FR-024/FR-026 uncertainty).
+    3. otherwise None = "giá chưa xác minh" (FR-024/FR-026 uncertainty).
 
-    A missing/zero `fee` is UNKNOWN, never "miễn phí": the old `fee = 0`
-    default made all 742 snapshot POIs look free, so the budget filter, the
-    BCS gate and `total_cost` were all vacuous (FULL-AUDIT B5).
+    `ticket_vnd` and the legacy `fee` field are NOT read: exact ticket chasing
+    was dropped (see the BAND_MIDPOINT note). A missing band is UNKNOWN, never
+    "miễn phí" — the old `fee = 0` default made all 742 snapshot POIs look
+    free, so the budget filter, the BCS gate and `total_cost` were vacuous
+    (FULL-AUDIT B5).
     """
     if not poi:
         return None
-    ticket = poi.get("ticket_vnd")
-    if ticket is not None:
-        try:
-            return int(ticket)
-        except (TypeError, ValueError):
-            return None
+    if poi.get("free_entry") is True:
+        return 0
     band = (poi.get("smart_tags") or {}).get("price_band")
-    if band in BAND_MIDPOINT:
-        return BAND_MIDPOINT[band]
-    try:
-        fee = int(poi.get("fee") or 0)
-    except (TypeError, ValueError):
-        fee = 0
-    return fee if fee > 0 else None
+    if isinstance(band, str):
+        band = band.strip().lower()
+    return BAND_MIDPOINT.get(band)
 
 
 def total_fee(acts: list[dict], pois: dict) -> int:

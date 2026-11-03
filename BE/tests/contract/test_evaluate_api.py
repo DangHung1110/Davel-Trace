@@ -24,10 +24,11 @@ from BE.tests import conftest  # noqa: E402
 
 POIS = [
     {"poi_id": "museum", "name": "M", "type": "museum",
-     "opening_hours": ["07:30-17:00"], "fee": 60000, "rating": 4.4,
+     "opening_hours": ["07:30-17:00"],
+     "smart_tags": {"price_band": "cheap"}, "rating": 4.4,
      "verified": True, "visit_min": {"p25": 45, "p50": 90, "p75": 135}},
     {"poi_id": "beach", "name": "B", "type": "beach",
-     "opening_hours": ["00:00-23:59"], "fee": 0, "rating": 4.6,
+     "opening_hours": ["00:00-23:59"], "free_entry": True, "rating": 4.6,
      "verified": True, "visit_min": {"p25": 90, "p50": 120, "p75": 180}},
 ]
 CELLS = {"museum->beach": {"minutes": 10, "km": 3.0},

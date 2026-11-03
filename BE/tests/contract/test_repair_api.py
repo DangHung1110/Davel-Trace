@@ -72,7 +72,12 @@ class TestRepairApi(unittest.TestCase):
         self.assertEqual(r.status_code, 200, r.text)
         body = r.json()
         self.assertEqual(set(body), {"plan", "rounds", "repairs", "gate",
-                                     "review_ms"})
+                                     "review_ms", "needs_verification",
+                                     "excluded"})
+        # B4: the retrieval explanation is surfaced, not discarded (the stored
+        # pool is all-verified here, so both lists are honestly empty).
+        self.assertEqual(body["needs_verification"], [])
+        self.assertEqual(body["excluded"], [])
         ids = [a["poi_id"] for a in body["plan"]["activities"]]
         self.assertIn("museum", ids)
         self.assertEqual(body["rounds"], 2)

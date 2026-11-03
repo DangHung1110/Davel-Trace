@@ -1,6 +1,8 @@
 """FastAPI entry (T001 + T020, lane C). Health + routers. Error envelope
 + logging centralize in T009."""
 
+import os
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,12 +24,28 @@ from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 
 app = FastAPI(title="Travel Agent BE")
-# NOTE(test-local, DO NOT COMMIT as-is): allow-all CORS so the local
-# harness page (served on another port) can call the API. Restrict to
-# app origins before any PR.
+
+# N6: the local test harness (`index.html` served by `server.py`) calls this
+# API from another origin. The allow-list is EXPLICIT (never "*"): the harness
+# origins below are always allowed, and `CORS_ORIGINS` (comma-separated) adds
+# more (e.g. a second harness port) at startup. It ADDS rather than replaces
+# so a typo in the env var can never silently break the local flow.
+HARNESS_ORIGINS = ("http://127.0.0.1:5500", "http://localhost:5500")
+
+
+def cors_origins() -> list[str]:
+    """Harness origins + `CORS_ORIGINS` extras (deduped, no trailing slash)."""
+    origins = list(HARNESS_ORIGINS)
+    for origin in os.environ.get("CORS_ORIGINS", "").split(","):
+        origin = origin.strip().rstrip("/")
+        if origin and origin not in origins:
+            origins.append(origin)
+    return origins
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins(),
     allow_methods=["*"],
     allow_headers=["*"],
 )

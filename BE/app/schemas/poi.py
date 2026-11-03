@@ -38,7 +38,12 @@ class POI(BaseModel):
     dur_source: DurSource = "category_rule"
     dur_confidence: DurConfidence = "low"
     price_level: int = Field(default=2, ge=1, le=3)
+    # DEPRECATED: kept for data compatibility; runtime money reads
+    # `smart_tags.price_band` (+ `free_entry`), never this field.
     fee: int = Field(default=0, ge=0)
+    # Explicit "miễn phí" marker (there is no `free` price band). Absent =
+    # not free; a missing band with no flag is an UNKNOWN price.
+    free_entry: bool = False
     rating: float | None = Field(default=None, ge=0, le=5)
     tags: list[str] = Field(default_factory=list)
     intensity: int = Field(default=2, ge=1, le=3)

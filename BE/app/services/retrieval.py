@@ -93,8 +93,10 @@ def uncertainty(p: dict) -> list[str]:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
         labels.append("tags chua xac minh")
-    if (int(p.get("fee", 0)) == 0
+    if (effective_fee(p) is None
             and soft_rules.poi_category(p) == "restaurant"):
+        # B5 v2: only `price_band` (or an explicit `free_entry`) makes the
+        # price KNOWN; a bare `fee == 0` / `ticket_vnd` is ignored, not free.
         labels.append("gia chua xac minh")
     return labels
 
@@ -132,9 +134,10 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if types and soft_rules.poi_category(p) not in types:
             excluded.append({"poi_id": pid, "reason": "khong khop loai hoat dong"})
             continue
-        # B5: a POI only eats budget when its price is actually KNOWN
-        # (ticket_vnd -> price_band midpoint -> legacy fee). Unknown price is
-        # not "free" (no false fact) but also cannot block on a guess.
+        # B5 v2: a POI only eats budget when its price is actually KNOWN
+        # (tag-only: free_entry -> 0, else `smart_tags.price_band` midpoint).
+        # Unknown price is not "free" (no false fact) but also cannot block on
+        # a guess. `ticket_vnd` / legacy `fee` are unread.
         fee = effective_fee(p)
         if fee is not None and fee > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})

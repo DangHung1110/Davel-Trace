@@ -37,7 +37,8 @@ from BE.app.services import (
     templates,
     trip_ctx,
 )
-from BE.app.services.common import hh, status_map, to_min, total_fee
+from BE.app.services.common import (
+    effective_fee, hh, status_map, to_min, total_fee)
 from BE.app.services.gate import SOFT_CHECKS
 from BE.app.services.optimizer import (
     POOL_DEFAULT_BAND, StubTrip, optimize, stubs_from_pois)
@@ -70,7 +71,8 @@ SAVINGS_TRAVEL_WEIGHT = 1.0 / 60  # per minute of the average matrix leg
 # so this is subtracted per transition minute: a 30-minute leg costs ~1.5
 # node-score points (roughly 150k VND of fee, so fee stays the primary cost
 # term while travel is no longer a tie-break). The avg-leg node term alone is
-# too weak when every POI is free, as in the Danang snapshot.
+# too weak on the Danang snapshot, where almost no POI carries a separately
+# verified entry fee (price bands / unknown, not "free").
 SAVINGS_EDGE_TRAVEL_WEIGHT = 0.5
 SAVINGS_PRICE_LEVEL_PENALTY = 0.15  # per level above the cheapest band
 SAVINGS_FREE_BONUS = 0.15         # a free stop is always preferred
@@ -367,18 +369,24 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     optimizer (`DIVERSITY_WEIGHT_BY_PROFILE`); the node score itself is
     novelty + a small rating/fit term.
     """
-    rating, fee = float(p.get("rating") or 0), int(p.get("fee") or 0)
+    rating = float(p.get("rating") or 0)
     if profile == "savings":
+        # B5 v2 parity: price is the KNOWN effective fee (tag-only:
+        # `price_band` midpoint, or 0 when `free_entry` is true); None =
+        # unknown, which is charged nothing but also never earns the "free"
+        # bonuses (the old `fee == 0` conflated unknown with verified free, so
+        # every unpriced snapshot POI looked free).
+        fee = effective_fee(p)
         cat = soft_rules.poi_category(p)
         price_level = int(p.get("price_level") or 1)
         fee_weight = SAVINGS_FEE_UNIT
         if budget is not None and 0 < float(budget) < TIGHT_BUDGET_VND:
             fee_weight = fee_weight / SAVINGS_TIGHT_FEE_MULTIPLIER
-        score = SAVINGS_BASE - (fee / fee_weight)
+        score = SAVINGS_BASE - ((fee or 0) / fee_weight)
         score -= avg_leg * SAVINGS_TRAVEL_WEIGHT
         score -= max(0, price_level - 1) * SAVINGS_PRICE_LEVEL_PENALTY
         score += rating * SAVINGS_RATING_WEIGHT
-        if fee == 0:
+        if p.get("free_entry") is True:  # explicit "miễn phí", never unknown
             score += SAVINGS_FREE_BONUS
             if cat in SAVINGS_CATEGORIES:
                 score += SAVINGS_CHEAP_CATEGORY_BONUS
@@ -436,15 +444,15 @@ def score_plan(plan: dict) -> dict:
 def _gate_poi(poi: dict) -> dict:
     """The slice of a POI the gate/BCS sees.
 
-    Money fields are passed through verbatim (`ticket_vnd`, `smart_tags`) on
-    top of the legacy `fee`: `validator`/`check_bcs` price a plan with
-    `plan_cost` -> `total_fee` -> `effective_fee`, so a projection that only
-    carried `fee` made every band-priced POI look free and the internal BCS
-    disagreed with `/v1/evaluate` for the very same plan.
+    Money travels tag-only: `smart_tags.price_band` + the explicit
+    `free_entry` flag. `validator`/`check_bcs` price a plan with `plan_cost`
+    -> `total_fee` -> `effective_fee`, so a projection that omitted the tags
+    made every band-priced POI look free and the internal BCS disagreed with
+    `/v1/evaluate` for the very same plan. Deprecated `ticket_vnd` / legacy
+    `fee` are not projected (they are unread by design).
     """
     return {"verified": poi.get("verified", False),
-            "fee": poi.get("fee", 0),
-            "ticket_vnd": poi.get("ticket_vnd"),
+            "free_entry": poi.get("free_entry") is True,
             "smart_tags": poi.get("smart_tags") or {},
             "opening_hours": poi.get("opening_hours", []),
             "type": poi.get("type", ""), "cat": poi.get("cat", "")}

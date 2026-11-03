@@ -230,6 +230,10 @@ async function doRepair(plan, box){
       + " · soft: " + ((gate.soft_failed || []).join(", ") || "—");
     body.appendChild(gateLine);
 
+    // B4/FR-013/FR-024: same payload as the itinerary panel — unverified POIs
+    // and per-POI exclusion reasons (the repair response carries both).
+    renderVerification(json, body);
+
     const acts = ((json.plan && json.plan.activities) || [])
       .map(a => a.start + "-" + a.end + " " + a.poi_id).join("\n");
     const pre = document.createElement("pre");

@@ -48,6 +48,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, _REPO_ROOT) if _REPO_ROOT not in sys.path else None
 
+from BE.common import BAND_MIDPOINT  # noqa: E402
 from BE.ml.patm.estimate_duration import canonical_category  # noqa: E402
 
 DN_BBOX = (15.80, 107.75, 16.35, 108.55)  # s,w,n,e
@@ -271,8 +272,12 @@ def judge_poi(poi: dict, ctx: SnapshotContext) -> dict:
     if poi.get("rating") == 5.0:
         queue.append("rating_perfect")
     tags = poi.get("smart_tags") or {}
-    if (tags.get("ticket") is True and poi.get("ticket_vnd") is None
-            and "price_sources" not in poi):
+    # B5 v2 (tag-only money): a paid-entry claim is only evidence-backed when
+    # the row carries a known price band; an explicit `free_entry` closes the
+    # claim the other way. `ticket_vnd` is deprecated and no longer read.
+    if (tags.get("ticket") is True
+            and tags.get("price_band") not in BAND_MIDPOINT
+            and poi.get("free_entry") is not True):
         queue.append("ticket_unverified")
 
     hard = list(dict.fromkeys(hard))
@@ -407,7 +412,8 @@ def compute_flags(pois: list[dict]) -> tuple[dict[str, list[str]], dict[str, flo
                 if wa & wb and len(wa & wb) >= 2:
                     def _rich(p):
                         return (1 if p.get("rating") else 0) + (1 if p.get("opening_hours") else 0) \
-                            + (1 if p.get("verified") else 0) + (1 if p.get("ticket_vnd") else 0)
+                            + (1 if p.get("verified") else 0) \
+                            + (1 if (p.get("smart_tags") or {}).get("price_band") else 0)
 
                     def _info(p):
                         src = "mới-OSM" if p["poi_id"].startswith("osm:") else "cũ-crawl"
@@ -443,9 +449,11 @@ def compute_flags(pois: list[dict]) -> tuple[dict[str, list[str]], dict[str, flo
             flags["D4-no-rating"].append(pid)
         elif p.get("rating") == 5.0:
             flags["D4-rating-5.0"].append(pid)
-        # D5 ticket claim w/o evidence
+        # D5 paid-entry claim w/o a known price band (tag-only money)
         st = p.get("smart_tags") or {}
-        if st.get("ticket") is True and p.get("ticket_vnd") is None and "price_sources" not in p:
+        if (st.get("ticket") is True
+                and st.get("price_band") not in BAND_MIDPOINT
+                and p.get("free_entry") is not True):
             flags["D5-ticket-unverified"].append(pid)
         # D6 bbox
         s, w, n, e = DN_BBOX

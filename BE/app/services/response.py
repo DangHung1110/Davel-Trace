@@ -42,8 +42,10 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
     ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
                for a in acts]
     preference = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
-    # B5: total_cost sums KNOWN effective fees only; every POI whose price is
-    # unknown travels as an uncertainty label (FR-024/FR-026), never as "free".
+    # B5 v2 (tag-only): total_cost sums KNOWN effective fees only — a
+    # `price_band` midpoint, or 0 for an explicit `free_entry`. Every POI whose
+    # band is missing travels as an uncertainty label (FR-024/FR-026), never as
+    # "free". Deprecated `ticket_vnd` / legacy `fee` are unread.
     unknown_prices = [{"poi_id": a["poi_id"], "label": "gia chua xac minh"}
                       for a in acts
                       if effective_fee(pois.get(a["poi_id"])) is None]

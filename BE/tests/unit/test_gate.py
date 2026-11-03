@@ -40,9 +40,11 @@ from BE.app.services.gate import (  # noqa: E402
 )
 
 POIS = {
-    "musu": {"verified": True, "fee": 60000, "opening_hours": ["07:30-17:00"]},
-    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"]},
-    "draft": {"verified": False, "fee": 0, "opening_hours": ["00:00-23:59"]},
+    "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
+             "opening_hours": ["07:30-17:00"]},
+    "beach": {"verified": True, "free_entry": True,
+              "opening_hours": ["00:00-23:59"]},
+    "draft": {"verified": False, "opening_hours": ["00:00-23:59"]},
 }
 MATRIX = {"musu->beach": {"minutes": 10}, "beach->musu": {"minutes": 10}}
 TRIP = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00"}
@@ -192,8 +194,8 @@ class TestGate(unittest.TestCase):
 
     def test_bcs_itinerary_total_cost_overrides_fee_sum(self):
         """Pins: itinerary['total_cost'] wins over the POI fee sum when present."""
-        # Fee-based sum would be 60000 (musu) > budget 10 -> override makes it pass.
-        self.assertEqual(total_fee(GOOD["activities"], POIS), 60000)
+        # Band-based sum is 100000 (musu cheap) > budget 10 -> override passes.
+        self.assertEqual(total_fee(GOOD["activities"], POIS), 100000)
         with_cost = dict(GOOD, total_cost=10)
         self.assertEqual(check_bcs(with_cost, dict(TRIP, budget=10), POIS, MATRIX),
                          {"passed": True, "score": 1.0})

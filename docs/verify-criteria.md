@@ -71,7 +71,7 @@ chính xác hơn — đó là giới hạn dữ liệu, ghi nhận tại đây.
 | H1 | `type` có đúng bản chất POI | type là nhãn Google thô tiếng Việt; "Điểm thu hút khách du lịch" có thể là quán hải sản (SPOT_CHECK dòng "Quán Hải sản Tân Trà Beach") | người đọc tên + web |
 | H2 | `visit_min.p50` hợp lý | suy từ category rule; lệch >60% median bị đẩy queue nhưng trong ngưỡng vẫn có thể sai (Ghềnh Bàng 54' quá ngắn) | người |
 | H3 | `rating` thật / ảo | không có review count trong snapshot; 5.0 tuyệt đối bị queue | người (hoặc crawl review count) |
-| H4 | `fee`/`price_level`/`ticket_vnd` đúng | B5: fee=0 cho cả 742, price_level đồng loạt =2; chỉ 13 dòng có `ticket_vnd` | người + `ingest_money.py` |
+| H4 | `price_band` đúng | B5 v2 (tag-only): band là nguồn sự thật duy nhất; `fee`/`price_level` đồng loạt =0/2, `ticket_vnd` đã DEPRECATED (không đọc runtime) | người + `ingest_money.py` |
 | H5 | Giờ mở cửa đúng ngoài đời | A6 chỉ kiểm format | người / nguồn web |
 | H6 | Trùng lặp thật hay khác chi nhánh | A7 chỉ phát hiện nghi vấn; quyết định gộp/giữ/loại là của người | người (`REVIEW_V2.md` D1) |
 | H7 | POI có phải điểm du lịch | "CỬA HÀNG ĐIỆN NƯỚC HUY HIỀN" từng lọt pool | người (quyết định LOẠI) |
@@ -101,7 +101,7 @@ Ví dụ đúng: "Bảo tàng Điêu khắc Chăm" type `Điểm thu hút khách
 | Kết cục | Điều kiện | Hành động |
 |---|---|---|
 | `auto_pass` | A1–A7 xanh **và** không cờ nghi ngờ nào | bật `verified=true`, ghi `verified_by="auto-verify-v1"`, `verified_at=<ngày chạy>` |
-| `queue` | chỉ có điều kiện **không quyết được / nghi ngờ**: `hours_missing`, `name_generic`, `duplicate_name`, `near_duplicate`, `rating_perfect`, `duration_outlier`, `ticket_unverified`, `type_unmapped`, `type_cat_mismatch` | **không bật**, ghi 1 dòng JSONL vào `auto_verify_queue.jsonl` cho người |
+| `queue` | chỉ có điều kiện **không quyết được / nghi ngờ**: `hours_missing`, `name_generic`, `duplicate_name`, `near_duplicate`, `rating_perfect`, `duration_outlier`, `ticket_unverified` (claim `ticket: true` nhưng **thiếu `price_band`** và không có `free_entry: true`), `type_unmapped`, `type_cat_mismatch` | **không bật**, ghi 1 dòng JSONL vào `auto_verify_queue.jsonl` cho người |
 | `fail` | vi phạm deterministic: `coords_missing`, `coords_outside_bbox`, `name_missing`, `source_missing`, `type_missing`, `cat_missing`, `cat_unknown`, `duplicate_poi_id`, `hours_format_invalid`, `hours_out_of_range`, `hours_zero_length` | **không bật**, ghi queue JSONL để người sửa/loại |
 
 Thứ tự ưu tiên: có `fail` → `fail`; không fail nhưng có queue reason → `queue`;
@@ -193,5 +193,6 @@ Lý do fail: `coords_outside_bbox=1`.
 3. **Soát chéo 362 dòng auto**: bắt buộc với các category từng bị SPOT_CHECK bắt
    lỗi type (attraction/landmark) và các dòng `rating_perfect` đã bị loại khỏi
    auto. Auto chỉ chứng minh cấu trúc, không chứng minh bản chất POI.
-4. **D5/giá**: 6 dòng `ticket_unverified` + toàn bộ fee=0 (B5) vẫn là nợ dữ
-   liệu, không thuộc phạm vi applier này.
+4. **D5/giá**: 6 dòng `ticket_unverified` (claim vé nhưng thiếu `price_band`,
+   trừ `free_entry: true`) vẫn là nợ dữ liệu; điền band là cách duy nhất đóng
+   nợ này (tag-only B5 v2 — `ticket_vnd` không còn được đọc).

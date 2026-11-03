@@ -17,13 +17,17 @@ from BE.app.services.profiles import run_profiles, score_plan  # noqa: E402
 
 H = 60
 POIS = [
-    {"poi_id": "fancy", "verified": True, "visit_min": 90, "rating": 5.0, "fee": 500000,
+    {"poi_id": "fancy", "verified": True, "visit_min": 90,
+     "rating": 5.0, "smart_tags": {"price_band": "expensive"},
      "intensity": 1, "opening_hours": ["10:00-22:00"]},
-    {"poi_id": "hill", "verified": True, "visit_min": 120, "rating": 4.7, "fee": 0,
+    {"poi_id": "hill", "verified": True, "visit_min": 120,
+     "rating": 4.7, "free_entry": True,
      "intensity": 3, "opening_hours": ["05:00-18:00"]},
-    {"poi_id": "beach", "verified": True, "visit_min": 120, "rating": 4.6, "fee": 0,
+    {"poi_id": "beach", "verified": True, "visit_min": 120,
+     "rating": 4.6, "free_entry": True,
      "intensity": 2, "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "noodle", "verified": True, "visit_min": 60, "rating": 4.5, "fee": 50000,
+    {"poi_id": "noodle", "verified": True, "visit_min": 60,
+     "rating": 4.5, "smart_tags": {"price_band": "cheap"},
      "intensity": 1, "opening_hours": ["07:00-21:00"]},
 ]
 IDS = [p["poi_id"] for p in POIS]

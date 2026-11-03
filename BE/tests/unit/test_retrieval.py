@@ -12,18 +12,22 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.retrieval import _overlaps, retrieve  # noqa: E402
+from BE.app.services.retrieval import (  # noqa: E402
+    _overlaps, retrieve, uncertainty)
 
 POIS = [
-    {"poi_id": "beach", "type": "beach", "fee": 0, "verified": True,
+    {"poi_id": "beach", "type": "beach", "free_entry": True, "verified": True,
      "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "noodle", "type": "restaurant", "fee": 50000, "verified": True,
+    {"poi_id": "noodle", "type": "restaurant",
+     "smart_tags": {"price_band": "cheap"}, "verified": True,
      "opening_hours": ["07:00-21:00"]},
-    {"poi_id": "museum", "type": "museum", "fee": 60000, "verified": True,
+    {"poi_id": "museum", "type": "museum",
+     "smart_tags": {"price_band": "cheap"}, "verified": True,
      "opening_hours": ["07:30-17:00"]},
-    {"poi_id": "draft", "type": "beach", "fee": 0, "verified": False,
+    {"poi_id": "draft", "type": "beach", "free_entry": True, "verified": False,
      "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "fancy", "type": "restaurant", "fee": 5000000, "verified": True,
+    {"poi_id": "fancy", "type": "restaurant",
+     "smart_tags": {"price_band": "expensive"}, "verified": True,
      "opening_hours": ["07:00-21:00"]},
 ]
 
@@ -48,7 +52,7 @@ class TestRetrieval(unittest.TestCase):
 
     def test_type_filter(self):
         out = retrieve(TRIP, POIS)
-        self.assertEqual(ids(out, "candidates"), ["beach", "noodle"])
+        self.assertEqual(ids(out, "candidates"), ["beach", "fancy", "noodle"])
         self.assertIn("khong khop loai", str(out["excluded"]))
 
     def test_closed_hours_excluded(self):
@@ -87,6 +91,22 @@ class TestRetrieval(unittest.TestCase):
         out = retrieve(trip, POIS)
         self.assertNotIn("beach", ids(out, "candidates"))
         self.assertIn("avoid", str(out["excluded"]))
+
+    def test_restaurant_price_label_uses_effective_fee(self):
+        """B5 v2: band/free_entry make price KNOWN; ticket_vnd/`fee` are unread."""
+        self.assertIn("gia chua xac minh",
+                      uncertainty({"type": "restaurant"}))
+        self.assertNotIn("gia chua xac minh",
+                         uncertainty({"type": "restaurant",
+                                      "smart_tags": {"price_band": "cheap"}}))
+        self.assertNotIn("gia chua xac minh",
+                         uncertainty({"type": "restaurant", "free_entry": True}))
+        # Deprecated money fields must not masquerade as a known price.
+        self.assertIn("gia chua xac minh",
+                      uncertainty({"type": "restaurant", "ticket_vnd": 0,
+                                   "fee": 50_000}))
+        self.assertNotIn("gia chua xac minh",
+                         uncertainty({"type": "beach"}))
 
 
 if __name__ == "__main__":

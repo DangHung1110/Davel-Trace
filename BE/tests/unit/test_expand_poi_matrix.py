@@ -343,18 +343,32 @@ class TestMainBatching(unittest.TestCase):
         self.assertEqual(self.read_matrix()["ids"], ["base"])
 
     def test_guard_allows_batch_exactly_at_the_cap(self):
-        # 1 existing + (cap - 1) new == cap.
+        # n + chunk == cap: 1 existing + (cap - 1 - chunk) new + chunk sources.
         cap = epm.MAX_TABLE_SIZE
-        pois, _ids = batch_dataset(cap - 1)
+        chunk = 100  # parse_args --chunk default
+        pois, _ids = batch_dataset(cap - 1 - chunk)
         with open(self.pois_path, "w", encoding="utf-8") as f:
             json.dump({"snapshot": "danang-v1", "pois": pois}, f)
         with contextlib.redirect_stdout(io.StringIO()):
-            code = self.run_main(["--limit", str(cap - 1)])
+            code = self.run_main(["--limit", str(cap - 1 - chunk)])
         self.assertEqual(code, 0)
-        self.assertEqual(self.read_matrix()["n"], cap)
+        self.assertEqual(self.read_matrix()["n"], cap - chunk)
+
+    def test_guard_reserves_a_chunk_of_source_headroom(self):
+        # n = cap - chunk + 1 passed the old n-only guard, but n + chunk is
+        # cap + 1: `sources` count too (real OSRM answers TooBig).
+        cap = epm.MAX_TABLE_SIZE
+        chunk = 100  # parse_args --chunk default
+        pois, _ids = batch_dataset(cap - chunk)
+        with open(self.pois_path, "w", encoding="utf-8") as f:
+            json.dump({"snapshot": "danang-v1", "pois": pois}, f)
+        with contextlib.redirect_stdout(io.StringIO()):
+            code = self.run_main(["--limit", str(cap - chunk)])
+        self.assertEqual(code, 2)
+        self.assertEqual(self.read_matrix()["ids"], ["base"])
 
     def test_three_batches_cover_the_selection_while_under_the_cap(self):
-        pois, ids = batch_dataset(290)  # 1 existing + 290 = 291 <= 300
+        pois, ids = batch_dataset(290)  # 1 existing + 290 = 291 <= 600
         with open(self.pois_path, "w", encoding="utf-8") as f:
             json.dump({"snapshot": "danang-v1", "pois": pois}, f)
         for limit in ("100", "100", "90"):

@@ -14,12 +14,13 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from BE.app.services.rank import WEIGHTS, rank, score_poi  # noqa: E402
 
 DATING_QUIET_SEA = {
-    "poi_id": "cove", "type": "beach", "fee": 0, "rating": 4.6,
+    "poi_id": "cove", "type": "beach", "free_entry": True, "rating": 4.6,
     "intensity": 1, "weather_sensitive": True,
     "tags": ["yên tĩnh", "hẹn hò", "biển"], "ambience": "yên tĩnh", "cuisine": [],
 }
 NOISY_CROWDED = {
-    "poi_id": "club", "type": "landmark", "fee": 500000, "rating": 3.5,
+    "poi_id": "club", "type": "landmark",
+    "smart_tags": {"price_band": "expensive"}, "rating": 3.5,
     "intensity": 3, "weather_sensitive": False,
     "tags": ["ồn ào", "đông"], "ambience": "ồn ào", "cuisine": [],
 }
@@ -97,6 +98,44 @@ class TestRank(unittest.TestCase):
         budget_user = score_poi(cheap, {"spending_level": 1}, ctx)["score"]
         luxury_user = score_poi(cheap, {"spending_level": 3}, ctx)["score"]
         self.assertGreater(budget_user, luxury_user)
+
+    def test_unknown_price_is_neutral_not_max_price_fit(self):
+        """B5 v2: `effective_fee is None` must score mid-scale, not 1.0.
+
+        The old `fee or 0` treated an unpriced row as the cheapest possible
+        POI, so "we do not know" out-ranked a known-price stop. Neutral is
+        pinned against the band table: at budget 600k, a `medium` band (300k)
+        has fee-share 0.5, exactly the unknown default; `cheap` (100k) scores
+        higher and `expensive` (700k, clamped) lower. `free_entry` is the only
+        POI that may claim the maximum.
+        """
+        base = {"poi_id": "p", "cat": "restaurant", "type": "Nhà hàng",
+                "rating": 4.5, "intensity": 1, "tags": []}
+        user = {"budget": 600_000}
+        ctx = {"hour": "12:00"}
+        unknown = dict(base)
+        free = dict(base, free_entry=True)
+        cheap = dict(base, smart_tags={"price_band": "cheap"})
+        medium = dict(base, smart_tags={"price_band": "medium"})
+        expensive = dict(base, smart_tags={"price_band": "expensive"})
+        s_unknown = score_poi(unknown, user, ctx)["score"]
+        self.assertIn("gia chua xac minh",
+                      score_poi(unknown, user, ctx)["reasons"])
+        self.assertNotIn("gia chua xac minh",
+                         score_poi(cheap, user, ctx)["reasons"])
+        self.assertEqual(s_unknown, score_poi(medium, user, ctx)["score"])
+        self.assertGreater(s_unknown, score_poi(expensive, user, ctx)["score"])
+        self.assertLess(s_unknown, score_poi(cheap, user, ctx)["score"])
+        self.assertLess(s_unknown, score_poi(free, user, ctx)["score"])
+
+    def test_deprecated_ticket_zero_is_not_free(self):
+        """B5 v2: `ticket_vnd = 0` no longer means "miễn phí" (field unread)."""
+        poi = {"poi_id": "old", "cat": "museum", "type": "Bảo tàng",
+               "rating": 4.5, "intensity": 1, "tags": [], "ticket_vnd": 0,
+               "fee": 0}
+        r = score_poi(poi, {}, {"hour": "12:00"})
+        self.assertNotIn("mien phi", r["reasons"])
+        self.assertIn("gia chua xac minh", r["reasons"])
 
 
 if __name__ == "__main__":

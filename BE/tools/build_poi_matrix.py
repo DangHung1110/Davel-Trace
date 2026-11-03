@@ -17,7 +17,7 @@ Docker (data dir OUTSIDE the repo, e.g. TMP):
     docker run --rm -v <tmp>:/data osrm/osrm-backend osrm-customize /data/vietnam-latest.osrm
     docker run -d --name osrm-vn --restart unless-stopped -p 127.0.0.1:5000:5000 \
         -v <tmp>:/data osrm/osrm-backend \
-        osrm-routed --algorithm mld --max-table-size 300 /data/vietnam-latest.osrm
+        osrm-routed --algorithm mld --max-table-size 600 /data/vietnam-latest.osrm
 
 Low-RAM hosts (<8 GB free): the whole-Vietnam extract can wedge Docker
 (edge-expanded phase). Cut the Da Nang bbox first (streaming, ~300 MB RAM),

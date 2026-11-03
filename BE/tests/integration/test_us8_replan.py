@@ -61,8 +61,11 @@ class TestUS8Replan(unittest.TestCase):
         self.assertIn("park", drops)  # outdoor remainder replaced
         new_ids = [a["poi_id"] for a in out["itinerary"]["activities"]]
         self.assertNotIn("park", new_ids)
-        by_id = {p["poi_id"]: {"verified": True, "fee": p["fee"],
-                               "opening_hours": p["opening_hours"]} for p in POIS}
+        by_id = {p["poi_id"]: {"verified": True,
+                               "free_entry": p.get("free_entry") is True,
+                               "smart_tags": p.get("smart_tags") or {},
+                               "opening_hours": p["opening_hours"]}
+                 for p in POIS}
         done_acts = [{"poi_id": a["poi_id"], "start": a["start"], "end": a["end"]}
                      for a in s["completed"]]
         full = done_acts + out["itinerary"]["activities"]

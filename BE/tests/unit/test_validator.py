@@ -16,8 +16,10 @@ from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
 POIS = {
-    "musu": {"verified": True, "fee": 60000, "opening_hours": ["07:30-17:00"]},
-    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"]},
+    "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
+             "opening_hours": ["07:30-17:00"]},
+    "beach": {"verified": True, "free_entry": True,
+              "opening_hours": ["00:00-23:59"]},
 }
 MATRIX = {"musu->beach": {"minutes": 10}, "beach->musu": {"minutes": 10}}
 TRIP = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00"}

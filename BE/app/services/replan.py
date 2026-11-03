@@ -23,6 +23,7 @@ from BE.app.services.budget import tighten_budget
 from BE.app.services.common import parse_hours, to_min
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
+from BE.app.services.profiles import candidate_cap_limit, cap_candidates
 from BE.app.services.soft_rules import CATEGORY_DAILY_CAP, cafe_cap
 from BE.app.services.validator import validate
 
@@ -85,6 +86,16 @@ def replan(state: dict, event: dict, pois: list[dict],
     cand_ids += [a["poi_id"] if isinstance(a, dict) else a for a in added
                  if (a["poi_id"] if isinstance(a, dict) else a) not in cand_ids]
 
+    # N3 parity with build_plan: the whole remaining pool was re-optimized
+    # uncapped here, so a large verified snapshot built the O(n^2) arc model
+    # per replan, hit the CP-SAT timeout and reported a false `no_solution`.
+    # Cap BEFORE the scorer/model with the same per-category balanced rule
+    # (must_visit pinned), so replans stay feasible instead of failing slow.
+    cand_pois, _cap_stats = cap_candidates(
+        [by_id[pid] for pid in cand_ids if pid in by_id], None,
+        candidate_cap_limit(), trip.get("must_visit") or [])
+    cand_ids = [p["poi_id"] for p in cand_pois]
+
     # depot legs from the last completed POI (rolling horizon continuity)
     travel2 = dict(travel)
     if completed_ids:
@@ -129,9 +140,14 @@ def replan(state: dict, event: dict, pois: list[dict],
     if budget_state is not None:
         tight = tighten_budget(budget_state, trip)
         effective_trip = dict(trip, budget=tight["allowed_remaining"])
+    # B5 v2: the validator prices the plan tag-only, so the projection must
+    # carry `smart_tags` (+ the explicit `free_entry` flag) or every band-priced
+    # POI looks free and BCS silently passes (oracle issue #1: bands travel
+    # with smart_tags). Deprecated `ticket_vnd` / legacy `fee` are not projected.
     rep = validate({"activities": acts}, effective_trip,
                    {p["poi_id"]: {"verified": p.get("verified", False),
-                                  "fee": p.get("fee", 0),
+                                  "free_entry": p.get("free_entry") is True,
+                                  "smart_tags": p.get("smart_tags") or {},
                                   "opening_hours": p.get("opening_hours", [])}
                     for p in pois}, matrix)
     if acts and not rep["passed"]:

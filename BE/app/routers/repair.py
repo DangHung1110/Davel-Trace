@@ -6,7 +6,8 @@ In:  {"itinerary_id": "..."}  (read from the select store) or
      {"plan": {...}, "trip": {...}}.
 Out: {"plan": {...}, "rounds": n,
       "repairs": [{"issue", "action", "kept"}, ...],
-      "gate": {...}, "review_ms": [...]}
+      "gate": {...}, "review_ms": [...],
+      "needs_verification": [...], "excluded": [...]}
 
 Per round: narrow LLM review (the exact /v1/review prompt) -> safe POI swaps
 (different category, same time slot, verified + matrix-connected) -> gate
@@ -35,6 +36,7 @@ from BE.app.routers import review as review_router
 from BE.app.routers import select as select_svc
 from BE.app.services import repair as repair_svc
 from BE.app.services import retrieval as retrieval_svc
+from BE.app.services.explain import explain_retrieval
 
 router = APIRouter(prefix="/v1", tags=["repair"])
 
@@ -58,7 +60,7 @@ def _as_index(raw) -> dict:
 
 
 def _resolve(body: RepairIn):
-    """(plan, trip, pois_by_id, pool, matrix) or an error response."""
+    """(plan, trip, pois_by_id, pool, matrix, explanation) or an error response."""
     plan = body.plan
     if plan is None:
         if not body.itinerary_id:
@@ -85,6 +87,12 @@ def _resolve(body: RepairIn):
     raw_pool = ctx.get("pois") or plan.get("pois")
     if raw_pool:
         pool = list(pois_by_id.get(p.get("poi_id"), p) for p in _as_index(raw_pool).values())
+        # The stored pool is the planner's own selection: this request excludes
+        # nothing from it, but its unverified members still owe an explanation
+        # (B4/FR-013). Reuse the retrieval entry shape instead of re-deriving it.
+        retrieval = {"needs_verification":
+                     retrieval_svc.retrieve(trip, pool)["needs_verification"],
+                     "excluded": []}
     else:
         # No stored candidate pool: reproduce the router's retrieval seam so
         # the repair can only choose POIs the planner could have chosen.
@@ -93,15 +101,19 @@ def _resolve(body: RepairIn):
                 os.path.join(snapshot_dir, "pois.json"))
         except (FileNotFoundError, NotADirectoryError):
             all_pois = list(pois_by_id.values())
-        candidate_ids = {c["poi_id"]
-                         for c in retrieval_svc.retrieve(trip, all_pois)["candidates"]}
+        retrieval = retrieval_svc.retrieve(trip, all_pois)
+        candidate_ids = {c["poi_id"] for c in retrieval["candidates"]}
         pool = [p for p in all_pois if p.get("poi_id") in candidate_ids]
+    # B4 (FR-013/FR-024): `needs_verification` + `excluded` used to be computed
+    # and thrown away. They are part of the response now, with the exact same
+    # shape POST /v1/itinerary returns ("cần xác minh" + per-POI reasons).
+    explanation = explain_retrieval(retrieval, pois_by_id)
 
     travel = ctx.get("travel")
     matrix = (_matrix_from_travel(travel)
               if isinstance(travel, dict) and travel
               else plan.get("matrix") or cells)
-    return (plan, trip, pois_by_id, pool, matrix), None
+    return (plan, trip, pois_by_id, pool, matrix, explanation), None
 
 
 @router.post("/repair")
@@ -109,7 +121,8 @@ def repair(body: RepairIn):
     resolved, err = _resolve(body)
     if err is not None:
         return err
-    plan, trip, pois_by_id, pool, matrix = resolved
+    plan, trip, pois_by_id, pool, matrix, explanation = resolved
+    needs_verification, excluded = explanation
 
     try:
         result = repair_svc.repair_plan(
@@ -119,7 +132,10 @@ def repair(body: RepairIn):
     except Exception as exc:  # noqa: BLE001 - never 500 the harness
         return {"plan": {k: v for k, v in plan.items() if not k.startswith("_")},
                 "rounds": 0, "repairs": [], "gate": None,
+                "needs_verification": needs_verification,
+                "excluded": excluded,
                 "note": f"REPAIR_UNAVAILABLE: {type(exc).__name__}"}
 
     repaired = {k: v for k, v in result["plan"].items() if not k.startswith("_")}
-    return {**result, "plan": repaired}
+    return {**result, "plan": repaired,
+            "needs_verification": needs_verification, "excluded": excluded}

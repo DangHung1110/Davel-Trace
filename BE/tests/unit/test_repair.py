@@ -101,12 +101,19 @@ class TestRepairLoop(unittest.TestCase):
         self.assertTrue(result["gate"]["passed"])  # hard gates still fine
 
     def test_unsafe_swap_is_reverted_by_the_gate(self):
-        """A different-category POI that breaks BCS must not be kept."""
-        pricey = {**POIS[2], "poi_id": "pricey", "fee": 9000000}
+        """A different-category POI that breaks BCS must not be kept.
+
+        B5 v2: BCS reads the band midpoint, so an `expensive` POI (700k) is
+        unaffordable against a 500k trip budget; an unknown-price POI is not
+        charged (and must not block).
+        """
+        pricey = {**POIS[2], "poi_id": "pricey",
+                  "smart_tags": {"price_band": "expensive"}}
         pool = [POIS[0], POIS[1], pricey]
         matrix = {f"{a['poi_id']}->{b['poi_id']}": {"minutes": 10, "km": 1.0}
                   for a in pool for b in pool if a is not b}
-        result = repair_plan(PLAN, TRIP, {p["poi_id"]: p for p in pool},
+        result = repair_plan(PLAN, dict(TRIP, budget=500_000),
+                             {p["poi_id"]: p for p in pool},
                              matrix, pool, food_only_review)
         ids = [a["poi_id"] for a in result["plan"]["activities"]]
         self.assertNotIn("pricey", ids)

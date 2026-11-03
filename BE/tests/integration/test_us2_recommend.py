@@ -18,22 +18,27 @@ from BE.app.services.context_score import score_context  # noqa: E402
 from BE.app.services.retrieval import retrieve  # noqa: E402
 
 POIS = [
-    {"poi_id": "cove-eat", "type": "restaurant", "fee": 200000, "rating": 4.6,
+    {"poi_id": "cove-eat", "type": "restaurant",
+     "smart_tags": {"price_band": "medium"}, "rating": 4.6,
      "intensity": 1, "ambience": "yên tĩnh", "crowd": "vừa phải",
      "verified": True, "opening_hours": ["10:00-22:00"],
      "tags": ["biển", "hẹn hò", "hải sản"], "cuisine": ["hải sản"]},
-    {"poi_id": "club", "type": "landmark", "fee": 100000, "rating": 3.5,
+    {"poi_id": "club", "type": "landmark",
+     "smart_tags": {"price_band": "cheap"}, "rating": 3.5,
      "intensity": 3, "ambience": "ồn ào", "crowd": "đông",
      "verified": True, "opening_hours": ["00:00-23:59"], "tags": ["nhạc"]},
-    {"poi_id": "shack", "type": "restaurant", "fee": 50000, "rating": None,
+    {"poi_id": "shack", "type": "restaurant", "rating": None,
      "intensity": 1, "ambience": "yên tĩnh", "crowd": "",
      "verified": False, "opening_hours": [], "tags": []},
-    {"poi_id": "fancy", "type": "restaurant", "fee": 9000000, "rating": 4.9,
+    {"poi_id": "fancy", "type": "restaurant",
+     "smart_tags": {"price_band": "expensive"}, "rating": 4.9,
      "intensity": 1, "ambience": "lãng mạn", "crowd": "vắng",
      "verified": True, "opening_hours": ["10:00-22:00"], "tags": ["biển"]},
 ]
 PREFS = ["yên tĩnh", "hẹn hò", "gần biển"]
-TRIP = {"budget": 3000000, "start_time": "18:00", "end_time": "22:00",
+# Budget 500k: `fancy` (expensive midpoint 700k) is the only over-budget row
+# under tag-only money; cove-eat (medium 300k) and club (cheap 100k) pass.
+TRIP = {"budget": 500000, "start_time": "18:00", "end_time": "22:00",
         "must_visit": [], "avoid": [], "activities": ["ăn", "biển"],
         "food_prefs": ["hải sản"]}
 

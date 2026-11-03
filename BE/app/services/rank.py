@@ -108,13 +108,19 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         reasons.append(f"rating cao {rating}")
 
     budget = int(user.get("budget", (ctx.get("trip") or {}).get("budget", 3000000)))
-    # B5: use the KNOWN effective fee (ticket_vnd -> price_band midpoint ->
-    # legacy fee). None means "price unknown": it contributes nothing to the
-    # fee-share term (neutral scoring default) and is labelled uncertain —
-    # never "mien phi", which was a false fact on all 742 fee-less POIs
-    # (FR-026). price_level spending-fit below is unchanged.
+    # B5 v2: use the KNOWN effective fee (tag-only: free_entry -> 0, else
+    # `smart_tags.price_band` midpoint). None means "price unknown": it
+    # contributes nothing to the fee-share term (neutral scoring default) and
+    # is labelled uncertain — never "mien phi", which was a false fact on all
+    # 742 fee-less POIs (FR-026). `ticket_vnd`/legacy `fee` are unread.
+    # price_level spending-fit below is unchanged.
     fee = effective_fee(poi)
-    parts["price"] = _clamp(1.0 - (fee or 0) / budget) if budget > 0 else 0.0
+    # Unknown price is NEUTRAL (mid-scale), never the max 1.0 the old
+    # `fee or 0` produced: "we do not know the price" must not out-rank a
+    # verified-free POI on the price component just because the row is empty.
+    fee_fit = (0.5 if fee is None
+               else _clamp(1.0 - fee / budget)) if budget > 0 else 0.0
+    parts["price"] = fee_fit
     # Onboarding spending level: align the POI price band with what the party
     # wants to spend (1 budget / 2 mid / 3 high). No price_level -> fee only.
     level = poi.get("price_level")
@@ -123,8 +129,8 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
     if fee is None:
         reasons.append("gia chua xac minh")
-    elif fee == 0:
-        # Only an explicit ticket_vnd = 0 reaches this branch (verified free).
+    elif poi.get("free_entry") is True:
+        # Tag-only: only the explicit free flag may say "miễn phí".
         reasons.append("mien phi")
 
     fitness = int(user.get("fitness", 2))

@@ -18,9 +18,11 @@ Usage (repo root, OSRM up on 127.0.0.1:5000):
 
 Batching (G5: expand ~100 POIs per batch, run the suite between batches):
 `--offset`/`--limit` window the SORTED selection (poi_id order), so a batch is
-deterministic. The matrix must stay under `--max-table-size` (300) points, hence
-the >300 guard applies to the BATCH (existing + this batch), not the full
-selection. 305 new POIs in 3 batches:
+deterministic. The matrix must stay under `--max-table-size` (600) locations;
+`OsrmClient.table()` sends the whole point set AND asks for `--chunk` of them
+as `sources`, and OSRM counts both, so the guard is
+`existing + batch + chunk <= 600` (the >600 case applies to the BATCH, not the
+full selection). 305 new POIs in 3 batches:
     python BE/tools/expand_poi_matrix.py --dry-run --limit 100 --offset 0
     python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 1: 100
     python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 2: next 100
@@ -55,8 +57,9 @@ from BE.app.services.osrm_client import OsrmClient  # noqa: E402
 DEFAULT_URL = "http://127.0.0.1:5000"
 DEFAULT_SNAPSHOT = os.path.join("BE", "data", "snapshots", "danang-v1")
 ROW_SEP = "->"
-# osrm-routed is started with --max-table-size 300 (see build_poi_matrix.py);
-# the whole point set travels in one request, so n must stay under it.
+# osrm-routed is started with --max-table-size 600 (see build_poi_matrix.py);
+# the point set and the `sources` chunk travel in one request, so the guard
+# reserves `chunk` headroom on top of n.
 MAX_TABLE_SIZE = 600
 
 
@@ -268,10 +271,16 @@ def main(argv=None) -> int:
             print(f"  {p['poi_id']}  {p.get('cat')}  rating={p.get('rating')}  "
                   f"{p.get('name')}")
         return 0
-    if n_batch > MAX_TABLE_SIZE:
-        room = MAX_TABLE_SIZE - n_existing
-        print(f"ERROR: batch of {len(new_pois)} POIs ({n_batch} points) > "
-              f"max-table-size {MAX_TABLE_SIZE}; use --limit {max(room, 0)} or fewer "
+    # OsrmClient.table() puts the WHOLE point set in the URL coordinates and
+    # then asks for `chunk` of them as `sources`; OSRM counts both against
+    # --max-table-size (verified: n+1 sources passes while n+chunk is rejected
+    # as TooBig), so the guard must reserve one full chunk, not just check n.
+    chunk = max(1, int(args.chunk))
+    if n_batch + chunk > MAX_TABLE_SIZE:
+        room = MAX_TABLE_SIZE - n_existing - chunk
+        print(f"ERROR: batch of {len(new_pois)} POIs ({n_batch} points + "
+              f"{chunk} sources) > max-table-size {MAX_TABLE_SIZE}; "
+              f"use --limit {max(room, 0)} or fewer "
               f"(full selection is {len(selection)} POIs — merge in batches)",
               file=sys.stderr)
         return 2

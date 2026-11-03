@@ -49,6 +49,12 @@ class TestMetrics(unittest.TestCase):
     def setUpClass(cls):
         with open(os.path.join(SNAPSHOT_DIR, "pois.json"), encoding="utf-8") as f:
             cls.pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
+        # B5 v2 (tag-only money): the locked seed has no price bands, so tag
+        # TWO rows with the cheap midpoint (100k each) to keep the BCS
+        # over-budget probe meaningful. Test-local copy only; the seed file is
+        # untouched and stays the locked 7-POI fixture.
+        for pid in ("cham-museum", "mi-quang-ba-mua"):
+            cls.pois[pid].setdefault("smart_tags", {})["price_band"] = "cheap"
         with open(os.path.join(SNAPSHOT_DIR, "matrix.json"), encoding="utf-8") as f:
             cls.matrix = json.load(f)["cells"]
         cls.trip = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00",

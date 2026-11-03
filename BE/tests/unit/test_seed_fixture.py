@@ -1,7 +1,7 @@
 """T061d: the shared conftest seed fixture is the LOCKED 7-POI seed.
 
 Guards against accidentally pointing fixtures at the big working snapshot
-(BE/data/snapshots/danang-v1, 764 POIs) — see CHECK-merge-blockers §2.
+(BE/data/snapshots/danang-v1, 742 POIs) — see CHECK-merge-blockers §2.
 
 Run from repo root: python BE/tests/unit/test_seed_fixture.py -v
 """

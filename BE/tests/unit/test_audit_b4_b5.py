@@ -1,8 +1,11 @@
-"""FULL-AUDIT B4 + B5 regression tests (money + explanation).
+"""FULL-AUDIT B4 + B5-v2 regression tests (money + explanation).
 
-B5: one `effective_fee(poi)` = ticket_vnd -> price_band midpoint -> legacy
-fee -> None ("giá chưa rõ"), wired into retrieval, `total_fee`/BCS, rank and
-`response.total_cost`. `fee = 0` is UNKNOWN, never "miễn phí".
+B5 v2 (TAG-ONLY money, 29/10/2026): `effective_fee(poi)` = explicit
+`free_entry` -> 0, else the `smart_tags.price_band` midpoint (cheap 100k /
+medium 300k / expensive 700k), else None ("giá chưa rõ"). `ticket_vnd` and the
+legacy `fee` field are DEPRECATED: kept in data, never read at runtime.
+Wired into retrieval, `total_fee`/BCS, rank, `response.total_cost`, repair,
+savings scoring, replan validation and the shadow ranker.
 B4: POST /v1/itinerary carries `needs_verification` (poi_id/reasons/
 must_visit) and `excluded` (one reason per POI) instead of discarding them.
 
@@ -28,21 +31,18 @@ from BE.tests import conftest  # noqa: E402
 
 def _poi(pid, **extra):
     poi = {"poi_id": pid, "verified": True, "opening_hours": ["00:00-23:59"],
-           "rating": 4.5, "intensity": 2, "tags": [], "fee": 0}
+           "rating": 4.5, "intensity": 2, "tags": []}
     poi.update(extra)
     return poi
 
 
 class TestEffectiveFee(unittest.TestCase):
-    """B5: ticket_vnd > price_band midpoint > legacy fee > unknown (None)."""
+    """B5 v2: free_entry -> 0; price_band midpoint; everything else unknown."""
 
-    def test_ticket_vnd_wins_over_band(self):
-        self.assertEqual(effective_fee({"ticket_vnd": 60000,
+    def test_free_entry_wins_over_band(self):
+        self.assertEqual(effective_fee({"free_entry": True,
                                         "smart_tags": {"price_band": "expensive"}}),
-                         60000)
-
-    def test_zero_ticket_is_really_free(self):
-        self.assertEqual(effective_fee({"ticket_vnd": 0}), 0)
+                         0)
 
     def test_band_midpoints(self):
         for band, expected in (("cheap", 100_000), ("medium", 300_000),
@@ -53,63 +53,72 @@ class TestEffectiveFee(unittest.TestCase):
         self.assertEqual(BAND_MIDPOINT, {"cheap": 100_000, "medium": 300_000,
                                          "expensive": 700_000})
 
-    def test_legacy_fee_kept_when_nonzero(self):
-        self.assertEqual(effective_fee({"fee": 50000}), 50000)
+    def test_ticket_vnd_is_deprecated_and_unread(self):
+        self.assertIsNone(effective_fee({"ticket_vnd": 60000}))
+        self.assertIsNone(effective_fee({"ticket_vnd": 0}))
+
+    def test_legacy_fee_is_unread(self):
+        self.assertIsNone(effective_fee({"fee": 50000}))
+        self.assertIsNone(effective_fee({"fee": 0}))
 
     def test_unknown_price_is_none_not_zero(self):
-        for poi in ({}, {"fee": 0}, {"smart_tags": {}},
-                    {"smart_tags": {"price_band": None}}, None):
+        for poi in ({}, {"smart_tags": {}}, {"smart_tags": {"price_band": None}},
+                    {"smart_tags": {"price_band": "free"}}, None):
             with self.subTest(poi=poi):
                 self.assertIsNone(effective_fee(poi))
 
     def test_total_and_plan_cost_use_effective_fees(self):
-        pois = {"musu": {"ticket_vnd": 60000},
-                "park": {"smart_tags": {"price_band": "cheap"}},
-                "beach": {"fee": 0}}
-        acts = [{"poi_id": "musu"}, {"poi_id": "park"}, {"poi_id": "beach"}]
-        self.assertEqual(total_fee(acts, pois), 160_000)
-        self.assertEqual(plan_cost({"activities": acts}, pois), 160_000)
+        pois = {"musu": {"smart_tags": {"price_band": "cheap"}},
+                "park": {"smart_tags": {"price_band": "expensive"}},
+                "deprecated": {"ticket_vnd": 60000, "fee": 50000}}
+        acts = [{"poi_id": "musu"}, {"poi_id": "park"}, {"poi_id": "deprecated"}]
+        self.assertEqual(total_fee(acts, pois), 800_000)
+        self.assertEqual(plan_cost({"activities": acts}, pois), 800_000)
         # Explicit total_cost still wins (one cost formula, both sides).
         self.assertEqual(plan_cost({"total_cost": 5, "activities": acts}, pois), 5)
 
 
 class TestBcsBlocksRealCost(unittest.TestCase):
-    """B5: BCS must reject a plan whose KNOWN ticket sum exceeds the budget."""
+    """B5 v2: BCS must reject a plan whose KNOWN band sum exceeds the budget."""
 
-    def test_ticket_fees_over_budget_fail_bcs(self):
-        pois = {"ticket": _poi("ticket", ticket_vnd=350000)}
-        itinerary = {"activities": [
-            {"poi_id": "ticket", "start": "09:00", "end": "11:00"}]}
-        trip = {"budget": 300000}
-        self.assertFalse(check_bcs(itinerary, trip, pois, {})["passed"])
-
-        ok_trip = {"budget": 400000}
-        self.assertTrue(check_bcs(itinerary, ok_trip, pois, {})["passed"])
-
-    def test_band_midpoint_over_budget_fails_bcs(self):
+    def test_expensive_band_over_budget_fails_bcs(self):
         pois = {"resort": _poi("resort", smart_tags={"price_band": "expensive"})}
         itinerary = {"activities": [
             {"poi_id": "resort", "start": "09:00", "end": "11:00"}]}
         # 700k midpoint (expensive) vs 500k budget.
-        self.assertFalse(check_bcs(itinerary, {"budget": 500000}, pois, {})["passed"])
+        self.assertFalse(check_bcs(itinerary, {"budget": 500_000}, pois, {})["passed"])
+        self.assertTrue(check_bcs(itinerary, {"budget": 700_000}, pois, {})["passed"])
+
+    def test_deprecated_ticket_cannot_block_or_charge(self):
+        pois = {"ticket": _poi("ticket", ticket_vnd=9_000_000, fee=9_000_000)}
+        itinerary = {"activities": [
+            {"poi_id": "ticket", "start": "09:00", "end": "11:00"}]}
+        self.assertTrue(check_bcs(itinerary, {"budget": 0}, pois, {})["passed"])
+        self.assertEqual(total_fee(itinerary["activities"], pois), 0)
 
     def test_unknown_price_does_not_fake_free_but_cannot_block(self):
-        pois = {"mystery": _poi("mystery", fee=0)}
+        pois = {"mystery": _poi("mystery")}
         itinerary = {"activities": [
             {"poi_id": "mystery", "start": "09:00", "end": "11:00"}]}
         self.assertTrue(check_bcs(itinerary, {"budget": 0}, pois, {})["passed"])
         self.assertEqual(total_fee(itinerary["activities"], pois), 0)
 
+    def test_explicit_free_entry_is_zero_cost(self):
+        pois = {"free": _poi("free", free_entry=True)}
+        itinerary = {"activities": [
+            {"poi_id": "free", "start": "09:00", "end": "11:00"}]}
+        self.assertTrue(check_bcs(itinerary, {"budget": 0}, pois, {})["passed"])
+
 
 class TestRetrievalFeeFilter(unittest.TestCase):
-    """B5: the retrieval budget filter reads the effective fee."""
+    """B5 v2: the retrieval budget filter reads the band midpoint only."""
 
-    TRIP = {"budget": 500000, "start_time": "07:00", "end_time": "18:00",
+    TRIP = {"budget": 500_000, "start_time": "07:00", "end_time": "18:00",
             "must_visit": [], "avoid": [], "activities": []}
 
     def test_band_over_budget_excluded(self):
         pois = [_poi("expensive", smart_tags={"price_band": "expensive"}),
-                _poi("cheap", smart_tags={"price_band": "cheap"}),]
+                _poi("cheap", smart_tags={"price_band": "cheap"})]
         out = retrieve(self.TRIP, pois)
         ids = [c["poi_id"] for c in out["candidates"]]
         self.assertIn("cheap", ids)
@@ -117,10 +126,10 @@ class TestRetrievalFeeFilter(unittest.TestCase):
         self.assertIn({"poi_id": "expensive", "reason": "vuot ngan sach"},
                       out["excluded"])
 
-    def test_ticket_over_budget_excluded(self):
-        out = retrieve(self.TRIP, [_poi("ticket", ticket_vnd=650000)])
-        self.assertEqual(out["candidates"], [])
-        self.assertIn("vuot ngan sach", str(out["excluded"]))
+    def test_deprecated_ticket_is_not_a_budget_fact(self):
+        out = retrieve(self.TRIP, [_poi("ticket", ticket_vnd=650_000)])
+        self.assertEqual([c["poi_id"] for c in out["candidates"]], ["ticket"])
+        self.assertEqual(out["excluded"], [])
 
     def test_unknown_price_kept(self):
         out = retrieve(self.TRIP, [_poi("mystery")])
@@ -128,11 +137,11 @@ class TestRetrievalFeeFilter(unittest.TestCase):
 
 
 class TestRankPriceLabel(unittest.TestCase):
-    """B5/FR-026: no false "mien phi" stamp on fee-less POIs."""
+    """B5 v2/FR-026: no false "mien phi" stamp on unpriced/legacy POIs."""
 
     CTX = {"hour": "12:00"}
 
-    def test_fee_less_poi_is_uncertain_not_free(self):
+    def test_unpriced_poi_is_uncertain_not_free(self):
         reasons = score_poi(_poi("mystery"), {}, self.CTX)["reasons"]
         self.assertNotIn("mien phi", reasons)
         self.assertIn("gia chua xac minh", reasons)
@@ -143,9 +152,14 @@ class TestRankPriceLabel(unittest.TestCase):
         self.assertNotIn("mien phi", reasons)
         self.assertNotIn("gia chua xac minh", reasons)
 
-    def test_only_verified_free_ticket_says_mien_phi(self):
-        reasons = score_poi(_poi("free", ticket_vnd=0), {}, self.CTX)["reasons"]
+    def test_only_free_entry_says_mien_phi(self):
+        reasons = score_poi(_poi("free", free_entry=True), {}, self.CTX)["reasons"]
         self.assertIn("mien phi", reasons)
+
+    def test_deprecated_ticket_zero_is_not_mien_phi(self):
+        reasons = score_poi(_poi("old", ticket_vnd=0, fee=0), {}, self.CTX)["reasons"]
+        self.assertNotIn("mien phi", reasons)
+        self.assertIn("gia chua xac minh", reasons)
 
     def test_price_level_spending_fit_still_applies(self):
         cheap = _poi("cheap", price_level=1, smart_tags={"price_band": "cheap"})
@@ -155,12 +169,12 @@ class TestRankPriceLabel(unittest.TestCase):
 
 
 class TestResponsePriceUncertainty(unittest.TestCase):
-    """B5: response total_cost sums effective fees + labels unknown prices."""
+    """B5 v2: response total_cost sums band midpoints + labels unknown prices."""
 
     POIS = {
-        "musu": {"verified": True, "ticket_vnd": 60000,
+        "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
                  "opening_hours": ["07:30-17:00"], "rating": 4.5},
-        "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"],
+        "beach": {"verified": True, "opening_hours": ["00:00-23:59"],
                   "rating": 4.6},
     }
     MATRIX = {"musu->beach": {"minutes": 10, "km": 3.5}}
@@ -176,7 +190,7 @@ class TestResponsePriceUncertainty(unittest.TestCase):
                           validate(self.OPT["itinerary"], self.TRIP,
                                    self.POIS, self.MATRIX),
                           self.TRIP, self.POIS, self.MATRIX)
-        self.assertEqual(plan["total_cost"], 60000)
+        self.assertEqual(plan["total_cost"], 100_000)
         self.assertEqual(plan["price_uncertainty"],
                          [{"poi_id": "beach", "label": "gia chua xac minh"}])
 
@@ -186,10 +200,10 @@ class TestItineraryResponseExplanation(unittest.TestCase):
 
     POIS = [
         {"poi_id": "beach", "name": "Bien", "type": "beach", "cat": "beach",
-         "opening_hours": ["00:00-23:59"], "fee": 0, "rating": 4.6,
+         "opening_hours": ["00:00-23:59"], "rating": 4.6,
          "intensity": 2, "tags": [], "verified": True},
         {"poi_id": "draft", "name": "Draft beach", "type": "beach",
-         "cat": "beach", "opening_hours": ["00:00-23:59"], "fee": 0,
+         "cat": "beach", "opening_hours": ["00:00-23:59"],
          "rating": 4.4, "intensity": 1, "tags": [], "verified": False},
         {"poi_id": "pricy", "name": "Pricy resort", "type": "Điểm thu hút",
          "cat": "attraction", "opening_hours": ["00:00-23:59"],

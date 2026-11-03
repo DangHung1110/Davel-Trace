@@ -33,7 +33,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from BE.common import hhmm as _hh, to_min as _to_min  # noqa: E402
+from BE.common import effective_fee, hhmm as _hh, to_min as _to_min  # noqa: E402
 
 DEFAULT_ORIGIN = "dragon-bridge"
 
@@ -82,7 +82,10 @@ def filter_pois(trip: dict, pois: dict) -> tuple[list[str], str]:
     for pid, p in pois.items():
         if not p.get("verified") or pid in avoid:
             continue
-        if int(p.get("fee", 0)) > int(trip.get("budget", 0)):
+        # B5 v2: one money truth (tag-only band midpoint / free_entry); the
+        # legacy `fee` field is deprecated and unread.
+        fee = effective_fee(p)
+        if fee is not None and fee > int(trip.get("budget", 0)):
             continue
         if pid in trip.get("must_visit", []) or _overlaps(p.get("opening_hours", []), ws, we):
             cands.append(pid)

@@ -69,12 +69,32 @@ Chữa TYPE + FALLBACK là xong 80% triệu chứng. Còn lại là làm cho đ�
   `smart_tags.price_band` cheap/medium/expensive, 13 điểm `ticket_vnd` + `band_verified`
   (enum + ngưỡng ở `price_from_raw.py:56-57`, ingest ở `ingest_money.py`).
   Migration nửa vời: data xong, runtime chưa.
-- Hướng sửa: 1 helper `effective_fee(poi)` = `ticket_vnd` → giữa band
+- Hướng sửa: 1 helper `effective_fee(poi)` = giữa band
   (cheap≈100k/medium≈300k/expensive≈700k theo ngưỡng price_from_raw)
   → `None` = "giá chưa rõ" (nhãn uncertainty, KHÔNG "miễn phí").
   Cắm vào 4 chỗ: retrieval filter, `plan_cost`/BCS, rank price part, repair.
   Giữ `price_level` cho spending-fit (đang sống ở `rank.py:114-117`).
   Spec đòi: FR-017/SC-008 (`spec.md:215,293`), `data-model.md:20`.
+  (Bản v2 tag-only bên dưới bỏ hẳn nhánh `ticket_vnd`.)
+
+#### B5 update — TAG-ONLY money (quyết định 29/10/2026)
+Bỏ hẳn việc đuổi số VND/ticket: quá đắt và dễ sai. **`price_band` là nguồn
+sự thật duy nhất về giá**; `ticket_vnd` thành field DEPRECATED (còn trong data,
+mọi code runtime bỏ đọc), `fee` legacy cũng không đọc. `effective_fee(poi)` v2:
+
+| `price_band` | `fee` quy đổi |
+|---|---|
+| `cheap` | 100.000 đ |
+| `medium` | 300.000 đ |
+| `expensive` | 700.000 đ |
+| thiếu / lạ | `None` = "giá chưa xác minh" (cộng 0, luôn hiện nhãn) |
+
+Miễn phí thật là **cờ tường minh `free_entry: true`** (enum band không có
+`free`); chỉ cờ này mới được nói "miễn phí". Toàn bộ reader đã theo v2:
+retrieval (budget filter + nhãn `gia chua xac minh`), `plan_cost`/`total_fee`/
+BCS, rank price part (unknown = trung tính 0.5), `response.total_cost` +
+`price_uncertainty`, repair fee check, savings `_score`, replan validator
+projection + shadow ranker (band đi kèm `smart_tags`).
 
 ### B6. Doc-code gap: `--apply-flag` không tồn tại
 - `spotcheck_v2.py:13-16` hứa flag, `main()` :53-57 không có;
@@ -128,7 +148,7 @@ Kết luận: 48 đủ cho plan đúng, không đủ cho plan đa dạng → đ�
   cặp không route được bỏ trống (B3 infeasible — đúng).
 - Tool `BE/tools/expand_poi_matrix.py`: append rows/columns, merge-only
   (không viết lại cell cũ), tự backup ngoài repo, mặc định `--verified-only`.
-- Full 742×742 ≈ 550k cặp; OSRM `--max-table-size 300` → ~9 request 300×300.
+- Full 742×742 ≈ 550k cặp; OSRM `--max-table-size 600` → ~4 request 600×600.
   Batch job một lần (phút–giờ), không sửa code.
 
 ### D2. Điều kiện mở rộng (không đảo)
@@ -154,9 +174,14 @@ Kết luận: 48 đủ cho plan đúng, không đủ cho plan đa dạng → đ�
   (7 POI seed), tools/eval default `BE/data/...` (742);
   test pin seed 7 POI (`conftest.py:5-7`) → suite xanh trong khi pool thật hỏng.
   Thêm 1 integration test boot đúng snapshot thật.
-- **N6 PR hygiene:** CORS allow-all đã commit (trái note "DO NOT COMMIT as-is"
-  của chính nó, `main.py:25-33`); router test-local (review/repair/accept)
-  đăng ký vô điều kiện. Siết trước PR.
+- **N6 PR hygiene:** CORS allow-all đã được siết: `main.py` allow-list tường minh
+  `HARNESS_ORIGINS` (`http://127.0.0.1:5500`, `http://localhost:5500`) +
+  `CORS_ORIGINS` (comma-separated, chỉ **thêm** chứ không thay — gõ sai env
+  không làm gãy luồng local). Test integration khẳng định harness origin nhận
+  `Access-Control-Allow-Origin`, origin lạ thì không, và không còn `"*"`.
+  Router test-local (review/repair/accept): **quyết định GIỮ đăng ký vô điều
+  kiện** vì harness local gọi trực tiếp chúng; đã ghi NOTE(test-local) tại chỗ,
+  tách/khóa lại khi có môi trường deploy thật. Còn lại trước PR: quét secret.
 - **N9 minor:** POI không giờ lọt hours filter + VROH — chấp nhận được hiện tại,
   ghi nhận, xử khi pool rộng.
 

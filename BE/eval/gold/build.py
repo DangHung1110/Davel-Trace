@@ -3,10 +3,10 @@
 SCOPED build, not a full gold suite. Query generation AND the gold/gate
 inputs are restricted to the eligible pool = POIs that are BOTH `verified`
 AND matrix-covered with every ordered candidate-to-candidate cell present.
-On the current T003b snapshot that pool is only 5 of 764 POIs (5 of 48
+At generation time (T003b snapshot) that pool was only 5 of 742 POIs (5 of 48
 verified; 43 verified POIs lack matrix coverage), and the 30-record output
-is the 30 Approach-B queries over that pool. Fee/category/duration breadth
-and SC-010 recovery remain open for T053.
+is the 30 Approach-B queries over that pool. The gold files are NOT rebuilt
+here; Fee/category/duration breadth and SC-010 recovery remain open for T053.
 
 Usage:
   python BE/eval/gold/build.py --snapshot BE/data/snapshots/danang-v1 \

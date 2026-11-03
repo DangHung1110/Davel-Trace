@@ -2,7 +2,8 @@
 in scoring; the tier-1 evaluator (`BE/eval/metrics.evaluate`) is the judge.
 
 Three planners over the SAME scoped gold queries (T051: 30 Approach-B
-queries over the 5/764 matrix-covered verified POIs; 23 feasible):
+queries over the 5/742 matrix-covered verified POIs **at generation time**;
+23 feasible). The gold suite is not rebuilt on this lane.
 
 - distance-only baseline: the T051 Approach-B gold itself (OR-Tools TSP on
   real OSRM minutes, preference-blind). It is the shortest-path reference
@@ -42,7 +43,8 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.services.gate import CHECKS as GATE_CHECKS  # noqa: E402
-from BE.common import load_json, load_matrix_cells, load_pois  # noqa: E402
+from BE.common import (  # noqa: E402
+    effective_fee, load_json, load_matrix_cells, load_pois)
 from BE.eval.gold.approach_b import chain_order, filter_pois  # noqa: E402
 from BE.eval.gold.build import coverage_summary, eligible_ids  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
@@ -327,8 +329,9 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         preserved_all = preserved_all and probe["preserved"]
     recovery = {"probed": probed, "ok": ok, "preserved_all": preserved_all}
 
-    zero_fee = all(int(p.get("fee", 0)) == 0 for pid in eligible
-                   for p in [by_id[pid]])
+    # B5 v2 parity: "zero fee" now means the known cost of every eligible POI
+    # is 0 (unknown price contributes 0 too) under the tag-only rule.
+    zero_fee = all((effective_fee(by_id[pid]) or 0) == 0 for pid in eligible)
     ratings = {by_id[pid].get("rating") for pid in eligible}
     uniform_ratings = len(ratings) == 1
     report = {

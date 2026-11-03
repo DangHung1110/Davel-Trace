@@ -138,8 +138,13 @@ class TestBaselines(unittest.TestCase):
                 sc["SC-009"]["pass"], sc["SC-009"]["ratio"] >= 1.10)
 
     def test_zero_fee_snapshot_marks_sc008_vacuous(self):
-        self.assertTrue(self.report["sc"]["SC-008"]["vacuous"])
-        self.assertIn("zero_fee", self.report["notes"])
+        # B5 v2 (tag-only money): `zero_fee` now means every eligible POI has
+        # a KNOWN cost of 0 (all free or all unknown). The working snapshot
+        # carries `price_band` rows, so SC-008 is measurable and must NOT be
+        # reported as vacuous. The flag still tracks the diagnostic exactly.
+        zero = "zero_fee" in self.report["notes"]
+        self.assertEqual(self.report["sc"]["SC-008"]["vacuous"], zero)
+        self.assertFalse(zero, "working snapshot has price bands -> BCS live")
         sc9 = self.report["sc"]["SC-009"]
         if "uniform_ratings" in self.report["notes"]:
             # A uniform pool cannot discriminate taste: undecidable, not equal.
