@@ -33,6 +33,9 @@ _EVIDENCE_TABLES = (
     "trip_days",
     "trip_activities",
     "active_trip_selections",
+    "budget_revisions",
+    "expense_entries",
+    "expense_audit_events",
 )
 
 
@@ -106,11 +109,13 @@ def collect_database_evidence(database_url: str) -> dict:
                     "SELECT CAST(p.account_id AS TEXT) AS profile_account_id, "
                     "CAST(t.trip_id AS TEXT) AS trip_id, "
                     "CAST(d.day_id AS TEXT) AS day_id, "
-                    "CAST(x.activity_id AS TEXT) AS activity_id "
+                    "CAST(x.activity_id AS TEXT) AS activity_id, "
+                    "CAST(e.expense_id AS TEXT) AS expense_id "
                     "FROM traveler_profiles p "
                     "LEFT JOIN trips t ON t.account_id = p.account_id "
                     "LEFT JOIN trip_days d ON d.trip_id = t.trip_id "
                     "LEFT JOIN trip_activities x ON x.day_id = d.day_id "
+                    "LEFT JOIN expense_entries e ON e.trip_id = t.trip_id "
                     "ORDER BY p.account_id, t.trip_id, d.position, x.position LIMIT 1"
                 )
             ).mappings().first()
@@ -119,6 +124,7 @@ def collect_database_evidence(database_url: str) -> dict:
                 "trip_id": None,
                 "day_id": None,
                 "activity_id": None,
+                "expense_id": None,
             }
         return {
             "schema_revision": revision,
