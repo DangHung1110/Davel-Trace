@@ -32,6 +32,7 @@ from BE.app.routers import weather as weather_router
 from BE.app.modules.identity import api as identity_api
 from BE.app.modules.profiles import api as profiles_api
 from BE.app.modules.trips import api as trips_api
+from BE.app.modules.expenses import api as persistent_expenses_api
 from BE.app.modules.identity.service import IdentityError
 
 configure_logging()
@@ -66,6 +67,7 @@ app.include_router(planning_evidence_router.router)
 app.include_router(identity_api.router)
 app.include_router(profiles_api.router)
 app.include_router(trips_api.router)
+app.include_router(persistent_expenses_api.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

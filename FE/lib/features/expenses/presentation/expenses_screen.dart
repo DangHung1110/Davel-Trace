@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../app_state.dart';
 import '../../../shared/widgets/app_header.dart';
@@ -17,6 +20,7 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
   String _category = 'all';
+  String _date = 'all';
 
   Future<void> _edit({ExpenseItem? expense}) async {
     if (widget.state.activeTrip == null) return;
@@ -25,7 +29,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       isScrollControlled: true,
       showDragHandle: true,
       useSafeArea: true,
-      builder: (_) => ExpenseEditor(expense: expense),
+      builder: (_) => ExpenseEditor(
+        expense: expense,
+        initialDate: widget.state.selectedTripDate,
+      ),
     );
     if (data == null || !mounted) return;
     try {
@@ -43,6 +50,29 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     }
   }
 
+  Future<void> _export() async {
+    try {
+      final payload = await widget.state.exportExpenses(
+        date: _date == 'all' ? null : _date,
+        category: _category == 'all' ? null : _category,
+      );
+      await Clipboard.setData(
+        ClipboardData(
+          text: const JsonEncoder.withIndent('  ').convert(payload),
+        ),
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Đã sao chép bản xuất chi tiêu dạng JSON.'),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) _error(widget.state.errorMessage);
+    }
+  }
+
   void _error(String? message) => ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text(message ?? 'Không thể hoàn tất thao tác.')),
   );
@@ -52,9 +82,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     final state = widget.state;
     final trip = state.activeTrip;
     final summary = state.expenseSummary;
-    final visible = state.expenses.where(
-      (expense) => _category == 'all' || expense.category == _category,
-    );
+    final visible = state.expenses.where((expense) {
+      final expenseDate =
+          '${expense.spentAt.year.toString().padLeft(4, '0')}-${expense.spentAt.month.toString().padLeft(2, '0')}-${expense.spentAt.day.toString().padLeft(2, '0')}';
+      return (_category == 'all' || expense.category == _category) &&
+          (_date == 'all' || expenseDate == _date);
+    }).toList();
     final progress = summary.budgetVnd == 0
         ? 0.0
         : (summary.spentVnd / summary.budgetVnd).clamp(0.0, 1.0);
@@ -88,7 +121,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             Expanded(
                               child: Text(
                                 state.demoSource == DemoSource.live
-                                    ? 'Khoản chi mới được gửi tới FastAPI và giữ trong phiên mobile.'
+                                    ? 'Đã đồng bộ PostgreSQL qua FastAPI. Dữ liệu vẫn còn sau khi khởi động lại.'
                                     : 'Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.',
                                 style: const TextStyle(fontSize: 11),
                               ),
@@ -191,9 +224,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       const SizedBox(height: 10),
                       _BudgetMetrics(
                         remainingVnd: summary.remainingVnd,
-                        averageVnd: state.expenses.isEmpty
-                            ? 0
-                            : summary.spentVnd ~/ state.expenses.length,
+                        averageVnd: summary.averageVnd,
                       ),
                       if (summary.alert != 'none') ...[
                         const SizedBox(height: 10),
@@ -221,12 +252,44 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 7),
+                              child: ChoiceChip(
+                                label: const Text('Mọi ngày'),
+                                selected: _date == 'all',
+                                onSelected: (_) =>
+                                    setState(() => _date = 'all'),
+                              ),
+                            ),
+                            ...state.tripDates.map((date) {
+                              final key =
+                                  '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 7),
+                                child: ChoiceChip(
+                                  label: Text('${date.day}/${date.month}'),
+                                  selected: _date == key,
+                                  onSelected: (_) =>
+                                      setState(() => _date = key),
+                                ),
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children:
                               {
                                 'all': 'Tất cả',
                                 'food': 'Ăn uống',
                                 'ticket': 'Vé',
                                 'transport': 'Di chuyển',
+                                'accommodation': 'Lưu trú',
+                                'shopping': 'Mua sắm',
                                 'other': 'Khác',
                               }.entries.map((entry) {
                                 return Padding(
@@ -253,6 +316,16 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                           Text(
                             '${visible.length} mục',
                             style: const TextStyle(fontSize: 11),
+                          ),
+                          const SizedBox(width: 6),
+                          IconButton(
+                            key: const Key('export-expenses-button'),
+                            tooltip: 'Sao chép bản xuất',
+                            onPressed: state.isMutating ? null : _export,
+                            icon: const Icon(
+                              Icons.ios_share_outlined,
+                              size: 19,
+                            ),
                           ),
                         ],
                       ),
@@ -456,8 +529,9 @@ class _NoTripExpense extends StatelessWidget {
 }
 
 class ExpenseEditor extends StatefulWidget {
-  const ExpenseEditor({super.key, this.expense});
+  const ExpenseEditor({super.key, this.expense, this.initialDate});
   final ExpenseItem? expense;
+  final DateTime? initialDate;
 
   @override
   State<ExpenseEditor> createState() => _ExpenseEditorState();
@@ -469,6 +543,7 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
   late final TextEditingController _amount;
   late final TextEditingController _notes;
   late String _category;
+  late DateTime _spentAt;
 
   @override
   void initState() {
@@ -477,6 +552,7 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
     _amount = TextEditingController(text: '${widget.expense?.amountVnd ?? ''}');
     _notes = TextEditingController(text: widget.expense?.notes ?? '');
     _category = widget.expense?.category ?? 'food';
+    _spentAt = widget.expense?.spentAt ?? widget.initialDate ?? DateTime.now();
   }
 
   @override
@@ -493,7 +569,7 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
       'label': _label.text.trim(),
       'amount_vnd': int.parse(_amount.text),
       'category': _category,
-      'spent_at': (widget.expense?.spentAt ?? DateTime.now()).toIso8601String(),
+      'spent_at': _spentAt.toIso8601String(),
       'notes': _notes.text.trim(),
     });
   }
@@ -534,9 +610,38 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
               decoration: const InputDecoration(labelText: 'Số tiền (VND)'),
               validator: (value) {
                 final amount = int.tryParse(value ?? '');
-                return amount == null || amount < 0
-                    ? 'Nhập số tiền từ 0'
+                return amount == null || amount <= 0
+                    ? 'Nhập số tiền lớn hơn 0'
                     : null;
+              },
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.calendar_today_outlined),
+              title: const Text('Ngày chi'),
+              subtitle: Text(
+                '${_spentAt.day}/${_spentAt.month}/${_spentAt.year}',
+              ),
+              trailing: const Icon(Icons.edit_calendar_outlined),
+              onTap: () async {
+                final picked = await showDatePicker(
+                  context: context,
+                  initialDate: _spentAt,
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2100),
+                );
+                if (picked != null) {
+                  setState(
+                    () => _spentAt = DateTime(
+                      picked.year,
+                      picked.month,
+                      picked.day,
+                      _spentAt.hour,
+                      _spentAt.minute,
+                    ),
+                  );
+                }
               },
             ),
             const SizedBox(height: 10),
@@ -547,6 +652,11 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
                 DropdownMenuItem(value: 'food', child: Text('Ăn uống')),
                 DropdownMenuItem(value: 'ticket', child: Text('Vé')),
                 DropdownMenuItem(value: 'transport', child: Text('Di chuyển')),
+                DropdownMenuItem(
+                  value: 'accommodation',
+                  child: Text('Lưu trú'),
+                ),
+                DropdownMenuItem(value: 'shopping', child: Text('Mua sắm')),
                 DropdownMenuItem(value: 'other', child: Text('Khác')),
               ],
               onChanged: (value) => setState(() => _category = value!),
@@ -577,6 +687,8 @@ IconData _icon(String category) => switch (category) {
   'food' => Icons.restaurant_outlined,
   'ticket' => Icons.local_activity_outlined,
   'transport' => Icons.directions_outlined,
+  'accommodation' => Icons.hotel_outlined,
+  'shopping' => Icons.shopping_bag_outlined,
   _ => Icons.receipt_long_outlined,
 };
 
@@ -584,5 +696,7 @@ String _categoryLabel(String category) => switch (category) {
   'food' => 'Ăn uống',
   'ticket' => 'Vé',
   'transport' => 'Di chuyển',
+  'accommodation' => 'Lưu trú',
+  'shopping' => 'Mua sắm',
   _ => 'Khác',
 };

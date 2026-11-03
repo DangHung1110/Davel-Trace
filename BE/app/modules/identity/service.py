@@ -16,6 +16,9 @@ from BE.app.core.config import Settings
 from BE.app.db.models import (
     AccountLifecycleEventModel,
     AccountModel,
+    BudgetRevisionModel,
+    ExpenseAuditEventModel,
+    ExpenseEntryModel,
     ExportRequestModel,
     IdentitySessionModel,
     OneTimeActionModel,
@@ -101,6 +104,15 @@ def _owned_product_export(session, account_id: UUID) -> dict:
                     "version": item.version,
                 } for item in activities],
             })
+        expenses = list(session.scalars(select(ExpenseEntryModel).where(
+            ExpenseEntryModel.trip_id == trip.trip_id
+        ).order_by(ExpenseEntryModel.spent_at, ExpenseEntryModel.expense_id)))
+        budget_revisions = list(session.scalars(select(BudgetRevisionModel).where(
+            BudgetRevisionModel.trip_id == trip.trip_id
+        ).order_by(BudgetRevisionModel.changed_at, BudgetRevisionModel.revision_id)))
+        expense_audit = list(session.scalars(select(ExpenseAuditEventModel).where(
+            ExpenseAuditEventModel.trip_id == trip.trip_id
+        ).order_by(ExpenseAuditEventModel.occurred_at, ExpenseAuditEventModel.event_id)))
         trips_payload.append({
             "id": str(trip.trip_id),
             "title": trip.title,
@@ -121,6 +133,36 @@ def _owned_product_export(session, account_id: UUID) -> dict:
             "created_at": trip.created_at.isoformat(),
             "updated_at": trip.updated_at.isoformat(),
             "days": days_payload,
+            "expenses": [{
+                "id": str(item.expense_id),
+                "day_id": str(item.day_id) if item.day_id else None,
+                "activity_id": str(item.activity_id) if item.activity_id else None,
+                "label": item.label,
+                "amount_vnd": int(item.amount),
+                "currency": item.currency,
+                "category": item.category,
+                "spent_at": item.spent_at.isoformat(),
+                "notes": item.notes,
+                "version": item.version,
+                "created_at": item.created_at.isoformat(),
+                "updated_at": item.updated_at.isoformat(),
+            } for item in expenses],
+            "budget_revisions": [{
+                "id": str(item.revision_id),
+                "previous_amount_vnd": int(item.previous_amount) if item.previous_amount is not None else None,
+                "new_amount_vnd": int(item.new_amount),
+                "currency": item.currency,
+                "reason": item.reason,
+                "changed_at": item.changed_at.isoformat(),
+            } for item in budget_revisions],
+            "expense_audit": [{
+                "id": str(item.event_id),
+                "expense_id": str(item.expense_id) if item.expense_id else None,
+                "event_type": item.event_type,
+                "before": item.before_payload,
+                "after": item.after_payload,
+                "occurred_at": item.occurred_at.isoformat(),
+            } for item in expense_audit],
         })
     return {"profile": profile_payload, "trips": trips_payload}
 

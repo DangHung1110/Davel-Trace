@@ -12,6 +12,7 @@ from BE.app.db.models import (ActiveTripSelectionModel, MutationReceiptModel,
     TravelerProfileModel, TripActivityModel, TripDayModel, TripLifecycleEventModel, TripModel)
 from BE.app.db.session import session_scope
 from BE.app.modules.identity.service import IdentityError
+from BE.app.modules.expenses.infrastructure import record_budget_revision
 from BE.app.modules.profiles.domain import profile_snapshot
 from BE.app.modules.trips.domain import dates_between, validate_trip
 from BE.app.modules.trips.infrastructure import owned_trip, receipt, request_fingerprint, save_receipt
@@ -172,7 +173,12 @@ class TripService:
             session.flush()
             for index, day in enumerate(ordered):
                 day.position = index
-            for field in ("title","start_date","end_date","traveler_count","day_start","day_end","preference_overrides","indicative_budget","preferred_transport","notes"):
+            if "indicative_budget" in data:
+                record_budget_revision(
+                    session, row, principal.account_id, data["indicative_budget"],
+                    data.get("budget_change_reason", "Cập nhật trong thông tin chuyến đi"),
+                )
+            for field in ("title","start_date","end_date","traveler_count","day_start","day_end","preference_overrides","preferred_transport","notes"):
                 if field in data: setattr(row, field, data[field])
             row.version += 1; row.updated_at = datetime.now(timezone.utc)
             session.flush(); return trip_public(session, row)

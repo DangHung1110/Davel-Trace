@@ -233,6 +233,10 @@ class ExpenseSummaryData {
     required this.remainingVnd,
     required this.byCategory,
     required this.alert,
+    this.byDay = const {},
+    this.averageVnd = 0,
+    this.entryCount = 0,
+    this.utilizationPercent = 0,
   });
 
   final int budgetVnd;
@@ -240,6 +244,10 @@ class ExpenseSummaryData {
   final int remainingVnd;
   final Map<String, int> byCategory;
   final String alert;
+  final Map<String, int> byDay;
+  final int averageVnd;
+  final int entryCount;
+  final double utilizationPercent;
 
   static const empty = ExpenseSummaryData(
     budgetVnd: 0,
@@ -258,6 +266,13 @@ class ExpenseSummaryData {
           (key, value) => MapEntry(key, value as int),
         ),
         alert: json['alert'] as String,
+        byDay: (json['by_day'] as Map<String, dynamic>? ?? const {}).map(
+          (key, value) => MapEntry(key, value as int),
+        ),
+        averageVnd: json['average_vnd'] as int? ?? 0,
+        entryCount: json['entry_count'] as int? ?? 0,
+        utilizationPercent:
+            (json['utilization_percent'] as num?)?.toDouble() ?? 0,
       );
 }
 

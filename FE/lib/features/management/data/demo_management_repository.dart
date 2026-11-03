@@ -110,7 +110,14 @@ class DemoManagementRepository implements ManagementRepository {
       spentVnd: spent,
       remainingVnd: budget - spent,
       byCategory: const {},
-      alert: spent >= budget && spent > 0 ? '100' : 'none',
+      alert: spent >= budget && spent > 0
+          ? '100'
+          : spent * 100 >= budget * 80 && spent > 0
+          ? '80'
+          : 'none',
+      averageVnd: expenses.isEmpty ? 0 : spent ~/ expenses.length,
+      entryCount: expenses.length,
+      utilizationPercent: budget == 0 ? 0 : spent / budget * 100,
     );
   }
 
@@ -326,11 +333,61 @@ class DemoManagementRepository implements ManagementRepository {
   Future<(ExpenseItem, ExpenseSummaryData)> updateExpense(
     String id,
     Map<String, dynamic> data,
-  ) async => (expenses.firstWhere((item) => item.id == id), summary);
+  ) async {
+    final old = expenses.firstWhere((item) => item.id == id);
+    final updated = ExpenseItem(
+      id: old.id,
+      label: data['label'] as String? ?? old.label,
+      amountVnd: data['amount_vnd'] as int? ?? old.amountVnd,
+      category: data['category'] as String? ?? old.category,
+      spentAt: data['spent_at'] == null
+          ? old.spentAt
+          : DateTime.parse(data['spent_at'] as String),
+      notes: data['notes'] as String? ?? old.notes,
+      version: old.version + 1,
+    );
+    expenses[expenses.indexOf(old)] = updated;
+    return (updated, summary);
+  }
+
   @override
   Future<ExpenseSummaryData> deleteExpense(ExpenseItem expense) async {
     expenses.remove(expense);
     return summary;
+  }
+
+  @override
+  Future<Map<String, dynamic>> exportExpenses(
+    String tripId, {
+    String? date,
+    String? category,
+  }) async {
+    final items = expenses.where((item) {
+      final key =
+          '${item.spentAt.year.toString().padLeft(4, '0')}-${item.spentAt.month.toString().padLeft(2, '0')}-${item.spentAt.day.toString().padLeft(2, '0')}';
+      return (date == null || date == key) &&
+          (category == null || category == item.category);
+    }).toList();
+    final spent = items.fold<int>(0, (total, item) => total + item.amountVnd);
+    return {
+      'schema_version': 1,
+      'generated_at': DateTime.now().toIso8601String(),
+      'trip_id': tripId,
+      'filters': {'date': date, 'category': category},
+      'items': [
+        for (final item in items)
+          {
+            'id': item.id,
+            'label': item.label,
+            'amount_vnd': item.amountVnd,
+            'category': item.category,
+            'spent_at': item.spentAt.toIso8601String(),
+            'notes': item.notes,
+          },
+      ],
+      'summary': {'spent_vnd': spent, 'entry_count': items.length},
+      'source': 'seeded_demo',
+    };
   }
 
   @override

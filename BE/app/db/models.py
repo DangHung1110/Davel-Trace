@@ -404,6 +404,69 @@ class TripActivityModel(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
 
 
+class BudgetRevisionModel(Base):
+    __tablename__ = "budget_revisions"
+    __table_args__ = (
+        CheckConstraint("new_amount >= 0", name="budget_revision_amount_non_negative"),
+        CheckConstraint("currency = 'VND'", name="budget_revision_currency_vnd"),
+        Index("ix_budget_revisions_trip_changed", "trip_id", "changed_at"),
+    )
+
+    revision_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    trip_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="CASCADE"), nullable=False)
+    previous_amount: Mapped[Decimal | None] = mapped_column(Numeric(14, 2))
+    new_amount: Mapped[Decimal] = mapped_column(Numeric(14, 2), nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), nullable=False, default="VND")
+    reason: Mapped[str] = mapped_column(String(500), nullable=False, default="")
+    changed_by: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    changed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class ExpenseEntryModel(Base):
+    __tablename__ = "expense_entries"
+    __table_args__ = (
+        CheckConstraint("amount > 0", name="expense_amount_positive"),
+        CheckConstraint("currency = 'VND'", name="expense_currency_vnd"),
+        CheckConstraint(
+            "category IN ('food','ticket','transport','accommodation','shopping','other')",
+            name="expense_category_valid",
+        ),
+        CheckConstraint("version > 0", name="expense_version_positive"),
+        Index("ix_expense_entries_trip_spent", "trip_id", "spent_at", "expense_id"),
+        Index("ix_expense_entries_trip_category", "trip_id", "category"),
+    )
+
+    expense_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    trip_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="CASCADE"), nullable=False)
+    day_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), ForeignKey("trip_days.day_id", ondelete="SET NULL"))
+    activity_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), ForeignKey("trip_activities.activity_id", ondelete="SET NULL"))
+    label: Mapped[str] = mapped_column(String(200), nullable=False)
+    amount: Mapped[Decimal] = mapped_column(Numeric(14, 2), nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), nullable=False, default="VND")
+    category: Mapped[str] = mapped_column(String(32), nullable=False)
+    spent_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    notes: Mapped[str] = mapped_column(String(2000), nullable=False, default="")
+    created_by: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class ExpenseAuditEventModel(Base):
+    __tablename__ = "expense_audit_events"
+    __table_args__ = (Index("ix_expense_audit_trip_occurred", "trip_id", "occurred_at"),)
+
+    event_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    trip_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="CASCADE"), nullable=False)
+    expense_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), nullable=True)
+    actor_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(32), nullable=False)
+    before_payload: Mapped[dict[str, Any] | None] = mapped_column(JSON_VALUE)
+    after_payload: Mapped[dict[str, Any] | None] = mapped_column(JSON_VALUE)
+    correlation_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
 class ActiveTripSelectionModel(Base):
     __tablename__ = "active_trip_selections"
     account_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="CASCADE"), primary_key=True)

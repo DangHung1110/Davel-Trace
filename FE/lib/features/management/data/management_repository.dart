@@ -36,6 +36,11 @@ abstract interface class ManagementRepository {
     Map<String, dynamic> data,
   );
   Future<ExpenseSummaryData> deleteExpense(ExpenseItem expense);
+  Future<Map<String, dynamic>> exportExpenses(
+    String tripId, {
+    String? date,
+    String? category,
+  });
   Future<List<PoiItem>> searchPois(String query);
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids);
 }
@@ -354,6 +359,7 @@ class HttpManagementRepository implements ManagementRepository {
   ) async {
     final json = await _api.post(
       '/v1/trips/$tripId/expenses',
+      headers: {'Idempotency-Key': _key('expense')},
       body: data,
     ) as Map<String, dynamic>;
     return (
@@ -385,6 +391,18 @@ class HttpManagementRepository implements ManagementRepository {
           query: {'version': '${expense.version}'},
         ) as Map<String, dynamic>,
       );
+
+  @override
+  Future<Map<String, dynamic>> exportExpenses(
+    String tripId, {
+    String? date,
+    String? category,
+  }) async => Map<String, dynamic>.from(
+    await _api.get(
+      '/v1/trips/$tripId/expenses/export',
+      query: {'date': ?date, 'category': ?category},
+    ) as Map,
+  );
 
   @override
   Future<List<PoiItem>> searchPois(String query) async {
