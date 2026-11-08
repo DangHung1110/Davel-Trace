@@ -346,6 +346,10 @@ class FakeManagementRepository implements ManagementRepository {
   ];
 
   @override
+  Future<PoiItem> getPoiDetails(String id) async =>
+      (await searchPois('')).firstWhere((item) => item.id == id);
+
+  @override
   Future<RoutePreviewData> previewRoute(
     String tripId,
     List<String> ids,
@@ -354,5 +358,10 @@ class FakeManagementRepository implements ManagementRepository {
     isRealRoute: true,
     distanceM: 3200,
     durationS: 720,
+    quality: 'road_route',
+    geometry: [
+      [108.2274, 16.0611],
+      [108.2290, 16.0630],
+    ],
   );
 }

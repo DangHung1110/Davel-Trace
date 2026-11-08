@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
+import '../domain/location_state.dart';
 import 'map_stop.dart';
 import 'widgets/map_canvas.dart';
 
@@ -14,6 +16,7 @@ class MapScreen extends StatefulWidget {
     required this.onOpenItinerary,
     this.tripTitle,
     this.routePreview,
+    this.locationProvider = const GeolocatorMapLocationProvider(),
   });
 
   final List<MapStop> stops;
@@ -21,6 +24,7 @@ class MapScreen extends StatefulWidget {
   final VoidCallback onOpenItinerary;
   final String? tripTitle;
   final RoutePreviewData? routePreview;
+  final MapLocationProvider locationProvider;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -29,8 +33,11 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   int _playRequest = 0;
   int _pauseRequest = 0;
+  int _resetRequest = 0;
   int _locateRequest = 0;
   bool _isPlaying = false;
+  MapLocation? _userLocation;
+  String? _locationMessage;
 
   void _play() => setState(() {
     _playRequest++;
@@ -42,12 +49,29 @@ class _MapScreenState extends State<MapScreen> {
     _isPlaying = false;
   });
 
-  void _locate() => setState(() => _locateRequest++);
+  Future<void> _locate() async {
+    setState(() => _locationMessage = 'Đang xác định vị trí…');
+    final result = await widget.locationProvider.currentLocation();
+    if (!mounted) return;
+    if (result.status != MapLocationStatus.located || result.location == null) {
+      setState(() => _locationMessage = mapLocationMessage(result.status));
+      return;
+    }
+    setState(() {
+      _userLocation = result.location;
+      _locationMessage = null;
+      _locateRequest++;
+    });
+  }
+
+  void _reset() => setState(() {
+    _isPlaying = false;
+    _resetRequest++;
+  });
 
   @override
   void didUpdateWidget(covariant MapScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.planRevision != widget.planRevision) _isPlaying = true;
   }
 
   @override
@@ -61,7 +85,10 @@ class _MapScreenState extends State<MapScreen> {
             routeRevision: widget.planRevision,
             playRequest: _playRequest,
             pauseRequest: _pauseRequest,
+            resetRequest: _resetRequest,
             locateRequest: _locateRequest,
+            userLocation: _userLocation,
+            routePreview: widget.routePreview,
           ),
         ),
         Positioned(
@@ -136,12 +163,19 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   const SizedBox(width: 6),
                   _MapPill(
-                    icon: widget.routePreview?.isRealRoute == true
-                        ? Icons.route_rounded
-                        : Icons.offline_bolt_outlined,
-                    label: widget.routePreview?.isRealRoute == true
-                        ? 'OSRM ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km'
-                        : 'PMTiles local',
+                    icon: switch (widget.routePreview?.quality) {
+                      'road_route' => Icons.route_rounded,
+                      'matrix_estimate' => Icons.straighten_rounded,
+                      'interpolated' => Icons.linear_scale_rounded,
+                      _ => Icons.offline_bolt_outlined,
+                    },
+                    label: switch (widget.routePreview?.quality) {
+                      'road_route' =>
+                        'OSRM ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km',
+                      'matrix_estimate' => 'Ước tính ma trận',
+                      'interpolated' => 'Nội suy minh họa',
+                      _ => 'Chưa có tuyến',
+                    },
                   ),
                   const SizedBox(width: 6),
                   const _MapPill(icon: Icons.waves_rounded, label: 'Sóng êm'),
@@ -150,6 +184,17 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
         ),
+        if (_locationMessage != null)
+          Positioned(
+            top: 110,
+            left: 12,
+            child: PointerInterceptor(
+              child: _MapPill(
+                icon: Icons.location_disabled_outlined,
+                label: _locationMessage!,
+              ),
+            ),
+          ),
         Positioned(
           top: 112,
           right: 12,
@@ -189,6 +234,14 @@ class _MapScreenState extends State<MapScreen> {
               isPlaying: _isPlaying,
               onPlay: widget.stops.length > 1 ? _play : null,
               onPause: _isPlaying ? _pause : null,
+              onReset: _reset,
+              routeSource: switch (widget.routePreview?.quality) {
+                'road_route' => 'OSRM',
+                'matrix_estimate' => 'Ma trận',
+                'interpolated' => 'Nội suy',
+                _ => 'Không có',
+              },
+              mapSource: kIsWeb ? 'PMTiles' : 'OSM',
               onOpenPoi: widget.onOpenItinerary,
             ),
           ),
@@ -205,6 +258,9 @@ class _ActiveTripCard extends StatelessWidget {
     required this.isPlaying,
     required this.onPlay,
     required this.onPause,
+    required this.onReset,
+    required this.routeSource,
+    required this.mapSource,
     required this.onOpenPoi,
   });
 
@@ -213,6 +269,9 @@ class _ActiveTripCard extends StatelessWidget {
   final bool isPlaying;
   final VoidCallback? onPlay;
   final VoidCallback? onPause;
+  final VoidCallback onReset;
+  final String routeSource;
+  final String mapSource;
   final VoidCallback onOpenPoi;
 
   @override
@@ -313,9 +372,9 @@ class _ActiveTripCard extends StatelessWidget {
             children: [
               _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
               const _Divider(),
-              const _TripMetric(value: 'OSRM', label: 'ưu tiên'),
+              _TripMetric(value: routeSource, label: 'tuyến'),
               const _Divider(),
-              const _TripMetric(value: 'PMTiles', label: 'bản đồ'),
+              _TripMetric(value: mapSource, label: 'bản đồ'),
             ],
           ),
         ),
@@ -344,6 +403,11 @@ class _ActiveTripCard extends StatelessWidget {
               tooltip: 'Tạm dừng',
               onPressed: onPause,
               icon: const Icon(Icons.pause_rounded),
+            ),
+            IconButton.filledTonal(
+              tooltip: 'Đặt lại mô phỏng',
+              onPressed: onReset,
+              icon: const Icon(Icons.restart_alt_rounded),
             ),
             const SizedBox(width: 5),
             IconButton.filledTonal(

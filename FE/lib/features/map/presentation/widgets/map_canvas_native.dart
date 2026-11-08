@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../theme/app_theme.dart';
+import '../../../management/domain/models.dart';
+import '../../domain/location_state.dart';
 import '../map_stop.dart';
 
 class MapCanvas extends StatefulWidget {
@@ -17,14 +16,20 @@ class MapCanvas extends StatefulWidget {
     required this.routeRevision,
     required this.playRequest,
     required this.pauseRequest,
+    required this.resetRequest,
     required this.locateRequest,
+    required this.userLocation,
+    required this.routePreview,
   });
 
   final List<MapStop> stops;
   final int routeRevision;
   final int playRequest;
   final int pauseRequest;
+  final int resetRequest;
   final int locateRequest;
+  final MapLocation? userLocation;
+  final RoutePreviewData? routePreview;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -36,14 +41,13 @@ class _MapCanvasState extends State<MapCanvas> {
   LatLng? _carPosition;
   LatLng? _userPosition;
   Timer? _animation;
-  bool _routeFromOsrm = false;
   int _animationIndex = 0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _loadRoute(autoPlay: widget.routeRevision > 0),
+      (_) => _loadRoute(autoPlay: false),
     );
   }
 
@@ -51,8 +55,11 @@ class _MapCanvasState extends State<MapCanvas> {
   void didUpdateWidget(covariant MapCanvas oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.routeRevision != widget.routeRevision ||
-        oldWidget.stops != widget.stops) {
-      _loadRoute(autoPlay: true);
+        oldWidget.stops != widget.stops ||
+        oldWidget.routePreview != widget.routePreview) {
+      _loadRoute(autoPlay: false);
+    } else if (oldWidget.resetRequest != widget.resetRequest) {
+      _resetRoute();
     } else if (oldWidget.playRequest != widget.playRequest) {
       _playRoute();
     } else if (oldWidget.pauseRequest != widget.pauseRequest) {
@@ -63,56 +70,12 @@ class _MapCanvasState extends State<MapCanvas> {
 
   Future<void> _loadRoute({required bool autoPlay}) async {
     _pauseRoute();
-    final fallback = widget.stops
-        .map((stop) => LatLng(stop.latitude, stop.longitude))
-        .toList();
-    var route = fallback;
-    var fromOsrm = false;
-
-    if (widget.stops.length > 1) {
-      final coordinates = widget.stops
-          .map((stop) => '${stop.longitude},${stop.latitude}')
-          .join(';');
-      final uri = Uri.parse(
-        'https://router.project-osrm.org/route/v1/driving/$coordinates'
-        '?overview=full&geometries=geojson&steps=false',
-      );
-      final client = HttpClient()
-        ..connectionTimeout = const Duration(seconds: 8);
-      try {
-        final request = await client.getUrl(uri);
-        request.headers.set(HttpHeaders.userAgentHeader, 'DavelTrace/1.0');
-        final response = await request.close().timeout(
-          const Duration(seconds: 10),
-        );
-        final body = await response.transform(utf8.decoder).join();
-        if (response.statusCode == HttpStatus.ok) {
-          final payload = jsonDecode(body) as Map<String, dynamic>;
-          final routes = payload['routes'] as List<dynamic>?;
-          if (payload['code'] == 'Ok' && routes != null && routes.isNotEmpty) {
-            final geometry = routes.first['geometry'] as Map<String, dynamic>;
-            final points = geometry['coordinates'] as List<dynamic>;
-            route = points.map((point) {
-              final pair = point as List<dynamic>;
-              return LatLng(
-                (pair[1] as num).toDouble(),
-                (pair[0] as num).toDouble(),
-              );
-            }).toList();
-            fromOsrm = route.length > 1;
-          }
-        }
-      } catch (_) {
-        route = fallback;
-      } finally {
-        client.close(force: true);
-      }
-    }
+    final geometry = widget.routePreview?.geometry ?? const <List<double>>[];
+    final route = geometry.map((point) => LatLng(point[1], point[0])).toList();
 
     if (!mounted) return;
     setState(() {
       _route = route;
-      _routeFromOsrm = fromOsrm;
       _carPosition = route.isEmpty ? null : route.first;
       _animationIndex = 0;
     });
@@ -121,29 +84,11 @@ class _MapCanvasState extends State<MapCanvas> {
   }
 
   Future<void> _locateUser() async {
-    try {
-      if (!await Geolocator.isLocationServiceEnabled()) return;
-      var permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
-        return;
-      }
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-          timeLimit: Duration(seconds: 10),
-        ),
-      );
-      if (!mounted) return;
-      final point = LatLng(position.latitude, position.longitude);
-      setState(() => _userPosition = point);
-      _controller.move(point, 15.5);
-    } catch (_) {
-      // The map remains usable if location permission or GPS is unavailable.
-    }
+    final location = widget.userLocation;
+    if (location == null) return;
+    final point = LatLng(location.latitude, location.longitude);
+    setState(() => _userPosition = point);
+    _controller.move(point, 15.5);
   }
 
   void _playRoute() {
@@ -166,6 +111,12 @@ class _MapCanvasState extends State<MapCanvas> {
 
   void _pauseRoute() => _animation?.cancel();
 
+  void _resetRoute() {
+    _pauseRoute();
+    _animationIndex = 0;
+    if (_route.isNotEmpty) setState(() => _carPosition = _route.first);
+  }
+
   @override
   void dispose() {
     _animation?.cancel();
@@ -178,7 +129,7 @@ class _MapCanvasState extends State<MapCanvas> {
     final fallback = widget.stops
         .map((stop) => LatLng(stop.latitude, stop.longitude))
         .toList();
-    final displayRoute = _route.isEmpty ? fallback : _route;
+    final displayRoute = _route;
     return Stack(
       children: [
         FlutterMap(
@@ -200,7 +151,9 @@ class _MapCanvasState extends State<MapCanvas> {
                 polylines: [
                   Polyline(
                     points: displayRoute,
-                    color: AppColors.primary,
+                    color: widget.routePreview?.quality == 'interpolated'
+                        ? AppColors.warning
+                        : AppColors.primary,
                     strokeWidth: 5,
                   ),
                 ],
@@ -248,12 +201,30 @@ class _MapCanvasState extends State<MapCanvas> {
               color: AppColors.surface.withValues(alpha: .92),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Text(
-              _routeFromOsrm ? 'OSRM · tuyến thực' : 'Đường nối dự phòng',
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontSize: 9,
-                fontWeight: FontWeight.w800,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 290),
+              child: Text(
+                {
+                  switch (widget.routePreview?.quality) {
+                    'road_route' => 'OSRM · tuyến đường bộ',
+                    'matrix_estimate' =>
+                      'Ước tính ma trận · không có hình học tuyến',
+                    'interpolated' =>
+                      'Đường nối nội suy · không phải tuyến thật',
+                    _ =>
+                      widget.routePreview?.warning ?? 'Chưa có tuyến khả dụng',
+                  },
+                  if (widget.routePreview?.warning case final warning?
+                      when warning.isNotEmpty)
+                    warning,
+                }.join(' · '),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ),
           ),

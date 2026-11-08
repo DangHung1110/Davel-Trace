@@ -284,6 +284,15 @@ class PoiItem {
     required this.latitude,
     required this.longitude,
     required this.verified,
+    this.source,
+    this.fetchedAt,
+    this.snapshotVersion,
+    this.openingHours = const [],
+    this.openingHoursState = 'unknown',
+    this.priceState = 'unknown',
+    this.priceLevel,
+    this.fee,
+    this.ticketNote,
   });
 
   final String id;
@@ -292,6 +301,15 @@ class PoiItem {
   final double latitude;
   final double longitude;
   final bool verified;
+  final String? source;
+  final String? fetchedAt;
+  final String? snapshotVersion;
+  final List<String> openingHours;
+  final String openingHoursState;
+  final String priceState;
+  final int? priceLevel;
+  final int? fee;
+  final String? ticketNote;
 
   factory PoiItem.fromJson(Map<String, dynamic> json) => PoiItem(
     id: json['poi_id'] as String,
@@ -300,6 +318,17 @@ class PoiItem {
     latitude: (json['lat'] as num).toDouble(),
     longitude: (json['lon'] as num).toDouble(),
     verified: json['verified'] as bool? ?? false,
+    source: json['source'] as String?,
+    fetchedAt: json['fetched_at'] as String?,
+    snapshotVersion: json['snapshot_version'] as String?,
+    openingHours: (json['opening_hours'] as List<dynamic>? ?? const [])
+        .map((item) => item.toString())
+        .toList(),
+    openingHoursState: json['opening_hours_state'] as String? ?? 'unknown',
+    priceState: json['price_state'] as String? ?? 'unknown',
+    priceLevel: json['price_level'] as int?,
+    fee: ((json['fee'] ?? json['ticket_vnd']) as num?)?.round(),
+    ticketNote: json['ticket_note'] as String?,
   );
 }
 
@@ -310,6 +339,8 @@ class RoutePreviewData {
     required this.distanceM,
     required this.durationS,
     this.warning,
+    this.quality,
+    this.geometry = const [],
   });
 
   final String source;
@@ -317,6 +348,8 @@ class RoutePreviewData {
   final int distanceM;
   final int durationS;
   final String? warning;
+  final String? quality;
+  final List<List<double>> geometry;
 
   factory RoutePreviewData.fromJson(Map<String, dynamic> json) =>
       RoutePreviewData(
@@ -325,7 +358,33 @@ class RoutePreviewData {
         distanceM: json['distance_m'] as int,
         durationS: json['duration_s'] as int,
         warning: json['warning'] as String?,
+        quality: json['quality'] as String?,
+        geometry:
+            ((json['geometry'] as Map<String, dynamic>?)?['coordinates']
+                        as List<dynamic>? ??
+                    const [])
+                .whereType<List<dynamic>>()
+                .where((pair) => pair.length >= 2)
+                .map(
+                  (pair) => [
+                    (pair[0] as num).toDouble(),
+                    (pair[1] as num).toDouble(),
+                  ],
+                )
+                .toList(),
       );
+
+  Map<String, dynamic> toJson() => {
+    'quality': quality ?? (isRealRoute ? 'road_route' : 'unavailable'),
+    'source': source,
+    'is_real_route': isRealRoute,
+    'geometry': geometry.isEmpty
+        ? null
+        : {'type': 'LineString', 'coordinates': geometry},
+    'distance_m': distanceM,
+    'duration_s': durationS,
+    'warning': warning,
+  };
 }
 
 String isoDate(DateTime value) =>

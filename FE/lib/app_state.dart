@@ -38,6 +38,8 @@ class AppState extends ChangeNotifier {
   ExpenseSummaryData expenseSummary = ExpenseSummaryData.empty;
   List<PoiItem> pois = [];
   RoutePreviewData? routePreview;
+  final Map<String, PoiItem?> mapPlaces = {};
+  int _mapPlacesRevision = 0;
   DemoSource demoSource = DemoSource.seeded;
   List<PlanAlternative> planAlternatives = PlanAlternative.seeded();
   PlanAlternative? activeAlternative;
@@ -389,6 +391,16 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<PoiItem> getPoiDetails(String id) async {
+    try {
+      return await repository.getPoiDetails(id);
+    } catch (error) {
+      errorMessage = _message(error);
+      notifyListeners();
+      rethrow;
+    }
+  }
+
   Future<void> saveExpense({
     ExpenseItem? existing,
     required Map<String, dynamic> data,
@@ -434,9 +446,25 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> loadRoutePreview() async {
-    final activities = itinerary?.activities ?? const <ActivityItem>[];
+    final allActivities = itinerary?.activities ?? const <ActivityItem>[];
+    final activities = allActivities
+        .where((item) => item.poiId != null)
+        .toList();
+    final customCount = allActivities.length - activities.length;
+    final placeLookup = _loadMapPlaces(activities);
     if (activeTrip == null || activities.length < 2) {
-      routePreview = null;
+      routePreview = RoutePreviewData(
+        source: 'none',
+        isRealRoute: false,
+        distanceM: 0,
+        durationS: 0,
+        quality: 'unavailable',
+        warning: customCount == 0
+            ? 'Cần ít nhất hai hoạt động có liên kết địa điểm để xem tuyến.'
+            : 'Cần ít nhất hai hoạt động có liên kết địa điểm. '
+                  '$customCount hoạt động riêng được bỏ qua.',
+      );
+      await placeLookup;
       notifyListeners();
       return;
     }
@@ -446,9 +474,56 @@ class AppState extends ChangeNotifier {
         activities.map((item) => item.id).toList(),
       );
     } catch (_) {
-      routePreview = null;
+      routePreview = const RoutePreviewData(
+        source: 'none',
+        isRealRoute: false,
+        distanceM: 0,
+        durationS: 0,
+        quality: 'unavailable',
+        warning: 'Không thể tải thông tin tuyến lúc này.',
+      );
     }
+    if (customCount > 0) {
+      final current = routePreview!;
+      routePreview = RoutePreviewData(
+        source: current.source,
+        isRealRoute: current.isRealRoute,
+        distanceM: current.distanceM,
+        durationS: current.durationS,
+        quality: current.quality,
+        geometry: current.geometry,
+        warning: [
+          current.warning,
+          '$customCount hoạt động riêng không có POI nên được bỏ qua.',
+        ].whereType<String>().where((value) => value.isNotEmpty).join(' '),
+      );
+    }
+    await placeLookup;
     notifyListeners();
+  }
+
+  Future<void> _loadMapPlaces(List<ActivityItem> activities) async {
+    final ids = activities
+        .map((item) => item.poiId!)
+        .toSet()
+        .where((id) => !mapPlaces.containsKey(id))
+        .toList();
+    if (ids.isEmpty) return;
+    final revision = ++_mapPlacesRevision;
+    final places = await Future.wait(
+      ids.map((id) async {
+        try {
+          return MapEntry<String, PoiItem?>(
+            id,
+            await repository.getPoiDetails(id),
+          );
+        } catch (_) {
+          return MapEntry<String, PoiItem?>(id, null);
+        }
+      }),
+    );
+    if (revision != _mapPlacesRevision) return;
+    mapPlaces.addEntries(places.where((entry) => entry.value != null));
   }
 
   Future<void> requestPlan() async {
