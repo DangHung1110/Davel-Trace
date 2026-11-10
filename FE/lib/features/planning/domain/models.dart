@@ -28,21 +28,38 @@ class PlanAlternative {
   factory PlanAlternative.fromJson(
     Map<String, dynamic> json, {
     String? shortageReason,
-  }) => PlanAlternative(
-    id: json['itinerary_id'] as String,
-    profile: json['profile'] as String? ?? 'balanced',
-    activities: (json['activities'] as List? ?? const [])
-        .map((item) => Map<String, dynamic>.from(item as Map))
-        .toList(),
-    rank:
-        json['deterministic_rank'] as int? ?? json['diverse_rank'] as int? ?? 1,
-    gatePassed: (json['gate'] as Map?)?['passed'] as bool? ?? true,
-    dataVersion: json['data_version'] as String? ?? 'unknown',
-    totalCost: (json['total_cost'] as num?)?.round() ?? 0,
-    totalKm: (json['total_km'] as num?)?.toDouble() ?? 0,
-    totalMinutes: (json['total_min'] as num?)?.round() ?? 0,
-    shortageReason: shortageReason,
-  );
+  }) {
+    final plan = json['plan'] is Map
+        ? Map<String, dynamic>.from(json['plan'] as Map)
+        : json;
+    final gate = json['gate'] is Map
+        ? json['gate'] as Map
+        : plan['gate'] as Map?;
+    return PlanAlternative(
+      id: json['alternative_id'] as String? ?? plan['itinerary_id'] as String,
+      profile:
+          json['profile'] as String? ??
+          plan['profile'] as String? ??
+          'balanced',
+      activities: (plan['activities'] as List? ?? const [])
+          .map((item) => Map<String, dynamic>.from(item as Map))
+          .toList(),
+      rank:
+          json['deterministic_rank'] as int? ??
+          plan['deterministic_rank'] as int? ??
+          plan['diverse_rank'] as int? ??
+          1,
+      gatePassed: gate?['passed'] as bool? ?? true,
+      dataVersion:
+          json['data_version'] as String? ??
+          plan['data_version'] as String? ??
+          'unknown',
+      totalCost: (plan['total_cost'] as num?)?.round() ?? 0,
+      totalKm: (plan['total_km'] as num?)?.toDouble() ?? 0,
+      totalMinutes: (plan['total_min'] as num?)?.round() ?? 0,
+      shortageReason: shortageReason,
+    );
+  }
 
   static List<PlanAlternative> seeded() => const [
     PlanAlternative(
@@ -80,19 +97,65 @@ class PlanAlternative {
 }
 
 class PlanningResult {
-  const PlanningResult({required this.items, this.shortageReason});
+  const PlanningResult({
+    required this.items,
+    this.shortageReason,
+    this.requestId,
+    this.status = 'completed',
+    this.failureCode,
+  });
   final List<PlanAlternative> items;
   final String? shortageReason;
+  final String? requestId;
+  final String status;
+  final String? failureCode;
 }
 
 class AcceptanceSummary {
-  const AcceptanceSummary({required this.id, required this.selectedAt});
+  const AcceptanceSummary({
+    required this.id,
+    required this.selectedAt,
+    this.versionId,
+  });
   final String id;
   final DateTime selectedAt;
+  final String? versionId;
 
   factory AcceptanceSummary.fromJson(Map<String, dynamic> json) =>
       AcceptanceSummary(
         id: json['acceptance_id'] as String,
         selectedAt: DateTime.parse(json['selected_at'] as String),
+        versionId: json['version_id'] as String?,
+      );
+}
+
+class ItineraryVersionSummary {
+  const ItineraryVersionSummary({
+    required this.id,
+    required this.ordinal,
+    required this.active,
+    required this.dataVersion,
+    required this.createdAt,
+    required this.reason,
+    this.parentId,
+  });
+
+  final String id;
+  final int ordinal;
+  final bool active;
+  final String? parentId;
+  final String dataVersion;
+  final DateTime createdAt;
+  final String reason;
+
+  factory ItineraryVersionSummary.fromJson(Map<String, dynamic> json) =>
+      ItineraryVersionSummary(
+        id: json['version_id'] as String,
+        ordinal: json['ordinal'] as int? ?? 1,
+        active: json['active'] as bool? ?? false,
+        parentId: json['parent_version_id'] as String?,
+        dataVersion: json['data_version'] as String? ?? 'unknown',
+        createdAt: DateTime.parse(json['created_at'] as String),
+        reason: json['reason'] as String? ?? 'accept',
       );
 }

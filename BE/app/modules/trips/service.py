@@ -4,11 +4,11 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from uuid import UUID, uuid4
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, select, update
 
 from BE.app.core.config import get_settings
 from BE.app.core.request_context import get_correlation_id
-from BE.app.db.models import (ActiveTripSelectionModel, MutationReceiptModel,
+from BE.app.db.models import (ActiveItineraryVersionModel, ActiveTripSelectionModel, ItineraryAlternativeModel, MutationReceiptModel,
     TravelerProfileModel, TripActivityModel, TripDayModel, TripLifecycleEventModel, TripModel)
 from BE.app.db.session import session_scope
 from BE.app.modules.identity.service import IdentityError
@@ -41,6 +41,15 @@ def overlap_warnings(activities) -> list[str]:
                 f"{previous.title} trùng thời gian với {current.title}."
             )
     return warnings
+
+
+def mark_trip_needs_review(session, trip) -> None:
+    if session.get(ActiveItineraryVersionModel, trip.trip_id) is not None:
+        trip.review_state = "needs_review"
+    session.execute(update(ItineraryAlternativeModel).where(
+        ItineraryAlternativeModel.trip_id == trip.trip_id,
+        ItineraryAlternativeModel.selectability_state == "current",
+    ).values(selectability_state="invalidated"))
 
 
 def trip_public(session, row, *, include_days=True) -> dict:
@@ -180,6 +189,7 @@ class TripService:
                 )
             for field in ("title","start_date","end_date","traveler_count","day_start","day_end","preference_overrides","preferred_transport","notes"):
                 if field in data: setattr(row, field, data[field])
+            mark_trip_needs_review(session, row)
             row.version += 1; row.updated_at = datetime.now(timezone.utc)
             session.flush(); return trip_public(session, row)
 
@@ -246,6 +256,7 @@ class TripService:
                 start_time=start, end_time=end, duration_minutes=data.get("duration_minutes"), estimated_cost=data.get("estimated_cost"),
                 notes=str(data.get("notes", ""))[:2000], position=position)
             session.add(row); session.flush(); save_receipt(session, principal.account_id, "activity.create", str(day_id), key_hash, fingerprint, row.activity_id, 201)
+            mark_trip_needs_review(session, trip)
             day.version += 1; session.flush(); return activity_public(row)
 
     def reorder(self, principal, trip_id, day_id, ids, expected_version):
@@ -266,6 +277,7 @@ class TripService:
             for index, row in enumerate(rows): row.position = len(rows) + index
             session.flush()
             for index, item in enumerate(ids): mapping[item].position = index
+            mark_trip_needs_review(session, trip)
             day.version += 1; session.flush()
             return {"id": str(day.day_id), "version": day.version, "activities": [activity_public(mapping[item]) for item in ids]}
 
@@ -289,6 +301,7 @@ class TripService:
                     setattr(row, field, data[field])
             if not row.title.strip():
                 raise IdentityError("VALIDATION_ERROR", "Tên hoạt động là bắt buộc.", 422)
+            mark_trip_needs_review(session, trip)
             row.version += 1; row.updated_at = datetime.now(timezone.utc); day.version += 1
             session.flush(); return activity_public(row)
 
@@ -298,7 +311,7 @@ class TripService:
             if not row:
                 raise IdentityError("NOT_FOUND", "Không tìm thấy hoạt động.", 404)
             day = session.get(TripDayModel, row.day_id, with_for_update=True)
-            owned_trip(session, principal.account_id, day.trip_id)
+            trip = owned_trip(session, principal.account_id, day.trip_id)
             if row.version != expected_version:
                 raise IdentityError("VERSION_CONFLICT", "Hoạt động đã thay đổi.", 409)
             position = row.position; session.delete(row); session.flush()
@@ -310,6 +323,7 @@ class TripService:
             session.flush()
             for index, item in enumerate(remaining):
                 item.position = position + index
+            mark_trip_needs_review(session, trip)
             day.version += 1; session.flush()
             return {"id": str(day.day_id), "version": day.version,
                     "activities": [activity_public(a) for a in session.scalars(select(TripActivityModel).where(

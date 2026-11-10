@@ -13,7 +13,7 @@ def test_upgrade_head_is_repeatable_on_local_postgres() -> None:
     command.upgrade(alembic_config(), "head")
     status = inspect_database(settings.database_url)
     assert status["schema_ready"] is True
-    assert status["current_revision"] == get_script_head() == "008_001"
+    assert status["current_revision"] == get_script_head() == "010_001"
 
 
 def test_missing_or_failed_revision_cannot_look_ready(monkeypatch) -> None:

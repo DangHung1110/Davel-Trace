@@ -44,10 +44,16 @@ class AppState extends ChangeNotifier {
   List<PlanAlternative> planAlternatives = PlanAlternative.seeded();
   PlanAlternative? activeAlternative;
   AcceptanceSummary? acceptance;
+  String? currentPlanningRequestId;
+  List<ItineraryVersionSummary> itineraryVersions = [];
   Map<String, dynamic>? planningReadiness;
   bool isPlanning = false;
   String plannerMessage =
       'Đang dùng dữ liệu mẫu trên máy. Bấm tạo phương án để thử FastAPI.';
+  final Map<String, String> _planningKeys = {};
+  final Map<String, String> _acceptanceKeys = {};
+  final Map<String, String> _activationKeys = {};
+  final Map<String, String> _replanKeys = {};
 
   Future<void> initialize() async {
     isLoading = true;
@@ -135,6 +141,17 @@ class AppState extends ChangeNotifier {
         alert: 'none',
       );
     }
+    if (!isDemoManagement &&
+        planningRepository is ItineraryLifecycleRepository) {
+      try {
+        itineraryVersions =
+            await (planningRepository as ItineraryLifecycleRepository).history(
+              id,
+            );
+      } catch (_) {
+        itineraryVersions = [];
+      }
+    }
     routePreview = null;
     final selected = selectedTripDate;
     selectedTripDate =
@@ -153,6 +170,8 @@ class AppState extends ChangeNotifier {
     expenses = [];
     expenseSummary = ExpenseSummaryData.empty;
     routePreview = null;
+    currentPlanningRequestId = null;
+    itineraryVersions = [];
   }
 
   Future<void> refresh() => initialize();
@@ -559,7 +578,18 @@ class AppState extends ChangeNotifier {
           'must_avoid': profile.mustAvoid,
           'transport': [trip.transport],
         },
+        'target_count': 5,
+        '_idempotency_key': _planningKeys.putIfAbsent(
+          '${trip.id}:${trip.version}',
+          () => 'plan-${trip.id}-v${trip.version}',
+        ),
       });
+      if (result.status == 'failed') {
+        throw ApiException(
+          result.failureCode ?? 'PLANNING_FAILED',
+          'Không thể lập lịch với dữ liệu hiện tại. Hãy kiểm tra ràng buộc chuyến đi.',
+        );
+      }
       if (result.items.isEmpty) {
         throw const ApiException(
           'NO_FEASIBLE_PLAN',
@@ -569,6 +599,7 @@ class AppState extends ChangeNotifier {
       planAlternatives = result.items;
       activeAlternative = result.items.first;
       acceptance = null;
+      currentPlanningRequestId = result.requestId;
       demoSource = DemoSource.live;
       plannerMessage = result.shortageReason == null
           ? 'FastAPI đã trả ${result.items.length} phương án qua cổng cứng.'
@@ -601,9 +632,12 @@ class AppState extends ChangeNotifier {
       activeAlternative = alternative;
       acceptance = null;
       if (demoSource == DemoSource.live) {
-        final key =
-            'mobile-${activeTrip?.id ?? 'trip'}-${alternative.id}-${DateTime.now().millisecondsSinceEpoch}';
+        final key = _acceptanceKeys.putIfAbsent(
+          alternative.id,
+          () => 'accept-${activeTrip?.id ?? 'trip'}-${alternative.id}',
+        );
         acceptance = await planningRepository.accept(alternative.id, key);
+        await loadItineraryHistory();
         plannerMessage =
             'Đã chốt và lưu acceptance ${acceptance!.id.substring(0, 8)}.';
       } else {
@@ -620,11 +654,93 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<void> loadItineraryHistory() async {
+    final trip = activeTrip;
+    if (trip == null || planningRepository is! ItineraryLifecycleRepository) {
+      return;
+    }
+    final lifecycle = planningRepository as ItineraryLifecycleRepository;
+    itineraryVersions = await lifecycle.history(trip.id);
+    notifyListeners();
+  }
+
+  Future<void> activateItineraryVersion(ItineraryVersionSummary version) async {
+    if (planningRepository is! ItineraryLifecycleRepository || version.active) {
+      return;
+    }
+    final lifecycle = planningRepository as ItineraryLifecycleRepository;
+    isPlanning = true;
+    errorMessage = null;
+    notifyListeners();
+    try {
+      final key = _activationKeys.putIfAbsent(
+        version.id,
+        () => 'activate-${activeTrip?.id ?? 'trip'}-${version.id}',
+      );
+      await lifecycle.activateVersion(version.id, key);
+      await loadItineraryHistory();
+      plannerMessage = 'Đã kích hoạt lại phiên bản ${version.ordinal}.';
+    } catch (error) {
+      errorMessage = _message(error);
+    } finally {
+      isPlanning = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> requestReplan() async {
+    final trip = activeTrip;
+    final source = itineraryVersions.where((item) => item.active).firstOrNull;
+    if (trip == null ||
+        planningRepository is! ItineraryLifecycleRepository ||
+        source == null) {
+      return;
+    }
+    final lifecycle = planningRepository as ItineraryLifecycleRepository;
+    isPlanning = true;
+    errorMessage = null;
+    notifyListeners();
+    try {
+      final key = _replanKeys.putIfAbsent(
+        source.id,
+        () => 'replan-${trip.id}-${source.id}',
+      );
+      final result = await lifecycle.replan(trip.id, source.id, key);
+      if (result.status == 'failed') {
+        throw ApiException(
+          result.failureCode ?? 'REPLAN_FAILED',
+          'Không thể lập lại phần còn lại với các ràng buộc hiện tại.',
+        );
+      }
+      if (result.items.isEmpty) {
+        throw const ApiException(
+          'NO_FEASIBLE_REPLAN',
+          'Không còn phương án khả thi cho phần chuyến đi còn lại.',
+        );
+      }
+      planAlternatives = result.items;
+      activeAlternative = result.items.first;
+      acceptance = null;
+      currentPlanningRequestId = result.requestId;
+      demoSource = DemoSource.live;
+      plannerMessage =
+          'Đã tạo ${result.items.length} phương án cho phần còn lại.';
+    } catch (error) {
+      errorMessage = _message(error);
+      plannerMessage = 'Chưa thể lập lại phần chuyến đi còn lại.';
+    } finally {
+      isPlanning = false;
+      notifyListeners();
+    }
+  }
+
   void resetDemoPlanning() {
     demoSource = DemoSource.seeded;
     planAlternatives = PlanAlternative.seeded();
     activeAlternative = null;
     acceptance = null;
+    currentPlanningRequestId = null;
+    itineraryVersions = [];
     planningReadiness = null;
     plannerMessage = 'Đã quay về dữ liệu demo trên thiết bị.';
     notifyListeners();

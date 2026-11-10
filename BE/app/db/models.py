@@ -83,6 +83,28 @@ class AcceptanceRecordModel(Base):
         ForeignKey("shadow_observations.observation_id", ondelete="SET NULL"),
         nullable=True,
     )
+    account_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"),
+        nullable=True,
+        index=True,
+    )
+    request_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("planning_requests.request_id", ondelete="RESTRICT"),
+        nullable=True,
+    )
+    alternative_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_alternatives.alternative_id", ondelete="RESTRICT"),
+        nullable=True,
+    )
+    itinerary_version_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+        nullable=True,
+        unique=True,
+    )
 
 
 class ShadowObservationModel(Base):
@@ -365,6 +387,222 @@ class TripModel(Base):
     archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     purge_after: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class PlanningRequestModel(Base):
+    __tablename__ = "planning_requests"
+    __table_args__ = (
+        UniqueConstraint(
+            "account_id", "request_kind", "idempotency_key",
+            name="uq_planning_request_owner_kind_key",
+        ),
+        CheckConstraint(
+            "request_kind IN ('plan','replan')",
+            name="planning_request_kind_valid",
+        ),
+        CheckConstraint(
+            "status IN ('running','completed','failed')",
+            name="planning_request_status_valid",
+        ),
+        CheckConstraint(
+            "target_count BETWEEN 1 AND 5 AND returned_count BETWEEN 0 AND 5",
+            name="planning_request_counts_valid",
+        ),
+        Index("ix_planning_requests_trip_created", "trip_id", "created_at"),
+    )
+
+    request_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), primary_key=True, default=uuid4
+    )
+    account_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("accounts.account_id", ondelete="RESTRICT"),
+        nullable=False,
+        index=True,
+    )
+    trip_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("trips.trip_id", ondelete="RESTRICT"),
+        nullable=False,
+        index=True,
+    )
+    request_kind: Mapped[str] = mapped_column(String(16), nullable=False)
+    idempotency_key: Mapped[str] = mapped_column(String(128), nullable=False)
+    request_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_version_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+        nullable=True,
+    )
+    trip_version: Mapped[int] = mapped_column(Integer, nullable=False)
+    data_version: Mapped[str] = mapped_column(String(128), nullable=False)
+    input_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    remaining_context: Mapped[dict[str, Any]] = mapped_column(
+        JSON_VALUE, nullable=False, default=dict
+    )
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="running")
+    target_count: Mapped[int] = mapped_column(Integer, nullable=False)
+    returned_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    shortage_reason: Mapped[str | None] = mapped_column(String(64))
+    failure_code: Mapped[str | None] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class ItineraryAlternativeModel(Base):
+    __tablename__ = "itinerary_alternatives"
+    __table_args__ = (
+        UniqueConstraint(
+            "request_id", "fingerprint",
+            name="uq_itinerary_alternative_request_fingerprint",
+        ),
+        CheckConstraint(
+            "selectability_state IN ('current','selected','superseded','invalidated')",
+            name="itinerary_alternative_state_valid",
+        ),
+        CheckConstraint(
+            "deterministic_rank BETWEEN 1 AND 5",
+            name="itinerary_alternative_rank_valid",
+        ),
+        Index("ix_itinerary_alternatives_trip_created", "trip_id", "created_at"),
+    )
+
+    alternative_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), primary_key=True, default=uuid4
+    )
+    request_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("planning_requests.request_id", ondelete="RESTRICT"),
+        nullable=False,
+        index=True,
+    )
+    trip_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="RESTRICT"), nullable=False
+    )
+    account_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
+    fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
+    profile: Mapped[str] = mapped_column(String(32), nullable=False)
+    plan_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    gate_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    deterministic_rank: Mapped[int] = mapped_column(Integer, nullable=False)
+    deterministic_score: Mapped[float | None] = mapped_column(Float)
+    data_version: Mapped[str] = mapped_column(String(128), nullable=False)
+    selectability_state: Mapped[str] = mapped_column(
+        String(24), nullable=False, default="current"
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+
+
+class ItineraryVersionModel(Base):
+    __tablename__ = "itinerary_versions"
+    __table_args__ = (
+        UniqueConstraint("trip_id", "ordinal", name="uq_itinerary_version_trip_ordinal"),
+        CheckConstraint("ordinal > 0", name="itinerary_version_ordinal_positive"),
+        Index("ix_itinerary_versions_trip_created", "trip_id", "created_at"),
+    )
+
+    version_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), primary_key=True, default=uuid4
+    )
+    account_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
+    trip_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="RESTRICT"), nullable=False
+    )
+    alternative_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_alternatives.alternative_id", ondelete="RESTRICT"),
+        nullable=True,
+        unique=True,
+    )
+    parent_version_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+        nullable=True,
+    )
+    ordinal: Mapped[int] = mapped_column(Integer, nullable=False)
+    plan_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    gate_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    request_payload: Mapped[dict[str, Any]] = mapped_column(JSON_VALUE, nullable=False)
+    data_version: Mapped[str] = mapped_column(String(128), nullable=False)
+    deterministic_rank: Mapped[int | None] = mapped_column(Integer)
+    deterministic_score: Mapped[float | None] = mapped_column(Float)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+
+
+class ActiveItineraryVersionModel(Base):
+    __tablename__ = "active_itinerary_versions"
+    __table_args__ = (
+        CheckConstraint("revision > 0", name="active_itinerary_version_revision_positive"),
+    )
+
+    trip_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("trips.trip_id", ondelete="RESTRICT"),
+        primary_key=True,
+    )
+    account_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
+    version_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+        nullable=False,
+        unique=True,
+    )
+    revision: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+
+
+class ItineraryVersionTransitionModel(Base):
+    __tablename__ = "itinerary_version_transitions"
+    __table_args__ = (
+        UniqueConstraint(
+            "account_id", "reason", "idempotency_key",
+            name="uq_itinerary_transition_owner_reason_key",
+        ),
+        CheckConstraint(
+            "reason IN ('accept','replan_accept','reactivate')",
+            name="itinerary_transition_reason_valid",
+        ),
+        Index("ix_itinerary_transitions_trip_occurred", "trip_id", "occurred_at"),
+    )
+
+    transition_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), primary_key=True, default=uuid4
+    )
+    account_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("accounts.account_id", ondelete="RESTRICT"), nullable=False
+    )
+    trip_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("trips.trip_id", ondelete="RESTRICT"), nullable=False
+    )
+    from_version_id: Mapped[UUID | None] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+    )
+    to_version_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("itinerary_versions.version_id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    reason: Mapped[str] = mapped_column(String(24), nullable=False)
+    idempotency_key: Mapped[str] = mapped_column(String(128), nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+    correlation_id: Mapped[str] = mapped_column(String(64), nullable=False)
 
 
 class TripDayModel(Base):

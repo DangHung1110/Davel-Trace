@@ -360,6 +360,57 @@ class _PlanningPanel extends StatelessWidget {
   const _PlanningPanel({required this.state});
   final AppState state;
 
+  Future<void> _showHistory(BuildContext context) async {
+    await state.loadItineraryHistory();
+    if (!context.mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (sheetContext) => FractionallySizedBox(
+        heightFactor: 0.72,
+        child: ListView(
+          key: const Key('itinerary-version-history'),
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+          children: [
+            Text(
+              'Lịch sử phiên bản',
+              style: Theme.of(sheetContext).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 8),
+            if (state.itineraryVersions.isEmpty)
+              const Text('Chưa có phiên bản đã chốt.'),
+            ...state.itineraryVersions.map(
+              (version) => Card(
+                child: ListTile(
+                  title: Text('Phiên bản ${version.ordinal}'),
+                  subtitle: Text(
+                    '${version.reason} · ${version.dataVersion}'
+                    '${version.parentId == null ? '' : ' · có phiên bản cha'}',
+                  ),
+                  trailing: version.active
+                      ? const Chip(label: Text('Đang dùng'))
+                      : TextButton(
+                          onPressed: state.isPlanning
+                              ? null
+                              : () async {
+                                  await state.activateItineraryVersion(version);
+                                  if (sheetContext.mounted) {
+                                    Navigator.pop(sheetContext);
+                                  }
+                                },
+                          child: const Text('Kích hoạt'),
+                        ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final live = state.demoSource == DemoSource.live;
@@ -440,6 +491,35 @@ class _PlanningPanel extends StatelessWidget {
             ),
           ),
         ),
+        if (state.itineraryVersions.isNotEmpty ||
+            (live && state.acceptance != null)) ...[
+          const SizedBox(height: 2),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              OutlinedButton.icon(
+                key: const Key('open-version-history'),
+                onPressed: state.isPlanning
+                    ? null
+                    : () => _showHistory(context),
+                icon: const Icon(Icons.history_rounded),
+                label: const Text('Lịch sử'),
+              ),
+              FilledButton.tonalIcon(
+                key: const Key('request-replan-button'),
+                onPressed:
+                    state.isPlanning ||
+                        !state.itineraryVersions.any((item) => item.active)
+                    ? null
+                    : state.requestReplan,
+                icon: const Icon(Icons.refresh_rounded),
+                label: const Text('Lập lại phần còn lại'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+        ],
         if (state.planningReadiness != null)
           Text(
             'Dữ liệu học: ${state.planningReadiness!['pairwise_judgments'] ?? 0}/150 so sánh · '
