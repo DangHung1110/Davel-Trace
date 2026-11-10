@@ -7,6 +7,7 @@ import 'features/profile/presentation/profile_screen.dart';
 import 'features/auth/application/auth_controller.dart';
 import 'features/auth/presentation/auth_gate.dart';
 import 'features/auth/data/http_auth_repository.dart';
+import 'features/planning/data/planning_repository.dart';
 import 'core/networking/api_client.dart';
 import 'features/shell/presentation/main_shell.dart';
 import 'shared/widgets/async_state_view.dart';
@@ -38,7 +39,10 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
       } else {
         final api = ApiClient();
         _auth = AuthController(repository: HttpAuthRepository(client: api));
-        _liveState = AppState(HttpManagementRepository(api));
+        _liveState = AppState(
+          HttpManagementRepository(api),
+          planningRepository: HttpPlanningRepository(api),
+        );
       }
       _auth!.addListener(_syncAuthenticatedState);
       _auth!.initialize();
