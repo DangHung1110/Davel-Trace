@@ -37,6 +37,7 @@ from BE.app.modules.expenses import api as persistent_expenses_api
 from BE.app.modules.catalog import api as catalog_api
 from BE.app.modules.catalog.infrastructure import load_catalog
 from BE.app.modules.routing import api as routing_api
+from BE.app.modules.planning_lifecycle import api as planning_lifecycle_api
 from BE.app.modules.routing.infrastructure import load_matrix, matrix_estimate, osrm_route
 from BE.app.modules.identity.service import IdentityError
 
@@ -80,6 +81,7 @@ app.state.route_provider = osrm_route
 app.state.matrix_estimator = matrix_estimate
 app.include_router(catalog_api.router)
 app.include_router(routing_api.router)
+app.include_router(planning_lifecycle_api.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

@@ -46,6 +46,12 @@ def _acceptance_dict(row: AcceptanceRecordModel) -> dict:
         "shadow_observation_id": (
             str(row.shadow_observation_id) if row.shadow_observation_id else None
         ),
+        "account_id": str(row.account_id) if row.account_id else None,
+        "request_id": str(row.request_id) if row.request_id else None,
+        "alternative_id": str(row.alternative_id) if row.alternative_id else None,
+        "itinerary_version_id": (
+            str(row.itinerary_version_id) if row.itinerary_version_id else None
+        ),
     }
 
 
@@ -101,6 +107,10 @@ class PostgresPlanningEvidenceRepository:
             deterministic_rank=values.get("deterministic_rank"),
             deterministic_score=values.get("deterministic_score"),
             shadow_observation_id=_uuid(values.get("shadow_observation_id")),
+            account_id=_uuid(values.get("account_id")),
+            request_id=_uuid(values.get("request_id")),
+            alternative_id=_uuid(values.get("alternative_id")),
+            itinerary_version_id=_uuid(values.get("itinerary_version_id")),
         )
         self.session.add(row)
         self.session.flush()
