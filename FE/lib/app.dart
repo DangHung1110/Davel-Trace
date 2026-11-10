@@ -1,14 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'app_state.dart';
 import 'features/management/data/demo_management_repository.dart';
 import 'features/management/data/management_repository.dart';
+import 'features/management/data/offline_management_repository.dart';
 import 'features/profile/presentation/profile_screen.dart';
 import 'features/auth/application/auth_controller.dart';
 import 'features/auth/presentation/auth_gate.dart';
 import 'features/auth/data/http_auth_repository.dart';
 import 'features/planning/data/planning_repository.dart';
 import 'core/networking/api_client.dart';
+import 'core/offline/secure_offline_persistence.dart';
 import 'features/shell/presentation/main_shell.dart';
 import 'shared/widgets/async_state_view.dart';
 import 'theme/app_theme.dart';
@@ -27,6 +31,9 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
   AppState? _liveState;
   bool _liveStarted = false;
   AuthController? _auth;
+  ApiClient? _liveApi;
+  String? _offlineAccountId;
+  bool _managesLiveComposition = false;
 
   @override
   void initState() {
@@ -38,11 +45,9 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
         _auth = widget.authController;
       } else {
         final api = ApiClient();
+        _liveApi = api;
+        _managesLiveComposition = true;
         _auth = AuthController(repository: HttpAuthRepository(client: api));
-        _liveState = AppState(
-          HttpManagementRepository(api),
-          planningRepository: HttpPlanningRepository(api),
-        );
       }
       _auth!.addListener(_syncAuthenticatedState);
       _auth!.initialize();
@@ -50,17 +55,38 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
   }
 
   void _syncAuthenticatedState() {
-    final live = _liveState;
+    final accountId = _auth?.account?.id;
     if (_auth?.status == AuthStatus.authenticated &&
-        live != null &&
-        !_liveStarted) {
+        _managesLiveComposition &&
+        accountId != null &&
+        (_liveState == null || _offlineAccountId != accountId)) {
+      _liveState?.dispose();
+      final api = _liveApi!;
+      final repository = OfflineManagementRepository(
+        live: HttpManagementRepository(api),
+        persistence: const SecureOfflinePersistence(),
+        accountId: accountId,
+      );
+      final live = AppState(
+        repository,
+        planningRepository: HttpPlanningRepository(api),
+      );
+      _liveState = live;
+      _offlineAccountId = accountId;
       _liveStarted = true;
-      live.initialize();
+      unawaited(live.initialize());
+      if (mounted) setState(() {});
     } else if (_auth?.status != AuthStatus.authenticated &&
-        live != null &&
+        _liveState != null &&
         _liveStarted) {
+      final live = _liveState!;
       _liveStarted = false;
       live.clearForSignOut();
+      unawaited(live.clearOfflineAccount());
+      live.dispose();
+      _liveState = null;
+      _offlineAccountId = null;
+      if (mounted) setState(() {});
     }
   }
 

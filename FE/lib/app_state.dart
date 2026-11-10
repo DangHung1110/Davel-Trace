@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'core/errors/api_exception.dart';
 import 'core/networking/api_client.dart';
 import 'features/management/data/management_repository.dart';
+import 'features/management/data/offline_management_repository.dart';
+import 'features/management/data/offline_models.dart';
 import 'features/management/domain/models.dart';
 import 'features/planning/data/planning_repository.dart';
 import 'features/planning/domain/models.dart';
@@ -21,7 +23,13 @@ class AppState extends ChangeNotifier {
   final LocalPreferences preferences;
   final PlanningRepository planningRepository;
 
-  bool get isDemoManagement => repository is! HttpManagementRepository;
+  bool get isDemoManagement => repository is! LiveManagementRepository;
+
+  OfflineSyncControl? get offlineSync => repository is OfflineSyncControl
+      ? repository as OfflineSyncControl
+      : null;
+
+  SyncStatus? get syncStatus => offlineSync?.status;
 
   bool isLoading = true;
   bool isMutating = false;
@@ -60,6 +68,7 @@ class AppState extends ChangeNotifier {
     errorMessage = null;
     notifyListeners();
     try {
+      await offlineSync?.loadStatus();
       final result = await repository.listProfiles();
       profiles = result.$1;
       final preferredId = result.$2 ?? await preferences.activeProfileId();
@@ -90,7 +99,7 @@ class AppState extends ChangeNotifier {
     final profile = activeProfile;
     if (profile == null) return;
     trips = await repository.listTrips(profile.id);
-    if (repository is HttpManagementRepository) {
+    if (repository is LiveManagementRepository) {
       final lifecycle = await Future.wait([
         repository.listTrips(profile.id, state: 'archived'),
         repository.listTrips(profile.id, state: 'deleted'),
@@ -102,8 +111,8 @@ class AppState extends ChangeNotifier {
       deletedTrips = [];
     }
     Trip? selected;
-    final liveActive = repository is HttpManagementRepository
-        ? (repository as HttpManagementRepository).activeTripId
+    final liveActive = repository is LiveManagementRepository
+        ? (repository as LiveManagementRepository).activeTripId
         : null;
     final wanted = selectId ?? activeTrip?.id ?? liveActive;
     if (wanted != null) {
@@ -111,7 +120,7 @@ class AppState extends ChangeNotifier {
         if (trip.id == wanted) selected = trip;
       }
     }
-    selected ??= selectFirst && repository is! HttpManagementRepository
+    selected ??= selectFirst && repository is! LiveManagementRepository
         ? trips.firstOrNull
         : null;
     if (selected == null) {
@@ -255,8 +264,8 @@ class AppState extends ChangeNotifier {
       'profile_id': activeProfile!.id,
       'city': 'da-nang',
     });
-    if (repository is HttpManagementRepository) {
-      await (repository as HttpManagementRepository).setActiveTrip(created);
+    if (repository is LiveManagementRepository) {
+      await (repository as LiveManagementRepository).setActiveTrip(created);
     }
     await _loadTrips(selectId: created.id);
   });
@@ -276,15 +285,15 @@ class AppState extends ChangeNotifier {
   });
 
   Future<void> selectTrip(Trip trip) => _mutate(() async {
-    if (repository is HttpManagementRepository) {
-      await (repository as HttpManagementRepository).setActiveTrip(trip);
+    if (repository is LiveManagementRepository) {
+      await (repository as LiveManagementRepository).setActiveTrip(trip);
     }
     await _loadTripDetail(trip.id);
   });
 
   Future<void> clearActiveTrip() => _mutate(() async {
-    if (repository is HttpManagementRepository) {
-      await (repository as HttpManagementRepository).setActiveTrip(null);
+    if (repository is LiveManagementRepository) {
+      await (repository as LiveManagementRepository).setActiveTrip(null);
     }
     _clearTripData(keepTrips: true);
   });
@@ -307,14 +316,14 @@ class AppState extends ChangeNotifier {
   Future<void> deleteActiveTrip() => _mutate(() async {
     final trip = activeTrip!;
     await repository.deleteTrip(trip);
-    if (repository is HttpManagementRepository) {
-      (repository as HttpManagementRepository).activeTripId = null;
+    if (repository is LiveManagementRepository) {
+      (repository as LiveManagementRepository).activeTripId = null;
     }
     trips = trips.where((item) => item.id != trip.id).toList();
-    deletedTrips = repository is HttpManagementRepository
+    deletedTrips = repository is LiveManagementRepository
         ? await repository.listTrips(activeProfile!.id, state: 'deleted')
         : [trip, ...deletedTrips];
-    if (repository is HttpManagementRepository) {
+    if (repository is LiveManagementRepository) {
       _clearTripData(keepTrips: true);
     } else {
       final next = trips.firstOrNull;
@@ -338,6 +347,7 @@ class AppState extends ChangeNotifier {
           })
         : await repository.updateActivity(existing.id, {
             ...data,
+            'trip_id': activeTrip!.id,
             'version': existing.version,
             'itinerary_version': current.version,
           });
@@ -444,6 +454,22 @@ class AppState extends ChangeNotifier {
     expenseSummary = await repository.deleteExpense(expense);
     expenses = expenses.where((item) => item.id != expense.id).toList();
   });
+
+  Future<void> synchronizeOfflineChanges() => _mutate(() async {
+    final sync = offlineSync;
+    if (sync == null) return;
+    await sync.synchronize();
+    await initialize();
+  });
+
+  Future<void> discardOfflineConflicts() => _mutate(() async {
+    final sync = offlineSync;
+    if (sync == null) return;
+    await sync.discardConflicts();
+    await initialize();
+  });
+
+  Future<void> clearOfflineAccount() async => offlineSync?.clearAccount();
 
   Future<Map<String, dynamic>> exportExpenses({
     String? date,
