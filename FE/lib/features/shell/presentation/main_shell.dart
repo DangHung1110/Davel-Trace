@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
@@ -65,6 +67,12 @@ class _MainShellState extends State<MainShell> {
                     children: [
                       if (state.isMutating)
                         const LinearProgressIndicator(minHeight: 2),
+                      if (state.syncStatus case final sync?
+                          when sync.usingStaleCache ||
+                              sync.pendingCount > 0 ||
+                              sync.conflictCount > 0 ||
+                              sync.failedCount > 0)
+                        OfflineSyncBanner(state: state),
                       if (state.errorMessage != null &&
                           state.profiles.isNotEmpty)
                         _StaleDataBanner(
@@ -140,6 +148,86 @@ class _MainShellState extends State<MainShell> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class OfflineSyncBanner extends StatelessWidget {
+  const OfflineSyncBanner({super.key, required this.state});
+
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final sync = state.syncStatus!;
+    final hasConflict = sync.conflictCount > 0 || sync.failedCount > 0;
+    final last = sync.lastSuccessAt?.toLocal();
+    final timestamp = last == null
+        ? 'chưa có lần đồng bộ thành công'
+        : '${last.hour.toString().padLeft(2, '0')}:${last.minute.toString().padLeft(2, '0')} '
+              '${last.day.toString().padLeft(2, '0')}/${last.month.toString().padLeft(2, '0')}';
+    final title = hasConflict
+        ? '${sync.conflictCount + sync.failedCount} thay đổi cần xử lý'
+        : sync.pendingCount > 0
+        ? '${sync.pendingCount} thay đổi đang chờ đồng bộ'
+        : 'Đang xem dữ liệu ngoại tuyến';
+    return Material(
+      key: const Key('offline-sync-banner'),
+      color: hasConflict ? const Color(0xFFFFE4E6) : const Color(0xFFE6FFFB),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 7, 8, 7),
+        child: Row(
+          children: [
+            Icon(
+              hasConflict
+                  ? Icons.sync_problem_rounded
+                  : Icons.cloud_off_outlined,
+              color: hasConflict ? Colors.red.shade700 : AppColors.primary,
+              size: 18,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppColors.ink,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    'Lần gần nhất: $timestamp',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
+            if (hasConflict)
+              TextButton(
+                key: const Key('discard-offline-conflicts-button'),
+                onPressed: state.isMutating
+                    ? null
+                    : () => unawaited(state.discardOfflineConflicts()),
+                child: const Text('Dùng máy chủ'),
+              )
+            else
+              TextButton(
+                key: const Key('sync-offline-changes-button'),
+                onPressed: state.isMutating
+                    ? null
+                    : () => unawaited(state.synchronizeOfflineChanges()),
+                child: const Text('Đồng bộ'),
+              ),
+          ],
+        ),
       ),
     );
   }

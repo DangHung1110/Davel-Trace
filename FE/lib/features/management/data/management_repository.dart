@@ -46,7 +46,14 @@ abstract interface class ManagementRepository {
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids);
 }
 
-class HttpManagementRepository implements ManagementRepository {
+abstract interface class LiveManagementRepository
+    implements ManagementRepository {
+  String? get activeTripId;
+  set activeTripId(String? value);
+  Future<void> setActiveTrip(Trip? trip);
+}
+
+class HttpManagementRepository implements LiveManagementRepository {
   HttpManagementRepository(this._api);
 
   final ApiClient _api;
@@ -56,6 +63,7 @@ class HttpManagementRepository implements ManagementRepository {
   final Map<String, int> _dayVersionById = {};
   final Map<String, String> _tripByActivity = {};
   final Map<String, String> _dayByActivity = {};
+  @override
   String? activeTripId;
   int _selectionVersion = 0;
 
@@ -126,6 +134,7 @@ class HttpManagementRepository implements ManagementRepository {
         .toList();
   }
 
+  @override
   Future<void> setActiveTrip(Trip? trip) async {
     final json = await _api.put(
       '/v1/trips/active',
