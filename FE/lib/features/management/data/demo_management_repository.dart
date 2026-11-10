@@ -391,15 +391,67 @@ class DemoManagementRepository implements ManagementRepository {
   }
 
   @override
-  Future<List<PoiItem>> searchPois(String query) async => const [];
-  @override
-  Future<RoutePreviewData> previewRoute(
-    String tripId,
-    List<String> ids,
-  ) async => const RoutePreviewData(
-    source: 'osrm',
-    isRealRoute: true,
-    distanceM: 24600,
-    durationS: 3600,
+  Future<List<PoiItem>> searchPois(String query) async =>
+      [
+            _demoPoi(
+              'demo-dragon-bridge',
+              'Cầu Rồng',
+              'landmark',
+              16.061,
+              108.227,
+            ),
+            _demoPoi('demo-my-khe', 'Biển Mỹ Khê', 'beach', 16.061, 108.247),
+            _demoPoi(
+              'demo-son-tra',
+              'Bán đảo Sơn Trà',
+              'nature',
+              16.105,
+              108.278,
+            ),
+          ]
+          .where(
+            (item) =>
+                item.name.toLowerCase().contains(query.toLowerCase()) ||
+                item.type.toLowerCase().contains(query.toLowerCase()),
+          )
+          .toList();
+
+  PoiItem _demoPoi(
+    String id,
+    String name,
+    String type,
+    double lat,
+    double lon,
+  ) => PoiItem(
+    id: id,
+    name: name,
+    type: type,
+    latitude: lat,
+    longitude: lon,
+    verified: false,
+    source: 'Dữ liệu mẫu',
+    snapshotVersion: 'demo-seed-v1',
   );
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async =>
+      (await searchPois('')).firstWhere((item) => item.id == id);
+  @override
+  Future<RoutePreviewData> previewRoute(String tripId, List<String> ids) async {
+    final byId = {for (final activity in activities) activity.id: activity};
+    final coordinates = ids
+        .map((id) => byId[id])
+        .whereType<ActivityItem>()
+        .map((activity) => [activity.longitude, activity.latitude])
+        .toList();
+    return RoutePreviewData(
+      source: 'demo_seed',
+      isRealRoute: false,
+      distanceM: 0,
+      durationS: 0,
+      quality: 'interpolated',
+      geometry: coordinates,
+      warning: 'Đường nối minh họa từ dữ liệu demo.',
+    );
+  }
 }

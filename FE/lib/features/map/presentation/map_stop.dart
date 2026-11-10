@@ -26,17 +26,30 @@ class MapStop {
   final IconData icon;
   final Color color;
 
-  factory MapStop.fromActivity(ActivityItem activity) => MapStop(
+  factory MapStop.fromActivity(
+    ActivityItem activity, {
+    PoiItem? place,
+  }) => MapStop(
     id: activity.id,
     title: activity.title,
-    subtitle: activity.notes.isEmpty
-        ? categoryLabel(activity.category)
-        : activity.notes,
+    subtitle: [
+      activity.notes.isEmpty
+          ? categoryLabel(activity.category)
+          : activity.notes,
+      if (activity.poiId == null)
+        'Hoạt động riêng'
+      else if (place == null)
+        'POI chưa khả dụng · trạng thái chưa xác minh'
+      else if (place.verified)
+        'POI đã xác minh'
+      else
+        'POI chưa xác minh',
+    ].join(' · '),
     time:
         '${activity.startAt.hour.toString().padLeft(2, '0')}:${activity.startAt.minute.toString().padLeft(2, '0')}',
     durationMinutes: activity.endAt.difference(activity.startAt).inMinutes,
-    latitude: activity.latitude,
-    longitude: activity.longitude,
+    latitude: place?.latitude ?? activity.latitude,
+    longitude: place?.longitude ?? activity.longitude,
     icon: categoryIcon(activity.category),
     color: categoryColor(activity.category),
   );

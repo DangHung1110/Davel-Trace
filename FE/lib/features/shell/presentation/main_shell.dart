@@ -32,7 +32,12 @@ class _MainShellState extends State<MainShell> {
     final state = widget.state;
     final stops = (state.itinerary?.activities ?? const [])
         .where((activity) => activity.poiId != null)
-        .map(MapStop.fromActivity)
+        .map(
+          (activity) => MapStop.fromActivity(
+            activity,
+            place: state.mapPlaces[activity.poiId],
+          ),
+        )
         .toList();
     return Scaffold(
       backgroundColor: AppColors.surfaceHigh,

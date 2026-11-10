@@ -924,6 +924,18 @@ class _ActivityTile extends StatelessWidget {
                         ),
                       ),
                       Text(
+                        activity.poiId == null
+                            ? 'Hoạt động riêng'
+                            : 'POI liên kết · chưa xác minh lại',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.muted,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
                         activity.notes.isEmpty
                             ? '${_clock(activity.startAt)}–${_clock(activity.endAt)}'
                             : activity.notes,
@@ -1276,6 +1288,87 @@ class _ActivityEditorState extends State<ActivityEditor> {
     });
   }
 
+  Future<void> _showPoiDetails(PoiItem result) async {
+    PoiItem place = result;
+    try {
+      place = await widget.state.getPoiDetails(result.id);
+    } catch (_) {
+      // Search result details remain usable when the detail request is offline.
+    }
+    if (!mounted) return;
+    final selected = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  place.name,
+                  style: Theme.of(sheetContext).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 6),
+                Text(place.type),
+                const SizedBox(height: 12),
+                _PoiEvidenceRow(
+                  label: 'Xác minh',
+                  value: place.verified
+                      ? 'Đã xác minh'
+                      : 'Chưa xác minh · cần kiểm tra',
+                ),
+                _PoiEvidenceRow(
+                  label: 'Nguồn',
+                  value: place.source ?? 'Không rõ nguồn',
+                ),
+                _PoiEvidenceRow(
+                  label: 'Phiên bản',
+                  value: place.snapshotVersion ?? 'Không rõ phiên bản',
+                ),
+                _PoiEvidenceRow(
+                  label: 'Giờ mở cửa',
+                  value: place.openingHours.isEmpty
+                      ? 'Chưa có dữ liệu'
+                      : place.openingHours.join(', '),
+                ),
+                _PoiEvidenceRow(
+                  label: 'Giá',
+                  value: place.priceState == 'unknown'
+                      ? 'Chưa có dữ liệu'
+                      : (place.ticketNote ??
+                            (place.fee == null
+                                ? (place.priceLevel == null
+                                      ? 'Có dữ liệu mức giá'
+                                      : 'Mức giá ${place.priceLevel}')
+                                : '${place.fee} ₫')),
+                ),
+                if (place.fetchedAt != null)
+                  _PoiEvidenceRow(
+                    label: 'Cập nhật nguồn',
+                    value: place.fetchedAt!,
+                  ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: () => Navigator.pop(sheetContext, true),
+                    icon: const Icon(Icons.add_location_alt_outlined),
+                    label: const Text('Thêm vào hoạt động'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    if (selected == true && mounted) _selectPoi(place);
+  }
+
   void _save() {
     if (!_formKey.currentState!.validate()) return;
     final parts = _time.text.split(':');
@@ -1372,10 +1465,24 @@ class _ActivityEditorState extends State<ActivityEditor> {
                     return ListTile(
                       dense: true,
                       title: Text(poi.name),
-                      subtitle: Text(poi.type),
-                      trailing: poi.verified
-                          ? const Icon(Icons.verified, size: 16)
-                          : null,
+                      subtitle: Text(
+                        '${poi.type} · ${poi.verified ? 'Đã xác minh' : 'Chưa xác minh'}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: IconButton(
+                        tooltip: 'Chi tiết và nguồn dữ liệu',
+                        icon: Icon(
+                          poi.verified
+                              ? Icons.verified_outlined
+                              : Icons.info_outline,
+                          size: 19,
+                          color: poi.verified
+                              ? AppColors.primary
+                              : AppColors.warning,
+                        ),
+                        onPressed: () => _showPoiDetails(poi),
+                      ),
                       onTap: () => _selectPoi(poi),
                     );
                   },
@@ -1493,6 +1600,31 @@ class _ActivityEditorState extends State<ActivityEditor> {
           ],
         ),
       ),
+    ),
+  );
+}
+
+class _PoiEvidenceRow extends StatelessWidget {
+  const _PoiEvidenceRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 5),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 104,
+          child: Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+        Expanded(child: Text(value)),
+      ],
     ),
   );
 }

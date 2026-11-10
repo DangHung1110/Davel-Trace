@@ -42,6 +42,7 @@ abstract interface class ManagementRepository {
     String? category,
   });
   Future<List<PoiItem>> searchPois(String query);
+  Future<PoiItem> getPoiDetails(String id);
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids);
 }
 
@@ -414,6 +415,12 @@ class HttpManagementRepository implements ManagementRepository {
         .map((item) => PoiItem.fromJson(item as Map<String, dynamic>))
         .toList();
   }
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async => PoiItem.fromJson(
+    await _api.get('/v1/pois/${Uri.encodeComponent(id)}')
+        as Map<String, dynamic>,
+  );
 
   @override
   Future<RoutePreviewData> previewRoute(
