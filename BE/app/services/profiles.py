@@ -149,6 +149,11 @@ CANDIDATE_CHEAP_MEALS = 4         # a tight budget may afford no other lunch or 
 # costs the same, so a 4.9 vegan-only kitchen loses to a 4.2 seafood place.
 TASTE_WEIGHT = 0.20
 
+# A rung that ran out of search budget with no solution (`status: unknown`) says
+# nothing about its rules. Two in a row say the pool is too hard for the budget:
+# the ladder stops there instead of paying the full budget on every rung left
+# (20 rungs x 6 s was a minute of nothing), and the plan says so.
+MAX_UNKNOWN_RUNGS = 2
 # A diagnosis only names the rule that killed a plan: small budgets each.
 DIAGNOSE_TIMEOUT_S = 2.0
 DIAGNOSE_WALL_GUARD_S = 30.0      # by work the wall clock must not decide the answer
@@ -680,7 +685,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     order_prefs = [tuple(pair) for pair in trip.get("order_prefs") or [] if len(pair) == 2]
     limits_used = limits
     stubs_used = stubs
+    unknown_rungs = 0
     for rung, (step, limits_try, kind) in enumerate(rungs):
+        if unknown_rungs >= MAX_UNKNOWN_RUNGS:
+            break
         stubs_try = stubs_by_kind[kind]
         out = optimize(stubs_try, travel, _to_trip(trip),
                        edge_scores=q, workers=workers, must_visit=must,
@@ -709,6 +717,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
             limits_used = limits_try
             stubs_used = stubs_try
             break
+        unknown_rungs = unknown_rungs + 1 if out.get("status") == "unknown" else 0
 
     def _diagnose(base_limits: dict) -> dict | None:
         """Which single HARD rule makes this pool infeasible? (diagnostic only)
@@ -806,7 +815,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
               "ban yeu cau, gio nay khong phai luc dep nhat" for a in misplaced]
     if extra:
         plan["warnings"] = extra + list(plan.get("warnings") or [])
-    if out.get("itinerary") is None and not distinct_from and diagnose:
+    if out.get("itinerary") is None and out.get("status") == "unknown":
+        # The budget, not a rule, stopped the search: a rule-by-rule diagnosis
+        # would only burn the same budget eight more times.
+        plan["infeasible_by"] = {"rule": "SEARCH_BUDGET",
+                                 "label": "het ngan sach tim kiem, chua chung minh vo nghiem"}
+    elif out.get("itinerary") is None and not distinct_from and diagnose:
         culprit = _diagnose(list(templates.attempts(limits))[-1])
         if culprit:
             plan["infeasible_by"] = culprit

@@ -5,8 +5,10 @@ Model (OR-Tools CP-SAT):
 - t[i] visit start; open[i] <= t[i] <= close[i]-dur[i] iff visited.
 - arc[i][j] => t[j] >= t[i]+dur[i]+travel[i][j]; depot t[0]=trip start.
 - Tmax: every visit finishes by trip end. Objective: max total score of visited.
-Returns {"status": optimal|feasible-timeout|infeasible, "itinerary" | "reason", ...}.
-Best-found is returned even on timeout.
+Returns {"status": optimal|feasible-timeout|infeasible|unknown, "itinerary" | "reason", ...}.
+Best-found is returned even on timeout. `unknown` = the search budget ran out before
+any solution was found: the model was NOT proven infeasible, so a caller must not
+read it as "these rules cannot be met".
 
 A falsy `StubTrip.origin_id` selects the OPEN TOUR ("drop depot legs"): the origin leg
 is not modelled, so the first activity may start at trip.start_min. The committed
@@ -91,6 +93,12 @@ POOL_DEFAULT_BAND = 0.95        # keep solutions >= 95 % of the OPT objective
 POOL_ENUM_TIMEOUT_S = 25.0      # total budget for the enumeration pass
 POOL_STEP_TIMEOUT_S = 5.0       # per member (nogood solve; warm greedy hint)
 POOL_STEP_DETERMINISTIC_TIME = 2.0  # the same, in work units, when the caller plans by work
+
+# Completing the greedy hint (`_complete_hint`): a solve with the hinted variables
+# fixed only has to derive the rest, so it ends in milliseconds; the limits are a
+# guard, not a budget.
+HINT_COMPLETE_DETERMINISTIC_TIME = 1.0
+HINT_COMPLETE_WALL_S = 10.0
 
 
 # What the model reads of a POI and of a trip (imported by profiles/replan).
@@ -295,7 +303,8 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         cats = set(req.get("categories") or [])
         groups.append({"nodes": ({node_of[pid] for pid in named if pid in node_of} if named is not None
                                  else {i for i, poi in enumerate(pois, 1) if poi.category in cats}),
-                       "need": int(req.get("count") or 1), "span": req.get("start_between")})
+                       "need": int(req.get("count") or 1), "span": req.get("start_between"),
+                       "named": named is not None})
     need_lunch, need_dinner = bool(lunch_required), bool(dinner_required)
     hint: list[tuple[int, int]] = []
     used_slots: set[int] = set()
@@ -433,7 +442,15 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 value += presence_value  # reward a new category (TASK-1)
             minutes = wait + poi.visit_min + STOP_OVERHEAD_MIN + leg
             efficiency = value / max(1, minutes)
-            key = (not (required and wait <= HINT_READY_MIN), -efficiency, -poi.score, poi.poi_id)
+            # A wish that names its places ("hải sản": these 29 restaurants) is a
+            # hard group in the wished rungs. Efficiency alone seated any
+            # restaurant at lunch and dinner and left the group open, so the seed
+            # broke a rule of the model and CP-SAT started from nothing: among the
+            # stops ready now, one that closes such a group goes first.
+            closes = sum(1 for g in open_groups if g["named"] and i in g["nodes"]
+                         and (not g["span"] or g["span"][0] <= start < g["span"][1]))
+            key = (not (required and wait <= HINT_READY_MIN), -closes, -efficiency,
+                   -poi.score, poi.poi_id)
             if best is None or key < best[0]:
                 best = (key, i, start, slot)
         if best is None:
@@ -476,6 +493,34 @@ def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
     m.Add(t[i] >= hi).OnlyEnforceIf(before.Not())
     m.AddMultiplicationEquality(hit, [after, before, visit[i]])
     return hit
+
+
+def _complete_hint(m, cp_model):
+    """Turn the partial greedy hint into a full feasible assignment; None if it has none.
+
+    CP-SAT reads a hint only once presolve is done (3 probing passes, ~3 work units
+    on an 80-POI day) and reports NOTHING when the budget ends before that: a short
+    budget returned UNKNOWN for a day the hint already held. A solve with the hinted
+    variables fixed fills in every other variable (they all follow from the arcs
+    and clocks) and ends in milliseconds. Its solution becomes the complete hint,
+    which the main search takes as its first incumbent, and the floor `optimize`
+    returns when the search runs out of budget before improving on it. None when
+    the greedy walk broke a rule the model has and the walk does not; the main
+    search then starts from scratch as before.
+    """
+    probe = cp_model.CpSolver()
+    probe.parameters.num_search_workers = 1
+    probe.parameters.fix_variables_to_their_hinted_value = True
+    probe.parameters.max_deterministic_time = HINT_COMPLETE_DETERMINISTIC_TIME
+    probe.parameters.max_time_in_seconds = HINT_COMPLETE_WALL_S
+    if probe.Solve(m) not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return None
+    proto = m.proto if hasattr(m, "proto") else m.Proto()
+    m.ClearHints()
+    for index, value in enumerate(probe.ResponseProto().solution):
+        proto.solution_hint.vars.append(index)
+        proto.solution_hint.values.append(int(value))
+    return probe
 
 
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
@@ -958,6 +1003,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         category_cap=category_cap, avoid_ids=avoid_ids,
                         precedence=precedence, max_fee=max_fee, required_any=required_any,
                         lunch_required=lunch_required, dinner_required=dinner_required)
+    hint_solver = None
     if hint:
         previous = 0
         for i, start in hint:
@@ -970,6 +1016,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         for i in range(1, n + 1):
             if i not in hinted:
                 m.AddHint(arc[(i, i)], 1)
+        hint_solver = _complete_hint(m, cp_model)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout_s
@@ -985,6 +1032,17 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     status = solver.Solve(m)
     elapsed = time.monotonic() - t0
     name = solver.StatusName(status)
+    from_hint = False
+    if status == cp_model.UNKNOWN and hint_solver is not None:
+        # The budget ended inside presolve: the completed hint is still a feasible
+        # day of this very model, so it is the answer, not "nothing".
+        solver, status, from_hint = hint_solver, cp_model.FEASIBLE, True
+    if status == cp_model.UNKNOWN:
+        # Out of budget with no incumbent (the greedy hint was infeasible or the
+        # budget did not even cover presolve). Not a proof of anything.
+        return {"status": "unknown",
+                "reason": "solver het ngan sach truoc khi tim duoc lich (UNKNOWN)",
+                "elapsed_s": round(elapsed, 3), "itinerary": None}
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         return {"status": "infeasible", "reason": f"solver {name}",
                 "elapsed_s": round(elapsed, 3), "itinerary": None}
@@ -1006,6 +1064,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     order, acts = _take()
     objective = solver.ObjectiveValue()
     return {"status": "optimal" if status == cp_model.OPTIMAL else "feasible-timeout",
+            "from_hint": from_hint,
             "elapsed_s": round(elapsed, 3),
             "itinerary": {"activities": acts,
                           "total_score": round(sum(sco[i] for i in order), 3),
