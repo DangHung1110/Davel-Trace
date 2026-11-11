@@ -33,6 +33,8 @@ class OfflineManagementRepository
   bool _isSyncing = false;
   String? _message;
   String? _localActiveTripId;
+  Future<void> _persistenceTail = Future<void>.value();
+  bool _cleared = false;
 
   @override
   String? get activeTripId => _localActiveTripId ?? live.activeTripId;
@@ -61,15 +63,19 @@ class OfflineManagementRepository
   }
 
   Future<OfflineEnvelope?> _loadExisting() async {
+    if (_cleared) return null;
     if (_envelope != null) return _envelope;
     final raw = await persistence.read(accountId);
+    if (_cleared) return null;
     if (raw == null) return null;
     try {
-      _envelope = OfflineEnvelope.decode(
+      final decoded = OfflineEnvelope.decode(
         raw,
         accountId: accountId,
         now: _clock(),
       );
+      if (_cleared) return null;
+      _envelope = decoded;
       return _envelope;
     } on FormatException {
       await persistence.delete(accountId);
@@ -81,8 +87,14 @@ class OfflineManagementRepository
       await _loadExisting() ?? OfflineEnvelope.empty(accountId, _clock());
 
   Future<void> _persist(OfflineEnvelope envelope) async {
-    _envelope = envelope;
-    await persistence.write(accountId, jsonEncode(envelope.toJson()));
+    final operation = _persistenceTail.then((_) async {
+      if (_cleared) return;
+      await persistence.write(accountId, jsonEncode(envelope.toJson()));
+      if (_cleared) return;
+      _envelope = envelope;
+    });
+    _persistenceTail = operation.catchError((Object _) {});
+    await operation;
   }
 
   Future<void> _cache(
@@ -116,6 +128,10 @@ class OfflineManagementRepository
     if (!_isNetwork(error)) throw error;
     final projection = (await _loadExisting())?.snapshots[key];
     if (projection == null) throw error;
+    if (_clock().toUtc().difference(projection.savedAt.toUtc()) >
+        OfflineEnvelope.maxCacheAge) {
+      throw error;
+    }
     _usingStaleCache = true;
     _message = 'Đang dùng dữ liệu đã lưu trên thiết bị.';
     return projection.payload;
@@ -517,10 +533,15 @@ class OfflineManagementRepository
 
   @override
   Future<void> clearAccount() async {
-    await persistence.delete(accountId);
+    _cleared = true;
     _envelope = null;
     _usingStaleCache = false;
     _message = null;
+    final operation = _persistenceTail.then(
+      (_) => persistence.delete(accountId),
+    );
+    _persistenceTail = operation.catchError((Object _) {});
+    await operation;
   }
 
   Future<void> _replaceProfile(

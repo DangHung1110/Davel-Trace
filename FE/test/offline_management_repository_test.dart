@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:davel_trace/app_state.dart';
 import 'package:davel_trace/core/errors/api_exception.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
 import 'package:davel_trace/features/management/data/offline_management_repository.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/fake_management_repository.dart';
 import 'support/memory_offline_persistence.dart';
@@ -76,6 +81,108 @@ void main() {
       );
     },
   );
+
+  test(
+    'rejects an expired projection after another projection refreshed',
+    () async {
+      final live = _LiveFake();
+      final persistence = MemoryOfflinePersistence();
+      final online = OfflineManagementRepository(
+        live: live,
+        persistence: persistence,
+        accountId: 'account-a',
+        clock: () => now,
+      );
+      await online.listTrips('profile-1');
+      await online.listProfiles();
+
+      final stored =
+          jsonDecode(persistence.values['account-a']!) as Map<String, dynamic>;
+      final snapshots = stored['snapshots'] as Map<String, dynamic>;
+      final tripProjection =
+          snapshots['trips:profile-1:available'] as Map<String, dynamic>;
+      tripProjection['saved_at'] = now
+          .subtract(const Duration(days: 31))
+          .toIso8601String();
+      persistence.values['account-a'] = jsonEncode(stored);
+      live.networkDown = true;
+
+      final restarted = OfflineManagementRepository(
+        live: live,
+        persistence: persistence,
+        accountId: 'account-a',
+        clock: () => now,
+      );
+
+      await expectLater(
+        restarted.listTrips('profile-1'),
+        throwsA(isA<ApiException>()),
+      );
+    },
+  );
+
+  test('late live read cannot recreate cache after account cleanup', () async {
+    final live = _LiveFake();
+    final baseline = await live.listProfiles();
+    final gate = Completer<(List<UserProfile>, String?)>();
+    live.profileReadGate = gate;
+    final persistence = MemoryOfflinePersistence();
+    final repository = OfflineManagementRepository(
+      live: live,
+      persistence: persistence,
+      accountId: 'account-a',
+      clock: () => now,
+    );
+
+    final read = repository.listProfiles();
+    await Future<void>.delayed(Duration.zero);
+    await repository.clearAccount();
+    gate.complete(baseline);
+    await read;
+
+    expect(persistence.values, isNot(contains('account-a')));
+  });
+
+  test('account cleanup waits for an in-flight cache write', () async {
+    final persistence = _BlockingMemoryOfflinePersistence();
+    final repository = OfflineManagementRepository(
+      live: _LiveFake(),
+      persistence: persistence,
+      accountId: 'account-a',
+      clock: () => now,
+    );
+
+    final read = repository.listProfiles();
+    await persistence.writeStarted.future;
+    final cleanup = repository.clearAccount();
+    persistence.releaseWrite.complete();
+    await Future.wait([read, cleanup]);
+
+    expect(persistence.values, isNot(contains('account-a')));
+  });
+
+  test('disposed app state ignores late initialization completion', () async {
+    SharedPreferences.setMockInitialValues({});
+    final live = _LiveFake();
+    final baseline = await live.listProfiles();
+    final gate = Completer<(List<UserProfile>, String?)>();
+    live.profileReadGate = gate;
+    final state = AppState(
+      OfflineManagementRepository(
+        live: live,
+        persistence: MemoryOfflinePersistence(),
+        accountId: 'account-a',
+        clock: () => now,
+      ),
+    );
+
+    final initialization = state.initialize();
+    await Future<void>.delayed(Duration.zero);
+    state.dispose();
+    gate.complete(baseline);
+
+    await expectLater(initialization, completes);
+  });
 
   test(
     'coalesces offline expense edits and survives adapter restart',
@@ -404,6 +511,7 @@ class _LiveFake extends FakeManagementRepository
   bool conflictExpense = false;
   bool terminalTrip = false;
   int? interruptReplayAt;
+  Completer<(List<UserProfile>, String?)>? profileReadGate;
   int _replayAttempt = 0;
   final List<String> replayLog = [];
 
@@ -429,6 +537,8 @@ class _LiveFake extends FakeManagementRepository
 
   @override
   Future<(List<UserProfile>, String?)> listProfiles() {
+    final gate = profileReadGate;
+    if (gate != null) return gate.future;
     if (networkDown) _offline();
     return super.listProfiles();
   }
@@ -499,5 +609,17 @@ class _LiveFake extends FakeManagementRepository
   ) {
     if (networkDown) _offline();
     return super.addExpense(tripId, data);
+  }
+}
+
+class _BlockingMemoryOfflinePersistence extends MemoryOfflinePersistence {
+  final writeStarted = Completer<void>();
+  final releaseWrite = Completer<void>();
+
+  @override
+  Future<void> write(String accountId, String value) async {
+    writeStarted.complete();
+    await releaseWrite.future;
+    await super.write(accountId, value);
   }
 }

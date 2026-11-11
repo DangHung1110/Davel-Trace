@@ -56,8 +56,21 @@ class AppState extends ChangeNotifier {
   List<ItineraryVersionSummary> itineraryVersions = [];
   Map<String, dynamic>? planningReadiness;
   bool isPlanning = false;
+  bool _disposed = false;
   String plannerMessage =
       'Đang dùng dữ liệu mẫu trên máy. Bấm tạo phương án để thử FastAPI.';
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) super.notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   final Map<String, String> _planningKeys = {};
   final Map<String, String> _acceptanceKeys = {};
   final Map<String, String> _activationKeys = {};
