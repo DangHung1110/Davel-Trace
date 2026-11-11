@@ -20,14 +20,27 @@ router = APIRouter(prefix="/v1", tags=["itinerary"])
 
 _STORE: dict = {"plans": {}, "active_id": None, "selected": None, "gate": None}
 
+# The store is in-memory and lived forever: every /v1/itinerary adds its plans
+# (each with the replan context, ~0.3 MB), so a demo box leaked a megabyte a
+# request. The oldest plans go once this many are held; the selected plan is
+# never evicted. An evicted id answers 404 like an unknown one.
+MAX_STORED_PLANS = 300
+
 
 class SelectIn(BaseModel):
     itinerary_id: str
 
 
 def register(plans: list[dict]) -> None:
+    store = _STORE["plans"]
     for p in plans:
-        _STORE["plans"][p["itinerary_id"]] = p
+        store.pop(p["itinerary_id"], None)  # re-registering moves it to the newest end
+        store[p["itinerary_id"]] = p
+    keep = {_STORE["active_id"], _STORE["selected"]} | {p["itinerary_id"] for p in plans}
+    for old in [pid for pid in store if pid not in keep]:
+        if len(store) <= MAX_STORED_PLANS:
+            break
+        del store[old]
 
 
 def get_store() -> dict:

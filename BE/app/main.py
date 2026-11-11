@@ -1,5 +1,7 @@
 """FastAPI entry: CORS, routers, the error envelope, health."""
 
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -27,6 +29,7 @@ PUBLIC_ROUTERS = (parse_router, itinerary_router, select_router, replan_router,
 # Local test harness only: semantic LLM review, the bounded LLM-guided repair
 # loop, and the append-only "Chốt plan" log for future weight-learning.
 LOCAL_ROUTERS = (review_router, repair_router, accept_router)
+log = logging.getLogger("davel.api")
 
 
 def configure(app: FastAPI, settings: Settings) -> None:
@@ -82,6 +85,9 @@ async def http_exception_handler(
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
+    # The envelope hides the traceback from the client; the server log keeps it,
+    # or a 500 is invisible to whoever runs the box.
+    log.exception("unhandled error on %s %s", request.method, request.url.path)
     return error("INTERNAL_ERROR", "loi noi bo", 500)
 
 

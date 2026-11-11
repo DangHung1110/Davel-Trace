@@ -72,6 +72,22 @@ class DenseCells(Mapping):
                             for minutes in row if minutes is not None)
         return self._len
 
+    def travel_minutes(self, ids: list[str]) -> dict[tuple[str, str], int]:
+        """{(a, b): minutes} over `ids`, read straight off the rows.
+
+        The same cells `get("a->b")` returns, without building a key string
+        per pair (a profile reads ~13k pairs a request). An unknown id or an
+        unroutable pair stays absent (B3), never 0.
+        """
+        known = [(pid, self._index[pid]) for pid in ids if pid in self._index]
+        out: dict[tuple[str, str], int] = {}
+        for a, i in known:
+            row = self._minutes[i]
+            for b, j in known:
+                if i != j and row[j] is not None:
+                    out[(a, b)] = int(row[j])
+        return out
+
 
 def dense_document(ids: list[str], cells: Mapping, meta: dict) -> dict:
     """Legacy-shaped cells (`(a, b)` or `"a->b"` keys) -> dense-v1 document.
@@ -123,6 +139,25 @@ def load_matrix_doc(path: str) -> dict:
     with _DOC_LOCK:
         _DOC_CACHE[path] = (key, doc)
     return doc
+
+
+def travel_minutes(cells: Mapping, ids: list[str]) -> dict[tuple[str, str], int]:
+    """{(a, b): minutes} for every routable ordered pair of `ids`.
+
+    Dense cells answer from their rows; legacy dict cells are read key by key.
+    A missing cell stays ABSENT (B3: infeasible, never an estimate).
+    """
+    if isinstance(cells, DenseCells):
+        return cells.travel_minutes(ids)
+    travel: dict[tuple[str, str], int] = {}
+    for a in ids:
+        for b in ids:
+            if a == b:
+                continue
+            cell = cells.get(f"{a}{ROW_SEP}{b}")
+            if cell is not None:
+                travel[(a, b)] = int(cell["minutes"])
+    return travel
 
 
 def load_cells(snapshot_dir: str) -> Mapping:

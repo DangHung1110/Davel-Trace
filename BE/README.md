@@ -38,6 +38,10 @@ dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 
 python -m uvicorn BE.app.main:app --port 8000
 ```
 
+Trong tiến trình, BE giữ lại tối đa 300 plan gần nhất cho `/v1/itinerary/{id}`, `/select` và `/replan`
+(plan cũ hơn trả 404 như id lạ); dự báo thời tiết Open-Meteo được nhớ 15 phút (lỗi mạng nhớ 60 giây) nên
+mỗi request lập lịch không gọi mạng lại. Lỗi 500 được ghi traceback vào log server (`davel.api`).
+
 Kiểm tra (đã verify thật):
 
 ```powershell

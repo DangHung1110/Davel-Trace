@@ -39,7 +39,9 @@ asks for them, `excluded` ones only as a must_visit.
 
 from __future__ import annotations
 
+import os
 import re
+import threading
 import unicodedata
 from functools import lru_cache
 
@@ -138,10 +140,30 @@ _WISH_TIERS = {"local", "wish_only"}
 WISH_ENOUGH_MAIN = 3
 
 
+_POIS_CACHE: dict[str, tuple[tuple[int, int], list[dict]]] = {}
+_POIS_LOCK = threading.Lock()
+
+
 def load_pois_json(path: str) -> list[dict]:
-    """Read a snapshot pois.json (T061c: shares BE.common.load_json)."""
+    """Read a snapshot pois.json (T061c: shares BE.common.load_json).
+
+    Parsed once per file version (path, mtime, size), like the matrix: the
+    2 MB snapshot was re-parsed on every plan request. The list is SHARED
+    between requests; nothing downstream mutates a POI (they are projected
+    with `poi_on_date` / `_gate_view`), so callers must keep it that way.
+    """
+    path = os.path.abspath(path)
+    stat = os.stat(path)
+    key = (stat.st_mtime_ns, stat.st_size)
+    with _POIS_LOCK:
+        hit = _POIS_CACHE.get(path)
+    if hit is not None and hit[0] == key:
+        return hit[1]
     data = load_json(path)
-    return data["pois"] if isinstance(data, dict) else data
+    pois = data["pois"] if isinstance(data, dict) else data
+    with _POIS_LOCK:
+        _POIS_CACHE[path] = (key, pois)
+    return pois
 
 
 def poi_category(p: dict) -> str:

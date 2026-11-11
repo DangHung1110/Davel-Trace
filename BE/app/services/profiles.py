@@ -29,6 +29,7 @@ from collections import Counter
 from dataclasses import replace
 
 from BE.app.services import (
+    matrix as matrix_svc,
     pool as pool_svc,
     profile_filter,
     response,
@@ -485,15 +486,7 @@ def _cap_candidates(candidates: list[dict], score, must: list[str],
 
 def _travel_from_cells(cells: dict, ids: list[str]) -> dict:
     """T061a: matrix cells -> {(a,b): minutes}; a missing cell stays ABSENT (B3)."""
-    travel = {}
-    for a in ids:
-        for b in ids:
-            if a == b:
-                continue
-            cell = cells.get(f"{a}->{b}")
-            if cell is not None:
-                travel[(a, b)] = int(cell["minutes"])
-    return travel
+    return matrix_svc.travel_minutes(cells, ids)
 
 
 def build_plan(profile: str, trip: dict, ranked: list[dict],
