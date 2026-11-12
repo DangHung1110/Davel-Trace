@@ -12,6 +12,14 @@ order the traveller asked for. Free time then goes into longer stays, and what i
 left collects at the start of the day or after the rest, in the heat of the day, not
 as holes between stops. The caller re-checks the result with the gate; any doubt
 keeps the solver's plan.
+
+An order is judged on the day it gives, not on its driving alone (`timing_cost`).
+The shortest tour used to win even when it opened an 08:00 day with lunch at 11:00,
+or left three hours between lunch and the next stop while the cafe sat right before
+that lunch: the solver's objective has no word for dead time, and of two days with
+the same stops it returned either. Dead minutes now cost a quarter of a minute of
+driving each, and a place the traveller named counts as misplaced outside its
+sensible hours (a pagoda after dark while the morning stood empty).
 """
 
 from __future__ import annotations
@@ -31,6 +39,27 @@ from BE.app.services.soft_rules import (
 # Order search budget in visited nodes. Nine stops are searched exhaustively once
 # the windows prune them; a count, not a clock, so the same plan comes back.
 MAX_NODES = 150_000
+# ... and in finished orders, each of which is timed and judged (`timing_cost`).
+MAX_ORDERS = 4_000
+
+# What a day may hold without it counting as dead time (minutes): a start this long
+# after the trip's, a wait between two stops, and a rest after lunch this much over
+# its length. Past that every minute costs TIMING_WEIGHT minutes of driving.
+LATE_START_FREE = 30
+HOLE_FREE = 30
+REST_EXTRA_FREE = 45
+# Measured on 219 real days (67 requests on danang-v1), same stops, weight only:
+#   0     29.6 min driving a day, 17 days starting over an hour late, 37 holes
+#   0.25  30.7 min                 0                                    8
+#   0.5   30.9 min                 0                                    6
+# A quarter buys nearly all of it for one more minute of driving a day.
+TIMING_WEIGHT = 0.25
+# A named place outside its sensible hours, in minutes of driving: worth a detour of
+# up to half an hour to avoid, never worth dropping the place (the solver already
+# seated it). On the 21 audited days with such a place, any value from 15 to 90 gave
+# the same days: 6 of 27 named stops at a wrong hour became 1, for 2.6 minutes more
+# driving a day (14 at most).
+MISPLACED_COST = 30
 
 
 def _role(stub, start: int, cafes: int) -> str | None:
@@ -102,11 +131,42 @@ def kept_dry(stub, wet: list[tuple[int, int]]):
     return replace(stub, windows=tuple(windows)) if windows else stub
 
 
+def timing_cost(rows: list[dict], legs: list[int], start_min: int, roles: dict,
+                rest_minutes: int | None, preferred: dict | None = None) -> float:
+    """What a finished day costs beyond its driving, in minutes of driving.
+
+    `rows` are the day's stops with their final clock times, `legs` the minutes
+    between consecutive stops (drive + the breathing room the model reserves).
+    Dead time is a start later than LATE_START_FREE after the trip's and every wait
+    past HOLE_FREE (after lunch: past the rest and REST_EXTRA_FREE). Time left after
+    the last stop is free: the evening is the traveller's. `preferred[poi_id]` are the
+    windows a named place should sit inside; outside all of them it is misplaced.
+    """
+    starts = [to_min(row["start"]) for row in rows]
+    ends = [to_min(row["end"]) for row in rows]
+    dead = max(0, starts[0] - start_min - LATE_START_FREE)
+    for i, leg in enumerate(legs):
+        free = HOLE_FREE
+        if roles.get(rows[i]["poi_id"]) == "lunch" and rest_minutes:
+            free = max(0, rest_minutes - leg) + REST_EXTRA_FREE
+        dead += max(0, starts[i + 1] - ends[i] - leg - free)
+    cost = TIMING_WEIGHT * dead
+    for row, start, end in zip(rows, starts, ends):
+        windows = (preferred or {}).get(row["poi_id"])
+        if windows and not any(lo <= start and end <= hi for lo, hi in windows):
+            cost += MISPLACED_COST
+    return cost
+
+
 def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_min: int,
                overhead: int, rest_minutes: int | None = None, late_end_min: int | None = None,
-               precedence: list | None = None) -> list[dict] | None:
-    """The stops in their shortest legal order with new clock times, None when the
-    search cannot even rebuild the solver's own day (the caller keeps that one)."""
+               precedence: list | None = None, preferred: dict | None = None) -> list[dict] | None:
+    """The stops in their best legal order with new clock times, None when the search
+    cannot even rebuild the solver's own day (the caller keeps that one).
+
+    Best = least driving plus `timing_cost` of the day the order gives. `preferred`:
+    {poi_id: windows} a named place should sit inside when some order allows it.
+    """
     ids = [a["poi_id"] for a in acts]
     if len(ids) < 2 or any(pid not in stubs for pid in ids):
         return None
@@ -122,20 +182,27 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
                 break
     before = {pid: {x for x, y in precedence or [] if y == pid and x in ids} for pid in ids}
 
-    best: dict = {"travel": None, "order": None}
-    nodes = 0
+    best: dict = {"cost": None, "rows": None}
+    nodes = orders = 0
 
     def walk(order: list, clock: int, used: frozenset, spent: int, rest_until: int,
              slots: frozenset) -> None:
-        nonlocal nodes
-        if nodes >= MAX_NODES:
+        nonlocal nodes, orders
+        if nodes >= MAX_NODES or orders >= MAX_ORDERS:
             return
-        if best["travel"] is not None and spent >= best["travel"]:
+        # Driving so far is a floor on what any order from here costs.
+        if best["cost"] is not None and spent >= best["cost"]:
             return
         if len(order) == len(ids):
             last_end = order[-1][1] + stubs[order[-1][0]].visit_min
             if late_end_min is None or last_end >= late_end_min:
-                best["travel"], best["order"] = spent, list(order)
+                orders += 1
+                rows = _close_gaps(order, stubs, roles, travel, overhead, rest_minutes)
+                legs = [travel.get((order[i][0], order[i + 1][0]), 0) + overhead
+                        for i in range(len(order) - 1)]
+                cost = spent + timing_cost(rows, legs, start_min, roles, rest_minutes, preferred)
+                if best["cost"] is None or cost < best["cost"]:
+                    best["cost"], best["rows"] = cost, rows
             return
         prev = order[-1][0] if order else None
         for pid in ids:
@@ -172,9 +239,7 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
                  slots | {slot} if slot is not None else slots)
 
     walk([], start_min, frozenset(), 0, 0, frozenset())
-    if best["order"] is None:
-        return None
-    return _close_gaps(best["order"], stubs, roles, travel, overhead, rest_minutes)
+    return best["rows"]
 
 
 def _close_gaps(order: list, stubs: dict, roles: dict, travel: dict, overhead: int,

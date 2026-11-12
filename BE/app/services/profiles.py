@@ -41,7 +41,8 @@ from BE.app.services import (
     trip_ctx,
 )
 from BE.app.services.optimizer import (
-    STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, stubs_from_pois)
+    STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, poi_windows,
+    stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
@@ -918,7 +919,7 @@ def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) ->
 
 def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: dict,
               order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None) -> list[dict]:
-    """`route_order.best_order`, kept only when it drives no further and the gate
+    """`route_order.best_order` (least driving and dead time), kept only when the gate
     still passes it: the solver's own plan is the fallback for any doubt."""
     if len(acts) < 2:
         return acts
@@ -936,18 +937,20 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         if (trip_ctx.rain_exposure(pois_by_id.get(act["poi_id"])) > 0
                 and all(end <= lo or start >= hi for lo, hi in wet)):
             by_id[act["poi_id"]] = route_order.kept_dry(by_id[act["poi_id"]], wet)
+    # A place the traveller named is held to its opening hours only, but belongs in
+    # the hours it makes sense whenever some order of the day allows that.
+    preferred = {}
+    for pid in trip.get("must_visit") or []:
+        if pid in by_id and soft_rules.time_fit_windows(pois_by_id.get(pid)):
+            windows = poi_windows(pois_by_id[pid], trip, deadline(trip))
+            if windows != [(0, 0)]:
+                preferred[pid] = windows
     better = route_order.best_order(
         acts, by_id, travel, to_min(trip.get("start_time", "07:00")), deadline(trip),
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
-        late_end_min=limits.get("late_end_min"), precedence=order_prefs)
+        late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred)
     if better is None:
-        return acts
-
-    def legs(rows: list[dict]) -> int:
-        return sum(travel.get((x["poi_id"], y["poi_id"]), 0) for x, y in zip(rows, rows[1:]))
-
-    if legs(better) > legs(acts):
         return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}
     checked = {"activities": better}
