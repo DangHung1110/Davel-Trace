@@ -242,6 +242,17 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             plan.pop("warnings", None)
         return plan
 
+    day_contexts = {(trip.get("date") or "", 0): ctx}
+
+    def day_ctx(day_trip: dict) -> dict:
+        """The context of one day of the trip: day 2 has the forecast of ITS date, or
+        of the day after the first when the trip has no date (the fetch is memoized,
+        so this costs a dictionary and no network)."""
+        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0))
+        if key not in day_contexts:
+            day_contexts[key] = trip_ctx.build(day_trip, profile if profile_provided else {})
+        return day_contexts[key]
+
     def build_one(profile_name: str, pool_size: int = 1,
                   deterministic_time: float = PLAN_DETERMINISTIC_TIME, **extra) -> dict:
         def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
@@ -250,7 +261,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             return dict(build_plan(
                 profile=profile_name, trip=day_trip,
                 ranked=[r for r in ranked if r.get("poi_id") not in used],
-                pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=ctx,
+                pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=day_ctx(day_trip),
                 pool_size=1 if several else pool_size,
                 timeout_s=PLAN_WALL_LIMIT_S, workers=PLAN_WORKERS,
                 deterministic_time=deterministic_time,

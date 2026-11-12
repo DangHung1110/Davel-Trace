@@ -195,6 +195,29 @@ class TestRealSnapshotPlanning(unittest.TestCase):
                 self.assertEqual(plan["template"]["relaxed_step"], 0)
                 self.assertTrue(any("bua trua an tai" in w for w in plan["warnings"]))
 
+    def test_each_day_of_a_trip_is_planned_on_its_own_forecast(self):
+        # The forecast was matched by hour only: every day of every trip got the first
+        # day's weather. Dry today, rain tomorrow: only day 2 is planned around the rain,
+        # and an undated trip says which days of the forecast it assumed.
+        def hours(date, rain):
+            return [{"at": f"{date}T{h:02d}:00", "temp_c": 27.0, "rain_prob": rain} for h in range(24)]
+        week = {"source": "open-meteo", "stale": False,
+                "hourly": hours("2026-11-11", 0.0) + hours("2026-11-12", 0.9)}
+        body = {"trip": {"start_time": "08:00", "end_time": "20:00", "budget": 4000000,
+                         "travelers": 2, "days": 2, "profile": COUPLE},
+                "profiles": ["balanced"]}
+        with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast", return_value=week):
+            plan = client.post("/v1/itinerary", json=body).json()["plans"][0]
+        self.assertTrue(plan["passed"], plan.get("warnings"))
+        rain = [w for w in plan["warnings"] if "du bao mua" in w]
+        self.assertEqual(len(rain), 1, plan["warnings"])
+        self.assertTrue(rain[0].startswith("ngay 2: du bao mua 08:00-20:00 (toi da 90%)"), rain)
+        self.assertIn("chua co ngay di nen dung du bao ngay 2026-11-12", rain[0])
+        # Nobody is sent to the beach or a park on the wet day; the dry day keeps the choice.
+        open_air = [poi_category(self.pois[a["poi_id"]]) for a in plan["activities"]
+                    if a["day"] == 2 and poi_category(self.pois[a["poi_id"]]) in ("beach", "park")]
+        self.assertEqual(open_air, [])
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))

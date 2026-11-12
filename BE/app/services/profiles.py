@@ -671,10 +671,15 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     q = _profile_edges(prof, scorer.edge_scores(ids, pois_by_id, ctx=ctx),
                        travel)
     # Dynamic state: same per-band multipliers the ranker scores against,
-    # but here the solver chooses the band the stop lands in.
-    state_bands, state_scores = ((None, None)
-                                 if not (ctx or {}).get("dynamic_state")
+    # but here the solver chooses the band the stop lands in. A request with no
+    # profile keeps the plain planning, except in the rain: a forecast that calls
+    # some hours wet moves open-air stops out of them for every traveller.
+    state_bands, state_scores = ((None, None) if not (ctx or {}).get("dynamic_state")
                                  else trip_ctx.optimizer_state(ctx, candidates))
+    state_costs = None
+    if trip_ctx.is_wet(ctx):
+        state_bands = trip_ctx.state_bands(ctx)
+        state_costs = trip_ctx.rain_costs(ctx, candidates)
     must = list(trip.get("must_visit") or [])
     # HARD cafe quota mirrored into the solver (gate CAFE_CAP): the profile's
     # cafe need decides between 1 and 2 cafes; NO_CONSECUTIVE is always on.
@@ -732,6 +737,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                        dinner_required=bool(limits_try.get("dinner_required")),
                        state_bands=state_bands,
                        state_score=state_scores,
+                       state_cost=state_costs,
                        category_cap=category_cap,
                        diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
                        max_fee=_max_fee(trip),
@@ -801,7 +807,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                 no_adjacent_food=override.pop("no_adjacent_food", True),
                 lunch_required=override.pop(
                     "lunch_required", bool(base_limits.get("lunch_required"))),
-                state_bands=state_bands, state_score=state_scores,
+                state_bands=state_bands, state_score=state_scores, state_cost=state_costs,
                 category_cap=override.pop("category_cap", category_cap),
                 max_fee=override.pop("max_fee", _max_fee(trip)))
             if probe.get("itinerary") is not None:
@@ -826,7 +832,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
 
     acts = (out.get("itinerary") or {}).get("activities", [])
     # The solver chose the stops; find their shortest legal order and honest times.
-    acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs, pois_by_id, cells)
+    acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs, pois_by_id, cells, ctx)
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
@@ -911,7 +917,7 @@ def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) ->
 
 
 def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: dict,
-              order_prefs: list, pois_by_id: dict, cells: dict) -> list[dict]:
+              order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None) -> list[dict]:
     """`route_order.best_order`, kept only when it drives no further and the gate
     still passes it: the solver's own plan is the fallback for any doubt."""
     if len(acts) < 2:
@@ -923,6 +929,13 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         for act in acts if span else []:
             if act["poi_id"] in group["poi_ids"] and span[0] <= to_min(act["start"]) < span[1]:
                 by_id[act["poi_id"]] = route_order.held_to(by_id[act["poi_id"]], span)
+    # An exposed stop the solver seated in a dry hour stays out of the rain.
+    wet = trip_ctx.wet_spans(ctx)
+    for act in acts if wet else []:
+        start, end = to_min(act["start"]), to_min(act["end"])
+        if (trip_ctx.rain_exposure(pois_by_id.get(act["poi_id"])) > 0
+                and all(end <= lo or start >= hi for lo, hi in wet)):
+            by_id[act["poi_id"]] = route_order.kept_dry(by_id[act["poi_id"]], wet)
     better = route_order.best_order(
         acts, by_id, travel, to_min(trip.get("start_time", "07:00")), deadline(trip),
         STOP_OVERHEAD_MIN,
@@ -996,6 +1009,16 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
             if days:
                 warnings.append(f"{poi.get('name')} nghi vao "
                                 f"{', '.join(WEEKDAY_LABELS[d] for d in days)}: chon ngay di de kiem tra")
+    # FR-026: the forecast is part of what the plan assumes. Wet hours are named, with
+    # the stops left in the open in them (a wish, a named place, a day with no roof to
+    # move under); so is a date the forecast does not reach (each day of a trip its own).
+    rain = trip_ctx.rain_note(ctx, acts, pois_by_id)
+    if rain:
+        warnings.append(rain)
+    if (ctx or {}).get("weather_source") == "out_of_range":
+        warnings.append(
+            f"chua co du bao thoi tiet cho ngay {trip.get('date')} (du bao chi co mot tuan), "
+            f"dung nhiet do gia dinh {ctx.get('temp_c')}C (mua coi nhu 0%)")
     on_site = (plan.get("template") or {}).get("lunch_on_site")
     if on_site:
         warnings.append(f"bua trua an tai {(pois_by_id.get(on_site) or {}).get('name') or on_site} "

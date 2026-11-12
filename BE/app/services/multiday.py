@@ -19,10 +19,8 @@ per day, and the totals and gate verdict cover the whole trip.
 
 from __future__ import annotations
 
-import datetime
-
 from BE.app.services import profiles
-from BE.common import BAND_FEE_VND, effective_fee, party_size
+from BE.common import BAND_FEE_VND, effective_fee, iso_date, party_size
 
 DAY_FIELDS = ("total_cost", "total_km", "total_min", "travel_min")
 DAY_FLOOR_PER_PERSON = 2 * BAND_FEE_VND["cheap"]  # lunch and dinner at the cheapest band
@@ -30,11 +28,7 @@ DAY_FLOOR_PER_PERSON = 2 * BAND_FEE_VND["cheap"]  # lunch and dinner at the chea
 
 def day_date(date: str, offset: int) -> str:
     """ISO date `offset` days later; "" when the trip has no usable date."""
-    try:
-        start = datetime.date.fromisoformat(date or "")
-    except ValueError:
-        return ""
-    return (start + datetime.timedelta(days=offset)).isoformat()
+    return iso_date(date, offset)
 
 
 def _usable(plan: dict) -> bool:
@@ -64,8 +58,10 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
                    else list(dict.fromkeys([remaining // left, max(remaining // left, spare), remaining]))
                    if left > 1 else [remaining])
         for budget in budgets:
+            # `day_offset`: which day of the trip this is, for what a date would tell
+            # but an undated trip cannot (the forecast of its second day).
             day_trip = {**trip, "days": 1, "date": day_date(trip.get("date"), index),
-                        "must_visit": today, "activities": wishes}
+                        "day_offset": index, "must_visit": today, "activities": wishes}
             if budget is not None:
                 day_trip["budget"] = budget
             # Only the last attempt explains itself: the diagnosis costs extra solves.

@@ -268,7 +268,9 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  max_fee: int | None = None,
                  required_any: list[dict] | None = None,
                  lunch_required: bool = False,
-                 dinner_required: bool = False) -> list[tuple[int, int]]:
+                 dinner_required: bool = False,
+                 state_bands: list[tuple[int, int]] | None = None,
+                 state_cost: dict[tuple[str, int], float] | None = None) -> list[tuple[int, int]]:
     """Deterministic feasible-ish tour used as a CP-SAT solution hint.
 
     Why: with the expanded candidate pool (all verified snapshot POIs) the
@@ -288,7 +290,10 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     TASK-1: at most `CATEGORY_SOFT_CAP` stops per category unless owed, so the seed
     already spreads across food/sightseeing/market. TASK-2: `STOP_OVERHEAD_MIN` is
     reserved between stops, exactly like the model. A must-visit stop the walk cannot place
-    gives no hint at all.
+    gives no hint at all. `state_cost` (rain on an open-air stop) is charged like the
+    model charges it, and a stop worth nothing or less at that hour is left out unless
+    it is owed. A seed blind to the rain opened the wet day at the beach, and the
+    budget ended 38 % under the day the model wanted.
 
     Returns [(node_index, start_min), ...] or [].
     """
@@ -393,6 +398,17 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
 
     unit = max((p.score for p in pois), default=1.0) or 1.0
     presence_value = unit * DIVERSITY_PRESENCE_RATIO
+
+    def _band_cost(poi: StubPOI, start: int) -> float:
+        """What the model charges this stop for the band its middle falls in."""
+        if not state_cost:
+            return 0.0
+        middle = start + poi.visit_min // 2
+        for k, (lo, hi) in enumerate(state_bands or []):
+            if lo <= middle < hi:
+                return unit * float(state_cost.get((poi.poi_id, k), 0.0))
+        return 0.0
+
     while True:
         if max_stops is not None and len(hint) >= int(max_stops):
             break
@@ -452,9 +468,14 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             if _blocked_by_cat(poi, start):
                 continue
             wait = start - clock
-            value = poi.score
+            value = poi.score - _band_cost(poi, start)
             if poi.category and used_cats.get(poi.category, 0) == 0:
                 value += presence_value  # reward a new category (TASK-1)
+            if value <= 0 and not required:
+                # Worth nothing to the objective: an open-air stop in the rain, or a
+                # dear place the savings profile scores below zero. The model would
+                # only take it for a rule the walk does not owe it to.
+                continue
             minutes = wait + poi.visit_min + STOP_OVERHEAD_MIN + leg
             efficiency = value / max(1, minutes)
             # A wish that names its places ("hải sản": these 29 restaurants) is a
@@ -562,6 +583,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              dinner_required: bool = False,
              state_bands: list[tuple[int, int]] | None = None,
              state_score: dict[tuple[str, int], float] | None = None,
+             state_cost: dict[tuple[str, int], float] | None = None,
              category_cap: int | None = None,
              diversity_weight: float | None = None,
              solution_pool: int = 1,
@@ -619,6 +641,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     horizon plus a per-(poi, band) multiplier; each band adds `unit * STATE_WEIGHT *
     (mult - 1)` when a visit lands in it. It steers placement (no beach in the 14:00 dip,
     no second meal right after lunch) without touching any hard rule.
+    state_cost: per-(poi, band) cost in units of the top POI score, subtracted when a
+    visit lands in the band (rain on an open-air stop, `trip_ctx.rain_costs`). Unlike the
+    multiplier it may exceed what the stop is worth: the solver then leaves the stop out
+    unless a hard rule (must_visit, a wish group, the pace floor) needs it.
     diversity_weight: overrides `DIVERSITY_WEIGHT` for this solve (the experience profile
     passes a dominant value, so a new category beats another stop of the same one).
 
@@ -652,6 +678,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         lunch_required=lunch_required,
                         dinner_required=dinner_required,
                         state_bands=state_bands, state_score=state_score,
+                        state_cost=state_cost,
                         category_cap=category_cap,
                         diversity_weight=diversity_weight,
                         distinct_from=distinct_from,
@@ -996,7 +1023,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # so a 13:15 landmark that runs through the 13:30-15:00 dip cannot game
     # the band boundary with its midpoint. No band means no term (the
     # legacy/eval paths are unchanged).
-    if state_bands and state_score:
+    if state_bands and (state_score or state_cost):
         band_unit = int(unit * STATE_WEIGHT * 1000)
         probes = []
         for k, frac in enumerate(((1, 4), (3, 4))):
@@ -1009,10 +1036,12 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             probes.append(probe)
         for k, (lo, hi) in enumerate(state_bands):
             for i in range(1, n + 1):
-                mult = state_score.get((ids[i - 1], k))
-                if mult is None:
+                mult = (state_score or {}).get((ids[i - 1], k))
+                cost = (state_cost or {}).get((ids[i - 1], k))
+                if mult is None and cost is None:
                     continue
-                delta = int(band_unit * (float(mult) - 1.0) / len(probes))
+                delta = int(band_unit * (float(1.0 if mult is None else mult) - 1.0) / len(probes))
+                delta -= int(unit * 1000 * float(cost or 0.0) / len(probes))
                 if not delta:
                     continue
                 for probe in probes:
@@ -1034,7 +1063,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         rest_after_lunch=rest_after_lunch,
                         category_cap=category_cap, avoid_ids=avoid_ids,
                         precedence=precedence, max_fee=max_fee, required_any=required_any,
-                        lunch_required=lunch_required, dinner_required=dinner_required)
+                        lunch_required=lunch_required, dinner_required=dinner_required,
+                        state_bands=state_bands, state_cost=state_cost)
     hint_solver = None
     if hint:
         previous = 0

@@ -164,6 +164,13 @@ class TestTwoDays(unittest.TestCase):
         self.assertEqual(multiday.day_date("", 1), "")
         self.assertEqual(multiday.day_date("2026-12-31", 1), "2027-01-01")
 
+    def test_each_day_knows_which_day_of_the_trip_it_is(self):
+        # An undated trip has no date to tell day 2 from day 1 (its forecast is the next day's).
+        _, solver = self.plan(FakeSolver(POOL))
+        self.assertEqual([(c["trip"]["date"], c["trip"]["day_offset"]) for c in solver.calls],
+                         [(c["trip"]["date"], i) for i, c in enumerate(solver.calls)])
+        self.assertEqual([c["trip"]["day_offset"] for c in solver.calls], [0, 1])
+
 
 class TestGateOverDays(unittest.TestCase):
     """Clock times repeat across days, and each day has its own caps."""

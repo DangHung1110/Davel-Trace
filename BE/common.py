@@ -157,12 +157,19 @@ def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     return open_windows(safe) or []
 
 
+def iso_date(date: str | None, offset: int = 0) -> str:
+    """The ISO date `offset` days after `date`; "" without a usable ISO date."""
+    try:
+        start = datetime.date.fromisoformat(date or "")
+    except (TypeError, ValueError):
+        return ""
+    return (start + datetime.timedelta(days=offset)).isoformat()
+
+
 def weekday_of(date: str | None) -> int | None:
     """Monday = 0, as `hours_by_day` is stored; None without a usable ISO date."""
-    try:
-        return datetime.date.fromisoformat(date or "").weekday()
-    except ValueError:
-        return None
+    day = iso_date(date)
+    return datetime.date.fromisoformat(day).weekday() if day else None
 
 
 def poi_on_date(poi: dict, date: str | None) -> dict:

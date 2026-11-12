@@ -92,6 +92,16 @@ def held_to(stub, span: list[int]):
         for lo, hi in windows if max(lo, span[0]) < min(hi, span[1] + stub.visit_min)))
 
 
+def kept_dry(stub, wet: list[tuple[int, int]]):
+    """The stub with the wet hours cut out of its windows: a stop the solver seated
+    in a dry hour is not moved into the rain for a shorter drive."""
+    windows = list(stub.windows or ((stub.open_min, stub.close_min),))
+    for a, b in wet:
+        windows = [piece for lo, hi in windows
+                   for piece in ((lo, min(hi, a)), (max(lo, b), hi)) if piece[0] < piece[1]]
+    return replace(stub, windows=tuple(windows)) if windows else stub
+
+
 def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_min: int,
                overhead: int, rest_minutes: int | None = None, late_end_min: int | None = None,
                precedence: list | None = None) -> list[dict] | None:
