@@ -46,7 +46,7 @@ from BE.app.services.optimizer import (
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
-    price_level_of, to_min, trusted_rating, weekday_of)
+    price_level_of, to_float, to_int, to_min, trusted_rating, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -149,6 +149,31 @@ CANDIDATE_CHEAP_MEALS = 4         # a tight budget may afford no other lunch or 
 # BBQ joint for a seafood profile (pinned in test_taste_scoring.py). A clash
 # costs the same, so a 4.9 vegan-only kitchen loses to a 4.2 seafood place.
 TASTE_WEIGHT = 0.20
+
+# The onboarding's other SOFT answers ("SOFT — trọng số điểm" on the page):
+# spending_level, outdoor_bias and the liked activities. They reached only the rank
+# list, which orders candidates and explains them, so the day came out the same
+# whatever was answered: on 12 real days the restaurants had the same price level
+# at spending 1, 2 and 3 in 10. Each is now a signed lean on the node score, in
+# units of the top POI score like TASTE_WEIGHT, and zero for the neutral answer
+# (level 2, bias 0, nothing ticked), so a profile that says nothing plans as before.
+# - spending: +/- for a priced place (restaurant, cafe, bar, spa) dearer or cheaper
+#   than such places usually are in the pool, towards what the level asks for.
+# - outdoor: bias (-1..1) on what `soft_rules.is_outdoor` calls outdoor.
+# - liked: a POI that answers a liked activity (`retrieval.poi_is_liked`), worth
+#   what a full taste hit is.
+# A lean chooses between places; it never adds a stop the rules do not ask for.
+# Measured on danang-v1 (4 parties x 3 plans, then the page's 3 cards x 3 plans):
+#   spending 1 against 3: the day's priced stops cost more at 3 in 12 of 12 plans
+#     (mean price level 1.02 against 1.82); they cost the same in 11 of 12 before.
+#   outdoor -1 / 0 / +1: 2.7 / 3.3 / 6.3 stops out of doors a day, never fewer for
+#     a higher bias in any of the 12; before 3.0 / 3.3 / 3.1, in no order.
+#   liked: 25 stops in a liked category on the 9 card plans against 16 with the
+#     likes blanked, none of the 9 with fewer (19 against 18 before; at 0.15 one
+#     plan had fewer, 0.25 gave 27).
+SPENDING_WEIGHT = 0.15
+OUTDOOR_WEIGHT = 0.15
+LIKED_WEIGHT = 0.20
 
 # A rung that ran out of search budget with no solution (`status: unknown`) says
 # nothing about its rules. Two in a row say the pool is too hard for the budget:
@@ -296,6 +321,48 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     # balanced: rating-first
     fame = math.log10(1 + int(p.get("review_count") or 0))
     return round(rating + BALANCED_FAME_WEIGHT * fame, 4)
+
+
+def price_reference(pois: list[dict]) -> dict[str, int]:
+    """What a priced place usually costs in this pool: the median price level of
+    each priced category (restaurants 2, cafes 1 on danang-v1). `soft_lean` reads a
+    place against it, so "cheap" means cheap for a restaurant, not cheaper than a park."""
+    levels: dict[str, list[int]] = {}
+    for poi in pois:
+        cat = soft_rules.poi_category(poi)
+        if cat in retrieval.PAID_CATS:
+            levels.setdefault(cat, []).append(price_level_of(poi))
+    return {cat: sorted(values)[len(values) // 2] for cat, values in levels.items()}
+
+
+def soft_lean(poi: dict, profile: dict | None, liked: list[str] | None = None,
+              price_ref: dict[str, int] | None = None) -> tuple[float, list[str]]:
+    """(lean, reasons) of the onboarding's soft answers for one POI.
+
+    `lean` is signed, in units of the top POI score (see SPENDING_WEIGHT); the
+    reasons are those that speak FOR the stop, for its explanation. A neutral
+    profile (spending 2, bias 0, no liked activity) gives (0.0, []) for every POI.
+    `liked`: `retrieval.liked_wishes(profile["activities"])`; `price_ref`:
+    `price_reference(pool)`.
+    """
+    profile = profile or {}
+    lean, reasons = 0.0, []
+    cat = soft_rules.poi_category(poi)
+    wants = to_int(profile.get("spending_level"), 2) - 2          # -1 thrifty .. +1 premium
+    if wants and cat in retrieval.PAID_CATS:
+        dearer = max(-1, min(1, price_level_of(poi) - (price_ref or {}).get(cat, 2)))
+        lean += SPENDING_WEIGHT * wants * dearer
+        if wants * dearer > 0:
+            reasons.append("hop muc chi tieu")
+    bias = max(-1.0, min(1.0, to_float(profile.get("outdoor_bias"))))
+    if bias and soft_rules.is_outdoor(poi):
+        lean += OUTDOOR_WEIGHT * bias
+        if bias > 0:
+            reasons.append("hop gu ngoai troi")
+    if liked and retrieval.poi_is_liked(poi, liked):
+        lean += LIKED_WEIGHT
+        reasons.append("hop hoat dong ban thich")
+    return round(lean, 4), reasons
 
 
 def plan_diversity(activities: list[dict], pois: list[dict],
@@ -648,9 +715,16 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         prefs += [t for t in profile_filter.cuisine_terms(activity)
                   if t not in prefs]
 
+    # The profile's other soft answers, once per POI of the pool (before the cap,
+    # so what the traveller leans to survives it).
+    liked = retrieval.liked_wishes(profile_data.get("activities"))
+    price_ref = price_reference(candidates)
+    leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+
     def _score_with_taste(poi: dict) -> float:
         unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
-        return base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
+        return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
+                + unit * leans[poi["poi_id"]][0])
 
     capped = _cap_candidates(candidates, _score_with_taste,
                              list(trip.get("must_visit") or []), wish_groups=act_groups,
@@ -837,6 +911,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
+    _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used
     extra = list(date_warnings)
@@ -891,6 +966,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
             if not member.get("passed"):
                 dropped += 1
                 continue
+            _add_lean_evidence(member, leans)
             member["profile"] = profile
             member["activity_match"] = _activity_match(
                 item["activities"], act_report, pois_by_id)
@@ -1116,6 +1192,17 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
         "pace_stops": list(template.get("pace_stops", ())),
         "relaxed_step": relaxed_step,
     }
+
+
+def _add_lean_evidence(plan: dict, leans: dict[str, tuple[float, list[str]]]) -> None:
+    """What the profile's soft answers said FOR a stop joins its evidence (FR-023)."""
+    for act in plan.get("activities", []):
+        evidence = (act.get("explanation") or {}).get("evidence")
+        if evidence is None:
+            continue
+        for reason in leans.get(act.get("poi_id"), (0.0, []))[1]:
+            if reason not in evidence:
+                evidence.append(reason)
 
 
 def _attach_explanations(plan: dict, ranked: list[dict], pois_by_id: dict | None = None) -> None:

@@ -218,6 +218,21 @@ class TestRealSnapshotPlanning(unittest.TestCase):
                     if a["day"] == 2 and poi_category(self.pois[a["poi_id"]]) in ("beach", "park")]
         self.assertEqual(open_air, [])
 
+    def test_spending_level_changes_what_the_days_tables_cost(self):
+        # The same restaurants came back at spending 1, 2 and 3: the answer only fed
+        # the rank list. A thrifty couple now eats at the cheap tables, a premium one
+        # does not, and each is still a full passing day.
+        def meal_levels(level):
+            _, plan = self.plan(profile=dict(COUPLE, spending_level=level), budget=3000000, travelers=2)
+            self.assertTrue(plan["passed"], plan.get("violations"))
+            levels = [p.get("price_level") or 2 for p in self.stops(plan) if poi_category(p) == "restaurant"]
+            self.assertGreaterEqual(len(levels), 2)             # lunch and dinner
+            return levels
+
+        thrifty, premium = meal_levels(1), meal_levels(3)
+        self.assertEqual(set(thrifty), {1}, thrifty)
+        self.assertGreater(sum(premium) / len(premium), sum(thrifty) / len(thrifty))
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))

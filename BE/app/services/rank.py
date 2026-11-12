@@ -32,7 +32,7 @@ from __future__ import annotations
 import math
 
 from BE.app.services import profile_filter, trip_ctx
-from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
+from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, is_outdoor, poi_category
 from BE.common import (
     BAND_FEE_VND, FEW_REVIEWS, clamp01, effective_fee, price_level_of, to_float, to_int, to_min,
     trusted_rating)
@@ -57,8 +57,7 @@ FAME_FULL_REVIEWS = 30_000
 # food POI with no cuisine evidence is neither rewarded nor punished.
 TASTE_NEUTRAL = 0.5
 
-# Categories the onboarding `outdoor_bias` moves (beach/nature/park/viewpoint).
-OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
+# What the onboarding `outdoor_bias` moves is `soft_rules.is_outdoor`.
 OUTDOOR_BIAS_WEIGHT = 0.25  # max pref_match shift at outdoor_bias = +/-1
 
 
@@ -144,9 +143,7 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         reasons.append("lech gu an (" + ", ".join(clashes) + ")")
     # outdoor_bias (-1..1): push outdoor/weather-sensitive POIs up or down.
     bias = max(-1.0, min(1.0, to_float(user.get("outdoor_bias", 0.0))))
-    ptype_bias = poi_category(poi) or str(poi.get("type") or "")
-    if bias and (ptype_bias in OUTDOOR_CATEGORIES
-                 or poi.get("weather_sensitive")):
+    if bias and is_outdoor(poi):
         parts["pref_match"] = clamp01(parts["pref_match"]
                                      + OUTDOOR_BIAS_WEIGHT * bias)
         reasons.append("hop gu ngoai troi" if bias > 0 else "han che ngoai troi")

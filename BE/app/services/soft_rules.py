@@ -86,6 +86,10 @@ SIGHTSEEING_CATEGORIES = frozenset({
     "beach", "viewpoint", "nature",
 })
 
+# Open-air categories, and the `outdoor_bias` view of a POI built on them: the
+# ranker, the traveller state and the solver's lean share this one definition.
+OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
+
 SAME_TYPE_PENALTY = 0.3         # B1, edge-score units
 RESTAURANT_PAIR_PENALTY = 0.45  # A2
 RESTAURANT_PAIR_MAX_GAP = 150   # A2: under 2.5 hours
@@ -131,6 +135,11 @@ def poi_category(poi: dict | None) -> str:
     """
     poi = poi or {}
     return str(poi.get("cat") or poi.get("type") or "").strip().lower()
+
+
+def is_outdoor(poi: dict | None) -> bool:
+    """What `outdoor_bias` moves: an open-air category, or a place the weather decides."""
+    return poi_category(poi) in OUTDOOR_CATEGORIES or bool((poi or {}).get("weather_sensitive"))
 
 
 def is_capped_category(category: str) -> bool:

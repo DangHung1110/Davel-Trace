@@ -134,6 +134,18 @@ ACTIVITY_EXTRA_CATS = {"núi": ["viewpoint", "attraction"], "leo núi": ["viewpo
 _SUNSET, _SUNRISE = (16 * 60, 18 * 60), (5 * 60, 7 * 60)
 ACTIVITY_START = {"ngắm hoàng hôn": _SUNSET, "hoàng hôn": _SUNSET,
                   "ngắm bình minh": _SUNRISE, "bình minh": _SUNRISE}
+# The onboarding catalog's activity codes (FE/onboard.html, frozen) as the wish each
+# stands for, so the one matcher below (`poi_fits_wish`) says what a liked activity
+# is, exactly as it does for a wish typed into the request. A like is a standing
+# preference: it leans the choice (profiles.soft_lean), it is never a required stop.
+CATALOG_ACTIVITY_WISH = {
+    "beach": "tắm biển", "water_sports": "lướt sóng", "trekking": "trekking",
+    "adventure": "leo núi", "viewpoint": "đài quan sát", "sunset_view": "ngắm hoàng hôn",
+    "temple": "tâm linh", "museum": "bảo tàng", "old_town": "di tích",
+    "market": "mua sắm", "nightlife": "quán bar", "spa": "spa", "park": "công viên",
+    "playground": "vui chơi", "cruise": "du thuyền",
+    "golf": "",   # no golf course in the data
+}
 _WISH_TIERS = {"local", "wish_only"}
 # A wish opens the local tier only where fewer main POIs than this can serve it: with
 # a dozen known pagodas, asking for "chùa" does not mean the one down the lane.
@@ -277,6 +289,23 @@ def poi_fits_wish(poi: dict, text: str) -> bool:
         return True
     accented, folded = _poi_words(poi)
     return any(_has_word(word, accented, folded) for word in words)
+
+
+def liked_wishes(activities: list[str] | None) -> list[str]:
+    """A profile's liked activities as wish texts: a catalog code through
+    `CATALOG_ACTIVITY_WISH`, anything else as it was typed."""
+    out: list[str] = []
+    for activity in activities or []:
+        text = str(activity or "").strip()
+        wish = CATALOG_ACTIVITY_WISH.get(text.lower(), text)
+        if wish and wish not in out:
+            out.append(wish)
+    return out
+
+
+def poi_is_liked(poi: dict, wishes: list[str]) -> bool:
+    """Does this POI answer one of the liked activities (`liked_wishes`)?"""
+    return any(poi_fits_wish(poi, wish) for wish in wishes)
 
 
 def wish_ids(activities: list[str], pois: list[dict]) -> list[str]:

@@ -43,7 +43,7 @@ modified here.
 from __future__ import annotations
 
 from BE.app.services import weather as weather_svc
-from BE.app.services.soft_rules import meal_slots, pace_of, poi_category
+from BE.app.services.soft_rules import OUTDOOR_CATEGORIES, meal_slots, pace_of, poi_category
 from BE.common import clamp01, hhmm, iso_date, to_float, to_min
 
 # --- paper windows ---------------------------------------------------------
@@ -117,7 +117,6 @@ DIP_LIGHT = 1.15
 EVENING_SOCIAL = 1.15
 LATE_HEAVY = 0.5
 
-OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
 REST_CATEGORIES = frozenset({"cafe", "spa", "museum", "landmark", "temple"})
 DESSERT_WORDS = ("dessert", "che", "banh ngot", "kem", "sweet")
 TREK_WORDS = ("trek", "hike", "adventure", "thac", "nui", "leo")
