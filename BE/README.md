@@ -32,7 +32,11 @@ trình duyệt từ các origin đó và tắt các router chỉ dùng cho test 
 (local) API nhận mọi cổng của `localhost` và `127.0.0.1`.
 
 Trên máy deploy, đo độ trễ bằng `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1` (mục tiêu p95
-dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày).
+dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày). Hai lượt đo của cùng một bản lệch nhau khoảng
+0,2 giây, nên so hai bản thì đo xen kẽ.
+
+Chấm chất lượng lịch bằng bộ quy tắc độc lập với cổng của ứng dụng (67 yêu cầu thật, 201 lịch, khoảng 6 phút):
+`python BE/tools/audit_plans.py --out audit.json --plans plans.txt`. Kết quả và cách đọc ở `docs/plan-accuracy.md`.
 
 ```powershell
 python -m uvicorn BE.app.main:app --port 8000
