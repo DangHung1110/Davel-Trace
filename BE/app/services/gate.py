@@ -40,6 +40,7 @@ from BE.app.services.soft_rules import (
     is_food,
     is_sightseeing,
     lunch_activity,
+    lunch_on_site,
     meal_slot,
     meal_window_present,
     poi_category,
@@ -270,7 +271,7 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     or a trip that cannot hold the lunch window at all), else
     ``(reason, offending_poi_ids)``:
     - ``REST_NO_LUNCH``: a lunch window exists but no restaurant starts in
-      11:00-13:00;
+      11:00-13:00 and no all-day stop runs through it (`lunch_on_site`);
     - ``REST_BAD_WINDOW``: the declared/derived siesta does not start at the
       lunch end (0..REST_START_TOLERANCE) or has the wrong length for the
       pace (a structural failure: the window itself is wrong);
@@ -290,6 +291,10 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     acts = _ordered(itinerary)
     lunch = lunch_activity(acts, pois)
     if lunch is None:
+        if lunch_on_site(acts, pois) is not None:
+            # An all-day place (soft_rules.ALL_DAY_MIN) feeds its visitors and is
+            # where they rest: there is no drive to a restaurant to follow.
+            return None
         return (REST_NO_LUNCH, [])
     span = rest_span(acts, pois, profile, deadline(trip))
     if span is None:  # defensive: lunch_activity already proved a lunch
@@ -516,7 +521,9 @@ RULE_FREEZE: dict[str, dict] = {
     "REST_FOLLOWS_LUNCH": {
         "status": "active", "canonical": None, "family": "rest",
         "reason": "canonical siesta rule: start at lunch end, length by pace; "
-                  "one definition (`rest_rule_violation`) for gate+validator",
+                  "one definition (`rest_rule_violation`) for gate+validator. An "
+                  "all-day stop through the lunch window is the lunch, eaten and "
+                  "rested on site (`soft_rules.lunch_on_site`)",
     },
     # Soft layer (soft_rules.py); statuses live here so there is ONE registry.
     "F1": {

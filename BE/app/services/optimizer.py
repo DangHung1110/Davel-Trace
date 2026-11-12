@@ -33,6 +33,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 
 from BE.app.services.soft_rules import (
+    ALL_DAY_MIN,
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
     CAFE_MORNING_END,
@@ -44,6 +45,7 @@ from BE.app.services.soft_rules import (
     cafe_daypart_at,
     category_allowed,
     clip_to_time_fit,
+    holds_lunch,
     meal_slot_at,
     poi_category,
 )
@@ -360,9 +362,19 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             return travel.get((poi_id, pois[next(iter(nodes)) - 1].poi_id), HINT_MIN_LEG)
         return HINT_MIN_LEG
 
+    def _feeds_lunch(poi: StubPOI) -> bool:
+        """An all-day place that can still be where the day has its lunch."""
+        return (need_lunch and not poi.restaurant and poi.visit_min >= ALL_DAY_MIN
+                and poi.open_min <= LUNCH_REQUIRED[0])
+
     def _must_deadlines() -> dict[int, int]:
         """Latest start of each must_visit left, so that those after it still fit."""
         own = {i: min(pois[i - 1].close_min, trip.end_min) - pois[i - 1].visit_min for i in must_left}
+        for i in must_left:
+            if _feeds_lunch(pois[i - 1]):
+                # Started later it no longer runs through lunch, and no restaurant
+                # can be reached from inside it.
+                own[i] = min(own[i], LUNCH_REQUIRED[0])
         chain = sorted(must_left, key=lambda i: (own[i], i))
         for first, then in precedence or []:
             a, b = node_of.get(first), node_of.get(then)
@@ -388,10 +400,10 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                        else DINNER_REQUIRED if need_dinner and clock < DINNER_REQUIRED[1] else None)
         open_groups = [g for g in groups if g["need"] > 0]
         # (latest start, the nodes that answer it) for what is owed by a clock.
-        owed = [(when, {i}) for i, when in _must_deadlines().items()]
-        owed += [(window[1], restaurants) for window, needed in ((LUNCH_REQUIRED, need_lunch),
-                                                                  (DINNER_REQUIRED, need_dinner)) if needed]
-        owed += [(g["span"][1], g["nodes"]) for g in open_groups if g["span"]]
+        owed = [(when, {i}, "") for i, when in _must_deadlines().items()]
+        owed += [(window[1], restaurants, meal) for window, needed, meal in (
+            (LUNCH_REQUIRED, need_lunch, "lunch"), (DINNER_REQUIRED, need_dinner, "dinner")) if needed]
+        owed += [(g["span"][1], g["nodes"], "") for g in open_groups if g["span"]]
         owed = [row for row in owed if row[0] > clock]
         reserved = len(must_left) + int(need_lunch) + int(need_dinner) + sum(g["need"] for g in open_groups)
         best: tuple[tuple, int, int, int | None] | None = None
@@ -426,8 +438,11 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             start, leg, slot = spot
             if (meal and start >= meal[1]) or (span and start >= span[1]):
                 continue
+            # An all-day stop through the lunch window is the lunch (eaten on site).
+            feeds = need_lunch and not poi.restaurant and holds_lunch(start, start + poi.visit_min)
             if any(start + poi.visit_min + STOP_OVERHEAD_MIN + _leg(poi.poi_id, nodes) > when
-                   for when, nodes in owed if i not in nodes):
+                   for when, nodes, owes in owed
+                   if i not in nodes and not (feeds and owes == "lunch")):
                 continue
             # TASK-3: do not seed a <2.5h restaurant pair either.
             if poi.restaurant and not mandatory and any(
@@ -449,6 +464,9 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             # stops ready now, one that closes such a group goes first.
             closes = sum(1 for g in open_groups if g["named"] and i in g["nodes"]
                          and (not g["span"] or g["span"][0] <= start < g["span"][1]))
+            # A named all-day place goes before the short stops it would outlast:
+            # by value per minute it always lost to a cafe, and then no longer fit.
+            closes += int(mandatory and _feeds_lunch(poi))
             key = (not (required and wait <= HINT_READY_MIN), -closes, -efficiency,
                    -poi.score, poi.poi_id)
             if best is None or key < best[0]:
@@ -461,6 +479,8 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         spent += poi.fee
         placed.add(i)
         must_left.discard(i)
+        if not poi.restaurant and holds_lunch(start, start + poi.visit_min):
+            need_lunch = False
         if poi.restaurant:
             if need_lunch and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1]:
                 need_lunch = False
@@ -589,7 +609,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     never "the same").
     no_adjacent_food: no arc between two restaurants, any cuisine. Redundant with
     no_consecutive today, explicit so the food rule survives a category split.
-    lunch_required: a restaurant starts in 11:00-13:00. It is never relaxed.
+    lunch_required: a restaurant starts in 11:00-13:00, or an all-day stop (`ALL_DAY_MIN`)
+    runs through that whole window and feeds its visitors on site. It is never relaxed.
     dinner_required: a restaurant starts in DINNER_REQUIRED. The planner may drop it, with
     a warning, when the money or the hours cannot hold a second meal.
     category_cap: at most N POIs per `NON_FOOD_CAPPED` category a day; meals are exempt.
@@ -712,11 +733,22 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                              LUNCH_REQUIRED[1], "lunch"))
             for i in range(1, n + 1) if pois[i - 1].restaurant
         ]
-        if not lunch_hits:
+        # An all-day place feeds its visitors (soft_rules.ALL_DAY_MIN): a stay that
+        # runs through the whole lunch window is the lunch, with no rest to follow.
+        on_site = []
+        for i in range(1, n + 1):
+            if pois[i - 1].restaurant or dur[i] < ALL_DAY_MIN:
+                continue
+            through = m.NewBoolVar(f"lunch_on_site_{i}")
+            m.AddImplication(through, visit[i])
+            m.Add(t[i] <= LUNCH_REQUIRED[0]).OnlyEnforceIf(through)
+            m.Add(t[i] + dur[i] >= LUNCH_REQUIRED[1]).OnlyEnforceIf(through)
+            on_site.append(through)
+        if not lunch_hits and not on_site:
             return {"status": "infeasible",
                     "reason": "khong co nha hang cho bua trua",
                     "elapsed_s": 0.0, "itinerary": None}
-        m.Add(sum(hit for _i, hit in lunch_hits) >= 1)
+        m.Add(sum(hit for _i, hit in lunch_hits) + sum(on_site) >= 1)
     if dinner_required:
         dinner_hits = [_window_hits(m, t, visit, i, DINNER_REQUIRED[0],
                                     DINNER_REQUIRED[1], "dinner")

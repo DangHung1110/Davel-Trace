@@ -24,6 +24,7 @@ from BE.app.services.soft_rules import (
     CAFE_MORNING_END,
     DINNER_REQUIRED,
     LUNCH_REQUIRED,
+    holds_lunch,
     meal_slot_at,
 )
 
@@ -54,6 +55,8 @@ def _earliest(role: str | None, clock: int) -> int | None:
         return clock if clock < CAFE_MORNING_END else None
     if role == "cafe_afternoon":
         return max(clock, CAFE_AFTERNOON_START + 1)
+    if role == "lunch_on_site":
+        return clock if clock <= LUNCH_REQUIRED[0] else None
     return clock
 
 
@@ -76,6 +79,8 @@ def _last_start(role: str | None, close: int, visit: int) -> int:
         last = min(last, DINNER_REQUIRED[1] - 1)
     elif role == "cafe_morning":
         last = min(last, CAFE_MORNING_END - 1)
+    elif role == "lunch_on_site":
+        last = min(last, LUNCH_REQUIRED[0])
     return last
 
 
@@ -97,6 +102,14 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
         return None
     cafes = sum(1 for pid in ids if stubs[pid].category == "cafe")
     roles = {a["poi_id"]: _role(stubs[a["poi_id"]], to_min(a["start"]), cafes) for a in acts}
+    if "lunch" not in roles.values():
+        # No restaurant lunch: an all-day stop through the lunch window is where the
+        # day eats (soft_rules.holds_lunch), and it must stay through that window.
+        for act in acts:
+            stub = stubs[act["poi_id"]]
+            if not stub.restaurant and holds_lunch(to_min(act["start"]), to_min(act["start"]) + stub.visit_min):
+                roles[act["poi_id"]] = "lunch_on_site"
+                break
     before = {pid: {x for x, y in precedence or [] if y == pid and x in ids} for pid in ids}
 
     best: dict = {"travel": None, "order": None}
@@ -133,6 +146,9 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
             earliest = _earliest(roles[pid], max(clock + leg + (overhead if prev else 0), rest_until))
             if earliest is None:
                 continue
+            if roles[pid] == "lunch_on_site":
+                # Through the whole lunch window: not so early that it ends before it does.
+                earliest = max(earliest, LUNCH_REQUIRED[1] - stub.visit_min)
             placed = _place(stub, earliest, end_min)
             if placed is None or (roles[pid] and placed[0] > _last_start(roles[pid], placed[1], stub.visit_min)):
                 continue

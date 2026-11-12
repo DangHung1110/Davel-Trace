@@ -41,7 +41,7 @@ from BE.app.services import (
     trip_ctx,
 )
 from BE.app.services.optimizer import (
-    STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_short, stubs_from_pois)
+    STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
@@ -359,8 +359,21 @@ def _within_budget(out: dict, stubs: list, trip: dict) -> bool:
                                   for a in out["itinerary"]["activities"]) <= ceiling
 
 
-def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
-            ) -> list[tuple[int, dict, str, bool]]:
+def _all_day_minutes(ids, pois_by_id: dict) -> int:
+    """Minutes an all-day place takes out of the day when the traveller named one:
+    the longest all-day stay among `ids` (0 = none of them is an all-day place)."""
+    stays = [poi_visit_min(pois_by_id[pid]) for pid in ids or [] if pid in pois_by_id]
+    return max((stay for stay in stays if stay >= soft_rules.ALL_DAY_MIN), default=0)
+
+
+def _limits(tpl_name: str | None, trip: dict, busy_min: int = 0) -> dict:
+    """The day's limits: its archetype's, else the universal human needs."""
+    return (templates.template_constraints(tpl_name, trip, busy_min) if tpl_name
+            else templates.universal_constraints(trip, busy_min))
+
+
+def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None,
+            wished_limits: dict | None = None) -> list[tuple[int, dict, str, bool]]:
     """Template ladder with the trip's activity groups riding along.
 
     The user's own wishes outrank the template's inferred counts: every
@@ -370,6 +383,8 @@ def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
     then reports them as unmet). Dinner goes last, with a warning: money or hours
     may not hold a second meal, and no plan helps nobody. A place the traveller
     named that still does not fit gets its shortest usual stay, also with a warning.
+    `wished_limits`: the limits of the wished rungs when a wish can only be met by an
+    all-day place (its pace floor then counts the rest of the day only).
     Returns (template_step, limits, stubs, wished) so `relaxed_step` keeps its meaning,
     with stubs "plain", "any_hour" or "short" and `wished` True while the rung still
     carries the activity groups; a rung identical to an earlier one (legacy NO_LIMITS)
@@ -377,7 +392,8 @@ def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
     """
     plain = list(enumerate(templates.attempts(limits)))
     wished = [(step, {**rung, "required_any": list(rung["required_any"]) + act_groups})
-              for step, rung in plain] if act_groups else []
+              for step, rung in enumerate(templates.attempts(wished_limits or limits))
+              ] if act_groups else []
     no_dinner = (lambda rows: [(step, {**rung, "dinner_required": False}, "plain") for step, rung in rows]) \
         if limits.get("dinner_required") else (lambda rows: [])
     rungs = [(step, rung, "plain", True) for step, rung in wished]
@@ -559,9 +575,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     if tpl_name not in templates.DAY_TEMPLATES:
         tpl_name = None  # "" / unknown / no profile -> legacy (no archetype)
     # A custom profile with no archetype still gets the universal lunch + rest
-    # lock; a request with no profile at all stays fully legacy.
-    limits = (templates.template_constraints(tpl_name, trip) if tpl_name
-              else templates.universal_constraints(trip))
+    # lock; a request with no profile at all stays fully legacy. A named all-day
+    # place (Bà Nà) leaves only the evening for the other stops.
+    limits = _limits(tpl_name, trip, _all_day_minutes(trip.get("must_visit"), pois_by_id))
 
     # Fail closed: the pool is exactly the ranked (verified, hard-filtered)
     # candidates. An empty pool is an honest empty plan, never "every POI"
@@ -680,7 +696,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     if distinct_from:
         solver_opts["distinct_from"] = list(distinct_from)
         solver_opts["distinct_ceiling"] = pool_svc.MAX_PAIRWISE_JACCARD
-    rungs = _ladder(limits, act_groups, must)
+    # A wish only an all-day place can meet ("cáp treo"): its rungs ask the pace
+    # floor of the evening that is left, the rungs without the wish of the whole day.
+    wish_busy = max((min((_all_day_minutes([pid], pois_by_id) for pid in group["poi_ids"]), default=0)
+                     for group in act_groups if group.get("poi_ids")), default=0)
+    rungs = _ladder(limits, act_groups, must,
+                    _limits(tpl_name, trip, wish_busy) if wish_busy else None)
     short_stubs = [replace(stub, visit_min=poi_visit_short(pois_by_id[stub.poi_id]))
                    if stub.poi_id in must_ids else stub for stub in stubs]
     stubs_by_kind = {"plain": stubs, "any_hour": wish_stubs, "short": short_stubs}
@@ -975,6 +996,10 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
             if days:
                 warnings.append(f"{poi.get('name')} nghi vao "
                                 f"{', '.join(WEEKDAY_LABELS[d] for d in days)}: chon ngay di de kiem tra")
+    on_site = (plan.get("template") or {}).get("lunch_on_site")
+    if on_site:
+        warnings.append(f"bua trua an tai {(pois_by_id.get(on_site) or {}).get('name') or on_site} "
+                        "(diem di ca ngay), khong xep nha hang rieng")
     rest = (plan.get("template") or {}).get("rest_block") or {}
     if rest.get("shrunk"):
         warnings.append(
@@ -1047,6 +1072,9 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
         None,
     ) if acts else None
     template = templates.DAY_TEMPLATES.get(name) or {}
+    # No restaurant lunch on a day that needs one: an all-day stop holds it on site.
+    on_site = (soft_rules.lunch_on_site(acts, pois or {})
+               if acts and lunch is None and limits.get("lunch_required") else None)
     return {
         "name": name,
         "label": template.get("label", ""),
@@ -1056,6 +1084,7 @@ def _template_report(name: str | None, limits: dict, acts: list[dict],
         "rest_ok": rest_ok,
         "lunch_required": bool(limits.get("lunch_required")),
         "lunch_restaurant": lunch,
+        "lunch_on_site": on_site.get("poi_id") if on_site else None,
         "cafe_cap": cafe_cap,
         "stops": len(acts),
         "pace_stops": list(template.get("pace_stops", ())),

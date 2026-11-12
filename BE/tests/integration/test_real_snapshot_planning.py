@@ -177,6 +177,24 @@ class TestRealSnapshotPlanning(unittest.TestCase):
                                               "event": {"type": "rain"}, "completed": [first]}).json()
         self.assertEqual(out["mode"], "plan", out.get("reason"))
 
+    def test_an_all_day_place_is_planned_with_its_lunch_on_site(self):
+        # Bà Nà Hills (7 hours, the best-known attraction of the snapshot) gave an
+        # EMPTY plan, asked for by name or by wish: lunch in town, then no time left.
+        park = next(pid for pid, p in self.pois.items() if p["name"] == "Sun World Bà Nà Hills")
+        for trip in ({"must_visit": [park]}, {"activities": ["cáp treo"]}):
+            with self.subTest(trip=trip):
+                _, plan = self.plan(profile=COUPLE, budget=3000000, travelers=2, **trip)
+                self.assertTrue(plan["passed"], plan.get("warnings"))
+                stops = {a["poi_id"]: a for a in plan["activities"]}
+                self.assertIn(park, stops)
+                self.assertLessEqual(stops[park]["start"], "11:00")
+                self.assertGreaterEqual(stops[park]["end"], "13:00")
+                self.assertEqual(plan["template"]["lunch_on_site"], park)
+                self.assertIsNone(plan["template"]["lunch_restaurant"])
+                self.assertGreaterEqual(len(stops), 4)   # the evening in town is planned too
+                self.assertEqual(plan["template"]["relaxed_step"], 0)
+                self.assertTrue(any("bua trua an tai" in w for w in plan["warnings"]))
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))

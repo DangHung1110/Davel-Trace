@@ -67,6 +67,13 @@ REST_START_TOLERANCE = 15                  # gate: rest may start <=15 min late
 DINNER_REQUIRED = (17 * 60 + 30, 20 * 60 + 30)
 DINNER_MIN_END = 19 * 60 + 30              # a day ending earlier has no room for it
 DINNER_LATEST_START = 18 * 60              # ... and one starting later already ate
+# A place people spend most of a day at (a hill park with its own restaurants: Bà Nà,
+# VinWonders, an island tour) feeds them too. A stay this long that runs through the
+# whole lunch window IS the lunch, eaten on site: no restaurant has to be driven to in
+# the middle of it, and the rest after lunch is taken there. Without this the day's
+# best-known attraction could not be planned at all (lunch at 11:00 in town, then a
+# seven-hour park until after dinner time).
+ALL_DAY_MIN = 300
 
 
 # F1 (soft category quota): a day needs at least one food stop and at least
@@ -339,6 +346,27 @@ def lunch_activity(activities: list[dict], pois: dict) -> dict | None:
             continue
         minutes = to_min(act.get("start"))
         if LUNCH_REQUIRED[0] <= minutes < LUNCH_REQUIRED[1]:
+            return act
+    return None
+
+
+def holds_lunch(start: int, end: int) -> bool:
+    """Does a stay of [start, end] minutes feed its visitors lunch on site?
+
+    Long enough to be an all-day place (`ALL_DAY_MIN`) and covering every minute a
+    lunch could start at, so no restaurant could be reached in between anyway.
+    """
+    return (end - start >= ALL_DAY_MIN and start <= LUNCH_REQUIRED[0]
+            and end >= LUNCH_REQUIRED[1])
+
+
+def lunch_on_site(activities: list[dict], pois: dict | None = None) -> dict | None:
+    """The all-day stop this day's lunch is eaten at, None when a restaurant holds
+    the lunch (or nothing does). `pois` only rules out a long sit in a restaurant."""
+    for act in sorted(activities or [], key=lambda a: a.get("start", "")):
+        if is_restaurant((pois or {}).get(act.get("poi_id"))):
+            continue
+        if holds_lunch(to_min(act.get("start")), to_min(act.get("end"))):
             return act
     return None
 
