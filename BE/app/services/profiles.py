@@ -152,7 +152,10 @@ TASTE_WEIGHT = 0.20
 # A rung that ran out of search budget with no solution (`status: unknown`) says
 # nothing about its rules. Two in a row say the pool is too hard for the budget:
 # the ladder stops there instead of paying the full budget on every rung left
-# (20 rungs x 6 s was a minute of nothing), and the plan says so.
+# (20 rungs x 6 s was a minute of nothing), and the plan says so. While the rungs
+# still carry the traveller's wishes, it is the wishes the budget cannot seat (a
+# seven-hour park next to a lunch and a dinner): those rungs are skipped and the day
+# is planned without them, reported unmet, instead of no plan at all.
 MAX_UNKNOWN_RUNGS = 2
 # A diagnosis only names the rule that killed a plan: small budgets each.
 DIAGNOSE_TIMEOUT_S = 2.0
@@ -357,7 +360,7 @@ def _within_budget(out: dict, stubs: list, trip: dict) -> bool:
 
 
 def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
-            ) -> list[tuple[int, dict, str]]:
+            ) -> list[tuple[int, dict, str, bool]]:
     """Template ladder with the trip's activity groups riding along.
 
     The user's own wishes outrank the template's inferred counts: every
@@ -367,27 +370,28 @@ def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None
     then reports them as unmet). Dinner goes last, with a warning: money or hours
     may not hold a second meal, and no plan helps nobody. A place the traveller
     named that still does not fit gets its shortest usual stay, also with a warning.
-    Returns (template_step, limits, stubs) so `relaxed_step` keeps its meaning, with
-    stubs "plain", "any_hour" or "short"; a rung identical to an earlier one (legacy
-    NO_LIMITS) is not re-solved.
+    Returns (template_step, limits, stubs, wished) so `relaxed_step` keeps its meaning,
+    with stubs "plain", "any_hour" or "short" and `wished` True while the rung still
+    carries the activity groups; a rung identical to an earlier one (legacy NO_LIMITS)
+    is not re-solved.
     """
     plain = list(enumerate(templates.attempts(limits)))
     wished = [(step, {**rung, "required_any": list(rung["required_any"]) + act_groups})
               for step, rung in plain] if act_groups else []
     no_dinner = (lambda rows: [(step, {**rung, "dinner_required": False}, "plain") for step, rung in rows]) \
         if limits.get("dinner_required") else (lambda rows: [])
-    rungs = [(step, rung, "plain") for step, rung in wished]
-    rungs += [(step, rung, "any_hour") for step, rung in wished]
-    rungs += no_dinner(wished)
-    rungs += [(step, rung, "plain") for step, rung in plain]
-    rungs += no_dinner(plain)
+    rungs = [(step, rung, "plain", True) for step, rung in wished]
+    rungs += [(step, rung, "any_hour", True) for step, rung in wished]
+    rungs += [(*row, True) for row in no_dinner(wished)]
+    rungs += [(step, rung, "plain", False) for step, rung in plain]
+    rungs += [(*row, False) for row in no_dinner(plain)]
     if must:
         step, last = plain[-1]
-        rungs.append((step, {**last, "dinner_required": False}, "short"))
-    out: list[tuple[int, dict, str]] = []
-    for step, rung, kind in rungs:
-        if all(rung != seen or kind != used for _, seen, used in out):
-            out.append((step, rung, kind))
+        rungs.append((step, {**last, "dinner_required": False}, "short", False))
+    out: list[tuple[int, dict, str, bool]] = []
+    for step, rung, kind, with_wishes in rungs:
+        if all(rung != seen or kind != used for _, seen, used, _w in out):
+            out.append((step, rung, kind, with_wishes))
     return out
 
 
@@ -686,9 +690,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     limits_used = limits
     stubs_used = stubs
     unknown_rungs = 0
-    for rung, (step, limits_try, kind) in enumerate(rungs):
-        if unknown_rungs >= MAX_UNKNOWN_RUNGS:
-            break
+    wishes_given_up = False
+    for rung, (step, limits_try, kind, with_wishes) in enumerate(rungs):
+        if with_wishes and wishes_given_up:
+            continue
         stubs_try = stubs_by_kind[kind]
         out = optimize(stubs_try, travel, _to_trip(trip),
                        edge_scores=q, workers=workers, must_visit=must,
@@ -718,6 +723,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
             stubs_used = stubs_try
             break
         unknown_rungs = unknown_rungs + 1 if out.get("status") == "unknown" else 0
+        if unknown_rungs >= MAX_UNKNOWN_RUNGS:
+            if not with_wishes:
+                break
+            wishes_given_up, unknown_rungs = True, 0
 
     def _diagnose(base_limits: dict) -> dict | None:
         """Which single HARD rule makes this pool infeasible? (diagnostic only)

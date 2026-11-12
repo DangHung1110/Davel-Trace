@@ -68,6 +68,31 @@ class TestLadderStopsOnBudget(unittest.TestCase):
         self.assertEqual(plan["infeasible_by"]["rule"], "SEARCH_BUDGET")
         self.assertTrue(any("ngan sach" in w for w in plan["warnings"]), plan["warnings"])
 
+    def test_a_wish_the_budget_cannot_seat_is_dropped_not_the_day(self):
+        # "cáp treo" (a seven-hour park) could not sit next to lunch and dinner: the
+        # wished rungs ran out of budget and the traveller got no plan at all.
+        calls = []
+        real = optimizer_mod.optimize
+
+        def unknown_while_wished(*args, **kwargs):
+            calls.append(kwargs)
+            if any(group.get("poi_ids") for group in kwargs.get("required_any") or []):
+                return {"status": "unknown", "itinerary": None,
+                        "reason": "solver het ngan sach truoc khi tim duoc lich (UNKNOWN)",
+                        "elapsed_s": 0.0}
+            return real(*args, **kwargs)
+
+        with mock.patch.object(profiles_mod, "optimize", unknown_while_wished):
+            plan = build_plan("balanced", _trip("08:00", "18:00", activities=["bảo tàng"]),
+                              RANKED, BY_ID, CELLS, template="family-slow", workers=1)
+        wished = [c for c in calls if any(g.get("poi_ids") for g in c.get("required_any") or [])]
+        self.assertEqual(len(wished), profiles_mod.MAX_UNKNOWN_RUNGS)  # the rest are skipped
+        self.assertTrue(plan["activities"])
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        self.assertNotIn("infeasible_by", plan)
+        # The day no longer has to hold the wish; it is reported either way.
+        self.assertIn(plan["activity_match"][0]["status"], ("met", "unmet"))
+
     def test_a_proven_infeasible_rung_keeps_climbing(self):
         calls = []
         real = optimizer_mod.optimize
