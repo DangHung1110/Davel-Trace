@@ -36,8 +36,8 @@ separate:
   reference only; rerun a blind seed after all latest corrections before
   claiming final accuracy. Gold-standard macro-F1 target >=0.95 remains pending
   in `docs/weather-label.md`.
-- Final PATM pair file was checked and versioned at
-  `BE/ml/patm/pairs_v4_final.json`: 2,028 rows (944 rule, 934 LLM-judge, 150
+- Final PATM pair file was checked and versioned as `pairs_v4_final.json`
+  (now `git show de7e0be:BE/ml/patm/pairs_v4_final.json`, superseded by v5): 2,028 rows (944 rule, 934 LLM-judge, 150
   human), with 123 rows referencing removed POIs excluded. Current snapshot:
   742 POIs. The 150 human rows represent 150 distinct unordered comparisons:
   51 prefer-first, 57 prefer-second, 42 tie (108 decisive). Retire or explicitly
@@ -77,8 +77,8 @@ separate:
 - Important limitation: current PATM training rows are created with neutral
   user/context defaults (`train.py` calls `extract(a, b)`); the trained model
   has not learned conditional preference effects from the current pair file.
-  `BE/ml/patm/judge_batch_v2.py` can generate profile-conditioned judge prompts,
-  but a prompt generator is not completed labeled training data.
+  `git show de7e0be:BE/ml/patm/judge_batch_v2.py` generates profile-conditioned judge
+  prompts, but a prompt generator is not completed labeled training data.
 
 ## Agreed next steps, in order
 

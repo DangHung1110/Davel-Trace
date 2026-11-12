@@ -1,78 +1,23 @@
 """Canonical gate registry (T011 + T061f), shared by validator + evaluator.
 
-ONE registry for the gate checks (fixes X8 "2 bộ cổng"): gate.py owns the
-formulas, `BE/eval/metrics.py` imports `CHECKS` and reads their `score`.
-Every check returns the canonical shape ``{"passed": bool, "score": float}``
-with a finite score in [0, 1]:
-- FAR: no activity on unknown/unverified POI (FR-013); score = verified
-  ratio.
-- PROFILE_SAFE: no activity violates the onboarding profile's hard filter
-  (allergy / must_avoid / accessibility, `profile_filter.drop_reason`). The
-  router drops those POIs before planning; this re-checks the final plan so a
-  planner path that skips the pre-filter can never ship an allergen.
-  No profile filter -> passes vacuously. score = safe activity ratio.
-- VROH: no activity outside POI opening hours (SC-006); score = compliant
-  ratio.
-- B3: no broken transit buffer — every consecutive transition's gap fits
-  the matrix travel minutes (R4/B3: a missing cell is infeasible, never
-  0/haversine); score = compliant transition ratio.
-- BCS: total cost within budget (SC-008).
-- ETB: the last activity ends by the deadline = min(end_time, return_time);
-  `return_time` is a HARD within-day cap, never silently stretched to
-  end_time (an evening extension must be a new, re-gated plan).
-- A1: at most one `restaurant` POI per meal slot (lunch 11:00-14:00,
-  dinner 17:00-21:00), by activity start time. Two lunches is not a
-  preference, it is a broken plan (data-quality pass, test-local).
-- CAFE_CAP: one `cafe` per day by default. A second cafe passes only when
-  the two are in different dayparts (morning start < 11:00 and afternoon
-  start > 13:00) AND the profile shows a cafe need (food_prefs/activities
-  mention cafe/coffee, or pace == 3). More than two cafes is always HARD.
-  score = allowed cafes / actual cafes.
-- CATEGORY_CAP: at most ONE non-food POI per category per day (market,
-  landmark, beach, attraction, temple, museum, park, viewpoint). A second one
-  is a HARD violation, no profile exemption; meals keep A1/CAFE_CAP.
-  score = allowed capped visits / actual capped visits.
-- NO_CONSECUTIVE: no two back-to-back POIs of the same category. No
-  exemptions: cafe->cafe is a broken plan now (it stays only as the SOFT
-  B1 edge penalty). This is the CANONICAL adjacency rule; the scan lives in
-  `soft_rules.same_category_edges`. score = compliant transition ratio.
-- NO_ADJACENT_FOOD (DEPRECATED, subsumed by NO_CONSECUTIVE): no two
-  back-to-back `restaurant` POIs, ANY cuisine (BBQ->vegan included). A strict
-  subset of NO_CONSECUTIVE (both read `poi_category`), kept in the registry
-  for named reporting/compat and computed by the SAME scan with
-  `only="restaurant"` — never a second predicate. See `RULE_FREEZE`.
-  score = compliant transition ratio.
-- REST_FOLLOWS_LUNCH: the siesta starts at the lunch restaurant's end
-  (lunch = restaurant starting 11:00-13:00), length by pace (60/45/30),
-  shrunk for a late lunch (floor 20 min) and with no other POI inside.
-  Legacy plans (no onboarding profile) pass vacuously.
-  score = compliant activity ratio.
-- F1 (SOFT): every day needs at least one food POI (`restaurant`/`cafe`)
-  AND at least one culture/nature/sightseeing POI (`attraction`,
-  `landmark`, `museum`, `park`, `beach`, `viewpoint`, `nature`). A plan
-  that is all food is semantically poor, not infeasible: F1 is in the
-  registry but listed in `SOFT_CHECKS`, so it reports a violation/penalty
-  and never fail-closes (score = satisfied halves / 2).
-- TIME_FIT (SOFT): every stop sits at an hour it makes sense (a restaurant at a
-  meal, a beach out of the midday sun, a pagoda before dark), on top of being open.
-  A must_visit is the traveller's own choice and is not judged.
-- DINNER (SOFT): a planned day that runs through dinner has a restaurant for it.
-- TCS: time mirror — VROH/B3/ETB all pass AND no overlap AND every
-  activity fits [start_time, deadline].
-- HCS: hard mirror — the concrete gates (incl. PROFILE_SAFE, A1, CAFE_CAP,
-  CATEGORY_CAP, NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH) pass AND must_visit
-  present AND avoid absent. Soft checks (F1) are NOT mirrored. The deprecated
-  NO_ADJACENT_FOOD stays in the mirror only as the compat view of
-  NO_CONSECUTIVE (see `RULE_FREEZE`); it adds no constraint of its own.
+ONE registry for the gate checks: gate.py owns the formulas, `BE/eval/metrics.py`
+imports `CHECKS`. Every check takes the shared plain dicts (itinerary, trip, pois,
+matrix) and returns ``{"passed": bool, "score": float}`` with a score in [0, 1].
 
-Inputs are the shared plain dicts (itinerary/trip/pois/matrix) used by the
-validator (T049) and the tier-1 evaluator.
+HARD (fail-closed): FAR (verified POIs), PROFILE_SAFE (allergy / must_avoid /
+accessibility, re-checked on the final plan), VROH (opening hours), B3 (gaps fit the
+matrix; a missing cell is infeasible), BCS (budget), ETB (deadline = min(end_time,
+return_time)), A1 (one restaurant per meal slot), CAFE_CAP, CATEGORY_CAP,
+NO_CONSECUTIVE, NO_ADJACENT_FOOD (deprecated view of NO_CONSECUTIVE),
+REST_FOLLOWS_LUNCH, and the mirrors TCS (time) and HCS (every hard gate + must_visit
+and avoid).
+SOFT (reported, never fail-closes, `SOFT_CHECKS`): F1 (food and sightseeing in a day),
+TIME_FIT (each stop at an hour it makes sense), DINNER.
 
-RULE_FREEZE (below) is the single audit surface for "which rule owns what":
-one canonical rule per group, the duplicates kept in code but marked
-deprecated with a reason and their canonical owner. Nothing is deleted and no
-pass/fail semantics change: a deprecated rule that still executes is computed
-from the canonical implementation, so it can never disagree with it.
+RULE_FREEZE (below) is the single audit surface for "which rule owns what": one
+canonical rule per group, the duplicates marked deprecated with a reason and their
+owner. A deprecated rule that still executes is computed from the canonical
+implementation, so it can never disagree with it.
 """
 
 from __future__ import annotations
@@ -95,6 +40,7 @@ from BE.app.services.soft_rules import (
     is_food,
     is_sightseeing,
     lunch_activity,
+    lunch_on_site,
     meal_slot,
     meal_window_present,
     poi_category,
@@ -103,8 +49,6 @@ from BE.app.services.soft_rules import (
 )
 from BE.app.services.profile_filter import drop_reason
 from BE.common import deadline, in_range, party_size, plan_cost, to_min
-
-EPS = 1e-9
 
 
 def _result(passed: bool, score: float | None = None) -> dict:
@@ -327,7 +271,7 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     or a trip that cannot hold the lunch window at all), else
     ``(reason, offending_poi_ids)``:
     - ``REST_NO_LUNCH``: a lunch window exists but no restaurant starts in
-      11:00-13:00;
+      11:00-13:00 and no all-day stop runs through it (`lunch_on_site`);
     - ``REST_BAD_WINDOW``: the declared/derived siesta does not start at the
       lunch end (0..REST_START_TOLERANCE) or has the wrong length for the
       pace (a structural failure: the window itself is wrong);
@@ -347,6 +291,10 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     acts = _ordered(itinerary)
     lunch = lunch_activity(acts, pois)
     if lunch is None:
+        if lunch_on_site(acts, pois) is not None:
+            # An all-day place (soft_rules.ALL_DAY_MIN) feeds its visitors and is
+            # where they rest: there is no drive to a restaurant to follow.
+            return None
         return (REST_NO_LUNCH, [])
     span = rest_span(acts, pois, profile, deadline(trip))
     if span is None:  # defensive: lunch_activity already proved a lunch
@@ -481,7 +429,7 @@ CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
           ("TCS", check_tcs), ("HCS", check_hcs))
 
 # F1, TIME_FIT and DINNER are quality, not feasibility: they are reported but never
-# fail-closes a plan (SOFT severity, test-local). Everything else is hard.
+# fail-closes a plan. Everything else is hard.
 SOFT_CHECKS = frozenset({"F1", "TIME_FIT", "DINNER"})
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
@@ -573,7 +521,9 @@ RULE_FREEZE: dict[str, dict] = {
     "REST_FOLLOWS_LUNCH": {
         "status": "active", "canonical": None, "family": "rest",
         "reason": "canonical siesta rule: start at lunch end, length by pace; "
-                  "one definition (`rest_rule_violation`) for gate+validator",
+                  "one definition (`rest_rule_violation`) for gate+validator. An "
+                  "all-day stop through the lunch window is the lunch, eaten and "
+                  "rested on site (`soft_rules.lunch_on_site`)",
     },
     # Soft layer (soft_rules.py); statuses live here so there is ONE registry.
     "F1": {
@@ -662,17 +612,6 @@ def freeze_drift(itinerary: dict, trip: dict, pois: dict,
             continue
         drift.append(name)
     return drift
-
-
-def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Compatibility summary over HARD checks: {"passed", "failed"}.
-
-    Soft checks (F1) are surfaced by `validator.validate` under
-    `soft_violations`, deliberately not here.
-    """
-    failed = [name for name, fn in HARD_CHECKS
-              if not fn(itinerary, trip, pois, matrix)["passed"]]
-    return {"passed": not failed, "failed": failed}
 
 
 def report(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:

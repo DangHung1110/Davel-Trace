@@ -2,7 +2,7 @@
 
 Every rule is a pure function of fields already in the snapshot: no source
 is called and no value is guessed, so the output is exact and re-runnable
-(idempotent). Run it after the enrichment tools (enrich_tags, ingest_money).
+(idempotent). Run it after the enrichment tool (enrich_tags).
 
   fee            <- ticket_vnd (web-verified adult ticket). The planner budget,
                     savings profile and gate read `fee` only.

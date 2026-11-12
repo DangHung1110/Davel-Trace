@@ -1,8 +1,5 @@
 """POI retrieval/filter (T015 + T024, lane C). Hard filter + uncertainty.
 
-Reads pois.json directly with json stdlib (STUB-NOTE: lane-A snapshot
-loader T008 wires in at phase-PR — same schema, swap one line).
-
 FR-013: unverified POIs are EXCLUDED from the main plan
 (`candidates`); they are listed separately under `needs_verification`
 ("can xac minh"), must-visit flagged (validator decides per FR-031).
@@ -23,7 +20,7 @@ needs, so "tắm biển" gave an infeasible (no lunch) or one-stop plan.
 `activity_requirements` turns them into optimizer `required_any` groups
 ("at least one beach") that the planner may relax with a warning.
 
-Activities match the canonical group `cat` (lane-A enum in pois.json; seed
+Activities match the canonical group `cat` (enum in pois.json; seed
 POIs without `cat` fall back to canonical_category(type)), never the raw
 SerpApi `type`. Activity text is NFC-normalised and matched whole-word,
 longest phrase first; a matched phrase is consumed so its sub-words cannot
@@ -35,20 +32,21 @@ not "hải sản", a statue is a landmark but not "chùa". `ACTIVITY_WORDS` narr
 wish to the POIs whose name, type or tags say so, and a plan only counts as
 meeting the wish when one of THOSE POIs is in it.
 
-`plan_tier` (BE/tools/fix_poi_accuracy.py) keeps the places no traveller would look
+`plan_tier` (a field of pois.json) keeps the places no traveller would look
 for out of a default plan: `local` and `wish_only` POIs come up only when a wish
 asks for them, `excluded` ones only as a must_visit.
 """
 
 from __future__ import annotations
 
+import os
 import re
+import threading
 import unicodedata
 from functools import lru_cache
 
-from BE.app.services import to_min
 from BE.app.services.profile_filter import fold
-from BE.common import effective_fee, load_json, party_size
+from BE.common import effective_fee, load_json, party_size, to_min
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -136,16 +134,48 @@ ACTIVITY_EXTRA_CATS = {"núi": ["viewpoint", "attraction"], "leo núi": ["viewpo
 _SUNSET, _SUNRISE = (16 * 60, 18 * 60), (5 * 60, 7 * 60)
 ACTIVITY_START = {"ngắm hoàng hôn": _SUNSET, "hoàng hôn": _SUNSET,
                   "ngắm bình minh": _SUNRISE, "bình minh": _SUNRISE}
+# The onboarding catalog's activity codes (FE/onboard.html, frozen) as the wish each
+# stands for, so the one matcher below (`poi_fits_wish`) says what a liked activity
+# is, exactly as it does for a wish typed into the request. A like is a standing
+# preference: it leans the choice (profiles.soft_lean), it is never a required stop.
+CATALOG_ACTIVITY_WISH = {
+    "beach": "tắm biển", "water_sports": "lướt sóng", "trekking": "trekking",
+    "adventure": "leo núi", "viewpoint": "đài quan sát", "sunset_view": "ngắm hoàng hôn",
+    "temple": "tâm linh", "museum": "bảo tàng", "old_town": "di tích",
+    "market": "mua sắm", "nightlife": "quán bar", "spa": "spa", "park": "công viên",
+    "playground": "vui chơi", "cruise": "du thuyền",
+    "golf": "",   # no golf course in the data
+}
 _WISH_TIERS = {"local", "wish_only"}
 # A wish opens the local tier only where fewer main POIs than this can serve it: with
 # a dozen known pagodas, asking for "chùa" does not mean the one down the lane.
 WISH_ENOUGH_MAIN = 3
 
 
+_POIS_CACHE: dict[str, tuple[tuple[int, int], list[dict]]] = {}
+_POIS_LOCK = threading.Lock()
+
+
 def load_pois_json(path: str) -> list[dict]:
-    """Read a snapshot pois.json (T061c: shares BE.common.load_json)."""
+    """Read a snapshot pois.json (T061c: shares BE.common.load_json).
+
+    Parsed once per file version (path, mtime, size), like the matrix: the
+    2 MB snapshot was re-parsed on every plan request. The list is SHARED
+    between requests; nothing downstream mutates a POI (they are projected
+    with `poi_on_date` / `_gate_view`), so callers must keep it that way.
+    """
+    path = os.path.abspath(path)
+    stat = os.stat(path)
+    key = (stat.st_mtime_ns, stat.st_size)
+    with _POIS_LOCK:
+        hit = _POIS_CACHE.get(path)
+    if hit is not None and hit[0] == key:
+        return hit[1]
     data = load_json(path)
-    return data["pois"] if isinstance(data, dict) else data
+    pois = data["pois"] if isinstance(data, dict) else data
+    with _POIS_LOCK:
+        _POIS_CACHE[path] = (key, pois)
+    return pois
 
 
 def poi_category(p: dict) -> str:
@@ -259,6 +289,23 @@ def poi_fits_wish(poi: dict, text: str) -> bool:
         return True
     accented, folded = _poi_words(poi)
     return any(_has_word(word, accented, folded) for word in words)
+
+
+def liked_wishes(activities: list[str] | None) -> list[str]:
+    """A profile's liked activities as wish texts: a catalog code through
+    `CATALOG_ACTIVITY_WISH`, anything else as it was typed."""
+    out: list[str] = []
+    for activity in activities or []:
+        text = str(activity or "").strip()
+        wish = CATALOG_ACTIVITY_WISH.get(text.lower(), text)
+        if wish and wish not in out:
+            out.append(wish)
+    return out
+
+
+def poi_is_liked(poi: dict, wishes: list[str]) -> bool:
+    """Does this POI answer one of the liked activities (`liked_wishes`)?"""
+    return any(poi_fits_wish(poi, wish) for wish in wishes)
 
 
 def wish_ids(activities: list[str], pois: list[dict]) -> list[str]:

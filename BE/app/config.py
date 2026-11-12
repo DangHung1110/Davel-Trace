@@ -10,7 +10,7 @@ No secrets are committed: copy BE/.env.example -> BE/.env (gitignored).
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 def load_dotenv(path: str = "BE/.env") -> None:
@@ -31,8 +31,6 @@ class Settings:
     judge_model: str = "qwen3:14b"
     snapshot_dir: str = os.path.join("data", "snapshots", "danang-v1")
     snapshot_name: str = "danang-v1"
-    google_places_key: str = ""
-    osrm_base_url: str = ""
     app_env: str = "local"
     cors_origins: tuple[str, ...] = ()
 
@@ -51,8 +49,6 @@ class Settings:
             snapshot_dir=snap,
             snapshot_name=os.environ.get("SNAPSHOT_NAME",
                                          os.path.basename(snap.rstrip("/\\")) or "danang-v1"),
-            google_places_key=os.environ.get("GOOGLE_PLACES_KEY", ""),
-            osrm_base_url=os.environ.get("OSRM_BASE_URL", ""),
             app_env=os.environ.get("APP_ENV", "local"),
             cors_origins=tuple(origin.strip() for origin
                                in os.environ.get("CORS_ORIGINS", "").split(",")

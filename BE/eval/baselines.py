@@ -60,9 +60,14 @@ EVAL_WORKERS = 1
 # path therefore budgets DETERMINISTIC time (OR-Tools work units) instead: the
 # same query does the same work on every run. The wall clock is only a safety
 # cap so a bad instance cannot hang the suite. Measured on the 30 queries, 80
-# candidates, one worker: plans solved 9/27 at 1.5, 24/27 at 3, 25/27 at 5, 27/27
-# at 8 (about 8 s a query). Below that the run scores the budget, not the planner.
-EVAL_DETERMINISTIC_TIME = 8.0
+# candidates, one worker, under CP-SAT's default presolve: plans solved 9/27 at 1.5,
+# 24/27 at 3, 25/27 at 5, 27/27 at 8 (about 8 s a query). Below that the run scores
+# the budget, not the planner. With the lighter presolve of a search on a budget
+# (`optimizer.SEARCH_PRESOLVE_ITERATIONS`) every one-day and two-day plan is solved
+# at 5 units, 4.4 s a query, with the ratings of the 8-unit run (4.561 against 4.563).
+# The value is the product's (`routers.itinerary.PLAN_DETERMINISTIC_TIME`): the table
+# scores the planner as it ships.
+EVAL_DETERMINISTIC_TIME = 5.0
 EVAL_WALL_SAFETY_S = 60.0
 TWO_DAY_QUERIES = 9
 ZERO_FEE_NOTE = ("all candidate fees are 0 in this snapshot -> BCS is "

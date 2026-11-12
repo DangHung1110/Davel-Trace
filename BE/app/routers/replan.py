@@ -4,12 +4,12 @@ In (contracts/api.md): {"itinerary_id": "...", "event": {DynamicEvent}}.
 Out: {"itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution",
 "changes": [...]}. Rule: completed activities preserved; version++.
 
-The lane-B rolling-horizon service (`BE.app.services.replan.replan`) owns
+The rolling-horizon service (`BE.app.services.replan.replan`) owns
 the logic; this shell rebuilds the trip state from the stored plan and
 exposes it. Two optional fields keep the demo usable without inventing a
 new contract: `completed` (mark done items before replanning, so the
-rolling horizon advances) and `budget_state` (lane-C `replan_budget()`
-snapshot -> actual remaining, T036b). Unknown itinerary -> 404 envelope.
+rolling horizon advances) and `budget_state` (the expense summary: its `left`
+is the actual remaining, T036b). Unknown itinerary -> 404 envelope.
 
 A plan of several days replans one day (`day`, default: the first with stops
 still to do). The other days come back unchanged in the new itinerary.

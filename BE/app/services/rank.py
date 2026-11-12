@@ -3,7 +3,7 @@
 score_poi(poi, user, ctx) -> {"score": 0..1, "reasons": [...]}.
 WEIGHTS sum to 1, all non-negative (unit test enforces sanity).
 PATM nac-2 (T029 model) replaces these weights later; the reasons
-format stays (explainer T042 reuses it).
+format stays.
 
 Signals:
 - attr: trusted rating/5, price fit (fee share of budget), effort fit
@@ -31,10 +31,11 @@ from __future__ import annotations
 
 import math
 
-from BE.app.services import to_min
 from BE.app.services import profile_filter, trip_ctx
-from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, poi_category
-from BE.common import BAND_FEE_VND, FEW_REVIEWS, effective_fee, price_level_of, trusted_rating
+from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, is_outdoor, poi_category
+from BE.common import (
+    BAND_FEE_VND, FEW_REVIEWS, clamp01, effective_fee, price_level_of, to_float, to_int, to_min,
+    trusted_rating)
 
 WEIGHTS = {
     "rating": 0.20,
@@ -56,27 +57,8 @@ FAME_FULL_REVIEWS = 30_000
 # food POI with no cuisine evidence is neither rewarded nor punished.
 TASTE_NEUTRAL = 0.5
 
-# Categories the onboarding `outdoor_bias` moves (beach/nature/park/viewpoint).
-OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
+# What the onboarding `outdoor_bias` moves is `soft_rules.is_outdoor`.
 OUTDOOR_BIAS_WEIGHT = 0.25  # max pref_match shift at outdoor_bias = +/-1
-
-
-def _int(value, default: int) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return default
-
-
-def _clamp(value: float) -> float:
-    return max(0.0, min(1.0, float(value)))
-
-
-def _num(value, default: float = 0.0) -> float:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return float(default)
 
 
 def _words(*parts) -> set[str]:
@@ -113,7 +95,7 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     reviews = poi.get("review_count")
     # Unknown count (fixtures, fresh crawls) is the middle: never a bonus or a cost.
     parts["fame"] = (0.5 if reviews is None
-                     else _clamp(math.log10(1 + int(reviews)) / math.log10(1 + FAME_FULL_REVIEWS)))
+                     else clamp01(math.log10(1 + int(reviews)) / math.log10(1 + FAME_FULL_REVIEWS)))
     rating = float(poi.get("rating") or 0.0)
     if rating >= 4.5 and (poi.get("review_count") is None
                           or poi["review_count"] >= FEW_REVIEWS):
@@ -123,12 +105,12 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     known_fee = effective_fee(poi)
     # Unknown price counts as the middle band, like `price_level_of` below.
     fee = BAND_FEE_VND["medium"] if known_fee is None else known_fee
-    parts["price"] = _clamp(1.0 - fee / budget) if budget > 0 else 0.0
+    parts["price"] = clamp01(1.0 - fee / budget) if budget > 0 else 0.0
     # Onboarding spending level: align the POI price band with what the party
     # wants to spend (1 budget / 2 mid / 3 high). Unknown price (null) counts as
     # the middle band (`UNKNOWN_PRICE_LEVEL`), so missing data is never a bonus.
-    gap = abs(price_level_of(poi) - _int(user.get("spending_level"), 2))
-    parts["price"] = 0.5 * parts["price"] + 0.5 * _clamp(1.0 - gap / 2.0)
+    gap = abs(price_level_of(poi) - to_int(user.get("spending_level"), 2))
+    parts["price"] = 0.5 * parts["price"] + 0.5 * clamp01(1.0 - gap / 2.0)
     if known_fee == 0:
         reasons.append("mien phi")
     elif known_fee is None:
@@ -154,17 +136,15 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
     # sits at the neutral 0.5 so the component never punishes a beach.
     taste_unit, taste_hits, clashes = profile_filter.taste_score(
         poi, user.get("food_prefs", []))
-    parts["taste"] = _clamp(TASTE_NEUTRAL + 0.5 * taste_unit)
+    parts["taste"] = clamp01(TASTE_NEUTRAL + 0.5 * taste_unit)
     if taste_unit > 0:
         reasons.append("dung gu an: " + ", ".join(taste_hits))
     elif clashes:
         reasons.append("lech gu an (" + ", ".join(clashes) + ")")
     # outdoor_bias (-1..1): push outdoor/weather-sensitive POIs up or down.
-    bias = max(-1.0, min(1.0, _num(user.get("outdoor_bias", 0.0))))
-    ptype_bias = poi_category(poi) or str(poi.get("type") or "")
-    if bias and (ptype_bias in OUTDOOR_CATEGORIES
-                 or poi.get("weather_sensitive")):
-        parts["pref_match"] = _clamp(parts["pref_match"]
+    bias = max(-1.0, min(1.0, to_float(user.get("outdoor_bias", 0.0))))
+    if bias and is_outdoor(poi):
+        parts["pref_match"] = clamp01(parts["pref_match"]
                                      + OUTDOOR_BIAS_WEIGHT * bias)
         reasons.append("hop gu ngoai troi" if bias > 0 else "han che ngoai troi")
 
@@ -206,7 +186,7 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         mult, state_reasons = trip_ctx.poi_multiplier(poi, state)
         score *= mult
         reasons.extend(state_reasons)
-    score = round(_clamp(score), 4)
+    score = round(clamp01(score), 4)
     return {"score": score, "reasons": reasons or ["mac dinh"]}
 
 

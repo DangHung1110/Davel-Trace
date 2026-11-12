@@ -17,11 +17,11 @@ itinerary generator.
 
 ### What changed from v4
 
-`pairs_v4_final.json` (2,028 records) is kept for comparison. The LLM judge was
+`pairs_v4_final.json` (2,028 records) is in git history before this card. The LLM judge was
 asked both orders of 466 pairs and contradicted itself on 129 of them (28%):
 125 named a different place to go first depending on the order of the question,
 4 answered a tie one way and a preference the other. v5 drops those 258 rows
-(`make_pairs.py --drop-contradictions`, and `collect_judge` now does the same).
+(`make_pairs.py --drop-contradictions`).
 A pair asked in one order only cannot be checked and stays.
 
 ## Metrics
@@ -98,7 +98,6 @@ See `docs/plan-accuracy.md` for plans measured with the model and with the rule.
 
 - Model: `BE/ml/patm/model.txt`; metrics: `BE/ml/patm/model_metrics.json`,
   `BE/ml/patm/lpo_metrics.json`.
-- Training pairs: `BE/ml/patm/pairs_v5_final.json`
-  (`pairs_v4_final.json` kept for comparison).
+- Training pairs: `BE/ml/patm/pairs_v5_final.json`.
 - Pair construction/evaluation tools: `make_pairs.py`, `train.py`,
   `evaluate.py`.

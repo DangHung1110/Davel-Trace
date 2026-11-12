@@ -1,33 +1,18 @@
 """Validator gate (T018, lane B). Per-gate pass/fail + violations.
 
-Wraps gate.py (T011) primitives for optimizer output (T017) and, later,
-the evaluator endpoint (T052): {"passed", "checks": {FAR/PROFILE_SAFE/VROH/B3/BCS/ETB/A1/
-CAFE_CAP/NO_CONSECUTIVE/NO_ADJACENT_FOOD/REST_FOLLOWS_LUNCH/F1/TCS/HCS},
-"violations": [...], "soft_violations": [...], "details": {gate:
-[offending poi_ids]}}.
+validate() -> {"passed", "checks": {gate: bool}, "violations": [...],
+"soft_violations": [...], "details": {gate: [offending poi_ids]}}. `violations` is the
+HARD fail list; `soft_violations` carries `gate.SOFT_CHECKS`, so an all-food day is
+reported without making the plan infeasible.
 
-`violations` stays the HARD fail list (fail-closed); `soft_violations` carries
-the quality checks registered in `gate.SOFT_CHECKS` (currently F1) so an
-all-food day is reported without making the plan infeasible. `details`
-covers both lists.
-
-This module OWNS NO RULE. Every offender list is computed from the same
-definition the gate scores:
-- adjacency: `soft_rules.same_category_edges` (NO_CONSECUTIVE, and the
-  deprecated NO_ADJACENT_FOOD view `only="restaurant"`);
-- budget: `plan_cost` (one cost formula, same as BCS);
-- deadline: `deadline` (min(end_time, return_time), same as ETB/TCS);
-- rest: `gate.rest_rule_violation` (the function behind REST_FOLLOWS_LUNCH).
-Rule status (active / deprecated + canonical owner) is `gate.RULE_FREEZE`.
-
-STUB-NOTE (as T017): inputs are plain dicts matching the plan schemas;
-phase-PR swaps in the real schemas (T007 plan.py) without changing this
-logic. Matrix comes from T010 (dict cells here).
+This module OWNS NO RULE: every offender list is computed from the definition the gate
+scores (`soft_rules.same_category_edges`, `plan_cost`, `deadline`,
+`gate.rest_rule_violation`).
 """
 
 from __future__ import annotations
 
-from BE.app.services.common import deadline, in_range, party_size, plan_cost, to_min
+from BE.common import deadline, in_range, party_size, plan_cost, to_min
 from BE.app.services.gate import (
     CHECKS,
     SOFT_CHECKS,
@@ -39,7 +24,6 @@ from BE.app.services.soft_rules import (
     CATEGORY_DAILY_CAP,
     NON_FOOD_CAPPED,
     is_food,
-    is_sightseeing,
     meal_slot,
     poi_category,
     same_category_edges,

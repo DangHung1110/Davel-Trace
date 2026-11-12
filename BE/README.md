@@ -32,11 +32,19 @@ trình duyệt từ các origin đó và tắt các router chỉ dùng cho test 
 (local) API nhận mọi cổng của `localhost` và `127.0.0.1`.
 
 Trên máy deploy, đo độ trễ bằng `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1` (mục tiêu p95
-dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày).
+dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày). Hai lượt đo của cùng một bản lệch nhau khoảng
+0,2 giây, nên so hai bản thì đo xen kẽ.
+
+Chấm chất lượng lịch bằng bộ quy tắc độc lập với cổng của ứng dụng (67 yêu cầu thật, 201 lịch, khoảng 6 phút):
+`python BE/tools/audit_plans.py --out audit.json --plans plans.txt`. Kết quả và cách đọc ở `docs/plan-accuracy.md`.
 
 ```powershell
 python -m uvicorn BE.app.main:app --port 8000
 ```
+
+Trong tiến trình, BE giữ lại tối đa 300 plan gần nhất cho `/v1/itinerary/{id}`, `/select` và `/replan`
+(plan cũ hơn trả 404 như id lạ); dự báo thời tiết Open-Meteo được nhớ 15 phút (lỗi mạng nhớ 60 giây) nên
+mỗi request lập lịch không gọi mạng lại. Lỗi 500 được ghi traceback vào log server (`davel.api`).
 
 Kiểm tra (đã verify thật):
 
@@ -52,14 +60,13 @@ curl.exe -X POST http://localhost:8000/v1/expenses `
 
 Lưu ý: `POST /v1/parse` cần LLM (Ollama local hoặc API key);
 không LLM thì endpoint trả lỗi transport rõ ràng, không crash.
-`POST /v1/itinerary` cần snapshot `data/snapshots/danang-v1/`
-(lane A, đủ lanes merge mới có).
+`POST /v1/itinerary` đọc snapshot ở `SNAPSHOT_DIR`: mặc định là bộ 7 POI mẫu
+`data/snapshots/danang-v1/`, dữ liệu thật ở `BE/data/snapshots/danang-v1`.
 
 ## 4. Test
 
 ```powershell
 python -m pytest BE/tests -q
-# 74 passed (lane C; đủ 3 lanes merge thì nhiều hơn)
 ```
 
 Unit chạy trực tiếp cũng được: `python BE/tests/unit/test_x.py`.

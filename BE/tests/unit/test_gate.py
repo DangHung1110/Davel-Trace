@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.common import total_fee  # noqa: E402
+from BE.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     ACTIVE_RULES,
     CHECKS,
@@ -20,7 +20,6 @@ from BE.app.services.gate import (  # noqa: E402
     HARD_CHECKS,
     RULE_FREEZE,
     SOFT_CHECKS,
-    all_pass,
     check_a1,
     check_b3,
     check_bcs,
@@ -72,6 +71,12 @@ EAT_POIS = {
 EAT_IDS = list(EAT_POIS)
 EAT_MATRIX = {f"{a}->{b}": {"minutes": 10}
               for a in EAT_IDS for b in EAT_IDS if a != b}
+
+
+
+def all_pass(itinerary, trip, pois, matrix):
+    rep = report(itinerary, trip, pois, matrix)
+    return {"passed": rep["passed"], "failed": rep["failed"]}
 
 
 class TestGate(unittest.TestCase):

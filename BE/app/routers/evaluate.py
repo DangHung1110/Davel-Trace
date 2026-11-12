@@ -16,7 +16,6 @@ Missing snapshot -> 503 SNAPSHOT_MISSING envelope.
 
 from __future__ import annotations
 
-import json
 import os
 
 from fastapi import APIRouter
@@ -25,6 +24,7 @@ from pydantic import BaseModel
 from BE.app.config import get_settings
 from BE.app.routers import error
 from BE.app.services import matrix as matrix_svc
+from BE.app.services import retrieval as retrieval_svc
 from BE.eval.metrics import evaluate as tier1_evaluate
 
 router = APIRouter(prefix="/v1", tags=["evaluate"])
@@ -38,8 +38,8 @@ class EvaluateIn(BaseModel):
 def load_eval_context(snapshot_dir: str) -> tuple[dict, dict] | None:
     """(pois by id, matrix cells) from the snapshot; None when pois missing."""
     try:
-        with open(os.path.join(snapshot_dir, "pois.json"), encoding="utf-8") as f:
-            pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
+        pois = {p["poi_id"]: p for p in retrieval_svc.load_pois_json(
+            os.path.join(snapshot_dir, "pois.json"))}
     except (FileNotFoundError, NotADirectoryError):
         return None
     return pois, matrix_svc.load_cells(snapshot_dir)

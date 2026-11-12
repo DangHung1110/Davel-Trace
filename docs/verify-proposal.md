@@ -91,7 +91,7 @@ Luật ghép nguồn:
 | Tồn tại + vị trí | Có, khi có nguồn 2 | OSM (36%; tham quan 50–65%) + VietMap/Google cho quán xá | POI chỉ có 1 nguồn |
 | Loại hình | Phần lớn | tag OSM + type Google | conflict |
 | Giờ mở cửa | Một phần | Google/VietMap; OSM chỉ 37 cặp | phần còn lại, hoặc dùng mặc định an toàn (mục 6.2) |
-| Thời lượng | **Không** verify bằng nguồn được | prior theo loại (`duration_prior.json`) + trần theo loại (đình ≤ 45 phút, chợ dân sinh ≤ 60 phút) | outlier |
+| Thời lượng | **Không** verify bằng nguồn được | prior theo loại + trần theo loại (đình ≤ 45 phút, chợ dân sinh ≤ 60 phút) | outlier |
 | Giá vé | Ít nguồn | trang chính thức (danangfantasticity), người | phần lớn |
 
 Kết luận: **không có cách tự động nào chính xác 100%**. Nhưng có thể tự động hoá phần

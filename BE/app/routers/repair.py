@@ -1,4 +1,4 @@
-"""POST /v1/repair (NOTE(test-local), do NOT PR as-is).
+"""POST /v1/repair (local test router, off in production).
 
 LLM-guided semantic repair with a bounded loop (max 2 rounds):
 
@@ -34,7 +34,7 @@ from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import review as review_router
 from BE.app.routers import select as select_svc
 from BE.app.services import repair as repair_svc
-from BE.app.routers.itinerary import _retrieval_report
+from BE.app.routers.itinerary import _public, _retrieval_report
 from BE.app.services import retrieval as retrieval_svc
 
 router = APIRouter(prefix="/v1", tags=["repair"])
@@ -44,12 +44,6 @@ class RepairIn(BaseModel):
     itinerary_id: str | None = None
     plan: dict | None = None
     trip: dict | None = None
-
-
-def _matrix_from_travel(travel: dict) -> dict:
-    """{(a, b): minutes} (plan context) -> {"a->b": {"minutes": n}}."""
-    return {f"{a}->{b}": {"minutes": int(minutes)}
-            for (a, b), minutes in travel.items()}
 
 
 def _as_index(raw) -> dict:
@@ -102,7 +96,7 @@ def _resolve(body: RepairIn):
         pool = [p for p in all_pois if p.get("poi_id") in candidate_ids]
 
     travel = ctx.get("travel")
-    matrix = (_matrix_from_travel(travel)
+    matrix = (select_svc._matrix_from_travel(travel)
               if isinstance(travel, dict) and travel
               else plan.get("matrix") or cells)
     return (plan, trip, pois_by_id, pool, matrix, report), None
@@ -116,8 +110,7 @@ def repair(body: RepairIn):
     plan, trip, pois_by_id, pool, matrix, report = resolved
 
     if plan.get("days"):
-        return {"plan": {k: v for k, v in plan.items() if not k.startswith("_")},
-                "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
+        return {"plan": _public(plan), "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
                 "note": "REPAIR_ONE_DAY: repair chi ho tro lich 1 ngay"}
 
     try:
@@ -126,9 +119,7 @@ def repair(body: RepairIn):
             review_fn=lambda p: review_router.review_plan(p, pois_by_id, trip),
         )
     except Exception as exc:  # noqa: BLE001 - never 500 the harness
-        return {"plan": {k: v for k, v in plan.items() if not k.startswith("_")},
-                "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
+        return {"plan": _public(plan), "rounds": 0, "repairs": [], "gate": None, "retrieval": report,
                 "note": f"REPAIR_UNAVAILABLE: {type(exc).__name__}"}
 
-    repaired = {k: v for k, v in result["plan"].items() if not k.startswith("_")}
-    return {**result, "plan": repaired, "retrieval": report}
+    return {**result, "plan": _public(result["plan"]), "retrieval": report}

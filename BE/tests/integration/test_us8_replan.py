@@ -1,8 +1,6 @@
 """US8 integration (T048, lane B — closes US8). quickstart S5.
 
-State with 2 completed + rain DynamicEvent (STUB-NOTE: stub dict per
-data-model; real event_clf T044 classifies text at phase-PR) -> replan:
-version 1->2, completed preserved, remaining re-optimized, changes list
+State with 2 completed + rain DynamicEvent -> replan: version 1->2, completed preserved, remaining re-optimized, changes list
 keep/drop/replace/reorder.
 
 Run from repo root: python BE/tests/integration/test_us8_replan.py -v

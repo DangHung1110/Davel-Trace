@@ -147,9 +147,9 @@ class TestItineraryContract(unittest.TestCase):
             return {"activities": [], "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={"trip": TRIP})
             self.assertEqual(r.status_code, 200, r.text)
             # Profiles solve in parallel: build order is free, the
@@ -160,7 +160,7 @@ class TestItineraryContract(unittest.TestCase):
             self.assertEqual([p["profile"] for p in plans],
                              ["savings", "balanced", "experience"])
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
 
     def test_itinerary_id_not_hardcoded(self):
         trip_id = "request-trip-uuid-test"
@@ -176,10 +176,10 @@ class TestItineraryContract(unittest.TestCase):
         old_plans = dict(store["plans"])
         old_active_id = store["active_id"]
         old_selected = store["selected"]
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
             select_mod.reset_store()
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={
                 "trip": dict(TRIP, trip_id=trip_id),
                 "profiles": requested_profiles,
@@ -203,7 +203,7 @@ class TestItineraryContract(unittest.TestCase):
             self.assertEqual(selected.status_code, 200, selected.text)
             self.assertEqual(selected.json(), {"active_id": plans[0]["itinerary_id"]})
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
             store["plans"] = old_plans
             store["active_id"] = old_active_id
             store["selected"] = old_selected

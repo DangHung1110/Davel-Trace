@@ -30,8 +30,6 @@ import sys
 import unicodedata
 
 CATEGORY_DEFAULTS: dict[str, int] = {
-    # ponytail: nac-1 static defaults on purpose — nac-2 LLM batch (needs the
-    # T003b snapshot) and nac-3 review mining are deferred, see module docstring.
     # LOCKED by seed (T003 --check 7/7): never change these 7 values.
     "landmark": 45,
     "transport": 20,

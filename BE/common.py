@@ -1,14 +1,8 @@
 """Shared stdlib glue for BE (one spot for copy-pasted helpers).
 
-T061c survivor: time <-> minutes, opening-hours parsing, plan fee/deadline
-and JSON/snapshot reads that were duplicated across `eval/`, `ml/` and the
-app services. `BE.app.services.common` re-exports these names, so lane B/C
-callers keep their imports while a single implementation lives here.
-No config, no classes, no third-party imports (DoD).
-
-ponytail: only genuinely repeated glue lives here. Domain schemas stay in
-`app/schemas/` and validated snapshot loading stays in
-`app/services/snapshot.py` (intentionally stricter, stdlib-only).
+Time <-> minutes, opening-hours parsing, plan fee/deadline and JSON/snapshot
+reads, shared by the app services, `eval/` and `ml/`. No config, no classes, no
+third-party imports (DoD).
 """
 
 from __future__ import annotations
@@ -17,6 +11,24 @@ import datetime
 import json
 import os
 from typing import Any
+
+
+def to_int(value, default: int = 2) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def to_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float(default)
+
+
+def clamp01(value: float) -> float:
+    return max(0.0, min(1.0, float(value)))
 
 
 def to_min(hhmm: str) -> int:
@@ -28,11 +40,6 @@ def to_min(hhmm: str) -> int:
 def hhmm(minutes: int) -> str:
     """Minutes since midnight -> 'HH:MM'."""
     return f"{minutes // 60:02d}:{minutes % 60:02d}"
-
-
-# T061c: the survivor helpers below were copy-pasted across app services /
-# eval. They live here once; `BE.app.services.common` re-exports them.
-hh = hhmm  # lane-B alias (BE.app.services.common.hh)
 
 
 def _intervals(spec: str):
@@ -150,12 +157,19 @@ def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     return open_windows(safe) or []
 
 
+def iso_date(date: str | None, offset: int = 0) -> str:
+    """The ISO date `offset` days after `date`; "" without a usable ISO date."""
+    try:
+        start = datetime.date.fromisoformat(date or "")
+    except (TypeError, ValueError):
+        return ""
+    return (start + datetime.timedelta(days=offset)).isoformat()
+
+
 def weekday_of(date: str | None) -> int | None:
     """Monday = 0, as `hours_by_day` is stored; None without a usable ISO date."""
-    try:
-        return datetime.date.fromisoformat(date or "").weekday()
-    except ValueError:
-        return None
+    day = iso_date(date)
+    return datetime.date.fromisoformat(day).weekday() if day else None
 
 
 def poi_on_date(poi: dict, date: str | None) -> dict:
@@ -225,7 +239,7 @@ def trusted_rating(poi: dict) -> float:
 
 
 # What one person spends at a POI with no known ticket: the middle of its price
-# band (BE/ml/data/price_from_raw.py: under 100k, 100-500k, over 500k per person).
+# band (under 100k, 100-500k, over 500k per person).
 BAND_FEE_VND = {"cheap": 50_000, "medium": 300_000, "expensive": 700_000}
 # The band is one scale for a meal. A drink or a small purchase in the same band
 # costs far less: 300k for a coffee was the visible error of the old table.

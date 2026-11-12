@@ -1,17 +1,11 @@
 """POST /v1/itinerary/select (T033e, lane C — closes US4). Chốt plan.
 
-In: {"itinerary_id"}. Out: {"active_id"}. Plan được chọn thành lịch
-chính, các plans khác giữ lại để so sánh (STUB-NOTE: in-memory store;
-state store runtime + version là lane B T045, wire ở phase-PR).
-Unknown id -> 404 envelope (không crash).
+In: {"itinerary_id"}. Out: {"active_id"}. Plan được chọn thành lịch chính, các plans
+khác giữ lại để so sánh (in-memory store). Unknown id -> 404 envelope.
 
-T061 wiring: the former `gate_stub` always passed; select now runs the
-canonical lane-B registry (`BE.app.services.gate.CHECKS`, 9 checks) over
-the plan's real context. Plans built by POST /v1/itinerary carry
-`_context = {trip, pois, travel}`; that context is normalised into the
-shared `(itinerary, trip, pois, matrix)` plain-dict shape `gate.py` reads.
-A plan whose context cannot be rebuilt is left selectable (legacy/stub
-plans, e.g. injectable test builders) — never fabricate a gate failure.
+Select runs the canonical gate (`gate.report`) over the plan's real context: plans built
+by POST /v1/itinerary carry `_context = {trip, pois, travel}`. A plan whose context cannot
+be rebuilt (injected test builders) stays selectable: a gate failure is never fabricated.
 """
 
 from __future__ import annotations
@@ -26,14 +20,27 @@ router = APIRouter(prefix="/v1", tags=["itinerary"])
 
 _STORE: dict = {"plans": {}, "active_id": None, "selected": None, "gate": None}
 
+# The store is in-memory and lived forever: every /v1/itinerary adds its plans
+# (each with the replan context, ~0.3 MB), so a demo box leaked a megabyte a
+# request. The oldest plans go once this many are held; the selected plan is
+# never evicted. An evicted id answers 404 like an unknown one.
+MAX_STORED_PLANS = 300
+
 
 class SelectIn(BaseModel):
     itinerary_id: str
 
 
 def register(plans: list[dict]) -> None:
+    store = _STORE["plans"]
     for p in plans:
-        _STORE["plans"][p["itinerary_id"]] = p
+        store.pop(p["itinerary_id"], None)  # re-registering moves it to the newest end
+        store[p["itinerary_id"]] = p
+    keep = {_STORE["active_id"], _STORE["selected"]} | {p["itinerary_id"] for p in plans}
+    for old in [pid for pid in store if pid not in keep]:
+        if len(store) <= MAX_STORED_PLANS:
+            break
+        del store[old]
 
 
 def get_store() -> dict:

@@ -177,6 +177,62 @@ class TestRealSnapshotPlanning(unittest.TestCase):
                                               "event": {"type": "rain"}, "completed": [first]}).json()
         self.assertEqual(out["mode"], "plan", out.get("reason"))
 
+    def test_an_all_day_place_is_planned_with_its_lunch_on_site(self):
+        # Bà Nà Hills (7 hours, the best-known attraction of the snapshot) gave an
+        # EMPTY plan, asked for by name or by wish: lunch in town, then no time left.
+        park = next(pid for pid, p in self.pois.items() if p["name"] == "Sun World Bà Nà Hills")
+        for trip in ({"must_visit": [park]}, {"activities": ["cáp treo"]}):
+            with self.subTest(trip=trip):
+                _, plan = self.plan(profile=COUPLE, budget=3000000, travelers=2, **trip)
+                self.assertTrue(plan["passed"], plan.get("warnings"))
+                stops = {a["poi_id"]: a for a in plan["activities"]}
+                self.assertIn(park, stops)
+                self.assertLessEqual(stops[park]["start"], "11:00")
+                self.assertGreaterEqual(stops[park]["end"], "13:00")
+                self.assertEqual(plan["template"]["lunch_on_site"], park)
+                self.assertIsNone(plan["template"]["lunch_restaurant"])
+                self.assertGreaterEqual(len(stops), 4)   # the evening in town is planned too
+                self.assertEqual(plan["template"]["relaxed_step"], 0)
+                self.assertTrue(any("bua trua an tai" in w for w in plan["warnings"]))
+
+    def test_each_day_of_a_trip_is_planned_on_its_own_forecast(self):
+        # The forecast was matched by hour only: every day of every trip got the first
+        # day's weather. Dry today, rain tomorrow: only day 2 is planned around the rain,
+        # and an undated trip says which days of the forecast it assumed.
+        def hours(date, rain):
+            return [{"at": f"{date}T{h:02d}:00", "temp_c": 27.0, "rain_prob": rain} for h in range(24)]
+        week = {"source": "open-meteo", "stale": False,
+                "hourly": hours("2026-11-11", 0.0) + hours("2026-11-12", 0.9)}
+        body = {"trip": {"start_time": "08:00", "end_time": "20:00", "budget": 4000000,
+                         "travelers": 2, "days": 2, "profile": COUPLE},
+                "profiles": ["balanced"]}
+        with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast", return_value=week):
+            plan = client.post("/v1/itinerary", json=body).json()["plans"][0]
+        self.assertTrue(plan["passed"], plan.get("warnings"))
+        rain = [w for w in plan["warnings"] if "du bao mua" in w]
+        self.assertEqual(len(rain), 1, plan["warnings"])
+        self.assertTrue(rain[0].startswith("ngay 2: du bao mua 08:00-20:00 (toi da 90%)"), rain)
+        self.assertIn("chua co ngay di nen dung du bao ngay 2026-11-12", rain[0])
+        # Nobody is sent to the beach or a park on the wet day; the dry day keeps the choice.
+        open_air = [poi_category(self.pois[a["poi_id"]]) for a in plan["activities"]
+                    if a["day"] == 2 and poi_category(self.pois[a["poi_id"]]) in ("beach", "park")]
+        self.assertEqual(open_air, [])
+
+    def test_spending_level_changes_what_the_days_tables_cost(self):
+        # The same restaurants came back at spending 1, 2 and 3: the answer only fed
+        # the rank list. A thrifty couple now eats at the cheap tables, a premium one
+        # does not, and each is still a full passing day.
+        def meal_levels(level):
+            _, plan = self.plan(profile=dict(COUPLE, spending_level=level), budget=3000000, travelers=2)
+            self.assertTrue(plan["passed"], plan.get("violations"))
+            levels = [p.get("price_level") or 2 for p in self.stops(plan) if poi_category(p) == "restaurant"]
+            self.assertGreaterEqual(len(levels), 2)             # lunch and dinner
+            return levels
+
+        thrifty, premium = meal_levels(1), meal_levels(3)
+        self.assertEqual(set(thrifty), {1}, thrifty)
+        self.assertGreater(sum(premium) / len(premium), sum(thrifty) / len(thrifty))
+
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])
         self.assertTrue(plan["passed"], plan.get("violations"))

@@ -101,6 +101,11 @@ class TestSolverBudget(unittest.TestCase):
         self.assertGreater(itinerary_mod.PLAN_WALL_LIMIT_S,
                            5 * itinerary_mod.PLAN_DETERMINISTIC_TIME)
 
+    def test_the_published_table_scores_the_planner_as_it_ships(self):
+        from BE.eval import baselines
+        self.assertEqual(baselines.EVAL_DETERMINISTIC_TIME, itinerary_mod.PLAN_DETERMINISTIC_TIME)
+        self.assertEqual(baselines.EVAL_WORKERS, itinerary_mod.PLAN_WORKERS)
+
 
 class TestRouterParallelRefill(unittest.TestCase):
     """Stub planner: every profile first returns the SAME day (Jaccard 1.0)."""
@@ -130,8 +135,7 @@ class TestRouterParallelRefill(unittest.TestCase):
 
     def test_conflicts_are_resolved_by_constrained_resolves(self):
         client = TestClient(main_mod.app)
-        with mock.patch.object(itinerary_mod, "_get_plan_builder",
-                               return_value=self._builder):
+        with mock.patch.object(itinerary_mod, "build_plan", self._builder):
             r = client.post("/v1/itinerary", json={"trip": self.TRIP})
         self.assertEqual(r.status_code, 200, r.text)
         plans = r.json()["plans"]

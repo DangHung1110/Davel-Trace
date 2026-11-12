@@ -8,10 +8,6 @@ categories, locked rest window, late end). Drops are surfaced as warnings.
 A legacy request that never sent `profile` keeps the previous unconstrained
 behaviour (template name None).
 
-Retrieval/ranking are lane C; feasibility planning is owned by lane B. Until
-that service is present, the endpoint fails explicitly instead of presenting
-the former rank-order stub as a real itinerary.
-
 GET /v1/itinerary/{id} (contracts/api.md "đọc lịch", offline cache key) reads
 a stored plan back. The body is the same public plan object POST /v1/itinerary
 returns (leading-underscore context keys stripped), so a client can cache the
@@ -37,7 +33,6 @@ an objective within the run-to-run noise of the sequential search.
 
 from __future__ import annotations
 
-import importlib
 import os
 from concurrent.futures import ThreadPoolExecutor
 from uuid import uuid4
@@ -61,6 +56,7 @@ from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
 from BE.app.services import trip_ctx
 from BE.app.services.optimizer import POOL_DEFAULT_BAND
+from BE.app.services.profiles import build_plan
 
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
@@ -92,19 +88,6 @@ class ItineraryIn(BaseModel):
     profiles: list[str] = ["savings", "balanced", "experience"]
 
 
-def _get_plan_builder():
-    """Return lane B's profile planner when available, otherwise fail closed."""
-    module_name = "BE.app.services.profiles"
-    try:
-        profiles_svc = importlib.import_module(module_name)
-    except ModuleNotFoundError as exc:
-        if exc.name == module_name:
-            return None
-        raise
-    builder = getattr(profiles_svc, "build_plan", None)
-    return builder if callable(builder) else None
-
-
 # One worker and a budget of WORK, not seconds: the same request gets the same plan
 # at any load (measured on one machine; another solver build or a machine that falls
 # back to the rule because it cannot load the PATM model may differ), a request costs
@@ -112,15 +95,13 @@ def _get_plan_builder():
 # out of time and returning nothing.
 # Measured on 7 scenarios at 5 s wall on 4 workers: 4/21 plans repeated, 43 CPU s a
 # request; at 6 work units on 1 worker: 21/21 repeated, 18 CPU s, same stops and rating.
+# The budget was 8 units under CP-SAT's default presolve; with the lighter presolve of
+# `optimizer.SEARCH_PRESOLVE_ITERATIONS` 5 units reach a better day sooner (the numbers
+# are with those settings).
 PLAN_WORKERS = 1
-PLAN_DETERMINISTIC_TIME = 8.0
+PLAN_DETERMINISTIC_TIME = 5.0
 # Only a last guard for an overloaded machine; it should never be what stops a solve.
 PLAN_WALL_LIMIT_S = 60.0
-
-
-def _load_cells(snapshot_dir: str):
-    """Matrix cells (legacy or dense), parsed once per file version."""
-    return matrix_svc.load_cells(snapshot_dir)
 
 
 @router.post("/itinerary")
@@ -142,13 +123,6 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     except (FileNotFoundError, NotADirectoryError):
         return error("SNAPSHOT_MISSING",
                      f"snapshot dir {settings.snapshot_dir} chua co (doi lane A T003b)", 503)
-
-    # The lane-B planner is intentionally optional on this branch. Do not
-    # silently substitute a fake itinerary if its real feasibility seam is absent.
-    builder = _get_plan_builder()
-    if builder is None:
-        return error("PLANNER_UNAVAILABLE",
-                     "dich vu lap lich lane B chua kha dung tren branch nay", 501)
 
     trip = body.trip.model_dump()
     trip["meals"] = True  # a planned day eats: lunch and dinner when it covers them
@@ -175,11 +149,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         trip.pop("profile", None)
     tpl_name = templates.select_template(profile) if profile_provided else ""
 
-    # NOTE(test-local, chua commit): luoi an toan — must_visit rac tu parser
-    # (ten mon an thay vi dia diem) se lam optimizer infeasible -> plan rong.
-    # Chi giu muc khop poi_id hoac ten POI trong snapshot; con lai rot xuong
-    # warnings chu khong giet ca plan. Cung loai bo must_visit bi hard-filter
-    # ho so hoac khong hop template (ly do ghi vao warnings).
+    # must_visit rac tu parser (ten mon an thay vi dia diem) se lam optimizer vo
+    # nghiem. Chi giu muc khop poi_id hoac ten POI trong snapshot, khong bi
+    # hard-filter ho so va hop template; con lai xuong warnings.
     name_to_id = {(p.get("name") or "").strip().lower(): pid
                   for pid, p in by_id.items()}
     kept_must, dropped_must = [], []
@@ -209,7 +181,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
     # Trip context (dynamic state): live weather for the trip hours + the
     # conditional meal rhythm + the hourly traveler state. It closes the
-    # rank rain_prob dead branch (rain_at per hour, max over the trip) and
+    # rank rain_prob dead branch (rain per hour, max over the trip) and
     # feeds the satiety/fatigue/heat/dip/evening rules. Built even without a
     # profile (weather/time are universal) but only a profile turns on the
     # state multipliers (dynamic_state), so legacy requests stay identical.
@@ -231,7 +203,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         user,
         {**ctx, "hour": trip["start_time"]},
     )
-    cells = _load_cells(settings.snapshot_dir)
+    cells = matrix_svc.load_cells(settings.snapshot_dir)
 
     drop_counts: dict[str, int] = {}
     verified_drops = [d for d in profile_drops
@@ -273,15 +245,26 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             plan.pop("warnings", None)
         return plan
 
+    day_contexts = {(trip.get("date") or "", 0): ctx}
+
+    def day_ctx(day_trip: dict) -> dict:
+        """The context of one day of the trip: day 2 has the forecast of ITS date, or
+        of the day after the first when the trip has no date (the fetch is memoized,
+        so this costs a dictionary and no network)."""
+        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0))
+        if key not in day_contexts:
+            day_contexts[key] = trip_ctx.build(day_trip, profile if profile_provided else {})
+        return day_contexts[key]
+
     def build_one(profile_name: str, pool_size: int = 1,
                   deterministic_time: float = PLAN_DETERMINISTIC_TIME, **extra) -> dict:
         def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
             # A solution pool is one day's alternatives: a longer trip plans argmax days.
             several = day_trip is not trip
-            return dict(builder(
+            return dict(build_plan(
                 profile=profile_name, trip=day_trip,
                 ranked=[r for r in ranked if r.get("poi_id") not in used],
-                pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=ctx,
+                pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=day_ctx(day_trip),
                 pool_size=1 if several else pool_size,
                 timeout_s=PLAN_WALL_LIMIT_S, workers=PLAN_WORKERS,
                 deterministic_time=deterministic_time,

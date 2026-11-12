@@ -23,11 +23,11 @@ experience) kèm tiền/điểm/lý do khác biệt. `POST /v1/itinerary/select`
 `{"itinerary_id": "<balanced>"}` → `{"active_id": ...}`.
 Lời dẫn: "Ba phương án, chốt một — hai cái còn lại để so sánh."
 
-## Scene 4 — GPS mock + rain replan (60s)
+## Scene 4 — Rain replan (60s)
 
-Replay `data/gps/demo_day.json` (Sơn Trà → Mỹ Khê, 6 điểm).
-Tới 13:30 trigger `rain/high` → replan: completed giữ nguyên,
-điểm outdoor còn lại đổi vào nhà + lý do "mưa 80%".
+`POST /v1/replan` với `{"itinerary_id": "<balanced>", "event": {"type": "rain"},
+"completed": [<các điểm đã đi>]}` → completed giữ nguyên, điểm ngoài trời còn lại
+bị bỏ, xếp lại phần còn lại trong ngày.
 Lời dẫn: "Trời mưa giữa đường — đã xong thì giữ, còn lại xếp lại."
 
 ## Scene 5 — Budget alerts (30s)

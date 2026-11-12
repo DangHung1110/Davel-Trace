@@ -1,77 +1,23 @@
-"""Layer-1 soft/quality rules (test-local data-quality pass), one small module.
+"""Soft/quality rules and the primitives every layer shares.
 
-Why here: the gate (A1) and the soft layer (A2/B1/B2/E2) must agree on what a
-"restaurant" / "bar" is and where the meal slots are. This module owns those
-primitives so `gate.py`, `validator.py`, `rank.py` and `scorer.py` all read
-the same definitions.
+The gate, the validator, the optimizer, the ranker and the scorer must agree on what
+a restaurant or a bar is, where the meal slots are and when a rest starts, so those
+definitions live here once. The HARD rules built on them (A1, CAFE_CAP, CATEGORY_CAP,
+NO_CONSECUTIVE, REST_FOLLOWS_LUNCH) and F1 are in `gate.py`; rule status is declared
+once in `gate.RULE_FREEZE`.
 
-Rules
------
-- A2 (soft, ACTIVE/canonical meal spacing): two `restaurant` POIs less than
-  2.5h apart (START to START), regardless of meal-slot labels -> split meal.
-  Pair penalty on the edge (folded into `scorer.edge_scores`) plus a
-  plan-level issue; the optimizer also carries a pairwise A2 objective term
-  (gate A1 only guards the hard slot boundary, so 10:49 vs 11:00 slips past
-  it). A2 is the ONE owner of "two meals too close in time"; B1's same-type
-  term is folded into the same restaurant edge, not a second rule.
-- B1 (soft, DEPRECATED as an independent rule): the old "two consecutive
-  same-type POIs" edge penalty. It is the soft mirror of the HARD
-  NO_CONSECUTIVE rule, so NO_CONSECUTIVE is canonical; B1 survives only as
-  the edge-weight term the optimizer reads (see `gate.RULE_FREEZE`).
-- B2 (soft, DEPRECATED as an independent rule): "more than two same-type
-  POIs in one day". The hard day-level caps own counting now: CATEGORY_CAP
-  (non-food, cap 1) and CAFE_CAP (cafe, cap 2). B2 survives only as a
-  report-only penalty for the types those caps deliberately exclude
-  (`gate.RULE_FREEZE`).
-- E2 (soft, ACTIVE): `bar`/`nightlife` starting before 17:00 -> rank time_fit
-  penalty (a bar in the morning is a semantic absurdity, not a hard error).
+- A2 (active): two restaurants under 2.5h apart, START to START. An edge penalty
+  (`scorer.edge_scores`), a plan issue and an optimizer term, because gate A1 only
+  guards the slot boundary: 10:49 vs 11:00 slips past it.
+- B1 (deprecated): two consecutive same-type POIs. Soft mirror of NO_CONSECUTIVE; it
+  survives as the edge-weight term the optimizer reads.
+- B2 (deprecated): more than two same-type POIs in a day. Report-only, for the types
+  CATEGORY_CAP and CAFE_CAP leave out.
+- E2 (active): `bar`/`nightlife` before 17:00, a rank time_fit penalty.
 
-Freeze note: rule status (active / deprecated + canonical owner + reason) is
-declared once in `gate.RULE_FREEZE`; this module never deletes a rule on its
-own, it only marks the deprecated ones here and keeps their numbers stable so
-scoring/ranking does not shift.
-
-HARD sequence rules (they live in `gate.py`, the primitives here):
-- CAFE_CAP: one cafe per day by default. A second cafe is allowed only when
-  the two sit in DIFFERENT dayparts (morning start < 11:00 AND afternoon
-  start > 13:00) AND the profile shows a cafe need (food_prefs/activities
-  mention cafe/coffee, or pace == 3). More than two cafes is always HARD.
-  `cafe_need`/`cafe_cap`/`cafe_daypart` are the single definition used by
-  the gate AND the optimizer, so the solver avoids the cap instead of
-  producing a plan the gate then rejects.
-- CATEGORY_CAP: at most ONE non-food POI per category per day
-  (`NON_FOOD_CAPPED`: market/landmark/beach/attraction/temple/museum/park/
-  viewpoint). Two markets or two beaches in one day is a broken plan. Meals
-  are exempt (A1 + CAFE_CAP own them). `is_capped_category` /
-  `category_allowed` are the shared primitives: the gate check, the
-  optimizer constraint and the greedy seed all read them.
-- NO_CONSECUTIVE (canonical): two back-to-back POIs of the same category are
-  HARD. No exemptions (the old B1 cafe->cafe morning exemption only survives
-  as a soft edge penalty; adjacency is now a broken plan, not a taste choice).
-  `same_category_edges` is the ONE adjacency scan: the gate check, the
-  validator offender list and B1 all read it.
-- NO_ADJACENT_FOOD (deprecated, subsumed by NO_CONSECUTIVE): "no two
-  consecutive `restaurant` POIs, whatever the cuisine". It is a strict subset
-  of NO_CONSECUTIVE (both read `poi_category`), so it stays in the registry
-  as a naming/compat layer computed by `same_category_edges(..., only=
-  "restaurant")`, not as a second predicate.
-- REST_FOLLOWS_LUNCH: the siesta window START is the lunch restaurant's END
-  time (no fixed 13:00 anchor). Length by pace (60/45/30 min); a late lunch
-  (> 15:00) shrinks it to fit the day, never below REST_MIN_FLOOR (20 min).
-  `rest_span`/`lunch_activity`/`rest_minutes` are the single definition used
-  by gate, validator, optimizer (via templates) and the plan report.
-
-A1 (HARD: at most one restaurant per meal slot) lives in `gate.py`; it uses
-`MEAL_SLOTS`/`meal_slot`/`poi_category` from here.
-F1 (SOFT: every day needs >=1 food AND >=1 culture/nature/sightseeing POI)
-also lives in `gate.py`, but is listed under `SOFT_CHECKS` so it only
-reports a violation/penalty and never fail-closes a plan. The category
-sets below are the single definition used by gate/validator/repair.
-
-Edge penalties (A2/B1) are small on purpose: they only nudge the optimizer's
-transition choice (q_ij), they never outweigh a POI's own score.
-B2/E2 are sequence-level; the CP-SAT objective has no day-level count term,
-so they are reported on the plan (`soft_penalties`) for review/ranking.
+Edge penalties are small on purpose: they nudge the optimizer's transition choice
+(q_ij) and never outweigh a POI's own score. B2/E2 are sequence-level, so they are
+only reported on the plan (`soft_penalties`).
 """
 
 from __future__ import annotations
@@ -121,6 +67,13 @@ REST_START_TOLERANCE = 15                  # gate: rest may start <=15 min late
 DINNER_REQUIRED = (17 * 60 + 30, 20 * 60 + 30)
 DINNER_MIN_END = 19 * 60 + 30              # a day ending earlier has no room for it
 DINNER_LATEST_START = 18 * 60              # ... and one starting later already ate
+# A place people spend most of a day at (a hill park with its own restaurants: Bà Nà,
+# VinWonders, an island tour) feeds them too. A stay this long that runs through the
+# whole lunch window IS the lunch, eaten on site: no restaurant has to be driven to in
+# the middle of it, and the rest after lunch is taken there. Without this the day's
+# best-known attraction could not be planned at all (lunch at 11:00 in town, then a
+# seven-hour park until after dinner time).
+ALL_DAY_MIN = 300
 
 
 # F1 (soft category quota): a day needs at least one food stop and at least
@@ -132,6 +85,10 @@ SIGHTSEEING_CATEGORIES = frozenset({
     "attraction", "landmark", "museum", "park", "temple",
     "beach", "viewpoint", "nature",
 })
+
+# Open-air categories, and the `outdoor_bias` view of a POI built on them: the
+# ranker, the traveller state and the solver's lean share this one definition.
+OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
 
 SAME_TYPE_PENALTY = 0.3         # B1, edge-score units
 RESTAURANT_PAIR_PENALTY = 0.45  # A2
@@ -180,6 +137,11 @@ def poi_category(poi: dict | None) -> str:
     return str(poi.get("cat") or poi.get("type") or "").strip().lower()
 
 
+def is_outdoor(poi: dict | None) -> bool:
+    """What `outdoor_bias` moves: an open-air category, or a place the weather decides."""
+    return poi_category(poi) in OUTDOOR_CATEGORIES or bool((poi or {}).get("weather_sensitive"))
+
+
 def is_capped_category(category: str) -> bool:
     """Is this category under the HARD one-per-day cap (CATEGORY_CAP)?"""
     return str(category or "").strip().lower() in NON_FOOD_CAPPED
@@ -198,13 +160,16 @@ def category_allowed(category: str, used: dict[str, int] | None,
     return int((used or {}).get(cat, 0)) < int(cap)
 
 
-def meal_slot(start: str) -> int | None:
-    """Index of the meal slot containing `start`, or None outside slots."""
-    minutes = to_min(start)
+def meal_slot_at(minutes: int) -> int | None:
+    """Index of the meal slot containing this minute, or None outside slots."""
     for idx, (lo, hi) in enumerate(MEAL_SLOTS):
         if lo <= minutes < hi:
             return idx
     return None
+
+
+def meal_slot(start: str) -> int | None:
+    return meal_slot_at(to_min(start))
 
 
 def meal_slots(trip: dict | None) -> list[dict]:
@@ -242,7 +207,6 @@ def covers_dinner(trip: dict | None) -> bool:
 # sun, a pagoda at 20:00 are open and still wrong. Each entry lists the windows a
 # whole visit must fit inside, on the same clock as `open_windows`.
 _EVENING = 26 * 60
-_ALL_DAY = ((5 * 60, _EVENING),)
 _MEALS = ((10 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
 _EATERY = ((6 * 60 + 30, 15 * 60), (17 * 60, 22 * 60 + 30))
 _DAYLIGHT = ((5 * 60, 18 * 60 + 15),)
@@ -304,17 +268,16 @@ def is_sightseeing(poi: dict | None) -> bool:
     return poi_category(poi) in SIGHTSEEING_CATEGORIES
 
 
-def in_nightlife_type(poi: dict | None) -> bool:
-    return poi_category(poi) in NIGHT_TYPES
-
-
 def cafe_daypart(start: str) -> str | None:
+    return cafe_daypart_at(to_min(start))
+
+
+def cafe_daypart_at(minutes: int) -> str | None:
     """CAFE_CAP daypart of a cafe start: "morning" (<11:00) / "afternoon"
     (>13:00), else None (the 11:00-13:00 window is not a valid 2nd-cafe slot).
 
     Keyed by activity START, like the meal slots (gate A1).
     """
-    minutes = to_min(start)
     if minutes < CAFE_MORNING_END:
         return "morning"
     if minutes > CAFE_AFTERNOON_START:
@@ -322,7 +285,7 @@ def cafe_daypart(start: str) -> str | None:
     return None
 
 
-def _pace(profile: dict) -> int:
+def pace_of(profile: dict | None) -> int:
     try:
         pace = int((profile or {}).get("pace") or 2)
     except (TypeError, ValueError):
@@ -337,7 +300,7 @@ def cafe_need(profile: dict | None) -> bool:
     must not grant itself a second cafe from POI names.
     """
     profile = profile or {}
-    if _pace(profile) >= CAFE_FAST_PACE:
+    if pace_of(profile) >= CAFE_FAST_PACE:
         return True
     prefs = list(profile.get("food_prefs") or []) + list(
         profile.get("activities") or [])
@@ -396,6 +359,27 @@ def lunch_activity(activities: list[dict], pois: dict) -> dict | None:
     return None
 
 
+def holds_lunch(start: int, end: int) -> bool:
+    """Does a stay of [start, end] minutes feed its visitors lunch on site?
+
+    Long enough to be an all-day place (`ALL_DAY_MIN`) and covering every minute a
+    lunch could start at, so no restaurant could be reached in between anyway.
+    """
+    return (end - start >= ALL_DAY_MIN and start <= LUNCH_REQUIRED[0]
+            and end >= LUNCH_REQUIRED[1])
+
+
+def lunch_on_site(activities: list[dict], pois: dict | None = None) -> dict | None:
+    """The all-day stop this day's lunch is eaten at, None when a restaurant holds
+    the lunch (or nothing does). `pois` only rules out a long sit in a restaurant."""
+    for act in sorted(activities or [], key=lambda a: a.get("start", "")):
+        if is_restaurant((pois or {}).get(act.get("poi_id"))):
+            continue
+        if holds_lunch(to_min(act.get("start")), to_min(act.get("end"))):
+            return act
+    return None
+
+
 def rest_minutes(profile: dict | None, lunch_end: int | None = None,
                  deadline: int | None = None) -> int:
     """Siesta length by pace; shrunk to fit a late lunch (never < floor).
@@ -405,7 +389,7 @@ def rest_minutes(profile: dict | None, lunch_end: int | None = None,
     (`deadline - lunch_end`) so the plan is not forced past its horizon,
     with REST_MIN_FLOOR as the hard floor. The shrink is reported by callers.
     """
-    pace = _pace(profile)
+    pace = pace_of(profile)
     length = REST_MIN_BY_PACE[pace]
     if lunch_end is not None and lunch_end > REST_LATE_LUNCH:
         if deadline is None:
@@ -427,7 +411,7 @@ def rest_span(activities: list[dict], pois: dict, profile: dict | None,
     if lunch is None:
         return None
     lunch_end = to_min(lunch.get("end"))
-    requested = REST_MIN_BY_PACE[_pace(profile)]
+    requested = REST_MIN_BY_PACE[pace_of(profile)]
     minutes = rest_minutes(profile, lunch_end, deadline)
     return {
         "start": lunch_end,
@@ -450,8 +434,6 @@ def effective_rest(span: dict | None, declared: dict | None) -> dict | None:
     start = to_min(rest["start"]) if rest.get("start") else span["start"]
     end = to_min(rest["end"]) if rest.get("end") else start + span["minutes"]
     return {**span, "start": start, "end": end, "minutes": end - start}
-
-
 
 
 def edge_penalty(a: dict | None, b: dict | None,
@@ -483,7 +465,6 @@ def edge_penalty(a: dict | None, b: dict | None,
         elif cb in FOOD_CATEGORIES and satiety > 0.6:
             penalty -= EDGE_FOOD_FULL_CAFE_PENALTY
     return round(penalty, 3)
-
 
 
 def plan_penalties(activities: list[dict], pois: dict,

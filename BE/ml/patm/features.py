@@ -23,12 +23,13 @@ Exposure features read ``smart_tags.outdoor_exposure`` /
 ``BE.ml.data.enrich_snapshot``) and fall back to the coarse canonical-type
 preset when a POI is not enriched yet.  ``rain_cover`` is mapped to
 enclosed 0.0 / mixed 0.5 / covered 0.7 / open 1.0 / unknown 0.5.
-
-[*] Hook fulfilled: `train.py` interim 10-feature extractor replaced by
-`extract` (same ordered-pair input, 21 outputs).
 """
 
 from __future__ import annotations
+
+from BE.ml.patm.estimate_duration import canonical_category
+from BE.ml.patm.prior import logprob
+from BE.ml.weather_label.labeler import type_exposure
 
 FEATURE_NAMES = (
     "d_intensity", "d_rating", "d_price", "d_duration",
@@ -59,11 +60,7 @@ def _num(v, default=0.0) -> float:
 
 
 def _canon(raw: str) -> str:
-    try:
-        from BE.ml.patm.estimate_duration import canonical_category
-        return canonical_category(raw or "")
-    except Exception:  # noqa: BLE001 - prior JSON absent in other worktrees
-        return raw or ""
+    return canonical_category(raw or "")
 
 
 def _is_food(p: dict) -> float:
@@ -84,12 +81,8 @@ def _clamp01(value) -> float:
 
 
 def _type_default(p: dict, key: str):
-    """Coarse canonical-type exposure preset; None when unavailable."""
-    try:
-        from BE.ml.weather_label.labeler import type_exposure
-        return type_exposure(_canon(p.get("type", ""))).get(key)
-    except Exception:  # noqa: BLE001 - other worktrees may lack the labeler
-        return None
+    """Coarse canonical-type exposure preset."""
+    return type_exposure(_canon(p.get("type", ""))).get(key)
 
 
 def _outdoor(p: dict) -> float:
@@ -131,14 +124,8 @@ def extract(a: dict, b: dict, user: dict | None = None,
     ia, ib = _num(a.get("intensity"), 2), _num(b.get("intensity"), 2)
     fa, fb = _is_food(a), _is_food(b)
     sa, sb = _sens(a), _sens(b)
-    try:
-        from BE.ml.patm.estimate_duration import canonical_category
-        from BE.ml.patm.prior import logprob
-        hour = int(_num(c.get("hour"), 9))
-        m_prior = logprob(canonical_category(b.get("type", "")),
-                          canonical_category(a.get("type", "")), hour)
-    except Exception:  # noqa: BLE001 - prior JSON absent in other worktrees
-        m_prior = 0.0
+    m_prior = logprob(_canon(b.get("type", "")), _canon(a.get("type", "")),
+                      int(_num(c.get("hour"), 9)))
     return [
         # A: attr deltas
         ia - ib,

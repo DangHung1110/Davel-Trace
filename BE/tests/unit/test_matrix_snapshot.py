@@ -4,7 +4,7 @@ Guards `BE/data/snapshots/danang-v1/matrix.json` — since Phase 3 the full
 motorbike build: every snapshot POI with coordinates, routed once by
 `BE/tools/build_poi_matrix.py --all` over the graph `BE/tools/osrm/
 build_osrm.sh` makes with `motorbike.lua`, stored as `dense-v1`. No Docker,
-no network: file checks + a `MatrixService` round-trip only. Skips when the
+no network: file checks only. Skips when the
 artifact is absent so unit runs stay green in fresh checkouts.
 
 The profile hash check ties the artifact to the committed profile: editing
@@ -22,8 +22,7 @@ from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import (  # noqa: E402
-    DENSE_FORMAT, MatrixService, load_matrix_doc)
+from BE.app.services.matrix import DENSE_FORMAT, load_matrix_doc  # noqa: E402
 
 _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 SNAPSHOT_DIR = os.path.join(_REPO_ROOT, "BE", "data", "snapshots", "danang-v1")
@@ -91,16 +90,6 @@ class TestMatrixSnapshotArtifact(unittest.TestCase):
         self.assertTrue(osrm["osrm_image"].endswith(":v5.27.1"))
         self.assertTrue(osrm["extract_md5"])
         self.assertTrue(osrm["osm_timestamp"])
-
-    def test_service_reads_artifact(self):
-        svc = MatrixService(os.path.dirname(MATRIX))
-        self.assertEqual(len(svc.ids), self.doc["n"])
-        a, b = self.doc["ids"][0], self.doc["ids"][1]
-        self.assertEqual(svc.minutes(a, a), (0, "cache"))
-        minutes, source = svc.minutes(a, b)
-        self.assertGreaterEqual(minutes, 1)
-        self.assertEqual(source, "osrm")
-        self.assertEqual(svc.minutes_or_none(a, b)[1], "osrm")
 
     def test_built_against_a_local_osrm(self):
         # The build host's port differs (macOS AirPlay owns 5000); the

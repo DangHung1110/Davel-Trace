@@ -16,11 +16,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services import optimizer as opt  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
-    all_pass,
     check_cafe_cap,
     check_no_adjacent_food,
     check_no_consecutive,
     check_rest_follows_lunch,
+    report,
 )
 from BE.app.services.validator import validate  # noqa: E402
 
@@ -146,7 +146,7 @@ class TestNoConsecutiveGate(unittest.TestCase):
         self.assertEqual(rep["details"]["NO_CONSECUTIVE"], ["b1->b2"])
         self.assertEqual(rep["details"]["CATEGORY_CAP"], ["b1", "b2"])
         self.assertEqual(rep["details"]["HCS"], ["b1", "b2", "b1->b2"])
-        self.assertEqual(all_pass(itin, TRIP, pois, matrix)["failed"],
+        self.assertEqual(report(itin, TRIP, pois, matrix)["failed"],
                          ["CATEGORY_CAP", "NO_CONSECUTIVE", "HCS"])
 
 

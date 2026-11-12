@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T17:06:18",
+ "generated_at": "2026-11-12T14:36:15",
  "suite": "BE/eval/gold/t051_scoped_suite.json",
  "snapshot": "BE/data/snapshots/danang-v1",
  "coverage": {
@@ -634,13 +634,13 @@
    },
    "soft_mean": {
     "STR": 1.0,
-    "DTU": 0.762,
+    "DTU": 0.7559,
     "SSR": 1.0,
-    "CSM": 0.5804,
+    "CSM": 0.5983,
     "EDI": 1.0,
-    "AQE": 0.9132
+    "AQE": 0.913
    },
-   "mean_rating": 4.5579
+   "mean_rating": 4.5608
   },
   "llm-only": {
    "status": "SKIP",
@@ -684,8 +684,8 @@
    "target": "hybrid taste-fit >= 1.10x shortest-path baseline",
    "metric": "mean trusted rating of the plan (preference proxy)",
    "distance_only": 4.4738,
-   "hybrid": 4.5579,
-   "ratio": 1.0188,
+   "hybrid": 4.5608,
+   "ratio": 1.0194,
    "undecidable": false,
    "pass": false
   },

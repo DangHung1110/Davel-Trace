@@ -1,11 +1,10 @@
 """Rolling-horizon replan + mode gate + version++ (T046, lane B).
 
-replan(state, event, pois, travel, trip): event is a DynamicEvent dict
-passed DIRECTLY (STUB-NOTE: lane-A event_clf T044 classifies text into
-events at phase-PR). Completed activities are fixed (T045 contract);
-only remaining is re-optimized (T017), then validated (T018).
+replan(state, event, pois, travel, trip): event is a DynamicEvent dict.
+Completed activities are fixed (T045 contract); only remaining is
+re-optimized (T017), then validated (T018).
 
-Horizon is the ETB hard deadline `_deadline(trip)` = min(end_time,
+Horizon is the ETB hard deadline `deadline(trip)` = min(end_time,
 return_time): a `return_time` is a hard within-day cap and is NEVER
 silently stretched to end_time (T046). Used for the optimizer's Tmax
 and the opening-hours fallback window.
@@ -19,8 +18,6 @@ from __future__ import annotations
 
 from BE.app.services import scorer
 from BE.app.services import state as store
-from BE.app.services.budget import tighten_budget
-from BE.app.services.common import hh, party_size, to_min, total_fee
 from BE.app.services.gate import check_profile_safe
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
@@ -30,7 +27,8 @@ from BE.app.services.soft_rules import (
     rest_span, time_fit_windows)
 from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
-from BE.common import effective_fee, poi_open_windows, trusted_rating
+from BE.common import (
+    deadline, effective_fee, party_size, poi_open_windows, to_min, total_fee, trusted_rating)
 
 
 # Lunch has to start by then (gate REST_FOLLOWS_LUNCH).
@@ -40,17 +38,6 @@ LUNCH_SUBSTITUTES = 5
 # plan gets the same answer, and these small solves finish far inside the budget.
 REPLAN_WORKERS = 1
 REPLAN_DETERMINISTIC_TIME = 2.0
-
-
-def _deadline(trip: dict) -> int:
-    """ETB hard within-day deadline: min(end_time, return_time) (T046).
-
-    `return_time` (when set) is a hard cap — the horizon is never
-    silently stretched to `end_time`. Defaults to end_time "18:00".
-    """
-    end = to_min(trip.get("end_time", "18:00"))
-    rt = trip.get("return_time")
-    return min(end, to_min(rt)) if rt else end
 
 
 def _event_drops(event: dict, remaining: list[dict], by_id: dict) -> set[str]:
@@ -75,11 +62,10 @@ def replan(state: dict, event: dict, pois: list[dict],
            budget_state: dict | None = None) -> dict:
     """Return {"itinerary" (versioned) | None, "mode", "changes", ...}.
 
-    `budget_state` is the lane-C raw `replan_budget()` snapshot
-    {trip_id, budget, spent, left, by_kind, alert}; when supplied, the
-    validator gates new activities against `allowed_remaining` (actual
-    funds left), not the trip's original total. `trip`/`budget_state`
-    are never mutated. Omitted -> legacy behavior (trip budget).
+    `budget_state` is the expense summary (GET /v1/expenses/summary); when
+    supplied, new activities are gated against its `left` (actual funds left),
+    not the trip's original total. `trip`/`budget_state` are never mutated.
+    Omitted -> the trip budget.
     """
     by_id = {p["poi_id"]: p for p in pois}
     completed_ids = [a["poi_id"] for a in state.get("completed", [])]
@@ -112,8 +98,8 @@ def replan(state: dict, event: dict, pois: list[dict],
     party = party_size(trip)
     done_cost = total_fee(done, by_id, party)
     allowed = None if trip.get("budget") is None else max(0, int(trip["budget"]) - done_cost)
-    if budget_state is not None:
-        allowed = tighten_budget(budget_state, trip)["allowed_remaining"]
+    if budget_state is not None:  # what is really left; overspent means nothing is
+        allowed = max(0, int(budget_state.get("left", 0)))
     max_fee = None if allowed is None else allowed // party
     gate_trip = trip if allowed is None else dict(trip, budget=allowed + done_cost)
     start = max(to_min(state.get("now", trip.get("start_time", "07:00"))),
@@ -127,7 +113,7 @@ def replan(state: dict, event: dict, pois: list[dict],
     plan_lunch = bool(limits["lunch_required"]) and not lunch_done and not lunch_missed
     blocked = None
     if lunch_done and limits["rest_after_lunch"]:
-        span = rest_span(done, by_id, trip["profile"], _deadline(trip))
+        span = rest_span(done, by_id, trip["profile"], deadline(trip))
         blocked = (span["start"], span["end"]) if span else None
     if lunch_missed:
         gate_trip = {k: v for k, v in gate_trip.items() if k != "profile"}
@@ -174,7 +160,7 @@ def replan(state: dict, event: dict, pois: list[dict],
     last_cat = poi_category(by_id.get(last_done["poi_id"])) if last_done else ""
     not_first = {pid for pid in cand_ids if pid in by_id and last_cat
                  and poi_category(by_id[pid]) == last_cat}
-    out = optimize(stub, travel2, StubTrip(start, _deadline(trip), origin_id),
+    out = optimize(stub, travel2, StubTrip(start, deadline(trip), origin_id),
                    edge_scores=q, workers=REPLAN_WORKERS,
                    deterministic_time=REPLAN_DETERMINISTIC_TIME, not_first=not_first,
                    # Universal HARD caps the gate checks: a replanned day must
@@ -253,7 +239,7 @@ def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
         floor = MEAL_SLOTS[1][0] if time_fit_windows(p) else MEAL_SLOTS[0][1]
         wins = [(max(lo, floor), hi) for lo, hi in wins if hi > floor]
     if wins is None:  # the fallback window also clamps to the deadline
-        span = (to_min(state.get("now", trip.get("start_time", "07:00"))), _deadline(trip))
+        span = (to_min(state.get("now", trip.get("start_time", "07:00"))), deadline(trip))
     else:
         span = (wins[0][0], wins[-1][1]) if wins else (0, 0)
     return StubPOI(p["poi_id"], poi_visit_min(p), *span, score,
