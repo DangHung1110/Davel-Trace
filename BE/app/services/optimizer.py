@@ -96,6 +96,19 @@ POOL_ENUM_TIMEOUT_S = 25.0      # total budget for the enumeration pass
 POOL_STEP_TIMEOUT_S = 5.0       # per member (nogood solve; warm greedy hint)
 POOL_STEP_DETERMINISTIC_TIME = 2.0  # the same, in work units, when the caller plans by work
 
+# CP-SAT settings of a search on a budget of work (`deterministic_time`). The default
+# presolve runs three passes and full probing, about four work units on an 80-POI
+# day: half of the old 8-unit budget went before the search improved on the seed.
+# One pass and light probing leave that work to the search. Measured on 72 real
+# models of danang-v1 against the best value known (reference: 24 units):
+#   default, 8 units       98.2 % mean, 69 % worst, 5 models under 95 %; request 6.4 s median, 7.8 s p95
+#   these,   5 units       99.3 % mean, 88 % worst, 1 model  under 95 %; request 5.7 s median, 6.1 s p95
+# (a request = the slowest of its three profiles). One pass with the default probing,
+# or this pair with symmetry detection off, left one day in 72 with no plan at 5
+# units; this pair left none.
+SEARCH_PRESOLVE_ITERATIONS = 1
+SEARCH_PROBING_LEVEL = 1
+
 # Completing the greedy hint (`_complete_hint`): a solve with the hinted variables
 # fixed only has to derive the rest, so it ends in milliseconds; the limits are a
 # guard, not a budget.
@@ -539,9 +552,10 @@ def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
 def _complete_hint(m, cp_model):
     """Turn the partial greedy hint into a full feasible assignment; None if it has none.
 
-    CP-SAT reads a hint only once presolve is done (3 probing passes, ~3 work units
-    on an 80-POI day) and reports NOTHING when the budget ends before that: a short
-    budget returned UNKNOWN for a day the hint already held. A solve with the hinted
+    CP-SAT reads a hint only once presolve is done (with its defaults: 3 probing
+    passes, ~3 work units on an 80-POI day; see `SEARCH_PRESOLVE_ITERATIONS`) and
+    reports NOTHING when the budget ends before that: a short budget returned
+    UNKNOWN for a day the hint already held. A solve with the hinted
     variables fixed fills in every other variable (they all follow from the arcs
     and clocks) and ends in milliseconds. Its solution becomes the complete hint,
     which the main search takes as its first incumbent, and the floor `optimize`
@@ -1088,6 +1102,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         # because the machine was busier the second time.
         solver.parameters.num_search_workers = 1
         solver.parameters.max_deterministic_time = float(deterministic_time)
+        solver.parameters.max_presolve_iterations = SEARCH_PRESOLVE_ITERATIONS
+        solver.parameters.cp_model_probing_level = SEARCH_PROBING_LEVEL
     if workers:
         solver.parameters.num_search_workers = workers
     t0 = time.monotonic()

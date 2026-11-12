@@ -95,8 +95,11 @@ class ItineraryIn(BaseModel):
 # out of time and returning nothing.
 # Measured on 7 scenarios at 5 s wall on 4 workers: 4/21 plans repeated, 43 CPU s a
 # request; at 6 work units on 1 worker: 21/21 repeated, 18 CPU s, same stops and rating.
+# The budget was 8 units under CP-SAT's default presolve; with the lighter presolve of
+# `optimizer.SEARCH_PRESOLVE_ITERATIONS` 5 units reach a better day sooner (the numbers
+# are with those settings).
 PLAN_WORKERS = 1
-PLAN_DETERMINISTIC_TIME = 8.0
+PLAN_DETERMINISTIC_TIME = 5.0
 # Only a last guard for an overloaded machine; it should never be what stops a solve.
 PLAN_WALL_LIMIT_S = 60.0
 

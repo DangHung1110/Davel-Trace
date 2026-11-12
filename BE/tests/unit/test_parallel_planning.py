@@ -101,6 +101,11 @@ class TestSolverBudget(unittest.TestCase):
         self.assertGreater(itinerary_mod.PLAN_WALL_LIMIT_S,
                            5 * itinerary_mod.PLAN_DETERMINISTIC_TIME)
 
+    def test_the_published_table_scores_the_planner_as_it_ships(self):
+        from BE.eval import baselines
+        self.assertEqual(baselines.EVAL_DETERMINISTIC_TIME, itinerary_mod.PLAN_DETERMINISTIC_TIME)
+        self.assertEqual(baselines.EVAL_WORKERS, itinerary_mod.PLAN_WORKERS)
+
 
 class TestRouterParallelRefill(unittest.TestCase):
     """Stub planner: every profile first returns the SAME day (Jaccard 1.0)."""
