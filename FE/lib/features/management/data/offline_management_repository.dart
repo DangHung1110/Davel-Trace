@@ -652,11 +652,7 @@ class OfflineManagementRepository
 
   @override
   Future<void> setActiveTrip(Trip? trip) async {
-    try {
-      await live.setActiveTrip(trip);
-    } on ApiException catch (error) {
-      if (error.code != 'NETWORK_ERROR') rethrow;
-    }
+    await live.setActiveTrip(trip);
     _localActiveTripId = trip?.id;
   }
 

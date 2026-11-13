@@ -272,6 +272,32 @@ void main() {
     expect(repository.status.pendingCount, 3);
   });
 
+  test('active-trip selection fails honestly while offline', () async {
+    final live = _LiveFake();
+    final repository = OfflineManagementRepository(
+      live: live,
+      persistence: MemoryOfflinePersistence(),
+      accountId: 'account-a',
+      clock: () => now,
+    );
+    final trip = (await repository.listTrips('profile-1')).single;
+    live.networkDown = true;
+
+    await expectLater(
+      repository.setActiveTrip(trip),
+      throwsA(
+        isA<ApiException>().having(
+          (error) => error.code,
+          'code',
+          'NETWORK_ERROR',
+        ),
+      ),
+    );
+
+    expect(repository.activeTripId, 'trip-1');
+    expect(repository.status.pendingCount, 0);
+  });
+
   test('removes a successful replay and never applies it twice', () async {
     final live = _LiveFake();
     final persistence = MemoryOfflinePersistence();
