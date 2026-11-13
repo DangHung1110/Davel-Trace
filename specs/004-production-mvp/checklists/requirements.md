@@ -32,5 +32,6 @@
 ## Notes
 
 - Validation iteration 1 completed on 2026-10-29.
+- Scope realignment revalidated on 2026-11-13: stable-planner integration and replaceable external AI assistance move into the current milestone; administration/data operations are explicitly deferred.
 - The specification intentionally requires durable shared production data and explicitly rejects in-memory/demo stores as the authoritative source.
 - Database-engine selection, code-first modeling, migration tooling, and DBeaver connection details are reserved for `$speckit-plan`, while the product-level durability requirements are already binding here.
