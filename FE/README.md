@@ -27,14 +27,17 @@ vào từng worktree. Chỉ cần Chrome để demo web, chưa cần Android emu
 Từ repo root (PowerShell):
 
 ```powershell
-& '.\.flutter-sdk\bin\flutter.bat' pub get --directory FE
-& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' pub get
+& '..\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+Pop-Location
 ```
 
 Git Bash:
 
 ```bash
-./.flutter-sdk/bin/flutter.bat run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+cd FE
+../.flutter-sdk/bin/flutter.bat run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
 ```
 
 Không dùng cú pháp PowerShell `$env:...` hoặc `&` trong Git Bash.

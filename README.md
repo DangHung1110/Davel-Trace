@@ -50,8 +50,10 @@ docker compose --env-file BE/.env up -d postgres
 Mở terminal PowerShell thứ hai:
 
 ```powershell
-& '.\.flutter-sdk\bin\flutter.bat' pub get --directory FE
-& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' pub get
+& '..\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+Pop-Location
 ```
 
 App tự căn giữa trong khung điện thoại khi chạy trên màn hình laptop. Nếu BE
@@ -60,8 +62,8 @@ server. Hướng dẫn/test đầy đủ: `specs/003-stable-planning-roadmap/qui
 Hướng dẫn platform/PostgreSQL đầy đủ:
 `specs/005-platform-foundation/quickstart.md`.
 
-PostgreSQL local dùng host `127.0.0.1`, port `5432`, database `davel_trace`,
-username `davel`; password lấy từ `BE/.env`. Compose dùng một volume chung,
+PostgreSQL local dùng host `127.0.0.1`, port theo `POSTGRES_PORT` (mẫu: `5437`), database `davel_trace`,
+username `davel`; password lấy từ `BE/.env`. `COMPOSE_PROJECT_NAME` chọn project/volume local,
 image Alpine có sẵn và log rotation để không nhân dung lượng theo worktree.
 
 Ô **Service API key** chỉ dùng cho Search/Place/Route của VietMap và có thể để trống. Khi để trống, tìm kiếm dùng Photon/OpenStreetMap và chỉ đường dùng OSRM.
@@ -90,7 +92,9 @@ login/session control, recovery, export and deletion while keeping AI optional.
 docker compose --env-file BE/.env up -d postgres
 .\.venv\Scripts\python.exe -m alembic -c BE\alembic.ini upgrade head
 .\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
-& '.\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+Pop-Location
 ```
 
 For the local verification/recovery inbox set

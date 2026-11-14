@@ -9,7 +9,7 @@ liệu authoritative; SQLite cũ chỉ còn là nguồn import/compatibility ở
 Từ repo root:
 
 ```powershell
-Copy-Item BE\.env.example BE\.env
+if (!(Test-Path BE\.env)) { Copy-Item BE\.env.example BE\.env }
 .\.venv\Scripts\python.exe -m pip install -r BE\requirements.txt
 ```
 
@@ -61,8 +61,11 @@ docker compose --env-file BE/.env up -d postgres
 docker compose --env-file BE/.env ps
 ```
 
-Compose cố định project name `davel-trace-dev`, dùng chung đúng một named
-volume giữa các worktree, chỉ pull image `postgres:16-alpine` khi thiếu và
+Compose mặc định dùng project `davel-trace-dev`; `COMPOSE_PROJECT_NAME` trong
+env có thể chọn một project/volume local riêng. Bản Task 012 trên máy này dùng
+`davel-trace-task012-demo`, cổng `5437`. Các worktree dùng cùng project sẽ dùng
+chung named volume; đổi port không tạo lại password trong volume cũ.
+Compose chỉ pull image `postgres:16-alpine` khi thiếu và
 giới hạn log ở 3 file × 10 MB. Không có application image/build cache.
 
 ```powershell
@@ -102,7 +105,7 @@ New Database Connection → PostgreSQL:
 
 ```text
 Host: 127.0.0.1
-Port: 5432 (hoặc POSTGRES_PORT trong BE/.env)
+Port: 5437 (hoặc POSTGRES_PORT trong BE/.env)
 Database: davel_trace
 Username: davel
 Password: giá trị POSTGRES_PASSWORD local

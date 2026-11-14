@@ -7,10 +7,38 @@
 - PostgreSQL and `DATABASE_URL` for lifecycle integration tests.
 - Optional Gemini Developer API key from Google AI Studio; a Gemini consumer subscription does not replace this key.
 
+## Current local checkout and database
+
+The active Task 012 checkout is now `D:\Project\PBL6`, branch
+`task/012-planning-llm-integration`. Backend settings load **this checkout's**
+`BE/.env`. The older worktree is detached at `2877e5e` and is no longer the
+running application's working directory. Do not copy an older worktree env
+over the current credentials.
+
+The existing local demo uses `COMPOSE_PROJECT_NAME=davel-trace-task012-demo`,
+`POSTGRES_PORT=5437`, database `davel_trace`, user `davel`, and the password
+in the ignored env. `DATABASE_URL` must use the same port and password.
+The example file uses placeholders and is only for a new setup.
+
+From the checkout root:
+
+```powershell
+docker compose --env-file BE/.env up -d postgres
+docker compose --env-file BE/.env ps
+```
+
+`COMPOSE_PROJECT_NAME` selects the existing project/volume even though the
+Compose file has a default name. Changing a password in env does not change
+the password already initialized in a volume. Preserve existing volumes.
+
+For DBeaver use PostgreSQL, host `127.0.0.1`, port `5437`, database
+`davel_trace`, username `davel`, password from `POSTGRES_PASSWORD` in env.
+The local schema head is `010_001`.
+
 ## Deterministic validation without AI
 
 ```powershell
-Copy-Item BE\.env.example BE\.env
+if (!(Test-Path BE\.env)) { Copy-Item BE\.env.example BE\.env }
 # Set DATABASE_URL and keep LLM_PROVIDER=disabled.
 python -m pytest BE/tests/unit BE/tests/contract -q
 python -m uvicorn BE.app.main:app --port 8000

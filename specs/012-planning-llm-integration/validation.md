@@ -32,3 +32,30 @@ Status: implementation checkpoint; **not yet converged / not merge-ready**.
 Use ignored `BE/.env`, `LLM_PROVIDER=gemini`, `GEMINI_API_KEY` and `LLM_MODEL=gemini-3.1-flash-lite`. Google currently lists a free tier for this model; availability/quota is project-specific. Gemini consumer subscriptions are not backend API credentials.
 
 References checked: [pricing](https://ai.google.dev/gemini-api/docs/pricing), [billing](https://ai.google.dev/gemini-api/docs/billing), [compatible REST](https://ai.google.dev/gemini-api/docs/openai).
+
+## Follow-up: primary checkout environment setup
+
+The task branch now runs from `D:\Project\PBL6`; the former task worktree
+remains detached at `2877e5e`. Existing root Gemini settings were preserved,
+and ignored root `BE/.env` now selects the existing
+`davel-trace-task012-demo` Compose project/volume and PostgreSQL port `5437`.
+No database volume was removed or recreated by this checkout move.
+
+- Compose resolution matches the existing project, volume and published port.
+- PostgreSQL is reachable at schema head `010_001`.
+- Root backend health/readiness and mobile HTTP each return 200.
+- Targeted environment/config/security, identity/profile/trip/expense,
+  planning/AI and migration suites: **42 passed**, one Pydantic alias warning.
+- Initial concurrent run had one identity timing result of 108ms against a
+  100ms threshold. Its isolated rerun and then the full sequential targeted
+  suite passed without modifying the assertion.
+- Root Flutter suite with shared stable SDK 3.47.5: **45 passed**. Its SDK-pinned
+  `test_api` lock entry was regenerated; no direct runtime dependency was added.
+- Root `BE/.env` is ignored and untracked. Templates contain no real keys or
+  passwords; copying a template no longer overwrites an existing env.
+- Live Gemini native authentication still returns **401** with the preserved
+  root credential. This remains open; configuration-only AI readiness is not
+  evidence of a successful provider invocation.
+
+This setup follow-up does not establish convergence or close the remaining
+latency, benchmark and AI coverage requirements recorded above.

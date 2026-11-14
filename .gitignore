@@ -8,6 +8,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+.worktrees/
 .pytest_cache/
 BE/.pytest_*/
 BE/data/*.db
