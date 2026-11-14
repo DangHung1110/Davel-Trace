@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 from enum import Enum
+from typing import Literal
 
 from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -25,10 +26,19 @@ class Settings(BaseSettings):
     app_mode: AppMode = AppMode.demo
     database_url: str = Field(default="", repr=False)
     allowed_origins: str = "http://127.0.0.1:5501,http://localhost:5501"
-    llm_provider: str = "local"
+    llm_provider: Literal["disabled", "local", "gemini", "compatible"] = "disabled"
     ollama_url: str = "http://localhost:11434"
     judge_model: str = "qwen3:14b"
-    snapshot_dir: str = os.path.join("data", "snapshots", "danang-v1")
+    gemini_api_key: str = Field(default="", repr=False)
+    llm_api_url: str = ""
+    llm_api_key: str = Field(default="", repr=False)
+    llm_model: str = "gemini-3.1-flash-lite"
+    llm_timeout_seconds: float = Field(default=10.0, ge=1.0, le=120.0)
+    llm_max_retries: int = Field(default=1, ge=0, le=2)
+    llm_parse_enabled: bool = True
+    llm_explanation_enabled: bool = True
+    llm_shadow_enabled: bool = False
+    snapshot_dir: str = os.path.join("BE", "data", "snapshots", "danang-v1")
     snapshot_name: str = ""
     google_places_key: str = Field(default="", repr=False)
     osrm_base_url: str = ""

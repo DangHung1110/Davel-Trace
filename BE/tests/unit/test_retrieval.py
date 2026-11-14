@@ -46,10 +46,14 @@ class TestRetrieval(unittest.TestCase):
         self.assertFalse(_overlaps(["12:03"], 12 * 60, 13 * 60))
         self.assertTrue(_overlaps([], 12 * 60, 13 * 60))
 
-    def test_type_filter(self):
+    def test_activities_never_exclude(self):
+        # Activities feed the optimizer's required_any groups; filtering the
+        # pool by them removed the restaurants a day needs (audit B1).
         out = retrieve(TRIP, POIS)
-        self.assertEqual(ids(out, "candidates"), ["beach", "noodle"])
-        self.assertIn("khong khop loai", str(out["excluded"]))
+        self.assertEqual(ids(out, "candidates"), ["beach", "museum", "noodle"])
+        self.assertNotIn("khong khop loai", str(out["excluded"]))
+        reasons = {c["poi_id"]: c["reasons"] for c in out["candidates"]}
+        self.assertIn("khop hoat dong beach", reasons["beach"])
 
     def test_closed_hours_excluded(self):
         trip = dict(TRIP, start_time="19:00", end_time="22:00",

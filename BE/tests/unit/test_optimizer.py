@@ -1,22 +1,22 @@
 """Unit test for CP-SAT optimizer (T017). Fixture POIs/matrix (no lane data).
 
 Covers: feasible schedule respects windows/gaps, timeout still returns
-best-found, infeasible (require_all, contradictory windows) has reason.
+best-found, infeasible (must_visit, contradictory windows) has reason.
 
 Run from repo root: python BE/tests/unit/test_optimizer.py -v
 """
 
-import json
 import os
 import sys
 import time
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import MatrixService  # noqa: E402
-from BE.app.services.optimizer import (  # noqa: E402
-    StubPOI, StubTrip, optimize, travel_from_matrix)
+from BE.app.services.matrix import load_matrix_doc  # noqa: E402
+from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
+from BE.app.services.profiles import _travel_from_cells  # noqa: E402
 
 H = 60
 _REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
@@ -92,7 +92,7 @@ class TestOptimizer(unittest.TestCase):
         t = {("depot", pid): 120 for pid in ("x", "y")}
         t.update({(a, b): 120 for a in ("x", "y")
                   for b in ("x", "y") if a != b})
-        out = optimize(bad, t, StubTrip(7 * H, 12 * H), require_all=True)
+        out = optimize(bad, t, StubTrip(7 * H, 12 * H), must_visit=["x", "y"])
         self.assertEqual(out["status"], "infeasible")
         self.assertTrue(out["reason"])
         self.assertIsNone(out["itinerary"])
@@ -100,14 +100,14 @@ class TestOptimizer(unittest.TestCase):
     def test_missing_travel_pair_is_infeasible_not_zero(self):
         poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
         out = optimize([poi], {("x", "depot"): 0},
-                       StubTrip(7 * H, 12 * H), require_all=True)
+                       StubTrip(7 * H, 12 * H), must_visit=["x"])
         self.assertEqual(out["status"], "infeasible")
         self.assertIsNone(out["itinerary"])
 
     def test_origin_leg_uses_matrix(self):
         poi = StubPOI("x", visit_min=60, open_min=7 * H, close_min=12 * H)
         out = optimize([poi], {("depot", "x"): 45},
-                       StubTrip(7 * H, 12 * H), require_all=True)
+                       StubTrip(7 * H, 12 * H), must_visit=["x"])
         self.assertIn(out["status"], ("optimal", "feasible-timeout"))
         self.assertGreaterEqual(to_min(out["itinerary"]["activities"][0]["start"]),
                                 7 * H + 45)
@@ -254,7 +254,8 @@ class TestPacing(unittest.TestCase):
     def test_pacing_caps_stops_per_day(self):
         from BE.app.services import optimizer as opt
         pois, travel, trip = self._fixture()
-        dense = opt.optimize(pois, travel, trip, workers=1, overhead_min=0)
+        with mock.patch.object(opt, "STOP_OVERHEAD_MIN", 0):
+            dense = opt.optimize(pois, travel, trip, workers=1)
         paced = opt.optimize(pois, travel, trip, workers=1)
         n_dense = len(dense["itinerary"]["activities"])
         n_paced = len(paced["itinerary"]["activities"])
@@ -338,27 +339,14 @@ class TestOptimizerRealMatrix(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.svc = MatrixService(os.path.dirname(_REAL_MATRIX))
-        with open(_REAL_MATRIX, encoding="utf-8") as f:
-            cls.doc = json.load(f)
-
-    def test_travel_from_matrix_matches_artifact(self):
-        ids = [DEPOT, FIXTURE[0][0], FIXTURE[1][0]]
-        travel = travel_from_matrix(self.svc, ids)
-        self.assertEqual(len(travel), 6)
-        for a in ids:
-            for b in ids:
-                if a == b:
-                    continue
-                cell = int(self.doc["cells"][f"{a}->{b}"]["minutes"])
-                self.assertEqual(travel[(a, b)], cell)
-                self.assertEqual(travel[(a, b)], self.svc.minutes(a, b)[0])
+        cls.doc = load_matrix_doc(_REAL_MATRIX)  # dense-v1 since Phase 3
+        cls.cells = cls.doc["cells"]
 
     def test_real_schedule_respects_windows_and_travel(self):
         stubs = [StubPOI(pid, dur, o, c, r)
                  for (pid, dur, o, c, r) in FIXTURE]
         ids = [DEPOT] + [p.poi_id for p in stubs]
-        travel = travel_from_matrix(self.svc, ids)
+        travel = _travel_from_cells(self.cells, ids)
         t0 = time.monotonic()
         out = optimize(stubs, travel, REAL_TRIP)
         wall = time.monotonic() - t0
@@ -377,10 +365,10 @@ class TestOptimizerRealMatrix(unittest.TestCase):
             self.assertLessEqual(e, min(cls_, REAL_TRIP.end_min))
             self.assertEqual(e - s, dur)
             if k == 0:
-                need = self.svc.minutes(DEPOT, act["poi_id"])[0]
+                need = self.cells[f"{DEPOT}->{act['poi_id']}"]["minutes"]
                 self.assertGreaterEqual(s, REAL_TRIP.start_min + need)
             else:
-                need = self.svc.minutes(prev_id, act["poi_id"])[0]
+                need = self.cells[f"{prev_id}->{act['poi_id']}"]["minutes"]
                 self.assertGreaterEqual(s - prev_end, need)
             prev_id, prev_end = act["poi_id"], e
         print(f"\n real matrix {out['status']}: {len(acts)} acts "
@@ -389,10 +377,10 @@ class TestOptimizerRealMatrix(unittest.TestCase):
     def test_scale_best_found_within_timeout(self):
         # 25 candidates is the largest deterministic slice that yields a
         # best-found itinerary here; all 150 is outside the basic envelope.
-        others = [i for i in self.svc.ids[:25] if i != DEPOT]
+        others = [i for i in self.doc["ids"][:25] if i != DEPOT]
         ids = [DEPOT] + others
         stubs = [StubPOI(i, 60, 7 * H, 18 * H, 1.0) for i in ids]
-        travel = travel_from_matrix(self.svc, ids)
+        travel = _travel_from_cells(self.cells, ids)
         t0 = time.monotonic()
         out = optimize(stubs, travel, REAL_TRIP)
         wall = time.monotonic() - t0

@@ -8,6 +8,10 @@ Repository hiện có ba bề mặt demo dùng chung dữ liệu Đà Nẵng:
 - Flutter mobile trong `FE/`: khung điện thoại 390×844 chạy ngay trên laptop,
   PMTiles local, lịch trình, chi tiêu, hồ sơ và planner live/offline trung thực.
 
+Planner luôn chạy bằng thuật toán deterministic. Gemini chỉ là lớp tùy chọn để
+diễn giải yêu cầu tiếng Việt và giải thích kết quả; xem hướng dẫn cấu hình tại
+[`BE/README.md`](BE/README.md#cấu-hình-gemini-cho-trợ-lý-lập-lịch).
+
 Bộ test tĩnh, không framework và không cần build. Chức năng gồm:
 
 - Render bản đồ Đà Nẵng từ `data/danang.pmtiles`, không cần VietMap API key.

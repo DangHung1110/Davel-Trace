@@ -1,14 +1,10 @@
-"""Trip state store + delta + preservation contract (T045, lane B).
+"""Trip state + delta + preservation contract (T045, lane B). In-memory.
 
 State: {trip_id, version, now, location, completed[], cancelled[],
 remaining[], history[]}. FR-047: every preference change records a
 state_delta AND bumps version. Preservation contract: completed items
-are IMMUTABLE — apply_delta may only touch remaining; attempts to
+are IMMUTABLE: apply_delta may only touch remaining; attempts to
 drop/alter completed are ignored and noted.
-
-STUB-NOTE (as T017/T018): plain-dict activities; in-memory store
-(STUB: persistent store wires at phase-PR with T046). Real plan
-schemas (T007) swap in without changing this logic.
 """
 
 from __future__ import annotations
@@ -16,8 +12,6 @@ from __future__ import annotations
 import copy
 
 _STORE: dict[str, dict] = {}
-# ponytail: in-memory store is the deliberate ceiling here; phase-PR
-# swaps in the persistent store (T046) without changing this logic.
 
 
 def new_state(trip_id: str, activities: list[dict],

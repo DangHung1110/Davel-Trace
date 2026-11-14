@@ -21,7 +21,8 @@ class OsrmRouteError(RuntimeError):
 @lru_cache(maxsize=2)
 def _read_matrix(path_text: str, modified_ns: int) -> dict:
     del modified_ns
-    return json.loads(Path(path_text).read_text(encoding="utf-8"))
+    from BE.app.services.matrix import load_matrix_doc
+    return load_matrix_doc(path_text)
 
 
 def load_matrix() -> dict:

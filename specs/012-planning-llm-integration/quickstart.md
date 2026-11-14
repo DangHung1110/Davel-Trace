@@ -25,11 +25,11 @@ Put only in ignored `BE/.env`:
 ```dotenv
 LLM_PROVIDER=gemini
 GEMINI_API_KEY=replace-with-your-key
-LLM_API_MODEL=choose-a-free-tier-compatible-model-from-ai-studio
+LLM_MODEL=gemini-3.1-flash-lite
 LLM_API_URL=https://generativelanguage.googleapis.com/v1beta/openai
 LLM_TIMEOUT_SECONDS=20
 LLM_MAX_RETRIES=1
-LLM_INTERPRETATION_ENABLED=true
+LLM_PARSE_ENABLED=true
 LLM_EXPLANATION_ENABLED=true
 LLM_SHADOW_ENABLED=false
 ```
@@ -40,7 +40,7 @@ Restart backend. Interpretation should return a reviewable proposal. Removing th
 
 ```powershell
 python -m pytest BE/tests -q
-python BE/tools/audit_plans.py --out audit.json --plans plans.txt
+python BE/tools/audit_plans.py --out "$env:TEMP/davel-task012-audit.json" --plans "$env:TEMP/davel-task012-plans.txt"
 python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1
 Set-Location FE
 flutter analyze

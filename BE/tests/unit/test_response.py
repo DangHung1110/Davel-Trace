@@ -44,7 +44,7 @@ class TestResponse(unittest.TestCase):
                           TRIP, POIS, MATRIX)
         self.assertTrue(plan["passed"])
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                         {"FAR": 1, "PROFILE_SAFE": 1, "VROH": 1, "B3": 1, "BCS": 1,
                           "ETB": 1, "A1": 1, "CAFE_CAP": 1,
                           "CATEGORY_CAP": 1,
                           "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,

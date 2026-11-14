@@ -88,7 +88,9 @@ class TestUS2Recommend(unittest.TestCase):
         trip = dict(TRIP, activities=["bảo tàng"], avoid=["club"])
         rec = recommend(trip, POIS, PREFS)
         self.assertIsNotNone(rec["top"])
-        self.assertEqual(rec["softened"], ["activities (bo loc loai, giu avoid+budget)"])
+        # Stable retrieval treats activities as soft wish groups, not a
+        # catalog filter, so there is no filter to relax.
+        self.assertEqual(rec["softened"], [])
         ordered = [r["poi_id"] for r in rec["ranked"]]
         self.assertNotIn("club", ordered)  # hard avoid kept
         print(f"\n softened: {rec['softened']} top: {rec['top']['poi_id']}")

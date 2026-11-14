@@ -13,7 +13,16 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.eval.metrics import GATE_CHECKS, dtu, evaluate, tcs, vroh  # noqa: E402
+from BE.app.services.gate import check_tcs, check_vroh  # noqa: E402
+from BE.eval.metrics import GATE_CHECKS, dtu, evaluate  # noqa: E402
+
+
+def tcs(*args) -> float:
+    return check_tcs(*args)["score"]
+
+
+def vroh(*args) -> float:
+    return 1.0 - check_vroh(*args)["score"]
 
 SNAPSHOT_DIR = os.path.join("data", "snapshots", "danang-v1")
 
@@ -146,10 +155,11 @@ class TestMetrics(unittest.TestCase):
         # T061f: metrics imports the canonical registry from gate.py (F1 is
         # the new SOFT quota; it is present here but not gate fail-closed).
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
         for _, fn in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
 
@@ -160,10 +170,11 @@ class TestMetrics(unittest.TestCase):
         self.assertIs(GATE_CHECKS, CANONICAL)
         self.assertIs(VALIDATOR_CHECKS, CANONICAL)
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
 
     def test_multi_interval_hours_parse(self):
         def score(activities, hours):

@@ -29,7 +29,9 @@ class TestDurationPrior(unittest.TestCase):
         cls.prior = load()
 
     def test_ten_cats_monotonic(self):
-        self.assertEqual(len(self.prior["cats"]), len(CATEGORY_DEFAULTS))
+        # Historical prior covers its original categories; new stable categories
+        # use the documented fallback until a measured prior is available.
+        self.assertTrue(set(self.prior["cats"]).issubset(CATEGORY_DEFAULTS))
         for cat, v in self.prior["cats"].items():
             self.assertLessEqual(v["p25"], v["p50"], cat)
             self.assertLessEqual(v["p50"], v["p75"], cat)

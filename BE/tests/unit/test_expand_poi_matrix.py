@@ -15,7 +15,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.matrix import MatrixService  # noqa: E402
+from BE.app.services.matrix import load_matrix_doc  # noqa: E402
 from BE.tools import expand_poi_matrix as epm  # noqa: E402
 
 POIS = [
@@ -168,9 +168,9 @@ class TestMain(unittest.TestCase):
         with open(matrix_path, encoding="utf-8") as f:
             doc = json.load(f)
         self.assertEqual(doc["n"], 4)
-        svc = MatrixService(os.path.dirname(matrix_path))
-        self.assertEqual(svc.ids, ["a", "b", "c", "d"])
-        self.assertGreaterEqual(svc.minutes("a", "c")[0], 1)
+        loaded = load_matrix_doc(matrix_path)
+        self.assertEqual(loaded["ids"], ["a", "b", "c", "d"])
+        self.assertGreaterEqual(loaded["cells"]["a->c"]["minutes"], 1)
 
     def test_main_returns_zero_when_nothing_to_add(self):
         code, matrix_path, _ = self.run_main(FakeClient())
@@ -185,6 +185,21 @@ class TestMain(unittest.TestCase):
         finally:
             epm.OsrmClient = real
         self.assertEqual(again, 0)
+
+    def test_dense_matrix_is_rebuilt_not_appended(self):
+        tmp = tempfile.mkdtemp(prefix="mxexd_")
+        pois_path = os.path.join(tmp, "pois.json")
+        matrix_path = os.path.join(tmp, "matrix.json")
+        with open(pois_path, "w", encoding="utf-8") as f:
+            json.dump({"pois": POIS}, f)
+        with open(matrix_path, "w", encoding="utf-8") as f:
+            json.dump({"format": "dense-v1", "ids": ["a"], "n": 1,
+                       "minutes": [[0]], "km": [[0.0]]}, f)
+        before = os.path.getmtime(matrix_path)
+        code = epm.main(["--pois", pois_path, "--matrix", matrix_path,
+                         "--backup", os.path.join(tmp, "b.json")])
+        self.assertEqual(code, 2)
+        self.assertEqual(os.path.getmtime(matrix_path), before)
 
 
 if __name__ == "__main__":

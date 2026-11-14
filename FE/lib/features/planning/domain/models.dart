@@ -159,3 +159,80 @@ class ItineraryVersionSummary {
         reason: json['reason'] as String? ?? 'accept',
       );
 }
+
+class AiInterpretationProposal {
+  const AiInterpretationProposal({
+    required this.id,
+    required this.fields,
+    required this.hardConstraints,
+    required this.softPreferences,
+    required this.assumptions,
+    required this.unresolved,
+    required this.provider,
+    required this.model,
+    required this.externalProcessing,
+  });
+
+  final String id;
+  final Map<String, dynamic> fields;
+  final Map<String, dynamic> hardConstraints;
+  final Map<String, dynamic> softPreferences;
+  final List<String> assumptions;
+  final List<String> unresolved;
+  final String provider;
+  final String? model;
+  final bool externalProcessing;
+
+  factory AiInterpretationProposal.fromJson(Map<String, dynamic> json) =>
+      AiInterpretationProposal(
+        id: json['proposal_id'] as String,
+        fields: Map<String, dynamic>.from(json['fields'] as Map? ?? const {}),
+        hardConstraints: Map<String, dynamic>.from(
+          json['hard_constraints'] as Map? ?? const {},
+        ),
+        softPreferences: Map<String, dynamic>.from(
+          json['soft_preferences'] as Map? ?? const {},
+        ),
+        assumptions: (json['assumptions'] as List? ?? const [])
+            .map((item) => item.toString())
+            .toList(),
+        unresolved: (json['unresolved'] as List? ?? const [])
+            .map((item) => item.toString())
+            .toList(),
+        provider: json['provider'] as String? ?? 'unknown',
+        model: json['model'] as String?,
+        externalProcessing: json['external_processing'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> get confirmedOverrides => {
+    ...fields,
+    ...hardConstraints,
+    ...softPreferences,
+  };
+}
+
+class PlanExplanation {
+  const PlanExplanation({
+    required this.source,
+    required this.summary,
+    required this.reasons,
+    required this.warnings,
+  });
+
+  final String source;
+  final String summary;
+  final List<Map<String, dynamic>> reasons;
+  final List<String> warnings;
+
+  factory PlanExplanation.fromJson(Map<String, dynamic> json) =>
+      PlanExplanation(
+        source: json['source'] as String? ?? 'deterministic',
+        summary: json['summary'] as String? ?? '',
+        reasons: (json['reasons'] as List? ?? const [])
+            .map((item) => Map<String, dynamic>.from(item as Map))
+            .toList(),
+        warnings: (json['warnings'] as List? ?? const [])
+            .map((item) => item.toString())
+            .toList(),
+      );
+}

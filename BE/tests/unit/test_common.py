@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.common import in_range, parse_hours, to_min  # noqa: E402
+from BE.common import in_range, parse_hours, to_min  # noqa: E402
 
 
 class TestCommonHours(unittest.TestCase):
@@ -51,6 +51,19 @@ class TestCommonHours(unittest.TestCase):
         self.assertIsNone(parse_hours([]))
         self.assertIsNone(parse_hours(None))
         self.assertFalse(in_range(to_min("11:00"), to_min("12:00"), ""))
+
+
+class TestIsoDate(unittest.TestCase):
+    def test_a_usable_date_is_normalised_and_shifted(self):
+        from BE.common import iso_date
+        self.assertEqual(iso_date("2026-11-14"), "2026-11-14")
+        self.assertEqual(iso_date("2026-12-31", 1), "2027-01-01")
+
+    def test_anything_else_is_no_date(self):
+        from BE.common import iso_date, weekday_of
+        for bad in ("", None, "next tuesday", "14/11/2026"):
+            self.assertEqual(iso_date(bad), "", bad)
+            self.assertIsNone(weekday_of(bad), bad)
 
 
 if __name__ == "__main__":

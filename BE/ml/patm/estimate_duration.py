@@ -5,6 +5,8 @@ nac-1 uses rule defaults. Nac-2 (LLM batch, pending T003b snapshot) will
 refine; nac-3 (review mining) is P3 backlog T060.
 
 Rules (R8 exact):
+  - category: reviewed `cat` when present, else the raw type; an attraction
+    named cau/dinh/chua/tuong dai/nha tho (one structure) -> landmark
   - base p50 from CATEGORY_DEFAULTS (minutes)
   - rating >= 4.5 -> x1.2
   - tag contains "rong"/"lon" (rong/lon = wide/large, diacritics-insensitive) -> x1.3
@@ -28,8 +30,6 @@ import sys
 import unicodedata
 
 CATEGORY_DEFAULTS: dict[str, int] = {
-    # ponytail: nac-1 static defaults on purpose — nac-2 LLM batch (needs the
-    # T003b snapshot) and nac-3 review mining are deferred, see module docstring.
     # LOCKED by seed (T003 --check 7/7): never change these 7 values.
     "landmark": 45,
     "transport": 20,
@@ -47,6 +47,9 @@ CATEGORY_DEFAULTS: dict[str, int] = {
     "lodging": 60,
     "spa": 90,
     "bar": 90,
+    # A stop to look at the view, like a landmark. Without a default of its own
+    # the raw type decided: "Điểm thu hút khách du lịch" gave 200-240 minutes.
+    "viewpoint": 45,
 }
 
 # Normalized-Vietnamese substring -> canonical. Specific first (dict order).
@@ -188,9 +191,32 @@ def estimate(category: str, rating: float | None = None,
     }
 
 
+# An "attraction" whose name starts like this is one structure (bridge,
+# communal house, pagoda, monument, church), not a Ba Na-scale park: it takes
+# the landmark default instead of attraction=200.
+LANDMARK_NAME_PREFIXES = ("cầu ", "đình ", "chùa ", "tượng đài ", "nhà thờ ")
+
+
+def duration_category(poi: dict) -> str:
+    """Category the duration rule reads: the reviewed `cat` when present.
+
+    The raw Google type alone mislabels many POIs ("Điểm thu hút khách du
+    lịch" on museums and beaches gave 200 minutes); `cat` is the relabelled
+    canonical category. Raw type stays the fallback for fresh crawls and for
+    a `cat` with no default of its own.
+    """
+    category = poi.get("cat")
+    if category not in CATEGORY_DEFAULTS:
+        category = poi.get("type", "")
+    name = unicodedata.normalize("NFC", str(poi.get("name") or "")).lower()
+    if canonical_category(category) == "attraction" and name.startswith(LANDMARK_NAME_PREFIXES):
+        return "landmark"
+    return category
+
+
 def enrich_poi(poi: dict) -> dict:
     """Fill visit_min/dur_* on a POI dict in place; return it."""
-    r = estimate(poi.get("type", ""), poi.get("rating"), poi.get("tags", []))
+    r = estimate(duration_category(poi), poi.get("rating"), poi.get("tags", []))
     poi["visit_min"] = {"p25": r["p25"], "p50": r["p50"], "p75": r["p75"]}
     poi["dur_source"] = r["dur_source"]
     poi["dur_confidence"] = r["dur_confidence"]
@@ -210,7 +236,7 @@ def main(argv: list[str]) -> int:
         pois = data if isinstance(data, list) else data.get("pois", [])
         bad = 0
         for poi in pois:
-            r = estimate(poi.get("type", ""), poi.get("rating"), poi.get("tags", []))
+            r = estimate(duration_category(poi), poi.get("rating"), poi.get("tags", []))
             if check_only:
                 vm = poi.get("visit_min", {})
                 if (vm.get("p25"), vm.get("p50"), vm.get("p75")) != (r["p25"], r["p50"], r["p75"]) \

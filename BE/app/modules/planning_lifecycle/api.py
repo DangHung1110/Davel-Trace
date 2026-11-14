@@ -5,7 +5,8 @@ from __future__ import annotations
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Header, Query
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+from datetime import time
 
 from BE.app.modules.identity.dependencies import current_principal
 from BE.app.modules.identity.domain import Principal
@@ -15,9 +16,34 @@ from BE.app.modules.planning_lifecycle.service import PlanningLifecycleService
 router = APIRouter(tags=["planning-lifecycle"])
 
 
+class ConstraintOverrides(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    indicative_budget: float | None = Field(default=None, ge=0)
+    traveler_count: int | None = Field(default=None, ge=1, le=100)
+    preferred_transport: str | None = Field(default=None, max_length=32)
+    day_start: str | None = None
+    day_end: str | None = None
+    must_visit: list[str] = Field(default_factory=list, max_length=20)
+    avoid: list[str] = Field(default_factory=list, max_length=50)
+    activities: list[str] = Field(default_factory=list, max_length=20)
+    food_preferences: list[str] = Field(default_factory=list, max_length=20)
+    accessibility: list[str] = Field(default_factory=list, max_length=20)
+
+    @model_validator(mode="after")
+    def validate_bounds(self):
+        for value in (self.day_start, self.day_end):
+            if value is not None:
+                time.fromisoformat(value)
+        if self.day_start and self.day_end:
+            if time.fromisoformat(self.day_end) <= time.fromisoformat(self.day_start):
+                raise ValueError("day_end must follow day_start")
+        return self
+
+
 class PlanningRequestBody(BaseModel):
     target_count: int = Field(default=5, ge=1, le=5)
-    constraint_overrides: dict = Field(default_factory=dict)
+    constraint_overrides: ConstraintOverrides = Field(default_factory=ConstraintOverrides)
 
 
 class ReplanBody(BaseModel):
@@ -46,7 +72,7 @@ def create_request(
         trip_id,
         _key(idempotency_key),
         target_count=body.target_count,
-        constraint_overrides=body.constraint_overrides,
+        constraint_overrides=body.constraint_overrides.model_dump(exclude_none=True),
     )
 
 

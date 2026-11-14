@@ -16,6 +16,44 @@ Copy-Item BE\.env.example BE\.env
 Đổi `POSTGRES_PASSWORD` và phần password tương ứng trong `DATABASE_URL`.
 `BE/.env` đã được gitignore và không được commit.
 
+## Cấu hình Gemini cho trợ lý lập lịch
+
+Planner deterministic không cần LLM. Khi `LLM_PROVIDER=disabled`, API lập lịch,
+chọn phương án và lịch sử vẫn hoạt động đầy đủ; chỉ interpretation/explanation AI
+không khả dụng.
+
+Gemini Plus/Google AI Pro trong ứng dụng Gemini và quota của Gemini Developer API
+là hai sản phẩm riêng. Tài khoản Plus không tự cấp API quota cho backend. Để bật
+Gemini:
+
+1. Mở [Google AI Studio](https://aistudio.google.com/app/apikey) và tạo Gemini API key.
+2. Sao chép `BE/.env.example` thành file ignored `BE/.env` nếu chưa có.
+3. Điền cấu hình sau; không đặt key trong Dart, source code, commit hoặc ảnh chụp log:
+
+   ```dotenv
+   LLM_PROVIDER=gemini
+   GEMINI_API_KEY=your_key_from_ai_studio
+   LLM_MODEL=gemini-3.1-flash-lite
+   LLM_PARSE_ENABLED=true
+   LLM_EXPLANATION_ENABLED=true
+   LLM_SHADOW_ENABLED=false
+   ```
+
+4. Khởi động lại backend và kiểm tra `GET /v1/ai/readiness`. Response chỉ hiển thị
+   provider/model/capability, tuyệt đối không trả key.
+
+Backend gọi REST compatibility endpoint chính thức của Gemini bằng Python stdlib,
+không thêm SDK và không dùng tài khoản/token ChatGPT. Nếu model trên không còn có
+trong project AI Studio của bạn, chỉ cần đổi `LLM_MODEL`; không cần migration dữ liệu.
+
+Tài liệu chính thức: [API quickstart](https://ai.google.dev/gemini-api/docs/get-started),
+[billing](https://ai.google.dev/gemini-api/docs/billing),
+[pricing/free tier](https://ai.google.dev/gemini-api/docs/pricing), và
+[OpenAI-compatible REST](https://ai.google.dev/gemini-api/docs/openai).
+
+Với provider hosted, UI phải thông báo nội dung được gửi ra ngoài và người dùng có
+thể bỏ qua AI để nhập trường có cấu trúc. Raw prompt/output không được lưu mặc định.
+
 ## 2. PostgreSQL bằng Docker, không làm phình máy
 
 ```powershell

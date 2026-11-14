@@ -43,12 +43,8 @@ modified here.
 from __future__ import annotations
 
 from BE.app.services import weather as weather_svc
-from BE.app.services.soft_rules import (
-    meal_slots,
-    meal_window_present,
-    poi_category,
-)
-from BE.common import to_min
+from BE.app.services.soft_rules import OUTDOOR_CATEGORIES, meal_slots, pace_of, poi_category
+from BE.common import clamp01, hhmm, iso_date, to_float, to_min
 
 # --- paper windows ---------------------------------------------------------
 # MEAL_WINDOWS / MIN_MEAL_OVERLAP / meal_slots / meal_window_present live in
@@ -78,6 +74,25 @@ HEAT_BANDS = (                 # (min_temp, stress, label)
     (35.0, 1.0, "cuc doan"),
 )
 
+# --- rain ------------------------------------------------------------------
+# The forecast used to reach only the rank list, which orders candidates and
+# explains them: with 90 % rain all day the plan still opened at the beach. An
+# hour more likely wet than dry now costs an exposed stop in the solver
+# (`rain_costs`), in units of the best stop's score. The state multipliers above
+# only move a stop to a better hour; they can never make it worth leaving out.
+# This can: in near-certain rain an open-air stop costs more than any stop and
+# its new-category bonus are worth (experience: 1 + 0.625), so it stays in the
+# day only where a wish, a named place or the pace floor needs it, and the plan
+# then says so. Rain for part of the day moves it to the dry hours instead.
+# `smart_tags.rain_cover` says how wet a visitor gets; a POI without it is judged
+# by its outdoor exposure.
+RAIN_LIKELY = 0.5              # same threshold as the rank weather rule
+RAIN_HEAVY = 0.8
+RAIN_COST = 1.2                # open air in a likely-wet hour, in top-score units
+RAIN_COST_HEAVY = 2.0          # ... when rain is near certain
+RAIN_COVER_EXPOSURE = {"enclosed": 0.0, "covered": 0.3, "mixed": 0.5, "open": 1.0}
+RAIN_WARN_EXPOSURE = 0.5       # a stop this exposed in a wet hour is named on the plan
+
 # --- optimizer time bands (disjoint, minutes since midnight) ---------------
 STATE_BANDS = (
     (5 * 60, 10 * 60),
@@ -102,25 +117,9 @@ DIP_LIGHT = 1.15
 EVENING_SOCIAL = 1.15
 LATE_HEAVY = 0.5
 
-OUTDOOR_CATEGORIES = frozenset({"beach", "nature", "park", "viewpoint"})
-REST_CATEGORIES = frozenset({"cafe", "spa", "museum", "landmark"})
+REST_CATEGORIES = frozenset({"cafe", "spa", "museum", "landmark", "temple"})
 DESSERT_WORDS = ("dessert", "che", "banh ngot", "kem", "sweet")
 TREK_WORDS = ("trek", "hike", "adventure", "thac", "nui", "leo")
-
-
-def _clamp(value: float, lo: float = 0.0, hi: float = 1.0) -> float:
-    return max(lo, min(hi, float(value)))
-
-
-def _float(value, default: float = 0.0) -> float:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return float(default)
-
-
-def hh(minutes: int) -> str:
-    return f"{int(minutes) // 60:02d}:{int(minutes) % 60:02d}"
 
 
 def _trip_start(trip: dict) -> int:
@@ -129,13 +128,6 @@ def _trip_start(trip: dict) -> int:
 
 def _trip_end(trip: dict) -> int:
     return to_min((trip or {}).get("end_time") or "18:00")
-
-
-def _pace(profile: dict | None) -> int:
-    try:
-        return min(3, max(1, int((profile or {}).get("pace") or 2)))
-    except (TypeError, ValueError):
-        return 2
 
 
 # --------------------------------------------------------------------------
@@ -163,8 +155,32 @@ def _short_transport(url: str) -> dict:
     return fetch_json(url, timeout=WEATHER_TIMEOUT_S)
 
 
+def forecast_day(forecast: dict | None, date: str | None, offset: int = 0) -> list[dict] | None:
+    """The hours of `forecast` on the trip's date, None when it does not cover it.
+
+    Open-Meteo answers a week from today, hour by hour, and every lookup below
+    matches the hour only: a trip dated next Saturday was planned on today's
+    rain. With a date only that day's hours are kept; a date outside the
+    forecast (past, or more than a week ahead) has no forecast at all, which the
+    plan says instead of borrowing another day's weather. A trip with no usable
+    date is read as starting on the first day of the forecast, as before, and its
+    day `offset` (0 = first) on the day that many later.
+    """
+    hourly = [e for e in (forecast or {}).get("hourly") or [] if len(str(e.get("at") or "")) >= 13]
+    day = iso_date(date)
+    if not hourly:
+        return None if day else list((forecast or {}).get("hourly") or [])
+    if not day:
+        days = sorted({str(e["at"])[:10] for e in hourly})
+        if int(offset) >= len(days):
+            return None
+        day = days[int(offset)]
+    hours = [e for e in hourly if str(e["at"])[:10] == day]
+    return hours or None
+
+
 def _forecast_hour(forecast: dict | None, minutes: int) -> dict | None:
-    """Hourly entry for a local hour (matches HH, like weather.rain_at)."""
+    """Hourly entry for a local hour (matches HH)."""
     hh_int = int(minutes) // 60
     for entry in (forecast or {}).get("hourly", []):
         at = str(entry.get("at") or "")
@@ -176,15 +192,15 @@ def _forecast_hour(forecast: dict | None, minutes: int) -> dict | None:
 def temp_at(ctx: dict | None, minutes: int) -> float:
     entry = _forecast_hour((ctx or {}).get("_forecast"), minutes)
     if entry is None:
-        return _float((ctx or {}).get("temp_c"), DEFAULT_TEMP_C)
-    return _float(entry.get("temp_c"), DEFAULT_TEMP_C)
+        return to_float((ctx or {}).get("temp_c"), DEFAULT_TEMP_C)
+    return to_float(entry.get("temp_c"), DEFAULT_TEMP_C)
 
 
 def rain_at_hour(ctx: dict | None, minutes: int) -> float:
     entry = _forecast_hour((ctx or {}).get("_forecast"), minutes)
     if entry is None:
-        return _float((ctx or {}).get("rain_prob"), 0.0)
-    return _float(entry.get("rain_prob"), 0.0)
+        return to_float((ctx or {}).get("rain_prob"), 0.0)
+    return to_float(entry.get("rain_prob"), 0.0)
 
 
 def solar_factor(minutes: int) -> float:
@@ -219,10 +235,69 @@ def _exposure(poi: dict) -> float:
     tags = (poi or {}).get("smart_tags") or {}
     value = tags.get("outdoor_exposure")
     if isinstance(value, (int, float)):
-        return _clamp(value)
+        return clamp01(value)
     if (poi or {}).get("weather_sensitive"):
         return 0.75
     return 1.0 if poi_category(poi) in OUTDOOR_CATEGORIES else 0.1
+
+
+def rain_exposure(poi: dict | None) -> float:
+    """How wet a visitor gets here when it rains: 0 (under a roof) .. 1 (open air)."""
+    poi = poi or {}
+    cover = str((poi.get("smart_tags") or {}).get("rain_cover") or "").strip().lower()
+    if cover in RAIN_COVER_EXPOSURE:
+        return RAIN_COVER_EXPOSURE[cover]
+    return 1.0 if (_exposure(poi) >= 0.55 or poi.get("weather_sensitive")) else 0.0
+
+
+def is_wet(ctx: dict | None) -> bool:
+    """Does the forecast hold an hour of the trip that is more likely wet than dry?"""
+    return to_float((ctx or {}).get("rain_prob")) >= RAIN_LIKELY
+
+
+def rain_between(ctx: dict | None, start: int, end: int) -> float:
+    """Highest hourly rain probability over [start, end) minutes."""
+    first = (int(start) // 60) * 60
+    return max((rain_at_hour(ctx, m) for m in range(first, max(int(end), first + 1), 60)),
+               default=0.0)
+
+
+def rain_note(ctx: dict | None, acts: list[dict], pois: dict) -> str | None:
+    """What the plan says when the forecast holds wet hours (FR-026), else None:
+    which hours, that the day was planned around them, the stops still in the open
+    in those hours, and the forecast day it assumed when the trip named none.
+    A day moved under a roof with no word of why reads as a planner that forgot
+    the beach."""
+    spans = wet_spans(ctx)
+    if not spans or not acts:
+        return None
+    ctx = ctx or {}
+    hours = ", ".join(f"{hhmm(lo)}-{hhmm(hi)}" for lo, hi in spans)
+    peak = max(rain_between(ctx, lo, hi) for lo, hi in spans)
+    note = (f"du bao mua {hours} (toi da {round(peak * 100)}%): "
+            "lich uu tien diem co mai che trong cac gio do")
+    outside = wet_stops(ctx, acts, pois)
+    if outside:
+        note += "; con ngoai troi, nen mang ao mua hoac doi gio: " + ", ".join(
+            f"{stop['name']} ({stop['start']}, {round(stop['rain_prob'] * 100)}%)" for stop in outside)
+    if ctx.get("weather_date_assumed"):
+        note += f"; chua co ngay di nen dung du bao ngay {ctx.get('weather_date')}"
+    return note
+
+
+def wet_stops(ctx: dict | None, acts: list[dict], pois: dict) -> list[dict]:
+    """Stops of a plan that sit in the open in an hour the forecast calls wet:
+    [{"poi_id", "name", "start", "rain_prob"}], for `rain_note`."""
+    if not is_wet(ctx):
+        return []
+    out = []
+    for act in acts or []:
+        poi = pois.get(act.get("poi_id")) or {}
+        rain = rain_between(ctx, to_min(act["start"]), to_min(act["end"]))
+        if rain >= RAIN_LIKELY and rain_exposure(poi) >= RAIN_WARN_EXPOSURE:
+            out.append({"poi_id": act.get("poi_id"), "name": poi.get("name") or act.get("poi_id"),
+                        "start": act["start"], "rain_prob": round(rain, 2)})
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -243,9 +318,9 @@ def satiety_at(minutes: int, trip: dict | None, slots: list[dict] | None = None
     if not ends:
         # No heavy meal has ended yet: the traveler left shortly after eating.
         elapsed = max(0, int(minutes) - _trip_start(trip or {}))
-        return _clamp(SATIETY_AT_START * 0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
+        return clamp01(SATIETY_AT_START * 0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
     elapsed = max(0, int(minutes) - max(ends))
-    return _clamp(0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
+    return clamp01(0.5 ** (elapsed / SATIETY_HALF_LIFE_MIN))
 
 
 def fatigue_at(minutes: int, trip: dict | None, profile: dict | None,
@@ -254,12 +329,12 @@ def fatigue_at(minutes: int, trip: dict | None, profile: dict | None,
     minutes = int(minutes)
     start = _trip_start(trip or {})
     elapsed_h = max(0.0, (minutes - start) / 60.0)
-    walked = elapsed_h * WALK_MIN_PER_HOUR[_pace(profile)]
+    walked = elapsed_h * WALK_MIN_PER_HOUR[pace_of(profile)]
     if MIDDAY[0] <= minutes <= MIDDAY[1]:
-        walked *= 1.0 + HEAT_FATIGUE_BOOST * _clamp(heat)
+        walked *= 1.0 + HEAT_FATIGUE_BOOST * clamp01(heat)
     if minutes > DIP_WINDOW[0]:
         walked += DIP_FATIGUE_STEP
-    return _clamp(walked / FATIGUE_REF_MIN)
+    return clamp01(walked / FATIGUE_REF_MIN)
 
 
 def state_at(minutes: int, trip: dict | None = None,
@@ -278,7 +353,7 @@ def state_at(minutes: int, trip: dict | None = None,
     late = minutes >= HEAVY_CUTOFF
     return {
         "minute": minutes,
-        "hour": hh(minutes),
+        "hour": hhmm(minutes),
         "daypart": daypart(minutes),
         "satiety": round(satiety, 3),
         "fatigue": round(fatigue, 3),
@@ -318,9 +393,9 @@ def poi_multiplier(poi: dict, state: dict,
     trek = cat in {"nature", "beach"} and (
         int(poi.get("intensity") or 2) >= 2 or exposure >= 0.7
         or any(w in words for w in TREK_WORDS))
-    satiety = _float(state.get("satiety"))
-    fatigue = _float(state.get("fatigue"))
-    stress = _float(state.get("heat_effective",
+    satiety = to_float(state.get("satiety"))
+    fatigue = to_float(state.get("fatigue"))
+    stress = to_float(state.get("heat_effective",
                               state.get("heat_stress")))
     # A stop inside the breakfast window IS breakfast (the prior "ate before
     # leaving" must not suppress the one meal the day still needs).
@@ -396,8 +471,10 @@ def build(trip: dict | None, profile: dict | None = None,
     """Request context: weather + meal slots + hourly state + rank grid.
 
     Never raises: an unavailable forecast degrades to the planning prior and
-    `weather_source = "none"`. `dynamic_state` is True only for an onboarding
-    profile so a legacy request keeps its old rank behaviour.
+    `weather_source = "none"` ("out_of_range" when the forecast does not cover
+    `trip.date`, see `forecast_day`). `trip.day_offset` (multiday) says which day of
+    an undated trip this is. `dynamic_state` is True only for an onboarding profile
+    so a legacy request keeps its old rank behaviour.
     """
     trip = trip or {}
     profile = profile or {}
@@ -415,11 +492,20 @@ def build(trip: dict | None, profile: dict | None = None,
     elif forecast is not None:
         source = str(forecast.get("source") or "injected")
         stale = bool(forecast.get("stale"))
+    weather_date = ""
+    if forecast is not None:
+        day = forecast_day(forecast, trip.get("date"), int(trip.get("day_offset") or 0))
+        if day is None:
+            # The forecast does not reach the trip's date: no weather, said so.
+            source, stale, forecast = "out_of_range", False, None
+        else:
+            forecast = {**forecast, "hourly": day}
+            weather_date = iso_date(str((day[0].get("at") if day else "") or "")[:10])
 
     start, end = _trip_start(trip), _trip_end(trip)
     hours = list(range(start, end + 1, 60))
     hourly = [{
-        "at": hh(m),
+        "at": hhmm(m),
         "temp_c": round(temp_at({"_forecast": forecast}, m), 1),
         "rain_prob": round(rain_at_hour({"_forecast": forecast}, m), 3),
     } for m in hours]
@@ -443,6 +529,10 @@ def build(trip: dict | None, profile: dict | None = None,
         "weather_source": source,
         "weather_stale": stale,
         "weather_error": error,
+        # The day the forecast is read on, and whether the trip named it or it was
+        # assumed (no date: the trip is taken to start on the forecast's first day).
+        "weather_date": weather_date,
+        "weather_date_assumed": bool(weather_date) and not iso_date(trip.get("date")),
         "state": state_at(start, trip, profile, {"meal_slots": slots,
                                                 "temp_c": temp_c,
                                                 "rain_prob": rain_prob,
@@ -450,6 +540,24 @@ def build(trip: dict | None, profile: dict | None = None,
         "_forecast": forecast,
     }
     return ctx
+
+
+def state_bands(ctx: dict | None) -> list[tuple[int, int]]:
+    """`STATE_BANDS` clipped to the trip horizon and cut where the forecast turns
+    wet or dry, so a band is wet or dry as a whole (a dry forecast cuts nothing)."""
+    ctx = ctx or {}
+    start, end = _trip_start(ctx.get("trip") or {}), _trip_end(ctx.get("trip") or {})
+    cuts, wet = [], None
+    for hour in range((start // 60) * 60, end, 60):
+        now = rain_at_hour(ctx, hour) >= RAIN_LIKELY
+        if wet is not None and now != wet and start < hour < end:
+            cuts.append(hour)
+        wet = now
+    bands = []
+    for lo, hi in STATE_BANDS:
+        edges = [max(lo, start)] + [c for c in cuts if lo < c < hi] + [min(hi, end)]
+        bands += [(a, b) for a, b in zip(edges, edges[1:]) if b - a >= 30]
+    return bands
 
 
 def optimizer_state(ctx: dict | None, pois: list[dict]
@@ -462,12 +570,7 @@ def optimizer_state(ctx: dict | None, pois: list[dict]
     is penalized when the model places it at 14:00.
     """
     ctx = ctx or {}
-    start, end = _trip_start(ctx.get("trip") or {}), _trip_end(ctx.get("trip") or {})
-    bands = []
-    for lo, hi in STATE_BANDS:
-        a, b = max(lo, start), min(hi, end)
-        if b - a >= 30:
-            bands.append((a, b))
+    bands = state_bands(ctx)
     scores: dict[tuple[str, int], float] = {}
     for k, (lo, hi) in enumerate(bands):
         state = state_at((lo + hi) // 2, ctx.get("trip"), ctx.get("profile"), ctx)
@@ -475,6 +578,39 @@ def optimizer_state(ctx: dict | None, pois: list[dict]
             mult, _reasons = poi_multiplier(poi, state, ctx.get("profile"))
             scores[(poi.get("poi_id"), k)] = mult
     return bands, scores
+
+
+def wet_spans(ctx: dict | None) -> list[tuple[int, int]]:
+    """The hours of the trip the forecast calls wet, as merged (start, end) minutes."""
+    spans: list[tuple[int, int]] = []
+    for lo, hi in state_bands(ctx) if is_wet(ctx) else []:
+        if rain_between(ctx, lo, hi) < RAIN_LIKELY:
+            continue
+        if spans and spans[-1][1] == lo:
+            spans[-1] = (spans[-1][0], hi)
+        else:
+            spans.append((lo, hi))
+    return spans
+
+
+def rain_costs(ctx: dict | None, pois: list[dict]) -> dict[tuple[str, int], float]:
+    """Per-(poi, band of `state_bands`) cost of standing in the rain, in units of
+    the best stop's score; only wet bands and exposed POIs have an entry.
+
+    A band's rain is its highest hourly probability (the bands are cut where the
+    forecast turns, so that is the band's own weather, not a neighbour's shower).
+    """
+    costs: dict[tuple[str, int], float] = {}
+    for k, (lo, hi) in enumerate(state_bands(ctx)):
+        rain = rain_between(ctx, lo, hi)
+        if rain < RAIN_LIKELY:
+            continue
+        level = RAIN_COST_HEAVY if rain >= RAIN_HEAVY else RAIN_COST
+        for poi in pois:
+            wet = rain_exposure(poi)
+            if wet > 0:
+                costs[(poi.get("poi_id"), k)] = round(level * wet, 3)
+    return costs
 
 
 def edge_state(ctx: dict | None) -> dict:
@@ -506,15 +642,15 @@ def plan_report(ctx: dict | None) -> dict:
     trip = ctx.get("trip") or {}
     bands = optimizer_state(ctx, [])[0]
     return {
-        "meal_slots": [{"name": s["name"], "start": hh(s["start"]),
-                        "end": hh(s["end"]), "heavy": s["heavy"]}
+        "meal_slots": [{"name": s["name"], "start": hhmm(s["start"]),
+                        "end": hhmm(s["end"]), "heavy": s["heavy"]}
                        for s in ctx.get("meal_slots") or []],
         "temp_c": ctx.get("temp_c"),
         "rain_prob": ctx.get("rain_prob"),
         "heat_band": ctx.get("heat_band"),
         "weather_source": ctx.get("weather_source"),
         "weather_stale": bool(ctx.get("weather_stale")),
-        "bands": [{"start": hh(lo), "end": hh(hi),
+        "bands": [{"start": hhmm(lo), "end": hhmm(hi),
                    "state": state_at((lo + hi) // 2, trip,
                                      ctx.get("profile"), ctx)}
                   for lo, hi in bands],

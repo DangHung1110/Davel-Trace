@@ -114,6 +114,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
     elif " " in remaining_from:
         remaining_from = remaining_from.rsplit(" ", 1)[-1]
     avoid = list(dict.fromkeys([
+        *(snapshot.get("avoid") or []),
         *(remaining.get("unavailable_poi_ids") or []),
         *(remaining.get("completed_poi_ids") or []),
         *(remaining.get("skipped_poi_ids") or []),
@@ -129,7 +130,10 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         travelers=snapshot.get("traveler_count", 1),
         budget=max(0, int(float(budget or 0) - actual)),
         transport=[snapshot.get("preferred_transport") or "mixed"],
+        must_visit=list(snapshot.get("must_visit") or []),
         avoid=avoid,
+        activities=list(snapshot.get("activities") or []),
+        food_prefs=list(snapshot.get("food_preferences") or []),
         profile=_profile(snapshot.get("profile_snapshot") or {}),
     ).model_dump()
 
@@ -144,12 +148,14 @@ class PlanningLifecycleService:
         self._planner = planner or self._run_legacy_planner
 
     def _run_legacy_planner(self, trip_input: dict, target: int, kind: str) -> dict:
-        timeout = 15 if kind == "replan" else 30
+        # Preserve the measured source solver budget; the product timeout is a
+        # final guard, not a tuning knob that silently changes feasible output.
+        timeout = 90
         executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="planner")
         future = executor.submit(
             legacy_itinerary,
             ItineraryIn(trip=TripRequest(**trip_input)),
-            True,
+            False,
         )
         try:
             result = future.result(timeout=timeout)
@@ -180,19 +186,34 @@ class PlanningLifecycleService:
         if not 1 <= target_count <= 5:
             raise IdentityError("VALIDATION_ERROR", "Số phương án phải từ 1 đến 5.", 422)
         overrides = dict(constraint_overrides or {})
+        from BE.app.modules.planning_lifecycle.api import ConstraintOverrides
+        overrides = ConstraintOverrides.model_validate(overrides).model_dump(
+            exclude_none=True, exclude_unset=True
+        )
         remaining = dict(remaining_context or {})
 
         with session_scope(self.settings.database_url) as session:
             trip = owned_trip(session, principal.account_id, trip_id, lock=True)
             snapshot = trip_public(session, trip)
             snapshot["account_id"] = str(principal.account_id)
+            if len(snapshot.get("days") or []) > 2:
+                raise IdentityError(
+                    "PLANNING_WINDOW_UNSUPPORTED",
+                    "Tự động lập lịch hiện hỗ trợ chuyến đi 1-2 ngày; bạn vẫn có thể quản lý thủ công các ngày còn lại.",
+                    422,
+                )
             effective_snapshot = dict(snapshot)
             for field in (
                 "indicative_budget", "preferred_transport", "day_start",
                 "day_end", "traveler_count", "preference_overrides",
+                "must_visit", "avoid", "activities", "food_preferences",
             ):
                 if field in overrides:
                     effective_snapshot[field] = overrides[field]
+            if "accessibility" in overrides:
+                profile_snapshot = dict(effective_snapshot.get("profile_snapshot") or {})
+                profile_snapshot["accessibility_needs"] = overrides["accessibility"]
+                effective_snapshot["profile_snapshot"] = profile_snapshot
             input_payload = {
                 "trip": effective_snapshot,
                 "constraint_overrides": overrides,
@@ -280,6 +301,10 @@ class PlanningLifecycleService:
             seen: set[str] = set()
             rank = 0
             for plan in plans:
+                poi_ids = {item.get("poi_id") for item in plan.get("activities") or []}
+                if (not set(planner_input.get("must_visit") or []).issubset(poi_ids)
+                        or set(planner_input.get("avoid") or []).intersection(poi_ids)):
+                    continue
                 gate = dict(plan.get("gate") or {})
                 fingerprint = alternative_fingerprint(plan)
                 families = gate.get("families") or {}

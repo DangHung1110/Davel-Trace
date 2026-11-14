@@ -100,8 +100,11 @@ class TestUS1Flow(unittest.TestCase):
                 if k in ("trip_id", "user_id", "city", "start_time", "end_time", "days",
                          "travelers", "budget", "transport", "must_visit", "avoid",
                          "activities", "food_prefs", "order_prefs")}
+        # Activities are required_any groups for the optimizer, never a
+        # pool filter: the restaurant stays a candidate.
         pool = retrieval_svc.retrieve(trip, POIS)["candidates"]
-        self.assertEqual({candidate["poi_id"] for candidate in pool}, {"hill", "beach"})
+        self.assertEqual({candidate["poi_id"] for candidate in pool},
+                         {"hill", "beach", "noodle"})
         with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",
                                side_effect=RuntimeError("offline test")):
             r = client.post("/v1/itinerary",
@@ -129,7 +132,7 @@ class TestUS1Flow(unittest.TestCase):
         # including the hard sequence rules (CAFE_CAP/NO_CONSECUTIVE/
         # NO_ADJACENT_FOOD) and REST_FOLLOWS_LUNCH (vacuous without a profile).
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                         {"FAR": 1, "PROFILE_SAFE": 1, "VROH": 1, "B3": 1, "BCS": 1,
                           "ETB": 1, "A1": 1, "CAFE_CAP": 1,
                           "CATEGORY_CAP": 1,
                           "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,

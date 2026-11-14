@@ -67,7 +67,7 @@ AVOID_GROUPS: dict[str, tuple[str, ...]] = {
     "spa": ("spa", "massage", "mát xa"),
     "beach": ("biển", "beach", "bãi biển"),
     "market": ("chợ", "market"),
-    "shopping": ("mua sắm", "shopping", "chợ", "market"),
+    "shopping": ("mua sắm", "shopping", "chợ", "market", "shop", "cửa hàng"),
     "crowd": ("đông", "ồn ào", "crowded", "crowd"),
 }
 # "trek"/"adventure" is also an effort class: high-intensity outdoor POIs are
@@ -147,6 +147,16 @@ def _match_terms(terms, text: str, folded: str) -> str | None:
     return None
 
 
+def has_word(text: str, words) -> bool:
+    """Whole-word `words` hit in an already-folded `text` (never substring:
+    "bar" must not fire on "barbecue", "pub" on "public")."""
+    for word in words:
+        pattern = _pattern(fold(str(word or "")))
+        if pattern is not None and pattern.search(text or ""):
+            return True
+    return False
+
+
 def terms_for(term: str, groups: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
     """Expand a user term through its group table (unknown term = itself)."""
     raw = str(term or "").strip()
@@ -158,6 +168,41 @@ def matches(poi: dict, term: str, groups: dict[str, tuple[str, ...]] | None = No
     """Matched term (for the warning) or None. Never raises on bad POI data."""
     text, folded = haystack(poi)
     return _match_terms(terms_for(term, groups or {}), text, folded)
+
+
+# --- the onboarding catalog's food_prefs codes (FE/onboard.html, frozen) -----
+# The page sends codes ("seafood", "local_cuisine"); the snapshot carries Google's
+# Vietnamese type tags and names ("Nhà hàng hải sản", "Mì Quảng ..."). Matched as
+# typed, a code hit only the few places with that English word in their name, so
+# the taste bonus hardly ever fired for a profile made on the onboarding page.
+# Each code expands to the words the data uses; free text still matches as itself.
+FOOD_PREF_GROUPS: dict[str, tuple[str, ...]] = {
+    "vietnamese": ("việt nam", "vietnamese", "món việt", "mì quảng", "mỳ quảng",
+                   "quán mì", "bánh xèo", "cơm", "phở", "bún"),
+    "seafood": ("hải sản", "seafood", "ốc", "cua biển", "tôm hùm", "ghẹ"),
+    "street_food": ("quán ăn nhỏ", "ăn vặt", "vỉa hè", "street food", "bánh mì",
+                    "bánh xèo", "quán mì"),
+    "local_cuisine": ("mì quảng", "mỳ quảng", "bánh xèo", "bún chả cá",
+                      "bánh tráng", "đặc sản", "quán mì"),
+    "cafe": ("cà phê", "cafe", "coffee"),
+    "fine_dining": ("cao cấp", "fine dining", "nhà hàng pháp", "steakhouse"),
+    "vegetarian_option": ("chay", "vegan", "vegetarian"),
+    "vegan_only": ("chay", "vegan", "vegetarian"),
+    "halal": ("halal",),
+    "kid_friendly": ("gia đình", "trẻ em", "kid"),
+    "bbq": ("nướng", "bbq", "lẩu", "hot pot", "hotpot", "yakiniku"),
+    "beer": ("bia", "beer", "quán nhậu", "quán rượu", "pub"),
+    "dessert": ("chè", "kem", "bánh ngọt", "tráng miệng", "dessert", "trân châu"),
+}
+# "Has a vegetarian choice" likes a vegetarian kitchen without ruling a grill out:
+# it never makes a cuisine clash (`vegan_only` does).
+OPTION_ONLY_PREFS = frozenset({"vegetarian_option"})
+
+
+def food_pref_terms(pref: str) -> tuple[str, ...]:
+    """The words one food preference is looked for under (a catalog code's group,
+    any other text as itself)."""
+    return terms_for(pref, FOOD_PREF_GROUPS)
 
 
 def taste_match(poi: dict, prefs: list[str] | None) -> tuple[float, list[str]]:
@@ -173,7 +218,7 @@ def taste_match(poi: dict, prefs: list[str] | None) -> tuple[float, list[str]]:
     text, folded = f"{text} {name}".strip(), f"{folded} {fold(name)}".strip()
     hits: list[str] = []
     for pref in prefs or []:
-        hit = _match_terms(terms_for(pref, {}), text, folded)
+        hit = _match_terms(food_pref_terms(pref), text, folded)
         if hit and hit not in hits:
             hits.append(hit)
     total = len([p for p in (prefs or []) if str(p).strip()])
@@ -219,6 +264,22 @@ def cuisine_classes(text: str) -> set[str]:
     return found
 
 
+def cuisine_terms(text: str) -> list[str]:
+    """Cuisine words named in free text ("ăn hải sản" -> ["hải sản"]).
+
+    Lets a food wish that arrived as an activity reach the taste bonus the
+    same way a `food_prefs` entry does.
+    """
+    raw = str(text or "").lower()
+    folded = fold(raw)
+    found: list[str] = []
+    for terms in CUISINE_CLASSES.values():
+        hit = _match_terms(terms, raw, folded)
+        if hit and hit not in found:
+            found.append(hit)
+    return found
+
+
 def poi_cuisine(poi: dict) -> set[str]:
     """Cuisine classes of a POI (tags/cuisine/type/cat/ambience/name)."""
     poi = poi or {}
@@ -244,7 +305,9 @@ def taste_score(poi: dict, prefs: list[str] | None
         return 0.0, [], []
     ratio, hits = taste_match(poi, prefs)
     poi_cls = poi_cuisine(poi)
-    pref_cls = cuisine_classes(" ".join(prefs))
+    pref_cls = cuisine_classes(" ".join(
+        term for pref in prefs if fold(pref) not in OPTION_ONLY_PREFS
+        for term in food_pref_terms(pref)))
     # A clash only exists when the POI serves NOTHING the profile asked for
     # (a seafood-and-vegan profile must not flag a seafood kitchen as vegan-
     # exclusive). Overlap wins; exclusivity is what the table describes.

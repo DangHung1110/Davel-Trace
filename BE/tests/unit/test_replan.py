@@ -13,9 +13,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services import scorer  # noqa: E402
 from BE.app.services import state as store  # noqa: E402
-from BE.app.services.common import to_min  # noqa: E402
-from BE.app.services.matrix import MatrixService  # noqa: E402
-from BE.app.services.optimizer import travel_from_matrix  # noqa: E402
+from BE.common import to_min  # noqa: E402
+from BE.app.services.matrix import load_matrix_doc  # noqa: E402
+from BE.app.services.profiles import MAX_SOLVER_CANDIDATES, _travel_from_cells  # noqa: E402
 from BE.app.services.replan import replan  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
@@ -70,6 +70,123 @@ class TestReplan(unittest.TestCase):
         self.assertNotIn("hill", drops + [a["poi_id"] for a in out["itinerary"]["activities"]]
                          if out["itinerary"]["activities"] else drops)
         print(f"\n rain: mode {out['mode']} v{out['version']} changes {out['changes']}")
+
+    def _day(self):
+        """A day with a profile: lunch, then a museum and a market."""
+        pois = [
+            {"poi_id": "temple", "verified": True, "cat": "landmark", "visit_min": 60, "fee": 0,
+             "opening_hours": ["06:00-18:00"]},
+            {"poi_id": "lunch", "verified": True, "cat": "restaurant", "visit_min": 60, "fee": 100000,
+             "opening_hours": ["10:00-21:00"]},
+            {"poi_id": "beach", "verified": True, "cat": "beach", "visit_min": 60, "fee": 0,
+             "weather_sensitive": True, "opening_hours": ["00:00-23:59"]},
+            {"poi_id": "museum", "verified": True, "cat": "museum", "visit_min": 60, "fee": 60000,
+             "opening_hours": ["08:00-18:00"]},
+        ]
+        ids = [p["poi_id"] for p in pois]
+        travel = {(a, b): 10 for a in ["depot", *ids] for b in ids if a != b}
+        state = store.new_state("t-day", [
+            {"poi_id": "temple", "start": "08:00", "end": "09:00"},
+            {"poi_id": "lunch", "start": "11:30", "end": "12:30"},
+            {"poi_id": "beach", "start": "14:00", "end": "15:00"},
+            {"poi_id": "museum", "start": "15:30", "end": "16:30"},
+        ], "08:00")
+        trip = {"trip_id": "t-day", "budget": 1000000, "avoid": [], "start_time": "08:00",
+                "end_time": "18:00",
+                "profile": {"party_type": "couple", "pace": 2, "fitness": 2}}
+        return pois, travel, state, trip
+
+    def test_replan_keeps_the_day_rules_of_a_profile(self):
+        # Every plan with a profile failed here: the gate could not see the lunch.
+        pois, travel, state, trip = self._day()
+        state = store.complete(state, "temple", "09:00")
+        out = replan(state, {"type": "rain"}, pois, travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        lunch = next(a for a in out["itinerary"]["activities"] if a["poi_id"] == "lunch")
+        self.assertGreaterEqual(lunch["start"], "11:00")
+        self.assertLess(lunch["start"], "13:00")
+
+    def test_replan_after_lunch_keeps_the_rest_clear(self):
+        pois, travel, state, trip = self._day()
+        state = store.complete(store.complete(state, "temple", "09:00"), "lunch", "12:30")
+        out = replan(state, {"type": "rain"}, pois, travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        museum = out["itinerary"]["activities"][0]
+        self.assertGreaterEqual(museum["start"], "13:15")
+
+    def test_a_delay_past_lunch_does_not_kill_the_day(self):
+        pois, travel, state, trip = self._day()
+        state = store.complete(state, "temple", "13:30")
+        out = replan(state, {"type": "delay"}, pois, travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+
+    def test_what_is_done_is_paid_from_the_budget(self):
+        pois, travel, state, trip = self._day()
+        state = store.complete(store.complete(state, "temple", "09:00"), "lunch", "12:30")
+        # 100k went on lunch, so the 60k museum no longer fits; the free beach does.
+        out = replan(state, {"type": "delay"}, pois, travel, {**trip, "budget": 150000})
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        self.assertEqual([a["poi_id"] for a in out["itinerary"]["activities"]], ["beach"])
+
+    def test_rain_on_an_open_air_lunch_finds_a_dry_one(self):
+        pois, travel, state, trip = self._day()
+        pois[1]["weather_sensitive"] = True
+        dry = {"poi_id": "indoor", "verified": True, "cat": "restaurant", "visit_min": 60,
+               "fee": 100000, "opening_hours": ["10:00-21:00"]}
+        ids = [p["poi_id"] for p in pois] + ["indoor"]
+        travel = {(a, b): 10 for a in ["depot", *ids] for b in ids if a != b}
+        state = store.complete(state, "temple", "09:00")
+        out = replan(state, {"type": "rain"}, [*pois, dry], travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        ids = [a["poi_id"] for a in out["itinerary"]["activities"]]
+        self.assertIn("indoor", ids)
+        self.assertNotIn("lunch", ids)
+        added = [c for c in out["changes"] if c["action"] == "add"]
+        self.assertEqual(added, [{"action": "add", "poi_id": "indoor",
+                                  "reason": "thay nha hang bi bo"}])
+
+    def test_with_no_dry_lunch_the_open_air_one_stays(self):
+        pois, travel, state, trip = self._day()
+        pois[1]["weather_sensitive"] = True
+        state = store.complete(state, "temple", "09:00")
+        out = replan(state, {"type": "rain"}, pois, travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        self.assertIn("lunch", [a["poi_id"] for a in out["itinerary"]["activities"]])
+
+    def test_rain_does_not_cancel_a_must_visit(self):
+        pois, travel, state, trip = self._day()
+        state = store.complete(state, "temple", "09:00")
+        out = replan(state, {"type": "rain"}, pois, travel, {**trip, "must_visit": ["beach"]})
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        self.assertIn("beach", [a["poi_id"] for a in out["itinerary"]["activities"]])
+        self.assertIn({"action": "keep", "poi_id": "beach", "reason": "diem bat buoc"}, out["changes"])
+
+    def test_an_explicit_drop_of_a_must_visit_still_fails_honestly(self):
+        pois, travel, state, trip = self._day()
+        out = replan(state, {"type": "drop_poi", "affected": ["beach"]}, pois, travel,
+                     {**trip, "must_visit": ["beach"]})
+        self.assertEqual(out["mode"], "no_solution")
+
+    def test_a_second_service_of_a_restaurant_counts(self):
+        pois, travel, state, trip = self._day()
+        pois[1]["opening_hours"] = ["10:00-13:00, 17:00-21:00"]
+        trip = {**trip, "start_time": "13:30", "end_time": "20:00"}
+        state = store.new_state("t-day2", [{"poi_id": "museum", "start": "13:30", "end": "14:30"},
+                                           {"poi_id": "lunch", "start": "17:30", "end": "18:30"}], "13:30")
+        out = replan(state, {"type": "delay"}, pois, travel, trip)
+        self.assertEqual(out["mode"], "plan", out.get("reason"))
+        self.assertIn("lunch", [a["poi_id"] for a in out["itinerary"]["activities"]])
+
+    def test_a_done_must_visit_does_not_block_a_replan(self):
+        out = replan(fresh_state(), {"type": "rain", "at": "13:00"}, POIS, TRAVEL,
+                     {**TRIP, "must_visit": ["hill"]})
+        self.assertEqual(out["mode"], "plan")
+
+    def test_a_must_visit_still_to_do_binds(self):
+        out = replan(fresh_state(), {"type": "rain", "at": "13:00"}, POIS, TRAVEL,
+                     {**TRIP, "must_visit": ["museum"]})
+        self.assertEqual(out["mode"], "no_solution")
+        self.assertIn("HCS", out["reason"])
 
     def test_replan_twice_no_duplicates(self):
         s = fresh_state()
@@ -210,11 +327,12 @@ class TestReplan(unittest.TestCase):
         """T046/B1/B3 on the real danang-v1 matrix: two replans, v1->2->3.
 
         Candidates are the snapshot POIs that are `verified` (only these pass
-        the canonical FAR gate; unverified candidates force no_solution). With
-        just 5 verified POIs the full set is used (~6-8 slice not reachable);
-        size chosen so the remaining pool is deterministically feasible.
+        the canonical FAR gate; unverified candidates force no_solution),
+        capped like a real plan's `_context.pois` (MAX_SOLVER_CANDIDATES):
+        the whole verified set (573 after the Phase 4 review) is no pool the
+        app ever hands the solver, and it runs out of solver time.
         """
-        svc = MatrixService(SNAPSHOT_DIR)
+        doc = load_matrix_doc(MATRIX_JSON)
         with open(POIS_JSON, encoding="utf-8") as fh:
             raw = json.load(fh)["pois"]
         by = {p["poi_id"]: p for p in raw}
@@ -229,10 +347,11 @@ class TestReplan(unittest.TestCase):
                     "rating": p.get("rating", 0),
                     "opening_hours": p.get("opening_hours") or []}
 
-        cand = [i for i in svc.ids if i in by and by[i].get("verified")]
+        cand = [i for i in doc["ids"] if i in by and by[i].get("verified")]
+        cand = cand[:MAX_SOLVER_CANDIDATES]
         self.assertGreaterEqual(len(cand), 4)
         pois = [mk(i) for i in cand]
-        travel = travel_from_matrix(svc, [DEPOT] + cand)
+        travel = _travel_from_cells(doc["cells"], [DEPOT] + cand)
         trip = {"trip_id": "real", "budget": 5000000, "avoid": [],
                 "start_time": "07:00", "end_time": "18:00"}
         state_acts = [{"poi_id": cand[0], "start": "07:30", "end": "09:30"},
@@ -261,7 +380,7 @@ class TestReplan(unittest.TestCase):
         self.assertTrue(set(a["poi_id"] for a in acts) <= set(cand))
         ordered = sorted(acts, key=lambda a: to_min(a["start"]))
         for x, y in zip(ordered, ordered[1:]):  # B3: gap >= real minutes
-            need = svc.minutes(x["poi_id"], y["poi_id"])[0]
+            need = doc["cells"][f"{x['poi_id']}->{y['poi_id']}"]["minutes"]
             self.assertGreaterEqual(to_min(y["start"]) - to_min(x["end"]), need)
         print(f"\n real: v{s['version']}->{first['version']}->{second['version']}"
               f" remaining {len(remaining)} unique, acts "

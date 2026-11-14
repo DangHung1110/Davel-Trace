@@ -1,8 +1,8 @@
 {
-  "cv_acc": 0.7699320243892661,
+  "cv_acc": 0.8166850619987358,
   "cv_folds": 5,
-  "held_acc": 0.7731343283582089,
-  "held_n": 335,
-  "flip_consistency": 0.7761194029850746,
+  "held_acc": 0.8214285714285714,
+  "held_n": 252,
+  "flip_consistency": 0.9682539682539683,
   "model": "BE/ml/patm/model.txt"
 }

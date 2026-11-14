@@ -55,6 +55,14 @@ class AppState extends ChangeNotifier {
   String? currentPlanningRequestId;
   List<ItineraryVersionSummary> itineraryVersions = [];
   Map<String, dynamic>? planningReadiness;
+  Map<String, dynamic>? aiReadiness;
+  AiInterpretationProposal? aiProposal;
+  PlanExplanation? planExplanation;
+  bool isInterpreting = false;
+  bool isExplaining = false;
+  String? aiMessage;
+  Map<String, dynamic> _confirmedPlanningOverrides = const {};
+  int _aiRequestRevision = 0;
   bool isPlanning = false;
   String plannerMessage =
       'Đang dùng dữ liệu mẫu trên máy. Bấm tạo phương án để thử FastAPI.';
@@ -131,6 +139,7 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> _loadTripDetail(String id) async {
+    if (activeTrip?.id != id) skipAiProposal();
     final detail = await repository.getTrip(id);
     activeTrip = detail.$1;
     itinerary = detail.$2;
@@ -172,6 +181,12 @@ class AppState extends ChangeNotifier {
   }
 
   void _clearTripData({bool keepTrips = false}) {
+    _aiRequestRevision += 1;
+    isInterpreting = false;
+    aiProposal = null;
+    aiMessage = null;
+    planExplanation = null;
+    _confirmedPlanningOverrides = const {};
     if (!keepTrips) trips = [];
     activeTrip = null;
     itinerary = null;
@@ -605,9 +620,10 @@ class AppState extends ChangeNotifier {
           'transport': [trip.transport],
         },
         'target_count': 5,
+        'constraint_overrides': _confirmedPlanningOverrides,
         '_idempotency_key': _planningKeys.putIfAbsent(
-          '${trip.id}:${trip.version}',
-          () => 'plan-${trip.id}-v${trip.version}',
+          '${trip.id}:${trip.version}:${_confirmedPlanningOverrides.toString()}',
+          () => 'plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}',
         ),
       });
       if (result.status == 'failed') {
@@ -630,6 +646,7 @@ class AppState extends ChangeNotifier {
       plannerMessage = result.shortageReason == null
           ? 'FastAPI đã trả ${result.items.length} phương án qua cổng cứng.'
           : 'FastAPI trả ${result.items.length} phương án; không thêm phương án kém chỉ để đủ số lượng.';
+      _confirmedPlanningOverrides = const {};
       try {
         planningReadiness = await planningRepository.readiness();
       } catch (_) {
@@ -647,6 +664,97 @@ class AppState extends ChangeNotifier {
     } finally {
       isPlanning = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> interpretPlanningRequest(String text) async {
+    final trip = activeTrip;
+    final repository = planningRepository;
+    if (trip == null || repository is! AiPlanningRepository) {
+      aiMessage = 'Trợ lý AI không có trong chế độ demo này.';
+      notifyListeners();
+      return;
+    }
+    final aiRepository = repository as AiPlanningRepository;
+    final revision = ++_aiRequestRevision;
+    isInterpreting = true;
+    aiMessage = null;
+    aiProposal = null;
+    notifyListeners();
+    try {
+      final readiness = await aiRepository.aiReadiness();
+      if (revision != _aiRequestRevision) return;
+      aiReadiness = readiness;
+      if (readiness['available'] != true ||
+          (readiness['capabilities'] as Map?)?['interpretation'] != true) {
+        throw const ApiException(
+          'LLM_DISABLED',
+          'Gemini chưa được cấu hình; bạn vẫn có thể tạo lịch trực tiếp.',
+        );
+      }
+      final proposal = await aiRepository.interpret(trip.id, text);
+      if (revision != _aiRequestRevision) return;
+      aiProposal = proposal;
+      aiMessage = proposal.unresolved.isEmpty
+          ? 'Hãy kiểm tra đề xuất trước khi xác nhận.'
+          : 'Có ${proposal.unresolved.length} giá trị chưa xác minh; chúng sẽ không được dùng.';
+    } catch (error) {
+      if (revision == _aiRequestRevision) {
+        aiMessage = _message(error);
+      }
+    } finally {
+      if (revision == _aiRequestRevision) {
+        isInterpreting = false;
+        notifyListeners();
+      }
+    }
+  }
+
+  Future<void> confirmAiProposalAndPlan({
+    Map<String, dynamic>? corrections,
+  }) async {
+    final proposal = aiProposal;
+    if (proposal == null) return;
+    _confirmedPlanningOverrides = Map<String, dynamic>.from(
+      proposal.confirmedOverrides,
+    );
+    if (corrections != null) _confirmedPlanningOverrides.addAll(corrections);
+    aiProposal = null;
+    aiMessage = 'Đã xác nhận đề xuất; planner deterministic đang xử lý.';
+    notifyListeners();
+    await requestPlan();
+  }
+
+  void skipAiProposal() {
+    _aiRequestRevision += 1;
+    isInterpreting = false;
+    isExplaining = false;
+    planExplanation = null;
+    aiProposal = null;
+    aiMessage = null;
+    _confirmedPlanningOverrides = const {};
+    notifyListeners();
+  }
+
+  Future<void> explainPlan(PlanAlternative alternative) async {
+    final repository = planningRepository;
+    if (repository is! AiPlanningRepository) return;
+    final aiRepository = repository as AiPlanningRepository;
+    final revision = _aiRequestRevision;
+    isExplaining = true;
+    planExplanation = null;
+    notifyListeners();
+    try {
+      final explanation = await aiRepository.explain(alternative.id);
+      if (revision != _aiRequestRevision) return;
+      planExplanation = explanation;
+    } catch (error) {
+      if (revision == _aiRequestRevision) aiMessage = _message(error);
+    } finally {
+      if (revision == _aiRequestRevision) {
+        isExplaining = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -768,6 +876,11 @@ class AppState extends ChangeNotifier {
     currentPlanningRequestId = null;
     itineraryVersions = [];
     planningReadiness = null;
+    aiReadiness = null;
+    aiProposal = null;
+    planExplanation = null;
+    aiMessage = null;
+    _confirmedPlanningOverrides = const {};
     plannerMessage = 'Đã quay về dữ liệu demo trên thiết bị.';
     notifyListeners();
   }
