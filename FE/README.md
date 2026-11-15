@@ -1,5 +1,8 @@
 # Flutter mobile — Davel Trace
 
+Google sign-in and real SMTP recovery setup:
+[`identity providers quickstart`](../specs/013-identity-providers/quickstart.md).
+
 Ứng dụng mobile chính của dự án, theo phong cách **Sơn Trà Breeze**: teal
 `#006A6A`, amber `#D97706`, nền trắng/slate, Material 3 bo tròn và ít màu.
 

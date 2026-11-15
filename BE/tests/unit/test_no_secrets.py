@@ -23,6 +23,8 @@ REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
 PATTERNS = [
     r"sk-[A-Za-z0-9]{8,}",
     r"AIza[A-Za-z0-9_-]{10,}",
+    r"AQ\.[A-Za-z0-9_-]{30,}",
+    r"GOCSPX-[A-Za-z0-9_-]{20,}",
     r"xox[bap]-[A-Za-z0-9-]{8,}",
     r"ghp_[A-Za-z0-9]{8,}",
     r"password\s*=\s*['\"][^'\"]{3,}",

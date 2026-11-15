@@ -33,7 +33,8 @@ the password already initialized in a volume. Preserve existing volumes.
 
 For DBeaver use PostgreSQL, host `127.0.0.1`, port `5437`, database
 `davel_trace`, username `davel`, password from `POSTGRES_PASSWORD` in env.
-The local schema head is `010_001`.
+The local schema head is `013_001` after the Google/SMTP follow-up; see
+[`identity providers`](../013-identity-providers/quickstart.md).
 
 ## Deterministic validation without AI
 

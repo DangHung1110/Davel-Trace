@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/config/api_config.dart';
 import '../application/auth_controller.dart';
 
 class RecoveryScreen extends StatefulWidget {
@@ -23,6 +22,14 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
   bool requested = false;
 
   @override
+  void dispose() {
+    email.dispose();
+    token.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text(
@@ -40,6 +47,11 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
           ),
           if (requested) ...[
             const SizedBox(height: 12),
+            Text(
+              widget.controller.message ??
+                  'Hãy kiểm tra email để lấy mã khôi phục.',
+            ),
+            const SizedBox(height: 12),
             TextField(
               controller: token,
               decoration: const InputDecoration(labelText: 'Mã khôi phục'),
@@ -51,7 +63,7 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
                 obscureText: true,
                 decoration: const InputDecoration(labelText: 'Mật khẩu mới'),
               ),
-            if (ApiConfig.isDemo)
+            if (widget.controller.developmentInboxEnabled)
               OutlinedButton(
                 onPressed: () async {
                   final value = await widget.controller.loadDevelopmentToken(

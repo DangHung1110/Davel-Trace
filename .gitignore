@@ -26,6 +26,7 @@ dist/
 build/
 .next/
 .flutter-sdk/
+.pub-cache-local/
 FE/.dart_tool/
 FE/.flutter-plugins
 FE/.flutter-plugins-dependencies

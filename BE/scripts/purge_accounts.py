@@ -26,6 +26,7 @@ from BE.app.db.models import (
 from BE.app.db.session import session_scope
 from BE.app.modules.identity.service import now_utc
 from BE.app.modules.identity.security import secret_hash
+from BE.app.modules.identity.provider_models import GoogleIdentityModel, GoogleLoginAttemptModel
 
 
 def purge_due_accounts() -> int:
@@ -76,7 +77,7 @@ def purge_due_accounts() -> int:
             ))
             for model in (IdentitySessionModel, OneTimeActionModel,
                           PasswordHistoryModel, RoleAssignmentModel,
-                          ExportRequestModel):
+                          ExportRequestModel, GoogleIdentityModel, GoogleLoginAttemptModel):
                 session.execute(delete(model).where(model.account_id == account_id))
             account.email_normalized = f"purged-{secret_hash(str(account_id))}@invalid.local"
             account.password_hash = "purged"

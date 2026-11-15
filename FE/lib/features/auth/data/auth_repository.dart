@@ -1,7 +1,9 @@
 import '../domain/models.dart';
 
 abstract interface class AuthRepository {
-  Future<void> register(String email, String password);
+  Future<Map<String, dynamic>> capabilities();
+  Future<String> register(String email, String password);
+  Future<void> resendVerification(String email);
   Future<void> verify(String token);
   Future<AuthTokens> login(String email, String password);
   Future<AuthTokens> refresh(String refreshToken);

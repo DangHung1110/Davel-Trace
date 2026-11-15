@@ -1,5 +1,8 @@
 # Backend (FastAPI + PostgreSQL)
 
+Google web sign-in and real SMTP identity email are documented in
+[`identity providers quickstart`](../specs/013-identity-providers/quickstart.md).
+
 FastAPI phục vụ planner hiện có và nền tảng quản lý. PostgreSQL 16 là kho dữ
 liệu authoritative; SQLite cũ chỉ còn là nguồn import/compatibility ở
 `demo|test`, không được chọn trong production.

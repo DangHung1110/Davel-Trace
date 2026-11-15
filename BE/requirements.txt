@@ -12,3 +12,4 @@ alembic>=1.13,<2
 psycopg[binary]>=3.2,<4
 pydantic-settings>=2.6,<3
 pwdlib[argon2]>=0.2,<1
+google-auth[requests]>=2.40,<3  # Google ID-token verification (spec 013)

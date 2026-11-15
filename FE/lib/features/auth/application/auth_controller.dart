@@ -5,6 +5,7 @@ import '../../../core/auth/secure_auth_session_store.dart';
 import '../../../core/errors/api_exception.dart';
 import '../data/auth_repository.dart';
 import '../data/http_auth_repository.dart';
+import '../data/google_sign_in.dart' as google;
 import '../domain/models.dart';
 
 enum AuthStatus {
@@ -16,20 +17,43 @@ enum AuthStatus {
 }
 
 class AuthController extends ChangeNotifier {
-  AuthController({AuthRepository? repository, AuthSessionStore? sessionStore})
-    : repository = repository ?? HttpAuthRepository(),
-      sessionStore = sessionStore ?? const SecureAuthSessionStore();
+  AuthController({
+    AuthRepository? repository,
+    AuthSessionStore? sessionStore,
+    Future<AuthTokens> Function()? googleSignIn,
+  }) : repository = repository ?? HttpAuthRepository(),
+       sessionStore = sessionStore ?? const SecureAuthSessionStore(),
+       _googleSignIn = googleSignIn,
+       _googlePlatformAvailable =
+           googleSignIn != null || google.supportsGoogleSignIn;
 
   final AuthRepository repository;
   final AuthSessionStore sessionStore;
+  final Future<AuthTokens> Function()? _googleSignIn;
+  final bool _googlePlatformAvailable;
+  bool googleAvailable = false;
+  bool developmentInboxEnabled = false;
+  String? googleAuthorizationOrigin;
   AuthStatus status = AuthStatus.initializing;
   AccountSummary? account;
   String? pendingEmail;
   String? message;
   String? errorMessage;
   bool busy = false;
+  Future<String?>? _refreshInFlight;
 
   Future<void> initialize() async {
+    try {
+      final capabilities = await repository.capabilities();
+      googleAvailable =
+          _googlePlatformAvailable && capabilities['google_sign_in'] == true;
+      googleAuthorizationOrigin =
+          capabilities['google_authorization_origin'] as String?;
+      developmentInboxEnabled = capabilities['development_inbox'] == true;
+    } catch (_) {
+      googleAvailable = false;
+      developmentInboxEnabled = false;
+    }
     repository.setRefreshHandler(_refreshAfterUnauthorized);
     final token = await sessionStore.readRefreshToken();
     if (token == null) {
@@ -72,7 +96,13 @@ class AuthController extends ChangeNotifier {
     status = AuthStatus.authenticated;
   }
 
-  Future<String?> _refreshAfterUnauthorized() async {
+  Future<String?> _refreshAfterUnauthorized() {
+    return _refreshInFlight ??= _rotateSession().whenComplete(() {
+      _refreshInFlight = null;
+    });
+  }
+
+  Future<String?> _rotateSession() async {
     final refreshToken = await sessionStore.readRefreshToken();
     if (refreshToken == null) return null;
     try {
@@ -90,10 +120,18 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> register(String email, String password) => _run(() async {
-    await repository.register(email, password);
+    final delivery = await repository.register(email, password);
     pendingEmail = email.trim().toLowerCase();
     status = AuthStatus.verificationRequired;
-    message = 'Tài khoản đã tạo. Hãy xác thực email để đăng nhập.';
+    message = delivery == 'sent'
+        ? 'Tài khoản đã tạo. Hãy kiểm tra email để lấy mã xác thực.'
+        : 'Tài khoản đã tạo nhưng chưa gửi được email. Hãy thử gửi lại mã.';
+  });
+
+  Future<void> resendVerification() => _run(() async {
+    if (pendingEmail == null) return;
+    await repository.resendVerification(pendingEmail!);
+    message = 'Yêu cầu gửi lại đã được tiếp nhận. Hãy kiểm tra email hoặc thử lại sau.';
   });
 
   Future<void> verify(String token) => _run(() async {
@@ -120,10 +158,19 @@ class AuthController extends ChangeNotifier {
     await _accept(await repository.login(email, password));
   });
 
+  Future<void> loginWithGoogle() => _run(() async {
+    await _accept(
+      await (_googleSignIn?.call() ??
+          google.signInWithGoogle(
+            authorizationOrigin: googleAuthorizationOrigin,
+          )),
+    );
+  });
+
   Future<void> requestRecovery(String email) => _run(() async {
     pendingEmail = email.trim().toLowerCase();
     await repository.requestRecovery(email);
-    message = 'Nếu tài khoản hợp lệ, hướng dẫn khôi phục đã được tạo.';
+    message = 'Yêu cầu đã được tiếp nhận. Nếu tài khoản hợp lệ, hãy kiểm tra email hoặc thử lại sau.';
   });
 
   Future<void> resetPassword(String token, String password) => _run(() async {

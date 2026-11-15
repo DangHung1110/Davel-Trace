@@ -14,12 +14,21 @@ class HttpAuthRepository implements AuthRepository {
       _client.onUnauthorized = handler;
 
   @override
-  Future<void> register(String email, String password) async {
-    await _client.post(
+  Future<Map<String, dynamic>> capabilities() async =>
+      await _client.get('/v1/auth/capabilities') as Map<String, dynamic>;
+
+  @override
+  Future<String> register(String email, String password) async {
+    final result = await _client.post(
       '/v1/auth/register',
       body: {'email': email, 'password': password, 'terms_accepted': true},
-    );
+    ) as Map<String, dynamic>;
+    return result['delivery_status'] as String? ?? 'failed';
   }
+
+  @override
+  Future<void> resendVerification(String email) async =>
+      _client.post('/v1/auth/verification/resend', body: {'email': email});
 
   @override
   Future<void> verify(String token) async =>
