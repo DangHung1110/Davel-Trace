@@ -143,6 +143,8 @@
       let lastCameraUpdate = 0;
       let mapReady = false;
       let pendingTrip;
+      let pendingUserLocation;
+      let followUserLocation = false;
       const animationDuration = 26000;
 
       function showError(message) {
@@ -389,7 +391,7 @@
           const current = pointAtProgress(routeCoordinates, lengths, progress);
           carMarker.setLngLat(current.point).setRotation(current.angle);
 
-          if (now - lastCameraUpdate > 450) {
+          if (!followUserLocation && now - lastCameraUpdate > 450) {
             map.easeTo({ center: current.point, duration: 500 });
             lastCameraUpdate = now;
           }
@@ -410,8 +412,14 @@
         if (routeCoordinates.length) createCar(routeCoordinates[0]);
       }
 
-      function setUserLocation(latitude, longitude) {
+      function setUserLocation(latitude, longitude, { follow = false, recenter = false } = {}) {
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude) ||
+            Math.abs(latitude) > 90 || Math.abs(longitude) > 180) return;
+        pendingUserLocation = { latitude, longitude, follow, recenter };
+        followUserLocation = follow;
+        if (!mapReady) return;
         const point = [longitude, latitude];
+        const firstFix = !userMarker;
         if (!userMarker) {
           const element = document.createElement("div");
           element.className = "user-marker";
@@ -421,35 +429,25 @@
         } else {
           userMarker.setLngLat(point);
         }
-        map.easeTo({ center: point, zoom: 16, duration: 900 });
+        if (follow || recenter) {
+          const camera = { center: point, duration: firstFix || recenter ? 650 : 300 };
+          if (firstFix || recenter) camera.zoom = 16;
+          map.easeTo(camera);
+        }
+        pendingUserLocation.recenter = false;
       }
 
-      function locateUser() {
-        if (!navigator.geolocation) {
-          showError("Thiết bị không hỗ trợ định vị.");
-          return;
-        }
-        statusElement.hidden = false;
-        statusElement.style.color = "#173c35";
-        statusElement.textContent = "Đang xác định vị trí của bạn…";
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const point = [position.coords.longitude, position.coords.latitude];
-            if (!userMarker) {
-              const element = document.createElement("div");
-              element.className = "user-marker";
-              userMarker = new maplibregl.Marker({ element, anchor: "center" })
-                .setLngLat(point)
-                .addTo(map);
-            } else {
-              userMarker.setLngLat(point);
-            }
-            map.easeTo({ center: point, zoom: 16, duration: 900 });
-            statusElement.hidden = true;
-          },
-          () => showError("Không thể lấy vị trí. Hãy kiểm tra quyền GPS."),
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 15000 },
-        );
+      function clearUserLocation() {
+        pendingUserLocation = undefined;
+        followUserLocation = false;
+        if (userMarker) { userMarker.remove(); userMarker = undefined; }
+      }
+
+      function releaseUserCamera(event) {
+        if (!event.originalEvent) return;
+        followUserLocation = false;
+        if (pendingUserLocation) pendingUserLocation.follow = false;
+        window.parent.postMessage(JSON.stringify({ type: "mapUserPan" }), window.location.origin);
       }
 
       async function renderTrip(stops, route = null, autoPlay = false) {
@@ -494,7 +492,7 @@
       }
 
       window.addEventListener("message", (event) => {
-        if (event.origin !== window.location.origin) return;
+        if (event.origin !== window.location.origin || event.source !== window.parent) return;
         try {
           const message =
             typeof event.data === "string" ? JSON.parse(event.data) : event.data;
@@ -507,9 +505,10 @@
           } else if (message?.type === "resetRoute") {
             resetRoute();
           } else if (message?.type === "setUserLocation") {
-            setUserLocation(message.latitude, message.longitude);
-          } else if (message?.type === "locateUser") {
-            locateUser();
+            setUserLocation(message.latitude, message.longitude,
+              { follow: message.follow === true, recenter: message.recenter === true });
+          } else if (message?.type === "clearUserLocation") {
+            clearUserLocation();
           }
         } catch (error) {
           console.error("Invalid Flutter map message", error);
@@ -557,6 +556,8 @@
             "bottom-right",
           );
           map.addControl(new maplibregl.FullscreenControl(), "bottom-right");
+          map.on("dragstart", releaseUserCamera);
+          map.on("zoomstart", releaseUserCamera);
 
           map.on("load", () => {
             add3DBuildings(map);
@@ -566,6 +567,10 @@
             const trip = pendingTrip || initialTrip;
             if (trip.stops.length > 1) {
               renderTrip(trip.stops, trip.route, trip.autoPlay);
+            }
+            if (pendingUserLocation) {
+              const latest = pendingUserLocation;
+              setUserLocation(latest.latitude, latest.longitude, latest);
             }
           });
           map.on("error", (event) => {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
 import 'dart:ui_web' as ui_web;
@@ -20,6 +21,8 @@ class MapCanvas extends StatefulWidget {
     required this.locateRequest,
     required this.userLocation,
     required this.routePreview,
+    this.followUser = false,
+    this.onUserPan,
   });
 
   final List<MapStop> stops;
@@ -30,6 +33,8 @@ class MapCanvas extends StatefulWidget {
   final int locateRequest;
   final MapLocation? userLocation;
   final RoutePreviewData? routePreview;
+  final bool followUser;
+  final VoidCallback? onUserPan;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -38,6 +43,28 @@ class MapCanvas extends StatefulWidget {
 class _MapCanvasState extends State<MapCanvas> {
   late final String _viewType;
   late final web.HTMLIFrameElement _iframe;
+  StreamSubscription<web.Event>? _loadedSubscription;
+  late final JSFunction _messageListener;
+  bool _loaded = false;
+
+  void _sendLocation({bool recenter = false}) {
+    if (!_loaded) return;
+    final location = widget.userLocation;
+    _iframe.contentWindow?.postMessage(
+      jsonEncode(
+        location == null
+            ? {'type': 'clearUserLocation'}
+            : {
+                'type': 'setUserLocation',
+                'latitude': location.latitude,
+                'longitude': location.longitude,
+                'follow': widget.followUser,
+                'recenter': recenter,
+              },
+      ).toJS,
+      web.window.location.origin.toJS,
+    );
+  }
 
   List<Map<String, Object>> get _serializedStops => widget.stops
       .map(
@@ -87,6 +114,26 @@ class _MapCanvasState extends State<MapCanvas> {
       ..style.border = '0'
       ..style.width = '100%'
       ..style.height = '100%';
+    _loadedSubscription = _iframe.onLoad.listen((_) {
+      _loaded = true;
+      _sendLocation(recenter: widget.followUser);
+    });
+    _messageListener = ((web.MessageEvent event) {
+      if (event.origin != web.window.location.origin ||
+          !event.source.strictEquals(_iframe.contentWindow).toDart) {
+        return;
+      }
+      try {
+        final raw = event.data.dartify();
+        final data = raw is String ? jsonDecode(raw) : raw;
+        if (data is Map && data['type'] == 'mapUserPan') {
+          widget.onUserPan?.call();
+        }
+      } catch (_) {
+        /* Ignore unrelated frame messages. */
+      }
+    }).toJS;
+    web.window.addEventListener('message', _messageListener);
 
     ui_web.platformViewRegistry.registerViewFactory(_viewType, (int viewId) {
       return _iframe;
@@ -99,6 +146,7 @@ class _MapCanvasState extends State<MapCanvas> {
     if (widget.routeRevision != oldWidget.routeRevision ||
         widget.routePreview != oldWidget.routePreview ||
         widget.stops != oldWidget.stops) {
+      _loaded = false;
       _iframe.src = _mapUrl(autoPlay: false);
     } else if (widget.playRequest != oldWidget.playRequest) {
       _send('playRoute');
@@ -106,19 +154,19 @@ class _MapCanvasState extends State<MapCanvas> {
       _send('pauseRoute');
     }
     if (widget.resetRequest != oldWidget.resetRequest) _send('resetRoute');
-    if (widget.locateRequest != oldWidget.locateRequest) {
-      final location = widget.userLocation;
-      if (location != null) {
-        _iframe.contentWindow?.postMessage(
-          jsonEncode({
-            'type': 'setUserLocation',
-            'latitude': location.latitude,
-            'longitude': location.longitude,
-          }).toJS,
-          web.window.location.origin.toJS,
-        );
-      }
+    if (widget.locateRequest != oldWidget.locateRequest ||
+        widget.userLocation != oldWidget.userLocation ||
+        widget.followUser != oldWidget.followUser) {
+      _sendLocation(recenter: widget.locateRequest != oldWidget.locateRequest);
     }
+  }
+
+  @override
+  void dispose() {
+    unawaited(_loadedSubscription?.cancel());
+    web.window.removeEventListener('message', _messageListener);
+    _iframe.remove();
+    super.dispose();
   }
 
   @override

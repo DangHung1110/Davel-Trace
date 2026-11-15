@@ -32,6 +32,8 @@ void main() {
         ),
       );
       await tester.tap(find.byKey(const Key('locate-user-button')));
+      await tester.runAsync(() => Future<void>.delayed(Duration.zero));
+      await tester.pump();
       await tester.pumpAndSettle();
       expect(find.text(outcome.value), findsOneWidget);
     }
@@ -65,4 +67,7 @@ class _FixedLocationProvider implements MapLocationProvider {
 
   @override
   Future<MapLocationResult> currentLocation() async => result;
+
+  @override
+  Stream<MapLocationResult> watchLocation() => Stream.value(result);
 }

@@ -1,5 +1,8 @@
 # Flutter mobile — Davel Trace
 
+Live foreground GPS, camera following and device test instructions:
+[`live GPS quickstart`](../specs/014-live-gps/quickstart.md).
+
 Google sign-in and real SMTP recovery setup:
 [`identity providers quickstart`](../specs/013-identity-providers/quickstart.md).
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -17,6 +19,7 @@ class MapScreen extends StatefulWidget {
     this.tripTitle,
     this.routePreview,
     this.locationProvider = const GeolocatorMapLocationProvider(),
+    this.isActive = true,
   });
 
   final List<MapStop> stops;
@@ -25,12 +28,13 @@ class MapScreen extends StatefulWidget {
   final String? tripTitle;
   final RoutePreviewData? routePreview;
   final MapLocationProvider locationProvider;
+  final bool isActive;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   int _playRequest = 0;
   int _pauseRequest = 0;
   int _resetRequest = 0;
@@ -38,6 +42,152 @@ class _MapScreenState extends State<MapScreen> {
   bool _isPlaying = false;
   MapLocation? _userLocation;
   String? _locationMessage;
+  bool _trackingRequested = false;
+  bool _followUser = false;
+  bool _appResumed = true;
+  int _trackingGeneration = 0;
+  StreamSubscription<MapLocationResult>? _positions;
+  Future<void> _cancellation = Future<void>.value();
+
+  bool get _canTrack => widget.isActive && _appResumed && _trackingRequested;
+
+  String get _gpsLabel {
+    final accuracy = _userLocation?.accuracyMeters;
+    return accuracy != null && accuracy.isFinite && accuracy >= 0
+        ? 'GPS trực tiếp · ±${accuracy.round()} m'
+        : 'GPS trực tiếp';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _appResumed =
+        WidgetsBinding.instance.lifecycleState == null ||
+        WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed;
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void _cancelPositions() {
+    _trackingGeneration++;
+    final old = _positions;
+    _positions = null;
+    if (old == null) return;
+    _cancellation = _cancellation.then((_) async {
+      try {
+        await old.cancel();
+      } catch (_) {
+        /* Already released by platform. */
+      }
+    });
+  }
+
+  Future<void> _startTracking() async {
+    _cancelPositions();
+    final generation = _trackingGeneration;
+    if (!mounted || !_canTrack) return;
+    setState(() {
+      _userLocation = null;
+      _locationMessage = 'Đang xác định vị trí…';
+    });
+    await _cancellation;
+    if (!mounted || !_canTrack || generation != _trackingGeneration) return;
+    try {
+      _positions = widget.locationProvider.watchLocation().listen(
+        (result) {
+          if (!mounted || !_canTrack || generation != _trackingGeneration) {
+            return;
+          }
+          final location = result.location;
+          if (result.status != MapLocationStatus.located || location == null) {
+            _endTracking(
+              mapLocationMessage(
+                result.status == MapLocationStatus.located
+                    ? MapLocationStatus.unavailable
+                    : result.status,
+              ),
+            );
+            return;
+          }
+          if (!location.isValid) return;
+          final previous = _userLocation;
+          if (previous?.timestamp != null &&
+              location.timestamp != null &&
+              !location.timestamp!.isAfter(previous!.timestamp!)) {
+            return;
+          }
+          setState(() {
+            _userLocation = location;
+            _locationMessage = null;
+            if (previous == null && _followUser) _locateRequest++;
+          });
+        },
+        onError: (Object error, StackTrace stack) {
+          if (mounted && generation == _trackingGeneration) {
+            _endTracking(mapLocationMessage(MapLocationStatus.unavailable));
+          }
+        },
+        onDone: () {
+          if (mounted && generation == _trackingGeneration && _canTrack) {
+            _endTracking('GPS đã dừng. Bấm vị trí để thử lại.');
+          }
+        },
+      );
+    } catch (_) {
+      if (mounted && generation == _trackingGeneration) {
+        _endTracking(mapLocationMessage(MapLocationStatus.unavailable));
+      }
+    }
+  }
+
+  void _endTracking(String message) {
+    _cancelPositions();
+    setState(() {
+      _trackingRequested = false;
+      _followUser = false;
+      _userLocation = null;
+      _locationMessage = message;
+    });
+  }
+
+  void _toggleTracking() {
+    if (_trackingRequested) {
+      _endTracking('Đã tắt GPS trực tiếp.');
+    } else {
+      setState(() {
+        _trackingRequested = true;
+        _followUser = true;
+      });
+      unawaited(_startTracking());
+    }
+  }
+
+  void _recenter() {
+    if (_userLocation == null) return;
+    setState(() {
+      _followUser = true;
+      _locateRequest++;
+    });
+  }
+
+  void _releaseCamera() {
+    if (_followUser && mounted) setState(() => _followUser = false);
+  }
+
+  void _suspendTracking() {
+    _cancelPositions();
+    _userLocation = null;
+    if (_trackingRequested) _locationMessage = 'GPS tạm dừng.';
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _appResumed = state == AppLifecycleState.resumed;
+    if (_canTrack) {
+      unawaited(_startTracking());
+    } else {
+      setState(_suspendTracking);
+    }
+  }
 
   void _play() => setState(() {
     _playRequest++;
@@ -49,21 +199,6 @@ class _MapScreenState extends State<MapScreen> {
     _isPlaying = false;
   });
 
-  Future<void> _locate() async {
-    setState(() => _locationMessage = 'Đang xác định vị trí…');
-    final result = await widget.locationProvider.currentLocation();
-    if (!mounted) return;
-    if (result.status != MapLocationStatus.located || result.location == null) {
-      setState(() => _locationMessage = mapLocationMessage(result.status));
-      return;
-    }
-    setState(() {
-      _userLocation = result.location;
-      _locationMessage = null;
-      _locateRequest++;
-    });
-  }
-
   void _reset() => setState(() {
     _isPlaying = false;
     _resetRequest++;
@@ -72,6 +207,21 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void didUpdateWidget(covariant MapScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.isActive != widget.isActive ||
+        oldWidget.locationProvider != widget.locationProvider) {
+      if (_canTrack) {
+        unawaited(_startTracking());
+      } else {
+        _suspendTracking();
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _cancelPositions();
+    super.dispose();
   }
 
   @override
@@ -89,6 +239,8 @@ class _MapScreenState extends State<MapScreen> {
             locateRequest: _locateRequest,
             userLocation: _userLocation,
             routePreview: widget.routePreview,
+            followUser: _followUser,
+            onUserPan: _releaseCamera,
           ),
         ),
         Positioned(
@@ -184,14 +336,20 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
         ),
-        if (_locationMessage != null)
+        if (_locationMessage != null || _userLocation != null)
           Positioned(
             top: 110,
             left: 12,
+            right: 72,
             child: PointerInterceptor(
-              child: _MapPill(
-                icon: Icons.location_disabled_outlined,
-                label: _locationMessage!,
+              child: Semantics(
+                liveRegion: true,
+                child: _MapPill(
+                  icon: _userLocation == null
+                      ? Icons.location_disabled_outlined
+                      : Icons.gps_fixed,
+                  label: _locationMessage ?? _gpsLabel,
+                ),
               ),
             ),
           ),
@@ -203,15 +361,22 @@ class _MapScreenState extends State<MapScreen> {
               children: [
                 _RoundMapButton(
                   key: const Key('locate-user-button'),
-                  icon: Icons.my_location_rounded,
-                  tooltip: 'Vị trí hiện tại',
-                  onPressed: _locate,
+                  icon: _trackingRequested
+                      ? Icons.gps_off_rounded
+                      : Icons.my_location_rounded,
+                  tooltip: _trackingRequested
+                      ? 'Tắt GPS trực tiếp'
+                      : 'Bật GPS trực tiếp',
+                  onPressed: _toggleTracking,
                 ),
                 const SizedBox(height: 7),
                 _RoundMapButton(
-                  icon: Icons.explore_outlined,
-                  tooltip: 'Hướng bản đồ',
-                  onPressed: () {},
+                  key: const Key('follow-user-button'),
+                  icon: _followUser
+                      ? Icons.gps_fixed_rounded
+                      : Icons.gps_not_fixed_rounded,
+                  tooltip: 'Về vị trí của tôi',
+                  onPressed: _recenter,
                 ),
                 const SizedBox(height: 7),
                 _RoundMapButton(
@@ -435,15 +600,20 @@ class _MapPill extends StatelessWidget {
       boxShadow: const [BoxShadow(color: Color(0x18173C35), blurRadius: 8)],
     ),
     child: Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: AppColors.primary, size: 14),
         const SizedBox(width: 5),
-        Text(
-          label,
-          style: const TextStyle(
-            color: AppColors.ink,
-            fontSize: 10,
-            fontWeight: FontWeight.w800,
+        Flexible(
+          child: Text(
+            label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+            ),
           ),
         ),
       ],

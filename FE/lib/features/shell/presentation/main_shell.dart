@@ -89,6 +89,7 @@ class _MainShellState extends State<MainShell> {
                             ),
                             if (_visited.contains(1))
                               MapScreen(
+                                isActive: _selectedIndex == 1,
                                 stops: stops,
                                 planRevision: state.itinerary?.version ?? 0,
                                 tripTitle: state.activeTrip?.title,
