@@ -333,7 +333,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
           Positioned(
             top: 110,
             left: 12,
-            right: 72,
+            right: 144,
             child: PointerInterceptor(
               child: Semantics(
                 liveRegion: true,
@@ -352,15 +352,24 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
           child: PointerInterceptor(
             child: Column(
               children: [
-                _RoundMapButton(
-                  key: const Key('locate-user-button'),
-                  icon: _trackingRequested
-                      ? Icons.gps_off_rounded
-                      : Icons.my_location_rounded,
-                  tooltip: _trackingRequested
-                      ? 'Tắt GPS trực tiếp'
-                      : 'Bật GPS trực tiếp',
-                  onPressed: _toggleTracking,
+                SizedBox(
+                  width: 128,
+                  child: Tooltip(
+                    message: _trackingRequested
+                        ? 'Tắt GPS trực tiếp'
+                        : 'Bật GPS trực tiếp',
+                    child: FilledButton.icon(
+                      key: const Key('locate-user-button'),
+                      icon: Icon(
+                        _trackingRequested
+                            ? Icons.gps_off_rounded
+                            : Icons.my_location_rounded,
+                        size: 18,
+                      ),
+                      label: Text(_trackingRequested ? 'Tắt GPS' : 'Bật GPS'),
+                      onPressed: _toggleTracking,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 7),
                 _RoundMapButton(
@@ -369,7 +378,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                       ? Icons.gps_fixed_rounded
                       : Icons.gps_not_fixed_rounded,
                   tooltip: 'Về vị trí của tôi',
-                  onPressed: _recenter,
+                  onPressed: _userLocation == null ? null : _recenter,
                 ),
               ],
             ),
@@ -428,6 +437,9 @@ class _ActiveTripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+    constraints: BoxConstraints(
+      maxHeight: MediaQuery.sizeOf(context).height * .42,
+    ),
     padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
       color: AppColors.surface,
@@ -440,136 +452,165 @@ class _ActiveTripCard extends StatelessWidget {
         ),
       ],
     ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Row(
-          children: [
+    child: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (stopCount == 0) ...[
             Text(
-              'Lịch trình trên bản đồ',
-              style: TextStyle(
-                color: AppColors.accent,
-                fontSize: 10,
-                fontWeight: FontWeight.w800,
-                letterSpacing: .8,
+              'Chuyến đi chưa có địa điểm',
+              key: const Key('empty-map-message'),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Thêm địa điểm hoặc chọn phương án lịch trình để xem các điểm dừng và tuyến đường.',
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Bạn vẫn có thể bật GPS để xem vị trí hiện tại và theo dõi khi di chuyển.',
+              style: TextStyle(fontSize: 12, color: AppColors.muted),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                key: const Key('empty-map-open-itinerary'),
+                onPressed: onOpenPoi,
+                icon: const Icon(Icons.add_location_alt_outlined),
+                label: const Text('Thêm điểm vào lịch'),
               ),
             ),
-            Spacer(),
-            Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
-            SizedBox(width: 4),
-            Text(
-              'Đà Nẵng',
-              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+          ] else ...[
+            const Row(
+              children: [
+                Text(
+                  'Lịch trình trên bản đồ',
+                  style: TextStyle(
+                    color: AppColors.accent,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: .8,
+                  ),
+                ),
+                Spacer(),
+                Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
+                SizedBox(width: 4),
+                Text(
+                  'Đà Nẵng',
+                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+                ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Container(
+                  width: 43,
+                  height: 43,
+                  decoration: BoxDecoration(
+                    color: AppColors.softSurface,
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: const Icon(
+                    Icons.restaurant_menu_rounded,
+                    color: AppColors.primary,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Điểm tiếp theo',
+                        style: TextStyle(fontSize: 10, color: AppColors.muted),
+                      ),
+                      Text(
+                        nextStop?.title ?? 'Chưa có điểm dừng trên bản đồ',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        nextStop == null
+                            ? '$stopCount điểm dừng trong lịch trình'
+                            : '${nextStop!.time} · dừng ${nextStop!.durationMinutes} phút',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: onOpenPoi,
+                  icon: const Icon(Icons.chevron_right_rounded),
+                ),
+              ],
+            ),
+            const SizedBox(height: 9),
             Container(
-              width: 43,
-              height: 43,
+              padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
               decoration: BoxDecoration(
                 color: AppColors.softSurface,
-                borderRadius: BorderRadius.circular(13),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
-                Icons.restaurant_menu_rounded,
-                color: AppColors.primary,
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  const Text(
-                    'Điểm tiếp theo',
-                    style: TextStyle(fontSize: 10, color: AppColors.muted),
-                  ),
-                  Text(
-                    nextStop?.title ?? 'Chưa có điểm dừng trên bản đồ',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: AppColors.ink,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    nextStop == null
-                        ? '$stopCount điểm dừng trong lịch trình'
-                        : '${nextStop!.time} · dừng ${nextStop!.durationMinutes} phút',
-                    style: const TextStyle(fontSize: 11),
-                  ),
+                  _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
+                  const _Divider(),
+                  _TripMetric(value: routeSource, label: 'tuyến'),
+                  const _Divider(),
+                  _TripMetric(value: mapSource, label: 'bản đồ'),
                 ],
               ),
             ),
-            IconButton(
-              onPressed: onOpenPoi,
-              icon: const Icon(Icons.chevron_right_rounded),
+            const SizedBox(height: 9),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    key: const Key('play-car-button'),
+                    onPressed: onPlay,
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.secondary,
+                      foregroundColor: Colors.white,
+                    ),
+                    icon: Icon(
+                      isPlaying
+                          ? Icons.directions_car_filled_rounded
+                          : Icons.play_arrow_rounded,
+                      size: 18,
+                    ),
+                    label: Text(isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến'),
+                  ),
+                ),
+                const SizedBox(width: 7),
+                IconButton.filledTonal(
+                  tooltip: 'Tạm dừng',
+                  onPressed: onPause,
+                  icon: const Icon(Icons.pause_rounded),
+                ),
+                IconButton.filledTonal(
+                  tooltip: 'Đặt lại mô phỏng',
+                  onPressed: onReset,
+                  icon: const Icon(Icons.restart_alt_rounded),
+                ),
+                const SizedBox(width: 5),
+                IconButton.filledTonal(
+                  tooltip: 'Xem chuyến đi',
+                  onPressed: onOpenPoi,
+                  icon: const Icon(Icons.info_outline_rounded),
+                ),
+              ],
             ),
           ],
-        ),
-        const SizedBox(height: 9),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.softSurface,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            children: [
-              _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
-              const _Divider(),
-              _TripMetric(value: routeSource, label: 'tuyến'),
-              const _Divider(),
-              _TripMetric(value: mapSource, label: 'bản đồ'),
-            ],
-          ),
-        ),
-        const SizedBox(height: 9),
-        Row(
-          children: [
-            Expanded(
-              child: FilledButton.icon(
-                key: const Key('play-car-button'),
-                onPressed: onPlay,
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.secondary,
-                  foregroundColor: Colors.white,
-                ),
-                icon: Icon(
-                  isPlaying
-                      ? Icons.directions_car_filled_rounded
-                      : Icons.play_arrow_rounded,
-                  size: 18,
-                ),
-                label: Text(isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến'),
-              ),
-            ),
-            const SizedBox(width: 7),
-            IconButton.filledTonal(
-              tooltip: 'Tạm dừng',
-              onPressed: onPause,
-              icon: const Icon(Icons.pause_rounded),
-            ),
-            IconButton.filledTonal(
-              tooltip: 'Đặt lại mô phỏng',
-              onPressed: onReset,
-              icon: const Icon(Icons.restart_alt_rounded),
-            ),
-            const SizedBox(width: 5),
-            IconButton.filledTonal(
-              tooltip: 'Xem chuyến đi',
-              onPressed: onOpenPoi,
-              icon: const Icon(Icons.info_outline_rounded),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
@@ -617,7 +658,7 @@ class _RoundMapButton extends StatelessWidget {
   });
   final IconData icon;
   final String tooltip;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) => IconButton.filled(
     tooltip: tooltip,

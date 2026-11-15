@@ -38,3 +38,16 @@ Convergence: implementation and required checks pass.
 Implementation commit: 061af4b on fix/ui.
 Ready PR: https://github.com/DangHung1110/Davel-Trace/pull/21
 Base: feat/product-platform. No merge into the integration branch was performed.
+
+## Map clarification follow-up
+Following the zero-marker/GPS feedback, the empty map explains the missing itinerary
+places and links directly to the schedule. A labeled Bật/Tắt GPS control replaces the
+ambiguous icon; recenter is disabled before a valid fix. Route simulation controls are
+hidden for zero stops. The map card scrolls within a bounded height so GPS stays accessible.
+Two regressions cover GPS movement on an empty itinerary, enabled-state transitions,
+the itinerary action, and a 320px viewport at 200% text. Full Flutter suite: 71 passed;
+analyzer: no issues; Node map bridge: all 4 passed. Physical walking was not performed.
+Release rebuild passed in 51.6s. In-app browser inspection verified that the real 3D map
+loads, Bật GPS is visible, recenter is disabled before a fix, and the empty-state action
+is reachable. No device permission was granted and no real coordinates were collected
+during browser review. The movement regressions use injected test fixes.

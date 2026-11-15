@@ -26,3 +26,10 @@ account pages also escape the mobile frame on desktop.
   usable. All routes/dialogs share the same constrained desktop mobile surface.
 - Preserve Google login, recovery, offline sync, manual activities, expenses and live GPS.
 - No new runtime dependencies, authentication contracts or scheduling algorithms.
+
+## Map clarity follow-up
+An empty trip must explain why there are no itinerary markers and offer a direct return
+to add places. GPS remains usable without stops. Its opt-in control must say Bật/Tắt GPS;
+recenter is disabled until a valid fix arrives. Simulated route playback is shown only
+when itinerary stops exist, and must never stand in for real movement. No traveled-path
+recording, background tracking or automatic itinerary generation is introduced.

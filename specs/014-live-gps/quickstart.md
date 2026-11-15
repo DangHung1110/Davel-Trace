@@ -7,7 +7,7 @@ The feature branch is `codex/live-gps-tracking`, based on
 
 1. Open http://127.0.0.1:5501 and hard reload (Ctrl+F5) after the new build.
 2. Sign in or choose the existing demo entry, then open **Bản đồ**.
-3. Tap the location button (**Bật GPS trực tiếp**) and allow location access in
+3. Tap the labeled **Bật GPS** button (tooltip **Bật GPS trực tiếp**) and allow location access in
    the browser/OS. No location request is made before this action.
 4. A blue marker represents device location. As the device reports movement,
    its marker updates automatically. The high-accuracy stream requests a 2 m
@@ -18,6 +18,14 @@ The feature branch is `codex/live-gps-tracking`, based on
 6. Tap **Tắt GPS trực tiếp** to stop and remove the live marker. Switching away
    from the map or backgrounding the app cancels the subscription. Returning
    resumes only if tracking was enabled before suspension.
+
+A newly created trip saves its dates/budget but does not automatically add places.
+For itinerary markers: open the trip -> **Lập lịch cho chuyến đi** -> generate and
+explicitly choose a plan, or add a catalog place manually. When the map has no stops,
+**Thêm điểm vào lịch** opens that itinerary. GPS is independent of those stops and
+works on an empty map. **Về vị trí của tôi** is disabled until a fix arrives.
+Current GPS shows a moving position marker and camera follow; it does not draw or
+save a traveled-path history.
 
 The car/play/pause controls remain route simulation, separate from the blue GPS
 marker. This feature does not provide turn-by-turn navigation or route recalculation.
