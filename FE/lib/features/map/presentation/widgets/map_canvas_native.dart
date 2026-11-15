@@ -20,6 +20,8 @@ class MapCanvas extends StatefulWidget {
     required this.locateRequest,
     required this.userLocation,
     required this.routePreview,
+    this.followUser = false,
+    this.onUserPan,
   });
 
   final List<MapStop> stops;
@@ -30,6 +32,8 @@ class MapCanvas extends StatefulWidget {
   final int locateRequest;
   final MapLocation? userLocation;
   final RoutePreviewData? routePreview;
+  final bool followUser;
+  final VoidCallback? onUserPan;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -65,7 +69,11 @@ class _MapCanvasState extends State<MapCanvas> {
     } else if (oldWidget.pauseRequest != widget.pauseRequest) {
       _pauseRoute();
     }
-    if (oldWidget.locateRequest != widget.locateRequest) _locateUser();
+    if (oldWidget.locateRequest != widget.locateRequest ||
+        oldWidget.userLocation != widget.userLocation ||
+        oldWidget.followUser != widget.followUser) {
+      _locateUser(recenter: oldWidget.locateRequest != widget.locateRequest);
+    }
   }
 
   Future<void> _loadRoute({required bool autoPlay}) async {
@@ -79,16 +87,24 @@ class _MapCanvasState extends State<MapCanvas> {
       _carPosition = route.isEmpty ? null : route.first;
       _animationIndex = 0;
     });
-    if (route.isNotEmpty) _controller.move(route.first, 13.2);
+    if (route.isNotEmpty &&
+        (!widget.followUser || widget.userLocation == null)) {
+      _controller.move(route.first, 13.2);
+    }
     if (autoPlay) _playRoute();
   }
 
-  Future<void> _locateUser() async {
+  void _locateUser({bool recenter = false}) {
     final location = widget.userLocation;
-    if (location == null) return;
+    if (location == null) {
+      setState(() => _userPosition = null);
+      return;
+    }
     final point = LatLng(location.latitude, location.longitude);
     setState(() => _userPosition = point);
-    _controller.move(point, 15.5);
+    if (widget.followUser || recenter) {
+      _controller.move(point, recenter ? 15.5 : _controller.camera.zoom);
+    }
   }
 
   void _playRoute() {
@@ -135,6 +151,14 @@ class _MapCanvasState extends State<MapCanvas> {
         FlutterMap(
           mapController: _controller,
           options: MapOptions(
+            onMapReady: () {
+              if (widget.userLocation != null) {
+                _locateUser(recenter: widget.followUser);
+              }
+            },
+            onPositionChanged: (_, hasGesture) {
+              if (hasGesture) widget.onUserPan?.call();
+            },
             initialCenter: fallback.isEmpty
                 ? const LatLng(16.0784, 108.2420)
                 : fallback.first,
@@ -173,7 +197,7 @@ class _MapCanvasState extends State<MapCanvas> {
                     point: _userPosition!,
                     width: 28,
                     height: 28,
-                    child: const _UserMarker(),
+                    child: const _UserMarker(key: Key('user-location-marker')),
                   ),
                 if (_carPosition != null)
                   Marker(
@@ -257,7 +281,7 @@ class _PlaceMarker extends StatelessWidget {
 }
 
 class _UserMarker extends StatelessWidget {
-  const _UserMarker();
+  const _UserMarker({super.key});
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
