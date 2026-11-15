@@ -1,75 +1,55 @@
-"""CP-SAT optimizer basic, OPTW (T017, lane B). Depot/flow/Tmax/windows.
+"""CP-SAT optimizer, OPTW (T017, lane B).
 
-STUB-NOTE: TripRequest/POI schemas (T007 trip/poi) are not in the lane-B
-worktree yet â€” minimal STUB dataclasses below stand in (same field
-names); phase-PR swaps them for the real schemas without touching the
-model code. Travel comes from dict-of-dict minutes (T010 matrix).
-
-Model (OR-Tools CP-SAT, 5s timeout):
+Model (OR-Tools CP-SAT):
 - circuit over depot + POIs; self-arc[i][i] == "skip i".
 - t[i] visit start; open[i] <= t[i] <= close[i]-dur[i] iff visited.
 - arc[i][j] => t[j] >= t[i]+dur[i]+travel[i][j]; depot t[0]=trip start.
 - Tmax: every visit finishes by trip end. Objective: max total score of visited.
-Returns {"status": optimal|feasible-timeout|infeasible, "itinerary" |
-"reason", ...}. Best-found is returned even on timeout (never empty-
-handed when a feasible prefix exists).
+Returns {"status": optimal|feasible-timeout|infeasible|unknown, "itinerary" | "reason", ...}.
+Best-found is returned even on timeout. `unknown` = the search budget ran out before
+any solution was found: the model was NOT proven infeasible, so a caller must not
+read it as "these rules cannot be met".
 
-T061a depot decision: `StubTrip.origin_id` is the depot (hotel). A falsy
-origin (`""`/`None`) selects the OPEN-TOUR variant ("drop depot legs"):
-the origin leg is not modelled, so the first activity may start at
-trip.start_min. Chosen over "add a depot node to the matrix" because the
-committed seed matrix has no depot cell and adding one needs a live OSRM
-call (offline demo) â€” haversine is banned for feasibility (R4/B3). Every
-INTER-POI transition still comes from the matrix; only the untracked
-origin leg is dropped.
+A falsy `StubTrip.origin_id` selects the OPEN TOUR ("drop depot legs"): the origin leg
+is not modelled, so the first activity may start at trip.start_min. The committed
+matrix has no depot cell and haversine is banned for feasibility (R4/B3). Every
+INTER-POI transition still comes from the matrix.
 
-T030: optional q_ij edge bonuses + W_A+s_A<=W_B precedence (PATM).
-
-TASK-1/2/3 objective additions (single-day plans):
-- TASK-1 category diversity: the score sum is no longer the only term. A
-  distinct-category presence bonus (spread across food/sightseeing/market/...)
-  plus a linear penalty on every visit beyond `CATEGORY_SOFT_CAP` of the
-  same category. Both are scaled by the TOP POI SCORE, so the term means the
-  same thing for every profile (savings' scores are ~0.5, balanced's ~5) and
-  `DIVERSITY_WEIGHT` is the single tuning knob (0 disables the term).
-- TASK-2 pacing: `STOP_OVERHEAD_MIN` minutes are reserved between consecutive
-  stops in the MODEL only (travel + overhead), so a day cannot be crammed
-  with 9-10 back-to-back stops. Reported visit end stays `start + visit_min`
-  (the reserve shows up as a real free gap; gate B3 still sees gap >= travel).
-- TASK-3 A2 sharpening: every pair of restaurants closer than
-  `RESTAURANT_PAIR_MAX_GAP` minutes (START-to-START) is penalized in the
-  objective regardless of meal-slot labels, so the 10:49 / 11:00 case (A1
-  passes, both are "one lunch") is caught by the solver, not just by review.
-
-HARD sequence rules mirrored from the gate (opt-in params, so the pure model
-tests keep their old shape):
-- `cafe_cap`: at most N cafes (1 or 2); with 2, one must start before 11:00
-  and the other after 13:00 (gate CAFE_CAP).
-- `category_cap`: at most N non-food POIs per category per day (gate
-  CATEGORY_CAP; N = 1 for every caller). Meals are exempt.
-- `no_consecutive`: no arc between two same-category POIs (NO_CONSECUTIVE).
-- `lunch_required`: exactly one restaurant starts in 11:00-13:00 (the
-  universal lunch that the locked rest window follows).
+Objective terms besides the score sum and the q_ij edge bonuses (T030):
+- Category diversity: a distinct-category bonus plus a penalty on every visit beyond
+  `CATEGORY_SOFT_CAP` of one category. Both scale with the TOP POI SCORE, so the term
+  means the same for every profile (savings ~0.5, balanced ~5).
+- A2: every pair of restaurants closer than `RESTAURANT_PAIR_MAX_GAP` minutes (START
+  to START) is penalized regardless of meal slots, so 10:49 / 11:00 is caught here.
+- Dynamic state (trip_ctx): a per-band multiplier decides which hours suit a stop.
+`STOP_OVERHEAD_MIN` minutes are reserved between stops in the MODEL only, so a day
+cannot be crammed; reported visit end stays `start + visit_min`.
 """
 
 from __future__ import annotations
 
 import time
 from dataclasses import dataclass
+from fractions import Fraction
 
-from BE.app.services.common import hh, parse_hours, to_min
 from BE.app.services.soft_rules import (
+    ALL_DAY_MIN,
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
     CAFE_MORNING_END,
-    CATEGORY_DAILY_CAP,
+    DINNER_REQUIRED,
     LUNCH_REQUIRED,
     MEAL_SLOTS,
     NON_FOOD_CAPPED,
     RESTAURANT_PAIR_MAX_GAP,
+    cafe_daypart_at,
     category_allowed,
+    clip_to_time_fit,
+    holds_lunch,
+    meal_slot_at,
     poi_category,
 )
+from BE.common import effective_fee, hhmm, poi_open_windows, to_min, trusted_rating
 
 TIMEOUT_S = 5.0
 
@@ -85,6 +65,13 @@ DIVERSITY_WEIGHT = 1.0
 DIVERSITY_PRESENCE_RATIO = 0.25   # per distinct category in the day
 DIVERSITY_EXCESS_RATIO = 0.75     # per visit beyond CATEGORY_SOFT_CAP
 CATEGORY_SOFT_CAP = 2
+# The seed walk (_greedy_hint): what is owed goes first once it is at most this many
+# minutes away, and a leg is assumed to take at least this long.
+HINT_READY_MIN = 30
+HINT_MIN_LEG = 5
+# A day that must end late and whose walk did not: how many evening stops are tried
+# as the one kept back for the end (`_closers`), each a walk of about a millisecond.
+HINT_CLOSER_TRIES = 3
 
 # TASK-2: model-only breathing room between consecutive stops (minutes).
 # Travel still comes from the matrix; the reserve is added on top, never
@@ -110,11 +97,34 @@ STATE_WEIGHT = 0.5
 POOL_DEFAULT_BAND = 0.95        # keep solutions >= 95 % of the OPT objective
 POOL_ENUM_TIMEOUT_S = 25.0      # total budget for the enumeration pass
 POOL_STEP_TIMEOUT_S = 5.0       # per member (nogood solve; warm greedy hint)
+POOL_STEP_DETERMINISTIC_TIME = 2.0  # the same, in work units, when the caller plans by work
+
+# CP-SAT settings of a search on a budget of work (`deterministic_time`). The default
+# presolve runs three passes and full probing, about four work units on an 80-POI
+# day: half of the old 8-unit budget went before the search improved on the seed.
+# One pass and light probing leave that work to the search. Measured on 72 real
+# models of danang-v1 against the best value known (reference: 24 units):
+#   default, 8 units       98.2 % mean, 69 % worst, 5 models under 95 %; request 6.4 s median, 7.8 s p95
+#   these,   5 units       99.3 % mean, 88 % worst, 1 model  under 95 %; request 5.7 s median, 6.1 s p95
+# (a request = the slowest of its three profiles). One pass with the default probing,
+# or this pair with symmetry detection off, left one day in 72 with no plan at 5
+# units; this pair left none.
+SEARCH_PRESOLVE_ITERATIONS = 1
+SEARCH_PROBING_LEVEL = 1
+
+# Completing the greedy hint (`_complete_hint`): a solve with the hinted variables
+# fixed only has to derive the rest, so it ends in milliseconds; the limits are a
+# guard, not a budget.
+HINT_COMPLETE_DETERMINISTIC_TIME = 1.0
+HINT_COMPLETE_WALL_S = 10.0
+# Rescuing a search that had no seed and found nothing (`_repair_hint`): a second
+# search of the same budget in which CP-SAT first moves the rejected seed until it is
+# feasible. The conflict limit is how far it may move it (the default of 10 gave up
+# on 2 of 9 real days, 2000 on none).
+HINT_REPAIR_CONFLICTS = 2000
 
 
-# ponytail: STUB dataclasses are a deliberate ceiling â€” T007 poi/trip
-# schemas are not in this worktree; phase-PR swaps them in, model code
-# untouched. Same field names, shared from here (imported by profiles/replan).
+# What the model reads of a POI and of a trip (imported by profiles/replan).
 @dataclass
 class StubPOI:
     poi_id: str
@@ -125,6 +135,15 @@ class StubPOI:
     restaurant: bool = False  # gate A1: <=1 restaurant per meal slot
     category: str = ""        # TASK-1: canonical category (cat/type); "" = legacy
     intensity: int = 2        # day-template effort ceiling (1..3)
+    # Several opening windows (lunch + dinner service); () = the single
+    # [open_min, close_min]. open/close then hold the envelope.
+    windows: tuple[tuple[int, int], ...] = ()
+    fee: int = 0              # VND per person (gate BCS, `max_fee`)
+    visit_max: int = 0        # p75: how long a visit may run when the day has room
+
+
+def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
+    return poi.windows or ((poi.open_min, poi.close_min),)
 
 
 @dataclass
@@ -147,66 +166,89 @@ def poi_visit_min(poi: dict) -> int:
     return int(vm or 60)
 
 
-def poi_window(poi: dict, trip: dict | None = None,
-               deadline: int | None = None) -> tuple[int, int]:
-    """T061a adapter: opening window in minutes, trip window when unset.
+def poi_visit_short(poi: dict) -> int:
+    """The shortest usual stay (p25): what a named place gets when nothing longer fits."""
+    vm = poi.get("visit_min")
+    if isinstance(vm, dict):
+        return int(vm.get("p25") or poi_visit_min(poi))
+    return poi_visit_min(poi)
 
-    Opening hours stay authoritative; when a POI has none the trip window
-    `[start_time, deadline]` is used. `deadline` (ETB: min(end, return))
-    wins over end_time when supplied so a horizon never silently stretches.
+
+def poi_visit_max(poi: dict) -> int:
+    """How long people may stay when the day has room: p75, else the scheduled time."""
+    vm = poi.get("visit_min")
+    return int(vm.get("p75") or 0) if isinstance(vm, dict) else 0
+
+
+def poi_windows(poi: dict, trip: dict | None = None,
+                deadline: int | None = None,
+                any_hour: bool = False) -> list[tuple[int, int]]:
+    """T061a adapter: opening windows in minutes, trip window when unset.
+
+    The windows are also cut to the hours the stop makes sense (TIME_FIT, a
+    restaurant at a meal, a beach out of the midday sun) unless `any_hour`: the
+    traveller named this very place, so only its opening hours bind.
+
+    Opening hours stay authoritative (`open_windows`: overnight spans and
+    every service of the day, intersected across weekday variants); a POI
+    with none takes its category's measured SAFE_HOURS. Only a POI with
+    neither (no hours, no `cat`) uses the trip window `[start_time,
+    deadline]`; `deadline` (ETB: min(end, return)) wins over end_time when
+    supplied so a horizon never silently stretches. No safe time gives
+    [(0, 0)]: nothing fits.
     """
-    win = parse_hours(poi.get("opening_hours"))
-    if win is not None:
-        return win
+    wins = poi_open_windows(poi)
+    if wins is not None:
+        if not any_hour:
+            wins = clip_to_time_fit(poi, wins)
+        return wins or [(0, 0)]
     start = to_min((trip or {}).get("start_time", "07:00"))
     if deadline is not None:
         end = deadline
     else:
         end = to_min((trip or {}).get("end_time", "18:00"))
-    return start, end
+    return [(start, end)]
 
 
 def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
-                deadline: int | None = None) -> StubPOI:
+                deadline: int | None = None, any_hour: bool = False) -> StubPOI:
     """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
-    open_min, close_min = poi_window(poi, trip, deadline)
+    wins = poi_windows(poi, trip, deadline, any_hour)
     bonus = MUST_GO_BONUS if poi.get("must_go") else 0.0
     category = poi_category(poi)
-    return StubPOI(poi["poi_id"], poi_visit_min(poi), open_min, close_min,
+    return StubPOI(poi["poi_id"], poi_visit_min(poi), wins[0][0], wins[-1][1],
                    float(score) + bonus,
                    restaurant=category == "restaurant",
                    category=category,
-                   intensity=int(poi.get("intensity") or 2))
+                   intensity=int(poi.get("intensity") or 2),
+                   windows=tuple(wins) if len(wins) > 1 else (),
+                   fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi))
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
-                    score_fn=None, deadline: int | None = None) -> list[StubPOI]:
+                    score_fn=None, deadline: int | None = None,
+                    any_hour_ids: set[str] | None = None) -> list[StubPOI]:
     """T061a adapter: adapt a POI list with one score function (or rating)."""
     def _score(p: dict) -> float:
         if score_fn is not None:
             return float(score_fn(p))
-        return float(p.get("rating") or 1.0)
+        return trusted_rating(p) or 1.0
 
-    return [poi_to_stub(p, trip, _score(p), deadline) for p in pois]
+    named = any_hour_ids or set()
+    return [poi_to_stub(p, trip, _score(p), deadline, p["poi_id"] in named) for p in pois]
 
 
 def travel_from_matrix(matrix, ids=None):
-    """T017 wiring: build optimize()'s travel dict from the cached matrix.
-
-    `matrix` is MatrixService-compatible (needs .ids and .minutes_or_none).
-    Pairs missing from the artifact stay ABSENT (arc forbidden in the model â€”
-    B3: infeasible stays infeasible, never 0/haversine/estimate). POI-metadata
-    adaptation (visit_min/opening-hours) stays in T061a, not here.
-    """
+    """Compatibility adapter from MatrixService to optimizer travel pairs."""
     ids = list(matrix.ids) if ids is None else list(ids)
     travel = {}
-    for a in ids:
-        for b in ids:
-            if a == b:
+    for first in ids:
+        for second in ids:
+            if first == second:
                 continue
-            m, _src = matrix.minutes_or_none(a, b)
-            if m is not None:
-                travel[(a, b)] = m
+            minutes, _source = matrix.minutes_or_none(first, second)
+            if minutes is not None:
+                travel[(first, second)] = minutes
     return travel
 
 
@@ -224,30 +266,31 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
         if need is None:
             return None  # B3: no matrix leg -> cannot be visited
         leg = need
-    start = max(clock + leg, poi.open_min)
-    # Locked rest window (day templates): the stop must finish before it or
-    # start after it â€” never overlap.
-    if blocked_window:
-        lo, hi = blocked_window
-        if start < hi and start + poi.visit_min > lo:
-            start = max(start, hi)
-    slot = _meal_slot_min(start) if poi.restaurant else None
-    if slot is not None and slot in used_slots:
-        shifted = max(start, MEAL_SLOTS[slot][1])  # after the slot ends
-        if shifted + poi.visit_min <= min(poi.close_min, trip.end_min):
-            start = shifted
-            slot = _meal_slot_min(start)
-    if slot is not None and slot in used_slots:
-        return None  # A1: another restaurant already owns this meal slot
-    if start + poi.visit_min > min(poi.close_min, trip.end_min):
-        return None
-    return start, leg, slot
+    for open_min, close_min in _windows(poi):  # earliest window that fits
+        close = min(close_min, trip.end_min)
+        start = max(clock + leg, open_min)
+        # Locked rest window (day templates): the stop must finish before it or
+        # start after it: never overlap.
+        if blocked_window:
+            lo, hi = blocked_window
+            if start < hi and start + poi.visit_min > lo:
+                start = max(start, hi)
+        slot = meal_slot_at(start) if poi.restaurant else None
+        if slot is not None and slot in used_slots:
+            shifted = max(start, MEAL_SLOTS[slot][1])  # after the slot ends
+            if shifted + poi.visit_min <= close:
+                start = shifted
+                slot = meal_slot_at(start)
+        if slot is not None and slot in used_slots:
+            continue  # A1: another restaurant already owns this meal slot
+        if start + poi.visit_min <= close:
+            return start, leg, slot
+    return None
 
 
 def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  trip: StubTrip,
                  must_set: set[str],
-                 overhead_min: int = STOP_OVERHEAD_MIN,
                  blocked_window: tuple[int, int] | None = None,
                  max_stops: int | None = None,
                  cafe_cap: int | None = None,
@@ -255,35 +298,64 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  no_adjacent_food: bool = False,
                  rest_after_lunch: int | None = None,
                  category_cap: int | None = None,
-                 avoid_ids: set[str] | None = None) -> list[tuple[int, int]]:
+                 avoid_ids: set[str] | None = None,
+                 precedence: list[tuple[str, str]] | None = None,
+                 max_fee: int | None = None,
+                 required_any: list[dict] | None = None,
+                 lunch_required: bool = False,
+                 dinner_required: bool = False,
+                 state_bands: list[tuple[int, int]] | None = None,
+                 state_cost: dict[tuple[str, int], float] | None = None,
+                 late_end_min: int | None = None,
+                 _closer: int | None = None) -> list[tuple[int, int]]:
     """Deterministic feasible-ish tour used as a CP-SAT solution hint.
 
     Why: with the expanded candidate pool (all verified snapshot POIs) the
     single-worker search used by the T053 harness can burn the whole 5 s
     budget without proving feasibility, returning an empty plan. A greedy
     initial solution gives the solver a starting point; it never changes the
-    model or the objective (hints are not constraints â€” an infeasible hint is
+    model or the objective (hints are not constraints: an infeasible hint is
     simply ignored by CP-SAT).
 
-    Order: must-visit POIs first (they are hard), then a value-per-minute
-    greedy: among the stops that still fit (matrix leg + opening window + a
-    free meal slot), pick the one with the best
-    `(score + first-of-category bonus) / (idle wait + visit + overhead +
-    leg)`. TASK-1: at most `CATEGORY_SOFT_CAP` non-mandatory stops per
-    category, so the seed already spreads across food/sightseeing/market.
-    TASK-2: `overhead_min` is reserved between stops, exactly like the model.
-    A must-visit stop that cannot be placed means the model is infeasible
-    anyway, so no hint is returned.
+    One forward walk, value per minute: among the stops that still fit (matrix leg +
+    opening window + a free meal slot), take the best `(score + first-of-category
+    bonus) / (idle wait + visit + overhead + leg)`. With one worker a seed that misses
+    what the model demands can cost the whole budget (a tight day then has no plan),
+    so the walk keeps room for it: must_visit in the asked order, lunch, dinner, the
+    wishes (`required_any`), their money and their clock. What is owed and ready now
+    goes first; a stop that would make something owed too late is not taken.
+    TASK-1: at most `CATEGORY_SOFT_CAP` stops per category unless owed, so the seed
+    already spreads across food/sightseeing/market. TASK-2: `STOP_OVERHEAD_MIN` is
+    reserved between stops, exactly like the model. A must-visit stop the walk cannot place
+    gives no hint at all. `state_cost` (rain on an open-air stop) is charged like the
+    model charges it, and a stop worth nothing or less at that hour is left out unless
+    it is owed. A seed blind to the rain opened the wet day at the beach, and the
+    budget ended 38 % under the day the model wanted. `late_end_min` (a template's
+    late end): a day that stopped at 19:17 was no day of the model at all, and with no
+    seed the largest days got no plan inside the budget. The last stop is moved later
+    inside its own hours until it ends late; when it cannot be (the walk had spent the
+    money and the one landmark of the day by noon) the walk is redone with one evening
+    stop kept back from the start (`_closer`, a node index): its category and its fee
+    are held for it like a named place's, and it is seated once it can end late.
 
     Returns [(node_index, start_min), ...] or [].
     """
     if not pois:
         return []
     avoid = set(avoid_ids or ())
-    must = sorted((i for i in range(1, len(pois) + 1)
-                   if pois[i - 1].poi_id in must_set),
-                  key=lambda i: (pois[i - 1].open_min,
-                                 pois[i - 1].close_min, pois[i - 1].poi_id))
+    node_of = {poi.poi_id: i for i, poi in enumerate(pois, 1)}
+    must_left = {node_of[pid] for pid in must_set if pid in node_of}
+    restaurants = {i for i, poi in enumerate(pois, 1) if poi.restaurant}
+    cheapest_meal = min((pois[i - 1].fee for i in restaurants), default=0)
+    groups = []
+    for req in required_any or []:
+        named = req.get("poi_ids")
+        cats = set(req.get("categories") or [])
+        groups.append({"nodes": ({node_of[pid] for pid in named if pid in node_of} if named is not None
+                                 else {i for i, poi in enumerate(pois, 1) if poi.category in cats}),
+                       "need": int(req.get("count") or 1), "span": req.get("start_between"),
+                       "named": named is not None})
+    need_lunch, need_dinner = bool(lunch_required), bool(dinner_required)
     hint: list[tuple[int, int]] = []
     used_slots: set[int] = set()
     used_cats: dict[str, int] = {}
@@ -294,13 +366,14 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     previous_cat: str = ""
     previous_food = False
     clock = trip.start_min
+    spent = 0
 
     def _clock_after(poi: StubPOI, start: int) -> int:
         """Advance the seed clock; lunch is followed by the rest window."""
         if (rest_after_lunch is not None and poi.restaurant
                 and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1]):
             return start + poi.visit_min + int(rest_after_lunch)
-        return start + poi.visit_min + overhead_min
+        return start + poi.visit_min + STOP_OVERHEAD_MIN
 
     def _blocked_by_cat(poi: StubPOI, start: int) -> bool:
         """CAFE_CAP / CATEGORY_CAP / NO_CONSECUTIVE / NO_ADJACENT_FOOD.
@@ -319,79 +392,195 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             if len(cafe_starts) >= int(cafe_cap):
                 return True
             if len(cafe_starts) == 1:
-                # A 2nd cafe only across dayparts (same rule as the model).
-                return (cafe_daypart_min(start) is None
-                        or cafe_daypart_min(start)
-                        == cafe_daypart_min(cafe_starts[0]))
+                # A 2nd cafe only across dayparts (same rule as the model): one in the
+                # morning AND one in the afternoon. A first cafe at 12:45 is in neither,
+                # so no second one can follow it (the seed used to seat one at 16:36).
+                first, now = cafe_daypart_at(cafe_starts[0]), cafe_daypart_at(start)
+                return first is None or now is None or now == first
         return False
 
-    for i in must:  # mandatory stops first, in opening-time order
-        poi = pois[i - 1]
-        spot = _hint_place(poi, previous, clock, trip, travel, used_slots,
-                           blocked_window)
-        if spot is None:
-            return []  # mandatory stop does not fit: model is infeasible
-        start, _leg, slot = spot
-        if _blocked_by_cat(poi, start):
-            return []  # seed cannot keep the hard sequence rules: let CP-SAT
-        hint.append((i, start))
-        placed.add(i)
-        if slot is not None:
-            used_slots.add(slot)
-        if poi.restaurant:
-            restaurant_starts.append(start)
-        if poi.category == "cafe":
-            cafe_starts.append(start)
-        if poi.category:
-            used_cats[poi.category] = used_cats.get(poi.category, 0) + 1
-        previous, previous_cat = poi.poi_id, poi.category
-        previous_food = poi.restaurant
-        clock = _clock_after(poi, start)
+    def _order_blocks(poi_id: str) -> bool:
+        """An asked order: its first stop is still owed, or its second already went."""
+        return any((then == poi_id and node_of.get(first) in must_left)
+                   or (first == poi_id and node_of.get(then) in placed)
+                   for first, then in precedence or [])
+
+    def _leg(poi_id: str, nodes: set[int]) -> int:
+        """The leg to a named place when it is known, else the shortest assumed."""
+        if len(nodes) == 1:
+            return travel.get((poi_id, pois[next(iter(nodes)) - 1].poi_id), HINT_MIN_LEG)
+        return HINT_MIN_LEG
+
+    def _feeds_lunch(poi: StubPOI) -> bool:
+        """An all-day place that can still be where the day has its lunch."""
+        return (need_lunch and not poi.restaurant and poi.visit_min >= ALL_DAY_MIN
+                and poi.open_min <= LUNCH_REQUIRED[0])
+
+    def _must_deadlines() -> dict[int, int]:
+        """Latest start of each must_visit left, so that those after it still fit."""
+        own = {i: min(pois[i - 1].close_min, trip.end_min) - pois[i - 1].visit_min for i in must_left}
+        for i in must_left:
+            if _feeds_lunch(pois[i - 1]):
+                # Started later it no longer runs through lunch, and no restaurant
+                # can be reached from inside it.
+                own[i] = min(own[i], LUNCH_REQUIRED[0])
+        chain = sorted(must_left, key=lambda i: (own[i], i))
+        for first, then in precedence or []:
+            a, b = node_of.get(first), node_of.get(then)
+            if a in own and b in own and chain.index(a) > chain.index(b):
+                chain.remove(a)
+                chain.insert(chain.index(b), a)
+        latest: dict[int, int] = {}
+        for at in range(len(chain) - 1, -1, -1):
+            i = chain[at]
+            latest[i] = own[i]
+            if at + 1 < len(chain):
+                after = chain[at + 1]
+                latest[i] = min(own[i], latest[after] - pois[i - 1].visit_min - STOP_OVERHEAD_MIN
+                                - _leg(pois[i - 1].poi_id, {after}))
+        return latest
 
     unit = max((p.score for p in pois), default=1.0) or 1.0
     presence_value = unit * DIVERSITY_PRESENCE_RATIO
+    late_end = (int(late_end_min) if late_end_min is not None and int(late_end_min) <= trip.end_min
+                else None)
+    closer_left = _closer is not None
+    closer_span = _late_span(pois[_closer - 1], late_end, trip) if closer_left else None
+
+    def _band_cost(poi: StubPOI, start: int) -> float:
+        """What the model charges this stop for the band its middle falls in."""
+        if not state_cost:
+            return 0.0
+        middle = start + poi.visit_min // 2
+        for k, (lo, hi) in enumerate(state_bands or []):
+            if lo <= middle < hi:
+                return unit * float(state_cost.get((poi.poi_id, k), 0.0))
+        return 0.0
+
     while True:
         if max_stops is not None and len(hint) >= int(max_stops):
             break
-        best: tuple[tuple[float, float, str], int, int] | None = None
+        meal_window = (LUNCH_REQUIRED if need_lunch and clock < LUNCH_REQUIRED[1]
+                       else DINNER_REQUIRED if need_dinner and clock < DINNER_REQUIRED[1] else None)
+        open_groups = [g for g in groups if g["need"] > 0]
+        # (latest start, the nodes that answer it) for what is owed by a clock.
+        owed = [(when, {i}, "") for i, when in _must_deadlines().items()]
+        owed += [(window[1], restaurants, meal) for window, needed, meal in (
+            (LUNCH_REQUIRED, need_lunch, "lunch"), (DINNER_REQUIRED, need_dinner, "dinner")) if needed]
+        owed += [(g["span"][1], g["nodes"], "") for g in open_groups if g["span"]]
+        if closer_left:
+            owed.append((closer_span[1], {_closer}, ""))
+        owed = [row for row in owed if row[0] > clock]
+        reserved = (len(must_left) + int(need_lunch) + int(need_dinner)
+                    + sum(g["need"] for g in open_groups) + int(closer_left))
+        best: tuple[tuple, int, int, int | None] | None = None
+        closing_later: tuple[tuple, int, int, int | None] | None = None
         for i in range(1, len(pois) + 1):
             if i in placed:
                 continue
             poi = pois[i - 1]
-            if poi.poi_id in avoid:
+            if poi.poi_id in avoid or _order_blocks(poi.poi_id):
                 continue
-            if poi.category and used_cats.get(poi.category, 0) >= CATEGORY_SOFT_CAP:
-                continue
-            spot = _hint_place(poi, previous, clock, trip, travel, used_slots,
+            mandatory = i in must_left
+            closing = closer_left and i == _closer
+            meal = meal_window if poi.restaurant else None
+            span = next((g["span"] for g in open_groups if g["span"] and i in g["nodes"]), None)
+            required = (mandatory or closing or meal is not None
+                        or any(i in g["nodes"] for g in open_groups))
+            if not required:
+                if max_stops is not None and len(hint) + reserved >= int(max_stops):
+                    continue
+                if poi.category and used_cats.get(poi.category, 0) >= CATEGORY_SOFT_CAP:
+                    continue
+                # Its cap and the no-neighbour rules would then block the named place,
+                # or the stop kept for the evening.
+                kept = {pois[j - 1].category for j in must_left}
+                if closer_left:
+                    kept.add(pois[_closer - 1].category)
+                if poi.category in kept:
+                    continue
+            if max_fee is not None and not mandatory:
+                meals_after = int(need_lunch) + int(need_dinner) - (1 if meal else 0)
+                held = sum(pois[j - 1].fee for j in must_left) + meals_after * cheapest_meal
+                if closer_left and not closing:
+                    held += pois[_closer - 1].fee
+                if spent + poi.fee + held > int(max_fee):
+                    continue
+            floor = max(clock, (meal or span or (clock,))[0])
+            if closing:
+                floor = max(floor, closer_span[0])
+            spot = _hint_place(poi, previous, floor, trip, travel, used_slots,
                                blocked_window)
             if spot is None:
                 continue
-            start, leg, _slot = spot
+            start, leg, slot = spot
+            if (meal and start >= meal[1]) or (span and start >= span[1]):
+                continue
+            # An all-day stop through the lunch window is the lunch (eaten on site).
+            feeds = need_lunch and not poi.restaurant and holds_lunch(start, start + poi.visit_min)
+            if any(start + poi.visit_min + STOP_OVERHEAD_MIN + _leg(poi.poi_id, nodes) > when
+                   for when, nodes, owes in owed
+                   if i not in nodes and not (feeds and owes == "lunch")):
+                continue
             # TASK-3: do not seed a <2.5h restaurant pair either.
-            if poi.restaurant and any(
+            if poi.restaurant and not mandatory and any(
                     abs(start - other) < RESTAURANT_PAIR_MAX_GAP
                     for other in restaurant_starts):
                 continue
             if _blocked_by_cat(poi, start):
                 continue
             wait = start - clock
-            value = poi.score
+            value = poi.score - _band_cost(poi, start)
             if poi.category and used_cats.get(poi.category, 0) == 0:
                 value += presence_value  # reward a new category (TASK-1)
-            minutes = wait + poi.visit_min + overhead_min + leg
+            if value <= 0 and not required:
+                # Worth nothing to the objective: an open-air stop in the rain, or a
+                # dear place the savings profile scores below zero. The model would
+                # only take it for a rule the walk does not owe it to.
+                continue
+            minutes = wait + poi.visit_min + STOP_OVERHEAD_MIN + leg
             efficiency = value / max(1, minutes)
-            key = (-efficiency, -poi.score, poi.poi_id)
+            # A wish that names its places ("hải sản": these 29 restaurants) is a
+            # hard group in the wished rungs. Efficiency alone seated any
+            # restaurant at lunch and dinner and left the group open, so the seed
+            # broke a rule of the model and CP-SAT started from nothing: among the
+            # stops ready now, one that closes such a group goes first.
+            closes = sum(1 for g in open_groups if g["named"] and i in g["nodes"]
+                         and (not g["span"] or g["span"][0] <= start < g["span"][1]))
+            # A named all-day place goes before the short stops it would outlast:
+            # by value per minute it always lost to a cafe, and then no longer fit.
+            closes += int(mandatory and _feeds_lunch(poi))
+            key = (not (required and wait <= HINT_READY_MIN), -closes, -efficiency,
+                   -poi.score, poi.poi_id)
+            if closing and wait > HINT_READY_MIN:
+                # The stop kept for the evening closes the day: until its hour comes it
+                # goes only when nothing else can (taken early on its value per minute,
+                # it left a dinner that closes at 19:30 no time to start).
+                closing_later = (key, i, start, slot)
+                continue
             if best is None or key < best[0]:
-                best = (key, i, start)
+                best = (key, i, start, slot)
+        best = best or closing_later
         if best is None:
             break
-        _key, i, start = best
+        _key, i, start, slot = best
         poi = pois[i - 1]
-        spot = _hint_place(poi, previous, clock, trip, travel, used_slots,
-                           blocked_window)
-        _start, _leg, slot = spot
         hint.append((i, start))
+        spent += poi.fee
         placed.add(i)
+        must_left.discard(i)
+        if i == _closer:
+            closer_left = False
+        if not poi.restaurant and holds_lunch(start, start + poi.visit_min):
+            need_lunch = False
+        if poi.restaurant:
+            if need_lunch and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1]:
+                need_lunch = False
+            elif need_dinner and DINNER_REQUIRED[0] <= start < DINNER_REQUIRED[1]:
+                need_dinner = False
+        for group in open_groups:
+            if i in group["nodes"] and (not group["span"] or group["span"][0] <= start < group["span"][1]):
+                group["need"] -= 1
         if slot is not None:
             used_slots.add(slot)
         if poi.restaurant:
@@ -403,23 +592,96 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         previous, previous_cat = poi.poi_id, poi.category
         previous_food = poi.restaurant
         clock = _clock_after(poi, start)
-    return hint
+
+    def _ends_late(tour: list[tuple[int, int]]) -> bool:
+        return any(start + pois[i - 1].visit_min >= late_end for i, start in tour)
+
+    if hint and not must_left and late_end is not None and not _ends_late(hint):
+        i, start = hint[-1]
+        later = _ending_late(pois[i - 1], start, late_end, trip, blocked_window,
+                             timed={n for g in groups if g["span"] for n in g["nodes"]}, node=i)
+        if later is not None:
+            hint[-1] = (i, later)
+        elif _closer is None:
+            # Keep one evening stop back from the start and walk the day again.
+            for node in _closers(pois, late_end, trip, avoid, must_set, precedence, max_fee,
+                                 cheapest_meal * (int(lunch_required) + int(dinner_required)),
+                                 _band_cost)[:HINT_CLOSER_TRIES]:
+                again = _greedy_hint(
+                    pois, travel, trip, must_set, blocked_window=blocked_window, max_stops=max_stops,
+                    cafe_cap=cafe_cap, no_consecutive=no_consecutive, no_adjacent_food=no_adjacent_food,
+                    rest_after_lunch=rest_after_lunch, category_cap=category_cap, avoid_ids=avoid_ids,
+                    precedence=precedence, max_fee=max_fee, required_any=required_any,
+                    lunch_required=lunch_required, dinner_required=dinner_required,
+                    state_bands=state_bands, state_cost=state_cost, late_end_min=late_end_min,
+                    _closer=node)
+                if again and _ends_late(again):
+                    return again
+    return [] if must_left else hint
 
 
-def cafe_daypart_min(minutes: int) -> str | None:
-    """Daypart of a cafe start in minutes (mirrors soft_rules.cafe_daypart)."""
-    if minutes < CAFE_MORNING_END:
-        return "morning"
-    if minutes > CAFE_AFTERNOON_START:
-        return "afternoon"
+def _late_span(poi: StubPOI, late_end: int | None, trip: StubTrip) -> tuple[int, int] | None:
+    """(earliest, latest) start at which this stop ends at or after `late_end` inside
+    its own hours and the day, None when it never can."""
+    if late_end is None:
+        return None
+    for open_min, close_min in _windows(poi):
+        first = max(open_min, late_end - poi.visit_min)
+        last = min(close_min, trip.end_min) - poi.visit_min
+        if first <= last:
+            return first, last
     return None
 
 
-def _meal_slot_min(minutes: int) -> int | None:
-    """Meal-slot index for a start in minutes (mirrors soft_rules.meal_slot)."""
-    for idx, (lo, hi) in enumerate(MEAL_SLOTS):
-        if lo <= minutes < hi:
-            return idx
+def _closers(pois: list[StubPOI], late_end: int, trip: StubTrip, avoid: set[str],
+             must_set: set[str], precedence: list | None, max_fee: int | None,
+             meals_fee: int, band_cost) -> list[int]:
+    """Nodes that can close a day which must end late, best first.
+
+    A stop that is no meal (meals and cafes keep their own hours and quotas), that the
+    traveller did not name or order (those have their own place in the walk), that can
+    end at or after `late_end`, and that the budget still affords beside the meals. By
+    what it is worth at that hour (the rain counts), then by id.
+    """
+    ordered = {pid for pair in precedence or [] for pid in pair}
+    rows = []
+    for i, poi in enumerate(pois, 1):
+        if (poi.restaurant or poi.category == "cafe" or poi.poi_id in avoid
+                or poi.poi_id in must_set or poi.poi_id in ordered):
+            continue
+        span = _late_span(poi, late_end, trip)
+        if span is None or (max_fee is not None and poi.fee + meals_fee > int(max_fee)):
+            continue
+        rows.append((-(poi.score - band_cost(poi, span[0])), poi.poi_id, i))
+    return [i for _value, _pid, i in sorted(rows)]
+
+
+def _ending_late(poi: StubPOI, start: int, late_end_min: int, trip: StubTrip,
+                 blocked_window: tuple[int, int] | None, timed: set[int] | None = None,
+                 node: int | None = None) -> int | None:
+    """A later start for the day's LAST stop so that it ends at or after
+    `late_end_min`, None when it already does or cannot inside its own hours.
+
+    Only the last stop moves, so no leg behind it changes. It keeps what it was
+    seated for: its meal slot (a dinner stays a dinner), its cafe daypart, and it
+    does not move into a locked window. A stop that answers a timed wish stays.
+    """
+    if start + poi.visit_min >= late_end_min or (timed and node in timed):
+        return None
+    wanted = late_end_min - poi.visit_min
+    for open_min, close_min in _windows(poi):
+        later = max(wanted, open_min, start)
+        if later + poi.visit_min > min(close_min, trip.end_min):
+            continue
+        if poi.restaurant and (meal_slot_at(later) != meal_slot_at(start)
+                               or (DINNER_REQUIRED[0] <= start < DINNER_REQUIRED[1]) !=
+                               (DINNER_REQUIRED[0] <= later < DINNER_REQUIRED[1])):
+            continue
+        if poi.category == "cafe" and cafe_daypart_at(later) != cafe_daypart_at(start):
+            continue
+        if blocked_window and later < blocked_window[1] and later + poi.visit_min > blocked_window[0]:
+            continue
+        return later
     return None
 
 
@@ -435,14 +697,66 @@ def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
     return hit
 
 
+def _complete_hint(m, cp_model):
+    """Turn the partial greedy hint into a full feasible assignment; None if it has none.
+
+    CP-SAT reads a hint only once presolve is done (with its defaults: 3 probing
+    passes, ~3 work units on an 80-POI day; see `SEARCH_PRESOLVE_ITERATIONS`) and
+    reports NOTHING when the budget ends before that: a short budget returned
+    UNKNOWN for a day the hint already held. A solve with the hinted
+    variables fixed fills in every other variable (they all follow from the arcs
+    and clocks) and ends in milliseconds. Its solution becomes the complete hint,
+    which the main search takes as its first incumbent, and the floor `optimize`
+    returns when the search runs out of budget before improving on it. None when
+    the greedy walk broke a rule the model has and the walk does not; the main
+    search then starts from scratch as before.
+    """
+    probe = cp_model.CpSolver()
+    probe.parameters.num_search_workers = 1
+    probe.parameters.fix_variables_to_their_hinted_value = True
+    probe.parameters.max_deterministic_time = HINT_COMPLETE_DETERMINISTIC_TIME
+    probe.parameters.max_time_in_seconds = HINT_COMPLETE_WALL_S
+    if probe.Solve(m) not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return None
+    proto = m.proto if hasattr(m, "proto") else m.Proto()
+    m.ClearHints()
+    for index, value in enumerate(probe.ResponseProto().solution):
+        proto.solution_hint.vars.append(index)
+        proto.solution_hint.values.append(int(value))
+    return probe
+
+
+def _repair_hint(m, cp_model, budget: float, wall_s: float):
+    """The best day a second search finds when it starts by repairing the rejected
+    seed: the solver holding it, or None.
+
+    The greedy walk does not know every rule of the model. A seed the model rejects
+    leaves the search without an incumbent, and on the largest days it then found
+    nothing inside the budget: the traveller got no plan at all (friends, 11 stops, a
+    late end; 3 of 9 such solves, before the walk learnt the late end). CP-SAT's hint
+    repair moves the seed until it is feasible and searches on from there. Used inside
+    every search it cost up to a fifth of the objective on the days the plain search
+    solved, so it is the rescue of a search that failed, not the way to search.
+    """
+    rescue = cp_model.CpSolver()
+    rescue.parameters.num_search_workers = 1
+    rescue.parameters.repair_hint = True
+    rescue.parameters.hint_conflict_limit = HINT_REPAIR_CONFLICTS
+    rescue.parameters.max_presolve_iterations = SEARCH_PRESOLVE_ITERATIONS
+    rescue.parameters.cp_model_probing_level = SEARCH_PROBING_LEVEL
+    rescue.parameters.max_deterministic_time = float(budget)
+    rescue.parameters.max_time_in_seconds = float(wall_s)
+    if rescue.Solve(m) not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        return None
+    return rescue
+
+
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
-             trip: StubTrip, require_all: bool = False,
-             timeout_s: float = TIMEOUT_S,
+             trip: StubTrip, timeout_s: float = TIMEOUT_S,
              edge_scores: dict[tuple[str, str], float] | None = None,
              precedence: list[tuple[str, str]] | None = None,
              workers: int = 0,
              must_visit: list[str] | None = None,
-             overhead_min: int | None = None,
              min_stops: int | None = None,
              max_stops: int | None = None,
              required_any: list[dict] | None = None,
@@ -453,91 +767,82 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              no_consecutive: bool = False,
              no_adjacent_food: bool = False,
              lunch_required: bool = False,
+             dinner_required: bool = False,
              state_bands: list[tuple[int, int]] | None = None,
              state_score: dict[tuple[str, int], float] | None = None,
+             state_cost: dict[tuple[str, int], float] | None = None,
              category_cap: int | None = None,
-             state_weight: float | None = None,
              diversity_weight: float | None = None,
              solution_pool: int = 1,
              pool_band: float = POOL_DEFAULT_BAND,
              pool_timeout_s: float | None = None,
              forbidden_sets: list[frozenset[str]] | None = None,
-             deterministic_time: float | None = None) -> dict:
-    """T030: q_ij edge bonuses + W_A+s_A<=W_B precedence (both optional).
+             distinct_from: list[frozenset[str]] | None = None,
+             distinct_ceiling: float = 0.6,
+             deterministic_time: float | None = None,
+             not_first: set[str] | None = None,
+             max_fee: int | None = None) -> dict:
+    """The best day over `pois` (see the module docstring for the model).
 
-    edge_scores[(a, b)]: bonus added when transition a->b is used.
-    precedence[(A, B)]: when BOTH visited, t[B] >= t[A]+dur[A].
-    workers: 0 = solver default (wall-clock search, may vary run to run);
-    1 = single deterministic worker, used by the T053 eval harness so a
-    baseline comparison is reproducible.
-    overhead_min: TASK-2 breathing room between stops (default
-    `STOP_OVERHEAD_MIN`; 0 restores the old dense schedule, tests only).
+    edge_scores[(a, b)]: bonus when transition a->b is used.
+    precedence[(A, B)]: when BOTH are visited, t[B] >= t[A]+dur[A].
+    workers: 0 = solver default (wall-clock search, may vary run to run); 1 = a single
+    deterministic worker.
+    deterministic_time: search budget in OR-Tools work units (single worker). It stops
+    after the same WORK on every run, where a wall-clock budget stops at whatever the
+    machine reached; `timeout_s` still caps wall time.
+    must_visit: HARD, every listed POI is in the itinerary (`MUST_GO_BONUS` is only a
+    nudge). One outside the candidates, or that the horizon cannot fit, gives an honest
+    no-solution rather than a plan that fails gate HCS.
+    max_fee: HARD ceiling on the fee sum per person (gate BCS, SC-008), so a plan is
+    never built over budget and then thrown away by the gate.
+    not_first: POI ids that may not open the tour (a replan's next stop must not repeat
+    the kind of stop just done).
 
-    Day-template inputs (all optional, None = legacy behaviour):
+    Day-template inputs (None = off):
     min_stops/max_stops: pace band on the number of visited POIs.
-    required_any: [{"count": 1, "categories": [...]}] â€” at least `count`
-    visits from each category set (a missing set = honest infeasible, the
-    caller relaxes or reports it).
-    blocked_window: (lo, hi) minutes that NO visit may overlap (legacy fixed
-    locked rest; day templates now use `rest_after_lunch` instead).
-    rest_after_lunch: siesta length in minutes, STARTING at the chosen lunch
-    activity's END (REST_FOLLOWS_LUNCH). It implies `lunch_required`; no visit
-    may overlap [lunch_end, lunch_end + rest_after_lunch). A late lunch makes
-    the window run past the horizon, which simply leaves no room for more
-    stops (the validator/report applies the 20-min floor and the shrink).
-    late_end_min: at least one visit must end at/after it (friends-fast late
-    end); the caller only passes it when the horizon can contain it.
+    required_any: [{"count": 1, "categories": [...]}]: at least `count` visits from each
+    category set, or from its `poi_ids`, starting inside `start_between` when given (a
+    missing set = honest infeasible, the caller relaxes or reports it).
+    blocked_window: (lo, hi) minutes that NO visit may overlap (a replan after lunch).
+    rest_after_lunch: siesta length in minutes, STARTING at the chosen lunch's END
+    (REST_FOLLOWS_LUNCH); it implies a lunch. A late lunch makes the window run past the
+    horizon, which simply leaves no room for more stops (the validator/report applies
+    the 20-min floor and the shrink).
+    late_end_min: at least one visit ends at/after it (friends-fast late end).
 
-    Hard sequence rules mirrored from the gate (so the solver avoids them
-    instead of producing a plan the gate rejects):
-    cafe_cap: None = legacy/off; 1 = at most one cafe; 2 = at most two, and
-    only when one starts before 11:00 AND one after 13:00 (gate CAFE_CAP).
-    no_consecutive: no arc between two POIs of the same category (gate
-    NO_CONSECUTIVE); a missing category is never "the same".
-    no_adjacent_food: no arc between two `restaurant` POIs, any cuisine (gate
-    NO_ADJACENT_FOOD). It is redundant with NO_CONSECUTIVE today (both
-    restaurants share the category) but it is kept explicit so the food rule
-    survives a future category split, and so it holds even if the broader
-    adjacency rule is turned off.
-    lunch_required: at least one restaurant starts in 11:00-13:00, i.e. the
-    universal lunch that the locked siesta follows (human need, every
-    template). Kept out of `attempts()` â€” it is never relaxed.
-    state_bands/state_score: DYNAMIC STATE soft layer (trip_ctx). Disjoint
-    time bands clipped to the horizon, plus a per-(poi, band) multiplier;
-    each band contributes `unit * STATE_WEIGHT * (mult - 1)` when a visit
-    starts inside it. It steers placement (beach not at the 14:00 dip, no
-    second meal right after lunch) without touching any hard rule.
-    state_weight: override the module STATE_WEIGHT (tests pin the tuning).
-    diversity_weight: override the module DIVERSITY_WEIGHT for this solve.
-    The experience profile passes a dominant value so a new category beats
-    another same-category stop; None keeps the global tuning.
-    category_cap: HARD daily cap for `NON_FOOD_CAPPED` categories (gate
-    CATEGORY_CAP). None = off (pure model tests); 1 = at most one market,
-    landmark, beach, attraction, temple, museum, park or viewpoint per day.
-    Meals are exempt (A1/CAFE_CAP own them).
+    Hard rules mirrored from the gate, so the solver avoids them instead of producing a
+    plan the gate rejects (off by default, so the pure model tests keep their shape):
+    cafe_cap: 1 = at most one cafe; 2 = at most two, one before 11:00 AND one after 13:00.
+    no_consecutive: no arc between two POIs of the same category (a missing category is
+    never "the same").
+    no_adjacent_food: no arc between two restaurants, any cuisine. Redundant with
+    no_consecutive today, explicit so the food rule survives a category split.
+    lunch_required: a restaurant starts in 11:00-13:00, or an all-day stop (`ALL_DAY_MIN`)
+    runs through that whole window and feeds its visitors on site. It is never relaxed.
+    dinner_required: a restaurant starts in DINNER_REQUIRED. The planner may drop it, with
+    a warning, when the money or the hours cannot hold a second meal.
+    category_cap: at most N POIs per `NON_FOOD_CAPPED` category a day; meals are exempt.
 
-    solution_pool/pool_band/pool_timeout_s: enumerate up to `solution_pool`
-    DISTINCT POI sets whose objective is >= `pool_band` * best, inside a
-    `pool_timeout_s` enumeration budget. The result then carries
-    `pool` [{activities, objective, poi_ids}] + `pool_stats`; callers pick
-    with pool.mmr_select (diverse mode). `solution_pool=1` (default) keeps the
-    exact previous single-plan behaviour, including `elapsed_s`.
+    state_bands/state_score: dynamic state (trip_ctx). Disjoint time bands clipped to the
+    horizon plus a per-(poi, band) multiplier; each band adds `unit * STATE_WEIGHT *
+    (mult - 1)` when a visit lands in it. It steers placement (no beach in the 14:00 dip,
+    no second meal right after lunch) without touching any hard rule.
+    state_cost: per-(poi, band) cost in units of the top POI score, subtracted when a
+    visit lands in the band (rain on an open-air stop, `trip_ctx.rain_costs`). Unlike the
+    multiplier it may exceed what the stop is worth: the solver then leaves the stop out
+    unless a hard rule (must_visit, a wish group, the pace floor) needs it.
+    diversity_weight: overrides `DIVERSITY_WEIGHT` for this solve (the experience profile
+    passes a dominant value, so a new category beats another stop of the same one).
 
-    forbidden_sets: pool-internal (see `_pool_search`). Each forbidden set is
-    a POI set that must NOT be visited again: one nogood
-    `sum(visit) <= |S|-1` per set, built into a FRESH model, never bolted onto
-    a solved one.
-    deterministic_time: optional deterministic search budget (OR-Tools work
-    units, single-worker). The T053 eval harness uses it instead of the plain
-    wall clock so a published comparison is byte-reproducible: a wall-clock
-    budget stops at whatever the machine reached, a deterministic budget stops
-    after the same WORK on every run. `timeout_s` still caps wall time.
-
-    must_visit (T053 bug 2): HARD constraint â€” every listed POI MUST be in
-    the itinerary (visit[i] == 1), unlike the SOFT MUST_GO_BONUS nudge in
-    poi_to_stub. A must_visit POI outside the candidate set, or one the
-    horizon cannot fit, makes the model infeasible -> honest no_solution
-    rather than a silently must-less plan that fails gate HCS.
+    solution_pool/pool_band/pool_timeout_s: enumerate up to `solution_pool` DISTINCT POI
+    sets with objective >= `pool_band` * best, inside the enumeration budget. The result
+    then carries `pool` [{activities, objective, poi_ids}] + `pool_stats`.
+    forbidden_sets: pool-internal (`_pool_search`), one nogood per POI set already taken.
+    distinct_from/distinct_ceiling: cross-option guarantee (router refill). The POI set A
+    must keep Jaccard(A, S) <= `distinct_ceiling` for every S, i.e.
+    |A&S| <= J*(|A|+|S|-|A&S|), which is LINEAR in the visit booleans: with J = p/q,
+    (q+p)*|A&S| <= p*(|A|+|S|).
     """
     from ortools.sat.python import cp_model
 
@@ -547,10 +852,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         return _pool_search(
             pois, travel, trip, k=int(solution_pool), band=float(pool_band),
             budget=pool_timeout_s,
-            kwargs=dict(require_all=require_all, timeout_s=timeout_s,
+            kwargs=dict(timeout_s=timeout_s,
                         edge_scores=edge_scores, precedence=precedence,
                         workers=workers, must_visit=must_visit,
-                        overhead_min=overhead_min, min_stops=min_stops,
+                        min_stops=min_stops,
                         max_stops=max_stops, required_any=required_any,
                         blocked_window=blocked_window,
                         rest_after_lunch=rest_after_lunch,
@@ -558,11 +863,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         no_consecutive=no_consecutive,
                         no_adjacent_food=no_adjacent_food,
                         lunch_required=lunch_required,
+                        dinner_required=dinner_required,
                         state_bands=state_bands, state_score=state_score,
-                        category_cap=category_cap, state_weight=state_weight,
-                        diversity_weight=diversity_weight))
+                        state_cost=state_cost,
+                        category_cap=category_cap,
+                        diversity_weight=diversity_weight,
+                        distinct_from=distinct_from,
+                        distinct_ceiling=distinct_ceiling, max_fee=max_fee,
+                        deterministic_time=deterministic_time, not_first=not_first))
 
-    overhead = STOP_OVERHEAD_MIN if overhead_min is None else int(overhead_min)
     ids = [p.poi_id for p in pois]
     n = len(ids)
     must_set = set(must_visit or [])
@@ -594,14 +903,26 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         visit[i] = m.NewBoolVar(f"visit_{i}")
         m.Add(arc[(i, i)] == 0).OnlyEnforceIf(visit[i])
         m.Add(arc[(i, i)] == 1).OnlyEnforceIf(visit[i].Not())
-        if require_all:
-            m.Add(visit[i] == 1)
         if ids[i - 1] in must_set:
             # T053 bug 2: must_visit is HARD (gate HCS), not the soft bonus.
             m.Add(visit[i] == 1)
-        m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
-        m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
+        wins = _windows(pois[i - 1])
+        if len(wins) == 1:
+            m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
+            m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
+        else:
+            # Lunch + dinner service: a visit sits inside exactly one window.
+            picks = []
+            for k, (lo, hi) in enumerate(wins):
+                pick = m.NewBoolVar(f"win_{i}_{k}")
+                m.Add(lo <= t[i]).OnlyEnforceIf(pick)
+                m.Add(t[i] <= hi - dur[i]).OnlyEnforceIf(pick)
+                picks.append(pick)
+            m.Add(sum(picks) == visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
+    if max_fee is not None:
+        m.Add(sum(pois[i - 1].fee * visit[i] for i in range(1, n + 1)) <= int(max_fee))
+
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].
     slot_hits: dict[int, list] = {}
@@ -616,7 +937,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(sum(hits) <= 1)
 
     # Universal lunch (human need): exactly one restaurant starts inside
-    # 11:00-13:00 â€” A1 above already caps the slot at one, so ">= 1" here is
+    # 11:00-13:00: A1 above already caps the slot at one, so ">= 1" here is
     # "exactly one lunch". The same hits drive the rest window (below), which
     # is tied to the chosen lunch's END, not to a fixed 13:00 anchor.
     lunch_hits: list[tuple[int, object]] = []
@@ -626,11 +947,31 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                              LUNCH_REQUIRED[1], "lunch"))
             for i in range(1, n + 1) if pois[i - 1].restaurant
         ]
-        if not lunch_hits:
+        # An all-day place feeds its visitors (soft_rules.ALL_DAY_MIN): a stay that
+        # runs through the whole lunch window is the lunch, with no rest to follow.
+        on_site = []
+        for i in range(1, n + 1):
+            if pois[i - 1].restaurant or dur[i] < ALL_DAY_MIN:
+                continue
+            through = m.NewBoolVar(f"lunch_on_site_{i}")
+            m.AddImplication(through, visit[i])
+            m.Add(t[i] <= LUNCH_REQUIRED[0]).OnlyEnforceIf(through)
+            m.Add(t[i] + dur[i] >= LUNCH_REQUIRED[1]).OnlyEnforceIf(through)
+            on_site.append(through)
+        if not lunch_hits and not on_site:
             return {"status": "infeasible",
                     "reason": "khong co nha hang cho bua trua",
                     "elapsed_s": 0.0, "itinerary": None}
-        m.Add(sum(hit for _i, hit in lunch_hits) >= 1)
+        m.Add(sum(hit for _i, hit in lunch_hits) + sum(on_site) >= 1)
+    if dinner_required:
+        dinner_hits = [_window_hits(m, t, visit, i, DINNER_REQUIRED[0],
+                                    DINNER_REQUIRED[1], "dinner")
+                       for i in range(1, n + 1) if pois[i - 1].restaurant]
+        if not dinner_hits:
+            return {"status": "infeasible",
+                    "reason": "khong co nha hang cho bua toi",
+                    "elapsed_s": 0.0, "itinerary": None}
+        m.Add(sum(dinner_hits) >= 1)
 
     # REST_FOLLOWS_LUNCH (HARD): rest_start == lunch_end for the chosen lunch,
     # and no other visit may overlap [rest_start, rest_start + rest_minutes).
@@ -693,6 +1034,18 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         if len(nodes) == len(forbidden) and nodes:
             m.Add(sum(visit[i] for i in nodes) <= len(nodes) - 1)
 
+    # Cross-option Jaccard ceiling (see docstring): a POI of S outside this
+    # candidate list can never be shared, it only grows the union.
+    if distinct_from:
+        ceiling = Fraction(distinct_ceiling).limit_denominator(100)
+        p, q = ceiling.numerator, ceiling.denominator
+        visited = sum(visit[i] for i in range(1, n + 1))
+        for other in distinct_from:
+            nodes = [node[pid] for pid in other if pid in node]
+            if nodes:
+                m.Add((q + p) * sum(visit[i] for i in nodes)
+                      <= p * (visited + len(other)))
+
     # gate NO_CONSECUTIVE (HARD): no arc between two same-category POIs.
     if no_consecutive:
         for i in range(1, n + 1):
@@ -719,16 +1072,21 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         m.Add(sum(visit[i] for i in range(1, n + 1)) >= int(min_stops))
     if max_stops is not None:
         m.Add(sum(visit[i] for i in range(1, n + 1)) <= int(max_stops))
-    # Archetype composition: at least N visits from each category set.
-    for req in required_any or []:
+    # Archetype composition: at least N visits from each category set, or from
+    # the exact POIs a narrow wish names ("hải sản": seafood places, not any meal).
+    for position, req in enumerate(required_any or []):
         cats = set(req.get("categories") or [])
-        nodes = [i for i in range(1, n + 1) if pois[i - 1].category in cats]
+        named = req.get("poi_ids")
+        nodes = ([node[pid] for pid in named if pid in node] if named is not None
+                 else [i for i in range(1, n + 1) if pois[i - 1].category in cats])
         need = int(req.get("count") or 1)
         if len(nodes) < need:
             return {"status": "infeasible",
                     "reason": f"thieu loai {sorted(cats)} trong candidate",
                     "elapsed_s": 0.0, "itinerary": None}
-        m.Add(sum(visit[i] for i in nodes) >= need)
+        span = req.get("start_between")
+        m.Add(sum(_window_hits(m, t, visit, i, int(span[0]), int(span[1]), f"wish{position}")
+                  if span else visit[i] for i in nodes) >= need)
     # Locked rest window: a visited stop ends before it or starts after it.
     if blocked_window:
         lo, hi = int(blocked_window[0]), int(blocked_window[1])
@@ -752,7 +1110,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             if i == j:
                 continue
             if i == 0 and not trip.origin_id:
-                # T061a "drop depot legs": open tour â€” the origin/hotel leg
+                # T061a "drop depot legs": open tour: the origin/hotel leg
                 # is not modelled (seed has no depot node; adding one needs
                 # an OSRM call and haversine is banned for feasibility).
                 # The FIRST activity is therefore free to start at
@@ -767,8 +1125,11 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             else:
                 # TASK-2: breathing room only BETWEEN stops (i > 0); the
                 # origin leg has none.
-                gap = w + (overhead if i > 0 else 0)
+                gap = w + (STOP_OVERHEAD_MIN if i > 0 else 0)
                 m.Add(t[j] >= t[i] + dur[i] + gap).OnlyEnforceIf(arc[(i, j)])
+    for pid in not_first or ():
+        if pid in node:
+            m.Add(arc[(0, node[pid])] == 0)
     for prec in precedence or []:
         ia, ib = node.get(prec[0]), node.get(prec[1])
         if ia is not None and ib is not None:
@@ -849,9 +1210,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # so a 13:15 landmark that runs through the 13:30-15:00 dip cannot game
     # the band boundary with its midpoint. No band means no term (the
     # legacy/eval paths are unchanged).
-    if state_bands and state_score:
-        band_unit = int(unit * (STATE_WEIGHT if state_weight is None
-                                else float(state_weight)) * 1000)
+    if state_bands and (state_score or state_cost):
+        band_unit = int(unit * STATE_WEIGHT * 1000)
         probes = []
         for k, frac in enumerate(((1, 4), (3, 4))):
             probe = {}
@@ -863,10 +1223,12 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             probes.append(probe)
         for k, (lo, hi) in enumerate(state_bands):
             for i in range(1, n + 1):
-                mult = state_score.get((ids[i - 1], k))
-                if mult is None:
+                mult = (state_score or {}).get((ids[i - 1], k))
+                cost = (state_cost or {}).get((ids[i - 1], k))
+                if mult is None and cost is None:
                     continue
-                delta = int(band_unit * (float(mult) - 1.0) / len(probes))
+                delta = int(band_unit * (float(1.0 if mult is None else mult) - 1.0) / len(probes))
+                delta -= int(unit * 1000 * float(cost or 0.0) / len(probes))
                 if not delta:
                     continue
                 for probe in probes:
@@ -881,12 +1243,17 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # reproduce a set the nogood just banned (must_visit is HARD: never drop).
     avoid_ids = ({next(iter(s)) for s in (forbidden_sets or []) if s}
                  - must_set)
-    hint = _greedy_hint(pois, travel, trip, must_set, overhead_min=overhead,
+    hint = _greedy_hint(pois, travel, trip, must_set,
                         blocked_window=blocked_window, max_stops=max_stops,
                         cafe_cap=cafe_cap, no_consecutive=no_consecutive,
                         no_adjacent_food=no_adjacent_food,
                         rest_after_lunch=rest_after_lunch,
-                        category_cap=category_cap, avoid_ids=avoid_ids)
+                        category_cap=category_cap, avoid_ids=avoid_ids,
+                        precedence=precedence, max_fee=max_fee, required_any=required_any,
+                        lunch_required=lunch_required, dinner_required=dinner_required,
+                        state_bands=state_bands, state_cost=state_cost,
+                        late_end_min=late_end_min)
+    hint_solver = None
     if hint:
         previous = 0
         for i, start in hint:
@@ -899,6 +1266,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         for i in range(1, n + 1):
             if i not in hinted:
                 m.AddHint(arc[(i, i)], 1)
+        hint_solver = _complete_hint(m, cp_model)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = timeout_s
@@ -908,12 +1276,32 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         # because the machine was busier the second time.
         solver.parameters.num_search_workers = 1
         solver.parameters.max_deterministic_time = float(deterministic_time)
+        solver.parameters.max_presolve_iterations = SEARCH_PRESOLVE_ITERATIONS
+        solver.parameters.cp_model_probing_level = SEARCH_PROBING_LEVEL
     if workers:
         solver.parameters.num_search_workers = workers
     t0 = time.monotonic()
     status = solver.Solve(m)
     elapsed = time.monotonic() - t0
     name = solver.StatusName(status)
+    from_hint = rescued = False
+    if status == cp_model.UNKNOWN and hint_solver is not None:
+        # The budget ended inside presolve: the completed hint is still a feasible
+        # day of this very model, so it is the answer, not "nothing".
+        solver, status, from_hint = hint_solver, cp_model.FEASIBLE, True
+    elif status == cp_model.UNKNOWN and hint and deterministic_time is not None:
+        # The model rejected the seed and the search found no day alone: once more,
+        # this time starting by repairing that seed.
+        rescue = _repair_hint(m, cp_model, float(deterministic_time), timeout_s)
+        elapsed = time.monotonic() - t0
+        if rescue is not None:
+            solver, status, rescued = rescue, cp_model.FEASIBLE, True
+    if status == cp_model.UNKNOWN:
+        # Out of budget with no incumbent (the greedy hint was infeasible or the
+        # budget did not even cover presolve). Not a proof of anything.
+        return {"status": "unknown",
+                "reason": "solver het ngan sach truoc khi tim duoc lich (UNKNOWN)",
+                "elapsed_s": round(elapsed, 3), "itinerary": None}
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         return {"status": "infeasible", "reason": f"solver {name}",
                 "elapsed_s": round(elapsed, 3), "itinerary": None}
@@ -927,14 +1315,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 break
             order.append(nxt)
             node_now = nxt
-        acts = [{"poi_id": ids[i - 1], "start": hh(int(solver.Value(t[i]))),
-                 "end": hh(int(solver.Value(t[i])) + dur[i])}
+        acts = [{"poi_id": ids[i - 1], "start": hhmm(int(solver.Value(t[i]))),
+                 "end": hhmm(int(solver.Value(t[i])) + dur[i])}
                 for i in order]
         return order, acts
 
     order, acts = _take()
     objective = solver.ObjectiveValue()
     return {"status": "optimal" if status == cp_model.OPTIMAL else "feasible-timeout",
+            "from_hint": from_hint, "rescued": rescued,
             "elapsed_s": round(elapsed, 3),
             "itinerary": {"activities": acts,
                           "total_score": round(sum(sco[i] for i in order), 3),
@@ -987,17 +1376,19 @@ def _pool_search(pois: list[StubPOI], travel: dict, trip: StubTrip,
     generated = list(first.get("pool") or [])
     sets: list[frozenset[str]] = [frozenset(generated[0]["poi_ids"])]
     allowed = float(budget) if budget is not None else POOL_ENUM_TIMEOUT_S
+    by_work = base.get("deterministic_time") is not None
     t0 = time.monotonic()
     attempts = 0
     while len(sets) < int(k):
         left = allowed - (time.monotonic() - t0)
-        if left <= 0.2:
+        if left <= 0.2 and not by_work:
             break
         attempts += 1
-        out = optimize(pois, travel, trip,
-                       **{**base,
-                          "timeout_s": max(0.5, min(POOL_STEP_TIMEOUT_S, left)),
-                          "forbidden_sets": sets})
+        # By work the pool is the same on a busy machine; the caller's wall guard in
+        # `base` still stands behind each member.
+        step = ({"deterministic_time": POOL_STEP_DETERMINISTIC_TIME} if by_work
+                else {"timeout_s": max(0.5, min(POOL_STEP_TIMEOUT_S, left))})
+        out = optimize(pois, travel, trip, **{**base, **step, "forbidden_sets": sets})
         member = (out.get("pool") or [None])[0]
         if out.get("itinerary") is None or not member:
             break  # the nogood neighbourhood is exhausted

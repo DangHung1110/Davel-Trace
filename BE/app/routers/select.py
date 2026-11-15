@@ -30,6 +30,7 @@ from BE.app.services import gate
 router = APIRouter(prefix="/v1", tags=["itinerary"])
 
 _STORE: dict = {"plans": {}, "active_id": None, "selected": None, "gate": None}
+MAX_STORED_PLANS = 256
 
 
 class SelectIn(BaseModel):
@@ -42,6 +43,12 @@ class SelectIn(BaseModel):
 def register(plans: list[dict]) -> None:
     for p in plans:
         _STORE["plans"][p["itinerary_id"]] = p
+    while len(_STORE["plans"]) > MAX_STORED_PLANS:
+        oldest = next((key for key in _STORE["plans"]
+                       if key != _STORE["active_id"]), None)
+        if oldest is None:
+            break
+        del _STORE["plans"][oldest]
 
 
 def get_store() -> dict:

@@ -51,5 +51,5 @@ def test_default_catalog_uses_the_full_versioned_product_snapshot():
     assert path == Path("BE/data/snapshots/danang-v1/pois.json")
     snapshot = json.loads(path.read_text(encoding="utf-8"))
     assert snapshot["snapshot"] == "danang-v1"
-    assert len(snapshot["pois"]) == 742
-    assert sum(bool(place.get("verified")) for place in snapshot["pois"]) == 48
+    assert len(snapshot["pois"]) == 750
+    assert sum(bool(place.get("verified")) for place in snapshot["pois"]) == 549

@@ -7,6 +7,45 @@ import 'package:flutter_test/flutter_test.dart';
 import 'auth_controller_test.dart';
 
 void main() {
+  testWidgets(
+    'Google requires explicit terms and completes through the auth gate',
+    (tester) async {
+      final repository = FakeAuthRepository();
+      var googleCalls = 0;
+      final controller = AuthController(
+        repository: repository,
+        sessionStore: MemoryAuthSessionStore(),
+        googleSignIn: () async {
+          googleCalls++;
+          return repository.login('demo@example.com', 'TravelDemo123');
+        },
+      );
+      await controller.initialize();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: AuthGate(
+            controller: controller,
+            child: const Text('Signed in'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final button = find.widgetWithText(
+        OutlinedButton,
+        'Tiếp tục bằng Google',
+      );
+      await tester.ensureVisible(button);
+      await tester.tap(button);
+      await tester.pump();
+      expect(googleCalls, 0);
+      await tester.tap(find.byType(CheckboxListTile));
+      await tester.pump();
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      expect(googleCalls, 1);
+      expect(find.text('Signed in'), findsOneWidget);
+    },
+  );
   testWidgets('mobile auth screen fits and labels demo honestly', (
     tester,
   ) async {

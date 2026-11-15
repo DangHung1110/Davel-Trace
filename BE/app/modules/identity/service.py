@@ -31,7 +31,7 @@ from BE.app.db.models import (
     TripModel,
 )
 from BE.app.db.session import session_scope
-from BE.app.modules.identity.delivery import development_outbox
+from BE.app.modules.identity.delivery import send_identity_email
 from BE.app.modules.identity.domain import Principal, account_public, session_public
 from BE.app.modules.identity.infrastructure import IdentityRepository
 from BE.app.modules.identity.security import (
@@ -233,14 +233,14 @@ class IdentityService:
             if purpose == "verify_email"
             else timedelta(minutes=self.settings.identity_recovery_ttl_minutes)
         )
-        delivery = "sent" if self.settings.identity_dev_outbox_enabled else "failed"
+        delivery = send_identity_email(self.settings, account.email_normalized,
+                                       purpose, token, expiry)
         session.add(OneTimeActionModel(
             account_id=account.account_id, purpose=purpose,
             token_hash=secret_hash(token), expires_at=expiry,
             delivery_status=delivery, correlation_id=correlation_id,
+            superseded_at=now if delivery != "sent" else None,
         ))
-        if self.settings.identity_dev_outbox_enabled:
-            development_outbox.deliver(account.email_normalized, purpose, token, expiry)
         return delivery
 
     def register(self, email: str, password: str, terms_accepted: bool,
@@ -276,7 +276,7 @@ class IdentityService:
             account = repo.account_by_email(normalized, lock=True)
             if account and account.status == "unverified":
                 self._issue_action(session, account, "verify_email", correlation_id)
-            return {"message": "Nếu tài khoản hợp lệ, hướng dẫn đã được gửi."}
+            return {"message": "Yêu cầu đã được tiếp nhận. Nếu tài khoản hợp lệ, hãy kiểm tra email hoặc thử lại sau."}
 
     def confirm_verification(self, token: str, correlation_id: str) -> dict:
         with session_scope(self.settings.database_url) as session:
@@ -371,6 +371,9 @@ class IdentityService:
                     IdentitySessionModel.family_id == old.family_id,
                     IdentitySessionModel.revoked_at.is_(None),
                 ).values(revoked_at=now, revoke_reason="refresh_replay"))
+                # Persist replay revocation before raising: session_scope rolls
+                # back exceptions, which otherwise leaves the rotated family active.
+                session.commit()
                 raise IdentityError("AUTHENTICATION_REQUIRED", "Phiên đăng nhập không còn hợp lệ.", 401)
             if not old or old.revoked_at or old.refresh_expires_at <= now:
                 raise IdentityError("AUTHENTICATION_REQUIRED", "Phiên đăng nhập không còn hợp lệ.", 401)
@@ -453,7 +456,7 @@ class IdentityService:
             if eligible:
                 self._issue_action(session, account, purpose, correlation_id)
                 self._audit(session, purpose, "requested", correlation_id, account.account_id)
-            return {"message": "Nếu tài khoản hợp lệ, hướng dẫn đã được gửi."}
+            return {"message": "Yêu cầu đã được tiếp nhận. Nếu tài khoản hợp lệ, hãy kiểm tra email hoặc thử lại sau."}
 
     def confirm_recovery(self, token: str, new_password: str,
                          correlation_id: str) -> None:

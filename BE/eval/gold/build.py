@@ -1,12 +1,10 @@
 """Suite entry (T051-BUILDER, lane A): queries -> Approach-B golds -> T049 gate.
 
-SCOPED build, not a full gold suite. Query generation AND the gold/gate
-inputs are restricted to the eligible pool = POIs that are BOTH `verified`
-AND matrix-covered with every ordered candidate-to-candidate cell present.
-On the current T003b snapshot that pool is only 5 of 764 POIs (5 of 48
-verified; 43 verified POIs lack matrix coverage), and the 30-record output
-is the 30 Approach-B queries over that pool. Fee/category/duration breadth
-and SC-010 recovery remain open for T053.
+Query generation AND the gold/gate inputs are restricted to the eligible pool =
+POIs that are BOTH `verified` AND matrix-covered with every ordered
+candidate-to-candidate cell present: every verified POI of danang-v1 (the
+coverage line prints the count). The 30-record output is the 30 Approach-B
+queries over that pool.
 
 Usage:
   python BE/eval/gold/build.py --snapshot BE/data/snapshots/danang-v1 \
@@ -99,7 +97,7 @@ def build_suite(pois_by_id: dict, matrix: dict, n: int, seed: int
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="T051 SCOPED suite builder")
+    ap = argparse.ArgumentParser(description="T051 suite builder")
     ap.add_argument("--snapshot", default=os.path.join("data", "snapshots", "danang-v1"))
     ap.add_argument("--n", type=int, default=30)
     ap.add_argument("--seed", type=int, default=7)
@@ -108,7 +106,7 @@ def main(argv: list[str] | None = None) -> int:
     pois = load_pois(args.snapshot, by_id=True)
     matrix = load_matrix_cells(args.snapshot)
     suite, bad, infeasible, cov = build_suite(pois, matrix, args.n, args.seed)
-    print("coverage (SCOPED, not full gold): "
+    print("coverage: "
           f"{cov['eligible']}/{cov['total_pois']} POIs eligible "
           f"({cov['eligible']}/{cov['verified']} verified intersect matrix, "
           f"{cov['missing_verified']} verified missing matrix); "

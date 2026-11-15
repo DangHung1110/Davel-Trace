@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/config/api_config.dart';
 import '../application/auth_controller.dart';
 
 class VerifyScreen extends StatefulWidget {
@@ -15,6 +14,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
   final token = TextEditingController();
 
   @override
+  void dispose() {
+    token.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Xác thực email')),
     body: SafeArea(
@@ -22,14 +27,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
         padding: const EdgeInsets.all(24),
         children: [
           Text(
-            'Mã xác thực đã được tạo cho ${widget.controller.pendingEmail ?? 'email của bạn'}.',
+            widget.controller.message ??
+                'Kiểm tra email ${widget.controller.pendingEmail ?? 'của bạn'} để lấy mã xác thực.',
           ),
           const SizedBox(height: 16),
           TextField(
             controller: token,
             decoration: const InputDecoration(labelText: 'Mã xác thực'),
           ),
-          if (ApiConfig.isDemo) ...[
+          if (widget.controller.developmentInboxEnabled) ...[
             const SizedBox(height: 12),
             OutlinedButton.icon(
               onPressed: () async {
@@ -58,6 +64,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 ? null
                 : () => widget.controller.verify(token.text),
             child: const Text('Xác thực'),
+          ),
+          TextButton(
+            onPressed: widget.controller.busy
+                ? null
+                : () async {
+                    await widget.controller.resendVerification();
+                    if (mounted) setState(() {});
+                  },
+            child: const Text('Gửi lại mã xác thực'),
           ),
         ],
       ),

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from uuid import UUID
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, Depends, Header, Query
 from fastapi.responses import JSONResponse
@@ -74,6 +75,16 @@ def identity_error_response(exc: IdentityError) -> JSONResponse:
 @router.post("/v1/auth/register", status_code=202)
 def register(body: RegisterBody):
     return service().register(body.email, body.password, body.terms_accepted, get_correlation_id())
+
+
+@router.get("/v1/auth/capabilities")
+def capabilities():
+    settings = get_settings()
+    development = settings.app_mode in {AppMode.demo, AppMode.test} and settings.identity_dev_outbox_enabled
+    return {"google_sign_in": settings.google_configured,
+            "google_authorization_origin": f"{urlsplit(settings.google_redirect_uri).scheme}://{urlsplit(settings.google_redirect_uri).netloc}",
+            "development_inbox": development,
+            "email_delivery": "development" if development else "smtp" if settings.smtp_configured else "unavailable"}
 
 
 @router.post("/v1/auth/verification/resend", status_code=202)

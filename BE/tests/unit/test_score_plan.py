@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.profiles import run_profiles, score_plan  # noqa: E402
+from BE.app.services.profiles import build_plan, score_plan  # noqa: E402
 
 CS1 = {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1, "ETB": 1, "TCS": 1, "HCS": 1}
 EXP = {"profile": "experience", "total_cost": 500000, "travel_min": 60,
@@ -41,9 +41,11 @@ class TestScorePlan(unittest.TestCase):
         self.assertEqual((r["profit"], r["utility"]), (0.0, 0.0))
 
     def test_pool_profit_winner_is_savings(self):
-        from BE.tests.unit.test_profiles import IDS, MATRIX, POIS, TRAVEL, TRIP
-        pool = run_profiles(POIS, TRAVEL, TRIP, MATRIX)
-        scored = [(p["profile"], score_plan(p)) for p in pool["plans"]]
+        from BE.tests.unit.test_profiles import IDS, MATRIX, POIS, TRIP
+        by_id = {p["poi_id"]: p for p in POIS}
+        ranked = [{"poi_id": pid} for pid in IDS]
+        scored = [(prof, score_plan(build_plan(prof, TRIP, ranked, by_id, MATRIX)))
+                  for prof in ("savings", "balanced", "experience")]
         self.assertTrue(all(s["gate"] for _, s in scored))
         winner = max(scored, key=lambda ps: ps[1]["profit"])[0]
         self.assertEqual(winner, "savings")

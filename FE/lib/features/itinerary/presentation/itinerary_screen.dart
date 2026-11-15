@@ -16,6 +16,93 @@ class ItineraryScreen extends StatelessWidget {
   });
 
   final AppState state;
+
+  static Future<void> _reviewProposal(
+    BuildContext context,
+    AppState state,
+  ) async {
+    final proposal = state.aiProposal;
+    if (proposal == null) return;
+    final values = proposal.confirmedOverrides;
+    final labels = <String, String>{
+      'indicative_budget': 'Ngân sách (VND)',
+      'traveler_count': 'Số người',
+      'day_start': 'Bắt đầu (HH:MM)',
+      'day_end': 'Kết thúc (HH:MM)',
+      'must_visit': 'Bắt buộc ghé (ID địa điểm, cách nhau dấu phẩy)',
+      'avoid': 'Tránh địa điểm (ID, cách nhau dấu phẩy)',
+      'accessibility': 'Nhu cầu tiếp cận',
+      'activities': 'Hoạt động yêu thích',
+      'food_preferences': 'Sở thích ăn uống',
+    };
+    final controllers = {
+      for (final key in labels.keys)
+        key: TextEditingController(
+          text: values[key] is List
+              ? (values[key] as List).join(', ')
+              : values[key]?.toString() ?? '',
+        ),
+    };
+    final corrections = await showDialog<Map<String, dynamic>>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Kiểm tra và sửa yêu cầu'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final entry in labels.entries)
+                TextField(
+                  controller: controllers[entry.key],
+                  decoration: InputDecoration(labelText: entry.value),
+                ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Quay lại'),
+          ),
+          FilledButton(
+            onPressed: () {
+              final result = <String, dynamic>{};
+              for (final key in labels.keys) {
+                final text = controllers[key]!.text.trim();
+                if (key == 'indicative_budget' || key == 'traveler_count') {
+                  if (text.isNotEmpty) {
+                    final number = int.tryParse(text);
+                    if (number == null ||
+                        number < 0 ||
+                        (key == 'traveler_count' &&
+                            (number < 1 || number > 100))) {
+                      return;
+                    }
+                    result[key] = number;
+                  }
+                } else if (key == 'day_start' || key == 'day_end') {
+                  if (text.isNotEmpty) result[key] = text;
+                } else {
+                  result[key] = text
+                      .split(',')
+                      .map((v) => v.trim())
+                      .where((v) => v.isNotEmpty)
+                      .toList();
+                }
+              }
+              Navigator.pop(dialogContext, result);
+            },
+            child: const Text('Xác nhận và lập lịch'),
+          ),
+        ],
+      ),
+    );
+    // Keep controllers alive until the route transition has disposed its fields.
+    if (corrections != null) {
+      await state.confirmAiProposalAndPlan(corrections: corrections);
+    }
+  }
+
   final VoidCallback onOpenMap;
 
   Future<void> _tripEditor(BuildContext context, {Trip? trip}) async {
@@ -360,6 +447,53 @@ class _PlanningPanel extends StatelessWidget {
   const _PlanningPanel({required this.state});
   final AppState state;
 
+  Future<void> _interpret(BuildContext context) async {
+    final controller = TextEditingController();
+    final text = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Nhờ Gemini diễn giải'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Nội dung sẽ được gửi tới nhà cung cấp AI bên ngoài. Không nhập mật khẩu, token hoặc thông tin riêng tư không cần thiết.',
+              style: TextStyle(fontSize: 12, color: AppColors.muted),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              key: const Key('planning-ai-prompt'),
+              controller: controller,
+              minLines: 3,
+              maxLines: 6,
+              maxLength: 4000,
+              decoration: const InputDecoration(
+                labelText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                alignLabelWithHint: true,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Dùng form thường'),
+          ),
+          FilledButton(
+            onPressed: () =>
+                Navigator.pop(dialogContext, controller.text.trim()),
+            child: const Text('Diễn giải'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (text != null && text.length >= 3) {
+      await state.interpretPlanningRequest(text);
+    }
+  }
+
   Future<void> _showHistory(BuildContext context) async {
     await state.loadItineraryHistory();
     if (!context.mounted) return;
@@ -461,6 +595,73 @@ class _PlanningPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 9),
+        OutlinedButton.icon(
+          key: const Key('request-ai-interpretation'),
+          onPressed: state.isInterpreting || state.isPlanning
+              ? null
+              : () => _interpret(context),
+          icon: Icon(
+            state.isInterpreting ? Icons.hourglass_top : Icons.auto_awesome,
+          ),
+          label: Text(
+            state.isInterpreting
+                ? 'Gemini đang diễn giải…'
+                : 'Nhờ Gemini diễn giải yêu cầu (tùy chọn)',
+          ),
+        ),
+        if (state.aiMessage != null) ...[
+          const SizedBox(height: 6),
+          Text(
+            state.aiMessage!,
+            key: const Key('planning-ai-message'),
+            style: const TextStyle(fontSize: 11, color: AppColors.muted),
+          ),
+        ],
+        if (state.aiProposal case final proposal?) ...[
+          const SizedBox(height: 8),
+          SurfaceCard(
+            key: const Key('planning-ai-proposal'),
+            color: const Color(0xFFF2F5F4),
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Đề xuất cần xác nhận · ${proposal.provider}${proposal.model == null ? '' : ' / ${proposal.model}'}',
+                  style: const TextStyle(fontWeight: FontWeight.w800),
+                ),
+                const SizedBox(height: 5),
+                Text('Trường: ${proposal.fields}'),
+                Text('Ràng buộc cứng: ${proposal.hardConstraints}'),
+                Text('Sở thích mềm: ${proposal.softPreferences}'),
+                if (proposal.assumptions.isNotEmpty)
+                  Text('Giả định: ${proposal.assumptions.join('; ')}'),
+                if (proposal.unresolved.isNotEmpty)
+                  Text(
+                    'Chưa xác minh (không dùng): ${proposal.unresolved.join('; ')}',
+                    style: const TextStyle(color: AppColors.warning),
+                  ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    TextButton(
+                      onPressed: state.skipAiProposal,
+                      child: const Text('Bỏ qua AI'),
+                    ),
+                    FilledButton(
+                      key: const Key('confirm-ai-proposal'),
+                      onPressed: () =>
+                          ItineraryScreen._reviewProposal(context, state),
+                      child: const Text('Xác nhận và lập lịch'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+        const SizedBox(height: 9),
         FilledButton.icon(
           key: const Key('request-plan-button'),
           onPressed: state.isPlanning ? null : state.requestPlan,
@@ -491,6 +692,40 @@ class _PlanningPanel extends StatelessWidget {
             ),
           ),
         ),
+        if (state.activeAlternative != null) ...[
+          TextButton.icon(
+            key: const Key('explain-active-plan'),
+            onPressed: state.isExplaining
+                ? null
+                : () => state.explainPlan(state.activeAlternative!),
+            icon: const Icon(Icons.info_outline),
+            label: Text(
+              state.isExplaining
+                  ? 'Đang giải thích…'
+                  : 'Giải thích (có thể gửi dữ liệu tới AI bên ngoài)',
+            ),
+          ),
+          if (state.planExplanation case final explanation?)
+            SurfaceCard(
+              key: const Key('plan-explanation'),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    explanation.source == 'ai_grounded'
+                        ? 'Giải thích AI có dẫn chứng'
+                        : 'Giải thích deterministic',
+                    style: const TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  Text(explanation.summary),
+                  ...explanation.reasons.map(
+                    (reason) => Text('• ${reason['text'] ?? ''}'),
+                  ),
+                ],
+              ),
+            ),
+        ],
         if (state.itineraryVersions.isNotEmpty ||
             (live && state.acceptance != null)) ...[
           const SizedBox(height: 2),

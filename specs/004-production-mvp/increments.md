@@ -23,8 +23,10 @@
 | 5 | `009-poi-map-routing` | Versioned POIs, search/details, PMTiles, real/fallback route and geolocation states | Search and add a POI, render local map, preview route, play/pause | Pending specification |
 | 6 | `010-itinerary-lifecycle` | Persisted requests, alternatives, hard gates, selection, versions, replan and acceptance evidence | Generate feasible alternatives, select idempotently, change constraints and replan | Pending specification |
 | 7 | `011-offline-sync` | Cached reading, queued safe writes, stale/conflict handling, demo isolation | Edit offline, reconnect, synchronize once and resolve a conflict | Pending specification |
-| 8 | `012-admin-data-ops` | User status, POI curation, catalog publishing, audit, backup/restore and readiness | Publish a catalog version, suspend a test user, restore a backup | Pending specification |
-| 9 | `013-ai-integration` | Replaceable parsing, explanation and shadow ranking adapters after evidence gates | Disable/replace AI provider without breaking management or feasibility | Deferred until evidence gates |
+| 8 | `012-planning-llm-integration` | Selectively integrate the stable planner from `feat/stable-p1-p4` with durable product contracts, plus replaceable natural-language parsing, grounded explanation and non-authoritative shadow adapters | Create a persisted trip, interpret and confirm a Vietnamese request, generate/select feasible alternatives, then repeat with the hosted LLM disabled | Current specification |
+| 9 | `013-admin-data-ops` | User status, POI curation, catalog publishing, audit, backup/restore and readiness | Publish a catalog version, suspend a test user, restore a backup | Deferred until after the integrated planning demo |
+
+The former `012-admin-data-ops` increment is superseded by `012-planning-llm-integration`. Existing unmerged administration work is preserved for later reconciliation and MUST NOT be mixed into Increment 012. The historical planner branch is a source of algorithms, data, tests, and evidence; it MUST be ported selectively rather than merged over the product-platform tree wholesale.
 
 ## Refactor Boundaries
 
@@ -36,6 +38,7 @@
 - `expenses`: budgets, entries, summaries and exports.
 - `catalog`: POIs, evidence, verification and data versions.
 - `planning`: requests, optimizer orchestration, hard gates, alternatives, versions and acceptance.
+- `ai`: replaceable natural-language parsing, grounded explanation and non-authoritative shadow comparison; it never owns itinerary feasibility or product records.
 - `routing`: route matrices, online route adapters and route evidence.
 - `operations`: audit, health, readiness, backup/restore and administrative controls.
 - `shared`: configuration, database lifecycle, error envelope, identifiers, clock and cross-cutting observability only.
@@ -59,10 +62,11 @@ An increment is complete only when:
 - Existing backend and Flutter regression suites remain green.
 - Schema changes can be applied to an empty database and upgraded from the previous increment.
 - Runtime data and secrets remain outside Git.
+- Deterministic structured planning remains usable with every hosted AI capability disabled or unavailable.
 - Documentation contains PowerShell and Git Bash demo commands plus DBeaver steps where data changes.
 - `/speckit.converge` reports no remaining implementation tasks.
 - Commits are small and professional, the branch is pushed, and review targets `dev` without direct protected-branch pushes.
 
 ## Branch Model
 
-`feat/product-platform` is the temporary product integration branch requested by the owner. Large increments SHOULD use `task/<increment>-<scope>` branches and merge back only after tests. The final reviewed product branch targets `dev`. The historical release branch receives no further changes.
+`feat/product-platform` is the temporary product integration branch requested by the owner. Large increments SHOULD use `task/<increment>-<scope>` branches and merge back only after tests. Increment 012 uses `task/012-planning-llm-integration`; `origin/feat/stable-p1-p4` remains an integration source, not the PR target. The final reviewed product branch targets `dev`. The historical release branch receives no further changes.

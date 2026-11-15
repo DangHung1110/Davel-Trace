@@ -54,7 +54,9 @@ for _a in COST_POIS:
     for _b in COST_POIS:
         if _a["poi_id"] == _b["poi_id"]:
             continue
-        _m = 5 if (_a["poi_id"] in NEAR and _b["poi_id"] in NEAR) else 40
+        # A ride the rating-first plan takes for a better dinner; 40 min each way
+        # is not worth 0.7 stars to any profile now that travel counts.
+        _m = 5 if (_a["poi_id"] in NEAR and _b["poi_id"] in NEAR) else 12
         COST_CELLS[f"{_a['poi_id']}->{_b['poi_id']}"] = {
             "minutes": _m, "km": _m / 10}
 COST_BY_ID = {p["poi_id"]: p for p in COST_POIS}
@@ -185,12 +187,12 @@ class TestJaccardGuarantee(unittest.TestCase):
         b = _plan("b", ["1", "2", "3", "4", "z"], 0.4)
         c = _plan("c", ["m", "n", "o", "p", "q"], 0.8)
 
-        def refill(plan):
-            calls.append(plan["profile"])
+        def refill(plan, others):
+            calls.append((plan["profile"], [o["profile"] for o in others]))
             return [_plan("b", ["6", "7", "8", "9", "y"], 0.7)]
 
         out, report = pool_svc.enforce_pairwise([a, b, c], refill=refill)
-        self.assertEqual(calls, ["b"])
+        self.assertEqual(calls, [("b", ["a", "c"])])
         self.assertTrue(report["satisfied"], report)
         self.assertIn("y", {act["poi_id"] for act in out[1]["activities"]})
 

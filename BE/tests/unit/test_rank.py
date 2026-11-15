@@ -40,7 +40,7 @@ class TestRank(unittest.TestCase):
         self.assertAlmostEqual(sum(WEIGHTS.values()), 1.0)
         self.assertEqual(set(WEIGHTS),
                          {"rating", "price", "effort", "pref_match", "taste",
-                          "time_fit", "weather"})
+                          "time_fit", "weather", "fame"})
 
     def test_scores_bounded_with_reasons(self):
         for poi in (DATING_QUIET_SEA, NOISY_CROWDED):

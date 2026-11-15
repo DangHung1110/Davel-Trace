@@ -16,6 +16,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final email = TextEditingController();
   final password = TextEditingController();
   bool obscure = true;
+  bool googleTermsAccepted = false;
 
   @override
   void dispose() {
@@ -92,6 +93,28 @@ class _SignInScreenState extends State<SignInScreen> {
                   widget.controller.busy ? 'Đang xử lý…' : 'Đăng nhập',
                 ),
               ),
+              if (widget.controller.googleAvailable) ...[
+                CheckboxListTile(
+                  value: googleTermsAccepted,
+                  onChanged: widget.controller.busy
+                      ? null
+                      : (value) => setState(
+                          () => googleTermsAccepted = value ?? false,
+                        ),
+                  contentPadding: EdgeInsets.zero,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: const Text(
+                    'Tôi đồng ý điều khoản sử dụng khi tiếp tục bằng Google.',
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: widget.controller.busy || !googleTermsAccepted
+                      ? null
+                      : widget.controller.loginWithGoogle,
+                  icon: const Icon(Icons.login),
+                  label: const Text('Tiếp tục bằng Google'),
+                ),
+              ],
               TextButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(

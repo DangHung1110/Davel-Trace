@@ -8,6 +8,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+.worktrees/
 .pytest_cache/
 BE/.pytest_*/
 BE/data/*.db
@@ -25,6 +26,7 @@ dist/
 build/
 .next/
 .flutter-sdk/
+.pub-cache-local/
 FE/.dart_tool/
 FE/.flutter-plugins
 FE/.flutter-plugins-dependencies

@@ -6,11 +6,11 @@
 
 **Status**: Portfolio baseline — delivered through incremental feature specs
 
-**Input**: User description: "Deliver a complete, production-oriented Davel Trace application with full management capabilities, durable shared data, a laptop-runnable mobile experience, and clean seams for adding AI itinerary recommendations later."
+**Input**: User description: "Deliver a durable Davel Trace product, integrate the proven stable-planning algorithms into the current platform, and add a replaceable externally configured LLM without allowing AI to control feasibility or product records."
 
 ## Product Vision
 
-Davel Trace is a Vietnamese-first travel companion for planning and managing a Da Nang trip from one place. A traveler can create an account, maintain travel preferences, organize trips and daily activities, compare only feasible itinerary alternatives, use the local Da Nang map and route guidance, track budget and expenses, and recover their data on another authorized device. Operators can curate the POI catalog and inspect operational evidence without editing user-owned records silently.
+Davel Trace is a Vietnamese-first travel companion for planning and managing a Da Nang trip from one place. A traveler can create an account, maintain travel preferences, organize trips and daily activities, compare only feasible itinerary alternatives, use the local Da Nang map and route guidance, track budget and expenses, and recover their data on another authorized device. A replaceable external language model may help interpret Vietnamese requests and explain evidence, while the deterministic planner and durable product records remain authoritative.
 
 This feature converts the current demonstrator into a complete product MVP. Demo-only, in-memory, and device-local repositories remain useful for explicit showcase or offline modes, but they are not accepted as the authoritative store for signed-in users.
 
@@ -28,8 +28,8 @@ Implementation is intentionally split into independently reviewable increments. 
 - Local Da Nang PMTiles display, route preview, real-route/fallback distinction, geolocation state, and play/pause route simulation.
 - Trip budgets, categorized expenses, daily and trip summaries, threshold warnings, corrections, and exports.
 - Explicit online, offline, seeded-demo, synchronizing, stale, and conflict states.
-- Administrative user-status controls, POI curation, data versioning, operational audit, and safe demo reset.
-- Stable interfaces and evidence records for adding AI parsing, explanation, ranking, and recommendation after the management MVP is reliable.
+- Selective integration of the verified stable-planning algorithms, data evidence, route matrix, weather-aware scheduling, alternatives, and replanning behavior into the durable planning lifecycle.
+- Replaceable external AI assistance for reviewable request parsing, grounded explanation, and non-authoritative shadow comparison, with a fully usable structured deterministic path when AI is disabled.
 - A laptop demo in a mobile-sized frame and deployable mobile/web behavior from the same product flows.
 
 ### Out of Scope for This MVP
@@ -39,6 +39,8 @@ Implementation is intentionally split into independently reviewable increments. 
 - Multi-city optimization; selectable plans remain limited to Da Nang.
 - AI-generated routes or any AI output that can bypass deterministic feasibility checks.
 - Automatic learned ranking or accepted-day retrieval before the published evidence thresholds are met.
+- Administration, account-status operations, catalog-authoring UI, backup/restore controls, and audit-console delivery until the later administration increment resumes.
+- Dependence on the continued availability, price, quota, or data policy of a particular free-tier AI provider or model.
 - Background turn-by-turn navigation comparable to a dedicated navigation provider.
 
 ## Actors and Permissions
@@ -193,29 +195,28 @@ A traveler marks progress, skips a stop, reports a delay or budget change, and r
 
 ---
 
-### User Story 9 - Curate Data and Operate the Product (Priority: P2)
+### User Story 9 - Use AI-Assisted Planning Safely (Priority: P2)
 
-An authorized operator manages POIs, publishes versioned catalog updates, reviews data quality, manages account status, and monitors readiness without seeing unnecessary private content.
+A traveler writes a Vietnamese request, reviews the proposed structured interpretation, corrects any assumption, and then receives alternatives from the deterministic planner.
 
-**Why this priority**: Reliable plans depend on controlled data and supportable operations.
+**Why this priority**: Language assistance reduces input friction, but only if model output remains reviewable and cannot become itinerary truth by itself.
 
-**Independent Test**: Create a draft POI change, verify required evidence, publish a new version, observe affected planning metadata, suspend a test account, and inspect the audit log.
+**Independent Test**: Interpret a request containing dates, budget, must-visit, soft preference, and accessibility constraint; correct one proposed field; then verify the confirmed request is the only input used for deterministic planning.
 
 **Acceptance Scenarios**:
 
-1. **Given** a curator proposes a POI, **When** required evidence is incomplete, **Then** the POI cannot enter selectable itineraries.
-2. **Given** a reviewed catalog change, **When** an administrator publishes it, **Then** a new immutable data version is created and existing accepted plans retain their prior version.
-3. **Given** an account violates policy, **When** an administrator suspends it with a reason, **Then** new sessions are blocked and the action is audited.
-4. **Given** an operator views readiness, **When** evidence thresholds are unmet, **Then** learned or AI-assisted promotion remains disabled.
-5. **Given** a support investigation, **When** logs are viewed, **Then** only necessary metadata is shown and secrets/credentials are never present.
+1. **Given** a natural-language request, **When** interpretation succeeds, **Then** hard constraints, soft preferences, assumptions, and unresolved fields are visibly distinct before confirmation.
+2. **Given** an unknown POI or invalid value, **When** interpretation is validated, **Then** it is rejected or marked unresolved rather than becoming catalog truth.
+3. **Given** the external model is disabled or unavailable, **When** the traveler plans, **Then** the structured deterministic path remains usable.
+4. **Given** model-generated explanation text, **When** it is displayed, **Then** factual claims are grounded in confirmed input, feasible-plan evidence, and the named data version.
 
 ---
 
-### User Story 10 - Add AI Later Without Rebuilding Management (Priority: P3)
+### User Story 10 - Replace the AI Provider Without Rebuilding Management (Priority: P3)
 
-The product can later add natural-language parsing, explanation, and non-authoritative ranking while accounts, trips, expenses, POIs, itinerary versions, and acceptance evidence remain stable.
+An operator can configure, disable, or replace the external model provider while accounts, trips, expenses, POIs, itinerary versions, and acceptance evidence remain stable.
 
-**Why this priority**: The management foundation must not be coupled to one model or require a data migration when AI is introduced.
+**Why this priority**: Free-tier model availability, quotas, and policies can change, so provider replacement must be an operational choice rather than a product rewrite.
 
 **Independent Test**: Replace an AI adapter with unavailable, local, and hosted test implementations and verify core CRUD, manual planning, deterministic feasibility, and persisted records behave identically.
 
@@ -224,7 +225,7 @@ The product can later add natural-language parsing, explanation, and non-authori
 1. **Given** AI is disabled or unavailable, **When** travelers manage trips and request deterministic planning, **Then** the core product remains usable.
 2. **Given** AI proposes a parse, explanation, or preference, **When** it conflicts with user data or hard constraints, **Then** authoritative user data and deterministic checks win.
 3. **Given** a shadow ranking experiment, **When** results are recorded, **Then** they cannot silently reorder or approve an itinerary before promotion criteria are explicitly met.
-4. **Given** a future AI provider changes, **When** the provider is replaced, **Then** stored management records and public product behavior remain compatible.
+4. **Given** the provider or model changes, **When** the service restarts, **Then** stored management records and public product behavior remain compatible without a data migration.
 
 ### Edge Cases
 
@@ -248,6 +249,8 @@ The product can later add natural-language parsing, explanation, and non-authori
 - The system restarts during a write, migration, import, export, or synchronization.
 - Seeded demo data resembles real data and must remain visibly labeled and isolated.
 - AI output is malformed, slow, unavailable, adversarial, or attempts to override system policy.
+- A free-tier provider rejects a request because of quota, safety policy, region, or model retirement.
+- A natural-language request contains credentials or unrelated private content that must not be forwarded externally.
 
 ## Requirements *(mandatory)*
 
@@ -354,7 +357,9 @@ The product can later add natural-language parsing, explanation, and non-authori
 - **FR-079**: Server-required features MUST fail with actionable offline messaging while unrelated local reading remains available.
 - **FR-080**: Synchronization metadata MUST not expose another traveler’s identifiers or private content.
 
-#### Administration, Data Quality, and Audit
+#### Deferred Administration, Data Quality, and Audit
+
+Requirements FR-081 through FR-092 remain product goals but are not gates for the current planning/LLM integration milestone. They resume in the deferred administration increment.
 
 - **FR-081**: Administrators MUST be able to list and filter accounts by status without viewing passwords or credentials.
 - **FR-082**: Administrators MUST be able to suspend and reactivate an account with reason, actor, and timestamp.
@@ -382,16 +387,18 @@ The product can later add natural-language parsing, explanation, and non-authori
 - **FR-101**: Retention and deletion rules MUST distinguish active, soft-deleted, exported, audit-required, anonymized, and purged data.
 - **FR-102**: Runtime data, database credentials, exports, caches, and backups MUST not be committed to source control.
 
-#### AI Extension Boundaries
+#### Configurable AI Assistance
 
 - **FR-103**: Core identity, management, expense, catalog, map, manual itinerary, feasibility, and persistence flows MUST operate without AI.
-- **FR-104**: Future AI integrations MUST use explicit, replaceable capabilities for parsing, explanation, shadow comparison, or non-authoritative recommendation.
+- **FR-104**: AI integrations MUST use explicit, replaceable capabilities for parsing, explanation, shadow comparison, or non-authoritative recommendation.
 - **FR-105**: AI output MUST be treated as untrusted input and validated before it changes authoritative records.
 - **FR-106**: AI MUST NOT generate or approve a route that bypasses deterministic feasibility gates.
 - **FR-107**: AI unavailability, timeout, malformed output, or provider change MUST NOT corrupt or block core management data.
 - **FR-108**: AI experiments MUST record provider/model/version, latency, status, and non-authoritative result without storing secrets.
 - **FR-109**: Shadow experiments MUST not reorder user-visible alternatives until explicit promotion criteria and review are complete.
 - **FR-110**: Adding or replacing an AI provider MUST NOT require destructive migration of accounts, trips, expenses, POIs, itineraries, or acceptance history.
+- **FR-111**: Provider, endpoint, model, credential reference, timeout, retry, and enabled capabilities MUST be configurable without committing secrets or changing product records.
+- **FR-112**: Hosted-model calls MUST disclose external processing, minimize submitted planning context, and offer a structured non-AI path.
 
 ### Key Entities
 
@@ -456,6 +463,7 @@ The product can later add natural-language parsing, explanation, and non-authori
 - **SC-019**: Core management and deterministic planning acceptance tests pass with every AI integration disabled.
 - **SC-020**: No committed file or ordinary runtime log contains a live credential, password, recovery token, or private connection secret.
 - **SC-021**: Full automated regression, mobile widget, migration, authorization, accounting, and smoke suites pass before release approval.
+- **SC-022**: Structured deterministic planning succeeds in 100% of provider-disabled, timeout, malformed-response, quota, and provider-unavailable regression scenarios.
 
 ## Assumptions
 
@@ -466,7 +474,9 @@ The product can later add natural-language parsing, explanation, and non-authori
 - A shared production-grade relational system of record replaces demo-only SQLite/in-memory persistence for authoritative data. SQLite may remain only for isolated tests or explicitly labeled offline/demo caches.
 - Existing verified POI snapshot, deterministic optimizer, hard-gate registry, PMTiles map, route/search fallbacks, and Flutter mobile shell are reusable inputs, not automatically trusted as production-complete.
 - The selected database engine, code-first models, migration tooling, connection configuration, and DBeaver setup will be made explicit in the implementation plan, not hidden as an implementation assumption.
-- AI itinerary parsing/ranking/explanation is a later capability. The MVP must establish stable data and service boundaries now but does not depend on AI availability.
+- AI itinerary parsing and grounded explanation are current replaceable capabilities; deterministic planning, management, and persisted records do not depend on AI availability.
+- A Gemini Developer API free-tier model is the initial hosted-provider candidate, but the exact model, quota, price, availability, and data policy are deployment concerns and may change.
+- Automated planning in the current integration increment covers one- and two-day Da Nang requests; manual management remains available for longer trips.
 - Account deletion uses a 30-day recovery window before final purge except records that must be retained or anonymized for audit/security obligations.
 - Booking, payments, receipt OCR, voice, multi-city planning, and public social features remain excluded unless a later specification expands scope.
 - External route, geolocation, weather, email, and optional AI providers may fail; core data management must remain consistent and errors must be explicit.
@@ -474,6 +484,7 @@ The product can later add natural-language parsing, explanation, and non-authori
 ## Dependencies
 
 - Existing Davel Trace deterministic planning and hard-gate behavior.
+- Stable planner algorithms, tests, snapshot evidence, and route matrix from `origin/feat/stable-p1-p4`, selectively adapted to current contracts.
 - A curated and versioned Da Nang POI dataset with route matrix and provenance.
 - Existing mobile design system, phone-frame behavior, PMTiles data, and map integration.
 - A deliverable email verification/recovery mechanism for non-demo environments.
@@ -482,4 +493,4 @@ The product can later add natural-language parsing, explanation, and non-authori
 
 ## Definition of Product Completion
 
-The feature is complete only when every P1 story works against durable shared data, P2 operations and offline honesty are demonstrated, AI-disabled operation passes, migration/backup/restore procedures are verified, all success criteria have evidence, no runtime secret or database is committed, and a reviewed release PR targets `dev` without direct pushes to protected branches.
+The current delivery milestone is complete only when every P1 story works against durable shared data, the integrated planner and offline honesty are demonstrated, AI-disabled operation passes, applicable migrations are verified, all current-increment success criteria have evidence, no runtime secret or database is committed, and a reviewed release PR targets `dev` without direct pushes to protected branches. Deferred administration and backup/restore operations are not silently claimed as complete and remain tracked in their later increment.

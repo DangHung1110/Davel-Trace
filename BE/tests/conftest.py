@@ -3,7 +3,7 @@
 Two snapshot dirs exist in this repo (CHECK-merge-blockers §2 "2 thư mục
 danang-v1"): the LOCKED 7-POI seed at `data/snapshots/danang-v1/` (root,
 used by config/quickstart S1-S7) and the big working snapshot at
-`BE/data/snapshots/danang-v1/` (764 POIs, lane-A artifacts). This module
+`BE/data/snapshots/danang-v1/` (750 POIs, stable planner artifacts). This module
 pins the LOCKED 7-POI seed for tests; do not point fixtures at the big one.
 
 Usable two ways:

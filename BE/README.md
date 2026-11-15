@@ -1,5 +1,8 @@
 # Backend (FastAPI + PostgreSQL)
 
+Google web sign-in and real SMTP identity email are documented in
+[`identity providers quickstart`](../specs/013-identity-providers/quickstart.md).
+
 FastAPI phục vụ planner hiện có và nền tảng quản lý. PostgreSQL 16 là kho dữ
 liệu authoritative; SQLite cũ chỉ còn là nguồn import/compatibility ở
 `demo|test`, không được chọn trong production.
@@ -9,12 +12,50 @@ liệu authoritative; SQLite cũ chỉ còn là nguồn import/compatibility ở
 Từ repo root:
 
 ```powershell
-Copy-Item BE\.env.example BE\.env
+if (!(Test-Path BE\.env)) { Copy-Item BE\.env.example BE\.env }
 .\.venv\Scripts\python.exe -m pip install -r BE\requirements.txt
 ```
 
 Đổi `POSTGRES_PASSWORD` và phần password tương ứng trong `DATABASE_URL`.
 `BE/.env` đã được gitignore và không được commit.
+
+## Cấu hình Gemini cho trợ lý lập lịch
+
+Planner deterministic không cần LLM. Khi `LLM_PROVIDER=disabled`, API lập lịch,
+chọn phương án và lịch sử vẫn hoạt động đầy đủ; chỉ interpretation/explanation AI
+không khả dụng.
+
+Gemini Plus/Google AI Pro trong ứng dụng Gemini và quota của Gemini Developer API
+là hai sản phẩm riêng. Tài khoản Plus không tự cấp API quota cho backend. Để bật
+Gemini:
+
+1. Mở [Google AI Studio](https://aistudio.google.com/app/apikey) và tạo Gemini API key.
+2. Sao chép `BE/.env.example` thành file ignored `BE/.env` nếu chưa có.
+3. Điền cấu hình sau; không đặt key trong Dart, source code, commit hoặc ảnh chụp log:
+
+   ```dotenv
+   LLM_PROVIDER=gemini
+   GEMINI_API_KEY=your_key_from_ai_studio
+   LLM_MODEL=gemini-3.1-flash-lite
+   LLM_PARSE_ENABLED=true
+   LLM_EXPLANATION_ENABLED=true
+   LLM_SHADOW_ENABLED=false
+   ```
+
+4. Khởi động lại backend và kiểm tra `GET /v1/ai/readiness`. Response chỉ hiển thị
+   provider/model/capability, tuyệt đối không trả key.
+
+Backend gọi REST compatibility endpoint chính thức của Gemini bằng Python stdlib,
+không thêm SDK và không dùng tài khoản/token ChatGPT. Nếu model trên không còn có
+trong project AI Studio của bạn, chỉ cần đổi `LLM_MODEL`; không cần migration dữ liệu.
+
+Tài liệu chính thức: [API quickstart](https://ai.google.dev/gemini-api/docs/get-started),
+[billing](https://ai.google.dev/gemini-api/docs/billing),
+[pricing/free tier](https://ai.google.dev/gemini-api/docs/pricing), và
+[OpenAI-compatible REST](https://ai.google.dev/gemini-api/docs/openai).
+
+Với provider hosted, UI phải thông báo nội dung được gửi ra ngoài và người dùng có
+thể bỏ qua AI để nhập trường có cấu trúc. Raw prompt/output không được lưu mặc định.
 
 ## 2. PostgreSQL bằng Docker, không làm phình máy
 
@@ -23,8 +64,11 @@ docker compose --env-file BE/.env up -d postgres
 docker compose --env-file BE/.env ps
 ```
 
-Compose cố định project name `davel-trace-dev`, dùng chung đúng một named
-volume giữa các worktree, chỉ pull image `postgres:16-alpine` khi thiếu và
+Compose mặc định dùng project `davel-trace-dev`; `COMPOSE_PROJECT_NAME` trong
+env có thể chọn một project/volume local riêng. Bản Task 012 trên máy này dùng
+`davel-trace-task012-demo`, cổng `5437`. Các worktree dùng cùng project sẽ dùng
+chung named volume; đổi port không tạo lại password trong volume cũ.
+Compose chỉ pull image `postgres:16-alpine` khi thiếu và
 giới hạn log ở 3 file × 10 MB. Không có application image/build cache.
 
 ```powershell
@@ -64,7 +108,7 @@ New Database Connection → PostgreSQL:
 
 ```text
 Host: 127.0.0.1
-Port: 5432 (hoặc POSTGRES_PORT trong BE/.env)
+Port: 5437 (hoặc POSTGRES_PORT trong BE/.env)
 Database: davel_trace
 Username: davel
 Password: giá trị POSTGRES_PASSWORD local

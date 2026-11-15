@@ -70,9 +70,10 @@ class TestUS4Multi(unittest.TestCase):
         itinerary_mod.get_settings = cls._settings
 
     def test_three_profiles_yield_three_plans_or_501(self):
+        # Activities are required_any groups, never a pool filter.
         pool = retrieval_svc.retrieve(TRIP, POIS)["candidates"]
         self.assertEqual({candidate["poi_id"] for candidate in pool},
-                         {"hill", "beach"})
+                         {"hill", "beach", "noodle"})
 
         profiles = ["savings", "balanced", "experience"]
         with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",

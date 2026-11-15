@@ -6,6 +6,7 @@ import os
 
 from BE.app.core.config import Settings
 from BE.app.db.migrations import inspect_database
+from BE.app.services.llm import provider_metadata
 
 
 def _component(name: str, required: bool, status: str, **metadata) -> dict:
@@ -58,7 +59,7 @@ def build_readiness(settings: Settings, *, correlation_id: str) -> dict:
         _component(
             "ai",
             False,
-            "ready" if settings.llm_provider in {"local", "api"} else "degraded",
+            "ready" if provider_metadata(settings)["configured"] else "degraded",
         )
     )
     ready = all(

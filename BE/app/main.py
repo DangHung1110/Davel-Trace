@@ -30,6 +30,7 @@ from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
 from BE.app.modules.identity import api as identity_api
+from BE.app.modules.identity import google_api
 from BE.app.modules.profiles import api as profiles_api
 from BE.app.modules.trips import api as trips_api
 from BE.app.modules.trips.service import TripService
@@ -38,6 +39,7 @@ from BE.app.modules.catalog import api as catalog_api
 from BE.app.modules.catalog.infrastructure import load_catalog
 from BE.app.modules.routing import api as routing_api
 from BE.app.modules.planning_lifecycle import api as planning_lifecycle_api
+from BE.app.modules.ai_assistance import api as ai_assistance_api
 from BE.app.modules.routing.infrastructure import load_matrix, matrix_estimate, osrm_route
 from BE.app.modules.identity.service import IdentityError
 
@@ -71,6 +73,7 @@ app.include_router(review_router.router)
 app.include_router(repair_router.router)
 app.include_router(planning_evidence_router.router)
 app.include_router(identity_api.router)
+app.include_router(google_api.router)
 app.include_router(profiles_api.router)
 app.include_router(trips_api.router)
 app.include_router(persistent_expenses_api.router)
@@ -82,6 +85,7 @@ app.state.matrix_estimator = matrix_estimate
 app.include_router(catalog_api.router)
 app.include_router(routing_api.router)
 app.include_router(planning_lifecycle_api.router)
+app.include_router(ai_assistance_api.router)
 
 
 def _validation_message(errors: list[dict]) -> str:

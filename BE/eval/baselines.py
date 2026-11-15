@@ -1,8 +1,8 @@
 """T053 full-suite run: baselines vs hybrid on the T051 gold (lane A). No LLM
 in scoring; the tier-1 evaluator (`BE/eval/metrics.evaluate`) is the judge.
 
-Three planners over the SAME scoped gold queries (T051: 30 Approach-B
-queries over the 5/764 matrix-covered verified POIs; 23 feasible):
+Three planners over the SAME gold queries (T051: 30 Approach-B queries over
+the verified, matrix-covered POIs):
 
 - distance-only baseline: the T051 Approach-B gold itself (OR-Tools TSP on
   real OSRM minutes, preference-blind). It is the shortest-path reference
@@ -42,7 +42,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.services.gate import CHECKS as GATE_CHECKS  # noqa: E402
-from BE.common import load_json, load_matrix_cells, load_pois  # noqa: E402
+from BE.common import effective_fee, load_json, load_matrix_cells, load_pois, trusted_rating  # noqa: E402
 from BE.eval.gold.approach_b import chain_order, filter_pois  # noqa: E402
 from BE.eval.gold.build import coverage_summary, eligible_ids  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
@@ -59,10 +59,18 @@ EVAL_WORKERS = 1
 # (test_baselines.test_run_is_deterministic caught exactly that). The eval
 # path therefore budgets DETERMINISTIC time (OR-Tools work units) instead: the
 # same query does the same work on every run. The wall clock is only a safety
-# cap so a bad instance cannot hang the suite.
-EVAL_DETERMINISTIC_TIME = 1.5
+# cap so a bad instance cannot hang the suite. Measured on the 30 queries, 80
+# candidates, one worker, under CP-SAT's default presolve: plans solved 9/27 at 1.5,
+# 24/27 at 3, 25/27 at 5, 27/27 at 8 (about 8 s a query). Below that the run scores
+# the budget, not the planner. With the lighter presolve of a search on a budget
+# (`optimizer.SEARCH_PRESOLVE_ITERATIONS`) every one-day and two-day plan is solved
+# at 5 units, 4.4 s a query, with the ratings of the 8-unit run (4.561 against 4.563).
+# The value is the product's (`routers.itinerary.PLAN_DETERMINISTIC_TIME`): the table
+# scores the planner as it ships.
+EVAL_DETERMINISTIC_TIME = 5.0
 EVAL_WALL_SAFETY_S = 60.0
-ZERO_FEE_NOTE = ("all candidate fees are 0 in the scoped snapshot -> BCS is "
+TWO_DAY_QUERIES = 9
+ZERO_FEE_NOTE = ("all candidate fees are 0 in this snapshot -> BCS is "
                  "vacuous: SC-008 is reported but cannot be exercised here "
                  "(T051 note: T053 must extend fee coverage)")
 
@@ -78,6 +86,11 @@ def distance_only_itinerary(record: dict) -> dict | None:
     return record.get("itinerary")
 
 
+def hybrid_trip(record: dict) -> dict:
+    """The trip the app would plan: the query's trip + its onboarding profile."""
+    return {**record["trip"], "profile": record.get("profile") or {}, "meals": True}
+
+
 def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
                      cells: dict, profile: str = HYBRID_PROFILE,
                      workers: int = EVAL_WORKERS,
@@ -90,20 +103,28 @@ def hybrid_itinerary(record: dict, pois_list: list[dict], by_id: dict,
     so the same query could return a different incumbent on a busier run (the
     published SC table must not drift). The wall clock stays as a safety cap.
     """
-    from BE.app.services import profiles, rank, retrieval
+    from BE.app.services import gate, multiday, profiles, rank, retrieval
 
-    trip = record["trip"]
+    trip = hybrid_trip(record)
     found = retrieval.retrieve(trip, pois_list)
     cids = [c["poi_id"] for c in found["candidates"]]
     ranked = rank.rank([by_id[i] for i in cids], {"budget": trip["budget"]},
                        {"trip": trip, "hour": trip.get("start_time", "07:00")})
-    plan = profiles.build_plan(profile, trip, ranked, by_id, cells,
-                               workers=workers,
-                               timeout_s=EVAL_WALL_SAFETY_S if
-                               deterministic_time is not None else None,
-                               deterministic_time=deterministic_time)
+
+    def solve(day_trip: dict, used: frozenset, _diagnose: bool) -> dict:
+        return profiles.build_plan(profile, day_trip,
+                                   [r for r in ranked if r["poi_id"] not in used],
+                                   by_id, cells, workers=workers,
+                                   timeout_s=EVAL_WALL_SAFETY_S if
+                                   deterministic_time is not None else None,
+                                   deterministic_time=deterministic_time)
+
+    plan = multiday.build_trip(
+        solve, trip, lambda itinerary, whole: gate.report(itinerary, whole, by_id, cells))
     return {"activities": plan.get("activities", []),
-            "total_cost": plan.get("total_cost")}
+            "total_cost": plan.get("total_cost"),
+            "activity_match": plan.get("activity_match") or [],
+            "_context": plan.get("_context") or {}}
 
 
 def llm_order_prompt(record: dict, cand_ids: list[str], by_id: dict) -> str:
@@ -171,19 +192,20 @@ def default_complete(prompt: str) -> dict:
 # --- SC-010 recovery probe -------------------------------------------------
 
 def recovery_probe(record: dict, activities: list[dict], pois: dict,
-                   matrix: dict) -> dict:
+                   matrix: dict, context: dict | None = None) -> dict:
     """Rain incident after the first activity: does a plan survive intact?
 
     SC-010: recovery succeeds (a NEW versioned feasible plan) AND every
     completed activity is preserved. Probes only plans with >=2 activities
-    (a 1-activity plan has nothing left to replan).
+    (a 1-activity plan has nothing left to replan). `context` is what the app
+    stores with a plan (candidates + legs), so the probe replans like POST /replan.
     """
     if len(activities) < 2:
         return {"ok": None, "reason": "fewer than 2 activities"}
     from BE.app.services import replan as replan_svc
     from BE.app.services import state as store
 
-    trip = record["trip"]
+    trip = hybrid_trip(record)
     state = store.new_state("t053-probe", activities,
                             start_time=trip.get("start_time", "07:00"))
     done = activities[:1]
@@ -195,8 +217,10 @@ def recovery_probe(record: dict, activities: list[dict], pois: dict,
             cell = matrix.get(f"{a['poi_id']}->{b['poi_id']}")
             if a["poi_id"] != b["poi_id"] and cell is not None:
                 travel[(a["poi_id"], b["poi_id"])] = int(cell["minutes"])
+    context = context or {}
     res = replan_svc.replan(state, {"type": "rain", "text": "troi mua"},
-                            list(pois.values()), travel, trip)
+                            context.get("pois") or list(pois.values()),
+                            context.get("travel") or travel, trip)
     done_ids = [a["poi_id"] for a in done]
     preserved = all(pid in res.get("preserved_completed", []) for pid in done_ids)
     ok = (res.get("mode") == "plan" and res.get("itinerary") is not None
@@ -250,7 +274,7 @@ def _sc_table(dist: dict, hyb: dict, recovery: dict, zero_fee: bool,
     # A uniform-rating pool cannot discriminate preference: the ratio is then
     # 1.0 by construction, so SC-009 is "undecidable here", not "proven equal".
     s009 = {"target": "hybrid taste-fit >= 1.10x shortest-path baseline",
-            "metric": "mean POI rating of the plan (preference proxy)",
+            "metric": "mean trusted rating of the plan (preference proxy)",
             "distance_only": d_fit, "hybrid": h_fit,
             "ratio": round(ratio, 4) if ratio is not None else None,
             "undecidable": uniform_ratings,
@@ -273,7 +297,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
     """Run distance-only + hybrid + (LLM-only or SKIP) -> report dict.
 
     `limit` caps the number of feasible queries (smoke runs / tests); the
-    published run leaves it None to cover the whole scoped suite.
+    published run leaves it None to cover the whole suite.
     """
     suite = load_json(suite_path)
     pois_list = load_pois(snapshot_dir)
@@ -292,7 +316,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         dr = {"_ratings": _ratings(d["activities"], by_id),
               **evaluate(d, rec["trip"], by_id, matrix)}
         hr = {"_ratings": _ratings(h["activities"], by_id),
-              **evaluate(h, rec["trip"], by_id, matrix)}
+              **evaluate(h, hybrid_trip(rec), by_id, matrix)}
         dist_reports.append(dr)
         hyb_reports.append(hr)
         hyb_plans.append(h)
@@ -319,7 +343,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
     ok = probed = 0
     preserved_all = True
     for rec, h in zip(feasible, hyb_plans):
-        probe = recovery_probe(rec, h["activities"], by_id, matrix)
+        probe = recovery_probe(rec, h["activities"], by_id, matrix, h.get("_context"))
         if probe["ok"] is None:
             continue
         probed += 1
@@ -327,8 +351,8 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         preserved_all = preserved_all and probe["preserved"]
     recovery = {"probed": probed, "ok": ok, "preserved_all": preserved_all}
 
-    zero_fee = all(int(p.get("fee", 0)) == 0 for pid in eligible
-                   for p in [by_id[pid]])
+    zero_fee = all(not effective_fee(by_id[pid]) for pid in eligible)
+    wishes = [m["status"] for h in hyb_plans for m in h.get("activity_match", [])]
     ratings = {by_id[pid].get("rating") for pid in eligible}
     uniform_ratings = len(ratings) == 1
     report = {
@@ -337,7 +361,8 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         "coverage": coverage,
         "feasible": len(feasible),
         "infeasible": len(suite) - len(feasible),
-        "hybrid": {"profile": profile},
+        "hybrid": {"profile": profile,
+                   "wishes": {"met": wishes.count("met"), "total": len(wishes)}},
         "systems": {"distance-only": dist, "hybrid": hyb, "llm-only": llm},
         "recovery": recovery,
         "notes": _notes(zero_fee, uniform_ratings),
@@ -362,9 +387,9 @@ def _notes(zero_fee: bool, uniform_ratings: bool) -> dict:
 def _ratings(activities: list[dict], by_id: dict) -> list[float]:
     out = []
     for a in activities:
-        r = by_id.get(a.get("poi_id"), {}).get("rating")
-        if r is not None:
-            out.append(float(r))
+        poi = by_id.get(a.get("poi_id"), {})
+        if poi.get("rating") is not None:
+            out.append(trusted_rating(poi))
     return out
 
 
@@ -376,9 +401,43 @@ def _attach_backends(report: dict) -> None:
         pass
 
 
+def run_two_day(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
+                profile: str = HYBRID_PROFILE, limit: int = TWO_DAY_QUERIES) -> dict:
+    """FR-020: the first full-day queries of the suite, asked for 2 days.
+
+    Reads the plan through the same evaluator as the 1-day systems, plus what
+    only a longer trip can get wrong: a day left empty and a POI used twice.
+    """
+    suite = load_json(suite_path)
+    pois_list = load_pois(snapshot_dir)
+    by_id = {p["poi_id"]: p for p in pois_list}
+    matrix = load_matrix_cells(snapshot_dir)
+    full_days = [r for r in suite if r.get("itinerary")
+                 and r["trip"]["start_time"] == "07:00" and r["trip"]["end_time"] == "18:00"]
+    passed, both_days, repeats, over_budget, stops = 0, 0, 0, 0, []
+    wishes: list[str] = []
+    for rec in full_days[:limit]:
+        record = {**rec, "trip": {**rec["trip"], "days": 2}}
+        plan = hybrid_itinerary(record, pois_list, by_id, matrix, profile)
+        acts = plan["activities"]
+        report = evaluate(plan, hybrid_trip(record), by_id, matrix)
+        passed += report["gate"]["passed"]
+        days = {a.get("day") for a in acts}
+        both_days += days == {1, 2}
+        repeats += len(acts) - len({a["poi_id"] for a in acts})
+        over_budget += int(plan.get("total_cost") or 0) > record["trip"]["budget"]
+        stops += [sum(a.get("day") == day for a in acts) for day in (1, 2)]
+        wishes += [m["status"] for m in plan["activity_match"]]
+    n = min(limit, len(full_days))
+    return {"n": n, "gate_pass": passed, "both_days": both_days, "repeated_pois": repeats,
+            "over_budget": over_budget,
+            "mean_stops_per_day": round(sum(stops) / len(stops), 2) if stops else 0.0,
+            "wishes": {"met": wishes.count("met"), "total": len(wishes)}}
+
+
 def _print_report(report: dict) -> None:
     cov = report["coverage"]
-    print(f"coverage (SCOPED): {cov['eligible']}/{cov['total_pois']} eligible "
+    print(f"coverage: {cov['eligible']}/{cov['total_pois']} eligible "
           f"({cov['eligible']}/{cov['verified']} verified intersect matrix)")
     print(f"feasible {report['feasible']} / infeasible {report['infeasible']}")
     for name, m in report["systems"].items():
@@ -407,7 +466,9 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     report = run(args.suite, args.snapshot, profile=args.profile,
                  limit=args.limit)
+    report["two_day"] = run_two_day(args.suite, args.snapshot, args.profile)
     _print_report(report)
+    print(f"two days: {report['two_day']}")
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=1)

@@ -20,8 +20,17 @@ abstract interface class ItineraryLifecycleRepository {
   });
 }
 
+abstract interface class AiPlanningRepository {
+  Future<Map<String, dynamic>> aiReadiness();
+  Future<AiInterpretationProposal> interpret(String tripId, String text);
+  Future<PlanExplanation> explain(String alternativeId);
+}
+
 class HttpPlanningRepository
-    implements PlanningRepository, ItineraryLifecycleRepository {
+    implements
+        PlanningRepository,
+        ItineraryLifecycleRepository,
+        AiPlanningRepository {
   HttpPlanningRepository(this._api);
   final ApiClient _api;
 
@@ -30,7 +39,10 @@ class HttpPlanningRepository
     final json = await _api.post(
       '/v1/trips/${request['trip_id']}/planning-requests',
       headers: {'Idempotency-Key': request['_idempotency_key'] as String},
-      body: {'target_count': request['target_count'] ?? 5},
+      body: {
+        'target_count': request['target_count'] ?? 5,
+        'constraint_overrides': request['constraint_overrides'] ?? const {},
+      },
     ) as Map<String, dynamic>;
     final shortage = json['shortage_reason'] as String?;
     final items = (json['alternatives'] as List? ?? const [])
@@ -65,6 +77,33 @@ class HttpPlanningRepository
   Future<Map<String, dynamic>> readiness() async => Map<String, dynamic>.from(
     await _api.get('/v1/planning/readiness') as Map,
   );
+
+  @override
+  Future<Map<String, dynamic>> aiReadiness() async =>
+      Map<String, dynamic>.from(await _api.get('/v1/ai/readiness') as Map);
+
+  @override
+  Future<AiInterpretationProposal> interpret(
+    String tripId,
+    String text,
+  ) async => AiInterpretationProposal.fromJson(
+    Map<String, dynamic>.from(
+      await _api.post(
+        '/v1/trips/$tripId/ai/interpretations',
+        body: {'text': text},
+      ) as Map,
+    ),
+  );
+
+  @override
+  Future<PlanExplanation> explain(String alternativeId) async =>
+      PlanExplanation.fromJson(
+        Map<String, dynamic>.from(
+          await _api.post(
+            '/v1/itinerary-alternatives/$alternativeId/ai/explanation',
+          ) as Map,
+        ),
+      );
 
   @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {

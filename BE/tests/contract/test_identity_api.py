@@ -91,6 +91,11 @@ def test_register_verify_login_refresh_revoke_recover_and_delete(monkeypatch) ->
             "refresh_token": credentials["refresh_token"],
         }).status_code == 401
         headers = {"Authorization": f"Bearer {refreshed.json()['access_token']}"}
+        assert client.get("/v1/account/me", headers=headers).status_code == 401
+        # Reuse revokes the whole family; a fresh password login is required.
+        fresh = client.post("/v1/auth/login", json=login_body)
+        assert fresh.status_code == 200
+        headers = {"Authorization": f"Bearer {fresh.json()['access_token']}"}
 
         assert client.post("/v1/account/exports", headers=headers, json={
             "current_password": "wrong-password", "confirmation": "XUẤT DỮ LIỆU",

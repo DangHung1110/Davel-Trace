@@ -218,14 +218,13 @@ def _worst_pair(plans: list[dict], ceiling: float) -> tuple[int, int, float] | N
 
 
 def enforce_pairwise(plans: list[dict], ceiling: float = MAX_PAIRWISE_JACCARD,
-                     refill=None,
-                     max_replacements: int | None = None
-                     ) -> tuple[list[dict], dict]:
+                     refill=None) -> tuple[list[dict], dict]:
     """Guarantee pairwise POI-set Jaccard <= `ceiling` for returned options.
 
     For every pair above the ceiling, the LOWER-QUALITY plan is replaced with
     the next MMR pick from its own solution pool (`_pool_plans`, or lazily
-    built by `refill(plan)`). Replacement candidates are taken in MMR order
+    built by `refill(plan, others)`, where `others` are the plans currently
+    kept beside it). Replacement candidates are taken in MMR order
     (quality first) and the first one that satisfies the ceiling against ALL
     other kept plans wins. A plan that cannot be replaced is kept as the
     best-effort least-similar option and reported (`exhausted`), so the
@@ -239,10 +238,7 @@ def enforce_pairwise(plans: list[dict], ceiling: float = MAX_PAIRWISE_JACCARD,
     exhausted: list[dict] = []
     tried: list[set[frozenset[str]]] = [
         {frozenset(poi_set(p))} for p in current]
-    limit = (max_replacements if max_replacements is not None
-             else max(4, 3 * max(1, len(current))))
-
-    for _round in range(max(1, limit)):
+    for _round in range(max(4, 3 * max(1, len(current)))):
         pair = _worst_pair(current, ceiling)
         if pair is None:
             break
@@ -256,10 +252,11 @@ def enforce_pairwise(plans: list[dict], ceiling: float = MAX_PAIRWISE_JACCARD,
             idx = max(i, j)  # deterministic tie-break: replace the later one
         alternatives = list(current[idx].get("_pool_plans") or [])
         if refill is not None:
+            others = [current[k] for k in range(len(current)) if k != idx]
             try:
-                alternatives += list(refill(current[idx]) or [])
+                alternatives += list(refill(current[idx], others) or [])
             except Exception:  # noqa: BLE001 - never lose the whole response
-                alternatives = alternatives
+                pass
         ordered = _mmr_candidates(alternatives)
 
         chosen = None

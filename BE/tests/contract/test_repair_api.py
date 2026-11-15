@@ -91,7 +91,11 @@ class TestRepairApi(unittest.TestCase):
                 {"poi_id": "cham-museum", "start": "14:00", "end": "15:00"},
             ],
         }
-        with mock.patch.object(review_mod, "review_plan", return_value=[]):
+        from BE.app.routers import repair as repair_mod
+        from BE.app.config import Settings
+        with mock.patch.object(review_mod, "review_plan", return_value=[]), \
+                mock.patch.object(repair_mod, "get_settings", return_value=Settings(
+                    snapshot_dir="data/snapshots/danang-v1", _env_file=None)):
             r = client.post("/v1/repair", json={"plan": public, "trip": TRIP})
         self.assertEqual(r.status_code, 200, r.text)
         self.assertTrue(r.json()["gate"]["passed"])

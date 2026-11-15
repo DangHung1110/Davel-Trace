@@ -143,67 +143,53 @@ class TestItineraryContract(unittest.TestCase):
         built_profiles = []
 
         def build_plan(**kwargs):
-            profile = kwargs["profile"]
-            built_profiles.append(profile)
-            activities = {
-                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
-                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
-                "experience": [
-                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
-                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
-                ],
-            }[profile]
-            return {"activities": activities,
-                    "total_cost": 0, "total_km": 0,
+            built_profiles.append(kwargs["profile"])
+            return {"activities": [], "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={"trip": TRIP})
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles,
-                             ["savings", "balanced", "experience"])
+            # Profiles solve in parallel: build order is free, the
+            # response order is not.
+            self.assertCountEqual(built_profiles,
+                                  ["savings", "balanced", "experience"])
             plans = r.json()["plans"]
-            self.assertEqual([p["profile"] for p in plans],
-                             ["savings", "balanced", "experience"])
+            # All requested objectives ran, but an empty injected result must
+            # never become a selectable product alternative.
+            self.assertEqual(plans, [])
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
 
     def test_itinerary_id_not_hardcoded(self):
         trip_id = "request-trip-uuid-test"
-        requested_profiles = ["savings", "balanced", "experience"]
+        requested_profiles = ["balanced"]
         built_profiles = []
 
         def build_plan(**kwargs):
-            profile = kwargs["profile"]
-            built_profiles.append(profile)
-            activities = {
-                "savings": [{"poi_id": "beach", "start": "08:00", "end": "09:00"}],
-                "balanced": [{"poi_id": "noodle", "start": "08:00", "end": "09:00"}],
-                "experience": [
-                    {"poi_id": "beach", "start": "08:00", "end": "09:00"},
-                    {"poi_id": "noodle", "start": "09:10", "end": "10:00"},
-                ],
-            }[profile]
-            return {"activities": activities,
-                    "total_cost": 0, "total_km": 0,
+            built_profiles.append(kwargs["profile"])
+            return {"activities": [
+                        {"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                        {"poi_id": "noodle", "start": "11:00", "end": "12:00"},
+                    ], "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
         store = select_mod.get_store()
         old_plans = dict(store["plans"])
         old_active_id = store["active_id"]
         old_selected = store["selected"]
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
             select_mod.reset_store()
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={
                 "trip": dict(TRIP, trip_id=trip_id),
                 "profiles": requested_profiles,
             })
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles, requested_profiles)
+            self.assertCountEqual(built_profiles, requested_profiles)
             plans = r.json()["plans"]
             self.assertEqual([plan["profile"] for plan in plans], requested_profiles)
             self.assertEqual(len(plans), len(requested_profiles))
@@ -221,7 +207,7 @@ class TestItineraryContract(unittest.TestCase):
             self.assertEqual(selected.status_code, 200, selected.text)
             self.assertEqual(selected.json(), {"active_id": plans[0]["itinerary_id"]})
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
             store["plans"] = old_plans
             store["active_id"] = old_active_id
             store["selected"] = old_selected

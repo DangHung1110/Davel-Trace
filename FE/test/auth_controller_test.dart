@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:davel_trace/core/auth/auth_session_store.dart';
 import 'package:davel_trace/features/auth/application/auth_controller.dart';
 import 'package:davel_trace/features/auth/data/auth_repository.dart';
@@ -10,6 +12,9 @@ class FakeAuthRepository implements AuthRepository {
   String? deletionCancelEmail;
   String? deletionCancelToken;
   String? exportPassword;
+  Future<String?> Function()? refreshHandler;
+  int refreshCalls = 0;
+  Completer<AuthTokens>? refreshCompleter;
   final account = const AccountSummary(
     id: 'account-1',
     email: 'demo@example.com',
@@ -29,14 +34,29 @@ class FakeAuthRepository implements AuthRepository {
   @override
   Future<AccountSummary> me() async => account;
   @override
-  Future<AuthTokens> refresh(String refreshToken) async => AuthTokens(
-    account: account,
-    accessToken: 'access-2',
-    refreshToken: 'refresh-2',
-  );
+  Future<AuthTokens> refresh(String refreshToken) async {
+    refreshCalls++;
+    if (refreshCompleter != null) return refreshCompleter!.future;
+    return AuthTokens(
+      account: account,
+      accessToken: 'access-2',
+      refreshToken: 'refresh-2',
+    );
+  }
+
   @override
-  Future<void> register(String email, String password) async =>
-      registeredEmail = email;
+  Future<Map<String, dynamic>> capabilities() async => {
+    'google_sign_in': true,
+    'development_inbox': true,
+  };
+  @override
+  Future<String> register(String email, String password) async {
+    registeredEmail = email;
+    return 'sent';
+  }
+
+  @override
+  Future<void> resendVerification(String email) async {}
   @override
   Future<void> requestRecovery(String email) async {}
   @override
@@ -54,7 +74,8 @@ class FakeAuthRepository implements AuthRepository {
   @override
   void setAccessToken(String? value) => access = value;
   @override
-  void setRefreshHandler(Future<String?> Function()? handler) {}
+  void setRefreshHandler(Future<String?> Function()? handler) =>
+      refreshHandler = handler;
   @override
   Future<void> verify(String token) async {}
   @override
@@ -75,6 +96,52 @@ class FakeAuthRepository implements AuthRepository {
 }
 
 void main() {
+  test('Google sign-in stores ordinary Davel credentials', () async {
+    final repository = FakeAuthRepository();
+    final store = MemoryAuthSessionStore();
+    final controller = AuthController(
+      repository: repository,
+      sessionStore: store,
+      googleSignIn: () async => AuthTokens(
+        account: repository.account,
+        accessToken: 'google-access',
+        refreshToken: 'google-refresh',
+      ),
+    );
+    await controller.initialize();
+    await controller.loginWithGoogle();
+    expect(controller.status, AuthStatus.authenticated);
+    expect(repository.access, 'google-access');
+    expect(await store.readRefreshToken(), 'google-refresh');
+  });
+
+  test('concurrent unauthorized requests share one refresh rotation', () async {
+    final repository = FakeAuthRepository();
+    final store = MemoryAuthSessionStore();
+    final controller = AuthController(
+      repository: repository,
+      sessionStore: store,
+    );
+    await controller.initialize();
+    await controller.login('demo@example.com', 'TravelDemo123');
+    repository.refreshCompleter = Completer<AuthTokens>();
+    final first = repository.refreshHandler!();
+    final second = repository.refreshHandler!();
+    await Future<void>.delayed(Duration.zero);
+    expect(repository.refreshCalls, 1);
+    repository.refreshCompleter!.complete(
+      AuthTokens(
+        account: repository.account,
+        accessToken: 'rotated-access',
+        refreshToken: 'rotated-refresh',
+      ),
+    );
+    expect(await Future.wait([first, second]), [
+      'rotated-access',
+      'rotated-access',
+    ]);
+    expect(await store.readRefreshToken(), 'rotated-refresh');
+  });
   test('starts signed out then registers and verifies', () async {
     final repository = FakeAuthRepository();
     final controller = AuthController(

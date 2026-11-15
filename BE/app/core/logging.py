@@ -14,10 +14,12 @@ _SENSITIVE = re.compile(
     r"(?i)(password|token|secret|api[_-]?key)(\s*[=:]\s*)([^\s,;]+)"
 )
 _CREDENTIAL_URL = re.compile(r"(://[^:/\s]+:)([^@/\s]+)(@)")
+_OAUTH_QUERY = re.compile(r"(/v1/auth/google/(?:callback|start))\?[^\s\"']+")
 
 
 def redact(value: object) -> str:
     text = str(value)
+    text = _OAUTH_QUERY.sub(r"\1?[REDACTED]", text)
     text = _SENSITIVE.sub(r"\1\2[REDACTED]", text)
     return _CREDENTIAL_URL.sub(r"\1[REDACTED]\3", text)
 
@@ -34,7 +36,20 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(payload, ensure_ascii=False, sort_keys=True)
 
 
+class OAuthAccessFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        # Uvicorn access logs use their own formatter rather than JsonFormatter.
+        if isinstance(record.args, tuple):
+            record.args = tuple(redact(arg) if isinstance(arg, str) else arg for arg in record.args)
+        elif isinstance(record.msg, str):
+            record.msg = redact(record.msg)
+        return True
+
+
 def configure_logging(level: int = logging.INFO) -> None:
+    access = logging.getLogger("uvicorn.access")
+    if not any(isinstance(item, OAuthAccessFilter) for item in access.filters):
+        access.addFilter(OAuthAccessFilter())
     root = logging.getLogger()
     if getattr(root, "_davel_trace_configured", False):
         return

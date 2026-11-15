@@ -50,7 +50,7 @@ class TestCategoryCapGate(unittest.TestCase):
     def test_capped_categories_are_the_non_food_sights(self):
         self.assertEqual(
             soft_rules.NON_FOOD_CAPPED,
-            frozenset({"market", "landmark", "beach", "attraction", "temple",
+            frozenset({"market", "shop", "landmark", "beach", "attraction", "temple",
                        "museum", "park", "viewpoint"}))
         # Meals are NOT capped here (A1 / CAFE_CAP own them).
         self.assertFalse(soft_rules.is_capped_category("restaurant"))

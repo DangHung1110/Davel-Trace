@@ -1,0 +1,332 @@
+{"poi_id": "ChIJqaQoXYMZQjERX_QzVEAZr_Q", "name": "MAAZI", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk", "name": "Bếp nhà Hà", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30", "name": "Nhà hàng hải sản .", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0", "name": "Nhà Hàng Bảo Châu", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJYQkmfagfQjER0iIRsKZ0Rcc", "name": "Quán nhà quê", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM", "name": "Chill Beach Thanh Khê", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["near_duplicate", "rating_perfect"], "siblings": ["ChIJSZabUwAZQjERqs6A8ECVnWY"]}
+{"poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc", "name": "La Bonne Café Đà Nẵng", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJkatEeMwZQjERnAUKgmrbNgQ"]}
+{"poi_id": "ChIJ864pbQA9QjER--PIUcxqd48", "name": "Son Tra Viewpoint", "cat": "viewpoint", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJo8N_zUw9QjERgutJ9u3-n7Y"]}
+{"poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw", "name": "Mây coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["duplicate_name", "rating_perfect"], "siblings": ["ChIJKbTF7NkZQjEReFD1hbN1Rg8"]}
+{"poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA", "name": "OM Tea & Coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJ34pDfgA9QjERzXhUIjmZbso"]}
+{"poi_id": "ChIJKSs6ZVYZQjERSuj5bQ10t0M", "name": "Ạt cà phê", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q", "name": "Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4", "name": "Tiệm Cafe Thổ - Cà Phê Ngon & Yên Tĩnh Ngũ Hành Sơn", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJvb3YtJYXQjERnLJ4-sFfc6A", "name": "Cà phê Chân Trần", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJO7l-RdwZQjERNj5fr2VyZ9Y", "name": "Dng.coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI", "name": "Seed-coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw", "name": "Phia Coffee & More", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJv-i7URUZQjERi-g4GEv06QU", "name": "7AM Coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U", "name": "MÂY COFFEE - TRUNG NGUYÊN Legend", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg", "name": "Highlands", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU", "name": "Cafe cóc kênh", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg", "name": "GREEN COFFEE", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJM2DzGgAZQjERp54q-gVvu-g", "name": "MAI Café Flowers & More", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8", "name": "Mây Coffee", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["duplicate_name"], "siblings": ["ChIJo5HJeVg9QjERxLqGaMYHXCw"]}
+{"poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ", "name": "Làng Bích họa Đà Nẵng", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJIypBnTAZQjERLPJvLObGXPc"]}
+{"poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs", "name": "Chợ Cồn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJeaPwiDUYQjERt4yUm81Oqi8"]}
+{"poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U", "name": "Khu du lịch sinh thái Suối Hoa", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw", "name": "Khu Du Lịch Sinh Thái Lái Thiêu", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk", "name": "DD WONDERLAND", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w", "name": "Bến Du Thuyền Đà Nẵng", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJEa410zMYQjER3f11TKinbkU", "name": "Seahorse", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["name_generic", "hours_missing"], "siblings": []}
+{"poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA", "name": "Dịch Vụ Cano Du Lịch Lặn Biển Ngắm San Hô Sơn Trà", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJ17GORdEXQjERhkujx-kwJA0"]}
+{"poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0", "name": "Khu Du lịch Sinh thái Suối Rạng", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJs5puLQA9QjERIaHbrBAGpjA"]}
+{"poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0", "name": "Sơn Trà Resort & Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ", "name": "Khu nghỉ mát Du lịch sinh thái Tiên Sa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y", "name": "View Ngắm Bình Minh Sơn Trà", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJ864pbQA9QjER--PIUcxqd48"]}
+{"poi_id": "ChIJ244paMwXQjERGVtPeitX4mA", "name": "KHU PHỐ DU LỊCH AN THƯỢNG", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["type_unmapped", "near_duplicate"], "siblings": ["ChIJOZ__YJwXQjER4wLDpzs9L5c"]}
+{"poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310", "name": "Công Viên Trung Tâm Hành Chính Liên Chiểu", "cat": "park", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJqdKPDDIZQjERC2tfiDtFLXE"]}
+{"poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k", "name": "Khu du lịch Nam Ô Heritage", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["ChIJZSAyL0YfQjERMP2R9yBDRwY"]}
+{"poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE", "name": "Quảng trường Liên Chiểu", "cat": "park", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJD4Ge5WQZQjERW-0GhLbS310"]}
+{"poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY", "name": "KDL Sinh thái Nam Ô", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["ChIJmUEOJQAfQjERLPIN_eYfU9k"]}
+{"poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto", "name": "Cami Riverside Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY", "name": "Bãi Tắm Thanh Khê", "cat": "beach", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJr_MgSAAZQjERnbnJDAtASZM"]}
+{"poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY", "name": "Nhà bia Chứng tích Núi Ghềnh", "cat": "museum", "decision": "queue", "hard": [], "queue": ["ticket_unverified"], "siblings": []}
+{"poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk", "name": "Nhà thờ Tộc Hồ Thanh Khê", "cat": "museum", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ", "name": "Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê", "cat": "museum", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o", "name": "Bãi Biển Tân Trà", "cat": "beach", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJrcJ8wVwRQjERJF58LAQEO-I"]}
+{"poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA", "name": "Chợ Hàn", "cat": "market", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJP1Uz6i0ZQjERfy-rpM1cGWc"]}
+{"poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8", "name": "Khu Ẩm Thực Chợ Cồn -식사 공간", "cat": "market", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJu6FQjzUYQjER39TMpgQVRUs"]}
+{"poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c", "name": "Chợ Đêm An Thượng", "cat": "market", "decision": "queue", "hard": [], "queue": ["near_duplicate"], "siblings": ["ChIJ244paMwXQjERGVtPeitX4mA"]}
+{"poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0", "name": "Chợ Khái Tây", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8", "name": "Chợ Quan Nam", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJDxZNtxMZQjERJDjAHhQgcEc", "name": "Sushi Time - 305 Điện Biên Phủ, Đà Nẵng", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM", "name": "Boulevard", "cat": "cafe", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8", "name": "Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak", "name": "VỌC Glamping", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["ticket_unverified"], "siblings": []}
+{"poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI", "name": "Mai Vang (Yellow Blossom) Bonsai Garden", "cat": "museum", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w", "name": "Tượng Phật Đá Phan Sơn", "cat": "museum", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8", "name": "Public Beach Access", "cat": "beach", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "osm:node/1036552571", "name": "Đèo Hải Vân", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["manual:hai-van-quan"]}
+{"poi_id": "osm:node/1335374809", "name": "chùa am Nam Ngư", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/1335374858", "name": "chùa am thờ Hỏa Xa", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/1335374873", "name": "chùa An Cư Tây", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/1623183649", "name": "Núi Sơn Trà", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/2093848429", "name": "Kim Sơn", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/2093848431", "name": "Mộc Sơn", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/2093848443", "name": "Thổ Sơn", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/2177056870", "name": "Thác Tóc Tiên", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/3760247201", "name": "chùa Vu Lan", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/3760247202", "name": "chùa Sư Nữ", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/3760272162", "name": "Chùa Tam Bảo (Chùa Tam Bảo Theravāda)", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/3763846156", "name": "Chùa Pháp Lâm", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4005611262", "name": "Đền thờ Tiền Hiền làng Lổ Giang", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["osm:node/4005611263"]}
+{"poi_id": "osm:node/4005611263", "name": "Đình Lổ Giáng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["osm:node/4005611262"]}
+{"poi_id": "osm:node/4122433690", "name": "Núi Bà Nà", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4172034499", "name": "Non Nuoc Beach", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4280016689", "name": "Chùa Giác Hoàng Viên", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4294135790", "name": "nhà thờ Phú Thượng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["duplicate_name", "hours_missing"], "siblings": ["ChIJY3yT3IweQjERnbDRpKk8b3A"]}
+{"poi_id": "osm:node/4294139091", "name": "nhà thờ An Ngãi Tây", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4294143691", "name": "Nhà thờ Giáo xứ An Thượng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4294167889", "name": "nhà thờ Tùng Sơn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4347089780", "name": "My An Beach", "cat": "beach", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4386676224", "name": "Chợ Miếu Bông", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4706189591", "name": "To Quoc Ghi Cong", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4741642219", "name": "Public beach", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4759000238", "name": "Dan Oasis Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4845297821", "name": "Gần núi thần tài", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/4924323121", "name": "Fishing Village and Fleet", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5273998822", "name": "Cầu Tiên Sơn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5273999121", "name": "Cầu Thuận Phước", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5276547123", "name": "Cau Nguyen Van Troi Bridge", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5286977425", "name": "Núi Thần Tài", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5421670780", "name": "Chùa An Phước", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/5432701004", "name": "Nhà thờ Hoà Cường", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/6346486685", "name": "Cây đa đại thụ", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/6528451001", "name": "Cây đa Đò Xu", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/7095169367", "name": "Art Gallery", "cat": "museum", "decision": "queue", "hard": [], "queue": ["hours_missing", "ticket_unverified"], "siblings": []}
+{"poi_id": "osm:node/7095169369", "name": "Non La", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/7276380289", "name": "Cầu Sông Hàn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/7477670190", "name": "노니판매점", "cat": "market", "decision": "queue", "hard": [], "queue": ["name_generic", "hours_missing"], "siblings": []}
+{"poi_id": "osm:node/7477670191", "name": "Gio coffee", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/8883385553", "name": "TASY STUDIO", "cat": "museum", "decision": "queue", "hard": [], "queue": ["ticket_unverified"], "siblings": []}
+{"poi_id": "osm:node/9921282483", "name": "Viet Nam's Delights", "cat": "market", "decision": "queue", "hard": [], "queue": ["duplicate_name", "hours_missing"], "siblings": ["osm:node/14045144381"]}
+{"poi_id": "osm:node/9921315929", "name": "Lưu Niệm - Đặc Sản", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10303626687", "name": "Núi Phước Tường", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10303626688", "name": "Núi Cẩm Khê", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10709724107", "name": "Làng đá mỹ nghệ Non Nước", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10709738005", "name": "Làng chiếu Cẩm Nê", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10709738105", "name": "Làng nước mắm Nam Ô", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/10723988763", "name": "Đài tưởng niệm thảm sát Hà My", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11359603957", "name": "Chùa Nam Sơn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11427582964", "name": "Thai Market", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11629841009", "name": "Núi Khe Xương", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11629996926", "name": "Núi Hải Vân", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11630013743", "name": "Núi Hoi", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/11762365155", "name": "Núi Hòng Chan", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/12333995781", "name": "Chợ đêm Lê Duẩn", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/12404434601", "name": "Khu Văn hóa Tâm linh Đà Sơn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/12603319867", "name": "Nhà thờ Thanh Bình", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/12701675501", "name": "Small waterfall", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/12811972501", "name": "Mart Souvenir", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13040467529", "name": "Bãi Đá", "cat": "beach", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13293564930", "name": "Himawari", "cat": "market", "decision": "queue", "hard": [], "queue": ["name_generic", "hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13484040419", "name": "Đền Bà Càn Khôn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13677406601", "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13687068650", "name": "Linh Phong Bảo Tháp", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13734880501", "name": "Tượng Phật Phước Lý", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13913398302", "name": "Suối Lạc", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/13913400201", "name": "Suối Ngọc", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "osm:node/14045144381", "name": "Viet Nam's Delights", "cat": "market", "decision": "queue", "hard": [], "queue": ["duplicate_name"], "siblings": ["osm:node/9921282483"]}
+{"poi_id": "osm:node/14130293535", "name": "Tượng đài Dũng sĩ Điện Ngọc", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0", "name": "Cổng Chùa Linh Ứng", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJuaI3VgMZQjER0B4a7LcJ-YA", "name": "Nhà Thờ Giáo Xứ An Hòa", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E", "name": "Nhà thờ Thánh Giuse lao công", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJs4dg5vceQjERJQ5D9ATvWhU", "name": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJcw0FdkgYQjERhr14f9cMXK0", "name": "Nhà Thờ Giáo Xứ Nội Hà", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJaV_Jo8gZQjERtDWMcdLRT1U", "name": "Nhà Thờ Giáo Xứ Hòa Thuận", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJY3yT3IweQjERnbDRpKk8b3A", "name": "Nhà thờ Phú Thượng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["duplicate_name", "hours_missing"], "siblings": ["osm:node/4294135790"]}
+{"poi_id": "ChIJOfpog-EYQjERw_VB4IBkfNI", "name": "Nhà Thờ Giáo Xứ Hòa Minh", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ3S-Eo0sYQjERo9MhApUI4WQ", "name": "Nhà thờ Chính Trạch", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJX_rcYHQZQjERQXQ9UxHmHN4", "name": "Nhà Thờ Giáo Xứ Phước Tường", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI", "name": "Chùa Bát Nhã", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE", "name": "Chùa Non Nước", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c", "name": "Chùa Bà Đa", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8", "name": "Thiền Viện Bồ Đề", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM", "name": "Chùa Nam Hải", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJASjStc0ZQjERf8hQfCEJ8JA", "name": "Chùa An Long", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I", "name": "Chùa Mỹ Khê", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA", "name": "Chùa Báo Ân", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJrynevMsZQjERzZIGoLZwQ2I", "name": "Chùa Từ Tôn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q", "name": "Ba Na Hills", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w", "name": "Sun World Bà Nà Hills", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["ticket_unverified"], "siblings": []}
+{"poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE", "name": "Đỉnh Bà Nà", "cat": "nature", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw", "name": "Bến Du Thuyền Sông Hàn", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "ticket_unverified"], "siblings": []}
+{"poi_id": "ChIJC78Y_XQXQjERnNGlsKERAHs", "name": "Eden Ocean View Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJKbntMIQXQjERh50f5GwfUm4", "name": "Sunview Beach Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg", "name": "A La Carte Danang Beach", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJRZXlI6MZQjERcre1gDV0kFE", "name": "Minh Trường Hotel 1 - Khách sạn view biển Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI", "name": "Sala Danang Beach Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4", "name": "HAIAN Beach Hotel & Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJTQo19YMXQjER1DttYZqjHYo", "name": "Mandila Beach Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJN75cdYQXQjERBUnemtIubGM", "name": "NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJzbKs7IMXQjERWf_Uz122Ohs", "name": "Diamond Sea Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJbeO3ddMZQjERzeIxy-6JpYc", "name": "Meliá Vinpearl Danang Riverfront", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM", "name": "Minh Toan SAFI Ocean Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJrxxvlNsXQjERy-eJcpABRJA", "name": "Nhu Minh Plaza Danang Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJT1sjdYQXQjERSLHKKZsmfdQ", "name": "Paris Deli Danang Beach Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJW7SBUHoXQjERdpSIWHkCuh0", "name": "Khách sạn Mường Thanh Luxury Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJUeabB3kXQjERFP2JL7c8YCg", "name": "DLG Hotel Danang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJbfHSGUXQjERRXCfzSX3s88", "name": "Holiday Beach Hotel Danang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJWcFCas8QQjERQGJzK8w1ta4", "name": "Hyatt Regency Danang Resort and Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJmZHsE5U9QjERDa3a1CuK3lo", "name": "InterContinental Danang Sun Peninsula Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE", "name": "Da Nang Mikazuki Japanese Resorts & Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJKfL8bWgXQjERWPZKseMae6E", "name": "Pullman Danang Beach Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJMTadzMQQQjER29xKIZnnHAU", "name": "Sandy Beach Non Nuoc Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJqXp39lv2QTERR9U4pFNMD2o", "name": "Mercure Danang French Village Bana Hills", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q", "name": "Risemount Premier Resort Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJjb4Ah-QRQjERFlzALzxOOvo", "name": "Four Seasons Resort The Nam Hai, Hoi An", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJd3RleOYXQjERQQD0TduMYnU", "name": "Olalani Resort & Condotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0", "name": "Meliá Danang Beach Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY", "name": "The Ocean Villas", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJY2uJ-ZgRQjEROTUmuLdOGic", "name": "The Five Villas Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJq56yCur3QTERYlOCLaSCVwQ", "name": "Làng Toom Sara Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQT4SLJwRQjERvym-dW5QWJ0", "name": "Shilla Monogram Danang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJz0RiIUQXQjER_XbsI16KkBE", "name": "TIA Wellness Resort", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJEyLB68sQQjER7FTfkhV0_MY", "name": "Danang Marriott Resort & Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJNxOlbnIXQjER9DXmYRuiv3Q", "name": "Lee spa & Massage Đà Nẵng", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU", "name": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo", "name": "Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJA0bFwKoZQjER--pX5_3_cD0", "name": "Tú Chợ đêm", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJNzbzAwAZQjERynEwf3zOgYE", "name": "Mì Quảng Bếp Quê - Đặc Sản Đà Nẵng", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg", "name": "Quán mỳ quảng Bà Minh", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJl2GYHgAZQjERp7zmf6CDTXk", "name": "Nhà hàng hải sản Sơn Biển Đông", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8", "name": "Đặc Sản Chả Bò Bà Tâm Đà Nẵng", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g", "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH", "cat": "market", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8", "name": "Cửa hàng Đặc sản Biển Đà Nẵng", "cat": "market", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ03jTTgAXQjERpVQunmJHv2c", "name": "Sontra Sea Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJfbl-2sMXQjERKLfkuhtH-BE", "name": "Peninsula Hotel Danang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJoSXYBfIXQjERoD3rJE5AWDU", "name": "Khách Sạn SeaShore", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJXm_IjoXQjERqJ9FNnjWpx8", "name": "Leaf Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJkRSDGIIXQjERdg4lYna_jV0", "name": "Pavilion Hotel DaNang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJoWXWNIwXQjERjFwxSEpICZ4", "name": "Hilton Garden Inn Da Nang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJu954vu8XQjERQNvn5_8eBE8", "name": "Grand Gold Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJS0p9LgcXQjERRnDVDqhYvX4", "name": "Khách sạn Radisson Đà Nẵng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJn2uBfeUXQjERvTmGbdnPARE", "name": "The Code Hotel & Spa Da Nang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJR4RA3I0XQjERajP7wKxjYu0", "name": "Mangata Beachfront Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJXRkLVPUZQjERhjMP_j_cdkQ", "name": "Mường Thanh Grand Đà Nẵng Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJq-4rgiMYQjERWeE47TN-W_Q", "name": "Vitalis Riverside Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJrW03HQAXQjERLRu5Xd4RvsE", "name": "Seavitel Beach Hotel - DaNang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQ-_7No0XQjERrR5A4J2fB9s", "name": "Monarque Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJXkD0OcbQjER8aTXsF-pS_Q", "name": "Nguyen Gia Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQWWv4A8YQjERuqj9zjNqKAc", "name": "Wyndham Danang Golden Bay Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ27_WHYQXQjERfwDksZnfqKM", "name": "TGT BEACH HOTEL", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJs2LW3rEXQjERAndHSLNX-Rc", "name": "Elites Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJpTFl49UYQjERrzeUIxz8NL4", "name": "Phước Hà", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJq0vnsSIZQjERiB7KQ_DkjW0", "name": "MỘC NHIÊN HOTEL", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJfS4VlKsZQjERPQy1DOvrEa8", "name": "Avenis Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJM560Qk0YQjERJDvIocFeEIw", "name": "Nice Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJVVUC-lEYQjERqdANIT0ShEw", "name": "Khách Sạn Smile", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["type_unmapped", "hours_missing"], "siblings": []}
+{"poi_id": "ChIJ9--6uKYZQjER5hS7ybSadkc", "name": "Ocean Star Hotel Danang Bay", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ767Qs08YQjERaSc6TDUM4WQ", "name": "Tan Hoang Long Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJgXLzUFEYQjERujTQH477KV0", "name": "Santori Hotel Danang Bay", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJWVl1NFUYQjERl2v9iNV-6F8", "name": "Khách Sạn Đại Long", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJAXvSo5EZQjERNYmexlgFouI", "name": "Lychee Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI", "name": "Moonlight Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJO3oiB7gZQjERONk8CvO8oTM", "name": "Dreamy Sky Boutique Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJZxgQeVYYQjERTs3tEgp2lVY", "name": "Khách Sạn Rose", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJj1wfpTQYQjERyAwSp1WRPpg", "name": "Orange Hotel", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJAUbRW8wZQjERf0sgTLr3Odo", "name": "Mercury Boutique Hotel Danang", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJJQWDpTQYQjER_VEl5Kl8HTY", "name": "Central Hotel & Spa", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ6ToOeVYYQjERj8BHGr6OZzc", "name": "Khách Sạn Huy Hoàng", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ67sbOfwZQjERNfKPIKkEdyw", "name": "La Maison Des Délices Hotel & Apartment", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJybre1xcZQjERDB05uYRpJBc", "name": "Aura Beachfront Hotel Apartment", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJCc2lfXgZQjERSUvZYj3RsMw", "name": "Hotel Hồng Phúc 2", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM", "name": "Ara Spa & Massage Da Nang", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJKZK2FcoZQjER8f6Uft81Mvg", "name": "Sơn Trà Spa Massage Trị Liệu Đà Nẵng", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo", "name": "HAPPY SPA", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ9ZTWZwAXQjERn99h6ziS_2c", "name": "Lotus Bloom Spa & Massage", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJz3rG-N0XQjERVs2Zo-BWxwQ", "name": "Smile Spa (tên cũ Spa Bà Thông - CN Sơn Trà)", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJcUs0-1YXQjERDYZBzXC8l24", "name": "Zon Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJVbx5NwAXQjERS9yRLPkJZ_I", "name": "Spa MyAn", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM", "name": "Van Ly Spa & Massage", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJpSoTPgAXQjERcs8hSdrolKM", "name": "H & H Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM", "name": "Spa & Massage Đà Nẵng", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ5xGrdQAXQjERUKN8BeMLPJo", "name": "Spa gội đầu - Tiệm nhà Ngân", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJK_ogWgARQjERnLylibgoTpw", "name": "Quýt Spa & More", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJmwtSJxYXQjERqyw4BIsIRV4", "name": "M'healthy spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4", "name": "CAMY SPA Liên Chiểu , Đà Nẵng", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJzRc5EgIZQjERKvXOUUpbcKA", "name": "Light Beauty Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJu9TGuzEZQjERolkiV2-wyQQ", "name": "Massage Khiếm Thị Mai Liên", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk", "name": "Vân Anh beauty spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ66onuEIZQjERJcc014sju08", "name": "Rice' Spa &Nails", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10", "name": "Nhung Spa Trị Liệu", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJYU-cVQAXQjERxfDy3td5_ac", "name": "New World Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM", "name": "An Mộc Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJw2G2IwAfQjERGAvvbDnKLHM", "name": "Thanh Tuyền Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ1dsj5MQZQjERbgyzx94Lv20", "name": "Alpha Medical Skin - Clinic & Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJqTDc25cZQjERd6ed4Iho8A8", "name": "Thanh Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJPQ-OSwAZQjER0Zu4X6NlQds", "name": "Thanh Spa Relax", "cat": "spa", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJQTe2HAAZQjERkD1J_cP6aSw", "name": "Green Haven Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJOXHZFwAZQjERnjc1WCNMaeU", "name": "Láng Beauty & Spa", "cat": "spa", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJueQn3rsZQjERgU81knCQmOQ", "name": "Bar Eau-de-vie", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJZVLi0gEZQjERl6s0h2bqoK0", "name": "Bar Đồ Yêu - Authentic Vietnamese Cocktail", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJW5KDTQAZQjERJXJQMoz2YJo", "name": "ANGEL LOUNGE", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ6e7t67oZQjERLcf4KcgElEc", "name": "Maju Top Class Bar - lounge", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw", "name": "켓 바 1 Kết Bar", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJx3fy4TgZQjER5y-HN2wBNl4", "name": "Navy Lounge", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4", "name": "Karaoke Thao", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJsztPMVkXQjERooynSorot-0", "name": "Blue Sky Bar", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJpSDE_bUXQjERRvGyIAFWpeE", "name": "Corner Pub", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA", "name": "Chevy", "cat": "bar", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc", "name": "Writer's Bar", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60", "name": "Quán nhậu Keo Lá Tràm", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJmd-xKSoZQjERr8BS2agMkCI", "name": "Cà Phê Star Pub", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJFXRrR0wZQjERNl4jMD9QNFI", "name": "Blues Q Coffee and Craft Beer Garden ( Bia thủ công)", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJOean5VUZQjERMWDUmGdTpJQ", "name": "KARAOKE VENUS", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJVS4QEX8fQjERk1vVwmP0Rk8", "name": "An Nhiên Quán", "cat": "restaurant", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJWTRb5NcYQjER6mJOuNl06k8", "name": "Quán Nhậu Hiếu Hòa", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJcYos3CkZQjERibEDbcXOpQs", "name": "Quán Karaoke Music For You", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA", "name": "RAIN MUSIC BOX & GAME", "cat": "market", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJP1XHPQAZQjERinsxWb2Ga0A", "name": "Karaoke Monaco Đà Nẵng", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJcTnFX6QfQjERgmN3buOe9AQ", "name": "Rượu Nếp Nhà Nấu", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJuQL2IN4YQjERYHan1mFjMdA", "name": "Karaoke RETRO", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJqRL3QEQZQjER71D0j0o7M7Q", "name": "Karaoke Night Club", "cat": "bar", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4", "name": "SAY Beer", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJvcXagjAYQjERCEguUGaxfEc", "name": "LIBRE", "cat": "bar", "decision": "queue", "hard": [], "queue": ["name_generic"], "siblings": []}
+{"poi_id": "ChIJc2sSdpMZQjERg6ykGdI-3r4", "name": "Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm", "cat": "bar", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}
+{"poi_id": "ChIJnZoMTbkQQjERwzvvHqGlb4E", "name": "Chùa Linh Sơn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJyaniiLoQQjERI3aW6z5atCc", "name": "Chùa Hương Sơn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJO9OcO7kQQjERuGR5zEtpfu8", "name": "Chùa Thái Sơn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk", "name": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJvexouL4QQjERy0qt57A0GX4", "name": "Chùa Phổ Đà Sơn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ8Z0D7KURQjERUPd36goDH90", "name": "Chùa Tam Tôn", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJLX9s7EUbQjERdsy67X5-NrE", "name": "Chùa Hải An Đà Nẵng", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJf_LKvbkbQjERSVrbzxU6Nuc", "name": "Chùa Vân Long", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ8VqGDeYRQjERVEkumiIa714", "name": "LÂM TỲ NI VIÊN", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs", "name": "Chùa Minh Phước", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJo2Yyix8ZQjERmG7AHQkOpIo", "name": "Chùa Phước Lộc", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJKcik9OQYQjERKZ21jblRTVc", "name": "Chùa Thanh Hải", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJl21Hd_4YQjERF980f9HS9Cc", "name": "Chùa Làng Thanh Khê", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["duplicate_name", "hours_missing"], "siblings": ["ChIJp3BwHgsZQjERzQZfxwNQNmE"]}
+{"poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY", "name": "Chùa Thanh Hà", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJp3BwHgsZQjERzQZfxwNQNmE", "name": "Chùa Làng Thanh Khê", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["duplicate_name", "hours_missing"], "siblings": ["ChIJl21Hd_4YQjERF980f9HS9Cc"]}
+{"poi_id": "ChIJQ2dbvVIYQjERVbGNKc5Tmcs", "name": "CHÙA TÂN THÀNH", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJF8yRoecZQjERdDBeBdSRD-Y", "name": "DA NANG DOWNTOWN", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJu1LdzQwZQjER2DSbyyayAbs", "name": "Công viên Cầu vượt Ngã Ba Huế", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU", "name": "Công viên 29/3", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJDYfSGZYZQjERmSERKl2Fj7E", "name": "Hidden Oasis Homestay", "cat": "lodging", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJvfs2CK4ZQjERYSUrqnRYbqo", "name": "Công viên hồ Ngọc Anh", "cat": "park", "decision": "queue", "hard": [], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "ChIJrd3YeXENQjERWWbMPMdY2CE", "name": "Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "duration_outlier"], "siblings": []}
+{"poi_id": "ChIJ00Fz0rANQjERLadxvkIRXBY", "name": "Thuyền Thúng Tượng Thúy - Coconut Basket Boat Tour Hoi An", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM", "name": "Rừng Dừa Bảy Mẫu", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo", "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJT9jHPuANQjERQTnqjbIQIF8", "name": "Thuyền thúng Dũng Thúy", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJT1zm9U8NQjERQf5DsBriCgc", "name": "Dịch Vụ Thuyền Thúng Bến Dừa", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["type_unmapped"], "siblings": []}
+{"poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo", "name": "Family Kitchen Da Nang - Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ8ai7BQAZQjERIkxmYHcV9DQ", "name": "Danang Summer Cooking and Coffee Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJs-NDcgAXQjERHA6tioqOfH4", "name": "Apron Up Cooking Class in Danang", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJYyr_6ogXQjERoXAq8cGEzcI", "name": "Rose Da Nang Coffee Workshop", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE", "name": "Jolie Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk", "name": "Danang Cooking Class - Lá Sen ダナン料理教室", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M", "name": "Da Nang Family Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc", "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJ26h5ZAANQjER2otGJosJliA", "name": "Rường House - Cooking Class & Craft Workshop", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJyZOJHa8NQjERSvp9yMenV6Y", "name": "Vinh Vo Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJx0dBXWYNQjERQzQO18QYhas", "name": "Mimi Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJddXz2K8PQjER4enhapQvvo8", "name": "Cooking With Jolie In Hoi An – Vietnamese Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier", "rating_perfect"], "siblings": []}
+{"poi_id": "ChIJmU3hl9WrNTERBUbnSp3g5vs", "name": "Thuan Tinh Island Cooking Tour", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["duration_outlier"], "siblings": []}
+{"poi_id": "ChIJH1ujCM0XQjERcOl1lB9Ns6k", "name": "Tuyet Pham Cooking Class", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "duration_outlier"], "siblings": []}
+{"poi_id": "manual:hai-van-quan", "name": "Hải Vân Quan", "cat": "landmark", "decision": "queue", "hard": [], "queue": ["hours_missing", "near_duplicate"], "siblings": ["osm:node/1036552571"]}
+{"poi_id": "manual:vinwonders-nam-hoi-an", "name": "VinWonders Nam Hội An", "cat": "attraction", "decision": "fail", "hard": ["coords_outside_bbox"], "queue": ["hours_missing"], "siblings": []}
+{"poi_id": "manual:cu-lao-cham", "name": "Cù Lao Chàm", "cat": "attraction", "decision": "queue", "hard": [], "queue": ["hours_missing", "duration_outlier"], "siblings": []}
+{"poi_id": "manual:smile-goods-danang", "name": "Smile Goods Danang", "cat": "market", "decision": "queue", "hard": [], "queue": ["rating_perfect"], "siblings": []}

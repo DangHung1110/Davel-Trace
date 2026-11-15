@@ -1,115 +1,199 @@
-"""LLM gateway (T005, lane C). JSON mode + temp 0.1 + Pydantic validate.
+"""Provider-neutral JSON LLM gateway.
 
-Provider switch via .env (config.py): LLM_PROVIDER=local (Ollama demo
-day, default) | api (test env, OpenAI-compatible endpoint for
-GPT-4o-mini / Gemini Flash). No URL/key is hardcoded — everything comes
-from Settings; keys live only in env/BE/.env (never committed).
-
-Retry: at most 2 retries (3 attempts total) on transport error, bad
-JSON, or schema-validation failure; exhaustion raises LLMError with a
-machine-readable reason. `transport` is injectable for mock tests.
+The deterministic planner never calls this module. AI capabilities use it for
+optional interpretation, explanation and shadow observations only. Gemini is
+called through Google's OpenAI-compatible REST surface without an SDK.
 """
 
 from __future__ import annotations
 
 import json
-import os
+import socket
+import urllib.error
+import urllib.request
 
 from BE.app.config import Settings, get_settings
-from BE.app.services import fetch_json
 
 try:
     from pydantic import BaseModel, ValidationError
 except ImportError:  # pragma: no cover
     BaseModel, ValidationError = None, Exception
 
-MAX_RETRIES = 2
 TEMPERATURE = 0.1
+GEMINI_OPENAI_BASE = "https://generativelanguage.googleapis.com/v1beta/openai"
+RETRYABLE = frozenset({"transport", "timeout", "bad_json", "schema"})
 
 
 class LLMError(RuntimeError):
+    """A normalized, secret-safe provider failure."""
+
     def __init__(self, reason: str, detail: str = ""):
-        super().__init__(f"llm failed [{reason}]: {detail[:200]}")
+        safe = str(detail or "provider request failed").replace("\r", " ").replace("\n", " ")
+        super().__init__(f"llm failed [{reason}]: {safe[:200]}")
         self.reason = reason
+        self.detail = safe[:200]
 
 
-def _endpoint(settings: Settings) -> tuple[str, dict, dict]:
-    """Return (url, headers, extra_body) per provider. No hardcoded secrets."""
-    if settings.llm_provider == "api":
-        base = os.environ.get("LLM_API_URL", "https://api.openai.com/v1")
-        key = os.environ.get("LLM_API_KEY", "")
-        return (base.rstrip("/") + "/chat/completions",
-                {"Content-Type": "application/json",
-                 "Authorization": f"Bearer {key}"},
-                {"model": os.environ.get("LLM_API_MODEL", "gpt-4o-mini"),
-                  # NOTE(test-local): LM Studio rejects
-                  # response_format json_object; prompt + _extract_json
-                  # already enforce/parse JSON, so omit it.
-                  "temperature": TEMPERATURE})
-    return (settings.ollama_url.rstrip("/") + "/api/chat",  # local Ollama
+def _safe_detail(detail: object, settings: Settings) -> str:
+    text = str(detail or "provider request failed")
+    for secret in (settings.gemini_api_key, settings.llm_api_key):
+        if secret:
+            text = text.replace(secret, "[redacted]")
+    return text
+
+
+def _endpoint(settings: Settings) -> tuple[str, dict[str, str], dict]:
+    """Return URL, headers and provider request fields; never log the result."""
+    provider = settings.llm_provider
+    if provider == "disabled":
+        raise LLMError("disabled", "AI assistance is disabled")
+    if provider == "local":
+        if not settings.ollama_url or not settings.judge_model:
+            raise LLMError("config", "local endpoint and model are required")
+        return (
+            settings.ollama_url.rstrip("/") + "/api/chat",
             {"Content-Type": "application/json"},
-            {"model": settings.judge_model,
-             "stream": False,
-             "format": "json",
-             "options": {"temperature": TEMPERATURE}})
+            {
+                "model": settings.judge_model,
+                "stream": False,
+                "format": "json",
+                "options": {"temperature": TEMPERATURE},
+            },
+        )
+    if provider == "gemini":
+        if not settings.gemini_api_key or not settings.llm_model:
+            raise LLMError("config", "Gemini API key and model are required")
+        base = settings.llm_api_url or GEMINI_OPENAI_BASE
+        key = settings.gemini_api_key
+    else:  # compatible
+        if not settings.llm_api_url or not settings.llm_api_key or not settings.llm_model:
+            raise LLMError("config", "compatible endpoint, key and model are required")
+        base = settings.llm_api_url
+        key = settings.llm_api_key
+    return (
+        base.rstrip("/") + "/chat/completions",
+        {"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+        {"model": settings.llm_model, "temperature": TEMPERATURE},
+    )
 
 
-def _urllib_transport(url: str, headers: dict, body: dict,
-                      timeout_s: float = 120) -> dict:
-    data = fetch_json(url, json.dumps(body).encode(), headers, timeout=timeout_s)
-    if "message" in data:  # Ollama shape
-        return {"text": data["message"].get("content", "")}
-    choices = data.get("choices", [])  # OpenAI-compatible shape
-    return {"text": choices[0]["message"]["content"] if choices else ""}
+def _classify_http(status: int, body: str) -> str:
+    lowered = body.lower()
+    if status in {401, 403}:
+        return "auth"
+    if status == 429:
+        return "quota"
+    if "safety" in lowered or "blocked" in lowered or "refusal" in lowered:
+        return "safety"
+    if status in {408, 504}:
+        return "timeout"
+    return "transport"
+
+
+def _urllib_transport(
+    url: str,
+    headers: dict[str, str],
+    body: dict,
+    timeout_s: float,
+) -> dict:
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(body).encode("utf-8"),
+        headers=headers,
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_s) as response:
+            data = json.load(response)
+    except urllib.error.HTTPError as exc:
+        raw = exc.read(4096).decode("utf-8", errors="replace")
+        raise LLMError(_classify_http(exc.code, raw), f"provider HTTP {exc.code}") from exc
+    except (TimeoutError, socket.timeout) as exc:
+        raise LLMError("timeout", "provider request timed out") from exc
+    except (urllib.error.URLError, OSError) as exc:
+        raise LLMError("transport", "provider is unavailable") from exc
+    if "message" in data:  # Ollama response
+        return {"text": (data.get("message") or {}).get("content", "")}
+    choices = data.get("choices") or []
+    if choices and (choices[0].get("finish_reason") == "content_filter"
+                    or (choices[0].get("message") or {}).get("refusal")):
+        raise LLMError("safety", "provider declined this request")
+    return {"text": (choices[0].get("message") or {}).get("content", "") if choices else ""}
 
 
 def _extract_json(text: str) -> dict:
     try:
-        obj = json.loads(text)
-        if isinstance(obj, dict):
-            return obj
-    except ValueError:
+        value = json.loads(text)
+        if isinstance(value, dict):
+            return value
+    except (TypeError, ValueError):
         pass
+    text = str(text or "")
     start, end = text.find("{"), text.rfind("}")
     if 0 <= start < end:
-        obj = json.loads(text[start:end + 1])
-        if isinstance(obj, dict):
-            return obj
+        value = json.loads(text[start:end + 1])
+        if isinstance(value, dict):
+            return value
     raise ValueError("no JSON object in response")
 
 
-def complete_json(prompt: str, schema=None, transport=None,
-                  settings: Settings | None = None,
-                  timeout_s: float = 120) -> dict:
-    """Prompt -> validated dict. `schema`: pydantic model (optional but
-    recommended). Raises LLMError(reason=transport|bad_json|schema).
-
-    `timeout_s` is forwarded to the default HTTP transport: the request path
-    uses the 120 s default, offline batch tools (curate_pool) may pass more
-    for a small local model that needs minutes for a long JSON answer.
-    """
+def complete_json(
+    prompt: str,
+    schema=None,
+    transport=None,
+    settings: Settings | None = None,
+    timeout_s: float | None = None,
+) -> dict:
+    """Return validated JSON or raise a normalized :class:`LLMError`."""
     settings = settings or get_settings()
-    transport = transport or (
-        lambda url, headers, body: _urllib_transport(url, headers, body, timeout_s))
-    url, headers, extra = _endpoint(settings)
-    body = {**extra, "messages": [{"role": "user", "content": prompt}]}
-    last: LLMError = LLMError("transport", "no attempt made")
-    for _ in range(MAX_RETRIES + 1):
+    url, headers, provider_fields = _endpoint(settings)
+    effective_timeout = timeout_s or settings.llm_timeout_seconds
+    sender = transport or (
+        lambda target, request_headers, request_body: _urllib_transport(
+            target, request_headers, request_body, effective_timeout
+        )
+    )
+    if schema is not None and hasattr(schema, "model_json_schema"):
+        prompt += "\nReturn ONLY a JSON object matching this schema:\n" + json.dumps(
+            schema.model_json_schema(), ensure_ascii=False
+        )
+    body = {**provider_fields, "messages": [{"role": "user", "content": prompt}]}
+    last = LLMError("transport", "no attempt made")
+    for attempt in range(settings.llm_max_retries + 1):
         try:
-            text = transport(url, headers, body).get("text", "")
-        except Exception as e:  # noqa: BLE001
-            last = LLMError("transport", str(e))
-            continue
-        try:
-            obj = _extract_json(text)
-        except ValueError as e:
-            last = LLMError("bad_json", str(e))
-            continue
-        if schema is not None and BaseModel is not None and issubclass(schema, BaseModel):
-            try:
-                return schema(**obj).model_dump()
-            except ValidationError as e:
-                last = LLMError("schema", str(e))
-                continue
-        return obj
+            response = sender(url, headers, body)
+            value = _extract_json(response.get("text", ""))
+            if schema is not None and BaseModel is not None and issubclass(schema, BaseModel):
+                return schema.model_validate(value).model_dump(mode="json")
+            return value
+        except LLMError as exc:
+            last = LLMError(exc.reason, _safe_detail(exc.detail, settings))
+        except (TimeoutError, socket.timeout) as exc:
+            last = LLMError("timeout", _safe_detail(exc, settings))
+        except ValidationError:
+            last = LLMError("schema", "provider JSON did not match the schema")
+        except (ValueError, json.JSONDecodeError) as exc:
+            last = LLMError("bad_json", _safe_detail(exc, settings))
+        except Exception:  # noqa: BLE001 - provider messages can contain secrets
+            last = LLMError("transport", "provider is unavailable")
+        if last.reason not in RETRYABLE or attempt >= settings.llm_max_retries:
+            break
     raise last
+
+
+def provider_metadata(settings: Settings | None = None) -> dict:
+    """Non-secret provider information for readiness responses."""
+    settings = settings or get_settings()
+    configured = settings.llm_provider == "local" or (
+        settings.llm_provider == "gemini" and bool(settings.gemini_api_key)
+    ) or (
+        settings.llm_provider == "compatible"
+        and bool(settings.llm_api_url and settings.llm_api_key)
+    )
+    model = settings.judge_model if settings.llm_provider == "local" else settings.llm_model
+    return {
+        "provider": settings.llm_provider,
+        "model": model if settings.llm_provider != "disabled" else None,
+        "configured": bool(configured and model),
+        "external_processing": settings.llm_provider in {"gemini", "compatible"},
+    }

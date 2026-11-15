@@ -10,6 +10,7 @@ from sqlalchemy import engine_from_config, pool
 from BE.app.core.config import get_settings
 from BE.app.db.base import Base
 from BE.app.db import models  # noqa: F401 - registers metadata
+from BE.app.modules.identity import provider_models  # noqa: F401
 
 
 config = context.config
