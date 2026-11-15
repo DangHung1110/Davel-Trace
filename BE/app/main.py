@@ -1,23 +1,64 @@
 """FastAPI entry (T001 + T020, lane C). Health + routers. Error envelope
 + logging centralize in T009."""
 
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from BE.app.config import get_settings
+from BE.app.core.config import get_settings
+from BE.app.core.health import build_readiness
+from BE.app.core.logging import configure_logging
+from BE.app.core.request_context import (
+    CorrelationMiddleware,
+    get_correlation_id,
+)
 from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
 from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
+from BE.app.routers import planning_evidence as planning_evidence_router
 from BE.app.routers import replan as replan_router
+from BE.app.routers import repair as repair_router
+from BE.app.routers import review as review_router
 from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
+from BE.app.modules.identity import api as identity_api
+from BE.app.modules.identity import google_api
+from BE.app.modules.profiles import api as profiles_api
+from BE.app.modules.trips import api as trips_api
+from BE.app.modules.trips.service import TripService
+from BE.app.modules.expenses import api as persistent_expenses_api
+from BE.app.modules.catalog import api as catalog_api
+from BE.app.modules.catalog.infrastructure import load_catalog
+from BE.app.modules.routing import api as routing_api
+from BE.app.modules.planning_lifecycle import api as planning_lifecycle_api
+from BE.app.modules.ai_assistance import api as ai_assistance_api
+from BE.app.modules.routing.infrastructure import load_matrix, matrix_estimate, osrm_route
+from BE.app.modules.identity.service import IdentityError
 
+configure_logging()
+logger = logging.getLogger(__name__)
 app = FastAPI(title="Travel Agent BE")
+_startup_settings = get_settings()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_startup_settings.cors_origins,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=[
+        "Authorization",
+        "Content-Type",
+        "Idempotency-Key",
+        "X-Correlation-ID",
+    ],
+)
+app.add_middleware(CorrelationMiddleware)
 app.include_router(parse_router.router)
 app.include_router(itinerary_router.router)
 app.include_router(select_router.router)
@@ -26,6 +67,25 @@ app.include_router(expenses_router.router)
 app.include_router(weather_router.router)
 app.include_router(evaluate_router.router)
 app.include_router(scorer_router.router)
+# NOTE(test-local): semantic LLM review for the local test harness only.
+app.include_router(review_router.router)
+# NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
+app.include_router(repair_router.router)
+app.include_router(planning_evidence_router.router)
+app.include_router(identity_api.router)
+app.include_router(google_api.router)
+app.include_router(profiles_api.router)
+app.include_router(trips_api.router)
+app.include_router(persistent_expenses_api.router)
+app.state.catalog_reader = load_catalog
+app.state.matrix_reader = load_matrix
+app.state.trip_reader = TripService()
+app.state.route_provider = osrm_route
+app.state.matrix_estimator = matrix_estimate
+app.include_router(catalog_api.router)
+app.include_router(routing_api.router)
+app.include_router(planning_lifecycle_api.router)
+app.include_router(ai_assistance_api.router)
 
 
 def _validation_message(errors: list[dict]) -> str:
@@ -61,10 +121,31 @@ async def http_exception_handler(
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
+    logger.exception("unhandled request failure")
     return error("INTERNAL_ERROR", "loi noi bo", 500)
+
+
+@app.exception_handler(IdentityError)
+async def identity_error_handler(request: Request, exc: IdentityError):
+    return identity_api.identity_error_response(exc)
 
 
 @app.get("/v1/health")
 def health() -> dict:
     settings = get_settings()
-    return {"status": "ok", "snapshot": settings.snapshot_name}
+    return {
+        "status": "ok",
+        "snapshot": settings.snapshot_name,
+        "correlation_id": get_correlation_id(),
+    }
+
+
+@app.get("/v1/ready")
+def readiness():
+    payload = build_readiness(
+        get_settings(),
+        correlation_id=get_correlation_id(),
+    )
+    if payload["status"] != "ready":
+        return JSONResponse(payload, status_code=503)
+    return payload

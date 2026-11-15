@@ -26,6 +26,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.ml.patm.make_pairs import (  # noqa: E402
     build_rule_pairs,
+    drop_self_contradictions,
     label_ordered,
     leave_poi_out_split,
     load_pois,
@@ -79,6 +80,29 @@ class TestPATM(unittest.TestCase):
     @unittest.skip("needs T029 model.txt (trained ranker) — rule scorer tested above")
     def test_model_accuracy_gate(self):
         pass
+
+
+class TestSelfContradictions(unittest.TestCase):
+    @staticmethod
+    def row(first, second, label, source="llm"):
+        return {"first_id": first, "second_id": second, "label": label, "source": source}
+
+    def test_an_answer_that_follows_the_question_order_is_dropped(self):
+        pairs = [self.row("a", "b", 1), self.row("b", "a", 1)]
+        self.assertEqual(drop_self_contradictions(pairs), ([], 1))
+
+    def test_a_tie_against_a_decision_is_dropped(self):
+        pairs = [self.row("a", "b", 0), self.row("b", "a", -1)]
+        self.assertEqual(drop_self_contradictions(pairs), ([], 1))
+
+    def test_consistent_answers_stay(self):
+        for pairs in ([self.row("a", "b", 1), self.row("b", "a", -1)],
+                      [self.row("a", "b", 0), self.row("b", "a", 0)]):
+            self.assertEqual(drop_self_contradictions(pairs), (pairs, 0))
+
+    def test_a_pair_asked_once_and_other_sources_stay(self):
+        pairs = [self.row("a", "b", 1), self.row("c", "d", 1, "rule"), self.row("d", "c", 1, "human")]
+        self.assertEqual(drop_self_contradictions(pairs), (pairs, 0))
 
 
 if __name__ == "__main__":

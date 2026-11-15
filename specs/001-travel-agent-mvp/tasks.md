@@ -82,12 +82,12 @@ description: "Task list for Personalized Travel Agent MVP"
 **Goal**: Transition scoring (rule nấc-1 → LightGBM nấc-2) + precedence constraints
 **Independent Test**: hiking→beach outscores beach→hiking; pairwise accuracy ≥70%
 
-- [X] T026 [P] [US3] Transition feature extractor, 16 features (`BE/ml/patm/features.py`)
+- [X] T026 [P] [US3] Transition feature extractor, 21 features (includes T062/T063b exposure features) (`BE/ml/patm/features.py`)
 - [X] T027 [P] [US3] Rule scorer nấc-1 (`BE/ml/patm/rule_score.py`) + unit test
-- [X] T028 [US3] Pair dataset builder: DONE v4 2026-10-17 — 2151 pairs (1000 rule + 973 Qwen3-8B + 178 human), snapshot 764, swap-check clean, leave-POI-out no-leak (pairs: C:/tmp/pairs_v4.json)
-- [X] T029 [US3] LightGBM RankNet trainer: DONE v4 2026-10-17 — CV 0.793 / held 0.777 / flip 0.728, model.txt + MODEL_CARD.md (depends on T028)
+- [X] T028 [US3] Pair dataset builder: reconciled final snapshot — 2,028 pairs (944 rule + 934 LLM-judge + 150 human distinct comparisons), snapshot 742; 123 rows for removed POIs excluded; versioned at `BE/ml/patm/pairs_v4_final.json`.
+- [X] T029 [US3] LightGBM RankNet trainer: v5, 21 features — pair-group CV 0.770 / held 0.773 (n=335) / flip 0.776; see `BE/ml/patm/MODEL_CARD.md` (depends on T028)
 - [X] T030 [US3] FastAPI scorer + precedence wiring into optimizer (`q_ij` edge weights, W_A+s_A≤W_B) (depends on T017, T029)
-- [X] T031 [US3] PATM eval: DONE v4 2026-10-17 — leave-POI-out train 1371/eval 805 (0 leak), held 0.777, flip 0.728; eval code = make_pairs --check + train.py report (in `BE/tests/unit/test_patm.py` viết test cố định sau)
+- [X] T031 [US3] PATM eval: POI-disjoint evaluation implemented in `BE/ml/patm/evaluate.py`; seed 7 human blind subset 29/36 decisive correct (0.806) vs rule 21/36 (0.583), with 10 ties reported separately. Descriptive only: human holdout is small; see `BE/ml/patm/lpo_metrics.json`.
 
 **Checkpoint**: US3 pipeline scores transitions; optimizer prefers preference order when feasible
 

@@ -1,0 +1,4429 @@
+[
+  {
+    "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
+    "name": "Nhà Vọng Cảnh",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.1351089,
+    "lon": 108.24537579999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
+    "name": "Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.055193,
+    "lon": 108.223694,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=outdoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit outdoor does not encode rain protection",
+      "ambiguous name keyword(s) cho dem ignored"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
+    "name": "Chợ đêm Helio - B. Night Market",
+    "type": "Chợ đêm",
+    "lat": 16.037223,
+    "lon": 108.2245568,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=outdoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit outdoor does not encode rain protection",
+      "ambiguous name keyword(s) market, cho dem ignored"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
+    "name": "Di tích Thành Điện Hải",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.0761821,
+    "lon": 108.22163019999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=outdoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit outdoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
+    "name": "Chợ Khuê Mỹ",
+    "type": "Chợ",
+    "lat": 16.0250457,
+    "lon": 108.24836409999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
+    "name": "F29 Golden Beef & Sky Bar",
+    "type": "Nhà hàng Pháp",
+    "lat": 16.0978264,
+    "lon": 108.2245057,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
+    "name": "Quán Tuấn Núi (Heo bản - Gà đen)",
+    "type": "Nhà hàng",
+    "lat": 16.0735947,
+    "lon": 108.15756929999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+    "name": "Chợ Non Nước",
+    "type": "Chợ",
+    "lat": 15.9952107,
+    "lon": 108.257204,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJP1Uz6i0ZQjERfy-rpM1cGWc",
+    "name": "Nhà hàng NHÀ BẾP CHỢ HÀN",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.0687376,
+    "lon": 108.22433749999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJZ6w1fJgZQjERP9-_TlpgQXM",
+    "name": "Lagoon Rooftop - Dragon Bridge Fire Show",
+    "type": "Quán bar",
+    "lat": 16.060461699999998,
+    "lon": 108.23142159999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJZQZGM-MZQjERm_6vbq_fWzo",
+    "name": "NYX Sky Lounge & Mixology",
+    "type": "Quán bar",
+    "lat": 16.0661803,
+    "lon": 108.2244388,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
+    "name": "BlackOut Rooftop Bar",
+    "type": "Quán bar",
+    "lat": 16.0807577,
+    "lon": 108.246822,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+    "name": "Khu Ẩm Thực Chợ Cồn -식사 공간",
+    "type": "Trung tâm mua sắm",
+    "lat": 16.0678356,
+    "lon": 108.21490759999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJgaVvkV0XQjERNZYSVEJS_Xo",
+    "name": "Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers",
+    "type": "Quán bar",
+    "lat": 16.0496805,
+    "lon": 108.24775269999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
+    "name": "Chợ Hoà Mỹ",
+    "type": "Chợ",
+    "lat": 16.0586913,
+    "lon": 108.16977639999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
+    "name": "Quán Hải sản Tân Trà Beach",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 15.989203999999999,
+    "lon": 108.27714019999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJsztPMVkXQjERooynSorot-0",
+    "name": "Blue Sky Bar",
+    "type": "Quán bar",
+    "lat": 16.0478325,
+    "lon": 108.2454643,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
+    "name": "Chợ Cồn",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.0677927,
+    "lon": 108.21448339999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
+    "name": "My Casa",
+    "type": "Nhà hàng ý",
+    "lat": 16.0717751,
+    "lon": 108.24275469999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=indoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit indoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "osm:node/4005611262",
+    "name": "Đền thờ Tiền Hiền làng Lổ Giang",
+    "type": "Cơ sở thờ tự",
+    "lat": 15.9976102,
+    "lon": 108.2121686,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=outdoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit outdoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "osm:node/4005611263",
+    "name": "Đình Lổ Giáng",
+    "type": "Cơ sở thờ tự",
+    "lat": 15.9982955,
+    "lon": 108.2124711,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "audit",
+    "space_confidence": 1.0,
+    "space_evidence": [
+      "audit=outdoor (human audit wins)"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "audit outdoor does not encode rain protection"
+    ],
+    "space_conflict": true
+  },
+  {
+    "poi_id": "ChIJsSD2e3kfQjER2d_jnMVrKZ4",
+    "name": "Quán nhậu A bảy",
+    "type": "Quán bia",
+    "lat": 16.0905284,
+    "lon": 108.11396119999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY",
+    "name": "The Ocean Villas",
+    "type": "Khách sạn nghỉ dưỡng",
+    "lat": 15.9744903,
+    "lon": 108.2801621,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=lodging -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJu2GuJRIXQjERzmEF0pBtsgM",
+    "name": "Mì Quảng Bà Vị - Võ Văn Kiệt",
+    "type": "Quán mì",
+    "lat": 16.0625581,
+    "lon": 108.2373329,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJu557PTwYQjERu1jlhJR4LEU",
+    "name": "New Phương Đông Club",
+    "type": "Quán bar",
+    "lat": 16.0825316,
+    "lon": 108.2209614,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=bar -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJu9TGuzEZQjERolkiV2-wyQQ",
+    "name": "Massage Khiếm Thị Mai Liên",
+    "type": "Bác sĩ trị liệu xoa bóp",
+    "lat": 16.0719571,
+    "lon": 108.147515,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=spa -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJvcXagjAYQjERCEguUGaxfEc",
+    "name": "LIBRE",
+    "type": "Quán bar",
+    "lat": 16.0726704,
+    "lon": 108.2210485,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=bar -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJvyd5GLEZQjERZgKsgMmnnkM",
+    "name": "Điểm Nóng+ Eat, Drink & Music",
+    "type": "Hộp đêm",
+    "lat": 16.0573808,
+    "lon": 108.2069542,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=bar -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJwYDU9ZwZQjERwliWFVsHlfw",
+    "name": "Mì Quảng Huệ",
+    "type": "Quán mì",
+    "lat": 16.0446941,
+    "lon": 108.21659059999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
+    "name": "Biển Rạng Sơn Trà",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.090621,
+    "lon": 108.2499868,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJx3fy4TgZQjER5y-HN2wBNl4",
+    "name": "Navy Lounge",
+    "type": "Quán bar cocktail",
+    "lat": 16.0707602,
+    "lon": 108.23560619999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=bar -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJx6-KGnIXQjER7x-T0zeOlBw",
+    "name": "Mộc quán Seafood Đà Nẵng",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.0640292,
+    "lon": 108.2415578,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJxQEDEgAZQjERJtu-CtBIya8",
+    "name": "PHỐ NƯỚNG ( Trần Triệu Luật - Liên Chiểu)",
+    "type": "Nhà hàng món nướng",
+    "lat": 16.069465,
+    "lon": 108.15884709999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJxwczMkkXQjERoo3KDb0ZQKE",
+    "name": "Hải Sản A SÂM",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.1033874,
+    "lon": 108.2565599,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
+    "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH",
+    "type": "Cửa hàng bán thực phẩm đặc sản",
+    "lat": 16.065733599999998,
+    "lon": 108.16955039999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
+    "name": "Sun World Bà Nà Hills",
+    "type": "Công viên giải trí",
+    "lat": 16.0265625,
+    "lon": 108.03281249999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cong vien) -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
+    "name": "Section 30",
+    "type": "Quán rượu",
+    "lat": 16.051266,
+    "lon": 108.24619179999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=bar -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8",
+    "name": "Thiền Viện Bồ Đề",
+    "type": "Chùa phật giáo",
+    "lat": 16.0654698,
+    "lon": 108.1725438,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (chua) -> both (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
+    "name": "Hải sản tươi sống Bà Rô",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.1066342,
+    "lon": 108.25797229999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
+    "name": "Trà Sơn Quán",
+    "type": "Nhà hàng",
+    "lat": 16.1072305,
+    "lon": 108.2525349,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+    "name": "Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường",
+    "type": "Quán ăn nhỏ",
+    "lat": 16.0161901,
+    "lon": 108.20484259999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=restaurant -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "manual:cu-lao-cham",
+    "name": "Cù Lao Chàm",
+    "type": "Đảo du lịch",
+    "lat": 15.9508587,
+    "lon": 108.5227203,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (dao) -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "manual:smile-goods-danang",
+    "name": "Smile Goods Danang",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0525749,
+    "lon": 108.2025122,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "manual:vinwonders-nam-hoi-an",
+    "name": "VinWonders Nam Hội An",
+    "type": "Công viên giải trí",
+    "lat": 15.7887796,
+    "lon": 108.4107881,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cong vien) -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/11427582964",
+    "name": "Thai Market",
+    "type": "Chợ",
+    "lat": 15.9963119,
+    "lon": 107.9889349,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cho) -> both (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "ambiguous name keyword(s) market ignored"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/12811972501",
+    "name": "Mart Souvenir",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.052254,
+    "lon": 108.247414,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/13293564930",
+    "name": "Himawari",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.063498,
+    "lon": 108.2315886,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/14045110791",
+    "name": "Lucky Retail",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0560017,
+    "lon": 108.2021613,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/14045130739",
+    "name": "Made in Vietnam",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0556406,
+    "lon": 108.2022206,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/14045144381",
+    "name": "Viet Nam's Delights",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0558021,
+    "lon": 108.2022075,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/2093848429",
+    "name": "Kim Sơn",
+    "type": "Đỉnh núi",
+    "lat": 15.9997446,
+    "lon": 108.2562213,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=nature -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/2093848431",
+    "name": "Mộc Sơn",
+    "type": "Đỉnh núi",
+    "lat": 16.0000029,
+    "lon": 108.2621751,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=nature -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/2093848443",
+    "name": "Thổ Sơn",
+    "type": "Đỉnh núi",
+    "lat": 16.0047612,
+    "lon": 108.255928,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=nature -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/4706189591",
+    "name": "To Quoc Ghi Cong",
+    "type": "Tượng đài",
+    "lat": 16.023789,
+    "lon": 108.2477299,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (tuong dai, tuong) -> outdoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/7095169369",
+    "name": "Non La",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0857055,
+    "lon": 108.2194606,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/7477670190",
+    "name": "노니판매점",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0894666,
+    "lon": 108.2394816,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/8883385553",
+    "name": "TASY STUDIO",
+    "type": "Phòng trưng bày",
+    "lat": 15.9256934,
+    "lon": 108.2939032,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical cat=museum -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/9921282483",
+    "name": "Viet Nam's Delights",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0529199,
+    "lon": 108.2024664,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "osm:node/9921315929",
+    "name": "Lưu Niệm - Đặc Sản",
+    "type": "Cửa hàng quà lưu niệm",
+    "lat": 16.0526672,
+    "lon": 108.2025006,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "canonical",
+    "space_confidence": 0.4,
+    "space_evidence": [
+      "canonical type/tags (cua hang) -> indoor (heuristic default) [conf 0.4, uncalibrated]"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ-WGIA80YQjER8XDqSVShrOE",
+    "name": "Quán Karaoke Smile Idol",
+    "type": "Quán bar karaoke",
+    "lat": 16.0845445,
+    "lon": 108.1454222,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) karaoke"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
+    "name": "Chùa Quán Thế Âm",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 15.9987511,
+    "lon": 108.2551427,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ-wZaJ2QZQjERhmDzz7BMz5g",
+    "name": "Khâu.cà phê",
+    "type": "Quán cà phê",
+    "lat": 16.0634429,
+    "lon": 108.2187969,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) ca phe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
+    "name": "Karaoke Song Ca",
+    "type": "Quán bar karaoke",
+    "lat": 16.053396,
+    "lon": 108.2391255,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) karaoke beat descriptive outdoor keyword(s) song -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ03jTTgAXQjERpVQunmJHv2c",
+    "name": "Sontra Sea Hotel",
+    "type": "Khách sạn",
+    "lat": 16.0994982,
+    "lon": 108.2546497,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ076jrJZFj0QRKwm40qhwBWA",
+    "name": "Julius Spa & Massage",
+    "type": "Spa",
+    "lat": 16.0505063,
+    "lon": 108.24451309999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
+    "name": "Tiệm Cafe Thổ - Cà Phê Ngon & Yên Tĩnh Ngũ Hành Sơn",
+    "type": "Quán cà phê",
+    "lat": 16.0067292,
+    "lon": 108.24254069999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe, ca phe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
+    "name": "Non Nuoc Stone Carving Memory Museum Da Nang City",
+    "type": "Bảo tàng",
+    "lat": 16.0037449,
+    "lon": 108.26608309999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) museum"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
+    "name": "Quán Hải Sản Thời Cổ Đà Nẵng - Seafood Restaurant",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.0438626,
+    "lon": 108.2473136,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) restaurant"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ1dsj5MQZQjERbgyzx94Lv20",
+    "name": "Alpha Medical Skin - Clinic & Spa",
+    "type": "Spa y tế",
+    "lat": 16.0744948,
+    "lon": 108.14952989999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ20P_fAANQjERgFeFcOB6MAs",
+    "name": "Điểm đón khách du lịch thuyền thúng cầu Hói Lăng",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 15.8749556,
+    "lon": 108.3726703,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) cau, thuyen, lang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ27_WHYQXQjERfwDksZnfqKM",
+    "name": "TGT BEACH HOTEL",
+    "type": "Khách sạn",
+    "lat": 16.068756,
+    "lon": 108.24383999999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
+    "name": "The Long Bar at InterContinental Danang",
+    "type": "Quán bar",
+    "lat": 16.1226269,
+    "lon": 108.30719049999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ2XROb6EZQjERoqg1HHvwj88",
+    "name": "Cafe Ý Liên",
+    "type": "Quán cà phê",
+    "lat": 16.047286,
+    "lon": 108.16563099999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ2exBne0ZQjERj07NR6zFg4c",
+    "name": "MÊ Ê Ê Beer Garden - 316 Hà Huy Tập",
+    "type": "Quán bia",
+    "lat": 16.0599562,
+    "lon": 108.18746929999999,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) beer garden -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ2yr5edIYQjER5_9326fLFA0",
+    "name": "Cafe The Light",
+    "type": "Quán cà phê",
+    "lat": 16.081595699999998,
+    "lon": 108.1466846,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
+    "name": "Chợ Chiều",
+    "type": "Chợ",
+    "lat": 16.0918092,
+    "lon": 108.2442679,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ37FbsJgZQjERQho2DqSzX_Y",
+    "name": "Châu Nhi Spa & Massage",
+    "type": "Spa mát xa",
+    "lat": 16.0640715,
+    "lon": 108.2416713,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ3S-Eo0sYQjERo9MhApUI4WQ",
+    "name": "Nhà thờ Chính Trạch",
+    "type": "Nhà thờ Công giáo",
+    "lat": 16.0684145,
+    "lon": 108.2098224,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) nha tho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
+    "name": "Vân Anh beauty spa",
+    "type": "Spa",
+    "lat": 16.0699649,
+    "lon": 108.14628499999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ3xT1QS4ZQjER8qV4HPop8io",
+    "name": "Nhà Hàng Chay Phúc An",
+    "type": "Nhà hàng",
+    "lat": 16.0737281,
+    "lon": 108.2032435,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ3zTSR1UYQjERxzlJpa-DNHE",
+    "name": "Karaoke Sao Mai",
+    "type": "Quán bar karaoke",
+    "lat": 16.0674997,
+    "lon": 108.1917101,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) karaoke"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ46gfxSkZQjERgT9OU08ssF4",
+    "name": "Spa Hồng Hạnh",
+    "type": "Spa",
+    "lat": 16.0693512,
+    "lon": 108.1508502,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ4Z8gV3cfQjERHH6fTdzj0E8",
+    "name": "Tiệm cafe Túi Thương Nhớ",
+    "type": "Quán cà phê",
+    "lat": 16.0807952,
+    "lon": 108.1078517,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
+    "name": "Cửa hàng Đặc sản Biển Đà Nẵng",
+    "type": "Cửa hàng bán thực phẩm đặc sản",
+    "lat": 16.0559312,
+    "lon": 108.2082236,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cua hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
+    "name": "Bãi biển Mỹ Khê",
+    "type": "Bãi biển",
+    "lat": 16.0616944,
+    "lon": 108.24693459999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) bai bien, bai"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
+    "name": "Chợ Khái Tây",
+    "type": "Chợ",
+    "lat": 15.9705742,
+    "lon": 108.2343764,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10",
+    "name": "Nhung Spa Trị Liệu",
+    "type": "Spa",
+    "lat": 16.0700563,
+    "lon": 108.14483279999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ5YNM8KoZQjERT-e5n84Og1E",
+    "name": "Cà phê Giao Mùa",
+    "type": "Quán cà phê",
+    "lat": 16.065012499999998,
+    "lon": 108.1926361,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) ca phe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ5xGrdQAXQjERUKN8BeMLPJo",
+    "name": "Spa gội đầu - Tiệm nhà Ngân",
+    "type": "Spa",
+    "lat": 16.017037,
+    "lon": 108.2528317,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
+    "name": "Bến Du Thuyền Sông Hàn",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.0503975,
+    "lon": 108.2239238,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) song, du thuyen, thuyen, ben"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ66onuEIZQjERJcc014sju08",
+    "name": "Rice' Spa &Nails",
+    "type": "Thẩm mỹ viện",
+    "lat": 16.0700487,
+    "lon": 108.14317349999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ67sbOfwZQjERNfKPIKkEdyw",
+    "name": "La Maison Des Délices Hotel & Apartment",
+    "type": "Lưu trú nhà dân",
+    "lat": 16.0547272,
+    "lon": 108.2057938,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ6ToOeVYYQjERj8BHGr6OZzc",
+    "name": "Khách Sạn Huy Hoàng",
+    "type": "Khách sạn",
+    "lat": 16.0720435,
+    "lon": 108.1941918,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) khach san"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q",
+    "name": "Àla Cafe Roaster",
+    "type": "Quán cà phê",
+    "lat": 16.0736498,
+    "lon": 108.221785,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
+    "name": "Herbal Spa",
+    "type": "Spa",
+    "lat": 16.069025,
+    "lon": 108.23702639999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ6e7t67oZQjERLcf4KcgElEc",
+    "name": "Maju Top Class Bar - lounge",
+    "type": "Quán bar tiếp viên nữ",
+    "lat": 16.0756281,
+    "lon": 108.2206077,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
+    "name": "Nguyên Café",
+    "type": "Quán cà phê",
+    "lat": 16.0111824,
+    "lon": 108.24298739999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
+    "name": "Regal Healthy Spa",
+    "type": "Spa mát xa",
+    "lat": 16.0528111,
+    "lon": 108.2459105,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ767Qs08YQjERaSc6TDUM4WQ",
+    "name": "Tan Hoang Long Hotel",
+    "type": "Khách sạn",
+    "lat": 16.072549,
+    "lon": 108.19982429999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
+    "name": "Bảo tàng Mỹ thuật Đà Nẵng",
+    "type": "Bảo tàng nghệ thuật",
+    "lat": 16.071302199999998,
+    "lon": 108.2177205,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bao tang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
+    "name": "SC Restaurant & Bar",
+    "type": "Nhà hàng cơm",
+    "lat": 16.002406699999998,
+    "lon": 108.2659644,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) restaurant, bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+    "name": "N Pub",
+    "type": "Quán bar",
+    "lat": 16.050733,
+    "lon": 108.24419359999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) pub"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
+    "name": "XLIII Specialty Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.048087199999998,
+    "lon": 108.24602329999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
+    "name": "Rosa Spa & Massage Da Nang",
+    "type": "Spa",
+    "lat": 16.0537034,
+    "lon": 108.2381547,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
+    "name": "Bảo Tàng Văn Hóa Phật Giáo",
+    "type": "Bảo tàng",
+    "lat": 15.998929299999999,
+    "lon": 108.2547934,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bao tang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM",
+    "name": "Minh Toan SAFI Ocean Hotel",
+    "type": "Khách sạn",
+    "lat": 16.0669592,
+    "lon": 108.2449362,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
+    "name": "Nhà hàng hải sản .",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.085448,
+    "lon": 108.221003,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
+    "name": "Danang Summer Cooking and Coffee Class",
+    "type": "Lớp học nấu ăn",
+    "lat": 16.0559425,
+    "lon": 108.2368906,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
+    "name": "Huyen Khong Cave",
+    "type": "Điện thờ",
+    "lat": 16.0042813,
+    "lon": 108.262067,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) cave"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
+    "name": "Nhà hàng Hai Cử",
+    "type": "Nhà hàng",
+    "lat": 16.065718999999998,
+    "lon": 108.2225285,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+    "name": "Elsa Spa massage Da Nang ( 엘사 스파 )",
+    "type": "Spa",
+    "lat": 16.0682072,
+    "lon": 108.2232724,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
+    "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+    "type": "Spa",
+    "lat": 16.0707073,
+    "lon": 108.1444408,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ9--6uKYZQjER5hS7ybSadkc",
+    "name": "Ocean Star Hotel Danang Bay",
+    "type": "Khách sạn",
+    "lat": 16.0724482,
+    "lon": 108.2010973,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
+    "name": "Q&B Luxury Spa – Massage & Sauna Đà Nẵng",
+    "type": "Spa",
+    "lat": 16.048352899999998,
+    "lon": 108.24229919999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
+    "name": "Trạm spa- nặn mụn",
+    "type": "Spa",
+    "lat": 16.0727072,
+    "lon": 108.17803459999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
+    "name": "OANI SPA",
+    "type": "Spa",
+    "lat": 16.0548417,
+    "lon": 108.24545069999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ9ZTWZwAXQjERn99h6ziS_2c",
+    "name": "Lotus Bloom Spa & Massage",
+    "type": "Spa sức khỏe",
+    "lat": 16.085010099999998,
+    "lon": 108.2458868,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ9Zlonv0YQjERUTfuOADyciU",
+    "name": "Cafe cóc kênh",
+    "type": "Quán cà phê",
+    "lat": 16.068645399999998,
+    "lon": 108.1815469,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
+    "name": "Chùa Minh Phước",
+    "type": "Chùa phật giáo",
+    "lat": 16.066081,
+    "lon": 108.1537408,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJ9wcVkY0ZQjERC4hzT7DwUcg",
+    "name": "Mộc Thanh Spa",
+    "type": "Spa sức khỏe",
+    "lat": 16.0653204,
+    "lon": 108.1929042,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
+    "name": "The Sense Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.037240399999998,
+    "lon": 108.24706859999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJA0bFwKoZQjER--pX5_3_cD0",
+    "name": "Tú Chợ đêm",
+    "type": "Nhà hàng",
+    "lat": 16.0683088,
+    "lon": 108.1490164,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "ambiguous name keyword(s) cho dem ignored"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJA8a2aLcQQjER5mciBxvjUVs",
+    "name": "Chùa Long Hoa",
+    "type": "Chùa phật giáo",
+    "lat": 16.005235199999998,
+    "lon": 108.2573611,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJASjStc0ZQjERf8hQfCEJ8JA",
+    "name": "Chùa An Long",
+    "type": "Chùa phật giáo",
+    "lat": 16.0597945,
+    "lon": 108.223266,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAUbRW8wZQjERf0sgTLr3Odo",
+    "name": "Mercury Boutique Hotel Danang",
+    "type": "Khách sạn",
+    "lat": 16.0604211,
+    "lon": 108.21585999999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAWgMydkZQjER-MpvKFLjoqs",
+    "name": "Tiệm cà phê Cậu Út",
+    "type": "Quán cà phê",
+    "lat": 16.0639814,
+    "lon": 108.22240719999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) ca phe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAXvSo5EZQjERNYmexlgFouI",
+    "name": "Lychee Hotel",
+    "type": "Khách sạn",
+    "lat": 16.0757863,
+    "lon": 108.2068695,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAZKjQVIZQjERmZdYEcKV5Go",
+    "name": "DƯƠNG THÙY SPA - Thanh Khê",
+    "type": "Spa mặt",
+    "lat": 16.0507372,
+    "lon": 108.1852693,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+    "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang",
+    "type": "Lớp học nấu ăn",
+    "lat": 16.0193914,
+    "lon": 108.24933879999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
+    "name": "Chợ Đêm Sơn Trà",
+    "type": "Chợ",
+    "lat": 16.0608125,
+    "lon": 108.23168749999999,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "ambiguous name keyword(s) cho dem ignored"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
+    "name": "L STAND COFFEE AND TEA",
+    "type": "Quán cà phê espresso",
+    "lat": 16.0510047,
+    "lon": 108.2440147,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJBSN7ys4XQjERD_WWhQb2XXk",
+    "name": "Sơn Trà Cà Phê (Coffee Store)",
+    "type": "Quán cà phê",
+    "lat": 16.0618446,
+    "lon": 108.2380405,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) ca phe, coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
+    "name": "Cửa hàng Đặc Sản Đà Nẵng Làm Quà",
+    "type": "Cửa hàng bán thực phẩm đặc sản",
+    "lat": 16.055322099999998,
+    "lon": 108.24471829999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cua hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJBTwySgAZQjERS5kel5Caf00",
+    "name": "Hội Vũ Spa",
+    "type": "Spa",
+    "lat": 16.067127199999998,
+    "lon": 108.19160939999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
+    "name": "Chợ Hòa Liên",
+    "type": "Chợ",
+    "lat": 16.0793446,
+    "lon": 108.0981886,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJC1S7VAAZQjERFItFlyewDHY",
+    "name": "Glow Spa Thanh Khê",
+    "type": "Spa",
+    "lat": 16.0581662,
+    "lon": 108.21259119999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJCQlahDsZQjER9ON_UbUNqiQ",
+    "name": "An Garden.Coffee & Tea",
+    "type": "Quán cà phê",
+    "lat": 16.074807,
+    "lon": 108.15964729999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+    "name": "Chùa Linh Ứng - Bà Nà",
+    "type": "Chùa phật giáo",
+    "lat": 15.9971357,
+    "lon": 107.99404419999999,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJCc2lfXgZQjERSUvZYj3RsMw",
+    "name": "Hotel Hồng Phúc 2",
+    "type": "Khách sạn",
+    "lat": 16.0729897,
+    "lon": 108.1882152,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJCd3q4FQXQjERF640iRTpb7I",
+    "name": "Mystery Bar & Lounge",
+    "type": "Quán bar",
+    "lat": 16.0687551,
+    "lon": 108.24229229999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+    "name": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
+    "type": "Chùa phật giáo",
+    "lat": 16.0418826,
+    "lon": 108.14825359999999,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
+    "name": "Công Viên Trung Tâm Hành Chính Liên Chiểu",
+    "type": "Công viên",
+    "lat": 16.0720506,
+    "lon": 108.15939519999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) cong vien"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
+    "name": "KARAOKE CAMEL 2",
+    "type": "Quán bar karaoke",
+    "lat": 16.067663,
+    "lon": 108.1916035,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) karaoke"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJDYfSGZYZQjERmSERKl2Fj7E",
+    "name": "Hidden Oasis Homestay",
+    "type": "Khách sạn",
+    "lat": 16.0695637,
+    "lon": 108.18447979999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) homestay"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
+    "name": "Da Nang Mikazuki Japanese Resorts & Spa",
+    "type": "Khách sạn",
+    "lat": 16.0934007,
+    "lon": 108.14468749999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA",
+    "name": "Chợ Hàn",
+    "type": "Chợ truyền thống",
+    "lat": 16.068083599999998,
+    "lon": 108.224069,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q",
+    "name": "Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng",
+    "type": "Quán cà phê",
+    "lat": 16.087381099999998,
+    "lon": 108.2390648,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJE5-utYgXQjERgi6BGTJ5WEI",
+    "name": "Wind Garden Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.074512,
+    "lon": 108.2434614,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEUTpMwAZQjER2orvyJWXVYo",
+    "name": "Cá Hồi Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.066334899999998,
+    "lon": 108.2199057,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
+    "name": "HAPPY SPA",
+    "type": "Spa",
+    "lat": 16.080594599999998,
+    "lon": 108.2454566,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEXMOHVMXQjER479UZE7C59c",
+    "name": "BAR FLOW Danang",
+    "type": "Quán bar cocktail",
+    "lat": 16.0587295,
+    "lon": 108.24343689999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
+    "name": "Bãi tắm hàng dừa Mỹ Khê",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.042512,
+    "lon": 108.25170879999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) bai tam, bai"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
+    "name": "Acacia by CaySi cafe",
+    "type": "Quán cà phê",
+    "lat": 16.0740525,
+    "lon": 108.24192579999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI",
+    "name": "Chùa Bát Nhã",
+    "type": "Chùa phật giáo",
+    "lat": 16.0615456,
+    "lon": 108.2166688,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEwAAALAZQjERyXCN5eSBt1Q",
+    "name": "Jang Mi Spa & Massage",
+    "type": "Spa mát xa",
+    "lat": 16.068642099999998,
+    "lon": 108.24167899999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEyLB68sQQjER7FTfkhV0_MY",
+    "name": "Danang Marriott Resort & Spa",
+    "type": "Khách sạn",
+    "lat": 16.0069561,
+    "lon": 108.26609619999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) resort, spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
+    "name": "Bảo Tàng Đà Nẵng",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.074554199999998,
+    "lon": 108.2239668,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bao tang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJF2lrSYgXQjERKBBhFKYlhkg",
+    "name": "Sofia Local Restaurant Danang – Việt Cuisine",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.0704992,
+    "lon": 108.24221779999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) restaurant"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJFVqYCKsZQjERv29XM5331mU",
+    "name": "Nhà Mình Spa cơ sở 2 462 Điện Biên Phủ",
+    "type": "Spa",
+    "lat": 16.0659959,
+    "lon": 108.1879185,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJFXRrR0wZQjERNl4jMD9QNFI",
+    "name": "Blues Q Coffee and Craft Beer Garden ( Bia thủ công)",
+    "type": "Quán bia sân vườn",
+    "lat": 16.0617572,
+    "lon": 108.1739539,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) beer garden -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
+    "name": "Tượng đài Mẹ Nhu",
+    "type": "Địa điểm lịch sử",
+    "lat": 16.0652433,
+    "lon": 108.1833896,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) tuong dai, tuong"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJFawIPfcXQjERz77xoR3B6Ag",
+    "name": "Nhà hàng Ngon Thị Hoa",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.048904399999998,
+    "lon": 108.2458626,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJG1WCi2UXQjER9CxEvEOoEpw",
+    "name": "Malibu Beach Club",
+    "type": "Quán bar",
+    "lat": 16.073864699999998,
+    "lon": 108.24612809999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) beach"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJG9IOepAXQjER3x9UnxFxJ7w",
+    "name": "Húa Hạ Lương Tử Spa – Massage & Foot Spa Da Nang",
+    "type": "Spa mát xa",
+    "lat": 16.0622743,
+    "lon": 108.2419848,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
+    "name": "Khu du lịch Bến Nam Yên",
+    "type": "Khu cắm trại",
+    "lat": 16.1377247,
+    "lon": 108.03805109999999,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) ben"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover",
+      "ambiguous name keyword(s) khu du lich ignored"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJH1TU7PsYQjER-jhAtZLdLMc",
+    "name": "Bonjour Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.073940099999998,
+    "lon": 108.182912,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
+    "name": "Nhà hàng Phú Mỹ Thành",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.0763618,
+    "lon": 108.2074803,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+    "name": "Chùa Linh Ứng - Bãi Bụt Sơn Trà",
+    "type": "Chùa phật giáo",
+    "lat": 16.100205499999998,
+    "lon": 108.2778816,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
+    "name": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )",
+    "type": "Nhà hàng Hàn Quốc",
+    "lat": 16.071877699999998,
+    "lon": 108.2429186,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
+    "name": "Bãi tắm Sao Biển",
+    "type": "Câu lạc bộ bãi biển",
+    "lat": 16.047601099999998,
+    "lon": 108.2502222,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) bai tam, bai"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
+    "name": "Nhà Hàng Bảo Châu",
+    "type": "Nhà hàng",
+    "lat": 16.064830999999998,
+    "lon": 108.2237268,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
+    "name": "Babylon Spa - Massage Da Nang",
+    "type": "Spa",
+    "lat": 16.0672167,
+    "lon": 108.2441068,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
+    "name": "Nhà Hàng LÀNG HẢI SẢN",
+    "type": "Nhà hàng hải sản",
+    "lat": 16.0721599,
+    "lon": 108.1954981,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) nha hang beat descriptive outdoor keyword(s) lang -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+    "name": "Moonlight Hotel",
+    "type": "Khách sạn",
+    "lat": 16.0639225,
+    "lon": 108.21972559999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJIZrPSy8ZQjERGZsE8IgrSnk",
+    "name": "FM Garden Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.0640207,
+    "lon": 108.15347829999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJIaxebnoXQjERNETM7bT3ewg",
+    "name": "Bãi tắm T20",
+    "type": "Bãi biển",
+    "lat": 16.0398823,
+    "lon": 108.2531363,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) bai tam, bai"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJIypBnTAZQjERLPJvLObGXPc",
+    "name": "La Bonne Café Đà Nẵng",
+    "type": "Quán cà phê",
+    "lat": 16.061367,
+    "lon": 108.2194442,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJ2sLdT4YQjERi930NC-XCo0",
+    "name": "Nhà Thờ Giáo Xứ Thanh Đức",
+    "type": "Nhà thờ Công giáo",
+    "lat": 16.0844223,
+    "lon": 108.220654,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) nha tho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg",
+    "name": "A La Carte Danang Beach",
+    "type": "Khách sạn",
+    "lat": 16.0687309,
+    "lon": 108.244693,
+    "old_space": "outdoor",
+    "suggested_space": "outdoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name outdoor keyword(s) beach"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJRnwO4UXQjERO5XPs69YCmM",
+    "name": "Nón Spa - Massage, Nail, Hair Washing, Facial and Skin care",
+    "type": "Spa sức khỏe",
+    "lat": 16.048705599999998,
+    "lon": 108.24700589999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
+    "name": "Trung Nguyên Legend Café",
+    "type": "Quán cà phê",
+    "lat": 16.1032923,
+    "lon": 108.2576502,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJXm_IjoXQjERqJ9FNnjWpx8",
+    "name": "Leaf Hotel",
+    "type": "Khách sạn",
+    "lat": 16.085846099999998,
+    "lon": 108.24813879999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) hotel"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
+    "name": "Nhà thờ Thánh Giuse lao công",
+    "type": "Nhà thờ Công giáo",
+    "lat": 16.09207,
+    "lon": 108.2436149,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) nha tho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
+    "name": "Chợ hải sản tươi sống biển Thanh Khê",
+    "type": "Chợ",
+    "lat": 16.0775777,
+    "lon": 108.1747857,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) cho -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJbfHSGUXQjERRXCfzSX3s88",
+    "name": "Holiday Beach Hotel Danang",
+    "type": "Khách sạn",
+    "lat": 16.0494867,
+    "lon": 108.24870539999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
+    "name": "Nhà Hàng Cơm Niêu Nồi Đất",
+    "type": "Nhà hàng Việt Nam",
+    "lat": 16.053563,
+    "lon": 108.2463157,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) nha hang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0",
+    "name": "Meliá Danang Beach Resort",
+    "type": "Khách sạn",
+    "lat": 16.0002912,
+    "lon": 108.2690161,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) resort beat descriptive outdoor keyword(s) beach -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJK0J1RXMXQjERPPTldZI_e5c",
+    "name": "Le Funky Donkey - French Bar",
+    "type": "Quán bar",
+    "lat": 16.0476058,
+    "lon": 108.24469099999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bar"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
+    "name": "Phia Coffee & More",
+    "type": "Quán cà phê",
+    "lat": 16.0658024,
+    "lon": 108.1560741,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKZK2FcoZQjER8f6Uft81Mvg",
+    "name": "Sơn Trà Spa Massage Trị Liệu Đà Nẵng",
+    "type": "Spa",
+    "lat": 16.058043899999998,
+    "lon": 108.17661249999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJK_ogWgARQjERnLylibgoTpw",
+    "name": "Quýt Spa & More",
+    "type": "Spa sức khỏe",
+    "lat": 16.0042883,
+    "lon": 108.24069159999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) spa"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKbTF7NkZQjEReFD1hbN1Rg8",
+    "name": "Mây Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.0612031,
+    "lon": 108.18558469999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKbntMIQXQjERh50f5GwfUm4",
+    "name": "Sunview Beach Hotel",
+    "type": "Khách sạn",
+    "lat": 16.073443,
+    "lon": 108.24252589999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) hotel beat descriptive outdoor keyword(s) beach -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKcik9OQYQjERKZ21jblRTVc",
+    "name": "Chùa Thanh Hải",
+    "type": "Chùa phật giáo",
+    "lat": 16.0750787,
+    "lon": 108.1768953,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKdW4YgAfQjERF1TVangBTwY",
+    "name": "Rustic Tea & Coffee",
+    "type": "Quán cà phê",
+    "lat": 16.0785727,
+    "lon": 108.12716909999999,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) coffee"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
+    "name": "Pullman Danang Beach Resort",
+    "type": "Khách sạn nghỉ dưỡng",
+    "lat": 16.0405647,
+    "lon": 108.2500872,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name venue keyword(s) resort beat descriptive outdoor keyword(s) beach -> indoor"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJL-fQUUcZQjERK85coinuqEk",
+    "name": "Xém. Cà Phê (K1/25 Đỗ quang)",
+    "type": "Quán cà phê",
+    "lat": 16.062855,
+    "lon": 108.2127051,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) ca phe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
+    "name": "Bảo tàng Điêu khắc Chăm Đà Nẵng",
+    "type": "Điểm thu hút khách du lịch",
+    "lat": 16.0603007,
+    "lon": 108.2232677,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) bao tang"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJLX9s7EUbQjERdsy67X5-NrE",
+    "name": "Chùa Hải An Đà Nẵng",
+    "type": "Chùa phật giáo",
+    "lat": 15.9680532,
+    "lon": 108.23549919999999,
+    "old_space": "both",
+    "suggested_space": "both",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name compound keyword(s) chua -> both"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  },
+  {
+    "poi_id": "ChIJM2DzGgAZQjERp54q-gVvu-g",
+    "name": "MAI Café Flowers & More",
+    "type": "Quán cà phê",
+    "lat": 16.0673513,
+    "lon": 108.1844946,
+    "old_space": "indoor",
+    "suggested_space": "indoor",
+    "space_source": "name",
+    "space_confidence": 0.6,
+    "space_evidence": [
+      "name indoor keyword(s) cafe"
+    ],
+    "old_rain_protection": "unknown",
+    "rain_protection": "unknown",
+    "rain_protection_confidence": 0.4,
+    "rain_protection_evidence": [
+      "no linked OSM rain-protection evidence -> unknown",
+      "abstained: absent evidence is not proof of no cover"
+    ],
+    "space_conflict": false
+  }
+]

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Davel-Trace planner evidence harness</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px}
+  textarea{width:100%;height:70px} button{padding:8px 16px;margin:6px 6px 6px 0;cursor:pointer}
+  pre{background:#f4f4f5;padding:12px;border-radius:8px;overflow:auto;max-height:420px}
+  .row{display:flex;gap:16px}.row>div{flex:1}
+  .ok{color:#166534}.err{color:#b91c1c}.warn{color:#b45309}
+  table.cmp{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+  table.cmp th,table.cmp td{border:1px solid #d4d4d8;padding:6px 8px;text-align:left;vertical-align:top}
+  table.cmp th{background:#f4f4f5}
+  .review{margin:0 0 14px;padding:10px 12px;border-left:4px solid #a1a1aa;background:#fafafa}
+  .review h4{margin:0 0 6px;font-size:14px}
+  .issue{margin:4px 0}
+  .sev-high{color:#b91c1c;font-weight:600}.sev-medium{color:#b45309}.sev-low{color:#52525b}
+</style>
+</head>
+<body>
+<h2>Davel-Trace test harness (BE :8000)</h2>
+<div class="row">
+  <div>
+    <h3>1. Parse (NL → TripRequest)</h3>
+    <textarea id="txt">Toi muon di Da Nang 1 ngay, ngan sach 2 trieu, thich hai san, xuat phat 7h sang</textarea><br>
+    <button onclick="doParse()">Parse</button>
+    <pre id="parseOut">...</pre>
+  </div>
+  <div>
+    <h3>2. Weather (Da Nang live)</h3>
+    <button onclick="doWeather()">Lay thoi tiet</button>
+    <pre id="wxOut">...</pre>
+  </div>
+</div>
+<h3>3. Itinerary (TripRequest → plan)</h3>
+<button onclick="doItin(['savings'])">Tiet kiem</button>
+<button onclick="doItin(['balanced'])">Can bang</button>
+<button onclick="doItin(['experience'])">Trai nghiem</button>
+<button onclick="doItin(['savings','balanced','experience'])"><b>So sanh 3 profile</b></button>
+<button onclick="doItin(['savings','balanced','experience'], true)"><b>5 phuong an kha thi</b></button>
+<button onclick="loadReadiness()">Doc readiness</button>
+<div id="itinBox"></div>
+<pre id="itinOut">...</pre>
+<pre id="readinessOut">Readiness: chua doc</pre>
+<script>
+const BE = "http://127.0.0.1:8000";
+const PROFILE_KEY = "davel_profile";
+let lastTrip = null;
+
+// Profile từ FE/onboard.html (localStorage). Không có thì bỏ qua.
+function loadProfile(){
+  try{
+    const raw = localStorage.getItem(PROFILE_KEY);
+    if(!raw) return null;
+    const p = JSON.parse(raw);
+    return (p && typeof p === "object" && !Array.isArray(p)) ? p : null;
+  }catch(e){
+    return null;
+  }
+}
+
+async function call(path, body){
+  const r = await fetch(BE + path, {method:"POST",
+    headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+  return {status: r.status, json: await r.json()};
+}
+
+async function loadReadiness(){
+  const el = document.getElementById("readinessOut");
+  try{
+    const r = await fetch(BE + "/v1/planning/readiness");
+    const j = await r.json();
+    el.textContent = "HTTP " + r.status + "\n" + JSON.stringify(j, null, 2);
+  }catch(e){ el.textContent = "LOI readiness: " + e; }
+}
+
+async function acceptPlan(plan, target){
+  target.textContent = "dang chot...";
+  const key = "harness-" + plan.itinerary_id + "-" + Date.now();
+  try{
+    const {status, json} = await call("/v1/itinerary/select", {
+      itinerary_id: plan.itinerary_id, idempotency_key: key
+    });
+    const accepted = json.acceptance || {};
+    target.className = status === 200 ? "ok" : "err";
+    target.textContent = status === 200
+      ? "Da luu: " + (accepted.acceptance_id || "?")
+      : "HTTP " + status + ": " + (json.message || json.error || "loi");
+    await loadReadiness();
+  }catch(e){ target.className = "err"; target.textContent = "LOI: " + e; }
+}
+
+async function doParse(){
+  const el = document.getElementById("parseOut");
+  el.textContent = "dang goi LLM (qwen3-8b, co the mat 1-3 phut)...";
+  try{
+    const {status, json} = await call("/v1/parse", {text: document.getElementById("txt").value});
+    el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 4000);
+    if(json && json.city){ lastTrip = json; el.innerHTML += '\n<span class="ok">→ TripRequest OK, co the Lap lich</span>'; }
+    else if(json && json.needs_clarification){ el.innerHTML += '\n<span class="err">→ can bo sung: ' + json.needs_clarification.join(", ") + "</span>"; }
+  }catch(e){ el.textContent = "LOI: " + e; }
+}
+
+async function doWeather(){
+  const el = document.getElementById("wxOut");
+  try{
+    const r = await fetch(BE + "/v1/weather?lat=16.05&lon=108.22");
+    const j = await r.json();
+    const now = j.hourly.slice(0, 12).map(h => h.at.slice(11) + " " + h.temp_c + "C mua " + Math.round(h.rain_prob*100) + "%").join("\n");
+    el.textContent = "source: " + j.source + (j.stale ? " (STALE)" : "") + "\n" + now;
+  }catch(e){ el.textContent = "LOI: " + e; }
+}
+
+function tripFromParse(t){
+  const {city, ...rest} = t;
+  const trip = {trip_id:"t1", user_id:"u1", city, date:"2026-10-28",
+    start_time: t.start_time || "07:00", end_time: t.end_time || "18:00",
+    days: t.days || 1, travelers: t.travelers || 2,
+    budget: t.budget || 2000000, transport: t.transport || ["motorbike"],
+    must_visit: t.must_visit || [], avoid: t.avoid || [],
+    activities: t.activities || [], food_prefs: t.food_prefs || []};
+  const savedProfile = loadProfile();
+  if(savedProfile) trip.profile = savedProfile;
+  return trip;
+}
+
+function cell(text, cls){
+  const td = document.createElement("td");
+  if(cls) td.className = cls;
+  td.textContent = text;
+  return td;
+}
+
+function softSummary(soft){
+  if(!soft || !Object.keys(soft).length) return "— (cổng chưa qua)";
+  return Object.entries(soft).map(([k, v]) => k + " " + v).join(" · ");
+}
+
+async function evaluatePlan(plan, trip){
+  try{
+    const {json} = await call("/v1/evaluate", {itinerary: plan, trip});
+    return json;
+  }catch(e){
+    return {error: String(e)};
+  }
+}
+
+async function doRepair(plan, box){
+  const id = plan.itinerary_id || "";
+  let panel = document.getElementById("rp-" + id);
+  if(!panel){
+    panel = document.createElement("div");
+    panel.id = "rp-" + id;
+    panel.className = "review";
+    box.appendChild(panel);
+  }
+  panel.innerHTML = "";
+  const title = document.createElement("h4");
+  title.textContent = "Repair — " + (plan.profile || "plan") + " (LLM review + swap, tối đa 2 vòng)";
+  panel.appendChild(title);
+  const body = document.createElement("div");
+  body.textContent = "đang repair (qwen3-8b, có thể mất 1-3 phút)...";
+  panel.appendChild(body);
+  try{
+    const {status, json} = await call("/v1/repair", {itinerary_id: id});
+    body.innerHTML = "";
+    if(json.note){
+      const note = document.createElement("div");
+      note.className = "warn";
+      note.textContent = json.note + " — giữ lịch hiện tại.";
+      body.appendChild(note);
+    }
+    const head = document.createElement("div");
+    head.textContent = "rounds: " + (json.rounds != null ? json.rounds : "?")
+      + " · review_ms: " + ((json.review_ms || []).join(", ") || "—");
+    body.appendChild(head);
+
+    const repairs = json.repairs || [];
+    if(!repairs.length){
+      const none = document.createElement("div");
+      none.className = "ok";
+      none.textContent = "Không có repair nào được áp dụng.";
+      body.appendChild(none);
+    }
+    for(const rep of repairs){
+      const div = document.createElement("div");
+      div.className = "issue";
+      const flag = document.createElement("span");
+      flag.className = rep.kept ? "ok" : "sev-high";
+      flag.textContent = (rep.kept ? "[KEEP] " : "[REVERT] ");
+      div.appendChild(flag);
+      div.appendChild(document.createTextNode(rep.issue || ""));
+      const act = document.createElement("span");
+      act.className = rep.kept ? "ok" : "warn";
+      act.textContent = " → " + (rep.action || "");
+      div.appendChild(act);
+      body.appendChild(div);
+    }
+
+    const gate = json.gate || {};
+    const gateLine = document.createElement("div");
+    gateLine.className = gate.passed ? "ok" : "err";
+    gateLine.textContent = "gate: " + (gate.passed ? "PASS" : "FAIL")
+      + " · failed: " + ((gate.failed || []).join(", ") || "—")
+      + " · soft: " + ((gate.soft_failed || []).join(", ") || "—");
+    body.appendChild(gateLine);
+
+    const acts = ((json.plan && json.plan.activities) || [])
+      .map(a => a.start + "-" + a.end + " " + a.poi_id).join("\n");
+    const pre = document.createElement("pre");
+    pre.textContent = "plan sau repair:\n" + (acts || "(rong)");
+    body.appendChild(pre);
+    if(status !== 200) body.innerHTML += '<div class="err">HTTP ' + status + "</div>";
+  }catch(e){
+    body.textContent = "LOI repair: " + e;
+  }
+}
+
+async function doReview(plan, box){
+  const id = plan.itinerary_id || "";
+  let panel = document.getElementById("rv-" + id);
+  if(!panel){
+    panel = document.createElement("div");
+    panel.id = "rv-" + id;
+    panel.className = "review";
+    box.appendChild(panel);
+  }
+  panel.innerHTML = "";
+  const title = document.createElement("h4");
+  title.textContent = "Review ngữ nghĩa — " + (plan.profile || "plan") + " (qwen3-8b, có thể mất ~1 phút)";
+  panel.appendChild(title);
+  const body = document.createElement("div");
+  body.textContent = "đang review...";
+  panel.appendChild(body);
+  try{
+    const {status, json} = await call("/v1/review", {itinerary_id: id});
+    body.innerHTML = "";
+    if(json && json.note === "LLM_UNAVAILABLE"){
+      body.innerHTML = '<span class="warn">LLM_UNAVAILABLE — không có review (lịch trình vẫn dùng được)</span>';
+      return;
+    }
+    const issues = (json && json.issues) || [];
+    if(!issues.length){
+      body.innerHTML = '<span class="ok">Không thấy điểm vô lý về nghĩa.</span>';
+      return;
+    }
+    for(const it of issues){
+      const div = document.createElement("div");
+      div.className = "issue";
+      const sev = document.createElement("span");
+      sev.className = "sev-" + (it.severity || "medium");
+      sev.textContent = "[" + (it.severity || "medium") + "] ";
+      div.appendChild(sev);
+      div.appendChild(document.createTextNode(it.issue || ""));
+      if(it.suggestion){
+        const sug = document.createElement("span");
+        sug.className = "warn";
+        sug.textContent = " → " + it.suggestion;
+        div.appendChild(sug);
+      }
+      body.appendChild(div);
+    }
+    if(status !== 200) body.innerHTML += '<div class="err">HTTP ' + status + "</div>";
+  }catch(e){
+    body.textContent = "LOI review: " + e;
+  }
+}
+
+async function renderPlans(plans, trip){
+  const box = document.getElementById("itinBox");
+  box.innerHTML = "";
+  const table = document.createElement("table");
+  table.className = "cmp";
+  const head = document.createElement("tr");
+  for(const label of ["Hồ sơ", "Số điểm", "Km", "Chi phí (đ)",
+                      "Qua cổng", "5 cổng", "Vi phạm", "Reward", "Điểm mềm", "Review / Chốt"]){
+    const th = document.createElement("th");
+    th.textContent = label;
+    head.appendChild(th);
+  }
+  table.appendChild(head);
+
+  for(const plan of plans){
+    const ev = await evaluatePlan(plan, trip);
+    const gate = ev.gate || {};
+    const tr = document.createElement("tr");
+    tr.appendChild(cell(plan.profile || "?"));
+    tr.appendChild(cell(String((plan.activities || []).length)));
+    tr.appendChild(cell(String(plan.total_km != null ? plan.total_km : "?")));
+    tr.appendChild(cell(Number(plan.total_cost || 0).toLocaleString("vi-VN")));
+    tr.appendChild(cell(gate.passed === true ? "✔ đạt" : "✘ hỏng",
+                        gate.passed === true ? "ok" : "err"));
+    const families = (plan.gate && plan.gate.families) || {};
+    tr.appendChild(cell(Object.entries(families).map(([name, value]) =>
+      name + ":" + (value.passed ? "OK" : "FAIL")).join(" · ") || "—"));
+    tr.appendChild(cell((gate.violations || []).join(", ") || "—"));
+    tr.appendChild(cell(String(ev.reward != null ? ev.reward : "?")));
+    tr.appendChild(cell(softSummary(ev.soft)));
+    const action = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.textContent = "Review";
+    btn.onclick = () => doReview(plan, box);
+    action.appendChild(btn);
+    const repairBtn = document.createElement("button");
+    repairBtn.textContent = "Repair";
+    repairBtn.onclick = () => doRepair(plan, box);
+    action.appendChild(repairBtn);
+    const acceptBtn = document.createElement("button");
+    acceptBtn.textContent = "Chot";
+    const accepted = document.createElement("div");
+    acceptBtn.onclick = () => acceptPlan(plan, accepted);
+    action.appendChild(acceptBtn);
+    action.appendChild(accepted);
+    tr.appendChild(action);
+    table.appendChild(tr);
+  }
+  box.appendChild(table);
+}
+
+async function doItin(profiles, diverse=false){
+  const el = document.getElementById("itinOut");
+  if(!lastTrip){ el.textContent = "Hay Parse truoc de co TripRequest."; return; }
+  const trip = tripFromParse(lastTrip);
+  document.getElementById("itinBox").innerHTML = "";
+  el.textContent = "dang lap lich (" + profiles.join(",") + ")...";
+  try{
+    const {status, json} = await call("/v1/itinerary" + (diverse ? "?diverse=true" : ""), {trip, profiles});
+    if(!json.plans){ el.textContent = "HTTP " + status + "\n" + JSON.stringify(json, null, 1).slice(0, 2000); return; }
+    await renderPlans(json.plans, trip);
+
+    let out = "HTTP " + status + ", " + json.plans.length + " plans\n";
+    if(json.solution_pool){
+      out += "target=" + json.solution_pool.target + " returned=" + json.solution_pool.returned
+        + " shortage=" + (json.solution_pool.shortage_reason || "none") + "\n";
+    }
+    out += "profile đính kèm: " + (trip.profile ? JSON.stringify(trip.profile) : "(không có)") + "\n";
+    for(const p of json.plans){
+      const acts = (p.activities || []).map(a => a.poi_id + " " + a.start + "-" + a.end).join("\n    ");
+      out += "\n== " + p.profile + " == cost=" + p.total_cost + " km=" + p.total_km
+        + " min=" + p.total_min + " pref=" + p.preference + "\n";
+      if(p.warnings) out += "  WARNINGS: " + p.warnings.join(" | ") + "\n";
+      if(p.violations && p.violations.length) out += "  VIOLATIONS: " + p.violations.join(",") + "\n";
+      if(p.soft_violations && p.soft_violations.length) out += "  SOFT VIOLATIONS: " + p.soft_violations.join(",") + "\n";
+      if(p.soft_penalties && p.soft_penalties.penalty){
+        out += "  SOFT PENALTY: " + p.soft_penalties.penalty
+          + " (" + p.soft_penalties.issues.map(i => i.rule).join(",") + ")\n";
+      }
+      out += "  activities (" + (p.activities || []).length + "):\n    " + (acts || "(rong)") + "\n";
+    }
+    el.textContent = out;
+  }catch(e){ el.textContent = "LOI: " + e; }
+}
+</script>
+</body>
+</html>

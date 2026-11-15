@@ -1,9 +1,9 @@
-"""Unit test for LLM gateway (T005). Mock transports only.
+"""Unit test for the provider-neutral LLM gateway. Mock transports only.
 
 Covers: valid JSON first-try, garbage-then-valid (retry heals),
 always-garbage (clear bad_json error), transport-error-then-success,
-schema validation + retry, api-provider auth header from env (no
-hardcoded key). Live Ollama smoke is manual/optional, not asserted.
+schema validation + retry, Gemini auth/endpoint and normalized failures.
+Live provider smoke is manual/optional, not asserted.
 
 Run from repo root: python BE/tests/unit/test_llm.py -v
 """
@@ -57,6 +57,12 @@ def bad_schema(url, headers, body):
     return {"text": '{"city": "da-nang"}'}  # missing days
 
 
+def blank_ints_transport(url, headers, body):
+    """qwen3 quirk: empty strings where the schema wants numbers."""
+    return {"text": '{"city": "da-nang", "days": "", "travelers": "", '
+                    '"budget": "3000000"}'}
+
+
 LOCAL = Settings(llm_provider="local", ollama_url="http://x:11434")
 
 
@@ -100,22 +106,88 @@ class TestLLM(unittest.TestCase):
             complete_json("p", TripSlots, bad_schema, LOCAL)
         self.assertEqual(cm.exception.reason, "schema")
 
-    def test_api_provider_uses_env_key(self):
+    def test_parser_schema_normalises_blank_ints_before_validation(self):
+        """Live regression: travelers "" must not retry 3x -> 503.
+
+        `complete_json` validates against the Pydantic schema BEFORE `parse`
+        can normalise the dict, so the schema itself must accept blanks.
+        """
+        from BE.app.services.parser import TripSlots as ParserSlots
+
+        out = complete_json("p", ParserSlots, blank_ints_transport, LOCAL)
+        self.assertIsNone(out["travelers"])
+        self.assertIsNone(out["days"])
+        self.assertEqual(out["budget"], 3000000)
+
+    def test_gemini_provider_uses_configured_key_and_endpoint(self):
         seen = {}
 
         def run(url, headers, body):
             seen.update(url=url, headers=headers, body=body)
             return {"text": '{"city": "da-nang", "days": 1}'}
-        os.environ["LLM_API_KEY"] = "sk-test-fake"
-        try:
-            out = complete_json("p", TripSlots, run,
-                                Settings(llm_provider="api"))
-        finally:
-            del os.environ["LLM_API_KEY"]
+        out = complete_json(
+            "p",
+            TripSlots,
+            run,
+            Settings(
+                llm_provider="gemini",
+                gemini_api_key="gemini-test-fake",
+                llm_model="gemini-test-model",
+                _env_file=None,
+            ),
+        )
         self.assertEqual(out["days"], 1)
-        self.assertIn("/chat/completions", seen["url"])
-        self.assertEqual(seen["headers"]["Authorization"], "Bearer sk-test-fake")
+        self.assertEqual(
+            seen["url"],
+            "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        )
+        self.assertEqual(
+            seen["headers"]["Authorization"], "Bearer gemini-test-fake"
+        )
+        self.assertEqual(seen["body"]["model"], "gemini-test-model")
         self.assertEqual(seen["body"]["temperature"], 0.1)
+
+    def test_disabled_provider_fails_before_transport(self):
+        called = False
+
+        def run(url, headers, body):
+            nonlocal called
+            called = True
+            return {"text": "{}"}
+
+        with self.assertRaises(LLMError) as cm:
+            complete_json(
+                "p", TripSlots, run,
+                Settings(llm_provider="disabled", _env_file=None),
+            )
+        self.assertEqual(cm.exception.reason, "disabled")
+        self.assertFalse(called)
+
+    def test_gemini_missing_key_is_config_error(self):
+        with self.assertRaises(LLMError) as cm:
+            complete_json(
+                "p", TripSlots, always_garbage,
+                Settings(llm_provider="gemini", gemini_api_key="", _env_file=None),
+            )
+        self.assertEqual(cm.exception.reason, "config")
+
+    def test_error_never_leaks_key(self):
+        secret = "gemini-secret-value"
+
+        def fail(url, headers, body):
+            raise RuntimeError(f"provider failed with {secret}")
+
+        with self.assertRaises(LLMError) as cm:
+            complete_json(
+                "p", TripSlots, fail,
+                Settings(
+                    llm_provider="gemini",
+                    gemini_api_key=secret,
+                    llm_max_retries=0,
+                    _env_file=None,
+                ),
+            )
+        self.assertNotIn(secret, str(cm.exception))
 
 
 if __name__ == "__main__":

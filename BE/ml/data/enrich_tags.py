@@ -1,17 +1,20 @@
-"""Smart-tag enrichment v1 (lane A, stdlib only). Taxonomy agreed 2026-10-09.
+"""Smart-tag enrichment v2 (lane A, stdlib only). Taxonomy agreed 2026-10-09.
 
 Groups (stored in poi["smart_tags"], old tags[] untouched):
   ticket: true | false | null  (entry ticket? null = unknown, never guessed)
   price_band: cheap | medium | expensive | null (known prices only; rule:
     price_band set => ticket true. All null until review/quota data lands,
     except curated Ba Na.)
-  space: indoor | outdoor | both        (audit I/O wins, else canonical)
+  space: indoor | outdoor | both | unknown
+    (T063 classifier; audit I/O/B wins, then OSM, then name/canonical)
+  rain_protection: enclosed | sheltered | none | unknown
+    (T063 classifier; linked OSM evidence only -- no generic rain-proof guess)
   party: family | couple | solo | group (who it's for)
-  time:  sunrise | morning | sunset | night | rain-proof (when)
+  time:  sunrise | morning | sunset | night (when; legacy rain-proof removed)
   budget: quick-stop-30 | half-day | full-day [+ must-go] (time fund)
 
-Sources: canonical_category + audit io_label + p50 + CURATED name list
-(famous POIs only — everything else rule-derived, confidence low).
+Sources: T063 classifier for space/rain, canonical_category + p50 + CURATED
+name list (famous POIs only — everything else rule-derived, confidence low).
 Curated entries are explicit and reviewable; no per-POI web claims.
 
 Usage (repo root):
@@ -22,7 +25,6 @@ Usage (repo root):
 from __future__ import annotations
 
 import argparse
-import copy
 import json
 import os
 import sys
@@ -34,20 +36,13 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.ml.patm.estimate_duration import canonical_category  # noqa: E402
+from BE.ml.weather_label.labeler import classify_poi  # noqa: E402
 
 
 def _norm(s: str) -> str:
     s = unicodedata.normalize("NFD", str(s or "").lower())
     return "".join(c for c in s if unicodedata.category(c) != "Mn").replace("đ", "d")
 
-
-SPACE_DEFAULT = {
-    "cafe": "indoor", "restaurant": "indoor", "museum": "indoor",
-    "lodging": "indoor", "transport": "indoor",
-    "spa": "indoor", "bar": "indoor",
-    "beach": "outdoor", "nature": "outdoor", "park": "outdoor",
-    "attraction": "both", "market": "both", "landmark": "both",
-}
 
 # Public-access canonicals: entry is genuinely free (beaches, pagodas,
 # bridges, markets, parks). museum/attraction: ticketed. Food/lodging/
@@ -91,14 +86,14 @@ TIME_DEFAULT = {
     "nature": ["sunrise", "morning"],
     "park": ["morning", "sunset"],
     "market": ["morning"],
-    "museum": ["morning", "rain-proof"],
-    "attraction": ["morning", "rain-proof"],
+    "museum": ["morning"],
+    "attraction": ["morning"],
     "landmark": ["morning", "sunset"],
-    "cafe": ["morning", "rain-proof"],
-    "restaurant": ["morning", "night", "rain-proof"],
-    "lodging": ["night", "rain-proof"],
+    "cafe": ["morning"],
+    "restaurant": ["morning", "night"],
+    "lodging": ["night"],
     "transport": ["morning"],
-    "spa": ["rain-proof"],
+    "spa": [],
     "bar": ["night"],
 }
 
@@ -121,7 +116,7 @@ CURATED = [
     ("han market", {"must_go": True}, {"market"}),
     ("du thuyen", {"ticket": True, "time": ["night"]}, None),
     ("cruise", {"ticket": True, "time": ["night"]}, None),
-    ("cho dem", {"time": ["night"], "space": "outdoor"}, {"market"}),
+    ("cho dem", {"time": ["night"]}, {"market"}),
     ("night market", {"time": ["night"]}, {"market"}),
     # SerpApi types real museums as attraction when the name says museum
     ("bao tang", {"ticket": True}, None),
@@ -140,21 +135,25 @@ def budget_of(p50: int) -> str:
     return "full-day"
 
 
-def tag_poi(p: dict) -> tuple[dict, str]:
+def tag_poi(p: dict, weather_result: dict | None = None) -> tuple[dict, str]:
+    """Build smart tags; space/rain come from the T063 classifier.
+
+    ``weather_result`` may be a precomputed ``classify_poi(p, ...)`` result to
+    avoid classifying twice in the snapshot pipeline.
+    """
     canon = canonical_category(p.get("type", ""))
-    io = p.get("io_label")
-    space = {"I": "indoor", "O": "outdoor", "B": "both"}.get(
-        io or "", SPACE_DEFAULT.get(canon, "both"))
+    weather = weather_result if weather_result is not None else classify_poi(p)
+    space = weather.get("space", "unknown")
+    rain = weather.get("rain_protection", "unknown")
     tags = {
         "ticket": TICKET_DEFAULT.get(canon, None),
         "price_band": None,
         "space": space,
+        "rain_protection": rain,
         "party": list(PARTY_DEFAULT.get(canon, ["group"])),
         "time": list(TIME_DEFAULT.get(canon, ["morning"])),
         "budget": [budget_of((p.get("visit_min") or {}).get("p50", 60))],
     }
-    if space == "indoor" and "rain-proof" not in tags["time"]:
-        tags["time"] = tags["time"] + ["rain-proof"]
     src = "rule_v1"
     nm = _norm(p.get("name", ""))
     if canon == "attraction" and any(k in nm for k in PAID_NAME_KEYS):
@@ -166,9 +165,15 @@ def tag_poi(p: dict) -> tuple[dict, str]:
                 if k == "must_go":
                     if v and "must-go" not in tags["budget"]:
                         tags["budget"] = tags["budget"] + ["must-go"]
+                elif k == "space":
+                    # Curated space cannot bypass audit/OSM precedence.
+                    continue
                 else:
                     tags[k] = list(v) if isinstance(v, list) else v
             src = "rule_v1+curated"
+    # The legacy generic "rain-proof" time tag is superseded by the explicit
+    # rain_protection field; never emit it from defaults or curation.
+    tags["time"] = [t for t in tags["time"] if t != "rain-proof"]
     # user rule: known price => ticket exists (future fills honor this too)
     if tags["price_band"] is not None:
         tags["ticket"] = True

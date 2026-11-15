@@ -4,3 +4,4 @@ specs/001-travel-agent-mvp/track.md merge=union
 # LightGBM model files are byte-exact text artifacts; never apply CRLF
 # conversion (Windows core.autocrlf=true corrupts them -> "Model format error").
 BE/ml/**/model.txt -text
+BE/tools/osrm/*.lua text eol=lf

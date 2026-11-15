@@ -73,6 +73,28 @@ class TestParser(unittest.TestCase):
         self.assertEqual(trip.avoid, [])
         self.assertIn("thích biển", out["soft_prefs"])
 
+    def test_blank_int_slots_use_defaults(self):
+        """qwen3 emits "" for a missing number: normalise before validation.
+
+        Regression (live): `travelers: ""` made TripSlots validation fail,
+        the LLM gateway retried 3x and /v1/parse returned 503. A blank int
+        slot must behave like an omitted one, not like malformed JSON.
+        """
+        slots = dict(FULL, travelers="", days="", budget="3000000",
+                     city="  Đà Nẵng  ", start_time=" 07:00 ")
+        out = parse("đi Đà Nẵng", llm_fn=mock(slots))
+        trip = out["trip"]
+        self.assertEqual(trip.travelers, 2)   # default
+        self.assertEqual(trip.days, 1)        # default
+        self.assertEqual(trip.budget, 3000000)  # numeric string coerced
+        self.assertEqual(trip.city, "đà-nẵng")
+        self.assertNotIn("needs_clarification", out)
+
+    def test_blank_budget_still_asks_for_clarification(self):
+        out = parse("đi Đà Nẵng", llm_fn=mock(dict(FULL, budget="")))
+        self.assertEqual(out["needs_clarification"], ["budget"])
+        self.assertNotIn("trip", out)
+
 
 if __name__ == "__main__":
     unittest.main()

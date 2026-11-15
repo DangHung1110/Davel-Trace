@@ -14,7 +14,7 @@ Contract (spec FR-001..006):
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from BE.app.schemas.trip import TripRequest
 from BE.app.services import llm as llm_gateway
@@ -29,8 +29,11 @@ class TripSlots(BaseModel):
     date: str = ""
     start_time: str = ""
     end_time: str = ""
-    days: int = 0
-    travelers: int = 0
+    # Optional ints: qwen3 sometimes emits "" for a missing number. Normalise
+    # that to None BEFORE validation so the existing defaults apply instead of
+    # failing the whole parse three times and returning 503.
+    days: int | None = None
+    travelers: int | None = None
     budget: int | None = None
     transport: list[str] = Field(default_factory=list)
     must_visit: list[str] = Field(default_factory=list)
@@ -41,6 +44,81 @@ class TripSlots(BaseModel):
     hard_constraints: list[str] = Field(default_factory=list)
     soft_prefs: list[str] = Field(default_factory=list)
     uncertainties: list[str] = Field(default_factory=list)
+
+    @field_validator("days", "travelers", "budget", mode="before")
+    @classmethod
+    def _blank_int(cls, value):
+        """Gateway-boundary guard: qwen3 sends "" for a missing number.
+
+        `llm.complete_json` validates the model response against this schema
+        BEFORE `parse` sees it, so the same normalisation must live here too:
+        otherwise the gateway retries 3x and returns 503 (the live bug).
+        """
+        if isinstance(value, str):
+            value = value.strip()
+            if not value:
+                return None
+            try:
+                return int(value)
+            except ValueError:
+                return None
+        return value
+
+
+_INT_SLOTS = ("days", "travelers", "budget")
+_STR_SLOTS = ("city", "date", "start_time", "end_time")
+_LIST_SLOTS = ("transport", "must_visit", "avoid", "activities", "food_prefs",
+               "hard_constraints", "soft_prefs", "uncertainties")
+
+
+def _normalize_slots(raw) -> dict:
+    """Pre-validate the LLM dict (qwen3 emits "" where a number is expected).
+
+    - "" / null for days/travelers/budget -> None (TripSlots defaults then
+      apply; budget None still asks for clarification, days/travelers fall
+      back to 1/2 in `parse`).
+    - numeric strings -> int ("3000000" -> 3000000).
+    - an unparseable number -> None, i.e. the same fail-open default instead
+      of a schema error that would retry the LLM and end in a 503.
+    - strings are stripped, list items are stripped and empties dropped.
+    """
+    if not isinstance(raw, dict):
+        return raw
+    out = dict(raw)
+    for key in _STR_SLOTS:
+        value = out.get(key)
+        if isinstance(value, str):
+            out[key] = value.strip()
+    for key in _INT_SLOTS:
+        value = out.get(key)
+        if isinstance(value, str):
+            value = value.strip()
+        if value is None or value == "":
+            out[key] = None
+            continue
+        try:
+            out[key] = int(value)
+        except (TypeError, ValueError):
+            out[key] = None
+    for key in _LIST_SLOTS:
+        value = out.get(key)
+        if not isinstance(value, list):
+            continue
+        cleaned = []
+        for item in value:
+            if isinstance(item, str):
+                item = item.strip()
+                if item:
+                    cleaned.append(item)
+            elif item is not None:
+                cleaned.append(item)
+        out[key] = cleaned
+    order = out.get("order_prefs")
+    if isinstance(order, list):
+        out["order_prefs"] = [
+            [str(part).strip() for part in pair if str(part).strip()]
+            for pair in order if isinstance(pair, (list, tuple))]
+    return out
 
 
 PROMPT_TEMPLATE = (
@@ -53,7 +131,12 @@ PROMPT_TEMPLATE = (
     "activities[], food_prefs[], order_prefs[] (cặp [trước, sau]), "
     "hard_constraints[], soft_prefs[] (sở thích mềm, KHÔNG đưa vào "
     "must_visit/avoid), uncertainties[] (thông tin chưa chắc chắn).\n"
-    "Câu: {text}"
+    "VÍ DỤ: 'thích hải sản' → food_prefs=[\"hải sản\"], soft_prefs+=[\"hải sản\"]; "
+    "TUYỆT ĐỐI KHÔNG cho món ăn/sở thích vào must_visit. must_visit chỉ "
+    "chứa TÊN ĐỊA ĐIỂM CỤ THỂ user nêu (ví dụ 'Cầu Rồng', 'chợ Cồn').\n"
+    "Câu: {text}\n"
+    "/no_think"  # NOTE(test-local): tat thinking mode cua qwen3 (cham,
+    # treo timeout). Xoa khi dung model khac.
 )
 
 
@@ -63,7 +146,8 @@ def parse(text: str, user_id: str = "u1", llm_fn=None) -> dict:
     Always includes "assumptions" and "soft_prefs" lists for transparency.
     """
     llm_fn = llm_fn or llm_gateway.complete_json
-    slots = TripSlots(**llm_fn(PROMPT_TEMPLATE.format(text=text), TripSlots))
+    raw = llm_fn(PROMPT_TEMPLATE.format(text=text), TripSlots)
+    slots = TripSlots(**_normalize_slots(raw))
     assumptions: list[str] = []
     missing: list[str] = []
     if not slots.city.strip():

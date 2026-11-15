@@ -17,9 +17,8 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.services.retrieval import _overlaps  # noqa: E402
 from BE.eval.gold.approach_b import (  # noqa: E402
-    _intervals,
-    _overlaps,
     filter_pois,
     make_gold,
     tsp_order,
@@ -93,8 +92,6 @@ class TestGold(unittest.TestCase):
         self.assertTrue(_overlaps(["10:30-14:00, 16:30-22:30"], 15 * 60, 18 * 60))
         # 14:30-16:00 sits in the gap between the two intervals.
         self.assertFalse(_overlaps(["10:30-14:00, 16:30-22:30"], 14 * 60 + 30, 16 * 60))
-        self.assertEqual(list(_intervals(["10:30-14:00, 16:30-22:30"])),
-                         [(10 * 60 + 30, 14 * 60), (16 * 60 + 30, 22 * 60 + 30)])
         pois = {
             "packed": {"poi_id": "packed", "verified": True, "fee": 0,
                        "opening_hours": ["10:30-14:00, 16:30-22:30"],

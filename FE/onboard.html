@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Davel-Trace — Hồ sơ chuyến đi (onboarding)</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;color:#18181b}
+  h2{margin:0 0 4px}
+  h3{margin:24px 0 8px}
+  .hint{color:#52525b;font-size:13px;margin:4px 0 12px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+  .card{text-align:left;background:#fff;border:2px solid #d4d4d8;border-radius:10px;padding:14px;cursor:pointer;font:inherit}
+  .card:hover{border-color:#a1a1aa}
+  .card.active{border-color:#166534;background:#f0fdf4}
+  .card b{display:block;font-size:15px;margin-bottom:6px}
+  .card span{display:block;font-size:12px;color:#52525b;line-height:1.5}
+  .sec{border-top:1px solid #e4e4e7;padding:10px 0}
+  .sec h4{margin:0 0 4px;font-size:14px}
+  .sec .note{font-size:12px;color:#71717a;margin:0 0 6px}
+  select{padding:6px 8px;min-width:320px;max-width:100%;font:inherit}
+  .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px 14px}
+  .checks label{font-size:13px;cursor:pointer}
+  input[type=range]{width:320px;max-width:100%;vertical-align:middle}
+  pre{background:#f4f4f5;padding:12px;border-radius:8px;overflow:auto;max-height:460px}
+  button{padding:8px 16px;margin:6px 6px 6px 0;cursor:pointer;font:inherit}
+  .ok{color:#166534}.err{color:#b91c1c}.warn{color:#b45309}
+  .muted{color:#71717a;font-size:12px;font-weight:400}
+  code{background:#f4f4f5;padding:1px 4px;border-radius:4px}
+</style>
+</head>
+<body>
+<h2>Davel-Trace — Hồ sơ chuyến đi</h2>
+<p class="hint">Chọn 1 kiểu mẫu (1 chạm) hoặc tùy chỉnh từng mục. Profile lưu vào <code>localStorage</code> và
+tự đính vào <code>TripRequest.profile</code> khi lập lịch ở <a href="/FE/test_harness.html">test harness</a>.</p>
+
+<h3>1. Chọn kiểu mẫu</h3>
+<div class="cards" id="cards"></div>
+
+<h3>2. Tùy chỉnh <span class="muted">(10 mục catalog — sửa được sau khi chọn mẫu)</span></h3>
+<div id="form"></div>
+<div id="formMsg" class="warn"></div>
+
+<h3>3. Profile sẽ gửi lên API</h3>
+<button onclick="saveProfile()"><b>Dùng profile này</b></button>
+<button onclick="clearProfile()">Xoá profile đã lưu</button>
+<span id="saveMsg"></span>
+<pre id="preview">...</pre>
+
+<script>
+const KEY = "davel_profile";
+
+/* ---------- Catalog (10 mục, catalog.txt) ---------- */
+const CAT = {
+  party_type: [
+    ["solo","Đi một mình"],
+    ["couple","Cặp đôi"],
+    ["friends","Nhóm bạn"],
+    ["family_with_kids","Gia đình có trẻ nhỏ"],
+    ["family_elderly","Gia đình có người lớn tuổi"],
+    ["family_mixed","Nhiều thế hệ (trẻ nhỏ + người lớn tuổi)"],
+    ["business","Đi công tác / kết hợp công việc"],
+    ["group_tour","Đoàn đông (công ty, lớp, hội)"]
+  ],
+  trip_purpose: [
+    ["leisure","Nghỉ dưỡng, thư giãn chung"],
+    ["food_tour","Trọng tâm ăn uống"],
+    ["nature","Thiên nhiên, biển, núi"],
+    ["culture","Văn hoá, lịch sử, tâm linh"],
+    ["adventure","Mạo hiểm, thể thao, khám phá"],
+    ["shopping","Mua sắm, chợ, đặc sản mang về"],
+    ["business","Công việc là chính, tranh thủ chơi"],
+    ["photography","Săn ảnh, check-in cảnh đẹp"],
+    ["wellness","Nghỉ khoẻ: spa, yoga, retreat"]
+  ],
+  spending_level: [
+    ["1","1 · Tiết kiệm tối đa (dưới ~500k/ngày/người)"],
+    ["2","2 · Thoải mái vừa phải (~500k–1.5tr/ngày/người)"],
+    ["3","3 · Premium (trên ~1.5tr/ngày/người)"]
+  ],
+  pace: [
+    ["1","1 · Chậm — ít điểm, ở lâu, nghỉ nhiều"],
+    ["2","2 · Cân bằng — vừa chơi vừa nghỉ"],
+    ["3","3 · Dày — dồn nhiều điểm, tranh thủ tối đa"]
+  ],
+  fitness: [
+    ["1","1 · Thấp — đi bộ ít, tránh leo trèo"],
+    ["2","2 · Vừa — đi bộ vừa, leo nhẹ được"],
+    ["3","3 · Cao — leo, trek, thể thao nước đều được"]
+  ],
+  food_prefs: [
+    ["vietnamese","Món Việt địa phương"],
+    ["seafood","Hải sản"],
+    ["street_food","Ăn vặt, quán vỉa hè"],
+    ["local_cuisine","Đặc sản Đà Nẵng (mì Quảng, bánh xèo, bún chả cá...)"],
+    ["cafe","Cà phê, trà, quán chill"],
+    ["fine_dining","Nhà hàng cao cấp"],
+    ["vegetarian_option","Có món chay để chọn"],
+    ["vegan_only","Chỉ ăn chay hoàn toàn"],
+    ["halal","Chuẩn Halal"],
+    ["kid_friendly","Có món trẻ em ăn được"],
+    ["BBQ","Nướng, lẩu"],
+    ["beer","Bia, quán nhậu"],
+    ["dessert","Tráng miệng, chè, bánh"]
+  ],
+  allergy: [
+    ["peanut","Đậu phộng"],
+    ["shellfish","Tôm, cua, sò (giáp xác)"],
+    ["fish","Cá"],
+    ["gluten","Lúa mì, bột mì"],
+    ["dairy","Sữa, bơ, phô mai"],
+    ["egg","Trứng"],
+    ["sesame","Mè / vừng"],
+    ["other_free_text","Tự ghi thêm"]
+  ],
+  activities: [
+    ["beach","Tắm biển, dạo biển (Mỹ Khê, Non Nước)"],
+    ["water_sports","Lướt ván, dù lượn, lặn (Sơn Trà)"],
+    ["trekking","Leo núi, đường rừng (Ngũ Hành Sơn, Bạch Mã)"],
+    ["adventure","Mạo hiểm, cảm giác mạnh (dù lượn, zipline)"],
+    ["viewpoint","Điểm ngắm cảnh (Đỉnh Bàn Cờ, vòng quay)"],
+    ["sunset_view","Ngắm hoàng hôn (Cầu Rồng, bãi biển phía tây)"],
+    ["temple","Chùa, đền, tâm linh (Linh Ứng, Non Nước)"],
+    ["museum","Bảo tàng, triển lãm (Chăm, Đà Nẵng)"],
+    ["old_town","Phố cổ, di sản (Hội An trong ngày)"],
+    ["market","Chợ, mua sắm (Chợ Cồn, chợ Hàn)"],
+    ["nightlife","Bar, pub, phố đêm (Bạch Đằng, An Thượng)"],
+    ["spa","Spa, massage, retreat"],
+    ["park","Công viên, dạo mát (Biển Đông, APEC)"],
+    ["playground","Khu vui chơi trẻ em (Helio, công viên nước)"],
+    ["cruise","Du thuyền sông/biển (sông Hàn về đêm)"],
+    ["golf","Sân golf (Laguna, BRG)"]
+  ],
+  accessibility: [
+    ["wheelchair","Xe lăn — loại POI không lối xe lăn, ép fitness=1"],
+    ["stroller","Xe đẩy trẻ em — loại POI nhiều bậc thang, đường khó"],
+    ["low_walking","Hạn chế đi bộ (<1km/lượt) — loại trek, khu rộng, ép fitness=1"],
+    ["no_stairs","Không leo cầu thang — loại POI chỉ có thang bộ"],
+    ["elderly_friendly","Thân thiện người lớn tuổi — ép pace≤2, fitness≤2"],
+    ["visual_aid","Hỗ trợ khiếm thị — ưu tiên tour có hướng dẫn"],
+    ["none","Không có nhu cầu đặc biệt (mặc định)"]
+  ],
+  must_avoid: [
+    ["bar","Quán bar, pub"],
+    ["nightlife","Hoạt động đêm muộn nói chung"],
+    ["crowded_late","Nơi đông đúc về đêm"],
+    ["loud_bar","Ồn ào (bar nhạc lớn, phố nhậu)"],
+    ["adventure","Mạo hiểm, cảm giác mạnh"],
+    ["trekking","Leo núi, đường rừng"],
+    ["water_sports","Thể thao nước"],
+    ["temple_crowd","Nơi tâm linh đông đúc"],
+    ["non_halal","Có phục vụ đồ không Halal"],
+    ["meat_heavy","Món mặn nhiều (nhóm chay)"],
+    ["high_price","Điểm vé đắt / chi tiêu cao"],
+    ["far_from_center","Điểm xa trung tâm (>15km)"]
+  ],
+  transport: [
+    ["motorbike","Xe máy"],
+    ["car","Ô tô"],
+    ["walk","Đi bộ"],
+    ["bicycle","Xe đạp"],
+    ["taxi","Taxi"],
+    ["bus","Xe buýt"]
+  ]
+};
+
+/* ---------- Archetype mẫu (pilot A/B/C) ---------- */
+const ARCHETYPES = {
+  A: {
+    title: "A · Gia đình có trẻ nhỏ",
+    meta: "family_with_kids · tiết kiệm · nhịp chậm · fitness thấp",
+    desc: "Biển, công viên, bảo tàng, sân chơi · tránh bar, đêm khuya, chỗ đông",
+    profile: {
+      party_type: "family_with_kids", trip_purpose: "leisure",
+      spending_level: 1, pace: 1, fitness: 1,
+      food_prefs: ["vietnamese","kid_friendly"], allergy: [],
+      activities: ["beach","park","museum","playground"],
+      outdoor_bias: -0.5,
+      accessibility: ["stroller"],
+      must_avoid: ["bar","nightlife","crowded_late"],
+      transport: ["car"]
+    }
+  },
+  B: {
+    title: "B · Nhóm bạn trẻ",
+    meta: "friends · premium · nhịp dày · fitness cao",
+    desc: "Nightlife, mạo hiểm, trekking, thể thao nước, ngắm cảnh",
+    profile: {
+      party_type: "friends", trip_purpose: "leisure",
+      spending_level: 3, pace: 3, fitness: 3,
+      food_prefs: ["seafood","street_food","BBQ","beer"], allergy: [],
+      activities: ["nightlife","adventure","trekking","water_sports","viewpoint"],
+      outdoor_bias: 0.7,
+      accessibility: [],
+      must_avoid: [],
+      transport: ["motorbike"]
+    }
+  },
+  C: {
+    title: "C · Cặp đôi thư thả",
+    meta: "couple · comfort · nhịp chậm · fitness vừa",
+    desc: "Chùa, bảo tàng, phố cổ, spa, hoàng hôn · tránh mạo hiểm, bar ồn",
+    profile: {
+      party_type: "couple", trip_purpose: "leisure",
+      spending_level: 2, pace: 1, fitness: 2,
+      food_prefs: ["local_cuisine","cafe","vegetarian_option"], allergy: [],
+      activities: ["temple","museum","old_town","spa","sunset_view"],
+      outdoor_bias: 0,
+      accessibility: [],
+      must_avoid: ["adventure","loud_bar"],
+      transport: ["motorbike"]
+    }
+  }
+};
+
+/* ---------- Form definition ---------- */
+const SECTIONS = [
+  {key:"party_type", title:"1 · Đi với ai", type:"select", options:CAT.party_type, note:"Chọn 1"},
+  {key:"trip_purpose", title:"2 · Mục đích chuyến đi", type:"checks", options:CAT.trip_purpose, max:2,
+   note:"Catalog cho chọn 1–2. Contract API nhận 1 chuỗi: mục đầu tiên được gửi."},
+  {key:"spending_level", title:"3 · Chi tiêu", type:"select", numeric:true, options:CAT.spending_level, note:"SOFT — trọng số điểm"},
+  {key:"pace", title:"4 · Nhịp đi", type:"select", numeric:true, options:CAT.pace, note:"SOFT"},
+  {key:"fitness", title:"5 · Thể lực", type:"select", numeric:true, options:CAT.fitness, note:"SOFT (hoá HARD khi có accessibility)"},
+  {key:"food_prefs", title:"6A · Sở thích ăn", type:"checks", options:CAT.food_prefs, note:"SOFT · chọn nhiều"},
+  {key:"allergy", title:"6B · Dị ứng", type:"checks", options:CAT.allergy, freeText:true, note:"HARD — loại thẳng POI"},
+  {key:"activities", title:"7 · Hoạt động", type:"checks", options:CAT.activities, note:"SOFT · chọn nhiều"},
+  {key:"outdoor_bias", title:"8 · Hướng trong / ngoài trời", type:"range", note:"SOFT · -1 = trong nhà, 0 = trung tính, +1 = ngoài trời"},
+  {key:"accessibility", title:"9 · Nhu cầu tiếp cận", type:"checks", options:CAT.accessibility, exclusive:"none",
+   note:"HARD · “Không có nhu cầu” loại các mục khác"},
+  {key:"must_avoid", title:"10 · Cần tránh", type:"checks", options:CAT.must_avoid, note:"HARD — loại thẳng POI"},
+  {key:"transport", title:"Phương tiện", type:"checks", options:CAT.transport, note:"Trường contract transport[] (ngoài 10 mục catalog)"}
+];
+
+const OD_LABEL = v => v <= -0.5 ? "Ưu tiên trong nhà" : v < -0.15 ? "Hơi thiên trong nhà"
+  : v <= 0.15 ? "Trung tính (planner tự cân theo thời tiết)" : v < 0.5 ? "Hơi thiên ngoài trời" : "Ưu tiên ngoài trời";
+
+// Thứ tự hiển thị của list đang chọn (giữ nguyên thứ tự archetype đã nạp).
+const orderHint = {};
+
+/* ---------- Build UI ---------- */
+function buildCards(){
+  const box = document.getElementById("cards");
+  for(const [id, a] of Object.entries(ARCHETYPES)){
+    const b = document.createElement("button");
+    b.className = "card";
+    b.type = "button";
+    b.dataset.archetype = id;
+    const t = document.createElement("b"); t.textContent = a.title;
+    const m = document.createElement("span"); m.textContent = a.meta;
+    const d = document.createElement("span"); d.textContent = a.desc;
+    b.append(t, m, d);
+    b.addEventListener("click", () => pickArchetype(id));
+    box.appendChild(b);
+  }
+}
+
+function buildForm(){
+  const form = document.getElementById("form");
+  for(const sec of SECTIONS){
+    const wrap = document.createElement("div");
+    wrap.className = "sec";
+    const h = document.createElement("h4"); h.textContent = sec.title;
+    wrap.appendChild(h);
+    if(sec.note){
+      const n = document.createElement("p"); n.className = "note"; n.textContent = sec.note;
+      wrap.appendChild(n);
+    }
+
+    if(sec.type === "select"){
+      const sel = document.createElement("select");
+      sel.id = "sel-" + sec.key;
+      for(const [v, label] of sec.options){
+        const o = document.createElement("option"); o.value = v; o.textContent = label;
+        sel.appendChild(o);
+      }
+      sel.addEventListener("change", syncPreview);
+      wrap.appendChild(sel);
+    } else if(sec.type === "range"){
+      const inRow = document.createElement("div");
+      const rng = document.createElement("input");
+      rng.type = "range"; rng.min = "-1"; rng.max = "1"; rng.step = "0.1";
+      rng.id = "rng-" + sec.key;
+      const out = document.createElement("span");
+      out.id = "lbl-" + sec.key; out.className = "muted";
+      out.style.marginLeft = "10px";
+      const upd = () => { out.textContent = Number(rng.value).toFixed(1) + " · " + OD_LABEL(Number(rng.value)); };
+      rng.addEventListener("input", () => { upd(); syncPreview(); });
+      inRow.append(rng, out);
+      wrap.appendChild(inRow);
+      // hiển thị nhãn sau khi gắn vào DOM (ở applyProfile)
+      rng.dataset.hasLabel = "1";
+      rng._upd = upd;
+    } else {
+      const box = document.createElement("div");
+      box.className = "checks";
+      for(const [v, label] of sec.options){
+        const lab = document.createElement("label");
+        const cb = document.createElement("input");
+        cb.type = "checkbox"; cb.value = v; cb.dataset.key = sec.key;
+        cb.addEventListener("change", () => onCheck(sec, cb));
+        lab.append(cb, document.createTextNode(" " + label));
+        box.appendChild(lab);
+      }
+      wrap.appendChild(box);
+      if(sec.freeText){
+        const inp = document.createElement("input");
+        inp.type = "text"; inp.id = "free-" + sec.key;
+        inp.placeholder = "Ghi rõ dị ứng (gửi kèm trong allergy[])";
+        inp.style.cssText = "display:none;margin-top:6px;padding:6px 8px;width:320px;max-width:100%;font:inherit";
+        inp.addEventListener("input", syncPreview);
+        wrap.appendChild(inp);
+      }
+    }
+    form.appendChild(wrap);
+  }
+}
+
+function onCheck(sec, cb){
+  const all = [...document.querySelectorAll('input[type=checkbox][data-key="' + sec.key + '"]')];
+  if(cb.checked){
+    if(sec.exclusive){
+      if(cb.value === sec.exclusive) all.forEach(o => { if(o !== cb) o.checked = false; });
+      else { const none = all.find(o => o.value === sec.exclusive); if(none) none.checked = false; }
+    }
+    if(sec.max && all.filter(o => o.checked).length > sec.max){
+      cb.checked = false;
+      msg("Tối đa " + sec.max + " mục cho phần “" + sec.title + "”.");
+    }
+  }
+  if(sec.freeText) syncFreeText(sec);
+  syncPreview();
+}
+
+function syncFreeText(sec){
+  const cb = document.querySelector('input[data-key="' + sec.key + '"][value="other_free_text"]');
+  const inp = document.getElementById("free-" + sec.key);
+  if(!cb || !inp) return;
+  inp.style.display = cb.checked ? "inline-block" : "none";
+}
+
+/* ---------- state <-> form ---------- */
+function pickArchetype(id){
+  applyProfile(ARCHETYPES[id].profile);
+  document.querySelectorAll(".card").forEach(c => c.classList.toggle("active", c.dataset.archetype === id));
+  msg("Đã nạp kiểu mẫu " + id + " — sửa trực tiếp bên dưới nếu cần.", "ok");
+  syncPreview();
+}
+
+function applyProfile(p){
+  for(const sec of SECTIONS){
+    if(sec.type === "select"){
+      const el = document.getElementById("sel-" + sec.key);
+      if(el && p[sec.key] != null) el.value = String(p[sec.key]);
+    } else if(sec.type === "range"){
+      const rng = document.getElementById("rng-" + sec.key);
+      if(rng && p[sec.key] != null){ rng.value = String(p[sec.key]); if(rng._upd) rng._upd(); }
+    } else {
+      const raw = sec.key === "trip_purpose" && typeof p[sec.key] === "string" ? [p[sec.key]] : (p[sec.key] || []);
+      orderHint[sec.key] = raw.slice();
+      const known = sec.options.map(o => o[0]);
+      const unknown = raw.filter(v => !known.includes(v));
+      const set = new Set(raw.filter(v => known.includes(v)));
+      if(sec.freeText && unknown.length) set.add("other_free_text");
+      document.querySelectorAll('input[type=checkbox][data-key="' + sec.key + '"]')
+        .forEach(cb => { cb.checked = set.has(cb.value); });
+      if(sec.freeText){
+        document.getElementById("free-" + sec.key).value = unknown[0] || "";
+        syncFreeText(sec);
+      }
+    }
+  }
+}
+
+function readForm(){
+  const raw = {};
+  for(const sec of SECTIONS){
+    if(sec.type === "select"){
+      const v = document.getElementById("sel-" + sec.key).value;
+      raw[sec.key] = sec.numeric ? Number(v) : v;
+    } else if(sec.type === "range"){
+      raw[sec.key] = Number(document.getElementById("rng-" + sec.key).value);
+    } else {
+      const picked = new Set([...document.querySelectorAll('input[type=checkbox][data-key="' + sec.key + '"]:checked')]
+        .map(i => i.value));
+      // giữ thứ tự đã nạp từ archetype/profile, mục mới thêm xếp theo thứ tự catalog
+      const hint = orderHint[sec.key] || [];
+      const catIdx = v => sec.options.findIndex(o => o[0] === v);
+      const vals = [...picked].sort((a, b) => {
+        const ia = hint.indexOf(a), ib = hint.indexOf(b);
+        if(ia !== -1 && ib !== -1) return ia - ib;
+        if(ia !== -1) return -1;
+        if(ib !== -1) return 1;
+        return catIdx(a) - catIdx(b);
+      });
+      if(sec.freeText){
+        const i = vals.indexOf("other_free_text");
+        if(i >= 0){
+          vals.splice(i, 1);
+          const txt = (document.getElementById("free-" + sec.key).value || "").trim();
+          // "không có"/"none"/... nghĩa là không khai báo -> bỏ, không thành filter cứng
+          const noneWords = ["không có","không","khong co","khong","none","n/a","-","khong co gi"];
+          if(txt && !noneWords.includes(txt.toLowerCase())) vals.push(txt);
+        }
+      }
+      raw[sec.key] = vals;
+    }
+  }
+  return {
+    party_type: raw.party_type,
+    trip_purpose: (raw.trip_purpose || [])[0] || "leisure",
+    spending_level: raw.spending_level,
+    pace: raw.pace,
+    fitness: raw.fitness,
+    food_prefs: raw.food_prefs,
+    allergy: raw.allergy,
+    activities: raw.activities,
+    outdoor_bias: Math.round(raw.outdoor_bias * 10) / 10,
+    accessibility: raw.accessibility,
+    must_avoid: raw.must_avoid,
+    transport: raw.transport
+  };
+}
+
+/* ---------- save / load ---------- */
+function syncPreview(){
+  document.getElementById("preview").textContent = JSON.stringify(readForm(), null, 2);
+}
+
+function saveProfile(){
+  const p = readForm();
+  localStorage.setItem(KEY, JSON.stringify(p));
+  msg("Đã lưu “" + KEY + "” (localStorage). Test harness sẽ đính profile này khi lập lịch.", "ok");
+  syncPreview();
+}
+
+function clearProfile(){
+  localStorage.removeItem(KEY);
+  msg("Đã xoá profile khỏi localStorage.");
+}
+
+let msgTimer = null;
+function msg(text, cls){
+  const el = document.getElementById("saveMsg");
+  el.className = cls || "warn";
+  el.textContent = text;
+  clearTimeout(msgTimer);
+  msgTimer = setTimeout(() => { el.textContent = ""; }, 5000);
+}
+
+/* ---------- init ---------- */
+buildCards();
+buildForm();
+const saved = localStorage.getItem(KEY);
+if(saved){
+  try{
+    applyProfile(JSON.parse(saved));
+    msg("Đang hiển thị profile đã lưu trong localStorage (“" + KEY + "”).");
+  }catch(e){
+    msg("Profile đã lưu không đọc được: " + e, "err");
+  }
+}
+syncPreview();
+</script>
+</body>
+</html>

@@ -23,11 +23,14 @@ class TestFeatures(unittest.TestCase):
         cls.a = cls.pois["son-tra"]
         cls.b = cls.pois["my-khe"]
 
-    def test_17_features_unique_names(self):
-        self.assertEqual(N_FEATURES, 17)
-        self.assertEqual(len(set(FEATURE_NAMES)), 17)
-        self.assertEqual(len(extract(self.a, self.b)), 17)
-        self.assertEqual(FEATURE_NAMES[-1], "prior_logp")
+    def test_21_features_unique_names(self):
+        self.assertEqual(N_FEATURES, 21)
+        self.assertEqual(len(set(FEATURE_NAMES)), 21)
+        self.assertEqual(len(extract(self.a, self.b)), 21)
+        self.assertEqual(FEATURE_NAMES[16], "prior_logp")
+        self.assertEqual(FEATURE_NAMES[17:], (
+            "x_outdoor_exposure", "x_rain_cover", "x_sun_exposure",
+            "x_wind_exposure"))
 
     def test_prior_logp_directional_finite(self):
         from BE.ml.patm.features import FEATURE_NAMES as FN
@@ -57,6 +60,37 @@ class TestFeatures(unittest.TestCase):
         for i in (4, 5, 6):  # meal_after, indoor_buffer, intensity_drop
             self.assertAlmostEqual(fwd[i], -back[i], places=9)
         self.assertEqual(fwd[7], back[7])  # same_type symmetric (documented)
+
+    def test_exposure_features_antisymmetric(self):
+        fwd, back = extract(self.a, self.b), extract(self.b, self.a)
+        for i in range(17, 21):  # outdoor, rain_cover, sun, wind
+            self.assertAlmostEqual(fwd[i], -back[i], places=9)
+
+    def test_exposure_features_read_smart_tags(self):
+        a = {"type": "beach", "smart_tags": {
+            "outdoor_exposure": 0.95, "sun_exposure": 0.9,
+            "wind_exposure": 0.9, "rain_cover": "open"}}
+        b = {"type": "museum", "smart_tags": {
+            "outdoor_exposure": 0.05, "sun_exposure": 0.05,
+            "wind_exposure": 0.05, "rain_cover": "enclosed"}}
+        fwd, back = extract(a, b), extract(b, a)
+        i_out = FEATURE_NAMES.index("x_outdoor_exposure")
+        i_rain = FEATURE_NAMES.index("x_rain_cover")
+        i_sun = FEATURE_NAMES.index("x_sun_exposure")
+        i_wind = FEATURE_NAMES.index("x_wind_exposure")
+        self.assertAlmostEqual(fwd[i_out], 0.9, places=6)
+        self.assertAlmostEqual(fwd[i_rain], 1.0, places=6)  # open both ends
+        self.assertAlmostEqual(fwd[i_sun], 0.85, places=6)
+        self.assertAlmostEqual(fwd[i_wind], 0.85, places=6)
+
+    def test_exposure_type_fallback_without_smart_tags(self):
+        a, b = {"type": "beach"}, {"type": "museum"}
+        self.assertGreater(
+            extract(a, b)[FEATURE_NAMES.index("x_outdoor_exposure")], 0.5)
+        # Unknown/absent type maps to the neutral 0.5, never a crash.
+        c = {"type": "unmapped-category"}
+        self.assertEqual(extract(a, c)[FEATURE_NAMES.index("x_rain_cover")],
+                         0.5)
 
     def test_neutral_defaults(self):
         self.assertEqual(extract(self.a, self.b),
