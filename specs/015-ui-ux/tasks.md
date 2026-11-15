@@ -6,7 +6,7 @@
 - [x] T004 Separate trip collection, daily itinerary, planning and travel preferences.
 - [x] T005 Rebuild trip editor; preserve time values; align shared controls and empty states.
 - [x] T006 Test navigation, payloads, responsive layouts and regressions; inspect screenshots.
-- [ ] T007 Converge documentation, commit, push and open PR into product-platform.
+- [x] T007 Converge documentation, commit, push and open PR into product-platform (#21).
 
 Analysis gate: PASS. Existing APIs cover scope; no dependency or migration required.
 No implementation started before this gate. Remaining limitations must be recorded in validation.

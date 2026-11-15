@@ -34,4 +34,7 @@ usability should still be reviewed on hardware; screenshots and widget tests are
 user study. The pre-existing catalog-only route eligibility is retained and explained.
 
 ## Final delivery
-Convergence: implementation and required checks pass. PR link added after publication.
+Convergence: implementation and required checks pass.
+Implementation commit: 061af4b on fix/ui.
+Ready PR: https://github.com/DangHung1110/Davel-Trace/pull/21
+Base: feat/product-platform. No merge into the integration branch was performed.
