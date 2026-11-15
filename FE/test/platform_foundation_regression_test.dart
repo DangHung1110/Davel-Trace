@@ -1,7 +1,7 @@
 import 'package:davel_trace/app.dart';
 import 'package:davel_trace/app_state.dart';
 import 'package:davel_trace/features/planning/domain/models.dart';
-import 'package:davel_trace/features/shell/presentation/main_shell.dart';
+import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +24,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('desktop-phone-frame')), findsOneWidget);
-    expect(find.text('Dữ liệu demo trên thiết bị'), findsOneWidget);
+    expect(find.byKey(const Key('trip-demo-notice')), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('map-tab')));
     await tester.pumpAndSettle();
@@ -36,11 +36,16 @@ void main() {
 
     await tester.tap(find.byKey(const Key('profile-tab')));
     await tester.pumpAndSettle();
+    expect(find.byKey(const Key('account-identity')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('travel-preferences-button')));
+    await tester.pumpAndSettle();
     expect(find.byKey(const Key('edit-profile-button')), findsOneWidget);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
 
     await tester.tap(find.byKey(const Key('itinerary-tab')));
     await tester.pumpAndSettle();
-    expect(find.byKey(const Key('source-status-banner')), findsOneWidget);
+    expect(find.byKey(const Key('trip-demo-notice')), findsOneWidget);
   });
 
   testWidgets('live and stale planning states stay visibly distinct', (
@@ -49,12 +54,12 @@ void main() {
     final state = AppState(FakeManagementRepository(seeded: true));
     await state.initialize();
     state.demoSource = DemoSource.live;
-    await tester.pumpWidget(MaterialApp(home: MainShell(state: state)));
+    await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
     await tester.pumpAndSettle();
-    expect(find.text('Planner trực tiếp · FastAPI'), findsOneWidget);
+    expect(find.text('Phương án từ hệ thống'), findsOneWidget);
 
     state.demoSource = DemoSource.stale;
-    await tester.pumpWidget(MaterialApp(home: MainShell(state: state)));
+    await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
     await tester.pumpAndSettle();
     expect(find.text('Dữ liệu gần nhất · mất kết nối'), findsOneWidget);
   });

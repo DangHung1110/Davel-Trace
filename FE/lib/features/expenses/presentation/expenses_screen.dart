@@ -8,11 +8,11 @@ import '../../../shared/widgets/app_header.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
-import '../../planning/domain/models.dart';
 
 class ExpensesScreen extends StatefulWidget {
-  const ExpensesScreen({super.key, required this.state});
+  const ExpensesScreen({super.key, required this.state, this.onOpenTrips});
   final AppState state;
+  final VoidCallback? onOpenTrips;
 
   @override
   State<ExpensesScreen> createState() => _ExpensesScreenState();
@@ -43,6 +43,24 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 
   Future<void> _delete(ExpenseItem expense) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Xóa khoản chi?'),
+        content: Text('${expense.label} · ${moneyVnd(expense.amountVnd)}'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Xóa khoản chi'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
     try {
       await widget.state.deleteExpense(expense);
     } catch (_) {
@@ -82,6 +100,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     final state = widget.state;
     final trip = state.activeTrip;
     final summary = state.expenseSummary;
+    final pendingSync =
+        state.syncStatus?.usingStaleCache == true ||
+        (state.syncStatus?.pendingCount ?? 0) > 0;
     final visible = state.expenses.where((expense) {
       final expenseDate =
           '${expense.spentAt.year.toString().padLeft(4, '0')}-${expense.spentAt.month.toString().padLeft(2, '0')}-${expense.spentAt.day.toString().padLeft(2, '0')}';
@@ -95,23 +116,30 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       color: AppColors.canvas,
       child: Column(
         children: [
-          const AppHeader(compact: true, section: 'Chi tiêu chuyến đi'),
+          AppHeader(
+            compact: true,
+            section: 'Chi tiêu',
+            trailing: TextButton(
+              onPressed: widget.onOpenTrips,
+              child: const Text('Đổi chuyến'),
+            ),
+          ),
           Expanded(
             child: trip == null
-                ? const _NoTripExpense()
+                ? _NoTripExpense(onOpenTrips: widget.onOpenTrips)
                 : ListView(
-                    padding: const EdgeInsets.fromLTRB(14, 12, 14, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                     children: [
                       SurfaceCard(
                         key: const Key('expense-source-status'),
-                        color: state.demoSource == DemoSource.live
+                        color: !state.isDemoManagement
                             ? const Color(0xFFE6F6F2)
                             : const Color(0xFFF2F5F4),
                         padding: const EdgeInsets.all(11),
                         child: Row(
                           children: [
                             Icon(
-                              state.demoSource == DemoSource.live
+                              !state.isDemoManagement
                                   ? Icons.cloud_done_outlined
                                   : Icons.phone_android_outlined,
                               color: AppColors.primary,
@@ -120,9 +148,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                state.demoSource == DemoSource.live
-                                    ? 'Đã đồng bộ PostgreSQL qua FastAPI. Dữ liệu vẫn còn sau khi khởi động lại.'
-                                    : 'Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.',
+                                !state.isDemoManagement && !pendingSync
+                                    ? 'Chi tiêu đã được lưu vào tài khoản.'
+                                    : state.isDemoManagement
+                                    ? 'Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.'
+                                    : 'Đang xem chi tiêu trên thiết bị. Đồng bộ để lưu thay đổi vào tài khoản.',
                                 style: const TextStyle(fontSize: 11),
                               ),
                             ),
@@ -134,13 +164,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         spacing: 7,
                         runSpacing: 7,
                         children: [
-                          const Chip(
-                            avatar: Icon(
-                              Icons.calendar_today_outlined,
-                              size: 15,
-                            ),
-                            label: Text('Tất cả'),
-                          ),
                           Chip(
                             avatar: const Icon(Icons.route_outlined, size: 15),
                             label: Text(trip.title),
@@ -163,7 +186,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               children: [
                                 const Expanded(
                                   child: Text(
-                                    'TỔNG NGÂN SÁCH CHUYẾN',
+                                    'Tổng ngân sách',
                                     style: TextStyle(
                                       color: AppColors.muted,
                                       fontSize: 10,
@@ -514,17 +537,17 @@ class _BudgetMetric extends StatelessWidget {
 }
 
 class _NoTripExpense extends StatelessWidget {
-  const _NoTripExpense();
+  const _NoTripExpense({this.onOpenTrips});
+  final VoidCallback? onOpenTrips;
 
   @override
-  Widget build(BuildContext context) => const Center(
-    child: Padding(
-      padding: EdgeInsets.all(28),
-      child: Text(
-        'Hãy tạo hoặc chọn một chuyến đi ở tab Lịch trình trước khi ghi chi tiêu.',
-        textAlign: TextAlign.center,
-      ),
-    ),
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.all(24),
+    children: [
+      const Text('Chọn chuyến đi để xem chi tiêu.'),
+      const SizedBox(height: 16),
+      FilledButton(onPressed: onOpenTrips, child: const Text('Chọn chuyến đi')),
+    ],
   );
 }
 
@@ -646,6 +669,7 @@ class _ExpenseEditorState extends State<ExpenseEditor> {
             ),
             const SizedBox(height: 10),
             DropdownButtonFormField<String>(
+              isExpanded: true,
               initialValue: _category,
               decoration: const InputDecoration(labelText: 'Nhóm chi'),
               items: const [

@@ -274,11 +274,12 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Icon(Icons.search_rounded, size: 18),
+                      const Icon(Icons.map_outlined, size: 18),
                       const SizedBox(width: 7),
                       Expanded(
                         child: Text(
-                          widget.tripTitle ?? 'Sơn Trà & Mỹ Khê',
+                          widget.tripTitle ??
+                              'Chọn chuyến đi để xem lịch trình',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -289,9 +290,8 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                         ),
                       ),
                       const Icon(
-                        Icons.mic_none_rounded,
+                        Icons.chevron_right_rounded,
                         color: AppColors.primary,
-                        size: 19,
                       ),
                     ],
                   ),
@@ -309,11 +309,6 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  const _MapPill(
-                    icon: Icons.wb_sunny_outlined,
-                    label: '28°C · Gió biển',
-                  ),
-                  const SizedBox(width: 6),
                   _MapPill(
                     icon: switch (widget.routePreview?.quality) {
                       'road_route' => Icons.route_rounded,
@@ -329,8 +324,6 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                       _ => 'Chưa có tuyến',
                     },
                   ),
-                  const SizedBox(width: 6),
-                  const _MapPill(icon: Icons.waves_rounded, label: 'Sóng êm'),
                 ],
               ),
             ),
@@ -377,12 +370,6 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                       : Icons.gps_not_fixed_rounded,
                   tooltip: 'Về vị trí của tôi',
                   onPressed: _recenter,
-                ),
-                const SizedBox(height: 7),
-                _RoundMapButton(
-                  icon: Icons.view_in_ar_outlined,
-                  tooltip: 'Bản đồ 3D',
-                  onPressed: () {},
                 ),
               ],
             ),
@@ -457,21 +444,21 @@ class _ActiveTripCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           children: [
             Text(
-              '✦ LỘ TRÌNH ĐẶC SẮC',
-              style: const TextStyle(
+              'Lịch trình trên bản đồ',
+              style: TextStyle(
                 color: AppColors.accent,
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
                 letterSpacing: .8,
               ),
             ),
-            const Spacer(),
-            const Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
-            const SizedBox(width: 4),
-            const Text(
+            Spacer(),
+            Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
+            SizedBox(width: 4),
+            Text(
               'Đà Nẵng',
               style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
             ),
@@ -502,7 +489,7 @@ class _ActiveTripCard extends StatelessWidget {
                     style: TextStyle(fontSize: 10, color: AppColors.muted),
                   ),
                   Text(
-                    nextStop?.title ?? 'Ngày 1 · Trung tâm & Biển Mỹ Khê',
+                    nextStop?.title ?? 'Chưa có điểm dừng trên bản đồ',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -560,7 +547,7 @@ class _ActiveTripCard extends StatelessWidget {
                       : Icons.play_arrow_rounded,
                   size: 18,
                 ),
-                label: Text(isPlaying ? 'Đang dẫn đường' : 'Bắt đầu đi'),
+                label: Text(isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến'),
               ),
             ),
             const SizedBox(width: 7),
@@ -576,7 +563,7 @@ class _ActiveTripCard extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             IconButton.filledTonal(
-              tooltip: 'Chi tiết địa điểm',
+              tooltip: 'Xem chuyến đi',
               onPressed: onOpenPoi,
               icon: const Icon(Icons.info_outline_rounded),
             ),

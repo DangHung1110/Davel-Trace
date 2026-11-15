@@ -61,18 +61,18 @@ void main() {
 
     await tester.tap(find.byKey(const Key('play-car-button')));
     await tester.pump(const Duration(milliseconds: 80));
-    expect(find.text('Đang dẫn đường'), findsOneWidget);
+    expect(find.text('Đang mô phỏng'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Tạm dừng'));
     await tester.pump();
-    expect(find.text('Bắt đầu đi'), findsOneWidget);
+    expect(find.text('Mô phỏng tuyến'), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('play-car-button')));
     await tester.pump(const Duration(milliseconds: 80));
-    expect(find.text('Đang dẫn đường'), findsOneWidget);
+    expect(find.text('Đang mô phỏng'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Đặt lại mô phỏng'));
     await tester.pump();
-    expect(find.text('Bắt đầu đi'), findsOneWidget);
+    expect(find.text('Mô phỏng tuyến'), findsOneWidget);
   });
 }

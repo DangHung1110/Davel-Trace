@@ -198,6 +198,13 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void leaveDemo() {
+    status = AuthStatus.signedOut;
+    message = null;
+    errorMessage = null;
+    notifyListeners();
+  }
+
   Future<void> logout() => _run(() async {
     try {
       await repository.logout();

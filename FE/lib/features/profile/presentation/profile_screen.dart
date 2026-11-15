@@ -7,10 +7,16 @@ import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key, required this.state, this.onReady});
+  const ProfileScreen({
+    super.key,
+    required this.state,
+    this.onReady,
+    this.showHeader = true,
+  });
 
   final AppState state;
   final VoidCallback? onReady;
+  final bool showHeader;
 
   Future<void> _openEditor(BuildContext context, {UserProfile? profile}) async {
     final data = await showModalBottomSheet<Map<String, dynamic>>(
@@ -77,36 +83,38 @@ class ProfileScreen extends StatelessWidget {
       color: AppColors.canvas,
       child: Column(
         children: [
-          AppHeader(
-            compact: true,
-            section: 'Hồ sơ',
-            trailing: state.isDemoManagement
-                ? IconButton(
-                    tooltip: 'Thêm hồ sơ',
-                    onPressed: state.isMutating
-                        ? null
-                        : () => _openEditor(context),
-                    icon: const Icon(Icons.person_add_alt_1_outlined),
-                  )
-                : null,
-          ),
+          if (showHeader)
+            AppHeader(
+              compact: true,
+              section: 'Sở thích du lịch',
+              trailing: state.isDemoManagement
+                  ? IconButton(
+                      tooltip: 'Thêm hồ sơ',
+                      onPressed: state.isMutating
+                          ? null
+                          : () => _openEditor(context),
+                      icon: const Icon(Icons.person_add_alt_1_outlined),
+                    )
+                  : null,
+            ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 24),
               children: [
                 Text(
-                  'Chào ${profile.displayName}',
+                  'Phong cách chuyến đi',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   state.isDemoManagement
-                      ? 'Hồ sơ local giúp tách chuyến đi cho nhiều người dùng trên cùng thiết bị.'
-                      : 'Hồ sơ này được lưu an toàn cùng tài khoản đang đăng nhập.',
+                      ? 'Tùy chọn của bản demo trên thiết bị.'
+                      : 'Dùng làm mặc định cho chuyến mới. Chuyến đã tạo giữ bản tùy chọn riêng; thay đổi ở đây không tự sửa chuyến cũ.',
                 ),
                 const SizedBox(height: 18),
                 if (state.profiles.length > 1) ...[
                   DropdownButtonFormField<String>(
+                    isExpanded: true,
                     key: const Key('profile-switcher'),
                     initialValue: profile.id,
                     decoration: const InputDecoration(
@@ -198,21 +206,31 @@ class ProfileScreen extends StatelessWidget {
                       ? null
                       : () => _openEditor(context, profile: profile),
                   icon: const Icon(Icons.edit_outlined),
-                  label: const Text('Chỉnh sửa hồ sơ'),
+                  label: const Text('Chỉnh sở thích du lịch'),
                 ),
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
                   key: const Key('offline-reset-action'),
                   onPressed: state.isMutating
                       ? null
-                      : state.isDemoManagement
-                      ? state.resetDemoPlanning
-                      : state.resetActiveProfile,
+                      : () async {
+                          try {
+                            if (state.isDemoManagement) {
+                              state.resetDemoPlanning();
+                            } else {
+                              await state.resetActiveProfile();
+                            }
+                          } catch (_) {
+                            if (context.mounted) {
+                              _showError(context, state.errorMessage);
+                            }
+                          }
+                        },
                   icon: const Icon(Icons.restart_alt_rounded),
                   label: Text(
                     state.isDemoManagement
                         ? 'Dùng lại dữ liệu demo'
-                        : 'Đặt lại tùy chọn mềm',
+                        : 'Đặt lại sở thích mặc định',
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -243,224 +261,40 @@ class ProfileOnboarding extends StatelessWidget {
     required this.onSubmit,
     required this.busy,
   });
-
   final Future<void> Function(Map<String, dynamic>) onSubmit;
   final bool busy;
 
   @override
-  Widget build(BuildContext context) => ColoredBox(
-    color: AppColors.canvas,
-    child: SafeArea(
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 390),
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-            children: [
-              const _DaNangHero(),
-              const SizedBox(height: 16),
-              const Text(
-                'ĐÀ NẴNG GO',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.accent,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Khám phá Đà Nẵng',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Lên kế hoạch chuyến đi hoàn hảo cùng trợ lý du lịch của bạn.',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              const SurfaceCard(
-                padding: EdgeInsets.all(14),
-                child: Column(
-                  children: [
-                    _WelcomeFeature(
-                      icon: Icons.auto_awesome_outlined,
-                      title: 'Lịch trình thông minh',
-                      subtitle: 'Quản lý lịch thủ công; AI sẽ được nối ở giai đoạn sau.',
-                    ),
-                    SizedBox(height: 12),
-                    _WelcomeFeature(
-                      icon: Icons.map_outlined,
-                      title: 'Bản đồ & tuyến đường',
-                      subtitle:
-                          'PMTiles Đà Nẵng, vị trí hiện tại và tuyến OSRM.',
-                    ),
-                    SizedBox(height: 12),
-                    _WelcomeFeature(
-                      icon: Icons.account_balance_wallet_outlined,
-                      title: 'Quản lý chi tiêu',
-                      subtitle:
-                          'Theo dõi ngân sách và cảnh báo theo chuyến đi.',
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-              Text(
-                'Tạo hồ sơ trên thiết bị',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              SurfaceCard(
-                child: ProfileEditor(
-                  key: ProfileEditor.inlineKey,
-                  inline: true,
-                ),
-              ),
-              const SizedBox(height: 12),
-              FilledButton(
-                key: const Key('create-first-profile-button'),
-                onPressed: busy
-                    ? null
-                    : () async {
-                        final form = ProfileEditor.inlineKey.currentState;
-                        final data = form?.submit();
-                        if (data == null) return;
-                        try {
-                          await onSubmit(data);
-                        } catch (_) {
-                          if (context.mounted) {
-                            _showError(
-                              context,
-                              'Không thể lưu hồ sơ. Kiểm tra backend rồi thử lại.',
-                            );
-                          }
-                        }
-                      },
-                child: Text(busy ? 'Đang lưu…' : 'Bắt đầu  →'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
-}
-
-class _DaNangHero extends StatelessWidget {
-  const _DaNangHero();
-
-  @override
-  Widget build(BuildContext context) => Container(
-    height: 190,
-    clipBehavior: Clip.antiAlias,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(28),
-      gradient: const LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Color(0xFFFFC995), Color(0xFF9ADDD9), Color(0xFF4DB4C0)],
-      ),
-    ),
-    child: Stack(
-      children: [
-        const Positioned(
-          top: 16,
-          left: 0,
-          right: 0,
-          child: Text(
-            'Khám phá Đà Nẵng',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.primaryDark,
-              fontSize: 12,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ),
-        Positioned(
-          left: -18,
-          bottom: 45,
-          child: Icon(
-            Icons.landscape_rounded,
-            size: 150,
-            color: AppColors.primary.withValues(alpha: .72),
-          ),
-        ),
-        const Positioned(
-          right: 24,
-          bottom: 48,
-          child: Icon(
-            Icons.location_city_rounded,
-            size: 72,
-            color: Color(0xBFFFFFFF),
-          ),
-        ),
-        Positioned(
-          left: -24,
-          right: -24,
-          bottom: -38,
-          child: Container(
-            height: 94,
-            decoration: const BoxDecoration(
-              color: Color(0xFFEAFBFA),
-              borderRadius: BorderRadius.vertical(
-                top: Radius.elliptical(220, 48),
-              ),
-            ),
-          ),
-        ),
-        const Positioned(
-          right: 66,
-          bottom: 30,
-          child: Icon(Icons.waves_rounded, size: 76, color: Color(0xFF2BA7B6)),
-        ),
-      ],
-    ),
-  );
-}
-
-class _WelcomeFeature extends StatelessWidget {
-  const _WelcomeFeature({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.all(16),
     children: [
-      Container(
-        width: 38,
-        height: 38,
-        decoration: const BoxDecoration(
-          color: AppColors.sand,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, color: AppColors.primary, size: 20),
+      Text(
+        'Sở thích du lịch',
+        style: Theme.of(context).textTheme.headlineMedium,
       ),
-      const SizedBox(width: 10),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: AppColors.ink,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Text(subtitle, style: const TextStyle(fontSize: 11)),
-          ],
-        ),
+      const SizedBox(height: 8),
+      const Text(
+        'Giúp gợi ý lịch phù hợp cho những chuyến đi mới. Đây là tùy chọn du lịch, không phải thông tin đăng nhập.',
+      ),
+      const SizedBox(height: 24),
+      ProfileEditor(key: ProfileEditor.inlineKey, inline: true),
+      const SizedBox(height: 16),
+      FilledButton(
+        key: const Key('create-first-profile-button'),
+        onPressed: busy
+            ? null
+            : () async {
+                final data = ProfileEditor.inlineKey.currentState?.submit();
+                if (data == null) return;
+                try {
+                  await onSubmit(data);
+                } catch (_) {
+                  if (context.mounted) {
+                    _showError(context, 'Không thể lưu sở thích. Hãy thử lại.');
+                  }
+                }
+              },
+        child: Text(busy ? 'Đang lưu…' : 'Lưu sở thích'),
       ),
     ],
   );
@@ -564,7 +398,9 @@ class ProfileEditorState extends State<ProfileEditor> {
         children: [
           if (!widget.inline) ...[
             Text(
-              widget.profile == null ? 'Hồ sơ mới' : 'Chỉnh sửa hồ sơ',
+              widget.profile == null
+                  ? 'Sở thích du lịch của bạn'
+                  : 'Chỉnh sở thích du lịch',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 14),
@@ -572,13 +408,16 @@ class ProfileEditorState extends State<ProfileEditor> {
           TextFormField(
             key: const Key('profile-name-field'),
             controller: _name,
-            decoration: const InputDecoration(labelText: 'Tên hiển thị'),
+            decoration: const InputDecoration(
+              labelText: 'Tên gọi trong hồ sơ du lịch',
+            ),
             validator: (value) => value == null || value.trim().isEmpty
                 ? 'Nhập tên hiển thị'
                 : null,
           ),
           const SizedBox(height: 10),
           DropdownButtonFormField<String>(
+            isExpanded: true,
             initialValue: _party,
             decoration: const InputDecoration(labelText: 'Bạn thường đi'),
             items: const [
@@ -591,6 +430,7 @@ class ProfileEditorState extends State<ProfileEditor> {
           ),
           const SizedBox(height: 10),
           DropdownButtonFormField<String>(
+            isExpanded: true,
             initialValue: _purpose,
             decoration: const InputDecoration(labelText: 'Mục đích chính'),
             items: const [
@@ -704,7 +544,7 @@ class ProfileEditorState extends State<ProfileEditor> {
                   final data = submit();
                   if (data != null) Navigator.pop(context, data);
                 },
-                child: const Text('Lưu hồ sơ'),
+                child: const Text('Lưu sở thích'),
               ),
             ),
           ],

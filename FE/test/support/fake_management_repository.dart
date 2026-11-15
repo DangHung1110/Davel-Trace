@@ -139,7 +139,9 @@ class FakeManagementRepository implements ManagementRepository {
 
   @override
   Future<List<Trip>> listTrips(String profileId, {String? state}) async =>
-      trips.where((trip) => trip.profileId == profileId).toList();
+      state == 'archived' || state == 'deleted'
+      ? []
+      : trips.where((trip) => trip.profileId == profileId).toList();
 
   @override
   Future<Trip> createTrip(Map<String, dynamic> data) async {

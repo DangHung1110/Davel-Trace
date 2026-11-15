@@ -7,15 +7,32 @@ import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 import '../../planning/domain/models.dart';
+import '../../profile/presentation/profile_screen.dart';
+import 'planning_request_review.dart';
 
 class ItineraryScreen extends StatelessWidget {
   const ItineraryScreen({
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onBack,
   });
 
   final AppState state;
+  final VoidCallback? onBack;
+
+  Future<void> openTripEditor(BuildContext context) => _tripEditor(context);
+
+  Future<void> _runAction(
+    BuildContext context,
+    Future<void> Function() action,
+  ) async {
+    try {
+      await action();
+    } catch (_) {
+      if (context.mounted) _error(context, state.errorMessage);
+    }
+  }
 
   static Future<void> _reviewProposal(
     BuildContext context,
@@ -23,82 +40,15 @@ class ItineraryScreen extends StatelessWidget {
   ) async {
     final proposal = state.aiProposal;
     if (proposal == null) return;
-    final values = proposal.confirmedOverrides;
-    final labels = <String, String>{
-      'indicative_budget': 'Ngân sách (VND)',
-      'traveler_count': 'Số người',
-      'day_start': 'Bắt đầu (HH:MM)',
-      'day_end': 'Kết thúc (HH:MM)',
-      'must_visit': 'Bắt buộc ghé (ID địa điểm, cách nhau dấu phẩy)',
-      'avoid': 'Tránh địa điểm (ID, cách nhau dấu phẩy)',
-      'accessibility': 'Nhu cầu tiếp cận',
-      'activities': 'Hoạt động yêu thích',
-      'food_preferences': 'Sở thích ăn uống',
-    };
-    final controllers = {
-      for (final key in labels.keys)
-        key: TextEditingController(
-          text: values[key] is List
-              ? (values[key] as List).join(', ')
-              : values[key]?.toString() ?? '',
+    final corrections = await Navigator.of(context).push<Map<String, dynamic>>(
+      MaterialPageRoute(
+        builder: (_) => PlanningRequestReview(
+          values: proposal.confirmedOverrides,
+          repository: state.repository,
         ),
-    };
-    final corrections = await showDialog<Map<String, dynamic>>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Kiểm tra và sửa yêu cầu'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final entry in labels.entries)
-                TextField(
-                  controller: controllers[entry.key],
-                  decoration: InputDecoration(labelText: entry.value),
-                ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Quay lại'),
-          ),
-          FilledButton(
-            onPressed: () {
-              final result = <String, dynamic>{};
-              for (final key in labels.keys) {
-                final text = controllers[key]!.text.trim();
-                if (key == 'indicative_budget' || key == 'traveler_count') {
-                  if (text.isNotEmpty) {
-                    final number = int.tryParse(text);
-                    if (number == null ||
-                        number < 0 ||
-                        (key == 'traveler_count' &&
-                            (number < 1 || number > 100))) {
-                      return;
-                    }
-                    result[key] = number;
-                  }
-                } else if (key == 'day_start' || key == 'day_end') {
-                  if (text.isNotEmpty) result[key] = text;
-                } else {
-                  result[key] = text
-                      .split(',')
-                      .map((v) => v.trim())
-                      .where((v) => v.isNotEmpty)
-                      .toList();
-                }
-              }
-              Navigator.pop(dialogContext, result);
-            },
-            child: const Text('Xác nhận và lập lịch'),
-          ),
-        ],
       ),
     );
-    // Keep controllers alive until the route transition has disposed its fields.
-    if (corrections != null) {
+    if (corrections != null && context.mounted) {
       await state.confirmAiProposalAndPlan(corrections: corrections);
     }
   }
@@ -106,12 +56,8 @@ class ItineraryScreen extends StatelessWidget {
   final VoidCallback onOpenMap;
 
   Future<void> _tripEditor(BuildContext context, {Trip? trip}) async {
-    final data = await showModalBottomSheet<Map<String, dynamic>>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      useSafeArea: true,
-      builder: (_) => TripEditor(trip: trip),
+    final data = await Navigator.of(context).push<Map<String, dynamic>>(
+      MaterialPageRoute(builder: (_) => TripEditor(trip: trip)),
     );
     if (data == null || !context.mounted) return;
     try {
@@ -199,12 +145,14 @@ class ItineraryScreen extends StatelessWidget {
           AppHeader(
             compact: true,
             section: 'Lịch trình',
-            trailing: IconButton(
-              key: const Key('create-trip-button'),
-              tooltip: 'Tạo chuyến đi',
-              onPressed: state.isMutating ? null : () => _tripEditor(context),
-              icon: const Icon(Icons.add_rounded),
-            ),
+            trailing: onBack == null
+                ? null
+                : TextButton.icon(
+                    key: const Key('back-to-trips'),
+                    onPressed: onBack,
+                    icon: const Icon(Icons.arrow_back, size: 18),
+                    label: const Text('Chuyến đi'),
+                  ),
           ),
           Expanded(
             child: trip == null
@@ -212,7 +160,7 @@ class ItineraryScreen extends StatelessWidget {
                 : RefreshIndicator(
                     onRefresh: state.refresh,
                     child: ListView(
-                      padding: const EdgeInsets.fromLTRB(14, 12, 14, 26),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                       children: [
                         Row(
                           children: [
@@ -220,16 +168,6 @@ class ItineraryScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'ĐÀ NẴNG · HÀNH TRÌNH CỦA BẠN',
-                                    style: TextStyle(
-                                      color: AppColors.accent,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w800,
-                                      letterSpacing: .8,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
                                   Text(
                                     trip.title,
                                     style: Theme.of(context)
@@ -240,6 +178,7 @@ class ItineraryScreen extends StatelessWidget {
                               ),
                             ),
                             PopupMenuButton<String>(
+                              enabled: !state.isMutating && !state.isPlanning,
                               tooltip: 'Tùy chọn chuyến đi',
                               onSelected: (value) {
                                 if (value == 'edit') {
@@ -252,7 +191,7 @@ class ItineraryScreen extends StatelessWidget {
                                   _archiveTrip(context);
                                 }
                                 if (value == 'clear') {
-                                  state.clearActiveTrip();
+                                  _runAction(context, state.clearActiveTrip);
                                 }
                               },
                               itemBuilder: (_) => const [
@@ -277,19 +216,6 @@ class ItineraryScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
-                        _TripSelector(state: state),
-                        if (state.archivedTrips.isNotEmpty ||
-                            state.deletedTrips.isNotEmpty) ...[
-                          const SizedBox(height: 8),
-                          _LifecycleTrips(state: state),
-                        ],
-                        const SizedBox(height: 12),
-                        _PlanningPanel(state: state),
-                        const SizedBox(height: 12),
-                        _TripInsightRow(
-                          remainingVnd: state.expenseSummary.remainingVnd,
-                        ),
-                        const SizedBox(height: 12),
                         SurfaceCard(
                           color: AppColors.primary,
                           child: Row(
@@ -304,7 +230,7 @@ class ItineraryScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${_shortDate(trip.startDate)} → ${_shortDate(trip.endDate)}',
+                                      '${_shortDate(trip.startDate)} đến ${_shortDate(trip.endDate)}',
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w800,
@@ -314,7 +240,7 @@ class ItineraryScreen extends StatelessWidget {
                                       '${trip.dayStart.substring(0, 5)}–${trip.dayEnd.substring(0, 5)} · ${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}',
                                       style: const TextStyle(
                                         color: Color(0xFFDDE9E4),
-                                        fontSize: 11,
+                                        fontSize: 12,
                                       ),
                                     ),
                                   ],
@@ -331,6 +257,20 @@ class ItineraryScreen extends StatelessWidget {
                               ),
                             ],
                           ),
+                        ),
+                        const SizedBox(height: 16),
+                        FilledButton.icon(
+                          key: const Key('open-planning-button'),
+                          onPressed: state.isMutating
+                              ? null
+                              : () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) =>
+                                        PlanningScreen(state: state),
+                                  ),
+                                ),
+                          icon: const Icon(Icons.auto_awesome_outlined),
+                          label: const Text('Lập lịch cho chuyến đi'),
                         ),
                         if (itinerary != null &&
                             itinerary.warnings.isNotEmpty) ...[
@@ -368,12 +308,12 @@ class ItineraryScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'Điểm nhấn trong ngày',
+                                'Lịch trình trong ngày',
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
                             Text(
-                              'v${itinerary?.version ?? 1}',
+                              'Bản ${itinerary?.version ?? 1}',
                               style: const TextStyle(
                                 color: AppColors.muted,
                                 fontSize: 11,
@@ -408,24 +348,32 @@ class ItineraryScreen extends StatelessWidget {
                                   }
                                 }
                               },
-                              onStatus: (status) =>
-                                  state.setActivityStatus(entry.$2, status),
+                              onStatus: (status) => _runAction(
+                                context,
+                                () => state.setActivityStatus(entry.$2, status),
+                              ),
                               onMoveUp: entry.$1 == 0
                                   ? null
-                                  : () => state.moveActivity(
-                                      entry.$1,
-                                      entry.$1 - 1,
+                                  : () => _runAction(
+                                      context,
+                                      () => state.moveActivity(
+                                        entry.$1,
+                                        entry.$1 - 1,
+                                      ),
                                     ),
                               onMoveDown: entry.$1 == dayActivities.length - 1
                                   ? null
-                                  : () => state.moveActivity(
-                                      entry.$1,
-                                      entry.$1 + 1,
+                                  : () => _runAction(
+                                      context,
+                                      () => state.moveActivity(
+                                        entry.$1,
+                                        entry.$1 + 1,
+                                      ),
                                     ),
                             ),
                           ),
                         const SizedBox(height: 12),
-                        FilledButton.icon(
+                        OutlinedButton.icon(
                           key: const Key('add-activity-button'),
                           onPressed: state.isMutating
                               ? null
@@ -443,9 +391,74 @@ class ItineraryScreen extends StatelessWidget {
   }
 }
 
-class _PlanningPanel extends StatelessWidget {
+class PlanningScreen extends StatelessWidget {
+  const PlanningScreen({super.key, required this.state});
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Lập lịch chuyến đi')),
+    body: AnimatedBuilder(
+      animation: state,
+      builder: (context, _) => ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Text(
+            state.activeTrip?.title ?? 'Chuyến đi',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Tạo phương án, xem các điểm dừng rồi chọn lịch phù hợp. Lịch hiện tại chỉ thay đổi khi bạn xác nhận chọn.',
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton.icon(
+            key: const Key('planning-preferences-button'),
+            onPressed: state.isPlanning
+                ? null
+                : () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => Scaffold(
+                        appBar: AppBar(title: const Text('Sở thích du lịch')),
+                        body: AnimatedBuilder(
+                          animation: state,
+                          builder: (_, _) =>
+                              ProfileScreen(state: state, showHeader: false),
+                        ),
+                      ),
+                    ),
+                  ),
+            icon: const Icon(Icons.tune),
+            label: const Text('Sở thích du lịch'),
+          ),
+          const SizedBox(height: 16),
+          _PlanningPanel(state: state),
+        ],
+      ),
+    ),
+  );
+}
+
+class _PlanningPanel extends StatefulWidget {
   const _PlanningPanel({required this.state});
   final AppState state;
+
+  @override
+  State<_PlanningPanel> createState() => _PlanningPanelState();
+}
+
+class _PlanningPanelState extends State<_PlanningPanel> {
+  AppState get state => widget.state;
+  final _placeNames = <String, Future<PoiItem?>>{};
+
+  Future<PoiItem?> _resolvePlace(String id) =>
+      _placeNames.putIfAbsent(id, () async {
+        try {
+          return await state.repository.getPoiDetails(id);
+        } catch (_) {
+          return null;
+        }
+      });
 
   Future<void> _interpret(BuildContext context) async {
     final controller = TextEditingController();
@@ -453,27 +466,29 @@ class _PlanningPanel extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Nhờ Gemini diễn giải'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Nội dung sẽ được gửi tới nhà cung cấp AI bên ngoài. Không nhập mật khẩu, token hoặc thông tin riêng tư không cần thiết.',
-              style: TextStyle(fontSize: 12, color: AppColors.muted),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              key: const Key('planning-ai-prompt'),
-              controller: controller,
-              minLines: 3,
-              maxLines: 6,
-              maxLength: 4000,
-              decoration: const InputDecoration(
-                labelText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
-                alignLabelWithHint: true,
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Nội dung sẽ được gửi tới nhà cung cấp AI bên ngoài. Không nhập mật khẩu, token hoặc thông tin riêng tư không cần thiết.',
+                style: TextStyle(fontSize: 12, color: AppColors.muted),
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              TextField(
+                key: const Key('planning-ai-prompt'),
+                controller: controller,
+                minLines: 3,
+                maxLines: 6,
+                maxLength: 4000,
+                decoration: const InputDecoration(
+                  labelText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                  alignLabelWithHint: true,
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -555,10 +570,12 @@ class _PlanningPanel extends StatelessWidget {
         ? const Color(0xFFFFF1E3)
         : const Color(0xFFF2F5F4);
     final title = live
-        ? 'Planner trực tiếp · FastAPI'
+        ? 'Phương án từ hệ thống'
         : stale
         ? 'Dữ liệu gần nhất · mất kết nối'
-        : 'Dữ liệu demo trên thiết bị';
+        : state.isDemoManagement
+        ? 'Phương án mẫu để tham khảo'
+        : 'Chưa có phương án cho chuyến này';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -585,7 +602,13 @@ class _PlanningPanel extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      state.plannerMessage,
+                      live
+                          ? 'Chọn một phương án để lưu vào lịch trình.'
+                          : stale
+                          ? 'Không tải được phương án mới. Bạn đang xem dữ liệu gần nhất.'
+                          : state.isDemoManagement
+                          ? 'Các phương án mẫu chưa được lưu vào chuyến đi.'
+                          : 'Tạo phương án để bắt đầu, sau đó xem và chọn lịch phù hợp.',
                       style: const TextStyle(fontSize: 11),
                     ),
                   ],
@@ -595,9 +618,37 @@ class _PlanningPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 9),
+        if (state.errorMessage != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              state.errorMessage!,
+              key: const Key('planning-action-error'),
+              style: const TextStyle(color: AppColors.error),
+            ),
+          ),
+        FilledButton.icon(
+          key: const Key('request-plan-button'),
+          onPressed:
+              state.isPlanning || state.isInterpreting || state.isDemoManagement
+              ? null
+              : state.requestPlan,
+          icon: Icon(
+            state.isPlanning ? Icons.hourglass_top : Icons.alt_route_rounded,
+          ),
+          label: Text(
+            state.isPlanning
+                ? 'Đang lập phương án…'
+                : state.isDemoManagement
+                ? 'Đăng nhập để lập lịch'
+                : 'Tạo phương án lịch trình',
+          ),
+        ),
+        const SizedBox(height: 12),
         OutlinedButton.icon(
           key: const Key('request-ai-interpretation'),
-          onPressed: state.isInterpreting || state.isPlanning
+          onPressed:
+              state.isInterpreting || state.isPlanning || state.isDemoManagement
               ? null
               : () => _interpret(context),
           icon: Icon(
@@ -606,7 +657,7 @@ class _PlanningPanel extends StatelessWidget {
           label: Text(
             state.isInterpreting
                 ? 'Gemini đang diễn giải…'
-                : 'Nhờ Gemini diễn giải yêu cầu (tùy chọn)',
+                : 'Nhập mong muốn bằng lời với Gemini',
           ),
         ),
         if (state.aiMessage != null) ...[
@@ -626,14 +677,14 @@ class _PlanningPanel extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Đề xuất cần xác nhận · ${proposal.provider}${proposal.model == null ? '' : ' / ${proposal.model}'}',
-                  style: const TextStyle(fontWeight: FontWeight.w800),
+                const Text(
+                  'Yêu cầu đã được diễn giải',
+                  style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 5),
-                Text('Trường: ${proposal.fields}'),
-                Text('Ràng buộc cứng: ${proposal.hardConstraints}'),
-                Text('Sở thích mềm: ${proposal.softPreferences}'),
+                const Text(
+                  'Kiểm tra ngân sách, thời gian và địa điểm trước khi dùng để lập lịch.',
+                ),
                 if (proposal.assumptions.isNotEmpty)
                   Text('Giả định: ${proposal.assumptions.join('; ')}'),
                 if (proposal.unresolved.isNotEmpty)
@@ -662,19 +713,16 @@ class _PlanningPanel extends StatelessWidget {
           ),
         ],
         const SizedBox(height: 9),
-        FilledButton.icon(
-          key: const Key('request-plan-button'),
-          onPressed: state.isPlanning ? null : state.requestPlan,
-          icon: Icon(
-            state.isPlanning ? Icons.hourglass_top : Icons.alt_route_rounded,
-          ),
-          label: Text(
-            state.isPlanning
-                ? 'Đang lập phương án…'
-                : 'Tạo 5 phương án khả thi',
-          ),
-        ),
         const SizedBox(height: 10),
+        if (state.acceptance != null) ...[
+          FilledButton.tonalIcon(
+            key: const Key('view-accepted-itinerary'),
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.check_circle_outline),
+            label: const Text('Đã lưu · Xem lịch trình'),
+          ),
+          const SizedBox(height: 12),
+        ],
         Text('Phương án', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 6),
         ...state.planAlternatives.map(
@@ -687,7 +735,9 @@ class _PlanningPanel extends StatelessWidget {
                   state.activeAlternative?.id == plan.id &&
                   state.acceptance != null,
               isLive: live,
-              busy: state.isPlanning,
+              busy: state.isPlanning || state.isDemoManagement || stale,
+              previewOnly: state.isDemoManagement,
+              resolvePlace: _resolvePlace,
               onSelect: () => state.acceptAlternative(plan),
             ),
           ),
@@ -702,7 +752,7 @@ class _PlanningPanel extends StatelessWidget {
             label: Text(
               state.isExplaining
                   ? 'Đang giải thích…'
-                  : 'Giải thích (có thể gửi dữ liệu tới AI bên ngoài)',
+                  : 'Vì sao gợi ý lịch này? (có dùng AI bên ngoài)',
             ),
           ),
           if (state.planExplanation case final explanation?)
@@ -715,7 +765,7 @@ class _PlanningPanel extends StatelessWidget {
                   Text(
                     explanation.source == 'ai_grounded'
                         ? 'Giải thích AI có dẫn chứng'
-                        : 'Giải thích deterministic',
+                        : 'Giải thích từ dữ liệu lịch trình',
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                   Text(explanation.summary),
@@ -755,12 +805,6 @@ class _PlanningPanel extends StatelessWidget {
           ),
           const SizedBox(height: 8),
         ],
-        if (state.planningReadiness != null)
-          Text(
-            'Dữ liệu học: ${state.planningReadiness!['pairwise_judgments'] ?? 0}/150 so sánh · '
-            '${state.planningReadiness!['accepted_complete_days'] ?? 0}/40 ngày đã chốt',
-            style: const TextStyle(color: AppColors.muted, fontSize: 10),
-          ),
       ],
     );
   }
@@ -774,6 +818,8 @@ class _AlternativeCard extends StatelessWidget {
     required this.isLive,
     required this.busy,
     required this.onSelect,
+    required this.resolvePlace,
+    this.previewOnly = false,
   });
 
   final PlanAlternative plan;
@@ -782,6 +828,8 @@ class _AlternativeCard extends StatelessWidget {
   final bool isLive;
   final bool busy;
   final VoidCallback onSelect;
+  final Future<PoiItem?> Function(String) resolvePlace;
+  final bool previewOnly;
 
   @override
   Widget build(BuildContext context) => SurfaceCard(
@@ -821,17 +869,33 @@ class _AlternativeCard extends StatelessWidget {
           style: const TextStyle(fontSize: 11, color: AppColors.muted),
         ),
         const SizedBox(height: 8),
+        for (final activity in plan.activities)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: FutureBuilder<PoiItem?>(
+              future: activity['name'] != null || activity['title'] != null
+                  ? null
+                  : resolvePlace(activity['poi_id']?.toString() ?? ''),
+              builder: (_, snapshot) => Text(
+                '${activity['start'] ?? activity['start_time'] ?? ''}  ${activity['name'] ?? activity['title'] ?? snapshot.data?.name ?? (snapshot.connectionState == ConnectionState.waiting ? 'Đang tải địa điểm…' : 'Chưa tải được tên địa điểm')}',
+              ),
+            ),
+          ),
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
             key: Key('accept-plan-${plan.id}'),
-            onPressed: busy ? null : onSelect,
+            onPressed: busy || accepted || !plan.gatePassed ? null : onSelect,
             child: Text(
-              accepted
+              previewOnly
+                  ? 'Đăng nhập để lưu lịch'
+                  : accepted
                   ? 'Đã lưu lựa chọn'
                   : selected && !isLive
                   ? 'Đã chọn cục bộ'
-                  : 'Chọn phương án',
+                  : !isLive
+                  ? 'Kết nối lại để lưu lịch'
+                  : 'Dùng lịch trình này',
             ),
           ),
         ),
@@ -894,7 +958,7 @@ class _NoTrip extends StatelessWidget {
           if (state.archivedTrips.isNotEmpty ||
               state.deletedTrips.isNotEmpty) ...[
             const SizedBox(height: 8),
-            _LifecycleTrips(state: state),
+            TripArchiveButton(state: state),
           ],
         ],
       ),
@@ -902,8 +966,8 @@ class _NoTrip extends StatelessWidget {
   );
 }
 
-class _LifecycleTrips extends StatelessWidget {
-  const _LifecycleTrips({required this.state});
+class TripArchiveButton extends StatelessWidget {
+  const TripArchiveButton({super.key, required this.state});
 
   final AppState state;
 
@@ -938,8 +1002,16 @@ class _LifecycleTrips extends StatelessWidget {
                   onPressed: state.isMutating
                       ? null
                       : () async {
-                          await state.restoreTrip(trip);
-                          if (sheetContext.mounted) Navigator.pop(sheetContext);
+                          try {
+                            await state.restoreTrip(trip);
+                            if (sheetContext.mounted) {
+                              Navigator.pop(sheetContext);
+                            }
+                          } catch (_) {
+                            if (sheetContext.mounted) {
+                              _error(sheetContext, state.errorMessage);
+                            }
+                          }
                         },
                   child: const Text('Khôi phục'),
                 ),
@@ -951,33 +1023,6 @@ class _LifecycleTrips extends StatelessWidget {
   );
 }
 
-class _TripSelector extends StatelessWidget {
-  const _TripSelector({required this.state});
-  final AppState state;
-
-  @override
-  Widget build(BuildContext context) => DropdownButtonFormField<String>(
-    key: const Key('trip-switcher'),
-    isExpanded: true,
-    initialValue: state.activeTrip!.id,
-    decoration: const InputDecoration(
-      labelText: 'Chuyến đi đang quản lý',
-      prefixIcon: Icon(Icons.route_outlined),
-    ),
-    items: state.trips
-        .map(
-          (trip) => DropdownMenuItem(value: trip.id, child: Text(trip.title)),
-        )
-        .toList(),
-    onChanged: state.isMutating
-        ? null
-        : (id) {
-            if (id == null || id == state.activeTrip!.id) return;
-            state.selectTrip(state.trips.firstWhere((trip) => trip.id == id));
-          },
-  );
-}
-
 class _DaySelector extends StatelessWidget {
   const _DaySelector({required this.state});
 
@@ -985,7 +1030,7 @@ class _DaySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 42,
+    height: MediaQuery.textScalerOf(context).scale(12) + 32,
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: state.tripDates.length,
@@ -1005,94 +1050,6 @@ class _DaySelector extends StatelessWidget {
   );
 }
 
-class _TripInsightRow extends StatelessWidget {
-  const _TripInsightRow({required this.remainingVnd});
-
-  final int remainingVnd;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      const Expanded(
-        child: _InsightPill(
-          icon: Icons.wb_sunny_outlined,
-          iconColor: AppColors.secondary,
-          title: '28°C',
-          subtitle: 'Trời ấm, có gió',
-        ),
-      ),
-      const SizedBox(width: 8),
-      Expanded(
-        child: _InsightPill(
-          icon: Icons.account_balance_wallet_outlined,
-          iconColor: AppColors.primary,
-          title: moneyVnd(remainingVnd),
-          subtitle: 'Ngân sách còn lại',
-        ),
-      ),
-    ],
-  );
-}
-
-class _InsightPill extends StatelessWidget {
-  const _InsightPill({
-    required this.icon,
-    required this.iconColor,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final IconData icon;
-  final Color iconColor;
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-    decoration: BoxDecoration(
-      color: AppColors.surface,
-      borderRadius: BorderRadius.circular(18),
-      boxShadow: const [
-        BoxShadow(
-          color: Color(0x0D006A6A),
-          blurRadius: 12,
-          offset: Offset(0, 4),
-        ),
-      ],
-    ),
-    child: Row(
-      children: [
-        Icon(icon, size: 19, color: iconColor),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.ink,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Text(
-                subtitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 9),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
 class _EmptyActivities extends StatelessWidget {
   const _EmptyActivities();
 
@@ -1105,7 +1062,7 @@ class _EmptyActivities extends StatelessWidget {
         SizedBox(width: 12),
         Expanded(
           child: Text(
-            'Lịch đang trống. Bạn có thể chọn POI trong catalog hoặc nhập địa điểm riêng.',
+            'Chưa có hoạt động trong ngày này. Thêm địa điểm hoặc lập lịch để bắt đầu.',
           ),
         ),
       ],
@@ -1136,223 +1093,123 @@ class _ActivityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 20,
-          child: Column(
+    padding: const EdgeInsets.only(bottom: 12),
+    child: SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  color: index == 0 ? AppColors.secondary : AppColors.primary,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.surface, width: 3),
-                  boxShadow: const [
-                    BoxShadow(color: Color(0x33006A6A), blurRadius: 3),
+              Icon(_activityIcon(activity.category), color: AppColors.primary),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${_clock(activity.startAt)} – ${_clock(activity.endAt)}',
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      activity.title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                   ],
                 ),
               ),
-              Container(width: 2, height: 104, color: AppColors.sand),
+              PopupMenuButton<String>(
+                tooltip: 'Tùy chọn hoạt động',
+                enabled: !busy,
+                onSelected: (action) {
+                  switch (action) {
+                    case 'edit':
+                      onEdit();
+                    case 'delete':
+                      onDelete();
+                    case 'up':
+                      onMoveUp?.call();
+                    case 'down':
+                      onMoveDown?.call();
+                  }
+                },
+                itemBuilder: (_) => [
+                  const PopupMenuItem(
+                    value: 'edit',
+                    child: Text('Sửa hoạt động'),
+                  ),
+                  PopupMenuItem(
+                    value: 'up',
+                    enabled: onMoveUp != null,
+                    child: const Text('Đưa lên'),
+                  ),
+                  PopupMenuItem(
+                    value: 'down',
+                    enabled: onMoveDown != null,
+                    child: const Text('Đưa xuống'),
+                  ),
+                  const PopupMenuItem(
+                    value: 'delete',
+                    child: Text('Xóa hoạt động'),
+                  ),
+                ],
+              ),
             ],
           ),
-        ),
-        const SizedBox(width: 4),
-        Expanded(
-          child: SurfaceCard(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 72,
-                  height: 82,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: index.isEven
-                          ? const [Color(0xFFB9E5E4), Color(0xFF5AAEAA)]
-                          : const [Color(0xFFFFD9B0), Color(0xFFD97706)],
-                    ),
+          if (activity.notes.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Text(activity.notes),
+          ],
+          const SizedBox(height: 12),
+          Text(
+            'Chi phí dự kiến: ${moneyVnd(activity.estimatedCostVnd)}',
+            style: const TextStyle(fontSize: 12),
+          ),
+          const SizedBox(height: 4),
+          PopupMenuButton<String>(
+            tooltip: 'Đổi trạng thái',
+            enabled: !busy,
+            initialValue: activity.progressState,
+            onSelected: onStatus,
+            itemBuilder: (_) => const [
+              PopupMenuItem(value: 'planned', child: Text('Đã lên kế hoạch')),
+              PopupMenuItem(value: 'completed', child: Text('Đã hoàn thành')),
+              PopupMenuItem(value: 'skipped', child: Text('Đã bỏ qua')),
+            ],
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 48),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    activity.progressState == 'completed'
+                        ? Icons.check_circle_outline
+                        : activity.progressState == 'skipped'
+                        ? Icons.cancel_outlined
+                        : Icons.schedule,
+                    size: 18,
+                    color: AppColors.primary,
                   ),
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Icon(
-                          _activityIcon(activity.category),
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                      Positioned(
-                        top: 7,
-                        left: 7,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 7,
-                            vertical: 3,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(99),
-                          ),
-                          child: Text(
-                            '${index + 1}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(switch (activity.progressState) {
+                      'completed' => 'Đã hoàn thành',
+                      'skipped' => 'Đã bỏ qua',
+                      _ => 'Đã lên kế hoạch',
+                    }),
                   ),
-                ),
-                const SizedBox(width: 11),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${_clock(activity.startAt)} · ${activity.category.toUpperCase()}',
-                        style: const TextStyle(
-                          color: AppColors.secondary,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        activity.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.ink,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        activity.poiId == null
-                            ? 'Hoạt động riêng'
-                            : 'POI liên kết · chưa xác minh lại',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppColors.muted,
-                          fontSize: 9,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        activity.notes.isEmpty
-                            ? '${_clock(activity.startAt)}–${_clock(activity.endAt)}'
-                            : activity.notes,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 10),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              moneyVnd(activity.estimatedCostVnd),
-                              style: const TextStyle(
-                                color: AppColors.muted,
-                                fontSize: 9,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          PopupMenuButton<String>(
-                            tooltip: 'Trạng thái hoạt động',
-                            enabled: !busy,
-                            initialValue: activity.progressState,
-                            onSelected: onStatus,
-                            itemBuilder: (_) => const [
-                              PopupMenuItem(
-                                value: 'planned',
-                                child: Text('Đã lên kế hoạch'),
-                              ),
-                              PopupMenuItem(
-                                value: 'completed',
-                                child: Text('Đã hoàn thành'),
-                              ),
-                              PopupMenuItem(
-                                value: 'skipped',
-                                child: Text('Đã bỏ qua'),
-                              ),
-                            ],
-                            child: Icon(
-                              activity.progressState == 'completed'
-                                  ? Icons.check_circle_rounded
-                                  : activity.progressState == 'skipped'
-                                  ? Icons.cancel_outlined
-                                  : Icons.schedule_rounded,
-                              size: 19,
-                              color: activity.progressState == 'completed'
-                                  ? AppColors.primary
-                                  : AppColors.muted,
-                            ),
-                          ),
-                          _MiniIcon(
-                            icon: Icons.arrow_upward_rounded,
-                            tooltip: 'Đưa lên',
-                            onPressed: busy ? null : onMoveUp,
-                          ),
-                          _MiniIcon(
-                            icon: Icons.arrow_downward_rounded,
-                            tooltip: 'Đưa xuống',
-                            onPressed: busy ? null : onMoveDown,
-                          ),
-                          _MiniIcon(
-                            icon: Icons.edit_outlined,
-                            tooltip: 'Sửa',
-                            onPressed: busy ? null : onEdit,
-                          ),
-                          _MiniIcon(
-                            icon: Icons.delete_outline,
-                            tooltip: 'Xóa',
-                            onPressed: busy ? null : onDelete,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                  const Icon(Icons.expand_more, size: 18),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
-  );
-}
-
-class _MiniIcon extends StatelessWidget {
-  const _MiniIcon({
-    required this.icon,
-    required this.tooltip,
-    required this.onPressed,
-  });
-  final IconData icon;
-  final String tooltip;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) => IconButton(
-    constraints: const BoxConstraints.tightFor(width: 27, height: 30),
-    padding: EdgeInsets.zero,
-    visualDensity: VisualDensity.compact,
-    tooltip: tooltip,
-    onPressed: onPressed,
-    icon: Icon(icon, size: 18),
   );
 }
 
@@ -1376,6 +1233,8 @@ class _TripEditorState extends State<TripEditor> {
   late final TextEditingController _title;
   late final TextEditingController _budget;
   late final TextEditingController _travelers;
+  late final TextEditingController _dayStart;
+  late final TextEditingController _dayEnd;
   late DateTime _start;
   late int _days;
   late String _transport;
@@ -1387,6 +1246,12 @@ class _TripEditorState extends State<TripEditor> {
     _title = TextEditingController(text: trip?.title ?? 'Cuối tuần ở Đà Nẵng');
     _budget = TextEditingController(text: '${trip?.budgetVnd ?? 3000000}');
     _travelers = TextEditingController(text: '${trip?.travelers ?? 2}');
+    _dayStart = TextEditingController(
+      text: trip?.dayStart.substring(0, 5) ?? '07:00',
+    );
+    _dayEnd = TextEditingController(
+      text: trip?.dayEnd.substring(0, 5) ?? '21:00',
+    );
     final now = DateTime.now();
     _start =
         trip?.startDate ??
@@ -1402,6 +1267,8 @@ class _TripEditorState extends State<TripEditor> {
     _title.dispose();
     _budget.dispose();
     _travelers.dispose();
+    _dayStart.dispose();
+    _dayEnd.dispose();
     super.dispose();
   }
 
@@ -1411,8 +1278,8 @@ class _TripEditorState extends State<TripEditor> {
       'title': _title.text.trim(),
       'start_date': isoDate(_start),
       'end_date': isoDate(_start.add(Duration(days: _days - 1))),
-      'day_start': '07:00:00',
-      'day_end': '21:00:00',
+      'day_start': '${_dayStart.text.trim()}:00',
+      'day_end': '${_dayEnd.text.trim()}:00',
       'travelers': int.parse(_travelers.text),
       'budget_vnd': int.parse(_budget.text),
       'transport': _transport,
@@ -1420,106 +1287,193 @@ class _TripEditorState extends State<TripEditor> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.fromLTRB(
-      18,
-      4,
-      18,
-      MediaQuery.viewInsetsOf(context).bottom + 18,
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: Text(widget.trip == null ? 'Tạo chuyến đi' : 'Sửa chuyến đi'),
     ),
-    child: SingleChildScrollView(
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.trip == null ? 'Tạo chuyến Đà Nẵng' : 'Sửa chuyến đi',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 14),
-            TextFormField(
-              key: const Key('trip-title-field'),
-              controller: _title,
-              decoration: const InputDecoration(labelText: 'Tên chuyến đi'),
-              validator: _required,
-            ),
-            const SizedBox(height: 10),
-            InkWell(
-              onTap: () async {
-                final picked = await showDatePicker(
-                  context: context,
-                  initialDate: _start,
-                  firstDate: DateTime(2024),
-                  lastDate: DateTime(2035),
-                );
-                if (picked != null) setState(() => _start = picked);
-              },
-              child: InputDecorator(
-                decoration: const InputDecoration(labelText: 'Ngày bắt đầu'),
-                child: Text(_shortDate(_start)),
+    bottomNavigationBar: Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: SafeArea(
+        minimum: const EdgeInsets.all(16),
+        child: FilledButton(
+          key: const Key('save-trip-button'),
+          onPressed: _save,
+          child: Text(widget.trip == null ? 'Tạo chuyến đi' : 'Lưu thay đổi'),
+        ),
+      ),
+    ),
+    body: Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Thông tin chuyến đi',
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-            ),
-            const SizedBox(height: 10),
-            SegmentedButton<int>(
-              segments: const [
-                ButtonSegment(value: 1, label: Text('1 ngày')),
-                ButtonSegment(value: 2, label: Text('2 ngày')),
-              ],
-              selected: {_days},
-              onSelectionChanged: (value) =>
-                  setState(() => _days = value.first),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    controller: _travelers,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Số người'),
-                    validator: _positive,
+              const SizedBox(height: 14),
+              const Text(
+                'Điểm đến: Đà Nẵng. Bạn có thể tự thêm hoạt động hoặc lập lịch sau khi tạo.',
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                key: const Key('trip-title-field'),
+                controller: _title,
+                maxLength: 160,
+                decoration: const InputDecoration(labelText: 'Tên chuyến đi'),
+                validator: _required,
+              ),
+              const SizedBox(height: 10),
+              InkWell(
+                key: const Key('trip-start-date-field'),
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: _start,
+                    firstDate: DateTime(2024),
+                    lastDate: DateTime(2035),
+                  );
+                  if (picked != null) setState(() => _start = picked);
+                },
+                child: InputDecorator(
+                  decoration: const InputDecoration(labelText: 'Ngày bắt đầu'),
+                  child: Text(_shortDate(_start)),
+                ),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<int>(
+                isExpanded: true,
+                key: const Key('trip-duration-field'),
+                initialValue: _days,
+                decoration: const InputDecoration(labelText: 'Số ngày'),
+                items: List.generate(
+                  14,
+                  (i) => DropdownMenuItem(
+                    value: i + 1,
+                    child: Text('${i + 1} ngày'),
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextFormField(
-                    controller: _budget,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Ngân sách (VND)',
+                onChanged: (value) => setState(() => _days = value!),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Người đi và ngân sách',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: const Key('trip-travelers-field'),
+                controller: _travelers,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Số người'),
+                validator: (value) {
+                  final count = int.tryParse(value?.trim() ?? '');
+                  return count != null && count >= 1 && count <= 20
+                      ? null
+                      : 'Nhập từ 1 đến 20 người';
+                },
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: const Key('trip-budget-field'),
+                controller: _budget,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Ngân sách (VND)',
+                  helperText: 'Tổng ngân sách cho cả nhóm',
+                ),
+                validator: _nonNegative,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Di chuyển và giờ hoạt động',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                key: const Key('trip-transport-field'),
+                initialValue: _transport,
+                decoration: const InputDecoration(labelText: 'Di chuyển'),
+                items: [
+                  const DropdownMenuItem(
+                    value: 'motorbike',
+                    child: Text('Xe máy'),
+                  ),
+                  const DropdownMenuItem(value: 'car', child: Text('Ô tô')),
+                  const DropdownMenuItem(
+                    value: 'walking',
+                    child: Text('Đi bộ'),
+                  ),
+                  const DropdownMenuItem(
+                    value: 'mixed',
+                    child: Text('Kết hợp phương tiện'),
+                  ),
+                  const DropdownMenuItem(value: 'taxi', child: Text('Taxi')),
+                  const DropdownMenuItem(
+                    value: 'bicycle',
+                    child: Text('Xe đạp'),
+                  ),
+                  if (![
+                    'motorbike',
+                    'car',
+                    'walking',
+                    'mixed',
+                    'taxi',
+                    'bicycle',
+                  ].contains(_transport))
+                    DropdownMenuItem(
+                      value: _transport,
+                      child: const Text('Phương tiện đã lưu'),
                     ),
-                    validator: _nonNegative,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              initialValue: _transport,
-              decoration: const InputDecoration(labelText: 'Di chuyển'),
-              items: const [
-                DropdownMenuItem(value: 'motorbike', child: Text('Xe máy')),
-                DropdownMenuItem(value: 'car', child: Text('Ô tô')),
-                DropdownMenuItem(value: 'walking', child: Text('Đi bộ')),
-              ],
-              onChanged: (value) => setState(() => _transport = value!),
-            ),
-            const SizedBox(height: 14),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                key: const Key('save-trip-button'),
-                onPressed: _save,
-                child: const Text('Lưu chuyến đi'),
+                ],
+                onChanged: (value) => setState(() => _transport = value!),
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+              TextFormField(
+                key: const Key('trip-day-start-field'),
+                controller: _dayStart,
+                keyboardType: TextInputType.datetime,
+                decoration: const InputDecoration(
+                  labelText: 'Bắt đầu mỗi ngày',
+                  hintText: '07:00',
+                ),
+                validator: _validTime,
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: const Key('trip-day-end-field'),
+                controller: _dayEnd,
+                keyboardType: TextInputType.datetime,
+                decoration: const InputDecoration(
+                  labelText: 'Kết thúc mỗi ngày',
+                  hintText: '21:00',
+                ),
+                validator: (value) {
+                  final error = _validTime(value);
+                  if (error != null) return error;
+                  if (_validTime(_dayStart.text) == null &&
+                      value!.trim().compareTo(_dayStart.text.trim()) <= 0) {
+                    return 'Giờ kết thúc phải sau giờ bắt đầu';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
         ),
       ),
     ),
   );
+
+  String? _validTime(String? value) =>
+      RegExp(r'^([01]\d|2[0-3]):[0-5]\d$').hasMatch(value?.trim() ?? '')
+      ? null
+      : 'Nhập giờ theo HH:MM (ví dụ 08:30)';
 }
 
 class ActivityEditor extends StatefulWidget {
@@ -1733,7 +1687,7 @@ class _ActivityEditorState extends State<ActivityEditor> {
             ),
             const SizedBox(height: 6),
             const Text(
-              'Tìm POI có sẵn hoặc nhập địa điểm riêng.',
+              'Chọn địa điểm có sẵn để hiển thị trên tuyến bản đồ. Hoạt động riêng được lưu vào lịch trình.',
               style: TextStyle(fontSize: 12),
             ),
             const SizedBox(height: 12),
@@ -1744,7 +1698,7 @@ class _ActivityEditorState extends State<ActivityEditor> {
                     key: const Key('poi-search-field'),
                     controller: _search,
                     decoration: const InputDecoration(
-                      labelText: 'Tìm POI',
+                      labelText: 'Tìm địa điểm',
                       hintText: 'Cầu Rồng, biển, cà phê…',
                     ),
                     onSubmitted: (_) => _findPoi(),
@@ -1867,6 +1821,7 @@ class _ActivityEditorState extends State<ActivityEditor> {
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
+                    isExpanded: true,
                     initialValue: _category,
                     decoration: const InputDecoration(labelText: 'Loại'),
                     items: const [

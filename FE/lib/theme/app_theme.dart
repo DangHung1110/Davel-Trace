@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  // Sơn Trà Breeze — exact tokens from Stitch project 10401962277345929591.
+  // Shared coastal palette across navigation and trip workflows.
   static const primary = Color(0xFF006A6A);
   static const primaryDark = Color(0xFF005050);
   static const secondary = Color(0xFFD97706);
@@ -142,7 +142,11 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(999),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          textStyle: const TextStyle(
+            fontFamily: 'Be Vietnam Pro',
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -153,15 +157,24 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(999),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          textStyle: const TextStyle(
+            fontFamily: 'Be Vietnam Pro',
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
         ),
       ),
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surfaceLow,
-        selectedColor: AppColors.primary,
+        selectedColor: AppColors.sand,
         side: const BorderSide(color: AppColors.outline),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-        labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+        labelStyle: const TextStyle(
+          fontFamily: 'Be Vietnam Pro',
+          color: AppColors.ink,
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       dividerColor: AppColors.outline,
     );

@@ -17,8 +17,8 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: compact ? 56 : 64,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      constraints: BoxConstraints(minHeight: compact ? 56 : 64),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: const BoxDecoration(color: AppColors.surface),
       child: Row(
         children: [
@@ -41,36 +41,19 @@ class AppHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Davel Trace',
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -.2,
-                  ),
-                ),
                 Text(
                   section,
                   style: const TextStyle(
-                    color: AppColors.muted,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -.2,
                   ),
                 ),
               ],
             ),
           ),
-          trailing ??
-              const CircleAvatar(
-                radius: 16,
-                backgroundColor: AppColors.sand,
-                child: Icon(
-                  Icons.person_rounded,
-                  color: AppColors.primary,
-                  size: 18,
-                ),
-              ),
+          ?trailing,
         ],
       ),
     );
