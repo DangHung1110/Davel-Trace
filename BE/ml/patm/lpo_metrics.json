@@ -1,0 +1,26 @@
+{
+  "protocol": "leave-poi-out; score human decisive labels only; ties excluded",
+  "seed": 7,
+  "held_frac": 0.2,
+  "poi_count": 716,
+  "train_pair_rows": 1171,
+  "trainable_rows": 884,
+  "train_ties_dropped": 287,
+  "eval_pair_rows": 599,
+  "eval_human_pairs": 46,
+  "eval_human_decisive": 38,
+  "eval_human_ties": 8,
+  "human_label_mix": {
+    "1": 15,
+    "-1": 23,
+    "0": 8
+  },
+  "heldout_poi_count": 157,
+  "poi_leakage": [],
+  "feature_count": 21,
+  "model_accuracy": 0.7368421052631579,
+  "model_correct": 28,
+  "rule_accuracy": 0.5263157894736842,
+  "rule_correct": 20,
+  "warning": "Small human holdout; descriptive only, not a stable quality estimate."
+}
