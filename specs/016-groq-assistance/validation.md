@@ -34,3 +34,7 @@ user itinerary was created/accepted, and no database migration/package was added
 Full end-user browser submit is left for the user; lower-level production services
 were exercised with real Groq network calls and authenticated API behavior is covered
 by the contract suite.
+
+Converged: implementation 5eb59a3 pushed on fix/ui; PR #21 updated with final Groq
+scope, model selection and validation: https://github.com/DangHung1110/Davel-Trace/pull/21
+Target remains feat/product-platform; no integration-branch merge was performed.

@@ -6,4 +6,4 @@
 - [x] Update ignored local configuration, safe template/docs and provider-neutral UI.
 - [x] Run unit/contract/regression checks and a live smoke when local key is available.
 - [x] Restart/rebuild preview and document exact results/limits.
-- [ ] Push and update PR #21.
+- [x] Push and update PR #21.
