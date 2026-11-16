@@ -1,0 +1,457 @@
+import '../domain/models.dart';
+import 'management_repository.dart';
+
+/// Device-local management kit used by the laptop demo. Planner intelligence
+/// still comes from FastAPI; these CRUD objects keep the UI usable offline.
+class DemoManagementRepository implements ManagementRepository {
+  DemoManagementRepository() {
+    profiles.add(_profile('profile-demo', 'Đặng Hùng'));
+    trips.add(_trip('trip-demo', 'profile-demo', 'Một ngày Đà Nẵng'));
+    activities.addAll(_seedActivities());
+  }
+
+  final profiles = <UserProfile>[];
+  final trips = <Trip>[];
+  final archivedTrips = <Trip>[];
+  final activities = <ActivityItem>[];
+  final expenses = <ExpenseItem>[];
+  String? activeProfileId = 'profile-demo';
+  int itineraryVersion = 1;
+
+  UserProfile _profile(String id, String name) => UserProfile(
+    id: id,
+    displayName: name,
+    partyType: 'couple',
+    tripPurpose: 'discovery',
+    spendingLevel: 2,
+    pace: 2,
+    fitness: 2,
+    foodPreferences: const ['mì Quảng', 'hải sản'],
+    mustAvoid: const ['bar ồn'],
+    version: 1,
+  );
+
+  Trip _trip(String id, String profileId, String title) => Trip(
+    id: id,
+    profileId: profileId,
+    title: title,
+    startDate: DateTime(2026, 10, 28),
+    endDate: DateTime(2026, 10, 28),
+    dayStart: '07:00:00',
+    dayEnd: '19:00:00',
+    travelers: 2,
+    budgetVnd: 3000000,
+    transport: 'motorbike',
+    status: 'draft',
+    version: 1,
+  );
+
+  List<ActivityItem> _seedActivities() => [
+    ActivityItem(
+      id: 'act-1',
+      position: 0,
+      poiId: 'son-tra',
+      title: 'Bán đảo Sơn Trà',
+      notes: 'Ngắm thành phố buổi sáng',
+      latitude: 16.105,
+      longitude: 108.278,
+      startAt: DateTime(2026, 10, 28, 7, 30),
+      endAt: DateTime(2026, 10, 28, 9, 30),
+      category: 'nature',
+      estimatedCostVnd: 0,
+      source: 'seeded',
+      version: 1,
+    ),
+    ActivityItem(
+      id: 'act-2',
+      position: 1,
+      poiId: 'cham-museum',
+      title: 'Bảo tàng Điêu khắc Chăm',
+      notes: 'Điểm văn hóa trong nhà',
+      latitude: 16.0603,
+      longitude: 108.2235,
+      startAt: DateTime(2026, 10, 28, 14),
+      endAt: DateTime(2026, 10, 28, 15, 30),
+      category: 'museum',
+      estimatedCostVnd: 60000,
+      source: 'seeded',
+      version: 1,
+    ),
+    ActivityItem(
+      id: 'act-3',
+      position: 2,
+      poiId: 'my-khe',
+      title: 'Biển Mỹ Khê',
+      notes: 'Hoàng hôn',
+      latitude: 16.061,
+      longitude: 108.247,
+      startAt: DateTime(2026, 10, 28, 16, 30),
+      endAt: DateTime(2026, 10, 28, 18),
+      category: 'beach',
+      estimatedCostVnd: 0,
+      source: 'seeded',
+      version: 1,
+    ),
+  ];
+
+  ItineraryData get itinerary => ItineraryData(
+    id: 'it-demo',
+    tripId: trips.first.id,
+    version: itineraryVersion,
+    activities: [...activities],
+    warnings: const ['Dữ liệu lịch quản lý đang ở chế độ demo trên thiết bị.'],
+  );
+
+  ExpenseSummaryData get summary {
+    final spent = expenses.fold<int>(0, (sum, item) => sum + item.amountVnd);
+    final budget = trips.isEmpty ? 0 : trips.first.budgetVnd;
+    return ExpenseSummaryData(
+      budgetVnd: budget,
+      spentVnd: spent,
+      remainingVnd: budget - spent,
+      byCategory: const {},
+      alert: spent >= budget && spent > 0
+          ? '100'
+          : spent * 100 >= budget * 80 && spent > 0
+          ? '80'
+          : 'none',
+      averageVnd: expenses.isEmpty ? 0 : spent ~/ expenses.length,
+      entryCount: expenses.length,
+      utilizationPercent: budget == 0 ? 0 : spent / budget * 100,
+    );
+  }
+
+  @override
+  Future<(List<UserProfile>, String?)> listProfiles() async =>
+      ([...profiles], activeProfileId);
+  @override
+  Future<UserProfile> createProfile(Map<String, dynamic> data) async {
+    final item = _profile(
+      'profile-${profiles.length + 1}',
+      data['display_name'] as String,
+    );
+    profiles.add(item);
+    activeProfileId = item.id;
+    return item;
+  }
+
+  @override
+  Future<UserProfile> updateProfile(
+    String id,
+    Map<String, dynamic> data,
+  ) async {
+    final old = profiles.firstWhere((item) => item.id == id);
+    final item = UserProfile(
+      id: old.id,
+      displayName: data['display_name'] as String? ?? old.displayName,
+      partyType: data['party_type'] as String? ?? old.partyType,
+      tripPurpose: data['trip_purpose'] as String? ?? old.tripPurpose,
+      spendingLevel: data['spending_level'] as int? ?? old.spendingLevel,
+      pace: data['pace'] as int? ?? old.pace,
+      fitness: data['fitness'] as int? ?? old.fitness,
+      foodPreferences: List<String>.from(
+        data['food_preferences'] as List? ?? old.foodPreferences,
+      ),
+      mustAvoid: List<String>.from(
+        data['must_avoid'] as List? ?? old.mustAvoid,
+      ),
+      preferredActivities: List<String>.from(
+        data['preferred_activities'] as List? ?? old.preferredActivities,
+      ),
+      usualTransport: List<String>.from(
+        data['usual_transport'] as List? ?? old.usualTransport,
+      ),
+      allergies: List<String>.from(data['allergies'] as List? ?? old.allergies),
+      accessibilityNeeds: List<String>.from(
+        data['accessibility_needs'] as List? ?? old.accessibilityNeeds,
+      ),
+      version: old.version + 1,
+    );
+    profiles[profiles.indexOf(old)] = item;
+    return item;
+  }
+
+  @override
+  Future<UserProfile> resetProfile(UserProfile profile) async =>
+      updateProfile(profile.id, {
+        'food_preferences': <String>[],
+        'preferred_activities': <String>[],
+        'usual_transport': <String>[],
+        'pace': 2,
+        'fitness': 2,
+        'spending_level': 2,
+      });
+
+  @override
+  Future<void> setActiveProfile(String id) async => activeProfileId = id;
+  @override
+  Future<void> deleteProfile(UserProfile profile) async =>
+      profiles.remove(profile);
+  @override
+  Future<List<Trip>> listTrips(String profileId, {String? state}) async =>
+      (state == 'archived' ? archivedTrips : trips)
+          .where((item) => item.profileId == profileId)
+          .toList();
+  @override
+  Future<Trip> createTrip(Map<String, dynamic> data) async {
+    final item = _trip(
+      'trip-${trips.length + 1}',
+      data['profile_id'] as String,
+      data['title'] as String,
+    );
+    trips.add(item);
+    return item;
+  }
+
+  @override
+  Future<Trip> updateTrip(String id, Map<String, dynamic> data) async =>
+      trips.firstWhere((item) => item.id == id);
+  @override
+  Future<void> deleteTrip(Trip trip) async => trips.remove(trip);
+  @override
+  Future<Trip> archiveTrip(Trip trip) async {
+    trips.remove(trip);
+    archivedTrips.add(trip);
+    return trip;
+  }
+
+  @override
+  Future<Trip> restoreTrip(Trip trip) async {
+    archivedTrips.remove(trip);
+    trips.add(trip);
+    return trip;
+  }
+
+  @override
+  Future<(Trip, ItineraryData, ExpenseSummaryData)> getTrip(String id) async =>
+      (trips.firstWhere((item) => item.id == id), itinerary, summary);
+  @override
+  Future<ItineraryData> addActivity(
+    String tripId,
+    Map<String, dynamic> data,
+  ) async {
+    activities.add(
+      ActivityItem(
+        id: 'act-${activities.length + 1}',
+        position: activities.length,
+        poiId: data['poi_id'] as String?,
+        title: data['title'] as String,
+        notes: data['notes'] as String,
+        latitude: data['latitude'] as double,
+        longitude: data['longitude'] as double,
+        startAt: DateTime.parse(data['start_at'] as String),
+        endAt: DateTime.parse(data['end_at'] as String),
+        category: data['category'] as String,
+        estimatedCostVnd: data['estimated_cost_vnd'] as int,
+        source: 'manual',
+        version: 1,
+      ),
+    );
+    itineraryVersion++;
+    return itinerary;
+  }
+
+  @override
+  Future<ItineraryData> updateActivity(
+    String id,
+    Map<String, dynamic> data,
+  ) async {
+    final old = activities.firstWhere((item) => item.id == id);
+    final updated = ActivityItem(
+      id: old.id,
+      position: old.position,
+      poiId: old.poiId,
+      title: data['title'] as String? ?? old.title,
+      notes: data['notes'] as String? ?? old.notes,
+      latitude: old.latitude,
+      longitude: old.longitude,
+      startAt: data['start_at'] == null
+          ? old.startAt
+          : DateTime.parse(data['start_at'] as String),
+      endAt: data['end_at'] == null
+          ? old.endAt
+          : DateTime.parse(data['end_at'] as String),
+      category: data['category'] as String? ?? old.category,
+      estimatedCostVnd:
+          data['estimated_cost_vnd'] as int? ?? old.estimatedCostVnd,
+      source: old.source,
+      version: old.version + 1,
+      progressState: data['progress_state'] as String? ?? old.progressState,
+    );
+    activities[activities.indexOf(old)] = updated;
+    itineraryVersion++;
+    return itinerary;
+  }
+
+  @override
+  Future<ItineraryData> deleteActivity(
+    ActivityItem activity,
+    int version,
+  ) async {
+    activities.remove(activity);
+    itineraryVersion++;
+    return itinerary;
+  }
+
+  @override
+  Future<ItineraryData> reorderActivities(
+    String tripId,
+    List<String> ids,
+    int version,
+  ) async {
+    final byId = {for (final item in activities) item.id: item};
+    activities
+      ..clear()
+      ..addAll(ids.map((id) => byId[id]!));
+    itineraryVersion++;
+    return itinerary;
+  }
+
+  @override
+  Future<(List<ExpenseItem>, ExpenseSummaryData)> listExpenses(
+    String tripId,
+  ) async => ([...expenses], summary);
+  @override
+  Future<(ExpenseItem, ExpenseSummaryData)> addExpense(
+    String tripId,
+    Map<String, dynamic> data,
+  ) async {
+    final item = ExpenseItem(
+      id: 'expense-${expenses.length + 1}',
+      label: data['label'] as String,
+      amountVnd: data['amount_vnd'] as int,
+      category: data['category'] as String,
+      spentAt: DateTime.parse(data['spent_at'] as String),
+      notes: data['notes'] as String,
+      version: 1,
+    );
+    expenses.add(item);
+    return (item, summary);
+  }
+
+  @override
+  Future<(ExpenseItem, ExpenseSummaryData)> updateExpense(
+    String id,
+    Map<String, dynamic> data,
+  ) async {
+    final old = expenses.firstWhere((item) => item.id == id);
+    final updated = ExpenseItem(
+      id: old.id,
+      label: data['label'] as String? ?? old.label,
+      amountVnd: data['amount_vnd'] as int? ?? old.amountVnd,
+      category: data['category'] as String? ?? old.category,
+      spentAt: data['spent_at'] == null
+          ? old.spentAt
+          : DateTime.parse(data['spent_at'] as String),
+      notes: data['notes'] as String? ?? old.notes,
+      version: old.version + 1,
+    );
+    expenses[expenses.indexOf(old)] = updated;
+    return (updated, summary);
+  }
+
+  @override
+  Future<ExpenseSummaryData> deleteExpense(ExpenseItem expense) async {
+    expenses.remove(expense);
+    return summary;
+  }
+
+  @override
+  Future<Map<String, dynamic>> exportExpenses(
+    String tripId, {
+    String? date,
+    String? category,
+  }) async {
+    final items = expenses.where((item) {
+      final key =
+          '${item.spentAt.year.toString().padLeft(4, '0')}-${item.spentAt.month.toString().padLeft(2, '0')}-${item.spentAt.day.toString().padLeft(2, '0')}';
+      return (date == null || date == key) &&
+          (category == null || category == item.category);
+    }).toList();
+    final spent = items.fold<int>(0, (total, item) => total + item.amountVnd);
+    return {
+      'schema_version': 1,
+      'generated_at': DateTime.now().toIso8601String(),
+      'trip_id': tripId,
+      'filters': {'date': date, 'category': category},
+      'items': [
+        for (final item in items)
+          {
+            'id': item.id,
+            'label': item.label,
+            'amount_vnd': item.amountVnd,
+            'category': item.category,
+            'spent_at': item.spentAt.toIso8601String(),
+            'notes': item.notes,
+          },
+      ],
+      'summary': {'spent_vnd': spent, 'entry_count': items.length},
+      'source': 'seeded_demo',
+    };
+  }
+
+  @override
+  Future<List<PoiItem>> searchPois(String query) async =>
+      [
+            _demoPoi(
+              'demo-dragon-bridge',
+              'Cầu Rồng',
+              'landmark',
+              16.061,
+              108.227,
+            ),
+            _demoPoi('demo-my-khe', 'Biển Mỹ Khê', 'beach', 16.061, 108.247),
+            _demoPoi(
+              'demo-son-tra',
+              'Bán đảo Sơn Trà',
+              'nature',
+              16.105,
+              108.278,
+            ),
+          ]
+          .where(
+            (item) =>
+                item.name.toLowerCase().contains(query.toLowerCase()) ||
+                item.type.toLowerCase().contains(query.toLowerCase()),
+          )
+          .toList();
+
+  PoiItem _demoPoi(
+    String id,
+    String name,
+    String type,
+    double lat,
+    double lon,
+  ) => PoiItem(
+    id: id,
+    name: name,
+    type: type,
+    latitude: lat,
+    longitude: lon,
+    verified: false,
+    source: 'Dữ liệu mẫu',
+    snapshotVersion: 'demo-seed-v1',
+  );
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async =>
+      (await searchPois('')).firstWhere((item) => item.id == id);
+  @override
+  Future<RoutePreviewData> previewRoute(String tripId, List<String> ids) async {
+    final byId = {for (final activity in activities) activity.id: activity};
+    final coordinates = ids
+        .map((id) => byId[id])
+        .whereType<ActivityItem>()
+        .map((activity) => [activity.longitude, activity.latitude])
+        .toList();
+    return RoutePreviewData(
+      source: 'demo_seed',
+      isRealRoute: false,
+      distanceM: 0,
+      durationS: 0,
+      quality: 'interpolated',
+      geometry: coordinates,
+      warning: 'Đường nối minh họa từ dữ liệu demo.',
+    );
+  }
+}
