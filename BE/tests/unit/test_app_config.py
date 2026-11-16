@@ -19,11 +19,15 @@ from BE.app.config import Settings  # noqa: E402
 from BE.app.main import configure  # noqa: E402
 
 APP_ORIGIN = "https://davel-trace.example"
+# Production settings refuse to load without an authoritative database URL.
+PROD_DB = "postgresql+psycopg://davel:test@127.0.0.1:5432/davel_trace"
+PRODUCTION = {"app_mode": "production", "allowed_origins": APP_ORIGIN,
+              "database_url": PROD_DB}
 
 
 def client(**settings) -> TestClient:
     app = FastAPI()
-    configure(app, Settings(**settings))
+    configure(app, Settings(_env_file=None, **settings))
     return TestClient(app)
 
 
@@ -46,12 +50,15 @@ class TestCors(unittest.TestCase):
         self.assertFalse(allowed(local, "http://localhost.evil.example"))
 
     def test_production_only_answers_its_own_origin(self):
-        prod = client(app_env="production", cors_origins=(APP_ORIGIN,))
+        prod = client(**PRODUCTION)
         self.assertTrue(allowed(prod, APP_ORIGIN))
         self.assertFalse(allowed(prod, "http://localhost:5500"))
 
     def test_only_the_methods_the_api_has(self):
-        self.assertEqual(preflight(client(), "http://localhost:5500", "DELETE").status_code, 400)
+        # The product platform's trips/expenses/identity routes use PUT, PATCH
+        # and DELETE; nothing answers TRACE.
+        self.assertEqual(preflight(client(), "http://localhost:5500", "DELETE").status_code, 200)
+        self.assertEqual(preflight(client(), "http://localhost:5500", "TRACE").status_code, 400)
 
 
 class TestRouters(unittest.TestCase):
@@ -61,19 +68,20 @@ class TestRouters(unittest.TestCase):
     def test_local_routers_stay_out_of_production(self):
         for path in ("/v1/repair", "/v1/review", "/v1/accept"):
             self.assertIn(path, self.paths())
-            self.assertNotIn(path, self.paths(app_env="production"))
+            self.assertNotIn(path, self.paths(**PRODUCTION))
 
     def test_public_routers_are_always_on(self):
-        self.assertIn("/v1/itinerary", self.paths(app_env="production"))
+        self.assertIn("/v1/itinerary", self.paths(**PRODUCTION))
 
 
 class TestEnv(unittest.TestCase):
     def test_settings_read_the_environment(self):
-        with mock.patch.dict(os.environ, {"APP_ENV": "production",
-                                          "CORS_ORIGINS": f" {APP_ORIGIN}, https://b.example ,"}):
-            settings = Settings.from_env()
+        with mock.patch.dict(os.environ, {"APP_MODE": "production",
+                                          "DATABASE_URL": PROD_DB,
+                                          "ALLOWED_ORIGINS": f" {APP_ORIGIN}, https://b.example ,"}):
+            settings = Settings(_env_file=None)
         self.assertTrue(settings.is_production)
-        self.assertEqual(settings.cors_origins, (APP_ORIGIN, "https://b.example"))
+        self.assertEqual(settings.cors_origins, [APP_ORIGIN, "https://b.example"])
 
 
 if __name__ == "__main__":

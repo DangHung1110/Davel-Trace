@@ -39,9 +39,11 @@
 <button onclick="doItin(['balanced'])">Can bang</button>
 <button onclick="doItin(['experience'])">Trai nghiem</button>
 <button onclick="doItin(['savings','balanced','experience'])"><b>So sanh 3 profile</b></button>
+<button onclick="loadReadiness()">Doc readiness</button>
 <div id="itinBox"></div>
 <button onclick="doAccept()">Chốt plan này</button>
 <pre id="itinOut">...</pre>
+<pre id="readinessOut">Readiness: chua doc</pre>
 <script>
 const BE = "http://127.0.0.1:8000";
 const PROFILE_KEY = "davel_profile";
@@ -64,6 +66,31 @@ async function call(path, body){
   const r = await fetch(BE + path, {method:"POST",
     headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
   return {status: r.status, json: await r.json()};
+}
+
+async function loadReadiness(){
+  const el = document.getElementById("readinessOut");
+  try{
+    const r = await fetch(BE + "/v1/planning/readiness");
+    const j = await r.json();
+    el.textContent = "HTTP " + r.status + "\n" + JSON.stringify(j, null, 2);
+  }catch(e){ el.textContent = "LOI readiness: " + e; }
+}
+
+async function acceptPlan(plan, target){
+  target.textContent = "dang chot...";
+  const key = "harness-" + plan.itinerary_id + "-" + Date.now();
+  try{
+    const {status, json} = await call("/v1/itinerary/select", {
+      itinerary_id: plan.itinerary_id, idempotency_key: key
+    });
+    const accepted = json.acceptance || {};
+    target.className = status === 200 ? "ok" : "err";
+    target.textContent = status === 200
+      ? "Da luu: " + (accepted.acceptance_id || "?")
+      : "HTTP " + status + ": " + (json.message || json.error || "loi");
+    await loadReadiness();
+  }catch(e){ target.className = "err"; target.textContent = "LOI: " + e; }
 }
 
 async function doParse(){
@@ -249,7 +276,7 @@ async function renderPlans(plans, trip){
   table.className = "cmp";
   const head = document.createElement("tr");
   for(const label of ["Hồ sơ", "Số điểm", "Km", "Chi phí (đ)",
-                      "Qua cổng", "Vi phạm", "Reward", "Điểm mềm", "Review"]){
+                      "Qua cổng", "Vi phạm", "Reward", "Điểm mềm", "Review / Chốt"]){
     const th = document.createElement("th");
     th.textContent = label;
     head.appendChild(th);
@@ -278,6 +305,12 @@ async function renderPlans(plans, trip){
     repairBtn.textContent = "Repair";
     repairBtn.onclick = () => doRepair(plan, box);
     action.appendChild(repairBtn);
+    const acceptBtn = document.createElement("button");
+    acceptBtn.textContent = "Chot";
+    const accepted = document.createElement("div");
+    acceptBtn.onclick = () => acceptPlan(plan, accepted);
+    action.appendChild(acceptBtn);
+    action.appendChild(accepted);
     tr.appendChild(action);
     table.appendChild(tr);
   }
