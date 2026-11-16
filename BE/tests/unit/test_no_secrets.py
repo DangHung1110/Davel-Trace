@@ -27,6 +27,7 @@ PATTERNS = [
     r"GOCSPX-[A-Za-z0-9_-]{20,}",
     r"xox[bap]-[A-Za-z0-9-]{8,}",
     r"ghp_[A-Za-z0-9]{8,}",
+    r"gsk_[A-Za-z0-9_-]{10,}",
     r"password\s*=\s*['\"][^'\"]{3,}",
     r"Bearer [A-Za-z0-9._-]{12,}",
     r"https?://[^/\s]*:[^/\s]*@[A-Za-z]",

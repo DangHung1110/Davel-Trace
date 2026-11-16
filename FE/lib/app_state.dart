@@ -727,7 +727,7 @@ class AppState extends ChangeNotifier {
           (readiness['capabilities'] as Map?)?['interpretation'] != true) {
         throw const ApiException(
           'LLM_DISABLED',
-          'Gemini chưa được cấu hình; bạn vẫn có thể tạo lịch trực tiếp.',
+          'Trợ lý AI chưa được cấu hình; bạn vẫn có thể tạo lịch trực tiếp.',
         );
       }
       final proposal = await aiRepository.interpret(trip.id, text);

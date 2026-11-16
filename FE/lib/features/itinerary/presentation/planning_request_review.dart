@@ -122,7 +122,7 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
         padding: const EdgeInsets.all(16),
         children: [
           const Text(
-            'Chỉnh lại thông tin Gemini đã hiểu. Địa điểm được giữ theo lựa chọn bên dưới; bạn có thể bỏ địa điểm không đúng.',
+            'Chỉnh lại thông tin trợ lý AI đã hiểu. Địa điểm được giữ theo lựa chọn bên dưới; bạn có thể bỏ địa điểm không đúng.',
           ),
           const SizedBox(height: 20),
           for (final entry in _labels.entries) ...[

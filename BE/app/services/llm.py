@@ -1,8 +1,8 @@
 """Provider-neutral JSON LLM gateway.
 
 The deterministic planner never calls this module. AI capabilities use it for
-optional interpretation, explanation and shadow observations only. Gemini is
-called through Google's OpenAI-compatible REST surface without an SDK.
+optional interpretation, explanation and shadow observations only. Hosted providers
+use their REST compatibility surfaces without an SDK.
 """
 
 from __future__ import annotations
@@ -21,6 +21,7 @@ except ImportError:  # pragma: no cover
 
 TEMPERATURE = 0.1
 GEMINI_OPENAI_BASE = "https://generativelanguage.googleapis.com/v1beta/openai"
+GROQ_OPENAI_BASE = "https://api.groq.com/openai/v1"
 RETRYABLE = frozenset({"transport", "timeout", "bad_json", "schema"})
 
 
@@ -36,7 +37,7 @@ class LLMError(RuntimeError):
 
 def _safe_detail(detail: object, settings: Settings) -> str:
     text = str(detail or "provider request failed")
-    for secret in (settings.gemini_api_key, settings.llm_api_key):
+    for secret in (settings.gemini_api_key, settings.groq_api_key, settings.llm_api_key):
         if secret:
             text = text.replace(secret, "[redacted]")
     return text
@@ -58,6 +59,25 @@ def _endpoint(settings: Settings) -> tuple[str, dict[str, str], dict]:
                 "stream": False,
                 "format": "json",
                 "options": {"temperature": TEMPERATURE},
+            },
+        )
+    if provider == "groq":
+        if not settings.groq_api_key or not settings.groq_model:
+            raise LLMError("config", "Groq API key and model are required")
+        return (
+            GROQ_OPENAI_BASE + "/chat/completions",
+            {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {settings.groq_api_key}",
+                "User-Agent": "Davel-Trace/1.0",
+            },
+            {
+                "model": settings.groq_model,
+                "temperature": TEMPERATURE,
+                "response_format": {"type": "json_object"},
+                "max_completion_tokens": 2048,
+                **({"reasoning_effort": "none"}
+                   if settings.groq_model == "qwen/qwen3.8-27b" else {}),
             },
         )
     if provider == "gemini":
@@ -85,6 +105,8 @@ def _classify_http(status: int, body: str) -> str:
         return "quota"
     if "safety" in lowered or "blocked" in lowered or "refusal" in lowered:
         return "safety"
+    if status in {400, 404, 422}:
+        return "config"
     if status in {408, 504}:
         return "timeout"
     return "transport"
@@ -157,6 +179,9 @@ def complete_json(
         prompt += "\nReturn ONLY a JSON object matching this schema:\n" + json.dumps(
             schema.model_json_schema(), ensure_ascii=False
         )
+    # JSON mode requires a JSON instruction even for callers without a schema.
+    if settings.llm_provider == "groq":
+        prompt += "\nReturn ONLY a JSON object, without markdown or commentary."
     body = {**provider_fields, "messages": [{"role": "user", "content": prompt}]}
     last = LLMError("transport", "no attempt made")
     for attempt in range(settings.llm_max_retries + 1):
@@ -187,13 +212,20 @@ def provider_metadata(settings: Settings | None = None) -> dict:
     configured = settings.llm_provider == "local" or (
         settings.llm_provider == "gemini" and bool(settings.gemini_api_key)
     ) or (
+        settings.llm_provider == "groq" and bool(settings.groq_api_key)
+    ) or (
         settings.llm_provider == "compatible"
         and bool(settings.llm_api_url and settings.llm_api_key)
     )
-    model = settings.judge_model if settings.llm_provider == "local" else settings.llm_model
+    if settings.llm_provider == "local":
+        model = settings.judge_model
+    elif settings.llm_provider == "groq":
+        model = settings.groq_model
+    else:
+        model = settings.llm_model
     return {
         "provider": settings.llm_provider,
         "model": model if settings.llm_provider != "disabled" else None,
         "configured": bool(configured and model),
-        "external_processing": settings.llm_provider in {"gemini", "compatible"},
+        "external_processing": settings.llm_provider in {"gemini", "groq", "compatible"},
     }

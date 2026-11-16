@@ -57,7 +57,7 @@ def test_llm_provider_and_bounds_are_typed() -> None:
     assert "not-a-real-key" not in repr(settings)
 
 
-@pytest.mark.parametrize("provider", ["disabled", "local", "gemini", "compatible"])
+@pytest.mark.parametrize("provider", ["disabled", "local", "gemini", "groq", "compatible"])
 def test_supported_llm_providers(provider: str) -> None:
     assert Settings(llm_provider=provider, _env_file=None).llm_provider == provider
 

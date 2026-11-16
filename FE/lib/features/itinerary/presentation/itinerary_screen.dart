@@ -465,7 +465,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
     final text = await showDialog<String>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Nhờ Gemini diễn giải'),
+        title: const Text('Diễn giải mong muốn với AI'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -656,8 +656,8 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
           label: Text(
             state.isInterpreting
-                ? 'Gemini đang diễn giải…'
-                : 'Nhập mong muốn bằng lời với Gemini',
+                ? 'AI đang diễn giải…'
+                : 'Nhập mong muốn bằng lời với AI',
           ),
         ),
         if (state.aiMessage != null) ...[
