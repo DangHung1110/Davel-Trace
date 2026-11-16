@@ -27,10 +27,12 @@ class Settings(BaseSettings):
     app_mode: AppMode = AppMode.demo
     database_url: str = Field(default="", repr=False)
     allowed_origins: str = "http://127.0.0.1:5501,http://localhost:5501"
-    llm_provider: Literal["disabled", "local", "gemini", "compatible"] = "disabled"
+    llm_provider: Literal["disabled", "local", "gemini", "groq", "compatible"] = "disabled"
     ollama_url: str = "http://localhost:11434"
     judge_model: str = "qwen3:14b"
     gemini_api_key: str = Field(default="", repr=False)
+    groq_api_key: str = Field(default="", repr=False)
+    groq_model: str = "qwen/qwen3.8-27b"
     llm_api_url: str = ""
     llm_api_key: str = Field(default="", repr=False)
     llm_model: str = "gemini-3.1-flash-lite"

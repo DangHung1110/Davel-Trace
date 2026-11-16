@@ -24,78 +24,136 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Tài khoản & bảo mật')),
-    body: ListView(
-      padding: const EdgeInsets.all(20),
-      children: [
-        ListTile(
-          leading: const CircleAvatar(child: Icon(Icons.person_outline)),
-          title: Text(widget.controller.account?.email ?? ''),
-          subtitle: Text(
-            'Vai trò: ${widget.controller.account?.roles.join(', ') ?? 'traveler'}',
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: widget.controller,
+    builder: (context, _) => Scaffold(
+      appBar: AppBar(title: const Text('Tài khoản & bảo mật')),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          if (widget.controller.errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                widget.controller.errorMessage!,
+                key: const Key('security-action-error'),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ),
+          ListTile(
+            leading: const CircleAvatar(child: Icon(Icons.person_outline)),
+            title: Text(
+              widget.controller.account?.email ?? '',
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: const Text('Thông tin tài khoản đăng nhập'),
           ),
-        ),
-        const Divider(),
-        Text('Phiên đăng nhập', style: Theme.of(context).textTheme.titleMedium),
-        FutureBuilder<List<IdentitySession>>(
-          future: sessions,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Column(
-              children: [
-                for (final item in snapshot.data!)
-                  ListTile(
-                    leading: Icon(
-                      item.current ? Icons.phone_android : Icons.devices,
-                    ),
-                    title: Text(item.deviceLabel),
-                    subtitle: Text(
-                      item.current ? 'Thiết bị hiện tại' : 'Đang hoạt động',
-                    ),
-                    trailing: item.current
-                        ? null
-                        : IconButton(
-                            icon: const Icon(Icons.logout),
-                            onPressed: () async {
-                              await widget.controller.repository.revokeSession(
-                                item.id,
-                              );
-                              setState(
-                                () => sessions = widget.controller.repository
-                                    .sessions(),
-                              );
-                            },
-                          ),
-                  ),
-              ],
-            );
-          },
-        ),
-        const SizedBox(height: 20),
-        OutlinedButton.icon(
-          onPressed: widget.controller.logout,
-          icon: const Icon(Icons.logout),
-          label: const Text('Đăng xuất'),
-        ),
-        const SizedBox(height: 12),
-        OutlinedButton.icon(
-          onPressed: () => _createExport(context),
-          icon: const Icon(Icons.download_outlined),
-          label: const Text('Tạo bản xuất dữ liệu'),
-        ),
-        const SizedBox(height: 12),
-        TextButton.icon(
-          style: TextButton.styleFrom(
-            foregroundColor: Theme.of(context).colorScheme.error,
+          const Divider(),
+          Text(
+            'Phiên đăng nhập',
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          onPressed: () => _confirmDeletion(context),
-          icon: const Icon(Icons.delete_outline),
-          label: const Text('Yêu cầu xóa tài khoản'),
-        ),
-      ],
+          FutureBuilder<List<IdentitySession>>(
+            future: sessions,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Không tải được thiết bị đăng nhập.'),
+                    TextButton(
+                      onPressed: () => setState(
+                        () =>
+                            sessions = widget.controller.repository.sessions(),
+                      ),
+                      child: const Text('Thử lại'),
+                    ),
+                  ],
+                );
+              }
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                children: [
+                  for (final item in snapshot.data!)
+                    ListTile(
+                      leading: Icon(
+                        item.current ? Icons.phone_android : Icons.devices,
+                      ),
+                      title: Text(item.deviceLabel),
+                      subtitle: Text(
+                        item.current ? 'Thiết bị hiện tại' : 'Đang hoạt động',
+                      ),
+                      trailing: item.current
+                          ? null
+                          : IconButton(
+                              icon: const Icon(Icons.logout),
+                              onPressed: () async {
+                                try {
+                                  await widget.controller.repository
+                                      .revokeSession(item.id);
+                                  if (mounted) {
+                                    setState(
+                                      () => sessions = widget
+                                          .controller
+                                          .repository
+                                          .sessions(),
+                                    );
+                                  }
+                                } catch (_) {
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'Không thể đăng xuất thiết bị này. Hãy thử lại.',
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                            ),
+                    ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+          OutlinedButton.icon(
+            key: const Key('security-logout-button'),
+            onPressed: widget.controller.busy
+                ? null
+                : () async {
+                    await widget.controller.logout();
+                    if (context.mounted) {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    }
+                  },
+            icon: const Icon(Icons.logout),
+            label: const Text('Đăng xuất'),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: widget.controller.busy
+                ? null
+                : () => _createExport(context),
+            icon: const Icon(Icons.download_outlined),
+            label: const Text('Tạo bản xuất dữ liệu'),
+          ),
+          const SizedBox(height: 12),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: widget.controller.busy
+                ? null
+                : () => _confirmDeletion(context),
+            icon: const Icon(Icons.delete_outline),
+            label: const Text('Yêu cầu xóa tài khoản'),
+          ),
+        ],
+      ),
     ),
   );
 

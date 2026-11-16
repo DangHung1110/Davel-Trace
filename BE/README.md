@@ -19,6 +19,39 @@ if (!(Test-Path BE\.env)) { Copy-Item BE\.env.example BE\.env }
 Đổi `POSTGRES_PASSWORD` và phần password tương ứng trong `DATABASE_URL`.
 `BE/.env` đã được gitignore và không được commit.
 
+## Cấu hình Groq cho trợ lý lập lịch
+
+GroqCloud ở [console.groq.com](https://console.groq.com/keys) là provider đang dùng;
+khác với sản phẩm Grok của xAI. Chỉ cấu hình trong file ignored `BE/.env`:
+
+```dotenv
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_key_from_groq_console
+GROQ_MODEL=qwen/qwen3.8-27b
+LLM_PARSE_ENABLED=true
+LLM_EXPLANATION_ENABLED=true
+LLM_SHADOW_ENABLED=false
+LLM_TIMEOUT_SECONDS=15
+LLM_MAX_RETRIES=1
+```
+
+Giữ nguyên cấu hình database, SMTP và Google OAuth. Groq dùng `GROQ_MODEL` riêng,
+không lấy `LLM_MODEL` của Gemini hoặc `LLM_API_URL` còn sót từ provider cũ.
+Không thay API key Google OAuth bằng key Groq. File `.env.example` luôn để trống key.
+
+Khởi động lại FastAPI rồi mở `GET /v1/ai/readiness`: provider phải là `groq`, model
+phải đúng cấu hình. `configured/available` chỉ xác nhận cấu hình đủ, chưa chứng minh
+API gọi thành công. Test tại chuyến đi -> Lập lịch -> Nhập mong muốn bằng lời với AI.
+Chỉ sau khi nhận đề xuất và người dùng xác nhận, planner deterministic mới lập lịch.
+Lỗi quota/auth/provider được báo và vẫn có thể bỏ qua AI để lập lịch thông thường.
+
+Gateway dùng Python stdlib, JSON object mode và xác thực Pydantic tại backend, không
+thêm SDK. Groq hosting/billing/key độc lập với tài khoản Codex/ChatGPT; không dùng
+token Codex. Model/quota tùy tài khoản Groq; không mặc định mọi lời gọi đều miễn phí.
+Tài liệu chính thức: [REST compatibility](https://console.groq.com/docs/openai),
+[models](https://console.groq.com/docs/models),
+[JSON output](https://console.groq.com/docs/structured-outputs).
+
 ## Cấu hình Gemini cho trợ lý lập lịch
 
 Planner deterministic không cần LLM. Khi `LLM_PROVIDER=disabled`, API lập lịch,

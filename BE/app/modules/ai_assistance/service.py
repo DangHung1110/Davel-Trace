@@ -45,7 +45,9 @@ class AiAssistanceService:
     ) -> None:
         self.settings = settings or get_settings()
         self._complete = completer or _default_completer
-        self._provider_identity = (self.settings.llm_provider, self.settings.llm_model)
+        self._provider_identity = (
+            self.settings.llm_provider, provider_metadata(self.settings)["model"]
+        )
 
     @property
     def _last_failure(self):
@@ -81,7 +83,7 @@ class AiAssistanceService:
             raise ValueError("text must contain 3-4000 characters")
         # Do not forward recognizable credentials embedded in traveler text.
         clean = re.sub(
-            r"(?i)(?:bearer\s+\S+|AIza[A-Za-z0-9_-]{10,}|"
+            r"(?i)(?:bearer\s+\S+|AIza[A-Za-z0-9_-]{10,}|gsk_[A-Za-z0-9_-]{10,}|"
             r"(?:password|token|secret|api[_ -]?key)\s*[=:]\s*\S+)",
             "[credential removed]", clean,
         )

@@ -63,6 +63,8 @@ class AppState extends ChangeNotifier {
   String? aiMessage;
   Map<String, dynamic> _confirmedPlanningOverrides = const {};
   int _aiRequestRevision = 0;
+  int _planningRevision = 0;
+  bool _disposed = false;
   bool isPlanning = false;
   String plannerMessage =
       'Đang dùng dữ liệu mẫu trên máy. Bấm tạo phương án để thử FastAPI.';
@@ -139,7 +141,10 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> _loadTripDetail(String id) async {
-    if (activeTrip?.id != id) skipAiProposal();
+    if (activeTrip?.id != id) {
+      skipAiProposal();
+      _resetPlanningContext();
+    }
     final detail = await repository.getTrip(id);
     activeTrip = detail.$1;
     itinerary = detail.$2;
@@ -180,7 +185,27 @@ class AppState extends ChangeNotifier {
         : activeTrip!.startDate;
   }
 
+  void _resetPlanningContext() {
+    _planningRevision++;
+    isPlanning = false;
+    planAlternatives = isDemoManagement ? PlanAlternative.seeded() : [];
+    activeAlternative = null;
+    acceptance = null;
+    currentPlanningRequestId = null;
+    itineraryVersions = [];
+    planningReadiness = null;
+    demoSource = DemoSource.seeded;
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _planningRevision++;
+    super.dispose();
+  }
+
   void _clearTripData({bool keepTrips = false}) {
+    _resetPlanningContext();
     _aiRequestRevision += 1;
     isInterpreting = false;
     aiProposal = null;
@@ -295,8 +320,11 @@ class AppState extends ChangeNotifier {
       'version': trip.version,
       'confirm_removed_days': confirmRemovedDays,
     });
+    _resetPlanningContext();
+    skipAiProposal();
     activeTrip = updated;
     trips = [for (final item in trips) item.id == updated.id ? updated : item];
+    await _loadTripDetail(updated.id);
   });
 
   Future<void> selectTrip(Trip trip) => _mutate(() async {
@@ -590,6 +618,7 @@ class AppState extends ChangeNotifier {
     final trip = activeTrip;
     final profile = activeProfile;
     if (trip == null || profile == null) return;
+    final revision = _planningRevision;
     isPlanning = true;
     errorMessage = null;
     notifyListeners();
@@ -626,6 +655,7 @@ class AppState extends ChangeNotifier {
           () => 'plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}',
         ),
       });
+      if (_disposed || revision != _planningRevision) return;
       if (result.status == 'failed') {
         throw ApiException(
           result.failureCode ?? 'PLANNING_FAILED',
@@ -648,22 +678,30 @@ class AppState extends ChangeNotifier {
           : 'FastAPI trả ${result.items.length} phương án; không thêm phương án kém chỉ để đủ số lượng.';
       _confirmedPlanningOverrides = const {};
       try {
-        planningReadiness = await planningRepository.readiness();
+        final readiness = await planningRepository.readiness();
+        if (!_disposed && revision == _planningRevision) {
+          planningReadiness = readiness;
+        }
       } catch (_) {
-        planningReadiness = null;
+        if (!_disposed && revision == _planningRevision) {
+          planningReadiness = null;
+        }
       }
     } catch (error) {
+      if (_disposed || revision != _planningRevision) return;
       demoSource = planAlternatives.isEmpty
           ? DemoSource.seeded
           : DemoSource.stale;
       if (planAlternatives.isEmpty) {
-        planAlternatives = PlanAlternative.seeded();
+        if (isDemoManagement) planAlternatives = PlanAlternative.seeded();
       }
       plannerMessage = 'Không nối được planner; giữ dữ liệu demo và không giả lập lưu server.';
       errorMessage = _message(error);
     } finally {
-      isPlanning = false;
-      notifyListeners();
+      if (!_disposed && revision == _planningRevision) {
+        isPlanning = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -689,7 +727,7 @@ class AppState extends ChangeNotifier {
           (readiness['capabilities'] as Map?)?['interpretation'] != true) {
         throw const ApiException(
           'LLM_DISABLED',
-          'Gemini chưa được cấu hình; bạn vẫn có thể tạo lịch trực tiếp.',
+          'Trợ lý AI chưa được cấu hình; bạn vẫn có thể tạo lịch trực tiếp.',
         );
       }
       final proposal = await aiRepository.interpret(trip.id, text);
@@ -759,6 +797,13 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> acceptAlternative(PlanAlternative alternative) async {
+    final tripId = activeTrip?.id;
+    if (!isDemoManagement && demoSource != DemoSource.live) return;
+    if (!alternative.gatePassed ||
+        !planAlternatives.any((item) => item.id == alternative.id)) {
+      return;
+    }
+    final revision = _planningRevision;
     isPlanning = true;
     errorMessage = null;
     notifyListeners();
@@ -770,7 +815,14 @@ class AppState extends ChangeNotifier {
           alternative.id,
           () => 'accept-${activeTrip?.id ?? 'trip'}-${alternative.id}',
         );
-        acceptance = await planningRepository.accept(alternative.id, key);
+        final result = await planningRepository.accept(alternative.id, key);
+        if (_disposed || revision != _planningRevision) return;
+        acceptance = result;
+        try {
+          if (tripId != null) await _loadTripDetail(tripId);
+        } catch (error) {
+          errorMessage = 'Đã lưu lịch trình, nhưng chưa tải lại được. Hãy làm mới chuyến đi.';
+        }
         await loadItineraryHistory();
         plannerMessage =
             'Đã chốt và lưu acceptance ${acceptance!.id.substring(0, 8)}.';
@@ -779,12 +831,15 @@ class AppState extends ChangeNotifier {
             'Đã chọn cục bộ để demo; chưa tạo acceptance trên server.';
       }
     } catch (error) {
+      if (_disposed || revision != _planningRevision) return;
       errorMessage = _message(error);
       plannerMessage =
           'Chưa thể chốt trên server; lựa chọn chỉ hiển thị cục bộ.';
     } finally {
-      isPlanning = false;
-      notifyListeners();
+      if (!_disposed && revision == _planningRevision) {
+        isPlanning = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -794,7 +849,10 @@ class AppState extends ChangeNotifier {
       return;
     }
     final lifecycle = planningRepository as ItineraryLifecycleRepository;
-    itineraryVersions = await lifecycle.history(trip.id);
+    final revision = _planningRevision;
+    final versions = await lifecycle.history(trip.id);
+    if (_disposed || revision != _planningRevision) return;
+    itineraryVersions = versions;
     notifyListeners();
   }
 
@@ -803,6 +861,7 @@ class AppState extends ChangeNotifier {
       return;
     }
     final lifecycle = planningRepository as ItineraryLifecycleRepository;
+    final revision = _planningRevision;
     isPlanning = true;
     errorMessage = null;
     notifyListeners();
@@ -812,13 +871,19 @@ class AppState extends ChangeNotifier {
         () => 'activate-${activeTrip?.id ?? 'trip'}-${version.id}',
       );
       await lifecycle.activateVersion(version.id, key);
+      if (_disposed || revision != _planningRevision) return;
+      final tripId = activeTrip?.id;
+      if (tripId != null) await _loadTripDetail(tripId);
       await loadItineraryHistory();
       plannerMessage = 'Đã kích hoạt lại phiên bản ${version.ordinal}.';
     } catch (error) {
+      if (_disposed || revision != _planningRevision) return;
       errorMessage = _message(error);
     } finally {
-      isPlanning = false;
-      notifyListeners();
+      if (!_disposed && revision == _planningRevision) {
+        isPlanning = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -831,6 +896,7 @@ class AppState extends ChangeNotifier {
       return;
     }
     final lifecycle = planningRepository as ItineraryLifecycleRepository;
+    final revision = _planningRevision;
     isPlanning = true;
     errorMessage = null;
     notifyListeners();
@@ -840,6 +906,7 @@ class AppState extends ChangeNotifier {
         () => 'replan-${trip.id}-${source.id}',
       );
       final result = await lifecycle.replan(trip.id, source.id, key);
+      if (_disposed || revision != _planningRevision) return;
       if (result.status == 'failed') {
         throw ApiException(
           result.failureCode ?? 'REPLAN_FAILED',
@@ -860,11 +927,14 @@ class AppState extends ChangeNotifier {
       plannerMessage =
           'Đã tạo ${result.items.length} phương án cho phần còn lại.';
     } catch (error) {
+      if (_disposed || revision != _planningRevision) return;
       errorMessage = _message(error);
       plannerMessage = 'Chưa thể lập lại phần chuyến đi còn lại.';
     } finally {
-      isPlanning = false;
-      notifyListeners();
+      if (!_disposed && revision == _planningRevision) {
+        isPlanning = false;
+        notifyListeners();
+      }
     }
   }
 

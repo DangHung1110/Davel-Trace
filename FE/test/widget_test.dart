@@ -23,14 +23,16 @@ Future<void> tapKey(WidgetTester tester, String key) async {
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets('creates the first local profile and opens management shell', (
+  testWidgets('opens account before preferences and creates a travel profile', (
     tester,
   ) async {
     final repository = FakeManagementRepository();
     await tester.pumpWidget(DavelTraceApp(repository: repository));
     await tester.pumpAndSettle();
 
-    expect(find.text('ĐÀ NẴNG GO'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsOneWidget);
+    await tapKey(tester, 'profile-tab');
+    await tapKey(tester, 'travel-preferences-button');
     final profileName = find.byKey(const Key('profile-name-field'));
     await tester.scrollUntilVisible(
       profileName,
@@ -40,9 +42,11 @@ void main() {
     await tester.enterText(profileName, 'Hùng');
     await tapKey(tester, 'create-first-profile-button');
 
-    expect(find.byType(NavigationBar), findsOneWidget);
-    expect(find.text('Chưa có chuyến đi'), findsOneWidget);
     expect(repository.profiles.single.displayName, 'Hùng');
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tapKey(tester, 'itinerary-tab');
+    expect(find.text('Chưa có chuyến đi'), findsOneWidget);
   });
 
   testWidgets('creates a trip and adds a manual activity', (tester) async {
@@ -50,7 +54,8 @@ void main() {
     await tester.pumpWidget(DavelTraceApp(repository: repository));
     await tester.pumpAndSettle();
 
-    expect(find.text('Cuối tuần Đà Nẵng'), findsNWidgets(2));
+    expect(find.text('Cuối tuần Đà Nẵng'), findsOneWidget);
+    await tapKey(tester, 'open-trip-trip-1');
     await tapKey(tester, 'add-activity-button');
     await tester.enterText(
       find.byKey(const Key('activity-title-field')),

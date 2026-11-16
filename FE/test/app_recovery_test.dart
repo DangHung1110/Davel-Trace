@@ -24,7 +24,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(NavigationBar), findsOneWidget);
-    expect(find.text('Cuối tuần Đà Nẵng'), findsNWidgets(2));
+    expect(find.text('Cuối tuần Đà Nẵng'), findsOneWidget);
   });
 
   testWidgets('keeps loaded data visible with a non-blocking retry banner', (
@@ -47,12 +47,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('stale-data-error-banner')), findsOneWidget);
-    expect(find.text('Cuối tuần Đà Nẵng'), findsNWidgets(2));
+    expect(find.text('Cuối tuần Đà Nẵng'), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('retry-stale-data-button')));
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('stale-data-error-banner')), findsNothing);
-    expect(find.text('Cuối tuần Đà Nẵng'), findsNWidgets(2));
+    expect(find.text('Cuối tuần Đà Nẵng'), findsOneWidget);
   });
 }

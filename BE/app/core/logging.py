@@ -15,11 +15,13 @@ _SENSITIVE = re.compile(
 )
 _CREDENTIAL_URL = re.compile(r"(://[^:/\s]+:)([^@/\s]+)(@)")
 _OAUTH_QUERY = re.compile(r"(/v1/auth/google/(?:callback|start))\?[^\s\"']+")
+_GROQ_KEY = re.compile(r"gsk_[A-Za-z0-9_-]{10,}")
 
 
 def redact(value: object) -> str:
     text = str(value)
     text = _OAUTH_QUERY.sub(r"\1?[REDACTED]", text)
+    text = _GROQ_KEY.sub("[REDACTED]", text)
     text = _SENSITIVE.sub(r"\1\2[REDACTED]", text)
     return _CREDENTIAL_URL.sub(r"\1[REDACTED]\3", text)
 

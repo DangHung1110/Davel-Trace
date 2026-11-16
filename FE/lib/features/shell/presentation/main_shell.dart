@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 import '../../../app_state.dart';
 import '../../../theme/app_theme.dart';
 import '../../expenses/expenses.dart';
-import '../../itinerary/itinerary.dart';
+import '../../itinerary/presentation/trips_screen.dart';
 import '../../map/map.dart';
-import '../../profile/profile.dart';
+import '../../auth/application/auth_controller.dart';
+import '../../auth/presentation/account_screen.dart';
 
 class MainShell extends StatefulWidget {
-  const MainShell({super.key, required this.state});
+  const MainShell({super.key, required this.state, this.auth});
   final AppState state;
+  final AuthController? auth;
 
   @override
   State<MainShell> createState() => _MainShellState();
@@ -19,6 +21,8 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int _selectedIndex = 0;
+  int _tripDetailRequest = 0;
+  int _tripCollectionRequest = 0;
   final Set<int> _visited = {0};
 
   void _select(int index) {
@@ -42,113 +46,95 @@ class _MainShellState extends State<MainShell> {
         )
         .toList();
     return Scaffold(
-      backgroundColor: AppColors.surfaceHigh,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final isDesktopPreview = constraints.maxWidth > 600;
-          final appWidth = isDesktopPreview ? 390.0 : constraints.maxWidth;
-          final appHeight = isDesktopPreview && constraints.maxHeight > 876
-              ? 844.0
-              : constraints.maxHeight;
-          return SafeArea(
-            child: Center(
-              child: SizedBox(
-                key: const Key('desktop-phone-frame'),
-                width: appWidth,
-                height: appHeight,
-                child: Material(
-                  color: AppColors.canvas,
-                  elevation: isDesktopPreview ? 14 : 0,
-                  clipBehavior: Clip.antiAlias,
-                  borderRadius: isDesktopPreview
-                      ? BorderRadius.circular(32)
-                      : BorderRadius.zero,
-                  child: Column(
-                    children: [
-                      if (state.isMutating)
-                        const LinearProgressIndicator(minHeight: 2),
-                      if (state.syncStatus case final sync?
-                          when sync.usingStaleCache ||
-                              sync.pendingCount > 0 ||
-                              sync.conflictCount > 0 ||
-                              sync.failedCount > 0)
-                        OfflineSyncBanner(state: state),
-                      if (state.errorMessage != null &&
-                          state.profiles.isNotEmpty)
-                        _StaleDataBanner(
-                          message: state.errorMessage!,
-                          onRetry: state.refresh,
-                        ),
-                      Expanded(
-                        child: IndexedStack(
-                          index: _selectedIndex,
-                          children: [
-                            ItineraryScreen(
-                              state: state,
-                              onOpenMap: () => _select(1),
-                            ),
-                            if (_visited.contains(1))
-                              MapScreen(
-                                isActive: _selectedIndex == 1,
-                                stops: stops,
-                                planRevision: state.itinerary?.version ?? 0,
-                                tripTitle: state.activeTrip?.title,
-                                routePreview: state.routePreview,
-                                onOpenItinerary: () => _select(0),
-                              )
-                            else
-                              const SizedBox.shrink(),
-                            ExpensesScreen(state: state),
-                            ProfileScreen(
-                              state: state,
-                              onReady: () => _select(0),
-                            ),
-                          ],
-                        ),
-                      ),
-                      NavigationBar(
-                        selectedIndex: _selectedIndex,
-                        onDestinationSelected: _select,
-                        destinations: const [
-                          NavigationDestination(
-                            key: Key('itinerary-tab'),
-                            icon: Icon(Icons.route_outlined, size: 21),
-                            selectedIcon: Icon(Icons.route_rounded, size: 21),
-                            label: 'Lịch trình',
-                          ),
-                          NavigationDestination(
-                            key: Key('map-tab'),
-                            icon: Icon(Icons.map_outlined, size: 21),
-                            selectedIcon: Icon(Icons.map_rounded, size: 21),
-                            label: 'Bản đồ',
-                          ),
-                          NavigationDestination(
-                            key: Key('expenses-tab'),
-                            icon: Icon(
-                              Icons.account_balance_wallet_outlined,
-                              size: 21,
-                            ),
-                            selectedIcon: Icon(
-                              Icons.account_balance_wallet_rounded,
-                              size: 21,
-                            ),
-                            label: 'Chi tiêu',
-                          ),
-                          NavigationDestination(
-                            key: Key('profile-tab'),
-                            icon: Icon(Icons.person_outline_rounded, size: 21),
-                            selectedIcon: Icon(Icons.person_rounded, size: 21),
-                            label: 'Cá nhân',
-                          ),
-                        ],
-                      ),
-                    ],
+      backgroundColor: AppColors.canvas,
+      body: SafeArea(
+        child: Column(
+          children: [
+            if (state.isMutating) const LinearProgressIndicator(minHeight: 2),
+            if (state.syncStatus case final sync?
+                when sync.usingStaleCache ||
+                    sync.pendingCount > 0 ||
+                    sync.conflictCount > 0 ||
+                    sync.failedCount > 0)
+              OfflineSyncBanner(state: state),
+            if (state.errorMessage != null)
+              _StaleDataBanner(
+                message: state.errorMessage!,
+                onRetry: state.refresh,
+              ),
+            Expanded(
+              child: IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  TripsScreen(
+                    state: state,
+                    onOpenMap: () => _select(1),
+                    detailRequest: _tripDetailRequest,
+                    collectionRequest: _tripCollectionRequest,
                   ),
-                ),
+                  if (_visited.contains(1))
+                    MapScreen(
+                      isActive: _selectedIndex == 1,
+                      stops: stops,
+                      planRevision: state.itinerary?.version ?? 0,
+                      tripTitle: state.activeTrip?.title,
+                      routePreview: state.routePreview,
+                      onOpenItinerary: () {
+                        _tripDetailRequest++;
+                        _select(0);
+                      },
+                    )
+                  else
+                    const SizedBox.shrink(),
+                  ExpensesScreen(
+                    state: state,
+                    onOpenTrips: () {
+                      _tripCollectionRequest++;
+                      _select(0);
+                    },
+                  ),
+                  AccountScreen(state: state, controller: widget.auth),
+                ],
               ),
             ),
-          );
-        },
+            NavigationBar(
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: (index) {
+                if (index == 0) _tripCollectionRequest++;
+                _select(index);
+              },
+              destinations: const [
+                NavigationDestination(
+                  key: Key('itinerary-tab'),
+                  icon: Icon(Icons.route_outlined, size: 21),
+                  selectedIcon: Icon(Icons.route_rounded, size: 21),
+                  label: 'Chuyến đi',
+                ),
+                NavigationDestination(
+                  key: Key('map-tab'),
+                  icon: Icon(Icons.map_outlined, size: 21),
+                  selectedIcon: Icon(Icons.map_rounded, size: 21),
+                  label: 'Bản đồ',
+                ),
+                NavigationDestination(
+                  key: Key('expenses-tab'),
+                  icon: Icon(Icons.account_balance_wallet_outlined, size: 21),
+                  selectedIcon: Icon(
+                    Icons.account_balance_wallet_rounded,
+                    size: 21,
+                  ),
+                  label: 'Chi tiêu',
+                ),
+                NavigationDestination(
+                  key: Key('profile-tab'),
+                  icon: Icon(Icons.person_outline_rounded, size: 21),
+                  selectedIcon: Icon(Icons.person_rounded, size: 21),
+                  label: 'Tài khoản',
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

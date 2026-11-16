@@ -9,6 +9,13 @@ Google sign-in and real SMTP recovery setup:
 Ứng dụng mobile chính của dự án, theo phong cách **Sơn Trà Breeze**: teal
 `#006A6A`, amber `#D97706`, nền trắng/slate, Material 3 bo tròn và ít màu.
 
+Điều hướng: **Chuyến đi** (danh sách → lịch từng ngày → màn lập lịch riêng),
+**Bản đồ**, **Chi tiêu**, **Tài khoản**. Email đăng nhập, bảo mật và **Đăng xuất**
+nằm ở Tài khoản. **Sở thích du lịch** là mặc định cho chuyến mới, tách khỏi danh
+tính đăng nhập. Editor và trang bảo mật cũng dùng chung khung mobile trên desktop.
+Font Be Vietnam Pro được đóng gói trong app; giấy phép ở `assets/fonts/OFL.txt`.
+Kịch bản kiểm tra UI: [`015 UI/UX quickstart`](../specs/015-ui-ux/quickstart.md).
+
 Luồng demo đã nối:
 
 - đăng ký, xác thực email demo, đăng nhập, refresh và quản lý phiên;

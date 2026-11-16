@@ -96,8 +96,14 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('desktop-phone-frame')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('open-trip-trip-1')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('open-planning-button')));
+    await tester.pumpAndSettle();
     expect(find.byKey(const Key('source-status-banner')), findsOneWidget);
     expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
     expect(find.byKey(const Key('map-tab')), findsOneWidget);
     expect(find.byKey(const Key('expenses-tab')), findsOneWidget);
     expect(find.byKey(const Key('profile-tab')), findsOneWidget);
@@ -137,6 +143,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    await tester.tap(find.byKey(const Key('open-trip-trip-1')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('open-planning-button')));
+    await tester.pumpAndSettle();
     expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

@@ -6,7 +6,6 @@ import 'app_state.dart';
 import 'features/management/data/demo_management_repository.dart';
 import 'features/management/data/management_repository.dart';
 import 'features/management/data/offline_management_repository.dart';
-import 'features/profile/presentation/profile_screen.dart';
 import 'features/auth/application/auth_controller.dart';
 import 'features/auth/presentation/auth_gate.dart';
 import 'features/auth/data/http_auth_repository.dart';
@@ -15,6 +14,7 @@ import 'core/networking/api_client.dart';
 import 'core/offline/secure_offline_persistence.dart';
 import 'features/shell/presentation/main_shell.dart';
 import 'shared/widgets/async_state_view.dart';
+import 'shared/widgets/mobile_frame.dart';
 import 'theme/app_theme.dart';
 
 class DavelTraceApp extends StatefulWidget {
@@ -34,6 +34,8 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
   ApiClient? _liveApi;
   String? _offlineAccountId;
   bool _managesLiveComposition = false;
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  AuthStatus? _previousAuthStatus;
 
   @override
   void initState() {
@@ -55,6 +57,17 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
   }
 
   void _syncAuthenticatedState() {
+    final status = _auth?.status;
+    if (status == AuthStatus.signedOut &&
+        (_previousAuthStatus == AuthStatus.authenticated ||
+            _previousAuthStatus == AuthStatus.demo)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+        }
+      });
+    }
+    _previousAuthStatus = status;
     final accountId = _auth?.account?.id;
     if (_auth?.status == AuthStatus.authenticated &&
         _managesLiveComposition &&
@@ -104,33 +117,36 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
     animation: Listenable.merge([_state, ?_liveState]),
     builder: (context, _) => MaterialApp(
       title: 'Davel Trace',
+      navigatorKey: _navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
+      builder: (context, child) => MobileFrame(child: child!),
       home: _auth == null
           ? _Root(state: _state)
           : AuthGate(
               controller: _auth!,
               authenticatedChild: _liveState == null
-                  ? _Root(state: _state)
-                  : _Root(state: _liveState!),
-              child: _Root(state: _state),
+                  ? _Root(state: _state, auth: _auth)
+                  : _Root(state: _liveState!, auth: _auth),
+              child: _Root(state: _state, auth: _auth),
             ),
     ),
   );
 }
 
 class _Root extends StatelessWidget {
-  const _Root({required this.state});
+  const _Root({required this.state, this.auth});
   final AppState state;
+  final AuthController? auth;
 
   @override
   Widget build(BuildContext context) {
-    final content = state.activeProfile == null
-        ? Scaffold(body: ProfileScreen(state: state))
-        : MainShell(state: state);
+    final content = MainShell(state: state, auth: auth);
     return AsyncStateView(
       loading: state.isLoading,
-      error: state.profiles.isEmpty ? state.errorMessage : null,
+      error: state.profiles.isEmpty && auth?.status != AuthStatus.authenticated
+          ? state.errorMessage
+          : null,
       onRetry: state.refresh,
       child: content,
     );

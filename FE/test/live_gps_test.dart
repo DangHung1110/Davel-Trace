@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:davel_trace/theme/app_theme.dart';
 
 class _StreamingLocation implements MapLocationProvider {
   _StreamingLocation() {
@@ -79,7 +80,14 @@ Future<void> _start(WidgetTester tester, _StreamingLocation provider) async {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   const cacheChannel = MethodChannel('plugins.flutter.io/path_provider');
-  setUpAll(() {
+  setUpAll(() async {
+    await (FontLoader('Be Vietnam Pro')
+          ..addFont(rootBundle.load('assets/fonts/BeVietnamPro-Regular.ttf'))
+          ..addFont(rootBundle.load('assets/fonts/BeVietnamPro-SemiBold.ttf')))
+        .load();
+    await (FontLoader(
+      'MaterialIcons',
+    )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           cacheChannel,
@@ -93,6 +101,88 @@ void main() {
   tearDownAll(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(cacheChannel, null);
+  });
+  testWidgets('empty itinerary explains markers and keeps live GPS available', (
+    tester,
+  ) async {
+    var openedItinerary = 0;
+    final provider = _StreamingLocation();
+    addTearDown(provider.fixes.close);
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: MapScreen(
+          stops: const [],
+          planRevision: 0,
+          locationProvider: provider,
+          onOpenItinerary: () => openedItinerary++,
+        ),
+      ),
+    );
+    await _pumpGPS(tester);
+    expect(find.byKey(const Key('empty-map-message')), findsOneWidget);
+    expect(find.byKey(const Key('play-car-button')), findsNothing);
+    expect(find.text('Bật GPS'), findsOneWidget);
+    final recenter = find.descendant(
+      of: find.byKey(const Key('follow-user-button')),
+      matching: find.byType(IconButton),
+    );
+    expect(tester.widget<IconButton>(recenter).onPressed, isNull);
+    await tester.tap(find.byKey(const Key('locate-user-button')));
+    await _pumpGPS(tester);
+    provider.emit(16.05);
+    await _pumpGPS(tester);
+    expect(find.text('Tắt GPS'), findsOneWidget);
+    expect(_canvas(tester).userLocation?.latitude, 16.05);
+    expect(tester.widget<IconButton>(recenter).onPressed, isNotNull);
+    provider.emit(16.051, second: 1);
+    await _pumpGPS(tester);
+    expect(_canvas(tester).userLocation?.latitude, 16.051);
+    await tester.ensureVisible(
+      find.byKey(const Key('empty-map-open-itinerary')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('empty-map-open-itinerary')));
+    await tester.pump();
+    expect(openedItinerary, 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('empty map controls fit a narrow viewport with large text', (
+    tester,
+  ) async {
+    final provider = _StreamingLocation();
+    addTearDown(provider.fixes.close);
+    tester.view.physicalSize = const Size(320, 640);
+    tester.view.devicePixelRatio = 1;
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: MapScreen(
+          stops: const [],
+          planRevision: 0,
+          locationProvider: provider,
+          onOpenItinerary: () {},
+        ),
+      ),
+    );
+    await _pumpGPS(tester);
+    await tester.tap(find.byKey(const Key('locate-user-button')));
+    await _pumpGPS(tester);
+    expect(provider.watches, 1);
+    final button = find.byKey(const Key('empty-map-open-itinerary'));
+    await tester.ensureVisible(button);
+    await tester.pumpAndSettle();
+    expect(button.hitTestable(), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
   testWidgets('panning before first fix keeps the camera free until recenter', (
     tester,
