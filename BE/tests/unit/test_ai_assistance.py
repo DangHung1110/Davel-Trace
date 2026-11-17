@@ -3,6 +3,37 @@ from __future__ import annotations
 from BE.app.core.config import Settings
 from BE.app.modules.ai_assistance.domain import ExplanationDraft, InterpretationDraft
 from BE.app.modules.ai_assistance.service import AiAssistanceService
+from BE.app.modules.ai_assistance.service import _candidate_names
+
+
+def test_interpretation_bounds_catalog_and_normalizes_trip_context_times():
+    captured = {}
+    catalog = [
+        {"poi_id": f"cafe-{i}", "name": f"Quán cà phê Đà Nẵng {i}", "verified": True}
+        for i in range(750)
+    ] + [{"poi_id": "dragon", "name": "Cầu Rồng", "verified": True}]
+    def complete(prompt, schema, settings):
+        captured["prompt"] = prompt
+        return InterpretationDraft(travelers=2, must_visit=["Cầu Rồng"]).model_dump(mode="json")
+    service = AiAssistanceService(Settings(llm_provider="local", _env_file=None), completer=complete)
+    result = service.interpret("Đi 2 người, ghé Cầu Rồng", catalog=catalog,
+        trip_context={"day_start": "07:00:00", "day_end": "21:00:00"})
+    assert '"day_start": "07:00"' in captured["prompt"]
+    assert '"day_end": "21:00"' in captured["prompt"]
+    assert "07:00:00" not in captured["prompt"]
+    assert "Quán cà phê Đà Nẵng 749" not in captured["prompt"]
+    assert len(captured["prompt"]) < 2500
+    assert result["hard_constraints"]["must_visit"] == ["dragon"]
+
+
+def test_candidate_shortlist_handles_accents_and_bounds_broad_matches():
+    catalog = [{"name": f"Bãi biển Đà Nẵng {i}", "verified": True} for i in range(750)]
+    catalog += [{"name": "Cầu Rồng", "verified": True}, {"name": "Biển bịa", "verified": False}]
+    assert _candidate_names("ghe cau rong", catalog) == ["Cầu Rồng"]
+    names = _candidate_names("thích biển Đà Nẵng", catalog)
+    assert len(names) <= 24 and sum(map(len, names)) <= 1200
+    assert "Biển bịa" not in names
+    assert _candidate_names("Đi Đà Nẵng 2 người, ngân sách 3 triệu", catalog) == []
 
 
 def test_interpretation_separates_hard_soft_and_unresolved() -> None:

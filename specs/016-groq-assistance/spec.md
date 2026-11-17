@@ -12,3 +12,12 @@ from errors/logs/prompts. No key enters Flutter, tracked templates or readiness 
 UI wording must remain accurate after provider changes. A live smoke with synthetic
 travel text is performed only after a key is available locally; readiness configuration
 alone is not proof of connectivity. No new dependency or migration.
+
+## Rate-limit regression
+The real app recorded quota failures. Sending the full 750-place catalog consumes
+over 5000 input tokens per attempt and schema retries can exceed the provider budget.
+Interpretation must send only a bounded relevant shortlist; the full catalog remains
+authoritative for resolution. A place not explicitly requested must never become a
+hard must-visit constraint. Missing values use null/empty lists; trip context times
+must use the same HH:MM representation as the output schema. Quota errors must be
+distinguishable from authentication/config/schema errors in the user-facing response.

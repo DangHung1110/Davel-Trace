@@ -53,6 +53,10 @@ def test_normalized_ai_failure_keeps_structured_planning_usable(
         )
         assert response.status_code == 503
         assert response.json()["error"] == f"LLM_{reason.upper()}"
+        if reason == "quota":
+            assert "giới hạn" in response.json()["message"]
+        if reason == "auth":
+            assert "API key" in response.json()["message"]
         assert "secret-provider-body" not in response.text
         result = planning.create_planning_request(
             owner, trip_id, f"after-ai-{reason}-key", target_count=1
