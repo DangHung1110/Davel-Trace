@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../management/data/management_repository.dart';
 import '../../management/domain/models.dart';
+import '../../planning/domain/models.dart';
 
 /// Editable confirmation; place IDs remain data, never text the traveler must enter.
 class PlanningRequestReview extends StatefulWidget {
@@ -9,9 +10,11 @@ class PlanningRequestReview extends StatefulWidget {
     super.key,
     required this.values,
     required this.repository,
+    this.placeResolutions = const [],
   });
   final Map<String, dynamic> values;
   final ManagementRepository repository;
+  final List<PlaceNameResolution> placeResolutions;
 
   @override
   State<PlanningRequestReview> createState() => _PlanningRequestReviewState();
@@ -31,6 +34,9 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
   late final Map<String, TextEditingController> _fields;
   late final Map<String, List<String>> _places;
   final _names = <String, Future<PoiItem?>>{};
+  final _choices = <int, String>{};
+  final _removedResolutions = <int>{};
+  String? _placeError;
 
   @override
   void initState() {
@@ -92,7 +98,30 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
 
   void _save() {
     if (!_form.currentState!.validate()) return;
-    final result = <String, dynamic>{...widget.values, ..._places};
+    final places = {
+      for (final entry in _places.entries) entry.key: [...entry.value],
+    };
+    for (var index = 0; index < widget.placeResolutions.length; index++) {
+      if (_removedResolutions.contains(index)) continue;
+      final selected = _choices[index];
+      if (selected == null) return;
+      places[widget.placeResolutions[index].constraint]!.add(selected);
+    }
+    if (places['must_visit']!
+        .toSet()
+        .intersection(places['avoid']!.toSet())
+        .isNotEmpty) {
+      setState(
+        () =>
+            _placeError = 'Một địa điểm không thể vừa muốn ghé vừa muốn tránh.',
+      );
+      return;
+    }
+    final result = <String, dynamic>{
+      ...widget.values,
+      for (final entry in places.entries)
+        entry.key: entry.value.toSet().toList(),
+    };
     for (final entry in _fields.entries) {
       final text = entry.value.text.trim();
       if (text.isEmpty) {
@@ -111,6 +140,117 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
       };
     }
     Navigator.pop(context, result);
+  }
+
+  Widget _resolutionField(int index) {
+    final resolution = widget.placeResolutions[index];
+    return Card(
+      key: Key('place-resolution-$index'),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '${resolution.constraint == 'must_visit' ? 'Muốn ghé' : 'Muốn tránh'}: ${resolution.name}',
+                  ),
+                ),
+                IconButton(
+                  key: Key('remove-place-resolution-$index'),
+                  tooltip: 'Bỏ yêu cầu địa điểm này',
+                  onPressed: () => setState(() {
+                    _removedResolutions.add(index);
+                    _choices.remove(index);
+                    _placeError = null;
+                  }),
+                  icon: const Icon(Icons.close),
+                ),
+              ],
+            ),
+            if (resolution.candidates.isEmpty)
+              FormField<String>(
+                validator: (_) =>
+                    'Bỏ yêu cầu này để tiếp tục hoặc quay lại sửa mong muốn.',
+                builder: (field) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Chưa tìm thấy địa điểm đã xác minh trong dữ liệu.',
+                    ),
+                    if (field.hasError)
+                      Text(
+                        field.errorText!,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                  ],
+                ),
+              )
+            else ...[
+              const Text('Có nhiều địa điểm phù hợp. Chọn đúng nơi bạn muốn.'),
+              const SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                key: Key('choose-place-resolution-$index'),
+                initialValue: _choices[index],
+                isExpanded: true,
+                itemHeight: null,
+                menuMaxHeight: 360,
+                decoration: const InputDecoration(labelText: 'Chọn địa điểm'),
+                selectedItemBuilder: (_) => resolution.candidates
+                    .map(
+                      (candidate) => Text(
+                        candidate.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )
+                    .toList(),
+                items: resolution.candidates
+                    .map(
+                      (candidate) => DropdownMenuItem(
+                        value: candidate.id,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(candidate.name),
+                              if (candidate.description.isNotEmpty)
+                                Text(
+                                  candidate.description,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) => setState(() {
+                  if (value != null) _choices[index] = value;
+                  _placeError = null;
+                }),
+                validator: (value) =>
+                    value == null ? 'Chọn địa điểm hoặc bỏ yêu cầu này.' : null,
+              ),
+              if (_choices[index] != null)
+                Text(
+                  resolution.candidates
+                      .firstWhere(
+                        (candidate) => candidate.id == _choices[index],
+                      )
+                      .description,
+                ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -166,6 +306,13 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
                 ),
               ),
           ],
+          for (var index = 0; index < widget.placeResolutions.length; index++)
+            if (!_removedResolutions.contains(index)) _resolutionField(index),
+          if (_placeError != null)
+            Text(
+              _placeError!,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
           const SizedBox(height: 20),
           FilledButton(
             key: const Key('save-planning-review'),

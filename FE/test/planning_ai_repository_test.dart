@@ -97,7 +97,84 @@ class _DelayedAiRepository extends _AiRepository {
       pending.future;
 }
 
+class _AmbiguousAiRepository extends _AiRepository {
+  @override
+  Future<AiInterpretationProposal> interpret(
+    String tripId,
+    String text,
+  ) async => AiInterpretationProposal.fromJson({
+    'proposal_id': 'ambiguous',
+    'hard_constraints': {
+      'must_visit': ['dragon-bridge'],
+      'avoid': <String>[],
+    },
+    'place_resolutions': [
+      {
+        'constraint': 'must_visit',
+        'name': 'An',
+        'status': 'ambiguous',
+        'candidates': [
+          {'poi_id': 'an-1', 'name': 'An 1'},
+          {'poi_id': 'an-2', 'name': 'An 2'},
+        ],
+      },
+    ],
+  });
+}
+
 void main() {
+  test('pending local place resolution cannot bypass review; selected IDs reach planning', () async {
+    SharedPreferences.setMockInitialValues({});
+    final repository = _AmbiguousAiRepository();
+    final state = AppState(
+      FakeManagementRepository(seeded: true),
+      planningRepository: repository,
+    );
+    addTearDown(state.dispose);
+    await state.initialize();
+    await state.interpretPlanningRequest('ghé An');
+    await state.confirmAiProposalAndPlan();
+    expect(repository.submittedOverrides, isNull);
+    expect(state.aiProposal, isNotNull);
+    await state.confirmAiProposalAndPlan(
+      corrections: {
+        'must_visit': ['dragon-bridge', 'an-2'],
+        'avoid': <String>[],
+      },
+    );
+    expect(repository.submittedOverrides?['must_visit'], [
+      'dragon-bridge',
+      'an-2',
+    ]);
+    expect(
+      repository.submittedOverrides.toString(),
+      isNot(contains('place_resolutions')),
+    );
+  });
+
+  test(
+    'explicitly dropping an ambiguous name preserves ordinary planning',
+    () async {
+      SharedPreferences.setMockInitialValues({});
+      final repository = _AmbiguousAiRepository();
+      final state = AppState(
+        FakeManagementRepository(seeded: true),
+        planningRepository: repository,
+      );
+      addTearDown(state.dispose);
+      await state.initialize();
+      await state.interpretPlanningRequest('ghé An');
+      await state.confirmAiProposalAndPlan(
+        corrections: {
+          'must_visit': ['dragon-bridge'],
+          'avoid': <String>[],
+        },
+      );
+      expect(repository.submittedOverrides?['must_visit'], ['dragon-bridge']);
+      expect(state.aiProposal, isNull);
+    },
+  );
+
   test('AI quota failure leaves structured planning enabled', () async {
     SharedPreferences.setMockInitialValues({});
     final state = AppState(

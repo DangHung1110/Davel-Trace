@@ -733,7 +733,9 @@ class AppState extends ChangeNotifier {
       final proposal = await aiRepository.interpret(trip.id, text);
       if (revision != _aiRequestRevision) return;
       aiProposal = proposal;
-      aiMessage = proposal.unresolved.isEmpty
+      aiMessage = proposal.placeResolutions.isNotEmpty
+          ? 'Hãy chọn hoặc bỏ các địa điểm chưa xác định trong bước kiểm tra.'
+          : proposal.unresolved.isEmpty
           ? 'Hãy kiểm tra đề xuất trước khi xác nhận.'
           : 'Có ${proposal.unresolved.length} giá trị chưa xác minh; chúng sẽ không được dùng.';
     } catch (error) {
@@ -753,10 +755,25 @@ class AppState extends ChangeNotifier {
   }) async {
     final proposal = aiProposal;
     if (proposal == null) return;
-    _confirmedPlanningOverrides = Map<String, dynamic>.from(
-      proposal.confirmedOverrides,
-    );
-    if (corrections != null) _confirmedPlanningOverrides.addAll(corrections);
+    if (proposal.placeResolutions.isNotEmpty &&
+        (corrections == null ||
+            !corrections.containsKey('must_visit') ||
+            !corrections.containsKey('avoid'))) {
+      aiMessage =
+          'Hãy kiểm tra và chọn hoặc bỏ các địa điểm trước khi lập lịch.';
+      notifyListeners();
+      return;
+    }
+    final confirmed = Map<String, dynamic>.from(proposal.confirmedOverrides);
+    if (corrections != null) confirmed.addAll(corrections);
+    final mustVisit = List<String>.from(confirmed['must_visit'] as List? ?? []);
+    final avoid = List<String>.from(confirmed['avoid'] as List? ?? []);
+    if (mustVisit.toSet().intersection(avoid.toSet()).isNotEmpty) {
+      aiMessage = 'Một địa điểm không thể vừa muốn ghé vừa muốn tránh.';
+      notifyListeners();
+      return;
+    }
+    _confirmedPlanningOverrides = confirmed;
     aiProposal = null;
     aiMessage = 'Đã xác nhận đề xuất; planner deterministic đang xử lý.';
     notifyListeners();
