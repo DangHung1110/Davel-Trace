@@ -7,4 +7,4 @@
 - [x] T005 Parse additive API metadata and require mobile candidate selection/removal.
 - [x] T006 Cover Flutter confirmation, cancellation, compatibility and planner payloads.
 - [x] T007 Run focused regressions/analyzer, prompt measurement and local demo checks.
-- [ ] T008 Converge, document results, commit/push and open PR to dev.
+- [x] T008 Converge, document results, commit/push and open PR #23 to main, as explicitly requested by the owner.

@@ -33,4 +33,6 @@ Validation: backend unit and authenticated API tests using fake completions and 
 databases; Flutter model/state/widget tests for choice/removal/cancel/overrides, plus
 existing mobile flows and analyzer. Compare prompt character counts without a network
 call. Run local range server and Flutter debug, never a release web build. Restart
-demo on this task code only after checks; commit/push task branch and open PR to dev.
+demo on this task code only after checks; commit/push task branch and open PR.
+Delivery target: main, per the owner's explicit follow-up on 2026-11-17 overriding
+the usual dev PR target. No direct push to main or automatic merge.
