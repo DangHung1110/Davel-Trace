@@ -45,6 +45,7 @@ class ItineraryScreen extends StatelessWidget {
         builder: (_) => PlanningRequestReview(
           values: proposal.confirmedOverrides,
           repository: state.repository,
+          placeResolutions: proposal.placeResolutions,
         ),
       ),
     );
@@ -691,6 +692,10 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                   Text(
                     'Chưa xác minh (không dùng): ${proposal.unresolved.join('; ')}',
                     style: const TextStyle(color: AppColors.warning),
+                  ),
+                if (proposal.placeResolutions.isNotEmpty)
+                  Text(
+                    '${proposal.placeResolutions.length} tên địa điểm cần bạn chọn hoặc bỏ trong bước kiểm tra.',
                   ),
                 const SizedBox(height: 8),
                 Wrap(

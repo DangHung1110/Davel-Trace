@@ -195,6 +195,69 @@ class ItineraryVersionSummary {
       );
 }
 
+class PlaceNameCandidate {
+  const PlaceNameCandidate({
+    required this.id,
+    required this.name,
+    this.type = '',
+    this.latitude,
+    this.longitude,
+    this.address = '',
+  });
+
+  final String id;
+  final String name;
+  final String type;
+  final double? latitude;
+  final double? longitude;
+  final String address;
+
+  factory PlaceNameCandidate.fromJson(Map<String, dynamic> json) =>
+      PlaceNameCandidate(
+        id: json['poi_id'] as String,
+        name: json['name'] as String,
+        type: json['type'] as String? ?? '',
+        latitude: (json['lat'] as num?)?.toDouble(),
+        longitude: (json['lon'] as num?)?.toDouble(),
+        address: json['address'] as String? ?? '',
+      );
+
+  String get description => [
+    if (type.isNotEmpty) type,
+    if (address.isNotEmpty) address,
+    if (address.isEmpty && latitude != null && longitude != null)
+      '${latitude!.toStringAsFixed(5)}, ${longitude!.toStringAsFixed(5)}',
+  ].join(' · ');
+}
+
+class PlaceNameResolution {
+  const PlaceNameResolution({
+    required this.constraint,
+    required this.name,
+    required this.status,
+    required this.candidates,
+  });
+
+  final String constraint;
+  final String name;
+  final String status;
+  final List<PlaceNameCandidate> candidates;
+
+  factory PlaceNameResolution.fromJson(Map<String, dynamic> json) =>
+      PlaceNameResolution(
+        constraint: json['constraint'] as String,
+        name: json['name'] as String,
+        status: json['status'] as String,
+        candidates: (json['candidates'] as List? ?? const [])
+            .map(
+              (item) => PlaceNameCandidate.fromJson(
+                Map<String, dynamic>.from(item as Map),
+              ),
+            )
+            .toList(),
+      );
+}
+
 class AiInterpretationProposal {
   const AiInterpretationProposal({
     required this.id,
@@ -206,6 +269,7 @@ class AiInterpretationProposal {
     required this.provider,
     required this.model,
     required this.externalProcessing,
+    this.placeResolutions = const [],
   });
 
   final String id;
@@ -217,6 +281,7 @@ class AiInterpretationProposal {
   final String provider;
   final String? model;
   final bool externalProcessing;
+  final List<PlaceNameResolution> placeResolutions;
 
   factory AiInterpretationProposal.fromJson(Map<String, dynamic> json) =>
       AiInterpretationProposal(
@@ -237,6 +302,13 @@ class AiInterpretationProposal {
         provider: json['provider'] as String? ?? 'unknown',
         model: json['model'] as String?,
         externalProcessing: json['external_processing'] as bool? ?? false,
+        placeResolutions: (json['place_resolutions'] as List? ?? const [])
+            .map(
+              (item) => PlaceNameResolution.fromJson(
+                Map<String, dynamic>.from(item as Map),
+              ),
+            )
+            .toList(),
       );
 
   Map<String, dynamic> get confirmedOverrides => {

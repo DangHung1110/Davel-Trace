@@ -35,9 +35,17 @@ class InterpretationBody(BaseModel):
 
 def _provider_error(exc: LLMError):
     code = ERROR_CODES.get(exc.reason, "LLM_TRANSPORT")
+    messages = {
+        "quota": "Trợ lý AI đã chạm giới hạn lượt hoặc token của nhà cung cấp. Chờ hạn mức hồi phục rồi thử lại; bạn vẫn có thể tạo lịch không dùng AI.",
+        "auth": "Nhà cung cấp từ chối API key của trợ lý AI. Cần kiểm tra lại cấu hình backend.",
+        "config": "Model hoặc cấu hình trợ lý AI chưa hợp lệ. Cần kiểm tra lại cấu hình backend.",
+        "schema": "Trợ lý AI trả về thông tin chưa đúng định dạng. Hãy rút gọn yêu cầu rồi thử lại, hoặc tạo lịch không dùng AI.",
+        "bad_json": "Trợ lý AI trả về thông tin chưa đúng định dạng. Hãy thử lại, hoặc tạo lịch không dùng AI.",
+        "timeout": "Trợ lý AI phản hồi quá lâu. Hãy thử lại, hoặc tạo lịch không dùng AI.",
+    }
     return error(
         code,
-        "Không thể dùng trợ lý AI lúc này; bạn vẫn có thể nhập yêu cầu có cấu trúc.",
+        messages.get(exc.reason, "Không thể dùng trợ lý AI lúc này; bạn vẫn có thể nhập yêu cầu có cấu trúc."),
         503,
     )
 
