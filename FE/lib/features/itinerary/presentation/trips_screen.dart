@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
 import '../../../shared/widgets/app_header.dart';
+import '../../../shared/widgets/coastal_scene.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
@@ -115,12 +116,12 @@ class _TripsScreenState extends State<TripsScreen> {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               children: [
                 Text(
-                  'Chuyến đi của bạn',
+                  'Hành trình của bạn',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Chọn một chuyến để xem lịch trình, bản đồ và chi tiêu.',
+                  'Một nơi cho lịch trình, bản đồ và những khoản chi.',
                 ),
                 const SizedBox(height: 20),
                 FilledButton.icon(
@@ -201,8 +202,10 @@ class _TripCard extends StatelessWidget {
   Widget build(BuildContext context) => Material(
     color: AppColors.surface,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16),
-      side: BorderSide(color: selected ? AppColors.primary : AppColors.outline),
+      borderRadius: BorderRadius.circular(24),
+      side: BorderSide(
+        color: selected ? AppColors.surfaceHigh : AppColors.outline,
+      ),
     ),
     clipBehavior: Clip.antiAlias,
     child: InkWell(
@@ -213,6 +216,26 @@ class _TripCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (selected) ...[
+              const CoastalScene(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(14),
+                    child: Text(
+                      'DÀNH THỜI GIAN CHO NHỮNG ĐIỀU BẠN THÍCH',
+                      style: TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: .6,
+                        color: AppColors.primaryDark,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
             Row(
               children: [
                 const Icon(Icons.luggage_outlined, color: AppColors.primary),
@@ -237,6 +260,32 @@ class _TripCard extends StatelessWidget {
             Text(
               '${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}',
               style: const TextStyle(fontSize: 12),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceLow,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Mở lịch trình',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_rounded,
+                    size: 18,
+                    color: AppColors.primary,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/widgets/section_intro.dart';
+
 import '../application/auth_controller.dart';
 
 class RecoveryScreen extends StatefulWidget {
@@ -40,6 +42,15 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          SectionIntro(
+            icon: Icons.lock_reset_outlined,
+            title: widget.cancelDeletion
+                ? 'Chào mừng bạn trở lại'
+                : 'Lấy lại quyền truy cập',
+            description: widget.cancelDeletion
+                ? 'Dùng email tài khoản để yêu cầu mã khôi phục trong thời gian cho phép.'
+                : 'Nhập email tài khoản để nhận hướng dẫn và mã đặt lại mật khẩu.',
+          ),
           TextField(
             controller: email,
             enabled: !requested,

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 abstract final class AppColors {
   // Shared coastal palette across navigation and trip workflows.
-  static const primary = Color(0xFF006A6A);
-  static const primaryDark = Color(0xFF005050);
-  static const secondary = Color(0xFFD97706);
+  static const primary = Color(0xFF376F68);
+  static const primaryDark = Color(0xFF294F4B);
+  static const secondary = Color(0xFF94735A);
   static const accent = secondary;
-  static const tertiary = Color(0xFF0284C7);
-  static const canvas = Color(0xFFF8FAFC);
+  static const tertiary = Color(0xFF527D97);
+  static const canvas = Color(0xFFF6F8F7);
   static const surface = Color(0xFFFFFFFF);
-  static const surfaceLow = Color(0xFFF1F5F9);
-  static const surfaceHigh = Color(0xFFE2E8F0);
-  static const sand = Color(0xFFE0F2F1);
-  static const ink = Color(0xFF0F172A);
-  static const muted = Color(0xFF475569);
-  static const outline = Color(0xFFE2E8F0);
+  static const surfaceLow = Color(0xFFF0F4F2);
+  static const surfaceHigh = Color(0xFFE5EEEA);
+  static const sand = Color(0xFFE5F1EC);
+  static const ink = Color(0xFF263D3A);
+  static const muted = Color(0xFF637570);
+  static const outline = Color(0xFFE3EAE6);
   static const success = primary;
   static const warning = secondary;
   static const error = Color(0xFFBA1A1A);
@@ -45,6 +45,31 @@ abstract final class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AppColors.canvas,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.canvas,
+        foregroundColor: AppColors.ink,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          fontFamily: 'Be Vietnam Pro',
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: AppColors.ink,
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      ),
       fontFamily: 'Be Vietnam Pro',
       textTheme: const TextTheme(
         displaySmall: TextStyle(
@@ -88,6 +113,9 @@ abstract final class AppTheme {
         color: AppColors.surface,
         elevation: 0,
         margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(22)),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -114,11 +142,11 @@ abstract final class AppTheme {
         height: 68,
         elevation: 0,
         backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.primary,
+        indicatorColor: AppColors.sand,
         iconTheme: WidgetStateProperty.resolveWith(
           (states) => IconThemeData(
             color: states.contains(WidgetState.selected)
-                ? Colors.white
+                ? AppColors.primary
                 : AppColors.muted,
           ),
         ),
@@ -147,6 +175,12 @@ abstract final class AppTheme {
             fontWeight: FontWeight.w600,
             fontSize: 14,
           ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(44, 48),
+          foregroundColor: AppColors.primary,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
