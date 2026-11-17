@@ -3,10 +3,9 @@ from __future__ import annotations
 from BE.app.core.config import Settings
 from BE.app.modules.ai_assistance.domain import ExplanationDraft, InterpretationDraft
 from BE.app.modules.ai_assistance.service import AiAssistanceService
-from BE.app.modules.ai_assistance.service import _candidate_names
 
 
-def test_interpretation_bounds_catalog_and_normalizes_trip_context_times():
+def test_interpretation_never_sends_catalog_and_normalizes_trip_context_times():
     captured = {}
     catalog = [
         {"poi_id": f"cafe-{i}", "name": f"Quán cà phê Đà Nẵng {i}", "verified": True}
@@ -24,16 +23,36 @@ def test_interpretation_bounds_catalog_and_normalizes_trip_context_times():
     assert "Quán cà phê Đà Nẵng 749" not in captured["prompt"]
     assert len(captured["prompt"]) < 2500
     assert result["hard_constraints"]["must_visit"] == ["dragon"]
+    assert "KNOWN_POI_NAMES" not in captured["prompt"]
+    first = captured["prompt"]
+    service.interpret("Đi 2 người, ghé Cầu Rồng", catalog=[],
+        trip_context={"day_start": "07:00:00", "day_end": "21:00:00"})
+    assert captured["prompt"] == first
 
 
-def test_candidate_shortlist_handles_accents_and_bounds_broad_matches():
-    catalog = [{"name": f"Bãi biển Đà Nẵng {i}", "verified": True} for i in range(750)]
-    catalog += [{"name": "Cầu Rồng", "verified": True}, {"name": "Biển bịa", "verified": False}]
-    assert _candidate_names("ghe cau rong", catalog) == ["Cầu Rồng"]
-    names = _candidate_names("thích biển Đà Nẵng", catalog)
-    assert len(names) <= 24 and sum(map(len, names)) <= 1200
-    assert "Biển bịa" not in names
-    assert _candidate_names("Đi Đà Nẵng 2 người, ngân sách 3 triệu", catalog) == []
+def test_interpretation_resolves_names_locally_without_guessing_ambiguous_ids():
+    catalog = [
+        {"poi_id": "bridge", "name": "Cầu Rồng", "verified": True},
+        {"poi_id": "cafe-1", "name": "Cà phê An", "verified": True, "lat": 16.1, "lon": 108.1},
+        {"poi_id": "cafe-2", "name": "Cà phê An", "verified": True, "lat": 16.2, "lon": 108.2},
+        {"poi_id": "bad", "name": "Biển bịa", "verified": False},
+    ]
+    def complete(prompt, schema, settings):
+        assert "Cà phê An" not in prompt
+        return {"must_visit": ["cau rong", "ca phe an", "Biển bịa"],
+                "avoid": ["ca phe an"], "activities": ["biển"]}
+    service = AiAssistanceService(Settings(llm_provider="local", _env_file=None), completer=complete)
+    result = service.interpret("ghé cau rong, ca phe an, Biển bịa", catalog=catalog, trip_context={})
+    assert result["hard_constraints"]["must_visit"] == ["bridge"]
+    assert result["hard_constraints"]["avoid"] == []
+    pending = result["place_resolutions"]
+    assert [(item["constraint"], item["status"]) for item in pending] == [
+        ("must_visit", "ambiguous"), ("must_visit", "not_found"), ("avoid", "ambiguous")]
+    assert [item["poi_id"] for item in pending[0]["candidates"]] == ["cafe-1", "cafe-2"]
+    assert pending[0]["candidates"][1]["lat"] == 16.2
+    assert pending[1]["candidates"] == []
+    assert "Biển bịa" in result["unresolved"]
+    assert result["soft_preferences"]["activities"] == ["biển"]
 
 
 def test_interpretation_separates_hard_soft_and_unresolved() -> None:
@@ -54,7 +73,7 @@ def test_interpretation_separates_hard_soft_and_unresolved() -> None:
     )
     result = service.interpret(
         "đi 2 người, phải ghé Cầu Rồng và Địa điểm bịa",
-        catalog=[{"poi_id": "dragon", "name": "Cầu Rồng"}],
+        catalog=[{"poi_id": "dragon", "name": "Cầu Rồng", "verified": True}],
         trip_context={"destination": "da_nang"},
     )
     assert result["status"] == "review_required"
@@ -62,6 +81,19 @@ def test_interpretation_separates_hard_soft_and_unresolved() -> None:
     assert result["hard_constraints"]["accessibility"] == ["wheelchair"]
     assert result["soft_preferences"]["food_preferences"] == ["hải sản"]
     assert "Địa điểm bịa" in result["unresolved"]
+
+
+def test_model_cannot_turn_unmentioned_catalog_places_into_hard_constraints():
+    service = AiAssistanceService(
+        Settings(llm_provider="local", _env_file=None),
+        completer=lambda *args: {"must_visit": ["Cầu Rồng"], "activities": ["biển"]},
+    )
+    result = service.interpret("thích biển", trip_context={}, catalog=[
+        {"poi_id": "bridge", "name": "Cầu Rồng", "verified": True},
+    ])
+    assert result["hard_constraints"]["must_visit"] == []
+    assert result["place_resolutions"] == []
+    assert result["unresolved"] == ["Cầu Rồng"]
 
 
 def test_interpretation_prompt_does_not_include_account_or_token_data() -> None:

@@ -49,6 +49,13 @@ API gọi thành công. Test tại chuyến đi -> Lập lịch -> Nhập mong m
 Chỉ sau khi nhận đề xuất và người dùng xác nhận, planner deterministic mới lập lịch.
 Lỗi quota/auth/provider được báo và vẫn có thể bỏ qua AI để lập lịch thông thường.
 
+Diễn giải chỉ gửi câu người dùng, các trường chuyến đi cần thiết và schema JSON;
+không gửi catalog hoặc danh sách địa điểm gợi ý tới LLM. Backend đối chiếu tên đã
+trích xuất với catalog đã xác minh, hỗ trợ tên không dấu. Tên khớp duy nhất được
+chuyển thành ID; tên khớp nhiều nơi cần chọn đúng địa điểm trong bước **Kiểm tra
+yêu cầu**. Tên không tìm thấy phải được bỏ hoặc sửa yêu cầu trước khi xác nhận.
+Planner nhận các ID đã xác nhận và tự lập lịch, không gọi LLM để duyệt địa điểm.
+
 Gateway dùng Python stdlib, JSON object mode và xác thực Pydantic tại backend, không
 thêm SDK. Groq hosting/billing/key độc lập với tài khoản Codex/ChatGPT; không dùng
 token Codex. Model/quota tùy tài khoản Groq; không mặc định mọi lời gọi đều miễn phí.

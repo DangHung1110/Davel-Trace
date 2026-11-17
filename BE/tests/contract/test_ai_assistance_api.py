@@ -37,6 +37,61 @@ def test_foreign_trip_is_rejected_before_external_call(lifecycle, monkeypatch):
         app.dependency_overrides.clear()
 
 
+def test_owned_interpretation_resolves_locally_and_only_confirmed_ids_reach_planner(
+    lifecycle, monkeypatch,
+):
+    from BE.app.modules.catalog import infrastructure
+    planning, owner, _other, trip_id, _url = lifecycle
+    calls = []
+    def complete(prompt, schema, settings):
+        calls.append(prompt)
+        assert "KNOWN_POI_NAMES" not in prompt
+        assert "Cà phê An chi nhánh" not in prompt
+        return {"travelers": 2, "budget": 3_000_000,
+                "must_visit": ["cau rong", "ca phe an"], "avoid": ["quan binh"]}
+    catalog = {"snapshot": "fixture-v1", "pois": [
+        {"poi_id": "bridge", "name": "Cầu Rồng", "verified": True},
+        {"poi_id": "an-1", "name": "Cà phê An chi nhánh 1", "verified": True, "lat": 16.1, "lon": 108.1},
+        {"poi_id": "an-2", "name": "Cà phê An chi nhánh 2", "verified": True, "lat": 16.2, "lon": 108.2},
+        {"poi_id": "binh-1", "name": "Quán Bình 1", "verified": True},
+        {"poi_id": "binh-2", "name": "Quán Bình 2", "verified": True},
+    ]}
+    monkeypatch.setattr(infrastructure, "load_catalog", lambda: catalog)
+    ai = AiAssistanceService(planning.settings, completer=complete)
+    app.dependency_overrides[current_principal] = lambda: owner
+    monkeypatch.setattr(api, "AiAssistanceService", lambda: ai)
+    try:
+        response = TestClient(app).post(
+            f"/v1/trips/{trip_id}/ai/interpretations",
+            json={"text": "Đi 2 người, 3 triệu, ghé cau rong, ca phe an, tránh quan binh"},
+        )
+        assert response.status_code == 200
+        proposal = response.json()
+        assert proposal["status"] == "review_required"
+        assert proposal["hard_constraints"]["must_visit"] == ["bridge"]
+        assert [item["constraint"] for item in proposal["place_resolutions"]] == ["must_visit", "avoid"]
+        assert len(calls) == 1
+        assert planning.list_versions(owner, trip_id)["items"] == []
+        captured = []
+        original_planner = planning._planner
+        def planner(trip, target, kind):
+            captured.append(trip)
+            return original_planner(trip, target, kind)
+        planning._planner = planner
+        result = planning.create_planning_request(
+            owner, trip_id, "confirmed-local-places", target_count=1,
+            constraint_overrides={**proposal["fields"],
+                **proposal["hard_constraints"], **proposal["soft_preferences"],
+                "must_visit": ["bridge", "an-2"], "avoid": ["binh-1"]},
+        )
+        assert result["status"] == "completed"
+        assert captured[0]["must_visit"] == ["bridge", "an-2"]
+        assert captured[0]["avoid"] == ["binh-1"]
+        assert len(calls) == 1  # planning itself never calls AI
+    finally:
+        app.dependency_overrides.clear()
+
+
 @pytest.mark.parametrize("reason", ["disabled", "auth", "quota", "timeout", "schema"])
 def test_normalized_ai_failure_keeps_structured_planning_usable(
     lifecycle, monkeypatch, reason
