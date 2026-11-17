@@ -14,6 +14,10 @@ travel text is performed only after a key is available locally; readiness config
 alone is not proof of connectivity. No new dependency or migration.
 
 ## Rate-limit regression
+The bounded-shortlist requirement below is superseded by
+`../017-extraction-local-resolution/spec.md`: no catalog context is sent to AI;
+place names are resolved locally after extraction, with explicit ambiguity review.
+
 The real app recorded quota failures. Sending the full 750-place catalog consumes
 over 5000 input tokens per attempt and schema retries can exceed the provider budget.
 Interpretation must send only a bounded relevant shortlist; the full catalog remains
