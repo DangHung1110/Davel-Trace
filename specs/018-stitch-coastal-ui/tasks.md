@@ -7,4 +7,4 @@
 - [x] T005 Adapt trips, auth, itinerary/planning, map, expenses and account/preferences.
 - [x] T006 Add meaningful GPS/interaction/mobile regression coverage.
 - [x] T007 Analyze, run all Flutter and JS checks and inspect running debug UI.
-- [ ] T008 Converge, commit/push fix/ui and open PR to main.
+- [x] T008 Converge, commit/push fix/ui and open PR #24 to main.
