@@ -29,7 +29,7 @@
       }
 
       body {
-        background: #dce8ef;
+        background: #e5eeea;
         font-family: Inter, system-ui, sans-serif;
       }
 
@@ -60,7 +60,7 @@
         height: 30px;
         border: 3px solid white;
         border-radius: 50% 50% 50% 10%;
-        background: #246bfd;
+        background: #376f68;
         color: white;
         box-shadow: 0 5px 14px rgba(22, 32, 51, 0.32);
         font-size: 11px;
@@ -73,7 +73,7 @@
       }
 
       .stop-marker.origin {
-        background: #ff625f;
+        background: #a97862;
       }
 
       .car-marker {
@@ -82,7 +82,7 @@
         height: 42px;
         border: 2px solid rgba(255, 255, 255, 0.95);
         border-radius: 8px 8px 6px 6px;
-        background: linear-gradient(90deg, #1662dd, #4c9bff 48%, #1760d9);
+        background: linear-gradient(90deg, #376f68, #7eaaa0 48%, #376f68);
         box-shadow: 0 5px 13px rgba(13, 42, 90, 0.45);
         transform-origin: 50% 50%;
       }
@@ -142,14 +142,21 @@
       let animationProgress = 0;
       let lastCameraUpdate = 0;
       let mapReady = false;
+      let mapLoadFailed = false;
       let pendingTrip;
       let pendingUserLocation;
       let followUserLocation = false;
       const animationDuration = 26000;
 
+      function notifyParent(type, values = {}) {
+        window.parent.postMessage(JSON.stringify({ type, ...values }), window.location.origin);
+      }
+
       function showError(message) {
         statusElement.textContent = message;
         statusElement.style.color = "#c43d4b";
+        statusElement.hidden = false;
+        notifyParent("mapError");
       }
 
       function add3DBuildings(map) {
@@ -237,7 +244,7 @@
           map.setPaintProperty(
             "demo-route-line",
             "line-color",
-            isFallback ? "#f09b32" : "#246bfd",
+            isFallback ? "#a97862" : "#376f68",
           );
           return;
         }
@@ -256,7 +263,7 @@
           source: "demo-route",
           layout: { "line-join": "round", "line-cap": "round" },
           paint: {
-            "line-color": isFallback ? "#f09b32" : "#246bfd",
+            "line-color": isFallback ? "#a97862" : "#376f68",
             "line-width": 6,
             "line-opacity": 0.96,
           },
@@ -281,6 +288,7 @@
       }
 
       function fitRoute(coordinates) {
+        if (!coordinates.length) return;
         const bounds = coordinates.reduce(
           (current, coordinate) => current.extend(coordinate),
           new maplibregl.LngLatBounds(coordinates[0], coordinates[0]),
@@ -418,6 +426,9 @@
         pendingUserLocation = { latitude, longitude, follow, recenter };
         followUserLocation = follow;
         if (!mapReady) return;
+        const inside = longitude >= 107.75 && longitude <= 108.55 &&
+          latitude >= 15.80 && latitude <= 16.35;
+        notifyParent("mapCoverage", { inside });
         const point = [longitude, latitude];
         const firstFix = !userMarker;
         if (!userMarker) {
@@ -429,7 +440,7 @@
         } else {
           userMarker.setLngLat(point);
         }
-        if (follow || recenter) {
+        if (inside && (follow || recenter)) {
           const camera = { center: point, duration: firstFix || recenter ? 650 : 300 };
           if (firstFix || recenter) camera.zoom = 16;
           map.easeTo(camera);
@@ -441,6 +452,7 @@
         pendingUserLocation = undefined;
         followUserLocation = false;
         if (userMarker) { userMarker.remove(); userMarker = undefined; }
+        notifyParent("mapCoverage", { inside: true });
       }
 
       function releaseUserCamera(event) {
@@ -451,7 +463,6 @@
       }
 
       async function renderTrip(stops, route = null, autoPlay = false) {
-        if (stops.length < 2) return;
         if (!mapReady) {
           pendingTrip = { stops, route, autoPlay };
           return;
@@ -481,13 +492,13 @@
             carMarker = undefined;
           }
         }
-        fitRoute(stops.map((stop) => [stop.longitude, stop.latitude]));
+        if (!followUserLocation) fitRoute(stops.map((stop) => [stop.longitude, stop.latitude]));
         if (quality === "road_route") statusElement.textContent = "OSRM · tuyến đường bộ";
         else if (quality === "matrix_estimate") statusElement.textContent = "Ước tính ma trận · không có hình học tuyến";
         else if (quality === "interpolated") statusElement.textContent = "Đường nối nội suy · không phải tuyến thật";
         else statusElement.textContent = route?.warning || "Chưa có tuyến khả dụng";
         if (route?.warning) statusElement.textContent = route.warning;
-        statusElement.hidden = quality === "road_route" && !route?.warning;
+        statusElement.hidden = stops.length < 2 || (quality === "road_route" && !route?.warning);
         if (autoPlay) setTimeout(playRoute, 1300);
       }
 
@@ -517,7 +528,20 @@
 
       async function startMap() {
         try {
-          const archiveUrl = new URL("data/danang.pmtiles", document.baseURI);
+          let archiveUrl = new URL("data/danang.pmtiles", document.baseURI);
+          const apiBase = new URLSearchParams(window.location.search).get("api");
+          if (apiBase) {
+            try {
+              const apiArchive = new URL(apiBase.replace(/\/$/, "") + "/v1/maps/danang.pmtiles");
+              const probe = await fetch(apiArchive, {
+                headers: { Range: "bytes=0-0" }, signal: AbortSignal.timeout(5000),
+              });
+              if (probe.status === 206 && probe.headers.get("content-length") === "1") {
+                archiveUrl = apiArchive;
+              }
+              await probe.body?.cancel();
+            } catch (_) { /* Packaged asset remains usable with a range-capable static server. */ }
+          }
           const protocol = new pmtiles.Protocol({ metadata: true });
           maplibregl.addProtocol("pmtiles", protocol.tile);
 
@@ -560,9 +584,10 @@
           map.on("zoomstart", releaseUserCamera);
 
           map.on("load", () => {
-            add3DBuildings(map);
+            try { add3DBuildings(map); }
+            catch (error) { console.warn("3D buildings unavailable", error); }
             mapReady = true;
-            statusElement.hidden = true;
+            statusElement.hidden = !mapLoadFailed;
             const initialTrip = parseInitialTrip();
             const trip = pendingTrip || initialTrip;
             if (trip.stops.length > 1) {
@@ -572,9 +597,12 @@
               const latest = pendingUserLocation;
               setUserLocation(latest.latitude, latest.longitude, latest);
             }
+            notifyParent(mapLoadFailed ? "mapError" : "mapReady");
           });
           map.on("error", (event) => {
             console.error("MapLibre error", event.error || event);
+            if (!mapReady) mapLoadFailed = true;
+            showError("Không tải được bản đồ. Kiểm tra kết nối rồi thử tải lại.");
           });
         } catch (error) {
           console.error(error);

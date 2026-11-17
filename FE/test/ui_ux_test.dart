@@ -147,7 +147,7 @@ void main() {
       await tester.pageBack();
       await tester.pumpAndSettle();
       await _tap(tester, 'back-to-trips');
-      expect(find.text('Chuyến đi của bạn'), findsOneWidget);
+      expect(find.text('Hành trình của bạn'), findsOneWidget);
     },
   );
 

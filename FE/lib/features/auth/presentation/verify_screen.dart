@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/widgets/section_intro.dart';
+
 import '../application/auth_controller.dart';
 
 class VerifyScreen extends StatefulWidget {
@@ -26,6 +28,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          const SectionIntro(
+            icon: Icons.mark_email_read_outlined,
+            title: 'Kiểm tra hộp thư',
+            description: 'Nhập mã xác thực email để tiếp tục. Bạn có thể gửi lại mã nếu chưa nhận được.',
+          ),
           Text(
             widget.controller.message ??
                 'Kiểm tra email ${widget.controller.pendingEmail ?? 'của bạn'} để lấy mã xác thực.',

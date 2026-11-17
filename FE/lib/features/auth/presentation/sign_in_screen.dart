@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/widgets/coastal_scene.dart';
+import '../../../theme/app_theme.dart';
+
 import '../application/auth_controller.dart';
 import 'recovery_screen.dart';
 import 'register_screen.dart';
@@ -32,20 +35,33 @@ class _SignInScreenState extends State<SignInScreen> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 440),
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(24, 40, 24, 24),
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
             children: [
-              const Icon(Icons.explore_rounded, size: 52),
+              const CoastalScene(
+                height: 112,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Icon(
+                      Icons.explore_outlined,
+                      color: AppColors.primary,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 16),
               Text(
                 'Davel Trace',
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineMedium
                     ?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               const Text(
-                'Quản lý chuyến đi Đà Nẵng gọn gàng, rõ ràng.',
-                textAlign: TextAlign.center,
+                'Khám phá Đà Nẵng, theo nhịp của bạn.',
+                textAlign: TextAlign.left,
               ),
               const SizedBox(height: 28),
               TextField(
@@ -133,16 +149,26 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 child: const Text('Quên mật khẩu?'),
               ),
-              TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => RecoveryScreen(
-                      controller: widget.controller,
-                      cancelDeletion: true,
-                    ),
-                  ),
+              ExpansionTile(
+                key: const Key('account-recovery-options'),
+                tilePadding: EdgeInsets.zero,
+                title: const Text(
+                  'Cần hỗ trợ tài khoản?',
+                  style: TextStyle(fontSize: 13),
                 ),
-                child: const Text('Khôi phục tài khoản đang chờ xóa'),
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => RecoveryScreen(
+                          controller: widget.controller,
+                          cancelDeletion: true,
+                        ),
+                      ),
+                    ),
+                    child: const Text('Khôi phục tài khoản đang chờ xóa'),
+                  ),
+                ],
               ),
               const Divider(height: 32),
               OutlinedButton.icon(

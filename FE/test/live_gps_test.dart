@@ -79,6 +79,31 @@ Future<void> _start(WidgetTester tester, _StreamingLocation provider) async {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  testWidgets('map retry and coverage notices do not restart the GPS watch', (
+    tester,
+  ) async {
+    final provider = _StreamingLocation();
+    addTearDown(provider.fixes.close);
+    await _start(tester, provider);
+    provider.emit(16.06);
+    await _pumpGPS(tester);
+    _canvas(tester).onMapError!('Không tải được bản đồ');
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('retry-map-button')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('retry-map-button')));
+    await tester.pumpAndSettle();
+    expect(_canvas(tester).reloadRequest, 1);
+    expect(provider.watches, 1);
+    expect(_canvas(tester).userLocation?.latitude, 16.06);
+    _canvas(tester).onCoverageChanged!(false);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ngoài vùng bản đồ Đà Nẵng'), findsOneWidget);
+    _canvas(tester).onCoverageChanged!(true);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ngoài vùng bản đồ Đà Nẵng'), findsNothing);
+    expect(provider.watches, 1);
+    expect(tester.takeException(), isNull);
+  });
   const cacheChannel = MethodChannel('plugins.flutter.io/path_provider');
   setUpAll(() async {
     await (FontLoader('Be Vietnam Pro')

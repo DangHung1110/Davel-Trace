@@ -97,41 +97,50 @@ class _MainShellState extends State<MainShell> {
                 ],
               ),
             ),
-            NavigationBar(
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (index) {
-                if (index == 0) _tripCollectionRequest++;
-                _select(index);
-              },
-              destinations: const [
-                NavigationDestination(
-                  key: Key('itinerary-tab'),
-                  icon: Icon(Icons.route_outlined, size: 21),
-                  selectedIcon: Icon(Icons.route_rounded, size: 21),
-                  label: 'Chuyến đi',
-                ),
-                NavigationDestination(
-                  key: Key('map-tab'),
-                  icon: Icon(Icons.map_outlined, size: 21),
-                  selectedIcon: Icon(Icons.map_rounded, size: 21),
-                  label: 'Bản đồ',
-                ),
-                NavigationDestination(
-                  key: Key('expenses-tab'),
-                  icon: Icon(Icons.account_balance_wallet_outlined, size: 21),
-                  selectedIcon: Icon(
-                    Icons.account_balance_wallet_rounded,
-                    size: 21,
+            Container(
+              margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(26),
+                border: Border.all(color: AppColors.outline),
+              ),
+              child: NavigationBar(
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (index) {
+                  if (index == 0) _tripCollectionRequest++;
+                  _select(index);
+                },
+                destinations: const [
+                  NavigationDestination(
+                    key: Key('itinerary-tab'),
+                    icon: Icon(Icons.route_outlined, size: 21),
+                    selectedIcon: Icon(Icons.route_rounded, size: 21),
+                    label: 'Chuyến đi',
                   ),
-                  label: 'Chi tiêu',
-                ),
-                NavigationDestination(
-                  key: Key('profile-tab'),
-                  icon: Icon(Icons.person_outline_rounded, size: 21),
-                  selectedIcon: Icon(Icons.person_rounded, size: 21),
-                  label: 'Tài khoản',
-                ),
-              ],
+                  NavigationDestination(
+                    key: Key('map-tab'),
+                    icon: Icon(Icons.map_outlined, size: 21),
+                    selectedIcon: Icon(Icons.map_rounded, size: 21),
+                    label: 'Bản đồ',
+                  ),
+                  NavigationDestination(
+                    key: Key('expenses-tab'),
+                    icon: Icon(Icons.account_balance_wallet_outlined, size: 21),
+                    selectedIcon: Icon(
+                      Icons.account_balance_wallet_rounded,
+                      size: 21,
+                    ),
+                    label: 'Chi tiêu',
+                  ),
+                  NavigationDestination(
+                    key: Key('profile-tab'),
+                    icon: Icon(Icons.person_outline_rounded, size: 21),
+                    selectedIcon: Icon(Icons.person_rounded, size: 21),
+                    label: 'Tài khoản',
+                  ),
+                ],
+              ),
             ),
           ],
         ),

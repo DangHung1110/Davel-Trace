@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/widgets/section_intro.dart';
+
 import '../application/auth_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -23,6 +25,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          const SectionIntro(
+            icon: Icons.person_add_alt_outlined,
+            title: 'Bắt đầu hành trình mới',
+            description:
+                'Lưu chuyến đi, sở thích và chi tiêu vào tài khoản của bạn.',
+          ),
           TextField(
             controller: email,
             decoration: const InputDecoration(labelText: 'Email'),

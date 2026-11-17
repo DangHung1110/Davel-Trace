@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../shared/widgets/section_intro.dart';
+
 import '../application/auth_controller.dart';
 import '../domain/models.dart';
 
@@ -31,6 +33,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          const SectionIntro(
+            icon: Icons.shield_outlined,
+            title: 'Bạn làm chủ tài khoản',
+            description: 'Kiểm tra thiết bị đăng nhập và quản lý dữ liệu cá nhân của bạn.',
+          ),
           if (widget.controller.errorMessage != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),

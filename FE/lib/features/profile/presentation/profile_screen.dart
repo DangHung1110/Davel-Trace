@@ -142,6 +142,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 14),
                 ],
                 SurfaceCard(
+                  color: AppColors.sand,
                   child: Column(
                     children: [
                       const CircleAvatar(
