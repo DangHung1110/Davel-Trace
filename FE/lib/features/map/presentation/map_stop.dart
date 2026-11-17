@@ -26,6 +26,32 @@ class MapStop {
   final IconData icon;
   final Color color;
 
+  @override
+  bool operator ==(Object other) =>
+      other is MapStop &&
+      id == other.id &&
+      title == other.title &&
+      subtitle == other.subtitle &&
+      time == other.time &&
+      durationMinutes == other.durationMinutes &&
+      latitude == other.latitude &&
+      longitude == other.longitude &&
+      icon == other.icon &&
+      color == other.color;
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    title,
+    subtitle,
+    time,
+    durationMinutes,
+    latitude,
+    longitude,
+    icon,
+    color,
+  );
+
   factory MapStop.fromActivity(
     ActivityItem activity, {
     PoiItem? place,

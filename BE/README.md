@@ -146,6 +146,12 @@ curl.exe -i http://127.0.0.1:8000/v1/ready
 `health` là liveness. `ready` kiểm tra PostgreSQL, Alembic head, catalog và
 ghi rõ AI/OSRM là optional/degraded thay vì làm core app chết.
 
+`GET /v1/maps/danang.pmtiles` phục vụ bản đồ local công khai, chỉ đọc, hỗ trợ HTTP
+byte-range (`206`) từ archive đã tracked trong repo. Flutter web dùng endpoint này
+khi asset server debug không hỗ trợ range; CORS cho phép Range/If-Match/If-Range và
+expose Content-Range/Accept-Ranges/ETag cho các origin đã cấu hình. Không cần token
+tài khoản để tải dữ liệu nền công khai; các API chuyến đi vẫn cần xác thực.
+
 ## Planner (lập lịch)
 
 Thuật toán lập lịch (`BE/app/services/`, `BE/common.py`, các router `itinerary`,
