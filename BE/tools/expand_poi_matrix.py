@@ -68,13 +68,20 @@ def _has_coords(poi: dict) -> bool:
             and isinstance(poi.get("lon"), (int, float)))
 
 
-def select_expansion(pois: list[dict], existing_ids: list[str],
-                     verified_only: bool = True) -> list[dict]:
-    """Verified, coordinate-bearing POIs the matrix does not cover yet.
+def is_stop(poi: dict) -> bool:
+    """v2.1 data-freeze gate G1 scope: active and not a trip base (lodging)."""
+    return poi.get("status") == "active" and poi.get("role") != "base"
 
+
+def select_expansion(pois: list[dict], existing_ids: list[str],
+                     verified_only: bool = True, select: str = "verified") -> list[dict]:
+    """Coordinate-bearing POIs the matrix does not cover yet.
+
+    `select="verified"` (default, v1): only `verified` POIs — unverified ones
+    are excluded unless `verified_only=False` (FR-013).
+    `select="stops"` (danang-v2.1, WP7/G1): every active non-base POI, since
+    the legacy `verified` flag no longer decides eligibility.
     Sorted by poi_id so repeated runs produce an identical append order.
-    Unverified candidates are excluded unless `verified_only=False`; the
-    optimizer would never pick them anyway (FR-013).
     """
     seen = set(existing_ids)
     picked = []
@@ -82,7 +89,10 @@ def select_expansion(pois: list[dict], existing_ids: list[str],
         pid = poi.get("poi_id")
         if not pid or pid in seen:
             continue
-        if verified_only and poi.get("verified") is not True:
+        if select == "stops":
+            if not is_stop(poi):
+                continue
+        elif verified_only and poi.get("verified") is not True:
             continue
         if not _has_coords(poi):
             continue
@@ -228,6 +238,12 @@ def parse_args(argv=None) -> argparse.Namespace:
                     help="skip the first M POIs of the sorted selection (default: 0)")
     ap.add_argument("--include-unverified", action="store_true",
                     help="also add unverified POIs (NOT recommended: FR-013)")
+    ap.add_argument("--select", choices=("verified", "stops"), default="verified",
+                    help="stops = every active non-base POI (danang-v2.1, gate G1)")
+    ap.add_argument("--max-table-size", type=int, default=MAX_TABLE_SIZE,
+                    help="must match osrm-routed --max-table-size")
+    ap.add_argument("--compact", action="store_true",
+                    help="write matrix.json without indentation (large matrices)")
     ap.add_argument("--dry-run", action="store_true")
     return ap.parse_args(argv)
 
@@ -242,11 +258,14 @@ def main(argv=None) -> int:
     matrix_path = args.matrix or os.path.join(args.snapshot_dir, "matrix.json")
     with open(pois_path, encoding="utf-8") as f:
         pois = json.load(f)["pois"]
+    from BE.common import view_pois  # v2.1 records -> runtime view (cat, verified)
+    pois = view_pois(pois, os.path.dirname(os.path.abspath(pois_path)))
     with open(matrix_path, encoding="utf-8") as f:
         existing = json.load(f)
 
     selection = select_expansion(pois, existing["ids"],
-                                 verified_only=not args.include_unverified)
+                                 verified_only=not args.include_unverified,
+                                 select=args.select)
     new_pois = select_batch(selection, args.offset, args.limit)
     n_existing = len(existing["ids"])
     n_full = n_existing + len(selection)
@@ -276,10 +295,11 @@ def main(argv=None) -> int:
     # --max-table-size (verified: n+1 sources passes while n+chunk is rejected
     # as TooBig), so the guard must reserve one full chunk, not just check n.
     chunk = max(1, int(args.chunk))
-    if n_batch + chunk > MAX_TABLE_SIZE:
-        room = MAX_TABLE_SIZE - n_existing - chunk
+    max_table = int(args.max_table_size)
+    if n_batch + chunk > max_table:
+        room = max_table - n_existing - chunk
         print(f"ERROR: batch of {len(new_pois)} POIs ({n_batch} points + "
-              f"{chunk} sources) > max-table-size {MAX_TABLE_SIZE}; "
+              f"{chunk} sources) > max-table-size {max_table}; "
               f"use --limit {max(room, 0)} or fewer "
               f"(full selection is {len(selection)} POIs — merge in batches)",
               file=sys.stderr)
@@ -307,7 +327,10 @@ def main(argv=None) -> int:
         json.dump(existing, f, ensure_ascii=False, indent=1)
         f.write("\n")
     with open(matrix_path, "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, indent=1)
+        if args.compact:
+            json.dump(doc, f, ensure_ascii=False, separators=(",", ":"))
+        else:
+            json.dump(doc, f, ensure_ascii=False, indent=1)
         f.write("\n")
 
     cov = doc["coverage"]

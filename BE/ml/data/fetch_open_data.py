@@ -37,7 +37,11 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import v2_rules as R  # noqa: E402
 
-UA = "Davel-TravelAgent/0.2 (student research project; contact: repo owner)"
+# Wikimedia requires a User-Agent with real contact info (URL or e-mail) and
+# answers 429 otherwise. The contact is set by the person running the fetch:
+#   $env:WIKIMEDIA_UA = "Davel-TravelAgent/0.2 (<your contact>)"
+UA = os.environ.get("WIKIMEDIA_UA",
+                    "Davel-TravelAgent/0.2 (student research project; contact: repo owner)")
 SRC = os.path.join("BE", "data", "sources")
 CACHE = os.path.join(SRC, "cache")
 SNAP = os.path.join("BE", "data", "snapshots", "danang-v2", "pois.json")
@@ -216,14 +220,88 @@ def fetch_popularity():
     _dump("popularity.json", out)
 
 
+WIKI_API = "https://{lang}.wikipedia.org/w/api.php"
+WD_API = "https://www.wikidata.org/w/api.php"
+
+
+def _views_90d(project, title):
+    end = time.strftime("%Y%m%d")
+    start = time.strftime("%Y%m%d", time.gmtime(time.time() - 90 * 86400))
+    t = urllib.parse.quote(title.replace(" ", "_"), safe="")
+    try:
+        pv = _get(PAGEVIEWS.format(project=project, title=t, start=start, end=end), pause=0.2)
+        return sum(x["views"] for x in pv.get("items", []))
+    except Exception as e:  # noqa: BLE001 - a missing article counts as 0
+        print("pageviews miss", title, e)
+        return 0
+
+
+def fetch_popularity_api():
+    """Fallback when the Wikidata SPARQL service (WDQS) is down/rate-limited.
+
+    Wikipedia geosearch around each attraction POI (vi + en), name match
+    (fold ratio >= 0.6, <= 800 m), then `pageprops.wikibase_item` -> Wikidata
+    `wbgetentities` sitelink count, plus 90-day pageviews. Same output schema
+    as `fetch_popularity`.
+    """
+    pois = [p for p in _pois() if p["role"] == "attraction" and p["status"] != "excluded"]
+    out = {}
+    for p in pois:
+        best = None
+        for lang in ("vi", "en"):
+            q = {"action": "query", "list": "geosearch", "gscoord": f"{p['lat']}|{p['lon']}",
+                 "gsradius": 800, "gslimit": 20, "format": "json"}
+            res = _get(WIKI_API.format(lang=lang) + "?" + urllib.parse.urlencode(q), pause=0.3)
+            for g in res.get("query", {}).get("geosearch", []):
+                ratio = difflib.SequenceMatcher(None, R.fold(p["name"]), R.fold(g["title"])).ratio()
+                f_name, f_title = R.fold(p["name"]), R.fold(g["title"])
+                if f_title and (f_title in f_name or f_name in f_title):
+                    ratio = max(ratio, 0.8)
+                score = ratio - g["dist"] / 2000
+                if ratio >= 0.6 and (best is None or score > best[0]):
+                    best = (score, lang, g, ratio)
+        if not best:
+            continue
+        _, lang, g, ratio = best
+        props = _get(WIKI_API.format(lang=lang) + "?" + urllib.parse.urlencode(
+            {"action": "query", "prop": "pageprops", "ppprop": "wikibase_item",
+             "pageids": g["pageid"], "format": "json"}), pause=0.3)
+        page = next(iter(props.get("query", {}).get("pages", {}).values()), {})
+        qid = (page.get("pageprops") or {}).get("wikibase_item")
+        sitelinks, views = None, 0
+        if qid:
+            ent = _get(WD_API + "?" + urllib.parse.urlencode(
+                {"action": "wbgetentities", "ids": qid, "props": "sitelinks", "format": "json"}),
+                pause=0.3)
+            links = (ent.get("entities", {}).get(qid) or {}).get("sitelinks") or {}
+            sitelinks = len(links)
+            for wiki, project in (("viwiki", "vi.wikipedia"), ("enwiki", "en.wikipedia")):
+                if wiki in links:
+                    views += _views_90d(project, links[wiki]["title"])
+        else:
+            views = _views_90d(f"{lang}.wikipedia", g["title"])
+        out[p["poi_id"]] = {"wikidata": qid, "wikidata_label": g["title"],
+                            "match_m": round(g["dist"], 1), "name_ratio": round(ratio, 2),
+                            "wikidata_sitelinks": sitelinks, "wikipedia_views_90d": views,
+                            "via": f"{lang}.wikipedia geosearch"}
+    print("popularity matches", len(out), "of", len(pois))
+    _dump("popularity.json", out)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("what", choices=["osm", "popularity", "all"])
+    ap.add_argument("what", choices=["osm", "popularity", "popularity-api", "all"])
     a = ap.parse_args(argv)
     if a.what in ("osm", "all"):
         fetch_osm()
     if a.what in ("popularity", "all"):
-        fetch_popularity()
+        try:
+            fetch_popularity()
+        except Exception as e:  # noqa: BLE001 - WDQS outage / 429
+            print("WDQS unavailable, using Wikipedia/Wikidata APIs instead:", e)
+            fetch_popularity_api()
+    if a.what == "popularity-api":
+        fetch_popularity_api()
 
 
 if __name__ == "__main__":
