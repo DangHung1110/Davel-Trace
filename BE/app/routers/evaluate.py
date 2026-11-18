@@ -42,7 +42,8 @@ def load_eval_context(snapshot_dir: str) -> tuple[dict, dict] | None:
     except (FileNotFoundError, NotADirectoryError):
         return None
     try:
-        with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
+        from BE.common import matrix_path
+        with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
             cells = json.load(f).get("cells", {})
     except (FileNotFoundError, NotADirectoryError):
         cells = {}

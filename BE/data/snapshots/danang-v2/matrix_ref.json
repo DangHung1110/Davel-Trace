@@ -1,0 +1,5 @@
+{
+ "matrix_from": "../danang-v1/matrix.json",
+ "reason": "v1 poi_ids reuse the v1 matrix (avoid a 26 MB copy)",
+ "missing_ids_note": "POI mới (added_in=v2.0-p0b) và 173 POI v1 chưa có hàng ma trận — cần tính lại"
+}

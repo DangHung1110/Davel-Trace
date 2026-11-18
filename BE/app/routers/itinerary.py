@@ -97,7 +97,8 @@ def _get_plan_builder():
 
 def _load_cells(snapshot_dir: str) -> dict:
     try:
-        with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
+        from BE.common import matrix_path
+        with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
             return json.load(f).get("cells", {})
     except (FileNotFoundError, NotADirectoryError):
         return {}

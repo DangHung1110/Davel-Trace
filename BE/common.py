@@ -149,6 +149,21 @@ def load_pois(snapshot_dir: str, by_id: bool = False):
     return {p["poi_id"]: p for p in pois} if by_id else pois
 
 
+def matrix_path(snapshot_dir: str) -> str:
+    """Path of the snapshot's matrix.json.
+
+    A snapshot may hold `matrix_ref.json` ({"matrix_from": "<relative path>"})
+    instead of its own copy when its poi_ids are identical to another
+    snapshot's (danang-v2 reuses danang-v1's 26 MB matrix).
+    """
+    own = os.path.join(snapshot_dir, "matrix.json")
+    ref = os.path.join(snapshot_dir, "matrix_ref.json")
+    if not os.path.exists(own) and os.path.exists(ref):
+        target = load_json(ref).get("matrix_from", "")
+        return os.path.normpath(os.path.join(snapshot_dir, target))
+    return own
+
+
 def load_matrix_cells(snapshot_dir: str) -> dict:
-    """Read <snapshot_dir>/matrix.json -> cells dict."""
-    return load_json(os.path.join(snapshot_dir, "matrix.json"))["cells"]
+    """Read the snapshot's matrix (see `matrix_path`) -> cells dict."""
+    return load_json(matrix_path(snapshot_dir))["cells"]

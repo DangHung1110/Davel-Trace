@@ -98,7 +98,12 @@ def verified_pois(data: dict) -> list[dict]:
 
 def load_matrix(snapshot_dir: str, ids: list[str]) -> dict:
     """Load + validate matrix.json cells against POI ids; raise ValueError."""
-    with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
+    own = os.path.join(snapshot_dir, "matrix.json")
+    ref = os.path.join(snapshot_dir, "matrix_ref.json")
+    if not os.path.exists(own) and os.path.exists(ref):
+        with open(ref, encoding="utf-8") as f:   # stdlib-only: no BE.common import
+            own = os.path.normpath(os.path.join(snapshot_dir, json.load(f)["matrix_from"]))
+    with open(own, encoding="utf-8") as f:
         matrix = json.load(f)
     errors: list[str] = []
     if matrix.get("ids") != ids:

@@ -42,7 +42,8 @@ class MatrixService:
         self.coords: dict = dict(coords or {})
         self._client = osrm_client  # tests inject; else built lazily on first miss
         self._backfill: dict[str, tuple[int, str]] = {}
-        with open(os.path.join(snapshot_dir, "matrix.json"), encoding="utf-8") as f:
+        from BE.common import matrix_path
+        with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
             data = json.load(f)
         self.ids: list[str] = data["ids"]
         self.cells: dict = data["cells"]

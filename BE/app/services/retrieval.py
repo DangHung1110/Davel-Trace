@@ -116,6 +116,15 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if pid in avoid:
             excluded.append({"poi_id": pid, "reason": "avoid"})
             continue
+        # danang-v2: lodging is a trip base (role=base), never a stop; a POI
+        # with status=excluded (e.g. hostess bar) is kept in data only.
+        # v1 POIs carry neither field, so v1 behaviour is unchanged.
+        if p.get("role") == "base" and pid not in must:
+            excluded.append({"poi_id": pid, "reason": "noi luu tru (base)"})
+            continue
+        if p.get("status") == "excluded":
+            excluded.append({"poi_id": pid, "reason": "loai khoi du lieu: " + str(p.get("status_reason") or "")})
+            continue
         if not p.get("verified"):
             entry = {"poi_id": pid, "uncertainty": uncertainty(p) + ["poi chua xac minh"],
                      "must_visit": pid in must,
