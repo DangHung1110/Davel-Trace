@@ -16,6 +16,9 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | price_band (re/vua/kha/cao), price_min/max_vnd, price_conf | chỉ nguồn sạch; trống nếu chỉ có Google |
 | hours_spans, hours_conf, hours_verified_by | giờ mở mọi ngày từ nguồn sạch, nếu không có thì khung an toàn của nhóm giờ |
 | signature | điểm tiêu biểu (danh sách must-go đã duyệt) |
+| price_tier | v2.1: free / cheap / medium / expensive / included / trống (DATA_SPEC_v2_1) |
+| hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / unknown |
+| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + Wikidata/Wikipedia), thay rating Google |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 

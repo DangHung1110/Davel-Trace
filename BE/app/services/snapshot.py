@@ -85,6 +85,10 @@ def load_snapshot(snapshot_dir: str) -> dict:
     """Load + validate pois.json; raise ValueError listing all violations."""
     with open(os.path.join(snapshot_dir, "pois.json"), encoding="utf-8") as f:
         data = json.load(f)
+    # v2.1 records carry no legacy fields; validate the runtime view (WP1).
+    # BE.common is stdlib-only, so this loader stays dependency-free.
+    from BE.common import view_pois
+    data["pois"] = view_pois(data.get("pois") or [], snapshot_dir)
     errors = validate_snapshot(data)
     if errors:
         raise ValueError("invalid snapshot " + snapshot_dir + ":\n- " + "\n- ".join(errors))

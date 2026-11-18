@@ -45,7 +45,21 @@ if _REPO_ROOT not in sys.path:
 import v2_rules as R  # noqa: E402
 
 TODAY = "2026-11-18"
-DATA_VERSION = "v2.0"
+DATA_VERSION = "v2.1"
+# DATA_SPEC_v2_1.md section 2: the ONLY top-level keys of a v2.1 POI (rule 11).
+V21_KEYS = (
+    "poi_id", "name", "name_raw", "name_en", "lat", "lon",
+    "category", "role", "status", "status_reason", "zone", "cluster_id", "alt_group",
+    "requires_ticket_of", "hours", "price", "dwell", "tags", "time_profile",
+    "popularity", "description", "ext_ids", "provenance",
+    "data_version", "valid_from", "valid_to",
+)
+PROVENANCE_KEYS = ("name", "location", "category", "hours", "price", "dwell", "tags", "popularity")
+FIXED_HOURS_BY = ("human", "open_data", "user", "agent_web")
+# smart_tags keys that are price, not tags (they fold into price.tier).
+PRICE_TAG_KEYS = {"price_band", "band_source", "band_verified", "price_band_v1", "ticket",
+                  "legacy_band_user", "price_band_source"}
+TAG_RENAME = {"time": "good_times", "budget": "time_budget"}
 POLICIES = ("cach_ly", "demo_phi_thuong_mai")
 DEFAULT_POLICY = "demo_phi_thuong_mai"
 
@@ -352,6 +366,210 @@ def build_price(p, category, archetype, price_web, web_tickets, policy, in_paid_
     return out, pv, q
 
 
+def price_tier(price, category):
+    """v2.0 price object -> one `price.tier` (DATA_SPEC_v2_1 price table).
+
+    included = inside a parent ticket; free = explicit free entry; a VND
+    figure (known or estimate) -> tier by the 4-level table; a web/user band
+    without numbers keeps its 3-level name; nothing known -> None.
+    """
+    from BE.common import tier_of_vnd
+    if category == "lodging" or price.get("status") == "not_applicable":
+        return None
+    if price.get("basis") == "included_in_parent":
+        return "included"
+    if price.get("free_entry"):
+        return "free"
+    for k in ("typical_vnd", "ticket_vnd", "min_vnd"):
+        if price.get(k) is not None:
+            return tier_of_vnd(price[k])
+    band = price.get("legacy_band_web") or price.get("legacy_band_user")
+    return band if band in ("cheap", "medium", "expensive") else None
+
+
+# WP6: clean ranking prior per category (role prior), no Google input.
+CATEGORY_PRIOR = {
+    "beach": 0.6, "viewpoint": 0.55, "outdoor_landmark": 0.5, "religious": 0.45,
+    "museum_indoor": 0.5, "day_market": 0.5, "night_market": 0.55, "paid_attraction": 0.55,
+    "restaurant": 0.45, "cafe": 0.4, "nightlife": 0.35, "wellness": 0.3, "lodging": 0.0,
+}
+
+
+def prize_prior(category, signature, wikidata, sitelinks, views):
+    """`popularity.prize_prior` in [0,1] + (verified_by, confidence, note).
+
+    Weighted clean signals (DATA_FIX_PLAN WP6): category prior, approved
+    signature list, Wikidata presence/sitelinks, Wikipedia 90-day views
+    (log-scaled). Missing sources lower the confidence, they never invent a
+    value. Google rating is NOT an input.
+    """
+    import math
+    p = CATEGORY_PRIOR.get(category, 0.4)
+    parts = [f"category={p}"]
+    if wikidata:
+        p += 0.1
+        parts.append("wikidata")
+    if sitelinks:
+        p += 0.15 * min(1.0, math.log1p(sitelinks) / math.log1p(60))
+        parts.append(f"sitelinks={sitelinks}")
+    if views:
+        p += 0.15 * min(1.0, math.log1p(views) / math.log1p(200_000))
+        parts.append(f"views90d={views}")
+    if signature:
+        p = max(p, 0.9) + (0.05 if (sitelinks or views) else 0.0)
+        parts.append("signature")
+    p = round(min(1.0, p), 3)
+    rich = bool(sitelinks or views)
+    return p, ("open_data" if rich else "inferred"), (0.6 if rich else 0.4), "; ".join(parts)
+
+
+def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
+    """Internal v2.0 record -> (v2.1 record, archive dict).
+
+    The v2.1 record holds exactly `V21_KEYS`; everything else that is not a
+    Google value goes to the archive (traceability only, never read at run
+    time). Google values live in `quarantine_entry` (filled by the caller).
+    """
+    google_src = p_src.get("source") == "serpapi/google-maps"
+    h, pr, dw = v["hours"], v["price"], v["dwell"]
+    open_ = legacy_hours[0].split(", ") if legacy_hours else []
+    kind = ("unknown" if not open_ else
+            "fixed" if pv_hours["verified_by"] in FIXED_HOURS_BY else "safe_window")
+    tier = price_tier(pr, v["category"])
+
+    st = {TAG_RENAME.get(k, k): val for k, val in (p_src.get("smart_tags") or {}).items()
+          if k not in PRICE_TAG_KEYS}
+    base = v["tags"]                                  # build_tags() output
+    tags = {**st, "indoor": base["indoor"], "effort": base["effort"],
+            "kid_friendly": base["kid_friendly"],
+            "weather_sensitive": bool(base["weather_sensitive"])}
+
+    pv = dict(v["provenance"])
+    v1_verified = pv.pop("v1_verified", None)
+    pv_price = dict(pv["price"])
+    nums = [f"{k}={pr[k]}" for k in ("ticket_vnd", "min_vnd", "max_vnd", "typical_vnd")
+            if pr.get(k) is not None]
+    if nums:
+        pv_price["note"] = "; ".join(x for x in (pv_price.get("note"), "VND " + ", ".join(nums)) if x)
+    pv["price"] = pv_price
+    pop_src = v["popularity"]
+    wd = v["ext_ids"].get("wikidata")
+    prior, prior_by, prior_conf, prior_note = prize_prior(
+        v["category"], pop_src["signature"], wd, pop_src.get("wikidata_sitelinks"),
+        pop_src.get("wikipedia_views_90d"))
+    pv["popularity"] = prov("prize_prior_v1:category+signature+wikidata+wikipedia", prior_by,
+                            confidence=prior_conf, note=prior_note)
+    rec = {
+        "poi_id": v["poi_id"],
+        "name": v["name"],
+        "name_raw": p_src.get("name_osm") or p_src["name"],
+        "name_en": v.get("name_en"),
+        "lat": v["lat"], "lon": v["lon"],
+        "category": v["category"], "role": v["role"],
+        "status": v["status"], "status_reason": v["status_reason"],
+        "zone": v["zone"], "cluster_id": v["cluster_id"], "alt_group": v["alt_group"],
+        "requires_ticket_of": v["requires_ticket_of"],
+        "hours": {"open": open_, "kind": kind, "closed_days": h.get("closed_days") or [],
+                  "access_window": h.get("access_window"), "archetype": h["archetype"]},
+        "price": {"tier": tier, "note": pr.get("note")},
+        "dwell": {k: dw[k] for k in ("p25", "p50", "p75")},
+        "tags": tags,
+        "time_profile": v["time_profile"],
+        "popularity": {"signature": pop_src["signature"],
+                       "prize_prior": None if v["category"] == "lodging" else prior,
+                       "wikidata": wd, "wikidata_sitelinks": pop_src.get("wikidata_sitelinks"),
+                       "wikipedia_views_90d": pop_src.get("wikipedia_views_90d")},
+        "description": v["description"],
+        "ext_ids": {"osm": v["ext_ids"].get("osm"),
+                    "google_place_id": v["poi_id"] if v["poi_id"].startswith("ChIJ") else None,
+                    "overture": v["ext_ids"].get("overture")},
+        "provenance": {k: pv[k] for k in PROVENANCE_KEYS},
+        "data_version": DATA_VERSION, "valid_from": v["valid_from"], "valid_to": v["valid_to"],
+    }
+    skip = set(V21_KEYS) | set(GOOGLE_FIELDS) | {"opening_hours", "smart_tags", "hours",
+                                                "price", "dwell", "tags", "provenance",
+                                                "popularity", "ext_ids", "description"}
+    if google_src:
+        skip |= {"price_note"}
+    archive = {k: val for k, val in v.items() if k not in skip}
+    archive["smart_tags_price"] = {k: val for k, val in (p_src.get("smart_tags") or {}).items()
+                                   if k in PRICE_TAG_KEYS}
+    archive["hours_v20"] = {k: val for k, val in h.items()
+                            if k not in ("archetype", "closed_days", "access_window")
+                            and not (google_src and k in ("raw_v1", "spans_any_day", "conflict"))}
+    archive["price_v20"] = {k: val for k, val in pr.items() if k != "note"}
+    archive["dwell_v20"] = {k: val for k, val in dw.items() if k not in ("p25", "p50", "p75")}
+    archive["ext_ids_v20"] = {k: val for k, val in v["ext_ids"].items() if k not in ("osm", "overture")}
+    archive["v1_verified"] = v1_verified
+    if not google_src and isinstance(p_src.get("tags"), list):
+        archive["tags_v1"] = p_src["tags"]
+    if google_src and isinstance(p_src.get("tags"), list) and p_src["tags"]:
+        quarantine_entry["tags_v1"] = p_src["tags"]
+    return rec, archive
+
+
+def load_decisions(sources_dir):
+    """{poi_id: {name?, status?, status_reason?, category?}} from
+    BE/data/sources/decisions_*.json (user-approved review/name decisions;
+    later files override earlier ones)."""
+    out = {}
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("decisions_") and fn.endswith(".json"):
+                for pid, d in (_load(os.path.join(sources_dir, fn), {}) or {}).get("items", {}).items():
+                    out.setdefault(pid, {}).update({**d, "_file": fn})
+    return out
+
+
+def load_human_verify(sources_dir):
+    """{poi_id: item} from BE/data/sources/human_verify_v2_*.json (verify-queue
+    export: hours, price_tier or ticket_vnd, evidence_url, checked_at)."""
+    out = {}
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("human_verify_v2_") and fn.endswith(".json"):
+                for it in (_load(os.path.join(sources_dir, fn), {}) or {}).get("items", []):
+                    out[it["poi_id"]] = {**it, "_file": fn}
+    return out
+
+
+def apply_decision(rec, d):
+    """User decision (WP5 names, WP10 review/duplicates) -> v2.1 record."""
+    pv = rec["provenance"]
+    if d.get("name"):
+        rec["name"] = d["name"]
+        pv["name"] = prov("user_decision", "user", note=f"{d['_file']}; tên gốc trong name_raw")
+    if d.get("status") in ("active", "review", "excluded"):
+        rec["status"] = d["status"]
+        rec["status_reason"] = d.get("status_reason") if d["status"] != "active" else None
+    if d.get("category") in R.ALL_CATEGORIES:
+        rec["category"], rec["role"] = d["category"], R.ROLE_OF[d["category"]]
+        pv["category"] = prov("user_decision", "user", note=d["_file"])
+
+
+def apply_human_verify(rec, it):
+    """Human-checked hours/price (WP8). `human` needs an evidence URL,
+    otherwise the value is recorded as `user` (DATA_SPEC_v2_1 verified_by)."""
+    from BE.common import PRICE_TIERS, tier_of_vnd
+    url = it.get("evidence_url")
+    by = "human" if url else "user"
+    when = it.get("checked_at") or TODAY
+    if it.get("hours"):
+        spans = [s.strip() for s in str(it["hours"]).split(",") if s.strip()]
+        if spans and all(R.parse_span(s) for s in spans):
+            rec["hours"]["open"], rec["hours"]["kind"] = spans, "fixed"
+            rec["provenance"]["hours"] = prov("human_verify", by, evidence_url=url,
+                                              verified_at=when, note=it["_file"])
+    tier = it.get("price_tier")
+    if tier is None and it.get("ticket_vnd") is not None:
+        tier = tier_of_vnd(it["ticket_vnd"])
+    if tier in PRICE_TIERS and not (tier == "included") ^ bool(rec["requires_ticket_of"]):
+        rec["price"]["tier"] = tier
+        note = it["_file"] + (f"; VND {it['ticket_vnd']}" if it.get("ticket_vnd") is not None else "")
+        rec["provenance"]["price"] = prov("human_verify", by, evidence_url=url,
+                                          verified_at=when, note=note)
+
+
 def build_tags(p, category):
     st = p.get("smart_tags") or {}
     space = st.get("space") or p.get("space")
@@ -509,6 +727,9 @@ def load_new_pois(sources_dir, existing):
 
 def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     assert policy in POLICIES, policy
+    # v2.1: pois.json is ALWAYS clean; Google values are only in quarantine and
+    # the policy is applied at RUN time by BE.common.poi_view (GOOGLE_POLICY).
+    runtime_policy, policy = policy, "cach_ly"
     v1 = _load(os.path.join(v1_dir, "pois.json"))
     pois_v1 = v1["pois"]
     price_web = _load(os.path.join(v1_dir, "price_web.json"), {})
@@ -567,6 +788,9 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     dups = find_duplicates(pois_v1)
 
     out_pois, quarantine, changes, review_rows = [], {}, [], []
+    v21, archive = [], {}
+    decisions = load_decisions(sources_dir)     # WP5 / WP10 (user-approved)
+    human = load_human_verify(sources_dir)      # WP8 (verify queue export)
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -619,8 +843,14 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         q = {k: p.get(k) for k in GOOGLE_FIELDS if google_src and p.get(k) not in (None, "", [])}
         q.update(q_hours)
         q.update(q_price)
-        if q:
-            quarantine[pid] = q
+        if google_src and q_hours.get("opening_hours"):
+            # every-day Google hours (∩ road access window), used by poi_view
+            # only under GOOGLE_POLICY=demo_phi_thuong_mai
+            every = R.intersect_all(q_hours["opening_hours"])
+            if every and access:
+                every = R.intersect(every, access)
+            if every:
+                q["hours_open"] = R.fmt(every)[0].split(", ")
 
         osm = p.get("osm_evidence") or {}
         osm_id = osm.get("osm") if osm and osm_name_ok(p, osm) else None
@@ -714,6 +944,15 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
                 if google_src:
                     v[k] = None if k == "rating" else ([] if k in ("pros", "cons") else "")
         out_pois.append(v)
+        rec, arch_fields = to_v21(v, p, pv_hours, legacy_hours, q)
+        if pid in decisions:
+            apply_decision(rec, decisions[pid])
+        if pid in human:
+            apply_human_verify(rec, human[pid])
+        v21.append(rec)
+        archive[pid] = arch_fields
+        if q:
+            quarantine[pid] = q
 
         if pid in v1_ids and R.V1_CAT_FALLBACK.get(p.get("cat")) != cat:
             changes.append({"poi_id": pid, "name": p["name"], "v1_cat": p.get("cat"),
@@ -728,25 +967,38 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         "derived_from": "danang-v1",
         "fetched_at": v1.get("fetched_at"),
         "built_at": TODAY,
-        "google_policy": policy,
+        "google_policy": "runtime (GOOGLE_POLICY env; pois.json is always clean)",
+        "google_policy_default": runtime_policy,
         "source": "danang-v1 (serpapi/google-maps + osm + manual) re-labelled; see provenance",
-        "count": len(out_pois),
-        "count_by_status": dict(Counter(p["status"] for p in out_pois)),
-        "count_by_category": dict(Counter(p["category"] for p in out_pois)),
-        "count_by_zone": dict(Counter(p["zone"] for p in out_pois)),
+        "sources": sorted({r["provenance"]["location"]["source"] for r in v21}),
+        "count": len(v21),
+        "count_by_status": dict(Counter(p["status"] for p in v21)),
+        "count_by_category": dict(Counter(p["category"] for p in v21)),
+        "count_by_zone": dict(Counter(p["zone"] for p in v21)),
+        "applied_decisions": len(decisions), "applied_human_verify": len(human),
         "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
         "count_new_pois": len(new_pois),
         "count_v1_pois": len(v1_ids),
-        "pois": out_pois,
+        "count_by_price_tier": dict(Counter(str(r["price"]["tier"]) for r in v21)),
+        "count_by_hours_kind": dict(Counter(r["hours"]["kind"] for r in v21)),
+        "pois": v21,
     }
     _dump(os.path.join(out_dir, "pois.json"), meta)
     _dump(os.path.join(out_dir, "quarantine_google.json"),
-          {"note": "Giá trị gốc Google (SerpAPI). KHÔNG dùng để train hay xuất production.",
-           "policy_in_build": policy, "items": quarantine})
-    _dump(os.path.join(out_dir, "matrix_ref.json"),
-          {"matrix_from": "../danang-v1/matrix.json",
-           "reason": "v1 poi_ids reuse the v1 matrix (avoid a 26 MB copy)",
-           "missing_ids_note": "POI mới (added_in=v2.0-p0b) và 173 POI v1 chưa có hàng ma trận — cần tính lại"})
+          {"note": "Giá trị gốc Google (SerpAPI). KHÔNG dùng để train hay xuất production. "
+                   "Chỉ BE.common.poi_view đọc file này khi GOOGLE_POLICY=demo_phi_thuong_mai.",
+           "items": quarantine})
+    _dump(os.path.join(out_dir, "archive_fields.json"),
+          {"note": "Trường cũ (v1/v2.0) không còn dùng — chỉ để truy vết, không module nào đọc lúc chạy. "
+                   "Giá trị gốc Google nằm ở quarantine_google.json, không ở đây.",
+           "data_version": DATA_VERSION, "items": archive})
+    if not os.path.exists(os.path.join(out_dir, "matrix.json")):
+        # Q2: danang-v2 owns its matrix once WP7 builds it (expand_poi_matrix
+        # --select stops); until then the v1 matrix is reused by reference.
+        _dump(os.path.join(out_dir, "matrix_ref.json"),
+              {"matrix_from": "../danang-v1/matrix.json",
+               "reason": "v1 poi_ids reuse the v1 matrix (avoid a 26 MB copy)",
+               "missing_ids_note": "POI mới (added_in=v2.0-p0b) và 173 POI v1 chưa có hàng ma trận — cần tính lại"})
     _csv(os.path.join(reports_dir, "08_new_pois.csv"),
          [{"poi_id": p["poi_id"], "name": p["name"], "category": p["category"], "zone": p["zone"],
            "cluster_id": p["cluster_id"], "requires_ticket_of": p["requires_ticket_of_name"],
@@ -756,8 +1008,9 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
            "zone": s["existing_name"]} for s in skipped_new],
          ["poi_id", "name", "category", "zone", "cluster_id", "requires_ticket_of", "hours", "hours_by"])
 
-    write_exports(out_pois, exports_dir)
-    write_reports(out_pois, v1, quarantine, changes, review_rows, dups, reports_dir, policy)
+    write_exports(out_pois, exports_dir, {r["poi_id"]: r for r in v21})
+    write_reports(out_pois, v1, quarantine, changes, review_rows, dups, reports_dir, policy,
+                  {r["poi_id"]: r for r in v21})
     return meta
 
 
@@ -772,6 +1025,7 @@ FEATURE_COLS = [
     "dwell_p25", "dwell_p50", "dwell_p75", "dwell_conf",
     "price_band", "price_min_vnd", "price_max_vnd", "price_basis", "price_conf",
     "free_entry", "hours_spans", "hours_conf", "hours_verified_by", "signature", "osm_id",
+    "price_tier", "hours_kind", "prize_prior",            # v2.1 (WP12)
 ]
 
 
@@ -779,10 +1033,12 @@ def _clean_value(prv):
     return prv and prv.get("verified_by") != "google_demo"
 
 
-def write_exports(pois, exports_dir):
+def write_exports(pois, exports_dir, v21_by_id=None):
     rows, weak = [], []
+    v21_by_id = v21_by_id or {}
     for p in pois:
         pv = p["provenance"]
+        r21 = v21_by_id.get(p["poi_id"]) or {}
         hours_ok, price_ok = _clean_value(pv["hours"]), _clean_value(pv["price"])
         safe_hours = p["hours"]["spans"] if hours_ok else p["hours"]["safe_windows"]
         rows.append({
@@ -808,6 +1064,9 @@ def write_exports(pois, exports_dir):
             "hours_conf": pv["hours"]["confidence"] if hours_ok else CONF["inferred"],
             "hours_verified_by": pv["hours"]["verified_by"] if hours_ok else "inferred",
             "signature": p["popularity"]["signature"], "osm_id": p["ext_ids"]["osm"],
+            "price_tier": (r21.get("price") or {}).get("tier"),
+            "hours_kind": (r21.get("hours") or {}).get("kind"),
+            "prize_prior": (r21.get("popularity") or {}).get("prize_prior"),
         })
         ev = p["category_evidence"]
         name_only = R.classify_name_only(p["name_vi"])
@@ -845,6 +1104,9 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | price_band (re/vua/kha/cao), price_min/max_vnd, price_conf | chỉ nguồn sạch; trống nếu chỉ có Google |
 | hours_spans, hours_conf, hours_verified_by | giờ mở mọi ngày từ nguồn sạch, nếu không có thì khung an toàn của nhóm giờ |
 | signature | điểm tiêu biểu (danh sách must-go đã duyệt) |
+| price_tier | v2.1: free / cheap / medium / expensive / included / trống (DATA_SPEC_v2_1) |
+| hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / unknown |
+| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + Wikidata/Wikipedia), thay rating Google |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 
@@ -858,7 +1120,8 @@ và ưu tiên dòng `label_conf >= 0.6`. Nhãn phải được người duyệt 
 # reports
 # --------------------------------------------------------------------------
 
-def write_reports(pois, v1, quarantine, changes, review_rows, dups, reports_dir, policy):
+def write_reports(pois, v1, quarantine, changes, review_rows, dups, reports_dir, policy,
+                  v21_by_id=None):
     os.makedirs(reports_dir, exist_ok=True)
     _csv(os.path.join(reports_dir, "02_category_changes.csv"), changes,
          ["poi_id", "name", "v1_cat", "v2_category", "evidence"])
@@ -902,7 +1165,7 @@ def write_reports(pois, v1, quarantine, changes, review_rows, dups, reports_dir,
     _csv(os.path.join(reports_dir, "07_ticket_checklist.csv"), ticket_rows,
          ["poi_id", "name", "category", "zone", "current_note", "price_status"])
 
-    queue = verify_queue(pois)
+    queue = verify_queue(pois, v21_by_id=v21_by_id)
     _csv(os.path.join(reports_dir, "11_verify_queue.csv"), queue,
          ["rank", "poi_id", "name", "category", "zone", "priority", "why", "hours_now",
           "hours_by", "price_now", "price_by", "maps_search"])
@@ -912,13 +1175,19 @@ def write_reports(pois, v1, quarantine, changes, review_rows, dups, reports_dir,
     _dump(os.path.join(reports_dir, "01_migration_summary.json"), summ)
 
 
-def verify_queue(pois, limit=150):
+def verify_queue(pois, limit=150, v21_by_id=None):
+    """Top POIs by importance x uncertainty, in v2.1 terms (hours.kind,
+    price.tier) when `v21_by_id` is given. Signature POIs first (gate G3)."""
     weights = {"paid_attraction": 1.0, "museum_indoor": 0.9, "beach": 0.8, "viewpoint": 0.8,
                "religious": 0.5, "outdoor_landmark": 0.6, "night_market": 0.9,
                "day_market": 0.7, "restaurant": 0.6, "cafe": 0.4, "nightlife": 0.4,
                "wellness": 0.3}
+    v21_by_id = v21_by_id or {}
     rows = []
-    for p in pois:
+    for p0 in pois:
+        r21 = v21_by_id.get(p0["poi_id"])
+        p = {**p0, "provenance": r21["provenance"], "status": r21["status"],
+             "name": r21["name"]} if r21 else p0
         if p["status"] == "excluded" or p["role"] == "base":
             continue
         pv = p["provenance"]
@@ -936,12 +1205,18 @@ def verify_queue(pois, limit=150):
             why.append(f"review: {p['status_reason']}")
             imp += 0.3
         q = (p["name"] + " Đà Nẵng").replace(" ", "+")
+        if r21:
+            hours_now = (", ".join(r21["hours"]["open"]) or "—") + f" [{r21['hours']['kind']}]"
+            price_now = str(r21["price"]["tier"])
+        else:
+            hours_now = ", ".join(p["hours"]["spans"]) or "—"
+            price_now = (f"{p['price']['band']} {p['price']['min_vnd']}-{p['price']['max_vnd']}"
+                         if p["price"]["band"] else p["price"]["status"])
         rows.append({"poi_id": p["poi_id"], "name": p["name"], "category": p["category"],
                      "zone": p["zone"], "priority": round(imp * unc, 3), "why": "; ".join(why),
-                     "hours_now": ", ".join(p["hours"]["spans"]) or "—",
+                     "hours_now": hours_now,
                      "hours_by": pv["hours"]["verified_by"],
-                     "price_now": (f"{p['price']['band']} {p['price']['min_vnd']}-{p['price']['max_vnd']}"
-                                   if p["price"]["band"] else p["price"]["status"]),
+                     "price_now": price_now,
                      "price_by": pv["price"]["verified_by"],
                      "maps_search": f"https://www.google.com/maps/search/{q}"})
     rows.sort(key=lambda r: -r["priority"])
@@ -960,7 +1235,8 @@ def write_queue_html(rows, path):
             "và lưu thành <code>BE/data/sources/human_verify_v2_YYYYMMDD.json</code>.</p>"
             "<button onclick='exp()'>Xuất JSON</button><table><tr><th>#</th><th>Tên</th>"
             "<th>Loại/khu</th><th>Lý do</th><th>Giờ hiện tại</th><th>Giá hiện tại</th>"
-            "<th>Giờ đúng</th><th>Giá vé/người (VND)</th><th>URL bằng chứng</th><th>Tra</th></tr>")
+            "<th>Giờ đúng (mọi ngày mở)</th><th>Mức giá / người (price.tier)</th>"
+            "<th>URL bằng chứng</th><th>Tra</th></tr>")
     body = []
     for r in rows:
         body.append(
@@ -968,13 +1244,17 @@ def write_queue_html(rows, path):
             f"<td>{r['category']}<br>{r['zone']}</td><td>{html.escape(r['why'])}</td>"
             f"<td>{html.escape(r['hours_now'])}<br><small>{r['hours_by']}</small></td>"
             f"<td>{html.escape(str(r['price_now']))}<br><small>{r['price_by']}</small></td>"
-            "<td><input class=h placeholder='08:00-17:00'></td><td><input class=p></td>"
+            "<td><input class=h placeholder='08:00-17:00'></td><td><select class=p>"
+            "<option value=''>—</option><option>free</option><option>cheap</option>"
+            "<option>medium</option><option>expensive</option><option>included</option>"
+            "</select><input class=v placeholder='VND (tuỳ chọn)'></td>"
             "<td><input class=u></td>"
             f"<td><a href='{html.escape(r['maps_search'])}' target=_blank>maps</a></td></tr>")
     tail = ("</table><script>function exp(){const o=[];document.querySelectorAll('tr[data-id]')"
             ".forEach(t=>{const h=t.querySelector('.h').value,p=t.querySelector('.p').value,"
-            "u=t.querySelector('.u').value;if(h||p)o.push({poi_id:t.dataset.id,hours:h||null,"
-            "ticket_vnd:p?Number(p):null,evidence_url:u||null,verified_by:'human',"
+            "v=t.querySelector('.v').value,u=t.querySelector('.u').value;"
+            "if(h||p||v)o.push({poi_id:t.dataset.id,hours:h||null,price_tier:p||null,"
+            "ticket_vnd:v?Number(v):null,evidence_url:u||null,verified_by:'human',"
             "checked_at:new Date().toISOString().slice(0,10)})});const b=new Blob([JSON.stringify("
             "{items:o},null,1)],{type:'application/json'});const a=document.createElement('a');"
             "a.href=URL.createObjectURL(b);a.download='human_verify_v2.json';a.click()}</script>")

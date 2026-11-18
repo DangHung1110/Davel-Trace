@@ -38,6 +38,12 @@ DavelAgentAnswer.txt
 data/snapshots/danang-full-tmp/
 BE/data/raw-round2/
 
+# fetch_open_data.py HTTP cache (Overpass / Wikimedia responses; rebuildable)
+BE/data/sources/cache/
+
+# Git-bash crash dumps
+*.stackdump
+
 # OSRM raw data: Geofabrik PBF extracts + MLD/CH graph artifacts
 # (generated once in a tmp dir outside the repo; never commit)
 *.osm.pbf

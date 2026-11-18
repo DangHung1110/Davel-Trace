@@ -1,6 +1,6 @@
 {
  "built_at": "2026-11-18",
- "google_policy": "demo_phi_thuong_mai",
+ "google_policy": "cach_ly",
  "v1_count": 742,
  "v1_meta_count": 745,
  "v2_count": 869,
@@ -94,15 +94,13 @@
   "hoi_an_old_town": 23
  },
  "hours_verified_by": {
-  "google_demo": 407,
+  "inferred": 719,
   "agent_web": 55,
-  "open_data": 84,
-  "inferred": 321,
+  "open_data": 93,
   "user": 2
  },
  "price_verified_by": {
-  "inferred": 577,
-  "google_demo": 253,
+  "inferred": 830,
   "user": 8,
   "agent_web": 31
  },
@@ -110,10 +108,10 @@
   "inferred": 831,
   "user": 38
  },
- "legacy_hours_nonempty": 785,
+ "legacy_hours_nonempty": 765,
  "v1_hours_nonempty": 499,
- "legacy_price_band": 281,
- "legacy_free_entry": 166,
+ "legacy_price_band": 28,
+ "legacy_free_entry": 167,
  "hours_conflict": 6,
  "quarantined_pois": 659,
  "category_changes": 178,
@@ -199,5 +197,5 @@
   }
  ],
  "ticket_todo": 28,
- "osm_linked": 247
+ "osm_linked": 315
 }

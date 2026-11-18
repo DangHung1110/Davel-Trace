@@ -37,8 +37,9 @@ class EvaluateIn(BaseModel):
 def load_eval_context(snapshot_dir: str) -> tuple[dict, dict] | None:
     """(pois by id, matrix cells) from the snapshot; None when pois missing."""
     try:
+        from BE.common import view_pois
         with open(os.path.join(snapshot_dir, "pois.json"), encoding="utf-8") as f:
-            pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
+            pois = {p["poi_id"]: p for p in view_pois(json.load(f)["pois"], snapshot_dir)}
     except (FileNotFoundError, NotADirectoryError):
         return None
     try:

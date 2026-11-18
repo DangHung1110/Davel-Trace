@@ -1,15 +1,14 @@
-"""Data rules for snapshot `danang-v2` (P0, TRAVELAGENT_CONTEXT.md section 7).
+"""Data rules for snapshot `danang-v2` in format v2.1 (docs/travelagent/DATA_SPEC_v2_1.md §5).
 
 Two layers:
 
-- Structural rules (always on): must hold for every build. They keep the
-  snapshot honest (no Google value in exports, provenance well-formed,
-  lodging never a candidate, ...).
-- P0 gate rules (run with `P0_GATE=1`): data COMPLETENESS
-  targets (ticket prices with evidence, every zone covers the basic roles).
-  They are expected to fail until the verification queue is worked through;
-  they are skipped in the normal suite so a red gate never hides a real
-  regression.
+- Structural rules 1-12 (always on): must hold for every build.
+- Data-freeze gates G1-G5 (run with `P0_GATE=1`): completeness targets of
+  DATA_FIX_PLAN.md §4. Expected to fail until the matching work package is
+  done; skipped in the normal suite so a red gate never hides a regression.
+
+Rule 12 (clean names) is enforced as a gate until WP5 (name table reviewed
+by the user) lands; it then moves to the always-on layer.
 
 Run from the repo root:  python -m pytest BE/tests/data -q
                           P0_GATE=1 python -m pytest BE/tests/data -q -k gate
@@ -18,6 +17,7 @@ Run from the repo root:  python -m pytest BE/tests/data -q
 import csv
 import json
 import os
+import re
 import sys
 import unittest
 
@@ -26,14 +26,21 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 
 import v2_rules as R  # noqa: E402
+from migrate_v2 import V21_KEYS, PROVENANCE_KEYS  # noqa: E402
 from BE.app.services import retrieval  # noqa: E402
 from BE.app.services.snapshot import load_snapshot  # noqa: E402
-from BE.common import load_matrix_cells  # noqa: E402
+from BE.common import (PRICE_TIERS, effective_fee, fee_upper, load_json,  # noqa: E402
+                       matrix_path, poi_view, view_pois)
 
 SNAP = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
 EXPORTS = os.path.join(ROOT, "BE", "data", "exports", "danang-v2")
-VERIFIED_BY = {"human", "open_data", "user", "agent_web", "google_demo", "inferred"}
-NEEDS_URL = {"human"}
+GOLD_V2 = os.path.join(ROOT, "BE", "eval", "gold", "gold_v2.json")
+VERIFIED_BY = {"human", "open_data", "user", "agent_web", "inferred"}
+GOOGLE_KEYS = {"rating", "price_level", "type", "ambience", "pros", "cons"}
+HOURS_KINDS = {"fixed", "safe_window", "unknown"}
+STATUSES = {"active", "review", "excluded"}
+SPAN = re.compile(r"^\d{2}:\d{2}-\d{2}:\d{2}$")
+CJK = re.compile(r"[぀-ヿ㐀-鿿가-힯]")
 GATE = os.environ.get("P0_GATE") == "1"
 
 
@@ -42,15 +49,20 @@ def _rows(name):
         return list(csv.DictReader(f))
 
 
+def _stop(p):
+    """A POI that can be a stop of a day plan (active, not a trip base)."""
+    return p["status"] == "active" and p["role"] != "base"
+
+
 @unittest.skipUnless(os.path.exists(os.path.join(SNAP, "pois.json")),
                      "danang-v2 not built (python BE/ml/data/migrate_v2.py)")
-class TestSnapshotV2(unittest.TestCase):
+class TestSnapshotV21(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = load_snapshot(SNAP)          # also runs the v1 validator
-        cls.pois = cls.data["pois"]
-        with open(os.path.join(SNAP, "quarantine_google.json"), encoding="utf-8") as f:
-            cls.quarantine = json.load(f)["items"]
+        cls.raw = load_json(os.path.join(SNAP, "pois.json"))
+        cls.pois = cls.raw["pois"]
+        cls.data = load_snapshot(SNAP)          # v1 validator on the runtime view
+        cls.quarantine = load_json(os.path.join(SNAP, "quarantine_google.json"))["items"]
 
     # 1. coordinates inside the bounding box, every POI has a known zone
     def test_01_coords_in_bbox_and_zone(self):
@@ -60,65 +72,51 @@ class TestSnapshotV2(unittest.TestCase):
             self.assertTrue(b["lon_min"] <= p["lon"] <= b["lon_max"], p["name"])
             self.assertIn(p["zone"], R.ZONES, p["name"])
 
-    # 2. no duplicate ids (near-duplicates are only flagged in reports)
+    # 2. poi_id unique
     def test_02_unique_ids(self):
         ids = [p["poi_id"] for p in self.pois]
         self.assertEqual(len(ids), len(set(ids)))
 
-    # 3. every POI has hours or an hour archetype; every active candidate
-    #    has usable opening_hours unless its archetype is "look it up"
-    def test_03_hours_or_archetype(self):
+    # 3. every stop has hours.open, or kind=unknown with a reason
+    def test_03_hours_open_or_unknown_with_reason(self):
         for p in self.pois:
-            self.assertIn(p["hours"]["archetype"], R.ARCHETYPES, p["name"])
-            if p["status"] == "active" and p["role"] != "base":
-                if p["hours"]["archetype"] != "co_ve":
-                    self.assertTrue(p["opening_hours"], p["name"])
+            h = p["hours"]
+            self.assertIn(h["kind"], HOURS_KINDS, p["name"])
+            for span in h["open"]:
+                self.assertRegex(span, SPAN, p["name"])
+            self.assertEqual(bool(h["open"]), h["kind"] != "unknown", p["name"])
+            if _stop(p) and h["kind"] == "unknown":
+                self.assertTrue(p["provenance"]["hours"].get("note"), p["name"])
 
-    # 4. every POI has a price status; known prices carry a band
-    def test_04_price_band_or_explicit_status(self):
+    # 4. one price field: tier in the vocabulary or null; included <=> parent ticket
+    def test_04_price_tier(self):
         for p in self.pois:
-            pr = p["price"]
-            self.assertIn(pr["status"], {"known", "estimate", "band_only", "todo",
-                                         "unknown", "not_applicable"}, p["name"])
-            if pr["status"] in ("known", "estimate") and pr["basis"] != "included_in_parent":
-                self.assertIn(pr["band"], R.BANDS, p["name"])
-            if pr["band"]:
-                self.assertIn(pr["band"], R.BANDS)
+            self.assertEqual(set(p["price"]), {"tier", "note"}, p["name"])
+            tier = p["price"]["tier"]
+            self.assertTrue(tier is None or tier in PRICE_TIERS, (p["name"], tier))
+            included = tier == "included"
+            self.assertEqual(included, bool(p["requires_ticket_of"]) and p["role"] == "attraction",
+                             p["name"])
 
-    # 5. provenance: confidence in [0,1], known vocabulary, evidence for human
+    # 5. provenance: 8 groups, confidence in [0,1], known vocabulary, human has URL
     def test_05_provenance_well_formed(self):
         for p in self.pois:
-            for field in ("name", "location", "category", "hours", "price", "dwell", "tags"):
-                pv = p["provenance"][field]
+            self.assertEqual(set(p["provenance"]), set(PROVENANCE_KEYS), p["name"])
+            for field, pv in p["provenance"].items():
                 self.assertIn(pv["verified_by"], VERIFIED_BY, (p["name"], field))
                 self.assertGreaterEqual(pv["confidence"], 0.0)
                 self.assertLessEqual(pv["confidence"], 1.0)
-                if pv["verified_by"] in NEEDS_URL:
+                if pv["verified_by"] == "human":
                     self.assertTrue(pv.get("evidence_url"), (p["name"], field))
-                if pv["verified_by"] == "agent_web" and pv["confidence"] >= 0.6:
-                    self.assertTrue(pv.get("evidence_url") or pv.get("note"), (p["name"], field))
 
-    # 6. exports never contain Google-derived values; snapshot keeps them
-    #    only in quarantine (and in legacy fields when policy = demo)
-    def test_06_no_google_in_exports(self):
+    # 6. pois.json and exports carry no Google key or google_demo value
+    def test_06_no_google_in_pois_or_exports(self):
+        for p in self.pois:
+            self.assertFalse(GOOGLE_KEYS & set(p), p["name"])
+            self.assertNotIn("google_demo", json.dumps(p["provenance"]), p["name"])
         feats = _rows("poi_features.csv")
         self.assertEqual(len(feats), len(self.pois))
-        banned = {"rating", "price_level", "type", "ambience", "pros", "cons"}
-        self.assertFalse(banned & set(feats[0].keys()))
-        by_id = {p["poi_id"]: p for p in self.pois}
-        for r in feats:
-            p = by_id[r["poi_id"]]
-            if p["provenance"]["price"]["verified_by"] == "google_demo":
-                self.assertEqual(r["price_band"], "", p["name"])
-                self.assertEqual(r["price_min_vnd"], "", p["name"])
-            if p["provenance"]["hours"]["verified_by"] == "google_demo":
-                self.assertEqual(r["hours_verified_by"], "inferred", p["name"])
-        for p in self.pois:
-            self.assertNotIn("quarantine", p)
-        if self.data["google_policy"] == "cach_ly":
-            for p in self.pois:
-                for field in ("hours", "price"):
-                    self.assertNotEqual(p["provenance"][field]["verified_by"], "google_demo")
+        self.assertFalse(GOOGLE_KEYS & set(feats[0].keys()))
 
     # 7. a description is only present with its source and licence
     def test_07_description_has_source_and_license(self):
@@ -127,67 +125,111 @@ class TestSnapshotV2(unittest.TestCase):
             if d.get("text"):
                 self.assertTrue(d.get("source") and d.get("license"), p["name"])
 
-    # 8. role=base (lodging) and status=excluded never become candidates
+    # 8. role=base and status=excluded never become candidates
     def test_08_base_and_excluded_not_candidates(self):
-        trip = {"budget": 2_000_000, "start_time": "07:00", "end_time": "22:00",
+        trip = {"budget": 5_000_000, "start_time": "07:00", "end_time": "22:00",
                 "must_visit": [], "avoid": [], "activities": []}
-        res = retrieval.retrieve(trip, self.pois)
+        res = retrieval.retrieve(trip, self.data["pois"])
         by_id = {p["poi_id"]: p for p in self.pois}
         for c in res["candidates"]:
             p = by_id[c["poi_id"]]
             self.assertNotEqual(p["role"], "base", p["name"])
             self.assertNotEqual(p["status"], "excluded", p["name"])
 
-    # 9. count matches metadata; ids identical to v1 so the v1 matrix applies
+    # 9. count matches metadata
     def test_09_count_matches_metadata(self):
-        self.assertEqual(self.data["count"], len(self.pois))
-        self.assertEqual(sum(self.data["count_by_status"].values()), len(self.pois))
-        cells = load_matrix_cells(SNAP)
-        self.assertGreater(len(cells), 0)
+        self.assertEqual(self.raw["count"], len(self.pois))
+        self.assertEqual(sum(self.raw["count_by_status"].values()), len(self.pois))
+        self.assertEqual(self.raw["data_version"], "v2.1")
 
-    # 10 (structural part). vocabularies
+    # 10. vocabularies of category / role / status / tags
     def test_10_vocabularies(self):
         for p in self.pois:
             self.assertIn(p["category"], R.ALL_CATEGORIES, p["name"])
             self.assertEqual(p["role"], R.ROLE_OF[p["category"]], p["name"])
-            self.assertIn(p["status"], {"active", "review", "excluded"})
+            self.assertIn(p["status"], STATUSES)
             if p["status"] != "active":
                 self.assertTrue(p["status_reason"], p["name"])
-            if p["requires_ticket_of"] and p["role"] == "attraction":
-                self.assertEqual(p["price"]["basis"], "included_in_parent", p["name"])
+            t = p["tags"]
+            self.assertIn(t.get("indoor"), (True, False, None), p["name"])
+            self.assertIsInstance(t.get("weather_sensitive"), bool, p["name"])
+            self.assertNotIn("time", t)          # renamed -> good_times
+            self.assertNotIn("budget", t)        # renamed -> time_budget
+            self.assertFalse({"price_band", "ticket", "band_source"} & set(t), p["name"])
 
-    def test_legacy_fields_follow_confidence_floor(self):
-        """A value only reaches the fields the app reads when confident enough."""
+    # 11. ONLY the top-level keys of DATA_SPEC_v2_1 §2 (whitelist)
+    def test_11_whitelisted_keys_only(self):
         for p in self.pois:
-            band = (p.get("smart_tags") or {}).get("price_band")
-            if band:
-                by = p["smart_tags"].get("band_source")
-                conf = p["provenance"]["price"]["confidence"]
-                self.assertTrue(conf >= 0.5 if by == "google_demo" else conf >= 0.55, p["name"])
-            if p.get("free_entry"):
-                self.assertGreaterEqual(p["provenance"]["price"]["confidence"], 0.6)
+            self.assertEqual(list(p), list(V21_KEYS), p["poi_id"])
+            self.assertEqual(p["data_version"], "v2.1")
 
-    def test_inferred_hours_use_safe_windows(self):
+    # ---- adapter (BE.common.poi_view) ------------------------------------
+
+    def test_view_exposes_legacy_fields_and_passes_v1_through(self):
+        v1 = {"poi_id": "x", "name": "n", "verified": True}
+        self.assertIs(poi_view(v1), v1)
+        for p in self.data["pois"]:
+            for k in ("opening_hours", "visit_min", "smart_tags", "type", "cat",
+                      "verified", "intensity", "weather_sensitive", "price_level"):
+                self.assertIn(k, p, (p["poi_id"], k))
+
+    def test_view_clean_policy_never_reads_google(self):
+        clean = view_pois(self.pois, SNAP, policy="cach_ly")
+        for p in clean:
+            prior = p["popularity"]["prize_prior"]
+            want = None if prior is None else round(3.0 + 2.0 * prior, 2)
+            self.assertEqual(p["rating"], want, p["name"])     # WP6: clean prior, not Google
+            self.assertEqual(p["ambience"], "")
+        by_id = {p["poi_id"]: p for p in clean}
         for p in self.pois:
-            pv = p["provenance"]["hours"]
-            if pv["source"].startswith("archetype:") and p["opening_hours"]:
-                safe = [s for w in p["hours"]["safe_windows"] for s in R.parse_element(w)]
-                got = R.parse_element(p["opening_hours"][0])
-                self.assertTrue(R.contains(safe, got), p["name"])
+            want = [", ".join(p["hours"]["open"])] if p["hours"]["open"] else []
+            self.assertEqual(by_id[p["poi_id"]]["opening_hours"], want, p["name"])
 
-    # ---- P0 gate: completeness targets --------------------------------
+    def test_view_verified_is_eligibility_rule(self):
+        for p, v in zip(self.pois, view_pois(self.pois, SNAP, policy="cach_ly")):
+            self.assertEqual(v["verified"], _stop(p) and p["hours"]["kind"] != "unknown",
+                             p["name"])
+
+    def test_fee_reads_price_tier(self):
+        for p in self.pois:
+            tier = p["price"]["tier"]
+            fee, up = effective_fee(p), fee_upper(p)
+            if tier is None:
+                self.assertIsNone(fee, p["name"])
+            else:
+                self.assertLessEqual(fee, up, p["name"])
+            if tier in ("free", "included"):
+                self.assertEqual(fee, 0, p["name"])
+
+    def test_prize_prior_is_clean_and_covers_every_stop(self):
+        """WP6: every stop has prize_prior in [0,1]; signature POIs rank high."""
+        for p in self.pois:
+            prior = p["popularity"]["prize_prior"]
+            if p["role"] == "base":
+                self.assertIsNone(prior, p["name"])
+                continue
+            self.assertIsNotNone(prior, p["name"])
+            self.assertTrue(0.0 <= prior <= 1.0, p["name"])
+            if p["popularity"]["signature"]:
+                self.assertGreaterEqual(prior, 0.9, p["name"])
+            self.assertNotIn("rating", p["provenance"]["popularity"]["note"] or "")
+
+    # ---- data-freeze gates (P0_GATE=1) -------------------------------------
 
     @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
-    def test_gate_paid_attractions_have_ticket_with_evidence(self):
-        missing = [p["name"] for p in self.pois
-                   if p["category"] == "paid_attraction" and p["status"] != "excluded"
-                   and p["price"]["basis"] != "included_in_parent"
-                   and not (p["price"]["ticket_vnd"] is not None
-                            and p["provenance"]["price"].get("evidence_url"))]
-        self.assertEqual(missing, [], f"{len(missing)} paid attractions lack ticket+evidence")
+    def test_gate_12_clean_names(self):
+        bad = [p["name"] for p in self.pois
+               if "|" in p["name"] or CJK.search(p["name"]) or len(p["name"]) > 60]
+        self.assertEqual(bad, [], f"{len(bad)} names need cleaning (WP5)")
 
     @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
-    def test_gate_each_zone_has_basic_roles(self):
+    def test_gate_G1_every_stop_has_matrix_row(self):
+        ids = set(load_json(matrix_path(SNAP)).get("ids", []))
+        missing = [p["name"] for p in self.pois if _stop(p) and p["poi_id"] not in ids]
+        self.assertEqual(missing, [], f"{len(missing)} stops lack a matrix row (WP7)")
+
+    @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
+    def test_gate_G2_each_zone_has_basic_roles(self):
         need = {"attraction", "meal", "rest"}
         gaps = {}
         for z in R.ZONES:
@@ -195,6 +237,30 @@ class TestSnapshotV2(unittest.TestCase):
             if need - have:
                 gaps[z] = sorted(need - have)
         self.assertEqual(gaps, {})
+
+    @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
+    def test_gate_G3_signature_hours_fixed_and_price_sourced(self):
+        bad = []
+        for p in self.pois:
+            if not p["popularity"]["signature"] or p["status"] == "excluded":
+                continue
+            pv = p["provenance"]["price"]
+            price_ok = p["price"]["tier"] in ("free", "included") or (
+                p["price"]["tier"] is not None and pv["verified_by"] != "inferred")
+            if p["hours"]["kind"] != "fixed" or not price_ok:
+                bad.append(p["name"])
+        self.assertEqual(bad, [], f"{len(bad)} signature POIs lack fixed hours / sourced price (WP8)")
+
+    @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
+    def test_gate_G4_no_review_left(self):
+        left = [p["name"] for p in self.pois if p["status"] == "review"]
+        self.assertEqual(left, [], f"{len(left)} POIs still in review (WP10)")
+
+    @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
+    def test_gate_G5_gold_v2_not_worse_than_v1(self):
+        self.assertTrue(os.path.exists(GOLD_V2), "gold v2 not built yet (WP11)")
+        g = load_json(GOLD_V2)
+        self.assertGreaterEqual(g["v2"]["gate_pass_rate"], g["v1"]["gate_pass_rate"])
 
 
 if __name__ == "__main__":
