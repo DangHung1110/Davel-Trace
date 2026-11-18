@@ -134,8 +134,32 @@ def _place(arrival: int, dur: int, hours: list[str], ws: int, we: int) -> int | 
     return best
 
 
+def _breaks_caps(pid: str, start: int, acts: list[dict], pois: dict) -> bool:
+    """True if adding `pid` at `start` would break a HARD gate quota:
+    CAFE_CAP (default 1/day), CATEGORY_CAP (one per capped non-food
+    category), NO_CONSECUTIVE (same category back to back), A1 (one
+    restaurant per meal slot). Mirrors gate.py through soft_rules."""
+    from BE.app.services.soft_rules import (CATEGORY_DAILY_CAP, NON_FOOD_CAPPED,
+                                            meal_slot, poi_category)
+    cat = poi_category(pois[pid])
+    cats = [poi_category(pois[a["poi_id"]]) for a in acts]
+    if cat and cats and cats[-1] == cat:
+        return True
+    if cat == "cafe" and cats.count("cafe") >= 1:
+        return True
+    if cat in NON_FOOD_CAPPED and cats.count(cat) >= CATEGORY_DAILY_CAP:
+        return True
+    if cat == "restaurant":
+        slot = meal_slot(_hh(start))
+        if slot is not None and any(c == "restaurant" and meal_slot(a["start"]) == slot
+                                    for a, c in zip(acts, cats)):
+            return True
+    return False
+
+
 def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
-                evidence: str = "gold:approach-b") -> tuple[list[dict] | None, str]:
+                evidence: str = "gold:approach-b",
+                caps: bool = False) -> tuple[list[dict] | None, str]:
     """Hours-aware placement of `order` -> (activities, "") or (None, reason).
 
     Shared by the Approach-B gold generator (T051) and the T053 LLM-only
@@ -159,6 +183,8 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
             if pid in must:
                 return None, f"must_visit {pid} exceeds hours/window"
             continue
+        if caps and pid not in must and _breaks_caps(pid, start, acts, pois):
+            continue   # WP11: a gold must pass the gate; skip a quota breaker
         acts.append({"poi_id": pid, "start": _hh(start), "end": _hh(start + dur),
                      "explanation": {"evidence": [evidence]}})
         prev, cur = pid, start + dur
@@ -169,7 +195,7 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
     return acts, ""
 
 
-def make_gold(query: dict, pois: dict, matrix: dict) -> dict:
+def make_gold(query: dict, pois: dict, matrix: dict, caps: bool = False) -> dict:
     """Return {"query_id", "itinerary" | None, "infeasible": reason or ''}."""
     trip = query["trip"]
     cands, bad = filter_pois(trip, pois)
@@ -190,7 +216,7 @@ def make_gold(query: dict, pois: dict, matrix: dict) -> dict:
     order = tsp_order(cands, matrix, origin)
     if trip.get("order_prefs"):
         pass  # Approach-B is preference-blind by design (baseline); prefs scored by SSR
-    acts, bad = chain_order(order, trip, pois, matrix)
+    acts, bad = chain_order(order, trip, pois, matrix, caps=caps)
     if acts is None:
         return {"query_id": query["query_id"], "itinerary": None, "infeasible": bad}
     return {"query_id": query["query_id"],

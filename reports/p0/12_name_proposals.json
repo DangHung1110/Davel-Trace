@@ -1,0 +1,79 @@
+{
+ "note": "ĐỀ XUẤT — chưa áp. Duyệt xong: chép sang BE/data/sources/decisions_names_YYYYMMDD.json (xoá dòng không đồng ý), rồi chạy migrate_v2.py.",
+ "items": {
+  "ChIJZSsvT9QZQjERf-oLnsT1C3Y": {
+   "name": "Yen Yakiniku & Izakaya",
+   "name_was": "Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản"
+  },
+  "ChIJHfGPsJkXQjERsHCXRTXX_Xs": {
+   "name": "Nhà hàng Hàn Quốc lòng bò nướng",
+   "name_was": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )"
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "name": "Khu ẩm thực Chợ Cồn",
+   "name_was": "Khu Ẩm Thực Chợ Cồn -식사 공간"
+  },
+  "ChIJm2iwgggbQjERj-x6QTYemFQ": {
+   "name": "Shop Hoa Tươi Ngũ Hành Sơn",
+   "name_was": "Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm hoa, không phải điểm du lịch"
+  },
+  "osm:node/7477670190": {
+   "name": "Cửa hàng bán noni",
+   "name_was": "노니판매점",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: cửa hàng bán lẻ cho khách đoàn"
+  },
+  "osm:node/13677406601": {
+   "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+   "name_was": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979."
+  },
+  "ChIJs3Rt4-QZQjERPTSZ7G6XAK0": {
+   "name": "Clover Spa",
+   "name_was": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지"
+  },
+  "ChIJv1gepxMZQjER2xJtkXvi9xU": {
+   "name": "Jeju Spa – Massage & Nail",
+   "name_was": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |"
+  },
+  "ChIJpRFvp6sZQjERY_CDfnMCx2w": {
+   "name": "Vigift Đà Nẵng – Quà Đặc Sản",
+   "name_was": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품"
+  },
+  "ChIJWd2LBrkZQjER4hLHO81ipK0": {
+   "name": "Lu's House Beauty & Academy",
+   "name_was": "Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm nặn mụn (WP5: wellness lẫn tiệm thẩm mỹ)"
+  },
+  "ChIJM1DTVHkZQjERDW1JNclcAtw": {
+   "name": "Massage người mù Đức Quý",
+   "name_was": "Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng"
+  },
+  "ChIJn9Kkxh4ZQjERgDXEcvzD4nI": {
+   "name": "MarLan Pub",
+   "name_was": "MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng"
+  },
+  "ChIJu9GUjOgZQjERpfx8z-GIMEw": {
+   "name": "Kết Bar",
+   "name_was": "켓 바 1 Kết Bar"
+  },
+  "ChIJxRB4CRgXQjER6zy0em0FyTk": {
+   "name": "Oppa O Bar",
+   "name_was": "오빠O Bar- Lounge & More"
+  },
+  "ChIJW9b8Ky0XQjERPn8CJNdE0Lk": {
+   "name": "Chùa Mỹ Thị",
+   "name_was": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng"
+  },
+  "ChIJ8e-HnOoZQjER1tLf4hD65xI": {
+   "name": "Elsa Spa",
+   "name_was": "Elsa Spa massage Da Nang ( 엘사 스파 )"
+  },
+  "ChIJp9cNzfwZQjERS7ZSaA95etk": {
+   "name": "Lá Sen Cooking Class",
+   "name_was": "Danang Cooking Class - Lá Sen ダナン料理教室"
+  }
+ }
+}

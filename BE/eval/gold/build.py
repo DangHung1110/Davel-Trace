@@ -73,7 +73,7 @@ def coverage_summary(pois_by_id: dict, matrix: dict, eligible: list[str]) -> dic
     }
 
 
-def build_suite(pois_by_id: dict, matrix: dict, n: int, seed: int
+def build_suite(pois_by_id: dict, matrix: dict, n: int, seed: int, caps: bool = False
                 ) -> tuple[list[dict], int, int, dict]:
     """Deterministic (suite, gate_failures, infeasible, coverage).
 
@@ -87,7 +87,7 @@ def build_suite(pois_by_id: dict, matrix: dict, n: int, seed: int
     suite: list[dict] = []
     bad = infeasible = 0
     for q in build_queries(list(pool.values()), n, seed):
-        gold = make_gold(q, pool, matrix)
+        gold = make_gold(q, pool, matrix, caps=caps)
         if gold["itinerary"] is None:
             infeasible += 1
             suite.append({**q, **gold, "gate": None, "soft": None})
