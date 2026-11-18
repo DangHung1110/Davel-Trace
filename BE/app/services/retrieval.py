@@ -25,7 +25,9 @@ from __future__ import annotations
 from BE.app.services import soft_rules, to_min
 from BE.app.services.common import effective_fee
 from BE.app.services.profile_filter import _match_terms, fold
-from BE.common import load_json
+import os
+
+from BE.common import load_json, view_pois
 
 # User activity keyword -> canonical English category (soft_rules.poi_category).
 # Keys are matched as WHOLE words/phrases (B3: a bare substring let "ăn" hit
@@ -47,7 +49,8 @@ ACTIVITY_TYPE_MAP = {
 def load_pois_json(path: str) -> list[dict]:
     """Read a snapshot pois.json (T061c: shares BE.common.load_json)."""
     data = load_json(path)
-    return data["pois"] if isinstance(data, dict) else data
+    pois = data["pois"] if isinstance(data, dict) else data
+    return view_pois(pois, os.path.dirname(path))     # v2.1 -> legacy view (WP1)
 
 
 def _overlaps(hours: list[str], ws: int, we: int) -> bool:
@@ -89,6 +92,9 @@ def uncertainty(p: dict) -> list[str]:
     labels = []
     if not p.get("opening_hours"):
         labels.append("gio mo cua chua xac minh")
+    elif (p.get("hours") or {}).get("kind") == "safe_window":
+        # v2.1 (WP3): inferred group window, never presented as fact
+        labels.append("nen kiem tra gio")
     if p.get("rating") is None:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
@@ -101,15 +107,23 @@ def uncertainty(p: dict) -> list[str]:
     return labels
 
 
-def retrieve(trip: dict, pois: list[dict]) -> dict:
+def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     """Return {"candidates": [{poi_id, reasons[], uncertainty[]}],
     "needs_verification": [{poi_id, reasons[], uncertainty[], must_visit}],
-    "excluded": [{poi_id, reason}]}."""
+    "excluded": [{poi_id, reason}]}.
+
+    `cells` (optional matrix cells): a POI without a matrix row cannot be
+    routed, so it is excluded with an explicit reason (WP4 eligibility rule:
+    active, not base, has a matrix row, hours known — the v2.1 view encodes
+    the rest in `verified`).
+    """
     ws, we = to_min(trip.get("start_time", "07:00")), to_min(trip.get("end_time", "18:00"))
     budget = int(trip.get("budget", 0))
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))
     types = wanted_types(trip.get("activities", []))
+    # ids that own a matrix row (source side of any cell), computed once
+    matrix_ids = {k.split("->", 1)[0] for k in cells} if cells else None
     candidates, needs_verification, excluded = [], [], []
     for p in pois:
         pid = p.get("poi_id")
@@ -131,6 +145,9 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
                      "reasons": ["must-visit (cho xac minh, ngoai main plan)"] if pid in must
                      else ["chua xac minh (FR-013)"]}
             needs_verification.append(entry)
+            continue
+        if matrix_ids is not None and pid not in matrix_ids:
+            excluded.append({"poi_id": pid, "reason": "chua co ma tran di chuyen"})
             continue
         reasons: list[str] = []
         if pid in must:

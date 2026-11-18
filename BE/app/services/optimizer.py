@@ -58,6 +58,7 @@ import time
 from dataclasses import dataclass
 
 from BE.app.services.common import hh, parse_hours, to_min
+from BE.common import parse_windows
 from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MAX_CAP,
@@ -128,6 +129,9 @@ class StubPOI:
     restaurant: bool = False  # gate A1: <=1 restaurant per meal slot
     category: str = ""        # TASK-1: canonical category (cat/type); "" = legacy
     intensity: int = 2        # day-template effort ceiling (1..3)
+    # WP3: every opening window (e.g. lunch + dinner). open_min/close_min stay
+    # the envelope; with >1 window the model picks exactly one of them.
+    windows: tuple = ()
 
 
 @dataclass
@@ -172,14 +176,19 @@ def poi_window(poi: dict, trip: dict | None = None,
 def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                 deadline: int | None = None) -> StubPOI:
     """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
-    open_min, close_min = poi_window(poi, trip, deadline)
+    windows = tuple(parse_windows(poi.get("opening_hours")))
+    if windows:
+        open_min, close_min = windows[0][0], max(c for _o, c in windows)
+    else:
+        open_min, close_min = poi_window(poi, trip, deadline)
     bonus = MUST_GO_BONUS if poi.get("must_go") else 0.0
     category = poi_category(poi)
     return StubPOI(poi["poi_id"], poi_visit_min(poi), open_min, close_min,
                    float(score) + bonus,
                    restaurant=category == "restaurant",
                    category=category,
-                   intensity=int(poi.get("intensity") or 2))
+                   intensity=int(poi.get("intensity") or 2),
+                   windows=windows if len(windows) > 1 else ())
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -228,6 +237,13 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
             return None  # B3: no matrix leg -> cannot be visited
         leg = need
     start = max(clock + leg, poi.open_min)
+    if poi.windows:
+        # WP3: earliest window the stop still fits in
+        fit = [max(clock + leg, o) for o, c in poi.windows
+               if max(clock + leg, o) + poi.visit_min <= c]
+        if not fit:
+            return None
+        start = fit[0]
     # Locked rest window (day templates): the stop must finish before it or
     # start after it â€” never overlap.
     if blocked_window:
@@ -244,6 +260,9 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
         return None  # A1: another restaurant already owns this meal slot
     if start + poi.visit_min > min(poi.close_min, trip.end_min):
         return None
+    if poi.windows and not any(o <= start and start + poi.visit_min <= c
+                               for o, c in poi.windows):
+        return None   # a shift pushed the stop into a closed gap
     return start, leg, slot
 
 
@@ -615,6 +634,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
         m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
+        wins = pois[i - 1].windows
+        if wins:
+            # WP3: several opening windows (lunch + dinner): a visited POI
+            # sits entirely inside exactly one of them.
+            pick = [m.NewBoolVar(f"win_{i}_{k}") for k in range(len(wins))]
+            m.Add(sum(pick) == visit[i])
+            for k, (o, c) in enumerate(wins):
+                m.Add(t[i] >= o).OnlyEnforceIf(pick[k])
+                m.Add(t[i] + dur[i] <= c).OnlyEnforceIf(pick[k])
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].
     slot_hits: dict[int, list] = {}

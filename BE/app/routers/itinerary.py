@@ -175,7 +175,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     retired_warnings = [
         f"khong dua vao lich '{m}': {why}" for m, why in dropped_must]
 
-    retrieval = retrieval_svc.retrieve(trip, pois)
+    cells = _load_cells(settings.snapshot_dir)
+    retrieval = retrieval_svc.retrieve(trip, pois, cells)
     candidate_ids = [c["poi_id"] for c in retrieval["candidates"]]
     # B4/FR-013: the retrieval explanation used to be computed and thrown
     # away. Keep it for the response (harness shows "cần xác minh").
@@ -204,7 +205,6 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         user,
         {**ctx, "hour": trip["start_time"]},
     )
-    cells = _load_cells(settings.snapshot_dir)
 
     drop_counts: dict[str, int] = {}
     verified_drops = [d for d in profile_drops
