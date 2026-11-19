@@ -545,6 +545,17 @@ def apply_decision(rec, d):
     if d.get("category") in R.ALL_CATEGORIES:
         rec["category"], rec["role"] = d["category"], R.ROLE_OF[d["category"]]
         pv["category"] = prov("user_decision", "user", note=d["_file"])
+    if "requires_ticket_of" in d:
+        # Q5: shared-ticket membership decided by the user (old town ticket)
+        parent = d["requires_ticket_of"]
+        rec["requires_ticket_of"] = parent
+        if parent and rec["role"] == "attraction":
+            rec["price"]["tier"] = "included"
+            pv["price"] = prov("user_decision", "user", note=f"{d['_file']}; vé tính ở {parent}")
+        elif not parent and rec["price"]["tier"] == "included":
+            rec["price"]["tier"] = None
+            pv["price"] = prov("user_decision", "user", confidence=0.0,
+                               note=f"{d['_file']}; bỏ khỏi vé chung — giá chưa biết")
 
 
 def apply_human_verify(rec, it):
