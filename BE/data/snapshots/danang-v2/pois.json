@@ -12,11 +12,11 @@
   "manual",
   "osm"
  ],
- "count": 869,
+ "count": 872,
  "count_by_status": {
-  "active": 845,
-  "review": 20,
-  "excluded": 4
+  "active": 828,
+  "excluded": 43,
+  "review": 1
  },
  "count_by_category": {
   "restaurant": 169,
@@ -25,39 +25,39 @@
   "day_market": 48,
   "viewpoint": 22,
   "religious": 94,
-  "outdoor_landmark": 62,
+  "outdoor_landmark": 64,
   "museum_indoor": 22,
-  "paid_attraction": 48,
+  "paid_attraction": 49,
   "lodging": 76,
-  "beach": 23,
-  "night_market": 6,
+  "beach": 24,
+  "night_market": 5,
   "wellness": 77
  },
  "count_by_zone": {
-  "trung_tam": 269,
+  "trung_tam": 270,
   "son_tra_my_khe": 230,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
-  "hoi_an": 123
+  "hoi_an": 125
  },
- "applied_decisions": 0,
- "applied_human_verify": 0,
+ "applied_decisions": 75,
+ "applied_human_verify": 27,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
- "count_new_pois": 127,
+ "count_new_pois": 130,
  "count_v1_pois": 742,
  "count_by_price_tier": {
-  "medium": 326,
-  "cheap": 223,
+  "medium": 327,
+  "cheap": 226,
   "expensive": 18,
   "free": 181,
-  "None": 89,
-  "included": 32
+  "None": 85,
+  "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 612,
-  "fixed": 153,
-  "unknown": 104
+  "safe_window": 592,
+  "fixed": 180,
+  "unknown": 100
  },
  "pois": [
   {
@@ -2703,7 +2703,7 @@
   },
   {
    "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
-   "name": "Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản",
+   "name": "Yen Yakiniku & Izakaya",
    "name_raw": "Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản",
    "name_en": null,
    "lat": 16.0664639,
@@ -2779,12 +2779,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -5345,7 +5345,7 @@
   },
   {
    "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
-   "name": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )",
+   "name": "Nhà hàng Hàn Quốc lòng bò nướng",
    "name_raw": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )",
    "name_en": null,
    "lat": 16.071877699999998,
@@ -5421,12 +5421,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -12539,8 +12539,8 @@
    "lon": 108.19355589999999,
    "category": "restaurant",
    "role": "meal",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "trùng với ChIJSZabUwAZQjERqs6A8ECVnWY",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -27693,9 +27693,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00"
+     "07:00-19:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cho_ngay"
@@ -27778,20 +27778,20 @@
      "note": "name:chợ"
     },
     "hours": {
-     "source": "archetype:cho_ngay",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/cho-con-da-nang-thien-duong-am-thuc.html#:~:text=Ch%E1%BB%A3%20th%C6%B0%E1%BB%9Dng%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng%20t%E1%BB%AB%20kho%E1%BA%A3ng%207%3A00%20%C4%91%E1%BA%BFn,t%E1%BB%AB%2015.000%20%C4%91%E1%BA%BFn%2050.000%C4%91%2Fsu%E1%BA%A5t%3B%20%C4%91%E1%BB%93%20u%E1%BB%91ng%20t%E1%BB%AB%2015.000%E2%80%9330.000%C4%91.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/cho-con-da-nang-thien-duong-am-thuc.html#:~:text=Ch%E1%BB%A3%20th%C6%B0%E1%BB%9Dng%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng%20t%E1%BB%AB%20kho%E1%BA%A3ng%207%3A00%20%C4%91%E1%BA%BFn,t%E1%BB%AB%2015.000%20%C4%91%E1%BA%BFn%2050.000%C4%91%2Fsu%E1%BA%A5t%3B%20%C4%91%E1%BB%93%20u%E1%BB%91ng%20t%E1%BB%AB%2015.000%E2%80%9330.000%C4%91.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -27839,10 +27839,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:30-11:00",
-     "14:00-16:30"
+     "07:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "bao_tang"
@@ -27925,20 +27924,20 @@
      "note": "name:bao tang"
     },
     "hours": {
-     "source": "archetype:bao_tang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://dulichlive.com/da-nang/bao-tang-dieu-khac-cham-da-nang-gio-mo-cua-gia-ve-review.html#:~:text=%E2%80%93%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%207h%20%E2%80%93%2017h30%20h%C3%A0ng,S%E1%BB%91%20%C4%91i%E1%BB%87n%20tho%E1%BA%A1i%20li%C3%AAn%20h%E1%BB%87%3A%200236%203574%20801",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://hoiandriver.com/journal/cham-sculpture-museum-da-nang-2026",
-     "verified_at": null,
-     "note": "NL 60k; ĐN thường trú+SV 20k; miễn phí <16t và 3 lễ/năm; VND ticket_vnd=60000, min_vnd=60000, max_vnd=60000, typical_vnd=60000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://dulichlive.com/da-nang/bao-tang-dieu-khac-cham-da-nang-gio-mo-cua-gia-ve-review.html#:~:text=%E2%80%93%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%207h%20%E2%80%93%2017h30%20h%C3%A0ng,S%E1%BB%91%20%C4%91i%E1%BB%87n%20tho%E1%BA%A1i%20li%C3%AAn%20h%E1%BB%87%3A%200236%203574%20801",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:museum",
@@ -27978,8 +27977,8 @@
    "lon": 108.22436189999999,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "không phải một địa điểm cố định (chương trình/tour)",
+   "status": "active",
+   "status_reason": null,
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -30320,14 +30319,16 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "07:30-22:30"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
-    "tier": null,
+    "tier": "cheap",
     "note": null
    },
    "dwell": {
@@ -30404,20 +30405,20 @@
      "note": "name:khu du lich sinh thai"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangpointer.com/activities/khu-du-lich-sinh-thai-suoi-rang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangpointer.com/activities/khu-du-lich-sinh-thai-suoi-rang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:eco_park",
@@ -30754,17 +30755,17 @@
    "lon": 108.273341,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "khu vực chung — đã tách thành điểm con: Chùa Linh Ứng Sơn Trà, Đỉnh Bàn Cờ, Cây Đa Ngàn Năm, Mũi Nghê, Hải đăng Tiên Sa, Bãi biển Tiên Sa, Nhất Lâm Thủy Trang Trà, Radar, Vịnh/Bãi biển Sơn Trà",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -30848,20 +30849,20 @@
      "note": "override:Bán đảo Sơn Trà"
     },
     "hours": {
-     "source": "rule_open_access",
-     "verified_by": "inferred",
-     "confidence": 0.55,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/#:~:text=%E2%9C%85%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2024h%20%E2%9C%85%20Gi%C3%A1%20v%C3%A9%3A,%C4%91i%E1%BB%83m%20s%C4%83n%20m%C3%A2y%20l%C3%BD%20t%C6%B0%E1%BB%9Fng%20%E1%BB%9F%20%C4%90%C3%A0%20N%E1%BA%B5ng.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/#:~:text=%E2%9C%85%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2024h%20%E2%9C%85%20Gi%C3%A1%20v%C3%A9%3A,%C4%91i%E1%BB%83m%20s%C4%83n%20m%C3%A2y%20l%C3%BD%20t%C6%B0%E1%BB%9Fng%20%E1%BB%9F%20%C4%90%C3%A0%20N%E1%BA%B5ng.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -30909,9 +30910,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "07:30-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -30919,7 +30920,7 @@
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
-    "tier": "free",
+    "tier": "cheap",
     "note": null
    },
    "dwell": {
@@ -30996,20 +30997,20 @@
      "note": "name:hai dang"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/check-in-thoa-thich-voi-ngon-hai-dang-tien-sa-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/check-in-thoa-thich-voi-ngon-hai-dang-tien-sa-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:viewpoint",
@@ -31057,9 +31058,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "07:30-19:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -31144,20 +31145,20 @@
      "note": "name:đỉnh"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://fvgtravel.com.vn/tin-tuc/dinh-ban-co-son-tra-n406#:~:text=%C4%90%E1%BB%89nh%20B%C3%A0n%20C%E1%BB%9D%20m%E1%BA%A5y%20gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3F%20%C4%90%E1%BB%89nh,ph%C3%A1%20v%C3%A0%20ng%E1%BA%AFm%20c%E1%BA%A3nh%20tr%C6%B0%E1%BB%9Bc%20khi%20tr%E1%BB%9Di%20t%E1%BB%91i.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://fvgtravel.com.vn/tin-tuc/dinh-ban-co-son-tra-n406#:~:text=%C4%90%E1%BB%89nh%20B%C3%A0n%20C%E1%BB%9D%20m%E1%BA%A5y%20gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3F%20%C4%90%E1%BB%89nh,ph%C3%A1%20v%C3%A0%20ng%E1%BA%AFm%20c%E1%BA%A3nh%20tr%C6%B0%E1%BB%9Bc%20khi%20tr%E1%BB%9Di%20t%E1%BB%91i.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:viewpoint",
@@ -31787,9 +31788,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -31874,20 +31875,20 @@
      "note": "name:mũi"
     },
     "hours": {
-     "source": "rule_open_access",
-     "verified_by": "inferred",
-     "confidence": 0.55,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/kham-pha-toa-do-song-ao-mui-nghe-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://danangbest.com/kham-pha-toa-do-song-ao-mui-nghe-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:viewpoint",
@@ -32238,8 +32239,8 @@
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": "free",
-    "note": null
+    "tier": "cheap",
+    "note": "Vé 10.000đ/người, gửi xe 5.000đ/xe (bắt buộc nếu đi xe), 6h-18h."
    },
    "dwell": {
     "p25": 10,
@@ -32317,18 +32318,18 @@
     "hours": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.5,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "tripbike.net; đồng thuận mia.vn"
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Vé 10.000đ/người, gửi xe 5.000đ/xe (bắt buộc nếu đi xe), 6h-18h."
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Vé 10.000đ/người, gửi xe 5.000đ/xe (bắt buộc nếu đi xe), 6h-18h.; VND ticket_vnd=10000, min_vnd=10000, max_vnd=10000, typical_vnd=10000"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -32657,7 +32658,7 @@
    "lon": 108.2627974,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "tên chung chung",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
@@ -33687,14 +33688,16 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "07:00-18:00"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -33771,20 +33774,20 @@
      "note": "name:khu du lich sinh thai"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://www.foody.vn/da-nang/khu-du-lich-sinh-thai-thuy-van-son#:~:text=Khu%20Du%20L%E1%BB%8Bch%20Sinh%20Th%C3%A1i%20Th%E1%BB%A7y%20V%C3%A2n%20S%C6%A1n,Gi%C3%A1%20b%C3%ACnh%20qu%C3%A2n%20%C4%91%E1%BA%A7u%20ng%C6%B0%E1%BB%9Di%2020.000%C4%91%20-%2050.000%C4%91",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://www.foody.vn/da-nang/khu-du-lich-sinh-thai-thuy-van-son#:~:text=Khu%20Du%20L%E1%BB%8Bch%20Sinh%20Th%C3%A1i%20Th%E1%BB%A7y%20V%C3%A2n%20S%C6%A1n,Gi%C3%A1%20b%C3%ACnh%20qu%C3%A2n%20%C4%91%E1%BA%A7u%20ng%C6%B0%E1%BB%9Di%2020.000%C4%91%20-%2050.000%C4%91",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:eco_park",
@@ -33824,8 +33827,8 @@
    "lon": 108.03805109999999,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -34261,8 +34264,8 @@
    "lon": 108.1318981,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -35141,7 +35144,7 @@
     "open": [
      "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -35226,20 +35229,20 @@
      "note": "name:bai bien;type:Bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
-     "verified_by": "inferred",
-     "confidence": 0.55,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/bai-bien-my-khe",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/bai-bien-my-khe",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -35720,8 +35723,8 @@
    "lon": 108.1839267,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -36313,17 +36316,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:30-11:00",
-     "14:00-16:30"
+     "09:00-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "bao_tang"
    },
    "price": {
     "tier": "medium",
-    "note": "VN >1m3: 140k; ngoại NL 200k; TE 1-1m3: 100k; <1m free; KM theo đợt"
+    "note": "NL 140.000đ (khách VN) / 200.000đ (khách nước ngoài); trẻ 1-1,3m 100.000đ; <1m miễn phí"
    },
    "dwell": {
     "p25": 45,
@@ -36399,20 +36401,20 @@
      "note": "name:bao tang;type:Bảo tàng nghệ thuật"
     },
     "hours": {
-     "source": "archetype:bao_tang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/bao-tang-3d-art-in-paradise",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119_fix.json; nguồn lệch: mô tả nangtrip 9:00-22:00, widget nangtrip 8:30-18:00, danatravel 9:00-18:00 (khách cuối 17:00) -> lấy 09:00-18:00"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://gtrip.vn/vietnam-tours/attractions/3d-museum-art-in-paradise",
-     "verified_at": null,
-     "note": "VN >1m3: 140k; ngoại NL 200k; TE 1-1m3: 100k; <1m free; KM theo đợt; VND ticket_vnd=140000, min_vnd=140000, max_vnd=140000, typical_vnd=140000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/bao-tang-3d-art-in-paradise",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119_fix.json"
     },
     "dwell": {
      "source": "dwell_table_v2:museum",
@@ -36460,16 +36462,15 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:30-11:00",
-     "14:00-16:30"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "bao_tang"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": "Trong chùa Quán Thế Âm, không vé niêm yết, miễn phí/tùy hỷ"
    },
    "dwell": {
@@ -36546,20 +36547,20 @@
      "note": "name:bao tang;type:Bảo tàng"
     },
     "hours": {
-     "source": "archetype:bao_tang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://dulichfree.com/bao-tang-phat-hoc-da-nang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://dulichfree.com/bao-tang-phat-hoc-da-nang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:museum",
@@ -36599,8 +36600,8 @@
    "lon": 108.26608309999999,
    "category": "museum_indoor",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9, #11)",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
    "alt_group": null,
@@ -37332,8 +37333,8 @@
    "lon": 108.2522278,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9)",
    "zone": "ngu_hanh_son",
    "cluster_id": null,
    "alt_group": null,
@@ -37478,7 +37479,7 @@
    "lon": 108.15382969999999,
    "category": "religious",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "chưa định danh rõ",
    "zone": "trung_tam",
    "cluster_id": null,
@@ -37919,8 +37920,8 @@
    "lon": 108.1851123,
    "category": "museum_indoor",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -38360,8 +38361,8 @@
    "lon": 108.27714019999999,
    "category": "restaurant",
    "role": "meal",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "trùng với ChIJtWWhh9wRQjERxmJ_DNJy62o",
    "zone": "ngu_hanh_son",
    "cluster_id": null,
    "alt_group": null,
@@ -39473,20 +39474,20 @@
      "note": "name:chợ;type:Chợ truyền thống"
     },
     "hours": {
-     "source": "osm",
-     "verified_by": "open_data",
-     "confidence": 0.65,
-     "evidence_url": "https://www.openstreetmap.org/way/204885903",
-     "verified_at": null,
-     "note": "OSM opening_hours='Mo-Su 06:00-19:00', khớp 39.4 m"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://kienoceanhotel.com/cho-han-da-nang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://kienoceanhotel.com/cho-han-da-nang/",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -39534,9 +39535,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "18:00-22:00"
+     "17:00-22:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cho_dem"
@@ -39617,20 +39618,20 @@
      "note": "name:cho dem;type:Chợ đêm"
     },
     "hours": {
-     "source": "archetype:cho_dem",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://mytour.vn/vi/blog/bai-viet/cho-dem-helio-o-da-nang-noi-mua-sam-thuong-thuc-am-thuc-soi-dong-khi-troi-toi.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://mytour.vn/vi/blog/bai-viet/cho-dem-helio-o-da-nang-noi-mua-sam-thuong-thuc-am-thuc-soi-dong-khi-troi-toi.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -39807,7 +39808,7 @@
   },
   {
    "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
-   "name": "Khu Ẩm Thực Chợ Cồn -식사 공간",
+   "name": "Khu ẩm thực Chợ Cồn",
    "name_raw": "Khu Ẩm Thực Chợ Cồn -식사 공간",
    "name_en": null,
    "lat": 16.0678356,
@@ -39881,12 +39882,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -40671,15 +40672,15 @@
   },
   {
    "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
-   "name": "Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng",
+   "name": "Shop Hoa Tươi Ngũ Hành Sơn",
    "name_raw": "Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng",
    "name_en": null,
    "lat": 16.0413066,
    "lon": 108.24229229999999,
    "category": "day_market",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm hoa, không phải điểm du lịch",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -40745,12 +40746,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -40830,9 +40831,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "18:00-22:00"
+     "18:00-23:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cho_dem"
@@ -40913,12 +40914,12 @@
      "note": "name:cho dem;type:Chợ đêm"
     },
     "hours": {
-     "source": "archetype:cho_dem",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong",
+     "verified_at": "2026-11-19",
+     "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00."
     },
     "price": {
      "source": "category_default:night_market",
@@ -44583,14 +44584,16 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "19:00-22:00"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
-    "tier": "cheap",
+    "tier": "medium",
     "note": "Vé ~3 USD (~75k, user verify, chưa chắc chắn)"
    },
    "dwell": {
@@ -44667,20 +44670,20 @@
      "note": "name:du thuyen;type:Bến du thuyền"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://locatravel.vn/ve-du-thuyen-song-han-7bovkx6b8z#:~:text=-%20Th%E1%BB%9Di%20gian%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2019h00%20-%2022h00,ng%C3%A0y%20so%20v%E1%BB%9Bi%20ng%C3%A0y%20s%E1%BB%AD%20d%E1%BB%A5ng%20d%E1%BB%8Bch%20v%E1%BB%A5.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "user_review",
-     "verified_by": "user",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "Vé ~3 USD (~75k, user verify, chưa chắc chắn); VND ticket_vnd=75000, min_vnd=75000, max_vnd=75000, typical_vnd=75000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://locatravel.vn/ve-du-thuyen-song-han-7bovkx6b8z#:~:text=-%20Th%E1%BB%9Di%20gian%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2019h00%20-%2022h00,ng%C3%A0y%20so%20v%E1%BB%9Bi%20ng%C3%A0y%20s%E1%BB%AD%20d%E1%BB%A5ng%20d%E1%BB%8Bch%20v%E1%BB%A5.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:boat_short",
@@ -44720,8 +44723,8 @@
    "lon": 108.1480098,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "review",
+   "status_reason": "link dẫn chứng là Thung Lũng Vàng (Đà Lạt), không phải VỌC Glamping Đà Nẵng; chưa có nguồn giá/giờ đúng địa điểm",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -45020,9 +45023,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-18:00"
+     "06:30-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -45105,20 +45108,20 @@
      "note": "name:chua"
     },
     "hours": {
-     "source": "rule_temple_default",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": null
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/tuong-quan-the-am-bo-tat | https://chilldanang.com/chua-quan-the-am-tai-da-nang/#:~:text=%C4%90%E1%BB%8Ba%20ch%E1%BB%89%3A%20Ch%C3%B9a%20t%E1%BB%8Da%20l%E1%BA%A1c%20t%E1%BA%A1i%20s%E1%BB%91%2048,xe%20m%C3%A1y%20v%C3%A0%20%C3%B4%20t%C3%B4%20r%E1%BA%A5t%20ti%E1%BB%87n%20l%E1%BB%A3i. | https://nangtrip.com/activities/chua-linh-ung",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/tuong-quan-the-am-bo-tat | https://chilldanang.com/chua-quan-the-am-tai-da-nang/#:~:text=%C4%90%E1%BB%8Ba%20ch%E1%BB%89%3A%20Ch%C3%B9a%20t%E1%BB%8Da%20l%E1%BA%A1c%20t%E1%BA%A1i%20s%E1%BB%91%2048,xe%20m%C3%A1y%20v%C3%A0%20%C3%B4%20t%C3%B4%20r%E1%BA%A5t%20ti%E1%BB%87n%20l%E1%BB%A3i. | https://nangtrip.com/activities/chua-linh-ung",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:religious_major",
@@ -45891,7 +45894,7 @@
    "lon": 108.2697745,
    "category": "beach",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "tên chung chung (OSM)",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
@@ -46481,16 +46484,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-17:30"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
     "tier": "free",
-    "note": null
+    "note": "Qua đèo miễn phí; Hải Vân Quan (manual:hai-van-quan) thu ~70.000đ — đề xuất ghé cùng."
    },
    "dwell": {
     "p25": 15,
@@ -46566,20 +46569,20 @@
      "note": "override:Đèo Hải Vân"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/deo-hai-van",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/deo-hai-van",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:viewpoint",
@@ -47063,8 +47066,8 @@
    "lon": 108.2866498,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
+   "status": "active",
+   "status_reason": null,
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -48680,8 +48683,8 @@
    "lon": 107.9856335,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
+   "status": "excluded",
+   "status_reason": "Lấy Bà Nà Hills (khu vui chơi thôi không cần Núi Bà Nà)",
    "zone": "ba_na_tay",
    "cluster_id": "ba_na",
    "alt_group": null,
@@ -49119,8 +49122,8 @@
    "lon": 108.1052579,
    "category": "religious",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "trùng với ChIJY3yT3IweQjERnbDRpKk8b3A",
    "zone": "ba_na_tay",
    "cluster_id": null,
    "alt_group": null,
@@ -50149,8 +50152,8 @@
    "lon": 108.075414,
    "category": "beach",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "tên chung chung (OSM)",
+   "status": "excluded",
+   "status_reason": "Này là nói chung của các bãi biển công cộng rồi",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -50438,8 +50441,8 @@
    "lon": 108.0720997,
    "category": "religious",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "tên chung chung",
+   "status": "excluded",
+   "status_reason": "Nên lấy rõ núi thần tài luôn chứ không nên lấy gần",
    "zone": "ba_na_tay",
    "cluster_id": null,
    "alt_group": null,
@@ -51309,15 +51312,15 @@
   },
   {
    "poi_id": "osm:node/5286977425",
-   "name": "Núi Thần Tài",
+   "name": "Công viên Suối khoáng nóng Núi Thần Tài",
    "name_raw": "Núi Thần Tài",
    "name_en": null,
    "lat": 15.9681262,
    "lon": 108.0196301,
-   "category": "outdoor_landmark",
+   "category": "paid_attraction",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
+   "status": "active",
+   "status_reason": null,
    "zone": "ba_na_tay",
    "cluster_id": null,
    "alt_group": null,
@@ -51332,8 +51335,8 @@
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
-    "tier": "free",
-    "note": null
+    "tier": "medium",
+    "note": "Vé 480.000đ (trẻ ≤99cm miễn phí) gồm công viên nước, tắm khoáng, Đền Thần Tài, công viên khủng long; tắm bùn riêng +100.000đ (tuỳ chọn). Gói trên trang là vé buổi chiều 14:00-17:30 (vào muộn nhất 15:00) — giờ cả ngày chưa có nguồn nên chưa ghi."
    },
    "dwell": {
     "p25": 45,
@@ -51385,12 +51388,12 @@
    },
    "provenance": {
     "name": {
-     "source": "osm",
-     "verified_by": "open_data",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": null
+     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "osm",
@@ -51401,12 +51404,12 @@
      "note": null
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "name:nui"
+     "note": "decisions_user_notes_20261119.json"
     },
     "hours": {
      "source": "archetype:ngoai_troi_tu_nhien",
@@ -51417,12 +51420,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang",
+     "verified_at": "2026-11-19",
+     "note": "Vé 480.000đ (trẻ ≤99cm miễn phí) gồm công viên nước, tắm khoáng, Đền Thần Tài, công viên khủng long; tắm bùn riêng +100.000đ (tuỳ chọn). Gói trên trang là vé buổi chiều 14:00-17:30 (vào muộn nhất 15:00) — giờ cả ngày chưa có nguồn nên chưa ghi.; VND ticket_vnd=480000, min_vnd=480000, max_vnd=480000, typical_vnd=480000"
     },
     "dwell": {
      "source": "dwell_table_v2:nature",
@@ -51751,7 +51754,7 @@
   },
   {
    "poi_id": "osm:node/6346486685",
-   "name": "Cây đa đại thụ",
+   "name": "Cây Đa Ngàn Năm Sơn Trà",
    "name_raw": "Cây đa đại thụ",
    "name_en": null,
    "lat": 16.1226157,
@@ -51766,16 +51769,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
     "tier": "free",
-    "note": null
+    "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong)."
    },
    "dwell": {
     "p25": 10,
@@ -51827,12 +51830,12 @@
    },
    "provenance": {
     "name": {
-     "source": "osm",
-     "verified_by": "open_data",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": null
+     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "osm",
@@ -51851,20 +51854,20 @@
      "note": "name:cay da"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong)."
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -52050,8 +52053,8 @@
    "lon": 108.2194277,
    "category": "museum_indoor",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #10)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -52480,15 +52483,15 @@
   },
   {
    "poi_id": "osm:node/7477670190",
-   "name": "노니판매점",
+   "name": "Cửa hàng bán noni",
    "name_raw": "노니판매점",
    "name_en": null,
    "lat": 16.0894666,
    "lon": 108.2394816,
    "category": "day_market",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: cửa hàng bán lẻ cho khách đoàn",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -52554,12 +52557,12 @@
    },
    "provenance": {
     "name": {
-     "source": "osm",
-     "verified_by": "open_data",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": null
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "osm",
@@ -52775,8 +52778,8 @@
    "lon": 108.2939032,
    "category": "museum_indoor",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #10)",
    "zone": "hoi_an",
    "cluster_id": null,
    "alt_group": null,
@@ -52921,8 +52924,8 @@
    "lon": 108.2024664,
    "category": "day_market",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -53355,7 +53358,7 @@
    "lon": 108.1647027,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
    "zone": "trung_tam",
    "cluster_id": null,
@@ -53500,7 +53503,7 @@
    "lon": 108.1622001,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
    "zone": "trung_tam",
    "cluster_id": null,
@@ -54521,7 +54524,7 @@
    "lon": 107.9641938,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
    "zone": "ba_na_tay",
    "cluster_id": null,
@@ -54666,8 +54669,8 @@
    "lon": 108.136611,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
+   "status": "excluded",
+   "status_reason": "Nên để là tour, cắm trại ở Đèo Hải Vân",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -54811,7 +54814,7 @@
    "lon": 108.1097027,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
@@ -54956,7 +54959,7 @@
    "lon": 107.9687946,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
@@ -55684,7 +55687,7 @@
    "lon": 108.2556163,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "tên chung chung (OSM)",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
@@ -56407,7 +56410,7 @@
   },
   {
    "poi_id": "osm:node/13677406601",
-   "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
+   "name": "Đài tưởng niệm chuyến bay 229 (1979)",
    "name_raw": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
    "name_en": null,
    "lat": 16.121001,
@@ -56484,12 +56487,12 @@
    },
    "provenance": {
     "name": {
-     "source": "osm",
-     "verified_by": "open_data",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": null
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "osm",
@@ -57433,8 +57436,8 @@
    "lon": 108.2022075,
    "category": "day_market",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -57861,7 +57864,7 @@
   },
   {
    "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
-   "name": "Chùa Linh Ứng - Bãi Bụt Sơn Trà",
+   "name": "Chùa Linh Ứng Sơn Trà",
    "name_raw": "Chùa Linh Ứng - Bãi Bụt Sơn Trà",
    "name_en": null,
    "lat": 16.100205499999998,
@@ -57876,10 +57879,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:30-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -57888,7 +57890,7 @@
    },
    "price": {
     "tier": "free",
-    "note": null
+    "note": "Miễn phí, bãi xe miễn phí, tượng Quan Âm 67m leo được 17 tầng (nangtrip chua-linh-ung + tuong-quan-the-am-bo-tat). Giờ lệch: 06:00-21:00 (nangtrip mô tả) / 06:30-17:30 (widget nangtrip, xedulichdanangchatluong) -> lấy 06:30-17:30."
    },
    "dwell": {
     "p25": 30,
@@ -57940,12 +57942,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -57964,20 +57966,20 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://nangtrip.com/activities/chua-linh-ung",
+     "verified_at": "2026-11-19",
+     "note": "Miễn phí, bãi xe miễn phí, tượng Quan Âm 67m leo được 17 tầng (nangtrip chua-linh-ung + tuong-quan-the-am-bo-tat). Giờ lệch: 06:00-21:00 (nangtrip mô tả) / 06:30-17:30 (widget nangtrip, xedulichdanangchatluong) -> lấy 06:30-17:30."
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://nangtrip.com/activities/chua-linh-ung",
+     "verified_at": "2026-11-19",
+     "note": "Miễn phí, bãi xe miễn phí, tượng Quan Âm 67m leo được 17 tầng (nangtrip chua-linh-ung + tuong-quan-the-am-bo-tat). Giờ lệch: 06:00-21:00 (nangtrip mô tả) / 06:30-17:30 (widget nangtrip, xedulichdanangchatluong) -> lấy 06:30-17:30.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious_major",
@@ -58017,8 +58019,8 @@
    "lon": 108.27688669999999,
    "category": "religious",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): cổng chùa",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -62012,8 +62014,8 @@
    "lon": 107.9961392,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "có thể trùng 'Sun World Bà Nà Hills'",
+   "status": "excluded",
+   "status_reason": "Sun World Bà Nà Hills",
    "zone": "ba_na_tay",
    "cluster_id": "ba_na",
    "alt_group": "ba_na_entry",
@@ -68836,7 +68838,7 @@
   },
   {
    "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
-   "name": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지",
+   "name": "Clover Spa",
    "name_raw": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지",
    "name_en": null,
    "lat": 16.0622143,
@@ -68908,12 +68910,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -68978,7 +68980,7 @@
   },
   {
    "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
-   "name": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |",
+   "name": "Jeju Spa – Massage & Nail",
    "name_raw": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |",
    "name_en": null,
    "lat": 16.069529,
@@ -69050,12 +69052,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -69546,12 +69548,12 @@
   },
   {
    "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
-   "name": "Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng",
+   "name": "Phố đi bộ Bạch Đằng",
    "name_raw": "Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng",
    "name_en": null,
    "lat": 16.055193,
    "lon": 108.223694,
-   "category": "night_market",
+   "category": "outdoor_landmark",
    "role": "attraction",
    "status": "active",
    "status_reason": null,
@@ -69561,16 +69563,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "18:00-22:00"
+     "15:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cho_dem"
    },
    "price": {
-    "tier": "cheap",
-    "note": null
+    "tier": "free",
+    "note": "Bờ tây sông Hàn, từ cầu Rồng tới cầu Trần Thị Lý (~1,2 km), 15:00-0:00 hằng ngày, đẹp nhất 18:30-21:30, đông thứ Sáu-Chủ nhật. Không phải chợ đêm (chợ đêm gần đó: Chợ Đêm Sơn Trà bên kia cầu Rồng; Chợ đêm An Thượng ở Ngũ Hành Sơn)."
    },
    "dwell": {
     "p25": 45,
@@ -69622,12 +69624,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -69638,28 +69640,28 @@
      "note": "toạ độ gốc Google — cần đối chiếu OSM"
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.8,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "override:Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng"
+     "note": "decisions_user_notes_20261119.json"
     },
     "hours": {
-     "source": "archetype:cho_dem",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://paracelresort.com/pho-di-bo-bach-dang-da-nang-gio-mo-cua-vi-tri-co-gi-choi-va-kinh-nghiem-di-thuc-te/",
+     "verified_at": "2026-11-19",
+     "note": "Bờ tây sông Hàn, từ cầu Rồng tới cầu Trần Thị Lý (~1,2 km), 15:00-0:00 hằng ngày, đẹp nhất 18:30-21:30, đông thứ Sáu-Chủ nhật. Không phải chợ đêm (chợ đêm gần đó: Chợ Đêm Sơn Trà bên kia cầu Rồng; Chợ đêm An Thượng ở Ngũ Hành Sơn)."
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://paracelresort.com/pho-di-bo-bach-dang-da-nang-gio-mo-cua-vi-tri-co-gi-choi-va-kinh-nghiem-di-thuc-te/",
+     "verified_at": "2026-11-19",
+     "note": "Bờ tây sông Hàn, từ cầu Rồng tới cầu Trần Thị Lý (~1,2 km), 15:00-0:00 hằng ngày, đẹp nhất 18:30-21:30, đông thứ Sáu-Chủ nhật. Không phải chợ đêm (chợ đêm gần đó: Chợ Đêm Sơn Trà bên kia cầu Rồng; Chợ đêm An Thượng ở Ngũ Hành Sơn).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -74212,7 +74214,7 @@
   },
   {
    "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
-   "name": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품",
+   "name": "Vigift Đà Nẵng – Quà Đặc Sản",
    "name_raw": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품",
    "name_en": null,
    "lat": 16.062223799999998,
@@ -74286,12 +74288,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -83733,15 +83735,15 @@
   },
   {
    "poi_id": "ChIJWd2LBrkZQjER4hLHO81ipK0",
-   "name": "Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy",
+   "name": "Lu's House Beauty & Academy",
    "name_raw": "Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy",
    "name_en": null,
    "lat": 16.0671771,
    "lon": 108.151738,
    "category": "wellness",
    "role": "wellness",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm nặn mụn (WP5: wellness lẫn tiệm thẩm mỹ)",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -83805,12 +83807,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -85018,8 +85020,8 @@
    "lon": 108.14317349999999,
    "category": "wellness",
    "role": "wellness",
-   "status": "review",
-   "status_reason": "tiệm làm đẹp — có nên là điểm trong lịch trình?",
+   "status": "active",
+   "status_reason": null,
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -88277,7 +88279,7 @@
   },
   {
    "poi_id": "ChIJM1DTVHkZQjERDW1JNclcAtw",
-   "name": "Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng",
+   "name": "Massage người mù Đức Quý",
    "name_raw": "Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng",
    "name_en": null,
    "lat": 16.0630745,
@@ -88349,12 +88351,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -90005,7 +90007,7 @@
   },
   {
    "poi_id": "ChIJn9Kkxh4ZQjERgDXEcvzD4nI",
-   "name": "MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",
+   "name": "MarLan Pub",
    "name_raw": "MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",
    "name_en": null,
    "lat": 16.0808869,
@@ -90081,12 +90083,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -90439,7 +90441,7 @@
   },
   {
    "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
-   "name": "켓 바 1 Kết Bar",
+   "name": "Kết Bar",
    "name_raw": "켓 바 1 Kết Bar",
    "name_en": null,
    "lat": 16.0823954,
@@ -90513,12 +90515,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -93319,7 +93321,7 @@
   },
   {
    "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
-   "name": "오빠O Bar- Lounge & More",
+   "name": "Oppa O Bar",
    "name_raw": "오빠O Bar- Lounge & More",
    "name_en": null,
    "lat": 16.0458937,
@@ -93393,12 +93395,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -96354,8 +96356,8 @@
    "lon": 108.1501043,
    "category": "day_market",
    "role": "attraction",
-   "status": "review",
-   "status_reason": "loại Google là cho thuê thiết bị — kiểm tra lại",
+   "status": "active",
+   "status_reason": null,
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -100114,8 +100116,8 @@
    "lon": 108.2769531,
    "category": "religious",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): tượng Quan Thế Âm nằm trong khuôn viên chùa",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -100699,7 +100701,7 @@
   },
   {
    "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
-   "name": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",
+   "name": "Chùa Mỹ Thị",
    "name_raw": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",
    "name_en": null,
    "lat": 16.0337449,
@@ -100777,12 +100779,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -102186,8 +102188,8 @@
    "lon": 108.1848437,
    "category": "religious",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -102482,8 +102484,8 @@
    "lon": 108.18482589999999,
    "category": "religious",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê",
    "zone": "hai_van_lien_chieu",
    "cluster_id": null,
    "alt_group": null,
@@ -102926,7 +102928,7 @@
    "lon": 108.22563319999999,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "review",
+   "status": "excluded",
    "status_reason": "chưa rõ là khu vui chơi có vé hay khu phố",
    "zone": "trung_tam",
    "cluster_id": null,
@@ -103645,7 +103647,7 @@
   },
   {
    "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
-   "name": "Elsa Spa massage Da Nang ( 엘사 스파 )",
+   "name": "Elsa Spa",
    "name_raw": "Elsa Spa massage Da Nang ( 엘사 스파 )",
    "name_en": null,
    "lat": 16.0682072,
@@ -103717,12 +103719,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -105496,15 +105498,15 @@
   },
   {
    "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
-   "name": "Danang Cooking Class - Lá Sen ダナン料理教室",
+   "name": "Lá Sen Cooking Class",
    "name_raw": "Danang Cooking Class - Lá Sen ダナン料理教室",
    "name_en": null,
    "lat": 16.0655423,
    "lon": 108.2304107,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "WP5",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -105567,12 +105569,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -106787,7 +106789,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": "70.000/lượt từ 02/6/2026 (NQ 05/2026/NQ-HĐND TP Huế), giảm 50% cho người dân Huế/Đà Nẵng, trẻ <13t miễn."
+    "note": "~70.000đ vào cửa ải (nangtrip, 'khoảng'). Đi qua đèo miễn phí."
    },
    "dwell": {
     "p25": 45,
@@ -106872,12 +106874,12 @@
      "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.7,
-     "evidence_url": "https://baovanhoa.vn/van-hoa/thu-phi-tham-quan-di-tich-quoc-gia-hai-van-quan-voi-muc-70000-dong-230675.html",
-     "verified_at": "2026-11-18",
-     "note": "70.000/lượt từ 02/6/2026 (NQ 05/2026/NQ-HĐND TP Huế), giảm 50% cho người dân Huế/Đà Nẵng, trẻ <13t miễn.; VND ticket_vnd=70000, min_vnd=70000, max_vnd=70000, typical_vnd=70000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/deo-hai-van",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:paid_site",
@@ -107216,15 +107218,17 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "00:00-23:59"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
-    "tier": "medium",
-    "note": "Cano khứ hồi trong ngày từ Cửa Đại ~350.000 gồm phí tham quan 70.000 (NQ 16/2026/NQ-HĐND từ 10/6/2026) + phí môi trường; tour trọn gói 500-700k. Phụ thuộc thời tiết biển."
+    "tier": "cheap",
+    "note": "Vé tham quan 70.000đ; PHÍ BẮT BUỘC đi lại từ Cửa Đại: cano ~150.000đ (15 phút) hoặc tàu gỗ ~50.000đ (1 giờ); tour lặn 700.000đ. Biển lặng tháng 3-8 (nangtrip)."
    },
    "dwell": {
     "p25": 360,
@@ -107297,20 +107301,20 @@
      "note": "override:Cù Lao Chàm"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/cu-lao-cham-quang-nam",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.65,
-     "evidence_url": "https://baovanhoa.vn/du-lich/tu-ngay-106-muc-thu-phi-tham-quan-cu-lao-cham-la-70000-dongnguoiluot-235643.html",
-     "verified_at": "2026-11-18",
-     "note": "Cano khứ hồi trong ngày từ Cửa Đại ~350.000 gồm phí tham quan 70.000 (NQ 16/2026/NQ-HĐND từ 10/6/2026) + phí môi trường; tour trọn gói 500-700k. Phụ thuộc thời tiết biển.; VND ticket_vnd=350000, min_vnd=350000, max_vnd=450000, typical_vnd=350000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/cu-lao-cham-quang-nam",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:island_day_trip",
@@ -107486,6 +107490,402 @@
    "valid_to": null
   },
   {
+   "poi_id": "manual:hoi-an-pho-di-bo-hoa-dang",
+   "name": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
+   "name_raw": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
+   "name_en": null,
+   "lat": 15.87655,
+   "lon": 108.3279,
+   "category": "outdoor_landmark",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "hoi_an",
+   "cluster_id": "hoi_an_old_town",
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "00:00-23:59"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": "Dạo phố, chụp tường vàng, thả hoa đăng: không cần vé (hoa đăng tự mua). Đẹp nhất tối 18:00-21:30, thả hoa đăng ~20-21h. Vào trong di tích mới cần vé phố cổ."
+   },
+   "dwell": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "tags": {
+    "indoor": null,
+    "effort": 2,
+    "kid_friendly": null,
+    "weather_sensitive": false
+   },
+   "time_profile": "outdoor_heat_sensitive",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.5,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:outdoor_landmark"
+    },
+    "hours": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an",
+     "verified_at": "2026-11-19",
+     "note": "Dạo phố, chụp tường vàng, thả hoa đăng: không cần vé (hoa đăng tự mua). Đẹp nhất tối 18:00-21:30, thả hoa đăng ~20-21h. Vào trong di tích mới cần vé phố cổ."
+    },
+    "price": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an",
+     "verified_at": "2026-11-19",
+     "note": "Dạo phố, chụp tường vàng, thả hoa đăng: không cần vé (hoa đăng tự mua). Đẹp nhất tối 18:00-21:30, thả hoa đăng ~20-21h. Vào trong di tích mới cần vé phố cổ.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:outdoor_urban",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:hoi-an-bai-choi",
+   "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "name_raw": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "name_en": null,
+   "lat": 15.87615,
+   "lon": 108.32585,
+   "category": "outdoor_landmark",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "hoi_an",
+   "cluster_id": "hoi_an_old_town",
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "19:00-21:00"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": "Diễn 19h mọi ngày tại Vườn tượng An Hội; xem miễn phí, mua thẻ bài 20.000đ/thẻ nếu chơi (mia.vn 12/05/2024). Giờ kết thúc chưa có nguồn — 21:00 là ước lượng."
+   },
+   "dwell": {
+    "p25": 20,
+    "p50": 40,
+    "p75": 70
+   },
+   "tags": {
+    "indoor": null,
+    "effort": 2,
+    "kid_friendly": null,
+    "weather_sensitive": false
+   },
+   "time_profile": "outdoor_heat_sensitive",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.5,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:outdoor_landmark"
+    },
+    "hours": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.5,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-bai-choi-hoi-an-15527",
+     "verified_at": "2026-11-19",
+     "note": "Diễn 19h mọi ngày tại Vườn tượng An Hội; xem miễn phí, mua thẻ bài 20.000đ/thẻ nếu chơi (mia.vn 12/05/2024). Giờ kết thúc chưa có nguồn — 21:00 là ước lượng."
+    },
+    "price": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.5,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-bai-choi-hoi-an-15527",
+     "verified_at": "2026-11-19",
+     "note": "Diễn 19h mọi ngày tại Vườn tượng An Hội; xem miễn phí, mua thẻ bài 20.000đ/thẻ nếu chơi (mia.vn 12/05/2024). Giờ kết thúc chưa có nguồn — 21:00 là ước lượng.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:park",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "osm:way/630377259",
+   "name": "Bãi biển Tiên Sa",
+   "name_raw": "Bãi biển Tiên Sa",
+   "name_en": null,
+   "lat": 16.1243611,
+   "lon": 108.2202733,
+   "category": "beach",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "08:00-18:00"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "cheap",
+    "note": "Bãi cát cuối đường Yết Kiêu (Cảng Tiên Sa), 25.000đ/người đã gồm gửi xe, 8h-18h."
+   },
+   "dwell": {
+    "p25": 45,
+    "p50": 90,
+    "p75": 150
+   },
+   "tags": {
+    "space": "outdoor",
+    "rain_protection": "unknown",
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "sunrise",
+     "morning",
+     "sunset"
+    ],
+    "time_budget": [
+     "half-day"
+    ],
+    "indoor": false,
+    "effort": 2,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "sun_anchored_beach",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.6,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": "way/630377259",
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "location": {
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:beach"
+    },
+    "hours": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Bãi cát cuối đường Yết Kiêu (Cảng Tiên Sa), 25.000đ/người đã gồm gửi xe, 8h-18h."
+    },
+    "price": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "verified_at": "2026-11-19",
+     "note": "Bãi cát cuối đường Yết Kiêu (Cảng Tiên Sa), 25.000đ/người đã gồm gửi xe, 8h-18h.; VND ticket_vnd=25000, min_vnd=25000, max_vnd=25000, typical_vnd=25000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:beach",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.6"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
    "poi_id": "osm:way/39268284",
    "name": "Chùa Cầu",
    "name_raw": "Chùa Cầu",
@@ -107502,16 +107902,16 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k). Đi ngắm bên ngoài không cần vé."
    },
    "dwell": {
     "p25": 10,
@@ -107582,12 +107982,12 @@
      "note": "curated_osm:outdoor_landmark"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/chua-cau-hoi-an",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
      "source": "cluster_rule",
@@ -107653,7 +108053,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
    },
    "dwell": {
     "p25": 45,
@@ -109360,7 +109760,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k)."
    },
    "dwell": {
     "p25": 15,
@@ -109502,7 +109902,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
    },
    "dwell": {
     "p25": 45,
@@ -109644,7 +110044,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
    },
    "dwell": {
     "p25": 45,
@@ -109786,7 +110186,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
    },
    "dwell": {
     "p25": 45,
@@ -109915,7 +110315,7 @@
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
    "alt_group": null,
-   "requires_ticket_of": null,
+   "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
      "08:00-11:00",
@@ -109927,8 +110327,8 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": "free",
-    "note": null
+    "tier": "included",
+    "note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
    },
    "dwell": {
     "p25": 15,
@@ -110009,12 +110409,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "note": "decisions_user_notes_20261119.json; vé tính ở osm:node/4601279489"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -110345,7 +110745,7 @@
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
    "alt_group": null,
-   "requires_ticket_of": null,
+   "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
      "08:00-11:00",
@@ -110357,7 +110757,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": "free",
+    "tier": "included",
     "note": null
    },
    "dwell": {
@@ -110434,12 +110834,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "note": "decisions_review_20261119.json; vé tính ở osm:node/4601279489"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -110626,7 +111026,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "18:00-22:00"
+     "17:00-23:00"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -110634,7 +111034,7 @@
     "archetype": "cho_dem"
    },
    "price": {
-    "tier": "cheap",
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -110707,20 +111107,20 @@
      "note": "curated_osm:night_market"
     },
     "hours": {
-     "source": "osm",
-     "verified_by": "open_data",
-     "confidence": 0.65,
-     "evidence_url": "https://www.openstreetmap.org/node/6099308589",
-     "verified_at": null,
-     "note": "OSM opening_hours='Mo-Su 18:00-22:00', khớp 0.0 m"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -110917,7 +111317,7 @@
    },
    "price": {
     "tier": "included",
-    "note": null
+    "note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
    },
    "dwell": {
     "p25": 45,
@@ -112456,10 +112856,10 @@
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
    "alt_group": null,
-   "requires_ticket_of": null,
+   "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "07:00-11:00"
+     "07:30-21:00"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -112467,8 +112867,8 @@
     "archetype": "bao_tang"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "included",
+    "note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ. Đóng cửa ngày 12 và 27 hằng tháng."
    },
    "dwell": {
     "p25": 45,
@@ -112539,20 +112939,20 @@
      "note": "curated_osm:museum_indoor"
     },
     "hours": {
-     "source": "osm",
-     "verified_by": "open_data",
-     "confidence": 0.65,
-     "evidence_url": "https://www.openstreetmap.org/node/7127464285",
-     "verified_at": null,
-     "note": "OSM opening_hours='Mo-Su 07:00-11:00', khớp 0.0 m"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://hoianmuseum.com/vi/about/bao-tang-nghe-y-truyen-thong.html",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "decisions_user_notes_20261119.json; vé tính ở osm:node/4601279489"
     },
     "dwell": {
      "source": "dwell_table_v2:museum",
@@ -112744,9 +113144,9 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "06:00-17:30"
+     "08:00-18:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
@@ -112824,12 +113224,12 @@
      "note": "curated_osm:viewpoint"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://sovaba.travel/blog/bai-viet-review-chi-tiet-cau-vang-ba-na-hills",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
      "source": "cluster_rule",
@@ -113176,7 +113576,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": "Vé phố cổ: NL nước ngoài 120.000, NL Việt Nam 80.000, 5 phiếu; nguồn ghi kiểm tra tháng 11/2026. Có nguồn khác nói dạo phố không cần vé — cần xác nhận. Giờ = giờ bán vé 7:30-21:30 mùa hè, tới 21:00 mùa đông (mekongasean.vn), lấy khung mùa đông."
+    "note": "Vé phố cổ 2 mức: 80.000đ = cảnh quan + Chùa Cầu HOẶC Miếu Quan Công + 2 công trình văn hóa; 120.000đ = cảnh quan + Chùa Cầu/Miếu Quan Công + hệ thống bảo tàng + 3 công trình. Miễn vé trẻ <16 tuổi, học sinh, công dân VN ≥60 tuổi (mang giấy tờ). Dạo phố, chợ, chợ đêm, thả hoa đăng, bài chòi: không cần vé."
    },
    "dwell": {
     "p25": 90,
@@ -113305,15 +113705,15 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": "free",
+    "tier": "cheap",
     "note": null
    },
    "dwell": {
@@ -113382,20 +113782,20 @@
      "note": "curated_osm:outdoor_landmark"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://hoianit.com/kham-pha-lang-rau-tra-que-thien-duong-rau-sach-giua-long-hoi-an/#:~:text=L%C3%A0ng%20rau%20Tr%C3%A0%20Qu%E1%BA%BF%20c%C3%A1ch%20ph%E1%BB%91%20c%E1%BB%95%20H%E1%BB%99i,%C4%83n%20v%C3%A0%20v%C3%AC%20sao%20UN%20Tourism%20ch%E1%BB%8Dn%20l%C3%A0ng.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://hoianit.com/kham-pha-lang-rau-tra-que-thien-duong-rau-sach-giua-long-hoi-an/#:~:text=L%C3%A0ng%20rau%20Tr%C3%A0%20Qu%E1%BA%BF%20c%C3%A1ch%20ph%E1%BB%91%20c%E1%BB%95%20H%E1%BB%99i,%C4%83n%20v%C3%A0%20v%C3%AC%20sao%20UN%20Tourism%20ch%E1%BB%8Dn%20l%C3%A0ng.",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json; VND 35000"
     },
     "dwell": {
      "source": "dwell_table_v2:village",
@@ -113443,11 +113843,13 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-11:30",
+     "13:30-16:30"
     ],
-    "kind": "safe_window",
-    "closed_days": [],
+    "kind": "fixed",
+    "closed_days": [
+     "Su"
+    ],
     "access_window": null,
     "archetype": "chua"
    },
@@ -113525,20 +113927,20 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://www.vietnamtourism.com/vi/nha-tho-chinh-toa-a-nang-nha-tho-hong-gio-mo-cua-quy-inh",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://www.vietnamtourism.com/vi/nha-tho-chinh-toa-a-nang-nha-tho-hong-gio-mo-cua-quy-inh",
+     "verified_at": "2026-11-19",
+     "note": "human_verify_v2_20261119.json"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -114144,8 +114546,8 @@
    "lon": 108.332008,
    "category": "restaurant",
    "role": "meal",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #7): Banh Mi Phuong",
    "zone": "hoi_an",
    "cluster_id": null,
    "alt_group": null,
@@ -118378,8 +118780,8 @@
    "lon": 108.331192,
    "category": "restaurant",
    "role": "meal",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #7): Quán ăn cô phưởng",
    "zone": "hoi_an",
    "cluster_id": null,
    "alt_group": null,

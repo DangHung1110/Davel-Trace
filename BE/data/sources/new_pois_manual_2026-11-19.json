@@ -1,0 +1,22 @@
+{
+ "about": "Điểm thêm theo yêu cầu người dùng 2026-11-19 (Hội An: phố đi bộ / hoa đăng, bài chòi; Sơn Trà: tách điểm con). id manual:* = không có phần tử OSM; toạ độ ước lượng trên bản đồ, cần đối chiếu OSM.",
+ "fetched_at": "2026-11-19",
+ "source": "user request + web (xem agent_web_2026-11-19b.json)",
+ "license": "toạ độ OSM ODbL khi có osm; manual = ước lượng",
+ "items": [
+  {"id": "manual:hoi-an-pho-di-bo-hoa-dang", "lat": 15.87655, "lon": 108.32790,
+   "name": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)", "c": "attraction"},
+  {"id": "manual:hoi-an-bai-choi", "lat": 15.87615, "lon": 108.32585,
+   "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)", "c": "attraction"},
+  {"osm": "way/630377259", "lat": 16.1243611, "lon": 108.2202733,
+   "name": "Bãi biển Tiên Sa", "c": "beach"}
+ ],
+ "curation": {
+  "category": {
+   "manual:hoi-an-pho-di-bo-hoa-dang": "outdoor_landmark",
+   "manual:hoi-an-bai-choi": "outdoor_landmark",
+   "way/630377259": "beach"
+  }
+ },
+ "prices": []
+}

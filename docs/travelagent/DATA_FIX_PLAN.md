@@ -140,3 +140,20 @@
 - Không gọi SerpAPI/API trả phí. Không để LLM viết mô tả hay đoán giờ/giá cụ thể.
 - Không thêm > 150 POI mới mà không hỏi. Không đổi hợp đồng API (`specs/.../contracts/`) mà không hỏi.
 - Không xoá file: thay vào đó chuyển sang `_to_delete/` và báo.
+
+## 6. Nhật ký tiến độ (handoff)
+
+| Ngày | Việc | Kết quả / chỗ xem |
+|---|---|---|
+| 18/11 | WP0–WP4, WP7, WP9, WP11–12 | commit `5a28ab3`…`00fb0de`; `reports/p0/P0_final.md` |
+| 19/11 | Giá null → nguồn web | 104 → 89 null (76 lưu trú); `reports/p0/13_null_price_research.md` |
+| 19/11 | Trang duyệt HTML + ingest JSON | `reports/p0/review_v21.html`, `BE/tools/ingest_review.py` |
+| 19/11 | **Duyệt vòng 1** (export người dùng, ảnh #6–#11, vé phố cổ Hội An, tách Sơn Trà/Bạch Đằng/Hải Vân, gộp Linh Ứng) | `reports/p0/14_review_round1.md`; 872 POI, review 1; ma trận 789 |
+
+**Việc mở tiếp theo:**
+- VỌC Glamping (review).
+- Bãi Đá Đen, Bãi Rạng, Hồ Xanh: thiếu toạ độ.
+- Data contract P1 (mục 3):
+  - Opening-hours: theo mùa, ngày ngoại lệ, suất diễn.
+  - Ticket: vé 80k/120k, số ô, phí bắt buộc.
+  - Tổng chi phí phải đếm số khoản "chưa biết", không coi chưa biết là 0.

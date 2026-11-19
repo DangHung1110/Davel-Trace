@@ -1,0 +1,46 @@
+{
+ "note": "Quyết định từ ghi chú + ảnh của người dùng ngày 2026-11-19 (review_v21_20261119.json + tin nhắn). File sắp sau decisions_review_* nên ghi đè. Xóa = status excluded (giữ bản ghi để truy vết).",
+ "items": {
+  "osm:node/9921282483": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights"},
+  "osm:node/14045144381": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights"},
+  "ChIJl21Hd_4YQjERF980f9HS9Cc": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê"},
+  "ChIJp3BwHgsZQjERzQZfxwNQNmE": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê"},
+  "osm:node/4279536690": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #7): Banh Mi Phuong"},
+  "osm:node/11888968769": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #7): Quán ăn cô phưởng"},
+  "ChIJGSKUUwCLQTERr0Je7WP5Xqc": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #8)"},
+  "ChIJZSAyL0YfQjERMP2R9yBDRwY": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #8)"},
+  "ChIJZ9UJGQQZQjERFL90XKMPBGk": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #8)"},
+  "ChIJ17mmuaQRQjERUiexX9MhcdI": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #9, #11)"},
+  "ChIJWe_7hboQQjERxap-mizn-ZY": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #9)"},
+  "ChIJfQr_phEZQjER5leh47CfKTQ": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #9)"},
+  "osm:node/7095169367": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #10)"},
+  "osm:node/8883385553": {"status": "excluded", "status_reason": "người dùng xóa (ảnh #10)"},
+
+  "ChIJHZakNa8ZQjERWNFToM16eB4": {"name": "Chùa Linh Ứng Sơn Trà", "status": "active"},
+  "ChIJabEOcucXQjER-8MNU9FNODw": {"status": "excluded", "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): tượng Quan Thế Âm nằm trong khuôn viên chùa"},
+  "ChIJuzUYUgAXQjER7uqAcJPQMY0": {"status": "excluded", "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): cổng chùa"},
+
+  "ChIJ6UAZeAAZQjERzK3T81riZmo": {"name": "Phố đi bộ Bạch Đằng", "category": "outdoor_landmark"},
+
+  "ChIJLVK-0XI9QjER5-Q0ZZoz5wE": {"status": "excluded", "status_reason": "khu vực chung — đã tách thành điểm con: Chùa Linh Ứng Sơn Trà, Đỉnh Bàn Cờ, Cây Đa Ngàn Năm, Mũi Nghê, Hải đăng Tiên Sa, Bãi biển Tiên Sa, Nhất Lâm Thủy Trang Trà, Radar, Vịnh/Bãi biển Sơn Trà"},
+  "osm:node/6346486685": {"name": "Cây Đa Ngàn Năm Sơn Trà"},
+
+  "osm:node/5286977425": {"name": "Công viên Suối khoáng nóng Núi Thần Tài", "category": "paid_attraction", "status": "active"},
+
+  "ChIJlxydWJEZQjER5GSMuHJHtak": {"status": "review", "status_reason": "link dẫn chứng là Thung Lũng Vàng (Đà Lạt), không phải VỌC Glamping Đà Nẵng; chưa có nguồn giá/giờ đúng địa điểm"},
+
+  "osm:node/4601279489": {"price_note": "Vé phố cổ 2 mức: 80.000đ = cảnh quan + Chùa Cầu HOẶC Miếu Quan Công + 2 công trình văn hóa; 120.000đ = cảnh quan + Chùa Cầu/Miếu Quan Công + hệ thống bảo tàng + 3 công trình. Miễn vé trẻ <16 tuổi, học sinh, công dân VN ≥60 tuổi (mang giấy tờ). Dạo phố, chợ, chợ đêm, thả hoa đăng, bài chòi: không cần vé."},
+  "osm:node/7127464285": {"price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ. Đóng cửa ngày 12 và 27 hằng tháng."},
+  "osm:node/3189923484": {"price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."},
+  "osm:way/631074714": {"price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."},
+  "osm:node/2076856032": {"price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."},
+  "osm:way/565592419": {"price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."},
+  "osm:way/209494258": {"price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."},
+  "osm:node/7127442985": {"price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."},
+  "osm:way/39268284": {"price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k). Đi ngắm bên ngoài không cần vé."},
+  "manual:cu-lao-cham": {"price_note": "Vé tham quan 70.000đ; PHÍ BẮT BUỘC đi lại từ Cửa Đại: cano ~150.000đ (15 phút) hoặc tàu gỗ ~50.000đ (1 giờ); tour lặn 700.000đ. Biển lặng tháng 3-8 (nangtrip)."},
+  "manual:hai-van-quan": {"price_note": "~70.000đ vào cửa ải (nangtrip, 'khoảng'). Đi qua đèo miễn phí."},
+  "osm:node/1036552571": {"price_note": "Qua đèo miễn phí; Hải Vân Quan (manual:hai-van-quan) thu ~70.000đ — đề xuất ghé cùng."},
+  "osm:way/631064893": {"price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k)."}
+ }
+}

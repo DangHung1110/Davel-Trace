@@ -20365,7 +20365,6 @@
    "category_evidence": [
     "v1_cat:attraction"
    ],
-   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -20383,13 +20382,13 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
-    "min_vnd": 0,
-    "max_vnd": 0,
-    "typical_vnd": 0,
+    "basis": "per_person",
+    "min_vnd": 10000,
+    "max_vnd": 10000,
+    "typical_vnd": 10000,
     "band": "re",
-    "ticket_vnd": null,
-    "free_entry": true,
+    "ticket_vnd": 10000,
+    "free_entry": false,
     "status": "known"
    },
    "dwell_v20": {
@@ -25819,7 +25818,7 @@
    },
    "hours_v20": {
     "spans": [
-     "18:00-22:00"
+     "18:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -32324,7 +32323,6 @@
    "category_evidence": [
     "name:nui"
    ],
-   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -32345,13 +32343,13 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
-    "min_vnd": 0,
-    "max_vnd": 0,
-    "typical_vnd": 0,
-    "band": "re",
-    "ticket_vnd": null,
-    "free_entry": true,
+    "basis": "per_person",
+    "min_vnd": 480000,
+    "max_vnd": 480000,
+    "typical_vnd": 480000,
+    "band": "cao",
+    "ticket_vnd": 480000,
+    "free_entry": false,
     "status": "known"
    },
    "dwell_v20": {
@@ -32605,7 +32603,7 @@
    },
    "hours_v20": {
     "spans": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -32619,12 +32617,12 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
+    "basis": "per_person",
     "min_vnd": 0,
     "max_vnd": 0,
     "typical_vnd": 0,
     "band": "re",
-    "ticket_vnd": null,
+    "ticket_vnd": 0,
     "free_entry": true,
     "status": "known"
    },
@@ -36452,8 +36450,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:30-17:30"
     ],
     "weekly": null,
     "archetype_default": [
@@ -36465,12 +36462,12 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
+    "basis": "per_person",
     "min_vnd": 0,
     "max_vnd": 0,
     "typical_vnd": 0,
     "band": "re",
-    "ticket_vnd": null,
+    "ticket_vnd": 0,
     "free_entry": true,
     "status": "known"
    },
@@ -43186,13 +43183,14 @@
    "category_evidence": [
     "override:Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
    },
    "hours_v20": {
     "spans": [
-     "18:00-22:00"
+     "15:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -43204,13 +43202,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 30000,
-    "max_vnd": 150000,
-    "typical_vnd": 90000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -65475,6 +65473,228 @@
    },
    "tags_v1": [
     "Cửa hàng quà lưu niệm"
+   ]
+  },
+  "manual:hoi-an-pho-di-bo-hoa-dang": {
+   "visit_min": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "fee": 0,
+   "source": "manual",
+   "verified": false,
+   "intensity": 2,
+   "weather_sensitive": false,
+   "fetched_at": "2026-11-19",
+   "hours_source": "",
+   "name_osm": null,
+   "osm_evidence": null,
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
+   "category_evidence": [
+    "curated_osm:outdoor_landmark"
+   ],
+   "smart_tags_price": {},
+   "hours_v20": {
+    "spans": [
+     "00:00-23:59"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "00:00-23:59"
+    ],
+    "safe_windows": [
+     "05:00-22:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "outdoor_urban",
+    "v1": {
+     "p25": 30,
+     "p50": 60,
+     "p75": 90
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": null,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": []
+  },
+  "manual:hoi-an-bai-choi": {
+   "visit_min": {
+    "p25": 20,
+    "p50": 40,
+    "p75": 70
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "fee": 0,
+   "source": "manual",
+   "verified": false,
+   "intensity": 2,
+   "weather_sensitive": false,
+   "fetched_at": "2026-11-19",
+   "hours_source": "",
+   "name_osm": null,
+   "osm_evidence": null,
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "category_evidence": [
+    "curated_osm:outdoor_landmark"
+   ],
+   "smart_tags_price": {},
+   "hours_v20": {
+    "spans": [
+     "19:00-21:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "00:00-23:59"
+    ],
+    "safe_windows": [
+     "05:00-22:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "park",
+    "v1": {
+     "p25": 30,
+     "p50": 60,
+     "p75": 90
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": null,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": []
+  },
+  "osm:way/630377259": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-19",
+   "verified": false,
+   "visit_min": {
+    "p25": 45,
+    "p50": 90,
+    "p75": 150
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 2,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": true,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bãi biển Tiên Sa",
+   "osm_evidence": {
+    "osm": "way/630377259",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bãi biển Tiên Sa"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bãi biển Tiên Sa",
+   "category_evidence": [
+    "curated_osm:beach"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "08:00-18:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "00:00-23:59"
+    ],
+    "safe_windows": [
+     "05:00-22:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 25000,
+    "max_vnd": 25000,
+    "typical_vnd": 25000,
+    "band": "re",
+    "ticket_vnd": 25000,
+    "free_entry": false,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "beach",
+    "v1": {
+     "p25": 84,
+     "p50": 120,
+     "p75": 168
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "Bãi biển"
    ]
   },
   "osm:way/39268284": {

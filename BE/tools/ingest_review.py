@@ -13,10 +13,42 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, "BE", "data", "sources")
+
+_DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+_VI_DAY = {"hai": "Mo", "ba": "Tu", "tư": "We", "năm": "Th", "sáu": "Fr", "bảy": "Sa"}
+
+
+def norm_hours(text):
+    """Free-text hours typed in the review page -> (["HH:MM-HH:MM", ...], closed_days).
+    '24h' / '24/7' / 'luôn mở' -> 00:00-23:59; '7h30 – 21h00' -> 07:30-21:00;
+    'A và B' -> two spans; '17:00-23:00/1:00' keeps the first close time;
+    'từ thứ Hai đến thứ Bảy' -> closed Su. ([], []) when nothing parses."""
+    if not text:
+        return [], []
+    s = str(text).lower()
+    if re.search(r"24\s*/\s*7|24h\b|24 giờ|luôn mở", s) and not re.search(r"\d{1,2}[:h]\d{2}\s*[-–]", s):
+        return ["00:00-23:59"], []
+    s = re.sub(r"(\d{1,2})h(\d{2})?", lambda m: f"{m.group(1)}:{m.group(2) or '00'}", s)
+    s = s.replace("–", "-").replace("—", "-")
+    spans = []
+    for o, c in re.findall(r"(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})", s):
+        oh, om = o.split(":")
+        ch, cm = c.split(":")
+        ch = "23" if ch == "24" else ch
+        cm = "59" if c.startswith("24") else cm
+        spans.append(f"{int(oh):02d}:{om}-{int(ch):02d}:{cm}")
+    closed = []
+    m = re.search(r"thứ\s+(hai|ba|tư|năm|sáu|bảy)\s+đến\s+(thứ\s+(hai|ba|tư|năm|sáu|bảy)|chủ nhật)", s)
+    if m:
+        a = _DAYS.index(_VI_DAY[m.group(1)])
+        b = 6 if m.group(2) == "chủ nhật" else _DAYS.index(_VI_DAY[m.group(3)])
+        closed = [d for i, d in enumerate(_DAYS) if not a <= i <= b]
+    return spans, closed
 
 
 def convert(export: dict) -> tuple[dict, dict]:
@@ -43,11 +75,24 @@ def convert(export: dict) -> tuple[dict, dict]:
         put(pid, requires_ticket_of=ot.get("parent"))
     for pid in ot.get("exclude", []):
         items.setdefault(pid, {})["requires_ticket_of"] = None
+    out_verify, unparsed = [], []
+    for v in export.get("verify", []):
+        if re.search(r"xóa địa điểm", v.get("note") or "", re.I):
+            put(v["poi_id"], status="excluded", status_reason="người dùng yêu cầu xóa")
+            continue
+        it = {**v, "checked_at": when, "verified_by": "human" if v.get("evidence_url") else "user"}
+        if v.get("hours"):
+            spans, closed = norm_hours(v["hours"])
+            if spans:
+                it["hours_raw"], it["hours"] = v["hours"], ", ".join(spans)
+                if closed:
+                    it["closed_days"] = closed
+            else:
+                unparsed.append(v["poi_id"])
+        out_verify.append(it)
     decisions = {"note": f"Từ {export.get('exported_at')} (review_v21.html). Q: {json.dumps(export.get('questions'), ensure_ascii=False)}",
                  "items": items}
-    verify = {"note": "review_v21.html export", "items": [
-        {**v, "checked_at": when, "verified_by": "human" if v.get("evidence_url") else "user"}
-        for v in export.get("verify", [])]}
+    verify = {"note": "review_v21.html export", "unparsed_hours": unparsed, "items": out_verify}
     return decisions, verify
 
 

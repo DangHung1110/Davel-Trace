@@ -8,7 +8,7 @@ ROOT = os.path.join(os.path.dirname(__file__), "..", "..", "..")
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 
-from BE.tools.ingest_review import convert  # noqa: E402
+from BE.tools.ingest_review import convert, norm_hours  # noqa: E402
 from migrate_v2 import apply_decision  # noqa: E402
 
 from BE.tests.unit.test_poi_view_v21 import rec  # noqa: E402
@@ -50,6 +50,20 @@ class TestIngestReview(unittest.TestCase):
         self.assertEqual((r["requires_ticket_of"], r["price"]["tier"]), ("osm:parent", "included"))
         apply_decision(r, {"requires_ticket_of": None, "_file": "d.json"})
         self.assertEqual((r["requires_ticket_of"], r["price"]["tier"]), (None, None))
+
+    def test_norm_hours_free_text(self):
+        self.assertEqual(norm_hours("7h30 – 21h00"), (["07:30-21:00"], []))
+        self.assertEqual(norm_hours("24h, luôn mở"), (["00:00-23:59"], []))
+        self.assertEqual(norm_hours("Mở 24/7"), (["00:00-23:59"], []))
+        self.assertEqual(norm_hours("17:00-23:00/1:00"), (["17:00-23:00"], []))
+        self.assertEqual(norm_hours("8:00-11:30 và 13:30-16:30 từ thứ Hai đến thứ Bảy"),
+                         (["08:00-11:30", "13:30-16:30"], ["Su"]))
+        self.assertEqual(norm_hours("không rõ"), ([], []))
+
+    def test_delete_note_becomes_excluded(self):
+        dec, ver = convert({**EXPORT, "verify": [{"poi_id": "x1", "note": "Xóa địa điểm này"}]})
+        self.assertEqual(dec["items"]["x1"]["status"], "excluded")
+        self.assertEqual(ver["items"], [])
 
     def test_rejects_other_files(self):
         with self.assertRaises(ValueError):

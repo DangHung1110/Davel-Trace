@@ -1,0 +1,12 @@
+{
+ "note": "Sửa sau khi đọc kỹ link (Claude, 2026-11-19). Sắp sau human_verify_v2_20261119.json nên THAY THẾ cả mục cùng poi_id.",
+ "items": [
+  {"poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak", "checked_at": "2026-11-19", "verified_by": "user",
+   "note": "BỎ giá trị đã nhập: link là Thung Lũng Vàng (Đà Lạt), không phải VỌC Glamping Đà Nẵng. POI chuyển review."},
+  {"poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E", "hours": "09:00-18:00", "price_tier": "medium",
+   "evidence_url": "https://nangtrip.com/activities/bao-tang-3d-art-in-paradise", "checked_at": "2026-11-19",
+   "verified_by": "human",
+   "hours_note": "nguồn lệch: mô tả nangtrip 9:00-22:00, widget nangtrip 8:30-18:00, danatravel 9:00-18:00 (khách cuối 17:00) -> lấy 09:00-18:00",
+   "price_note": "NL 140.000đ (khách VN) / 200.000đ (khách nước ngoài); trẻ 1-1,3m 100.000đ; <1m miễn phí"}
+ ]
+}

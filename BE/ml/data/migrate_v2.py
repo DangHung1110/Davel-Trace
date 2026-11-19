@@ -545,6 +545,8 @@ def apply_decision(rec, d):
     if d.get("category") in R.ALL_CATEGORIES:
         rec["category"], rec["role"] = d["category"], R.ROLE_OF[d["category"]]
         pv["category"] = prov("user_decision", "user", note=d["_file"])
+    if d.get("price_note"):
+        rec["price"]["note"] = d["price_note"]
     if "requires_ticket_of" in d:
         # Q5: shared-ticket membership decided by the user (old town ticket)
         parent = d["requires_ticket_of"]
@@ -569,13 +571,20 @@ def apply_human_verify(rec, it):
         spans = [s.strip() for s in str(it["hours"]).split(",") if s.strip()]
         if spans and all(R.parse_span(s) for s in spans):
             rec["hours"]["open"], rec["hours"]["kind"] = spans, "fixed"
+            if "closed_days" in it:
+                rec["hours"]["closed_days"] = list(it["closed_days"] or [])
+            note = it["_file"] + (f"; {it['hours_note']}" if it.get("hours_note") else "")
             rec["provenance"]["hours"] = prov("human_verify", by, evidence_url=url,
-                                              verified_at=when, note=it["_file"])
+                                              verified_at=when, note=note)
+        else:
+            print("WARN human_verify hours not parsed:", rec["poi_id"], it["hours"])
     tier = it.get("price_tier")
     if tier is None and it.get("ticket_vnd") is not None:
         tier = tier_of_vnd(it["ticket_vnd"])
     if tier in PRICE_TIERS and not (tier == "included") ^ bool(rec["requires_ticket_of"]):
         rec["price"]["tier"] = tier
+        if it.get("price_note"):
+            rec["price"]["note"] = it["price_note"]
         note = it["_file"] + (f"; VND {it['ticket_vnd']}" if it.get("ticket_vnd") is not None else "")
         rec["provenance"]["price"] = prov("human_verify", by, evidence_url=url,
                                           verified_at=when, note=note)
@@ -671,25 +680,30 @@ def find_duplicates(pois, max_m=150, min_ratio=0.72):
 def _base_from_osm(item, name, fetched_at):
     """v1-shaped record for an OSM element, built by the existing osm_add
     pipeline (duration prior, smart_tags) when importable, else minimal."""
-    otype, oid = item["osm"].split("/")
+    manual = item["osm"].startswith("manual:")
+    otype, oid = ("node", "0") if manual else item["osm"].split("/")
     tags = {"opening_hours": item.get("oh") or ""}
     try:
+        if manual:
+            raise LookupError("manual place: no OSM element")
         from BE.ml.data.osm_add import to_poi
         p = to_poi({"type": otype, "id": int(oid)}, item.get("c") or "?", item["lat"], item["lon"],
                    name, tags)
     except Exception as e:  # noqa: BLE001 - fall back, never block the build
-        print("WARN osm_add.to_poi unavailable:", type(e).__name__, e)
-        p = {"poi_id": f"osm:{item['osm']}", "name": name, "type": item.get("c") or "?",
+        if not manual:
+            print("WARN osm_add.to_poi unavailable:", type(e).__name__, e)
+        p = {"poi_id": item["osm"] if manual else f"osm:{item['osm']}", "name": name,
+             "type": item.get("c") or "?",
              "lat": item["lat"], "lon": item["lon"], "visit_min": {"p25": 30, "p50": 60, "p75": 90},
              "dur_source": "category_rule", "dur_confidence": "low", "price_level": 2, "fee": 0,
-             "rating": None, "tags": [], "source": "osm/overpass", "verified": False,
-             "intensity": 2, "weather_sensitive": False, "smart_tags": {}}
+             "rating": None, "tags": [], "source": "manual" if manual else "osm/overpass",
+             "verified": False, "intensity": 2, "weather_sensitive": False, "smart_tags": {}}
     p["fetched_at"] = fetched_at
     p["opening_hours"] = []           # hours come from the weekly OSM parser
     p["hours_source"] = ""
-    p["name_osm"] = item["name"]
-    p["osm_evidence"] = {"osm": item["osm"], "dist_m": 0.0, "hours": item.get("oh"),
-                         "fee": item.get("fee"), "name": name}
+    p["name_osm"] = None if manual else item["name"]
+    p["osm_evidence"] = None if manual else {"osm": item["osm"], "dist_m": 0.0, "hours": item.get("oh"),
+                                             "fee": item.get("fee"), "name": name}
     p["added_in"] = "v2.0-p0b"
     return p
 
@@ -708,7 +722,10 @@ def load_new_pois(sources_dir, existing):
         cur = doc.get("curation", {})
         disp = cur.get("display_name", {})
         for it in doc.get("items", []):
-            pid = f"osm:{it['osm']}"
+            if "osm" not in it:
+                # hand-added place with no OSM element (id "manual:<slug>")
+                it = {**it, "osm": it["id"]}
+            pid = it["osm"] if it["osm"].startswith("manual:") else f"osm:{it['osm']}"
             if pid in have:
                 continue
             name = disp.get(it["osm"], it["name"])

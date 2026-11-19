@@ -741,6 +741,9 @@ manual:mikazuki-waterpark,Mikazuki Water Park 365,paid_attraction,paid_attractio
 manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,paid_attraction,paid_attraction,True,False,0.8,active
 manual:cu-lao-cham,Cù Lao Chàm,paid_attraction,paid_attraction,True,False,0.9,active
 manual:smile-goods-danang,Smile Goods Danang,day_market,,False,True,0.5,active
+manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,outdoor_landmark,True,False,0.6,active
+manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,outdoor_landmark,True,False,0.6,active
+osm:way/630377259,Bãi biển Tiên Sa,beach,beach,True,False,0.6,active
 osm:way/39268284,Chùa Cầu,outdoor_landmark,religious,False,False,0.3,active
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,museum_indoor,True,False,0.6,active
 osm:way/320722329,Hội quán Phúc Kiến,religious,restaurant,False,False,0.3,active

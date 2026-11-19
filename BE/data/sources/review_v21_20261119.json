@@ -1,0 +1,527 @@
+{
+ "schema": "review_v21",
+ "snapshot_built": "2026-11-19",
+ "exported_at": "2026-11-19",
+ "questions": {
+  "Q1": {
+   "choice": "free / <100k / 100–500k / 500k–1,2tr (mặc định)",
+   "default": true,
+   "note": null
+  },
+  "Q2": {
+   "choice": "file riêng danang-v2/matrix.json (đang dùng)",
+   "default": true,
+   "note": null
+  },
+  "Q3": {
+   "choice": "cach_ly (đang dùng)",
+   "default": true,
+   "note": null
+  },
+  "Q4": {
+   "choice": "duyệt theo bảng dưới",
+   "default": true,
+   "note": null
+  },
+  "Q5": {
+   "choice": "theo bảng 'Vé phố cổ' dưới",
+   "default": true,
+   "note": null
+  },
+  "Q6": {
+   "choice": "OSRM car (đang dùng), Valhalla motor_scooter ở P1",
+   "default": true,
+   "note": "Chắc nếu xử lí xong thì dưng cả OSRM và Valhalla luôn"
+  }
+ },
+ "names": [
+  {
+   "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
+   "name": "Yen Yakiniku & Izakaya",
+   "name_was": "Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản"
+  },
+  {
+   "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
+   "name": "Nhà hàng Hàn Quốc lòng bò nướng",
+   "name_was": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )"
+  },
+  {
+   "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+   "name": "Khu ẩm thực Chợ Cồn",
+   "name_was": "Khu Ẩm Thực Chợ Cồn -식사 공간"
+  },
+  {
+   "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
+   "name": "Shop Hoa Tươi Ngũ Hành Sơn",
+   "name_was": "Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng"
+  },
+  {
+   "poi_id": "osm:node/7477670190",
+   "name": "Cửa hàng bán noni",
+   "name_was": "노니판매점"
+  },
+  {
+   "poi_id": "osm:node/13677406601",
+   "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+   "name_was": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979."
+  },
+  {
+   "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
+   "name": "Clover Spa",
+   "name_was": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지"
+  },
+  {
+   "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
+   "name": "Jeju Spa – Massage & Nail",
+   "name_was": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |"
+  },
+  {
+   "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
+   "name": "Vigift Đà Nẵng – Quà Đặc Sản",
+   "name_was": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품"
+  },
+  {
+   "poi_id": "ChIJWd2LBrkZQjER4hLHO81ipK0",
+   "name": "Lu's House Beauty & Academy",
+   "name_was": "Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy"
+  },
+  {
+   "poi_id": "ChIJM1DTVHkZQjERDW1JNclcAtw",
+   "name": "Massage người mù Đức Quý",
+   "name_was": "Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJn9Kkxh4ZQjERgDXEcvzD4nI",
+   "name": "MarLan Pub",
+   "name_was": "MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
+   "name": "Kết Bar",
+   "name_was": "켓 바 1 Kết Bar"
+  },
+  {
+   "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
+   "name": "Oppa O Bar",
+   "name_was": "오빠O Bar- Lounge & More"
+  },
+  {
+   "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
+   "name": "Chùa Mỹ Thị",
+   "name_was": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+   "name": "Elsa Spa",
+   "name_was": "Elsa Spa massage Da Nang ( 엘사 스파 )"
+  },
+  {
+   "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
+   "name": "Lá Sen Cooking Class",
+   "name_was": "Danang Cooking Class - Lá Sen ダナン料理教室"
+  }
+ ],
+ "status": [
+  {
+   "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
+   "status": "excluded",
+   "reason": "đề xuất excluded: tiệm hoa, không phải điểm du lịch"
+  },
+  {
+   "poi_id": "osm:node/7477670190",
+   "status": "excluded",
+   "reason": "đề xuất excluded: cửa hàng bán lẻ cho khách đoàn"
+  },
+  {
+   "poi_id": "ChIJWd2LBrkZQjER4hLHO81ipK0",
+   "status": "excluded",
+   "reason": "đề xuất excluded: tiệm nặn mụn (WP5: wellness lẫn tiệm thẩm mỹ)"
+  },
+  {
+   "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
+   "status": "excluded",
+   "reason": "WP5"
+  },
+  {
+   "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
+   "status": "active",
+   "reason": "không phải một địa điểm cố định (chương trình/tour)"
+  },
+  {
+   "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
+   "status": "excluded",
+   "reason": "tên chung chung"
+  },
+  {
+   "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
+   "status": "excluded",
+   "reason": "chưa định danh rõ"
+  },
+  {
+   "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
+   "status": "excluded",
+   "reason": "tên chung chung (OSM)"
+  },
+  {
+   "poi_id": "osm:node/1623183649",
+   "status": "active",
+   "reason": "cái này thì chắc cho chỉ hướng tới khu vực núi Sơn Trà là được"
+  },
+  {
+   "poi_id": "osm:node/4122433690",
+   "status": "excluded",
+   "reason": "Lấy Bà Nà Hills (khu vui chơi thôi không cần Núi Bà Nà)"
+  },
+  {
+   "poi_id": "osm:node/4741642219",
+   "status": "excluded",
+   "reason": "Này là nói chung của các bãi biển công cộng rồi"
+  },
+  {
+   "poi_id": "osm:node/4845297821",
+   "status": "excluded",
+   "reason": "Nên lấy rõ núi thần tài luôn chứ không nên lấy gần"
+  },
+  {
+   "poi_id": "osm:node/5286977425",
+   "status": "active",
+   "reason": "Chắc chỉ được địa điểm để tới Núi Thần Tài là được. Cái này cũng có vé kiểu giống như Bà Nà Hills. https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang. Có giá vé là 480.000 ₫. "
+  },
+  {
+   "poi_id": "osm:node/10303626687",
+   "status": "excluded",
+   "reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  {
+   "poi_id": "osm:node/10303626688",
+   "status": "excluded",
+   "reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  {
+   "poi_id": "osm:node/11629841009",
+   "status": "excluded",
+   "reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  {
+   "poi_id": "osm:node/11629996926",
+   "status": "excluded",
+   "reason": "Nên để là tour, cắm trại ở Đèo Hải Vân"
+  },
+  {
+   "poi_id": "osm:node/11630013743",
+   "status": "excluded",
+   "reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  {
+   "poi_id": "osm:node/11762365155",
+   "status": "excluded",
+   "reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  {
+   "poi_id": "osm:node/12701675501",
+   "status": "excluded",
+   "reason": "tên chung chung (OSM)"
+  },
+  {
+   "poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q",
+   "status": "excluded",
+   "reason": "Sun World Bà Nà Hills"
+  },
+  {
+   "poi_id": "ChIJ66onuEIZQjERJcc014sju08",
+   "status": "active",
+   "reason": "tiệm làm đẹp — có nên là điểm trong lịch trình?"
+  },
+  {
+   "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+   "status": "active",
+   "reason": "Này ổn vì là để hát karaoke, vui chơi"
+  },
+  {
+   "poi_id": "ChIJF8yRoecZQjERdDBeBdSRD-Y",
+   "status": "excluded",
+   "reason": "chưa rõ là khu vui chơi có vé hay khu phố"
+  },
+  {
+   "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "osm:node/7095169367",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  },
+  {
+   "poi_id": "osm:node/8883385553",
+   "status": "excluded",
+   "reason": "người dùng duyệt"
+  }
+ ],
+ "duplicates": [
+  {
+   "a": "ChIJr_MgSAAZQjERnbnJDAtASZM",
+   "b": "ChIJSZabUwAZQjERqs6A8ECVnWY",
+   "decision": "keep_b"
+  },
+  {
+   "a": "ChIJrcJ8wVwRQjERJF58LAQEO-I",
+   "b": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
+   "decision": "keep_b"
+  },
+  {
+   "a": "osm:node/1036552571",
+   "b": "manual:hai-van-quan",
+   "decision": "distinct"
+  },
+  {
+   "a": "osm:node/4294135790",
+   "b": "ChIJY3yT3IweQjERnbDRpKk8b3A",
+   "decision": "keep_b"
+  },
+  {
+   "a": "osm:node/9921282483",
+   "b": "osm:node/14045144381",
+   "decision": "keep_b"
+  },
+  {
+   "a": "ChIJl21Hd_4YQjERF980f9HS9Cc",
+   "b": "ChIJp3BwHgsZQjERzQZfxwNQNmE",
+   "decision": "keep_a"
+  },
+  {
+   "a": "osm:way/35952504",
+   "b": "osm:way/35952591",
+   "decision": "distinct"
+  },
+  {
+   "a": "osm:node/4279536690",
+   "b": "osm:node/11888968769",
+   "decision": "distinct"
+  }
+ ],
+ "verify": [
+  {
+   "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
+   "hours": "07:30-22:30",
+   "price_tier": "cheap",
+   "evidence_url": "https://danangpointer.com/activities/khu-du-lich-sinh-thai-suoi-rang/",
+   "note": "Entry pricing varies; confirm on arrival.. Chắc cho cheap vì mức giá không rõ"
+  },
+  {
+   "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
+   "hours": "07:00-18:00",
+   "price_tier": "free",
+   "evidence_url": "https://www.foody.vn/da-nang/khu-du-lich-sinh-thai-thuy-van-son#:~:text=Khu%20Du%20L%E1%BB%8Bch%20Sinh%20Th%C3%A1i%20Th%E1%BB%A7y%20V%C3%A2n%20S%C6%A1n,Gi%C3%A1%20b%C3%ACnh%20qu%C3%A2n%20%C4%91%E1%BA%A7u%20ng%C6%B0%E1%BB%9Di%2020.000%C4%91%20-%2050.000%C4%91"
+  },
+  {
+   "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
+   "hours": "7:00-17:00",
+   "price_tier": "free",
+   "evidence_url": "https://dulichfree.com/bao-tang-phat-hoc-da-nang/",
+   "note": "Bảo tàng Phật học Đà Nẵng nằm ở tầng 2 khu chánh điện chùa Quan Thế Âm, số 48 Sư Vạn Hạnh, phường Hòa Hải, quận Ngũ Hành Sơn. Bảo tàng mở cửa từ 7h00 đến 17h00 hằng ngày và miễn phí vào cửa. Nên đến vào khoảng 9h00 sáng để tham quan trong không gian yên tĩnh nhất."
+  },
+  {
+   "poi_id": "ChIJ17mmuaQRQjERUiexX9MhcdI",
+   "note": "Xóa địa điểm này"
+  },
+  {
+   "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
+   "hours": "07:00 – 18:00",
+   "price_tier": "cheap",
+   "evidence_url": "https://newlifetravel.vn/thung-lung-vang-da-lat/#:~:text=Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2007%3A00%20%E2%80%93%2018%3A00%20h%C3%A0ng%20ng%C3%A0y.,VN%C4%90%2Fng%C6%B0%E1%BB%9Di%29%2C%20thu%C3%AA%20c%E1%BB%A7i%20l%E1%BB%ADa%20tr%E1%BA%A1i%20%28kho%E1%BA%A3ng%20500.000%20VN%C4%90%29.",
+   "note": "Địa chỉ: Đường Ankroet, Phường Lang Biang, Đà Lạt, Lâm Đồng. Giờ mở cửa: 07:00 – 18:00 hàng ngày. Giá vé vào cổng: 70.000 VNĐ/người lớn và 30.000 VNĐ/trẻ em. Quy mô: Khoảng 23 ha, nổi bật với rừng thông, hồ nước nhân tạo và cảnh quan xanh mát. Dịch vụ cộng thêm: Xe điện tham quan (40.000 VNĐ/người), thuê củi lửa trại (khoảng 500.000 VNĐ). Điểm nổi bật: Hồ Suối Vàng – Đan Kia, đồi thông và mùa cỏ hồng từ tháng 11 đến tháng 12. Hoạt động: Picnic, cắm trại, câu cá, chụp ảnh cưới và tổ chức team building."
+  },
+  {
+   "poi_id": "osm:node/7127464285",
+   "hours": "7h30 – 21h00",
+   "price_tier": "cheap",
+   "evidence_url": "https://hoianmuseum.com/vi/about/bao-tang-nghe-y-truyen-thong.html",
+   "note": "Thời gian mở cửa: 7h30 – 21h30 hằng ngày. Đóng cửa vào ngày 12 và 27 hằng tháng để thực hiện công tác chuyên môn. Có vé tham quan là hệ thống vé vào chung phố cổ Hội An."
+  },
+  {
+   "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
+   "hours": "7:00 - 19:30",
+   "price_tier": "cheap",
+   "evidence_url": "https://danangbest.com/cho-con-da-nang-thien-duong-am-thuc.html#:~:text=Ch%E1%BB%A3%20th%C6%B0%E1%BB%9Dng%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng%20t%E1%BB%AB%20kho%E1%BA%A3ng%207%3A00%20%C4%91%E1%BA%BFn,t%E1%BB%AB%2015.000%20%C4%91%E1%BA%BFn%2050.000%C4%91%2Fsu%E1%BA%A5t%3B%20%C4%91%E1%BB%93%20u%E1%BB%91ng%20t%E1%BB%AB%2015.000%E2%80%9330.000%C4%91.",
+   "note": "Chợ thường hoạt động từ khoảng 7:00 đến 19:30. Giờ chính xác có thể thay đổi tùy thời điểm và từng khu trong chợ. Nên kiểm tra lại trước khi đến, nhất là nếu đi vào buổi tối. Giá món ăn ở Chợ Cồn khoảng bao nhiêu? Hầu hết các món ăn dao động từ 15.000 đến 50.000đ/suất; đồ uống từ 15.000–30.000đ. "
+  },
+  {
+   "poi_id": "ChIJLWoAs80ZQjERLKHDYD-ZymI",
+   "hours": "7:00 – 17:30",
+   "price_tier": "cheap",
+   "evidence_url": "https://dulichlive.com/da-nang/bao-tang-dieu-khac-cham-da-nang-gio-mo-cua-gia-ve-review.html#:~:text=%E2%80%93%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%207h%20%E2%80%93%2017h30%20h%C3%A0ng,S%E1%BB%91%20%C4%91i%E1%BB%87n%20tho%E1%BA%A1i%20li%C3%AAn%20h%E1%BB%87%3A%200236%203574%20801",
+   "note": "Giờ mở cửa: 7h – 17h30 hàng ngày – Giá vé: 60k/lượt "
+  },
+  {
+   "poi_id": "ChIJLVK-0XI9QjER5-Q0ZZoz5wE",
+   "hours": "24h, luôn mở",
+   "price_tier": "free",
+   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/#:~:text=%E2%9C%85%20Gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2024h%20%E2%9C%85%20Gi%C3%A1%20v%C3%A9%3A,%C4%91i%E1%BB%83m%20s%C4%83n%20m%C3%A2y%20l%C3%BD%20t%C6%B0%E1%BB%9Fng%20%E1%BB%9F%20%C4%90%C3%A0%20N%E1%BA%B5ng.",
+   "note": "đọc full trang này vì cái bán đảo sơn trà đó có nhiều khu vực đi tham quan nói riêng, còn bán đảo Sơn Trà chỉ là nói chung thôi. Tách cái Bán đảo sơn trà ra thành các khu nói riêng này thì hơn"
+  },
+  {
+   "poi_id": "ChIJI4oSjdE9QjERlXMiA630YKs",
+   "hours": "07:30–18:00",
+   "price_tier": "cheap",
+   "evidence_url": "https://danangbest.com/check-in-thoa-thich-voi-ngon-hai-dang-tien-sa-da-nang.html",
+   "note": "Địa chỉ  Bán đảo Sơn Trà, quận Sơn Trà, Đà Nẵng  Năm xây dựng  1902 (do người Pháp khởi công)  Độ cao  223m so với mực nước biển  Giờ tham quan chính thức Sơn Trà  Tháng 3 – 9: 07:30–18:30  Tháng 10 – 2 năm sau: 07:30–17:30  Ngoài khung này rào chắn được đóng lại.  Phí tham quan  Không có bảng giá niêm yết ổn định được xác nhận — cần hỏi tại chỗ khi đến.  Khả năng vào/leo tháp  Không được đảm bảo trước — cần xác nhận tại chỗ với nhân viên quản lý.  Phương tiện được phép  Xe máy số/côn hoặc ô tô. Xe tay ga bị cấm trên các tuyến tham quan Sơn Trà.  Thời điểm lý tưởng  07:30–09:00 (sáng sớm) hoặc 16:00–18:00 (chiều tà)"
+  },
+  {
+   "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+   "hours": "7:30 - 19:00",
+   "price_tier": "free",
+   "evidence_url": "https://fvgtravel.com.vn/tin-tuc/dinh-ban-co-son-tra-n406#:~:text=%C4%90%E1%BB%89nh%20B%C3%A0n%20C%E1%BB%9D%20m%E1%BA%A5y%20gi%E1%BB%9D%20m%E1%BB%9F%20c%E1%BB%ADa%3F%20%C4%90%E1%BB%89nh,ph%C3%A1%20v%C3%A0%20ng%E1%BA%AFm%20c%E1%BA%A3nh%20tr%C6%B0%E1%BB%9Bc%20khi%20tr%E1%BB%9Di%20t%E1%BB%91i.",
+   "note": "1 trong các khu vực chơi của Bán Đảo Sơn Trà. Đỉnh Bàn Cờ mấy giờ mở cửa? Đỉnh Bàn Cờ Sơn Trà mở cửa đón du khách từ 7h30 sáng đến 19h tối mỗi ngày. Tất cả các hoạt động tham quan, dã ngoại và chụp ảnh đều diễn ra trong khung giờ này, vì vậy bạn nên sắp xếp thời gian hợp lý để có đủ thời gian khám phá và ngắm cảnh trước khi trời tối."
+  },
+  {
+   "poi_id": "ChIJ_XkaoQs-QjER_IUTHqI3gI8",
+   "hours": "24h, luôn mở",
+   "price_tier": "free",
+   "evidence_url": "https://danangbest.com/kham-pha-toa-do-song-ao-mui-nghe-da-nang.html",
+   "note": "Mũi Nghê nằm ở phía Đông Nam của bán đảo Sơn Trà – một trong những điểm ngắm cảnh đặc sắc trên hệ thống viewpoint Sơn Trà. 1 dạn viewpoint nên là luôn mở và free thôi. Lộ trình chuẩn từ trung tâm Từ trung tâm thành phố, đi theo đường ven biển Võ Nguyên Giáp – Hoàng Sa về phía bán đảo Sơn Trà. Sau khi đi qua chùa Linh Ứng Sơn Trà, bạn tiếp tục theo đường Hoàng Sa thêm khoảng 3 km. Dọc đường sẽ đi qua khu vực cây đa ngàn năm tuổi – một cột mốc thiên nhiên dễ nhận biết giúp bạn định hướng đúng lối rẽ vào rừng.  Đoạn trekking xuống mũi Sau khi gửi xe, bạn sẽ nhận ra một con đường hẹp dẫn vào rừng. Đoạn này cực kỳ dốc, nhưng đã có sẵn dây thừng buộc để hỗ trợ xuống. Đi theo đường mòn trong rừng khoảng 15 phút, vượt dốc dựng đứng xuống phía biển, băng qua bãi đất trống thêm 5 phút là đến nơi. Tổng thời gian trekking một chiều: 20–25 phút.  ⚠️ Lưu ý an toàn quan trọng:  Đoạn dốc có dây thừng là đoạn nguy hiểm  – đá trơn khi ẩm ướt. Không phù hợp cho trẻ nhỏ dưới 8 tuổi và người lớn tuổi có vấn đề về xương khớp. Không xuất phát sau 15:30 nếu không quen đường – trời tối nhanh trong rừng. Cần mang găng tay mỏng để bám dây thừng khi xuống dốc. Phương tiện di chuyển Xe máy là phương tiện được nhiều du khách ưa chọn nhờ sự linh hoạt. Tuy nhiên đường đi đến Mũi Nghê khá dốc và hiểm trở, đòi hỏi tay lái vững và nên dùng xe số thay vì xe ga. Bạn có thể tham khảo các địa điểm thuê xe máy Đà Nẵng uy tín để có trải nghiệm tốt .  Ô tô phù hợp cho nhóm đông hoặc gia đình có trẻ nhỏ. Nên chọn xe gầm cao, lưu ý nhiều khúc cua gấp và nhường đường phương tiện ngược chiều. Thuê ô tô tự lái ở Đà Nẵng thường tiết kiệm hơn đi xe công nghệ nếu đi theo nhóm.  Bãi đỗ xe: Có điểm dừng/đỗ xe gần lối xuống trekking, phí gửi tùy thời điểm (nếu có). Bãi có thể chật kín vào cuối tuần và dịp lễ – nên đến trước 5:30 sáng để có chỗ thuận lợi."
+  },
+  {
+   "poi_id": "ChIJ4w7694IXQjERrFXucqKL--o",
+   "hours": "24h, luôn mở",
+   "price_tier": "free",
+   "evidence_url": "https://nangtrip.com/activities/bai-bien-my-khe",
+   "note": "Tham quan và tắm biển tại Mỹ Khê hoàn toàn miễn phí, bạn chỉ trả tiền cho các dịch vụ bổ sung như thuê ghế phơi nắng, tắm nước ngọt hoặc tham gia trò chơi thể thao. Bãi biển có đầy đủ tiện ích sạch sẽ, an toàn, với các quán ăn hải sản gần đó để thưởng thức. 1. Vị trí & Không gian:  Vị trí: Bãi biển Mỹ Khê nằm ở phường Phước Mỹ, quận Sơn Trà, cách trung tâm thành phố Đà Nẵng khoảng 3km. Bãi biển trải dài từ chân bán đảo Sơn Trà đến Ngũ Hành Sơn, với đoạn chính dành cho du khách tắm biển dài khoảng 900m.  Đặc điểm: Bãi biển nổi tiếng với bờ cát trắng mịn, nước biển xanh ngọc bích và sóng êm dịu. Không gian thoáng đãng, lãng mạn, rất thích hợp để dạo bộ hoặc ngắm bình minh và hoàng hôn.  2. Hoạt động & Trải nghiệm:  Các hoạt động phổ biến: Bãi biển Mỹ Khê là địa điểm lý tưởng để tắm biển, thư giãn trên bãi cát và tham gia nhiều trò chơi dưới nước như lướt sóng, chèo thuyền kayak, dù lượn và mô tô nước.  Thời điểm lý tưởng: Bạn có thể đến đây vào buổi sáng sớm để đón bình minh, chạy bộ và bơi lội trong không khí trong lành. Chiều muộn là thời điểm lý tưởng để ngắm hoàng hôn và dạo chơi trên bãi cát.  3. Điểm đặc trưng & Giá cả:  Điểm đặc trưng: Bãi biển Mỹ Khê từng được tạp chí Forbes của Mỹ bình chọn là một trong sáu bãi biển quyến rũ nhất hành tinh. Bãi biển cũng nổi tiếng với sự sạch sẽ và an toàn.  Chi phí: Việc tham quan và tắm biển hoàn toàn miễn phí. Các dịch vụ khác như thuê ghế phơi nắng, tắm nước ngọt, hoặc tham gia trò chơi thể thao trên biển sẽ có thu phí riêng.  4. Đánh giá tổng quát & Lời khuyên:  Bãi biển Mỹ Khê là một điểm đến không thể bỏ qua khi bạn đến Đà Nẵng. Với vẻ đẹp tự nhiên, tiện ích đầy đủ và sự đa dạng của các hoạt động, nơi đây phù hợp cho cả du khách muốn thư giãn hay tìm kiếm những trải nghiệm mạo hiểm."
+  },
+  {
+   "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+   "hours": "9:00 - 22:00",
+   "price_tier": "medium",
+   "evidence_url": "https://nangtrip.com/activities/bao-tang-3d-art-in-paradise",
+   "note": "Giá vé và giờ mở cửa: Mở cửa từ 9:00 đến 22:00. Giá vé người lớn 140.000 VNĐ, trẻ em cao 1-1,3m là 100.000 VNĐ và miễn phí cho trẻ dưới 1m. Nhiều khách đánh giá mức giá hợp lý so với trải nghiệm. Tiện ích hỗ trợ: Cuối khu có quán cà phê phục vụ đồ ăn uống với giá phải chăng, nước chỉ khoảng 10.000 VNĐ. Giờ mở cửa: 9:00 - 18:00, mở cả ngày lễ, Tết; nhận khách cuối cùng lúc 17:00 danatravel Giá vé khách nước ngoài: người lớn (trên 1m3) 200.000 đồng, trẻ em (1m-1m3) 100.000 đồng, dưới 1m miễn phí Giá vé khách Việt Nam: người lớn 140.000 đồng, trẻ em 100.000 đồng, dưới 1m miễn phí Không gian rộng hơn 3.000 m² với hàng trăm bức tranh quy mô lớn."
+  },
+  {
+   "poi_id": "ChIJDcx-OTIYQjERP4eyjItPspA",
+   "hours": "6h00 – 19h00",
+   "price_tier": "cheap",
+   "evidence_url": "https://kienoceanhotel.com/cho-han-da-nang/",
+   "note": "Chợ Hàn Đà Nẵng ở 119 Trần Phú, phường Hải Châu 1, quận Hải Châu, cách cầu Rồng khoảng 700 m. Chợ mở cửa hằng ngày từ 6 giờ sáng đến 19 giờ, đông đúc nhất vào buổi sáng. Tầng 1 bán đồ ăn và đặc sản, tầng 2 bán vải vóc, quần áo và thời trang. Thời gian mở cửa: Khoảng 6h00 – 19h00 hằng ngày. Giờ cao điểm: Từ 9h00 – 11h00 và 15h00 – 18h00, khi lượng khách du lịch đông. Buổi tối: Một số gian hàng vẫn mở cửa đến tối, đặc biệt là khu bán đặc sản và đồ lưu niệm. Nhiều du khách lần đầu ghé thăm thường băn khoăn liệu giá cả ở Chợ Hàn Đà Nẵng có cao hơn so với các khu chợ khác trong thành phố hay không. Thực tế, mặt bằng giá tại đây nhỉnh hơn một chút so với chợ dân sinh thuần địa phương do nằm ở trung tâm và phục vụ nhiều khách du lịch, tuy nhiên vẫn ở mức hợp lý nếu biết cách chọn quầy và thương lượng.  Hải sản khô, đặc sản: trung bình từ 150.000 – 500.000 VNĐ/kg tùy loại. Đồ ăn trong chợ: 20.000 – 50.000 VNĐ/phần. Quà lưu niệm, phụ kiện: từ 30.000 VNĐ trở lên. Vải vóc, quần áo: đa dạng phân khúc, từ bình dân đến cao cấp."
+  },
+  {
+   "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
+   "hours": "17:00 - 22:30",
+   "price_tier": "cheap",
+   "evidence_url": "https://mytour.vn/vi/blog/bai-viet/cho-dem-helio-o-da-nang-noi-mua-sam-thuong-thuc-am-thuc-soi-dong-khi-troi-toi.html",
+   "note": "Giờ mở cửa và giá vé vào chợ đêm Helio như thế nào? Chợ đêm Helio mở cửa từ 17h00 đến 22h30 hàng ngày và hoàn toàn miễn phí. Tuy nhiên, bạn sẽ cần mang tiền để mua sắm và thưởng thức các món ăn ngon tại đây, với mức giá dao động từ 5.000 đến 45.000 VNĐ/món."
+  },
+  {
+   "poi_id": "ChIJp91wYRgZQjER9Yry1HWPhW8",
+   "hours": "19:00 - 22:00",
+   "price_tier": "medium",
+   "evidence_url": "https://locatravel.vn/ve-du-thuyen-song-han-7bovkx6b8z#:~:text=-%20Th%E1%BB%9Di%20gian%20m%E1%BB%9F%20c%E1%BB%ADa%3A%2019h00%20-%2022h00,ng%C3%A0y%20so%20v%E1%BB%9Bi%20ng%C3%A0y%20s%E1%BB%AD%20d%E1%BB%A5ng%20d%E1%BB%8Bch%20v%E1%BB%A5.",
+   "note": "Thời gian mở cửa: 19h00 - 22h00 mỗi ngày. - Loại vé: Vé giấy. - Hình thức nhận vé: Quý khách vui lòng đến quầy vé và báo thông tin họ tên, sđt của Quý khách để nhận vé. - Trẻ em cao từ 1m - 1m3: 80.000đ. - Quý khách vui lòng đặt vé trước tối thiểu 01 ngày so với ngày sử dụng dịch vụ."
+  },
+  {
+   "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
+   "hours": "6:30 – 17:30",
+   "price_tier": "free",
+   "evidence_url": "https://nangtrip.com/activities/tuong-quan-the-am-bo-tat | https://chilldanang.com/chua-quan-the-am-tai-da-nang/#:~:text=%C4%90%E1%BB%8Ba%20ch%E1%BB%89%3A%20Ch%C3%B9a%20t%E1%BB%8Da%20l%E1%BA%A1c%20t%E1%BA%A1i%20s%E1%BB%91%2048,xe%20m%C3%A1y%20v%C3%A0%20%C3%B4%20t%C3%B4%20r%E1%BA%A5t%20ti%E1%BB%87n%20l%E1%BB%A3i. | https://nangtrip.com/activities/chua-linh-ung",
+   "note": "MÀ CÁI NÀY LÀ CHÙA LINH ỨNG. CÓ TƯỢNG QUAN THẾ ÂM. NÊN ĐỔI TÊN LẠI THÀNH CHÙA LINH ỨNG. Miễn phí Địa chỉ: Chùa tọa lạc tại số 48 đường Sư Vạn Hạnh, phường Hòa Hải, quận Ngũ Hành Sơn. Chi phí & Giờ mở cửa: Nơi đây mở cửa đón khách tham quan hoàn toàn miễn phí. Di chuyển: Từ trung tâm thành phố, bạn chỉ mất khoảng 20 phút (11-12km) để đến nơi. Chùa có bãi giữ xe cho cả xe máy và ô tô rất tiện lợi."
+  },
+  {
+   "poi_id": "osm:node/1036552571",
+   "hours": "24h, luôn mở",
+   "price_tier": "free",
+   "evidence_url": "https://nangtrip.com/activities/deo-hai-van",
+   "note": "Nhiên liệu & Vé vào: Tại điểm ngắm cảnh có bán xăng nhưng giá cao, khoảng 200.000 VNĐ một chai, nên khách được khuyên đổ đầy bình trước khi khởi hành từ Đà Nẵng hoặc Lăng Cô. Cửa ải Hải Vân Quan thu phí vào cửa khoảng 70.000 VNĐ. Thường đi chơi không cần qua hầm thì sẽ free, còn qua hầm thì sẽ tốn phí như trên. Mặc định là cho đi chơi qua Hải Vân Quan đi vì Điểm đến nổi bật: Hải Vân Quan được nhắc đến như điểm dừng chân có cổng gạch cổ, nơi du khách có thể ngắm toàn cảnh bờ biển Đà Nẵng từ trên cao. Một số review ghi nhận không khí yên bình và cảm giác thư giãn khi đứng trên đỉnh đèo."
+  },
+  {
+   "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+   "evidence_url": "https://nangtrip.com/activities/chua-linh-ung",
+   "note": "Cái này gọi chung vẫn là Chùa Linh Ứng. Là chỗ có tượng quan thế âm. Thống nhất cái Chùa Quan thế Âm và cái này thành 1 Chùa Linh ứng và làm về chùa Linh Ứng thôi."
+  },
+  {
+   "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
+   "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong | https://paracelresort.com/pho-di-bo-bach-dang-da-nang-gio-mo-cua-vi-tri-co-gi-choi-va-kinh-nghiem-di-thuc-te/",
+   "note": "Nên Tách ra vì sẽ là Phố đi bộ và 1 bên là chợ đêm An Thượng thì phải.  Phố đi bộ thì sẽ free còn chợ đêm thì Gian hàng phục vụ mì Quảng (40,000 VNĐ), bánh tráng cuốn (15,000 VNĐ), hải sản nướng (50,000-100,000 VNĐ), bia tươi (20,000 VNĐ).  Chợ đêm An thượng thì Thời gian mở cửa  Mở từ 5:00 chiều đến 11:00 tối (thứ Bảy, Chủ Nhật đến 12:00 đêm). Vé: miễn phí. Còn Phố đi bộ thì hoạt động từ 15 giờ đến 0 giờ hằng ngày, trong đó từ thứ sáu đến chủ nhật thường nhộn nhịp hơn do lượng khách tăng mạnh vào cuối tuần và Với người đi lần đầu, nên tránh đánh giá phố đi bộ này chỉ qua buổi trưa hoặc đầu chiều. Lúc đó nắng còn gắt, gió sông chưa tạo được cảm giác dễ chịu như buổi tối. Nếu mục tiêu của bạn là trải nghiệm đúng “chất” phố đi bộ ven sông Hàn, hãy đến sau 17 giờ 30 phút, đặc biệt là khoảng 18 giờ 30 đến 21 giờ 30. Đây là lúc dòng người đông vừa đủ, ánh sáng lên đẹp, các quầy dịch vụ và hoạt động xung quanh cũng vào nhịp rõ nhất."
+  },
+  {
+   "poi_id": "manual:hai-van-quan",
+   "price_tier": "cheap",
+   "evidence_url": "https://nangtrip.com/activities/deo-hai-van",
+   "note": "Điểm đến nổi bật: Hải Vân Quan được nhắc đến như điểm dừng chân có cổng gạch cổ, nơi du khách có thể ngắm toàn cảnh bờ biển Đà Nẵng từ trên cao. Một số review ghi nhận không khí yên bình và cảm giác thư giãn khi đứng trên đỉnh đèo. Tức là 1 trong các điểm dừng chân khi đi Đèo Hải Vân. Nên là nếu đi đèo Hài Vân thì có thể đề xuất đi Hải Vân Quan luôn."
+  },
+  {
+   "poi_id": "manual:cu-lao-cham",
+   "hours": "Mở 24/7",
+   "price_tier": "cheap",
+   "evidence_url": "https://nangtrip.com/activities/cu-lao-cham-quang-nam",
+   "note": "Thời gian mở cửa  Mở 24/7, tour từ 7:00 sáng. Vé: 70,000 VNĐ, tour lặn 700,000 VNĐ."
+  },
+  {
+   "poi_id": "osm:way/39268284",
+   "hours": "Mở 24/7",
+   "price_tier": "medium",
+   "evidence_url": "https://nangtrip.com/activities/chua-cau-hoi-an",
+   "note": "Thời gian mở cửa  Mở 24/7. Vé: 80,000 VNĐ (người Việt), 150,000 VNĐ (người nước ngoài, vé phố cổ)."
+  },
+  {
+   "poi_id": "osm:node/6099308589",
+   "hours": "17:00-23:00/1:00",
+   "price_tier": "free",
+   "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an",
+   "note": "Thời gian mở cửa  Mở 5:00 chiều đến 11:00 đêm, có thể đến 1:00 sáng mùa cao điểm. Vé: Miễn phí."
+  },
+  {
+   "poi_id": "osm:way/683416736",
+   "hours": "8:00 - 18:30",
+   "price_tier": "expensive",
+   "evidence_url": "https://sovaba.travel/blog/bai-viet-review-chi-tiet-cau-vang-ba-na-hills",
+   "note": "Khu du lịch Bà Nà Hills hoạt động quanh năm, nhưng giờ mở cửa cụ thể như sau (cập nhật 2026, có thể thay đổi do thời tiết): Cáp treo Bà Nà Hills: 8:00 - 22:00 hàng ngày (liên tục, không nghỉ trưa). Cầu Vàng và các điểm tham quan chính: 8:00 - 18:30 (tất cả các ngày trong tuần). Giá vé tham quan cầu Vàng Để tham quan Cầu Vàng, bạn cần mua vé cáp treo Bà Nà Hills. Vé này bao gồm cả phí vào cổng khu du lịch và quyền tham quan tất cả các điểm nổi bật trong khuôn viên như Cầu Vàng, Làng Pháp, Vườn hoa Le Jardin D’Amour và Fantasy Park.  Giá vé năm 2026 có sự thay đổi nhẹ theo mùa du lịch và đối tượng khách, với nhiều ưu đãi hấp dẫn cho du khách Việt Nam. Cụ thể như sau:  Vé cáp treo khứ hồi + vé vào cổng Người lớn (trên 1,4m): 950.000 VNĐ Trẻ em (1m – 1,4m): 750. 000 VNĐ Người Đà Nẵng / Người cao tuổi: 600.000 VNĐ (người lớn) và 500.000 VNĐ (trẻ em) Cư dân Đà Nẵng cần xuất trình CMND để được giảm giá. Trẻ em dưới 1m được miễn phí hoàn toàn.  Combo cáp treo + buffet trưa Người lớn: 1.250.000 VNĐ Trẻ em: 950.000 VNĐ Combo bao gồm bữa buffet trưa tại nhà hàng Hầm Rượu Debay, nơi nổi tiếng với không gian châu Âu cổ điển và thực đơn phong phú."
+  },
+  {
+   "poi_id": "osm:way/251397637",
+   "hours": "7:00-17:00",
+   "price_tier": "cheap",
+   "ticket_vnd": 35000,
+   "evidence_url": "https://hoianit.com/kham-pha-lang-rau-tra-que-thien-duong-rau-sach-giua-long-hoi-an/#:~:text=L%C3%A0ng%20rau%20Tr%C3%A0%20Qu%E1%BA%BF%20c%C3%A1ch%20ph%E1%BB%91%20c%E1%BB%95%20H%E1%BB%99i,%C4%83n%20v%C3%A0%20v%C3%AC%20sao%20UN%20Tourism%20ch%E1%BB%8Dn%20l%C3%A0ng.",
+   "note": "Làng rau Trà Quế cách phố cổ Hội An 3,2 km: đường đi xe máy, vé 35.000đ, giờ mở cửa, giờ vàng chụp ảnh, tour làm nông, lớp nấu ăn và vì sao UN Tourism chọn làng."
+  },
+  {
+   "poi_id": "osm:way/404714309",
+   "hours": "8:00-11:30 và 13:30-16:30 từ thứ Hai đến thứ Bảy",
+   "price_tier": "free",
+   "evidence_url": "https://www.vietnamtourism.com/vi/nha-tho-chinh-toa-a-nang-nha-tho-hong-gio-mo-cua-quy-inh",
+   "note": "Nhà thờ Chính tòa Đà Nẵng nằm tại 156 đường Trần Phú, quận Hải Châu, bờ tây sông Hàn, cách Chợ Hàn một quãng đi bộ ngắn. Vào cửa miễn phí. Dành 20 đến 30 phút cho riêng nhà thờ, hoặc 2 đến 3 giờ nếu kết hợp lộ trình đi bộ trung tâm. Khung giờ tham quan được công bố thường là khoảng 8:00-11:30 và 13:30-16:30 từ thứ Hai đến thứ Bảy, nhưng các nguồn chênh nhau 30 phút, nên hãy coi đây là giờ ước chừng. Bên trong không phải lúc nào cũng mở cửa cho khách tham quan ngoài giờ lễ. Tham dự một buổi lễ với tư cách khách tôn trọng là cách chắc chắn nhất để vào trong. Quy định trang phục: che vai, ngực và đầu gối. Mang theo một lớp áo mỏng trong thời tiết nóng. Các nguồn ghi chiều cao tháp là cả 70 m và 80 m. Thời gian xây dựng được ghi nhận là 1923 đến 1924, khánh thành ngày 14 tháng 9 năm 1924."
+  }
+ ],
+ "old_town": {
+  "parent": "osm:node/4601279489",
+  "include": [
+   "osm:way/565186618",
+   "osm:node/7127464285",
+   "osm:way/209494258"
+  ],
+  "exclude": []
+ }
+}

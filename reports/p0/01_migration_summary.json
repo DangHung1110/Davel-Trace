@@ -3,9 +3,9 @@
  "google_policy": "cach_ly",
  "v1_count": 742,
  "v1_meta_count": 745,
- "v2_count": 869,
+ "v2_count": 872,
  "status": {
-  "active": 845,
+  "active": 848,
   "review": 20,
   "excluded": 4
  },
@@ -16,11 +16,11 @@
   "day_market": 48,
   "viewpoint": 22,
   "religious": 94,
-  "outdoor_landmark": 62,
+  "outdoor_landmark": 64,
   "museum_indoor": 22,
   "paid_attraction": 48,
   "lodging": 76,
-  "beach": 23,
+  "beach": 24,
   "night_market": 6,
   "wellness": 77
  },
@@ -28,24 +28,24 @@
   "meal": 169,
   "nightlife": 91,
   "rest": 131,
-  "attraction": 325,
+  "attraction": 328,
   "base": 76,
   "wellness": 77
  },
  "zone": {
-  "trung_tam": 269,
+  "trung_tam": 270,
   "son_tra_my_khe": 230,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
-  "hoi_an": 123
+  "hoi_an": 125
  },
  "zone_roles": {
   "trung_tam": {
    "meal": 47,
    "nightlife": 31,
    "rest": 49,
-   "attraction": 97,
+   "attraction": 98,
    "base": 23,
    "wellness": 20
   },
@@ -80,7 +80,7 @@
    "rest": 4
   },
   "hoi_an": {
-   "attraction": 56,
+   "attraction": 58,
    "base": 1,
    "meal": 43,
    "rest": 18,
@@ -91,27 +91,27 @@
   "ngu_hanh_son": 21,
   "ba_na": 24,
   "bay_mau": 7,
-  "hoi_an_old_town": 23
+  "hoi_an_old_town": 25
  },
  "hours_verified_by": {
-  "inferred": 716,
-  "agent_web": 59,
+  "inferred": 712,
+  "agent_web": 66,
   "open_data": 92,
   "user": 2
  },
  "price_verified_by": {
-  "inferred": 824,
+  "inferred": 819,
   "user": 8,
-  "agent_web": 37
+  "agent_web": 45
  },
  "dwell_verified_by": {
-  "inferred": 831,
+  "inferred": 834,
   "user": 38
  },
- "legacy_hours_nonempty": 765,
+ "legacy_hours_nonempty": 768,
  "v1_hours_nonempty": 499,
- "legacy_price_band": 29,
- "legacy_free_entry": 180,
+ "legacy_price_band": 32,
+ "legacy_free_entry": 179,
  "hours_conflict": 6,
  "quarantined_pois": 659,
  "category_changes": 178,
@@ -197,5 +197,5 @@
   }
  ],
  "ticket_todo": 26,
- "osm_linked": 315
+ "osm_linked": 316
 }
