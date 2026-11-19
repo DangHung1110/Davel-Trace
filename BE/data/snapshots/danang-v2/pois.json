@@ -12,9 +12,9 @@
   "manual",
   "osm"
  ],
- "count": 873,
+ "count": 875,
  "count_by_status": {
-  "active": 829,
+  "active": 831,
   "excluded": 44
  },
  "count_by_category": {
@@ -24,39 +24,39 @@
   "day_market": 48,
   "viewpoint": 22,
   "religious": 94,
-  "outdoor_landmark": 64,
+  "outdoor_landmark": 65,
   "museum_indoor": 22,
   "paid_attraction": 49,
   "lodging": 76,
-  "beach": 25,
+  "beach": 26,
   "night_market": 5,
   "wellness": 77
  },
  "count_by_zone": {
   "trung_tam": 270,
-  "son_tra_my_khe": 231,
+  "son_tra_my_khe": 233,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 77,
- "applied_human_verify": 27,
+ "applied_decisions": 83,
+ "applied_human_verify": 28,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
- "count_new_pois": 131,
+ "count_new_pois": 133,
  "count_v1_pois": 742,
  "count_by_price_tier": {
   "medium": 327,
   "cheap": 226,
   "expensive": 19,
-  "free": 182,
+  "free": 184,
   "None": 84,
   "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 592,
-  "fixed": 182,
-  "unknown": 99
+  "safe_window": 593,
+  "fixed": 187,
+  "unknown": 95
  },
  "pois": [
   {
@@ -3008,8 +3008,10 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "10:00-17:30"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": [
      "07:30-17:30"
@@ -3094,12 +3096,12 @@
      "note": "name:lounge;type:Nhà hàng"
     },
     "hours": {
-     "source": "archetype:bar",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://sontraretreat.vn/",
+     "verified_at": "2026-11-19",
+     "note": "Website chính thức đọc trực tiếp có lịch 09:30-22:00 cả bảy ngày. PasGo ghi 08:00-21:00 cả tuần nhưng đã dừng nhận đặt chỗ; không có nghĩa nhà hàng đóng cửa. Theo yêu cầu chọn khung hẹp, hours là giao hai lịch 09:30-21:00, không phải giờ đóng cửa do chủ quán công bố. Kết quả tìm kiếm lưu cache của website từng hiện 10:00-22:00 (thứ Sáu 22:30); ưu tiên nội dung trang mở trực tiếp 09:30-22:00. Không coi khoảng giá món ăn là giá vé. Khi tính cả lịch Tripadvisor 10:00-22:00, khung cuối cùng chọn 10:00-21:00."
     },
     "price": {
      "source": "category_default:nightlife",
@@ -28716,15 +28718,17 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "07:30-17:00"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
     "tier": "medium",
-    "note": "Tham quan NL 100k; combo chơi 150k; ăn 150-400k; lều 550-600k; TE<1m3 50k"
+    "note": "Cổng du lịch thành phố, bài ngày 07/12/2017; giờ đọc được từ bản chỉ mục tìm kiếm, mở URL trực tiếp hiện chủ yếu khung trang tiếng Anh. VinWonders ghi 07:00-19:00 thứ Hai đến Chủ nhật, cả lễ Tết. Chọn khung hẹp 07:30-17:00; cần xác nhận lại trước khi coi là lịch hiện hành chắc chắn. ticket_vnd là vé cổng người lớn tham khảo 100.000đ từ VinWonders; trẻ em 50.000đ, trò chơi/thuê chòi tính riêng."
    },
    "dwell": {
     "p25": 120,
@@ -28800,20 +28804,20 @@
      "note": "name:khu du lich sinh thai"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://danangfantasticity.com/en/cung-kham-pha/khu-du-lich-sinh-thai-lai-thieu-da-nang",
+     "verified_at": "2026-11-19",
+     "note": "Cổng du lịch thành phố, bài ngày 07/12/2017; giờ đọc được từ bản chỉ mục tìm kiếm, mở URL trực tiếp hiện chủ yếu khung trang tiếng Anh. VinWonders ghi 07:00-19:00 thứ Hai đến Chủ nhật, cả lễ Tết. Chọn khung hẹp 07:30-17:00; cần xác nhận lại trước khi coi là lịch hiện hành chắc chắn. ticket_vnd là vé cổng người lớn tham khảo 100.000đ từ VinWonders; trẻ em 50.000đ, trò chơi/thuê chòi tính riêng."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://glamptrip.vn/place/lai-thieu-glamping-green-world-da-nang/",
-     "verified_at": null,
-     "note": "Tham quan NL 100k; combo chơi 150k; ăn 150-400k; lều 550-600k; TE<1m3 50k; VND ticket_vnd=100000, min_vnd=100000, max_vnd=100000, typical_vnd=100000"
+     "confidence": 0.55,
+     "evidence_url": "https://danangfantasticity.com/en/cung-kham-pha/khu-du-lich-sinh-thai-lai-thieu-da-nang",
+     "verified_at": "2026-11-19",
+     "note": "Cổng du lịch thành phố, bài ngày 07/12/2017; giờ đọc được từ bản chỉ mục tìm kiếm, mở URL trực tiếp hiện chủ yếu khung trang tiếng Anh. VinWonders ghi 07:00-19:00 thứ Hai đến Chủ nhật, cả lễ Tết. Chọn khung hẹp 07:30-17:00; cần xác nhận lại trước khi coi là lịch hiện hành chắc chắn. ticket_vnd là vé cổng người lớn tham khảo 100.000đ từ VinWonders; trẻ em 50.000đ, trò chơi/thuê chòi tính riêng.; VND ticket_vnd=100000, min_vnd=100000, max_vnd=100000, typical_vnd=100000"
     },
     "dwell": {
      "source": "dwell_table_v2:eco_park",
@@ -28860,8 +28864,10 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "09:00-21:00"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
@@ -28944,12 +28950,12 @@
      "note": "name:wonderland;type:Sân chơi trong nhà"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://www.greensm.com/vn-vi/news/khu-vui-choi-da-nang",
+     "verified_at": "2026-11-19",
+     "note": "Đúng địa chỉ 78B Quang Trung. Green SM ghi thứ Hai/Chủ nhật 08:00-22:00; thứ Ba-Sáu 08:30-22:00; thứ Bảy 09:00-22:00. MIA ghi ngày thường 08:00-21:00, cuối tuần 08:00-22:00. Giao bảo thủ mọi ngày và giữa các nguồn là 09:00-21:00; không phải giờ nguyên văn của một nguồn. Không chốt một ticket_vnd vì giá theo ngày và nguồn lệch: Green SM 40.000đ/bé ngày thường, 60.000đ cuối tuần/lễ; Khamphadanang ghi 60.000/80.000đ. Không coi vé trẻ em là chi tiêu một người lớn."
     },
     "price": {
      "source": "web",
@@ -29012,7 +29018,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": "Vào cổng free; powercard 15-20k; máy lẻ từ 4k; nhà phao 45k"
+    "note": "Helio Kids/Play tạm ngưng từ 05/09/2025 để nâng cấp (danangfantasticity 09/09/2025); nay chuyển mô hình Art Mall — giờ toàn tổ hợp chưa có nguồn, để unknown."
    },
    "dwell": {
     "p25": 60,
@@ -30314,7 +30320,7 @@
    "status": "active",
    "status_reason": null,
    "zone": "son_tra_my_khe",
-   "cluster_id": null,
+   "cluster_id": "bai_rang",
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
@@ -107888,8 +107894,8 @@
   },
   {
    "poi_id": "manual:son-tra-bai-da-den",
-   "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà",
-   "name_raw": "Bãi Đá Đen (Bãi Obama) Sơn Trà",
+   "name": "Bãi Đá Đen Sơn Trà",
+   "name_raw": "Bãi Đá Đen Sơn Trà",
    "name_en": null,
    "lat": 16.1474562,
    "lon": 108.2338043,
@@ -107912,7 +107918,275 @@
    },
    "price": {
     "tier": "free",
-    "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Toạ độ nangtrip 16.1474562,108.2338043."
+    "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Bỏ alias 'Bãi Obama': trên OSM 'Obama' trỏ bãi khác ~9 km phía đông (geo_codex). Toạ độ nangtrip 16.1474562,108.2338043."
+   },
+   "dwell": {
+    "p25": 45,
+    "p50": 90,
+    "p75": 150
+   },
+   "tags": {
+    "indoor": null,
+    "effort": 2,
+    "kid_friendly": null,
+    "weather_sensitive": false
+   },
+   "time_profile": "sun_anchored_beach",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.6,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:beach"
+    },
+    "hours": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://nangtrip.com/activities/bai-da-den",
+     "verified_at": "2026-11-19",
+     "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Bỏ alias 'Bãi Obama': trên OSM 'Obama' trỏ bãi khác ~9 km phía đông (geo_codex). Toạ độ nangtrip 16.1474562,108.2338043."
+    },
+    "price": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://nangtrip.com/activities/bai-da-den",
+     "verified_at": "2026-11-19",
+     "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Bỏ alias 'Bãi Obama': trên OSM 'Obama' trỏ bãi khác ~9 km phía đông (geo_codex). Toạ độ nangtrip 16.1474562,108.2338043.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:beach",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.6"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "osm:way/140401174",
+   "name": "Hồ Xanh Sơn Trà",
+   "name_raw": "Hồ Xanh Sơn Trà",
+   "name_en": null,
+   "lat": 16.098764,
+   "lon": 108.2677282,
+   "category": "outdoor_landmark",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "05:00-22:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": "Hồ tự nhiên, nơi công cộng: mức free và khung giờ an toàn lấy theo luật nơi công cộng (inferred); chưa có nguồn tin cậy về vé/giờ (người dùng 19/11)."
+   },
+   "dwell": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "tags": {
+    "space": "unknown",
+    "rain_protection": "unknown",
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "good_times": [
+     "morning"
+    ],
+    "time_budget": [
+     "full-day"
+    ],
+    "indoor": null,
+    "effort": 2,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "outdoor_heat_sensitive",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.5,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": "way/140401174",
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "location": {
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:outdoor_landmark"
+    },
+    "hours": {
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "rule_free_public",
+     "verified_by": "inferred",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:outdoor_urban",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:son-tra-bai-rang",
+   "name": "Bãi Rạng Sơn Trà",
+   "name_raw": "Bãi Rạng Sơn Trà",
+   "name_en": null,
+   "lat": 16.1056,
+   "lon": 108.29177,
+   "category": "beach",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": "bai_rang",
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "09:00-18:00"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": "Không vé vào; PHÍ BẮT BUỘC gửi xe ~10.000đ; thuê chòi ~300.000đ/chòi 6 người (tuỳ chọn)."
    },
    "dwell": {
     "p25": 45,
@@ -107969,20 +108243,20 @@
      "note": "curated_osm:beach"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://nangtrip.com/activities/bai-da-den",
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "user paste 2026-11-19",
      "verified_at": "2026-11-19",
-     "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Toạ độ nangtrip 16.1474562,108.2338043."
+     "note": "human_verify_v2_20261119_fix.json; 9:00-18:00 (thông tin người dùng cung cấp)"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://nangtrip.com/activities/bai-da-den",
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "user paste 2026-11-19",
      "verified_at": "2026-11-19",
-     "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Toạ độ nangtrip 16.1474562,108.2338043.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
+     "note": "human_verify_v2_20261119_fix.json; VND 0"
     },
     "dwell": {
      "source": "dwell_table_v2:beach",
@@ -111445,7 +111719,7 @@
    },
    "price": {
     "tier": "included",
-    "note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
+    "note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé. Nhà 66 Bạch Đằng tạm đóng sửa chữa từ 09/3/2026; chương trình chuyển sang Hội trường Quảng trường Sông Hoài, 01 Cao Hồng Lãnh (hoianheritage 11/3/2026). Suất cũ 10:15 và 15:15 — chưa xác nhận mở lại, để unknown."
    },
    "dwell": {
     "p25": 45,
@@ -111577,15 +111851,19 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
-    "closed_days": [],
+    "open": [
+     "17:00-21:30"
+    ],
+    "kind": "fixed",
+    "closed_days": [
+     "Tu"
+    ],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
     "tier": "expensive",
-    "note": "Show thực cảnh Ký ức Hội An 600.000–1.200.000 tuỳ hạng ghế, diễn buổi tối."
+    "note": "Vé ECO người lớn ≥140cm 600.000đ gồm vào công viên + show (ticketgo); HIGH/VIP đắt hơn. Show 20:00-21:00, nghỉ thứ Ba; vào trước 15-20 phút."
    },
    "dwell": {
     "p25": 90,
@@ -111657,20 +111935,20 @@
      "note": "curated_osm:paid_attraction"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.55,
+     "evidence_url": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
+     "verified_at": "2026-11-19",
+     "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào côn"
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
      "confidence": 0.55,
-     "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/bo-tui-kinh-nghiem-du-lich-hoi-an-2-ngay-1-dem-chi-tiet-tu-a-z-25220",
-     "verified_at": "2026-11-18",
-     "note": "Show thực cảnh Ký ức Hội An 600.000–1.200.000 tuỳ hạng ghế, diễn buổi tối.; VND ticket_vnd=600000, min_vnd=600000, max_vnd=1200000, typical_vnd=600000"
+     "evidence_url": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
+     "verified_at": "2026-11-19",
+     "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào côn; VND ticket_vnd=600000, min_vnd=600000, max_vnd=1200000, typical_vnd=600000"
     },
     "dwell": {
      "source": "dwell_table_v2:evening_show",

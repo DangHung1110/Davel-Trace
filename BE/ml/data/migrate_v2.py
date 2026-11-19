@@ -154,6 +154,7 @@ def build_hours(p, category, archetype, hours_web, policy, access, web_item=None
         chosen, pv = every, prov("user_review", "user")
     elif wi_spans:
         chosen = wi_spans
+        closed_days = list(web_item.get("closed_days") or []) or None
         pv = prov("web", "agent_web", evidence_url=web_item.get("evidence_url"),
                   note=web_item.get("note"), verified_at=web_item.get("checked_at"),
                   confidence=web_item.get("confidence", 0.6))
@@ -778,7 +779,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
 
     new_pois, new_cats, old_town, new_prices, new_wd, skipped_new = load_new_pois(sources_dir, pois_v1)
     for row in new_prices:
-        web_tickets[row["poi_id"]] = row
+        # agent_web_* (later, curated) wins key-by-key; keep new_pois min/max range
+        web_tickets[row["poi_id"]] = {**row, **web_tickets.get(row["poi_id"], {})}
     for pid, qid in new_wd.items():
         popularity.setdefault(pid, {})["wikidata"] = qid
     v1_ids = {p["poi_id"] for p in pois_v1}

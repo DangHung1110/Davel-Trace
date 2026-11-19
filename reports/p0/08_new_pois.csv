@@ -2,7 +2,9 @@ poi_id,name,category,zone,cluster_id,requires_ticket_of,hours,hours_by
 manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,hoi_an,hoi_an_old_town,,00:00-23:59,agent_web
 manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,hoi_an,hoi_an_old_town,,19:00-21:00,agent_web
 osm:way/630377259,Bãi biển Tiên Sa,beach,trung_tam,,,08:00-18:00,agent_web
-manual:son-tra-bai-da-den,Bãi Đá Đen (Bãi Obama) Sơn Trà,beach,son_tra_my_khe,,,00:00-23:59,agent_web
+manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,son_tra_my_khe,,,00:00-23:59,agent_web
+osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,son_tra_my_khe,,,05:00-22:00,inferred
+manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,son_tra_my_khe,,,05:00-22:00,inferred
 osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,hoi_an_old_town,Phố cổ Hội An,05:00-22:00,inferred
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"07:30-11:30, 13:30-17:30",open_data
 osm:way/320722329,Hội quán Phúc Kiến,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
@@ -28,7 +30,7 @@ osm:way/35952504,Chợ Hội An,day_market,hoi_an,hoi_an_old_town,,08:00-11:00,i
 osm:node/6099308589,Chợ đêm Hội An,night_market,hoi_an,hoi_an_old_town,,18:00-22:00,open_data
 osm:way/35952591,Chợ vải Hội An,day_market,hoi_an,,,06:00-19:00,open_data
 osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,hoi_an,hoi_an_old_town,Phố cổ Hội An,,inferred
-osm:way/14131302,Công viên Ấn tượng Hội An (show Ký ức Hội An),paid_attraction,hoi_an,,,,inferred
+osm:way/14131302,Công viên Ấn tượng Hội An (show Ký ức Hội An),paid_attraction,hoi_an,,,17:00-21:30,agent_web
 osm:node/5513474821,Công viên Đất nung Thanh Hà,paid_attraction,hoi_an,,,08:30-17:30,open_data
 osm:node/4171964390,Làng gốm Thanh Hà,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
 osm:node/10709738006,Làng mộc Kim Bồng,outdoor_landmark,hoi_an,,,05:00-22:00,inferred

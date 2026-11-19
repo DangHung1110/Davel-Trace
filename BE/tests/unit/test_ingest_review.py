@@ -72,3 +72,18 @@ class TestIngestReview(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_final_policies_map_to_decisions():
+    export = {"schema": "review_v21", "final": True, "exported_at": "2026-11-20",
+              "policies": {"cooking": {"choice": 1, "ids": ["a", "b"]},
+                           "voc": {"choice": 0, "ids": ["v"]},
+                           "helio": {"choice": 0, "ids": ["h"]}},
+              "auto_review": [{"poi_id": "x", "name": "X", "agree": False, "fix": "08:00-17:00"}],
+              "verify": [{"poi_id": "m", "hours": "07:00-17:30", "evidence_url": "https://e.x", "closed_days": ["Tu"]}]}
+    decisions, verify = convert(export)
+    assert decisions["items"]["a"]["status"] == "excluded"
+    assert "v" not in decisions["items"]
+    assert decisions["items"]["h"]["status"] == "excluded"
+    assert decisions["auto_disagree"][0]["poi_id"] == "x"
+    assert verify["items"][0]["verified_by"] == "human" and verify["items"][0]["closed_days"] == ["Tu"]

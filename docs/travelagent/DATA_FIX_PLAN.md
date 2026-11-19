@@ -150,11 +150,13 @@
 | 19/11 | Trang duyệt HTML + ingest JSON | `reports/p0/review_v21.html`, `BE/tools/ingest_review.py` |
 | 19/11 | **Duyệt vòng 1** (export người dùng, ảnh #6–#11, vé phố cổ Hội An, tách Sơn Trà/Bạch Đằng/Hải Vân, gộp Linh Ứng) | `reports/p0/14_review_round1.md`; 872 POI, review 1; ma trận 789 |
 | 19/11 | Duyệt vòng 1b: VỌC, Hải Vân Quan (giờ + cụm hai_van), Thủy Vân Sơn xóa, Bãi Đá Đen | 873 POI, review 0, **G1–G5 + rule 12 xanh**; còn Bãi Rạng, Hồ Xanh |
+| 19/11 | Vòng 1c: Hồ Xanh (OSM way/140401174), Bãi Rạng (manual, cụm `bai_rang` với KDL Suối Rạng), bỏ alias "Bãi Obama" | 875 POI, ma trận 792, gate xanh; `reports/p0/14_review_round1.md` mục Vòng 1c |
 
-**Việc mở tiếp theo:**
-- VỌC Glamping (review).
-- Bãi Đá Đen, Bãi Rạng, Hồ Xanh: thiếu toạ độ.
-- Data contract P1 (mục 3):
-  - Opening-hours: theo mùa, ngày ngoại lệ, suất diễn.
-  - Ticket: vé 80k/120k, số ô, phí bắt buộc.
-  - Tổng chi phí phải đếm số khoản "chưa biết", không coi chưa biết là 0.
+| 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
+
+**Việc mở tiếp theo (sau vòng 1c):**
+- Giờ do người kiểm: 24/50 (tiêu chí mục 4) → cần duyệt thêm ~26 điểm tiêu biểu.
+- Giờ `unknown` ngoài lưu trú: 19 → 15. Codex (t15) tìm được 4 điểm (`agent_web_2026-11-19c.json`). Còn 12 lớp nấu ăn (theo lịch đặt, cần kiểu giờ `by_booking` ở P1), Helio (đang nâng cấp) và Nhà biểu diễn 66 Bạch Đằng (tạm đóng 3/2026).
+- 76 lưu trú: giá null + giờ unknown — chủ ý (không xếp vào lịch tham quan), cần người dùng chốt.
+- Data contract P1 (mục 3): giờ theo mùa/ngày ngoại lệ/suất diễn; vé nhiều mức 80k/120k; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0. Hiện 69 POI chỉ có ở `price.note`.
+- Mở PR `feat/p0-data-v2` → `dev`.

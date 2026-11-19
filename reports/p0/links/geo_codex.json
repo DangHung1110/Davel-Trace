@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Bãi Đá Đen",
+    "lat": 16.147561074852817,
+    "lon": 108.23380461450425,
+    "source": "https://travelshelper.com/vietnam/da-nang/black-rock-beach/",
+    "quote": "\"latitude\":16.147561074852817,\"longitude\":108.23380461450425",
+    "confidence": "medium",
+    "note": "Tọa độ trong GeoCoordinates và data-lat/data-lon của HTML, tại bờ tây bắc Sơn Trà. Snapshot hiện đã có manual:son-tra-bai-da-den gần như cùng vị trí: nghi trùng, không nên thêm mới. Không khẳng định Bãi Đá Đen đồng nhất Bãi Obama: Nominatim với tên Obama trả Bãi Đá osm:node/13040467529 ở 16.0988527,108.3012745 phía đông; POI này cũng đã có trong snapshot. Hai vị trí cách nhau nhiều km; cần duyệt lại alias. Chỉ xác minh tọa độ, không xác nhận quyền tiếp cận hay giờ mở cửa.",
+    "additional_evidence": [
+      {
+        "source": "https://vietpowertravel.com/blog/black-stone-beach.html",
+        "coordinate_text": "16.147084, 108.233289",
+        "note": "Cặp tọa độ bổ trợ đọc từ HTML; cùng khu vực phía tây bắc."
+      },
+      {
+        "source": "https://nominatim.openstreetmap.org/search?q=Obama&format=jsonv2&viewbox=108.18%2C16.16%2C108.35%2C16.08&bounded=1&limit=4",
+        "osm_id": "osm:node/13040467529",
+        "lat": 16.0988527,
+        "lon": 108.3012745,
+        "note": "Kết quả khác vị trí; chỉ dùng cảnh báo alias, không thay tọa độ chính."
+      }
+    ],
+    "crs": "WGS84 / EPSG:4326",
+    "bbox_checked": true,
+    "checked_at": "2026-11-19",
+    "nearest_existing": {
+      "poi_id": "manual:son-tra-bai-da-den",
+      "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà",
+      "dist_m": 12,
+      "category": "beach"
+    },
+    "related_existing": [
+      {
+        "poi_id": "osm:node/13040467529",
+        "name": "Bãi Đá",
+        "dist_m": 9015,
+        "category": "beach"
+      },
+      {
+        "poi_id": "manual:son-tra-bai-da-den",
+        "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà",
+        "dist_m": 12,
+        "category": "beach"
+      }
+    ],
+    "lookup_notes": "Overpass: overpass-api.de HTTP 502; overpass.kumi.systems và overpass.private.coffee timeout. Nominatim truy vấn trong bbox: Bãi Đá Đen/Bai Da Den và Bãi Rạng/Bai Rang trả []; Hồ Xanh và Obama có kết quả. Khoảng cách haversine, bán kính Trái Đất 6371000 m, so snapshot tại thời điểm ghi file."
+  },
+  {
+    "name": "Bãi Rạng",
+    "lat": 16.1056,
+    "lon": 108.29177,
+    "source": "https://vietnam.worldplaces.me/view-place/21371614-bai-rang-da-nang.html",
+    "quote": "Bãi Rạng, Đà Nẵng; 16.1056 , 108.29177 (GPS Coordinates)",
+    "confidence": "medium",
+    "note": "Nguồn trang địa điểm, chưa có OSM ID khớp chính xác qua truy vấn tên. Gần Khu Du lịch Sinh thái Suối Rạng: có thể cùng khu bãi biển nhưng chưa đủ kết luận là cùng thực thể với cơ sở kinh doanh. Biển Rạng Sơn Trà trong snapshot là restaurant ở vị trí khác, không lấy tọa độ nhà hàng thay bãi biển.",
+    "crs": "WGS84 / EPSG:4326",
+    "bbox_checked": true,
+    "checked_at": "2026-11-19",
+    "nearest_existing": {
+      "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
+      "name": "Khu Du lịch Sinh thái Suối Rạng",
+      "dist_m": 166,
+      "category": "paid_attraction"
+    },
+    "related_existing": [
+      {
+        "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
+        "name": "Biển Rạng Sơn Trà",
+        "dist_m": 4765,
+        "category": "restaurant"
+      },
+      {
+        "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
+        "name": "Khu Du lịch Sinh thái Suối Rạng",
+        "dist_m": 166,
+        "category": "paid_attraction"
+      }
+    ],
+    "lookup_notes": "Overpass: overpass-api.de HTTP 502; overpass.kumi.systems và overpass.private.coffee timeout. Nominatim truy vấn trong bbox: Bãi Đá Đen/Bai Da Den và Bãi Rạng/Bai Rang trả []; Hồ Xanh và Obama có kết quả. Khoảng cách haversine, bán kính Trái Đất 6371000 m, so snapshot tại thời điểm ghi file."
+  },
+  {
+    "name": "Hồ Xanh",
+    "lat": 16.098764,
+    "lon": 108.2677282,
+    "source": "osm:way/140401174",
+    "source_url": "https://nominatim.openstreetmap.org/search?q=H%E1%BB%93+Xanh&format=jsonv2&viewbox=108.18%2C16.16%2C108.35%2C16.08&bounded=1&limit=5",
+    "quote": "\"osm_type\":\"way\",\"osm_id\":140401174,\"lat\":\"16.0987640\",\"lon\":\"108.2677282\",\"category\":\"natural\",\"type\":\"water\"",
+    "confidence": "high",
+    "note": "Nominatim trả Hồ Xanh Đà Nẵng, Phường Sơn Trà; natural=water. Tọa độ đại diện đối tượng mặt nước, chưa phải lối vào hay điểm dừng xe. Nhà Hàng Hồ Xanh trong snapshot ở Thanh Khê là thực thể khác.",
+    "crs": "WGS84 / EPSG:4326",
+    "bbox_checked": true,
+    "checked_at": "2026-11-19",
+    "nearest_existing": {
+      "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
+      "name": "Sơn Trà Marina",
+      "dist_m": 229,
+      "category": "restaurant"
+    },
+    "related_existing": [
+      {
+        "poi_id": "ChIJ37F4OvoZQjERcSRyXX_s91c",
+        "name": "Nhà Hàng Hồ Xanh - Hồ Xanh Restaurant",
+        "dist_m": 7100,
+        "category": "restaurant"
+      }
+    ],
+    "lookup_notes": "Overpass: overpass-api.de HTTP 502; overpass.kumi.systems và overpass.private.coffee timeout. Nominatim truy vấn trong bbox: Bãi Đá Đen/Bai Da Den và Bãi Rạng/Bai Rang trả []; Hồ Xanh và Obama có kết quả. Khoảng cách haversine, bán kính Trái Đất 6371000 m, so snapshot tại thời điểm ghi file."
+  }
+]

@@ -1,0 +1,43 @@
+{
+ "about": "Giờ mở cửa có nguồn cho paid_attraction/nightlife đang 'unknown' (Codex pane t15, đọc web, 2026-11-19; reports/p0/links/hours_codex.json). Nguồn lệch -> giao khung hẹp. verified_by=agent_web.",
+ "checked_at": "2026-11-19",
+ "items": [
+  {
+   "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
+   "name": "Son Tra Retreat - Garden Lounge & Eatery",
+   "hours": "10:00-21:00",
+   "confidence": 0.55,
+   "evidence_url": "https://sontraretreat.vn/",
+   "note": "Website chính thức đọc trực tiếp có lịch 09:30-22:00 cả bảy ngày. PasGo ghi 08:00-21:00 cả tuần nhưng đã dừng nhận đặt chỗ; không có nghĩa nhà hàng đóng cửa. Theo yêu cầu chọn khung hẹp, hours là giao hai lịch 09:30-21:00, không phải giờ đóng cửa do chủ quán công bố. Kết quả tìm kiếm lưu cache của website từng hiện 10:00-22:00 (thứ Sáu 22:30); ưu tiên nội dung trang mở trực tiếp 09:30-22:00. Không coi khoảng giá món ăn là giá vé. Khi tính cả lịch Tripadvisor 10:00-22:00, khung cuối cùng chọn 10:00-21:00."
+  },
+  {
+   "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
+   "name": "Khu Du Lịch Sinh Thái Lái Thiêu",
+   "hours": "07:30-17:00",
+   "confidence": 0.55,
+   "evidence_url": "https://danangfantasticity.com/en/cung-kham-pha/khu-du-lich-sinh-thai-lai-thieu-da-nang",
+   "note": "Cổng du lịch thành phố, bài ngày 07/12/2017; giờ đọc được từ bản chỉ mục tìm kiếm, mở URL trực tiếp hiện chủ yếu khung trang tiếng Anh. VinWonders ghi 07:00-19:00 thứ Hai đến Chủ nhật, cả lễ Tết. Chọn khung hẹp 07:30-17:00; cần xác nhận lại trước khi coi là lịch hiện hành chắc chắn. ticket_vnd là vé cổng người lớn tham khảo 100.000đ từ VinWonders; trẻ em 50.000đ, trò chơi/thuê chòi tính riêng.",
+   "ticket_vnd": 100000
+  },
+  {
+   "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
+   "name": "DD WONDERLAND",
+   "hours": "09:00-21:00",
+   "confidence": 0.55,
+   "evidence_url": "https://www.greensm.com/vn-vi/news/khu-vui-choi-da-nang",
+   "note": "Đúng địa chỉ 78B Quang Trung. Green SM ghi thứ Hai/Chủ nhật 08:00-22:00; thứ Ba-Sáu 08:30-22:00; thứ Bảy 09:00-22:00. MIA ghi ngày thường 08:00-21:00, cuối tuần 08:00-22:00. Giao bảo thủ mọi ngày và giữa các nguồn là 09:00-21:00; không phải giờ nguyên văn của một nguồn. Không chốt một ticket_vnd vì giá theo ngày và nguồn lệch: Green SM 40.000đ/bé ngày thường, 60.000đ cuối tuần/lễ; Khamphadanang ghi 60.000/80.000đ. Không coi vé trẻ em là chi tiêu một người lớn."
+  },
+  {
+   "poi_id": "osm:way/14131302",
+   "name": "Công viên Ấn tượng Hội An (show Ký ức Hội An)",
+   "hours": "17:00-21:30",
+   "confidence": 0.55,
+   "evidence_url": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
+   "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào côn",
+   "closed_days": [
+    "Tu"
+   ],
+   "ticket_vnd": 600000
+  }
+ ]
+}

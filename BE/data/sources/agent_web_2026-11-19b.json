@@ -2,48 +2,107 @@
  "about": "Giờ/giá đọc từ link người dùng đưa + trang liên quan (Claude, WebFetch, 2026-11-19). verified_by=agent_web: đã mở và đọc trang, chưa kiểm tại chỗ. Khi các nguồn lệch nhau lấy khung hẹp hơn (an toàn) và ghi rõ trong note.",
  "checked_at": "2026-11-19",
  "items": [
-  {"poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4", "name": "Chùa Linh Ứng Sơn Trà", "ticket_vnd": 0, "free_entry": true,
-   "hours": "06:30-17:30", "confidence": 0.6,
+  {
+   "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+   "name": "Chùa Linh Ứng Sơn Trà",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "06:30-17:30",
+   "confidence": 0.6,
    "note": "Miễn phí, bãi xe miễn phí, tượng Quan Âm 67m leo được 17 tầng (nangtrip chua-linh-ung + tuong-quan-the-am-bo-tat). Giờ lệch: 06:00-21:00 (nangtrip mô tả) / 06:30-17:30 (widget nangtrip, xedulichdanangchatluong) -> lấy 06:30-17:30.",
-   "evidence_url": "https://nangtrip.com/activities/chua-linh-ung"},
-  {"poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo", "name": "Phố đi bộ Bạch Đằng", "ticket_vnd": 0, "free_entry": true,
-   "hours": "15:00-23:59", "confidence": 0.6,
+   "evidence_url": "https://nangtrip.com/activities/chua-linh-ung"
+  },
+  {
+   "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
+   "name": "Phố đi bộ Bạch Đằng",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "15:00-23:59",
+   "confidence": 0.6,
    "note": "Bờ tây sông Hàn, từ cầu Rồng tới cầu Trần Thị Lý (~1,2 km), 15:00-0:00 hằng ngày, đẹp nhất 18:30-21:30, đông thứ Sáu-Chủ nhật. Không phải chợ đêm (chợ đêm gần đó: Chợ Đêm Sơn Trà bên kia cầu Rồng; Chợ đêm An Thượng ở Ngũ Hành Sơn).",
-   "evidence_url": "https://paracelresort.com/pho-di-bo-bach-dang-da-nang-gio-mo-cua-vi-tri-co-gi-choi-va-kinh-nghiem-di-thuc-te/"},
-  {"poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c", "name": "Chợ Đêm An Thượng",
-   "hours": "18:00-23:00", "confidence": 0.6,
+   "evidence_url": "https://paracelresort.com/pho-di-bo-bach-dang-da-nang-gio-mo-cua-vi-tri-co-gi-choi-va-kinh-nghiem-di-thuc-te/"
+  },
+  {
+   "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+   "name": "Chợ Đêm An Thượng",
+   "hours": "18:00-23:00",
+   "confidence": 0.6,
    "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00.",
-   "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong"},
-  {"poi_id": "osm:node/6346486685", "name": "Cây Đa Ngàn Năm Sơn Trà", "ticket_vnd": 0, "free_entry": true,
-   "hours": "00:00-23:59", "confidence": 0.6,
+   "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong"
+  },
+  {
+   "poi_id": "osm:node/6346486685",
+   "name": "Cây Đa Ngàn Năm Sơn Trà",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "00:00-23:59",
+   "confidence": 0.6,
    "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong).",
-   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"},
-  {"poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk", "name": "Nhất Lâm Thủy Trang Trà", "ticket_vnd": 10000,
-   "hours": "06:00-18:00", "confidence": 0.6,
+   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"
+  },
+  {
+   "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
+   "name": "Nhất Lâm Thủy Trang Trà",
+   "ticket_vnd": 10000,
+   "hours": "06:00-18:00",
+   "confidence": 0.6,
    "note": "Vé 10.000đ/người, gửi xe 5.000đ/xe (bắt buộc nếu đi xe), 6h-18h.",
-   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"},
-  {"poi_id": "osm:way/630377259", "name": "Bãi biển Tiên Sa", "ticket_vnd": 25000,
-   "hours": "08:00-18:00", "confidence": 0.6,
+   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"
+  },
+  {
+   "poi_id": "osm:way/630377259",
+   "name": "Bãi biển Tiên Sa",
+   "ticket_vnd": 25000,
+   "hours": "08:00-18:00",
+   "confidence": 0.6,
    "note": "Bãi cát cuối đường Yết Kiêu (Cảng Tiên Sa), 25.000đ/người đã gồm gửi xe, 8h-18h.",
-   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"},
-  {"poi_id": "osm:node/5286977425", "name": "Công viên Suối khoáng nóng Núi Thần Tài", "ticket_vnd": 480000,
+   "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/"
+  },
+  {
+   "poi_id": "osm:node/5286977425",
+   "name": "Công viên Suối khoáng nóng Núi Thần Tài",
+   "ticket_vnd": 480000,
    "confidence": 0.6,
    "note": "Vé 480.000đ (trẻ ≤99cm miễn phí) gồm công viên nước, tắm khoáng, Đền Thần Tài, công viên khủng long; tắm bùn riêng +100.000đ (tuỳ chọn). Gói trên trang là vé buổi chiều 14:00-17:30 (vào muộn nhất 15:00) — giờ cả ngày chưa có nguồn nên chưa ghi.",
-   "evidence_url": "https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang"},
-  {"poi_id": "manual:hoi-an-pho-di-bo-hoa-dang", "name": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
-   "ticket_vnd": 0, "free_entry": true, "hours": "00:00-23:59", "confidence": 0.55,
+   "evidence_url": "https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang"
+  },
+  {
+   "poi_id": "manual:hoi-an-pho-di-bo-hoa-dang",
+   "name": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "00:00-23:59",
+   "confidence": 0.55,
    "note": "Dạo phố, chụp tường vàng, thả hoa đăng: không cần vé (hoa đăng tự mua). Đẹp nhất tối 18:00-21:30, thả hoa đăng ~20-21h. Vào trong di tích mới cần vé phố cổ.",
-   "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an"},
-  {"poi_id": "manual:hoi-an-bai-choi", "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
-   "ticket_vnd": 0, "free_entry": true, "hours": "19:00-21:00", "confidence": 0.5,
+   "evidence_url": "https://nangtrip.com/activities/cho-dem-hoi-an"
+  },
+  {
+   "poi_id": "manual:hoi-an-bai-choi",
+   "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "19:00-21:00",
+   "confidence": 0.5,
    "note": "Diễn 19h mọi ngày tại Vườn tượng An Hội; xem miễn phí, mua thẻ bài 20.000đ/thẻ nếu chơi (mia.vn 12/05/2024). Giờ kết thúc chưa có nguồn — 21:00 là ước lượng.",
-   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-bai-choi-hoi-an-15527"},
-  {"poi_id": "manual:son-tra-bai-da-den", "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà", "ticket_vnd": 0, "free_entry": true,
-   "hours": "00:00-23:59", "confidence": 0.55,
-   "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Toạ độ nangtrip 16.1474562,108.2338043.",
-   "evidence_url": "https://nangtrip.com/activities/bai-da-den"},
-  {"poi_id": "manual:hai-van-quan", "name": "Hải Vân Quan", "ticket_vnd": 70000, "confidence": 0.6,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-bai-choi-hoi-an-15527"
+  },
+  {
+   "poi_id": "manual:son-tra-bai-da-den",
+   "name": "Bãi Đá Đen Sơn Trà",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "00:00-23:59",
+   "confidence": 0.55,
+   "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Bỏ alias 'Bãi Obama': trên OSM 'Obama' trỏ bãi khác ~9 km phía đông (geo_codex). Toạ độ nangtrip 16.1474562,108.2338043.",
+   "evidence_url": "https://nangtrip.com/activities/bai-da-den"
+  },
+  {
+   "poi_id": "manual:hai-van-quan",
+   "name": "Hải Vân Quan",
+   "ticket_vnd": 70000,
+   "confidence": 0.6,
    "note": "70.000đ/người/lượt (khách VN và nước ngoài), miễn phí trẻ <13 tuổi, giảm 50% cư dân Huế/Đà Nẵng, người cao tuổi…; nghị quyết HĐND Huế 22/5, hiệu lực tới hết 2028 (khamphahue); nangtrip cũng ghi ~70.000đ. GIỜ MỞ CỬA: chưa nguồn nào nêu. Điểm dừng chân trên Đèo Hải Vân — đi đèo thì đề xuất ghé luôn.",
-   "evidence_url": "https://khamphahue.com.vn/en-us/Hue-24h/Travel/tid/Hue-Approves-Entry-Fee-for-Hai-Van-Gate-National-Relic.html/pid/18947/cid/513"}
+   "evidence_url": "https://khamphahue.com.vn/en-us/Hue-24h/Travel/tid/Hue-Approves-Entry-Fee-for-Hai-Van-Gate-National-Relic.html/pid/18947/cid/513"
+  }
  ]
 }

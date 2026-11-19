@@ -1932,7 +1932,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "10:00-21:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -18122,7 +18122,9 @@
     "price_band": "medium"
    },
    "hours_v20": {
-    "spans": [],
+    "spans": [
+     "07:30-17:00"
+    ],
     "weekly": null,
     "archetype_default": [],
     "safe_windows": []
@@ -18215,7 +18217,9 @@
     "price_band": "cheap"
    },
    "hours_v20": {
-    "spans": [],
+    "spans": [
+     "09:00-21:00"
+    ],
     "weekly": null,
     "archetype_default": [],
     "safe_windows": []
@@ -65716,7 +65720,7 @@
    "osm_evidence": null,
    "added_in": "v2.0-p0b",
    "requires_ticket_of_name": null,
-   "name_vi": "Bãi Đá Đen (Bãi Obama) Sơn Trà",
+   "name_vi": "Bãi Đá Đen Sơn Trà",
    "category_evidence": [
     "curated_osm:beach"
    ],
@@ -65743,6 +65747,161 @@
     "typical_vnd": 0,
     "band": "re",
     "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "beach",
+    "v1": {
+     "p25": 30,
+     "p50": 60,
+     "p75": 90
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": null,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": []
+  },
+  "osm:way/140401174": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-19",
+   "verified": false,
+   "visit_min": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 2,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": true,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Hồ Xanh Sơn Trà",
+   "osm_evidence": {
+    "osm": "way/140401174",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Hồ Xanh Sơn Trà"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Hồ Xanh Sơn Trà",
+   "category_evidence": [
+    "curated_osm:outdoor_landmark"
+   ],
+   "free_entry": true,
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "05:00-22:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "00:00-23:59"
+    ],
+    "safe_windows": [
+     "05:00-22:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": null,
+    "free_entry": true,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "outdoor_urban",
+    "v1": {
+     "p25": 140,
+     "p50": 200,
+     "p75": 280
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "manual:son-tra-bai-rang": {
+   "visit_min": {
+    "p25": 45,
+    "p50": 90,
+    "p75": 150
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "fee": 0,
+   "source": "manual",
+   "verified": false,
+   "intensity": 2,
+   "weather_sensitive": false,
+   "fetched_at": "2026-11-19",
+   "hours_source": "",
+   "name_osm": null,
+   "osm_evidence": null,
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bãi Rạng Sơn Trà",
+   "category_evidence": [
+    "curated_osm:beach"
+   ],
+   "free_entry": true,
+   "smart_tags_price": {},
+   "hours_v20": {
+    "spans": [
+     "05:00-22:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "00:00-23:59"
+    ],
+    "safe_windows": [
+     "05:00-22:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": null,
     "free_entry": true,
     "status": "known"
    },
@@ -67966,7 +68125,9 @@
     "price_band": null
    },
    "hours_v20": {
-    "spans": [],
+    "spans": [
+     "17:00-21:30"
+    ],
     "weekly": null,
     "spans_any_day": [],
     "raw_v1": [],

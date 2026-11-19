@@ -73,3 +73,25 @@
 - **Kết quả**:
   - 873 POI: 829 active, 44 excluded, 0 review. Ma trận 790 điểm, 0 ô lỗi.
   - **Gate P0 xanh hết** (rule 1–12, G1–G5).
+
+## Vòng 1c — 19/11 tối
+
+- **Hồ Xanh Sơn Trà**: thêm từ OSM `way/140401174` (natural=water, Nominatim; `reports/p0/links/geo_codex.json`, tin cậy cao).
+  - Toạ độ là tâm mặt hồ, không phải lối vào.
+  - Chưa có nguồn về vé/giờ → `free` + khung giờ an toàn theo luật nơi công cộng (inferred), không đoán thêm.
+- **Bãi Rạng Sơn Trà**: thêm `manual:son-tra-bai-rang` (toạ độ worldplaces, tin cậy trung bình).
+  - 09:00–18:00, không vé, gửi xe bắt buộc ~10.000đ, chòi ~300.000đ/6 người (thông tin người dùng, `verified_by=user`).
+  - Cách KDL Sinh thái Suối Rạng ~166 m: giữ 2 điểm riêng, cùng `cluster_id = bai_rang`.
+- **Bãi Đá Đen**: đổi tên thành "Bãi Đá Đen Sơn Trà". Bỏ alias "Bãi Obama" vì trên OSM "Obama" trỏ bãi khác cách ~9 km.
+- **Kết quả**: 875 POI (831 active, 44 excluded, 0 review); ma trận 792, 0 ô lỗi; gate P0 22/22 xanh.
+- **Giờ cho điểm `unknown`** (Codex t15, `reports/p0/links/hours_codex.json` → `agent_web_2026-11-19c.json`; nguồn lệch thì lấy giao khung hẹp):
+
+  | Điểm | Giờ | Ghi chú |
+  |---|---|---|
+  | Son Tra Retreat | 10:00–21:00 | giao thêm khung bán đảo 07:30–17:30 |
+  | KDL Sinh thái Lái Thiêu | 07:30–17:00 | vé 100.000đ |
+  | DD Wonderland | 09:00–21:00 | — |
+  | Ký ức Hội An | 17:00–21:30, nghỉ thứ Ba | show 20:00–21:00, vé ECO 600.000đ |
+
+  - Helio và Nhà biểu diễn 66 Bạch Đằng: tạm ngưng hoặc chuyển chỗ → giữ `unknown`, có ghi chú.
+  - `migrate_v2`: agent_web nay mang được `closed_days`; agent_web thắng new_pois theo từng khoá.

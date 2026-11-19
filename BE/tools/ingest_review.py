@@ -75,6 +75,18 @@ def convert(export: dict) -> tuple[dict, dict]:
         put(pid, requires_ticket_of=ot.get("parent"))
     for pid in ot.get("exclude", []):
         items.setdefault(pid, {})["requires_ticket_of"] = None
+    # final_review.html: policy choices (index 0 = recommended / current state)
+    pol = export.get("policies") or {}
+    act = {("cooking", 1): {"status": "excluded", "status_reason": "người dùng: loại lớp nấu ăn (chốt cuối)"},
+           ("voc", 1): {"category": "lodging"},
+           ("helio", 0): {"status": "excluded", "status_reason": "tạm ngưng từ 9/2025, chưa có giờ mới (chốt cuối)"},
+           ("nha66", 0): {"status": "excluded", "status_reason": "tạm đóng 3/2026, chưa xác nhận mở lại (chốt cuối)"},
+           ("bai_rang", 1): {"status": "excluded", "status_reason": "gộp vào KDL Sinh thái Suối Rạng (chốt cuối)"}}
+    for key, p in pol.items():
+        for pid in p.get("ids") or []:
+            if (key, p.get("choice")) in act:
+                put(pid, **act[(key, p["choice"])])
+    disagree = [a for a in export.get("auto_review", []) if not a.get("agree")]
     out_verify, unparsed = [], []
     for v in export.get("verify", []):
         if re.search(r"xóa địa điểm", v.get("note") or "", re.I):
@@ -92,6 +104,9 @@ def convert(export: dict) -> tuple[dict, dict]:
         out_verify.append(it)
     decisions = {"note": f"Từ {export.get('exported_at')} (review_v21.html). Q: {json.dumps(export.get('questions'), ensure_ascii=False)}",
                  "items": items}
+    if pol or disagree:
+        decisions["policies"] = pol
+        decisions["auto_disagree"] = disagree   # handled by hand: free-text fixes
     verify = {"note": "review_v21.html export", "unparsed_hours": unparsed, "items": out_verify}
     return decisions, verify
 
@@ -105,13 +120,18 @@ def main(argv=None) -> int:
         export = json.load(f)
     decisions, verify = convert(export)
     tag = (export.get("exported_at") or "").replace("-", "")
-    for name, obj in ((f"decisions_review_{tag}.json", decisions), (f"human_verify_v2_{tag}.json", verify)):
+    # final export sorts AFTER every earlier source so it wins (later file overrides)
+    names = ((f"decisions_zfinal_{tag}.json", f"human_verify_v2_{tag}_zfinal.json") if export.get("final")
+             else (f"decisions_review_{tag}.json", f"human_verify_v2_{tag}.json"))
+    for name, obj in zip(names, (decisions, verify)):
         path = os.path.join(SRC, name)
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             json.dump(obj, f, ensure_ascii=False, indent=1)
             f.write("\n")
         print("wrote", path)
     print(f"decisions: {len(decisions['items'])} POI · verify: {len(verify['items'])} POI")
+    for a in decisions.get("auto_disagree", []):
+        print("  KHÔNG ĐỒNG Ý:", a["poi_id"], a["name"], "->", a.get("fix"))
     return 0
 
 
