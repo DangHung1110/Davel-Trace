@@ -48,15 +48,15 @@
  "count_v1_pois": 742,
  "count_by_price_tier": {
   "medium": 326,
-  "cheap": 222,
+  "cheap": 223,
   "expensive": 18,
-  "free": 167,
-  "None": 104,
+  "free": 181,
+  "None": 89,
   "included": 32
  },
  "count_by_hours_kind": {
-  "safe_window": 615,
-  "fixed": 150,
+  "safe_window": 612,
+  "fixed": 153,
   "unknown": 104
  },
  "pois": [
@@ -32673,7 +32673,7 @@
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -32758,12 +32758,12 @@
      "note": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -32819,7 +32819,7 @@
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -32904,12 +32904,12 @@
      "note": "suy luận: bãi công cộng mở tự do"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:beach",
@@ -45907,7 +45907,7 @@
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -45993,12 +45993,12 @@
      "note": "không gian mở, không cổng"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -47218,16 +47218,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "free",
+    "note": "Bảng giá Ngũ Hành Sơn: chỉ Thủy Sơn thu 40.000đ; 'Các ngọn núi khác (Kim, Mộc, Hỏa, Thổ): Không thu phí vào cổng'. Giờ 07:00-17:30 (bài 23/01/2026, nguồn khác ghi 17:00/19:00)."
    },
    "dwell": {
     "p25": 105,
@@ -47302,20 +47302,20 @@
      "note": "type:Đỉnh núi;name:sơn"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Bảng giá Ngũ Hành Sơn: chỉ Thủy Sơn thu 40.000đ; 'Các ngọn núi khác (Kim, Mộc, Hỏa, Thổ): Không thu phí vào cổng'. Giờ 07:00-17:30 (bài 23/01/2026, nguồn khác ghi 17:00/19:00)."
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Bảng giá Ngũ Hành Sơn: chỉ Thủy Sơn thu 40.000đ; 'Các ngọn núi khác (Kim, Mộc, Hỏa, Thổ): Không thu phí vào cổng'. Giờ 07:00-17:30 (bài 23/01/2026, nguồn khác ghi 17:00/19:00).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -47363,16 +47363,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "free",
+    "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026)."
    },
    "dwell": {
     "p25": 105,
@@ -47447,20 +47447,20 @@
      "note": "type:Đỉnh núi;name:sơn"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026)."
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -47508,16 +47508,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "free",
+    "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026)."
    },
    "dwell": {
     "p25": 105,
@@ -47592,20 +47592,20 @@
      "note": "type:Đỉnh núi;name:sơn"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026)."
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html",
+     "verified_at": "2026-11-19",
+     "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "category_rule+user_ok",
@@ -53661,8 +53661,8 @@
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "free",
+    "note": "gtrip.vn (13/11/2026): 'Opening hours: Sunrise to sunset', 'Entrance fee: Free'. Giờ không ghi cụ thể nên để trống."
    },
    "dwell": {
     "p25": 30,
@@ -53746,12 +53746,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.5,
+     "evidence_url": "https://gtrip.vn/attractions/non-nuoc-stone-carving-village",
+     "verified_at": "2026-11-19",
+     "note": "gtrip.vn (13/11/2026): 'Opening hours: Sunrise to sunset', 'Entrance fee: Free'. Giờ không ghi cụ thể nên để trống.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:village",
@@ -60401,7 +60401,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -60487,12 +60487,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -100575,7 +100575,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -100661,12 +100661,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -100871,7 +100871,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -100957,12 +100957,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -101019,7 +101019,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -101105,12 +101105,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -101167,7 +101167,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -101253,12 +101253,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -101611,7 +101611,7 @@
     "archetype": "chua"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": null
    },
    "dwell": {
@@ -101697,12 +101697,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:religious",
@@ -111198,8 +111198,8 @@
     "archetype": "co_ve"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "cheap",
+    "note": "sunparadiseland (15/08/2026): 'Giá vé vào công viên Đất nung Thanh Hà là 50.000 đồng cho người lớn và 30.000 đồng đối với trẻ em'; mở từ 08:30 (giờ đóng ghi '5:00' không rõ, giữ giờ OSM hiện có)."
    },
    "dwell": {
     "p25": 45,
@@ -111278,12 +111278,12 @@
      "note": "OSM opening_hours='Mo-Su 08:30-17:30', khớp 0.0 m"
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/kham-pha-cong-vien-dat-nung-thanh-ha-25272",
+     "verified_at": "2026-11-19",
+     "note": "sunparadiseland (15/08/2026): 'Giá vé vào công viên Đất nung Thanh Hà là 50.000 đồng cho người lớn và 30.000 đồng đối với trẻ em'; mở từ 08:30 (giờ đóng ghi '5:00' không rõ, giữ giờ OSM hiện có).; VND ticket_vnd=50000, min_vnd=30000, max_vnd=50000, typical_vnd=50000"
     },
     "dwell": {
      "source": "dwell_table_v2:paid_site",
@@ -112326,8 +112326,8 @@
     "archetype": "bao_tang"
    },
    "price": {
-    "tier": null,
-    "note": null
+    "tier": "free",
+    "note": "localvietnam (cập nhật 13/10/2025): 'Free admission', 'Open daily from 8:00 AM to 8:00 PM', 26 Phan Bội Châu, Hội An."
    },
    "dwell": {
     "p25": 20,
@@ -112398,20 +112398,20 @@
      "note": "curated_osm:museum_indoor"
     },
     "hours": {
-     "source": "osm",
-     "verified_by": "open_data",
-     "confidence": 0.65,
-     "evidence_url": "https://www.openstreetmap.org/node/12344125229",
-     "verified_at": null,
-     "note": "OSM opening_hours='Mo-Su 08:00-20:00', khớp 0.0 m"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://localvietnam.com/quang-nam/hoi-an/precious-heritage-museum/",
+     "verified_at": "2026-11-19",
+     "note": "localvietnam (cập nhật 13/10/2025): 'Free admission', 'Open daily from 8:00 AM to 8:00 PM', 26 Phan Bội Châu, Hội An."
     },
     "price": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://localvietnam.com/quang-nam/hoi-an/precious-heritage-museum/",
+     "verified_at": "2026-11-19",
+     "note": "localvietnam (cập nhật 13/10/2025): 'Free admission', 'Open daily from 8:00 AM to 8:00 PM', 26 Phan Bội Châu, Hội An.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:gallery",

@@ -20653,6 +20653,7 @@
    "category_evidence": [
     "v1_cat:attraction"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -20670,14 +20671,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -20741,6 +20742,7 @@
    "category_evidence": [
     "name:bai tam"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -20758,14 +20760,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -28955,6 +28957,7 @@
    "category_evidence": [
     "override:Public Beach Access"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -28972,14 +28975,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -29771,13 +29774,14 @@
     "type:Đỉnh núi",
     "name:sơn"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
    },
    "hours_v20": {
     "spans": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -29792,13 +29796,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -29860,13 +29864,14 @@
     "type:Đỉnh núi",
     "name:sơn"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
    },
    "hours_v20": {
     "spans": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -29881,13 +29886,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -29949,13 +29954,14 @@
     "type:Đỉnh núi",
     "name:sơn"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
    },
    "hours_v20": {
     "spans": [
-     "06:00-17:30"
+     "07:00-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -29970,13 +29976,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -33784,13 +33790,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -37928,6 +37934,7 @@
     "name:chua",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -37947,14 +37954,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -61460,6 +61467,7 @@
     "name:chua",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -61479,14 +61487,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -61633,6 +61641,7 @@
     "name:chua",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -61652,14 +61661,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -61721,6 +61730,7 @@
     "name:chua",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -61740,14 +61750,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -61808,6 +61818,7 @@
     "name:chua",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -61827,14 +61838,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -62069,6 +62080,7 @@
     "name:lam ty ni vien",
     "type:Chùa phật giáo"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": false,
     "price_band": null
@@ -62088,14 +62100,14 @@
     ]
    },
    "price_v20": {
-    "basis": "per_person",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
+    "basis": "entry",
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
     "ticket_vnd": null,
-    "free_entry": null,
-    "status": "unknown"
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -67763,13 +67775,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "todo"
+    "min_vnd": 30000,
+    "max_vnd": 50000,
+    "typical_vnd": 50000,
+    "band": "vua",
+    "ticket_vnd": 50000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -68421,6 +68433,7 @@
    "category_evidence": [
     "curated_osm:museum_indoor"
    ],
+   "free_entry": true,
    "smart_tags_price": {
     "ticket": true,
     "price_band": null
@@ -68429,15 +68442,7 @@
     "spans": [
      "08:00-20:00"
     ],
-    "weekly": {
-     "Mo": "08:00-20:00",
-     "Tu": "08:00-20:00",
-     "We": "08:00-20:00",
-     "Th": "08:00-20:00",
-     "Fr": "08:00-20:00",
-     "Sa": "08:00-20:00",
-     "Su": "08:00-20:00"
-    },
+    "weekly": null,
     "spans_any_day": [],
     "raw_v1": [],
     "conflict": false,
@@ -68451,13 +68456,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": null,
-    "max_vnd": null,
-    "typical_vnd": null,
-    "band": null,
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "todo"
+    "min_vnd": 0,
+    "max_vnd": 0,
+    "typical_vnd": 0,
+    "band": "re",
+    "ticket_vnd": 0,
+    "free_entry": true,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",

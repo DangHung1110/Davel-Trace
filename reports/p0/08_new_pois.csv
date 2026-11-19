@@ -33,7 +33,7 @@ osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,,,05:00-22:00,inferred
 osm:node/4171925609,Cồn Thuận Tình,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
 osm:relation/3938690,Vườn Tượng An Hội,outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
 osm:way/35952574,Cầu An Hội,outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
-osm:node/12344125229,Precious Heritage Art Gallery Museum,museum_indoor,hoi_an,,,08:00-20:00,open_data
+osm:node/12344125229,Precious Heritage Art Gallery Museum,museum_indoor,hoi_an,,,08:00-20:00,agent_web
 osm:node/7127464285,Bảo tàng Y học Cổ truyền Hội An,museum_indoor,hoi_an,hoi_an_old_town,,07:00-11:00,open_data
 osm:way/209492808,Nhà thờ Công giáo Hội An,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
 osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,ba_na,Sun World Bà Nà Hills,06:00-17:30,inferred

@@ -820,8 +820,12 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
                                       "fee": om["tags"].get("fee"), "name": om["tags"].get("name")})
         hours, legacy_hours, pv_hours, q_hours = build_hours(p, cat, arch, hours_web, policy, access,
                                                              web_item)
+        # Only Bà Nà is a closed paid area. Around Ngũ Hành Sơn only the
+        # Thủy Sơn gate charges (NHS_TICKETED -> requires_ticket_of =
+        # included); pagodas, beach and the other peaks outside it keep the
+        # public-place rule (vietnambooking 23/01/2026: "các ngọn khác miễn phí").
         price, pv_price, q_price = build_price(v, cat, arch, price_web, web_tickets, policy,
-                                               pid in cluster and cluster[pid] in ("ba_na", "ngu_hanh_son"))
+                                               pid in cluster and cluster[pid] == "ba_na")
         tags = build_tags(p, cat)
 
         dur_src = p.get("dur_source")

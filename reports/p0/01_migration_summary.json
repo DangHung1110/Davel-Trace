@@ -94,15 +94,15 @@
   "hoi_an_old_town": 23
  },
  "hours_verified_by": {
-  "inferred": 719,
-  "agent_web": 55,
-  "open_data": 93,
+  "inferred": 716,
+  "agent_web": 59,
+  "open_data": 92,
   "user": 2
  },
  "price_verified_by": {
-  "inferred": 830,
+  "inferred": 824,
   "user": 8,
-  "agent_web": 31
+  "agent_web": 37
  },
  "dwell_verified_by": {
   "inferred": 831,
@@ -110,8 +110,8 @@
  },
  "legacy_hours_nonempty": 765,
  "v1_hours_nonempty": 499,
- "legacy_price_band": 28,
- "legacy_free_entry": 167,
+ "legacy_price_band": 29,
+ "legacy_free_entry": 180,
  "hours_conflict": 6,
  "quarantined_pois": 659,
  "category_changes": 178,
@@ -196,6 +196,6 @@
    "share": 0.87
   }
  ],
- "ticket_todo": 28,
+ "ticket_todo": 26,
  "osm_linked": 315
 }
