@@ -33,14 +33,14 @@
   },
   {
    "poi_id": "manual:son-tra-bai-rang",
-   "hours": "09:00-18:00",
+   "hours": "09:00-17:30",
    "price_tier": "free",
    "ticket_vnd": 0,
-   "evidence_url": "user paste 2026-11-19",
+   "evidence_url": null,
    "checked_at": "2026-11-19",
-   "verified_by": "user",
-   "hours_note": "9:00-18:00 (thông tin người dùng cung cấp)",
-   "price_note": "Không vé vào; PHÍ BẮT BUỘC gửi xe ~10.000đ; thuê chòi ~300.000đ/chòi 6 người (tuỳ chọn)."
+   "hours_note": "Người dùng đưa 9:00-18:00 nhưng đó là giờ dịch vụ lặn (locatravel, từ 01/01/2026), không phải giờ bãi. Giao với khung tuyến bán đảo 07:30-17:30 (mùa đông) -> 09:00-17:30.",
+   "price_note": "Không vé vào; PHÍ BẮT BUỘC gửi xe ~10.000đ; thuê chòi ~300.000đ/chòi 6 người (tuỳ chọn).",
+   "note": "Nguồn: tin nhắn người dùng 2026-11-19 + locatravel.vn/ve-lan-ngam-san-ho-ban-dao-son-tra"
   }
  ]
 }

@@ -95,3 +95,24 @@
 
   - Helio và Nhà biểu diễn 66 Bạch Đằng: tạm ngưng hoặc chuyển chỗ → giữ `unknown`, có ghi chú.
   - `migrate_v2`: agent_web nay mang được `closed_days`; agent_web thắng new_pois theo từng khoá.
+
+## Kiểm chứng chéo bằng AI-Hay — 19/11 khuya
+
+- **Cách làm:** hỏi AI-Hay (ai-hay.vn, ẩn danh, qua Edge + `orca computer`) 9 lượt cho 57 điểm của `final_review.html`. Kết quả ở `reports/p0/links/aihay_rows.json`.
+  - AI-Hay là LLM: chỉ dùng như gợi ý.
+  - Codex (t15) mở trang nguồn để kiểm (`aihay_verified.json`).
+- **Kết quả AI-Hay:** 5 ĐÚNG, 13 SAI, 38 KHÔNG RÕ. Chỉ 16/56 dòng có link; nhiều dòng "SAI" không có link. Lượt đầu còn nhầm Chợ đêm An Thượng là "ở Hội An".
+- **Codex mở trang nguồn:** 8 khớp, 4 lệch, 44 chưa đủ nguồn.
+- **Đã sửa theo nguồn (vào `agent_web_2026-11-19c.json`, `human_verify_v2_20261119_fix.json`):**
+
+  | Điểm | Trước | Sau | Nguồn / ghi chú |
+  |---|---|---|---|
+  | Núi Thần Tài | 06:00-17:30 (suy luận) | **08:30-17:30**, vé 490.000đ | danangfantasticity 22/01/2026 |
+  | Ngũ Hành Sơn | đến 17:30 | **07:00-17:00** | — |
+  | Cây Đa Ngàn Năm | 24h | **07:30-17:30** | giờ tuyến bán đảo theo mùa, lấy khung hẹp |
+  | Bãi Rạng | 9:00-18:00 | **09:00-17:30** | 9-18 là giờ dịch vụ lặn (locatravel); giao với khung bán đảo; `verified_by=user` (trước ghi nhầm human) |
+
+- **Lỗi phát hiện:** khung giờ bán đảo chỉ áp cho điểm có `access_note` từ v1, nên điểm mới (Bãi Rạng, Bãi Đá Đen, Hồ Xanh…) không được áp.
+  - Hồ Xanh (gần Sơn Trà Marina, chân bán đảo) và Bãi Đá Đen (đường ven biển Hoàng Sa): chưa có nguồn nói chúng thuộc tuyến kiểm soát, nên giữ nguyên.
+  - Ghi vào P1: hợp đồng giờ theo mùa + phạm vi tuyến.
+- **Trang chốt cuối:** mỗi dòng giờ hiện thêm "AI-Hay: …" và "Codex mở trang: khớp/LỆCH" kèm link, để người duyệt bấm nhanh.

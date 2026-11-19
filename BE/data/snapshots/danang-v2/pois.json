@@ -54,8 +54,8 @@
   "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 593,
-  "fixed": 187,
+  "safe_window": 592,
+  "fixed": 188,
   "unknown": 95
  },
  "pois": [
@@ -28132,7 +28132,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:00-17:30"
+     "07:00-17:00"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -28141,7 +28141,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": "Vé Thủy Sơn NL 40.000 (gồm hang, chùa trên núi); thang máy 15.000/lượt (30.000 khứ hồi); trẻ <6t miễn. Giờ 07:00-17:30 theo vietnamtourism.com."
+    "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng."
    },
    "dwell": {
     "p25": 30,
@@ -28220,18 +28220,18 @@
     "hours": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.7,
-     "evidence_url": "https://danangfantasticity.com/en/di-san-canh-quan/danh-thang-ngu-hanh-son",
-     "verified_at": "2026-11-18",
-     "note": "Vé Thủy Sơn NL 40.000 (gồm hang, chùa trên núi); thang máy 15.000/lượt (30.000 khứ hồi); trẻ <6t miễn. Giờ 07:00-17:30 theo vietnamtourism.com."
+     "confidence": 0.65,
+     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+     "verified_at": "2026-11-19",
+     "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.7,
-     "evidence_url": "https://danangfantasticity.com/en/di-san-canh-quan/danh-thang-ngu-hanh-son",
-     "verified_at": "2026-11-18",
-     "note": "Vé Thủy Sơn NL 40.000 (gồm hang, chùa trên núi); thang máy 15.000/lượt (30.000 khứ hồi); trẻ <6t miễn. Giờ 07:00-17:30 theo vietnamtourism.com.; VND ticket_vnd=40000, min_vnd=40000, max_vnd=70000, typical_vnd=40000"
+     "confidence": 0.65,
+     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+     "verified_at": "2026-11-19",
+     "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng.; VND ticket_vnd=40000, min_vnd=40000, max_vnd=70000, typical_vnd=40000"
     },
     "dwell": {
      "source": "dwell_table_v2:religious_major",
@@ -51332,16 +51332,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "06:00-17:30"
+     "08:30-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
     "tier": "medium",
-    "note": "Vé 480.000đ (trẻ ≤99cm miễn phí) gồm công viên nước, tắm khoáng, Đền Thần Tài, công viên khủng long; tắm bùn riêng +100.000đ (tuỳ chọn). Gói trên trang là vé buổi chiều 14:00-17:30 (vào muộn nhất 15:00) — giờ cả ngày chưa có nguồn nên chưa ghi."
+    "note": "8h30-17h30; NL 490.000đ, TE 1-1,4m 245.000đ (bảng 2026, danangfantasticity 22/01/2026; Traveloka cùng giờ). nangtrip trước đó ghi 480.000đ. Tắm bùn +100.000đ tuỳ chọn."
    },
    "dwell": {
     "p25": 45,
@@ -51417,20 +51417,20 @@
      "note": "decisions_user_notes_20261119.json"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_tu_nhien",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.65,
+     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+     "verified_at": "2026-11-19",
+     "note": "8h30-17h30; NL 490.000đ, TE 1-1,4m 245.000đ (bảng 2026, danangfantasticity 22/01/2026; Traveloka cùng giờ). nangtrip trước đó ghi 480.000đ. Tắm bùn +100.000đ tuỳ chọn."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang",
+     "confidence": 0.65,
+     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
      "verified_at": "2026-11-19",
-     "note": "Vé 480.000đ (trẻ ≤99cm miễn phí) gồm công viên nước, tắm khoáng, Đền Thần Tài, công viên khủng long; tắm bùn riêng +100.000đ (tuỳ chọn). Gói trên trang là vé buổi chiều 14:00-17:30 (vào muộn nhất 15:00) — giờ cả ngày chưa có nguồn nên chưa ghi.; VND ticket_vnd=480000, min_vnd=480000, max_vnd=480000, typical_vnd=480000"
+     "note": "8h30-17h30; NL 490.000đ, TE 1-1,4m 245.000đ (bảng 2026, danangfantasticity 22/01/2026; Traveloka cùng giờ). nangtrip trước đó ghi 480.000đ. Tắm bùn +100.000đ tuỳ chọn.; VND ticket_vnd=490000, min_vnd=490000, max_vnd=490000, typical_vnd=490000"
     },
     "dwell": {
      "source": "dwell_table_v2:nature",
@@ -51774,7 +51774,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "07:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -51783,7 +51783,7 @@
    },
    "price": {
     "tier": "free",
-    "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong)."
+    "note": "Miễn phí; đoạn Bãi Bắc - Cây Đa dành cho khách đi bộ. Không mở 24h như ghi trước. Tuyến bán đảo Sơn Trà kiểm soát theo mùa: 07:30-18:30 (tháng 3-9), 07:30-17:30 (tháng 10-2) (vietnamnet; Nhân Dân 15/09/2025) -> lấy khung hẹp quanh năm."
    },
    "dwell": {
     "p25": 10,
@@ -51862,17 +51862,17 @@
      "source": "web",
      "verified_by": "agent_web",
      "confidence": 0.6,
-     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "evidence_url": "https://danangbest.com/cay-da-ngan-nam-da-nang-bieu-tuong-bat-diet-cua-suc-song.html",
      "verified_at": "2026-11-19",
-     "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong)."
+     "note": "Miễn phí; đoạn Bãi Bắc - Cây Đa dành cho khách đi bộ. Không mở 24h như ghi trước. Tuyến bán đảo Sơn Trà kiểm soát theo mùa: 07:30-18:30 (tháng 3-9), 07:30-17:30 (tháng 10-2) (vietnamnet; Nhân Dân 15/09/2025) -> lấy khung hẹp quanh năm."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
      "confidence": 0.6,
-     "evidence_url": "https://xedulichdanangchatluong.com/bang-tin/gia-ve-tham-quan-ban-dao-son-tra-chua-linh-ung/",
+     "evidence_url": "https://danangbest.com/cay-da-ngan-nam-da-nang-bieu-tuong-bat-diet-cua-suc-song.html",
      "verified_at": "2026-11-19",
-     "note": "Cây di sản >1000 năm, miễn phí, 24h (xedulichdanangchatluong).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
+     "note": "Miễn phí; đoạn Bãi Bắc - Cây Đa dành cho khách đi bộ. Không mở 24h như ghi trước. Tuyến bán đảo Sơn Trà kiểm soát theo mùa: 07:30-18:30 (tháng 3-9), 07:30-17:30 (tháng 10-2) (vietnamnet; Nhân Dân 15/09/2025) -> lấy khung hẹp quanh năm.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -108177,7 +108177,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "09:00-18:00"
+     "09:00-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -108244,17 +108244,17 @@
     },
     "hours": {
      "source": "human_verify",
-     "verified_by": "human",
-     "confidence": 0.9,
-     "evidence_url": "user paste 2026-11-19",
+     "verified_by": "user",
+     "confidence": 0.7,
+     "evidence_url": null,
      "verified_at": "2026-11-19",
-     "note": "human_verify_v2_20261119_fix.json; 9:00-18:00 (thông tin người dùng cung cấp)"
+     "note": "human_verify_v2_20261119_fix.json; Người dùng đưa 9:00-18:00 nhưng đó là giờ dịch vụ lặn (locatravel, từ 01/01/2026), không phải giờ bãi. Giao với khung tuyến bán đảo 07:30-17:30 (mùa đông) -> 09:00-17:30."
     },
     "price": {
      "source": "human_verify",
-     "verified_by": "human",
-     "confidence": 0.9,
-     "evidence_url": "user paste 2026-11-19",
+     "verified_by": "user",
+     "confidence": 0.7,
+     "evidence_url": null,
      "verified_at": "2026-11-19",
      "note": "human_verify_v2_20261119_fix.json; VND 0"
     },

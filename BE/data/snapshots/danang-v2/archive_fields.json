@@ -17759,7 +17759,7 @@
    },
    "hours_v20": {
     "spans": [
-     "07:00-17:30"
+     "07:00-17:00"
     ],
     "weekly": null,
     "archetype_default": [],
@@ -32333,7 +32333,7 @@
    },
    "hours_v20": {
     "spans": [
-     "06:00-17:30"
+     "08:30-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -32348,11 +32348,11 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 480000,
-    "max_vnd": 480000,
-    "typical_vnd": 480000,
+    "min_vnd": 490000,
+    "max_vnd": 490000,
+    "typical_vnd": 490000,
     "band": "cao",
-    "ticket_vnd": 480000,
+    "ticket_vnd": 490000,
     "free_entry": false,
     "status": "known"
    },
@@ -32607,7 +32607,7 @@
    },
    "hours_v20": {
     "spans": [
-     "00:00-23:59"
+     "07:30-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],

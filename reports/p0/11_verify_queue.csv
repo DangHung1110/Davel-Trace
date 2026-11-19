@@ -22,10 +22,10 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 21,ChIJEymIkTYYQjERWO-pgjkKGMk,Bảo Tàng Đà Nẵng,museum_indoor,trung_tam,0.68,,08:00-17:00 [fixed],open_data,cheap,agent_web,https://www.google.com/maps/search/Bảo+Tàng+Đà+Nẵng+Đà+Nẵng
 22,ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ Bạch Đằng,night_market,trung_tam,0.68,,15:00-23:59 [fixed],agent_web,free,agent_web,https://www.google.com/maps/search/Phố+đi+bộ+Bạch+Đằng+Đà+Nẵng
 23,osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,0.64,,08:00-18:30 [fixed],human,included,inferred,https://www.google.com/maps/search/Cầu+Vàng+Đà+Nẵng
-24,ChIJyUQ4aw72QTERCXl5YV-4U1w,Sun World Bà Nà Hills,paid_attraction,ba_na_tay,0.63,,08:00-22:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/Sun+World+Bà+Nà+Hills+Đà+Nẵng
-25,manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,paid_attraction,hoi_an,0.63,,09:00-18:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/VinWonders+Nam+Hội+An+Đà+Nẵng
-26,osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,0.56,,00:00-23:59 [fixed],human,included,inferred,https://www.google.com/maps/search/Chùa+Cầu+Đà+Nẵng
-27,ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn,paid_attraction,ngu_hanh_son,0.54,,07:00-17:30 [fixed],agent_web,cheap,agent_web,https://www.google.com/maps/search/Ngũ+Hành+Sơn+Đà+Nẵng
+24,ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn,paid_attraction,ngu_hanh_son,0.63,,07:00-17:00 [fixed],agent_web,cheap,agent_web,https://www.google.com/maps/search/Ngũ+Hành+Sơn+Đà+Nẵng
+25,ChIJyUQ4aw72QTERCXl5YV-4U1w,Sun World Bà Nà Hills,paid_attraction,ba_na_tay,0.63,,08:00-22:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/Sun+World+Bà+Nà+Hills+Đà+Nẵng
+26,manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,paid_attraction,hoi_an,0.63,,09:00-18:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/VinWonders+Nam+Hội+An+Đà+Nẵng
+27,osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,0.56,,00:00-23:59 [fixed],human,included,inferred,https://www.google.com/maps/search/Chùa+Cầu+Đà+Nẵng
 28,ChIJAdChYQAZQjERdBTX1_66Q_8,Chợ Đêm Sơn Trà,night_market,trung_tam,0.54,giá inferred 0.4,18:00-23:00 [fixed],open_data,cheap,inferred,https://www.google.com/maps/search/Chợ+Đêm+Sơn+Trà+Đà+Nẵng
 29,ChIJOZ__YJwXQjER4wLDpzs9L5c,Chợ Đêm An Thượng,night_market,son_tra_my_khe,0.54,giá inferred 0.4,18:00-23:00 [fixed],agent_web,cheap,inferred,https://www.google.com/maps/search/Chợ+Đêm+An+Thượng+Đà+Nẵng
 30,osm:node/12333995781,Chợ đêm Lê Duẩn,night_market,trung_tam,0.54,giờ inferred 0.45; giá inferred 0.4,18:00-22:00 [safe_window],inferred,cheap,inferred,https://www.google.com/maps/search/Chợ+đêm+Lê+Duẩn+Đà+Nẵng

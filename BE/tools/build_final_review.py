@@ -90,8 +90,20 @@ def collect():
     cand.sort(key=lambda p: (not p["popularity"]["signature"],
                              not p["provenance"]["hours"].get("evidence_url"),
                              -(p["popularity"]["prize_prior"] or 0)))
+    confirm = [_brief(p) for p in cand[:CONFIRM_MAX]]
+    # second opinion: AI-Hay answer (an LLM — hint only) + Codex check of the page it cited
+    links = os.path.join(ROOT, "reports", "p0", "links")
+    hint = {}
+    for fn, kind in (("aihay_rows.json", "aihay"), ("aihay_verified.json", "checked")):
+        path = os.path.join(links, fn)
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                for r in json.load(f):
+                    hint.setdefault(r["poi_id"], {})[kind] = r
+    for r in auto + confirm:
+        r["hint"] = hint.get(r["poi_id"])
     return {"built_at": dt.date.today().isoformat(), "human_now": human, "human_target": HUMAN_TARGET,
-            "policies": policies, "auto": auto, "confirm": [_brief(p) for p in cand[:CONFIRM_MAX]]}
+            "policies": policies, "auto": auto, "confirm": confirm}
 
 
 PAGE = r"""<!doctype html>
@@ -109,7 +121,7 @@ h2{font-size:15px;margin:0 0 4px}p.help{color:var(--mute);margin:0 0 10px;font-s
 table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;padding:6px;border-top:1px solid var(--line)}th{font-size:12px;color:var(--mute);font-weight:600}
 td small{color:var(--mute)}input[type=text],input[type=url],select{width:100%;padding:5px 6px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink);font:inherit}
 .chip{display:inline-block;background:var(--chip);border-radius:10px;padding:0 7px;font-size:12px;margin:1px 2px 1px 0}.count{font-weight:600;color:var(--acc)}
-tr.ok{background:var(--ok)}.wrap{overflow-x:auto}a{color:var(--acc)}.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;min-width:120px}.bar i{display:block;height:100%;background:var(--acc)}
+tr.ok{background:var(--ok)}.warn{color:var(--warn)}.wrap{overflow-x:auto}a{color:var(--acc)}.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;min-width:120px}.bar i{display:block;height:100%;background:var(--acc)}
 @media (max-width:720px){th:nth-child(n+3),td:nth-child(n+3){min-width:150px}}
 </style></head><body>
 <header><h1>Chốt dữ liệu danang-v2.1 — lần cuối <small style="color:var(--mute);font-weight:400">build __BUILT__</small></h1>
@@ -132,7 +144,12 @@ const osm = r => `<a target="_blank" rel="noopener" href="https://www.openstreet
 const link = u => u && /^https?:/.test(u) ? `<a target="_blank" rel="noopener" href="${esc(u)}">nguồn</a>` : "";
 const info = r => `<b>${esc(r.name)}</b>${r.signature ? ' <span class="chip">tiêu biểu</span>' : ""}<br><small>${esc(r.category)} · ${esc(r.zone)}</small> ${osm(r)}`;
 const now = r => `<span class="chip">${esc(r.hours)}${r.closed.length ? " · nghỉ " + esc(r.closed.join(",")) : ""}</span><span class="chip">giá ${esc(r.tier ?? "null")}</span>
-  <small>giờ: ${esc(r.hours_by)} ${link(r.hours_url)} · giá: ${esc(r.price_by)} ${link(r.price_url)}</small>${r.note ? `<br><small>${esc(r.note)}</small>` : ""}`;
+  <small>giờ: ${esc(r.hours_by)} ${link(r.hours_url)} · giá: ${esc(r.price_by)} ${link(r.price_url)}</small>${r.note ? `<br><small>${esc(r.note)}</small>` : ""}${hint(r)}`;
+const hint = r => {
+  const h = r.hint || {}, a = h.aihay, c = h.checked; let s = "";
+  if (a) s += `<br><small class="${a.verdict.startsWith("SAI") ? "warn" : ""}">AI-Hay: <b>${esc(a.verdict)}</b> — ${esc(a.hours_src).slice(0, 90)} · ${esc(a.ticket_src).slice(0, 60)} ${(a.links || []).slice(0, 2).map(link).join(" ")}</small>`;
+  if (c) s += `<br><small class="${c.agrees_with_ours === false ? "warn" : ""}">Codex mở trang: ${c.agrees_with_ours === true ? "khớp" : c.agrees_with_ours === false ? "<b>LỆCH</b>" : "chưa rõ"} — ${esc(c.page_says_hours || "")} ${esc(c.page_says_ticket || "")} ${link(c.source)}</small>`;
+  return s; };
 const inp = (k, ph, type = "text") => `<input type="${type}" data-k="${k}" placeholder="${esc(ph)}" value="${esc(S[k] ?? "")}">`;
 function T(id, head, rows) { document.getElementById(id).innerHTML = `<tr>${head.map(h => `<th>${h}</th>`).join("")}</tr>` + rows.join(""); }
 function render() {
