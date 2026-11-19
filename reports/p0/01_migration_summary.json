@@ -3,9 +3,9 @@
  "google_policy": "cach_ly",
  "v1_count": 742,
  "v1_meta_count": 745,
- "v2_count": 872,
+ "v2_count": 873,
  "status": {
-  "active": 848,
+  "active": 849,
   "review": 20,
   "excluded": 4
  },
@@ -20,7 +20,7 @@
   "museum_indoor": 22,
   "paid_attraction": 48,
   "lodging": 76,
-  "beach": 24,
+  "beach": 25,
   "night_market": 6,
   "wellness": 77
  },
@@ -28,13 +28,13 @@
   "meal": 169,
   "nightlife": 91,
   "rest": 131,
-  "attraction": 328,
+  "attraction": 329,
   "base": 76,
   "wellness": 77
  },
  "zone": {
   "trung_tam": 270,
-  "son_tra_my_khe": 230,
+  "son_tra_my_khe": 231,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
@@ -53,7 +53,7 @@
    "meal": 39,
    "nightlife": 32,
    "rest": 29,
-   "attraction": 61,
+   "attraction": 62,
    "base": 35,
    "wellness": 33
   },
@@ -95,20 +95,20 @@
  },
  "hours_verified_by": {
   "inferred": 712,
-  "agent_web": 66,
+  "agent_web": 67,
   "open_data": 92,
   "user": 2
  },
  "price_verified_by": {
   "inferred": 819,
   "user": 8,
-  "agent_web": 45
+  "agent_web": 46
  },
  "dwell_verified_by": {
-  "inferred": 834,
+  "inferred": 835,
   "user": 38
  },
- "legacy_hours_nonempty": 768,
+ "legacy_hours_nonempty": 769,
  "v1_hours_nonempty": 499,
  "legacy_price_band": 32,
  "legacy_free_entry": 179,

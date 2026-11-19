@@ -27,7 +27,9 @@
 
   "osm:node/5286977425": {"name": "Công viên Suối khoáng nóng Núi Thần Tài", "category": "paid_attraction", "status": "active"},
 
-  "ChIJlxydWJEZQjER5GSMuHJHtak": {"status": "review", "status_reason": "link dẫn chứng là Thung Lũng Vàng (Đà Lạt), không phải VỌC Glamping Đà Nẵng; chưa có nguồn giá/giờ đúng địa điểm"},
+  "ChIJlxydWJEZQjER5GSMuHJHtak": {"status": "active", "price_note": "Gói qua đêm theo người (183 Nam Cao, Hòa Khánh Nam): lều 2 người/lều 695.000đ (T2–T6, CN) / 745.000đ (T7, lễ); phòng 745.000đ / 795.000đ; gồm ăn sáng, cà phê, BBQ tối (lều), hồ bơi. Không có vé vào cổng riêng (nghiencamtrai 12/10/2025)."},
+  "ChIJg5OvAgAhQjERKbrq9-Wza-U": {"status": "excluded", "status_reason": "người dùng xóa 2026-11-19 (nghi ngừng hoạt động: cưỡng chế tháo dỡ 4/2024)"},
+  "ChIJ-cf9B7wQQjERutUzeynzw8w": {"status": "active", "price_note": "Chùa Quán Thế Âm (48 Sư Vạn Hạnh, Ngũ Hành Sơn) — KHÁC Chùa Linh Ứng Sơn Trà; trong chùa có Bảo tàng Văn hóa Phật giáo."},
 
   "osm:node/4601279489": {"price_note": "Vé phố cổ 2 mức: 80.000đ = cảnh quan + Chùa Cầu HOẶC Miếu Quan Công + 2 công trình văn hóa; 120.000đ = cảnh quan + Chùa Cầu/Miếu Quan Công + hệ thống bảo tàng + 3 công trình. Miễn vé trẻ <16 tuổi, học sinh, công dân VN ≥60 tuổi (mang giấy tờ). Dạo phố, chợ, chợ đêm, thả hoa đăng, bài chòi: không cần vé."},
   "osm:node/7127464285": {"price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ. Đóng cửa ngày 12 và 27 hằng tháng."},
@@ -39,8 +41,8 @@
   "osm:node/7127442985": {"price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."},
   "osm:way/39268284": {"price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k). Đi ngắm bên ngoài không cần vé."},
   "manual:cu-lao-cham": {"price_note": "Vé tham quan 70.000đ; PHÍ BẮT BUỘC đi lại từ Cửa Đại: cano ~150.000đ (15 phút) hoặc tàu gỗ ~50.000đ (1 giờ); tour lặn 700.000đ. Biển lặng tháng 3-8 (nangtrip)."},
-  "manual:hai-van-quan": {"price_note": "~70.000đ vào cửa ải (nangtrip, 'khoảng'). Đi qua đèo miễn phí."},
-  "osm:node/1036552571": {"price_note": "Qua đèo miễn phí; Hải Vân Quan (manual:hai-van-quan) thu ~70.000đ — đề xuất ghé cùng."},
+  "manual:hai-van-quan": {"cluster_id": "hai_van", "price_note": "70.000đ/lượt (khách VN và quốc tế) từ 2/6/2026 tới 31/12/2028; trẻ dưới 1,2 m miễn phí; cư dân Huế, Đà Nẵng giảm 50% (vnexpress 1/6/2026). Nằm trên đỉnh Đèo Hải Vân — một phần của chuyến đi đèo."},
+  "osm:node/1036552571": {"cluster_id": "hai_van", "price_note": "Qua đèo miễn phí; Hải Vân Quan trên đỉnh đèo (manual:hai-van-quan) thu 70.000đ, 07:00-17:30 — đề xuất ghé cùng."},
   "osm:way/631064893": {"price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k)."}
  }
 }

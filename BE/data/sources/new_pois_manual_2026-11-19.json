@@ -9,12 +9,16 @@
   {"id": "manual:hoi-an-bai-choi", "lat": 15.87615, "lon": 108.32585,
    "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)", "c": "attraction"},
   {"osm": "way/630377259", "lat": 16.1243611, "lon": 108.2202733,
-   "name": "Bãi biển Tiên Sa", "c": "beach"}
+   "name": "Bãi biển Tiên Sa", "c": "beach"},
+  {"id": "manual:son-tra-bai-da-den", "lat": 16.1474562, "lon": 108.2338043,
+   "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà", "c": "beach",
+   "coord_source": "https://nangtrip.com/activities/bai-da-den"}
  ],
  "curation": {
   "category": {
    "manual:hoi-an-pho-di-bo-hoa-dang": "outdoor_landmark",
    "manual:hoi-an-bai-choi": "outdoor_landmark",
+   "manual:son-tra-bai-da-den": "beach",
    "way/630377259": "beach"
   }
  },

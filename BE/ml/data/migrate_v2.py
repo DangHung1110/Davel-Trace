@@ -547,6 +547,9 @@ def apply_decision(rec, d):
         pv["category"] = prov("user_decision", "user", note=d["_file"])
     if d.get("price_note"):
         rec["price"]["note"] = d["price_note"]
+    if "cluster_id" in d:
+        # geographic grouping only (cluster ≠ constraint): visit-together hint
+        rec["cluster_id"] = d["cluster_id"]
     if "requires_ticket_of" in d:
         # Q5: shared-ticket membership decided by the user (old town ticket)
         parent = d["requires_ticket_of"]

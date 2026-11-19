@@ -149,6 +149,7 @@
 | 19/11 | Giá null → nguồn web | 104 → 89 null (76 lưu trú); `reports/p0/13_null_price_research.md` |
 | 19/11 | Trang duyệt HTML + ingest JSON | `reports/p0/review_v21.html`, `BE/tools/ingest_review.py` |
 | 19/11 | **Duyệt vòng 1** (export người dùng, ảnh #6–#11, vé phố cổ Hội An, tách Sơn Trà/Bạch Đằng/Hải Vân, gộp Linh Ứng) | `reports/p0/14_review_round1.md`; 872 POI, review 1; ma trận 789 |
+| 19/11 | Duyệt vòng 1b: VỌC, Hải Vân Quan (giờ + cụm hai_van), Thủy Vân Sơn xóa, Bãi Đá Đen | 873 POI, review 0, **G1–G5 + rule 12 xanh**; còn Bãi Rạng, Hồ Xanh |
 
 **Việc mở tiếp theo:**
 - VỌC Glamping (review).

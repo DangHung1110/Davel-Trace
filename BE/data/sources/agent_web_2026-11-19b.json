@@ -38,6 +38,10 @@
    "ticket_vnd": 0, "free_entry": true, "hours": "19:00-21:00", "confidence": 0.5,
    "note": "Diễn 19h mọi ngày tại Vườn tượng An Hội; xem miễn phí, mua thẻ bài 20.000đ/thẻ nếu chơi (mia.vn 12/05/2024). Giờ kết thúc chưa có nguồn — 21:00 là ước lượng.",
    "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-bai-choi-hoi-an-15527"},
+  {"poi_id": "manual:son-tra-bai-da-den", "name": "Bãi Đá Đen (Bãi Obama) Sơn Trà", "ticket_vnd": 0, "free_entry": true,
+   "hours": "00:00-23:59", "confidence": 0.55,
+   "note": "Khu công cộng, không vé; có thể mất phí gửi xe ~10.000đ (nguồn người dùng). Mở suốt ngày đêm nhưng nên đi ban ngày (đường tối, sóng lớn); đẹp 06:00-09:00 hoặc 16:30-18:00; đá trơn, đi giày bám, ít quán (nangtrip FAQ). Toạ độ nangtrip 16.1474562,108.2338043.",
+   "evidence_url": "https://nangtrip.com/activities/bai-da-den"},
   {"poi_id": "manual:hai-van-quan", "name": "Hải Vân Quan", "ticket_vnd": 70000, "confidence": 0.6,
    "note": "70.000đ/người/lượt (khách VN và nước ngoài), miễn phí trẻ <13 tuổi, giảm 50% cư dân Huế/Đà Nẵng, người cao tuổi…; nghị quyết HĐND Huế 22/5, hiệu lực tới hết 2028 (khamphahue); nangtrip cũng ghi ~70.000đ. GIỜ MỞ CỬA: chưa nguồn nào nêu. Điểm dừng chân trên Đèo Hải Vân — đi đèo thì đề xuất ghé luôn.",
    "evidence_url": "https://khamphahue.com.vn/en-us/Hue-24h/Travel/tid/Hue-Approves-Entry-Fee-for-Hai-Van-Gate-National-Relic.html/pid/18947/cid/513"}

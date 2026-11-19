@@ -57,3 +57,19 @@
 - Còn đỏ:
   - **G3**: Hải Vân Quan đã có vé 70.000đ (nghị quyết HĐND Huế, khamphahue) nhưng không nguồn nào nêu giờ mở cửa.
   - **G4**: VỌC Glamping đang `review`.
+
+## Vòng 1b — 19/11 tối (theo phản hồi người dùng)
+
+- **Chùa Quán Thế Âm (Ngũ Hành Sơn) và Chùa Linh Ứng Sơn Trà**: người dùng xác nhận là 2 chùa khác nhau. Giữ cả 2 và ghi chú phân biệt.
+- **VỌC Glamping** → active, `expensive`, mở 24/24 (nghiencamtrai 12/10/2025).
+  - Gói qua đêm 695.000–795.000đ/người, 183 Nam Cao, Hòa Khánh Nam.
+  - Vẫn để `paid_attraction`. Bản chất là chỗ ở qua đêm; có thể chuyển `lodging` nếu muốn.
+- **Thủy Vân Sơn** → excluded (người dùng xóa).
+- **Hải Vân Quan**: vé 70.000đ, 07:00–17:30 (vnexpress 1/6/2026). Hải Vân Quan và Đèo Hải Vân cùng `cluster_id = hai_van` (gợi ý đi cùng, không phải ràng buộc).
+- **Bãi Đá Đen (Bãi Obama)**: thêm `manual:son-tra-bai-da-den`.
+  - Toạ độ lấy từ nangtrip. Miễn phí; có thể mất khoảng 10k gửi xe.
+- **Bãi Rạng, Hồ Xanh**: chưa thêm vì chưa có toạ độ có nguồn.
+  - Pane Codex (t18) đang tìm, chờ người duyệt lệnh đọc web.
+- **Kết quả**:
+  - 873 POI: 829 active, 44 excluded, 0 review. Ma trận 790 điểm, 0 ô lỗi.
+  - **Gate P0 xanh hết** (rule 1–12, G1–G5).
