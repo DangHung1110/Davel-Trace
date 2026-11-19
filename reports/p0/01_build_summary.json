@@ -1,0 +1,187 @@
+{
+ "built_at": "2026-11-19",
+ "data_version": "v2.3",
+ "candidates": 877,
+ "records_built": 876,
+ "kept": 556,
+ "dropped": 321,
+ "dropped_by_rule": {
+  "excluded": 136,
+  "lodging": 76,
+  "review": 1,
+  "closed": 6,
+  "not_listed": 17,
+  "few_reviews": 77,
+  "no_hours": 6,
+  "hours_conflict": 1,
+  "duplicate": 1
+ },
+ "kept_by_role": {
+  "attraction": 186,
+  "meal": 149,
+  "nightlife": 57,
+  "rest": 111,
+  "wellness": 53
+ },
+ "kept_by_category": {
+  "beach": 15,
+  "cafe": 111,
+  "day_market": 23,
+  "museum_indoor": 16,
+  "night_market": 5,
+  "nightlife": 57,
+  "outdoor_landmark": 39,
+  "paid_attraction": 33,
+  "religious": 47,
+  "restaurant": 149,
+  "viewpoint": 8,
+  "wellness": 53
+ },
+ "kept_by_zone": {
+  "ba_na_tay": 20,
+  "hai_van_lien_chieu": 57,
+  "hoi_an": 95,
+  "ngu_hanh_son": 33,
+  "son_tra_my_khe": 165,
+  "trung_tam": 186
+ },
+ "zone_roles": {
+  "ba_na_tay": {
+   "attraction": 7,
+   "meal": 11,
+   "rest": 2
+  },
+  "hai_van_lien_chieu": {
+   "attraction": 18,
+   "meal": 14,
+   "nightlife": 2,
+   "rest": 20,
+   "wellness": 3
+  },
+  "hoi_an": {
+   "attraction": 45,
+   "meal": 36,
+   "nightlife": 2,
+   "rest": 12
+  },
+  "ngu_hanh_son": {
+   "attraction": 14,
+   "meal": 8,
+   "nightlife": 2,
+   "rest": 6,
+   "wellness": 3
+  },
+  "son_tra_my_khe": {
+   "attraction": 41,
+   "meal": 39,
+   "nightlife": 27,
+   "rest": 26,
+   "wellness": 32
+  },
+  "trung_tam": {
+   "attraction": 61,
+   "meal": 41,
+   "nightlife": 24,
+   "rest": 45,
+   "wellness": 15
+  }
+ },
+ "hours_kind": {
+  "fixed": 112,
+  "safe_window": 444
+ },
+ "hours_verified_by": {
+  "agent_web": 37,
+  "inferred": 444,
+  "open_data": 75
+ },
+ "price_tier": {
+  "cheap": 178,
+  "expensive": 13,
+  "free": 100,
+  "included": 17,
+  "medium": 248
+ },
+ "price_verified_by": {
+  "agent_web": 30,
+  "inferred": 518,
+  "user": 8
+ },
+ "dwell_verified_by": {
+  "inferred": 554,
+  "user": 2
+ },
+ "location_verified_by": {
+  "inferred": 334,
+  "open_data": 222
+ },
+ "on_request": 26,
+ "audience": {
+  "None": 100,
+  "local": 45,
+  "tourist": 411
+ },
+ "signature": 33,
+ "osm_linked": 227,
+ "wikidata_linked": 7,
+ "quarantined_pois": 556,
+ "google_evidence_of_kept": {
+  "google_maps_check": 99,
+  "google_v1": 457
+ },
+ "names_fixed": [
+  {
+   "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+   "from": "Elsa Spa massage Da Nang ( 엘사 스파 )",
+   "to": "Elsa Spa"
+  },
+  {
+   "poi_id": "ChIJHfGPsJkXQjERsHCXRTXX_Xs",
+   "from": "다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang )",
+   "to": "Nhà hàng Hàn Quốc lòng bò nướng"
+  },
+  {
+   "poi_id": "ChIJM1DTVHkZQjERDW1JNclcAtw",
+   "from": "Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng",
+   "to": "Massage người mù Đức Quý"
+  },
+  {
+   "poi_id": "ChIJZSsvT9QZQjERf-oLnsT1C3Y",
+   "from": "Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản",
+   "to": "Yen Yakiniku & Izakaya"
+  },
+  {
+   "poi_id": "ChIJn9Kkxh4ZQjERgDXEcvzD4nI",
+   "from": "MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",
+   "to": "MarLan Pub"
+  },
+  {
+   "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
+   "from": "Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품",
+   "to": "Vigift Đà Nẵng – Quà Đặc Sản"
+  },
+  {
+   "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
+   "from": "Clover Spa - Best Spa Massage Da Nang 다낭 마사지",
+   "to": "Clover Spa"
+  },
+  {
+   "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
+   "from": "켓 바 1 Kết Bar",
+   "to": "Kết Bar"
+  },
+  {
+   "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
+   "from": "Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |",
+   "to": "Jeju Spa – Massage & Nail"
+  },
+  {
+   "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
+   "from": "오빠O Bar- Lounge & More",
+   "to": "Oppa O Bar"
+  }
+ ],
+ "review_decided": [
+  "osm:node/1623183649"
+ ]
+}

@@ -1,0 +1,142 @@
+poi_id,name,category,zone,v21_status,v22_status,reason,decided_by
+osm:way/404714309,Nhà thờ Chính tòa Đà Nẵng,religious,trung_tam,active,(gộp trùng),trùng 'Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng)',migrate_v2 (POI mới trùng POI cũ)
+manual:bai-tam-pham-van-dong,Bãi tắm Phạm Văn Đồng,beach,son_tra_my_khe,(không có),active,,review_v1
+manual:golden-pine,New Golden Pine Club,nightlife,trung_tam,(không có),active,,review_v1
+manual:sky36,Sky36,nightlife,trung_tam,(không có),active,,review_v1
+manual:cau-tinh-yeu,Cầu Tình Yêu,outdoor_landmark,trung_tam,(không có),active,,review_v1
+manual:ca-chep-hoa-rong,Tượng Cá Chép Hóa Rồng,outdoor_landmark,trung_tam,(không có),active,,review_v1
+manual:nha-tho-con-ga,Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng),religious,trung_tam,(không có),active,,review_v1
+manual:banh-xeo-ba-duong,Bánh Xèo Bà Dưỡng,restaurant,trung_tam,(không có),active,,review_v1
+manual:be-man,Hải Sản Bé Mặn,restaurant,son_tra_my_khe,(không có),active,,review_v1
+ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu Ẩm Thực Chợ Cồn -식사 공간,day_market,trung_tam,active,excluded,"khu ăn uống trong Chợ Cồn, không phải chợ",plan_tier_v1
+ChIJfQr_phEZQjER5leh47CfKTQ,Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê,museum_indoor,trung_tam,active,excluded,"chỉ mở theo đoàn, phải liên hệ trước",plan_tier_v1
+ChIJWZUpXf0RQjER6uu8gU2gIhI,Mai Vang (Yellow Blossom) Bonsai Garden,outdoor_landmark,ngu_hanh_son,active,excluded,"vườn tư nhân, phải liên hệ trước",plan_tier_v1
+ChIJO0IiWR0RQjERtGkQtqESJ1Y,Động Vân Thông,outdoor_landmark,ngu_hanh_son,active,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJ8be7KQARQjER5Lnd2LHaDAs,Huyen Khong Cave,religious,ngu_hanh_son,active,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJVWzfhcwZQjERa_qP0BpsBkk,Nhà thờ Tộc Hồ Thanh Khê,religious,hai_van_lien_chieu,active,excluded,"nhà thờ tộc, không phải điểm tham quan",plan_tier_v1
+ChIJNdWwUgARQjERansIEJQleAU,Động Tàng Chơn,religious,ngu_hanh_son,active,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJOxVypBYRQjERMmK2P6JbzF0,Động Âm Phủ,religious,ngu_hanh_son,active,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJu9TGuzEZQjERolkiV2-wyQQ,Massage Khiếm Thị Mai Liên,wellness,hai_van_lien_chieu,active,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJ66onuEIZQjERJcc014sju08,Rice' Spa &Nails,wellness,hai_van_lien_chieu,review,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJl4vFoHERQjERWxJkz9bsJDg,Spa Luna,wellness,ngu_hanh_son,active,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,beach,ngu_hanh_son,active,excluded,trùng hoặc nằm trong 'Bãi biển Non Nước',review_v1
+osm:node/4172034499,Non Nuoc Beach,beach,ngu_hanh_son,active,excluded,trùng hoặc nằm trong 'Bãi Tắm Non Nước',review_v1
+ChIJg-cynKIXQjERyE7ZIaTaCO8,Public Beach Access,beach,ngu_hanh_son,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4741642219,Public beach,beach,hai_van_lien_chieu,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJXeYho6gZQjERhk0LVFc69TA,2AM Coffee,cafe,trung_tam,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJE4CAepEXQjERg75wrYIZk2Q,"Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng",cafe,son_tra_my_khe,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJQW9rQNwZQjER4zC6dP7vitg,GREEN COFFEE,cafe,hai_van_lien_chieu,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+osm:node/7477670191,Gio coffee,cafe,son_tra_my_khe,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+ChIJoeH5ukkZQjERxUlcUbKA-XE,Ibasho Coffee,cafe,hai_van_lien_chieu,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJbyos3sAXQjER6Eajh3ljHYE,The South Coffee,cafe,ngu_hanh_son,active,excluded,địa điểm đã đổi tên hoặc đổi chủ,review_v1
+ChIJFad1TFAXQjERE9B6U1THHT4,Chợ Khuê Mỹ,day_market,ngu_hanh_son,active,excluded,không phải điểm đến du lịch,review_v1
+osm:node/4386676224,Chợ Miếu Bông,day_market,ngu_hanh_son,active,excluded,không phải điểm đến du lịch,review_v1
+osm:node/13293564930,Himawari,day_market,trung_tam,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/14045110791,Lucky Retail,day_market,trung_tam,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/9921315929,Lưu Niệm - Đặc Sản,day_market,trung_tam,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/14045130739,Made in Vietnam,day_market,trung_tam,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/12811972501,Mart Souvenir,day_market,son_tra_my_khe,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/7095169369,Non La,day_market,trung_tam,active,excluded,trùng hoặc nằm trong 'Art Gallery',review_v1
+ChIJ1XDmcgAZQjERg3z1Ix0EbZA,RAIN MUSIC BOX & GAME,day_market,hai_van_lien_chieu,review,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJm2iwgggbQjERj-x6QTYemFQ,Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng,day_market,son_tra_my_khe,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+manual:smile-goods-danang,Smile Goods Danang,day_market,trung_tam,active,excluded,toạ độ sai — cần nhập lại,review_v1
+osm:node/11427582964,Thai Market,day_market,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/9921282483,Viet Nam's Delights,day_market,trung_tam,active,excluded,trùng hoặc nằm trong 'Viet Nam's Delights',review_v1
+osm:node/7477670190,노니판매점,day_market,son_tra_my_khe,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/7095169367,Art Gallery,museum_indoor,trung_tam,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/8883385553,TASY STUDIO,museum_indoor,hoi_an,active,excluded,không phải điểm đến du lịch,review_v1
+ChIJOZ__YJwXQjER4wLDpzs9L5c,Chợ Đêm An Thượng,night_market,son_tra_my_khe,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJVS4QEX8fQjERk1vVwmP0Rk8,An Nhiên Quán,nightlife,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJFXRrR0wZQjERNl4jMD9QNFI,Blues Q Coffee and Craft Beer Garden ( Bia thủ công),nightlife,trung_tam,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJs95SfgAZQjERWa0RkAoF0XA,City Box - Music Box,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJmd-xKSoZQjERr8BS2agMkCI,Cà Phê Star Pub,nightlife,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJD8ivG7YZQjERxe5fgwGSVao,KARAOKE CAMEL 2,nightlife,trung_tam,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJOean5VUZQjERMWDUmGdTpJQ,KARAOKE VENUS,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJR7_4DdYYQjERUNxW7r51REs,Karaoke Alô,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJP1XHPQAZQjERinsxWb2Ga0A,Karaoke Monaco Đà Nẵng,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJZ5ZGlCsZQjER95guGn5ybGo,Karaoke Next Top Luxury,nightlife,son_tra_my_khe,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJqRL3QEQZQjER71D0j0o7M7Q,Karaoke Night Club,nightlife,trung_tam,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJj8OOR1UYQjERdZlR_ysOs4E,Karaoke Phương Trí,nightlife,trung_tam,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJuQL2IN4YQjERYHan1mFjMdA,Karaoke RETRO,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ3zTSR1UYQjERxzlJpa-DNHE,Karaoke Sao Mai,nightlife,trung_tam,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ0-6wNdsXQjER068QxYa3E5o,Karaoke Song Ca,nightlife,son_tra_my_khe,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJh73ojOMXQjERtV8NNHwmrO4,Karaoke Thao,nightlife,son_tra_my_khe,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJcYos3CkZQjERibEDbcXOpQs,Quán Karaoke Music For You,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ-WGIA80YQjER8XDqSVShrOE,Quán Karaoke Smile Idol,nightlife,hai_van_lien_chieu,active,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJc2sSdpMZQjERg6ykGdI-3r4,Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm,nightlife,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJQxr6eAAfQjER1vwrQRjtk60,Quán nhậu Keo Lá Tràm,nightlife,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJcTnFX6QfQjERgmN3buOe9AQ,Rượu Nếp Nhà Nấu,nightlife,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJw3dqIx8ZQjERxFZPN1A3gew,The PILL Bar & Club,nightlife,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJl7zcVgARQjERTJASEbCGeuc,Writer's Bar,nightlife,ngu_hanh_son,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+osm:node/6346486685,Cây đa đại thụ,outdoor_landmark,son_tra_my_khe,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/5273998822,Cầu Tiên Sơn,outdoor_landmark,son_tra_my_khe,active,excluded,không phải điểm đến du lịch,review_v1
+ChIJF8yRoecZQjERdDBeBdSRD-Y,DA NANG DOWNTOWN,outdoor_landmark,trung_tam,review,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJC0W3bjoYQjERVBMskQcoQck,Di tích Thành Điện Hải,outdoor_landmark,trung_tam,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+osm:node/4924323121,Fishing Village and Fleet,outdoor_landmark,son_tra_my_khe,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJKytgDsgQQjER6al50BDd7vc,Hòn Thủy Sơn,outdoor_landmark,ngu_hanh_son,active,excluded,trùng hoặc nằm trong 'Ngũ Hành Sơn',review_v1
+ChIJJ66EjfQRQjERrmpQQcYTgq8,Khu Dừng Chân,outdoor_landmark,ngu_hanh_son,review,excluded,không phải điểm đến du lịch,review_v1
+osm:node/10709738005,Làng chiếu Cẩm Nê,outdoor_landmark,trung_tam,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/13677406601,"Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",outdoor_landmark,son_tra_my_khe,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/5286977425,Núi Thần Tài,outdoor_landmark,ba_na_tay,review,excluded,không phải điểm tham quan (điểm thật 'Công viên Suối khoáng nóng Núi Thần Tài' chưa có),review_v1
+ChIJqdKPDDIZQjERC2tfiDtFLXE,Quảng trường Liên Chiểu,outdoor_landmark,hai_van_lien_chieu,active,excluded,trùng hoặc nằm trong 'Công Viên Trung Tâm Hành Chính Liên Chiểu',review_v1
+osm:node/12701675501,Small waterfall,outdoor_landmark,son_tra_my_khe,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/13913400201,Suối Ngọc,outdoor_landmark,hai_van_lien_chieu,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/2177056870,Thác Tóc Tiên,outdoor_landmark,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/4706189591,To Quoc Ghi Cong,outdoor_landmark,ngu_hanh_son,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,trung_tam,review,excluded,không phải điểm đến du lịch,review_v1
+ChIJyWFmArX3QTERon6tUT6re4Q,Ba Na Hills,paid_attraction,ba_na_tay,review,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJ5ySJbAAZQjEROESCTb3NJsw,Bến Du Thuyền Sông Hàn,paid_attraction,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+osm:node/10154412164,Fantasy Park,paid_attraction,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJZ9UJGQQZQjERFL90XKMPBGk,Hồ Bơi Thanh Khê,paid_attraction,trung_tam,active,excluded,không phải điểm đến du lịch,review_v1
+ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,paid_attraction,hai_van_lien_chieu,active,excluded,trùng hoặc nằm trong 'Khu du lịch Nam Ô Heritage',review_v1
+ChIJg5OvAgAhQjERKbrq9-Wza-U,Khu Du Lịch Sinh Thái Thuỷ Vân Sơn,paid_attraction,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJH1ujCM0XQjERcOl1lB9Ns6k,Tuyet Pham Cooking Class,paid_attraction,son_tra_my_khe,active,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+ChIJX7bFNr8NQjERJJLeQ2lyHWo,"rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",paid_attraction,hoi_an,active,excluded,trùng hoặc gộp với điểm khác,review_v1
+osm:node/5421670780,Chùa An Phước,religious,trung_tam,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJCRy3iv_2QTERfZxGJkIMHHQ,Chùa Linh Ứng - Bà Nà,religious,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJp3BwHgsZQjERzQZfxwNQNmE,Chùa Làng Thanh Khê,religious,hai_van_lien_chieu,active,excluded,trùng hoặc nằm trong 'Chùa Làng Thanh Khê',review_v1
+ChIJo2Yyix8ZQjERmG7AHQkOpIo,Chùa Phước Lộc,religious,hai_van_lien_chieu,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJuzUYUgAXQjER7uqAcJPQMY0,Cổng Chùa Linh Ứng,religious,son_tra_my_khe,active,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+ChIJodkOVL8fQjERGwRf5tBRLvI,Di tích Đình Hồng Phước,religious,hai_van_lien_chieu,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+osm:node/4845297821,Gần núi thần tài,religious,ba_na_tay,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/12404434601,Khu Văn hóa Tâm linh Đà Sơn,religious,trung_tam,active,excluded,trùng hoặc nằm trong 'CHÙA KHÔNG TÊN ĐÀ NẴNG',review_v1
+osm:node/13687068650,Linh Phong Bảo Tháp,religious,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJnwKLiE4YQjERMVI0qrqKg1c,Nhà Thờ Giáo Xứ Tam Tòa,religious,trung_tam,active,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJPdLppX4XQjERnV5xcr28sO0,Nhà thờ Gia Phước,religious,son_tra_my_khe,active,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJxdBK6SsYQjERYojL_cVEkbs,Nhà thờ Giáo xứ An Hải,religious,trung_tam,active,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+osm:node/4294143691,Nhà thờ Giáo xứ An Thượng,religious,son_tra_my_khe,active,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJ8ar-PNQXQjERFGGdrbCAQbg,Tháp Xá Lợi,religious,son_tra_my_khe,active,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,religious,son_tra_my_khe,active,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+osm:node/3760247202,chùa Sư Nữ,religious,trung_tam,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/1335374809,chùa am Nam Ngư,religious,hai_van_lien_chieu,active,excluded,không phải điểm đến du lịch,review_v1
+osm:node/1335374858,chùa am thờ Hỏa Xa,religious,hai_van_lien_chieu,active,excluded,không phải điểm đến du lịch,review_v1
+osm:node/4294139091,nhà thờ An Ngãi Tây,religious,ba_na_tay,active,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4294135790,nhà thờ Phú Thượng,religious,ba_na_tay,active,excluded,trùng hoặc nằm trong 'Nhà thờ Phú Thượng',review_v1
+osm:node/4294167889,nhà thờ Tùng Sơn,religious,ba_na_tay,active,excluded,trùng hoặc nằm trong 'NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO',review_v1
+ChIJ9yzkbH0ZQjERDhPDi_ITcmM,Đà Sơn tâm linh,religious,trung_tam,review,excluded,trùng hoặc gộp với điểm khác,review_v1
+ChIJ5QtSVAAZQjERwKdjEbXi6wk,Bếp nhà Hà,restaurant,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJrYC1becZQjER-97HchRaP_Q,Minh Chau Palace,restaurant,hai_van_lien_chieu,active,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJHyNg3TIYQjERqz7x0udvRd0,Nhà Hàng Bảo Châu,restaurant,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJQwYzLAcZQjERVvClU0ze5Ek,Nhà hàng MIKADO,restaurant,trung_tam,active,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJH4d2i1YYQjERFSA6rKn_Pos,Nhà hàng Phú Mỹ Thành,restaurant,trung_tam,active,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJadL4d-gYQjERKE_uTeup8iY,Nhà hàng Tiệc cưới Hưng Gia Trần,restaurant,hai_van_lien_chieu,active,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJ8aa8NQAZQjERRM8-aOoNZ30,Nhà hàng hải sản .,restaurant,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+osm:node/2093848429,Kim Sơn,viewpoint,ngu_hanh_son,active,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/2093848431,Mộc Sơn,viewpoint,ngu_hanh_son,active,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/4122433690,Núi Bà Nà,viewpoint,ba_na_tay,review,excluded,trùng hoặc nằm trong 'Sun World Bà Nà Hills',review_v1
+osm:node/10303626688,Núi Cẩm Khê,viewpoint,trung_tam,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11630013743,Núi Hoi,viewpoint,hai_van_lien_chieu,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11762365155,Núi Hòng Chan,viewpoint,hai_van_lien_chieu,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11629996926,Núi Hải Vân,viewpoint,hai_van_lien_chieu,review,excluded,chỉ là một phần của 'Hải Vân Quan' — xếp điểm chính,review_v1
+osm:node/11629841009,Núi Khe Xương,viewpoint,ba_na_tay,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/10303626687,Núi Phước Tường,viewpoint,trung_tam,review,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/2093848443,Thổ Sơn,viewpoint,ngu_hanh_son,active,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/1036552571,Đèo Hải Vân,viewpoint,hai_van_lien_chieu,active,excluded,trùng hoặc nằm trong 'Hải Vân Quan',review_v1
+ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,ba_na_tay,active,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJacuaCgAfQjERmRXLEMbkPJM,An Mộc Spa,wellness,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJC1S7VAAZQjERFItFlyewDHY,Glow Spa Thanh Khê,wellness,trung_tam,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJYU-cVQAXQjERxfDy3td5_ac,New World Spa,wellness,hai_van_lien_chieu,active,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJWd2LBrkZQjER4hLHO81ipK0,Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy,wellness,hai_van_lien_chieu,active,excluded,chăm sóc da theo liệu trình — không phải spa thư giãn,review_v1
+ChIJw2G2IwAfQjERGAvvbDnKLHM,Thanh Tuyền Spa,wellness,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJ95sVZAAZQjERaWAzQF3vSiQ,Trạm spa- nặn mụn,wellness,hai_van_lien_chieu,active,excluded,chăm sóc da theo liệu trình — không phải spa thư giãn,review_v1
+ChIJ3dEof08ZQjERrJfwaLyIAIk,Vân Anh beauty spa,wellness,hai_van_lien_chieu,active,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1

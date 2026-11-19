@@ -1,0 +1,24 @@
+{
+ "about": "Giá vé / giờ mở tra cứu web ngày 2026-11-19 (Claude, WebSearch + WebFetch) cho các POI có price.tier = null. verified_by=agent_web: có URL đã mở và đọc, CHƯA được người kiểm tra tại chỗ. Không dùng Google Maps. POI không tìm được nguồn đáng tin KHÔNG có mặt ở đây (xem reports/p0/13_null_price_research.md).",
+ "checked_at": "2026-11-19",
+ "items": [
+  {"poi_id": "osm:node/2093848429", "name": "Kim Sơn", "ticket_vnd": 0, "free_entry": true, "hours": "07:00-17:30", "confidence": 0.6,
+   "note": "Bảng giá Ngũ Hành Sơn: chỉ Thủy Sơn thu 40.000đ; 'Các ngọn núi khác (Kim, Mộc, Hỏa, Thổ): Không thu phí vào cổng'. Giờ 07:00-17:30 (bài 23/01/2026, nguồn khác ghi 17:00/19:00).",
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html"},
+  {"poi_id": "osm:node/2093848431", "name": "Mộc Sơn", "ticket_vnd": 0, "free_entry": true, "hours": "07:00-17:30", "confidence": 0.6,
+   "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026).",
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html"},
+  {"poi_id": "osm:node/2093848443", "name": "Thổ Sơn", "ticket_vnd": 0, "free_entry": true, "hours": "07:00-17:30", "confidence": 0.6,
+   "note": "Như Kim Sơn: các ngọn ngoài Thủy Sơn không thu phí vào cổng (vietnambooking 23/01/2026).",
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/ngu-hanh-son-da-nang.html"},
+  {"poi_id": "osm:node/10709724107", "name": "Làng đá mỹ nghệ Non Nước", "ticket_vnd": 0, "free_entry": true, "hours": null, "confidence": 0.5,
+   "note": "gtrip.vn (13/11/2026): 'Opening hours: Sunrise to sunset', 'Entrance fee: Free'. Giờ không ghi cụ thể nên để trống.",
+   "evidence_url": "https://gtrip.vn/attractions/non-nuoc-stone-carving-village"},
+  {"poi_id": "osm:node/12344125229", "name": "Precious Heritage Art Gallery Museum", "ticket_vnd": 0, "free_entry": true, "hours": "08:00-20:00", "confidence": 0.6,
+   "note": "localvietnam (cập nhật 13/10/2025): 'Free admission', 'Open daily from 8:00 AM to 8:00 PM', 26 Phan Bội Châu, Hội An.",
+   "evidence_url": "https://localvietnam.com/quang-nam/hoi-an/precious-heritage-museum/"},
+  {"poi_id": "osm:node/5513474821", "name": "Công viên Đất nung Thanh Hà", "ticket_vnd": 50000, "min_vnd": 30000, "max_vnd": 50000, "confidence": 0.6,
+   "note": "sunparadiseland (15/08/2026): 'Giá vé vào công viên Đất nung Thanh Hà là 50.000 đồng cho người lớn và 30.000 đồng đối với trẻ em'; mở từ 08:30 (giờ đóng ghi '5:00' không rõ, giữ giờ OSM hiện có).",
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/kham-pha-cong-vien-dat-nung-thanh-ha-25272"}
+ ]
+}

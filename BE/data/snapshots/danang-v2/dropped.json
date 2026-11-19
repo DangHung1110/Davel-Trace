@@ -1,0 +1,2907 @@
+{
+ "note": "POI không giữ trong danang-v2 (mỗi POI một lý do, luật ở BE/ml/data/curate_v2.py). Muốn giữ lại một POI: thêm {\"status\": \"active\"} cho poi_id đó vào BE/data/sources/decisions_*.json rồi build lại (trừ lưu trú).",
+ "data_version": "v2.3",
+ "count": 321,
+ "count_by_rule": {
+  "excluded": 136,
+  "lodging": 76,
+  "review": 1,
+  "closed": 6,
+  "not_listed": 17,
+  "few_reviews": 77,
+  "no_hours": 6,
+  "hours_conflict": 1,
+  "duplicate": 1
+ },
+ "items": [
+  {
+   "poi_id": "ChIJ-WGIA80YQjER8XDqSVShrOE",
+   "name": "Quán Karaoke Smile Idol",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
+   "name": "Karaoke Song Ca",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+   "name": "RAIN MUSIC BOX & GAME",
+   "category": "day_market",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ1dsj5MQZQjERbgyzx94Lv20",
+   "name": "Alpha Medical Skin - Clinic & Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "cơ sở y tế/thẩm mỹ ('clinic' trong tên)",
+   "decided_by": "rules_v2"
+  },
+  {
+   "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
+   "name": "Vân Anh beauty spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ3zTSR1UYQjERxzlJpa-DNHE",
+   "name": "Karaoke Sao Mai",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ5QtSVAAZQjERwKdjEbXi6wk",
+   "name": "Bếp nhà Hà",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
+   "name": "Bến Du Thuyền Sông Hàn",
+   "category": "paid_attraction",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ66onuEIZQjERJcc014sju08",
+   "name": "Rice' Spa &Nails",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJ6e7t67oZQjERLcf4KcgElEc",
+   "name": "Maju Top Class Bar - lounge",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quán có tiếp viên (không phù hợp lịch trình chung)",
+   "decided_by": "rules_v2"
+  },
+  {
+   "poi_id": "ChIJ8aa8NQAZQjERRM8-aOoNZ30",
+   "name": "Nhà hàng hải sản .",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ8ar-PNQXQjERFGGdrbCAQbg",
+   "name": "Tháp Xá Lợi",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ8be7KQARQjER5Lnd2LHaDAs",
+   "name": "Huyen Khong Cave",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
+   "name": "Trạm spa- nặn mụn",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "chăm sóc da theo liệu trình — không phải spa thư giãn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ9yzkbH0ZQjERDhPDi_ITcmM",
+   "name": "Đà Sơn tâm linh",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trùng hoặc gộp với điểm khác",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
+   "name": "Di tích Thành Điện Hải",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJC1S7VAAZQjERFItFlyewDHY",
+   "name": "Glow Spa Thanh Khê",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+   "name": "Chùa Linh Ứng - Bà Nà",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
+   "name": "KARAOKE CAMEL 2",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJE4CAepEXQjERg75wrYIZk2Q",
+   "name": "Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJF8yRoecZQjERdDBeBdSRD-Y",
+   "name": "DA NANG DOWNTOWN",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJFXRrR0wZQjERNl4jMD9QNFI",
+   "name": "Blues Q Coffee and Craft Beer Garden ( Bia thủ công)",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
+   "name": "Chợ Khuê Mỹ",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJFdFWDOQZQjERhEwTQhM7XII",
+   "name": "YUMI Counter & Lounge",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "quán có tiếp viên (không phù hợp lịch trình chung)",
+   "decided_by": "rules_v2"
+  },
+  {
+   "poi_id": "ChIJH1ujCM0XQjERcOl1lB9Ns6k",
+   "name": "Tuyet Pham Cooking Class",
+   "category": "paid_attraction",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE",
+   "name": "Đỉnh Bà Nà",
+   "category": "viewpoint",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJH4d2i1YYQjERFSA6rKn_Pos",
+   "name": "Nhà hàng Phú Mỹ Thành",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
+   "name": "Đà Nẵng Food Tour",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJHyNg3TIYQjERqz7x0udvRd0",
+   "name": "Nhà Hàng Bảo Châu",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJJ66EjfQRQjERrmpQQcYTgq8",
+   "name": "Khu Dừng Chân",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
+   "name": "Hòn Thủy Sơn",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Ngũ Hành Sơn'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJNdWwUgARQjERansIEJQleAU",
+   "name": "Động Tàng Chơn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
+   "name": "Động Vân Thông",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+   "name": "Chợ Đêm An Thượng",
+   "category": "night_market",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJOean5VUZQjERMWDUmGdTpJQ",
+   "name": "KARAOKE VENUS",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
+   "name": "Động Âm Phủ",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJP1XHPQAZQjERinsxWb2Ga0A",
+   "name": "Karaoke Monaco Đà Nẵng",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJPdLppX4XQjERnV5xcr28sO0",
+   "name": "Nhà thờ Gia Phước",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
+   "name": "GREEN COFFEE",
+   "category": "cafe",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJQwYzLAcZQjERVvClU0ze5Ek",
+   "name": "Nhà hàng MIKADO",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60",
+   "name": "Quán nhậu Keo Lá Tràm",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJR7_4DdYYQjERUNxW7r51REs",
+   "name": "Karaoke Alô",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJVS4QEX8fQjERk1vVwmP0Rk8",
+   "name": "An Nhiên Quán",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
+   "name": "Nhà thờ Tộc Hồ Thanh Khê",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "nhà thờ tộc, không phải điểm tham quan",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJW5KDTQAZQjERJXJQMoz2YJo",
+   "name": "ANGEL LOUNGE",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quán có tiếp viên (không phù hợp lịch trình chung)",
+   "decided_by": "rules_v2"
+  },
+  {
+   "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
+   "name": "Mai Vang (Yellow Blossom) Bonsai Garden",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "vườn tư nhân, phải liên hệ trước",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJWd2LBrkZQjER4hLHO81ipK0",
+   "name": "Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "chăm sóc da theo liệu trình — không phải spa thư giãn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+   "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "rule": "excluded",
+   "reason": "trùng hoặc gộp với điểm khác",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJXeYho6gZQjERhk0LVFc69TA",
+   "name": "2AM Coffee",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJYU-cVQAXQjERxfDy3td5_ac",
+   "name": "New World Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJZ5ZGlCsZQjER95guGn5ybGo",
+   "name": "Karaoke Next Top Luxury",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJZ9UJGQQZQjERFL90XKMPBGk",
+   "name": "Hồ Bơi Thanh Khê",
+   "category": "paid_attraction",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJZSAyL0YfQjERMP2R9yBDRwY",
+   "name": "KDL Sinh thái Nam Ô",
+   "category": "paid_attraction",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Khu du lịch Nam Ô Heritage'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJabEOcucXQjER-8MNU9FNODw",
+   "name": "Tượng Quan Thế Âm Bồ Tát",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM",
+   "name": "An Mộc Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
+   "name": "Nhà hàng Tiệc cưới Hưng Gia Trần",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
+   "name": "The South Coffee",
+   "category": "cafe",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "địa điểm đã đổi tên hoặc đổi chủ",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJc2sSdpMZQjERg6ykGdI-3r4",
+   "name": "Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJcTnFX6QfQjERgmN3buOe9AQ",
+   "name": "Rượu Nếp Nhà Nấu",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJcYos3CkZQjERibEDbcXOpQs",
+   "name": "Quán Karaoke Music For You",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+   "name": "Khu Ẩm Thực Chợ Cồn -식사 공간",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "khu ăn uống trong Chợ Cồn, không phải chợ",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJfQr_phEZQjER5leh47CfKTQ",
+   "name": "Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê",
+   "category": "museum_indoor",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "chỉ mở theo đoàn, phải liên hệ trước",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJg-cynKIXQjERyE7ZIaTaCO8",
+   "name": "Public Beach Access",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJg5OvAgAhQjERKbrq9-Wza-U",
+   "name": "Khu Du Lịch Sinh Thái Thuỷ Vân Sơn",
+   "category": "paid_attraction",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4",
+   "name": "Karaoke Thao",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJj8OOR1UYQjERdZlR_ysOs4E",
+   "name": "Karaoke Phương Trí",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
+   "name": "Spa Luna",
+   "category": "wellness",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+   "name": "Writer's Bar",
+   "category": "nightlife",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJm2iwgggbQjERj-x6QTYemFQ",
+   "name": "Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng",
+   "category": "day_market",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJmd-xKSoZQjERr8BS2agMkCI",
+   "name": "Cà Phê Star Pub",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJnwKLiE4YQjERMVI0qrqKg1c",
+   "name": "Nhà Thờ Giáo Xứ Tam Tòa",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJo2Yyix8ZQjERmG7AHQkOpIo",
+   "name": "Chùa Phước Lộc",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
+   "name": "Di tích Đình Hồng Phước",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJoeH5ukkZQjERxUlcUbKA-XE",
+   "name": "Ibasho Coffee",
+   "category": "cafe",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "đã đóng cửa hoặc không còn hoạt động",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJp3BwHgsZQjERzQZfxwNQNmE",
+   "name": "Chùa Làng Thanh Khê",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Chùa Làng Thanh Khê'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJqRL3QEQZQjER71D0j0o7M7Q",
+   "name": "Karaoke Night Club",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
+   "name": "Quảng trường Liên Chiểu",
+   "category": "outdoor_landmark",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Công Viên Trung Tâm Hành Chính Liên Chiểu'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJrYC1becZQjER-97HchRaP_Q",
+   "name": "Minh Chau Palace",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJs95SfgAZQjERWa0RkAoF0XA",
+   "name": "City Box - Music Box",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
+   "name": "Bãi Tắm Non Nước",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Bãi biển Non Nước'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJu9TGuzEZQjERolkiV2-wyQQ",
+   "name": "Massage Khiếm Thị Mai Liên",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",
+   "decided_by": "plan_tier_v1"
+  },
+  {
+   "poi_id": "ChIJuQL2IN4YQjERYHan1mFjMdA",
+   "name": "Karaoke RETRO",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "karaoke — không phải điểm đến cho khách du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJuzUYUgAXQjER7uqAcJPQMY0",
+   "name": "Cổng Chùa Linh Ứng",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJw2G2IwAfQjERGAvvbDnKLHM",
+   "name": "Thanh Tuyền Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJw3dqIx8ZQjERxFZPN1A3gew",
+   "name": "The PILL Bar & Club",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "quá ít bằng chứng là điểm đáng gợi ý",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJxdBK6SsYQjERYojL_cVEkbs",
+   "name": "Nhà thờ Giáo xứ An Hải",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q",
+   "name": "Ba Na Hills",
+   "category": "paid_attraction",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "manual:smile-goods-danang",
+   "name": "Smile Goods Danang",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "toạ độ sai — cần nhập lại",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/10154412164",
+   "name": "Fantasy Park",
+   "category": "paid_attraction",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/10303626687",
+   "name": "Núi Phước Tường",
+   "category": "viewpoint",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/10303626688",
+   "name": "Núi Cẩm Khê",
+   "category": "viewpoint",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/1036552571",
+   "name": "Đèo Hải Vân",
+   "category": "viewpoint",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Hải Vân Quan'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/10709738005",
+   "name": "Làng chiếu Cẩm Nê",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/11427582964",
+   "name": "Thai Market",
+   "category": "day_market",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/11629841009",
+   "name": "Núi Khe Xương",
+   "category": "viewpoint",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/11629996926",
+   "name": "Núi Hải Vân",
+   "category": "viewpoint",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "chỉ là một phần của 'Hải Vân Quan' — xếp điểm chính",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/11630013743",
+   "name": "Núi Hoi",
+   "category": "viewpoint",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/11762365155",
+   "name": "Núi Hòng Chan",
+   "category": "viewpoint",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/12404434601",
+   "name": "Khu Văn hóa Tâm linh Đà Sơn",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'CHÙA KHÔNG TÊN ĐÀ NẴNG'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/12701675501",
+   "name": "Small waterfall",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/12811972501",
+   "name": "Mart Souvenir",
+   "category": "day_market",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/13293564930",
+   "name": "Himawari",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/1335374809",
+   "name": "chùa am Nam Ngư",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/1335374858",
+   "name": "chùa am thờ Hỏa Xa",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/13677406601",
+   "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/13687068650",
+   "name": "Linh Phong Bảo Tháp",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/13913400201",
+   "name": "Suối Ngọc",
+   "category": "outdoor_landmark",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/14045110791",
+   "name": "Lucky Retail",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/14045130739",
+   "name": "Made in Vietnam",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/2093848429",
+   "name": "Kim Sơn",
+   "category": "viewpoint",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/2093848431",
+   "name": "Mộc Sơn",
+   "category": "viewpoint",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/2093848443",
+   "name": "Thổ Sơn",
+   "category": "viewpoint",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/2177056870",
+   "name": "Thác Tóc Tiên",
+   "category": "outdoor_landmark",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/3760247202",
+   "name": "chùa Sư Nữ",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4122433690",
+   "name": "Núi Bà Nà",
+   "category": "viewpoint",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Sun World Bà Nà Hills'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4172034499",
+   "name": "Non Nuoc Beach",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Bãi Tắm Non Nước'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4294135790",
+   "name": "nhà thờ Phú Thượng",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Nhà thờ Phú Thượng'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4294139091",
+   "name": "nhà thờ An Ngãi Tây",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4294143691",
+   "name": "Nhà thờ Giáo xứ An Thượng",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4294167889",
+   "name": "nhà thờ Tùng Sơn",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4386676224",
+   "name": "Chợ Miếu Bông",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4706189591",
+   "name": "To Quoc Ghi Cong",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4741642219",
+   "name": "Public beach",
+   "category": "beach",
+   "zone": "hai_van_lien_chieu",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4845297821",
+   "name": "Gần núi thần tài",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/4924323121",
+   "name": "Fishing Village and Fleet",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/5273998822",
+   "name": "Cầu Tiên Sơn",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/5286977425",
+   "name": "Núi Thần Tài",
+   "category": "outdoor_landmark",
+   "zone": "ba_na_tay",
+   "rule": "excluded",
+   "reason": "không phải điểm tham quan (điểm thật 'Công viên Suối khoáng nóng Núi Thần Tài' chưa có)",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/5421670780",
+   "name": "Chùa An Phước",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/6346486685",
+   "name": "Cây đa đại thụ",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/7095169367",
+   "name": "Art Gallery",
+   "category": "museum_indoor",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/7095169369",
+   "name": "Non La",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Art Gallery'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/7477670190",
+   "name": "노니판매점",
+   "category": "day_market",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/7477670191",
+   "name": "Gio coffee",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "rule": "excluded",
+   "reason": "không xác nhận được cơ sở tại toạ độ này",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/8883385553",
+   "name": "TASY STUDIO",
+   "category": "museum_indoor",
+   "zone": "hoi_an",
+   "rule": "excluded",
+   "reason": "không phải điểm đến du lịch",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/9921282483",
+   "name": "Viet Nam's Delights",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "trùng hoặc nằm trong 'Viet Nam's Delights'",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "osm:node/9921315929",
+   "name": "Lưu Niệm - Đặc Sản",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "excluded",
+   "reason": "tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận",
+   "decided_by": "review_v1"
+  },
+  {
+   "poi_id": "ChIJ03jTTgAXQjERpVQunmJHv2c",
+   "name": "Sontra Sea Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ27_WHYQXQjERfwDksZnfqKM",
+   "name": "TGT BEACH HOTEL",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ67sbOfwZQjERNfKPIKkEdyw",
+   "name": "La Maison Des Délices Hotel & Apartment",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ6ToOeVYYQjERj8BHGr6OZzc",
+   "name": "Khách Sạn Huy Hoàng",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ767Qs08YQjERaSc6TDUM4WQ",
+   "name": "Tan Hoang Long Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM",
+   "name": "Minh Toan SAFI Ocean Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJ9--6uKYZQjER5hS7ybSadkc",
+   "name": "Ocean Star Hotel Danang Bay",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJAUbRW8wZQjERf0sgTLr3Odo",
+   "name": "Mercury Boutique Hotel Danang",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJAXvSo5EZQjERNYmexlgFouI",
+   "name": "Lychee Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJC78Y_XQXQjERnNGlsKERAHs",
+   "name": "Eden Ocean View Đà Nẵng",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJCc2lfXgZQjERSUvZYj3RsMw",
+   "name": "Hotel Hồng Phúc 2",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJDYfSGZYZQjERmSERKl2Fj7E",
+   "name": "Hidden Oasis Homestay",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
+   "name": "Da Nang Mikazuki Japanese Resorts & Spa",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJEa410zMYQjER3f11TKinbkU",
+   "name": "Seahorse",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJEyLB68sQQjER7FTfkhV0_MY",
+   "name": "Danang Marriott Resort & Spa",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+   "name": "Moonlight Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg",
+   "name": "A La Carte Danang Beach",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJQWDpTQYQjER_VEl5Kl8HTY",
+   "name": "Central Hotel & Spa",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJXkD0OcbQjER8aTXsF-pS_Q",
+   "name": "Nguyen Gia Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJXm_IjoXQjERqJ9FNnjWpx8",
+   "name": "Leaf Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJbfHSGUXQjERRXCfzSX3s88",
+   "name": "Holiday Beach Hotel Danang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0",
+   "name": "Meliá Danang Beach Resort",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJKbntMIQXQjERh50f5GwfUm4",
+   "name": "Sunview Beach Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
+   "name": "Pullman Danang Beach Resort",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJM560Qk0YQjERJDvIocFeEIw",
+   "name": "Nice Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJMTadzMQQQjER29xKIZnnHAU",
+   "name": "Sandy Beach Non Nuoc Resort",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI",
+   "name": "Sala Danang Beach Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJN75cdYQXQjERBUnemtIubGM",
+   "name": "NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJO3oiB7gZQjERONk8CvO8oTM",
+   "name": "Dreamy Sky Boutique Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJQ-_7No0XQjERrR5A4J2fB9s",
+   "name": "Monarque Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
+   "name": "Risemount Premier Resort Đà Nẵng",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJQT4SLJwRQjERvym-dW5QWJ0",
+   "name": "Shilla Monogram Danang",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJQWWv4A8YQjERuqj9zjNqKAc",
+   "name": "Wyndham Danang Golden Bay Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJR4RA3I0XQjERajP7wKxjYu0",
+   "name": "Mangata Beachfront Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJRZXlI6MZQjERcre1gDV0kFE",
+   "name": "Minh Trường Hotel 1 - Khách sạn view biển Đà Nẵng",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJS07IM4Y9QjER5m2dd3eyku0",
+   "name": "Sơn Trà Resort & Spa",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJS0p9LgcXQjERRnDVDqhYvX4",
+   "name": "Khách sạn Radisson Đà Nẵng",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJT1sjdYQXQjERSLHKKZsmfdQ",
+   "name": "Paris Deli Danang Beach Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJTQo19YMXQjER1DttYZqjHYo",
+   "name": "Mandila Beach Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJUcvhoSgfQjERsU0uoSUtsto",
+   "name": "Cami Riverside Resort",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJUeabB3kXQjERFP2JL7c8YCg",
+   "name": "DLG Hotel Danang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJVVUC-lEYQjERqdANIT0ShEw",
+   "name": "Khách Sạn Smile",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJW7SBUHoXQjERdpSIWHkCuh0",
+   "name": "Khách sạn Mường Thanh Luxury Đà Nẵng",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4",
+   "name": "HAIAN Beach Hotel & Spa",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJWVl1NFUYQjERl2v9iNV-6F8",
+   "name": "Khách Sạn Đại Long",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJWcFCas8QQjERQGJzK8w1ta4",
+   "name": "Hyatt Regency Danang Resort and Spa",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJXRkLVPUZQjERhjMP_j_cdkQ",
+   "name": "Mường Thanh Grand Đà Nẵng Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJY2uJ-ZgRQjEROTUmuLdOGic",
+   "name": "The Five Villas Đà Nẵng",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJZWmMe1g9QjERrOGO9nVdagQ",
+   "name": "Khu nghỉ mát Du lịch sinh thái Tiên Sa",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJZxgQeVYYQjERTs3tEgp2lVY",
+   "name": "Khách Sạn Rose",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJbeO3ddMZQjERzeIxy-6JpYc",
+   "name": "Meliá Vinpearl Danang Riverfront",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJd3RleOYXQjERQQD0TduMYnU",
+   "name": "Olalani Resort & Condotel",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJfS4VlKsZQjERPQy1DOvrEa8",
+   "name": "Avenis Hotel",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJfbl-2sMXQjERKLfkuhtH-BE",
+   "name": "Peninsula Hotel Danang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJgXLzUFEYQjERujTQH477KV0",
+   "name": "Santori Hotel Danang Bay",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJj1wfpTQYQjERyAwSp1WRPpg",
+   "name": "Orange Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJjb4Ah-QRQjERFlzALzxOOvo",
+   "name": "Four Seasons Resort The Nam Hai, Hoi An",
+   "category": "lodging",
+   "zone": "hoi_an",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJkRSDGIIXQjERdg4lYna_jV0",
+   "name": "Pavilion Hotel DaNang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJmZHsE5U9QjERDa3a1CuK3lo",
+   "name": "InterContinental Danang Sun Peninsula Resort",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJn2uBfeUXQjERvTmGbdnPARE",
+   "name": "The Code Hotel & Spa Da Nang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJoSXYBfIXQjERoD3rJE5AWDU",
+   "name": "Khách Sạn SeaShore",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJoWXWNIwXQjERjFwxSEpICZ4",
+   "name": "Hilton Garden Inn Da Nang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJpTFl49UYQjERrzeUIxz8NL4",
+   "name": "Phước Hà",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJq-4rgiMYQjERWeE47TN-W_Q",
+   "name": "Vitalis Riverside Hotel",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJq0vnsSIZQjERiB7KQ_DkjW0",
+   "name": "MỘC NHIÊN HOTEL",
+   "category": "lodging",
+   "zone": "hai_van_lien_chieu",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJq56yCur3QTERYlOCLaSCVwQ",
+   "name": "Làng Toom Sara Đà Nẵng",
+   "category": "lodging",
+   "zone": "ba_na_tay",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJqXp39lv2QTERR9U4pFNMD2o",
+   "name": "Mercure Danang French Village Bana Hills",
+   "category": "lodging",
+   "zone": "ba_na_tay",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJrW03HQAXQjERLRu5Xd4RvsE",
+   "name": "Seavitel Beach Hotel - DaNang",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJrxxvlNsXQjERy-eJcpABRJA",
+   "name": "Nhu Minh Plaza Danang Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJs2LW3rEXQjERAndHSLNX-Rc",
+   "name": "Elites Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY",
+   "name": "The Ocean Villas",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJu954vu8XQjERQNvn5_8eBE8",
+   "name": "Grand Gold Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJybre1xcZQjERDB05uYRpJBc",
+   "name": "Aura Beachfront Hotel Apartment",
+   "category": "lodging",
+   "zone": "trung_tam",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
+   "name": "TIA Wellness Resort",
+   "category": "lodging",
+   "zone": "ngu_hanh_son",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "ChIJzbKs7IMXQjERWf_Uz122Ohs",
+   "name": "Diamond Sea Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "osm:node/4759000238",
+   "name": "Dan Oasis Hotel",
+   "category": "lodging",
+   "zone": "son_tra_my_khe",
+   "rule": "lodging",
+   "reason": "lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "osm:node/1623183649",
+   "name": "Núi Sơn Trà",
+   "category": "viewpoint",
+   "zone": "son_tra_my_khe",
+   "rule": "review",
+   "reason": "đỉnh núi OSM, không có lối tham quan riêng — đã có Bán đảo Sơn Trà và Đỉnh Bàn Cờ",
+   "decided_by": "auto_v23"
+  },
+  {
+   "poi_id": "osm:node/12635080558",
+   "name": "SummerBeach Restaurant",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đang tạm đóng cửa",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4520093589",
+   "name": "Lapin Ca Phe",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đã đóng cửa vĩnh viễn",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4548163789",
+   "name": "Bánh mì Thuý",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đang tạm đóng cửa",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/5611617221",
+   "name": "Café Sputnik",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đã đóng cửa vĩnh viễn",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/7127442985",
+   "name": "Nhà biểu diễn nghệ thuật cổ truyền Hội An",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đang tạm đóng cửa",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:way/565592419",
+   "name": "Bảo tàng Hội An",
+   "category": "museum_indoor",
+   "zone": "hoi_an",
+   "rule": "closed",
+   "reason": "Google Maps: đang tạm đóng cửa",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/10162249917",
+   "name": "Barconcù",
+   "category": "nightlife",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/10297955384",
+   "name": "Lamonta Pub & Restaurant",
+   "category": "nightlife",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/10709738105",
+   "name": "Làng nước mắm Nam Ô",
+   "category": "outdoor_landmark",
+   "zone": "hai_van_lien_chieu",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/10763332205",
+   "name": "Hiệp Ký",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/11890609669",
+   "name": "Cơm chay Thiện Tâm - Vegan Food",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/13890168980",
+   "name": "Cafe Cô Bốn",
+   "category": "cafe",
+   "zone": "ba_na_tay",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/14337971575",
+   "name": "Arapang",
+   "category": "restaurant",
+   "zone": "ba_na_tay",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/3893467764",
+   "name": "UY VIET COFFEE BEAN",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4171925609",
+   "name": "Cồn Thuận Tình",
+   "category": "outdoor_landmark",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4401168602",
+   "name": "Nha Hang Com Nieu Hong Phuc 3",
+   "category": "restaurant",
+   "zone": "ba_na_tay",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4721435589",
+   "name": "Sleepy Gecko Chillout Bar",
+   "category": "nightlife",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4883744921",
+   "name": "dau bep banh mi",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/4945171421",
+   "name": "Hai (Mì Quang - Cao Lâu)",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/5107806021",
+   "name": "Hôp Dùa",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/5273107721",
+   "name": "Nhà Hàng Hành Là",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/5677701323",
+   "name": "Rosie's Cafe",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/7094679785",
+   "name": "Mate Restaurant and Coffee Hoi An",
+   "category": "cafe",
+   "zone": "hoi_an",
+   "rule": "not_listed",
+   "reason": "không tìm thấy trên Google Maps",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "ChIJ0RbSL4ARQjERLwRYqY1bqp4",
+   "name": "Tiệm Cafe Thổ - Cà Phê Ngon & Yên Tĩnh Ngũ Hành Sơn",
+   "category": "cafe",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ20P_fAANQjERgFeFcOB6MAs",
+   "name": "Điểm đón khách du lịch thuyền thúng cầu Hói Lăng",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ26h5ZAANQjER2otGJosJliA",
+   "name": "Rường House - Cooking Class & Craft Workshop",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+   "name": "Ba Nở Quán",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
+   "name": "Bê Thui Thiên 2",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
+   "name": "Cửa hàng Đặc sản Biển Đà Nẵng",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10",
+   "name": "Nhung Spa Trị Liệu",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ7bDAtv8YQjERj0Fj9FcnHgA",
+   "name": "House Coffee",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
+   "name": "Bảo Tàng Văn Hóa Phật Giáo",
+   "category": "museum_indoor",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ8VqGDeYRQjERVEkumiIa714",
+   "name": "LÂM TỲ NI VIÊN",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ8Z0D7KURQjERUPd36goDH90",
+   "name": "Chùa Tam Tôn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
+   "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
+   "name": "Chùa Minh Phước",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJA0bFwKoZQjER--pX5_3_cD0",
+   "name": "Tú Chợ đêm",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+   "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang",
+   "category": "paid_attraction",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
+   "name": "View Sơn Trà về đêm",
+   "category": "viewpoint",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJG9IOepAXQjER3x9UnxFxJ7w",
+   "name": "Húa Hạ Lương Tử Spa – Massage & Foot Spa Da Nang",
+   "category": "wellness",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJGSKUUwCLQTERr0Je7WP5Xqc",
+   "name": "Khu du lịch Bến Nam Yên",
+   "category": "paid_attraction",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
+   "name": "Bãi tắm Sao Biển",
+   "category": "beach",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJKS3rlfYZQjERPJolPRTWSZw",
+   "name": "Phia Coffee & More",
+   "category": "cafe",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
+   "name": "Unicorn Chill Zone",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJK_ogWgARQjERnLylibgoTpw",
+   "name": "Quýt Spa & More",
+   "category": "wellness",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJKcik9OQYQjERKZ21jblRTVc",
+   "name": "Chùa Thanh Hải",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJLX9s7EUbQjERdsy67X5-NrE",
+   "name": "Chùa Hải An Đà Nẵng",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJMZtZVeQZQjERchri-_Wa9C8",
+   "name": "Bar Đà Nẵng",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
+   "name": "JEJU coffee",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
+   "name": "Chợ Quan Nam",
+   "category": "day_market",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJNQWGShUZQjER71TXPpJW4Xs",
+   "name": "Thủ Đạo Thang Spa Đà Nẵng",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJNXaMJAAZQjERJxDzvQEO38c",
+   "name": "Mộc An Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJO9OcO7kQQjERuGR5zEtpfu8",
+   "name": "Chùa Thái Sơn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
+   "name": "Bãi tắm Nguyễn Thần Hiến",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJOXHZFwAZQjERnjc1WCNMaeU",
+   "name": "Láng Beauty & Spa",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJOxHeFjkYQjERZAilaOR-hJA",
+   "name": "Quán Mì Quảng Bà Năm",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
+   "name": "MÂY COFFEE - TRUNG NGUYÊN Legend",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJQ2dbvVIYQjERVbGNKc5Tmcs",
+   "name": "CHÙA TÂN THÀNH",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJUf5Hcw8ZQjERsntEedW35TI",
+   "name": "Sky coffee",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
+   "name": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJWTRb5NcYQjER6mJOuNl06k8",
+   "name": "Quán Nhậu Hiếu Hòa",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJWe_7hboQQjERxap-mizn-ZY",
+   "name": "Nhà bia Chứng tích Núi Ghềnh",
+   "category": "outdoor_landmark",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJY6qXPYkZQjER8UoDJvGopTk",
+   "name": "Bãi biển Xuân Hà Beach",
+   "category": "beach",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJYQkmfagfQjER0iIRsKZ0Rcc",
+   "name": "Quán nhà quê",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJd-PzSQAfQjERdmCtpw8ajB4",
+   "name": "King Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJf_LKvbkbQjERSVrbzxU6Nuc",
+   "name": "Chùa Vân Long",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJfzqqXwAZQjERWQ7zRsTU8Zk",
+   "name": "Moya Wellness Spa Da Nang",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
+   "name": "Tượng Phật Đá Phan Sơn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJl21Hd_4YQjERF980f9HS9Cc",
+   "name": "Chùa Làng Thanh Khê",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
+   "name": "Nhy Nguyen Beauty & Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJnZoMTbkQQjERwzvvHqGlb4E",
+   "name": "Chùa Linh Sơn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJp9cNzfwZQjERS7ZSaA95etk",
+   "name": "Danang Cooking Class - Lá Sen ダナン料理教室",
+   "category": "paid_attraction",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJr_MgSAAZQjERnbnJDAtASZM",
+   "name": "Chill Beach Thanh Khê",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJs9Tdb7kfQjERg5O07vnwsww",
+   "name": "Nàng Thir Spa ở Hòa Khánh",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJsSD2e3kfQjER2d_jnMVrKZ4",
+   "name": "Quán nhậu A bảy",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY",
+   "name": "Chùa Thanh Hà",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4",
+   "name": "SAY Beer",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJueQn3rsZQjERgU81knCQmOQ",
+   "name": "Bar Eau-de-vie",
+   "category": "nightlife",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJvexouL4QQjERy0qt57A0GX4",
+   "name": "Chùa Phổ Đà Sơn",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJvfs2CK4ZQjERYSUrqnRYbqo",
+   "name": "Công viên hồ Ngọc Anh",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJxU52AgAZQjERUmuAje5_L5Q",
+   "name": "Bãi biển Nguyễn Tất Thành",
+   "category": "beach",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
+   "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH",
+   "category": "day_market",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJzRc5EgIZQjERKvXOUUpbcKA",
+   "name": "Light Beauty Spa",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/11423769989",
+   "name": "Postal Cafe",
+   "category": "cafe",
+   "zone": "ba_na_tay",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/11888483369",
+   "name": "Chợ Phước Mỹ",
+   "category": "day_market",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/1335374873",
+   "name": "chùa An Cư Tây",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/13484040419",
+   "name": "Đền Bà Càn Khôn",
+   "category": "religious",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/14045144381",
+   "name": "Viet Nam's Delights",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/14067929701",
+   "name": "Bonny handmade",
+   "category": "day_market",
+   "zone": "son_tra_my_khe",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/2092582318",
+   "name": "Tụy Tiên Đường Minh Hương",
+   "category": "religious",
+   "zone": "hoi_an",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/3760247201",
+   "name": "chùa Vu Lan",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/4005611262",
+   "name": "Đền thờ Tiền Hiền làng Lổ Giang",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/4005611263",
+   "name": "Đình Lổ Giáng",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/4280016689",
+   "name": "Chùa Giác Hoàng Viên",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/4347089780",
+   "name": "My An Beach",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "rule": "few_reviews",
+   "reason": "điểm của người địa phương, Google Maps không có số đánh giá",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/5273998823",
+   "name": "Cầu Trần Thị Lý",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "điểm của người địa phương, Google Maps không có số đánh giá",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/5276547123",
+   "name": "Cau Nguyen Van Troi Bridge",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "điểm của người địa phương, Google Maps không có số đánh giá",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:node/5674096859",
+   "name": "Nhà cổ Diệp Đồng Nguyên",
+   "category": "museum_indoor",
+   "zone": "hoi_an",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "osm:node/6528451001",
+   "name": "Cây đa Đò Xu",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "rule": "few_reviews",
+   "reason": "điểm của người địa phương, Google Maps không có số đánh giá",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:way/35952591",
+   "name": "Chợ vải Hội An",
+   "category": "day_market",
+   "zone": "hoi_an",
+   "rule": "few_reviews",
+   "reason": "ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá)",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
+   "name": "Chợ Khái Tây",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+   "name": "Chợ Non Nước",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJPQ-OSwAZQjER0Zu4X6NlQds",
+   "name": "Thanh Spa Relax",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
+   "name": "Biển Rạng Sơn Trà",
+   "category": "restaurant",
+   "zone": "son_tra_my_khe",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "ChIJx3fy4TgZQjER5y-HN2wBNl4",
+   "name": "Navy Lounge",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:way/35952504",
+   "name": "Chợ Hội An",
+   "category": "day_market",
+   "zone": "hoi_an",
+   "rule": "no_hours",
+   "reason": "không có giờ mở cửa trên Google Maps hay nguồn nào khác",
+   "decided_by": "auto_v23:google_maps_check"
+  },
+  {
+   "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
+   "name": "Da Nang Family Cooking Class",
+   "category": "paid_attraction",
+   "zone": "trung_tam",
+   "rule": "hours_conflict",
+   "reason": "giờ trên Google Maps lệch hẳn mọi nhóm giờ của thể loại",
+   "decided_by": "auto_v23:google_v1"
+  },
+  {
+   "poi_id": "osm:way/404714309",
+   "name": "Nhà thờ Chính tòa Đà Nẵng",
+   "category": "religious",
+   "zone": "trung_tam",
+   "rule": "duplicate",
+   "reason": "trùng với 'Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng)'",
+   "decided_by": "import_osm"
+  }
+ ]
+}

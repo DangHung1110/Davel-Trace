@@ -1,0 +1,14 @@
+{
+ "about": "Giờ tra cứu web ngày 2026-11-19 (Claude, WebSearch) cho 2 điểm tiêu biểu còn thiếu giờ. verified_by=agent_web: có URL nhưng CHƯA được người kiểm tại chỗ. Chỉ bổ sung giờ (khoá hours_*); giá giữ nguyên nguồn cũ. Không dùng Google Maps.",
+ "checked_at": "2026-11-19",
+ "items": [
+  {"name": "Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river", "hours": "18:00-21:45",
+   "hours_confidence": 0.55,
+   "hours_note": "Tàu ngắm cảnh không ăn tối: 4 chuyến/ngày từ 18:00 đến 21:00, mỗi chuyến ~45 phút; Chủ nhật có thể xuất phát muộn (~20:00).",
+   "hours_evidence_url": "https://vinwonders.com/vi/bai-viet-du-lich/du-thuyen-tren-song-han/"},
+  {"name": "Cù Lao Chàm", "hours": "08:00-15:00",
+   "hours_confidence": 0.55,
+   "hours_note": "Ca nô từ cảng Cửa Đại đi 08:00-09:00, về đất liền 14:00-15:00; hoãn khi biển động.",
+   "hours_evidence_url": "https://vnexpress.net/cam-nang-du-lich-cu-lao-cham-4751193.html"}
+ ]
+}

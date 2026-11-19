@@ -1,0 +1,322 @@
+poi_id,name,category,zone,rule,reason,decided_by
+ChIJ-WGIA80YQjER8XDqSVShrOE,Quán Karaoke Smile Idol,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ0-6wNdsXQjER068QxYa3E5o,Karaoke Song Ca,nightlife,son_tra_my_khe,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ1XDmcgAZQjERg3z1Ix0EbZA,RAIN MUSIC BOX & GAME,day_market,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ1dsj5MQZQjERbgyzx94Lv20,Alpha Medical Skin - Clinic & Spa,wellness,hai_van_lien_chieu,excluded,cơ sở y tế/thẩm mỹ ('clinic' trong tên),rules_v2
+ChIJ3dEof08ZQjERrJfwaLyIAIk,Vân Anh beauty spa,wellness,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJ3zTSR1UYQjERxzlJpa-DNHE,Karaoke Sao Mai,nightlife,trung_tam,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJ5QtSVAAZQjERwKdjEbXi6wk,Bếp nhà Hà,restaurant,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJ5ySJbAAZQjEROESCTb3NJsw,Bến Du Thuyền Sông Hàn,paid_attraction,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJ66onuEIZQjERJcc014sju08,Rice' Spa &Nails,wellness,hai_van_lien_chieu,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJ6e7t67oZQjERLcf4KcgElEc,Maju Top Class Bar - lounge,nightlife,trung_tam,excluded,quán có tiếp viên (không phù hợp lịch trình chung),rules_v2
+ChIJ8aa8NQAZQjERRM8-aOoNZ30,Nhà hàng hải sản .,restaurant,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJ8ar-PNQXQjERFGGdrbCAQbg,Tháp Xá Lợi,religious,son_tra_my_khe,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+ChIJ8be7KQARQjER5Lnd2LHaDAs,Huyen Khong Cave,religious,ngu_hanh_son,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJ95sVZAAZQjERaWAzQF3vSiQ,Trạm spa- nặn mụn,wellness,hai_van_lien_chieu,excluded,chăm sóc da theo liệu trình — không phải spa thư giãn,review_v1
+ChIJ9yzkbH0ZQjERDhPDi_ITcmM,Đà Sơn tâm linh,religious,trung_tam,excluded,trùng hoặc gộp với điểm khác,review_v1
+ChIJC0W3bjoYQjERVBMskQcoQck,Di tích Thành Điện Hải,outdoor_landmark,trung_tam,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJC1S7VAAZQjERFItFlyewDHY,Glow Spa Thanh Khê,wellness,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJCRy3iv_2QTERfZxGJkIMHHQ,Chùa Linh Ứng - Bà Nà,religious,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJD8ivG7YZQjERxe5fgwGSVao,KARAOKE CAMEL 2,nightlife,trung_tam,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJE4CAepEXQjERg75wrYIZk2Q,"Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng",cafe,son_tra_my_khe,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJF8yRoecZQjERdDBeBdSRD-Y,DA NANG DOWNTOWN,outdoor_landmark,trung_tam,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJFXRrR0wZQjERNl4jMD9QNFI,Blues Q Coffee and Craft Beer Garden ( Bia thủ công),nightlife,trung_tam,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJFad1TFAXQjERE9B6U1THHT4,Chợ Khuê Mỹ,day_market,ngu_hanh_son,excluded,không phải điểm đến du lịch,review_v1
+ChIJFdFWDOQZQjERhEwTQhM7XII,YUMI Counter & Lounge,nightlife,son_tra_my_khe,excluded,quán có tiếp viên (không phù hợp lịch trình chung),rules_v2
+ChIJH1ujCM0XQjERcOl1lB9Ns6k,Tuyet Pham Cooking Class,paid_attraction,son_tra_my_khe,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+ChIJH4d2i1YYQjERFSA6rKn_Pos,Nhà hàng Phú Mỹ Thành,restaurant,trung_tam,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,trung_tam,excluded,không phải điểm đến du lịch,review_v1
+ChIJHyNg3TIYQjERqz7x0udvRd0,Nhà Hàng Bảo Châu,restaurant,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJJ66EjfQRQjERrmpQQcYTgq8,Khu Dừng Chân,outdoor_landmark,ngu_hanh_son,excluded,không phải điểm đến du lịch,review_v1
+ChIJKytgDsgQQjER6al50BDd7vc,Hòn Thủy Sơn,outdoor_landmark,ngu_hanh_son,excluded,trùng hoặc nằm trong 'Ngũ Hành Sơn',review_v1
+ChIJNdWwUgARQjERansIEJQleAU,Động Tàng Chơn,religious,ngu_hanh_son,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJO0IiWR0RQjERtGkQtqESJ1Y,Động Vân Thông,outdoor_landmark,ngu_hanh_son,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJOZ__YJwXQjER4wLDpzs9L5c,Chợ Đêm An Thượng,night_market,son_tra_my_khe,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJOean5VUZQjERMWDUmGdTpJQ,KARAOKE VENUS,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJOxVypBYRQjERMmK2P6JbzF0,Động Âm Phủ,religious,ngu_hanh_son,excluded,"nằm trong Ngũ Hành Sơn, đã tính trong điểm đó",plan_tier_v1
+ChIJP1XHPQAZQjERinsxWb2Ga0A,Karaoke Monaco Đà Nẵng,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJPdLppX4XQjERnV5xcr28sO0,Nhà thờ Gia Phước,religious,son_tra_my_khe,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJQW9rQNwZQjER4zC6dP7vitg,GREEN COFFEE,cafe,hai_van_lien_chieu,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJQwYzLAcZQjERVvClU0ze5Ek,Nhà hàng MIKADO,restaurant,trung_tam,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJQxr6eAAfQjER1vwrQRjtk60,Quán nhậu Keo Lá Tràm,nightlife,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJR7_4DdYYQjERUNxW7r51REs,Karaoke Alô,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJVS4QEX8fQjERk1vVwmP0Rk8,An Nhiên Quán,nightlife,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJVWzfhcwZQjERa_qP0BpsBkk,Nhà thờ Tộc Hồ Thanh Khê,religious,hai_van_lien_chieu,excluded,"nhà thờ tộc, không phải điểm tham quan",plan_tier_v1
+ChIJW5KDTQAZQjERJXJQMoz2YJo,ANGEL LOUNGE,nightlife,trung_tam,excluded,quán có tiếp viên (không phù hợp lịch trình chung),rules_v2
+ChIJWZUpXf0RQjER6uu8gU2gIhI,Mai Vang (Yellow Blossom) Bonsai Garden,outdoor_landmark,ngu_hanh_son,excluded,"vườn tư nhân, phải liên hệ trước",plan_tier_v1
+ChIJWd2LBrkZQjER4hLHO81ipK0,Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy,wellness,hai_van_lien_chieu,excluded,chăm sóc da theo liệu trình — không phải spa thư giãn,review_v1
+ChIJX7bFNr8NQjERJJLeQ2lyHWo,"rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",paid_attraction,hoi_an,excluded,trùng hoặc gộp với điểm khác,review_v1
+ChIJXeYho6gZQjERhk0LVFc69TA,2AM Coffee,cafe,trung_tam,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJYU-cVQAXQjERxfDy3td5_ac,New World Spa,wellness,hai_van_lien_chieu,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJZ5ZGlCsZQjER95guGn5ybGo,Karaoke Next Top Luxury,nightlife,son_tra_my_khe,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJZ9UJGQQZQjERFL90XKMPBGk,Hồ Bơi Thanh Khê,paid_attraction,trung_tam,excluded,không phải điểm đến du lịch,review_v1
+ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,paid_attraction,hai_van_lien_chieu,excluded,trùng hoặc nằm trong 'Khu du lịch Nam Ô Heritage',review_v1
+ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,religious,son_tra_my_khe,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+ChIJacuaCgAfQjERmRXLEMbkPJM,An Mộc Spa,wellness,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJadL4d-gYQjERKE_uTeup8iY,Nhà hàng Tiệc cưới Hưng Gia Trần,restaurant,hai_van_lien_chieu,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJbyos3sAXQjER6Eajh3ljHYE,The South Coffee,cafe,ngu_hanh_son,excluded,địa điểm đã đổi tên hoặc đổi chủ,review_v1
+ChIJc2sSdpMZQjERg6ykGdI-3r4,Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm,nightlife,trung_tam,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJcTnFX6QfQjERgmN3buOe9AQ,Rượu Nếp Nhà Nấu,nightlife,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJcYos3CkZQjERibEDbcXOpQs,Quán Karaoke Music For You,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu Ẩm Thực Chợ Cồn -식사 공간,day_market,trung_tam,excluded,"khu ăn uống trong Chợ Cồn, không phải chợ",plan_tier_v1
+ChIJfQr_phEZQjER5leh47CfKTQ,Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê,museum_indoor,trung_tam,excluded,"chỉ mở theo đoàn, phải liên hệ trước",plan_tier_v1
+ChIJg-cynKIXQjERyE7ZIaTaCO8,Public Beach Access,beach,ngu_hanh_son,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJg5OvAgAhQjERKbrq9-Wza-U,Khu Du Lịch Sinh Thái Thuỷ Vân Sơn,paid_attraction,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJh73ojOMXQjERtV8NNHwmrO4,Karaoke Thao,nightlife,son_tra_my_khe,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJj8OOR1UYQjERdZlR_ysOs4E,Karaoke Phương Trí,nightlife,trung_tam,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJl4vFoHERQjERWxJkz9bsJDg,Spa Luna,wellness,ngu_hanh_son,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJl7zcVgARQjERTJASEbCGeuc,Writer's Bar,nightlife,ngu_hanh_son,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJm2iwgggbQjERj-x6QTYemFQ,Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng,day_market,son_tra_my_khe,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJmd-xKSoZQjERr8BS2agMkCI,Cà Phê Star Pub,nightlife,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJnwKLiE4YQjERMVI0qrqKg1c,Nhà Thờ Giáo Xứ Tam Tòa,religious,trung_tam,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJo2Yyix8ZQjERmG7AHQkOpIo,Chùa Phước Lộc,religious,hai_van_lien_chieu,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJodkOVL8fQjERGwRf5tBRLvI,Di tích Đình Hồng Phước,religious,hai_van_lien_chieu,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJoeH5ukkZQjERxUlcUbKA-XE,Ibasho Coffee,cafe,hai_van_lien_chieu,excluded,đã đóng cửa hoặc không còn hoạt động,review_v1
+ChIJp3BwHgsZQjERzQZfxwNQNmE,Chùa Làng Thanh Khê,religious,hai_van_lien_chieu,excluded,trùng hoặc nằm trong 'Chùa Làng Thanh Khê',review_v1
+ChIJqRL3QEQZQjER71D0j0o7M7Q,Karaoke Night Club,nightlife,trung_tam,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJqdKPDDIZQjERC2tfiDtFLXE,Quảng trường Liên Chiểu,outdoor_landmark,hai_van_lien_chieu,excluded,trùng hoặc nằm trong 'Công Viên Trung Tâm Hành Chính Liên Chiểu',review_v1
+ChIJrYC1becZQjER-97HchRaP_Q,Minh Chau Palace,restaurant,hai_van_lien_chieu,excluded,"trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn",review_v1
+ChIJs95SfgAZQjERWa0RkAoF0XA,City Box - Music Box,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,beach,ngu_hanh_son,excluded,trùng hoặc nằm trong 'Bãi biển Non Nước',review_v1
+ChIJu9TGuzEZQjERolkiV2-wyQQ,Massage Khiếm Thị Mai Liên,wellness,hai_van_lien_chieu,excluded,"cơ sở y tế hoặc thẩm mỹ, không phải điểm du lịch",plan_tier_v1
+ChIJuQL2IN4YQjERYHan1mFjMdA,Karaoke RETRO,nightlife,hai_van_lien_chieu,excluded,karaoke — không phải điểm đến cho khách du lịch,review_v1
+ChIJuzUYUgAXQjER7uqAcJPQMY0,Cổng Chùa Linh Ứng,religious,son_tra_my_khe,excluded,trùng hoặc nằm trong 'Chùa Linh Ứng - Bãi Bụt Sơn Trà',review_v1
+ChIJw2G2IwAfQjERGAvvbDnKLHM,Thanh Tuyền Spa,wellness,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJw3dqIx8ZQjERxFZPN1A3gew,The PILL Bar & Club,nightlife,hai_van_lien_chieu,excluded,quá ít bằng chứng là điểm đáng gợi ý,review_v1
+ChIJxdBK6SsYQjERYojL_cVEkbs,Nhà thờ Giáo xứ An Hải,religious,trung_tam,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+ChIJyWFmArX3QTERon6tUT6re4Q,Ba Na Hills,paid_attraction,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+manual:smile-goods-danang,Smile Goods Danang,day_market,trung_tam,excluded,toạ độ sai — cần nhập lại,review_v1
+osm:node/10154412164,Fantasy Park,paid_attraction,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/10303626687,Núi Phước Tường,viewpoint,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/10303626688,Núi Cẩm Khê,viewpoint,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/1036552571,Đèo Hải Vân,viewpoint,hai_van_lien_chieu,excluded,trùng hoặc nằm trong 'Hải Vân Quan',review_v1
+osm:node/10709738005,Làng chiếu Cẩm Nê,outdoor_landmark,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11427582964,Thai Market,day_market,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/11629841009,Núi Khe Xương,viewpoint,ba_na_tay,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11629996926,Núi Hải Vân,viewpoint,hai_van_lien_chieu,excluded,chỉ là một phần của 'Hải Vân Quan' — xếp điểm chính,review_v1
+osm:node/11630013743,Núi Hoi,viewpoint,hai_van_lien_chieu,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/11762365155,Núi Hòng Chan,viewpoint,hai_van_lien_chieu,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/12404434601,Khu Văn hóa Tâm linh Đà Sơn,religious,trung_tam,excluded,trùng hoặc nằm trong 'CHÙA KHÔNG TÊN ĐÀ NẴNG',review_v1
+osm:node/12701675501,Small waterfall,outdoor_landmark,son_tra_my_khe,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/12811972501,Mart Souvenir,day_market,son_tra_my_khe,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/13293564930,Himawari,day_market,trung_tam,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/1335374809,chùa am Nam Ngư,religious,hai_van_lien_chieu,excluded,không phải điểm đến du lịch,review_v1
+osm:node/1335374858,chùa am thờ Hỏa Xa,religious,hai_van_lien_chieu,excluded,không phải điểm đến du lịch,review_v1
+osm:node/13677406601,"Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",outdoor_landmark,son_tra_my_khe,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/13687068650,Linh Phong Bảo Tháp,religious,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/13913400201,Suối Ngọc,outdoor_landmark,hai_van_lien_chieu,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/14045110791,Lucky Retail,day_market,trung_tam,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/14045130739,Made in Vietnam,day_market,trung_tam,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/2093848429,Kim Sơn,viewpoint,ngu_hanh_son,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/2093848431,Mộc Sơn,viewpoint,ngu_hanh_son,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/2093848443,Thổ Sơn,viewpoint,ngu_hanh_son,excluded,chỉ là một phần của 'Hòn Thủy Sơn' — xếp điểm chính,review_v1
+osm:node/2177056870,Thác Tóc Tiên,outdoor_landmark,ba_na_tay,excluded,nằm trong khu Sun World Bà Nà (cùng vé) — gộp vào POI Sun World,review_v1
+osm:node/3760247202,chùa Sư Nữ,religious,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4122433690,Núi Bà Nà,viewpoint,ba_na_tay,excluded,trùng hoặc nằm trong 'Sun World Bà Nà Hills',review_v1
+osm:node/4172034499,Non Nuoc Beach,beach,ngu_hanh_son,excluded,trùng hoặc nằm trong 'Bãi Tắm Non Nước',review_v1
+osm:node/4294135790,nhà thờ Phú Thượng,religious,ba_na_tay,excluded,trùng hoặc nằm trong 'Nhà thờ Phú Thượng',review_v1
+osm:node/4294139091,nhà thờ An Ngãi Tây,religious,ba_na_tay,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4294143691,Nhà thờ Giáo xứ An Thượng,religious,son_tra_my_khe,excluded,"nhà thờ giáo xứ chỉ có giờ lễ, không có giờ tham quan",review_v1
+osm:node/4294167889,nhà thờ Tùng Sơn,religious,ba_na_tay,excluded,trùng hoặc nằm trong 'NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO',review_v1
+osm:node/4386676224,Chợ Miếu Bông,day_market,ngu_hanh_son,excluded,không phải điểm đến du lịch,review_v1
+osm:node/4706189591,To Quoc Ghi Cong,outdoor_landmark,ngu_hanh_son,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4741642219,Public beach,beach,hai_van_lien_chieu,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4845297821,Gần núi thần tài,religious,ba_na_tay,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/4924323121,Fishing Village and Fleet,outdoor_landmark,son_tra_my_khe,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/5273998822,Cầu Tiên Sơn,outdoor_landmark,son_tra_my_khe,excluded,không phải điểm đến du lịch,review_v1
+osm:node/5286977425,Núi Thần Tài,outdoor_landmark,ba_na_tay,excluded,không phải điểm tham quan (điểm thật 'Công viên Suối khoáng nóng Núi Thần Tài' chưa có),review_v1
+osm:node/5421670780,Chùa An Phước,religious,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/6346486685,Cây đa đại thụ,outdoor_landmark,son_tra_my_khe,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/7095169367,Art Gallery,museum_indoor,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/7095169369,Non La,day_market,trung_tam,excluded,trùng hoặc nằm trong 'Art Gallery',review_v1
+osm:node/7477670190,노니판매점,day_market,son_tra_my_khe,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+osm:node/7477670191,Gio coffee,cafe,son_tra_my_khe,excluded,không xác nhận được cơ sở tại toạ độ này,review_v1
+osm:node/8883385553,TASY STUDIO,museum_indoor,hoi_an,excluded,không phải điểm đến du lịch,review_v1
+osm:node/9921282483,Viet Nam's Delights,day_market,trung_tam,excluded,trùng hoặc nằm trong 'Viet Nam's Delights',review_v1
+osm:node/9921315929,Lưu Niệm - Đặc Sản,day_market,trung_tam,excluded,tên chung chung hoặc chỉ có trên OSM — không đủ nguồn xác nhận,review_v1
+ChIJ03jTTgAXQjERpVQunmJHv2c,Sontra Sea Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ27_WHYQXQjERfwDksZnfqKM,TGT BEACH HOTEL,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ67sbOfwZQjERNfKPIKkEdyw,La Maison Des Délices Hotel & Apartment,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ6ToOeVYYQjERj8BHGr6OZzc,Khách Sạn Huy Hoàng,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ767Qs08YQjERaSc6TDUM4WQ,Tan Hoang Long Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ8YytBwwXQjERJQIQYf4qyqM,Minh Toan SAFI Ocean Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJ9--6uKYZQjER5hS7ybSadkc,Ocean Star Hotel Danang Bay,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJAUbRW8wZQjERf0sgTLr3Odo,Mercury Boutique Hotel Danang,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJAXvSo5EZQjERNYmexlgFouI,Lychee Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJC78Y_XQXQjERnNGlsKERAHs,Eden Ocean View Đà Nẵng,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJCc2lfXgZQjERSUvZYj3RsMw,Hotel Hồng Phúc 2,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJDYfSGZYZQjERmSERKl2Fj7E,Hidden Oasis Homestay,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJDZsVkg4ZQjER7u0k8Siz7SE,Da Nang Mikazuki Japanese Resorts & Spa,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJEa410zMYQjER3f11TKinbkU,Seahorse,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJEyLB68sQQjER7FTfkhV0_MY,Danang Marriott Resort & Spa,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJISuvVcsZQjERhnOk-O_w9pI,Moonlight Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJ93iFIQXQjERhV8dXhMwLOg,A La Carte Danang Beach,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJQWDpTQYQjER_VEl5Kl8HTY,Central Hotel & Spa,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJXkD0OcbQjER8aTXsF-pS_Q,Nguyen Gia Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJXm_IjoXQjERqJ9FNnjWpx8,Leaf Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJbfHSGUXQjERRXCfzSX3s88,Holiday Beach Hotel Danang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJJxW4ysUQQjER_NC7GzE1W_0,Meliá Danang Beach Resort,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJKbntMIQXQjERh50f5GwfUm4,Sunview Beach Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJKfL8bWgXQjERWPZKseMae6E,Pullman Danang Beach Resort,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJM560Qk0YQjERJDvIocFeEIw,Nice Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJMTadzMQQQjER29xKIZnnHAU,Sandy Beach Non Nuoc Resort,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJMeyhoXgXQjERqCs6CuNR5yI,Sala Danang Beach Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJN75cdYQXQjERBUnemtIubGM,NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJO3oiB7gZQjERONk8CvO8oTM,Dreamy Sky Boutique Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJQ-_7No0XQjERrR5A4J2fB9s,Monarque Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJQ3ODRnwXQjERsTy60ZdRD_Q,Risemount Premier Resort Đà Nẵng,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJQT4SLJwRQjERvym-dW5QWJ0,Shilla Monogram Danang,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJQWWv4A8YQjERuqj9zjNqKAc,Wyndham Danang Golden Bay Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJR4RA3I0XQjERajP7wKxjYu0,Mangata Beachfront Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJRZXlI6MZQjERcre1gDV0kFE,Minh Trường Hotel 1 - Khách sạn view biển Đà Nẵng,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJS07IM4Y9QjER5m2dd3eyku0,Sơn Trà Resort & Spa,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJS0p9LgcXQjERRnDVDqhYvX4,Khách sạn Radisson Đà Nẵng,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJT1sjdYQXQjERSLHKKZsmfdQ,Paris Deli Danang Beach Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJTQo19YMXQjER1DttYZqjHYo,Mandila Beach Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJUcvhoSgfQjERsU0uoSUtsto,Cami Riverside Resort,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJUeabB3kXQjERFP2JL7c8YCg,DLG Hotel Danang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJVVUC-lEYQjERqdANIT0ShEw,Khách Sạn Smile,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJW7SBUHoXQjERdpSIWHkCuh0,Khách sạn Mường Thanh Luxury Đà Nẵng,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJW7iIXnoXQjERwzVF2LpQ_m4,HAIAN Beach Hotel & Spa,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJWVl1NFUYQjERl2v9iNV-6F8,Khách Sạn Đại Long,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJWcFCas8QQjERQGJzK8w1ta4,Hyatt Regency Danang Resort and Spa,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJXRkLVPUZQjERhjMP_j_cdkQ,Mường Thanh Grand Đà Nẵng Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJY2uJ-ZgRQjEROTUmuLdOGic,The Five Villas Đà Nẵng,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJZWmMe1g9QjERrOGO9nVdagQ,Khu nghỉ mát Du lịch sinh thái Tiên Sa,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJZxgQeVYYQjERTs3tEgp2lVY,Khách Sạn Rose,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJbeO3ddMZQjERzeIxy-6JpYc,Meliá Vinpearl Danang Riverfront,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJd3RleOYXQjERQQD0TduMYnU,Olalani Resort & Condotel,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJfS4VlKsZQjERPQy1DOvrEa8,Avenis Hotel,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJfbl-2sMXQjERKLfkuhtH-BE,Peninsula Hotel Danang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJgXLzUFEYQjERujTQH477KV0,Santori Hotel Danang Bay,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJj1wfpTQYQjERyAwSp1WRPpg,Orange Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJjb4Ah-QRQjERFlzALzxOOvo,"Four Seasons Resort The Nam Hai, Hoi An",lodging,hoi_an,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJkRSDGIIXQjERdg4lYna_jV0,Pavilion Hotel DaNang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJmZHsE5U9QjERDa3a1CuK3lo,InterContinental Danang Sun Peninsula Resort,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJn2uBfeUXQjERvTmGbdnPARE,The Code Hotel & Spa Da Nang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJoSXYBfIXQjERoD3rJE5AWDU,Khách Sạn SeaShore,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJoWXWNIwXQjERjFwxSEpICZ4,Hilton Garden Inn Da Nang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJpTFl49UYQjERrzeUIxz8NL4,Phước Hà,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJq-4rgiMYQjERWeE47TN-W_Q,Vitalis Riverside Hotel,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJq0vnsSIZQjERiB7KQ_DkjW0,MỘC NHIÊN HOTEL,lodging,hai_van_lien_chieu,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJq56yCur3QTERYlOCLaSCVwQ,Làng Toom Sara Đà Nẵng,lodging,ba_na_tay,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJqXp39lv2QTERR9U4pFNMD2o,Mercure Danang French Village Bana Hills,lodging,ba_na_tay,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJrW03HQAXQjERLRu5Xd4RvsE,Seavitel Beach Hotel - DaNang,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJrxxvlNsXQjERy-eJcpABRJA,Nhu Minh Plaza Danang Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJs2LW3rEXQjERAndHSLNX-Rc,Elites Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJtaLa9KoRQjERpVTDAGoA9ZY,The Ocean Villas,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJu954vu8XQjERQNvn5_8eBE8,Grand Gold Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJybre1xcZQjERDB05uYRpJBc,Aura Beachfront Hotel Apartment,lodging,trung_tam,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJz0RiIUQXQjER_XbsI16KkBE,TIA Wellness Resort,lodging,ngu_hanh_son,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+ChIJzbKs7IMXQjERWf_Uz122Ohs,Diamond Sea Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+osm:node/4759000238,Dan Oasis Hotel,lodging,son_tra_my_khe,lodging,lưu trú — app không xếp khách sạn vào lịch; điểm xuất phát lấy từ bản đồ,auto_v23
+osm:node/1623183649,Núi Sơn Trà,viewpoint,son_tra_my_khe,review,"đỉnh núi OSM, không có lối tham quan riêng — đã có Bán đảo Sơn Trà và Đỉnh Bàn Cờ",auto_v23
+osm:node/12635080558,SummerBeach Restaurant,restaurant,hoi_an,closed,Google Maps: đang tạm đóng cửa,auto_v23:google_maps_check
+osm:node/4520093589,Lapin Ca Phe,cafe,hoi_an,closed,Google Maps: đã đóng cửa vĩnh viễn,auto_v23:google_maps_check
+osm:node/4548163789,Bánh mì Thuý,restaurant,hoi_an,closed,Google Maps: đang tạm đóng cửa,auto_v23:google_maps_check
+osm:node/5611617221,Café Sputnik,cafe,hoi_an,closed,Google Maps: đã đóng cửa vĩnh viễn,auto_v23:google_maps_check
+osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,hoi_an,closed,Google Maps: đang tạm đóng cửa,auto_v23:google_maps_check
+osm:way/565592419,Bảo tàng Hội An,museum_indoor,hoi_an,closed,Google Maps: đang tạm đóng cửa,auto_v23:google_maps_check
+osm:node/10162249917,Barconcù,nightlife,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/10297955384,Lamonta Pub & Restaurant,nightlife,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/10709738105,Làng nước mắm Nam Ô,outdoor_landmark,hai_van_lien_chieu,not_listed,không tìm thấy trên Google Maps,auto_v23:google_v1
+osm:node/10763332205,Hiệp Ký,restaurant,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/11890609669,Cơm chay Thiện Tâm - Vegan Food,restaurant,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/13890168980,Cafe Cô Bốn,cafe,ba_na_tay,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/14337971575,Arapang,restaurant,ba_na_tay,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/3893467764,UY VIET COFFEE BEAN,cafe,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/4171925609,Cồn Thuận Tình,outdoor_landmark,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/4401168602,Nha Hang Com Nieu Hong Phuc 3,restaurant,ba_na_tay,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/4721435589,Sleepy Gecko Chillout Bar,nightlife,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/4883744921,dau bep banh mi,restaurant,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/4945171421,Hai (Mì Quang - Cao Lâu),restaurant,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/5107806021,Hôp Dùa,cafe,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/5273107721,Nhà Hàng Hành Là,restaurant,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/5677701323,Rosie's Cafe,cafe,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+osm:node/7094679785,Mate Restaurant and Coffee Hoi An,cafe,hoi_an,not_listed,không tìm thấy trên Google Maps,auto_v23:google_maps_check
+ChIJ0RbSL4ARQjERLwRYqY1bqp4,Tiệm Cafe Thổ - Cà Phê Ngon & Yên Tĩnh Ngũ Hành Sơn,cafe,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ20P_fAANQjERgFeFcOB6MAs,Điểm đón khách du lịch thuyền thúng cầu Hói Lăng,paid_attraction,hoi_an,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ26h5ZAANQjER2otGJosJliA,Rường House - Cooking Class & Craft Workshop,paid_attraction,hoi_an,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ2fSHNwAfQjERtjvxUmal-YY,Ba Nở Quán,restaurant,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ3ZNy2BkZQjERkAqpwnkat3o,Bê Thui Thiên 2,nightlife,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ4_aypxYZQjERzFP2v0FweY8,Cửa hàng Đặc sản Biển Đà Nẵng,day_market,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ5RkjQCUZQjERDtUHgOu7k10,Nhung Spa Trị Liệu,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ7bDAtv8YQjERj0Fj9FcnHgA,House Coffee,cafe,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ82_sTbkQQjERQ5jmVkoovic,Bảo Tàng Văn Hóa Phật Giáo,museum_indoor,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ8VqGDeYRQjERVEkumiIa714,LÂM TỲ NI VIÊN,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ8Z0D7KURQjERUPd36goDH90,Chùa Tam Tôn,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ8zk-ZgAZQjERhiZiMzjjRe4,"CAMY SPA Liên Chiểu , Đà Nẵng",wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJ9w6iligZQjERXLpgwwjF0Fs,Chùa Minh Phước,religious,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJA0bFwKoZQjER--pX5_3_cD0,Tú Chợ đêm,restaurant,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJAZn-164ZQjERV1ZAwfTgWuc,Sunny Vietnamese Banh Mi & Coffee Class- Da Nang,paid_attraction,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJFXuefgA9QjERTm9u0hlzWcs,View Sơn Trà về đêm,viewpoint,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJG9IOepAXQjER3x9UnxFxJ7w,Húa Hạ Lương Tử Spa – Massage & Foot Spa Da Nang,wellness,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJGSKUUwCLQTERr0Je7WP5Xqc,Khu du lịch Bến Nam Yên,paid_attraction,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJHwgddQAXQjERs5sNrVutheI,Bãi tắm Sao Biển,beach,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJKS3rlfYZQjERPJolPRTWSZw,Phia Coffee & More,cafe,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJKVaLEy8XQjERAgiDXavBMTE,Unicorn Chill Zone,nightlife,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJK_ogWgARQjERnLylibgoTpw,Quýt Spa & More,wellness,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJKcik9OQYQjERKZ21jblRTVc,Chùa Thanh Hải,religious,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJLX9s7EUbQjERdsy67X5-NrE,Chùa Hải An Đà Nẵng,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJMZtZVeQZQjERchri-_Wa9C8,Bar Đà Nẵng,nightlife,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJMdGCKyQZQjERpNccOkd5duk,JEJU coffee,cafe,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJN16-6x0fQjERlJytS0E3Kx8,Chợ Quan Nam,day_market,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJNQWGShUZQjER71TXPpJW4Xs,Thủ Đạo Thang Spa Đà Nẵng,wellness,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJNXaMJAAZQjERJxDzvQEO38c,Mộc An Spa,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJO9OcO7kQQjERuGR5zEtpfu8,Chùa Thái Sơn,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJOQ-obAARQjERQ4kQhqErSkw,Bãi tắm Nguyễn Thần Hiến,beach,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJOXHZFwAZQjERnjc1WCNMaeU,Láng Beauty & Spa,wellness,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJOxHeFjkYQjERZAilaOR-hJA,Quán Mì Quảng Bà Năm,restaurant,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJP3or6NQZQjERmBDBnMA8O4U,MÂY COFFEE - TRUNG NGUYÊN Legend,cafe,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJQ2dbvVIYQjERVbGNKc5Tmcs,CHÙA TÂN THÀNH,religious,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJUf5Hcw8ZQjERsntEedW35TI,Sky coffee,cafe,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJW9b8Ky0XQjERPn8CJNdE0Lk,"Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJWTRb5NcYQjER6mJOuNl06k8,Quán Nhậu Hiếu Hòa,nightlife,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJWe_7hboQQjERxap-mizn-ZY,Nhà bia Chứng tích Núi Ghềnh,outdoor_landmark,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJY6qXPYkZQjER8UoDJvGopTk,Bãi biển Xuân Hà Beach,beach,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJYQkmfagfQjER0iIRsKZ0Rcc,Quán nhà quê,restaurant,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJd-PzSQAfQjERdmCtpw8ajB4,King Spa,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJf_LKvbkbQjERSVrbzxU6Nuc,Chùa Vân Long,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJfzqqXwAZQjERWQ7zRsTU8Zk,Moya Wellness Spa Da Nang,wellness,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJiXlEK7IRQjERvpdL4vcW86w,Tượng Phật Đá Phan Sơn,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJl21Hd_4YQjERF980f9HS9Cc,Chùa Làng Thanh Khê,religious,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJmVevrx4ZQjER64G39u7fZaM,Nhy Nguyen Beauty & Spa,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJnZoMTbkQQjERwzvvHqGlb4E,Chùa Linh Sơn,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJp9cNzfwZQjERS7ZSaA95etk,Danang Cooking Class - Lá Sen ダナン料理教室,paid_attraction,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJr_MgSAAZQjERnbnJDAtASZM,Chill Beach Thanh Khê,restaurant,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJs9Tdb7kfQjERg5O07vnwsww,Nàng Thir Spa ở Hòa Khánh,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJsSD2e3kfQjER2d_jnMVrKZ4,Quán nhậu A bảy,nightlife,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJsVPjaP8YQjER76Ao_3tvppY,Chùa Thanh Hà,religious,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJswSHXgAZQjERZnVL4je3PG4,SAY Beer,nightlife,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJueQn3rsZQjERgU81knCQmOQ,Bar Eau-de-vie,nightlife,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJvexouL4QQjERy0qt57A0GX4,Chùa Phổ Đà Sơn,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJvfs2CK4ZQjERYSUrqnRYbqo,Công viên hồ Ngọc Anh,outdoor_landmark,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJxU52AgAZQjERUmuAje5_L5Q,Bãi biển Nguyễn Tất Thành,beach,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJy9eI3pEZQjERRjXgQMj8m-g,Mê Vui - Đặc sản Đà Nẵng SẠCH,day_market,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+ChIJzRc5EgIZQjERKvXOUUpbcKA,Light Beauty Spa,wellness,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/11423769989,Postal Cafe,cafe,ba_na_tay,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_maps_check
+osm:node/11888483369,Chợ Phước Mỹ,day_market,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/1335374873,chùa An Cư Tây,religious,hai_van_lien_chieu,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/13484040419,Đền Bà Càn Khôn,religious,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/14045144381,Viet Nam's Delights,day_market,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/14067929701,Bonny handmade,day_market,son_tra_my_khe,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/2092582318,Tụy Tiên Đường Minh Hương,religious,hoi_an,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_maps_check
+osm:node/3760247201,chùa Vu Lan,religious,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/4005611262,Đền thờ Tiền Hiền làng Lổ Giang,religious,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/4005611263,Đình Lổ Giáng,religious,trung_tam,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/4280016689,Chùa Giác Hoàng Viên,religious,ngu_hanh_son,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_v1
+osm:node/4347089780,My An Beach,beach,ngu_hanh_son,few_reviews,"điểm của người địa phương, Google Maps không có số đánh giá",auto_v23:google_v1
+osm:node/5273998823,Cầu Trần Thị Lý,outdoor_landmark,trung_tam,few_reviews,"điểm của người địa phương, Google Maps không có số đánh giá",auto_v23:google_v1
+osm:node/5276547123,Cau Nguyen Van Troi Bridge,outdoor_landmark,trung_tam,few_reviews,"điểm của người địa phương, Google Maps không có số đánh giá",auto_v23:google_v1
+osm:node/5674096859,Nhà cổ Diệp Đồng Nguyên,museum_indoor,hoi_an,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_maps_check
+osm:node/6528451001,Cây đa Đò Xu,outdoor_landmark,trung_tam,few_reviews,"điểm của người địa phương, Google Maps không có số đánh giá",auto_v23:google_v1
+osm:way/35952591,Chợ vải Hội An,day_market,hoi_an,few_reviews,ít thông tin trên Google Maps (chưa đủ 30 lượt đánh giá),auto_v23:google_maps_check
+ChIJ55qx-YAaQjERJm3mA3vFjX0,Chợ Khái Tây,day_market,ngu_hanh_son,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_v1
+ChIJO56jTAARQjEREYLpKFOB1DA,Chợ Non Nước,day_market,ngu_hanh_son,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_v1
+ChIJPQ-OSwAZQjER0Zu4X6NlQds,Thanh Spa Relax,wellness,trung_tam,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_v1
+ChIJx02UcvIXQjER8al1AkjYuW0,Biển Rạng Sơn Trà,restaurant,son_tra_my_khe,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_v1
+ChIJx3fy4TgZQjER5y-HN2wBNl4,Navy Lounge,nightlife,son_tra_my_khe,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_v1
+osm:way/35952504,Chợ Hội An,day_market,hoi_an,no_hours,không có giờ mở cửa trên Google Maps hay nguồn nào khác,auto_v23:google_maps_check
+ChIJrQINf-wZQjEREXiFm4Gq56M,Da Nang Family Cooking Class,paid_attraction,trung_tam,hours_conflict,giờ trên Google Maps lệch hẳn mọi nhóm giờ của thể loại,auto_v23:google_v1
+osm:way/404714309,Nhà thờ Chính tòa Đà Nẵng,religious,trung_tam,duplicate,trùng với 'Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng)',import_osm

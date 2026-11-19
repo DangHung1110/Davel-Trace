@@ -1,0 +1,121 @@
+{
+ "about": "Giá vé / giờ mở tra cứu web ngày 2026-11-18 (Claude, WebSearch). verified_by=agent_web: có URL nhưng CHƯA được người kiểm tra tại chỗ. Giá thay đổi theo mùa/khuyến mãi — luôn đọc 'note'. USD quy đổi 26.000 VND/USD (giả định).",
+ "checked_at": "2026-11-18",
+ "items": [
+  {
+   "name": "Sun World Bà Nà Hills",
+   "ticket_vnd": 1000000,
+   "min_vnd": 500000,
+   "max_vnd": 1000000,
+   "hours": "08:00-22:00",
+   "confidence": 0.65,
+   "note": "Cáp treo khứ hồi NL niêm yết 1.000.000 (khách ngoại tỉnh); khách Đà Nẵng 650.000; U25 (18-25t) 500.000 tới 31/12/2026; cáp treo ~8h-22h tuỳ dịch vụ. Vé dùng 3 ngày liên tiếp.",
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/cap-nhat-ve-cap-treo-ba-na-hills-2026-huong-dan-cach-mua-online-20210"
+  },
+  {
+   "name": "Ngũ Hành Sơn",
+   "ticket_vnd": 40000,
+   "min_vnd": 40000,
+   "max_vnd": 70000,
+   "hours": "07:00-17:30",
+   "confidence": 0.7,
+   "note": "Vé Thủy Sơn NL 40.000 (gồm hang, chùa trên núi); thang máy 15.000/lượt (30.000 khứ hồi); trẻ <6t miễn. Giờ 07:00-17:30 theo vietnamtourism.com.",
+   "evidence_url": "https://danangfantasticity.com/en/di-san-canh-quan/danh-thang-ngu-hanh-son"
+  },
+  {
+   "name": "Động Âm Phủ",
+   "ticket_vnd": 20000,
+   "min_vnd": 20000,
+   "max_vnd": 20000,
+   "confidence": 0.6,
+   "note": "Vé riêng 20.000, dưới chân núi (không nằm trong vé Thủy Sơn).",
+   "evidence_url": "https://www.vietnamtourism.com/vi/ngu-hanh-son-a-nang-hang-ong-chua-thang-may-va-chuyen-nhung-"
+  },
+  {
+   "name": "Cù Lao Chàm",
+   "ticket_vnd": 350000,
+   "min_vnd": 350000,
+   "max_vnd": 450000,
+   "confidence": 0.65,
+   "note": "Cano khứ hồi trong ngày từ Cửa Đại ~350.000 gồm phí tham quan 70.000 (NQ 16/2026/NQ-HĐND từ 10/6/2026) + phí môi trường; tour trọn gói 500-700k. Phụ thuộc thời tiết biển.",
+   "evidence_url": "https://baovanhoa.vn/du-lich/tu-ngay-106-muc-thu-phi-tham-quan-cu-lao-cham-la-70000-dongnguoiluot-235643.html"
+  },
+  {
+   "name": "Rừng Dừa Bảy Mẫu",
+   "ticket_vnd": 30000,
+   "min_vnd": 105000,
+   "max_vnd": 230000,
+   "typical_vnd": 130000,
+   "hours": "07:00-17:00",
+   "confidence": 0.6,
+   "apply_to_alt_group": "bay_mau",
+   "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này.",
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html"
+  },
+  {
+   "name": "Bến Du Thuyền Sông Hàn",
+   "ticket_vnd": 150000,
+   "min_vnd": 150000,
+   "max_vnd": 750000,
+   "hours": "18:00-21:45",
+   "confidence": 0.6,
+   "note": "Du thuyền ngắm cảnh NL 150.000 (trẻ 1-1,3m 100.000), chuyến 18h-21h ~45 phút; combo ăn tối 375-750k.",
+   "evidence_url": "https://vinwonders.com/vi/bai-viet-du-lich/du-thuyen-tren-song-han/"
+  },
+  {
+   "name": "Bến Du Thuyền Đà Nẵng",
+   "ticket_vnd": 150000,
+   "min_vnd": 150000,
+   "max_vnd": 750000,
+   "hours": "18:00-21:45",
+   "confidence": 0.55,
+   "note": "Bến xuất phát du thuyền sông Hàn; giá như vé du thuyền ngắm cảnh (150.000 NL).",
+   "evidence_url": "https://vinwonders.com/vi/bai-viet-du-lich/du-thuyen-tren-song-han/"
+  },
+  {
+   "name": "Khu du lịch sinh thái Suối Hoa",
+   "ticket_vnd": 100000,
+   "min_vnd": 50000,
+   "max_vnd": 100000,
+   "hours": "09:00-17:00",
+   "confidence": 0.55,
+   "note": "NL (>=1,4m) 100.000, trẻ 1-1,4m 50.000; giờ 9-17h (nguồn khác ghi 8:00-17:30 và 30k — có mâu thuẫn, cần người xác nhận).",
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/khu-du-lich-sinh-thai-suoi-hoa/"
+  },
+  {
+   "name": "Hải Vân Quan",
+   "ticket_vnd": 70000,
+   "min_vnd": 70000,
+   "max_vnd": 70000,
+   "confidence": 0.7,
+   "note": "70.000/lượt từ 02/6/2026 (NQ 05/2026/NQ-HĐND TP Huế), giảm 50% cho người dân Huế/Đà Nẵng, trẻ <13t miễn.",
+   "evidence_url": "https://baovanhoa.vn/van-hoa/thu-phi-tham-quan-di-tich-quoc-gia-hai-van-quan-voi-muc-70000-dong-230675.html"
+  },
+  {
+   "name": "Jolie Cooking Class",
+   "ticket_vnd": 1040000,
+   "min_vnd": 1040000,
+   "max_vnd": 1040000,
+   "confidence": 0.55,
+   "note": "US$40/người trên cookly (Jolie Da Nang Cooking Class with Local Market Tour) ≈ 1.040.000 VND.",
+   "evidence_url": "https://www.cookly.me/do/1323-jolie-da-nang-cooking-class-with-local-market-tour/in/da-nang"
+  },
+  {
+   "name": "VinWonders Nam Hội An",
+   "ticket_vnd": 650000,
+   "min_vnd": 450000,
+   "max_vnd": 650000,
+   "hours": "09:00-18:00",
+   "confidence": 0.65,
+   "note": "Vé tiêu chuẩn: >=1,4m 650.000; 1-1,4m và >60t 450.000; <1m miễn. Giờ T2-T6 9:00-18:00, T7-CN 9:00-19:00 (dùng 9-18 cho mọi ngày).",
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/cac-tro-choi-o-vinwonders-nam-hoi-an/"
+  }
+ ],
+ "category_notes": {
+  "cooking_class": "Lớp nấu ăn Đà Nẵng trên cookly/pelago: US$29-40/người (≈750k-1.050k); Hội An US$34-63. Dùng làm ƯỚC LƯỢNG theo thể loại (inferred), không gán cho từng lớp.",
+  "evidence": [
+   "https://www.cookly.me/do/3064-5-dishes-traditional-cuisine-cooking-class-with-market-tour-in-da-nang/in/da-nang",
+   "https://www.pelago.com/en/activity/p80z6f4vt-vietnam-home-cooking-class-in-da-nang-da-nang"
+  ]
+ }
+}
