@@ -152,3 +152,4 @@ Nguồn: VietnamPlus + Tuổi Trẻ (17/08/2026), VnEconomy + VietNamNet (15–1
   - Chưa rõ, giữ luật cũ: Ghềnh Bàng (24h; báo Văn Hoá 2026 cảnh báo không tự ý tiếp cận), Hải đăng Tiên Sa, Radar Sơn Trà 1 và Núi Sơn Trà (cổng private trên OSM), Nhất Lâm Thủy Trang Trà, Đài tưởng niệm 229, The Long Bar InterContinental.
   - Bãi Đá Đen Sơn Trà (người dùng thêm) trùng tên với điểm cấm trekking trong VietNamNet — cần người dùng xác nhận; Codex coi 'Bãi Đá' (Obama) là bãi khác, ngoài tuyến.
 - Kết quả: 876 POI (825 active, 51 excluded).
+- **Người dùng chốt 20/11:** loại 4 điểm bị cấm/không được tự ý tiếp cận — Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen Sơn Trà (`decisions_zfinal_20261120b.json`). Kết quả: 876 POI (822 active, 54 excluded).

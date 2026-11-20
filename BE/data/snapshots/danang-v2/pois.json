@@ -14,8 +14,8 @@
  ],
  "count": 876,
  "count_by_status": {
-  "active": 825,
-  "excluded": 51
+  "active": 822,
+  "excluded": 54
  },
  "count_by_category": {
   "restaurant": 169,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 89,
+ "applied_decisions": 91,
  "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
  "count_new_pois": 134,
@@ -30163,8 +30163,8 @@
    "lon": 108.31163219999999,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Ghềnh Bàng; báo Văn Hoá 13/08/2026 cảnh báo)",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -30896,8 +30896,8 @@
    "lon": 108.3220625,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Hải đăng Tiên Sa)",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -31775,7 +31775,7 @@
    "category": "viewpoint",
    "role": "attraction",
    "status": "excluded",
-   "status_reason": "Không phải điểm tham quan được phép: 'cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen' (VietNamNet 15/09/2025); nơi từng có người lạc, tai nạn, đuối nước (VietnamPlus, Tuổi Trẻ 17/08/2026).",
+   "status_reason": "Không phải điểm tham quan được phép: 'cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen' (VietNamNet 15/09/2025); nơi từng có người lạc, tai nạn, đuối nước (VietnamPlus, Tuổi Trẻ 17/08/2026). Người dùng xác nhận 20/11.",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -107886,8 +107886,8 @@
    "lon": 108.2338043,
    "category": "beach",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Bãi Đá Đen; VietNamNet 15/09/2025: cấm trekking tự phát)",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -107941,7 +107941,7 @@
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
+     "note": "decisions_zfinal_20261120b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "manual",

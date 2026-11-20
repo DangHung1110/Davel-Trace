@@ -1,9 +1,21 @@
 {
- "note": "Sau chốt cuối 20/11 (Claude): an toàn theo thông báo chính thức về bán đảo Sơn Trà.",
+ "note": "Sau chốt cuối 20/11: loại 4 điểm bị cấm trên bán đảo Sơn Trà (người dùng xác nhận).",
  "items": {
   "ChIJ_XkaoQs-QjER_IUTHqI3gI8": {
    "status": "excluded",
-   "status_reason": "Không phải điểm tham quan được phép: 'cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen' (VietNamNet 15/09/2025); nơi từng có người lạc, tai nạn, đuối nước (VietnamPlus, Tuổi Trẻ 17/08/2026)."
+   "status_reason": "Không phải điểm tham quan được phép: 'cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen' (VietNamNet 15/09/2025); nơi từng có người lạc, tai nạn, đuối nước (VietnamPlus, Tuổi Trẻ 17/08/2026). Người dùng xác nhận 20/11."
+  },
+  "ChIJI4oSjdE9QjERlXMiA630YKs": {
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Hải đăng Tiên Sa)"
+  },
+  "ChIJW0KcgfI9QjERJpkPfjssyfo": {
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Ghềnh Bàng; báo Văn Hoá 13/08/2026 cảnh báo)"
+  },
+  "manual:son-tra-bai-da-den": {
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Bãi Đá Đen; VietNamNet 15/09/2025: cấm trekking tự phát)"
   }
  }
 }
