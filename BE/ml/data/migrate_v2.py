@@ -547,6 +547,40 @@ def load_access_route(sources_dir):
     return out
 
 
+def load_booking(sources_dir):
+    """{poi_id: row} from BE/data/sources/booking_*.json — experiences sold as
+    fixed sessions (cooking classes, workshops). Row: sessions, closed_days,
+    duration_min, booking_url, evidence_url, note. Later files override."""
+    out = {}
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("booking_") and fn.endswith(".json"):
+                for it in (_load(os.path.join(sources_dir, fn), {}) or {}).get("items", []):
+                    out[it["poi_id"]] = {**it, "_file": fn}
+    return out
+
+
+def apply_booking(rec, it):
+    """hours.kind = by_booking: `open` lists the bookable sessions and dwell is
+    the full session, so a stop can only sit exactly on one session."""
+    spans = [s.strip() for s in it.get("sessions") or [] if R.parse_span(s.strip())]
+    if not spans:
+        return
+    h = rec["hours"]
+    h["open"], h["kind"] = spans, "by_booking"
+    if "closed_days" in it:
+        h["closed_days"] = list(it["closed_days"] or [])
+    lens = [(c - o) % 1440 for s in spans for o, c in R.parse_element(s)]
+    m = it.get("duration_min") or min(lens)
+    rec["dwell"] = {"p25": m, "p50": m, "p75": m}
+    note = f"{it['_file']}; theo suất, cần đặt trước" + (f"; đặt: {it['booking_url']}" if it.get("booking_url") else "")
+    rec["provenance"]["hours"] = prov("web", "agent_web", evidence_url=it.get("evidence_url") or it.get("booking_url"),
+                                      note=note, confidence=0.6)
+    rec["provenance"]["dwell"] = prov("web", "agent_web", note=f"{it['_file']}; = độ dài suất", confidence=0.6)
+    if it.get("price_note"):
+        rec["price"]["note"] = it["price_note"]
+
+
 def clip_to_access(rec):
     """Road window also bounds hours set later (decisions / human verify):
     the place may be open, but the road to it is not."""
@@ -851,6 +885,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     decisions = load_decisions(sources_dir)     # WP5 / WP10 (user-approved)
     human = load_human_verify(sources_dir)      # WP8 (verify queue export)
     route = load_access_route(sources_dir)      # Sơn Trà controlled-road scope
+    booking = load_booking(sources_dir)         # session-based experiences
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -1014,6 +1049,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
             apply_decision(rec, decisions[pid])
         if pid in human:
             apply_human_verify(rec, human[pid])
+        if pid in booking:
+            apply_booking(rec, booking[pid])
         clip_to_access(rec)
         v21.append(rec)
         archive[pid] = arch_fields
@@ -1171,7 +1208,7 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | hours_spans, hours_conf, hours_verified_by | giờ mở mọi ngày từ nguồn sạch, nếu không có thì khung an toàn của nhóm giờ |
 | signature | điểm tiêu biểu (danh sách must-go đã duyệt) |
 | price_tier | v2.1: free / cheap / medium / expensive / included / trống (DATA_SPEC_v2_1) |
-| hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / unknown |
+| hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / by_booking (theo suất, cần đặt trước) / unknown |
 | prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + Wikidata/Wikipedia), thay rating Google |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)

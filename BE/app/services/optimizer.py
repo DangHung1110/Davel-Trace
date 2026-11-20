@@ -132,6 +132,8 @@ class StubPOI:
     # WP3: every opening window (e.g. lunch + dinner). open_min/close_min stay
     # the envelope; with >1 window the model picks exactly one of them.
     windows: tuple = ()
+    # hours.kind == "by_booking": bookable sessions (cooking class); <= 1/day
+    booking: bool = False
 
 
 @dataclass
@@ -188,7 +190,8 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    restaurant=category == "restaurant",
                    category=category,
                    intensity=int(poi.get("intensity") or 2),
-                   windows=windows if len(windows) > 1 else ())
+                   windows=windows if len(windows) > 1 else (),
+                   booking=(poi.get("hours") or {}).get("kind") == "by_booking")
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -655,6 +658,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     for hits in slot_hits.values():
         if len(hits) > 1:
             m.Add(sum(hits) <= 1)
+    # by_booking (HARD): at most one session-based experience per day
+    booked = [visit[i] for i in range(1, n + 1) if pois[i - 1].booking]
+    if len(booked) > 1:
+        m.Add(sum(booked) <= 1)
 
     # Universal lunch (human need): exactly one restaurant starts inside
     # 11:00-13:00 â€” A1 above already caps the slot at one, so ">= 1" here is

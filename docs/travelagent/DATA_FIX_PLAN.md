@@ -139,12 +139,12 @@ Trạng thái 20/11 — đều kiểm bằng `P0_GATE=1 pytest BE/tests/data/tes
 ## 4b. Còn lại để dữ liệu sạch + đúng format cho kiến trúc mới (P1, sau PR #25)
 
 Chất lượng (không đổi format):
-1. Giờ `safe_window` 557 điểm → `fixed` có nguồn, theo thứ tự: chùa/nhà thờ (80, khung hiện tại quá hẹp) → ngoài trời + chợ (69) → spa + nightlife (158). Quán ăn/cà phê giữ khung an toàn.
+1. Giờ `safe_window` 557 → **498** (20/11: +19 chùa/hội quán, +10 ngoài trời/chợ, +30 spa/nightlife có nguồn). Phần còn lại không có nguồn đọc được (chùa làng, quán nhỏ). Quán ăn/cà phê giữ khung an toàn.
 2. Giá: 677/745 điểm là ước lượng theo loại → lấy giá thật cho điểm hay vào lịch (paid_attraction, signature, chợ đêm), quán ăn giữ khoảng giá.
 3. Toạ độ: 552 điểm toạ độ Google chưa đối chiếu OSM (rủi ro thấp).
 
 Format (đổi `DATA_SPEC_v2_1` — cần người dùng duyệt):
-4. `hours.kind = by_booking` + `sessions` + `booking_url` cho 13 lớp nấu ăn (thay `unknown`).
+4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 4/13 lớp có suất có nguồn, 9 lớp còn unknown. Còn: bỏ bữa liền kề sau lớp nấu ăn.
 5. Suất/giờ khởi hành cho show, tour (Ký ức Hội An 20:00, tour lặn 4 suất) thay vì một khung mở cửa.
 6. Vé nhiều mức (người lớn/trẻ em/cư dân, ECO/HIGH/VIP) + phí bắt buộc (gửi xe, thang máy, thuyền) thành trường có cấu trúc; hiện chỉ ở `price.note`.
 7. Đếm khoản "chưa biết" khi tính chi phí thay vì coi = 0.
@@ -175,7 +175,7 @@ Dữ liệu kiến trúc (mục 3): `time_profiles`, giờ mặt trời, khí h�
 
 **Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
 - Giờ do người kiểm: 30 điểm. Tiêu chí ≥ 50 đã được người dùng bỏ (20/11).
-- Giờ `unknown` ngoài lưu trú: 13 lớp nấu ăn (giữ active, cần kiểu giờ `by_booking` ở P1). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
+- Giờ `unknown` ngoài lưu trú: 9 lớp nấu ăn chưa có lịch suất (4 lớp khác đã là `by_booking`, 20/11). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
 - 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
 - Khung bán đảo Sơn Trà: đã có `access_route_*.json` + cắt giờ theo khung đường (20/11); giữ 07:30-17:30 quanh năm. Người dùng loại Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen, Bãi Obama (khu cấm). Còn 6 điểm 'chưa rõ' giữ luật cũ (xem `reports/p0/14_review_round1.md`).
 - Data contract P1 (mục 3): ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.

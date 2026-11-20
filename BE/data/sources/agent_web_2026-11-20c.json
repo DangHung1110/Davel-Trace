@@ -1,0 +1,326 @@
+{
+ "about": "Giờ có nguồn cho điểm ngoài trời/chợ và spa/nightlife (Codex t15 đọc OSM + web, 20/11/2026; reports/p0/links/outdoor_market_codex.json, spa_nightlife_codex.json). Không dùng Google. 24:00 ghi 23:59.",
+ "checked_at": "2026-11-20",
+ "items": [
+  {
+   "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+   "name": "Khu ẩm thực Chợ Cồn",
+   "hours": "07:00-15:00",
+   "confidence": 0.6,
+   "evidence_url": "https://tixgo.vn/node/3988",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời"
+  },
+  {
+   "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
+   "name": "Chợ Mân Thái",
+   "hours": "08:00-21:00",
+   "confidence": 0.6,
+   "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 8:00 đến 21:00\". Mục Chợ Mân Thái, đường Trần Duy Chiến; không phải giờ chợ cá ven biển. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
+   "name": "Chợ Hòa Khánh",
+   "hours": "04:00-21:30",
+   "confidence": 0.6,
+   "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 4:00 đến 21:30\". Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
+   "name": "Chợ Thanh Vinh",
+   "hours": "05:00-08:00, 15:00-20:00",
+   "confidence": 0.6,
+   "evidence_url": "https://top1danang.com/diem-den/cho-thanh-vinh-da-nang.html",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày\". Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
+   "name": "Chợ An Hải Bắc",
+   "hours": "07:00-17:00",
+   "confidence": 0.6,
+   "evidence_url": "https://danangbest.com/cho-an-hai-bac-thien-duong-am-thuc-va-mua-sam-tai-thanh-pho.html",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Thời gian tham quan: 7h00 - 17h00\". Khung chung hẹp hơn với https://kienoceanhotel.com/cho-an-hai-bac-da-nang/ ghi “Giờ mở cửa: 4:00 – 18:30 hàng ngày”. Nguồn chính gọi đây là thời gian tham quan; không kết luận sạp ngừng bán ngoài khung này. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "osm:node/14067929701",
+   "name": "Bonny handmade",
+   "hours": "08:00-11:30, 14:00-17:30",
+   "confidence": 0.6,
+   "evidence_url": "https://www.openstreetmap.org/node/14067929701",
+   "note": "Giờ (osm, Codex t15 20/11/2026): \"Mo-Su 08:00-11:30, 14:00-17:30\". opening_hours của chính node Bonny handmade, 25 An Thượng 35. OSM ghi cả tuần; đây là cửa hàng handmade, không phải chợ."
+  },
+  {
+   "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
+   "name": "Đặc sản Đà Nẵng làm quà - Dương Lê",
+   "hours": "09:00-21:00",
+   "confidence": 0.6,
+   "evidence_url": "https://monngondanang.vn/cua-hang-dac-san-da-nang-duong-le/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 09:00 – 21:00\". Nguồn nêu cơ sở 516 Núi Thành phù hợp khu vực tọa độ đầu vào, cùng chi nhánh 151A Nguyễn Văn Thoại; đây là cửa hàng đặc sản. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8",
+   "name": "Đặc Sản Chả Bò Bà Tâm Đà Nẵng",
+   "hours": "06:00-22:00",
+   "confidence": 0.6,
+   "evidence_url": "https://ruoctom.com/cha-bo-ba-tam-da-nang/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 6h00 – 22h00\". Nguồn nêu Chả bò Bà Tâm, 31 Nguyễn Hữu Cảnh, Thuận Phước; cửa hàng đặc sản. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "osm:way/35952504",
+   "name": "Chợ Hội An",
+   "hours": "06:00-22:00",
+   "confidence": 0.6,
+   "evidence_url": "https://visitdanang.travel/vi/tron-bo-kinh-nghiem-tham-quan-va-mua-sam-cho-hoi-an-11365",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm\". Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "osm:node/4171964390",
+   "name": "Làng gốm Thanh Hà",
+   "hours": "08:00-17:30",
+   "confidence": 0.6,
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/lang-gom-thanh-ha-hoi-an-kinh-nghiem-tham-quan-day-du/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Làng gốm Thanh Hà giờ mở cửa tham khảo từ: 8h00 – 17h30\". Trích phần câu; giờ tham khảo khu tham quan làng gốm. https://vevin.vn/vn/blog/detail/lang-gom-thanh-ha-181 cũng ghi 8:00–17:30. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+   "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
+   "name": "F29 Golden Beef & Sky Bar",
+   "hours": "17:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://dananggoldenbay.com/f29-golden-beef-sky-bar-the-pinnacle-of-western-cuisine-fireworks-dining-in-da-nang/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Opening Hours: 14:00 – 24:00 | Giờ mở cửa: 𝟏𝟕:𝟎𝟎 - 𝟐𝟒:𝟎𝟎\". Khung chung hẹp hơn: trang khách sạn ghi 14–24; video của chính Wyndham Danang Golden Bay ngày 2024-04-03 https://www.youtube.com/watch?v=TYkdGPihcuQ ghi 17–24. Hai trích đoạn theo thứ tự hai nguồn. Tầng 29, Wyndham Golden Bay; nguồn cũ cần xác nhận"
+  },
+  {
+   "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
+   "name": "Vive Océane - Beach Club & Restaurant",
+   "hours": "11:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.hyatt.com/hyatt-regency/en-US/danhr-hyatt-regency-danang-resort-and-spa/dining/vive-oceane",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Bar: 11:00 AM - 11:00 PM Kitchen: 11:00 AM - 10:30 PM\". Trang chính Hyatt, 5 Trường Sa. hours là giờ bar; bếp ngừng 22:30. Không dùng giờ nhận phòng khách sạn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJp5h-DjMYQjERTMBHOnlub0o",
+   "name": "The 1920's Lounge",
+   "hours": "19:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://the1920s.vn/booking/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"19:00 - NỬA ĐÊM\". Trang đặt bàn của chính The 1920's Lounge, 53 Trần Quốc Toản; chuyển NỬA ĐÊM thành 24:00. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
+   "name": "The Long Bar at InterContinental Danang",
+   "hours": "10:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.danang.intercontinental.com/dining/the-l_o_n_g-bar/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Open Daily | Fun and Drinks | 10:00 – 23:00 | Food | 11:30 - 22:00\". Trích nhãn và giá trị mục Hours. hours là giờ phục vụ đồ uống; bếp 11:30–22:00. Không phải giờ Club Lounge/khách sạn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJe8GWJBYXQjERmtVZP78E5oU",
+   "name": "The Speakeasy Bar & Tapas",
+   "hours": "16:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://princehoteldanang.com/the-speakeasy-bar-tapas/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Opening Hours: 16:00 to Midnight\". Trang khách sạn Prince, tầng 26; chuyển Midnight thành 24:00. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
+   "name": "BlackOut Rooftop Bar",
+   "hours": "15:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://www.radissonhotels.com/en-us/hotels/radisson-red-danang/restaurants-and-bars/rooftop-bar",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Daily 3:00 pm - 12:00 am\". Trang chính Radisson RED; mục Opening hours, không dùng khung happy hour hoặc DJ. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+   "name": "N Pub",
+   "hours": "15:30-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://n-pub.com/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Thứ Hai - Chủ NhậtMonday - Sunday · 3:30PM – 11PM (15:30–23:00)\". Trang chính N Pub, giờ Opening Hours cả tuần. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
+   "name": "Maia Beach Bar",
+   "hours": "16:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.openstreetmap.org/node/10747475499",
+   "note": "Giờ (osm, Codex t15 20/11/2026): \"Mo-Su 16:00-23:00\". OSM Maia tại 16.0515244,108.2485711 cách đầu vào khoảng 20 m, khớp Maia Beach Bar; website https://maiabeachbar.com/contact đọc được nhưng không nêu giờ. OSM snapshot 2026-11-20T05:48:41Z; tag ghi cả tuần."
+  },
+  {
+   "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
+   "name": "Section 30",
+   "hours": "16:00-01:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.thesection30.com/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"4pm - 1am\". Trích dòng mục Service; các dòng Mon–Sun cùng khung 4pm–1am (Mon/Tue/Wed có khoảng trắng trong chữ am). Giờ đóng sang ngày hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+   "name": "Writer's Bar",
+   "hours": "09:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://www.marriott.com/en-us/hotels/dadmr-danang-marriott-resort-and-spa/dining/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Everyday | 9:00 AM-12:00 AM\". Mục Writer's Bar trên trang chính Danang Marriott Resort & Spa. Không lấy giờ nhà hàng/pool bar khác. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJQydy2apx34oRnci64Kkdi4U",
+   "name": "For You Club",
+   "hours": "20:00-03:00",
+   "confidence": 0.6,
+   "evidence_url": "https://foryouclubdanang.com/faq",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"For You Club mở cửa từ 20:00 đến 03:00 sáng hằng đêm, kể cả cuối tuần và lễ tết.\". Trang chính cơ sở 52–55 Trần Văn Trứ; đóng 03:00 sáng hôm sau. Không dùng giờ cao điểm 22:30. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
+   "name": "The Roof - Da Nang",
+   "hours": "14:00-01:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.theroofdanang.com/about",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Sun – Thu | 2:00 PM – 1:00 AM | Fri – Sat | 2:00 PM – 2:00 AM\". Trích nhãn và giá trị Opening Hours. Khung chung cả tuần 14:00–01:00; thứ Sáu/thứ Bảy thực tế trang ghi đến 02:00. Cơ sở tầng 3 trên East West Brewing, 1A Võ Nguyên Giáp. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJkZi7gkcYQjERPd87DaNuhW0",
+   "name": "On The Radio",
+   "hours": "19:00-02:00",
+   "confidence": 0.6,
+   "evidence_url": "https://gonight.vn/bar/on-the-radio-thai-phien-quan-hai-chau/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"⏱️ Giờ mở cửa: 19:00–02:00 hàng ngày.\". Trang nhận đặt bàn nêu đích danh On The Radio, 76 Thái Phiên. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
+   "name": "Panda Spa & Massage",
+   "hours": "09:00-23:45",
+   "confidence": 0.6,
+   "evidence_url": "https://pandaspa.vn/vi/contact",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa | 9 giờ sáng - 23 giờ 45 tối\". Trích nhãn và giá trị của cơ sở 01 Panda Spa & Massage, 229 Nguyễn Văn Thoại. Không lấy hỗ trợ hotline 24/7 làm giờ spa. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJp4sb2egXQjERFOFVxrsHiyI",
+   "name": "Luxury Healthy Spa & Massage",
+   "hours": "09:00-04:00",
+   "confidence": 0.6,
+   "evidence_url": "https://healthyspadanang.com/luxury-spa-da-nang/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"From 09:00 until 04:00 the next morning, every day.\". Trang chính chi nhánh Luxury Healthy Spa, 224 Trần Bá Đằng; không dùng giờ đóng của Regal/Annam. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJEwAAALAZQjERyXCN5eSBt1Q",
+   "name": "Jang Mi Spa & Massage",
+   "hours": "09:30-22:00",
+   "confidence": 0.6,
+   "evidence_url": "https://jangmispa.vn/gioi-thieu/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Mon - Sun: 9:00 am-10:00pm | Location 1: 77 Duong Dinh Nghe,Son Tra.Mon- Sun: 9:30AM- 10PM\". Khung chung hẹp hơn do header ghi 09–22, nội dung Location 1 ghi 09:30–22. Cùng cơ sở 77 Dương Đình Nghệ; không áp giờ chi nhánh 53 Thái Phiên. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
+   "name": "Q&B Luxury Spa – Massage & Sauna Đà Nẵng",
+   "hours": "08:30-23:55",
+   "confidence": 0.6,
+   "evidence_url": "https://www.fresha.com/a/q-b-luxury-spa-da-nang-ngu-hanh-son-viet-nam-46-hoang-ke-viem-rrsm7c7l",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Monday | 8:30 AM - 11:55 PM | Sunday | 8:30 AM - 11:55 PM\". Trích hai dòng của lịch mở cửa; cả bảy ngày đều cùng 08:30–23:55. Trang đặt dịch vụ Q&B LUXURY SPA, 46 Hoàng Kế Viêm. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
+   "name": "Babylon Spa - Massage Da Nang",
+   "hours": "09:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://babylonspa.vn/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Operating Hours: | 09:00 – 23:00 daily\". Trang chính Babylon nêu hai cơ sở 30 Hà Bổng và 105 Hoàng Kế Viêm; giờ chung của thương hiệu. Đối chiếu https://babylonspa.vn/30-ha-bong-eng/ xác định cơ sở 30 Hà Bổng cho POI này. Nhận booking cuối 22:30, không phải đóng cửa. closed_days=[]: không c"
+  },
+  {
+   "poi_id": "ChIJwdZa4eQ7JQwRYcRRBR0ZE24",
+   "name": "Ánh Spa & Massage Đà Nẵng",
+   "hours": "09:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://anhspa.vn/pages/faq",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Thứ 2 - Chủ nhật: 9:00am to 23:00pm\". Trang chính Ánh Spa, 08 Trương Quyền; chuẩn hóa 23:00pm thành 23:00 theo cách viết 24 giờ của nguồn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ076jrJZFj0QRKwm40qhwBWA",
+   "name": "Julius Spa & Massage",
+   "hours": "09:00-02:00",
+   "confidence": 0.6,
+   "evidence_url": "https://www.juliusspa.com/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"9:00 AM - 2:00 AM\". Trang chính Julius 1, B4-14 An Thượng 38; nhận diện cùng đường đầu vào. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJXcc22ZcZQjERT47ZqHMl13c",
+   "name": "Charm Spa - Massage Da Nang",
+   "hours": "09:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://charmspa.com.vn/en/branches/charm-spa-da-nang/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"The branch is open from 9:00 AM to 11:00 PM every day of the week, including weekends.\". Trang chính CHARM SPA Da Nang, 283 Nguyễn Chí Thanh; giờ riêng chi nhánh Đà Nẵng. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
+   "name": "Babylon Spa Massage Da Nang",
+   "hours": "09:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://babylonspa.vn/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Operating Hours: | 09:00 – 23:00 daily\". Giờ chung trang chính Babylon, dùng cho hai cơ sở được chính trang liệt kê. https://babylonspa.vn/vi/105-hoang-ke-viem/ xác định cơ sở 105 Hoàng Kế Viêm cho POI này. Last booking 22:30 khác giờ đóng. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
+   "name": "Herbal Spa",
+   "hours": "09:00-22:30",
+   "confidence": 0.6,
+   "evidence_url": "https://www.openstreetmap.org/way/1278503035",
+   "note": "Giờ (osm, Codex t15 20/11/2026): \"Mo-Su 09:00-22:30\". OSM Herbal Spa tâm 16.0690932,108.2364889 cách đầu vào khoảng 58 m, cùng tên trong 80 m. Trang đặt dịch vụ https://spabooking.vn/en/spa-massage/herbal-spa.html cũng ghi Monday-Sunday: 09:00–22:30; last booking 20:30 không phải đóng cửa. OSM snapshot"
+  },
+  {
+   "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
+   "name": "OANI SPA",
+   "hours": "09:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://oanispa.com/vi/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ hoạt động: 9:00 – 23:00 hằng ngày (Đặt trước trễ nhất 22:30)\". Trang chính liệt kê Oani Spa gần biển Mỹ Khê, 46 Phan Liêm, khớp nhánh đầu vào; 22:30 là hạn đặt trước. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM",
+   "name": "Ara Spa & Massage Da Nang",
+   "hours": "00:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://araspa.vn/booking/?service=12",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"24/7 | ALWAYS OPEN | DAY & NIGHT | FOR YOUR COMFORT\". Trang đặt lịch của chính ARA Spa, 02 Hoàng Sa. Đây là banner mở cửa ngày đêm; không lấy happy hours 09:30–15:00 làm giờ hoạt động. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
+   "name": "le vénin spa",
+   "hours": "09:00-23:59",
+   "confidence": 0.6,
+   "evidence_url": "https://leveninspa.com/vi/lien-he-levenin-spa/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"09:00 SÁNG - 02:00 SÁNG | Monday to Sunday: 8AM – 02AM\". Cùng cơ sở 231 Dương Đình Nghệ: header nguồn này 09–02, thân trang 08–02; https://leveninspadanang.com/ ghi “08:00 AM – 00:00 AM”. Lấy giao hẹp 09–24. Loại giờ của WellBe vì trang trộn dữ liệu Google/place và điện thoại placeholder, không dùng làm bằ"
+  },
+  {
+   "poi_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
+   "name": "Regal Healthy Spa",
+   "hours": "09:00-23:30",
+   "confidence": 0.6,
+   "evidence_url": "https://healthyspadanang.com/regal-spa-da-nang/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"From 09:00 to 23:30 every day.\". Trang chính Healthy Spa Regal, 14–16 Phan Tôn; không áp giờ đến 04:00 của Luxury. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJmwtSJxYXQjERqyw4BIsIRV4",
+   "name": "M'healthy spa",
+   "hours": "08:00-23:00",
+   "confidence": 0.6,
+   "evidence_url": "https://mhealthyspadanang.com/",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 08:00 AM – 23:00 PM (T2 – CN)\". Trang chính M'healthy, 52 Hoàng Kế Viêm; chuẩn hóa cách viết giờ 24h kèm AM/PM của nguồn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ9wcVkY0ZQjERC4hzT7DwUcg",
+   "name": "Mộc Thanh Spa",
+   "hours": "08:00-20:00",
+   "confidence": 0.6,
+   "evidence_url": "https://ohbeauti.vn/spa/moc-thanh-spa",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"8:00 - 20:00 (T2-CN)\". Trang đặt lịch tư vấn đích danh Mộc Thanh Spa, 268 Bế Văn Đàn, Thanh Khê; mục Giờ làm việc. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+   "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+   "name": "Elsa Spa",
+   "hours": "08:00-20:00",
+   "confidence": 0.6,
+   "evidence_url": "https://ohbeauti.vn/spa/elsa-spa-massage-da-nang",
+   "note": "Giờ (web, Codex t15 20/11/2026): \"8:00 - 20:00 (T2-CN)\". Trang đặt lịch tư vấn đích danh Elsa Spa massage Da Nang, 52 Nguyễn Thái Học; mục Giờ làm việc. closed_days=[]: không có ngày nghỉ được xác nhận."
+  }
+ ]
+}

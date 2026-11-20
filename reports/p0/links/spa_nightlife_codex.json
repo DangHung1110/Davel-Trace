@@ -1,0 +1,1584 @@
+[
+  {
+    "poi_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
+    "name": "F29 Golden Beef & Sky Bar",
+    "hours": "17:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://dananggoldenbay.com/f29-golden-beef-sky-bar-the-pinnacle-of-western-cuisine-fireworks-dining-in-da-nang/",
+    "quote": "Opening Hours: 14:00 – 24:00 | Giờ mở cửa: 𝟏𝟕:𝟎𝟎 - 𝟐𝟒:𝟎𝟎",
+    "note": "Khung chung hẹp hơn: trang khách sạn ghi 14–24; video của chính Wyndham Danang Golden Bay ngày 2024-04-03 https://www.youtube.com/watch?v=TYkdGPihcuQ ghi 17–24. Hai trích đoạn theo thứ tự hai nguồn. Tầng 29, Wyndham Golden Bay; nguồn cũ cần xác nhận lại. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ7VljWJ4RQjER2Fp6XPnZiaM",
+    "name": "SC Restaurant & Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
+    "name": "Vive Océane - Beach Club & Restaurant",
+    "hours": "11:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.hyatt.com/hyatt-regency/en-US/danhr-hyatt-regency-danang-resort-and-spa/dining/vive-oceane",
+    "quote": "Bar: 11:00 AM - 11:00 PM\nKitchen: 11:00 AM - 10:30 PM",
+    "note": "Trang chính Hyatt, 5 Trường Sa. hours là giờ bar; bếp ngừng 22:30. Không dùng giờ nhận phòng khách sạn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJr_-_LCgZQjERRByqB18J3Ls",
+    "name": "Quán nhậu Vườn Bia",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ1fgYYgAZQjERPupjVbkyt6A",
+    "name": "Quán Nhậu Cô Chiêu",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/quannhaucochieu",
+    "quote": null,
+    "note": "Đã mở fanpage cơ sở, chỉ nhận vỏ Facebook không có nội dung giờ đọc được; bỏ giờ ở trang tổng hợp/place. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ3ZNy2BkZQjERkAqpwnkat3o",
+    "name": "Bê Thui Thiên 2",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJSYpfiOcZQjERYKZX_AdStPY",
+    "name": "GINZA Bar & Lounge",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJueQn3rsZQjERgU81knCQmOQ",
+    "name": "Bar Eau-de-vie",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJp5h-DjMYQjERTMBHOnlub0o",
+    "name": "The 1920's Lounge",
+    "hours": "19:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://the1920s.vn/booking/",
+    "quote": "19:00 - NỬA ĐÊM",
+    "note": "Trang đặt bàn của chính The 1920's Lounge, 53 Trần Quốc Toản; chuyển NỬA ĐÊM thành 24:00. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJZVLi0gEZQjERl6s0h2bqoK0",
+    "name": "Bar Đồ Yêu - Authentic Vietnamese Cocktail",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJYTdcRmIZQjERpxIQp-G8HQ4",
+    "name": "Vấn Cocktail Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/vancocktailbar",
+    "quote": null,
+    "note": "Đã mở fanpage Vấn, không có lịch giờ đọc được. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQdpSMREZQjEReHEkMWcVwbw",
+    "name": "Dazzling Cocktail Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJxxumO4QZQjERqrQlIwbE8cA",
+    "name": "Buffalo beer & coffee",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJh8C0GlYXQjERhjmDp-ik-Uc",
+    "name": "C Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJu557PTwYQjERu1jlhJR4LEU",
+    "name": "New Phương Đông Club",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/newphuongdongnightclub/",
+    "quote": null,
+    "note": "Đã mở fanpage, không đọc được giờ hoạt động. Không lấy giờ của nhà hàng/khách sạn New Orient hoặc thông tin pháp lý làm lịch mở cửa. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJn9Kkxh4ZQjERgDXEcvzD4nI",
+    "name": "MarLan Pub",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJp4lxrJsZQjERdBDtWzWyHJU",
+    "name": "Bambi Beer Club",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJYZuMDnEZQjERrftd297ekRM",
+    "name": "Tê Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/tecocktails",
+    "quote": null,
+    "note": "Đã mở fanpage cơ sở; trang không trả nội dung giờ đọc được. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJu9GUjOgZQjERpfx8z-GIMEw",
+    "name": "Kết Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJEXMOHVMXQjER479UZE7C59c",
+    "name": "BAR FLOW Danang",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJZQZGM-MZQjERm_6vbq_fWzo",
+    "name": "NYX Sky Lounge & Mixology",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/NYX.Lounge.21",
+    "quote": null,
+    "note": "Đã mở fanpage NYX; không đọc được giờ hoạt động. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJwRzh0c0ZQjERSqm3HPF_Gi4",
+    "name": "T&V Lounge Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
+    "name": "The Long Bar at InterContinental Danang",
+    "hours": "10:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.danang.intercontinental.com/dining/the-l_o_n_g-bar/",
+    "quote": "Open Daily | Fun and Drinks | 10:00 – 23:00 | Food | 11:30 - 22:00",
+    "note": "Trích nhãn và giá trị mục Hours. hours là giờ phục vụ đồ uống; bếp 11:30–22:00. Không phải giờ Club Lounge/khách sạn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJe8GWJBYXQjERmtVZP78E5oU",
+    "name": "The Speakeasy Bar & Tapas",
+    "hours": "16:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://princehoteldanang.com/the-speakeasy-bar-tapas/",
+    "quote": "Opening Hours: 16:00 to Midnight",
+    "note": "Trang khách sạn Prince, tầng 26; chuyển Midnight thành 24:00. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ5aETx9oZQjERBE0f6BHAbyg",
+    "name": "Takara Lounge",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJabHpMJoXQjERgyUE4Jz8_D0",
+    "name": "BlackOut Rooftop Bar",
+    "hours": "15:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.radissonhotels.com/en-us/hotels/radisson-red-danang/restaurants-and-bars/rooftop-bar",
+    "quote": "Daily 3:00 pm - 12:00 am",
+    "note": "Trang chính Radisson RED; mục Opening hours, không dùng khung happy hour hoặc DJ. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJP0--pEAXQjERoheJMf24gHA",
+    "name": "Lounge Beach bar & Restaurant",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/loungebeachbarrestaurant",
+    "quote": null,
+    "note": "Fanpage chuyển sang LoungeBeachBarRestaurant nhưng chỉ đọc được vỏ Facebook, không có giờ. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJCd3q4FQXQjERF640iRTpb7I",
+    "name": "Mystery Bar & Lounge",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.facebook.com/mysterybardanang/",
+    "quote": null,
+    "note": "Đã mở trang Mystery Bar & Lounge; không có giờ đọc được. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJx3fy4TgZQjER5y-HN2wBNl4",
+    "name": "Navy Lounge",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJZ5ZGlCsZQjER95guGn5ybGo",
+    "name": "Karaoke Next Top Luxury",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJdac9auQYQjERbldnY0G9R9c",
+    "name": "Roma premium lounge",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4",
+    "name": "Karaoke Thao",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJZ6w1fJgZQjERP9-_TlpgQXM",
+    "name": "Lagoon Rooftop - Dragon Bridge Fire Show",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJK0J1RXMXQjERPPTldZI_e5c",
+    "name": "Le Funky Donkey - French Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJgaVvkV0XQjERNZYSVEJS_Xo",
+    "name": "Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJxRB4CRgXQjER6zy0em0FyTk",
+    "name": "Oppa O Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJsztPMVkXQjERooynSorot-0",
+    "name": "Blue Sky Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+    "name": "N Pub",
+    "hours": "15:30-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://n-pub.com/",
+    "quote": "Thứ Hai - Chủ NhậtMonday - Sunday · 3:30PM – 11PM (15:30–23:00)",
+    "note": "Trang chính N Pub, giờ Opening Hours cả tuần. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJpSDE_bUXQjERRvGyIAFWpeE",
+    "name": "Corner Pub",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
+    "name": "Maia Beach Bar",
+    "hours": "16:00-23:00",
+    "closed_days": [],
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/10747475499",
+    "quote": "Mo-Su 16:00-23:00",
+    "note": "OSM Maia tại 16.0515244,108.2485711 cách đầu vào khoảng 20 m, khớp Maia Beach Bar; website https://maiabeachbar.com/contact đọc được nhưng không nêu giờ. OSM snapshot 2026-11-20T05:48:41Z; tag ghi cả tuần."
+  },
+  {
+    "poi_id": "ChIJyVQ3iwoXQjERNILX5sPCUKA",
+    "name": "Section 30",
+    "hours": "16:00-01:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.thesection30.com/",
+    "quote": "4pm - 1am",
+    "note": "Trích dòng mục Service; các dòng Mon–Sun cùng khung 4pm–1am (Mon/Tue/Wed có khoảng trắng trong chữ am). Giờ đóng sang ngày hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
+    "name": "Unicorn Chill Zone",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJcbN8RKEXQjERd0H0haMdx4Y",
+    "name": "Filling Station",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA",
+    "name": "Chevy",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+    "name": "Writer's Bar",
+    "hours": "09:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.marriott.com/en-us/hotels/dadmr-danang-marriott-resort-and-spa/dining/",
+    "quote": "Everyday | 9:00 AM-12:00 AM",
+    "note": "Mục Writer's Bar trên trang chính Danang Marriott Resort & Spa. Không lấy giờ nhà hàng/pool bar khác. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJY_iyslwXQjERFoDw4waR2Sg",
+    "name": "The Trip 66",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.thetrip66.com/",
+    "quote": null,
+    "note": "Trang chính THE TRIP 66 đọc được liên hệ nhưng không thấy giờ mở–đóng trong nội dung. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
+    "name": "Karaoke Song Ca",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJw3dqIx8ZQjERxFZPN1A3gew",
+    "name": "The PILL Bar & Club",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60",
+    "name": "Quán nhậu Keo Lá Tràm",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJmd-xKSoZQjERr8BS2agMkCI",
+    "name": "Cà Phê Star Pub",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJFXRrR0wZQjERNl4jMD9QNFI",
+    "name": "Blues Q Coffee and Craft Beer Garden ( Bia thủ công)",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJOean5VUZQjERMWDUmGdTpJQ",
+    "name": "KARAOKE VENUS",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJVS4QEX8fQjERk1vVwmP0Rk8",
+    "name": "An Nhiên Quán",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJWTRb5NcYQjER6mJOuNl06k8",
+    "name": "Quán Nhậu Hiếu Hòa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJG1WCi2UXQjER9CxEvEOoEpw",
+    "name": "Malibu Beach Club",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJcYos3CkZQjERibEDbcXOpQs",
+    "name": "Quán Karaoke Music For You",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJR7_4DdYYQjERUNxW7r51REs",
+    "name": "Karaoke Alô",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ-WGIA80YQjER8XDqSVShrOE",
+    "name": "Quán Karaoke Smile Idol",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJP1XHPQAZQjERinsxWb2Ga0A",
+    "name": "Karaoke Monaco Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJsSD2e3kfQjER2d_jnMVrKZ4",
+    "name": "Quán nhậu A bảy",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJcTnFX6QfQjERgmN3buOe9AQ",
+    "name": "Rượu Nếp Nhà Nấu",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJuQL2IN4YQjERYHan1mFjMdA",
+    "name": "Karaoke RETRO",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJs95SfgAZQjERWa0RkAoF0XA",
+    "name": "City Box - Music Box",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://karaokebooking.vn/dia-diem/mecrawl-36467",
+    "quote": null,
+    "note": "Trang đặt phòng đích danh City Box - Music Box đọc được nhưng không có giờ hoạt động rõ ràng. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJqRL3QEQZQjER71D0j0o7M7Q",
+    "name": "Karaoke Night Club",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJVde_IrUZQjERJghlJMKJ6v0",
+    "name": "DINK Beer Pub",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQydy2apx34oRnci64Kkdi4U",
+    "name": "For You Club",
+    "hours": "20:00-03:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://foryouclubdanang.com/faq",
+    "quote": "For You Club mở cửa từ 20:00 đến 03:00 sáng hằng đêm, kể cả cuối tuần và lễ tết.",
+    "note": "Trang chính cơ sở 52–55 Trần Văn Trứ; đóng 03:00 sáng hôm sau. Không dùng giờ cao điểm 22:30. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJswSHXgAZQjERZnVL4je3PG4",
+    "name": "SAY Beer",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJvyd5GLEZQjERZgKsgMmnnkM",
+    "name": "Điểm Nóng+ Eat, Drink & Music",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ2exBne0ZQjERj07NR6zFg4c",
+    "name": "MÊ Ê Ê Beer Garden - 316 Hà Huy Tập",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJvcXagjAYQjERCEguUGaxfEc",
+    "name": "LIBRE",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
+    "name": "The Roof - Da Nang",
+    "hours": "14:00-01:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.theroofdanang.com/about",
+    "quote": "Sun – Thu | 2:00 PM – 1:00 AM | Fri – Sat | 2:00 PM – 2:00 AM",
+    "note": "Trích nhãn và giá trị Opening Hours. Khung chung cả tuần 14:00–01:00; thứ Sáu/thứ Bảy thực tế trang ghi đến 02:00. Cơ sở tầng 3 trên East West Brewing, 1A Võ Nguyên Giáp. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJj8OOR1UYQjERdZlR_ysOs4E",
+    "name": "Karaoke Phương Trí",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJTQuJbKYZQjERAE9fPrQroZw",
+    "name": "Drink Đi",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ3zTSR1UYQjERxzlJpa-DNHE",
+    "name": "Karaoke Sao Mai",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJN_abDNcZQjERmLjyrAo7IPk",
+    "name": "CẬU ẤM BEER CHILL",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJc2sSdpMZQjERg6ykGdI-3r4",
+    "name": "Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJMZtZVeQZQjERchri-_Wa9C8",
+    "name": "Bar Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJObG9DvoZQjER1tqakgkbUno",
+    "name": "CẬU CẢ - 37 Điện Biên Phủ",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
+    "name": "KARAOKE CAMEL 2",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJkZi7gkcYQjERPd87DaNuhW0",
+    "name": "On The Radio",
+    "hours": "19:00-02:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://gonight.vn/bar/on-the-radio-thai-phien-quan-hai-chau/",
+    "quote": "⏱️ Giờ mở cửa: 19:00–02:00 hàng ngày.",
+    "note": "Trang nhận đặt bàn nêu đích danh On The Radio, 76 Thái Phiên. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "osm:node/10285677009",
+    "name": "The Shamrock",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã đọc node OSM của chính POI: không có opening_hours. Tìm web tên + Hội An chưa có trang cơ sở/đặt bàn với giờ đọc được đủ xác minh. Không dùng giờ của bar trùng tên ở Đà Nẵng. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/10180856817",
+    "name": "Tiger Tiger Bar",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã đọc node OSM của chính POI: không có opening_hours. Tìm web tên + Hội An chưa có trang cơ sở/đặt bàn với giờ đọc được đủ xác minh. Không dùng giờ của bar trùng tên ở Đà Nẵng. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/10297955384",
+    "name": "Lamonta Pub & Restaurant",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã đọc node OSM của chính POI: không có opening_hours. Tìm web tên + Hội An chưa có trang cơ sở/đặt bàn với giờ đọc được đủ xác minh. Không dùng giờ của bar trùng tên ở Đà Nẵng. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
+    "name": "Panda Spa & Massage",
+    "hours": "09:00-23:45",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://pandaspa.vn/vi/contact",
+    "quote": "Giờ mở cửa | 9 giờ sáng - 23 giờ 45 tối",
+    "note": "Trích nhãn và giá trị của cơ sở 01 Panda Spa & Massage, 229 Nguyễn Văn Thoại. Không lấy hỗ trợ hotline 24/7 làm giờ spa. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJp4sb2egXQjERFOFVxrsHiyI",
+    "name": "Luxury Healthy Spa & Massage",
+    "hours": "09:00-04:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://healthyspadanang.com/luxury-spa-da-nang/",
+    "quote": "From 09:00 until 04:00 the next morning, every day.",
+    "note": "Trang chính chi nhánh Luxury Healthy Spa, 224 Trần Bá Đằng; không dùng giờ đóng của Regal/Annam. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJEwAAALAZQjERyXCN5eSBt1Q",
+    "name": "Jang Mi Spa & Massage",
+    "hours": "09:30-22:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://jangmispa.vn/gioi-thieu/",
+    "quote": "Mon - Sun: 9:00 am-10:00pm | Location 1: 77 Duong Dinh Nghe,Son Tra.Mon- Sun: 9:30AM- 10PM",
+    "note": "Khung chung hẹp hơn do header ghi 09–22, nội dung Location 1 ghi 09:30–22. Cùng cơ sở 77 Dương Đình Nghệ; không áp giờ chi nhánh 53 Thái Phiên. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ90TAWzMXQjERjZ9VhdeUbxU",
+    "name": "Q&B Luxury Spa – Massage & Sauna Đà Nẵng",
+    "hours": "08:30-23:55",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.fresha.com/a/q-b-luxury-spa-da-nang-ngu-hanh-son-viet-nam-46-hoang-ke-viem-rrsm7c7l",
+    "quote": "Monday | 8:30 AM - 11:55 PM | Sunday | 8:30 AM - 11:55 PM",
+    "note": "Trích hai dòng của lịch mở cửa; cả bảy ngày đều cùng 08:30–23:55. Trang đặt dịch vụ Q&B LUXURY SPA, 46 Hoàng Kế Viêm. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
+    "name": "Babylon Spa - Massage Da Nang",
+    "hours": "09:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://babylonspa.vn/",
+    "quote": "Operating Hours: | 09:00 – 23:00 daily",
+    "note": "Trang chính Babylon nêu hai cơ sở 30 Hà Bổng và 105 Hoàng Kế Viêm; giờ chung của thương hiệu. Đối chiếu https://babylonspa.vn/30-ha-bong-eng/ xác định cơ sở 30 Hà Bổng cho POI này. Nhận booking cuối 22:30, không phải đóng cửa. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJwdZa4eQ7JQwRYcRRBR0ZE24",
+    "name": "Ánh Spa & Massage Đà Nẵng",
+    "hours": "09:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://anhspa.vn/pages/faq",
+    "quote": "Thứ 2 - Chủ nhật: 9:00am to 23:00pm",
+    "note": "Trang chính Ánh Spa, 08 Trương Quyền; chuẩn hóa 23:00pm thành 23:00 theo cách viết 24 giờ của nguồn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ076jrJZFj0QRKwm40qhwBWA",
+    "name": "Julius Spa & Massage",
+    "hours": "09:00-02:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.juliusspa.com/",
+    "quote": "9:00 AM - 2:00 AM",
+    "note": "Trang chính Julius 1, B4-14 An Thượng 38; nhận diện cùng đường đầu vào. Đóng sáng hôm sau. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJNxOlbnIXQjER9DXmYRuiv3Q",
+    "name": "Lee spa & Massage Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://leespadn.salonhero.vn/dat-lich",
+    "quote": null,
+    "note": "Trang đặt lịch Lee Spa & Massage đọc được nhưng không nêu giờ cố định. Các nguồn khác nêu 75 Hà Bổng, chưa xác định khớp nhánh tại tọa độ đầu vào nên không chuyển giờ. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
+    "name": "Tigon massa - Spa & Massage Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJXcc22ZcZQjERT47ZqHMl13c",
+    "name": "Charm Spa - Massage Da Nang",
+    "hours": "09:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://charmspa.com.vn/en/branches/charm-spa-da-nang/",
+    "quote": "The branch is open from 9:00 AM to 11:00 PM every day of the week, including weekends.",
+    "note": "Trang chính CHARM SPA Da Nang, 283 Nguyễn Chí Thanh; giờ riêng chi nhánh Đà Nẵng. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
+    "name": "Babylon Spa Massage Da Nang",
+    "hours": "09:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://babylonspa.vn/",
+    "quote": "Operating Hours: | 09:00 – 23:00 daily",
+    "note": "Giờ chung trang chính Babylon, dùng cho hai cơ sở được chính trang liệt kê. https://babylonspa.vn/vi/105-hoang-ke-viem/ xác định cơ sở 105 Hoàng Kế Viêm cho POI này. Last booking 22:30 khác giờ đóng. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
+    "name": "Herbal Spa",
+    "hours": "09:00-22:30",
+    "closed_days": [],
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/way/1278503035",
+    "quote": "Mo-Su 09:00-22:30",
+    "note": "OSM Herbal Spa tâm 16.0690932,108.2364889 cách đầu vào khoảng 58 m, cùng tên trong 80 m. Trang đặt dịch vụ https://spabooking.vn/en/spa-massage/herbal-spa.html cũng ghi Monday-Sunday: 09:00–22:30; last booking 20:30 không phải đóng cửa. OSM snapshot 2026-11-20T05:48:41Z; tag ghi cả tuần."
+  },
+  {
+    "poi_id": "ChIJs3Rt4-QZQjERPTSZ7G6XAK0",
+    "name": "Clover Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://cloverspa.vn/en/branch-office.html",
+    "quote": null,
+    "note": "Trang chi nhánh Clover có 266 Trần Phú, nhưng dòng giờ 09–22:30 nằm sau mục Nha Trang, chưa xác định áp cho Đà Nẵng; không chuyển giờ giữa chi nhánh. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
+    "name": "Jeju Spa – Massage & Nail",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJsyY9JzoYQjERvaNXwl9KJkI",
+    "name": "Spa Massage Sông Hàn",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ80QCWQAXQjER9Wfb-KFGetQ",
+    "name": "Rosa Spa & Massage Da Nang",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.rosaspadanang.com/",
+    "quote": null,
+    "note": "Trang chính Rosa Spa đọc được nhưng không có lịch giờ cố định trong nội dung đọc được. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
+    "name": "OANI SPA",
+    "hours": "09:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://oanispa.com/vi/",
+    "quote": "Giờ hoạt động: 9:00 – 23:00 hằng ngày (Đặt trước trễ nhất 22:30)",
+    "note": "Trang chính liệt kê Oani Spa gần biển Mỹ Khê, 46 Phan Liêm, khớp nhánh đầu vào; 22:30 là hạn đặt trước. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJ37FbsJgZQjERQho2DqSzX_Y",
+    "name": "Châu Nhi Spa & Massage",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQc2Xk0cXQjERnOTCS5zK1LM",
+    "name": "Ara Spa & Massage Da Nang",
+    "hours": "00:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://araspa.vn/booking/?service=12",
+    "quote": "24/7 | ALWAYS OPEN | DAY & NIGHT | FOR YOUR COMFORT",
+    "note": "Trang đặt lịch của chính ARA Spa, 02 Hoàng Sa. Đây là banner mở cửa ngày đêm; không lấy happy hours 09:30–15:00 làm giờ hoạt động. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
+    "name": "le vénin spa",
+    "hours": "09:00-24:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://leveninspa.com/vi/lien-he-levenin-spa/",
+    "quote": "09:00 SÁNG - 02:00 SÁNG | Monday to Sunday: 8AM – 02AM",
+    "note": "Cùng cơ sở 231 Dương Đình Nghệ: header nguồn này 09–02, thân trang 08–02; https://leveninspadanang.com/ ghi “08:00 AM – 00:00 AM”. Lấy giao hẹp 09–24. Loại giờ của WellBe vì trang trộn dữ liệu Google/place và điện thoại placeholder, không dùng làm bằng chứng. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJKZK2FcoZQjER8f6Uft81Mvg",
+    "name": "Sơn Trà Spa Massage Trị Liệu Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
+    "name": "HAPPY SPA",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ9ZTWZwAXQjERn99h6ziS_2c",
+    "name": "Lotus Bloom Spa & Massage",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://gayogayo.com/shop/products/2035",
+    "quote": null,
+    "note": "Trang coupon nêu đích danh Lotus Bloom Spa; giờ 09–18 xuất hiện là giờ tư vấn của công ty GayoGayo, không phải giờ spa nên loại. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJz3rG-N0XQjERVs2Zo-BWxwQ",
+    "name": "Smile Spa (tên cũ Spa Bà Thông - CN Sơn Trà)",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJcUs0-1YXQjERDYZBzXC8l24",
+    "name": "Zon Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJVbx5NwAXQjERS9yRLPkJZ_I",
+    "name": "Spa MyAn",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJr3x17yAXQjER8gIQveo92QM",
+    "name": "Hi Spa - Local Wellness Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ_QZY3EMXQjERjA5RvSnV9AM",
+    "name": "Hương Tràm Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM",
+    "name": "Van Ly Spa & Massage",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJpSoTPgAXQjERcs8hSdrolKM",
+    "name": "H & H Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJJRnwO4UXQjERO5XPs69YCmM",
+    "name": "Nón Spa - Massage, Nail, Hair Washing, Facial and Skin care",
+    "hours": "10:00-23:00",
+    "closed_days": [
+      "Tet holiday (dates not stated)"
+    ],
+    "source": "web",
+    "evidence_url": "https://nonspa.vn/faq/",
+    "quote": "We open at 10:00 every day except Thursdays. | except Wednesday | Closing time: 23:00 | closed during the Tet holiday",
+    "note": "Nguồn tự mâu thuẫn: FAQ nghỉ thứ Năm, đóng 23:30; footer nghỉ thứ Tư, đóng 23:00. Chỉ giữ giờ chung hẹp 10–23 vào ngày hoạt động; KHÔNG xác nhận mở thứ Tư/thứ Năm. Ngày nghỉ tuần chưa xác minh, không gán một ngày là chắc chắn. Nhận khách cuối 21:30. Nghỉ Tết không nêu ngày cụ thể."
+  },
+  {
+    "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
+    "name": "Spa & Massage Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJXYpw5DMXQjERzS8ce1U5Z3M",
+    "name": "Lá sen Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://bookingoi.com/vn/danang/phuongnguhanhson/lasenspa",
+    "quote": null,
+    "note": "Trang đích danh La Sen Spa đọc được, không có giờ mở–đóng cố định trong phần nội dung. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ5xGrdQAXQjERUKN8BeMLPJo",
+    "name": "Spa gội đầu - Tiệm nhà Ngân",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJzYULZMgRQjERYRTCyEgKZUY",
+    "name": "AURA SPA-Massage-Nails-Hair Wash & Relaxation In Da Nang",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJyUfZ9fAZQjERIMtiBaxkTko",
+    "name": "Nguon Spa Da Nang - Nguồn Hoàng Kế Viêm",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
+    "name": "Spa Luna",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJK_ogWgARQjERnLylibgoTpw",
+    "name": "Quýt Spa & More",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJvWLgr6cXQjER3bVwhb1OVrs",
+    "name": "JUNE SPA",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
+    "name": "Regal Healthy Spa",
+    "hours": "09:00-23:30",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://healthyspadanang.com/regal-spa-da-nang/",
+    "quote": "From 09:00 to 23:30 every day.",
+    "note": "Trang chính Healthy Spa Regal, 14–16 Phan Tôn; không áp giờ đến 04:00 của Luxury. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJmwtSJxYXQjERqyw4BIsIRV4",
+    "name": "M'healthy spa",
+    "hours": "08:00-23:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://mhealthyspadanang.com/",
+    "quote": "Giờ mở cửa: 08:00 AM – 23:00 PM (T2 – CN)",
+    "note": "Trang chính M'healthy, 52 Hoàng Kế Viêm; chuẩn hóa cách viết giờ 24h kèm AM/PM của nguồn. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJc2zPTQAXQjERn0HeQzam084",
+    "name": "Harmony Haven Spa & Massage",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
+    "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJs9Tdb7kfQjERg5O07vnwsww",
+    "name": "Nàng Thir Spa ở Hòa Khánh",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
+    "name": "Massage Therapy Spa The Yen",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJzRc5EgIZQjERKvXOUUpbcKA",
+    "name": "Light Beauty Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ46gfxSkZQjERgT9OU08ssF4",
+    "name": "Spa Hồng Hạnh",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJu9TGuzEZQjERolkiV2-wyQQ",
+    "name": "Massage Khiếm Thị Mai Liên",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJNXaMJAAZQjERJxDzvQEO38c",
+    "name": "Mộc An Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJeYxRAo8ZQjERawBcqjOhTRQ",
+    "name": "Tâm Spa - Spa Dưỡng Sinh",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
+    "name": "Vân Anh beauty spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ66onuEIZQjERJcc014sju08",
+    "name": "Rice' Spa &Nails",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ5RkjQCUZQjERDtUHgOu7k10",
+    "name": "Nhung Spa Trị Liệu",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://nhungspatrilieu.com/",
+    "quote": null,
+    "note": "Trang chính Nhung Spa, 119 Âu Cơ, đọc được nhưng không có giờ mở–đóng rõ ràng. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
+    "name": "Nhy Nguyen Beauty & Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJYU-cVQAXQjERxfDy3td5_ac",
+    "name": "New World Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM",
+    "name": "An Mộc Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJw2G2IwAfQjERGAvvbDnKLHM",
+    "name": "Thanh Tuyền Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJd-PzSQAfQjERdmCtpw8ajB4",
+    "name": "King Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJy2xEfdgZQjER-EpNiwxo5Y0",
+    "name": "Đỗ Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
+    "name": "Trạm spa- nặn mụn",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ9wcVkY0ZQjERC4hzT7DwUcg",
+    "name": "Mộc Thanh Spa",
+    "hours": "08:00-20:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://ohbeauti.vn/spa/moc-thanh-spa",
+    "quote": "8:00 - 20:00 (T2-CN)",
+    "note": "Trang đặt lịch tư vấn đích danh Mộc Thanh Spa, 268 Bế Văn Đàn, Thanh Khê; mục Giờ làm việc. closed_days=[]: không có ngày nghỉ được xác nhận."
+  },
+  {
+    "poi_id": "ChIJqTDc25cZQjERd6ed4Iho8A8",
+    "name": "Thanh Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJPQ-OSwAZQjER0Zu4X6NlQds",
+    "name": "Thanh Spa Relax",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJQTe2HAAZQjERkD1J_cP6aSw",
+    "name": "Green Haven Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJOXHZFwAZQjERnjc1WCNMaeU",
+    "name": "Láng Beauty & Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJNQWGShUZQjER71TXPpJW4Xs",
+    "name": "Thủ Đạo Thang Spa Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJG9IOepAXQjER3x9UnxFxJ7w",
+    "name": "Húa Hạ Lương Tử Spa – Massage & Foot Spa Da Nang",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJBTwySgAZQjERS5kel5Caf00",
+    "name": "Hội Vũ Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJFVqYCKsZQjERv29XM5331mU",
+    "name": "Nhà Mình Spa cơ sở 2 462 Điện Biên Phủ",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJfzqqXwAZQjERWQ7zRsTU8Zk",
+    "name": "Moya Wellness Spa Da Nang",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJAZKjQVIZQjERmZdYEcKV5Go",
+    "name": "DƯƠNG THÙY SPA - Thanh Khê",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJg85mY5EZQjERXv4xH_p-_MI",
+    "name": "Ellie Beauty Spa",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://mamap.vn/massage/ellie-beauty-spa/45356amp",
+    "quote": null,
+    "note": "Trang MAMAP nêu Ellie Beauty Spa và một khoảng giờ, nhưng phần đọc được chưa xác nhận địa chỉ/nhánh khớp tọa độ; chưa nhận làm giờ POI. hours=null; closed_days=[] nghĩa là chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJC1S7VAAZQjERFItFlyewDHY",
+    "name": "Glow Spa Thanh Khê",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJM1DTVHkZQjERDW1JNclcAtw",
+    "name": "Massage người mù Đức Quý",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "Đã truy vấn OSM gộp và tìm web theo tên + Đà Nẵng/Hội An. Chưa có tag đã đọc khớp tên hoặc trang cơ sở/đặt dịch vụ đọc được xác nhận giờ mở–đóng cho đúng POI. Không dùng hours_now, giờ chung ngành hoặc dữ liệu Google/place. closed_days=[]: chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+    "name": "Elsa Spa",
+    "hours": "08:00-20:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://ohbeauti.vn/spa/elsa-spa-massage-da-nang",
+    "quote": "8:00 - 20:00 (T2-CN)",
+    "note": "Trang đặt lịch tư vấn đích danh Elsa Spa massage Da Nang, 52 Nguyễn Thái Học; mục Giờ làm việc. closed_days=[]: không có ngày nghỉ được xác nhận."
+  }
+]

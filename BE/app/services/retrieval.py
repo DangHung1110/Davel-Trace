@@ -46,6 +46,21 @@ ACTIVITY_TYPE_MAP = {
 }
 
 
+# hours.kind == "by_booking" (cooking class, workshop): sold as fixed sessions,
+# so it is only suggested when the traveller asks for food/culture experiences
+# (or names it as must-visit). Matched as whole words like ACTIVITY_TYPE_MAP.
+BOOKING_INTEREST = ("ẩm thực", "nấu ăn", "lớp nấu", "học nấu", "cooking", "văn hóa",
+                    "trải nghiệm", "workshop")
+
+
+def wants_booking(activities: list[str]) -> bool:
+    for a in activities or []:
+        low = str(a or "").lower()
+        if _match_terms(BOOKING_INTEREST, low, fold(low)) is not None:
+            return True
+    return False
+
+
 def load_pois_json(path: str) -> list[dict]:
     """Read a snapshot pois.json (T061c: shares BE.common.load_json)."""
     data = load_json(path)
@@ -95,6 +110,8 @@ def uncertainty(p: dict) -> list[str]:
     elif (p.get("hours") or {}).get("kind") == "safe_window":
         # v2.1 (WP3): inferred group window, never presented as fact
         labels.append("nen kiem tra gio")
+    elif (p.get("hours") or {}).get("kind") == "by_booking":
+        labels.append("can dat truoc (theo suat)")
     if p.get("rating") is None:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
@@ -122,6 +139,7 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))
     types = wanted_types(trip.get("activities", []))
+    booking_ok = wants_booking(trip.get("activities", []))
     # ids that own a matrix row (source side of any cell), computed once
     matrix_ids = {k.split("->", 1)[0] for k in cells} if cells else None
     candidates, needs_verification, excluded = [], [], []
@@ -157,7 +175,12 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
             candidates.append({"poi_id": pid, "reasons": reasons,
                                "uncertainty": uncertainty(p)})
             continue
-        if types and soft_rules.poi_category(p) not in types:
+        is_booking = (p.get("hours") or {}).get("kind") == "by_booking"
+        if is_booking and not booking_ok:
+            excluded.append({"poi_id": pid, "reason": "trai nghiem can dat truoc (chi goi y khi chon am thuc/van hoa)"})
+            continue
+        # a requested food/culture experience matches by itself, whatever its category
+        if types and not is_booking and soft_rules.poi_category(p) not in types:
             excluded.append({"poi_id": pid, "reason": "khong khop loai hoat dong"})
             continue
         # B5 v2: a POI only eats budget when its price is actually KNOWN

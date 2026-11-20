@@ -1,0 +1,145 @@
+[
+ {
+  "poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo",
+  "name": "Family Kitchen Da Nang - Cooking Class",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.056936,
+  "lon": 108.238289,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
+  "name": "Danang Summer Cooking and Coffee Class",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.055943,
+  "lon": 108.236891,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJs-NDcgAXQjERHA6tioqOfH4",
+  "name": "Apron Up Cooking Class in Danang",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.042784,
+  "lon": 108.241647,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJYyr_6ogXQjERoXAq8cGEzcI",
+  "name": "Rose Da Nang Coffee Workshop",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.076499,
+  "lon": 108.232376,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+  "name": "Jolie Cooking Class",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.059846,
+  "lon": 108.235315,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": "US$40/người trên cookly (Jolie Da Nang Cooking Class with Local Market Tour) ≈ 1.040.000 VND."
+ },
+ {
+  "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
+  "name": "Da Nang Family Cooking Class",
+  "category": "paid_attraction",
+  "zone": "trung_tam",
+  "lat": 16.039423,
+  "lon": 108.220094,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+  "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang",
+  "category": "paid_attraction",
+  "zone": "ngu_hanh_son",
+  "lat": 16.019391,
+  "lon": 108.249339,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ26h5ZAANQjER2otGJosJliA",
+  "name": "Rường House - Cooking Class & Craft Workshop",
+  "category": "paid_attraction",
+  "zone": "hoi_an",
+  "lat": 15.884461,
+  "lon": 108.367348,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJyZOJHa8NQjERSvp9yMenV6Y",
+  "name": "Vinh Vo Cooking Class",
+  "category": "paid_attraction",
+  "zone": "hoi_an",
+  "lat": 15.874506,
+  "lon": 108.358585,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJx0dBXWYNQjERQzQO18QYhas",
+  "name": "Mimi Cooking Class",
+  "category": "paid_attraction",
+  "zone": "hoi_an",
+  "lat": 15.880066,
+  "lon": 108.365894,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJddXz2K8PQjER4enhapQvvo8",
+  "name": "Cooking With Jolie In Hoi An – Vietnamese Cooking Class",
+  "category": "paid_attraction",
+  "zone": "hoi_an",
+  "lat": 15.890496,
+  "lon": 108.32223,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJmU3hl9WrNTERBUbnSp3g5vs",
+  "name": "Thuan Tinh Island Cooking Tour",
+  "category": "paid_attraction",
+  "zone": "hoi_an",
+  "lat": 15.87417,
+  "lon": 108.369225,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJH1ujCM0XQjERcOl1lB9Ns6k",
+  "name": "Tuyet Pham Cooking Class",
+  "category": "paid_attraction",
+  "zone": "son_tra_my_khe",
+  "lat": 16.040971,
+  "lon": 108.245305,
+  "prize_prior": 0.55,
+  "hours_now": [],
+  "price_note": null
+ }
+]

@@ -27,13 +27,13 @@ osm:way/209494258,Văn Miếu Hội An,religious,hoi_an,hoi_an_old_town,,"08:00-
 osm:relation/2836882,Chùa Chúc Thánh,religious,hoi_an,,,07:00-18:00,agent_web
 osm:way/474383101,Chùa Phước Lâm,religious,hoi_an,,,07:30-21:30,agent_web
 osm:way/565186618,Đình Cẩm Phô,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
-osm:way/35952504,Chợ Hội An,day_market,hoi_an,hoi_an_old_town,,08:00-11:00,inferred
+osm:way/35952504,Chợ Hội An,day_market,hoi_an,hoi_an_old_town,,06:00-22:00,agent_web
 osm:node/6099308589,Chợ đêm Hội An,night_market,hoi_an,hoi_an_old_town,,18:00-22:00,open_data
 osm:way/35952591,Chợ vải Hội An,day_market,hoi_an,,,06:00-19:00,open_data
 osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,hoi_an,hoi_an_old_town,Phố cổ Hội An,,inferred
 osm:way/14131302,Công viên Ấn tượng Hội An (show Ký ức Hội An),paid_attraction,hoi_an,,,17:00-21:30,agent_web
 osm:node/5513474821,Công viên Đất nung Thanh Hà,paid_attraction,hoi_an,,,08:30-17:30,open_data
-osm:node/4171964390,Làng gốm Thanh Hà,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
+osm:node/4171964390,Làng gốm Thanh Hà,outdoor_landmark,hoi_an,,,08:00-17:30,agent_web
 osm:node/10709738006,Làng mộc Kim Bồng,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
 osm:node/4517387589,Làng Triêm Tây,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
 osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,,,05:00-22:00,inferred

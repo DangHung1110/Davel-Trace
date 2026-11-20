@@ -161,3 +161,17 @@ Codex (t15) đọc web cho 80 điểm tôn giáo đang dùng khung ước lượ
 - 19 nhà thờ chỉ có giờ lễ (không phải giờ tham quan) → giữ `safe_window`.
 - 42 điểm không có nguồn đọc được → giữ `safe_window`.
 - Giờ ngoài lưu trú: fixed 175 → 194, safe_window 557 → 538, unknown 13 (lớp nấu ăn).
+
+## Trải nghiệm theo suất (`by_booking`) + giờ ngoài trời/chợ/spa/nightlife — 20/11
+
+**Hợp đồng mới (người dùng duyệt):** `hours.kind = by_booking` (`DATA_SPEC_v2_1.md`).
+- `open` = các suất đặt được; `dwell` = độ dài suất → solver chỉ đặt trọn một suất (dùng cơ chế nhiều khung giờ sẵn có).
+- `retrieval.py`: chỉ gợi ý khi khách chọn ẩm thực/nấu ăn/văn hoá/trải nghiệm/workshop (hoặc must-visit); nhãn "can dat truoc (theo suat)".
+- `optimizer.py`: tối đa 1 trải nghiệm theo suất mỗi ngày (ràng buộc cứng).
+- Nguồn: `BE/data/sources/booking_*.json` → `migrate_v2.apply_booking`. Test: `BE/tests/unit/test_by_booking.py`.
+- Dữ liệu (Codex đọc trang lớp/đặt chỗ, `reports/p0/links/cooking_sessions_codex.json`): 4/13 lớp có suất ghi rõ → by_booking (Family Kitchen, Apron Up, Sunny Bánh Mì & Coffee, Thuận Tình Island). 2 lớp Jolie ghi giờ dạng "09:00 / 15:00 · 13:00 / 19:00" — chưa rõ cặp bắt đầu/kết thúc nên chưa áp; 7 lớp không có lịch → giữ unknown.
+- **Chưa làm:** bỏ bữa ăn liền kề sau lớp nấu ăn (cần sửa luật bữa trưa bắt buộc trong solver).
+
+**Giờ có nguồn (Codex: OSM + web, không Google):** ngoài trời/chợ 10/69, spa/nightlife 30/158 → `agent_web_2026-11-20c.json` (Nón Spa bỏ: nguồn mâu thuẫn ngày nghỉ). Còn lại không có nguồn đọc được → giữ `safe_window`.
+
+Giờ ngoài lưu trú: fixed 234, safe_window 498, by_booking 4, unknown 9.

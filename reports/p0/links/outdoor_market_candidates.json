@@ -1,0 +1,900 @@
+[
+ {
+  "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
+  "name": "Trà Quán Góc Nhà Tụi Mình",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.072386,
+  "lon": 108.221849,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+  "name": "Làng Bích họa Đà Nẵng",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.06073,
+  "lon": 108.220053,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
+  "name": "Đà Nẵng Food Tour",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.066101,
+  "lon": 108.224362,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": "Chiến dịch TP (passport ẩm thực, tự trả món) + free walking tour tip-based — không vé cố định"
+ },
+ {
+  "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
+  "name": "Di tích Thành Điện Hải",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.076182,
+  "lon": 108.22163,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:30-11:00",
+   "14:00-16:30"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
+  "name": "Khu du lịch Nam Ô Heritage",
+  "category": "outdoor_landmark",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.110811,
+  "lon": 108.132421,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
+  "name": "Khu Căn cứ Cách mạng K20",
+  "category": "outdoor_landmark",
+  "zone": "ngu_hanh_son",
+  "lat": 16.021618,
+  "lon": 108.241898,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "06:00-17:30"
+  ],
+  "price_note": "Di tích dâng hương/tự do, không bán vé; đi theo đoàn, liên hệ quản lý"
+ },
+ {
+  "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
+  "name": "Chợ An Hải Đông",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.056406,
+  "lon": 108.238728,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
+  "name": "Chợ Thanh Bình",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.076663,
+  "lon": 108.211422,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
+  "name": "Chợ hải sản tươi sống biển Thanh Khê",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.077578,
+  "lon": 108.174786,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+  "name": "Khu ẩm thực Chợ Cồn",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.067836,
+  "lon": 108.214908,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
+  "name": "Chợ Chiều",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.091809,
+  "lon": 108.244268,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
+  "name": "Chợ Mân Thái",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.085592,
+  "lon": 108.243222,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
+  "name": "Chợ Khuê Mỹ",
+  "category": "day_market",
+  "zone": "ngu_hanh_son",
+  "lat": 16.025046,
+  "lon": 108.248364,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+  "name": "Chợ Non Nước",
+  "category": "day_market",
+  "zone": "ngu_hanh_son",
+  "lat": 15.995211,
+  "lon": 108.257204,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJw6DOwZ8QQjERjDMobkQxbF0",
+  "name": "Chợ Bình Kỳ",
+  "category": "day_market",
+  "zone": "ngu_hanh_son",
+  "lat": 15.993154,
+  "lon": 108.238932,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
+  "name": "Chợ Khái Tây",
+  "category": "day_market",
+  "zone": "ngu_hanh_son",
+  "lat": 15.970574,
+  "lon": 108.234376,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
+  "name": "Chợ Hòa Khánh",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.070307,
+  "lon": 108.149138,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
+  "name": "Chợ Thanh Vinh",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.076284,
+  "lon": 108.132289,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
+  "name": "Chợ Hòa Khánh Nam",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.055919,
+  "lon": 108.15641,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
+  "name": "Chợ Hòa Liên",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.079345,
+  "lon": 108.098189,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
+  "name": "Chợ Quan Nam",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.096432,
+  "lon": 108.097612,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
+  "name": "Mai Vang (Yellow Blossom) Bonsai Garden",
+  "category": "outdoor_landmark",
+  "zone": "ngu_hanh_son",
+  "lat": 15.981124,
+  "lon": 108.272262,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": "Vườn tư nhân, không niêm yết vé, liên hệ 0913430429 — unknown"
+ },
+ {
+  "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
+  "name": "Chợ Trời (Flea Market)",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.066239,
+  "lon": 108.216228,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
+  "name": "Chợ An Hải Bắc",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.081128,
+  "lon": 108.231038,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/2177056870",
+  "name": "Thác Tóc Tiên",
+  "category": "outdoor_landmark",
+  "zone": "ba_na_tay",
+  "lat": 16.024466,
+  "lon": 108.02623,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "06:00-17:30"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4386676224",
+  "name": "Chợ Miếu Bông",
+  "category": "day_market",
+  "zone": "ngu_hanh_son",
+  "lat": 15.97989,
+  "lon": 108.208979,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4706189591",
+  "name": "To Quoc Ghi Cong",
+  "category": "outdoor_landmark",
+  "zone": "ngu_hanh_son",
+  "lat": 16.023789,
+  "lon": 108.24773,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4924323121",
+  "name": "Fishing Village and Fleet",
+  "category": "outdoor_landmark",
+  "zone": "son_tra_my_khe",
+  "lat": 16.101754,
+  "lon": 108.258963,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/5273998822",
+  "name": "Cầu Tiên Sơn",
+  "category": "outdoor_landmark",
+  "zone": "son_tra_my_khe",
+  "lat": 16.035269,
+  "lon": 108.235272,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/5273999121",
+  "name": "Cầu Thuận Phước",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.094808,
+  "lon": 108.220013,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/5276547123",
+  "name": "Cau Nguyen Van Troi Bridge",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.051089,
+  "lon": 108.229247,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/6528451001",
+  "name": "Cây đa Đò Xu",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.027678,
+  "lon": 108.221887,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/7095169369",
+  "name": "Non La",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.085705,
+  "lon": 108.219461,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/7276380289",
+  "name": "Cầu Sông Hàn",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.07214,
+  "lon": 108.226811,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/9921315929",
+  "name": "Lưu Niệm - Đặc Sản",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.052667,
+  "lon": 108.202501,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/10709724107",
+  "name": "Làng đá mỹ nghệ Non Nước",
+  "category": "outdoor_landmark",
+  "zone": "ngu_hanh_son",
+  "lat": 16.000952,
+  "lon": 108.266643,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": "gtrip.vn (13/11/2026): 'Opening hours: Sunrise to sunset', 'Entrance fee: Free'. Giờ không ghi cụ thể nên để trống."
+ },
+ {
+  "poi_id": "osm:node/10709738005",
+  "name": "Làng chiếu Cẩm Nê",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 15.986732,
+  "lon": 108.177282,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/10709738105",
+  "name": "Làng nước mắm Nam Ô",
+  "category": "outdoor_landmark",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.112831,
+  "lon": 108.13009,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/10723988763",
+  "name": "Đài tưởng niệm thảm sát Hà My",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.925238,
+  "lon": 108.306548,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/11427582964",
+  "name": "Thai Market",
+  "category": "day_market",
+  "zone": "ba_na_tay",
+  "lat": 15.996312,
+  "lon": 107.988935,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/12811972501",
+  "name": "Mart Souvenir",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.052254,
+  "lon": 108.247414,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/13293564930",
+  "name": "Himawari",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.063498,
+  "lon": 108.231589,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/13677406601",
+  "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+  "category": "outdoor_landmark",
+  "zone": "son_tra_my_khe",
+  "lat": 16.121001,
+  "lon": 108.257229,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/13913398302",
+  "name": "Suối Lạc",
+  "category": "outdoor_landmark",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.107676,
+  "lon": 107.940932,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "06:00-17:30"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/13913400201",
+  "name": "Suối Ngọc",
+  "category": "outdoor_landmark",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.108828,
+  "lon": 107.945906,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "06:00-17:30"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/14067929701",
+  "name": "Bonny handmade",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.052473,
+  "lon": 108.243868,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/14130293535",
+  "name": "Tượng đài Dũng sĩ Điện Ngọc",
+  "category": "outdoor_landmark",
+  "zone": "ngu_hanh_son",
+  "lat": 15.955565,
+  "lon": 108.255576,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
+  "name": "Cửa hàng Đặc Sản Đà Nẵng Làm Quà",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.055322,
+  "lon": 108.244718,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
+  "name": "Đặc sản Đà Nẵng làm quà - Dương Lê",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.034358,
+  "lon": 108.222446,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8",
+  "name": "Đặc Sản Chả Bò Bà Tâm Đà Nẵng",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.086696,
+  "lon": 108.219218,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
+  "name": "Đặc Sản Ngon Đà Nẵng - Đặc Sản Làm Quà shop online",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.081002,
+  "lon": 108.239674,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
+  "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.065734,
+  "lon": 108.16955,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
+  "name": "Cửa hàng Đặc sản Biển Đà Nẵng",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.055931,
+  "lon": 108.208224,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
+  "name": "Siêu thị Đặc sản Hương Đà",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.063617,
+  "lon": 108.243089,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
+  "name": "Vigift Đà Nẵng – Quà Đặc Sản",
+  "category": "day_market",
+  "zone": "son_tra_my_khe",
+  "lat": 16.062224,
+  "lon": 108.23762,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
+  "name": "Cô Na - ĐẶC SẢN ĐÀ NẴNG",
+  "category": "day_market",
+  "zone": "trung_tam",
+  "lat": 16.071259,
+  "lon": 108.188557,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+  "name": "RAIN MUSIC BOX & GAME",
+  "category": "day_market",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.068772,
+  "lon": 108.150104,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "09:00-19:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJu1LdzQwZQjER2DSbyyayAbs",
+  "name": "Công viên Cầu vượt Ngã Ba Huế",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.062353,
+  "lon": 108.178828,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
+  "name": "Công viên 29/3",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.062519,
+  "lon": 108.204514,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "ChIJvfs2CK4ZQjERYSUrqnRYbqo",
+  "name": "Công viên hồ Ngọc Anh",
+  "category": "outdoor_landmark",
+  "zone": "trung_tam",
+  "lat": 16.064972,
+  "lon": 108.180459,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:way/35952504",
+  "name": "Chợ Hội An",
+  "category": "day_market",
+  "zone": "hoi_an",
+  "lat": 15.876799,
+  "lon": 108.33136,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "08:00-11:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4171964390",
+  "name": "Làng gốm Thanh Hà",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.877126,
+  "lon": 108.298987,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/10709738006",
+  "name": "Làng mộc Kim Bồng",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.864517,
+  "lon": 108.325302,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4517387589",
+  "name": "Làng Triêm Tây",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.872133,
+  "lon": 108.305589,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:node/4171925609",
+  "name": "Cồn Thuận Tình",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.864417,
+  "lon": 108.364381,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:relation/3938690",
+  "name": "Vườn Tượng An Hội",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.8761,
+  "lon": 108.325699,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:way/35952574",
+  "name": "Cầu An Hội",
+  "category": "outdoor_landmark",
+  "zone": "hoi_an",
+  "lat": 15.876492,
+  "lon": 108.326463,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:way/1109970009",
+  "name": "Nhà thờ Saint Denis",
+  "category": "outdoor_landmark",
+  "zone": "ba_na_tay",
+  "lat": 15.997358,
+  "lon": 107.987799,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ },
+ {
+  "poi_id": "osm:way/149699484",
+  "name": "Công viên Biển Đông",
+  "category": "outdoor_landmark",
+  "zone": "son_tra_my_khe",
+  "lat": 16.068147,
+  "lon": 108.245928,
+  "prize_prior": 0.5,
+  "hours_now": [
+   "05:00-22:00"
+  ],
+  "price_note": null
+ }
+]

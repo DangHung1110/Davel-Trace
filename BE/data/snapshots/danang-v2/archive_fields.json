@@ -3341,7 +3341,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "17:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -5111,7 +5111,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "11:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -25180,7 +25180,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "07:00-15:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -25457,7 +25457,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "08:00-21:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -26078,7 +26078,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "04:00-21:30"
     ],
     "weekly": null,
     "archetype_default": [
@@ -26163,7 +26163,8 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "05:00-08:00",
+     "15:00-20:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -29243,7 +29244,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "07:00-17:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -36258,7 +36259,8 @@
    },
    "hours_v20": {
     "spans": [
-     "09:00-19:00"
+     "08:00-11:30",
+     "14:00-17:30"
     ],
     "weekly": null,
     "spans_any_day": [
@@ -41725,7 +41727,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:45"
     ],
     "weekly": null,
     "archetype_default": [
@@ -41811,7 +41813,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-04:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -41897,7 +41899,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:30-22:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -41983,7 +41985,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "08:30-23:55"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42069,7 +42071,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42155,7 +42157,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42241,7 +42243,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-02:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42497,7 +42499,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42583,7 +42585,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -42669,7 +42671,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-22:30"
     ],
     "weekly": null,
     "archetype_default": [
@@ -43097,7 +43099,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -45467,7 +45469,7 @@
    },
    "hours_v20": {
     "spans": [
-     "09:00-19:00"
+     "09:00-21:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -45552,7 +45554,7 @@
    },
    "hours_v20": {
     "spans": [
-     "09:00-19:00"
+     "06:00-22:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -49288,7 +49290,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "00:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -49374,7 +49376,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -51079,7 +51081,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "09:00-23:30"
     ],
     "weekly": null,
     "archetype_default": [
@@ -51163,7 +51165,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "08:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -53035,7 +53037,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "08:00-20:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -54403,7 +54405,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "19:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -55867,7 +55869,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "10:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -55953,7 +55955,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "16:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -56130,7 +56132,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "15:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -57360,7 +57362,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "15:30-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -57530,7 +57532,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "16:00-23:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -57615,7 +57617,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "16:00-01:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -57955,7 +57957,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "09:00-23:59"
     ],
     "weekly": null,
     "archetype_default": [
@@ -59828,7 +59830,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "20:00-03:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -60254,7 +60256,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "14:00-01:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -61028,7 +61030,7 @@
    },
    "hours_v20": {
     "spans": [
-     "19:30-23:00"
+     "19:00-02:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -63285,7 +63287,7 @@
    },
    "hours_v20": {
     "spans": [
-     "10:00-20:00"
+     "08:00-20:00"
     ],
     "weekly": null,
     "archetype_default": [
@@ -67827,7 +67829,7 @@
    },
    "hours_v20": {
     "spans": [
-     "08:00-11:00"
+     "06:00-22:00"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -68342,7 +68344,7 @@
    },
    "hours_v20": {
     "spans": [
-     "05:00-22:00"
+     "08:00-17:30"
     ],
     "weekly": null,
     "spans_any_day": [],
