@@ -170,8 +170,13 @@ Codex (t15) đọc web cho 80 điểm tôn giáo đang dùng khung ước lượ
 - `optimizer.py`: tối đa 1 trải nghiệm theo suất mỗi ngày (ràng buộc cứng).
 - Nguồn: `BE/data/sources/booking_*.json` → `migrate_v2.apply_booking`. Test: `BE/tests/unit/test_by_booking.py`.
 - Dữ liệu (Codex đọc trang lớp/đặt chỗ, `reports/p0/links/cooking_sessions_codex.json`): 4/13 lớp có suất ghi rõ → by_booking (Family Kitchen, Apron Up, Sunny Bánh Mì & Coffee, Thuận Tình Island). 2 lớp Jolie ghi giờ dạng "09:00 / 15:00 · 13:00 / 19:00" — chưa rõ cặp bắt đầu/kết thúc nên chưa áp; 7 lớp không có lịch → giữ unknown.
-- **Chưa làm:** bỏ bữa ăn liền kề sau lớp nấu ăn (cần sửa luật bữa trưa bắt buộc trong solver).
+- **Bữa ăn:** suất lớp nấu ăn trùng khung bữa (trưa 11–14, tối 17–21) được tính là bữa đó — `soft_rules.is_meal_experience/covers_slot`, `gate.check_a1`, `lunch_activity`, optimizer `_overlap_hits` (A1 + bữa trưa bắt buộc + nghỉ trưa sau lớp). Test `TestMealExperience`.
 
 **Giờ có nguồn (Codex: OSM + web, không Google):** ngoài trời/chợ 10/69, spa/nightlife 30/158 → `agent_web_2026-11-20c.json` (Nón Spa bỏ: nguồn mâu thuẫn ngày nghỉ). Còn lại không có nguồn đọc được → giữ `safe_window`.
 
 Giờ ngoài lưu trú: fixed 234, safe_window 498, by_booking 4, unknown 9.
+
+## Giá thật cho điểm hay vào lịch — 20/11
+
+Codex (t15) đọc web cho 100 điểm giá ước lượng (`reports/p0/links/prices_codex.json`): 35 có số liệu; áp 29 (`agent_web_2026-11-20d.json`). Nhà hàng chỉ nhận chi tiêu trung bình/người — bỏ 6 quán chỉ có giá một món. Chợ/chợ đêm: giá món ăn vặt. Lớp nấu ăn: USD × 25.000.
+Đổi mức: Sơn Trà Marina medium → cheap (60–120k), The Temptation medium → expensive (2–4,9tr/người), Mimi Cooking Class expensive → medium (400k). Giá ngoài lưu trú: ước lượng 677 → 648.

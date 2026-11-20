@@ -69,13 +69,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "min_vnd": 150000,
+    "max_vnd": 350000,
+    "typical_vnd": 250000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 250000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -163,13 +163,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "min_vnd": 100000,
+    "max_vnd": 300000,
+    "typical_vnd": 200000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 200000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -540,12 +540,12 @@
    "price_v20": {
     "basis": "per_person",
     "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "max_vnd": 300000,
+    "typical_vnd": 250000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 250000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -1478,12 +1478,12 @@
    "price_v20": {
     "basis": "per_person",
     "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "max_vnd": 300000,
+    "typical_vnd": 250000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 250000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -1764,13 +1764,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "min_vnd": 249000,
+    "max_vnd": 499000,
+    "typical_vnd": 249000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 249000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -1856,13 +1856,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 100000,
+    "min_vnd": 200000,
     "max_vnd": 300000,
-    "typical_vnd": 200000,
+    "typical_vnd": 250000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 250000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2230,13 +2230,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 100000,
-    "max_vnd": 350000,
-    "typical_vnd": 225000,
-    "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 60000,
+    "max_vnd": 120000,
+    "typical_vnd": 90000,
+    "band": "vua",
+    "ticket_vnd": 90000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2325,13 +2325,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
-    "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 2000000,
+    "max_vnd": 4900000,
+    "typical_vnd": 2450000,
+    "band": "cao",
+    "ticket_vnd": 2450000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2513,13 +2513,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 100000,
-    "max_vnd": 350000,
-    "typical_vnd": 225000,
+    "min_vnd": 162500,
+    "max_vnd": 162500,
+    "typical_vnd": 162500,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 162500,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2608,13 +2608,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 200000,
+    "min_vnd": 350000,
     "max_vnd": 600000,
-    "typical_vnd": 400000,
-    "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "typical_vnd": 475000,
+    "band": "cao",
+    "ticket_vnd": 475000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2696,12 +2696,12 @@
    "price_v20": {
     "basis": "per_person",
     "min_vnd": 100000,
-    "max_vnd": 350000,
-    "typical_vnd": 225000,
+    "max_vnd": 500000,
+    "typical_vnd": 300000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 300000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -2890,12 +2890,12 @@
    "price_v20": {
     "basis": "per_person",
     "min_vnd": 200000,
-    "max_vnd": 600000,
-    "typical_vnd": 400000,
+    "max_vnd": 300000,
+    "typical_vnd": 250000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 250000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -3539,13 +3539,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 100000,
-    "max_vnd": 350000,
-    "typical_vnd": 225000,
+    "min_vnd": 150000,
+    "max_vnd": 500000,
+    "typical_vnd": 325000,
     "band": "kha",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 325000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -17961,12 +17961,12 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
+    "basis": "per_person",
     "min_vnd": 0,
     "max_vnd": 0,
     "typical_vnd": 0,
     "band": "re",
-    "ticket_vnd": null,
+    "ticket_vnd": 0,
     "free_entry": true,
     "status": "known"
    },
@@ -25192,13 +25192,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 20000,
-    "max_vnd": 150000,
-    "typical_vnd": 85000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 25000,
+    "max_vnd": 35000,
+    "typical_vnd": 30000,
+    "band": "re",
+    "ticket_vnd": 30000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -25294,13 +25294,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 30000,
-    "max_vnd": 150000,
-    "typical_vnd": 90000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 15000,
+    "max_vnd": 35000,
+    "typical_vnd": 25000,
+    "band": "re",
+    "ticket_vnd": 25000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -25833,13 +25833,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 30000,
-    "max_vnd": 150000,
-    "typical_vnd": 90000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 15000,
+    "max_vnd": 30000,
+    "typical_vnd": 22000,
+    "band": "re",
+    "ticket_vnd": 22000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -26090,13 +26090,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 20000,
-    "max_vnd": 150000,
-    "typical_vnd": 85000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 25000,
+    "max_vnd": 35000,
+    "typical_vnd": 30000,
+    "band": "re",
+    "ticket_vnd": 30000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -26177,12 +26177,12 @@
    "price_v20": {
     "basis": "per_person",
     "min_vnd": 20000,
-    "max_vnd": 150000,
-    "typical_vnd": 85000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "max_vnd": 40000,
+    "typical_vnd": 30000,
+    "band": "re",
+    "ticket_vnd": 30000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -26525,13 +26525,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 20000,
-    "max_vnd": 150000,
-    "typical_vnd": 85000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 10000,
+    "max_vnd": 15000,
+    "typical_vnd": 12000,
+    "band": "re",
+    "ticket_vnd": 12000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -34791,13 +34791,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 30000,
-    "max_vnd": 150000,
-    "typical_vnd": 90000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 5000,
+    "max_vnd": 35000,
+    "typical_vnd": 20000,
+    "band": "re",
+    "ticket_vnd": 20000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -63950,13 +63950,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "min_vnd": 875000,
+    "max_vnd": 875000,
+    "typical_vnd": 875000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 875000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64029,13 +64029,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "min_vnd": 893750,
+    "max_vnd": 894000,
+    "typical_vnd": 894000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 894000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64109,13 +64109,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "min_vnd": 800000,
+    "max_vnd": 800000,
+    "typical_vnd": 800000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 800000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64667,13 +64667,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "min_vnd": 370000,
+    "max_vnd": 570000,
+    "typical_vnd": 570000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 570000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64747,13 +64747,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
-    "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 400000,
+    "max_vnd": 400000,
+    "typical_vnd": 400000,
+    "band": "kha",
+    "ticket_vnd": 400000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64828,12 +64828,12 @@
    "price_v20": {
     "basis": "ticket",
     "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "max_vnd": 750000,
+    "typical_vnd": 750000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 750000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -64906,13 +64906,13 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 750000,
-    "max_vnd": 1100000,
-    "typical_vnd": 900000,
+    "min_vnd": 1000000,
+    "max_vnd": 1000000,
+    "typical_vnd": 1000000,
     "band": "cao",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "ticket_vnd": 1000000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",
@@ -67844,13 +67844,13 @@
    },
    "price_v20": {
     "basis": "per_person",
-    "min_vnd": 20000,
-    "max_vnd": 150000,
-    "typical_vnd": 85000,
-    "band": "vua",
-    "ticket_vnd": null,
-    "free_entry": null,
-    "status": "estimate"
+    "min_vnd": 25000,
+    "max_vnd": 40000,
+    "typical_vnd": 32000,
+    "band": "re",
+    "ticket_vnd": 32000,
+    "free_entry": false,
+    "status": "known"
    },
    "dwell_v20": {
     "unit": "min",

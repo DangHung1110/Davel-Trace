@@ -144,7 +144,7 @@ Chất lượng (không đổi format):
 3. Toạ độ: 552 điểm toạ độ Google chưa đối chiếu OSM (rủi ro thấp).
 
 Format (đổi `DATA_SPEC_v2_1` — cần người dùng duyệt):
-4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 4/13 lớp có suất có nguồn, 9 lớp còn unknown. Còn: bỏ bữa liền kề sau lớp nấu ăn.
+4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 4/13 lớp có suất có nguồn, 9 lớp còn unknown. Lớp nấu ăn trùng khung bữa = bữa đó (optimizer + gate, 20/11).
 5. Suất/giờ khởi hành cho show, tour (Ký ức Hội An 20:00, tour lặn 4 suất) thay vì một khung mở cửa.
 6. Vé nhiều mức (người lớn/trẻ em/cư dân, ECO/HIGH/VIP) + phí bắt buộc (gửi xe, thang máy, thuyền) thành trường có cấu trúc; hiện chỉ ở `price.note`.
 7. Đếm khoản "chưa biết" khi tính chi phí thay vì coi = 0.

@@ -460,6 +460,18 @@ def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
     return hit
 
 
+def _overlap_hits(m, t, dur, visit, i, lo: int, hi: int, tag: str):
+    """Boolvar: node i is visited AND [t, t+dur) overlaps [lo, hi)."""
+    hit = m.NewBoolVar(f"{tag}_o_{i}")
+    m.AddImplication(hit, visit[i])
+    m.Add(t[i] < hi).OnlyEnforceIf(hit)
+    m.Add(t[i] + dur[i] > lo).OnlyEnforceIf(hit)
+    early = m.NewBoolVar(f"{tag}_e_{i}")       # not hit -> entirely before or after
+    m.Add(t[i] + dur[i] <= lo).OnlyEnforceIf([visit[i], hit.Not(), early])
+    m.Add(t[i] >= hi).OnlyEnforceIf([visit[i], hit.Not(), early.Not()])
+    return hit
+
+
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, require_all: bool = False,
              timeout_s: float = TIMEOUT_S,
@@ -649,7 +661,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].
     slot_hits: dict[int, list] = {}
+    booking_meal: dict[int, dict[int, object]] = {}   # slot -> {node: overlap hit}
     for i in range(1, n + 1):
+        if pois[i - 1].booking:
+            # cooking class: the session IS the meal of each slot it overlaps
+            for idx, (lo, hi) in enumerate(MEAL_SLOTS):
+                hit = _overlap_hits(m, t, dur, visit, i, lo, hi, f"bm_{idx}")
+                booking_meal.setdefault(idx, {})[i] = hit
+                slot_hits.setdefault(idx, []).append(hit)
+            continue
         if not pois[i - 1].restaurant:
             continue
         for idx, (lo, hi) in enumerate(MEAL_SLOTS):
@@ -672,8 +692,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         lunch_hits = [
             (i, _window_hits(m, t, visit, i, LUNCH_REQUIRED[0],
                              LUNCH_REQUIRED[1], "lunch"))
-            for i in range(1, n + 1) if pois[i - 1].restaurant
-        ]
+            for i in range(1, n + 1) if pois[i - 1].restaurant and not pois[i - 1].booking
+        ] + list(booking_meal.get(0, {}).items())   # a class over lunch is the lunch
         if not lunch_hits:
             return {"status": "infeasible",
                     "reason": "khong co nha hang cho bua trua",

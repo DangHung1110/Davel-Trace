@@ -46,8 +46,8 @@
  "count_new_pois": 134,
  "count_v1_pois": 742,
  "count_by_price_tier": {
-  "medium": 328,
-  "cheap": 226,
+  "medium": 327,
+  "cheap": 227,
   "expensive": 19,
   "free": 184,
   "None": 84,
@@ -87,7 +87,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Khoảng giá : 150.000 - 350.000 đ/người\". VND; không quy đổi ngoại tệ. Trang đặt bàn Ơ Kìa, số 7 Trần Phú; nêu rõ đơn vị/người. typical=null vì không có điểm đại diện, không lấy trung bình cộng. Bãi xe nguồn ghi miễn phí; hóa đơn VAT tính theo quy định, không thấy mức cố"
    },
    "dwell": {
     "p25": 40,
@@ -171,12 +171,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://pasgo.vn/nha-hang/nha-hang-hai-san-o-kia-tran-phu-5838",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Khoảng giá : 150.000 - 350.000 đ/người\". VND; không quy đổi ngoại tệ. Trang đặt bàn Ơ Kìa, số 7 Trần Phú; nêu rõ đơn vị/người. typical=null vì không có điểm đại diện, không lấy trung bình cộng. Bãi xe nguồn ghi miễn phí; hóa đơn VAT tính theo quy định, không thấy mức cố; VND ticket_vnd=250000, min_vnd=150000, max_vnd=350000, typical_vnd=250000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -234,7 +234,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"100.000 – 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Hải sản Mộc Quán, 26 Tô Hiến Thành, nhãn Trung bình/người: khoảng 100–300k. typical=200k từ nhận xét độc lập trên https://www.foody.vn/da-nang/moc-quan-hai-san-tuoi-song: “tầm 200k/ng bao no”. Đây"
    },
    "dwell": {
     "p25": 40,
@@ -318,12 +318,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"100.000 – 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Hải sản Mộc Quán, 26 Tô Hiến Thành, nhãn Trung bình/người: khoảng 100–300k. typical=200k từ nhận xét độc lập trên https://www.foody.vn/da-nang/moc-quan-hai-san-tuoi-song: “tầm 200k/ng bao no”. Đây; VND ticket_vnd=200000, min_vnd=100000, max_vnd=300000, typical_vnd=200000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -822,7 +822,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Trung bình/người: 200.000 - 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Hải sản Bà Tám, K126/2 đường 2 Tháng 9; nguồn nêu rõ theo người. Không dùng khoảng giá 80–165k trên header Foody vì không rõ đơn vị. Không tự lấy điểm giữa."
    },
    "dwell": {
     "p25": 40,
@@ -906,12 +906,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Trung bình/người: 200.000 - 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Hải sản Bà Tám, K126/2 đường 2 Tháng 9; nguồn nêu rõ theo người. Không dùng khoảng giá 80–165k trên header Foody vì không rõ đơn vị. Không tự lấy điểm giữa.; VND ticket_vnd=250000, min_vnd=200000, max_vnd=300000, typical_vnd=250000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -2288,7 +2288,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Giá trung bình: 200.000 – 300.000 VNĐ/người\". VND; không quy đổi ngoại tệ. Mục cơ sở 54–56 Quang Trung phù hợp POI; số tiền theo người ghi trong phần giới thiệu, không dùng điểm đánh giá/place. typical=null; không gán giá ưu đãi nhóm hoặc giá của cơ sở khác thành một vé."
    },
    "dwell": {
     "p25": 40,
@@ -2372,12 +2372,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:an_toi",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://khamphadanang.vn/dia-diem/gyu-sachi/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Giá trung bình: 200.000 – 300.000 VNĐ/người\". VND; không quy đổi ngoại tệ. Mục cơ sở 54–56 Quang Trung phù hợp POI; số tiền theo người ghi trong phần giới thiệu, không dùng điểm đánh giá/place. typical=null; không gán giá ưu đãi nhóm hoặc giá của cơ sở khác thành một vé.; VND ticket_vnd=250000, min_vnd=200000, max_vnd=300000, typical_vnd=250000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -2727,7 +2727,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Áp dụng cho mức giá buffet 249k – 299k – 349K – 399K – 499K\". VND; không quy đổi ngoại tệ. Trang chính cơ sở 38 Trần Quốc Toản. typical chọn vé cơ bản 249k; min/max là các mức buffet được liệt kê, không lấy trung bình. Giá 187k/người là hiệu quả nhóm đi 4 tính 3, chỉ buổi trưa T2–T6 tháng 1"
    },
    "dwell": {
     "p25": 40,
@@ -2811,12 +2811,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:an_toi",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://yenyakiniku.vn/blog/buffet-thit-nuong-nhat-ban/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Áp dụng cho mức giá buffet 249k – 299k – 349K – 399K – 499K\". VND; không quy đổi ngoại tệ. Trang chính cơ sở 38 Trần Quốc Toản. typical chọn vé cơ bản 249k; min/max là các mức buffet được liệt kê, không lấy trung bình. Giá 187k/người là hiệu quả nhóm đi 4 tính 3, chỉ buổi trưa T2–T6 tháng 1; VND ticket_vnd=249000, min_vnd=249000, max_vnd=499000, typical_vnd=249000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -2873,7 +2873,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Reference price: 200,000 – 300,000 VND/person\". VND; không quy đổi ngoại tệ. Mục riêng Gang Yu Hot Pot, 87 Yên Bái, không phải giá của nhà hàng Golden Dragon thuộc khách sạn viết bài. Có đơn vị/người; typical=null vì chỉ có khoảng."
    },
    "dwell": {
     "p25": 40,
@@ -2957,12 +2957,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:an_toi",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=100000, max_vnd=300000, typical_vnd=200000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://grandmercuredanang.com/discovery/chinese-restaurant-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Reference price: 200,000 – 300,000 VND/person\". VND; không quy đổi ngoại tệ. Mục riêng Gang Yu Hot Pot, 87 Yên Bái, không phải giá của nhà hàng Golden Dragon thuộc khách sạn viết bài. Có đơn vị/người; typical=null vì chỉ có khoảng.; VND ticket_vnd=250000, min_vnd=200000, max_vnd=300000, typical_vnd=250000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -3460,8 +3460,8 @@
     "archetype": "nha_hang"
    },
    "price": {
-    "tier": "medium",
-    "note": null
+    "tier": "cheap",
+    "note": "Giá (Codex t15 20/11/2026): \"60,000đ - 120,000đ\". VND; không quy đổi ngoại tệ. Khoảng giá đồ uống/lượt ghé cà phê tại Sơn Trà Marina; không phải giá một bữa nhà hàng. typical=null, không tự chọn món hay cộng vé check-in khi nguồn chưa nêu."
    },
    "dwell": {
     "p25": 40,
@@ -3545,12 +3545,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=100000, max_vnd=350000, typical_vnd=225000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danang.coffee/son-tra-marina/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"60,000đ - 120,000đ\". VND; không quy đổi ngoại tệ. Khoảng giá đồ uống/lượt ghé cà phê tại Sơn Trà Marina; không phải giá một bữa nhà hàng. typical=null, không tự chọn món hay cộng vé check-in khi nguồn chưa nêu.; VND ticket_vnd=90000, min_vnd=60000, max_vnd=120000, typical_vnd=90000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -3607,8 +3607,8 @@
     "archetype": "nha_hang"
    },
    "price": {
-    "tier": "medium",
-    "note": null
+    "tier": "expensive",
+    "note": "Giá (Codex t15 20/11/2026): \"2,000,000 VND (Vegetarian) to 4,900,000 VND (White Tasting) per person, food only | Discovery | Lunch Menu | 2,450,000 VND\". VND; không quy đổi ngoại tệ. Trích cụm câu và ô bảng. Khoảng năm set menu/người; typical chọn set Discovery Lunch ghi giá 2,45 triệu, không lấy trung bình. Nguồn nói giá bao gồm VAT; ghép rượu là tùy chọn và tính thêm, không cộng"
    },
    "dwell": {
     "p25": 40,
@@ -3692,12 +3692,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://thetemptation.com.vn/the-temptation-da-nang-everything-to-know-before-your-visit",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"2,000,000 VND (Vegetarian) to 4,900,000 VND (White Tasting) per person, food only | Discovery | Lunch Menu | 2,450,000 VND\". VND; không quy đổi ngoại tệ. Trích cụm câu và ô bảng. Khoảng năm set menu/người; typical chọn set Discovery Lunch ghi giá 2,45 triệu, không lấy trung bình. Nguồn nói giá bao gồm VAT; ghép rượu là tùy chọn và tính thêm, không cộng; VND ticket_vnd=2450000, min_vnd=2000000, max_vnd=4900000, typical_vnd=2450000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -3901,7 +3901,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"HIGH-TEA SET có giá 325,000 VND++/set (*) cho 02 khách bao gồm trà và các loại bánh.\". VND; phép chia giá set ghi rõ cho 02 khách: 325.000 ÷ 2 = 162.500/người, trước ++. Một lượt trà chiều, không phải bữa chính. 162.500/người = 325.000/2 khi HAI người lớn cùng dùng đúng set; một người đi riêng không được bảo đảm mua nửa set. ++ là thuế/phí ngoài giá cơ bản, tỷ lệ hiện"
    },
    "dwell": {
     "p25": 40,
@@ -3985,12 +3985,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=100000, max_vnd=350000, typical_vnd=225000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.chiclandhotel.com/vn/uu-dai/thu-thai-thuong-vi-tra-banh-classy-high-tea.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"HIGH-TEA SET có giá 325,000 VND++/set (*) cho 02 khách bao gồm trà và các loại bánh.\". VND; phép chia giá set ghi rõ cho 02 khách: 325.000 ÷ 2 = 162.500/người, trước ++. Một lượt trà chiều, không phải bữa chính. 162.500/người = 325.000/2 khi HAI người lớn cùng dùng đúng set; một người đi riêng không được bảo đảm mua nửa set. ++ là thuế/phí ngoài giá cơ bản, tỷ lệ hiện; VND ticket_vnd=162500, min_vnd=162500, max_vnd=162500, typical_vnd=162500"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -4048,7 +4048,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Giá tham khảo: 350.000 đến 600.000 đồng/người lớn\". VND; không quy đổi ngoại tệ. Mục Brilliant Seafood, 178 Hồ Nghinh: giá buffet người lớn, không phải món/kg hải sản. typical=null vì nguồn chỉ nêu khoảng; chưa xác minh thuế/đồ uống đã bao gồm."
    },
    "dwell": {
     "p25": 40,
@@ -4132,12 +4132,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://visitdanang.travel/vi/trai-nghiem-buffet-o-da-nang-duoc-dan-sanh-an-truyen-tai-nhau-6531",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Giá tham khảo: 350.000 đến 600.000 đồng/người lớn\". VND; không quy đổi ngoại tệ. Mục Brilliant Seafood, 178 Hồ Nghinh: giá buffet người lớn, không phải món/kg hải sản. typical=null vì nguồn chỉ nêu khoảng; chưa xác minh thuế/đồ uống đã bao gồm.; VND ticket_vnd=475000, min_vnd=350000, max_vnd=600000, typical_vnd=475000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -4195,7 +4195,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"100.000 – 500.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Nhà hàng Chân Trời Góc Bể, 60 Nguyễn Hữu An, nhãn Trung bình/người. Không dùng các đánh giá Google được sao chép tại trang tổng hợp khác; không lấy trung bình cộng làm typical."
    },
    "dwell": {
     "p25": 40,
@@ -4279,12 +4279,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=100000, max_vnd=350000, typical_vnd=225000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"100.000 – 500.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Nhà hàng Chân Trời Góc Bể, 60 Nguyễn Hữu An, nhãn Trung bình/người. Không dùng các đánh giá Google được sao chép tại trang tổng hợp khác; không lấy trung bình cộng làm typical.; VND ticket_vnd=300000, min_vnd=100000, max_vnd=500000, typical_vnd=300000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -4488,7 +4488,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"200.000 – 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Nhà hàng Lão Đại, hai cơ sở đối diện nhau tại ngã tư Võ Văn Kiệt/Phạm Cự Lượng, nhãn Trung bình/người. Không lấy giá món Mực và xôi chiên 65k làm tổng bữa người."
    },
    "dwell": {
     "p25": 40,
@@ -4572,12 +4572,12 @@
      "note": null
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"200.000 – 300.000 VNĐ\". VND; không quy đổi ngoại tệ. Mục Nhà hàng Lão Đại, hai cơ sở đối diện nhau tại ngã tư Võ Văn Kiệt/Phạm Cự Lượng, nhãn Trung bình/người. Không lấy giá món Mực và xôi chiên 65k làm tổng bữa người.; VND ticket_vnd=250000, min_vnd=200000, max_vnd=300000, typical_vnd=250000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -5515,7 +5515,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"một bữa ăn tại đây có thể dao động từ 150.000 VNĐ đến 500.000 VNĐ mỗi người\". VND; không quy đổi ngoại tệ. Trích phần câu về Sofia, 11 Phạm Văn Đồng. Nguồn nêu theo người, tùy món và đồ uống; typical=null, không dùng khoảng 20–150k trên header Foody không rõ đơn vị."
    },
    "dwell": {
     "p25": 40,
@@ -5599,12 +5599,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=100000, max_vnd=350000, typical_vnd=225000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://hanoidep.vn/sofia-restaurant-danang-11-pham-van-dong-an-hai-bac-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"một bữa ăn tại đây có thể dao động từ 150.000 VNĐ đến 500.000 VNĐ mỗi người\". VND; không quy đổi ngoại tệ. Trích phần câu về Sofia, 11 Phạm Văn Đồng. Nguồn nêu theo người, tùy món và đồ uống; typical=null, không dùng khoảng 20–150k trên header Foody không rõ đơn vị.; VND ticket_vnd=325000, min_vnd=150000, max_vnd=500000, typical_vnd=325000"
     },
     "dwell": {
      "source": "dwell_table_v2:restaurant",
@@ -28430,7 +28430,7 @@
    },
    "price": {
     "tier": "free",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Cầu Rồng không có vé tham quan. Đi bộ qua hoàn toàn miễn phí.\". VND; không quy đổi ngoại tệ. Chỉ phí tham quan/đi bộ tại không gian công cộng; không gồm ăn uống, phương tiện hoặc chỗ ngồi thương mại."
    },
    "dwell": {
     "p25": 10,
@@ -28516,12 +28516,12 @@
      "note": "cầu đi lại tự do 24/7; show lửa-nước T6-CN 21:00 (breezevietnam.com)"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vnguide.vn/entertainment/dragon-bridge-da-nang-6612108",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Cầu Rồng không có vé tham quan. Đi bộ qua hoàn toàn miễn phí.\". VND; không quy đổi ngoại tệ. Chỉ phí tham quan/đi bộ tại không gian công cộng; không gồm ăn uống, phương tiện hoặc chỗ ngồi thương mại.; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -39824,7 +39824,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời | Giá (Codex t15 20/11/2026): \"Bún mắm nêm thịt quay | 25.000đ – 35.000đ / tô\". VND; không quy đổi ngoại tệ. Trích tên món và ô giá cùng dòng bảng. Chọn một tô bún mắm ở khu ẩm thực trong nhà làm phạm vi min/max cho một món chính; không tính tổng ăn nhiều món/người hoặc cộng các phần chia nhóm. typical=null;"
    },
    "dwell": {
     "p25": 30,
@@ -39903,15 +39903,15 @@
      "confidence": 0.6,
      "evidence_url": "https://tixgo.vn/node/3988",
      "verified_at": "2026-11-20",
-     "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời"
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời | Giá (Codex t15 20/11/2026): \"Bún mắm nêm thịt quay | 25.000đ – 35.000đ / tô\". VND; không quy đổi ngoại tệ. Trích tên món và ô giá cùng dòng bảng. Chọn một tô bún mắm ở khu ẩm thực trong nhà làm phạm vi min/max cho một món chính; không tính tổng ăn nhiều món/người hoặc cộng các phần chia nhóm. typical=null;"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://tixgo.vn/node/3988",
+     "verified_at": "2026-11-20",
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời | Giá (Codex t15 20/11/2026): \"Bún mắm nêm thịt quay | 25.000đ – 35.000đ / tô\". VND; không quy đổi ngoại tệ. Trích tên món và ô giá cùng dòng bảng. Chọn một tô bún mắm ở khu ẩm thực trong nhà làm phạm vi min/max cho một món chính; không tính tổng ăn nhiều món/người hoặc cộng các phần chia nhóm. typical=null;; VND ticket_vnd=30000, min_vnd=25000, max_vnd=35000, typical_vnd=30000"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -39968,7 +39968,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"các món ăn vặt, chè, xiên nướng phổ biến từ 15.000 đến 35.000 VNĐ một phần.\". VND; không quy đổi ngoại tệ. Trích phần câu về đồ ăn, min/max cho MỘT PHẦN ăn vặt; chưa có mức chi tiêu cả lượt/người nên typical=null. https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/cho-dem-son-tra-da-nang/ ghi vé vào"
    },
    "dwell": {
     "p25": 45,
@@ -40050,12 +40050,12 @@
      "note": "OSM opening_hours='Mo-Su 18:00-23:00', khớp 24.3 m"
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://visitdanang.travel/vi/kham-pha-cho-dem-son-tra-diem-vui-choi-nhon-nhip-giua-long-da-nang-11481",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"các món ăn vặt, chè, xiên nướng phổ biến từ 15.000 đến 35.000 VNĐ một phần.\". VND; không quy đổi ngoại tệ. Trích phần câu về đồ ăn, min/max cho MỘT PHẦN ăn vặt; chưa có mức chi tiêu cả lượt/người nên typical=null. https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/cho-dem-son-tra-da-nang/ ghi vé vào; VND ticket_vnd=25000, min_vnd=15000, max_vnd=35000, typical_vnd=25000"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -40832,7 +40832,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00. | Giá (Codex t15 20/11/2026): \"Các món xiên nướng dao động từ 15.000đ – 30.000đ/xiên\". VND; không quy đổi ngoại tệ. Trích phần câu; giá MỘT XIÊN, không phải ngân sách bữa ăn. typical=null vì không có số xiên/phần ăn một người; không lấy tiền lẻ khuyên mang 100–200k hoặc giá vé xe làm chi phí ăn."
    },
    "dwell": {
     "p25": 45,
@@ -40910,16 +40910,16 @@
      "verified_by": "agent_web",
      "confidence": 0.6,
      "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong",
-     "verified_at": "2026-11-19",
-     "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00."
+     "verified_at": "2026-11-20",
+     "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00. | Giá (Codex t15 20/11/2026): \"Các món xiên nướng dao động từ 15.000đ – 30.000đ/xiên\". VND; không quy đổi ngoại tệ. Trích phần câu; giá MỘT XIÊN, không phải ngân sách bữa ăn. typical=null vì không có số xiên/phần ăn một người; không lấy tiền lẻ khuyên mang 100–200k hoặc giá vé xe làm chi phí ăn."
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://nangtrip.com/activities/cho-dem-an-thuong",
+     "verified_at": "2026-11-20",
+     "note": "Vào cửa miễn phí; món 15.000-100.000đ. Giờ lệch: 17:00-23:00 (T7, CN tới 24:00) trong bài / 18:00-23:00 ở khung giờ -> lấy 18:00-23:00. | Giá (Codex t15 20/11/2026): \"Các món xiên nướng dao động từ 15.000đ – 30.000đ/xiên\". VND; không quy đổi ngoại tệ. Trích phần câu; giá MỘT XIÊN, không phải ngân sách bữa ăn. typical=null vì không có số xiên/phần ăn một người; không lấy tiền lẻ khuyên mang 100–200k hoặc giá vé xe làm chi phí ăn.; VND ticket_vnd=22000, min_vnd=15000, max_vnd=30000, typical_vnd=22000"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -41264,7 +41264,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 4:00 đến 21:30\". Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Mì Quảng | Giá tham khảo: 25.000 - 35.000 VNĐ/tô.\". VND; không quy đổi ngoại tệ. Một tô mì Quảng tại chợ; không dùng giá đồ khô/quà lưu niệm. typical=null vì nguồn chỉ nêu khoảng. Gửi xe máy nguồn nêu thường 5.000 VNĐ/xe, chỉ ở note; miễn phí vào chợ theo yêu cầu."
    },
    "dwell": {
     "p25": 30,
@@ -41343,15 +41343,15 @@
      "confidence": 0.6,
      "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
      "verified_at": "2026-11-20",
-     "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 4:00 đến 21:30\". Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ."
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 4:00 đến 21:30\". Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Mì Quảng | Giá tham khảo: 25.000 - 35.000 VNĐ/tô.\". VND; không quy đổi ngoại tệ. Một tô mì Quảng tại chợ; không dùng giá đồ khô/quà lưu niệm. typical=null vì nguồn chỉ nêu khoảng. Gửi xe máy nguồn nêu thường 5.000 VNĐ/xe, chỉ ở note; miễn phí vào chợ theo yêu cầu."
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Giờ mở cửa: 4:00 đến 21:30\". Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Mì Quảng | Giá tham khảo: 25.000 - 35.000 VNĐ/tô.\". VND; không quy đổi ngoại tệ. Một tô mì Quảng tại chợ; không dùng giá đồ khô/quà lưu niệm. typical=null vì nguồn chỉ nêu khoảng. Gửi xe máy nguồn nêu thường 5.000 VNĐ/xe, chỉ ở note; miễn phí vào chợ theo yêu cầu.; VND ticket_vnd=30000, min_vnd=25000, max_vnd=35000, typical_vnd=30000"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -41409,7 +41409,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giờ (web, Codex t15 20/11/2026): \"5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày\". Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"20.000đ - 40.000đ\". VND; không quy đổi ngoại tệ. Khoảng giá của quầy Cháo Vịt Cô Hạnh - Chợ Thanh Vinh, không phải toàn chợ. Nguồn không nêu giá từng cỡ tô hoặc mức chi tiêu trung bình nên typical=null; dùng khoảng giá món tại đúng quầy, cần xác nhậ"
    },
    "dwell": {
     "p25": 30,
@@ -41488,15 +41488,15 @@
      "confidence": 0.6,
      "evidence_url": "https://top1danang.com/diem-den/cho-thanh-vinh-da-nang.html",
      "verified_at": "2026-11-20",
-     "note": "Giờ (web, Codex t15 20/11/2026): \"5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày\". Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ."
+     "note": "Giờ (web, Codex t15 20/11/2026): \"5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày\". Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"20.000đ - 40.000đ\". VND; không quy đổi ngoại tệ. Khoảng giá của quầy Cháo Vịt Cô Hạnh - Chợ Thanh Vinh, không phải toàn chợ. Nguồn không nêu giá từng cỡ tô hoặc mức chi tiêu trung bình nên typical=null; dùng khoảng giá món tại đúng quầy, cần xác nhậ"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://top1danang.com/diem-den/cho-thanh-vinh-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giờ (web, Codex t15 20/11/2026): \"5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày\". Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"20.000đ - 40.000đ\". VND; không quy đổi ngoại tệ. Khoảng giá của quầy Cháo Vịt Cô Hạnh - Chợ Thanh Vinh, không phải toàn chợ. Nguồn không nêu giá từng cỡ tô hoặc mức chi tiêu trung bình nên typical=null; dùng khoảng giá món tại đúng quầy, cần xác nhậ; VND ticket_vnd=30000, min_vnd=20000, max_vnd=40000, typical_vnd=30000"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -41985,7 +41985,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"bún mắm thịt luộc chỉ có 10k mà tô to chà bá, bún heo quay thì 15k.\". VND; không quy đổi ngoại tệ. Hai tô bún mắm trong nhận xét Foody về khu ẩm thực chợ Hòa Mỹ. Giá từ nhận xét cũ, chưa xác minh được ngày của chính nhận xét; không xem là báo giá hiện tại bảo đảm. typical=null vì hai lựa chọn khác"
    },
    "dwell": {
     "p25": 30,
@@ -42067,12 +42067,12 @@
      "note": "foody.vn Khu Ẩm Thực Chợ Hoà Mỹ 05:00-19:00"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.foody.vn/da-nang/khu-am-thuc-cho-hoa-my",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"bún mắm thịt luộc chỉ có 10k mà tô to chà bá, bún heo quay thì 15k.\". VND; không quy đổi ngoại tệ. Hai tô bún mắm trong nhận xét Foody về khu ẩm thực chợ Hòa Mỹ. Giá từ nhận xét cũ, chưa xác minh được ngày của chính nhận xét; không xem là báo giá hiện tại bảo đảm. typical=null vì hai lựa chọn khác; VND ticket_vnd=12000, min_vnd=10000, max_vnd=15000, typical_vnd=12000"
     },
     "dwell": {
      "source": "dwell_table_v2:market",
@@ -55255,7 +55255,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Street snacks and drinks | 5,000–35,000 | Entry is free.\". VND từ cột Typical price (VND); bỏ cột USD quy đổi của bài. Trích ô bảng đồ ăn/uống và câu phí vào chợ. Khoảng giá từng món ăn vặt, không dùng 100–250k của quần áo. typical=null; không tự cộng một lượt ghé."
    },
    "dwell": {
     "p25": 45,
@@ -55337,12 +55337,12 @@
      "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "category_default:night_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=30000, max_vnd=150000, typical_vnd=90000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://visitdanang.org/le-duan-night-market-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Street snacks and drinks | 5,000–35,000 | Entry is free.\". VND từ cột Typical price (VND); bỏ cột USD quy đổi của bài. Trích ô bảng đồ ăn/uống và câu phí vào chợ. Khoảng giá từng món ăn vặt, không dùng 100–250k của quần áo. typical=null; không tự cộng một lượt ghé.; VND ticket_vnd=20000, min_vnd=5000, max_vnd=35000, typical_vnd=20000"
     },
     "dwell": {
      "source": "dwell_table_v2:night_market",
@@ -104883,12 +104883,12 @@
      "note": "booking_20261120.json; theo suất, cần đặt trước; đặt: https://familykitchendanang.com/#contact"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://familykitchendanang.com/faq.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"$35 USD per person — all inclusive.\". USD 35/người; quy đổi cố định 25.000 VND/USD theo task: 35 × 25.000 = 875.000 VND. Giá một người cho lớp gồm chợ, nguyên liệu, sáu món, bữa ăn và sách công thức; FAQ nói không phụ thu lớp riêng. Không cộng giá vận chuyển khi nguồn không nêu là bắt buộc.; VND ticket_vnd=875000, min_vnd=875000, max_vnd=875000, typical_vnd=875000"
     },
     "dwell": {
      "source": "web",
@@ -104943,7 +104943,7 @@
    },
    "price": {
     "tier": "expensive",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"From US$ 35.75\". From USD 35.75; 35,75 × 25.000 = 893.750 VND theo tỷ giá task. Nhà cung cấp trên trang là Danang Summer Cooking and Coffee Class; gói 3 Hours Cooking Class. Chỉ là giá khởi điểm, không có trần/giá chốt theo ngày nên typical/max=null. Trang cảnh báo phụ thu lễ trả"
    },
    "dwell": {
     "p25": 180,
@@ -105024,12 +105024,12 @@
      "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.klook.com/en-US/activity/158141-cook-5-dishes-authentic-vietnam-food-and-market-adventure/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"From US$ 35.75\". From USD 35.75; 35,75 × 25.000 = 893.750 VND theo tỷ giá task. Nhà cung cấp trên trang là Danang Summer Cooking and Coffee Class; gói 3 Hours Cooking Class. Chỉ là giá khởi điểm, không có trần/giá chốt theo ngày nên typical/max=null. Trang cảnh báo phụ thu lễ trả; VND ticket_vnd=894000, min_vnd=893750, max_vnd=894000, typical_vnd=894000"
     },
     "dwell": {
      "source": "dwell_table_v2:cooking_class",
@@ -105169,12 +105169,12 @@
      "note": "booking_20261120.json; theo suất, cần đặt trước; đặt: https://danangapronupcookingclass.com/reservation_danang_apron_up_group_cooking_class.html?tour=Daily+Cooking+Group+Tour"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangapronupcookingclass.com/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Price : 32USD/Person /Group Tour ( You are a member of group 6 to 10 People )\". USD 32/người; 32 × 25.000 = 800.000 VND theo task. Chọn giá khuyến mãi lớp ghép nhóm 6–10 người; không dùng giá gạch 45 USD hay bảng lớp riêng theo số khách. Đây là một vé người lớn/gói ghép, không phải thuê cả nhóm.; VND ticket_vnd=800000, min_vnd=800000, max_vnd=800000, typical_vnd=800000"
     },
     "dwell": {
      "source": "web",
@@ -106079,7 +106079,7 @@
    },
    "price": {
     "tier": "expensive",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"570,000vnd/1 adult | SEAT IN COACH: 370,000VND/1PAX\". VND; không quy đổi ngoại tệ. Hai gói khác nhau trên chính trang: 570k/người lớn gồm chợ, thuyền thúng, nấu ăn, đưa đón và nước; gói cooking 2,5 giờ 370k/PAX (giá trẻ em liệt kê riêng). typical chọn gói đầy đủ 570k, min/max là hai"
    },
    "dwell": {
     "p25": 180,
@@ -106160,12 +106160,12 @@
      "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinhvoecocookingclass.com/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"570,000vnd/1 adult | SEAT IN COACH: 370,000VND/1PAX\". VND; không quy đổi ngoại tệ. Hai gói khác nhau trên chính trang: 570k/người lớn gồm chợ, thuyền thúng, nấu ăn, đưa đón và nước; gói cooking 2,5 giờ 370k/PAX (giá trẻ em liệt kê riêng). typical chọn gói đầy đủ 570k, min/max là hai; VND ticket_vnd=570000, min_vnd=370000, max_vnd=570000, typical_vnd=570000"
     },
     "dwell": {
      "source": "dwell_table_v2:cooking_class",
@@ -106219,8 +106219,8 @@
     "archetype": "co_ve"
    },
    "price": {
-    "tier": "expensive",
-    "note": null
+    "tier": "medium",
+    "note": "Giá (Codex t15 20/11/2026): \"The cooking class costs 400,000 vnd for one person and takes about 3 hours.\". VND; không quy đổi ngoại tệ. Câu trả lời của Mi N tại mục Q&A MiMi Cooking Hoi An; giá lịch sử, trang chỉ hiện mốc tương đối hơn một năm nên published_or_updated=null. Cần xác nhận lại trước khi đặt; không coi là giá bảo đảm ngày"
    },
    "dwell": {
     "p25": 180,
@@ -106301,12 +106301,12 @@
      "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.tripadvisor.ie/FAQ_Answers-g298082-d17537825-t7365041-Hello_What_are_the_dishes_made_And_how_much.html",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"The cooking class costs 400,000 vnd for one person and takes about 3 hours.\". VND; không quy đổi ngoại tệ. Câu trả lời của Mi N tại mục Q&A MiMi Cooking Hoi An; giá lịch sử, trang chỉ hiện mốc tương đối hơn một năm nên published_or_updated=null. Cần xác nhận lại trước khi đặt; không coi là giá bảo đảm ngày; VND ticket_vnd=400000, min_vnd=400000, max_vnd=400000, typical_vnd=400000"
     },
     "dwell": {
      "source": "dwell_table_v2:cooking_class",
@@ -106361,7 +106361,7 @@
    },
    "price": {
     "tier": "expensive",
-    "note": null
+    "note": "Giá (Codex t15 20/11/2026): \"Price: USD 30 per person | Public holiday surcharge: USD 9 per person\". USD 30/người; 30 × 25.000 = 750.000 VND theo task; phụ thu lễ quy đổi riêng ở note. Gói Cooking Class Experience, vé Adult 10+ trên lịch giá. Phụ thu lễ bắt buộc khi áp dụng: USD 9 = 225.000 VND/người, chỉ ghi note; ba số chính là giá cơ bản. Không trộn gói chợ/thuyền thúng."
    },
    "dwell": {
     "p25": 180,
@@ -106442,12 +106442,12 @@
      "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://joliecookingclass.com/booking/hoi-an-cooking-class-experience/",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"Price: USD 30 per person | Public holiday surcharge: USD 9 per person\". USD 30/người; 30 × 25.000 = 750.000 VND theo task; phụ thu lễ quy đổi riêng ở note. Gói Cooking Class Experience, vé Adult 10+ trên lịch giá. Phụ thu lễ bắt buộc khi áp dụng: USD 9 = 225.000 VND/người, chỉ ghi note; ba số chính là giá cơ bản. Không trộn gói chợ/thuyền thúng.; VND ticket_vnd=750000, min_vnd=750000, max_vnd=750000, typical_vnd=750000"
     },
     "dwell": {
      "source": "dwell_table_v2:cooking_class",
@@ -106586,12 +106586,12 @@
      "note": "booking_20261120.json; theo suất, cần đặt trước; đặt: https://www.cookly.me/en-ca/do/1187-morning-class-with-market-trip-boat-ride-through-water-coconut-forest/in/hoi-an?currency=USD"
     },
     "price": {
-     "source": "category_default:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG: lớp nấu ăn Đà Nẵng US$29-40/người (cookly/pelago 11/2026); VND min_vnd=750000, max_vnd=1100000, typical_vnd=900000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.cookly.me/en-ca/do/1187-morning-class-with-market-trip-boat-ride-through-water-coconut-forest/in/hoi-an?currency=USD",
+     "verified_at": "2026-11-20",
+     "note": "Giá (Codex t15 20/11/2026): \"US$ 40 | per person\". USD 40/người; 40 × 25.000 = 1.000.000 VND theo task. Thuan Tinh Island: Market, Boat Ride, and Vietnamese Cooking Class; giá gói trong form có Adults. Không trộn tour Sunset khác. Thuyền/chợ thuộc gói; không tự cộng phụ phí. Không lấy ngày của đánh giá; VND ticket_vnd=1000000, min_vnd=1000000, max_vnd=1000000, typical_vnd=1000000"
     },
     "dwell": {
      "source": "web",
@@ -111410,7 +111410,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "Giờ (web, Codex t15 20/11/2026): \"Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm\". Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Cao lầu | 25.000–40.000đ | Vé | Miễn phí\". VND; không quy đổi ngoại tệ. Trích hai dòng bảng: một phần cao lầu tại nhà lồng ẩm thực và phí vào chợ. Không phải vé phố cổ, không gồm quà lưu niệm. Nguồn nói gửi xe có phí nhưng không thấy mức cụ thể; chỉ ghi note. typical=null"
    },
    "dwell": {
     "p25": 30,
@@ -111484,15 +111484,15 @@
      "confidence": 0.6,
      "evidence_url": "https://visitdanang.travel/vi/tron-bo-kinh-nghiem-tham-quan-va-mua-sam-cho-hoi-an-11365",
      "verified_at": "2026-11-20",
-     "note": "Giờ (web, Codex t15 20/11/2026): \"Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm\". Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ."
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm\". Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Cao lầu | 25.000–40.000đ | Vé | Miễn phí\". VND; không quy đổi ngoại tệ. Trích hai dòng bảng: một phần cao lầu tại nhà lồng ẩm thực và phí vào chợ. Không phải vé phố cổ, không gồm quà lưu niệm. Nguồn nói gửi xe có phí nhưng không thấy mức cụ thể; chỉ ghi note. typical=null"
     },
     "price": {
-     "source": "category_default:day_market",
-     "verified_by": "inferred",
-     "confidence": 0.4,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=20000, max_vnd=150000, typical_vnd=85000"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://visitdanang.travel/vi/tron-bo-kinh-nghiem-tham-quan-va-mua-sam-cho-hoi-an-11365",
+     "verified_at": "2026-11-20",
+     "note": "Giờ (web, Codex t15 20/11/2026): \"Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm\". Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ. | Giá (Codex t15 20/11/2026): \"Cao lầu | 25.000–40.000đ | Vé | Miễn phí\". VND; không quy đổi ngoại tệ. Trích hai dòng bảng: một phần cao lầu tại nhà lồng ẩm thực và phí vào chợ. Không phải vé phố cổ, không gồm quà lưu niệm. Nguồn nói gửi xe có phí nhưng không thấy mức cụ thể; chỉ ghi note. typical=null; VND ticket_vnd=32000, min_vnd=25000, max_vnd=40000, typical_vnd=32000"
     },
     "dwell": {
      "source": "dwell_table_v2:market",

@@ -86,3 +86,43 @@ class TestOptimizer(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestMealExperience(unittest.TestCase):
+    """A cooking class over a meal slot IS that meal (optimizer + gate agree)."""
+
+    def _class(self, pid="c1"):
+        return StubPOI(pid, 180, 9 * H + 30, 16 * H, 5.0,
+                       windows=((9 * H + 30, 12 * H + 30), (13 * H, 16 * H)), booking=True)
+
+    def test_class_alone_satisfies_lunch(self):
+        travel = {("depot", "c1"): 10}
+        out = optimize([self._class()], travel, StubTrip(8 * H, 17 * H, "depot"),
+                       lunch_required=True, require_all=True, timeout_s=5)
+        self.assertEqual([a["poi_id"] for a in out["itinerary"]["activities"]], ["c1"])
+
+    def test_no_second_lunch_when_class_covers_it(self):
+        ids = ["c1", "r1"]
+        travel = {(a, b): 10 for a in ["depot"] + ids for b in ids if a != b}
+        trip = StubTrip(8 * H, 20 * H, "depot")
+        # both sessions overlap 11-14 and the restaurant only opens 11-14: no room for it
+        lunch_only = StubPOI("r1", 60, 11 * H, 14 * H, 5.0, restaurant=True, category="restaurant")
+        out = optimize([self._class(), lunch_only], travel, trip, require_all=True, timeout_s=5)
+        self.assertEqual(out["status"], "infeasible")
+        # open until 20:00: it moves to the dinner slot, never a second lunch
+        all_day = StubPOI("r1", 60, 11 * H, 20 * H, 5.0, restaurant=True, category="restaurant")
+        out = optimize([self._class(), all_day], travel, trip, require_all=True, timeout_s=5)
+        r = next(a for a in out["itinerary"]["activities"] if a["poi_id"] == "r1")
+        r_start = int(r["start"][:2]) * H + int(r["start"][3:])
+        self.assertFalse(11 * H <= r_start < 14 * H, r)
+
+    def test_gate_counts_class_as_meal(self):
+        from BE.app.services.gate import check_a1
+        from BE.app.services.soft_rules import lunch_activity
+        pois = {"c1": {"poi_id": "c1", "category": "paid_attraction", "hours": {"kind": "by_booking"}},
+                "r1": {"poi_id": "r1", "category": "restaurant", "cat": "restaurant", "type": "restaurant"}}
+        acts = [{"poi_id": "c1", "start": "09:30", "end": "12:30"},
+                {"poi_id": "r1", "start": "12:45", "end": "13:45"}]
+        self.assertFalse(check_a1({"activities": acts}, {}, pois, {})["passed"])
+        self.assertTrue(check_a1({"activities": acts[:1]}, {}, pois, {})["passed"])
+        self.assertEqual(lunch_activity(acts[:1], pois)["poi_id"], "c1")

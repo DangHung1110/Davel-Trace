@@ -100,9 +100,9 @@
   "user": 2
  },
  "price_verified_by": {
-  "inferred": 820,
-  "user": 8,
-  "agent_web": 48
+  "agent_web": 77,
+  "inferred": 791,
+  "user": 8
  },
  "dwell_verified_by": {
   "inferred": 838,
@@ -110,7 +110,7 @@
  },
  "legacy_hours_nonempty": 776,
  "v1_hours_nonempty": 499,
- "legacy_price_band": 35,
+ "legacy_price_band": 63,
  "legacy_free_entry": 181,
  "hours_conflict": 6,
  "quarantined_pois": 659,
@@ -196,6 +196,6 @@
    "share": 0.87
   }
  ],
- "ticket_todo": 26,
+ "ticket_todo": 19,
  "osm_linked": 317
 }
