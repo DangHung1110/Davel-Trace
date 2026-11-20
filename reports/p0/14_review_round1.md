@@ -180,3 +180,9 @@ Giờ ngoài lưu trú: fixed 234, safe_window 498, by_booking 4, unknown 9.
 
 Codex (t15) đọc web cho 100 điểm giá ước lượng (`reports/p0/links/prices_codex.json`): 35 có số liệu; áp 29 (`agent_web_2026-11-20d.json`). Nhà hàng chỉ nhận chi tiêu trung bình/người — bỏ 6 quán chỉ có giá một món. Chợ/chợ đêm: giá món ăn vặt. Lớp nấu ăn: USD × 25.000.
 Đổi mức: Sơn Trà Marina medium → cheap (60–120k), The Temptation medium → expensive (2–4,9tr/người), Mimi Cooking Class expensive → medium (400k). Giá ngoài lưu trú: ước lượng 677 → 648.
+
+## Kiểm mẫu loại điểm + Jolie + rà soát — 20/11
+
+- **Loại điểm:** 68 điểm ngẫu nhiên phân tầng theo 12 loại (`reports/p0/links/category_sample.json`), Codex đọc tag OSM/web (`category_audit_codex.json`): 49 đúng, 2 sai, 17 chưa rõ (thiếu nguồn, tên khớp loại). Tỉ lệ sai 3,9% (< 5%) → giữ luật phân loại; sửa 2 điểm sai theo tag OSM (`decisions_zfinal_20261120c.json`): Gio coffee → day_market (`shop=gift`), Thác Tóc Tiên → viewpoint (`tourism=viewpoint`).
+- **Jolie (ĐN + Hội An):** người dùng xác nhận 2 suất 09:00-13:00 / 15:00-19:00 → by_booking (6/13 lớp; 7 lớp còn unknown).
+- **Rà soát tự động:** 0 điểm có khung mở < thời gian ở lại; 0 điểm tên "Hội An" sai khu; 3 cặp gần nhau < 80 m là thực thể khác nhau (Nhà Bếp Chợ Hàn/Chợ Hàn, Chợ Cồn/Khu ẩm thực Chợ Cồn, Hát Bài Chòi/Vườn tượng An Hội) → giữ.

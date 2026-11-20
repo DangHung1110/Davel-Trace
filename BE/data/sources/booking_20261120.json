@@ -1,5 +1,5 @@
 {
- "about": "Trải nghiệm theo suất (hours.kind=by_booking), Codex t15 đọc trang lớp học/đặt chỗ 20/11/2026 (reports/p0/links/cooking_sessions_codex.json). Chỉ lớp có lịch suất ghi rõ; lớp khác giữ unknown.",
+ "about": "Trải nghiệm theo suất (hours.kind=by_booking), Codex t15 đọc trang lớp học/đặt chỗ 20/11/2026 (reports/p0/links/cooking_sessions_codex.json). Chỉ lớp có lịch suất ghi rõ; lớp khác giữ unknown. Jolie (ĐN, Hội An): người dùng xác nhận 2 suất 09:00-13:00 và 15:00-19:00 (20/11).",
  "checked_at": "2026-11-20",
  "items": [
   {
@@ -60,6 +60,34 @@
    "evidence_url": "https://www.cookly.me/en-ca/do/1187-morning-class-with-market-trip-boat-ride-through-water-coconut-forest/in/hoi-an?currency=USD",
    "price_note": "US$ 40/người lớn; Gói Market, Boat Ride and Vietnamese Cooking Class của Thuan Tinh Island, không trộn gói Sunset 3,5 giờ/$27. Ca tính toàn tour từ đón đến trả khách; nguồn ghi rõ cả bốn mốc và 5 giờ. Gồm chợ, thuyền sông/thuyền chèo qua rừng dừa, nguyên liệu, nấu ăn và đón khách; không tự đồng nhất mọi đoạn thuyền với thuyền thúng. Chưa xác minh ngày nghỉ.",
    "quote": "8:30am • 11:30am\n5 hours\nAdults\nUS$ 40\n1:30 pm: Return back to your hotel\n4:30 pm: Return back to your hotel\nBoat ride"
+  },
+  {
+   "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+   "name": "Jolie Cooking Class",
+   "sessions": [
+    "09:00-13:00",
+    "15:00-19:00"
+   ],
+   "closed_days": [],
+   "duration_min": 240,
+   "booking_url": "https://joliecookingclass.com/booking/da-nang-market-cooking-experience/",
+   "evidence_url": "https://joliecookingclass.com/booking/da-nang-market-cooking-experience/",
+   "price_note": "USD 40 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026).",
+   "quote": "09:00 / 15:00 – Meet at the meeting point ... 13:00 / 19:00 – Relax, share stories, and enjoy local hospitality"
+  },
+  {
+   "poi_id": "ChIJddXz2K8PQjER4enhapQvvo8",
+   "name": "Cooking With Jolie In Hoi An – Vietnamese Cooking Class",
+   "sessions": [
+    "09:00-13:00",
+    "15:00-19:00"
+   ],
+   "closed_days": [],
+   "duration_min": 240,
+   "booking_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
+   "evidence_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
+   "price_note": "USD 30 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026).",
+   "quote": "09:00 / 15:00 – Meet at the meeting point ... 13:00 / 19:00 – Relax, share stories, and enjoy local hospitality"
   }
  ]
 }

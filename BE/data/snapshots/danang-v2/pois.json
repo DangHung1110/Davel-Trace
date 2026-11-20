@@ -20,11 +20,11 @@
  "count_by_category": {
   "restaurant": 169,
   "nightlife": 91,
-  "cafe": 131,
-  "day_market": 48,
-  "viewpoint": 22,
+  "cafe": 130,
+  "day_market": 49,
+  "viewpoint": 23,
   "religious": 94,
-  "outdoor_landmark": 65,
+  "outdoor_landmark": 64,
   "museum_indoor": 22,
   "paid_attraction": 50,
   "lodging": 76,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 92,
+ "applied_decisions": 94,
  "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
  "count_new_pois": 134,
@@ -56,8 +56,8 @@
  "count_by_hours_kind": {
   "safe_window": 532,
   "fixed": 249,
-  "unknown": 91,
-  "by_booking": 4
+  "unknown": 89,
+  "by_booking": 6
  },
  "pois": [
   {
@@ -47637,7 +47637,7 @@
    "name_en": null,
    "lat": 16.0244662,
    "lon": 108.0262303,
-   "category": "outdoor_landmark",
+   "category": "viewpoint",
    "role": "attraction",
    "status": "active",
    "status_reason": null,
@@ -47725,12 +47725,12 @@
      "note": null
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.8,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "override:Thác Tóc Tiên"
+     "note": "decisions_zfinal_20261120c.json"
     },
     "hours": {
      "source": "archetype:ngoai_troi_tu_nhien",
@@ -52622,8 +52622,8 @@
    "name_en": null,
    "lat": 16.0692623,
    "lon": 108.2376088,
-   "category": "cafe",
-   "role": "rest",
+   "category": "day_market",
+   "role": "attraction",
    "status": "active",
    "status_reason": null,
    "zone": "son_tra_my_khe",
@@ -52641,7 +52641,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "OSM shop=gift (cửa hàng quà lưu niệm), không phải quán cà phê dù tên có 'coffee'."
    },
    "dwell": {
     "p25": 30,
@@ -52707,12 +52707,12 @@
      "note": null
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "name:coffee;type:Cửa hàng quà lưu niệm"
+     "note": "decisions_zfinal_20261120c.json"
     },
     "hours": {
      "source": "archetype:cafe",
@@ -105362,19 +105362,22 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "09:00-13:00",
+     "15:00-19:00"
+    ],
+    "kind": "by_booking",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
     "tier": "expensive",
-    "note": "US$40/người trên cookly (Jolie Da Nang Cooking Class with Local Market Tour) ≈ 1.040.000 VND."
+    "note": "USD 40 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026)."
    },
    "dwell": {
-    "p25": 180,
-    "p50": 210,
+    "p25": 240,
+    "p50": 240,
     "p75": 240
    },
    "tags": {
@@ -105443,12 +105446,12 @@
      "note": "name:cooking class;type:Lớp học nấu ăn"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://joliecookingclass.com/booking/da-nang-market-cooking-experience/",
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "note": "booking_20261120.json; theo suất, cần đặt trước; đặt: https://joliecookingclass.com/booking/da-nang-market-cooking-experience/"
     },
     "price": {
      "source": "web",
@@ -105459,12 +105462,12 @@
      "note": "US$40/người trên cookly (Jolie Da Nang Cooking Class with Local Market Tour) ≈ 1.040.000 VND.; VND ticket_vnd=1040000, min_vnd=1040000, max_vnd=1040000, typical_vnd=1040000"
     },
     "dwell": {
-     "source": "dwell_table_v2:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.4,
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+     "note": "booking_20261120.json; = độ dài suất"
     },
     "tags": {
      "source": "rule_v1",
@@ -106353,19 +106356,22 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "09:00-13:00",
+     "15:00-19:00"
+    ],
+    "kind": "by_booking",
     "closed_days": [],
     "access_window": null,
     "archetype": "co_ve"
    },
    "price": {
     "tier": "expensive",
-    "note": "Giá (Codex t15 20/11/2026): \"Price: USD 30 per person | Public holiday surcharge: USD 9 per person\". USD 30/người; 30 × 25.000 = 750.000 VND theo task; phụ thu lễ quy đổi riêng ở note. Gói Cooking Class Experience, vé Adult 10+ trên lịch giá. Phụ thu lễ bắt buộc khi áp dụng: USD 9 = 225.000 VND/người, chỉ ghi note; ba số chính là giá cơ bản. Không trộn gói chợ/thuyền thúng."
+    "note": "USD 30 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026)."
    },
    "dwell": {
-    "p25": 180,
-    "p50": 210,
+    "p25": 240,
+    "p50": 240,
     "p75": 240
    },
    "tags": {
@@ -106434,12 +106440,12 @@
      "note": "name:cooking class;type:Lớp học nấu ăn"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "note": "booking_20261120.json; theo suất, cần đặt trước; đặt: https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/"
     },
     "price": {
      "source": "web",
@@ -106450,12 +106456,12 @@
      "note": "Giá (Codex t15 20/11/2026): \"Price: USD 30 per person | Public holiday surcharge: USD 9 per person\". USD 30/người; 30 × 25.000 = 750.000 VND theo task; phụ thu lễ quy đổi riêng ở note. Gói Cooking Class Experience, vé Adult 10+ trên lịch giá. Phụ thu lễ bắt buộc khi áp dụng: USD 9 = 225.000 VND/người, chỉ ghi note; ba số chính là giá cơ bản. Không trộn gói chợ/thuyền thúng.; VND ticket_vnd=750000, min_vnd=750000, max_vnd=750000, typical_vnd=750000"
     },
     "dwell": {
-     "source": "dwell_table_v2:cooking_class",
-     "verified_by": "inferred",
-     "confidence": 0.4,
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+     "note": "booking_20261120.json; = độ dài suất"
     },
     "tags": {
      "source": "rule_v1",

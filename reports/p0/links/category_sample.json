@@ -1,0 +1,698 @@
+{
+ "categories": [
+  "beach",
+  "cafe",
+  "day_market",
+  "museum_indoor",
+  "night_market",
+  "nightlife",
+  "outdoor_landmark",
+  "paid_attraction",
+  "religious",
+  "restaurant",
+  "viewpoint",
+  "wellness"
+ ],
+ "items": [
+  {
+   "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
+   "name": "Bãi tắm Nguyễn Thần Hiến",
+   "name_raw": "Bãi tắm Nguyễn Thần Hiến",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "lat": 15.994815,
+   "lon": 108.273776,
+   "rule_evidence": "name:bai tam"
+  },
+  {
+   "poi_id": "osm:node/4347089780",
+   "name": "My An Beach",
+   "name_raw": "My An Beach",
+   "category": "beach",
+   "zone": "ngu_hanh_son",
+   "lat": 16.025095,
+   "lon": 108.259534,
+   "rule_evidence": "name:beach;type:Bãi biển"
+  },
+  {
+   "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
+   "name": "Bãi tắm Sao Biển",
+   "name_raw": "Bãi tắm Sao Biển",
+   "category": "beach",
+   "zone": "son_tra_my_khe",
+   "lat": 16.047601,
+   "lon": 108.250222,
+   "rule_evidence": "name:bai tam;type:Câu lạc bộ bãi biển"
+  },
+  {
+   "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
+   "name": "Sound Cafe",
+   "name_raw": "Sound Cafe",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "lat": 16.075074,
+   "lon": 108.241278,
+   "rule_evidence": "name:cafe;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
+   "name": "CaFe Mộc Gia",
+   "name_raw": "CaFe Mộc Gia",
+   "category": "cafe",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.06594,
+   "lon": 108.148831,
+   "rule_evidence": "name:cafe;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
+   "name": "The Hideout café",
+   "name_raw": "The Hideout café",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "lat": 16.053405,
+   "lon": 108.240431,
+   "rule_evidence": "name:cafe;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
+   "name": "IKIGAI CAFE",
+   "name_raw": "IKIGAI CAFE",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "lat": 16.090492,
+   "lon": 108.230783,
+   "rule_evidence": "name:cafe;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
+   "name": "IKIGAI . garden . cafe",
+   "name_raw": "IKIGAI . garden . cafe",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "lat": 16.074022,
+   "lon": 108.220596,
+   "rule_evidence": "name:cafe;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
+   "name": "Paradise coffee",
+   "name_raw": "Paradise coffee",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "lat": 16.098845,
+   "lon": 108.224925,
+   "rule_evidence": "name:coffee;type:Quán cà phê"
+  },
+  {
+   "poi_id": "osm:node/7477670191",
+   "name": "Gio coffee",
+   "name_raw": "Gio coffee",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "lat": 16.069262,
+   "lon": 108.237609,
+   "rule_evidence": "name:coffee;type:Cửa hàng quà lưu niệm"
+  },
+  {
+   "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
+   "name": "TIME COFFEE",
+   "name_raw": "TIME COFFEE",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "lat": 16.086166,
+   "lon": 108.229003,
+   "rule_evidence": "name:coffee;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
+   "name": "JEJU coffee",
+   "name_raw": "JEJU coffee",
+   "category": "cafe",
+   "zone": "son_tra_my_khe",
+   "lat": 16.099964,
+   "lon": 108.232287,
+   "rule_evidence": "name:coffee;type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
+   "name": "Highlands",
+   "name_raw": "Highlands",
+   "category": "cafe",
+   "zone": "trung_tam",
+   "lat": 16.065478,
+   "lon": 108.194781,
+   "rule_evidence": "type:Quán cà phê"
+  },
+  {
+   "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
+   "name": "LE'O COFFEE & TEA",
+   "name_raw": "LE'O COFFEE & TEA",
+   "category": "cafe",
+   "zone": "ngu_hanh_son",
+   "lat": 15.981251,
+   "lon": 108.250005,
+   "rule_evidence": "name:coffee;type:Quán cà phê"
+  },
+  {
+   "poi_id": "osm:node/14045130739",
+   "name": "Made in Vietnam",
+   "name_raw": "Made in Vietnam",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "lat": 16.055641,
+   "lon": 108.202221,
+   "rule_evidence": "type:Cửa hàng quà lưu niệm"
+  },
+  {
+   "poi_id": "osm:node/9921315929",
+   "name": "Lưu Niệm - Đặc Sản",
+   "name_raw": "Lưu Niệm - Đặc Sản",
+   "category": "day_market",
+   "zone": "trung_tam",
+   "lat": 16.052667,
+   "lon": 108.202501,
+   "rule_evidence": "name:dac san;type:Cửa hàng quà lưu niệm"
+  },
+  {
+   "poi_id": "osm:node/4386676224",
+   "name": "Chợ Miếu Bông",
+   "name_raw": "Chợ Miếu Bông",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "lat": 15.97989,
+   "lon": 108.208979,
+   "rule_evidence": "name:chợ;type:Chợ"
+  },
+  {
+   "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+   "name": "Chợ Non Nước",
+   "name_raw": "Chợ Non Nước",
+   "category": "day_market",
+   "zone": "ngu_hanh_son",
+   "lat": 15.995211,
+   "lon": 108.257204,
+   "rule_evidence": "name:chợ"
+  },
+  {
+   "poi_id": "osm:node/7127464285",
+   "name": "Bảo tàng Y học Cổ truyền Hội An",
+   "name_raw": "Hoi An Museum of Traditional Medicine",
+   "category": "museum_indoor",
+   "zone": "hoi_an",
+   "lat": 15.876649,
+   "lon": 108.329838,
+   "rule_evidence": "curated_osm:museum_indoor"
+  },
+  {
+   "poi_id": "osm:node/4279640089",
+   "name": "Nhà cổ Phùng Hưng",
+   "name_raw": "Nhà cổ Phùng Hưng",
+   "category": "museum_indoor",
+   "zone": "hoi_an",
+   "lat": 15.877219,
+   "lon": 108.32579,
+   "rule_evidence": "curated_osm:museum_indoor"
+  },
+  {
+   "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
+   "name": "Bảo tàng Mỹ thuật Đà Nẵng",
+   "name_raw": "Bảo tàng Mỹ thuật Đà Nẵng",
+   "category": "museum_indoor",
+   "zone": "trung_tam",
+   "lat": 16.071302,
+   "lon": 108.21772,
+   "rule_evidence": "name:bao tang;type:Bảo tàng nghệ thuật"
+  },
+  {
+   "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+   "name": "Chợ Đêm An Thượng",
+   "name_raw": "Chợ Đêm An Thượng",
+   "category": "night_market",
+   "zone": "son_tra_my_khe",
+   "lat": 16.05027,
+   "lon": 108.247707,
+   "rule_evidence": "name:cho dem;type:Chợ đêm"
+  },
+  {
+   "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
+   "name": "Chợ đêm Helio - B. Night Market",
+   "name_raw": "Chợ đêm Helio - B. Night Market",
+   "category": "night_market",
+   "zone": "trung_tam",
+   "lat": 16.037223,
+   "lon": 108.224557,
+   "rule_evidence": "name:cho dem;type:Chợ đêm"
+  },
+  {
+   "poi_id": "osm:node/12333995781",
+   "name": "Chợ đêm Lê Duẩn",
+   "name_raw": "Chợ đêm Lê Duẩn",
+   "category": "night_market",
+   "zone": "trung_tam",
+   "lat": 16.070751,
+   "lon": 108.215016,
+   "rule_evidence": "name:cho dem;type:Chợ"
+  },
+  {
+   "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
+   "name": "Unicorn Chill Zone",
+   "name_raw": "Unicorn Chill Zone",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "lat": 16.050989,
+   "lon": 108.243041,
+   "rule_evidence": "type:Quán bar"
+  },
+  {
+   "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
+   "name": "The Roof - Da Nang",
+   "name_raw": "The Roof - Da Nang",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "lat": 16.06753,
+   "lon": 108.246047,
+   "rule_evidence": "name:the roof;type:Quán bar cocktail"
+  },
+  {
+   "poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60",
+   "name": "Quán nhậu Keo Lá Tràm",
+   "name_raw": "Quán nhậu Keo Lá Tràm",
+   "category": "nightlife",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.093975,
+   "lon": 108.111034,
+   "rule_evidence": "name:nhậu;type:Quán bar"
+  },
+  {
+   "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+   "name": "Writer's Bar",
+   "name_raw": "Writer's Bar",
+   "category": "nightlife",
+   "zone": "ngu_hanh_son",
+   "lat": 16.006661,
+   "lon": 108.266467,
+   "rule_evidence": "name:bar;type:Quán bar"
+  },
+  {
+   "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+   "name": "N Pub",
+   "name_raw": "N Pub",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "lat": 16.050733,
+   "lon": 108.244194,
+   "rule_evidence": "name:pub;type:Quán bar"
+  },
+  {
+   "poi_id": "ChIJY_iyslwXQjERFoDw4waR2Sg",
+   "name": "The Trip 66",
+   "name_raw": "The Trip 66",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "lat": 16.039802,
+   "lon": 108.249286,
+   "rule_evidence": "type:Quán bar"
+  },
+  {
+   "poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA",
+   "name": "Chevy",
+   "name_raw": "Chevy",
+   "category": "nightlife",
+   "zone": "son_tra_my_khe",
+   "lat": 16.049786,
+   "lon": 108.247481,
+   "rule_evidence": "type:Quán bar"
+  },
+  {
+   "poi_id": "osm:node/2177056870",
+   "name": "Thác Tóc Tiên",
+   "name_raw": "Thác Tóc Tiên",
+   "category": "outdoor_landmark",
+   "zone": "ba_na_tay",
+   "lat": 16.024466,
+   "lon": 108.02623,
+   "rule_evidence": "override:Thác Tóc Tiên"
+  },
+  {
+   "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+   "name": "Làng Bích họa Đà Nẵng",
+   "name_raw": "Làng Bích họa Đà Nẵng",
+   "category": "outdoor_landmark",
+   "zone": "trung_tam",
+   "lat": 16.06073,
+   "lon": 108.220053,
+   "rule_evidence": "name:làng"
+  },
+  {
+   "poi_id": "osm:node/10709738006",
+   "name": "Làng mộc Kim Bồng",
+   "name_raw": "Làng mộc Kim Bồng",
+   "category": "outdoor_landmark",
+   "zone": "hoi_an",
+   "lat": 15.864517,
+   "lon": 108.325302,
+   "rule_evidence": "curated_osm:outdoor_landmark"
+  },
+  {
+   "poi_id": "osm:node/10709738105",
+   "name": "Làng nước mắm Nam Ô",
+   "name_raw": "Làng nước mắm Nam Ô",
+   "category": "outdoor_landmark",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.112831,
+   "lon": 108.13009,
+   "rule_evidence": "name:làng"
+  },
+  {
+   "poi_id": "osm:node/13677406601",
+   "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+   "name_raw": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
+   "category": "outdoor_landmark",
+   "zone": "son_tra_my_khe",
+   "lat": 16.121001,
+   "lon": 108.257229,
+   "rule_evidence": "name:memorial;type:Đài tưởng niệm"
+  },
+  {
+   "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+   "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+   "name_raw": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "lat": 15.87408,
+   "lon": 108.374537,
+   "rule_evidence": "name:thuyen thung;type:Đại lý du lịch bằng thuyền"
+  },
+  {
+   "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+   "name": "Jolie Cooking Class",
+   "name_raw": "Jolie Cooking Class",
+   "category": "paid_attraction",
+   "zone": "son_tra_my_khe",
+   "lat": 16.059846,
+   "lon": 108.235315,
+   "rule_evidence": "name:cooking class;type:Lớp học nấu ăn"
+  },
+  {
+   "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+   "name": "Rừng Dừa Bảy Mẫu",
+   "name_raw": "Rừng Dừa Bảy Mẫu",
+   "category": "paid_attraction",
+   "zone": "hoi_an",
+   "lat": 15.878298,
+   "lon": 108.372455,
+   "rule_evidence": "override:Rừng Dừa Bảy Mẫu"
+  },
+  {
+   "poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA",
+   "name": "Chùa Báo Ân",
+   "name_raw": "Chùa Báo Ân",
+   "category": "religious",
+   "zone": "trung_tam",
+   "lat": 16.05275,
+   "lon": 108.209505,
+   "rule_evidence": "name:chua;type:Chùa phật giáo"
+  },
+  {
+   "poi_id": "ChIJA8a2aLcQQjER5mciBxvjUVs",
+   "name": "Chùa Long Hoa",
+   "name_raw": "Chùa Long Hoa",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "lat": 16.005235,
+   "lon": 108.257361,
+   "rule_evidence": "name:chua;type:Chùa phật giáo"
+  },
+  {
+   "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
+   "name": "Chùa Quán Thế Âm",
+   "name_raw": "Chùa Quán Thế Âm",
+   "category": "religious",
+   "zone": "ngu_hanh_son",
+   "lat": 15.998751,
+   "lon": 108.255143,
+   "rule_evidence": "name:chua"
+  },
+  {
+   "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+   "name": "Chùa Linh Ứng - Bà Nà",
+   "name_raw": "Chùa Linh Ứng - Bà Nà",
+   "category": "religious",
+   "zone": "ba_na_tay",
+   "lat": 15.997136,
+   "lon": 107.994044,
+   "rule_evidence": "name:chua;type:Chùa phật giáo"
+  },
+  {
+   "poi_id": "ChIJRZhHIMkZQjERYBH-5S1xKNg",
+   "name": "Chùa Phổ Đà",
+   "name_raw": "Chùa Phổ Đà",
+   "category": "religious",
+   "zone": "trung_tam",
+   "lat": 16.055951,
+   "lon": 108.218656,
+   "rule_evidence": "name:chua;type:Chùa phật giáo"
+  },
+  {
+   "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
+   "name": "Nhà thờ Tộc Hồ Thanh Khê",
+   "name_raw": "Nhà thờ Tộc Hồ Thanh Khê",
+   "category": "religious",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.073022,
+   "lon": 108.18461,
+   "rule_evidence": "override:Nhà thờ Tộc Hồ Thanh Khê"
+  },
+  {
+   "poi_id": "osm:node/2092582385",
+   "name": "Hội quán Hải Nam",
+   "name_raw": "Hội quán Hải Nam",
+   "category": "religious",
+   "zone": "hoi_an",
+   "lat": 15.87787,
+   "lon": 108.331996,
+   "rule_evidence": "curated_osm:religious"
+  },
+  {
+   "poi_id": "osm:node/5923288385",
+   "name": "Firefly Restaurant & Bar",
+   "name_raw": "Firefly Restaurant & Bar",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "lat": 15.876053,
+   "lon": 108.34633,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "osm:node/7003805266",
+   "name": "Nha Hang Chay ROM",
+   "name_raw": "Nha Hang Chay ROM",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "lat": 15.887604,
+   "lon": 108.33031,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
+   "name": "Nhà hàng Tiệc cưới Hưng Gia Trần",
+   "name_raw": "Nhà hàng Tiệc cưới Hưng Gia Trần",
+   "category": "restaurant",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.079735,
+   "lon": 108.168945,
+   "rule_evidence": "name:nha hang;type:Nhà hàng"
+  },
+  {
+   "poi_id": "osm:node/4225643190",
+   "name": "Phố Xưa",
+   "name_raw": "Phố Xưa",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "lat": 15.878327,
+   "lon": 108.330014,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "osm:node/5447259721",
+   "name": "Vy's Market Restaurant & Cooking School",
+   "name_raw": "Vy's Market Restaurant & Cooking School",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "lat": 15.8756,
+   "lon": 108.326035,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+   "name": "Quán mỳ quảng Bà Minh",
+   "name_raw": "Quán mỳ quảng Bà Minh",
+   "category": "restaurant",
+   "zone": "ngu_hanh_son",
+   "lat": 16.011947,
+   "lon": 108.255623,
+   "rule_evidence": "name:quán;type:Quán mì"
+  },
+  {
+   "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
+   "name": "Nhà hàng Mr.Anh",
+   "name_raw": "Nhà hàng Mr.Anh",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "lat": 16.067772,
+   "lon": 108.213794,
+   "rule_evidence": "name:nha hang;type:Nhà hàng Việt Nam"
+  },
+  {
+   "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
+   "name": "Hải Sản Ku Tom Đà Nẵng",
+   "name_raw": "Hải Sản Ku Tom Đà Nẵng",
+   "category": "restaurant",
+   "zone": "son_tra_my_khe",
+   "lat": 16.065721,
+   "lon": 108.243372,
+   "rule_evidence": "name:hai san;type:Nhà hàng hải sản"
+  },
+  {
+   "poi_id": "osm:node/4401168602",
+   "name": "Nha Hang Com Nieu Hong Phuc 3",
+   "name_raw": "Nha Hang Com Nieu Hong Phuc 3",
+   "category": "restaurant",
+   "zone": "ba_na_tay",
+   "lat": 16.027208,
+   "lon": 108.062166,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
+   "name": "Mì Quảng Bà Vị",
+   "name_raw": "Mì Quảng Bà Vị",
+   "category": "restaurant",
+   "zone": "son_tra_my_khe",
+   "lat": 16.048559,
+   "lon": 108.240433,
+   "rule_evidence": "name:mì;type:Quán mì"
+  },
+  {
+   "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
+   "name": "Nhà Hàng Hải Sản - Ơ Kìa",
+   "name_raw": "Nhà Hàng Hải Sản - Ơ Kìa",
+   "category": "restaurant",
+   "zone": "trung_tam",
+   "lat": 16.080108,
+   "lon": 108.223099,
+   "rule_evidence": "name:nha hang;type:Nhà hàng hải sản"
+  },
+  {
+   "poi_id": "osm:node/13164974235",
+   "name": "Bikini Bottom Express Hoi An Riverside",
+   "name_raw": "Bikini Bottom Express Hoi An Riverside",
+   "category": "restaurant",
+   "zone": "hoi_an",
+   "lat": 15.877318,
+   "lon": 108.338637,
+   "rule_evidence": "curated_osm:restaurant"
+  },
+  {
+   "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
+   "name": "Quán Hải Sản Thời Cổ Đà Nẵng - Seafood Restaurant",
+   "name_raw": "Quán Hải Sản Thời Cổ Đà Nẵng - Seafood Restaurant",
+   "category": "restaurant",
+   "zone": "son_tra_my_khe",
+   "lat": 16.043863,
+   "lon": 108.247314,
+   "rule_evidence": "name:restaurant;type:Nhà hàng hải sản"
+  },
+  {
+   "poi_id": "osm:node/2093848431",
+   "name": "Mộc Sơn",
+   "name_raw": "Mộc Sơn",
+   "category": "viewpoint",
+   "zone": "ngu_hanh_son",
+   "lat": 16.000003,
+   "lon": 108.262175,
+   "rule_evidence": "type:Đỉnh núi;name:sơn"
+  },
+  {
+   "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
+   "name": "View Ngắm Bình Minh Sơn Trà",
+   "name_raw": "View Ngắm Bình Minh Sơn Trà",
+   "category": "viewpoint",
+   "zone": "son_tra_my_khe",
+   "lat": 16.102437,
+   "lon": 108.308145,
+   "rule_evidence": "name:view"
+  },
+  {
+   "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+   "name": "Đỉnh Bàn Cờ",
+   "name_raw": "Đỉnh Bàn Cờ",
+   "category": "viewpoint",
+   "zone": "son_tra_my_khe",
+   "lat": 16.118937,
+   "lon": 108.271983,
+   "rule_evidence": "name:đỉnh"
+  },
+  {
+   "poi_id": "ChIJr3x17yAXQjER8gIQveo92QM",
+   "name": "Hi Spa - Local Wellness Spa",
+   "name_raw": "Hi Spa - Local Wellness Spa",
+   "category": "wellness",
+   "zone": "son_tra_my_khe",
+   "lat": 16.084983,
+   "lon": 108.246379,
+   "rule_evidence": "name:spa;type:Spa sức khỏe"
+  },
+  {
+   "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
+   "name": "HAPPY SPA",
+   "name_raw": "HAPPY SPA",
+   "category": "wellness",
+   "zone": "son_tra_my_khe",
+   "lat": 16.080595,
+   "lon": 108.245457,
+   "rule_evidence": "name:spa;type:Spa"
+  },
+  {
+   "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
+   "name": "Tigon massa - Spa & Massage Đà Nẵng",
+   "name_raw": "Tigon massa - Spa & Massage Đà Nẵng",
+   "category": "wellness",
+   "zone": "trung_tam",
+   "lat": 16.033862,
+   "lon": 108.223931,
+   "rule_evidence": "name:spa;type:Spa"
+  },
+  {
+   "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
+   "name": "le vénin spa",
+   "name_raw": "le vénin spa",
+   "category": "wellness",
+   "zone": "son_tra_my_khe",
+   "lat": 16.069242,
+   "lon": 108.23635,
+   "rule_evidence": "name:spa;type:Spa"
+  },
+  {
+   "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
+   "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+   "name_raw": "CAMY SPA Liên Chiểu , Đà Nẵng",
+   "category": "wellness",
+   "zone": "hai_van_lien_chieu",
+   "lat": 16.070707,
+   "lon": 108.144441,
+   "rule_evidence": "name:spa;type:Spa"
+  },
+  {
+   "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
+   "name": "Spa Luna",
+   "name_raw": "Spa Luna",
+   "category": "wellness",
+   "zone": "ngu_hanh_son",
+   "lat": 16.000614,
+   "lon": 108.262424,
+   "rule_evidence": "name:spa;type:Spa y tế"
+  }
+ ]
+}
