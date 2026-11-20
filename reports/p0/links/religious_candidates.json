@@ -1,0 +1,1042 @@
+[
+ {
+  "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
+  "name": "Sơn Trà Tịnh Viên",
+  "name_raw": "Sơn Trà Tịnh Viên",
+  "zone": "son_tra_my_khe",
+  "lat": 16.114732,
+  "lon": 108.257247,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJodkOVL8fQjERGwRf5tBRLvI",
+  "name": "Di tích Đình Hồng Phước",
+  "name_raw": "Di tích Đình Hồng Phước",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.090223,
+  "lon": 108.119623,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
+  "name": "Nhà thờ Tộc Hồ Thanh Khê",
+  "name_raw": "Nhà thờ Tộc Hồ Thanh Khê",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.073022,
+  "lon": 108.18461,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJiXlEK7IRQjERvpdL4vcW86w",
+  "name": "Tượng Phật Đá Phan Sơn",
+  "name_raw": "Tượng Phật Đá Phan Sơn",
+  "zone": "ngu_hanh_son",
+  "lat": 15.989735,
+  "lon": 108.251312,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/1335374809",
+  "name": "chùa am Nam Ngư",
+  "name_raw": "chùa am Nam Ngư",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.231784,
+  "lon": 108.08647,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/1335374858",
+  "name": "chùa am thờ Hỏa Xa",
+  "name_raw": "chùa am thờ Hỏa Xa",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.220727,
+  "lon": 108.085966,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/1335374873",
+  "name": "chùa An Cư Tây",
+  "name_raw": "chùa An Cư Tây",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.221481,
+  "lon": 108.040981,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/3760247201",
+  "name": "chùa Vu Lan",
+  "name_raw": "chùa Vu Lan",
+  "zone": "trung_tam",
+  "lat": 16.052013,
+  "lon": 108.219568,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/3760247202",
+  "name": "chùa Sư Nữ",
+  "name_raw": "chùa Sư Nữ",
+  "zone": "trung_tam",
+  "lat": 16.053315,
+  "lon": 108.219571,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/3760272162",
+  "name": "Chùa Tam Bảo (Chùa Tam Bảo Theravāda)",
+  "name_raw": "Chùa Tam Bảo (Chùa Tam Bảo Theravāda)",
+  "zone": "trung_tam",
+  "lat": 16.058187,
+  "lon": 108.219347,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/3763846156",
+  "name": "Chùa Pháp Lâm",
+  "name_raw": "Chùa Pháp Lâm",
+  "zone": "trung_tam",
+  "lat": 16.062286,
+  "lon": 108.215534,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4005611262",
+  "name": "Đền thờ Tiền Hiền làng Lổ Giang",
+  "name_raw": "Đền thờ Tiền Hiền làng Lổ Giang",
+  "zone": "trung_tam",
+  "lat": 15.99761,
+  "lon": 108.212169,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4005611263",
+  "name": "Đình Lổ Giáng",
+  "name_raw": "Đình Lổ Giáng",
+  "zone": "trung_tam",
+  "lat": 15.998295,
+  "lon": 108.212471,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4280016689",
+  "name": "Chùa Giác Hoàng Viên",
+  "name_raw": "Chùa Giác Hoàng Viên",
+  "zone": "ngu_hanh_son",
+  "lat": 16.005616,
+  "lon": 108.254634,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4294139091",
+  "name": "nhà thờ An Ngãi Tây",
+  "name_raw": "nhà thờ An Ngãi Tây",
+  "zone": "ba_na_tay",
+  "lat": 16.068114,
+  "lon": 108.10439,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4294143691",
+  "name": "Nhà thờ Giáo xứ An Thượng",
+  "name_raw": "Nhà thờ Giáo xứ An Thượng",
+  "zone": "son_tra_my_khe",
+  "lat": 16.048073,
+  "lon": 108.240888,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/4294167889",
+  "name": "nhà thờ Tùng Sơn",
+  "name_raw": "nhà thờ Tùng Sơn",
+  "zone": "ba_na_tay",
+  "lat": 16.060964,
+  "lon": 108.096969,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/5421670780",
+  "name": "Chùa An Phước",
+  "name_raw": "Chùa An Phước",
+  "zone": "trung_tam",
+  "lat": 16.063448,
+  "lon": 108.2316,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/5432701004",
+  "name": "Nhà thờ Hoà Cường",
+  "name_raw": "Nhà thờ Hoà Cường",
+  "zone": "trung_tam",
+  "lat": 16.044099,
+  "lon": 108.209793,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/11359603957",
+  "name": "Chùa Nam Sơn",
+  "name_raw": "Chùa Nam Sơn",
+  "zone": "trung_tam",
+  "lat": 15.998799,
+  "lon": 108.205104,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/12404434601",
+  "name": "Khu Văn hóa Tâm linh Đà Sơn",
+  "name_raw": "Khu Văn hóa Tâm linh Đà Sơn",
+  "zone": "trung_tam",
+  "lat": 16.041857,
+  "lon": 108.147778,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/12603319867",
+  "name": "Nhà thờ Thanh Bình",
+  "name_raw": "Nhà thờ Thanh Bình",
+  "zone": "trung_tam",
+  "lat": 16.076662,
+  "lon": 108.213286,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/13484040419",
+  "name": "Đền Bà Càn Khôn",
+  "name_raw": "Đền Bà Càn Khôn",
+  "zone": "son_tra_my_khe",
+  "lat": 16.104021,
+  "lon": 108.285991,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/13687068650",
+  "name": "Linh Phong Bảo Tháp",
+  "name_raw": "Linh Phong Bảo Tháp",
+  "zone": "ba_na_tay",
+  "lat": 15.998097,
+  "lon": 107.985969,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/13734880501",
+  "name": "Tượng Phật Phước Lý",
+  "name_raw": "Tượng Phật Phước Lý",
+  "zone": "trung_tam",
+  "lat": 16.040563,
+  "lon": 108.148938,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJuaI3VgMZQjER0B4a7LcJ-YA",
+  "name": "Nhà Thờ Giáo Xứ An Hòa",
+  "name_raw": "Nhà Thờ Giáo Xứ An Hòa",
+  "zone": "trung_tam",
+  "lat": 16.052799,
+  "lon": 108.183279,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJJ2sLdT4YQjERi930NC-XCo0",
+  "name": "Nhà Thờ Giáo Xứ Thanh Đức",
+  "name_raw": "Nhà Thờ Giáo Xứ Thanh Đức",
+  "zone": "trung_tam",
+  "lat": 16.084422,
+  "lon": 108.220654,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJxdBK6SsYQjERYojL_cVEkbs",
+  "name": "Nhà thờ Giáo xứ An Hải",
+  "name_raw": "Nhà thờ Giáo xứ An Hải",
+  "zone": "trung_tam",
+  "lat": 16.069251,
+  "lon": 108.229807,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
+  "name": "Nhà thờ Thánh Giuse lao công",
+  "name_raw": "Nhà thờ Thánh Giuse lao công",
+  "zone": "son_tra_my_khe",
+  "lat": 16.09207,
+  "lon": 108.243615,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJs4dg5vceQjERJQ5D9ATvWhU",
+  "name": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO",
+  "name_raw": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO",
+  "zone": "ba_na_tay",
+  "lat": 16.062535,
+  "lon": 108.096007,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJPdLppX4XQjERnV5xcr28sO0",
+  "name": "Nhà thờ Gia Phước",
+  "name_raw": "Nhà thờ Gia Phước",
+  "zone": "son_tra_my_khe",
+  "lat": 16.056575,
+  "lon": 108.242596,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJnwKLiE4YQjERMVI0qrqKg1c",
+  "name": "Nhà Thờ Giáo Xứ Tam Tòa",
+  "name_raw": "Nhà Thờ Giáo Xứ Tam Tòa",
+  "zone": "trung_tam",
+  "lat": 16.071716,
+  "lon": 108.203795,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJcw0FdkgYQjERhr14f9cMXK0",
+  "name": "Nhà Thờ Giáo Xứ Nội Hà",
+  "name_raw": "Nhà Thờ Giáo Xứ Nội Hà",
+  "zone": "trung_tam",
+  "lat": 16.075466,
+  "lon": 108.211006,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJaV_Jo8gZQjERtDWMcdLRT1U",
+  "name": "Nhà Thờ Giáo Xứ Hòa Thuận",
+  "name_raw": "Nhà Thờ Giáo Xứ Hòa Thuận",
+  "zone": "trung_tam",
+  "lat": 16.053341,
+  "lon": 108.218756,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJY3yT3IweQjERnbDRpKk8b3A",
+  "name": "Nhà thờ Phú Thượng",
+  "name_raw": "Nhà thờ Phú Thượng",
+  "zone": "ba_na_tay",
+  "lat": 16.050763,
+  "lon": 108.103519,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJOfpog-EYQjERw_VB4IBkfNI",
+  "name": "Nhà Thờ Giáo Xứ Hòa Minh",
+  "name_raw": "Nhà Thờ Giáo Xứ Hòa Minh",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.070763,
+  "lon": 108.171824,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ5VTV0hwaQjERYReDb0dJJq8",
+  "name": "Giáo xứ Cồn Dầu",
+  "name_raw": "Giáo xứ Cồn Dầu",
+  "zone": "trung_tam",
+  "lat": 16.015123,
+  "lon": 108.225395,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ3S-Eo0sYQjERo9MhApUI4WQ",
+  "name": "Nhà thờ Chính Trạch",
+  "name_raw": "Nhà thờ Chính Trạch",
+  "zone": "trung_tam",
+  "lat": 16.068414,
+  "lon": 108.209822,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJX_rcYHQZQjERQXQ9UxHmHN4",
+  "name": "Nhà Thờ Giáo Xứ Phước Tường",
+  "name_raw": "Nhà Thờ Giáo Xứ Phước Tường",
+  "zone": "trung_tam",
+  "lat": 16.041621,
+  "lon": 108.186103,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI",
+  "name": "Chùa Bát Nhã",
+  "name_raw": "Chùa Bát Nhã",
+  "zone": "trung_tam",
+  "lat": 16.061546,
+  "lon": 108.216669,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
+  "name": "Chùa Non Nước",
+  "name_raw": "Chùa Non Nước",
+  "zone": "ngu_hanh_son",
+  "lat": 16.003956,
+  "lon": 108.263718,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJRZhHIMkZQjERYBH-5S1xKNg",
+  "name": "Chùa Phổ Đà",
+  "name_raw": "Chùa Phổ Đà",
+  "zone": "trung_tam",
+  "lat": 16.055951,
+  "lon": 108.218656,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+  "name": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
+  "name_raw": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
+  "zone": "trung_tam",
+  "lat": 16.041883,
+  "lon": 108.148254,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+  "name": "Chùa Bà Đa",
+  "name_raw": "Chùa Bà Đa",
+  "zone": "son_tra_my_khe",
+  "lat": 16.037566,
+  "lon": 108.240516,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8",
+  "name": "Thiền Viện Bồ Đề",
+  "name_raw": "Thiền Viện Bồ Đề",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.06547,
+  "lon": 108.172544,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM",
+  "name": "Chùa Nam Hải",
+  "name_raw": "Chùa Nam Hải",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.145891,
+  "lon": 108.123413,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJASjStc0ZQjERf8hQfCEJ8JA",
+  "name": "Chùa An Long",
+  "name_raw": "Chùa An Long",
+  "zone": "trung_tam",
+  "lat": 16.059794,
+  "lon": 108.223266,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+  "name": "Chùa Linh Ứng - Bà Nà",
+  "name_raw": "Chùa Linh Ứng - Bà Nà",
+  "zone": "ba_na_tay",
+  "lat": 15.997136,
+  "lon": 107.994044,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
+  "name": "Chùa Mỹ Khê",
+  "name_raw": "Chùa Mỹ Khê",
+  "zone": "son_tra_my_khe",
+  "lat": 16.064824,
+  "lon": 108.243022,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA",
+  "name": "Chùa Báo Ân",
+  "name_raw": "Chùa Báo Ân",
+  "zone": "trung_tam",
+  "lat": 16.05275,
+  "lon": 108.209505,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJrynevMsZQjERzZIGoLZwQ2I",
+  "name": "Chùa Từ Tôn",
+  "name_raw": "Chùa Từ Tôn",
+  "zone": "trung_tam",
+  "lat": 16.060367,
+  "lon": 108.218508,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ8ar-PNQXQjERFGGdrbCAQbg",
+  "name": "Tháp Xá Lợi",
+  "name_raw": "Tháp Xá Lợi",
+  "zone": "son_tra_my_khe",
+  "lat": 16.099915,
+  "lon": 108.280007,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJnZoMTbkQQjERwzvvHqGlb4E",
+  "name": "Chùa Linh Sơn",
+  "name_raw": "Chùa Linh Sơn",
+  "zone": "ngu_hanh_son",
+  "lat": 15.998875,
+  "lon": 108.256241,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJyaniiLoQQjERI3aW6z5atCc",
+  "name": "Chùa Hương Sơn",
+  "name_raw": "Chùa Hương Sơn",
+  "zone": "ngu_hanh_son",
+  "lat": 16.003797,
+  "lon": 108.252402,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJO9OcO7kQQjERuGR5zEtpfu8",
+  "name": "Chùa Thái Sơn",
+  "name_raw": "Chùa Thái Sơn",
+  "zone": "ngu_hanh_son",
+  "lat": 15.999834,
+  "lon": 108.257502,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
+  "name": "Chùa Mỹ Thị",
+  "name_raw": "Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",
+  "zone": "ngu_hanh_son",
+  "lat": 16.033745,
+  "lon": 108.240802,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJvexouL4QQjERy0qt57A0GX4",
+  "name": "Chùa Phổ Đà Sơn",
+  "name_raw": "Chùa Phổ Đà Sơn",
+  "zone": "ngu_hanh_son",
+  "lat": 16.000216,
+  "lon": 108.259785,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJA8a2aLcQQjER5mciBxvjUVs",
+  "name": "Chùa Long Hoa",
+  "name_raw": "Chùa Long Hoa",
+  "zone": "ngu_hanh_son",
+  "lat": 16.005235,
+  "lon": 108.257361,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ8Z0D7KURQjERUPd36goDH90",
+  "name": "Chùa Tam Tôn",
+  "name_raw": "Chùa Tam Tôn",
+  "zone": "ngu_hanh_son",
+  "lat": 16.003952,
+  "lon": 108.262145,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJLX9s7EUbQjERdsy67X5-NrE",
+  "name": "Chùa Hải An Đà Nẵng",
+  "name_raw": "Chùa Hải An Đà Nẵng",
+  "zone": "ngu_hanh_son",
+  "lat": 15.968053,
+  "lon": 108.235499,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJf_LKvbkbQjERSVrbzxU6Nuc",
+  "name": "Chùa Vân Long",
+  "name_raw": "Chùa Vân Long",
+  "zone": "ngu_hanh_son",
+  "lat": 16.010046,
+  "lon": 108.237844,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ8VqGDeYRQjERVEkumiIa714",
+  "name": "LÂM TỲ NI VIÊN",
+  "name_raw": "LÂM TỲ NI VIÊN",
+  "zone": "ngu_hanh_son",
+  "lat": 16.004017,
+  "lon": 108.264445,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
+  "name": "Chùa Minh Phước",
+  "name_raw": "Chùa Minh Phước",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.066081,
+  "lon": 108.153741,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJo2Yyix8ZQjERmG7AHQkOpIo",
+  "name": "Chùa Phước Lộc",
+  "name_raw": "Chùa Phước Lộc",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.06738,
+  "lon": 108.167086,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJKcik9OQYQjERKZ21jblRTVc",
+  "name": "Chùa Thanh Hải",
+  "name_raw": "Chùa Thanh Hải",
+  "zone": "hai_van_lien_chieu",
+  "lat": 16.075079,
+  "lon": 108.176895,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY",
+  "name": "Chùa Thanh Hà",
+  "name_raw": "Chùa Thanh Hà",
+  "zone": "trung_tam",
+  "lat": 16.071175,
+  "lon": 108.18941,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJQ2dbvVIYQjERVbGNKc5Tmcs",
+  "name": "CHÙA TÂN THÀNH",
+  "name_raw": "CHÙA TÂN THÀNH",
+  "zone": "trung_tam",
+  "lat": 16.068311,
+  "lon": 108.200136,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "ChIJaX09zkgYQjERCtro2DeADN0",
+  "name": "Chùa Thuận Thành",
+  "name_raw": "Chùa Thuận Thành",
+  "zone": "trung_tam",
+  "lat": 16.074414,
+  "lon": 108.208585,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/320722329",
+  "name": "Hội quán Phúc Kiến",
+  "name_raw": "Hội quán Phúc Kiến",
+  "zone": "hoi_an",
+  "lat": 15.878139,
+  "lon": 108.330992,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/448044645",
+  "name": "Hội quán Triều Châu",
+  "name_raw": "Hội quán Triều Châu",
+  "zone": "hoi_an",
+  "lat": 15.877906,
+  "lon": 108.333033,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/565300448",
+  "name": "Hội Quán Quảng Triệu",
+  "name_raw": "Hội Quán Quảng Triệu",
+  "zone": "hoi_an",
+  "lat": 15.877365,
+  "lon": 108.326566,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/6151138385",
+  "name": "Hội quán Ngũ Bang",
+  "name_raw": "Hội quán Ngũ Bang",
+  "zone": "hoi_an",
+  "lat": 15.877757,
+  "lon": 108.330059,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/2092582385",
+  "name": "Hội quán Hải Nam",
+  "name_raw": "Hội quán Hải Nam",
+  "zone": "hoi_an",
+  "lat": 15.87787,
+  "lon": 108.331996,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:node/2092582318",
+  "name": "Tụy Tiên Đường Minh Hương",
+  "name_raw": "Tụy Tiên Đường Minh Hương",
+  "zone": "hoi_an",
+  "lat": 15.877822,
+  "lon": 108.331689,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/631064893",
+  "name": "Quan Công Miếu",
+  "name_raw": "Quan Công Miếu",
+  "zone": "hoi_an",
+  "lat": 15.87754,
+  "lon": 108.33139,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/209494258",
+  "name": "Văn Miếu Hội An",
+  "name_raw": "Văn Miếu Hội An",
+  "zone": "hoi_an",
+  "lat": 15.87987,
+  "lon": 108.323001,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:relation/2836882",
+  "name": "Chùa Chúc Thánh",
+  "name_raw": "Chùa Chúc Thánh",
+  "zone": "hoi_an",
+  "lat": 15.888976,
+  "lon": 108.327056,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/474383101",
+  "name": "Chùa Phước Lâm",
+  "name_raw": "Chùa Phước Lâm",
+  "zone": "hoi_an",
+  "lat": 15.892465,
+  "lon": 108.323664,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/565186618",
+  "name": "Đình Cẩm Phô",
+  "name_raw": "Đình Cẩm Phô",
+  "zone": "hoi_an",
+  "lat": 15.878294,
+  "lon": 108.324183,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ },
+ {
+  "poi_id": "osm:way/209492808",
+  "name": "Nhà thờ Công giáo Hội An",
+  "name_raw": "Nhà thờ Công giáo Hội An",
+  "zone": "hoi_an",
+  "lat": 15.882719,
+  "lon": 108.329109,
+  "prize_prior": 0.45,
+  "hours_now": [
+   "08:00-11:00",
+   "14:00-16:00"
+  ]
+ }
+]

@@ -54,8 +54,8 @@
   "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 591,
-  "fixed": 190,
+  "safe_window": 572,
+  "fixed": 209,
   "unknown": 95
  },
  "pois": [
@@ -30464,10 +30464,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:30-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -30550,12 +30549,12 @@
      "note": "name:tinh vien;type:Vườn"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://daivietourist.vn/son-tra-tinh-vien/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"mở cửa miễn phí hàng ngày từ 6h30 đến 18h.\". Trích nguyên văn đoạn nêu giờ trong bài về đúng Sơn Trà Tịnh Viên. Giờ tham quan theo hướng dẫn du lịch, chưa phải xác nhận trực tiếp của cơ sở."
     },
     "price": {
      "source": "rule_free_public",
@@ -48089,10 +48088,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:00-21:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -48176,12 +48174,12 @@
      "note": "name:chua;type:Cơ sở thờ tự"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/chua-tam-bao-da-nang-kham-pha-chon-tam-linh-noi-tieng-bac-nhat-mien-trung/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 06:00 – 21:00 hằng ngày\". Đúng chùa Tam Bảo tại 323 Phan Châu Trinh, Đà Nẵng; OSM node không có giờ. Pullman và Mikazuki cũng ghi 06:00–21:00."
     },
     "price": {
      "source": "rule_free_public",
@@ -48237,10 +48235,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:00-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -48324,12 +48321,12 @@
      "note": "name:chua;type:Cơ sở thờ tự"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"6:00 – 18:00/19:00\". Trích ô giờ mở cửa của Pháp Lâm tại 574 Ông Ích Khiêm; lấy mốc đóng sớm 18:00. Mikazuki ghi 24 giờ tại https://mikazuki.com.vn/vn/chua-da-nang.html, nên giữ phần giao hẹp 06:00–18:00; chưa xác nhận với chùa."
     },
     "price": {
      "source": "rule_free_public",
@@ -51463,10 +51460,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -51550,12 +51546,12 @@
      "note": "name:chua;type:Cơ sở thờ tự"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://190travel.com/vi-vn/blog/chua-an-phuoc-da-nang",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Chùa An Phước Đà Nẵng mở cửa từ 6 giờ sáng đến 17 giờ chiều (5 giờ chiều) hàng ngày.\". Giờ đón khách theo bài về An Phước Đà Nẵng. Vietnam Booking ghi cả ngày, kèm khuyến nghị đến 05:00–21:00; đây là khuyến nghị, không phải giờ mở cửa xác nhận. Nguồn đối chiếu: https://www.vietnambooking.com/du-lich/blog-du-lich/chua-an-phuoc-da-nang.html"
     },
     "price": {
      "source": "rule_free_public",
@@ -54233,10 +54229,10 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-11:30",
+     "13:30-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -54319,12 +54315,12 @@
      "note": "name:chua"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/chua-nam-son-da-nang.html",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Sáng: 07:00 – 11:30\nChiều: 13:30 – 17:00\". Trích hai dòng trong mục Giờ mở cửa cập nhật 2026. Lấy phần giao hẹp với 05:00–12:00,13:30–21:00 của Pullman/Mikazuki và 05:00–21:00 của Đà Nẵng Best; giữ nghỉ trưa, không mở rộng buổi tối. Nguồn đối chiếu: https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/ ; https://danangbest.com/chua-nam-son-diem-den-cho-tin-do-yeu-van-hoa-tam-linh.html"
     },
     "price": {
      "source": "rule_free_public",
@@ -60236,10 +60232,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:00-20:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -60323,12 +60318,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinpearl.com/vi/chua-bat-nha-da-nang",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: vào những ngày thường, chùa Bát Nhã mở cửa từ 6:00 - 20:30.\". Giờ thường ngày của đúng chùa tại 176 Triệu Nữ Vương. Lấy phần giao hẹp với nguồn ghi 05:00–21:00 và nguồn ghi cả ngày; Pullman cũng ghi 06:00–20:30. Dịp lễ có thể muộn hơn. Đối chiếu: https://www.vietnambooking.com/du-lich/blog-du-lich/chua-bat-nha-da-nang.html ; https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/"
     },
     "price": {
      "source": "rule_free_public",
@@ -60384,10 +60379,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -60471,12 +60465,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/chua-linh-ung-ngu-hanh-son-16518",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 6h30 – 17h30\". Nguồn xác nhận Chùa Non Nước là tên khác của Linh Ứng Ngũ Hành Sơn trên Thủy Sơn, khớp vị trí. Lấy phần giao 07:00–17:30 với Pullman/Mikazuki ghi 07:00–17:30, thay vì suy giờ chung cho mọi chùa trên Ngũ Hành Sơn. Đối chiếu: https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/"
     },
     "price": {
      "source": "rule_free_public",
@@ -60532,10 +60526,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "06:00-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -60619,12 +60612,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/chua-pho-da-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 6:00 – 18:00 hàng ngày\". Đúng chùa Phổ Đà 340 Phan Chu Trinh, khác Phổ Đà Sơn. Lấy phần giao hẹp với Pullman 06:00–22:00 và Vietnam Booking 05:00–21:00. Đối chiếu: https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/ ; https://www.vietnambooking.com/du-lich/blog-du-lich/chua-pho-da-da-nang.html"
     },
     "price": {
      "source": "rule_free_public",
@@ -61272,10 +61265,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -61359,12 +61351,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://dulich24.com.vn/du-lich-quan-hai-chau/chua-an-long-id-5241",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Thứ Hai 08:00 - 17:00\". Trích một dòng bảng giờ: nguồn ghi cùng 08:00–17:00 cho cả bảy ngày. Phần giới thiệu xác nhận chùa sau Bảo tàng Điêu khắc Chăm, phường Bình Hiên; không dùng chùa An Long ở Mỹ Tho."
     },
     "price": {
      "source": "rule_free_public",
@@ -61420,10 +61412,9 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-17:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -61507,12 +61498,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.pullman-danang.com/vi/kham-pha/kham-pha/nhung-ngoi-chua-noi-tieng-o-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"8:00 – 17:30\". Trích ô giờ của Linh Ứng – Núi Bà Nà, không phải Sơn Trà/Thủy Sơn. Mikazuki cũng ghi 08:00–17:30: https://mikazuki.com.vn/vn/chua-da-nang.html . Trang Sun World về chùa đã đọc nhưng chưa có giờ riêng; cần xác nhận điều kiện cáp treo khi đi."
     },
     "price": {
      "source": "cluster_rule",
@@ -101002,10 +100993,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -101089,12 +101079,12 @@
      "note": "name:chua;type:Chùa phật giáo"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.vietnamairlines.com/th/vi/plan-book/travel/travel-guide/ngu-hanh-son-da-nang",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 07:00 - 17:00.\". Mục Chùa Long Hoa ghi rõ Hòa Hải, Ngũ Hành Sơn, khớp nơi cần kiểm tra. Không dùng địa chỉ Hòa An/Cẩm Lệ xuất hiện ở một số bài khác; OSM không có thẻ giờ."
     },
     "price": {
      "source": "rule_free_public",
@@ -108699,10 +108689,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -108781,12 +108770,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangfantasticity.com/en/kien-truc/hoi-quan-phuc-kien",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: Thông thường từ 7h00 đến 17h00 hằng ngày.\". Cổng du lịch thành phố ghi 07:00–17:00; VnGuide ghi 08:00–17:30, nên lấy phần giao hẹp 08:00–17:00 theo yêu cầu xử lý mâu thuẫn. Đối chiếu: https://vnguide.vn/entertainment/fukian-assembly-hall-451145 . Đây là giờ tham khảo của đúng hội quán 46 Trần Phú, không phải giờ phố đi bộ."
     },
     "price": {
      "source": "cluster_rule",
@@ -108842,10 +108831,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -108923,12 +108911,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://quangnamtourism.com.vn/hoi-quan-trieu-chau-hoi-an/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Hội quán Triều Châu mở cửa từ 7h – 17h hàng ngày.\". Nguồn nói trực tiếp đúng hội quán Triều Châu Hội An. Hoian Memoriesland cũng ghi 07:00–17:00; không lấy giờ gợi ý tránh nắng 07:00–09:30/15:00–17:00 làm giờ mở cửa."
     },
     "price": {
      "source": "cluster_rule",
@@ -108984,10 +108972,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-16:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -109065,12 +109052,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinpearl.com/vi/hoi-quan-quang-dong-su-hoa-quyen-cua-van-hoa-viet-trung",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 6h - 16h\". Hội Quán Quảng Triệu còn gọi Quảng Đông, đúng địa chỉ 176 Trần Phú. Vinpearl/Hoian Memoriesland ghi 06:00–16:00, VinWonders ghi 08:00–19:00, nên lấy phần giao hẹp 08:00–16:00. Đối chiếu: https://vinwonders.com/vi/wonderpedia/news/hoi-quan-quang-dong-net-dep-tinh-xao-giua-long-pho-hoi/"
     },
     "price": {
      "source": "cluster_rule",
@@ -109126,10 +109113,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -109208,12 +109194,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://hoianmemoriesland.com/vi/chiem-nguong-ve-dep-kien-truc-cua-5-hoi-quan-nguoi-hoa-o-hoi-an-d427",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: từ 07:00 đến 17:00 hằng ngày\". Mục 3.4 Hội quán Trung Hoa xác nhận đây cũng là Hội Quán Ngũ Bang, 64 Trần Phú. Mytour ghi 05:30–17:30; lấy phần giao hẹp 07:00–17:00. Đối chiếu: https://mytour.vn/vi/blog/bai-viet/5-diem-check-in-hot-o-hoi-an-dam-chat-van-hoa-truyen-thong.html . Không dùng giờ từ Google Maps trên hoianit.com."
     },
     "price": {
      "source": "cluster_rule",
@@ -109269,10 +109255,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -109350,12 +109335,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://hoianmemoriesland.com/vi/chiem-nguong-ve-dep-kien-truc-cua-5-hoi-quan-nguoi-hoa-o-hoi-an-d427",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: từ 07:00 đến 17:00 hằng ngày\". Mục riêng Hội quán Hải Nam, địa chỉ 10 Trần Phú. Chưa có thẻ giờ OSM. Không sử dụng giờ 09:00–21:00 mà hoianit.com nêu rõ lấy từ Google Maps."
     },
     "price": {
      "source": "cluster_rule",
@@ -110264,10 +110249,9 @@
    "requires_ticket_of": "osm:node/4601279489",
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "08:00-17:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -110345,12 +110329,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/tham-quan-chua-ong-hoi-an/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Chùa Ông Hội An mở cửa từ 7h00 sáng đến 17h00 chiều mỗi ngày.\". Nguồn xác nhận Chùa Ông còn gọi Quan Công Miếu, 24 Trần Phú, ghi 07:00–17:00. VnGuide ghi 08:00–17:30 nên lấy phần giao hẹp 08:00–17:00. Đối chiếu: https://vnguide.vn/entertainment/quan-kong-temple-hoi-an-454962 . Không dùng giờ chung của phố đi bộ."
     },
     "price": {
      "source": "cluster_rule",
@@ -110976,10 +110960,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:00-18:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -111058,12 +111041,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://danangbest.com/chua-chuc-thanh-hoi-an-dia-diem-tam-linh-ban-khong-nen-bo-lo.html",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ đón khách (tham khảo): Khoảng 7:00–18:00 ngày thường\". Trích phần thông tin nhanh của đúng chùa 104 Tôn Đức Thắng. Đây là giờ tham khảo, ngày lễ/đợt tu tập có thể đổi; phần nội dung bài yêu cầu xác nhận lại. QTA chỉ ghi cả ngày, không cung cấp mốc hẹp hơn. Chưa xác minh ngày nghỉ cố định."
     },
     "price": {
      "source": "rule_free_public",
@@ -111119,10 +111102,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "07:30-21:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -111201,12 +111183,12 @@
      "note": "curated_osm:religious"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": "https://www.wafaifo.com/vi/cac-ngoi-chua-o-hoi-an/",
+     "verified_at": "2026-11-20",
+     "note": "Giờ tham quan (Codex t15 đọc trang, 20/11/2026): \"Giờ mở cửa: 7:30 – 21:30 hằng ngày\". Mục Chùa Phước Lâm ghi Lê Hồng Phong, Cẩm Hà, Hội An, khớp địa điểm. Dùng nội dung hướng dẫn du lịch của khách sạn, không dùng dữ liệu giờ trên Google Maps/Google place."
     },
     "price": {
      "source": "rule_free_public",

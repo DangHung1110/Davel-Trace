@@ -153,3 +153,11 @@ Nguồn: VietnamPlus + Tuổi Trẻ (17/08/2026), VnEconomy + VietNamNet (15–1
   - Bãi Đá Đen Sơn Trà (người dùng thêm) trùng tên với điểm cấm trekking trong VietNamNet — cần người dùng xác nhận; Codex coi 'Bãi Đá' (Obama) là bãi khác, ngoài tuyến.
 - Kết quả: 876 POI (825 active, 51 excluded).
 - **Người dùng chốt 20/11:** loại 5 điểm bị cấm/không được tự ý tiếp cận — Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen Sơn Trà, Bãi Đá (Bãi Obama) (`decisions_zfinal_20261120b.json`). Kết quả: 876 POI (821 active, 55 excluded).
+
+## Giờ chùa / hội quán có nguồn — 20/11
+
+Codex (t15) đọc web cho 80 điểm tôn giáo đang dùng khung ước lượng 08:00-11:00, 14:00-16:00 (`reports/p0/links/religious_codex.json`, không dùng Google):
+- **19 điểm có giờ tham quan có nguồn → `fixed`** (`agent_web_2026-11-20b.json`), ví dụ Sơn Trà Tịnh Viên 06:30-18:00, Chùa Tam Bảo 06:00-21:00, Chùa Bát Nhã 06:00-20:30, 5 hội quán Hội An 07:00/08:00-16:00/17:00. Nguồn lệch → lấy khung hẹp.
+- 19 nhà thờ chỉ có giờ lễ (không phải giờ tham quan) → giữ `safe_window`.
+- 42 điểm không có nguồn đọc được → giữ `safe_window`.
+- Giờ ngoài lưu trú: fixed 175 → 194, safe_window 557 → 538, unknown 13 (lớp nấu ăn).

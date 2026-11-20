@@ -126,13 +126,30 @@
 
 ## 4. Điều kiện "chốt dữ liệu" để triển khai kiến trúc
 
-- [ ] 12 luật cấu trúc xanh; G1–G5 xanh.
-- [ ] Mỗi POI đúng một trường giá, một trường giờ; không còn khoá ngoài danh sách trắng.
-- [ ] Mọi POI active có ma trận; không còn cờ `verified` cũ.
-- [ ] Mỗi khu có attraction + meal + rest.
+Trạng thái 20/11 — đều kiểm bằng `P0_GATE=1 pytest BE/tests/data/test_snapshot_v2.py` (xanh):
+
+- [x] 12 luật cấu trúc xanh; G1–G5 xanh. (`test_01`…`test_11`, `test_gate_12`, `test_gate_G1`…`G5`)
+- [x] Mỗi POI đúng một trường giá, một trường giờ; không còn khoá ngoài danh sách trắng. (`test_11_whitelisted_keys_only`)
+- [x] Mọi POI active có ma trận; không còn cờ `verified` cũ. (`test_gate_G1`, `test_view_verified_is_eligibility_rule`)
+- [x] Mỗi khu có attraction + meal + rest. (`test_gate_G2`)
 - [x] ~~≥ 50 điểm tiêu biểu có giờ do người kiểm~~ — người dùng bỏ tiêu chí 20/11 (đã tự kiểm các điểm cần thiết; hiện 30).
-- [ ] `prize_prior` thay `rating`; chạy được với `GOOGLE_POLICY=cach_ly`.
-- [ ] Gold dựng lại trên v2.1, tỉ lệ qua gate ≥ v1.
+- [x] `prize_prior` thay `rating`; chạy được với `GOOGLE_POLICY=cach_ly`. (`test_prize_prior_is_clean…`, `test_view_clean_policy_never_reads_google`)
+- [x] Gold dựng lại trên v2.1, tỉ lệ qua gate ≥ v1. (`test_gate_G5`, `BE/eval/gold/gold_v2.json`)
+
+## 4b. Còn lại để dữ liệu sạch + đúng format cho kiến trúc mới (P1, sau PR #25)
+
+Chất lượng (không đổi format):
+1. Giờ `safe_window` 557 điểm → `fixed` có nguồn, theo thứ tự: chùa/nhà thờ (80, khung hiện tại quá hẹp) → ngoài trời + chợ (69) → spa + nightlife (158). Quán ăn/cà phê giữ khung an toàn.
+2. Giá: 677/745 điểm là ước lượng theo loại → lấy giá thật cho điểm hay vào lịch (paid_attraction, signature, chợ đêm), quán ăn giữ khoảng giá.
+3. Toạ độ: 552 điểm toạ độ Google chưa đối chiếu OSM (rủi ro thấp).
+
+Format (đổi `DATA_SPEC_v2_1` — cần người dùng duyệt):
+4. `hours.kind = by_booking` + `sessions` + `booking_url` cho 13 lớp nấu ăn (thay `unknown`).
+5. Suất/giờ khởi hành cho show, tour (Ký ức Hội An 20:00, tour lặn 4 suất) thay vì một khung mở cửa.
+6. Vé nhiều mức (người lớn/trẻ em/cư dân, ECO/HIGH/VIP) + phí bắt buộc (gửi xe, thang máy, thuyền) thành trường có cấu trúc; hiện chỉ ở `price.note`.
+7. Đếm khoản "chưa biết" khi tính chi phí thay vì coi = 0.
+
+Dữ liệu kiến trúc (mục 3): `time_profiles`, giờ mặt trời, khí hậu theo tháng × giờ, tham số trạng thái, ma trận theo khung giờ (P50/P90), gold 30 → 100.
 
 ## 5. Không làm
 

@@ -8,24 +8,24 @@ manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,son_tra_my_khe,,,05:00-22:00
 manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,son_tra_my_khe,,,08:00-16:45,agent_web
 osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,hoi_an_old_town,Phố cổ Hội An,05:00-22:00,inferred
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"07:30-11:30, 13:30-17:30",open_data
-osm:way/320722329,Hội quán Phúc Kiến,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
-osm:way/448044645,Hội quán Triều Châu,religious,hoi_an,,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
-osm:way/565300448,Hội Quán Quảng Triệu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
-osm:node/6151138385,Hội quán Ngũ Bang,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
-osm:node/2092582385,Hội quán Hải Nam,religious,hoi_an,,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
+osm:way/320722329,Hội quán Phúc Kiến,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-17:00,agent_web
+osm:way/448044645,Hội quán Triều Châu,religious,hoi_an,,Phố cổ Hội An,07:00-17:00,agent_web
+osm:way/565300448,Hội Quán Quảng Triệu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-16:00,agent_web
+osm:node/6151138385,Hội quán Ngũ Bang,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,07:00-17:00,agent_web
+osm:node/2092582385,Hội quán Hải Nam,religious,hoi_an,,Phố cổ Hội An,07:00-17:00,agent_web
 osm:way/595299310,Nhà cổ Tấn Ký,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/4279640089,Nhà cổ Phùng Hưng,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/2076855866,Nhà cổ Đức An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/2076855954,Nhà cổ Quân Thắng,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/5674096859,Nhà cổ Diệp Đồng Nguyên,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/2092582318,Tụy Tiên Đường Minh Hương,religious,hoi_an,,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
-osm:way/631064893,Quan Công Miếu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
+osm:way/631064893,Quan Công Miếu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-17:00,agent_web
 osm:node/2076856032,Bảo tàng Gốm sứ Mậu dịch Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:node/3189923484,Bảo tàng Văn hóa Sa Huỳnh,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:way/631074714,Bảo tàng Văn hóa Dân gian Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
 osm:way/209494258,Văn Miếu Hội An,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
-osm:relation/2836882,Chùa Chúc Thánh,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
-osm:way/474383101,Chùa Phước Lâm,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:relation/2836882,Chùa Chúc Thánh,religious,hoi_an,,,07:00-18:00,agent_web
+osm:way/474383101,Chùa Phước Lâm,religious,hoi_an,,,07:30-21:30,agent_web
 osm:way/565186618,Đình Cẩm Phô,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
 osm:way/35952504,Chợ Hội An,day_market,hoi_an,hoi_an_old_town,,08:00-11:00,inferred
 osm:node/6099308589,Chợ đêm Hội An,night_market,hoi_an,hoi_an_old_town,,18:00-22:00,open_data
