@@ -130,7 +130,7 @@
 - [ ] Mỗi POI đúng một trường giá, một trường giờ; không còn khoá ngoài danh sách trắng.
 - [ ] Mọi POI active có ma trận; không còn cờ `verified` cũ.
 - [ ] Mỗi khu có attraction + meal + rest.
-- [ ] ≥ 50 điểm tiêu biểu có giờ do người kiểm.
+- [x] ~~≥ 50 điểm tiêu biểu có giờ do người kiểm~~ — người dùng bỏ tiêu chí 20/11 (đã tự kiểm các điểm cần thiết; hiện 30).
 - [ ] `prize_prior` thay `rating`; chạy được với `GOOGLE_POLICY=cach_ly`.
 - [ ] Gold dựng lại trên v2.1, tỉ lệ qua gate ≥ v1.
 
@@ -157,7 +157,7 @@
 | 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (826 active, 50 excluded), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |
 
 **Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
-- Giờ do người kiểm: **30/50** (tiêu chí mục 4 chưa đạt). Không chặn P0; phần còn thiếu là nợ P1 — duyệt thêm ~20 điểm tiêu biểu qua `reports/p0/final_review.html` (dựng lại bằng `build_final_review.py`).
+- Giờ do người kiểm: 30 điểm. Tiêu chí ≥ 50 đã được người dùng bỏ (20/11).
 - Giờ `unknown` ngoài lưu trú: 13 lớp nấu ăn (giữ active, cần kiểu giờ `by_booking` ở P1). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
 - 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
 - Data contract P1 (mục 3): giờ theo mùa (khung bán đảo Sơn Trà 17:30/18:30 và chưa áp cho điểm mới), ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.
