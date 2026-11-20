@@ -14,8 +14,8 @@
  ],
  "count": 876,
  "count_by_status": {
-  "active": 822,
-  "excluded": 54
+  "active": 821,
+  "excluded": 55
  },
  "count_by_category": {
   "restaurant": 169,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 91,
+ "applied_decisions": 92,
  "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
  "count_new_pois": 134,
@@ -55970,8 +55970,8 @@
    "lon": 108.3012745,
    "category": "beach",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Bãi Đá / Bãi Obama, OSM 'Obama')",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,

@@ -1,5 +1,5 @@
 {
- "note": "Sau chốt cuối 20/11: loại 4 điểm bị cấm trên bán đảo Sơn Trà (người dùng xác nhận).",
+ "note": "Sau chốt cuối 20/11: loại 5 điểm bị cấm trên bán đảo Sơn Trà (người dùng xác nhận).",
  "items": {
   "ChIJ_XkaoQs-QjER_IUTHqI3gI8": {
    "status": "excluded",
@@ -16,6 +16,10 @@
   "manual:son-tra-bai-da-den": {
    "status": "excluded",
    "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Bãi Đá Đen; VietNamNet 15/09/2025: cấm trekking tự phát)"
+  },
+  "osm:node/13040467529": {
+   "status": "excluded",
+   "status_reason": "người dùng 20/11: loại vì khu bị cấm/không được tự ý tiếp cận trên bán đảo Sơn Trà (Bãi Đá / Bãi Obama, OSM 'Obama')"
   }
  }
 }

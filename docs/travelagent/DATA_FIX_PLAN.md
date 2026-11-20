@@ -154,11 +154,11 @@
 
 | 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
 
-| 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (822 active, 54 excluded sau loại khu cấm Sơn Trà), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |
+| 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (821 active, 55 excluded sau loại khu cấm Sơn Trà), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |
 
 **Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
 - Giờ do người kiểm: 30 điểm. Tiêu chí ≥ 50 đã được người dùng bỏ (20/11).
 - Giờ `unknown` ngoài lưu trú: 13 lớp nấu ăn (giữ active, cần kiểu giờ `by_booking` ở P1). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
 - 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
-- Khung bán đảo Sơn Trà: đã có `access_route_*.json` + cắt giờ theo khung đường (20/11); giữ 07:30-17:30 quanh năm. Người dùng loại Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen (khu cấm). Còn 6 điểm 'chưa rõ' giữ luật cũ (xem `reports/p0/14_review_round1.md`).
+- Khung bán đảo Sơn Trà: đã có `access_route_*.json` + cắt giờ theo khung đường (20/11); giữ 07:30-17:30 quanh năm. Người dùng loại Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen, Bãi Obama (khu cấm). Còn 6 điểm 'chưa rõ' giữ luật cũ (xem `reports/p0/14_review_round1.md`).
 - Data contract P1 (mục 3): ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.
