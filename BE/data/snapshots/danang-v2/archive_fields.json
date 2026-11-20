@@ -927,7 +927,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 110.5,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -3525,10 +3525,17 @@
    },
    "hours_v20": {
     "spans": [
-     "11:00-13:30",
-     "17:30-20:30"
+     "06:00-22:00"
     ],
-    "weekly": null,
+    "weekly": {
+     "Mo": "06:00-22:00",
+     "Tu": "06:00-22:00",
+     "We": "06:00-22:00",
+     "Th": "06:00-22:00",
+     "Fr": "06:00-22:00",
+     "Sa": "06:00-22:00",
+     "Su": "06:00-22:00"
+    },
     "archetype_default": [
      "10:00-22:00"
     ],
@@ -3557,7 +3564,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": null,
+    "osm_match_m": 18.0,
     "wikidata": null
    },
    "v1_verified": {
@@ -4320,7 +4327,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": null,
+    "osm_match_m": 85.8,
     "wikidata": null
    },
    "v1_verified": {
@@ -9585,7 +9592,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 95.9,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -17793,7 +17800,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 76.8,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -23399,7 +23406,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 118.5,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -25226,7 +25233,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 54.6,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -28661,7 +28668,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 74.6,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -33099,7 +33106,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 0.0,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -42117,7 +42124,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 85.4,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -63532,7 +63539,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": null,
+    "osm_match_m": 9.6,
     "wikidata": null
    },
    "v1_verified": {
@@ -65581,7 +65588,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 109.6,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -65650,7 +65657,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 17.1,
+    "osm_match_m": null,
     "wikidata": null
    },
    "v1_verified": {
@@ -68175,7 +68182,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 115.7,
+    "osm_match_m": 0.0,
     "wikidata": null
    },
    "v1_verified": {
@@ -69540,7 +69547,7 @@
     }
    },
    "ext_ids_v20": {
-    "osm_match_m": 101.2,
+    "osm_match_m": 0.0,
     "wikidata": "Q5965459"
    },
    "v1_verified": {

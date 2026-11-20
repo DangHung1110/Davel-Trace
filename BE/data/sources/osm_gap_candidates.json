@@ -185,19 +185,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/2076855765",
-   "lat": 15.8761577,
-   "lon": 108.3305259,
-   "name": "Blue Dragon",
-   "name_en": null,
-   "opening_hours": "Mo-Su,PH 10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "rest",
    "osm": "node/2076855779",
    "lat": 15.8761347,
@@ -407,19 +394,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/2076855988",
-   "lat": 15.8761822,
-   "lon": 108.3285209,
-   "name": "Quang Thang",
-   "name_en": null,
-   "opening_hours": "Mo-Su,PH 15:30-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/2076855994",
    "lat": 15.8761784,
    "lon": 108.3307714,
@@ -598,19 +572,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/2091401445",
-   "lat": 15.8748137,
-   "lon": 108.3257502,
-   "name": "Chua Long Tho",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
   },
   {
    "zone": "hoi_an",
@@ -1095,32 +1056,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/2461400753",
-   "lat": 15.8775027,
-   "lon": 108.3310483,
-   "name": "Bazar Garden Restaurant",
-   "name_en": null,
-   "opening_hours": "07:30-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/2461400758",
-   "lat": 15.8780039,
-   "lon": 108.3281558,
-   "name": "Vegetarian Vegan Chay Resturant",
-   "name_en": "Ba Dam Vegetarian",
-   "opening_hours": "Mo-Su 07:00-20:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/2461409071",
    "lat": 15.8826281,
@@ -1183,19 +1118,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/2617007574",
-   "lat": 15.8772786,
-   "lon": 108.3277903,
-   "name": "Kazimierz Kwiatkowski",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": "Q11738068",
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -1326,32 +1248,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/3093689362",
-   "lat": 15.882786,
-   "lon": 108.3274487,
-   "name": "Café 41",
-   "name_en": null,
-   "opening_hours": "10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/3093689363",
-   "lat": 15.8827324,
-   "lon": 108.3275342,
-   "name": "Café 43",
-   "name_en": null,
-   "opening_hours": "10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -1772,19 +1668,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/3812098704",
-   "lat": 15.898873,
-   "lon": 108.3592524,
-   "name": "Chez Cesar Restaurant",
-   "name_en": "Chez Cesar Restaurant",
-   "opening_hours": "Mo-Su 11:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/3887708818",
    "lat": 15.8804191,
    "lon": 108.3269039,
@@ -1794,19 +1677,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/3888954278",
-   "lat": 15.8783485,
-   "lon": 108.3379487,
-   "name": "Karma Waters",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-20:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -1898,19 +1768,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4141060177",
-   "lat": 15.876212,
-   "lon": 108.3179561,
-   "name": "Facetime Cafe & Bar",
-   "name_en": null,
-   "opening_hours": "6 am - midnight",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -2292,19 +2149,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/4221031594",
-   "lat": 15.9138697,
-   "lon": 108.3400532,
-   "name": "The H`mong Sisters",
-   "name_en": null,
-   "opening_hours": "09:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/4225587390",
    "lat": 15.8814924,
    "lon": 108.3222371,
@@ -2448,32 +2292,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/4246108134",
-   "lat": 15.8748136,
-   "lon": 108.3225092,
-   "name": "Spa Hoi An",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4252334691",
-   "lat": 15.8767027,
-   "lon": 108.3285612,
-   "name": "CocoBox",
-   "name_en": null,
-   "opening_hours": "Mo-Su,PH 07:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/4253872198",
    "lat": 15.8794309,
    "lon": 108.3189976,
@@ -2483,32 +2301,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4253896690",
-   "lat": 15.8801731,
-   "lon": 108.3282312,
-   "name": "The Espresso Station",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:30-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4254168216",
-   "lat": 15.8757458,
-   "lon": 108.3265717,
-   "name": "cornercorner",
-   "name_en": null,
-   "opening_hours": "9am 12pm",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -2756,19 +2548,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/4285798291",
-   "lat": 15.876746,
-   "lon": 108.3335626,
-   "name": "3 Dragons",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -3188,19 +2967,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4347237636",
-   "lat": 15.9126539,
-   "lon": 108.3400633,
-   "name": "Quan Chay Sen Trang",
-   "name_en": null,
-   "opening_hours": "Mo,We-Su 09:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/4347237637",
    "lat": 15.9125776,
@@ -3315,32 +3081,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4352229289",
-   "lat": 15.8800142,
-   "lon": 108.3388152,
-   "name": "Namaste",
-   "name_en": null,
-   "opening_hours": "Mo-Su 12:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4352237791",
-   "lat": 15.8791456,
-   "lon": 108.3350817,
-   "name": "Ganesh Indian Restaurant",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:00-12:00,17:00-22:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
   },
   {
    "zone": "hoi_an",
@@ -3747,19 +3487,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4449095589",
-   "lat": 15.8858212,
-   "lon": 108.3285106,
-   "name": "Minh Hien 2",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/4453752663",
    "lat": 15.8777563,
@@ -3825,19 +3552,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4461175292",
-   "lat": 15.8777909,
-   "lon": 108.3257573,
-   "name": "Rosies Cafe",
-   "name_en": null,
-   "opening_hours": "Mo-Sa 09:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/4476186940",
    "lat": 15.8849411,
@@ -3874,6 +3588,19 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
+  },
+  {
+   "zone": "hoi_an",
+   "role_guess": "attraction",
+   "osm": "node/4488354489",
+   "lat": 15.8770369,
+   "lon": 108.3300555,
+   "name": "Живая музыка через дорогу",
+   "name_en": "Coconut Café",
+   "opening_hours": null,
+   "fee": null,
+   "wikidata": null,
+   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -3923,19 +3650,6 @@
    "name": "Thuy Ta Song Que",
    "name_en": "Thuy Ta Song Que restaurant",
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4519205790",
-   "lat": 15.8798221,
-   "lon": 108.3374209,
-   "name": "Annen Yoga & Vegetarian",
-   "name_en": null,
-   "opening_hours": "Mo-Sa 06:00-21:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -4138,32 +3852,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/4579382689",
-   "lat": 15.8938449,
-   "lon": 108.3276462,
-   "name": "Jack's Cat Cafe",
-   "name_en": null,
-   "opening_hours": "Tu-We, Fr-Su 11:00-15:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/4582592213",
-   "lat": 15.8786801,
-   "lon": 108.3287826,
-   "name": "Tran Family Chapel",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/4585008801",
    "lat": 15.87539,
    "lon": 108.3260021,
@@ -4320,19 +4008,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/4614061399",
-   "lat": 15.878445,
-   "lon": 108.3259185,
-   "name": "Baba's kitchen",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/4621586790",
    "lat": 15.8806475,
    "lon": 108.341625,
@@ -4355,19 +4030,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4631365689",
-   "lat": 15.8754817,
-   "lon": 108.320661,
-   "name": "KaTê café",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -4735,19 +4397,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/4770510721",
-   "lat": 15.8771862,
-   "lon": 108.3261789,
-   "name": "Caffè da Hong",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/4774264726",
    "lat": 15.8883274,
@@ -5035,19 +4684,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/4839614226",
-   "lat": 15.8834731,
-   "lon": 108.3261897,
-   "name": "Ho Lo Quan",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/4839614227",
    "lat": 15.8796356,
    "lon": 108.3287825,
@@ -5151,19 +4787,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4869072521",
-   "lat": 15.9043052,
-   "lon": 108.3339811,
-   "name": "Sen Trang - Quan Chay",
-   "name_en": "Sen Trang - Vegetarian Restaurant",
-   "opening_hours": "We-Mo 09:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/4870056221",
    "lat": 15.8844995,
@@ -5230,19 +4853,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/4887456421",
-   "lat": 15.8927627,
-   "lon": 108.3146876,
-   "name": "I Love Coffee Xinh Lee Coffee & Restaurant",
-   "name_en": "I Love Coffee Xinh Lee Coffee & Restaurant",
-   "opening_hours": "Mo-Su 06:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/4888948921",
    "lat": 15.8964414,
    "lon": 108.3645033,
@@ -5278,19 +4888,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/4905288121",
-   "lat": 15.8808353,
-   "lon": 108.3278275,
-   "name": "Quan an Anh Vu",
-   "name_en": "Restaurant Anh Vu",
-   "opening_hours": "Mo-Su 15:00-20:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
   },
   {
    "zone": "hoi_an",
@@ -5411,19 +5008,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/4937240722",
-   "lat": 15.8746537,
-   "lon": 108.333154,
-   "name": "Life bar",
-   "name_en": "New life bar",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/4937240921",
    "lat": 15.8799537,
@@ -5538,19 +5122,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/4965493634",
-   "lat": 15.8761816,
-   "lon": 108.3251323,
-   "name": "Moe's tavern regae bar",
-   "name_en": "Moe's tavern regae bar",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
   },
   {
    "zone": "hoi_an",
@@ -5840,19 +5411,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5061520126",
-   "lat": 15.8796336,
-   "lon": 108.3373238,
-   "name": "Annien",
-   "name_en": "Annen Yoga and Vegetarian Restaurant",
-   "opening_hours": "Mo-Su 09:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5072875425",
    "lat": 15.8797202,
@@ -5928,19 +5486,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/5110691326",
-   "lat": 15.8762017,
-   "lon": 108.3249779,
-   "name": "Mr. Bean Bar",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
   },
   {
    "zone": "hoi_an",
@@ -6192,19 +5737,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/5250607284",
-   "lat": 15.8841192,
-   "lon": 108.3254,
-   "name": "Jim's Snackbar",
-   "name_en": "Jim's Snackbar",
-   "opening_hours": "Tu-Su 02:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/5270082921",
    "lat": 15.8770602,
    "lon": 108.3405892,
@@ -6296,19 +5828,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/5299012021",
-   "lat": 15.8827183,
-   "lon": 108.3359561,
-   "name": "Tam Quang Minh",
-   "name_en": "Tam Quang Minh Vegetarian Restaurant",
-   "opening_hours": "Mo-Su 06:00-18:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/5300299624",
    "lat": 15.8804144,
    "lon": 108.341776,
@@ -6318,19 +5837,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/5301723422",
-   "lat": 15.8756423,
-   "lon": 108.3273686,
-   "name": "11 coffee house",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -6412,19 +5918,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/5325684221",
-   "lat": 15.8810435,
-   "lon": 108.3446773,
-   "name": "Hoi An Blind Massage",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/5339917521",
    "lat": 15.8784987,
@@ -6474,19 +5967,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/5353761323",
-   "lat": 15.8820932,
-   "lon": 108.3455171,
-   "name": "Spa Sweden",
-   "name_en": "Hội An",
-   "opening_hours": "Mo-Su 08:00-00:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
   },
   {
    "zone": "hoi_an",
@@ -6724,19 +6204,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5414154624",
-   "lat": 15.8848634,
-   "lon": 108.3490973,
-   "name": "Red Dragon Restaurant",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:30-22:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5420442721",
    "lat": 15.8833902,
@@ -6854,19 +6321,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5444164055",
-   "lat": 15.8797871,
-   "lon": 108.3269763,
-   "name": "Day & Night",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5444174166",
    "lat": 15.8799835,
@@ -6916,19 +6370,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5444645841",
-   "lat": 15.8799505,
-   "lon": 108.3262736,
-   "name": "Tea Garden",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -7010,32 +6451,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/5444674051",
-   "lat": 15.8801254,
-   "lon": 108.3251968,
-   "name": "Cafe Thiện Trung",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/5444684504",
-   "lat": 15.8799317,
-   "lon": 108.3251631,
-   "name": "Café Tin;",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5444685015",
    "lat": 15.8807525,
@@ -7049,19 +6464,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/5444685779",
-   "lat": 15.8798174,
-   "lon": 108.3251751,
-   "name": "Quán Café - Trà Cung Đình",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/5444689515",
    "lat": 15.8766647,
@@ -7072,19 +6474,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "nightlife"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5444693768",
-   "lat": 15.8799726,
-   "lon": 108.3260302,
-   "name": "Quán Phở Tiến",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
   },
   {
    "zone": "hoi_an",
@@ -7316,19 +6705,6 @@
    "name": "An Hien Com Ga",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5464917424",
-   "lat": 15.8923094,
-   "lon": 108.3603553,
-   "name": "Happy Buffalo",
-   "name_en": null,
-   "opening_hours": "Mo-Sa 17:00-23:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -7582,19 +6958,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5570949320",
-   "lat": 15.9130907,
-   "lon": 108.3412915,
-   "name": "The Fisherman",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:30-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5572565921",
    "lat": 15.8853113,
@@ -7647,19 +7010,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5595997721",
-   "lat": 15.8766176,
-   "lon": 108.3316053,
-   "name": "An Hý",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:00-20:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5601755422",
    "lat": 15.8811003,
@@ -7667,19 +7017,6 @@
    "name": "Hui buí",
    "name_en": "Barber - shave",
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5613322622",
-   "lat": 15.8758308,
-   "lon": 108.32672,
-   "name": "Nostalife",
-   "name_en": null,
-   "opening_hours": "Mo-Su 12:00-12:00,21:30-21:30",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -8557,19 +7894,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5798643153",
-   "lat": 15.8794059,
-   "lon": 108.3203352,
-   "name": "Quán Chay Nhân Duyên Vegan",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/5800843761",
    "lat": 15.8785208,
@@ -8622,19 +7946,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/5809954055",
-   "lat": 15.8803222,
-   "lon": 108.3279264,
-   "name": "Hoi An Smoothie",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:30-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/5810353653",
    "lat": 15.9081589,
@@ -8645,19 +7956,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/5811814156",
-   "lat": 15.8944869,
-   "lon": 108.3164733,
-   "name": "Hein Coffee",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -8791,19 +8089,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/6034005613",
-   "lat": 15.8784234,
-   "lon": 108.3237708,
-   "name": "Viet Ngon",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/6034005702",
    "lat": 15.8758854,
@@ -8905,19 +8190,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "nightlife"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/6091196615",
-   "lat": 15.8774754,
-   "lon": 108.3285499,
-   "name": "Phan Kim Chi Art Gallery",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "museum_indoor"
   },
   {
    "zone": "hoi_an",
@@ -9182,19 +8454,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/6224346486",
-   "lat": 15.8807991,
-   "lon": 108.3261239,
-   "name": "La Luna Spa",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/6231515285",
    "lat": 15.8759177,
    "lon": 108.3561839,
@@ -9256,45 +8515,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/6251697585",
-   "lat": 15.8789572,
-   "lon": 108.3413943,
-   "name": "NOURISH eatery",
-   "name_en": null,
-   "opening_hours": "Tu-Su 09:00-16:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/6252089286",
-   "lat": 15.9136899,
-   "lon": 108.3370642,
-   "name": "Spa V",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/6257424485",
-   "lat": 15.8836771,
-   "lon": 108.3253961,
-   "name": "Hoi An Sports Bar",
-   "name_en": "sports bar",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
   },
   {
    "zone": "hoi_an",
@@ -9637,19 +8857,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/6354826049",
-   "lat": 15.8976157,
-   "lon": 108.3640426,
-   "name": "Cua Dai Beach Spa",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/6372734486",
    "lat": 15.8416131,
    "lon": 108.349573,
@@ -9711,19 +8918,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/6418785294",
-   "lat": 15.8872239,
-   "lon": 108.3515786,
-   "name": "Són La Coffee",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -9838,19 +9032,6 @@
    "name": "Nha Khoa BS NGỌC HÙNG",
    "name_en": "Dental Clinic NGOC HUNG",
    "opening_hours": "Mo-Sa 09:00-19:00; Su 08:00-12:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/6483231385",
-   "lat": 15.8976897,
-   "lon": 108.3050318,
-   "name": "An Farm Hoi An",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-18:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -10156,19 +9337,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/6696113992",
-   "lat": 15.8819548,
-   "lon": 108.3255198,
-   "name": "Tô Tô",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/6696115985",
    "lat": 15.9270149,
@@ -10326,19 +9494,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/6821692763",
-   "lat": 15.8765686,
-   "lon": 108.3426278,
-   "name": "Hoa Hiên",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-21:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/6863053585",
    "lat": 15.8874887,
    "lon": 108.3292053,
@@ -10488,19 +9643,6 @@
    "name": "Seaside",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/6956509385",
-   "lat": 15.912816,
-   "lon": 108.3402148,
-   "name": "Bikini Bottom Express An Bang",
-   "name_en": null,
-   "opening_hours": "mo-su 08:30-22:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -10819,19 +9961,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/7118673485",
-   "lat": 15.8786153,
-   "lon": 108.3312809,
-   "name": "Lê Hội Bánh Mí Chay",
-   "name_en": "Lê Hội Vegan Sandwich",
-   "opening_hours": "Mo-Su 06:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/7121408674",
    "lat": 15.8799123,
@@ -10839,6 +9968,19 @@
    "name": "Mini Mart",
    "name_en": null,
    "opening_hours": "Mo-Su 08:00; 01:00; PH open",
+   "fee": null,
+   "wikidata": null,
+   "category_guess": "outdoor_landmark"
+  },
+  {
+   "zone": "hoi_an",
+   "role_guess": "rest",
+   "osm": "node/7121639387",
+   "lat": 15.8771382,
+   "lon": 108.3270782,
+   "name": "Кафе",
+   "name_en": null,
+   "opening_hours": null,
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -10868,19 +10010,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/7127464285",
-   "lat": 15.8766492,
-   "lon": 108.3298384,
-   "name": "Hoi An Museum of Traditional Medicine",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-11:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "museum_indoor"
   },
   {
    "zone": "hoi_an",
@@ -11011,19 +10140,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/7155363886",
-   "lat": 15.8864383,
-   "lon": 108.3512441,
-   "name": "Blues and Brews Resteraunt & Bar",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
   },
   {
    "zone": "hoi_an",
@@ -11274,19 +10390,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/7200332585",
-   "lat": 15.8817604,
-   "lon": 108.3247719,
-   "name": "Herbal Spa - Hoi An Branch 1",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "rest",
    "osm": "node/7210505486",
    "lat": 15.8849804,
@@ -11323,19 +10426,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/7238341085",
-   "lat": 15.8784826,
-   "lon": 108.3238898,
-   "name": "Quàn 137 Bà Linh",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -11651,19 +10741,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/7721404199",
-   "lat": 15.8442652,
-   "lon": 108.2803369,
-   "name": "Caffe Cỏ Đá",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/7866791124",
    "lat": 15.8808257,
@@ -11687,19 +10764,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/8088140322",
-   "lat": 15.89005,
-   "lon": 108.3235138,
-   "name": "Bonte café",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -11752,19 +10816,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/9529282481",
-   "lat": 15.8801469,
-   "lon": 108.3244394,
-   "name": "The Curve Cafe",
-   "name_en": null,
-   "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -11911,19 +10962,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/9963308324",
-   "lat": 15.888326,
-   "lon": 108.3296691,
-   "name": "Hani Health Spa",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-21:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "rest",
    "osm": "node/10029093147",
    "lat": 15.880781,
@@ -11947,19 +10985,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/10171278941",
-   "lat": 15.8702083,
-   "lon": 108.3159055,
-   "name": "Chùa Kim Bửu",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
   },
   {
    "zone": "hoi_an",
@@ -12165,19 +11190,6 @@
    "name": "An My rest stop",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/10304029313",
-   "lat": 15.892499,
-   "lon": 108.3521422,
-   "name": "Roving Chillhouse",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:30-21:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -12471,19 +11483,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/10603243286",
-   "lat": 15.872965,
-   "lon": 108.3366764,
-   "name": "Món Ngon Hà Nội",
-   "name_en": null,
-   "opening_hours": "Mo closed; Tu-Su 07:00-19:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/10603580456",
    "lat": 15.8731819,
    "lon": 108.3327081,
@@ -12613,19 +11612,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/10635513085",
-   "lat": 15.8779723,
-   "lon": 108.326669,
-   "name": "Artbook",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:30-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/10650762805",
    "lat": 15.8782134,
@@ -12718,19 +11704,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/10736269999",
-   "lat": 15.874212,
-   "lon": 108.3332381,
-   "name": "Spa Jonu",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/10736277153",
    "lat": 15.8796279,
    "lon": 108.3287106,
@@ -12766,19 +11739,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/10760853506",
-   "lat": 15.8774859,
-   "lon": 108.3343705,
-   "name": "Lemon tree spa",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
   },
   {
    "zone": "hoi_an",
@@ -13394,19 +12354,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/11581690669",
-   "lat": 15.8780963,
-   "lon": 108.3375281,
-   "name": "Chùa Bảo Thắng",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/11581700332",
    "lat": 15.8794937,
    "lon": 108.3335921,
@@ -13504,19 +12451,6 @@
    "name": "Used Books",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/11609574104",
-   "lat": 15.8803093,
-   "lon": 108.3405967,
-   "name": "Good Eats",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-16:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -13771,19 +12705,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "meal",
-   "osm": "node/11840976337",
-   "lat": 15.8766216,
-   "lon": 108.3276081,
-   "name": "V vegan cafe & restaurant",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
    "osm": "node/11841019755",
    "lat": 15.8783864,
    "lon": 108.3284274,
@@ -13803,19 +12724,6 @@
    "name": "Lối Nhỏ Food & Drink",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/11873114055",
-   "lat": 15.9149497,
-   "lon": 108.3365583,
-   "name": "Cosy Corner",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-17:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -13845,19 +12753,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/11878409184",
-   "lat": 15.891081,
-   "lon": 108.3441943,
-   "name": "Tropical Eatery",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-18:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
   },
   {
    "zone": "hoi_an",
@@ -13914,19 +12809,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/11896339273",
-   "lat": 15.8855958,
-   "lon": 108.3505685,
-   "name": "CSO Gallery",
-   "name_en": null,
-   "opening_hours": "Tu-Su 08:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "museum_indoor"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/11903565471",
    "lat": 15.8805157,
    "lon": 108.3432286,
@@ -13959,19 +12841,6 @@
    "name": "Hasaki",
    "name_en": null,
    "opening_hours": "24/7",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/11919603867",
-   "lat": 15.8777238,
-   "lon": 108.327873,
-   "name": "Avocado",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-16:00, 17:00-21:30",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -14173,19 +13042,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/12058417799",
-   "lat": 15.8973896,
-   "lon": 108.3396668,
-   "name": "Miss Hoi An",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-19:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/12060446555",
    "lat": 15.8778983,
@@ -14342,19 +13198,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/12323301001",
-   "lat": 15.8757161,
-   "lon": 108.3270621,
-   "name": "Balloons SPA",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "node/12323871101",
    "lat": 15.8759205,
@@ -14469,19 +13312,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/12468807102",
-   "lat": 15.8785072,
-   "lon": 108.330018,
-   "name": "Mezcal Cocteleria",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -14902,19 +13732,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "rest",
-   "osm": "node/12702443401",
-   "lat": 15.8403283,
-   "lon": 108.2816481,
-   "name": "Share Kafe",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
    "osm": "node/12702609501",
    "lat": 15.8401803,
    "lon": 108.2813223,
@@ -15291,19 +14108,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13091349871",
-   "lat": 15.880572,
-   "lon": 108.3412716,
-   "name": "Nhã Na",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13091480897",
    "lat": 15.8862069,
@@ -15356,19 +14160,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13120808702",
-   "lat": 15.8774569,
-   "lon": 108.3261386,
-   "name": "Street Café",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-18:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13120817201",
    "lat": 15.8692925,
@@ -15405,45 +14196,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13124286901",
-   "lat": 15.8773522,
-   "lon": 108.3261357,
-   "name": "Street Café (cà phê Muối)",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-16:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13124293801",
-   "lat": 15.8798598,
-   "lon": 108.3271752,
-   "name": "Cà phê Nhà Nguyên",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-17:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13146901701",
-   "lat": 15.8756445,
-   "lon": 108.3243691,
-   "name": "Subi Coffee & Tea",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:30-19:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -15491,19 +14243,6 @@
    "lat": 15.912947,
    "lon": 108.3386895,
    "name": "Mini-Golf Hoi An",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/13152739401",
-   "lat": 15.9128319,
-   "lon": 108.3385966,
-   "name": "Hoi An Brewing Co",
    "name_en": null,
    "opening_hours": null,
    "fee": null,
@@ -15850,19 +14589,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13426342201",
-   "lat": 15.881633,
-   "lon": 108.3499364,
-   "name": "Banh Xeo Khue",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-20:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13426342202",
    "lat": 15.8760908,
@@ -16019,19 +14745,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13430047101",
-   "lat": 15.8812772,
-   "lon": 108.3449295,
-   "name": "An Phuoc Vegetarian",
-   "name_en": null,
-   "opening_hours": "Mo-Su 06:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13431983601",
    "lat": 15.8757751,
@@ -16055,19 +14768,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/13439124694",
-   "lat": 15.8784079,
-   "lon": 108.3240194,
-   "name": "Herbal Spa Hoi An",
-   "name_en": null,
-   "opening_hours": "Mo-Su 10:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
   },
   {
    "zone": "hoi_an",
@@ -16143,19 +14843,6 @@
    "name": "G8 Open Tour",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13462061301",
-   "lat": 15.8771352,
-   "lon": 108.3383049,
-   "name": "Vi Hoi An",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-22:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -16263,19 +14950,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "node/13537125073",
-   "lat": 15.8799379,
-   "lon": 108.3284934,
-   "name": "Bill Coffee & Tea",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -16591,19 +15265,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13687990703",
-   "lat": 15.8763924,
-   "lon": 108.3285688,
-   "name": "The Son Bistro",
-   "name_en": null,
-   "opening_hours": "Mo-Su,PH 08:00-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13688336601",
    "lat": 15.8891572,
@@ -16904,19 +15565,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "node/13797708575",
-   "lat": 15.8764766,
-   "lon": 108.3736311,
-   "name": "Hoi An Basket Boat",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "paid_attraction"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "node/13800199422",
    "lat": 15.8932965,
    "lon": 108.3265802,
@@ -16939,19 +15587,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "lodging"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13812953288",
-   "lat": 15.8772999,
-   "lon": 108.3347817,
-   "name": "Thirty3 Eatery",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
   },
   {
    "zone": "hoi_an",
@@ -17027,19 +15662,6 @@
    "name": "iVegan Supershop",
    "name_en": null,
    "opening_hours": "Mo-Su 07:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13888271701",
-   "lat": 15.8809229,
-   "lon": 108.3276524,
-   "name": "Seeds",
-   "name_en": null,
-   "opening_hours": "Mo-Su 17:00-21:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -17267,19 +15889,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13895748101",
-   "lat": 15.8717006,
-   "lon": 108.3331828,
-   "name": "Family Reataurant & Cafe",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-16:00, 17:30-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "rest",
    "osm": "node/13898121701",
    "lat": 15.8724102,
@@ -17306,32 +15915,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13904544801",
-   "lat": 15.8721587,
-   "lon": 108.3346704,
-   "name": "Cẩm Nam Quán",
-   "name_en": null,
-   "opening_hours": "Mo-Su 09:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13906389201",
-   "lat": 15.872022,
-   "lon": 108.3361283,
-   "name": "Fami's",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "node/13916857301",
    "lat": 15.8804877,
@@ -17352,19 +15935,6 @@
    "name": "Hí 2Hand",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/13934799101",
-   "lat": 15.8767451,
-   "lon": 108.332085,
-   "name": "Buttercup",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:30-16:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
@@ -17511,19 +16081,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "museum_indoor"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "node/14025305349",
-   "lat": 15.8761056,
-   "lon": 108.3301327,
-   "name": "Home Paste",
-   "name_en": null,
-   "opening_hours": "Mo-Su,PH 08:30-21:30",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -17709,19 +16266,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "node/14337513701",
-   "lat": 15.8745831,
-   "lon": 108.3255918,
-   "name": "Son Hoi An Spa",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "wellness"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "rest",
    "osm": "node/14338025801",
    "lat": 15.8763192,
@@ -17732,19 +16276,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "nightlife",
-   "osm": "node/14339936801",
-   "lat": 15.9055208,
-   "lon": 108.3528679,
-   "name": "Yang Smile Beach Bar",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "nightlife"
   },
   {
    "zone": "hoi_an",
@@ -17827,19 +16358,6 @@
   {
    "zone": "hoi_an",
    "role_guess": "attraction",
-   "osm": "way/209494260",
-   "lat": 15.8788032,
-   "lon": 108.323379,
-   "name": "Nhà thờ Tin lành Hội An",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
    "osm": "way/209526701",
    "lat": 15.8777943,
    "lon": 108.3342066,
@@ -17862,32 +16380,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "day_market"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "way/210933183",
-   "lat": 15.8913484,
-   "lon": 108.3522457,
-   "name": "Di tích Đình Thanh Tẩy",
-   "name_en": "The Thanh Tay communal house",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "way/210966819",
-   "lat": 15.8775797,
-   "lon": 108.3257071,
-   "name": "Nhà thờ tộc Nguyễn Tường",
-   "name_en": "Nguyen Tuong Clan Ancestral Hall",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
   },
   {
    "zone": "hoi_an",
@@ -17953,19 +16445,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "way/212215308",
-   "lat": 15.8799773,
-   "lon": 108.3279254,
-   "name": "Starbucks",
-   "name_en": null,
-   "opening_hours": "Mo-Su 07:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -18307,19 +16786,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "way/549343300",
-   "lat": 15.9223117,
-   "lon": 108.3231174,
-   "name": "Hoang Long Beach",
-   "name_en": null,
-   "opening_hours": "Mo-Su 08:00-22:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "beach"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "way/551951748",
    "lat": 15.8743404,
@@ -18463,19 +16929,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "way/565276813",
-   "lat": 15.8803254,
-   "lon": 108.3194311,
-   "name": "Thanh That Cao Dai",
-   "name_en": null,
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "meal",
    "osm": "way/565277229",
    "lat": 15.8811072,
@@ -18499,19 +16952,6 @@
    "fee": null,
    "wikidata": null,
    "category_guess": "restaurant"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "way/565280048",
-   "lat": 15.8805898,
-   "lon": 108.3277584,
-   "name": "JEERA",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:00-23:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
   },
   {
    "zone": "hoi_an",
@@ -18996,19 +17436,6 @@
   },
   {
    "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "way/616910526",
-   "lat": 15.9117198,
-   "lon": 108.3411656,
-   "name": "Thom's Sourdough Bakery & Coffee - An Bang Beach",
-   "name_en": null,
-   "opening_hours": "07:30-16:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
-  },
-  {
-   "zone": "hoi_an",
    "role_guess": "attraction",
    "osm": "way/626346775",
    "lat": 15.8866056,
@@ -19071,32 +17498,6 @@
    "fee": "no",
    "wikidata": null,
    "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "attraction",
-   "osm": "way/631070197",
-   "lat": 15.8786235,
-   "lon": 108.3273085,
-   "name": "Chùa Pháp Bảo",
-   "name_en": "Phap Bao Pagoda",
-   "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "religious"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "rest",
-   "osm": "way/631732355",
-   "lat": 15.8805705,
-   "lon": 108.328957,
-   "name": "Thom's Sourdough Bakery & Coffee - Hoi An Ancient Town",
-   "name_en": null,
-   "opening_hours": "07:30-19:00",
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "cafe"
   },
   {
    "zone": "hoi_an",
@@ -19510,19 +17911,6 @@
    "name": "Trung tâm Y tế khu vực Hội An",
    "name_en": null,
    "opening_hours": null,
-   "fee": null,
-   "wikidata": null,
-   "category_guess": "outdoor_landmark"
-  },
-  {
-   "zone": "hoi_an",
-   "role_guess": "meal",
-   "osm": "way/1245731730",
-   "lat": 15.8772042,
-   "lon": 108.3385995,
-   "name": "Missteak Hoi An",
-   "name_en": null,
-   "opening_hours": "Mo-Su 11:30-23:00",
    "fee": null,
    "wikidata": null,
    "category_guess": "outdoor_landmark"

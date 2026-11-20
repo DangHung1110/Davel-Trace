@@ -134,12 +134,13 @@ def fetch_osm():
                 continue
             d = R.haversine_m(p["lat"], p["lon"], el["lat"], el["lon"])
             names = [el["tags"].get(k, "") for k in ("name", "name:vi", "name:en")]
-            ratio = max(difflib.SequenceMatcher(None, R.fold(p["name"]), R.fold(nm)).ratio()
+            ratio = max(difflib.SequenceMatcher(None, R.name_key(p["name"]), R.name_key(nm)).ratio()
                         for nm in names if nm) if any(names) else 0
             # same rule as migrate_v2.osm_name_ok: one name containing the other
             # ("Mộc quán Seafood Đà Nẵng" / "Mộc Quán") is a match
-            a = R.fold(p["name"])
-            if a and any(nm and (R.fold(nm) in a or a in R.fold(nm)) for nm in names):
+            a = R.name_key(p["name"])
+            if a and any(nm and R.name_key(nm) and (R.name_key(nm) in a or a in R.name_key(nm))
+                         for nm in names):
                 ratio = max(ratio, 0.9)
             score = ratio - d / 300.0
             if d <= 120 and ratio >= 0.6 and (best is None or score > best["score"]):

@@ -194,3 +194,10 @@ Người dùng duyệt thêm tối đa 150 điểm nếu đủ thông tin theo f
 - `BE/data/sources/new_pois_osm_2026-11-20.json` — 124 điểm (tất cả ở Hội An): 55 nhà hàng + 35 cà phê (chỉ lấy điểm có `opening_hours` trên OSM), 13 spa, 9 bar, 9 tôn giáo (chọn tay; Nhà thờ tộc Trần + Nguyễn Tường thuộc vé phố cổ, nguồn hoianfairytour xác nhận), 2 phòng tranh, tượng đài Kazik.
 - Codex (t15) tra giờ/giá cho 30 điểm chưa đủ (`reports/p0/links/new_hoian_codex.json`) → 14 có nguồn (`agent_web_2026-11-20e.json`).
 - Kết quả: 101/124 giờ `fixed`, 23 `safe_window`; mọi điểm có mức giá. Ma trận 793 → **917** (chạy theo đợt `--chunk 50`, 0 ô thiếu). Snapshot 1000 POI, 945 active.
+
+## u(t), tên tiếng Anh, sửa khớp OSM — 20/11
+
+- **u(t):** `BE/data/priors/time_profiles.json` (11 profile, neo mặt trời/đồng hồ, đỉnh 1, phủ 24 h — tham số thiết kế, hiệu chỉnh bằng log) + `BE/app/services/time_utility.py` (`sun_times` NOAA, `u_at`, `u_mean` = trung bình trên khoảng ở lại). Giờ mặt trời kiểm với weatherspark (độ dài ngày 21/6 = 13h05, 22/12 = 11h10) và alpenglow (15/12: 06:06 / 17:17), lệch ≤ 3 phút.
+- **name_en:** lấy `name:en` của phần tử OSM đã liên kết → 126 điểm.
+- **Sửa khớp OSM (lỗi thật):** so tên sau khi bỏ chữ thành phố (`v2_rules.name_key`) — "La Bonne Café Đà Nẵng" từng khớp "Làng Bích họa Đà Nẵng", "Babylon Spa Da Nang" ↔ "Maison Spa Da Nang", "Phố cổ Hội An" ↔ "Met Hoi An"; một phần tử OSM chỉ thuộc một điểm (3 động Ngũ Hành Sơn từng cùng trỏ "Động Âm Phủ"); điểm gốc OSM không bị khớp sang phần tử khác. 0 id OSM dùng chung; test `test_osm_name_match.py`.
+- **Mô tả:** OSM chỉ có 15/869 `description`, 0 tiếng Việt, nhiều dòng vô nghĩa → không lấy (xem đề xuất ở tin nhắn 20/11).

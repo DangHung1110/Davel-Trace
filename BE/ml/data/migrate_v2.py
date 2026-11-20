@@ -233,7 +233,7 @@ def osm_name_ok(p, osm, max_m=60, min_ratio=0.6):
     dist = osm.get("dist_m")
     if dist is None or dist > max_m or not osm.get("name"):
         return False
-    a, b = R.fold(p["name"]), R.fold(osm["name"])
+    a, b = R.name_key(p["name"]), R.name_key(osm["name"])
     if not a or not b:
         return False
     return a in b or b in a or difflib.SequenceMatcher(None, a, b).ratio() >= min_ratio
@@ -766,6 +766,7 @@ def _base_from_osm(item, name, fetched_at):
     p["opening_hours"] = []           # hours come from the weekly OSM parser
     p["hours_source"] = ""
     p["name_osm"] = None if manual else item["name"]
+    p["name_en"] = item.get("en")
     p["osm_evidence"] = None if manual else {"osm": item["osm"], "dist_m": 0.0, "hours": item.get("oh"),
                                              "fee": item.get("fee"), "name": name}
     p["added_in"] = "v2.0-p0b"
@@ -836,6 +837,17 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
                 web_tickets[row.get("poi_id") or row["name"]] = row
     popularity = _load(os.path.join(sources_dir, "popularity.json"), {}) or {}
     osm_match = (_load(os.path.join(sources_dir, "osm_match.json"), {}) or {}).get("items", {})
+    # one OSM element belongs to one POI: the best name match (then nearest)
+    # keeps it ("Động Tàng Chơn"/"Động Vân Thông" all matched "Động Âm Phủ"),
+    # and an element that IS an OSM-origin POI is never lent to another one.
+    owner = {}
+    for pid, m in osm_match.items():
+        key = (m.get("name_ratio", 0), -m.get("dist_m", 0))
+        if m["osm"] not in owner or key > owner[m["osm"]][0]:
+            owner[m["osm"]] = (key, pid)
+    osm_match = {pid: m for pid, m in osm_match.items()
+                 if owner[m["osm"]][1] == pid
+                 and (pid == f"osm:{m['osm']}" or not any(p["poi_id"] == f"osm:{m['osm']}" for p in pois_v1))}
 
     new_pois, new_cats, old_town, new_prices, new_wd, skipped_new = load_new_pois(sources_dir, pois_v1)
     for row in new_prices:
@@ -908,7 +920,13 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         v["requires_ticket_of_name"] = parent["name"] if parent else None
 
         web_item = web_tickets.get(pid) or web_tickets.get(p["name"])
+        # an OSM-origin POI IS its element: never re-match it to a neighbour
         om = osm_match.get(pid)
+        if om and pid.startswith("osm:") and om["osm"] != pid[4:]:
+            om = None
+        if om and not any(osm_name_ok(p, {"name": om["tags"].get(k), "dist_m": om["dist_m"]}, max_m=120)
+                          for k in ("name", "name:vi", "name:en")):
+            om = None   # fetch matched on a shared city word only (La Bonne Café ≠ Làng Bích họa)
         if om and not (p.get("osm_evidence") or {}).get("hours"):
             # fresh Overpass match (fetch_open_data.py) feeds the OSM-hours branch
             p = dict(p, osm_evidence={"osm": om["osm"], "dist_m": om["dist_m"],
@@ -974,7 +992,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         v.update({
             "data_version": DATA_VERSION,
             "name_vi": p["name"],
-            "name_en": None,
+            # OSM `name:en` of the linked element (ODbL), else the new-POI row's
+            "name_en": ((om or {}).get("tags") or {}).get("name:en") or p.get("name_en") or None,
             "ext_ids": {"osm": osm_id, "osm_match_m": osm.get("dist_m") if osm_id else None,
                         "overture": None, "wikidata": pop.get("wikidata")},
             "category": cat,

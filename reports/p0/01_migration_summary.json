@@ -95,9 +95,9 @@
   "hoi_an_old_town": 32
  },
  "hours_verified_by": {
-  "inferred": 666,
+  "inferred": 665,
   "agent_web": 143,
-  "open_data": 189,
+  "open_data": 190,
   "user": 2
  },
  "price_verified_by": {
@@ -198,5 +198,5 @@
   }
  ],
  "ticket_todo": 19,
- "osm_linked": 516
+ "osm_linked": 510
 }

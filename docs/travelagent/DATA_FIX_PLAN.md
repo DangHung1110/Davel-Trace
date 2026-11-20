@@ -118,8 +118,8 @@
 
 | Dữ liệu | File đề xuất | Nguồn | Ghi chú |
 |---|---|---|---|
-| Đường cong `u(t)` cho 13 `time_profile` | `BE/data/priors/time_profiles.json` | thiết kế + log sau này | neo bình minh/hoàng hôn, phủ 24 h, đỉnh = 1 |
-| Giờ mặt trời theo ngày | sinh bằng code (công thức thiên văn, không cần mạng) | — | dùng cho `u(t)` |
+| ~~Đường cong `u(t)`~~ **xong 20/11** cho 11 `time_profile` đang dùng | `BE/data/priors/time_profiles.json` + `BE/app/services/time_utility.py` (`u_at`, `u_mean`) | thiết kế (design prior) + log sau này | neo bình minh/hoàng hôn/chính trưa hoặc giờ đồng hồ, phủ 24 h, đỉnh = 1; test `test_time_utility.py` |
+| ~~Giờ mặt trời theo ngày~~ **xong 20/11** | `time_utility.sun_times` (NOAA, không mạng) | — | đối chiếu weatherspark/alpenglow: lệch ≤ 3 phút |
 | Khí hậu bình thường theo tháng × giờ | `BE/data/priors/climate_danang.json` | Open-Meteo historical (MẠNG) | để tính phần lệch thời tiết |
 | Tham số trạng thái (năng lượng, độ no, nhiệt) | `BE/data/priors/state_params.json` | thiết kế, hiệu chỉnh từ pilot | mô phỏng, không thu thập |
 | Ma trận theo khung giờ × thời tiết, P50/P90 | ma trận v2 | Valhalla `motor_scooter` | |

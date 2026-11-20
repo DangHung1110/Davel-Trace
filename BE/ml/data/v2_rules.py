@@ -31,6 +31,15 @@ import unicodedata
 # --------------------------------------------------------------------------
 
 
+CITY_WORDS = re.compile(r"\b(tp|thanh pho|da nang|danang|hoi an|hoian|viet nam|vietnam|quang nam)\b")
+
+
+def name_key(text: str | None) -> str:
+    """fold() without city words: "La Bonne Café Đà Nẵng" vs "Làng Bích họa
+    Đà Nẵng" must not look alike just because both end in the city name."""
+    return re.sub(r"\s+", " ", CITY_WORDS.sub(" ", fold(text))).strip()
+
+
 def fold(text: str | None) -> str:
     """Lower-case, strip Vietnamese diacritics, collapse spaces."""
     t = (text or "").replace("đ", "d").replace("Đ", "D")

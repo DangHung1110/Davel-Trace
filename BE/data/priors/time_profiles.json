@@ -1,0 +1,153 @@
+{
+ "version": "time_profiles_v1",
+ "created": "2026-11-20",
+ "status": "design prior (verified_by=design) — hình dạng do thiết kế, KHÔNG phải số đo; hiệu chỉnh bằng log pilot (giữ/đổi/bỏ theo giờ tới).",
+ "spec": "u(t) ∈ [0,1], đỉnh = 1, phủ 24 giờ, nội suy tuyến tính giữa các mốc (vòng qua nửa đêm). Mốc neo theo mặt trời ('sunrise', 'sunset', 'solar_noon' + offset_min) hoặc giờ đồng hồ ('clock' + time). Giờ mở cửa và khung đường KHÔNG nằm ở đây (solver đọc hours.open); u(t) chỉ là mức hấp dẫn khi đang mở. Hàm mục tiêu dùng ū = trung bình u trên khoảng ở lại (TRAVELAGENT_CONTEXT §3). Code: BE/app/services/time_utility.py.",
+ "profiles": {
+  "sun_anchored_beach": {
+   "why": "Tắm biển: sáng sớm sau bình minh và chiều muộn trước hoàng hôn; giữa trưa nắng gắt.",
+   "points": [
+    {"ref": "sunrise", "offset_min": -30, "u": 0.3},
+    {"ref": "sunrise", "offset_min": 30, "u": 1.0},
+    {"ref": "sunrise", "offset_min": 180, "u": 0.8},
+    {"ref": "solar_noon", "offset_min": -60, "u": 0.3},
+    {"ref": "solar_noon", "offset_min": 60, "u": 0.15},
+    {"ref": "sunset", "offset_min": -180, "u": 0.55},
+    {"ref": "sunset", "offset_min": -90, "u": 1.0},
+    {"ref": "sunset", "offset_min": 0, "u": 0.8},
+    {"ref": "sunset", "offset_min": 60, "u": 0.3},
+    {"ref": "clock", "time": "23:00", "u": 0.1}
+   ]
+  },
+  "sun_anchored_view": {
+   "why": "Điểm ngắm cảnh: đỉnh ở bình minh và hoàng hôn (giờ vàng), trưa nắng chói thấp.",
+   "points": [
+    {"ref": "sunrise", "offset_min": -45, "u": 0.7},
+    {"ref": "sunrise", "offset_min": 0, "u": 1.0},
+    {"ref": "sunrise", "offset_min": 120, "u": 0.6},
+    {"ref": "solar_noon", "offset_min": 0, "u": 0.3},
+    {"ref": "sunset", "offset_min": -90, "u": 0.75},
+    {"ref": "sunset", "offset_min": -15, "u": 1.0},
+    {"ref": "sunset", "offset_min": 30, "u": 0.8},
+    {"ref": "sunset", "offset_min": 120, "u": 0.4},
+    {"ref": "clock", "time": "23:30", "u": 0.15}
+   ]
+  },
+  "outdoor_heat_sensitive": {
+   "why": "Điểm ngoài trời không che (phố, cầu, công viên): sáng mát và chiều tối tốt; trưa nóng; tối có đèn (phố cổ, cầu Rồng).",
+   "points": [
+    {"ref": "sunrise", "offset_min": 0, "u": 0.6},
+    {"ref": "sunrise", "offset_min": 90, "u": 1.0},
+    {"ref": "clock", "time": "10:00", "u": 0.7},
+    {"ref": "solar_noon", "offset_min": 0, "u": 0.3},
+    {"ref": "clock", "time": "15:00", "u": 0.5},
+    {"ref": "sunset", "offset_min": -60, "u": 0.9},
+    {"ref": "sunset", "offset_min": 60, "u": 1.0},
+    {"ref": "clock", "time": "21:30", "u": 0.8},
+    {"ref": "clock", "time": "23:30", "u": 0.3}
+   ]
+  },
+  "morning_cool": {
+   "why": "Chùa, đền: sáng sớm thanh tịnh và mát; trưa thấp; chiều khá.",
+   "points": [
+    {"ref": "sunrise", "offset_min": 0, "u": 0.8},
+    {"ref": "sunrise", "offset_min": 60, "u": 1.0},
+    {"ref": "clock", "time": "09:30", "u": 0.85},
+    {"ref": "solar_noon", "offset_min": 0, "u": 0.4},
+    {"ref": "clock", "time": "15:30", "u": 0.65},
+    {"ref": "sunset", "offset_min": 0, "u": 0.6},
+    {"ref": "clock", "time": "21:00", "u": 0.3},
+    {"ref": "clock", "time": "23:30", "u": 0.1}
+   ]
+  },
+  "indoor_flat": {
+   "why": "Bảo tàng, trong nhà: gần như đều; nhỉnh vào trưa nắng/nóng (chỗ tránh nắng).",
+   "points": [
+    {"ref": "clock", "time": "08:00", "u": 0.85},
+    {"ref": "clock", "time": "11:30", "u": 1.0},
+    {"ref": "clock", "time": "15:30", "u": 1.0},
+    {"ref": "clock", "time": "18:00", "u": 0.85},
+    {"ref": "clock", "time": "22:00", "u": 0.7},
+    {"ref": "clock", "time": "03:00", "u": 0.5}
+   ]
+  },
+  "morning_market": {
+   "why": "Chợ ban ngày: đông và tươi nhất sáng sớm, thưa dần sau 9–10 giờ.",
+   "points": [
+    {"ref": "clock", "time": "05:00", "u": 0.7},
+    {"ref": "clock", "time": "06:30", "u": 1.0},
+    {"ref": "clock", "time": "09:00", "u": 0.75},
+    {"ref": "clock", "time": "11:00", "u": 0.45},
+    {"ref": "clock", "time": "15:00", "u": 0.35},
+    {"ref": "clock", "time": "19:00", "u": 0.3},
+    {"ref": "clock", "time": "23:00", "u": 0.1}
+   ]
+  },
+  "evening_peak": {
+   "why": "Chợ đêm, bar, nightlife: sống sau hoàng hôn, đỉnh khoảng 20–22 giờ.",
+   "points": [
+    {"ref": "clock", "time": "06:00", "u": 0.1},
+    {"ref": "clock", "time": "15:00", "u": 0.2},
+    {"ref": "sunset", "offset_min": 0, "u": 0.55},
+    {"ref": "sunset", "offset_min": 90, "u": 1.0},
+    {"ref": "clock", "time": "22:00", "u": 1.0},
+    {"ref": "clock", "time": "23:59", "u": 0.6},
+    {"ref": "clock", "time": "02:00", "u": 0.3}
+   ]
+  },
+  "meal_windows": {
+   "why": "Nhà hàng: đỉnh giờ ăn trưa và tối, sáng vừa (ăn sáng), giữa giờ thấp.",
+   "points": [
+    {"ref": "clock", "time": "06:30", "u": 0.55},
+    {"ref": "clock", "time": "08:30", "u": 0.6},
+    {"ref": "clock", "time": "10:00", "u": 0.3},
+    {"ref": "clock", "time": "11:30", "u": 1.0},
+    {"ref": "clock", "time": "13:00", "u": 1.0},
+    {"ref": "clock", "time": "15:00", "u": 0.3},
+    {"ref": "clock", "time": "18:00", "u": 1.0},
+    {"ref": "clock", "time": "20:00", "u": 1.0},
+    {"ref": "clock", "time": "22:00", "u": 0.4},
+    {"ref": "clock", "time": "01:00", "u": 0.1}
+   ]
+  },
+  "flat_rest": {
+   "why": "Cà phê: cà phê sáng, nghỉ trưa tránh nắng là đỉnh, tối vừa.",
+   "points": [
+    {"ref": "clock", "time": "06:30", "u": 0.8},
+    {"ref": "clock", "time": "09:00", "u": 0.8},
+    {"ref": "clock", "time": "13:00", "u": 1.0},
+    {"ref": "clock", "time": "15:30", "u": 1.0},
+    {"ref": "clock", "time": "18:00", "u": 0.7},
+    {"ref": "clock", "time": "21:00", "u": 0.65},
+    {"ref": "clock", "time": "23:30", "u": 0.2}
+   ]
+  },
+  "afternoon_rest": {
+   "why": "Spa, massage: nghỉ trưa/chiều sau khi đi nắng là đỉnh; tối sau bữa tối khá.",
+   "points": [
+    {"ref": "clock", "time": "09:00", "u": 0.45},
+    {"ref": "clock", "time": "12:30", "u": 0.8},
+    {"ref": "clock", "time": "14:00", "u": 1.0},
+    {"ref": "clock", "time": "16:30", "u": 1.0},
+    {"ref": "clock", "time": "18:30", "u": 0.7},
+    {"ref": "clock", "time": "20:30", "u": 0.9},
+    {"ref": "clock", "time": "23:00", "u": 0.4},
+    {"ref": "clock", "time": "02:00", "u": 0.1}
+   ]
+  },
+  "open_hours_flat": {
+   "why": "Điểm có vé (khu vui chơi, show, tour): mức đều trong giờ mở; giờ mở/suất do hours.open quyết định.",
+   "points": [
+    {"ref": "clock", "time": "00:00", "u": 1.0},
+    {"ref": "clock", "time": "23:59", "u": 1.0}
+   ]
+  },
+  "none": {
+   "why": "Lưu trú (base) — không phải điểm dừng.",
+   "points": [
+    {"ref": "clock", "time": "00:00", "u": 0.0},
+    {"ref": "clock", "time": "23:59", "u": 0.0}
+   ]
+  }
+ }
+}
