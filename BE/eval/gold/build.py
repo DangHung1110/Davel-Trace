@@ -29,7 +29,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.common import load_matrix_cells, load_pois  # noqa: E402
-from BE.eval.gold.approach_b import make_gold  # noqa: E402
+from BE.eval.gold.approach_b import chain_order, make_gold  # noqa: E402
 from BE.eval.gold.queries import build_queries  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
 
@@ -86,7 +86,10 @@ def build_suite(pois_by_id: dict, matrix: dict, n: int, seed: int, caps: bool = 
     coverage = coverage_summary(pois_by_id, matrix, eligible)
     suite: list[dict] = []
     bad = infeasible = 0
-    for q in build_queries(list(pool.values()), n, seed):
+    def fits(must: list[str], trip: dict) -> bool:
+        return chain_order(list(must), trip, pool, matrix)[0] is not None
+
+    for q in build_queries(list(pool.values()), n, seed, fits=fits):
         gold = make_gold(q, pool, matrix, caps=caps)
         if gold["itinerary"] is None:
             infeasible += 1

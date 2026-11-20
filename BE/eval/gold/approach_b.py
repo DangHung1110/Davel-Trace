@@ -134,6 +134,24 @@ def _place(arrival: int, dur: int, hours: list[str], ws: int, we: int) -> int | 
     return best
 
 
+def _musts_fit_after(pid: str, clock: int, order: list[str], acts: list[dict], must: set,
+                     pois: dict, matrix: dict, ws: int, we: int) -> bool:
+    """Leaving `pid` at `clock`, can every not-yet-placed must_visit still be
+    placed, in tour order, going straight from one to the next?"""
+    placed = {a["poi_id"] for a in acts}
+    prev, cur = pid, clock
+    for m in (x for x in order if x in must and x not in placed):
+        gap = _edge_minutes(matrix, prev, m)
+        if gap is None:
+            return False
+        dur = int(pois[m]["visit_min"]["p50"])
+        start = _place(cur + gap, dur, pois[m].get("opening_hours", []), ws, we)
+        if start is None:
+            return False
+        prev, cur = m, start + dur
+    return True
+
+
 def _breaks_caps(pid: str, start: int, acts: list[dict], pois: dict) -> bool:
     """True if adding `pid` at `start` would break a HARD gate quota:
     CAFE_CAP (default 1/day), CATEGORY_CAP (one per capped non-food
@@ -185,6 +203,9 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
             continue
         if caps and pid not in must and _breaks_caps(pid, start, acts, pois):
             continue   # WP11: a gold must pass the gate; skip a quota breaker
+        if pid not in must and not _musts_fit_after(pid, start + dur, order, acts, must,
+                                                    pois, matrix, ws, we):
+            continue   # an optional stop may not push a must_visit out of its hours
         acts.append({"poi_id": pid, "start": _hh(start), "end": _hh(start + dur),
                      "explanation": {"evidence": [evidence]}})
         prev, cur = pid, start + dur

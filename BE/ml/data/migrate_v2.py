@@ -51,7 +51,7 @@ V21_KEYS = (
     "poi_id", "name", "name_raw", "name_en", "lat", "lon",
     "category", "role", "status", "status_reason", "zone", "cluster_id", "alt_group",
     "requires_ticket_of", "hours", "price", "dwell", "tags", "time_profile",
-    "popularity", "description", "ext_ids", "provenance",
+    "popularity", "ext_ids", "provenance",
     "data_version", "valid_from", "valid_to",
 )
 PROVENANCE_KEYS = ("name", "location", "category", "hours", "price", "dwell", "tags", "popularity")
@@ -502,10 +502,8 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
                        "wikipedia_views_90d": pop_src.get("wikipedia_views_90d"),
                        "guide_mentions": pop_src.get("guide_mentions") or 0,
                        "michelin": bool(pop_src.get("michelin"))},
-        "description": v["description"],
         "ext_ids": {"osm": v["ext_ids"].get("osm"),
-                    "google_place_id": v["poi_id"] if v["poi_id"].startswith("ChIJ") else None,
-                    "overture": v["ext_ids"].get("overture")},
+                    "google_place_id": v["poi_id"] if v["poi_id"].startswith("ChIJ") else None},
         "provenance": {k: pv[k] for k in PROVENANCE_KEYS},
         "data_version": DATA_VERSION, "valid_from": v["valid_from"], "valid_to": v["valid_to"],
     }
@@ -1018,7 +1016,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
             # OSM `name:en` of the linked element (ODbL), else the new-POI row's
             "name_en": ((om or {}).get("tags") or {}).get("name:en") or p.get("name_en") or None,
             "ext_ids": {"osm": osm_id, "osm_match_m": osm.get("dist_m") if osm_id else None,
-                        "overture": None, "wikidata": pop.get("wikidata")},
+                        "wikidata": pop.get("wikidata")},
             "category": cat,
             "category_evidence": cat_ev[pid],
             "role": R.ROLE_OF[cat],
@@ -1037,7 +1035,6 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
                            "signature": signature,
                            "guide_mentions": (guides.get(pid) or {}).get("mentions", 0),
                            "michelin": bool((guides.get(pid) or {}).get("michelin"))},
-            "description": {"text": None, "source": None, "license": None},
             "provenance": {
                 "name": prov(loc_src, loc_pv["verified_by"], confidence=loc_pv["confidence"],
                              note=loc_pv["note"]),

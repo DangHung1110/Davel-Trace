@@ -1,0 +1,2601 @@
+{
+ "day": "2026-06-15",
+ "static": {
+  "active_non_lodging": 869,
+  "missing_profile": [],
+  "no_good_time_in_hours": 0,
+  "no_good_examples": [],
+  "flat_in_hours": 244,
+  "by_category": {
+   "restaurant": {
+    "n": 220,
+    "no_good": 0,
+    "flat": 107,
+    "median_range": 0.29
+   },
+   "nightlife": {
+    "n": 97,
+    "no_good": 0,
+    "flat": 74,
+    "median_range": 0.06
+   },
+   "cafe": {
+    "n": 165,
+    "no_good": 0,
+    "flat": 4,
+    "median_range": 0.33
+   },
+   "day_market": {
+    "n": 45,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.42
+   },
+   "viewpoint": {
+    "n": 12,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.52
+   },
+   "religious": {
+    "n": 96,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.35
+   },
+   "outdoor_landmark": {
+    "n": 58,
+    "no_good": 0,
+    "flat": 1,
+    "median_range": 0.67
+   },
+   "museum_indoor": {
+    "n": 20,
+    "no_good": 0,
+    "flat": 18,
+    "median_range": 0.11
+   },
+   "paid_attraction": {
+    "n": 41,
+    "no_good": 0,
+    "flat": 40,
+    "median_range": 0.0
+   },
+   "beach": {
+    "n": 22,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.78
+   },
+   "night_market": {
+    "n": 5,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.36
+   },
+   "wellness": {
+    "n": 88,
+    "no_good": 0,
+    "flat": 0,
+    "median_range": 0.38
+   }
+  }
+ },
+ "solver": {
+  "queries": 30,
+  "feasible_A": 30,
+  "feasible_B": 30,
+  "objective_A": 101.042,
+  "objective_B": 119.156,
+  "stops_A": 171,
+  "stops_B": 167,
+  "bad_time_A": 45,
+  "bad_time_B": 19,
+  "mean_u_A": 0.687,
+  "mean_u_B": 0.824,
+  "solve_s_A_max": 10.09,
+  "solve_s_B_max": 10.22,
+  "rows": [
+   {
+    "query_id": "q01",
+    "window": "07:00-12:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.346,
+     "prize_sum": 3.918,
+     "mean_u": 0.866,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:01",
+       "morning_cool",
+       0.91
+      ],
+      [
+       "08:45",
+       "indoor_flat",
+       0.91
+      ],
+      [
+       "10:15",
+       "outdoor_heat_sensitive",
+       0.62
+      ],
+      [
+       "11:00",
+       "meal_windows",
+       0.93
+      ]
+     ]
+    },
+    "A_no_u_s": 3.86,
+    "A_no_u_status": "optimal",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.58,
+     "prize_sum": 3.918,
+     "mean_u": 0.917,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:35",
+       "morning_cool",
+       0.88
+      ],
+      [
+       "09:19",
+       "indoor_flat",
+       0.93
+      ],
+      [
+       "11:00",
+       "meal_windows",
+       0.93
+      ]
+     ]
+    },
+    "B_with_u_s": 1.28,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q02",
+    "window": "07:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.364,
+     "prize_sum": 8.559,
+     "mean_u": 0.626,
+     "bad_time_stops": 3,
+     "plan": [
+      [
+       "07:00",
+       "indoor_flat",
+       0.82
+      ],
+      [
+       "08:30",
+       "morning_market",
+       0.75
+      ],
+      [
+       "09:44",
+       "indoor_flat",
+       0.95
+      ],
+      [
+       "11:39",
+       "sun_anchored_view",
+       0.31
+      ],
+      [
+       "12:49",
+       "outdoor_heat_sensitive",
+       0.37
+      ],
+      [
+       "13:30",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:14",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:56",
+       "outdoor_heat_sensitive",
+       0.68
+      ],
+      [
+       "17:12",
+       "sun_anchored_view",
+       0.87
+      ]
+     ]
+    },
+    "A_no_u_s": 10.06,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.876,
+     "prize_sum": 7.6,
+     "mean_u": 0.773,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "morning_cool",
+       0.91
+      ],
+      [
+       "08:43",
+       "morning_market",
+       0.72
+      ],
+      [
+       "09:57",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "11:52",
+       "sun_anchored_view",
+       0.33
+      ],
+      [
+       "12:35",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:29",
+       "morning_market",
+       0.35
+      ],
+      [
+       "15:43",
+       "indoor_flat",
+       0.95
+      ]
+     ]
+    },
+    "B_with_u_s": 10.14,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q03",
+    "window": "07:00-12:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 2.862,
+     "prize_sum": 3.8,
+     "mean_u": 0.761,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "sun_anchored_view",
+       0.61
+      ],
+      [
+       "08:10",
+       "morning_cool",
+       0.9
+      ],
+      [
+       "09:01",
+       "morning_market",
+       0.72
+      ],
+      [
+       "09:46",
+       "outdoor_heat_sensitive",
+       0.71
+      ],
+      [
+       "10:47",
+       "meal_windows",
+       0.87
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.35,
+     "prize_sum": 3.8,
+     "mean_u": 0.871,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "07:42",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "09:04",
+       "morning_market",
+       0.71
+      ],
+      [
+       "09:49",
+       "morning_cool",
+       0.75
+      ],
+      [
+       "11:00",
+       "meal_windows",
+       0.93
+      ]
+     ]
+    },
+    "B_with_u_s": 4.86,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q04",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.09,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q05",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 8,
+     "objective": 3.981,
+     "prize_sum": 6.509,
+     "mean_u": 0.662,
+     "bad_time_stops": 4,
+     "plan": [
+      [
+       "07:00",
+       "morning_market",
+       0.9
+      ],
+      [
+       "08:15",
+       "indoor_flat",
+       0.89
+      ],
+      [
+       "10:10",
+       "sun_anchored_view",
+       0.39
+      ],
+      [
+       "11:29",
+       "morning_cool",
+       0.43
+      ],
+      [
+       "13:14",
+       "sun_anchored_view",
+       0.45
+      ],
+      [
+       "14:26",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "16:13",
+       "morning_market",
+       0.33
+      ],
+      [
+       "17:27",
+       "outdoor_heat_sensitive",
+       0.91
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 7,
+     "objective": 4.681,
+     "prize_sum": 5.55,
+     "mean_u": 0.863,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "morning_market",
+       0.9
+      ],
+      [
+       "08:16",
+       "morning_cool",
+       0.9
+      ],
+      [
+       "09:10",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "10:34",
+       "indoor_flat",
+       0.98
+      ],
+      [
+       "12:38",
+       "sun_anchored_view",
+       0.39
+      ],
+      [
+       "13:51",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "15:34",
+       "sun_anchored_beach",
+       0.86
+      ]
+     ]
+    },
+    "B_with_u_s": 10.12,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q06",
+    "window": "13:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.011,
+     "prize_sum": 4.759,
+     "mean_u": 0.632,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:18",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:32",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.539,
+     "prize_sum": 4.75,
+     "mean_u": 0.745,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_market",
+       0.39
+      ],
+      [
+       "14:14",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "15:43",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:27",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.06,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q07",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.96,
+     "prize_sum": 7.495,
+     "mean_u": 0.803,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:04",
+       "morning_market",
+       0.52
+      ],
+      [
+       "11:22",
+       "afternoon_rest",
+       0.76
+      ],
+      [
+       "13:10",
+       "afternoon_rest",
+       0.97
+      ],
+      [
+       "14:53",
+       "morning_cool",
+       0.62
+      ],
+      [
+       "16:03",
+       "sun_anchored_view",
+       0.7
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 6,
+     "objective": 3.508,
+     "prize_sum": 4.645,
+     "mean_u": 0.797,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "10:25",
+       "sun_anchored_view",
+       0.38
+      ],
+      [
+       "11:39",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "13:09",
+       "afternoon_rest",
+       0.96
+      ],
+      [
+       "14:57",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "16:43",
+       "evening_peak",
+       0.44
+      ]
+     ]
+    },
+    "B_with_u_s": 10.11,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q08",
+    "window": "13:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.011,
+     "prize_sum": 4.759,
+     "mean_u": 0.632,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:18",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:32",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 9.99,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.539,
+     "prize_sum": 4.75,
+     "mean_u": 0.745,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_market",
+       0.39
+      ],
+      [
+       "14:14",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "15:43",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:27",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.06,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q09",
+    "window": "13:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 2.882,
+     "prize_sum": 3.949,
+     "mean_u": 0.722,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "13:00",
+       "meal_windows",
+       0.84
+      ],
+      [
+       "14:19",
+       "morning_cool",
+       0.58
+      ],
+      [
+       "15:06",
+       "outdoor_heat_sensitive",
+       0.54
+      ],
+      [
+       "16:22",
+       "sun_anchored_view",
+       0.73
+      ],
+      [
+       "17:33",
+       "outdoor_heat_sensitive",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 4,
+     "objective": 2.737,
+     "prize_sum": 2.99,
+     "mean_u": 0.873,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "13:00",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:53",
+       "morning_cool",
+       0.62
+      ],
+      [
+       "15:39",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "16:59",
+       "meal_windows",
+       0.87
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q10",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q11",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.566,
+     "prize_sum": 7.477,
+     "mean_u": 0.767,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "flat_rest",
+       0.8
+      ],
+      [
+       "09:08",
+       "morning_market",
+       0.66
+      ],
+      [
+       "10:22",
+       "outdoor_heat_sensitive",
+       0.59
+      ],
+      [
+       "10:57",
+       "morning_market",
+       0.44
+      ],
+      [
+       "12:11",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "13:41",
+       "morning_cool",
+       0.54
+      ],
+      [
+       "14:54",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "17:22",
+       "sun_anchored_view",
+       0.9
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 7,
+     "objective": 5.36,
+     "prize_sum": 5.568,
+     "mean_u": 0.969,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "morning_market",
+       0.9
+      ],
+      [
+       "08:26",
+       "morning_cool",
+       0.88
+      ],
+      [
+       "09:57",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "11:22",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "12:56",
+       "flat_rest",
+       1.0
+      ],
+      [
+       "14:27",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "16:16",
+       "open_hours_flat",
+       1.0
+      ]
+     ]
+    },
+    "B_with_u_s": 10.11,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q12",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q13",
+    "window": "07:00-12:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 1.788,
+     "prize_sum": 2.859,
+     "mean_u": 0.619,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "morning_cool",
+       0.94
+      ],
+      [
+       "08:17",
+       "outdoor_heat_sensitive",
+       0.85
+      ],
+      [
+       "09:27",
+       "meal_windows",
+       0.37
+      ],
+      [
+       "11:24",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.475,
+     "prize_sum": 3.8,
+     "mean_u": 0.92,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:01",
+       "outdoor_heat_sensitive",
+       0.96
+      ],
+      [
+       "07:43",
+       "outdoor_heat_sensitive",
+       0.9
+      ],
+      [
+       "08:18",
+       "morning_cool",
+       0.9
+      ],
+      [
+       "09:01",
+       "indoor_flat",
+       0.92
+      ],
+      [
+       "10:58",
+       "meal_windows",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q14",
+    "window": "07:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.364,
+     "prize_sum": 8.559,
+     "mean_u": 0.626,
+     "bad_time_stops": 3,
+     "plan": [
+      [
+       "07:00",
+       "indoor_flat",
+       0.82
+      ],
+      [
+       "08:30",
+       "morning_market",
+       0.75
+      ],
+      [
+       "09:44",
+       "indoor_flat",
+       0.95
+      ],
+      [
+       "11:39",
+       "sun_anchored_view",
+       0.31
+      ],
+      [
+       "12:49",
+       "outdoor_heat_sensitive",
+       0.37
+      ],
+      [
+       "13:30",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:14",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:56",
+       "outdoor_heat_sensitive",
+       0.68
+      ],
+      [
+       "17:12",
+       "sun_anchored_view",
+       0.87
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.876,
+     "prize_sum": 7.6,
+     "mean_u": 0.773,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "morning_cool",
+       0.91
+      ],
+      [
+       "08:43",
+       "morning_market",
+       0.72
+      ],
+      [
+       "09:57",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "11:52",
+       "sun_anchored_view",
+       0.33
+      ],
+      [
+       "12:35",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:29",
+       "morning_market",
+       0.35
+      ],
+      [
+       "15:43",
+       "indoor_flat",
+       0.95
+      ]
+     ]
+    },
+    "B_with_u_s": 10.11,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q15",
+    "window": "13:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 1.391,
+     "prize_sum": 2.818,
+     "mean_u": 0.561,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "14:07",
+       "morning_cool",
+       0.57
+      ],
+      [
+       "14:50",
+       "morning_market",
+       0.35
+      ],
+      [
+       "16:07",
+       "afternoon_rest",
+       0.94
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 3,
+     "objective": 1.776,
+     "prize_sum": 1.868,
+     "mean_u": 0.95,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "13:00",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "14:32",
+       "afternoon_rest",
+       1.0
+      ],
+      [
+       "16:55",
+       "outdoor_heat_sensitive",
+       0.85
+      ]
+     ]
+    },
+    "B_with_u_s": 10.12,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q16",
+    "window": "07:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.364,
+     "prize_sum": 8.559,
+     "mean_u": 0.626,
+     "bad_time_stops": 3,
+     "plan": [
+      [
+       "07:00",
+       "indoor_flat",
+       0.82
+      ],
+      [
+       "08:30",
+       "morning_market",
+       0.75
+      ],
+      [
+       "09:44",
+       "indoor_flat",
+       0.95
+      ],
+      [
+       "11:39",
+       "sun_anchored_view",
+       0.31
+      ],
+      [
+       "12:49",
+       "outdoor_heat_sensitive",
+       0.37
+      ],
+      [
+       "13:30",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:14",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:56",
+       "outdoor_heat_sensitive",
+       0.68
+      ],
+      [
+       "17:12",
+       "sun_anchored_view",
+       0.87
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.876,
+     "prize_sum": 7.6,
+     "mean_u": 0.773,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "morning_cool",
+       0.91
+      ],
+      [
+       "08:43",
+       "morning_market",
+       0.72
+      ],
+      [
+       "09:57",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "11:52",
+       "sun_anchored_view",
+       0.33
+      ],
+      [
+       "12:35",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:29",
+       "morning_market",
+       0.35
+      ],
+      [
+       "15:43",
+       "indoor_flat",
+       0.95
+      ]
+     ]
+    },
+    "B_with_u_s": 10.11,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q17",
+    "window": "13:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.09,
+     "prize_sum": 3.068,
+     "mean_u": 0.681,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "meal_windows",
+       0.64
+      ],
+      [
+       "15:11",
+       "sun_anchored_beach",
+       0.79
+      ],
+      [
+       "17:38",
+       "outdoor_heat_sensitive",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 4,
+     "objective": 2.255,
+     "prize_sum": 3.068,
+     "mean_u": 0.752,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "meal_windows",
+       0.84
+      ],
+      [
+       "14:15",
+       "outdoor_heat_sensitive",
+       0.46
+      ],
+      [
+       "15:11",
+       "sun_anchored_beach",
+       0.79
+      ],
+      [
+       "17:38",
+       "outdoor_heat_sensitive",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.0,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q18",
+    "window": "13:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.011,
+     "prize_sum": 4.759,
+     "mean_u": 0.632,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:18",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:32",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.539,
+     "prize_sum": 4.75,
+     "mean_u": 0.745,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_market",
+       0.39
+      ],
+      [
+       "14:14",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "15:43",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:27",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q19",
+    "window": "07:00-12:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 3,
+     "objective": 1.735,
+     "prize_sum": 1.94,
+     "mean_u": 0.842,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:30",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:26",
+       "afternoon_rest",
+       0.66
+      ]
+     ]
+    },
+    "A_no_u_s": 1.56,
+    "A_no_u_status": "optimal",
+    "B_with_u": {
+     "stops": 3,
+     "objective": 1.739,
+     "prize_sum": 1.94,
+     "mean_u": 0.845,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:34",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:30",
+       "afternoon_rest",
+       0.67
+      ]
+     ]
+    },
+    "B_with_u_s": 2.16,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q20",
+    "window": "07:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 9,
+     "objective": 5.364,
+     "prize_sum": 8.559,
+     "mean_u": 0.626,
+     "bad_time_stops": 3,
+     "plan": [
+      [
+       "07:00",
+       "indoor_flat",
+       0.82
+      ],
+      [
+       "08:30",
+       "morning_market",
+       0.75
+      ],
+      [
+       "09:44",
+       "indoor_flat",
+       0.95
+      ],
+      [
+       "11:39",
+       "sun_anchored_view",
+       0.31
+      ],
+      [
+       "12:49",
+       "outdoor_heat_sensitive",
+       0.37
+      ],
+      [
+       "13:30",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:14",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:56",
+       "outdoor_heat_sensitive",
+       0.68
+      ],
+      [
+       "17:12",
+       "sun_anchored_view",
+       0.87
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.876,
+     "prize_sum": 7.6,
+     "mean_u": 0.773,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "morning_cool",
+       0.91
+      ],
+      [
+       "08:43",
+       "morning_market",
+       0.72
+      ],
+      [
+       "09:57",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "11:52",
+       "sun_anchored_view",
+       0.33
+      ],
+      [
+       "12:35",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:29",
+       "morning_market",
+       0.35
+      ],
+      [
+       "15:43",
+       "indoor_flat",
+       0.95
+      ]
+     ]
+    },
+    "B_with_u_s": 10.17,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q21",
+    "window": "07:00-12:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.255,
+     "prize_sum": 2.95,
+     "mean_u": 0.778,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "sun_anchored_beach",
+       0.81
+      ],
+      [
+       "09:22",
+       "outdoor_heat_sensitive",
+       0.75
+      ],
+      [
+       "09:57",
+       "morning_cool",
+       0.72
+      ],
+      [
+       "10:42",
+       "meal_windows",
+       0.83
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 4,
+     "objective": 2.404,
+     "prize_sum": 2.95,
+     "mean_u": 0.812,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "07:40",
+       "sun_anchored_beach",
+       0.71
+      ],
+      [
+       "10:02",
+       "morning_cool",
+       0.7
+      ],
+      [
+       "10:47",
+       "meal_windows",
+       0.87
+      ]
+     ]
+    },
+    "B_with_u_s": 6.03,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q22",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.17,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q23",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 7,
+     "objective": 3.902,
+     "prize_sum": 5.899,
+     "mean_u": 0.694,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "07:00",
+       "indoor_flat",
+       0.82
+      ],
+      [
+       "08:56",
+       "sun_anchored_view",
+       0.47
+      ],
+      [
+       "10:22",
+       "flat_rest",
+       0.89
+      ],
+      [
+       "12:00",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "15:21",
+       "morning_cool",
+       0.65
+      ],
+      [
+       "16:05",
+       "outdoor_heat_sensitive",
+       0.71
+      ],
+      [
+       "16:40",
+       "morning_market",
+       0.32
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 7,
+     "objective": 5.407,
+     "prize_sum": 5.89,
+     "mean_u": 0.924,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:01",
+       "morning_market",
+       0.9
+      ],
+      [
+       "08:15",
+       "morning_cool",
+       0.9
+      ],
+      [
+       "09:09",
+       "morning_cool",
+       0.82
+      ],
+      [
+       "10:23",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "12:00",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "15:37",
+       "flat_rest",
+       0.94
+      ],
+      [
+       "17:25",
+       "outdoor_heat_sensitive",
+       0.91
+      ]
+     ]
+    },
+    "B_with_u_s": 10.22,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q24",
+    "window": "13:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.011,
+     "prize_sum": 4.759,
+     "mean_u": 0.632,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:18",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:32",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.539,
+     "prize_sum": 4.75,
+     "mean_u": 0.745,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_market",
+       0.39
+      ],
+      [
+       "14:14",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "15:43",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:27",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.09,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q25",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 7,
+     "objective": 3.649,
+     "prize_sum": 6.151,
+     "mean_u": 0.593,
+     "bad_time_stops": 3,
+     "plan": [
+      [
+       "07:00",
+       "sun_anchored_beach",
+       0.84
+      ],
+      [
+       "09:03",
+       "outdoor_heat_sensitive",
+       0.75
+      ],
+      [
+       "10:45",
+       "morning_market",
+       0.45
+      ],
+      [
+       "11:59",
+       "morning_market",
+       0.41
+      ],
+      [
+       "13:30",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:42",
+       "meal_windows",
+       0.37
+      ],
+      [
+       "16:52",
+       "sun_anchored_view",
+       0.8
+      ]
+     ]
+    },
+    "A_no_u_s": 10.03,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.725,
+     "prize_sum": 7.101,
+     "mean_u": 0.8,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "morning_market",
+       0.9
+      ],
+      [
+       "08:14",
+       "morning_market",
+       0.78
+      ],
+      [
+       "09:37",
+       "sun_anchored_beach",
+       0.39
+      ],
+      [
+       "11:44",
+       "meal_windows",
+       1.0
+      ],
+      [
+       "13:02",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "15:29",
+       "morning_cool",
+       0.65
+      ],
+      [
+       "16:25",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:26",
+       "sun_anchored_view",
+       0.91
+      ]
+     ]
+    },
+    "B_with_u_s": 10.17,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q26",
+    "window": "13:00-18:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 5,
+     "objective": 3.011,
+     "prize_sum": 4.759,
+     "mean_u": 0.632,
+     "bad_time_stops": 2,
+     "plan": [
+      [
+       "13:00",
+       "outdoor_heat_sensitive",
+       0.38
+      ],
+      [
+       "13:35",
+       "morning_cool",
+       0.53
+      ],
+      [
+       "14:18",
+       "morning_market",
+       0.36
+      ],
+      [
+       "15:32",
+       "indoor_flat",
+       0.96
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 3.539,
+     "prize_sum": 4.75,
+     "mean_u": 0.745,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_market",
+       0.39
+      ],
+      [
+       "14:14",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "15:43",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:27",
+       "outdoor_heat_sensitive",
+       0.77
+      ],
+      [
+       "17:29",
+       "sun_anchored_view",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 10.08,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q27",
+    "window": "13:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.257,
+     "prize_sum": 3.14,
+     "mean_u": 0.68,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "sun_anchored_beach",
+       0.37
+      ],
+      [
+       "15:41",
+       "morning_cool",
+       0.64
+      ],
+      [
+       "16:34",
+       "outdoor_heat_sensitive",
+       0.79
+      ],
+      [
+       "17:36",
+       "outdoor_heat_sensitive",
+       0.92
+      ]
+     ]
+    },
+    "A_no_u_s": 4.62,
+    "A_no_u_status": "optimal",
+    "B_with_u": {
+     "stops": 4,
+     "objective": 2.262,
+     "prize_sum": 3.14,
+     "mean_u": 0.683,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "13:00",
+       "morning_cool",
+       0.5
+      ],
+      [
+       "13:47",
+       "sun_anchored_beach",
+       0.51
+      ],
+      [
+       "16:38",
+       "outdoor_heat_sensitive",
+       0.8
+      ],
+      [
+       "17:40",
+       "outdoor_heat_sensitive",
+       0.92
+      ]
+     ]
+    },
+    "B_with_u_s": 4.01,
+    "B_with_u_status": "optimal"
+   },
+   {
+    "query_id": "q28",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.05,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.09,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q29",
+    "window": "07:00-18:00",
+    "candidates": 27,
+    "A_no_u": {
+     "stops": 8,
+     "objective": 4.739,
+     "prize_sum": 6.818,
+     "mean_u": 0.689,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "sun_anchored_view",
+       0.61
+      ],
+      [
+       "08:08",
+       "morning_market",
+       0.79
+      ],
+      [
+       "09:36",
+       "sun_anchored_beach",
+       0.36
+      ],
+      [
+       "12:05",
+       "indoor_flat",
+       1.0
+      ],
+      [
+       "13:45",
+       "morning_cool",
+       0.56
+      ],
+      [
+       "15:18",
+       "outdoor_heat_sensitive",
+       0.63
+      ],
+      [
+       "16:36",
+       "outdoor_heat_sensitive",
+       0.8
+      ],
+      [
+       "17:09",
+       "flat_rest",
+       0.76
+      ]
+     ]
+    },
+    "A_no_u_s": 10.09,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 8,
+     "objective": 5.152,
+     "prize_sum": 6.818,
+     "mean_u": 0.771,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "sun_anchored_beach",
+       0.81
+      ],
+      [
+       "09:36",
+       "outdoor_heat_sensitive",
+       0.73
+      ],
+      [
+       "10:14",
+       "outdoor_heat_sensitive",
+       0.55
+      ],
+      [
+       "11:32",
+       "flat_rest",
+       0.95
+      ],
+      [
+       "12:56",
+       "open_hours_flat",
+       1.0
+      ],
+      [
+       "14:10",
+       "morning_cool",
+       0.59
+      ],
+      [
+       "15:34",
+       "morning_cool",
+       0.65
+      ],
+      [
+       "17:24",
+       "sun_anchored_view",
+       0.91
+      ]
+     ]
+    },
+    "B_with_u_s": 10.19,
+    "B_with_u_status": "feasible-timeout"
+   },
+   {
+    "query_id": "q30",
+    "window": "07:00-12:00",
+    "candidates": 25,
+    "A_no_u": {
+     "stops": 4,
+     "objective": 2.688,
+     "prize_sum": 3.809,
+     "mean_u": 0.707,
+     "bad_time_stops": 1,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.93
+      ],
+      [
+       "08:41",
+       "indoor_flat",
+       0.9
+      ],
+      [
+       "10:11",
+       "morning_cool",
+       0.67
+      ],
+      [
+       "11:23",
+       "sun_anchored_view",
+       0.31
+      ]
+     ]
+    },
+    "A_no_u_s": 10.06,
+    "A_no_u_status": "feasible-timeout",
+    "B_with_u": {
+     "stops": 5,
+     "objective": 4.091,
+     "prize_sum": 4.75,
+     "mean_u": 0.861,
+     "bad_time_stops": 0,
+     "plan": [
+      [
+       "07:00",
+       "outdoor_heat_sensitive",
+       0.97
+      ],
+      [
+       "08:00",
+       "outdoor_heat_sensitive",
+       0.87
+      ],
+      [
+       "08:36",
+       "morning_market",
+       0.74
+      ],
+      [
+       "09:50",
+       "morning_cool",
+       0.74
+      ],
+      [
+       "10:42",
+       "indoor_flat",
+       0.99
+      ]
+     ]
+    },
+    "B_with_u_s": 10.12,
+    "B_with_u_status": "feasible-timeout"
+   }
+  ]
+ }
+}

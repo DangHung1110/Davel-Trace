@@ -118,12 +118,11 @@ class TestSnapshotV21(unittest.TestCase):
         self.assertEqual(len(feats), len(self.pois))
         self.assertFalse(GOOGLE_KEYS & set(feats[0].keys()))
 
-    # 7. a description is only present with its source and licence
-    def test_07_description_has_source_and_license(self):
+    # 7. dropped fields (no source coverage) stay dropped: description, overture id
+    def test_07_dropped_fields_absent(self):
         for p in self.pois:
-            d = p["description"]
-            if d.get("text"):
-                self.assertTrue(d.get("source") and d.get("license"), p["name"])
+            self.assertNotIn("description", p, p["name"])
+            self.assertNotIn("overture", p["ext_ids"], p["name"])
 
     # 8. role=base and status=excluded never become candidates
     def test_08_base_and_excluded_not_candidates(self):

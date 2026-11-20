@@ -48,8 +48,7 @@
   "time_profile": "outdoor_heat_sensitive",
   "popularity": { "signature": true, "prize_prior": 0.92, "wikidata": "Q1091054",
                   "wikidata_sitelinks": null, "wikipedia_views_90d": null },
-  "description": { "text": null, "source": null, "license": null },
-  "ext_ids": { "osm": "way/39268284", "google_place_id": null, "overture": null },
+  "ext_ids": { "osm": "way/39268284", "google_place_id": null },
 
   "provenance": {
     "name":     {"source": "osm", "verified_by": "open_data", "confidence": 0.7, "evidence_url": null, "verified_at": "2026-11-18", "note": null},
@@ -143,7 +142,7 @@ Cấu trúc (luôn bật):
 4. `price.tier` thuộc từ vựng hoặc `null`; `included` ⇔ có `requires_ticket_of` và role = attraction.
 5. Provenance đủ 8 trường, confidence ∈ [0,1], `human` có `evidence_url`.
 6. `pois.json` và exports không có khoá/giá trị Google (`rating`, `price_level`, `type`, `ambience`, `pros`, `cons`).
-7. `description.text` ⇒ có `source` + `license`.
+7. Không có `description` và `ext_ids.overture` (đã bỏ 2026-11-20: OSM chỉ có 15/869 mô tả, 0 tiếng Việt; Overture không dùng). Lời giải thích ghép từ các trường dữ liệu.
 8. `role = base` và `status = excluded` không vào ứng viên.
 9. `count` khớp metadata.
 10. Từ vựng `category/role/status/hours.kind/tags.*` hợp lệ.

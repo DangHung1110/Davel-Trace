@@ -34,7 +34,11 @@ LIKES = ["biển và hải sản", "leo núi rồi đi biển", "văn hóa và �
 BUDGET_TEXT = {1000000: "1 triệu", 3000000: "3 triệu", 5000000: "5 triệu"}
 
 
-def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
+def build_queries(pois: list[dict], n: int = 5, seed: int = 7, fits=None) -> list[dict]:
+    """`fits(must, trip) -> bool` (optional): a sampled must_visit pair is
+    redrawn (up to 50 times, same rng) until both can be placed, in order,
+    inside the trip window. Without it a random pair often needs a bar on a
+    07:00-12:00 trip and the gold is infeasible by construction."""
     rng = random.Random(seed)
     ids = sorted(p["poi_id"] for p in pois if p.get("verified"))
     combos = list(itertools.product(BUDGETS, WINDOWS))
@@ -43,6 +47,10 @@ def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
     for i in range(n):
         budget, (ws, we) = combos[i % len(combos)]
         must = rng.sample(ids, k=min(2, len(ids))) if i % 2 == 0 else []
+        for _ in range(50 if fits and must else 0):
+            if fits(must, {"start_time": ws, "end_time": we, "must_visit": must}):
+                break
+            must = rng.sample(ids, k=min(2, len(ids)))
         avoid = rng.sample([x for x in ids if x not in must],
                            k=1 if len(ids) - len(must) > 2 else 0)
         order = [[must[0], must[1]]] if len(must) == 2 else []
