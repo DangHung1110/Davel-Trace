@@ -1,0 +1,99 @@
+{
+ "note": "Từ 2026-11-20 (review_v21.html). Q: {}",
+ "items": {
+  "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
+   "name": "Ngũ Hành Sơn (Thủy Sơn)"
+  },
+  "osm:node/2093848429": {
+   "status": "excluded",
+   "status_reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)"
+  },
+  "osm:node/2093848443": {
+   "status": "excluded",
+   "status_reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)"
+  },
+  "ChIJKytgDsgQQjER6al50BDd7vc": {
+   "status": "excluded",
+   "status_reason": "trùng Ngũ Hành Sơn (Thủy Sơn) sau khi đổi tên (chốt cuối)"
+  },
+  "ChIJs5puLQA9QjERIaHbrBAGpjA": {
+   "status": "excluded",
+   "status_reason": "người dùng: thay bằng tour lặn bến CT15 (manual:son-tra-tour-lan-ct15); điểm Google này là cơ sở lặn khác gần Bãi Rạng (chốt cuối)"
+  },
+  "ChIJK4sVPc0ZQjERdGROWQ8MMg4": {
+   "status": "excluded",
+   "status_reason": "tạm ngưng từ 9/2025, chưa có giờ mới (chốt cuối)"
+  },
+  "osm:node/7127442985": {
+   "status": "excluded",
+   "status_reason": "tạm đóng 3/2026, chưa xác nhận mở lại (chốt cuối)"
+  }
+ },
+ "policies": {
+  "lodging": {
+   "choice": 0,
+   "label": "Giữ nguyên — lưu trú không xếp vào lịch tham quan (khuyên dùng)",
+   "recommended": true,
+   "ids": [],
+   "note": null
+  },
+  "cooking": {
+   "choice": 0,
+   "label": "Giữ active, giờ 'theo lịch đặt' (kiểu by_booking ở P1)",
+   "recommended": true,
+   "ids": [
+    "ChIJO5_PAj8XQjER34kyBjbMYNo",
+    "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
+    "ChIJs-NDcgAXQjERHA6tioqOfH4",
+    "ChIJYyr_6ogXQjERoXAq8cGEzcI",
+    "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+    "ChIJrQINf-wZQjEREXiFm4Gq56M",
+    "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+    "ChIJ26h5ZAANQjER2otGJosJliA",
+    "ChIJyZOJHa8NQjERSvp9yMenV6Y",
+    "ChIJx0dBXWYNQjERQzQO18QYhas",
+    "ChIJddXz2K8PQjER4enhapQvvo8",
+    "ChIJmU3hl9WrNTERBUbnSp3g5vs",
+    "ChIJH1ujCM0XQjERcOl1lB9Ns6k"
+   ],
+   "note": null
+  },
+  "voc": {
+   "choice": 0,
+   "label": "Để paid_attraction (trải nghiệm)",
+   "recommended": true,
+   "ids": [
+    "ChIJlxydWJEZQjER5GSMuHJHtak"
+   ],
+   "note": null
+  },
+  "helio": {
+   "choice": 0,
+   "label": "Loại (excluded) tới khi có giờ mới",
+   "recommended": true,
+   "ids": [
+    "ChIJK4sVPc0ZQjERdGROWQ8MMg4"
+   ],
+   "note": null
+  },
+  "nha66": {
+   "choice": 0,
+   "label": "Loại (excluded) tới khi xác nhận mở lại",
+   "recommended": true,
+   "ids": [
+    "osm:node/7127442985"
+   ],
+   "note": null
+  },
+  "bai_rang": {
+   "choice": 0,
+   "label": "Tách 2 điểm, cùng cụm bai_rang (đang dùng)",
+   "recommended": true,
+   "ids": [
+    "manual:son-tra-bai-rang"
+   ],
+   "note": null
+  }
+ },
+ "auto_disagree": []
+}

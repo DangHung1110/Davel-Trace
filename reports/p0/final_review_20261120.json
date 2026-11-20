@@ -1,0 +1,238 @@
+{
+ "schema": "review_v21",
+ "final": true,
+ "snapshot_built": "2026-11-20",
+ "exported_at": "2026-11-20",
+ "questions": {},
+ "names": [
+  {
+   "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+   "name_was": "Ngũ Hành Sơn",
+   "name": "Ngũ Hành Sơn (Thủy Sơn)"
+  }
+ ],
+ "status": [
+  {
+   "poi_id": "osm:node/2093848429",
+   "status": "excluded",
+   "reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)"
+  },
+  {
+   "poi_id": "osm:node/2093848443",
+   "status": "excluded",
+   "reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)"
+  },
+  {
+   "poi_id": "ChIJKytgDsgQQjER6al50BDd7vc",
+   "status": "excluded",
+   "reason": "trùng Ngũ Hành Sơn (Thủy Sơn) sau khi đổi tên (chốt cuối)"
+  },
+  {
+   "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
+   "status": "excluded",
+   "reason": "người dùng: thay bằng tour lặn bến CT15 (manual:son-tra-tour-lan-ct15); điểm Google này là cơ sở lặn khác gần Bãi Rạng (chốt cuối)"
+  }
+ ],
+ "duplicates": [],
+ "verify": [
+  {
+   "poi_id": "osm:way/140401174",
+   "hours": "00:00-23:59",
+   "price_tier": "free",
+   "ticket_vnd": 0,
+   "evidence_url": "https://daivietourist.vn/ho-xanh-da-nang/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "mở 24h, miễn phí (daivietourist)",
+   "price_note": "Hồ tự nhiên, không thu vé (daivietourist; vinpearl cũng ghi 'không thu vé vào cửa')."
+  },
+  {
+   "poi_id": "osm:way/14131302",
+   "hours": "17:00-21:30",
+   "closed_days": [
+    "Tu"
+   ],
+   "price_tier": "expensive",
+   "ticket_vnd": 600000,
+   "evidence_url": "https://hoianit.com/show-ky-uc-hoi-an/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Show 20:00 hằng tối trừ thứ Ba, ~60 phút (hoianit); giữ khung công viên 17:00-21:30",
+   "price_note": "ECO 600.000đ tại quầy (online ~520-540k); HIGH 750k (online 650-675k); VIP 1.200.000đ; trẻ 1-1,4m từ ~250-270k online; cư dân ĐN/QN cũ từ ~320k (cần CCCD). Show 20:00, ~60', nghỉ thứ Ba."
+  },
+  {
+   "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+   "hours": "07:30-18:30",
+   "price_tier": "medium",
+   "ticket_vnd": 30000,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Giờ mở cửa 7h30-18h30 (mia.vn)",
+   "price_note": "Vé cổng NL 30.000đ, trẻ 5-9t 15.000đ, <5t miễn phí; thuyền thúng 150.000đ/thúng/2 người/45' (khách VN 200k, quốc tế 250k/2 người/thúng tuỳ bảng)."
+  },
+  {
+   "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+   "hours": "07:00-17:00",
+   "price_tier": "cheap",
+   "ticket_vnd": 40000,
+   "evidence_url": "https://nangtrip.com/activities/ngu-hanh-son",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "07:00-17:00 (danangfantasticity 22/01/2026), người dùng giữ",
+   "price_note": "Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt; động Âm Phủ 20.000đ riêng. Kim Sơn, Thổ Sơn gộp vào điểm này (người dùng 20/11)."
+  },
+  {
+   "poi_id": "manual:son-tra-tour-lan-ct15",
+   "hours": "08:00-16:45",
+   "price_tier": "medium",
+   "ticket_vnd": 450000,
+   "evidence_url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Khởi hành 8h00-14h45 hằng ngày, tour 120' -> kết thúc muộn nhất 16:45 (oktrip)",
+   "price_note": "Tour trọn gói 120': cano + SUP + câu cá + lặn ngắm san hô. NL (≥6t) 450.000đ, trẻ 1-6t 250.000đ, <1t miễn phí. Xuất phát bến thủy nội địa CT15 (pin Sơn Trà Marina theo tixgo; oktrip ghi đường Hoàng Sa, Thọ Quang)."
+  }
+ ],
+ "old_town": {
+  "parent": null,
+  "include": [],
+  "exclude": []
+ },
+ "policies": {
+  "lodging": {
+   "choice": 0,
+   "label": "Giữ nguyên — lưu trú không xếp vào lịch tham quan (khuyên dùng)",
+   "recommended": true,
+   "ids": [],
+   "note": null
+  },
+  "cooking": {
+   "choice": 0,
+   "label": "Giữ active, giờ 'theo lịch đặt' (kiểu by_booking ở P1)",
+   "recommended": true,
+   "ids": [
+    "ChIJO5_PAj8XQjER34kyBjbMYNo",
+    "ChIJ8ai7BQAZQjERIkxmYHcV9DQ",
+    "ChIJs-NDcgAXQjERHA6tioqOfH4",
+    "ChIJYyr_6ogXQjERoXAq8cGEzcI",
+    "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+    "ChIJrQINf-wZQjEREXiFm4Gq56M",
+    "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+    "ChIJ26h5ZAANQjER2otGJosJliA",
+    "ChIJyZOJHa8NQjERSvp9yMenV6Y",
+    "ChIJx0dBXWYNQjERQzQO18QYhas",
+    "ChIJddXz2K8PQjER4enhapQvvo8",
+    "ChIJmU3hl9WrNTERBUbnSp3g5vs",
+    "ChIJH1ujCM0XQjERcOl1lB9Ns6k"
+   ],
+   "note": null
+  },
+  "voc": {
+   "choice": 0,
+   "label": "Để paid_attraction (trải nghiệm)",
+   "recommended": true,
+   "ids": [
+    "ChIJlxydWJEZQjER5GSMuHJHtak"
+   ],
+   "note": null
+  },
+  "helio": {
+   "choice": 0,
+   "label": "Loại (excluded) tới khi có giờ mới",
+   "recommended": true,
+   "ids": [
+    "ChIJK4sVPc0ZQjERdGROWQ8MMg4"
+   ],
+   "note": null
+  },
+  "nha66": {
+   "choice": 0,
+   "label": "Loại (excluded) tới khi xác nhận mở lại",
+   "recommended": true,
+   "ids": [
+    "osm:node/7127442985"
+   ],
+   "note": null
+  },
+  "bai_rang": {
+   "choice": 0,
+   "label": "Tách 2 điểm, cùng cụm bai_rang (đang dùng)",
+   "recommended": true,
+   "ids": [
+    "manual:son-tra-bai-rang"
+   ],
+   "note": null
+  }
+ },
+ "auto_review": [
+  {
+   "poi_id": "manual:hoi-an-bai-choi",
+   "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "osm:way/140401174",
+   "name": "Hồ Xanh Sơn Trà",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "manual:son-tra-bai-rang",
+   "name": "Bãi Rạng Sơn Trà",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "manual:son-tra-bai-da-den",
+   "name": "Bãi Đá Đen Sơn Trà",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+   "name": "Chùa Linh Ứng Sơn Trà",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+   "name": "Chợ Đêm An Thượng",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+   "name": "Bảo tàng 3D Art In Paradise",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
+   "name": "Son Tra Retreat - Garden Lounge & Eatery",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
+   "name": "Khu Du Lịch Sinh Thái Lái Thiêu",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
+   "name": "DD WONDERLAND",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "osm:way/14131302",
+   "name": "Công viên Ấn tượng Hội An (show Ký ức Hội An)",
+   "agree": true,
+   "fix": null
+  },
+  {
+   "poi_id": "osm:node/5286977425",
+   "name": "Công viên Suối khoáng nóng Núi Thần Tài",
+   "agree": true,
+   "fix": null
+  }
+ ],
+ "note": "Do Claude ghi thay người dùng theo tin nhắn 2026-11-20: A/B giữ mặc định (người dùng đồng ý), C = 7 dòng người dùng tự kiểm kèm link."
+}

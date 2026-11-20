@@ -747,6 +747,7 @@ osm:way/630377259,Bãi biển Tiên Sa,beach,beach,True,False,0.6,active
 manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,beach,True,False,0.6,active
 osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,outdoor_landmark,False,False,0.3,active
+manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,paid_attraction,True,False,0.6,active
 osm:way/39268284,Chùa Cầu,outdoor_landmark,religious,False,False,0.3,active
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,museum_indoor,True,False,0.6,active
 osm:way/320722329,Hội quán Phúc Kiến,religious,restaurant,False,False,0.3,active

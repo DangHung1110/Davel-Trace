@@ -48,6 +48,14 @@
    "name": "Bãi Rạng Sơn Trà",
    "c": "beach",
    "coord_source": "https://vietnam.worldplaces.me/view-place/21371614-bai-rang-da-nang.html (geo_codex.json, medium)"
+  },
+  {
+   "id": "manual:son-tra-tour-lan-ct15",
+   "lat": 16.0968369,
+   "lon": 108.2669597,
+   "name": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "c": "attraction",
+   "coord_source": "tixgo.vn/node/3822 -> maps pin Sơn Trà Marina !3d16.0968369!4d108.2669597 (reports/p0/links/final2_codex.json, medium)"
   }
  ],
  "curation": {
@@ -57,7 +65,8 @@
    "manual:son-tra-bai-da-den": "beach",
    "way/630377259": "beach",
    "way/140401174": "outdoor_landmark",
-   "manual:son-tra-bai-rang": "beach"
+   "manual:son-tra-bai-rang": "beach",
+   "manual:son-tra-tour-lan-ct15": "paid_attraction"
   }
  },
  "prices": []

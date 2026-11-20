@@ -154,9 +154,10 @@
 
 | 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
 
-**Việc mở tiếp theo (sau vòng 1c):**
-- Giờ do người kiểm: 24/50 (tiêu chí mục 4) → cần duyệt thêm ~26 điểm tiêu biểu.
-- Giờ `unknown` ngoài lưu trú: 19 → 15. Codex (t15) tìm được 4 điểm (`agent_web_2026-11-19c.json`). Còn 12 lớp nấu ăn (theo lịch đặt, cần kiểu giờ `by_booking` ở P1), Helio (đang nâng cấp) và Nhà biểu diễn 66 Bạch Đằng (tạm đóng 3/2026).
-- 76 lưu trú: giá null + giờ unknown — chủ ý (không xếp vào lịch tham quan), cần người dùng chốt.
-- Data contract P1 (mục 3): giờ theo mùa/ngày ngoại lệ/suất diễn; vé nhiều mức 80k/120k; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0. Hiện 69 POI chỉ có ở `price.note`.
-- Mở PR `feat/p0-data-v2` → `dev`.
+| 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (826 active, 50 excluded), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |
+
+**Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
+- Giờ do người kiểm: **30/50** (tiêu chí mục 4 chưa đạt). Không chặn P0; phần còn thiếu là nợ P1 — duyệt thêm ~20 điểm tiêu biểu qua `reports/p0/final_review.html` (dựng lại bằng `build_final_review.py`).
+- Giờ `unknown` ngoài lưu trú: 13 lớp nấu ăn (giữ active, cần kiểu giờ `by_booking` ở P1). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
+- 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
+- Data contract P1 (mục 3): giờ theo mùa (khung bán đảo Sơn Trà 17:30/18:30 và chưa áp cho điểm mới), ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.

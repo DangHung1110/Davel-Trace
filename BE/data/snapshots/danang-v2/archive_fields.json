@@ -17768,7 +17768,7 @@
    "price_v20": {
     "basis": "ticket",
     "min_vnd": 40000,
-    "max_vnd": 70000,
+    "max_vnd": 75000,
     "typical_vnd": 40000,
     "band": "re",
     "ticket_vnd": 40000,
@@ -63381,7 +63381,7 @@
    },
    "hours_v20": {
     "spans": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "weekly": null,
     "archetype_default": [],
@@ -63389,9 +63389,9 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 105000,
-    "max_vnd": 230000,
-    "typical_vnd": 130000,
+    "min_vnd": 30000,
+    "max_vnd": 105000,
+    "typical_vnd": 105000,
     "band": "vua",
     "ticket_vnd": 30000,
     "free_entry": false,
@@ -63625,7 +63625,7 @@
    },
    "hours_v20": {
     "spans": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "weekly": null,
     "archetype_default": [],
@@ -63633,9 +63633,9 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 105000,
-    "max_vnd": 230000,
-    "typical_vnd": 130000,
+    "min_vnd": 30000,
+    "max_vnd": 105000,
+    "typical_vnd": 105000,
     "band": "vua",
     "ticket_vnd": 30000,
     "free_entry": false,
@@ -63706,7 +63706,7 @@
    },
    "hours_v20": {
     "spans": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "weekly": null,
     "archetype_default": [],
@@ -63714,9 +63714,9 @@
    },
    "price_v20": {
     "basis": "ticket",
-    "min_vnd": 105000,
-    "max_vnd": 230000,
-    "typical_vnd": 130000,
+    "min_vnd": 30000,
+    "max_vnd": 105000,
+    "typical_vnd": 105000,
     "band": "vua",
     "ticket_vnd": 30000,
     "free_entry": false,
@@ -65810,7 +65810,7 @@
    },
    "hours_v20": {
     "spans": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
     "weekly": null,
     "spans_any_day": [],
@@ -65824,12 +65824,12 @@
     ]
    },
    "price_v20": {
-    "basis": "entry",
+    "basis": "per_person",
     "min_vnd": 0,
     "max_vnd": 0,
     "typical_vnd": 0,
     "band": "re",
-    "ticket_vnd": null,
+    "ticket_vnd": 0,
     "free_entry": true,
     "status": "known"
    },
@@ -65908,6 +65908,71 @@
    "dwell_v20": {
     "unit": "min",
     "kind": "beach",
+    "v1": {
+     "p25": 30,
+     "p50": 60,
+     "p75": 90
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": null,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": []
+  },
+  "manual:son-tra-tour-lan-ct15": {
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "fee": 0,
+   "source": "manual",
+   "verified": false,
+   "intensity": 2,
+   "weather_sensitive": false,
+   "fetched_at": "2026-11-19",
+   "hours_source": "",
+   "name_osm": null,
+   "osm_evidence": null,
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "category_evidence": [
+    "curated_osm:paid_attraction"
+   ],
+   "smart_tags_price": {},
+   "hours_v20": {
+    "spans": [
+     "08:00-16:45"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [],
+    "safe_windows": []
+   },
+   "price_v20": {
+    "basis": "ticket",
+    "min_vnd": 250000,
+    "max_vnd": 450000,
+    "typical_vnd": 450000,
+    "band": "cao",
+    "ticket_vnd": 450000,
+    "free_entry": false,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "boat_short",
     "v1": {
      "p25": 30,
      "p50": 60,

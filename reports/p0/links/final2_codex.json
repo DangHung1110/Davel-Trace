@@ -1,0 +1,105 @@
+{
+  "asia_park": {
+    "operating": false,
+    "hours": null,
+    "weekend_hours": null,
+    "entry": null,
+    "prices": null,
+    "lat": null,
+    "lon": null,
+    "sources": [
+      {
+        "url": "https://sunworld.vn/da-nang-downtown",
+        "quote": null,
+        "read_status": "HTTP 404",
+        "note": "URL được giao trả404; không đọc được trang giờ/vé hay link giờ/vé của đơn vị vận hành. Không coi404 riêng lẻ là bằng chứng đóng cửa."
+      },
+      {
+        "url": "https://chinhsachcuocsong.vnanet.vn/huong-toi-bieu-tuong-moi-da-nang-downtown-tam-dung-hoat-dong-tu-ngay-3-9/65920.html",
+        "quote": "Tổ hợp giải trí Da Nang Downtown sẽ chính thức dừng hoạt động từ ngày 3/9/2025.",
+        "published_or_updated": "2025-08-05",
+        "note": "TTXVN dẫn thông tin Ban Giám đốc; nói về công viên cũ và giai đoạn chuyển đổi."
+      },
+      {
+        "url": "https://danangsundowntown.vn/da-nang-downtown-hoat-dong-khong-cap-nhat-2026/",
+        "quote": "Khu phức hợp này đã chính thức ngừng đón khách từ ngày 3/9/2025.",
+        "published_or_updated": "Trang hiển thị 04/03/2026 và16/11/2026; nội dung nói cập nhật tháng10/2026",
+        "note": "Nguồn thương mại bổ trợ2026, không coi tên miền này là website chính thức Sun World. Bài cho biết chưa có thông báo mở lại theo mô hình cũ tính đến tháng10/2026."
+      },
+      {
+        "url": "https://mytour.vn/vi/blog/bai-viet/da-nang-wonderland-huong-dan-trai-nghiem-tu-a-den-z.html",
+        "quote": "Công Viên Châu Á Đà Nẵng mở cửa từ 15h00 đến 21h00 hàng ngày.",
+        "published_or_updated": "2025-12-01",
+        "note": "Cùng đoạn ghi thứSáu, thứBảy, Chủnhật đóng22h; cùng bài ghi miễn phí cổng và bảng giá trò chơi. Đây là nội dung lịch sử/mâu thuẫn với tin dừng hoạt động; không phải bằng chứng mở lại2026."
+      }
+    ],
+    "historical_mytour": {
+      "weekday_hours": "15:00-21:00 (thứ Hai-thứ Năm); thứ Sáu15:00-22:00",
+      "weekend_hours": "15:00-22:00 (thứ Sáu, thứ Bảy, Chủ nhật theo bài)",
+      "entry": "Miễn phí cổng theo bài Mytour; không áp dụng như một cam kết hiện hành khi công viên dừng đón khách.",
+      "prices": "Vé từng trò:30.000đ. Sun Wheel:100.000đ người>1,4m;70.000đ trẻ1-1,4m;dưới1m miễn phí. All-in-one:200.000đ người>1,4m;150.000đ trẻ1-1,4m; bảng cũng ghi150.000đ dưới1m (giữ nguyên, chưa kiểm chứng). Không dùng bảng này làm giá2026.",
+      "source": "https://mytour.vn/vi/blog/bai-viet/da-nang-wonderland-huong-dan-trai-nghiem-tu-a-den-z.html"
+    },
+    "entrance_note": "Chưa có trang đọc được chỉ rõ tọa độ cổng vào. Link địa chỉ của Mytour có !3d16.0402596!4d108.2266311, là pin địa điểm công viên, không ghi là entrance; phần @16.0410696,108.2185933 là tâm camera và không được dùng làm tọa độPOI. Vì chưa xác nhận cổng nên lat/lon chính đểnull.",
+    "map_place_pin_only": {
+      "lat": 16.0402596,
+      "lon": 108.2266311,
+      "entrance_verified": false,
+      "source_page": "https://mytour.vn/vi/blog/bai-viet/da-nang-wonderland-huong-dan-trai-nghiem-tu-a-den-z.html",
+      "evidence": "!3d16.0402596!4d108.2266311"
+    },
+    "operating_assessment": "Đánh giá dừng đón khách dựa tinTTXVN về thông báo của ban giám đốc và bài cập nhật2026 bổ trợ; chưa tìm thấy thông báo chính thức mở lại. Không kết luận đóng vĩnh viễn. Giờ/vé hiện hành đểnull; các số từMytour chỉ lưu ởhistorical_mytour.",
+    "confidence": "medium",
+    "checked_at": "2026-11-20"
+  },
+  "ct15": {
+    "lat": 16.0968369,
+    "lon": 108.2669597,
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://tixgo.vn/node/3822",
+        "quote": "Địa điểm bến: Bến thuỷ nội địa CT15, đường Hồ Xanh, phường Sơn Trà",
+        "note": "Tự mở trang và đọc HTML. Ngay sau địa chỉ này có linkhttps://maps.app.goo.gl/kbc5EW7QMGLArG3SA. Trang cũng gọi điểm đón là bếnMarina."
+      },
+      {
+        "url": "https://maps.app.goo.gl/kbc5EW7QMGLArG3SA",
+        "quote": "!3d16.0968369!4d108.2669597",
+        "resolved_url": "https://www.google.com/maps/place/S%C6%A1n+Tr%C3%A0+Marina/@16.0956117,108.263201,17.53z/data=!4m6!3m5!1s0x314217fb2504d755:0x8d1e9493227bb9ef!8m2!3d16.0968369!4d108.2669597!16s%2Fg%2F11rw7j4vrm",
+        "note": "Tự mở link và đọcURL chuyển hướng. Tên đíchSơn Trà Marina; dùng tọa độ pin!3d/!4d, không dùng tâm camera@16.0956117,108.263201. Đây là pin điểm đón mà trangtour liên kết, chưa phải mốc pháp lý riêng củaCT15."
+      },
+      {
+        "url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+        "quote": "120 phút",
+        "published_or_updated": "Trang hiển thị30/08/2026 và18/09/2026",
+        "note": "Tự mở mụcTóm Tắt Nhanh, bảngvé vàFAQ. Trang xác nhận khởi hànhCT15, thời lượng120phút, khởi hành08:00-14:45, giáNL450k vàTE1-6tuổi250k."
+      },
+      {
+        "url": "https://baomoi.com/da-nang-cong-bo-hoat-dong-ben-thuy-noi-dia-ct15-phuc-vu-du-lich-tai-ban-dao-son-tra-c41820080.epi",
+        "quote": "có tọa độ X: 1780317.557; Y: 555119.940 (hệ tọa độ VN 2000)",
+        "published_or_updated": "2022-02-21",
+        "note": "Bản đăng lạiDoanh Nghiệp Việt Nam vềQĐ53/QĐ-SGTVT17/02/2022. Đây là tọa độ phẳngVN2000, không phải WGS84. Không tự chuyển vì trang không nêu đủ tham số phép chiếu/chuyển hệ."
+      }
+    ],
+    "oktrip_confirms": true,
+    "oktrip_quote": "Các khung giờ khởi hành từ 8h00 đến 14h45 hàng ngày.",
+    "oktrip_values": {
+      "departures": "08:00-14:45",
+      "duration_min": 120,
+      "adult_vnd": 450000,
+      "adult_age_as_written": "từ6tuổi trở lên",
+      "child_vnd": 250000,
+      "child_age_as_written": "từ1-6tuổi",
+      "under_1": "Miễn phí",
+      "sessions": [
+        "08:00-10:00",
+        "10:15-12:15",
+        "12:30-14:30",
+        "14:45-16:45"
+      ]
+    },
+    "coordinate_kind": "tour_departure_map_pin_at_son_tra_marina",
+    "note": "Mứcmedium vì trangTixGo nối tênCT15 với pinSơnTràMarina; chưa đối chiếu độc lập ranh giới bến hành chính. Nominatim vớiCT15/BếnCT15/Bến thủy nội địaCT15 trongbbox16.08,108.18,16.16,108.35 đều trả[]. Không lấy tâm camera. Linkmaps từ trangThịnhAdventures gắnCT15 lại trỏ một cơ sởlặn tại16.1053533,108.2932861, nên loại pinđó do không chứng minh cùng bến. OKtrip nêu đúng các giá/lịch được yêu cầu, nhưng tự ghi giá tham khảo có thể đổi theo mùa/điểm đón; mô tả tuổi bị chồng tại6tuổi (cả1-6vàtừ6trởlên), cần hỏi nhà cung cấp cho trẻ đúng6tuổi. Lịch khởi hành không phải giờ mở toàn bến.",
+    "checked_at": "2026-11-20"
+  }
+}

@@ -12,10 +12,10 @@
   "manual",
   "osm"
  ],
- "count": 875,
+ "count": 876,
  "count_by_status": {
-  "active": 831,
-  "excluded": 44
+  "active": 826,
+  "excluded": 50
  },
  "count_by_category": {
   "restaurant": 169,
@@ -26,7 +26,7 @@
   "religious": 94,
   "outdoor_landmark": 65,
   "museum_indoor": 22,
-  "paid_attraction": 49,
+  "paid_attraction": 50,
   "lodging": 76,
   "beach": 26,
   "night_market": 5,
@@ -34,19 +34,19 @@
  },
  "count_by_zone": {
   "trung_tam": 270,
-  "son_tra_my_khe": 233,
+  "son_tra_my_khe": 234,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 83,
- "applied_human_verify": 28,
+ "applied_decisions": 88,
+ "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
- "count_new_pois": 133,
+ "count_new_pois": 134,
  "count_v1_pois": 742,
  "count_by_price_tier": {
-  "medium": 327,
+  "medium": 328,
   "cheap": 226,
   "expensive": 19,
   "free": 184,
@@ -54,8 +54,8 @@
   "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 592,
-  "fixed": 188,
+  "safe_window": 591,
+  "fixed": 190,
   "unknown": 95
  },
  "pois": [
@@ -28117,7 +28117,7 @@
   },
   {
    "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
-   "name": "Ngũ Hành Sơn",
+   "name": "Ngũ Hành Sơn (Thủy Sơn)",
    "name_raw": "Ngũ Hành Sơn",
    "name_en": null,
    "lat": 16.0037104,
@@ -28141,7 +28141,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng."
+    "note": "Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt; động Âm Phủ 20.000đ riêng. Kim Sơn, Thổ Sơn gộp vào điểm này (người dùng 20/11)."
    },
    "dwell": {
     "p25": 30,
@@ -28194,12 +28194,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261120.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -28218,20 +28218,20 @@
      "note": "override:Ngũ Hành Sơn"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.65,
-     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
-     "verified_at": "2026-11-19",
-     "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng."
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/ngu-hanh-son",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; 07:00-17:00 (danangfantasticity 22/01/2026), người dùng giữ"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.65,
-     "evidence_url": "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
-     "verified_at": "2026-11-19",
-     "note": "07h00-17h00 (danangfantasticity 22/01/2026); trước ghi 07:00-17:30 (vietnamtourism) -> lấy khung hẹp. Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt (30.000đ khứ hồi); Động Âm Phủ 20.000đ riêng.; VND ticket_vnd=40000, min_vnd=40000, max_vnd=70000, typical_vnd=40000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://nangtrip.com/activities/ngu-hanh-son",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; VND 40000"
     },
     "dwell": {
      "source": "dwell_table_v2:religious_major",
@@ -29003,8 +29003,8 @@
    "lon": 108.2247361,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "tạm ngưng từ 9/2025, chưa có giờ mới (chốt cuối)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -30022,8 +30022,8 @@
    "lon": 108.2933125,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng: thay bằng tour lặn bến CT15 (manual:son-tra-tour-lan-ct15); điểm Google này là cơ sở lặn khác gần Bãi Rạng (chốt cuối)",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
@@ -37192,8 +37192,8 @@
    "lon": 108.26254829999999,
    "category": "outdoor_landmark",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "trùng Ngũ Hành Sơn (Thủy Sơn) sau khi đổi tên (chốt cuối)",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
    "alt_group": null,
@@ -47218,8 +47218,8 @@
    "lon": 108.2562213,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
    "alt_group": null,
@@ -47508,8 +47508,8 @@
    "lon": 108.255928,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "người dùng: gộp vào Ngũ Hành Sơn (Thủy Sơn) (chốt cuối)",
    "zone": "ngu_hanh_son",
    "cluster_id": "ngu_hanh_son",
    "alt_group": null,
@@ -103809,7 +103809,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -103818,7 +103818,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": "[giá chung nhóm bay_mau] Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+    "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau."
    },
    "dwell": {
     "p25": 40,
@@ -103893,18 +103893,18 @@
     "hours": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+     "confidence": 0.65,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "[giá chung nhóm bay_mau] Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này.; VND ticket_vnd=30000, min_vnd=105000, max_vnd=230000, typical_vnd=130000"
+     "confidence": 0.65,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau.; VND ticket_vnd=30000, min_vnd=30000, max_vnd=105000, typical_vnd=105000"
     },
     "dwell": {
      "source": "dwell_table_v2:boat_short",
@@ -104241,7 +104241,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -104250,7 +104250,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+    "note": "Vé cổng NL 30.000đ, trẻ 5-9t 15.000đ, <5t miễn phí; thuyền thúng 150.000đ/thúng/2 người/45' (khách VN 200k, quốc tế 250k/2 người/thúng tuỳ bảng)."
    },
    "dwell": {
     "p25": 40,
@@ -104323,20 +104323,20 @@
      "note": "override:Rừng Dừa Bảy Mẫu"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; Giờ mở cửa 7h30-18h30 (mia.vn)"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này.; VND ticket_vnd=30000, min_vnd=105000, max_vnd=230000, typical_vnd=130000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; VND 30000"
     },
     "dwell": {
      "source": "dwell_table_v2:boat_short",
@@ -104384,7 +104384,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:00-17:00"
+     "07:30-18:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -104393,7 +104393,7 @@
    },
    "price": {
     "tier": "medium",
-    "note": "[giá chung nhóm bay_mau] Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+    "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau."
    },
    "dwell": {
     "p25": 40,
@@ -104468,18 +104468,18 @@
     "hours": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.6,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này."
+     "confidence": 0.65,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau."
     },
     "price": {
      "source": "web",
      "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/rung-dua-bay-mau.html",
-     "verified_at": "2026-11-18",
-     "note": "[giá chung nhóm bay_mau] Vé cổng 30.000/người + thuyền thúng 150-200k/thuyền (2 khách) hoặc ~100k/người; chi tiêu/người ước 105-230k. Các điểm thuyền thúng quanh rừng dừa dùng chung mức này.; VND ticket_vnd=30000, min_vnd=105000, max_vnd=230000, typical_vnd=130000"
+     "confidence": 0.65,
+     "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+     "verified_at": "2026-11-20",
+     "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau.; VND ticket_vnd=30000, min_vnd=30000, max_vnd=105000, typical_vnd=105000"
     },
     "dwell": {
      "source": "dwell_table_v2:boat_short",
@@ -108036,16 +108036,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
     "tier": "free",
-    "note": "Hồ tự nhiên, nơi công cộng: mức free và khung giờ an toàn lấy theo luật nơi công cộng (inferred); chưa có nguồn tin cậy về vé/giờ (người dùng 19/11)."
+    "note": "Hồ tự nhiên, không thu vé (daivietourist; vinpearl cũng ghi 'không thu vé vào cửa')."
    },
    "dwell": {
     "p25": 10,
@@ -108116,20 +108116,20 @@
      "note": "curated_osm:outdoor_landmark"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://daivietourist.vn/ho-xanh-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; mở 24h, miễn phí (daivietourist)"
     },
     "price": {
-     "source": "rule_free_public",
-     "verified_by": "inferred",
-     "confidence": 0.7,
-     "evidence_url": null,
-     "verified_at": null,
-     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://daivietourist.vn/ho-xanh-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; VND 0"
     },
     "dwell": {
      "source": "dwell_table_v2:outdoor_urban",
@@ -108281,6 +108281,133 @@
      "evidence_url": null,
      "verified_at": null,
      "note": "category=0.6"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:son-tra-tour-lan-ct15",
+   "name": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "name_raw": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "name_en": null,
+   "lat": 16.0968369,
+   "lon": 108.2669597,
+   "category": "paid_attraction",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "08:00-16:45"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "co_ve"
+   },
+   "price": {
+    "tier": "medium",
+    "note": "Tour trọn gói 120': cano + SUP + câu cá + lặn ngắm san hô. NL (≥6t) 450.000đ, trẻ 1-6t 250.000đ, <1t miễn phí. Xuất phát bến thủy nội địa CT15 (pin Sơn Trà Marina theo tixgo; oktrip ghi đường Hoàng Sa, Thọ Quang)."
+   },
+   "dwell": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "tags": {
+    "indoor": null,
+    "effort": 2,
+    "kid_friendly": null,
+    "weather_sensitive": false
+   },
+   "time_profile": "open_hours_flat",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.55,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null
+   },
+   "description": {
+    "text": null,
+    "source": null,
+    "license": null
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null,
+    "overture": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:paid_attraction"
+    },
+    "hours": {
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; Khởi hành 8h00-14h45 hằng ngày, tour 120' -> kết thúc muộn nhất 16:45 (oktrip)"
+    },
+    "price": {
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; VND 450000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:boat_short",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v1:category+signature+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.55"
     }
    },
    "data_version": "v2.1",
@@ -111704,8 +111831,8 @@
    "lon": 108.329645,
    "category": "paid_attraction",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "tạm đóng 3/2026, chưa xác nhận mở lại (chốt cuối)",
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
    "alt_group": null,
@@ -111863,7 +111990,7 @@
    },
    "price": {
     "tier": "expensive",
-    "note": "Vé ECO người lớn ≥140cm 600.000đ gồm vào công viên + show (ticketgo); HIGH/VIP đắt hơn. Show 20:00-21:00, nghỉ thứ Ba; vào trước 15-20 phút."
+    "note": "ECO 600.000đ tại quầy (online ~520-540k); HIGH 750k (online 650-675k); VIP 1.200.000đ; trẻ 1-1,4m từ ~250-270k online; cư dân ĐN/QN cũ từ ~320k (cần CCCD). Show 20:00, ~60', nghỉ thứ Ba."
    },
    "dwell": {
     "p25": 90,
@@ -111935,20 +112062,20 @@
      "note": "curated_osm:paid_attraction"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
-     "verified_at": "2026-11-19",
-     "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào côn"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://hoianit.com/show-ky-uc-hoi-an/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; Show 20:00 hằng tối trừ thứ Ba, ~60 phút (hoianit); giữ khung công viên 17:00-21:30"
     },
     "price": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.55,
-     "evidence_url": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
-     "verified_at": "2026-11-19",
-     "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào côn; VND ticket_vnd=600000, min_vnd=600000, max_vnd=1200000, typical_vnd=600000"
+     "source": "human_verify",
+     "verified_by": "human",
+     "confidence": 0.9,
+     "evidence_url": "https://hoianit.com/show-ky-uc-hoi-an/",
+     "verified_at": "2026-11-20",
+     "note": "human_verify_v2_20261120_zfinal.json; VND 600000"
     },
     "dwell": {
      "source": "dwell_table_v2:evening_show",

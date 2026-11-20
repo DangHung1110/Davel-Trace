@@ -3,8 +3,9 @@ manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường v
 manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,hoi_an,hoi_an_old_town,,19:00-21:00,agent_web
 osm:way/630377259,Bãi biển Tiên Sa,beach,trung_tam,,,08:00-18:00,agent_web
 manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,son_tra_my_khe,,,00:00-23:59,agent_web
-osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,son_tra_my_khe,,,05:00-22:00,inferred
+osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,son_tra_my_khe,,,00:00-23:59,agent_web
 manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,son_tra_my_khe,,,05:00-22:00,inferred
+manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,son_tra_my_khe,,,08:00-16:45,agent_web
 osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,hoi_an_old_town,Phố cổ Hội An,05:00-22:00,inferred
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"07:30-11:30, 13:30-17:30",open_data
 osm:way/320722329,Hội quán Phúc Kiến,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred

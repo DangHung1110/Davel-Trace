@@ -116,3 +116,26 @@
   - Hồ Xanh (gần Sơn Trà Marina, chân bán đảo) và Bãi Đá Đen (đường ven biển Hoàng Sa): chưa có nguồn nói chúng thuộc tuyến kiểm soát, nên giữ nguyên.
   - Ghi vào P1: hợp đồng giờ theo mùa + phạm vi tuyến.
 - **Trang chốt cuối:** mỗi dòng giờ hiện thêm "AI-Hay: …" và "Codex mở trang: khớp/LỆCH" kèm link, để người duyệt bấm nhanh.
+
+## Chốt cuối — 20/11
+
+File xuất: `reports/p0/final_review_20261120.json` (Claude ghi theo tin nhắn người dùng; ingest → `decisions_zfinal_20261120.json`, `human_verify_v2_20261120_zfinal.json`; số liệu vé ở `agent_web_2026-11-20.json`).
+
+- **A, B:** người dùng giữ mặc định → Helio, Nhà biểu diễn 66 Bạch Đằng loại; 13 lớp nấu ăn giữ active; VỌC giữ paid_attraction; Bãi Rạng tách 2 điểm; lưu trú giữ nguyên. 12 giá trị mục B đồng ý hết.
+- **C — 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link** (verified_by = human):
+
+| Điểm | Kết quả | Nguồn |
+|---|---|---|
+| Hồ Xanh Sơn Trà | 24h, miễn phí | daivietourist.vn |
+| Công viên Ấn tượng (Ký ức Hội An) | giữ 17:00-21:30, nghỉ thứ Ba; show 20:00 ~60'; ECO 600k quầy (online 520-540k), HIGH 750k, VIP 1,2tr | hoianit.com |
+| Rừng Dừa Bảy Mẫu (+ 2 điểm cùng cụm, agent_web) | 07:30-18:30; cổng 30k; thúng 150k/2 người/45' | mia.vn |
+| Ngũ Hành Sơn → **Ngũ Hành Sơn (Thủy Sơn)** | 40k + thang máy 15k/lượt + Âm Phủ 20k; **Kim Sơn, Thổ Sơn gộp vào** (excluded) | nangtrip.com |
+| Tour lặn ngắm san hô Sơn Trà (bến CT15) | **điểm mới** `manual:son-tra-tour-lan-ct15` tại pin Sơn Trà Marina; suất 08:00-14:45, 120' → 08:00-16:45; NL 450k, trẻ 1-6t 250k | oktrip.vn; toạ độ tixgo.vn/node/3822 |
+| DD Wonderland | **giữ nguyên** — xem dưới | |
+
+- **Không làm theo nguyên văn / Claude tự quyết thêm:**
+  - "DD Wonderland": link người dùng (mytour) nói về **Công viên Châu Á / Da Nang Downtown** — nơi khác (OSM way/667422708), và đã **dừng hoạt động từ 3/9/2025** (TTXVN 5/8/2025; chưa có tin mở lại tới 10/2026). Không thêm điểm; DD Wonderland (khu vui chơi trẻ em) giữ giá trị cũ.
+  - Điểm Google "Dịch Vụ Cano … Lặn Biển" (gần Bãi Rạng) là cơ sở lặn khác bến CT15 → loại, thay bằng điểm mới đúng bến thay vì chỉ đổi tên.
+  - Hòn Thủy Sơn loại vì trùng "Ngũ Hành Sơn (Thủy Sơn)" (~100 m).
+- Codex (t15) kiểm 2 tra cứu: `reports/p0/links/final2_codex.json`.
+- Kết quả: 876 POI (826 active, 50 excluded), ma trận 793 (0 ô thiếu), giờ do người kiểm 30/50.
