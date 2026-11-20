@@ -41,7 +41,7 @@
   "price": { "tier": "included", "note": "trong vé phố cổ" },
   "dwell": { "p25": 10, "p50": 20, "p75": 40 },
   "tags": {
-    "indoor": false, "effort": 1, "sun_exposure": 0.7, "rain_cover": "partial",
+    "indoor": false, "effort": 1, "sun_exposure": 0.7, "rain_cover": "open",
     "kid_friendly": true, "weather_sensitive": true,
     "good_times": ["morning", "sunset", "night"], "time_budget": "quick"
   },
@@ -77,7 +77,10 @@
 | `hours.closed_days` | Mo…Su | lịch chưa xét thứ; dữ liệu đã sẵn cho P1 |
 | `price.tier` | free, cheap, medium, expensive, included, `null` | **chi tiêu một người cho một lần ghé**, gồm vé + khoản bắt buộc (vd. cano Cù Lao Chàm). `included` = đã nằm trong vé điểm cha (`requires_ticket_of`), solver cộng vé cha đúng 1 lần. `null` = chưa biết |
 | `dwell` | phút, p25 ≤ p50 ≤ p75 | |
-| `tags.time_budget` | quick, half_day, full_day | đổi tên từ `smart_tags.budget` (không phải tiền) |
+| `tags.time_budget` | quick-stop-30, half-day, full-day, must-go (list) | đổi tên từ `smart_tags.budget` (không phải tiền) |
+| `tags.good_times` / `tags.party` | sunrise, morning, sunset, night / family, couple, solo, group (list, có thể rỗng) | |
+| `tags.space` | indoor, outdoor, both | `tags.indoor` = (`space` == indoor), luôn bool |
+| `tags.rain_cover` · `sun_exposure` · `wind_exposure` · `outdoor_exposure` | open, mixed, enclosed · 0..1 | `exposure_source`: explicit (bộ gán nhãn T063) hoặc category_prior (ước lượng theo không gian + loại cho POI OSM/nhập tay) |
 | `popularity.prize_prior` | 0–1 | tín hiệu xếp hạng sạch thay `rating` (cách tính: `DATA_FIX_PLAN.md` WP6) |
 
 ### Bảng mức giá (sống trong code, không lưu từng POI)
@@ -148,6 +151,9 @@ Cấu trúc (luôn bật):
 10. Từ vựng `category/role/status/hours.kind/tags.*` hợp lệ.
 11. **Chỉ có các khoá cấp cao nhất của mục 2** (danh sách trắng).
 12. `name` sạch (không `|`, không chữ Hàn/Trung/Nhật, ≤ 60 ký tự).
+13. **Một bộ khoá `tags` cho mọi POI** (13 khoá); không còn `rain_protection` (bỏ 21/11: "unknown" ở 941/941 POI, `rain_cover` thay thế).
+14. Không POI active nào có `hours.kind = unknown`. Lưu trú (base) = `00:00-23:59` safe_window (quy ước lễ tân 24h, `provenance.hours.source = rule_lodging_24h`). Lớp theo suất không có lịch suất công bố → excluded có lý do.
+15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày).
 
 Cổng chốt dữ liệu (`P0_GATE=1`):
 - G1. Mọi POI active không phải base có hàng ma trận.

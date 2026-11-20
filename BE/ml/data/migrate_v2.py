@@ -60,6 +60,7 @@ FIXED_HOURS_BY = ("human", "open_data", "user", "agent_web")
 PRICE_TAG_KEYS = {"price_band", "band_source", "band_verified", "price_band_v1", "ticket",
                   "legacy_band_user", "price_band_source"}
 TAG_RENAME = {"time": "good_times", "budget": "time_budget"}
+TAG_LIST_KEYS = ("party", "good_times", "time_budget")
 POLICIES = ("cach_ly", "demo_phi_thuong_mai")
 DEFAULT_POLICY = "demo_phi_thuong_mai"
 
@@ -454,6 +455,9 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
     open_ = legacy_hours[0].split(", ") if legacy_hours else []
     kind = ("unknown" if not open_ else
             "fixed" if pv_hours["verified_by"] in FIXED_HOURS_BY else "safe_window")
+    lodging_24h = v["category"] == "lodging" and not open_
+    if lodging_24h:                 # a base, not a stop: reception is open round the clock
+        open_, kind = ["00:00-23:59"], "safe_window"
     tier = price_tier(pr, v["category"])
 
     st = {TAG_RENAME.get(k, k): val for k, val in (p_src.get("smart_tags") or {}).items()
@@ -468,9 +472,21 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
         tags.update({k: val for k, val in prior.items() if tags.get(k) in (None, "unknown")})
         tags.setdefault("exposure_source", "category_prior")
         tags["weather_sensitive"] = tags["rain_cover"] != "enclosed"
+    # one tag schema for every POI: `indoor` follows `space` (never None);
+    # `rain_protection` was "unknown" on every POI (rain_cover replaces it)
+    tags["indoor"] = tags.get("space") == "indoor"
+    tags.pop("rain_protection", None)
+    for k in TAG_LIST_KEYS:
+        if not isinstance(tags.get(k), list):
+            tags[k] = []
+    if tags.get("kid_friendly") is None:
+        tags["kid_friendly"] = "family" in tags["party"] and v["category"] != "nightlife"
 
     pv = dict(v["provenance"])
     v1_verified = pv.pop("v1_verified", None)
+    if lodging_24h:
+        pv["hours"] = prov("rule_lodging_24h", "inferred", confidence=0.8,
+                           note="lưu trú: lễ tân 24h (quy ước), không phải giờ tham quan")
     pv_price = dict(pv["price"])
     nums = [f"{k}={pr[k]}" for k in ("ticket_vnd", "min_vnd", "max_vnd", "typical_vnd")
             if pr.get(k) is not None]
@@ -788,6 +804,8 @@ def _base_from_osm(item, name, fetched_at):
              "dur_source": "category_rule", "dur_confidence": "low", "price_level": 2, "fee": 0,
              "rating": None, "tags": [], "source": "manual" if manual else "osm/overpass",
              "verified": False, "intensity": 2, "weather_sensitive": False, "smart_tags": {}}
+    if item.get("smart_tags"):        # curated tags on a manual/new-POI row
+        p["smart_tags"] = {**(p.get("smart_tags") or {}), **item["smart_tags"]}
     p["fetched_at"] = fetched_at
     p["opening_hours"] = []           # hours come from the weekly OSM parser
     p["hours_source"] = ""

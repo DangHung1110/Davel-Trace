@@ -261,6 +261,31 @@ class TestSnapshotV21(unittest.TestCase):
         g = load_json(GOLD_V2)
         self.assertGreaterEqual(g["v2"]["gate_pass_rate"], g["v1"]["gate_pass_rate"])
 
+    # 13. one tag schema for every POI; vocabularies match DATA_SPEC
+    def test_13_one_tag_schema(self):
+        keys = {tuple(sorted(p["tags"])) for p in self.pois}
+        self.assertEqual(len(keys), 1, keys)
+        for p in self.pois:
+            t = p["tags"]
+            self.assertNotIn("rain_protection", t)
+            self.assertIn(t["space"], ("indoor", "outdoor", "both"), p["name"])
+            self.assertIs(t["indoor"], t["space"] == "indoor", p["name"])
+            self.assertIn(t["rain_cover"], ("open", "mixed", "enclosed"), p["name"])
+            self.assertTrue(set(t["time_budget"]) <= {"quick-stop-30", "half-day", "full-day", "must-go"})
+            self.assertTrue(set(t["good_times"]) <= {"sunrise", "morning", "sunset", "night"})
+            self.assertTrue(set(t["party"]) <= {"family", "couple", "solo", "group"})
+
+    # 14. no active POI with unknown hours (lodging = 24h rule)
+    def test_14_no_unknown_hours_active(self):
+        bad = [p["name"] for p in self.pois if p["status"] == "active" and p["hours"]["kind"] == "unknown"]
+        self.assertEqual(bad, [])
+
+    # 15. every active POI, lodging included, owns a matrix row
+    def test_15_every_active_poi_in_matrix(self):
+        with open(os.path.join(SNAP, "matrix.json"), encoding="utf-8") as f:
+            ids = set(json.load(f)["ids"])
+        self.assertEqual([p["poi_id"] for p in self.pois if p["status"] == "active" and p["poi_id"] not in ids], [])
+
 
 if __name__ == "__main__":
     unittest.main()

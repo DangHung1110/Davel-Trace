@@ -152,6 +152,22 @@ def _musts_fit_after(pid: str, clock: int, order: list[str], acts: list[dict], m
     return True
 
 
+def _crowds_out_must(pid: str, acts: list[dict], must: set, trip: dict, pois: dict) -> bool:
+    """True if an OPTIONAL `pid` would take the capped-category slot (cafe /
+    one-per-day categories) or the budget that a not-yet-placed must_visit
+    needs, so the must would then break CAFE_CAP / CATEGORY_CAP / BCS."""
+    from BE.app.services.soft_rules import NON_FOOD_CAPPED, poi_category
+    placed = {a["poi_id"] for a in acts}
+    left = [m for m in must if m not in placed]
+    cat = poi_category(pois[pid])
+    if cat == "cafe" or cat in NON_FOOD_CAPPED:
+        if any(poi_category(pois[m]) == cat for m in left):
+            return True
+    fee = lambda x: effective_fee(pois.get(x)) or 0
+    spent = sum(fee(a["poi_id"]) for a in acts) + fee(pid) + sum(fee(m) for m in left)
+    return spent > int(trip.get("budget") or 10**12)
+
+
 def _breaks_caps(pid: str, start: int, acts: list[dict], pois: dict) -> bool:
     """True if adding `pid` at `start` would break a HARD gate quota:
     CAFE_CAP (default 1/day), CATEGORY_CAP (one per capped non-food
@@ -206,6 +222,8 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
         if pid not in must and not _musts_fit_after(pid, start + dur, order, acts, must,
                                                     pois, matrix, ws, we):
             continue   # an optional stop may not push a must_visit out of its hours
+        if caps and pid not in must and _crowds_out_must(pid, acts, must, trip, pois):
+            continue   # keep the cap slot / budget a later must_visit needs
         acts.append({"poi_id": pid, "start": _hh(start), "end": _hh(start + dur),
                      "explanation": {"evidence": [evidence]}})
         prev, cur = pid, start + dur

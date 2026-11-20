@@ -92,6 +92,9 @@ def select_expansion(pois: list[dict], existing_ids: list[str],
         if select == "stops":
             if not is_stop(poi):
                 continue
+        elif select == "active":   # stops + trip bases (lodging: start/rest/end legs)
+            if poi.get("status") != "active":
+                continue
         elif verified_only and poi.get("verified") is not True:
             continue
         if not _has_coords(poi):
@@ -238,8 +241,9 @@ def parse_args(argv=None) -> argparse.Namespace:
                     help="skip the first M POIs of the sorted selection (default: 0)")
     ap.add_argument("--include-unverified", action="store_true",
                     help="also add unverified POIs (NOT recommended: FR-013)")
-    ap.add_argument("--select", choices=("verified", "stops"), default="verified",
-                    help="stops = every active non-base POI (danang-v2.1, gate G1)")
+    ap.add_argument("--select", choices=("verified", "stops", "active"), default="verified",
+                    help="stops = every active non-base POI (danang-v2.1, gate G1); "
+                         "active = stops + lodging bases")
     ap.add_argument("--max-table-size", type=int, default=MAX_TABLE_SIZE,
                     help="must match osrm-routed --max-table-size")
     ap.add_argument("--compact", action="store_true",

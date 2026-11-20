@@ -1,0 +1,29 @@
+{
+ "note": "21/11/2026: lớp học/workshop theo suất không tìm được lịch suất công bố (tra web 21/11: chỉ thấy trang của lớp khác). Loại khỏi ứng viên với lý do rõ; bổ sung lại khi có lịch suất có nguồn (booking_*.json).",
+ "items": {
+  "ChIJ8ai7BQAZQjERIkxmYHcV9DQ": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "ChIJYyr_6ogXQjERoXAq8cGEzcI": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "ChIJ26h5ZAANQjER2otGJosJliA": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "ChIJyZOJHa8NQjERSvp9yMenV6Y": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "ChIJx0dBXWYNQjERQzQO18QYhas": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "ChIJH1ujCM0XQjERcOl1lB9Ns6k": {
+   "status": "excluded",
+   "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  }
+ }
+}

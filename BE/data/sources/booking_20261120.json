@@ -88,6 +88,20 @@
    "evidence_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
    "price_note": "USD 30 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026).",
    "quote": "09:00 / 15:00 – Meet at the meeting point ... 13:00 / 19:00 – Relax, share stories, and enjoy local hospitality"
+  },
+  {
+   "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
+   "name": "Da Nang Family Cooking Class",
+   "sessions": [
+    "10:00-12:30",
+    "17:00-19:30"
+   ],
+   "closed_days": [],
+   "duration_min": 150,
+   "booking_url": "https://pelago.com/en/activity/pzt54hubo-da-nang-family-cooking-class-vietnam-da-nang",
+   "evidence_url": "https://pelago.com/en/activity/pzt54hubo-da-nang-family-cooking-class-vietnam-da-nang",
+   "price_note": "Điểm hẹn Sala Coffee, 61 Hàn Thuyên, Hải Châu. Suất trưa 10:00–12:30, suất tối 17:00–19:30 (trang đặt chỗ Pelago, tra 21/11/2026).",
+   "quote": "Time of class: 10:00 am-12:30 pm: Lunch; 5:00pm-7:30 pm: Dinner"
   }
  ]
 }
