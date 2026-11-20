@@ -1,16 +1,26 @@
 {
  "source": "OpenStreetMap via Overpass (ODbL)",
- "fetched_at": "2026-11-18",
+ "fetched_at": "2026-11-20",
  "items": {
   "ChIJx6-KGnIXQjER7x-T0zeOlBw": {
    "osm": "node/7064981285",
    "dist_m": 12.0,
-   "name_ratio": 0.63,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "seafood",
     "name": "Mộc Quán",
     "name:en": "Mộc Seafood"
+   }
+  },
+  "ChIJmQmygLwXQjERcZVy8--sIcE": {
+   "osm": "node/5485496021",
+   "dist_m": 11.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Bé Bien"
    }
   },
   "ChIJP1Uz6i0ZQjERfy-rpM1cGWc": {
@@ -31,6 +41,25 @@
     "name": "Maazi"
    }
   },
+  "ChIJ1Xr5dnkXQjERSYpx3HJqSj0": {
+   "osm": "node/10709321405",
+   "dist_m": 110.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "car_rental",
+    "name": "Русский",
+    "opening_hours": "Mo-Su 09:00-21:00"
+   }
+  },
+  "ChIJ8cqHGTMYQjERU0gT5dridKc": {
+   "osm": "node/7095281753",
+   "dist_m": 6.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Hai Cử"
+   }
+  },
   "ChIJySI1VxkXQjERUSItJZQgxBE": {
    "osm": "node/12372814701",
    "dist_m": 4.7,
@@ -44,17 +73,26 @@
   "ChIJudsANu4XQjERbLKxjXDLHtU": {
    "osm": "node/12857894331",
    "dist_m": 16.7,
-   "name_ratio": 0.79,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "vietnamese;seafood",
     "name": "My Hanh Seafood"
    }
   },
+  "ChIJH72bVncZQjERoTgax0OjZKY": {
+   "osm": "node/12175071924",
+   "dist_m": 4.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Loco"
+   }
+  },
   "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
    "osm": "node/12032859170",
    "dist_m": 2.4,
-   "name_ratio": 0.78,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "vietnamese",
@@ -76,7 +114,7 @@
   "ChIJO0E1hoYXQjER-ML-N1yAGAU": {
    "osm": "node/4759752150",
    "dist_m": 2.7,
-   "name_ratio": 0.79,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "barbecue;japanese",
@@ -90,6 +128,25 @@
    "tags": {
     "amenity": "restaurant",
     "name": "Them Hai San"
+   }
+  },
+  "ChIJFbFDWA8ZQjERwNPaFGXBRPQ": {
+   "osm": "node/6679993986",
+   "dist_m": 47.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "F29"
+   }
+  },
+  "ChIJPYQKSAAXQjER0cga1BLD_MI": {
+   "osm": "node/7027674985",
+   "dist_m": 21.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;seafood",
+    "name": "Muoi Bien"
    }
   },
   "ChIJw-jjo3IXQjERjDCm-Yd0EAA": {
@@ -106,7 +163,7 @@
   "ChIJ97eYL8YQQjER8HxFGKLiQec": {
    "osm": "node/4150425790",
    "dist_m": 1.5,
-   "name_ratio": 0.61,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "name": "La Luna"
@@ -115,7 +172,7 @@
   "ChIJ7VljWJ4RQjER2Fp6XPnZiaM": {
    "osm": "node/11171782637",
    "dist_m": 2.1,
-   "name_ratio": 0.87,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "name": "SC Restaurant"
@@ -134,7 +191,7 @@
   "ChIJRaHks2wXQjERVMrWhffmRXw": {
    "osm": "node/12830575038",
    "dist_m": 7.0,
-   "name_ratio": 0.75,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "korean;barbecue",
@@ -148,6 +205,16 @@
    "tags": {
     "amenity": "cafe",
     "name": "Cucina Luca"
+   }
+  },
+  "ChIJJexJsaUXQjERb9rmSRBkLf0": {
+   "osm": "node/12837179237",
+   "dist_m": 3.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Noi Dat"
    }
   },
   "ChIJV_BGLtAZQjERD9LS1cvwDwg": {
@@ -183,7 +250,7 @@
   "ChIJxX--D-oZQjERQ4LzQRoeVXk": {
    "osm": "node/10598314706",
    "dist_m": 1.8,
-   "name_ratio": 0.8,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "cafe",
     "name": "Reply 1988"
@@ -197,6 +264,27 @@
     "amenity": "cafe",
     "name": "Trình cà phê",
     "opening_hours": "Mo-Su 06:30-01:30"
+   }
+  },
+  "ChIJrcgyp-wZQjERNqpo6xe5Ogw": {
+   "osm": "node/13299175525",
+   "dist_m": 11.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Kite",
+    "name:vi": "Kite"
+   }
+  },
+  "ChIJTahQxcwZQjERrNKa5emQFC4": {
+   "osm": "node/5382678421",
+   "dist_m": 1.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Nam House",
+    "opening_hours": "06:00-23:00"
    }
   },
   "ChIJUdH0Q88ZQjER0AoQ8Pbil28": {
@@ -234,7 +322,7 @@
   "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q": {
    "osm": "node/12609115911",
    "dist_m": 7.9,
-   "name_ratio": 0.67,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "cafe",
     "cuisine": "coffee_shop",
@@ -291,7 +379,7 @@
   "ChIJhbtaILkXQjER88acd2hTeAA": {
    "osm": "node/12853200242",
    "dist_m": 8.7,
-   "name_ratio": 0.71,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "cafe",
     "name": "Phuong"
@@ -306,6 +394,25 @@
     "cuisine": "coffee_shop",
     "name": "Venus Cafe",
     "opening_hours": "06:45-22:00"
+   }
+  },
+  "ChIJAxDyECwXQjERcsCmIBvQ1Vk": {
+   "osm": "node/13392416701",
+   "dist_m": 61.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "D.coffee"
+   }
+  },
+  "ChIJO7l-RdwZQjERNj5fr2VyZ9Y": {
+   "osm": "node/12843905562",
+   "dist_m": 9.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "DNG"
    }
   },
   "ChIJR4XhE3sXQjERBfL8sHnu-JQ": {
@@ -372,6 +479,17 @@
     "wikipedia": "vi:Bảo tàng Nghệ thuật điêu khắc Chăm Đà Nẵng"
    }
   },
+  "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
+   "osm": "node/1758586662",
+   "dist_m": 76.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Thuỷ Sơn",
+    "name:en": "Mountain of Water",
+    "name:vi": "Thuỷ Sơn",
+    "tourism": "attraction"
+   }
+  },
   "ChIJzX1dFjAZQjERswowf61V1fk": {
    "osm": "way/675604354",
    "dist_m": 54.6,
@@ -404,7 +522,7 @@
   "ChIJC0W3bjoYQjERVBMskQcoQck": {
    "osm": "way/118609193",
    "dist_m": 24.2,
-   "name_ratio": 0.78,
+   "name_ratio": 0.9,
    "tags": {
     "historic": "ruins",
     "name": "Thành Điện Hải"
@@ -439,6 +557,15 @@
     "tourism": "viewpoint"
    }
   },
+  "ChIJS07IM4Y9QjER5m2dd3eyku0": {
+   "osm": "node/1623183663",
+   "dist_m": 34.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Son Tra Resort & Spa",
+    "tourism": "hotel"
+   }
+  },
   "ChIJqaaYAdIiQjERGuZHElpvurA": {
    "osm": "way/1265740821",
    "dist_m": 45.3,
@@ -447,6 +574,16 @@
     "name": "Cat Vang Beach",
     "name:en": "Cat Vang Beach",
     "name:vi": "Bãi Cát Vàng"
+   }
+  },
+  "ChIJaQNtm9IfQjERhfrVRYqgA1M": {
+   "osm": "node/5255590921",
+   "dist_m": 21.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hồ Hoà Trung",
+    "name:en": "Hoà Trung lake",
+    "tourism": "information"
    }
   },
   "ChIJVVmn6uMjQjERwv0F2ZV9pJw": {
@@ -478,6 +615,18 @@
     "tourism": "museum"
    }
   },
+  "ChIJo8fznMYZQjERNtNTUT-ZJyk": {
+   "osm": "way/1481663042",
+   "dist_m": 25.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "charge": "40000 VND",
+    "fee": "yes",
+    "name": "Bảo tàng Hồ Chí Minh - Chi nhánh Quân khu 5,",
+    "name:en": "Ho Chi Minh and Military Zone 5 Museum",
+    "opening_hours": "Tu-Th 08:00-12:00,14:00-16:30; Sa-Su 08:00-12:00,14:00-16:30"
+   }
+  },
   "ChIJ82_sTbkQQjERQ5jmVkoovic": {
    "osm": "node/8474743417",
    "dist_m": 60.1,
@@ -486,6 +635,18 @@
     "name": "Bảo tàng Phật giáo",
     "opening_hours": "Mo-Su 09:00-17:00",
     "tourism": "museum"
+   }
+  },
+  "ChIJNdWwUgARQjERansIEJQleAU": {
+   "osm": "node/5279215522",
+   "dist_m": 118.5,
+   "name_ratio": 0.64,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
    }
   },
   "ChIJOyXC4H0XQjERpm2T2xpZcwU": {
@@ -521,10 +682,22 @@
   "ChIJBcr6kegZQjER2nCllYpT_Qc": {
    "osm": "node/7301996085",
    "dist_m": 31.4,
-   "name_ratio": 0.78,
+   "name_ratio": 0.9,
    "tags": {
     "name": "Chợ đêm Helio",
     "name:en": "Helio Night Market",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "osm": "way/204790989",
+   "dist_m": 54.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Cồn",
+    "name:en": "Con Market",
+    "name:vi": "Chợ Cồn",
     "tourism": "attraction"
    }
   },
@@ -641,6 +814,16 @@
     "tourism": "viewpoint"
    }
   },
+  "ChIJedpeSI4ZQjERYqZQdHBbz5E": {
+   "osm": "node/13368831101",
+   "dist_m": 39.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Ikigai"
+   }
+  },
   "ChIJ-cf9B7wQQjERutUzeynzw8w": {
    "osm": "node/2093848428",
    "dist_m": 63.9,
@@ -650,6 +833,30 @@
     "name": "Chùa Quán Thế Âm",
     "name:en": "Quan The Am Pagoda",
     "name:vi": "Chùa Quán Thế Âm"
+   }
+  },
+  "ChIJOxVypBYRQjERMmK2P6JbzF0": {
+   "osm": "node/5279215522",
+   "dist_m": 17.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
+   }
+  },
+  "ChIJO0IiWR0RQjERtGkQtqESJ1Y": {
+   "osm": "node/5279215522",
+   "dist_m": 74.6,
+   "name_ratio": 0.64,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
    }
   },
   "ChIJ9_dffMQQQjERuJbqVGdSysY": {
@@ -777,6 +984,15 @@
    "tags": {
     "amenity": "place_of_worship",
     "name": "chùa Sư Nữ"
+   }
+  },
+  "osm:node/3760272162": {
+   "osm": "node/3760272162",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Tam Bảo"
    }
   },
   "osm:node/3763846156": {
@@ -913,6 +1129,15 @@
     "tourism": "viewpoint"
    }
   },
+  "osm:node/4759000238": {
+   "osm": "node/4759000238",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Dan Oasis Hotel",
+    "tourism": "hotel"
+   }
+  },
   "osm:node/4845297821": {
    "osm": "node/4845297821",
    "dist_m": 0.0,
@@ -980,7 +1205,7 @@
   "osm:node/5286977425": {
    "osm": "node/5286977425",
    "dist_m": 0.0,
-   "name_ratio": 1.0,
+   "name_ratio": 0.9,
    "tags": {
     "name": "Núi Thần Tài",
     "name:en": "Than Tai water park",
@@ -1024,6 +1249,14 @@
     "tourism": "gallery"
    }
   },
+  "osm:node/7095169369": {
+   "osm": "node/7095169369",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Non La"
+   }
+  },
   "osm:node/7276380289": {
    "osm": "node/7276380289",
    "dist_m": 0.0,
@@ -1035,14 +1268,20 @@
     "tourism": "attraction"
    }
   },
-  "osm:node/7477670191": {
-   "osm": "node/13651634201",
-   "dist_m": 93.4,
-   "name_ratio": 0.76,
+  "osm:node/7477670190": {
+   "osm": "node/7477670190",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
    "tags": {
-    "amenity": "cafe",
-    "name": "Nice coffee",
-    "opening_hours": "Mo-Su 08:00-22:00"
+    "name": "노니판매점"
+   }
+  },
+  "osm:node/7477670191": {
+   "osm": "node/7477670191",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Gio coffee"
    }
   },
   "osm:node/8883385553": {
@@ -1053,6 +1292,22 @@
     "name": "TASY STUDIO",
     "opening_hours": "24/7",
     "tourism": "gallery"
+   }
+  },
+  "osm:node/9921282483": {
+   "osm": "node/9921282483",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Viet Nam's Delights"
+   }
+  },
+  "osm:node/9921315929": {
+   "osm": "node/9921315929",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lưu Niệm - Đặc Sản"
    }
   },
   "osm:node/10154412164": {
@@ -1219,12 +1474,28 @@
     "tourism": "viewpoint"
    }
   },
+  "osm:node/12811972501": {
+   "osm": "node/12811972501",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Mart Souvenir"
+   }
+  },
   "osm:node/13040467529": {
    "osm": "node/13040467529",
    "dist_m": 0.0,
    "name_ratio": 1.0,
    "tags": {
     "name": "Bãi Đá"
+   }
+  },
+  "osm:node/13293564930": {
+   "osm": "node/13293564930",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Himawari"
    }
   },
   "osm:node/13484040419": {
@@ -1234,15 +1505,6 @@
    "tags": {
     "amenity": "place_of_worship",
     "name": "Đền Bà Càn Khôn"
-   }
-  },
-  "osm:node/13677406601": {
-   "osm": "node/13677406601",
-   "dist_m": 0.0,
-   "name_ratio": 1.0,
-   "tags": {
-    "historic": "memorial",
-    "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979."
    }
   },
   "osm:node/13687068650": {
@@ -1268,6 +1530,42 @@
     "tourism": "attraction"
    }
   },
+  "osm:node/14045110791": {
+   "osm": "node/14045110791",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lucky Retail",
+    "opening_hours": "Mo-Su,PH 06:00-00:59"
+   }
+  },
+  "osm:node/14045130739": {
+   "osm": "node/14045130739",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Made in Vietnam",
+    "opening_hours": "Mo-Su,PH 06:00-00:59"
+   }
+  },
+  "osm:node/14045144381": {
+   "osm": "node/14045144381",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Viet Nam's Delights",
+    "opening_hours": "Mo-Su,PH 07:00-00:59"
+   }
+  },
+  "osm:node/14067929701": {
+   "osm": "node/14067929701",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bonny handmade",
+    "opening_hours": "Mo-Su 08:00-11:30, 14:00-17:30"
+   }
+  },
   "osm:node/14130293535": {
    "osm": "node/14130293535",
    "dist_m": 0.0,
@@ -1280,7 +1578,7 @@
   "ChIJHZakNa8ZQjERWNFToM16eB4": {
    "osm": "way/486703049",
    "dist_m": 60.4,
-   "name_ratio": 0.62,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "place_of_worship",
     "name": "Chùa Linh Ứng"
@@ -1298,7 +1596,7 @@
   "ChIJOfpog-EYQjERw_VB4IBkfNI": {
    "osm": "way/834483808",
    "dist_m": 8.8,
-   "name_ratio": 0.8,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "place_of_worship",
     "name": "Giáo xứ Hoà Minh"
@@ -1307,7 +1605,7 @@
   "ChIJ5VTV0hwaQjERYReDb0dJJq8": {
    "osm": "way/1374632791",
    "dist_m": 12.7,
-   "name_ratio": 0.79,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "place_of_worship",
     "name": "Nhà thờ Giáo xứ Cồn Dầu"
@@ -1334,7 +1632,7 @@
   "ChIJCRy3iv_2QTERfZxGJkIMHHQ": {
    "osm": "relation/20707914",
    "dist_m": 12.5,
-   "name_ratio": 0.81,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "place_of_worship",
     "name": "Chùa Linh Ứng",
@@ -1370,6 +1668,114 @@
     "name": "Chùa Từ Tôn"
    }
   },
+  "ChIJyUQ4aw72QTERCXl5YV-4U1w": {
+   "osm": "node/14136161565",
+   "dist_m": 108.5,
+   "name_ratio": 0.67,
+   "tags": {
+    "name": "Failyland of Ba Na Hills",
+    "tourism": "information"
+   }
+  },
+  "ChIJJ93iFIQXQjERhV8dXhMwLOg": {
+   "osm": "way/572217540",
+   "dist_m": 7.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "A La Carte Danang Beach",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJMeyhoXgXQjERqCs6CuNR5yI": {
+   "osm": "way/1050159061",
+   "dist_m": 12.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sala Danang Beach Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJW7iIXnoXQjERwzVF2LpQ_m4": {
+   "osm": "way/693058159",
+   "dist_m": 0.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Haian Beach Hotel & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJTQo19YMXQjER1DttYZqjHYo": {
+   "osm": "node/12860787931",
+   "dist_m": 24.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mandila Beach",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJN75cdYQXQjERBUnemtIubGM": {
+   "osm": "node/12860787933",
+   "dist_m": 20.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Nalod",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJzbKs7IMXQjERWf_Uz122Ohs": {
+   "osm": "way/1243635507",
+   "dist_m": 24.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Diamond Sea",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJbeO3ddMZQjERzeIxy-6JpYc": {
+   "osm": "way/1050249359",
+   "dist_m": 29.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Meliá Vinpearl Danang Riverfront",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ8YytBwwXQjERJQIQYf4qyqM": {
+   "osm": "way/1243635505",
+   "dist_m": 13.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Minh Toan Safi Ocean",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJT1sjdYQXQjERSLHKKZsmfdQ": {
+   "osm": "way/1243635515",
+   "dist_m": 5.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Paris Deli Danang Beach Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJW7SBUHoXQjERdpSIWHkCuh0": {
+   "osm": "way/693059133",
+   "dist_m": 0.4,
+   "name_ratio": 0.69,
+   "tags": {
+    "name": "Mường Thanh Đà Nẵng",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJUeabB3kXQjERFP2JL7c8YCg": {
+   "osm": "way/693369267",
+   "dist_m": 35.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "DLG Hotel",
+    "tourism": "hotel"
+   }
+  },
   "ChIJJbfHSGUXQjERRXCfzSX3s88": {
    "osm": "node/4231051889",
    "dist_m": 55.6,
@@ -1377,6 +1783,158 @@
    "tags": {
     "amenity": "bar",
     "name": "Holiday Beach Club"
+   }
+  },
+  "ChIJWcFCas8QQjERQGJzK8w1ta4": {
+   "osm": "way/164333086",
+   "dist_m": 66.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hyatt Regency Danang Resort and Spa",
+    "name:en": "Hyatt Regency Danang Resort and Spa",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "wikidata": "Q111402875"
+   }
+  },
+  "ChIJmZHsE5U9QjERDa3a1CuK3lo": {
+   "osm": "way/360113559",
+   "dist_m": 32.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "InterContinental Danang Sun Peninsula Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJKfL8bWgXQjERWPZKseMae6E": {
+   "osm": "way/118614290",
+   "dist_m": 69.3,
+   "name_ratio": 0.85,
+   "tags": {
+    "name": "Pullman Beach Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJMTadzMQQQjER29xKIZnnHAU": {
+   "osm": "node/13893330292",
+   "dist_m": 3.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sandy Beach Non Nuoc Resort"
+   }
+  },
+  "ChIJQ3ODRnwXQjERsTy60ZdRD_Q": {
+   "osm": "way/1314327486",
+   "dist_m": 5.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Risemount Premier Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJjb4Ah-QRQjERFlzALzxOOvo": {
+   "osm": "way/162072617",
+   "dist_m": 51.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Four Seasons Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJd3RleOYXQjERQQD0TduMYnU": {
+   "osm": "way/164333087",
+   "dist_m": 13.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Olalani Resort & Condotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJJxW4ysUQQjER_NC7GzE1W_0": {
+   "osm": "way/513706270",
+   "dist_m": 67.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Meliá Danang Beach Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJtaLa9KoRQjERpVTDAGoA9ZY": {
+   "osm": "way/1127653587",
+   "dist_m": 59.4,
+   "name_ratio": 0.75,
+   "tags": {
+    "name": "The Ocean Suites",
+    "tourism": "apartment"
+   }
+  },
+  "ChIJQT4SLJwRQjERvym-dW5QWJ0": {
+   "osm": "way/1127655296",
+   "dist_m": 99.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Shilla Monogram",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJz0RiIUQXQjER_XbsI16KkBE": {
+   "osm": "way/164333079",
+   "dist_m": 90.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Tia Wellness Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJEyLB68sQQjER7FTfkhV0_MY": {
+   "osm": "way/164333100",
+   "dist_m": 90.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Danang Marriott Resort & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ7fA2ROsZQjERuQWylV-XvDg": {
+   "osm": "node/12169174294",
+   "dist_m": 4.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Panda Spa"
+   }
+  },
+  "ChIJHzP474MXQjERHjpAS3HY_AY": {
+   "osm": "node/5541654971",
+   "dist_m": 85.4,
+   "name_ratio": 0.67,
+   "tags": {
+    "name": "Maison Spa Da Nang",
+    "opening_hours": "Mo-Su 08:30-22:00"
+   }
+  },
+  "ChIJoyYaBewXQjEROdwfQaOB610": {
+   "osm": "node/12839895661",
+   "dist_m": 4.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Babylon"
+   }
+  },
+  "ChIJ6dOY7ykYQjER0aPtP-ONTzM": {
+   "osm": "way/1278503035",
+   "dist_m": 57.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Herbal Spa",
+    "opening_hours": "Mo-Su 09:00-22:30"
+   }
+  },
+  "ChIJ98HsudQXQjERpViPqdVY3ko": {
+   "osm": "node/13149864557",
+   "dist_m": 4.8,
+   "name_ratio": 0.88,
+   "tags": {
+    "name": "Aoni Spa"
    }
   },
   "ChIJgRyzBl8ZQjERJF9sFGvE4R8": {
@@ -1394,7 +1952,7 @@
   "ChIJHRmt7soZQjERhuei1xWj9Xs": {
    "osm": "node/5116302323",
    "dist_m": 100.4,
-   "name_ratio": 0.71,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "name": "Mì Quảng Ếch",
@@ -1418,16 +1976,25 @@
   "ChIJ14kOf8kZQjERrdrrQPpiZKA": {
    "osm": "node/5983039285",
    "dist_m": 8.1,
-   "name_ratio": 0.86,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "name": "Mi Quang Thi 251"
    }
   },
+  "ChIJ2eEwIrEZQjERmUcku_xN6pw": {
+   "osm": "node/6466304585",
+   "dist_m": 6.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "My Quang Ba Mua"
+   }
+  },
   "ChIJkYkOmOMXQjEREz4KLKpwAOE": {
    "osm": "node/7141021585",
    "dist_m": 6.4,
-   "name_ratio": 0.67,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "seafood;vietnamese",
@@ -1446,14 +2013,265 @@
     "name": "Da Thanh Quan"
    }
   },
+  "ChIJBVHLh_gXQjER0MFnoSFsh4A": {
+   "osm": "node/4352303490",
+   "dist_m": 6.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Ông Minh",
+    "opening_hours": "Mo-Su 09:00-23:00"
+   }
+  },
   "ChIJO_gU03QZQjERdvtWlsIeyOM": {
    "osm": "node/13290069643",
    "dist_m": 13.2,
-   "name_ratio": 0.73,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "cuisine": "seafood",
     "name": "Kim Seafood"
+   }
+  },
+  "ChIJBT1hHA4XQjERHcTlavRMj5I": {
+   "osm": "node/12841142111",
+   "dist_m": 105.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Dac San Da Nang"
+   }
+  },
+  "ChIJSwMjjYEXQjERBbThTSOPeKY": {
+   "osm": "node/12167891404",
+   "dist_m": 3.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Huong Da"
+   }
+  },
+  "ChIJ03jTTgAXQjERpVQunmJHv2c": {
+   "osm": "node/12171202636",
+   "dist_m": 10.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sontra Sea Hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJfbl-2sMXQjERKLfkuhtH-BE": {
+   "osm": "way/1279557695",
+   "dist_m": 11.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Peninsula Hotel Danang",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJkRSDGIIXQjERdg4lYna_jV0": {
+   "osm": "way/693341949",
+   "dist_m": 6.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Pavilion Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJoWXWNIwXQjERjFwxSEpICZ4": {
+   "osm": "way/1279557691",
+   "dist_m": 15.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hilton Garden Inn Da Nang",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJu954vu8XQjERQNvn5_8eBE8": {
+   "osm": "node/12171117113",
+   "dist_m": 19.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Grand Gold",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJS0p9LgcXQjERRnDVDqhYvX4": {
+   "osm": "node/10314394709",
+   "dist_m": 9.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Radisson",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJn2uBfeUXQjERvTmGbdnPARE": {
+   "osm": "node/7712584625",
+   "dist_m": 12.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "The Code",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJR4RA3I0XQjERajP7wKxjYu0": {
+   "osm": "node/12171117110",
+   "dist_m": 16.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mangata",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJXRkLVPUZQjERhjMP_j_cdkQ": {
+   "osm": "node/2987491833",
+   "dist_m": 29.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Muong Thanh",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJrW03HQAXQjERLRu5Xd4RvsE": {
+   "osm": "node/12860787941",
+   "dist_m": 18.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Seavitel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJQ-_7No0XQjERrR5A4J2fB9s": {
+   "osm": "way/693394241",
+   "dist_m": 17.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Monarque Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJQWWv4A8YQjERuqj9zjNqKAc": {
+   "osm": "node/12816183324",
+   "dist_m": 21.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Wyndham Danang Golden Bay Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ27_WHYQXQjERfwDksZnfqKM": {
+   "osm": "node/11888500069",
+   "dist_m": 32.7,
+   "name_ratio": 0.75,
+   "tags": {
+    "name": "Lucia beach hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJs2LW3rEXQjERAndHSLNX-Rc": {
+   "osm": "way/693117415",
+   "dist_m": 36.5,
+   "name_ratio": 0.64,
+   "tags": {
+    "name": "The Legend Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJfS4VlKsZQjERPQy1DOvrEa8": {
+   "osm": "node/13020264601",
+   "dist_m": 20.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Avenis",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ9--6uKYZQjER5hS7ybSadkc": {
+   "osm": "node/13545986805",
+   "dist_m": 12.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Ocean Star",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJISuvVcsZQjERhnOk-O_w9pI": {
+   "osm": "node/12346362901",
+   "dist_m": 17.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Moonlight Hotel Suites & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJAUbRW8wZQjERf0sgTLr3Odo": {
+   "osm": "node/12167609726",
+   "dist_m": 4.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mercury",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJX8a3GJEZQjERe6n-Xtcds1w": {
+   "osm": "node/11893018499",
+   "dist_m": 19.6,
+   "name_ratio": 0.96,
+   "tags": {
+    "name": "Levenin Spa"
+   }
+  },
+  "ChIJXYpw5DMXQjERzS8ce1U5Z3M": {
+   "osm": "node/12848662376",
+   "dist_m": 50.6,
+   "name_ratio": 0.71,
+   "tags": {
+    "name": "Lee Spa"
+   }
+  },
+  "ChIJyUfZ9fAZQjERIMtiBaxkTko": {
+   "osm": "node/12839895658",
+   "dist_m": 10.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Nguon Spa"
+   }
+  },
+  "ChIJ701Bqt8XQjERf9oQmmJJRE8": {
+   "osm": "node/12870331350",
+   "dist_m": 10.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Regal Healthy Spa"
+   }
+  },
+  "ChIJu557PTwYQjERu1jlhJR4LEU": {
+   "osm": "node/4725852293",
+   "dist_m": 26.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "nightclub",
+    "name": "New phuong dong",
+    "name:vi": "New phuong dong"
+   }
+  },
+  "ChIJYZuMDnEZQjERrftd297ekRM": {
+   "osm": "node/12373133701",
+   "dist_m": 7.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Tê Bar - Speakeasy",
+    "opening_hours": "Mo-Su 19:00-01:30"
+   }
+  },
+  "ChIJZQZGM-MZQjERm_6vbq_fWzo": {
+   "osm": "node/10313151251",
+   "dist_m": 97.4,
+   "name_ratio": 0.63,
+   "tags": {
+    "amenity": "nightclub",
+    "name": "Sophie Mixology"
    }
   },
   "ChIJP0--pEAXQjERoheJMf24gHA": {
@@ -1489,7 +2307,7 @@
   "ChIJK0J1RXMXQjERPPTldZI_e5c": {
    "osm": "node/13546014230",
    "dist_m": 3.3,
-   "name_ratio": 0.63,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "bar",
     "name": "Funky Donkey"
@@ -1498,11 +2316,21 @@
   "ChIJdwwwfFoXQjERW6mXtIdB8LU": {
    "osm": "node/6627633488",
    "dist_m": 0.9,
-   "name_ratio": 0.69,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "bar",
     "name": "Shamrock Sports Bar Da Nang",
     "opening_hours": "24/7"
+   }
+  },
+  "ChIJQwork9IXQjERVcF8a6VWq5I": {
+   "osm": "node/10747475499",
+   "dist_m": 20.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Maia",
+    "opening_hours": "Mo-Su 16:00-23:00"
    }
   },
   "ChIJyVQ3iwoXQjERNILX5sPCUKA": {
@@ -1530,6 +2358,23 @@
    "tags": {
     "amenity": "pub",
     "name": "Chevy"
+   }
+  },
+  "ChIJ0-6wNdsXQjER068QxYa3E5o": {
+   "osm": "node/12173072825",
+   "dist_m": 43.8,
+   "name_ratio": 0.71,
+   "tags": {
+    "amenity": "karaoke_box",
+    "name": "Karaoke Sieu Sau"
+   }
+  },
+  "ChIJObG9DvoZQjER1tqakgkbUno": {
+   "osm": "node/6520986264",
+   "dist_m": 77.1,
+   "name_ratio": 0.71,
+   "tags": {
+    "name": "Mắt kính Điện Biên Phủ"
    }
   },
   "ChIJ8ar-PNQXQjERFGGdrbCAQbg": {
@@ -1582,6 +2427,14 @@
     "name": "Chùa Thuận Thành"
    }
   },
+  "ChIJYy3rrs4ZQjER3g_-SEo5WPU": {
+   "osm": "way/420019435",
+   "dist_m": 103.4,
+   "name_ratio": 0.76,
+   "tags": {
+    "name": "Hồ Công viên 29 tháng 3"
+   }
+  },
   "manual:hai-van-quan": {
    "osm": "way/466418347",
    "dist_m": 0.0,
@@ -1599,6 +2452,35 @@
    "tags": {
     "name": "VinWonders Nam Hội An",
     "tourism": "theme_park"
+   }
+  },
+  "manual:hoi-an-pho-di-bo-hoa-dang": {
+   "osm": "node/7121639387",
+   "dist_m": 109.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Кафе"
+   }
+  },
+  "manual:hoi-an-bai-choi": {
+   "osm": "relation/3938690",
+   "dist_m": 17.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Vườn Tượng An Hội",
+    "name:en": "An Hoi Sculpture Park",
+    "name:vi": "Vườn Tượng An Hội"
+   }
+  },
+  "osm:way/630377259": {
+   "osm": "way/630377259",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bãi biển Tiên Sa",
+    "name:en": "Tien Sa Beach",
+    "name:vi": "Bãi biển Tiên Sa"
    }
   },
   "osm:way/39268284": {
@@ -1681,7 +2563,7 @@
   "osm:way/595299310": {
    "osm": "way/595299310",
    "dist_m": 0.0,
-   "name_ratio": 0.63,
+   "name_ratio": 0.9,
    "tags": {
     "fee": "yes",
     "name": "Tan Ky",
@@ -1725,7 +2607,7 @@
   "osm:node/5674096859": {
    "osm": "node/5674096859",
    "dist_m": 0.1,
-   "name_ratio": 0.82,
+   "name_ratio": 0.9,
    "tags": {
     "name": "Diep Dong Nguyen",
     "name:en": "Diep Dong Nguyen House",
@@ -1764,10 +2646,20 @@
     "tourism": "museum"
    }
   },
+  "osm:node/3189923484": {
+   "osm": "node/3189923484",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "fee": "yes",
+    "name": "Sa Huynh",
+    "tourism": "museum"
+   }
+  },
   "osm:way/631074714": {
    "osm": "way/631074714",
    "dist_m": 0.0,
-   "name_ratio": 0.77,
+   "name_ratio": 0.9,
    "tags": {
     "name": "Bảo tàng Văn hóa dân",
     "name:en": "Museum of Folklore",
@@ -1829,7 +2721,7 @@
   "osm:node/6099308589": {
    "osm": "node/6099308589",
    "dist_m": 0.1,
-   "name_ratio": 0.67,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "marketplace",
     "name": "Chợ Đêm",
@@ -1848,6 +2740,15 @@
     "name:en": "Hoi An Textile Market",
     "opening_hours": "Mo-Su 06:00-19:00",
     "tourism": "attraction"
+   }
+  },
+  "osm:node/7127442985": {
+   "osm": "node/4488354489",
+   "dist_m": 115.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Живая музыка через дорогу",
+    "name:en": "Coconut Café"
    }
   },
   "osm:node/10709738006": {
@@ -1905,13 +2806,12 @@
    }
   },
   "osm:node/7127464285": {
-   "osm": "way/631074714",
-   "dist_m": 32.2,
-   "name_ratio": 0.63,
+   "osm": "node/4488354489",
+   "dist_m": 49.0,
+   "name_ratio": 0.9,
    "tags": {
-    "name": "Bảo tàng Văn hóa dân",
-    "name:en": "Museum of Folklore",
-    "tourism": "museum"
+    "name": "Живая музыка через дорогу",
+    "name:en": "Coconut Café"
    }
   },
   "osm:way/209492808": {
@@ -2820,7 +3720,7 @@
   "osm:node/13587488508": {
    "osm": "node/13587488508",
    "dist_m": 0.0,
-   "name_ratio": 0.62,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "restaurant",
     "name": "Four Seasons",
@@ -2868,7 +3768,7 @@
   "osm:node/14337971574": {
    "osm": "node/14337971574",
    "dist_m": 0.0,
-   "name_ratio": 0.84,
+   "name_ratio": 0.9,
    "tags": {
     "amenity": "cafe",
     "cuisine": "coffee_shop;vietnamese",

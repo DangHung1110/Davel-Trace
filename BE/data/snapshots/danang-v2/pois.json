@@ -54,9 +54,9 @@
   "included": 35
  },
  "count_by_hours_kind": {
-  "safe_window": 532,
-  "fixed": 249,
-  "unknown": 89,
+  "safe_window": 528,
+  "fixed": 255,
+  "unknown": 87,
   "by_booking": 6
  },
  "pois": [
@@ -1455,7 +1455,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/10709321405",
     "google_place_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
     "overture": null
    },
@@ -5268,7 +5268,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/6679993986",
     "google_place_id": "ChIJFbFDWA8ZQjERwNPaFGXBRPQ",
     "overture": null
    },
@@ -6149,7 +6149,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/7027674985",
     "google_place_id": "ChIJPYQKSAAXQjER0cga1BLD_MI",
     "overture": null
    },
@@ -14057,7 +14057,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13299175525",
     "google_place_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
     "overture": null
    },
@@ -14292,9 +14292,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-20:30"
+     "06:00-23:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cafe"
@@ -14375,12 +14375,12 @@
      "note": "name:cafe;type:Quán cà phê"
     },
     "hours": {
-     "source": "archetype:cafe",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/node/5382678421",
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": "OSM opening_hours='06:00-23:00', khớp 1.2 m"
     },
     "price": {
      "source": "category_default:cafe",
@@ -19819,7 +19819,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13392416701",
     "google_place_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
     "overture": null
    },
@@ -28184,7 +28184,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/1758586662",
     "google_place_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
     "overture": null
    },
@@ -36014,11 +36014,14 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:30-11:00",
+     "08:00-12:00",
      "14:00-16:30"
     ],
-    "kind": "safe_window",
-    "closed_days": [],
+    "kind": "fixed",
+    "closed_days": [
+     "Mo",
+     "Fr"
+    ],
     "access_window": null,
     "archetype": "bao_tang"
    },
@@ -36070,7 +36073,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1481663042",
     "google_place_id": "ChIJo8fznMYZQjERNtNTUT-ZJyk",
     "overture": null
    },
@@ -36100,12 +36103,12 @@
      "note": "name:bao tang;type:Bảo tàng lịch sử"
     },
     "hours": {
-     "source": "archetype:bao_tang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/way/1481663042",
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": "OSM opening_hours='Tu-Th 08:00-12:00,14:00-16:30; Sa-Su 08:00-12:00,14:00-16:30', khớp 25.1 m; đóng cửa Mo,Fr (lịch chưa xét thứ trong tuần)"
     },
     "price": {
      "source": "web",
@@ -36949,7 +36952,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/5279215522",
     "google_place_id": "ChIJNdWwUgARQjERansIEJQleAU",
     "overture": null
    },
@@ -39868,7 +39871,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/204790989",
     "google_place_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
     "overture": null
    },
@@ -45216,7 +45219,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/5279215522",
     "google_place_id": "ChIJOxVypBYRQjERMmK2P6JbzF0",
     "overture": null
    },
@@ -45363,7 +45366,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/5279215522",
     "google_place_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
     "overture": null
    },
@@ -48146,7 +48149,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/3760272162",
+    "osm": "node/3760272162",
     "google_place_id": null,
     "overture": null
    },
@@ -50347,7 +50350,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/4759000238",
+    "osm": "node/4759000238",
     "google_place_id": null,
     "overture": null
    },
@@ -52251,7 +52254,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/7095169369",
+    "osm": "node/7095169369",
     "google_place_id": null,
     "overture": null
    },
@@ -52541,7 +52544,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/7477670190",
+    "osm": "node/7477670190",
     "google_place_id": null,
     "overture": null
    },
@@ -52685,7 +52688,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "node/13651634201",
+    "osm": "node/7477670191",
     "google_place_id": null,
     "overture": null
    },
@@ -52975,7 +52978,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/9921282483",
+    "osm": "node/9921282483",
     "google_place_id": null,
     "overture": null
    },
@@ -53119,7 +53122,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/9921315929",
+    "osm": "node/9921315929",
     "google_place_id": null,
     "overture": null
    },
@@ -55885,7 +55888,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/12811972501",
+    "osm": "node/12811972501",
     "google_place_id": null,
     "overture": null
    },
@@ -56176,7 +56179,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/13293564930",
+    "osm": "node/13293564930",
     "google_place_id": null,
     "overture": null
    },
@@ -56471,7 +56474,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "node/13677406601",
+    "osm": "osm:node/13677406601",
     "google_place_id": null,
     "overture": null
    },
@@ -57199,7 +57202,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/14045110791",
+    "osm": "node/14045110791",
     "google_place_id": null,
     "overture": null
    },
@@ -57232,7 +57235,7 @@
      "source": "osm",
      "verified_by": "open_data",
      "confidence": 0.7,
-     "evidence_url": null,
+     "evidence_url": "node/14045110791",
      "verified_at": null,
      "note": null
     },
@@ -57343,7 +57346,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/14045130739",
+    "osm": "node/14045130739",
     "google_place_id": null,
     "overture": null
    },
@@ -57376,7 +57379,7 @@
      "source": "osm",
      "verified_by": "open_data",
      "confidence": 0.7,
-     "evidence_url": null,
+     "evidence_url": "node/14045130739",
      "verified_at": null,
      "note": null
     },
@@ -57487,7 +57490,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/14045144381",
+    "osm": "node/14045144381",
     "google_place_id": null,
     "overture": null
    },
@@ -57520,7 +57523,7 @@
      "source": "osm",
      "verified_by": "open_data",
      "confidence": 0.7,
-     "evidence_url": null,
+     "evidence_url": "node/14045144381",
      "verified_at": null,
      "note": null
     },
@@ -57632,7 +57635,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "osm:node/14067929701",
+    "osm": "node/14067929701",
     "google_place_id": null,
     "overture": null
    },
@@ -62207,7 +62210,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/14136161565",
     "google_place_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
     "overture": null
    },
@@ -62924,7 +62927,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/572217540",
     "google_place_id": "ChIJJ93iFIQXQjERhV8dXhMwLOg",
     "overture": null
    },
@@ -63208,7 +63211,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1050159061",
     "google_place_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI",
     "overture": null
    },
@@ -63350,7 +63353,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693058159",
     "google_place_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4",
     "overture": null
    },
@@ -63492,7 +63495,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12860787931",
     "google_place_id": "ChIJTQo19YMXQjER1DttYZqjHYo",
     "overture": null
    },
@@ -63634,7 +63637,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12860787933",
     "google_place_id": "ChIJN75cdYQXQjERBUnemtIubGM",
     "overture": null
    },
@@ -63776,7 +63779,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1243635507",
     "google_place_id": "ChIJzbKs7IMXQjERWf_Uz122Ohs",
     "overture": null
    },
@@ -63918,7 +63921,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1050249359",
     "google_place_id": "ChIJbeO3ddMZQjERzeIxy-6JpYc",
     "overture": null
    },
@@ -64060,7 +64063,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1243635505",
     "google_place_id": "ChIJ8YytBwwXQjERJQIQYf4qyqM",
     "overture": null
    },
@@ -64344,7 +64347,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1243635515",
     "google_place_id": "ChIJT1sjdYQXQjERSLHKKZsmfdQ",
     "overture": null
    },
@@ -64486,7 +64489,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693059133",
     "google_place_id": "ChIJW7SBUHoXQjERdpSIWHkCuh0",
     "overture": null
    },
@@ -64628,7 +64631,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693369267",
     "google_place_id": "ChIJUeabB3kXQjERFP2JL7c8YCg",
     "overture": null
    },
@@ -64902,7 +64905,7 @@
    "popularity": {
     "signature": false,
     "prize_prior": null,
-    "wikidata": null,
+    "wikidata": "Q111402875",
     "wikidata_sitelinks": null,
     "wikipedia_views_90d": null
    },
@@ -64912,7 +64915,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/164333086",
     "google_place_id": "ChIJWcFCas8QQjERQGJzK8w1ta4",
     "overture": null
    },
@@ -64979,7 +64982,7 @@
      "confidence": 0.4,
      "evidence_url": null,
      "verified_at": null,
-     "note": "category=0.0"
+     "note": "category=0.0; wikidata"
     }
    },
    "data_version": "v2.1",
@@ -65054,7 +65057,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/360113559",
     "google_place_id": "ChIJmZHsE5U9QjERDa3a1CuK3lo",
     "overture": null
    },
@@ -65338,7 +65341,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/118614290",
     "google_place_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
     "overture": null
    },
@@ -65480,7 +65483,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13893330292",
     "google_place_id": "ChIJMTadzMQQQjER29xKIZnnHAU",
     "overture": null
    },
@@ -65764,7 +65767,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1314327486",
     "google_place_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
     "overture": null
    },
@@ -65906,7 +65909,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/162072617",
     "google_place_id": "ChIJjb4Ah-QRQjERFlzALzxOOvo",
     "overture": null
    },
@@ -66048,7 +66051,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/164333087",
     "google_place_id": "ChIJd3RleOYXQjERQQD0TduMYnU",
     "overture": null
    },
@@ -66190,7 +66193,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/513706270",
     "google_place_id": "ChIJJxW4ysUQQjER_NC7GzE1W_0",
     "overture": null
    },
@@ -66332,7 +66335,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1127653587",
     "google_place_id": "ChIJtaLa9KoRQjERpVTDAGoA9ZY",
     "overture": null
    },
@@ -66758,7 +66761,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1127655296",
     "google_place_id": "ChIJQT4SLJwRQjERvym-dW5QWJ0",
     "overture": null
    },
@@ -66900,7 +66903,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/164333079",
     "google_place_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
     "overture": null
    },
@@ -67042,7 +67045,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/164333100",
     "google_place_id": "ChIJEyLB68sQQjER7FTfkhV0_MY",
     "overture": null
    },
@@ -67184,7 +67187,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12169174294",
     "google_place_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
     "overture": null
    },
@@ -67752,7 +67755,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/5541654971",
     "google_place_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
     "overture": null
    },
@@ -68604,7 +68607,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12839895661",
     "google_place_id": "ChIJoyYaBewXQjEROdwfQaOB610",
     "overture": null
    },
@@ -68746,7 +68749,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1278503035",
     "google_place_id": "ChIJ6dOY7ykYQjER0aPtP-ONTzM",
     "overture": null
    },
@@ -69456,7 +69459,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13149864557",
     "google_place_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
     "overture": null
    },
@@ -71063,7 +71066,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/6466304585",
     "google_place_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
     "overture": null
    },
@@ -72764,10 +72767,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "11:00-13:30",
-     "17:30-20:30"
+     "09:00-23:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "nha_hang"
@@ -72820,7 +72822,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/4352303490",
     "google_place_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
     "overture": null
    },
@@ -72850,12 +72852,12 @@
      "note": "name:hai san;type:Nhà hàng hải sản"
     },
     "hours": {
-     "source": "archetype:nha_hang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/node/4352303490",
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": "OSM opening_hours='Mo-Su 09:00-23:00', khớp 6.9 m"
     },
     "price": {
      "source": "category_default:nha_hang",
@@ -73258,7 +73260,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12841142111",
     "google_place_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
     "overture": null
    },
@@ -74122,7 +74124,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12167891404",
     "google_place_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
     "overture": null
    },
@@ -74646,8 +74648,10 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "00:00-23:59"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "luu_tru"
@@ -74698,7 +74702,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12171202636",
     "google_place_id": "ChIJ03jTTgAXQjERpVQunmJHv2c",
     "overture": null
    },
@@ -74728,12 +74732,12 @@
      "note": "name:hotel;type:Khách sạn"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/node/12171202636",
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "note": "OSM opening_hours='24/7', khớp 10.7 m"
     },
     "price": {
      "source": "n/a",
@@ -74840,7 +74844,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1279557695",
     "google_place_id": "ChIJfbl-2sMXQjERKLfkuhtH-BE",
     "overture": null
    },
@@ -75266,7 +75270,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693341949",
     "google_place_id": "ChIJkRSDGIIXQjERdg4lYna_jV0",
     "overture": null
    },
@@ -75408,7 +75412,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/1279557691",
     "google_place_id": "ChIJoWXWNIwXQjERjFwxSEpICZ4",
     "overture": null
    },
@@ -75550,7 +75554,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12171117113",
     "google_place_id": "ChIJu954vu8XQjERQNvn5_8eBE8",
     "overture": null
    },
@@ -75692,7 +75696,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/10314394709",
     "google_place_id": "ChIJS0p9LgcXQjERRnDVDqhYvX4",
     "overture": null
    },
@@ -75834,7 +75838,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/7712584625",
     "google_place_id": "ChIJn2uBfeUXQjERvTmGbdnPARE",
     "overture": null
    },
@@ -75976,7 +75980,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12171117110",
     "google_place_id": "ChIJR4RA3I0XQjERajP7wKxjYu0",
     "overture": null
    },
@@ -76118,7 +76122,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/2987491833",
     "google_place_id": "ChIJXRkLVPUZQjERhjMP_j_cdkQ",
     "overture": null
    },
@@ -76402,7 +76406,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12860787941",
     "google_place_id": "ChIJrW03HQAXQjERLRu5Xd4RvsE",
     "overture": null
    },
@@ -76544,7 +76548,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693394241",
     "google_place_id": "ChIJQ-_7No0XQjERrR5A4J2fB9s",
     "overture": null
    },
@@ -76828,7 +76832,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12816183324",
     "google_place_id": "ChIJQWWv4A8YQjERuqj9zjNqKAc",
     "overture": null
    },
@@ -76970,7 +76974,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/11888500069",
     "google_place_id": "ChIJ27_WHYQXQjERfwDksZnfqKM",
     "overture": null
    },
@@ -77112,7 +77116,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/693117415",
     "google_place_id": "ChIJs2LW3rEXQjERAndHSLNX-Rc",
     "overture": null
    },
@@ -77486,8 +77490,10 @@
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
-    "open": [],
-    "kind": "unknown",
+    "open": [
+     "00:00-23:59"
+    ],
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "luu_tru"
@@ -77538,7 +77544,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13020264601",
     "google_place_id": "ChIJfS4VlKsZQjERPQy1DOvrEa8",
     "overture": null
    },
@@ -77568,12 +77574,12 @@
      "note": "name:hotel;type:Khách sạn"
     },
     "hours": {
-     "source": "none",
-     "verified_by": "inferred",
-     "confidence": 0.0,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/node/13020264601",
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — cần tra trang chính thức"
+     "note": "OSM opening_hours='24/7', khớp 20.8 m"
     },
     "price": {
      "source": "n/a",
@@ -77963,7 +77969,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/13545986805",
     "google_place_id": "ChIJ9--6uKYZQjER5hS7ybSadkc",
     "overture": null
    },
@@ -78673,7 +78679,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12346362901",
     "google_place_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
     "overture": null
    },
@@ -79241,7 +79247,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12167609726",
     "google_place_id": "ChIJAUbRW8wZQjERf0sgTLr3Odo",
     "overture": null
    },
@@ -80377,7 +80383,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/11893018499",
     "google_place_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
     "overture": null
    },
@@ -82223,7 +82229,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12848662376",
     "google_place_id": "ChIJXYpw5DMXQjERzS8ce1U5Z3M",
     "overture": null
    },
@@ -82649,7 +82655,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12839895658",
     "google_place_id": "ChIJyUfZ9fAZQjERIMtiBaxkTko",
     "overture": null
    },
@@ -83217,7 +83223,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12870331350",
     "google_place_id": "ChIJ701Bqt8XQjERf9oQmmJJRE8",
     "overture": null
    },
@@ -89771,7 +89777,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/4725852293",
     "google_place_id": "ChIJu557PTwYQjERu1jlhJR4LEU",
     "overture": null
    },
@@ -90296,9 +90302,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "19:30-23:00"
+     "19:00-01:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "bar"
@@ -90349,7 +90355,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12373133701",
     "google_place_id": "ChIJYZuMDnEZQjERrftd297ekRM",
     "overture": null
    },
@@ -90379,12 +90385,12 @@
      "note": "name:bar;type:Quán bar cocktail"
     },
     "hours": {
-     "source": "archetype:bar",
-     "verified_by": "inferred",
-     "confidence": 0.45,
-     "evidence_url": null,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.65,
+     "evidence_url": "https://www.openstreetmap.org/node/12373133701",
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": "OSM opening_hours='Mo-Su 19:00-01:30', khớp 7.7 m"
     },
     "price": {
      "source": "category_default:nightlife",
@@ -90781,7 +90787,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/10313151251",
     "google_place_id": "ChIJZQZGM-MZQjERm_6vbq_fWzo",
     "overture": null
    },
@@ -93949,7 +93955,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/10747475499",
     "google_place_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
     "overture": null
    },
@@ -94957,7 +94963,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/12173072825",
     "google_place_id": "ChIJ0-6wNdsXQjER068QxYa3E5o",
     "overture": null
    },
@@ -99581,7 +99587,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/6520986264",
     "google_place_id": "ChIJObG9DvoZQjER1tqakgkbUno",
     "overture": null
    },
@@ -103266,7 +103272,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "way/420019435",
     "google_place_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
     "overture": null
    },
@@ -107548,7 +107554,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "node/7121639387",
     "google_place_id": null,
     "overture": null
    },
@@ -107675,7 +107681,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": null,
+    "osm": "relation/3938690",
     "google_place_id": null,
     "overture": null
    },
@@ -111879,7 +111885,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "node/7127442985",
+    "osm": "node/4488354489",
     "google_place_id": null,
     "overture": null
    },
@@ -113433,7 +113439,7 @@
     "license": null
    },
    "ext_ids": {
-    "osm": "way/631074714",
+    "osm": "node/4488354489",
     "google_place_id": null,
     "overture": null
    },

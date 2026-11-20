@@ -96,15 +96,19 @@ def _dump(name, obj):
 # OSM
 # --------------------------------------------------------------------------
 
-OSM_QUERY = """[out:json][timeout:180];
+OSM_QUERY = """[out:json][timeout:240];
 (
-  nwr["tourism"~"attraction|museum|viewpoint|gallery|theme_park|zoo"]({s},{w},{n},{e});
+  nwr["name"]["amenity"]({s},{w},{n},{e});
+  nwr["name"]["tourism"]({s},{w},{n},{e});
+  nwr["name"]["shop"]({s},{w},{n},{e});
+  nwr["name"]["leisure"]({s},{w},{n},{e});
   nwr["historic"]({s},{w},{n},{e});
-  nwr["amenity"~"place_of_worship|restaurant|cafe|bar|pub|marketplace|fast_food"]["name"]({s},{w},{n},{e});
-  nwr["natural"~"beach|peak|waterfall"]["name"]({s},{w},{n},{e});
-  nwr["leisure"~"park|water_park|beach_resort"]["name"]({s},{w},{n},{e});
+  nwr["natural"~"beach|peak|waterfall|water|bay|cape"]["name"]({s},{w},{n},{e});
 );
 out center tags;"""
+# 20/11: widened from attractions/food only to every named amenity/tourism/
+# shop/leisure element — hotels, spas, massage, karaoke, clubs and shops were
+# missing, so 627 Google-origin POIs could only reach 17% OSM links.
 
 
 def fetch_osm():
@@ -132,6 +136,11 @@ def fetch_osm():
             names = [el["tags"].get(k, "") for k in ("name", "name:vi", "name:en")]
             ratio = max(difflib.SequenceMatcher(None, R.fold(p["name"]), R.fold(nm)).ratio()
                         for nm in names if nm) if any(names) else 0
+            # same rule as migrate_v2.osm_name_ok: one name containing the other
+            # ("Mộc quán Seafood Đà Nẵng" / "Mộc Quán") is a match
+            a = R.fold(p["name"])
+            if a and any(nm and (R.fold(nm) in a or a in R.fold(nm)) for nm in names):
+                ratio = max(ratio, 0.9)
             score = ratio - d / 300.0
             if d <= 120 and ratio >= 0.6 and (best is None or score > best["score"]):
                 best = {"osm": el["osm"], "dist_m": round(d, 1), "name_ratio": round(ratio, 2),

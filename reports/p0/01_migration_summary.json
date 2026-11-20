@@ -94,9 +94,9 @@
   "hoi_an_old_town": 25
  },
  "hours_verified_by": {
-  "inferred": 649,
+  "inferred": 643,
   "agent_web": 133,
-  "open_data": 92,
+  "open_data": 98,
   "user": 2
  },
  "price_verified_by": {
@@ -108,7 +108,7 @@
   "inferred": 838,
   "user": 38
  },
- "legacy_hours_nonempty": 776,
+ "legacy_hours_nonempty": 778,
  "v1_hours_nonempty": 499,
  "legacy_price_band": 63,
  "legacy_free_entry": 181,
@@ -197,5 +197,5 @@
   }
  ],
  "ticket_todo": 19,
- "osm_linked": 317
+ "osm_linked": 392
 }

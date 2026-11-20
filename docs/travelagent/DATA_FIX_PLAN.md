@@ -100,6 +100,7 @@
 - BẠN: `python BE/ml/data/fetch_open_data.py all` (OSM khớp tên + Wikidata + lượt xem Wikipedia).
 - CC: dùng `osm_match.json` để đối chiếu 580 toạ độ gốc Google (lệch > 100 m → `review`), điền `ext_ids.osm`, `popularity.*`.
 - **Nghiệm thu:** ≥ 50% POI gốc Google có liên kết OSM khớp tên; báo cáo POI lệch toạ độ.
+- **Kết quả 20/11:** mở rộng truy vấn OSM (mọi `amenity/tourism/shop/leisure` có tên; trước thiếu khách sạn, spa, karaoke, cửa hàng) + khớp tên chứa nhau ở bước tải → liên kết OSM **107 → 180/627 (29%)**; lệch toạ độ trung vị 14 m. **Không đạt 50%** vì phần lớn quán nhỏ/spa/cà phê chưa có trên OSM — giới hạn của nguồn, không phải thuật toán (khớp tên lõi chỉ thêm 6 cặp, có cặp dễ nhầm nên không dùng). Đề xuất đổi tiêu chí thành "mọi điểm có trên OSM đều được liên kết".
 
 ### WP10 — Chốt các mục chờ duyệt · BẠN + CC
 - BẠN duyệt Q4, Q5. CC áp quyết định qua file nguồn (`BE/data/sources/decisions_*.json`), không sửa tay `pois.json`.
@@ -141,7 +142,7 @@ Trạng thái 20/11 — đều kiểm bằng `P0_GATE=1 pytest BE/tests/data/tes
 Chất lượng (không đổi format):
 1. Giờ `safe_window` 557 → **498** (20/11: +19 chùa/hội quán, +10 ngoài trời/chợ, +30 spa/nightlife có nguồn). Phần còn lại không có nguồn đọc được (chùa làng, quán nhỏ). Quán ăn/cà phê giữ khung an toàn.
 2. Giá: 677/745 điểm là ước lượng theo loại → lấy giá thật cho điểm hay vào lịch (paid_attraction, signature, chợ đêm), quán ăn giữ khoảng giá.
-3. Toạ độ: 552 điểm toạ độ Google chưa đối chiếu OSM (rủi ro thấp).
+3. Toạ độ: 627 điểm gốc Google, 180 đã liên kết OSM (lệch trung vị 14 m); phần còn lại không có trên OSM (rủi ro thấp).
 
 Format (đổi `DATA_SPEC_v2_1` — cần người dùng duyệt):
 4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 4/13 lớp có suất có nguồn, 9 lớp còn unknown. Lớp nấu ăn trùng khung bữa = bữa đó (optimizer + gate, 20/11).
