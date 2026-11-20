@@ -45,7 +45,8 @@ def load_eval_context(snapshot_dir: str) -> tuple[dict, dict] | None:
     try:
         from BE.common import matrix_path
         with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
-            cells = json.load(f).get("cells", {})
+            from BE.matrix_format import cells_of
+            cells = cells_of(json.load(f))
     except (FileNotFoundError, NotADirectoryError):
         cells = {}
     return pois, cells

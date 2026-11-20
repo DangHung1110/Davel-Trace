@@ -153,7 +153,7 @@ Cấu trúc (luôn bật):
 12. `name` sạch (không `|`, không chữ Hàn/Trung/Nhật, ≤ 60 ký tự).
 13. **Một bộ khoá `tags` cho mọi POI** (13 khoá); không còn `rain_protection` (bỏ 21/11: "unknown" ở 941/941 POI, `rain_cover` thay thế).
 14. Không POI active nào có `hours.kind = unknown`. Lưu trú (base) = `00:00-23:59` safe_window (quy ước lễ tân 24h, `provenance.hours.source = rule_lodging_24h`). Lớp theo suất không có lịch suất công bố → excluded có lý do.
-15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày).
+15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày). `matrix.json` lưu dạng `format: dense_v1` (`ids` + mảng phẳng `minutes`/`km` theo hàng, ô (i, j) ở `i*n+j`, `-1` = không đi được, không bao giờ là 0 giả); đọc qua `BE.matrix_format.cells_of` (giữ giao diện `"a->b" -> {km, minutes}`). 988 điểm: 7,2 MB thay vì 73,6 MB.
 
 Cổng chốt dữ liệu (`P0_GATE=1`):
 - G1. Mọi POI active không phải base có hàng ma trận.

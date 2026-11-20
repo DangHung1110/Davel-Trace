@@ -1,5 +1,5 @@
 {
- "note": "21/11/2026: lớp học/workshop theo suất không tìm được lịch suất công bố (tra web 21/11: chỉ thấy trang của lớp khác). Loại khỏi ứng viên với lý do rõ; bổ sung lại khi có lịch suất có nguồn (booking_*.json).",
+ "note": "21/11/2026: lớp học/workshop theo suất không tìm được lịch suất công bố (tra web 21/11: chỉ thấy trang của lớp khác). Loại khỏi ứng viên với lý do rõ; bổ sung lại khi có lịch suất có nguồn (booking_*.json). | Café 41/43 (Hội An, OSM amenity=restaurant): Café 43 có thật (43 Trần Cao Vân; wanderlog.com/place/details/1116844, foody.vn/quang-nam/43-cafe) là quán ăn bình dân -> restaurant; Café 41 không có dấu vết trên web, node liền số cạnh Café 43 (11 m) -> excluded.",
  "items": {
   "ChIJ8ai7BQAZQjERIkxmYHcV9DQ": {
    "status": "excluded",
@@ -24,6 +24,14 @@
   "ChIJH1ujCM0XQjERcOl1lB9Ns6k": {
    "status": "excluded",
    "status_reason": "lớp học theo suất: chưa có lịch suất công bố (tra 21/11/2026) — thêm lại khi có nguồn"
+  },
+  "osm:node/3093689363": {
+   "category": "restaurant",
+   "price_note": "quán ăn bình dân giá rẻ (Foody, Wanderlog); OSM amenity=restaurant"
+  },
+  "osm:node/3093689362": {
+   "status": "excluded",
+   "status_reason": "không xác minh được trên web; nghi node nhập thừa cạnh Café 43 (11 m, cùng giờ, node liền số)"
   }
  }
 }

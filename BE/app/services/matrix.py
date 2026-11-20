@@ -46,7 +46,8 @@ class MatrixService:
         with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
             data = json.load(f)
         self.ids: list[str] = data["ids"]
-        self.cells: dict = data["cells"]
+        from BE.matrix_format import cells_of
+        self.cells = cells_of(data)
         self.source: str = data.get("source", "cache")
 
     # -- cache-first reads ---------------------------------------------------

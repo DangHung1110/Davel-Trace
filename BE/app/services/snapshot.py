@@ -112,7 +112,8 @@ def load_matrix(snapshot_dir: str, ids: list[str]) -> dict:
     errors: list[str] = []
     if matrix.get("ids") != ids:
         errors.append("matrix ids differ from snapshot POI ids")
-    cells = matrix.get("cells", {})
+    from BE.matrix_format import cells_of
+    cells = cells_of(matrix)
     if len(cells) != len(ids) * len(ids):
         errors.append(f"matrix cells {len(cells)} != {len(ids)}x{len(ids)}")
     for a in ids:

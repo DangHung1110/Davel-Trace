@@ -14,13 +14,13 @@
  ],
  "count": 1000,
  "count_by_status": {
-  "active": 939,
-  "excluded": 61
+  "active": 938,
+  "excluded": 62
  },
  "count_by_category": {
-  "restaurant": 224,
+  "restaurant": 225,
   "nightlife": 100,
-  "cafe": 165,
+  "cafe": 164,
   "day_market": 49,
   "viewpoint": 23,
   "religious": 103,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 249
  },
- "applied_decisions": 100,
+ "applied_decisions": 102,
  "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
  "count_new_pois": 258,
@@ -131868,8 +131868,8 @@
    "lon": 108.3274487,
    "category": "cafe",
    "role": "rest",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "không xác minh được trên web; nghi node nhập thừa cạnh Café 43 (11 m, cùng giờ, node liền số)",
    "zone": "hoi_an",
    "cluster_id": null,
    "alt_group": null,
@@ -132007,8 +132007,8 @@
    "name_en": null,
    "lat": 15.8827324,
    "lon": 108.3275342,
-   "category": "cafe",
-   "role": "rest",
+   "category": "restaurant",
+   "role": "meal",
    "status": "active",
    "status_reason": null,
    "zone": "hoi_an",
@@ -132026,7 +132026,7 @@
    },
    "price": {
     "tier": "cheap",
-    "note": null
+    "note": "quán ăn bình dân giá rẻ (Foody, Wanderlog); OSM amenity=restaurant"
    },
    "dwell": {
     "p25": 30,
@@ -132089,12 +132089,12 @@
      "note": null
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "curated_osm:cafe"
+     "note": "decisions_zfinal_20261121.json"
     },
     "hours": {
      "source": "osm",

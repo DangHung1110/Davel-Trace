@@ -246,6 +246,8 @@ def parse_args(argv=None) -> argparse.Namespace:
                          "active = stops + lodging bases")
     ap.add_argument("--max-table-size", type=int, default=MAX_TABLE_SIZE,
                     help="must match osrm-routed --max-table-size")
+    ap.add_argument("--dense", action="store_true",
+                    help="write the dense_v1 format (BE/matrix_format.py); kept when the input is dense")
     ap.add_argument("--compact", action="store_true",
                     help="write matrix.json without indentation (large matrices)")
     ap.add_argument("--dry-run", action="store_true")
@@ -266,6 +268,11 @@ def main(argv=None) -> int:
     pois = view_pois(pois, os.path.dirname(os.path.abspath(pois_path)))
     with open(matrix_path, encoding="utf-8") as f:
         existing = json.load(f)
+    from BE.matrix_format import DENSE, cells_of, to_dense
+    was_dense = existing.get("format") == DENSE
+    if was_dense:   # merge works on the legacy cell dict; written back dense
+        existing = {**{k: v for k, v in existing.items() if k not in ("format", "minutes", "km")},
+                    "cells": dict(cells_of(existing))}
 
     selection = select_expansion(pois, existing["ids"],
                                  verified_only=not args.include_unverified,
@@ -331,7 +338,9 @@ def main(argv=None) -> int:
         json.dump(existing, f, ensure_ascii=False, indent=1)
         f.write("\n")
     with open(matrix_path, "w", encoding="utf-8") as f:
-        if args.compact:
+        if was_dense or args.dense:
+            doc = to_dense(doc)
+        if args.compact or was_dense or args.dense:
             json.dump(doc, f, ensure_ascii=False, separators=(",", ":"))
         else:
             json.dump(doc, f, ensure_ascii=False, indent=1)

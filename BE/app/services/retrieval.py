@@ -141,7 +141,8 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     types = wanted_types(trip.get("activities", []))
     booking_ok = wants_booking(trip.get("activities", []))
     # ids that own a matrix row (source side of any cell), computed once
-    matrix_ids = {k.split("->", 1)[0] for k in cells} if cells else None
+    matrix_ids = ((set(cells.row_ids) if hasattr(cells, "row_ids")
+                   else {k.split("->", 1)[0] for k in cells}) if cells else None)
     candidates, needs_verification, excluded = [], [], []
     for p in pois:
         pid = p.get("poi_id")

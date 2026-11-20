@@ -367,4 +367,5 @@ def matrix_path(snapshot_dir: str) -> str:
 
 def load_matrix_cells(snapshot_dir: str) -> dict:
     """Read the snapshot's matrix (see `matrix_path`) -> cells dict."""
-    return load_json(matrix_path(snapshot_dir))["cells"]
+    from BE.matrix_format import cells_of
+    return cells_of(load_json(matrix_path(snapshot_dir)))

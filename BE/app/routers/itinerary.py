@@ -99,7 +99,8 @@ def _load_cells(snapshot_dir: str) -> dict:
     try:
         from BE.common import matrix_path
         with open(matrix_path(snapshot_dir), encoding="utf-8") as f:
-            return json.load(f).get("cells", {})
+            from BE.matrix_format import cells_of
+            return cells_of(json.load(f))
     except (FileNotFoundError, NotADirectoryError):
         return {}
 
