@@ -28814,7 +28814,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -30382,7 +30382,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -30520,7 +30520,7 @@
     "kid_friendly": true,
     "weather_sensitive": true
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -33642,7 +33642,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -48955,7 +48955,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -60912,7 +60912,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61050,7 +61050,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61188,7 +61188,7 @@
     "kid_friendly": true,
     "weather_sensitive": true
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61326,7 +61326,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61464,7 +61464,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61602,7 +61602,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61740,7 +61740,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -61878,7 +61878,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62016,7 +62016,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62154,7 +62154,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62292,7 +62292,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62430,7 +62430,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62568,7 +62568,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62706,7 +62706,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62844,7 +62844,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -62982,7 +62982,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63120,7 +63120,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63258,7 +63258,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63396,7 +63396,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63534,7 +63534,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63672,7 +63672,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63810,7 +63810,7 @@
     "kid_friendly": true,
     "weather_sensitive": true
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -63948,7 +63948,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64086,7 +64086,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64224,7 +64224,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64362,7 +64362,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64500,7 +64500,7 @@
     "kid_friendly": true,
     "weather_sensitive": true
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64638,7 +64638,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64776,7 +64776,7 @@
     "kid_friendly": true,
     "weather_sensitive": true
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -64914,7 +64914,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -65052,7 +65052,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -65190,7 +65190,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -72635,7 +72635,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -72773,7 +72773,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -72911,7 +72911,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73049,7 +73049,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73187,7 +73187,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73325,7 +73325,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73463,7 +73463,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73601,7 +73601,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73739,7 +73739,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -73877,7 +73877,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74015,7 +74015,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74153,7 +74153,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74291,7 +74291,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74429,7 +74429,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74567,7 +74567,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74705,7 +74705,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74843,7 +74843,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -74981,7 +74981,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75119,7 +75119,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75257,7 +75257,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75397,7 +75397,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75535,7 +75535,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75672,7 +75672,7 @@
     "kid_friendly": false,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75810,7 +75810,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -75948,7 +75948,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76086,7 +76086,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76224,7 +76224,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76362,7 +76362,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76500,7 +76500,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76638,7 +76638,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76776,7 +76776,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -76914,7 +76914,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77052,7 +77052,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77190,7 +77190,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77328,7 +77328,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77466,7 +77466,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77604,7 +77604,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -77742,7 +77742,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -100547,7 +100547,7 @@
     "kid_friendly": true,
     "weather_sensitive": false
    },
-   "time_profile": "none",
+   "time_profile": "lodging_rest",
    "popularity": {
     "signature": false,
     "prize_prior": null,
@@ -104566,10 +104566,16 @@
     "p75": 40
    },
    "tags": {
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": null,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "space": "outdoor",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -104689,10 +104695,16 @@
     "p75": 70
    },
    "tags": {
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": null,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "space": "outdoor",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -104830,7 +104842,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.95,
+    "sun_exposure": 0.95,
+    "wind_exposure": 0.95,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "sun_anchored_beach",
    "popularity": {
@@ -104950,10 +104967,16 @@
     "p75": 150
    },
    "tags": {
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": null,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.95,
+    "sun_exposure": 0.95,
+    "wind_exposure": 0.95,
+    "rain_cover": "open",
+    "space": "outdoor",
+    "exposure_source": "category_prior"
    },
    "time_profile": "sun_anchored_beach",
    "popularity": {
@@ -105073,7 +105096,7 @@
     "p75": 40
    },
    "tags": {
-    "space": "unknown",
+    "space": "outdoor",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -105087,10 +105110,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -105210,10 +105238,16 @@
     "p75": 150
    },
    "tags": {
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": null,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.95,
+    "sun_exposure": 0.95,
+    "wind_exposure": 0.95,
+    "rain_cover": "open",
+    "space": "outdoor",
+    "exposure_source": "category_prior"
    },
    "time_profile": "sun_anchored_beach",
    "popularity": {
@@ -105333,10 +105367,16 @@
     "p75": 90
    },
    "tags": {
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": null,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "space": "outdoor",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -105470,10 +105510,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -105611,7 +105656,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -105746,10 +105796,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -105869,7 +105924,7 @@
     "p75": 50
    },
    "tags": {
-    "space": "unknown",
+    "space": "both",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -105883,10 +105938,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -106006,7 +106066,7 @@
     "p75": 50
    },
    "tags": {
-    "space": "unknown",
+    "space": "both",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -106020,10 +106080,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -106158,10 +106223,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -106281,7 +106351,7 @@
     "p75": 50
    },
    "tags": {
-    "space": "unknown",
+    "space": "both",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -106295,10 +106365,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -106436,7 +106511,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -106574,7 +106654,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -106712,7 +106797,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -106850,7 +106940,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -106988,7 +107083,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -107124,10 +107224,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -107261,10 +107366,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -107402,7 +107512,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -107540,7 +107655,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -107678,7 +107798,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -107815,10 +107940,15 @@
      "quick-stop-30",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -107953,10 +108083,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -108091,10 +108226,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -108226,10 +108366,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -108361,10 +108506,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_market",
    "popularity": {
@@ -108499,10 +108649,15 @@
      "full-day",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -108637,10 +108792,15 @@
      "full-day",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_market",
    "popularity": {
@@ -108758,7 +108918,7 @@
     "p75": 110
    },
    "tags": {
-    "space": "unknown",
+    "space": "outdoor",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -108773,10 +108933,15 @@
      "full-day",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -108916,7 +109081,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -109053,7 +109223,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -109190,7 +109365,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -109327,7 +109507,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -109464,7 +109649,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -109601,7 +109791,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.95,
+    "sun_exposure": 0.95,
+    "wind_exposure": 0.95,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "sun_anchored_beach",
    "popularity": {
@@ -109721,7 +109916,7 @@
     "p75": 40
    },
    "tags": {
-    "space": "unknown",
+    "space": "outdoor",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -109735,10 +109930,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -109875,7 +110075,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -110012,7 +110217,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -110149,7 +110359,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -110286,7 +110501,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -110423,10 +110643,15 @@
      "quick-stop-30",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -110563,7 +110788,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.9,
+    "sun_exposure": 0.9,
+    "wind_exposure": 0.9,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "sun_anchored_view",
    "popularity": {
@@ -110697,10 +110927,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -110820,7 +111055,7 @@
     "p75": 180
    },
    "tags": {
-    "space": "unknown",
+    "space": "outdoor",
     "rain_protection": "unknown",
     "party": [
      "family",
@@ -110834,10 +111069,15 @@
     "time_budget": [
      "full-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -110957,7 +111197,7 @@
     "p75": 240
    },
    "tags": {
-    "space": "unknown",
+    "space": "outdoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -110968,10 +111208,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "open_hours_flat",
    "popularity": {
@@ -111105,7 +111350,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -111243,10 +111493,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -111383,7 +111638,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -111520,7 +111780,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -111658,7 +111923,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -111796,7 +112066,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -111933,7 +112208,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112070,7 +112350,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112207,7 +112492,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112344,7 +112634,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112481,7 +112776,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112618,7 +112918,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112755,7 +113060,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -112892,7 +113202,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113030,7 +113345,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113167,7 +113487,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113304,7 +113629,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113424,7 +113754,7 @@
     "p75": 45
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -113435,10 +113765,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113575,7 +113910,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113714,7 +114054,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113851,7 +114196,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -113988,7 +114338,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114125,7 +114480,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114262,7 +114622,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114399,7 +114764,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114537,7 +114907,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114674,7 +115049,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114811,7 +115191,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -114948,7 +115333,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115085,7 +115475,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115222,7 +115617,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115361,7 +115761,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115498,7 +115903,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115635,7 +116045,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115773,7 +116188,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -115910,7 +116330,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116048,7 +116473,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116185,7 +116615,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116305,7 +116740,7 @@
     "p75": 45
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -116316,10 +116751,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116456,7 +116896,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116593,7 +117038,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116730,7 +117180,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -116867,7 +117322,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -117004,7 +117464,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -117141,7 +117606,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -117278,7 +117748,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -117413,7 +117888,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -117548,7 +118028,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -117683,7 +118168,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -117818,7 +118308,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -117955,7 +118450,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118090,7 +118590,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118225,7 +118730,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118360,7 +118870,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118495,7 +119010,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118630,7 +119150,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118765,7 +119290,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -118900,7 +119430,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119035,7 +119570,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119170,7 +119710,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119305,7 +119850,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119440,7 +119990,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119575,7 +120130,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119710,7 +120270,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -119847,7 +120412,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -119982,7 +120552,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -120117,7 +120692,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -120252,7 +120832,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -120387,7 +120972,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -120524,7 +121114,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -120644,7 +121239,7 @@
     "p75": 90
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -120655,10 +121250,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -120795,7 +121395,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -120933,7 +121538,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121071,7 +121681,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121209,7 +121824,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121347,7 +121967,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121468,7 +122093,7 @@
     "p75": 90
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -121479,10 +122104,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121620,7 +122250,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121758,7 +122393,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -121896,7 +122536,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -122033,7 +122678,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -122170,7 +122820,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -122305,7 +122960,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -122440,7 +123100,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -122575,7 +123240,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -122710,7 +123380,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -122844,7 +123519,12 @@
     "indoor": false,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "outdoor_heat_sensitive",
    "popularity": {
@@ -122976,10 +123656,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123115,10 +123800,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123254,10 +123944,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123393,10 +124088,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123532,10 +124232,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123672,10 +124377,15 @@
      "quick-stop-30",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123812,10 +124522,15 @@
      "quick-stop-30",
      "must-go"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -123950,10 +124665,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -124088,10 +124808,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": true
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "morning_cool",
    "popularity": {
@@ -124229,7 +124954,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -124368,7 +125098,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "indoor_flat",
    "popularity": {
@@ -124501,7 +125236,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -124634,7 +125374,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -124767,7 +125512,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -124900,7 +125650,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125033,7 +125788,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125166,7 +125926,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125299,7 +126064,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125432,7 +126202,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125565,7 +126340,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125698,7 +126478,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125831,7 +126616,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -125964,7 +126754,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -126097,7 +126892,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "afternoon_rest",
    "popularity": {
@@ -126232,7 +127032,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -126367,7 +127172,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -126502,7 +127312,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -126637,7 +127452,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -126772,7 +127592,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -126907,7 +127732,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -127042,7 +127872,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -127177,7 +128012,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -127312,7 +128152,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "evening_peak",
    "popularity": {
@@ -127447,7 +128292,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -127582,7 +128432,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -127717,7 +128572,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -127854,7 +128714,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -127989,7 +128854,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128124,7 +128994,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128259,7 +129134,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128394,7 +129274,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128529,7 +129414,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128661,10 +129551,15 @@
     "time_budget": [
      "quick-stop-30"
     ],
-    "indoor": null,
+    "indoor": false,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128799,7 +129694,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -128934,7 +129834,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129069,7 +129974,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129204,7 +130114,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129339,7 +130254,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129474,7 +130394,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129609,7 +130534,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129744,7 +130674,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -129879,7 +130814,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130014,7 +130954,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130149,7 +131094,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130284,7 +131234,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130419,7 +131374,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130554,7 +131514,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130689,7 +131654,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130824,7 +131794,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -130959,7 +131934,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -131096,7 +132076,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -131233,7 +132218,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -131370,7 +132360,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -131507,7 +132502,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -131644,7 +132644,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -131781,7 +132786,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -131918,7 +132928,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132055,7 +133070,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132192,7 +133212,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132330,7 +133355,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132469,7 +133499,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132606,7 +133641,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132744,7 +133784,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -132881,7 +133926,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133021,7 +134071,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -133158,7 +134213,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133295,7 +134355,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133434,7 +134499,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133571,7 +134641,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133708,7 +134783,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133845,7 +134925,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -133982,7 +135067,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134119,7 +135209,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134256,7 +135351,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134393,7 +135493,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -134530,7 +135635,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134669,7 +135779,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134806,7 +135921,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -134943,7 +136063,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -135080,7 +136205,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -135217,7 +136347,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -135354,7 +136489,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -135491,7 +136631,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -135630,7 +136775,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -135767,7 +136917,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -135904,7 +137059,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136041,7 +137201,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136178,7 +137343,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136315,7 +137485,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136452,7 +137627,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136589,7 +137769,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136727,7 +137912,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -136864,7 +138054,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137001,7 +138196,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137138,7 +138338,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137276,7 +138481,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137413,7 +138623,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137550,7 +138765,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137687,7 +138907,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137824,7 +139049,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -137961,7 +139191,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138098,7 +139333,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138236,7 +139476,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -138373,7 +139618,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138510,7 +139760,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138647,7 +139902,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138784,7 +140044,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -138921,7 +140186,12 @@
     "indoor": false,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": true,
+    "outdoor_exposure": 0.75,
+    "sun_exposure": 0.75,
+    "wind_exposure": 0.75,
+    "rain_cover": "open",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -139058,7 +140328,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -139195,7 +140470,12 @@
     "indoor": true,
     "effort": 1,
     "kid_friendly": true,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "flat_rest",
    "popularity": {
@@ -139317,7 +140597,7 @@
     "p75": 90
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -139328,10 +140608,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -139453,7 +140738,7 @@
     "p75": 90
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -139464,10 +140749,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {
@@ -139587,7 +140877,7 @@
     "p75": 45
    },
    "tags": {
-    "space": "unknown",
+    "space": "indoor",
     "rain_protection": "unknown",
     "party": [
      "group"
@@ -139598,10 +140888,15 @@
     "time_budget": [
      "half-day"
     ],
-    "indoor": null,
+    "indoor": true,
     "effort": 2,
     "kid_friendly": false,
-    "weather_sensitive": false
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "category_prior"
    },
    "time_profile": "meal_windows",
    "popularity": {

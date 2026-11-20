@@ -1,0 +1,30 @@
+{
+ "version": "travel_time_factors_v1",
+ "created": "2026-11-20",
+ "status": "design prior (verified_by=design): KHÔNG có nguồn kẹt xe mở cho Đà Nẵng/Hội An; hệ số là ước lượng, gắn cờ, hiệu chỉnh bằng thời gian di chuyển thực tế trong log pilot. Ma trận gốc (OSRM) là đường thông thoáng.",
+ "spec": "travel(t) = matrix_minutes × factor(zone_from, zone_to, t). Hai vùng khác nhau: lấy hệ số lớn hơn (chuyến liên vùng thường đi qua vùng đông hơn). Giờ là giờ BẮT ĐẦU di chuyển, nội suy theo bậc (không nội suy tuyến tính). Code: BE/app/services/travel_time.py.",
+ "bands": [
+  {"from": "00:00", "to": "06:00", "label": "dem"},
+  {"from": "06:00", "to": "06:30", "label": "sang_som"},
+  {"from": "06:30", "to": "08:30", "label": "cao_diem_sang"},
+  {"from": "08:30", "to": "11:00", "label": "ngay"},
+  {"from": "11:00", "to": "13:00", "label": "trua"},
+  {"from": "13:00", "to": "16:30", "label": "ngay"},
+  {"from": "16:30", "to": "18:30", "label": "cao_diem_chieu"},
+  {"from": "18:30", "to": "21:30", "label": "toi"},
+  {"from": "21:30", "to": "24:00", "label": "dem"}
+ ],
+ "factors": {
+  "trung_tam":          {"dem": 0.9, "sang_som": 1.0, "cao_diem_sang": 1.35, "ngay": 1.1, "trua": 1.15, "cao_diem_chieu": 1.4, "toi": 1.2},
+  "son_tra_my_khe":     {"dem": 0.9, "sang_som": 1.0, "cao_diem_sang": 1.25, "ngay": 1.05, "trua": 1.1, "cao_diem_chieu": 1.3, "toi": 1.2},
+  "ngu_hanh_son":       {"dem": 0.9, "sang_som": 1.0, "cao_diem_sang": 1.2, "ngay": 1.05, "trua": 1.05, "cao_diem_chieu": 1.25, "toi": 1.1},
+  "hai_van_lien_chieu": {"dem": 0.9, "sang_som": 1.0, "cao_diem_sang": 1.25, "ngay": 1.05, "trua": 1.05, "cao_diem_chieu": 1.3, "toi": 1.05},
+  "hoi_an":             {"dem": 0.9, "sang_som": 1.0, "cao_diem_sang": 1.1, "ngay": 1.05, "trua": 1.05, "cao_diem_chieu": 1.15, "toi": 1.3},
+  "ba_na_tay":          {"dem": 0.95, "sang_som": 1.0, "cao_diem_sang": 1.05, "ngay": 1.0, "trua": 1.0, "cao_diem_chieu": 1.1, "toi": 1.0}
+ },
+ "why": {
+  "cao_diem": "giờ đi làm/tan tầm phổ biến ở đô thị Việt Nam 06:30–08:30 và 16:30–18:30; trung tâm (cầu Rồng, Hùng Vương, Nguyễn Văn Linh) chịu nặng nhất.",
+  "hoi_an_toi": "phố cổ buổi tối đông khách, cấm xe một số tuyến, đi bộ chậm: tối là giờ chậm nhất ở Hội An.",
+  "ba_na": "đường đèo/ngoại ô, ít xe; thời gian chủ yếu là cáp treo (nằm trong dwell)."
+ }
+}

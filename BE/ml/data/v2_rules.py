@@ -635,8 +635,33 @@ TIME_PROFILE = {
     "museum_indoor": "indoor_flat", "day_market": "morning_market",
     "night_market": "evening_peak", "restaurant": "meal_windows",
     "cafe": "flat_rest", "nightlife": "evening_peak", "wellness": "afternoon_rest",
-    "paid_attraction": "open_hours_flat", "lodging": "none",
+    "paid_attraction": "open_hours_flat", "lodging": "lodging_rest",
 }
+
+
+# Weather exposure prior for POIs the v1 T063 labeler never saw (OSM / manual
+# additions). Values are the modes of the labeled POIs of the same space and
+# category (danang-v2.1, 2026-11-20); `exposure_source` marks them estimated.
+EXPOSURE_BY_SPACE = {
+    "indoor": {"outdoor_exposure": 0.1, "sun_exposure": 0.05, "wind_exposure": 0.1, "rain_cover": "enclosed"},
+    "both": {"outdoor_exposure": 0.6, "sun_exposure": 0.48, "wind_exposure": 0.48, "rain_cover": "mixed"},
+}
+OUTDOOR_EXPOSURE = {"beach": 0.95, "viewpoint": 0.9}          # others 0.75
+DEFAULT_SPACE = {"beach": "outdoor", "viewpoint": "outdoor", "outdoor_landmark": "outdoor",
+                 "paid_attraction": "outdoor", "religious": "both", "night_market": "both"}
+
+
+def exposure_prior(category: str, space: str | None) -> dict:
+    """Exposure fields from space (else the category's usual space)."""
+    if space not in ("indoor", "outdoor", "both"):
+        space = DEFAULT_SPACE.get(category, "indoor")
+    if space == "outdoor":
+        x = OUTDOOR_EXPOSURE.get(category, 0.75)
+        ex = {"outdoor_exposure": x, "sun_exposure": x, "wind_exposure": x, "rain_cover": "open"}
+    else:
+        ex = dict(EXPOSURE_BY_SPACE[space])
+    return {**ex, "space": space, "indoor": space == "indoor",
+            "exposure_source": "category_prior"}
 
 
 # --------------------------------------------------------------------------

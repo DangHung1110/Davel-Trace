@@ -462,6 +462,12 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
     tags = {**st, "indoor": base["indoor"], "effort": base["effort"],
             "kid_friendly": base["kid_friendly"],
             "weather_sensitive": bool(base["weather_sensitive"])}
+    if tags.get("rain_cover") is None:
+        # OSM/manual additions never went through the v1 T063 labeler
+        prior = R.exposure_prior(v["category"], tags.get("space"))
+        tags.update({k: val for k, val in prior.items() if tags.get(k) in (None, "unknown")})
+        tags.setdefault("exposure_source", "category_prior")
+        tags["weather_sensitive"] = tags["rain_cover"] != "enclosed"
 
     pv = dict(v["provenance"])
     v1_verified = pv.pop("v1_verified", None)
