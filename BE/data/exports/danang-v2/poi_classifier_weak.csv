@@ -875,3 +875,127 @@ osm:node/13890168980,Cafe Cô Bốn,cafe,cafe,True,False,0.6,active
 osm:node/14337971574,Highlands Coffee (Bà Nà),cafe,cafe,True,False,0.6,active
 osm:node/11423769989,Postal Cafe,cafe,cafe,True,False,0.6,active
 osm:node/14337980312,Soul Cafe,cafe,cafe,True,False,0.6,active
+osm:node/2617007574,Tượng đài Kazik (Kazimierz Kwiatkowski),outdoor_landmark,outdoor_landmark,True,False,0.6,active
+osm:way/210933183,Di tích Đình Thanh Tẩy,religious,religious,True,False,0.6,active
+osm:node/10171278941,Chùa Kim Bửu,religious,religious,True,False,0.6,active
+osm:way/631070197,Chùa Pháp Bảo,religious,religious,True,False,0.6,active
+osm:node/2091401445,Chùa Long Thọ,religious,religious,True,False,0.6,active
+osm:node/11581690669,Chùa Bảo Thắng,religious,religious,True,False,0.6,active
+osm:way/209494260,Nhà thờ Tin lành Hội An,religious,religious,True,False,0.6,active
+osm:way/565276813,Thánh thất Cao Đài Hội An,religious,,False,False,0.3,active
+osm:node/4582592213,Nhà thờ tộc Trần,religious,religious,True,False,0.6,active
+osm:way/210966819,Nhà thờ tộc Nguyễn Tường,religious,religious,True,False,0.6,active
+osm:node/6091196615,Phòng tranh Phan Kim Chi,museum_indoor,,False,False,0.3,active
+osm:node/11896339273,CSO Gallery,museum_indoor,museum_indoor,True,False,0.6,active
+osm:node/4246108134,Spa Hoi An,wellness,wellness,True,False,0.6,active
+osm:node/5325684221,Hoi An Blind Massage,wellness,wellness,True,False,0.6,active
+osm:node/5353761323,Spa Sweden,wellness,wellness,True,False,0.6,active
+osm:node/6224346486,La Luna Spa,wellness,wellness,True,False,0.6,active
+osm:node/6252089286,Spa V,wellness,wellness,True,False,0.6,active
+osm:node/6354826049,Cua Dai Beach Spa,wellness,wellness,True,False,0.6,active
+osm:node/7200332585,Herbal Spa - Hoi An Branch 1,wellness,wellness,True,False,0.6,active
+osm:node/9963308324,Hani Health Spa,wellness,wellness,True,False,0.6,active
+osm:node/10736269999,Spa Jonu,wellness,wellness,True,False,0.6,active
+osm:node/10760853506,Lemon tree spa,wellness,wellness,True,False,0.6,active
+osm:node/12323301001,Balloons SPA,wellness,wellness,True,False,0.6,active
+osm:node/13439124694,Herbal Spa Hoi An,wellness,wellness,True,False,0.6,active
+osm:node/14337513701,Son Hoi An Spa,wellness,wellness,True,False,0.6,active
+osm:node/4937240722,Life bar,nightlife,nightlife,True,False,0.6,active
+osm:node/5110691326,Mr. Bean Bar,nightlife,nightlife,True,False,0.6,active
+osm:node/6257424485,Hoi An Sports Bar,nightlife,nightlife,True,False,0.6,active
+osm:node/12468807102,Mezcal Cocteleria,nightlife,,False,False,0.3,active
+osm:node/4965493634,Moe's tavern regae bar,nightlife,nightlife,True,False,0.6,active
+osm:node/13152739401,Hoi An Brewing Co,nightlife,,False,False,0.3,active
+osm:node/14339936801,Yang Smile Beach Bar,nightlife,nightlife,True,False,0.6,active
+osm:node/6696113992,Tô Tô,nightlife,,False,False,0.3,active
+osm:node/4285798291,3 Dragons,nightlife,,False,False,0.3,active
+osm:node/4141060177,Facetime Cafe & Bar,cafe,cafe,True,False,0.6,active
+osm:node/4252334691,CocoBox,cafe,,False,False,0.3,active
+osm:node/4253896690,The Espresso Station,cafe,cafe,True,False,0.6,active
+osm:node/4461175292,Rosies Cafe,cafe,cafe,True,False,0.6,active
+osm:node/4631365689,KaTê café,cafe,cafe,True,False,0.6,active
+osm:node/4770510721,Caffè da Hong,cafe,,False,False,0.3,active
+osm:node/5301723422,11 coffee house,cafe,cafe,True,False,0.6,active
+osm:node/5444674051,Cafe Thiện Trung,cafe,cafe,True,False,0.6,active
+osm:node/5444684504,Café Tin;,cafe,cafe,True,False,0.6,active
+osm:node/5444685779,Quán Café - Trà Cung Đình,cafe,cafe,True,False,0.6,active
+osm:node/5809954055,Hoi An Smoothie,cafe,,False,False,0.3,active
+osm:node/7721404199,Caffe Cỏ Đá,cafe,,False,False,0.3,active
+osm:node/8088140322,Bonte café,cafe,cafe,True,False,0.6,active
+osm:node/9529282481,The Curve Cafe,cafe,cafe,True,False,0.6,active
+osm:node/10635513085,Artbook,cafe,,False,False,0.3,active
+osm:node/11873114055,Cosy Corner,cafe,,False,False,0.3,active
+osm:node/12058417799,Miss Hoi An,cafe,,False,False,0.3,active
+osm:node/12702443401,Share Kafe,cafe,,False,False,0.3,active
+osm:node/13091349871,Nhã Na,cafe,,False,False,0.3,active
+osm:node/13120808702,Street Café,cafe,cafe,True,False,0.6,active
+osm:node/13124286901,Street Café (cà phê Muối),cafe,cafe,True,False,0.6,active
+osm:node/13124293801,Cà phê Nhà Nguyên,cafe,cafe,True,False,0.6,active
+osm:node/13146901701,Subi Coffee & Tea,cafe,cafe,True,False,0.6,active
+osm:node/13537125073,Bill Coffee & Tea,cafe,cafe,True,False,0.6,active
+osm:way/212215308,Starbucks,cafe,,False,False,0.3,active
+osm:way/616910526,Thom's Sourdough Bakery & Coffee - An Bang Beach,cafe,cafe,True,False,0.6,active
+osm:way/631732355,Thom's Sourdough Bakery & Coffee - Hoi An Ancient Town,cafe,cafe,True,False,0.6,active
+osm:node/2076855765,Blue Dragon,restaurant,,False,False,0.3,active
+osm:node/2076855988,Quang Thang,restaurant,,False,False,0.3,active
+osm:node/2461400753,Bazar Garden Restaurant,restaurant,restaurant,True,False,0.6,active
+osm:node/2461400758,Vegetarian Vegan Chay Resturant,restaurant,,False,False,0.3,active
+osm:node/3093689362,Café 41,cafe,cafe,True,False,0.6,active
+osm:node/3093689363,Café 43,cafe,cafe,True,False,0.6,active
+osm:node/3812098704,Chez Cesar Restaurant,restaurant,restaurant,True,False,0.6,active
+osm:node/3888954278,Karma Waters,restaurant,,False,False,0.3,active
+osm:node/4221031594,The H`mong Sisters,restaurant,,False,False,0.3,active
+osm:node/4254168216,cornercorner,restaurant,,False,False,0.3,active
+osm:node/4347237636,Quan Chay Sen Trang,restaurant,,False,False,0.3,active
+osm:node/4352229289,Namaste,restaurant,,False,False,0.3,active
+osm:node/4352237791,Ganesh Indian Restaurant,restaurant,restaurant,True,False,0.6,active
+osm:node/4449095589,Minh Hien 2,restaurant,,False,False,0.3,active
+osm:node/4579382689,Jack's Cat Cafe,cafe,cafe,True,False,0.6,active
+osm:node/4614061399,Baba's kitchen,restaurant,restaurant,True,False,0.6,active
+osm:node/4839614226,Ho Lo Quan,restaurant,,False,False,0.3,active
+osm:node/4869072521,Sen Trang - Quan Chay,restaurant,,False,False,0.3,active
+osm:node/4887456421,I Love Coffee Xinh Lee Coffee & Restaurant,restaurant,cafe,False,False,0.3,active
+osm:node/4905288121,Quan an Anh Vu,restaurant,restaurant,True,False,0.6,active
+osm:node/5061520126,Annien,restaurant,,False,False,0.3,active
+osm:node/5299012021,Tam Quang Minh,restaurant,,False,False,0.3,active
+osm:node/5414154624,Red Dragon Restaurant,restaurant,restaurant,True,False,0.6,active
+osm:node/5444164055,Day & Night,restaurant,,False,False,0.3,active
+osm:node/5444645841,Tea Garden,cafe,cafe,True,False,0.6,active
+osm:node/5444693768,Quán Phở Tiến,restaurant,restaurant,True,False,0.6,active
+osm:node/5464917424,Happy Buffalo,restaurant,,False,False,0.3,active
+osm:node/5570949320,The Fisherman,restaurant,,False,False,0.3,active
+osm:node/5595997721,An Hý,restaurant,,False,False,0.3,active
+osm:node/5613322622,Nostalife,restaurant,,False,False,0.3,active
+osm:node/5798643153,Quán Chay Nhân Duyên Vegan,restaurant,restaurant,True,False,0.6,active
+osm:node/5811814156,Hein Coffee,cafe,cafe,True,False,0.6,active
+osm:node/6034005613,Viet Ngon,restaurant,,False,False,0.3,active
+osm:node/6251697585,NOURISH eatery,restaurant,restaurant,True,False,0.6,active
+osm:node/6418785294,Són La Coffee,cafe,cafe,True,False,0.6,active
+osm:node/6483231385,An Farm Hoi An,restaurant,,False,False,0.3,active
+osm:node/6821692763,Hoa Hiên,restaurant,,False,False,0.3,active
+osm:node/6956509385,Bikini Bottom Express An Bang,restaurant,,False,False,0.3,active
+osm:node/7155363886,Blues and Brews Resteraunt & Bar,restaurant,nightlife,False,False,0.3,active
+osm:node/7238341085,Quàn 137 Bà Linh,restaurant,,False,False,0.3,active
+osm:node/10304029313,Roving Chillhouse,restaurant,,False,False,0.3,active
+osm:node/10603243286,Món Ngon Hà Nội,restaurant,,False,False,0.3,active
+osm:node/11609574104,Good Eats,restaurant,,False,False,0.3,active
+osm:node/11840976337,V vegan cafe & restaurant,restaurant,cafe,False,False,0.3,active
+osm:node/11878409184,Tropical Eatery,restaurant,restaurant,True,False,0.6,active
+osm:node/11919603867,Avocado,restaurant,,False,False,0.3,active
+osm:node/13426342201,Banh Xeo Khue,restaurant,,False,False,0.3,active
+osm:node/13430047101,An Phuoc Vegetarian,restaurant,,False,False,0.3,active
+osm:node/13462061301,Vi Hoi An,restaurant,,False,False,0.3,active
+osm:node/13687990703,The Son Bistro,restaurant,restaurant,True,False,0.6,active
+osm:node/13812953288,Thirty3 Eatery,restaurant,restaurant,True,False,0.6,active
+osm:node/13888271701,Seeds,restaurant,,False,False,0.3,active
+osm:node/13895748101,Family Reataurant & Cafe,cafe,cafe,True,False,0.6,active
+osm:node/13904544801,Cẩm Nam Quán,restaurant,restaurant,True,False,0.6,active
+osm:node/13906389201,Fami's,restaurant,,False,False,0.3,active
+osm:node/13934799101,Buttercup,restaurant,,False,False,0.3,active
+osm:node/14025305349,Home Paste,restaurant,,False,False,0.3,active
+osm:way/549343300,Hoang Long Beach,restaurant,beach,False,False,0.3,active
+osm:way/565280048,JEERA,restaurant,,False,False,0.3,active
+osm:way/1245731730,Missteak Hoi An,cafe,,False,False,0.3,active
+osm:node/4519205790,Annen Yoga & Vegetarian,restaurant,,False,False,0.3,active
+osm:node/5250607284,Jim's Snackbar,restaurant,,False,False,0.3,active
+osm:node/7118673485,Lê Hội Bánh Mí Chay,restaurant,restaurant,True,False,0.6,active

@@ -187,3 +187,10 @@ Codex (t15) đọc web cho 100 điểm giá ước lượng (`reports/p0/links/p
 - **Jolie (ĐN + Hội An):** người dùng xác nhận 2 suất 09:00-13:00 / 15:00-19:00 → by_booking (6/13 lớp; 7 lớp còn unknown).
 - **Rà soát tự động:** 0 điểm có khung mở < thời gian ở lại; 0 điểm tên "Hội An" sai khu; 3 cặp gần nhau < 80 m là thực thể khác nhau (Nhà Bếp Chợ Hàn/Chợ Hàn, Chợ Cồn/Khu ẩm thực Chợ Cồn, Hát Bài Chòi/Vườn tượng An Hội) → giữ.
 - **Đối chiếu toạ độ Google ↔ OSM (WP9):** truy vấn OSM mở rộng (6.488 điểm có tên) + khớp tên chứa nhau → liên kết 107 → 180/627 điểm gốc Google; lệch trung vị 14 m (toạ độ Google tin được). 6 điểm có thêm giờ từ tag OSM `opening_hours` (Tê Bar 19:00-01:30, Ông Minh 09:00-23:00, NAM house 06:00-23:00, Bảo tàng Hồ Chí Minh 08:00-12:00/14:00-16:30, 2 khách sạn). Tiêu chí ≥ 50% không đạt được bằng OSM (thiếu quán nhỏ/spa).
+
+## Bổ sung 124 điểm Hội An từ OSM — 20/11
+
+Người dùng duyệt thêm tối đa 150 điểm nếu đủ thông tin theo format hiện tại. Nguồn: truy vấn OSM mở rộng (`fetch_open_data.py`), vùng thiếu Hội An/Bà Nà; bỏ điểm đã có / trùng tên khác chữ (Hội Quán Phước Kiến = Hội quán Phúc Kiến, Thanh Ha Pottery Village = Làng gốm Thanh Hà, Kim Bồng, Văn chỉ Minh Hương, Linh Phong Thiền Tự), miếu họ nhỏ, nghĩa trang, bãi đậu xe, cửa hàng.
+- `BE/data/sources/new_pois_osm_2026-11-20.json` — 124 điểm (tất cả ở Hội An): 55 nhà hàng + 35 cà phê (chỉ lấy điểm có `opening_hours` trên OSM), 13 spa, 9 bar, 9 tôn giáo (chọn tay; Nhà thờ tộc Trần + Nguyễn Tường thuộc vé phố cổ, nguồn hoianfairytour xác nhận), 2 phòng tranh, tượng đài Kazik.
+- Codex (t15) tra giờ/giá cho 30 điểm chưa đủ (`reports/p0/links/new_hoian_codex.json`) → 14 có nguồn (`agent_web_2026-11-20e.json`).
+- Kết quả: 101/124 giờ `fixed`, 23 `safe_window`; mọi điểm có mức giá. Ma trận 793 → **917** (chạy theo đợt `--chunk 50`, 0 ô thiếu). Snapshot 1000 POI, 945 active.

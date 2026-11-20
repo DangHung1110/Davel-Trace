@@ -3,34 +3,34 @@
  "google_policy": "cach_ly",
  "v1_count": 742,
  "v1_meta_count": 745,
- "v2_count": 876,
+ "v2_count": 1000,
  "status": {
-  "active": 852,
+  "active": 976,
   "review": 20,
   "excluded": 4
  },
  "category": {
-  "restaurant": 169,
-  "nightlife": 91,
-  "cafe": 131,
+  "restaurant": 224,
+  "nightlife": 100,
+  "cafe": 166,
   "day_market": 48,
   "viewpoint": 22,
-  "religious": 94,
-  "outdoor_landmark": 65,
-  "museum_indoor": 22,
+  "religious": 103,
+  "outdoor_landmark": 66,
+  "museum_indoor": 24,
   "paid_attraction": 49,
   "lodging": 76,
   "beach": 26,
   "night_market": 6,
-  "wellness": 77
+  "wellness": 90
  },
  "role": {
-  "meal": 169,
-  "nightlife": 91,
-  "rest": 131,
-  "attraction": 332,
+  "meal": 224,
+  "nightlife": 100,
+  "rest": 166,
+  "attraction": 344,
   "base": 76,
-  "wellness": 77
+  "wellness": 90
  },
  "zone": {
   "trung_tam": 270,
@@ -38,7 +38,7 @@
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
-  "hoi_an": 125
+  "hoi_an": 249
  },
  "zone_roles": {
   "trung_tam": {
@@ -80,42 +80,43 @@
    "rest": 4
   },
   "hoi_an": {
-   "attraction": 58,
+   "attraction": 70,
    "base": 1,
-   "meal": 43,
-   "rest": 18,
-   "nightlife": 5
+   "meal": 98,
+   "rest": 53,
+   "nightlife": 14,
+   "wellness": 13
   }
  },
  "clusters": {
   "ngu_hanh_son": 21,
   "ba_na": 24,
   "bay_mau": 7,
-  "hoi_an_old_town": 25
+  "hoi_an_old_town": 32
  },
  "hours_verified_by": {
-  "inferred": 643,
-  "agent_web": 133,
-  "open_data": 98,
+  "inferred": 666,
+  "agent_web": 143,
+  "open_data": 189,
   "user": 2
  },
  "price_verified_by": {
-  "agent_web": 77,
-  "inferred": 791,
+  "agent_web": 87,
+  "inferred": 905,
   "user": 8
  },
  "dwell_verified_by": {
-  "inferred": 838,
+  "inferred": 962,
   "user": 38
  },
- "legacy_hours_nonempty": 778,
+ "legacy_hours_nonempty": 902,
  "v1_hours_nonempty": 499,
- "legacy_price_band": 63,
- "legacy_free_entry": 181,
+ "legacy_price_band": 70,
+ "legacy_free_entry": 190,
  "hours_conflict": 6,
  "quarantined_pois": 659,
  "category_changes": 178,
- "duplicate_candidates": 8,
+ "duplicate_candidates": 9,
  "archetype_vs_google": [
   {
    "archetype": "an_toi",
@@ -197,5 +198,5 @@
   }
  ],
  "ticket_todo": 19,
- "osm_linked": 392
+ "osm_linked": 516
 }

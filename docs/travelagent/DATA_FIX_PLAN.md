@@ -172,6 +172,7 @@ Dữ liệu kiến trúc (mục 3): `time_profiles`, giờ mặt trời, khí h�
 
 | 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
 
+| 20/11 | Bổ sung 124 điểm Hội An từ OSM (nhà hàng/cà phê có giờ OSM, spa, bar, chùa, nhà thờ tộc, phòng tranh) | 1000 POI, 945 active, ma trận 917; `reports/p0/14_review_round1.md` |
 | 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (821 active, 55 excluded sau loại khu cấm Sơn Trà), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |
 
 **Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
