@@ -396,7 +396,17 @@ CATEGORY_PRIOR = {
 }
 
 
-def prize_prior(category, signature, wikidata, sitelinks, views):
+def load_guides(sources_dir):
+    """{poi_id: {mentions, michelin}} from BE/data/sources/popularity_guides_*.json."""
+    out = {}
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("popularity_guides_") and fn.endswith(".json"):
+                out.update((_load(os.path.join(sources_dir, fn), {}) or {}).get("items", {}))
+    return out
+
+
+def prize_prior(category, signature, wikidata, sitelinks, views, mentions=0, michelin=False):
     """`popularity.prize_prior` in [0,1] + (verified_by, confidence, note).
 
     Weighted clean signals (DATA_FIX_PLAN WP6): category prior, approved
@@ -416,11 +426,19 @@ def prize_prior(category, signature, wikidata, sitelinks, views):
     if views:
         p += 0.15 * min(1.0, math.log1p(views) / math.log1p(200_000))
         parts.append(f"views90d={views}")
+    if mentions:
+        # independent travel-guide pages recommending it (saturating: 1 -> +0.12,
+        # 3 -> +0.23, many -> +0.3); absence is NOT a penalty
+        p += 0.3 * (1 - math.exp(-mentions / 2))
+        parts.append(f"guides={mentions}")
+    if michelin:
+        p += 0.1
+        parts.append("michelin")
     if signature:
-        p = max(p, 0.9) + (0.05 if (sitelinks or views) else 0.0)
+        p = max(p, 0.9) + (0.05 if (sitelinks or views or mentions) else 0.0)
         parts.append("signature")
     p = round(min(1.0, p), 3)
-    rich = bool(sitelinks or views)
+    rich = bool(sitelinks or views or mentions or michelin)
     return p, ("open_data" if rich else "inferred"), (0.6 if rich else 0.4), "; ".join(parts)
 
 
@@ -457,8 +475,10 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
     wd = v["ext_ids"].get("wikidata")
     prior, prior_by, prior_conf, prior_note = prize_prior(
         v["category"], pop_src["signature"], wd, pop_src.get("wikidata_sitelinks"),
-        pop_src.get("wikipedia_views_90d"))
-    pv["popularity"] = prov("prize_prior_v1:category+signature+wikidata+wikipedia", prior_by,
+        pop_src.get("wikipedia_views_90d"), pop_src.get("guide_mentions") or 0,
+        bool(pop_src.get("michelin")))
+    pv["popularity"] = prov("prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+                            "agent_web" if pop_src.get("guide_mentions") else prior_by,
                             confidence=prior_conf, note=prior_note)
     rec = {
         "poi_id": v["poi_id"],
@@ -479,7 +499,9 @@ def to_v21(v, p_src, pv_hours, legacy_hours, quarantine_entry):
         "popularity": {"signature": pop_src["signature"],
                        "prize_prior": None if v["category"] == "lodging" else prior,
                        "wikidata": wd, "wikidata_sitelinks": pop_src.get("wikidata_sitelinks"),
-                       "wikipedia_views_90d": pop_src.get("wikipedia_views_90d")},
+                       "wikipedia_views_90d": pop_src.get("wikipedia_views_90d"),
+                       "guide_mentions": pop_src.get("guide_mentions") or 0,
+                       "michelin": bool(pop_src.get("michelin"))},
         "description": v["description"],
         "ext_ids": {"osm": v["ext_ids"].get("osm"),
                     "google_place_id": v["poi_id"] if v["poi_id"].startswith("ChIJ") else None,
@@ -898,6 +920,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     human = load_human_verify(sources_dir)      # WP8 (verify queue export)
     route = load_access_route(sources_dir)      # Sơn Trà controlled-road scope
     booking = load_booking(sources_dir)         # session-based experiences
+    guides = load_guides(sources_dir)           # travel-guide mentions (popularity)
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -1011,7 +1034,9 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
             "dwell": dwell,
             "popularity": {"wikipedia_views_90d": pop.get("wikipedia_views_90d"),
                            "wikidata_sitelinks": pop.get("wikidata_sitelinks"),
-                           "signature": signature},
+                           "signature": signature,
+                           "guide_mentions": (guides.get(pid) or {}).get("mentions", 0),
+                           "michelin": bool((guides.get(pid) or {}).get("michelin"))},
             "description": {"text": None, "source": None, "license": None},
             "provenance": {
                 "name": prov(loc_src, loc_pv["verified_by"], confidence=loc_pv["confidence"],
@@ -1148,6 +1173,7 @@ FEATURE_COLS = [
     "price_band", "price_min_vnd", "price_max_vnd", "price_basis", "price_conf",
     "free_entry", "hours_spans", "hours_conf", "hours_verified_by", "signature", "osm_id",
     "price_tier", "hours_kind", "prize_prior",            # v2.1 (WP12)
+    "guide_mentions", "michelin", "name_en",              # 20/11 (clean popularity)
 ]
 
 
@@ -1189,6 +1215,9 @@ def write_exports(pois, exports_dir, v21_by_id=None):
             "price_tier": (r21.get("price") or {}).get("tier"),
             "hours_kind": (r21.get("hours") or {}).get("kind"),
             "prize_prior": (r21.get("popularity") or {}).get("prize_prior"),
+            "guide_mentions": (r21.get("popularity") or {}).get("guide_mentions"),
+            "michelin": (r21.get("popularity") or {}).get("michelin"),
+            "name_en": r21.get("name_en"),
         })
         ev = p["category_evidence"]
         name_only = R.classify_name_only(p["name_vi"])
@@ -1228,7 +1257,9 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | signature | điểm tiêu biểu (danh sách must-go đã duyệt) |
 | price_tier | v2.1: free / cheap / medium / expensive / included / trống (DATA_SPEC_v2_1) |
 | hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / by_booking (theo suất, cần đặt trước) / unknown |
-| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + Wikidata/Wikipedia), thay rating Google |
+| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + số trang cẩm nang + Michelin + Wikidata/Wikipedia), thay rating Google |
+| guide_mentions, michelin | số trang cẩm nang độc lập giới thiệu điểm; có trong Michelin Guide (`popularity_guides_*.json`) |
+| name_en | tên tiếng Anh từ OSM `name:en` |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 

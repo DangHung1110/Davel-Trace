@@ -18,7 +18,9 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | signature | điểm tiêu biểu (danh sách must-go đã duyệt) |
 | price_tier | v2.1: free / cheap / medium / expensive / included / trống (DATA_SPEC_v2_1) |
 | hours_kind | v2.1: fixed (giờ có nguồn) / safe_window (khung an toàn theo nhóm) / by_booking (theo suất, cần đặt trước) / unknown |
-| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + Wikidata/Wikipedia), thay rating Google |
+| prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + số trang cẩm nang + Michelin + Wikidata/Wikipedia), thay rating Google |
+| guide_mentions, michelin | số trang cẩm nang độc lập giới thiệu điểm; có trong Michelin Guide (`popularity_guides_*.json`) |
+| name_en | tên tiếng Anh từ OSM `name:en` |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 
