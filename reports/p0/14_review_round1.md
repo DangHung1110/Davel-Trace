@@ -139,3 +139,16 @@ File xuất: `reports/p0/final_review_20261120.json` (Claude ghi theo tin nhắn
   - Hòn Thủy Sơn loại vì trùng "Ngũ Hành Sơn (Thủy Sơn)" (~100 m).
 - Codex (t15) kiểm 2 tra cứu: `reports/p0/links/final2_codex.json`.
 - Kết quả: 876 POI (826 active, 50 excluded), ma trận 793 (0 ô thiếu), giờ do người kiểm 30/50.
+
+## Tuyến kiểm soát bán đảo Sơn Trà — 20/11
+
+Nguồn: VietnamPlus + Tuổi Trẻ (17/08/2026), VnEconomy + VietNamNet (15–16/09/2025). Ba tuyến: Tiên Sa–Suối Ôm–Đỉnh Bàn Cờ (**đang tạm dừng sau bão**, 17/08/2026); Yết Kiêu–Đỉnh Bàn Cờ–Bãi Bắc (đoạn Bàn Cờ→Bãi Bắc một chiều); Ngã ba Bãi Bắc–Cây Đa (chỉ đi bộ). Giờ 07:30–18:30 (tháng 3–9) / 07:30–17:30 (tháng 10–2).
+
+- **Mùa:** mùa đi đẹp nhất là tháng 3–9, nhưng dữ liệu giữ **07:30–17:30 quanh năm** vì mốc này đúng ở cả hai mùa (mùa hè chỉ sớm 1 tiếng); chọn 18:30 sẽ sai cho khách đi tháng 10–2.
+- **Code:** `migrate_v2.py` đọc `BE/data/sources/access_route_*.json` (on_route/off_route; điểm không có thì giữ luật cũ) và **cắt cả giờ do người kiểm/quyết định theo khung đường** (`clip_to_access`). Trước đây giờ người kiểm ghi đè khung đường: Bán đảo Sơn Trà, Mũi Nghê (24h), Đỉnh Bàn Cờ (→19:00), Hải đăng Tiên Sa (→18:00) nay về 07:30–17:30. Cây Đa ghi rõ on_route.
+- **Mũi Nghê → excluded:** "cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen" (VietNamNet).
+- **Phân loại từng điểm (Codex t15, `reports/p0/links/sontra_route_codex.json` → `access_route_son_tra_20261120b.json`):** 3 trên tuyến (Đỉnh Bàn Cờ, Nhà Vọng Cảnh, Cây Đa), 35 ngoài tuyến, 8 chưa rõ. Căn cứ: trạm ở nút Hoàng Sa gần ngã ba Bãi Bắc (danangportal); 'resort, Bảo tàng Đồng Đình, chùa Linh Ứng' ở chân núi ngoài vùng kiểm soát (VnExpress 6/11/2019) + hình học đường OSM. Là suy luận, không phải bản đồ ranh pháp lý.
+  - 9 điểm ngoài tuyến được bỏ khung đường (trước đây áp theo toạ độ): chùa Linh Ứng 06:30-17:30, Son Tra Retreat 10:00-21:00, Sơn Trà Marina, Bãi biển/Vịnh Sơn Trà, các điểm ngắm cảnh trên đường Hoàng Sa, Sơn Trà Tịnh Viên.
+  - Chưa rõ, giữ luật cũ: Ghềnh Bàng (24h; báo Văn Hoá 2026 cảnh báo không tự ý tiếp cận), Hải đăng Tiên Sa, Radar Sơn Trà 1 và Núi Sơn Trà (cổng private trên OSM), Nhất Lâm Thủy Trang Trà, Đài tưởng niệm 229, The Long Bar InterContinental.
+  - Bãi Đá Đen Sơn Trà (người dùng thêm) trùng tên với điểm cấm trekking trong VietNamNet — cần người dùng xác nhận; Codex coi 'Bãi Đá' (Obama) là bãi khác, ngoài tuyến.
+- Kết quả: 876 POI (825 active, 51 excluded).

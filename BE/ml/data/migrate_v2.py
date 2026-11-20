@@ -534,6 +534,32 @@ def load_human_verify(sources_dir):
     return out
 
 
+def load_access_route(sources_dir):
+    """{poi_id: "on_route"|"off_route"} from BE/data/sources/access_route_*.json
+    (Sơn Trà controlled-road scope, sourced; later files override)."""
+    out = {}
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("access_route_") and fn.endswith(".json"):
+                for it in (_load(os.path.join(sources_dir, fn), {}) or {}).get("items", []):
+                    if it.get("class") in ("on_route", "off_route"):
+                        out[it["poi_id"]] = it["class"]
+    return out
+
+
+def clip_to_access(rec):
+    """Road window also bounds hours set later (decisions / human verify):
+    the place may be open, but the road to it is not."""
+    h = rec["hours"]
+    if not (h.get("access_window") and h.get("open")):
+        return
+    acc = [s for w in h["access_window"] for s in R.parse_element(w)]
+    spans = [s for w in h["open"] for s in R.parse_element(w)]
+    clipped = R.intersect(spans, acc) if spans and acc else spans
+    if clipped:
+        h["open"] = R.fmt(clipped)[0].split(", ")
+
+
 def apply_decision(rec, d):
     """User decision (WP5 names, WP10 review/duplicates) -> v2.1 record."""
     pv = rec["provenance"]
@@ -824,6 +850,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     v21, archive = [], {}
     decisions = load_decisions(sources_dir)     # WP5 / WP10 (user-approved)
     human = load_human_verify(sources_dir)      # WP8 (verify queue export)
+    route = load_access_route(sources_dir)      # Sơn Trà controlled-road scope
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -836,7 +863,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         arch = R.archetype_of(cat, p["name"], p.get("type"))
         access = None
         on_peninsula = p["lat"] >= 16.095 and p["lon"] >= 108.245
-        if "07:30-18:30" in (p.get("access_note") or "") and on_peninsula:
+        legacy_rule = "07:30-18:30" in (p.get("access_note") or "") and on_peninsula
+        if route.get(pid, "on_route" if legacy_rule else "off_route") == "on_route":
             # Sơn Trà peninsula road window; Oct-Feb is 07:30-17:30. Use the
             # stricter one all year (conservative; source in access_note).
             access = R.parse_element("07:30-17:30")
@@ -986,6 +1014,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
             apply_decision(rec, decisions[pid])
         if pid in human:
             apply_human_verify(rec, human[pid])
+        clip_to_access(rec)
         v21.append(rec)
         archive[pid] = arch_fields
         if q:

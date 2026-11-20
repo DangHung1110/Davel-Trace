@@ -1,0 +1,26 @@
+{
+ "about": "Phạm vi tuyến kiểm soát bán đảo Sơn Trà (Claude đọc VietnamPlus + Tuổi Trẻ 17/08/2026, VnEconomy + VietNamNet 15-16/09/2025). Ba tuyến: Tiên Sa–Suối Ôm–Đỉnh Bàn Cờ (tạm dừng sau bão, 17/08/2026); Yết Kiêu–Đỉnh Bàn Cờ–Bãi Bắc; Ngã ba Bãi Bắc–Cây Đa di sản (chỉ đi bộ). Giờ 07:30-18:30 (tháng 3-9) / 07:30-17:30 (tháng 10-2) — dữ liệu dùng 07:30-17:30 quanh năm (đúng cả 2 mùa). Chỉ ghi điểm bài báo nêu rõ; điểm không nêu giữ luật cũ của migrate_v2 (access_note v1 + toạ độ). Không bài nào nêu vị trí barie.",
+ "checked_at": "2026-11-20",
+ "sources": [
+  "https://www.vietnamplus.vn/ban-dao-son-tra-co-3-tuyen-diem-duoc-phep-tham-quan-post1130716.vnp",
+  "https://tuoitre.vn/tuyen-diem-nao-duoc-phep-tham-quan-tai-ban-dao-son-tra-di-xe-gi-100260817094758415.htm",
+  "https://vneconomy.vn/da-nang-mo-lai-3-tuyen-du-lich-ban-dao-son-tra.htm",
+  "https://vietnamnet.vn/da-nang-mo-lai-cac-tuyen-tham-quan-ban-dao-son-tra-sau-gan-3-nam-dong-cua-2442770.html"
+ ],
+ "items": [
+  {
+   "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+   "name": "Đỉnh Bàn Cờ",
+   "class": "on_route",
+   "reason": "điểm cuối tuyến Tiên Sa–Suối Ôm–Đỉnh Bàn Cờ và giữa tuyến Yết Kiêu–Đỉnh Bàn Cờ–Bãi Bắc",
+   "evidence_url": "https://www.vietnamplus.vn/ban-dao-son-tra-co-3-tuyen-diem-duoc-phep-tham-quan-post1130716.vnp"
+  },
+  {
+   "poi_id": "osm:node/6346486685",
+   "name": "Cây Đa Ngàn Năm Sơn Trà",
+   "class": "on_route",
+   "reason": "điểm cuối tuyến 'Ngã ba Bãi Bắc-Cây đa Di sản chỉ dành cho người đi bộ'",
+   "evidence_url": "https://www.vietnamplus.vn/ban-dao-son-tra-co-3-tuyen-diem-duoc-phep-tham-quan-post1130716.vnp"
+  }
+ ]
+}

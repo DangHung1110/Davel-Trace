@@ -160,4 +160,5 @@
 - Giờ do người kiểm: 30 điểm. Tiêu chí ≥ 50 đã được người dùng bỏ (20/11).
 - Giờ `unknown` ngoài lưu trú: 13 lớp nấu ăn (giữ active, cần kiểu giờ `by_booking` ở P1). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
 - 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
-- Data contract P1 (mục 3): giờ theo mùa (khung bán đảo Sơn Trà 17:30/18:30 và chưa áp cho điểm mới), ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.
+- Khung bán đảo Sơn Trà: đã có `access_route_*.json` + cắt giờ theo khung đường (20/11); giữ 07:30-17:30 quanh năm. Còn Ghềnh Bàng, Bãi Đá, Suối Rạng chưa có nguồn phạm vi.
+- Data contract P1 (mục 3): ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.

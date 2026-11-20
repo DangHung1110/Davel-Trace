@@ -14,8 +14,8 @@
  ],
  "count": 876,
  "count_by_status": {
-  "active": 826,
-  "excluded": 50
+  "active": 825,
+  "excluded": 51
  },
  "count_by_category": {
   "restaurant": 169,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 125
  },
- "applied_decisions": 88,
+ "applied_decisions": 89,
  "applied_human_verify": 33,
  "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
  "count_new_pois": 134,
@@ -3009,13 +3009,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "10:00-17:30"
+     "10:00-21:00"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "bar"
    },
    "price": {
@@ -3452,13 +3450,12 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "11:00-13:30"
+     "11:00-13:30",
+     "17:30-20:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "nha_hang"
    },
    "price": {
@@ -16454,13 +16451,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -29882,13 +29877,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
@@ -30476,9 +30469,7 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "chua"
    },
    "price": {
@@ -30620,13 +30611,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
@@ -30768,7 +30757,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "07:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -30915,7 +30904,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-18:00"
+     "07:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -31063,7 +31052,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-19:00"
+     "07:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -31785,15 +31774,15 @@
    "lon": 108.3368715,
    "category": "viewpoint",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "Không phải điểm tham quan được phép: 'cấm tuyệt đối các tuyến trekking tự phát xuống Hục Lỡ, Mũi Nghê, Bãi Đá Đen' (VietNamNet 15/09/2025); nơi từng có người lạc, tai nạn, đuối nước (VietnamPlus, Tuổi Trẻ 17/08/2026).",
    "zone": "son_tra_my_khe",
    "cluster_id": null,
    "alt_group": null,
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "07:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
@@ -31941,13 +31930,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "00:00-23:59"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -43148,13 +43135,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "06:00-17:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -51778,7 +51763,9 @@
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "07:30-17:30"
+    ],
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
@@ -57884,13 +57871,11 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "07:30-17:30"
+     "06:30-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": [
-     "07:30-17:30"
-    ],
+    "access_window": null,
     "archetype": "chua"
    },
    "price": {
