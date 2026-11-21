@@ -23,7 +23,7 @@ BAR = {"poi_id": "bar", "name": "Bar", "cat": "bar",
 def solve(poi, start, end):
     stub = poi_to_stub(poi)
     out = optimize([stub], {}, StubTrip(to_min(start), to_min(end), None),
-                   must_visit=[poi["poi_id"]], overhead_min=0, timeout_s=10, workers=1)
+                   must_visit=[poi["poi_id"]], timeout_s=10, workers=1)
     acts = (out.get("itinerary") or {}).get("activities") or []
     return out["status"], acts
 
