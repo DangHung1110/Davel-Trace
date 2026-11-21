@@ -756,6 +756,7 @@ manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,beach,True,False,0.6,ex
 osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,outdoor_landmark,False,False,0.3,active
 manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,paid_attraction,True,False,0.6,active
+manual:lapin-bakery-da-nang,Lapin Bakery & Dessert Cafe,cafe,cafe,True,False,0.6,active
 osm:way/39268284,Chùa Cầu,outdoor_landmark,religious,False,False,0.3,active
 osm:way/565592419,Bảo tàng Hội An,museum_indoor,museum_indoor,True,False,0.6,active
 osm:way/320722329,Hội quán Phúc Kiến,religious,restaurant,False,False,0.3,active
@@ -844,7 +845,7 @@ osm:node/13360620516,Kurumi - Healthy Vegan Food & Desserts,restaurant,,False,Fa
 osm:node/13397525601,Cô Anh - Sông Hoāi,restaurant,,False,False,0.3,active
 osm:node/13654762201,Long's Kitchen Restaurant & Cooking Class,restaurant,paid_attraction,False,False,0.3,active
 osm:node/11795856089,Nghé Coffee Hội An,cafe,cafe,True,False,0.6,active
-osm:node/4520093589,Lapin Ca Phe,cafe,cafe,True,False,0.6,active
+osm:node/4520093589,Lapin Ca Phe,cafe,cafe,True,False,0.6,excluded
 osm:node/4717672963,Hoi An Roastery,cafe,,False,False,0.3,active
 osm:node/4844888422,Phin Coffee Restaurant,cafe,cafe,True,False,0.6,active
 osm:node/5677701323,Rosie's Cafe,cafe,cafe,True,False,0.6,active

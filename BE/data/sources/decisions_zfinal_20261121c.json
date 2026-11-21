@@ -1,5 +1,5 @@
 {
- "note": "21/11/2026: phát hiện chất lượng từ bản danang-v2.3 của Duong Tung Bach (nhánh task/data-v22-unify, không merge — giữ bản danang-v2.1 trên main). Chỉ lấy lý do KHÔNG dựa trên số review Google; người dùng duyệt nhóm A (karaoke, tiệc cưới, công ty tour), B (sai toạ độ/loại) và kiểm nhóm C (đóng cửa): chỉ 2 quán có thông báo tạm đóng; 7 điểm còn lại không có thông báo đóng cửa nên giữ.",
+ "note": "21/11/2026: phát hiện chất lượng từ bản danang-v2.3 của Duong Tung Bach (nhánh task/data-v22-unify, không merge — giữ bản danang-v2.1 trên main). Chỉ lấy lý do KHÔNG dựa trên số review Google; người dùng duyệt nhóm A (karaoke, tiệc cưới, công ty tour), B (sai toạ độ/loại) và kiểm nhóm C (đóng cửa): chỉ 2 quán có thông báo tạm đóng; 7 điểm còn lại không có thông báo đóng cửa nên giữ. | 21/11: Lapin Ca Phe (Hội An) đóng vĩnh viễn, người dùng kiểm; Café Sputnik, Bánh mì Thuý, SummerBeach, Bảo tàng Hội An không có tin đóng cửa -> giữ.",
  "items": {
   "ChIJs95SfgAZQjERWa0RkAoF0XA": {
    "status": "excluded",
@@ -104,6 +104,10 @@
   "ChIJoeH5ukkZQjERxUlcUbKA-XE": {
    "status": "excluded",
    "status_reason": "tạm đóng cửa từ 05/07/2026 để cải tạo, chưa có ngày mở lại (fanpage của quán, người dùng kiểm 21/11/2026) — thêm lại khi mở cửa"
+  },
+  "osm:node/4520093589": {
+   "status": "excluded",
+   "status_reason": "đã đóng vĩnh viễn (Lapin Cafe, 107 Trần Cao Vân, Hội An — người dùng kiểm trên bản đồ 21/11/2026)"
   }
  }
 }

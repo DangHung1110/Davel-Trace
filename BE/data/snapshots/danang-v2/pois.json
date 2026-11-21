@@ -12,15 +12,15 @@
   "manual",
   "osm"
  ],
- "count": 1008,
+ "count": 1009,
  "count_by_status": {
   "active": 918,
-  "excluded": 90
+  "excluded": 91
  },
  "count_by_category": {
   "restaurant": 227,
   "nightlife": 102,
-  "cafe": 164,
+  "cafe": 165,
   "day_market": 49,
   "viewpoint": 23,
   "religious": 104,
@@ -34,19 +34,19 @@
  },
  "count_by_zone": {
   "trung_tam": 276,
-  "son_tra_my_khe": 236,
+  "son_tra_my_khe": 237,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
   "hoi_an": 249
  },
- "applied_decisions": 162,
- "applied_human_verify": 33,
+ "applied_decisions": 163,
+ "applied_human_verify": 34,
  "matrix": "matrix.json (dense-v1, BE.app.services.matrix; every active POI incl. lodging)",
- "count_new_pois": 258,
+ "count_new_pois": 259,
  "count_v1_pois": 750,
  "count_by_price_tier": {
-  "medium": 402,
+  "medium": 403,
   "cheap": 267,
   "expensive": 21,
   "free": 198,
@@ -55,7 +55,7 @@
  },
  "count_by_hours_kind": {
   "safe_window": 635,
-  "fixed": 354,
+  "fixed": 355,
   "unknown": 12,
   "by_booking": 7
  },
@@ -106052,6 +106052,148 @@
    "valid_to": null
   },
   {
+   "poi_id": "manual:lapin-bakery-da-nang",
+   "name": "Lapin Bakery & Dessert Cafe",
+   "name_raw": "Lapin Bakery & Dessert Cafe",
+   "name_en": null,
+   "lat": 16.0631875,
+   "lon": 108.2414375,
+   "category": "cafe",
+   "role": "rest",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "06:00-23:59"
+    ],
+    "kind": "fixed",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "cafe"
+   },
+   "price": {
+    "tier": "medium",
+    "note": "Mức medium (100-500k/người): người dùng tham khảo phân bố giá do khách báo trên bản đồ (đa số 100-200k/người, 420 lượt), chưa có nguồn ngoài Google; độ tin thấp, cần nguồn menu/fanpage để nâng."
+   },
+   "dwell": {
+    "p25": 30,
+    "p50": 50,
+    "p75": 80
+   },
+   "tags": {
+    "good_times": [
+     "morning",
+     "night"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "indoor": true,
+    "effort": 2,
+    "kid_friendly": true,
+    "weather_sensitive": false,
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "space": "indoor",
+    "exposure_source": "category_prior"
+   },
+   "time_profile": "flat_rest",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.4,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "curated_osm:cafe"
+    },
+    "hours": {
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.7,
+     "evidence_url": "https://danangfantasticity.com/discovery/lapin-bakery-dessert-cafe-a-new-wave-on-da-nangs-fb-map",
+     "verified_at": "2026-11-21",
+     "note": "Danang Fantasticity (cổng du lịch TP Đà Nẵng, 22/08/2025): A17-2 Võ Văn Kiệt, mở 06:00-24:00; người dùng xác nhận 'đóng cửa vào 0:00' trên bản đồ 21/11/2026."
+    },
+    "price": {
+     "source": "human_verify",
+     "verified_by": "user",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": "2026-11-21",
+     "note": "human_verify_v2_20261121.json"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:cafe",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.4"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
    "poi_id": "osm:way/39268284",
    "name": "Chùa Cầu",
    "name_raw": "Chùa Cầu",
@@ -118489,8 +118631,8 @@
    "lon": 108.328097,
    "category": "cafe",
    "role": "rest",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "đã đóng vĩnh viễn (Lapin Cafe, 107 Trần Cao Vân, Hội An — người dùng kiểm trên bản đồ 21/11/2026)",
    "zone": "hoi_an",
    "cluster_id": null,
    "alt_group": null,

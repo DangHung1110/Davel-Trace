@@ -83430,6 +83430,75 @@
    },
    "tags_v1": []
   },
+  "manual:lapin-bakery-da-nang": {
+   "visit_min": {
+    "p25": 30,
+    "p50": 50,
+    "p75": 80
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "fee": 0,
+   "source": "manual",
+   "verified": false,
+   "intensity": 2,
+   "weather_sensitive": false,
+   "fetched_at": "2026-11-19",
+   "hours_source": "",
+   "name_osm": null,
+   "osm_evidence": null,
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Lapin Bakery & Dessert Cafe",
+   "category_evidence": [
+    "curated_osm:cafe"
+   ],
+   "smart_tags_price": {},
+   "hours_v20": {
+    "spans": [
+     "06:00-23:59"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "06:30-22:00"
+    ],
+    "safe_windows": [
+     "08:00-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 25000,
+    "max_vnd": 70000,
+    "typical_vnd": 47500,
+    "band": "re",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "cafe",
+    "v1": {
+     "p25": 30,
+     "p50": 60,
+     "p75": 90
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": null,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": []
+  },
   "osm:way/39268284": {
    "hours_source": "",
    "fee": 0,
