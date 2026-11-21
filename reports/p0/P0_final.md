@@ -1,3 +1,23 @@
+# P0 — `danang-v2.1`: trạng thái cuối (21/11/2026)
+
+Dữ liệu đã chốt để làm kiến trúc. Phần bên dưới mục này là nhật ký P0-c ngày 18–19/11, giữ để truy vết; số liệu trong đó là số lúc ấy.
+
+| Hạng mục | Cuối |
+|---|---|
+| POI | **1000**: 938 active (862 điểm dừng + 76 lưu trú), 62 excluded (mỗi cái có lý do) |
+| Format | 25 khoá cấp cao nhất (danh sách trắng); một bộ 13 khoá `tags` cho mọi POI; luật 1–15 có test (`BE/tests/data/test_snapshot_v2.py`) |
+| Giờ (active) | fixed 341 · safe_window 590 (gồm 76 lưu trú 24h quy ước) · by_booking 7 · **unknown 0** |
+| Giá (active) | medium 389 · cheap 258 · free 167 · included 33 · expensive 15 · null 76 (lưu trú) |
+| Độ nổi tiếng | `prize_prior` 32 mức; 155 POI có cẩm nang nhắc tới, 10 Michelin; không dùng `rating` Google |
+| u(t) | 12 dạng, phủ 1000/1000; thử trên CP-SAT: +16% hàm mục tiêu, điểm giờ xấu −59% (`15_ut_sufficiency.md`); khí hậu giảm 62% điểm phơi nắng gắt tháng 6 |
+| Thời tiết | mức phơi nắng/mưa 1000/1000 (742 có nhãn, 258 ước lượng theo loại); khí hậu ERA5 6 vùng × 12 tháng × 24 giờ (`16_context_sufficiency.md`) |
+| Ma trận | `dense_v1`, 988 id phủ mọi POI active gồm lưu trú, 0 ô thiếu, 7,2 MB; hệ số kẹt xe theo khung giờ (ước lượng) |
+| Gold | 30 câu; v2 qua gate 29/30 (v1 27/30); q25 rớt vì 2 điểm bắt buộc cùng nhóm cap cứng — hợp lệ |
+| Còn là ước lượng (chỉnh bằng log pilot) | giá theo loại, dwell, u(t), hệ số kẹt xe, mức phơi của 258 POI OSM/nhập tay |
+| Để sau (không chặn kiến trúc) | `price.items` (spec 002), gold 30 → 100 |
+
+---
+
 # P0-c — `danang-v2.1` (18–19/11/2026)
 
 Theo `docs/travelagent/PROMPT_P0C_FINALIZE.md`. Q1–Q6 không được trả lời → dùng mặc định của `DATA_FIX_PLAN.md`

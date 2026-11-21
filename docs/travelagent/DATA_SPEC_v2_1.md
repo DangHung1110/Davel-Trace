@@ -133,7 +133,7 @@ Ngân sách: so **tổng trung điểm** với ngân sách; **tổng cận trên
 | `pois.json` | bản ghi v2.1 (mục 2), metadata (`data_version`, `count`, `built_at`, `sources`) |
 | `quarantine_google.json` | mọi giá trị gốc Google, theo `poi_id` |
 | `archive_fields.json` | trường cũ không còn dùng, theo `poi_id` (để truy vết, không ai đọc lúc chạy) |
-| `matrix.json` (hoặc `matrix_ref.json`) | ma trận di chuyển phủ **mọi** POI active |
+| `matrix.json` (dense_v1) | ma trận di chuyển phủ **mọi** POI active |
 | `README.md` | đặc tả rút gọn + cách build lại |
 
 ## 5. Luật kiểm tra (pytest `BE/tests/data/`)

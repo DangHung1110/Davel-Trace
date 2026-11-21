@@ -4,29 +4,29 @@
   "jun": {
    "U": {
     "feasible": 30,
-    "stops": 168,
-    "heat_exposed": 45,
+    "stops": 175,
+    "heat_exposed": 39,
     "rain_exposed": 1
    },
    "UW": {
     "feasible": 30,
-    "stops": 159,
-    "heat_exposed": 24,
-    "rain_exposed": 0
+    "stops": 167,
+    "heat_exposed": 15,
+    "rain_exposed": 1
    }
   },
   "nov": {
    "U": {
     "feasible": 30,
-    "stops": 157,
+    "stops": 167,
     "heat_exposed": 0,
-    "rain_exposed": 60
+    "rain_exposed": 62
    },
    "UW": {
     "feasible": 30,
-    "stops": 161,
+    "stops": 170,
     "heat_exposed": 0,
-    "rain_exposed": 51
+    "rain_exposed": 57
    }
   },
   "traffic": {
@@ -35,9 +35,9 @@
    "broken_stops": 0,
    "mean_delay_min": 0,
    "worst_case_matrix": {
-    "feasible": 29,
-    "stops": 148,
-    "stops_free_flow": 168,
+    "feasible": 30,
+    "stops": 160,
+    "stops_free_flow": 175,
     "plans_broken_under_traffic": 0
    }
   }
@@ -48,17 +48,17 @@
    "window": "07:00-12:00",
    "jun": {
     "U": {
-     "stops": 5,
+     "stops": 4,
      "heat_exposed": 0,
      "rain_exposed": 0
     },
     "UW": {
-     "stops": 5,
-     "heat_exposed": 0,
+     "stops": 4,
+     "heat_exposed": 1,
      "rain_exposed": 0
     },
-    "U_s": 8.83,
-    "UW_s": 1.28
+    "U_s": 9.17,
+    "UW_s": 8.11
    },
    "R": {
     "broken_stops": 0,
@@ -66,7 +66,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 0.86,
+    "s": 9.02,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -74,17 +74,17 @@
    },
    "nov": {
     "U": {
-     "stops": 5,
+     "stops": 4,
      "heat_exposed": 0,
      "rain_exposed": 1
     },
     "UW": {
-     "stops": 5,
+     "stops": 4,
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 1.42,
-    "UW_s": 1.53
+    "U_s": 8.86,
+    "UW_s": 10.08
    }
   },
   {
@@ -101,8 +101,8 @@
      "heat_exposed": 2,
      "rain_exposed": 0
     },
-    "U_s": 10.23,
-    "UW_s": 10.28
+    "U_s": 9.5,
+    "UW_s": 10.09
    },
    "R": {
     "broken_stops": 0,
@@ -127,8 +127,8 @@
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "U_s": 10.14,
-    "UW_s": 10.19
+    "U_s": 9.86,
+    "UW_s": 10.09
    }
   },
   {
@@ -137,7 +137,7 @@
    "jun": {
     "U": {
      "stops": 5,
-     "heat_exposed": 1,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
     "UW": {
@@ -145,8 +145,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 5.17,
-    "UW_s": 2.52
+    "U_s": 6.73,
+    "UW_s": 4.38
    },
    "R": {
     "broken_stops": 0,
@@ -154,7 +154,7 @@
    },
    "T": {
     "stops": 5,
-    "s": 2.44,
+    "s": 3.44,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -171,8 +171,8 @@
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 3.92,
-    "UW_s": 3.16
+    "U_s": 5.33,
+    "UW_s": 4.91
    }
   },
   {
@@ -189,8 +189,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.06,
-    "UW_s": 10.09
+    "U_s": 7.95,
+    "UW_s": 8.36
    },
    "R": {
     "broken_stops": 0,
@@ -198,7 +198,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 8.83,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -211,12 +211,12 @@
      "rain_exposed": 1
     },
     "UW": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
-     "rain_exposed": 1
+     "rain_exposed": 2
     },
-    "U_s": 10.06,
-    "UW_s": 10.09
+    "U_s": 8.94,
+    "UW_s": 8.56
    }
   },
   {
@@ -224,17 +224,17 @@
    "window": "07:00-18:00",
    "jun": {
     "U": {
-     "stops": 7,
-     "heat_exposed": 3,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 7,
+     "stops": 8,
      "heat_exposed": 2,
      "rain_exposed": 0
     },
-    "U_s": 10.17,
-    "UW_s": 10.2
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "U_s": 9.66,
+    "UW_s": 10.12
    },
    "R": {
     "broken_stops": 0,
@@ -242,7 +242,7 @@
    },
    "T": {
     "stops": 8,
-    "s": 10.16,
+    "s": 10.09,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -250,17 +250,17 @@
    },
    "nov": {
     "U": {
-     "stops": 7,
-     "heat_exposed": 0,
-     "rain_exposed": 3
-    },
-    "UW": {
-     "stops": 7,
+     "stops": 8,
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.2,
-    "UW_s": 10.2
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 10.11,
+    "UW_s": 10.16
    }
   },
   {
@@ -277,8 +277,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.08,
-    "UW_s": 10.11
+    "U_s": 9.7,
+    "UW_s": 10.09
    },
    "R": {
     "broken_stops": 0,
@@ -312,25 +312,25 @@
    "window": "07:00-18:00",
    "jun": {
     "U": {
-     "stops": 6,
+     "stops": 8,
      "heat_exposed": 2,
      "rain_exposed": 0
     },
     "UW": {
      "stops": 7,
-     "heat_exposed": 1,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.16,
-    "UW_s": 10.2
+    "U_s": 10.12,
+    "UW_s": 10.12
    },
    "R": {
     "broken_stops": 0,
     "delay_min": 0
    },
    "T": {
-    "stops": 6,
-    "s": 10.16,
+    "stops": 7,
+    "s": 10.14,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -347,8 +347,8 @@
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 10.17,
-    "UW_s": 10.34
+    "U_s": 10.09,
+    "UW_s": 10.14
    }
   },
   {
@@ -365,7 +365,7 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.08,
+    "U_s": 10.06,
     "UW_s": 10.08
    },
    "R": {
@@ -374,7 +374,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 10.05,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -392,7 +392,7 @@
      "rain_exposed": 2
     },
     "U_s": 10.06,
-    "UW_s": 10.09
+    "UW_s": 10.08
    }
   },
   {
@@ -409,8 +409,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.14,
-    "UW_s": 10.12
+    "U_s": 10.06,
+    "UW_s": 10.08
    },
    "R": {
     "broken_stops": 0,
@@ -418,7 +418,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 9.72,
+    "s": 6.05,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -426,17 +426,17 @@
    },
    "nov": {
     "U": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
-     "rain_exposed": 0
+     "rain_exposed": 1
     },
     "UW": {
      "stops": 4,
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.12,
-    "UW_s": 10.12
+    "U_s": 8.3,
+    "UW_s": 8.48
    }
   },
   {
@@ -453,8 +453,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.08,
-    "UW_s": 10.11
+    "U_s": 8.11,
+    "UW_s": 8.56
    },
    "R": {
     "broken_stops": 0,
@@ -462,7 +462,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 9.83,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -479,8 +479,8 @@
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 10.09,
-    "UW_s": 10.12
+    "U_s": 10.06,
+    "UW_s": 10.08
    }
   },
   {
@@ -489,16 +489,16 @@
    "jun": {
     "U": {
      "stops": 7,
-     "heat_exposed": 2,
+     "heat_exposed": 1,
      "rain_exposed": 0
     },
     "UW": {
      "stops": 7,
-     "heat_exposed": 1,
-     "rain_exposed": 0
+     "heat_exposed": 0,
+     "rain_exposed": 1
     },
-    "U_s": 10.14,
-    "UW_s": 10.19
+    "U_s": 10.12,
+    "UW_s": 10.14
    },
    "R": {
     "broken_stops": 0,
@@ -506,7 +506,7 @@
    },
    "T": {
     "stops": 7,
-    "s": 10.17,
+    "s": 10.12,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -514,17 +514,17 @@
    },
    "nov": {
     "U": {
-     "stops": 6,
+     "stops": 8,
      "heat_exposed": 0,
      "rain_exposed": 3
     },
     "UW": {
-     "stops": 7,
+     "stops": 6,
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.2,
-    "UW_s": 10.17
+    "U_s": 10.11,
+    "UW_s": 10.14
    }
   },
   {
@@ -537,12 +537,12 @@
      "rain_exposed": 0
     },
     "UW": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.09,
-    "UW_s": 10.11
+    "U_s": 10.08,
+    "UW_s": 10.09
    },
    "R": {
     "broken_stops": 0,
@@ -550,7 +550,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.12,
+    "s": 10.06,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -567,8 +567,8 @@
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 10.08,
-    "UW_s": 10.16
+    "U_s": 10.05,
+    "UW_s": 10.06
    }
   },
   {
@@ -577,16 +577,16 @@
    "jun": {
     "U": {
      "stops": 5,
-     "heat_exposed": 1,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
     "UW": {
      "stops": 5,
-     "heat_exposed": 1,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
     "U_s": 10.08,
-    "UW_s": 10.14
+    "UW_s": 10.09
    },
    "R": {
     "broken_stops": 0,
@@ -594,7 +594,7 @@
    },
    "T": {
     "stops": 5,
-    "s": 8.95,
+    "s": 6.16,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -611,8 +611,8 @@
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.08,
-    "UW_s": 10.11
+    "U_s": 10.06,
+    "UW_s": 10.08
    }
   },
   {
@@ -629,8 +629,8 @@
      "heat_exposed": 2,
      "rain_exposed": 0
     },
-    "U_s": 10.17,
-    "UW_s": 10.17
+    "U_s": 10.11,
+    "UW_s": 10.12
    },
    "R": {
     "broken_stops": 0,
@@ -638,7 +638,7 @@
    },
    "T": {
     "stops": 8,
-    "s": 10.17,
+    "s": 10.11,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -655,8 +655,8 @@
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "U_s": 10.14,
-    "UW_s": 10.19
+    "U_s": 10.09,
+    "UW_s": 10.09
    }
   },
   {
@@ -673,16 +673,16 @@
      "heat_exposed": 1,
      "rain_exposed": 0
     },
-    "U_s": 10.09,
-    "UW_s": 10.11
+    "U_s": 10.06,
+    "UW_s": 10.14
    },
    "R": {
     "broken_stops": 0,
     "delay_min": 0
    },
    "T": {
-    "stops": 3,
-    "s": 10.11,
+    "stops": 4,
+    "s": 10.12,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -697,10 +697,10 @@
     "UW": {
      "stops": 4,
      "heat_exposed": 0,
-     "rain_exposed": 1
+     "rain_exposed": 2
     },
-    "U_s": 10.06,
-    "UW_s": 10.12
+    "U_s": 9.72,
+    "UW_s": 10.05
    }
   },
   {
@@ -717,8 +717,8 @@
      "heat_exposed": 2,
      "rain_exposed": 0
     },
-    "U_s": 10.14,
-    "UW_s": 10.23
+    "U_s": 10.11,
+    "UW_s": 10.17
    },
    "R": {
     "broken_stops": 0,
@@ -726,7 +726,7 @@
    },
    "T": {
     "stops": 8,
-    "s": 10.12,
+    "s": 10.11,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -743,8 +743,8 @@
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "U_s": 10.11,
-    "UW_s": 10.2
+    "U_s": 10.14,
+    "UW_s": 10.22
    }
   },
   {
@@ -758,51 +758,7 @@
     },
     "UW": {
      "stops": 4,
-     "heat_exposed": 2,
-     "rain_exposed": 0
-    },
-    "U_s": 10.11,
-    "UW_s": 10.14
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": 3,
-    "s": 4.92,
-    "R": {
-     "broken_stops": 0,
-     "delay_min": 0
-    }
-   },
-   "nov": {
-    "U": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 2
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 2
-    },
-    "U_s": 9.7,
-    "UW_s": 10.09
-   }
-  },
-  {
-   "query_id": "q18",
-   "window": "13:00-18:00",
-   "jun": {
-    "U": {
-     "stops": 5,
-     "heat_exposed": 2,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 0,
+     "heat_exposed": 1,
      "rain_exposed": 0
     },
     "U_s": 10.06,
@@ -822,238 +778,21 @@
    },
    "nov": {
     "U": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 3
-    },
-    "UW": {
      "stops": 5,
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.06,
-    "UW_s": 10.11
-   }
-  },
-  {
-   "query_id": "q19",
-   "window": "07:00-12:00",
-   "jun": {
-    "U": {
-     "stops": 3,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
     "UW": {
-     "stops": 3,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
-    "U_s": 1.89,
-    "UW_s": 2.56
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": null,
-    "s": 1.83,
-    "R": null
-   },
-   "nov": {
-    "U": {
-     "stops": 3,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 3,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
-    "U_s": 4.14,
-    "UW_s": 1.45
-   }
-  },
-  {
-   "query_id": "q20",
-   "window": "07:00-18:00",
-   "jun": {
-    "U": {
-     "stops": 8,
-     "heat_exposed": 2,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 8,
-     "heat_exposed": 2,
-     "rain_exposed": 0
-    },
-    "U_s": 10.11,
-    "UW_s": 10.19
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": 8,
-    "s": 10.17,
-    "R": {
-     "broken_stops": 0,
-     "delay_min": 0
-    }
-   },
-   "nov": {
-    "U": {
-     "stops": 8,
+     "stops": 4,
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "UW": {
-     "stops": 8,
-     "heat_exposed": 0,
-     "rain_exposed": 3
-    },
-    "U_s": 10.12,
-    "UW_s": 10.19
+    "U_s": 10.08,
+    "UW_s": 10.06
    }
   },
   {
-   "query_id": "q21",
-   "window": "07:00-12:00",
-   "jun": {
-    "U": {
-     "stops": 4,
-     "heat_exposed": 1,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 1,
-     "rain_exposed": 0
-    },
-    "U_s": 5.84,
-    "UW_s": 5.05
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": 4,
-    "s": 4.75,
-    "R": {
-     "broken_stops": 0,
-     "delay_min": 0
-    }
-   },
-   "nov": {
-    "U": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 2
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 2
-    },
-    "U_s": 5.7,
-    "UW_s": 4.25
-   }
-  },
-  {
-   "query_id": "q22",
-   "window": "07:00-12:00",
-   "jun": {
-    "U": {
-     "stops": 5,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 0
-    },
-    "U_s": 10.09,
-    "UW_s": 10.12
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": 4,
-    "s": 10.09,
-    "R": {
-     "broken_stops": 0,
-     "delay_min": 0
-    }
-   },
-   "nov": {
-    "U": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 1
-    },
-    "UW": {
-     "stops": 4,
-     "heat_exposed": 0,
-     "rain_exposed": 1
-    },
-    "U_s": 10.06,
-    "UW_s": 10.11
-   }
-  },
-  {
-   "query_id": "q23",
-   "window": "07:00-18:00",
-   "jun": {
-    "U": {
-     "stops": 7,
-     "heat_exposed": 1,
-     "rain_exposed": 1
-    },
-    "UW": {
-     "stops": 7,
-     "heat_exposed": 2,
-     "rain_exposed": 0
-    },
-    "U_s": 10.16,
-    "UW_s": 10.19
-   },
-   "R": {
-    "broken_stops": 0,
-    "delay_min": 0
-   },
-   "T": {
-    "stops": 6,
-    "s": 10.16,
-    "R": {
-     "broken_stops": 0,
-     "delay_min": 0
-    }
-   },
-   "nov": {
-    "U": {
-     "stops": 7,
-     "heat_exposed": 0,
-     "rain_exposed": 3
-    },
-    "UW": {
-     "stops": 7,
-     "heat_exposed": 0,
-     "rain_exposed": 1
-    },
-    "U_s": 10.19,
-    "UW_s": 10.17
-   }
-  },
-  {
-   "query_id": "q24",
+   "query_id": "q18",
    "window": "13:00-18:00",
    "jun": {
     "U": {
@@ -1067,7 +806,7 @@
      "rain_exposed": 0
     },
     "U_s": 10.08,
-    "UW_s": 10.11
+    "UW_s": 10.06
    },
    "R": {
     "broken_stops": 0,
@@ -1092,34 +831,78 @@
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.08,
-    "UW_s": 10.09
+    "U_s": 10.05,
+    "UW_s": 10.08
    }
   },
   {
-   "query_id": "q25",
-   "window": "07:00-18:00",
+   "query_id": "q19",
+   "window": "07:00-12:00",
    "jun": {
     "U": {
-     "stops": 8,
-     "heat_exposed": 4,
+     "stops": 5,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
     "UW": {
-     "stops": 6,
-     "heat_exposed": 2,
+     "stops": 5,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.17,
-    "UW_s": 10.19
+    "U_s": 1.38,
+    "UW_s": 1.52
    },
    "R": {
     "broken_stops": 0,
     "delay_min": 0
    },
    "T": {
-    "stops": 7,
-    "s": 10.17,
+    "stops": 4,
+    "s": 0.8,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 1.42,
+    "UW_s": 1.24
+   }
+  },
+  {
+   "query_id": "q20",
+   "window": "07:00-18:00",
+   "jun": {
+    "U": {
+     "stops": 8,
+     "heat_exposed": 2,
+     "rain_exposed": 0
+    },
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 2,
+     "rain_exposed": 0
+    },
+    "U_s": 10.09,
+    "UW_s": 10.14
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 8,
+    "s": 10.12,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1132,12 +915,232 @@
      "rain_exposed": 3
     },
     "UW": {
-     "stops": 7,
+     "stops": 8,
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "U_s": 10.16,
-    "UW_s": 10.19
+    "U_s": 10.09,
+    "UW_s": 10.14
+   }
+  },
+  {
+   "query_id": "q21",
+   "window": "07:00-12:00",
+   "jun": {
+    "U": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "U_s": 9.34,
+    "UW_s": 9.25
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 5,
+    "s": 10.06,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 1
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 8.8,
+    "UW_s": 10.06
+   }
+  },
+  {
+   "query_id": "q22",
+   "window": "07:00-12:00",
+   "jun": {
+    "U": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "U_s": 10.08,
+    "UW_s": 10.08
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 4,
+    "s": 10.06,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 4,
+     "heat_exposed": 0,
+     "rain_exposed": 1
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 10.09,
+    "UW_s": 9.34
+   }
+  },
+  {
+   "query_id": "q23",
+   "window": "07:00-18:00",
+   "jun": {
+    "U": {
+     "stops": 8,
+     "heat_exposed": 1,
+     "rain_exposed": 0
+    },
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 2,
+     "rain_exposed": 0
+    },
+    "U_s": 9.27,
+    "UW_s": 10.09
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 7,
+    "s": 9.88,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 8,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "UW": {
+     "stops": 9,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 9.64,
+    "UW_s": 10.09
+   }
+  },
+  {
+   "query_id": "q24",
+   "window": "13:00-18:00",
+   "jun": {
+    "U": {
+     "stops": 5,
+     "heat_exposed": 2,
+     "rain_exposed": 0
+    },
+    "UW": {
+     "stops": 4,
+     "heat_exposed": 0,
+     "rain_exposed": 0
+    },
+    "U_s": 7.62,
+    "UW_s": 8.47
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 4,
+    "s": 10.05,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 4,
+     "heat_exposed": 0,
+     "rain_exposed": 3
+    },
+    "UW": {
+     "stops": 5,
+     "heat_exposed": 0,
+     "rain_exposed": 2
+    },
+    "U_s": 10.06,
+    "UW_s": 8.55
+   }
+  },
+  {
+   "query_id": "q25",
+   "window": "07:00-18:00",
+   "jun": {
+    "U": {
+     "stops": 8,
+     "heat_exposed": 3,
+     "rain_exposed": 1
+    },
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 1,
+     "rain_exposed": 0
+    },
+    "U_s": 10.08,
+    "UW_s": 10.09
+   },
+   "R": {
+    "broken_stops": 0,
+    "delay_min": 0
+   },
+   "T": {
+    "stops": 8,
+    "s": 10.08,
+    "R": {
+     "broken_stops": 0,
+     "delay_min": 0
+    }
+   },
+   "nov": {
+    "U": {
+     "stops": 9,
+     "heat_exposed": 0,
+     "rain_exposed": 4
+    },
+    "UW": {
+     "stops": 8,
+     "heat_exposed": 0,
+     "rain_exposed": 3
+    },
+    "U_s": 9.89,
+    "UW_s": 10.11
    }
   },
   {
@@ -1154,8 +1157,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.08,
-    "UW_s": 10.11
+    "U_s": 10.06,
+    "UW_s": 10.09
    },
    "R": {
     "broken_stops": 0,
@@ -1163,7 +1166,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 10.06,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1180,8 +1183,8 @@
      "heat_exposed": 0,
      "rain_exposed": 2
     },
-    "U_s": 10.09,
-    "UW_s": 10.11
+    "U_s": 10.05,
+    "UW_s": 9.05
    }
   },
   {
@@ -1189,25 +1192,25 @@
    "window": "13:00-18:00",
    "jun": {
     "U": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 2,
      "rain_exposed": 0
     },
     "UW": {
-     "stops": 3,
-     "heat_exposed": 1,
+     "stops": 4,
+     "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 4.41,
-    "UW_s": 6.19
+    "U_s": 8.23,
+    "UW_s": 9.16
    },
    "R": {
     "broken_stops": 0,
     "delay_min": 0
    },
    "T": {
-    "stops": 3,
-    "s": 4.91,
+    "stops": 5,
+    "s": 10.05,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1215,17 +1218,17 @@
    },
    "nov": {
     "U": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
-     "rain_exposed": 2
+     "rain_exposed": 3
     },
     "UW": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
-     "rain_exposed": 2
+     "rain_exposed": 0
     },
-    "U_s": 5.26,
-    "UW_s": 6.09
+    "U_s": 10.08,
+    "UW_s": 10.09
    }
   },
   {
@@ -1242,7 +1245,7 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.08,
+    "U_s": 10.06,
     "UW_s": 10.09
    },
    "R": {
@@ -1251,7 +1254,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 10.06,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1264,12 +1267,12 @@
      "rain_exposed": 1
     },
     "UW": {
-     "stops": 4,
+     "stops": 5,
      "heat_exposed": 0,
-     "rain_exposed": 1
+     "rain_exposed": 2
     },
-    "U_s": 10.09,
-    "UW_s": 10.09
+    "U_s": 9.58,
+    "UW_s": 9.03
    }
   },
   {
@@ -1282,12 +1285,12 @@
      "rain_exposed": 0
     },
     "UW": {
-     "stops": 8,
-     "heat_exposed": 2,
+     "stops": 7,
+     "heat_exposed": 1,
      "rain_exposed": 0
     },
-    "U_s": 10.16,
-    "UW_s": 10.2
+    "U_s": 10.09,
+    "UW_s": 10.11
    },
    "R": {
     "broken_stops": 0,
@@ -1295,7 +1298,7 @@
    },
    "T": {
     "stops": 7,
-    "s": 10.16,
+    "s": 10.09,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1312,8 +1315,8 @@
      "heat_exposed": 0,
      "rain_exposed": 3
     },
-    "U_s": 10.22,
-    "UW_s": 10.19
+    "U_s": 10.11,
+    "UW_s": 10.11
    }
   },
   {
@@ -1330,8 +1333,8 @@
      "heat_exposed": 0,
      "rain_exposed": 0
     },
-    "U_s": 10.06,
-    "UW_s": 10.11
+    "U_s": 8.12,
+    "UW_s": 8.64
    },
    "R": {
     "broken_stops": 0,
@@ -1339,7 +1342,7 @@
    },
    "T": {
     "stops": 4,
-    "s": 10.08,
+    "s": 9.33,
     "R": {
      "broken_stops": 0,
      "delay_min": 0
@@ -1356,8 +1359,8 @@
      "heat_exposed": 0,
      "rain_exposed": 1
     },
-    "U_s": 10.09,
-    "UW_s": 10.11
+    "U_s": 10.05,
+    "UW_s": 10.09
    }
   }
  ]

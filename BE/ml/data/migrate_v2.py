@@ -7,7 +7,6 @@ Reads (never writes) `BE/data/snapshots/danang-v1/`. Writes:
 
 - `BE/data/snapshots/danang-v2/pois.json`      v1 superset + v2 fields
 - `BE/data/snapshots/danang-v2/quarantine_google.json`  Google-derived values
-- `BE/data/snapshots/danang-v2/matrix_ref.json` pointer to the v1 matrix
 - `BE/data/exports/danang-v2/*.csv`            training-safe tables (no Google)
 - `reports/p0/*`                               migration reports + verify queue
 
@@ -43,6 +42,7 @@ _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 import v2_rules as R  # noqa: E402
+from BE.common import DEFAULT_GOOGLE_POLICY  # noqa: E402
 
 TODAY = "2026-11-18"
 DATA_VERSION = "v2.1"
@@ -1136,7 +1136,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         "fetched_at": v1.get("fetched_at"),
         "built_at": TODAY,
         "google_policy": "runtime (GOOGLE_POLICY env; pois.json is always clean)",
-        "google_policy_default": runtime_policy,
+        "google_policy_default": DEFAULT_GOOGLE_POLICY,   # what poi_view uses when GOOGLE_POLICY is unset
         "source": "danang-v1 (serpapi/google-maps + osm + manual) re-labelled; see provenance",
         "sources": sorted({r["provenance"]["location"]["source"] for r in v21}),
         "count": len(v21),
@@ -1144,7 +1144,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         "count_by_category": dict(Counter(p["category"] for p in v21)),
         "count_by_zone": dict(Counter(p["zone"] for p in v21)),
         "applied_decisions": len(decisions), "applied_human_verify": len(human),
-        "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
+        "matrix": "matrix.json (dense_v1; every active POI incl. lodging; BE/tools/expand_poi_matrix.py --select active)",
         "count_new_pois": len(new_pois),
         "count_v1_pois": len(v1_ids),
         "count_by_price_tier": dict(Counter(str(r["price"]["tier"]) for r in v21)),
@@ -1160,13 +1160,6 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
           {"note": "Trường cũ (v1/v2.0) không còn dùng — chỉ để truy vết, không module nào đọc lúc chạy. "
                    "Giá trị gốc Google nằm ở quarantine_google.json, không ở đây.",
            "data_version": DATA_VERSION, "items": archive})
-    if not os.path.exists(os.path.join(out_dir, "matrix.json")):
-        # Q2: danang-v2 owns its matrix once WP7 builds it (expand_poi_matrix
-        # --select stops); until then the v1 matrix is reused by reference.
-        _dump(os.path.join(out_dir, "matrix_ref.json"),
-              {"matrix_from": "../danang-v1/matrix.json",
-               "reason": "v1 poi_ids reuse the v1 matrix (avoid a 26 MB copy)",
-               "missing_ids_note": "POI mới (added_in=v2.0-p0b) và 173 POI v1 chưa có hàng ma trận — cần tính lại"})
     _csv(os.path.join(reports_dir, "08_new_pois.csv"),
          [{"poi_id": p["poi_id"], "name": p["name"], "category": p["category"], "zone": p["zone"],
            "cluster_id": p["cluster_id"], "requires_ticket_of": p["requires_ticket_of_name"],

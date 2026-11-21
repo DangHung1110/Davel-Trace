@@ -5,7 +5,7 @@
  "fetched_at": "2026-10-03",
  "built_at": "2026-11-18",
  "google_policy": "runtime (GOOGLE_POLICY env; pois.json is always clean)",
- "google_policy_default": "demo_phi_thuong_mai",
+ "google_policy_default": "cach_ly",
  "source": "danang-v1 (serpapi/google-maps + osm + manual) re-labelled; see provenance",
  "sources": [
   "google_maps",
@@ -42,7 +42,7 @@
  },
  "applied_decisions": 102,
  "applied_human_verify": 33,
- "matrix": "matrix_ref.json -> danang-v1/matrix.json (v1 poi_ids only)",
+ "matrix": "matrix.json (dense_v1; every active POI incl. lodging; BE/tools/expand_poi_matrix.py --select active)",
  "count_new_pois": 258,
  "count_v1_pois": 742,
  "count_by_price_tier": {

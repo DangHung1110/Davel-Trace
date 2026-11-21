@@ -1,3 +1,5 @@
+> **Đã cũ (báo cáo P0 đầu tiên, 18/11).** Trạng thái hiện tại: `reports/p0/P0_final.md`.
+
 # Báo cáo P0 – Làm sạch dữ liệu (`danang-v2`) — 2026-11-18
 
 Người làm: Claude (phiên cloud, truy cập repo qua thư mục kết nối). Chưa commit — xem "Việc bạn cần làm".

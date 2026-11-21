@@ -120,9 +120,9 @@
 |---|---|---|---|
 | ~~Đường cong `u(t)`~~ **xong 20/11** cho 11 `time_profile` đang dùng | `BE/data/priors/time_profiles.json` + `BE/app/services/time_utility.py` (`u_at`, `u_mean`) | thiết kế (design prior) + log sau này | neo bình minh/hoàng hôn/chính trưa hoặc giờ đồng hồ, phủ 24 h, đỉnh = 1; test `test_time_utility.py` |
 | ~~Giờ mặt trời theo ngày~~ **xong 20/11** | `time_utility.sun_times` (NOAA, không mạng) | — | đối chiếu weatherspark/alpenglow: lệch ≤ 3 phút |
-| Khí hậu bình thường theo tháng × giờ | `BE/data/priors/climate_danang.json` | Open-Meteo historical (MẠNG) | để tính phần lệch thời tiết |
+| ~~Khí hậu bình thường theo tháng × giờ~~ **xong 20/11** | `BE/data/priors/climate.json` + `BE/app/services/climate.py` | Open-Meteo, ERA5 2016–2025 | 6 vùng × 12 tháng × 24 giờ; `as_forecast` cùng dạng dự báo; thử nghiệm `reports/p0/16_context_sufficiency.md` |
 | Tham số trạng thái (năng lượng, độ no, nhiệt) | `BE/data/priors/state_params.json` | thiết kế, hiệu chỉnh từ pilot | mô phỏng, không thu thập |
-| Ma trận theo khung giờ × thời tiết, P50/P90 | ma trận v2 | Valhalla `motor_scooter` | |
+| ~~Ma trận theo khung giờ~~ **xong 20/11 (dạng hệ số)** | `BE/data/priors/travel_time_factors.json` + `BE/app/services/travel_time.py` | ước lượng (không có nguồn kẹt xe mở) | thử nghiệm: lịch thông thoáng + đệm 12 phút không bị phá (0/30) → không cần cung phụ thuộc giờ trong lõi bộ giải; P50/P90 thật chờ log pilot |
 | Gold 30 → 100 | `BE/eval/gold/` | thủ công + tạo sinh | |
 
 ## 4. Điều kiện "chốt dữ liệu" để triển khai kiến trúc
@@ -145,7 +145,7 @@ Chất lượng (không đổi format):
 3. Toạ độ: 627 điểm gốc Google, 180 đã liên kết OSM (lệch trung vị 14 m); phần còn lại không có trên OSM (rủi ro thấp).
 
 Format (đổi `DATA_SPEC_v2_1` — cần người dùng duyệt):
-4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 4/13 lớp có suất có nguồn, 9 lớp còn unknown. Lớp nấu ăn trùng khung bữa = bữa đó (optimizer + gate, 20/11).
+4. ~~`hours.kind = by_booking`~~ — **xong 20/11** (spec + retrieval + optimizer + `booking_*.json`); 21/11: 7 lớp có suất có nguồn, 6 lớp không có lịch → excluded. Lớp nấu ăn trùng khung bữa = bữa đó (optimizer + gate).
 5. Suất/giờ khởi hành cho show, tour (Ký ức Hội An 20:00, tour lặn 4 suất) thay vì một khung mở cửa.
 6. Vé nhiều mức (người lớn/trẻ em/cư dân, ECO/HIGH/VIP) + phí bắt buộc (gửi xe, thang máy, thuyền) thành trường có cấu trúc; hiện chỉ ở `price.note`.
 7. Đếm khoản "chưa biết" khi tính chi phí thay vì coi = 0.
@@ -177,7 +177,16 @@ Dữ liệu kiến trúc (mục 3): `time_profiles`, giờ mặt trời, khí h�
 
 **Trạng thái sau chốt cuối 20/11 — dữ liệu P0 đóng băng:**
 - Giờ do người kiểm: 30 điểm. Tiêu chí ≥ 50 đã được người dùng bỏ (20/11).
-- Giờ `unknown` ngoài lưu trú: 9 lớp nấu ăn chưa có lịch suất (4 lớp khác đã là `by_booking`, 20/11). Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
-- 76 lưu trú: giá null + giờ unknown — chủ ý, người dùng chốt giữ nguyên.
+- Giờ `unknown`: **0 POI active** (21/11). 7 lớp theo suất có lịch có nguồn (`by_booking`); 6 lớp không có lịch suất công bố → excluded có lý do. Helio và Nhà biểu diễn 66 Bạch Đằng đã loại.
+- 76 lưu trú: giá null (chủ ý); giờ `00:00-23:59` safe_window theo quy ước lễ tân 24h (21/11); có hàng ma trận (21/11).
 - Khung bán đảo Sơn Trà: đã có `access_route_*.json` + cắt giờ theo khung đường (20/11); giữ 07:30-17:30 quanh năm. Người dùng loại Mũi Nghê, Hải đăng Tiên Sa, Ghềnh Bàng, Bãi Đá Đen, Bãi Obama (khu cấm). Còn 6 điểm 'chưa rõ' giữ luật cũ (xem `reports/p0/14_review_round1.md`).
 - Data contract P1 (mục 3): ngày ngoại lệ, suất diễn/khởi hành; vé nhiều mức; phí bắt buộc (gửi xe, thuyền Cù Lao Chàm); đếm khoản "chưa biết" thay vì coi = 0.
+
+**Nhật ký tiếp (sau chốt cuối 20/11):**
+
+| Ngày | Việc | Kết quả / chỗ xem |
+|---|---|---|
+| 20/11 | Thử `u(t)` trên CP-SAT (30 câu mẫu): +18% hàm mục tiêu, điểm giờ xấu −58%; bỏ `description` + `ext_ids.overture`; sửa bộ sinh gold (điểm bắt buộc ngoài giờ) | `reports/p0/15_ut_sufficiency.md` |
+| 20/11 | Khí hậu ERA5 (6 vùng × tháng × giờ), hệ số kẹt xe theo giờ, `lodging_rest`, mức phơi nắng/mưa cho 258 POI OSM/nhập tay | `reports/p0/16_context_sufficiency.md`; 1000/1000 có `time_profile` + `rain_cover` |
+| 21/11 | **Dọn format**: ma trận +71 lưu trú (988 id, 0 ô thiếu); một bộ 13 khoá `tags` (bỏ `rain_protection`, `indoor` = `space`); lưu trú 24h; Da Nang Family Class có suất (Pelago), 6 lớp không có lịch suất → excluded; Café 43 → restaurant, Café 41 excluded; ma trận `dense_v1` 73,6 → 7,2 MB; luật 13–15 + test | 1000 POI: 938 active (862 điểm dừng + 76 lưu trú), 62 excluded; gold v2 29/30 gate (q25: 2 điểm bắt buộc cùng nhóm cap cứng — hợp lệ) |
+| 21/11 | Dọn file: xoá 12 đề bài `reports/p0/links/TASK_*.md`, 9 danh sách đầu vào đã dùng, `urls.json`, `matrix_ref.json` (người dùng duyệt xoá thẳng; còn trong lịch sử git `5dea9d4`); giữ bằng chứng `*_codex.json`, trang duyệt, toàn bộ `BE/data/sources` | README snapshot + metadata `google_policy_default = cach_ly` cập nhật |

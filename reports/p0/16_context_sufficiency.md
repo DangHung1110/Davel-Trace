@@ -1,6 +1,6 @@
 # 16 — Khí hậu, thời tiết, di chuyển theo khung giờ, u(t) cho cả 1000 POI (thử trước kiến trúc)
 
-Ngày: 2026-11-20 · Script: `BE/tools/context_sufficiency.py` · Số liệu thô: `16_context_sufficiency.json`
+Ngày: 2026-11-20, chạy lại 21/11 trên data cuối · Script: `BE/tools/context_sufficiency.py` · Số liệu thô: `16_context_sufficiency.json`
 
 ## Dữ liệu đã thêm
 
@@ -31,13 +31,13 @@ Kiểm tra khí hậu với thực tế:
 | | Tháng 6, U | Tháng 6, UW | Tháng 11, U | Tháng 11, UW |
 |---|---|---|---|---|
 | Câu có lịch | 30 | 30 | 30 | 30 |
-| Số điểm | 168 | 159 (−5%) | 157 | 161 |
-| Điểm phơi nắng gắt (cảm giác ≥ 36°C và phơi nắng ≥ 0,7) | 45 | **24 (−47%)** | 0 | 0 |
-| Điểm ngoài trời giờ hay mưa (P ≥ 0,2) | 1 | 0 | 60 | 51 (−15%) |
+| Số điểm | 175 | 167 (−5%) | 167 | 170 |
+| Điểm phơi nắng gắt (cảm giác ≥ 36°C và phơi nắng ≥ 0,7) | 39 | **15 (−62%)** | 0 | 0 |
+| Điểm ngoài trời giờ hay mưa (P ≥ 0,2) | 1 | 1 | 62 | 57 (−8%) |
 
 **Đọc kết quả:**
-- **Nóng:** khí hậu đủ dùng. Nắng gắt theo giờ có quy luật, nên lịch dời điểm ngoài trời ra khỏi buổi trưa và giảm được gần một nửa số điểm phơi nắng gắt.
-- **Mưa:** khí hậu chỉ cho tỉ lệ nền. Tháng 11, P(mưa) khoảng 0,25 gần như đều cả ngày, nên dời giờ không tránh được mưa; chỉ giảm được 15%.
+- **Nóng:** khí hậu đủ dùng. Nắng gắt theo giờ có quy luật, nên lịch dời điểm ngoài trời ra khỏi buổi trưa và giảm được gần 2/3 số điểm phơi nắng gắt.
+- **Mưa:** khí hậu chỉ cho tỉ lệ nền. Tháng 11, P(mưa) khoảng 0,25 gần như đều cả ngày, nên dời giờ không tránh được mưa; chỉ giảm được 8%.
   - Muốn tránh mưa phải biết **hôm nào** mưa. Việc đó cần dự báo thật: dịch vụ `weather.fetch_forecast` đã có, tầm khoảng 16 ngày.
   - Khí hậu dùng cho chuyến xa hơn tầm dự báo và làm giá trị mặc định. Hành vi này đúng: không nên loại hết biển chỉ vì tháng 11 trung bình hay mưa.
   - Việc cho kiến trúc: khi gần ngày đi, ưu tiên dự báo, và cho phép xếp lại lịch.
@@ -48,7 +48,7 @@ Kiểm tra khí hậu với thực tế:
   - Kết quả: **0/30 lịch bị phá**, độ trễ trung bình 0 phút.
   - Lý do: mỗi chặng có sẵn 12 phút đệm (`STOP_OVERHEAD_MIN`), mà các chặng trong lịch ngắn, nên đệm hấp thụ được hệ số tới ×1,4.
 - **T:** xếp lại trên ma trận nhân hệ số xấu nhất trong khung giờ chuyến đi.
-  - Kết quả: 29/30 câu có lịch, **148 điểm so với 168 (−12%)**. Câu q19 không còn xếp được.
+  - Kết quả: 30/30 câu có lịch nhưng **160 điểm so với 175 (−9%)**.
   - Cách bi quan này mất nhiều điểm mà không đổi lại gì, vì R đã cho thấy lịch thông thoáng vẫn giữ được.
 
 **Kết luận E2:**
