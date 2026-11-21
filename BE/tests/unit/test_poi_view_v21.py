@@ -118,8 +118,15 @@ class TestEligibilityWP4(unittest.TestCase):
         self.assertIn({"poi_id": "b", "reason": "chua co ma tran di chuyen"}, res["excluded"])
 
     def test_safe_window_hours_are_labelled(self):
-        res = retrieval.retrieve(TRIP, self.view(rec(kind="safe_window")))
+        poi = rec(kind="safe_window")
+        poi["popularity"]["signature"] = True   # a known sight stays in the main tier
+        res = retrieval.retrieve(TRIP, self.view(poi))
         self.assertIn("nen kiem tra gio", res["candidates"][0]["uncertainty"])
+
+    def test_unknown_sight_without_sourced_hours_is_local_tier(self):
+        res = retrieval.retrieve(TRIP, self.view(rec(kind="safe_window")))
+        self.assertEqual(res["candidates"], [])
+        self.assertEqual(res["excluded"][0]["reason"], "chi xep khi duoc yeu cau")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,12 @@
+{
+ "note": "21/11/2026: người dùng tự kiểm (không có link nguồn ngoài Google -> verified_by=user).",
+ "items": [
+  {
+   "poi_id": "manual:lapin-bakery-da-nang",
+   "price_tier": "medium",
+   "checked_at": "2026-11-21",
+   "price_note": "Mức medium (100-500k/người): người dùng tham khảo phân bố giá do khách báo trên bản đồ (đa số 100-200k/người, 420 lượt), chưa có nguồn ngoài Google; độ tin thấp, cần nguồn menu/fanpage để nâng.",
+   "note": "người dùng kiểm 21/11/2026, không kèm link"
+  }
+ ]
+}

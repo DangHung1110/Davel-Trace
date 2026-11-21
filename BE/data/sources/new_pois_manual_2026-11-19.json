@@ -112,6 +112,29 @@
      "morning"
     ]
    }
+  },
+  {
+   "id": "manual:lapin-bakery-da-nang",
+   "lat": 16.0631875,
+   "lon": 108.2414375,
+   "name": "Lapin Bakery & Dessert Cafe",
+   "c": "cafe",
+   "coord_source": "Plus Code 367R+7H An Hải, Đà Nẵng (A17-2 Võ Văn Kiệt; người dùng gửi ảnh bản đồ 21/11/2026)",
+   "smart_tags": {
+    "time": [
+     "morning",
+     "night"
+    ],
+    "budget": [
+     "quick-stop-30"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ]
+   }
   }
  ],
  "curation": {

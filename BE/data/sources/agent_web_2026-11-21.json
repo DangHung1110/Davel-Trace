@@ -1,0 +1,14 @@
+{
+ "about": "21/11/2026: giờ có nguồn cho điểm nhập tay Lapin Bakery & Dessert Cafe (Đà Nẵng), thay quán Lapin ở Hội An đã đóng vĩnh viễn.",
+ "checked_at": "2026-11-21",
+ "items": [
+  {
+   "poi_id": "manual:lapin-bakery-da-nang",
+   "name": "Lapin Bakery & Dessert Cafe",
+   "hours": "06:00-23:59",
+   "confidence": 0.7,
+   "evidence_url": "https://danangfantasticity.com/discovery/lapin-bakery-dessert-cafe-a-new-wave-on-da-nangs-fb-map",
+   "note": "Danang Fantasticity (cổng du lịch TP Đà Nẵng, 22/08/2025): A17-2 Võ Văn Kiệt, mở 06:00-24:00; người dùng xác nhận 'đóng cửa vào 0:00' trên bản đồ 21/11/2026."
+  }
+ ]
+}

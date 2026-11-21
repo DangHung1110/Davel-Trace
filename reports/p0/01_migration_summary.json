@@ -3,16 +3,16 @@
  "google_policy": "cach_ly",
  "v1_count": 750,
  "v1_meta_count": 750,
- "v2_count": 1008,
+ "v2_count": 1009,
  "status": {
-  "active": 984,
+  "active": 985,
   "review": 20,
   "excluded": 4
  },
  "category": {
   "restaurant": 226,
   "nightlife": 102,
-  "cafe": 166,
+  "cafe": 167,
   "day_market": 48,
   "viewpoint": 22,
   "religious": 104,
@@ -27,14 +27,14 @@
  "role": {
   "meal": 226,
   "nightlife": 102,
-  "rest": 166,
+  "rest": 167,
   "attraction": 348,
   "base": 76,
   "wellness": 90
  },
  "zone": {
   "trung_tam": 276,
-  "son_tra_my_khe": 236,
+  "son_tra_my_khe": 237,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
@@ -52,7 +52,7 @@
   "son_tra_my_khe": {
    "meal": 40,
    "nightlife": 32,
-   "rest": 29,
+   "rest": 30,
    "attraction": 66,
    "base": 35,
    "wellness": 33
@@ -96,20 +96,20 @@
  },
  "hours_verified_by": {
   "inferred": 676,
-  "agent_web": 132,
+  "agent_web": 133,
   "open_data": 198,
   "user": 2
  },
  "price_verified_by": {
   "agent_web": 87,
-  "inferred": 913,
+  "inferred": 914,
   "user": 8
  },
  "dwell_verified_by": {
-  "inferred": 970,
+  "inferred": 971,
   "user": 38
  },
- "legacy_hours_nonempty": 910,
+ "legacy_hours_nonempty": 911,
  "v1_hours_nonempty": 523,
  "legacy_price_band": 70,
  "legacy_free_entry": 195,
