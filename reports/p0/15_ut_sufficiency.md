@@ -1,5 +1,17 @@
 # 15 — u(t) có đủ để làm kiến trúc không? (thử nghiệm trước kiến trúc)
 
+> **Chạy lại 21/11 trên platform `main`**: ma trận **xe máy** (`dense-v1`, 1008 POI), planner của `main`, `STATE_WEIGHT` = 1,0 cho thử nghiệm; data trước lần loại 26 điểm.
+>
+> | | A (không u) | B (có u) |
+> |---|---|---|
+> | Câu có lịch | 28/30 | 29/30 |
+> | Σ prize·ū | 94,3 | **112,8 (+20%)** |
+> | ū trung bình | 0,70 | **0,87** |
+> | Điểm đi vào giờ xấu (ū < 0,5) | 39 | **2 (−95%)** |
+> | Tổng số điểm | 157 | 149 (−5%) |
+>
+> Câu không có lịch: q25 (cả A lẫn B) và q05 (chỉ A). Lý do: bộ giải hết giờ trước khi tìm được nghiệm, vì chặng xe máy dài hơn. 28/30 lần giải vẫn dừng vì hết giờ. Kết luận giữ nguyên: u(t) đủ dùng; ngân sách bộ giải và warm start là việc của kiến trúc. Phần dưới đây là số đo 20–21/11 trên ma trận ô tô.
+
 Ngày: 2026-11-20, chạy lại 21/11 trên data cuối · Script: `BE/tools/ut_sufficiency.py` · Số liệu thô: `15_ut_sufficiency.json`
 Ngày mô phỏng: 15/6/2026 (mùa cao điểm). Không gọi mạng.
 

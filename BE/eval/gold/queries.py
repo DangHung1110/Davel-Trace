@@ -59,9 +59,17 @@ def _fits_window(poi: dict, ws: str, we: str) -> bool:
     return windows is None or any(max(o, start) + dur <= min(c, end) for o, c in windows)
 
 
+def _same_kind(a: dict, b: dict) -> bool:
+    """Same planner category, or both food stops (restaurant / cafe)."""
+    from BE.app.services.soft_rules import poi_category
+    ca, cb = poi_category(a), poi_category(b)
+    return ca == cb or {ca, cb} <= {"restaurant", "cafe"}
+
+
 def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
     rng = random.Random(seed)
     verified = [p for p in pois if p.get("verified")]
+    by_id = {p["poi_id"]: p for p in verified}
     ids = sorted(p["poi_id"] for p in verified)
     combos = list(itertools.product(BUDGETS, WINDOWS))
     rng.shuffle(combos)
@@ -74,6 +82,14 @@ def build_queries(pois: list[dict], n: int = 5, seed: int = 7) -> list[dict]:
                      if _fits_window(p, ws, we) and templates.allows(p, day)
                      and p.get("plan_tier") != "excluded")
         must = rng.sample(fit, k=min(2, len(fit))) if i % 2 == 0 else []
+        if len(must) == 2 and _same_kind(by_id[must[0]], by_id[must[1]]):
+            # two temples / two cafes / two meals as must_visit break a HARD day rule
+            # by themselves (CATEGORY_CAP, CAFE_CAP, A1): the gold would be infeasible
+            # by construction, not because of the data. Redraw the second one.
+            others = [x for x in fit if x != must[0]
+                      and not _same_kind(by_id[must[0]], by_id[x])]
+            if others:
+                must[1] = rng.choice(others)
         avoid = rng.sample([x for x in ids if x not in must],
                            k=1 if len(ids) - len(must) > 2 else 0)
         order = [[must[0], must[1]]] if len(must) == 2 else []

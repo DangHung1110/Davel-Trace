@@ -1,5 +1,16 @@
 # 16 — Khí hậu, thời tiết, di chuyển theo khung giờ, u(t) cho cả 1000 POI (thử trước kiến trúc)
 
+> **Chạy lại 21/11 trên platform `main` + ma trận xe máy** (data trước lần loại 26 điểm):
+>
+> | | Tháng 6, U | Tháng 6, UW | Tháng 11, U | Tháng 11, UW |
+> |---|---|---|---|---|
+> | Câu có lịch | 29 | 29 | 29 | 29 |
+> | Số điểm | 157 | 155 | 158 | 157 |
+> | Phơi nắng gắt | 29 | **12 (−59%)** | 0 | 0 |
+> | Ngoài trời giờ hay mưa | 2 | 2 | 48 | **35 (−27%)** |
+>
+> Kẹt xe: 0/29 lịch bị phá khi nhân hệ số, trễ trung bình 0,2 phút. Ma trận xấu nhất: 153 điểm so với 157 (−3%). Kết luận giữ nguyên. Phần dưới đây là số đo trên ma trận ô tô.
+
 Ngày: 2026-11-20, chạy lại 21/11 trên data cuối · Script: `BE/tools/context_sufficiency.py` · Số liệu thô: `16_context_sufficiency.json`
 
 ## Dữ liệu đã thêm
