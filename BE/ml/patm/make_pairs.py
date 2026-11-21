@@ -15,13 +15,7 @@ Protocol pieces:
   to hold it.
 - SWAP-CHECK: every pair is stored in both orders (a,b) and (b,a);
   `swap_check` asserts antisymmetry (label flips, tie stays tie).
-  Judge batch (Qwen) asks both orders too and drops inconsistent pairs.
-- JUDGE BATCH (frame only, runs later): `--emit-judge-batch` writes a
-  JSONL of prompts (name+category+rating+tags, both orders) for the
-  overnight Qwen run (owner batch LLM: Bach); `--collect-judge` parses
-  the returned JSONL into pairs. No judge data exists yet.
-- HUMAN VERIFY: `sample_human` draws a stratified n (default 200)
-  for the <=3-day human check after the batch.
+  `--drop-contradictions` removes the LLM pairs answered both ways.
 - NO POI LEAKAGE: `leave_poi_out_split` hides 20% of POI ids from train;
   any pair touching a held-out POI goes to eval (T031 generalization proof).
 
@@ -33,7 +27,6 @@ Pair record:
 Usage:
   python BE/ml/patm/make_pairs.py --snapshot data/snapshots/danang-v1 --n 42 --seed 7
   python BE/ml/patm/make_pairs.py --snapshot ... --check pairs.json
-  python BE/ml/patm/make_pairs.py --snapshot ... --emit-judge-batch judge_q.jsonl
 """
 
 from __future__ import annotations
@@ -58,32 +51,6 @@ from BE.ml.patm.rule_score import (  # noqa: E402
 )
 
 LABEL_NAMES = {1: "prefer-first", 0: "tie", -1: "prefer-second"}
-
-
-def _legacy_margin(a: dict, b: dict) -> tuple[float, list[str]]:
-    """Pre-T027 inline rules. Backward-compat oracle asserted by test_rule_score."""
-    # ponytail: no runtime caller — kept only as the T027 backward-compat oracle.
-    margin, fired = 0.0, []
-    ia, ib = a.get("intensity", 2), b.get("intensity", 2)
-    if ia > ib:  # van dong truoc, thu gian sau (spec US3: hiking -> beach)
-        margin += 0.5
-        fired.append("intensity-desc")
-    elif ib > ia:
-        margin -= 0.5
-        fired.append("intensity-desc")
-    if a.get("type") != "restaurant" and b.get("type") == "restaurant":
-        margin += 0.3  # an sau hoat dong
-        fired.append("meal-after-activity")
-    elif b.get("type") != "restaurant" and a.get("type") == "restaurant":
-        margin -= 0.3
-        fired.append("meal-after-activity")
-    if a.get("weather_sensitive") and not b.get("weather_sensitive"):
-        margin -= 0.2  # uu tien trong-nha truoc khi thoi tiet doi
-        fired.append("indoor-buffer")
-    elif b.get("weather_sensitive") and not a.get("weather_sensitive"):
-        margin += 0.2
-        fired.append("indoor-buffer")
-    return margin, fired
 
 
 def _rule_margin(a: dict, b: dict) -> tuple[float, list[str]]:
@@ -185,77 +152,27 @@ def leave_poi_out_split(pairs: list[dict], frac: float = 0.2,
     return train, eval_, leaked
 
 
-def sample_human(pairs: list[dict], n: int = 200, seed: int = 7) -> list[dict]:
-    """Stratified sample for the <=3-day human check (post-batch)."""
-    rng = random.Random(seed)
-    by_label: dict[int, list[dict]] = {1: [], 0: [], -1: []}
-    for p in pairs:
-        by_label[p["label"]].append(p)
-    per = n // 3
-    out: list[dict] = []
-    for label in (1, 0, -1):
-        pool = by_label[label][:]
-        rng.shuffle(pool)
-        out.extend(pool[:per])
-    rng.shuffle(out)
-    return out
+def drop_self_contradictions(pairs: list[dict]) -> tuple[list[dict], int]:
+    """Drop LLM pairs whose two orders disagree, return (kept, pairs dropped).
 
-
-def emit_judge_batch(pois: list[dict], path: str, n: int = 600, seed: int = 7) -> int:
-    """Write judge prompts JSONL (both orders per item = swap-check)."""
-    # ponytail: emit-only — the Qwen batch is a deferred manual run (T028).
-    rng = random.Random(seed)
-    combos = list(itertools.combinations(sorted(pois, key=lambda p: p["poi_id"]), 2))
-    rng.shuffle(combos)
-    rows: list[dict] = []
-    for a, b in combos[: (n // 2)]:
-        for first, second in ((a, b), (b, a)):
-            rows.append({
-                "prompt": ("Chon thu tu tot hon cho khach thich van dong truoc, "
-                           "thu gian sau. Tra JSON {\"choice\": \"first\"|\"second\"|\"tie\"}.\n"
-                           f"First: {first['name']} ({first['type']}, "
-                           f"rating {first.get('rating')}, tags {first.get('tags')})\n"
-                           f"Second: {second['name']} ({second['type']}, "
-                           f"rating {second.get('rating')}, tags {second.get('tags')})"),
-                "first_id": first["poi_id"], "second_id": second["poi_id"],
-            })
-    with open(path, "w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    return len(rows)
-
-
-def collect_human(answers_path: str, verify_path: str) -> list[dict]:
-    """Parse human_answers.json [{pair_n, human}] joined with the verify
-    set -> pairs with source=human. human: 1/0/-1."""
-    ans = {r["pair_n"]: r["human"]
-           for r in json.load(open(answers_path, encoding="utf-8"))}
-    pairs: list[dict] = []
-    with open(verify_path, encoding="utf-8") as f:
-        for line in f:
-            row = json.loads(line)
-            if row["pair_n"] in ans and ans[row["pair_n"]] in (1, 0, -1):
-                pairs.append({"pair_id": f"human-{row['pair_n']}",
-                              "first_id": row["first_id"],
-                              "second_id": row["second_id"],
-                              "label": ans[row["pair_n"]], "margin": 0.0,
-                              "source": "human", "rules": ["human-verify"],
-                              "swapped_from": None})
-    return pairs
-
-
-def collect_judge(path: str) -> list[dict]:
-    """Parse returned judge JSONL (each line: first_id, second_id, choice)."""
-    pairs: list[dict] = []
-    with open(path, encoding="utf-8") as f:
-        for i, line in enumerate(f):
-            row = json.loads(line)
-            label = {"first": 1, "tie": 0, "second": -1}[row["choice"]]
-            pairs.append({"pair_id": f"llm-{i}", "first_id": row["first_id"],
-                          "second_id": row["second_id"], "label": label,
-                          "margin": 0.0, "source": "llm", "rules": ["llm-judge"],
-                          "swapped_from": None})
-    return pairs
+    The judge is asked both orders. An answer that follows the order of the
+    question ("whichever is named first") says nothing about the places: 129 of
+    466 pairs in v4. A pair asked in one order only cannot be checked and stays.
+    """
+    orders: dict[frozenset, list[dict]] = {}
+    for pair in pairs:
+        if pair.get("source") == "llm":
+            orders.setdefault(frozenset((pair["first_id"], pair["second_id"])), []).append(pair)
+    bad = set()
+    for key, rows in orders.items():
+        if len(rows) == 2:
+            a, b = rows
+            same_order = a["first_id"] == b["first_id"]
+            if a["label"] != (b["label"] if same_order else -b["label"]):
+                bad.add(key)
+    kept = [p for p in pairs if p.get("source") != "llm"
+            or frozenset((p["first_id"], p["second_id"])) not in bad]
+    return kept, len(bad)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -265,9 +182,17 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default="")
     ap.add_argument("--check", default="")
-    ap.add_argument("--emit-judge-batch", default="")
+    ap.add_argument("--drop-contradictions", nargs=2, metavar=("IN", "OUT"),
+                    help="rewrite a pair file without self-contradicting LLM pairs")
     args = ap.parse_args(argv)
 
+    if args.drop_contradictions:
+        with open(args.drop_contradictions[0], encoding="utf-8") as f:
+            kept, dropped = drop_self_contradictions(json.load(f))
+        with open(args.drop_contradictions[1], "w", encoding="utf-8") as f:
+            json.dump(kept, f, ensure_ascii=False)
+        print(f"dropped {dropped} self-contradicting LLM pairs, {len(kept)} rows left")
+        return 0
     if args.check:
         with open(args.check, encoding="utf-8") as f:
             pairs = json.load(f)
@@ -282,11 +207,6 @@ def main(argv: list[str] | None = None) -> int:
         return 1 if errors or leaked else 0
 
     pois = load_pois(args.snapshot)
-    if args.emit_judge_batch:
-        k = emit_judge_batch(pois, args.emit_judge_batch, n=args.n, seed=args.seed)
-        print(f"wrote {k} judge prompts -> {args.emit_judge_batch} (chay Qwen sau, chua co data)")
-        return 0
-
     pairs = build_rule_pairs(pois, args.n, args.seed)
     print(f"built {len(pairs)} rule pairs from {len(pois)} POIs")
     print("balance:", balance_report(pairs))

@@ -12,50 +12,50 @@
   "manual",
   "osm"
  ],
- "count": 1000,
+ "count": 1008,
  "count_by_status": {
-  "active": 937,
-  "excluded": 63
+  "active": 944,
+  "excluded": 64
  },
  "count_by_category": {
-  "restaurant": 225,
-  "nightlife": 100,
+  "restaurant": 227,
+  "nightlife": 102,
   "cafe": 164,
   "day_market": 49,
   "viewpoint": 23,
-  "religious": 103,
-  "outdoor_landmark": 65,
+  "religious": 104,
+  "outdoor_landmark": 67,
   "museum_indoor": 24,
   "paid_attraction": 50,
   "lodging": 76,
-  "beach": 26,
+  "beach": 27,
   "night_market": 5,
   "wellness": 90
  },
  "count_by_zone": {
-  "trung_tam": 270,
-  "son_tra_my_khe": 234,
+  "trung_tam": 276,
+  "son_tra_my_khe": 236,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
   "hoi_an": 249
  },
- "applied_decisions": 140,
+ "applied_decisions": 141,
  "applied_human_verify": 33,
- "matrix": "matrix.json (dense_v1; every active POI incl. lodging; BE/tools/expand_poi_matrix.py --select active)",
+ "matrix": "matrix.json (dense-v1, BE.app.services.matrix; every active POI incl. lodging)",
  "count_new_pois": 258,
- "count_v1_pois": 742,
+ "count_v1_pois": 750,
  "count_by_price_tier": {
-  "medium": 399,
-  "cheap": 266,
+  "medium": 402,
+  "cheap": 267,
   "expensive": 21,
-  "free": 193,
-  "None": 84,
+  "free": 198,
+  "None": 83,
   "included": 37
  },
  "count_by_hours_kind": {
-  "safe_window": 625,
-  "fixed": 356,
+  "safe_window": 635,
+  "fixed": 354,
   "unknown": 12,
   "by_booking": 7
  },
@@ -1638,9 +1638,10 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "11:00-13:30",
+     "17:30-20:30"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "nha_hang"
@@ -1718,12 +1719,12 @@
      "note": "type:Nhà hàng hải sản"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:nha_hang",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "Apple Maps Open 24 Hours; ghiendanang.com 'Luôn mở cửa'"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "category_default:nha_hang",
@@ -27317,9 +27318,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 30,
+    "p50": 45,
+    "p75": 75
    },
    "tags": {
     "space": "outdoor",
@@ -28151,10 +28152,10 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:30-11:00",
-     "14:00-16:30"
+     "08:00-11:30",
+     "13:30-16:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "bao_tang"
@@ -28232,12 +28233,12 @@
      "note": "name:di tich"
     },
     "hours": {
-     "source": "archetype:bao_tang",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "web",
+     "verified_by": "agent_web",
+     "confidence": 0.5,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": "giờ Bảo tàng ĐN trong khuôn viên; nghỉ T2 (quangthangcatba.com)"
     },
     "price": {
      "source": "rule_free_public",
@@ -28726,9 +28727,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 15,
+    "p50": 30,
+    "p75": 45
    },
    "tags": {
     "space": "outdoor",
@@ -28867,9 +28868,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 168,
-    "p50": 240,
-    "p75": 336
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -29434,9 +29435,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 30,
+    "p50": 60,
+    "p75": 90
    },
    "tags": {
     "space": "outdoor",
@@ -29563,9 +29564,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -29643,12 +29644,12 @@
      "note": "name:vịnh"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: vịnh/biển mở tự do; đường bộ giới hạn 07:30-18:30 (mytour.danang.vn)"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -29718,9 +29719,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 126,
+    "p25": 120,
     "p50": 180,
-    "p75": 252
+    "p75": 240
    },
    "tags": {
     "space": "outdoor",
@@ -30841,9 +30842,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "06:00-17:30"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_tu_nhien"
@@ -30921,12 +30922,12 @@
      "note": "name:view"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_tu_nhien",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: điểm ngắm cảnh generic; đường lên giới hạn 07:30-18:30"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -30982,7 +30983,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -30994,9 +30995,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -31063,12 +31064,12 @@
      "note": "name:bai cat;type:Bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -31544,9 +31545,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -31624,12 +31625,12 @@
      "note": "v1_cat:attraction"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: điểm dừng ven đường Sơn Trà, không cổng/vé"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -31685,9 +31686,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -31765,12 +31766,12 @@
      "note": "name:bai tam"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: bãi công cộng mở tự do"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -31838,9 +31839,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -33234,9 +33235,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -33314,12 +33315,12 @@
      "note": "name:bai sung co"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: bãi hoang sơ ngoài trời, không cổng vé"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -33514,9 +33515,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -33594,12 +33595,12 @@
      "note": "name:bai tam"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -33667,9 +33668,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 140,
-    "p50": 200,
-    "p75": 280
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -33949,9 +33950,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -34080,9 +34081,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -34161,12 +34162,12 @@
      "note": "name:tuong dai;type:Địa điểm lịch sử"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: tượng đài công cộng ngoài trời"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -34222,7 +34223,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -34234,9 +34235,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -34303,12 +34304,12 @@
      "note": "name:bai tam;type:Câu lạc bộ bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -34376,9 +34377,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -36064,15 +36065,16 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "08:30-11:00",
+     "14:00-16:30"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "bao_tang"
    },
    "price": {
-    "tier": null,
+    "tier": "free",
     "note": "Bia ngoài trời, tham quan tự do"
    },
    "dwell": {
@@ -36144,20 +36146,20 @@
      "note": "override:Nhà bia Chứng tích Núi Ghềnh"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:bao_tang",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: nhà bia ngoài trời, không cổng/vé"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
-     "source": "none",
+     "source": "rule_free_public",
      "verified_by": "inferred",
-     "confidence": 0.0,
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "KHÔNG XÁC ĐỊNH — giá vé phải tra trang chính thức (không đoán)"
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
      "source": "dwell_table_v2:historic_site",
@@ -36773,7 +36775,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -36785,9 +36787,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -36854,12 +36856,12 @@
      "note": "name:bai tam;type:Bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -36915,7 +36917,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -36927,9 +36929,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -36996,12 +36998,12 @@
      "note": "name:bai bien;type:Bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -37199,7 +37201,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -37211,9 +37213,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -37280,12 +37282,12 @@
      "note": "name:bai bien;type:Sân bóng chuyền bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -37341,7 +37343,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -37353,9 +37355,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -37422,12 +37424,12 @@
      "note": "name:bai tam;type:Bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -37483,9 +37485,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -37563,12 +37565,12 @@
      "note": "name:bai tam"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: phân khu bãi Mỹ Khê mở tự do"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -37636,9 +37638,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 30,
+    "p50": 45,
+    "p75": 75
    },
    "tags": {
     "space": "outdoor",
@@ -43339,7 +43341,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -43419,12 +43421,12 @@
      "note": "name:bai bien"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -43763,9 +43765,9 @@
    "requires_ticket_of": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
    "hours": {
     "open": [
-     "07:00-17:30"
+     "05:00-22:00"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -43844,12 +43846,12 @@
      "note": "type:Điểm mốc lịch sử"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận theo giờ quần thể NHS (động núi Thủy Sơn)"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "cluster_rule",
@@ -44265,7 +44267,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "v1_cat:attraction"
+     "note": "v1_cat:temple"
     },
     "hours": {
      "source": "web",
@@ -44471,7 +44473,7 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "05:00-22:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
@@ -44483,9 +44485,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -44552,12 +44554,12 @@
      "note": "name:bai tam;type:Câu lạc bộ bãi biển"
     },
     "hours": {
-     "source": "rule_open_access",
+     "source": "archetype:ngoai_troi_do_thi",
      "verified_by": "inferred",
-     "confidence": 0.55,
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "không gian mở, không cổng"
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
     },
     "price": {
      "source": "rule_free_public",
@@ -45475,7 +45477,7 @@
     "note": null
    },
    "dwell": {
-    "p25": 105,
+    "p25": 90,
     "p50": 150,
     "p75": 210
    },
@@ -46165,10 +46167,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -46247,12 +46248,12 @@
      "note": "name:chua;type:Cơ sở thờ tự"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -48017,9 +48018,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -48029,9 +48030,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -48098,12 +48099,12 @@
      "note": "name:beach;type:Bãi biển"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -49229,7 +49230,7 @@
      "source": "osm",
      "verified_by": "open_data",
      "confidence": 0.7,
-     "evidence_url": "node/5273998823",
+     "evidence_url": null,
      "verified_at": null,
      "note": null
     },
@@ -49287,9 +49288,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -49367,12 +49368,12 @@
      "note": "name:cầu"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -49852,10 +49853,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "08:00-11:00",
-     "14:00-16:00"
+     "05:00-21:30"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "chua"
@@ -49934,12 +49934,12 @@
      "note": "name:nha tho;type:Cơ sở thờ tự"
     },
     "hours": {
-     "source": "archetype:chua",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -50560,9 +50560,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -50640,12 +50640,12 @@
      "note": "name:cầu"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -52677,9 +52677,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 105,
-    "p50": 150,
-    "p75": 210
+    "p25": 126,
+    "p50": 180,
+    "p75": 252
    },
    "tags": {
     "space": "outdoor",
@@ -52817,9 +52817,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 105,
-    "p50": 150,
-    "p75": 210
+    "p25": 126,
+    "p50": 180,
+    "p75": 252
    },
    "tags": {
     "space": "outdoor",
@@ -53364,9 +53364,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "18:00-22:00"
+     "17:00-23:00"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "cho_dem"
@@ -53442,12 +53442,12 @@
      "note": "name:cho dem;type:Chợ"
     },
     "hours": {
-     "source": "archetype:cho_dem",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "web",
@@ -54069,9 +54069,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -54081,9 +54081,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 100,
+    "p75": 150
    },
    "tags": {
     "space": "outdoor",
@@ -54150,12 +54150,12 @@
      "note": "name:bãi đá;type:Bãi biển"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -54931,9 +54931,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 42,
-    "p50": 60,
-    "p75": 84
+    "p25": 90,
+    "p50": 150,
+    "p75": 210
    },
    "tags": {
     "space": "outdoor",
@@ -55756,9 +55756,9 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "05:00-22:00"
+     "00:00-23:59"
     ],
-    "kind": "safe_window",
+    "kind": "fixed",
     "closed_days": [],
     "access_window": null,
     "archetype": "ngoai_troi_do_thi"
@@ -55837,12 +55837,12 @@
      "note": "name:tuong dai;type:Tượng đài"
     },
     "hours": {
-     "source": "archetype:ngoai_troi_do_thi",
-     "verified_by": "inferred",
-     "confidence": 0.45,
+     "source": "osm",
+     "verified_by": "open_data",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+     "note": null
     },
     "price": {
      "source": "rule_free_public",
@@ -96255,9 +96255,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 84,
-    "p50": 120,
-    "p75": 168
+    "p25": 60,
+    "p50": 75,
+    "p75": 105
    },
    "tags": {
     "space": "indoor",
@@ -99674,9 +99674,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 30,
+    "p50": 45,
+    "p75": 75
    },
    "tags": {
     "space": "outdoor",
@@ -100095,9 +100095,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 101,
-    "p50": 144,
-    "p75": 202
+    "p25": 30,
+    "p50": 45,
+    "p75": 75
    },
    "tags": {
     "space": "outdoor",
@@ -103320,7 +103320,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -103328,7 +103328,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -103461,7 +103461,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -103469,7 +103469,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -103602,7 +103602,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -103610,7 +103610,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -103740,7 +103740,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -103748,7 +103748,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -103879,7 +103879,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -103887,7 +103887,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -103936,6 +103936,1136 @@
      "evidence_url": null,
      "verified_at": null,
      "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:cau-tinh-yeu",
+   "name": "Cầu Tình Yêu",
+   "name_raw": "Cầu Tình Yêu",
+   "name_en": null,
+   "lat": 16.0629967,
+   "lon": 108.2298146,
+   "category": "outdoor_landmark",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "05:00-22:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": null
+   },
+   "dwell": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "tags": {
+    "space": "outdoor",
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "good_times": [
+     "morning",
+     "sunset"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "outdoor_exposure": 0.7,
+    "sun_exposure": 0.7,
+    "wind_exposure": 0.7,
+    "rain_cover": "open",
+    "exposure_source": "explicit",
+    "indoor": false,
+    "effort": 1,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "outdoor_heat_sensitive",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.5,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:cầu;type:Thắng cảnh"
+    },
+    "hours": {
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "rule_free_public",
+     "verified_by": "inferred",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:outdoor_urban",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:ca-chep-hoa-rong",
+   "name": "Tượng Cá Chép Hóa Rồng",
+   "name_raw": "Tượng Cá Chép Hóa Rồng",
+   "name_en": null,
+   "lat": 16.0629054,
+   "lon": 108.2298191,
+   "category": "outdoor_landmark",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "05:00-22:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": null
+   },
+   "dwell": {
+    "p25": 10,
+    "p50": 20,
+    "p75": 40
+   },
+   "tags": {
+    "space": "outdoor",
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "good_times": [
+     "morning",
+     "sunset"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "outdoor_exposure": 0.7,
+    "sun_exposure": 0.7,
+    "wind_exposure": 0.7,
+    "rain_cover": "open",
+    "exposure_source": "explicit",
+    "indoor": false,
+    "effort": 1,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "outdoor_heat_sensitive",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.5,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "type:Tượng đài"
+    },
+    "hours": {
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "rule_free_public",
+     "verified_by": "inferred",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:outdoor_urban",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.5"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:nha-tho-con-ga",
+   "name": "Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng)",
+   "name_raw": "Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng)",
+   "name_en": null,
+   "lat": 16.0666672,
+   "lon": 108.2231873,
+   "category": "religious",
+   "role": "attraction",
+   "status": "excluded",
+   "status_reason": "trùng với \"Nhà thờ Chính tòa Đà Nẵng\" (cách 14 m); điểm nhập tay mới của main (danang-v1)",
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "08:00-11:00",
+     "14:00-16:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "chua"
+   },
+   "price": {
+    "tier": "free",
+    "note": null
+   },
+   "dwell": {
+    "p25": 15,
+    "p50": 30,
+    "p75": 50
+   },
+   "tags": {
+    "space": "both",
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "good_times": [
+     "morning",
+     "sunset"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "outdoor_exposure": 0.6,
+    "sun_exposure": 0.48,
+    "wind_exposure": 0.48,
+    "rain_cover": "mixed",
+    "exposure_source": "explicit",
+    "indoor": false,
+    "effort": 1,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "morning_cool",
+   "popularity": {
+    "signature": true,
+    "prize_prior": 0.9,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:nha tho;type:Nhà thờ Công giáo"
+    },
+    "hours": {
+     "source": "archetype:chua",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "rule_free_public",
+     "verified_by": "inferred",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:religious",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.45; signature"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:bai-tam-pham-van-dong",
+   "name": "Bãi tắm Phạm Văn Đồng",
+   "name_raw": "Bãi tắm Phạm Văn Đồng",
+   "name_en": null,
+   "lat": 16.0732782,
+   "lon": 108.2468342,
+   "category": "beach",
+   "role": "attraction",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "05:00-22:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "ngoai_troi_do_thi"
+   },
+   "price": {
+    "tier": "free",
+    "note": null
+   },
+   "dwell": {
+    "p25": 45,
+    "p50": 90,
+    "p75": 150
+   },
+   "tags": {
+    "space": "outdoor",
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "sunrise",
+     "morning",
+     "sunset"
+    ],
+    "time_budget": [
+     "half-day"
+    ],
+    "outdoor_exposure": 0.95,
+    "sun_exposure": 0.95,
+    "wind_exposure": 0.95,
+    "rain_cover": "open",
+    "exposure_source": "explicit",
+    "indoor": false,
+    "effort": 2,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "sun_anchored_beach",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.6,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:bai tam;type:Bãi biển"
+    },
+    "hours": {
+     "source": "archetype:ngoai_troi_do_thi",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "rule_free_public",
+     "verified_by": "inferred",
+     "confidence": 0.7,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:beach",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.6"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:be-man",
+   "name": "Hải Sản Bé Mặn",
+   "name_raw": "Hải Sản Bé Mặn",
+   "name_en": null,
+   "lat": 16.0820695,
+   "lon": 108.2473865,
+   "category": "restaurant",
+   "role": "meal",
+   "status": "active",
+   "status_reason": null,
+   "zone": "son_tra_my_khe",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "nha_hang"
+   },
+   "price": {
+    "tier": "medium",
+    "note": null
+   },
+   "dwell": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "tags": {
+    "space": "indoor",
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "morning",
+     "night"
+    ],
+    "time_budget": [
+     "half-day"
+    ],
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "explicit",
+    "indoor": true,
+    "effort": 1,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "meal_windows",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.45,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:hai san;type:Nhà hàng hải sản"
+    },
+    "hours": {
+     "source": "archetype:nha_hang",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "category_default:nha_hang",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=200000, max_vnd=600000, typical_vnd=400000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:restaurant",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.45"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:banh-xeo-ba-duong",
+   "name": "Bánh Xèo Bà Dưỡng",
+   "name_raw": "Bánh Xèo Bà Dưỡng",
+   "name_en": null,
+   "lat": 16.0588772,
+   "lon": 108.216166,
+   "category": "restaurant",
+   "role": "meal",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "11:00-13:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "com_trua"
+   },
+   "price": {
+    "tier": "cheap",
+    "note": "100-200k/nguoi"
+   },
+   "dwell": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "tags": {
+    "space": "indoor",
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "morning",
+     "night"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "explicit",
+    "indoor": true,
+    "effort": 1,
+    "kid_friendly": true,
+    "weather_sensitive": true
+   },
+   "time_profile": "meal_windows",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.45,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:bánh;type:Quán ăn nhỏ"
+    },
+    "hours": {
+     "source": "archetype:com_trua",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "category_default:com_trua",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo kiểu quán; VND min_vnd=30000, max_vnd=70000, typical_vnd=50000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:restaurant",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.45"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:golden-pine",
+   "name": "New Golden Pine Club",
+   "name_raw": "New Golden Pine Club",
+   "name_en": null,
+   "lat": 16.0742601,
+   "lon": 108.2290869,
+   "category": "nightlife",
+   "role": "nightlife",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "19:30-23:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "bar"
+   },
+   "price": {
+    "tier": "medium",
+    "note": null
+   },
+   "dwell": {
+    "p25": 60,
+    "p50": 90,
+    "p75": 150
+   },
+   "tags": {
+    "space": "indoor",
+    "party": [
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "night"
+    ],
+    "time_budget": [
+     "half-day"
+    ],
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "explicit",
+    "indoor": true,
+    "effort": 1,
+    "kid_friendly": false,
+    "weather_sensitive": true
+   },
+   "time_profile": "evening_peak",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.35,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "name:club;type:Hộp đêm"
+    },
+    "hours": {
+     "source": "archetype:bar",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "category_default:nightlife",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=80000, max_vnd=300000, typical_vnd=190000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:nightlife",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.35"
+    }
+   },
+   "data_version": "v2.1",
+   "valid_from": "2026-11-18",
+   "valid_to": null
+  },
+  {
+   "poi_id": "manual:sky36",
+   "name": "Sky36",
+   "name_raw": "Sky36",
+   "name_en": null,
+   "lat": 16.0771856,
+   "lon": 108.2238351,
+   "category": "nightlife",
+   "role": "nightlife",
+   "status": "active",
+   "status_reason": null,
+   "zone": "trung_tam",
+   "cluster_id": null,
+   "alt_group": null,
+   "requires_ticket_of": null,
+   "hours": {
+    "open": [
+     "19:30-23:00"
+    ],
+    "kind": "safe_window",
+    "closed_days": [],
+    "access_window": null,
+    "archetype": "bar"
+   },
+   "price": {
+    "tier": "medium",
+    "note": null
+   },
+   "dwell": {
+    "p25": 60,
+    "p50": 90,
+    "p75": 150
+   },
+   "tags": {
+    "space": "indoor",
+    "party": [
+     "couple",
+     "group"
+    ],
+    "good_times": [
+     "night"
+    ],
+    "time_budget": [
+     "quick-stop-30"
+    ],
+    "outdoor_exposure": 0.1,
+    "sun_exposure": 0.05,
+    "wind_exposure": 0.1,
+    "rain_cover": "enclosed",
+    "exposure_source": "explicit",
+    "indoor": true,
+    "effort": 1,
+    "kid_friendly": false,
+    "weather_sensitive": true
+   },
+   "time_profile": "evening_peak",
+   "popularity": {
+    "signature": false,
+    "prize_prior": 0.35,
+    "wikidata": null,
+    "wikidata_sitelinks": null,
+    "wikipedia_views_90d": null,
+    "guide_mentions": 0,
+    "michelin": false
+   },
+   "ext_ids": {
+    "osm": null,
+    "google_place_id": null
+   },
+   "provenance": {
+    "name": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "location": {
+     "source": "manual",
+     "verified_by": "agent_web",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
+    },
+    "category": {
+     "source": "rules_v2",
+     "verified_by": "inferred",
+     "confidence": 0.6,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "type:Quán bar"
+    },
+    "hours": {
+     "source": "archetype:bar",
+     "verified_by": "inferred",
+     "confidence": 0.45,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "khung an toàn theo nhóm giờ — nên kiểm tra giờ thật"
+    },
+    "price": {
+     "source": "category_default:nightlife",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=80000, max_vnd=300000, typical_vnd=190000"
+    },
+    "dwell": {
+     "source": "dwell_table_v2:nightlife",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+    },
+    "tags": {
+     "source": "rule_v1",
+     "verified_by": "inferred",
+     "confidence": 0.5,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": null
+    },
+    "popularity": {
+     "source": "prize_prior_v2:category+signature+guides+michelin+wikidata+wikipedia",
+     "verified_by": "inferred",
+     "confidence": 0.4,
+     "evidence_url": null,
+     "verified_at": null,
+     "note": "category=0.35"
     }
    },
    "data_version": "v2.1",
@@ -104021,7 +105151,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -104029,7 +105159,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -104162,7 +105292,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -104170,7 +105300,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -104444,7 +105574,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -104718,7 +105848,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -104726,7 +105856,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -104858,7 +105988,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "location": {
      "source": "manual",
@@ -104866,7 +105996,7 @@
      "confidence": 0.6,
      "evidence_url": null,
      "verified_at": null,
-     "note": "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"
+     "note": "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"
     },
     "category": {
      "source": "rules_v2",
@@ -104966,7 +106096,7 @@
      "morning"
     ],
     "time_budget": [
-     "full-day"
+     "quick-stop-30"
     ],
     "indoor": false,
     "effort": 2,
@@ -109637,7 +110767,7 @@
      "morning"
     ],
     "time_budget": [
-     "full-day"
+     "quick-stop-30"
     ],
     "indoor": false,
     "effort": 2,
@@ -110204,7 +111334,7 @@
      "morning"
     ],
     "time_budget": [
-     "full-day"
+     "quick-stop-30"
     ],
     "indoor": false,
     "effort": 2,
@@ -110345,7 +111475,7 @@
      "morning"
     ],
     "time_budget": [
-     "full-day"
+     "quick-stop-30"
     ],
     "indoor": false,
     "effort": 2,

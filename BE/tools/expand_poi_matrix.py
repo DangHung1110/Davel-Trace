@@ -16,20 +16,6 @@ Usage (repo root, OSRM up on 127.0.0.1:5000):
     python BE/tools/expand_poi_matrix.py                 # merge into matrix.json
     python BE/tools/expand_poi_matrix.py --verified-only # default: only verified
 
-Batching (G5: expand ~100 POIs per batch, run the suite between batches):
-`--offset`/`--limit` window the SORTED selection (poi_id order), so a batch is
-deterministic. The matrix must stay under `--max-table-size` (600) locations;
-`OsrmClient.table()` sends the whole point set AND asks for `--chunk` of them
-as `sources`, and OSRM counts both, so the guard is
-`existing + batch + chunk <= 600` (the >600 case applies to the BATCH, not the
-full selection). 305 new POIs in 3 batches:
-    python BE/tools/expand_poi_matrix.py --dry-run --limit 100 --offset 0
-    python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 1: 100
-    python BE/tools/expand_poi_matrix.py --limit 100 --offset 0   # batch 2: next 100
-    python BE/tools/expand_poi_matrix.py --limit 105 --offset 0   # batch 3: last 105
-Merged POIs leave the selection, so each later batch uses `--offset 0`; only
-resume a partial run against an unchanged matrix.
-
 Guards:
 - a timestamped backup of matrix.json is written OUTSIDE the repo before the
   write (override with --backup);
@@ -52,15 +38,15 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__f
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.app.services.matrix import DENSE_FORMAT  # noqa: E402
 from BE.app.services.osrm_client import OsrmClient  # noqa: E402
 
 DEFAULT_URL = "http://127.0.0.1:5000"
 DEFAULT_SNAPSHOT = os.path.join("BE", "data", "snapshots", "danang-v1")
 ROW_SEP = "->"
-# osrm-routed is started with --max-table-size 600 (see build_poi_matrix.py);
-# the point set and the `sources` chunk travel in one request, so the guard
-# reserves `chunk` headroom on top of n.
-MAX_TABLE_SIZE = 600
+# osrm-routed is started with --max-table-size 300 (see build_poi_matrix.py);
+# the whole point set travels in one request, so n must stay under it.
+MAX_TABLE_SIZE = 300
 
 
 def _has_coords(poi: dict) -> bool:
@@ -68,20 +54,13 @@ def _has_coords(poi: dict) -> bool:
             and isinstance(poi.get("lon"), (int, float)))
 
 
-def is_stop(poi: dict) -> bool:
-    """v2.1 data-freeze gate G1 scope: active and not a trip base (lodging)."""
-    return poi.get("status") == "active" and poi.get("role") != "base"
-
-
 def select_expansion(pois: list[dict], existing_ids: list[str],
-                     verified_only: bool = True, select: str = "verified") -> list[dict]:
-    """Coordinate-bearing POIs the matrix does not cover yet.
+                     verified_only: bool = True) -> list[dict]:
+    """Verified, coordinate-bearing POIs the matrix does not cover yet.
 
-    `select="verified"` (default, v1): only `verified` POIs — unverified ones
-    are excluded unless `verified_only=False` (FR-013).
-    `select="stops"` (danang-v2.1, WP7/G1): every active non-base POI, since
-    the legacy `verified` flag no longer decides eligibility.
     Sorted by poi_id so repeated runs produce an identical append order.
+    Unverified candidates are excluded unless `verified_only=False`; the
+    optimizer would never pick them anyway (FR-013).
     """
     seen = set(existing_ids)
     picked = []
@@ -89,36 +68,13 @@ def select_expansion(pois: list[dict], existing_ids: list[str],
         pid = poi.get("poi_id")
         if not pid or pid in seen:
             continue
-        if select == "stops":
-            if not is_stop(poi):
-                continue
-        elif select == "active":   # stops + trip bases (lodging: start/rest/end legs)
-            if poi.get("status") != "active":
-                continue
-        elif verified_only and poi.get("verified") is not True:
+        if verified_only and poi.get("verified") is not True:
             continue
         if not _has_coords(poi):
             continue
         picked.append(poi)
     picked.sort(key=lambda p: p["poi_id"])
     return picked
-
-
-def select_batch(selection: list[dict], offset: int = 0,
-                 limit: int | None = None) -> list[dict]:
-    """Deterministic window over an already-sorted selection (--offset/--limit).
-
-    `selection` comes from `select_expansion`, i.e. sorted by `poi_id`, so the
-    same matrix state always yields the same batch for the same window.
-    `offset` skips that many POIs; `limit=None` means "all the rest".
-    """
-    if offset < 0:
-        raise ValueError(f"offset must be >= 0, got {offset}")
-    if limit is not None and limit < 0:
-        raise ValueError(f"limit must be >= 0, got {limit}")
-    if limit is None:
-        return list(selection[offset:])
-    return list(selection[offset:offset + limit])
 
 
 def category_counts(pois: list[dict]) -> dict[str, int]:
@@ -216,16 +172,6 @@ def _backup_path(matrix_path: str) -> str:
     return os.path.join(out_dir, f"{os.path.basename(matrix_path)}.{ts}.bak")
 
 
-def _nonneg_int(value: str) -> int:
-    try:
-        n = int(value)
-    except (TypeError, ValueError):
-        raise argparse.ArgumentTypeError(f"expected an integer, got {value!r}")
-    if n < 0:
-        raise argparse.ArgumentTypeError(f"expected >= 0, got {n}")
-    return n
-
-
 def parse_args(argv=None) -> argparse.Namespace:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--snapshot-dir", default=DEFAULT_SNAPSHOT)
@@ -235,21 +181,8 @@ def parse_args(argv=None) -> argparse.Namespace:
     ap.add_argument("--chunk", type=int, default=100)
     ap.add_argument("--timeout", type=float, default=120.0)
     ap.add_argument("--backup", default="", help="default: OS temp dir, timestamped")
-    ap.add_argument("--limit", type=_nonneg_int, default=None,
-                    help="merge at most N POIs of the sorted selection (default: all)")
-    ap.add_argument("--offset", type=_nonneg_int, default=0,
-                    help="skip the first M POIs of the sorted selection (default: 0)")
     ap.add_argument("--include-unverified", action="store_true",
                     help="also add unverified POIs (NOT recommended: FR-013)")
-    ap.add_argument("--select", choices=("verified", "stops", "active"), default="verified",
-                    help="stops = every active non-base POI (danang-v2.1, gate G1); "
-                         "active = stops + lodging bases")
-    ap.add_argument("--max-table-size", type=int, default=MAX_TABLE_SIZE,
-                    help="must match osrm-routed --max-table-size")
-    ap.add_argument("--dense", action="store_true",
-                    help="write the dense_v1 format (BE/matrix_format.py); kept when the input is dense")
-    ap.add_argument("--compact", action="store_true",
-                    help="write matrix.json without indentation (large matrices)")
     ap.add_argument("--dry-run", action="store_true")
     return ap.parse_args(argv)
 
@@ -264,55 +197,31 @@ def main(argv=None) -> int:
     matrix_path = args.matrix or os.path.join(args.snapshot_dir, "matrix.json")
     with open(pois_path, encoding="utf-8") as f:
         pois = json.load(f)["pois"]
-    from BE.common import view_pois  # v2.1 records -> runtime view (cat, verified)
-    pois = view_pois(pois, os.path.dirname(os.path.abspath(pois_path)))
     with open(matrix_path, encoding="utf-8") as f:
         existing = json.load(f)
-    from BE.matrix_format import DENSE, cells_of, to_dense
-    was_dense = existing.get("format") == DENSE
-    if was_dense:   # merge works on the legacy cell dict; written back dense
-        existing = {**{k: v for k, v in existing.items() if k not in ("format", "minutes", "km")},
-                    "cells": dict(cells_of(existing))}
+    if existing.get("format") == DENSE_FORMAT:
+        # Phase 3: a dense matrix already covers every POI with coordinates;
+        # a new POI means a new snapshot, and the full rebuild takes seconds.
+        print("ERROR: dense matrix; rebuild with BE/tools/build_poi_matrix.py "
+              "--all instead of appending", file=sys.stderr)
+        return 2
 
-    selection = select_expansion(pois, existing["ids"],
-                                 verified_only=not args.include_unverified,
-                                 select=args.select)
-    new_pois = select_batch(selection, args.offset, args.limit)
-    n_existing = len(existing["ids"])
-    n_full = n_existing + len(selection)
-    n_batch = n_existing + len(new_pois)
-    print(f"matrix n={existing['n']} -> {n_full} "
-          f"(+{len(selection)} POIs); by category {category_counts(selection)}")
-    remaining = max(0, len(selection) - args.offset - len(new_pois))
-    print(f"batch: offset={args.offset} "
-          f"limit={'all' if args.limit is None else args.limit} -> "
-          f"{len(new_pois)} POIs; n={n_existing} -> {n_batch}; "
-          f"by category {category_counts(new_pois)}; remaining after batch={remaining}")
+    new_pois = select_expansion(pois, existing["ids"],
+                                verified_only=not args.include_unverified)
+    n_total = len(existing["ids"]) + len(new_pois)
+    print(f"matrix n={existing['n']} -> {n_total} "
+          f"(+{len(new_pois)} POIs); by category {category_counts(new_pois)}")
     if not new_pois:
-        if not selection:
-            print("nothing to add; matrix already covers every verified POI")
-        else:
-            print(f"nothing to add: --offset {args.offset} is past the "
-                  f"{len(selection)} selected POIs (merged POIs leave the selection; "
-                  f"re-run with --offset 0)")
+        print("nothing to add; matrix already covers every verified POI")
         return 0
     if args.dry_run:
         for p in new_pois:
             print(f"  {p['poi_id']}  {p.get('cat')}  rating={p.get('rating')}  "
                   f"{p.get('name')}")
         return 0
-    # OsrmClient.table() puts the WHOLE point set in the URL coordinates and
-    # then asks for `chunk` of them as `sources`; OSRM counts both against
-    # --max-table-size (verified: n+1 sources passes while n+chunk is rejected
-    # as TooBig), so the guard must reserve one full chunk, not just check n.
-    chunk = max(1, int(args.chunk))
-    max_table = int(args.max_table_size)
-    if n_batch + chunk > max_table:
-        room = max_table - n_existing - chunk
-        print(f"ERROR: batch of {len(new_pois)} POIs ({n_batch} points + "
-              f"{chunk} sources) > max-table-size {max_table}; "
-              f"use --limit {max(room, 0)} or fewer "
-              f"(full selection is {len(selection)} POIs — merge in batches)",
+    if n_total > MAX_TABLE_SIZE:
+        print(f"ERROR: {n_total} points > max-table-size {MAX_TABLE_SIZE}; "
+              f"raise osrm-routed --max-table-size or split the build",
               file=sys.stderr)
         return 2
 
@@ -338,12 +247,7 @@ def main(argv=None) -> int:
         json.dump(existing, f, ensure_ascii=False, indent=1)
         f.write("\n")
     with open(matrix_path, "w", encoding="utf-8") as f:
-        if was_dense or args.dense:
-            doc = to_dense(doc)
-        if args.compact or was_dense or args.dense:
-            json.dump(doc, f, ensure_ascii=False, separators=(",", ":"))
-        else:
-            json.dump(doc, f, ensure_ascii=False, indent=1)
+        json.dump(doc, f, ensure_ascii=False, indent=1)
         f.write("\n")
 
     cov = doc["coverage"]

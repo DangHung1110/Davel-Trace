@@ -1,5 +1,5 @@
 {
- "note": "21/11/2026 rà soát cuối: 33 tên VIẾT HOA TOÀN BỘ + 4 tên dấu câu thừa -> tên chuẩn (tên gốc giữ ở name_raw); 2 lỗi giờ gán nhầm từ danang-v1/hours_web.json (khoá theo tên).",
+ "note": "21/11/2026 rà soát cuối: 33 tên VIẾT HOA TOÀN BỘ + 4 tên dấu câu thừa -> tên chuẩn (tên gốc giữ ở name_raw); 2 lỗi giờ gán nhầm từ danang-v1/hours_web.json (khoá theo tên). | Đồng bộ main 21/11: \"Nhà thờ Con Gà\" (manual của main) trùng Nhà thờ Chính tòa -> excluded.",
  "items": {
   "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
    "name": "Xóm Mới Garden"
@@ -119,6 +119,10 @@
   },
   "ChIJ8zk-ZgAZQjERhiZiMzjjRe4": {
    "name": "Camy Spa Liên Chiểu"
+  },
+  "manual:nha-tho-con-ga": {
+   "status": "excluded",
+   "status_reason": "trùng với \"Nhà thờ Chính tòa Đà Nẵng\" (cách 14 m); điểm nhập tay mới của main (danang-v1)"
   }
  }
 }

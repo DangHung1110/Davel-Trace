@@ -17,7 +17,7 @@ All entities Pydantic-validated (see `contracts/api.md`).
 - State: `draft → confirmed → planned → active → done`; `active` + delta → `replanning`.
 
 ### POI (snapshot, TravelEval schema)
-- Fields: `poi_id`, `name`, `name_en?`, `type`, `lat`, `lon`, `opening_hours[]`, `visit_min{p25,p50,p75}`, `dur_source` (category_rule|llm|review_mined|actual), `dur_confidence` (low|medium|high), `price_level` 1–3, `fee`, `rating`, `tags[]`, `intensity` 1–3, `ambience`, `weather_sensitive` bool, `pros[]`, `cons[]`, `source`, `fetched_at`, `verified` bool.
+- Fields: `poi_id`, `name`, `name_en?`, `type`, `cat`, `subcat?`, `lat`, `lon`, `opening_hours[]`, `hours_by_day[7]?` (thứ 2 trước, chuỗi rỗng = nghỉ), `visit_min{p25,p50,p75}`, `dur_source` (subcat_rule|curated|google_typical|human), `dur_confidence` (low|medium|high), `price_level` 1–3, `fee`, `rating`, `review_count?`, `tags[]`, `intensity` 1–3, `ambience`, `weather_sensitive` bool, `pros[]`, `cons[]`, `source`, `fetched_at`, `verified` bool, `plan_tier` (main|local|wish_only|excluded), `plan_tier_reason?`. Xem `docs/plan-accuracy.md`.
 - Validation: unverified POIs excluded from main plan (FR-013); `fetched_at` required. Duration semantics (R8): optimizer schedules with `p50`; gate checks `p75` buffer (FR-019 hãm lịch dày); UI shows "~p25–p75 phút (ước tính)" — never as fact (constitution IV).
 - Relations: POI → N Activities; POI pair → transition features.
 

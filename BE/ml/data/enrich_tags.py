@@ -35,6 +35,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+from BE.ml.data.normalize_fields import inferred_hours_rule  # noqa: E402
 from BE.ml.patm.estimate_duration import canonical_category  # noqa: E402
 from BE.ml.weather_label.labeler import classify_poi  # noqa: E402
 
@@ -240,7 +241,8 @@ def apply_price_web(pois: list[dict], snapshot_dir: str) -> dict:
         if not p.get("opening_hours") and ev.get("hours_fill"):
             p["opening_hours"] = ev["hours_fill"]
             p["hours_source"] = "web"
-            filled += 1
+            inferred_hours_rule(p)  # a "suy luận" guess is labelled, never web fact
+            filled += bool(p["opening_hours"])
         applied += 1
     return {"applied": applied, "filled_hours": filled}
 

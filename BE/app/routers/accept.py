@@ -1,4 +1,4 @@
-"""POST /v1/accept (NOTE(test-local), do NOT PR as-is). "Chốt plan" logging.
+"""POST /v1/accept (local test router, off in production). "Chốt plan" logging.
 
 The harness operator compares generated plans and accepts the day they would
 actually ship. This endpoint persists that decision so future weight-learning

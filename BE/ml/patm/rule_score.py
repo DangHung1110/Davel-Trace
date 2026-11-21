@@ -19,6 +19,8 @@ reproduces base margins exactly):
 
 from __future__ import annotations
 
+from BE.ml.patm.estimate_duration import canonical_category
+
 TIE_MARGIN = 0.15
 
 W_INTENSITY = 0.5
@@ -27,11 +29,7 @@ W_INDOOR = 0.2
 
 
 def _canon(raw: str) -> str:
-    try:
-        from BE.ml.patm.estimate_duration import canonical_category
-        return canonical_category(raw or "")
-    except Exception:  # noqa: BLE001 - other worktrees may lack the module
-        return raw or ""
+    return canonical_category(raw or "")
 
 
 def _is_food(p: dict) -> bool:

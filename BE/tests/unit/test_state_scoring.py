@@ -12,6 +12,7 @@ from __future__ import annotations
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                 "..", "..", "..")))
@@ -333,9 +334,10 @@ class TestStateWeightTuning(unittest.TestCase):
 
     def _pick(self, weight):
         bands, scores = self._bands()
-        out = optimizer.optimize(self.POIS, self.TRAVEL, self.TRIP,
-                                 workers=1, timeout_s=5, state_bands=bands,
-                                 state_score=scores, state_weight=weight)
+        with mock.patch.object(optimizer, "STATE_WEIGHT", weight):
+            out = optimizer.optimize(self.POIS, self.TRAVEL, self.TRIP,
+                                     workers=1, timeout_s=5, state_bands=bands,
+                                     state_score=scores)
         self.assertIsNotNone(out["itinerary"])
         acts = out["itinerary"]["activities"]
         self.assertEqual(len(acts), 1, acts)

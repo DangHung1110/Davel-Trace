@@ -1,8 +1,6 @@
 """US8 integration (T048, lane B — closes US8). quickstart S5.
 
-State with 2 completed + rain DynamicEvent (STUB-NOTE: stub dict per
-data-model; real event_clf T044 classifies text at phase-PR) -> replan:
-version 1->2, completed preserved, remaining re-optimized, changes list
+State with 2 completed + rain DynamicEvent -> replan: version 1->2, completed preserved, remaining re-optimized, changes list
 keep/drop/replace/reorder.
 
 Run from repo root: python BE/tests/integration/test_us8_replan.py -v
@@ -61,11 +59,8 @@ class TestUS8Replan(unittest.TestCase):
         self.assertIn("park", drops)  # outdoor remainder replaced
         new_ids = [a["poi_id"] for a in out["itinerary"]["activities"]]
         self.assertNotIn("park", new_ids)
-        by_id = {p["poi_id"]: {"verified": True,
-                               "free_entry": p.get("free_entry") is True,
-                               "smart_tags": p.get("smart_tags") or {},
-                               "opening_hours": p["opening_hours"]}
-                 for p in POIS}
+        by_id = {p["poi_id"]: {"verified": True, "fee": p["fee"],
+                               "opening_hours": p["opening_hours"]} for p in POIS}
         done_acts = [{"poi_id": a["poi_id"], "start": a["start"], "end": a["end"]}
                      for a in s["completed"]]
         full = done_acts + out["itinerary"]["activities"]

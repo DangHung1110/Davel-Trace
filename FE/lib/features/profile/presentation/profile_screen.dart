@@ -1,0 +1,611 @@
+import 'package:flutter/material.dart';
+
+import '../../../app_state.dart';
+import '../../../shared/widgets/app_header.dart';
+import '../../../shared/widgets/surface_card.dart';
+import '../../../theme/app_theme.dart';
+import '../../management/domain/models.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({
+    super.key,
+    required this.state,
+    this.onReady,
+    this.showHeader = true,
+  });
+
+  final AppState state;
+  final VoidCallback? onReady;
+  final bool showHeader;
+
+  Future<void> _openEditor(BuildContext context, {UserProfile? profile}) async {
+    final data = await showModalBottomSheet<Map<String, dynamic>>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (_) => ProfileEditor(profile: profile),
+    );
+    if (data == null || !context.mounted) return;
+    try {
+      if (profile == null) {
+        await state.createProfile(data);
+      } else {
+        await state.updateActiveProfile(data);
+      }
+      onReady?.call();
+    } catch (_) {
+      if (context.mounted) _showError(context, state.errorMessage);
+    }
+  }
+
+  Future<void> _delete(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Xóa hồ sơ?'),
+        content: const Text(
+          'Các chuyến đi và khoản chi thuộc hồ sơ này cũng sẽ bị xóa.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Xóa'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+    try {
+      await state.deleteActiveProfile();
+    } catch (_) {
+      if (context.mounted) _showError(context, state.errorMessage);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final profile = state.activeProfile;
+    if (profile == null) {
+      return ProfileOnboarding(
+        busy: state.isMutating,
+        onSubmit: (data) async {
+          await state.createProfile(data);
+          onReady?.call();
+        },
+      );
+    }
+    return ColoredBox(
+      color: AppColors.canvas,
+      child: Column(
+        children: [
+          if (showHeader)
+            AppHeader(
+              compact: true,
+              section: 'Sở thích du lịch',
+              trailing: state.isDemoManagement
+                  ? IconButton(
+                      tooltip: 'Thêm hồ sơ',
+                      onPressed: state.isMutating
+                          ? null
+                          : () => _openEditor(context),
+                      icon: const Icon(Icons.person_add_alt_1_outlined),
+                    )
+                  : null,
+            ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 24),
+              children: [
+                Text(
+                  'Phong cách chuyến đi',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  state.isDemoManagement
+                      ? 'Tùy chọn của bản demo trên thiết bị.'
+                      : 'Dùng làm mặc định cho chuyến mới. Chuyến đã tạo giữ bản tùy chọn riêng; thay đổi ở đây không tự sửa chuyến cũ.',
+                ),
+                const SizedBox(height: 18),
+                if (state.profiles.length > 1) ...[
+                  DropdownButtonFormField<String>(
+                    isExpanded: true,
+                    key: const Key('profile-switcher'),
+                    initialValue: profile.id,
+                    decoration: const InputDecoration(
+                      labelText: 'Hồ sơ đang dùng',
+                    ),
+                    items: state.profiles
+                        .map(
+                          (item) => DropdownMenuItem(
+                            value: item.id,
+                            child: Text(item.displayName),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: state.isMutating
+                        ? null
+                        : (id) {
+                            if (id == null) return;
+                            state.selectProfile(
+                              state.profiles.firstWhere(
+                                (item) => item.id == id,
+                              ),
+                            );
+                          },
+                  ),
+                  const SizedBox(height: 14),
+                ],
+                SurfaceCard(
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.sand,
+                        child: Icon(
+                          Icons.person_outline_rounded,
+                          color: AppColors.primary,
+                          size: 30,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        profile.displayName,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 12),
+                      _ProfileRow(
+                        label: 'Kiểu nhóm',
+                        value: _party(profile.partyType),
+                      ),
+                      _ProfileRow(
+                        label: 'Mục đích',
+                        value: _purpose(profile.tripPurpose),
+                      ),
+                      _ProfileRow(label: 'Nhịp đi', value: '${profile.pace}/3'),
+                      _ProfileRow(
+                        label: 'Mức chi',
+                        value: '${profile.spendingLevel}/3',
+                      ),
+                      _ProfileRow(
+                        label: 'Ẩm thực',
+                        value: profile.foodPreferences.isEmpty
+                            ? 'Chưa đặt'
+                            : profile.foodPreferences.join(', '),
+                      ),
+                      _ProfileRow(
+                        label: 'Cần tránh',
+                        value: profile.mustAvoid.isEmpty
+                            ? 'Không có'
+                            : profile.mustAvoid.join(', '),
+                      ),
+                      _ProfileRow(
+                        label: 'Dị ứng',
+                        value: profile.allergies.isEmpty
+                            ? 'Không có'
+                            : profile.allergies.join(', '),
+                      ),
+                      _ProfileRow(
+                        label: 'Hỗ trợ',
+                        value: profile.accessibilityNeeds.isEmpty
+                            ? 'Không có'
+                            : profile.accessibilityNeeds.join(', '),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 14),
+                OutlinedButton.icon(
+                  key: const Key('edit-profile-button'),
+                  onPressed: state.isMutating
+                      ? null
+                      : () => _openEditor(context, profile: profile),
+                  icon: const Icon(Icons.edit_outlined),
+                  label: const Text('Chỉnh sở thích du lịch'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  key: const Key('offline-reset-action'),
+                  onPressed: state.isMutating
+                      ? null
+                      : () async {
+                          try {
+                            if (state.isDemoManagement) {
+                              state.resetDemoPlanning();
+                            } else {
+                              await state.resetActiveProfile();
+                            }
+                          } catch (_) {
+                            if (context.mounted) {
+                              _showError(context, state.errorMessage);
+                            }
+                          }
+                        },
+                  icon: const Icon(Icons.restart_alt_rounded),
+                  label: Text(
+                    state.isDemoManagement
+                        ? 'Dùng lại dữ liệu demo'
+                        : 'Đặt lại sở thích mặc định',
+                  ),
+                ),
+                const SizedBox(height: 8),
+                if (state.isDemoManagement)
+                  TextButton.icon(
+                    onPressed: state.isMutating ? null : () => _delete(context),
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: AppColors.error,
+                    ),
+                    label: const Text(
+                      'Xóa hồ sơ',
+                      style: TextStyle(color: AppColors.error),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileOnboarding extends StatelessWidget {
+  const ProfileOnboarding({
+    super.key,
+    required this.onSubmit,
+    required this.busy,
+  });
+  final Future<void> Function(Map<String, dynamic>) onSubmit;
+  final bool busy;
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.all(16),
+    children: [
+      Text(
+        'Sở thích du lịch',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Giúp gợi ý lịch phù hợp cho những chuyến đi mới. Đây là tùy chọn du lịch, không phải thông tin đăng nhập.',
+      ),
+      const SizedBox(height: 24),
+      ProfileEditor(key: ProfileEditor.inlineKey, inline: true),
+      const SizedBox(height: 16),
+      FilledButton(
+        key: const Key('create-first-profile-button'),
+        onPressed: busy
+            ? null
+            : () async {
+                final data = ProfileEditor.inlineKey.currentState?.submit();
+                if (data == null) return;
+                try {
+                  await onSubmit(data);
+                } catch (_) {
+                  if (context.mounted) {
+                    _showError(context, 'Không thể lưu sở thích. Hãy thử lại.');
+                  }
+                }
+              },
+        child: Text(busy ? 'Đang lưu…' : 'Lưu sở thích'),
+      ),
+    ],
+  );
+}
+
+class ProfileEditor extends StatefulWidget {
+  const ProfileEditor({super.key, this.profile, this.inline = false});
+
+  static final inlineKey = GlobalKey<ProfileEditorState>();
+
+  final UserProfile? profile;
+  final bool inline;
+
+  @override
+  State<ProfileEditor> createState() => ProfileEditorState();
+}
+
+class ProfileEditorState extends State<ProfileEditor> {
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _name;
+  late final TextEditingController _food;
+  late final TextEditingController _activities;
+  late final TextEditingController _transport;
+  late final TextEditingController _avoid;
+  late final TextEditingController _allergies;
+  late final TextEditingController _accessibility;
+  late String _party;
+  late String _purpose;
+  late double _pace;
+  late double _spending;
+
+  @override
+  void initState() {
+    super.initState();
+    final profile = widget.profile;
+    _name = TextEditingController(text: profile?.displayName ?? '');
+    _food = TextEditingController(
+      text: profile?.foodPreferences.join(', ') ?? '',
+    );
+    _activities = TextEditingController(
+      text: profile?.preferredActivities.join(', ') ?? '',
+    );
+    _transport = TextEditingController(
+      text: profile?.usualTransport.join(', ') ?? '',
+    );
+    _avoid = TextEditingController(text: profile?.mustAvoid.join(', ') ?? '');
+    _allergies = TextEditingController(
+      text: profile?.allergies.join(', ') ?? '',
+    );
+    _accessibility = TextEditingController(
+      text: profile?.accessibilityNeeds.join(', ') ?? '',
+    );
+    _party = profile?.partyType ?? 'solo';
+    _purpose = profile?.tripPurpose ?? 'leisure';
+    _pace = (profile?.pace ?? 2).toDouble();
+    _spending = (profile?.spendingLevel ?? 2).toDouble();
+  }
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _food.dispose();
+    _activities.dispose();
+    _transport.dispose();
+    _avoid.dispose();
+    _allergies.dispose();
+    _accessibility.dispose();
+    super.dispose();
+  }
+
+  Map<String, dynamic>? submit() {
+    if (!_formKey.currentState!.validate()) return null;
+    return {
+      'display_name': _name.text.trim(),
+      'language': 'vi',
+      'party_type': _party,
+      'trip_purpose': _purpose,
+      'spending_level': _spending.round(),
+      'pace': _pace.round(),
+      'fitness': 2,
+      'food_preferences': _food.text
+          .split(',')
+          .map((item) => item.trim())
+          .where((item) => item.isNotEmpty)
+          .toList(),
+      'preferred_activities': _csv(_activities.text),
+      'usual_transport': _csv(_transport.text),
+      'must_avoid': _csv(_avoid.text),
+      'allergies': _csv(_allergies.text),
+      'accessibility_needs': _csv(_accessibility.text),
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final form = Form(
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (!widget.inline) ...[
+            Text(
+              widget.profile == null
+                  ? 'Sở thích du lịch của bạn'
+                  : 'Chỉnh sở thích du lịch',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 14),
+          ],
+          TextFormField(
+            key: const Key('profile-name-field'),
+            controller: _name,
+            decoration: const InputDecoration(
+              labelText: 'Tên gọi trong hồ sơ du lịch',
+            ),
+            validator: (value) => value == null || value.trim().isEmpty
+                ? 'Nhập tên hiển thị'
+                : null,
+          ),
+          const SizedBox(height: 10),
+          DropdownButtonFormField<String>(
+            isExpanded: true,
+            initialValue: _party,
+            decoration: const InputDecoration(labelText: 'Bạn thường đi'),
+            items: const [
+              DropdownMenuItem(value: 'solo', child: Text('Một mình')),
+              DropdownMenuItem(value: 'couple', child: Text('Cặp đôi')),
+              DropdownMenuItem(value: 'family', child: Text('Gia đình')),
+              DropdownMenuItem(value: 'friends', child: Text('Nhóm bạn')),
+            ],
+            onChanged: (value) => setState(() => _party = value!),
+          ),
+          const SizedBox(height: 10),
+          DropdownButtonFormField<String>(
+            isExpanded: true,
+            initialValue: _purpose,
+            decoration: const InputDecoration(labelText: 'Mục đích chính'),
+            items: const [
+              DropdownMenuItem(value: 'leisure', child: Text('Nghỉ dưỡng')),
+              DropdownMenuItem(value: 'discovery', child: Text('Khám phá')),
+              DropdownMenuItem(value: 'food', child: Text('Ẩm thực')),
+              DropdownMenuItem(value: 'business', child: Text('Công tác')),
+            ],
+            onChanged: (value) => setState(() => _purpose = value!),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _food,
+            decoration: const InputDecoration(
+              labelText: 'Món yêu thích',
+              hintText: 'mì Quảng, hải sản',
+            ),
+          ),
+          if (!widget.inline) ...[
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _activities,
+              decoration: const InputDecoration(
+                labelText: 'Hoạt động yêu thích',
+                hintText: 'biển, bảo tàng, ẩm thực',
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _transport,
+              decoration: const InputDecoration(
+                labelText: 'Phương tiện thường dùng',
+                hintText: 'xe máy, taxi, đi bộ',
+              ),
+            ),
+            const SizedBox(height: 14),
+            const Text(
+              'Ràng buộc bắt buộc',
+              style: TextStyle(
+                color: AppColors.error,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: _avoid,
+              decoration: const InputDecoration(
+                labelText: 'Những điều cần tránh',
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _allergies,
+              decoration: const InputDecoration(labelText: 'Dị ứng'),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: _accessibility,
+              decoration: const InputDecoration(
+                labelText: 'Nhu cầu hỗ trợ tiếp cận',
+              ),
+            ),
+          ],
+          const SizedBox(height: 10),
+          Text(
+            'Nhịp đi · ${_pace.round()}/3',
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          Slider(
+            value: _pace,
+            min: 1,
+            max: 3,
+            divisions: 2,
+            onChanged: (value) => setState(() => _pace = value),
+          ),
+          Text(
+            'Mức chi · ${_spending.round()}/3',
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          Slider(
+            value: _spending,
+            min: 1,
+            max: 3,
+            divisions: 2,
+            onChanged: (value) => setState(() => _spending = value),
+          ),
+        ],
+      ),
+    );
+    if (widget.inline) {
+      return form;
+    }
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        18,
+        4,
+        18,
+        MediaQuery.viewInsetsOf(context).bottom + 18,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            form,
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                key: const Key('save-profile-button'),
+                onPressed: () {
+                  final data = submit();
+                  if (data != null) Navigator.pop(context, data);
+                },
+                child: const Text('Lưu sở thích'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProfileRow extends StatelessWidget {
+  const _ProfileRow({required this.label, required this.value});
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 7),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 90,
+          child: Text(
+            label,
+            style: const TextStyle(color: AppColors.muted, fontSize: 12),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+String _party(String value) => switch (value) {
+  'couple' => 'Cặp đôi',
+  'family' => 'Gia đình',
+  'friends' => 'Nhóm bạn',
+  _ => 'Một mình',
+};
+
+String _purpose(String value) => switch (value) {
+  'discovery' => 'Khám phá',
+  'food' => 'Ẩm thực',
+  'business' => 'Công tác',
+  _ => 'Nghỉ dưỡng',
+};
+
+List<String> _csv(String value) => value
+    .split(',')
+    .map((item) => item.trim())
+    .where((item) => item.isNotEmpty)
+    .toList();
+
+void _showError(BuildContext context, String? message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(message ?? 'Không thể hoàn tất thao tác.')),
+  );
+}

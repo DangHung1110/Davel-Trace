@@ -1,15 +1,9 @@
-"""Services package (T001, lane C). Domain services land per-lane:
-lane C (llm, parser, retrieval, ...), lane B (matrix, gate, optimizer,
-...), lane A (snapshot). No stubs here — each lane adds its own files."""
+"""Services package (T001, lane C)."""
 
 from __future__ import annotations
 
 import json
 import urllib.request
-
-# T061c: single implementation in BE/common.py; re-exported here so
-# rank/retrieval import sites stay unchanged.
-from BE.common import to_min  # noqa: F401
 
 
 def fetch_json(url: str, data: bytes | None = None, headers: dict | None = None,

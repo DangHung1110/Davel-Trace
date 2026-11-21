@@ -1,21 +1,34 @@
 """Shared stdlib glue for BE (one spot for copy-pasted helpers).
 
-T061c survivor: time <-> minutes, opening-hours parsing, plan fee/deadline
-and JSON/snapshot reads that were duplicated across `eval/`, `ml/` and the
-app services. `BE.app.services.common` re-exports these names, so lane B/C
-callers keep their imports while a single implementation lives here.
-No config, no classes, no third-party imports (DoD).
-
-ponytail: only genuinely repeated glue lives here. Domain schemas stay in
-`app/schemas/` and validated snapshot loading stays in
-`app/services/snapshot.py` (intentionally stricter, stdlib-only).
+Time <-> minutes, opening-hours parsing, plan fee/deadline and JSON/snapshot
+reads, shared by the app services, `eval/` and `ml/`. No config, no classes, no
+third-party imports (DoD).
 """
 
 from __future__ import annotations
 
+import datetime
 import json
 import os
 from typing import Any
+
+
+def to_int(value, default: int = 2) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def to_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float(default)
+
+
+def clamp01(value: float) -> float:
+    return max(0.0, min(1.0, float(value)))
 
 
 def to_min(hhmm: str) -> int:
@@ -27,11 +40,6 @@ def to_min(hhmm: str) -> int:
 def hhmm(minutes: int) -> str:
     """Minutes since midnight -> 'HH:MM'."""
     return f"{minutes // 60:02d}:{minutes % 60:02d}"
-
-
-# T061c: the survivor helpers below were copy-pasted across app services /
-# eval. They live here once; `BE.app.services.common` re-exports them.
-hh = hhmm  # lane-B alias (BE.app.services.common.hh)
 
 
 def _intervals(spec: str):
@@ -60,13 +68,34 @@ def in_range(start: int, end: int, spec: str) -> bool:
     return False
 
 
+DAY_MIN = 24 * 60
+
+
+def day_spans(spec: str) -> list[tuple[int, int]]:
+    """Sorted, merged open spans of one hours element on a same-day clock.
+
+    A span that closes at or before it opens runs past midnight, so its close
+    moves to the next day ("19:30-03:00" -> 1170..1620, "09:00-00:00" ->
+    540..1440). A day trip never uses the early-morning tail of the previous
+    evening, so that tail is not modelled here (`in_range` still accepts it).
+    """
+    spans = sorted((o, c if c > o else c + DAY_MIN) for o, c in _intervals(spec))
+    merged: list[tuple[int, int]] = []
+    for o, c in spans:
+        if merged and o <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], c))
+        else:
+            merged.append((o, c))
+    return merged
+
+
+
 def parse_windows(hours: list | None) -> list[tuple[int, int]]:
     """Every 'HH:MM-HH:MM' window of `hours` as same-day minutes, sorted.
 
     A window that wraps midnight ("17:00-02:00") or ends at "23:59" is
-    clipped to the end of the day (1440): a day plan never crosses midnight,
-    and the old first-span reader turned such a window into an impossible
-    constraint (close < open). WP3: the optimizer chooses one of these.
+    clipped to the end of the day (1440): a day plan never crosses midnight.
+    The optimizer chooses one of these (danang-v2.1 multi-window hours, WP3).
     """
     out = []
     for spec in hours or []:
@@ -76,75 +105,216 @@ def parse_windows(hours: list | None) -> list[tuple[int, int]]:
             out.append((o, c))
     return sorted(set(out))
 
+def open_windows(hours: list | None) -> list[tuple[int, int]] | None:
+    """Same-day open windows that every listed variant agrees on.
+
+    Each `opening_hours` element is one variant of the week: the crawl keeps
+    the distinct weekday ranges, e.g. ["10:30-14:00, 17:30-20:45",
+    "17:30-20:45"] = lunch closed on some days. The trip weekday is not
+    matched to them, so the safe answer is the intersection (open on every
+    variant). None = no parsable hours (caller picks the default); [] = the
+    variants share no open time.
+    """
+    variants = [s for s in (day_spans(h) for h in hours or []) if s]
+    if not variants:
+        return None
+    common = variants[0]
+    for spans in variants[1:]:
+        common = [(max(a, c), min(b, d)) for a, b in common for c, d in spans
+                  if max(a, c) < min(b, d)]
+    return sorted(common)
+
+
+# Hours assumed for a POI that has none, so a missing value never reads as
+# "open all trip" (a pagoda at 23:05). Each entry is the 15-minute slots in
+# which >= SAFE_HOURS_SHARE of that group's POIs with sourced hours are open,
+# measured on danang-v1 by `BE/ml/data/normalize_fields.py --safe-hours`
+# (test_normalize_fields fails when the table drifts from the snapshot).
+# Sightseeing categories are pooled (too few rows each). [] = no such time
+# (markets mix dawn wet markets with night markets): not schedulable until
+# real hours land. Other groups (lodging, transport) keep the trip window.
+SAFE_HOURS_SHARE = 0.9
+SIGHTSEEING_CATS = ("attraction", "beach", "landmark", "museum", "nature", "park",
+                    "temple", "viewpoint")
+SAFE_HOURS: dict[str, list[str]] = {
+    "bar": ["19:30-23:45"],
+    "cafe": ["07:30-19:30"],
+    "market": [],
+    "restaurant": ["17:00-21:00"],
+    "sightseeing": ["08:30-17:00"],
+    "spa": ["09:30-19:30"],
+}
+
+
+def hours_group(cat: str) -> str:
+    """SAFE_HOURS key of a category ("" when it has no assumed hours)."""
+    if cat in SIGHTSEEING_CATS:
+        return "sightseeing"
+    if cat == "shop":  # measured with the markets: both were one category
+        return "market"
+    return cat if cat in ("restaurant", "cafe", "bar", "spa", "market") else ""
+
+
+def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
+    """`open_windows` of the POI's hours, else of its group's SAFE_HOURS.
+
+    None = neither (the caller keeps its default, e.g. the trip window for a
+    legacy fixture without `cat`); [] = no time is safe to schedule, which is
+    also a POI closed on the trip's date (`poi_on_date`).
+    """
+    if poi.get("closed_today"):
+        return []
+    wins = open_windows(poi.get("opening_hours"))
+    if wins is not None:
+        return wins
+    safe = SAFE_HOURS.get(hours_group(poi.get("cat") or ""))
+    if safe is None:
+        return None
+    return open_windows(safe) or []
+
+
+def iso_date(date: str | None, offset: int = 0) -> str:
+    """The ISO date `offset` days after `date`; "" without a usable ISO date."""
+    try:
+        start = datetime.date.fromisoformat(date or "")
+    except (TypeError, ValueError):
+        return ""
+    return (start + datetime.timedelta(days=offset)).isoformat()
+
+
+def weekday_of(date: str | None) -> int | None:
+    """Monday = 0, as `hours_by_day` is stored; None without a usable ISO date."""
+    day = iso_date(date)
+    return datetime.date.fromisoformat(day).weekday() if day else None
+
+
+def poi_on_date(poi: dict, date: str | None) -> dict:
+    """The POI as it is on that date: that weekday's hours, or `closed_today`.
+
+    Everything downstream reads `opening_hours`, so this one projection is the
+    whole weekday logic. No date or no weekly table leaves the POI as it is
+    (`open_windows` then takes what every variant of the week agrees on).
+    """
+    day = weekday_of(date)
+    week = poi.get("hours_by_day")
+    if day is None or not week:
+        return poi
+    today = week[day]
+    return {**poi, "opening_hours": [today] if today else [], "closed_today": not today}
+
+
+def closed_weekdays(poi: dict) -> list[int]:
+    """Weekdays (Monday = 0) the weekly table says the POI is closed."""
+    return [day for day, hours in enumerate(poi.get("hours_by_day") or []) if not hours]
+
 
 def parse_hours(hours: list | None) -> tuple[int, int] | None:
-    """First 'HH:MM-HH:MM' opening span as minutes, or None when unset."""
-    if not hours:
-        return None
-    for spec in hours:
-        for o, c in _intervals(spec):
-            return o, c
-    return None
+    """First window of `open_windows` as minutes, or None when unset.
 
-
-# B5 (FULL-AUDIT v2, TAG-ONLY money): price band -> typical per-person spend.
-# Thresholds mirror `BE/ml/data/price_from_raw.py` `band()` (cheap <100k,
-# medium <=500k, expensive >500k); the midpoint is the "what a visitor
-# actually pays" figure, matching the ingest rule that bands a menu by its
-# midpoint, not its ceiling.
-#
-# PRODUCT DECISION (2026-10-29): the band IS the price truth. Chasing exact
-# VND per ticket was dropped as too costly/error-prone, so `ticket_vnd` is
-# DEPRECATED data (field kept, never read at runtime) and the legacy `fee`
-# field is likewise unread. A genuinely free POI sets `free_entry: true`
-# (there is no `free` band in the enum); band missing + no `free_entry`
-# means "giá chưa xác minh" (unknown, NOT free).
-BAND_MIDPOINT = {"cheap": 100_000, "medium": 300_000, "expensive": 700_000}
-
-
-def effective_fee(poi: dict | None) -> int | None:
-    """Known spend for one POI in VND, or None when the price is unknown.
-
-    Order (tag-only v2):
-    1. `free_entry is True` — explicit "miễn phí" -> 0;
-    2. `smart_tags.price_band` — cheap/medium/expensive -> BAND_MIDPOINT;
-    3. otherwise None = "giá chưa xác minh" (FR-024/FR-026 uncertainty).
-
-    `ticket_vnd` and the legacy `fee` field are NOT read: exact ticket chasing
-    was dropped (see the BAND_MIDPOINT note). A missing band is UNKNOWN, never
-    "miễn phí" — the old `fee = 0` default made all 742 snapshot POIs look
-    free, so the budget filter, the BCS gate and `total_cost` were vacuous
-    (FULL-AUDIT B5).
+    Variants that share no open time give (0, 0): nothing fits, rather than
+    the caller's "open all trip" default.
     """
-    if not poi:
+    windows = open_windows(hours)
+    if windows is None:
         return None
+    return windows[0] if windows else (0, 0)
+
+
+# Price level assumed for a POI with no price evidence (`price_level` null):
+# the middle band, which is what the crawl placeholder 2 used to say
+# silently. Ranking is unchanged; retrieval labels the price as unverified.
+UNKNOWN_PRICE_LEVEL = 2
+
+
+def price_level_of(poi: dict) -> int:
+    """POI price level 1..3, UNKNOWN_PRICE_LEVEL when null or absent."""
+    level = poi.get("price_level")
+    return UNKNOWN_PRICE_LEVEL if level is None else int(level)
+
+
+# Rating shrunk towards the pool by its review count (a Bayesian average): a 5.0
+# from 2 reviews says little, a 4.9 from 10,000 says a lot. Scoring on the raw
+# rating fills a rating-first day with the least-known 5.0 places. The prior sits
+# near the verified pool's mean rating, its weight near their median review count
+# (4.56 and 216 on danang-v1, Google Maps 30/10/2026).
+RATING_PRIOR = 4.5
+RATING_PRIOR_REVIEWS = 200
+# Below this a rating is an anecdote, not evidence (never "rating cao").
+FEW_REVIEWS = 20
+
+
+def trusted_rating(poi: dict) -> float:
+    """Rating to score on: the raw rating when the review count is unknown
+    (fixtures, fresh crawls); no rating stays 0, not the prior."""
+    rating = float(poi.get("rating") or 0.0)
+    reviews = poi.get("review_count")
+    if not rating or reviews is None:
+        return rating
+    return round((reviews * rating + RATING_PRIOR_REVIEWS * RATING_PRIOR)
+                 / (reviews + RATING_PRIOR_REVIEWS), 3)
+
+
+# What one person spends at a POI with no known ticket: the middle of its price
+# band (under 100k, 100-500k, over 500k per person).
+BAND_FEE_VND = {"cheap": 50_000, "medium": 300_000, "expensive": 700_000}
+# The band is one scale for a meal. A drink or a small purchase in the same band
+# costs far less: 300k for a coffee was the visible error of the old table.
+BAND_FEE_BY_CAT = {
+    "cafe": {"medium": 100_000, "expensive": 200_000},
+    "bar": {"medium": 200_000, "expensive": 400_000},
+    "shop": {"medium": 100_000, "expensive": 200_000},
+}
+# Open access: a cheap band here means free to enter, not a cheap meal.
+FREE_ENTRY_CATS = frozenset({"beach", "landmark", "nature", "park", "temple", "viewpoint"})
+# A place the review found no ticket for costs nothing to enter, whatever its band.
+NO_TICKET_FREE_CATS = FREE_ENTRY_CATS | {"museum"}
+
+
+def effective_fee(poi: dict) -> int | None:
+    """VND one person spends here: the ticket, else the middle of the price band,
+    0 for an open-access place with no ticket. None = price unknown, never "free".
+    A POI with no smart_tags (fixtures) has no band to read and keeps its `fee`."""
     price = poi.get("price")
     if isinstance(price, dict) and "tier" in price:
-        # v2.1 (WP2): one field, 4 tiers (+ included = paid via parent ticket).
+        # v2.1 (WP2): one field, 4 tiers (+ included = paid via the parent ticket).
         return TIER_MIDPOINT.get(price.get("tier"))
-    if poi.get("free_entry") is True:
+    ticket = poi.get("ticket_vnd")
+    if isinstance(ticket, int):
+        return ticket
+    fee = int(poi.get("fee") or 0)
+    tags = poi.get("smart_tags")
+    if fee > 0 or tags is None:
+        return fee
+    band, cat = tags.get("price_band"), poi.get("cat")
+    if band == "cheap" and cat in FREE_ENTRY_CATS and tags.get("ticket") is not True:
         return 0
-    band = (poi.get("smart_tags") or {}).get("price_band")
-    if isinstance(band, str):
-        band = band.strip().lower()
-    return BAND_MIDPOINT.get(band)
+    if cat in NO_TICKET_FREE_CATS and tags.get("ticket") is False:
+        return 0
+    return BAND_FEE_BY_CAT.get(cat, {}).get(band) or BAND_FEE_VND.get(band)
 
 
-def total_fee(acts: list[dict], pois: dict) -> int:
-    """Sum of KNOWN effective fees (unknown price adds 0, never assumed free)."""
-    total = 0
-    for a in acts:
-        fee = effective_fee(pois.get(a.get("poi_id")))
-        if fee is not None:
-            total += fee
-    return total
+def fee_is_estimate(poi: dict) -> bool:
+    """True when `effective_fee` comes from the price band, not from a real price."""
+    return bool(effective_fee(poi)) and not isinstance(poi.get("ticket_vnd"), int) \
+        and not int(poi.get("fee") or 0)
 
 
-def plan_cost(itinerary: dict, pois: dict) -> int:
-    """Itinerary cost: explicit `total_cost` wins, else the POI fee sum."""
+def party_size(trip: dict) -> int:
+    """People the budget covers (POI prices are per person)."""
+    return max(1, int(trip.get("travelers") or 1))
+
+
+def total_fee(acts: list[dict], pois: dict, travelers: int = 1) -> int:
+    """What the party spends at these stops (unknown POI or price counts 0)."""
+    return travelers * sum(effective_fee(pois.get(a.get("poi_id"), {}) or {}) or 0
+                           for a in acts)
+
+
+def plan_cost(itinerary: dict, pois: dict, travelers: int = 1) -> int:
+    """Itinerary cost: explicit `total_cost` wins, else what the party spends."""
     if "total_cost" in itinerary:
         return int(itinerary["total_cost"])
-    return total_fee(itinerary.get("activities", []), pois)
+    return total_fee(itinerary.get("activities", []), pois, travelers)
 
 
 def deadline(trip: dict, default: str = "18:00") -> int:
@@ -248,6 +418,8 @@ LEGACY_TYPE_VI = {
 _TAG_RENAME_BACK = {"good_times": "time", "time_budget": "budget"}
 _TAG_NOT_SMART = {"indoor", "effort", "kid_friendly", "weather_sensitive"}
 
+WEEKDAYS_V21 = ("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")   # hours.closed_days codes
+
 _QUARANTINE_CACHE: dict[str, dict] = {}
 
 
@@ -302,6 +474,12 @@ def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = Non
     if demo and hours.get("kind") != "fixed" and q.get("hours_open"):
         open_ = list(q["hours_open"])          # Google every-day hours (demo only)
     v["opening_hours"] = [", ".join(open_)] if open_ else []
+    # closed_days (Mo..Su) -> the weekly table main's weekday logic reads
+    # (`hours_by_day`, Monday = 0, "" = closed; `poi_on_date` -> closed_today)
+    closed = set(hours.get("closed_days") or [])
+    if closed and open_:
+        day = ", ".join(open_)
+        v["hours_by_day"] = ["" if d in closed else day for d in WEEKDAYS_V21]
 
     dwell = poi.get("dwell") or {}
     v["visit_min"] = {k: dwell.get(k) for k in ("p25", "p50", "p75")}
@@ -350,22 +528,10 @@ def view_pois(pois: list[dict], snapshot_dir: str | None = None,
     return [poi_view(p, policy, q) for p in pois]
 
 
-def matrix_path(snapshot_dir: str) -> str:
-    """Path of the snapshot's matrix.json.
+def load_matrix_cells(snapshot_dir: str):
+    """<snapshot_dir>/matrix.json -> cells Mapping (legacy dict or dense-v1).
 
-    A snapshot may hold `matrix_ref.json` ({"matrix_from": "<relative path>"})
-    instead of its own copy when its poi_ids are identical to another
-    snapshot's (danang-v2 reuses danang-v1's 26 MB matrix).
+    Raises FileNotFoundError like before when the snapshot has no matrix.
     """
-    own = os.path.join(snapshot_dir, "matrix.json")
-    ref = os.path.join(snapshot_dir, "matrix_ref.json")
-    if not os.path.exists(own) and os.path.exists(ref):
-        target = load_json(ref).get("matrix_from", "")
-        return os.path.normpath(os.path.join(snapshot_dir, target))
-    return own
-
-
-def load_matrix_cells(snapshot_dir: str) -> dict:
-    """Read the snapshot's matrix (see `matrix_path`) -> cells dict."""
-    from BE.matrix_format import cells_of
-    return cells_of(load_json(matrix_path(snapshot_dir)))
+    from BE.app.services.matrix import load_matrix_doc
+    return load_matrix_doc(os.path.join(snapshot_dir, "matrix.json"))["cells"]

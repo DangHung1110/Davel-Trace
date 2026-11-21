@@ -1,97 +1,56 @@
 """Canonical gate registry (T011 + T061f), shared by validator + evaluator.
 
-ONE registry for the gate checks (fixes X8 "2 bộ cổng"): gate.py owns the
-formulas, `BE/eval/metrics.py` imports `CHECKS` and reads their `score`.
-Every check returns the canonical shape ``{"passed": bool, "score": float}``
-with a finite score in [0, 1]:
-- FAR: no activity on unknown/unverified POI (FR-013); score = verified
-  ratio.
-- VROH: no activity outside POI opening hours (SC-006); score = compliant
-  ratio.
-- B3: no broken transit buffer — every consecutive transition's gap fits
-  the matrix travel minutes (R4/B3: a missing cell is infeasible, never
-  0/haversine); score = compliant transition ratio.
-- BCS: total cost within budget (SC-008).
-- ETB: the last activity ends by the deadline = min(end_time, return_time);
-  `return_time` is a HARD within-day cap, never silently stretched to
-  end_time (an evening extension must be a new, re-gated plan).
-- A1: at most one `restaurant` POI per meal slot (lunch 11:00-14:00,
-  dinner 17:00-21:00), by activity start time. Two lunches is not a
-  preference, it is a broken plan (data-quality pass, test-local).
-- CAFE_CAP: one `cafe` per day by default. A second cafe passes only when
-  the two are in different dayparts (morning start < 11:00 and afternoon
-  start > 13:00) AND the profile shows a cafe need (food_prefs/activities
-  mention cafe/coffee, or pace == 3). More than two cafes is always HARD.
-  score = allowed cafes / actual cafes.
-- CATEGORY_CAP: at most ONE non-food POI per category per day (market,
-  landmark, beach, attraction, temple, museum, park, viewpoint). A second one
-  is a HARD violation, no profile exemption; meals keep A1/CAFE_CAP.
-  score = allowed capped visits / actual capped visits.
-- NO_CONSECUTIVE: no two back-to-back POIs of the same category. No
-  exemptions: cafe->cafe is a broken plan now (it stays only as the SOFT
-  B1 edge penalty). This is the CANONICAL adjacency rule; the scan lives in
-  `soft_rules.same_category_edges`. score = compliant transition ratio.
-- NO_ADJACENT_FOOD (DEPRECATED, subsumed by NO_CONSECUTIVE): no two
-  back-to-back `restaurant` POIs, ANY cuisine (BBQ->vegan included). A strict
-  subset of NO_CONSECUTIVE (both read `poi_category`), kept in the registry
-  for named reporting/compat and computed by the SAME scan with
-  `only="restaurant"` — never a second predicate. See `RULE_FREEZE`.
-  score = compliant transition ratio.
-- REST_FOLLOWS_LUNCH: the siesta starts at the lunch restaurant's end
-  (lunch = restaurant starting 11:00-13:00), length by pace (60/45/30),
-  shrunk for a late lunch (floor 20 min) and with no other POI inside.
-  Legacy plans (no onboarding profile) pass vacuously.
-  score = compliant activity ratio.
-- F1 (SOFT): every day needs at least one food POI (`restaurant`/`cafe`)
-  AND at least one culture/nature/sightseeing POI (`attraction`,
-  `landmark`, `museum`, `park`, `beach`, `viewpoint`, `nature`). A plan
-  that is all food is semantically poor, not infeasible: F1 is in the
-  registry but listed in `SOFT_CHECKS`, so it reports a violation/penalty
-  and never fail-closes (score = satisfied halves / 2).
-- TCS: time mirror — VROH/B3/ETB all pass AND no overlap AND every
-  activity fits [start_time, deadline].
-- HCS: hard mirror — the concrete gates (incl. A1, CAFE_CAP, CATEGORY_CAP,
-  NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH) pass AND must_visit
-  present AND avoid absent. Soft checks (F1) are NOT mirrored. The deprecated
-  NO_ADJACENT_FOOD stays in the mirror only as the compat view of
-  NO_CONSECUTIVE (see `RULE_FREEZE`); it adds no constraint of its own.
+ONE registry for the gate checks: gate.py owns the formulas, `BE/eval/metrics.py`
+imports `CHECKS`. Every check takes the shared plain dicts (itinerary, trip, pois,
+matrix) and returns ``{"passed": bool, "score": float}`` with a score in [0, 1].
 
-Inputs are the shared plain dicts (itinerary/trip/pois/matrix) used by the
-validator (T049) and the tier-1 evaluator.
+HARD (fail-closed): FAR (verified POIs), PROFILE_SAFE (allergy / must_avoid /
+accessibility, re-checked on the final plan), VROH (opening hours), B3 (gaps fit the
+matrix; a missing cell is infeasible), BCS (budget), ETB (deadline = min(end_time,
+return_time)), A1 (one restaurant per meal slot), CAFE_CAP, CATEGORY_CAP,
+NO_CONSECUTIVE, NO_ADJACENT_FOOD (deprecated view of NO_CONSECUTIVE),
+REST_FOLLOWS_LUNCH, and the mirrors TCS (time) and HCS (every hard gate + must_visit
+and avoid).
+SOFT (reported, never fail-closes, `SOFT_CHECKS`): F1 (food and sightseeing in a day),
+TIME_FIT (each stop at an hour it makes sense), DINNER.
 
-RULE_FREEZE (below) is the single audit surface for "which rule owns what":
-one canonical rule per group, the duplicates kept in code but marked
-deprecated with a reason and their canonical owner. Nothing is deleted and no
-pass/fail semantics change: a deprecated rule that still executes is computed
-from the canonical implementation, so it can never disagree with it.
+RULE_FREEZE (below) is the single audit surface for "which rule owns what": one
+canonical rule per group, the duplicates marked deprecated with a reason and their
+owner. A deprecated rule that still executes is computed from the canonical
+implementation, so it can never disagree with it.
 """
 
 from __future__ import annotations
+
+import functools
 
 from BE.app.services.soft_rules import (
     CAFE_DEFAULT_CAP,
     CAFE_MAX_CAP,
     CATEGORY_DAILY_CAP,
+    DINNER_REQUIRED,
     MEAL_SLOTS,
     NON_FOOD_CAPPED,
     REST_START_TOLERANCE,
     cafe_daypart,
     cafe_need,
+    covers_dinner,
     covers_slot,
     effective_rest,
+    fits_time_of_day,
     is_food,
     is_meal_experience,
     is_sightseeing,
     lunch_activity,
+    lunch_on_site,
     meal_slot,
     meal_window_present,
     poi_category,
     rest_span,
     same_category_edges,
 )
-from BE.common import deadline, in_range, plan_cost, to_min
-
-EPS = 1e-9
+from BE.app.services.profile_filter import drop_reason
+from BE.common import deadline, in_range, party_size, plan_cost, to_min
 
 
 def _result(passed: bool, score: float | None = None) -> dict:
@@ -107,6 +66,26 @@ def _ordered(itinerary: dict) -> list[dict]:
     return sorted(itinerary.get("activities", []), key=lambda a: a["start"])
 
 
+def split_days(itinerary: dict) -> list[dict]:
+    """One itinerary per `day` (multiday.py); a one-day plan is returned as it is."""
+    days: dict = {}
+    for act in itinerary.get("activities", []):
+        days.setdefault(act.get("day"), []).append(act)
+    if len(days) <= 1:
+        return [itinerary]
+    return [{**itinerary, "activities": days[day]} for day in sorted(days, key=lambda d: d or 0)]
+
+
+def _per_day(check):
+    """A rule of one day: on a longer trip every day must pass it on its own
+    (clock times repeat across days, and each day has its own caps and lunch)."""
+    @functools.wraps(check)
+    def wrapped(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+        results = [check(day, trip, pois, matrix) for day in split_days(itinerary)]
+        return _result(all(r["passed"] for r in results), min(r["score"] for r in results))
+    return wrapped
+
+
 def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff every activity uses a verified POI (non-empty plan)."""
     acts = itinerary.get("activities", [])
@@ -118,6 +97,19 @@ def check_far(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(bad == 0, 1.0 - bad / len(acts))
 
 
+def check_profile_safe(itinerary: dict, trip: dict, pois: dict,
+                       matrix: dict) -> dict:
+    """Pass iff no activity hits the profile's allergy/must_avoid/access rule."""
+    profile = trip.get("profile") or {}
+    acts = itinerary.get("activities", [])
+    if not acts or not any(profile.get(k) for k in
+                           ("allergy", "must_avoid", "accessibility")):
+        return _result(True, 1.0)
+    bad = sum(1 for a in acts
+              if drop_reason(pois.get(a.get("poi_id")) or {}, profile))
+    return _result(bad == 0, 1.0 - bad / len(acts))
+
+
 def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff every activity fits opening hours; score = compliant ratio."""
     acts = itinerary.get("activities", [])
@@ -125,13 +117,15 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
         return _result(True, 1.0)
     bad = 0
     for a in acts:
-        hours = (pois.get(a.get("poi_id"), {}) or {}).get("opening_hours") or []
+        poi = pois.get(a.get("poi_id"), {}) or {}
+        hours = poi.get("opening_hours") or []
         s, e = to_min(a["start"]), to_min(a["end"])
-        if hours and not any(in_range(s, e, h) for h in hours):
+        if poi.get("closed_today") or (hours and not any(in_range(s, e, h) for h in hours)):
             bad += 1
     return _result(bad == 0, 1.0 - bad / len(acts))
 
 
+@_per_day
 def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff each gap fits matrix travel time; score = compliant ratio."""
     acts = _ordered(itinerary)
@@ -148,7 +142,7 @@ def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff total cost is within budget (one formula, both sides)."""
-    cost = plan_cost(itinerary, pois)
+    cost = plan_cost(itinerary, pois, party_size(trip))
     return _result(cost <= int(trip.get("budget", 0)))
 
 
@@ -161,6 +155,7 @@ def check_etb(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(last_end <= deadline(trip))
 
 
+@_per_day
 def check_a1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Pass iff at most one restaurant sits inside each meal slot.
 
@@ -187,6 +182,7 @@ def check_a1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(over == 0, 1.0 - over / total if total else 1.0)
 
 
+@_per_day
 def check_cafe_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """HARD cafe quota: 1/day; 2 only split across dayparts with a cafe need.
 
@@ -209,6 +205,7 @@ def check_cafe_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dic
     return _result(False, min(1.0, CAFE_DEFAULT_CAP / count))
 
 
+@_per_day
 def check_category_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """HARD daily category cap: at most ONE non-food POI per category.
 
@@ -236,6 +233,7 @@ def check_category_cap(itinerary: dict, trip: dict, pois: dict, matrix: dict) ->
     return _result(over == 0, 1.0 - over / total)
 
 
+@_per_day
 def check_no_consecutive(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """CANONICAL adjacency rule: no two back-to-back POIs of the same category.
 
@@ -252,6 +250,7 @@ def check_no_consecutive(itinerary: dict, trip: dict, pois: dict, matrix: dict) 
     return _result(bad == 0, 1.0 - bad / (len(acts) - 1))
 
 
+@_per_day
 def check_no_adjacent_food(itinerary: dict, trip: dict, pois: dict,
                            matrix: dict) -> dict:
     """DEPRECATED (kept for named reporting): adjacent restaurants.
@@ -281,7 +280,7 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     or a trip that cannot hold the lunch window at all), else
     ``(reason, offending_poi_ids)``:
     - ``REST_NO_LUNCH``: a lunch window exists but no restaurant starts in
-      11:00-13:00;
+      11:00-13:00 and no all-day stop runs through it (`lunch_on_site`);
     - ``REST_BAD_WINDOW``: the declared/derived siesta does not start at the
       lunch end (0..REST_START_TOLERANCE) or has the wrong length for the
       pace (a structural failure: the window itself is wrong);
@@ -301,6 +300,10 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     acts = _ordered(itinerary)
     lunch = lunch_activity(acts, pois)
     if lunch is None:
+        if lunch_on_site(acts, pois) is not None:
+            # An all-day place (soft_rules.ALL_DAY_MIN) feeds its visitors and is
+            # where they rest: there is no drive to a restaurant to follow.
+            return None
         return (REST_NO_LUNCH, [])
     span = rest_span(acts, pois, profile, deadline(trip))
     if span is None:  # defensive: lunch_activity already proved a lunch
@@ -320,6 +323,7 @@ def rest_rule_violation(itinerary: dict, trip: dict,
     return ("", offenders)
 
 
+@_per_day
 def check_rest_follows_lunch(itinerary: dict, trip: dict, pois: dict,
                              matrix: dict) -> dict:
     """HARD: the siesta exists and starts at the lunch restaurant's end.
@@ -343,6 +347,7 @@ def check_rest_follows_lunch(itinerary: dict, trip: dict, pois: dict,
     return _result(False, 1.0 - len(offenders) / others if others else 1.0)
 
 
+@_per_day
 def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """SOFT category quota: >=1 food AND >=1 sightseeing per day.
 
@@ -360,6 +365,29 @@ def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(met == 2, met / 2.0)
 
 
+def check_time_fit(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """SOFT: every stop the planner chose sits at an hour it makes sense."""
+    acts = [a for a in itinerary.get("activities", [])
+            if a.get("poi_id") not in (trip.get("must_visit") or [])]
+    if not acts:
+        return _result(True, 1.0)
+    bad = sum(1 for a in acts if not fits_time_of_day(pois.get(a.get("poi_id")),
+                                                      to_min(a["start"]), to_min(a["end"])))
+    return _result(bad == 0, 1.0 - bad / len(acts))
+
+
+@_per_day
+def check_dinner(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """SOFT: a planned day (`meals`) that runs through dinner has one."""
+    acts = itinerary.get("activities", [])
+    if not acts or not trip.get("meals") or not covers_dinner(trip):
+        return _result(True, 1.0)
+    return _result(any(poi_category(pois.get(a.get("poi_id"), {})) == "restaurant"
+                       and DINNER_REQUIRED[0] <= to_min(a["start"]) < DINNER_REQUIRED[1]
+                       for a in acts))
+
+
+@_per_day
 def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Time mirror: VROH/B3/ETB + no overlap + inside [start, deadline]."""
     if not all(check(itinerary, trip, pois, matrix)["passed"]
@@ -380,14 +408,17 @@ def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """Hard mirror: concrete gates (incl. A1/CAFE_CAP/sequence/rest) + HCS."""
     if not all(check(itinerary, trip, pois, matrix)["passed"]
-               for check in (check_far, check_vroh, check_b3,
+               for check in (check_far, check_profile_safe, check_vroh, check_b3,
                              check_bcs, check_etb, check_a1,
                              check_cafe_cap, check_category_cap,
                              check_no_consecutive,
                              check_no_adjacent_food, check_rest_follows_lunch)):
         return _result(False)
     ids = [a.get("poi_id") for a in itinerary.get("activities", [])]
-    if any(m in ids for m in trip.get("avoid", [])):
+    if any(m in ids for m in trip.get("avoid", [])) or len(ids) != len(set(ids)):
+        return _result(False)
+    # FR-020: a trip of N days is N days of stops, not one day and a promise.
+    if len(split_days(itinerary)) < int(trip.get("days") or 1):
         return _result(False)
     must = trip.get("must_visit", [])
     if must and not all(m in ids for m in must):
@@ -395,18 +426,20 @@ def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(True)
 
 
-CHECKS = (("FAR", check_far), ("VROH", check_vroh),
+CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
+          ("VROH", check_vroh),
           ("B3", check_b3), ("BCS", check_bcs), ("ETB", check_etb),
           ("A1", check_a1), ("CAFE_CAP", check_cafe_cap),
           ("CATEGORY_CAP", check_category_cap),
           ("NO_CONSECUTIVE", check_no_consecutive),
           ("NO_ADJACENT_FOOD", check_no_adjacent_food),
           ("REST_FOLLOWS_LUNCH", check_rest_follows_lunch),
-          ("F1", check_f1), ("TCS", check_tcs), ("HCS", check_hcs))
+          ("F1", check_f1), ("TIME_FIT", check_time_fit), ("DINNER", check_dinner),
+          ("TCS", check_tcs), ("HCS", check_hcs))
 
-# F1 is a quality quota, not feasibility: it is reported but never
-# fail-closes a plan (SOFT severity, test-local). Everything else is hard.
-SOFT_CHECKS = frozenset({"F1"})
+# F1, TIME_FIT and DINNER are quality, not feasibility: they are reported but never
+# fail-closes a plan. Everything else is hard.
+SOFT_CHECKS = frozenset({"F1", "TIME_FIT", "DINNER"})
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
 
@@ -431,6 +464,11 @@ RULE_FREEZE: dict[str, dict] = {
         "status": "active", "canonical": None, "family": "safety",
         "reason": "unknown/unverified POI is unsafe; hard safety gate, "
                   "kept untouched",
+    },
+    "PROFILE_SAFE": {
+        "status": "active", "canonical": None, "family": "safety",
+        "reason": "allergy/must_avoid/accessibility re-checked on the final "
+                  "plan (defence in depth behind profile_filter.hard_filter)",
     },
     "VROH": {
         "status": "active", "canonical": None, "family": "hours",
@@ -492,13 +530,25 @@ RULE_FREEZE: dict[str, dict] = {
     "REST_FOLLOWS_LUNCH": {
         "status": "active", "canonical": None, "family": "rest",
         "reason": "canonical siesta rule: start at lunch end, length by pace; "
-                  "one definition (`rest_rule_violation`) for gate+validator",
+                  "one definition (`rest_rule_violation`) for gate+validator. An "
+                  "all-day stop through the lunch window is the lunch, eaten and "
+                  "rested on site (`soft_rules.lunch_on_site`)",
     },
     # Soft layer (soft_rules.py); statuses live here so there is ONE registry.
     "F1": {
         "status": "active", "canonical": None, "family": "variety",
         "reason": ">=1 food AND >=1 sightseeing per day; SOFT (reported, "
                   "never fail-closes)",
+    },
+    "TIME_FIT": {
+        "status": "active", "canonical": None, "family": "time-fit",
+        "reason": "a stop at an hour it makes sense, by category; SOFT (the "
+                  "solver windows own it, the ladder may relax it for a wish)",
+    },
+    "DINNER": {
+        "status": "active", "canonical": None, "family": "meal-slot",
+        "reason": "a planned day through dinner has one; SOFT (the ladder drops "
+                  "it, with a warning, when money or hours cannot hold it)",
     },
     "A2": {
         "status": "active", "canonical": None, "family": "meal-spacing",
@@ -571,17 +621,6 @@ def freeze_drift(itinerary: dict, trip: dict, pois: dict,
             continue
         drift.append(name)
     return drift
-
-
-def all_pass(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Compatibility summary over HARD checks: {"passed", "failed"}.
-
-    Soft checks (F1) are surfaced by `validator.validate` under
-    `soft_violations`, deliberately not here.
-    """
-    failed = [name for name, fn in HARD_CHECKS
-              if not fn(itinerary, trip, pois, matrix)["passed"]]
-    return {"passed": not failed, "failed": failed}
 
 
 def report(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:

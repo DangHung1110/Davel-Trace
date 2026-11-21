@@ -64,6 +64,21 @@ Lớp theo suất chỉ gợi ý khi người dùng muốn trải nghiệm ẩm 
 
 **Yêu cầu.** Yêu cầu lịch trình mang ngày đi (`date`); bộ lọc loại POI có thứ đó trong `closed_days`; gate kiểm lại.
 
+**Cập nhật sau đồng bộ `main` (21/11).** `main` đã có logic theo thứ: `hours_by_day` + `BE.common.poi_on_date` → `closed_today`. `poi_view` giờ chuyển `closed_days` của v2 thành `hours_by_day`, nên khi trip có `date` thì phần của `main` tự áp cho v2. Còn lại: kiểm tra đầu-cuối khi chuyển runtime sang v2.
+
 ## A8. Export cho model đọc từ bản ghi v2.1 cuối
 
 Đã sửa 21/11 (`write_exports`): trước đó `poi_features.csv` lấy từ bản ghi trung gian nên lệch `pois.json` ở 63 trạng thái và 5 loại. Test `test_16_export_matches_snapshot` giữ hai bên khớp. Pipeline train mới nên đọc `poi_features.csv` hoặc trực tiếp `pois.json`, không đọc `archive_fields.json`.
+
+## A9. Chuyển runtime sang danang-v2 trên platform của `main`
+
+**Vì sao.** Sau khi đồng bộ 21/11, `main` vẫn chạy mặc định `danang-v1` (`BE/app/core/config.py`). Planner của `main` đọc thêm những trường v2 chưa có:
+- `plan_tier` (main / local / excluded) và `plan_tier_reason`: dùng cho tầng "ước muốn" của `retrieve`;
+- `review_count`: dùng cho `trusted_rating`, rating Google co về trung bình theo số review;
+- `subcat`.
+
+**Yêu cầu.**
+1. `poi_view` sinh `plan_tier` từ dữ liệu sạch của v2 (vd. `status`, `prize_prior`, `hours.kind`, `signature`), không lấy từ Google. `trusted_rating` đọc `prize_prior` thay cho rating × review_count khi `GOOGLE_POLICY=cach_ly`.
+2. Chạy lại `reports/p0/15_ut_sufficiency` và `16_context_sufficiency` trên **ma trận xe máy**: các số hiện tại đo trên ma trận ô tô, mà thời gian xe máy dài hơn 1,67 lần (trung vị).
+3. Đổi `snapshot_dir` mặc định chỉ khi gold v2 ≥ v1 trên planner của `main` (hiện 27/30 so với 26/30).
+

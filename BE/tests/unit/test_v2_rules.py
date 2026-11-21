@@ -2,7 +2,6 @@
 
 import os
 import sys
-import tempfile
 import json
 import unittest
 
@@ -11,7 +10,6 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 
 import v2_rules as R  # noqa: E402
-from BE.common import matrix_path  # noqa: E402
 
 
 class TestFoldAndMatch(unittest.TestCase):
@@ -123,20 +121,6 @@ class TestPrices(unittest.TestCase):
                          {"min": 400000, "max": None})
         self.assertEqual(R.parse_user_price("user: Xanh 150k-1200k, vote medium"),
                          {"min": 150000, "max": 1200000})
-
-
-class TestMatrixRef(unittest.TestCase):
-    def test_matrix_ref_is_followed(self):
-        with tempfile.TemporaryDirectory() as d:
-            os.makedirs(os.path.join(d, "a"))
-            os.makedirs(os.path.join(d, "b"))
-            with open(os.path.join(d, "a", "matrix.json"), "w") as f:
-                json.dump({"cells": {}}, f)
-            with open(os.path.join(d, "b", "matrix_ref.json"), "w") as f:
-                json.dump({"matrix_from": "../a/matrix.json"}, f)
-            self.assertEqual(os.path.normpath(matrix_path(os.path.join(d, "b"))),
-                             os.path.normpath(os.path.join(d, "a", "matrix.json")))
-            self.assertEqual(matrix_path(os.path.join(d, "a")), os.path.join(d, "a", "matrix.json"))
 
 
 if __name__ == "__main__":

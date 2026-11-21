@@ -15,7 +15,7 @@ Nhánh chức năng, không worktree. Không push thẳng main/dev. Không commi
 - Ống: parse (NL→TripRequest, có /no_think + normalize ""→default, hết 503) → profile 10 mục catalog (onboard UI 3 archetype A/B/C + tùy tay, localStorage) → template khung ngày → CP-SAT + PATM + state động → hard gates → LLM review/repair → evaluate
 - Kỷ luật ngày: ăn đúng bữa, nghỉ bám bữa (45/30p theo pace), cafe ≤2 khác buổi, cấm kề quán/kề loại, cap 1/ngày phi-ăn, bữa theo phủ giờ
 - Đa dạng: pool MMR + Jaccard + `?diverse=true`; default profiles = cả 3, pairwise Jaccard ≤0.6
-- Ma trận 193 POI / 37.249 cell, 48 verified routable; weather live Open-Meteo; CORS allow-all TEST-ONLY (siết trước PR)
+- Ma trận 193 POI / 37.249 cell, 48 verified routable; weather live Open-Meteo; CORS theo `CORS_ORIGINS`, `APP_ENV=production` tắt router test (`BE/README.md`)
 - `FE/test_harness.html` + `FE/onboard.html` là công cụ test (chưa commit)
 
 ## Thứ tự đã chốt (đừng đảo)
@@ -26,7 +26,7 @@ Nhánh chức năng, không worktree. Không push thẳng main/dev. Không commi
 - Rank (so N plan chọn hay nhất) KHÁC review (chê 1 plan + veto): giữ cả hai, rank không thay review
 
 ## Còn lại
-- User test lại → gom 2 PR vào dev: (1) data+matrix+gate/rule (2) planner+FE. Siết CORS + quét secret trước khi đẩy.
+- User test lại → gom 2 PR vào dev: (1) data+matrix+gate/rule (2) planner+FE. Quét secret trước khi đẩy.
 - Harness hiện tên POI (thay id) — nhét vào lane PR.
 - Nợ biết rõ: quán hải sản chưa thắng quán 4.9 (taste vào node optimizer — lát 2); viewpoint pool thiếu; review LLM nondeterministic ở lỗi nhẹ (bảo đảm bằng gate); parse flake đã giảm chưa hết hẳn (bấm lại là qua).
 - Paper related-work: /tmp/llm_itinerary_papers.md, diversity_papers.md, novelty_papers.md, meal_state_papers.md, stable_planning_papers.md

@@ -3,22 +3,22 @@
  "seed": 7,
  "policy": "cach_ly",
  "v1": {
-  "eligible": 410,
+  "eligible": 549,
   "records": 30,
-  "feasible": 30,
-  "infeasible": 0,
-  "gate_pass": 27,
-  "gate_pass_rate": 0.9,
-  "mean_activities": 4.63
+  "feasible": 26,
+  "infeasible": 4,
+  "gate_pass": 26,
+  "gate_pass_rate": 0.867,
+  "mean_activities": 3.88
  },
  "v2": {
-  "eligible": 861,
+  "eligible": 868,
   "records": 30,
-  "feasible": 30,
-  "infeasible": 0,
-  "gate_pass": 30,
-  "gate_pass_rate": 1.0,
-  "mean_activities": 4.53
+  "feasible": 27,
+  "infeasible": 3,
+  "gate_pass": 27,
+  "gate_pass_rate": 0.9,
+  "mean_activities": 3.89
  },
  "suite_v2": [
   {
@@ -26,28 +26,47 @@
    "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 1 triệu",
    "trip": {
     "budget": 1000000,
+    "travelers": 1,
     "start_time": "07:00",
     "end_time": "12:00",
     "must_visit": [
-     "ChIJgaLldI0ZQjEReQCfThP_6CQ",
-     "osm:node/11888483369"
+     "osm:node/10723988763",
+     "osm:way/448044645"
     ],
     "avoid": [
      "ChIJ78thjjYYQjERkiy-c9ebVPE"
     ],
     "order_prefs": [
      [
-      "ChIJgaLldI0ZQjEReQCfThP_6CQ",
-      "osm:node/11888483369"
+      "osm:node/10723988763",
+      "osm:way/448044645"
      ]
+    ],
+    "activities": [
+     "tắm biển",
+     "hải sản"
     ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
+      "poi_id": "osm:node/10723988763",
       "start": "07:00",
-      "end": "07:40",
+      "end": "07:20",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -55,9 +74,9 @@
       }
      },
      {
-      "poi_id": "ChIJHQpEDCAXQjERnXmpQofhDWw",
-      "start": "08:00",
-      "end": "08:50",
+      "poi_id": "osm:way/448044645",
+      "start": "07:38",
+      "end": "08:08",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -65,29 +84,9 @@
       }
      },
      {
-      "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
-      "start": "08:54",
-      "end": "09:24",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
-      "start": "09:25",
-      "end": "10:40",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/11888483369",
-      "start": "10:45",
-      "end": "11:45",
+      "poi_id": "osm:node/5595997721",
+      "start": "11:00",
+      "end": "12:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -103,11 +102,11 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.85,
+    "DTU": 0.367,
     "SSR": 1.0,
-    "CSM": 0.65,
+    "CSM": 0.75,
     "EDI": 1.0,
-    "AQE": 0.82
+    "AQE": 0.803
    }
   },
   {
@@ -115,18 +114,37 @@
    "prefs_text": "cuối tuần đi Đà Nẵng 2 người 5 triệu thích leo núi rồi đi biển",
    "trip": {
     "budget": 5000000,
+    "travelers": 2,
     "start_time": "07:00",
     "end_time": "18:00",
     "must_visit": [],
     "avoid": [
      "ChIJ4UuIQXgXQjERz192UgYuxMU"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+      "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
       "start": "08:00",
       "end": "08:50",
       "explanation": {
@@ -136,7 +154,134 @@
       }
      },
      {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
+      "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
+      "start": "08:53",
+      "end": "09:33",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
+      "start": "11:00",
+      "end": "12:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
+      "start": "14:00",
+      "end": "14:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+      "start": "14:31",
+      "end": "15:46",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM",
+      "start": "15:47",
+      "end": "17:17",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
+      "start": "17:21",
+      "end": "17:51",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.568,
+    "SSR": 1.0,
+    "CSM": 0.66,
+    "EDI": 1.0,
+    "AQE": 0.8
+   }
+  },
+  {
+   "query_id": "q03",
+   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 5 triệu thích văn hóa và ẩm thực",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "ChIJzYULZMgRQjERYRTCyEgKZUY",
+     "ChIJA-NYRUwXQjER4pvBUQyoo8U"
+    ],
+    "avoid": [
+     "ChIJR7_4DdYYQjERUNxW7r51REs"
+    ],
+    "order_prefs": [
+     [
+      "ChIJzYULZMgRQjERYRTCyEgKZUY",
+      "ChIJA-NYRUwXQjER4pvBUQyoo8U"
+     ]
+    ],
+    "activities": [
+     "bảo tàng"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
+      "start": "08:00",
+      "end": "08:50",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJzYULZMgRQjERYRTCyEgKZUY",
       "start": "10:00",
       "end": "11:30",
       "explanation": {
@@ -146,108 +291,9 @@
       }
      },
      {
-      "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
-      "start": "11:31",
-      "end": "12:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "12:33",
-      "end": "14:57",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
-      "start": "15:01",
-      "end": "16:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
-      "start": "16:34",
-      "end": "17:34",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.748,
-    "SSR": 1.0,
-    "CSM": 0.87,
-    "EDI": 1.0,
-    "AQE": 0.763
-   }
-  },
-  {
-   "query_id": "q03",
-   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 5 triệu thích văn hóa và ẩm thực",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [
-     "ChIJoyYaBewXQjEROdwfQaOB610",
-     "ChIJ8WgvsE8ZQjERZzNoKTBgM84"
-    ],
-    "avoid": [
-     "ChIJR7_4DdYYQjERUNxW7r51REs"
-    ],
-    "order_prefs": [
-     [
-      "ChIJoyYaBewXQjEROdwfQaOB610",
-      "ChIJ8WgvsE8ZQjERZzNoKTBgM84"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
-      "start": "09:00",
-      "end": "10:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/5273998823",
-      "start": "10:35",
-      "end": "10:55",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJ8WgvsE8ZQjERZzNoKTBgM84",
-      "start": "11:06",
-      "end": "11:56",
+      "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
+      "start": "11:34",
+      "end": "11:54",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -264,10 +310,10 @@
    "soft": {
     "STR": 1.0,
     "DTU": 0.533,
-    "SSR": 1.0,
-    "CSM": 0.94,
+    "SSR": 0.0,
+    "CSM": 0.76,
     "EDI": 1.0,
-    "AQE": 0.792
+    "AQE": 0.776
    }
   },
   {
@@ -275,40 +321,36 @@
    "prefs_text": "cuối tuần đi Đà Nẵng 4 người 3 triệu thích check-in trung tâm",
    "trip": {
     "budget": 3000000,
+    "travelers": 4,
     "start_time": "07:00",
     "end_time": "12:00",
     "must_visit": [],
     "avoid": [
      "ChIJpSDE_bUXQjERRvGyIAFWpeE"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
+      "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
+      "start": "11:00",
+      "end": "12:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -324,11 +366,11 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.9,
+    "DTU": 0.2,
     "SSR": 1.0,
-    "CSM": 1.0,
+    "CSM": 0.667,
     "EDI": 1.0,
-    "AQE": 0.892
+    "AQE": 0.78
    }
   },
   {
@@ -336,21 +378,182 @@
    "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 1 triệu",
    "trip": {
     "budget": 1000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJN16-6x0fQjERlJytS0E3Kx8",
+     "ChIJe4p5ow8YQjERbmoA9Ml2JCk"
+    ],
+    "avoid": [
+     "osm:node/13687068650"
+    ],
+    "order_prefs": [
+     [
+      "ChIJN16-6x0fQjERlJytS0E3Kx8",
+      "ChIJe4p5ow8YQjERbmoA9Ml2JCk"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": null,
+   "infeasible": "must_visit ChIJN16-6x0fQjERlJytS0E3Kx8 exceeds hours/window",
+   "gate": null,
+   "soft": null
+  },
+  {
+   "query_id": "q06",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 5 triệu",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJ7fA2ROsZQjERuQWylV-XvDg"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
+      "start": "13:00",
+      "end": "14:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM",
+      "start": "15:05",
+      "end": "15:35",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
+      "start": "15:41",
+      "end": "16:21",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
+      "start": "16:41",
+      "end": "17:01",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
+      "start": "17:04",
+      "end": "17:54",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.767,
+    "SSR": 1.0,
+    "CSM": 0.96,
+    "EDI": 1.0,
+    "AQE": 0.811
+   }
+  },
+  {
+   "query_id": "q07",
+   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 3 triệu thích leo núi rồi đi biển",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
     "start_time": "07:00",
     "end_time": "18:00",
     "must_visit": [
      "osm:node/11888483369",
-     "ChIJ7fA2ROsZQjERuQWylV-XvDg"
+     "ChIJ9_dffMQQQjERuJbqVGdSysY"
     ],
     "avoid": [
-     "osm:node/11645353169"
+     "ChIJPYQKSAAXQjER0cga1BLD_MI"
     ],
     "order_prefs": [
      [
       "osm:node/11888483369",
-      "ChIJ7fA2ROsZQjERuQWylV-XvDg"
+      "ChIJ9_dffMQQQjERuJbqVGdSysY"
      ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
     ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
@@ -365,9 +568,9 @@
       }
      },
      {
-      "poi_id": "ChIJz0Od5IUXQjERmAV9JgLRqm8",
-      "start": "11:00",
-      "end": "12:00",
+      "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
+      "start": "08:17",
+      "end": "08:37",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -375,9 +578,9 @@
       }
      },
      {
-      "poi_id": "osm:way/149699484",
-      "start": "12:02",
-      "end": "12:42",
+      "poi_id": "osm:node/2093848431",
+      "start": "08:38",
+      "end": "11:08",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -385,7 +588,7 @@
       }
      },
      {
-      "poi_id": "ChIJuzoag4EXQjERm__A5Whnw5I",
+      "poi_id": "ChIJO9OcO7kQQjERuGR5zEtpfu8",
       "start": "14:00",
       "end": "14:30",
       "explanation": {
@@ -395,9 +598,9 @@
       }
      },
      {
-      "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
-      "start": "14:33",
-      "end": "15:33",
+      "poi_id": "ChIJ82_sTbkQQjERQ5jmVkoovic",
+      "start": "14:31",
+      "end": "15:46",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -405,19 +608,9 @@
       }
      },
      {
-      "poi_id": "ChIJd1ac6eUXQjERQdIGPn3xFwI",
-      "start": "15:36",
-      "end": "16:26",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJ7fA2ROsZQjERuQWylV-XvDg",
-      "start": "16:27",
-      "end": "17:57",
+      "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
+      "start": "15:50",
+      "end": "16:40",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -433,200 +626,48 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.591,
+    "DTU": 0.583,
     "SSR": 1.0,
-    "CSM": 0.35,
+    "CSM": 0.867,
     "EDI": 1.0,
-    "AQE": 0.791
-   }
-  },
-  {
-   "query_id": "q06",
-   "prefs_text": "cuối tuần đi Đà Nẵng 1 người 5 triệu thích biển và hải sản",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "13:00",
-    "end_time": "18:00",
-    "must_visit": [],
-    "avoid": [
-     "ChIJ5xkIv7EZQjERDZQIupNo09w"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-      "start": "13:00",
-      "end": "13:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "13:51",
-      "end": "15:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "15:23",
-      "end": "17:47",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.947,
-    "SSR": 1.0,
-    "CSM": 0.94,
-    "EDI": 1.0,
-    "AQE": 0.76
-   }
-  },
-  {
-   "query_id": "q07",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 3 triệu, ưu tiên leo núi rồi đi biển",
-   "trip": {
-    "budget": 3000000,
-    "start_time": "07:00",
-    "end_time": "18:00",
-    "must_visit": [
-     "osm:node/10709724107",
-     "ChIJFzkgXmA9QjERbjn2eoPqMn8"
-    ],
-    "avoid": [
-     "ChIJXeXlix8ZQjERx9QsmNqx6_U"
-    ],
-    "order_prefs": [
-     [
-      "osm:node/10709724107",
-      "ChIJFzkgXmA9QjERbjn2eoPqMn8"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:01",
-      "end": "10:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
-      "start": "10:32",
-      "end": "12:02",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
-      "start": "12:04",
-      "end": "13:04",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
-      "start": "13:05",
-      "end": "14:35",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
-      "start": "14:41",
-      "end": "15:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
-      "start": "15:36",
-      "end": "18:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.961,
-    "SSR": 1.0,
-    "CSM": 0.75,
-    "EDI": 1.0,
-    "AQE": 0.795
+    "AQE": 0.801
    }
   },
   {
    "query_id": "q08",
-   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 1 triệu thích văn hóa và ẩm thực",
+   "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 1 triệu, ưu tiên văn hóa và ẩm thực",
    "trip": {
     "budget": 1000000,
+    "travelers": 2,
     "start_time": "13:00",
     "end_time": "18:00",
     "must_visit": [],
     "avoid": [
-     "manual:vinwonders-nam-hoi-an"
+     "ChIJFzkgXmA9QjERbjn2eoPqMn8"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+      "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
       "start": "13:00",
       "end": "13:50",
       "explanation": {
@@ -636,9 +677,9 @@
       }
      },
      {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "13:51",
-      "end": "15:21",
+      "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
+      "start": "13:52",
+      "end": "15:22",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -646,556 +687,7 @@
       }
      },
      {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "15:23",
-      "end": "17:47",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.947,
-    "SSR": 1.0,
-    "CSM": 0.7,
-    "EDI": 1.0,
-    "AQE": 0.76
-   }
-  },
-  {
-   "query_id": "q09",
-   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 3 triệu thích check-in trung tâm",
-   "trip": {
-    "budget": 3000000,
-    "start_time": "13:00",
-    "end_time": "18:00",
-    "must_visit": [
-     "osm:way/210966819",
-     "osm:node/4225643190"
-    ],
-    "avoid": [
-     "ChIJLX9s7EUbQjERdsy67X5-NrE"
-    ],
-    "order_prefs": [
-     [
-      "osm:way/210966819",
-      "osm:node/4225643190"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "osm:way/210966819",
-      "start": "13:00",
-      "end": "13:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/632030501",
-      "start": "13:31",
-      "end": "14:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/631074714",
-      "start": "14:22",
-      "end": "15:37",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/565280048",
-      "start": "15:39",
-      "end": "16:39",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/35952574",
-      "start": "16:41",
-      "end": "17:01",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/4225643190",
-      "start": "17:03",
-      "end": "17:33",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.883,
-    "SSR": 1.0,
-    "CSM": 0.883,
-    "EDI": 1.0,
-    "AQE": 0.812
-   }
-  },
-  {
-   "query_id": "q10",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 1 triệu",
-   "trip": {
-    "budget": 1000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [],
-    "avoid": [
-     "osm:node/11423808688"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.9,
-    "SSR": 1.0,
-    "CSM": 1.0,
-    "EDI": 1.0,
-    "AQE": 0.892
-   }
-  },
-  {
-   "query_id": "q11",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 5 triệu",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "07:00",
-    "end_time": "18:00",
-    "must_visit": [
-     "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
-     "osm:node/10760853506"
-    ],
-    "avoid": [
-     "ChIJ7YfDY2QXQjERS2EcCR3hj0U"
-    ],
-    "order_prefs": [
-     [
-      "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
-      "osm:node/10760853506"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
-      "start": "07:00",
-      "end": "07:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/14067929701",
-      "start": "08:00",
-      "end": "08:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJyUfZ9fAZQjERIMtiBaxkTko",
-      "start": "10:00",
-      "end": "11:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/4294143691",
-      "start": "14:00",
-      "end": "14:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
-      "start": "14:34",
-      "end": "15:34",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/5273998823",
-      "start": "15:38",
-      "end": "15:58",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10760853506",
-      "start": "16:29",
-      "end": "17:59",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.561,
-    "SSR": 1.0,
-    "CSM": 0.75,
-    "EDI": 1.0,
-    "AQE": 0.796
-   }
-  },
-  {
-   "query_id": "q12",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 5 triệu",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [],
-    "avoid": [
-     "ChIJwandNwA9QjERWjnwsYXsQrk"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.9,
-    "SSR": 1.0,
-    "CSM": 1.0,
-    "EDI": 1.0,
-    "AQE": 0.892
-   }
-  },
-  {
-   "query_id": "q13",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 3 triệu, ưu tiên văn hóa và ẩm thực",
-   "trip": {
-    "budget": 3000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [
-     "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
-     "osm:node/6252089286"
-    ],
-    "avoid": [
-     "ChIJaQNtm9IfQjERhfrVRYqgA1M"
-    ],
-    "order_prefs": [
-     [
-      "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
-      "osm:node/6252089286"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
-      "start": "09:00",
-      "end": "09:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
-      "start": "09:32",
-      "end": "09:52",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/6252089286",
-      "start": "10:23",
-      "end": "11:53",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.467,
-    "SSR": 1.0,
-    "CSM": 0.9,
-    "EDI": 1.0,
-    "AQE": 0.773
-   }
-  },
-  {
-   "query_id": "q14",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 1 triệu, ưu tiên check-in trung tâm",
-   "trip": {
-    "budget": 1000000,
-    "start_time": "07:00",
-    "end_time": "18:00",
-    "must_visit": [],
-    "avoid": [
-     "ChIJsSD2e3kfQjER2d_jnMVrKZ4"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-      "start": "08:00",
-      "end": "08:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "10:00",
-      "end": "11:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
-      "start": "11:31",
-      "end": "12:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "12:33",
-      "end": "14:57",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
-      "start": "15:01",
-      "end": "16:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
-      "start": "16:34",
-      "end": "17:34",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.748,
-    "SSR": 1.0,
-    "CSM": 0.35,
-    "EDI": 1.0,
-    "AQE": 0.763
-   }
-  },
-  {
-   "query_id": "q15",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 5 triệu",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "13:00",
-    "end_time": "18:00",
-    "must_visit": [
-     "ChIJSZabUwAZQjERqs6A8ECVnWY",
-     "osm:node/7208591085"
-    ],
-    "avoid": [
-     "ChIJLWoAs80ZQjERLKHDYD-ZymI"
-    ],
-    "order_prefs": [
-     [
-      "ChIJSZabUwAZQjERqs6A8ECVnWY",
-      "osm:node/7208591085"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJSZabUwAZQjERqs6A8ECVnWY",
-      "start": "13:00",
-      "end": "15:24",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJsVPjaP8YQjER76Ao_3tvppY",
+      "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
       "start": "15:25",
       "end": "15:55",
       "explanation": {
@@ -1205,9 +697,9 @@
       }
      },
      {
-      "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
-      "start": "15:56",
-      "end": "16:26",
+      "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
+      "start": "15:58",
+      "end": "17:13",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1215,8 +707,93 @@
       }
      },
      {
-      "poi_id": "osm:node/7208591085",
-      "start": "16:54",
+      "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+      "start": "17:16",
+      "end": "17:46",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.917,
+    "SSR": 1.0,
+    "CSM": 0.3,
+    "EDI": 1.0,
+    "AQE": 0.772
+   }
+  },
+  {
+   "query_id": "q09",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: check-in trung tâm, ngân sách 3 triệu",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJQRIRJDIYQjER4JvYKu_Qnak",
+     "osm:node/6224346486"
+    ],
+    "avoid": [
+     "ChIJEXMOHVMXQjER479UZE7C59c"
+    ],
+    "order_prefs": [
+     [
+      "ChIJQRIRJDIYQjER4JvYKu_Qnak",
+      "osm:node/6224346486"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
+      "start": "13:00",
+      "end": "13:50",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/6224346486",
+      "start": "14:43",
+      "end": "16:13",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/6257424485",
+      "start": "16:14",
       "end": "17:44",
       "explanation": {
        "evidence": [
@@ -1233,32 +810,48 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.847,
+    "DTU": 0.767,
     "SSR": 1.0,
-    "CSM": 0.98,
+    "CSM": 0.633,
     "EDI": 1.0,
-    "AQE": 0.795
+    "AQE": 0.772
    }
   },
   {
-   "query_id": "q16",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 3 triệu",
+   "query_id": "q10",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 1 triệu",
    "trip": {
-    "budget": 3000000,
+    "budget": 1000000,
+    "travelers": 1,
     "start_time": "07:00",
-    "end_time": "18:00",
+    "end_time": "12:00",
     "must_visit": [],
     "avoid": [
-     "ChIJ9Zlonv0YQjERUTfuOADyciU"
+     "osm:node/10536187009"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-      "start": "08:00",
-      "end": "08:50",
+      "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
+      "start": "07:00",
+      "end": "07:50",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1266,7 +859,17 @@
       }
      },
      {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
+      "poi_id": "osm:way/404714309",
+      "start": "08:00",
+      "end": "08:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJv1gepxMZQjER2xJtkXvi9xU",
       "start": "10:00",
       "end": "11:30",
       "explanation": {
@@ -1276,39 +879,9 @@
       }
      },
      {
-      "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
-      "start": "11:31",
-      "end": "12:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "12:33",
-      "end": "14:57",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
-      "start": "15:01",
-      "end": "16:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
-      "start": "16:34",
-      "end": "17:34",
+      "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
+      "start": "11:33",
+      "end": "11:53",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1324,40 +897,59 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.748,
+    "DTU": 0.633,
     "SSR": 1.0,
-    "CSM": 0.783,
+    "CSM": 0.7,
     "EDI": 1.0,
-    "AQE": 0.763
+    "AQE": 0.872
    }
   },
   {
-   "query_id": "q17",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 1 triệu",
+   "query_id": "q11",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 5 triệu",
    "trip": {
-    "budget": 1000000,
-    "start_time": "13:00",
+    "budget": 5000000,
+    "travelers": 1,
+    "start_time": "07:00",
     "end_time": "18:00",
     "must_visit": [
-     "ChIJzRc5EgIZQjERKvXOUUpbcKA",
-     "ChIJwUTwp4IZQjERHfo3HZIYvzo"
+     "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
+     "osm:node/7155363886"
     ],
     "avoid": [
-     "ChIJe3Ixim4XQjERbbrbMnyhr34"
+     "osm:node/10763332205"
     ],
     "order_prefs": [
      [
-      "ChIJzRc5EgIZQjERKvXOUUpbcKA",
-      "ChIJwUTwp4IZQjERHfo3HZIYvzo"
+      "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
+      "osm:node/7155363886"
      ]
+    ],
+    "activities": [
+     "tắm biển",
+     "hải sản"
     ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJzRc5EgIZQjERKvXOUUpbcKA",
-      "start": "13:00",
-      "end": "14:30",
+      "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
+      "start": "08:00",
+      "end": "08:50",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1365,9 +957,9 @@
       }
      },
      {
-      "poi_id": "osm:node/4294139091",
-      "start": "14:32",
-      "end": "15:02",
+      "poi_id": "osm:node/7155363886",
+      "start": "10:00",
+      "end": "11:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1375,9 +967,9 @@
       }
      },
      {
-      "poi_id": "ChIJqSwlvMkZQjERE_9aVr3pkes",
-      "start": "15:12",
-      "end": "16:12",
+      "poi_id": "osm:node/11896339273",
+      "start": "11:01",
+      "end": "11:41",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1385,9 +977,9 @@
       }
      },
      {
-      "poi_id": "ChIJFYLgeggZQjERgwxGcK7JcpQ",
-      "start": "16:14",
-      "end": "16:34",
+      "poi_id": "osm:node/13426342201",
+      "start": "11:42",
+      "end": "12:42",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1395,9 +987,39 @@
       }
      },
      {
-      "poi_id": "ChIJwUTwp4IZQjERHfo3HZIYvzo",
-      "start": "16:40",
-      "end": "17:30",
+      "poi_id": "osm:node/5325684221",
+      "start": "12:43",
+      "end": "14:13",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/11609574104",
+      "start": "14:14",
+      "end": "15:14",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/11581690669",
+      "start": "15:15",
+      "end": "15:45",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/13164974235",
+      "start": "15:46",
+      "end": "16:46",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1413,101 +1035,138 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.833,
+    "DTU": 0.682,
     "SSR": 1.0,
-    "CSM": 0.65,
+    "CSM": 0.73,
     "EDI": 1.0,
-    "AQE": 0.772
+    "AQE": 0.778
    }
   },
   {
-   "query_id": "q18",
+   "query_id": "q12",
+   "prefs_text": "cuối tuần đi Đà Nẵng 4 người 5 triệu thích leo núi rồi đi biển",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJh8C0GlYXQjERhjmDp-ik-Uc"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+      "start": "07:30",
+      "end": "08:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/12803739945",
+      "start": "11:00",
+      "end": "12:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.4,
+    "SSR": 1.0,
+    "CSM": 0.6,
+    "EDI": 1.0,
+    "AQE": 0.88
+   }
+  },
+  {
+   "query_id": "q13",
    "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 3 triệu",
    "trip": {
     "budget": 3000000,
-    "start_time": "13:00",
-    "end_time": "18:00",
-    "must_visit": [],
-    "avoid": [
-     "ChIJX_rcYHQZQjERQXQ9UxHmHN4"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-      "start": "13:00",
-      "end": "13:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "13:51",
-      "end": "15:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "15:23",
-      "end": "17:47",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.947,
-    "SSR": 1.0,
-    "CSM": 0.9,
-    "EDI": 1.0,
-    "AQE": 0.76
-   }
-  },
-  {
-   "query_id": "q19",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 1 triệu, ưu tiên check-in trung tâm",
-   "trip": {
-    "budget": 1000000,
+    "travelers": 1,
     "start_time": "07:00",
     "end_time": "12:00",
     "must_visit": [
-     "ChIJoyYaBewXQjEROdwfQaOB610",
-     "ChIJJexJsaUXQjERb9rmSRBkLf0"
+     "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+     "osm:node/9921315929"
     ],
     "avoid": [
-     "osm:node/5513474821"
+     "ChIJ7YfDY2QXQjERS2EcCR3hj0U"
     ],
     "order_prefs": [
      [
-      "ChIJoyYaBewXQjEROdwfQaOB610",
-      "ChIJJexJsaUXQjERb9rmSRBkLf0"
+      "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+      "osm:node/9921315929"
      ]
+    ],
+    "activities": [
+     "bảo tàng"
     ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
+      "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+      "start": "08:00",
+      "end": "08:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/9921315929",
       "start": "09:00",
-      "end": "10:30",
+      "end": "09:30",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1515,9 +1174,9 @@
       }
      },
      {
-      "poi_id": "osm:node/5273998823",
-      "start": "10:35",
-      "end": "10:55",
+      "poi_id": "ChIJZdLv8rkZQjERIhU2VsEsCl4",
+      "start": "09:33",
+      "end": "10:23",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1525,7 +1184,7 @@
       }
      },
      {
-      "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
+      "poi_id": "ChIJ1yFjaOwZQjERO43leJW7YHk",
       "start": "11:00",
       "end": "12:00",
       "explanation": {
@@ -1545,28 +1204,44 @@
     "STR": 1.0,
     "DTU": 0.567,
     "SSR": 1.0,
-    "CSM": 0.7,
+    "CSM": 0.883,
     "EDI": 1.0,
-    "AQE": 0.799
+    "AQE": 0.792
    }
   },
   {
-   "query_id": "q20",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 5 triệu, ưu tiên yên tĩnh hẹn hò",
+   "query_id": "q14",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: check-in trung tâm, ngân sách 1 triệu",
    "trip": {
-    "budget": 5000000,
+    "budget": 1000000,
+    "travelers": 4,
     "start_time": "07:00",
     "end_time": "18:00",
     "must_visit": [],
     "avoid": [
-     "ChIJw2G2IwAfQjERGAvvbDnKLHM"
+     "ChIJwandNwA9QjERWjnwsYXsQrk"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+      "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
       "start": "08:00",
       "end": "08:50",
       "explanation": {
@@ -1576,9 +1251,9 @@
       }
      },
      {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "10:00",
-      "end": "11:30",
+      "poi_id": "ChIJgaLldI0ZQjEReQCfThP_6CQ",
+      "start": "08:51",
+      "end": "09:31",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1586,9 +1261,9 @@
       }
      },
      {
-      "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
-      "start": "11:31",
-      "end": "12:31",
+      "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
+      "start": "09:36",
+      "end": "10:36",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1596,256 +1271,7 @@
       }
      },
      {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "12:33",
-      "end": "14:57",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
-      "start": "15:01",
-      "end": "16:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
-      "start": "16:34",
-      "end": "17:34",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.748,
-    "SSR": 1.0,
-    "CSM": 0.87,
-    "EDI": 1.0,
-    "AQE": 0.763
-   }
-  },
-  {
-   "query_id": "q21",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 5 triệu",
-   "trip": {
-    "budget": 5000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [
-     "osm:node/3760247201",
-     "ChIJ95sVZAAZQjERaWAzQF3vSiQ"
-    ],
-    "avoid": [
-     "osm:node/5798643153"
-    ],
-    "order_prefs": [
-     [
-      "osm:node/3760247201",
-      "ChIJ95sVZAAZQjERaWAzQF3vSiQ"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "osm:node/3760247201",
-      "start": "08:00",
-      "end": "08:30",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJxzo3j9EZQjER785qACnbIW0",
-      "start": "08:33",
-      "end": "09:23",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/5273998823",
-      "start": "09:25",
-      "end": "09:45",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/7095169369",
-      "start": "09:51",
-      "end": "10:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
-      "start": "10:28",
-      "end": "11:58",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.733,
-    "SSR": 1.0,
-    "CSM": 0.93,
-    "EDI": 1.0,
-    "AQE": 0.782
-   }
-  },
-  {
-   "query_id": "q22",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 3 triệu, ưu tiên leo núi rồi đi biển",
-   "trip": {
-    "budget": 3000000,
-    "start_time": "07:00",
-    "end_time": "12:00",
-    "must_visit": [],
-    "avoid": [
-     "osm:node/7095169369"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.9,
-    "SSR": 1.0,
-    "CSM": 1.0,
-    "EDI": 1.0,
-    "AQE": 0.892
-   }
-  },
-  {
-   "query_id": "q23",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 1 triệu, ưu tiên văn hóa và ẩm thực",
-   "trip": {
-    "budget": 1000000,
-    "start_time": "07:00",
-    "end_time": "18:00",
-    "must_visit": [
-     "osm:node/4347237636",
-     "ChIJeYxRAo8ZQjERawBcqjOhTRQ"
-    ],
-    "avoid": [
-     "osm:node/12603319867"
-    ],
-    "order_prefs": [
-     [
-      "osm:node/4347237636",
-      "ChIJeYxRAo8ZQjERawBcqjOhTRQ"
-     ]
-    ]
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "osm:node/4347237636",
-      "start": "09:00",
-      "end": "10:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/616910526",
-      "start": "10:01",
-      "end": "10:51",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/6956509385",
-      "start": "10:52",
-      "end": "11:52",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:way/210933183",
+      "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
       "start": "14:00",
       "end": "14:30",
       "explanation": {
@@ -1855,19 +1281,9 @@
       }
      },
      {
-      "poi_id": "osm:way/631074714",
-      "start": "14:35",
-      "end": "15:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJeYxRAo8ZQjERawBcqjOhTRQ",
-      "start": "16:22",
-      "end": "17:52",
+      "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
+      "start": "14:38",
+      "end": "15:38",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1883,30 +1299,54 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.553,
+    "DTU": 0.364,
     "SSR": 1.0,
-    "CSM": 0.2,
+    "CSM": 0.4,
     "EDI": 1.0,
-    "AQE": 0.778
+    "AQE": 0.807
    }
   },
   {
-   "query_id": "q24",
-   "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 5 triệu, ưu tiên check-in trung tâm",
+   "query_id": "q15",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 5 triệu",
    "trip": {
     "budget": 5000000,
+    "travelers": 2,
     "start_time": "13:00",
     "end_time": "18:00",
-    "must_visit": [],
-    "avoid": [
-     "osm:node/7477670191"
+    "must_visit": [
+     "osm:node/14337980312",
+     "ChIJxdBK6SsYQjERYojL_cVEkbs"
     ],
-    "order_prefs": []
+    "avoid": [
+     "ChIJu2GuJRIXQjERzmEF0pBtsgM"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/14337980312",
+      "ChIJxdBK6SsYQjERYojL_cVEkbs"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+      "poi_id": "osm:node/14337980312",
       "start": "13:00",
       "end": "13:50",
       "explanation": {
@@ -1916,9 +1356,9 @@
       }
      },
      {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "13:51",
-      "end": "15:21",
+      "poi_id": "ChIJxdBK6SsYQjERYojL_cVEkbs",
+      "start": "14:54",
+      "end": "15:24",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1926,9 +1366,29 @@
       }
      },
      {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "15:23",
-      "end": "17:47",
+      "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
+      "start": "15:25",
+      "end": "16:25",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "manual:cau-tinh-yeu",
+      "start": "16:26",
+      "end": "16:46",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/13293564930",
+      "start": "16:47",
+      "end": "17:17",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1944,38 +1404,49 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.947,
+    "DTU": 0.633,
     "SSR": 1.0,
     "CSM": 0.94,
     "EDI": 1.0,
-    "AQE": 0.76
+    "AQE": 0.807
    }
   },
   {
-   "query_id": "q25",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: yên tĩnh hẹn hò, ngân sách 3 triệu",
+   "query_id": "q16",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 3 triệu, ưu tiên biển và hải sản",
    "trip": {
     "budget": 3000000,
+    "travelers": 1,
     "start_time": "07:00",
     "end_time": "18:00",
-    "must_visit": [
-     "ChIJVbx5NwAXQjERS9yRLPkJZ_I",
-     "ChIJuaI3VgMZQjER0B4a7LcJ-YA"
-    ],
+    "must_visit": [],
     "avoid": [
-     "osm:node/4389441895"
+     "ChIJg85mY5EZQjERXv4xH_p-_MI"
     ],
-    "order_prefs": [
-     [
-      "ChIJVbx5NwAXQjERS9yRLPkJZ_I",
-      "ChIJuaI3VgMZQjER0B4a7LcJ-YA"
-     ]
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
     ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJVbx5NwAXQjERS9yRLPkJZ_I",
+      "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
       "start": "10:00",
       "end": "11:30",
       "explanation": {
@@ -1985,9 +1456,9 @@
       }
      },
      {
-      "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
-      "start": "11:32",
-      "end": "12:02",
+      "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
+      "start": "11:31",
+      "end": "12:01",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -1995,9 +1466,9 @@
       }
      },
      {
-      "poi_id": "ChIJz3rG-N0XQjERVs2Zo-BWxwQ",
+      "poi_id": "ChIJdyMboI8ZQjERY5aq4y19Nfg",
       "start": "12:04",
-      "end": "13:34",
+      "end": "13:04",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2005,9 +1476,9 @@
       }
      },
      {
-      "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
-      "start": "13:36",
-      "end": "14:36",
+      "poi_id": "osm:node/5273998822",
+      "start": "13:07",
+      "end": "13:27",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2015,9 +1486,9 @@
       }
      },
      {
-      "poi_id": "osm:way/149699484",
-      "start": "14:37",
-      "end": "15:17",
+      "poi_id": "ChIJW9b8Ky0XQjERPn8CJNdE0Lk",
+      "start": "14:00",
+      "end": "14:30",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2025,9 +1496,9 @@
       }
      },
      {
-      "poi_id": "ChIJuaI3VgMZQjER0B4a7LcJ-YA",
-      "start": "15:27",
-      "end": "15:57",
+      "poi_id": "ChIJiaXn52YXQjERbd2jnJ1Xmg0",
+      "start": "14:34",
+      "end": "15:24",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2035,9 +1506,9 @@
       }
      },
      {
-      "poi_id": "ChIJAZKjQVIZQjERmZdYEcKV5Go",
-      "start": "15:58",
-      "end": "17:28",
+      "poi_id": "ChIJw-jjo3IXQjERjDCm-Yd0EAA",
+      "start": "17:00",
+      "end": "18:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2053,99 +1524,57 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.652,
+    "DTU": 0.515,
     "SSR": 1.0,
-    "CSM": 0.65,
+    "CSM": 0.717,
     "EDI": 1.0,
-    "AQE": 0.779
+    "AQE": 0.795
    }
   },
   {
-   "query_id": "q26",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: biển và hải sản, ngân sách 1 triệu",
+   "query_id": "q17",
+   "prefs_text": "cuối tuần đi Đà Nẵng 1 người 1 triệu thích leo núi rồi đi biển",
    "trip": {
     "budget": 1000000,
-    "start_time": "13:00",
-    "end_time": "18:00",
-    "must_visit": [],
-    "avoid": [
-     "ChIJ7bDAtv8YQjERj0Fj9FcnHgA"
-    ],
-    "order_prefs": []
-   },
-   "itinerary": {
-    "activities": [
-     {
-      "poi_id": "ChIJw4WrdmsZQjERRCJKWvRJHtI",
-      "start": "13:00",
-      "end": "13:50",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
-      "start": "13:51",
-      "end": "15:21",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
-      "start": "15:23",
-      "end": "17:47",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     }
-    ]
-   },
-   "infeasible": "",
-   "gate": {
-    "passed": true,
-    "violations": []
-   },
-   "soft": {
-    "STR": 1.0,
-    "DTU": 0.947,
-    "SSR": 1.0,
-    "CSM": 0.7,
-    "EDI": 1.0,
-    "AQE": 0.76
-   }
-  },
-  {
-   "query_id": "q27",
-   "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 3 triệu, ưu tiên leo núi rồi đi biển",
-   "trip": {
-    "budget": 3000000,
+    "travelers": 1,
     "start_time": "13:00",
     "end_time": "18:00",
     "must_visit": [
-     "osm:node/11645353169",
-     "osm:node/4221031594"
+     "osm:node/4893587521",
+     "ChIJO0IiWR0RQjERtGkQtqESJ1Y"
     ],
     "avoid": [
-     "osm:way/404714309"
+     "osm:node/4343966693"
     ],
     "order_prefs": [
      [
-      "osm:node/11645353169",
-      "osm:node/4221031594"
+      "osm:node/4893587521",
+      "ChIJO0IiWR0RQjERtGkQtqESJ1Y"
      ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
     ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "osm:node/11645353169",
+      "poi_id": "osm:node/4893587521",
       "start": "13:00",
       "end": "14:00",
       "explanation": {
@@ -2155,9 +1584,9 @@
       }
      },
      {
-      "poi_id": "osm:way/632030501",
-      "start": "14:01",
-      "end": "14:51",
+      "poi_id": "ChIJO0IiWR0RQjERtGkQtqESJ1Y",
+      "start": "14:36",
+      "end": "14:56",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2165,8 +1594,77 @@
       }
      },
      {
-      "poi_id": "osm:way/631070197",
-      "start": "14:52",
+      "poi_id": "osm:node/2093848431",
+      "start": "14:57",
+      "end": "17:27",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.767,
+    "SSR": 1.0,
+    "CSM": 0.75,
+    "EDI": 1.0,
+    "AQE": 0.8
+   }
+  },
+  {
+   "query_id": "q18",
+   "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 3 triệu, ưu tiên văn hóa và ẩm thực",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/11422697875"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJVWyt-r8ZQjERVMHwS2CscbI",
+      "start": "13:00",
+      "end": "13:50",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ3dEof08ZQjERrJfwaLyIAIk",
+      "start": "13:52",
       "end": "15:22",
       "explanation": {
        "evidence": [
@@ -2175,9 +1673,9 @@
       }
      },
      {
-      "poi_id": "osm:way/565592419",
-      "start": "15:23",
-      "end": "16:38",
+      "poi_id": "ChIJ9w6iligZQjERXLpgwwjF0Fs",
+      "start": "15:25",
+      "end": "15:55",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2185,9 +1683,19 @@
       }
      },
      {
-      "poi_id": "osm:node/4221031594",
-      "start": "16:47",
-      "end": "17:47",
+      "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
+      "start": "15:58",
+      "end": "17:13",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+      "start": "17:16",
+      "end": "17:46",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2205,30 +1713,54 @@
     "STR": 1.0,
     "DTU": 0.917,
     "SSR": 1.0,
-    "CSM": 0.817,
+    "CSM": 0.533,
     "EDI": 1.0,
-    "AQE": 0.852
+    "AQE": 0.772
    }
   },
   {
-   "query_id": "q28",
-   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 1 triệu, ưu tiên văn hóa và ẩm thực",
+   "query_id": "q19",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 1 triệu, ưu tiên check-in trung tâm",
    "trip": {
     "budget": 1000000,
+    "travelers": 2,
     "start_time": "07:00",
     "end_time": "12:00",
-    "must_visit": [],
-    "avoid": [
-     "osm:node/4721435589"
+    "must_visit": [
+     "osm:node/4582592213",
+     "manual:be-man"
     ],
-    "order_prefs": []
+    "avoid": [
+     "osm:node/4893587521"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/4582592213",
+      "manual:be-man"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
+      "poi_id": "osm:node/4582592213",
       "start": "07:00",
-      "end": "08:00",
+      "end": "07:30",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2236,19 +1768,9 @@
       }
      },
      {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
+      "poi_id": "manual:be-man",
+      "start": "11:00",
+      "end": "12:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2264,40 +1786,126 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.9,
+    "DTU": 0.3,
     "SSR": 1.0,
-    "CSM": 1.0,
+    "CSM": 0.5,
     "EDI": 1.0,
-    "AQE": 0.892
+    "AQE": 0.804
    }
   },
   {
-   "query_id": "q29",
-   "prefs_text": "lịch Đà Nẵng 1 ngày: check-in trung tâm, ngân sách 5 triệu",
+   "query_id": "q20",
+   "prefs_text": "cuối tuần đi Đà Nẵng 1 người 5 triệu thích yên tĩnh hẹn hò",
    "trip": {
     "budget": 5000000,
+    "travelers": 1,
     "start_time": "07:00",
     "end_time": "18:00",
-    "must_visit": [
-     "ChIJtWWhh9wRQjERxmJ_DNJy62o",
-     "ChIJf_LKvbkbQjERSVrbzxU6Nuc"
-    ],
+    "must_visit": [],
     "avoid": [
-     "ChIJKSs6ZVYZQjERSuj5bQ10t0M"
+     "osm:node/12959087697"
     ],
-    "order_prefs": [
-     [
-      "ChIJtWWhh9wRQjERxmJ_DNJy62o",
-      "ChIJf_LKvbkbQjERSVrbzxU6Nuc"
-     ]
-    ]
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJtWWhh9wRQjERxmJ_DNJy62o",
+      "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
+      "start": "16:00",
+      "end": "17:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
+      "start": "17:31",
+      "end": "17:51",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.167,
+    "SSR": 1.0,
+    "CSM": 0.95,
+    "EDI": 1.0,
+    "AQE": 0.808
+   }
+  },
+  {
+   "query_id": "q21",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 5 triệu, ưu tiên biển và hải sản",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 1,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "osm:node/13890168980",
+     "ChIJzYULZMgRQjERYRTCyEgKZUY"
+    ],
+    "avoid": [
+     "ChIJJexJsaUXQjERb9rmSRBkLf0"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/13890168980",
+      "ChIJzYULZMgRQjERYRTCyEgKZUY"
+     ]
+    ],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "osm:node/13890168980",
       "start": "07:00",
-      "end": "09:24",
+      "end": "07:50",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2315,39 +1923,9 @@
       }
      },
      {
-      "poi_id": "osm:node/10709724107",
-      "start": "11:31",
-      "end": "12:31",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "12:32",
-      "end": "15:02",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJf_LKvbkbQjERSVrbzxU6Nuc",
-      "start": "15:09",
-      "end": "15:39",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "ChIJ6ymP8AARQjERnEbundPQK-c",
-      "start": "15:41",
-      "end": "16:31",
+      "poi_id": "ChIJ9_dffMQQQjERuJbqVGdSysY",
+      "start": "11:34",
+      "end": "11:54",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2363,52 +1941,51 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.794,
+    "DTU": 0.533,
     "SSR": 1.0,
     "CSM": 0.94,
     "EDI": 1.0,
-    "AQE": 0.799
+    "AQE": 0.776
    }
   },
   {
-   "query_id": "q30",
-   "prefs_text": "cuối tuần đi Đà Nẵng 1 người 5 triệu thích yên tĩnh hẹn hò",
+   "query_id": "q22",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 12:00 3 triệu, ưu tiên leo núi rồi đi biển",
    "trip": {
-    "budget": 5000000,
+    "budget": 3000000,
+    "travelers": 1,
     "start_time": "07:00",
     "end_time": "12:00",
     "must_visit": [],
     "avoid": [
-     "ChIJwTU11dAZQjERsydZriN8k5M"
+     "ChIJw2G2IwAfQjERGAvvbDnKLHM"
     ],
-    "order_prefs": []
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
    },
    "itinerary": {
     "activities": [
      {
-      "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
-      "start": "07:00",
-      "end": "08:00",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/2093848431",
-      "start": "08:02",
-      "end": "10:32",
-      "explanation": {
-       "evidence": [
-        "gold:approach-b"
-       ]
-      }
-     },
-     {
-      "poi_id": "osm:node/10709724107",
-      "start": "10:33",
-      "end": "11:33",
+      "poi_id": "ChIJUcRcH40XQjERyj5XPUTEfO0",
+      "start": "11:00",
+      "end": "12:00",
       "explanation": {
        "evidence": [
         "gold:approach-b"
@@ -2424,11 +2001,613 @@
    },
    "soft": {
     "STR": 1.0,
-    "DTU": 0.9,
+    "DTU": 0.2,
     "SSR": 1.0,
-    "CSM": 1.0,
+    "CSM": 0.917,
     "EDI": 1.0,
-    "AQE": 0.892
+    "AQE": 0.78
+   }
+  },
+  {
+   "query_id": "q23",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 1 triệu, ưu tiên văn hóa và ẩm thực",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJEzuDsG8XQjERz7a51RnJnvU",
+     "osm:node/5613322622"
+    ],
+    "avoid": [
+     "osm:node/11359603957"
+    ],
+    "order_prefs": [
+     [
+      "ChIJEzuDsG8XQjERz7a51RnJnvU",
+      "osm:node/5613322622"
+     ]
+    ],
+    "activities": [
+     "bảo tàng"
+    ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
+      "start": "07:00",
+      "end": "07:45",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/5613322622",
+      "start": "12:00",
+      "end": "13:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/5674096859",
+      "start": "14:00",
+      "end": "15:15",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/5611617221",
+      "start": "15:16",
+      "end": "16:06",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/11890992769",
+      "start": "16:07",
+      "end": "16:37",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.394,
+    "SSR": 1.0,
+    "CSM": 0.3,
+    "EDI": 1.0,
+    "AQE": 0.784
+   }
+  },
+  {
+   "query_id": "q24",
+   "prefs_text": "đi Đà Nẵng từ 13:00 đến 18:00 5 triệu, ưu tiên check-in trung tâm",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/4280016689"
+    ],
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
+      "start": "13:00",
+      "end": "13:50",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJmVevrx4ZQjER64G39u7fZaM",
+      "start": "13:51",
+      "end": "15:21",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
+      "start": "15:23",
+      "end": "17:47",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.947,
+    "SSR": 1.0,
+    "CSM": 0.76,
+    "EDI": 1.0,
+    "AQE": 0.76
+   }
+  },
+  {
+   "query_id": "q25",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 3 triệu, ưu tiên yên tĩnh hẹn hò",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 1,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/4347237636",
+     "osm:node/7118673485"
+    ],
+    "avoid": [
+     "osm:node/7155363886"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/4347237636",
+      "osm:node/7118673485"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": null,
+   "infeasible": "must_visit osm:node/4347237636 breaks a day rule",
+   "gate": null,
+   "soft": null
+  },
+  {
+   "query_id": "q26",
+   "prefs_text": "cuối tuần đi Đà Nẵng 2 người 1 triệu thích biển và hải sản",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:way/616910526"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ]
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJVWhfuoYZQjERiqzzyK-rRko",
+      "start": "13:00",
+      "end": "13:50",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJeYxRAo8ZQjERawBcqjOhTRQ",
+      "start": "13:52",
+      "end": "15:22",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
+      "start": "15:28",
+      "end": "16:28",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
+      "start": "16:35",
+      "end": "16:55",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.733,
+    "SSR": 1.0,
+    "CSM": 0.3,
+    "EDI": 1.0,
+    "AQE": 0.77
+   }
+  },
+  {
+   "query_id": "q27",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: leo núi rồi đi biển, ngân sách 3 triệu",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/4517387589",
+     "ChIJBQHuNG49QjER7Mb_Y2I64mk"
+    ],
+    "avoid": [
+     "ChIJ7bDAtv8YQjERj0Fj9FcnHgA"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/4517387589",
+      "ChIJBQHuNG49QjER7Mb_Y2I64mk"
+     ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ]
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "osm:node/4517387589",
+      "start": "13:00",
+      "end": "14:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+      "start": "15:22",
+      "end": "15:52",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ28SKFJU9QjERBgIwBViBWD4",
+      "start": "16:10",
+      "end": "17:40",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.6,
+    "SSR": 1.0,
+    "CSM": 0.667,
+    "EDI": 1.0,
+    "AQE": 0.856
+   }
+  },
+  {
+   "query_id": "q28",
+   "prefs_text": "lịch Đà Nẵng 1 ngày: văn hóa và ẩm thực, ngân sách 1 triệu",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJZdLv8rkZQjERIhU2VsEsCl4"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ]
+   },
+   "profile": {
+    "party_type": "couple",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 2,
+    "fitness": 2,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
+      "start": "07:00",
+      "end": "08:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJrfvtnpYhQjEReNe0fgh8KMM",
+      "start": "09:05",
+      "end": "09:35",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
+      "start": "09:41",
+      "end": "10:21",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+      "start": "11:00",
+      "end": "12:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.733,
+    "SSR": 1.0,
+    "CSM": 0.0,
+    "EDI": 1.0,
+    "AQE": 0.819
+   }
+  },
+  {
+   "query_id": "q29",
+   "prefs_text": "đi Đà Nẵng từ 07:00 đến 18:00 5 triệu, ưu tiên check-in trung tâm",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/14025305349",
+     "ChIJqWGIf00ZQjER4BkCiBYX8mU"
+    ],
+    "avoid": [
+     "osm:node/4614061399"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/14025305349",
+      "ChIJqWGIf00ZQjER4BkCiBYX8mU"
+     ]
+    ],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "family",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 1,
+    "fitness": 1,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": null,
+   "infeasible": "must_visit osm:node/14025305349 breaks a day rule",
+   "gate": null,
+   "soft": null
+  },
+  {
+   "query_id": "q30",
+   "prefs_text": "cuối tuần đi Đà Nẵng 2 người 5 triệu thích yên tĩnh hẹn hò",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJeROGTS4ZQjERKlipW2HlSvw"
+    ],
+    "order_prefs": [],
+    "activities": []
+   },
+   "profile": {
+    "party_type": "friends",
+    "trip_purpose": "leisure",
+    "spending_level": 2,
+    "pace": 3,
+    "fitness": 3,
+    "food_prefs": [],
+    "allergy": [],
+    "activities": [],
+    "outdoor_bias": 0.0,
+    "accessibility": [],
+    "must_avoid": [],
+    "transport": []
+   },
+   "itinerary": {
+    "activities": [
+     {
+      "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+      "start": "07:30",
+      "end": "08:30",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     },
+     {
+      "poi_id": "osm:node/12803739945",
+      "start": "11:00",
+      "end": "12:00",
+      "explanation": {
+       "evidence": [
+        "gold:approach-b"
+       ]
+      }
+     }
+    ]
+   },
+   "infeasible": "",
+   "gate": {
+    "passed": true,
+    "violations": []
+   },
+   "soft": {
+    "STR": 1.0,
+    "DTU": 0.4,
+    "SSR": 1.0,
+    "CSM": 0.8,
+    "EDI": 1.0,
+    "AQE": 0.88
    }
   }
  ]

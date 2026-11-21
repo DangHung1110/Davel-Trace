@@ -133,7 +133,7 @@ Ngân sách: so **tổng trung điểm** với ngân sách; **tổng cận trên
 | `pois.json` | bản ghi v2.1 (mục 2), metadata (`data_version`, `count`, `built_at`, `sources`) |
 | `quarantine_google.json` | mọi giá trị gốc Google, theo `poi_id` |
 | `archive_fields.json` | trường cũ không còn dùng, theo `poi_id` (để truy vết, không ai đọc lúc chạy) |
-| `matrix.json` (dense_v1) | ma trận di chuyển phủ **mọi** POI active |
+| `matrix.json` (dense-v1, xe máy) | ma trận di chuyển phủ **mọi** POI active |
 | `README.md` | đặc tả rút gọn + cách build lại |
 
 ## 5. Luật kiểm tra (pytest `BE/tests/data/`)
@@ -153,7 +153,7 @@ Cấu trúc (luôn bật):
 12. `name` sạch (không `|`, không chữ Hàn/Trung/Nhật, ≤ 60 ký tự).
 13. **Một bộ khoá `tags` cho mọi POI** (13 khoá); không còn `rain_protection` (bỏ 21/11: "unknown" ở 941/941 POI, `rain_cover` thay thế).
 14. Không POI active nào có `hours.kind = unknown`. Lưu trú (base) = `00:00-23:59` safe_window (quy ước lễ tân 24h, `provenance.hours.source = rule_lodging_24h`). Lớp theo suất không có lịch suất công bố → excluded có lý do.
-15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày). `matrix.json` lưu dạng `format: dense_v1` (`ids` + mảng phẳng `minutes`/`km` theo hàng, ô (i, j) ở `i*n+j`, `-1` = không đi được, không bao giờ là 0 giả); đọc qua `BE.matrix_format.cells_of` (giữ giao diện `"a->b" -> {km, minutes}`). 988 điểm: 7,2 MB thay vì 73,6 MB.
+15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày). `matrix.json` dùng định dạng `dense-v1` của `BE.app.services.matrix` (`ids` + mảng `minutes`/`km` theo hàng, `null` = không đi được, không bao giờ là 0 giả), profile xe máy.
 16. `exports/danang-v2/poi_features.csv` lấy từ bản ghi v2.1 cuối: trạng thái, loại, giờ, nhãn khớp `pois.json` từng POI.
 17. Tên hiển thị (POI active) không viết hoa toàn bộ, không dấu câu thừa; tên gốc ở `name_raw`. Quyết định `hours_reset` (file `decisions_*`) đưa giờ về khung an toàn theo nhóm khi nguồn giờ bị gán nhầm điểm (`danang-v1/hours_web.json` khoá theo tên).
 

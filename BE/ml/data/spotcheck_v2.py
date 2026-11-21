@@ -48,7 +48,6 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, _REPO_ROOT) if _REPO_ROOT not in sys.path else None
 
-from BE.common import BAND_MIDPOINT  # noqa: E402
 from BE.ml.patm.estimate_duration import canonical_category  # noqa: E402
 
 DN_BBOX = (15.80, 107.75, 16.35, 108.55)  # s,w,n,e
@@ -86,6 +85,8 @@ AUTO_PASS = "auto_pass"
 QUEUE = "queue"
 FAIL = "fail"
 ALREADY = "already_verified"
+# A human said LOẠI (ingest_verdicts.py): never auto-pass it back.
+HUMAN_REJECTED = "human_rejected"
 
 
 def _norm(s: str) -> str:
@@ -272,12 +273,8 @@ def judge_poi(poi: dict, ctx: SnapshotContext) -> dict:
     if poi.get("rating") == 5.0:
         queue.append("rating_perfect")
     tags = poi.get("smart_tags") or {}
-    # B5 v2 (tag-only money): a paid-entry claim is only evidence-backed when
-    # the row carries a known price band; an explicit `free_entry` closes the
-    # claim the other way. `ticket_vnd` is deprecated and no longer read.
-    if (tags.get("ticket") is True
-            and tags.get("price_band") not in BAND_MIDPOINT
-            and poi.get("free_entry") is not True):
+    if (tags.get("ticket") is True and poi.get("ticket_vnd") is None
+            and "price_sources" not in poi):
         queue.append("ticket_unverified")
 
     hard = list(dict.fromkeys(hard))
@@ -295,16 +292,18 @@ def judge_poi(poi: dict, ctx: SnapshotContext) -> dict:
 
 
 def build_plan(pois: list[dict]) -> tuple[list[dict], SnapshotContext]:
-    """Judge every row; already-verified rows are skipped (never re-audited)."""
+    """Judge every row; already-verified and human-rejected rows are skipped
+    (never re-audited)."""
     ctx = SnapshotContext(pois)
     plan: list[dict] = []
     for poi in pois:
-        if poi.get("verified") is True:
+        rejected = (poi.get("review") or {}).get("verdict") == "loai"
+        if poi.get("verified") is True or rejected:
             plan.append({
                 "poi_id": str(poi.get("poi_id") or ""),
                 "name": str(poi.get("name") or ""),
                 "cat": str(poi.get("cat") or ""),
-                "decision": ALREADY,
+                "decision": HUMAN_REJECTED if rejected else ALREADY,
                 "hard": [],
                 "queue": [],
                 "siblings": [],
@@ -412,8 +411,7 @@ def compute_flags(pois: list[dict]) -> tuple[dict[str, list[str]], dict[str, flo
                 if wa & wb and len(wa & wb) >= 2:
                     def _rich(p):
                         return (1 if p.get("rating") else 0) + (1 if p.get("opening_hours") else 0) \
-                            + (1 if p.get("verified") else 0) \
-                            + (1 if (p.get("smart_tags") or {}).get("price_band") else 0)
+                            + (1 if p.get("verified") else 0) + (1 if p.get("ticket_vnd") else 0)
 
                     def _info(p):
                         src = "mới-OSM" if p["poi_id"].startswith("osm:") else "cũ-crawl"
@@ -449,11 +447,9 @@ def compute_flags(pois: list[dict]) -> tuple[dict[str, list[str]], dict[str, flo
             flags["D4-no-rating"].append(pid)
         elif p.get("rating") == 5.0:
             flags["D4-rating-5.0"].append(pid)
-        # D5 paid-entry claim w/o a known price band (tag-only money)
+        # D5 ticket claim w/o evidence
         st = p.get("smart_tags") or {}
-        if (st.get("ticket") is True
-                and st.get("price_band") not in BAND_MIDPOINT
-                and p.get("free_entry") is not True):
+        if st.get("ticket") is True and p.get("ticket_vnd") is None and "price_sources" not in p:
             flags["D5-ticket-unverified"].append(pid)
         # D6 bbox
         s, w, n, e = DN_BBOX
@@ -507,7 +503,7 @@ def print_applier(summary: dict, *, applied: bool, flipped: int,
     print(f"mode={mode} criteria=docs/verify-criteria.md")
     print(f"unverified={d[AUTO_PASS] + d[QUEUE] + d[FAIL]} "
           f"auto_pass={d[AUTO_PASS]} queue={d[QUEUE]} fail={d[FAIL]} "
-          f"already_verified={d[ALREADY]}")
+          f"already_verified={d[ALREADY]} human_rejected={d[HUMAN_REJECTED]}")
     print("by cat (auto_pass/queue/fail):")
     for cat in sorted(summary["by_cat"]):
         c = summary["by_cat"][cat]
@@ -549,7 +545,7 @@ def main(argv: list[str] | None = None) -> int:
         description="Spot-check snapshot + optional auto-verify applier.")
     ap.add_argument("--snapshot", required=True)
     ap.add_argument("--review-out", default="",
-                    help="write a REVIEW_V2-style tick file here")
+                    help="write a tick file for human review here")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--apply-flag", dest="apply", action="store_true",
                       help="flip verified=true for auto-pass rows only")

@@ -32,7 +32,7 @@
    ]
   },
   "ChIJmQmygLwXQjERcZVy8--sIcE": {
-   "rating": 4.7,
+   "rating": 4.8,
    "price_level": 2,
    "type": "Nhà hàng hải sản",
    "opening_hours": [
@@ -134,7 +134,6 @@
   },
   "ChIJ5QtSVAAZQjERwKdjEbXi6wk": {
    "rating": 5,
-   "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
     "09:00-23:30"
@@ -170,7 +169,7 @@
    ]
   },
   "ChIJ8cqHGTMYQjERU0gT5dridKc": {
-   "rating": 3.9,
+   "rating": 4.0,
    "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
@@ -194,7 +193,7 @@
    ]
   },
   "ChIJudsANu4XQjERbLKxjXDLHtU": {
-   "rating": 4.7,
+   "rating": 4.4,
    "price_level": 2,
    "type": "Nhà hàng hải sản",
    "opening_hours": [
@@ -230,7 +229,6 @@
   },
   "ChIJ8aa8NQAZQjERRM8-aOoNZ30": {
    "rating": 5,
-   "price_level": 2,
    "type": "Nhà hàng hải sản",
    "tags_v1": [
     "Nhà hàng hải sản"
@@ -275,7 +273,6 @@
   },
   "ChIJHyNg3TIYQjERqz7x0udvRd0": {
    "rating": 5,
-   "price_level": 2,
    "type": "Nhà hàng",
    "tags_v1": [
     "Nhà hàng"
@@ -479,7 +476,7 @@
    ]
   },
   "ChIJe4p5ow8YQjERbmoA9Ml2JCk": {
-   "rating": 4.4,
+   "rating": 4.5,
    "price_level": 2,
    "type": "Nhà hàng Việt Nam",
    "opening_hours": [
@@ -627,7 +624,7 @@
    ]
   },
   "ChIJRVOgcgAXQjER7lPiR_QvAdQ": {
-   "rating": 4.9,
+   "rating": 4.8,
    "price_level": 2,
    "type": "Nhà hàng Việt Nam",
    "opening_hours": [
@@ -648,7 +645,7 @@
    ]
   },
   "ChIJP-VRM2YXQjERbEUrtG6wq9Q": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 2,
    "type": "Nhà hàng Việt Nam",
    "opening_hours": [
@@ -690,7 +687,7 @@
   },
   "ChIJPYQKSAAXQjER0cga1BLD_MI": {
    "rating": 4.4,
-   "price_level": 3,
+   "price_level": 2,
    "type": "Nhà hàng hải sản",
    "opening_hours": [
     "10:00-23:00"
@@ -704,7 +701,7 @@
   },
   "ChIJw-jjo3IXQjERjDCm-Yd0EAA": {
    "rating": 4.9,
-   "price_level": 3,
+   "price_level": 2,
    "type": "Nhà hàng Pháp",
    "opening_hours": [
     "17:00-21:00"
@@ -891,7 +888,7 @@
   },
   "ChIJW_ilwg0XQjERQbqRXGggIFE": {
    "rating": 4.8,
-   "price_level": 3,
+   "price_level": 2,
    "type": "Nhà hàng ý",
    "opening_hours": [
     "11:00-21:30"
@@ -963,7 +960,7 @@
   },
   "ChIJYy-g38oQQjER2c931z_dDt4": {
    "rating": 4.4,
-   "price_level": 3,
+   "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
     "09:00-21:00"
@@ -1018,7 +1015,7 @@
    ]
   },
   "ChIJYQkmfagfQjER0iIRsKZ0Rcc": {
-   "rating": 4.9,
+   "rating": 4.8,
    "price_level": 2,
    "type": "Nhà hàng",
    "tags_v1": [
@@ -1084,7 +1081,7 @@
   },
   "ChIJVeL2KNYYQjERkTADVXDZcRM": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà hàng ăn chay",
    "opening_hours": [
     "06:30-21:00"
@@ -1098,7 +1095,7 @@
   },
   "ChIJqWGIf00ZQjER4BkCiBYX8mU": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà hàng",
    "opening_hours": [
     "09:30-21:30"
@@ -1168,7 +1165,7 @@
    ]
   },
   "ChIJ1fgYYgAZQjERPupjVbkyt6A": {
-   "rating": 4.3,
+   "rating": 4.2,
    "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
@@ -1212,7 +1209,7 @@
    ]
   },
   "ChIJGZVxyf0ZQjERBbAyCvPNq7E": {
-   "rating": 4.2,
+   "rating": 4.1,
    "price_level": 2,
    "type": "Nhà hàng Việt Nam",
    "opening_hours": [
@@ -1460,7 +1457,6 @@
   },
   "ChIJadL4d-gYQjERKE_uTeup8iY": {
    "rating": 4,
-   "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
     "08:00-20:00"
@@ -1497,7 +1493,6 @@
   },
   "ChIJrYC1becZQjER-97HchRaP_Q": {
    "rating": 4.4,
-   "price_level": 2,
    "type": "Nhà hàng",
    "opening_hours": [
     "08:00-20:30"
@@ -1569,18 +1564,12 @@
    "rating": 4.6,
    "price_level": 1,
    "type": "Quán cà phê",
-   "opening_hours": [
-    "07:30-00:00"
-   ],
    "price_range": {
     "typical": 50000,
     "min": null,
     "max": 100000
    },
    "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-   "hours_open": [
-    "07:30-23:59"
-   ],
    "tags_v1": [
     "Quán cà phê"
    ]
@@ -1589,18 +1578,12 @@
    "rating": 4.8,
    "price_level": 1,
    "type": "Quán cà phê",
-   "opening_hours": [
-    "06:30-23:30"
-   ],
    "price_range": {
     "typical": 50000,
     "min": null,
     "max": 100000
    },
    "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-   "hours_open": [
-    "06:30-23:30"
-   ],
    "tags_v1": [
     "Quán cà phê"
    ]
@@ -1609,24 +1592,18 @@
    "rating": 4.7,
    "price_level": 1,
    "type": "Quán cà phê",
-   "opening_hours": [
-    "07:30-22:00"
-   ],
    "price_range": {
     "typical": 50000,
     "min": null,
     "max": 100000
    },
    "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-   "hours_open": [
-    "07:30-22:00"
-   ],
    "tags_v1": [
     "Quán cà phê"
    ]
   },
   "ChIJWXGFjDcYQjER0LvTZMZvBn0": {
-   "rating": 4.6,
+   "rating": 4.5,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -1686,7 +1663,7 @@
    ]
   },
   "ChIJEUTpMwAZQjER2orvyJWXVYo": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2091,7 +2068,7 @@
    ]
   },
   "ChIJ34pDfgA9QjERzXhUIjmZbso": {
-   "rating": 4.7,
+   "rating": 4.8,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2111,7 +2088,7 @@
    ]
   },
   "ChIJR43OJscZQjERMdsfIG3cJ9g": {
-   "rating": 4.6,
+   "rating": 4.5,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2154,7 +2131,7 @@
    ]
   },
   "ChIJJS-cJ58XQjERxgFIfN6CjJ0": {
-   "rating": 3.6,
+   "rating": 5.0,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2216,7 +2193,7 @@
   },
   "ChIJMdGCKyQZQjERpNccOkd5duk": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-23:00"
@@ -2230,7 +2207,6 @@
   },
   "ChIJE4CAepEXQjERg75wrYIZk2Q": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-19:30"
@@ -2386,7 +2362,7 @@
    ]
   },
   "ChIJhRHxyd4XQjERPVL2Kw_eqdw": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2452,7 +2428,7 @@
   },
   "ChIJ0RbSL4ARQjERLwRYqY1bqp4": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "tags_v1": [
     "Quán cà phê"
@@ -2515,7 +2491,7 @@
    ]
   },
   "ChIJzeNmTwARQjERLSXizyRKI9g": {
-   "rating": 4.6,
+   "rating": 4.7,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -2606,18 +2582,12 @@
    "rating": 4.6,
    "price_level": 1,
    "type": "Quán cà phê",
-   "opening_hours": [
-    "07:00-22:00"
-   ],
    "price_range": {
     "typical": 50000,
     "min": null,
     "max": 100000
    },
    "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
-   "hours_open": [
-    "07:00-22:00"
-   ],
    "tags_v1": [
     "Quán cà phê",
     "Nhà hàng chuyên phục vụ bữa sáng",
@@ -2690,7 +2660,7 @@
   },
   "ChIJVWyt-r8ZQjERVMHwS2CscbI": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:00-22:00",
@@ -2705,7 +2675,7 @@
   },
   "ChIJw4WrdmsZQjERRCJKWvRJHtI": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:30-22:00"
@@ -2955,7 +2925,7 @@
   },
   "ChIJcx8dydYYQjERMG39tIgHP1Y": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -2990,7 +2960,7 @@
   },
   "ChIJ2yr5edIYQjER5_9326fLFA0": {
    "rating": 3.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -3004,7 +2974,7 @@
   },
   "ChIJV9qvhLoZQjERX5RrjGA07mM": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -3097,7 +3067,7 @@
    ]
   },
   "ChIJL-fQUUcZQjERK85coinuqEk": {
-   "rating": 4.2,
+   "rating": 4.3,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -3131,7 +3101,7 @@
    ]
   },
   "ChIJuZTrvVoZQjER371drzqC5hk": {
-   "rating": 4.8,
+   "rating": 4.7,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -3172,7 +3142,7 @@
   },
   "ChIJ7bDAtv8YQjERj0Fj9FcnHgA": {
    "rating": 4.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:30"
@@ -3185,7 +3155,7 @@
    ]
   },
   "ChIJzVnvNgAZQjERef60MBfcz8E": {
-   "rating": 4.5,
+   "rating": 4.4,
    "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
@@ -3206,7 +3176,7 @@
   },
   "ChIJH1TU7PsYQjER-jhAtZLdLMc": {
    "rating": 4.2,
-   "price_level": 1,
+   "price_level": 2,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -3240,7 +3210,6 @@
   },
   "ChIJQW9rQNwZQjER4zC6dP7vitg": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Quán cà phê",
    "tags_v1": [
     "Quán cà phê"
@@ -3309,7 +3278,7 @@
   },
   "ChIJUf5Hcw8ZQjERsntEedW35TI": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "tags_v1": [
     "Quán cà phê"
@@ -3317,7 +3286,7 @@
   },
   "ChIJteAgYXsZQjERK6NHlXGXIPI": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:30-22:30"
@@ -3351,7 +3320,7 @@
   },
   "ChIJbbs1ZTQYQjERi3OdfmnRk2g": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -3360,7 +3329,7 @@
   },
   "ChIJkatEeMwZQjERnAUKgmrbNgQ": {
    "rating": 3.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "08:00-21:30"
@@ -3374,7 +3343,7 @@
   },
   "ChIJu6FQjzUYQjER39TMpgQVRUs": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:00-19:00"
@@ -3389,7 +3358,7 @@
   },
   "ChIJLWoAs80ZQjERLKHDYD-ZymI": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:00-17:00"
@@ -3405,7 +3374,6 @@
   },
   "ChIJH5FAHiEYQjERi-kdX4gd-eE": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "08:00-21:00"
@@ -3420,7 +3388,7 @@
   },
   "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:00-17:30"
@@ -3435,7 +3403,7 @@
   },
   "ChIJzX1dFjAZQjERswowf61V1fk": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -3443,7 +3411,7 @@
   },
   "ChIJL1GKWJYZQjERLrEGqlK2kwQ": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Cầu",
    "tags_v1": [
     "Cầu",
@@ -3452,7 +3420,7 @@
   },
   "ChIJLTomluP3QTERUy-b9iAYR8U": {
    "rating": 3.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3468,7 +3436,7 @@
   },
   "ChIJQWQVKr4ZQjERcafNnRyLelk": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Sân chơi trong nhà",
    "opening_hours": [
     "08:00-22:00",
@@ -3483,8 +3451,8 @@
    ]
   },
   "ChIJK4sVPc0ZQjERdGROWQ8MMg4": {
-   "rating": 4.3,
-   "price_level": 2,
+   "rating": 4.2,
+   "price_level": 1,
    "type": "Trung tâm vui chơi giải trí",
    "opening_hours": [
     "07:00-23:00"
@@ -3498,7 +3466,6 @@
   },
   "ChIJC0W3bjoYQjERVBMskQcoQck": {
    "rating": 4.3,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -3506,8 +3473,8 @@
    ]
   },
   "ChIJEymIkTYYQjERWO-pgjkKGMk": {
-   "rating": 4.3,
-   "price_level": 2,
+   "rating": 4.2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "08:00-17:00"
@@ -3543,8 +3510,8 @@
    ]
   },
   "ChIJCyoHH4kZQjERX3hJiiMqhyk": {
-   "rating": 4.7,
-   "price_level": 2,
+   "rating": 4.8,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -3552,7 +3519,7 @@
   },
   "ChIJrVOLzgUXQjERRuyvUi8WxkQ": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3568,7 +3535,7 @@
   },
   "ChIJW0KcgfI9QjERJpkPfjssyfo": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Thắng cảnh",
    "tags_v1": [
     "Thắng cảnh",
@@ -3577,7 +3544,7 @@
   },
   "ChIJ17GORdEXQjERhkujx-kwJA0": {
    "rating": 4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:30-22:30"
@@ -3591,7 +3558,7 @@
   },
   "ChIJFzkgXmA9QjERbjn2eoPqMn8": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Vườn",
    "opening_hours": [
     "06:30-17:00"
@@ -3605,7 +3572,7 @@
   },
   "ChIJpYNhNwAXQjERflfHrn1lop4": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3613,7 +3580,7 @@
   },
   "ChIJLVK-0XI9QjER5-Q0ZZoz5wE": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bán đảo",
    "tags_v1": [
     "Bán đảo"
@@ -3621,7 +3588,7 @@
   },
   "ChIJI4oSjdE9QjERlXMiA630YKs": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "05:00-21:00"
@@ -3635,7 +3602,7 @@
   },
   "ChIJBQHuNG49QjER7Mb_Y2I64mk": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:30-17:30"
@@ -3662,7 +3629,6 @@
   },
   "ChIJZWmMe1g9QjERrOGO9nVdagQ": {
    "rating": 4.2,
-   "price_level": 2,
    "type": "Khách sạn nghỉ dưỡng",
    "tags_v1": [
     "Khách sạn nghỉ dưỡng"
@@ -3670,7 +3636,7 @@
   },
   "ChIJPbgJ4DY9QjER7OSjP2_jSC8": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3678,15 +3644,15 @@
   },
   "ChIJ08DIzjY9QjER4ldy4JXZBLA": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
    ]
   },
   "ChIJ_XkaoQs-QjER_IUTHqI3gI8": {
-   "rating": 4.5,
-   "price_level": 2,
+   "rating": 4.6,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3694,7 +3660,7 @@
   },
   "ChIJo8N_zUw9QjERgutJ9u3-n7Y": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3702,7 +3668,7 @@
   },
   "ChIJqaaYAdIiQjERGuZHElpvurA": {
    "rating": 4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển",
    "tags_v1": [
     "Bãi biển"
@@ -3710,7 +3676,7 @@
   },
   "ChIJwandNwA9QjERWjnwsYXsQrk": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3718,7 +3684,7 @@
   },
   "ChIJgaLldI0ZQjEReQCfThP_6CQ": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3734,7 +3700,6 @@
   },
   "ChIJJ66EjfQRQjERrmpQQcYTgq8": {
    "rating": 4.3,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3742,7 +3707,6 @@
   },
   "ChIJu59e1rsRQjERB-49hSxMnXo": {
    "rating": 4.5,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3750,7 +3714,7 @@
   },
   "ChIJgdHMn8gYQjERmEdW2JHUGTw": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển công cộng",
    "opening_hours": [
     "05:00-19:00"
@@ -3764,7 +3728,7 @@
   },
   "ChIJD4Ge5WQZQjERW-0GhLbS310": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -3772,7 +3736,7 @@
   },
   "ChIJmUEOJQAfQjERLPIN_eYfU9k": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3790,7 +3754,7 @@
   },
   "ChIJaQNtm9IfQjERhfrVRYqgA1M": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -3799,7 +3763,6 @@
   },
   "ChIJg5OvAgAhQjERKbrq9-Wza-U": {
    "rating": 4,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "00:00-17:00",
@@ -3815,7 +3778,7 @@
   },
   "ChIJGSKUUwCLQTERr0Je7WP5Xqc": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Khu cắm trại",
    "tags_v1": [
     "Khu cắm trại"
@@ -3823,7 +3786,6 @@
   },
   "ChIJqdKPDDIZQjERC2tfiDtFLXE": {
    "rating": 4.7,
-   "price_level": 2,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -3831,23 +3793,22 @@
   },
   "ChIJuzvMeE4ZQjERE-pQycR-Mjo": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
    ]
   },
   "ChIJZSAyL0YfQjERMP2R9yBDRwY": {
-   "rating": 3.8,
-   "price_level": 2,
+   "rating": 4.7,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
    ]
   },
   "ChIJVVmn6uMjQjERwv0F2ZV9pJw": {
-   "rating": 4.6,
-   "price_level": 2,
+   "rating": 4.5,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3866,8 +3827,8 @@
    ]
   },
   "ChIJEaxZWQAXQjERUp3M2TesuM8": {
-   "rating": 4.9,
-   "price_level": 2,
+   "rating": 4.8,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3875,7 +3836,7 @@
   },
   "ChIJz4Y1XCcZQjERzg9AZYfOGH8": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -3883,7 +3844,7 @@
   },
   "ChIJNUwPk-cZQjERgxIYcjgmCyU": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -3891,7 +3852,7 @@
   },
   "ChIJ4w7694IXQjERrFXucqKL--o": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển",
    "tags_v1": [
     "Bãi biển"
@@ -3899,15 +3860,15 @@
   },
   "ChIJFYLgeggZQjERgwxGcK7JcpQ": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Địa điểm lịch sử",
    "tags_v1": [
     "Địa điểm lịch sử"
    ]
   },
   "ChIJSZabUwAZQjERqs6A8ECVnWY": {
-   "rating": 4.6,
-   "price_level": 2,
+   "rating": 4.5,
+   "price_level": 1,
    "type": "Câu lạc bộ bãi biển",
    "tags_v1": [
     "Câu lạc bộ bãi biển"
@@ -3915,7 +3876,7 @@
   },
   "ChIJY6qXPYkZQjER8UoDJvGopTk": {
    "rating": 4.1,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển công cộng",
    "tags_v1": [
     "Bãi biển công cộng"
@@ -3923,7 +3884,6 @@
   },
   "ChIJZ9UJGQQZQjERFL90XKMPBGk": {
    "rating": 4,
-   "price_level": 2,
    "type": "Hồ bơi",
    "opening_hours": [
     "06:00-22:00"
@@ -3937,7 +3897,7 @@
   },
   "ChIJ78thjjYYQjERkiy-c9ebVPE": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng nghệ thuật",
    "opening_hours": [
     "08:00-17:00"
@@ -3952,7 +3912,7 @@
   },
   "ChIJo8fznMYZQjERNtNTUT-ZJyk": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng lịch sử",
    "opening_hours": [
     "08:00-12:00, 14:00-16:30"
@@ -3969,7 +3929,7 @@
   },
   "ChIJaa7lANcXQjERmT3kgV5U7uA": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng nghệ thuật",
    "opening_hours": [
     "07:30-18:00"
@@ -4002,7 +3962,7 @@
   },
   "ChIJ82_sTbkQQjERQ5jmVkoovic": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng",
    "opening_hours": [
     "08:00-18:00"
@@ -4017,7 +3977,7 @@
   },
   "ChIJ17mmuaQRQjERUiexX9MhcdI": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng",
    "opening_hours": [
     "08:00-17:00"
@@ -4031,7 +3991,7 @@
   },
   "ChIJTXOYPFQXQjERGWO0Jf095tw": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng chiến tranh",
    "opening_hours": [
     "08:00-11:00, 13:30-16:30"
@@ -4046,7 +4006,7 @@
   },
   "ChIJNdWwUgARQjERansIEJQleAU": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -4054,7 +4014,7 @@
   },
   "ChIJ8be7KQARQjER5Lnd2LHaDAs": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điện thờ",
    "tags_v1": [
     "Điện thờ"
@@ -4062,7 +4022,6 @@
   },
   "ChIJKytgDsgQQjER6al50BDd7vc": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "opening_hours": [
     "07:00-17:00"
@@ -4077,7 +4036,7 @@
   },
   "ChIJWe_7hboQQjERxap-mizn-ZY": {
    "rating": 4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng lịch sử địa phương",
    "tags_v1": [
     "Bảo tàng lịch sử địa phương"
@@ -4085,14 +4044,12 @@
   },
   "ChIJ9yzkbH0ZQjERDhPDi_ITcmM": {
    "rating": 3.7,
-   "price_level": 2,
    "type": "Bảo tàng",
    "tags_v1": [
     "Bảo tàng"
    ]
   },
   "ChIJodkOVL8fQjERGwRf5tBRLvI": {
-   "price_level": 2,
    "type": "Bảo tàng chiến tranh",
    "tags_v1": [
     "Bảo tàng chiến tranh"
@@ -4100,7 +4057,7 @@
   },
   "ChIJVWzfhcwZQjERa_qP0BpsBkk": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng",
    "tags_v1": [
     "Bảo tàng"
@@ -4108,7 +4065,7 @@
   },
   "ChIJfQr_phEZQjER5leh47CfKTQ": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng di sản",
    "opening_hours": [
     "07:30-17:30"
@@ -4122,7 +4079,7 @@
   },
   "ChIJzQu--DUXQjERBw1iz5k5GlE": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển",
    "tags_v1": [
     "Bãi biển"
@@ -4130,7 +4087,7 @@
   },
   "ChIJX_osydwQQjERB-Y6MvLfJmQ": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển",
    "tags_v1": [
     "Bãi biển"
@@ -4146,7 +4103,7 @@
   },
   "ChIJtWWhh9wRQjERxmJ_DNJy62o": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Sân bóng chuyền bãi biển",
    "tags_v1": [
     "Sân bóng chuyền bãi biển"
@@ -4154,7 +4111,7 @@
   },
   "ChIJIaxebnoXQjERNETM7bT3ewg": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bãi biển",
    "tags_v1": [
     "Bãi biển"
@@ -4162,7 +4119,7 @@
   },
   "ChIJOQ-obAARQjERQ4kQhqErSkw": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -4170,7 +4127,7 @@
   },
   "ChIJEzuDsG8XQjERz7a51RnJnvU": {
    "rating": 4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -4178,7 +4135,7 @@
   },
   "ChIJOyXC4H0XQjERpm2T2xpZcwU": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "05:00-20:00"
@@ -4192,7 +4149,7 @@
   },
   "ChIJXcxl0UcYQjERVfYu-bKtvPU": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "05:30-12:02",
@@ -4210,7 +4167,7 @@
   },
   "ChIJDcx-OTIYQjERP4eyjItPspA": {
    "rating": 3.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ truyền thống",
    "opening_hours": [
     "06:00-19:00"
@@ -4226,7 +4183,7 @@
   },
   "ChIJBcr6kegZQjER2nCllYpT_Qc": {
    "rating": 4.1,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ đêm",
    "opening_hours": [
     "17:00-23:00"
@@ -4240,7 +4197,7 @@
   },
   "ChIJJZ47gFgZQjERvHYpZqPp0lU": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "00:00-06:30, 14:30-00:00"
@@ -4255,7 +4212,7 @@
   },
   "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Trung tâm mua sắm",
    "opening_hours": [
     "15:00-23:00"
@@ -4268,8 +4225,8 @@
    ]
   },
   "ChIJAdChYQAZQjERdBTX1_66Q_8": {
-   "rating": 3.7,
-   "price_level": 2,
+   "rating": 3.6,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "17:00-23:59",
@@ -4285,7 +4242,7 @@
   },
   "ChIJ2zJrN_EXQjERFRsnRcZaDjI": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "04:30-19:30"
@@ -4299,7 +4256,7 @@
   },
   "ChIJb-kmpPQXQjERKc6w6X8CFKc": {
    "rating": 4.1,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "08:00-21:00"
@@ -4313,7 +4270,6 @@
   },
   "ChIJFad1TFAXQjERE9B6U1THHT4": {
    "rating": 4.3,
-   "price_level": 2,
    "type": "Chợ",
    "opening_hours": [
     "05:00-19:00"
@@ -4326,8 +4282,8 @@
    ]
   },
   "ChIJO56jTAARQjEREYLpKFOB1DA": {
-   "rating": 4.5,
-   "price_level": 2,
+   "rating": 4.4,
+   "price_level": 1,
    "type": "Chợ",
    "tags_v1": [
     "Chợ"
@@ -4335,7 +4291,6 @@
   },
   "ChIJm2iwgggbQjERj-x6QTYemFQ": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Chợ hoa",
    "opening_hours": [
     "04:00-23:30"
@@ -4350,7 +4305,6 @@
   },
   "ChIJOZ__YJwXQjER4wLDpzs9L5c": {
    "rating": 4,
-   "price_level": 2,
    "type": "Chợ đêm",
    "opening_hours": [
     "18:00-23:00"
@@ -4364,7 +4318,7 @@
   },
   "ChIJw6DOwZ8QQjERjDMobkQxbF0": {
    "rating": 3.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "05:00-16:30"
@@ -4377,8 +4331,8 @@
    ]
   },
   "ChIJ55qx-YAaQjERJm3mA3vFjX0": {
-   "rating": 4.1,
-   "price_level": 2,
+   "rating": 4.2,
+   "price_level": 1,
    "type": "Chợ",
    "tags_v1": [
     "Chợ"
@@ -4386,7 +4340,7 @@
   },
   "ChIJg5P0rjoZQjER1MD61JUxPB0": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "04:00-21:30"
@@ -4400,7 +4354,7 @@
   },
   "ChIJlU7ZlygfQjERs_tFa6tFx-s": {
    "rating": 3.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ nông sản",
    "opening_hours": [
     "05:00-18:00"
@@ -4414,7 +4368,7 @@
   },
   "ChIJWZ_M9joZQjERLLPsSJV90FY": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ nông sản",
    "opening_hours": [
     "05:00-12:00"
@@ -4428,7 +4382,7 @@
   },
   "ChIJBVvszgofQjER58MnfuhxrRI": {
    "rating": 4.1,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "06:00-18:00"
@@ -4442,7 +4396,7 @@
   },
   "ChIJN16-6x0fQjERlJytS0E3Kx8": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "tags_v1": [
     "Chợ"
@@ -4450,7 +4404,7 @@
   },
   "ChIJqSwlvMkZQjERE_9aVr3pkes": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "tags_v1": [
     "Chợ"
@@ -4493,7 +4447,7 @@
    ]
   },
   "ChIJDxZNtxMZQjERJDjAHhQgcEc": {
-   "rating": 5,
+   "rating": 4.9,
    "price_level": 2,
    "type": "Nhà hàng Nhật Bản",
    "opening_hours": [
@@ -4529,8 +4483,8 @@
    ]
   },
   "ChIJxzo3j9EZQjER785qACnbIW0": {
-   "rating": 4.4,
-   "price_level": 2,
+   "rating": 4.5,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:00-22:00"
@@ -4545,7 +4499,7 @@
   },
   "ChIJZdLv8rkZQjERIhU2VsEsCl4": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:30-23:00"
@@ -4559,7 +4513,7 @@
   },
   "ChIJkVJFwIgXQjERz4j_u7g6_Ao": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:30-00:00"
@@ -4575,7 +4529,7 @@
   },
   "ChIJFXuefgA9QjERTm9u0hlzWcs": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm ngắm cảnh",
    "opening_hours": [
     "17:00-23:00"
@@ -4589,7 +4543,7 @@
   },
   "ChIJd1ac6eUXQjERQdIGPn3xFwI": {
    "rating": 4.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:00-18:00"
@@ -4622,8 +4576,8 @@
    ]
   },
   "ChIJKdW4YgAfQjERF1TVangBTwY": {
-   "rating": 4.3,
-   "price_level": 2,
+   "rating": 4.4,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -4640,8 +4594,8 @@
    ]
   },
   "ChIJ8WgvsE8ZQjERZzNoKTBgM84": {
-   "rating": 4,
-   "price_level": 2,
+   "rating": 4.1,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -4654,8 +4608,8 @@
    ]
   },
   "ChIJr4cXZxUZQjER1gqN7YF0A70": {
-   "rating": 4.7,
-   "price_level": 2,
+   "rating": 4.6,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00",
@@ -4670,21 +4624,15 @@
   },
   "ChIJMQ_j9n0ZQjER6BCkcpQNT8s": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
-   "opening_hours": [
-    "07:30-22:00"
-   ],
-   "hours_open": [
-    "07:30-22:00"
-   ],
    "tags_v1": [
     "Quán cà phê"
    ]
   },
   "ChIJwTU11dAZQjERsydZriN8k5M": {
-   "rating": 4.6,
-   "price_level": 2,
+   "rating": 4.5,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:30-22:00"
@@ -4698,7 +4646,7 @@
   },
   "ChIJedpeSI4ZQjERYqZQdHBbz5E": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "07:30-22:30"
@@ -4712,7 +4660,7 @@
   },
   "ChIJ5YNM8KoZQjERT-e5n84Og1E": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán cà phê",
    "opening_hours": [
     "06:00-22:00"
@@ -4740,7 +4688,7 @@
   },
   "ChIJlxydWJEZQjER5GSMuHJHtak": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -4753,8 +4701,8 @@
    ]
   },
   "ChIJxU52AgAZQjERUmuAje5_L5Q": {
-   "rating": 4.3,
-   "price_level": 2,
+   "rating": 4.1,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -4762,7 +4710,7 @@
   },
   "ChIJ-cf9B7wQQjERutUzeynzw8w": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -4771,15 +4719,15 @@
   },
   "ChIJOxVypBYRQjERMmK2P6JbzF0": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
    ]
   },
   "ChIJO0IiWR0RQjERtGkQtqESJ1Y": {
-   "rating": 4.5,
-   "price_level": 2,
+   "rating": 4.4,
+   "price_level": 1,
    "type": "Điểm mốc lịch sử",
    "tags_v1": [
     "Điểm mốc lịch sử"
@@ -4787,7 +4735,7 @@
   },
   "ChIJWZUpXf0RQjER6uu8gU2gIhI": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng",
    "tags_v1": [
     "Bảo tàng"
@@ -4795,7 +4743,7 @@
   },
   "ChIJiXlEK7IRQjERvpdL4vcW86w": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Bảo tàng điêu khắc",
    "tags_v1": [
     "Bảo tàng điêu khắc"
@@ -4803,7 +4751,7 @@
   },
   "ChIJ9_dffMQQQjERuJbqVGdSysY": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -4812,15 +4760,14 @@
   },
   "ChIJg-cynKIXQjERyE7ZIaTaCO8": {
    "rating": 5,
-   "price_level": 2,
    "type": "Nhà chòi trên bãi biển",
    "tags_v1": [
     "Nhà chòi trên bãi biển"
    ]
   },
   "ChIJHwgddQAXQjERs5sNrVutheI": {
-   "rating": 3.9,
-   "price_level": 2,
+   "rating": 3.8,
+   "price_level": 1,
    "type": "Câu lạc bộ bãi biển",
    "tags_v1": [
     "Câu lạc bộ bãi biển"
@@ -4828,7 +4775,7 @@
   },
   "ChIJO61z6OMZQjERxyCrO6bO28I": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "05:30-19:00"
@@ -4841,8 +4788,8 @@
    ]
   },
   "ChIJP1PH5CMYQjERBYmCltC5WCE": {
-   "rating": 3.8,
-   "price_level": 2,
+   "rating": 3.9,
+   "price_level": 1,
    "type": "Chợ",
    "opening_hours": [
     "04:00-18:30"
@@ -4856,7 +4803,7 @@
   },
   "ChIJHZakNa8ZQjERWNFToM16eB4": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "06:00-21:00"
@@ -4870,7 +4817,6 @@
   },
   "ChIJuzUYUgAXQjER7uqAcJPQMY0": {
    "rating": 4.8,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -4878,15 +4824,15 @@
   },
   "ChIJuaI3VgMZQjER0B4a7LcJ-YA": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
    ]
   },
   "ChIJJ2sLdT4YQjERi930NC-XCo0": {
-   "rating": 4.1,
-   "price_level": 2,
+   "rating": 4.2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "opening_hours": [
     "04:30-21:00"
@@ -4900,7 +4846,6 @@
   },
   "ChIJxdBK6SsYQjERYojL_cVEkbs": {
    "rating": 4.5,
-   "price_level": 2,
    "type": "Nhà thờ Công giáo",
    "opening_hours": [
     "05:30-06:30, 16:30-17:30",
@@ -4913,7 +4858,7 @@
   },
   "ChIJJYpRy_YXQjERoyNzmnL2f-E": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4921,7 +4866,7 @@
   },
   "ChIJs4dg5vceQjERJQ5D9ATvWhU": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4929,7 +4874,6 @@
   },
   "ChIJPdLppX4XQjERnV5xcr28sO0": {
    "rating": 4.7,
-   "price_level": 2,
    "type": "Nhà thờ Công giáo",
    "opening_hours": [
     "05:00-05:30",
@@ -4943,7 +4887,6 @@
   },
   "ChIJnwKLiE4YQjERMVI0qrqKg1c": {
    "rating": 4.5,
-   "price_level": 2,
    "type": "Nhà thờ Công giáo",
    "opening_hours": [
     "05:00-06:00, 07:30-08:30, 17:00-18:00",
@@ -4959,7 +4902,7 @@
   },
   "ChIJcw0FdkgYQjERhr14f9cMXK0": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4967,7 +4910,7 @@
   },
   "ChIJaV_Jo8gZQjERtDWMcdLRT1U": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4975,7 +4918,7 @@
   },
   "ChIJY3yT3IweQjERnbDRpKk8b3A": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4983,7 +4926,7 @@
   },
   "ChIJOfpog-EYQjERw_VB4IBkfNI": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -4991,7 +4934,7 @@
   },
   "ChIJ5VTV0hwaQjERYReDb0dJJq8": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "opening_hours": [
     "05:00-19:00"
@@ -5005,7 +4948,7 @@
   },
   "ChIJ3S-Eo0sYQjERo9MhApUI4WQ": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -5013,7 +4956,7 @@
   },
   "ChIJX_rcYHQZQjERQXQ9UxHmHN4": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà thờ Công giáo",
    "tags_v1": [
     "Nhà thờ Công giáo"
@@ -5021,7 +4964,7 @@
   },
   "ChIJEf1GVMoZQjERQxbPWFvFiKI": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5029,7 +4972,7 @@
   },
   "ChIJfQNjLMYQQjERo1m_A0X8aLE": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo",
@@ -5038,7 +4981,7 @@
   },
   "ChIJRZhHIMkZQjERYBH-5S1xKNg": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "06:00-22:00"
@@ -5053,7 +4996,7 @@
   },
   "ChIJCeQZ-jkZQjERaXJSI0ZDWXw": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "09:00-17:00"
@@ -5067,7 +5010,7 @@
   },
   "ChIJsdeOrV8XQjER8weQ8Az-w5c": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5075,7 +5018,7 @@
   },
   "ChIJyd-t1B0ZQjERVSYFtVbYms8": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo",
@@ -5084,7 +5027,7 @@
   },
   "ChIJrfvtnpYhQjEReNe0fgh8KMM": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5092,7 +5035,7 @@
   },
   "ChIJASjStc0ZQjERf8hQfCEJ8JA": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo",
@@ -5101,7 +5044,6 @@
   },
   "ChIJCRy3iv_2QTERfZxGJkIMHHQ": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "08:00-17:30"
@@ -5115,7 +5057,7 @@
   },
   "ChIJuzoag4EXQjERm__A5Whnw5I": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5123,7 +5065,7 @@
   },
   "ChIJaUuo57kZQjERzjJfr1YdjCA": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5131,7 +5073,7 @@
   },
   "ChIJrynevMsZQjERzZIGoLZwQ2I": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -5139,7 +5081,6 @@
   },
   "ChIJyWFmArX3QTERon6tUT6re4Q": {
    "rating": 4.4,
-   "price_level": 2,
    "type": "Thắng cảnh",
    "tags_v1": [
     "Thắng cảnh",
@@ -5148,7 +5089,7 @@
   },
   "ChIJyUQ4aw72QTERCXl5YV-4U1w": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Công viên giải trí",
    "opening_hours": [
     "08:00-22:00"
@@ -5163,7 +5104,6 @@
   },
   "ChIJH38kxPn2QTERee_Ccs86ccE": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Ridge",
    "tags_v1": [
     "Ridge"
@@ -5171,7 +5111,6 @@
   },
   "ChIJ5ySJbAAZQjEROESCTb3NJsw": {
    "rating": 4.5,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -5733,7 +5672,7 @@
    ]
   },
   "ChIJNxOlbnIXQjER9DXmYRuiv3Q": {
-   "rating": 5,
+   "rating": 4.9,
    "price_level": 2,
    "type": "Spa",
    "opening_hours": [
@@ -5828,7 +5767,7 @@
    ]
   },
   "ChIJv1gepxMZQjER2xJtkXvi9xU": {
-   "rating": 4.6,
+   "rating": 4.7,
    "price_level": 2,
    "type": "Spa",
    "tags_v1": [
@@ -5886,7 +5825,7 @@
   },
   "ChIJ6UAZeAAZQjERzK3T81riZmo": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch",
@@ -5895,7 +5834,7 @@
   },
   "ChIJA0bFwKoZQjER--pX5_3_cD0": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Nhà hàng",
    "tags_v1": [
     "Nhà hàng"
@@ -6230,18 +6169,12 @@
    "rating": 4.9,
    "price_level": 2,
    "type": "Nhà hàng hải sản",
-   "opening_hours": [
-    "10:00-02:00"
-   ],
    "price_range": {
     "typical": 350000,
     "min": 100000,
     "max": 600000
    },
    "price_note": "~350.000đ (khoảng 100-600 N ₫)",
-   "hours_open": [
-    "10:00-02:00"
-   ],
    "tags_v1": [
     "Nhà hàng hải sản"
    ]
@@ -6721,7 +6654,6 @@
   },
   "ChIJpTFl49UYQjERrzeUIxz8NL4": {
    "rating": 3.7,
-   "price_level": 2,
    "type": "Khách sạn",
    "tags_v1": [
     "Khách sạn"
@@ -6765,7 +6697,6 @@
   },
   "ChIJVVUC-lEYQjERqdANIT0ShEw": {
    "rating": 3.2,
-   "price_level": 2,
    "type": "unknown"
   },
   "ChIJ9--6uKYZQjER5hS7ybSadkc": {
@@ -7008,7 +6939,7 @@
    ]
   },
   "ChIJEWVESw8XQjEReJCexT_n2Wo": {
-   "rating": 4.9,
+   "rating": 4.8,
    "price_level": 2,
    "type": "Spa",
    "tags_v1": [
@@ -7033,12 +6964,6 @@
    "rating": 5,
    "price_level": 2,
    "type": "Spa",
-   "opening_hours": [
-    "10:30-19:30"
-   ],
-   "hours_open": [
-    "10:30-19:30"
-   ],
    "tags_v1": [
     "Spa"
    ]
@@ -7090,7 +7015,7 @@
    ]
   },
   "ChIJ_QZY3EMXQjERjA5RvSnV9AM": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 2,
    "type": "Spa",
    "opening_hours": [
@@ -7177,7 +7102,7 @@
   },
   "ChIJ5xGrdQAXQjERUKN8BeMLPJo": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Spa",
    "opening_hours": [
     "09:00-21:00"
@@ -7238,12 +7163,6 @@
    "rating": 5,
    "price_level": 2,
    "type": "Spa sức khỏe",
-   "opening_hours": [
-    "08:30-20:00"
-   ],
-   "hours_open": [
-    "08:30-20:00"
-   ],
    "tags_v1": [
     "Spa sức khỏe"
    ]
@@ -7296,12 +7215,6 @@
    "rating": 4.8,
    "price_level": 2,
    "type": "Spa mát xa",
-   "opening_hours": [
-    "08:00-04:00"
-   ],
-   "hours_open": [
-    "08:00-04:00"
-   ],
    "tags_v1": [
     "Spa mát xa"
    ]
@@ -7322,7 +7235,6 @@
   },
   "ChIJWd2LBrkZQjER4hLHO81ipK0": {
    "rating": 4.9,
-   "price_level": 2,
    "type": "Spa",
    "opening_hours": [
     "09:00-20:00"
@@ -7434,7 +7346,6 @@
   },
   "ChIJ3dEof08ZQjERrJfwaLyIAIk": {
    "rating": 5,
-   "price_level": 2,
    "type": "Spa",
    "tags_v1": [
     "Spa"
@@ -7479,7 +7390,6 @@
   },
   "ChIJYU-cVQAXQjERxfDy3td5_ac": {
    "rating": 4.9,
-   "price_level": 2,
    "type": "Spa mát xa",
    "tags_v1": [
     "Spa mát xa"
@@ -7487,7 +7397,6 @@
   },
   "ChIJacuaCgAfQjERmRXLEMbkPJM": {
    "rating": 5,
-   "price_level": 2,
    "type": "Spa",
    "opening_hours": [
     "08:00-21:00"
@@ -7501,7 +7410,6 @@
   },
   "ChIJw2G2IwAfQjERGAvvbDnKLHM": {
    "rating": 5,
-   "price_level": 2,
    "type": "Spa sức khỏe",
    "opening_hours": [
     "08:00-22:00"
@@ -7558,7 +7466,6 @@
   },
   "ChIJ95sVZAAZQjERaWAzQF3vSiQ": {
    "rating": 4.9,
-   "price_level": 2,
    "type": "Spa",
    "opening_hours": [
     "08:00-22:00"
@@ -7599,7 +7506,7 @@
    ]
   },
   "ChIJPQ-OSwAZQjER0Zu4X6NlQds": {
-   "rating": 5,
+   "rating": 4.9,
    "price_level": 2,
    "type": "Spa mát xa",
    "tags_v1": [
@@ -7702,7 +7609,7 @@
    ]
   },
   "ChIJfzqqXwAZQjERWQ7zRsTU8Zk": {
-   "rating": 4.8,
+   "rating": 4.6,
    "price_level": 2,
    "type": "Spa",
    "opening_hours": [
@@ -7733,7 +7640,7 @@
    ]
   },
   "ChIJg85mY5EZQjERXv4xH_p-_MI": {
-   "rating": 4.3,
+   "rating": 4.4,
    "price_level": 2,
    "type": "Spa",
    "opening_hours": [
@@ -7747,7 +7654,6 @@
    ]
   },
   "ChIJC1S7VAAZQjERFItFlyewDHY": {
-   "price_level": 2,
    "type": "Spa",
    "opening_hours": [
     "09:00-20:00"
@@ -7818,7 +7724,7 @@
    ]
   },
   "ChIJZVLi0gEZQjERl6s0h2bqoK0": {
-   "rating": 5,
+   "rating": 4.9,
    "price_level": 2,
    "type": "Quán bar cocktail",
    "opening_hours": [
@@ -7861,7 +7767,6 @@
   },
   "ChIJW5KDTQAZQjERJXJQMoz2YJo": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar tiếp viên nữ",
    "opening_hours": [
     "19:30-02:00"
@@ -7926,7 +7831,6 @@
   },
   "ChIJ6e7t67oZQjERLcf4KcgElEc": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar tiếp viên nữ",
    "opening_hours": [
     "19:00-02:00"
@@ -7956,7 +7860,7 @@
    ]
   },
   "ChIJp4lxrJsZQjERdBDtWzWyHJU": {
-   "rating": 4.8,
+   "rating": 4.7,
    "price_level": 2,
    "type": "Quán bar",
    "opening_hours": [
@@ -8187,7 +8091,6 @@
   },
   "ChIJZ5ZGlCsZQjER95guGn5ybGo": {
    "rating": 4.7,
-   "price_level": 2,
    "type": "Quán bar karaoke",
    "opening_hours": [
     "11:00-03:00"
@@ -8255,11 +8158,6 @@
    "rating": 4.7,
    "price_level": 2,
    "type": "Quán bar cocktail",
-   "opening_hours": [
-    "00:30-01:00",
-    "00:30-01:00, 19:30-00:00",
-    "19:30-00:00"
-   ],
    "price_range": {
     "typical": 250000,
     "min": 200000,
@@ -8295,7 +8193,7 @@
    ]
   },
   "ChIJdwwwfFoXQjERW6mXtIdB8LU": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 2,
    "type": "Bar thể thao",
    "opening_hours": [
@@ -8341,7 +8239,7 @@
   },
   "ChIJxRB4CRgXQjER6zy0em0FyTk": {
    "rating": 4.7,
-   "price_level": 3,
+   "price_level": 2,
    "type": "Quán bar",
    "opening_hours": [
     "19:30-01:30"
@@ -8455,7 +8353,7 @@
   },
   "ChIJKVaLEy8XQjERAgiDXavBMTE": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán bar",
    "opening_hours": [
     "18:30-00:00"
@@ -8512,7 +8410,6 @@
   },
   "ChIJl7zcVgARQjERTJASEbCGeuc": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar",
    "opening_hours": [
     "09:00-00:00"
@@ -8573,7 +8470,6 @@
   },
   "ChIJw3dqIx8ZQjERxFZPN1A3gew": {
    "rating": 4.3,
-   "price_level": 2,
    "type": "Quán bar",
    "opening_hours": [
     "07:30-23:30"
@@ -8587,7 +8483,6 @@
   },
   "ChIJQxr6eAAfQjER1vwrQRjtk60": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar",
    "tags_v1": [
     "Quán bar"
@@ -8595,7 +8490,6 @@
   },
   "ChIJmd-xKSoZQjERr8BS2agMkCI": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar",
    "tags_v1": [
     "Quán bar"
@@ -8603,7 +8497,6 @@
   },
   "ChIJFXRrR0wZQjERNl4jMD9QNFI": {
    "rating": 4.5,
-   "price_level": 2,
    "type": "Quán bia sân vườn",
    "tags_v1": [
     "Quán bia sân vườn",
@@ -8613,7 +8506,6 @@
   },
   "ChIJOean5VUZQjERMWDUmGdTpJQ": {
    "rating": 3.6,
-   "price_level": 2,
    "type": "Quán bar",
    "tags_v1": [
     "Quán bar"
@@ -8621,7 +8513,6 @@
   },
   "ChIJVS4QEX8fQjERk1vVwmP0Rk8": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bia",
    "tags_v1": [
     "Quán bia"
@@ -8629,7 +8520,7 @@
   },
   "ChIJWTRb5NcYQjER6mJOuNl06k8": {
    "rating": 3.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Quán rượu",
    "tags_v1": [
     "Quán rượu"
@@ -8657,7 +8548,6 @@
   },
   "ChIJcYos3CkZQjERibEDbcXOpQs": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar karaoke",
    "opening_hours": [
     "08:00-00:00"
@@ -8670,8 +8560,7 @@
    ]
   },
   "ChIJ1XDmcgAZQjERg3z1Ix0EbZA": {
-   "rating": 5,
-   "price_level": 2,
+   "rating": 4.6,
    "type": "Dịch vụ cho thuê thiết bị karaoke",
    "opening_hours": [
     "09:00-05:00"
@@ -8706,7 +8595,6 @@
   },
   "ChIJ-WGIA80YQjER8XDqSVShrOE": {
    "rating": 4.7,
-   "price_level": 2,
    "type": "Quán bar karaoke",
    "opening_hours": [
     "08:00-00:00"
@@ -8719,15 +8607,14 @@
    ]
   },
   "ChIJP1XHPQAZQjERinsxWb2Ga0A": {
-   "rating": 3.4,
-   "price_level": 2,
+   "rating": 4.3,
    "type": "Quán bar karaoke",
    "tags_v1": [
     "Quán bar karaoke"
    ]
   },
   "ChIJsSD2e3kfQjER2d_jnMVrKZ4": {
-   "rating": 4.4,
+   "rating": 3.8,
    "price_level": 2,
    "type": "Quán bia",
    "opening_hours": [
@@ -8742,7 +8629,6 @@
   },
   "ChIJcTnFX6QfQjERgmN3buOe9AQ": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán rượu",
    "tags_v1": [
     "Quán rượu"
@@ -8764,7 +8650,7 @@
    ]
   },
   "ChIJs95SfgAZQjERWa0RkAoF0XA": {
-   "rating": 3.6,
+   "rating": 3.7,
    "price_level": 1,
    "type": "Quán bar karaoke",
    "opening_hours": [
@@ -9020,7 +8906,6 @@
   },
   "ChIJc2sSdpMZQjERg6ykGdI-3r4": {
    "rating": 5,
-   "price_level": 2,
    "type": "Quán bar",
    "opening_hours": [
     "10:00-22:30"
@@ -9047,7 +8932,7 @@
    ]
   },
   "ChIJObG9DvoZQjER1tqakgkbUno": {
-   "rating": 4.4,
+   "rating": 4.3,
    "price_level": 2,
    "type": "Quán bia sân vườn",
    "opening_hours": [
@@ -9087,7 +8972,7 @@
    ]
   },
   "ChIJkZi7gkcYQjERPd87DaNuhW0": {
-   "rating": 4.7,
+   "rating": 4.6,
    "price_level": 2,
    "type": "Quán bar ca nhạc trực tiếp",
    "opening_hours": [
@@ -9115,7 +9000,6 @@
   },
   "ChIJ8ar-PNQXQjERFGGdrbCAQbg": {
    "rating": 4.7,
-   "price_level": 2,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "06:00-21:00"
@@ -9130,7 +9014,6 @@
   },
   "ChIJabEOcucXQjER-8MNU9FNODw": {
    "rating": 4.8,
-   "price_level": 2,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "06:30-17:30"
@@ -9144,7 +9027,7 @@
   },
   "ChIJnZoMTbkQQjERwzvvHqGlb4E": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9152,7 +9035,7 @@
   },
   "ChIJyaniiLoQQjERI3aW6z5atCc": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9160,7 +9043,7 @@
   },
   "ChIJO9OcO7kQQjERuGR5zEtpfu8": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9168,7 +9051,7 @@
   },
   "ChIJW9b8Ky0XQjERPn8CJNdE0Lk": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9176,7 +9059,7 @@
   },
   "ChIJvexouL4QQjERy0qt57A0GX4": {
    "rating": 4.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9184,7 +9067,7 @@
   },
   "ChIJA8a2aLcQQjER5mciBxvjUVs": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "07:00-17:00"
@@ -9198,7 +9081,7 @@
   },
   "ChIJ8Z0D7KURQjERUPd36goDH90": {
    "rating": 4.5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9206,7 +9089,7 @@
   },
   "ChIJLX9s7EUbQjERdsy67X5-NrE": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9214,7 +9097,7 @@
   },
   "ChIJf_LKvbkbQjERSVrbzxU6Nuc": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9222,7 +9105,7 @@
   },
   "ChIJ8VqGDeYRQjERVEkumiIa714": {
    "rating": 4.9,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9230,7 +9113,7 @@
   },
   "ChIJ9w6iligZQjERXLpgwwjF0Fs": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9238,7 +9121,6 @@
   },
   "ChIJo2Yyix8ZQjERmG7AHQkOpIo": {
    "rating": 4.6,
-   "price_level": 2,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9246,7 +9128,7 @@
   },
   "ChIJKcik9OQYQjERKZ21jblRTVc": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9254,7 +9136,7 @@
   },
   "ChIJl21Hd_4YQjERF980f9HS9Cc": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9262,14 +9144,13 @@
   },
   "ChIJsVPjaP8YQjER76Ao_3tvppY": {
    "rating": 4.2,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
    ]
   },
   "ChIJp3BwHgsZQjERzQZfxwNQNmE": {
-   "price_level": 2,
    "type": "Chùa",
    "tags_v1": [
     "Chùa"
@@ -9277,7 +9158,7 @@
   },
   "ChIJQ2dbvVIYQjERVbGNKc5Tmcs": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "tags_v1": [
     "Chùa phật giáo"
@@ -9285,7 +9166,7 @@
   },
   "ChIJaX09zkgYQjERCtro2DeADN0": {
    "rating": 4.3,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Chùa phật giáo",
    "opening_hours": [
     "05:00-21:00"
@@ -9299,7 +9180,6 @@
   },
   "ChIJF8yRoecZQjERdDBeBdSRD-Y": {
    "rating": 4.4,
-   "price_level": 2,
    "type": "Điểm thu hút khách du lịch",
    "tags_v1": [
     "Điểm thu hút khách du lịch"
@@ -9307,7 +9187,7 @@
   },
   "ChIJu1LdzQwZQjER2DSbyyayAbs": {
    "rating": 4.6,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -9315,7 +9195,7 @@
   },
   "ChIJYy3rrs4ZQjER3g_-SEo5WPU": {
    "rating": 4.4,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -9323,7 +9203,6 @@
   },
   "ChIJDYfSGZYZQjERmSERKl2Fj7E": {
    "rating": 4.9,
-   "price_level": 2,
    "type": "Khách sạn",
    "tags_v1": [
     "Khách sạn"
@@ -9331,7 +9210,7 @@
   },
   "ChIJvfs2CK4ZQjERYSUrqnRYbqo": {
    "rating": 4.7,
-   "price_level": 2,
+   "price_level": 1,
    "type": "Công viên",
    "tags_v1": [
     "Công viên"
@@ -9404,7 +9283,6 @@
   },
   "ChIJX7bFNr8NQjERJJLeQ2lyHWo": {
    "rating": 5,
-   "price_level": 2,
    "type": "Đại lý du lịch bằng thuyền",
    "opening_hours": [
     "08:00-18:00"
@@ -9431,7 +9309,7 @@
    ]
   },
   "ChIJT1zm9U8NQjERQf5DsBriCgc": {
-   "rating": 4.1,
+   "rating": 5.0,
    "price_level": 2,
    "type": "Đại lý du lịch",
    "opening_hours": [
@@ -9446,7 +9324,7 @@
   },
   "ChIJO5_PAj8XQjER34kyBjbMYNo": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "09:30-19:30"
@@ -9460,7 +9338,7 @@
   },
   "ChIJ8ai7BQAZQjERIkxmYHcV9DQ": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "08:30-20:30"
@@ -9474,7 +9352,7 @@
   },
   "ChIJs-NDcgAXQjERHA6tioqOfH4": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "08:00-21:00"
@@ -9504,7 +9382,7 @@
   },
   "ChIJg2m14V0ZQjERt4DjGOdJDiE": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "07:30-19:00"
@@ -9519,7 +9397,7 @@
   },
   "ChIJp9cNzfwZQjERS7ZSaA95etk": {
    "rating": 4.8,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "08:00-20:30"
@@ -9533,7 +9411,7 @@
   },
   "ChIJrQINf-wZQjEREXiFm4Gq56M": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "10:00-12:30, 17:00-19:30"
@@ -9563,7 +9441,7 @@
   },
   "ChIJ26h5ZAANQjER2otGJosJliA": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "07:00-20:00"
@@ -9580,7 +9458,7 @@
   },
   "ChIJyZOJHa8NQjERSvp9yMenV6Y": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "07:00-18:00"
@@ -9594,7 +9472,7 @@
   },
   "ChIJx0dBXWYNQjERQzQO18QYhas": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "09:00-22:00"
@@ -9608,7 +9486,7 @@
   },
   "ChIJddXz2K8PQjER4enhapQvvo8": {
    "rating": 5,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "06:00-19:00"
@@ -9625,7 +9503,7 @@
   },
   "ChIJmU3hl9WrNTERBUbnSp3g5vs": {
    "rating": 4.9,
-   "price_level": 2,
+   "price_level": 3,
    "type": "Lớp học nấu ăn",
    "opening_hours": [
     "08:00-20:00"
@@ -9640,11 +9518,34 @@
    ]
   },
   "ChIJH1ujCM0XQjERcOl1lB9Ns6k": {
-   "price_level": 2,
    "type": "Lớp học nấu ăn",
    "tags_v1": [
     "Lớp học nấu ăn"
    ]
+  },
+  "manual:banh-xeo-ba-duong": {
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
+  },
+  "manual:golden-pine": {
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)"
+  },
+  "manual:sky36": {
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)"
   }
  }
 }

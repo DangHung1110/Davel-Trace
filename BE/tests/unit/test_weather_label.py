@@ -20,11 +20,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.ml.weather_label.labeler import (  # noqa: E402
     classify_poi,
-    classify_snapshot_poi,
     featurize,
     label,
     label_element,
-    weather_evidence,
 )
 
 OSM_DN = os.path.join(os.environ.get("TEMP", "/tmp"), "opencode", "osm", "danang.json")
@@ -96,10 +94,6 @@ class TestWeatherLabelV1(unittest.TestCase):
             r = label(featurize(el(tags)))
             self.assertIn(r["confidence"], (0.9, 0.7, 0.5))
 
-    def test_evidence_shape(self):
-        ev = weather_evidence("Cafe", label_element(el({"amenity": "cafe"})))
-        self.assertTrue(ev and "indoor" in ev[0])
-
     def test_osm_smoke_distribution(self):
         if not os.path.exists(OSM_DN):
             self.skipTest("OSM cache absent (fetch_osm.py first)")
@@ -111,8 +105,7 @@ class TestWeatherLabelV1(unittest.TestCase):
 
 
 class TestClassifyPoiSchema(unittest.TestCase):
-    def test_schema_and_alias(self):
-        self.assertIs(classify_snapshot_poi, classify_poi)
+    def test_schema(self):
         r = sample(name="Bảo tàng Chăm", cat="museum")
         for key in (
             "space", "space_source", "space_confidence", "space_evidence",

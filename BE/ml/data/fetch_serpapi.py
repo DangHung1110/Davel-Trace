@@ -106,14 +106,6 @@ def search_params(category: str, district: str) -> dict:
             "q": f"{category} {district} Đà Nẵng", "hl": "vi", "gl": "vn"}
 
 
-def details_params(place_id: str) -> dict:
-    # DOCUMENTATION ONLY — live-verified 2026-09-28 that SerpApi
-    # google_maps does NOT serve place details this way (returns
-    # "Google hasn't returned any results"). Kept so nobody retries it.
-    # run() normalizes from the (rich) search payload instead.
-    return {"engine": "google_maps", "q": place_id, "hl": "vi", "gl": "vn"}
-
-
 def raw_path(raw_dir: str, kind: str, key: str) -> str:
     safe = "".join(c if c.isalnum() else "_" for c in key)[:80]
     return os.path.join(raw_dir, kind, safe + ".json")
@@ -181,7 +173,7 @@ def normalize(place_id: str, search_item: dict) -> dict:
         "opening_hours": parse_hours(search_item.get("operating_hours")),
         "visit_min": {"p25": 0, "p50": 0, "p75": 0},  # nac-2 fills later
         "dur_source": "pending_llm", "dur_confidence": "low",
-        "price_level": 2, "fee": 0,
+        "price_level": None, "fee": 0,  # null until a real price (normalize_fields)
         "rating": rating,
         "tags": cats,
         "intensity": 2, "ambience": "", "weather_sensitive": False,

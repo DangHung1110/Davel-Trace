@@ -28,9 +28,8 @@ sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 import v2_rules as R  # noqa: E402
 from migrate_v2 import V21_KEYS, PROVENANCE_KEYS  # noqa: E402
 from BE.app.services import retrieval  # noqa: E402
-from BE.app.services.snapshot import load_snapshot  # noqa: E402
 from BE.common import (PRICE_TIERS, effective_fee, fee_upper, load_json,  # noqa: E402
-                       matrix_path, poi_view, view_pois)
+                       load_pois, poi_view, view_pois)
 
 SNAP = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
 EXPORTS = os.path.join(ROOT, "BE", "data", "exports", "danang-v2")
@@ -61,7 +60,7 @@ class TestSnapshotV21(unittest.TestCase):
     def setUpClass(cls):
         cls.raw = load_json(os.path.join(SNAP, "pois.json"))
         cls.pois = cls.raw["pois"]
-        cls.data = load_snapshot(SNAP)          # v1 validator on the runtime view
+        cls.data = {"pois": load_pois(SNAP)}   # runtime view (poi_view)
         cls.quarantine = load_json(os.path.join(SNAP, "quarantine_google.json"))["items"]
 
     # 1. coordinates inside the bounding box, every POI has a known zone
@@ -223,7 +222,7 @@ class TestSnapshotV21(unittest.TestCase):
 
     @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
     def test_gate_G1_every_stop_has_matrix_row(self):
-        ids = set(load_json(matrix_path(SNAP)).get("ids", []))
+        ids = set(load_json(os.path.join(SNAP, "matrix.json")).get("ids", []))
         missing = [p["name"] for p in self.pois if _stop(p) and p["poi_id"] not in ids]
         self.assertEqual(missing, [], f"{len(missing)} stops lack a matrix row (WP7)")
 

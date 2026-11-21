@@ -3,11 +3,11 @@
 > **Current data status (2026-10-27):** the final `danang-v1` snapshot has 742
 > POIs after manual review; `space` is indoor 504, outdoor 129, both 109,
 > unknown 0. The top-150 route matrix is rebuilt with 22,500/22,500 OSRM
-> cells. See
-> [`WEATHER_AUDIT_RECONCILIATION.md`](../BE/data/snapshots/danang-v1/WEATHER_AUDIT_RECONCILIATION.md)
-> and [`EXPOSURE_DISTRIBUTION.md`](../BE/data/snapshots/danang-v1/EXPOSURE_DISTRIBUTION.md)
-> for the final snapshot. Historical counts and model metrics below describe
-> earlier 764-POI runs and are retained as experiment history.
+> cells. The audit reports and review pages (`WEATHER_AUDIT_RECONCILIATION.md`,
+> `render_review`) are in git history: `git show de7e0be:<path>`;
+> `EXPOSURE_DISTRIBUTION.md` is written by `enrich_snapshot.py --apply`.
+> Historical counts and model metrics below describe earlier 764-POI runs and are
+> retained as experiment history.
 
 Replaces the dead low-variance weather labels with continuous exposure
 attributes and wires them into the PATM transition features. Numbers below are
@@ -186,10 +186,6 @@ python BE/ml/data/enrich_snapshot.py --snapshot BE/data/snapshots/danang-v1 `
 python BE/ml/patm/train.py --pairs C:\tmp\pairs_v4_final.json `
     --snapshot BE/data/snapshots/danang-v1 --model-out BE/ml/patm/model.txt
 python -m unittest discover -s BE/tests -t BE
-python -m BE.ml.weather_label.render_review --input `
-    BE/data/snapshots/danang-v1/weather_review_200.json --blind
-python -m BE.ml.weather_label.render_review --snapshot `
-    BE/data/snapshots/danang-v1 --blind --seed 999 --limit 40
 ```
 
 After choosing labels in the blind page, export JSON and pass it back to the

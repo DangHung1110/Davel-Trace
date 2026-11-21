@@ -15,13 +15,19 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from BE.app.core.config import Settings
+from BE.app.core.logging import redact
+
 REPO = os.path.join(os.path.dirname(__file__), "..", "..", "..")
 
 PATTERNS = [
     r"sk-[A-Za-z0-9]{8,}",
     r"AIza[A-Za-z0-9_-]{10,}",
+    r"AQ\.[A-Za-z0-9_-]{30,}",
+    r"GOCSPX-[A-Za-z0-9_-]{20,}",
     r"xox[bap]-[A-Za-z0-9-]{8,}",
     r"ghp_[A-Za-z0-9]{8,}",
+    r"gsk_[A-Za-z0-9_-]{10,}",
     r"password\s*=\s*['\"][^'\"]{3,}",
     r"Bearer [A-Za-z0-9._-]{12,}",
     r"https?://[^/\s]*:[^/\s]*@[A-Za-z]",
@@ -37,6 +43,18 @@ def tracked_files() -> list[str]:
 
 
 class TestNoSecrets(unittest.TestCase):
+    def test_config_and_log_redaction(self):
+        secret = "not-a-live-secret"
+        url = f"postgresql+psycopg://davel:{secret}@localhost/davel_trace"
+        settings = Settings(
+            app_mode="production",
+            database_url=url,
+            allowed_origins="https://app.example",
+            _env_file=None,
+        )
+        self.assertNotIn(secret, repr(settings))
+        self.assertNotIn(secret, redact(url))
+
     def test_no_secret_patterns(self):
         hits = []
         for f in tracked_files():
@@ -51,7 +69,15 @@ class TestNoSecrets(unittest.TestCase):
             for pat in PATTERNS:
                 for m in re.finditer(pat, text):
                     line = text[max(0, m.start() - 60):m.end() + 20]
-                    if not ALLOW.search(line):
+                    documented_scheme = (
+                        f.endswith(".md") and m.group() == "Bearer " + "authentication"
+                    )
+                    known_test_password = (
+                        f.startswith("BE/tests/") and
+                        m.group() in ('password = "TravelDemo123',
+                                      'password = "TravelDemo456')
+                    )
+                    if not ALLOW.search(line) and not documented_scheme and not known_test_password:
                         hits.append(f"{f}: {pat} :: {line.strip()[:100]}")
         self.assertEqual(hits, [], f"possible secrets:\n" + "\n".join(hits[:10]))
 

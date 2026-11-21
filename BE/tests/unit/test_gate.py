@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.common import total_fee  # noqa: E402
+from BE.common import total_fee  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     ACTIVE_RULES,
     CHECKS,
@@ -20,7 +20,6 @@ from BE.app.services.gate import (  # noqa: E402
     HARD_CHECKS,
     RULE_FREEZE,
     SOFT_CHECKS,
-    all_pass,
     check_a1,
     check_b3,
     check_bcs,
@@ -30,6 +29,7 @@ from BE.app.services.gate import (  # noqa: E402
     check_hcs,
     check_no_adjacent_food,
     check_no_consecutive,
+    check_profile_safe,
     check_rest_follows_lunch,
     check_tcs,
     check_vroh,
@@ -40,11 +40,9 @@ from BE.app.services.gate import (  # noqa: E402
 )
 
 POIS = {
-    "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
-             "opening_hours": ["07:30-17:00"]},
-    "beach": {"verified": True, "free_entry": True,
-              "opening_hours": ["00:00-23:59"]},
-    "draft": {"verified": False, "opening_hours": ["00:00-23:59"]},
+    "musu": {"verified": True, "fee": 60000, "opening_hours": ["07:30-17:00"]},
+    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"]},
+    "draft": {"verified": False, "fee": 0, "opening_hours": ["00:00-23:59"]},
 }
 MATRIX = {"musu->beach": {"minutes": 10}, "beach->musu": {"minutes": 10}}
 TRIP = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00"}
@@ -75,6 +73,12 @@ EAT_MATRIX = {f"{a}->{b}": {"minutes": 10}
               for a in EAT_IDS for b in EAT_IDS if a != b}
 
 
+
+def all_pass(itinerary, trip, pois, matrix):
+    rep = report(itinerary, trip, pois, matrix)
+    return {"passed": rep["passed"], "failed": rep["failed"]}
+
+
 class TestGate(unittest.TestCase):
     def test_good_passes_all_hard_gates(self):
         # F1 (soft) legitimately fails on this fixture: it has no category
@@ -88,16 +92,17 @@ class TestGate(unittest.TestCase):
                          {"passed": True, "failed": []})
 
     def test_soft_registry_membership(self):
-        self.assertEqual(SOFT_CHECKS, frozenset({"F1"}))
+        self.assertEqual(SOFT_CHECKS, frozenset({"F1", "TIME_FIT", "DINNER"}))
         self.assertNotIn("F1", [name for name, _ in HARD_CHECKS])
         self.assertEqual(len(HARD_CHECKS), len(CHECKS) - len(SOFT_CHECKS))
 
     def test_registry_and_result_shape_are_canonical(self):
         self.assertEqual([name for name, _ in CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB",
+                          "A1", "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
         for _, fn in CHECKS:
             result = fn(GOOD, TRIP, POIS, MATRIX)
             self.assertEqual(set(result), {"passed", "score"})
@@ -194,8 +199,8 @@ class TestGate(unittest.TestCase):
 
     def test_bcs_itinerary_total_cost_overrides_fee_sum(self):
         """Pins: itinerary['total_cost'] wins over the POI fee sum when present."""
-        # Band-based sum is 100000 (musu cheap) > budget 10 -> override passes.
-        self.assertEqual(total_fee(GOOD["activities"], POIS), 100000)
+        # Fee-based sum would be 60000 (musu) > budget 10 -> override makes it pass.
+        self.assertEqual(total_fee(GOOD["activities"], POIS), 60000)
         with_cost = dict(GOOD, total_cost=10)
         self.assertEqual(check_bcs(with_cost, dict(TRIP, budget=10), POIS, MATRIX),
                          {"passed": True, "score": 1.0})
@@ -505,6 +510,46 @@ class TestRuleFreeze(unittest.TestCase):
     def test_report_deprecated_failed_is_empty_when_all_pass(self):
         self.assertEqual(report(GOOD, TRIP, POIS, MATRIX)["deprecated_failed"],
                          [])
+
+
+class TestProfileSafe(unittest.TestCase):
+    """PROFILE_SAFE re-checks the onboarding hard filter on the final plan."""
+
+    SEAFOOD = {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"],
+               "cat": "restaurant", "tags": ["Nhà hàng hải sản"]}
+    PLAN = {"activities": [{"poi_id": "beach", "start": "08:00", "end": "09:00"},
+                           {"poi_id": "sea", "start": "11:30", "end": "12:30"}]}
+
+    def _pois(self):
+        return {**POIS, "sea": self.SEAFOOD}
+
+    def test_allergen_fails_and_hcs_mirrors_it(self):
+        trip = dict(TRIP, profile={"allergy": ["hải sản"]})
+        res = check_profile_safe(self.PLAN, trip, self._pois(), MATRIX)
+        self.assertFalse(res["passed"])
+        self.assertAlmostEqual(res["score"], 0.5)
+        self.assertFalse(check_hcs(self.PLAN, trip, self._pois(), MATRIX)["passed"])
+        self.assertIn("PROFILE_SAFE", report(self.PLAN, trip, self._pois(), MATRIX)["failed"])
+
+    def test_no_profile_filter_passes(self):
+        for trip in (TRIP, dict(TRIP, profile={"party_type": "couple"})):
+            self.assertTrue(check_profile_safe(self.PLAN, trip, self._pois(),
+                                               MATRIX)["passed"])
+
+    def test_must_avoid_and_accessibility(self):
+        bar = {"verified": True, "fee": 0, "opening_hours": [], "cat": "bar",
+               "tags": ["quán bar"], "intensity": 1}
+        plan = {"activities": [{"poi_id": "bar", "start": "20:00", "end": "21:00"}]}
+        trip = dict(TRIP, profile={"must_avoid": ["nightlife"]})
+        self.assertFalse(check_profile_safe(plan, trip, {"bar": bar}, MATRIX)["passed"])
+        trek = {"verified": True, "cat": "nature", "intensity": 3}
+        plan = {"activities": [{"poi_id": "trek", "start": "08:00", "end": "10:00"}]}
+        trip = dict(TRIP, profile={"accessibility": ["wheelchair"]})
+        self.assertFalse(check_profile_safe(plan, trip, {"trek": trek}, MATRIX)["passed"])
+
+    def test_registered_as_active_safety_rule(self):
+        self.assertEqual(RULE_FREEZE["PROFILE_SAFE"]["family"], "safety")
+        self.assertIn("PROFILE_SAFE", [name for name, _ in HARD_CHECKS])
 
 
 class TestRestRuleSingleDefinition(unittest.TestCase):

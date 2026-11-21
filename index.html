@@ -913,7 +913,9 @@
         stopAnimation(true);
         els.createRoute.disabled = true;
         els.playRoute.disabled = true;
-        setStatus("Đang gọi Route API v4 và dựng tuyến…", "loading");
+        setStatus(getServiceKey()
+          ? "Đang gọi Route API v4 và dựng tuyến…"
+          : "Đang tìm tuyến bám đường bằng OSRM/OpenStreetMap…", "loading");
 
         const query = new URLSearchParams({
           apikey: getServiceKey(),
@@ -923,11 +925,13 @@
         });
         query.append("point", `${end[1]},${end[0]}`);
 
-        const endpoints = [
+        // Không có Service API key thì VietMap chỉ trả 401 ba lần (mất 1-2 giây và
+        // ba lỗi console) trước khi sang OSRM: bỏ qua luôn, như phần tìm kiếm đã làm.
+        const endpoints = getServiceKey() ? [
           { label: "Route v4", url: "https://maps.vietmap.vn/api/route/v4" },
           { label: "Route v3", url: "https://maps.vietmap.vn/api/route/v3" },
           { label: "Route v1.1", url: "https://maps.vietmap.vn/api/route", extra: "&api-version=1.1" },
-        ];
+        ] : [];
         const errors = [];
 
         try {
@@ -945,7 +949,9 @@
           if (!result) {
             const locked = errors.some((message) => message.includes("HTTP 423"));
             try {
-              setStatus("VietMap Routing bị khóa, đang tìm tuyến bám đường bằng OSRM…", "loading");
+              setStatus(endpoints.length
+                ? "VietMap Routing bị khóa, đang tìm tuyến bám đường bằng OSRM…"
+                : "Chưa có Service API key, đang tìm tuyến bám đường bằng OSRM…", "loading");
               const fallback = await requestOsrmRoute(start, end);
               routeIsDemo = false;
               routePath = fallback.path;
@@ -958,7 +964,9 @@
               setStatus(
                 locked
                   ? "VietMap Routing bị khóa (HTTP 423). Tuyến hiện tại dùng OSRM/OpenStreetMap nên xe đã bám theo đường và đi qua cầu."
-                  : "Đã tạo tuyến bám đường bằng OSRM/OpenStreetMap vì VietMap Route chưa dùng được.",
+                  : endpoints.length
+                    ? "Đã tạo tuyến bám đường bằng OSRM/OpenStreetMap vì VietMap Route chưa dùng được."
+                    : "Đã tạo tuyến bám đường bằng OSRM/OpenStreetMap (chưa nhập Service API key).",
                 "ok"
               );
               scheduleAutoStart();

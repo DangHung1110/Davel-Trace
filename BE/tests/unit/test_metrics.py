@@ -13,7 +13,16 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.eval.metrics import GATE_CHECKS, dtu, evaluate, tcs, vroh  # noqa: E402
+from BE.app.services.gate import check_tcs, check_vroh  # noqa: E402
+from BE.eval.metrics import GATE_CHECKS, dtu, evaluate  # noqa: E402
+
+
+def tcs(*args) -> float:
+    return check_tcs(*args)["score"]
+
+
+def vroh(*args) -> float:
+    return 1.0 - check_vroh(*args)["score"]
 
 SNAPSHOT_DIR = os.path.join("data", "snapshots", "danang-v1")
 
@@ -49,12 +58,6 @@ class TestMetrics(unittest.TestCase):
     def setUpClass(cls):
         with open(os.path.join(SNAPSHOT_DIR, "pois.json"), encoding="utf-8") as f:
             cls.pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
-        # B5 v2 (tag-only money): the locked seed has no price bands, so tag
-        # TWO rows with the cheap midpoint (100k each) to keep the BCS
-        # over-budget probe meaningful. Test-local copy only; the seed file is
-        # untouched and stays the locked 7-POI fixture.
-        for pid in ("cham-museum", "mi-quang-ba-mua"):
-            cls.pois[pid].setdefault("smart_tags", {})["price_band"] = "cheap"
         with open(os.path.join(SNAPSHOT_DIR, "matrix.json"), encoding="utf-8") as f:
             cls.matrix = json.load(f)["cells"]
         cls.trip = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00",
@@ -152,10 +155,11 @@ class TestMetrics(unittest.TestCase):
         # T061f: metrics imports the canonical registry from gate.py (F1 is
         # the new SOFT quota; it is present here but not gate fail-closed).
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
         for _, fn in GATE_CHECKS:
             fn(self.good, self.trip, self.pois, self.matrix)
 
@@ -166,10 +170,11 @@ class TestMetrics(unittest.TestCase):
         self.assertIs(GATE_CHECKS, CANONICAL)
         self.assertIs(VALIDATOR_CHECKS, CANONICAL)
         self.assertEqual([name for name, _ in GATE_CHECKS],
-                         ["FAR", "VROH", "B3", "BCS", "ETB", "A1", "CAFE_CAP",
+                         ["FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
+                          "CAFE_CAP",
                           "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"])
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"])
 
     def test_multi_interval_hours_parse(self):
         def score(activities, hours):

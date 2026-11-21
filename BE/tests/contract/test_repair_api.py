@@ -72,12 +72,10 @@ class TestRepairApi(unittest.TestCase):
         self.assertEqual(r.status_code, 200, r.text)
         body = r.json()
         self.assertEqual(set(body), {"plan", "rounds", "repairs", "gate",
-                                     "review_ms", "needs_verification",
-                                     "excluded"})
-        # B4: the retrieval explanation is surfaced, not discarded (the stored
-        # pool is all-verified here, so both lists are honestly empty).
-        self.assertEqual(body["needs_verification"], [])
-        self.assertEqual(body["excluded"], [])
+                                     "review_ms", "retrieval"})
+        # FR-013/FR-024: what retrieval kept out reaches the client here too.
+        self.assertIn("needs_verification", body["retrieval"])
+        self.assertIn("excluded", body["retrieval"])
         ids = [a["poi_id"] for a in body["plan"]["activities"]]
         self.assertIn("museum", ids)
         self.assertEqual(body["rounds"], 2)
@@ -96,7 +94,11 @@ class TestRepairApi(unittest.TestCase):
                 {"poi_id": "cham-museum", "start": "14:00", "end": "15:00"},
             ],
         }
-        with mock.patch.object(review_mod, "review_plan", return_value=[]):
+        from BE.app.routers import repair as repair_mod
+        from BE.app.config import Settings
+        with mock.patch.object(review_mod, "review_plan", return_value=[]), \
+                mock.patch.object(repair_mod, "get_settings", return_value=Settings(
+                    snapshot_dir="data/snapshots/danang-v1", _env_file=None)):
             r = client.post("/v1/repair", json={"plan": public, "trip": TRIP})
         self.assertEqual(r.status_code, 200, r.text)
         self.assertTrue(r.json()["gate"]["passed"])

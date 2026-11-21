@@ -98,7 +98,7 @@ class TestMealExperience(unittest.TestCase):
     def test_class_alone_satisfies_lunch(self):
         travel = {("depot", "c1"): 10}
         out = optimize([self._class()], travel, StubTrip(8 * H, 17 * H, "depot"),
-                       lunch_required=True, require_all=True, timeout_s=5)
+                       lunch_required=True, must_visit=["c1"], timeout_s=5)
         self.assertEqual([a["poi_id"] for a in out["itinerary"]["activities"]], ["c1"])
 
     def test_no_second_lunch_when_class_covers_it(self):
@@ -107,11 +107,11 @@ class TestMealExperience(unittest.TestCase):
         trip = StubTrip(8 * H, 20 * H, "depot")
         # both sessions overlap 11-14 and the restaurant only opens 11-14: no room for it
         lunch_only = StubPOI("r1", 60, 11 * H, 14 * H, 5.0, restaurant=True, category="restaurant")
-        out = optimize([self._class(), lunch_only], travel, trip, require_all=True, timeout_s=5)
+        out = optimize([self._class(), lunch_only], travel, trip, must_visit=["c1", "r1"], timeout_s=5)
         self.assertEqual(out["status"], "infeasible")
         # open until 20:00: it moves to the dinner slot, never a second lunch
         all_day = StubPOI("r1", 60, 11 * H, 20 * H, 5.0, restaurant=True, category="restaurant")
-        out = optimize([self._class(), all_day], travel, trip, require_all=True, timeout_s=5)
+        out = optimize([self._class(), all_day], travel, trip, must_visit=["c1", "r1"], timeout_s=5)
         r = next(a for a in out["itinerary"]["activities"] if a["poi_id"] == "r1")
         r_start = int(r["start"][:2]) * H + int(r["start"][3:])
         self.assertFalse(11 * H <= r_start < 14 * H, r)

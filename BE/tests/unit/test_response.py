@@ -15,10 +15,8 @@ from BE.app.services.response import build_plan  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
 POIS = {
-    "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
-             "opening_hours": ["07:30-17:00"]},
-    "beach": {"verified": True, "free_entry": True,
-              "opening_hours": ["00:00-23:59"]},
+    "musu": {"verified": True, "fee": 60000, "opening_hours": ["07:30-17:00"]},
+    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"]},
 }
 MATRIX = {"musu->beach": {"minutes": 10, "km": 3.5},
           "beach->musu": {"minutes": 10, "km": 3.5}}
@@ -34,7 +32,7 @@ class TestResponse(unittest.TestCase):
     def test_totals_correct(self):
         plan = build_plan(OPT, validate(OPT["itinerary"], TRIP, POIS, MATRIX),
                           TRIP, POIS, MATRIX)
-        self.assertEqual(plan["total_cost"], 100000)
+        self.assertEqual(plan["total_cost"], 60000)
         self.assertEqual(plan["total_km"], 3.5)
         self.assertEqual(plan["total_min"], 90 + 120 + 10)  # visit + travel
         self.assertEqual(len(plan["segments"]), 1)
@@ -46,7 +44,7 @@ class TestResponse(unittest.TestCase):
                           TRIP, POIS, MATRIX)
         self.assertTrue(plan["passed"])
         self.assertEqual(plan["constraint_status"],
-                         {"FAR": 1, "VROH": 1, "B3": 1, "BCS": 1,
+                         {"FAR": 1, "PROFILE_SAFE": 1, "VROH": 1, "B3": 1, "BCS": 1,
                           "ETB": 1, "A1": 1, "CAFE_CAP": 1,
                           "CATEGORY_CAP": 1,
                           "NO_CONSECUTIVE": 1, "NO_ADJACENT_FOOD": 1,

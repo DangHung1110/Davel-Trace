@@ -1,44 +1,29 @@
 """Validator gate (T018, lane B). Per-gate pass/fail + violations.
 
-Wraps gate.py (T011) primitives for optimizer output (T017) and, later,
-the evaluator endpoint (T052): {"passed", "checks": {FAR/VROH/B3/BCS/ETB/A1/
-CAFE_CAP/NO_CONSECUTIVE/NO_ADJACENT_FOOD/REST_FOLLOWS_LUNCH/F1/TCS/HCS},
-"violations": [...], "soft_violations": [...], "details": {gate:
-[offending poi_ids]}}.
+validate() -> {"passed", "checks": {gate: bool}, "violations": [...],
+"soft_violations": [...], "details": {gate: [offending poi_ids]}}. `violations` is the
+HARD fail list; `soft_violations` carries `gate.SOFT_CHECKS`, so an all-food day is
+reported without making the plan infeasible.
 
-`violations` stays the HARD fail list (fail-closed); `soft_violations` carries
-the quality checks registered in `gate.SOFT_CHECKS` (currently F1) so an
-all-food day is reported without making the plan infeasible. `details`
-covers both lists.
-
-This module OWNS NO RULE. Every offender list is computed from the same
-definition the gate scores:
-- adjacency: `soft_rules.same_category_edges` (NO_CONSECUTIVE, and the
-  deprecated NO_ADJACENT_FOOD view `only="restaurant"`);
-- budget: `plan_cost` (one cost formula, same as BCS);
-- deadline: `deadline` (min(end_time, return_time), same as ETB/TCS);
-- rest: `gate.rest_rule_violation` (the function behind REST_FOLLOWS_LUNCH).
-Rule status (active / deprecated + canonical owner) is `gate.RULE_FREEZE`.
-
-STUB-NOTE (as T017): inputs are plain dicts matching the plan schemas;
-phase-PR swaps in the real schemas (T007 plan.py) without changing this
-logic. Matrix comes from T010 (dict cells here).
+This module OWNS NO RULE: every offender list is computed from the definition the gate
+scores (`soft_rules.same_category_edges`, `plan_cost`, `deadline`,
+`gate.rest_rule_violation`).
 """
 
 from __future__ import annotations
 
-from BE.app.services.common import deadline, in_range, plan_cost, to_min
+from BE.common import deadline, in_range, party_size, plan_cost, to_min
 from BE.app.services.gate import (
     CHECKS,
     SOFT_CHECKS,
     check_cafe_cap,
     rest_rule_violation,
 )
+from BE.app.services.profile_filter import drop_reason
 from BE.app.services.soft_rules import (
     CATEGORY_DAILY_CAP,
     NON_FOOD_CAPPED,
     is_food,
-    is_sightseeing,
     meal_slot,
     poi_category,
     same_category_edges,
@@ -51,6 +36,10 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
     if gate == "FAR":
         return [a.get("poi_id") for a in acts
                 if a.get("poi_id") not in pois or not pois[a["poi_id"]].get("verified")]
+    if gate == "PROFILE_SAFE":
+        profile = trip.get("profile") or {}
+        return [a.get("poi_id") for a in acts
+                if drop_reason(pois.get(a.get("poi_id")) or {}, profile)]
     if gate == "VROH":
         out = []
         for a in acts:
@@ -71,7 +60,7 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
     if gate == "BCS":
         # One cost formula for both sides: `plan_cost` (explicit total_cost
         # wins over the POI fee sum), exactly what check_bcs scores.
-        cost = plan_cost(itinerary, pois)
+        cost = plan_cost(itinerary, pois, party_size(trip))
         return [] if cost <= int(trip.get("budget", 0)) else [f"cost {cost}"]
     if (gate == "ETB" and acts
             and (trip.get("end_time") or trip.get("return_time"))):

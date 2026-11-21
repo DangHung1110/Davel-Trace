@@ -26,14 +26,13 @@ POIS = [
     {"poi_id": "beach", "name": "Beach", "type": "beach", "lat": 16.0,
      "lon": 108.2, "opening_hours": ["00:00-23:59"],
      "visit_min": {"p25": 60, "p50": 90, "p75": 120}, "dur_source": "category_rule",
-     "dur_confidence": "low", "price_level": 1, "free_entry": True, "rating": 4.6,
+     "dur_confidence": "low", "price_level": 1, "fee": 0, "rating": 4.6,
      "tags": ["biển"], "intensity": 2, "ambience": "", "weather_sensitive": True,
      "pros": [], "cons": [], "source": "t", "fetched_at": "2026-09-28", "verified": True},
     {"poi_id": "noodle", "name": "Noodle", "type": "restaurant", "lat": 16.0,
      "lon": 108.2, "opening_hours": ["07:00-21:00"],
      "visit_min": {"p25": 30, "p50": 60, "p75": 90}, "dur_source": "category_rule",
-     "dur_confidence": "low", "price_level": 2,
-     "smart_tags": {"price_band": "cheap"}, "rating": 4.5,
+     "dur_confidence": "low", "price_level": 2, "fee": 50000, "rating": 4.5,
      "tags": ["ăn"], "intensity": 1, "ambience": "", "weather_sensitive": False,
      "pros": [], "cons": [], "source": "t", "fetched_at": "2026-09-28", "verified": True},
 ]
@@ -148,18 +147,20 @@ class TestItineraryContract(unittest.TestCase):
             return {"activities": [], "total_cost": 0, "total_km": 0,
                     "total_min": 0, "constraint_status": {}}
 
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={"trip": TRIP})
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles,
-                             ["savings", "balanced", "experience"])
+            # Profiles solve in parallel: build order is free, the
+            # response order is not.
+            self.assertCountEqual(built_profiles,
+                                  ["savings", "balanced", "experience"])
             plans = r.json()["plans"]
             self.assertEqual([p["profile"] for p in plans],
                              ["savings", "balanced", "experience"])
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
 
     def test_itinerary_id_not_hardcoded(self):
         trip_id = "request-trip-uuid-test"
@@ -175,16 +176,16 @@ class TestItineraryContract(unittest.TestCase):
         old_plans = dict(store["plans"])
         old_active_id = store["active_id"]
         old_selected = store["selected"]
-        old_builder = itinerary_mod._get_plan_builder
+        old_builder = itinerary_mod.build_plan
         try:
             select_mod.reset_store()
-            itinerary_mod._get_plan_builder = lambda: build_plan
+            itinerary_mod.build_plan = build_plan
             r = client.post("/v1/itinerary", json={
                 "trip": dict(TRIP, trip_id=trip_id),
                 "profiles": requested_profiles,
             })
             self.assertEqual(r.status_code, 200, r.text)
-            self.assertEqual(built_profiles, requested_profiles)
+            self.assertCountEqual(built_profiles, requested_profiles)
             plans = r.json()["plans"]
             self.assertEqual([plan["profile"] for plan in plans], requested_profiles)
             self.assertEqual(len(plans), len(requested_profiles))
@@ -202,7 +203,7 @@ class TestItineraryContract(unittest.TestCase):
             self.assertEqual(selected.status_code, 200, selected.text)
             self.assertEqual(selected.json(), {"active_id": plans[0]["itinerary_id"]})
         finally:
-            itinerary_mod._get_plan_builder = old_builder
+            itinerary_mod.build_plan = old_builder
             store["plans"] = old_plans
             store["active_id"] = old_active_id
             store["selected"] = old_selected

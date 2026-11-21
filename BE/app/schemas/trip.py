@@ -34,23 +34,6 @@ class TripProfile(BaseModel):
     transport: list[str] = Field(default_factory=list)
 
 
-class User(BaseModel):
-    user_id: str = "u1"
-    lang: str = "vi"
-    party_type: str = "solo"
-    trip_purpose: str = "leisure"
-    spending_level: int = Field(default=2, ge=1, le=3)
-    pace: int = Field(default=2, ge=1, le=3)
-    fitness: int = Field(default=2, ge=1, le=3)
-    food_prefs: list[str] = Field(default_factory=list)
-    allergy: list[str] = Field(default_factory=list)
-    activities: list[str] = Field(default_factory=list)
-    outdoor_bias: float = Field(default=0.0, ge=-1.0, le=1.0)
-    accessibility: list[str] = Field(default_factory=list)
-    must_avoid: list[str] = Field(default_factory=list)
-    transport: list[str] = Field(default_factory=list)
-
-
 class Origin(BaseModel):
     lat: float
     lon: float

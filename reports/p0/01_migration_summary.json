@@ -1,40 +1,40 @@
 {
  "built_at": "2026-11-18",
  "google_policy": "cach_ly",
- "v1_count": 742,
- "v1_meta_count": 745,
- "v2_count": 1000,
+ "v1_count": 750,
+ "v1_meta_count": 750,
+ "v2_count": 1008,
  "status": {
-  "active": 976,
+  "active": 984,
   "review": 20,
   "excluded": 4
  },
  "category": {
-  "restaurant": 224,
-  "nightlife": 100,
+  "restaurant": 226,
+  "nightlife": 102,
   "cafe": 166,
   "day_market": 48,
   "viewpoint": 22,
-  "religious": 103,
-  "outdoor_landmark": 66,
+  "religious": 104,
+  "outdoor_landmark": 68,
   "museum_indoor": 24,
   "paid_attraction": 49,
   "lodging": 76,
-  "beach": 26,
+  "beach": 27,
   "night_market": 6,
   "wellness": 90
  },
  "role": {
-  "meal": 224,
-  "nightlife": 100,
+  "meal": 226,
+  "nightlife": 102,
   "rest": 166,
-  "attraction": 344,
+  "attraction": 348,
   "base": 76,
   "wellness": 90
  },
  "zone": {
-  "trung_tam": 270,
-  "son_tra_my_khe": 234,
+  "trung_tam": 276,
+  "son_tra_my_khe": 236,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
@@ -42,18 +42,18 @@
  },
  "zone_roles": {
   "trung_tam": {
-   "meal": 47,
-   "nightlife": 31,
+   "meal": 48,
+   "nightlife": 33,
    "rest": 49,
-   "attraction": 98,
+   "attraction": 101,
    "base": 23,
    "wellness": 20
   },
   "son_tra_my_khe": {
-   "meal": 39,
+   "meal": 40,
    "nightlife": 32,
    "rest": 29,
-   "attraction": 65,
+   "attraction": 66,
    "base": 35,
    "wellness": 33
   },
@@ -95,28 +95,28 @@
   "hoi_an_old_town": 32
  },
  "hours_verified_by": {
-  "inferred": 665,
-  "agent_web": 143,
-  "open_data": 190,
+  "inferred": 676,
+  "agent_web": 132,
+  "open_data": 198,
   "user": 2
  },
  "price_verified_by": {
   "agent_web": 87,
-  "inferred": 905,
+  "inferred": 913,
   "user": 8
  },
  "dwell_verified_by": {
-  "inferred": 962,
+  "inferred": 970,
   "user": 38
  },
- "legacy_hours_nonempty": 902,
- "v1_hours_nonempty": 499,
+ "legacy_hours_nonempty": 910,
+ "v1_hours_nonempty": 523,
  "legacy_price_band": 70,
- "legacy_free_entry": 190,
- "hours_conflict": 6,
- "quarantined_pois": 659,
- "category_changes": 178,
- "duplicate_candidates": 9,
+ "legacy_free_entry": 195,
+ "hours_conflict": 3,
+ "quarantined_pois": 662,
+ "category_changes": 180,
+ "duplicate_candidates": 10,
  "archetype_vs_google": [
   {
    "archetype": "an_toi",
@@ -138,9 +138,9 @@
   },
   {
    "archetype": "cafe",
-   "n_with_google_hours": 95,
-   "safe_inside": 81,
-   "share": 0.85
+   "n_with_google_hours": 90,
+   "safe_inside": 76,
+   "share": 0.84
   },
   {
    "archetype": "cho_dem",
@@ -186,15 +186,15 @@
   },
   {
    "archetype": "nha_hang",
-   "n_with_google_hours": 71,
-   "safe_inside": 56,
+   "n_with_google_hours": 70,
+   "safe_inside": 55,
    "share": 0.79
   },
   {
    "archetype": "spa",
-   "n_with_google_hours": 70,
-   "safe_inside": 61,
-   "share": 0.87
+   "n_with_google_hours": 67,
+   "safe_inside": 59,
+   "share": 0.88
   }
  ],
  "ticket_todo": 19,

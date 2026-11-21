@@ -1,68 +1,102 @@
-"""FastAPI entry (T001 + T020, lane C). Health + routers. Error envelope
-+ logging centralize in T009."""
+"""FastAPI entry: CORS, routers, the error envelope, health.
 
-import os
+The planner's routers (feat/stable-p1-p4) keep their exposure rules: the public
+ones are always on, the local test-harness ones only outside production. The
+product platform's capabilities (feat/product-platform) are mounted after them
+in every mode.
+"""
+
+import logging
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from BE.app.config import get_settings
+from BE.app.config import Settings, get_settings
+from BE.app.core.health import build_readiness
+from BE.app.core.logging import configure_logging
+from BE.app.core.request_context import (
+    CorrelationMiddleware,
+    get_correlation_id,
+)
 from BE.app.routers import accept as accept_router
 from BE.app.routers import error
 from BE.app.routers import expenses as expenses_router
 from BE.app.routers import evaluate as evaluate_router
 from BE.app.routers import itinerary as itinerary_router
 from BE.app.routers import parse as parse_router
+from BE.app.routers import planning_evidence as planning_evidence_router
 from BE.app.routers import replan as replan_router
 from BE.app.routers import repair as repair_router
 from BE.app.routers import review as review_router
 from BE.app.routers import scorer as scorer_router
 from BE.app.routers import select as select_router
 from BE.app.routers import weather as weather_router
+from BE.app.modules.identity import api as identity_api
+from BE.app.modules.identity import google_api
+from BE.app.modules.profiles import api as profiles_api
+from BE.app.modules.trips import api as trips_api
+from BE.app.modules.trips.service import TripService
+from BE.app.modules.expenses import api as persistent_expenses_api
+from BE.app.modules.catalog import api as catalog_api
+from BE.app.modules.catalog.infrastructure import load_catalog
+from BE.app.modules.routing import api as routing_api
+from BE.app.modules.planning_lifecycle import api as planning_lifecycle_api
+from BE.app.modules.ai_assistance import api as ai_assistance_api
+from BE.app.modules.routing.infrastructure import load_matrix, matrix_estimate, osrm_route
+from BE.app.modules.identity.service import IdentityError
 
+# Local dev pages (harness, Flutter web) run on any localhost port.
+LOCAL_ORIGIN_REGEX = r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$"
+PUBLIC_ROUTERS = (parse_router, itinerary_router, select_router, replan_router,
+                  expenses_router, weather_router, evaluate_router, scorer_router)
+# Local test harness only: semantic LLM review, the bounded LLM-guided repair
+# loop, and the append-only "Chốt plan" log for future weight-learning.
+LOCAL_ROUTERS = (review_router, repair_router, accept_router)
+# Product platform: durable evidence, identity, profiles, trips, expenses,
+# catalog, routing, the planning lifecycle and optional AI assistance.
+PRODUCT_ROUTERS = (planning_evidence_router, identity_api, google_api,
+                   profiles_api, trips_api, persistent_expenses_api,
+                   catalog_api, routing_api, planning_lifecycle_api,
+                   ai_assistance_api)
+log = logging.getLogger("davel.api")
+
+
+def configure(app: FastAPI, settings: Settings) -> None:
+    """CORS + routers. A production deploy only answers its own origins."""
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=list(settings.cors_origins),
+        allow_origin_regex=None if settings.is_production else LOCAL_ORIGIN_REGEX,
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allow_headers=[
+            "Authorization",
+            "Content-Type",
+            "Idempotency-Key",
+            "X-Correlation-ID",
+        ],
+    )
+    app.add_middleware(CorrelationMiddleware)
+    for module in PUBLIC_ROUTERS:
+        app.include_router(module.router)
+    if not settings.is_production:
+        for module in LOCAL_ROUTERS:
+            app.include_router(module.router)
+    app.state.catalog_reader = load_catalog
+    app.state.matrix_reader = load_matrix
+    app.state.trip_reader = TripService()
+    app.state.route_provider = osrm_route
+    app.state.matrix_estimator = matrix_estimate
+    for module in PRODUCT_ROUTERS:
+        app.include_router(module.router)
+
+
+configure_logging()
 app = FastAPI(title="Travel Agent BE")
-
-# N6: the local test harness (`index.html` served by `server.py`) calls this
-# API from another origin. The allow-list is EXPLICIT (never "*"): the harness
-# origins below are always allowed, and `CORS_ORIGINS` (comma-separated) adds
-# more (e.g. a second harness port) at startup. It ADDS rather than replaces
-# so a typo in the env var can never silently break the local flow.
-HARNESS_ORIGINS = ("http://127.0.0.1:5500", "http://localhost:5500")
-
-
-def cors_origins() -> list[str]:
-    """Harness origins + `CORS_ORIGINS` extras (deduped, no trailing slash)."""
-    origins = list(HARNESS_ORIGINS)
-    for origin in os.environ.get("CORS_ORIGINS", "").split(","):
-        origin = origin.strip().rstrip("/")
-        if origin and origin not in origins:
-            origins.append(origin)
-    return origins
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=cors_origins(),
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-app.include_router(parse_router.router)
-app.include_router(itinerary_router.router)
-app.include_router(select_router.router)
-app.include_router(replan_router.router)
-app.include_router(expenses_router.router)
-app.include_router(weather_router.router)
-app.include_router(evaluate_router.router)
-app.include_router(scorer_router.router)
-# NOTE(test-local): semantic LLM review for the local test harness only.
-app.include_router(review_router.router)
-# NOTE(test-local): bounded LLM-guided repair loop (same review + safe swaps).
-app.include_router(repair_router.router)
-# NOTE(test-local): append-only "Chốt plan" log for future weight-learning.
-app.include_router(accept_router.router)
+configure(app, get_settings())
 
 
 def _validation_message(errors: list[dict]) -> str:
@@ -98,10 +132,33 @@ async def http_exception_handler(
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
+    # The envelope hides the traceback from the client; the server log keeps it,
+    # or a 500 is invisible to whoever runs the box.
+    log.exception("unhandled error on %s %s", request.method, request.url.path)
     return error("INTERNAL_ERROR", "loi noi bo", 500)
+
+
+@app.exception_handler(IdentityError)
+async def identity_error_handler(request: Request, exc: IdentityError):
+    return identity_api.identity_error_response(exc)
 
 
 @app.get("/v1/health")
 def health() -> dict:
     settings = get_settings()
-    return {"status": "ok", "snapshot": settings.snapshot_name}
+    return {
+        "status": "ok",
+        "snapshot": settings.snapshot_name,
+        "correlation_id": get_correlation_id(),
+    }
+
+
+@app.get("/v1/ready")
+def readiness():
+    payload = build_readiness(
+        get_settings(),
+        correlation_id=get_correlation_id(),
+    )
+    if payload["status"] != "ready":
+        return JSONResponse(payload, status_code=503)
+    return payload

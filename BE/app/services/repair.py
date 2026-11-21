@@ -1,4 +1,4 @@
-"""LLM-guided, gate-checked plan repair (test-local; max 2 rounds).
+"""LLM-guided, gate-checked plan repair (max 2 rounds).
 
 Why: the deterministic gate can prove a plan is *feasible*, and the narrow
 LLM review can point at plans that are semantically poor (all-food day,
@@ -32,15 +32,8 @@ from collections import Counter
 
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
-from BE.app.services.common import (
-    effective_fee,
-    in_range,
-    status_map,
-    to_min,
-    total_fee,
-)
+from BE.app.services.response import plan_totals
 from BE.app.services.gate import SOFT_CHECKS, check_f1
-from BE.app.services.profile_filter import _match_terms, fold
 from BE.app.services.soft_rules import (
     RESTAURANT_PAIR_MAX_GAP,
     is_food,
@@ -48,6 +41,8 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.app.services.validator import validate
+from BE.common import (
+    effective_fee, party_size, poi_open_windows, status_map, to_min, total_fee)
 
 MAX_ROUNDS = 2
 ACTIONABLE = ("high", "medium")
@@ -98,25 +93,28 @@ def _f1_target(acts: list[dict], pois: dict, trip: dict,
     return min(pool, key=lambda a: ranks.get(a.get("poi_id"), 0.0)), want
 
 
+def _mentions(text: str, term: str) -> bool:
+    """Whole-word mention: "bar" is not in "barbecue", "an" not in "văn"."""
+    return bool(term) and re.search(
+        r"(?<!\w)" + re.escape(term) + r"(?!\w)", text) is not None
+
+
 def _named_target(issue: dict, acts: list[dict], pois: dict,
                   ranks: dict) -> dict | None:
     """Lowest-ranked activity whose POI/type/category the issue mentions."""
     text = f"{issue.get('issue', '')} {issue.get('suggestion', '')}".lower()
-    folded = fold(text)
     by_rank = sorted(acts, key=lambda a: ranks.get(a.get("poi_id"), 0.0))
     for act in by_rank:
         name = str(pois.get(act.get("poi_id"), {}).get("name") or "").strip().lower()
-        # Whole-name match (B3): "Bãi Đá" must not be picked out of
-        # "bãi đáy..." and a category word must be a word, not a fragment.
-        if name and _match_terms((name,), text, folded) is not None:
+        if _mentions(text, name):
             return act
     for act in by_rank:
         poi = pois.get(act.get("poi_id"), {})
         cat = poi_category(poi)
-        if cat and _match_terms((cat,), text, folded) is not None:
+        if _mentions(text, cat):
             return act
         kind = str(poi.get("type") or "").strip().lower()
-        if kind and _match_terms((kind,), text, folded) is not None:
+        if _mentions(text, kind):
             return act
     # Token overlap (e.g. "ăn chay" -> "Nhà hàng chay ..."): ignore generic
     # venue words so "nhà hàng"/"quán" never match every food POI.
@@ -185,10 +183,8 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
     prev = acts[index - 1]["poi_id"] if index > 0 else None
     nxt = acts[index + 1]["poi_id"] if index + 1 < len(acts) else None
     budget = int(trip.get("budget", 0))
-    # B5: BCS is computed from effective fees, so the pre-filter must use the
-    # same money (an unknown price contributes 0 here and never blocks).
-    other_fee = sum(effective_fee(pois.get(a.get("poi_id"))) or 0
-                    for i, a in enumerate(acts) if i != index)
+    party = party_size(trip)
+    other_fee = total_fee([a for i, a in enumerate(acts) if i != index], pois, party)
     out = []
     for poi in pool:
         pid = poi.get("poi_id")
@@ -207,7 +203,7 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
             continue
         if nxt and not matrix.get(f"{pid}->{nxt}"):
             continue
-        if budget and other_fee + (effective_fee(poi) or 0) > budget:
+        if budget and other_fee + (effective_fee(poi) or 0) * party > budget:
             continue
         out.append({"score": rank_svc.score_poi(poi, user, ctx)["score"],
                     "poi": poi})
@@ -216,9 +212,11 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
 
 
 def _fits_slot(poi: dict, start: int, end: int) -> bool:
-    """Same slot only: opening hours must cover [start, end] (unset = ok)."""
-    hours = poi.get("opening_hours") or []
-    return not hours or any(in_range(start, end, h) for h in hours)
+    """Same slot only: a window of `poi_open_windows` (the optimizer's view:
+    real hours, else the category's safe hours) covers [start, end]; a POI
+    with neither is ok."""
+    wins = poi_open_windows(poi)
+    return wins is None or any(lo <= start and end <= hi for lo, hi in wins)
 
 
 def _gate_pois(pois: dict, pool: list[dict]) -> dict:
@@ -250,27 +248,7 @@ def _trial(acts: list[dict], index: int, new_poi: dict, issue: dict) -> list[dic
 def _refresh(plan: dict, acts: list[dict], trip: dict, pois: dict,
              matrix: dict) -> tuple[dict, dict]:
     """Recompute derived totals/segments/status from the new activity list."""
-    out = dict(plan)
-    out["activities"] = acts
-    segments, total_km, travel_min = [], 0.0, 0
-    for x, y in zip(acts, acts[1:]):
-        cell = matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}
-        km = float(cell.get("km", 0.0))
-        minutes = int(cell.get("minutes", 0))
-        segments.append({"from_id": x["poi_id"], "to_id": y["poi_id"],
-                         "mode": "motorbike", "km": km, "minutes": minutes,
-                         "source": "cache"})
-        total_km += km
-        travel_min += minutes
-    visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
-    ratings = [float((pois.get(a["poi_id"]) or {}).get("rating") or 0)
-               for a in acts]
-    out["segments"] = segments
-    out["total_cost"] = total_fee(acts, pois)
-    out["total_km"] = round(total_km, 2)
-    out["travel_min"] = travel_min
-    out["total_min"] = visit_min + travel_min
-    out["preference"] = round(sum(ratings) / len(ratings), 3) if ratings else 0.0
+    out = {**plan, "activities": acts, **plan_totals(acts, trip, pois, matrix)}
     out["soft_penalties"] = soft_rules.plan_penalties(acts, pois, trip)
 
     rep = validate({"activities": acts}, trip, pois, matrix)

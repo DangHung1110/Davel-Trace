@@ -1,6 +1,8 @@
 # P0 — `danang-v2.1`: trạng thái cuối (21/11/2026)
 
-Dữ liệu đã chốt để làm kiến trúc. Phần bên dưới mục này là nhật ký P0-c ngày 18–19/11, giữ để truy vết; số liệu trong đó là số lúc ấy.
+Dữ liệu đã chốt để làm kiến trúc.
+
+> **Sau đồng bộ với `main` (21/11):** 1008 POI (944 active: 868 điểm dừng + 76 lưu trú; 64 excluded); giờ active fixed 338 · safe_window 599 · by_booking 7; ma trận **xe máy** `dense-v1` cho cả 1008 POI; gold v2 27/30 (v1 26/30) trên bộ sinh của `main`. Bảng dưới là số trước đồng bộ. Các thử nghiệm 15/16 đo trên ma trận ô tô, cần chạy lại (`docs/travelagent/ARCHITECTURE_BACKLOG.md` A9). Phần bên dưới mục này là nhật ký P0-c ngày 18–19/11, giữ để truy vết; số liệu trong đó là số lúc ấy.
 
 | Hạng mục | Cuối |
 |---|---|

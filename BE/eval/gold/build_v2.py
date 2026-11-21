@@ -49,11 +49,9 @@ def summarize(suite: list[dict], coverage: dict) -> dict:
 def run(snapshot: str, n: int, seed: int, policy: str) -> tuple[list[dict], dict]:
     pois = view_pois(load_json(os.path.join(snapshot, "pois.json"))["pois"], snapshot, policy)
     by_id = {p["poi_id"]: p for p in pois}
-    # caps=True on BOTH snapshots: the distance-only chain skips optional
-    # stops that would break a HARD quota, so a gold is gate-valid by
-    # construction and the v1/v2 comparison measures the data, not the
-    # generator's blindness to cafe/category caps.
-    suite, _bad, _inf, cov = build_suite(by_id, load_matrix_cells(snapshot), n, seed, caps=True)
+    # main's Approach-B checks the day rules (budget, caps, A1) at every step,
+    # so a gold is gate-valid by construction on both snapshots.
+    suite, _bad, _inf, cov = build_suite(by_id, load_matrix_cells(snapshot), n, seed)
     return suite, summarize(suite, cov)
 
 

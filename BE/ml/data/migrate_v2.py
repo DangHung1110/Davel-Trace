@@ -793,7 +793,7 @@ def find_duplicates(pois, max_m=150, min_ratio=0.72):
 # --------------------------------------------------------------------------
 
 def _base_from_osm(item, name, fetched_at):
-    """v1-shaped record for an OSM element, built by the existing osm_add
+    """v1-shaped record for an OSM element, built by `v2_osm.to_poi`
     pipeline (duration prior, smart_tags) when importable, else minimal."""
     manual = item["osm"].startswith("manual:")
     otype, oid = ("node", "0") if manual else item["osm"].split("/")
@@ -801,7 +801,7 @@ def _base_from_osm(item, name, fetched_at):
     try:
         if manual:
             raise LookupError("manual place: no OSM element")
-        from BE.ml.data.osm_add import to_poi
+        from BE.ml.data.v2_osm import to_poi
         p = to_poi({"type": otype, "id": int(oid)}, item.get("c") or "?", item["lat"], item["lon"],
                    name, tags)
     except Exception as e:  # noqa: BLE001 - fall back, never block the build
@@ -880,7 +880,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     pois_v1 = v1["pois"]
     price_web = _load(os.path.join(v1_dir, "price_web.json"), {})
     hours_web = _load(os.path.join(v1_dir, "hours_web.json"), {})
-    geo = {g["poi_id"]: g for g in _load(os.path.join(v1_dir, "geo_answers.json"), [])}
+    # 50 dwell confirmations from the user geo review (was danang-v1/geo_answers.json)
+    geo = {g["poi_id"]: g for g in _load(os.path.join(sources_dir, "dwell_user_ok_geo_review.json"), [])}
     web_tickets = {}
     for fn in sorted(os.listdir(sources_dir)) if os.path.isdir(sources_dir) else []:
         if fn.startswith("agent_web_") and fn.endswith(".json"):
@@ -1039,7 +1040,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
                       confidence=0.7 if loc_src == "osm" else 0.6,
                       note=None if loc_src == "osm" else (
                           "toạ độ gốc Google — cần đối chiếu OSM" if loc_src == "google_maps"
-                          else "nhập thủ công (manual_pois.json / web) — cần đối chiếu OSM"))
+                          else "nhập thủ công (new_pois_manual_* / web) — cần đối chiếu OSM"))
         signature = bool(p.get("must_go")) or p["name"] in SIGNATURE_EXTRA
         pop = popularity.get(pid) or {}
 
@@ -1153,7 +1154,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         "count_by_category": dict(Counter(p["category"] for p in v21)),
         "count_by_zone": dict(Counter(p["zone"] for p in v21)),
         "applied_decisions": len(decisions), "applied_human_verify": len(human),
-        "matrix": "matrix.json (dense_v1; every active POI incl. lodging; BE/tools/expand_poi_matrix.py --select active)",
+        "matrix": "matrix.json (dense-v1, BE.app.services.matrix; every active POI incl. lodging)",
         "count_new_pois": len(new_pois),
         "count_v1_pois": len(v1_ids),
         "count_by_price_tier": dict(Counter(str(r["price"]["tier"]) for r in v21)),

@@ -12,22 +12,18 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services.retrieval import (  # noqa: E402
-    _overlaps, retrieve, uncertainty)
+from BE.app.services.retrieval import _overlaps, retrieve  # noqa: E402
 
 POIS = [
-    {"poi_id": "beach", "type": "beach", "free_entry": True, "verified": True,
+    {"poi_id": "beach", "type": "beach", "fee": 0, "verified": True,
      "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "noodle", "type": "restaurant",
-     "smart_tags": {"price_band": "cheap"}, "verified": True,
+    {"poi_id": "noodle", "type": "restaurant", "fee": 50000, "verified": True,
      "opening_hours": ["07:00-21:00"]},
-    {"poi_id": "museum", "type": "museum",
-     "smart_tags": {"price_band": "cheap"}, "verified": True,
+    {"poi_id": "museum", "type": "museum", "fee": 60000, "verified": True,
      "opening_hours": ["07:30-17:00"]},
-    {"poi_id": "draft", "type": "beach", "free_entry": True, "verified": False,
+    {"poi_id": "draft", "type": "beach", "fee": 0, "verified": False,
      "opening_hours": ["00:00-23:59"]},
-    {"poi_id": "fancy", "type": "restaurant",
-     "smart_tags": {"price_band": "expensive"}, "verified": True,
+    {"poi_id": "fancy", "type": "restaurant", "fee": 5000000, "verified": True,
      "opening_hours": ["07:00-21:00"]},
 ]
 
@@ -50,10 +46,14 @@ class TestRetrieval(unittest.TestCase):
         self.assertFalse(_overlaps(["12:03"], 12 * 60, 13 * 60))
         self.assertTrue(_overlaps([], 12 * 60, 13 * 60))
 
-    def test_type_filter(self):
+    def test_activities_never_exclude(self):
+        # Activities feed the optimizer's required_any groups; filtering the
+        # pool by them removed the restaurants a day needs (audit B1).
         out = retrieve(TRIP, POIS)
-        self.assertEqual(ids(out, "candidates"), ["beach", "fancy", "noodle"])
-        self.assertIn("khong khop loai", str(out["excluded"]))
+        self.assertEqual(ids(out, "candidates"), ["beach", "museum", "noodle"])
+        self.assertNotIn("khong khop loai", str(out["excluded"]))
+        reasons = {c["poi_id"]: c["reasons"] for c in out["candidates"]}
+        self.assertIn("khop hoat dong beach", reasons["beach"])
 
     def test_closed_hours_excluded(self):
         trip = dict(TRIP, start_time="19:00", end_time="22:00",
@@ -91,22 +91,6 @@ class TestRetrieval(unittest.TestCase):
         out = retrieve(trip, POIS)
         self.assertNotIn("beach", ids(out, "candidates"))
         self.assertIn("avoid", str(out["excluded"]))
-
-    def test_restaurant_price_label_uses_effective_fee(self):
-        """B5 v2: band/free_entry make price KNOWN; ticket_vnd/`fee` are unread."""
-        self.assertIn("gia chua xac minh",
-                      uncertainty({"type": "restaurant"}))
-        self.assertNotIn("gia chua xac minh",
-                         uncertainty({"type": "restaurant",
-                                      "smart_tags": {"price_band": "cheap"}}))
-        self.assertNotIn("gia chua xac minh",
-                         uncertainty({"type": "restaurant", "free_entry": True}))
-        # Deprecated money fields must not masquerade as a known price.
-        self.assertIn("gia chua xac minh",
-                      uncertainty({"type": "restaurant", "ticket_vnd": 0,
-                                   "fee": 50_000}))
-        self.assertNotIn("gia chua xac minh",
-                         uncertainty({"type": "beach"}))
 
 
 if __name__ == "__main__":

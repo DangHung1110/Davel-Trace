@@ -108,7 +108,6 @@ class TestConstraints(unittest.TestCase):
         limits = template_constraints("family-slow",
                                       {"start_time": "08:00",
                                        "end_time": "17:30"})
-        self.assertIsNone(limits["blocked_window"])  # no fixed clock anchor
         self.assertTrue(limits["rest_after_lunch"])
         self.assertEqual(limits["rest_minutes"], 60)
         self.assertEqual((limits["min_stops"], limits["max_stops"]), (5, 6))
@@ -119,7 +118,6 @@ class TestConstraints(unittest.TestCase):
         limits = template_constraints("family-slow",
                                       {"start_time": "07:00",
                                        "end_time": "11:00"})
-        self.assertIsNone(limits["blocked_window"])
         self.assertFalse(limits["rest_after_lunch"])
         self.assertIsNone(limits["rest_minutes"])
 
@@ -145,7 +143,6 @@ class TestConstraints(unittest.TestCase):
         self.assertEqual(ladder[1]["required_any"], [])
         self.assertIsNone(ladder[2]["max_stops"])
         for step in ladder:  # the lunch+rest rule + bans never relax
-            self.assertIsNone(step["blocked_window"])
             self.assertTrue(step["rest_after_lunch"])
             self.assertEqual(step["rest_minutes"], 60)  # pace 1
             self.assertEqual(step["allowed_categories"],
@@ -175,7 +172,6 @@ class TestUniversalRestAndLunch(unittest.TestCase):
             self.assertIn(block["minutes"], (30, 45, 60), name)
             limits = template_constraints(name, TRIP_LONG)
             self.assertTrue(limits["rest_after_lunch"], name)
-            self.assertIsNone(limits["blocked_window"], name)
             self.assertTrue(limits["lunch_required"], name)
             self.assertIn(limits["rest_minutes"], (30, 45, 60), name)
 
@@ -203,7 +199,6 @@ class TestUniversalRestAndLunch(unittest.TestCase):
         self.assertTrue(limits["rest_after_lunch"])
         self.assertTrue(limits["lunch_required"])
         self.assertEqual(limits["rest_minutes"], 45)  # pace 2
-        self.assertIsNone(limits["blocked_window"])
         self.assertIsNone(limits["min_stops"])
         self.assertIsNone(limits["allowed_categories"])
 

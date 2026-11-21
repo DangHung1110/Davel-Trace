@@ -2,7 +2,7 @@ archetype,n_with_google_hours,safe_inside,share
 an_toi,12,11,0.92
 bao_tang,9,9,1.0
 bar,69,62,0.9
-cafe,95,81,0.85
+cafe,90,76,0.84
 cho_dem,3,3,1.0
 cho_ngay,16,14,0.88
 chua,12,10,0.83
@@ -10,5 +10,5 @@ com_trua,20,18,0.9
 cua_hang,10,9,0.9
 ngoai_troi_do_thi,3,0,0.0
 ngoai_troi_tu_nhien,5,1,0.2
-nha_hang,71,56,0.79
-spa,70,61,0.87
+nha_hang,70,55,0.79
+spa,67,59,0.88

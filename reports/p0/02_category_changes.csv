@@ -7,8 +7,7 @@ ChIJr_-_LCgZQjERRByqB18J3Ls,Quán nhậu Vườn Bia,restaurant,nightlife,name:n
 ChIJ1fgYYgAZQjERPupjVbkyt6A,Quán Nhậu Cô Chiêu,restaurant,nightlife,name:nhậu;type:Nhà hàng
 ChIJt1wLHjEYQjEREA1YGZU2yOc,Trà Quán Góc Nhà Tụi Mình,cafe,day_market,type:Cửa hàng trà truyền thống;name:quán
 ChIJiaXn52YXQjERbd2jnJ1Xmg0,Quán cà phê Sáu Trên Sáu,restaurant,cafe,name:ca phe;type:Nhà hàng
-ChIJbbs1ZTQYQjERi3OdfmnRk2g,Đình làng Hải Châu,attraction,religious,name:đình
-ChIJu6FQjzUYQjER39TMpgQVRUs,Chợ Cồn,attraction,day_market,name:chợ
+ChIJbbs1ZTQYQjERi3OdfmnRk2g,Đình làng Hải Châu,temple,religious,name:đình
 ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn,attraction,paid_attraction,override:Ngũ Hành Sơn
 ChIJLTomluP3QTERUy-b9iAYR8U,Khu du lịch sinh thái Suối Hoa,attraction,paid_attraction,name:khu du lich sinh thai
 ChIJSRWy6Hr3QTERiU3vuI0PbHw,Khu Du Lịch Sinh Thái Lái Thiêu,attraction,paid_attraction,name:khu du lich sinh thai
@@ -18,54 +17,46 @@ ChIJ5xkIv7EZQjERDZQIupNo09w,Bến Du Thuyền Đà Nẵng,attraction,paid_attrac
 ChIJs5puLQA9QjERIaHbrBAGpjA,Dịch Vụ Cano Du Lịch Lặn Biển Ngắm San Hô Sơn Trà,attraction,paid_attraction,name:cano
 ChIJ17GORdEXQjERhkujx-kwJA0,Khu Du lịch Sinh thái Suối Rạng,attraction,paid_attraction,name:khu du lich sinh thai
 ChIJFzkgXmA9QjERbjn2eoPqMn8,Sơn Trà Tịnh Viên,park,religious,name:tinh vien;type:Vườn
-ChIJI4oSjdE9QjERlXMiA630YKs,Hải đăng Tiên Sa,attraction,viewpoint,name:hai dang
-ChIJBQHuNG49QjER7Mb_Y2I64mk,Đỉnh Bàn Cờ,attraction,viewpoint,name:đỉnh
-ChIJPbgJ4DY9QjER7OSjP2_jSC8,Radar Sơn Trà 1,attraction,viewpoint,name:radar
-ChIJ08DIzjY9QjER4ldy4JXZBLA,Nhà Vọng Cảnh,attraction,viewpoint,name:vong canh
-ChIJ_XkaoQs-QjER_IUTHqI3gI8,Mũi Nghê,attraction,viewpoint,name:mũi
-ChIJo8N_zUw9QjERgutJ9u3-n7Y,View Ngắm Bình Minh Sơn Trà,attraction,viewpoint,name:view
+ChIJpYNhNwAXQjERflfHrn1lop4,Vịnh Sơn Trà,viewpoint,outdoor_landmark,name:vịnh
+ChIJI4oSjdE9QjERlXMiA630YKs,Hải đăng Tiên Sa,landmark,viewpoint,name:hai dang
 ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,attraction,beach,name:bai tam
 ChIJg5OvAgAhQjERKbrq9-Wza-U,Khu Du Lịch Sinh Thái Thuỷ Vân Sơn,attraction,paid_attraction,name:khu du lich sinh thai
 ChIJGSKUUwCLQTERr0Je7WP5Xqc,Khu du lịch Bến Nam Yên,nature,paid_attraction,type:Khu cắm trại
 ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,park,paid_attraction,name:kdl sinh thai;type:Công viên
-ChIJVVmn6uMjQjERwv0F2ZV9pJw,Bãi Sủng Cỏ,attraction,beach,name:bai sung co
-ChIJEaxZWQAXQjERUp3M2TesuM8,Bãi tắm hàng dừa Mỹ Khê,attraction,beach,name:bai tam
 ChIJZ9UJGQQZQjERFL90XKMPBGk,Hồ Bơi Thanh Khê,beach,paid_attraction,override:Hồ Bơi Thanh Khê
-ChIJNdWwUgARQjERansIEJQleAU,Động Tàng Chơn,landmark,religious,type:Chùa phật giáo
-ChIJ8be7KQARQjER5Lnd2LHaDAs,Huyen Khong Cave,landmark,religious,type:Điện thờ
-ChIJWe_7hboQQjERxap-mizn-ZY,Nhà bia Chứng tích Núi Ghềnh,museum,outdoor_landmark,override:Nhà bia Chứng tích Núi Ghềnh
+ChIJNdWwUgARQjERansIEJQleAU,Động Tàng Chơn,temple,religious,type:Chùa phật giáo
+ChIJ8be7KQARQjER5Lnd2LHaDAs,Huyen Khong Cave,temple,religious,type:Điện thờ
 ChIJ9yzkbH0ZQjERDhPDi_ITcmM,Đà Sơn tâm linh,landmark,religious,name:tam linh;type:Bảo tàng
 ChIJodkOVL8fQjERGwRf5tBRLvI,Di tích Đình Hồng Phước,landmark,religious,name:đình;type:Bảo tàng chiến tranh
-ChIJVWzfhcwZQjERa_qP0BpsBkk,Nhà thờ Tộc Hồ Thanh Khê,museum,religious,override:Nhà thờ Tộc Hồ Thanh Khê
-ChIJOQ-obAARQjERQ4kQhqErSkw,Bãi tắm Nguyễn Thần Hiến,attraction,beach,name:bai tam
+ChIJVWzfhcwZQjERa_qP0BpsBkk,Nhà thờ Tộc Hồ Thanh Khê,temple,religious,override:Nhà thờ Tộc Hồ Thanh Khê
 ChIJBcr6kegZQjER2nCllYpT_Qc,Chợ đêm Helio - B. Night Market,market,night_market,name:cho dem;type:Chợ đêm
 ChIJAdChYQAZQjERdBTX1_66Q_8,Chợ Đêm Sơn Trà,market,night_market,name:cho dem
 ChIJOZ__YJwXQjER4wLDpzs9L5c,Chợ Đêm An Thượng,market,night_market,name:cho dem;type:Chợ đêm
 ChIJ3ZNy2BkZQjERkAqpwnkat3o,Bê Thui Thiên 2,restaurant,nightlife,type:Quán bia
 ChIJp91wYRgZQjER9Yry1HWPhW8,Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river,attraction,paid_attraction,name:du thuyen;type:Bến du thuyền
 ChIJlxydWJEZQjER5GSMuHJHtak,VỌC Glamping,attraction,paid_attraction,name:glamping
-ChIJxU52AgAZQjERUmuAje5_L5Q,Bãi biển Nguyễn Tất Thành,attraction,beach,name:bai bien
-ChIJ-cf9B7wQQjERutUzeynzw8w,Chùa Quán Thế Âm,attraction,religious,name:chua
-ChIJOxVypBYRQjERMmK2P6JbzF0,Động Âm Phủ,landmark,religious,type:Chùa phật giáo
+ChIJ-cf9B7wQQjERutUzeynzw8w,Chùa Quán Thế Âm,temple,religious,name:chua
+ChIJOxVypBYRQjERMmK2P6JbzF0,Động Âm Phủ,temple,religious,type:Chùa phật giáo
 ChIJWZUpXf0RQjER6uu8gU2gIhI,Mai Vang (Yellow Blossom) Bonsai Garden,museum,outdoor_landmark,override:Mai Vang (Yellow Blossom) Bonsai Garden
-ChIJiXlEK7IRQjERvpdL4vcW86w,Tượng Phật Đá Phan Sơn,museum,religious,override:Tượng Phật Đá Phan Sơn
+ChIJiXlEK7IRQjERvpdL4vcW86w,Tượng Phật Đá Phan Sơn,landmark,religious,override:Tượng Phật Đá Phan Sơn
+ChIJ9_dffMQQQjERuJbqVGdSysY,Quốc Tự Tam Thai,temple,outdoor_landmark,v1_cat:temple
 osm:node/1036552571,Đèo Hải Vân,attraction,viewpoint,override:Đèo Hải Vân
 osm:node/1335374809,chùa am Nam Ngư,landmark,religious,name:chua;type:Cơ sở thờ tự
 osm:node/1335374858,chùa am thờ Hỏa Xa,landmark,religious,name:chua;type:Cơ sở thờ tự
-osm:node/1335374873,chùa An Cư Tây,landmark,religious,name:chua;type:Cơ sở thờ tự
+osm:node/1335374873,chùa An Cư Tây,temple,religious,name:chua;type:Cơ sở thờ tự
 osm:node/1623183649,Núi Sơn Trà,nature,viewpoint,override:Núi Sơn Trà
 osm:node/2093848429,Kim Sơn,nature,viewpoint,type:Đỉnh núi;name:sơn
 osm:node/2093848431,Mộc Sơn,nature,viewpoint,type:Đỉnh núi;name:sơn
 osm:node/2093848443,Thổ Sơn,nature,viewpoint,type:Đỉnh núi;name:sơn
-osm:node/3760247201,chùa Vu Lan,landmark,religious,name:chua;type:Cơ sở thờ tự
+osm:node/3760247201,chùa Vu Lan,temple,religious,name:chua;type:Cơ sở thờ tự
 osm:node/3760247202,chùa Sư Nữ,landmark,religious,name:chua;type:Cơ sở thờ tự
-osm:node/3760272162,Chùa Tam Bảo (Chùa Tam Bảo Theravāda),landmark,religious,name:chua;type:Cơ sở thờ tự
-osm:node/3763846156,Chùa Pháp Lâm,landmark,religious,name:chua;type:Cơ sở thờ tự
-osm:node/4005611262,Đền thờ Tiền Hiền làng Lổ Giang,landmark,religious,name:đền;type:Cơ sở thờ tự
-osm:node/4005611263,Đình Lổ Giáng,landmark,religious,name:đình;type:Cơ sở thờ tự
+osm:node/3760272162,Chùa Tam Bảo (Chùa Tam Bảo Theravāda),temple,religious,name:chua;type:Cơ sở thờ tự
+osm:node/3763846156,Chùa Pháp Lâm,temple,religious,name:chua;type:Cơ sở thờ tự
+osm:node/4005611262,Đền thờ Tiền Hiền làng Lổ Giang,temple,religious,name:đền;type:Cơ sở thờ tự
+osm:node/4005611263,Đình Lổ Giáng,temple,religious,name:đình;type:Cơ sở thờ tự
 osm:node/4122433690,Núi Bà Nà,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/4172034499,Non Nuoc Beach,attraction,beach,name:beach
-osm:node/4280016689,Chùa Giác Hoàng Viên,landmark,religious,name:chua;type:Cơ sở thờ tự
+osm:node/4280016689,Chùa Giác Hoàng Viên,temple,religious,name:chua;type:Cơ sở thờ tự
 osm:node/4294135790,nhà thờ Phú Thượng,landmark,religious,name:nha tho;type:Cơ sở thờ tự
 osm:node/4294139091,nhà thờ An Ngãi Tây,landmark,religious,name:nha tho;type:Cơ sở thờ tự
 osm:node/4294143691,Nhà thờ Giáo xứ An Thượng,landmark,religious,name:nha tho;type:Cơ sở thờ tự
@@ -73,85 +64,95 @@ osm:node/4294167889,nhà thờ Tùng Sơn,landmark,religious,name:nha tho;type:C
 osm:node/4741642219,Public beach,landmark,beach,override:Public beach
 osm:node/4845297821,Gần núi thần tài,landmark,religious,type:Cơ sở thờ tự;name:nui
 osm:node/5421670780,Chùa An Phước,landmark,religious,name:chua;type:Cơ sở thờ tự
-osm:node/5432701004,Nhà thờ Hoà Cường,landmark,religious,name:nha tho;type:Cơ sở thờ tự
+osm:node/5432701004,Nhà thờ Hoà Cường,temple,religious,name:nha tho;type:Cơ sở thờ tự
 osm:node/7477670191,Gio coffee,market,cafe,name:coffee;type:Cửa hàng quà lưu niệm
 osm:node/10154412164,Fantasy Park,attraction,paid_attraction,override:Fantasy Park
 osm:node/10303626687,Núi Phước Tường,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/10303626688,Núi Cẩm Khê,nature,viewpoint,type:Đỉnh núi;name:nui
-osm:node/11359603957,Chùa Nam Sơn,attraction,religious,name:chua
+osm:node/11359603957,Chùa Nam Sơn,temple,religious,name:chua
 osm:node/11629841009,Núi Khe Xương,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/11629996926,Núi Hải Vân,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/11630013743,Núi Hoi,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/11762365155,Núi Hòng Chan,nature,viewpoint,type:Đỉnh núi;name:nui
 osm:node/12333995781,Chợ đêm Lê Duẩn,market,night_market,name:cho dem;type:Chợ
 osm:node/12404434601,Khu Văn hóa Tâm linh Đà Sơn,attraction,religious,name:tam linh
-osm:node/12603319867,Nhà thờ Thanh Bình,landmark,religious,name:nha tho;type:Cơ sở thờ tự
-osm:node/13484040419,Đền Bà Càn Khôn,landmark,religious,name:đền;type:Cơ sở thờ tự
+osm:node/12603319867,Nhà thờ Thanh Bình,temple,religious,name:nha tho;type:Cơ sở thờ tự
+osm:node/13484040419,Đền Bà Càn Khôn,temple,religious,name:đền;type:Cơ sở thờ tự
 osm:node/13687068650,Linh Phong Bảo Tháp,attraction,religious,name:bao thap
-osm:node/13734880501,Tượng Phật Phước Lý,attraction,religious,name:tuong phat
-ChIJHZakNa8ZQjERWNFToM16eB4,Chùa Linh Ứng - Bãi Bụt Sơn Trà,landmark,religious,name:chua;type:Chùa phật giáo
+osm:node/13734880501,Tượng Phật Phước Lý,landmark,religious,name:tuong phat
+osm:node/14045144381,Viet Nam's Delights,shop,day_market,type:Cửa hàng quà lưu niệm
+osm:node/14067929701,Bonny handmade,shop,day_market,type:Cửa hàng quà lưu niệm
+ChIJHZakNa8ZQjERWNFToM16eB4,Chùa Linh Ứng - Bãi Bụt Sơn Trà,temple,religious,name:chua;type:Chùa phật giáo
 ChIJuzUYUgAXQjER7uqAcJPQMY0,Cổng Chùa Linh Ứng,attraction,religious,name:chua
-ChIJuaI3VgMZQjER0B4a7LcJ-YA,Nhà Thờ Giáo Xứ An Hòa,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJJ2sLdT4YQjERi930NC-XCo0,Nhà Thờ Giáo Xứ Thanh Đức,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJuaI3VgMZQjER0B4a7LcJ-YA,Nhà Thờ Giáo Xứ An Hòa,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJJ2sLdT4YQjERi930NC-XCo0,Nhà Thờ Giáo Xứ Thanh Đức,temple,religious,name:nha tho;type:Nhà thờ Công giáo
 ChIJxdBK6SsYQjERYojL_cVEkbs,Nhà thờ Giáo xứ An Hải,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJJYpRy_YXQjERoyNzmnL2f-E,Nhà thờ Thánh Giuse lao công,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJs4dg5vceQjERJQ5D9ATvWhU,NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJJYpRy_YXQjERoyNzmnL2f-E,Nhà thờ Thánh Giuse lao công,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJs4dg5vceQjERJQ5D9ATvWhU,NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO,temple,religious,name:nha tho;type:Nhà thờ Công giáo
 ChIJPdLppX4XQjERnV5xcr28sO0,Nhà thờ Gia Phước,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
 ChIJnwKLiE4YQjERMVI0qrqKg1c,Nhà Thờ Giáo Xứ Tam Tòa,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJcw0FdkgYQjERhr14f9cMXK0,Nhà Thờ Giáo Xứ Nội Hà,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJaV_Jo8gZQjERtDWMcdLRT1U,Nhà Thờ Giáo Xứ Hòa Thuận,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJY3yT3IweQjERnbDRpKk8b3A,Nhà thờ Phú Thượng,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJOfpog-EYQjERw_VB4IBkfNI,Nhà Thờ Giáo Xứ Hòa Minh,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJ5VTV0hwaQjERYReDb0dJJq8,Giáo xứ Cồn Dầu,landmark,religious,name:giao xu;type:Nhà thờ Công giáo
-ChIJ3S-Eo0sYQjERo9MhApUI4WQ,Nhà thờ Chính Trạch,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJX_rcYHQZQjERQXQ9UxHmHN4,Nhà Thờ Giáo Xứ Phước Tường,landmark,religious,name:nha tho;type:Nhà thờ Công giáo
-ChIJEf1GVMoZQjERQxbPWFvFiKI,Chùa Bát Nhã,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJfQNjLMYQQjERo1m_A0X8aLE,Chùa Non Nước,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJRZhHIMkZQjERYBH-5S1xKNg,Chùa Phổ Đà,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJCeQZ-jkZQjERaXJSI0ZDWXw,CHÙA KHÔNG TÊN ĐÀ NẴNG,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJsdeOrV8XQjER8weQ8Az-w5c,Chùa Bà Đa,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJyd-t1B0ZQjERVSYFtVbYms8,Thiền Viện Bồ Đề,landmark,religious,name:thien vien;type:Chùa phật giáo
-ChIJrfvtnpYhQjEReNe0fgh8KMM,Chùa Nam Hải,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJASjStc0ZQjERf8hQfCEJ8JA,Chùa An Long,landmark,religious,name:chua;type:Chùa phật giáo
+ChIJcw0FdkgYQjERhr14f9cMXK0,Nhà Thờ Giáo Xứ Nội Hà,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJaV_Jo8gZQjERtDWMcdLRT1U,Nhà Thờ Giáo Xứ Hòa Thuận,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJY3yT3IweQjERnbDRpKk8b3A,Nhà thờ Phú Thượng,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJOfpog-EYQjERw_VB4IBkfNI,Nhà Thờ Giáo Xứ Hòa Minh,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJ5VTV0hwaQjERYReDb0dJJq8,Giáo xứ Cồn Dầu,temple,religious,name:giao xu;type:Nhà thờ Công giáo
+ChIJ3S-Eo0sYQjERo9MhApUI4WQ,Nhà thờ Chính Trạch,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJX_rcYHQZQjERQXQ9UxHmHN4,Nhà Thờ Giáo Xứ Phước Tường,temple,religious,name:nha tho;type:Nhà thờ Công giáo
+ChIJEf1GVMoZQjERQxbPWFvFiKI,Chùa Bát Nhã,temple,religious,name:chua;type:Chùa phật giáo
+ChIJfQNjLMYQQjERo1m_A0X8aLE,Chùa Non Nước,temple,religious,name:chua;type:Chùa phật giáo
+ChIJRZhHIMkZQjERYBH-5S1xKNg,Chùa Phổ Đà,temple,religious,name:chua;type:Chùa phật giáo
+ChIJCeQZ-jkZQjERaXJSI0ZDWXw,CHÙA KHÔNG TÊN ĐÀ NẴNG,temple,religious,name:chua;type:Chùa phật giáo
+ChIJsdeOrV8XQjER8weQ8Az-w5c,Chùa Bà Đa,temple,religious,name:chua;type:Chùa phật giáo
+ChIJyd-t1B0ZQjERVSYFtVbYms8,Thiền Viện Bồ Đề,temple,religious,name:thien vien;type:Chùa phật giáo
+ChIJrfvtnpYhQjEReNe0fgh8KMM,Chùa Nam Hải,temple,religious,name:chua;type:Chùa phật giáo
+ChIJASjStc0ZQjERf8hQfCEJ8JA,Chùa An Long,temple,religious,name:chua;type:Chùa phật giáo
 ChIJCRy3iv_2QTERfZxGJkIMHHQ,Chùa Linh Ứng - Bà Nà,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJuzoag4EXQjERm__A5Whnw5I,Chùa Mỹ Khê,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJaUuo57kZQjERzjJfr1YdjCA,Chùa Báo Ân,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJrynevMsZQjERzZIGoLZwQ2I,Chùa Từ Tôn,landmark,religious,name:chua;type:Chùa phật giáo
+ChIJuzoag4EXQjERm__A5Whnw5I,Chùa Mỹ Khê,temple,religious,name:chua;type:Chùa phật giáo
+ChIJaUuo57kZQjERzjJfr1YdjCA,Chùa Báo Ân,temple,religious,name:chua;type:Chùa phật giáo
+ChIJrynevMsZQjERzZIGoLZwQ2I,Chùa Từ Tôn,temple,religious,name:chua;type:Chùa phật giáo
 ChIJyWFmArX3QTERon6tUT6re4Q,Ba Na Hills,landmark,paid_attraction,override:Ba Na Hills
 ChIJyUQ4aw72QTERCXl5YV-4U1w,Sun World Bà Nà Hills,attraction,paid_attraction,override:Sun World Bà Nà Hills
 ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,nature,viewpoint,override:Đỉnh Bà Nà
 ChIJ5ySJbAAZQjEROESCTb3NJsw,Bến Du Thuyền Sông Hàn,attraction,paid_attraction,override:Bến Du Thuyền Sông Hàn
-ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng,attraction,night_market,override:Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng
+ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng,market,night_market,override:Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng
+ChIJBT1hHA4XQjERHcTlavRMj5I,Cửa hàng Đặc Sản Đà Nẵng Làm Quà,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJlZA7YgEZQjERwBfzBwsUo18,Đặc sản Đà Nẵng làm quà - Dương Lê,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJWaLrVbMZQjERa8YCUGiCkX8,Đặc Sản Chả Bò Bà Tâm Đà Nẵng,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJu5AYG0UXQjEREoejRui0VzY,Đặc Sản Ngon Đà Nẵng - Đặc Sản Làm Quà shop online,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJy9eI3pEZQjERRjXgQMj8m-g,Mê Vui - Đặc sản Đà Nẵng SẠCH,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJ4_aypxYZQjERzFP2v0FweY8,Cửa hàng Đặc sản Biển Đà Nẵng,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJSwMjjYEXQjERBbThTSOPeKY,Siêu thị Đặc sản Hương Đà,shop,day_market,name:dac san;type:Cửa hàng lưu niệm
+ChIJpRFvp6sZQjERY_CDfnMCx2w,Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품,shop,day_market,name:dac san;type:Cửa hàng bán thực phẩm đặc sản
+ChIJpeV7WwAZQjER5TfSiKGu0Qc,Cô Na - ĐẶC SẢN ĐÀ NẴNG,shop,day_market,name:dac san;type:Cửa hàng tạp phẩm
 ChIJxxumO4QZQjERqrQlIwbE8cA,Buffalo beer & coffee,restaurant,nightlife,type:Quán bia;name:coffee
 ChIJn9Kkxh4ZQjERgDXEcvzD4nI,"MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",restaurant,nightlife,name:pub;type:Quán bia
 ChIJFXRrR0wZQjERNl4jMD9QNFI,Blues Q Coffee and Craft Beer Garden ( Bia thủ công),park,nightlife,type:Quán bia sân vườn;name:coffee
 ChIJVS4QEX8fQjERk1vVwmP0Rk8,An Nhiên Quán,restaurant,nightlife,type:Quán bia;name:quán
 ChIJsSD2e3kfQjER2d_jnMVrKZ4,Quán nhậu A bảy,restaurant,nightlife,name:nhậu;type:Quán bia
 ChIJVde_IrUZQjERJghlJMKJ6v0,DINK Beer Pub,restaurant,nightlife,name:pub;type:Nhà hàng Đức
-ChIJswSHXgAZQjERZnVL4je3PG4,SAY Beer,park,nightlife,name:beer;type:Quán bia sân vườn
 ChIJ2exBne0ZQjERj07NR6zFg4c,MÊ Ê Ê Beer Garden - 316 Hà Huy Tập,restaurant,nightlife,name:beer;type:Quán bia
 ChIJN_abDNcZQjERmLjyrAo7IPk,CẬU ẤM BEER CHILL,restaurant,nightlife,name:beer;type:Quán bia
-ChIJObG9DvoZQjER1tqakgkbUno,CẬU CẢ - 37 Điện Biên Phủ,park,nightlife,type:Quán bia sân vườn
+ChIJObG9DvoZQjER1tqakgkbUno,CẬU CẢ - 37 Điện Biên Phủ,restaurant,nightlife,type:Quán bia sân vườn
 ChIJ8ar-PNQXQjERFGGdrbCAQbg,Tháp Xá Lợi,landmark,religious,name:thap xa loi;type:Chùa phật giáo
 ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,landmark,religious,name:quan the am;type:Chùa phật giáo
-ChIJnZoMTbkQQjERwzvvHqGlb4E,Chùa Linh Sơn,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJyaniiLoQQjERI3aW6z5atCc,Chùa Hương Sơn,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJO9OcO7kQQjERuGR5zEtpfu8,Chùa Thái Sơn,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJW9b8Ky0XQjERPn8CJNdE0Lk,"Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",landmark,religious,name:chua;type:Chùa phật giáo
-ChIJvexouL4QQjERy0qt57A0GX4,Chùa Phổ Đà Sơn,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJA8a2aLcQQjER5mciBxvjUVs,Chùa Long Hoa,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJ8Z0D7KURQjERUPd36goDH90,Chùa Tam Tôn,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJLX9s7EUbQjERdsy67X5-NrE,Chùa Hải An Đà Nẵng,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJf_LKvbkbQjERSVrbzxU6Nuc,Chùa Vân Long,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJ8VqGDeYRQjERVEkumiIa714,LÂM TỲ NI VIÊN,landmark,religious,name:lam ty ni vien;type:Chùa phật giáo
-ChIJ9w6iligZQjERXLpgwwjF0Fs,Chùa Minh Phước,landmark,religious,name:chua;type:Chùa phật giáo
+ChIJnZoMTbkQQjERwzvvHqGlb4E,Chùa Linh Sơn,temple,religious,name:chua;type:Chùa phật giáo
+ChIJyaniiLoQQjERI3aW6z5atCc,Chùa Hương Sơn,temple,religious,name:chua;type:Chùa phật giáo
+ChIJO9OcO7kQQjERuGR5zEtpfu8,Chùa Thái Sơn,temple,religious,name:chua;type:Chùa phật giáo
+ChIJW9b8Ky0XQjERPn8CJNdE0Lk,"Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",temple,religious,name:chua;type:Chùa phật giáo
+ChIJvexouL4QQjERy0qt57A0GX4,Chùa Phổ Đà Sơn,temple,religious,name:chua;type:Chùa phật giáo
+ChIJA8a2aLcQQjER5mciBxvjUVs,Chùa Long Hoa,temple,religious,name:chua;type:Chùa phật giáo
+ChIJ8Z0D7KURQjERUPd36goDH90,Chùa Tam Tôn,temple,religious,name:chua;type:Chùa phật giáo
+ChIJLX9s7EUbQjERdsy67X5-NrE,Chùa Hải An Đà Nẵng,temple,religious,name:chua;type:Chùa phật giáo
+ChIJf_LKvbkbQjERSVrbzxU6Nuc,Chùa Vân Long,temple,religious,name:chua;type:Chùa phật giáo
+ChIJ8VqGDeYRQjERVEkumiIa714,LÂM TỲ NI VIÊN,temple,religious,name:lam ty ni vien;type:Chùa phật giáo
+ChIJ9w6iligZQjERXLpgwwjF0Fs,Chùa Minh Phước,temple,religious,name:chua;type:Chùa phật giáo
 ChIJo2Yyix8ZQjERmG7AHQkOpIo,Chùa Phước Lộc,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJKcik9OQYQjERKZ21jblRTVc,Chùa Thanh Hải,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJl21Hd_4YQjERF980f9HS9Cc,Chùa Làng Thanh Khê,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJsVPjaP8YQjER76Ao_3tvppY,Chùa Thanh Hà,landmark,religious,name:chua;type:Chùa phật giáo
+ChIJKcik9OQYQjERKZ21jblRTVc,Chùa Thanh Hải,temple,religious,name:chua;type:Chùa phật giáo
+ChIJl21Hd_4YQjERF980f9HS9Cc,Chùa Làng Thanh Khê,temple,religious,name:chua;type:Chùa phật giáo
+ChIJsVPjaP8YQjER76Ao_3tvppY,Chùa Thanh Hà,temple,religious,name:chua;type:Chùa phật giáo
 ChIJp3BwHgsZQjERzQZfxwNQNmE,Chùa Làng Thanh Khê,landmark,religious,name:chua;type:Chùa
-ChIJQ2dbvVIYQjERVbGNKc5Tmcs,CHÙA TÂN THÀNH,landmark,religious,name:chua;type:Chùa phật giáo
-ChIJaX09zkgYQjERCtro2DeADN0,Chùa Thuận Thành,landmark,religious,name:chua;type:Chùa phật giáo
+ChIJQ2dbvVIYQjERVbGNKc5Tmcs,CHÙA TÂN THÀNH,temple,religious,name:chua;type:Chùa phật giáo
+ChIJaX09zkgYQjERCtro2DeADN0,Chùa Thuận Thành,temple,religious,name:chua;type:Chùa phật giáo
 ChIJrd3YeXENQjERWWbMPMdY2CE,Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An,attraction,paid_attraction,name:thuyen thung;type:Đại lý du lịch bằng thuyền
 ChIJ00Fz0rANQjERLadxvkIRXBY,Thuyền Thúng Tượng Thúy - Coconut Basket Boat Tour Hoi An,attraction,paid_attraction,name:thuyen thung;type:Đại lý du lịch bằng thuyền
 ChIJ20P_fAANQjERgFeFcOB6MAs,Điểm đón khách du lịch thuyền thúng cầu Hói Lăng,attraction,paid_attraction,name:thuyen thung
@@ -177,3 +178,4 @@ manual:hai-van-quan,Hải Vân Quan,landmark,paid_attraction,override:Hải Vân
 manual:mikazuki-waterpark,Mikazuki Water Park 365,attraction,paid_attraction,name:water park;type:Công viên nước
 manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,attraction,paid_attraction,name:vinwonders;type:Công viên giải trí
 manual:cu-lao-cham,Cù Lao Chàm,attraction,paid_attraction,override:Cù Lao Chàm
+manual:nha-tho-con-ga,Nhà thờ Con Gà (Giáo xứ Chính Tòa Đà Nẵng),temple,religious,name:nha tho;type:Nhà thờ Công giáo

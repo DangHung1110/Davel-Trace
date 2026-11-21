@@ -10,8 +10,8 @@ python BE/ml/data/migrate_v2.py          # đọc danang-v1 (không sửa) + BE/
 
 | File | Nội dung |
 |---|---|
-| `pois.json` | **1000 POI**: 938 active (862 điểm dừng + 76 lưu trú), 62 excluded, mỗi cái có lý do. Mỗi khái niệm đúng một trường, đúng 25 khoá cấp cao nhất (luật 11), một bộ 13 khoá `tags` cho mọi POI (luật 13). **Luôn sạch**: không có giá trị gốc Google. |
-| `matrix.json` | Ma trận di chuyển **phủ mọi POI active, gồm lưu trú** (988 id = 938 active + 50 POI bị loại sau khi đã có hàng; hàng thừa vô hại); OSRM `car` MLD, 976 144 ô, 0 ô thiếu. Định dạng `dense_v1` (7,2 MB), đọc qua `BE.matrix_format.cells_of`. Mở rộng bằng `BE/tools/expand_poi_matrix.py --select active`. |
+| `pois.json` | **1008 POI**: 944 active (868 điểm dừng + 76 lưu trú), 64 excluded, mỗi cái có lý do. Đầu vào là `danang-v1` của `main` (750 POI, gồm 8 điểm nhập tay mới, đồng bộ 21/11). Mỗi khái niệm đúng một trường, đúng 25 khoá cấp cao nhất (luật 11), một bộ 13 khoá `tags` cho mọi POI (luật 13). **Luôn sạch**: không có giá trị gốc Google. |
+| `matrix.json` | Ma trận di chuyển **xe máy** (OSRM, `BE/tools/osrm/motorbike.lua`, như `danang-v1` của `main`) cho **cả 1008 POI**, 1 016 064 ô, 0 ô thiếu. Định dạng `dense-v1`, đọc qua `BE.app.services.matrix.load_cells`. Dựng lại: `BE/tools/osrm/build_osrm.sh` rồi `python BE/tools/build_poi_matrix.py --all --pois BE/data/snapshots/danang-v2/pois.json --osrm-meta <data>/osrm-meta.json`. |
 | `quarantine_google.json` | Giá trị gốc Google (rating, price_level, type, ambience, pros/cons, giờ mọi ngày, tag v1) theo `poi_id`. Chỉ `BE.common.poi_view` đọc, và chỉ khi `GOOGLE_POLICY=demo_phi_thuong_mai`; mặc định lúc chạy là `cach_ly`. |
 | `archive_fields.json` | Trường v1/v2.0 không còn dùng, chỉ để truy vết; không module nào đọc lúc chạy. |
 
@@ -19,7 +19,7 @@ python BE/ml/data/migrate_v2.py          # đọc danang-v1 (không sửa) + BE/
 
 | Trường | Giá trị |
 |---|---|
-| `hours` | `{open, kind, closed_days, access_window, archetype}`. `kind` (POI active): fixed 341 (có nguồn) · safe_window 590 (khung an toàn theo nhóm, nhãn "nên kiểm tra giờ"; gồm 76 lưu trú 24h theo quy ước) · by_booking 7 (lớp học theo suất). Không POI active nào `unknown`. `access_window` = khung đường Sơn Trà 07:30–17:30. |
+| `hours` | `{open, kind, closed_days, access_window, archetype}`. `kind` (POI active): fixed 338 (có nguồn) · safe_window 599 (khung an toàn theo nhóm, nhãn "nên kiểm tra giờ"; gồm 76 lưu trú 24h theo quy ước) · by_booking 7 (lớp học theo suất). Không POI active nào `unknown`. `access_window` = khung đường Sơn Trà 07:30–17:30. |
 | `price` | `{tier, note}`. `tier` ∈ free / cheap (<100k) / medium (100–500k) / expensive (500k–1,2tr) / included (trong vé điểm cha `requires_ticket_of`) / `null` (lưu trú). Số VND gốc + URL ở `provenance.price.note`. |
 | `dwell` | `{p25, p50, p75}` phút. |
 | `tags` | `space`, `indoor` (= space == indoor), `effort`, `kid_friendly`, `party`, `good_times`, `time_budget`, `weather_sensitive`, `outdoor_exposure`, `sun_exposure`, `wind_exposure`, `rain_cover`, `exposure_source` (explicit / category_prior). |
@@ -38,7 +38,7 @@ python BE/ml/data/migrate_v2.py          # đọc danang-v1 (không sửa) + BE/
 ## App đọc dữ liệu thế nào
 
 Mọi chỗ nạp `pois.json` (`BE.common.load_pois`, `retrieval.load_pois_json`, `routers/evaluate.load_eval_context`,
-`snapshot.load_snapshot`) đi qua `BE.common.poi_view`, sinh lại các trường cũ app đang đọc:
+đi qua `BE.common.poi_view`, sinh lại các trường cũ app đang đọc:
 `opening_hours` ← `hours.open`; `visit_min` ← `dwell`; `smart_tags.price_band` / `free_entry` ← `price.tier`;
 `rating` ← `3 + 2·prize_prior` (demo: rating Google nếu có); `verified` ← luật đủ điều kiện (active, không base, giờ ≠ unknown);
 `cat`/`type` ← `category`. Bản ghi v1 đi qua nguyên vẹn. Kiến trúc mới nên đọc thẳng v2.1 (`prize_prior` thay `rating`).

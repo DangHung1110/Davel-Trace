@@ -1,5 +1,17 @@
 # Da Nang Local PMTiles 3D Route Simulator
 
+Repository hiện có ba bề mặt demo dùng chung dữ liệu Đà Nẵng:
+
+- Prototype bản đồ tĩnh ở thư mục gốc (`index.html` + `server.py`).
+- FastAPI planner/platform trong `BE/`: phương án khả thi, hard gate,
+  PostgreSQL code-first, shadow calibration và readiness theo component.
+- Flutter mobile trong `FE/`: khung điện thoại 390×844 chạy ngay trên laptop,
+  PMTiles local, lịch trình, chi tiêu, hồ sơ và planner live/offline trung thực.
+
+Planner luôn chạy bằng thuật toán deterministic. Groq/Gemini chỉ là lớp tùy chọn để
+diễn giải yêu cầu tiếng Việt và giải thích kết quả; xem hướng dẫn cấu hình tại
+[`BE/README.md`](BE/README.md#cấu-hình-groq-cho-trợ-lý-lập-lịch).
+
 Bộ test tĩnh, không framework và không cần build. Chức năng gồm:
 
 - Render bản đồ Đà Nẵng từ `data/danang.pmtiles`, không cần VietMap API key.
@@ -25,6 +37,35 @@ Không dùng `python -m http.server` cho file PMTiles vì server mặc định k
 
 Sau đó mở `http://localhost:5500`. Bản đồ tự tải từ file local, không cần nhập API key.
 
+## Demo mobile trên laptop
+
+Mở terminal PowerShell thứ nhất:
+
+```powershell
+docker compose --env-file BE/.env up -d postgres
+.\.venv\Scripts\python.exe -m alembic -c BE\alembic.ini upgrade head
+.\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
+```
+
+Mở terminal PowerShell thứ hai:
+
+```powershell
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' pub get
+& '..\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000
+Pop-Location
+```
+
+App tự căn giữa trong khung điện thoại khi chạy trên màn hình laptop. Nếu BE
+chưa chạy, app vẫn mở dữ liệu demo và ghi rõ rằng lựa chọn chưa được lưu lên
+server. Hướng dẫn/test đầy đủ: `specs/003-stable-planning-roadmap/quickstart.md`.
+Hướng dẫn platform/PostgreSQL đầy đủ:
+`specs/005-platform-foundation/quickstart.md`.
+
+PostgreSQL local dùng host `127.0.0.1`, port theo `POSTGRES_PORT` (mẫu: `5437`), database `davel_trace`,
+username `davel`; password lấy từ `BE/.env`. `COMPOSE_PROJECT_NAME` chọn project/volume local,
+image Alpine có sẵn và log rotation để không nhân dung lượng theo worktree.
+
 Ô **Service API key** chỉ dùng cho Search/Place/Route của VietMap và có thể để trống. Khi để trống, tìm kiếm dùng Photon/OpenStreetMap và chỉ đường dùng OSRM.
 
 ## Dữ liệu bản đồ local
@@ -41,3 +82,21 @@ File `data/danang.pmtiles` được cắt từ Protomaps/OpenStreetMap build ng�
 
 PMTiles chứa dữ liệu vector để render. Font và sprite hiện vẫn tải từ CDN Protomaps; muốn chạy hoàn toàn không có Internet thì cần tải thêm các asset này vào dự án. Search và routing cũng là dịch vụ online, tách biệt với bản đồ nền local.
 #
+# Product platform demo (Flutter + FastAPI)
+
+The complete product work is developed incrementally on `feat/product-platform`.
+Identity/access revision `006_001` adds PostgreSQL accounts, verification,
+login/session control, recovery, export and deletion while keeping AI optional.
+
+```powershell
+docker compose --env-file BE/.env up -d postgres
+.\.venv\Scripts\python.exe -m alembic -c BE\alembic.ini upgrade head
+.\.venv\Scripts\python.exe -m uvicorn BE.app.main:app --host 127.0.0.1 --port 8000
+Push-Location FE
+& '..\.flutter-sdk\bin\flutter.bat' run -d chrome --web-port 5501 --web-hostname 127.0.0.1 --dart-define=API_BASE_URL=http://127.0.0.1:8000 --dart-define=APP_MODE=demo
+Pop-Location
+```
+
+For the local verification/recovery inbox set
+`IDENTITY_DEV_OUTBOX_ENABLED=true` in ignored `BE/.env`. See
+`specs/006-identity-access/quickstart.md` for the full demo and DBeaver guide.

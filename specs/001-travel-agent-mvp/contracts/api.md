@@ -10,16 +10,38 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 
 ## POST /itinerary — TripRequest → plans
 - In: `{ "trip": {TripRequest}, "profiles": ["savings", "balanced", "experience"] }`
-- Out: `{ "plans": [{Itinerary + scores + explanations}], "selected": null }`
+- Out: `{ "plans": [{Itinerary + scores + explanations + activity_match}], "selected": null, "retrieval": {...} }`
 - Rule: every plan passed feasibility gate; ≥2 plans when feasible.
+- Rule (FR-006, FR-022): `activities` không bao giờ lọc bớt POI. Mỗi hoạt động hiểu được thành ràng buộc "ít nhất 1 điểm thật sự đúng mong muốn đó" cho bộ giải ("hải sản" là quán hải sản, "chùa" là chùa, không chỉ cùng nhóm loại); không xếp được thì bỏ ràng buộc đó và cảnh báo. Mỗi plan có `activity_match: [{activity, categories, status, poi_id?, start_between?}]`. `status`: `met` (kèm `poi_id` của điểm đáp ứng) / `unmet` / `no_verified_poi` (dữ liệu chưa có điểm nào như vậy) / `over_budget` (có điểm nhưng ngân sách không đủ) / `blocked_by_profile` (hồ sơ khách loại điểm đó) / `outside_trip_hours` (mong muốn chỉ có nghĩa trong một khung giờ ngoài chuyến đi, `start_between` là khung phút) / `not_understood`.
+- Rule: "ngắm hoàng hôn", "ngắm bình minh" là mong muốn có giờ: điểm đáp ứng phải bắt đầu trong khung 16:00–18:00, 05:00–07:00.
+- Rule: `trip.date` (ISO) cho biết thứ của ngày đi. Giờ mở cửa đọc theo đúng thứ đó (`hours_by_day`), điểm nghỉ ngày đó không được xếp; điểm trong `must_visit` nghỉ ngày đó bị bỏ kèm cảnh báo. Không có `date` thì plan cảnh báo các điểm có ngày nghỉ trong tuần. Chuyến nhiều ngày tính thứ riêng cho từng ngày.
+- Rule: ngày đi qua khung 17:30–20:30 có bữa tối như bữa trưa; tiền hoặc giờ không đủ thì bỏ bữa tối kèm cảnh báo. Cổng mềm `DINNER` và `TIME_FIT` (điểm xếp đúng thời điểm trong ngày theo loại) có trong `constraint_status`, không làm rớt plan; `must_visit` không bị chấm `TIME_FIT`.
+- Rule: điểm `must_visit` không vừa ở thời lượng thường dùng được xếp ở thời lượng ngắn nhất thường gặp (p25) kèm cảnh báo.
+- Rule: điểm đi cả ngày (thời lượng từ 5 giờ: Bà Nà, VinWonders, Cù Lao Chàm) chạy suốt khung 11:00–13:00 thì bữa trưa ăn ngay tại đó: plan không xếp nhà hàng trưa và không có khoảng nghỉ sau bữa trưa, `template.lunch_on_site` là `poi_id` của điểm đó (`lunch_restaurant` và `rest_block` là `null`), kèm một dòng trong `warnings`. Cổng `REST_FOLLOWS_LUNCH` chấp nhận trường hợp này. Số điểm tối thiểu của ngày chỉ tính trên phần ngày còn lại.
+- Rule: dự báo thời tiết đọc theo `trip.date`, mỗi ngày của chuyến nhiều ngày đọc ngày của nó; ngày nằm ngoài dự báo (quá một tuần) thì không dùng dự báo và `warnings` nói rõ; không có `date` thì chuyến được coi là bắt đầu vào ngày đầu của dự báo và `warnings` ghi ngày đã dùng. Giờ có xác suất mưa từ 50% làm điểm ngoài trời mất điểm trong bộ giải theo mức che mưa của điểm (`smart_tags.rain_cover`): mưa cả ngày thì điểm lộ thiên chỉ còn trong lịch khi khách yêu cầu hoặc lịch cần đủ số điểm; mưa một phần ngày thì điểm đó dời sang giờ khô. Khi dự báo có giờ mưa, `warnings` có một dòng "du bao mua HH:MM-HH:MM (toi da N%) ..." nêu các khung giờ mưa, tên các điểm ngoài trời còn nằm trong giờ mưa, và ngày dự báo đã dùng nếu chuyến không có `date`.
+- Rule: thứ tự và giờ của các điểm được chọn theo quãng đường cộng thời gian chết (khởi hành muộn hơn 30 phút, khoảng trống hơn 30 phút giữa hai điểm, nghỉ trưa dài hơn mức nghỉ 45 phút); điểm `must_visit` được đặt trong khung giờ hợp lý của loại điểm khi có thứ tự cho phép.
+- Rule: các câu trả lời SOFT của hồ sơ onboarding cộng hoặc trừ điểm cho từng điểm trong bộ giải, không chỉ trong bảng xếp hạng: `spending_level` (1 hoặc 3 nghiêng về quán rẻ hơn hoặc đắt hơn mức thường gặp của loại đó), `outdoor_bias` (-1..1, trên các điểm ngoài trời), `activities` (mã của danh mục onboarding như `beach`, `museum`, `nightlife`, hoặc chữ tự do; là sở thích, không phải điểm bắt buộc như `trip.activities`) và `food_prefs` (mã như `seafood`, `BBQ`, `local_cuisine`, hoặc chữ tự do). Hồ sơ trung tính (mức 2, 0, không chọn gì) cho đúng lịch như khi không có các trường này. `explanation.evidence` của điểm được chọn có thêm "hop muc chi tieu", "hop gu ngoai troi", "hop hoat dong ban thich" khi đúng.
+- Rule: POI có `plan_tier`: `main` vào lịch mặc định; `local` chỉ khi một mong muốn có dưới 3 điểm `main` dùng được (không bị khách tránh, mở trong khung giờ chuyến đi, vé không vượt ngân sách); `wish_only` chỉ khi có mong muốn đúng điểm đó; `excluded` không tự vào lịch. `must_visit` bỏ qua `plan_tier`.
+- Rule: trên cùng một máy và cùng bản cài đặt, cùng một yêu cầu cho cùng một lịch ở mọi mức tải (bộ giải 1 luồng, giới hạn theo khối lượng tính toán, không theo đồng hồ). Mới đo trên một máy: máy khác có thể cho lịch khác nếu khác phiên bản bộ giải, hoặc không nạp được mô hình PATM và phải dùng luật dự phòng. Dự báo thời tiết đổi thì lịch cũng có thể đổi.
+- Rule (FR-013, FR-024): `retrieval = { candidates, needs_verification_total, needs_verification: [{poi_id, name, cat, must_visit, reasons, uncertainty}] (tối đa 20, must_visit trước), excluded: {lý do: số POI}, unmatched_activities }`.
+- Rule: `must_visit` chưa xác minh không vào lịch và không làm hỏng lịch: plan vẫn lập với các điểm còn lại, kèm cảnh báo trong `warnings`; điểm đó nằm trong `needs_verification` với `must_visit: true`.
+- Rule: pool rỗng sau bộ lọc cứng → plan rỗng `passed: false`, `infeasible_by.rule = "EMPTY_POOL"`; không bao giờ lấy toàn bộ snapshot thay thế.
+- Rule: `constraint_status` có thêm cổng cứng `PROFILE_SAFE` (dị ứng / must_avoid / khả năng đi lại của hồ sơ, kiểm lại trên plan cuối).
+
+- Rule (FR-020): `trip.days = 2` trả một plan cho cả chuyến. Mỗi phần tử `activities` và `segments` có `day` (1, 2); `days = [{day, date, stops, total_cost, total_km, total_min, travel_min, cost_estimated, passed, violations, template, soft_penalties}]`. Không điểm nào lặp giữa các ngày; `total_cost` và `passed` tính cho cả chuyến. Không xếp đủ số ngày → `passed: false` kèm cảnh báo. `days = 1` giữ nguyên dạng cũ (không có `day`, `days`).
 
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`
 
+Stable-planning addendum: client mới gửi thêm `idempotency_key` để nhận
+acceptance summary; client cũ giữ nguyên response trên nhưng server vẫn lưu
+accepted-plan evidence. Xem `specs/003-stable-planning-roadmap/contracts/api.md`.
+
 ## POST /replan — disruption → new version
-- In: `{ "itinerary_id": "...", "event": {DynamicEvent} }`
-- Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...] }`
+- In: `{ "itinerary_id": "...", "event": {DynamicEvent}, "completed": [...], "day": 2 }`
+- Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...], "day": 2 }`
 - Rule: completed activities preserved; version++.
+- Rule (FR-020): plan nhiều ngày chỉ xếp lại một ngày: `day`, mặc định là ngày đầu tiên còn điểm chưa đi. Các ngày khác trả về nguyên vẹn. Ngày không có trong plan → 404 `UNKNOWN_DAY`.
 
 ## GET /itinerary/{id} — đọc lịch (offline cache key)
 

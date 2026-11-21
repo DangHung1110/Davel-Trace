@@ -16,10 +16,8 @@ from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
 
 POIS = {
-    "musu": {"verified": True, "smart_tags": {"price_band": "cheap"},
-             "opening_hours": ["07:30-17:00"]},
-    "beach": {"verified": True, "free_entry": True,
-              "opening_hours": ["00:00-23:59"]},
+    "musu": {"verified": True, "fee": 60000, "opening_hours": ["07:30-17:00"]},
+    "beach": {"verified": True, "fee": 0, "opening_hours": ["00:00-23:59"]},
 }
 MATRIX = {"musu->beach": {"minutes": 10}, "beach->musu": {"minutes": 10}}
 TRIP = {"budget": 3000000, "start_time": "07:00", "end_time": "18:00"}
@@ -38,10 +36,10 @@ class TestValidator(unittest.TestCase):
         self.assertEqual(rep["soft_violations"], ["F1"])
         self.assertEqual(rep["details"]["F1"], ["musu", "beach"])
         self.assertEqual(set(rep["checks"]),
-                         {"FAR", "VROH", "B3", "BCS", "ETB", "A1",
+                         {"FAR", "PROFILE_SAFE", "VROH", "B3", "BCS", "ETB", "A1",
                           "CAFE_CAP", "CATEGORY_CAP", "NO_CONSECUTIVE",
                           "NO_ADJACENT_FOOD",
-                          "REST_FOLLOWS_LUNCH", "F1", "TCS", "HCS"})
+                          "REST_FOLLOWS_LUNCH", "F1", "TIME_FIT", "DINNER", "TCS", "HCS"})
         print(f"\n good: {rep['checks']}")
 
     def test_ghost_poi(self):
