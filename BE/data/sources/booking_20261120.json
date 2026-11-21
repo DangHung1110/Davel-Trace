@@ -1,0 +1,107 @@
+{
+ "about": "Trải nghiệm theo suất (hours.kind=by_booking), Codex t15 đọc trang lớp học/đặt chỗ 20/11/2026 (reports/p0/links/cooking_sessions_codex.json). Chỉ lớp có lịch suất ghi rõ; lớp khác giữ unknown. Jolie (ĐN, Hội An): người dùng xác nhận 2 suất 09:00-13:00 và 15:00-19:00 (20/11).",
+ "checked_at": "2026-11-20",
+ "items": [
+  {
+   "poi_id": "ChIJO5_PAj8XQjER34kyBjbMYNo",
+   "name": "Family Kitchen Da Nang - Cooking Class",
+   "sessions": [
+    "09:30-12:30",
+    "13:00-16:00",
+    "16:30-19:30"
+   ],
+   "closed_days": [],
+   "duration_min": 180,
+   "booking_url": "https://familykitchendanang.com/#contact",
+   "evidence_url": "https://familykitchendanang.com/faq.html",
+   "price_note": "$35 USD per person/người lớn; Trích nguyên văn các ô/cụm trên FAQ chính chủ: ba ca mỗi ngày, thứ Hai–Chủ nhật. Gồm đi chợ, nguyên liệu, nấu sáu món, ăn món tự nấu và sách công thức. Chưa có bằng chứng gói gồm thuyền thúng; booking_url là biểu mẫu được FAQ liên kết.",
+   "quote": "9:30am – 12:30pm\n1:00pm – 4:00pm\n4:30pm – 7:30pm\n3 hours\n$35 USD per person\nMon – Sun\nmarket visit\n6 dishes\nrecipe booklet"
+  },
+  {
+   "poi_id": "ChIJs-NDcgAXQjERHA6tioqOfH4",
+   "name": "Apron Up Cooking Class in Danang",
+   "sessions": [
+    "09:00-13:30",
+    "12:00-16:30",
+    "16:00-20:30"
+   ],
+   "closed_days": [],
+   "duration_min": 270,
+   "booking_url": "https://danangapronupcookingclass.com/reservation_danang_apron_up_group_cooking_class.html?tour=Daily+Cooking+Group+Tour",
+   "evidence_url": "https://danangapronupcookingclass.com/",
+   "price_note": "32USD/Person /Group Tour/người lớn; Chọn gói lớp ghép, không trộn với lớp riêng 4 giờ và bảng giá theo cỡ nhóm. Giờ kết thúc tính từ ba giờ bắt đầu + thời lượng 4,5 giờ nguồn ghi, cần xác nhận khi đặt; không phải các mốc kết thúc được in riêng. Lớp daily; có đi chợ, nguyên liệu, đầu bếp, năm món, sách công thức và chứng nhận. Chưa xác nhận thuyền thúng.",
+   "quote": "Starting times: 9:00, 12:00, 16:00\nDuration: 4.5 hours\n32USD/Person /Group Tour\nWet market tour\n5 dishes\nPrinted cook booklet\nCertificate"
+  },
+  {
+   "poi_id": "ChIJAZn-164ZQjERV1ZAwfTgWuc",
+   "name": "Sunny Vietnamese Banh Mi & Coffee Class- Da Nang",
+   "sessions": [
+    "08:30-11:30",
+    "12:00-15:00",
+    "16:00-19:00"
+   ],
+   "closed_days": [],
+   "duration_min": 180,
+   "booking_url": "https://www.myrealtrip.com/experiences/products/7173954",
+   "evidence_url": "https://www.myrealtrip.com/experiences/products/7173954",
+   "price_note": "giá chưa rõ/người lớn; Trang đặt lớp Sunny tại 253 Nguyễn Đình Chiểu, Đà Nẵng nêu ba ca ba giờ làm bánh mì và cà phê với Jenny; thực đơn thay đổi theo ca. Thời lượng 180 phút tính trực tiếp từ từng cặp mốc. Chưa có giá VND/USD đọc được, chưa xác nhận đi chợ hoặc thuyền thúng; chưa xác minh ngày nghỉ.",
+   "quote": "오전 타임 : 08:30 ~ 11:30\n오후 타임 : 12:00 ~ 15:00\n저녁 타임 : 16:00 ~ 19:00"
+  },
+  {
+   "poi_id": "ChIJmU3hl9WrNTERBUbnSp3g5vs",
+   "name": "Thuan Tinh Island Cooking Tour",
+   "sessions": [
+    "08:30-13:30",
+    "11:30-16:30"
+   ],
+   "closed_days": [],
+   "duration_min": 300,
+   "booking_url": "https://www.cookly.me/en-ca/do/1187-morning-class-with-market-trip-boat-ride-through-water-coconut-forest/in/hoi-an?currency=USD",
+   "evidence_url": "https://www.cookly.me/en-ca/do/1187-morning-class-with-market-trip-boat-ride-through-water-coconut-forest/in/hoi-an?currency=USD",
+   "price_note": "US$ 40/người lớn; Gói Market, Boat Ride and Vietnamese Cooking Class của Thuan Tinh Island, không trộn gói Sunset 3,5 giờ/$27. Ca tính toàn tour từ đón đến trả khách; nguồn ghi rõ cả bốn mốc và 5 giờ. Gồm chợ, thuyền sông/thuyền chèo qua rừng dừa, nguyên liệu, nấu ăn và đón khách; không tự đồng nhất mọi đoạn thuyền với thuyền thúng. Chưa xác minh ngày nghỉ.",
+   "quote": "8:30am • 11:30am\n5 hours\nAdults\nUS$ 40\n1:30 pm: Return back to your hotel\n4:30 pm: Return back to your hotel\nBoat ride"
+  },
+  {
+   "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+   "name": "Jolie Cooking Class",
+   "sessions": [
+    "09:00-13:00",
+    "15:00-19:00"
+   ],
+   "closed_days": [],
+   "duration_min": 240,
+   "booking_url": "https://joliecookingclass.com/booking/da-nang-market-cooking-experience/",
+   "evidence_url": "https://joliecookingclass.com/booking/da-nang-market-cooking-experience/",
+   "price_note": "USD 40 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026).",
+   "quote": "09:00 / 15:00 – Meet at the meeting point ... 13:00 / 19:00 – Relax, share stories, and enjoy local hospitality"
+  },
+  {
+   "poi_id": "ChIJddXz2K8PQjER4enhapQvvo8",
+   "name": "Cooking With Jolie In Hoi An – Vietnamese Cooking Class",
+   "sessions": [
+    "09:00-13:00",
+    "15:00-19:00"
+   ],
+   "closed_days": [],
+   "duration_min": 240,
+   "booking_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
+   "evidence_url": "https://joliecookingclass.com/booking/hoi-an-market-cooking-experience/",
+   "price_note": "USD 30 per person/người lớn. Lịch 'Morning / Afternoon Experience': 09:00/15:00 gặp ở điểm hẹn, uống cà phê -> 13:00/19:00 kết thúc (người dùng xác nhận 2 suất sáng/chiều, 20/11/2026).",
+   "quote": "09:00 / 15:00 – Meet at the meeting point ... 13:00 / 19:00 – Relax, share stories, and enjoy local hospitality"
+  },
+  {
+   "poi_id": "ChIJrQINf-wZQjEREXiFm4Gq56M",
+   "name": "Da Nang Family Cooking Class",
+   "sessions": [
+    "10:00-12:30",
+    "17:00-19:30"
+   ],
+   "closed_days": [],
+   "duration_min": 150,
+   "booking_url": "https://pelago.com/en/activity/pzt54hubo-da-nang-family-cooking-class-vietnam-da-nang",
+   "evidence_url": "https://pelago.com/en/activity/pzt54hubo-da-nang-family-cooking-class-vietnam-da-nang",
+   "price_note": "Điểm hẹn Sala Coffee, 61 Hàn Thuyên, Hải Châu. Suất trưa 10:00–12:30, suất tối 17:00–19:30 (trang đặt chỗ Pelago, tra 21/11/2026).",
+   "quote": "Time of class: 10:00 am-12:30 pm: Lunch; 5:00pm-7:30 pm: Dinner"
+  }
+ ]
+}

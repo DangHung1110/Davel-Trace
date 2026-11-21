@@ -1,0 +1,88 @@
+{
+ "about": "Chốt cuối 20/11/2026: giá/giờ từ link người dùng đã tự kiểm (xem reports/p0/final_review_20261120.json). Sắp sau agent_web_2026-11-19c nên thay cả dòng cùng poi_id.",
+ "checked_at": "2026-11-20",
+ "items": [
+  {
+   "poi_id": "osm:way/140401174",
+   "name": "Hồ Xanh Sơn Trà",
+   "ticket_vnd": 0,
+   "free_entry": true,
+   "hours": "00:00-23:59",
+   "confidence": 0.7,
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Mở 24h, miễn phí.",
+   "evidence_url": "https://daivietourist.vn/ho-xanh-da-nang/"
+  },
+  {
+   "poi_id": "osm:way/14131302",
+   "name": "Công viên Ấn tượng Hội An (show Ký ức Hội An)",
+   "hours": "17:00-21:30",
+   "confidence": 0.7,
+   "evidence_url": "https://hoianit.com/show-ky-uc-hoi-an/",
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Show 20:00 trừ thứ Ba ~60'; ECO 600k tại quầy (online 520-540k), HIGH 750k, VIP 1,2tr. Khung công viên 17:00-21:30 giữ từ bản trước (ticketgo/KKday giao nhau).",
+   "closed_days": [
+    "Tu"
+   ],
+   "ticket_vnd": 600000,
+   "min_vnd": 600000,
+   "max_vnd": 1200000
+  },
+  {
+   "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+   "name": "Ngũ Hành Sơn (Thủy Sơn)",
+   "ticket_vnd": 40000,
+   "min_vnd": 40000,
+   "max_vnd": 75000,
+   "hours": "07:00-17:00",
+   "confidence": 0.7,
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé Thủy Sơn 40k, thang máy 15k/lượt, động Âm Phủ 20k (max = 40+15+20). Giờ 07:00-17:00 (danangfantasticity 22/01/2026).",
+   "evidence_url": "https://nangtrip.com/activities/ngu-hanh-son"
+  },
+  {
+   "poi_id": "manual:son-tra-tour-lan-ct15",
+   "name": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "ticket_vnd": 450000,
+   "min_vnd": 250000,
+   "max_vnd": 450000,
+   "hours": "08:00-16:45",
+   "confidence": 0.7,
+   "evidence_url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Khởi hành 8h00-14h45, tour 120' (kết thúc muộn nhất 16:45). NL 450k, trẻ 1-6t 250k, <1t miễn phí. Bến CT15 (pin Sơn Trà Marina, tixgo.vn/node/3822). Suất: 08:00-10:00, 10:15-12:15, 12:30-14:30, 14:45-16:45."
+  },
+  {
+   "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+   "name": "Rừng Dừa Bảy Mẫu",
+   "ticket_vnd": 30000,
+   "min_vnd": 30000,
+   "max_vnd": 105000,
+   "typical_vnd": 105000,
+   "hours": "07:30-18:30",
+   "confidence": 0.7,
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30.",
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267"
+  },
+  {
+   "poi_id": "ChIJrd3YeXENQjERWWbMPMdY2CE",
+   "name": "Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An",
+   "ticket_vnd": 30000,
+   "min_vnd": 30000,
+   "max_vnd": 105000,
+   "typical_vnd": 105000,
+   "hours": "07:30-18:30",
+   "confidence": 0.65,
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau.",
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267"
+  },
+  {
+   "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+   "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+   "ticket_vnd": 30000,
+   "min_vnd": 30000,
+   "max_vnd": 105000,
+   "typical_vnd": 105000,
+   "hours": "07:30-18:30",
+   "confidence": 0.65,
+   "note": "Người dùng tự kiểm kèm link (20/11/2026); số liệu đọc từ trang đó. Vé cổng NL 30k (trẻ 5-9t 15k); thuyền thúng 150k/thúng/2 người/45' (~75k/người) -> max ~105k/người. Giờ 7h30-18h30. Áp chung cụm bay_mau.",
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267"
+  }
+ ]
+}

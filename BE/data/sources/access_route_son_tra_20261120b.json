@@ -1,0 +1,245 @@
+{
+ "about": "Phân loại tuyến kiểm soát Sơn Trà của Codex (t15, 20/11/2026): đối chiếu nguồn (danangportal trạm Hoàng Sa gần ngã ba Bãi Bắc; vnexpress 6/11/2019: resort, Bảo tàng Đồng Đình, chùa Linh Ứng ở chân núi ngoài vùng kiểm soát; vietnamplus/baodanang 2026) với hình học đường OSM. Suy luận, không phải bản đồ ranh pháp lý; 'unknown' không ghi (giữ luật cũ). Chi tiết + nguồn: reports/p0/links/sontra_route_codex.json. Sắp sau access_route_son_tra_20261120.json.",
+ "checked_at": "2026-11-20",
+ "sources": [
+  "https://cttdt.danangportal.gov.vn/en/web/dng/w/trien-khai-thi-diem-cong-tac-quan-ly-bao-dam-an-toan-cho-du-khach-khi-da-ngoai-tham-quan-tai-ban-dao-son-tra-i",
+  "https://danangfantasticity.com/en/di-san-canh-quan/ban-dao-son-tra",
+  "https://vnexpress.net/son-tra-dong-cua-rung-dem-4008331.html",
+  "https://nhandan.vn/da-nang-chinh-thuc-mo-lai-tuyen-tham-quan-da-ngoai-tai-ban-dao-son-tra-post908256.html",
+  "https://baodanang.vn/quy-dinh-thoi-gian-tham-quan-ban-dao-son-tra-3348893.html",
+  "https://www.vietnamplus.vn/ban-dao-son-tra-co-3-tuyen-diem-duoc-phep-tham-quan-post1130716.vnp",
+  "https://baovanhoa.vn/den-ban-dao-son-tra-dung-vuot-bien-cam-255661.html",
+  "https://danangfantasticity.com/en/khuyen-cao-khong-tham-gia-tour-trekking-du-lich-sinh-thai-trai-phep-tai-ban-dao-son-tra",
+  "https://baodanang.vn/ban-dao-son-tra-don-du-khach-tro-lai-tham-quan-3355181.html"
+ ],
+ "items": [
+  {
+   "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
+   "name": "Son Tra Retreat - Garden Lounge & Eatery",
+   "class": "off_route",
+   "reason": "Nhánh dân cư nối Hoàng Sa ở chân núi, trước đoạn kiểm soát Bãi Bắc; OSM cho đường tiếp cận từ phía thành phố."
+  },
+  {
+   "poi_id": "ChIJx02UcvIXQjER8al1AkjYuW0",
+   "name": "Biển Rạng Sơn Trà",
+   "class": "off_route",
+   "reason": "Tọa độ là nhà hàng trong khu đô thị phía nam chân núi, không phải bãi Rạng ở phía đông bán đảo."
+  },
+  {
+   "poi_id": "ChIJVdcEJfsXQjER77l7IpOUHo0",
+   "name": "Sơn Trà Marina",
+   "class": "off_route",
+   "reason": "Bến Marina nối trực tiếp đoạn Hoàng Sa ven biển chân núi qua đường vào bến, trước tuyến Ngã ba Bãi Bắc–Cây Đa."
+  },
+  {
+   "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
+   "name": "Trà Sơn Quán",
+   "class": "off_route",
+   "reason": "Trong mạng đường dân cư Thọ Quang phía thành phố, không cần đi lên tuyến Bàn Cờ hoặc qua Bãi Bắc."
+  },
+  {
+   "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
+   "name": "Hải sản tươi sống Bà Rô",
+   "class": "off_route",
+   "reason": "Đường dân cư chân núi, tiếp cận từ phía Hoàng Sa/Lê Văn Lương, ngoài ba tuyến vào rừng được mô tả."
+  },
+  {
+   "poi_id": "ChIJ864pbQA9QjER--PIUcxqd48",
+   "name": "Son Tra Viewpoint",
+   "class": "off_route",
+   "reason": "Điểm tọa độ sát way 140401014 trên Hoàng Sa, phía thành phố của ngã ba Bãi Bắc; không suy từ tên Sơn Trà thành điểm trên tuyến núi."
+  },
+  {
+   "poi_id": "ChIJhZI15EcYQjERBq1kypqtqtc",
+   "name": "Lữ Cafe & Bar",
+   "class": "off_route",
+   "reason": "Trong mạng đường chân núi Thọ Quang, có đường tiếp cận từ thành phố không vào ba tuyến kiểm soát."
+  },
+  {
+   "poi_id": "ChIJo5HJeVg9QjERxLqGaMYHXCw",
+   "name": "Mây coffee",
+   "class": "off_route",
+   "reason": "Nhánh dân cư nối đường chân núi; tọa độ phía thành phố, không trên đường lên Bàn Cờ."
+  },
+  {
+   "poi_id": "ChIJmQ0KGkE9QjER4TyQDQ_04TA",
+   "name": "OM Tea & Coffee",
+   "class": "off_route",
+   "reason": "Nhánh dân cư phía thành phố, tiếp cận qua mạng đường chân núi ngoài tuyến Bàn Cờ và Cây Đa."
+  },
+  {
+   "poi_id": "ChIJ34pDfgA9QjERzXhUIjmZbso",
+   "name": "Tiệm Hoa & Nắng - WiWi Coffee",
+   "class": "off_route",
+   "reason": "Nhánh dân cư Thọ Quang, có kết nối ra thành phố trước các đoạn lên rừng."
+  },
+  {
+   "poi_id": "ChIJJS-cJ58XQjERxgFIfN6CjJ0",
+   "name": "Trung Nguyên Legend Café",
+   "class": "off_route",
+   "reason": "Quán trong mạng đường dân cư chân núi, không cần qua đoạn kiểm soát tuyến núi."
+  },
+  {
+   "poi_id": "ChIJsYoIEOIXQjER_5_trbAwgnA",
+   "name": "Hương Sơn Coffee",
+   "class": "off_route",
+   "reason": "Tọa độ thuộc mạng đường dân cư phía thành phố, ngoài các tuyến Yết Kiêu lên núi và Bãi Bắc–Cây Đa."
+  },
+  {
+   "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
+   "name": "Voọc Souvenir Coffee",
+   "class": "off_route",
+   "reason": "Quán ở phía đô thị, gần mạng đường Yết Kiêu/Thọ Quang trước nhánh lên núi."
+  },
+  {
+   "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
+   "name": "Bãi biển Sơn Trà",
+   "class": "off_route",
+   "reason": "Bờ biển phía thành phố tại chân núi, nối mạng đường ven biển trước các tuyến kiểm soát vào rừng."
+  },
+  {
+   "poi_id": "ChIJ17GORdEXQjERhkujx-kwJA0",
+   "name": "Khu Du lịch Sinh thái Suối Rạng",
+   "class": "off_route",
+   "reason": "Tọa độ sát đoạn Hoàng Sa way 140401014 ở Suối Rạng, trước ngã ba Bãi Bắc; không phải tuyến Suối Ôm đang tạm dừng."
+  },
+  {
+   "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
+   "name": "Sơn Trà Tịnh Viên",
+   "class": "off_route",
+   "reason": "OSM nối nhánh vào vườn với mạng đường chân núi phía thành phố (way 471879747), không cần lên đoạn Yết Kiêu trên núi."
+  },
+  {
+   "poi_id": "ChIJpYNhNwAXQjERflfHrn1lop4",
+   "name": "Vịnh Sơn Trà",
+   "class": "off_route",
+   "reason": "Tọa độ là điểm vịnh sát chân núi cạnh đoạn Hoàng Sa phía thành phố, trước lối lên các tuyến rừng."
+  },
+  {
+   "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+   "name": "Đỉnh Bàn Cờ",
+   "class": "on_route",
+   "reason": "Bàn Cờ là điểm được nêu trực tiếp trên tuyến Yết Kiêu–Đỉnh Bàn Cờ–Bãi Bắc; cầu thang OSM way 1263637605 nối tuyến đỉnh, áp dụng cửa sổ tham quan."
+  },
+  {
+   "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
+   "name": "Nhà Vọng Cảnh",
+   "class": "on_route",
+   "reason": "Nhà Vọng Cảnh nằm trên nhánh way 140401102 nối đường Yết Kiêu trên núi; S1 nêu rõ hành trình sau trạm lên Nhà Vọng Cảnh–Bàn Cờ–Bãi Bắc."
+  },
+  {
+   "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
+   "name": "View Ngắm Bình Minh Sơn Trà",
+   "class": "off_route",
+   "reason": "Tọa độ sát way 140401014 trên đoạn Hoàng Sa ven biển trước ngã ba Bãi Bắc, không trên đường núi Bàn Cờ."
+  },
+  {
+   "poi_id": "ChIJaa7lANcXQjERmT3kgV5U7uA",
+   "name": "Bảo tàng Đồng Đình",
+   "class": "off_route",
+   "reason": "Cổng bảo tàng sát Hoàng Sa way 140401014 trước Bãi Bắc; S3 còn nêu trực tiếp Đồng Đình trong nhóm chân núi ngoài kiểm soát thí điểm."
+  },
+  {
+   "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+   "name": "Bảo tàng 3D Art In Paradise",
+   "class": "off_route",
+   "reason": "Điểm trong khu đô thị phía tây nam chân bán đảo, nối đường thành phố, không vào ba tuyến rừng."
+  },
+  {
+   "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
+   "name": "Chợ Chiều",
+   "class": "off_route",
+   "reason": "Chợ trong khu đô thị Thọ Quang phía thành phố, không cần đi qua đoạn kiểm soát đường núi."
+  },
+  {
+   "poi_id": "ChIJFXuefgA9QjERTm9u0hlzWcs",
+   "name": "View Sơn Trà về đêm",
+   "class": "off_route",
+   "reason": "Điểm trên nhánh way 471879749 nối mạng chân núi (471879748/471879747), phía thành phố của đoạn Yết Kiêu lên núi."
+  },
+  {
+   "poi_id": "osm:node/4924323121",
+   "name": "Fishing Village and Fleet",
+   "class": "off_route",
+   "reason": "Điểm làng chài ven biển trong mạng chân núi Thọ Quang, tiếp cận từ thành phố trước các tuyến kiểm soát vào rừng."
+  },
+  {
+   "poi_id": "osm:node/6346486685",
+   "name": "Cây Đa Ngàn Năm Sơn Trà",
+   "class": "on_route",
+   "reason": "Cây Đa là đích tuyến Ngã ba Bãi Bắc–Cây Đa được BQL nêu trực tiếp; áp dụng cửa sổ và chỉ đi bộ theo cập nhật 2026."
+  },
+  {
+   "poi_id": "osm:node/13040467529",
+   "name": "Bãi Đá",
+   "class": "off_route",
+   "reason": "Bãi Đá tại tọa độ này nối nhánh 830604959/471857313 từ Hoàng Sa trước Bãi Bắc; không đồng nhất với Bãi Đá Đen được cảnh báo ở nguồn 2026."
+  },
+  {
+   "poi_id": "osm:node/13484040419",
+   "name": "Đền Bà Càn Khôn",
+   "class": "off_route",
+   "reason": "Nhánh đền way 1470278956 nối đoạn Hoàng Sa way 140401014 trước Bãi Bắc; tiếp cận không cần đi đường núi."
+  },
+  {
+   "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+   "name": "Chùa Linh Ứng Sơn Trà",
+   "class": "off_route",
+   "reason": "Quần thể chùa nối Hoàng Sa trước Bãi Bắc; S3 nêu trực tiếp Linh Ứng ngoài kiểm soát chân núi, không phải ngoại lệ cho phép hành hương qua mọi trạm."
+  },
+  {
+   "poi_id": "ChIJJYpRy_YXQjERoyNzmnL2f-E",
+   "name": "Nhà thờ Thánh Giuse lao công",
+   "class": "off_route",
+   "reason": "Nhà thờ trong mạng đường đô thị phía thành phố, ngoài ba tuyến vào rừng."
+  },
+  {
+   "poi_id": "ChIJkYkOmOMXQjEREz4KLKpwAOE",
+   "name": "Hải sản Năm Đảnh",
+   "class": "off_route",
+   "reason": "Nhà hàng trong hẻm dân cư chân núi nối mạng đường đô thị, không qua đoạn Yết Kiêu lên Bàn Cờ."
+  },
+  {
+   "poi_id": "ChIJxwczMkkXQjERoo3KDb0ZQKE",
+   "name": "Hải Sản A SÂM",
+   "class": "off_route",
+   "reason": "Nhà hàng trong mạng đường dân cư Thọ Quang, trước các nhánh lên rừng kiểm soát."
+  },
+  {
+   "poi_id": "ChIJ66IiIgAXQjERK0P0RUVMuWM",
+   "name": "Van Ly Spa & Massage",
+   "class": "off_route",
+   "reason": "Cơ sở trong khu đô thị phía nam chân núi, có đường tiếp cận từ thành phố ngoài tuyến kiểm soát."
+  },
+  {
+   "poi_id": "ChIJh73ojOMXQjERtV8NNHwmrO4",
+   "name": "Karaoke Thao",
+   "class": "off_route",
+   "reason": "Cơ sở trong hẻm dân cư chân núi, nối đường đô thị không cần vào tuyến Bàn Cờ hoặc Cây Đa."
+  },
+  {
+   "poi_id": "ChIJ8ar-PNQXQjERFGGdrbCAQbg",
+   "name": "Tháp Xá Lợi",
+   "class": "off_route",
+   "reason": "Tháp thuộc quần thể Linh Ứng, lối vào qua chùa từ đoạn Hoàng Sa trước Bãi Bắc; rào chùa là quản lý cơ sở riêng."
+  },
+  {
+   "poi_id": "osm:way/140401174",
+   "name": "Hồ Xanh Sơn Trà",
+   "class": "off_route",
+   "reason": "Hồ nằm cạnh đoạn Hoàng Sa chân núi way 140401014 trước Bãi Bắc, ngoài tuyến kiểm soát vào rừng."
+  },
+  {
+   "poi_id": "manual:son-tra-bai-rang",
+   "name": "Bãi Rạng Sơn Trà",
+   "class": "off_route",
+   "reason": "Bãi Rạng tiếp cận từ đoạn Hoàng Sa trước ngã ba Bãi Bắc; không liên quan tuyến Tiên Sa–Suối Ôm, giờ cơ sở và biển là quy định riêng."
+  },
+  {
+   "poi_id": "manual:son-tra-tour-lan-ct15",
+   "name": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "class": "off_route",
+   "reason": "Bến CT15 tại tọa độ Marina có đường vào từ Hoàng Sa chân núi, không cần đi các tuyến rừng; phân loại này chỉ áp dụng bến xuất phát, không xác nhận mọi điểm lặn trên tour được phép."
+  }
+ ]
+}

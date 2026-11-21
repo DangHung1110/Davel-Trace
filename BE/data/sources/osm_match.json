@@ -1,0 +1,5038 @@
+{
+ "source": "OpenStreetMap via Overpass (ODbL)",
+ "fetched_at": "2026-11-20",
+ "items": {
+  "ChIJx6-KGnIXQjER7x-T0zeOlBw": {
+   "osm": "node/7064981285",
+   "dist_m": 12.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Mộc Quán",
+    "name:en": "Mộc Seafood"
+   }
+  },
+  "ChIJmQmygLwXQjERcZVy8--sIcE": {
+   "osm": "node/5485496021",
+   "dist_m": 11.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Bé Bien"
+   }
+  },
+  "ChIJP1Uz6i0ZQjERfy-rpM1cGWc": {
+   "osm": "node/14125298501",
+   "dist_m": 3.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Nhà hàng NHÀ BÊP CHÓ HÀN"
+   }
+  },
+  "ChIJqaQoXYMZQjERX_QzVEAZr_Q": {
+   "osm": "node/13917253901",
+   "dist_m": 1.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Maazi"
+   }
+  },
+  "ChIJ8cqHGTMYQjERU0gT5dridKc": {
+   "osm": "node/7095281753",
+   "dist_m": 6.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Hai Cử"
+   }
+  },
+  "ChIJySI1VxkXQjERUSItJZQgxBE": {
+   "osm": "node/12372814701",
+   "dist_m": 4.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;deli;fish;seafood;vietnamese",
+    "name": "Bé Ni 2"
+   }
+  },
+  "ChIJudsANu4XQjERbLKxjXDLHtU": {
+   "osm": "node/12857894331",
+   "dist_m": 16.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;seafood",
+    "name": "My Hanh Seafood"
+   }
+  },
+  "ChIJH72bVncZQjERoTgax0OjZKY": {
+   "osm": "node/12175071924",
+   "dist_m": 4.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Loco"
+   }
+  },
+  "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
+   "osm": "node/12032859170",
+   "dist_m": 2.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "XÓM MỚI GARDEN ĐÀ NẴNG (씀모이가든 다낭)",
+    "opening_hours": "Mo-Su 10:30-22:00"
+   }
+  },
+  "ChIJz0Od5IUXQjERmAV9JgLRqm8": {
+   "osm": "node/4778581323",
+   "dist_m": 3.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "spanish;italian_pizza;tapas;pizza;noodles",
+    "name": "My Casa",
+    "opening_hours": "Th-Tu 11:00-12:00, 13:00-14:00"
+   }
+  },
+  "ChIJO0E1hoYXQjER-ML-N1yAGAU": {
+   "osm": "node/4759752150",
+   "dist_m": 2.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "barbecue;japanese",
+    "name": "Phố nướng Tokyo"
+   }
+  },
+  "ChIJN84BNSQXQjERyy7N3rDXisc": {
+   "osm": "node/12833350534",
+   "dist_m": 10.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Them Hai San"
+   }
+  },
+  "ChIJFbFDWA8ZQjERwNPaFGXBRPQ": {
+   "osm": "node/6679993986",
+   "dist_m": 47.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "F29"
+   }
+  },
+  "ChIJF2lrSYgXQjERKBBhFKYlhkg": {
+   "osm": "node/4430043290",
+   "dist_m": 18.0,
+   "name_ratio": 0.63,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Sofia Restaurant",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "ChIJPYQKSAAXQjER0cga1BLD_MI": {
+   "osm": "node/7027674985",
+   "dist_m": 21.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;seafood",
+    "name": "Muoi Bien"
+   }
+  },
+  "ChIJw-jjo3IXQjERjDCm-Yd0EAA": {
+   "osm": "node/13009347078",
+   "dist_m": 2.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Comptoir",
+    "opening_hours": "Mo-Su 17:00-21:00"
+   }
+  },
+  "ChIJ97eYL8YQQjER8HxFGKLiQec": {
+   "osm": "node/4150425790",
+   "dist_m": 1.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "La Luna"
+   }
+  },
+  "ChIJ7VljWJ4RQjER2Fp6XPnZiaM": {
+   "osm": "node/11171782637",
+   "dist_m": 2.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "SC Restaurant"
+   }
+  },
+  "ChIJFawIPfcXQjERz77xoR3B6Ag": {
+   "osm": "node/14106869301",
+   "dist_m": 85.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "NGON DA NANG",
+    "opening_hours": "Mo-Su 10:00-22:30"
+   }
+  },
+  "ChIJEyohTbcXQjERpvkbGecn3ow": {
+   "osm": "way/1314684507",
+   "dist_m": 6.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "Golden Meat House"
+   }
+  },
+  "ChIJRaHks2wXQjERVMrWhffmRXw": {
+   "osm": "node/12830575038",
+   "dist_m": 7.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "korean;barbecue",
+    "name": "Korea BBQ"
+   }
+  },
+  "ChIJW_ilwg0XQjERQbqRXGggIFE": {
+   "osm": "node/12850675088",
+   "dist_m": 9.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cucina Luca"
+   }
+  },
+  "ChIJJexJsaUXQjERb9rmSRBkLf0": {
+   "osm": "node/12837179237",
+   "dist_m": 3.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Noi Dat"
+   }
+  },
+  "ChIJV_BGLtAZQjERD9LS1cvwDwg": {
+   "osm": "node/7222014985",
+   "dist_m": 1.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Nha Hang Mr.Anh"
+   }
+  },
+  "ChIJ3xT1QS4ZQjER8qV4HPop8io": {
+   "osm": "node/729406420",
+   "dist_m": 13.8,
+   "name_ratio": 0.82,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Nhà Hàng Chay & Cà Phê Thúp An"
+   }
+  },
+  "ChIJ7xtm7rMXQjER7ye2fxPfbFE": {
+   "osm": "way/1181332013",
+   "dist_m": 5.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "XLIII Specialty Coffee",
+    "opening_hours": "Mo-Su 06:30-22:30"
+   }
+  },
+  "ChIJxX--D-oZQjERQ4LzQRoeVXk": {
+   "osm": "node/10598314706",
+   "dist_m": 1.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Reply 1988"
+   }
+  },
+  "ChIJ2eFWbrcXQjERkMR0z_5VhM0": {
+   "osm": "node/11665246470",
+   "dist_m": 16.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Trình cà phê",
+    "opening_hours": "Mo-Su 06:30-01:30"
+   }
+  },
+  "ChIJrcgyp-wZQjERNqpo6xe5Ogw": {
+   "osm": "node/13299175525",
+   "dist_m": 11.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Kite",
+    "name:vi": "Kite"
+   }
+  },
+  "ChIJTahQxcwZQjERrNKa5emQFC4": {
+   "osm": "node/5382678421",
+   "dist_m": 1.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Nam House",
+    "opening_hours": "06:00-23:00"
+   }
+  },
+  "ChIJUdH0Q88ZQjER0AoQ8Pbil28": {
+   "osm": "node/13744719202",
+   "dist_m": 0.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Nia Coffee",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "ChIJi0bpGjIYQjERRodYRF89PH8": {
+   "osm": "node/4352240896",
+   "dist_m": 10.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;vietnamese",
+    "name": "Cộng Cà Phê",
+    "name:vi": "Cộng Cà Phê"
+   }
+  },
+  "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q": {
+   "osm": "node/12609115911",
+   "dist_m": 7.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Àla Cafe",
+    "opening_hours": "Mo-Su 07:00-18:00"
+   }
+  },
+  "ChIJ-wZaJ2QZQjERhmDzz7BMz5g": {
+   "osm": "node/13288544261",
+   "dist_m": 4.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Khâu Cà Phê"
+   }
+  },
+  "ChIJmQ0KGkE9QjER4TyQDQ_04TA": {
+   "osm": "node/14285427701",
+   "dist_m": 5.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "OM Tea & Coffee"
+   }
+  },
+  "ChIJKSs6ZVYZQjERSuj5bQ10t0M": {
+   "osm": "node/14004104302",
+   "dist_m": 8.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "At Ca Phe"
+   }
+  },
+  "ChIJE5-utYgXQjERgi6BGTJ5WEI": {
+   "osm": "node/3888955324",
+   "dist_m": 8.0,
+   "name_ratio": 0.69,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cloud Garden Cafe"
+   }
+  },
+  "ChIJe6VC-zUXQjERyh7x6tTJHX4": {
+   "osm": "node/12222115201",
+   "dist_m": 6.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "internet_cafe",
+    "name": "HI4 COFFEE & WORKSPACE",
+    "opening_hours": "24/7"
+   }
+  },
+  "ChIJhbtaILkXQjER88acd2hTeAA": {
+   "osm": "node/12853200242",
+   "dist_m": 8.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Phuong"
+   }
+  },
+  "ChIJzTsg_GQXQjERpsLoJSWJHmU": {
+   "osm": "node/6108958606",
+   "dist_m": 6.2,
+   "name_ratio": 0.82,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Venus Cafe",
+    "opening_hours": "06:45-22:00"
+   }
+  },
+  "ChIJAxDyECwXQjERcsCmIBvQ1Vk": {
+   "osm": "node/13392416701",
+   "dist_m": 61.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "D.coffee"
+   }
+  },
+  "ChIJO7l-RdwZQjERNj5fr2VyZ9Y": {
+   "osm": "node/12843905562",
+   "dist_m": 9.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "name": "DNG"
+   }
+  },
+  "ChIJR4XhE3sXQjERBfL8sHnu-JQ": {
+   "osm": "node/12848643539",
+   "dist_m": 67.6,
+   "name_ratio": 0.78,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Alo Coffee"
+   }
+  },
+  "ChIJuZTrvVoZQjER371drzqC5hk": {
+   "osm": "node/729406554",
+   "dist_m": 62.5,
+   "name_ratio": 0.67,
+   "tags": {
+    "amenity": "cafe",
+    "name": "MatBien Coffee"
+   }
+  },
+  "ChIJXeYho6gZQjERhk0LVFc69TA": {
+   "osm": "node/12615300356",
+   "dist_m": 8.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "2AM Coffee"
+   }
+  },
+  "ChIJkatEeMwZQjERnAUKgmrbNgQ": {
+   "osm": "node/11176025737",
+   "dist_m": 3.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lang Bich hoa Da Nang",
+    "name:en": "Fresco Village Da Nang",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJu6FQjzUYQjER39TMpgQVRUs": {
+   "osm": "way/204790989",
+   "dist_m": 42.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Cồn",
+    "name:en": "Con Market",
+    "name:vi": "Chợ Cồn",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJLWoAs80ZQjERLKHDYD-ZymI": {
+   "osm": "way/302872188",
+   "dist_m": 15.7,
+   "name_ratio": 0.81,
+   "tags": {
+    "fee": "yes",
+    "name": "Bảo tàng Nghệ thuật Điêu khắc Chăm Đà Nẵng",
+    "name:en": "Đà Nẵng Museum of Cham Sculpture",
+    "name:vi": "Bảo tàng Nghệ thuật Điêu khắc Chăm Đà Nẵng",
+    "tourism": "museum",
+    "wikidata": "Q6940790",
+    "wikipedia": "vi:Bảo tàng Nghệ thuật điêu khắc Chăm Đà Nẵng"
+   }
+  },
+  "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
+   "osm": "node/1758586662",
+   "dist_m": 76.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Thuỷ Sơn",
+    "name:en": "Mountain of Water",
+    "name:vi": "Thuỷ Sơn",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJzX1dFjAZQjERswowf61V1fk": {
+   "osm": "way/675604354",
+   "dist_m": 54.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Công Viên APEC"
+   }
+  },
+  "ChIJL1GKWJYZQjERLrEGqlK2kwQ": {
+   "osm": "way/694831926",
+   "dist_m": 23.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Rồng",
+    "name:en": "Dragon Bridge",
+    "opening_hours": "24/7",
+    "tourism": "attraction",
+    "wikidata": "Q5305270"
+   }
+  },
+  "ChIJK4sVPc0ZQjERdGROWQ8MMg4": {
+   "osm": "node/4807957148",
+   "dist_m": 19.3,
+   "name_ratio": 0.75,
+   "tags": {
+    "name": "Trung tâm Giải trí Phức hợp Helio Center",
+    "tourism": "theme_park"
+   }
+  },
+  "ChIJC0W3bjoYQjERVBMskQcoQck": {
+   "osm": "way/118609193",
+   "dist_m": 24.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "historic": "ruins",
+    "name": "Thành Điện Hải"
+   }
+  },
+  "ChIJEymIkTYYQjERWO-pgjkKGMk": {
+   "osm": "way/1368599361",
+   "dist_m": 30.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bảo tàng Đà Nẵng",
+    "name:en": "Đà Nẵng Museum",
+    "opening_hours": "08:00-17:00",
+    "tourism": "museum"
+   }
+  },
+  "ChIJrVOLzgUXQjERRuyvUi8WxkQ": {
+   "osm": "node/12647208262",
+   "dist_m": 14.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bãi Biển Sơn Trà"
+   }
+  },
+  "ChIJBQHuNG49QjER7Mb_Y2I64mk": {
+   "osm": "node/1538334281",
+   "dist_m": 2.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Ban Co Peak",
+    "name:vi": "Đỉnh Bàn Cờ",
+    "tourism": "viewpoint"
+   }
+  },
+  "ChIJS07IM4Y9QjER5m2dd3eyku0": {
+   "osm": "node/1623183663",
+   "dist_m": 34.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Son Tra Resort & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJqaaYAdIiQjERGuZHElpvurA": {
+   "osm": "way/1265740821",
+   "dist_m": 45.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cat Vang Beach",
+    "name:en": "Cat Vang Beach",
+    "name:vi": "Bãi Cát Vàng"
+   }
+  },
+  "ChIJaQNtm9IfQjERhfrVRYqgA1M": {
+   "osm": "node/5255590921",
+   "dist_m": 21.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hồ Hoà Trung",
+    "name:en": "Hoà Trung lake",
+    "tourism": "information"
+   }
+  },
+  "ChIJVVmn6uMjQjERwv0F2ZV9pJw": {
+   "osm": "way/1415072215",
+   "dist_m": 33.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bãi Sủng Cỏ"
+   }
+  },
+  "ChIJFYLgeggZQjERgwxGcK7JcpQ": {
+   "osm": "node/11555496744",
+   "dist_m": 4.3,
+   "name_ratio": 0.86,
+   "tags": {
+    "historic": "monument",
+    "name": "Tượng Mẹ Nhu"
+   }
+  },
+  "ChIJ78thjjYYQjERkiy-c9ebVPE": {
+   "osm": "way/1574932306",
+   "dist_m": 4.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bảo tàng Mỹ thuật Đà Nẵng",
+    "name:en": "Da Nang Fine Arts Museum",
+    "name:vi": "Bảo tàng Mỹ thuật Đà Nẵng",
+    "opening_hours": "08:00-17:00",
+    "tourism": "museum"
+   }
+  },
+  "ChIJo8fznMYZQjERNtNTUT-ZJyk": {
+   "osm": "way/1481663042",
+   "dist_m": 25.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "charge": "40000 VND",
+    "fee": "yes",
+    "name": "Bảo tàng Hồ Chí Minh - Chi nhánh Quân khu 5,",
+    "name:en": "Ho Chi Minh and Military Zone 5 Museum",
+    "opening_hours": "Tu-Th 08:00-12:00,14:00-16:30; Sa-Su 08:00-12:00,14:00-16:30"
+   }
+  },
+  "ChIJ82_sTbkQQjERQ5jmVkoovic": {
+   "osm": "node/8474743417",
+   "dist_m": 60.1,
+   "name_ratio": 0.82,
+   "tags": {
+    "name": "Bảo tàng Phật giáo",
+    "opening_hours": "Mo-Su 09:00-17:00",
+    "tourism": "museum"
+   }
+  },
+  "ChIJNdWwUgARQjERansIEJQleAU": {
+   "osm": "node/5279215522",
+   "dist_m": 118.5,
+   "name_ratio": 0.64,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
+   }
+  },
+  "ChIJOyXC4H0XQjERpm2T2xpZcwU": {
+   "osm": "way/780466790",
+   "dist_m": 15.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ An Hải Đông",
+    "name:en": "An Hải Đông Market"
+   }
+  },
+  "ChIJXcxl0UcYQjERVfYu-bKtvPU": {
+   "osm": "way/1326234991",
+   "dist_m": 8.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Thanh Bình"
+   }
+  },
+  "ChIJDcx-OTIYQjERP4eyjItPspA": {
+   "osm": "way/204885903",
+   "dist_m": 39.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Hàn",
+    "name:en": "Han Market",
+    "opening_hours": "Mo-Su 06:00-19:00"
+   }
+  },
+  "ChIJBcr6kegZQjER2nCllYpT_Qc": {
+   "osm": "node/7301996085",
+   "dist_m": 31.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Chợ đêm Helio",
+    "name:en": "Helio Night Market",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "osm": "way/204790989",
+   "dist_m": 54.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Cồn",
+    "name:en": "Con Market",
+    "name:vi": "Chợ Cồn",
+    "tourism": "attraction"
+   }
+  },
+  "ChIJAdChYQAZQjERdBTX1_66Q_8": {
+   "osm": "way/1556362196",
+   "dist_m": 24.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Đêm Sơn Trà",
+    "name:en": "Son Tra Night Market",
+    "opening_hours": "Mo-Su 18:00-23:00"
+   }
+  },
+  "ChIJ2zJrN_EXQjERFRsnRcZaDjI": {
+   "osm": "way/1551522688",
+   "dist_m": 23.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Chiều"
+   }
+  },
+  "ChIJb-kmpPQXQjERKc6w6X8CFKc": {
+   "osm": "way/1076716232",
+   "dist_m": 17.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Mân Thái"
+   }
+  },
+  "ChIJFad1TFAXQjERE9B6U1THHT4": {
+   "osm": "way/1076716243",
+   "dist_m": 13.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Khuê Mỹ"
+   }
+  },
+  "ChIJO56jTAARQjEREYLpKFOB1DA": {
+   "osm": "way/1326324217",
+   "dist_m": 14.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Non Nước"
+   }
+  },
+  "ChIJg5P0rjoZQjER1MD61JUxPB0": {
+   "osm": "way/1326279033",
+   "dist_m": 53.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Hòa Khánh"
+   }
+  },
+  "ChIJWZ_M9joZQjERLLPsSJV90FY": {
+   "osm": "way/1551522692",
+   "dist_m": 13.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Hòa Khánh Nam"
+   }
+  },
+  "ChIJqSwlvMkZQjERE_9aVr3pkes": {
+   "osm": "way/1551522691",
+   "dist_m": 43.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Hòa Mỹ"
+   }
+  },
+  "ChIJq8DocTMYQjERrIcBZUiEnSM": {
+   "osm": "node/4166771189",
+   "dist_m": 10.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "ice_cream;coffee_shop",
+    "name": "Boulevard"
+   }
+  },
+  "ChIJxzo3j9EZQjER785qACnbIW0": {
+   "osm": "node/12167716635",
+   "dist_m": 110.9,
+   "name_ratio": 0.7,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Tigon Coffee"
+   }
+  },
+  "ChIJkVJFwIgXQjERz4j_u7g6_Ao": {
+   "osm": "node/13848489601",
+   "dist_m": 55.8,
+   "name_ratio": 0.62,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "breakfast;coffee_shop",
+    "name": "Spanda Yoga Café",
+    "opening_hours": "Mo-Sa 08:00-17:00"
+   }
+  },
+  "ChIJFXuefgA9QjERTm9u0hlzWcs": {
+   "osm": "node/12701646101",
+   "dist_m": 10.9,
+   "name_ratio": 0.65,
+   "tags": {
+    "name": "Son Tra view",
+    "tourism": "viewpoint"
+   }
+  },
+  "ChIJedpeSI4ZQjERYqZQdHBbz5E": {
+   "osm": "node/13368831101",
+   "dist_m": 39.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Ikigai"
+   }
+  },
+  "ChIJ-cf9B7wQQjERutUzeynzw8w": {
+   "osm": "node/2093848428",
+   "dist_m": 63.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Quán Thế Âm",
+    "name:en": "Quan The Am Pagoda",
+    "name:vi": "Chùa Quán Thế Âm"
+   }
+  },
+  "ChIJOxVypBYRQjERMmK2P6JbzF0": {
+   "osm": "node/5279215522",
+   "dist_m": 17.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
+   }
+  },
+  "ChIJO0IiWR0RQjERtGkQtqESJ1Y": {
+   "osm": "node/5279215522",
+   "dist_m": 74.6,
+   "name_ratio": 0.64,
+   "tags": {
+    "charge": "20 000 VND",
+    "fee": "yes",
+    "name": "Động Âm Phủ",
+    "name:en": "Am Phu Cave",
+    "name:vi": "Động Âm Phủ"
+   }
+  },
+  "ChIJ9_dffMQQQjERuJbqVGdSysY": {
+   "osm": "way/627383451",
+   "dist_m": 37.6,
+   "name_ratio": 0.69,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Tam Thai",
+    "name:en": "Tam Thai Pagoda",
+    "name:vi": "Chùa Tam Thai"
+   }
+  },
+  "ChIJP1PH5CMYQjERBYmCltC5WCE": {
+   "osm": "way/1551512249",
+   "dist_m": 53.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ An Hải Bắc"
+   }
+  },
+  "osm:node/1036552571": {
+   "osm": "node/1036552571",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Đèo Hải Vân",
+    "name:en": "Hai Van Pass",
+    "tourism": "attraction",
+    "wikidata": "Q1477078",
+    "wikipedia": "vi:Đèo Hải Vân"
+   }
+  },
+  "osm:node/1335374809": {
+   "osm": "node/1335374809",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "chùa am Nam Ngư",
+    "name:en": "Nam Ngư pagoda"
+   }
+  },
+  "osm:node/1335374858": {
+   "osm": "node/1335374858",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "chùa am thờ Hỏa Xa"
+   }
+  },
+  "osm:node/1335374873": {
+   "osm": "node/1335374873",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "chùa An Cư Tây"
+   }
+  },
+  "osm:node/1623183649": {
+   "osm": "node/1623183649",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Sơn Trà",
+    "name:en": "Son Tra Mountain",
+    "wikidata": "Q7560606"
+   }
+  },
+  "osm:node/2093848429": {
+   "osm": "node/2093848429",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Kim Sơn",
+    "name:en": "Mountain of Metal",
+    "name:vi": "Kim Sơn"
+   }
+  },
+  "osm:node/2093848431": {
+   "osm": "node/2093848431",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Mộc Sơn",
+    "name:en": "Mountain of Wood",
+    "name:vi": "Mộc Sơn"
+   }
+  },
+  "osm:node/2093848443": {
+   "osm": "node/2093848443",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Thổ Sơn",
+    "name:en": "Mountain of Earth",
+    "name:vi": "Thổ Sơn"
+   }
+  },
+  "osm:node/2177056870": {
+   "osm": "node/2177056870",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Thác Tóc Tiên",
+    "tourism": "viewpoint"
+   }
+  },
+  "osm:node/3760247201": {
+   "osm": "node/3760247201",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "chùa Vu Lan"
+   }
+  },
+  "osm:node/3760247202": {
+   "osm": "node/3760247202",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "chùa Sư Nữ"
+   }
+  },
+  "osm:node/3760272162": {
+   "osm": "node/3760272162",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Tam Bảo"
+   }
+  },
+  "osm:node/3763846156": {
+   "osm": "node/3763846156",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Pháp Lâm",
+    "name:en": "Phap Lam Temple",
+    "name:vi": "Chùa Pháp Lâm"
+   }
+  },
+  "osm:node/4005611262": {
+   "osm": "node/4005611262",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Đền thờ Tiền Hiền làng Lổ Giang"
+   }
+  },
+  "osm:node/4005611263": {
+   "osm": "node/4005611263",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Đình Lổ Giáng"
+   }
+  },
+  "osm:node/4122433690": {
+   "osm": "node/4122433690",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Bà Nà",
+    "name:en": "Bà Nà Mountain",
+    "name:vi": "Núi Bà Nà"
+   }
+  },
+  "osm:node/4172034499": {
+   "osm": "node/4172034499",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Non Nuoc Beach",
+    "name:en": "Non Nuoc Beach",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/4280016689": {
+   "osm": "node/4280016689",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Giác Hoàng Viên"
+   }
+  },
+  "osm:node/4294135790": {
+   "osm": "node/4294135790",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "nhà thờ Phú Thượng"
+   }
+  },
+  "osm:node/4294139091": {
+   "osm": "node/4294139091",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "nhà thờ An Ngãi Tây"
+   }
+  },
+  "osm:node/4294143691": {
+   "osm": "node/4294143691",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Giáo xứ An Thượng",
+    "name:en": "An Thuong Parish Church",
+    "name:vi": "Nhà thờ Giáo xứ An Thượng"
+   }
+  },
+  "osm:node/4294167889": {
+   "osm": "node/4294167889",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "nhà thờ Tùng Sơn"
+   }
+  },
+  "osm:node/4347089780": {
+   "osm": "node/4347089780",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "My An Beach",
+    "name:en": "My An Beach"
+   }
+  },
+  "osm:node/4386676224": {
+   "osm": "node/4386676224",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Miếu Bông"
+   }
+  },
+  "osm:node/4706189591": {
+   "osm": "node/4706189591",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "monument",
+    "name": "To Quoc Ghi Cong",
+    "name:vi": "To Quoc Ghi Cong"
+   }
+  },
+  "osm:node/4741642219": {
+   "osm": "node/4741642219",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Public beach",
+    "name:vi": "Public beach",
+    "tourism": "viewpoint"
+   }
+  },
+  "osm:node/4759000238": {
+   "osm": "node/4759000238",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Dan Oasis Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "osm:node/4845297821": {
+   "osm": "node/4845297821",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Gần núi thần tài",
+    "name:vi": "Gần núi thần tài"
+   }
+  },
+  "osm:node/4924323121": {
+   "osm": "node/4924323121",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Fishing Village and Fleet",
+    "name:en": "Fishing Village",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5273998822": {
+   "osm": "node/5273998822",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Tiên Sơn",
+    "name:en": "Tien Son Bridge",
+    "name:vi": "Cầu Tiên Sơn",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5273998823": {
+   "osm": "node/5273998823",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Trần Thị Lý",
+    "name:en": "Tran Thi Ly Bridge",
+    "name:vi": "Cầu Trần Thị Lý",
+    "opening_hours": "24/7",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5273999121": {
+   "osm": "node/5273999121",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Thuận Phước",
+    "name:en": "Thuan Phuoc Bridge",
+    "name:vi": "Cầu Thuận Phước",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5276547123": {
+   "osm": "node/5276547123",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cau Nguyen Van Troi Bridge",
+    "name:en": "Old River Crossing Bridge",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5286977425": {
+   "osm": "node/5286977425",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Núi Thần Tài",
+    "name:en": "Than Tai water park",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/5421670780": {
+   "osm": "node/5421670780",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa An Phước"
+   }
+  },
+  "osm:node/5432701004": {
+   "osm": "node/5432701004",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Hoà Cường",
+    "name:en": "Hòa Cường Catholic Church"
+   }
+  },
+  "osm:node/6528451001": {
+   "osm": "node/6528451001",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cây đa Đò Xu",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/7095169367": {
+   "osm": "node/7095169367",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Art Gallery",
+    "tourism": "gallery"
+   }
+  },
+  "osm:node/7095169369": {
+   "osm": "node/7095169369",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Non La"
+   }
+  },
+  "osm:node/7276380289": {
+   "osm": "node/7276380289",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Sông Hàn",
+    "name:en": "Han River Bridge",
+    "name:vi": "Cầu Sông Hàn",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/7477670191": {
+   "osm": "node/7477670191",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Gio coffee"
+   }
+  },
+  "osm:node/8883385553": {
+   "osm": "node/8883385553",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "TASY STUDIO",
+    "opening_hours": "24/7",
+    "tourism": "gallery"
+   }
+  },
+  "osm:node/9921282483": {
+   "osm": "node/9921282483",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Viet Nam's Delights"
+   }
+  },
+  "osm:node/9921315929": {
+   "osm": "node/9921315929",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lưu Niệm - Đặc Sản"
+   }
+  },
+  "osm:node/10154412164": {
+   "osm": "node/10154412164",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Fantasy Park",
+    "opening_hours": "08:30-18:00",
+    "tourism": "theme_park"
+   }
+  },
+  "osm:node/10303626687": {
+   "osm": "node/10303626687",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Phước Tường"
+   }
+  },
+  "osm:node/10303626688": {
+   "osm": "node/10303626688",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Cẩm Khê"
+   }
+  },
+  "osm:node/10709724107": {
+   "osm": "node/10709724107",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Làng đá mỹ nghệ Non Nước",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/10709738005": {
+   "osm": "node/10709738005",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Làng chiếu Cẩm Nê",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/10709738105": {
+   "osm": "node/10709738105",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Làng nước mắm Nam Ô",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/10723988763": {
+   "osm": "node/10723988763",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "memorial",
+    "name": "Đài tưởng niệm thảm sát Hà My"
+   }
+  },
+  "osm:node/11359603957": {
+   "osm": "node/11359603957",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Nam Sơn",
+    "name:vi": "Chùa Nam Sơn",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/11427582964": {
+   "osm": "node/11427582964",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Thai Market"
+   }
+  },
+  "osm:node/11629841009": {
+   "osm": "node/11629841009",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Khe Xương"
+   }
+  },
+  "osm:node/11629996926": {
+   "osm": "node/11629996926",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Hải Vân"
+   }
+  },
+  "osm:node/11630013743": {
+   "osm": "node/11630013743",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Hoi"
+   }
+  },
+  "osm:node/11762365155": {
+   "osm": "node/11762365155",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Núi Hòng Chan"
+   }
+  },
+  "osm:node/11888483369": {
+   "osm": "node/11888483369",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Phước Mỹ",
+    "name:en": "Phước Mỹ market",
+    "opening_hours": "Mo-Su 05:00-18:00"
+   }
+  },
+  "osm:node/12333995781": {
+   "osm": "node/12333995781",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ đêm Lê Duẩn"
+   }
+  },
+  "osm:node/12404434601": {
+   "osm": "node/12404434601",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Khu Văn hóa Tâm linh Đà Sơn",
+    "name:en": "Da Son Spiritual and Cultural Complex",
+    "name:vi": "Khu Văn hóa Tâm linh Đà Sơn",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/12603319867": {
+   "osm": "node/12603319867",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Thanh Bình"
+   }
+  },
+  "osm:node/12701675501": {
+   "osm": "node/12701675501",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Small waterfall",
+    "tourism": "viewpoint"
+   }
+  },
+  "osm:node/12811972501": {
+   "osm": "node/12811972501",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Mart Souvenir"
+   }
+  },
+  "osm:node/13040467529": {
+   "osm": "node/13040467529",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bãi Đá"
+   }
+  },
+  "osm:node/13293564930": {
+   "osm": "node/13293564930",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Himawari"
+   }
+  },
+  "osm:node/13484040419": {
+   "osm": "node/13484040419",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Đền Bà Càn Khôn"
+   }
+  },
+  "osm:node/13687068650": {
+   "osm": "node/13687068650",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Linh Phong Bảo Tháp",
+    "name:en": "Linh Phong Tower",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/13734880501": {
+   "osm": "node/13734880501",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "monument",
+    "name": "Tượng Phật Phước Lý",
+    "name:en": "Giant Buddha Statue - Da Son Spiritual Complex",
+    "name:vi": "Tượng Phật Phước Lý",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/14045110791": {
+   "osm": "node/14045110791",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lucky Retail",
+    "opening_hours": "Mo-Su,PH 06:00-00:59"
+   }
+  },
+  "osm:node/14045130739": {
+   "osm": "node/14045130739",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Made in Vietnam",
+    "opening_hours": "Mo-Su,PH 06:00-00:59"
+   }
+  },
+  "osm:node/14045144381": {
+   "osm": "node/14045144381",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Viet Nam's Delights",
+    "opening_hours": "Mo-Su,PH 07:00-00:59"
+   }
+  },
+  "osm:node/14067929701": {
+   "osm": "node/14067929701",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bonny handmade",
+    "opening_hours": "Mo-Su 08:00-11:30, 14:00-17:30"
+   }
+  },
+  "osm:node/14130293535": {
+   "osm": "node/14130293535",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "monument",
+    "name": "Tượng đài Dũng sĩ Điện Ngọc"
+   }
+  },
+  "ChIJHZakNa8ZQjERWNFToM16eB4": {
+   "osm": "way/486703049",
+   "dist_m": 60.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Linh Ứng"
+   }
+  },
+  "ChIJxdBK6SsYQjERYojL_cVEkbs": {
+   "osm": "way/693383334",
+   "dist_m": 6.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Giáo xứ An Hải"
+   }
+  },
+  "ChIJOfpog-EYQjERw_VB4IBkfNI": {
+   "osm": "way/834483808",
+   "dist_m": 8.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Giáo xứ Hoà Minh"
+   }
+  },
+  "ChIJ5VTV0hwaQjERYReDb0dJJq8": {
+   "osm": "way/1374632791",
+   "dist_m": 12.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Giáo xứ Cồn Dầu"
+   }
+  },
+  "ChIJRZhHIMkZQjERYBH-5S1xKNg": {
+   "osm": "way/1326441936",
+   "dist_m": 45.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Phổ Đà"
+   }
+  },
+  "ChIJASjStc0ZQjERf8hQfCEJ8JA": {
+   "osm": "way/1375028004",
+   "dist_m": 12.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa An Long"
+   }
+  },
+  "ChIJCRy3iv_2QTERfZxGJkIMHHQ": {
+   "osm": "relation/20707914",
+   "dist_m": 12.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Linh Ứng",
+    "name:en": "Linh Ung Pagoda",
+    "name:vi": "Chùa Linh Ứng"
+   }
+  },
+  "ChIJuzoag4EXQjERm__A5Whnw5I": {
+   "osm": "way/1279556276",
+   "dist_m": 41.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Mỹ Khê",
+    "name:en": "My Khe Temple"
+   }
+  },
+  "ChIJaUuo57kZQjERzjJfr1YdjCA": {
+   "osm": "way/1329689890",
+   "dist_m": 28.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Báo Ân"
+   }
+  },
+  "ChIJrynevMsZQjERzZIGoLZwQ2I": {
+   "osm": "way/1326445079",
+   "dist_m": 8.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Từ Tôn"
+   }
+  },
+  "ChIJyUQ4aw72QTERCXl5YV-4U1w": {
+   "osm": "node/14136161565",
+   "dist_m": 108.5,
+   "name_ratio": 0.67,
+   "tags": {
+    "name": "Failyland of Ba Na Hills",
+    "tourism": "information"
+   }
+  },
+  "ChIJJ93iFIQXQjERhV8dXhMwLOg": {
+   "osm": "way/572217540",
+   "dist_m": 7.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "A La Carte Danang Beach",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJMeyhoXgXQjERqCs6CuNR5yI": {
+   "osm": "way/1050159061",
+   "dist_m": 12.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sala Danang Beach Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJW7iIXnoXQjERwzVF2LpQ_m4": {
+   "osm": "way/693058159",
+   "dist_m": 0.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Haian Beach Hotel & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJTQo19YMXQjER1DttYZqjHYo": {
+   "osm": "node/12860787931",
+   "dist_m": 24.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mandila Beach",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJN75cdYQXQjERBUnemtIubGM": {
+   "osm": "node/12860787933",
+   "dist_m": 20.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Nalod",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJzbKs7IMXQjERWf_Uz122Ohs": {
+   "osm": "way/1243635507",
+   "dist_m": 24.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Diamond Sea",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJbeO3ddMZQjERzeIxy-6JpYc": {
+   "osm": "way/1050249359",
+   "dist_m": 29.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Meliá Vinpearl Danang Riverfront",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ8YytBwwXQjERJQIQYf4qyqM": {
+   "osm": "way/1243635505",
+   "dist_m": 13.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Minh Toan Safi Ocean",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJT1sjdYQXQjERSLHKKZsmfdQ": {
+   "osm": "way/1243635515",
+   "dist_m": 5.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Paris Deli Danang Beach Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJW7SBUHoXQjERdpSIWHkCuh0": {
+   "osm": "way/693059133",
+   "dist_m": 0.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mường Thanh Đà Nẵng",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJUeabB3kXQjERFP2JL7c8YCg": {
+   "osm": "way/693369267",
+   "dist_m": 35.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "DLG Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJJbfHSGUXQjERRXCfzSX3s88": {
+   "osm": "node/4231051889",
+   "dist_m": 55.6,
+   "name_ratio": 0.81,
+   "tags": {
+    "amenity": "bar",
+    "name": "Holiday Beach Club"
+   }
+  },
+  "ChIJWcFCas8QQjERQGJzK8w1ta4": {
+   "osm": "way/164333086",
+   "dist_m": 66.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hyatt Regency Danang Resort and Spa",
+    "name:en": "Hyatt Regency Danang Resort and Spa",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "wikidata": "Q111402875"
+   }
+  },
+  "ChIJmZHsE5U9QjERDa3a1CuK3lo": {
+   "osm": "way/360113559",
+   "dist_m": 32.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "InterContinental Danang Sun Peninsula Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJKfL8bWgXQjERWPZKseMae6E": {
+   "osm": "way/118614290",
+   "dist_m": 69.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Pullman Beach Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJMTadzMQQQjER29xKIZnnHAU": {
+   "osm": "node/13893330292",
+   "dist_m": 3.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sandy Beach Non Nuoc Resort"
+   }
+  },
+  "ChIJQ3ODRnwXQjERsTy60ZdRD_Q": {
+   "osm": "way/1314327486",
+   "dist_m": 5.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Risemount Premier Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJjb4Ah-QRQjERFlzALzxOOvo": {
+   "osm": "way/162072617",
+   "dist_m": 51.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Four Seasons Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJd3RleOYXQjERQQD0TduMYnU": {
+   "osm": "way/164333087",
+   "dist_m": 13.3,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Olalani Resort & Condotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJJxW4ysUQQjER_NC7GzE1W_0": {
+   "osm": "way/513706270",
+   "dist_m": 67.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Meliá Danang Beach Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJtaLa9KoRQjERpVTDAGoA9ZY": {
+   "osm": "way/1127653587",
+   "dist_m": 59.4,
+   "name_ratio": 0.75,
+   "tags": {
+    "name": "The Ocean Suites",
+    "tourism": "apartment"
+   }
+  },
+  "ChIJQT4SLJwRQjERvym-dW5QWJ0": {
+   "osm": "way/1127655296",
+   "dist_m": 99.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Shilla Monogram",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJz0RiIUQXQjER_XbsI16KkBE": {
+   "osm": "way/164333079",
+   "dist_m": 90.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Tia Wellness Resort",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJEyLB68sQQjER7FTfkhV0_MY": {
+   "osm": "way/164333100",
+   "dist_m": 90.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Danang Marriott Resort & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ7fA2ROsZQjERuQWylV-XvDg": {
+   "osm": "node/12169174294",
+   "dist_m": 4.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Panda Spa"
+   }
+  },
+  "ChIJoyYaBewXQjEROdwfQaOB610": {
+   "osm": "node/12839895661",
+   "dist_m": 4.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Babylon"
+   }
+  },
+  "ChIJ6dOY7ykYQjER0aPtP-ONTzM": {
+   "osm": "way/1278503035",
+   "dist_m": 57.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Herbal Spa",
+    "opening_hours": "Mo-Su 09:00-22:30"
+   }
+  },
+  "ChIJ98HsudQXQjERpViPqdVY3ko": {
+   "osm": "node/13149864557",
+   "dist_m": 4.8,
+   "name_ratio": 0.88,
+   "tags": {
+    "name": "Aoni Spa"
+   }
+  },
+  "ChIJgRyzBl8ZQjERJF9sFGvE4R8": {
+   "osm": "node/12337003901",
+   "dist_m": 6.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "noodles;chicken;fish;seafood;vietnamese;local;noodles;regional;frog;rooster_testicles",
+    "name": "Mỳ Quảng Cô Sáu",
+    "name:vi": "Mỳ Quảng Sứa Hồng Vân",
+    "opening_hours": "06:00-22:30"
+   }
+  },
+  "ChIJHRmt7soZQjERhuei1xWj9Xs": {
+   "osm": "node/5116302323",
+   "dist_m": 100.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Mì Quảng Ếch",
+    "name:vi": "Mì Quảng Ếch",
+    "opening_hours": "Mo-Su 06:30-22:30"
+   }
+  },
+  "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g": {
+   "osm": "node/4430077491",
+   "dist_m": 1.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;noodles",
+    "name": "Mi Quang 1A",
+    "name:en": "Mi Quang 1A",
+    "name:vi": "Mi Quang 1A",
+    "opening_hours": "Mo-Su 06:00-21:00"
+   }
+  },
+  "ChIJ14kOf8kZQjERrdrrQPpiZKA": {
+   "osm": "node/5983039285",
+   "dist_m": 8.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Mi Quang Thi 251"
+   }
+  },
+  "ChIJ2eEwIrEZQjERmUcku_xN6pw": {
+   "osm": "node/6466304585",
+   "dist_m": 6.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "My Quang Ba Mua"
+   }
+  },
+  "ChIJkYkOmOMXQjEREz4KLKpwAOE": {
+   "osm": "node/7141021585",
+   "dist_m": 6.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood;vietnamese",
+    "name": "Nam Danh",
+    "name:en": "Nam Danh - AMAZING CHEAP SEAFOOD",
+    "name:vi": "Nam Danh - AMAZING CHEAP SEAFOOD"
+   }
+  },
+  "ChIJe3Ixim4XQjERbbrbMnyhr34": {
+   "osm": "node/12169278140",
+   "dist_m": 3.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Da Thanh Quan"
+   }
+  },
+  "ChIJBVHLh_gXQjER0MFnoSFsh4A": {
+   "osm": "node/4352303490",
+   "dist_m": 6.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Ông Minh",
+    "opening_hours": "Mo-Su 09:00-23:00"
+   }
+  },
+  "ChIJO_gU03QZQjERdvtWlsIeyOM": {
+   "osm": "node/13290069643",
+   "dist_m": 13.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Kim Seafood"
+   }
+  },
+  "ChIJBT1hHA4XQjERHcTlavRMj5I": {
+   "osm": "node/12841142111",
+   "dist_m": 105.5,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Dac San Da Nang"
+   }
+  },
+  "ChIJSwMjjYEXQjERBbThTSOPeKY": {
+   "osm": "node/12167891404",
+   "dist_m": 3.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Huong Da"
+   }
+  },
+  "ChIJ03jTTgAXQjERpVQunmJHv2c": {
+   "osm": "node/12171202636",
+   "dist_m": 10.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Sontra Sea Hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJfbl-2sMXQjERKLfkuhtH-BE": {
+   "osm": "way/1279557695",
+   "dist_m": 11.2,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Peninsula Hotel Danang",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJkRSDGIIXQjERdg4lYna_jV0": {
+   "osm": "way/693341949",
+   "dist_m": 6.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Pavilion Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJoWXWNIwXQjERjFwxSEpICZ4": {
+   "osm": "way/1279557691",
+   "dist_m": 15.6,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hilton Garden Inn Da Nang",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJu954vu8XQjERQNvn5_8eBE8": {
+   "osm": "node/12171117113",
+   "dist_m": 19.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Grand Gold",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJS0p9LgcXQjERRnDVDqhYvX4": {
+   "osm": "node/10314394709",
+   "dist_m": 9.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Radisson",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJn2uBfeUXQjERvTmGbdnPARE": {
+   "osm": "node/7712584625",
+   "dist_m": 12.2,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "The Code",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJR4RA3I0XQjERajP7wKxjYu0": {
+   "osm": "node/12171117110",
+   "dist_m": 16.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mangata",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJXRkLVPUZQjERhjMP_j_cdkQ": {
+   "osm": "node/2987491833",
+   "dist_m": 29.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Muong Thanh",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJrW03HQAXQjERLRu5Xd4RvsE": {
+   "osm": "node/12860787941",
+   "dist_m": 18.4,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Seavitel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJQ-_7No0XQjERrR5A4J2fB9s": {
+   "osm": "way/693394241",
+   "dist_m": 17.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Monarque Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJQWWv4A8YQjERuqj9zjNqKAc": {
+   "osm": "node/12816183324",
+   "dist_m": 21.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Wyndham Danang Golden Bay Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ27_WHYQXQjERfwDksZnfqKM": {
+   "osm": "node/11888500069",
+   "dist_m": 32.7,
+   "name_ratio": 0.75,
+   "tags": {
+    "name": "Lucia beach hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJs2LW3rEXQjERAndHSLNX-Rc": {
+   "osm": "way/693117415",
+   "dist_m": 36.5,
+   "name_ratio": 0.64,
+   "tags": {
+    "name": "The Legend Hotel",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJfS4VlKsZQjERPQy1DOvrEa8": {
+   "osm": "node/13020264601",
+   "dist_m": 20.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Avenis",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJ9--6uKYZQjER5hS7ybSadkc": {
+   "osm": "node/13545986805",
+   "dist_m": 12.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Ocean Star",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJISuvVcsZQjERhnOk-O_w9pI": {
+   "osm": "node/12346362901",
+   "dist_m": 17.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Moonlight Hotel Suites & Spa",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJAUbRW8wZQjERf0sgTLr3Odo": {
+   "osm": "node/12167609726",
+   "dist_m": 4.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Mercury",
+    "tourism": "hotel"
+   }
+  },
+  "ChIJX8a3GJEZQjERe6n-Xtcds1w": {
+   "osm": "node/11893018499",
+   "dist_m": 19.6,
+   "name_ratio": 0.96,
+   "tags": {
+    "name": "Levenin Spa"
+   }
+  },
+  "ChIJXYpw5DMXQjERzS8ce1U5Z3M": {
+   "osm": "node/12848662376",
+   "dist_m": 50.6,
+   "name_ratio": 0.71,
+   "tags": {
+    "name": "Lee Spa"
+   }
+  },
+  "ChIJyUfZ9fAZQjERIMtiBaxkTko": {
+   "osm": "node/12839895658",
+   "dist_m": 10.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Nguon Spa"
+   }
+  },
+  "ChIJ701Bqt8XQjERf9oQmmJJRE8": {
+   "osm": "node/12870331350",
+   "dist_m": 10.9,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Regal Healthy Spa"
+   }
+  },
+  "ChIJu557PTwYQjERu1jlhJR4LEU": {
+   "osm": "node/4725852293",
+   "dist_m": 26.8,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "nightclub",
+    "name": "New phuong dong",
+    "name:vi": "New phuong dong"
+   }
+  },
+  "ChIJYZuMDnEZQjERrftd297ekRM": {
+   "osm": "node/12373133701",
+   "dist_m": 7.7,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Tê Bar - Speakeasy",
+    "opening_hours": "Mo-Su 19:00-01:30"
+   }
+  },
+  "ChIJZQZGM-MZQjERm_6vbq_fWzo": {
+   "osm": "node/10313151251",
+   "dist_m": 97.4,
+   "name_ratio": 0.63,
+   "tags": {
+    "amenity": "nightclub",
+    "name": "Sophie Mixology"
+   }
+  },
+  "ChIJP0--pEAXQjERoheJMf24gHA": {
+   "osm": "node/12170223349",
+   "dist_m": 30.3,
+   "name_ratio": 0.6,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "4U Restaurant"
+   }
+  },
+  "ChIJZ6w1fJgZQjERP9-_TlpgQXM": {
+   "osm": "node/13626844401",
+   "dist_m": 17.7,
+   "name_ratio": 0.8,
+   "tags": {
+    "amenity": "bar",
+    "name": "Duy Tịnh Rooftop Bar Đà Nẵng - Dragon Bridge Fire Show"
+   }
+  },
+  "ChIJkxff_x0XQjERCC_CN8DFt54": {
+   "osm": "node/7016543285",
+   "dist_m": 18.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "The Craftsman Cocktail Bar",
+    "name:en": "Good atmosphere",
+    "opening_hours": "Mo-Su 18:00-02:00"
+   }
+  },
+  "ChIJK0J1RXMXQjERPPTldZI_e5c": {
+   "osm": "node/13546014230",
+   "dist_m": 3.3,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Funky Donkey"
+   }
+  },
+  "ChIJdwwwfFoXQjERW6mXtIdB8LU": {
+   "osm": "node/6627633488",
+   "dist_m": 0.9,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Shamrock Sports Bar Da Nang",
+    "opening_hours": "24/7"
+   }
+  },
+  "ChIJQwork9IXQjERVcF8a6VWq5I": {
+   "osm": "node/10747475499",
+   "dist_m": 20.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "bar",
+    "name": "Maia",
+    "opening_hours": "Mo-Su 16:00-23:00"
+   }
+  },
+  "ChIJyVQ3iwoXQjERNILX5sPCUKA": {
+   "osm": "node/10902657909",
+   "dist_m": 4.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Section 30"
+   }
+  },
+  "ChIJcbN8RKEXQjERd0H0haMdx4Y": {
+   "osm": "node/9934745717",
+   "dist_m": 5.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "pub",
+    "name": "Filling Station"
+   }
+  },
+  "ChIJV5uGxecXQjERLhaOZuWV6tA": {
+   "osm": "node/12168408874",
+   "dist_m": 5.5,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "pub",
+    "name": "Chevy"
+   }
+  },
+  "ChIJ0-6wNdsXQjER068QxYa3E5o": {
+   "osm": "node/12173072825",
+   "dist_m": 43.8,
+   "name_ratio": 0.71,
+   "tags": {
+    "amenity": "karaoke_box",
+    "name": "Karaoke Sieu Sau"
+   }
+  },
+  "ChIJObG9DvoZQjER1tqakgkbUno": {
+   "osm": "node/6520986264",
+   "dist_m": 77.1,
+   "name_ratio": 0.71,
+   "tags": {
+    "name": "Mắt kính Điện Biên Phủ"
+   }
+  },
+  "ChIJ8ar-PNQXQjERFGGdrbCAQbg": {
+   "osm": "way/486703057",
+   "dist_m": 8.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Tháp Xá Lợi",
+    "name:en": "Xa Loi Pagoda"
+   }
+  },
+  "ChIJnZoMTbkQQjERwzvvHqGlb4E": {
+   "osm": "node/2093848427",
+   "dist_m": 55.7,
+   "name_ratio": 0.6,
+   "tags": {
+    "name": "Hỏa Sơn",
+    "name:en": "Mountain of Fire",
+    "name:vi": "Hỏa Sơn"
+   }
+  },
+  "ChIJyaniiLoQQjERI3aW6z5atCc": {
+   "osm": "node/8616526724",
+   "dist_m": 62.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Hương Sơn",
+    "name:en": "Perform Mountain pagoda"
+   }
+  },
+  "ChIJ8Z0D7KURQjERUPd36goDH90": {
+   "osm": "way/627383447",
+   "dist_m": 1.4,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Tam Tôn",
+    "name:en": "Tam Ton Pagoda",
+    "name:vi": "Chùa Tam Tôn"
+   }
+  },
+  "ChIJaX09zkgYQjERCtro2DeADN0": {
+   "osm": "way/1422444084",
+   "dist_m": 2.8,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Thuận Thành"
+   }
+  },
+  "ChIJYy3rrs4ZQjER3g_-SEo5WPU": {
+   "osm": "way/420019435",
+   "dist_m": 103.4,
+   "name_ratio": 0.76,
+   "tags": {
+    "name": "Hồ Công viên 29 tháng 3"
+   }
+  },
+  "ChIJ00Fz0rANQjERLadxvkIRXBY": {
+   "osm": "node/13797708575",
+   "dist_m": 9.6,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Hoi An Basket Boat",
+    "tourism": "attraction"
+   }
+  },
+  "manual:hai-van-quan": {
+   "osm": "way/466418347",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hải Vân Quan",
+    "name:en": "Hai Van Gate",
+    "tourism": "attraction"
+   }
+  },
+  "manual:vinwonders-nam-hoi-an": {
+   "osm": "way/782381624",
+   "dist_m": 12.7,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "VinWonders Nam Hội An",
+    "tourism": "theme_park"
+   }
+  },
+  "manual:hoi-an-bai-choi": {
+   "osm": "relation/3938690",
+   "dist_m": 17.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Vườn Tượng An Hội",
+    "name:en": "An Hoi Sculpture Park",
+    "name:vi": "Vườn Tượng An Hội"
+   }
+  },
+  "osm:way/630377259": {
+   "osm": "way/630377259",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bãi biển Tiên Sa",
+    "name:en": "Tien Sa Beach",
+    "name:vi": "Bãi biển Tiên Sa"
+   }
+  },
+  "osm:way/39268284": {
+   "osm": "way/39268284",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Chùa Cầu",
+    "name:en": "Japanese Bridge",
+    "name:vi": "Chùa Cầu",
+    "tourism": "attraction",
+    "wikidata": "Q1091054",
+    "wikipedia": "vi:Chùa Cầu"
+   }
+  },
+  "osm:way/565592419": {
+   "osm": "way/565592419",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Bảo tàng Hội An",
+    "name:en": "Hoi An Museum",
+    "opening_hours": "Mo-Su 07:30-11:30,13:30-17:30",
+    "tourism": "museum",
+    "wikidata": "Q114397271"
+   }
+  },
+  "osm:way/320722329": {
+   "osm": "way/320722329",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Hội quán Phúc Kiến",
+    "name:en": "Assembly Hall of the Fujian Chinese Congregation"
+   }
+  },
+  "osm:way/448044645": {
+   "osm": "way/448044645",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hội quán Triều Châu",
+    "name:en": "Trieu Chau (Chaozhou) Assembly Hall",
+    "tourism": "attraction",
+    "wikipedia": "vi:Hội quán Triều Châu (Hội An)"
+   }
+  },
+  "osm:way/565300448": {
+   "osm": "way/565300448",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hội Quán Quảng Triệu",
+    "name:en": "Quang Trieu (Cantonese) Assembly Hall",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/6151138385": {
+   "osm": "node/6151138385",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Hội quán Ngũ Bang",
+    "name:en": "Hoi An’s All-Chinese Assembly Hall"
+   }
+  },
+  "osm:node/2092582385": {
+   "osm": "node/2092582385",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "community_centre",
+    "name": "Hội quán Hải Nam",
+    "name:en": "Assembly Hall of the Hainan Chinese Congregation",
+    "tourism": "attraction"
+   }
+  },
+  "osm:way/595299310": {
+   "osm": "way/595299310",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "fee": "yes",
+    "name": "Tan Ky",
+    "name:en": "National Heritage House of Tan Ky",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/4279640089": {
+   "osm": "node/4279640089",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "fee": "yes",
+    "name": "Nhà cổ Phùng Hưng",
+    "name:en": "Phung Hung Old House",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/2076855866": {
+   "osm": "node/2076855866",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "fee": "yes",
+    "name": "Nhà cổ Đức An",
+    "name:en": "Duc An Ancient House",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/2076855954": {
+   "osm": "node/2076855954",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "fee": "yes",
+    "name": "Nhà cổ Quân Thắng",
+    "name:en": "Quan Thang House",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/5674096859": {
+   "osm": "node/5674096859",
+   "dist_m": 0.1,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Diep Dong Nguyen",
+    "name:en": "Diep Dong Nguyen House",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/2092582318": {
+   "osm": "node/2092582318",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Tụy Tiên Đường Minh Hương",
+    "name:en": "Minh Huong Communal House"
+   }
+  },
+  "osm:way/631064893": {
+   "osm": "way/631064893",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Quan Công Miếu",
+    "name:en": "Quan Cong Temple",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/2076856032": {
+   "osm": "node/2076856032",
+   "dist_m": 0.0,
+   "name_ratio": 0.96,
+   "tags": {
+    "fee": "yes",
+    "name": "Boa tang gom su mau dich",
+    "name:en": "Ceramic Tiles Museum",
+    "tourism": "museum"
+   }
+  },
+  "osm:node/3189923484": {
+   "osm": "node/3189923484",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "fee": "yes",
+    "name": "Sa Huynh",
+    "tourism": "museum"
+   }
+  },
+  "osm:way/631074714": {
+   "osm": "way/631074714",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "name": "Bảo tàng Văn hóa dân",
+    "name:en": "Museum of Folklore",
+    "tourism": "museum"
+   }
+  },
+  "osm:way/209494258": {
+   "osm": "way/209494258",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Văn Miếu Hội An",
+    "name:en": "Confucius Temple"
+   }
+  },
+  "osm:relation/2836882": {
+   "osm": "relation/2836882",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Chúc Thánh",
+    "name:en": "Chuc Thanh Pagoda"
+   }
+  },
+  "osm:way/474383101": {
+   "osm": "way/474383101",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Phước Lâm",
+    "wikipedia": "vi:Chùa Phước Lâm"
+   }
+  },
+  "osm:way/565186618": {
+   "osm": "way/565186618",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Đình Cẩm Phô",
+    "name:en": "Cam Pho Temple",
+    "name:vi": "Đình Cẩm Phô",
+    "tourism": "yes"
+   }
+  },
+  "osm:way/35952504": {
+   "osm": "way/35952504",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Hội An",
+    "name:en": "Hoi An Market"
+   }
+  },
+  "osm:node/6099308589": {
+   "osm": "node/6099308589",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ Đêm",
+    "name:en": "Night Market",
+    "opening_hours": "Mo-Su 18:00-22:00",
+    "tourism": "attraction"
+   }
+  },
+  "osm:way/35952591": {
+   "osm": "way/35952591",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "marketplace",
+    "name": "Chợ vải Hội An",
+    "name:en": "Hoi An Textile Market",
+    "opening_hours": "Mo-Su 06:00-19:00",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/10709738006": {
+   "osm": "node/10709738006",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Làng mộc Kim Bồng",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/4171925609": {
+   "osm": "node/4171925609",
+   "dist_m": 0.1,
+   "name_ratio": 0.65,
+   "tags": {
+    "name": "Thuan Tinh Island",
+    "tourism": "attraction"
+   }
+  },
+  "osm:relation/3938690": {
+   "osm": "relation/3938690",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Vườn Tượng An Hội",
+    "name:en": "An Hoi Sculpture Park",
+    "name:vi": "Vườn Tượng An Hội"
+   }
+  },
+  "osm:way/35952574": {
+   "osm": "way/35952574",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu An Hội",
+    "name:en": "An Hoi Bridge",
+    "name:vi": "Cầu An Hội",
+    "tourism": "attraction"
+   }
+  },
+  "osm:node/12344125229": {
+   "osm": "node/12344125229",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "fee": "no",
+    "name": "Precious Heritage Art Gallery Museum",
+    "name:en": "Precious Heritage Art Gallery Museum",
+    "name:vi": "Di San Vô Giá",
+    "opening_hours": "Mo-Su 08:00-20:00",
+    "tourism": "museum",
+    "wikidata": "Q30744118",
+    "wikipedia": "en:Precious Heritage Art Gallery Museum"
+   }
+  },
+  "osm:node/7127464285": {
+   "osm": "way/631074714",
+   "dist_m": 32.2,
+   "name_ratio": 0.64,
+   "tags": {
+    "name": "Bảo tàng Văn hóa dân",
+    "name:en": "Museum of Folklore",
+    "tourism": "museum"
+   }
+  },
+  "osm:way/209492808": {
+   "osm": "way/209492808",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Công giáo Hội An",
+    "name:en": "Hoi An Catholic Cathedral"
+   }
+  },
+  "osm:way/683416736": {
+   "osm": "way/683416736",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cầu Vàng",
+    "name:en": "Golden Bridge",
+    "tourism": "attraction",
+    "wikidata": "Q55954790",
+    "wikipedia": "en:Golden Bridge (Vietnam)"
+   }
+  },
+  "osm:way/1109970009": {
+   "osm": "way/1109970009",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Saint Denis",
+    "name:en": "Saint Denis Church",
+    "name:vi": "Nhà thờ Saint Denis",
+    "tourism": "attraction"
+   }
+  },
+  "osm:way/198804483": {
+   "osm": "way/198804483",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "archaeological_site",
+    "name": "Thánh địa Mỹ Sơn",
+    "name:en": "Mỹ Sơn Ruins",
+    "opening_hours": "Mo-Su 06:00-18:00",
+    "tourism": "attraction",
+    "wikidata": "Q391406",
+    "wikipedia": "fr:Sanctuaire de Mỹ Sơn"
+   }
+  },
+  "osm:way/404714309": {
+   "osm": "way/404714309",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Chính tòa Đà Nẵng",
+    "name:en": "Da Nang Cathedral"
+   }
+  },
+  "osm:way/149699484": {
+   "osm": "way/149699484",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Công viên Biển Đông",
+    "name:en": "East Sea Park"
+   }
+  },
+  "osm:node/4343966693": {
+   "osm": "node/4343966693",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood;vietnamese;barbecue;local",
+    "name": "An Bang beach village",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/2217387212": {
+   "osm": "node/2217387212",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "An Bang Beach Club"
+   }
+  },
+  "osm:node/3157491491": {
+   "osm": "node/3157491491",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Tra Que Water Wheel"
+   }
+  },
+  "osm:node/4279536690": {
+   "osm": "node/4279536690",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local;sandwich;vietnamese",
+    "name": "Banh Mi Phuong",
+    "name:en": "Banh Mi Phuong",
+    "name:vi": "Bánh mì Phượng",
+    "opening_hours": "Mo-Su 06:30-21:00"
+   }
+  },
+  "osm:node/4389441895": {
+   "osm": "node/4389441895",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Bale Well",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/4706534566": {
+   "osm": "node/4706534566",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Orivy",
+    "opening_hours": "12:00-22:00"
+   }
+  },
+  "osm:node/5447215326": {
+   "osm": "node/5447215326",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Morning Glory Signature",
+    "opening_hours": "Mo-Su 11:00-22:30"
+   }
+  },
+  "osm:node/5447259721": {
+   "osm": "node/5447259721",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Vy's Market Restaurant & Cooking School",
+    "opening_hours": "Mo-Su 11:00-22:30"
+   }
+  },
+  "osm:node/7055486785": {
+   "osm": "node/7055486785",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "salad;fish;seafood;chicken;vietnamese",
+    "name": "Mango Rooms",
+    "opening_hours": "Mo-Su 08:00-23:00"
+   }
+  },
+  "osm:node/12785618658": {
+   "osm": "node/12785618658",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Morning Glory Countryside",
+    "opening_hours": "11:00-21:00"
+   }
+  },
+  "osm:node/12043189706": {
+   "osm": "node/12043189706",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "noodles;sushi",
+    "name": "Hiên Sushi Bar",
+    "name:en": "Hien Sushi Bar",
+    "opening_hours": "Mo-Su 16:00-22:00"
+   }
+  },
+  "osm:node/12470795401": {
+   "osm": "node/12470795401",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Faifoo Central Restaurant"
+   }
+  },
+  "osm:node/4225643190": {
+   "osm": "node/4225643190",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;regional;vietnamese;traditional;local",
+    "name": "Phố Xưa",
+    "name:en": "Pho Xua",
+    "opening_hours": "Mo-Su 10:00-21:00"
+   }
+  },
+  "osm:node/4548149290": {
+   "osm": "node/4548149290",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;cake;pizza;sandwich;diner;breakfast;coffee_shop;fish_and_chips;fish;chicken;seafood;ice_cream;noodles;ramen;curry;deli;pasta;grill;kebab;barbecue;tea;beef_bowl;sausage;asian;american;vietnamese;italian_pizza;local",
+    "name": "Nhà hàng Solo",
+    "name:en": "Solo Restaurant",
+    "name:vi": "Nhà hàng Solo",
+    "opening_hours": "Mo-Su 08:00-23:00"
+   }
+  },
+  "osm:node/4548163789": {
+   "osm": "node/4548163789",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "cuisine": "diner;breakfast;coffee_shop;chicken;ice_cream;sausage;tea;vietnamese;local",
+    "name": "Bánh mì Thuý",
+    "name:en": "Bread Thuý",
+    "name:vi": "Bánh mì Thuý",
+    "opening_hours": "Mo-Su 14:00-21:00"
+   }
+  },
+  "osm:node/4580499791": {
+   "osm": "node/4580499791",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "Cabanon Café",
+    "name:en": "Cabanon",
+    "opening_hours": "Mo-Su 09:00-21:00"
+   }
+  },
+  "osm:node/4821984428": {
+   "osm": "node/4821984428",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese;sushi",
+    "name": "Hoshigami",
+    "name:en": "Hoshigami",
+    "name:vi": "Hoshigami",
+    "opening_hours": "Tu-Su 16:00-22:00"
+   }
+  },
+  "osm:node/4883744921": {
+   "osm": "node/4883744921",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "dau bep banh mi",
+    "name:en": "Chef Burger",
+    "opening_hours": "Mo-Su 12:00-21:00"
+   }
+  },
+  "osm:node/4893587521": {
+   "osm": "node/4893587521",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Quản Chay An Lạc",
+    "name:en": "An Lạc Vegetarian Food",
+    "opening_hours": "Mo-Su 07:30-21:30"
+   }
+  },
+  "osm:node/4920642221": {
+   "osm": "node/4920642221",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "american;vietnamese",
+    "name": "Havana",
+    "name:en": "Hanava",
+    "name:vi": "Havana",
+    "opening_hours": "Mo-Su 11:00-23:00"
+   }
+  },
+  "osm:node/4945171421": {
+   "osm": "node/4945171421",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Hai (Mì Quang - Cao Lâu)",
+    "name:vi": "Hai"
+   }
+  },
+  "osm:node/5273107721": {
+   "osm": "node/5273107721",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Nhà Hàng Hành Là",
+    "name:en": "Spring Onion Restaurant",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5425858521": {
+   "osm": "node/5425858521",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "VY’s Deli"
+   }
+  },
+  "osm:node/5923288385": {
+   "osm": "node/5923288385",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;pizza",
+    "name": "Firefly Restaurant & Bar",
+    "name:en": "Firefly Restaurant & Bar",
+    "opening_hours": "Mo-Su 11:30-21:30"
+   }
+  },
+  "osm:node/7003805266": {
+   "osm": "node/7003805266",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "tea;vietnamese;international;coffee_shop",
+    "name": "Nha Hang Chay ROM",
+    "name:en": "ROM - Vegetarian restaurant and bar",
+    "opening_hours": "Mo-Su 08:00-22:00"
+   }
+  },
+  "osm:node/10304039134": {
+   "osm": "node/10304039134",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "american",
+    "name": "Caddilac Bar & Grill",
+    "opening_hours": "Mo-Su 14:00-22:00"
+   }
+  },
+  "osm:node/10304585640": {
+   "osm": "node/10304585640",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Jan",
+    "name:en": "Restaurant JAN ( Local food )",
+    "opening_hours": "Mo-Su 09:00-17:00"
+   }
+  },
+  "osm:node/10304609242": {
+   "osm": "node/10304609242",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Bánh Xèo, Thịt Nướng, Nem Lụi Bà 9",
+    "opening_hours": "Mo-Su 09:30-21:30"
+   }
+  },
+  "osm:node/10652658505": {
+   "osm": "node/10652658505",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;international",
+    "name": "Peanuts - Vegan Vietnamese Food",
+    "opening_hours": "We-Mo 11:00-21:00"
+   }
+  },
+  "osm:node/10736260563": {
+   "osm": "node/10736260563",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Chickpea Eatery",
+    "opening_hours": "Mo-Su 09:00-20:00"
+   }
+  },
+  "osm:node/10763332205": {
+   "osm": "node/10763332205",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Hiệp Ký",
+    "opening_hours": "Mo-Su 10:00-23:00"
+   }
+  },
+  "osm:node/11618601226": {
+   "osm": "node/11618601226",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Dingo Deli"
+   }
+  },
+  "osm:node/11645353169": {
+   "osm": "node/11645353169",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;international",
+    "name": "7 Bridges Hoi An Craft Beer Tap Room",
+    "opening_hours": "Mo-Su 10:00-23:00"
+   }
+  },
+  "osm:node/11888968769": {
+   "osm": "node/11888968769",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Quán ăn cô phưởng"
+   }
+  },
+  "osm:node/11890609669": {
+   "osm": "node/11890609669",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Cơm chay Thiện Tâm - Vegan Food",
+    "opening_hours": "Mo-Su 08:00-21:00"
+   }
+  },
+  "osm:node/11890992769": {
+   "osm": "node/11890992769",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "cuisine": "sandwich",
+    "name": "Hoa Sen Bánh Mì Chay",
+    "name:en": "Hoa Sen Vegetarian Bánh Mì",
+    "opening_hours": "Mo-Su 06:00-20:00"
+   }
+  },
+  "osm:node/12635080558": {
+   "osm": "node/12635080558",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional;asian;coffee_shop;vietnamese;breakfast;fish_and_chips;juice",
+    "name": "SummerBeach Restaurant",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/12803739945": {
+   "osm": "node/12803739945",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "The Boat Riverside Restaurant & Bar",
+    "opening_hours": "11:00-21:30"
+   }
+  },
+  "osm:node/13164974235": {
+   "osm": "node/13164974235",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;breakfast",
+    "name": "Bikini Bottom Express Hoi An Riverside",
+    "opening_hours": "Mo-Su 09:00-23:00"
+   }
+  },
+  "osm:node/13164991521": {
+   "osm": "node/13164991521",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;japanese;vietnamese",
+    "name": "Vietnom Local Eatery Hoi An",
+    "opening_hours": "Mo-su 9:00-22:00"
+   }
+  },
+  "osm:node/13360620516": {
+   "osm": "node/13360620516",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "name": "Kurumi - Healthy Vegan Food & Desserts",
+    "opening_hours": "Mo-Su 08:00-21:00"
+   }
+  },
+  "osm:node/13397525601": {
+   "osm": "node/13397525601",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Cô Anh - Sông Hoāi",
+    "opening_hours": "Mo-Su 10:00-21:00"
+   }
+  },
+  "osm:node/13654762201": {
+   "osm": "node/13654762201",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Long's Kitchen Restaurant & Cooking Class",
+    "opening_hours": "Mo-Su 11:00-22:00"
+   }
+  },
+  "osm:node/11795856089": {
+   "osm": "node/11795856089",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;đồ_ăn_chay",
+    "name": "Nghé Coffee Hội An",
+    "name:en": "Nghe Coffee Hoi An",
+    "opening_hours": "Mo-Su 08:00-20:00"
+   }
+  },
+  "osm:node/4520093589": {
+   "osm": "node/4520093589",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "tea;coffee_shop",
+    "name": "Lapin Ca Phe",
+    "name:en": "Lapin Coffee House",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/4717672963": {
+   "osm": "node/4717672963",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Hoi An Roastery",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/4844888422": {
+   "osm": "node/4844888422",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;regional",
+    "name": "Phin Coffee Restaurant",
+    "name:en": "Phin Espresso & Drip",
+    "opening_hours": "Mo-Su 08:00-21:30"
+   }
+  },
+  "osm:node/5677701323": {
+   "osm": "node/5677701323",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "breakfast;coffee_shop;tea",
+    "name": "Rosie's Cafe",
+    "name:en": "Rosie's cafe",
+    "name:vi": "Rosie's Cafe",
+    "opening_hours": "Mo-Fr 09:00-17:00; Sa 08:00-15:00"
+   }
+  },
+  "osm:node/6219918385": {
+   "osm": "node/6219918385",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Bao's coffee place",
+    "name:en": "Bao coffee",
+    "name:vi": "Bao coffee",
+    "opening_hours": "Mo-Su 06:00-20:00"
+   }
+  },
+  "osm:node/7208591085": {
+   "osm": "node/7208591085",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;pizza;juice;bakery;cookies;dessert;tea;lemonade;soft_drinks;cake",
+    "name": "Tiệm bánh Meraki",
+    "name:en": "Meraki bakery",
+    "opening_hours": "Mo-Su 08:00-21:00"
+   }
+  },
+  "osm:way/632030501": {
+   "osm": "way/632030501",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "tea;coffee;snack",
+    "name": "Reaching out Teahouse"
+   }
+  },
+  "osm:node/10536187009": {
+   "osm": "node/10536187009",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Dudu Cafe Hoi An",
+    "name:en": "Dudu Cafe & Bistro",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/10959238968": {
+   "osm": "node/10959238968",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "sandwich;coffee_shop;pastry;french;german;breakfast;brunch;european;western;dessert;cake;tea",
+    "name": "Thom's Sourdough Bakery & Coffee - Tan Thanh Beach",
+    "opening_hours": "Mo-Su 07:30-18:00"
+   }
+  },
+  "osm:node/12647213526": {
+   "osm": "node/12647213526",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;bubble_tea;cake;cafe",
+    "name": "Vintage Taste Deli Cafe Hoi An",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/13881156000": {
+   "osm": "node/13881156000",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee;brunch",
+    "name": "Yesh!",
+    "opening_hours": "Mo-Su 07:30-14:30"
+   }
+  },
+  "osm:node/1726781610": {
+   "osm": "node/1726781610",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "international",
+    "name": "Cargo Club Cafe & Restaurant",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/3893467764": {
+   "osm": "node/3893467764",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "UY VIET COFFEE BEAN",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/5107806021": {
+   "osm": "node/5107806021",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Hôp Dùa",
+    "name:en": "Cocobox Juice Bar, Café & Farmshop",
+    "name:vi": "Hôp Dùa",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/5265545321": {
+   "osm": "node/5265545321",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Sound of Silence",
+    "name:en": "Sound of Silence Specialty Coffee",
+    "opening_hours": "Mo-Su 07:00-19:00"
+   }
+  },
+  "osm:node/5611617221": {
+   "osm": "node/5611617221",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "asian",
+    "name": "Café Sputnik",
+    "opening_hours": "Mo-Su 09:00-22:00"
+   }
+  },
+  "osm:node/7094679785": {
+   "osm": "node/7094679785",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "chicken;diner;sausage;ice_cream;deli;pizza;donut;pasta;seafood;italian_pizza;crepe;noodles;asian;oriental;pancake;fish_and_chips;sandwich;vietnamese;coffee_shop;curry;fish;breakfast;grill",
+    "name": "Mate Restaurant and Coffee Hoi An",
+    "opening_hours": "Mo-Su 08:30-21:30"
+   }
+  },
+  "osm:node/10162249917": {
+   "osm": "node/10162249917",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Barconcù",
+    "name:en": "Barconcu",
+    "opening_hours": "Tu-Su 16:00-00:00"
+   }
+  },
+  "osm:node/4721435589": {
+   "osm": "node/4721435589",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Sleepy Gecko Chillout Bar",
+    "opening_hours": "Mo-Su 10:00-24:00"
+   }
+  },
+  "osm:node/10285677009": {
+   "osm": "node/10285677009",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "pub",
+    "cuisine": "irish",
+    "name": "The Shamrock"
+   }
+  },
+  "osm:node/10180856817": {
+   "osm": "node/10180856817",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Tiger Tiger Bar"
+   }
+  },
+  "osm:node/10297955384": {
+   "osm": "node/10297955384",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "pub",
+    "name": "Lamonta Pub & Restaurant"
+   }
+  },
+  "osm:node/10154412491": {
+   "osm": "node/10154412491",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Kungfu Noodle",
+    "opening_hours": "Mo-Su,PH 09:00-21:00"
+   }
+  },
+  "osm:node/11422706022": {
+   "osm": "node/11422706022",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "name": "El Fresco",
+    "opening_hours": "PH,Mo-Su 09:00-21:00"
+   }
+  },
+  "osm:node/11423808688": {
+   "osm": "node/11423808688",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Le Table",
+    "opening_hours": "06:30-21:00"
+   }
+  },
+  "osm:node/12959087697": {
+   "osm": "node/12959087697",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "sushi",
+    "name": "Rosa"
+   }
+  },
+  "osm:node/14337631970": {
+   "osm": "node/14337631970",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Nhà Hàng Chay Ngọc Chi",
+    "name:en": "Ngọc Chi Vegetarian Restaurant"
+   }
+  },
+  "osm:node/14337971573": {
+   "osm": "node/14337971573",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Bharata"
+   }
+  },
+  "osm:node/11422697875": {
+   "osm": "node/11422697875",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "La Crique"
+   }
+  },
+  "osm:node/11423812931": {
+   "osm": "node/11423812931",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "name": "Lotteria"
+   }
+  },
+  "osm:node/11423819121": {
+   "osm": "node/11423819121",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Brasserie"
+   }
+  },
+  "osm:node/13587488508": {
+   "osm": "node/13587488508",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Four Seasons",
+    "name:vi": "Nhà hàng 4 mùa"
+   }
+  },
+  "osm:node/14337971575": {
+   "osm": "node/14337971575",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Arapang"
+   }
+  },
+  "osm:node/4401168602": {
+   "osm": "node/4401168602",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Nha Hang Com Nieu Hong Phuc 3"
+   }
+  },
+  "osm:way/1109970036": {
+   "osm": "way/1109970036",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Beer Plaza"
+   }
+  },
+  "osm:node/13890168980": {
+   "osm": "node/13890168980",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Cafe Cô Bốn",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/14337971574": {
+   "osm": "node/14337971574",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;vietnamese",
+    "name": "Highlands Coffee",
+    "name:en": "Highlands Coffee"
+   }
+  },
+  "osm:node/11423769989": {
+   "osm": "node/11423769989",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Postal Cafe"
+   }
+  },
+  "osm:node/14337980312": {
+   "osm": "node/14337980312",
+   "dist_m": 0.1,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Soul Cafe"
+   }
+  },
+  "osm:node/2617007574": {
+   "osm": "node/2617007574",
+   "dist_m": 0.0,
+   "name_ratio": 0.9,
+   "tags": {
+    "historic": "monument",
+    "name": "Kazimierz Kwiatkowski",
+    "wikidata": "Q11738068",
+    "wikipedia": "en:Kazimierz Kwiatkowski (architect)"
+   }
+  },
+  "osm:way/210933183": {
+   "osm": "way/210933183",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "historic": "building",
+    "name": "Di tích Đình Thanh Tẩy",
+    "name:en": "The Thanh Tay communal house",
+    "name:vi": "Di tích Đình Thanh Tẩy"
+   }
+  },
+  "osm:node/10171278941": {
+   "osm": "node/10171278941",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Kim Bửu"
+   }
+  },
+  "osm:way/631070197": {
+   "osm": "way/631070197",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Pháp Bảo",
+    "name:en": "Phap Bao Pagoda",
+    "name:vi": "Chùa Pháp Bảo"
+   }
+  },
+  "osm:node/2091401445": {
+   "osm": "node/2091401445",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chua Long Tho"
+   }
+  },
+  "osm:node/11581690669": {
+   "osm": "node/11581690669",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Bảo Thắng"
+   }
+  },
+  "osm:way/209494260": {
+   "osm": "way/209494260",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Tin lành Hội An"
+   }
+  },
+  "osm:way/565276813": {
+   "osm": "way/565276813",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Thanh That Cao Dai"
+   }
+  },
+  "osm:node/4582592213": {
+   "osm": "node/4582592213",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Tran Family Chapel",
+    "name:vi": "Nhà thờ tộc Trần"
+   }
+  },
+  "osm:way/210966819": {
+   "osm": "way/210966819",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ tộc Nguyễn Tường",
+    "name:en": "Nguyen Tuong Clan Ancestral Hall",
+    "name:vi": "Nhà thờ tộc Nguyễn Tường"
+   }
+  },
+  "osm:node/11896339273": {
+   "osm": "node/11896339273",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "CSO Gallery",
+    "opening_hours": "Tu-Su 08:00-17:00",
+    "tourism": "gallery"
+   }
+  },
+  "osm:node/4246108134": {
+   "osm": "node/4246108134",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Spa Hoi An"
+   }
+  },
+  "osm:node/5325684221": {
+   "osm": "node/5325684221",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hoi An Blind Massage"
+   }
+  },
+  "osm:node/5353761323": {
+   "osm": "node/5353761323",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Spa Sweden",
+    "name:en": "Hội An",
+    "opening_hours": "Mo-Su 08:00-00:00"
+   }
+  },
+  "osm:node/6224346486": {
+   "osm": "node/6224346486",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "La Luna Spa"
+   }
+  },
+  "osm:node/6252089286": {
+   "osm": "node/6252089286",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Spa V"
+   }
+  },
+  "osm:node/6354826049": {
+   "osm": "node/6354826049",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Cua Dai Beach Spa"
+   }
+  },
+  "osm:node/7200332585": {
+   "osm": "node/7200332585",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Herbal Spa - Hoi An Branch 1",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/9963308324": {
+   "osm": "node/9963308324",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Hani Health Spa",
+    "opening_hours": "Mo-Su 09:00-21:00"
+   }
+  },
+  "osm:node/10736269999": {
+   "osm": "node/10736269999",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Spa Jonu"
+   }
+  },
+  "osm:node/10760853506": {
+   "osm": "node/10760853506",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Lemon tree spa"
+   }
+  },
+  "osm:node/12323301001": {
+   "osm": "node/12323301001",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Balloons SPA"
+   }
+  },
+  "osm:node/13439124694": {
+   "osm": "node/13439124694",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Herbal Spa Hoi An",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/14337513701": {
+   "osm": "node/14337513701",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "name": "Son Hoi An Spa"
+   }
+  },
+  "osm:node/4937240722": {
+   "osm": "node/4937240722",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Life bar",
+    "name:en": "New life bar"
+   }
+  },
+  "osm:node/5110691326": {
+   "osm": "node/5110691326",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Mr. Bean Bar"
+   }
+  },
+  "osm:node/6257424485": {
+   "osm": "node/6257424485",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Hoi An Sports Bar",
+    "name:en": "sports bar",
+    "name:vi": "sports bar"
+   }
+  },
+  "osm:node/12468807102": {
+   "osm": "node/12468807102",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Mezcal Cocteleria"
+   }
+  },
+  "osm:node/4965493634": {
+   "osm": "node/4965493634",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Moe's tavern regae bar",
+    "name:en": "Moe's tavern regae bar",
+    "name:vi": "Moe's tavern regae bar"
+   }
+  },
+  "osm:node/13152739401": {
+   "osm": "node/13152739401",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Hoi An Brewing Co"
+   }
+  },
+  "osm:node/14339936801": {
+   "osm": "node/14339936801",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Yang Smile Beach Bar"
+   }
+  },
+  "osm:node/6696113992": {
+   "osm": "node/6696113992",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "Tô Tô"
+   }
+  },
+  "osm:node/4285798291": {
+   "osm": "node/4285798291",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "bar",
+    "name": "3 Dragons"
+   }
+  },
+  "osm:node/4141060177": {
+   "osm": "node/4141060177",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Facetime Cafe & Bar",
+    "opening_hours": "6 am - midnight"
+   }
+  },
+  "osm:node/4252334691": {
+   "osm": "node/4252334691",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "CocoBox",
+    "opening_hours": "Mo-Su,PH 07:00-21:00"
+   }
+  },
+  "osm:node/4253896690": {
+   "osm": "node/4253896690",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "The Espresso Station",
+    "opening_hours": "Mo-Su 07:30-17:00"
+   }
+  },
+  "osm:node/4461175292": {
+   "osm": "node/4461175292",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "breakfast;vietnamese;cake;coffee_shop",
+    "name": "Rosies Cafe",
+    "name:vi": "Rosies Cafe",
+    "opening_hours": "Mo-Sa 09:00-17:00"
+   }
+  },
+  "osm:node/4631365689": {
+   "osm": "node/4631365689",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "KaTê café",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/4770510721": {
+   "osm": "node/4770510721",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Caffè da Hong",
+    "name:vi": "Caffè da Hong",
+    "opening_hours": "Mo-Su 08:00-17:00"
+   }
+  },
+  "osm:node/5301723422": {
+   "osm": "node/5301723422",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "11 coffee house",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5444674051": {
+   "osm": "node/5444674051",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cafe Thiện Trung",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5444684504": {
+   "osm": "node/5444684504",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Café Tin;",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+   }
+  },
+  "osm:node/5444685779": {
+   "osm": "node/5444685779",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Quán Café - Trà Cung Đình",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5809954055": {
+   "osm": "node/5809954055",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "tea;cake;sandwich;breakfast;coffee_shop",
+    "name": "Hoi An Smoothie",
+    "opening_hours": "Mo-Su 08:30-22:00"
+   }
+  },
+  "osm:node/7721404199": {
+   "osm": "node/7721404199",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Caffe Cỏ Đá",
+    "opening_hours": "Mo-Su 06:00-21:00"
+   }
+  },
+  "osm:node/8088140322": {
+   "osm": "node/8088140322",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Bonte café",
+    "opening_hours": "Mo-Su 06:00-21:00"
+   }
+  },
+  "osm:node/9529282481": {
+   "osm": "node/9529282481",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "cafe;bar;live_music",
+    "name": "The Curve Cafe",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/10635513085": {
+   "osm": "node/10635513085",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Artbook",
+    "opening_hours": "Mo-Su 07:30-23:00"
+   }
+  },
+  "osm:node/11873114055": {
+   "osm": "node/11873114055",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cosy Corner",
+    "opening_hours": "Mo-Su 07:00-17:00"
+   }
+  },
+  "osm:node/12058417799": {
+   "osm": "node/12058417799",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Miss Hoi An",
+    "opening_hours": "Mo-Su 07:00-19:00"
+   }
+  },
+  "osm:node/12702443401": {
+   "osm": "node/12702443401",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;tea",
+    "name": "Share Kafe",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "osm:node/13091349871": {
+   "osm": "node/13091349871",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Nhã Na",
+    "opening_hours": "Mo-Su 07:00-17:00"
+   }
+  },
+  "osm:node/13120808702": {
+   "osm": "node/13120808702",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Street Café",
+    "opening_hours": "Mo-Su 06:00-18:00"
+   }
+  },
+  "osm:node/13124286901": {
+   "osm": "node/13124286901",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "vietnamese",
+    "name": "Street Café (cà phê Muối)",
+    "opening_hours": "Mo-Su 06:00-16:00"
+   }
+  },
+  "osm:node/13124293801": {
+   "osm": "node/13124293801",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Cà phê Nhà Nguyên",
+    "opening_hours": "Mo-Su 06:00-17:00"
+   }
+  },
+  "osm:node/13146901701": {
+   "osm": "node/13146901701",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "name": "Subi Coffee & Tea",
+    "opening_hours": "Mo-Su 06:30-19:00"
+   }
+  },
+  "osm:node/13537125073": {
+   "osm": "node/13537125073",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Bill Coffee & Tea",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:way/212215308": {
+   "osm": "way/212215308",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Starbucks",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:way/616910526": {
+   "osm": "way/616910526",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;sandwich;german;french;breakfast;cake;tea;juice;european;pastry;western",
+    "name": "Thom's Sourdough Bakery & Coffee - An Bang Beach",
+    "opening_hours": "07:30-16:00"
+   }
+  },
+  "osm:way/631732355": {
+   "osm": "way/631732355",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;sandwich;french;pastry",
+    "name": "Thom's Sourdough Bakery & Coffee - Hoi An Ancient Town",
+    "opening_hours": "07:30-19:00"
+   }
+  },
+  "osm:node/2076855765": {
+   "osm": "node/2076855765",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Blue Dragon",
+    "opening_hours": "Mo-Su,PH 10:00-22:00"
+   }
+  },
+  "osm:node/2076855988": {
+   "osm": "node/2076855988",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Quang Thang",
+    "opening_hours": "Mo-Su,PH 15:30-22:00"
+   }
+  },
+  "osm:node/2461400753": {
+   "osm": "node/2461400753",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "name": "Bazar Garden Restaurant",
+    "opening_hours": "07:30-23:00"
+   }
+  },
+  "osm:node/2461400758": {
+   "osm": "node/2461400758",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;vietnamese",
+    "name": "Vegetarian Vegan Chay Resturant",
+    "name:en": "Ba Dam Vegetarian",
+    "opening_hours": "Mo-Su 07:00-20:00"
+   }
+  },
+  "osm:node/3093689362": {
+   "osm": "node/3093689362",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Café 41",
+    "opening_hours": "10:00-22:00"
+   }
+  },
+  "osm:node/3093689363": {
+   "osm": "node/3093689363",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Café 43",
+    "opening_hours": "10:00-22:00"
+   }
+  },
+  "osm:node/3812098704": {
+   "osm": "node/3812098704",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Chez Cesar Restaurant",
+    "name:en": "Chez Cesar Restaurant",
+    "opening_hours": "Mo-Su 11:00-22:00"
+   }
+  },
+  "osm:node/3888954278": {
+   "osm": "node/3888954278",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Karma Waters",
+    "opening_hours": "Mo-Su 10:00-20:30"
+   }
+  },
+  "osm:node/4221031594": {
+   "osm": "node/4221031594",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "fish;mediterranean;bbq;wine",
+    "name": "The H`mong Sisters",
+    "opening_hours": "09:00-22:00"
+   }
+  },
+  "osm:node/4254168216": {
+   "osm": "node/4254168216",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "cornercorner",
+    "opening_hours": "9am 12pm"
+   }
+  },
+  "osm:node/4347237636": {
+   "osm": "node/4347237636",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Quan Chay Sen Trang",
+    "opening_hours": "Mo,We-Su 09:00-21:00"
+   }
+  },
+  "osm:node/4352229289": {
+   "osm": "node/4352229289",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Namaste",
+    "opening_hours": "Mo-Su 12:00-22:00"
+   }
+  },
+  "osm:node/4352237791": {
+   "osm": "node/4352237791",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Ganesh Indian Restaurant",
+    "opening_hours": "Mo-Su 11:00-12:00,17:00-22:30"
+   }
+  },
+  "osm:node/4449095589": {
+   "osm": "node/4449095589",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;noodles;vietnamese",
+    "name": "Minh Hien 2",
+    "opening_hours": "Mo-Su 09:00-22:00"
+   }
+  },
+  "osm:node/4579382689": {
+   "osm": "node/4579382689",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Jack's Cat Cafe",
+    "opening_hours": "Tu-We, Fr-Su 11:00-15:00"
+   }
+  },
+  "osm:node/4614061399": {
+   "osm": "node/4614061399",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Baba's kitchen",
+    "opening_hours": "Mo-Su 11:00-22:00"
+   }
+  },
+  "osm:node/4839614226": {
+   "osm": "node/4839614226",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Ho Lo Quan",
+    "name:vi": "Ho Lo Quan",
+    "opening_hours": "Mo-Su 10:00-23:00"
+   }
+  },
+  "osm:node/4869072521": {
+   "osm": "node/4869072521",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;vietnamese",
+    "name": "Sen Trang - Quan Chay",
+    "name:en": "Sen Trang - Vegetarian Restaurant",
+    "opening_hours": "We-Mo 09:00-17:00"
+   }
+  },
+  "osm:node/4887456421": {
+   "osm": "node/4887456421",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "I Love Coffee Xinh Lee Coffee & Restaurant",
+    "name:en": "I Love Coffee Xinh Lee Coffee & Restaurant",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "osm:node/4905288121": {
+   "osm": "node/4905288121",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Quan an Anh Vu",
+    "name:en": "Restaurant Anh Vu",
+    "name:vi": "Quan an Anh Vu",
+    "opening_hours": "Mo-Su 15:00-20:00"
+   }
+  },
+  "osm:node/5061520126": {
+   "osm": "node/5061520126",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Annien",
+    "name:en": "Annen Yoga and Vegetarian Restaurant",
+    "name:vi": "Annien",
+    "opening_hours": "Mo-Su 09:00-21:00"
+   }
+  },
+  "osm:node/5299012021": {
+   "osm": "node/5299012021",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Tam Quang Minh",
+    "name:en": "Tam Quang Minh Vegetarian Restaurant",
+    "opening_hours": "Mo-Su 06:00-18:00"
+   }
+  },
+  "osm:node/5414154624": {
+   "osm": "node/5414154624",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Red Dragon Restaurant",
+    "opening_hours": "Mo-Su 11:30-22:30"
+   }
+  },
+  "osm:node/5444164055": {
+   "osm": "node/5444164055",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Day & Night",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5444645841": {
+   "osm": "node/5444645841",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Tea Garden",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5444693768": {
+   "osm": "node/5444693768",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Quán Phở Tiến",
+    "opening_hours": "24/7"
+   }
+  },
+  "osm:node/5464917424": {
+   "osm": "node/5464917424",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Happy Buffalo",
+    "opening_hours": "Mo-Sa 17:00-23:00"
+   }
+  },
+  "osm:node/5570949320": {
+   "osm": "node/5570949320",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "tea;burger;pasta;pancake;breakfast;international;coffee_shop",
+    "name": "The Fisherman",
+    "opening_hours": "Mo-Su 07:30-23:00"
+   }
+  },
+  "osm:node/5595997721": {
+   "osm": "node/5595997721",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "An Hý",
+    "opening_hours": "Mo-Su 11:00-20:30"
+   }
+  },
+  "osm:node/5613322622": {
+   "osm": "node/5613322622",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;vietnamese",
+    "name": "Nostalife",
+    "opening_hours": "Mo-Su 12:00-12:00,21:30-21:30"
+   }
+  },
+  "osm:node/5798643153": {
+   "osm": "node/5798643153",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza;vietnamese",
+    "name": "Quán Chay Nhân Duyên Vegan",
+    "name:vi": "Quán Chay Nhân Duyên Vegẻtaian",
+    "opening_hours": "Mo-Su 07:00-21:00"
+   }
+  },
+  "osm:node/5811814156": {
+   "osm": "node/5811814156",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Hein Coffee",
+    "opening_hours": "Mo-Su 08:00-22:00"
+   }
+  },
+  "osm:node/6034005613": {
+   "osm": "node/6034005613",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Viet Ngon",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/6251697585": {
+   "osm": "node/6251697585",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "NOURISH eatery",
+    "opening_hours": "Tu-Su 09:00-16:00"
+   }
+  },
+  "osm:node/6418785294": {
+   "osm": "node/6418785294",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Són La Coffee",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "osm:node/6483231385": {
+   "osm": "node/6483231385",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "An Farm Hoi An",
+    "opening_hours": "Mo-Su 08:00-18:00"
+   }
+  },
+  "osm:node/6821692763": {
+   "osm": "node/6821692763",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;traditional;diner;local;coffee_shop;fine_dining;wine",
+    "name": "Hoa Hiên",
+    "opening_hours": "Mo-Su 09:00-21:30"
+   }
+  },
+  "osm:node/6956509385": {
+   "osm": "node/6956509385",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;breakfast",
+    "name": "Bikini Bottom Express An Bang",
+    "opening_hours": "mo-su 08:30-22:00"
+   }
+  },
+  "osm:node/7155363886": {
+   "osm": "node/7155363886",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Blues and Brews Resteraunt & Bar",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  "osm:node/7238341085": {
+   "osm": "node/7238341085",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional;asian;vietnamese",
+    "name": "Quàn 137 Bà Linh",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "osm:node/10304029313": {
+   "osm": "node/10304029313",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Roving Chillhouse",
+    "opening_hours": "Mo-Su 07:30-21:00"
+   }
+  },
+  "osm:node/10603243286": {
+   "osm": "node/10603243286",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Món Ngon Hà Nội",
+    "opening_hours": "Mo closed; Tu-Su 07:00-19:00"
+   }
+  },
+  "osm:node/11609574104": {
+   "osm": "node/11609574104",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "american;breakfast;cake;coffee_shop;pasta;sandwich",
+    "name": "Good Eats",
+    "opening_hours": "Mo-Su 08:00-16:00"
+   }
+  },
+  "osm:node/11840976337": {
+   "osm": "node/11840976337",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "V vegan cafe & restaurant",
+    "opening_hours": "Mo-Su 11:00-22:00"
+   }
+  },
+  "osm:node/11878409184": {
+   "osm": "node/11878409184",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Tropical Eatery",
+    "opening_hours": "Mo-Su 08:00-18:00"
+   }
+  },
+  "osm:node/11919603867": {
+   "osm": "node/11919603867",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Avocado",
+    "opening_hours": "Mo-Su 08:00-16:00, 17:00-21:30"
+   }
+  },
+  "osm:node/13426342201": {
+   "osm": "node/13426342201",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "savory_pancakes;vietnamese",
+    "name": "Banh Xeo Khue",
+    "opening_hours": "Mo-Su 10:00-20:00"
+   }
+  },
+  "osm:node/13430047101": {
+   "osm": "node/13430047101",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "An Phuoc Vegetarian",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  "osm:node/13462061301": {
+   "osm": "node/13462061301",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Vi Hoi An",
+    "name:vi": "Vị Hội An",
+    "opening_hours": "Mo-Su 09:00-22:00"
+   }
+  },
+  "osm:node/13687990703": {
+   "osm": "node/13687990703",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "The Son Bistro",
+    "opening_hours": "Mo-Su,PH 08:00-23:00"
+   }
+  },
+  "osm:node/13812953288": {
+   "osm": "node/13812953288",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Thirty3 Eatery",
+    "opening_hours": "Mo-Su 07:00-22:00"
+   }
+  },
+  "osm:node/13888271701": {
+   "osm": "node/13888271701",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;noodles",
+    "name": "Seeds",
+    "opening_hours": "Mo-Su 17:00-21:00"
+   }
+  },
+  "osm:node/13895748101": {
+   "osm": "node/13895748101",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "breakfast;burger;coffee_shop;fish;noodles;pasta;pizza",
+    "name": "Family Reataurant & Cafe",
+    "opening_hours": "Mo-Su 09:00-16:00, 17:30-22:00"
+   }
+  },
+  "osm:node/13904544801": {
+   "osm": "node/13904544801",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;coffee_shop;noodles;vietnamese",
+    "name": "Cẩm Nam Quán",
+    "opening_hours": "Mo-Su 09:00-22:00"
+   }
+  },
+  "osm:node/13906389201": {
+   "osm": "node/13906389201",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Fami's",
+    "opening_hours": "Mo-Su 08:00-22:00"
+   }
+  },
+  "osm:node/13934799101": {
+   "osm": "node/13934799101",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "bagel;breakfast;coffee_shop",
+    "name": "Buttercup",
+    "opening_hours": "Mo-Su 07:30-16:00"
+   }
+  },
+  "osm:node/14025305349": {
+   "osm": "node/14025305349",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "name": "Home Paste",
+    "opening_hours": "Mo-Su,PH 08:30-21:30"
+   }
+  },
+  "osm:way/549343300": {
+   "osm": "way/549343300",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;international",
+    "name": "Hoang Long Beach",
+    "opening_hours": "Mo-Su 08:00-22:00"
+   }
+  },
+  "osm:way/565280048": {
+   "osm": "way/565280048",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "JEERA",
+    "opening_hours": "Mo-Su 11:00-23:00"
+   }
+  },
+  "osm:way/1245731730": {
+   "osm": "way/1245731730",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "Missteak Hoi An",
+    "opening_hours": "Mo-Su 11:30-23:00"
+   }
+  },
+  "osm:node/4519205790": {
+   "osm": "node/4519205790",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "cuisine": "sandwich",
+    "name": "Annen Yoga & Vegetarian",
+    "opening_hours": "Mo-Sa 06:00-21:00"
+   }
+  },
+  "osm:node/5250607284": {
+   "osm": "node/5250607284",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "cuisine": "burger;sandwich;hot_dog",
+    "name": "Jim's Snackbar",
+    "name:en": "Jim's Snackbar",
+    "name:vi": "Jim's Snackbar",
+    "opening_hours": "Tu-Su 02:00-21:00"
+   }
+  },
+  "osm:node/7118673485": {
+   "osm": "node/7118673485",
+   "dist_m": 0.0,
+   "name_ratio": 1.0,
+   "tags": {
+    "amenity": "fast_food",
+    "cuisine": "sandwich",
+    "name": "Lê Hội Bánh Mí Chay",
+    "name:en": "Lê Hội Vegan Sandwich",
+    "opening_hours": "Mo-Su 06:00-21:00"
+   }
+  }
+ }
+}

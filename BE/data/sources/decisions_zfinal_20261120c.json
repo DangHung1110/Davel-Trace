@@ -1,0 +1,12 @@
+{
+ "note": "Kiểm mẫu loại điểm 20/11/2026 (68 điểm ngẫu nhiên phân tầng, Codex đọc OSM/web; reports/p0/links/category_audit_codex.json): 49 đúng, 2 sai, 17 chưa rõ; tỉ lệ sai 3,9% < 5% -> giữ luật phân loại, sửa 2 điểm sai theo tag OSM.",
+ "items": {
+  "osm:node/7477670191": {
+   "category": "day_market",
+   "price_note": "OSM shop=gift (cửa hàng quà lưu niệm), không phải quán cà phê dù tên có 'coffee'."
+  },
+  "osm:node/2177056870": {
+   "category": "viewpoint"
+  }
+ }
+}

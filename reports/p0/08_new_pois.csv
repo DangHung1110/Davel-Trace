@@ -1,0 +1,259 @@
+poi_id,name,category,zone,cluster_id,requires_ticket_of,hours,hours_by
+manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,hoi_an,hoi_an_old_town,,00:00-23:59,agent_web
+manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,hoi_an,hoi_an_old_town,,19:00-21:00,agent_web
+osm:way/630377259,Bãi biển Tiên Sa,beach,trung_tam,,,08:00-18:00,agent_web
+manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,son_tra_my_khe,,,00:00-23:59,agent_web
+osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,son_tra_my_khe,,,00:00-23:59,agent_web
+manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,son_tra_my_khe,,,05:00-22:00,inferred
+manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,son_tra_my_khe,,,08:00-16:45,agent_web
+osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,hoi_an_old_town,Phố cổ Hội An,05:00-22:00,inferred
+osm:way/565592419,Bảo tàng Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"07:30-11:30, 13:30-17:30",open_data
+osm:way/320722329,Hội quán Phúc Kiến,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-17:00,agent_web
+osm:way/448044645,Hội quán Triều Châu,religious,hoi_an,,Phố cổ Hội An,07:00-17:00,agent_web
+osm:way/565300448,Hội Quán Quảng Triệu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-16:00,agent_web
+osm:node/6151138385,Hội quán Ngũ Bang,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,07:00-17:00,agent_web
+osm:node/2092582385,Hội quán Hải Nam,religious,hoi_an,,Phố cổ Hội An,07:00-17:00,agent_web
+osm:way/595299310,Nhà cổ Tấn Ký,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/4279640089,Nhà cổ Phùng Hưng,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/2076855866,Nhà cổ Đức An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/2076855954,Nhà cổ Quân Thắng,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/5674096859,Nhà cổ Diệp Đồng Nguyên,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/2092582318,Tụy Tiên Đường Minh Hương,religious,hoi_an,,Phố cổ Hội An,"08:00-11:00, 14:00-16:00",inferred
+osm:way/631064893,Quan Công Miếu,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-17:00,agent_web
+osm:node/2076856032,Bảo tàng Gốm sứ Mậu dịch Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:node/3189923484,Bảo tàng Văn hóa Sa Huỳnh,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:way/631074714,Bảo tàng Văn hóa Dân gian Hội An,museum_indoor,hoi_an,hoi_an_old_town,Phố cổ Hội An,"08:30-11:00, 14:00-16:30",inferred
+osm:way/209494258,Văn Miếu Hội An,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
+osm:relation/2836882,Chùa Chúc Thánh,religious,hoi_an,,,07:00-18:00,agent_web
+osm:way/474383101,Chùa Phước Lâm,religious,hoi_an,,,07:30-21:30,agent_web
+osm:way/565186618,Đình Cẩm Phô,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/35952504,Chợ Hội An,day_market,hoi_an,hoi_an_old_town,,06:00-22:00,agent_web
+osm:node/6099308589,Chợ đêm Hội An,night_market,hoi_an,hoi_an_old_town,,18:00-22:00,open_data
+osm:way/35952591,Chợ vải Hội An,day_market,hoi_an,,,06:00-19:00,open_data
+osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,hoi_an,hoi_an_old_town,Phố cổ Hội An,,inferred
+osm:way/14131302,Công viên Ấn tượng Hội An (show Ký ức Hội An),paid_attraction,hoi_an,,,17:00-21:30,agent_web
+osm:node/5513474821,Công viên Đất nung Thanh Hà,paid_attraction,hoi_an,,,08:30-17:30,open_data
+osm:node/4171964390,Làng gốm Thanh Hà,outdoor_landmark,hoi_an,,,08:00-17:30,agent_web
+osm:node/10709738006,Làng mộc Kim Bồng,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
+osm:node/4517387589,Làng Triêm Tây,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
+osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,,,05:00-22:00,inferred
+osm:node/4171925609,Cồn Thuận Tình,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
+osm:relation/3938690,Vườn Tượng An Hội,outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
+osm:way/35952574,Cầu An Hội,outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
+osm:node/12344125229,Precious Heritage Art Gallery Museum,museum_indoor,hoi_an,,,08:00-20:00,agent_web
+osm:node/7127464285,Bảo tàng Y học Cổ truyền Hội An,museum_indoor,hoi_an,hoi_an_old_town,,07:00-11:00,open_data
+osm:way/209492808,Nhà thờ Công giáo Hội An,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,ba_na,Sun World Bà Nà Hills,06:00-17:30,inferred
+osm:way/1109970009,Nhà thờ Saint Denis,outdoor_landmark,ba_na_tay,ba_na,Sun World Bà Nà Hills,05:00-22:00,inferred
+osm:way/198804483,Thánh địa Mỹ Sơn,paid_attraction,hoi_an,,,06:00-18:00,open_data
+osm:node/4601279489,Phố cổ Hội An,paid_attraction,hoi_an,hoi_an_old_town,,07:30-21:00,agent_web
+osm:way/251397637,Làng rau Trà Quế,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
+osm:way/404714309,Nhà thờ Chính tòa Đà Nẵng,religious,trung_tam,,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/149699484,Công viên Biển Đông,outdoor_landmark,son_tra_my_khe,,,05:00-22:00,inferred
+osm:node/4343966693,An Bang beach village,restaurant,hoi_an,,,10:00-22:00,open_data
+osm:node/2217387212,An Bang Beach Club,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/3157491491,Tra Que Water Wheel,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/4279536690,Banh Mi Phuong,restaurant,hoi_an,,,06:30-21:00,open_data
+osm:node/4389441895,Bale Well,restaurant,hoi_an,,,10:00-22:00,open_data
+osm:node/4706534566,Orivy,restaurant,hoi_an,,,12:00-22:00,open_data
+osm:node/5447215326,Morning Glory Signature,restaurant,hoi_an,,,11:00-22:30,open_data
+osm:node/5447259721,Vy's Market Restaurant & Cooking School,restaurant,hoi_an,,,11:00-22:30,open_data
+osm:node/7055486785,Mango Rooms,restaurant,hoi_an,,,08:00-23:00,open_data
+osm:node/12785618658,Morning Glory Countryside,restaurant,hoi_an,,,11:00-21:00,open_data
+osm:node/12043189706,Hiên Sushi Bar,restaurant,hoi_an,,,16:00-22:00,open_data
+osm:node/12470795401,Faifoo Central Restaurant,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/4225643190,Phố Xưa,restaurant,hoi_an,,,10:00-21:00,open_data
+osm:node/4548149290,Nhà hàng Solo,restaurant,hoi_an,,,08:00-23:00,open_data
+osm:node/4548163789,Bánh mì Thuý,restaurant,hoi_an,,,14:00-21:00,open_data
+osm:node/4580499791,Cabanon Café,restaurant,hoi_an,,,09:00-21:00,open_data
+osm:node/4821984428,Hoshigami,restaurant,hoi_an,,,16:00-22:00,open_data
+osm:node/4883744921,dau bep banh mi,restaurant,hoi_an,,,12:00-21:00,open_data
+osm:node/4893587521,Quán Chay An Lạc,restaurant,hoi_an,,,07:30-21:30,open_data
+osm:node/4920642221,Havana,restaurant,hoi_an,,,11:00-23:00,open_data
+osm:node/4945171421,Hai (Mì Quang - Cao Lâu),restaurant,hoi_an,,,17:30-21:30,inferred
+osm:node/5273107721,Nhà Hàng Hành Là,restaurant,hoi_an,,,00:00-23:59,open_data
+osm:node/5425858521,VY’s Deli,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/5923288385,Firefly Restaurant & Bar,restaurant,hoi_an,,,11:30-21:30,open_data
+osm:node/7003805266,Nha Hang Chay ROM,restaurant,hoi_an,,,08:00-22:00,open_data
+osm:node/10304039134,Caddilac Bar & Grill,restaurant,hoi_an,,,14:00-22:00,open_data
+osm:node/10304585640,Jan,restaurant,hoi_an,,,09:00-17:00,open_data
+osm:node/10304609242,"Bánh Xèo, Thịt Nướng, Nem Lụi Bà 9",restaurant,hoi_an,,,09:30-21:30,open_data
+osm:node/10652658505,Peanuts - Vegan Vietnamese Food,restaurant,hoi_an,,,11:00-21:00,open_data
+osm:node/10736260563,Chickpea Eatery,restaurant,hoi_an,,,09:00-20:00,open_data
+osm:node/10763332205,Hiệp Ký,restaurant,hoi_an,,,10:00-23:00,open_data
+osm:node/11618601226,Dingo Deli,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11645353169,7 Bridges Hoi An Craft Beer Tap Room,restaurant,hoi_an,,,10:00-23:00,open_data
+osm:node/11888968769,Quán ăn cô phưởng,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11890609669,Cơm chay Thiện Tâm - Vegan Food,restaurant,hoi_an,,,08:00-21:00,open_data
+osm:node/11890992769,Hoa Sen Bánh Mì Chay,restaurant,hoi_an,,,06:00-20:00,open_data
+osm:node/12635080558,SummerBeach Restaurant,restaurant,hoi_an,,,07:00-22:00,open_data
+osm:node/12803739945,The Boat Riverside Restaurant & Bar,restaurant,hoi_an,,,11:00-21:30,open_data
+osm:node/13164974235,Bikini Bottom Express Hoi An Riverside,restaurant,hoi_an,,,09:00-23:00,open_data
+osm:node/13164991521,Vietnom Local Eatery Hoi An,restaurant,hoi_an,,,09:00-22:00,open_data
+osm:node/13360620516,Kurumi - Healthy Vegan Food & Desserts,restaurant,hoi_an,,,08:00-21:00,open_data
+osm:node/13397525601,Cô Anh - Sông Hoāi,restaurant,hoi_an,,,10:00-21:00,open_data
+osm:node/13654762201,Long's Kitchen Restaurant & Cooking Class,restaurant,hoi_an,,,11:00-22:00,open_data
+osm:node/11795856089,Nghé Coffee Hội An,cafe,hoi_an,,,08:00-20:00,open_data
+osm:node/4520093589,Lapin Ca Phe,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/4717672963,Hoi An Roastery,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/4844888422,Phin Coffee Restaurant,cafe,hoi_an,,,08:00-21:30,open_data
+osm:node/5677701323,Rosie's Cafe,cafe,hoi_an,,,09:00-15:00,open_data
+osm:node/6219918385,Bao's coffee place,cafe,hoi_an,,,06:00-20:00,open_data
+osm:node/7208591085,Tiệm bánh Meraki,cafe,hoi_an,,,08:00-21:00,open_data
+osm:way/632030501,Reaching out Teahouse,cafe,hoi_an,,,08:00-20:30,inferred
+osm:node/10536187009,Dudu Cafe Hoi An,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/10959238968,Thom's Sourdough Bakery & Coffee - Tan Thanh Beach,cafe,hoi_an,,,07:30-18:00,open_data
+osm:node/12647213526,Vintage Taste Deli Cafe Hoi An,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/13881156000,Yesh!,cafe,hoi_an,,,07:30-14:30,open_data
+osm:node/1726781610,Cargo Club Cafe & Restaurant,cafe,hoi_an,,,10:00-22:00,open_data
+osm:node/3893467764,UY VIET COFFEE BEAN,cafe,hoi_an,,,10:00-22:00,open_data
+osm:node/5107806021,Hôp Dùa,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/5265545321,Sound of Silence,cafe,hoi_an,,,07:00-19:00,open_data
+osm:node/5611617221,Café Sputnik,cafe,hoi_an,,,09:00-22:00,open_data
+osm:node/7094679785,Mate Restaurant and Coffee Hoi An,cafe,hoi_an,,,08:30-21:30,open_data
+osm:node/10162249917,Barconcù,nightlife,hoi_an,,,16:00-23:59,open_data
+osm:node/4721435589,Sleepy Gecko Chillout Bar,nightlife,hoi_an,,,10:00-23:59,open_data
+osm:node/10285677009,The Shamrock,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/10180856817,Tiger Tiger Bar,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/10297955384,Lamonta Pub & Restaurant,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/10154412491,Kungfu Noodle,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,09:00-21:00,open_data
+osm:node/11422706022,El Fresco,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,09:00-21:00,open_data
+osm:node/11423808688,Le Table,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,06:30-21:00,open_data
+osm:node/12959087697,Rosa,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/14337631970,Nhà Hàng Chay Ngọc Chi,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/14337971573,Bharata,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11422697875,La Crique,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11423812931,Lotteria,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11423819121,Brasserie,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/13587488508,Nhà hàng Four Seasons (Bà Nà),restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/14337971575,Arapang,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
+osm:node/4401168602,Nha Hang Com Nieu Hong Phuc 3,restaurant,ba_na_tay,,,11:00-13:00,inferred
+osm:way/1109970036,Beer Plaza,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,17:30-21:30,inferred
+osm:node/13890168980,Cafe Cô Bốn,cafe,ba_na_tay,,,00:00-23:59,open_data
+osm:node/14337971574,Highlands Coffee (Bà Nà),cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
+osm:node/11423769989,Postal Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
+osm:node/14337980312,Soul Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
+osm:node/2617007574,Tượng đài Kazik (Kazimierz Kwiatkowski),outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
+osm:way/210933183,Di tích Đình Thanh Tẩy,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:node/10171278941,Chùa Kim Bửu,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/631070197,Chùa Pháp Bảo,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
+osm:node/2091401445,Chùa Long Thọ,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
+osm:node/11581690669,Chùa Bảo Thắng,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/209494260,Nhà thờ Tin lành Hội An,religious,hoi_an,hoi_an_old_town,,"08:00-11:00, 14:00-16:00",inferred
+osm:way/565276813,Thánh thất Cao Đài Hội An,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
+osm:node/4582592213,Nhà thờ tộc Trần,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,07:00-21:00,agent_web
+osm:way/210966819,Nhà thờ tộc Nguyễn Tường,religious,hoi_an,hoi_an_old_town,Phố cổ Hội An,08:00-17:00,agent_web
+osm:node/6091196615,Phòng tranh Phan Kim Chi,museum_indoor,hoi_an,hoi_an_old_town,,"08:30-11:00, 14:00-16:30",inferred
+osm:node/11896339273,CSO Gallery,museum_indoor,hoi_an,,,08:00-17:00,agent_web
+osm:node/4246108134,Spa Hoi An,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/5325684221,Hoi An Blind Massage,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/5353761323,Spa Sweden,wellness,hoi_an,,,08:00-23:59,open_data
+osm:node/6224346486,La Luna Spa,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/6252089286,Spa V,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/6354826049,Cua Dai Beach Spa,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/7200332585,Herbal Spa - Hoi An Branch 1,wellness,hoi_an,,,10:00-22:00,open_data
+osm:node/9963308324,Hani Health Spa,wellness,hoi_an,,,09:00-21:00,open_data
+osm:node/10736269999,Spa Jonu,wellness,hoi_an,,,09:00-22:00,agent_web
+osm:node/10760853506,Lemon tree spa,wellness,hoi_an,,,10:00-22:00,agent_web
+osm:node/12323301001,Balloons SPA,wellness,hoi_an,,,10:00-20:00,inferred
+osm:node/13439124694,Herbal Spa Hoi An,wellness,hoi_an,,,10:00-22:00,open_data
+osm:node/14337513701,Son Hoi An Spa,wellness,hoi_an,,,08:00-22:00,agent_web
+osm:node/4937240722,Life bar,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/5110691326,Mr. Bean Bar,nightlife,hoi_an,,,12:00-23:59,agent_web
+osm:node/6257424485,Hoi An Sports Bar,nightlife,hoi_an,,,11:00-23:00,agent_web
+osm:node/12468807102,Mezcal Cocteleria,nightlife,hoi_an,,,18:00-23:30,agent_web
+osm:node/4965493634,Moe's tavern regae bar,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/13152739401,Hoi An Brewing Co,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/14339936801,Yang Smile Beach Bar,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/6696113992,Tô Tô,nightlife,hoi_an,,,19:30-23:00,inferred
+osm:node/4285798291,3 Dragons,nightlife,hoi_an,,,11:00-23:59,agent_web
+osm:node/4141060177,Facetime Cafe & Bar,cafe,hoi_an,,,08:00-20:30,inferred
+osm:node/4252334691,CocoBox,cafe,hoi_an,,,07:00-21:00,open_data
+osm:node/4253896690,The Espresso Station,cafe,hoi_an,,,07:30-17:00,open_data
+osm:node/4461175292,Rosies Cafe,cafe,hoi_an,,,09:00-17:00,open_data
+osm:node/4631365689,KaTê café,cafe,hoi_an,,,07:00-22:00,open_data
+osm:node/4770510721,Caffè da Hong,cafe,hoi_an,,,08:00-17:00,open_data
+osm:node/5301723422,11 coffee house,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/5444674051,Cafe Thiện Trung,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/5444684504,Café Tin;,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/5444685779,Quán Café - Trà Cung Đình,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/5809954055,Hoi An Smoothie,cafe,hoi_an,,,08:30-22:00,open_data
+osm:node/7721404199,Caffe Cỏ Đá,cafe,hoi_an,,,06:00-21:00,open_data
+osm:node/8088140322,Bonte café,cafe,hoi_an,,,06:00-21:00,open_data
+osm:node/9529282481,The Curve Cafe,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/10635513085,Artbook,cafe,hoi_an,,,07:30-23:00,open_data
+osm:node/11873114055,Cosy Corner,cafe,hoi_an,,,07:00-17:00,open_data
+osm:node/12058417799,Miss Hoi An,cafe,hoi_an,,,07:00-19:00,open_data
+osm:node/12702443401,Share Kafe,cafe,hoi_an,,,06:00-22:00,open_data
+osm:node/13091349871,Nhã Na,cafe,hoi_an,,,07:00-17:00,open_data
+osm:node/13120808702,Street Café,cafe,hoi_an,,,06:00-18:00,open_data
+osm:node/13124286901,Street Café (cà phê Muối),cafe,hoi_an,,,06:00-16:00,open_data
+osm:node/13124293801,Cà phê Nhà Nguyên,cafe,hoi_an,,,06:00-17:00,open_data
+osm:node/13146901701,Subi Coffee & Tea,cafe,hoi_an,,,06:30-19:00,open_data
+osm:node/13537125073,Bill Coffee & Tea,cafe,hoi_an,,,07:00-22:00,open_data
+osm:way/212215308,Starbucks,cafe,hoi_an,,,07:00-22:00,open_data
+osm:way/616910526,Thom's Sourdough Bakery & Coffee - An Bang Beach,cafe,hoi_an,,,07:30-16:00,open_data
+osm:way/631732355,Thom's Sourdough Bakery & Coffee - Hoi An Ancient Town,cafe,hoi_an,,,07:30-19:00,open_data
+osm:node/2076855765,Blue Dragon,restaurant,hoi_an,,,10:00-22:00,open_data
+osm:node/2076855988,Quang Thang,restaurant,hoi_an,,,15:30-22:00,open_data
+osm:node/2461400753,Bazar Garden Restaurant,restaurant,hoi_an,,,07:30-23:00,open_data
+osm:node/2461400758,Vegetarian Vegan Chay Resturant,restaurant,hoi_an,,,07:00-20:00,open_data
+osm:node/3093689362,Café 41,cafe,hoi_an,,,10:00-22:00,open_data
+osm:node/3093689363,Café 43,cafe,hoi_an,,,10:00-22:00,open_data
+osm:node/3812098704,Chez Cesar Restaurant,restaurant,hoi_an,,,11:00-22:00,open_data
+osm:node/3888954278,Karma Waters,restaurant,hoi_an,,,10:00-20:30,open_data
+osm:node/4221031594,The H`mong Sisters,restaurant,hoi_an,,,09:00-22:00,open_data
+osm:node/4254168216,cornercorner,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/4347237636,Quan Chay Sen Trang,restaurant,hoi_an,,,09:00-21:00,open_data
+osm:node/4352229289,Namaste,restaurant,hoi_an,,,12:00-22:00,open_data
+osm:node/4352237791,Ganesh Indian Restaurant,restaurant,hoi_an,,,"11:00-12:00, 17:00-22:30",open_data
+osm:node/4449095589,Minh Hien 2,restaurant,hoi_an,,,09:00-22:00,open_data
+osm:node/4579382689,Jack's Cat Cafe,cafe,hoi_an,,,11:00-15:00,open_data
+osm:node/4614061399,Baba's kitchen,restaurant,hoi_an,,,11:00-22:00,open_data
+osm:node/4839614226,Ho Lo Quan,restaurant,hoi_an,,,10:00-23:00,open_data
+osm:node/4869072521,Sen Trang - Quan Chay,restaurant,hoi_an,,,09:00-17:00,open_data
+osm:node/4887456421,I Love Coffee Xinh Lee Coffee & Restaurant,restaurant,hoi_an,,,06:00-22:00,open_data
+osm:node/4905288121,Quan an Anh Vu,restaurant,hoi_an,,,15:00-20:00,open_data
+osm:node/5061520126,Annien,restaurant,hoi_an,,,09:00-21:00,open_data
+osm:node/5299012021,Tam Quang Minh,restaurant,hoi_an,,,06:00-18:00,open_data
+osm:node/5414154624,Red Dragon Restaurant,restaurant,hoi_an,,,11:30-22:30,open_data
+osm:node/5444164055,Day & Night,restaurant,hoi_an,,,00:00-23:59,open_data
+osm:node/5444645841,Tea Garden,cafe,hoi_an,,,00:00-23:59,open_data
+osm:node/5444693768,Quán Phở Tiến,restaurant,hoi_an,,,00:00-23:59,open_data
+osm:node/5464917424,Happy Buffalo,restaurant,hoi_an,,,17:00-23:00,open_data
+osm:node/5570949320,The Fisherman,restaurant,hoi_an,,,07:30-23:00,open_data
+osm:node/5595997721,An Hý,restaurant,hoi_an,,,11:00-20:30,open_data
+osm:node/5613322622,Nostalife,restaurant,hoi_an,,,12:00-21:30,open_data
+osm:node/5798643153,Quán Chay Nhân Duyên Vegan,restaurant,hoi_an,,,07:00-21:00,open_data
+osm:node/5811814156,Hein Coffee,cafe,hoi_an,,,08:00-22:00,open_data
+osm:node/6034005613,Viet Ngon,restaurant,hoi_an,,,10:00-22:00,open_data
+osm:node/6251697585,NOURISH eatery,restaurant,hoi_an,,,09:00-16:00,open_data
+osm:node/6418785294,Són La Coffee,cafe,hoi_an,,,06:00-22:00,open_data
+osm:node/6483231385,An Farm Hoi An,restaurant,hoi_an,,,08:00-18:00,open_data
+osm:node/6821692763,Hoa Hiên,restaurant,hoi_an,,,09:00-21:30,open_data
+osm:node/6956509385,Bikini Bottom Express An Bang,restaurant,hoi_an,,,08:30-22:00,open_data
+osm:node/7155363886,Blues and Brews Resteraunt & Bar,restaurant,hoi_an,,,10:00-22:00,open_data
+osm:node/7238341085,Quàn 137 Bà Linh,restaurant,hoi_an,,,06:00-22:00,open_data
+osm:node/10304029313,Roving Chillhouse,restaurant,hoi_an,,,07:30-21:00,open_data
+osm:node/10603243286,Món Ngon Hà Nội,restaurant,hoi_an,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/11609574104,Good Eats,restaurant,hoi_an,,,08:00-16:00,open_data
+osm:node/11840976337,V vegan cafe & restaurant,restaurant,hoi_an,,,11:00-22:00,open_data
+osm:node/11878409184,Tropical Eatery,restaurant,hoi_an,,,08:00-18:00,open_data
+osm:node/11919603867,Avocado,restaurant,hoi_an,,,"08:00-16:00, 17:00-21:30",open_data
+osm:node/13426342201,Banh Xeo Khue,restaurant,hoi_an,,,10:00-20:00,open_data
+osm:node/13430047101,An Phuoc Vegetarian,restaurant,hoi_an,,,06:00-22:00,open_data
+osm:node/13462061301,Vi Hoi An,restaurant,hoi_an,,,09:00-22:00,open_data
+osm:node/13687990703,The Son Bistro,restaurant,hoi_an,,,08:00-23:00,open_data
+osm:node/13812953288,Thirty3 Eatery,restaurant,hoi_an,,,07:00-22:00,open_data
+osm:node/13888271701,Seeds,restaurant,hoi_an,,,17:00-21:00,open_data
+osm:node/13895748101,Family Reataurant & Cafe,cafe,hoi_an,,,"09:00-16:00, 17:30-22:00",open_data
+osm:node/13904544801,Cẩm Nam Quán,restaurant,hoi_an,,,09:00-22:00,open_data
+osm:node/13906389201,Fami's,restaurant,hoi_an,,,08:00-22:00,open_data
+osm:node/13934799101,Buttercup,restaurant,hoi_an,,,07:30-16:00,open_data
+osm:node/14025305349,Home Paste,restaurant,hoi_an,,,08:30-21:30,open_data
+osm:way/549343300,Hoang Long Beach,restaurant,hoi_an,,,08:00-22:00,open_data
+osm:way/565280048,JEERA,restaurant,hoi_an,,,11:00-23:00,open_data
+osm:way/1245731730,Missteak Hoi An,cafe,hoi_an,,,11:30-23:00,open_data
+osm:node/4519205790,Annen Yoga & Vegetarian,restaurant,hoi_an,,,06:00-21:00,open_data
+osm:node/5250607284,Jim's Snackbar,restaurant,hoi_an,,,02:00-21:00,open_data
+osm:node/7118673485,Lê Hội Bánh Mí Chay,restaurant,hoi_an,,,06:00-21:00,open_data

@@ -45,8 +45,8 @@ import threading
 import unicodedata
 from functools import lru_cache
 
-from BE.app.services.profile_filter import fold
-from BE.common import effective_fee, load_json, party_size, to_min
+from BE.app.services.profile_filter import _match_terms, fold
+from BE.common import effective_fee, load_json, party_size, to_min, view_pois
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -156,6 +156,21 @@ _POIS_CACHE: dict[str, tuple[tuple[int, int], list[dict]]] = {}
 _POIS_LOCK = threading.Lock()
 
 
+# hours.kind == "by_booking" (cooking class, workshop): sold as fixed sessions,
+# so it is only suggested when the traveller asks for food/culture experiences
+# (or names it as must-visit). Matched as whole words like ACTIVITY_TYPE_MAP.
+BOOKING_INTEREST = ("ẩm thực", "nấu ăn", "lớp nấu", "học nấu", "cooking", "văn hóa",
+                    "trải nghiệm", "workshop")
+
+
+def wants_booking(activities: list[str]) -> bool:
+    for a in activities or []:
+        low = str(a or "").lower()
+        if _match_terms(BOOKING_INTEREST, low, fold(low)) is not None:
+            return True
+    return False
+
+
 def load_pois_json(path: str) -> list[dict]:
     """Read a snapshot pois.json (T061c: shares BE.common.load_json).
 
@@ -173,6 +188,7 @@ def load_pois_json(path: str) -> list[dict]:
         return hit[1]
     data = load_json(path)
     pois = data["pois"] if isinstance(data, dict) else data
+    pois = view_pois(pois, os.path.dirname(path))     # v2.1 -> legacy view (WP1)
     with _POIS_LOCK:
         _POIS_CACHE[path] = (key, pois)
     return pois
@@ -318,6 +334,11 @@ def uncertainty(p: dict) -> list[str]:
     labels = []
     if not p.get("opening_hours"):
         labels.append("gio mo cua chua xac minh")
+    elif (p.get("hours") or {}).get("kind") == "safe_window":
+        # v2.1 (WP3): inferred group window, never presented as fact
+        labels.append("nen kiem tra gio")
+    elif (p.get("hours") or {}).get("kind") == "by_booking":
+        labels.append("can dat truoc (theo suat)")
     if p.get("rating") is None:
         labels.append("rating chua xac minh")
     if not p.get("tags"):
@@ -331,10 +352,14 @@ def uncertainty(p: dict) -> list[str]:
     return labels
 
 
-def retrieve(trip: dict, pois: list[dict]) -> dict:
+def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     """Return {"candidates": [{poi_id, reasons[], uncertainty[]}],
     "needs_verification": [{poi_id, reasons[], uncertainty[], must_visit}],
-    "excluded": [{poi_id, reason}], "unmatched_activities": [str]}."""
+    "excluded": [{poi_id, reason}], "unmatched_activities": [str]}.
+
+    `cells` (optional matrix cells): a POI without a matrix row cannot be
+    routed, so it is excluded with an explicit reason (WP4 eligibility rule).
+    """
     ws, we = to_min(trip.get("start_time", "07:00")), to_min(trip.get("end_time", "18:00"))
     budget = int(trip.get("budget", 0))
     party = party_size(trip)
@@ -342,6 +367,10 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
     avoid = set(trip.get("avoid", []))
     activities = trip.get("activities", []) or []
     types = wanted_types(activities)
+    booking_ok = wants_booking(activities)
+    # ids that own a matrix row, computed once (dense matrices expose them)
+    matrix_ids = ((set(cells.row_ids) if hasattr(cells, "row_ids")
+                   else {k.split("->", 1)[0] for k in cells}) if cells else None)
     candidates, needs_verification, excluded = [], [], []
 
     def within_trip(p: dict) -> bool:
@@ -356,12 +385,24 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
         if pid in avoid:
             excluded.append({"poi_id": pid, "reason": "avoid"})
             continue
+        # danang-v2: lodging is a trip base (role=base), never a stop; a POI
+        # with status=excluded (e.g. hostess bar) is kept in data only.
+        # v1 POIs carry neither field, so v1 behaviour is unchanged.
+        if p.get("role") == "base" and pid not in must:
+            excluded.append({"poi_id": pid, "reason": "noi luu tru (base)"})
+            continue
+        if p.get("status") == "excluded":
+            excluded.append({"poi_id": pid, "reason": "loai khoi du lieu: " + str(p.get("status_reason") or "")})
+            continue
         if not p.get("verified"):
             entry = {"poi_id": pid, "uncertainty": uncertainty(p) + ["poi chua xac minh"],
                      "must_visit": pid in must,
                      "reasons": ["must-visit (cho xac minh, ngoai main plan)"] if pid in must
                      else ["chua xac minh (FR-013)"]}
             needs_verification.append(entry)
+            continue
+        if matrix_ids is not None and pid not in matrix_ids:
+            excluded.append({"poi_id": pid, "reason": "chua co ma tran di chuyen"})
             continue
         reasons: list[str] = []
         if pid in must:
@@ -370,6 +411,9 @@ def retrieve(trip: dict, pois: list[dict]) -> dict:
             reasons.append("must-visit")
             candidates.append({"poi_id": pid, "reasons": reasons,
                                "uncertainty": uncertainty(p)})
+            continue
+        if (p.get("hours") or {}).get("kind") == "by_booking" and not booking_ok:
+            excluded.append({"poi_id": pid, "reason": "trai nghiem can dat truoc (chi goi y khi chon am thuc/van hoa)"})
             continue
         cat = poi_category(p)
         if cat in NON_ACTIVITY_CATS:

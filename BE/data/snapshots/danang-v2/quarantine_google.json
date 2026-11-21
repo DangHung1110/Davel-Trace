@@ -1,0 +1,9551 @@
+{
+ "note": "Giá trị gốc Google (SerpAPI). KHÔNG dùng để train hay xuất production. Chỉ BE.common.poi_view đọc file này khi GOOGLE_POLICY=demo_phi_thuong_mai.",
+ "items": {
+  "ChIJfb2A754ZQjERwntwhqY2_nQ": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "06:00-23:00"
+   ],
+   "hours_open": [
+    "06:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJx6-KGnIXQjER7x-T0zeOlBw": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:30-22:30"
+   ],
+   "hours_open": [
+    "10:30-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJmQmygLwXQjERcZVy8--sIcE": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "07:30-02:00"
+   ],
+   "price_range": {
+    "typical": 500000,
+    "min": 200000,
+    "max": 800000
+   },
+   "price_note": "~500.000đ (khoảng 200-800 N ₫)",
+   "hours_open": [
+    "07:30-02:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà cung cấp thực phẩm và đồ uống cho dịch vụ ăn uống",
+    "Nơi tổ chức sự kiện"
+   ]
+  },
+  "ChIJP1Uz6i0ZQjERfy-rpM1cGWc": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "09:00-22:00"
+   ],
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJdyMboI8ZQjERY5aq4y19Nfg": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "08:00-23:00"
+   ],
+   "hours_open": [
+    "08:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJUahp7dYZQjERa6ryX2z_stg": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-22:30"
+   ],
+   "price_range": {
+    "typical": 400000,
+    "min": 200000,
+    "max": 600000
+   },
+   "price_note": "~400.000đ (khoảng 200-600 N ₫)",
+   "hours_open": [
+    "10:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJi5XzTqsZQjERn5HbwcdvD5Y": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJqaQoXYMZQjERX_QzVEAZr_Q": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Ấn Độ",
+   "opening_hours": [
+    "11:00-00:00"
+   ],
+   "hours_open": [
+    "11:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng Ấn Độ",
+    "Quán bar",
+    "Nhà hàng",
+    "Nhà hàng Nam Ấn Độ"
+   ]
+  },
+  "ChIJ5QtSVAAZQjERwKdjEbXi6wk": {
+   "rating": 5,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:00-23:30"
+   ],
+   "hours_open": [
+    "09:00-23:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJ1Xr5dnkXQjERSYpx3HJqSj0": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "price_range": {
+    "typical": 400000,
+    "min": 100000,
+    "max": 700000
+   },
+   "price_note": "~400.000đ (khoảng 100-700 N ₫)",
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng",
+    "Chợ hải sản",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ8cqHGTMYQjERU0gT5dridKc": {
+   "rating": 4.0,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-21:00"
+   ],
+   "hours_open": [
+    "10:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJySI1VxkXQjERUSItJZQgxBE": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJudsANu4XQjERbLKxjXDLHtU": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJH72bVncZQjERoTgax0OjZKY": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:30-22:00"
+   ],
+   "hours_open": [
+    "10:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng Anh",
+    "Nhà hàng món lẩu",
+    "Nhà hàng Hàn Quốc",
+    "Nhà hàng Trung Quốc",
+    "Nhà hàng cơm",
+    "Nhà hàng",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ8aa8NQAZQjERRM8-aOoNZ30": {
+   "rating": 5,
+   "type": "Nhà hàng hải sản",
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJJSd-naoZQjERheTI-IEkRrc": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng Nhật Bản",
+   "opening_hours": [
+    "10:30-14:00, 16:30-22:30",
+    "10:30-22:30"
+   ],
+   "hours_open": [
+    "10:30-14:00",
+    "16:30-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng Nhật Bản",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJHyNg3TIYQjERqz7x0udvRd0": {
+   "rating": 5,
+   "type": "Nhà hàng",
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJZSsvT9QZQjERf-oLnsT1C3Y": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Nhật Bản",
+   "opening_hours": [
+    "11:00-15:00, 17:00-22:30",
+    "11:00-15:30, 17:00-23:00"
+   ],
+   "hours_open": [
+    "11:00-15:00",
+    "17:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng Nhật Bản"
+   ]
+  },
+  "ChIJ-VaWslgZQjERwaL3uKR9fB4": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng món lẩu",
+   "opening_hours": [
+    "10:30-14:00, 17:00-02:00"
+   ],
+   "hours_open": [
+    "10:30-14:00",
+    "17:00-02:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng món lẩu",
+    "Nhà hàng tiệc đứng"
+   ]
+  },
+  "ChIJLeqV3_cXQjERH0Dq1Mte6_w": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:00-22:00",
+    "09:30-22:00"
+   ],
+   "price_range": {
+    "typical": 400000,
+    "min": 200000,
+    "max": 600000
+   },
+   "price_note": "~400.000đ (khoảng 200-600 N ₫)",
+   "hours_open": [
+    "09:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán bar",
+    "Quán bia sân vườn",
+    "Quán cà phê",
+    "Quán bar cocktail",
+    "Quầy giải khát",
+    "Nhà hàng phục vụ bữa trưa",
+    "Nhà hàng cơm",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJx02UcvIXQjER8al1AkjYuW0": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "tags_v1": [
+    "Nhà hàng Việt Nam",
+    "Văn phòng công ty",
+    "Nhà hàng cơm",
+    "Nhà điều hành du lịch",
+    "Đại lý du lịch"
+   ]
+  },
+  "ChIJz0Od5IUXQjERmAV9JgLRqm8": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Nhà hàng ý",
+   "opening_hours": [
+    "11:00-22:00"
+   ],
+   "price_range": {
+    "typical": 550000,
+    "min": 300000,
+    "max": 800000
+   },
+   "price_note": "~550.000đ (khoảng 300-800 N ₫)",
+   "hours_open": [
+    "11:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng ý",
+    "Quán bar",
+    "Quán bar cocktail",
+    "Bữa tối",
+    "Nhà hàng ăn chay",
+    "Nhà hàng Địa Trung Hải",
+    "Nhà hàng",
+    "Nhà hàng Tây Ban Nha",
+    "Quầy tapa",
+    "Quán rượu"
+   ]
+  },
+  "ChIJVdcEJfsXQjER77l7IpOUHo0": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "07:30-21:00"
+   ],
+   "price_range": {
+    "typical": 100000,
+    "min": null,
+    "max": 200000
+   },
+   "price_note": "~100.000đ (khoảng 1-200.000 ₫)",
+   "hours_open": [
+    "07:30-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán cà phê",
+    "Bến du thuyền"
+   ]
+  },
+  "ChIJd2HsN1oXQjER19a79kUNt-U": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Nhà hàng Pháp",
+   "opening_hours": [
+    "11:00-14:00, 18:00-22:00",
+    "18:00-22:00"
+   ],
+   "hours_open": [
+    "18:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Pháp",
+    "Nhà hàng cao cấp",
+    "Nhà hàng Pháp hiện đại",
+    "Nhà hàng",
+    "Nhà hàng Phương Tây"
+   ]
+  },
+  "ChIJO0E1hoYXQjER-ML-N1yAGAU": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "11:00-23:00"
+   ],
+   "hours_open": [
+    "11:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Nhà hàng món nướng"
+   ]
+  },
+  "ChIJh4MCHBoXQjERA274y4wwup4": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Trà trân châu",
+    "Quán cà phê",
+    "Khu ăn uống"
+   ]
+  },
+  "ChIJYahwiHIXQjER0CIGd09pgcg": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-14:00, 16:00-22:00"
+   ],
+   "hours_open": [
+    "10:00-14:00",
+    "16:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng châu Á"
+   ]
+  },
+  "ChIJe4p5ow8YQjERbmoA9Ml2JCk": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "09:30-23:00"
+   ],
+   "hours_open": [
+    "09:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJeTslKdkXQjERPFZeN_Ta-Ek": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "09:30-21:30"
+   ],
+   "hours_open": [
+    "09:30-21:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Quán ăn nhỏ"
+   ]
+  },
+  "ChIJeVJaMNUZQjERnRz_bfJ5ex4": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "price_range": {
+    "typical": 450000,
+    "min": 200000,
+    "max": 700000
+   },
+   "price_note": "~450.000đ (khoảng 200-700 N ₫)",
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Phòng tiệc",
+    "Quán bia sân vườn",
+    "Nhà hàng giá rẻ",
+    "Nhà hàng gia đình",
+    "Nhà hàng",
+    "Nhà bán buôn hải sản"
+   ]
+  },
+  "ChIJyy6atVM9QjER3q1j566SMPg": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJUcRcH40XQjERyj5XPUTEfO0": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "16:00-22:00"
+   ],
+   "hours_open": [
+    "16:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJye8yM0M9QjERwtla0qUFoOs": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJN84BNSQXQjERyy7N3rDXisc": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "11:00-00:00"
+   ],
+   "hours_open": [
+    "11:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJFbFDWA8ZQjERwNPaFGXBRPQ": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng Pháp",
+   "opening_hours": [
+    "14:00-00:00"
+   ],
+   "hours_open": [
+    "14:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng Pháp"
+   ]
+  },
+  "ChIJHfGPsJkXQjERsHCXRTXX_Xs": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Hàn Quốc",
+   "opening_hours": [
+    "10:30-23:50"
+   ],
+   "hours_open": [
+    "10:30-23:50"
+   ],
+   "tags_v1": [
+    "Nhà hàng Hàn Quốc"
+   ]
+  },
+  "ChIJF2lrSYgXQjERKBBhFKYlhkg": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:30-22:00"
+   ],
+   "hours_open": [
+    "10:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJRVOgcgAXQjER7lPiR_QvAdQ": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam",
+    "Nhà hàng gia đình"
+   ]
+  },
+  "ChIJP-VRM2YXQjERbEUrtG6wq9Q": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJd47MOrUQQjERkE6lCjR2874": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:30-23:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": null,
+    "max": 400000
+   },
+   "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
+   "hours_open": [
+    "10:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJPYQKSAAXQjER0cga1BLD_MI": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJw-jjo3IXQjERjDCm-Yd0EAA": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng Pháp",
+   "opening_hours": [
+    "17:00-21:00"
+   ],
+   "hours_open": [
+    "17:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Pháp",
+    "Nhà hàng Pháp thượng hạng"
+   ]
+  },
+  "ChIJ97eYL8YQQjER8HxFGKLiQec": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-21:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Nhà hàng chuyên phục vụ bữa sáng"
+   ]
+  },
+  "ChIJ7VljWJ4RQjER2Fp6XPnZiaM": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng cơm",
+   "opening_hours": [
+    "09:00-16:00, 18:30-21:00",
+    "09:00-16:00, 19:00-21:00",
+    "09:00-21:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "09:00-16:00",
+    "19:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng cơm"
+   ]
+  },
+  "ChIJFawIPfcXQjERz77xoR3B6Ag": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam",
+    "Quán cà phê",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJz_cDrLoRQjERy7ZIG8Mj5-E": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "17:00-22:00"
+   ],
+   "hours_open": [
+    "17:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJvWxNwnsXQjERKAEy50FwlnI": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ4UuIQXgXQjERz192UgYuxMU": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng Hàn Quốc",
+   "opening_hours": [
+    "11:00-14:00, 17:00-22:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 300000,
+    "max": 400000
+   },
+   "price_note": "~350.000đ (khoảng 300-400 N ₫)",
+   "hours_open": [
+    "11:00-14:00",
+    "17:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Hàn Quốc"
+   ]
+  },
+  "ChIJEyohTbcXQjERpvkbGecn3ow": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng món nướng Hàn Quốc",
+   "opening_hours": [
+    "10:00-00:00"
+   ],
+   "hours_open": [
+    "10:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng món nướng Hàn Quốc",
+    "Nhà hàng món nướng",
+    "Khu vực nướng",
+    "Nhà hàng Hàn Quốc",
+    "Nhà hàng bít tết"
+   ]
+  },
+  "ChIJN-vJNV8XQjERNccI4vX2rHY": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Nhà hàng cao cấp",
+   "opening_hours": [
+    "10:30-14:00, 17:30-20:45",
+    "17:30-20:45"
+   ],
+   "hours_open": [
+    "17:30-20:45"
+   ],
+   "tags_v1": [
+    "Nhà hàng cao cấp",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJRaHks2wXQjERVMrWhffmRXw": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng thịt bò Hàn Quốc",
+   "opening_hours": [
+    "10:30-23:00",
+    "10:30-23:30"
+   ],
+   "hours_open": [
+    "10:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng thịt bò Hàn Quốc",
+    "Nhà hàng Hàn Quốc",
+    "Nhà hàng bít tết"
+   ]
+  },
+  "ChIJW_ilwg0XQjERQbqRXGggIFE": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng ý",
+   "opening_hours": [
+    "11:00-21:30"
+   ],
+   "hours_open": [
+    "11:00-21:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng ý",
+    "Nhà hàng Châu Âu",
+    "Nhà hàng",
+    "Nhà hàng Phương Tây"
+   ]
+  },
+  "ChIJhcB00uoQQjERjQEm4m6FatM": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-14:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-14:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJd8h2AyoRQjERNWCSTs1L1jU": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "11:00-23:00"
+   ],
+   "hours_open": [
+    "11:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Câu lạc bộ"
+   ]
+  },
+  "ChIJJexJsaUXQjERb9rmSRBkLf0": {
+   "rating": 3.9,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJYy-g38oQQjER2c931z_dDt4": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:00-21:00"
+   ],
+   "hours_open": [
+    "09:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJgYDeDs0YQjER0bb1Zj0mVWw": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJxQEDEgAZQjERJtu-CtBIya8": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng món nướng",
+   "opening_hours": [
+    "16:00-23:00"
+   ],
+   "hours_open": [
+    "16:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng món nướng"
+   ]
+  },
+  "ChIJ2fSHNwAfQjERtjvxUmal-YY": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJYQkmfagfQjER0iIRsKZ0Rcc": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJLSyuRcIZQjEReKwhRREzUaQ": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-21:00"
+   ],
+   "hours_open": [
+    "10:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJgUt949cYQjERTHdMcEeiF2o": {
+   "rating": 3.9,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "08:00-23:00"
+   ],
+   "hours_open": [
+    "08:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJxQQMGMoYQjER-2IGXb-pTtQ": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJjSsrUvMZQjERM248I6ifNB8": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "16:00-05:00"
+   ],
+   "hours_open": [
+    "16:00-05:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán rượu"
+   ]
+  },
+  "ChIJVeL2KNYYQjERkTADVXDZcRM": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Nhà hàng ăn chay",
+   "opening_hours": [
+    "06:30-21:00"
+   ],
+   "hours_open": [
+    "06:30-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng ăn chay"
+   ]
+  },
+  "ChIJqWGIf00ZQjER4BkCiBYX8mU": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:30-21:30"
+   ],
+   "hours_open": [
+    "09:30-21:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJgySoNs8YQjERfMLXuOeJ940": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:30-00:00",
+    "16:00-00:00"
+   ],
+   "hours_open": [
+    "16:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJr_-_LCgZQjERRByqB18J3Ls": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-23:00"
+   ],
+   "hours_open": [
+    "08:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJ-7JfLigZQjERZm4r5uDmk5o": {
+   "rating": 3.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-23:00"
+   ],
+   "hours_open": [
+    "08:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJM5BHkDAZQjERYlaJyu15KFg": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJ1fgYYgAZQjERPupjVbkyt6A": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "15:00-00:00"
+   ],
+   "hours_open": [
+    "15:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJ_2lhydMZQjERNTX79I86p44": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-22:30",
+    "13:00-22:30"
+   ],
+   "hours_open": [
+    "13:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJ1eef2IsZQjERjy-_tblqzJs": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-14:00, 16:00-20:30"
+   ],
+   "hours_open": [
+    "10:00-14:00",
+    "16:00-20:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJGZVxyf0ZQjERBbAyCvPNq7E": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "16:00-23:30"
+   ],
+   "hours_open": [
+    "16:00-23:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJV_BGLtAZQjERD9LS1cvwDwg": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "10:30-20:00"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "10:30-20:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ1yFjaOwZQjERO43leJW7YHk": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-14:00, 16:00-21:00"
+   ],
+   "hours_open": [
+    "10:00-14:00",
+    "16:00-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJI85kEAAZQjERpstMFkP60mc": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán cà phê",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ37F4OvoZQjERcSRyXX_s91c": {
+   "rating": 3.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:00-22:30"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "09:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJK5AaRBYZQjER9AALhERmND8": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJQwYzLAcZQjERVvClU0ze5Ek": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-20:30"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "08:00-20:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJnbmM8vMZQjERuPNJSfZqqfM": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:30-00:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:30-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Đại lý cho thuê xe ô tô"
+   ]
+  },
+  "ChIJ3xT1QS4ZQjER8qV4HPop8io": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "10:00-21:30"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-21:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJH4d2i1YYQjERFSA6rKn_Pos": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "08:00-21:30"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "hours_open": [
+    "08:00-21:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJIRqUZWgZQjERwaNywpofxfk": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "08:00-23:00"
+   ],
+   "price_range": {
+    "typical": 400000,
+    "min": 200000,
+    "max": 600000
+   },
+   "price_note": "~400.000đ (khoảng 200-600 N ₫)",
+   "hours_open": [
+    "08:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJr_MgSAAZQjERnbnJDAtASZM": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "15:00-23:00"
+   ],
+   "hours_open": [
+    "15:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJY-zHSgQZQjERRoAvxXVcViU": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "12:30-23:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "12:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Gian hàng rong"
+   ]
+  },
+  "ChIJadL4d-gYQjERKE_uTeup8iY": {
+   "rating": 4,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-20:00"
+   ],
+   "hours_open": [
+    "08:00-20:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Nhà tổ chức đám cưới",
+    "Dịch vụ cưới hỏi",
+    "Địa điểm tổ chức lễ cưới"
+   ]
+  },
+  "ChIJaeTAGgMZQjER5Hvtuv10j_s": {
+   "rating": 3.9,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:30-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "09:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJrYC1becZQjER-97HchRaP_Q": {
+   "rating": 4.4,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "08:00-20:30"
+   ],
+   "hours_open": [
+    "08:00-20:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJH_EMuNcZQjERI1YtG7IGGDo": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJgxcYKLsZQjERlmvsGGeXidw": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-20:30",
+    "07:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-20:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ7xtm7rMXQjER7ye2fxPfbFE": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cơ sở rang cà phê"
+   ]
+  },
+  "ChIJxX--D-oZQjERQ4LzQRoeVXk": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ2eFWbrcXQjERkMR0z_5VhM0": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJrcgyp-wZQjERNqpo6xe5Ogw": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJWXGFjDcYQjER0LvTZMZvBn0": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJTahQxcwZQjERrNKa5emQFC4": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJAWgMydkZQjER-MpvKFLjoqs": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJEUTpMwAZQjER2orvyJWXVYo": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-00:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJUdH0Q88ZQjER0AoQ8Pbil28": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJi0bpGjIYQjERRodYRF89PH8": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-23:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-23:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJIypBnTAZQjERLPJvLObGXPc": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-00:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJW4dpfjkYQjERcGpyYomHFO4": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJQRIRJDIYQjER4JvYKu_Qnak": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "08:00-19:30"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "08:00-19:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cửa hàng lưu niệm"
+   ]
+  },
+  "ChIJ2_OVwmIZQjERrNNkMMg-gk4": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:15"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:15"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Quán cà phê espresso"
+   ]
+  },
+  "ChIJt1wLHjEYQjEREA1YGZU2yOc": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Cửa hàng trà truyền thống",
+   "opening_hours": [
+    "09:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Cửa hàng trà truyền thống"
+   ]
+  },
+  "ChIJ6YzGFvEZQjERtj5MGs3Pj2Q": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "00:30-17:00",
+    "08:00-17:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cơ sở rang cà phê",
+    "Cửa tiệm bán lẻ trực tiếp"
+   ]
+  },
+  "ChIJwUTwp4IZQjERHfo3HZIYvzo": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJXeXlix8ZQjERx9QsmNqx6_U": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ-wZaJ2QZQjERhmDzz7BMz5g": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJBSN7ys4XQjERD_WWhQb2XXk": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ864pbQA9QjER--PIUcxqd48": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Điểm ngắm cảnh",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Điểm ngắm cảnh"
+   ]
+  },
+  "ChIJhZI15EcYQjERBq1kypqtqtc": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-21:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:30-21:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Quán bar"
+   ]
+  },
+  "ChIJo5HJeVg9QjERxLqGaMYHXCw": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-19:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-19:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJmQ0KGkE9QjER4TyQDQ_04TA": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-21:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-21:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Quán cà phê espresso",
+    "Phòng trà",
+    "Nhà sản xuất trà",
+    "Cửa hàng trà",
+    "Nhà bán buôn trà"
+   ]
+  },
+  "ChIJKSs6ZVYZQjERSuj5bQ10t0M": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-17:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-17:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJE5-utYgXQjERgi6BGTJ5WEI": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJEcPC-tEXQjERrwFtFCPExZQ": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ34pDfgA9QjERzXhUIjmZbso": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJR43OJscZQjERMdsfIG3cJ9g": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "00:00-22:00",
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Không gian làm việc chia sẻ",
+    "Quán cà phê espresso"
+   ]
+  },
+  "ChIJjUOBqjgZQjER7IrYE9R52A8": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJJS-cJ58XQjERxgFIfN6CjJ0": {
+   "rating": 5.0,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-20:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-20:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cửa hàng cà phê"
+   ]
+  },
+  "ChIJHQpEDCAXQjERnXmpQofhDWw": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-23:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-23:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJsYoIEOIXQjER_5_trbAwgnA": {
+   "rating": 3.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJMdGCKyQZQjERpNccOkd5duk": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-23:00"
+   ],
+   "hours_open": [
+    "06:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJE4CAepEXQjERg75wrYIZk2Q": {
+   "rating": 5,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-19:30"
+   ],
+   "hours_open": [
+    "06:00-19:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Trang trại phong lan"
+   ]
+  },
+  "ChIJQyBNHwAZQjERhLY1IOG14OY": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJV3itrRYZQjERjahF1Mkk0to": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-18:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-18:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJf8tFWf0XQjERNR0V2Xki5zQ": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJiaXn52YXQjERbd2jnJ1Xmg0": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "07:30-21:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "07:30-21:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Khu vực phục vụ bia",
+    "Quán ăn nhỏ",
+    "Nhà hàng chuyên phục vụ bữa sáng",
+    "Nhà hàng chuyên phục vụ bữa nửa buổi",
+    "Quán bar cocktail",
+    "Quán cà phê",
+    "Bữa tối",
+    "Nhà hàng phục vụ bữa trưa"
+   ]
+  },
+  "ChIJe6VC-zUXQjERyh7x6tTJHX4": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJhbtaILkXQjER88acd2hTeAA": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJzTsg_GQXQjERpsLoJSWJHmU": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJhRHxyd4XQjERPVL2Kw_eqdw": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cơ sở rang cà phê",
+    "Quầy cà phê",
+    "Cửa hàng cà phê",
+    "Quán cà phê espresso",
+    "Quán cà phê internet"
+   ]
+  },
+  "ChIJAxDyECwXQjERcsCmIBvQ1Vk": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê espresso",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê espresso"
+   ]
+  },
+  "ChIJrfU0w0MRQjERC4PjgT9h3LQ": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-18:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-18:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ0RbSL4ARQjERLwRYqY1bqp4": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJvb3YtJYXQjERnLJ4-sFfc6A": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJO7l-RdwZQjERNj5fr2VyZ9Y": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "08:00-21:00",
+    "08:00-21:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJbyos3sAXQjER6Eajh3ljHYE": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-00:00",
+    "06:00-09:00",
+    "06:00-21:00",
+    "09:00-21:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJzeNmTwARQjERLSXizyRKI9g": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJh_2eI0gZQjERROaoM-QEtXY": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJA-NYRUwXQjER4pvBUQyoo8U": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-19:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-19:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJHaTEwB4ZQjERrE6CMe37byI": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJWSoH1BQRQjERRUsvBDeBGvo": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJR4XhE3sXQjERBfL8sHnu-JQ": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê",
+    "Nhà hàng chuyên phục vụ bữa sáng",
+    "Cơ sở rang cà phê",
+    "Cửa hàng cà phê",
+    "Không gian làm việc chia sẻ",
+    "Nhà hàng ăn nhanh"
+   ]
+  },
+  "ChIJKbpWc6IXQjERMZMSscftz9I": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "07:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJV4P2WKQRQjERkfoEDY1uBq0": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Khu ăn uống"
+   ]
+  },
+  "ChIJk3YrZLoZQjERp5PbcDTftQw": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJVWyt-r8ZQjERVMHwS2CscbI": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00",
+    "07:00-22:30"
+   ],
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJw4WrdmsZQjERRCJKWvRJHtI": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJPzf25OAYQjERRUv1zSbS49Q": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "12:00-01:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "12:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ4Z8gV3cfQjERHH6fTdzj0E8": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-18:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-18:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJn7_3kc8ZQjERBi6T5XvhPko": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJa7FkIyUZQjER7VxLENFhuI0": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJlZdRA3AZQjERGSBb-UXUMZw": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJr-RyTyYfQjERmXNNs1WNyY4": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-21:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-21:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJKS3rlfYZQjERPJolPRTWSZw": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJCQlahDsZQjER9ON_UbUNqiQ": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ2XROb6EZQjERoqg1HHvwj88": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJVWhfuoYZQjERiqzzyK-rRko": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJv-i7URUZQjERi-g4GEv06QU": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJP3or6NQZQjERmBDBnMA8O4U": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJIZrPSy8ZQjERGZsE8IgrSnk": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJcx8dydYYQjERMG39tIgHP1Y": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJIcLWMlAZQjER1VvH4kJ2aZA": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Vườn thực vật"
+   ]
+  },
+  "ChIJ2yr5edIYQjER5_9326fLFA0": {
+   "rating": 3.8,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJV9qvhLoZQjERX5RrjGA07mM": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJhYuNIQAZQjERoyprw_nC3Ts": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-17:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:30-17:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJoeH5ukkZQjERxUlcUbKA-XE": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJu0Ud-tsZQjERupkb3A3mxro": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ55nxA9MZQjERNOaUcyvyXxg": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJL-fQUUcZQjERK85coinuqEk": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-23:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-23:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ9Zlonv0YQjERUTfuOADyciU": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJuZTrvVoZQjER371drzqC5hk": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJg1iLwaoZQjERDQOM5N0IZdM": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "05:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "05:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ7bDAtv8YQjERj0Fj9FcnHgA": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJzVnvNgAZQjERef60MBfcz8E": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJH1TU7PsYQjER-jhAtZLdLMc": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJXeYho6gZQjERhk0LVFc69TA": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJQW9rQNwZQjER4zC6dP7vitg": {
+   "rating": 4.6,
+   "type": "Quán cà phê",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJM2DzGgAZQjERp54q-gVvu-g": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-19:00",
+    "07:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-19:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJKbTF7NkZQjEReFD1hbN1Rg8": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJXfWk4QYZQjERpQw56WNZ0js": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJUf5Hcw8ZQjERsntEedW35TI": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJteAgYXsZQjERK6NHlXGXIPI": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:30"
+   ],
+   "hours_open": [
+    "06:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJfagM2mkZQjER9NTQqfVjnI8": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJbbs1ZTQYQjERi3OdfmnRk2g": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Đình làng"
+   ]
+  },
+  "ChIJkatEeMwZQjERnAUKgmrbNgQ": {
+   "rating": 3.9,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "08:00-21:30"
+   ],
+   "hours_open": [
+    "08:00-21:30"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJu6FQjzUYQjER39TMpgQVRUs": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:00-19:00"
+   ],
+   "hours_open": [
+    "07:00-19:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Chợ"
+   ]
+  },
+  "ChIJLWoAs80ZQjERLKHDYD-ZymI": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Bảo tàng di sản",
+    "Bảo tàng điêu khắc"
+   ]
+  },
+  "ChIJH5FAHiEYQjERi-kdX4gd-eE": {
+   "rating": 4.6,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Nhà điều hành du lịch"
+   ]
+  },
+  "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:00-17:30"
+   ],
+   "hours_open": [
+    "07:00-17:30"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Thắng cảnh"
+   ]
+  },
+  "ChIJzX1dFjAZQjERswowf61V1fk": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJL1GKWJYZQjERLrEGqlK2kwQ": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Cầu",
+   "tags_v1": [
+    "Cầu",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJLTomluP3QTERUy-b9iAYR8U": {
+   "rating": 3.5,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJSRWy6Hr3QTERiU3vuI0PbHw": {
+   "rating": 3.7,
+   "price_level": 2,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJQWQVKr4ZQjERcafNnRyLelk": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Sân chơi trong nhà",
+   "opening_hours": [
+    "08:00-22:00",
+    "08:30-22:00",
+    "09:00-22:00"
+   ],
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Sân chơi trong nhà"
+   ]
+  },
+  "ChIJK4sVPc0ZQjERdGROWQ8MMg4": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Trung tâm vui chơi giải trí",
+   "opening_hours": [
+    "07:00-23:00"
+   ],
+   "hours_open": [
+    "07:00-23:00"
+   ],
+   "tags_v1": [
+    "Trung tâm vui chơi giải trí"
+   ]
+  },
+  "ChIJC0W3bjoYQjERVBMskQcoQck": {
+   "rating": 4.3,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Pháo đài"
+   ]
+  },
+  "ChIJEymIkTYYQjERWO-pgjkKGMk": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "08:00-17:00"
+   ],
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Bảo tàng lịch sử"
+   ]
+  },
+  "ChIJ5xkIv7EZQjERDZQIupNo09w": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Bến du thuyền",
+   "tags_v1": [
+    "Bến du thuyền"
+   ]
+  },
+  "ChIJEa410zMYQjER3f11TKinbkU": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 500000
+   },
+   "price_note": "~500.000đ (khoảng 20 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Khách sạn nghỉ dưỡng",
+    "Căn hộ được phục vụ"
+   ]
+  },
+  "ChIJCyoHH4kZQjERX3hJiiMqhyk": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJrVOLzgUXQjERRuyvUi8WxkQ": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJs5puLQA9QjERIaHbrBAGpjA": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJW0KcgfI9QjERJpkPfjssyfo": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Thắng cảnh",
+   "tags_v1": [
+    "Thắng cảnh",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ17GORdEXQjERhkujx-kwJA0": {
+   "rating": 4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:30-22:30"
+   ],
+   "hours_open": [
+    "07:30-22:30"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJFzkgXmA9QjERbjn2eoPqMn8": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Vườn",
+   "opening_hours": [
+    "06:30-17:00"
+   ],
+   "hours_open": [
+    "06:30-17:00"
+   ],
+   "tags_v1": [
+    "Vườn"
+   ]
+  },
+  "ChIJpYNhNwAXQjERflfHrn1lop4": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJLVK-0XI9QjER5-Q0ZZoz5wE": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Bán đảo",
+   "tags_v1": [
+    "Bán đảo"
+   ]
+  },
+  "ChIJI4oSjdE9QjERlXMiA630YKs": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "05:00-21:00"
+   ],
+   "hours_open": [
+    "07:30-17:30"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJBQHuNG49QjER7Mb_Y2I64mk": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:30-17:30"
+   ],
+   "hours_open": [
+    "07:30-17:30"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJS07IM4Y9QjER5m2dd3eyku0": {
+   "rating": 4.3,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 2125000
+   },
+   "price_note": "~2.125.000đ (khoảng 85 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJZWmMe1g9QjERrOGO9nVdagQ": {
+   "rating": 4.2,
+   "type": "Khách sạn nghỉ dưỡng",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng"
+   ]
+  },
+  "ChIJPbgJ4DY9QjER7OSjP2_jSC8": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ08DIzjY9QjER4ldy4JXZBLA": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ_XkaoQs-QjER_IUTHqI3gI8": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJo8N_zUw9QjERgutJ9u3-n7Y": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJqaaYAdIiQjERGuZHElpvurA": {
+   "rating": 4,
+   "price_level": 1,
+   "type": "Bãi biển",
+   "tags_v1": [
+    "Bãi biển"
+   ]
+  },
+  "ChIJwandNwA9QjERWjnwsYXsQrk": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJgaLldI0ZQjEReQCfThP_6CQ": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ244paMwXQjERGVtPeitX4mA": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Hiệp hội/Tổ chức",
+   "tags_v1": [
+    "Hiệp hội/Tổ chức"
+   ]
+  },
+  "ChIJJ66EjfQRQjERrmpQQcYTgq8": {
+   "rating": 4.3,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJu59e1rsRQjERB-49hSxMnXo": {
+   "rating": 4.5,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJgdHMn8gYQjERmEdW2JHUGTw": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Bãi biển công cộng",
+   "opening_hours": [
+    "05:00-19:00"
+   ],
+   "hours_open": [
+    "05:00-19:00"
+   ],
+   "tags_v1": [
+    "Bãi biển công cộng"
+   ]
+  },
+  "ChIJD4Ge5WQZQjERW-0GhLbS310": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJmUEOJQAfQjERLPIN_eYfU9k": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ86LzsaUhQjERGxE6itCeBCY": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Công viên sinh thái",
+    "Khách sạn"
+   ]
+  },
+  "ChIJaQNtm9IfQjERhfrVRYqgA1M": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Khu cắm trại"
+   ]
+  },
+  "ChIJg5OvAgAhQjERKbrq9-Wza-U": {
+   "rating": 4,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "00:00-17:00",
+    "08:00-17:00",
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJGSKUUwCLQTERr0Je7WP5Xqc": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Khu cắm trại",
+   "tags_v1": [
+    "Khu cắm trại"
+   ]
+  },
+  "ChIJqdKPDDIZQjERC2tfiDtFLXE": {
+   "rating": 4.7,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJuzvMeE4ZQjERE-pQycR-Mjo": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJZSAyL0YfQjERMP2R9yBDRwY": {
+   "rating": 4.7,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJVVmn6uMjQjERwv0F2ZV9pJw": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJUcvhoSgfQjERsU0uoSUtsto": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 525000
+   },
+   "price_note": "~525.000đ (khoảng 21 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJEaxZWQAXQjERUp3M2TesuM8": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJz4Y1XCcZQjERzg9AZYfOGH8": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJNUwPk-cZQjERgxIYcjgmCyU": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJ4w7694IXQjERrFXucqKL--o": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Bãi biển",
+   "tags_v1": [
+    "Bãi biển"
+   ]
+  },
+  "ChIJFYLgeggZQjERgwxGcK7JcpQ": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Địa điểm lịch sử",
+   "tags_v1": [
+    "Địa điểm lịch sử"
+   ]
+  },
+  "ChIJSZabUwAZQjERqs6A8ECVnWY": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Câu lạc bộ bãi biển",
+   "tags_v1": [
+    "Câu lạc bộ bãi biển"
+   ]
+  },
+  "ChIJY6qXPYkZQjER8UoDJvGopTk": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Bãi biển công cộng",
+   "tags_v1": [
+    "Bãi biển công cộng"
+   ]
+  },
+  "ChIJZ9UJGQQZQjERFL90XKMPBGk": {
+   "rating": 4,
+   "type": "Hồ bơi",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Hồ bơi"
+   ]
+  },
+  "ChIJ78thjjYYQjERkiy-c9ebVPE": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Bảo tàng nghệ thuật",
+   "opening_hours": [
+    "08:00-17:00"
+   ],
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Bảo tàng nghệ thuật",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJo8fznMYZQjERNtNTUT-ZJyk": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Bảo tàng lịch sử",
+   "opening_hours": [
+    "08:00-12:00, 14:00-16:30"
+   ],
+   "hours_open": [
+    "08:00-12:00",
+    "14:00-16:30"
+   ],
+   "tags_v1": [
+    "Bảo tàng lịch sử",
+    "Bảo tàng",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJaa7lANcXQjERmT3kgV5U7uA": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Bảo tàng nghệ thuật",
+   "opening_hours": [
+    "07:30-18:00"
+   ],
+   "hours_open": [
+    "07:30-18:00"
+   ],
+   "tags_v1": [
+    "Bảo tàng nghệ thuật",
+    "Quán cà phê",
+    "Khu bảo tồn thiên nhiên",
+    "Nhà hàng",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJcVJkUPcXQjERsA8_dfySw5E": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Bảo tàng nghệ thuật",
+   "opening_hours": [
+    "08:30-18:00"
+   ],
+   "hours_open": [
+    "08:30-18:00"
+   ],
+   "tags_v1": [
+    "Bảo tàng nghệ thuật",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ82_sTbkQQjERQ5jmVkoovic": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Bảo tàng",
+   "opening_hours": [
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Bảo tàng",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ17mmuaQRQjERUiexX9MhcdI": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Bảo tàng",
+   "opening_hours": [
+    "08:00-17:00"
+   ],
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Bảo tàng"
+   ]
+  },
+  "ChIJTXOYPFQXQjERGWO0Jf095tw": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Bảo tàng chiến tranh",
+   "opening_hours": [
+    "08:00-11:00, 13:30-16:30"
+   ],
+   "hours_open": [
+    "08:00-11:00",
+    "13:30-16:30"
+   ],
+   "tags_v1": [
+    "Bảo tàng chiến tranh"
+   ]
+  },
+  "ChIJNdWwUgARQjERansIEJQleAU": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJ8be7KQARQjER5Lnd2LHaDAs": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điện thờ",
+   "tags_v1": [
+    "Điện thờ"
+   ]
+  },
+  "ChIJKytgDsgQQjER6al50BDd7vc": {
+   "rating": 4.6,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Thắng cảnh"
+   ]
+  },
+  "ChIJWe_7hboQQjERxap-mizn-ZY": {
+   "rating": 4,
+   "price_level": 1,
+   "type": "Bảo tàng lịch sử địa phương",
+   "tags_v1": [
+    "Bảo tàng lịch sử địa phương"
+   ]
+  },
+  "ChIJ9yzkbH0ZQjERDhPDi_ITcmM": {
+   "rating": 3.7,
+   "type": "Bảo tàng",
+   "tags_v1": [
+    "Bảo tàng"
+   ]
+  },
+  "ChIJodkOVL8fQjERGwRf5tBRLvI": {
+   "type": "Bảo tàng chiến tranh",
+   "tags_v1": [
+    "Bảo tàng chiến tranh"
+   ]
+  },
+  "ChIJVWzfhcwZQjERa_qP0BpsBkk": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Bảo tàng",
+   "tags_v1": [
+    "Bảo tàng"
+   ]
+  },
+  "ChIJfQr_phEZQjER5leh47CfKTQ": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Bảo tàng di sản",
+   "opening_hours": [
+    "07:30-17:30"
+   ],
+   "hours_open": [
+    "07:30-17:30"
+   ],
+   "tags_v1": [
+    "Bảo tàng di sản"
+   ]
+  },
+  "ChIJzQu--DUXQjERBw1iz5k5GlE": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Bãi biển",
+   "tags_v1": [
+    "Bãi biển"
+   ]
+  },
+  "ChIJX_osydwQQjERB-Y6MvLfJmQ": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Bãi biển",
+   "tags_v1": [
+    "Bãi biển"
+   ]
+  },
+  "ChIJrcJ8wVwRQjERJF58LAQEO-I": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJtWWhh9wRQjERxmJ_DNJy62o": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Sân bóng chuyền bãi biển",
+   "tags_v1": [
+    "Sân bóng chuyền bãi biển"
+   ]
+  },
+  "ChIJIaxebnoXQjERNETM7bT3ewg": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Bãi biển",
+   "tags_v1": [
+    "Bãi biển"
+   ]
+  },
+  "ChIJOQ-obAARQjERQ4kQhqErSkw": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJEzuDsG8XQjERz7a51RnJnvU": {
+   "rating": 4,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJOyXC4H0XQjERpm2T2xpZcwU": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "05:00-20:00"
+   ],
+   "hours_open": [
+    "05:00-20:00"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJXcxl0UcYQjERVfYu-bKtvPU": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "05:30-12:02",
+    "05:30-12:03",
+    "05:30-12:04",
+    "05:30-12:05",
+    "06:00-12:02"
+   ],
+   "hours_open": [
+    "06:00-12:02"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJDcx-OTIYQjERP4eyjItPspA": {
+   "rating": 3.9,
+   "price_level": 1,
+   "type": "Chợ truyền thống",
+   "opening_hours": [
+    "06:00-19:00"
+   ],
+   "hours_open": [
+    "06:00-19:00"
+   ],
+   "tags_v1": [
+    "Chợ truyền thống",
+    "Chợ",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJBcr6kegZQjER2nCllYpT_Qc": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Chợ đêm",
+   "opening_hours": [
+    "17:00-23:00"
+   ],
+   "hours_open": [
+    "17:00-23:00"
+   ],
+   "tags_v1": [
+    "Chợ đêm"
+   ]
+  },
+  "ChIJJZ47gFgZQjERvHYpZqPp0lU": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "00:00-06:30, 14:30-00:00"
+   ],
+   "hours_open": [
+    "00:00-06:30",
+    "14:30-23:59"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Trung tâm mua sắm",
+   "opening_hours": [
+    "15:00-23:00"
+   ],
+   "hours_open": [
+    "15:00-23:00"
+   ],
+   "tags_v1": [
+    "Trung tâm mua sắm"
+   ]
+  },
+  "ChIJAdChYQAZQjERdBTX1_66Q_8": {
+   "rating": 3.6,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "17:00-23:59",
+    "17:30-23:45",
+    "17:30-23:59"
+   ],
+   "hours_open": [
+    "17:30-23:45"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJ2zJrN_EXQjERFRsnRcZaDjI": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "04:30-19:30"
+   ],
+   "hours_open": [
+    "04:30-19:30"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJb-kmpPQXQjERKc6w6X8CFKc": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJFad1TFAXQjERE9B6U1THHT4": {
+   "rating": 4.3,
+   "type": "Chợ",
+   "opening_hours": [
+    "05:00-19:00"
+   ],
+   "hours_open": [
+    "05:00-19:00"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJO56jTAARQjEREYLpKFOB1DA": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Chợ",
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJm2iwgggbQjERj-x6QTYemFQ": {
+   "rating": 4.6,
+   "type": "Chợ hoa",
+   "opening_hours": [
+    "04:00-23:30"
+   ],
+   "hours_open": [
+    "04:00-23:30"
+   ],
+   "tags_v1": [
+    "Chợ hoa",
+    "Văn phòng công ty"
+   ]
+  },
+  "ChIJOZ__YJwXQjER4wLDpzs9L5c": {
+   "rating": 4,
+   "type": "Chợ đêm",
+   "opening_hours": [
+    "18:00-23:00"
+   ],
+   "hours_open": [
+    "18:00-23:00"
+   ],
+   "tags_v1": [
+    "Chợ đêm"
+   ]
+  },
+  "ChIJw6DOwZ8QQjERjDMobkQxbF0": {
+   "rating": 3.8,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "05:00-16:30"
+   ],
+   "hours_open": [
+    "05:00-16:30"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJ55qx-YAaQjERJm3mA3vFjX0": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chợ",
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJg5P0rjoZQjER1MD61JUxPB0": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "04:00-21:30"
+   ],
+   "hours_open": [
+    "04:00-21:30"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJlU7ZlygfQjERs_tFa6tFx-s": {
+   "rating": 3.9,
+   "price_level": 1,
+   "type": "Chợ nông sản",
+   "opening_hours": [
+    "05:00-18:00"
+   ],
+   "hours_open": [
+    "05:00-18:00"
+   ],
+   "tags_v1": [
+    "Chợ nông sản"
+   ]
+  },
+  "ChIJWZ_M9joZQjERLLPsSJV90FY": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chợ nông sản",
+   "opening_hours": [
+    "05:00-12:00"
+   ],
+   "hours_open": [
+    "05:00-12:00"
+   ],
+   "tags_v1": [
+    "Chợ nông sản"
+   ]
+  },
+  "ChIJBVvszgofQjER58MnfuhxrRI": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "06:00-18:00"
+   ],
+   "hours_open": [
+    "06:00-18:00"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJN16-6x0fQjERlJytS0E3Kx8": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chợ",
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJqSwlvMkZQjERE_9aVr3pkes": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Chợ",
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJQ8VFVdgZQjERM6OjWmgGH5A": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Quán ăn nhỏ",
+   "opening_hours": [
+    "10:30-13:00, 16:00-20:30"
+   ],
+   "hours_open": [
+    "10:30-13:00",
+    "16:00-20:30"
+   ],
+   "tags_v1": [
+    "Quán ăn nhỏ",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJ3ZNy2BkZQjERkAqpwnkat3o": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "04:30-22:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": null,
+    "max": 400000
+   },
+   "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
+   "hours_open": [
+    "04:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJDxZNtxMZQjERJDjAHhQgcEc": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng Nhật Bản",
+   "opening_hours": [
+    "10:00-14:00, 16:00-22:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-14:00",
+    "16:00-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng Nhật Bản"
+   ]
+  },
+  "ChIJq8DocTMYQjERrIcBZUiEnSM": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-23:00"
+   ],
+   "hours_open": [
+    "07:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cửa hàng kem"
+   ]
+  },
+  "ChIJxzo3j9EZQjER785qACnbIW0": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-22:00"
+   ],
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Trà trân châu"
+   ]
+  },
+  "ChIJZdLv8rkZQjERIhU2VsEsCl4": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-23:00"
+   ],
+   "hours_open": [
+    "07:30-23:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJkVJFwIgXQjERz4j_u7g6_Ao": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-00:00"
+   ],
+   "hours_open": [
+    "07:30-23:59"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Cửa hàng bia",
+    "Cửa hàng âm nhạc"
+   ]
+  },
+  "ChIJFXuefgA9QjERTm9u0hlzWcs": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm ngắm cảnh",
+   "opening_hours": [
+    "17:00-23:00"
+   ],
+   "hours_open": [
+    "17:00-23:00"
+   ],
+   "tags_v1": [
+    "Điểm ngắm cảnh"
+   ]
+  },
+  "ChIJd1ac6eUXQjERQdIGPn3xFwI": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:00-18:00"
+   ],
+   "hours_open": [
+    "07:00-18:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ6ymP8AARQjERnEbundPQK-c": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJKdW4YgAfQjERF1TVangBTwY": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê",
+    "Trà trân châu",
+    "Không gian làm việc chia sẻ",
+    "Quán cà phê internet",
+    "Quầy giải khát"
+   ]
+  },
+  "ChIJ8WgvsE8ZQjERZzNoKTBgM84": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJr4cXZxUZQjER1gqN7YF0A70": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00",
+    "07:00-22:00"
+   ],
+   "hours_open": [
+    "07:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJMQ_j9n0ZQjER6BCkcpQNT8s": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJwTU11dAZQjERsydZriN8k5M": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJedpeSI4ZQjERYqZQdHBbz5E": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "07:30-22:30"
+   ],
+   "hours_open": [
+    "07:30-22:30"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJ5YNM8KoZQjERT-e5n84Og1E": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán cà phê",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán cà phê"
+   ]
+  },
+  "ChIJp91wYRgZQjER9Yry1HWPhW8": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Bến du thuyền",
+   "opening_hours": [
+    "17:00-22:00"
+   ],
+   "hours_open": [
+    "17:00-22:00"
+   ],
+   "tags_v1": [
+    "Bến du thuyền"
+   ]
+  },
+  "ChIJlxydWJEZQjER5GSMuHJHtak": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Trung tâm vui chơi dành cho trẻ em",
+    "Quán cà phê",
+    "Khách sạn nghỉ dưỡng",
+    "Nhà hàng",
+    "Hồ bơi",
+    "Khu cắm trại"
+   ]
+  },
+  "ChIJxU52AgAZQjERUmuAje5_L5Q": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJ-cf9B7wQQjERutUzeynzw8w": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJOxVypBYRQjERMmK2P6JbzF0": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJO0IiWR0RQjERtGkQtqESJ1Y": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Điểm mốc lịch sử",
+   "tags_v1": [
+    "Điểm mốc lịch sử"
+   ]
+  },
+  "ChIJWZUpXf0RQjER6uu8gU2gIhI": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Bảo tàng",
+   "tags_v1": [
+    "Bảo tàng"
+   ]
+  },
+  "ChIJiXlEK7IRQjERvpdL4vcW86w": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Bảo tàng điêu khắc",
+   "tags_v1": [
+    "Bảo tàng điêu khắc"
+   ]
+  },
+  "ChIJ9_dffMQQQjERuJbqVGdSysY": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJg-cynKIXQjERyE7ZIaTaCO8": {
+   "rating": 5,
+   "type": "Nhà chòi trên bãi biển",
+   "tags_v1": [
+    "Nhà chòi trên bãi biển"
+   ]
+  },
+  "ChIJHwgddQAXQjERs5sNrVutheI": {
+   "rating": 3.8,
+   "price_level": 1,
+   "type": "Câu lạc bộ bãi biển",
+   "tags_v1": [
+    "Câu lạc bộ bãi biển"
+   ]
+  },
+  "ChIJO61z6OMZQjERxyCrO6bO28I": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "05:30-19:00"
+   ],
+   "hours_open": [
+    "05:30-19:00"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJP1PH5CMYQjERBYmCltC5WCE": {
+   "rating": 3.9,
+   "price_level": 1,
+   "type": "Chợ",
+   "opening_hours": [
+    "04:00-18:30"
+   ],
+   "hours_open": [
+    "04:00-18:30"
+   ],
+   "tags_v1": [
+    "Chợ"
+   ]
+  },
+  "ChIJHZakNa8ZQjERWNFToM16eB4": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "06:00-21:00"
+   ],
+   "hours_open": [
+    "06:00-21:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJuzUYUgAXQjER7uqAcJPQMY0": {
+   "rating": 4.8,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJuaI3VgMZQjER0B4a7LcJ-YA": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJJ2sLdT4YQjERi930NC-XCo0": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "opening_hours": [
+    "04:30-21:00"
+   ],
+   "hours_open": [
+    "04:30-21:00"
+   ],
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJxdBK6SsYQjERYojL_cVEkbs": {
+   "rating": 4.5,
+   "type": "Nhà thờ Công giáo",
+   "opening_hours": [
+    "05:30-06:30, 16:30-17:30",
+    "17:30-18:30"
+   ],
+   "tags_v1": [
+    "Nhà thờ Công giáo",
+    "Nhà thờ"
+   ]
+  },
+  "ChIJJYpRy_YXQjERoyNzmnL2f-E": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJs4dg5vceQjERJQ5D9ATvWhU": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJPdLppX4XQjERnV5xcr28sO0": {
+   "rating": 4.7,
+   "type": "Nhà thờ Công giáo",
+   "opening_hours": [
+    "05:00-05:30",
+    "05:00-05:30, 17:00-18:00",
+    "05:00-06:00, 17:00-18:00",
+    "18:00-18:30"
+   ],
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJnwKLiE4YQjERMVI0qrqKg1c": {
+   "rating": 4.5,
+   "type": "Nhà thờ Công giáo",
+   "opening_hours": [
+    "05:00-06:00, 07:30-08:30, 17:00-18:00",
+    "17:30-18:30"
+   ],
+   "hours_open": [
+    "17:30-18:00"
+   ],
+   "tags_v1": [
+    "Nhà thờ Công giáo",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJcw0FdkgYQjERhr14f9cMXK0": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJaV_Jo8gZQjERtDWMcdLRT1U": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJY3yT3IweQjERnbDRpKk8b3A": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJOfpog-EYQjERw_VB4IBkfNI": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJ5VTV0hwaQjERYReDb0dJJq8": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "opening_hours": [
+    "05:00-19:00"
+   ],
+   "hours_open": [
+    "05:00-19:00"
+   ],
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJ3S-Eo0sYQjERo9MhApUI4WQ": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJX_rcYHQZQjERQXQ9UxHmHN4": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Nhà thờ Công giáo",
+   "tags_v1": [
+    "Nhà thờ Công giáo"
+   ]
+  },
+  "ChIJEf1GVMoZQjERQxbPWFvFiKI": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJfQNjLMYQQjERo1m_A0X8aLE": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJRZhHIMkZQjERYBH-5S1xKNg": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJCeQZ-jkZQjERaXJSI0ZDWXw": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "09:00-17:00"
+   ],
+   "hours_open": [
+    "09:00-17:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJsdeOrV8XQjER8weQ8Az-w5c": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJyd-t1B0ZQjERVSYFtVbYms8": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo",
+    "Trung tâm thiền"
+   ]
+  },
+  "ChIJrfvtnpYhQjEReNe0fgh8KMM": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJASjStc0ZQjERf8hQfCEJ8JA": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJCRy3iv_2QTERfZxGJkIMHHQ": {
+   "rating": 4.6,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "08:00-17:30"
+   ],
+   "hours_open": [
+    "08:00-17:30"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJuzoag4EXQjERm__A5Whnw5I": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJaUuo57kZQjERzjJfr1YdjCA": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJrynevMsZQjERzZIGoLZwQ2I": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJyWFmArX3QTERon6tUT6re4Q": {
+   "rating": 4.4,
+   "type": "Thắng cảnh",
+   "tags_v1": [
+    "Thắng cảnh",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJyUQ4aw72QTERCXl5YV-4U1w": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Công viên giải trí",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Công viên giải trí",
+    "Công viên giải trí"
+   ]
+  },
+  "ChIJH38kxPn2QTERee_Ccs86ccE": {
+   "rating": 4.6,
+   "type": "Ridge",
+   "tags_v1": [
+    "Ridge"
+   ]
+  },
+  "ChIJ5ySJbAAZQjEROESCTb3NJsw": {
+   "rating": 4.5,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJC78Y_XQXQjERnNGlsKERAHs": {
+   "rating": 4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 950000
+   },
+   "price_note": "~950.000đ (khoảng 38 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJKbntMIQXQjERh50f5GwfUm4": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 300000
+   },
+   "price_note": "~300.000đ (khoảng 12 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJJ93iFIQXQjERhV8dXhMwLOg": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1175000
+   },
+   "price_note": "~1.175.000đ (khoảng 47 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJRZXlI6MZQjERcre1gDV0kFE": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 325000
+   },
+   "price_note": "~325.000đ (khoảng 13 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJMeyhoXgXQjERqCs6CuNR5yI": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1075000
+   },
+   "price_note": "~1.075.000đ (khoảng 43 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJW7iIXnoXQjERwzVF2LpQ_m4": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 975000
+   },
+   "price_note": "~975.000đ (khoảng 39 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJTQo19YMXQjER1DttYZqjHYo": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 950000
+   },
+   "price_note": "~950.000đ (khoảng 38 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJN75cdYQXQjERBUnemtIubGM": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng 40 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Quán cà phê",
+    "Trung tâm hội thảo",
+    "Spa sức khỏe",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJzbKs7IMXQjERWf_Uz122Ohs": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 950000
+   },
+   "price_note": "~950.000đ (khoảng 38 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJbeO3ddMZQjERzeIxy-6JpYc": {
+   "rating": 4.9,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1450000
+   },
+   "price_note": "~1.450.000đ (khoảng 58 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ8YytBwwXQjERJQIQYf4qyqM": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1125000
+   },
+   "price_note": "~1.125.000đ (khoảng 45 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Trung tâm hội thảo",
+    "Nhà hàng",
+    "Spa"
+   ]
+  },
+  "ChIJrxxvlNsXQjERy-eJcpABRJA": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 725000
+   },
+   "price_note": "~725.000đ (khoảng 29 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJT1sjdYQXQjERSLHKKZsmfdQ": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 900000
+   },
+   "price_note": "~900.000đ (khoảng 36 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJW7SBUHoXQjERdpSIWHkCuh0": {
+   "rating": 4.3,
+   "price_level": 3,
+   "type": "Khách sạn lưu trú dài hạn",
+   "price_range": {
+    "typical": 1025000
+   },
+   "price_note": "~1.025.000đ (khoảng 41 US$)",
+   "tags_v1": [
+    "Khách sạn lưu trú dài hạn",
+    "Khách sạn"
+   ]
+  },
+  "ChIJUeabB3kXQjERFP2JL7c8YCg": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1175000
+   },
+   "price_note": "~1.175.000đ (khoảng 47 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJJbfHSGUXQjERRXCfzSX3s88": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1025000
+   },
+   "price_note": "~1.025.000đ (khoảng 41 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJWcFCas8QQjERQGJzK8w1ta4": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 4000000
+   },
+   "price_note": "~4.000.000đ (khoảng 160 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJmZHsE5U9QjERDa3a1CuK3lo": {
+   "rating": 4.9,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 11100000
+   },
+   "price_note": "~11.100.000đ (khoảng 444 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Trung tâm hội thảo",
+    "Nhà hàng cao cấp",
+    "Spa",
+    "Địa điểm tổ chức lễ cưới"
+   ]
+  },
+  "ChIJDZsVkg4ZQjER7u0k8Siz7SE": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 2775000
+   },
+   "price_note": "~2.775.000đ (khoảng 111 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJKfL8bWgXQjERWPZKseMae6E": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 4375000
+   },
+   "price_note": "~4.375.000đ (khoảng 175 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Câu lạc bộ bãi biển",
+    "Nơi tổ chức sự kiện",
+    "Câu lạc bộ thể dục",
+    "Khách sạn",
+    "Nhà hàng",
+    "Spa",
+    "Địa điểm tổ chức lễ cưới"
+   ]
+  },
+  "ChIJMTadzMQQQjER29xKIZnnHAU": {
+   "rating": 4.3,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 750000
+   },
+   "price_note": "~750.000đ (khoảng 30 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Khách sạn",
+    "Spa"
+   ]
+  },
+  "ChIJqXp39lv2QTERR9U4pFNMD2o": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 3225000
+   },
+   "price_note": "~3.225.000đ (khoảng 129 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJQ3ODRnwXQjERsTy60ZdRD_Q": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 900000
+   },
+   "price_note": "~900.000đ (khoảng 36 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Khách sạn"
+   ]
+  },
+  "ChIJjb4Ah-QRQjERFlzALzxOOvo": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 22850000
+   },
+   "price_note": "~22.850.000đ (khoảng 914 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Nơi tổ chức sự kiện",
+    "Khách sạn lưu trú dài hạn",
+    "Căn hộ nghỉ dưỡng cho thuê",
+    "Khách sạn nghỉ dưỡng",
+    "Spa",
+    "Biệt thự",
+    "Địa điểm tổ chức lễ cưới",
+    "Trung tâm chăm sóc sức khỏe",
+    "Khách sạn chăm sóc sức khỏe"
+   ]
+  },
+  "ChIJd3RleOYXQjERQQD0TduMYnU": {
+   "rating": 3.9,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 1250000
+   },
+   "price_note": "~1.250.000đ (khoảng 50 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Quán bar",
+    "Khu tổ hợp công quản",
+    "Khách sạn lưu trú dài hạn",
+    "Khách sạn",
+    "Nhà hàng",
+    "Spa",
+    "Bể bơi",
+    "Sân quần vợt",
+    "Địa điểm tổ chức lễ cưới"
+   ]
+  },
+  "ChIJJxW4ysUQQjER_NC7GzE1W_0": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 2300000
+   },
+   "price_note": "~2.300.000đ (khoảng 92 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJtaLa9KoRQjERpVTDAGoA9ZY": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 1525000
+   },
+   "price_note": "~1.525.000đ (khoảng 61 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Khu tổ hợp công quản"
+   ]
+  },
+  "ChIJY2uJ-ZgRQjEROTUmuLdOGic": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 31650000
+   },
+   "price_note": "~31.650.000đ (khoảng 1.266 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Biệt thự nhà vườn",
+    "Khách sạn"
+   ]
+  },
+  "ChIJq56yCur3QTERYlOCLaSCVwQ": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 1275000
+   },
+   "price_note": "~1.275.000đ (khoảng 51 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Khu vực nướng",
+    "Khu cắm trại",
+    "Quán cà phê",
+    "Công viên sinh thái",
+    "Khách sạn",
+    "Nhà hàng",
+    "Nhà điều hành du lịch",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJQT4SLJwRQjERvym-dW5QWJ0": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 2225000
+   },
+   "price_note": "~2.225.000đ (khoảng 89 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng",
+    "Khách sạn"
+   ]
+  },
+  "ChIJz0RiIUQXQjER_XbsI16KkBE": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 9400000
+   },
+   "price_note": "~9.400.000đ (khoảng 376 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng"
+   ]
+  },
+  "ChIJEyLB68sQQjER7FTfkhV0_MY": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 4375000
+   },
+   "price_note": "~4.375.000đ (khoảng 175 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ7fA2ROsZQjERuQWylV-XvDg": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:45"
+   ],
+   "hours_open": [
+    "09:00-23:45"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa ban ngày",
+    "Spa mặt",
+    "Spa sức khỏe",
+    "Spa đá nóng",
+    "Spa mát xa",
+    "Chuyên gia bấm huyệt",
+    "Cơ sở chăm sóc da"
+   ]
+  },
+  "ChIJp4sb2egXQjERFOFVxrsHiyI": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "09:00-04:00"
+   ],
+   "hours_open": [
+    "09:00-04:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJEwAAALAZQjERyXCN5eSBt1Q": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "09:00-22:00"
+   ],
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Spa ban ngày",
+    "Spa sức khỏe",
+    "Spa đá nóng"
+   ]
+  },
+  "ChIJ90TAWzMXQjERjZ9VhdeUbxU": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:30-04:00"
+   ],
+   "hours_open": [
+    "08:30-04:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa ban ngày",
+    "Phòng mát-xa chân",
+    "Spa mát xa",
+    "Nhà tắm hơi"
+   ]
+  },
+  "ChIJHzP474MXQjERHjpAS3HY_AY": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa ban ngày",
+    "Spa mặt",
+    "Phòng mát-xa chân",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJwdZa4eQ7JQwRYcRRBR0ZE24": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "09:00-00:00"
+   ],
+   "hours_open": [
+    "09:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJ076jrJZFj0QRKwm40qhwBWA": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "07:00-02:00"
+   ],
+   "hours_open": [
+    "07:00-02:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mặt",
+    "Spa đá nóng",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJNxOlbnIXQjER9DXmYRuiv3Q": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "10:00-00:00"
+   ],
+   "hours_open": [
+    "10:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Thẩm mỹ viện",
+    "Spa mặt",
+    "Spa sức khỏe",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJRQDAiMIZQjERgrBd-ERmO-k": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-22:30"
+   ],
+   "hours_open": [
+    "09:00-22:30"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJXcc22ZcZQjERT47ZqHMl13c": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJoyYaBewXQjEROdwfQaOB610": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJ6dOY7ykYQjER0aPtP-ONTzM": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-22:30"
+   ],
+   "hours_open": [
+    "09:00-22:30"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa ban ngày",
+    "Spa mặt",
+    "Spa đá nóng",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJs3Rt4-QZQjERPTSZ7G6XAK0": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:30-23:00"
+   ],
+   "hours_open": [
+    "08:30-23:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Spa sức khỏe",
+    "Spa"
+   ]
+  },
+  "ChIJv1gepxMZQjER2xJtkXvi9xU": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Spa",
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJsyY9JzoYQjERvaNXwl9KJkI": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:00-23:30"
+   ],
+   "hours_open": [
+    "08:00-23:30"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Dịch vụ hương liệu pháp",
+    "Phòng mát-xa chân",
+    "Spa sức khỏe",
+    "Spa đá nóng"
+   ]
+  },
+  "ChIJ80QCWQAXQjER9Wfb-KFGetQ": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "12:00-00:00"
+   ],
+   "hours_open": [
+    "12:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ98HsudQXQjERpViPqdVY3ko": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mặt",
+    "Spa mát xa",
+    "Bác sĩ trị liệu xoa bóp"
+   ]
+  },
+  "ChIJ6UAZeAAZQjERzK3T81riZmo": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch",
+    "Khu vực đi bộ"
+   ]
+  },
+  "ChIJA0bFwKoZQjER--pX5_3_cD0": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Nhà hàng",
+   "tags_v1": [
+    "Nhà hàng"
+   ]
+  },
+  "ChIJgRyzBl8ZQjERJF9sFGvE4R8": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "06:30-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán ăn nhỏ",
+    "Quán mì"
+   ]
+  },
+  "ChIJHz8ambQZQjERjEFJ-wJ-9EE": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-21:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-21:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJYzRCE9YYQjER-BWS4JP_erM": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "05:00-21:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "05:00-21:00"
+   ],
+   "tags_v1": [
+    "Quán mì",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJHRmt7soZQjERhuei1xWj9Xs": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Nhà hàng",
+   "opening_hours": [
+    "06:30-22:15"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-22:15"
+   ],
+   "tags_v1": [
+    "Nhà hàng",
+    "Quán mì"
+   ]
+  },
+  "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g": {
+   "rating": 4,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-21:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-21:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJNzbzAwAZQjERynEwf3zOgYE": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán mì",
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJ14kOf8kZQjERrdrrQPpiZKA": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-13:29, 16:00-21:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-13:29",
+    "16:00-21:00"
+   ],
+   "tags_v1": [
+    "Quán mì",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJJ7sPzc4ZQjERLXHWKHCIglQ": {
+   "rating": 3.7,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJ2eEwIrEZQjERmUcku_xN6pw": {
+   "rating": 3.8,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-21:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-21:30"
+   ],
+   "tags_v1": [
+    "Quán mì",
+    "Nhà hàng chuyên phục vụ bữa sáng",
+    "Cửa hàng bán đồ ăn nấu sẵn",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJka0rSjkYQjERCmramEII0n4": {
+   "rating": 3.8,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJu2GuJRIXQjERzmEF0pBtsgM": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "07:00-23:00",
+    "07:00-23:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "07:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJ8VYU_wQRQjER1lJ6MdGSHjg": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:00-19:30",
+    "06:30-19:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-19:30"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJOxHeFjkYQjERZAilaOR-hJA": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJeROGTS4ZQjERKlipW2HlSvw": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán ăn nhỏ",
+   "opening_hours": [
+    "06:00-10:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-10:00"
+   ],
+   "tags_v1": [
+    "Quán ăn nhỏ"
+   ]
+  },
+  "ChIJwYDU9ZwZQjERwliWFVsHlfw": {
+   "rating": 4.1,
+   "price_level": 1,
+   "type": "Quán mì",
+   "opening_hours": [
+    "06:30-10:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:30-10:30"
+   ],
+   "tags_v1": [
+    "Quán mì"
+   ]
+  },
+  "ChIJR1aq9sMZQjERm5CGfBs-Qi4": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Nhà hàng Việt Nam",
+   "opening_hours": [
+    "06:00-22:30"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJy0rCqNkXQjERksI84rfTy5k": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJkYkOmOMXQjEREz4KLKpwAOE": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-22:30"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "10:00-22:30"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJxwczMkkXQjERoo3KDb0ZQKE": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "08:30-23:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": 100000,
+    "max": 300000
+   },
+   "price_note": "~200.000đ (khoảng 100-300 N ₫)",
+   "hours_open": [
+    "08:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJe3Ixim4XQjERbbrbMnyhr34": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-02:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "10:00-02:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJBVHLh_gXQjER0MFnoSFsh4A": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:00-02:00"
+   ],
+   "hours_open": [
+    "10:00-02:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJl2GYHgAZQjERp7zmf6CDTXk": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJO_gU03QZQjERdvtWlsIeyOM": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng hải sản",
+   "opening_hours": [
+    "10:30-23:00"
+   ],
+   "hours_open": [
+    "10:30-23:00"
+   ],
+   "tags_v1": [
+    "Nhà hàng hải sản"
+   ]
+  },
+  "ChIJBT1hHA4XQjERHcTlavRMj5I": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "opening_hours": [
+    "07:30-22:30"
+   ],
+   "hours_open": [
+    "07:30-22:30"
+   ],
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản",
+    "Chợ nông sản"
+   ]
+  },
+  "ChIJlZA7YgEZQjERwBfzBwsUo18": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "opening_hours": [
+    "08:30-21:00"
+   ],
+   "hours_open": [
+    "08:30-21:00"
+   ],
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản",
+    "Cửa hàng bán thực phẩm sạch",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJWaLrVbMZQjERa8YCUGiCkX8": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản"
+   ]
+  },
+  "ChIJu5AYG0UXQjEREoejRui0VzY": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "opening_hours": [
+    "06:30-22:30",
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản"
+   ]
+  },
+  "ChIJy9eI3pEZQjERRjXgQMj8m-g": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản"
+   ]
+  },
+  "ChIJ4_aypxYZQjERzFP2v0FweY8": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "opening_hours": [
+    "08:00-20:00"
+   ],
+   "hours_open": [
+    "08:00-20:00"
+   ],
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản"
+   ]
+  },
+  "ChIJSwMjjYEXQjERBbThTSOPeKY": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Cửa hàng lưu niệm",
+   "opening_hours": [
+    "07:00-22:30",
+    "07:00-23:00"
+   ],
+   "hours_open": [
+    "07:00-22:30"
+   ],
+   "tags_v1": [
+    "Cửa hàng lưu niệm"
+   ]
+  },
+  "ChIJpRFvp6sZQjERY_CDfnMCx2w": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Cửa hàng bán thực phẩm đặc sản",
+   "opening_hours": [
+    "07:30-23:00"
+   ],
+   "hours_open": [
+    "07:30-23:00"
+   ],
+   "tags_v1": [
+    "Cửa hàng bán thực phẩm đặc sản",
+    "Cửa hàng giỏ quà tặng",
+    "Cửa hàng quà tặng",
+    "Cửa hàng thực phẩm thiên nhiên",
+    "Cửa tiệm bán lẻ trực tiếp",
+    "Cửa hàng lưu niệm"
+   ]
+  },
+  "ChIJpeV7WwAZQjER5TfSiKGu0Qc": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Cửa hàng tạp phẩm",
+   "opening_hours": [
+    "09:00-12:00, 14:00-19:30"
+   ],
+   "hours_open": [
+    "09:00-12:00",
+    "14:00-19:30"
+   ],
+   "tags_v1": [
+    "Cửa hàng tạp phẩm"
+   ]
+  },
+  "ChIJzYloKSQaQjERN9-d8WZyCQo": {
+   "rating": 3.7,
+   "price_level": 1,
+   "type": "Quán ăn nhỏ",
+   "opening_hours": [
+    "06:00-22:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "06:00-22:00"
+   ],
+   "tags_v1": [
+    "Quán ăn nhỏ"
+   ]
+  },
+  "ChIJ03jTTgAXQjERpVQunmJHv2c": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 375000
+   },
+   "price_note": "~375.000đ (khoảng 15 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJfbl-2sMXQjERKLfkuhtH-BE": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1625000
+   },
+   "price_note": "~1.625.000đ (khoảng 65 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Nhà hàng cho người theo đạo Hồi"
+   ]
+  },
+  "ChIJoSXYBfIXQjERoD3rJE5AWDU": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 550000
+   },
+   "price_note": "~550.000đ (khoảng 22 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJJXm_IjoXQjERqJ9FNnjWpx8": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 975000
+   },
+   "price_note": "~975.000đ (khoảng 39 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Quán cà phê",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJkRSDGIIXQjERdg4lYna_jV0": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 750000
+   },
+   "price_note": "~750.000đ (khoảng 30 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Khách sạn nghỉ dưỡng"
+   ]
+  },
+  "ChIJoWXWNIwXQjERjFwxSEpICZ4": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1475000
+   },
+   "price_note": "~1.475.000đ (khoảng 59 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJu954vu8XQjERQNvn5_8eBE8": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 675000
+   },
+   "price_note": "~675.000đ (khoảng 27 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJS0p9LgcXQjERRnDVDqhYvX4": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1400000
+   },
+   "price_note": "~1.400.000đ (khoảng 56 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJn2uBfeUXQjERvTmGbdnPARE": {
+   "rating": 4.6,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 775000
+   },
+   "price_note": "~775.000đ (khoảng 31 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Quán bar cocktail",
+    "Quán cà phê",
+    "Khách sạn lưu trú dài hạn",
+    "Nhà hàng",
+    "Khách sạn chăm sóc sức khỏe"
+   ]
+  },
+  "ChIJR4RA3I0XQjERajP7wKxjYu0": {
+   "rating": 4.5,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 675000
+   },
+   "price_note": "~675.000đ (khoảng 27 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJXRkLVPUZQjERhjMP_j_cdkQ": {
+   "rating": 4.2,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 625000
+   },
+   "price_note": "~625.000đ (khoảng 25 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJq-4rgiMYQjERWeE47TN-W_Q": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 150000
+   },
+   "price_note": "~150.000đ (khoảng 6 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJrW03HQAXQjERLRu5Xd4RvsE": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 425000
+   },
+   "price_note": "~425.000đ (khoảng 17 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJQ-_7No0XQjERrR5A4J2fB9s": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 900000
+   },
+   "price_note": "~900.000đ (khoảng 36 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJJXkD0OcbQjER8aTXsF-pS_Q": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 400000
+   },
+   "price_note": "~400.000đ (khoảng 16 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJQWWv4A8YQjERuqj9zjNqKAc": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 1475000
+   },
+   "price_note": "~1.475.000đ (khoảng 59 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ27_WHYQXQjERfwDksZnfqKM": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 300000
+   },
+   "price_note": "~300.000đ (khoảng 12 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJs2LW3rEXQjERAndHSLNX-Rc": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 375000
+   },
+   "price_note": "~375.000đ (khoảng 15 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng"
+   ]
+  },
+  "ChIJpTFl49UYQjERrzeUIxz8NL4": {
+   "rating": 3.7,
+   "type": "Khách sạn",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJq0vnsSIZQjERiB7KQ_DkjW0": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 425000
+   },
+   "price_note": "~425.000đ (khoảng 17 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJfS4VlKsZQjERPQy1DOvrEa8": {
+   "rating": 4.2,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 525000
+   },
+   "price_note": "~525.000đ (khoảng 21 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJM560Qk0YQjERJDvIocFeEIw": {
+   "rating": 3.1,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 150000
+   },
+   "price_note": "~150.000đ (khoảng 6 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJVVUC-lEYQjERqdANIT0ShEw": {
+   "rating": 3.2,
+   "type": "unknown"
+  },
+  "ChIJ9--6uKYZQjER5hS7ybSadkc": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 200000
+   },
+   "price_note": "~200.000đ (khoảng 8 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ767Qs08YQjERaSc6TDUM4WQ": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 300000
+   },
+   "price_note": "~300.000đ (khoảng 12 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJgXLzUFEYQjERujTQH477KV0": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 600000
+   },
+   "price_note": "~600.000đ (khoảng 24 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJWVl1NFUYQjERl2v9iNV-6F8": {
+   "rating": 4.1,
+   "price_level": 3,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 525000
+   },
+   "price_note": "~525.000đ (khoảng 21 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJAXvSo5EZQjERNYmexlgFouI": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 325000
+   },
+   "price_note": "~325.000đ (khoảng 13 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJISuvVcsZQjERhnOk-O_w9pI": {
+   "rating": 3.4,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 200000
+   },
+   "price_note": "~200.000đ (khoảng 8 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Trung tâm hội nghị",
+    "Phòng mát-xa chân",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJO3oiB7gZQjERONk8CvO8oTM": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 175000
+   },
+   "price_note": "~175.000đ (khoảng 7 US$)",
+   "tags_v1": [
+    "Khách sạn",
+    "Khách sạn lưu trú dài hạn",
+    "Dịch vụ cho thuê xe tay ga",
+    "Đại lý cho thuê nhà nghỉ"
+   ]
+  },
+  "ChIJZxgQeVYYQjERTs3tEgp2lVY": {
+   "rating": 3.6,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 350000
+   },
+   "price_note": "~350.000đ (khoảng 14 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJj1wfpTQYQjERyAwSp1WRPpg": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 175000
+   },
+   "price_note": "~175.000đ (khoảng 7 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJAUbRW8wZQjERf0sgTLr3Odo": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 275000
+   },
+   "price_note": "~275.000đ (khoảng 11 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJJQWDpTQYQjER_VEl5Kl8HTY": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Khách sạn nghỉ dưỡng",
+   "price_range": {
+    "typical": 300000
+   },
+   "price_note": "~300.000đ (khoảng 12 US$)",
+   "tags_v1": [
+    "Khách sạn nghỉ dưỡng"
+   ]
+  },
+  "ChIJ6ToOeVYYQjERj8BHGr6OZzc": {
+   "rating": 3.3,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 275000
+   },
+   "price_note": "~275.000đ (khoảng 11 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ67sbOfwZQjERNfKPIKkEdyw": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Lưu trú nhà dân",
+   "price_range": {
+    "typical": 500000
+   },
+   "price_note": "~500.000đ (khoảng 20 US$)",
+   "tags_v1": [
+    "Lưu trú nhà dân"
+   ]
+  },
+  "ChIJybre1xcZQjERDB05uYRpJBc": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 375000
+   },
+   "price_note": "~375.000đ (khoảng 15 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJCc2lfXgZQjERSUvZYj3RsMw": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Khách sạn",
+   "price_range": {
+    "typical": 175000
+   },
+   "price_note": "~175.000đ (khoảng 7 US$)",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJ37FbsJgZQjERQho2DqSzX_Y": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "07:00-00:30"
+   ],
+   "hours_open": [
+    "07:00-00:30"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Spa sức khỏe",
+    "Spa đá nóng",
+    "Tiệm chăm sóc móng"
+   ]
+  },
+  "ChIJQc2Xk0cXQjERnOTCS5zK1LM": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJX8a3GJEZQjERe6n-Xtcds1w": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-00:00"
+   ],
+   "hours_open": [
+    "08:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJKZK2FcoZQjER8f6Uft81Mvg": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJEWVESw8XQjEReJCexT_n2Wo": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ9ZTWZwAXQjERn99h6ziS_2c": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "09:00-02:00"
+   ],
+   "hours_open": [
+    "09:00-02:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJz3rG-N0XQjERVs2Zo-BWxwQ": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJcUs0-1YXQjERDYZBzXC8l24": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:30-00:00"
+   ],
+   "hours_open": [
+    "08:30-23:59"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJVbx5NwAXQjERS9yRLPkJZ_I": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-23:00",
+    "08:00-23:30",
+    "09:00-23:30"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa sức khỏe",
+    "Cơ sở chăm sóc da"
+   ]
+  },
+  "ChIJr3x17yAXQjER8gIQveo92QM": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "09:00-23:30"
+   ],
+   "hours_open": [
+    "09:00-23:30"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJ_QZY3EMXQjERjA5RvSnV9AM": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ66IiIgAXQjERK0P0RUVMuWM": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJpSoTPgAXQjERcs8hSdrolKM": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "09:00-23:00",
+    "09:30-23:00"
+   ],
+   "hours_open": [
+    "09:30-23:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJJRnwO4UXQjERO5XPs69YCmM": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "10:00-22:00"
+   ],
+   "hours_open": [
+    "10:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJD_KLo4cZQjERpAAtPY2TsIM": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "08:30-23:30"
+   ],
+   "hours_open": [
+    "08:30-23:30"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJXYpw5DMXQjERzS8ce1U5Z3M": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJ5xGrdQAXQjERUKN8BeMLPJo": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-21:00"
+   ],
+   "hours_open": [
+    "09:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJzYULZMgRQjERYRTCyEgKZUY": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-22:00"
+   ],
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa sức khỏe",
+    "Spa đá nóng"
+   ]
+  },
+  "ChIJyUfZ9fAZQjERIMtiBaxkTko": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-00:00"
+   ],
+   "hours_open": [
+    "09:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJl4vFoHERQjERWxJkz9bsJDg": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa y tế",
+   "opening_hours": [
+    "08:00-18:00",
+    "08:00-19:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Spa y tế"
+   ]
+  },
+  "ChIJK_ogWgARQjERnLylibgoTpw": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJvWLgr6cXQjER3bVwhb1OVrs": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "10:00-22:30"
+   ],
+   "hours_open": [
+    "10:00-22:30"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJ701Bqt8XQjERf9oQmmJJRE8": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "09:00-23:30"
+   ],
+   "hours_open": [
+    "09:00-23:30"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Tiệm chăm sóc móng",
+    "Cửa hàng tắm hơi"
+   ]
+  },
+  "ChIJmwtSJxYXQjERqyw4BIsIRV4": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJc2zPTQAXQjERn0HeQzam084": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJ8zk-ZgAZQjERhiZiMzjjRe4": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:30-19:30"
+   ],
+   "hours_open": [
+    "08:30-19:30"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJWd2LBrkZQjER4hLHO81ipK0": {
+   "rating": 4.9,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-20:00"
+   ],
+   "hours_open": [
+    "09:00-20:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJs9Tdb7kfQjERg5O07vnwsww": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:30-22:00"
+   ],
+   "hours_open": [
+    "08:30-22:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJrXev5SsZQjERFgTaHcdCtjY": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJzRc5EgIZQjERKvXOUUpbcKA": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-19:00"
+   ],
+   "hours_open": [
+    "09:00-19:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ46gfxSkZQjERgT9OU08ssF4": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "07:30-20:00"
+   ],
+   "hours_open": [
+    "07:30-20:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJu9TGuzEZQjERolkiV2-wyQQ": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Bác sĩ trị liệu xoa bóp",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Bác sĩ trị liệu xoa bóp"
+   ]
+  },
+  "ChIJNXaMJAAZQjERJxDzvQEO38c": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJeYxRAo8ZQjERawBcqjOhTRQ": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "08:00-20:00"
+   ],
+   "hours_open": [
+    "08:00-20:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJ3dEof08ZQjERrJfwaLyIAIk": {
+   "rating": 5,
+   "type": "Spa",
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ66onuEIZQjERJcc014sju08": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Thẩm mỹ viện",
+   "opening_hours": [
+    "08:30-18:30",
+    "08:30-20:00"
+   ],
+   "hours_open": [
+    "08:30-18:30"
+   ],
+   "tags_v1": [
+    "Thẩm mỹ viện"
+   ]
+  },
+  "ChIJ5RkjQCUZQjERDtUHgOu7k10": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJmVevrx4ZQjER64G39u7fZaM": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJYU-cVQAXQjERxfDy3td5_ac": {
+   "rating": 4.9,
+   "type": "Spa mát xa",
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJacuaCgAfQjERmRXLEMbkPJM": {
+   "rating": 5,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJw2G2IwAfQjERGAvvbDnKLHM": {
+   "rating": 5,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJ1dsj5MQZQjERbgyzx94Lv20": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa y tế",
+   "opening_hours": [
+    "08:00-20:00",
+    "08:30-18:00"
+   ],
+   "hours_open": [
+    "08:30-18:00"
+   ],
+   "tags_v1": [
+    "Spa y tế"
+   ]
+  },
+  "ChIJd-PzSQAfQjERdmCtpw8ajB4": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-20:30"
+   ],
+   "hours_open": [
+    "09:00-20:30"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJy2xEfdgZQjER-EpNiwxo5Y0": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-21:00"
+   ],
+   "hours_open": [
+    "09:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ95sVZAAZQjERaWAzQF3vSiQ": {
+   "rating": 4.9,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJ9wcVkY0ZQjERC4hzT7DwUcg": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "10:00-21:00"
+   ],
+   "hours_open": [
+    "10:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe"
+   ]
+  },
+  "ChIJqTDc25cZQjERd6ed4Iho8A8": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa đá nóng",
+   "opening_hours": [
+    "09:00-21:00"
+   ],
+   "hours_open": [
+    "09:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa đá nóng"
+   ]
+  },
+  "ChIJPQ-OSwAZQjER0Zu4X6NlQds": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJQTe2HAAZQjERkD1J_cP6aSw": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-21:30"
+   ],
+   "hours_open": [
+    "09:00-21:30"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mát xa",
+    "Cơ sở chăm sóc da"
+   ]
+  },
+  "ChIJOXHZFwAZQjERnjc1WCNMaeU": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJNQWGShUZQjER71TXPpJW4Xs": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Spa sức khỏe",
+   "opening_hours": [
+    "08:00-17:00"
+   ],
+   "hours_open": [
+    "08:00-17:00"
+   ],
+   "tags_v1": [
+    "Spa sức khỏe",
+    "Spa mặt",
+    "Spa đá nóng"
+   ]
+  },
+  "ChIJG9IOepAXQjER3x9UnxFxJ7w": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:00-01:00"
+   ],
+   "hours_open": [
+    "08:00-01:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa",
+    "Spa mặt",
+    "Spa sức khỏe",
+    "Spa"
+   ]
+  },
+  "ChIJBTwySgAZQjERS5kel5Caf00": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-20:00"
+   ],
+   "hours_open": [
+    "09:00-20:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Phòng tập thể dục"
+   ]
+  },
+  "ChIJFVqYCKsZQjERv29XM5331mU": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-21:00"
+   ],
+   "hours_open": [
+    "09:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa sức khỏe",
+    "Spa đá nóng",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJfzqqXwAZQjERWQ7zRsTU8Zk": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "10:00-21:00"
+   ],
+   "hours_open": [
+    "10:00-21:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJAZKjQVIZQjERmZdYEcKV5Go": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mặt",
+   "opening_hours": [
+    "08:00-21:30"
+   ],
+   "hours_open": [
+    "08:00-21:30"
+   ],
+   "tags_v1": [
+    "Spa mặt",
+    "Spa sức khỏe",
+    "Phòng khám",
+    "Cơ sở chăm sóc da"
+   ]
+  },
+  "ChIJg85mY5EZQjERXv4xH_p-_MI": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-20:00"
+   ],
+   "hours_open": [
+    "09:00-20:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJC1S7VAAZQjERFItFlyewDHY": {
+   "type": "Spa",
+   "opening_hours": [
+    "09:00-20:00"
+   ],
+   "hours_open": [
+    "09:00-20:00"
+   ],
+   "tags_v1": [
+    "Spa"
+   ]
+  },
+  "ChIJM1DTVHkZQjERDW1JNclcAtw": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa mát xa",
+   "opening_hours": [
+    "08:00-22:00"
+   ],
+   "hours_open": [
+    "08:00-22:00"
+   ],
+   "tags_v1": [
+    "Spa mát xa"
+   ]
+  },
+  "ChIJSYpfiOcZQjERYKZX_AdStPY": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:30-03:00"
+   ],
+   "hours_open": [
+    "19:30-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Quán bar cocktail",
+    "Quán bar tiếp viên nữ",
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJueQn3rsZQjERgU81knCQmOQ": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "tags_v1": [
+    "Quán bar cocktail",
+    "Dịch vụ pha chế"
+   ]
+  },
+  "ChIJp5h-DjMYQjERTMBHOnlub0o": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar ca nhạc trực tiếp",
+   "opening_hours": [
+    "19:00-01:30"
+   ],
+   "hours_open": [
+    "19:00-01:30"
+   ],
+   "tags_v1": [
+    "Quán bar ca nhạc trực tiếp",
+    "Quán bar",
+    "Quán bar cocktail",
+    "Địa điểm ca nhạc trực tiếp",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJZVLi0gEZQjERl6s0h2bqoK0": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "18:00-01:00"
+   ],
+   "hours_open": [
+    "18:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJYTdcRmIZQjERpxIQp-G8HQ4": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJQdpSMREZQjEReHEkMWcVwbw": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "19:00-01:00"
+   ],
+   "hours_open": [
+    "19:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJW5KDTQAZQjERJXJQMoz2YJo": {
+   "rating": 5,
+   "type": "Quán bar tiếp viên nữ",
+   "opening_hours": [
+    "19:30-02:00"
+   ],
+   "hours_open": [
+    "19:30-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar tiếp viên nữ"
+   ]
+  },
+  "ChIJxxumO4QZQjERqrQlIwbE8cA": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "07:00-12:00, 17:00-00:00"
+   ],
+   "hours_open": [
+    "07:00-12:00",
+    "17:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJh8C0GlYXQjERhjmDp-ik-Uc": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar ca nhạc trực tiếp",
+   "opening_hours": [
+    "16:00-00:00"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "16:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar ca nhạc trực tiếp"
+   ]
+  },
+  "ChIJu557PTwYQjERu1jlhJR4LEU": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "20:00-03:00"
+   ],
+   "hours_open": [
+    "20:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Hộp đêm",
+    "Vũ trường"
+   ]
+  },
+  "ChIJ6e7t67oZQjERLcf4KcgElEc": {
+   "rating": 5,
+   "type": "Quán bar tiếp viên nữ",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar tiếp viên nữ"
+   ]
+  },
+  "ChIJn9Kkxh4ZQjERgDXEcvzD4nI": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "17:00-00:00"
+   ],
+   "hours_open": [
+    "17:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bia",
+    "Quán bar cocktail",
+    "Địa điểm ca nhạc trực tiếp",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJp4lxrJsZQjERdBDtWzWyHJU": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "18:00-03:00"
+   ],
+   "hours_open": [
+    "18:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJYZuMDnEZQjERrftd297ekRM": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "19:00-01:30"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "19:00-01:30"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail",
+    "Quán bar",
+    "Quán rượu"
+   ]
+  },
+  "ChIJu9GUjOgZQjERpfx8z-GIMEw": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "19:30-02:30"
+   ],
+   "hours_open": [
+    "19:30-02:30"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJEXMOHVMXQjER479UZE7C59c": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "19:00-01:00"
+   ],
+   "hours_open": [
+    "19:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJZQZGM-MZQjERm_6vbq_fWzo": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "16:00-23:30"
+   ],
+   "hours_open": [
+    "16:00-23:30"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJwRzh0c0ZQjERSqm3HPF_Gi4": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: không rõ tiền bạc",
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJFdFWDOQZQjERhEwTQhM7XII": {
+   "rating": 4.9,
+   "price_level": 3,
+   "type": "Quán bar tiếp viên nữ",
+   "opening_hours": [
+    "19:00-03:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: không rõ tiền bạc",
+   "hours_open": [
+    "19:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar tiếp viên nữ"
+   ]
+  },
+  "ChIJ28SKFJU9QjERBgIwBViBWD4": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "10:00-23:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: Giá 120.000 30.000.000",
+   "hours_open": [
+    "10:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJe8GWJBYXQjERmtVZP78E5oU": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "16:00-00:00"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "hours_open": [
+    "16:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJ5aETx9oZQjERBE0f6BHAbyg": {
+   "rating": 4.7,
+   "price_level": 3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)",
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJabHpMJoXQjERgyUE4Jz8_D0": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "15:00-00:00"
+   ],
+   "price_range": {
+    "typical": 500000,
+    "min": 200000,
+    "max": 800000
+   },
+   "price_note": "~500.000đ (khoảng 200-800 N ₫)",
+   "hours_open": [
+    "15:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Quán bar cocktail",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJP0--pEAXQjERoheJMf24gHA": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "07:30-01:00"
+   ],
+   "hours_open": [
+    "07:30-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Quầy giải khát",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJCd3q4FQXQjERF640iRTpb7I": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:30-03:00"
+   ],
+   "hours_open": [
+    "19:30-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJx3fy4TgZQjER5y-HN2wBNl4": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJZ5ZGlCsZQjER95guGn5ybGo": {
+   "rating": 4.7,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "11:00-03:00"
+   ],
+   "hours_open": [
+    "11:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJdac9auQYQjERbldnY0G9R9c": {
+   "rating": 4.4,
+   "price_level": 3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫)",
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJh73ojOMXQjERtV8NNHwmrO4": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "price_range": {
+    "typical": 250000,
+    "min": 100000,
+    "max": 400000
+   },
+   "price_note": "~250.000đ (khoảng 100-400 N ₫)",
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJZ6w1fJgZQjERP9-_TlpgQXM": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "16:30-23:30"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "16:30-23:30"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJkxff_x0XQjERCC_CN8DFt54": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "tags_v1": [
+    "Quán bar cocktail"
+   ]
+  },
+  "ChIJK0J1RXMXQjERPPTldZI_e5c": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "17:00-04:00"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 100000,
+    "max": 400000
+   },
+   "price_note": "~250.000đ (khoảng 100-400 N ₫)",
+   "hours_open": [
+    "17:00-04:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Quán bar cocktail",
+    "Vũ trường",
+    "Quán bar karaoke",
+    "Quán rượu"
+   ]
+  },
+  "ChIJdwwwfFoXQjERW6mXtIdB8LU": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Bar thể thao",
+   "opening_hours": [
+    "00:00-05:30, 08:00-00:00",
+    "00:00-06:30, 08:00-00:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": null,
+    "max": 400000
+   },
+   "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
+   "hours_open": [
+    "00:00-05:30",
+    "08:00-23:59"
+   ],
+   "tags_v1": [
+    "Bar thể thao",
+    "Quán bar có trò ném phi tiêu",
+    "Quán rượu Ai-len",
+    "Câu lạc bộ bi da lỗ"
+   ]
+  },
+  "ChIJgaVvkV0XQjERNZYSVEJS_Xo": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "17:00-00:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "17:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJxRB4CRgXQjER6zy0em0FyTk": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:30-01:30"
+   ],
+   "hours_open": [
+    "19:30-01:30"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJsztPMVkXQjERooynSorot-0": {
+   "rating": 3.6,
+   "price_level": 2,
+   "type": "Quán bar",
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "tags_v1": [
+    "Quán bar",
+    "Nhà hàng pizza"
+   ]
+  },
+  "ChIJ7YfDY2QXQjERS2EcCR3hj0U": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Quán bar",
+   "opening_hours": [
+    "14:00-23:59"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "14:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJpSDE_bUXQjERRvGyIAFWpeE": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Quán bar",
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJQwork9IXQjERVcF8a6VWq5I": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "07:00-01:00"
+   ],
+   "price_range": {
+    "typical": 300000,
+    "min": 100000,
+    "max": 500000
+   },
+   "price_note": "~300.000đ (khoảng 100-500 N ₫)",
+   "hours_open": [
+    "07:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Sân bóng chuyền bãi biển",
+    "Quán cà phê",
+    "Địa điểm ca nhạc trực tiếp",
+    "Nhà hàng",
+    "Nhà hàng hải sản",
+    "Sân khấu",
+    "Trường dạy lướt sóng",
+    "Cửa hàng đồ lướt ván"
+   ]
+  },
+  "ChIJyVQ3iwoXQjERNILX5sPCUKA": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán rượu",
+   "opening_hours": [
+    "16:00-01:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": 100000,
+    "max": 300000
+   },
+   "price_note": "~200.000đ (khoảng 100-300 N ₫)",
+   "hours_open": [
+    "16:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán rượu",
+    "Quán cà phê",
+    "Nhà hàng",
+    "Bar thể thao"
+   ]
+  },
+  "ChIJKVaLEy8XQjERAgiDXavBMTE": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Quán bar",
+   "opening_hours": [
+    "18:30-00:00"
+   ],
+   "hours_open": [
+    "18:30-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJcbN8RKEXQjERd0H0haMdx4Y": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "07:00-04:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "07:00-04:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Cửa hàng kem",
+    "Nhà hàng Ấn Độ",
+    "Nhà hàng"
+   ]
+  },
+  "ChIJV5uGxecXQjERLhaOZuWV6tA": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "11:00-02:00"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 100000,
+    "max": 400000
+   },
+   "price_note": "~250.000đ (khoảng 100-400 N ₫)",
+   "hours_open": [
+    "11:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJl7zcVgARQjERTJASEbCGeuc": {
+   "rating": 5,
+   "type": "Quán bar",
+   "opening_hours": [
+    "09:00-00:00"
+   ],
+   "hours_open": [
+    "09:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJY_iyslwXQjERFoDw4waR2Sg": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "08:00-02:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": null,
+    "max": 400000
+   },
+   "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
+   "hours_open": [
+    "08:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Câu lạc bộ nhạc Blue",
+    "Quán cà phê",
+    "Quán bar rượu táo",
+    "Quán bar cocktail",
+    "Quán bar ca nhạc trực tiếp",
+    "Câu lạc bộ nhạc Rock"
+   ]
+  },
+  "ChIJ0-6wNdsXQjER068QxYa3E5o": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "12:30-03:00",
+    "18:30-03:00"
+   ],
+   "price_range": {
+    "typical": 200000,
+    "min": null,
+    "max": 400000
+   },
+   "price_note": "~200.000đ (khoảng 1-400.000 ₫)",
+   "hours_open": [
+    "18:30-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJw3dqIx8ZQjERxFZPN1A3gew": {
+   "rating": 4.3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "07:30-23:30"
+   ],
+   "hours_open": [
+    "07:30-23:30"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJQxr6eAAfQjER1vwrQRjtk60": {
+   "rating": 5,
+   "type": "Quán bar",
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJmd-xKSoZQjERr8BS2agMkCI": {
+   "rating": 5,
+   "type": "Quán bar",
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJFXRrR0wZQjERNl4jMD9QNFI": {
+   "rating": 4.5,
+   "type": "Quán bia sân vườn",
+   "tags_v1": [
+    "Quán bia sân vườn",
+    "Cửa hàng cà phê",
+    "Vườn"
+   ]
+  },
+  "ChIJOean5VUZQjERMWDUmGdTpJQ": {
+   "rating": 3.6,
+   "type": "Quán bar",
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJVS4QEX8fQjERk1vVwmP0Rk8": {
+   "rating": 5,
+   "type": "Quán bia",
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJWTRb5NcYQjER6mJOuNl06k8": {
+   "rating": 3.7,
+   "price_level": 1,
+   "type": "Quán rượu",
+   "tags_v1": [
+    "Quán rượu"
+   ]
+  },
+  "ChIJG1WCi2UXQjER9CxEvEOoEpw": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "07:00-02:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "07:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJcYos3CkZQjERibEDbcXOpQs": {
+   "rating": 5,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "08:00-00:00"
+   ],
+   "hours_open": [
+    "08:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJ1XDmcgAZQjERg3z1Ix0EbZA": {
+   "rating": 4.6,
+   "type": "Dịch vụ cho thuê thiết bị karaoke",
+   "opening_hours": [
+    "09:00-05:00"
+   ],
+   "hours_open": [
+    "09:00-05:00"
+   ],
+   "tags_v1": [
+    "Dịch vụ cho thuê thiết bị karaoke",
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJR7_4DdYYQjERUNxW7r51REs": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "09:30-00:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "09:30-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJ-WGIA80YQjER8XDqSVShrOE": {
+   "rating": 4.7,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "08:00-00:00"
+   ],
+   "hours_open": [
+    "08:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJP1XHPQAZQjERinsxWb2Ga0A": {
+   "rating": 4.3,
+   "type": "Quán bar karaoke",
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJsSD2e3kfQjER2d_jnMVrKZ4": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "09:00-23:00"
+   ],
+   "hours_open": [
+    "09:00-23:00"
+   ],
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJcTnFX6QfQjERgmN3buOe9AQ": {
+   "rating": 5,
+   "type": "Quán rượu",
+   "tags_v1": [
+    "Quán rượu"
+   ]
+  },
+  "ChIJuQL2IN4YQjERYHan1mFjMdA": {
+   "rating": 4.4,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "price_range": {
+    "typical": 250000,
+    "min": 100000,
+    "max": 400000
+   },
+   "price_note": "~250.000đ (khoảng 100-400 N ₫)",
+   "tags_v1": [
+    "Quán bar karaoke",
+    "Quán bar"
+   ]
+  },
+  "ChIJs95SfgAZQjERWa0RkAoF0XA": {
+   "rating": 3.7,
+   "price_level": 1,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "09:00-05:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "09:00-05:00"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJqRL3QEQZQjER71D0j0o7M7Q": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJVde_IrUZQjERJghlJMKJ6v0": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Nhà hàng Đức",
+   "opening_hours": [
+    "10:00-00:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "10:00-23:59"
+   ],
+   "tags_v1": [
+    "Nhà hàng Đức",
+    "Quán bia sân vườn",
+    "Quán bia"
+   ]
+  },
+  "ChIJQydy2apx34oRnci64Kkdi4U": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Quán bar",
+   "opening_hours": [
+    "20:00-03:00"
+   ],
+   "price_range": {
+    "typical": 1000000
+   },
+   "price_note": "~1.000.000đ (khoảng Trên 1 Tr ₫) | user: Không có giá cụ thể đâu cả",
+   "hours_open": [
+    "20:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Hộp đêm"
+   ]
+  },
+  "ChIJswSHXgAZQjERZnVL4je3PG4": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Quán bia sân vườn",
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "tags_v1": [
+    "Quán bia sân vườn"
+   ]
+  },
+  "ChIJvyd5GLEZQjERZgKsgMmnnkM": {
+   "rating": 3.8,
+   "price_level": 2,
+   "type": "Hộp đêm",
+   "opening_hours": [
+    "15:00-03:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 300000,
+    "max": 400000
+   },
+   "price_note": "~350.000đ (khoảng 300-400 N ₫)",
+   "hours_open": [
+    "15:00-03:00"
+   ],
+   "tags_v1": [
+    "Hộp đêm"
+   ]
+  },
+  "ChIJ2exBne0ZQjERj07NR6zFg4c": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "15:00-00:00"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "hours_open": [
+    "15:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJvcXagjAYQjERCEguUGaxfEc": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "19:00-01:00"
+   ],
+   "price_range": {
+    "typical": 450000,
+    "min": 200000,
+    "max": 700000
+   },
+   "price_note": "~450.000đ (khoảng 200-700 N ₫)",
+   "hours_open": [
+    "19:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJASuSy-sXQjERJ6nq5Rma0vs": {
+   "rating": 4.8,
+   "price_level": 2,
+   "type": "Quán bar cocktail",
+   "opening_hours": [
+    "14:00-01:00",
+    "14:00-01:30"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "14:00-01:00"
+   ],
+   "tags_v1": [
+    "Quán bar cocktail",
+    "Quán bar",
+    "Vũ trường",
+    "Quán bar Hookah",
+    "Quầy giải khát"
+   ]
+  },
+  "ChIJj8OOR1UYQjERdZlR_ysOs4E": {
+   "rating": 4,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "10:00-00:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJTQuJbKYZQjERAE9fPrQroZw": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "16:30-03:30"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "16:30-03:30"
+   ],
+   "tags_v1": [
+    "Quán bar",
+    "Nhà hàng Việt Nam"
+   ]
+  },
+  "ChIJ3zTSR1UYQjERxzlJpa-DNHE": {
+   "rating": 4.1,
+   "price_level": 2,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "10:00-03:00"
+   ],
+   "price_range": {
+    "typical": 150000,
+    "min": 100000,
+    "max": 200000
+   },
+   "price_note": "~150.000đ (khoảng 100-200 N ₫)",
+   "hours_open": [
+    "10:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJN_abDNcZQjERmLjyrAo7IPk": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Quán bia",
+   "opening_hours": [
+    "16:00-03:00"
+   ],
+   "price_range": {
+    "typical": 250000,
+    "min": 200000,
+    "max": 300000
+   },
+   "price_note": "~250.000đ (khoảng 200-300 N ₫)",
+   "hours_open": [
+    "16:00-03:00"
+   ],
+   "tags_v1": [
+    "Quán bia"
+   ]
+  },
+  "ChIJc2sSdpMZQjERg6ykGdI-3r4": {
+   "rating": 5,
+   "type": "Quán bar",
+   "opening_hours": [
+    "10:00-22:30"
+   ],
+   "hours_open": [
+    "10:00-22:30"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJMZtZVeQZQjERchri-_Wa9C8": {
+   "rating": 4.7,
+   "price_level": 2,
+   "type": "Quán bar",
+   "opening_hours": [
+    "20:30-05:00"
+   ],
+   "hours_open": [
+    "20:30-05:00"
+   ],
+   "tags_v1": [
+    "Quán bar"
+   ]
+  },
+  "ChIJObG9DvoZQjER1tqakgkbUno": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Quán bia sân vườn",
+   "opening_hours": [
+    "17:00-02:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "17:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bia sân vườn"
+   ]
+  },
+  "ChIJD8ivG7YZQjERxe5fgwGSVao": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Quán bar karaoke",
+   "opening_hours": [
+    "08:30-00:00"
+   ],
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)",
+   "hours_open": [
+    "08:30-23:59"
+   ],
+   "tags_v1": [
+    "Quán bar karaoke"
+   ]
+  },
+  "ChIJkZi7gkcYQjERPd87DaNuhW0": {
+   "rating": 4.6,
+   "price_level": 2,
+   "type": "Quán bar ca nhạc trực tiếp",
+   "opening_hours": [
+    "19:00-02:00"
+   ],
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)",
+   "hours_open": [
+    "19:00-02:00"
+   ],
+   "tags_v1": [
+    "Quán bar ca nhạc trực tiếp",
+    "Quán bar",
+    "Cửa hàng bia",
+    "Quán bia",
+    "Quán bar cocktail",
+    "Địa điểm ca nhạc trực tiếp",
+    "Điểm thu hút khách du lịch",
+    "Quán rượu"
+   ]
+  },
+  "ChIJ8ar-PNQXQjERFGGdrbCAQbg": {
+   "rating": 4.7,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "06:00-21:00"
+   ],
+   "hours_open": [
+    "06:00-21:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJabEOcucXQjER-8MNU9FNODw": {
+   "rating": 4.8,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "06:30-17:30"
+   ],
+   "hours_open": [
+    "06:30-17:30"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJnZoMTbkQQjERwzvvHqGlb4E": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJyaniiLoQQjERI3aW6z5atCc": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJO9OcO7kQQjERuGR5zEtpfu8": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJW9b8Ky0XQjERPn8CJNdE0Lk": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJvexouL4QQjERy0qt57A0GX4": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJA8a2aLcQQjER5mciBxvjUVs": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJ8Z0D7KURQjERUPd36goDH90": {
+   "rating": 4.5,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJLX9s7EUbQjERdsy67X5-NrE": {
+   "rating": 5,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJf_LKvbkbQjERSVrbzxU6Nuc": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJ8VqGDeYRQjERVEkumiIa714": {
+   "rating": 4.9,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJ9w6iligZQjERXLpgwwjF0Fs": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJo2Yyix8ZQjERmG7AHQkOpIo": {
+   "rating": 4.6,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJKcik9OQYQjERKZ21jblRTVc": {
+   "rating": 4.8,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJl21Hd_4YQjERF980f9HS9Cc": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJsVPjaP8YQjER76Ao_3tvppY": {
+   "rating": 4.2,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJp3BwHgsZQjERzQZfxwNQNmE": {
+   "type": "Chùa",
+   "tags_v1": [
+    "Chùa"
+   ]
+  },
+  "ChIJQ2dbvVIYQjERVbGNKc5Tmcs": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJaX09zkgYQjERCtro2DeADN0": {
+   "rating": 4.3,
+   "price_level": 1,
+   "type": "Chùa phật giáo",
+   "opening_hours": [
+    "05:00-21:00"
+   ],
+   "hours_open": [
+    "05:00-21:00"
+   ],
+   "tags_v1": [
+    "Chùa phật giáo"
+   ]
+  },
+  "ChIJF8yRoecZQjERdDBeBdSRD-Y": {
+   "rating": 4.4,
+   "type": "Điểm thu hút khách du lịch",
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJu1LdzQwZQjER2DSbyyayAbs": {
+   "rating": 4.6,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJYy3rrs4ZQjER3g_-SEo5WPU": {
+   "rating": 4.4,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJDYfSGZYZQjERmSERKl2Fj7E": {
+   "rating": 4.9,
+   "type": "Khách sạn",
+   "tags_v1": [
+    "Khách sạn"
+   ]
+  },
+  "ChIJvfs2CK4ZQjERYSUrqnRYbqo": {
+   "rating": 4.7,
+   "price_level": 1,
+   "type": "Công viên",
+   "tags_v1": [
+    "Công viên"
+   ]
+  },
+  "ChIJ8e-HnOoZQjER1tLf4hD65xI": {
+   "rating": 4.9,
+   "price_level": 2,
+   "type": "Spa",
+   "opening_hours": [
+    "08:00-00:00"
+   ],
+   "hours_open": [
+    "08:00-23:59"
+   ],
+   "tags_v1": [
+    "Spa",
+    "Spa mát xa"
+   ]
+  },
+  "ChIJrd3YeXENQjERWWbMPMdY2CE": {
+   "rating": 4.3,
+   "price_level": 2,
+   "type": "Đại lý du lịch bằng thuyền",
+   "tags_v1": [
+    "Đại lý du lịch bằng thuyền"
+   ]
+  },
+  "ChIJ00Fz0rANQjERLadxvkIRXBY": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Đại lý du lịch bằng thuyền",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Đại lý du lịch bằng thuyền"
+   ]
+  },
+  "ChIJ20P_fAANQjERgFeFcOB6MAs": {
+   "rating": 3.5,
+   "price_level": 2,
+   "type": "Điểm thu hút khách du lịch",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJUbe6YK4NQjERw6BXx5s8cHM": {
+   "rating": 4.2,
+   "price_level": 2,
+   "type": "Nhà điều hành du lịch",
+   "opening_hours": [
+    "07:30-18:30"
+   ],
+   "hours_open": [
+    "07:30-18:30"
+   ],
+   "tags_v1": [
+    "Nhà điều hành du lịch"
+   ]
+  },
+  "ChIJX7bFNr8NQjERJJLeQ2lyHWo": {
+   "rating": 5,
+   "type": "Đại lý du lịch bằng thuyền",
+   "opening_hours": [
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Đại lý du lịch bằng thuyền"
+   ]
+  },
+  "ChIJT9jHPuANQjERQTnqjbIQIF8": {
+   "rating": 4.5,
+   "price_level": 2,
+   "type": "Đại lý du lịch bằng thuyền",
+   "opening_hours": [
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Đại lý du lịch bằng thuyền"
+   ]
+  },
+  "ChIJT1zm9U8NQjERQf5DsBriCgc": {
+   "rating": 5.0,
+   "price_level": 2,
+   "type": "Đại lý du lịch",
+   "opening_hours": [
+    "07:00-17:00"
+   ],
+   "hours_open": [
+    "07:00-17:00"
+   ],
+   "tags_v1": [
+    "Đại lý du lịch"
+   ]
+  },
+  "ChIJO5_PAj8XQjER34kyBjbMYNo": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "09:30-19:30"
+   ],
+   "hours_open": [
+    "09:30-19:30"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJ8ai7BQAZQjERIkxmYHcV9DQ": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "08:30-20:30"
+   ],
+   "hours_open": [
+    "08:30-20:30"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJs-NDcgAXQjERHA6tioqOfH4": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "08:00-21:00"
+   ],
+   "hours_open": [
+    "08:00-21:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJYyr_6ogXQjERoXAq8cGEzcI": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "08:00-18:00"
+   ],
+   "hours_open": [
+    "08:00-18:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn",
+    "Quán cà phê",
+    "Trung tâm văn hoá"
+   ]
+  },
+  "ChIJg2m14V0ZQjERt4DjGOdJDiE": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "07:30-19:00"
+   ],
+   "hours_open": [
+    "07:30-19:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn",
+    "Trường dạy nấu ăn"
+   ]
+  },
+  "ChIJp9cNzfwZQjERS7ZSaA95etk": {
+   "rating": 4.8,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "08:00-20:30"
+   ],
+   "hours_open": [
+    "08:00-20:30"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJrQINf-wZQjEREXiFm4Gq56M": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "10:00-12:30, 17:00-19:30"
+   ],
+   "hours_open": [
+    "10:00-12:30",
+    "17:00-19:30"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJAZn-164ZQjERV1ZAwfTgWuc": {
+   "rating": 5,
+   "price_level": 2,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "07:00-19:00",
+    "08:00-19:00"
+   ],
+   "hours_open": [
+    "08:00-19:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJ26h5ZAANQjER2otGJosJliA": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "07:00-20:00"
+   ],
+   "hours_open": [
+    "07:00-20:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn",
+    "Phòng trưng bày nghệ thuật",
+    "Lớp học vẽ",
+    "Lớp làm đồ gỗ"
+   ]
+  },
+  "ChIJyZOJHa8NQjERSvp9yMenV6Y": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "07:00-18:00"
+   ],
+   "hours_open": [
+    "07:00-18:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJx0dBXWYNQjERQzQO18QYhas": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "09:00-22:00"
+   ],
+   "hours_open": [
+    "09:00-22:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "ChIJddXz2K8PQjER4enhapQvvo8": {
+   "rating": 5,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "06:00-19:00"
+   ],
+   "hours_open": [
+    "06:00-19:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn",
+    "Trường dạy nấu ăn",
+    "Nhà điều hành du lịch",
+    "Điểm thu hút khách du lịch"
+   ]
+  },
+  "ChIJmU3hl9WrNTERBUbnSp3g5vs": {
+   "rating": 4.9,
+   "price_level": 3,
+   "type": "Lớp học nấu ăn",
+   "opening_hours": [
+    "08:00-20:00"
+   ],
+   "hours_open": [
+    "08:00-20:00"
+   ],
+   "tags_v1": [
+    "Lớp học nấu ăn",
+    "Trường dạy nấu ăn",
+    "Đại lý du lịch"
+   ]
+  },
+  "ChIJH1ujCM0XQjERcOl1lB9Ns6k": {
+   "type": "Lớp học nấu ăn",
+   "tags_v1": [
+    "Lớp học nấu ăn"
+   ]
+  },
+  "manual:banh-xeo-ba-duong": {
+   "price_range": {
+    "typical": 50000,
+    "min": null,
+    "max": 100000
+   },
+   "price_note": "~50.000đ (khoảng 1-100.000 ₫)"
+  },
+  "manual:golden-pine": {
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)"
+  },
+  "manual:sky36": {
+   "price_range": {
+    "typical": 350000,
+    "min": 100000,
+    "max": 600000
+   },
+   "price_note": "~350.000đ (khoảng 100-600 N ₫)"
+  }
+ }
+}

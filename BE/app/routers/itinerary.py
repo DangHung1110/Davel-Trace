@@ -170,7 +170,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     retired_warnings = [
         f"khong dua vao lich '{m}': {why}" for m, why in dropped_must]
 
-    retrieval = retrieval_svc.retrieve(trip, pois)
+    cells = matrix_svc.load_cells(settings.snapshot_dir)
+    retrieval = retrieval_svc.retrieve(trip, pois, cells)
     # An unverified must_visit is reported under `needs_verification` (FR-013) and
     # never planned: left in the list it is a stop the solver must make and cannot,
     # and the traveller gets no plan at all.
@@ -203,7 +204,6 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         user,
         {**ctx, "hour": trip["start_time"]},
     )
-    cells = matrix_svc.load_cells(settings.snapshot_dir)
 
     drop_counts: dict[str, int] = {}
     verified_drops = [d for d in profile_drops

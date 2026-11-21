@@ -35,9 +35,11 @@ from BE.app.services.soft_rules import (
     cafe_daypart,
     cafe_need,
     covers_dinner,
+    covers_slot,
     effective_rest,
     fits_time_of_day,
     is_food,
+    is_meal_experience,
     is_sightseeing,
     lunch_activity,
     lunch_on_site,
@@ -163,7 +165,14 @@ def check_a1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """
     counts = [0] * len(MEAL_SLOTS)
     for a in itinerary.get("activities", []):
-        if poi_category(pois.get(a.get("poi_id"), {})) != "restaurant":
+        poi = pois.get(a.get("poi_id"), {})
+        if is_meal_experience(poi):
+            # cooking class: it IS the meal of every slot it overlaps
+            for k, sl in enumerate(MEAL_SLOTS):
+                if covers_slot(to_min(a["start"]), to_min(a["end"]), sl):
+                    counts[k] += 1
+            continue
+        if poi_category(poi) != "restaurant":
             continue
         slot = meal_slot(a["start"])
         if slot is not None:

@@ -1,0 +1,692 @@
+[
+  {
+    "poi_id": "ChIJt1wLHjEYQjEREA1YGZU2yOc",
+    "name": "Trà Quán Góc Nhà Tụi Mình",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Tên là trà quán, cần rà lại category day_market; không lấy giờ từ trang tổng hợp có đánh giá kiểu place chưa rõ xuất xứ."
+  },
+  {
+    "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+    "name": "Làng Bích họa Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "ChIJH5FAHiEYQjERi-kdX4gd-eE",
+    "name": "Đà Nẵng Food Tour",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Doanh nghiệp food tour; không gán giờ lễ hội ẩm thực 2026 cho doanh nghiệp."
+  },
+  {
+    "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
+    "name": "Di tích Thành Điện Hải",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://visitdanang.travel/vi/thanh-dien-hai",
+    "quote": null,
+    "note": "Trang đọc được có nhãn Giờ mở cửa nhưng không có giá trị; không chuyển giờ Bảo tàng Đà Nẵng thành giờ Thành Điện Hải."
+  },
+  {
+    "poi_id": "ChIJmUEOJQAfQjERLPIN_eYfU9k",
+    "name": "Khu du lịch Nam Ô Heritage",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJTXOYPFQXQjERGWO0Jf095tw",
+    "name": "Khu Căn cứ Cách mạng K20",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJOyXC4H0XQjERpm2T2xpZcwU",
+    "name": "Chợ An Hải Đông",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Bỏ thông tin directory liên kết Maps vì không xác định được nguồn giờ độc lập."
+  },
+  {
+    "poi_id": "ChIJXcxl0UcYQjERVfYu-bKtvPU",
+    "name": "Chợ Thanh Bình",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJJZ47gFgZQjERvHYpZqPp0lU",
+    "name": "Chợ hải sản tươi sống biển Thanh Khê",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+    "name": "Khu ẩm thực Chợ Cồn",
+    "hours": "07:00-15:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://tixgo.vn/node/3988",
+    "quote": "Khu ẩm thực trong nhà | 07:00 – 15:00",
+    "note": "Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ2zJrN_EXQjERFRsnRcZaDjI",
+    "name": "Chợ Chiều",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://tourdanangcity.vn/cho-chieu-da-nang/",
+    "quote": "Giờ mở cửa chính xác của chợ là từ 16 giờ.",
+    "note": "Khớp đường Ngô Quyền/Thọ Quang. Nguồn nói khoảng 19h30 bắt đầu tan dần, không xác nhận giờ đóng cửa cố định nên không tạo khoảng đầy đủ. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJb-kmpPQXQjERKc6w6X8CFKc",
+    "name": "Chợ Mân Thái",
+    "hours": "08:00-21:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
+    "quote": "Giờ mở cửa: 8:00 đến 21:00",
+    "note": "Mục Chợ Mân Thái, đường Trần Duy Chiến; không phải giờ chợ cá ven biển. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJFad1TFAXQjERE9B6U1THHT4",
+    "name": "Chợ Khuê Mỹ",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+    "name": "Chợ Non Nước",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJw6DOwZ8QQjERjDMobkQxbF0",
+    "name": "Chợ Bình Kỳ",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJ55qx-YAaQjERJm3mA3vFjX0",
+    "name": "Chợ Khái Tây",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJg5P0rjoZQjER1MD61JUxPB0",
+    "name": "Chợ Hòa Khánh",
+    "hours": "04:00-21:30",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://mikazuki.com.vn/vn/cho-da-nang.html",
+    "quote": "Giờ mở cửa: 4:00 đến 21:30",
+    "note": "Mục Chợ Hòa Khánh, đường Âu Cơ; không áp giờ riêng chợ đêm. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJlU7ZlygfQjERs_tFa6tFx-s",
+    "name": "Chợ Thanh Vinh",
+    "hours": "05:00-08:00, 15:00-20:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://top1danang.com/diem-den/cho-thanh-vinh-da-nang.html",
+    "quote": "5h sáng- 8,9h sáng | khoảng từ 15 - 20 giờ hằng ngày",
+    "note": "Trích hai cụm thời gian. Nguồn 2019: buổi sáng đóng khoảng 8 hoặc 9 giờ; lấy mốc hẹp 08:00, buổi chiều khoảng 15–20. Giờ xấp xỉ, nguồn cũ cần xác nhận lại. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJWZ_M9joZQjERLLPsSJV90FY",
+    "name": "Chợ Hòa Khánh Nam",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJBVvszgofQjER58MnfuhxrRI",
+    "name": "Chợ Hòa Liên",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJN16-6x0fQjERlJytS0E3Kx8",
+    "name": "Chợ Quan Nam",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJWZUpXf0RQjER6uu8gU2gIhI",
+    "name": "Mai Vang (Yellow Blossom) Bonsai Garden",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "ChIJO61z6OMZQjERxyCrO6bO28I",
+    "name": "Chợ Trời (Flea Market)",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJP1PH5CMYQjERBYmCltC5WCE",
+    "name": "Chợ An Hải Bắc",
+    "hours": "07:00-17:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://danangbest.com/cho-an-hai-bac-thien-duong-am-thuc-va-mua-sam-tai-thanh-pho.html",
+    "quote": "Thời gian tham quan: 7h00 - 17h00",
+    "note": "Khung chung hẹp hơn với https://kienoceanhotel.com/cho-an-hai-bac-da-nang/ ghi “Giờ mở cửa: 4:00 – 18:30 hàng ngày”. Nguồn chính gọi đây là thời gian tham quan; không kết luận sạp ngừng bán ngoài khung này. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/2177056870",
+    "name": "Thác Tóc Tiên",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "osm:node/4386676224",
+    "name": "Chợ Miếu Bông",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/4706189591",
+    "name": "To Quoc Ghi Cong",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/4924323121",
+    "name": "Fishing Village and Fleet",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/5273998822",
+    "name": "Cầu Tiên Sơn",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/5273999121",
+    "name": "Cầu Thuận Phước",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/5276547123",
+    "name": "Cau Nguyen Van Troi Bridge",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/6528451001",
+    "name": "Cây đa Đò Xu",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/7095169369",
+    "name": "Non La",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "osm:node/7276380289",
+    "name": "Cầu Sông Hàn",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/9921315929",
+    "name": "Lưu Niệm - Đặc Sản",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "osm:node/10709724107",
+    "name": "Làng đá mỹ nghệ Non Nước",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/10709738005",
+    "name": "Làng chiếu Cẩm Nê",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated. Giờ 07:30–17:30 tại nguồn https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/lang-chieu-cam-ne-da-nang/ dành cho hộ tổ chức trải nghiệm; không gán cho cả làng."
+  },
+  {
+    "poi_id": "osm:node/10709738105",
+    "name": "Làng nước mắm Nam Ô",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://daivietourist.vn/lang-nghe-nuoc-mam-nam-o-da-nang/",
+    "quote": "Làng nghề không có giờ mở cửa cố định",
+    "note": "public, no hours stated. Trích phần câu: làng dân cư sản xuất; không chuyển giờ riêng của hộ làm mắm thành giờ chung làng. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/10723988763",
+    "name": "Đài tưởng niệm thảm sát Hà My",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/11427582964",
+    "name": "Thai Market",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "osm:node/12811972501",
+    "name": "Mart Souvenir",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "osm:node/13293564930",
+    "name": "Himawari",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "osm:node/13677406601",
+    "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "osm:node/13913398302",
+    "name": "Suối Lạc",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/13913400201",
+    "name": "Suối Ngọc",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/14067929701",
+    "name": "Bonny handmade",
+    "hours": "08:00-11:30, 14:00-17:30",
+    "closed_days": [],
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/14067929701",
+    "quote": "Mo-Su 08:00-11:30, 14:00-17:30",
+    "note": "opening_hours của chính node Bonny handmade, 25 An Thượng 35. OSM ghi cả tuần; đây là cửa hàng handmade, không phải chợ."
+  },
+  {
+    "poi_id": "osm:node/14130293535",
+    "name": "Tượng đài Dũng sĩ Điện Ngọc",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "ChIJBT1hHA4XQjERHcTlavRMj5I",
+    "name": "Cửa hàng Đặc Sản Đà Nẵng Làm Quà",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJlZA7YgEZQjERwBfzBwsUo18",
+    "name": "Đặc sản Đà Nẵng làm quà - Dương Lê",
+    "hours": "09:00-21:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://monngondanang.vn/cua-hang-dac-san-da-nang-duong-le/",
+    "quote": "Giờ mở cửa: 09:00 – 21:00",
+    "note": "Nguồn nêu cơ sở 516 Núi Thành phù hợp khu vực tọa độ đầu vào, cùng chi nhánh 151A Nguyễn Văn Thoại; đây là cửa hàng đặc sản. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJWaLrVbMZQjERa8YCUGiCkX8",
+    "name": "Đặc Sản Chả Bò Bà Tâm Đà Nẵng",
+    "hours": "06:00-22:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://ruoctom.com/cha-bo-ba-tam-da-nang/",
+    "quote": "Giờ mở cửa: 6h00 – 22h00",
+    "note": "Nguồn nêu Chả bò Bà Tâm, 31 Nguyễn Hữu Cảnh, Thuận Phước; cửa hàng đặc sản. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "ChIJu5AYG0UXQjEREoejRui0VzY",
+    "name": "Đặc Sản Ngon Đà Nẵng - Đặc Sản Làm Quà shop online",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJy9eI3pEZQjERRjXgQMj8m-g",
+    "name": "Mê Vui - Đặc sản Đà Nẵng SẠCH",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJ4_aypxYZQjERzFP2v0FweY8",
+    "name": "Cửa hàng Đặc sản Biển Đà Nẵng",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJSwMjjYEXQjERBbThTSOPeKY",
+    "name": "Siêu thị Đặc sản Hương Đà",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJpRFvp6sZQjERY_CDfnMCx2w",
+    "name": "Vigift Đà Nẵng – Quà Đặc Sản",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Nguồn https://vigift.framer.website/lien-he nêu 70–72 Võ Văn Kiệt, chưa khớp vị trí đầu vào; không áp giờ chi nhánh này."
+  },
+  {
+    "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
+    "name": "Cô Na - ĐẶC SẢN ĐÀ NẴNG",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Cửa hàng/quà lưu niệm, cần rà lại category day_market."
+  },
+  {
+    "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
+    "name": "RAIN MUSIC BOX & GAME",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "ChIJu1LdzQwZQjER2DSbyyayAbs",
+    "name": "Công viên Cầu vượt Ngã Ba Huế",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "ChIJYy3rrs4ZQjER3g_-SEo5WPU",
+    "name": "Công viên 29/3",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "ChIJvfs2CK4ZQjERYSUrqnRYbqo",
+    "name": "Công viên hồ Ngọc Anh",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:way/35952504",
+    "name": "Chợ Hội An",
+    "hours": "06:00-22:00",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://visitdanang.travel/vi/tron-bo-kinh-nghiem-tham-quan-va-mua-sam-cho-hoi-an-11365",
+    "quote": "Chợ Hội An hoạt động từ sáng sớm, khoảng 6h cho tới 22h đêm",
+    "note": "Trích phần câu có giờ xấp xỉ; chợ Hội An, không phải chợ đêm Nguyễn Hoàng. Giờ từng sạp có thể khác. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/4171964390",
+    "name": "Làng gốm Thanh Hà",
+    "hours": "08:00-17:30",
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/lang-gom-thanh-ha-hoi-an-kinh-nghiem-tham-quan-day-du/",
+    "quote": "Làng gốm Thanh Hà giờ mở cửa tham khảo từ: 8h00 – 17h30",
+    "note": "Trích phần câu; giờ tham khảo khu tham quan làng gốm. https://vevin.vn/vn/blog/detail/lang-gom-thanh-ha-181 cũng ghi 8:00–17:30. closed_days=[]: chưa xác minh ngày nghỉ."
+  },
+  {
+    "poi_id": "osm:node/10709738006",
+    "name": "Làng mộc Kim Bồng",
+    "hours": null,
+    "closed_days": [],
+    "source": "web",
+    "evidence_url": "https://www.greensm.com/vn-vi/news/lang-moc-kim-bong",
+    "quote": "Làng mở cửa tự do cả ngày",
+    "note": "public, no hours stated. Trích phần câu; 07:00–17:00 là thời gian đẹp nhất khi xưởng hoạt động, không phải giờ mở–đóng toàn làng."
+  },
+  {
+    "poi_id": "osm:node/4517387589",
+    "name": "Làng Triêm Tây",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:node/4171925609",
+    "name": "Cồn Thuận Tình",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:relation/3938690",
+    "name": "Vườn Tượng An Hội",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:way/35952574",
+    "name": "Cầu An Hội",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  },
+  {
+    "poi_id": "osm:way/1109970009",
+    "name": "Nhà thờ Saint Denis",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "OSM đã kiểm tra; tìm web theo tên/địa điểm nhưng chưa có giờ mở–đóng đọc được và khớp POI. Không dùng hours_now làm bằng chứng. closed_days=[] nghĩa là chưa có bằng chứng ngày nghỉ. Không mặc định truy cập tự do/cả ngày; không lấy giờ cơ sở lân cận, cáp treo hoặc nhà hàng trùng tên."
+  },
+  {
+    "poi_id": "osm:way/149699484",
+    "name": "Công viên Biển Đông",
+    "hours": null,
+    "closed_days": [],
+    "source": "none",
+    "evidence_url": null,
+    "quote": null,
+    "note": "public, no hours stated"
+  }
+]

@@ -1,0 +1,546 @@
+[
+ {
+  "poi_id": "osm:way/140401174",
+  "name": "Hồ Xanh Sơn Trà",
+  "verdict": "SAI",
+  "hours_src": "24h",
+  "ticket_src": "Miễn phí",
+  "links": [
+   "https://vinpearl.com/vi/du-lich-ho-xanh-da-nang-ve-dep-tho-mong-giua-long-thanh-pho"
+  ],
+  "batch": 0
+ },
+ {
+  "poi_id": "manual:son-tra-bai-rang",
+  "name": "Bãi Rạng Sơn Trà",
+  "verdict": "SAI",
+  "hours_src": "07:30-18:30 (tháng 3-9) / 07:30-17:30 (tháng 10-2); dịch vụ lặn: 09:00-18:00",
+  "ticket_src": "Miễn phí (chỉ phí gửi xe ~10.000 VNĐ)",
+  "links": [
+   "https://locatravel.vn/ve-lan-ngam-san-ho-ban-dao-son-tra",
+   "https://danangbest.com/bai-rang-da-nang-diem-den-ly-tuong-cho-tin-do-yeu-thich-bien.html"
+  ],
+  "batch": 0
+ },
+ {
+  "poi_id": "manual:son-tra-bai-da-den",
+  "name": "Bãi Đá Đen Sơn Trà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận",
+  "ticket_src": "Không có nguồn xác nhận",
+  "links": [],
+  "batch": 0
+ },
+ {
+  "poi_id": "ChIJHZakNa8ZQjERWNFToM16eB4",
+  "name": "Chùa Linh Ứng Sơn Trà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa cụ thể",
+  "ticket_src": "Không có nguồn xác nhận",
+  "links": [],
+  "batch": 0
+ },
+ {
+  "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+  "name": "Chợ Đêm An Thượng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa cụ thể",
+  "ticket_src": "Không có nguồn xác nhận",
+  "links": [],
+  "batch": 0
+ },
+ {
+  "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+  "name": "Bảo tàng 3D Art In Paradise",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "09:00-18:00",
+  "ticket_src": "Không có nguồn xác nhận mức giá cụ thể",
+  "links": [
+   "https://danatravel.vn/thong-tin-du-lich/bang-gia-ve-tham-quan-cac-diem-du-lich-da-nang-khong-the-bo-qua.html?srsltid=AYCX9vJCaZdYFHYT5fnnnrnMZxZ_RLSoeYffDOVV1p-7YhCrjV4ugwTc"
+  ],
+  "batch": 0
+ },
+ {
+  "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
+  "name": "Son Tra Retreat - Garden Lounge & Eatery",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa cụ thể",
+  "ticket_src": "Không có nguồn xác nhận mức giá cụ thể",
+  "links": [
+   "https://tiawellnessresort.com/vi/ban-dao-son-tra-kinh-nghiem-di-tron-mot-ngay-o-da-nang/",
+   "https://www.facebook.com/tongdai1022/posts/quy-%C4%91%E1%BB%8Bnh-th%E1%BB%9Di-gian-tham-quan-b%C3%A1n-%C4%91%E1%BA%A3o-s%C6%A1n-tr%C3%A0-/1368011345513355/"
+  ],
+  "batch": 0
+ },
+ {
+  "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
+  "name": "Khu Du Lịch Sinh Thái Lái Thiêu",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có dữ liệu nguồn",
+  "ticket_src": "Không có dữ liệu nguồn",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
+  "name": "DD WONDERLAND",
+  "verdict": "SAI",
+  "hours_src": "08:00-22:00 (Thứ 2, Chủ Nhật), 08:30-22:00 (Thứ 3-Thứ 6), 09:00-22:00 (Thứ 7)",
+  "ticket_src": "40.000 - 60.000 (cheap)",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "osm:way/14131302",
+  "name": "Công viên Ấn tượng Hội An (show Ký ức Hội An)",
+  "verdict": "SAI",
+  "hours_src": "15:00 - 21:30, không ghi nghỉ thứ 3",
+  "ticket_src": "600.000 (expensive)",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "osm:node/5286977425",
+  "name": "Công viên Suối khoáng nóng Núi Thần Tài",
+  "verdict": "SAI",
+  "hours_src": "08:30 - 17:30",
+  "ticket_src": "350.000 - 450.000 (medium)",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+  "name": "Ngũ Hành Sơn",
+  "verdict": "SAI",
+  "hours_src": "07:00 - 17:00",
+  "ticket_src": "~80.000 (bao gồm vé vào + thang máy, cheap)",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "ChIJEymIkTYYQjERWO-pgjkKGMk",
+  "name": "Bảo Tàng Đà Nẵng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không tìm thấy dữ liệu nguồn về Bảo Tàng Đà Nẵng chung, chỉ có thông tin Bảo tàng Mỹ thuật Đà Nẵng mở 08:00-17:00",
+  "ticket_src": "Không có dữ liệu nguồn về giá vé Bảo Tàng Đà Nẵng chung",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
+  "name": "Sun World Bà Nà Hills",
+  "verdict": "SAI",
+  "hours_src": "07:30 - 21:30 / 08:00 - 22:00 tùy nguồn",
+  "ticket_src": "600.000 - 1.250.000 (expensive)",
+  "links": [],
+  "batch": 1
+ },
+ {
+  "poi_id": "ChIJ6UAZeAAZQjERzK3T81riZmo",
+  "name": "Phố đi bộ Bạch Đằng",
+  "verdict": "ĐÚNG",
+  "hours_src": "15:00-23:59",
+  "ticket_src": "free (miễn phí vào tham quan)",
+  "links": [
+   "https://daivietourist.vn/pho-di-bo-bach-dang-da-nang/"
+  ],
+  "batch": 2
+ },
+ {
+  "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+  "name": "Rừng Dừa Bảy Mẫu",
+  "verdict": "SAI",
+  "hours_src": "07:00-17:00 (tham khảo, có nguồn ghi 7h30-17h30 / 7h30-18h30 tùy ngày)",
+  "ticket_src": "medium, vé vào cổng 30.000đ, combo thuyền thúng 150.000-200.000đ/người",
+  "links": [
+   "https://danaticket.com/san-pham/ve-rung-dua-bay-mau",
+   "https://rungduabaymau.vn/"
+  ],
+  "batch": 2
+ },
+ {
+  "poi_id": "manual:vinwonders-nam-hoi-an",
+  "name": "VinWonders Nam Hội An",
+  "verdict": "ĐÚNG một phần",
+  "hours_src": "Thứ 2-Thứ 6: 09:00-19:40, Thứ 7-Chủ nhật: 09:00-21:20",
+  "ticket_src": "expensive, vé vào cửa người lớn từ 620.000-700.000đ",
+  "links": [
+   "https://checkinhoian.com/index.php/du-la-ch-a-na-ng/97-50-d-a-di-m-du-l-ch-da-n-ng-h-p-d-n-nh-t-b-n-tha-h-l-a-ch-n"
+  ],
+  "batch": 2
+ },
+ {
+  "poi_id": "osm:way/198804483",
+  "name": "Thánh địa Mỹ Sơn",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "ticket_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "links": [],
+  "batch": 2
+ },
+ {
+  "poi_id": "osm:node/4601279489",
+  "name": "Phố cổ Hội An",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "ticket_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "links": [],
+  "batch": 2
+ },
+ {
+  "poi_id": "ChIJL1GKWJYZQjERLrEGqlK2kwQ",
+  "name": "Cầu Rồng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "ticket_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "links": [],
+  "batch": 2
+ },
+ {
+  "poi_id": "ChIJW0KcgfI9QjERJpkPfjssyfo",
+  "name": "Ghềnh Bàng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "ticket_src": "Không có nguồn được xác nhận trong dữ liệu tìm kiếm",
+  "links": [],
+  "batch": 2
+ },
+ {
+  "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
+  "name": "Bãi biển Sơn Trà",
+  "verdict": "ĐÚNG phần giờ mùa mưa, SAI phần giờ mùa khô, ĐÚNG giá",
+  "hours_src": "07:30-18:30 (tháng 3-9), 07:30-17:30 (tháng 10-2 năm sau)",
+  "ticket_src": "Miễn phí (free)",
+  "links": [
+   "https://gocnhinthoidai.vn/du-lich/mo-cua-tham-quan-ban-dao-son-tra-tu-hom-nay.html",
+   "https://vietnamnet.vn/da-nang-mo-lai-cac-tuyen-tham-quan-ban-dao-son-tra-sau-gan-3-nam-dong-cua-2442770.html"
+  ],
+  "batch": 3
+ },
+ {
+  "poi_id": "osm:way/630377259",
+  "name": "Bãi biển Tiên Sa",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa cụ thể cho bãi biển Tiên Sa riêng",
+  "ticket_src": "Không có nguồn xác nhận giá vé riêng cho bãi biển Tiên Sa",
+  "links": [],
+  "batch": 3
+ },
+ {
+  "poi_id": "osm:way/565592419",
+  "name": "Bảo tàng Hội An",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa 07:30-11:30, 13:30-17:30",
+  "ticket_src": "Vé đã bao gồm trong vé phố cổ 80.000 VNĐ (người Việt) / 120.000 VNĐ (quốc tế) (cheap)",
+  "links": [
+   "https://dulichvietnam.com.vn/ve-tham-quan-du-lich-hoi-an-2025.html"
+  ],
+  "batch": 3
+ },
+ {
+  "poi_id": "osm:node/12344125229",
+  "name": "Precious Heritage Art Gallery Museum",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa 08:00-20:00",
+  "ticket_src": "Không có nguồn xác nhận giá vé miễn phí",
+  "links": [],
+  "batch": 3
+ },
+ {
+  "poi_id": "ChIJLTomluP3QTERUy-b9iAYR8U",
+  "name": "Khu du lịch sinh thái Suối Hoa",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa 09:00-17:00",
+  "ticket_src": "Không có nguồn xác nhận giá vé medium",
+  "links": [],
+  "batch": 3
+ },
+ {
+  "poi_id": "ChIJ5xkIv7EZQjERDZQIupNo09w",
+  "name": "Bến Du Thuyền Đà Nẵng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa 18:00-21:45",
+  "ticket_src": "Giá du thuyền từ 120.000 VNĐ trở lên",
+  "links": [
+   "https://www.facebook.com/groups/1263330090446991/posts/29054903260862967/"
+  ],
+  "batch": 3
+ },
+ {
+  "poi_id": "ChIJAdChYQAZQjERdBTX1_66Q_8",
+  "name": "Chợ Đêm Sơn Trà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận giờ mở cửa 18:00-23:00",
+  "ticket_src": "Không có nguồn xác nhận giá vé, chợ đêm thường miễn phí vào cửa",
+  "links": [],
+  "batch": 3
+ },
+ {
+  "poi_id": "osm:node/2093848429",
+  "name": "Kim Sơn (Ngũ Hành Sơn)",
+  "verdict": "SAI",
+  "hours_src": "06:00 - 21:00",
+  "ticket_src": "free (miễn phí)",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "osm:node/2093848431",
+  "name": "Mộc Sơn (Ngũ Hành Sơn)",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác nhận",
+  "ticket_src": "Không có nguồn xác nhận",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "osm:node/2093848443",
+  "name": "Thổ Sơn (Ngũ Hành Sơn)",
+  "verdict": "SAI",
+  "hours_src": "07:00 - 17:00",
+  "ticket_src": "free (miễn phí)",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "ChIJ5ySJbAAZQjEROESCTb3NJsw",
+  "name": "Bến Du Thuyền Sông Hàn",
+  "verdict": "ĐÚNG",
+  "hours_src": "18:00 - 21:45 (chuyến cuối khởi hành ~21h30)",
+  "ticket_src": "medium (120.000 - 200.000 VNĐ)",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "ChIJrd3YeXENQjERWWbMPMdY2CE",
+  "name": "Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An",
+  "verdict": "ĐÚNG",
+  "hours_src": "07:00 - 17:00",
+  "ticket_src": "medium (150.000 - 250.000 VNĐ/thuyền)",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "ChIJ00Fz0rANQjERLadxvkIRXBY",
+  "name": "Thuyền Thúng Tượng Thúy - Coconut Basket Boat Tour Hoi An",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn riêng xác nhận",
+  "ticket_src": "Không có nguồn riêng xác nhận",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "ChIJ20P_fAANQjERgFeFcOB6MAs",
+  "name": "Điểm đón khách du lịch thuyền thúng cầu Hói Lăng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn riêng xác nhận",
+  "ticket_src": "Không có nguồn riêng xác nhận",
+  "links": [],
+  "batch": 4
+ },
+ {
+  "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+  "name": "Rừng dừa Hội An, basketboat, thuyền thúng Lê Hiền",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực riêng cho cơ sở Lê Hiền",
+  "ticket_src": "Không có nguồn xác thực riêng cho cơ sở Lê Hiền",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "ChIJT9jHPuANQjERQTnqjbIQIF8",
+  "name": "Thuyền thúng Dũng Thúy",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực riêng cho cơ sở Dũng Thúy",
+  "ticket_src": "Không có nguồn xác thực riêng cho cơ sở Dũng Thúy",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "ChIJT1zm9U8NQjERQf5DsBriCgc",
+  "name": "Dịch Vụ Thuyền Thúng Bến Dừa",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực riêng cho cơ sở Bến Dừa",
+  "ticket_src": "Không có nguồn xác thực riêng cho cơ sở Bến Dừa",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "osm:node/5513474821",
+  "name": "Công viên Đất nung Thanh Hà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực",
+  "ticket_src": "Không có nguồn xác thực",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "ChIJwandNwA9QjERWjnwsYXsQrk",
+  "name": "Nhất Lâm Thủy Trang Trà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực",
+  "ticket_src": "Không có nguồn xác thực",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
+  "name": "Bảo tàng Mỹ thuật Đà Nẵng",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực",
+  "ticket_src": "Không có nguồn xác thực",
+  "links": [],
+  "batch": 5
+ },
+ {
+  "poi_id": "osm:node/5273998823",
+  "name": "Cầu Trần Thị Lý",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn xác thực",
+  "ticket_src": "Không có nguồn xác thực giá vé",
+  "links": [
+   "https://danangopentour.vn/rung-dua-bay-mau-hoi-an.html",
+   "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267"
+  ],
+  "batch": 5
+ },
+ {
+  "poi_id": "osm:node/6346486685",
+  "name": "Cây Đa Ngàn Năm Sơn Trà",
+  "verdict": "SAI",
+  "hours_src": "07:30-18:30 (tháng 3-9), 07:30-17:30 (tháng 10-2)",
+  "ticket_src": "free",
+  "links": [
+   "https://danangbest.com/cay-da-ngan-nam-da-nang-bieu-tuong-bat-diet-cua-suc-song.html",
+   "https://nhandan.vn/da-nang-chinh-thuc-mo-lai-tuyen-tham-quan-da-ngoai-tai-ban-dao-son-tra-post908256.html"
+  ],
+  "batch": 6
+ },
+ {
+  "poi_id": "osm:node/11888483369",
+  "name": "Chợ Phước Mỹ",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "08:00 - ~24:00 (theo nguồn cũ 2024, không có cập nhật 2025-2026 chính thức)",
+  "ticket_src": "không có thông tin vé tham quan",
+  "links": [
+   "https://sontratravel.wordpress.com/2024/12/09/cho-phuoc-my-da-nang-goc-nho-binh-yen-giua-long-da-thanh/"
+  ],
+  "batch": 6
+ },
+ {
+  "poi_id": "manual:hoi-an-pho-di-bo-hoa-dang",
+  "name": "Phố đi bộ phố cổ Hội An",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "không có nguồn xác nhận chính thức",
+  "ticket_src": "không có nguồn xác nhận chính thức",
+  "links": [],
+  "batch": 6
+ },
+ {
+  "poi_id": "osm:way/35952591",
+  "name": "Chợ vải Hội An",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "không có nguồn xác nhận chính thức",
+  "ticket_src": "không có nguồn xác nhận chính thức",
+  "links": [],
+  "batch": 6
+ },
+ {
+  "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
+  "name": "Bãi Tắm Non Nước",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "không có nguồn xác nhận chính thức",
+  "ticket_src": "không có nguồn xác nhận chính thức",
+  "links": [],
+  "batch": 6
+ },
+ {
+  "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
+  "name": "Bãi Sủng Cỏ",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "không có nguồn xác nhận chính thức",
+  "ticket_src": "không có nguồn xác nhận chính thức",
+  "links": [],
+  "batch": 6
+ },
+ {
+  "poi_id": "ChIJEaxZWQAXQjERUp3M2TesuM8",
+  "name": "Bãi tắm hàng dừa Mỹ Khê",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "không có nguồn xác nhận chính thức",
+  "ticket_src": "free",
+  "links": [
+   "https://vemaybayvietmy.com/nhung-dia-diem-tham-quan-mien-phi-tai-da-nang.html"
+  ],
+  "batch": 6
+ },
+ {
+  "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
+  "name": "Bãi tắm Nguyễn Thần Hiến",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn dữ liệu cụ thể",
+  "ticket_src": "Không có nguồn dữ liệu cụ thể",
+  "links": [],
+  "batch": 7
+ },
+ {
+  "poi_id": "ChIJs5puLQA9QjERIaHbrBAGpjA",
+  "name": "Dịch Vụ Cano Du Lịch Lặn Biển Ngắm San Hô Sơn Trà",
+  "verdict": "SAI",
+  "hours_src": "06:00-18:00, các tour hoạt động phổ biến 07:00-17:30",
+  "ticket_src": "250.000 - 450.000 (medium)",
+  "links": [
+   "https://www.dulichsonghan.net/lan-ngam-san-ho-da-nang-283.html",
+   "https://veduthuyen.vn/tour-du-thuyen/tour-lan-ngam-san-ho-son-tra-da-nang-2026-combo-4-tro-choi-chi-300k/"
+  ],
+  "batch": 7
+ },
+ {
+  "poi_id": "ChIJPbgJ4DY9QjER7OSjP2_jSC8",
+  "name": "Radar Sơn Trà 1",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn dữ liệu cụ thể",
+  "ticket_src": "Không có nguồn dữ liệu cụ thể",
+  "links": [],
+  "batch": 7
+ },
+ {
+  "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
+  "name": "Nhà Vọng Cảnh",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn dữ liệu cụ thể",
+  "ticket_src": "Không có nguồn dữ liệu cụ thể",
+  "links": [],
+  "batch": 7
+ },
+ {
+  "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
+  "name": "View Ngắm Bình Minh Sơn Trà",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn dữ liệu cụ thể",
+  "ticket_src": "Không có nguồn dữ liệu cụ thể",
+  "links": [],
+  "batch": 7
+ },
+ {
+  "poi_id": "osm:node/10154412164",
+  "name": "Fantasy Park",
+  "verdict": "KHÔNG RÕ",
+  "hours_src": "Không có nguồn dữ liệu cụ thể, giờ vận hành phổ biến của Ba Na Hills 08:00-22:00",
+  "ticket_src": "Giá vé đã bao gồm trong vé vào cửa Khu du lịch Sun World Ba Na Hills",
+  "links": [],
+  "batch": 7
+ },
+ {
+  "poi_id": "manual:mikazuki-waterpark",
+  "name": "Mikazuki Water Park 365",
+  "verdict": "SAI",
+  "hours_src": "Thứ 2-Thứ 6: 09:00-20:00, Cuối tuần/lễ: 08:30-20:00",
+  "ticket_src": "350.000 (ngày thường) - 400.000 (cuối tuần, medium)",
+  "links": [
+   "https://danatravel.vn/thong-tin-du-lich/bang-gia-ve-tham-quan-cac-diem-du-lich-da-nang-khong-the-bo-qua.html?srsltid=AYCX9vKJmqKXmBdcAoz1kt-fzQ79doj1VfP4nxDdvn3i8BpBzoZl4V1a",
+   "https://danangfantasticity.com/ru/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+  ],
+  "batch": 7
+ }
+]

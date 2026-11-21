@@ -1,0 +1,161 @@
+{
+ "note": "Quyết định từ ghi chú + ảnh của người dùng ngày 2026-11-19 (review_v21_20261119.json + tin nhắn). File sắp sau decisions_review_* nên ghi đè. Xóa = status excluded (giữ bản ghi để truy vết).",
+ "items": {
+  "osm:node/9921282483": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights"
+  },
+  "osm:node/14045144381": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Viet Nam's Delights"
+  },
+  "ChIJl21Hd_4YQjERF980f9HS9Cc": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê"
+  },
+  "ChIJp3BwHgsZQjERzQZfxwNQNmE": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #6): Chùa Làng Thanh Khê"
+  },
+  "osm:node/4279536690": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #7): Banh Mi Phuong"
+  },
+  "osm:node/11888968769": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #7): Quán ăn cô phưởng"
+  },
+  "ChIJGSKUUwCLQTERr0Je7WP5Xqc": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)"
+  },
+  "ChIJZSAyL0YfQjERMP2R9yBDRwY": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)"
+  },
+  "ChIJZ9UJGQQZQjERFL90XKMPBGk": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #8)"
+  },
+  "ChIJ17mmuaQRQjERUiexX9MhcdI": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9, #11)"
+  },
+  "ChIJWe_7hboQQjERxap-mizn-ZY": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9)"
+  },
+  "ChIJfQr_phEZQjER5leh47CfKTQ": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #9)"
+  },
+  "osm:node/7095169367": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #10)"
+  },
+  "osm:node/8883385553": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa (ảnh #10)"
+  },
+  "ChIJHZakNa8ZQjERWNFToM16eB4": {
+   "name": "Chùa Linh Ứng Sơn Trà",
+   "status": "active"
+  },
+  "ChIJabEOcucXQjER-8MNU9FNODw": {
+   "status": "excluded",
+   "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): tượng Quan Thế Âm nằm trong khuôn viên chùa"
+  },
+  "ChIJuzUYUgAXQjER7uqAcJPQMY0": {
+   "status": "excluded",
+   "status_reason": "gộp vào Chùa Linh Ứng Sơn Trà (ChIJHZakNa8ZQjERWNFToM16eB4): cổng chùa"
+  },
+  "ChIJ6UAZeAAZQjERzK3T81riZmo": {
+   "name": "Phố đi bộ Bạch Đằng",
+   "category": "outdoor_landmark"
+  },
+  "ChIJLVK-0XI9QjER5-Q0ZZoz5wE": {
+   "status": "excluded",
+   "status_reason": "khu vực chung — đã tách thành điểm con: Chùa Linh Ứng Sơn Trà, Đỉnh Bàn Cờ, Cây Đa Ngàn Năm, Mũi Nghê, Hải đăng Tiên Sa, Bãi biển Tiên Sa, Nhất Lâm Thủy Trang Trà, Radar, Vịnh/Bãi biển Sơn Trà"
+  },
+  "osm:node/6346486685": {
+   "name": "Cây Đa Ngàn Năm Sơn Trà"
+  },
+  "osm:node/5286977425": {
+   "name": "Công viên Suối khoáng nóng Núi Thần Tài",
+   "category": "paid_attraction",
+   "status": "active"
+  },
+  "ChIJlxydWJEZQjER5GSMuHJHtak": {
+   "status": "active",
+   "price_note": "Gói qua đêm theo người (183 Nam Cao, Hòa Khánh Nam): lều 2 người/lều 695.000đ (T2–T6, CN) / 745.000đ (T7, lễ); phòng 745.000đ / 795.000đ; gồm ăn sáng, cà phê, BBQ tối (lều), hồ bơi. Không có vé vào cổng riêng (nghiencamtrai 12/10/2025)."
+  },
+  "ChIJg5OvAgAhQjERKbrq9-Wza-U": {
+   "status": "excluded",
+   "status_reason": "người dùng xóa 2026-11-19 (nghi ngừng hoạt động: cưỡng chế tháo dỡ 4/2024)"
+  },
+  "ChIJ-cf9B7wQQjERutUzeynzw8w": {
+   "status": "active",
+   "price_note": "Chùa Quán Thế Âm (48 Sư Vạn Hạnh, Ngũ Hành Sơn) — KHÁC Chùa Linh Ứng Sơn Trà; trong chùa có Bảo tàng Văn hóa Phật giáo."
+  },
+  "osm:node/4601279489": {
+   "price_note": "Vé phố cổ 2 mức: 80.000đ = cảnh quan + Chùa Cầu HOẶC Miếu Quan Công + 2 công trình văn hóa; 120.000đ = cảnh quan + Chùa Cầu/Miếu Quan Công + hệ thống bảo tàng + 3 công trình. Miễn vé trẻ <16 tuổi, học sinh, công dân VN ≥60 tuổi (mang giấy tờ). Dạo phố, chợ, chợ đêm, thả hoa đăng, bài chòi: không cần vé."
+  },
+  "osm:node/7127464285": {
+   "price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ. Đóng cửa ngày 12 và 27 hằng tháng."
+  },
+  "osm:node/3189923484": {
+   "price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
+  },
+  "osm:way/631074714": {
+   "price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
+  },
+  "osm:node/2076856032": {
+   "price_note": "Thuộc hệ thống bảo tàng — chỉ vé 120.000đ."
+  },
+  "osm:way/565592419": {
+   "price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
+  },
+  "osm:way/209494258": {
+   "price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé."
+  },
+  "osm:node/7127442985": {
+   "price_note": "Trong khu phố cổ; tên không có trong danh sách rút gọn — xác nhận tại quầy khi rọc vé. Nhà 66 Bạch Đằng tạm đóng sửa chữa từ 09/3/2026; chương trình chuyển sang Hội trường Quảng trường Sông Hoài, 01 Cao Hồng Lãnh (hoianheritage 11/3/2026). Suất cũ 10:15 và 15:15 — chưa xác nhận mở lại, để unknown."
+  },
+  "osm:way/39268284": {
+   "price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k). Đi ngắm bên ngoài không cần vé."
+  },
+  "manual:cu-lao-cham": {
+   "price_note": "Vé tham quan 70.000đ; PHÍ BẮT BUỘC đi lại từ Cửa Đại: cano ~150.000đ (15 phút) hoặc tàu gỗ ~50.000đ (1 giờ); tour lặn 700.000đ. Biển lặng tháng 3-8 (nangtrip)."
+  },
+  "manual:hai-van-quan": {
+   "cluster_id": "hai_van",
+   "price_note": "70.000đ/lượt (khách VN và quốc tế) từ 2/6/2026 tới 31/12/2028; trẻ dưới 1,2 m miễn phí; cư dân Huế, Đà Nẵng giảm 50% (vnexpress 1/6/2026). Nằm trên đỉnh Đèo Hải Vân — một phần của chuyến đi đèo."
+  },
+  "osm:node/1036552571": {
+   "cluster_id": "hai_van",
+   "price_note": "Qua đèo miễn phí; Hải Vân Quan trên đỉnh đèo (manual:hai-van-quan) thu 70.000đ, 07:00-17:30 — đề xuất ghé cùng."
+  },
+  "osm:way/631064893": {
+   "price_note": "Chọn Chùa Cầu HOẶC Miếu Quan Công (cả vé 80k và 120k)."
+  },
+  "manual:son-tra-bai-da-den": {
+   "name": "Bãi Đá Đen Sơn Trà"
+  },
+  "manual:son-tra-bai-rang": {
+   "cluster_id": "bai_rang",
+   "price_note": "Không vé vào; gửi xe bắt buộc ~10.000đ; chòi ~300.000đ/6 người. Cách KDL Sinh thái Suối Rạng ~166 m — đề xuất ghé cùng."
+  },
+  "ChIJ17GORdEXQjERhkujx-kwJA0": {
+   "cluster_id": "bai_rang"
+  },
+  "osm:way/140401174": {
+   "price_note": "Hồ tự nhiên, nơi công cộng: mức free và khung giờ an toàn lấy theo luật nơi công cộng (inferred); chưa có nguồn tin cậy về vé/giờ (người dùng 19/11)."
+  },
+  "ChIJK4sVPc0ZQjERdGROWQ8MMg4": {
+   "price_note": "Helio Kids/Play tạm ngưng từ 05/09/2025 để nâng cấp (danangfantasticity 09/09/2025); nay chuyển mô hình Art Mall — giờ toàn tổ hợp chưa có nguồn, để unknown."
+  },
+  "osm:way/14131302": {
+   "price_note": "Vé ECO người lớn ≥140cm 600.000đ gồm vào công viên + show (ticketgo); HIGH/VIP đắt hơn. Show 20:00-21:00, nghỉ thứ Ba; vào trước 15-20 phút."
+  }
+ }
+}

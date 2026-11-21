@@ -35,6 +35,11 @@ class DenseCells(Mapping):
         self._km = km
         self._len: int | None = None
 
+    @property
+    def row_ids(self) -> list[str]:
+        """poi_ids that own a row (cheap; avoids splitting every "a->b" key)."""
+        return list(self._index)
+
     def _cell(self, key: str) -> dict | None:
         a, sep, b = key.partition(ROW_SEP)
         i, j = self._index.get(a), self._index.get(b)

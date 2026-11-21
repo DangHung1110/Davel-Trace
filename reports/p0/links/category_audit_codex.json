@@ -1,0 +1,818 @@
+[
+  {
+    "poi_id": "ChIJOQ-obAARQjERQ4kQhqErSkw",
+    "name": "Bãi tắm Nguyễn Thần Hiến",
+    "category_now": "beach",
+    "category_true": "beach",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm được thông tin liên quan nhà tắm nước ngọt/bãi tắm Nguyễn Thần Hiến, nhưng trang chính quyền lỗi timeout, chưa đọc được đoạn khớp đúng POI. Không xác nhận chỉ từ tên; category_true=beach tạm giữ đầu vào, không phải kết luận. Overpass gộp lỗi 502/504."
+  },
+  {
+    "poi_id": "osm:node/4347089780",
+    "name": "My An Beach",
+    "category_now": "beach",
+    "category_true": "beach",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/4347089780",
+    "quote_or_tags": {
+      "name": "My An Beach",
+      "natural": "beach"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. "
+  },
+  {
+    "poi_id": "ChIJHwgddQAXQjERs5sNrVutheI",
+    "name": "Bãi tắm Sao Biển",
+    "category_now": "beach",
+    "category_true": "beach",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://ghiendanang.com/bai-tam-sao-bien-da-nang/",
+    "quote_or_tags": "Bãi tắm này tại Đà Nẵng luôn là điểm đến hấp dẫn cho cả du khách trong nước và quốc tế",
+    "note": "Trích phần câu; bài mô tả bãi biển, nước biển và bãi cát, không phải quán bar/club dù type đầu vào có beach club."
+  },
+  {
+    "poi_id": "ChIJkVJFwIgXQjERz4j_u7g6_Ao",
+    "name": "Sound Cafe",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.sound.com.vn/",
+    "quote_or_tags": "Nơi bạn có thể thưởng thức coffee cùng với hệ thống âm thanh Hi-end và nguồn âm nhạc phong phú và đa dạng.",
+    "note": "Trang chính SOUND, địa chỉ 30 An Cư 6. Mô hình nghe nhạc và cà phê; không đổi sang nightlife chỉ vì có âm nhạc hoặc bán thiết bị âm thanh."
+  },
+  {
+    "poi_id": "ChIJV9qvhLoZQjERX5RrjGA07mM",
+    "name": "CaFe Mộc Gia",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm CaFe Mộc Gia + Đà Nẵng chỉ thấy kết quả mang dữ liệu place/đánh giá, chưa có trang cơ sở hay menu đọc được khớp vị trí. Không dùng type Quán cà phê của đầu vào làm xác minh độc lập; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
+    "name": "The Hideout café",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://danang.coffee/the-hideout-cafe-nguyen-van-thoai/",
+    "quote_or_tags": "The Hideout không chỉ phục vụ cà phê",
+    "note": "Trích phần câu; mô tả menu Cold Brew, trà, đá xay và brunch tại 72/24 Nguyễn Văn Thoại. Công năng quán cà phê được nguồn mô tả, không chỉ suy từ tên."
+  },
+  {
+    "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
+    "name": "IKIGAI CAFE",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Các bài đọc được nói IKIGAI Garden Cafe tại 218/8 Đống Đa, 60 Nguyễn Chí Thanh hoặc 2 Phan Thành Tài; chưa khớp điểm IKIGAI CAFE này ở khu vực Nại Hiên Đông. Không chuyển chứng cứ giữa các nhánh; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
+    "name": "IKIGAI . garden . cafe",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://gocdoday.com/ikigai-garden-cafe-quan-ca-phe-rat-nhat-ban/",
+    "quote_or_tags": "tiệm cafe là căn nhà vườn cách đường lớn 10m, ngay bên tay phải.",
+    "note": "Trích phần câu ở mục cơ sở 218/8 Đống Đa, phù hợp khu vực đầu vào. Không dùng địa chỉ 60 Nguyễn Chí Thanh trên foodtourdanang hoặc cơ sở 2 Phan Thành Tài để xác nhận nhánh này."
+  },
+  {
+    "poi_id": "ChIJR43OJscZQjERMdsfIG3cJ9g",
+    "name": "Paradise coffee",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.paradise.vn/",
+    "quote_or_tags": "Quán cà phê của chúng tôi được xây dựng và đi vào hoạt động từ đầu năm 2020 cho đến bây giờ.",
+    "note": "Trang chính Paradise Coffee Đà Nẵng mô tả đồ uống cà phê/trà và không gian làm việc/họp; không phải lodging chỉ vì tên Paradise."
+  },
+  {
+    "poi_id": "osm:node/7477670191",
+    "name": "Gio coffee",
+    "category_now": "cafe",
+    "category_true": "day_market",
+    "verdict": "wrong",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/7477670191",
+    "quote_or_tags": {
+      "name": "Gio coffee",
+      "shop": "gift"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. shop=gift: theo định nghĩa task, cửa hàng quà lưu niệm thuộc day_market. Không để chữ coffee trong tên lấn át tag công năng; nên đối chiếu thực địa nếu cập nhật sau này."
+  },
+  {
+    "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
+    "name": "TIME COFFEE",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Trang Triple về Time Coffee nêu 509 Trần Hưng Đạo, xa tọa độ đầu vào, và có thông tin ngừng/đóng tạm thời từ 2023. Loại nguồn đó cho POI này; KHÔNG gán closed cho điểm khác địa chỉ. Chưa có bằng chứng hợp lệ nên category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJMdGCKyQZQjERpNccOkd5duk",
+    "name": "JEJU coffee",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm được trang ShopeeFood JEJU Coffee - Cà Phê, Trà Trái Cây & Smoothies (Khúc Hạo/1 Ngô Thị Hiệu), nhưng trang không đọc được đầy đủ và chưa chốt nhánh/vị trí. Loại dữ liệu place; category_true tạm giữ, không xác nhận chỉ bằng chữ coffee."
+  },
+  {
+    "poi_id": "ChIJ55nxA9MZQjERNOaUcyvyXxg",
+    "name": "Highlands",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Chưa đọc được trang cửa hàng Highlands khớp đúng vị trí này. Không lấy thông tin Highlands tại sân bay, Aeon Mall hoặc nhánh Điện Biên Phủ chưa khớp tọa độ để xác nhận; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
+    "name": "LE'O COFFEE & TEA",
+    "category_now": "cafe",
+    "category_true": "cafe",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Kết quả LE'O Coffee & Tea chủ yếu là dữ liệu tổng hợp có đánh giá Google; chưa có menu/trang cơ sở độc lập đọc được. Không dùng dữ liệu Google/place hoặc chính tên để xác nhận; category_true tạm giữ."
+  },
+  {
+    "poi_id": "osm:node/14045130739",
+    "name": "Made in Vietnam",
+    "category_now": "day_market",
+    "category_true": "day_market",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/14045130739",
+    "quote_or_tags": {
+      "name": "Made in Vietnam",
+      "shop": "gift"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. day_market được task định nghĩa bao gồm souvenir shop, vì vậy shop=gift phù hợp; không nhất thiết là chợ truyền thống."
+  },
+  {
+    "poi_id": "osm:node/9921315929",
+    "name": "Lưu Niệm - Đặc Sản",
+    "category_now": "day_market",
+    "category_true": "day_market",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/9921315929",
+    "quote_or_tags": {
+      "name": "Lưu Niệm - Đặc Sản",
+      "shop": "gift"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Cửa hàng quà lưu niệm/đặc sản được chấp nhận trong day_market theo task."
+  },
+  {
+    "poi_id": "osm:node/4386676224",
+    "name": "Chợ Miếu Bông",
+    "category_now": "day_market",
+    "category_true": "day_market",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/4386676224",
+    "quote_or_tags": {
+      "name": "Chợ Miếu Bông",
+      "amenity": "marketplace"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. "
+  },
+  {
+    "poi_id": "ChIJO56jTAARQjEREYLpKFOB1DA",
+    "name": "Chợ Non Nước",
+    "category_now": "day_market",
+    "category_true": "day_market",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://top1danang.com/diem-den/cho-non-nuoc-da-nang.html",
+    "quote_or_tags": "Chợ Non Nước Đà Nẵng là một khu chợ nhỏ thuộc quận Ngũ Hành Sơn",
+    "note": "Trích phần câu; bài nêu chợ bán hàng dân sinh tại đường số 4 Trần Đại Nghĩa, Hòa Hải; không nhầm làng đá Non Nước."
+  },
+  {
+    "poi_id": "osm:node/7127464285",
+    "name": "Bảo tàng Y học Cổ truyền Hội An",
+    "category_now": "museum_indoor",
+    "category_true": "museum_indoor",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/7127464285",
+    "quote_or_tags": {
+      "name": "Hoi An Museum of Traditional Medicine",
+      "tourism": "museum",
+      "museum": "local"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. "
+  },
+  {
+    "poi_id": "osm:node/4279640089",
+    "name": "Nhà cổ Phùng Hưng",
+    "category_now": "museum_indoor",
+    "category_true": "museum_indoor",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/4279640089",
+    "quote_or_tags": {
+      "name": "Nhà cổ Phùng Hưng",
+      "tourism": "museum",
+      "fee": "yes"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Có thu phí nhưng công năng cụ thể là bảo tàng/nhà cổ trưng bày; không đổi sang paid_attraction chỉ vì fee=yes."
+  },
+  {
+    "poi_id": "ChIJ78thjjYYQjERkiy-c9ebVPE",
+    "name": "Bảo tàng Mỹ thuật Đà Nẵng",
+    "category_now": "museum_indoor",
+    "category_true": "museum_indoor",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://baotangdanang.vn/gioi-thieu-ve-bao-tang-da-nang-co-so-2",
+    "quote_or_tags": "hiện đang lưu giữ và trưng bày, giới thiệu đến công chúng hơn 2000 tác phẩm mỹ thuật hiện đại",
+    "note": "Trích phần câu trên trang chính bảo tàng, địa chỉ 78 Lê Duẩn, có ba tầng trưng bày. Tên tổ chức nay là cơ sở 2 Bảo tàng Đà Nẵng; không phải bằng chứng đóng cửa vĩnh viễn."
+  },
+  {
+    "poi_id": "ChIJOZ__YJwXQjER4wLDpzs9L5c",
+    "name": "Chợ Đêm An Thượng",
+    "category_now": "night_market",
+    "category_true": "night_market",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://queenbus.com.vn/cho-dem-an-thuong-da-nang",
+    "quote_or_tags": "Nằm lọt thỏm giữa khu du lịch An Thượng",
+    "note": "Trích phần câu về Chợ Đêm An Thượng; bài mô tả gian hàng, ẩm thực, mua sắm buổi tối trong khu phố Tây. Không đồng nhất toàn khu An Thượng với một nhà hàng/bar riêng."
+  },
+  {
+    "poi_id": "ChIJBcr6kegZQjER2nCllYpT_Qc",
+    "name": "Chợ đêm Helio - B. Night Market",
+    "category_now": "night_market",
+    "category_true": "night_market",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/helio-center-da-nang.html",
+    "quote_or_tags": "Chợ đêm Helio (B. Night Market) | 17:00 – 22:30 | 17:00 – 23:00",
+    "note": "Trích dòng bảng giờ ngày thường/cuối tuần. Đúng tiểu địa điểm chợ đêm trong Helio Center; không đổi thành paid_attraction của toàn trung tâm trò chơi."
+  },
+  {
+    "poi_id": "osm:node/12333995781",
+    "name": "Chợ đêm Lê Duẩn",
+    "category_now": "night_market",
+    "category_true": "night_market",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://visitdanang.org/le-duan-night-market-da-nang/",
+    "quote_or_tags": "It’s open every evening, roughly 6 PM to 11 PM",
+    "note": "Trích phần câu về chợ đêm Lê Duẩn, kiệt 144 Lê Duẩn. OSM chính node có amenity=marketplace nhưng không phân biệt ngày/đêm; nguồn web xác nhận hoạt động buổi tối."
+  },
+  {
+    "poi_id": "ChIJKVaLEy8XQjERAgiDXavBMTE",
+    "name": "Unicorn Chill Zone",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm chính xác Unicorn Chill Zone + Đà Nẵng chưa thấy nội dung cơ sở/OSM đọc được xác nhận bar/pub. Chill Zone tự nó không đủ xác định nightlife; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJASuSy-sXQjERJ6nq5Rma0vs",
+    "name": "The Roof - Da Nang",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.theroofdanang.com/about",
+    "quote_or_tags": "The Roof is more than a rooftop lounge or cocktail bar.",
+    "note": "Trang chính cơ sở tầng 3 trên East West Brewing, 1A Võ Nguyên Giáp, nêu lounge/cocktail bar và DJ; nightlife phù hợp, không phải viewpoint chỉ vì có cảnh đẹp."
+  },
+  {
+    "poi_id": "ChIJQxr6eAAfQjER1vwrQRjtk60",
+    "name": "Quán nhậu Keo Lá Tràm",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm Quán nhậu Keo Lá Tràm chưa có menu/trang cơ sở đọc được để phân biệt restaurant với nightlife. Không coi mọi quán nhậu là bar, cũng không tự đổi sang restaurant chỉ từ chữ nhậu. category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+    "name": "Writer's Bar",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.marriott.com/en-us/hotels/dadmr-danang-marriott-resort-and-spa/dining/",
+    "quote_or_tags": "Relax in this cocktail bar on the Danang beachfront",
+    "note": "Trích phần câu tại mục Writer's Bar trên trang chính Danang Marriott Resort & Spa. Là bar trong khách sạn, không phải lodging của toàn resort."
+  },
+  {
+    "poi_id": "ChIJ7YfDY2QXQjERS2EcCR3hj0U",
+    "name": "N Pub",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://n-pub.com/",
+    "quote_or_tags": "Art Bar, Live Music & Craft Beer",
+    "note": "Trích phần tiêu đề tự giới thiệu của trang chính N Pub Đà Nẵng; có đồ uống, live music/open mic. Không chỉ suy từ chữ Pub trong dữ liệu đầu vào."
+  },
+  {
+    "poi_id": "ChIJY_iyslwXQjERFoDw4waR2Sg",
+    "name": "The Trip 66",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.findglocal.com/VN/Da-Nang/108208837206294/The-Trip-66",
+    "quote_or_tags": "Good music, cold beers, cocktails, food & pool",
+    "note": "Trích mô tả trang cơ sở ở 456 Võ Nguyên Giáp; website chính https://www.thetrip66.com/ cũng xác nhận địa chỉ này. Sự kiện farewell tại 66 Phan Tứ nói rõ có địa điểm mới, không phải đóng vĩnh viễn thương hiệu/POI tại địa chỉ mới."
+  },
+  {
+    "poi_id": "ChIJV5uGxecXQjERLhaOZuWV6tA",
+    "name": "Chevy",
+    "category_now": "nightlife",
+    "category_true": "nightlife",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.findglocal.com/VN/Da-Nang/116391311398762/Chevy-Sports-Bar-and-Bistro",
+    "quote_or_tags": "Sports bar, 05 hoàng kế viêm, Da Nang.",
+    "note": "Trích mô tả cơ sở; có thông báo đồ uống/sự kiện và món ăn. Chức năng sports bar làm nightlife phù hợp dù có chữ Bistro."
+  },
+  {
+    "poi_id": "osm:node/2177056870",
+    "name": "Thác Tóc Tiên",
+    "category_now": "outdoor_landmark",
+    "category_true": "viewpoint",
+    "verdict": "wrong",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/2177056870",
+    "quote_or_tags": {
+      "name": "Thác Tóc Tiên",
+      "tourism": "viewpoint",
+      "waterway": "waterfall"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Node cụ thể vừa ghi waterfall vừa ghi tourism=viewpoint. Trong tập category cho phép, viewpoint sát chức năng được tag hơn outdoor_landmark; không suy rằng đây là công viên công cộng miễn phí."
+  },
+  {
+    "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+    "name": "Làng Bích họa Đà Nẵng",
+    "category_now": "outdoor_landmark",
+    "category_true": "outdoor_landmark",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://nestahotel.com.vn/blog/lang-bich-hoa-da-nang/",
+    "quote_or_tags": "Làng bích họa Đà Nẵng là một trong những điểm check-in miễn phí",
+    "note": "Trích phần câu; bài mô tả khu hẻm nghệ thuật/tranh tường ở Hải Châu, phù hợp không gian công cộng ngoài trời."
+  },
+  {
+    "poi_id": "osm:node/10709738006",
+    "name": "Làng mộc Kim Bồng",
+    "category_now": "outdoor_landmark",
+    "category_true": "outdoor_landmark",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.greensm.com/vn-vi/news/lang-moc-kim-bong",
+    "quote_or_tags": "Làng mở cửa tự do cả ngày",
+    "note": "Trích phần câu về toàn làng mộc. OSM chính node tourism=attraction không chứng minh thu phí; làng là cộng đồng dân cư/làng nghề, dịch vụ xưởng/tour có thể trả riêng."
+  },
+  {
+    "poi_id": "osm:node/10709738105",
+    "name": "Làng nước mắm Nam Ô",
+    "category_now": "outdoor_landmark",
+    "category_true": "outdoor_landmark",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://daivietourist.vn/lang-nghe-nuoc-mam-nam-o-da-nang/",
+    "quote_or_tags": "Làng nghề không có giờ mở cửa cố định vì đây là khu dân cư sản xuất",
+    "note": "Trích phần câu về làng nước mắm Nam Ô, không phải một shop hay tour cụ thể. Nguồn còn phân biệt làng với khu du lịch có vé vào cổng."
+  },
+  {
+    "poi_id": "osm:node/13677406601",
+    "name": "Đài tưởng niệm chuyến bay 229 (1979)",
+    "category_now": "outdoor_landmark",
+    "category_true": "outdoor_landmark",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/13677406601",
+    "quote_or_tags": {
+      "name": "Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",
+      "historic": "memorial"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Tag historic=memorial xác nhận đài tưởng niệm ngoài trời. Audit category không xác nhận quyền truy cập tự do vào khu vực Sơn Trà hay lịch mở cửa."
+  },
+  {
+    "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
+    "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+    "category_now": "paid_attraction",
+    "category_true": "paid_attraction",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Không tìm được trang đích danh thuyền thúng Lê Hiền đọc được. Bài chung rừng dừa Bảy Mẫu không xác minh đúng nhà cung cấp này; chưa thể chốt tour trả phí/đại lý từ tên. category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJg2m14V0ZQjERt4DjGOdJDiE",
+    "name": "Jolie Cooking Class",
+    "category_now": "paid_attraction",
+    "category_true": "paid_attraction",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://joliecookingclass.com/booking/da-nang-cooking-class-experience/",
+    "quote_or_tags": "Authentic Vietnamese home cooking with Jolie’s family in Da Nang. | From | $30.00",
+    "note": "Trang đặt lớp của chính Jolie; class/experience có giá vé, phù hợp paid_attraction. Không chuyển sang restaurant chỉ vì có bữa ăn; audit này không xác nhận tọa độ/điểm hẹn mới."
+  },
+  {
+    "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+    "name": "Rừng Dừa Bảy Mẫu",
+    "category_now": "paid_attraction",
+    "category_true": "paid_attraction",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.hoianworldheritage.org.vn/vi/news/Du-lich-Hoi-An/hoi-an-co-17-tuyen-cho-du-khach-tham-quan-rung-dua-bay-mau-2847.hwh",
+    "quote_or_tags": "Thời gian hoạt động, phục vụ khách trải nghiệm dịch vụ chèo thúng chai từ 7g-18g.",
+    "note": "Nguồn quản lý di sản Hội An xác nhận các tuyến du lịch và dịch vụ thúng chai tại rừng dừa Bảy Mẫu. Chọn paid_attraction theo phạm vi trải nghiệm/tour của task; không dùng nó để khẳng định toàn bộ khu rừng tự nhiên có cùng phí."
+  },
+  {
+    "poi_id": "ChIJaUuo57kZQjERzjJfr1YdjCA",
+    "name": "Chùa Báo Ân",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Các URL tìm/kiểm tra cho Chùa Báo Ân tại vị trí này không cho nội dung đọc được đủ xác minh; đường dẫn phatgiaodanang.vn/chua-bao-an/ trả 404. Không lấy chùa trùng tên ở địa phương khác hoặc type đầu vào làm chứng cứ; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJA8a2aLcQQjER5mciBxvjUVs",
+    "name": "Chùa Long Hoa",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.vietnamairlines.com/th/vi/plan-book/travel/travel-guide/ngu-hanh-son-da-nang",
+    "quote_or_tags": "hơn 30 tượng Phật Di Lặc",
+    "note": "Trích phần câu ở mục Chùa Long Hoa, Hòa Hải/Ngũ Hành Sơn. Ngôi chùa có khu vườn tượng Phật, không nhầm Chùa Long Hoa ở Hòa An/Cẩm Lệ."
+  },
+  {
+    "poi_id": "ChIJ-cf9B7wQQjERutUzeynzw8w",
+    "name": "Chùa Quán Thế Âm",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://cttdt.danangportal.gov.vn/vi/w/chua-quan-the-am-chua-quan-am-i",
+    "quote_or_tags": "Đặc biệt nơi đây được gọi là Thánh Địa Phật Giáo",
+    "note": "Trích phần câu trên cổng thành phố về Chùa Quán Thế Âm tại chân Kim Sơn; chức năng tôn giáo chính, không đổi sang bảo tàng dù có trưng bày Phật giáo."
+  },
+  {
+    "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+    "name": "Chùa Linh Ứng - Bà Nà",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://sunworld.vn/vi/banahills/check-in/chua-linh-ung-ba-nahtml",
+    "quote_or_tags": "Chùa thuộc sự quản lý của Giáo hội Phật giáo Việt Nam",
+    "note": "Trích phần câu của đơn vị vận hành Bà Nà. Chùa nằm trong khu du lịch có vé nhưng vẫn giữ category religious cụ thể của ngôi chùa."
+  },
+  {
+    "poi_id": "ChIJRZhHIMkZQjERYBH-5S1xKNg",
+    "name": "Chùa Phổ Đà",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://cttdt.danangportal.gov.vn/vi/web/dng/w/chua-pho-da-i",
+    "quote_or_tags": "Ngôi chùa đã trải qua hai đời trụ trì",
+    "note": "Trích phần câu về chùa Phổ Đà, 340 Phan Châu Trinh trên cổng thành phố; phù hợp religious."
+  },
+  {
+    "poi_id": "ChIJVWzfhcwZQjERa_qP0BpsBkk",
+    "name": "Nhà thờ Tộc Hồ Thanh Khê",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm đích danh Nhà thờ Tộc Hồ Thanh Khê chưa có nội dung đọc được đủ xác minh. Không suy đây là nhà thờ Công giáo chỉ từ chữ nhà thờ; có thể là nơi thờ tự dòng họ nhưng chưa chốt. category_true tạm giữ."
+  },
+  {
+    "poi_id": "osm:node/2092582385",
+    "name": "Hội quán Hải Nam",
+    "category_now": "religious",
+    "category_true": "religious",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://vinpearl.com/vi/hoi-quan-hai-nam-hoi-an-cong-trinh-kien-truc-co-hon-100-nam-tuoi",
+    "quote_or_tags": "Về sau, đây là nơi thờ tự 108 thương lái người Hoa",
+    "note": "Trích phần câu về Hội quán Hải Nam, Hội An. OSM community_centre/community_hall chỉ là tag chức năng rộng; nguồn mô tả thờ tự và cúng tế nên religious phù hợp hơn day_market/museum."
+  },
+  {
+    "poi_id": "osm:node/5923288385",
+    "name": "Firefly Restaurant & Bar",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/5923288385",
+    "quote_or_tags": {
+      "name": "Firefly Restaurant & Bar",
+      "amenity": "restaurant",
+      "operator": "family restaurant",
+      "cuisine": "vietnamese;pizza"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. amenity=restaurant, operator=family restaurant; chữ Bar trong tên không làm đổi công năng chính thành nightlife."
+  },
+  {
+    "poi_id": "osm:node/7003805266",
+    "name": "Nha Hang Chay ROM",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/7003805266",
+    "quote_or_tags": {
+      "name": "Nha Hang Chay ROM",
+      "amenity": "restaurant",
+      "diet:vegetarian": "only"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Tag xác nhận nhà hàng chay; không đổi thành cafe chỉ vì cuisine có coffee_shop."
+  },
+  {
+    "poi_id": "ChIJadL4d-gYQjERKE_uTeup8iY",
+    "name": "Nhà hàng Tiệc cưới Hưng Gia Trần",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://mimi.com.vn/blogs/news/nha-hang-tiec-cuoi-hung-gia-tran-da-nang/",
+    "quote_or_tags": "ẩm thực 5 sao chuẩn vị Việt – Á – Âu",
+    "note": "Trích phần câu về nhà hàng tiệc cưới Hưng Gia Trần, địa điểm phục vụ bữa tiệc/ẩm thực. Theo task, meal place thuộc restaurant; tổ chức sự kiện không tự biến thành paid_attraction."
+  },
+  {
+    "poi_id": "osm:node/4225643190",
+    "name": "Phố Xưa",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/4225643190",
+    "quote_or_tags": {
+      "name": "Phố Xưa",
+      "amenity": "restaurant",
+      "addr:housenumber": "35",
+      "addr:street": "Phan Châu Trinh"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. "
+  },
+  {
+    "poi_id": "osm:node/5447259721",
+    "name": "Vy's Market Restaurant & Cooking School",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/5447259721",
+    "quote_or_tags": {
+      "name": "Vy's Market Restaurant & Cooking School",
+      "amenity": "restaurant",
+      "cuisine": "vietnamese"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Nhà hàng là công năng chính được tag; Market và Cooking School trong tên không đủ để đổi thành chợ hoặc lớp học độc lập."
+  },
+  {
+    "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+    "name": "Quán mỳ quảng Bà Minh",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://www.foody.vn/da-nang/ba-minh-mi-quang-01-hai-trieu.txxmae/binh-luan-18516586",
+    "quote_or_tags": "Bà Minh - Mì Quảng - 01 Hải Triều | Quán ăn",
+    "note": "Trích tên và nhãn loại hình của trang quán trên Foody; nhà hàng/quán mì thuộc restaurant theo định nghĩa task."
+  },
+  {
+    "poi_id": "ChIJV_BGLtAZQjERD9LS1cvwDwg",
+    "name": "Nhà hàng Mr.Anh",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://mranh.vn/",
+    "quote_or_tags": "Thực đơn của Mr. Anh là sự hòa trộn tinh hoa phong vị xứ Quảng.",
+    "note": "Trang chính Mr.Anh Restaurant Đà Nẵng xác nhận thực đơn/đặt bàn và phục vụ bữa ăn, không phải lodging dù công ty có tên ngành khách sạn."
+  },
+  {
+    "poi_id": "ChIJy0rCqNkXQjERksI84rfTy5k",
+    "name": "Hải Sản Ku Tom Đà Nẵng",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://haisankutomdanang.com/",
+    "quote_or_tags": "Hải sản tươi sống",
+    "note": "Trang chính Hải Sản Ku Tôm Đà Nẵng có menu-thực đơn, món hải sản và đặt bàn. Dùng nội dung cơ sở, không dùng các đánh giá Google được nhúng ở phần khác của trang."
+  },
+  {
+    "poi_id": "osm:node/4401168602",
+    "name": "Nha Hang Com Nieu Hong Phuc 3",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/4401168602",
+    "quote_or_tags": {
+      "name": "Nha Hang Com Nieu Hong Phuc 3",
+      "amenity": "restaurant"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. "
+  },
+  {
+    "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
+    "name": "Mì Quảng Bà Vị",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://khamphadanang.vn/dia-diem/mi-quang-ba-vi-da-nang/",
+    "quote_or_tags": "Mì quảng Bà Vị Đà Nẵng: Địa chỉ hàng đầu trong ẩm thực Đà Thành",
+    "note": "Trang giới thiệu quán chuyên mì Quảng, có nội dung thực đơn; meal place thuộc restaurant. Không dùng điểm đánh giá/place."
+  },
+  {
+    "poi_id": "ChIJfb2A754ZQjERwntwhqY2_nQ",
+    "name": "Nhà Hàng Hải Sản - Ơ Kìa",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://pasgo.vn/nha-hang/nha-hang-hai-san-o-kia-tran-phu-5838",
+    "quote_or_tags": "Loại hình: | Gọi món hải sản",
+    "note": "Trang nhận đặt bàn của Ơ Kìa tại số 7 Trần Phú nêu rõ loại hình; không đổi sang nightlife do có phòng karaoke phụ trợ."
+  },
+  {
+    "poi_id": "osm:node/13164974235",
+    "name": "Bikini Bottom Express Hoi An Riverside",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/13164974235",
+    "quote_or_tags": {
+      "name": "Bikini Bottom Express Hoi An Riverside",
+      "amenity": "restaurant",
+      "bar": "yes",
+      "cuisine": "burger;breakfast"
+    },
+    "note": "Đã đọc tag của chính node qua API OSM, vị trí khớp tọa độ đầu vào. Nhà hàng burger/breakfast, bar=yes là chức năng phụ; không chuyển sang nightlife."
+  },
+  {
+    "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
+    "name": "Quán Hải Sản Thời Cổ Đà Nẵng - Seafood Restaurant",
+    "category_now": "restaurant",
+    "category_true": "restaurant",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://ghiendanang.com/quan-hai-san-thoi-co-da-nang/",
+    "quote_or_tags": "Hải sản tại đây luôn tươi sống, được chế biến khéo léo",
+    "note": "Trích phần câu về quán Thời Cổ 354/1 Võ Nguyên Giáp; nhà hàng hải sản có thực đơn/giá món, không chỉ là cửa hàng nguyên liệu."
+  },
+  {
+    "poi_id": "osm:node/2093848431",
+    "name": "Mộc Sơn",
+    "category_now": "viewpoint",
+    "category_true": "viewpoint",
+    "verdict": "unclear",
+    "source": "osm",
+    "evidence_url": "https://www.openstreetmap.org/node/2093848431",
+    "quote_or_tags": {
+      "name": "Mộc Sơn",
+      "natural": "peak"
+    },
+    "note": "Chính node chỉ xác nhận natural=peak, không có tourism=viewpoint. Bài Vietnam Airlines https://www.vietnamairlines.com/th/vi/plan-book/travel/travel-guide/ngu-hanh-son-da-nang mô tả Mộc Sơn hoang sơ, gần như vắng hoạt động du lịch; chưa chứng minh đây là điểm ngắm cảnh có thể tiếp cận. Không coi mọi đỉnh núi là viewpoint. category_true=viewpoint chỉ tạm giữ để đúng enum; verdict=unclear, không xác nhận."
+  },
+  {
+    "poi_id": "ChIJo8N_zUw9QjERgutJ9u3-n7Y",
+    "name": "View Ngắm Bình Minh Sơn Trà",
+    "category_now": "viewpoint",
+    "category_true": "viewpoint",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm View Ngắm Bình Minh Sơn Trà chưa có trang đọc được khớp điểm tọa độ này. Không chuyển bài Đỉnh Bàn Cờ, chùa Linh Ứng hoặc một điểm bình minh khác sang; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJBQHuNG49QjER7Mb_Y2I64mk",
+    "name": "Đỉnh Bàn Cờ",
+    "category_now": "viewpoint",
+    "category_true": "viewpoint",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://baodanang.vn/dinh-ban-co-3196041.html",
+    "quote_or_tags": "du khách có thể ngắm toàn cảnh thành phố Đà Nẵng từ độ cao gần 700m",
+    "note": "Trích phần câu; báo mô tả trải nghiệm ngắm cảnh từ đỉnh Bàn Cờ. Tượng/bàn cờ không làm thay công năng điểm ngắm cảnh; không suy hiện trạng mở đường từ bài cũ."
+  },
+  {
+    "poi_id": "ChIJr3x17yAXQjER8gIQveo92QM",
+    "name": "Hi Spa - Local Wellness Spa",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm được Hi Spa - Relaxing time trên TripAdvisor nhưng chưa đọc/đối chiếu được nhánh với Hi Spa - Local Wellness Spa ở vị trí này; các nguồn place bị loại. category_true tạm giữ, không xác nhận từ chữ Spa."
+  },
+  {
+    "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
+    "name": "HAPPY SPA",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tên HAPPY SPA trùng nhiều nơi. Mapcarta/OSM node 12841766773 ở 16.05403,108.24586 cách đầu vào gần 3 km, nên loại; Japanese Style Happy Spa 33–34 Đỗ Bí cũng là địa chỉ khác. Không chuyển chứng cứ massage của nhánh khác sang; category_true tạm giữ."
+  },
+  {
+    "poi_id": "ChIJRQDAiMIZQjERgrBd-ERmO-k",
+    "name": "Tigon massa - Spa & Massage Đà Nẵng",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://tigonmassa.com/gioi-thieu",
+    "quote_or_tags": "Giới thiệu về tigon massa Spa & Massage Đà Nẵng",
+    "note": "Trang chính mô tả phòng trị liệu và các liệu pháp massage/chăm sóc sức khỏe, không phải lodging dù ví không gian như spa resort."
+  },
+  {
+    "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
+    "name": "le vénin spa",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://leveninspadanang.com/",
+    "quote_or_tags": "Aromatherapy Massage | Bamboo Massage | Traditional Thai Massage",
+    "note": "Trích tên dịch vụ trên trang chính Levenin Spa tại 231 Dương Đình Nghệ; wellness rõ ràng. Không dùng thông tin place nhúng bên ngoài."
+  },
+  {
+    "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
+    "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "ok",
+    "source": "web",
+    "evidence_url": "https://karmel.vn/ngo-hoang-my-spa-he-thong-karmel-tai-da-nang",
+    "quote_or_tags": "Là một Spa chăm sóc da uy tín hàng đầu tại Đà Nẵng",
+    "note": "Trích phần câu về CAMY Spa Clinic & Academy quận Liên Chiểu từ trang đối tác mỹ phẩm; dịch vụ chăm sóc da thuộc wellness trong enum task, không phải lodging."
+  },
+  {
+    "poi_id": "ChIJl4vFoHERQjERWxJkz9bsJDg",
+    "name": "Spa Luna",
+    "category_now": "wellness",
+    "category_true": "wellness",
+    "verdict": "unclear",
+    "source": "name_only",
+    "evidence_url": null,
+    "quote_or_tags": null,
+    "note": "Tìm Spa Luna + Đà Nẵng chỉ thấy thư mục/place hoặc spa cùng tên nơi khác; chưa có trang cơ sở/menu dịch vụ đọc được khớp vị trí Hòa Hải. Không dùng Spa y tế của đầu vào làm xác minh; category_true tạm giữ."
+  },
+  {
+    "summary": {
+      "ok": 49,
+      "wrong": 2,
+      "closed": 0,
+      "unclear": 17,
+      "wrong_rate_of_decided": 0.0392156862745098
+    }
+  }
+]

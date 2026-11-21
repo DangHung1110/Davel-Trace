@@ -1,0 +1,1488 @@
+{
+ "about": "Tín hiệu độ nổi tiếng sạch: số trang cẩm nang du lịch độc lập (36 trang, 2024-2026, vi+en; cổng du lịch TP, Michelin Guide, travel guides) giới thiệu điểm. Codex t15 đọc trang 20/11/2026 (reports/p0/links/guide_*_codex.json). Không dùng rating/review Google. Điểm không có trong file = 0 lần nhắc (không phải 'kém').",
+ "checked_at": "2026-11-20",
+ "pages": [
+  {
+   "url": "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+   "title": "Da Nang Region MICHELIN Restaurants - the MICHELIN Guide Vietnam",
+   "published_or_updated": null,
+   "topic": "restaurants_michelin",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://guide.michelin.com/th/en/article/dining-out/must-try-michelin-street-food-in-da-nang",
+   "title": "5 Must-Try MICHELIN Street Eats in Da Nang",
+   "published_or_updated": "2025-03-14",
+   "topic": "street_food_michelin",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+   "title": "The Best Seafood Restaurants in Da Nang - The MICHELIN Guide",
+   "published_or_updated": "2026-03-04",
+   "topic": "seafood_michelin",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784",
+   "title": "Top 7 quán cafe đẹp ở Đà Nẵng view cực chill, tha hồ sống ảo",
+   "published_or_updated": "2026-01-14",
+   "topic": "cafes",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+   "title": "Lên lịch khám phá Đà Nẵng 2026 – Cập nhật giá vé tham quan các điểm, khu du lịch",
+   "published_or_updated": null,
+   "topic": "attractions_museums_craft_villages",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://www.lonelyplanet.com/articles/guide-to-danang",
+   "title": "A Guide to Danang, Vietnam",
+   "published_or_updated": "2026-09-21",
+   "topic": "attractions_beaches",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/see-and-do/best-spas-in-hoi-an/",
+   "title": "The Best Spas In Hoi An – Helpful Hints For The Ultimate Massage",
+   "published_or_updated": "2020-02-11",
+   "topic": "spas",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+   "title": "The Ultimate 3-Day Weekend in Danang, Vietnam",
+   "published_or_updated": "2026-09-21",
+   "topic": "attractions_food_markets",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/general/hoi-an-nightlife/",
+   "title": "Hoi An Nightlife – The Best Bars and Clubs",
+   "published_or_updated": "2020-04-23",
+   "topic": "bars_nightlife",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/eat/best-bars-in-hoi-an/",
+   "title": "Best Bars In Hoi An",
+   "published_or_updated": "2020-01-24",
+   "topic": "bars_nightlife",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+   "title": "Hoi An’s Best Western Restaurants",
+   "published_or_updated": "2020-03-26",
+   "topic": "restaurants",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/see-and-do/hoi-ans-beaches/",
+   "title": "A Complete Guide to Hoi An’s Beaches",
+   "published_or_updated": "2020-03-26",
+   "topic": "beaches_bars_restaurants",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/",
+   "title": "The Best Coffee Shops In Hoi An",
+   "published_or_updated": "2020-02-11",
+   "topic": "cafes",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://hiddenhoian.com/eat/craft-beer-hoi-an/",
+   "title": "The Best Craft Beer in Hoi An: Bars and Breweries",
+   "published_or_updated": "2024-09-06",
+   "topic": "craft_beer",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+   "title": "The best ways to explore the ancient town of Hoi An",
+   "published_or_updated": "2026-11-04",
+   "topic": "attractions_heritage_markets_beaches",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+   "title": "10 essential things to do in Hoi An",
+   "published_or_updated": "2026-11-04",
+   "topic": "attractions_food_cafes_nightlife",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://vietnam.travel/things-to-do/holistic-wellness-hoi-an-beaches-and-resorts/",
+   "title": "Holistic Wellness on Hoi An’s Beaches and Resorts",
+   "published_or_updated": "2026-10-18",
+   "topic": "beaches_wellness",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/top-10-quan-cafe-hoi-an-check-in-view-pho-co-sieu-dinh-407",
+   "title": "Top 12 quán cafe Hội An check-in view phố cổ siêu đỉnh",
+   "published_or_updated": "2026-08-04",
+   "topic": "cafes",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+   "title": "Must-visit places in Da Nang",
+   "published_or_updated": "2026-11-04",
+   "topic": "attractions_beaches",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://vinwonders.com/vi/wonderpedia/news/diem-danh-cac-quan-an-sang-da-nang-ngon-sieu-dat-khach/",
+   "title": "Điểm danh các quán ăn sáng Đà Nẵng NGON, siêu đắt khách 2026",
+   "published_or_updated": "2025-12-09",
+   "topic": "street_food_breakfast",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/cafe-canh-dong-hoi-an-21353",
+   "title": "Top 10 quán cafe cánh đồng Hội An đẹp và đáng ghé",
+   "published_or_updated": "2026-08-24",
+   "topic": "cafes",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136",
+   "title": "Top 20 spa Đà Nẵng mang lại trải nghiệm thư giãn sảng khoái",
+   "published_or_updated": "2026-08-14",
+   "topic": "spas",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://vinwonders.com/vi/wonderpedia/news/top-25-nha-hang-o-hoi-an/",
+   "title": "Top 25 nhà hàng ở Hội An cực đông khách, NGON khó cưỡng",
+   "published_or_updated": "2025-12-17",
+   "topic": "restaurants",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://vinwonders.com/vi/wonderpedia/news/quan-an-hoi-an-ngon/",
+   "title": "17 quán ăn ngon ở Hội An từ sáng đến đêm không thể bỏ qua",
+   "published_or_updated": "2025-08-24",
+   "topic": "restaurants_street_food",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026",
+   "title": "Danh sách các cơ sở ăn uống MICHELIN Guide Đà Nẵng 2026",
+   "published_or_updated": null,
+   "topic": "restaurants_michelin",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://danangfantasticity.com/en/indulge-in-fine-dining-experiences-in-da-nang",
+   "title": "Indulge in Fine Dining Experiences in Da Nang",
+   "published_or_updated": null,
+   "topic": "restaurants_fine_dining",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+   "title": "Đi đâu?",
+   "published_or_updated": "2023-06-13",
+   "topic": "attractions_heritage_beaches",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://visitdanang.org/best-bars-nightclubs-in-da-nang/",
+   "title": "Best Bars & Nightclubs in Da Nang (2026): 19 Spots for a Great Night Out",
+   "published_or_updated": "2026-11-19",
+   "topic": "bars_nightlife",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/",
+   "title": "Best Bars in Da Nang – A Personal and Independent Guide",
+   "published_or_updated": "2026-07-22",
+   "topic": "bars_nightlife",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://www.vietnamcoracle.com/hoi-an-bars-drinking-guide/",
+   "title": "Hoi An Bars & Drinking Guide",
+   "published_or_updated": "2024-11-19",
+   "topic": "bars_nightlife",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://www.wafaifo.com/art-galleries-hoi-an/",
+   "title": "5+ Art Galleries In Hoi An for Art Lovers & Curious Travellers",
+   "published_or_updated": "2026-06-22",
+   "topic": "art_galleries",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://www.wafaifo.com/vi/?p=5157",
+   "title": "Top 10+ Ngôi Chùa (Đền) Cổ Kính & Linh Thiêng Nhất tại Hội An",
+   "published_or_updated": "2026-04-17",
+   "topic": "pagodas_heritage",
+   "zone": "hoi_an"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+   "title": "Top 42 địa điểm du lịch Đà Nẵng cực hot không thể bỏ qua",
+   "published_or_updated": "2026-08-26",
+   "topic": "attractions_beaches_markets",
+   "zone": "da_nang_hoi_an"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849",
+   "title": "Kinh nghiệm càn quét chợ Cồn Đà Nẵng, khám phá thiên đường ẩm thực",
+   "published_or_updated": "2026-08-13",
+   "topic": "markets_street_food",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304",
+   "title": "Top 14 ngôi chùa Đà Nẵng, cõi Phật linh thiêng giữa phố biển",
+   "published_or_updated": "2024-08-02",
+   "topic": "pagodas",
+   "zone": "da_nang"
+  },
+  {
+   "url": "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467",
+   "title": "Khám phá 7 khu chợ đêm Đà Nẵng sôi động không thể bỏ lỡ",
+   "published_or_updated": "2025-10-17",
+   "topic": "night_markets",
+   "zone": "da_nang"
+  }
+ ],
+ "items": {
+  "ChIJx6-KGnIXQjER7x-T0zeOlBw": {
+   "mentions": 3,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJySI1VxkXQjERUSItJZQgxBE": {
+   "mentions": 3,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJudsANu4XQjERbLKxjXDLHtU": {
+   "mentions": 3,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJd2HsN1oXQjER19a79kUNt-U": {
+   "mentions": 2,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJw-jjo3IXQjERjDCm-Yd0EAA": {
+   "mentions": 4,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026",
+    "https://danangfantasticity.com/en/indulge-in-fine-dining-experiences-in-da-nang",
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJN-vJNV8XQjERNccI4vX2rHY": {
+   "mentions": 3,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026",
+    "https://danangfantasticity.com/en/indulge-in-fine-dining-experiences-in-da-nang"
+   ]
+  },
+  "ChIJ7xtm7rMXQjER7ye2fxPfbFE": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJ2eFWbrcXQjERkMR0z_5VhM0": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJTahQxcwZQjERrNKa5emQFC4": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJUdH0Q88ZQjER0AoQ8Pbil28": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJQRIRJDIYQjER4JvYKu_Qnak": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJKbpWc6IXQjERMZMSscftz9I": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJkatEeMwZQjERnAUKgmrbNgQ": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJu6FQjzUYQjER39TMpgQVRUs": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849",
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJLWoAs80ZQjERLKHDYD-ZymI": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJ2y5L4dQNQjERxeSLc68fbrw": {
+   "mentions": 7,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/holistic-wellness-hoi-an-beaches-and-resorts/",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJL1GKWJYZQjERLrEGqlK2kwQ": {
+   "mentions": 8,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136",
+    "https://danangfantasticity.com/en/indulge-in-fine-dining-experiences-in-da-nang",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849",
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJEymIkTYYQjERWO-pgjkKGMk": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "ChIJFzkgXmA9QjERbjn2eoPqMn8": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJBQHuNG49QjER7Mb_Y2I64mk": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJ08DIzjY9QjER4ldy4JXZBLA": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJwandNwA9QjERWjnwsYXsQrk": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJu59e1rsRQjERB-49hSxMnXo": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJ86LzsaUhQjERGxE6itCeBCY": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJaQNtm9IfQjERhfrVRYqgA1M": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJ4w7694IXQjERrFXucqKL--o": {
+   "mentions": 7,
+   "michelin": false,
+   "pages": [
+    "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/",
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849"
+   ]
+  },
+  "ChIJ78thjjYYQjERkiy-c9ebVPE": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "ChIJaa7lANcXQjERmT3kgV5U7uA": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJ8be7KQARQjER5Lnd2LHaDAs": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJX_osydwQQjERB-Y6MvLfJmQ": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJDcx-OTIYQjERP4eyjItPspA": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJBcr6kegZQjER2nCllYpT_Qc": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849"
+   ]
+  },
+  "ChIJAdChYQAZQjERdBTX1_66Q_8": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJq8DocTMYQjERrIcBZUiEnSM": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/quan-cafe-dep-o-da-nang-12784"
+   ]
+  },
+  "ChIJ-cf9B7wQQjERutUzeynzw8w": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJOxVypBYRQjERMmK2P6JbzF0": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "ChIJ9_dffMQQQjERuJbqVGdSysY": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "osm:node/1036552571": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/1623183649": {
+   "mentions": 6,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "osm:node/3763846156": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "osm:node/4172034499": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/5273998823": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "osm:node/5286977425": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/6346486685": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/7276380289": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/indulge-in-fine-dining-experiences-in-da-nang"
+   ]
+  },
+  "osm:node/10709724107": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/10709738005": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/11359603957": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "osm:node/12333995781": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJHZakNa8ZQjERWNFToM16eB4": {
+   "mentions": 5,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJEf1GVMoZQjERQxbPWFvFiKI": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJfQNjLMYQQjERo1m_A0X8aLE": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJRZhHIMkZQjERYBH-5S1xKNg": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJCeQZ-jkZQjERaXJSI0ZDWXw": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJsdeOrV8XQjER8weQ8Az-w5c": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJyd-t1B0ZQjERVSYFtVbYms8": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJCRy3iv_2QTERfZxGJkIMHHQ": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100",
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJyUQ4aw72QTERCXl5YV-4U1w": {
+   "mentions": 5,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "ChIJH38kxPn2QTERee_Ccs86ccE": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJHzP474MXQjERHjpAS3HY_AY": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136"
+   ]
+  },
+  "ChIJXcc22ZcZQjERT47ZqHMl13c": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136"
+   ]
+  },
+  "ChIJoyYaBewXQjEROdwfQaOB610": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136"
+   ]
+  },
+  "ChIJ6dOY7ykYQjER0aPtP-ONTzM": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136"
+   ]
+  },
+  "ChIJ6UAZeAAZQjERzK3T81riZmo": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/cho-dem-da-nang-soi-dong-19467"
+   ]
+  },
+  "ChIJgRyzBl8ZQjERJF9sFGvE4R8": {
+   "mentions": 2,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJHRmt7soZQjERhuei1xWj9Xs": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vinwonders.com/vi/wonderpedia/news/diem-danh-cac-quan-an-sang-da-nang-ngon-sieu-dat-khach/"
+   ]
+  },
+  "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g": {
+   "mentions": 2,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJR1aq9sMZQjERm5CGfBs-Qi4": {
+   "mentions": 2,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJkYkOmOMXQjEREz4KLKpwAOE": {
+   "mentions": 3,
+   "michelin": true,
+   "pages": [
+    "https://guide.michelin.com/vn/en/da-nang-region/restaurants/",
+    "https://guide.michelin.com/vn/en/best-of/the-best-seafood-restaurants-in-da-nang",
+    "https://danangfantasticity.com/en/danh-sach-cac-co-so-an-uong-michelin-guide-da-nang-2026"
+   ]
+  },
+  "ChIJX8a3GJEZQjERe6n-Xtcds1w": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-10-spa-da-nang-14136"
+   ]
+  },
+  "ChIJp5h-DjMYQjERTMBHOnlub0o": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJZVLi0gEZQjERl6s0h2bqoK0": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJh8C0GlYXQjERhjmDp-ik-Uc": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJu557PTwYQjERu1jlhJR4LEU": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/"
+   ]
+  },
+  "ChIJYZuMDnEZQjERrftd297ekRM": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/",
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJP0--pEAXQjERoheJMf24gHA": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJCd3q4FQXQjERF640iRTpb7I": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/"
+   ]
+  },
+  "ChIJkxff_x0XQjERCC_CN8DFt54": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJQwork9IXQjERVcF8a6VWq5I": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/",
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJyVQ3iwoXQjERNILX5sPCUKA": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJQydy2apx34oRnci64Kkdi4U": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/"
+   ]
+  },
+  "ChIJASuSy-sXQjERJ6nq5Rma0vs": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/"
+   ]
+  },
+  "ChIJkZi7gkcYQjERPd87DaNuhW0": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://visitdanang.org/best-bars-nightclubs-in-da-nang/"
+   ]
+  },
+  "ChIJyaniiLoQQjERI3aW6z5atCc": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/tham-quan-chua-da-nang-16304"
+   ]
+  },
+  "ChIJUbe6YK4NQjERw6BXx5s8cHM": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "manual:hai-van-quan": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "manual:vinwonders-nam-hoi-an": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://vinwonders.com/vi/wonderpedia/news/diem-danh-cac-quan-an-sang-da-nang-ngon-sieu-dat-khach/",
+    "https://vinwonders.com/vi/wonderpedia/news/top-25-nha-hang-o-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "manual:cu-lao-cham": {
+   "mentions": 6,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://hiddenhoian.com/see-and-do/hoi-ans-beaches/",
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/vi/?p=5157",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "manual:hoi-an-pho-di-bo-hoa-dang": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:way/630377259": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:way/140401174": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:way/39268284": {
+   "mentions": 9,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/",
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://vietnam.travel/things-to-do/holistic-wellness-hoi-an-beaches-and-resorts/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.vietnamcoracle.com/hoi-an-bars-drinking-guide/",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:way/565592419": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/320722329": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:way/448044645": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/565300448": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/2092582385": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/595299310": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/4279640089": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/2076855866": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/2076855954": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/2092582318": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/631064893": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:node/2076856032": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/3189923484": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/631074714": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:relation/2836882": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:way/474383101": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:way/565186618": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/35952504": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://vinwonders.com/vi/wonderpedia/news/quan-an-hoi-an-ngon/",
+    "https://www.vietnamcoracle.com/hoi-an-bars-drinking-guide/",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:way/35952591": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/"
+   ]
+  },
+  "osm:way/14131302": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "osm:node/4171964390": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/10709738006": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/art-galleries-hoi-an/",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:node/4517387589": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich"
+   ]
+  },
+  "osm:node/5403993021": {
+   "mentions": 5,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/see-and-do/hoi-ans-beaches/",
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://vietnam.travel/things-to-do/holistic-wellness-hoi-an-beaches-and-resorts/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:node/7127464285": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/683416736": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://www.lonelyplanet.com/articles/guide-to-danang",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://vietnam.travel/things-to-do/must-visit-places-in-da-nang/",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:way/198804483": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://guide.michelin.com/th/en/article/dining-out/must-try-michelin-street-food-in-da-nang",
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://www.lonelyplanet.com/articles/the-ultimate-weekend-in-danang-vietnam",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:node/4601279489": {
+   "mentions": 15,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/",
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/",
+    "https://hiddenhoian.com/eat/craft-beer-hoi-an/",
+    "https://vietnam.travel/things-to-do/the-best-ways-to-explore-the-ancient-town-of-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://mia.vn/cam-nang-du-lich/top-10-quan-cafe-hoi-an-check-in-view-pho-co-sieu-dinh-407",
+    "https://mia.vn/cam-nang-du-lich/cafe-canh-dong-hoi-an-21353",
+    "https://vinwonders.com/vi/wonderpedia/news/top-25-nha-hang-o-hoi-an/",
+    "https://vinwonders.com/vi/wonderpedia/news/quan-an-hoi-an-ngon/",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh",
+    "https://www.wafaifo.com/art-galleries-hoi-an/",
+    "https://www.wafaifo.com/vi/?p=5157",
+    "https://mia.vn/cam-nang-du-lich/top-dia-diem-du-lich-da-nang-11100"
+   ]
+  },
+  "osm:way/251397637": {
+   "mentions": 4,
+   "michelin": false,
+   "pages": [
+    "https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich",
+    "https://mia.vn/cam-nang-du-lich/top-10-quan-cafe-hoi-an-check-in-view-pho-co-sieu-dinh-407",
+    "https://mia.vn/cam-nang-du-lich/cafe-canh-dong-hoi-an-21353",
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/404714309": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/can-quet-cho-con-da-nang-de-kham-pha-thien-duong-am-thuc-van-nguoi-me-1849"
+   ]
+  },
+  "osm:node/4343966693": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vinwonders.com/vi/wonderpedia/news/top-25-nha-hang-o-hoi-an/"
+   ]
+  },
+  "osm:node/4389441895": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vinwonders.com/vi/wonderpedia/news/quan-an-hoi-an-ngon/"
+   ]
+  },
+  "osm:node/7055486785": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/",
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/"
+   ]
+  },
+  "osm:node/4580499791": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/"
+   ]
+  },
+  "osm:node/4945171421": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vinwonders.com/vi/wonderpedia/news/quan-an-hoi-an-ngon/"
+   ]
+  },
+  "osm:node/11618601226": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/",
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/"
+   ]
+  },
+  "osm:node/11645353169": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/craft-beer-hoi-an/",
+    "https://amthuchiendai.vn/en/best-bars-in-da-nang-a-personal-and-independent-guide/",
+    "https://www.vietnamcoracle.com/hoi-an-bars-drinking-guide/"
+   ]
+  },
+  "osm:node/4717672963": {
+   "mentions": 3,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://mia.vn/cam-nang-du-lich/top-10-quan-cafe-hoi-an-check-in-view-pho-co-sieu-dinh-407"
+   ]
+  },
+  "osm:node/4844888422": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/"
+   ]
+  },
+  "osm:node/5677701323": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:way/632030501": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:node/1726781610": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+    "https://vinwonders.com/vi/wonderpedia/news/top-25-nha-hang-o-hoi-an/"
+   ]
+  },
+  "osm:node/5265545321": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/"
+   ]
+  },
+  "osm:node/10285677009": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/"
+   ]
+  },
+  "osm:node/10180856817": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/general/hoi-an-nightlife/",
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/"
+   ]
+  },
+  "osm:node/10171278941": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.wafaifo.com/vi/?p=5157"
+   ]
+  },
+  "osm:node/4582592213": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:way/210966819": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.hoianworldheritage.org.vn/vi/news/print/Du-lich-Hoi-An/di-dau-2341.hwh"
+   ]
+  },
+  "osm:node/6091196615": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.wafaifo.com/art-galleries-hoi-an/"
+   ]
+  },
+  "osm:node/5325684221": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/see-and-do/best-spas-in-hoi-an/"
+   ]
+  },
+  "osm:node/5110691326": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/"
+   ]
+  },
+  "osm:node/6257424485": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-bars-in-hoi-an/"
+   ]
+  },
+  "osm:node/12468807102": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://www.vietnamcoracle.com/hoi-an-bars-drinking-guide/"
+   ]
+  },
+  "osm:node/4252334691": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/",
+    "https://mia.vn/cam-nang-du-lich/top-10-quan-cafe-hoi-an-check-in-view-pho-co-sieu-dinh-407"
+   ]
+  },
+  "osm:node/4253896690": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/best-coffee-shops-in-hoi-an/"
+   ]
+  },
+  "osm:node/4461175292": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:node/12058417799": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/cafe-canh-dong-hoi-an-21353"
+   ]
+  },
+  "osm:node/2461400753": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/"
+   ]
+  },
+  "osm:node/4221031594": {
+   "mentions": 2,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/eat/hoi-ans-best-western-restaurants/",
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:node/5464917424": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://vietnam.travel/things-to-do/top-things-to-do-hoi-an/"
+   ]
+  },
+  "osm:node/5570949320": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://hiddenhoian.com/see-and-do/hoi-ans-beaches/"
+   ]
+  },
+  "osm:node/10304029313": {
+   "mentions": 1,
+   "michelin": false,
+   "pages": [
+    "https://mia.vn/cam-nang-du-lich/cafe-canh-dong-hoi-an-21353"
+   ]
+  }
+ }
+}

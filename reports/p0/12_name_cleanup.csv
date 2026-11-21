@@ -1,0 +1,18 @@
+poi_id,category,zone,name_now,name_proposed,why,status_proposal
+ChIJZSsvT9QZQjERf-oLnsT1C3Y,restaurant,trung_tam,Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản,Yen Yakiniku & Izakaya,bỏ quảng cáo + địa chỉ,
+ChIJHfGPsJkXQjERsHCXRTXX_Xs,restaurant,son_tra_my_khe,다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang ),Nhà hàng Hàn Quốc lòng bò nướng,bỏ chữ Hàn + mô tả lặp,
+ChIJeaPwiDUYQjERt4yUm81Oqi8,day_market,trung_tam,Khu Ẩm Thực Chợ Cồn -식사 공간,Khu ẩm thực Chợ Cồn,bỏ chữ Hàn,
+ChIJm2iwgggbQjERj-x6QTYemFQ,day_market,son_tra_my_khe,Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng,Shop Hoa Tươi Ngũ Hành Sơn,bỏ phần sau |,"đề xuất excluded: tiệm hoa, không phải điểm du lịch"
+osm:node/7477670190,day_market,son_tra_my_khe,노니판매점,Cửa hàng bán noni,dịch tên Hàn,đề xuất excluded: cửa hàng bán lẻ cho khách đoàn
+osm:node/13677406601,outdoor_landmark,son_tra_my_khe,"Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",Đài tưởng niệm chuyến bay 229 (1979),"rút gọn, > 60 ký tự",
+ChIJs3Rt4-QZQjERPTSZ7G6XAK0,wellness,trung_tam,Clover Spa - Best Spa Massage Da Nang 다낭 마사지,Clover Spa,bỏ quảng cáo + chữ Hàn,
+ChIJv1gepxMZQjER2xJtkXvi9xU,wellness,trung_tam,Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |,Jeju Spa – Massage & Nail,bỏ | và chữ Hàn/Trung,
+ChIJpRFvp6sZQjERY_CDfnMCx2w,day_market,son_tra_my_khe,Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품,Vigift Đà Nẵng – Quà Đặc Sản,bỏ phần sau |,
+ChIJWd2LBrkZQjER4hLHO81ipK0,wellness,hai_van_lien_chieu,Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy,Lu's House Beauty & Academy,bỏ quảng cáo,đề xuất excluded: tiệm nặn mụn (WP5: wellness lẫn tiệm thẩm mỹ)
+ChIJM1DTVHkZQjERDW1JNclcAtw,wellness,trung_tam,Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng,Massage người mù Đức Quý,bỏ chữ Hàn/Nga,
+ChIJn9Kkxh4ZQjERgDXEcvzD4nI,nightlife,trung_tam,"MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",MarLan Pub,"bỏ quảng cáo, > 60 ký tự",
+ChIJu9GUjOgZQjERpfx8z-GIMEw,nightlife,trung_tam,켓 바 1 Kết Bar,Kết Bar,bỏ chữ Hàn,
+ChIJxRB4CRgXQjER6zy0em0FyTk,nightlife,son_tra_my_khe,오빠O Bar- Lounge & More,Oppa O Bar,phiên âm chữ Hàn (오빠 = Oppa),
+ChIJW9b8Ky0XQjERPn8CJNdE0Lk,religious,ngu_hanh_son,"Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",Chùa Mỹ Thị,bỏ địa chỉ,
+ChIJ8e-HnOoZQjER1tLf4hD65xI,wellness,trung_tam,Elsa Spa massage Da Nang ( 엘사 스파 ),Elsa Spa,bỏ quảng cáo + chữ Hàn,
+ChIJp9cNzfwZQjERS7ZSaA95etk,paid_attraction,trung_tam,Danang Cooking Class - Lá Sen ダナン料理教室,Lá Sen Cooking Class,bỏ chữ Nhật,

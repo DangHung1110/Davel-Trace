@@ -1,0 +1,151 @@
+{
+ "about": "Giờ/giá có nguồn cho điểm mới Hội An (Codex t15 đọc web, 20/11/2026; reports/p0/links/new_hoian_codex.json). Nhà thờ tộc Trần/Nguyễn Tường thuộc vé phố cổ -> chỉ giờ.",
+ "checked_at": "2026-11-20",
+ "items": [
+  {
+   "poi_id": "osm:node/10171278941",
+   "name": "Chùa Kim Bửu",
+   "confidence": 0.6,
+   "evidence_url": "https://www.wafaifo.com/vi/?p=5157",
+   "note": "Codex t15 20/11/2026: \"11. Chùa Kim Bửu; Giờ mở cửa: Mở cửa hằng ngày; Miễn phí vào cửa\". Trích các nhãn trong riêng mục Chùa Kim Bửu ở Cẩm Kim. Trang nói mở hằng ngày nhưng không có giờ bắt đầu/kết thúc, nên hours=null. Giá 0 chỉ là vào chùa, không bao gồm cúng dường/dịch vụ.",
+   "ticket_vnd": 0,
+   "free_entry": true
+  },
+  {
+   "poi_id": "osm:way/631070197",
+   "name": "Chùa Pháp Bảo",
+   "confidence": 0.6,
+   "evidence_url": "https://hoianit.com/chua-phap-bao-hoi-an/",
+   "note": "Codex t15 20/11/2026: \"Miễn phí vào cửa; Không thuộc vé tham quan\". Các trích đoạn trong mục Chùa Pháp Bảo. Nguồn nói chùa không niêm yết giờ mở cửa như một điểm du lịch; các khoảng giờ khuyên ghé không phải lịch mở cửa, nên hours=null. Không dùng giờ thuê xe ở cuối b",
+   "ticket_vnd": 0,
+   "free_entry": true
+  },
+  {
+   "poi_id": "osm:node/4582592213",
+   "name": "Nhà thờ tộc Trần",
+   "confidence": 0.6,
+   "evidence_url": "https://hoianfairytour.com/vi/ve-tham-quan-pho-co-hoi-an/",
+   "note": "Codex t15 20/11/2026: \"Nhà thờ tộc Trần; 7:00 – 21:00\". Trích tên và ô giờ trong bảng riêng địa điểm 21 Lê Lợi; nguồn lưu ý lịch có thể thay đổi mùa mưa/lễ. Cổng di sản xác nhận nằm trong tuyến vé: https://www.hoianworldheritage.org.vn/vi/news/Dieu-can-bie",
+   "hours": "07:00-21:00"
+  },
+  {
+   "poi_id": "osm:way/210966819",
+   "name": "Nhà thờ tộc Nguyễn Tường",
+   "confidence": 0.6,
+   "evidence_url": "https://hoianfairytour.com/vi/ve-tham-quan-pho-co-hoi-an/",
+   "note": "Codex t15 20/11/2026: \"Nhà thờ tộc Nguyễn Tường; 8:00 – 17:00\". Trích tên và ô giờ trong bảng cho địa chỉ 8 Nguyễn Thị Minh Khai; không dùng giờ quầy bán vé làm giờ nhà thờ. Thuộc danh sách vé theo https://www.hoianworldheritage.org.vn/vi/news/Dieu-can-biet/Ve-tha",
+   "hours": "08:00-17:00"
+  },
+  {
+   "poi_id": "osm:node/6091196615",
+   "name": "Phòng tranh Phan Kim Chi",
+   "confidence": 0.6,
+   "evidence_url": "https://www.wafaifo.com/art-galleries-hoi-an/",
+   "note": "Codex t15 20/11/2026: \"Phan Kim Chi Art Gallery; Price range: Browsing is generally free.\". Trích riêng mục phòng tranh Phan Kim Chi, 37 Lê Lợi. Nguồn nói thường được xem tranh miễn phí; giữ mức 0 cho việc xem tranh theo hướng dẫn, cần xác nhận trước nếu có triển lãm đặc biệt. Mua tác phẩm t",
+   "ticket_vnd": 0,
+   "free_entry": true
+  },
+  {
+   "poi_id": "osm:node/11896339273",
+   "name": "CSO Gallery",
+   "confidence": 0.6,
+   "evidence_url": "https://ticketgo.vn/event/ve-vao-cua-cso-gallery-hoi-an",
+   "note": "Codex t15 20/11/2026: \"Người lớn: 130,000 VND/ vé; Thứ 2 hàng tuần off\". CSO tại 229 Cửa Đại. TicketGo ghi giờ 08:00-17:00 từ thứ Ba đến Chủ Nhật, nhất quán tag OSM opening_hours=Tu-Su 08:00-17:00 tại https://www.openstreetmap.org/node/11896339273 . Giá khác theo quốc tịch",
+   "hours": "08:00-17:00",
+   "closed_days": [
+    "Mo"
+   ],
+   "ticket_vnd": 190000,
+   "typical_vnd": 190000,
+   "min_vnd": 130000,
+   "max_vnd": 250000
+  },
+  {
+   "poi_id": "osm:node/5325684221",
+   "name": "Hoi An Blind Massage",
+   "confidence": 0.6,
+   "evidence_url": "https://hiddenhoian.com/see-and-do/best-spas-in-hoi-an/",
+   "note": "Codex t15 20/11/2026: \"Hoi An Blind Massage; 60 Min Massage: Vietnamese massage – 150,000 VND\". Giá tham chiếu một người/một liệu trình massage Việt Nam 60 phút, tại 412 Cửa Đại, theo hướng dẫn cập nhật tháng 02/2020; không phải toàn dải menu hay giá đã xác nhận năm 2026. Cần xác nhận lại trước",
+   "ticket_vnd": 150000,
+   "typical_vnd": 150000,
+   "min_vnd": 150000,
+   "max_vnd": 150000
+  },
+  {
+   "poi_id": "osm:node/10736269999",
+   "name": "Spa Jonu",
+   "confidence": 0.6,
+   "evidence_url": "https://jonu-spa-42822.mamap.vn/",
+   "note": "Codex t15 20/11/2026: \"09:00 ~ 22:00; VIETNAMESE MASSAGE; 60 phút; 360,000đ; AROMA MASSAGE; 90 phút; 700,000đ\". Jonu Spa tại 07 Nguyễn Tri Phương, Cẩm Nam. typical_vnd là massage Việt Nam 60 phút/người; min/max là dải các gói massage đọc được (Việt Nam, bốn tay, aroma, Thai, đá nóng...), không phải ước lượng tr",
+   "hours": "09:00-22:00",
+   "ticket_vnd": 360000,
+   "typical_vnd": 360000,
+   "min_vnd": 360000,
+   "max_vnd": 700000
+  },
+  {
+   "poi_id": "osm:node/10760853506",
+   "name": "Lemon tree spa",
+   "confidence": 0.6,
+   "evidence_url": "https://lemontreehoian.com/",
+   "note": "Codex t15 20/11/2026: \"Open daily10 AM – 10 PM; 60’ · 620,000₫; 60’ · 580,000₫; 120’ · 1,050,000₫\". Website Lemon Tree Spa, địa chỉ 07 Trương Minh Lượng, Sơn Phong. typical_vnd là Aroma Massage người lớn 60 phút, giá niêm yết; min/max chỉ các massage người lớn đọc được: chăm sóc bộ phận 60 phút đến",
+   "hours": "10:00-22:00",
+   "ticket_vnd": 620000,
+   "typical_vnd": 620000,
+   "min_vnd": 580000,
+   "max_vnd": 1050000
+  },
+  {
+   "poi_id": "osm:node/14337513701",
+   "name": "Son Hoi An Spa",
+   "confidence": 0.6,
+   "evidence_url": "https://sonhoianspa.com/service/relaxation-massage-eco-oil/",
+   "note": "Codex t15 20/11/2026: \"Vietnamese Signature Massage; 60'; 690.000 vnđ; Thai Aroma Hot Stone Fusion; 90'; 1.050.000 vnd\". Giá niêm yết/người: typical_vnd là Vietnamese Signature Massage 60 phút; min/max là dải các massage trong trang này, không gồm toàn bộ gói spa/beauty. Trang quảng cáo giảm 20%, cần kiểm tra điều kiện",
+   "hours": "08:00-22:00",
+   "ticket_vnd": 690000,
+   "typical_vnd": 690000,
+   "min_vnd": 690000,
+   "max_vnd": 1050000
+  },
+  {
+   "poi_id": "osm:node/5110691326",
+   "name": "Mr. Bean Bar",
+   "confidence": 0.6,
+   "evidence_url": "https://viedasie.com/les-meilleurs-bars-et-pubs-a-hoi-an.htm",
+   "note": "Codex t15 20/11/2026: \"Mr Bean Bar; Horaires: 12h00–00h00, tous les jours\". Mục riêng Mr Bean Bar tại 61 Nguyễn Phúc Chu; 00:00 là nửa đêm kết thúc ngày phục vụ. Không có giá một món uống cụ thể đọc được trong hướng dẫn. Không dùng mức chi tiêu/người của danh bạ hoặc giá bình",
+   "hours": "12:00-23:59"
+  },
+  {
+   "poi_id": "osm:node/6257424485",
+   "name": "Hoi An Sports Bar",
+   "confidence": 0.6,
+   "evidence_url": "https://hiddenhoian.com/general/sports-bars-hoi-an-best-places-to-watch-the-game/",
+   "note": "Codex t15 20/11/2026: \"11 a.m. to 11 p.m. daily.\". Giờ của đúng Hoi An Sports Bar tại 505 Hai Bà Trưng, nguồn ngày 18/09/2019. Chưa xác nhận lịch hiện hành năm 2026; không chuyển dữ liệu cơ sở tại 61a Phan Châu Trinh. Bài nói có bia nhưng không nêu gi",
+   "hours": "11:00-23:00"
+  },
+  {
+   "poi_id": "osm:node/12468807102",
+   "name": "Mezcal Cocteleria",
+   "confidence": 0.6,
+   "evidence_url": "https://www.mezcalcocteleria.com/contact-us",
+   "note": "Codex t15 20/11/2026: \"Mon 6.00 PM - 11.30 PM; Sun 6.00 PM - 11.30 PM\". Trang chính thức ghi cùng lịch 18:00-23:30 cả bảy ngày tại 38 Phan Chu Trinh; ưu tiên lịch này hơn các guide ghi 23:45. Dải giá cocktail/người lấy từ https://www.hoiana.com/ko/blog/cocktail-bar-in-hoi",
+   "hours": "18:00-23:30",
+   "ticket_vnd": 200000,
+   "typical_vnd": 200000,
+   "min_vnd": 150000,
+   "max_vnd": 250000
+  },
+  {
+   "poi_id": "osm:node/4285798291",
+   "name": "3 Dragons",
+   "confidence": 0.6,
+   "evidence_url": "https://hiddenhoian.com/general/sports-bars-hoi-an-best-places-to-watch-the-game/",
+   "note": "Codex t15 20/11/2026: \"8 a.m. to 12 a.m. Tuesday to Sunday. 11 a.m. to 12 a.m. Mondays.\". Nguồn 18/09/2019 cho 3 Dragons, 51 Phan Bội Châu: mở thứ Hai muộn hơn; 00:00 là cuối ngày, giờ có thể khác khi có trận đấu lớn. Đây là lịch cũ cần xác nhận lại. Giá bia khuyến mãi theo https://daytrip",
+   "hours": "11:00-23:59",
+   "ticket_vnd": 20000,
+   "typical_vnd": 20000,
+   "min_vnd": 20000,
+   "max_vnd": 20000
+  }
+ ]
+}

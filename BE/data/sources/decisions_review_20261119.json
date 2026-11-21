@@ -1,0 +1,205 @@
+{
+ "note": "Từ 2026-11-19 (review_v21.html). Q: {\"Q1\": {\"choice\": \"free / <100k / 100–500k / 500k–1,2tr (mặc định)\", \"default\": true, \"note\": null}, \"Q2\": {\"choice\": \"file riêng danang-v2/matrix.json (đang dùng)\", \"default\": true, \"note\": null}, \"Q3\": {\"choice\": \"cach_ly (đang dùng)\", \"default\": true, \"note\": null}, \"Q4\": {\"choice\": \"duyệt theo bảng dưới\", \"default\": true, \"note\": null}, \"Q5\": {\"choice\": \"theo bảng 'Vé phố cổ' dưới\", \"default\": true, \"note\": null}, \"Q6\": {\"choice\": \"OSRM car (đang dùng), Valhalla motor_scooter ở P1\", \"default\": true, \"note\": \"Chắc nếu xử lí xong thì dưng cả OSRM và Valhalla luôn\"}}",
+ "items": {
+  "ChIJZSsvT9QZQjERf-oLnsT1C3Y": {
+   "name": "Yen Yakiniku & Izakaya"
+  },
+  "ChIJHfGPsJkXQjERsHCXRTXX_Xs": {
+   "name": "Nhà hàng Hàn Quốc lòng bò nướng"
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "name": "Khu ẩm thực Chợ Cồn"
+  },
+  "ChIJm2iwgggbQjERj-x6QTYemFQ": {
+   "name": "Shop Hoa Tươi Ngũ Hành Sơn",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm hoa, không phải điểm du lịch"
+  },
+  "osm:node/7477670190": {
+   "name": "Cửa hàng bán noni",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: cửa hàng bán lẻ cho khách đoàn"
+  },
+  "osm:node/13677406601": {
+   "name": "Đài tưởng niệm chuyến bay 229 (1979)"
+  },
+  "ChIJs3Rt4-QZQjERPTSZ7G6XAK0": {
+   "name": "Clover Spa"
+  },
+  "ChIJv1gepxMZQjER2xJtkXvi9xU": {
+   "name": "Jeju Spa – Massage & Nail"
+  },
+  "ChIJpRFvp6sZQjERY_CDfnMCx2w": {
+   "name": "Vigift Đà Nẵng – Quà Đặc Sản"
+  },
+  "ChIJWd2LBrkZQjER4hLHO81ipK0": {
+   "name": "Lu's House Beauty & Academy",
+   "status": "excluded",
+   "status_reason": "đề xuất excluded: tiệm nặn mụn (WP5: wellness lẫn tiệm thẩm mỹ)"
+  },
+  "ChIJM1DTVHkZQjERDW1JNclcAtw": {
+   "name": "Massage người mù Đức Quý"
+  },
+  "ChIJn9Kkxh4ZQjERgDXEcvzD4nI": {
+   "name": "MarLan Pub"
+  },
+  "ChIJu9GUjOgZQjERpfx8z-GIMEw": {
+   "name": "Kết Bar"
+  },
+  "ChIJxRB4CRgXQjER6zy0em0FyTk": {
+   "name": "Oppa O Bar"
+  },
+  "ChIJW9b8Ky0XQjERPn8CJNdE0Lk": {
+   "name": "Chùa Mỹ Thị"
+  },
+  "ChIJ8e-HnOoZQjER1tLf4hD65xI": {
+   "name": "Elsa Spa"
+  },
+  "ChIJp9cNzfwZQjERS7ZSaA95etk": {
+   "name": "Lá Sen Cooking Class",
+   "status": "excluded",
+   "status_reason": "WP5"
+  },
+  "ChIJH5FAHiEYQjERi-kdX4gd-eE": {
+   "status": "active",
+   "status_reason": "không phải một địa điểm cố định (chương trình/tour)"
+  },
+  "ChIJJ66EjfQRQjERrmpQQcYTgq8": {
+   "status": "excluded",
+   "status_reason": "tên chung chung"
+  },
+  "ChIJ9yzkbH0ZQjERDhPDi_ITcmM": {
+   "status": "excluded",
+   "status_reason": "chưa định danh rõ"
+  },
+  "ChIJg-cynKIXQjERyE7ZIaTaCO8": {
+   "status": "excluded",
+   "status_reason": "tên chung chung (OSM)"
+  },
+  "osm:node/1623183649": {
+   "status": "active",
+   "status_reason": "cái này thì chắc cho chỉ hướng tới khu vực núi Sơn Trà là được"
+  },
+  "osm:node/4122433690": {
+   "status": "excluded",
+   "status_reason": "Lấy Bà Nà Hills (khu vui chơi thôi không cần Núi Bà Nà)"
+  },
+  "osm:node/4741642219": {
+   "status": "excluded",
+   "status_reason": "Này là nói chung của các bãi biển công cộng rồi"
+  },
+  "osm:node/4845297821": {
+   "status": "excluded",
+   "status_reason": "Nên lấy rõ núi thần tài luôn chứ không nên lấy gần"
+  },
+  "osm:node/5286977425": {
+   "status": "active",
+   "status_reason": "Chắc chỉ được địa điểm để tới Núi Thần Tài là được. Cái này cũng có vé kiểu giống như Bà Nà Hills. https://nangtrip.com/product/ve-cong-vien-suoi-khoang-nong-nui-than-tai-da-nang. Có giá vé là 480.000 ₫. "
+  },
+  "osm:node/10303626687": {
+   "status": "excluded",
+   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  "osm:node/10303626688": {
+   "status": "excluded",
+   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  "osm:node/11629841009": {
+   "status": "excluded",
+   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  "osm:node/11629996926": {
+   "status": "excluded",
+   "status_reason": "Nên để là tour, cắm trại ở Đèo Hải Vân"
+  },
+  "osm:node/11630013743": {
+   "status": "excluded",
+   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  "osm:node/11762365155": {
+   "status": "excluded",
+   "status_reason": "đỉnh núi OSM, chưa rõ có đường lên/điểm tham quan"
+  },
+  "osm:node/12701675501": {
+   "status": "excluded",
+   "status_reason": "tên chung chung (OSM)"
+  },
+  "ChIJyWFmArX3QTERon6tUT6re4Q": {
+   "status": "excluded",
+   "status_reason": "Sun World Bà Nà Hills"
+  },
+  "ChIJ66onuEIZQjERJcc014sju08": {
+   "status": "active",
+   "status_reason": "tiệm làm đẹp — có nên là điểm trong lịch trình?"
+  },
+  "ChIJ1XDmcgAZQjERg3z1Ix0EbZA": {
+   "status": "active",
+   "status_reason": "Này ổn vì là để hát karaoke, vui chơi"
+  },
+  "ChIJF8yRoecZQjERdDBeBdSRD-Y": {
+   "status": "excluded",
+   "status_reason": "chưa rõ là khu vui chơi có vé hay khu phố"
+  },
+  "ChIJGSKUUwCLQTERr0Je7WP5Xqc": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "ChIJZSAyL0YfQjERMP2R9yBDRwY": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "ChIJZ9UJGQQZQjERFL90XKMPBGk": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "ChIJ17mmuaQRQjERUiexX9MhcdI": {
+   "status": "excluded",
+   "status_reason": "người dùng yêu cầu xóa"
+  },
+  "ChIJWe_7hboQQjERxap-mizn-ZY": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "ChIJfQr_phEZQjER5leh47CfKTQ": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "osm:node/7095169367": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "osm:node/8883385553": {
+   "status": "excluded",
+   "status_reason": "người dùng duyệt"
+  },
+  "ChIJr_MgSAAZQjERnbnJDAtASZM": {
+   "status": "excluded",
+   "status_reason": "trùng với ChIJSZabUwAZQjERqs6A8ECVnWY"
+  },
+  "ChIJrcJ8wVwRQjERJF58LAQEO-I": {
+   "status": "excluded",
+   "status_reason": "trùng với ChIJtWWhh9wRQjERxmJ_DNJy62o"
+  },
+  "osm:node/4294135790": {
+   "status": "excluded",
+   "status_reason": "trùng với ChIJY3yT3IweQjERnbDRpKk8b3A"
+  },
+  "osm:node/9921282483": {
+   "status": "excluded",
+   "status_reason": "trùng với osm:node/14045144381"
+  },
+  "ChIJp3BwHgsZQjERzQZfxwNQNmE": {
+   "status": "excluded",
+   "status_reason": "trùng với ChIJl21Hd_4YQjERF980f9HS9Cc"
+  },
+  "osm:way/565186618": {
+   "requires_ticket_of": "osm:node/4601279489"
+  },
+  "osm:node/7127464285": {
+   "requires_ticket_of": "osm:node/4601279489"
+  },
+  "osm:way/209494258": {
+   "requires_ticket_of": "osm:node/4601279489"
+  }
+ }
+}

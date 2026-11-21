@@ -1,0 +1,202 @@
+{
+ "built_at": "2026-11-18",
+ "google_policy": "cach_ly",
+ "v1_count": 750,
+ "v1_meta_count": 750,
+ "v2_count": 1008,
+ "status": {
+  "active": 984,
+  "review": 20,
+  "excluded": 4
+ },
+ "category": {
+  "restaurant": 226,
+  "nightlife": 102,
+  "cafe": 166,
+  "day_market": 48,
+  "viewpoint": 22,
+  "religious": 104,
+  "outdoor_landmark": 68,
+  "museum_indoor": 24,
+  "paid_attraction": 49,
+  "lodging": 76,
+  "beach": 27,
+  "night_market": 6,
+  "wellness": 90
+ },
+ "role": {
+  "meal": 226,
+  "nightlife": 102,
+  "rest": 166,
+  "attraction": 348,
+  "base": 76,
+  "wellness": 90
+ },
+ "zone": {
+  "trung_tam": 276,
+  "son_tra_my_khe": 236,
+  "ngu_hanh_son": 80,
+  "hai_van_lien_chieu": 127,
+  "ba_na_tay": 40,
+  "hoi_an": 249
+ },
+ "zone_roles": {
+  "trung_tam": {
+   "meal": 48,
+   "nightlife": 33,
+   "rest": 49,
+   "attraction": 101,
+   "base": 23,
+   "wellness": 20
+  },
+  "son_tra_my_khe": {
+   "meal": 40,
+   "nightlife": 32,
+   "rest": 29,
+   "attraction": 66,
+   "base": 35,
+   "wellness": 33
+  },
+  "ngu_hanh_son": {
+   "meal": 8,
+   "nightlife": 3,
+   "rest": 8,
+   "attraction": 47,
+   "base": 9,
+   "wellness": 5
+  },
+  "hai_van_lien_chieu": {
+   "meal": 19,
+   "nightlife": 17,
+   "rest": 23,
+   "attraction": 43,
+   "base": 6,
+   "wellness": 18
+  },
+  "ba_na_tay": {
+   "attraction": 21,
+   "base": 2,
+   "meal": 13,
+   "rest": 4
+  },
+  "hoi_an": {
+   "attraction": 70,
+   "base": 1,
+   "meal": 98,
+   "rest": 53,
+   "nightlife": 14,
+   "wellness": 13
+  }
+ },
+ "clusters": {
+  "ngu_hanh_son": 21,
+  "ba_na": 24,
+  "bay_mau": 7,
+  "hoi_an_old_town": 32
+ },
+ "hours_verified_by": {
+  "inferred": 676,
+  "agent_web": 132,
+  "open_data": 198,
+  "user": 2
+ },
+ "price_verified_by": {
+  "agent_web": 87,
+  "inferred": 913,
+  "user": 8
+ },
+ "dwell_verified_by": {
+  "inferred": 970,
+  "user": 38
+ },
+ "legacy_hours_nonempty": 910,
+ "v1_hours_nonempty": 523,
+ "legacy_price_band": 70,
+ "legacy_free_entry": 195,
+ "hours_conflict": 3,
+ "quarantined_pois": 662,
+ "category_changes": 180,
+ "duplicate_candidates": 10,
+ "archetype_vs_google": [
+  {
+   "archetype": "an_toi",
+   "n_with_google_hours": 12,
+   "safe_inside": 11,
+   "share": 0.92
+  },
+  {
+   "archetype": "bao_tang",
+   "n_with_google_hours": 9,
+   "safe_inside": 9,
+   "share": 1.0
+  },
+  {
+   "archetype": "bar",
+   "n_with_google_hours": 69,
+   "safe_inside": 62,
+   "share": 0.9
+  },
+  {
+   "archetype": "cafe",
+   "n_with_google_hours": 90,
+   "safe_inside": 76,
+   "share": 0.84
+  },
+  {
+   "archetype": "cho_dem",
+   "n_with_google_hours": 3,
+   "safe_inside": 3,
+   "share": 1.0
+  },
+  {
+   "archetype": "cho_ngay",
+   "n_with_google_hours": 16,
+   "safe_inside": 14,
+   "share": 0.88
+  },
+  {
+   "archetype": "chua",
+   "n_with_google_hours": 12,
+   "safe_inside": 10,
+   "share": 0.83
+  },
+  {
+   "archetype": "com_trua",
+   "n_with_google_hours": 20,
+   "safe_inside": 18,
+   "share": 0.9
+  },
+  {
+   "archetype": "cua_hang",
+   "n_with_google_hours": 10,
+   "safe_inside": 9,
+   "share": 0.9
+  },
+  {
+   "archetype": "ngoai_troi_do_thi",
+   "n_with_google_hours": 3,
+   "safe_inside": 0,
+   "share": 0.0
+  },
+  {
+   "archetype": "ngoai_troi_tu_nhien",
+   "n_with_google_hours": 5,
+   "safe_inside": 1,
+   "share": 0.2
+  },
+  {
+   "archetype": "nha_hang",
+   "n_with_google_hours": 70,
+   "safe_inside": 55,
+   "share": 0.79
+  },
+  {
+   "archetype": "spa",
+   "n_with_google_hours": 67,
+   "safe_inside": 59,
+   "share": 0.88
+  }
+ ],
+ "ticket_todo": 19,
+ "osm_linked": 510
+}

@@ -1,0 +1,74 @@
+{
+ "note": "review_v21.html export",
+ "unparsed_hours": [],
+ "items": [
+  {
+   "poi_id": "osm:way/140401174",
+   "hours": "00:00-23:59",
+   "price_tier": "free",
+   "ticket_vnd": 0,
+   "evidence_url": "https://daivietourist.vn/ho-xanh-da-nang/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "mở 24h, miễn phí (daivietourist)",
+   "price_note": "Hồ tự nhiên, không thu vé (daivietourist; vinpearl cũng ghi 'không thu vé vào cửa').",
+   "checked_at": "2026-11-20",
+   "verified_by": "human",
+   "hours_raw": "00:00-23:59"
+  },
+  {
+   "poi_id": "osm:way/14131302",
+   "hours": "17:00-21:30",
+   "closed_days": [
+    "Tu"
+   ],
+   "price_tier": "expensive",
+   "ticket_vnd": 600000,
+   "evidence_url": "https://hoianit.com/show-ky-uc-hoi-an/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Show 20:00 hằng tối trừ thứ Ba, ~60 phút (hoianit); giữ khung công viên 17:00-21:30",
+   "price_note": "ECO 600.000đ tại quầy (online ~520-540k); HIGH 750k (online 650-675k); VIP 1.200.000đ; trẻ 1-1,4m từ ~250-270k online; cư dân ĐN/QN cũ từ ~320k (cần CCCD). Show 20:00, ~60', nghỉ thứ Ba.",
+   "checked_at": "2026-11-20",
+   "verified_by": "human",
+   "hours_raw": "17:00-21:30"
+  },
+  {
+   "poi_id": "ChIJUbe6YK4NQjERw6BXx5s8cHM",
+   "hours": "07:30-18:30",
+   "price_tier": "medium",
+   "ticket_vnd": 30000,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/kham-pha-rung-dua-bay-mau-16267",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Giờ mở cửa 7h30-18h30 (mia.vn)",
+   "price_note": "Vé cổng NL 30.000đ, trẻ 5-9t 15.000đ, <5t miễn phí; thuyền thúng 150.000đ/thúng/2 người/45' (khách VN 200k, quốc tế 250k/2 người/thúng tuỳ bảng).",
+   "checked_at": "2026-11-20",
+   "verified_by": "human",
+   "hours_raw": "07:30-18:30"
+  },
+  {
+   "poi_id": "ChIJ2y5L4dQNQjERxeSLc68fbrw",
+   "hours": "07:00-17:00",
+   "price_tier": "cheap",
+   "ticket_vnd": 40000,
+   "evidence_url": "https://nangtrip.com/activities/ngu-hanh-son",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "07:00-17:00 (danangfantasticity 22/01/2026), người dùng giữ",
+   "price_note": "Vé Thủy Sơn NL 40.000đ; thang máy 15.000đ/lượt; động Âm Phủ 20.000đ riêng. Kim Sơn, Thổ Sơn gộp vào điểm này (người dùng 20/11).",
+   "checked_at": "2026-11-20",
+   "verified_by": "human",
+   "hours_raw": "07:00-17:00"
+  },
+  {
+   "poi_id": "manual:son-tra-tour-lan-ct15",
+   "hours": "08:00-16:45",
+   "price_tier": "medium",
+   "ticket_vnd": 450000,
+   "evidence_url": "https://oktrip.vn/du-lich-tu-tuc/trai-nghiem-lan-ngam-san-ho-da-nang/",
+   "note": "người dùng tự kiểm, kèm link (chốt cuối 20/11)",
+   "hours_note": "Khởi hành 8h00-14h45 hằng ngày, tour 120' -> kết thúc muộn nhất 16:45 (oktrip)",
+   "price_note": "Tour trọn gói 120': cano + SUP + câu cá + lặn ngắm san hô. NL (≥6t) 450.000đ, trẻ 1-6t 250.000đ, <1t miễn phí. Xuất phát bến thủy nội địa CT15 (pin Sơn Trà Marina theo tixgo; oktrip ghi đường Hoàng Sa, Thọ Quang).",
+   "checked_at": "2026-11-20",
+   "verified_by": "human",
+   "hours_raw": "08:00-16:45"
+  }
+ ]
+}

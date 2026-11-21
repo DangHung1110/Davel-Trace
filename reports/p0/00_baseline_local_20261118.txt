@@ -1,0 +1,76 @@
+# WP0 baseline local — 2026-11-18T22:25:10+07:00
+## Step 2: python -m pytest BE/tests -q -p no:cacheprovider --durations=15
+...........................................................ss........... [  8%]
+................................................................ [ 15%]
+........................................................................ [ 24%]
+........................................................................ [ 32%]
+........................................................................ [ 41%]
+................................................s....................... [ 49%]
+........................................................................ [ 58%]
+........................................................................ [ 66%]
+........................................................................ [ 74%]
+........................................................................ [ 83%]
+........................................................................ [ 91%]
+.............s........................................................   [100%]
+============================== warnings summary ===============================
+..\..\..\AppData\Local\Programs\Python\Python310\lib\site-packages\fastapi\testclient.py:1
+  C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+BE/tests/unit/test_gold.py::TestGold::test_all_feasible_golds_pass_gate
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+BE/tests/unit/test_gold.py::TestGold::test_all_feasible_golds_pass_gate
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+BE/tests/unit/test_gold.py::TestGold::test_all_feasible_golds_pass_gate
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 15 durations =============================
+803.27s call     BE/tests/unit/test_baselines.py::TestBaselines::test_full_suite_run_covers_all_23_feasible
+171.25s setup    BE/tests/unit/test_baselines.py::TestBaselines::test_distance_only_is_the_gold
+133.09s call     BE/tests/unit/test_baselines.py::TestBaselines::test_llm_only_skip_has_reason_and_no_numbers
+101.78s call     BE/tests/unit/test_baselines.py::TestBaselines::test_run_is_deterministic
+52.67s call     BE/tests/unit/test_baselines.py::TestBaselines::test_llm_bad_order_is_the_baselines_own_failure
+29.87s call     BE/tests/unit/test_pool_diverse.py::TestDiverseEndpoint::test_diverse_returns_three_pairwise_different_plans
+17.66s call     BE/tests/unit/test_replan.py::TestReplan::test_real_matrix_replan_twice_no_duplicates
+16.24s call     BE/tests/contract/test_itinerary.py::TestItineraryContract::test_three_profiles_yield_three_plans_or_501
+10.85s setup    BE/tests/unit/test_weather_exposure.py::TestSnapshotExposureDistribution::test_distribution_helper_matches_report
+10.75s call     BE/tests/unit/test_baselines.py::TestBaselines::test_hybrid_plan_matches_independent_evaluate
+8.87s call     BE/tests/unit/test_baselines.py::TestBaselines::test_hybrid_is_the_real_pipeline_and_gate_is_reported_honestly
+7.62s call     BE/tests/unit/test_weather_enrichment.py::TestAuditPreservation::test_snapshot_audit_labels_are_exact
+7.55s call     BE/tests/unit/test_pool_diverse.py::TestDiverseEndpoint::test_default_reports_guarantee_and_no_per_plan_pool
+5.66s call     BE/tests/unit/test_weather_label.py::TestAuditPrecedence::test_snapshot_audit_labels_are_preserved
+5.23s call     BE/tests/unit/test_template_wiring.py::TestBuildPlanTemplates::test_legacy_path_has_no_template_constraints
+850 passed, 4 skipped, 4 warnings, 8 subtests passed in 1483.81s (0:24:43)
+exit=0
+
+## Step 3: P0_GATE=1 python -m pytest BE/tests/data -q -k gate
+.F                                                                       [100%]
+================================== FAILURES ===================================
+_____ TestSnapshotV2.test_gate_paid_attractions_have_ticket_with_evidence _____
+
+self = <tests.data.test_snapshot_v2.TestSnapshotV2 testMethod=test_gate_paid_attractions_have_ticket_with_evidence>
+
+    @unittest.skipUnless(GATE, "P0 gate (set P0_GATE=1)")
+    def test_gate_paid_attractions_have_ticket_with_evidence(self):
+        missing = [p["name"] for p in self.pois
+                   if p["category"] == "paid_attraction" and p["status"] != "excluded"
+                   and p["price"]["basis"] != "included_in_parent"
+                   and not (p["price"]["ticket_vnd"] is not None
+                            and p["provenance"]["price"].get("evidence_url"))]
+>       self.assertEqual(missing, [], f"{len(missing)} paid attractions lack ticket+evidence")
+E       AssertionError: Lists differ: ['Trung T\xe2m Gi\u1ea3i Tr\xed Helio', 'Khu Du l\u1ecbch [725 chars] H\xe0'] != []
+E       
+E       First list contains 22 additional elements.
+E       First extra element 0:
+E       'Trung T\xe2m Gi\u1ea3i Tr\xed Helio'
+E       
+E       Diff is 843 characters long. Set self.maxDiff to None to see it. : 22 paid attractions lack ticket+evidence
+
+BE\tests\data\test_snapshot_v2.py:187: AssertionError
+=========================== short test summary info ===========================
+FAILED BE/tests/data/test_snapshot_v2.py::TestSnapshotV2::test_gate_paid_attractions_have_ticket_with_evidence
+1 failed, 1 passed, 12 deselected in 0.67s
+exit=1

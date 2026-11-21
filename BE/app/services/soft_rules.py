@@ -318,6 +318,18 @@ def is_restaurant(poi: dict | None) -> bool:
     return poi_category(poi) == "restaurant"
 
 
+def is_meal_experience(poi: dict | None) -> bool:
+    """hours.kind == by_booking (cooking class): the traveller eats what they
+    cook, so a session that OVERLAPS a meal slot is that meal (A1 counts it,
+    it can be the lunch, and no other restaurant is needed in the slot)."""
+    return ((poi or {}).get("hours") or {}).get("kind") == "by_booking"
+
+
+def covers_slot(start: int, end: int, slot: tuple[int, int]) -> bool:
+    """Activity [start, end) overlaps the meal slot [lo, hi)."""
+    return start < slot[1] and end > slot[0]
+
+
 def same_category_edges(activities: list[dict] | None, pois: dict,
                         only: str | None = None) -> list[tuple[dict, dict]]:
     """Canonical "back-to-back POIs of the same category" scan.
@@ -351,7 +363,11 @@ def lunch_activity(activities: list[dict], pois: dict) -> dict | None:
     activity dict (not the POI) because the rest window is tied to its END.
     """
     for act in sorted(activities or [], key=lambda a: a.get("start", "")):
-        if not is_restaurant(pois.get(act.get("poi_id"))):
+        poi = pois.get(act.get("poi_id"))
+        if is_meal_experience(poi) and covers_slot(to_min(act.get("start")),
+                                                   to_min(act.get("end")), LUNCH_SLOT):
+            return act      # a cooking class over lunch is the lunch
+        if not is_restaurant(poi):
             continue
         minutes = to_min(act.get("start"))
         if LUNCH_REQUIRED[0] <= minutes < LUNCH_REQUIRED[1]:

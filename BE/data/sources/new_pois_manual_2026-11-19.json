@@ -1,0 +1,129 @@
+{
+ "about": "Điểm thêm theo yêu cầu người dùng 2026-11-19 (Hội An: phố đi bộ / hoa đăng, bài chòi; Sơn Trà: tách điểm con). id manual:* = không có phần tử OSM; toạ độ ước lượng trên bản đồ, cần đối chiếu OSM.",
+ "fetched_at": "2026-11-19",
+ "source": "user request + web (xem agent_web_2026-11-19b.json)",
+ "license": "toạ độ OSM ODbL khi có osm; manual = ước lượng",
+ "items": [
+  {
+   "id": "manual:hoi-an-pho-di-bo-hoa-dang",
+   "lat": 15.87655,
+   "lon": 108.3279,
+   "name": "Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",
+   "c": "attraction",
+   "smart_tags": {
+    "budget": [
+     "half-day"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "time": [
+     "sunset",
+     "night"
+    ]
+   }
+  },
+  {
+   "id": "manual:hoi-an-bai-choi",
+   "lat": 15.87615,
+   "lon": 108.32585,
+   "name": "Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội)",
+   "c": "attraction",
+   "smart_tags": {
+    "budget": [
+     "half-day"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "solo",
+     "group"
+    ],
+    "time": [
+     "night"
+    ]
+   }
+  },
+  {
+   "osm": "way/630377259",
+   "lat": 16.1243611,
+   "lon": 108.2202733,
+   "name": "Bãi biển Tiên Sa",
+   "c": "beach"
+  },
+  {
+   "id": "manual:son-tra-bai-da-den",
+   "lat": 16.1474562,
+   "lon": 108.2338043,
+   "name": "Bãi Đá Đen Sơn Trà",
+   "c": "beach",
+   "coord_source": "https://nangtrip.com/activities/bai-da-den"
+  },
+  {
+   "osm": "way/140401174",
+   "lat": 16.098764,
+   "lon": 108.2677282,
+   "name": "Hồ Xanh Sơn Trà",
+   "c": "attraction",
+   "coord_source": "OSM natural=water (Nominatim, geo_codex.json); toạ độ tâm mặt hồ, không phải lối vào"
+  },
+  {
+   "id": "manual:son-tra-bai-rang",
+   "lat": 16.1056,
+   "lon": 108.29177,
+   "name": "Bãi Rạng Sơn Trà",
+   "c": "beach",
+   "coord_source": "https://vietnam.worldplaces.me/view-place/21371614-bai-rang-da-nang.html (geo_codex.json, medium)",
+   "smart_tags": {
+    "budget": [
+     "half-day"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "time": [
+     "morning",
+     "sunset"
+    ]
+   }
+  },
+  {
+   "id": "manual:son-tra-tour-lan-ct15",
+   "lat": 16.0968369,
+   "lon": 108.2669597,
+   "name": "Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",
+   "c": "attraction",
+   "coord_source": "tixgo.vn/node/3822 -> maps pin Sơn Trà Marina !3d16.0968369!4d108.2669597 (reports/p0/links/final2_codex.json, medium)",
+   "smart_tags": {
+    "budget": [
+     "half-day"
+    ],
+    "party": [
+     "family",
+     "couple",
+     "group"
+    ],
+    "time": [
+     "morning"
+    ]
+   }
+  }
+ ],
+ "curation": {
+  "category": {
+   "manual:hoi-an-pho-di-bo-hoa-dang": "outdoor_landmark",
+   "manual:hoi-an-bai-choi": "outdoor_landmark",
+   "manual:son-tra-bai-da-den": "beach",
+   "way/630377259": "beach",
+   "way/140401174": "outdoor_landmark",
+   "manual:son-tra-bai-rang": "beach",
+   "manual:son-tra-tour-lan-ct15": "paid_attraction"
+  }
+ },
+ "prices": []
+}

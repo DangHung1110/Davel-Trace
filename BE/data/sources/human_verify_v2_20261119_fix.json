@@ -1,0 +1,46 @@
+{
+ "note": "Sửa sau khi đọc kỹ link (Claude, 2026-11-19). Sắp sau human_verify_v2_20261119.json nên THAY THẾ cả mục cùng poi_id.",
+ "items": [
+  {
+   "poi_id": "ChIJlxydWJEZQjER5GSMuHJHtak",
+   "hours": "00:00-23:59",
+   "price_tier": "expensive",
+   "evidence_url": "https://nghiencamtrai.com/voc-glamping/",
+   "checked_at": "2026-11-19",
+   "verified_by": "human",
+   "hours_note": "mở 24/24, check-in theo khung giờ đặt (nghiencamtrai 12/10/2025); link Đà Lạt nhập lúc đầu đã bỏ",
+   "note": "Gói 695.000–795.000đ/người -> expensive (500k–1,2tr)."
+  },
+  {
+   "poi_id": "manual:hai-van-quan",
+   "hours": "07:00-17:30",
+   "price_tier": "cheap",
+   "ticket_vnd": 70000,
+   "evidence_url": "https://vnexpress.net/di-tich-hai-van-quan-chinh-thuc-thu-phi-tham-quan-5080669.html",
+   "checked_at": "2026-11-19",
+   "verified_by": "human",
+   "hours_note": "'Thời gian mở cửa đón khách từ 7h đến 17h30 hằng ngày' (vnexpress 1/6/2026)"
+  },
+  {
+   "poi_id": "ChIJcVJkUPcXQjERsA8_dfySw5E",
+   "hours": "09:00-18:00",
+   "price_tier": "medium",
+   "evidence_url": "https://nangtrip.com/activities/bao-tang-3d-art-in-paradise",
+   "checked_at": "2026-11-19",
+   "verified_by": "human",
+   "hours_note": "nguồn lệch: mô tả nangtrip 9:00-22:00, widget nangtrip 8:30-18:00, danatravel 9:00-18:00 (khách cuối 17:00) -> lấy 09:00-18:00",
+   "price_note": "NL 140.000đ (khách VN) / 200.000đ (khách nước ngoài); trẻ 1-1,3m 100.000đ; <1m miễn phí"
+  },
+  {
+   "poi_id": "manual:son-tra-bai-rang",
+   "hours": "09:00-17:30",
+   "price_tier": "free",
+   "ticket_vnd": 0,
+   "evidence_url": null,
+   "checked_at": "2026-11-19",
+   "hours_note": "Người dùng đưa 9:00-18:00 nhưng đó là giờ dịch vụ lặn (locatravel, từ 01/01/2026), không phải giờ bãi. Giao với khung tuyến bán đảo 07:30-17:30 (mùa đông) -> 09:00-17:30.",
+   "price_note": "Không vé vào; PHÍ BẮT BUỘC gửi xe ~10.000đ; thuê chòi ~300.000đ/chòi 6 người (tuỳ chọn).",
+   "note": "Nguồn: tin nhắn người dùng 2026-11-19 + locatravel.vn/ve-lan-ngam-san-ho-ban-dao-son-tra"
+  }
+ ]
+}

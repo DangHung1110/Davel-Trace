@@ -1,0 +1,188 @@
+[
+  {
+    "poi_id": "ChIJLeqV3_cXQjERH0Dq1Mte6_w",
+    "name": "Son Tra Retreat - Garden Lounge & Eatery",
+    "hours": "10:00-21:00",
+    "closed_days": [],
+    "ticket_vnd": null,
+    "source": "https://sontraretreat.vn/",
+    "quote": "Mon 09:30 - 22:00",
+    "checked_at": "2026-11-19",
+    "confidence": "medium",
+    "note": "Website chính thức đọc trực tiếp có lịch 09:30-22:00 cả bảy ngày. PasGo ghi 08:00-21:00 cả tuần nhưng đã dừng nhận đặt chỗ; không có nghĩa nhà hàng đóng cửa. Theo yêu cầu chọn khung hẹp, hours là giao hai lịch 09:30-21:00, không phải giờ đóng cửa do chủ quán công bố. Kết quả tìm kiếm lưu cache của website từng hiện 10:00-22:00 (thứ Sáu 22:30); ưu tiên nội dung trang mở trực tiếp 09:30-22:00. Không coi khoảng giá món ăn là giá vé. Khi tính cả lịch Tripadvisor 10:00-22:00, khung cuối cùng chọn 10:00-21:00.",
+    "alternatives": [
+      {
+        "source": "https://pasgo.vn/nha-hang/son-tra-retreat---garden-lounge-and-eatery-3977",
+        "hours": "08:00-21:00",
+        "quote": "Đang mở cửa: 08:00 - 21:00",
+        "note": "Địa chỉ cùng 11 Lê Văn Lương; lịch bảy ngày."
+      },
+      {
+        "source": "https://www.tripadvisor.com/Restaurant_Review-g15339118-d17199287-Reviews-Son_Tra_Retreat_Garden_Lounge_Eatery-Tho_Quang_Son_Tra_Peninsula_Da_Nang.html",
+        "hours": "10:00-22:00",
+        "note": "Lịch bên thứ ba trong kết quả tìm kiếm; nếu áp giao với cả nguồn này thì khung nghiêm ngặt hơn là 10:00-21:00."
+      }
+    ],
+    "selection": "conservative_intersection"
+  },
+  {
+    "poi_id": "ChIJSRWy6Hr3QTERiU3vuI0PbHw",
+    "name": "Khu Du Lịch Sinh Thái Lái Thiêu",
+    "hours": "07:30-17:00",
+    "closed_days": [],
+    "ticket_vnd": 100000,
+    "source": "https://danangfantasticity.com/en/cung-kham-pha/khu-du-lich-sinh-thai-lai-thieu-da-nang",
+    "quote": "Thời gian mở cửa: 07h30 – 17h00 hàng ngày",
+    "checked_at": "2026-11-19",
+    "confidence": "medium",
+    "note": "Cổng du lịch thành phố, bài ngày 07/12/2017; giờ đọc được từ bản chỉ mục tìm kiếm, mở URL trực tiếp hiện chủ yếu khung trang tiếng Anh. VinWonders ghi 07:00-19:00 thứ Hai đến Chủ nhật, cả lễ Tết. Chọn khung hẹp 07:30-17:00; cần xác nhận lại trước khi coi là lịch hiện hành chắc chắn. ticket_vnd là vé cổng người lớn tham khảo 100.000đ từ VinWonders; trẻ em 50.000đ, trò chơi/thuê chòi tính riêng.",
+    "alternatives": [
+      {
+        "source": "https://vinwonders.com/vi/wonderpedia/news/khu-du-lich-sinh-thai-lai-thieu/",
+        "hours": "07:00-19:00",
+        "quote": "Thời gian mở cửa: 07h00 – 19h00 từ thứ 2 đến chủ nhật (cả ngày lễ, Tết)",
+        "ticket_vnd": 100000,
+        "note": "Bảng vé người lớn 100.000, trẻ em 50.000; chính trang ghi giá tham khảo có thể thay đổi."
+      }
+    ],
+    "selection": "conservative_intersection"
+  },
+  {
+    "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
+    "name": "DD WONDERLAND",
+    "hours": "09:00-21:00",
+    "closed_days": [],
+    "ticket_vnd": null,
+    "source": "https://www.greensm.com/vn-vi/news/khu-vui-choi-da-nang",
+    "quote": "09:00 – 22:00 (Thứ 7).",
+    "checked_at": "2026-11-19",
+    "confidence": "medium",
+    "note": "Đúng địa chỉ 78B Quang Trung. Green SM ghi thứ Hai/Chủ nhật 08:00-22:00; thứ Ba-Sáu 08:30-22:00; thứ Bảy 09:00-22:00. MIA ghi ngày thường 08:00-21:00, cuối tuần 08:00-22:00. Giao bảo thủ mọi ngày và giữa các nguồn là 09:00-21:00; không phải giờ nguyên văn của một nguồn. Không chốt một ticket_vnd vì giá theo ngày và nguồn lệch: Green SM 40.000đ/bé ngày thường, 60.000đ cuối tuần/lễ; Khamphadanang ghi 60.000/80.000đ. Không coi vé trẻ em là chi tiêu một người lớn.",
+    "alternatives": [
+      {
+        "source": "https://mia.vn/cam-nang-du-lich/nhung-khu-vui-choi-tre-em-o-da-nang-17760",
+        "quote": "8h - 21h (thứ 2 đến thứ 6) | 8h - 22h (thứ 7, Chủ Nhật)",
+        "note": "Bài 31/01/2025, giá tham khảo 40.000-60.000đ."
+      },
+      {
+        "source": "https://khamphadanang.vn/dia-diem/dd-wonderland/",
+        "quote": "Giờ mở cửa: 8:00 – 22:00 hàng ngày",
+        "note": "Trong cùng trang phần đầu lại hiện 8:30-22:00; vé ghi 60.000/80.000đ/bé."
+      },
+      {
+        "source": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/top-11-khu-vui-choi-cho-tre-em-o-da-nang-cap-nhat-moi-23847",
+        "quote": "DD Wonderland mở cửa từ 8h00 đến 21h30 mỗi ngày.",
+        "hours": "08:00-21:30"
+      }
+    ],
+    "ticket_options": [
+      {
+        "source": "https://www.greensm.com/vn-vi/news/khu-vui-choi-da-nang",
+        "audience": "child",
+        "weekdays_vnd": 40000,
+        "weekends_holidays_vnd": 60000
+      },
+      {
+        "source": "https://khamphadanang.vn/dia-diem/dd-wonderland/",
+        "audience": "child",
+        "weekdays_vnd": 60000,
+        "weekends_vnd": 80000
+      }
+    ],
+    "selection": "conservative_intersection"
+  },
+  {
+    "poi_id": "ChIJK4sVPc0ZQjERdGROWQ8MMg4",
+    "name": "Trung Tâm Giải Trí Helio",
+    "hours": null,
+    "closed_days": [],
+    "ticket_vnd": null,
+    "source": "https://danangfantasticity.com/to-hop-noi-bat/helio-center-tam-dung-hoat-dong",
+    "quote": "Helio Kids và Helio Play sẽ tạm ngưng hoạt động từ 05/09/2025 để sửa chữa, nâng cấp toàn diện.",
+    "checked_at": "2026-11-19",
+    "confidence": "low",
+    "note": "Chưa xác minh được giờ hiện hành cho toàn tổ hợp/Helio Play-Kids cũ. Thông báo 09/09/2025 là bằng chứng tạm ngưng trong quá khứ, không đủ kết luận toàn tổ hợp vẫn đóng ngày kiểm tra. Website hiện đã giới thiệu mô hình Art Mall, B.Fair, SODABAK, Metiz và một số mục COMING SOON. Không dùng lịch từng phân khu thay giờ của toàn POI. closed_days=[] ở đây là chưa xác định ngày nghỉ, không khẳng định mở cả tuần. Bản FAQ cũ trong chỉ mục ghi 17:30-22:00 ngày thường, 08:00-22:30 cuối tuần/lễ; không áp vì có thay đổi vận hành.",
+    "alternatives": [
+      {
+        "source": "https://www.helio.vn/",
+        "note": "Trang chính thức mở trực tiếp mô tả Art Mall mới; chưa thấy bảng giờ chung hiện hành."
+      },
+      {
+        "source": "https://helio.vn/vi/faqs/",
+        "quote": "Thứ 2 - Thứ 6: 17:30 - 22:00 Cuối tuần, ngày lễ: 08:00 - 22:30",
+        "note": "FAQ cũ đọc từ chỉ mục, URL mở trực tiếp timeout; không chọn làm hours."
+      },
+      {
+        "source": "https://www.localgymsandfitness.com/VN/Da-Nang/1450343668559843/Sodabak",
+        "note": "Bản sao bài SODABAK 26/09/2026 ghi thứ Hai-Sáu 10:00-22:00, cuối tuần/lễ 09:00-22:30; chỉ phân khu tầng 2, chưa phải lịch toàn tổ hợp."
+      }
+    ]
+  },
+  {
+    "poi_id": "osm:node/7127442985",
+    "name": "Nhà biểu diễn nghệ thuật cổ truyền Hội An (66 Bạch Đằng)",
+    "hours": null,
+    "closed_days": [],
+    "ticket_vnd": null,
+    "source": "https://hoianheritage.danang.gov.vn/vi/news/Tin-tuc-su-kien/ban-giao-mat-bang-thi-cong-cong-trinh-sua-chua-cai-tao-nha-66-bach-dang-1724.html",
+    "quote": "công trình sẽ tạm đóng cửa trong 2 tháng bắt đầu từ ngày 09/3/2026 để sửa chữa, cải tạo.",
+    "checked_at": "2026-11-19",
+    "confidence": "low",
+    "note": "Nguồn quản lý di sản ngày 11/03/2026 xác nhận chương trình chuyển sang Hội trường Quảng trường Sông Hoài, 01 Cao Hồng Lãnh. Chưa tìm được xác nhận mở lại tại đúng 66 Bạch Đằng; không suy ra đã mở sau 2 tháng. Bài chính thức 2022 nêu suất bắt đầu 10:15 và 15:15 hằng ngày, nhưng không nêu giờ kết thúc. Hộ chiếu di sản tháng 01/2026 được chỉ mục ghi 10:15-11:00 và 15:15-16:00, trước thông báo sửa chữa. Không gán lịch cũ hoặc lịch ở địa điểm mới cho node 66 Bạch Đằng. closed_days=[] là chưa xác định, không khẳng định mở cả tuần. Chưa có giá vé riêng hiện hành; không tự đặt 0 do thuộc vé phố cổ.",
+    "alternatives": [
+      {
+        "source": "https://hoianworldheritage.org.vn/vi/news/Van-hoa-nghe-thuat/nha-bieu-dien-nghe-thuat-co-truyen-hoi-an-2160.hwh",
+        "quote": "với hai suất diễn 10g 15, 15g 15/ ngày",
+        "note": "Bài 12/05/2022; chỉ có giờ bắt đầu, không tự suy ra thời lượng."
+      },
+      {
+        "source": "https://danangfantasticity.com/wp-content/uploads/2026/01/Ho-Chieu-Di-san-Da-Nang.pdf",
+        "quote": "Show diễn 1: 10h15 – 11h00; Show diễn 2: 15h15 – 16h00",
+        "hours": "10:15-11:00, 15:15-16:00",
+        "note": "Trích từ chỉ mục tìm kiếm; PDF 11,7 MB vượt giới hạn mở của web tool. Tài liệu tháng 01/2026 cũ hơn thông báo chuyển địa điểm tháng 03/2026."
+      }
+    ]
+  },
+  {
+    "poi_id": "osm:way/14131302",
+    "name": "Công viên Ấn tượng Hội An (show Ký ức Hội An)",
+    "hours": "17:00-21:30",
+    "closed_days": [
+      "Tu"
+    ],
+    "ticket_vnd": 600000,
+    "source": "https://ticketgo.vn/event/ky-uc-hoi-an-hoi-an-memories-show-gia-ve-va-lich-dien",
+    "quote": "Hoi An Impression Theme Park (16:00 – 22:00)",
+    "checked_at": "2026-11-19",
+    "confidence": "medium",
+    "note": "POI là công viên, không phải chỉ sân khấu. Ticketgo và KKday ghi công viên 16:00-22:00, show 20:00-21:00, nghỉ thứ Ba. Nguồn Vietnam.travel ghi công viên mở 17:00 và show cũ 19:30-20:45; video khai trương của chủ vận hành năm 2018 ghi công viên 16:45-21:30, show cũ 19:30-20:30. Theo yêu cầu khung hẹp, hours công viên là giao bảo thủ 17:00-21:30, không phải giờ chính thức mới được xác nhận. Suất show hiện được bên bán vé công bố 20:00-21:00; cần giữ đủ 60 phút, không giao/cắt ngắn các lịch show khác phiên bản. ticket_vnd=600000 là giá niêm yết vé ECO người lớn từ 140cm tại Ticketgo, gồm vào công viên, không phải vé công viên riêng; hạng HIGH/VIP và khuyến mãi có giá khác. Xác nhận ngày diễn khi đặt vé.",
+    "show_hours": "20:00-21:00",
+    "alternatives": [
+      {
+        "source": "https://www.kkday.com/fr/product/20235-hoi-an-memories-show-ticket",
+        "quote": "Hoi An Memories Land : 16h00–22h00, Lundi - Dimanche (Mardi fermé)",
+        "hours": "16:00-22:00",
+        "closed_days": [
+          "Tu"
+        ],
+        "note": "Cùng trang ghi show 20:00-21:00, vào trước 15-20 phút."
+      },
+      {
+        "source": "https://vietnam.travel/vi/things-to-do/back-time-hoi-an-memories-show/",
+        "quote": "Công viên Chủ đề mở cửa lúc 5 giờ chiều",
+        "note": "Nguồn du lịch quốc gia; cùng bài có lịch show 19:30-20:45, khác lịch các bên bán vé hiện tại."
+      },
+      {
+        "source": "https://www.youtube.com/watch?v=DzFxpdowDMI",
+        "quote": "Giờ mở cửa công viên: 16h45 - 21h30 (minishow diễn từ 17h00)",
+        "hours": "16:45-21:30",
+        "note": "Video kênh chủ vận hành ngày 08/11/2018, lịch lịch sử, chưa chứng minh giờ đóng hiện hành."
+      },
+      {
+        "source": "https://hoianmemoriesland.com/vi/ky-uc-hoi-an-mot-trong-nhung-show-dien-viet-nam-ma-ban-khong-nen-bo-lo-d190",
+        "note": "Bài chính thức 30/10/2023 ghi công viên mở từ 16h, trừ thứ Ba; không có giờ đóng rõ."
+      }
+    ],
+    "selection": "conservative_intersection_with_historical_sources"
+  }
+]

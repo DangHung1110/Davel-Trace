@@ -140,6 +140,8 @@ class StubPOI:
     windows: tuple[tuple[int, int], ...] = ()
     fee: int = 0              # VND per person (gate BCS, `max_fee`)
     visit_max: int = 0        # p75: how long a visit may run when the day has room
+    # hours.kind == "by_booking": bookable sessions (cooking class); <= 1/day
+    booking: bool = False
 
 
 def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
@@ -222,7 +224,8 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    category=category,
                    intensity=int(poi.get("intensity") or 2),
                    windows=tuple(wins) if len(wins) > 1 else (),
-                   fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi))
+                   fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi),
+                   booking=(poi.get("hours") or {}).get("kind") == "by_booking")
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -737,6 +740,18 @@ def _repair_hint(m, cp_model, budget: float, wall_s: float):
     return rescue
 
 
+def _overlap_hits(m, t, dur, visit, i, lo: int, hi: int, tag: str):
+    """Boolvar: node i is visited AND [t, t+dur) overlaps [lo, hi)."""
+    hit = m.NewBoolVar(f"{tag}_o_{i}")
+    m.AddImplication(hit, visit[i])
+    m.Add(t[i] < hi).OnlyEnforceIf(hit)
+    m.Add(t[i] + dur[i] > lo).OnlyEnforceIf(hit)
+    early = m.NewBoolVar(f"{tag}_e_{i}")       # not hit -> entirely before or after
+    m.Add(t[i] + dur[i] <= lo).OnlyEnforceIf([visit[i], hit.Not(), early])
+    m.Add(t[i] >= hi).OnlyEnforceIf([visit[i], hit.Not(), early.Not()])
+    return hit
+
+
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, timeout_s: float = TIMEOUT_S,
              edge_scores: dict[tuple[str, str], float] | None = None,
@@ -912,7 +927,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].
     slot_hits: dict[int, list] = {}
+    booking_meal: dict[int, dict[int, object]] = {}   # slot -> {node: overlap hit}
     for i in range(1, n + 1):
+        if pois[i - 1].booking:
+            # cooking class: the session IS the meal of each slot it overlaps
+            for idx, (lo, hi) in enumerate(MEAL_SLOTS):
+                hit = _overlap_hits(m, t, dur, visit, i, lo, hi, f"bm_{idx}")
+                booking_meal.setdefault(idx, {})[i] = hit
+                slot_hits.setdefault(idx, []).append(hit)
+            continue
         if not pois[i - 1].restaurant:
             continue
         for idx, (lo, hi) in enumerate(MEAL_SLOTS):
@@ -921,6 +944,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     for hits in slot_hits.values():
         if len(hits) > 1:
             m.Add(sum(hits) <= 1)
+    # by_booking (HARD): at most one session-based experience per day
+    booked = [visit[i] for i in range(1, n + 1) if pois[i - 1].booking]
+    if len(booked) > 1:
+        m.Add(sum(booked) <= 1)
 
     # Universal lunch (human need): exactly one restaurant starts inside
     # 11:00-13:00: A1 above already caps the slot at one, so ">= 1" here is
@@ -931,8 +958,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         lunch_hits = [
             (i, _window_hits(m, t, visit, i, LUNCH_REQUIRED[0],
                              LUNCH_REQUIRED[1], "lunch"))
-            for i in range(1, n + 1) if pois[i - 1].restaurant
-        ]
+            for i in range(1, n + 1) if pois[i - 1].restaurant and not pois[i - 1].booking
+        ] + list(booking_meal.get(0, {}).items())   # a class over lunch is the lunch
         # An all-day place feeds its visitors (soft_rules.ALL_DAY_MIN): a stay that
         # runs through the whole lunch window is the lunch, with no rest to follow.
         on_site = []
