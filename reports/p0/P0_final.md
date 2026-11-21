@@ -22,7 +22,7 @@ Dữ liệu đã chốt để làm kiến trúc.
 
 # P0-c — `danang-v2.1` (18–19/11/2026)
 
-Theo `docs/travelagent/PROMPT_P0C_FINALIZE.md`. Q1–Q6 không được trả lời → dùng mặc định của `DATA_FIX_PLAN.md`
+Theo `docs/travelagent/archive/PROMPT_P0C_FINALIZE.md`. Q1–Q6 không được trả lời → dùng mặc định của `DATA_FIX_PLAN.md`
 (Q1 ngưỡng giá như spec · Q2 ma trận riêng cho v2 · Q3 demo → `cach_ly` sau WP6 · Q4/Q5 giữ nguyên chờ duyệt · Q6 OSRM `car` trước).
 
 ## 1. Trước / sau
@@ -44,7 +44,7 @@ Theo `docs/travelagent/PROMPT_P0C_FINALIZE.md`. Q1–Q6 không được trả l�
 
 | WP | Trạng thái | Ghi chú |
 |---|---|---|
-| WP0 | ✅ | commit `5a28ab3`; test mốc `reports/p0/00_baseline_local_20261118.txt` |
+| WP0 | ✅ | commit `5a28ab3`; test mốc `reports/p0/archive/00_baseline_local_20261118.txt` |
 | WP1 `poi_view` + schema v2.1 | ✅ | `BE/common.py::poi_view/view_pois`; loader `common.load_pois`, `retrieval.load_pois_json`, `evaluate.load_eval_context`, `snapshot.load_snapshot`; `archive_fields.json` |
 | WP2 giá 4 mức | ✅ | `TIER_MIDPOINT` 0/50k/250k/850k, `TIER_UPPER` 0/100k/500k/1,2tr; `effective_fee` đọc `price.tier`; `fee_upper` cho cảnh báo |
 | WP3 giờ một trường | ✅ | `parse_windows`; CP-SAT chọn đúng 1 khung; khung qua nửa đêm không còn bị chặn; nhãn "nen kiem tra gio" |

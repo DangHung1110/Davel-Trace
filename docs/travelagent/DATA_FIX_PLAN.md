@@ -1,6 +1,6 @@
 # Kế hoạch hoàn thiện dữ liệu → `danang-v2.1` — 18/11/2026, 22:00
 
-> Đích: `DATA_SPEC_v2_1.md`. Hiện trạng có số liệu: `reports/p0/P0_report.md`.
+> Đích: `DATA_SPEC_v2_1.md`. Hiện trạng có số liệu: `reports/p0/P0_final.md`.
 > Ký hiệu người làm: **CC** = Claude Code trong repo · **BẠN** = người dùng · **MẠNG** = cần máy có internet thường
 > (máy ảo của Claude chỉ ra được pypi) · **ROUTING** = cần OSRM/Valhalla chạy trên máy bạn.
 
@@ -170,7 +170,7 @@ Dữ liệu kiến trúc (mục 3): `time_profiles`, giờ mặt trời, khí h�
 | 19/11 | Duyệt vòng 1b: VỌC, Hải Vân Quan (giờ + cụm hai_van), Thủy Vân Sơn xóa, Bãi Đá Đen | 873 POI, review 0, **G1–G5 + rule 12 xanh**; còn Bãi Rạng, Hồ Xanh |
 | 19/11 | Vòng 1c: Hồ Xanh (OSM way/140401174), Bãi Rạng (manual, cụm `bai_rang` với KDL Suối Rạng), bỏ alias "Bãi Obama" | 875 POI, ma trận 792, gate xanh; `reports/p0/14_review_round1.md` mục Vòng 1c |
 
-| 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
+| 19/11 | **Trang chốt cuối** `reports/p0/final_review.html` (`BE/tools/build_final_review.py`, công cụ một lần, đã xoá 21/11; trang HTML giữ lại): A 6 quyết định chính sách · B 12 giá trị Claude tự chọn · C 45 điểm xác nhận giờ/giá | export `final_review_*.json` → `ingest_review.py` ghi `decisions_zfinal_*` + `human_verify_v2_*_zfinal` (sắp sau cùng nên thắng) |
 
 | 20/11 | Bổ sung 124 điểm Hội An từ OSM (nhà hàng/cà phê có giờ OSM, spa, bar, chùa, nhà thờ tộc, phòng tranh) | 1000 POI, 945 active, ma trận 917; `reports/p0/14_review_round1.md` |
 | 20/11 | **Chốt cuối** (`reports/p0/final_review_20261120.json`): A/B giữ mặc định (người dùng đồng ý); C = 7 dòng AI-Hay báo sai, người dùng tự kiểm kèm link | 876 POI (821 active, 55 excluded sau loại khu cấm Sơn Trà), ma trận 793, gate xanh; `reports/p0/14_review_round1.md` mục Chốt cuối |

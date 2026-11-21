@@ -2,11 +2,11 @@
 
 > Đọc file này trước mọi việc trong repo. Ngày chốt: 18/11/2026, bản 22:00 (sau P0-a và bổ sung độ phủ).
 > Bộ tài liệu: file này (bối cảnh + kiến trúc + quy tắc) · `DATA_SPEC_v2_1.md` (form dữ liệu đích) ·
-> `DATA_FIX_PLAN.md` (việc còn lại, thứ tự, nghiệm thu) · `PROMPT_P0C_FINALIZE.md` (prompt giao việc) ·
-> `reports/p0/P0_report.md` (số liệu đã làm). `PROMPT_P0_DATA.md`, `PROMPT_P0B_NEXT.md` là bản cũ, chỉ để tham khảo.
+> `DATA_FIX_PLAN.md` (việc còn lại, thứ tự, nghiệm thu) · `archive/PROMPT_P0C_FINALIZE.md` (prompt giao việc, đã xong) ·
+> `reports/p0/P0_final.md` (số liệu đã làm). `archive/PROMPT_P0_DATA.md`, `archive/PROMPT_P0B_NEXT.md` là bản cũ, chỉ để tham khảo.
 > Nguồn đầy đủ (do người dùng giữ): doc "TravelAgent – Kiến trúc Agent lập lịch du lịch Đà Nẵng"
 > (mục 12–17 là bản chốt; mục 1–11 là lịch sử thiết kế) và doc "TravelAgent – Đánh giá audit dữ liệu POI".
-> Nếu file này mâu thuẫn với `AGENTS.md`, `HANDOFF.md` hoặc `specs/001-travel-agent-mvp/`, DỪNG LẠI và hỏi người dùng.
+> Nếu file này mâu thuẫn với `AGENTS.md` hoặc `specs/001-travel-agent-mvp/`, DỪNG LẠI và hỏi người dùng.
 
 ---
 
@@ -179,7 +179,7 @@ prize = xác suất đã hiệu chỉnh; w đổi phút ra điểm, tinh chỉnh
 
 ## 8. Quy tắc làm việc cho agent
 
-1. Đọc `AGENTS.md`, `HANDOFF.md`, `specs/001-travel-agent-mvp/` trước. Mâu thuẫn với file này → hỏi người dùng.
+1. Đọc `AGENTS.md`, `specs/001-travel-agent-mvp/` trước (`docs/archive/HANDOFF_20261028.md` là ghi chú bàn giao cũ). Mâu thuẫn với file này → hỏi người dùng.
 2. Chạy pytest trước và sau mỗi thay đổi; không để số test pass giảm.
 3. KHÔNG sửa hay xoá `BE/data/snapshots/danang-v1/`. Tạo snapshot mới có version.
 4. Không dùng trường gốc Google để train hay xuất production, trừ khi người dùng chọn chính sách demo phi thương mại.
@@ -218,7 +218,7 @@ prize = xác suất đã hiệu chỉnh; w đổi phút ra điểm, tinh chỉnh
 
 ## 11. Trạng thái và việc tiếp (18/11/2026, 22:00)
 
-Đã làm: xem `reports/p0/P0_report.md` (mục 1–7). Tóm tắt: `v2_rules.py`, `migrate_v2.py`, `fetch_open_data.py`;
+Đã làm: xem `reports/p0/P0_final.md` (bản đầu: `reports/p0/archive/P0_report.md`). Tóm tắt: `v2_rules.py`, `migrate_v2.py`, `fetch_open_data.py`;
 snapshot `danang-v2` (869 POI); exports sạch cho ML; 11 giá vé có URL; 127 POI OSM bổ sung độ phủ; `matrix_path()`;
 `retrieval` bỏ lưu trú và POI bị loại; 30 test dữ liệu mới.
 
