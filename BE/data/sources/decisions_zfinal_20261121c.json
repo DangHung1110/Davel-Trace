@@ -1,0 +1,109 @@
+{
+ "note": "21/11/2026: phát hiện chất lượng từ bản danang-v2.3 của Duong Tung Bach (nhánh task/data-v22-unify, không merge — giữ bản danang-v2.1 trên main). Chỉ lấy lý do KHÔNG dựa trên số review Google; người dùng duyệt nhóm A (karaoke, tiệc cưới, công ty tour), B (sai toạ độ/loại) và kiểm nhóm C (đóng cửa): chỉ 2 quán có thông báo tạm đóng; 7 điểm còn lại không có thông báo đóng cửa nên giữ.",
+ "items": {
+  "ChIJs95SfgAZQjERWa0RkAoF0XA": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJR7_4DdYYQjERUNxW7r51REs": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJD8ivG7YZQjERxe5fgwGSVao": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJP1XHPQAZQjERinsxWb2Ga0A": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJZ5ZGlCsZQjER95guGn5ybGo": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJqRL3QEQZQjER71D0j0o7M7Q": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJj8OOR1UYQjERdZlR_ysOs4E": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJuQL2IN4YQjERYHan1mFjMdA": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJ3zTSR1UYQjERxzlJpa-DNHE": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJ0-6wNdsXQjER068QxYa3E5o": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJh73ojOMXQjERtV8NNHwmrO4": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJOean5VUZQjERMWDUmGdTpJQ": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJcYos3CkZQjERibEDbcXOpQs": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJ-WGIA80YQjER8XDqSVShrOE": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJ1XDmcgAZQjERg3z1Ix0EbZA": {
+   "status": "excluded",
+   "status_reason": "karaoke — không phải điểm đến cho khách du lịch (review v1 của main, nhánh task/data-v22-unify)"
+  },
+  "ChIJH5FAHiEYQjERi-kdX4gd-eE": {
+   "status": "excluded",
+   "status_reason": "công ty tour, không phải một địa điểm (review v1, nhánh task/data-v22-unify)"
+  },
+  "osm:node/7477670191": {
+   "status": "excluded",
+   "status_reason": "không xác nhận được cơ sở tại toạ độ (review v1, nhánh task/data-v22-unify); loại cũng sai (day_market)"
+  },
+  "osm:node/13293564930": {
+   "status": "excluded",
+   "status_reason": "không xác nhận được cơ sở tại toạ độ (review v1, nhánh task/data-v22-unify); loại cũng sai (day_market)"
+  },
+  "osm:node/14045110791": {
+   "status": "excluded",
+   "status_reason": "không xác nhận được cơ sở tại toạ độ (review v1, nhánh task/data-v22-unify); loại cũng sai (day_market)"
+  },
+  "osm:node/14045130739": {
+   "status": "excluded",
+   "status_reason": "không xác nhận được cơ sở tại toạ độ (review v1, nhánh task/data-v22-unify); loại cũng sai (day_market)"
+  },
+  "ChIJrYC1becZQjER-97HchRaP_Q": {
+   "status": "excluded",
+   "status_reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn (review v1, nhánh task/data-v22-unify)"
+  },
+  "ChIJQwYzLAcZQjERVvClU0ze5Ek": {
+   "status": "excluded",
+   "status_reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn (review v1, nhánh task/data-v22-unify)"
+  },
+  "ChIJH4d2i1YYQjERFSA6rKn_Pos": {
+   "status": "excluded",
+   "status_reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn (review v1, nhánh task/data-v22-unify)"
+  },
+  "ChIJadL4d-gYQjERKE_uTeup8iY": {
+   "status": "excluded",
+   "status_reason": "trung tâm tiệc cưới, hội nghị — không phải nơi khách ghé ăn (review v1, nhánh task/data-v22-unify)"
+  },
+  "ChIJXeYho6gZQjERhk0LVFc69TA": {
+   "status": "excluded",
+   "status_reason": "cơ sở 194 Nguyễn Tri Phương tạm đóng từ 22/10/2026 để cải tạo (fanpage, người dùng kiểm 21/11/2026); cơ sở Tôn Đức Thắng vẫn mở nhưng chưa có trong dữ liệu"
+  },
+  "ChIJoeH5ukkZQjERxUlcUbKA-XE": {
+   "status": "excluded",
+   "status_reason": "tạm đóng cửa từ 05/07/2026 để cải tạo, chưa có ngày mở lại (fanpage của quán, người dùng kiểm 21/11/2026) — thêm lại khi mở cửa"
+  }
+ }
+}

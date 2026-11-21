@@ -35,6 +35,9 @@ sys.path.insert(0, ROOT)
 from BE.common import load_json, load_matrix_cells, to_min, view_pois  # noqa: E402
 from BE.app.services.climate import climate_at  # noqa: E402
 from BE.app.services.optimizer import StubTrip, optimize, stubs_from_pois  # noqa: E402
+import BE.app.services.optimizer as _opt  # noqa: E402
+
+_opt.STATE_WEIGHT = 1.0   # experiment weight (main ships 0.5); same as the 20/11 runs
 from BE.app.services.profiles import _travel_from_cells  # noqa: E402
 from BE.app.services.retrieval import retrieve  # noqa: E402
 from BE.app.services.time_utility import u_at, u_mean  # noqa: E402
@@ -62,7 +65,7 @@ def solve(stubs, travel, trip_window, must, score_fn=None):
     kw = {}
     if score_fn:
         bands = [(a, min(a + BAND, en)) for a in range(st_, en, BAND) if min(a + BAND, en) - a >= 15]
-        kw = {"state_bands": bands, "state_weight": 1.0,
+        kw = {"state_bands": bands,
               "state_score": {(s.poi_id, k): score_fn(s.poi_id, (lo + hi) / 2)
                               for k, (lo, hi) in enumerate(bands) for s in stubs}}
     t0 = time.monotonic()

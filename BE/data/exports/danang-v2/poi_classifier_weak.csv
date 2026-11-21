@@ -79,16 +79,16 @@ ChIJ1yFjaOwZQjERO43leJW7YHk,Nhà hàng chay Shanti Vegan Đà Nẵng,restaurant,
 ChIJI85kEAAZQjERpstMFkP60mc,Khu Văn hóa Du lịch Không Gian Xưa,restaurant,,False,True,0.5,active
 ChIJ37F4OvoZQjERcSRyXX_s91c,Nhà Hàng Hồ Xanh - Hồ Xanh Restaurant,restaurant,restaurant,True,False,0.8,active
 ChIJK5AaRBYZQjER9AALhERmND8,Nhà hàng chay Hoa Sen,restaurant,restaurant,True,False,0.8,active
-ChIJQwYzLAcZQjERVvClU0ze5Ek,Nhà hàng MIKADO,restaurant,restaurant,True,False,0.8,active
+ChIJQwYzLAcZQjERVvClU0ze5Ek,Nhà hàng MIKADO,restaurant,restaurant,True,False,0.8,excluded
 ChIJnbmM8vMZQjERuPNJSfZqqfM,Quán thanh vân,restaurant,restaurant,True,False,0.8,active
 ChIJ3xT1QS4ZQjER8qV4HPop8io,Nhà Hàng Chay Phúc An,restaurant,restaurant,True,False,0.8,active
-ChIJH4d2i1YYQjERFSA6rKn_Pos,Nhà hàng Phú Mỹ Thành,restaurant,restaurant,True,False,0.8,active
+ChIJH4d2i1YYQjERFSA6rKn_Pos,Nhà hàng Phú Mỹ Thành,restaurant,restaurant,True,False,0.8,excluded
 ChIJIRqUZWgZQjERwaNywpofxfk,Nhà hàng Làng Hải Sản,restaurant,restaurant,True,False,0.8,active
 ChIJr_MgSAAZQjERnbnJDAtASZM,Chill Beach Thanh Khê,restaurant,beach,False,True,0.5,excluded
 ChIJY-zHSgQZQjERRoAvxXVcViU,Be Nhung Restaurant,restaurant,restaurant,True,False,0.8,active
-ChIJadL4d-gYQjERKE_uTeup8iY,Nhà hàng Tiệc cưới Hưng Gia Trần,restaurant,restaurant,True,False,0.8,active
+ChIJadL4d-gYQjERKE_uTeup8iY,Nhà hàng Tiệc cưới Hưng Gia Trần,restaurant,restaurant,True,False,0.8,excluded
 ChIJaeTAGgMZQjER5Hvtuv10j_s,Nhà Hàng Sân Vườn Hai Trí,restaurant,restaurant,True,False,0.8,active
-ChIJrYC1becZQjER-97HchRaP_Q,Minh Chau Palace,restaurant,,False,True,0.5,active
+ChIJrYC1becZQjER-97HchRaP_Q,Minh Chau Palace,restaurant,,False,True,0.5,excluded
 ChIJH_EMuNcZQjERI1YtG7IGGDo,Hải Sản Quán Có,restaurant,restaurant,True,False,0.8,active
 ChIJgxcYKLsZQjERlmvsGGeXidw,The 59 cafe,cafe,cafe,True,False,0.8,active
 ChIJ7xtm7rMXQjER7ye2fxPfbFE,XLIII Specialty Coffee,cafe,cafe,True,False,0.8,active
@@ -169,7 +169,7 @@ ChIJIcLWMlAZQjER1VvH4kJ2aZA,La’s Cafe,cafe,cafe,True,False,0.8,active
 ChIJ2yr5edIYQjER5_9326fLFA0,Cafe The Light,cafe,cafe,True,False,0.8,active
 ChIJV9qvhLoZQjERX5RrjGA07mM,CaFe Mộc Gia,cafe,cafe,True,False,0.8,active
 ChIJhYuNIQAZQjERoyprw_nC3Ts,Mew Roastery - Specialty Coffee,cafe,cafe,True,False,0.8,active
-ChIJoeH5ukkZQjERxUlcUbKA-XE,Ibasho Coffee,cafe,cafe,True,False,0.8,active
+ChIJoeH5ukkZQjERxUlcUbKA-XE,Ibasho Coffee,cafe,cafe,True,False,0.8,excluded
 ChIJu0Ud-tsZQjERupkb3A3mxro,The Leaf House Cafe,cafe,cafe,True,False,0.8,active
 ChIJ55nxA9MZQjERNOaUcyvyXxg,Highlands,cafe,,False,True,0.5,active
 ChIJL-fQUUcZQjERK85coinuqEk,Xém. Cà Phê (K1/25 Đỗ quang),cafe,cafe,True,False,0.8,active
@@ -179,7 +179,7 @@ ChIJg1iLwaoZQjERDQOM5N0IZdM,Cà Phê Hè Phố,cafe,cafe,True,False,0.8,active
 ChIJ7bDAtv8YQjERj0Fj9FcnHgA,House Coffee,cafe,cafe,True,False,0.8,active
 ChIJzVnvNgAZQjERef60MBfcz8E,Hulala Coffee,cafe,cafe,True,False,0.8,active
 ChIJH1TU7PsYQjER-jhAtZLdLMc,Bonjour Coffee,cafe,cafe,True,False,0.8,active
-ChIJXeYho6gZQjERhk0LVFc69TA,2AM Coffee,cafe,cafe,True,False,0.8,active
+ChIJXeYho6gZQjERhk0LVFc69TA,2AM Coffee,cafe,cafe,True,False,0.8,excluded
 ChIJQW9rQNwZQjER4zC6dP7vitg,Green Coffee,cafe,cafe,True,False,0.8,active
 ChIJM2DzGgAZQjERp54q-gVvu-g,MAI Café Flowers & More,cafe,cafe,True,False,0.8,active
 ChIJKbTF7NkZQjEReFD1hbN1Rg8,Mây Coffee,cafe,cafe,True,False,0.8,active
@@ -191,7 +191,7 @@ ChIJbbs1ZTQYQjERi3OdfmnRk2g,Đình làng Hải Châu,religious,religious,True,Fa
 ChIJkatEeMwZQjERnAUKgmrbNgQ,Làng Bích họa Đà Nẵng,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 ChIJu6FQjzUYQjER39TMpgQVRUs,Chợ Cồn,day_market,day_market,True,False,0.6,active
 ChIJLWoAs80ZQjERLKHDYD-ZymI,Bảo tàng Điêu khắc Chăm Đà Nẵng,museum_indoor,museum_indoor,True,False,0.6,active
-ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,,False,False,0.3,active
+ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,,False,False,0.3,excluded
 ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn (Thủy Sơn),paid_attraction,outdoor_landmark,False,False,0.9,active
 ChIJzX1dFjAZQjERswowf61V1fk,Công Viên APEC,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJL1GKWJYZQjERLrEGqlK2kwQ,Cầu Rồng,outdoor_landmark,outdoor_landmark,True,False,0.8,active
@@ -360,7 +360,7 @@ osm:node/7095169367,Art Gallery,museum_indoor,museum_indoor,True,False,0.8,exclu
 osm:node/7095169369,Non La,day_market,,False,True,0.5,active
 osm:node/7276380289,Cầu Sông Hàn,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/7477670190,Cửa hàng bán noni,day_market,,False,True,0.5,excluded
-osm:node/7477670191,Gio coffee,day_market,cafe,False,False,0.9,active
+osm:node/7477670191,Gio coffee,day_market,cafe,False,False,0.9,excluded
 osm:node/8883385553,TASY STUDIO,museum_indoor,,False,True,0.5,excluded
 osm:node/9921282483,Viet Nam's Delights,day_market,,False,True,0.5,excluded
 osm:node/9921315929,Lưu Niệm - Đặc Sản,day_market,day_market,True,False,0.8,active
@@ -384,15 +384,15 @@ osm:node/12603319867,Nhà thờ Thanh Bình,religious,religious,True,False,0.8,a
 osm:node/12701675501,Small waterfall,outdoor_landmark,outdoor_landmark,True,False,0.9,excluded
 osm:node/12811972501,Mart Souvenir,day_market,day_market,True,False,0.8,active
 osm:node/13040467529,Bãi Đá,beach,beach,True,False,0.8,excluded
-osm:node/13293564930,Himawari,day_market,,False,True,0.5,active
+osm:node/13293564930,Himawari,day_market,,False,True,0.5,excluded
 osm:node/13484040419,Đền Bà Càn Khôn,religious,religious,True,False,0.8,active
 osm:node/13677406601,Đài tưởng niệm chuyến bay 229 (1979),outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/13687068650,Linh Phong Bảo Tháp,religious,religious,True,False,0.6,active
 osm:node/13734880501,Tượng Phật Phước Lý,religious,religious,True,False,0.6,active
 osm:node/13913398302,Suối Lạc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/13913400201,Suối Ngọc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
-osm:node/14045110791,Lucky Retail,day_market,,False,True,0.5,active
-osm:node/14045130739,Made in Vietnam,day_market,,False,True,0.5,active
+osm:node/14045110791,Lucky Retail,day_market,,False,True,0.5,excluded
+osm:node/14045130739,Made in Vietnam,day_market,,False,True,0.5,excluded
 osm:node/14045144381,Viet Nam's Delights,day_market,,False,True,0.5,excluded
 osm:node/14067929701,Bonny handmade,day_market,,False,True,0.5,active
 osm:node/14130293535,Tượng đài Dũng sĩ Điện Ngọc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
@@ -635,9 +635,9 @@ ChIJabHpMJoXQjERgyUE4Jz8_D0,BlackOut Rooftop Bar,nightlife,nightlife,True,False,
 ChIJP0--pEAXQjERoheJMf24gHA,Lounge Beach bar & Restaurant,nightlife,nightlife,True,False,0.8,active
 ChIJCd3q4FQXQjERF640iRTpb7I,Mystery Bar & Lounge,nightlife,nightlife,True,False,0.8,active
 ChIJx3fy4TgZQjER5y-HN2wBNl4,Navy Lounge,nightlife,nightlife,True,False,0.8,active
-ChIJZ5ZGlCsZQjER95guGn5ybGo,Karaoke Next Top Luxury,nightlife,nightlife,True,False,0.8,active
+ChIJZ5ZGlCsZQjER95guGn5ybGo,Karaoke Next Top Luxury,nightlife,nightlife,True,False,0.8,excluded
 ChIJdac9auQYQjERbldnY0G9R9c,Roma premium lounge,nightlife,nightlife,True,False,0.8,active
-ChIJh73ojOMXQjERtV8NNHwmrO4,Karaoke Thao,nightlife,nightlife,True,False,0.8,active
+ChIJh73ojOMXQjERtV8NNHwmrO4,Karaoke Thao,nightlife,nightlife,True,False,0.8,excluded
 ChIJZ6w1fJgZQjERP9-_TlpgQXM,Lagoon Rooftop - Dragon Bridge Fire Show,nightlife,nightlife,True,False,0.8,active
 ChIJkxff_x0XQjERCC_CN8DFt54,The Craftsman Cocktail Bar,nightlife,nightlife,True,False,0.8,active
 ChIJK0J1RXMXQjERPPTldZI_e5c,Le Funky Donkey - French Bar,nightlife,nightlife,True,False,0.8,active
@@ -654,25 +654,25 @@ ChIJcbN8RKEXQjERd0H0haMdx4Y,Filling Station,nightlife,,False,True,0.5,active
 ChIJV5uGxecXQjERLhaOZuWV6tA,Chevy,nightlife,,False,True,0.5,active
 ChIJl7zcVgARQjERTJASEbCGeuc,Writer's Bar,nightlife,nightlife,True,False,0.8,active
 ChIJY_iyslwXQjERFoDw4waR2Sg,The Trip 66,nightlife,,False,True,0.5,active
-ChIJ0-6wNdsXQjER068QxYa3E5o,Karaoke Song Ca,nightlife,nightlife,True,False,0.8,active
+ChIJ0-6wNdsXQjER068QxYa3E5o,Karaoke Song Ca,nightlife,nightlife,True,False,0.8,excluded
 ChIJw3dqIx8ZQjERxFZPN1A3gew,The PILL Bar & Club,nightlife,nightlife,True,False,0.8,active
 ChIJQxr6eAAfQjER1vwrQRjtk60,Quán nhậu Keo Lá Tràm,nightlife,nightlife,True,False,0.8,active
 ChIJmd-xKSoZQjERr8BS2agMkCI,Cà Phê Star Pub,nightlife,cafe,False,True,0.5,active
 ChIJFXRrR0wZQjERNl4jMD9QNFI,Blues Q Coffee and Craft Beer Garden ( Bia thủ công),nightlife,cafe,False,True,0.5,active
-ChIJOean5VUZQjERMWDUmGdTpJQ,Karaoke Venus,nightlife,nightlife,True,False,0.8,active
+ChIJOean5VUZQjERMWDUmGdTpJQ,Karaoke Venus,nightlife,nightlife,True,False,0.8,excluded
 ChIJVS4QEX8fQjERk1vVwmP0Rk8,An Nhiên Quán,nightlife,restaurant,False,True,0.5,active
 ChIJWTRb5NcYQjER6mJOuNl06k8,Quán Nhậu Hiếu Hòa,nightlife,nightlife,True,False,0.8,active
 ChIJG1WCi2UXQjER9CxEvEOoEpw,Malibu Beach Club,nightlife,nightlife,True,False,0.8,active
-ChIJcYos3CkZQjERibEDbcXOpQs,Quán Karaoke Music For You,nightlife,nightlife,True,False,0.8,active
-ChIJ1XDmcgAZQjERg3z1Ix0EbZA,Rain Music Box & Game,day_market,,False,False,0.3,active
-ChIJR7_4DdYYQjERUNxW7r51REs,Karaoke Alô,nightlife,nightlife,True,False,0.8,active
-ChIJ-WGIA80YQjER8XDqSVShrOE,Quán Karaoke Smile Idol,nightlife,nightlife,True,False,0.8,active
-ChIJP1XHPQAZQjERinsxWb2Ga0A,Karaoke Monaco Đà Nẵng,nightlife,nightlife,True,False,0.8,active
+ChIJcYos3CkZQjERibEDbcXOpQs,Quán Karaoke Music For You,nightlife,nightlife,True,False,0.8,excluded
+ChIJ1XDmcgAZQjERg3z1Ix0EbZA,Rain Music Box & Game,day_market,,False,False,0.3,excluded
+ChIJR7_4DdYYQjERUNxW7r51REs,Karaoke Alô,nightlife,nightlife,True,False,0.8,excluded
+ChIJ-WGIA80YQjER8XDqSVShrOE,Quán Karaoke Smile Idol,nightlife,nightlife,True,False,0.8,excluded
+ChIJP1XHPQAZQjERinsxWb2Ga0A,Karaoke Monaco Đà Nẵng,nightlife,nightlife,True,False,0.8,excluded
 ChIJsSD2e3kfQjER2d_jnMVrKZ4,Quán nhậu A bảy,nightlife,nightlife,True,False,0.8,active
 ChIJcTnFX6QfQjERgmN3buOe9AQ,Rượu Nếp Nhà Nấu,nightlife,,False,True,0.5,active
-ChIJuQL2IN4YQjERYHan1mFjMdA,Karaoke RETRO,nightlife,nightlife,True,False,0.8,active
-ChIJs95SfgAZQjERWa0RkAoF0XA,City Box - Music Box,nightlife,,False,True,0.5,active
-ChIJqRL3QEQZQjER71D0j0o7M7Q,Karaoke Night Club,nightlife,nightlife,True,False,0.8,active
+ChIJuQL2IN4YQjERYHan1mFjMdA,Karaoke RETRO,nightlife,nightlife,True,False,0.8,excluded
+ChIJs95SfgAZQjERWa0RkAoF0XA,City Box - Music Box,nightlife,,False,True,0.5,excluded
+ChIJqRL3QEQZQjER71D0j0o7M7Q,Karaoke Night Club,nightlife,nightlife,True,False,0.8,excluded
 ChIJVde_IrUZQjERJghlJMKJ6v0,DINK Beer Pub,nightlife,nightlife,True,False,0.8,active
 ChIJQydy2apx34oRnci64Kkdi4U,For You Club,nightlife,nightlife,True,False,0.8,active
 ChIJswSHXgAZQjERZnVL4je3PG4,SAY Beer,nightlife,nightlife,True,False,0.8,active
@@ -680,14 +680,14 @@ ChIJvyd5GLEZQjERZgKsgMmnnkM,"Điểm Nóng+ Eat, Drink & Music",nightlife,,False
 ChIJ2exBne0ZQjERj07NR6zFg4c,MÊ Ê Ê Beer Garden - 316 Hà Huy Tập,nightlife,nightlife,True,False,0.8,active
 ChIJvcXagjAYQjERCEguUGaxfEc,LIBRE,nightlife,,False,True,0.5,active
 ChIJASuSy-sXQjERJ6nq5Rma0vs,The Roof - Da Nang,nightlife,nightlife,True,False,0.8,active
-ChIJj8OOR1UYQjERdZlR_ysOs4E,Karaoke Phương Trí,nightlife,nightlife,True,False,0.8,active
+ChIJj8OOR1UYQjERdZlR_ysOs4E,Karaoke Phương Trí,nightlife,nightlife,True,False,0.8,excluded
 ChIJTQuJbKYZQjERAE9fPrQroZw,Drink Đi,nightlife,,False,True,0.5,active
-ChIJ3zTSR1UYQjERxzlJpa-DNHE,Karaoke Sao Mai,nightlife,nightlife,True,False,0.8,active
+ChIJ3zTSR1UYQjERxzlJpa-DNHE,Karaoke Sao Mai,nightlife,nightlife,True,False,0.8,excluded
 ChIJN_abDNcZQjERmLjyrAo7IPk,Cậu Ấm Beer Chill,nightlife,nightlife,True,False,0.8,active
 ChIJc2sSdpMZQjERg6ykGdI-3r4,Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm,nightlife,restaurant,False,True,0.5,active
 ChIJMZtZVeQZQjERchri-_Wa9C8,Bar Đà Nẵng,nightlife,nightlife,True,False,0.8,active
 ChIJObG9DvoZQjER1tqakgkbUno,CẬU CẢ - 37 Điện Biên Phủ,nightlife,,False,True,0.5,active
-ChIJD8ivG7YZQjERxe5fgwGSVao,Karaoke Camel 2,nightlife,nightlife,True,False,0.8,active
+ChIJD8ivG7YZQjERxe5fgwGSVao,Karaoke Camel 2,nightlife,nightlife,True,False,0.8,excluded
 ChIJkZi7gkcYQjERPd87DaNuhW0,On The Radio,nightlife,,False,True,0.5,active
 ChIJ8ar-PNQXQjERFGGdrbCAQbg,Tháp Xá Lợi,religious,religious,True,False,0.8,active
 ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,religious,religious,True,False,0.8,excluded

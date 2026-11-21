@@ -390,7 +390,7 @@ def tier_of_vnd(vnd: float | None) -> str | None:
 # v2.1 category -> legacy English `cat` the v1 services compare against.
 LEGACY_CAT = {
     "beach": "beach", "viewpoint": "viewpoint", "outdoor_landmark": "landmark",
-    "religious": "landmark", "museum_indoor": "museum", "day_market": "market",
+    "religious": "temple", "museum_indoor": "museum", "day_market": "market",
     "night_market": "market", "restaurant": "restaurant", "cafe": "cafe",
     "nightlife": "bar", "wellness": "spa", "paid_attraction": "attraction",
     "lodging": "lodging",
@@ -445,6 +445,49 @@ def load_quarantine(snapshot_dir: str | None) -> dict:
 
 def is_v21(poi: dict | None) -> bool:
     return bool(poi) and poi.get("data_version") == DATA_VERSION_V21
+
+
+# v2.1 -> main's `plan_tier` (retrieval wish tiers, soft_rules time-fit), from
+# CLEAN fields only: v1's tiers lean on Google review counts ("duoi 30 danh gia").
+_TIER_EVERYDAY = {"restaurant", "cafe", "nightlife", "wellness"}       # eat / drink / rest
+_TIER_LOCAL_UNLESS_KNOWN = {"religious", "day_market"}                 # village pagodas, lane markets
+
+
+def v2_plan_tier(poi: dict) -> tuple[str, str]:
+    """(plan_tier, reason) of a v2.1 record: main / local / excluded.
+
+    main  = everyday stops, by_booking sessions (their own gate), and sights that
+            are signature, in a travel guide / Michelin, or have sourced hours;
+    local = the rest (shown only when a wish asks for them, retrieval._WISH_TIERS).
+    """
+    if poi.get("status") == "excluded":
+        return "excluded", "loai khoi du lieu"
+    cat = poi.get("category")
+    pop = poi.get("popularity") or {}
+    hours = poi.get("hours") or {}
+    known = bool(pop.get("signature") or (pop.get("guide_mentions") or 0) > 0 or pop.get("michelin"))
+    if cat in _TIER_EVERYDAY or hours.get("kind") == "by_booking" or known:
+        return "main", ""
+    if cat not in _TIER_LOCAL_UNLESS_KNOWN and hours.get("kind") == "fixed":
+        return "main", ""
+    return "local", "v2: khong co trong cam nang, khong phai diem bieu tuong" + (
+        "" if cat in _TIER_LOCAL_UNLESS_KNOWN else ", gio chua co nguon")
+
+
+def v2_subcat(poi: dict) -> str | None:
+    """main's `subcat` (soft_rules.TIME_FIT_BY_SUBCAT) where v2.1 says it plainly."""
+    cat = poi.get("category")
+    if cat == "night_market":
+        return "night_market"
+    if cat == "religious" and (_fold_ascii(poi.get("name") or "") + " ").startswith("nha tho "):
+        return "church"
+    return None
+
+
+def _fold_ascii(text: str) -> str:
+    import unicodedata
+    t = unicodedata.normalize("NFD", text.lower().replace("đ", "d"))
+    return "".join(c for c in t if unicodedata.category(c) != "Mn")
 
 
 def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = None) -> dict:
@@ -512,6 +555,8 @@ def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = Non
     v["ambience"] = q.get("ambience") or ""
     v["pros"] = list(q.get("pros") or [])
     v["cons"] = list(q.get("cons") or [])
+    v["plan_tier"], v["plan_tier_reason"] = v2_plan_tier(poi)
+    v["subcat"] = v2_subcat(poi)
     v["verified"] = (poi.get("status") == "active" and poi.get("role") != "base"
                      and hours.get("kind") != "unknown")
     v["source"] = (prov.get("location") or {}).get("source") or "danang-v2.1"

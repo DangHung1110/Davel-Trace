@@ -31,6 +31,9 @@ sys.path.insert(0, ROOT)
 
 from BE.common import load_json, load_matrix_cells, parse_windows, to_min, view_pois  # noqa: E402
 from BE.app.services.optimizer import StubTrip, optimize, stubs_from_pois  # noqa: E402
+import BE.app.services.optimizer as _opt  # noqa: E402
+
+_opt.STATE_WEIGHT = 1.0   # experiment weight (main ships 0.5); same as the 20/11 runs
 from BE.app.services.profiles import _travel_from_cells  # noqa: E402
 from BE.app.services.retrieval import retrieve  # noqa: E402
 from BE.app.services.time_utility import load_profiles, u_at, u_mean  # noqa: E402
@@ -122,7 +125,6 @@ def solver_check(raw: list[dict]) -> dict:
             kw = {}
             if key == "B_with_u":
                 kw["state_bands"], kw["state_score"] = ut_state(stubs, st_, en, prof_of)
-                kw["state_weight"] = 1.0
             t0 = time.monotonic()
             out = optimize(stubs, travel, strip, must_visit=must, workers=1,
                            deterministic_time=DET, timeout_s=2 * DET, **kw)
