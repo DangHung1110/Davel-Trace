@@ -13,11 +13,11 @@ ChIJ8cqHGTMYQjERU0gT5dridKc,Nhà hàng Hai Cử,restaurant,restaurant,True,False
 ChIJySI1VxkXQjERUSItJZQgxBE,Bé Ni 2,restaurant,,False,True,0.5,active
 ChIJudsANu4XQjERbLKxjXDLHtU,Hải sản My Hanh Seafood,restaurant,restaurant,True,False,0.8,active
 ChIJH72bVncZQjERoTgax0OjZKY,Nhà hàng LoCo,restaurant,restaurant,True,False,0.8,active
-ChIJ8aa8NQAZQjERRM8-aOoNZ30,Nhà hàng hải sản .,restaurant,restaurant,True,False,0.8,active
+ChIJ8aa8NQAZQjERRM8-aOoNZ30,Nhà hàng hải sản .,restaurant,restaurant,True,False,0.8,excluded
 ChIJJSd-naoZQjERheTI-IEkRrc,Gyu Sachi - Nhà hàng nướng Nhật Ngưu Hạnh,restaurant,restaurant,True,False,0.8,active
-ChIJjaiK7LgZQjERSQvPDP9gnVQ,XÓM MỚI GARDEN,restaurant,outdoor_landmark,False,True,0.5,active
+ChIJjaiK7LgZQjERSQvPDP9gnVQ,Xóm Mới Garden,restaurant,outdoor_landmark,False,True,0.5,active
 ChIJHyNg3TIYQjERqz7x0udvRd0,Nhà Hàng Bảo Châu,restaurant,restaurant,True,False,0.8,active
-ChIJZSsvT9QZQjERf-oLnsT1C3Y,Yen Yakiniku & Izakaya – Buffet Nướng Nhật Bản tại Đà Nẵng 38 Trần Quốc Toản,restaurant,restaurant,True,False,0.8,active
+ChIJZSsvT9QZQjERf-oLnsT1C3Y,Yen Yakiniku & Izakaya,restaurant,restaurant,True,False,0.8,active
 ChIJ-VaWslgZQjERwaL3uKR9fB4,Gang Yu Hot Pot,restaurant,,False,True,0.5,active
 ChIJLeqV3_cXQjERH0Dq1Mte6_w,Son Tra Retreat - Garden Lounge & Eatery,nightlife,nightlife,True,False,0.8,active
 ChIJx02UcvIXQjER8al1AkjYuW0,Biển Rạng Sơn Trà,restaurant,outdoor_landmark,False,True,0.5,active
@@ -35,7 +35,7 @@ ChIJUcRcH40XQjERyj5XPUTEfO0,Hải sản Quang Trường,restaurant,restaurant,Tr
 ChIJye8yM0M9QjERwtla0qUFoOs,Hải sản tươi sống Bà Rô,restaurant,restaurant,True,False,0.8,active
 ChIJN84BNSQXQjERyy7N3rDXisc,Thèm Hải Sản,restaurant,restaurant,True,False,0.8,active
 ChIJFbFDWA8ZQjERwNPaFGXBRPQ,F29 Golden Beef & Sky Bar,nightlife,nightlife,True,False,0.8,active
-ChIJHfGPsJkXQjERsHCXRTXX_Xs,다낭 한식당 곱창집 Nhà hàng hàn quốc lòng bò nướng ( 소곱창집 식당 Da Nang ),restaurant,restaurant,True,False,0.8,active
+ChIJHfGPsJkXQjERsHCXRTXX_Xs,Nhà hàng Hàn Quốc lòng bò nướng,restaurant,restaurant,True,False,0.8,active
 ChIJF2lrSYgXQjERKBBhFKYlhkg,Sofia Local Restaurant Danang – Việt Cuisine,restaurant,restaurant,True,False,0.8,active
 ChIJRVOgcgAXQjER7lPiR_QvAdQ,Nhà hàng Làng Ta,restaurant,restaurant,True,False,0.8,active
 ChIJP-VRM2YXQjERbEUrtG6wq9Q,Nhà Hàng Nhà Bếp Khuê Mỹ,restaurant,restaurant,True,False,0.8,active
@@ -83,8 +83,8 @@ ChIJQwYzLAcZQjERVvClU0ze5Ek,Nhà hàng MIKADO,restaurant,restaurant,True,False,0
 ChIJnbmM8vMZQjERuPNJSfZqqfM,Quán thanh vân,restaurant,restaurant,True,False,0.8,active
 ChIJ3xT1QS4ZQjER8qV4HPop8io,Nhà Hàng Chay Phúc An,restaurant,restaurant,True,False,0.8,active
 ChIJH4d2i1YYQjERFSA6rKn_Pos,Nhà hàng Phú Mỹ Thành,restaurant,restaurant,True,False,0.8,active
-ChIJIRqUZWgZQjERwaNywpofxfk,Nhà Hàng LÀNG HẢI SẢN,restaurant,restaurant,True,False,0.8,active
-ChIJr_MgSAAZQjERnbnJDAtASZM,Chill Beach Thanh Khê,restaurant,beach,False,True,0.5,active
+ChIJIRqUZWgZQjERwaNywpofxfk,Nhà hàng Làng Hải Sản,restaurant,restaurant,True,False,0.8,active
+ChIJr_MgSAAZQjERnbnJDAtASZM,Chill Beach Thanh Khê,restaurant,beach,False,True,0.5,excluded
 ChIJY-zHSgQZQjERRoAvxXVcViU,Be Nhung Restaurant,restaurant,restaurant,True,False,0.8,active
 ChIJadL4d-gYQjERKE_uTeup8iY,Nhà hàng Tiệc cưới Hưng Gia Trần,restaurant,restaurant,True,False,0.8,active
 ChIJaeTAGgMZQjER5Hvtuv10j_s,Nhà Hàng Sân Vườn Hai Trí,restaurant,restaurant,True,False,0.8,active
@@ -94,7 +94,7 @@ ChIJgxcYKLsZQjERlmvsGGeXidw,The 59 cafe,cafe,cafe,True,False,0.8,active
 ChIJ7xtm7rMXQjER7ye2fxPfbFE,XLIII Specialty Coffee,cafe,cafe,True,False,0.8,active
 ChIJxX--D-oZQjERQ4LzQRoeVXk,Reply 1988 Cafe,cafe,cafe,True,False,0.8,active
 ChIJ2eFWbrcXQjERkMR0z_5VhM0,Trình cà phê,cafe,cafe,True,False,0.8,active
-ChIJrcgyp-wZQjERNqpo6xe5Ogw,KITE COFFEE & SOUVENIRS,cafe,cafe,True,False,0.8,active
+ChIJrcgyp-wZQjERNqpo6xe5Ogw,Kite Coffee & Souvenirs,cafe,cafe,True,False,0.8,active
 ChIJWXGFjDcYQjER0LvTZMZvBn0,Lối Xưa Cafe,cafe,cafe,True,False,0.8,active
 ChIJTahQxcwZQjERrNKa5emQFC4,NAM house Cafe (Egg Coffee),cafe,cafe,True,False,0.8,active
 ChIJAWgMydkZQjER-MpvKFLjoqs,Tiệm cà phê Cậu Út,cafe,cafe,True,False,0.8,active
@@ -108,7 +108,7 @@ ChIJ2_OVwmIZQjERrNNkMMg-gk4,Moss Coffee Shop 2,cafe,cafe,True,False,0.8,active
 ChIJt1wLHjEYQjEREA1YGZU2yOc,Trà Quán Góc Nhà Tụi Mình,day_market,restaurant,False,True,0.5,active
 ChIJ6YzGFvEZQjERtj5MGs3Pj2Q,Àla Cafe Roaster,cafe,cafe,True,False,0.8,active
 ChIJwUTwp4IZQjERHfo3HZIYvzo,HỨA cafe,cafe,cafe,True,False,0.8,active
-ChIJXeXlix8ZQjERx9QsmNqx6_U,[91cc] 91 Concept Coffee,cafe,cafe,True,False,0.8,active
+ChIJXeXlix8ZQjERx9QsmNqx6_U,91 Concept Coffee,cafe,cafe,True,False,0.8,active
 ChIJ-wZaJ2QZQjERhmDzz7BMz5g,Khâu.cà phê,cafe,cafe,True,False,0.8,active
 ChIJBSN7ys4XQjERD_WWhQb2XXk,Sơn Trà Cà Phê (Coffee Store),cafe,cafe,True,False,0.8,active
 ChIJ864pbQA9QjER--PIUcxqd48,Son Tra Viewpoint,viewpoint,viewpoint,True,False,0.8,active
@@ -126,15 +126,15 @@ ChIJHQpEDCAXQjERnXmpQofhDWw,S2 Station,cafe,,False,True,0.5,active
 ChIJsYoIEOIXQjER_5_trbAwgnA,Hương Sơn Coffee,cafe,cafe,True,False,0.8,active
 ChIJMdGCKyQZQjERpNccOkd5duk,JEJU coffee,cafe,cafe,True,False,0.8,active
 ChIJE4CAepEXQjERg75wrYIZk2Q,"Coffee Trà, 51 Lý Đạo Thành, Mân Thái, Sơn Trà, Đà Nẵng",cafe,cafe,True,False,0.8,active
-ChIJQyBNHwAZQjERhLY1IOG14OY,TIME COFFEE,cafe,cafe,True,False,0.8,active
-ChIJV3itrRYZQjERjahF1Mkk0to,IKIGAI CAFE,cafe,cafe,True,False,0.8,active
+ChIJQyBNHwAZQjERhLY1IOG14OY,Time Coffee,cafe,cafe,True,False,0.8,active
+ChIJV3itrRYZQjERjahF1Mkk0to,Ikigai Cafe,cafe,cafe,True,False,0.8,active
 ChIJf8tFWf0XQjERNR0V2Xki5zQ,Voọc Souvenir Coffee,cafe,cafe,True,False,0.8,active
 ChIJiaXn52YXQjERbd2jnJ1Xmg0,Quán cà phê Sáu Trên Sáu,cafe,cafe,True,False,0.8,active
-ChIJe6VC-zUXQjERyh7x6tTJHX4,HI4 COFFEE & WORKSPACE,cafe,cafe,True,False,0.8,active
+ChIJe6VC-zUXQjERyh7x6tTJHX4,HI4 Coffee & Workspace,cafe,cafe,True,False,0.8,active
 ChIJhbtaILkXQjER88acd2hTeAA,Cafe Phương,cafe,cafe,True,False,0.8,active
 ChIJzTsg_GQXQjERpsLoJSWJHmU,Venus Coffee,cafe,cafe,True,False,0.8,active
 ChIJhRHxyd4XQjERPVL2Kw_eqdw,The Cups Coffee Roastery,cafe,cafe,True,False,0.8,active
-ChIJAxDyECwXQjERcsCmIBvQ1Vk,L STAND COFFEE AND TEA,cafe,cafe,True,False,0.8,active
+ChIJAxDyECwXQjERcsCmIBvQ1Vk,L Stand Coffee and Tea,cafe,cafe,True,False,0.8,active
 ChIJrfU0w0MRQjERC4PjgT9h3LQ,ChuAn cafe,cafe,cafe,True,False,0.8,active
 ChIJ0RbSL4ARQjERLwRYqY1bqp4,Tiệm Cafe Thổ - Cà Phê Ngon & Yên Tĩnh Ngũ Hành Sơn,cafe,cafe,True,False,0.8,active
 ChIJvb3YtJYXQjERnLJ4-sFfc6A,Cà phê Chân Trần,cafe,cafe,True,False,0.8,active
@@ -147,11 +147,11 @@ ChIJHaTEwB4ZQjERrE6CMe37byI,BigHome coffee 24/7,cafe,cafe,True,False,0.8,active
 ChIJWSoH1BQRQjERRUsvBDeBGvo,43 Coffee & Milk Tea,cafe,cafe,True,False,0.8,active
 ChIJR4XhE3sXQjERBfL8sHnu-JQ,H Coffee,cafe,cafe,True,False,0.8,active
 ChIJKbpWc6IXQjERMZMSscftz9I,The Hideout café,cafe,cafe,True,False,0.8,active
-ChIJV4P2WKQRQjERkfoEDY1uBq0,LE'O COFFEE & TEA,cafe,cafe,True,False,0.8,active
-ChIJk3YrZLoZQjERp5PbcDTftQw,THE POWERHOUSE 2 COFFEE & MORE,cafe,cafe,True,False,0.8,active
+ChIJV4P2WKQRQjERkfoEDY1uBq0,Le'o Coffee & Tea,cafe,cafe,True,False,0.8,active
+ChIJk3YrZLoZQjERp5PbcDTftQw,The Powerhouse 2 Coffee & More,cafe,cafe,True,False,0.8,active
 ChIJVWyt-r8ZQjERVMHwS2CscbI,CA Liên Chiểu,cafe,,False,True,0.5,active
 ChIJw4WrdmsZQjERRCJKWvRJHtI,Seed-coffee,cafe,cafe,True,False,0.8,active
-ChIJPzf25OAYQjERRUv1zSbS49Q,GAGA CAFÉ,cafe,cafe,True,False,0.8,active
+ChIJPzf25OAYQjERRUv1zSbS49Q,Gaga Café,cafe,cafe,True,False,0.8,active
 ChIJ4Z8gV3cfQjERHH6fTdzj0E8,Tiệm cafe Túi Thương Nhớ,cafe,cafe,True,False,0.8,active
 ChIJn7_3kc8ZQjERBi6T5XvhPko,T Garden coffee,cafe,cafe,True,False,0.8,active
 ChIJa7FkIyUZQjER7VxLENFhuI0,SaiGon Brown Coffee,cafe,cafe,True,False,0.8,active
@@ -162,7 +162,7 @@ ChIJCQlahDsZQjER9ON_UbUNqiQ,An Garden.Coffee & Tea,cafe,cafe,True,False,0.8,acti
 ChIJ2XROb6EZQjERoqg1HHvwj88,Cafe Ý Liên,cafe,cafe,True,False,0.8,active
 ChIJVWhfuoYZQjERiqzzyK-rRko,Kiến Cafe,cafe,cafe,True,False,0.8,active
 ChIJv-i7URUZQjERi-g4GEv06QU,7AM Coffee,cafe,cafe,True,False,0.8,active
-ChIJP3or6NQZQjERmBDBnMA8O4U,MÂY COFFEE - TRUNG NGUYÊN Legend,cafe,cafe,True,False,0.8,active
+ChIJP3or6NQZQjERmBDBnMA8O4U,Mây Coffee - Trung Nguyên Legend,cafe,cafe,True,False,0.8,active
 ChIJIZrPSy8ZQjERGZsE8IgrSnk,FM Garden Coffee,cafe,cafe,True,False,0.8,active
 ChIJcx8dydYYQjERMG39tIgHP1Y,CAFE DƯ ÂM - Nhạc Trịnh,cafe,cafe,True,False,0.8,active
 ChIJIcLWMlAZQjER1VvH4kJ2aZA,La’s Cafe,cafe,cafe,True,False,0.8,active
@@ -170,7 +170,7 @@ ChIJ2yr5edIYQjER5_9326fLFA0,Cafe The Light,cafe,cafe,True,False,0.8,active
 ChIJV9qvhLoZQjERX5RrjGA07mM,CaFe Mộc Gia,cafe,cafe,True,False,0.8,active
 ChIJhYuNIQAZQjERoyprw_nC3Ts,Mew Roastery - Specialty Coffee,cafe,cafe,True,False,0.8,active
 ChIJoeH5ukkZQjERxUlcUbKA-XE,Ibasho Coffee,cafe,cafe,True,False,0.8,active
-ChIJu0Ud-tsZQjERupkb3A3mxro,THE LEAF HOUSE CAFE,cafe,cafe,True,False,0.8,active
+ChIJu0Ud-tsZQjERupkb3A3mxro,The Leaf House Cafe,cafe,cafe,True,False,0.8,active
 ChIJ55nxA9MZQjERNOaUcyvyXxg,Highlands,cafe,,False,True,0.5,active
 ChIJL-fQUUcZQjERK85coinuqEk,Xém. Cà Phê (K1/25 Đỗ quang),cafe,cafe,True,False,0.8,active
 ChIJ9Zlonv0YQjERUTfuOADyciU,Cafe cóc kênh,cafe,cafe,True,False,0.8,active
@@ -180,7 +180,7 @@ ChIJ7bDAtv8YQjERj0Fj9FcnHgA,House Coffee,cafe,cafe,True,False,0.8,active
 ChIJzVnvNgAZQjERef60MBfcz8E,Hulala Coffee,cafe,cafe,True,False,0.8,active
 ChIJH1TU7PsYQjER-jhAtZLdLMc,Bonjour Coffee,cafe,cafe,True,False,0.8,active
 ChIJXeYho6gZQjERhk0LVFc69TA,2AM Coffee,cafe,cafe,True,False,0.8,active
-ChIJQW9rQNwZQjER4zC6dP7vitg,GREEN COFFEE,cafe,cafe,True,False,0.8,active
+ChIJQW9rQNwZQjER4zC6dP7vitg,Green Coffee,cafe,cafe,True,False,0.8,active
 ChIJM2DzGgAZQjERp54q-gVvu-g,MAI Café Flowers & More,cafe,cafe,True,False,0.8,active
 ChIJKbTF7NkZQjEReFD1hbN1Rg8,Mây Coffee,cafe,cafe,True,False,0.8,active
 ChIJXfWk4QYZQjERpQw56WNZ0js,Cà Phê An Hội,cafe,cafe,True,False,0.8,active
@@ -191,50 +191,50 @@ ChIJbbs1ZTQYQjERi3OdfmnRk2g,Đình làng Hải Châu,religious,religious,True,Fa
 ChIJkatEeMwZQjERnAUKgmrbNgQ,Làng Bích họa Đà Nẵng,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 ChIJu6FQjzUYQjER39TMpgQVRUs,Chợ Cồn,day_market,day_market,True,False,0.6,active
 ChIJLWoAs80ZQjERLKHDYD-ZymI,Bảo tàng Điêu khắc Chăm Đà Nẵng,museum_indoor,museum_indoor,True,False,0.6,active
-ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,,False,False,0.3,review
-ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn,paid_attraction,paid_attraction,True,False,0.9,active
+ChIJH5FAHiEYQjERi-kdX4gd-eE,Đà Nẵng Food Tour,outdoor_landmark,,False,False,0.3,active
+ChIJ2y5L4dQNQjERxeSLc68fbrw,Ngũ Hành Sơn (Thủy Sơn),paid_attraction,outdoor_landmark,False,False,0.9,active
 ChIJzX1dFjAZQjERswowf61V1fk,Công Viên APEC,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJL1GKWJYZQjERLrEGqlK2kwQ,Cầu Rồng,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJLTomluP3QTERUy-b9iAYR8U,Khu du lịch sinh thái Suối Hoa,paid_attraction,paid_attraction,True,False,0.6,active
 ChIJSRWy6Hr3QTERiU3vuI0PbHw,Khu Du Lịch Sinh Thái Lái Thiêu,paid_attraction,paid_attraction,True,False,0.6,active
-ChIJQWQVKr4ZQjERcafNnRyLelk,DD WONDERLAND,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJK4sVPc0ZQjERdGROWQ8MMg4,Trung Tâm Giải Trí Helio,paid_attraction,paid_attraction,True,False,0.9,active
+ChIJQWQVKr4ZQjERcafNnRyLelk,DD Wonderland,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJK4sVPc0ZQjERdGROWQ8MMg4,Trung Tâm Giải Trí Helio,paid_attraction,paid_attraction,True,False,0.9,excluded
 ChIJC0W3bjoYQjERVBMskQcoQck,Di tích Thành Điện Hải,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 ChIJEymIkTYYQjERWO-pgjkKGMk,Bảo Tàng Đà Nẵng,museum_indoor,museum_indoor,True,False,0.6,active
 ChIJ5xkIv7EZQjERDZQIupNo09w,Bến Du Thuyền Đà Nẵng,paid_attraction,paid_attraction,True,False,0.9,active
 ChIJEa410zMYQjER3f11TKinbkU,Seahorse,lodging,,False,True,0.5,active
 ChIJCyoHH4kZQjERX3hJiiMqhyk,Đường hoa Bạch Đằng,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJrVOLzgUXQjERRuyvUi8WxkQ,Bãi biển Sơn Trà,beach,beach,True,False,0.6,active
-ChIJs5puLQA9QjERIaHbrBAGpjA,Dịch Vụ Cano Du Lịch Lặn Biển Ngắm San Hô Sơn Trà,paid_attraction,paid_attraction,True,False,0.6,active
-ChIJW0KcgfI9QjERJpkPfjssyfo,Ghềnh Bàng,outdoor_landmark,outdoor_landmark,True,False,0.9,active
+ChIJs5puLQA9QjERIaHbrBAGpjA,Dịch Vụ Cano Du Lịch Lặn Biển Ngắm San Hô Sơn Trà,paid_attraction,paid_attraction,True,False,0.6,excluded
+ChIJW0KcgfI9QjERJpkPfjssyfo,Ghềnh Bàng,outdoor_landmark,outdoor_landmark,True,False,0.9,excluded
 ChIJ17GORdEXQjERhkujx-kwJA0,Khu Du lịch Sinh thái Suối Rạng,paid_attraction,paid_attraction,True,False,0.6,active
 ChIJFzkgXmA9QjERbjn2eoPqMn8,Sơn Trà Tịnh Viên,religious,religious,True,False,0.8,active
 ChIJpYNhNwAXQjERflfHrn1lop4,Vịnh Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-ChIJLVK-0XI9QjER5-Q0ZZoz5wE,Bán đảo Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.9,active
-ChIJI4oSjdE9QjERlXMiA630YKs,Hải đăng Tiên Sa,viewpoint,viewpoint,True,False,0.6,active
+ChIJLVK-0XI9QjER5-Q0ZZoz5wE,Bán đảo Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.9,excluded
+ChIJI4oSjdE9QjERlXMiA630YKs,Hải đăng Tiên Sa,viewpoint,viewpoint,True,False,0.6,excluded
 ChIJBQHuNG49QjER7Mb_Y2I64mk,Đỉnh Bàn Cờ,viewpoint,viewpoint,True,False,0.6,active
 ChIJS07IM4Y9QjER5m2dd3eyku0,Sơn Trà Resort & Spa,lodging,lodging,True,False,0.8,active
 ChIJZWmMe1g9QjERrOGO9nVdagQ,Khu nghỉ mát Du lịch sinh thái Tiên Sa,lodging,,False,True,0.5,active
 ChIJPbgJ4DY9QjER7OSjP2_jSC8,Radar Sơn Trà 1,viewpoint,viewpoint,True,False,0.6,active
 ChIJ08DIzjY9QjER4ldy4JXZBLA,Nhà Vọng Cảnh,viewpoint,viewpoint,True,False,0.6,active
-ChIJ_XkaoQs-QjER_IUTHqI3gI8,Mũi Nghê,viewpoint,viewpoint,True,False,0.6,active
+ChIJ_XkaoQs-QjER_IUTHqI3gI8,Mũi Nghê,viewpoint,viewpoint,True,False,0.6,excluded
 ChIJo8N_zUw9QjERgutJ9u3-n7Y,View Ngắm Bình Minh Sơn Trà,viewpoint,viewpoint,True,False,0.6,active
 ChIJqaaYAdIiQjERGuZHElpvurA,Bãi Cát Vàng,beach,beach,True,False,0.8,active
 ChIJwandNwA9QjERWjnwsYXsQrk,Nhất Lâm Thủy Trang Trà,outdoor_landmark,,False,False,0.3,active
 ChIJgaLldI0ZQjEReQCfThP_6CQ,Công viên Kỳ Quan,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-ChIJ244paMwXQjERGVtPeitX4mA,KHU PHỐ DU LỊCH AN THƯỢNG,outdoor_landmark,outdoor_landmark,True,False,0.9,active
-ChIJJ66EjfQRQjERrmpQQcYTgq8,Khu Dừng Chân,outdoor_landmark,,False,False,0.3,review
+ChIJ244paMwXQjERGVtPeitX4mA,Khu phố du lịch An Thượng,outdoor_landmark,outdoor_landmark,True,False,0.9,active
+ChIJJ66EjfQRQjERrmpQQcYTgq8,Khu Dừng Chân,outdoor_landmark,,False,False,0.3,excluded
 ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,beach,beach,True,False,0.6,active
 ChIJgdHMn8gYQjERmEdW2JHUGTw,Bãi tắm Liên Chiểu,beach,beach,True,False,0.8,active
 ChIJD4Ge5WQZQjERW-0GhLbS310,Công Viên Trung Tâm Hành Chính Liên Chiểu,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJmUEOJQAfQjERLPIN_eYfU9k,Khu du lịch Nam Ô Heritage,outdoor_landmark,,False,False,0.3,active
 ChIJ86LzsaUhQjERGxE6itCeBCY,Suối Lương - Hai Van Park,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 ChIJaQNtm9IfQjERhfrVRYqgA1M,Hồ Hòa Trung,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-ChIJg5OvAgAhQjERKbrq9-Wza-U,Khu Du Lịch Sinh Thái Thuỷ Vân Sơn,paid_attraction,paid_attraction,True,False,0.6,active
-ChIJGSKUUwCLQTERr0Je7WP5Xqc,Khu du lịch Bến Nam Yên,paid_attraction,,False,True,0.5,active
+ChIJg5OvAgAhQjERKbrq9-Wza-U,Khu Du Lịch Sinh Thái Thuỷ Vân Sơn,paid_attraction,paid_attraction,True,False,0.6,excluded
+ChIJGSKUUwCLQTERr0Je7WP5Xqc,Khu du lịch Bến Nam Yên,paid_attraction,,False,True,0.5,excluded
 ChIJqdKPDDIZQjERC2tfiDtFLXE,Quảng trường Liên Chiểu,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJuzvMeE4ZQjERE-pQycR-Mjo,Cầu vượt đi bộ Mikazuki,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,paid_attraction,paid_attraction,True,False,0.8,excluded
 ChIJVVmn6uMjQjERwv0F2ZV9pJw,Bãi Sủng Cỏ,beach,beach,True,False,0.6,active
 ChIJUcvhoSgfQjERsU0uoSUtsto,Cami Riverside Resort,lodging,lodging,True,False,0.8,active
 ChIJEaxZWQAXQjERUp3M2TesuM8,Bãi tắm hàng dừa Mỹ Khê,beach,beach,True,False,0.6,active
@@ -244,25 +244,25 @@ ChIJ4w7694IXQjERrFXucqKL--o,Bãi biển Mỹ Khê,beach,beach,True,False,0.8,act
 ChIJFYLgeggZQjERgwxGcK7JcpQ,Tượng đài Mẹ Nhu,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJSZabUwAZQjERqs6A8ECVnWY,Bãi Tắm Thanh Khê,beach,beach,True,False,0.8,active
 ChIJY6qXPYkZQjER8UoDJvGopTk,Bãi biển Xuân Hà Beach,beach,beach,True,False,0.8,active
-ChIJZ9UJGQQZQjERFL90XKMPBGk,Hồ Bơi Thanh Khê,paid_attraction,paid_attraction,True,False,0.9,active
+ChIJZ9UJGQQZQjERFL90XKMPBGk,Hồ Bơi Thanh Khê,paid_attraction,paid_attraction,True,False,0.9,excluded
 ChIJ78thjjYYQjERkiy-c9ebVPE,Bảo tàng Mỹ thuật Đà Nẵng,museum_indoor,museum_indoor,True,False,0.8,active
 ChIJo8fznMYZQjERNtNTUT-ZJyk,Bảo tàng Hồ Chí Minh,museum_indoor,museum_indoor,True,False,0.8,active
 ChIJaa7lANcXQjERmT3kgV5U7uA,Bảo tàng Đồng Đình,museum_indoor,museum_indoor,True,False,0.8,active
 ChIJcVJkUPcXQjERsA8_dfySw5E,Bảo tàng 3D Art In Paradise,museum_indoor,museum_indoor,True,False,0.8,active
 ChIJ82_sTbkQQjERQ5jmVkoovic,Bảo Tàng Văn Hóa Phật Giáo,museum_indoor,museum_indoor,True,False,0.8,active
-ChIJ17mmuaQRQjERUiexX9MhcdI,Non Nuoc Stone Carving Memory Museum Da Nang City,museum_indoor,museum_indoor,True,False,0.8,active
+ChIJ17mmuaQRQjERUiexX9MhcdI,Non Nuoc Stone Carving Memory Museum Da Nang City,museum_indoor,museum_indoor,True,False,0.8,excluded
 ChIJTXOYPFQXQjERGWO0Jf095tw,Khu Căn cứ Cách mạng K20,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 ChIJNdWwUgARQjERansIEJQleAU,Động Tàng Chơn,religious,,False,True,0.5,active
 ChIJ8be7KQARQjER5Lnd2LHaDAs,Huyen Khong Cave,religious,,False,True,0.5,active
-ChIJKytgDsgQQjER6al50BDd7vc,Hòn Thủy Sơn,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-ChIJWe_7hboQQjERxap-mizn-ZY,Nhà bia Chứng tích Núi Ghềnh,outdoor_landmark,outdoor_landmark,True,False,0.9,active
-ChIJ9yzkbH0ZQjERDhPDi_ITcmM,Đà Sơn tâm linh,religious,religious,True,False,0.8,review
+ChIJKytgDsgQQjER6al50BDd7vc,Hòn Thủy Sơn,outdoor_landmark,outdoor_landmark,True,False,0.6,excluded
+ChIJWe_7hboQQjERxap-mizn-ZY,Nhà bia Chứng tích Núi Ghềnh,outdoor_landmark,outdoor_landmark,True,False,0.9,excluded
+ChIJ9yzkbH0ZQjERDhPDi_ITcmM,Đà Sơn tâm linh,religious,religious,True,False,0.8,excluded
 ChIJodkOVL8fQjERGwRf5tBRLvI,Di tích Đình Hồng Phước,religious,religious,True,False,0.8,active
 ChIJVWzfhcwZQjERa_qP0BpsBkk,Nhà thờ Tộc Hồ Thanh Khê,religious,religious,True,False,0.9,active
-ChIJfQr_phEZQjER5leh47CfKTQ,Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê,museum_indoor,museum_indoor,True,False,0.8,active
+ChIJfQr_phEZQjER5leh47CfKTQ,Nhà Lưu niệm Chiến Công Mẹ Nhu và 07 Dũng sĩ Thanh Khê,museum_indoor,museum_indoor,True,False,0.8,excluded
 ChIJzQu--DUXQjERBw1iz5k5GlE,Bãi tắm Sơn Thủy,beach,beach,True,False,0.8,active
 ChIJX_osydwQQjERB-Y6MvLfJmQ,Bãi biển Non Nước,beach,beach,True,False,0.8,active
-ChIJrcJ8wVwRQjERJF58LAQEO-I,Quán Hải sản Tân Trà Beach,restaurant,restaurant,True,False,0.6,active
+ChIJrcJ8wVwRQjERJF58LAQEO-I,Quán Hải sản Tân Trà Beach,restaurant,restaurant,True,False,0.6,excluded
 ChIJtWWhh9wRQjERxmJ_DNJy62o,Bãi Biển Tân Trà,beach,beach,True,False,0.8,active
 ChIJIaxebnoXQjERNETM7bT3ewg,Bãi tắm T20,beach,beach,True,False,0.8,active
 ChIJOQ-obAARQjERQ4kQhqErSkw,Bãi tắm Nguyễn Thần Hiến,beach,beach,True,False,0.6,active
@@ -272,13 +272,13 @@ ChIJXcxl0UcYQjERVfYu-bKtvPU,Chợ Thanh Bình,day_market,day_market,True,False,0
 ChIJDcx-OTIYQjERP4eyjItPspA,Chợ Hàn,day_market,day_market,True,False,0.8,active
 ChIJBcr6kegZQjER2nCllYpT_Qc,Chợ đêm Helio - B. Night Market,night_market,night_market,True,False,0.8,active
 ChIJJZ47gFgZQjERvHYpZqPp0lU,Chợ hải sản tươi sống biển Thanh Khê,day_market,day_market,True,False,0.6,active
-ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu Ẩm Thực Chợ Cồn -식사 공간,day_market,day_market,True,False,0.8,active
+ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu ẩm thực Chợ Cồn,day_market,day_market,True,False,0.8,active
 ChIJAdChYQAZQjERdBTX1_66Q_8,Chợ Đêm Sơn Trà,night_market,night_market,True,False,0.6,active
 ChIJ2zJrN_EXQjERFRsnRcZaDjI,Chợ Chiều,day_market,day_market,True,False,0.6,active
 ChIJb-kmpPQXQjERKc6w6X8CFKc,Chợ Mân Thái,day_market,day_market,True,False,0.6,active
 ChIJFad1TFAXQjERE9B6U1THHT4,Chợ Khuê Mỹ,day_market,day_market,True,False,0.6,active
 ChIJO56jTAARQjEREYLpKFOB1DA,Chợ Non Nước,day_market,day_market,True,False,0.6,active
-ChIJm2iwgggbQjERj-x6QTYemFQ,Shop Hoa Tươi Quận Ngũ Hành Sơn Đà Nẵng | Điện Hoa Đà Nẵng,day_market,outdoor_landmark,False,True,0.5,active
+ChIJm2iwgggbQjERj-x6QTYemFQ,Shop Hoa Tươi Ngũ Hành Sơn,day_market,outdoor_landmark,False,True,0.5,excluded
 ChIJOZ__YJwXQjER4wLDpzs9L5c,Chợ Đêm An Thượng,night_market,night_market,True,False,0.8,active
 ChIJw6DOwZ8QQjERjDMobkQxbF0,Chợ Bình Kỳ,day_market,day_market,True,False,0.6,active
 ChIJ55qx-YAaQjERJm3mA3vFjX0,Chợ Khái Tây,day_market,day_market,True,False,0.6,active
@@ -301,9 +301,9 @@ ChIJ6ymP8AARQjERnEbundPQK-c,Nguyên Café,cafe,cafe,True,False,0.8,active
 ChIJKdW4YgAfQjERF1TVangBTwY,Rustic Tea & Coffee,cafe,cafe,True,False,0.8,active
 ChIJ8WgvsE8ZQjERZzNoKTBgM84,MÙA HÈ cakes and drinks,cafe,,False,True,0.5,active
 ChIJr4cXZxUZQjER1gqN7YF0A70,Lá Garden coffee,cafe,cafe,True,False,0.8,active
-ChIJMQ_j9n0ZQjER6BCkcpQNT8s,MOR CÀ PHÊ,cafe,cafe,True,False,0.8,active
+ChIJMQ_j9n0ZQjER6BCkcpQNT8s,Mor Cà Phê,cafe,cafe,True,False,0.8,active
 ChIJwTU11dAZQjERsydZriN8k5M,Cà Phê muối Huế 2 - n salt Cafe Tản Đà,cafe,cafe,True,False,0.8,active
-ChIJedpeSI4ZQjERYqZQdHBbz5E,IKIGAI . garden . cafe,cafe,cafe,True,False,0.8,active
+ChIJedpeSI4ZQjERYqZQdHBbz5E,Ikigai Garden Cafe,cafe,cafe,True,False,0.8,active
 ChIJ5YNM8KoZQjERT-e5n84Og1E,Cà phê Giao Mùa,cafe,cafe,True,False,0.8,active
 ChIJp91wYRgZQjER9Yry1HWPhW8,Du thuyền sông Hàn Vinh Anh - Da Nang cruise on Han river,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJlxydWJEZQjER5GSMuHJHtak,VỌC Glamping,paid_attraction,paid_attraction,True,False,0.6,active
@@ -314,7 +314,7 @@ ChIJO0IiWR0RQjERtGkQtqESJ1Y,Động Vân Thông,outdoor_landmark,,False,True,0.5
 ChIJWZUpXf0RQjER6uu8gU2gIhI,Mai Vang (Yellow Blossom) Bonsai Garden,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 ChIJiXlEK7IRQjERvpdL4vcW86w,Tượng Phật Đá Phan Sơn,religious,religious,True,False,0.9,active
 ChIJ9_dffMQQQjERuJbqVGdSysY,Quốc Tự Tam Thai,outdoor_landmark,,False,False,0.3,active
-ChIJg-cynKIXQjERyE7ZIaTaCO8,Public Beach Access,beach,beach,True,False,0.9,review
+ChIJg-cynKIXQjERyE7ZIaTaCO8,Public Beach Access,beach,beach,True,False,0.9,excluded
 ChIJHwgddQAXQjERs5sNrVutheI,Bãi tắm Sao Biển,beach,beach,True,False,0.8,active
 ChIJO61z6OMZQjERxyCrO6bO28I,Chợ Trời (Flea Market),day_market,day_market,True,False,0.6,active
 ChIJP1PH5CMYQjERBYmCltC5WCE,Chợ An Hải Bắc,day_market,day_market,True,False,0.6,active
@@ -322,87 +322,87 @@ osm:node/1036552571,Đèo Hải Vân,viewpoint,viewpoint,True,False,0.9,active
 osm:node/1335374809,chùa am Nam Ngư,religious,religious,True,False,0.8,active
 osm:node/1335374858,chùa am thờ Hỏa Xa,religious,religious,True,False,0.8,active
 osm:node/1335374873,chùa An Cư Tây,religious,religious,True,False,0.8,active
-osm:node/1623183649,Núi Sơn Trà,viewpoint,viewpoint,True,False,0.9,review
-osm:node/2093848429,Kim Sơn,viewpoint,outdoor_landmark,False,True,0.5,active
+osm:node/1623183649,Núi Sơn Trà,viewpoint,viewpoint,True,False,0.9,active
+osm:node/2093848429,Kim Sơn,viewpoint,outdoor_landmark,False,True,0.5,excluded
 osm:node/2093848431,Mộc Sơn,viewpoint,outdoor_landmark,False,True,0.5,active
-osm:node/2093848443,Thổ Sơn,viewpoint,outdoor_landmark,False,True,0.5,active
-osm:node/2177056870,Thác Tóc Tiên,outdoor_landmark,outdoor_landmark,True,False,0.9,active
+osm:node/2093848443,Thổ Sơn,viewpoint,outdoor_landmark,False,True,0.5,excluded
+osm:node/2177056870,Thác Tóc Tiên,viewpoint,outdoor_landmark,False,False,0.9,active
 osm:node/3760247201,chùa Vu Lan,religious,religious,True,False,0.8,active
 osm:node/3760247202,chùa Sư Nữ,religious,religious,True,False,0.8,active
 osm:node/3760272162,Chùa Tam Bảo (Chùa Tam Bảo Theravāda),religious,religious,True,False,0.8,active
 osm:node/3763846156,Chùa Pháp Lâm,religious,religious,True,False,0.8,active
 osm:node/4005611262,Đền thờ Tiền Hiền làng Lổ Giang,religious,religious,True,False,0.8,active
 osm:node/4005611263,Đình Lổ Giáng,religious,religious,True,False,0.8,active
-osm:node/4122433690,Núi Bà Nà,viewpoint,outdoor_landmark,False,True,0.5,review
+osm:node/4122433690,Núi Bà Nà,viewpoint,outdoor_landmark,False,True,0.5,excluded
 osm:node/4172034499,Non Nuoc Beach,beach,beach,True,False,0.6,active
 osm:node/4280016689,Chùa Giác Hoàng Viên,religious,religious,True,False,0.8,active
-osm:node/4294135790,nhà thờ Phú Thượng,religious,religious,True,False,0.8,active
+osm:node/4294135790,nhà thờ Phú Thượng,religious,religious,True,False,0.8,excluded
 osm:node/4294139091,nhà thờ An Ngãi Tây,religious,religious,True,False,0.8,active
 osm:node/4294143691,Nhà thờ Giáo xứ An Thượng,religious,religious,True,False,0.8,active
 osm:node/4294167889,nhà thờ Tùng Sơn,religious,religious,True,False,0.8,active
 osm:node/4347089780,My An Beach,beach,beach,True,False,0.8,active
 osm:node/4386676224,Chợ Miếu Bông,day_market,day_market,True,False,0.8,active
 osm:node/4706189591,To Quoc Ghi Cong,outdoor_landmark,,False,True,0.5,active
-osm:node/4741642219,Public beach,beach,beach,True,False,0.9,review
+osm:node/4741642219,Public beach,beach,beach,True,False,0.9,excluded
 osm:node/4759000238,Dan Oasis Hotel,lodging,lodging,True,False,0.8,active
-osm:node/4845297821,Gần núi thần tài,religious,outdoor_landmark,False,True,0.5,review
+osm:node/4845297821,Gần núi thần tài,religious,outdoor_landmark,False,True,0.5,excluded
 osm:node/4924323121,Fishing Village and Fleet,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 osm:node/5273998822,Cầu Tiên Sơn,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/5273998823,Cầu Trần Thị Lý,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/5273999121,Cầu Thuận Phước,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/5276547123,Cau Nguyen Van Troi Bridge,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-osm:node/5286977425,Núi Thần Tài,outdoor_landmark,outdoor_landmark,True,False,0.6,review
+osm:node/5286977425,Công viên Suối khoáng nóng Núi Thần Tài,paid_attraction,outdoor_landmark,False,False,0.9,active
 osm:node/5421670780,Chùa An Phước,religious,religious,True,False,0.8,active
 osm:node/5432701004,Nhà thờ Hoà Cường,religious,religious,True,False,0.8,active
-osm:node/6346486685,Cây đa đại thụ,outdoor_landmark,outdoor_landmark,True,False,0.6,active
+osm:node/6346486685,Cây Đa Ngàn Năm Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/6528451001,Cây đa Đò Xu,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-osm:node/7095169367,Art Gallery,museum_indoor,museum_indoor,True,False,0.8,active
+osm:node/7095169367,Art Gallery,museum_indoor,museum_indoor,True,False,0.8,excluded
 osm:node/7095169369,Non La,day_market,,False,True,0.5,active
 osm:node/7276380289,Cầu Sông Hàn,outdoor_landmark,outdoor_landmark,True,False,0.6,active
-osm:node/7477670190,노니판매점,day_market,,False,True,0.5,active
-osm:node/7477670191,Gio coffee,cafe,cafe,True,False,0.8,active
-osm:node/8883385553,TASY STUDIO,museum_indoor,,False,True,0.5,active
-osm:node/9921282483,Viet Nam's Delights,day_market,,False,True,0.5,active
+osm:node/7477670190,Cửa hàng bán noni,day_market,,False,True,0.5,excluded
+osm:node/7477670191,Gio coffee,day_market,cafe,False,False,0.9,active
+osm:node/8883385553,TASY STUDIO,museum_indoor,,False,True,0.5,excluded
+osm:node/9921282483,Viet Nam's Delights,day_market,,False,True,0.5,excluded
 osm:node/9921315929,Lưu Niệm - Đặc Sản,day_market,day_market,True,False,0.8,active
 osm:node/10154412164,Fantasy Park,paid_attraction,paid_attraction,True,False,0.9,active
-osm:node/10303626687,Núi Phước Tường,viewpoint,outdoor_landmark,False,True,0.5,review
-osm:node/10303626688,Núi Cẩm Khê,viewpoint,outdoor_landmark,False,True,0.5,review
+osm:node/10303626687,Núi Phước Tường,viewpoint,outdoor_landmark,False,True,0.5,excluded
+osm:node/10303626688,Núi Cẩm Khê,viewpoint,outdoor_landmark,False,True,0.5,excluded
 osm:node/10709724107,Làng đá mỹ nghệ Non Nước,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 osm:node/10709738005,Làng chiếu Cẩm Nê,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/10709738105,Làng nước mắm Nam Ô,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:node/10723988763,Đài tưởng niệm thảm sát Hà My,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/11359603957,Chùa Nam Sơn,religious,religious,True,False,0.6,active
 osm:node/11427582964,Thai Market,day_market,day_market,True,False,0.8,active
-osm:node/11629841009,Núi Khe Xương,viewpoint,outdoor_landmark,False,True,0.5,review
-osm:node/11629996926,Núi Hải Vân,viewpoint,outdoor_landmark,False,True,0.5,review
-osm:node/11630013743,Núi Hoi,viewpoint,outdoor_landmark,False,True,0.5,review
-osm:node/11762365155,Núi Hòng Chan,viewpoint,outdoor_landmark,False,True,0.5,review
+osm:node/11629841009,Núi Khe Xương,viewpoint,outdoor_landmark,False,True,0.5,excluded
+osm:node/11629996926,Núi Hải Vân,viewpoint,outdoor_landmark,False,True,0.5,excluded
+osm:node/11630013743,Núi Hoi,viewpoint,outdoor_landmark,False,True,0.5,excluded
+osm:node/11762365155,Núi Hòng Chan,viewpoint,outdoor_landmark,False,True,0.5,excluded
 osm:node/11888483369,Chợ Phước Mỹ,day_market,day_market,True,False,0.8,active
 osm:node/12333995781,Chợ đêm Lê Duẩn,night_market,night_market,True,False,0.8,active
 osm:node/12404434601,Khu Văn hóa Tâm linh Đà Sơn,religious,religious,True,False,0.6,active
 osm:node/12603319867,Nhà thờ Thanh Bình,religious,religious,True,False,0.8,active
-osm:node/12701675501,Small waterfall,outdoor_landmark,outdoor_landmark,True,False,0.9,review
+osm:node/12701675501,Small waterfall,outdoor_landmark,outdoor_landmark,True,False,0.9,excluded
 osm:node/12811972501,Mart Souvenir,day_market,day_market,True,False,0.8,active
-osm:node/13040467529,Bãi Đá,beach,beach,True,False,0.8,active
+osm:node/13040467529,Bãi Đá,beach,beach,True,False,0.8,excluded
 osm:node/13293564930,Himawari,day_market,,False,True,0.5,active
 osm:node/13484040419,Đền Bà Càn Khôn,religious,religious,True,False,0.8,active
-osm:node/13677406601,"Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",outdoor_landmark,outdoor_landmark,True,False,0.8,active
+osm:node/13677406601,Đài tưởng niệm chuyến bay 229 (1979),outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/13687068650,Linh Phong Bảo Tháp,religious,religious,True,False,0.6,active
 osm:node/13734880501,Tượng Phật Phước Lý,religious,religious,True,False,0.6,active
 osm:node/13913398302,Suối Lạc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/13913400201,Suối Ngọc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 osm:node/14045110791,Lucky Retail,day_market,,False,True,0.5,active
 osm:node/14045130739,Made in Vietnam,day_market,,False,True,0.5,active
-osm:node/14045144381,Viet Nam's Delights,day_market,,False,True,0.5,active
+osm:node/14045144381,Viet Nam's Delights,day_market,,False,True,0.5,excluded
 osm:node/14067929701,Bonny handmade,day_market,,False,True,0.5,active
 osm:node/14130293535,Tượng đài Dũng sĩ Điện Ngọc,outdoor_landmark,outdoor_landmark,True,False,0.8,active
-ChIJHZakNa8ZQjERWNFToM16eB4,Chùa Linh Ứng - Bãi Bụt Sơn Trà,religious,religious,True,False,0.8,active
-ChIJuzUYUgAXQjER7uqAcJPQMY0,Cổng Chùa Linh Ứng,religious,religious,True,False,0.6,active
+ChIJHZakNa8ZQjERWNFToM16eB4,Chùa Linh Ứng Sơn Trà,religious,religious,True,False,0.8,active
+ChIJuzUYUgAXQjER7uqAcJPQMY0,Cổng Chùa Linh Ứng,religious,religious,True,False,0.6,excluded
 ChIJuaI3VgMZQjER0B4a7LcJ-YA,Nhà Thờ Giáo Xứ An Hòa,religious,religious,True,False,0.8,active
 ChIJJ2sLdT4YQjERi930NC-XCo0,Nhà Thờ Giáo Xứ Thanh Đức,religious,religious,True,False,0.8,active
 ChIJxdBK6SsYQjERYojL_cVEkbs,Nhà thờ Giáo xứ An Hải,religious,religious,True,False,0.8,active
 ChIJJYpRy_YXQjERoyNzmnL2f-E,Nhà thờ Thánh Giuse lao công,religious,religious,True,False,0.8,active
-ChIJs4dg5vceQjERJQ5D9ATvWhU,NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO,religious,religious,True,False,0.8,active
+ChIJs4dg5vceQjERJQ5D9ATvWhU,Nhà thờ cổ Tùng Sơn,religious,religious,True,False,0.8,active
 ChIJPdLppX4XQjERnV5xcr28sO0,Nhà thờ Gia Phước,religious,religious,True,False,0.8,active
 ChIJnwKLiE4YQjERMVI0qrqKg1c,Nhà Thờ Giáo Xứ Tam Tòa,religious,religious,True,False,0.8,active
 ChIJcw0FdkgYQjERhr14f9cMXK0,Nhà Thờ Giáo Xứ Nội Hà,religious,religious,True,False,0.8,active
@@ -415,7 +415,7 @@ ChIJX_rcYHQZQjERQXQ9UxHmHN4,Nhà Thờ Giáo Xứ Phước Tường,religious,re
 ChIJEf1GVMoZQjERQxbPWFvFiKI,Chùa Bát Nhã,religious,religious,True,False,0.8,active
 ChIJfQNjLMYQQjERo1m_A0X8aLE,Chùa Non Nước,religious,religious,True,False,0.8,active
 ChIJRZhHIMkZQjERYBH-5S1xKNg,Chùa Phổ Đà,religious,religious,True,False,0.8,active
-ChIJCeQZ-jkZQjERaXJSI0ZDWXw,CHÙA KHÔNG TÊN ĐÀ NẴNG,religious,religious,True,False,0.8,active
+ChIJCeQZ-jkZQjERaXJSI0ZDWXw,Chùa Không Tên,religious,religious,True,False,0.8,active
 ChIJsdeOrV8XQjER8weQ8Az-w5c,Chùa Bà Đa,religious,religious,True,False,0.8,active
 ChIJyd-t1B0ZQjERVSYFtVbYms8,Thiền Viện Bồ Đề,religious,religious,True,False,0.8,active
 ChIJrfvtnpYhQjEReNe0fgh8KMM,Chùa Nam Hải,religious,religious,True,False,0.8,active
@@ -424,7 +424,7 @@ ChIJCRy3iv_2QTERfZxGJkIMHHQ,Chùa Linh Ứng - Bà Nà,religious,religious,True,
 ChIJuzoag4EXQjERm__A5Whnw5I,Chùa Mỹ Khê,religious,religious,True,False,0.8,active
 ChIJaUuo57kZQjERzjJfr1YdjCA,Chùa Báo Ân,religious,religious,True,False,0.8,active
 ChIJrynevMsZQjERzZIGoLZwQ2I,Chùa Từ Tôn,religious,religious,True,False,0.8,active
-ChIJyWFmArX3QTERon6tUT6re4Q,Ba Na Hills,paid_attraction,paid_attraction,True,False,0.9,review
+ChIJyWFmArX3QTERon6tUT6re4Q,Ba Na Hills,paid_attraction,paid_attraction,True,False,0.9,excluded
 ChIJyUQ4aw72QTERCXl5YV-4U1w,Sun World Bà Nà Hills,paid_attraction,paid_attraction,True,False,0.9,active
 ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,viewpoint,True,False,0.9,active
 ChIJ5ySJbAAZQjEROESCTb3NJsw,Bến Du Thuyền Sông Hàn,paid_attraction,paid_attraction,True,False,0.9,active
@@ -435,7 +435,7 @@ ChIJRZXlI6MZQjERcre1gDV0kFE,Minh Trường Hotel 1 - Khách sạn view biển Đ
 ChIJMeyhoXgXQjERqCs6CuNR5yI,Sala Danang Beach Hotel,lodging,lodging,True,False,0.8,active
 ChIJW7iIXnoXQjERwzVF2LpQ_m4,HAIAN Beach Hotel & Spa,lodging,lodging,True,False,0.8,active
 ChIJTQo19YMXQjER1DttYZqjHYo,Mandila Beach Hotel,lodging,lodging,True,False,0.8,active
-ChIJN75cdYQXQjERBUnemtIubGM,NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ,lodging,lodging,True,False,0.8,active
+ChIJN75cdYQXQjERBUnemtIubGM,Nalod Đà Nẵng,lodging,,False,False,0.3,active
 ChIJzbKs7IMXQjERWf_Uz122Ohs,Diamond Sea Hotel,lodging,lodging,True,False,0.8,active
 ChIJbeO3ddMZQjERzeIxy-6JpYc,Meliá Vinpearl Danang Riverfront,lodging,,False,True,0.5,active
 ChIJ8YytBwwXQjERJQIQYf4qyqM,Minh Toan SAFI Ocean Hotel,lodging,lodging,True,False,0.8,active
@@ -472,12 +472,12 @@ ChIJRQDAiMIZQjERgrBd-ERmO-k,Tigon massa - Spa & Massage Đà Nẵng,wellness,wel
 ChIJXcc22ZcZQjERT47ZqHMl13c,Charm Spa - Massage Da Nang,wellness,wellness,True,False,0.8,active
 ChIJoyYaBewXQjEROdwfQaOB610,Babylon Spa Massage Da Nang,wellness,wellness,True,False,0.8,active
 ChIJ6dOY7ykYQjER0aPtP-ONTzM,Herbal Spa,wellness,wellness,True,False,0.8,active
-ChIJs3Rt4-QZQjERPTSZ7G6XAK0,Clover Spa - Best Spa Massage Da Nang 다낭 마사지,wellness,wellness,True,False,0.8,active
-ChIJv1gepxMZQjER2xJtkXvi9xU,Jeju Spa – Massage & Nail | 제주 스파 네일 & 마사지 | | 济州岛水疗美甲按摩 |,wellness,wellness,True,False,0.8,active
+ChIJs3Rt4-QZQjERPTSZ7G6XAK0,Clover Spa,wellness,wellness,True,False,0.8,active
+ChIJv1gepxMZQjER2xJtkXvi9xU,Jeju Spa – Massage & Nail,wellness,wellness,True,False,0.8,active
 ChIJsyY9JzoYQjERvaNXwl9KJkI,Spa Massage Sông Hàn,wellness,wellness,True,False,0.8,active
 ChIJ80QCWQAXQjER9Wfb-KFGetQ,Rosa Spa & Massage Da Nang,wellness,wellness,True,False,0.8,active
-ChIJ98HsudQXQjERpViPqdVY3ko,OANI SPA,wellness,wellness,True,False,0.8,active
-ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ - chợ đêm Bạch Đằng Đà Nẵng,night_market,night_market,True,False,0.9,active
+ChIJ98HsudQXQjERpViPqdVY3ko,Oani Spa,wellness,wellness,True,False,0.8,active
+ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ Bạch Đằng,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 ChIJA0bFwKoZQjER--pX5_3_cD0,Tú Chợ đêm,restaurant,restaurant,True,False,0.9,active
 ChIJgRyzBl8ZQjERJF9sFGvE4R8,Mỳ Quảng Cô Sáu,restaurant,restaurant,True,False,0.8,active
 ChIJHz8ambQZQjERjEFJ-wJ-9EE,Mỳ Quảng Hương Quê,restaurant,restaurant,True,False,0.8,active
@@ -498,7 +498,7 @@ ChIJR1aq9sMZQjERm5CGfBs-Qi4,Mỳ Quảng Quê Xưa,restaurant,restaurant,True,Fa
 ChIJy0rCqNkXQjERksI84rfTy5k,Hải Sản Ku Tom Đà Nẵng,restaurant,restaurant,True,False,0.8,active
 ChIJkYkOmOMXQjEREz4KLKpwAOE,Hải sản Năm Đảnh,restaurant,restaurant,True,False,0.8,active
 ChIJxwczMkkXQjERoo3KDb0ZQKE,Hải Sản A SÂM,restaurant,restaurant,True,False,0.8,active
-ChIJe3Ixim4XQjERbbrbMnyhr34,ĐÀ THÀNH QUÁN,restaurant,outdoor_landmark,False,True,0.5,active
+ChIJe3Ixim4XQjERbbrbMnyhr34,Đà Thành Quán,restaurant,outdoor_landmark,False,True,0.5,active
 ChIJBVHLh_gXQjER0MFnoSFsh4A,Quán Hải Sản ÔNG MINH,restaurant,restaurant,True,False,0.8,active
 ChIJl2GYHgAZQjERp7zmf6CDTXk,Nhà hàng hải sản Sơn Biển Đông,restaurant,restaurant,True,False,0.8,active
 ChIJO_gU03QZQjERdvtWlsIeyOM,Hải Sản Kim Seafood,restaurant,restaurant,True,False,0.8,active
@@ -509,8 +509,8 @@ ChIJu5AYG0UXQjEREoejRui0VzY,Đặc Sản Ngon Đà Nẵng - Đặc Sản Làm Qu
 ChIJy9eI3pEZQjERRjXgQMj8m-g,Mê Vui - Đặc sản Đà Nẵng SẠCH,day_market,day_market,True,False,0.8,active
 ChIJ4_aypxYZQjERzFP2v0FweY8,Cửa hàng Đặc sản Biển Đà Nẵng,day_market,day_market,True,False,0.8,active
 ChIJSwMjjYEXQjERBbThTSOPeKY,Siêu thị Đặc sản Hương Đà,day_market,day_market,True,False,0.8,active
-ChIJpRFvp6sZQjERY_CDfnMCx2w,Vigift Đà Nẵng – Quà Đặc Sản | Souvenir & Speciality | 기념품 & 특산품,day_market,day_market,True,False,0.8,active
-ChIJpeV7WwAZQjER5TfSiKGu0Qc,Cô Na - ĐẶC SẢN ĐÀ NẴNG,day_market,day_market,True,False,0.8,active
+ChIJpRFvp6sZQjERY_CDfnMCx2w,Vigift Đà Nẵng – Quà Đặc Sản,day_market,day_market,True,False,0.8,active
+ChIJpeV7WwAZQjER5TfSiKGu0Qc,Cô Na - Đặc sản Đà Nẵng,day_market,day_market,True,False,0.8,active
 ChIJzYloKSQaQjERN9-d8WZyCQo,Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường,restaurant,restaurant,True,False,0.8,active
 ChIJ03jTTgAXQjERpVQunmJHv2c,Sontra Sea Hotel,lodging,lodging,True,False,0.8,active
 ChIJfbl-2sMXQjERKLfkuhtH-BE,Peninsula Hotel Danang,lodging,lodging,True,False,0.8,active
@@ -528,10 +528,10 @@ ChIJrW03HQAXQjERLRu5Xd4RvsE,Seavitel Beach Hotel - DaNang,lodging,lodging,True,F
 ChIJQ-_7No0XQjERrR5A4J2fB9s,Monarque Hotel,lodging,lodging,True,False,0.8,active
 ChIJJXkD0OcbQjER8aTXsF-pS_Q,Nguyen Gia Hotel,lodging,lodging,True,False,0.8,active
 ChIJQWWv4A8YQjERuqj9zjNqKAc,Wyndham Danang Golden Bay Hotel,lodging,lodging,True,False,0.8,active
-ChIJ27_WHYQXQjERfwDksZnfqKM,TGT BEACH HOTEL,lodging,lodging,True,False,0.8,active
+ChIJ27_WHYQXQjERfwDksZnfqKM,TGT Beach Hotel,lodging,lodging,True,False,0.8,active
 ChIJs2LW3rEXQjERAndHSLNX-Rc,Elites Hotel,lodging,lodging,True,False,0.8,active
 ChIJpTFl49UYQjERrzeUIxz8NL4,Phước Hà,lodging,,False,True,0.5,active
-ChIJq0vnsSIZQjERiB7KQ_DkjW0,MỘC NHIÊN HOTEL,lodging,lodging,True,False,0.8,active
+ChIJq0vnsSIZQjERiB7KQ_DkjW0,Mộc Nhiên Hotel,lodging,lodging,True,False,0.8,active
 ChIJfS4VlKsZQjERPQy1DOvrEa8,Avenis Hotel,lodging,lodging,True,False,0.8,active
 ChIJM560Qk0YQjERJDvIocFeEIw,Nice Hotel,lodging,lodging,True,False,0.8,active
 ChIJVVUC-lEYQjERqdANIT0ShEw,Khách Sạn Smile,lodging,lodging,True,False,0.6,active
@@ -554,7 +554,7 @@ ChIJ37FbsJgZQjERQho2DqSzX_Y,Châu Nhi Spa & Massage,wellness,wellness,True,False
 ChIJQc2Xk0cXQjERnOTCS5zK1LM,Ara Spa & Massage Da Nang,wellness,wellness,True,False,0.8,active
 ChIJX8a3GJEZQjERe6n-Xtcds1w,le vénin spa,wellness,wellness,True,False,0.8,active
 ChIJKZK2FcoZQjER8f6Uft81Mvg,Sơn Trà Spa Massage Trị Liệu Đà Nẵng,wellness,wellness,True,False,0.8,active
-ChIJEWVESw8XQjEReJCexT_n2Wo,HAPPY SPA,wellness,wellness,True,False,0.8,active
+ChIJEWVESw8XQjEReJCexT_n2Wo,Happy Spa,wellness,wellness,True,False,0.8,active
 ChIJ9ZTWZwAXQjERn99h6ziS_2c,Lotus Bloom Spa & Massage,wellness,wellness,True,False,0.8,active
 ChIJz3rG-N0XQjERVs2Zo-BWxwQ,Smile Spa (tên cũ Spa Bà Thông - CN Sơn Trà),wellness,wellness,True,False,0.8,active
 ChIJcUs0-1YXQjERDYZBzXC8l24,Zon Spa,wellness,wellness,True,False,0.8,active
@@ -571,12 +571,12 @@ ChIJzYULZMgRQjERYRTCyEgKZUY,AURA SPA-Massage-Nails-Hair Wash & Relaxation In Da 
 ChIJyUfZ9fAZQjERIMtiBaxkTko,Nguon Spa Da Nang - Nguồn Hoàng Kế Viêm,wellness,wellness,True,False,0.8,active
 ChIJl4vFoHERQjERWxJkz9bsJDg,Spa Luna,wellness,wellness,True,False,0.8,active
 ChIJK_ogWgARQjERnLylibgoTpw,Quýt Spa & More,wellness,wellness,True,False,0.8,active
-ChIJvWLgr6cXQjER3bVwhb1OVrs,JUNE SPA,wellness,wellness,True,False,0.8,active
+ChIJvWLgr6cXQjER3bVwhb1OVrs,June Spa,wellness,wellness,True,False,0.8,active
 ChIJ701Bqt8XQjERf9oQmmJJRE8,Regal Healthy Spa,wellness,wellness,True,False,0.8,active
 ChIJmwtSJxYXQjERqyw4BIsIRV4,M'healthy spa,wellness,wellness,True,False,0.8,active
 ChIJc2zPTQAXQjERn0HeQzam084,Harmony Haven Spa & Massage,wellness,wellness,True,False,0.8,active
-ChIJ8zk-ZgAZQjERhiZiMzjjRe4,"CAMY SPA Liên Chiểu , Đà Nẵng",wellness,wellness,True,False,0.8,active
-ChIJWd2LBrkZQjER4hLHO81ipK0,Spa Nặn Mụn - Không Sưng Liên Chiểu Lu's House Beauty & Academy,wellness,wellness,True,False,0.8,active
+ChIJ8zk-ZgAZQjERhiZiMzjjRe4,Camy Spa Liên Chiểu,wellness,wellness,True,False,0.8,active
+ChIJWd2LBrkZQjER4hLHO81ipK0,Lu's House Beauty & Academy,wellness,,False,False,0.3,excluded
 ChIJs9Tdb7kfQjERg5O07vnwsww,Nàng Thir Spa ở Hòa Khánh,wellness,wellness,True,False,0.8,active
 ChIJrXev5SsZQjERFgTaHcdCtjY,Massage Therapy Spa The Yen,wellness,wellness,True,False,0.8,active
 ChIJzRc5EgIZQjERKvXOUUpbcKA,Light Beauty Spa,wellness,wellness,True,False,0.8,active
@@ -585,7 +585,7 @@ ChIJu9TGuzEZQjERolkiV2-wyQQ,Massage Khiếm Thị Mai Liên,wellness,wellness,Tr
 ChIJNXaMJAAZQjERJxDzvQEO38c,Mộc An Spa,wellness,wellness,True,False,0.8,active
 ChIJeYxRAo8ZQjERawBcqjOhTRQ,Tâm Spa - Spa Dưỡng Sinh,wellness,wellness,True,False,0.8,active
 ChIJ3dEof08ZQjERrJfwaLyIAIk,Vân Anh beauty spa,wellness,wellness,True,False,0.8,active
-ChIJ66onuEIZQjERJcc014sju08,Rice' Spa &Nails,wellness,wellness,True,False,0.6,review
+ChIJ66onuEIZQjERJcc014sju08,Rice' Spa &Nails,wellness,wellness,True,False,0.6,active
 ChIJ5RkjQCUZQjERDtUHgOu7k10,Nhung Spa Trị Liệu,wellness,wellness,True,False,0.8,active
 ChIJmVevrx4ZQjER64G39u7fZaM,Nhy Nguyen Beauty & Spa,wellness,wellness,True,False,0.8,active
 ChIJYU-cVQAXQjERxfDy3td5_ac,New World Spa,wellness,wellness,True,False,0.8,active
@@ -608,7 +608,7 @@ ChIJfzqqXwAZQjERWQ7zRsTU8Zk,Moya Wellness Spa Da Nang,wellness,wellness,True,Fal
 ChIJAZKjQVIZQjERmZdYEcKV5Go,DƯƠNG THÙY SPA - Thanh Khê,wellness,wellness,True,False,0.8,active
 ChIJg85mY5EZQjERXv4xH_p-_MI,Ellie Beauty Spa,wellness,wellness,True,False,0.8,active
 ChIJC1S7VAAZQjERFItFlyewDHY,Glow Spa Thanh Khê,wellness,wellness,True,False,0.8,active
-ChIJM1DTVHkZQjERDW1JNclcAtw,Blind Massage Người mù Đức Quý - 블라인드 마사지 Слепой массаж-Đà Nẵng,wellness,wellness,True,False,0.8,active
+ChIJM1DTVHkZQjERDW1JNclcAtw,Massage người mù Đức Quý,wellness,wellness,True,False,0.8,active
 ChIJSYpfiOcZQjERYKZX_AdStPY,GINZA Bar & Lounge,nightlife,nightlife,True,False,0.8,active
 ChIJueQn3rsZQjERgU81knCQmOQ,Bar Eau-de-vie,nightlife,nightlife,True,False,0.8,active
 ChIJp5h-DjMYQjERTMBHOnlub0o,The 1920's Lounge,nightlife,nightlife,True,False,0.8,active
@@ -620,10 +620,10 @@ ChIJxxumO4QZQjERqrQlIwbE8cA,Buffalo beer & coffee,nightlife,cafe,False,True,0.5,
 ChIJh8C0GlYXQjERhjmDp-ik-Uc,C Bar,nightlife,nightlife,True,False,0.8,active
 ChIJu557PTwYQjERu1jlhJR4LEU,New Phương Đông Club,nightlife,nightlife,True,False,0.8,active
 ChIJ6e7t67oZQjERLcf4KcgElEc,Maju Top Class Bar - lounge,nightlife,nightlife,True,False,0.8,excluded
-ChIJn9Kkxh4ZQjERgDXEcvzD4nI,"MarLan Pub – Craft Beer, Wine, Cocktail, Food & Live Music Đà Nẵng",nightlife,nightlife,True,False,0.8,active
+ChIJn9Kkxh4ZQjERgDXEcvzD4nI,MarLan Pub,nightlife,nightlife,True,False,0.8,active
 ChIJp4lxrJsZQjERdBDtWzWyHJU,Bambi Beer Club,nightlife,nightlife,True,False,0.8,active
 ChIJYZuMDnEZQjERrftd297ekRM,Tê Bar,nightlife,nightlife,True,False,0.8,active
-ChIJu9GUjOgZQjERpfx8z-GIMEw,켓 바 1 Kết Bar,nightlife,nightlife,True,False,0.8,active
+ChIJu9GUjOgZQjERpfx8z-GIMEw,Kết Bar,nightlife,nightlife,True,False,0.8,active
 ChIJEXMOHVMXQjER479UZE7C59c,BAR FLOW Danang,nightlife,nightlife,True,False,0.8,active
 ChIJZQZGM-MZQjERm_6vbq_fWzo,NYX Sky Lounge & Mixology,nightlife,nightlife,True,False,0.8,active
 ChIJwRzh0c0ZQjERSqm3HPF_Gi4,T&V Lounge Bar,nightlife,nightlife,True,False,0.8,active
@@ -643,7 +643,7 @@ ChIJkxff_x0XQjERCC_CN8DFt54,The Craftsman Cocktail Bar,nightlife,nightlife,True,
 ChIJK0J1RXMXQjERPPTldZI_e5c,Le Funky Donkey - French Bar,nightlife,nightlife,True,False,0.8,active
 ChIJdwwwfFoXQjERW6mXtIdB8LU,The Original Shamrock Sports Bar Da Nang 🇮🇪 since 2019,nightlife,nightlife,True,False,0.8,active
 ChIJgaVvkV0XQjERNZYSVEJS_Xo,Marine Sky Bar-Rooftop SeaView with Exclusive Spa Offers,nightlife,wellness,False,True,0.5,active
-ChIJxRB4CRgXQjER6zy0em0FyTk,오빠O Bar- Lounge & More,nightlife,nightlife,True,False,0.8,active
+ChIJxRB4CRgXQjER6zy0em0FyTk,Oppa O Bar,nightlife,nightlife,True,False,0.8,active
 ChIJsztPMVkXQjERooynSorot-0,Blue Sky Bar,nightlife,nightlife,True,False,0.8,active
 ChIJ7YfDY2QXQjERS2EcCR3hj0U,N Pub,nightlife,nightlife,True,False,0.8,active
 ChIJpSDE_bUXQjERRvGyIAFWpeE,Corner Pub,nightlife,nightlife,True,False,0.8,active
@@ -659,12 +659,12 @@ ChIJw3dqIx8ZQjERxFZPN1A3gew,The PILL Bar & Club,nightlife,nightlife,True,False,0
 ChIJQxr6eAAfQjER1vwrQRjtk60,Quán nhậu Keo Lá Tràm,nightlife,nightlife,True,False,0.8,active
 ChIJmd-xKSoZQjERr8BS2agMkCI,Cà Phê Star Pub,nightlife,cafe,False,True,0.5,active
 ChIJFXRrR0wZQjERNl4jMD9QNFI,Blues Q Coffee and Craft Beer Garden ( Bia thủ công),nightlife,cafe,False,True,0.5,active
-ChIJOean5VUZQjERMWDUmGdTpJQ,KARAOKE VENUS,nightlife,nightlife,True,False,0.8,active
+ChIJOean5VUZQjERMWDUmGdTpJQ,Karaoke Venus,nightlife,nightlife,True,False,0.8,active
 ChIJVS4QEX8fQjERk1vVwmP0Rk8,An Nhiên Quán,nightlife,restaurant,False,True,0.5,active
 ChIJWTRb5NcYQjER6mJOuNl06k8,Quán Nhậu Hiếu Hòa,nightlife,nightlife,True,False,0.8,active
 ChIJG1WCi2UXQjER9CxEvEOoEpw,Malibu Beach Club,nightlife,nightlife,True,False,0.8,active
 ChIJcYos3CkZQjERibEDbcXOpQs,Quán Karaoke Music For You,nightlife,nightlife,True,False,0.8,active
-ChIJ1XDmcgAZQjERg3z1Ix0EbZA,RAIN MUSIC BOX & GAME,day_market,,False,False,0.3,review
+ChIJ1XDmcgAZQjERg3z1Ix0EbZA,Rain Music Box & Game,day_market,,False,False,0.3,active
 ChIJR7_4DdYYQjERUNxW7r51REs,Karaoke Alô,nightlife,nightlife,True,False,0.8,active
 ChIJ-WGIA80YQjER8XDqSVShrOE,Quán Karaoke Smile Idol,nightlife,nightlife,True,False,0.8,active
 ChIJP1XHPQAZQjERinsxWb2Ga0A,Karaoke Monaco Đà Nẵng,nightlife,nightlife,True,False,0.8,active
@@ -683,59 +683,59 @@ ChIJASuSy-sXQjERJ6nq5Rma0vs,The Roof - Da Nang,nightlife,nightlife,True,False,0.
 ChIJj8OOR1UYQjERdZlR_ysOs4E,Karaoke Phương Trí,nightlife,nightlife,True,False,0.8,active
 ChIJTQuJbKYZQjERAE9fPrQroZw,Drink Đi,nightlife,,False,True,0.5,active
 ChIJ3zTSR1UYQjERxzlJpa-DNHE,Karaoke Sao Mai,nightlife,nightlife,True,False,0.8,active
-ChIJN_abDNcZQjERmLjyrAo7IPk,CẬU ẤM BEER CHILL,nightlife,nightlife,True,False,0.8,active
+ChIJN_abDNcZQjERmLjyrAo7IPk,Cậu Ấm Beer Chill,nightlife,nightlife,True,False,0.8,active
 ChIJc2sSdpMZQjERg6ykGdI-3r4,Quán New Điểm Hẹn - Giao Lưu Ca Nhạc Hằng Đêm,nightlife,restaurant,False,True,0.5,active
 ChIJMZtZVeQZQjERchri-_Wa9C8,Bar Đà Nẵng,nightlife,nightlife,True,False,0.8,active
 ChIJObG9DvoZQjER1tqakgkbUno,CẬU CẢ - 37 Điện Biên Phủ,nightlife,,False,True,0.5,active
-ChIJD8ivG7YZQjERxe5fgwGSVao,KARAOKE CAMEL 2,nightlife,nightlife,True,False,0.8,active
+ChIJD8ivG7YZQjERxe5fgwGSVao,Karaoke Camel 2,nightlife,nightlife,True,False,0.8,active
 ChIJkZi7gkcYQjERPd87DaNuhW0,On The Radio,nightlife,,False,True,0.5,active
 ChIJ8ar-PNQXQjERFGGdrbCAQbg,Tháp Xá Lợi,religious,religious,True,False,0.8,active
-ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,religious,religious,True,False,0.8,active
+ChIJabEOcucXQjER-8MNU9FNODw,Tượng Quan Thế Âm Bồ Tát,religious,religious,True,False,0.8,excluded
 ChIJnZoMTbkQQjERwzvvHqGlb4E,Chùa Linh Sơn,religious,religious,True,False,0.8,active
 ChIJyaniiLoQQjERI3aW6z5atCc,Chùa Hương Sơn,religious,religious,True,False,0.8,active
 ChIJO9OcO7kQQjERuGR5zEtpfu8,Chùa Thái Sơn,religious,religious,True,False,0.8,active
-ChIJW9b8Ky0XQjERPn8CJNdE0Lk,"Chùa Mỹ Thị,tổ 11 đường Nguyễn Lữ,quận Ngũ Hành Sơn Thành Phố Đà Nẵng",religious,religious,True,False,0.8,active
+ChIJW9b8Ky0XQjERPn8CJNdE0Lk,Chùa Mỹ Thị,religious,religious,True,False,0.8,active
 ChIJvexouL4QQjERy0qt57A0GX4,Chùa Phổ Đà Sơn,religious,religious,True,False,0.8,active
 ChIJA8a2aLcQQjER5mciBxvjUVs,Chùa Long Hoa,religious,religious,True,False,0.8,active
 ChIJ8Z0D7KURQjERUPd36goDH90,Chùa Tam Tôn,religious,religious,True,False,0.8,active
 ChIJLX9s7EUbQjERdsy67X5-NrE,Chùa Hải An Đà Nẵng,religious,religious,True,False,0.8,active
 ChIJf_LKvbkbQjERSVrbzxU6Nuc,Chùa Vân Long,religious,religious,True,False,0.8,active
-ChIJ8VqGDeYRQjERVEkumiIa714,LÂM TỲ NI VIÊN,religious,religious,True,False,0.8,active
+ChIJ8VqGDeYRQjERVEkumiIa714,Lâm Tỳ Ni Viên,religious,religious,True,False,0.8,active
 ChIJ9w6iligZQjERXLpgwwjF0Fs,Chùa Minh Phước,religious,religious,True,False,0.8,active
 ChIJo2Yyix8ZQjERmG7AHQkOpIo,Chùa Phước Lộc,religious,religious,True,False,0.8,active
 ChIJKcik9OQYQjERKZ21jblRTVc,Chùa Thanh Hải,religious,religious,True,False,0.8,active
-ChIJl21Hd_4YQjERF980f9HS9Cc,Chùa Làng Thanh Khê,religious,religious,True,False,0.8,active
+ChIJl21Hd_4YQjERF980f9HS9Cc,Chùa Làng Thanh Khê,religious,religious,True,False,0.8,excluded
 ChIJsVPjaP8YQjER76Ao_3tvppY,Chùa Thanh Hà,religious,religious,True,False,0.8,active
-ChIJp3BwHgsZQjERzQZfxwNQNmE,Chùa Làng Thanh Khê,religious,religious,True,False,0.8,active
-ChIJQ2dbvVIYQjERVbGNKc5Tmcs,CHÙA TÂN THÀNH,religious,religious,True,False,0.8,active
+ChIJp3BwHgsZQjERzQZfxwNQNmE,Chùa Làng Thanh Khê,religious,religious,True,False,0.8,excluded
+ChIJQ2dbvVIYQjERVbGNKc5Tmcs,Chùa Tân Thành,religious,religious,True,False,0.8,active
 ChIJaX09zkgYQjERCtro2DeADN0,Chùa Thuận Thành,religious,religious,True,False,0.8,active
-ChIJF8yRoecZQjERdDBeBdSRD-Y,DA NANG DOWNTOWN,outdoor_landmark,outdoor_landmark,True,False,0.6,review
+ChIJF8yRoecZQjERdDBeBdSRD-Y,DA NANG DOWNTOWN,outdoor_landmark,outdoor_landmark,True,False,0.6,excluded
 ChIJu1LdzQwZQjER2DSbyyayAbs,Công viên Cầu vượt Ngã Ba Huế,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJYy3rrs4ZQjER3g_-SEo5WPU,Công viên 29/3,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJDYfSGZYZQjERmSERKl2Fj7E,Hidden Oasis Homestay,lodging,lodging,True,False,0.8,active
 ChIJvfs2CK4ZQjERYSUrqnRYbqo,Công viên hồ Ngọc Anh,outdoor_landmark,outdoor_landmark,True,False,0.8,active
-ChIJ8e-HnOoZQjER1tLf4hD65xI,Elsa Spa massage Da Nang ( 엘사 스파 ),wellness,wellness,True,False,0.8,active
+ChIJ8e-HnOoZQjER1tLf4hD65xI,Elsa Spa,wellness,wellness,True,False,0.8,active
 ChIJrd3YeXENQjERWWbMPMdY2CE,Tham Quan Rừng Dừa Bảy Mẫu - Thuyền Thúng Hội An,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJ00Fz0rANQjERLadxvkIRXBY,Thuyền Thúng Tượng Thúy - Coconut Basket Boat Tour Hoi An,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJ20P_fAANQjERgFeFcOB6MAs,Điểm đón khách du lịch thuyền thúng cầu Hói Lăng,paid_attraction,paid_attraction,True,False,0.6,active
 ChIJUbe6YK4NQjERw6BXx5s8cHM,Rừng Dừa Bảy Mẫu,paid_attraction,paid_attraction,True,False,0.9,active
-ChIJX7bFNr8NQjERJJLeQ2lyHWo,"rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",paid_attraction,paid_attraction,True,False,0.8,active
+ChIJX7bFNr8NQjERJJLeQ2lyHWo,Thuyền thúng Lê Hiền (Rừng dừa Hội An),paid_attraction,paid_attraction,True,False,0.8,active
 ChIJT9jHPuANQjERQTnqjbIQIF8,Thuyền thúng Dũng Thúy,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJT1zm9U8NQjERQf5DsBriCgc,Dịch Vụ Thuyền Thúng Bến Dừa,paid_attraction,paid_attraction,True,False,0.9,active
 ChIJO5_PAj8XQjER34kyBjbMYNo,Family Kitchen Da Nang - Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJ8ai7BQAZQjERIkxmYHcV9DQ,Danang Summer Cooking and Coffee Class,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJ8ai7BQAZQjERIkxmYHcV9DQ,Danang Summer Cooking and Coffee Class,paid_attraction,paid_attraction,True,False,0.8,excluded
 ChIJs-NDcgAXQjERHA6tioqOfH4,Apron Up Cooking Class in Danang,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJYyr_6ogXQjERoXAq8cGEzcI,Rose Da Nang Coffee Workshop,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJYyr_6ogXQjERoXAq8cGEzcI,Rose Da Nang Coffee Workshop,paid_attraction,paid_attraction,True,False,0.8,excluded
 ChIJg2m14V0ZQjERt4DjGOdJDiE,Jolie Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJp9cNzfwZQjERS7ZSaA95etk,Danang Cooking Class - Lá Sen ダナン料理教室,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJp9cNzfwZQjERS7ZSaA95etk,Lá Sen Cooking Class,paid_attraction,paid_attraction,True,False,0.8,excluded
 ChIJrQINf-wZQjEREXiFm4Gq56M,Da Nang Family Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJAZn-164ZQjERV1ZAwfTgWuc,Sunny Vietnamese Banh Mi & Coffee Class- Da Nang,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJ26h5ZAANQjER2otGJosJliA,Rường House - Cooking Class & Craft Workshop,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJyZOJHa8NQjERSvp9yMenV6Y,Vinh Vo Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJx0dBXWYNQjERQzQO18QYhas,Mimi Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJ26h5ZAANQjER2otGJosJliA,Rường House - Cooking Class & Craft Workshop,paid_attraction,paid_attraction,True,False,0.8,excluded
+ChIJyZOJHa8NQjERSvp9yMenV6Y,Vinh Vo Cooking Class,paid_attraction,paid_attraction,True,False,0.8,excluded
+ChIJx0dBXWYNQjERQzQO18QYhas,Mimi Cooking Class,paid_attraction,paid_attraction,True,False,0.8,excluded
 ChIJddXz2K8PQjER4enhapQvvo8,Cooking With Jolie In Hoi An – Vietnamese Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
 ChIJmU3hl9WrNTERBUbnSp3g5vs,Thuan Tinh Island Cooking Tour,paid_attraction,paid_attraction,True,False,0.8,active
-ChIJH1ujCM0XQjERcOl1lB9Ns6k,Tuyet Pham Cooking Class,paid_attraction,paid_attraction,True,False,0.8,active
+ChIJH1ujCM0XQjERcOl1lB9Ns6k,Tuyet Pham Cooking Class,paid_attraction,paid_attraction,True,False,0.8,excluded
 manual:hai-van-quan,Hải Vân Quan,paid_attraction,paid_attraction,True,False,0.9,active
 manual:mikazuki-waterpark,Mikazuki Water Park 365,paid_attraction,paid_attraction,True,False,0.8,active
 manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,paid_attraction,paid_attraction,True,False,0.8,active
@@ -744,7 +744,7 @@ manual:smile-goods-danang,Smile Goods Danang,day_market,,False,True,0.5,active
 manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,outdoor_landmark,True,False,0.6,active
 manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:way/630377259,Bãi biển Tiên Sa,beach,beach,True,False,0.6,active
-manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,beach,True,False,0.6,active
+manual:son-tra-bai-da-den,Bãi Đá Đen Sơn Trà,beach,beach,True,False,0.6,excluded
 osm:way/140401174,Hồ Xanh Sơn Trà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
 manual:son-tra-bai-rang,Bãi Rạng Sơn Trà,beach,outdoor_landmark,False,False,0.3,active
 manual:son-tra-tour-lan-ct15,"Tour lặn ngắm san hô Sơn Trà (cano, SUP, câu cá — bến CT15)",paid_attraction,paid_attraction,True,False,0.6,active
@@ -772,7 +772,7 @@ osm:way/565186618,Đình Cẩm Phô,religious,religious,True,False,0.6,active
 osm:way/35952504,Chợ Hội An,day_market,day_market,True,False,0.6,active
 osm:node/6099308589,Chợ đêm Hội An,night_market,night_market,True,False,0.6,active
 osm:way/35952591,Chợ vải Hội An,day_market,day_market,True,False,0.6,active
-osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,,False,False,0.3,active
+osm:node/7127442985,Nhà biểu diễn nghệ thuật cổ truyền Hội An,paid_attraction,,False,False,0.3,excluded
 osm:way/14131302,Công viên Ấn tượng Hội An (show Ký ức Hội An),paid_attraction,outdoor_landmark,False,False,0.3,active
 osm:node/5513474821,Công viên Đất nung Thanh Hà,paid_attraction,outdoor_landmark,False,False,0.3,active
 osm:node/4171964390,Làng gốm Thanh Hà,outdoor_landmark,outdoor_landmark,True,False,0.6,active
@@ -795,7 +795,7 @@ osm:way/149699484,Công viên Biển Đông,outdoor_landmark,outdoor_landmark,Tr
 osm:node/4343966693,An Bang beach village,restaurant,beach,False,False,0.3,active
 osm:node/2217387212,An Bang Beach Club,restaurant,nightlife,False,False,0.3,active
 osm:node/3157491491,Tra Que Water Wheel,restaurant,,False,False,0.3,active
-osm:node/4279536690,Banh Mi Phuong,restaurant,restaurant,True,False,0.6,active
+osm:node/4279536690,Banh Mi Phuong,restaurant,restaurant,True,False,0.6,excluded
 osm:node/4389441895,Bale Well,restaurant,,False,False,0.3,active
 osm:node/4706534566,Orivy,restaurant,,False,False,0.3,active
 osm:node/5447215326,Morning Glory Signature,restaurant,,False,False,0.3,active
@@ -825,7 +825,7 @@ osm:node/10736260563,Chickpea Eatery,restaurant,restaurant,True,False,0.6,active
 osm:node/10763332205,Hiệp Ký,restaurant,,False,False,0.3,active
 osm:node/11618601226,Dingo Deli,restaurant,,False,False,0.3,active
 osm:node/11645353169,7 Bridges Hoi An Craft Beer Tap Room,restaurant,nightlife,False,False,0.3,active
-osm:node/11888968769,Quán ăn cô phưởng,restaurant,restaurant,True,False,0.6,active
+osm:node/11888968769,Quán ăn cô phưởng,restaurant,restaurant,True,False,0.6,excluded
 osm:node/11890609669,Cơm chay Thiện Tâm - Vegan Food,restaurant,restaurant,True,False,0.6,active
 osm:node/11890992769,Hoa Sen Bánh Mì Chay,restaurant,restaurant,True,False,0.6,active
 osm:node/12635080558,SummerBeach Restaurant,restaurant,restaurant,True,False,0.6,active
@@ -848,7 +848,7 @@ osm:node/10959238968,Thom's Sourdough Bakery & Coffee - Tan Thanh Beach,cafe,caf
 osm:node/12647213526,Vintage Taste Deli Cafe Hoi An,cafe,cafe,True,False,0.6,active
 osm:node/13881156000,Yesh!,cafe,,False,False,0.3,active
 osm:node/1726781610,Cargo Club Cafe & Restaurant,cafe,cafe,True,False,0.6,active
-osm:node/3893467764,UY VIET COFFEE BEAN,cafe,cafe,True,False,0.6,active
+osm:node/3893467764,Uy Viet Coffee Bean,cafe,cafe,True,False,0.6,active
 osm:node/5107806021,Hôp Dùa,cafe,,False,False,0.3,active
 osm:node/5265545321,Sound of Silence,cafe,,False,False,0.3,active
 osm:node/5611617221,Café Sputnik,cafe,cafe,True,False,0.6,active
@@ -940,8 +940,8 @@ osm:node/2076855765,Blue Dragon,restaurant,,False,False,0.3,active
 osm:node/2076855988,Quang Thang,restaurant,,False,False,0.3,active
 osm:node/2461400753,Bazar Garden Restaurant,restaurant,restaurant,True,False,0.6,active
 osm:node/2461400758,Vegetarian Vegan Chay Resturant,restaurant,,False,False,0.3,active
-osm:node/3093689362,Café 41,cafe,cafe,True,False,0.6,active
-osm:node/3093689363,Café 43,cafe,cafe,True,False,0.6,active
+osm:node/3093689362,Café 41,cafe,cafe,True,False,0.6,excluded
+osm:node/3093689363,Café 43,restaurant,cafe,False,False,0.9,active
 osm:node/3812098704,Chez Cesar Restaurant,restaurant,restaurant,True,False,0.6,active
 osm:node/3888954278,Karma Waters,restaurant,,False,False,0.3,active
 osm:node/4221031594,The H`mong Sisters,restaurant,,False,False,0.3,active

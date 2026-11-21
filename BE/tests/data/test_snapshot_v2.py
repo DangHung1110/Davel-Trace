@@ -286,6 +286,31 @@ class TestSnapshotV21(unittest.TestCase):
             ids = set(json.load(f)["ids"])
         self.assertEqual([p["poi_id"] for p in self.pois if p["status"] == "active" and p["poi_id"] not in ids], [])
 
+    # 16. training export = pois.json (same status / category / hours / tags per POI)
+    def test_16_export_matches_snapshot(self):
+        by_id = {p["poi_id"]: p for p in self.pois}
+        bad = []
+        for r in _rows("poi_features.csv"):
+            p = by_id[r["poi_id"]]
+            for col, val in (("status", p["status"]), ("category", p["category"]),
+                             ("hours_kind", p["hours"]["kind"]), ("rain_cover", p["tags"]["rain_cover"]),
+                             ("time_profile", p["time_profile"])):
+                if r[col] != str(val):
+                    bad.append((p["name"], col, r[col], val))
+        self.assertEqual(bad, [])
+
+    # 17. display names: not ALL CAPS, no stray punctuation
+    def test_17_display_names(self):
+        bad = []
+        for p in (x for x in self.pois if x["status"] == "active"):
+            n = p["name"]
+            letters = [c for c in n if c.isalpha()]
+            if len(letters) > 6 and sum(c.isupper() for c in letters) > 0.7 * len(letters):
+                bad.append(n)
+            if re.search(r"\s[.,]\s|[.,]\s*$|^\W", n):
+                bad.append(n)
+        self.assertEqual(bad, [])
+
 
 if __name__ == "__main__":
     unittest.main()

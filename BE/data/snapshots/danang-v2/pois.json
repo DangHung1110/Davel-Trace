@@ -14,8 +14,8 @@
  ],
  "count": 1000,
  "count_by_status": {
-  "active": 938,
-  "excluded": 62
+  "active": 937,
+  "excluded": 63
  },
  "count_by_category": {
   "restaurant": 225,
@@ -40,7 +40,7 @@
   "ba_na_tay": 40,
   "hoi_an": 249
  },
- "applied_decisions": 102,
+ "applied_decisions": 140,
  "applied_human_verify": 33,
  "matrix": "matrix.json (dense_v1; every active POI incl. lodging; BE/tools/expand_poi_matrix.py --select active)",
  "count_new_pois": 258,
@@ -54,8 +54,8 @@
   "included": 37
  },
  "count_by_hours_kind": {
-  "safe_window": 624,
-  "fixed": 357,
+  "safe_window": 625,
+  "fixed": 356,
   "unknown": 12,
   "by_booking": 7
  },
@@ -2055,8 +2055,8 @@
    "lon": 108.221003,
    "category": "restaurant",
    "role": "meal",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "tên chung chung (\"Nhà hàng hải sản .\"), không xác định được quán; giờ 24h trong nguồn v1 chép nhầm từ Bé Ni 2 (khác địa chỉ, cách 3,3 km)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -2330,7 +2330,7 @@
   },
   {
    "poi_id": "ChIJjaiK7LgZQjERSQvPDP9gnVQ",
-   "name": "XÓM MỚI GARDEN",
+   "name": "Xóm Mới Garden",
    "name_raw": "XÓM MỚI GARDEN",
    "name_en": null,
    "lat": 16.0635108,
@@ -2401,12 +2401,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -3051,9 +3051,10 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "11:00-13:30",
+     "17:30-20:30"
     ],
-    "kind": "fixed",
+    "kind": "safe_window",
     "closed_days": [],
     "access_window": null,
     "archetype": "nha_hang"
@@ -3131,12 +3132,12 @@
      "note": "type:Nhà hàng Việt Nam;name:sơn"
     },
     "hours": {
-     "source": "web",
-     "verified_by": "agent_web",
-     "confidence": 0.5,
+     "source": "rule_archetype_safe",
+     "verified_by": "inferred",
+     "confidence": 0.45,
      "evidence_url": null,
      "verified_at": null,
-     "note": "suy luận: bãi tự nhiên hoang sơ, không vé/giờ"
+     "note": "decisions_zfinal_20261121b.json; giờ 24h nguồn v1 suy theo \"bãi tự nhiên\" nhưng đây là nhà hàng (access_route_son_tra_20261120b: nhà hàng trong khu đô thị chân núi) -> khung an toàn nhà hàng"
     },
     "price": {
      "source": "category_default:nha_hang",
@@ -11963,7 +11964,7 @@
   },
   {
    "poi_id": "ChIJIRqUZWgZQjERwaNywpofxfk",
-   "name": "Nhà Hàng LÀNG HẢI SẢN",
+   "name": "Nhà hàng Làng Hải Sản",
    "name_raw": "Nhà Hàng LÀNG HẢI SẢN",
    "name_en": null,
    "lat": 16.0721599,
@@ -12035,12 +12036,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -13513,7 +13514,7 @@
   },
   {
    "poi_id": "ChIJrcgyp-wZQjERNqpo6xe5Ogw",
-   "name": "KITE COFFEE & SOUVENIRS",
+   "name": "Kite Coffee & Souvenirs",
    "name_raw": "KITE COFFEE & SOUVENIRS",
    "name_en": null,
    "lat": 16.0649446,
@@ -13582,12 +13583,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -15459,7 +15460,7 @@
   },
   {
    "poi_id": "ChIJXeXlix8ZQjERx9QsmNqx6_U",
-   "name": "[91cc] 91 Concept Coffee",
+   "name": "91 Concept Coffee",
    "name_raw": "[91cc] 91 Concept Coffee",
    "name_en": null,
    "lat": 16.0662557,
@@ -15528,12 +15529,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -17961,7 +17962,7 @@
   },
   {
    "poi_id": "ChIJQyBNHwAZQjERhLY1IOG14OY",
-   "name": "TIME COFFEE",
+   "name": "Time Coffee",
    "name_raw": "TIME COFFEE",
    "name_en": null,
    "lat": 16.0861664,
@@ -18030,12 +18031,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -18100,7 +18101,7 @@
   },
   {
    "poi_id": "ChIJV3itrRYZQjERjahF1Mkk0to",
-   "name": "IKIGAI CAFE",
+   "name": "Ikigai Cafe",
    "name_raw": "IKIGAI CAFE",
    "name_en": null,
    "lat": 16.0904924,
@@ -18169,12 +18170,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -18519,7 +18520,7 @@
   },
   {
    "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
-   "name": "HI4 COFFEE & WORKSPACE",
+   "name": "HI4 Coffee & Workspace",
    "name_raw": "HI4 COFFEE & WORKSPACE",
    "name_en": null,
    "lat": 16.048823,
@@ -18588,12 +18589,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -19075,7 +19076,7 @@
   },
   {
    "poi_id": "ChIJAxDyECwXQjERcsCmIBvQ1Vk",
-   "name": "L STAND COFFEE AND TEA",
+   "name": "L Stand Coffee and Tea",
    "name_raw": "L STAND COFFEE AND TEA",
    "name_en": null,
    "lat": 16.0510047,
@@ -19144,12 +19145,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -20882,7 +20883,7 @@
   },
   {
    "poi_id": "ChIJV4P2WKQRQjERkfoEDY1uBq0",
-   "name": "LE'O COFFEE & TEA",
+   "name": "Le'o Coffee & Tea",
    "name_raw": "LE'O COFFEE & TEA",
    "name_en": null,
    "lat": 15.981250699999999,
@@ -20951,12 +20952,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -21021,7 +21022,7 @@
   },
   {
    "poi_id": "ChIJk3YrZLoZQjERp5PbcDTftQw",
-   "name": "THE POWERHOUSE 2 COFFEE & MORE",
+   "name": "The Powerhouse 2 Coffee & More",
    "name_raw": "THE POWERHOUSE 2 COFFEE & MORE",
    "name_en": null,
    "lat": 16.0713011,
@@ -21090,12 +21091,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -21438,7 +21439,7 @@
   },
   {
    "poi_id": "ChIJPzf25OAYQjERRUv1zSbS49Q",
-   "name": "GAGA CAFÉ",
+   "name": "Gaga Café",
    "name_raw": "GAGA CAFÉ",
    "name_en": null,
    "lat": 16.0735103,
@@ -21507,12 +21508,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -22967,7 +22968,7 @@
   },
   {
    "poi_id": "ChIJP3or6NQZQjERmBDBnMA8O4U",
-   "name": "MÂY COFFEE - TRUNG NGUYÊN Legend",
+   "name": "Mây Coffee - Trung Nguyên Legend",
    "name_raw": "MÂY COFFEE - TRUNG NGUYÊN Legend",
    "name_en": null,
    "lat": 16.0630554,
@@ -23036,12 +23037,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -24079,7 +24080,7 @@
   },
   {
    "poi_id": "ChIJu0Ud-tsZQjERupkb3A3mxro",
-   "name": "THE LEAF HOUSE CAFE",
+   "name": "The Leaf House Cafe",
    "name_raw": "THE LEAF HOUSE CAFE",
    "name_en": null,
    "lat": 16.0731486,
@@ -24148,12 +24149,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -25469,7 +25470,7 @@
   },
   {
    "poi_id": "ChIJQW9rQNwZQjER4zC6dP7vitg",
-   "name": "GREEN COFFEE",
+   "name": "Green Coffee",
    "name_raw": "GREEN COFFEE",
    "name_en": null,
    "lat": 16.070185,
@@ -25538,12 +25539,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -27855,7 +27856,7 @@
   },
   {
    "poi_id": "ChIJQWQVKr4ZQjERcafNnRyLelk",
-   "name": "DD WONDERLAND",
+   "name": "DD Wonderland",
    "name_raw": "DD WONDERLAND",
    "name_en": null,
    "lat": 16.0746815,
@@ -27926,12 +27927,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -31390,7 +31391,7 @@
   },
   {
    "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
-   "name": "KHU PHỐ DU LỊCH AN THƯỢNG",
+   "name": "Khu phố du lịch An Thượng",
    "name_raw": "KHU PHỐ DU LỊCH AN THƯỢNG",
    "name_en": null,
    "lat": 16.0503276,
@@ -31458,12 +31459,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -42485,7 +42486,7 @@
   },
   {
    "poi_id": "ChIJMQ_j9n0ZQjER6BCkcpQNT8s",
-   "name": "MOR CÀ PHÊ",
+   "name": "Mor Cà Phê",
    "name_raw": "MOR CÀ PHÊ",
    "name_en": null,
    "lat": 16.0583208,
@@ -42554,12 +42555,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -42763,7 +42764,7 @@
   },
   {
    "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
-   "name": "IKIGAI . garden . cafe",
+   "name": "Ikigai Garden Cafe",
    "name_raw": "IKIGAI . garden . cafe",
    "name_en": null,
    "lat": 16.0740215,
@@ -42832,12 +42833,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -56737,7 +56738,7 @@
   },
   {
    "poi_id": "ChIJs4dg5vceQjERJQ5D9ATvWhU",
-   "name": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO",
+   "name": "Nhà thờ cổ Tùng Sơn",
    "name_raw": "NHÀ THỜ CỔ TÙNG SƠN - NHÀ THỜ CÔNG GIÁO",
    "name_en": null,
    "lat": 16.0625347,
@@ -56810,12 +56811,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -58593,7 +58594,7 @@
   },
   {
    "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
-   "name": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
+   "name": "Chùa Không Tên",
    "name_raw": "CHÙA KHÔNG TÊN ĐÀ NẴNG",
    "name_en": null,
    "lat": 16.0418826,
@@ -58666,12 +58667,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -61414,7 +61415,7 @@
   },
   {
    "poi_id": "ChIJN75cdYQXQjERBUnemtIubGM",
-   "name": "NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ",
+   "name": "Nalod Đà Nẵng",
    "name_raw": "NALOD ĐÀ NẴNG - KHÁCH SẠN & TRUNG TÂM HỘI NGHỊ",
    "name_en": null,
    "lat": 16.0721006,
@@ -61483,12 +61484,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -67081,7 +67082,7 @@
   },
   {
    "poi_id": "ChIJ98HsudQXQjERpViPqdVY3ko",
-   "name": "OANI SPA",
+   "name": "Oani Spa",
    "name_raw": "OANI SPA",
    "name_en": null,
    "lat": 16.0548417,
@@ -67148,12 +67149,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -70183,7 +70184,7 @@
   },
   {
    "poi_id": "ChIJe3Ixim4XQjERbbrbMnyhr34",
-   "name": "ĐÀ THÀNH QUÁN",
+   "name": "Đà Thành Quán",
    "name_raw": "ĐÀ THÀNH QUÁN",
    "name_en": null,
    "lat": 16.0554266,
@@ -70255,12 +70256,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -71862,7 +71863,7 @@
   },
   {
    "poi_id": "ChIJpeV7WwAZQjER5TfSiKGu0Qc",
-   "name": "Cô Na - ĐẶC SẢN ĐÀ NẴNG",
+   "name": "Cô Na - Đặc sản Đà Nẵng",
    "name_raw": "Cô Na - ĐẶC SẢN ĐÀ NẴNG",
    "name_en": null,
    "lat": 16.071259299999998,
@@ -71931,12 +71932,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -74366,7 +74367,7 @@
   },
   {
    "poi_id": "ChIJ27_WHYQXQjERfwDksZnfqKM",
-   "name": "TGT BEACH HOTEL",
+   "name": "TGT Beach Hotel",
    "name_raw": "TGT BEACH HOTEL",
    "name_en": null,
    "lat": 16.068756,
@@ -74435,12 +74436,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -74783,7 +74784,7 @@
   },
   {
    "poi_id": "ChIJq0vnsSIZQjERiB7KQ_DkjW0",
-   "name": "MỘC NHIÊN HOTEL",
+   "name": "Mộc Nhiên Hotel",
    "name_raw": "MỘC NHIÊN HOTEL",
    "name_en": null,
    "lat": 16.080577299999998,
@@ -74852,12 +74853,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -77971,7 +77972,7 @@
   },
   {
    "poi_id": "ChIJEWVESw8XQjEReJCexT_n2Wo",
-   "name": "HAPPY SPA",
+   "name": "Happy Spa",
    "name_raw": "HAPPY SPA",
    "name_en": null,
    "lat": 16.080594599999998,
@@ -78038,12 +78039,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -80300,7 +80301,7 @@
   },
   {
    "poi_id": "ChIJvWLgr6cXQjER3bVwhb1OVrs",
-   "name": "JUNE SPA",
+   "name": "June Spa",
    "name_raw": "JUNE SPA",
    "name_en": null,
    "lat": 16.0481499,
@@ -80367,12 +80368,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -80848,7 +80849,7 @@
   },
   {
    "poi_id": "ChIJ8zk-ZgAZQjERhiZiMzjjRe4",
-   "name": "CAMY SPA Liên Chiểu , Đà Nẵng",
+   "name": "Camy Spa Liên Chiểu",
    "name_raw": "CAMY SPA Liên Chiểu , Đà Nẵng",
    "name_en": null,
    "lat": 16.0707073,
@@ -80915,12 +80916,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -92462,7 +92463,7 @@
   },
   {
    "poi_id": "ChIJOean5VUZQjERMWDUmGdTpJQ",
-   "name": "KARAOKE VENUS",
+   "name": "Karaoke Venus",
    "name_raw": "KARAOKE VENUS",
    "name_en": null,
    "lat": 16.0689648,
@@ -92531,12 +92532,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -93159,7 +93160,7 @@
   },
   {
    "poi_id": "ChIJ1XDmcgAZQjERg3z1Ix0EbZA",
-   "name": "RAIN MUSIC BOX & GAME",
+   "name": "Rain Music Box & Game",
    "name_raw": "RAIN MUSIC BOX & GAME",
    "name_en": null,
    "lat": 16.068772,
@@ -93228,12 +93229,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -95808,7 +95809,7 @@
   },
   {
    "poi_id": "ChIJN_abDNcZQjERmLjyrAo7IPk",
-   "name": "CẬU ẤM BEER CHILL",
+   "name": "Cậu Ấm Beer Chill",
    "name_raw": "CẬU ẤM BEER CHILL",
    "name_en": null,
    "lat": 16.0650224,
@@ -95879,12 +95880,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -96368,7 +96369,7 @@
   },
   {
    "poi_id": "ChIJD8ivG7YZQjERxe5fgwGSVao",
-   "name": "KARAOKE CAMEL 2",
+   "name": "Karaoke Camel 2",
    "name_raw": "KARAOKE CAMEL 2",
    "name_en": null,
    "lat": 16.067663,
@@ -96437,12 +96438,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -98218,7 +98219,7 @@
   },
   {
    "poi_id": "ChIJ8VqGDeYRQjERVEkumiIa714",
-   "name": "LÂM TỲ NI VIÊN",
+   "name": "Lâm Tỳ Ni Viên",
    "name_raw": "LÂM TỲ NI VIÊN",
    "name_en": null,
    "lat": 16.0040168,
@@ -98291,12 +98292,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -99219,7 +99220,7 @@
   },
   {
    "poi_id": "ChIJQ2dbvVIYQjERVbGNKc5Tmcs",
-   "name": "CHÙA TÂN THÀNH",
+   "name": "Chùa Tân Thành",
    "name_raw": "CHÙA TÂN THÀNH",
    "name_en": null,
    "lat": 16.068311299999998,
@@ -99292,12 +99293,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -100900,7 +100901,7 @@
   },
   {
    "poi_id": "ChIJX7bFNr8NQjERJJLeQ2lyHWo",
-   "name": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
+   "name": "Thuyền thúng Lê Hiền (Rừng dừa Hội An)",
    "name_raw": "rừng dừa hội an , basketboat . thuyền thúng Lê Hiền",
    "name_en": null,
    "lat": 15.874080099999999,
@@ -100968,12 +100969,12 @@
    },
    "provenance": {
     "name": {
-     "source": "google_maps",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "toạ độ gốc Google — cần đối chiếu OSM"
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -119021,7 +119022,7 @@
   },
   {
    "poi_id": "osm:node/3893467764",
-   "name": "UY VIET COFFEE BEAN",
+   "name": "Uy Viet Coffee Bean",
    "name_raw": "UY VIET COFFEE BEAN",
    "name_en": null,
    "lat": 15.879396,
@@ -119090,12 +119091,12 @@
    },
    "provenance": {
     "name": {
-     "source": "osm",
-     "verified_by": "open_data",
+     "source": "user_decision",
+     "verified_by": "user",
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": null
+     "note": "decisions_zfinal_20261121b.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "osm",

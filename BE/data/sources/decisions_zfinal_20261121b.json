@@ -1,0 +1,124 @@
+{
+ "note": "21/11/2026 rà soát cuối: 33 tên VIẾT HOA TOÀN BỘ + 4 tên dấu câu thừa -> tên chuẩn (tên gốc giữ ở name_raw); 2 lỗi giờ gán nhầm từ danang-v1/hours_web.json (khoá theo tên).",
+ "items": {
+  "ChIJjaiK7LgZQjERSQvPDP9gnVQ": {
+   "name": "Xóm Mới Garden"
+  },
+  "ChIJIRqUZWgZQjERwaNywpofxfk": {
+   "name": "Nhà hàng Làng Hải Sản"
+  },
+  "ChIJrcgyp-wZQjERNqpo6xe5Ogw": {
+   "name": "Kite Coffee & Souvenirs"
+  },
+  "ChIJQyBNHwAZQjERhLY1IOG14OY": {
+   "name": "Time Coffee"
+  },
+  "ChIJV3itrRYZQjERjahF1Mkk0to": {
+   "name": "Ikigai Cafe"
+  },
+  "ChIJe6VC-zUXQjERyh7x6tTJHX4": {
+   "name": "HI4 Coffee & Workspace"
+  },
+  "ChIJAxDyECwXQjERcsCmIBvQ1Vk": {
+   "name": "L Stand Coffee and Tea"
+  },
+  "ChIJV4P2WKQRQjERkfoEDY1uBq0": {
+   "name": "Le'o Coffee & Tea"
+  },
+  "ChIJk3YrZLoZQjERp5PbcDTftQw": {
+   "name": "The Powerhouse 2 Coffee & More"
+  },
+  "ChIJPzf25OAYQjERRUv1zSbS49Q": {
+   "name": "Gaga Café"
+  },
+  "ChIJP3or6NQZQjERmBDBnMA8O4U": {
+   "name": "Mây Coffee - Trung Nguyên Legend"
+  },
+  "ChIJu0Ud-tsZQjERupkb3A3mxro": {
+   "name": "The Leaf House Cafe"
+  },
+  "ChIJQW9rQNwZQjER4zC6dP7vitg": {
+   "name": "Green Coffee"
+  },
+  "ChIJQWQVKr4ZQjERcafNnRyLelk": {
+   "name": "DD Wonderland"
+  },
+  "ChIJ244paMwXQjERGVtPeitX4mA": {
+   "name": "Khu phố du lịch An Thượng"
+  },
+  "ChIJMQ_j9n0ZQjER6BCkcpQNT8s": {
+   "name": "Mor Cà Phê"
+  },
+  "ChIJs4dg5vceQjERJQ5D9ATvWhU": {
+   "name": "Nhà thờ cổ Tùng Sơn"
+  },
+  "ChIJCeQZ-jkZQjERaXJSI0ZDWXw": {
+   "name": "Chùa Không Tên"
+  },
+  "ChIJN75cdYQXQjERBUnemtIubGM": {
+   "name": "Nalod Đà Nẵng"
+  },
+  "ChIJ98HsudQXQjERpViPqdVY3ko": {
+   "name": "Oani Spa"
+  },
+  "ChIJe3Ixim4XQjERbbrbMnyhr34": {
+   "name": "Đà Thành Quán"
+  },
+  "ChIJpeV7WwAZQjER5TfSiKGu0Qc": {
+   "name": "Cô Na - Đặc sản Đà Nẵng"
+  },
+  "ChIJ27_WHYQXQjERfwDksZnfqKM": {
+   "name": "TGT Beach Hotel"
+  },
+  "ChIJq0vnsSIZQjERiB7KQ_DkjW0": {
+   "name": "Mộc Nhiên Hotel"
+  },
+  "ChIJEWVESw8XQjEReJCexT_n2Wo": {
+   "name": "Happy Spa"
+  },
+  "ChIJvWLgr6cXQjER3bVwhb1OVrs": {
+   "name": "June Spa"
+  },
+  "ChIJOean5VUZQjERMWDUmGdTpJQ": {
+   "name": "Karaoke Venus"
+  },
+  "ChIJ1XDmcgAZQjERg3z1Ix0EbZA": {
+   "name": "Rain Music Box & Game"
+  },
+  "ChIJN_abDNcZQjERmLjyrAo7IPk": {
+   "name": "Cậu Ấm Beer Chill"
+  },
+  "ChIJD8ivG7YZQjERxe5fgwGSVao": {
+   "name": "Karaoke Camel 2"
+  },
+  "ChIJ8VqGDeYRQjERVEkumiIa714": {
+   "name": "Lâm Tỳ Ni Viên"
+  },
+  "ChIJQ2dbvVIYQjERVbGNKc5Tmcs": {
+   "name": "Chùa Tân Thành"
+  },
+  "osm:node/3893467764": {
+   "name": "Uy Viet Coffee Bean"
+  },
+  "ChIJedpeSI4ZQjERYqZQdHBbz5E": {
+   "name": "Ikigai Garden Cafe"
+  },
+  "ChIJXeXlix8ZQjERx9QsmNqx6_U": {
+   "name": "91 Concept Coffee"
+  },
+  "ChIJX7bFNr8NQjERJJLeQ2lyHWo": {
+   "name": "Thuyền thúng Lê Hiền (Rừng dừa Hội An)"
+  },
+  "ChIJ8aa8NQAZQjERRM8-aOoNZ30": {
+   "status": "excluded",
+   "status_reason": "tên chung chung (\"Nhà hàng hải sản .\"), không xác định được quán; giờ 24h trong nguồn v1 chép nhầm từ Bé Ni 2 (khác địa chỉ, cách 3,3 km)"
+  },
+  "ChIJx02UcvIXQjER8al1AkjYuW0": {
+   "hours_reset": true,
+   "hours_note": "giờ 24h nguồn v1 suy theo \"bãi tự nhiên\" nhưng đây là nhà hàng (access_route_son_tra_20261120b: nhà hàng trong khu đô thị chân núi) -> khung an toàn nhà hàng"
+  },
+  "ChIJ8zk-ZgAZQjERhiZiMzjjRe4": {
+   "name": "Camy Spa Liên Chiểu"
+  }
+ }
+}

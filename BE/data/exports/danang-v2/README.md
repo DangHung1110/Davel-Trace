@@ -10,7 +10,7 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 |---|---|
 | category, role, zone | nhãn v2 (12 thể loại + lodging) |
 | cluster_id, alt_group | cụm vé chung (ba_na, ngu_hanh_son) / nhóm thay thế (chỉ chọn 1) |
-| indoor, effort, sun_exposure, rain_cover, time_of_day | tag suy luận (rule_v1), confidence 0.5 |
+| space, indoor, effort, sun_exposure, rain_cover, time_of_day | nhãn v2.1 (`tags`); `exposure_source` = explicit (bộ gán nhãn T063) hoặc category_prior (ước lượng) |
 | archetype, time_profile | nhóm giờ + id đường cong u(t) (định nghĩa ở P1) |
 | dwell_p25/p50/p75 | phút ở lại (ước lượng theo thể loại trừ khi `dwell_conf` >= 0.6) |
 | price_band (re/vua/kha/cao), price_min/max_vnd, price_conf | chỉ nguồn sạch; trống nếu chỉ có Google |

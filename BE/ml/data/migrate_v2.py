@@ -650,6 +650,15 @@ def apply_decision(rec, d):
         pv["category"] = prov("user_decision", "user", note=d["_file"])
     if d.get("price_note"):
         rec["price"]["note"] = d["price_note"]
+    if d.get("hours_reset"):
+        # the source hours were attached to the wrong place (v1 hours_web is
+        # keyed by name): fall back to the archetype safe window, flagged
+        arch = rec["hours"]["archetype"]
+        rec["hours"]["open"] = list(R.ARCHETYPES[arch]["safe"])
+        rec["hours"]["kind"] = "safe_window"
+        rec["hours"]["closed_days"] = []
+        pv["hours"] = prov("rule_archetype_safe", "inferred",
+                           note=f"{d['_file']}; {d.get('hours_note') or 'giờ nguồn bị gán nhầm'}")
     if "cluster_id" in d:
         # geographic grouping only (cluster ≠ constraint): visit-together hint
         rec["cluster_id"] = d["cluster_id"]
@@ -1181,8 +1190,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
 
 FEATURE_COLS = [
     "poi_id", "name_vi", "category", "role", "status", "zone", "cluster_id", "alt_group",
-    "lat", "lon", "indoor", "kid_friendly", "effort", "sun_exposure", "rain_cover",
-    "time_of_day", "weather_sensitive", "archetype", "time_profile",
+    "lat", "lon", "space", "indoor", "kid_friendly", "effort", "sun_exposure", "rain_cover",
+    "exposure_source", "time_of_day", "weather_sensitive", "archetype", "time_profile",
     "dwell_p25", "dwell_p50", "dwell_p75", "dwell_conf",
     "price_band", "price_min_vnd", "price_max_vnd", "price_basis", "price_conf",
     "free_entry", "hours_spans", "hours_conf", "hours_verified_by", "signature", "osm_id",
@@ -1196,53 +1205,54 @@ def _clean_value(prv):
 
 
 def write_exports(pois, exports_dir, v21_by_id=None):
+    """Training tables. Every column comes from the FINAL v2.1 record (what
+    pois.json holds, after decisions / human verify / booking / access-route
+    / tag normalisation); the internal v2.0 record only supplies the raw VND
+    numbers v2.1 does not keep, and only when their source is clean."""
     rows, weak = [], []
     v21_by_id = v21_by_id or {}
     for p in pois:
-        pv = p["provenance"]
-        r21 = v21_by_id.get(p["poi_id"]) or {}
-        hours_ok, price_ok = _clean_value(pv["hours"]), _clean_value(pv["price"])
-        safe_hours = p["hours"]["spans"] if hours_ok else p["hours"]["safe_windows"]
+        q = v21_by_id[p["poi_id"]]
+        qt, qh, qp, qpv = q["tags"], q["hours"], q["popularity"], q["provenance"]
+        price_ok = _clean_value(p["provenance"]["price"])
         rows.append({
-            "poi_id": p["poi_id"], "name_vi": p["name_vi"], "category": p["category"],
-            "role": p["role"], "status": p["status"], "zone": p["zone"],
-            "cluster_id": p["cluster_id"], "alt_group": p["alt_group"],
-            "lat": p["lat"], "lon": p["lon"],
-            "indoor": p["tags"]["indoor"], "kid_friendly": p["tags"]["kid_friendly"],
-            "effort": p["tags"]["effort"], "sun_exposure": p["tags"]["sun_exposure"],
-            "rain_cover": p["tags"]["rain_cover"],
-            "time_of_day": "|".join(p["tags"]["time_of_day"] or []),
-            "weather_sensitive": p["tags"]["weather_sensitive"],
-            "archetype": p["hours"]["archetype"], "time_profile": p["time_profile"],
-            "dwell_p25": p["dwell"]["p25"], "dwell_p50": p["dwell"]["p50"],
-            "dwell_p75": p["dwell"]["p75"], "dwell_conf": pv["dwell"]["confidence"],
+            "poi_id": q["poi_id"], "name_vi": q["name"], "category": q["category"],
+            "role": q["role"], "status": q["status"], "zone": q["zone"],
+            "cluster_id": q["cluster_id"], "alt_group": q["alt_group"],
+            "lat": q["lat"], "lon": q["lon"],
+            "space": qt["space"], "indoor": qt["indoor"], "kid_friendly": qt["kid_friendly"],
+            "effort": qt["effort"], "sun_exposure": qt["sun_exposure"],
+            "rain_cover": qt["rain_cover"], "exposure_source": qt["exposure_source"],
+            "time_of_day": "|".join(qt["good_times"] or []),
+            "weather_sensitive": qt["weather_sensitive"],
+            "archetype": qh["archetype"], "time_profile": q["time_profile"],
+            "dwell_p25": q["dwell"]["p25"], "dwell_p50": q["dwell"]["p50"],
+            "dwell_p75": q["dwell"]["p75"], "dwell_conf": qpv["dwell"]["confidence"],
             "price_band": p["price"]["band"] if price_ok else None,
             "price_min_vnd": p["price"]["min_vnd"] if price_ok else None,
             "price_max_vnd": p["price"]["max_vnd"] if price_ok else None,
             "price_basis": p["price"]["basis"],
-            "price_conf": pv["price"]["confidence"] if price_ok else 0.0,
-            "free_entry": p["price"]["free_entry"] if price_ok else None,
-            "hours_spans": "|".join(safe_hours or []),
-            "hours_conf": pv["hours"]["confidence"] if hours_ok else CONF["inferred"],
-            "hours_verified_by": pv["hours"]["verified_by"] if hours_ok else "inferred",
-            "signature": p["popularity"]["signature"], "osm_id": p["ext_ids"]["osm"],
-            "price_tier": (r21.get("price") or {}).get("tier"),
-            "hours_kind": (r21.get("hours") or {}).get("kind"),
-            "prize_prior": (r21.get("popularity") or {}).get("prize_prior"),
-            "guide_mentions": (r21.get("popularity") or {}).get("guide_mentions"),
-            "michelin": (r21.get("popularity") or {}).get("michelin"),
-            "name_en": r21.get("name_en"),
+            "price_conf": qpv["price"]["confidence"],
+            "free_entry": q["price"]["tier"] in ("free", "included") or None,
+            "hours_spans": "|".join(qh["open"] or []),
+            "hours_conf": qpv["hours"]["confidence"],
+            "hours_verified_by": qpv["hours"]["verified_by"],
+            "signature": qp["signature"], "osm_id": q["ext_ids"]["osm"],
+            "price_tier": q["price"]["tier"], "hours_kind": qh["kind"],
+            "prize_prior": qp["prize_prior"], "guide_mentions": qp["guide_mentions"],
+            "michelin": qp["michelin"], "name_en": q["name_en"],
         })
         ev = p["category_evidence"]
-        name_only = R.classify_name_only(p["name_vi"])
+        name_only = R.classify_name_only(q["name"])
         uses_type = any(e.startswith("type:") for e in ev[:1])
-        conf = 0.9 if ev[0].startswith("override") else (
-            0.8 if (name_only == p["category"] and any(e.startswith("type:") for e in ev)) else
-            0.6 if name_only == p["category"] else 0.5 if uses_type else 0.3)
-        weak.append({"poi_id": p["poi_id"], "text": p["name_vi"], "label": p["category"],
-                     "label_name_only": name_only, "agree": name_only == p["category"],
-                     "label_uses_google_type": uses_type, "label_conf": conf,
-                     "status": p["status"]})
+        decided = q["category"] != p["category"]      # a user/audit decision changed it
+        conf = 0.9 if (decided or ev[0].startswith("override")) else (
+            0.8 if (name_only == q["category"] and any(e.startswith("type:") for e in ev)) else
+            0.6 if name_only == q["category"] else 0.5 if uses_type else 0.3)
+        weak.append({"poi_id": q["poi_id"], "text": q["name"], "label": q["category"],
+                     "label_name_only": name_only, "agree": name_only == q["category"],
+                     "label_uses_google_type": uses_type and not decided, "label_conf": conf,
+                     "status": q["status"]})
     _csv(os.path.join(exports_dir, "poi_features.csv"), rows, FEATURE_COLS)
     _csv(os.path.join(exports_dir, "poi_classifier_weak.csv"), weak,
          ["poi_id", "text", "label", "label_name_only", "agree", "label_uses_google_type",
@@ -1263,7 +1273,7 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 |---|---|
 | category, role, zone | nhãn v2 (12 thể loại + lodging) |
 | cluster_id, alt_group | cụm vé chung (ba_na, ngu_hanh_son) / nhóm thay thế (chỉ chọn 1) |
-| indoor, effort, sun_exposure, rain_cover, time_of_day | tag suy luận (rule_v1), confidence 0.5 |
+| space, indoor, effort, sun_exposure, rain_cover, time_of_day | nhãn v2.1 (`tags`); `exposure_source` = explicit (bộ gán nhãn T063) hoặc category_prior (ước lượng) |
 | archetype, time_profile | nhóm giờ + id đường cong u(t) (định nghĩa ở P1) |
 | dwell_p25/p50/p75 | phút ở lại (ước lượng theo thể loại trừ khi `dwell_conf` >= 0.6) |
 | price_band (re/vua/kha/cao), price_min/max_vnd, price_conf | chỉ nguồn sạch; trống nếu chỉ có Google |
