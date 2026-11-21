@@ -13,7 +13,9 @@ venv/
 BE/.pytest_*/
 BE/data/*.db
 BE/data/*.db-*
-BE/data/exports/
+BE/data/exports/*
+# danang-v2 training tables are kept in the repo (BE/ml/data/migrate_v2.py writes them)
+!BE/data/exports/danang-v2/
 backups/
 *.dump
 *.backup
