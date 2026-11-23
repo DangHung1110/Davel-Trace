@@ -9,6 +9,7 @@ from typing import Any
 
 from BE.app.core.config import get_settings
 from BE.app.modules.catalog.domain import CatalogUnavailable, place_id, valid_place
+from BE.common import view_pois
 
 
 def _snapshot_path(configured: str) -> Path:
@@ -45,15 +46,26 @@ def _load_path(path_text: str, modified_ns: int) -> dict[str, Any]:
     rows = payload.get("pois")
     if not version or not isinstance(rows, list) or not rows:
         raise CatalogUnavailable("catalog snapshot metadata is invalid")
+    if not all(isinstance(row, dict) for row in rows):
+        raise CatalogUnavailable("catalog snapshot contains an invalid place")
+    # A danang-v2.1 record keeps what the catalog reads (`verified`, `cat`, `type`,
+    # `opening_hours`...) out of the file. The planner derives those fields with
+    # `BE.common.poi_view`, so the catalog must too, or one SNAPSHOT_DIR serves two
+    # different sets of places (on v2.1 every row failed `valid_place` and /v1/pois,
+    # /v1/routes/preview and the AI place lookup answered 503). v1 rows pass through.
+    try:
+        rows = view_pois(rows, str(Path(path_text).parent))
+    except (AttributeError, KeyError, TypeError, ValueError) as exc:
+        raise CatalogUnavailable("catalog snapshot contains an invalid place") from exc
     seen: set[str] = set()
     for row in rows:
-        if not isinstance(row, dict) or not valid_place(row):
+        if not valid_place(row):
             raise CatalogUnavailable("catalog snapshot contains an invalid place")
         identifier = place_id(row)
         if identifier in seen:
             raise CatalogUnavailable("catalog snapshot contains duplicate place IDs")
         seen.add(identifier)
-    return payload
+    return {**payload, "pois": rows}
 
 
 def load_catalog() -> dict[str, Any]:
