@@ -25,6 +25,7 @@ from __future__ import annotations
 import os
 from collections import Counter
 
+from BE.app.services import rules
 from BE.app.services.profile_filter import fold, has_word
 from BE.common import to_min
 
@@ -124,12 +125,12 @@ CATEGORY_DAILY_CAP = 1          # >1 of a capped category in one day (hard only 
 # gate only REPORTS them (`soft_checks`). They are HARD again when the traveller
 # asks for them (`trip["strict_rules"]`, e.g. ["CATEGORY_CAP"]) or when the
 # environment sets DAVEL_TASTE_RULES=hard (the old behaviour, for A/B runs).
-TASTE_RULES = frozenset({"CATEGORY_CAP", "NO_CONSECUTIVE"})
-# Objective v1 (DAVEL_OBJECTIVE, BE/app/services/objective.py) moves four more rules of
-# thumb into the objective: the cafe quota, one restaurant per meal slot, the
-# restaurant adjacency alias and the siesta. The lunch itself stays hard (gate LUNCH).
-V1_TASTE_RULES = TASTE_RULES | frozenset({"CAFE_CAP", "A1", "NO_ADJACENT_FOOD",
-                                          "REST_FOLLOWS_LUNCH"})
+# Both sets come from the one book of rules (BE/app/services/rules.py): under the
+# legacy objective only CATEGORY_CAP and NO_CONSECUTIVE are soft; objective v1
+# (DAVEL_OBJECTIVE) makes every taste rule a term of the objective. The lunch itself
+# stays hard (gate.check_lunch inside HCS).
+TASTE_RULES = rules.LEGACY_SOFT_TASTE
+V1_TASTE_RULES = rules.TASTE
 
 
 def taste_rules() -> frozenset[str]:

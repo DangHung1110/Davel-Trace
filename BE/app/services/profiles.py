@@ -662,7 +662,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     limits = _limits(tpl_name, trip, _all_day_minutes(trip.get("must_visit"), pois_by_id))
     # Objective v1 (DAVEL_OBJECTIVE): the template's taste limits (pace band, required
     # categories, late end, dinner) become terms of the objective; K0 keeps its pace top.
-    spec = objective_mod.build_spec(trip, limits) if objective_mod.active() else None
+    spec = (objective_mod.build_spec(trip, limits, profile=prof)
+            if objective_mod.active() else None)
     if spec is not None:
         limits = _v1_limits(limits)
 
@@ -767,8 +768,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     wish_ids = {pid for group in act_groups for pid in group.get("poi_ids") or []}
     wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=deadline(trip),
                                   any_hour_ids=must_ids | wish_ids) if wish_ids else stubs)
-    q = _profile_edges(prof, scorer.edge_scores(ids, pois_by_id, ctx=ctx),
-                       travel)
+    # One place per rule (rules.py): under objective v1 the edges carry the PATM
+    # transition score only; riding minutes (T9), A2 (T6) and B1 (T4) live in the
+    # objective, so the legacy edge penalties and EDGE_TRAVEL_WEIGHT are not added.
+    q = scorer.edge_scores(ids, pois_by_id, ctx=ctx, rule_penalties=spec is None)
+    if spec is None:
+        q = _profile_edges(prof, q, travel)
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no
     # profile keeps the plain planning, except in the rain: a forecast that calls

@@ -33,6 +33,8 @@ import os
 from dataclasses import dataclass
 from functools import lru_cache
 
+from BE.app.services import rules
+
 WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), "objective_weights")
 LEGACY = "legacy"
 
@@ -62,9 +64,9 @@ GROUP_OF_LEGACY_CAT = {
     "bar": "nightlife", "nightlife": "nightlife", "spa": "wellness", "restaurant": "",
 }
 
-# Rules a traveller can make hard again by naming them in `trip["strict_rules"]`.
-STRICTABLE = frozenset({"CATEGORY_CAP", "NO_CONSECUTIVE", "CAFE_CAP", "A1",
-                        "NO_ADJACENT_FOOD", "REST_FOLLOWS_LUNCH"})
+# Rules a traveller can make hard again by naming them in `trip["strict_rules"]`:
+# the taste layer of the one book of rules (rules.py).
+STRICTABLE = rules.TASTE
 
 FOOD_TOUR_WORDS = ("food tour", "an uong", "am thuc", "an vat", "an het", "tour an")
 
@@ -167,12 +169,16 @@ def comfortable_stops(trip: dict, limits: dict | None, w: dict, pace: int) -> in
 
 
 def build_spec(trip: dict | None, limits: dict | None = None,
-               w: dict | None = None) -> Spec:
+               w: dict | None = None, profile: str | None = None) -> Spec:
+    """The solve's spec. `profile` (savings / balanced / experience) applies that
+    profile's overrides from the weights file: the three plans of a request are
+    the same objective under three weight sets."""
     from BE.app.services import templates
     from BE.common import to_min
 
     trip = trip or {}
-    w = w or weights()
+    w = dict(w or weights())
+    w.update((w.get("profiles") or {}).get(profile or "", {}))
     pace = templates._profile_pace(trip) or 2
     start = to_min(trip.get("start_time", "07:00"))
     return Spec(w=w, k0=comfortable_stops(trip, limits, w, pace), pace=pace,

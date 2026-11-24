@@ -103,7 +103,8 @@ def score_transition(a: dict, b: dict, user: dict | None = None,
 
 
 def edge_scores(ids: list[str], by_id: dict, user: dict | None = None,
-                ctx: dict | None = None) -> dict[tuple[str, str], float]:
+                ctx: dict | None = None,
+                rule_penalties: bool = True) -> dict[tuple[str, str], float]:
     """q_ij for every ordered pair (optimizer T017 input).
 
     TASK-2 soft layer: A2 (back-to-back restaurants) and B1 (same-type
@@ -112,6 +113,10 @@ def edge_scores(ids: list[str], by_id: dict, user: dict | None = None,
     state layer: when `ctx` carries the trip context, `edge_penalty` also
     applies the satiety-aware food transition (trip_ctx.edge_state), so a
     still-full traveler is nudged away from another meal.
+
+    rule_penalties=False (objective v1): the transition score alone. A2, B1 and the
+    satiety transition are then owned by objective terms T6, T4 and T2 (rules.py),
+    so they are not counted twice.
 
     The model scores all n*(n-1) pairs in ONE batched predict (same values as
     `score_transition` per pair): per-pair predict calls cost ~4 s per profile
@@ -125,5 +130,7 @@ def edge_scores(ids: list[str], by_id: dict, user: dict | None = None,
         learned = [float(v - 0.5) for v in _bst.predict(x)]
     else:
         learned = [_rule(by_id[a], by_id[b]) for a, b in pairs]
+    if not rule_penalties:
+        return {(a, b): round(score, 4) for (a, b), score in zip(pairs, learned)}
     return {(a, b): round(score + edge_penalty(by_id[a], by_id[b], ctx), 4)
             for (a, b), score in zip(pairs, learned)}

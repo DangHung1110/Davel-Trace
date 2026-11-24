@@ -155,7 +155,11 @@ def replan(state: dict, event: dict, pois: list[dict],
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
     origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
-    q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id)
+    # Objective v1: the same terms as the first plan (T3-T9); the edges then carry
+    # the transition score only (A2/B1 are objective terms, rules.py).
+    spec = objective_mod.build_spec(trip, limits) if objective_mod.active() else None
+    q = scorer.edge_scores([pid for pid in cand_ids if pid in by_id], by_id,
+                           rule_penalties=spec is None)
     # The gate reads the whole day: what comes next must not repeat what was just done.
     last_done = max(done, key=lambda a: a["start"]) if done else None
     last_cat = poi_category(by_id.get(last_done["poi_id"])) if last_done else ""
@@ -165,7 +169,6 @@ def replan(state: dict, event: dict, pois: list[dict],
                  and poi_category(by_id[pid]) == last_cat} if taste["no_consecutive"] else set()
     # Objective v1: the same terms as the first plan (T3-T9) over the remaining day;
     # a taste rule stays a constraint only when the trip names it in `strict_rules`.
-    spec = objective_mod.build_spec(trip, limits) if objective_mod.active() else None
     day_cafe_cap = None if not trip.get("profile") else cafe_cap(trip.get("profile"))
     adjacent_food = True
     if spec is not None:

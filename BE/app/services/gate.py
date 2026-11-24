@@ -25,6 +25,8 @@ from __future__ import annotations
 
 import functools
 
+from BE.app.services import rules
+
 from BE.app.services.soft_rules import (
     soft_checks,
     taste_rules,
@@ -441,15 +443,9 @@ def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     are reported on their own row and must not fail the plan through this mirror.
     """
     soft_taste = taste_rules() - taste_rules_hard(trip)
-    mirrored = [check_far, check_profile_safe, check_vroh, check_b3,
-                check_bcs, check_etb, check_lunch]
-    for name, check in (("A1", check_a1), ("CAFE_CAP", check_cafe_cap),
-                        ("NO_ADJACENT_FOOD", check_no_adjacent_food),
-                        ("REST_FOLLOWS_LUNCH", check_rest_follows_lunch),
-                        ("CATEGORY_CAP", check_category_cap),
-                        ("NO_CONSECUTIVE", check_no_consecutive)):
-        if name not in soft_taste:
-            mirrored.append(check)
+    by_name = {name: fn for name, fn in CHECKS if rules.layer(name) != "mirror"}
+    by_name["LUNCH"] = check_lunch
+    mirrored = [by_name[name] for name in rules.HCS_MIRROR if name not in soft_taste]
     if not all(check(itinerary, trip, pois, matrix)["passed"] for check in mirrored):
         return _result(False)
     ids = [a.get("poi_id") for a in itinerary.get("activities", [])]
@@ -477,7 +473,7 @@ CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
 
 # F1, TIME_FIT and DINNER are quality, not feasibility: they are reported but never
 # fail-closes a plan. Everything else is hard.
-SOFT_CHECKS = frozenset({"F1", "TIME_FIT", "DINNER"})
+SOFT_CHECKS = rules.QUALITY  # F1, TIME_FIT, DINNER (rules.py, layer "quality")
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
 
