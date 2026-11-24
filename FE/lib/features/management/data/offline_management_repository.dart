@@ -156,7 +156,7 @@ class OfflineManagementRepository
       final result = await live.listTrips(profileId, state: state);
       _localActiveTripId = live.activeTripId;
       await _cache(key, {
-        'items': result.map(_tripJson).toList(),
+        'items': result.map((trip) => trip.toJson()).toList(),
         'active_trip_id': _localActiveTripId,
       });
       return result;
@@ -175,7 +175,7 @@ class OfflineManagementRepository
     try {
       final result = await live.getTrip(id);
       await _cache(key, {
-        'trip': _tripJson(result.$1),
+        'trip': result.$1.toJson(),
         'itinerary': _itineraryJson(result.$2),
         'summary': _summaryJson(result.$3),
       });
@@ -547,7 +547,7 @@ class OfflineManagementRepository
     if (detail != null) {
       await _cache(
         'trip:${trip.id}',
-        {...detail.payload, 'trip': _tripJson(trip)},
+        {...detail.payload, 'trip': trip.toJson()},
         serverSuccess: serverSuccess,
         pendingIds: {...detail.pendingResourceIds}..remove(trip.id),
       );
@@ -569,7 +569,7 @@ class OfflineManagementRepository
           .toList();
       final index = items.indexWhere((item) => item['id'] == trip.id);
       if (index < 0) continue;
-      items[index] = _tripJson(trip);
+      items[index] = trip.toJson();
       await _cache(
         entry.key,
         {...entry.value.payload, 'items': items},
@@ -687,7 +687,8 @@ class OfflineManagementRepository
     String? category,
   }) => live.exportExpenses(tripId, date: date, category: category);
   @override
-  Future<List<PoiItem>> searchPois(String query) => live.searchPois(query);
+  Future<List<PoiItem>> searchPois(String query, {String? category}) =>
+      live.searchPois(query, category: category);
   @override
   Future<PoiItem> getPoiDetails(String id) => live.getPoiDetails(id);
   @override
@@ -709,21 +710,6 @@ Map<String, dynamic> _profileJson(UserProfile item) => {
   'usual_transport': item.usualTransport,
   'allergies': item.allergies,
   'accessibility_needs': item.accessibilityNeeds,
-  'version': item.version,
-};
-
-Map<String, dynamic> _tripJson(Trip item) => {
-  'id': item.id,
-  'profile_id': item.profileId,
-  'title': item.title,
-  'start_date': isoDate(item.startDate),
-  'end_date': isoDate(item.endDate),
-  'day_start': item.dayStart,
-  'day_end': item.dayEnd,
-  'travelers': item.travelers,
-  'budget_vnd': item.budgetVnd,
-  'transport': item.transport,
-  'status': item.status,
   'version': item.version,
 };
 

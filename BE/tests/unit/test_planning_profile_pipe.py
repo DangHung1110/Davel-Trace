@@ -99,6 +99,13 @@ class TestTripRequest(unittest.TestCase):
         origin = _trip_request({**TRIP, "base_poi_id": "hotel"}, {})["origin"]
         self.assertEqual(origin["poi_id"], "hotel")
 
+    def test_saved_base_applies_until_the_traveler_finishes_a_stop(self):
+        snapshot = {**TRIP, "preference_overrides": {"base_poi_id": "hotel"}}
+        self.assertEqual(_trip_request(snapshot, {})["origin"]["poi_id"], "hotel")
+        self.assertEqual(
+            _trip_request(snapshot, {"current_poi_id": "cafe"})["origin"]["poi_id"], "cafe"
+        )
+
     def test_a_replan_resumes_from_the_last_finished_stop(self):
         trip = _trip_request({**TRIP, "base_poi_id": "hotel"},
                              {"current_poi_id": "cafe", "remaining_from": "14:10"})

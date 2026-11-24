@@ -160,6 +160,8 @@ class FakeManagementRepository implements ManagementRepository {
       transport: data['transport'] as String,
       status: 'draft',
       version: 1,
+      preferenceOverrides:
+          data['preference_overrides'] as Map<String, dynamic>? ?? const {},
     );
     trips.add(trip);
     return trip;
@@ -185,6 +187,9 @@ class FakeManagementRepository implements ManagementRepository {
       transport: data['transport'] as String? ?? old.transport,
       status: data['status'] as String? ?? old.status,
       version: old.version + 1,
+      preferenceOverrides:
+          data['preference_overrides'] as Map<String, dynamic>? ??
+          old.preferenceOverrides,
     );
     trips[trips.indexOf(old)] = updated;
     return updated;
@@ -338,16 +343,17 @@ class FakeManagementRepository implements ManagementRepository {
   };
 
   @override
-  Future<List<PoiItem>> searchPois(String query) async => const [
-    PoiItem(
-      id: 'dragon-bridge',
-      name: 'Cầu Rồng',
-      type: 'Điểm tham quan',
-      latitude: 16.0611,
-      longitude: 108.2274,
-      verified: false,
-    ),
-  ];
+  Future<List<PoiItem>> searchPois(String query, {String? category}) async =>
+      const [
+        PoiItem(
+          id: 'dragon-bridge',
+          name: 'Cầu Rồng',
+          type: 'Điểm tham quan',
+          latitude: 16.0611,
+          longitude: 108.2274,
+          verified: false,
+        ),
+      ];
 
   @override
   Future<PoiItem> getPoiDetails(String id) async =>

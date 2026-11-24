@@ -7,6 +7,62 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 
 void main() {
+  test('hotel search filters the server catalog before pagination', () async {
+    final repository = HttpManagementRepository(
+      ApiClient(
+        baseUrl: 'http://example.test',
+        client: MockClient((request) async {
+          expect(request.url.path, '/v1/pois');
+          expect(request.url.queryParameters, {
+            'q': 'Biển',
+            'limit': '30',
+            'category': 'lodging',
+          });
+          return http.Response('{"items":[]}', 200);
+        }),
+      ),
+    );
+    expect(await repository.searchPois('Biển', category: 'lodging'), isEmpty);
+  });
+
+  test('trip create and update round-trip saved preferences', () async {
+    const preferences = {'outdoor_bias': 1.0, 'base_poi_id': 'hotel-1'};
+    final calls = <String>[];
+    final repository = HttpManagementRepository(
+      ApiClient(
+        baseUrl: 'http://example.test',
+        client: MockClient((request) async {
+          calls.add(request.method);
+          expect(jsonDecode(request.body)['preference_overrides'], preferences);
+          return http.Response(
+            jsonEncode({
+              'id': 'trip-1',
+              'title': 'Da Nang',
+              'start_date': '2026-11-28',
+              'end_date': '2026-11-28',
+              'day_start': '07:00',
+              'day_end': '18:00',
+              'traveler_count': 2,
+              'version': 1,
+              'preference_overrides': preferences,
+            }),
+            200,
+          );
+        }),
+      ),
+    );
+    final created = await repository.createTrip({
+      'preference_overrides': preferences,
+    });
+    final updated = await repository.updateTrip(created.id, {
+      'version': created.version,
+      'preference_overrides': preferences,
+    });
+    expect(created.outdoorBias, 1);
+    expect(updated.basePoiId, 'hotel-1');
+    expect(calls, ['POST', 'PATCH']);
+  });
+
   test('catalog search keeps provenance and verified state', () async {
     Uri? requested;
     final repository = HttpManagementRepository(

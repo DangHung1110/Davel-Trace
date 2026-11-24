@@ -171,7 +171,9 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
     ]))
     # A replan resumes from the last stop the traveller finished; a fresh plan starts
     # at the base they chose. The planner uses it only when the matrix can route it.
-    start_at = remaining.get("current_poi_id") or snapshot.get("base_poi_id")
+    saved_base = (snapshot.get("preference_overrides") or {}).get("base_poi_id")
+    start_at = (remaining.get("current_poi_id") or snapshot.get("base_poi_id")
+                or (saved_base if isinstance(saved_base, str) else None))
     return TripRequest(
         trip_id=snapshot["id"],
         user_id=snapshot.get("account_id", "owned-user"),

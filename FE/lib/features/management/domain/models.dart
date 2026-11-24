@@ -71,6 +71,7 @@ class Trip {
     required this.transport,
     required this.status,
     required this.version,
+    this.preferenceOverrides = const {},
   });
 
   final String id;
@@ -85,6 +86,33 @@ class Trip {
   final String transport;
   final String status;
   final int version;
+  final Map<String, dynamic> preferenceOverrides;
+
+  String? get basePoiId => switch (preferenceOverrides['base_poi_id']) {
+    final String value when value.isNotEmpty => value,
+    _ => null,
+  };
+
+  double? get outdoorBias => switch (preferenceOverrides['outdoor_bias']) {
+    final num value when value.isFinite => value.toDouble(),
+    _ => null,
+  };
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'profile_id': profileId,
+    'title': title,
+    'start_date': isoDate(startDate),
+    'end_date': isoDate(endDate),
+    'day_start': dayStart,
+    'day_end': dayEnd,
+    'travelers': travelers,
+    'budget_vnd': budgetVnd,
+    'transport': transport,
+    'status': status,
+    'version': version,
+    'preference_overrides': preferenceOverrides,
+  };
 
   factory Trip.fromJson(Map<String, dynamic> json) => Trip(
     id: json['id'] as String,
@@ -111,6 +139,9 @@ class Trip {
         json['lifecycle_state'] as String? ??
         'available',
     version: json['version'] as int,
+    preferenceOverrides: Map<String, dynamic>.unmodifiable(
+      json['preference_overrides'] as Map? ?? const {},
+    ),
   );
 }
 
