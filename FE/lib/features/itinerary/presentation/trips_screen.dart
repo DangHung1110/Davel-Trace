@@ -14,11 +14,13 @@ class TripsScreen extends StatefulWidget {
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onOpenManualMap,
     this.detailRequest = 0,
     this.collectionRequest = 0,
   });
   final AppState state;
   final VoidCallback onOpenMap;
+  final VoidCallback? onOpenManualMap;
   final int detailRequest;
   final int collectionRequest;
 
@@ -101,6 +103,7 @@ class _TripsScreenState extends State<TripsScreen> {
         child: ItineraryScreen(
           state: state,
           onOpenMap: widget.onOpenMap,
+          onOpenManualMap: widget.onOpenManualMap,
           onBack: () => setState(() => _detail = false),
         ),
       );

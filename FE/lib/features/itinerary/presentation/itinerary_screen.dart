@@ -6,6 +6,7 @@ import '../../../shared/widgets/app_header.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
+import '../../map/presentation/planned_route_map.dart';
 import '../../planning/domain/models.dart';
 import '../../profile/presentation/profile_screen.dart';
 import 'hotel_picker.dart';
@@ -16,6 +17,7 @@ class ItineraryScreen extends StatelessWidget {
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onOpenManualMap,
     this.onBack,
   });
 
@@ -56,6 +58,7 @@ class ItineraryScreen extends StatelessWidget {
   }
 
   final VoidCallback onOpenMap;
+  final VoidCallback? onOpenManualMap;
 
   Future<void> _tripEditor(BuildContext context, {Trip? trip}) async {
     final data = await Navigator.of(context).push<Map<String, dynamic>>(
@@ -140,6 +143,7 @@ class ItineraryScreen extends StatelessWidget {
     final trip = state.activeTrip;
     final itinerary = state.itinerary;
     final dayActivities = state.activitiesForSelectedDay;
+    final savedPlan = state.savedPlanForSelectedDay;
     return ColoredBox(
       color: AppColors.canvas,
       child: Column(
@@ -246,7 +250,7 @@ class ItineraryScreen extends StatelessWidget {
                               ),
                               IconButton(
                                 key: const Key('open-trip-map-button'),
-                                tooltip: 'Mở bản đồ',
+                                tooltip: 'Mở bản đồ lịch đã lưu',
                                 onPressed: onOpenMap,
                                 icon: const Icon(
                                   Icons.map_outlined,
@@ -311,7 +315,9 @@ class ItineraryScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Bản ${itinerary?.version ?? 1}',
+                              savedPlan == null
+                                  ? 'Bản ${itinerary?.version ?? 1}'
+                                  : 'Đã chốt',
                               style: const TextStyle(
                                 color: AppColors.muted,
                                 fontSize: 11,
@@ -320,9 +326,36 @@ class ItineraryScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 9),
-                        if (itinerary == null || dayActivities.isEmpty)
-                          const _EmptyActivities()
-                        else
+                        if (savedPlan != null)
+                          SurfaceCard(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (final (index, activity)
+                                    in savedPlan.plan.activities.indexed)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 6),
+                                    child: Text(
+                                      '${index + 1}. ${activity['start'] ?? activity['start_time'] ?? ''} '
+                                      '${activity['name'] ?? activity['title'] ?? state.mapPlaces[activity['poi_id']]?.name ?? 'Điểm dừng chưa tải tên'}',
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        if (savedPlan == null && dayActivities.isEmpty)
+                          const _EmptyActivities(),
+                        if (savedPlan != null &&
+                            onOpenManualMap != null &&
+                            dayActivities.any(
+                              (activity) => activity.poiId != null,
+                            ))
+                          TextButton.icon(
+                            onPressed: onOpenManualMap,
+                            icon: const Icon(Icons.map_outlined),
+                            label: const Text('Bản đồ các điểm thêm thủ công'),
+                          ),
+                        if (dayActivities.isNotEmpty)
                           ...dayActivities.indexed.map(
                             (entry) => _ActivityTile(
                               activity: entry.$2,
@@ -460,6 +493,24 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           return null;
         }
       });
+
+  void _previewPlan(PlanAlternative plan) {
+    final trip = state.activeTrip;
+    if (trip == null) return;
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) => PlannedRouteMap(
+          plan: plan,
+          tripId: trip.id,
+          repository: state.repository,
+          resolvePlace: _resolvePlace,
+          title: 'Dự kiến · Phương án ${plan.rank}',
+          isDraft: true,
+          onBack: () => Navigator.of(context).pop(),
+        ),
+      ),
+    );
+  }
 
   Future<void> _pickHotel() async {
     final tripId = state.activeTrip?.id;
@@ -799,6 +850,9 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               previewOnly: state.isDemoManagement,
               resolvePlace: _resolvePlace,
               onSelect: () => state.acceptAlternative(plan),
+              onPreview: state.activeTrip == null
+                  ? null
+                  : () => _previewPlan(plan),
             ),
           ),
         ),
@@ -878,6 +932,7 @@ class _AlternativeCard extends StatelessWidget {
     required this.busy,
     required this.onSelect,
     required this.resolvePlace,
+    this.onPreview,
     this.previewOnly = false,
   });
 
@@ -888,6 +943,7 @@ class _AlternativeCard extends StatelessWidget {
   final bool busy;
   final VoidCallback onSelect;
   final Future<PoiItem?> Function(String) resolvePlace;
+  final VoidCallback? onPreview;
   final bool previewOnly;
 
   @override
@@ -939,6 +995,13 @@ class _AlternativeCard extends StatelessWidget {
                 '${activity['start'] ?? activity['start_time'] ?? ''}  ${activity['name'] ?? activity['title'] ?? snapshot.data?.name ?? (snapshot.connectionState == ConnectionState.waiting ? 'Đang tải địa điểm…' : 'Chưa tải được tên địa điểm')}',
               ),
             ),
+          ),
+        if (onPreview != null && plan.activities.isNotEmpty)
+          TextButton.icon(
+            key: Key('preview-plan-${plan.id}'),
+            onPressed: onPreview,
+            icon: const Icon(Icons.route_outlined),
+            label: const Text('Xem lộ trình dự kiến'),
           ),
         SizedBox(
           width: double.infinity,

@@ -4,7 +4,9 @@ import 'package:davel_trace/features/auth/application/auth_controller.dart';
 import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
+import 'package:davel_trace/features/management/data/demo_management_repository.dart';
 import 'package:davel_trace/features/itinerary/presentation/planning_request_review.dart';
+import 'package:davel_trace/features/map/presentation/widgets/map_canvas.dart';
 import 'package:davel_trace/shared/widgets/mobile_frame.dart';
 import 'package:davel_trace/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -151,6 +153,39 @@ void main() {
       expect(find.text('Chuyến đi của bạn'), findsOneWidget);
     },
   );
+
+  testWidgets('previews ordered demo stops before saving any itinerary', (
+    tester,
+  ) async {
+    _viewport(tester, const Size(390, 844));
+    final repo = DemoManagementRepository()..activities.clear();
+    await tester.pumpWidget(DavelTraceApp(repository: repo));
+    await tester.pumpAndSettle();
+    await _tap(tester, 'open-trip-trip-demo');
+    await _tap(tester, 'open-trip-map-button');
+    expect(find.byKey(const Key('empty-map-message')), findsOneWidget);
+    await _tap(tester, 'empty-map-open-itinerary');
+    await _tap(tester, 'open-planning-button');
+    await _tap(tester, 'preview-plan-seeded-balanced');
+
+    final map = tester.widget<MapCanvas>(find.byType(MapCanvas));
+    expect(map.stops.map((stop) => stop.title), [
+      'Bán đảo Sơn Trà',
+      'Ăn trưa với mì Quảng',
+      'Bảo tàng Điêu khắc Chăm',
+      'Biển Mỹ Khê',
+    ]);
+    expect(map.routePreview?.quality, 'interpolated');
+    expect(map.routePreview?.geometry, hasLength(4));
+    expect(find.byKey(const Key('locate-user-button')), findsNothing);
+    expect(repo.activities, isEmpty);
+    await _tap(tester, 'open-map-replan-button');
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
+  });
 
   for (final width in [320.0, 390.0]) {
     testWidgets('core journeys fit ${width.toInt()}px with enlarged text', (

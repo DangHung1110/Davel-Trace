@@ -16,7 +16,10 @@ abstract interface class OfflineSyncControl {
 }
 
 class OfflineManagementRepository
-    implements LiveManagementRepository, OfflineSyncControl {
+    implements
+        LiveManagementRepository,
+        OfflineSyncControl,
+        DraftRouteRepository {
   OfflineManagementRepository({
     required this.live,
     required this.persistence,
@@ -691,6 +694,22 @@ class OfflineManagementRepository
       live.searchPois(query, category: category);
   @override
   Future<PoiItem> getPoiDetails(String id) => live.getPoiDetails(id);
+
+  @override
+  Future<RoutePreviewData> previewDraftRoute(
+    String tripId,
+    List<String> poiIds,
+  ) async {
+    final repository = live;
+    if (repository is DraftRouteRepository) {
+      return (repository as DraftRouteRepository).previewDraftRoute(
+        tripId,
+        poiIds,
+      );
+    }
+    throw UnsupportedError('Draft route unavailable');
+  }
+
   @override
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids) =>
       live.previewRoute(tripId, ids);

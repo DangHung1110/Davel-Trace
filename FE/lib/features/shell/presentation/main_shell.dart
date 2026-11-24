@@ -7,6 +7,7 @@ import '../../../theme/app_theme.dart';
 import '../../expenses/expenses.dart';
 import '../../itinerary/presentation/trips_screen.dart';
 import '../../map/map.dart';
+import '../../map/presentation/planned_route_map.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../auth/presentation/account_screen.dart';
 
@@ -24,19 +25,30 @@ class _MainShellState extends State<MainShell> {
   int _tripDetailRequest = 0;
   int _tripCollectionRequest = 0;
   final Set<int> _visited = {0};
+  bool _showManualRoute = false;
 
-  void _select(int index) {
+  void _select(int index, {bool manualRoute = false}) {
     setState(() {
       _selectedIndex = index;
       _visited.add(index);
+      if (index == 1) _showManualRoute = manualRoute;
     });
-    if (index == 1) widget.state.loadRoutePreview();
+    if (index == 1 &&
+        (manualRoute || widget.state.savedPlanForSelectedDay == null)) {
+      widget.state.loadRoutePreview();
+    }
+  }
+
+  void _openItineraryFromMap() {
+    _tripDetailRequest++;
+    _select(0);
   }
 
   @override
   Widget build(BuildContext context) {
     final state = widget.state;
-    final stops = (state.itinerary?.activities ?? const [])
+    final savedPlan = state.savedPlanForSelectedDay;
+    final stops = state.activitiesForSelectedDay
         .where((activity) => activity.poiId != null)
         .map(
           (activity) => MapStop.fromActivity(
@@ -44,6 +56,7 @@ class _MainShellState extends State<MainShell> {
             place: state.mapPlaces[activity.poiId],
           ),
         )
+        .where((stop) => stop.hasLocation)
         .toList();
     return Scaffold(
       backgroundColor: AppColors.canvas,
@@ -69,20 +82,33 @@ class _MainShellState extends State<MainShell> {
                   TripsScreen(
                     state: state,
                     onOpenMap: () => _select(1),
+                    onOpenManualMap: () => _select(1, manualRoute: true),
                     detailRequest: _tripDetailRequest,
                     collectionRequest: _tripCollectionRequest,
                   ),
-                  if (_visited.contains(1))
+                  if (_visited.contains(1) &&
+                      savedPlan != null &&
+                      !_showManualRoute)
+                    PlannedRouteMap(
+                      key: ValueKey(savedPlan.versionId),
+                      plan: savedPlan.plan,
+                      tripId: savedPlan.tripId,
+                      repository: state.repository,
+                      resolvePlace: (id) async =>
+                          state.mapPlaces[id] ??
+                          await state.repository.getPoiDetails(id),
+                      title: state.activeTrip!.title,
+                      isActive: _selectedIndex == 1,
+                      onBack: _openItineraryFromMap,
+                    )
+                  else if (_visited.contains(1))
                     MapScreen(
                       isActive: _selectedIndex == 1,
                       stops: stops,
                       planRevision: state.itinerary?.version ?? 0,
                       tripTitle: state.activeTrip?.title,
                       routePreview: state.routePreview,
-                      onOpenItinerary: () {
-                        _tripDetailRequest++;
-                        _select(0);
-                      },
+                      onOpenItinerary: _openItineraryFromMap,
                     )
                   else
                     const SizedBox.shrink(),

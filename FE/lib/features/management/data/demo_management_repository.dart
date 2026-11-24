@@ -417,6 +417,14 @@ class DemoManagementRepository implements ManagementRepository {
               16.105,
               108.278,
             ),
+            _demoPoi(
+              'mi-quang',
+              'Điểm ăn mì Quảng mẫu',
+              'food',
+              16.065,
+              108.222,
+            ),
+            _demoPoi('han-market', 'Chợ Hàn', 'market', 16.068, 108.224),
           ]
           .where(
             (item) =>
@@ -444,8 +452,22 @@ class DemoManagementRepository implements ManagementRepository {
   );
 
   @override
-  Future<PoiItem> getPoiDetails(String id) async =>
-      (await searchPois('')).firstWhere((item) => item.id == id);
+  Future<PoiItem> getPoiDetails(String id) async {
+    final activity = _seedActivities()
+        .where((item) => item.poiId == id)
+        .firstOrNull;
+    if (activity != null) {
+      return _demoPoi(
+        id,
+        activity.title,
+        activity.category,
+        activity.latitude,
+        activity.longitude,
+      );
+    }
+    return (await searchPois('')).firstWhere((item) => item.id == id);
+  }
+
   @override
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids) async {
     final byId = {for (final activity in activities) activity.id: activity};

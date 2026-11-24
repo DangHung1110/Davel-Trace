@@ -3,8 +3,10 @@ import 'package:davel_trace/app_state.dart';
 import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
+import 'package:davel_trace/features/map/presentation/widgets/map_canvas.dart';
 import 'package:davel_trace/features/planning/data/planning_repository.dart';
 import 'package:davel_trace/features/planning/domain/models.dart';
+import 'package:davel_trace/features/shell/presentation/main_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,11 +14,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'support/fake_management_repository.dart';
 
 class _LifecyclePlanningRepository
-    implements PlanningRepository, ItineraryLifecycleRepository {
+    implements
+        PlanningRepository,
+        ItineraryLifecycleRepository,
+        ItineraryPlanReader {
   final planningKeys = <String>[];
   final acceptanceKeys = <String>[];
   final replanKeys = <String>[];
   final overrides = <Map<String, dynamic>>[];
+  SavedItineraryPlan? savedPlan;
 
   static const alternative = PlanAlternative(
     id: 'alternative-010',
@@ -63,6 +69,9 @@ class _LifecyclePlanningRepository
 
   @override
   Future<void> activateVersion(String versionId, String key) async {}
+
+  @override
+  Future<SavedItineraryPlan> readVersion(String versionId) async => savedPlan!;
 
   @override
   Future<PlanningResult> replan(
@@ -116,8 +125,75 @@ class _HotelManagement extends FakeManagementRepository
   }
 }
 
+class _SavedMapManagement extends _HotelManagement
+    implements DraftRouteRepository {
+  List<String>? routedIds;
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async =>
+      id == _HotelManagement.hotel.id
+      ? _HotelManagement.hotel
+      : const PoiItem(
+          id: 'bridge',
+          name: 'Cầu Rồng',
+          type: 'landmark',
+          latitude: 16.0611,
+          longitude: 108.2274,
+          verified: true,
+        );
+
+  @override
+  Future<RoutePreviewData> previewDraftRoute(
+    String tripId,
+    List<String> poiIds,
+  ) {
+    routedIds = poiIds;
+    return previewRoute(tripId, const []);
+  }
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets('reopens a saved planner route even when no manual stops exist', (
+    tester,
+  ) async {
+    final management = _SavedMapManagement();
+    final planning = _LifecyclePlanningRepository()
+      ..savedPlan = SavedItineraryPlan.fromJson({
+        'version_id': 'version-010',
+        'trip_id': 'trip-1',
+        'request': {
+          'trip': {'start_date': '2026-10-17'},
+        },
+        'plan': {
+          'activities': [
+            {'poi_id': 'bridge', 'start': '08:00', 'end': '09:00'},
+            {'poi_id': 'hotel-1', 'start': '09:30', 'end': '10:30'},
+          ],
+        },
+      });
+    final state = AppState(management, planningRepository: planning);
+    addTearDown(state.dispose);
+    await state.initialize();
+    expect(state.itinerary?.activities, isEmpty);
+    expect(state.savedPlanForSelectedDay?.versionId, 'version-010');
+    state.selectTripDate(DateTime(2026, 10, 18));
+    expect(state.savedPlanForSelectedDay, isNull);
+    state.selectTripDate(DateTime(2026, 10, 17));
+    await tester.pumpWidget(MaterialApp(home: MainShell(state: state)));
+    await tester.tap(find.byKey(const Key('map-tab')));
+    await tester.pumpAndSettle();
+
+    final canvas = tester.widget<MapCanvas>(find.byType(MapCanvas));
+    expect(canvas.stops.map((stop) => stop.title), [
+      'Cầu Rồng',
+      'Khách sạn Biển',
+    ]);
+    expect(management.routedIds, ['bridge', 'hotel-1']);
+    expect(canvas.routePreview?.quality, 'road_route');
+    expect(find.byKey(const Key('locate-user-button')), findsOneWidget);
+  });
 
   testWidgets(
     'selecting, reopening and clearing a hotel changes each planning request',

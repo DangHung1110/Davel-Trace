@@ -20,6 +20,7 @@ class MapScreen extends StatefulWidget {
     this.routePreview,
     this.locationProvider = const GeolocatorMapLocationProvider(),
     this.isActive = true,
+    this.isDraft = false,
   });
 
   final List<MapStop> stops;
@@ -29,6 +30,7 @@ class MapScreen extends StatefulWidget {
   final RoutePreviewData? routePreview;
   final MapLocationProvider locationProvider;
   final bool isActive;
+  final bool isDraft;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -51,6 +53,32 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   int _trackingGeneration = 0;
   StreamSubscription<MapLocationResult>? _positions;
   Future<void> _cancellation = Future<void>.value();
+  late RoutePreviewData? _displayRoute = _routeForDisplay();
+
+  RoutePreviewData? _routeForDisplay() {
+    final route = widget.routePreview;
+    if (route == null ||
+        widget.stops.length < 2 ||
+        route.geometry.length >= 2) {
+      return route;
+    }
+    return RoutePreviewData(
+      source: route.source,
+      quality: route.quality == 'matrix_estimate'
+          ? 'matrix_estimate'
+          : 'interpolated',
+      isRealRoute: false,
+      distanceM: route.distanceM,
+      durationS: route.durationS,
+      geometry: [
+        for (final stop in widget.stops) [stop.longitude, stop.latitude],
+      ],
+      warning: [
+        if (route.warning case final warning? when warning.isNotEmpty) warning,
+        'Đường nét đứt chỉ minh họa thứ tự điểm dừng.',
+      ].join(' '),
+    );
+  }
 
   bool get _canTrack => widget.isActive && _appResumed && _trackingRequested;
 
@@ -229,6 +257,11 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   @override
   void didUpdateWidget(covariant MapScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.routePreview != widget.routePreview ||
+        !listEquals(oldWidget.stops, widget.stops)) {
+      _displayRoute = _routeForDisplay();
+      _isPlaying = false;
+    }
     if (oldWidget.isActive != widget.isActive ||
         oldWidget.locationProvider != widget.locationProvider) {
       if (_canTrack) {
@@ -260,7 +293,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             resetRequest: _resetRequest,
             locateRequest: _locateRequest,
             userLocation: _userLocation,
-            routePreview: widget.routePreview,
+            routePreview: _displayRoute,
             followUser: _followUser,
             onUserPan: _releaseCamera,
             reloadRequest: _reloadMapRequest,
@@ -346,15 +379,15 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                       children: [
                         if (widget.stops.length > 1)
                           _MapPill(
-                            icon: switch (widget.routePreview?.quality) {
+                            icon: switch (_displayRoute?.quality) {
                               'road_route' => Icons.route_rounded,
                               'matrix_estimate' => Icons.straighten_rounded,
                               'interpolated' => Icons.linear_scale_rounded,
                               _ => Icons.offline_bolt_outlined,
                             },
-                            label: switch (widget.routePreview?.quality) {
+                            label: switch (_displayRoute?.quality) {
                               'road_route' =>
-                                'OSRM ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km',
+                                'OSRM ${(_displayRoute!.distanceM / 1000).toStringAsFixed(1)} km',
                               'matrix_estimate' => 'Ước tính ma trận',
                               'interpolated' => 'Nội suy minh họa',
                               _ => 'Chưa có tuyến',
@@ -377,43 +410,44 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  PointerInterceptor(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          width: 132,
-                          child: Tooltip(
-                            message: _trackingRequested
-                                ? 'Tắt GPS trực tiếp'
-                                : 'Bật GPS trực tiếp',
-                            child: FilledButton.icon(
-                              key: const Key('locate-user-button'),
-                              icon: Icon(
-                                _trackingRequested
-                                    ? Icons.gps_off_rounded
-                                    : Icons.my_location_rounded,
-                                size: 18,
+                  if (!widget.isDraft)
+                    PointerInterceptor(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 132,
+                            child: Tooltip(
+                              message: _trackingRequested
+                                  ? 'Tắt GPS trực tiếp'
+                                  : 'Bật GPS trực tiếp',
+                              child: FilledButton.icon(
+                                key: const Key('locate-user-button'),
+                                icon: Icon(
+                                  _trackingRequested
+                                      ? Icons.gps_off_rounded
+                                      : Icons.my_location_rounded,
+                                  size: 18,
+                                ),
+                                label: Text(
+                                  _trackingRequested ? 'Tắt GPS' : 'Bật GPS',
+                                ),
+                                onPressed: _toggleTracking,
                               ),
-                              label: Text(
-                                _trackingRequested ? 'Tắt GPS' : 'Bật GPS',
-                              ),
-                              onPressed: _toggleTracking,
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        _RoundMapButton(
-                          key: const Key('follow-user-button'),
-                          icon: _followUser
-                              ? Icons.gps_fixed_rounded
-                              : Icons.gps_not_fixed_rounded,
-                          tooltip: 'Về vị trí của tôi',
-                          onPressed: _userLocation == null ? null : _recenter,
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          _RoundMapButton(
+                            key: const Key('follow-user-button'),
+                            icon: _followUser
+                                ? Icons.gps_fixed_rounded
+                                : Icons.gps_not_fixed_rounded,
+                            tooltip: 'Về vị trí của tôi',
+                            onPressed: _userLocation == null ? null : _recenter,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
               if (_mapError != null || _outsideMapCoverage) ...[
@@ -458,10 +492,10 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
               nextStop: nextStop,
               stopCount: widget.stops.length,
               isPlaying: _isPlaying,
-              onPlay: widget.stops.length > 1 ? _play : null,
+              onPlay: (_displayRoute?.geometry.length ?? 0) >= 2 ? _play : null,
               onPause: _isPlaying ? _pause : null,
               onReset: _reset,
-              routeSource: switch (widget.routePreview?.quality) {
+              routeSource: switch (_displayRoute?.quality) {
                 'road_route' => 'OSRM',
                 'matrix_estimate' => 'Ma trận',
                 'interpolated' => 'Nội suy',
@@ -469,6 +503,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
               },
               mapSource: kIsWeb ? 'PMTiles' : 'OSM',
               onOpenPoi: widget.onOpenItinerary,
+              isDraft: widget.isDraft,
             ),
           ),
         ),
@@ -488,6 +523,7 @@ class _ActiveTripCard extends StatelessWidget {
     required this.routeSource,
     required this.mapSource,
     required this.onOpenPoi,
+    required this.isDraft,
   });
 
   final MapStop? nextStop;
@@ -499,6 +535,7 @@ class _ActiveTripCard extends StatelessWidget {
   final String routeSource;
   final String mapSource;
   final VoidCallback onOpenPoi;
+  final bool isDraft;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -525,12 +562,18 @@ class _ActiveTripCard extends StatelessWidget {
         children: [
           if (stopCount == 0) ...[
             Text(
-              'Chuyến đi chưa có địa điểm',
+              isDraft
+                  ? 'Phương án chưa có điểm xác định vị trí'
+                  : 'Chuyến đi chưa có địa điểm',
               key: const Key('empty-map-message'),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 4),
-            const Text('Thêm điểm dừng hoặc chọn một phương án để xem tuyến.'),
+            Text(
+              isDraft
+                  ? 'Quay lại để xem danh sách điểm và thử phương án khác.'
+                  : 'Mở Lập lịch để xem phương án dự kiến hoặc thêm điểm vào lịch.',
+            ),
             const SizedBox(height: 8),
             SizedBox(
               width: double.infinity,
@@ -538,7 +581,7 @@ class _ActiveTripCard extends StatelessWidget {
                 key: const Key('empty-map-open-itinerary'),
                 onPressed: onOpenPoi,
                 icon: const Icon(Icons.add_location_alt_outlined),
-                label: const Text('Thêm điểm vào lịch'),
+                label: Text(isDraft ? 'Quay lại phương án' : 'Về lịch trình'),
               ),
             ),
           ] else ...[
@@ -561,9 +604,14 @@ class _ActiveTripCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Điểm tiếp theo',
-                        style: TextStyle(fontSize: 10, color: AppColors.muted),
+                      Text(
+                        isDraft
+                            ? 'Điểm xuất phát trong phương án'
+                            : 'Điểm đầu tiên',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: AppColors.muted,
+                        ),
                       ),
                       Text(
                         nextStop?.title ?? 'Chưa có điểm dừng trên bản đồ',
@@ -585,7 +633,7 @@ class _ActiveTripCard extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Xem chuyến đi',
+                  tooltip: isDraft ? 'Quay lại phương án' : 'Xem chuyến đi',
                   onPressed: onOpenPoi,
                   icon: const Icon(Icons.chevron_right_rounded),
                 ),

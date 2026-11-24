@@ -26,6 +26,13 @@ class MapStop {
   final IconData icon;
   final Color color;
 
+  bool get hasLocation =>
+      latitude.isFinite &&
+      longitude.isFinite &&
+      latitude.abs() <= 90 &&
+      longitude.abs() <= 180 &&
+      (latitude != 0 || longitude != 0);
+
   @override
   bool operator ==(Object other) =>
       other is MapStop &&

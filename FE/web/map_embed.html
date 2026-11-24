@@ -233,6 +233,7 @@
       }
 
       function drawRoute(coordinates, isFallback = false) {
+        const dash = isFallback ? [2, 1.25] : null;
         const data = {
           type: "Feature",
           properties: {},
@@ -246,6 +247,8 @@
             "line-color",
             isFallback ? "#f09b32" : "#246bfd",
           );
+          map.setPaintProperty("demo-route-line", "line-dasharray", dash);
+          map.setPaintProperty("demo-route-casing", "line-dasharray", dash);
           return;
         }
 
@@ -255,7 +258,11 @@
           type: "line",
           source: "demo-route",
           layout: { "line-join": "round", "line-cap": "round" },
-          paint: { "line-color": "rgba(255,255,255,.94)", "line-width": 10 },
+          paint: {
+            "line-color": "rgba(255,255,255,.94)",
+            "line-width": 10,
+            ...(dash ? { "line-dasharray": dash } : {}),
+          },
         });
         map.addLayer({
           id: "demo-route-line",
@@ -266,6 +273,7 @@
             "line-color": isFallback ? "#f09b32" : "#246bfd",
             "line-width": 6,
             "line-opacity": 0.96,
+            ...(dash ? { "line-dasharray": dash } : {}),
           },
         });
       }
@@ -276,7 +284,7 @@
           const element = document.createElement("div");
           element.className = `stop-marker ${index === 0 ? "origin" : ""}`;
           const label = document.createElement("span");
-          label.textContent = index === 0 ? "A" : String(index);
+          label.textContent = String(index + 1);
           element.append(label);
           element.title = [stop.title || `Điểm ${index + 1}`, stop.subtitle]
             .filter(Boolean)
@@ -492,9 +500,11 @@
             carMarker = undefined;
           }
         }
-        if (!followUserLocation) fitRoute(stops.map((stop) => [stop.longitude, stop.latitude]));
+        if (!followUserLocation) {
+          fitRoute([...routeCoordinates, ...stops.map((stop) => [stop.longitude, stop.latitude])]);
+        }
         if (quality === "road_route") statusElement.textContent = "OSRM · tuyến đường bộ";
-        else if (quality === "matrix_estimate") statusElement.textContent = "Ước tính ma trận · không có hình học tuyến";
+        else if (quality === "matrix_estimate") statusElement.textContent = "Ước tính ma trận · đường nối minh họa";
         else if (quality === "interpolated") statusElement.textContent = "Đường nối nội suy · không phải tuyến thật";
         else statusElement.textContent = route?.warning || "Chưa có tuyến khả dụng";
         if (route?.warning) statusElement.textContent = route.warning;
