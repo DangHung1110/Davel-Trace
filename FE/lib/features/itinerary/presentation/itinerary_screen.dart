@@ -167,16 +167,11 @@ class ItineraryScreen extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    trip.title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium,
-                                  ),
-                                ],
+                              child: Text(
+                                trip.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium,
                               ),
                             ),
                             PopupMenuButton<String>(
@@ -219,12 +214,13 @@ class ItineraryScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         SurfaceCard(
-                          color: AppColors.primary,
+                          color: AppColors.sand,
+                          padding: const EdgeInsets.fromLTRB(14, 10, 8, 10),
                           child: Row(
                             children: [
                               const Icon(
                                 Icons.calendar_month_outlined,
-                                color: Colors.white,
+                                color: AppColors.primary,
                               ),
                               const SizedBox(width: 11),
                               Expanded(
@@ -234,15 +230,15 @@ class ItineraryScreen extends StatelessWidget {
                                     Text(
                                       '${_shortDate(trip.startDate)} đến ${_shortDate(trip.endDate)}',
                                       style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.ink,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     Text(
                                       '${trip.dayStart.substring(0, 5)}–${trip.dayEnd.substring(0, 5)} · ${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}',
                                       style: const TextStyle(
-                                        color: Color(0xFFDDE9E4),
-                                        fontSize: 12,
+                                        color: AppColors.muted,
+                                        fontSize: 13,
                                       ),
                                     ),
                                   ],
@@ -254,7 +250,7 @@ class ItineraryScreen extends StatelessWidget {
                                 onPressed: onOpenMap,
                                 icon: const Icon(
                                   Icons.map_outlined,
-                                  color: Colors.white,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ],
@@ -410,30 +406,33 @@ class PlanningScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Tạo phương án, xem các điểm dừng rồi chọn lịch phù hợp. Lịch hiện tại chỉ thay đổi khi bạn xác nhận chọn.',
-          ),
+          const Text('Lịch trình chỉ thay đổi khi bạn xác nhận một phương án.'),
           const SizedBox(height: 16),
-          OutlinedButton.icon(
-            key: const Key('planning-preferences-button'),
-            onPressed: state.isPlanning
-                ? null
-                : () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => Scaffold(
-                        appBar: AppBar(title: const Text('Sở thích du lịch')),
-                        body: AnimatedBuilder(
-                          animation: state,
-                          builder: (_, _) =>
-                              ProfileScreen(state: state, showHeader: false),
+          SurfaceCard(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: ListTile(
+              key: const Key('planning-preferences-button'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.tune, color: AppColors.primary),
+              trailing: const Icon(Icons.chevron_right_rounded),
+              title: const Text('Sở thích du lịch'),
+              onTap: state.isPlanning
+                  ? null
+                  : () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => Scaffold(
+                          appBar: AppBar(title: const Text('Sở thích du lịch')),
+                          body: AnimatedBuilder(
+                            animation: state,
+                            builder: (_, _) =>
+                                ProfileScreen(state: state, showHeader: false),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-            icon: const Icon(Icons.tune),
-            label: const Text('Sở thích du lịch'),
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           _PlanningPanel(state: state),
         ],
       ),
@@ -591,10 +590,10 @@ class _PlanningPanelState extends State<_PlanningPanel> {
     final live = state.demoSource == DemoSource.live;
     final stale = state.demoSource == DemoSource.stale;
     final color = live
-        ? const Color(0xFFE6F6F2)
+        ? AppColors.sand
         : stale
         ? const Color(0xFFFFF1E3)
-        : const Color(0xFFF2F5F4);
+        : AppColors.surfaceLow;
     final title = live
         ? 'Phương án từ hệ thống'
         : stale
@@ -606,28 +605,34 @@ class _PlanningPanelState extends State<_PlanningPanel> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (!state.isDemoManagement && state.activeTrip != null) ...[
-          ListTile(
-            key: const Key('planning-hotel-button'),
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.hotel_outlined),
-            title: const Text('Nơi lưu trú'),
-            subtitle: basePoiId == null
-                ? const Text('Chọn khách sạn làm điểm xuất phát (tùy chọn)')
-                : FutureBuilder<PoiItem?>(
-                    key: ValueKey(basePoiId),
-                    future: _resolvePlace(basePoiId),
-                    builder: (_, snapshot) =>
-                        Text(snapshot.data?.name ?? 'Đã chọn nơi lưu trú'),
-                  ),
-            onTap: busy ? null : _pickHotel,
-            trailing: basePoiId == null
-                ? const Icon(Icons.chevron_right)
-                : IconButton(
-                    key: const Key('planning-clear-hotel-button'),
-                    tooltip: 'Bỏ nơi lưu trú',
-                    onPressed: busy ? null : () => _saveHotel(null),
-                    icon: const Icon(Icons.close),
-                  ),
+          SurfaceCard(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: ListTile(
+              key: const Key('planning-hotel-button'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(
+                Icons.hotel_outlined,
+                color: AppColors.primary,
+              ),
+              title: const Text('Nơi lưu trú'),
+              subtitle: basePoiId == null
+                  ? const Text('Chọn khách sạn làm điểm xuất phát (tùy chọn)')
+                  : FutureBuilder<PoiItem?>(
+                      key: ValueKey(basePoiId),
+                      future: _resolvePlace(basePoiId),
+                      builder: (_, snapshot) =>
+                          Text(snapshot.data?.name ?? 'Đã chọn nơi lưu trú'),
+                    ),
+              onTap: busy ? null : _pickHotel,
+              trailing: basePoiId == null
+                  ? const Icon(Icons.chevron_right)
+                  : IconButton(
+                      key: const Key('planning-clear-hotel-button'),
+                      tooltip: 'Bỏ nơi lưu trú',
+                      onPressed: busy ? null : () => _saveHotel(null),
+                      icon: const Icon(Icons.close),
+                    ),
+            ),
           ),
           const SizedBox(height: 8),
         ],
@@ -694,7 +699,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
         ),
         const SizedBox(height: 12),
-        OutlinedButton.icon(
+        TextButton.icon(
           key: const Key('request-ai-interpretation'),
           onPressed: busy || state.isDemoManagement
               ? null
@@ -766,8 +771,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
             ),
           ),
         ],
-        const SizedBox(height: 9),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         if (state.acceptance != null) ...[
           FilledButton.tonalIcon(
             key: const Key('view-accepted-itinerary'),
@@ -777,8 +781,10 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
           const SizedBox(height: 12),
         ],
-        Text('Phương án', style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 6),
+        if (state.planAlternatives.isNotEmpty) ...[
+          Text('Phương án', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 6),
+        ],
         ...state.planAlternatives.map(
           (plan) => Padding(
             padding: const EdgeInsets.only(bottom: 8),

@@ -116,7 +116,9 @@ def _dump(path, obj):
 def _csv(path, rows, cols):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        # LF like the committed files: csv's default "\r\n" made a rebuild on a
+        # machine without core.autocrlf rewrite every line of every report
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in rows:
             w.writerow({k: ("" if r.get(k) is None else r.get(k)) for k in cols})
@@ -602,6 +604,63 @@ def load_booking(sources_dir):
     return out
 
 
+def load_dish_sources(sources_dir):
+    """{poi_id or name: [row]} from BE/data/sources/dishes_*.json — main dishes
+    read on a web page of the place (menu, own site, food guide). Row: dishes
+    (ids of BE.common.DISHES), evidence_url (required), quote, checked_at."""
+    out = defaultdict(list)
+    if os.path.isdir(sources_dir):
+        for fn in sorted(os.listdir(sources_dir)):
+            if fn.startswith("dishes_") and fn.endswith(".json"):
+                doc = _load(os.path.join(sources_dir, fn), {}) or {}
+                for it in doc.get("items", []):
+                    row = {**it, "checked_at": it.get("checked_at") or doc.get("checked_at"),
+                           "_file": fn}
+                    out[it.get("poi_id") or it["name"]].append(row)
+    return out
+
+
+def build_dishes(rec, rows, osm_cuisine=None):
+    """`tags.dishes` = [{dish, source, url}], one entry per dish.
+
+    A web row (has a URL) wins, then the linked OSM element's `cuisine` (URL =
+    the element), then the POI's own name (`source: name`, the evidence is the
+    record's `name`). Only places that serve food carry dishes; a web row
+    without a URL or with an unknown dish id is dropped (printed)."""
+    from BE.common import DISH_CATEGORIES, DISHES, dishes_from_name, dishes_from_osm_cuisine
+    if rec["category"] not in DISH_CATEGORIES:
+        return []
+    out, seen = [], set()
+
+    def add(dish, source, url):
+        if dish not in seen:
+            seen.add(dish)
+            out.append({"dish": dish, "source": source, "url": url})
+
+    for row in rows or []:
+        bad = [d for d in row.get("dishes") or [] if d not in DISHES]
+        if bad or not str(row.get("evidence_url") or "").startswith("http"):
+            print("WARN dish row skipped:", rec["poi_id"], row.get("_file"), bad or "no URL")
+            continue
+        for dish in row["dishes"]:
+            add(dish, "web", row["evidence_url"])
+    osm_id = rec["ext_ids"].get("osm")
+    if osm_cuisine and osm_id:
+        for dish in dishes_from_osm_cuisine(osm_cuisine):
+            add(dish, "osm", f"https://www.openstreetmap.org/{osm_id}")
+    for dish in dishes_from_name(rec["name"]):
+        add(dish, "name", None)
+    return out
+
+
+def matrix_ids(out_dir):
+    """ids of `<out_dir>/matrix.json`, or None when there is no matrix yet."""
+    path = os.path.join(out_dir, "matrix.json")
+    if not os.path.exists(path):
+        return None
+    return set((_load(path, {}) or {}).get("ids") or [])
+
+
 def apply_booking(rec, it):
     """hours.kind = by_booking: `open` lists the bookable sessions and dwell is
     the full session, so a stop can only sit exactly on one session."""
@@ -820,6 +879,8 @@ def _base_from_osm(item, name, fetched_at):
     p["hours_source"] = ""
     p["name_osm"] = None if manual else item["name"]
     p["name_en"] = item.get("en")
+    if item.get("cuisine"):
+        p["osm_cuisine"] = item["cuisine"]       # OSM `cuisine` tag -> tags.dishes
     p["osm_evidence"] = None if manual else {"osm": item["osm"], "dist_m": 0.0, "hours": item.get("oh"),
                                              "fee": item.get("fee"), "name": name}
     p["added_in"] = "v2.0-p0b"
@@ -953,6 +1014,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     route = load_access_route(sources_dir)      # Sơn Trà controlled-road scope
     booking = load_booking(sources_dir)         # session-based experiences
     guides = load_guides(sources_dir)           # travel-guide mentions (popularity)
+    dish_rows = load_dish_sources(sources_dir)  # main dishes read on the place's pages
+    routed = matrix_ids(out_dir)                # POIs the travel matrix can route
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -1127,6 +1190,15 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         if pid in booking:
             apply_booking(rec, booking[pid])
         clip_to_access(rec)
+        osm_cuisine = ((om or {}).get("tags") or {}).get("cuisine") or p.get("osm_cuisine")
+        rec["tags"]["dishes"] = build_dishes(
+            rec, dish_rows.get(pid, []) + dish_rows.get(rec["name"], []), osm_cuisine)
+        if routed is not None and rec["status"] == "active" and pid not in routed:
+            # a stop the matrix cannot route never reaches a plan (retrieval) and
+            # breaks rule 15: kept for review until the OSRM matrix is rebuilt
+            rec["status"] = "review"
+            rec["status_reason"] = ("chưa có hàng trong ma trận xe máy (matrix.json): dựng lại "
+                                    "OSRM rồi chạy lại migrate_v2 để thành active")
         v21.append(rec)
         archive[pid] = arch_fields
         if q:
@@ -1159,6 +1231,8 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
         "count_v1_pois": len(v1_ids),
         "count_by_price_tier": dict(Counter(str(r["price"]["tier"]) for r in v21)),
         "count_by_hours_kind": dict(Counter(r["hours"]["kind"] for r in v21)),
+        "count_with_dishes": sum(bool(r["tags"]["dishes"]) for r in v21),
+        "count_dishes_by_source": dict(Counter(d["source"] for r in v21 for d in r["tags"]["dishes"])),
         "pois": v21,
     }
     _dump(os.path.join(out_dir, "pois.json"), meta)
@@ -1198,6 +1272,7 @@ FEATURE_COLS = [
     "free_entry", "hours_spans", "hours_conf", "hours_verified_by", "signature", "osm_id",
     "price_tier", "hours_kind", "prize_prior",            # v2.1 (WP12)
     "guide_mentions", "michelin", "name_en",              # 20/11 (clean popularity)
+    "dishes",                                             # 24/11 tags.dishes ids, "|"
 ]
 
 
@@ -1242,6 +1317,7 @@ def write_exports(pois, exports_dir, v21_by_id=None):
             "price_tier": q["price"]["tier"], "hours_kind": qh["kind"],
             "prize_prior": qp["prize_prior"], "guide_mentions": qp["guide_mentions"],
             "michelin": qp["michelin"], "name_en": q["name_en"],
+            "dishes": "|".join(d["dish"] for d in qt["dishes"]),
         })
         ev = p["category_evidence"]
         name_only = R.classify_name_only(q["name"])
@@ -1285,6 +1361,7 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + số trang cẩm nang + Michelin + Wikidata/Wikipedia), thay rating Google |
 | guide_mentions, michelin | số trang cẩm nang độc lập giới thiệu điểm; có trong Michelin Guide (`popularity_guides_*.json`) |
 | name_en | tên tiếng Anh từ OSM `name:en` |
+| dishes | món chính (`tags.dishes`, id của `BE.common.DISHES`, nối bằng `\\|`): từ tên quán, OSM `cuisine` hoặc trang web có link |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 

@@ -36,9 +36,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from BE.common import effective_fee, load_matrix_cells  # noqa: E402
+from BE.common import effective_fee, is_v21, load_matrix_cells, load_pois  # noqa: E402
 
-DEFAULT_SNAPSHOT = str(REPO_ROOT / "BE" / "data" / "snapshots" / "danang-v1")
+DEFAULT_SNAPSHOT = str(REPO_ROOT / "BE" / "data" / "snapshots" / "danang-v2")
 
 
 def peak_rss_mb() -> float:
@@ -331,7 +331,8 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
             why = wrong_hour(poi, s, e)
             if why:
                 flags.append(f"Q_WRONG_HOUR {poi['name']} {a['start']}-{a['end']}: {why}")
-            if (poi.get("review_count") or 0) < 20:
+            # v2.1 data carries no review counts (Google values are quarantined).
+            if not is_v21(poi) and (poi.get("review_count") or 0) < 20:
                 flags.append(f"Q_UNKNOWN_PLACE {poi['name']} ({poi.get('review_count')} danh gia)")
             if (poi.get("rating") or 0) < 3.8:
                 flags.append(f"Q_LOW_RATING {poi['name']} {poi.get('rating')}")
@@ -387,7 +388,9 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
     """Judge the saved plans; prints the summary and returns {"summary", "counts", ...}."""
     doc = json.load(open(path, encoding="utf-8"))
     snapshot = doc.get("snapshot") or DEFAULT_SNAPSHOT
-    pois = {p["poi_id"]: p for p in json.load(open(snapshot + "/pois.json", encoding="utf-8"))["pois"]}
+    # The fields the app plans with (`verified`, `opening_hours`, `cat`...) exist on a
+    # v2.1 record only through BE.common.poi_view; v1 records pass through unchanged.
+    pois = load_pois(snapshot, by_id=True)
     cells = load_matrix_cells(snapshot)
     name_to_id = {p["name"].strip().lower(): pid for pid, p in pois.items()}
 

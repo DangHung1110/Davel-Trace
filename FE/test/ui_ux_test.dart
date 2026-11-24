@@ -99,6 +99,7 @@ void main() {
       expect(authRepo.access, isNull);
       expect(await store.readRefreshToken(), isNull);
       expect(find.text('Đăng nhập'), findsOneWidget);
+      await _capture(tester, 'sign-in-390');
     },
   );
 

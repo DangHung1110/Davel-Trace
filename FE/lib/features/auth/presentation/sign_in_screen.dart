@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/widgets/field_cover.dart';
 import '../application/auth_controller.dart';
 import 'recovery_screen.dart';
 import 'register_screen.dart';
@@ -18,6 +19,17 @@ class _SignInScreenState extends State<SignInScreen> {
   bool obscure = true;
   bool googleTermsAccepted = false;
 
+  void _openRecovery({bool cancelDeletion = false}) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => RecoveryScreen(
+          controller: widget.controller,
+          cancelDeletion: cancelDeletion,
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     email.dispose();
@@ -32,25 +44,19 @@ class _SignInScreenState extends State<SignInScreen> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 440),
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(24, 40, 24, 24),
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
             children: [
-              const Icon(Icons.explore_rounded, size: 52),
-              const SizedBox(height: 16),
-              Text(
-                'Davel Trace',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineMedium
-                    ?.copyWith(fontWeight: FontWeight.w800),
+              const FieldCover(
+                compact: true,
+                title: 'Davel Trace',
+                description: 'Lập lịch và khám phá Đà Nẵng.',
               ),
-              const SizedBox(height: 8),
-              const Text(
-                'Quản lý chuyến đi Đà Nẵng gọn gàng, rõ ràng.',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 20),
               TextField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.email],
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   prefixIcon: Icon(Icons.mail_outline),
@@ -60,10 +66,12 @@ class _SignInScreenState extends State<SignInScreen> {
               TextField(
                 controller: password,
                 obscureText: obscure,
+                autofillHints: const [AutofillHints.password],
                 decoration: InputDecoration(
                   labelText: 'Mật khẩu',
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
+                    tooltip: obscure ? 'Hiện mật khẩu' : 'Ẩn mật khẩu',
                     onPressed: () => setState(() => obscure = !obscure),
                     icon: Icon(
                       obscure
@@ -93,6 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   widget.controller.busy ? 'Đang xử lý…' : 'Đăng nhập',
                 ),
               ),
+              const SizedBox(height: 8),
               if (widget.controller.googleAvailable) ...[
                 CheckboxListTile(
                   value: googleTermsAccepted,
@@ -115,34 +124,34 @@ class _SignInScreenState extends State<SignInScreen> {
                   label: const Text('Tiếp tục bằng Google'),
                 ),
               ],
-              TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        RegisterScreen(controller: widget.controller),
-                  ),
-                ),
-                child: const Text('Tạo tài khoản'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        RecoveryScreen(controller: widget.controller),
-                  ),
-                ),
-                child: const Text('Quên mật khẩu?'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => RecoveryScreen(
-                      controller: widget.controller,
-                      cancelDeletion: true,
+              OverflowBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                overflowAlignment: OverflowBarAlignment.start,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) =>
+                            RegisterScreen(controller: widget.controller),
+                      ),
                     ),
+                    child: const Text('Tạo tài khoản'),
+                  ),
+                  TextButton(
+                    onPressed: _openRecovery,
+                    child: const Text('Quên mật khẩu?'),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () => _openRecovery(cancelDeletion: true),
+                  child: const Text(
+                    'Khôi phục tài khoản đang chờ xóa',
+                    textAlign: TextAlign.start,
                   ),
                 ),
-                child: const Text('Khôi phục tài khoản đang chờ xóa'),
               ),
               const Divider(height: 32),
               OutlinedButton.icon(
@@ -152,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'Dữ liệu demo chỉ nằm trên thiết bị và không giả là dữ liệu tài khoản.',
+                'Dữ liệu demo chỉ lưu trên thiết bị này.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12),
               ),

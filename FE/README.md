@@ -6,8 +6,8 @@ Live foreground GPS, camera following and device test instructions:
 Google sign-in and real SMTP recovery setup:
 [`identity providers quickstart`](../specs/013-identity-providers/quickstart.md).
 
-Ứng dụng mobile chính của dự án, theo phong cách **Sơn Trà Breeze**: teal
-`#006A6A`, amber `#D97706`, nền trắng/slate, Material 3 bo tròn và ít màu.
+Ứng dụng Flutter dùng nền giấy ấm, xanh lá và vàng đất theo hướng sổ tay
+du lịch Đà Nẵng. Quy ước giao diện chung nằm trong [DESIGN.md](../DESIGN.md).
 
 Điều hướng: **Chuyến đi** (danh sách → lịch từng ngày → màn lập lịch riêng),
 **Bản đồ**, **Chi tiêu**, **Tài khoản**. Email đăng nhập, bảo mật và **Đăng xuất**

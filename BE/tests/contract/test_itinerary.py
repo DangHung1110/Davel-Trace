@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 import uuid
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -20,6 +21,7 @@ from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.routers import select as select_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.services import retrieval as retrieval_svc  # noqa: E402
+from BE.app.services import trip_ctx  # noqa: E402
 from BE.tests import conftest  # noqa: E402
 
 POIS = [
@@ -246,6 +248,29 @@ class TestItineraryContract(unittest.TestCase):
         self.assertEqual(r.status_code, 503)
         self.assertEqual(set(r.json()), {"error", "message"})
         self.assertEqual(r.json()["error"], "SNAPSHOT_MISSING")
+
+    def test_areas_on_a_snapshot_without_zones_say_so(self):
+        """These POIs carry no `zone` (like danang-v1): areas cannot filter them,
+        the plan is the one without areas and a warning says the choice did nothing."""
+        body = {"trip": TRIP, "profiles": ["balanced"]}
+        with mock.patch.object(trip_ctx.weather_svc, "fetch_forecast",
+                               side_effect=RuntimeError("offline test")):
+            plain = client.post("/v1/itinerary", json=body)
+            zoned = client.post("/v1/itinerary", json={
+                **body, "trip": {**TRIP, "areas": ["trung_tam"]}})
+        self.assertEqual(plain.status_code, 200, plain.text)
+        self.assertEqual(zoned.status_code, 200, zoned.text)
+        stops = [[a["poi_id"] for a in r.json()["plans"][0]["activities"]]
+                 for r in (plain, zoned)]
+        self.assertEqual(stops[0], stops[1])
+        self.assertIn("khong loc theo khu vuc: du lieu nay chua chia khu vuc",
+                      zoned.json()["plans"][0]["warnings"])
+        self.assertNotIn("khong loc theo khu vuc: du lieu nay chua chia khu vuc",
+                         plain.json()["plans"][0].get("warnings") or [])
+
+    def test_an_unknown_area_is_a_422(self):
+        r = client.post("/v1/itinerary", json={"trip": {**TRIP, "areas": ["downtown"]}})
+        self.assertEqual(r.status_code, 422)
 
 
 if __name__ == "__main__":

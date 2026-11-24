@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
 import '../../../shared/widgets/app_header.dart';
+import '../../../shared/widgets/field_cover.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
@@ -110,75 +111,102 @@ class _TripsScreenState extends State<TripsScreen> {
         Expanded(
           child: RefreshIndicator(
             onRefresh: state.refresh,
-            child: ListView(
+            child: CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-              children: [
-                Text(
-                  'Chuyến đi của bạn',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Chọn một chuyến để xem lịch trình, bản đồ và chi tiêu.',
-                ),
-                const SizedBox(height: 20),
-                FilledButton.icon(
-                  key: const Key('create-trip-button'),
-                  onPressed: state.isMutating || state.isPlanning
-                      ? null
-                      : _create,
-                  icon: const Icon(Icons.add),
-                  label: const Text('Tạo chuyến đi'),
-                ),
-                const SizedBox(height: 16),
-                if (state.isDemoManagement)
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      'Bản demo · Thay đổi chưa được lưu vào tài khoản.',
-                      key: Key('trip-demo-notice'),
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                if (state.trips.isEmpty)
-                  SurfaceCard(
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+                  sliver: SliverToBoxAdapter(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(
-                          Icons.luggage_outlined,
-                          size: 36,
-                          color: AppColors.primary,
+                        const FieldCover(
+                          title: 'Chuyến đi của bạn',
+                          description:
+                              'Lịch trình, bản đồ và chi tiêu ở cùng một nơi.',
                         ),
-                        const SizedBox(height: 16),
+                        if (state.isDemoManagement) ...[
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Bản demo · Thay đổi chưa được lưu vào tài khoản.',
+                            key: Key('trip-demo-notice'),
+                          ),
+                        ],
+                        const SizedBox(height: 20),
                         Text(
-                          'Chưa có chuyến đi',
+                          'Chuyến đã lưu',
                           style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Bắt đầu với ngày đi, ngân sách và những nơi bạn muốn khám phá.',
                         ),
                       ],
                     ),
                   ),
-                for (final trip in state.trips) ...[
-                  _TripCard(
-                    trip: trip,
-                    selected: state.activeTrip?.id == trip.id,
-                    onTap: state.isMutating || state.isPlanning
-                        ? null
-                        : () => _open(trip),
+                ),
+                if (state.trips.isEmpty)
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    sliver: SliverToBoxAdapter(
+                      child: SurfaceCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Chưa có chuyến đi',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Tạo chuyến để chọn ngày đi và lên lịch khám phá.',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                ],
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverList.builder(
+                    itemCount: state.trips.length,
+                    itemBuilder: (context, index) {
+                      final trip = state.trips[index];
+                      return Padding(
+                        key: ValueKey(trip.id),
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: _TripCard(
+                          trip: trip,
+                          selected: state.activeTrip?.id == trip.id,
+                          onTap: state.isMutating || state.isPlanning
+                              ? null
+                              : () => _open(trip),
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 if (state.archivedTrips.isNotEmpty ||
-                    state.deletedTrips.isNotEmpty) ...[
-                  const SizedBox(height: 12),
-                  TripArchiveButton(state: state),
-                ],
+                    state.deletedTrips.isNotEmpty)
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: TripArchiveButton(state: state),
+                    ),
+                  ),
+                const SliverToBoxAdapter(child: SizedBox(height: 12)),
               ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
+          child: SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              key: const Key('create-trip-button'),
+              onPressed: state.isMutating || state.isPlanning ? null : _create,
+              icon: const Icon(Icons.add),
+              label: const Text('Tạo chuyến đi'),
             ),
           ),
         ),
@@ -199,10 +227,10 @@ class _TripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-    color: AppColors.surface,
+    color: selected ? AppColors.sand : AppColors.surface,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
-      side: BorderSide(color: selected ? AppColors.primary : AppColors.outline),
+      side: const BorderSide(color: AppColors.outline),
     ),
     clipBehavior: Clip.antiAlias,
     child: InkWell(
@@ -215,28 +243,21 @@ class _TripCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.luggage_outlined, color: AppColors.primary),
-                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    selected ? 'Đang xem' : 'Đà Nẵng',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.primary,
-                    ),
+                    trip.title,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 const Icon(Icons.chevron_right_rounded),
               ],
             ),
-            const SizedBox(height: 12),
-            Text(trip.title, style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             Text('${_date(trip.startDate)} đến ${_date(trip.endDate)}'),
             const SizedBox(height: 4),
             Text(
-              '${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}',
-              style: const TextStyle(fontSize: 12),
+              '${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}${selected ? ' · Đang xem' : ''}',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),

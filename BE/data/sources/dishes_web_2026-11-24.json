@@ -1,0 +1,233 @@
+{
+ "about": "Món chính đọc trên trang web có URL (cẩm nang ẩm thực, thực đơn của quán) -> tags.dishes source=web. id món: BE.common.DISHES. Không có URL thì không nhận.",
+ "checked_at": "2026-11-24",
+ "items": [
+  {
+   "poi_id": "osm:node/4948013624",
+   "name": "Bún chả cá 109",
+   "dishes": [
+    "bun_cha_ca"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/an-la-ghien-voi-10-quan-bun-cha-ca-da-nang-sieu-hut-khach/",
+   "quote": "Bún chả cá Nguyễn Chí Thanh Đà Nẵng — 109 Nguyễn Chí Thanh, phường Hải Châu"
+  },
+  {
+   "poi_id": "osm:node/12350543701",
+   "name": "Bún chả cá Hờn",
+   "dishes": [
+    "bun_cha_ca"
+   ],
+   "evidence_url": "https://vietnam.travel/vi/things-to-do/foodie-guide-da-nang/",
+   "quote": "Bún chả cá Bà Hờn — 113/3 Nguyễn Chí Thanh (vietnam.travel; cũng có ở VinWonders 13/12/2025)"
+  },
+  {
+   "poi_id": "osm:node/12372824403",
+   "name": "Bún chả cá Bà Hoa",
+   "dishes": [
+    "bun_cha_ca"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/an-la-ghien-voi-10-quan-bun-cha-ca-da-nang-sieu-hut-khach/",
+   "quote": "Bún chả cá Bà Hoa Đà Nẵng — 27 Lê Hồng Phong, phường Hải Châu"
+  },
+  {
+   "poi_id": "osm:node/6152679485",
+   "name": "Quán Mậu - Bánh tráng thịt heo",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/banh-trang-cuon-thit-heo/",
+   "quote": "Quán Mậu — 35 Đỗ Thúc Tịnh, phường Cẩm Lệ: bánh tráng cuốn thịt heo"
+  },
+  {
+   "poi_id": "osm:node/14064309337",
+   "name": "Đặc sản Trần",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://vietnam.travel/vi/things-to-do/da-nangs-special-pork-rolls/",
+   "quote": "Đặc sản Trần — bánh tráng cuốn thịt heo, 'bốn cơ sở' (vietnam.travel, không ghi số nhà)"
+  },
+  {
+   "poi_id": "osm:node/12612220045",
+   "name": "Quán Đại Lộc",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/banh-trang-cuon-thit-heo/",
+   "quote": "Quán bánh tráng cuốn thịt heo Đà Nẵng Trưng Nữ Vương — 95 đường Trưng Nữ Vương (VinWonders 19/07/2025; OSM ghi 'Quán Đại Lộc' số 97, coi là cùng quán)"
+  },
+  {
+   "poi_id": "osm:node/4118223691",
+   "name": "Bê thui số 3 Tuệ Tĩnh",
+   "dishes": [
+    "be_thui"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/review-mon-ngon-da-nang-top-nhung-mon-an-gay-thuong-nho-nhat-dinh-phai-thu/",
+   "quote": "Bê thui số 3 Tuệ Tĩnh — bê thui Cầu Mống, 3 Tuệ Tĩnh, Hải Châu"
+  },
+  {
+   "poi_id": "osm:node/13288511161",
+   "name": "Nhà hàng chay Ngọc Chi (Hải Châu)",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "Ngoc Chi Vegetarian Restaurant — 202 Hoang Dieu Street"
+  },
+  {
+   "poi_id": "osm:node/5947469393",
+   "name": "Bảo An Macrobiotic",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "Bao An Macrobiotic Restaurant — 56 Hoang Bich Son Street (vegetarian restaurants list)"
+  },
+  {
+   "poi_id": "osm:node/10777150405",
+   "name": "Quán chay Tỉnh Quán",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "Tinh Quan Vegetarian Restaurant — 11 Tran Nhat Duat Street"
+  },
+  {
+   "poi_id": "osm:way/1208690134",
+   "name": "Loving Vegan",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "Loving Vegan — 61 Le Quang Dao Street"
+  },
+  {
+   "poi_id": "osm:node/12905689342",
+   "name": "Chay Corner",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "CHAY corner – Vietnamese Dumplings — 17 Le Huu Trac Street"
+  },
+  {
+   "poi_id": "osm:node/11198985391",
+   "name": "iVegan",
+   "dishes": [
+    "mon_chay"
+   ],
+   "evidence_url": "https://vinwonders.com/en/wonderpedia/news/vegetarian-restaurant-in-da-nang/",
+   "quote": "IVegan Danang — Lot 31 An Thuong 4 Street"
+  },
+  {
+   "poi_id": "osm:node/2988814633",
+   "name": "Bánh bèo 291 Nguyễn Chí Thanh",
+   "dishes": [
+    "banh_beo"
+   ],
+   "evidence_url": "https://vietnam.travel/vi/things-to-do/foodie-guide-da-nang/",
+   "quote": "bánh bèo, bánh nậm, bánh bột lọc — 291 Nguyễn Chí Thanh"
+  },
+  {
+   "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
+   "name": "Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương",
+   "dishes": [
+    "mi_quang",
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://myquangbamua.com.vn/",
+   "quote": "Thực đơn chuỗi: mục 'Mỳ Quảng' và 'Bánh Tráng Cuốn Thịt Heo'; cơ sở '95A Nguyễn Tri Phương'; 'Tùy cơ sở mà thực đơn có thể thay đổi'"
+  },
+  {
+   "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+   "name": "Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường",
+   "dishes": [
+    "mi_quang",
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://myquangbamua.com.vn/",
+   "quote": "Thực đơn chuỗi: mục 'Mỳ Quảng' và 'Bánh Tráng Cuốn Thịt Heo'; cơ sở '58 Ông Ích Đường'; 'Tùy cơ sở mà thực đơn có thể thay đổi'"
+  },
+  {
+   "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
+   "name": "Mỳ Quảng Quê Xưa",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/banh-trang-cuon-thit-heo/",
+   "quote": "Quán Quê Xưa — 165 – 167 đường Núi Thành: bánh tráng cuốn thịt heo"
+  },
+  {
+   "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
+   "name": "Chợ Cồn",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/banh-trang-cuon-thit-heo/",
+   "quote": "Chợ Cồn — 225 Ông Ích Khiêm: bánh tráng cuốn thịt heo"
+  },
+  {
+   "poi_id": "ChIJu6FQjzUYQjER39TMpgQVRUs",
+   "name": "Chợ Cồn",
+   "dishes": [
+    "banh_beo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/review-mon-ngon-da-nang-top-nhung-mon-an-gay-thuong-nho-nhat-dinh-phai-thu/",
+   "quote": "bánh bèo, nậm, lọc ở chợ Cồn Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+   "name": "Khu ẩm thực Chợ Cồn",
+   "dishes": [
+    "banh_trang_thit_heo"
+   ],
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/muon-tim-quan-banh-trang-cuon-thit-heo-da-nang-chuan-vi-phai-bo-tui-ngay-danh-sach-nay-2017",
+   "quote": "Bánh tráng cuốn thịt heo chợ Cồn Bi Mỹ — khu ẩm thực chợ Cồn, Hùng Vương"
+  },
+  {
+   "poi_id": "ChIJeaPwiDUYQjERt4yUm81Oqi8",
+   "name": "Khu ẩm thực Chợ Cồn",
+   "dishes": [
+    "banh_beo"
+   ],
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/review-mon-ngon-da-nang-top-nhung-mon-an-gay-thuong-nho-nhat-dinh-phai-thu/",
+   "quote": "bánh bèo, nậm, lọc ở chợ Cồn Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJe4p5ow8YQjERbmoA9Ml2JCk",
+   "name": "Nhà hàng Chân Trời Góc Bể",
+   "dishes": [
+    "hai_san"
+   ],
+   "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+   "quote": "trong bài 'quán hải sản Đà Nẵng' của AEON Mall Đà Nẵng"
+  },
+  {
+   "poi_id": "ChIJeVJaMNUZQjERnRz_bfJ5ex4",
+   "name": "Nhà Hàng Lão Đại",
+   "dishes": [
+    "hai_san"
+   ],
+   "evidence_url": "https://danangthanhkhe.aeonmall-vietnam.com/vi/kham-pha-da-thanh/quan-hai-san-da-nang.html",
+   "quote": "trong bài 'quán hải sản Đà Nẵng' của AEON Mall Đà Nẵng"
+  },
+  {
+   "poi_id": "manual:be-man",
+   "name": "Hải Sản Bé Mặn",
+   "dishes": [
+    "hai_san"
+   ],
+   "evidence_url": "https://vietnam.travel/vi/things-to-do/foodie-guide-da-nang/",
+   "quote": "Hải sản Bé Mặn — Đường Võ Nguyên Giáp"
+  },
+  {
+   "poi_id": "manual:banh-xeo-ba-duong",
+   "name": "Bánh Xèo Bà Dưỡng",
+   "dishes": [
+    "banh_xeo"
+   ],
+   "evidence_url": "https://vietnam.travel/vi/things-to-do/foodie-guide-da-nang/",
+   "quote": "Bánh xèo Bà Dưỡng — 280/23 Hoàng Diệu"
+  }
+ ]
+}

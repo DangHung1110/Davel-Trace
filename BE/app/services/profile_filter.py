@@ -37,6 +37,13 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from BE.common import DISHES
+
+# Every way to name a dish (BE.common.DISHES), longest first, for `cuisine_terms`.
+# A POI carries the same phrases as `cuisine` (poi_view), so the haystack below
+# already sees its dishes: taste, allergy and must_avoid all read them.
+_DISH_PHRASES = tuple(sorted({p for d in DISHES.values() for p in d["aka"]}, key=len, reverse=True))
+
 # --- allergy groups (keys are folded/ASCII) --------------------------------
 ALLERGEN_GROUPS: dict[str, tuple[str, ...]] = {
     # NOTE: no bare "cua" (crab) — folded it collides with "cửa hàng" (shop).
@@ -183,7 +190,8 @@ FOOD_PREF_GROUPS: dict[str, tuple[str, ...]] = {
     "street_food": ("quán ăn nhỏ", "ăn vặt", "vỉa hè", "street food", "bánh mì",
                     "bánh xèo", "quán mì"),
     "local_cuisine": ("mì quảng", "mỳ quảng", "bánh xèo", "bún chả cá",
-                      "bánh tráng", "đặc sản", "quán mì"),
+                      "bánh tráng", "đặc sản", "quán mì", "bún mắm", "bánh canh",
+                      "cao lầu", "nem lụi", "bánh bèo", "bê thui", "cơm gà"),
     "cafe": ("cà phê", "cafe", "coffee"),
     "fine_dining": ("cao cấp", "fine dining", "nhà hàng pháp", "steakhouse"),
     "vegetarian_option": ("chay", "vegan", "vegetarian"),
@@ -268,15 +276,29 @@ def cuisine_terms(text: str) -> list[str]:
     """Cuisine words named in free text ("ăn hải sản" -> ["hải sản"]).
 
     Lets a food wish that arrived as an activity reach the taste bonus the
-    same way a `food_prefs` entry does.
+    same way a `food_prefs` entry does. A named dish comes first and whole
+    ("ăn bún chả cá" -> "bún chả cá", then "cá"), so the shop that serves it
+    outscores any fish kitchen.
     """
     raw = str(text or "").lower()
     folded = fold(raw)
     found: list[str] = []
+    for phrase in _DISH_PHRASES:
+        if any(phrase in f for f in found):
+            continue        # "chả cá" inside an already named "bún chả cá"
+        # One word must match with its accents ("chạy bộ" is not "chay"); a
+        # phrase is long enough to match text typed without them ("an chay").
+        exact = _pattern(phrase)
+        loose = _pattern(fold(phrase)) if " " in phrase else None
+        if (exact and exact.search(raw)) or (loose and loose.search(folded)):
+            found.append(phrase)
     for terms in CUISINE_CLASSES.values():
         hit = _match_terms(terms, raw, folded)
-        if hit and hit not in found:
-            found.append(hit)
+        if not hit or any(hit in f for f in found):
+            continue        # "cá" of an already named "bún chả cá"
+        if hit.isascii() and " " not in hit and not _pattern(hit).search(raw):
+            continue        # matched only once accents were dropped: "chạy" is not "chay"
+        found.append(hit)
     return found
 
 

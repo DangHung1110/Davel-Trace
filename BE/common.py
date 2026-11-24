@@ -416,7 +416,7 @@ LEGACY_TYPE_VI = {
 }
 # v2.1 tags key -> legacy smart_tags key (renamed in v2.1)
 _TAG_RENAME_BACK = {"good_times": "time", "time_budget": "budget"}
-_TAG_NOT_SMART = {"indoor", "effort", "kid_friendly", "weather_sensitive"}
+_TAG_NOT_SMART = {"indoor", "effort", "kid_friendly", "weather_sensitive", "dishes"}
 
 WEEKDAYS_V21 = ("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")   # hours.closed_days codes
 
@@ -490,6 +490,128 @@ def _fold_ascii(text: str) -> str:
     return "".join(c for c in t if unicodedata.category(c) != "Mn")
 
 
+# --------------------------------------------------------------------------
+# Dish vocabulary (`tags.dishes`, DATA_SPEC_v2_1 §2)
+# --------------------------------------------------------------------------
+# One table for the build (a dish read off the POI name or its OSM `cuisine`,
+# BE/ml/data/migrate_v2.py) and for the app (`poi_view` -> `dishes` and the
+# `cuisine` words that profile_filter / rank / the gate already match, and the
+# wish words of retrieval). A record stores dish ids only; names live here.
+#
+#   vi       display name
+#   aka      match phrases, lower case, diacritics kept: a food pref or a wish is
+#            matched against them, so a shop carries every way to say its dish
+#   name     regex on the FOLDED name (no diacritics, ASCII)
+#   name_vi  regex on the lower-cased name WITH diacritics, for one-syllable
+#            dishes where folding collides ("phở"/"phố", "chay"/"cháy", "ốc")
+#   not      folded regex that vetoes the name rule ("bún thịt nướng" is not BBQ)
+#   osm      OSM `cuisine` values that name the dish
+#   cats     legacy cats a wish for the dish looks in (default: restaurant)
+DISHES: dict[str, dict] = {
+    "bun_cha_ca": {"vi": "bún chả cá", "aka": ("bún chả cá", "chả cá"),
+                   "name": r"\bbun cha ca\b|\bcha ca\b", "not": r"\bbanh canh cha ca\b"},
+    "banh_trang_thit_heo": {"vi": "bánh tráng cuốn thịt heo",
+                            "aka": ("bánh tráng cuốn thịt heo", "bánh tráng thịt heo",
+                                    "bánh tráng cuốn", "cuốn thịt heo", "thịt heo cuốn"),
+                            "name": r"\bbanh trang (cuon )?thit heo\b|\bbanh trang cuon\b"
+                                    r"|\bcuon thit heo\b"},
+    "mi_quang": {"vi": "mì Quảng", "aka": ("mì quảng", "mỳ quảng"), "name": r"\bm[iy] quang\b"},
+    "banh_xeo": {"vi": "bánh xèo", "aka": ("bánh xèo",), "name": r"\bbanh xeo\b"},
+    "hai_san": {"vi": "hải sản", "aka": ("hải sản", "seafood"),
+                "name": r"\bhai san\b|\bseafood\b", "osm": ("seafood",)},
+    "oc": {"vi": "ốc", "aka": ("ốc",), "name_vi": r"(?<!\w)ốc(?!\w)"},
+    "mon_chay": {"vi": "món chay", "aka": ("món chay", "đồ chay", "ăn chay", "chay", "thuần chay",
+                                           "vegan", "vegetarian"),
+                 "name": r"\bvegan\b|\bvegetarian\b|\bplant based\b",
+                 "name_vi": r"(?<!\w)chay(?!\w)", "osm": ("vegan", "vegetarian", "đồ_ăn_chay")},
+    "do_nuong": {"vi": "đồ nướng", "aka": ("đồ nướng", "món nướng", "nướng", "bbq", "barbecue",
+                                           "grill", "yakiniku"),
+                 "name": r"\bbbq\b|\bbarbecue\b|\bgrill\b|\byakiniku\b",
+                 "name_vi": r"(?<!\w)nướng(?!\w)",
+                 "not": r"\bbun thit nuong\b|\bbanh trang nuong\b|\bnem nuong\b"
+                        r"|\bbanh canh ca nuong\b",
+                 "osm": ("barbecue", "bbq", "grill")},
+    "lau": {"vi": "lẩu", "aka": ("lẩu", "hot pot", "hotpot"), "name": r"\bhot ?pot\b",
+            "name_vi": r"(?<!\w)lẩu(?!\w)", "osm": ("hot_pot", "hotpot")},
+    "com_ga": {"vi": "cơm gà", "aka": ("cơm gà",), "name": r"\bcom ga\b"},
+    "banh_canh": {"vi": "bánh canh", "aka": ("bánh canh",), "name": r"\bbanh canh\b"},
+    "bun_mam": {"vi": "bún mắm", "aka": ("bún mắm", "bún mắm nêm"), "name": r"\bbun mam\b"},
+    "bun_bo": {"vi": "bún bò", "aka": ("bún bò", "bún bò huế"), "name": r"\bbun bo\b"},
+    "bun_thit_nuong": {"vi": "bún thịt nướng", "aka": ("bún thịt nướng",),
+                       "name": r"\bbun thit nuong\b"},
+    "bun_cha": {"vi": "bún chả Hà Nội", "aka": ("bún chả hà nội", "bún chả"),
+                "name": r"\bbun cha\b(?! ca\b)"},
+    "nem_lui": {"vi": "nem lụi", "aka": ("nem lụi",), "name": r"\bnem lui\b"},
+    "pho": {"vi": "phở", "aka": ("phở",), "name_vi": r"(?<!\w)phở(?!\w)"},
+    "banh_mi": {"vi": "bánh mì", "aka": ("bánh mì", "bánh mỳ"), "name": r"\bbanh m[iy]\b",
+                "cats": ("restaurant", "cafe")},
+    "cao_lau": {"vi": "cao lầu", "aka": ("cao lầu",), "name": r"\bcao lau\b"},
+    "com_nieu": {"vi": "cơm niêu", "aka": ("cơm niêu",), "name": r"\bcom nieu\b"},
+    "be_thui": {"vi": "bê thui", "aka": ("bê thui",), "name": r"\bbe thui\b"},
+    "banh_beo": {"vi": "bánh bèo", "aka": ("bánh bèo",), "name": r"\bbanh beo\b"},
+    "che": {"vi": "chè", "aka": ("chè",), "name_vi": r"(?<!\w)chè(?!\w)",
+            "cats": ("restaurant", "cafe")},
+    "sushi": {"vi": "sushi", "aka": ("sushi",), "name": r"\bsushi\b", "osm": ("sushi",)},
+    "pizza": {"vi": "pizza", "aka": ("pizza",), "name": r"\bpizza\b|\bpizzeria\b",
+              "osm": ("pizza", "italian_pizza")},
+    "bit_tet": {"vi": "bít tết", "aka": ("bít tết", "steak"),
+                "name": r"\bsteak(house)?\b|\bbit tet\b", "osm": ("steak_house",)},
+}
+# v2.1 categories that can carry dishes (what you can eat at)
+DISH_CATEGORIES = ("restaurant", "cafe", "day_market", "night_market")
+# `tags.dishes[].source`: the POI's own name (evidence = `name`), its OSM
+# element's `cuisine` tag, or a web page of the place (menu, site, food guide)
+DISH_SOURCES = ("name", "osm", "web")
+# An OSM element listing more cuisines than this is a kitchen-sink tag, not a dish
+OSM_CUISINE_MAX = 5
+
+
+def _dish_texts(name: str | None) -> tuple[str, str]:
+    import unicodedata
+    raw = unicodedata.normalize("NFC", str(name or "")).lower()
+    return raw, _fold_ascii(raw)
+
+
+def dishes_from_name(name: str | None) -> list[str]:
+    """Dish ids a POI name states ("Bún chả cá 109" -> ["bun_cha_ca"])."""
+    import re
+    raw, folded = _dish_texts(name)
+    out = []
+    for dish_id, d in DISHES.items():
+        if d.get("not") and re.search(d["not"], folded):
+            continue
+        if (d.get("name") and re.search(d["name"], folded)) or (
+                d.get("name_vi") and re.search(d["name_vi"], raw)):
+            out.append(dish_id)
+    return out
+
+
+def dishes_from_osm_cuisine(cuisine: str | None) -> list[str]:
+    """Dish ids of an OSM `cuisine` value ("vietnamese;seafood" -> ["hai_san"])."""
+    import re
+    values = [v.strip().lower() for v in re.split(r"[;,]", str(cuisine or "")) if v.strip()]
+    if not values or len(values) > OSM_CUISINE_MAX:
+        return []
+    return [dish_id for dish_id, d in DISHES.items() if set(d.get("osm") or ()) & set(values)]
+
+
+def dish_ids(poi: dict | None) -> list[str]:
+    """Known dish ids of a v2.1 record (`tags.dishes[].dish`)."""
+    tags = (poi or {}).get("tags")
+    rows = tags.get("dishes") if isinstance(tags, dict) else None
+    return [r.get("dish") for r in rows or [] if isinstance(r, dict) and r.get("dish") in DISHES]
+
+
+def dish_phrases(ids) -> list[str]:
+    """Every match phrase of these dishes, once, in table order."""
+    out: list[str] = []
+    for dish_id in ids or []:
+        for phrase in DISHES.get(dish_id, {}).get("aka", ()):
+            if phrase not in out:
+                out.append(phrase)
+    return out
+
+
 def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = None) -> dict:
     """v2.1 record -> dict with BOTH the v2.1 fields and the legacy fields the
     current services read (`opening_hours`, `visit_min`, `smart_tags`,
@@ -544,6 +666,11 @@ def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = Non
     v["cat"] = legacy_cat(cat, hours.get("archetype"))
     v["type"] = q.get("type") or LEGACY_TYPE_VI.get(cat, cat)
     v["tags"] = list(q.get("tags_v1") or []) or [LEGACY_TYPE_VI.get(cat, cat)]
+    # `tags.dishes`: display names, and every way to say them as `cuisine`, the
+    # field the taste / allergy / gate haystacks and the wish words read.
+    dishes = dish_ids(poi)
+    v["dishes"] = [DISHES[d]["vi"] for d in dishes]
+    v["cuisine"] = dish_phrases(dishes)
     # WP6: legacy `rating` (0-5 scale the rankers read) comes from the clean
     # `popularity.prize_prior` as 3 + 2*prior, so the existing thresholds
     # (4.5 "rating cao", experience fit floor 3.0) keep their meaning. Only the

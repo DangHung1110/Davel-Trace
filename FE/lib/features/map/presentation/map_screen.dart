@@ -288,32 +288,29 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
           child: PointerInterceptor(
             child: Material(
               color: AppColors.surface.withValues(alpha: .96),
-              elevation: 3,
-              shadowColor: const Color(0x22006A6A),
-              borderRadius: BorderRadius.circular(99),
+              elevation: 1,
+              borderRadius: BorderRadius.circular(12),
               child: InkWell(
                 key: const Key('open-map-replan-button'),
-                borderRadius: BorderRadius.circular(99),
+                borderRadius: BorderRadius.circular(12),
                 onTap: widget.onOpenItinerary,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 7,
+                    horizontal: 12,
+                    vertical: 8,
                   ),
                   child: Row(
                     children: [
                       const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: AppColors.surfaceLow,
+                        radius: 16,
+                        backgroundColor: AppColors.sand,
                         child: Icon(
                           Icons.arrow_back_rounded,
                           color: AppColors.primary,
                           size: 18,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.map_outlined, size: 18),
-                      const SizedBox(width: 7),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           widget.tripTitle ??
@@ -322,15 +319,11 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: AppColors.ink,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                      const Icon(
-                        Icons.chevron_right_rounded,
-                        color: AppColors.primary,
-                      ),
                     ],
                   ),
                 ),
@@ -339,122 +332,123 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
           ),
         ),
         Positioned(
-          top: 66,
+          top: 68,
           left: 12,
           right: 12,
-          child: PointerInterceptor(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _MapPill(
-                    icon: switch (widget.routePreview?.quality) {
-                      'road_route' => Icons.route_rounded,
-                      'matrix_estimate' => Icons.straighten_rounded,
-                      'interpolated' => Icons.linear_scale_rounded,
-                      _ => Icons.offline_bolt_outlined,
-                    },
-                    label: switch (widget.routePreview?.quality) {
-                      'road_route' =>
-                        'OSRM ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km',
-                      'matrix_estimate' => 'Ước tính ma trận',
-                      'interpolated' => 'Nội suy minh họa',
-                      _ => 'Chưa có tuyến',
-                    },
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (widget.stops.length > 1)
+                          _MapPill(
+                            icon: switch (widget.routePreview?.quality) {
+                              'road_route' => Icons.route_rounded,
+                              'matrix_estimate' => Icons.straighten_rounded,
+                              'interpolated' => Icons.linear_scale_rounded,
+                              _ => Icons.offline_bolt_outlined,
+                            },
+                            label: switch (widget.routePreview?.quality) {
+                              'road_route' =>
+                                'OSRM ${(widget.routePreview!.distanceM / 1000).toStringAsFixed(1)} km',
+                              'matrix_estimate' => 'Ước tính ma trận',
+                              'interpolated' => 'Nội suy minh họa',
+                              _ => 'Chưa có tuyến',
+                            },
+                          ),
+                        if (_locationMessage != null || _userLocation != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Semantics(
+                              liveRegion: true,
+                              child: _MapPill(
+                                icon: _userLocation == null
+                                    ? Icons.location_disabled_outlined
+                                    : Icons.gps_fixed,
+                                label: _locationMessage ?? _gpsLabel,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  PointerInterceptor(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 132,
+                          child: Tooltip(
+                            message: _trackingRequested
+                                ? 'Tắt GPS trực tiếp'
+                                : 'Bật GPS trực tiếp',
+                            child: FilledButton.icon(
+                              key: const Key('locate-user-button'),
+                              icon: Icon(
+                                _trackingRequested
+                                    ? Icons.gps_off_rounded
+                                    : Icons.my_location_rounded,
+                                size: 18,
+                              ),
+                              label: Text(
+                                _trackingRequested ? 'Tắt GPS' : 'Bật GPS',
+                              ),
+                              onPressed: _toggleTracking,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        _RoundMapButton(
+                          key: const Key('follow-user-button'),
+                          icon: _followUser
+                              ? Icons.gps_fixed_rounded
+                              : Icons.gps_not_fixed_rounded,
+                          tooltip: 'Về vị trí của tôi',
+                          onPressed: _userLocation == null ? null : _recenter,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ),
-        ),
-        if (_locationMessage != null || _userLocation != null)
-          Positioned(
-            top: 110,
-            left: 12,
-            right: 144,
-            child: PointerInterceptor(
-              child: Semantics(
-                liveRegion: true,
-                child: _MapPill(
-                  icon: _userLocation == null
-                      ? Icons.location_disabled_outlined
-                      : Icons.gps_fixed,
-                  label: _locationMessage ?? _gpsLabel,
-                ),
-              ),
-            ),
-          ),
-        Positioned(
-          top: 112,
-          right: 12,
-          child: PointerInterceptor(
-            child: Column(
-              children: [
-                SizedBox(
-                  width: 128,
-                  child: Tooltip(
-                    message: _trackingRequested
-                        ? 'Tắt GPS trực tiếp'
-                        : 'Bật GPS trực tiếp',
-                    child: FilledButton.icon(
-                      key: const Key('locate-user-button'),
-                      icon: Icon(
-                        _trackingRequested
-                            ? Icons.gps_off_rounded
-                            : Icons.my_location_rounded,
-                        size: 18,
+              if (_mapError != null || _outsideMapCoverage) ...[
+                const SizedBox(height: 6),
+                PointerInterceptor(
+                  child: Material(
+                    color: AppColors.surface,
+                    borderRadius: BorderRadius.circular(18),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _mapError ?? 'Vị trí GPS nằm ngoài vùng bản đồ Đà Nẵng. Bản đồ vẫn giữ ở chuyến đi của bạn.',
+                          ),
+                          if (_mapError != null)
+                            TextButton.icon(
+                              key: const Key('retry-map-button'),
+                              onPressed: () => setState(() {
+                                _mapError = null;
+                                _reloadMapRequest++;
+                              }),
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Tải lại bản đồ'),
+                            ),
+                        ],
                       ),
-                      label: Text(_trackingRequested ? 'Tắt GPS' : 'Bật GPS'),
-                      onPressed: _toggleTracking,
                     ),
                   ),
                 ),
-                const SizedBox(height: 7),
-                _RoundMapButton(
-                  key: const Key('follow-user-button'),
-                  icon: _followUser
-                      ? Icons.gps_fixed_rounded
-                      : Icons.gps_not_fixed_rounded,
-                  tooltip: 'Về vị trí của tôi',
-                  onPressed: _userLocation == null ? null : _recenter,
-                ),
               ],
-            ),
+            ],
           ),
         ),
-        if (_mapError != null || _outsideMapCoverage)
-          Positioned(
-            top: 174,
-            left: 12,
-            right: 12,
-            child: PointerInterceptor(
-              child: Material(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(18),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _mapError ?? 'Vị trí GPS nằm ngoài vùng bản đồ Đà Nẵng. Bản đồ vẫn giữ ở chuyến đi của bạn.',
-                      ),
-                      if (_mapError != null)
-                        TextButton.icon(
-                          key: const Key('retry-map-button'),
-                          onPressed: () => setState(() {
-                            _mapError = null;
-                            _reloadMapRequest++;
-                          }),
-                          icon: const Icon(Icons.refresh),
-                          label: const Text('Tải lại bản đồ'),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
         Positioned(
           left: 8,
           right: 8,
@@ -514,12 +508,13 @@ class _ActiveTripCard extends StatelessWidget {
     padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
       color: AppColors.surface,
-      borderRadius: BorderRadius.circular(28),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: AppColors.outline),
       boxShadow: const [
         BoxShadow(
-          color: Color(0x24006A6A),
-          blurRadius: 28,
-          offset: Offset(0, 10),
+          color: Color(0x18193F33),
+          blurRadius: 14,
+          offset: Offset(0, 4),
         ),
       ],
     ),
@@ -534,16 +529,9 @@ class _ActiveTripCard extends StatelessWidget {
               key: const Key('empty-map-message'),
               style: Theme.of(context).textTheme.titleMedium,
             ),
+            const SizedBox(height: 4),
+            const Text('Thêm điểm dừng hoặc chọn một phương án để xem tuyến.'),
             const SizedBox(height: 8),
-            const Text(
-              'Thêm địa điểm hoặc chọn phương án lịch trình để xem các điểm dừng và tuyến đường.',
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Bạn vẫn có thể bật GPS để xem vị trí hiện tại và theo dõi khi di chuyển.',
-              style: TextStyle(fontSize: 12, color: AppColors.muted),
-            ),
-            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
@@ -554,27 +542,6 @@ class _ActiveTripCard extends StatelessWidget {
               ),
             ),
           ] else ...[
-            const Row(
-              children: [
-                Text(
-                  'Lịch trình trên bản đồ',
-                  style: TextStyle(
-                    color: AppColors.accent,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: .8,
-                  ),
-                ),
-                Spacer(),
-                Icon(Icons.map_outlined, color: AppColors.warning, size: 15),
-                SizedBox(width: 4),
-                Text(
-                  'Đà Nẵng',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
             Row(
               children: [
                 Container(
@@ -585,7 +552,7 @@ class _ActiveTripCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13),
                   ),
                   child: const Icon(
-                    Icons.restaurant_menu_rounded,
+                    Icons.location_on_outlined,
                     color: AppColors.primary,
                   ),
                 ),
@@ -618,6 +585,7 @@ class _ActiveTripCard extends StatelessWidget {
                   ),
                 ),
                 IconButton(
+                  tooltip: 'Xem chuyến đi',
                   onPressed: onOpenPoi,
                   icon: const Icon(Icons.chevron_right_rounded),
                 ),
@@ -670,12 +638,6 @@ class _ActiveTripCard extends StatelessWidget {
                   tooltip: 'Đặt lại mô phỏng',
                   onPressed: onReset,
                   icon: const Icon(Icons.restart_alt_rounded),
-                ),
-                const SizedBox(width: 5),
-                IconButton.filledTonal(
-                  tooltip: 'Xem chuyến đi',
-                  onPressed: onOpenPoi,
-                  icon: const Icon(Icons.info_outline_rounded),
                 ),
               ],
             ),

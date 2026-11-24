@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  // Shared coastal palette across navigation and trip workflows.
-  static const primary = Color(0xFF006A6A);
-  static const primaryDark = Color(0xFF005050);
-  static const secondary = Color(0xFFD97706);
+  static const primary = Color(0xFF245644);
+  static const primaryDark = Color(0xFF193F33);
+  static const secondary = Color(0xFF865116);
   static const accent = secondary;
-  static const tertiary = Color(0xFF0284C7);
-  static const canvas = Color(0xFFF8FAFC);
-  static const surface = Color(0xFFFFFFFF);
-  static const surfaceLow = Color(0xFFF1F5F9);
-  static const surfaceHigh = Color(0xFFE2E8F0);
-  static const sand = Color(0xFFE0F2F1);
-  static const ink = Color(0xFF0F172A);
-  static const muted = Color(0xFF475569);
-  static const outline = Color(0xFFE2E8F0);
+  static const tertiary = Color(0xFF2E606C);
+  static const canvas = Color(0xFFF7F5ED);
+  static const surface = Color(0xFFFFFEF9);
+  static const surfaceLow = Color(0xFFF0EDE2);
+  static const surfaceHigh = Color(0xFFE3E7DC);
+  static const sand = Color(0xFFDDEBDC);
+  static const ink = Color(0xFF1D2821);
+  static const muted = Color(0xFF4D5B50);
+  static const outline = Color(0xFFD4DBCF);
   static const success = primary;
   static const warning = secondary;
   static const error = Color(0xFFBA1A1A);
@@ -46,19 +45,36 @@ abstract final class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AppColors.canvas,
       fontFamily: 'Be Vietnam Pro',
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.canvas,
+        foregroundColor: AppColors.ink,
+        surfaceTintColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+      ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: AppColors.primary,
+        selectionColor: AppColors.sand,
+      ),
       textTheme: const TextTheme(
         displaySmall: TextStyle(
           color: AppColors.ink,
-          fontSize: 32,
-          height: 1.25,
-          fontWeight: FontWeight.w700,
-          letterSpacing: -1,
+          fontSize: 34,
+          height: 1.14,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -.9,
         ),
         headlineMedium: TextStyle(
           color: AppColors.ink,
-          fontSize: 24,
-          height: 1.33,
-          fontWeight: FontWeight.w700,
+          fontSize: 26,
+          height: 1.24,
+          fontWeight: FontWeight.w600,
           letterSpacing: -0.6,
         ),
         titleLarge: TextStyle(
@@ -91,22 +107,22 @@ abstract final class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceLow,
+        fillColor: AppColors.surface,
         hintStyle: const TextStyle(color: AppColors.muted),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 15,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.outline),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.outline),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
       ),
@@ -114,11 +130,14 @@ abstract final class AppTheme {
         height: 68,
         elevation: 0,
         backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.primary,
+        indicatorColor: AppColors.sand,
+        indicatorShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         iconTheme: WidgetStateProperty.resolveWith(
           (states) => IconThemeData(
             color: states.contains(WidgetState.selected)
-                ? Colors.white
+                ? AppColors.primaryDark
                 : AppColors.muted,
           ),
         ),
@@ -136,11 +155,11 @@ abstract final class AppTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size(44, 48),
+          minimumSize: const Size(48, 50),
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(13),
           ),
           textStyle: const TextStyle(
             fontFamily: 'Be Vietnam Pro',
@@ -151,11 +170,11 @@ abstract final class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          minimumSize: const Size(44, 48),
+          minimumSize: const Size(48, 48),
           foregroundColor: AppColors.primary,
           side: const BorderSide(color: AppColors.outline),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(13),
           ),
           textStyle: const TextStyle(
             fontFamily: 'Be Vietnam Pro',
