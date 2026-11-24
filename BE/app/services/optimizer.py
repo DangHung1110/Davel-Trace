@@ -11,9 +11,11 @@ any solution was found: the model was NOT proven infeasible, so a caller must no
 read it as "these rules cannot be met".
 
 A falsy `StubTrip.origin_id` selects the OPEN TOUR ("drop depot legs"): the origin leg
-is not modelled, so the first activity may start at trip.start_min. The committed
-matrix has no depot cell and haversine is banned for feasibility (R4/B3). Every
-INTER-POI transition still comes from the matrix.
+is not modelled, so the first activity may start at trip.start_min. A truthy one is
+the place the day starts from (a lodging with a matrix row, or the stop a replan
+resumes from): `travel[(origin_id, poi)]` is the first leg and an edge score keyed on
+it prices arc 0 -> poi. Haversine is banned for feasibility (R4/B3): every leg,
+the first one included, comes from the matrix.
 
 Objective terms besides the score sum and the q_ij edge bonuses (T030):
 - Category diversity: a distinct-category bonus plus a penalty on every visit beyond
@@ -1149,8 +1151,12 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(t[ib] >= t[ia] + dur[ia]).OnlyEnforceIf(
                 [visit[ia], visit[ib]])
     obj = sum(int(sco[i] * 1000) * visit[i] for i in range(1, n + 1))
+    # The base a day starts from is the depot, not a stop: a score keyed on it prices
+    # the first leg (arc 0 -> j), so the first drive costs what any other drive does.
+    starts_at = ({**node, trip.origin_id: 0}
+                 if trip.origin_id and trip.origin_id not in node else node)
     for (a, b), q in (edge_scores or {}).items():
-        ia, ib = node.get(a), node.get(b)
+        ia, ib = starts_at.get(a), node.get(b)
         if ia is not None and ib is not None and ia != ib:
             obj += int(float(q) * 100) * arc[(ia, ib)]
 

@@ -127,17 +127,25 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 @_per_day
 def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Pass iff each gap fits matrix travel time; score = compliant ratio."""
+    """Pass iff each gap fits matrix travel time; score = compliant ratio.
+
+    A day that starts at a base (`trip["origin_id"]`: the lodging, or where a replan
+    resumes) also needs the drive from it before the first stop.
+    """
     acts = _ordered(itinerary)
-    if len(acts) < 2:
+    origin = trip.get("origin_id")
+    legs = [(x["poi_id"], to_min(x["end"]), y) for x, y in zip(acts, acts[1:])]
+    if origin and acts:
+        legs.insert(0, (origin, to_min(trip.get("start_time", "07:00")), acts[0]))
+    if not legs:
         return _result(True, 1.0)
     bad = 0
-    for x, y in zip(acts, acts[1:]):
-        gap = to_min(y["start"]) - to_min(x["end"])
-        need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
+    for source, ready, y in legs:
+        gap = to_min(y["start"]) - ready
+        need = (matrix.get(f"{source}->{y['poi_id']}", {}) or {}).get("minutes")
         if need is None or gap < need:
             bad += 1
-    return _result(bad == 0, 1.0 - bad / (len(acts) - 1))
+    return _result(bad == 0, 1.0 - bad / len(legs))
 
 
 def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
