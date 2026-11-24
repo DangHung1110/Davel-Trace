@@ -14,7 +14,7 @@ Neutral defaults: spending/pace/fitness = 2, outdoor_bias = 0.0, lists empty.
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class TripProfile(BaseModel):
@@ -35,9 +35,23 @@ class TripProfile(BaseModel):
 
 
 class Origin(BaseModel):
-    lat: float
-    lon: float
+    """Where each day starts: the traveller's base or the stop they are at.
+
+    `poi_id` names a place of the snapshot (a lodging, or the last stop on a replan);
+    only a place with a matrix row moves the plan, because every leg must come from
+    the matrix (gate B3, no haversine). `lat`/`lon` alone are kept for display.
+    """
+
+    lat: float | None = None
+    lon: float | None = None
     label: str = ""
+    poi_id: str | None = None
+
+    @model_validator(mode="after")
+    def _anchored(self) -> "Origin":
+        if self.poi_id is None and (self.lat is None or self.lon is None):
+            raise ValueError("origin can poi_id hoac ca lat va lon")
+        return self
 
 
 class TripRequest(BaseModel):

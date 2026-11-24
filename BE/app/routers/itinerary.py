@@ -104,6 +104,23 @@ PLAN_DETERMINISTIC_TIME = 5.0
 PLAN_WALL_LIMIT_S = 60.0
 
 
+def _origin_id(origin: dict | None, by_id: dict, cells) -> tuple[str | None, str | None]:
+    """`trip.origin` -> (the place each day starts from, why it was not usable).
+
+    Only a snapshot place with a matrix row can anchor a day (every leg comes from
+    the matrix); a bare lat/lon is not routed, so it keeps the open tour silently.
+    """
+    pid = (origin or {}).get("poi_id")
+    if not pid:
+        return None, None
+    if pid not in by_id:
+        return None, f"khong dung diem xuat phat '{pid}': khong co trong du lieu"
+    if not matrix_svc.has_row(cells, pid):
+        name = by_id[pid].get("name") or pid
+        return None, f"khong dung diem xuat phat '{name}': chua co ma tran di chuyen"
+    return pid, None
+
+
 @router.post("/itinerary")
 def itinerary(body: ItineraryIn, diverse: bool = False):
     """One plan per requested profile; omitted profiles = all three.
@@ -171,6 +188,13 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         f"khong dua vao lich '{m}': {why}" for m, why in dropped_must]
 
     cells = matrix_svc.load_cells(settings.snapshot_dir)
+    # A day that starts at the traveller's base (or where a replan resumes) charges
+    # its first drive; a base the matrix cannot route from keeps the open tour.
+    origin_id, origin_warning = _origin_id(trip.get("origin"), by_id, cells)
+    if origin_id:
+        trip["origin_id"] = origin_id
+    if origin_warning:
+        retired_warnings.append(origin_warning)
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
     # An unverified must_visit is reported under `needs_verification` (FR-013) and
     # never planned: left in the list it is a stop the solver must make and cannot,

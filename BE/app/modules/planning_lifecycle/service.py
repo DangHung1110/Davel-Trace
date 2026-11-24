@@ -84,15 +84,57 @@ def _legacy_payload(result) -> dict:
     return result
 
 
+# The profile API stores these spending styles (profiles/api.py); "economy" and
+# "premium" are the names an older client used. Anything else is the middle level.
+SPENDING_LEVEL = {"saver": 1, "economy": 1, "balanced": 2, "comfort": 3, "premium": 3}
+# What a trip may change of the profile it was created with. Hard fields (allergies,
+# must_avoid, accessibility) are refused by trips/domain.py and never come from here.
+SOFT_OVERRIDES = (
+    "party_type", "trip_purpose", "pace", "fitness", "spending_style",
+    "spending_level", "outdoor_bias", "food_preferences", "preferred_activities",
+    "usual_transport",
+)
+
+
+def _level(value) -> int | None:
+    """A 1-3 answer (pace, fitness, spending), or None when it is not one."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return int(value) if value in (1, 2, 3) else None
+
+
+def _bias(value) -> float:
+    """outdoor_bias in [-1, 1]; a missing or unreadable answer is neutral."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return 0.0
+    return max(-1.0, min(1.0, float(value)))
+
+
+def _effective_profile(snapshot: dict) -> dict:
+    """The trip's profile: the snapshot taken when the trip was created, then the
+    trip's own soft `preference_overrides` (e.g. {"outdoor_bias": 0.5})."""
+    profile = dict(snapshot.get("profile_snapshot") or {})
+    for key, value in (snapshot.get("preference_overrides") or {}).items():
+        if key in SOFT_OVERRIDES:
+            profile[key] = value
+    return profile
+
+
 def _profile(snapshot: dict) -> dict:
+    """Product profile -> the planner's onboarding profile (`TripProfile` keys).
+
+    An answer out of range falls back to the neutral value instead of failing the plan.
+    """
+    spending = _level(snapshot.get("spending_level"))
+    if spending is None:
+        spending = SPENDING_LEVEL.get(snapshot.get("spending_style"), 2)
     return {
         "party_type": snapshot.get("party_type", "solo"),
         "trip_purpose": snapshot.get("trip_purpose", "leisure"),
-        "spending_level": {
-            "economy": 1, "balanced": 2, "premium": 3
-        }.get(snapshot.get("spending_style"), 2),
-        "pace": snapshot.get("pace", 2),
-        "fitness": snapshot.get("fitness", 2),
+        "spending_level": spending,
+        "pace": _level(snapshot.get("pace")) or 2,
+        "fitness": _level(snapshot.get("fitness")) or 2,
+        "outdoor_bias": _bias(snapshot.get("outdoor_bias")),
         "food_prefs": snapshot.get("food_preferences", []),
         "allergy": snapshot.get("allergies", []),
         "activities": snapshot.get("preferred_activities", []),
@@ -100,6 +142,13 @@ def _profile(snapshot: dict) -> dict:
         "must_avoid": snapshot.get("must_avoid", []),
         "transport": snapshot.get("usual_transport", []),
     }
+
+
+def _current_poi(completed: list[str], known: dict) -> str | None:
+    """Where a replan resumes: the place of the latest finished stop (by day, then by
+    position in the day). None before any stop is done: the day starts at the base."""
+    done = [known[key] for key in completed if (known.get(key) or {}).get("poi_id")]
+    return max(done, key=lambda item: item["order"])["poi_id"] if done else None
 
 
 def _trip_request(snapshot: dict, remaining: dict) -> dict:
@@ -120,9 +169,13 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         *(remaining.get("completed_poi_ids") or []),
         *(remaining.get("skipped_poi_ids") or []),
     ]))
+    # A replan resumes from the last stop the traveller finished; a fresh plan starts
+    # at the base they chose. The planner uses it only when the matrix can route it.
+    start_at = remaining.get("current_poi_id") or snapshot.get("base_poi_id")
     return TripRequest(
         trip_id=snapshot["id"],
         user_id=snapshot.get("account_id", "owned-user"),
+        origin={"poi_id": start_at} if start_at else None,
         city="da-nang",
         date=snapshot.get("start_date", ""),
         start_time=remaining_from[:5],
@@ -135,7 +188,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         avoid=avoid,
         activities=list(snapshot.get("activities") or []),
         food_prefs=list(snapshot.get("food_preferences") or []),
-        profile=_profile(snapshot.get("profile_snapshot") or {}),
+        profile=_profile(_effective_profile(snapshot)),
     ).model_dump()
 
 
@@ -209,6 +262,7 @@ class PlanningLifecycleService:
                 "indicative_budget", "preferred_transport", "day_start",
                 "day_end", "traveler_count", "preference_overrides",
                 "must_visit", "avoid", "activities", "food_preferences",
+                "base_poi_id",
             ):
                 if field in overrides:
                     effective_snapshot[field] = overrides[field]
@@ -574,6 +628,8 @@ class PlanningLifecycleService:
                     TripActivityModel.activity_id,
                     TripActivityModel.progress_state,
                     TripActivityModel.poi_id,
+                    TripActivityModel.position,
+                    TripDayModel.position.label("day_position"),
                 )
                 .join(TripDayModel, TripDayModel.day_id == TripActivityModel.day_id)
                 .where(TripDayModel.trip_id == trip_id)
@@ -582,6 +638,7 @@ class PlanningLifecycleService:
                 str(item.activity_id): {
                     "state": item.progress_state,
                     "poi_id": item.poi_id,
+                    "order": (item.day_position, item.position),
                 }
                 for item in activity_rows
             }
@@ -611,6 +668,7 @@ class PlanningLifecycleService:
                 "unavailable_poi_ids": list(payload.get("unavailable_poi_ids") or []),
                 "changed_constraints": dict(payload.get("changed_constraints") or {}),
                 "actual_spend": float(actual_spend or 0),
+                "current_poi_id": _current_poi(completed, known),
             }
         return self.create_planning_request(
             principal,

@@ -39,6 +39,11 @@ def search_places(places: list[dict[str, Any]], query: str, kind: str | None,
     requested_kind = normalize_text(kind or "")
     matches = []
     for place in places:
+        # danang-v2.1 keeps excluded records (karaoke, hostess bars, places the user
+        # deleted) for traceability only: never offered in search, still found by id
+        # so an older trip that holds one keeps its route.
+        if place.get("status") == "excluded":
+            continue
         haystack = " ".join([
             str(place.get("name", "")), str(place.get("type", "")),
             str(place.get("cat", "")), " ".join(map(str, place.get("tags", []))),

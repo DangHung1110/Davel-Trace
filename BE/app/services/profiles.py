@@ -409,8 +409,10 @@ def score_plan(plan: dict) -> dict:
 
 
 def _to_trip(trip: dict) -> StubTrip:
-    """Open tour: the seed matrix has no depot cell (optimizer T061a)."""
-    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip), None)
+    """The day's clock and its start: the base the router resolved (`origin_id`, a
+    place with a matrix row), else the open tour (optimizer T061a)."""
+    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip),
+                    trip.get("origin_id") or None)
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -743,8 +745,15 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     wish_ids = {pid for group in act_groups for pid in group.get("poi_ids") or []}
     wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=deadline(trip),
                                   any_hour_ids=must_ids | wish_ids) if wish_ids else stubs)
-    q = _profile_edges(prof, scorer.edge_scores(ids, pois_by_id, ctx=ctx),
-                       travel)
+    edges = scorer.edge_scores(ids, pois_by_id, ctx=ctx)
+    origin_id = trip.get("origin_id")
+    if origin_id and origin_id not in ids:
+        # The day starts at the traveller's base: its first drive is a leg like any
+        # other, charged by `_profile_edges` and read by the order search and gate B3.
+        legs = matrix_svc.legs_from(cells, origin_id, ids)
+        travel.update(legs)
+        edges.update({pair: 0.0 for pair in legs})
+    q = _profile_edges(prof, edges, travel)
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no
     # profile keeps the plain planning, except in the rain: a forecast that calls
@@ -1025,7 +1034,8 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         acts, by_id, travel, to_min(trip.get("start_time", "07:00")), deadline(trip),
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
-        late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred)
+        late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred,
+        origin=trip.get("origin_id"))
     if better is None:
         return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}
