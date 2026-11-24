@@ -21,6 +21,7 @@ khi build snapshot. Giá trị nào chỉ có nguồn Google thì để trống 
 | prize_prior | v2.1: tín hiệu xếp hạng sạch 0–1 (thể loại + tiêu biểu + số trang cẩm nang + Michelin + Wikidata/Wikipedia), thay rating Google |
 | guide_mentions, michelin | số trang cẩm nang độc lập giới thiệu điểm; có trong Michelin Guide (`popularity_guides_*.json`) |
 | name_en | tên tiếng Anh từ OSM `name:en` |
+| dishes | món chính (`tags.dishes`, id của `BE.common.DISHES`, nối bằng `\|`): từ tên quán, OSM `cuisine` hoặc trang web có link |
 
 ## poi_classifier_weak.csv — nhãn yếu cho bộ phân loại POI (TF-IDF + LightGBM)
 

@@ -46,7 +46,7 @@ import unicodedata
 from functools import lru_cache
 
 from BE.app.services.profile_filter import _match_terms, fold
-from BE.common import effective_fee, load_json, party_size, to_min, view_pois
+from BE.common import DISHES, effective_fee, load_json, party_size, to_min, view_pois
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -124,6 +124,15 @@ ACTIVITY_WORDS = {
     "thuyền thúng": ("thúng",), "thủy cung": ("thủy cung", "aquarium"),
     "nấu ăn": ("nấu ăn", "cooking"), "lặn": ("lặn", "san hô", "diving"),
 }
+# Every way to name a dish of `BE.common.DISHES` is a wish too ("ăn bún chả cá",
+# "bánh tráng thịt heo"): its category, narrowed to the shops whose name or
+# `tags.dishes` (`cuisine`, poi_view) says it. Hand-written entries above win.
+for _dish in DISHES.values():
+    for _phrase in _dish["aka"]:
+        ACTIVITY_TYPE_MAP.setdefault(_phrase, list(_dish.get("cats") or ("restaurant",)))
+        ACTIVITY_WORDS.setdefault(_phrase, tuple(_dish["aka"]))
+ACTIVITY_TYPE_MAP.setdefault("bánh tráng", ["restaurant"])
+ACTIVITY_WORDS.setdefault("bánh tráng", ("bánh tráng",))
 # Hiking also counts on a viewpoint or attraction that IS a hill climb; the caves
 # of Ngũ Hành Sơn are inside that one attraction.
 ACTIVITY_EXTRA_CATS = {"núi": ["viewpoint", "attraction"], "leo núi": ["viewpoint", "attraction"],
@@ -283,6 +292,7 @@ def _poi_words(poi: dict) -> tuple[str, str]:
     """Name, type and tags as spaced lower-case words: (accented, folded)."""
     parts = [str(poi.get("name") or ""), str(poi.get("type") or "")]
     parts += [str(t) for t in poi.get("tags") or []]
+    parts += [str(t) for t in poi.get("cuisine") or []]     # tags.dishes (poi_view)
     text = unicodedata.normalize("NFC", " ".join(parts)).lower()
     spaced = " ".join(re.sub(r"[^\w/ ]+", " ", text).split())
     return f" {spaced} ", f" {fold(spaced)} "

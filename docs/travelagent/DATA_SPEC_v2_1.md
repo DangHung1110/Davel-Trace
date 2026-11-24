@@ -80,6 +80,7 @@
 | `tags.time_budget` | quick-stop-30, half-day, full-day, must-go (list) | đổi tên từ `smart_tags.budget` (không phải tiền) |
 | `tags.good_times` / `tags.party` | sunrise, morning, sunset, night / family, couple, solo, group (list, có thể rỗng) | |
 | `tags.space` | indoor, outdoor, both | `tags.indoor` = (`space` == indoor), luôn bool |
+| `tags.dishes` | `[{dish, source, url}]`; `dish` ∈ `BE.common.DISHES`; `source` ∈ name, osm, web | món chính của nơi ăn uống (restaurant, cafe, chợ); mỗi món một dòng; `web`/`osm` bắt buộc `url`, `name` = tên quán nói món. Thêm 24/11/2026 |
 | `tags.rain_cover` · `sun_exposure` · `wind_exposure` · `outdoor_exposure` | open, mixed, enclosed · 0..1 | `exposure_source`: explicit (bộ gán nhãn T063) hoặc category_prior (ước lượng theo không gian + loại cho POI OSM/nhập tay) |
 | `popularity.prize_prior` | 0–1 | tín hiệu xếp hạng sạch thay `rating` (cách tính: `DATA_FIX_PLAN.md` WP6) |
 
@@ -151,11 +152,13 @@ Cấu trúc (luôn bật):
 10. Từ vựng `category/role/status/hours.kind/tags.*` hợp lệ.
 11. **Chỉ có các khoá cấp cao nhất của mục 2** (danh sách trắng).
 12. `name` sạch (không `|`, không chữ Hàn/Trung/Nhật, ≤ 60 ký tự).
-13. **Một bộ khoá `tags` cho mọi POI** (13 khoá); không còn `rain_protection` (bỏ 21/11: "unknown" ở 941/941 POI, `rain_cover` thay thế).
+13. **Một bộ khoá `tags` cho mọi POI** (14 khoá, gồm `dishes` từ 24/11); không còn `rain_protection` (bỏ 21/11: "unknown" ở 941/941 POI, `rain_cover` thay thế).
 14. Không POI active nào có `hours.kind = unknown`. Lưu trú (base) = `00:00-23:59` safe_window (quy ước lễ tân 24h, `provenance.hours.source = rule_lodging_24h`). Lớp theo suất không có lịch suất công bố → excluded có lý do.
 15. Mọi POI active (gồm lưu trú) có hàng trong `matrix.json` (chặng khách sạn → điểm, về nghỉ trưa, về cuối ngày). `matrix.json` dùng định dạng `dense-v1` của `BE.app.services.matrix` (`ids` + mảng `minutes`/`km` theo hàng, `null` = không đi được, không bao giờ là 0 giả), profile xe máy.
 16. `exports/danang-v2/poi_features.csv` lấy từ bản ghi v2.1 cuối: trạng thái, loại, giờ, nhãn khớp `pois.json` từng POI.
 17. Tên hiển thị (POI active) không viết hoa toàn bộ, không dấu câu thừa; tên gốc ở `name_raw`. Quyết định `hours_reset` (file `decisions_*`) đưa giờ về khung an toàn theo nhóm khi nguồn giờ bị gán nhầm điểm (`danang-v1/hours_web.json` khoá theo tên).
+
+18. `tags.dishes`: id món hợp lệ, không trùng, chỉ ở nơi ăn uống; `source=name` thì tên quán khớp luật món; `web`/`osm` có `url`; cột `dishes` của `poi_features.csv` khớp.
 
 Cổng chốt dữ liệu (`P0_GATE=1`):
 - G1. Mọi POI active không phải base có hàng ma trận.
