@@ -39,6 +39,9 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   int _pauseRequest = 0;
   int _resetRequest = 0;
   int _locateRequest = 0;
+  int _reloadMapRequest = 0;
+  String? _mapError;
+  bool _outsideMapCoverage = false;
   bool _isPlaying = false;
   MapLocation? _userLocation;
   String? _locationMessage;
@@ -91,12 +94,30 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
     });
     await _cancellation;
     if (!mounted || !_canTrack || generation != _trackingGeneration) return;
+    final provider = widget.locationProvider;
+
+    bool isCurrent() =>
+        mounted && _canTrack && generation == _trackingGeneration;
+
+    void applyFix(MapLocation location) {
+      if (!isCurrent() || !location.isValid) return;
+      final previous = _userLocation;
+      if (previous?.timestamp != null &&
+          location.timestamp != null &&
+          !location.timestamp!.isAfter(previous!.timestamp!)) {
+        return;
+      }
+      setState(() {
+        _userLocation = location;
+        _locationMessage = null;
+        if (previous == null && _followUser) _locateRequest++;
+      });
+    }
+
     try {
-      _positions = widget.locationProvider.watchLocation().listen(
+      _positions = provider.watchLocation().listen(
         (result) {
-          if (!mounted || !_canTrack || generation != _trackingGeneration) {
-            return;
-          }
+          if (!isCurrent()) return;
           final location = result.location;
           if (result.status != MapLocationStatus.located || location == null) {
             _endTracking(
@@ -108,18 +129,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             );
             return;
           }
-          if (!location.isValid) return;
-          final previous = _userLocation;
-          if (previous?.timestamp != null &&
-              location.timestamp != null &&
-              !location.timestamp!.isAfter(previous!.timestamp!)) {
-            return;
-          }
-          setState(() {
-            _userLocation = location;
-            _locationMessage = null;
-            if (previous == null && _followUser) _locateRequest++;
-          });
+          applyFix(location);
         },
         onError: (Object error, StackTrace stack) {
           if (mounted && generation == _trackingGeneration) {
@@ -131,6 +141,17 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             _endTracking('GPS đã dừng. Bấm vị trí để thử lại.');
           }
         },
+      );
+      // A new watch can wait for movement. Ask for one fix in parallel so
+      // restarting GPS can restore the marker while the traveler is still.
+      unawaited(
+        Future.sync(provider.currentLocation).then((result) {
+          if (result.status == MapLocationStatus.located &&
+              result.location != null &&
+              _userLocation == null) {
+            applyFix(result.location!);
+          }
+        }, onError: (Object _) {}),
       );
     } catch (_) {
       if (mounted && generation == _trackingGeneration) {
@@ -146,6 +167,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
       _followUser = false;
       _userLocation = null;
       _locationMessage = message;
+      _outsideMapCoverage = false;
     });
   }
 
@@ -241,6 +263,22 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             routePreview: widget.routePreview,
             followUser: _followUser,
             onUserPan: _releaseCamera,
+            reloadRequest: _reloadMapRequest,
+            onMapError: (message) {
+              if (mounted && _mapError != message) {
+                setState(() => _mapError = message);
+              }
+            },
+            onMapReady: () {
+              if (mounted && _mapError != null) {
+                setState(() => _mapError = null);
+              }
+            },
+            onCoverageChanged: (inside) {
+              if (mounted && _outsideMapCoverage == inside) {
+                setState(() => _outsideMapCoverage = !inside);
+              }
+            },
           ),
         ),
         Positioned(
@@ -384,6 +422,39 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             ),
           ),
         ),
+        if (_mapError != null || _outsideMapCoverage)
+          Positioned(
+            top: 174,
+            left: 12,
+            right: 12,
+            child: PointerInterceptor(
+              child: Material(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(18),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _mapError ?? 'Vị trí GPS nằm ngoài vùng bản đồ Đà Nẵng. Bản đồ vẫn giữ ở chuyến đi của bạn.',
+                      ),
+                      if (_mapError != null)
+                        TextButton.icon(
+                          key: const Key('retry-map-button'),
+                          onPressed: () => setState(() {
+                            _mapError = null;
+                            _reloadMapRequest++;
+                          }),
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Tải lại bản đồ'),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         Positioned(
           left: 8,
           right: 8,

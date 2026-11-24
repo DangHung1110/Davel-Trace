@@ -1,5 +1,8 @@
 import 'package:davel_trace/app.dart';
 import 'package:davel_trace/app_state.dart';
+import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
+import 'package:davel_trace/features/management/data/management_repository.dart';
+import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/features/planning/data/planning_repository.dart';
 import 'package:davel_trace/features/planning/domain/models.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ class _LifecyclePlanningRepository
   final planningKeys = <String>[];
   final acceptanceKeys = <String>[];
   final replanKeys = <String>[];
+  final overrides = <Map<String, dynamic>>[];
 
   static const alternative = PlanAlternative(
     id: 'alternative-010',
@@ -29,6 +33,9 @@ class _LifecyclePlanningRepository
   @override
   Future<PlanningResult> requestPlan(Map<String, dynamic> request) async {
     planningKeys.add(request['_idempotency_key'] as String);
+    overrides.add(
+      Map<String, dynamic>.from(request['constraint_overrides'] as Map),
+    );
     return const PlanningResult(items: [alternative], requestId: 'request-010');
   }
 
@@ -79,8 +86,107 @@ class _LifecyclePlanningRepository
   Future<Map<String, dynamic>> readiness() async => {'status': 'ready'};
 }
 
+class _HotelManagement extends FakeManagementRepository
+    implements LiveManagementRepository {
+  _HotelManagement() : super(seeded: true);
+
+  static const hotel = PoiItem(
+    id: 'hotel-1',
+    name: 'Khách sạn Biển',
+    type: 'Khách sạn',
+    latitude: 16.05,
+    longitude: 108.22,
+    verified: false,
+  );
+
+  @override
+  String? activeTripId = 'trip-1';
+  @override
+  Future<void> setActiveTrip(Trip? trip) async => activeTripId = trip?.id;
+  @override
+  Future<List<PoiItem>> searchPois(String query, {String? category}) async {
+    expect(category, 'lodging');
+    return query == 'Biển' ? [hotel] : [];
+  }
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async {
+    expect(id, hotel.id);
+    return hotel;
+  }
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets(
+    'selecting, reopening and clearing a hotel changes each planning request',
+    (tester) async {
+      tester.view.physicalSize = const Size(390, 844);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final management = _HotelManagement();
+      await management.updateTrip('trip-1', {
+        'preference_overrides': {'outdoor_bias': -1.0},
+      });
+      final planning = _LifecyclePlanningRepository();
+      final state = AppState(management, planningRepository: planning);
+      await state.initialize();
+
+      Future<void> tapKey(String key) async {
+        final finder = find.byKey(Key(key));
+        await tester.ensureVisible(finder);
+        await tester.pumpAndSettle();
+        await tester.tap(finder.hitTestable());
+        await tester.pumpAndSettle();
+      }
+
+      await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
+      await tester.pumpAndSettle();
+      await tapKey('planning-hotel-button');
+      await tester.enterText(
+        find.byKey(const Key('hotel-search-field')),
+        'Biển',
+      );
+      await tapKey('hotel-search-button');
+      await tapKey('hotel-result-hotel-1');
+      expect(find.text('Khách sạn Biển'), findsOneWidget);
+      expect(management.trips.single.outdoorBias, -1.0);
+      await tapKey('request-plan-button');
+      await tapKey('request-plan-button');
+      expect(planning.overrides, [
+        {'base_poi_id': 'hotel-1'},
+        {'base_poi_id': 'hotel-1'},
+      ]);
+      state.aiProposal = AiInterpretationProposal.fromJson({
+        'proposal_id': 'proposal-1',
+        'fields': {'traveler_count': 3},
+      });
+      await state.confirmAiProposalAndPlan();
+      await tester.pumpAndSettle();
+      expect(planning.overrides.last, {
+        'traveler_count': 3,
+        'base_poi_id': 'hotel-1',
+      });
+
+      await tester.pumpWidget(const SizedBox.shrink());
+      state.dispose();
+      final reopened = AppState(management, planningRepository: planning);
+      await reopened.initialize();
+      await tester.pumpWidget(
+        MaterialApp(home: PlanningScreen(state: reopened)),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Khách sạn Biển'), findsOneWidget);
+      await tapKey('planning-clear-hotel-button');
+      await tapKey('request-plan-button');
+      expect(planning.overrides.last, isEmpty);
+      expect(management.trips.single.outdoorBias, -1.0);
+      await tester.pumpWidget(const SizedBox.shrink());
+      reopened.dispose();
+    },
+  );
 
   testWidgets('shows the phone frame and honest demo planning state', (
     tester,

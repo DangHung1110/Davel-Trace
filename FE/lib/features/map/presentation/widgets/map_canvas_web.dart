@@ -6,9 +6,12 @@ import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
+import '../../../../core/config/api_config.dart';
+
 import '../../../management/domain/models.dart';
 import '../../domain/location_state.dart';
 import '../map_stop.dart';
+import 'map_bridge_controller.dart';
 
 class MapCanvas extends StatefulWidget {
   const MapCanvas({
@@ -23,18 +26,25 @@ class MapCanvas extends StatefulWidget {
     required this.routePreview,
     this.followUser = false,
     this.onUserPan,
+    this.reloadRequest = 0,
+    this.onMapError,
+    this.onMapReady,
+    this.onCoverageChanged,
   });
 
   final List<MapStop> stops;
-  final int routeRevision;
-  final int playRequest;
-  final int pauseRequest;
-  final int resetRequest;
-  final int locateRequest;
+  final int routeRevision,
+      playRequest,
+      pauseRequest,
+      resetRequest,
+      locateRequest,
+      reloadRequest;
   final MapLocation? userLocation;
   final RoutePreviewData? routePreview;
   final bool followUser;
-  final VoidCallback? onUserPan;
+  final VoidCallback? onUserPan, onMapReady;
+  final ValueChanged<String>? onMapError;
+  final ValueChanged<bool>? onCoverageChanged;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -43,63 +53,29 @@ class MapCanvas extends StatefulWidget {
 class _MapCanvasState extends State<MapCanvas> {
   late final String _viewType;
   late final web.HTMLIFrameElement _iframe;
-  StreamSubscription<web.Event>? _loadedSubscription;
+  late final MapBridgeController _bridge;
   late final JSFunction _messageListener;
-  bool _loaded = false;
+  StreamSubscription<web.Event>? _loadSubscription;
+  Timer? _loadTimeout;
 
-  void _sendLocation({bool recenter = false}) {
-    if (!_loaded) return;
-    final location = widget.userLocation;
-    _iframe.contentWindow?.postMessage(
-      jsonEncode(
-        location == null
-            ? {'type': 'clearUserLocation'}
-            : {
-                'type': 'setUserLocation',
-                'latitude': location.latitude,
-                'longitude': location.longitude,
-                'follow': widget.followUser,
-                'recenter': recenter,
-              },
-      ).toJS,
-      web.window.location.origin.toJS,
-    );
-  }
+  String _frameUrl([int retry = 0]) => Uri(
+    path: 'map_embed.html',
+    queryParameters: {
+      'api': ApiConfig.baseUrl,
+      if (retry > 0) 'retry': '$retry',
+    },
+  ).toString();
 
-  List<Map<String, Object>> get _serializedStops => widget.stops
-      .map(
-        (stop) => <String, Object>{
-          'id': stop.id,
-          'title': stop.title,
-          'subtitle': stop.subtitle,
-          'latitude': stop.latitude,
-          'longitude': stop.longitude,
-        },
-      )
-      .toList();
-
-  String _mapUrl({required bool autoPlay}) {
-    return Uri(
-      path: 'map_embed.html',
-      queryParameters: {
-        'stops': jsonEncode(_serializedStops),
-        'autoplay': autoPlay.toString(),
-        'route': jsonEncode(widget.routePreview?.toJson()),
-      },
-    ).toString();
-  }
-
-  void _send(String type, {bool autoPlay = false}) {
-    final message = jsonEncode({
-      'type': type,
-      'stops': _serializedStops,
-      'route': widget.routePreview?.toJson(),
-      'autoPlay': autoPlay,
+  void _watchLoading() {
+    _loadTimeout?.cancel();
+    if (_bridge.ready) return;
+    _loadTimeout = Timer(const Duration(seconds: 20), () {
+      if (mounted && !_bridge.ready) {
+        widget.onMapError?.call(
+          'Bản đồ chưa tải được. Kiểm tra kết nối rồi thử lại.',
+        );
+      }
     });
-    _iframe.contentWindow?.postMessage(
-      message.toJS,
-      web.window.location.origin.toJS,
-    );
   }
 
   @override
@@ -107,17 +83,25 @@ class _MapCanvasState extends State<MapCanvas> {
     super.initState();
     _viewType = 'davel-local-pmtiles-${identityHashCode(this)}';
     _iframe = web.HTMLIFrameElement()
-      ..src = _mapUrl(autoPlay: false)
+      ..src = _frameUrl()
       ..title = 'Bản đồ 3D Đà Nẵng'
       ..setAttribute('allow', 'geolocation')
-      ..setAttribute('allowfullscreen', 'true')
       ..style.border = '0'
       ..style.width = '100%'
       ..style.height = '100%';
-    _loadedSubscription = _iframe.onLoad.listen((_) {
-      _loaded = true;
-      _sendLocation(recenter: widget.followUser);
+    _bridge = MapBridgeController((message) {
+      _iframe.contentWindow?.postMessage(
+        jsonEncode(message).toJS,
+        web.window.location.origin.toJS,
+      );
     });
+    _bridge.updateTrip(widget.stops, widget.routeRevision, widget.routePreview);
+    _bridge.updateLocation(
+      widget.userLocation,
+      follow: widget.followUser,
+      recenter: widget.followUser,
+    );
+    _loadSubscription = _iframe.onLoad.listen((_) => _watchLoading());
     _messageListener = ((web.MessageEvent event) {
       if (event.origin != web.window.location.origin ||
           !event.source.strictEquals(_iframe.contentWindow).toDart) {
@@ -126,51 +110,69 @@ class _MapCanvasState extends State<MapCanvas> {
       try {
         final raw = event.data.dartify();
         final data = raw is String ? jsonDecode(raw) : raw;
-        if (data is Map && data['type'] == 'mapUserPan') {
-          widget.onUserPan?.call();
+        if (data is! Map) return;
+        switch (data['type']) {
+          case 'mapReady':
+            _loadTimeout?.cancel();
+            _bridge.markReady();
+            widget.onMapReady?.call();
+          case 'mapError':
+            _loadTimeout?.cancel();
+            widget.onMapError?.call(
+              'Không tải được bản đồ. Kiểm tra kết nối rồi thử lại.',
+            );
+          case 'mapCoverage':
+            widget.onCoverageChanged?.call(data['inside'] == true);
+          case 'mapUserPan':
+            widget.onUserPan?.call();
         }
       } catch (_) {
         /* Ignore unrelated frame messages. */
       }
     }).toJS;
     web.window.addEventListener('message', _messageListener);
-
-    ui_web.platformViewRegistry.registerViewFactory(_viewType, (int viewId) {
-      return _iframe;
-    });
+    ui_web.platformViewRegistry.registerViewFactory(_viewType, (_) => _iframe);
+    _watchLoading();
   }
 
   @override
   void didUpdateWidget(covariant MapCanvas oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.routeRevision != oldWidget.routeRevision ||
-        widget.routePreview != oldWidget.routePreview ||
-        widget.stops != oldWidget.stops) {
-      _loaded = false;
-      _iframe.src = _mapUrl(autoPlay: false);
-    } else if (widget.playRequest != oldWidget.playRequest) {
-      _send('playRoute');
-    } else if (widget.pauseRequest != oldWidget.pauseRequest) {
-      _send('pauseRoute');
+    if (widget.reloadRequest != oldWidget.reloadRequest) {
+      _bridge.ready = false;
+      _iframe.src = _frameUrl(widget.reloadRequest);
+      _watchLoading();
     }
-    if (widget.resetRequest != oldWidget.resetRequest) _send('resetRoute');
+    _bridge.updateTrip(widget.stops, widget.routeRevision, widget.routePreview);
+    if (widget.playRequest != oldWidget.playRequest) {
+      _bridge.command('playRoute');
+    }
+    if (widget.pauseRequest != oldWidget.pauseRequest) {
+      _bridge.command('pauseRoute');
+    }
+    if (widget.resetRequest != oldWidget.resetRequest) {
+      _bridge.command('resetRoute');
+    }
     if (widget.locateRequest != oldWidget.locateRequest ||
         widget.userLocation != oldWidget.userLocation ||
         widget.followUser != oldWidget.followUser) {
-      _sendLocation(recenter: widget.locateRequest != oldWidget.locateRequest);
+      _bridge.updateLocation(
+        widget.userLocation,
+        follow: widget.followUser,
+        recenter: widget.locateRequest != oldWidget.locateRequest,
+      );
     }
   }
 
   @override
   void dispose() {
-    unawaited(_loadedSubscription?.cancel());
+    _loadTimeout?.cancel();
+    unawaited(_loadSubscription?.cancel());
     web.window.removeEventListener('message', _messageListener);
     _iframe.remove();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return HtmlElementView(viewType: _viewType);
-  }
+  Widget build(BuildContext context) => HtmlElementView(viewType: _viewType);
 }

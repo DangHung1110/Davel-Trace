@@ -77,7 +77,11 @@ def configure(app: FastAPI, settings: Settings) -> None:
             "Content-Type",
             "Idempotency-Key",
             "X-Correlation-ID",
+            "Range",
+            "If-Match",
+            "If-Range",
         ],
+        expose_headers=["Content-Range", "Accept-Ranges", "ETag"],
     )
     app.add_middleware(CorrelationMiddleware)
     for module in PUBLIC_ROUTERS:

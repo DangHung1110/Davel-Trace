@@ -29,6 +29,8 @@ class ConstraintOverrides(BaseModel):
     activities: list[str] = Field(default_factory=list, max_length=20)
     food_preferences: list[str] = Field(default_factory=list, max_length=20)
     accessibility: list[str] = Field(default_factory=list, max_length=20)
+    # Where each day starts: a lodging of the catalog (its `poi_id`).
+    base_poi_id: str | None = Field(default=None, min_length=1, max_length=128)
 
     @model_validator(mode="after")
     def validate_bounds(self):

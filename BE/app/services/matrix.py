@@ -165,6 +165,30 @@ def travel_minutes(cells: Mapping, ids: list[str]) -> dict[tuple[str, str], int]
     return travel
 
 
+def has_row(cells: Mapping, pid: str) -> bool:
+    """Does `pid` own a matrix row (can a day start there)?"""
+    if isinstance(cells, DenseCells):
+        return pid in cells._index
+    prefix = f"{pid}{ROW_SEP}"
+    return any(key.startswith(prefix) for key in cells)
+
+
+def legs_from(cells: Mapping, origin: str, ids: list[str]) -> dict[tuple[str, str], int]:
+    """{(origin, b): minutes} for every `b` of `ids` the origin's row reaches.
+
+    The first drive of a day that starts at a base (a lodging, or the stop a replan
+    resumes from), read off one row. A missing cell stays absent (B3), never 0.
+    """
+    legs: dict[tuple[str, str], int] = {}
+    for b in ids:
+        if b == origin:
+            continue
+        cell = cells.get(f"{origin}{ROW_SEP}{b}")
+        if cell is not None:
+            legs[(origin, b)] = int(cell["minutes"])
+    return legs
+
+
 def load_cells(snapshot_dir: str) -> Mapping:
     """`<snapshot_dir>/matrix.json` cells; {} when the snapshot has none."""
     try:

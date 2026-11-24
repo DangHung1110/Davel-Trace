@@ -306,6 +306,60 @@ void main() {
   );
 
   testWidgets(
+    'trip space preference preserves the saved hotel and other overrides',
+    (tester) async {
+      _viewport(tester, const Size(390, 844));
+      final trip = Trip.fromJson({
+        'id': 'trip-test',
+        'title': 'Đà Nẵng',
+        'start_date': '2026-11-28',
+        'end_date': '2026-11-29',
+        'day_start': '07:00:00',
+        'day_end': '20:00:00',
+        'travelers': 2,
+        'version': 1,
+        'preference_overrides': {
+          'base_poi_id': 'hotel-1',
+          'pace': 3,
+          'outdoor_bias': 1.0,
+        },
+      });
+      Map<String, dynamic>? submitted;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () async {
+                  submitted = await Navigator.of(context)
+                      .push<Map<String, dynamic>>(
+                        MaterialPageRoute(
+                          builder: (_) => TripEditor(trip: trip),
+                        ),
+                      );
+                },
+                child: const Text('Mở form'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Mở form'));
+      await tester.pumpAndSettle();
+      await _tap(tester, 'trip-outdoor-bias-field');
+      expect(find.text('Ưu tiên ngoài trời'), findsWidgets);
+      await tester.tap(find.text('Ưu tiên trong nhà').last);
+      await tester.pumpAndSettle();
+      await _tap(tester, 'save-trip-button');
+      expect(submitted?['preference_overrides'], {
+        'base_poi_id': 'hotel-1',
+        'pace': 3,
+        'outdoor_bias': -1.0,
+      });
+    },
+  );
+
+  testWidgets(
     'trip editor validates backend limits and stays usable with the keyboard',
     (tester) async {
       _viewport(tester, const Size(320, 640));

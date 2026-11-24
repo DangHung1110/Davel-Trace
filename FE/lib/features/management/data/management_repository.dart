@@ -41,7 +41,7 @@ abstract interface class ManagementRepository {
     String? date,
     String? category,
   });
-  Future<List<PoiItem>> searchPois(String query);
+  Future<List<PoiItem>> searchPois(String query, {String? category});
   Future<PoiItem> getPoiDetails(String id);
   Future<RoutePreviewData> previewRoute(String tripId, List<String> ids);
 }
@@ -162,7 +162,7 @@ class HttpManagementRepository implements LiveManagementRepository {
         'day_start': data['day_start'],
         'day_end': data['day_end'],
         'notes': data['notes'] ?? '',
-        'preference_overrides': const {},
+        'preference_overrides': data['preference_overrides'] ?? const {},
       },
     ) as Map<String, dynamic>,
   );
@@ -185,6 +185,8 @@ class HttpManagementRepository implements LiveManagementRepository {
         if (data['transport'] != null) 'preferred_transport': data['transport'],
         if (data['day_start'] != null) 'day_start': data['day_start'],
         if (data['day_end'] != null) 'day_end': data['day_end'],
+        if (data['preference_overrides'] != null)
+          'preference_overrides': data['preference_overrides'],
       },
     ) as Map<String, dynamic>,
   );
@@ -415,10 +417,10 @@ class HttpManagementRepository implements LiveManagementRepository {
   );
 
   @override
-  Future<List<PoiItem>> searchPois(String query) async {
+  Future<List<PoiItem>> searchPois(String query, {String? category}) async {
     final json = await _api.get(
       '/v1/pois',
-      query: {'q': query, 'limit': '30'},
+      query: {'q': query, 'limit': '30', 'category': ?category},
     ) as Map<String, dynamic>;
     return (json['items'] as List)
         .map((item) => PoiItem.fromJson(item as Map<String, dynamic>))

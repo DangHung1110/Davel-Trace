@@ -8,6 +8,7 @@ import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 import '../../planning/domain/models.dart';
 import '../../profile/presentation/profile_screen.dart';
+import 'hotel_picker.dart';
 import 'planning_request_review.dart';
 
 class ItineraryScreen extends StatelessWidget {
@@ -461,6 +462,28 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         }
       });
 
+  Future<void> _pickHotel() async {
+    final tripId = state.activeTrip?.id;
+    final hotel = await showModalBottomSheet<PoiItem>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (_) => HotelPicker(repository: state.repository),
+    );
+    if (!mounted || hotel == null || state.activeTrip?.id != tripId) return;
+    _placeNames[hotel.id] = Future.value(hotel);
+    await _saveHotel(hotel.id);
+  }
+
+  Future<void> _saveHotel(String? poiId) async {
+    try {
+      await state.setPlanningHotel(poiId);
+    } catch (_) {
+      // AppState exposes the save error in this panel.
+    }
+  }
+
   Future<void> _interpret(BuildContext context) async {
     final controller = TextEditingController();
     final text = await showDialog<String>(
@@ -563,6 +586,8 @@ class _PlanningPanelState extends State<_PlanningPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final basePoiId = state.activeTrip?.basePoiId;
+    final busy = state.isPlanning || state.isInterpreting || state.isMutating;
     final live = state.demoSource == DemoSource.live;
     final stale = state.demoSource == DemoSource.stale;
     final color = live
@@ -580,6 +605,32 @@ class _PlanningPanelState extends State<_PlanningPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (!state.isDemoManagement && state.activeTrip != null) ...[
+          ListTile(
+            key: const Key('planning-hotel-button'),
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.hotel_outlined),
+            title: const Text('Nơi lưu trú'),
+            subtitle: basePoiId == null
+                ? const Text('Chọn khách sạn làm điểm xuất phát (tùy chọn)')
+                : FutureBuilder<PoiItem?>(
+                    key: ValueKey(basePoiId),
+                    future: _resolvePlace(basePoiId),
+                    builder: (_, snapshot) =>
+                        Text(snapshot.data?.name ?? 'Đã chọn nơi lưu trú'),
+                  ),
+            onTap: busy ? null : _pickHotel,
+            trailing: basePoiId == null
+                ? const Icon(Icons.chevron_right)
+                : IconButton(
+                    key: const Key('planning-clear-hotel-button'),
+                    tooltip: 'Bỏ nơi lưu trú',
+                    onPressed: busy ? null : () => _saveHotel(null),
+                    icon: const Icon(Icons.close),
+                  ),
+          ),
+          const SizedBox(height: 8),
+        ],
         SurfaceCard(
           key: const Key('source-status-banner'),
           color: color,
@@ -630,10 +681,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
         FilledButton.icon(
           key: const Key('request-plan-button'),
-          onPressed:
-              state.isPlanning || state.isInterpreting || state.isDemoManagement
-              ? null
-              : state.requestPlan,
+          onPressed: busy || state.isDemoManagement ? null : state.requestPlan,
           icon: Icon(
             state.isPlanning ? Icons.hourglass_top : Icons.alt_route_rounded,
           ),
@@ -648,8 +696,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         const SizedBox(height: 12),
         OutlinedButton.icon(
           key: const Key('request-ai-interpretation'),
-          onPressed:
-              state.isInterpreting || state.isPlanning || state.isDemoManagement
+          onPressed: busy || state.isDemoManagement
               ? null
               : () => _interpret(context),
           icon: Icon(
@@ -707,8 +754,10 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                     ),
                     FilledButton(
                       key: const Key('confirm-ai-proposal'),
-                      onPressed: () =>
-                          ItineraryScreen._reviewProposal(context, state),
+                      onPressed: busy
+                          ? null
+                          : () =>
+                                ItineraryScreen._reviewProposal(context, state),
                       child: const Text('Xác nhận và lập lịch'),
                     ),
                   ],
@@ -799,8 +848,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               FilledButton.tonalIcon(
                 key: const Key('request-replan-button'),
                 onPressed:
-                    state.isPlanning ||
-                        !state.itineraryVersions.any((item) => item.active)
+                    busy || !state.itineraryVersions.any((item) => item.active)
                     ? null
                     : state.requestReplan,
                 icon: const Icon(Icons.refresh_rounded),
@@ -1243,6 +1291,7 @@ class _TripEditorState extends State<TripEditor> {
   late DateTime _start;
   late int _days;
   late String _transport;
+  double? _outdoorBias;
 
   @override
   void initState() {
@@ -1265,6 +1314,7 @@ class _TripEditorState extends State<TripEditor> {
         ? 2
         : trip.endDate.difference(trip.startDate).inDays + 1;
     _transport = trip?.transport ?? 'motorbike';
+    _outdoorBias = trip?.outdoorBias;
   }
 
   @override
@@ -1288,6 +1338,11 @@ class _TripEditorState extends State<TripEditor> {
       'travelers': int.parse(_travelers.text),
       'budget_vnd': int.parse(_budget.text),
       'transport': _transport,
+      if (_outdoorBias != null)
+        'preference_overrides': {
+          ...?widget.trip?.preferenceOverrides,
+          'outdoor_bias': _outdoorBias!,
+        },
     });
   }
 
@@ -1467,6 +1522,21 @@ class _TripEditorState extends State<TripEditor> {
                   }
                   return null;
                 },
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<double>(
+                key: const Key('trip-outdoor-bias-field'),
+                isExpanded: true,
+                initialValue: _outdoorBias?.sign ?? 0,
+                decoration: const InputDecoration(
+                  labelText: 'Ưu tiên không gian',
+                ),
+                items: const [
+                  DropdownMenuItem(value: -1, child: Text('Ưu tiên trong nhà')),
+                  DropdownMenuItem(value: 0, child: Text('Cân bằng')),
+                  DropdownMenuItem(value: 1, child: Text('Ưu tiên ngoài trời')),
+                ],
+                onChanged: (value) => setState(() => _outdoorBias = value),
               ),
             ],
           ),
