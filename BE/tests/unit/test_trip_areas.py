@@ -2,7 +2,8 @@
 
 - `TripRequest.areas` takes the danang-v2 `zone` codes;
 - the parser reads them from the request text ("trung tâm", "Mỹ Khê", "Hội An"...);
-- the app passes `ConstraintOverrides.areas` through the trip snapshot;
+- the app passes `ConstraintOverrides.areas` through the trip snapshot, or saves
+  the zones on the trip (`preference_overrides.areas`) for every plan and replan;
 - retrieval drops every other zone ("ngoai khu vuc"), never a must_visit, and
   changes nothing when no area is given.
 
@@ -12,6 +13,7 @@ Run: python -m pytest BE/tests/unit/test_trip_areas.py -q
 import os
 import sys
 import unittest
+from datetime import date, time
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -19,6 +21,7 @@ from pydantic import ValidationError  # noqa: E402
 
 from BE.app.modules.planning_lifecycle.api import ConstraintOverrides  # noqa: E402
 from BE.app.modules.planning_lifecycle.service import _trip_request  # noqa: E402
+from BE.app.modules.trips.domain import validate_trip  # noqa: E402
 from BE.app.schemas.trip import AREA_CODES, TripRequest  # noqa: E402
 from BE.app.services.parser import areas_in_text, parse  # noqa: E402
 from BE.app.services.profiles import _activity_warnings  # noqa: E402
@@ -228,6 +231,49 @@ class TestAppContract(unittest.TestCase):
 
     def test_no_areas_plans_anywhere(self):
         self.assertEqual(_trip_request(SNAPSHOT, {})["areas"], [])
+
+    def test_the_areas_saved_on_the_trip_reach_the_planner(self):
+        saved = {**SNAPSHOT, "preference_overrides": {"areas": ["son_tra_my_khe"],
+                                                      "base_poi_id": "hotel"}}
+        self.assertEqual(_trip_request(saved, {})["areas"], ["son_tra_my_khe"])
+
+    def test_a_replan_keeps_the_saved_areas(self):
+        saved = {**SNAPSHOT, "preference_overrides": {"areas": ["hoi_an"]}}
+        replan = {"remaining_from": "13:00", "completed_poi_ids": ["p1"],
+                  "current_poi_id": "p1"}
+        self.assertEqual(_trip_request(saved, replan)["areas"], ["hoi_an"])
+
+    def test_the_request_areas_win_for_that_request(self):
+        saved = {**SNAPSHOT, "preference_overrides": {"areas": ["hoi_an"]}}
+        self.assertEqual(_trip_request({**saved, "areas": ["trung_tam"]}, {})["areas"],
+                         ["trung_tam"])
+        # [] is an AI proposal that names no zone: the trip's own stay in force.
+        self.assertEqual(_trip_request({**saved, "areas": []}, {})["areas"], ["hoi_an"])
+
+    def test_saved_values_that_are_not_codes_are_skipped(self):
+        for saved, expected in ((["Hội An", "trung_tam"], ["trung_tam"]),
+                                ("trung_tam", []), (None, []), ({"x": 1}, []),
+                                ([["hoi_an"]], [])):
+            snapshot = {**SNAPSHOT, "preference_overrides": {"areas": saved}}
+            self.assertEqual(_trip_request(snapshot, {})["areas"], expected, saved)
+
+
+TRIP_FORM = {"title": "Đà Nẵng", "start_date": date(2026, 11, 28),
+             "end_date": date(2026, 11, 28), "traveler_count": 2,
+             "day_start": time(7), "day_end": time(18)}
+
+
+class TestSavedOnTheTrip(unittest.TestCase):
+    def test_the_trip_saves_zone_codes(self):
+        for areas in ([], ["trung_tam"], list(AREA_CODES), None):
+            validate_trip({**TRIP_FORM, "preference_overrides": {
+                "areas": areas, "base_poi_id": "hotel"}})
+        validate_trip({**TRIP_FORM, "preference_overrides": {"outdoor_bias": 0.5}})
+
+    def test_a_label_or_a_lone_code_is_refused(self):
+        for areas in (["Trung tâm"], "trung_tam", [None], ["trung_tam", "downtown"]):
+            with self.assertRaises(ValueError, msg=repr(areas)):
+                validate_trip({**TRIP_FORM, "preference_overrides": {"areas": areas}})
 
 
 if __name__ == "__main__":

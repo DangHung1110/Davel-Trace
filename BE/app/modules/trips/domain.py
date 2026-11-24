@@ -4,6 +4,7 @@ from datetime import date, timedelta
 from typing import Any
 
 from BE.app.modules.profiles.domain import HARD_FIELDS
+from BE.app.schemas.trip import AREA_CODES
 
 
 def validate_trip(data: dict[str, Any]) -> None:
@@ -19,6 +20,11 @@ def validate_trip(data: dict[str, Any]) -> None:
         raise ValueError("Giờ bắt đầu ngày phải trước giờ kết thúc.")
     if any(key in HARD_FIELDS for key in (data.get("preference_overrides") or {})):
         raise ValueError("Không thể làm yếu ràng buộc an toàn của hồ sơ.")
+    # The zones the planner keeps to (planning_lifecycle `_areas`): codes, not labels.
+    areas = (data.get("preference_overrides") or {}).get("areas")
+    if areas is not None and (not isinstance(areas, list)
+                              or any(code not in AREA_CODES for code in areas)):
+        raise ValueError("Khu vực phải là danh sách mã: " + ", ".join(AREA_CODES) + ".")
 
 
 def dates_between(start: date, end: date) -> list[date]:

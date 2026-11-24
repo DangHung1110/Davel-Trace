@@ -49,7 +49,7 @@ from BE.app.modules.planning_lifecycle.infrastructure import (
 from BE.app.modules.planning_lifecycle.stable_planner import with_product_evidence
 from BE.app.modules.trips.service import trip_public
 from BE.app.routers.itinerary import ItineraryIn, itinerary as legacy_itinerary
-from BE.app.schemas.trip import TripRequest
+from BE.app.schemas.trip import AREA_CODES, TripRequest
 
 
 Planner = Callable[[dict, int, str], dict]
@@ -151,6 +151,20 @@ def _current_poi(completed: list[str], known: dict) -> str | None:
     return max(done, key=lambda item: item["order"])["poi_id"] if done else None
 
 
+def _areas(snapshot: dict) -> list[str]:
+    """The zones a plan stays in: the request's own, else the ones saved on the trip
+    (`preference_overrides.areas`, so a replan keeps them), else anywhere.
+
+    The trip API refuses saved values that are not zone codes; any that are
+    there anyway are skipped rather than failing the plan."""
+    if snapshot.get("areas"):
+        return list(snapshot["areas"])
+    saved = (snapshot.get("preference_overrides") or {}).get("areas")
+    if not isinstance(saved, list):
+        return []
+    return [code for code in saved if code in AREA_CODES]
+
+
 def _trip_request(snapshot: dict, remaining: dict) -> dict:
     start = snapshot.get("day_start") or "07:00:00"
     end = snapshot.get("day_end") or "18:00:00"
@@ -190,7 +204,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         avoid=avoid,
         activities=list(snapshot.get("activities") or []),
         food_prefs=list(snapshot.get("food_preferences") or []),
-        areas=list(snapshot.get("areas") or []),
+        areas=_areas(snapshot),
         profile=_profile(_effective_profile(snapshot)),
     ).model_dump()
 
