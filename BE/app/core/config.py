@@ -41,7 +41,11 @@ class Settings(BaseSettings):
     llm_parse_enabled: bool = True
     llm_explanation_enabled: bool = True
     llm_shadow_enabled: bool = False
-    snapshot_dir: str = os.path.join("BE", "data", "snapshots", "danang-v1")
+    # danang-v2 (1,009 POIs, format v2.1) is read through BE.common.poi_view.
+    # BE/data/snapshots/danang-v1 (750 POIs) still loads when set explicitly.
+    snapshot_dir: str = os.path.join("BE", "data", "snapshots", "danang-v2")
+    # Empty = the folder name. Saved planning requests carry it as data_version,
+    # so a change marks their unselected alternatives stale.
     snapshot_name: str = ""
     google_places_key: str = Field(default="", repr=False)
     osrm_base_url: str = ""
@@ -98,7 +102,7 @@ class Settings(BaseSettings):
                 raise ValueError("Production Google callback requires HTTPS")
         if not self.snapshot_name:
             self.snapshot_name = (
-                os.path.basename(self.snapshot_dir.rstrip("/\\")) or "danang-v1"
+                os.path.basename(self.snapshot_dir.rstrip("/\\")) or "danang-v2"
             )
         if self.app_mode is AppMode.production:
             if self.identity_dev_outbox_enabled:

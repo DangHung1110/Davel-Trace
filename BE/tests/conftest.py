@@ -1,10 +1,13 @@
 """Shared test fixtures (T061d). Seed snapshot + snapshot helpers.
 
-Two snapshot dirs exist in this repo (CHECK-merge-blockers §2 "2 thư mục
-danang-v1"): the LOCKED 7-POI seed at `data/snapshots/danang-v1/` (root,
-used by config/quickstart S1-S7) and the big working snapshot at
-`BE/data/snapshots/danang-v1/` (750 POIs, stable planner artifacts). This module
-pins the LOCKED 7-POI seed for tests; do not point fixtures at the big one.
+Three snapshot dirs exist in this repo (two named danang-v1, see
+CHECK-merge-blockers §2): the LOCKED 7-POI seed at
+`data/snapshots/danang-v1/` (root, quickstart S1-S7), the 750-POI working
+snapshot at `BE/data/snapshots/danang-v1/` (stable planner artifacts) and
+`BE/data/snapshots/danang-v2/` (1,009 POIs, the app's default
+`SNAPSHOT_DIR`). A test names the snapshot it needs instead of reading the
+default. This module pins the LOCKED 7-POI seed; do not point its fixtures at
+a big one.
 
 Usable two ways:
 - pytest: `def test_x(seed): ...` (fixtures below).
