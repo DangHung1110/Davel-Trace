@@ -19,18 +19,19 @@ class FakeManagementRepository implements ManagementRepository {
   int _itineraryVersion = 1;
   final List<ActivityItem> activities = [];
 
-  static UserProfile _profile(String id, String name) => UserProfile(
-    id: id,
-    displayName: name,
-    partyType: 'solo',
-    tripPurpose: 'leisure',
-    spendingLevel: 2,
-    pace: 2,
-    fitness: 2,
-    foodPreferences: const [],
-    mustAvoid: const [],
-    version: 1,
-  );
+  static UserProfile _profile(String id, String name, {int fitness = 2}) =>
+      UserProfile(
+        id: id,
+        displayName: name,
+        partyType: 'solo',
+        tripPurpose: 'leisure',
+        spendingLevel: 2,
+        pace: 2,
+        fitness: fitness,
+        foodPreferences: const [],
+        mustAvoid: const [],
+        version: 1,
+      );
 
   static Trip _trip(String id, String profileId, String title) => Trip(
     id: id,
@@ -86,6 +87,7 @@ class FakeManagementRepository implements ManagementRepository {
     final item = _profile(
       'profile-${profiles.length + 1}',
       data['display_name'] as String,
+      fitness: data['fitness'] as int? ?? 2,
     );
     profiles.add(item);
     activeProfileId = item.id;
