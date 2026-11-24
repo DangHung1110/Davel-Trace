@@ -64,10 +64,25 @@ class Origin(BaseModel):
         return self
 
 
+class Resume(BaseModel):
+    """A replan in the middle of the first day of a longer trip.
+
+    That day starts at `start_time` from `origin` (where the traveller is now; None is
+    the trip's `origin`). The days after it start at the trip's `start_time` from the
+    trip's `origin`, as every day of a plan does. On a one-day trip it simply is the
+    day's `start_time` and `origin`.
+    """
+
+    start_time: str
+    origin: Origin | None = None
+
+
 class TripRequest(BaseModel):
     trip_id: str = "t1"
     user_id: str = "u1"
     origin: Origin | None = None
+    # A replan in the middle of the first day (see Resume); None: every day alike.
+    resume: Resume | None = None
     city: str = "da-nang"
     date: str = ""
     start_time: str = "07:00"
@@ -87,6 +102,15 @@ class TripRequest(BaseModel):
     # The default is the neutral profile (levels 2, bias 0, empty lists), so a
     # client that omits `profile` still sees the exact same key set it can send.
     profile: dict = Field(default_factory=lambda: TripProfile().model_dump())
+
+    @model_validator(mode="after")
+    def _one_day_resumes_at_its_start(self) -> "TripRequest":
+        """A one-day trip has no later day: `resume` is its start and its origin."""
+        if self.resume is not None and self.days == 1:
+            self.start_time = self.resume.start_time
+            self.origin = self.resume.origin or self.origin
+            self.resume = None
+        return self
 
     @field_validator("areas", mode="before")
     @classmethod

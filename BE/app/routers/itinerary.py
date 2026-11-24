@@ -195,6 +195,16 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         trip["origin_id"] = origin_id
     if origin_warning:
         retired_warnings.append(origin_warning)
+    if trip.get("resume"):
+        # A replan in the middle of the first day: that day starts later, from where the
+        # traveller is (multiday applies it to the first day only). A place the matrix
+        # cannot route leaves that day an open tour, not the base they are not at.
+        resume = trip["resume"]
+        resume_id, resume_warning = (_origin_id(resume["origin"], by_id, cells)
+                                     if resume.get("origin") else (origin_id, None))
+        trip["resume"] = {"start_time": resume["start_time"], "origin_id": resume_id}
+        if resume_warning:
+            retired_warnings.append(resume_warning)
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
     if trip.get("areas") and not any(p.get("zone") for p in pois):
         # danang-v1 has no zones: say the choice did nothing instead of ignoring it.
@@ -272,13 +282,15 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             plan.pop("warnings", None)
         return plan
 
-    day_contexts = {(trip.get("date") or "", 0): ctx}
+    day_contexts = {(trip.get("date") or "", 0, trip.get("start_time")): ctx}
 
     def day_ctx(day_trip: dict) -> dict:
         """The context of one day of the trip: day 2 has the forecast of ITS date, or
-        of the day after the first when the trip has no date (the fetch is memoized,
-        so this costs a dictionary and no network)."""
-        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0))
+        of the day after the first when the trip has no date, and a first day that
+        resumes later (`resume`) the hours it has left (the fetch is memoized, so this
+        costs a dictionary and no network)."""
+        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0),
+               day_trip.get("start_time"))
         if key not in day_contexts:
             day_contexts[key] = trip_ctx.build(day_trip, profile if profile_provided else {})
         return day_contexts[key]
