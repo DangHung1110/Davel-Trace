@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -22,6 +23,10 @@ class MapCanvas extends StatefulWidget {
     required this.routePreview,
     this.followUser = false,
     this.onUserPan,
+    this.reloadRequest = 0,
+    this.onMapError,
+    this.onMapReady,
+    this.onCoverageChanged,
   });
 
   final List<MapStop> stops;
@@ -34,6 +39,10 @@ class MapCanvas extends StatefulWidget {
   final RoutePreviewData? routePreview;
   final bool followUser;
   final VoidCallback? onUserPan;
+  final int reloadRequest;
+  final ValueChanged<String>? onMapError;
+  final VoidCallback? onMapReady;
+  final ValueChanged<bool>? onCoverageChanged;
 
   @override
   State<MapCanvas> createState() => _MapCanvasState();
@@ -59,7 +68,7 @@ class _MapCanvasState extends State<MapCanvas> {
   void didUpdateWidget(covariant MapCanvas oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.routeRevision != widget.routeRevision ||
-        oldWidget.stops != widget.stops ||
+        !listEquals(oldWidget.stops, widget.stops) ||
         oldWidget.routePreview != widget.routePreview) {
       _loadRoute(autoPlay: false);
     } else if (oldWidget.resetRequest != widget.resetRequest) {
@@ -152,6 +161,7 @@ class _MapCanvasState extends State<MapCanvas> {
           mapController: _controller,
           options: MapOptions(
             onMapReady: () {
+              widget.onMapReady?.call();
               if (widget.userLocation != null) {
                 _locateUser(recenter: widget.followUser);
               }
@@ -166,6 +176,7 @@ class _MapCanvasState extends State<MapCanvas> {
           ),
           children: [
             TileLayer(
+              key: ValueKey(widget.reloadRequest),
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'com.daveltrace.davel_trace',
               maxNativeZoom: 19,

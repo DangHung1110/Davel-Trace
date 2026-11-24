@@ -1,9 +1,11 @@
-"""Authenticated route-preview endpoint."""
+"""Authenticated route previews and public local-map byte serving."""
 
+from pathlib import Path
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
+from starlette.responses import FileResponse
 
 from BE.app.modules.catalog.domain import CatalogUnavailable
 from BE.app.modules.identity.dependencies import current_principal
@@ -12,6 +14,16 @@ from BE.app.modules.identity.service import IdentityError
 from BE.app.modules.routing.application import preview
 
 router = APIRouter(tags=["routing"])
+MAP_ARCHIVE_PATH = Path(__file__).resolve().parents[4] / "data" / "danang.pmtiles"
+
+
+@router.get("/v1/maps/danang.pmtiles")
+def map_archive():
+    """Public map data, including byte ranges required by PMTiles clients."""
+    if not MAP_ARCHIVE_PATH.is_file():
+        raise HTTPException(status_code=503, detail="Bản đồ tạm thời chưa khả dụng.")
+    return FileResponse(MAP_ARCHIVE_PATH, media_type="application/vnd.pmtiles",
+                        headers={"Cache-Control": "public, max-age=86400"})
 
 
 class RoutePreviewBody(BaseModel):

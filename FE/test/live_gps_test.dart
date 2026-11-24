@@ -20,9 +20,11 @@ class _StreamingLocation implements MapLocationProvider {
   late final StreamController<MapLocationResult> fixes;
   int listeners = 0;
   int watches = 0;
+  Future<MapLocationResult> Function()? firstFix;
   @override
-  Future<MapLocationResult> currentLocation() async =>
-      throw StateError('Use the live stream');
+  Future<MapLocationResult> currentLocation() async => firstFix != null
+      ? await firstFix!()
+      : const MapLocationResult(MapLocationStatus.unavailable);
   @override
   Stream<MapLocationResult> watchLocation() {
     watches++;
@@ -79,6 +81,76 @@ Future<void> _start(WidgetTester tester, _StreamingLocation provider) async {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  testWidgets('stationary GPS restores the marker after pan and off/on', (
+    tester,
+  ) async {
+    const fix = MapLocationResult(
+      MapLocationStatus.located,
+      location: MapLocation(latitude: 16.06, longitude: 108.22),
+    );
+    final provider = _StreamingLocation()..firstFix = () async => fix;
+    addTearDown(provider.fixes.close);
+    await _start(tester, provider);
+    expect(_canvas(tester).userLocation, fix.location);
+    _canvas(tester).onUserPan!();
+    await tester.pump();
+    expect(_canvas(tester).followUser, isFalse);
+    expect(_canvas(tester).userLocation, fix.location);
+    await tester.tap(find.byKey(const Key('locate-user-button')));
+    await _pumpGPS(tester);
+    expect(_canvas(tester).userLocation, isNull);
+    await tester.tap(find.byKey(const Key('locate-user-button')));
+    await _pumpGPS(tester);
+    expect(_canvas(tester).userLocation, fix.location);
+    expect(_canvas(tester).followUser, isTrue);
+    expect(provider.listeners, 1);
+    expect(provider.watches, 2);
+  });
+
+  testWidgets('late initial GPS fix cannot revive a stopped watch', (
+    tester,
+  ) async {
+    final pending = Completer<MapLocationResult>();
+    final provider = _StreamingLocation()..firstFix = () => pending.future;
+    addTearDown(provider.fixes.close);
+    await _start(tester, provider);
+    await tester.tap(find.byKey(const Key('locate-user-button')));
+    await _pumpGPS(tester);
+    pending.complete(
+      const MapLocationResult(
+        MapLocationStatus.located,
+        location: MapLocation(latitude: 16.06, longitude: 108.22),
+      ),
+    );
+    await _pumpGPS(tester);
+    expect(_canvas(tester).userLocation, isNull);
+    expect(provider.listeners, 0);
+  });
+  testWidgets('map retry and coverage notices do not restart the GPS watch', (
+    tester,
+  ) async {
+    final provider = _StreamingLocation();
+    addTearDown(provider.fixes.close);
+    await _start(tester, provider);
+    provider.emit(16.06);
+    await _pumpGPS(tester);
+    _canvas(tester).onMapError!('Không tải được bản đồ');
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('retry-map-button')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('retry-map-button')));
+    await tester.pumpAndSettle();
+    expect(_canvas(tester).reloadRequest, 1);
+    expect(provider.watches, 1);
+    expect(_canvas(tester).userLocation?.latitude, 16.06);
+    _canvas(tester).onCoverageChanged!(false);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ngoài vùng bản đồ Đà Nẵng'), findsOneWidget);
+    _canvas(tester).onCoverageChanged!(true);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ngoài vùng bản đồ Đà Nẵng'), findsNothing);
+    expect(provider.watches, 1);
+    expect(tester.takeException(), isNull);
+  });
   const cacheChannel = MethodChannel('plugins.flutter.io/path_provider');
   setUpAll(() async {
     await (FontLoader('Be Vietnam Pro')
