@@ -15,11 +15,13 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from BE.app.services.gate import check_bcs  # noqa: E402
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize  # noqa: E402
+from BE.app.services.profiles import _gate_view  # noqa: E402
 from BE.app.services.rank import score_poi  # noqa: E402
 from BE.common import (  # noqa: E402
-    effective_fee, fee_is_estimate, party_size, plan_cost, total_fee)
+    effective_fee, fee_is_estimate, load_pois, party_size, plan_cost, total_fee)
 
 SNAPSHOT = Path(__file__).resolve().parents[2] / "data" / "snapshots" / "danang-v1"
+SNAPSHOT_V2 = SNAPSHOT.parent / "danang-v2"
 
 
 def poi(cat="restaurant", band="medium", **extra):
@@ -91,6 +93,25 @@ class TestPlanCost(unittest.TestCase):
         self.assertEqual(check_bcs(itinerary, {"budget": 400000, "travelers": 2}, self.pois, {})["score"], 0.0)
 
 
+class TestGateSeesTheSolverPrice(unittest.TestCase):
+    """The gate judges a plan on `_gate_view` copies; BCS must price them like the
+    solver and the plan's total_cost do (all three call effective_fee)."""
+
+    # A danang-v2 restaurant: the v2.1 tier says 250k, the legacy band says 300k.
+    v2 = poi("restaurant", "medium", price={"tier": "medium"})
+
+    def test_the_gate_reads_the_v2_price_tier(self):
+        self.assertEqual(effective_fee(self.v2), 250000)
+        self.assertEqual(effective_fee(_gate_view(self.v2)), 250000)
+
+    def test_a_couple_at_the_budget_passes_bcs(self):
+        itinerary = {"activities": [{"poi_id": "p"}]}
+        trip = {"budget": 500000, "travelers": 2}
+        full, gate = {"p": self.v2}, {"p": _gate_view(self.v2)}
+        self.assertEqual(plan_cost(itinerary, gate, 2), plan_cost(itinerary, full, 2))
+        self.assertTrue(check_bcs(itinerary, trip, gate, {})["passed"])
+
+
 class TestSolverBudget(unittest.TestCase):
     def solve(self, max_fee):
         stubs = [StubPOI("free", 60, 8 * 60, 20 * 60, 1.0, fee=0),
@@ -118,6 +139,12 @@ class TestRealSnapshot(unittest.TestCase):
     def test_every_verified_poi_has_a_price(self):
         pois = json.loads((SNAPSHOT / "pois.json").read_text(encoding="utf-8"))["pois"]
         self.assertEqual([p["name"] for p in pois if p.get("verified") and effective_fee(p) is None], [])
+
+    def test_every_danang_v2_poi_costs_the_same_at_the_gate(self):
+        # 593 active places differed before the gate view carried `price`.
+        pois = load_pois(str(SNAPSHOT_V2))
+        self.assertGreater(len(pois), 1000)
+        self.assertEqual([p["name"] for p in pois if effective_fee(_gate_view(p)) != effective_fee(p)], [])
 
 
 if __name__ == "__main__":

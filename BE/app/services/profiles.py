@@ -534,8 +534,12 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # What the gate registry reads off a POI: FAR/BCS/VROH, the category for
 # A1/caps, and the PROFILE_SAFE haystack (tags/cuisine/ambience/smart_tags/
 # intensity, the same fields profile_filter.hard_filter matched).
-_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "ticket_vnd",
-               "subcat", "plan_tier", "closed_today")
+# BCS prices a stop with `effective_fee`, like the solver and the plan's total_cost,
+# so the view carries every field it reads: `price` (v2.1 tier) wins over
+# ticket_vnd/fee/smart_tags. Without it the gate fell back to the smart_tags band
+# (medium restaurant 300k where the solver paid 250k).
+_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
+               "ticket_vnd", "subcat", "plan_tier", "closed_today")
 
 
 def _gate_view(p: dict) -> dict:
