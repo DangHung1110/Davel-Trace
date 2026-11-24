@@ -1,6 +1,6 @@
 {
   "version": "v1",
-  "note": "Hand-set v1 weights (doc: Davel - Ham muc tieu v1). Units of U = the top candidate score of the pool. 24/11: beta.market 2.0 and kappa 0.6/1.2/2.0 after the first held-out run; tau 0.014 = the legacy edge travel weight (about 0.006 U/min) folded into T9, now the only place riding minutes cost. profiles: the three plans of a request are this objective under three weight sets (experience keeps the legacy 2.5x diversity). To be replaced by learned weights (same keys, new file).",
+  "note": "Hand-set v1 weights (doc: Davel - Ham muc tieu v1). Units of U = the top candidate score of the pool. 24/11 after the held-out runs: beta.market 2.0 (Cho Han + Cho Con on one day in 17/120 plans), beta.history 1.5 (two museums in 9/120), kappa 0.6/1.2/2.0 (28/120 plans over the template pace ceiling). tau 0.014 = the legacy edge travel weight of balanced/experience (~0.006 U/min) folded into T9, now the only place riding minutes cost. profiles: the three plans of a request are this objective under three weight sets. experience keeps the legacy 2.5x diversity; savings keeps its legacy edge travel weight (~0.038 U/min, tau 0.045) and doubles the pace penalty (its free stops all score near U). To be replaced by learned weights (same keys, new file).",
   "w_state": 0.5,
   "rho": [
     0.35,
@@ -13,7 +13,7 @@
     "nature": 1.0,
     "viewpoint": 0.8,
     "religious": 1.2,
-    "history": 1.0,
+    "history": 1.5,
     "urban": 0.5,
     "market": 2.0,
     "experience": 1.0,
@@ -60,7 +60,11 @@
   "w_edge": 1.0,
   "solver_candidates": 40,
   "profiles": {
-    "savings": {},
+    "savings": {
+      "tau": 0.045,
+      "pace_scale": 2.0,
+      "repeat_scale": 1.5
+    },
     "balanced": {},
     "experience": {
       "repeat_scale": 2.5
