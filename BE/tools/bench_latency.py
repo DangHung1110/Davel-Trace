@@ -6,7 +6,7 @@ forecast API would otherwise count as planner latency. Run it on the deploy
 machine: the earlier numbers come from a 12-core laptop.
 
 Usage (repo root):
-  python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1 [--rounds 3] [--days 2]
+  python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v2 [--rounds 3] [--days 2]
 
 Exits 1 when a plan fails or p95 misses the gate.
 """

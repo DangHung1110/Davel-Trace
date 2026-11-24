@@ -30,6 +30,11 @@ from BE.app.modules.identity.service import IdentityError
 from BE.app.modules.planning_lifecycle.service import PlanningLifecycleService
 from BE.app.modules.trips.service import TripService
 
+# test_stable_planner_lifecycle runs the real solver on this fixture's settings, so
+# the snapshot is pinned to the 750-POI danang-v1 it was written against instead of
+# following the app default (danang-v2).
+V1_SNAPSHOT = Path(__file__).resolve().parents[2] / "data" / "snapshots" / "danang-v1"
+
 
 def _planner(_trip: dict, target: int, _kind: str) -> dict:
     plans = []
@@ -76,6 +81,7 @@ def lifecycle(tmp_path: Path):
     settings = Settings(
         app_mode=AppMode.test,
         database_url=database_url,
+        snapshot_dir=str(V1_SNAPSHOT),
         snapshot_name="danang-test-v1",
     )
     engine = get_engine(database_url)

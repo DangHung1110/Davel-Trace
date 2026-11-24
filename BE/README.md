@@ -154,14 +154,19 @@ Thuật toán lập lịch (`BE/app/services/`, `BE/common.py`, các router `iti
 rank/score và data version của từng phương án được tính ở
 `BE/app/modules/planning_lifecycle/stable_planner.py`, không sửa planner.
 
-- `POST /v1/itinerary` đọc snapshot ở `SNAPSHOT_DIR`. Mặc định (và trong
-  `.env.example`) là dữ liệu thật `BE/data/snapshots/danang-v1` (750 POI); bộ 7 POI
-  mẫu khóa cho quickstart và test nằm ở `data/snapshots/danang-v1/`.
+- `POST /v1/itinerary` và catalog `/v1/pois` đọc snapshot ở `SNAPSHOT_DIR`. Mặc định (và trong
+  `.env.example`) là dữ liệu thật `BE/data/snapshots/danang-v2` (1.009 POI, 918 đang dùng, định
+  dạng v2.1, đọc qua `BE.common.poi_view`). `SNAPSHOT_NAME` để trống thì lấy tên thư mục
+  (`danang-v2`); giá trị này được lưu làm `data_version` của từng lần lập lịch, nên đổi nó thì
+  các phương án cũ chưa chọn bị coi là hết hạn. Bản cũ `BE/data/snapshots/danang-v1` (750 POI)
+  vẫn chạy nếu đặt `SNAPSHOT_DIR` về nó; bộ 7 POI mẫu khóa cho quickstart và test nằm ở
+  `data/snapshots/danang-v1/`. `BE/.env` chép từ `.env.example` cũ vẫn trỏ về v1: sửa hai dòng
+  `SNAPSHOT_DIR`/`SNAPSHOT_NAME` cho khớp.
 - Khi deploy, đặt `APP_MODE=production`, `DATABASE_URL` và `ALLOWED_ORIGINS=<origin của app>`
   (cách nhau bằng dấu phẩy). Khi đó API chỉ nhận trình duyệt từ các origin đó và tắt các
   router chỉ dùng cho test local (`/v1/review`, `/v1/repair`, `/v1/accept`). Ngoài production
   API nhận mọi cổng của `localhost` và `127.0.0.1`. `APP_ENV`/`CORS_ORIGINS` cũ không còn được đọc.
-- Đo độ trễ trên máy deploy: `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v1`
+- Đo độ trễ trên máy deploy: `python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v2`
   (mục tiêu p95 dưới 8 giây mỗi ngày của chuyến; thêm `--days 2` để đo lịch 2 ngày). Hai lượt đo
   của cùng một bản lệch nhau khoảng 0,2 giây, nên so hai bản thì đo xen kẽ.
 - Chấm chất lượng lịch bằng bộ quy tắc độc lập với cổng của ứng dụng (67 yêu cầu thật, 201 lịch,
