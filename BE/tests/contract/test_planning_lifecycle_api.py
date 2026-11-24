@@ -7,6 +7,7 @@ from pathlib import Path
 from uuid import UUID, uuid4
 
 import pytest
+from pydantic import ValidationError
 from sqlalchemy import create_engine, func, select
 
 from BE.app.core.config import AppMode, Settings
@@ -248,3 +249,43 @@ def test_trip_mutation_preserves_active_version_and_invalidates_open_alternative
             "pending-accept-key",
         )
     assert stale.value.code == "ALTERNATIVE_STALE"
+
+
+def test_areas_reach_the_planner_on_a_plan_and_a_replan(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    seen: list[dict] = []
+
+    def planner(trip: dict, target: int, kind: str) -> dict:
+        seen.append(trip)
+        return _planner(trip, target, kind)
+
+    capturing = PlanningLifecycleService(settings=service.settings, planner=planner)
+    capturing.create_planning_request(owner, trip_id, "plain-plan-key", target_count=1)
+    planned = capturing.create_planning_request(
+        owner, trip_id, "areas-plan-key", target_count=1,
+        constraint_overrides={"areas": ["trung_tam", "son_tra_my_khe"]},
+    )
+    assert seen[0]["areas"] == []
+    assert seen[1]["areas"] == ["trung_tam", "son_tra_my_khe"]
+    with session_scope(database_url) as session:
+        rows = {row.idempotency_key: row
+                for row in session.scalars(select(PlanningRequestModel))}
+        # No areas: the stored overrides (and the idempotency fingerprint) are unchanged.
+        assert "areas" not in rows["plain-plan-key"].input_payload["constraint_overrides"]
+        assert rows["areas-plan-key"].input_payload["trip"]["areas"] == [
+            "trung_tam", "son_tra_my_khe"]
+
+    accepted = capturing.accept(
+        owner, planned["alternatives"][0]["alternative_id"], "areas-accept-key"
+    )
+    capturing.replan(owner, trip_id, "areas-replan-key", {
+        "source_version_id": accepted["version"]["version_id"],
+        "changed_constraints": {"areas": ["hoi_an"]},
+        "target_count": 1,
+    })
+    assert seen[2]["areas"] == ["hoi_an"]
+
+    with pytest.raises(ValidationError):
+        capturing.create_planning_request(
+            owner, trip_id, "unknown-area-key", constraint_overrides={"areas": ["Hội An"]}
+        )

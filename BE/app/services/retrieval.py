@@ -35,6 +35,11 @@ meeting the wish when one of THOSE POIs is in it.
 `plan_tier` (a field of pois.json) keeps the places no traveller would look
 for out of a default plan: `local` and `wish_only` POIs come up only when a wish
 asks for them, `excluded` ones only as a must_visit.
+
+`trip.areas` (zones the traveller wants to stay in, the `zone` of a danang-v2
+POI) drops every other zone with the reason "ngoai khu vuc"; a must_visit is
+always kept. A POI without a `zone` (danang-v1 has none) cannot be placed, so it
+stays. No areas: nothing changes.
 """
 
 from __future__ import annotations
@@ -329,6 +334,13 @@ def wish_ids(activities: list[str], pois: list[dict]) -> list[str]:
     return [p["poi_id"] for p in pois if any(poi_fits_wish(p, a) for a in activities or [])]
 
 
+def in_areas(poi: dict, areas) -> bool:
+    """Is the POI in one of the trip's zones? No areas = anywhere; a POI with no
+    `zone` cannot be told apart, so it is kept."""
+    zone = poi.get("zone")
+    return not areas or not zone or zone in areas
+
+
 def uncertainty(p: dict) -> list[str]:
     """FR-024/FR-026 labels for unverified fields (never used as fact)."""
     labels = []
@@ -365,6 +377,7 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     party = party_size(trip)
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))
+    areas = set(trip.get("areas") or [])
     activities = trip.get("activities", []) or []
     types = wanted_types(activities)
     booking_ok = wants_booking(activities)
@@ -376,8 +389,9 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     def within_trip(p: dict) -> bool:
         return (effective_fee(p) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
 
+    # The local tier opens for a wish the chosen zones cannot serve with main POIs.
     usable_main = [p for p in pois if p.get("verified") and p.get("plan_tier") == "main"
-                   and p.get("poi_id") not in avoid and within_trip(p)]
+                   and p.get("poi_id") not in avoid and in_areas(p, areas) and within_trip(p)]
     short_of_main = [a for a in activities
                      if sum(poi_fits_wish(p, a) for p in usable_main) < WISH_ENOUGH_MAIN]
     for p in pois:
@@ -393,6 +407,11 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
             continue
         if p.get("status") == "excluded":
             excluded.append({"poi_id": pid, "reason": "loai khoi du lieu: " + str(p.get("status_reason") or "")})
+            continue
+        # Before the verification split: a place outside the chosen zones is not
+        # one to verify for this trip either.
+        if pid not in must and not in_areas(p, areas):
+            excluded.append({"poi_id": pid, "reason": "ngoai khu vuc"})
             continue
         if not p.get("verified"):
             entry = {"poi_id": pid, "uncertainty": uncertainty(p) + ["poi chua xac minh"],
@@ -444,16 +463,18 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
 def activity_requirements(activities: list[str], pool: list[dict],
                           banned: list[dict] | None = None,
                           unaffordable: list[dict] | None = None,
-                          horizon: tuple[int, int] | None = None
+                          horizon: tuple[int, int] | None = None,
+                          outside: list[dict] | None = None,
                           ) -> tuple[list[dict], list[dict]]:
     """Trip activities -> (`required_any` groups, per-activity report).
 
     One group per understood activity: "at least one of THESE POIs", the ones
     that really fit the wish, so a wish with no matching POI never costs a solver
-    run. `banned` is what the day's profile took out of the pool and `unaffordable`
-    what the budget did: a wish only they could meet is reported as such, not as
-    missing data. Report statuses: "required" (group emitted; the planner later marks
-    it met/relaxed), "blocked_by_profile", "over_budget", "no_verified_poi"
+    run. `banned` is what the day's profile took out of the pool, `unaffordable`
+    what the budget did and `outside` what the trip's areas did: a wish only they
+    could meet is reported as such, not as missing data. Report statuses:
+    "required" (group emitted; the planner later marks it met/relaxed),
+    "blocked_by_profile", "over_budget", "outside_areas", "no_verified_poi"
     (understood, nothing fits), "outside_trip_hours" (a sunrise on a day that starts
     at eight), "not_understood".
     """
@@ -469,6 +490,7 @@ def activity_requirements(activities: list[str], pool: list[dict],
         if not ids:
             status = ("blocked_by_profile" if any(poi_fits_wish(p, activity) for p in banned or [])
                       else "over_budget" if any(poi_fits_wish(p, activity) for p in unaffordable or [])
+                      else "outside_areas" if any(poi_fits_wish(p, activity) for p in outside or [])
                       else "no_verified_poi")
             report.append({"activity": activity, "categories": cats, "status": status})
             continue

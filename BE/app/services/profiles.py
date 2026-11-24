@@ -517,6 +517,9 @@ def _activity_warnings(match: list[dict]) -> list[str]:
                          "ngoai khung gio cua chuyen di")
         elif entry["status"] == "over_budget":
             lines.append(f"ngan sach khong du cho hoat dong '{entry['activity']}'")
+        elif entry["status"] == "outside_areas":
+            lines.append(f"khu vuc da chon khong co diem phu hop voi hoat dong "
+                         f"'{entry['activity']}'")
         elif entry["status"] == "no_verified_poi":
             lines.append(f"chua co diem da xac minh phu hop voi hoat dong "
                          f"'{entry['activity']}' trong khung gio nay")
@@ -685,9 +688,14 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
 
     # Activities -> "at least one stop of these categories" (FR-006: a
     # preference the ladder may relax with a warning, never a pool filter).
+    # A wish only another zone can meet says so, not "over budget" or "no data".
+    areas = trip.get("areas") or []
+    outside = [p for p in pois_by_id.values()
+               if p.get("verified") and not retrieval.in_areas(p, areas)] if areas else []
     act_groups, act_report = retrieval.activity_requirements(
-        activities, candidates, banned, unaffordable,
-        horizon=(to_min(trip.get("start_time", "07:00")), deadline(trip)))
+        activities, candidates, banned,
+        [p for p in unaffordable if retrieval.in_areas(p, areas)],
+        horizon=(to_min(trip.get("start_time", "07:00")), deadline(trip)), outside=outside)
 
     if not candidates:
         plan = _assemble([], {"itinerary": None,
