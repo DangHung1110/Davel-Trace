@@ -3,14 +3,14 @@
  "google_policy": "cach_ly",
  "v1_count": 750,
  "v1_meta_count": 750,
- "v2_count": 1009,
+ "v2_count": 1029,
  "status": {
-  "active": 985,
+  "active": 1005,
   "review": 20,
   "excluded": 4
  },
  "category": {
-  "restaurant": 226,
+  "restaurant": 246,
   "nightlife": 102,
   "cafe": 167,
   "day_market": 48,
@@ -25,7 +25,7 @@
   "wellness": 90
  },
  "role": {
-  "meal": 226,
+  "meal": 246,
   "nightlife": 102,
   "rest": 167,
   "attraction": 348,
@@ -33,8 +33,8 @@
   "wellness": 90
  },
  "zone": {
-  "trung_tam": 276,
-  "son_tra_my_khe": 237,
+  "trung_tam": 287,
+  "son_tra_my_khe": 246,
   "ngu_hanh_son": 80,
   "hai_van_lien_chieu": 127,
   "ba_na_tay": 40,
@@ -42,7 +42,7 @@
  },
  "zone_roles": {
   "trung_tam": {
-   "meal": 48,
+   "meal": 59,
    "nightlife": 33,
    "rest": 49,
    "attraction": 101,
@@ -50,7 +50,7 @@
    "wellness": 20
   },
   "son_tra_my_khe": {
-   "meal": 40,
+   "meal": 49,
    "nightlife": 32,
    "rest": 30,
    "attraction": 66,
@@ -95,28 +95,28 @@
   "hoi_an_old_town": 32
  },
  "hours_verified_by": {
-  "inferred": 676,
-  "agent_web": 133,
-  "open_data": 198,
+  "inferred": 682,
+  "agent_web": 139,
+  "open_data": 206,
   "user": 2
  },
  "price_verified_by": {
-  "agent_web": 87,
-  "inferred": 914,
+  "agent_web": 90,
+  "inferred": 931,
   "user": 8
  },
  "dwell_verified_by": {
-  "inferred": 971,
+  "inferred": 991,
   "user": 38
  },
- "legacy_hours_nonempty": 911,
+ "legacy_hours_nonempty": 931,
  "v1_hours_nonempty": 523,
- "legacy_price_band": 70,
+ "legacy_price_band": 73,
  "legacy_free_entry": 195,
  "hours_conflict": 3,
  "quarantined_pois": 662,
  "category_changes": 180,
- "duplicate_candidates": 10,
+ "duplicate_candidates": 11,
  "archetype_vs_google": [
   {
    "archetype": "an_toi",
@@ -198,5 +198,5 @@
   }
  ],
  "ticket_todo": 19,
- "osm_linked": 510
+ "osm_linked": 530
 }

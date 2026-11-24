@@ -11,6 +11,7 @@ from datetime import time
 from BE.app.modules.identity.dependencies import current_principal
 from BE.app.modules.identity.domain import Principal
 from BE.app.modules.planning_lifecycle.service import PlanningLifecycleService
+from BE.app.schemas.trip import AREA_CODES, Area
 
 
 router = APIRouter(tags=["planning-lifecycle"])
@@ -29,6 +30,13 @@ class ConstraintOverrides(BaseModel):
     activities: list[str] = Field(default_factory=list, max_length=20)
     food_preferences: list[str] = Field(default_factory=list, max_length=20)
     accessibility: list[str] = Field(default_factory=list, max_length=20)
+    # Where each day starts: a lodging of the catalog (its `poi_id`).
+    base_poi_id: str | None = Field(default=None, min_length=1, max_length=128)
+    # Zones the plan stays in (TripRequest.areas) for this request only; None or []
+    # = the zones saved on the trip (`preference_overrides.areas`), else anywhere.
+    # None, not [], by default: a request without areas keeps the overrides (and
+    # so the idempotency fingerprint) it had before the field existed.
+    areas: list[Area] | None = Field(default=None, max_length=len(AREA_CODES))
 
     @model_validator(mode="after")
     def validate_bounds(self):

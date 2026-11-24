@@ -17,13 +17,26 @@ def _hard_checks(validation: dict) -> dict:
             if name not in SOFT_CHECKS}
 
 
+def _legs(acts: list[dict], origin: str | None) -> list[tuple[str, str]]:
+    """The drives of a plan: stop to stop, and from the base to each day's first stop
+    when the trip starts at one (a day never starts where the last one ended)."""
+    legs = []
+    for i, act in enumerate(acts):
+        new_day = i == 0 or act.get("day") != acts[i - 1].get("day")
+        if new_day and origin:
+            legs.append((origin, act["poi_id"]))
+        elif i > 0:
+            legs.append((acts[i - 1]["poi_id"], act["poi_id"]))
+    return legs
+
+
 def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
     """Everything a plan derives from its stops: route, money, minutes, mean rating."""
     segments, total_km, travel_min = [], 0.0, 0
-    for x, y in zip(acts, acts[1:]):
-        cell = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {})
+    for a, b in _legs(acts, trip.get("origin_id")):
+        cell = (matrix.get(f"{a}->{b}", {}) or {})
         km, minutes = float(cell.get("km", 0.0)), int(cell.get("minutes", 0))
-        segments.append({"from_id": x["poi_id"], "to_id": y["poi_id"],
+        segments.append({"from_id": a, "to_id": b,
                          "mode": "motorbike", "km": km, "minutes": minutes,
                          "source": "cache"})
         total_km += km

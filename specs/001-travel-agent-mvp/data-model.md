@@ -12,8 +12,8 @@ All entities Pydantic-validated (see `contracts/api.md`).
 - Relations: 1 User → N TripRequests, N Expenses, N EvaluationRecords.
 
 ### TripRequest
-- Fields: `trip_id`, `user_id`, `origin{lat,lon,label}`, `city` (=`da-nang` MVP), `date`, `start_time`, `end_time`, `days` 1–2, `travelers`, `budget`, `transport[]`, `must_visit[]`, `avoid[]`, `activities[]`, `food_prefs`, `order_prefs[]`.
-- Validation: city/time present or clarification (FR-005); budget ≥0; days ≤2.
+- Fields: `trip_id`, `user_id`, `origin{lat,lon,label}`, `city` (=`da-nang` MVP), `date`, `start_time`, `end_time`, `days` 1–2, `travelers`, `budget`, `transport[]`, `must_visit[]`, `avoid[]`, `activities[]`, `food_prefs`, `order_prefs[]`, `areas[]` (mã `zone` của danang-v2; rỗng = mọi khu), `resume{start_time, origin?}` (replan giữa ngày đầu: ngày 1 bắt đầu lúc đó, từ điểm đó; các ngày sau như `start_time`/`origin`; mặc định `null`).
+- Validation: city/time present or clarification (FR-005); budget ≥0; days ≤2; `areas` chỉ nhận 6 mã khu vực.
 - State: `draft → confirmed → planned → active → done`; `active` + delta → `replanning`.
 
 ### POI (snapshot, TravelEval schema)

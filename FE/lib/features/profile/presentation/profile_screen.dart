@@ -324,6 +324,7 @@ class ProfileEditorState extends State<ProfileEditor> {
   late String _party;
   late String _purpose;
   late double _pace;
+  late double _fitness;
   late double _spending;
 
   @override
@@ -350,6 +351,7 @@ class ProfileEditorState extends State<ProfileEditor> {
     _party = profile?.partyType ?? 'solo';
     _purpose = profile?.tripPurpose ?? 'leisure';
     _pace = (profile?.pace ?? 2).toDouble();
+    _fitness = (profile?.fitness ?? 2).toDouble();
     _spending = (profile?.spendingLevel ?? 2).toDouble();
   }
 
@@ -374,7 +376,7 @@ class ProfileEditorState extends State<ProfileEditor> {
       'trip_purpose': _purpose,
       'spending_level': _spending.round(),
       'pace': _pace.round(),
-      'fitness': 2,
+      'fitness': _fitness.round(),
       'food_preferences': _food.text
           .split(',')
           .map((item) => item.trim())
@@ -505,6 +507,18 @@ class ProfileEditorState extends State<ProfileEditor> {
             max: 3,
             divisions: 2,
             onChanged: (value) => setState(() => _pace = value),
+          ),
+          Text(
+            'Thể lực · ${_fitness.round()}/3',
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          Slider(
+            key: const Key('profile-fitness-slider'),
+            value: _fitness,
+            min: 1,
+            max: 3,
+            divisions: 2,
+            onChanged: (value) => setState(() => _fitness = value),
           ),
           Text(
             'Mức chi · ${_spending.round()}/3',

@@ -82,12 +82,28 @@ def split_days(itinerary: dict) -> list[dict]:
     return [{**itinerary, "activities": days[day]} for day in sorted(days, key=lambda d: d or 0)]
 
 
+def day_trip(day: dict, trip: dict) -> dict:
+    """The trip one day of a plan is judged by. A replan in the middle of the first
+    day (`trip["resume"]`) starts that day later and where the traveller is; every
+    other day keeps the trip's start and origin."""
+    resume = trip.get("resume")
+    acts = day.get("activities") or []
+    if not resume or not acts or any(a.get("day", 1) != 1 for a in acts):
+        return trip
+    first = {key: value for key, value in trip.items() if key != "resume"}
+    first["start_time"] = resume.get("start_time") or trip.get("start_time")
+    if "origin_id" in resume:  # resolved by the router; None is an open tour
+        first["origin_id"] = resume["origin_id"]
+    return first
+
+
 def _per_day(check):
     """A rule of one day: on a longer trip every day must pass it on its own
     (clock times repeat across days, and each day has its own caps and lunch)."""
     @functools.wraps(check)
     def wrapped(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-        results = [check(day, trip, pois, matrix) for day in split_days(itinerary)]
+        results = [check(day, day_trip(day, trip), pois, matrix)
+                   for day in split_days(itinerary)]
         return _result(all(r["passed"] for r in results), min(r["score"] for r in results))
     return wrapped
 
@@ -133,17 +149,25 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 @_per_day
 def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Pass iff each gap fits matrix travel time; score = compliant ratio."""
+    """Pass iff each gap fits matrix travel time; score = compliant ratio.
+
+    A day that starts at a base (`trip["origin_id"]`: the lodging, or where a replan
+    resumes) also needs the drive from it before the first stop.
+    """
     acts = _ordered(itinerary)
-    if len(acts) < 2:
+    origin = trip.get("origin_id")
+    legs = [(x["poi_id"], to_min(x["end"]), y) for x, y in zip(acts, acts[1:])]
+    if origin and acts:
+        legs.insert(0, (origin, to_min(trip.get("start_time", "07:00")), acts[0]))
+    if not legs:
         return _result(True, 1.0)
     bad = 0
-    for x, y in zip(acts, acts[1:]):
-        gap = to_min(y["start"]) - to_min(x["end"])
-        need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
+    for source, ready, y in legs:
+        gap = to_min(y["start"]) - ready
+        need = (matrix.get(f"{source}->{y['poi_id']}", {}) or {}).get("minutes")
         if need is None or gap < need:
             bad += 1
-    return _result(bad == 0, 1.0 - bad / (len(acts) - 1))
+    return _result(bad == 0, 1.0 - bad / len(legs))
 
 
 def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:

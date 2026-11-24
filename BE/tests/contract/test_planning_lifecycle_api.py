@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from datetime import date, time
+from datetime import date, datetime, time, timezone
 from pathlib import Path
 from uuid import UUID, uuid4
 
 import pytest
+from pydantic import ValidationError
 from sqlalchemy import create_engine, func, select
 
 from BE.app.core.config import AppMode, Settings
@@ -20,6 +21,7 @@ from BE.app.db.models import (
     ItineraryVersionTransitionModel,
     PlanningRequestModel,
     TravelerProfileModel,
+    TripActivityModel,
     TripDayModel,
     TripModel,
 )
@@ -28,6 +30,11 @@ from BE.app.modules.identity.domain import Principal
 from BE.app.modules.identity.service import IdentityError
 from BE.app.modules.planning_lifecycle.service import PlanningLifecycleService
 from BE.app.modules.trips.service import TripService
+
+# test_stable_planner_lifecycle runs the real solver on this fixture's settings, so
+# the snapshot is pinned to the 750-POI danang-v1 it was written against instead of
+# following the app default (danang-v2).
+V1_SNAPSHOT = Path(__file__).resolve().parents[2] / "data" / "snapshots" / "danang-v1"
 
 
 def _planner(_trip: dict, target: int, _kind: str) -> dict:
@@ -75,6 +82,7 @@ def lifecycle(tmp_path: Path):
     settings = Settings(
         app_mode=AppMode.test,
         database_url=database_url,
+        snapshot_dir=str(V1_SNAPSHOT),
         snapshot_name="danang-test-v1",
     )
     engine = get_engine(database_url)
@@ -248,3 +256,194 @@ def test_trip_mutation_preserves_active_version_and_invalidates_open_alternative
             "pending-accept-key",
         )
     assert stale.value.code == "ALTERNATIVE_STALE"
+
+
+def test_areas_reach_the_planner_on_a_plan_and_a_replan(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    seen: list[dict] = []
+
+    def planner(trip: dict, target: int, kind: str) -> dict:
+        seen.append(trip)
+        return _planner(trip, target, kind)
+
+    capturing = PlanningLifecycleService(settings=service.settings, planner=planner)
+    capturing.create_planning_request(owner, trip_id, "plain-plan-key", target_count=1)
+    planned = capturing.create_planning_request(
+        owner, trip_id, "areas-plan-key", target_count=1,
+        constraint_overrides={"areas": ["trung_tam", "son_tra_my_khe"]},
+    )
+    assert seen[0]["areas"] == []
+    assert seen[1]["areas"] == ["trung_tam", "son_tra_my_khe"]
+    with session_scope(database_url) as session:
+        rows = {row.idempotency_key: row
+                for row in session.scalars(select(PlanningRequestModel))}
+        # No areas: the stored overrides (and the idempotency fingerprint) are unchanged.
+        assert "areas" not in rows["plain-plan-key"].input_payload["constraint_overrides"]
+        assert rows["areas-plan-key"].input_payload["trip"]["areas"] == [
+            "trung_tam", "son_tra_my_khe"]
+
+    accepted = capturing.accept(
+        owner, planned["alternatives"][0]["alternative_id"], "areas-accept-key"
+    )
+    capturing.replan(owner, trip_id, "areas-replan-key", {
+        "source_version_id": accepted["version"]["version_id"],
+        "changed_constraints": {"areas": ["hoi_an"]},
+        "target_count": 1,
+    })
+    assert seen[2]["areas"] == ["hoi_an"]
+
+    with pytest.raises(ValidationError):
+        capturing.create_planning_request(
+            owner, trip_id, "unknown-area-key", constraint_overrides={"areas": ["Hội An"]}
+        )
+
+
+# --- replans: the rest of the trip, from now, with what was confirmed before ----------
+
+def _utc(day: int, hour: int, minute: int = 0) -> datetime:
+    return datetime(2026, 11, day, hour, minute, tzinfo=timezone.utc)
+
+
+def _second_day(database_url: str, trip_id: UUID) -> None:
+    """The fixture trip, 10 November, gets an 11 November too."""
+    with session_scope(database_url) as session:
+        session.get(TripModel, trip_id).end_date = date(2026, 11, 11)
+        session.add(TripDayModel(trip_id=trip_id, local_date=date(2026, 11, 11), position=1))
+
+
+def _finish_first_stop(database_url: str, trip_id: UUID, poi_id: str) -> None:
+    with session_scope(database_url) as session:
+        day = session.scalar(select(TripDayModel).where(
+            TripDayModel.trip_id == trip_id, TripDayModel.position == 0))
+        session.add(TripActivityModel(day_id=day.day_id, title="Cà phê", poi_id=poi_id,
+                                      progress_state="completed", position=0))
+
+
+def _capturing(service, clock):
+    seen: list[dict] = []
+
+    def planner(trip: dict, target: int, kind: str) -> dict:
+        seen.append(trip)
+        return _planner(trip, target, kind)
+
+    return PlanningLifecycleService(service.settings, planner=planner, clock=clock), seen
+
+
+def _accepted(service, owner, trip_id, key, **overrides):
+    planned = service.create_planning_request(
+        owner, trip_id, f"{key}-plan", target_count=1, constraint_overrides=overrides or None)
+    return service.accept(owner, planned["alternatives"][0]["alternative_id"],
+                          f"{key}-accept")["version"]["version_id"]
+
+
+def test_a_replan_plans_the_rest_of_the_trip_from_now(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    _second_day(database_url, trip_id)
+    # 07:05 UTC is 14:05 in Đà Nẵng, on the first day of the trip.
+    planning, seen = _capturing(service, lambda: _utc(10, 7, 5))
+    source = _accepted(planning, owner, trip_id, "rest", base_poi_id="hotel-1")
+    _finish_first_stop(database_url, trip_id, "cafe-1")
+
+    replanned = planning.replan(owner, trip_id, "rest-replan", {
+        "source_version_id": source, "target_count": 1})
+
+    fresh, replan = seen
+    # A fresh plan still covers the whole trip, whatever the time.
+    assert (fresh["date"], fresh["days"], fresh["start_time"]) == ("2026-11-10", 2, "07:00")
+    assert fresh["resume"] is None
+    # The replan: today from now and from the cafe, tomorrow from the hotel at 07:00.
+    assert (replan["date"], replan["days"], replan["start_time"]) == ("2026-11-10", 2, "07:00")
+    assert replan["origin"]["poi_id"] == "hotel-1"
+    assert replan["resume"]["start_time"] == "14:05"
+    assert replan["resume"]["origin"]["poi_id"] == "cafe-1"
+    assert "cafe-1" in replan["avoid"]
+    window = {"day": 1, "date": "2026-11-10", "days": 2, "start_time": "14:05"}
+    assert replanned["remaining_context"]["window"] == window
+    assert replanned["alternatives"][0]["plan"]["window"] == window
+
+
+def test_a_replan_on_the_second_day_plans_that_day_alone(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    _second_day(database_url, trip_id)
+    planning, seen = _capturing(service, lambda: _utc(11, 2, 15))  # 09:15 on day 2
+    source = _accepted(planning, owner, trip_id, "second", base_poi_id="hotel-1")
+    _finish_first_stop(database_url, trip_id, "cafe-1")
+
+    planning.replan(owner, trip_id, "second-replan", {"source_version_id": source})
+
+    replan = seen[-1]
+    assert (replan["date"], replan["days"], replan["start_time"]) == ("2026-11-11", 1, "09:15")
+    assert replan["resume"] is None
+    # Yesterday's cafe is behind a night at the hotel.
+    assert replan["origin"]["poi_id"] == "hotel-1"
+
+
+def test_the_device_time_wins_over_the_server_clock(lifecycle):
+    service, owner, _other, trip_id, _database_url = lifecycle
+    planning, seen = _capturing(service, lambda: _utc(10, 7, 5))
+    source = _accepted(planning, owner, trip_id, "device")
+
+    planning.replan(owner, trip_id, "device-replan", {
+        "source_version_id": source, "remaining_from": "2026-11-10T15:30:00+07:00"})
+
+    assert (seen[-1]["date"], seen[-1]["days"], seen[-1]["start_time"]) == (
+        "2026-11-10", 1, "15:30")
+
+
+def test_a_replan_keeps_the_constraints_the_source_was_planned_with(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    planning, seen = _capturing(service, lambda: _utc(10, 1))
+    confirmed = {
+        "must_visit": ["poi-1"], "avoid": ["poi-9"], "activities": ["biển"],
+        "food_preferences": ["hải sản"], "areas": ["son_tra_my_khe"],
+        "indicative_budget": 1_500_000.0,
+    }
+    source = _accepted(planning, owner, trip_id, "kept", **confirmed)
+
+    planning.replan(owner, trip_id, "kept-replan", {"source_version_id": source})
+    planning.replan(owner, trip_id, "changed-replan", {
+        "source_version_id": source, "changed_constraints": {"areas": ["hoi_an"]}})
+
+    kept, changed = seen[1], seen[2]
+    assert kept["must_visit"] == ["poi-1"]
+    assert kept["avoid"] == ["poi-9"]
+    assert kept["activities"] == ["biển"]
+    assert kept["food_prefs"] == ["hải sản"]
+    assert kept["areas"] == ["son_tra_my_khe"]
+    assert kept["budget"] == 1_500_000
+    assert changed["areas"] == ["hoi_an"]
+    assert changed["must_visit"] == ["poi-1"]
+    with session_scope(database_url) as session:
+        rows = {row.idempotency_key: row for row in session.scalars(select(PlanningRequestModel))}
+        assert rows["kept-replan"].input_payload["constraint_overrides"] == confirmed
+        assert rows["changed-replan"].input_payload["constraint_overrides"] == {
+            **confirmed, "areas": ["hoi_an"]}
+        assert rows["kept-replan"].remaining_context["changed_constraints"] == {}
+
+
+def test_nothing_is_left_after_the_last_day(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    planning, _seen = _capturing(service, lambda: _utc(10, 11, 30))  # 18:30, day_end 18:00
+    source = _accepted(planning, owner, trip_id, "late")
+
+    with pytest.raises(IdentityError) as closed:
+        planning.replan(owner, trip_id, "late-replan", {"source_version_id": source})
+
+    assert (closed.value.code, closed.value.status) == ("REPLAN_WINDOW_CLOSED", 409)
+    with session_scope(database_url) as session:
+        assert session.scalar(select(func.count()).select_from(PlanningRequestModel).where(
+            PlanningRequestModel.request_kind == "replan")) == 0
+
+
+def test_a_retried_replan_gets_the_plan_it_asked_for(lifecycle):
+    service, owner, _other, trip_id, _database_url = lifecycle
+    planning, _seen = _capturing(service, lambda: _utc(10, 7, 5))
+    source = _accepted(planning, owner, trip_id, "retry")
+    first = planning.replan(owner, trip_id, "retry-replan", {"source_version_id": source})
+
+    # The same key later, even once the day is over: the clock is not what was sent.
+    later, _ = _capturing(service, lambda: _utc(10, 11, 30))
+    again = later.replan(owner, trip_id, "retry-replan", {"source_version_id": source})
+
+    assert again["request_id"] == first["request_id"]
+    assert again["remaining_context"]["window"]["start_time"] == "14:05"

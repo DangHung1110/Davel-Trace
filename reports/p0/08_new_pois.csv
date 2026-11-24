@@ -1,4 +1,24 @@
 poi_id,name,category,zone,cluster_id,requires_ticket_of,hours,hours_by
+osm:node/4948013624,Bún chả cá 109,restaurant,trung_tam,,,06:30-22:30,agent_web
+osm:node/12350543701,Bún chả cá Hờn,restaurant,trung_tam,,,06:00-22:00,agent_web
+osm:node/12372824403,Bún chả cá Bà Hoa,restaurant,trung_tam,,,06:00-21:00,open_data
+osm:node/6152679485,Quán Mậu - Bánh tráng thịt heo,restaurant,trung_tam,,,08:00-22:30,agent_web
+osm:node/14064309337,Đặc sản Trần,restaurant,son_tra_my_khe,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/12612220045,Quán Đại Lộc,restaurant,trung_tam,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/6152685685,Bún Mắm Vân,restaurant,trung_tam,,,06:00-23:00,open_data
+osm:node/4118223691,Bê thui số 3 Tuệ Tĩnh,restaurant,trung_tam,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/13288511161,Nhà hàng chay Ngọc Chi (Hải Châu),restaurant,trung_tam,,,09:00-21:00,open_data
+osm:node/5947469393,Bảo An Macrobiotic,restaurant,son_tra_my_khe,,,06:30-15:30,open_data
+osm:node/10777150405,Quán chay Tỉnh Quán,restaurant,son_tra_my_khe,,,08:00-19:30,agent_web
+osm:way/1208690134,Loving Vegan,restaurant,son_tra_my_khe,,,09:00-21:00,open_data
+osm:node/12905689342,Chay Corner,restaurant,son_tra_my_khe,,,11:15-21:50,agent_web
+osm:node/11198985391,iVegan,restaurant,son_tra_my_khe,,,09:00-21:00,agent_web
+osm:node/12174005655,Bánh canh cá nục Nhi,restaurant,son_tra_my_khe,,,06:00-21:00,open_data
+osm:node/14269716101,Nem lụi - bò lá lốt Được (chợ Hàn),restaurant,trung_tam,,,11:00-22:00,open_data
+osm:node/2988814633,Bánh bèo 291 Nguyễn Chí Thanh,restaurant,trung_tam,,,"11:00-13:30, 17:30-20:30",inferred
+osm:node/6469566385,Bánh xèo Cô Ba,restaurant,trung_tam,,,11:00-13:00,inferred
+osm:node/12833350535,Hải Sản Ốc 68,restaurant,son_tra_my_khe,,,17:30-21:30,inferred
+osm:node/13022818102,Bánh canh cá lóc Bé Huế,restaurant,son_tra_my_khe,,,08:00-22:00,open_data
 manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,hoi_an,hoi_an_old_town,,00:00-23:59,agent_web
 manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,hoi_an,hoi_an_old_town,,19:00-21:00,agent_web
 osm:way/630377259,Bãi biển Tiên Sa,beach,trung_tam,,,08:00-18:00,agent_web

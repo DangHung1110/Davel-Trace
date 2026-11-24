@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
 from BE.app.core.config import AppMode, Settings
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def test_demo_defaults_are_explicit_and_local() -> None:
@@ -12,6 +16,19 @@ def test_demo_defaults_are_explicit_and_local() -> None:
     assert "http://127.0.0.1:5501" in settings.cors_origins
     assert settings.database_required is False
     assert settings.llm_provider == "disabled"
+
+
+def test_default_snapshot_is_danang_v2_named_after_its_folder(monkeypatch) -> None:
+    monkeypatch.delenv("SNAPSHOT_DIR", raising=False)
+    monkeypatch.delenv("SNAPSHOT_NAME", raising=False)
+    settings = Settings(_env_file=None)
+    assert Path(settings.snapshot_dir) == Path("BE", "data", "snapshots", "danang-v2")
+    assert settings.snapshot_name == "danang-v2"
+    for name in ("pois.json", "matrix.json"):
+        assert (REPO_ROOT / settings.snapshot_dir / name).is_file()
+    # Planning requests store the name as data_version; it follows an explicit folder.
+    older = Settings(snapshot_dir=str(Path("BE", "data", "snapshots", "danang-v1")), _env_file=None)
+    assert older.snapshot_name == "danang-v1"
 
 
 def test_production_requires_postgresql_database_url() -> None:

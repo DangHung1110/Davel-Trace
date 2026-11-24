@@ -82919,6 +82919,1780 @@
     "Quán bar"
    ]
   },
+  "osm:node/4948013624": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Quán An Bún Chả Cá",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/4948013624",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bún chả cá 109"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bún chả cá 109",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:30-22:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-14:00"
+    ],
+    "safe_windows": [
+     "11:00-13:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 40000,
+    "max_vnd": 60000,
+    "typical_vnd": 50000,
+    "band": "vua",
+    "ticket_vnd": 60000,
+    "free_entry": false,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12350543701": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bún chả cá Hờn",
+   "osm_cuisine": "vietnamese;noodle",
+   "osm_evidence": {
+    "osm": "node/12350543701",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bún chả cá Hờn"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bún chả cá Hờn",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:00-22:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-14:00"
+    ],
+    "safe_windows": [
+     "11:00-13:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 15000,
+    "max_vnd": 28000,
+    "typical_vnd": 21500,
+    "band": "re",
+    "ticket_vnd": 28000,
+    "free_entry": false,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12372824403": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bún Chả Cá Bà Hoa",
+   "osm_cuisine": "fish;noodles;vietnamese",
+   "osm_evidence": {
+    "osm": "node/12372824403",
+    "dist_m": 0.0,
+    "hours": "06:00-21:00",
+    "fee": null,
+    "name": "Bún chả cá Bà Hoa"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bún chả cá Bà Hoa",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:00-21:00"
+    ],
+    "weekly": {
+     "Mo": "06:00-21:00",
+     "Tu": "06:00-21:00",
+     "We": "06:00-21:00",
+     "Th": "06:00-21:00",
+     "Fr": "06:00-21:00",
+     "Sa": "06:00-21:00",
+     "Su": "06:00-21:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-14:00"
+    ],
+    "safe_windows": [
+     "11:00-13:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 15000,
+    "max_vnd": 28000,
+    "typical_vnd": 21500,
+    "band": "re",
+    "ticket_vnd": 28000,
+    "free_entry": false,
+    "status": "known"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/6152679485": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Quán Mậu - Bánh tráng thịt heo",
+   "osm_evidence": {
+    "osm": "node/6152679485",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Quán Mậu - Bánh tráng thịt heo"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Quán Mậu - Bánh tráng thịt heo",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "08:00-22:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/14064309337": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Đặc Sản Trần",
+   "osm_evidence": {
+    "osm": "node/14064309337",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Đặc sản Trần"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Đặc sản Trần",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12612220045": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Quán Đại Lộc",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/12612220045",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Quán Đại Lộc"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Quán Đại Lộc",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/6152685685": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bún Mắm Vân",
+   "osm_evidence": {
+    "osm": "node/6152685685",
+    "dist_m": 0.0,
+    "hours": "Mo-Su 06:00-23:00",
+    "fee": null,
+    "name": "Bún Mắm Vân"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bún Mắm Vân",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:00-23:00"
+    ],
+    "weekly": {
+     "Mo": "06:00-23:00",
+     "Tu": "06:00-23:00",
+     "We": "06:00-23:00",
+     "Th": "06:00-23:00",
+     "Fr": "06:00-23:00",
+     "Sa": "06:00-23:00",
+     "Su": "06:00-23:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-14:00"
+    ],
+    "safe_windows": [
+     "11:00-13:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 30000,
+    "max_vnd": 70000,
+    "typical_vnd": 50000,
+    "band": "vua",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/4118223691": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bê thui",
+   "osm_cuisine": "grill",
+   "osm_evidence": {
+    "osm": "node/4118223691",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bê thui số 3 Tuệ Tĩnh"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bê thui số 3 Tuệ Tĩnh",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/13288511161": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Nhà Hàng Chay Ngọc Chi",
+   "osm_cuisine": "regional",
+   "osm_evidence": {
+    "osm": "node/13288511161",
+    "dist_m": 0.0,
+    "hours": "09:00-21:00",
+    "fee": null,
+    "name": "Nhà hàng chay Ngọc Chi (Hải Châu)"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Nhà hàng chay Ngọc Chi (Hải Châu)",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "09:00-21:00"
+    ],
+    "weekly": {
+     "Mo": "09:00-21:00",
+     "Tu": "09:00-21:00",
+     "We": "09:00-21:00",
+     "Th": "09:00-21:00",
+     "Fr": "09:00-21:00",
+     "Sa": "09:00-21:00",
+     "Su": "09:00-21:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/5947469393": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bao An Macrobiotic",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/5947469393",
+    "dist_m": 0.0,
+    "hours": "Mo-Sa 06:30-20:30; Su 06:30-15:30",
+    "fee": null,
+    "name": "Bảo An Macrobiotic"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bảo An Macrobiotic",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:30-15:30"
+    ],
+    "weekly": {
+     "Mo": "06:30-20:30",
+     "Tu": "06:30-20:30",
+     "We": "06:30-20:30",
+     "Th": "06:30-20:30",
+     "Fr": "06:30-20:30",
+     "Sa": "06:30-20:30",
+     "Su": "06:30-15:30"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/10777150405": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Quán chay Tỉnh Quán",
+   "osm_evidence": {
+    "osm": "node/10777150405",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Quán chay Tỉnh Quán"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Quán chay Tỉnh Quán",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "08:00-19:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:way/1208690134": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Loving Vegan",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "way/1208690134",
+    "dist_m": 0.0,
+    "hours": "Mo-Su 09:00-21:00",
+    "fee": null,
+    "name": "Loving Vegan"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Loving Vegan",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "09:00-21:00"
+    ],
+    "weekly": {
+     "Mo": "09:00-21:00",
+     "Tu": "09:00-21:00",
+     "We": "09:00-21:00",
+     "Th": "09:00-21:00",
+     "Fr": "09:00-21:00",
+     "Sa": "09:00-21:00",
+     "Su": "09:00-21:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12905689342": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Quán Chay Chay Corner",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/12905689342",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Chay Corner"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Chay Corner",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:15-21:50"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/11198985391": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "IVegan",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/11198985391",
+    "dist_m": 0.0,
+    "hours": "Mon-Sun 08:00-21:00",
+    "fee": null,
+    "name": "iVegan"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "iVegan",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "09:00-21:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12174005655": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 20,
+    "p50": 30,
+    "p75": 45
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bánh canh cá nục Nhi-cơ sở 4",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/12174005655",
+    "dist_m": 0.0,
+    "hours": "Mo-Su 06:00-21:00",
+    "fee": null,
+    "name": "Bánh canh cá nục Nhi"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bánh canh cá nục Nhi",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "06:00-21:00"
+    ],
+    "weekly": {
+     "Mo": "06:00-21:00",
+     "Tu": "06:00-21:00",
+     "We": "06:00-21:00",
+     "Th": "06:00-21:00",
+     "Fr": "06:00-21:00",
+     "Sa": "06:00-21:00",
+     "Su": "06:00-21:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "06:00-10:30"
+    ],
+    "safe_windows": [
+     "06:30-09:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 20000,
+    "max_vnd": 50000,
+    "typical_vnd": 35000,
+    "band": "re",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "breakfast",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/14269716101": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Nem Lụi - Bò Lá Lốt Được Chợ Hàn",
+   "osm_cuisine": "vietnamese;noodle",
+   "osm_evidence": {
+    "osm": "node/14269716101",
+    "dist_m": 0.0,
+    "hours": "Mo-Su 11:00-22:00",
+    "fee": null,
+    "name": "Nem lụi - bò lá lốt Được (chợ Hàn)"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Nem lụi - bò lá lốt Được (chợ Hàn)",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-22:00"
+    ],
+    "weekly": {
+     "Mo": "11:00-22:00",
+     "Tu": "11:00-22:00",
+     "We": "11:00-22:00",
+     "Th": "11:00-22:00",
+     "Fr": "11:00-22:00",
+     "Sa": "11:00-22:00",
+     "Su": "11:00-22:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/2988814633": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Bánh bèo 291 Nguyễn Chí Thanh",
+   "osm_cuisine": "vietnamese",
+   "osm_evidence": {
+    "osm": "node/2988814633",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bánh bèo 291 Nguyễn Chí Thanh"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bánh bèo 291 Nguyễn Chí Thanh",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-22:00"
+    ],
+    "safe_windows": [
+     "11:00-13:30",
+     "17:30-20:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 100000,
+    "max_vnd": 350000,
+    "typical_vnd": 225000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/6469566385": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Banh xeo Co Ba",
+   "osm_evidence": {
+    "osm": "node/6469566385",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Bánh xèo Cô Ba"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bánh xèo Cô Ba",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "11:00-13:00"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "10:00-14:00"
+    ],
+    "safe_windows": [
+     "11:00-13:00"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 30000,
+    "max_vnd": 70000,
+    "typical_vnd": 50000,
+    "band": "vua",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/12833350535": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Hải Sản Ốc 68",
+   "osm_cuisine": "seafood",
+   "osm_evidence": {
+    "osm": "node/12833350535",
+    "dist_m": 0.0,
+    "hours": null,
+    "fee": null,
+    "name": "Hải Sản Ốc 68"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Hải Sản Ốc 68",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "17:30-21:30"
+    ],
+    "weekly": null,
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "16:00-23:00"
+    ],
+    "safe_windows": [
+     "17:30-21:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 200000,
+    "max_vnd": 600000,
+    "typical_vnd": 400000,
+    "band": "kha",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "restaurant",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
+  "osm:node/13022818102": {
+   "hours_source": "",
+   "fee": 0,
+   "source": "osm/overpass",
+   "fetched_at": "2026-11-24",
+   "verified": false,
+   "visit_min": {
+    "p25": 20,
+    "p50": 30,
+    "p75": 45
+   },
+   "dur_source": "category_rule",
+   "dur_confidence": "low",
+   "intensity": 1,
+   "intensity_source": "canonical_rule",
+   "weather_sensitive": false,
+   "ws_source": "canonical_rule",
+   "io_label": null,
+   "smart_tag_source": "rule_v1",
+   "name_osm": "Banh Canh Ca Loc Be Hue",
+   "osm_evidence": {
+    "osm": "node/13022818102",
+    "dist_m": 0.0,
+    "hours": "Mo-Su 08:00-22:00",
+    "fee": null,
+    "name": "Bánh canh cá lóc Bé Huế"
+   },
+   "added_in": "v2.0-p0b",
+   "requires_ticket_of_name": null,
+   "name_vi": "Bánh canh cá lóc Bé Huế",
+   "category_evidence": [
+    "curated_osm:restaurant"
+   ],
+   "smart_tags_price": {
+    "ticket": false,
+    "price_band": null
+   },
+   "hours_v20": {
+    "spans": [
+     "08:00-22:00"
+    ],
+    "weekly": {
+     "Mo": "08:00-22:00",
+     "Tu": "08:00-22:00",
+     "We": "08:00-22:00",
+     "Th": "08:00-22:00",
+     "Fr": "08:00-22:00",
+     "Sa": "08:00-22:00",
+     "Su": "08:00-22:00"
+    },
+    "spans_any_day": [],
+    "raw_v1": [],
+    "conflict": false,
+    "archetype_default": [
+     "06:00-10:30"
+    ],
+    "safe_windows": [
+     "06:30-09:30"
+    ]
+   },
+   "price_v20": {
+    "basis": "per_person",
+    "min_vnd": 20000,
+    "max_vnd": 50000,
+    "typical_vnd": 35000,
+    "band": "re",
+    "ticket_vnd": null,
+    "free_entry": null,
+    "status": "estimate"
+   },
+   "dwell_v20": {
+    "unit": "min",
+    "kind": "breakfast",
+    "v1": {
+     "p25": 42,
+     "p50": 60,
+     "p75": 84
+    }
+   },
+   "ext_ids_v20": {
+    "osm_match_m": 0.0,
+    "wikidata": null
+   },
+   "v1_verified": {
+    "verified_by_v1": null,
+    "verified_at_v1": null,
+    "mapped_to": "inferred"
+   },
+   "tags_v1": [
+    "restaurant"
+   ]
+  },
   "manual:hoi-an-pho-di-bo-hoa-dang": {
    "visit_min": {
     "p25": 10,

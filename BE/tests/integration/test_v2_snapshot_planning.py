@@ -92,6 +92,14 @@ class TestV2SnapshotPlanning(unittest.TestCase):
         plan = self.plan(profile=COUPLE)
         self.assertFalse([p["name"] for p in self.stops(plan) if p["plan_tier"] == "local"])
 
+    def test_areas_keep_the_day_in_the_centre(self):
+        # gold q14 "ưu tiên check-in trung tâm": without areas the day ran to Hội An.
+        plan = self.plan(profile=FAMILY, areas=["trung_tam"], date="2026-11-28",
+                         start_time="07:00", end_time="18:00", budget=1000000)
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        self.assertGreaterEqual(len(plan["activities"]), 4)
+        self.assertEqual({p["zone"] for p in self.stops(plan)}, {"trung_tam"})
+
 
 if __name__ == "__main__":
     unittest.main()

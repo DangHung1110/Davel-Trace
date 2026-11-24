@@ -62,6 +62,13 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
             # but an undated trip cannot (the forecast of its second day).
             day_trip = {**trip, "days": 1, "date": day_date(trip.get("date"), index),
                         "day_offset": index, "must_visit": today, "activities": wishes}
+            resume = day_trip.pop("resume", None)
+            if index == 0 and resume:
+                # A replan in the middle of the first day: it starts later, from where
+                # the traveller is (the router resolved `origin_id`, None = open tour).
+                # The days after it start at the trip's start_time from its origin.
+                day_trip["start_time"] = resume["start_time"]
+                day_trip["origin_id"] = resume.get("origin_id")
             if budget is not None:
                 day_trip["budget"] = budget
             # Only the last attempt explains itself: the diagnosis costs extra solves.

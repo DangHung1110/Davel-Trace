@@ -411,8 +411,10 @@ def score_plan(plan: dict) -> dict:
 
 
 def _to_trip(trip: dict) -> StubTrip:
-    """Open tour: the seed matrix has no depot cell (optimizer T061a)."""
-    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip), None)
+    """The day's clock and its start: the base the router resolved (`origin_id`, a
+    place with a matrix row), else the open tour (optimizer T061a)."""
+    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip),
+                    trip.get("origin_id") or None)
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -529,6 +531,9 @@ def _activity_warnings(match: list[dict]) -> list[str]:
                          "ngoai khung gio cua chuyen di")
         elif entry["status"] == "over_budget":
             lines.append(f"ngan sach khong du cho hoat dong '{entry['activity']}'")
+        elif entry["status"] == "outside_areas":
+            lines.append(f"khu vuc da chon khong co diem phu hop voi hoat dong "
+                         f"'{entry['activity']}'")
         elif entry["status"] == "no_verified_poi":
             lines.append(f"chua co diem da xac minh phu hop voi hoat dong "
                          f"'{entry['activity']}' trong khung gio nay")
@@ -543,8 +548,12 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # What the gate registry reads off a POI: FAR/BCS/VROH, the category for
 # A1/caps, and the PROFILE_SAFE haystack (tags/cuisine/ambience/smart_tags/
 # intensity, the same fields profile_filter.hard_filter matched).
-_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "ticket_vnd",
-               "subcat", "plan_tier", "closed_today")
+# BCS prices a stop with `effective_fee`, like the solver and the plan's total_cost,
+# so the view carries every field it reads: `price` (v2.1 tier) wins over
+# ticket_vnd/fee/smart_tags. Without it the gate fell back to the smart_tags band
+# (medium restaurant 300k where the solver paid 250k).
+_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
+               "ticket_vnd", "subcat", "plan_tier", "closed_today")
 
 
 def _gate_view(p: dict) -> dict:
@@ -703,9 +712,14 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
 
     # Activities -> "at least one stop of these categories" (FR-006: a
     # preference the ladder may relax with a warning, never a pool filter).
+    # A wish only another zone can meet says so, not "over budget" or "no data".
+    areas = trip.get("areas") or []
+    outside = [p for p in pois_by_id.values()
+               if p.get("verified") and not retrieval.in_areas(p, areas)] if areas else []
     act_groups, act_report = retrieval.activity_requirements(
-        activities, candidates, banned, unaffordable,
-        horizon=(to_min(trip.get("start_time", "07:00")), deadline(trip)))
+        activities, candidates, banned,
+        [p for p in unaffordable if retrieval.in_areas(p, areas)],
+        horizon=(to_min(trip.get("start_time", "07:00")), deadline(trip)), outside=outside)
 
     if not candidates:
         plan = _assemble([], {"itinerary": None,
@@ -771,9 +785,16 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # One place per rule (rules.py): under objective v1 the edges carry the PATM
     # transition score only; riding minutes (T9), A2 (T6) and B1 (T4) live in the
     # objective, so the legacy edge penalties and EDGE_TRAVEL_WEIGHT are not added.
-    q = scorer.edge_scores(ids, pois_by_id, ctx=ctx, rule_penalties=spec is None)
-    if spec is None:
-        q = _profile_edges(prof, q, travel)
+    edges = scorer.edge_scores(ids, pois_by_id, ctx=ctx, rule_penalties=spec is None)
+    origin_id = trip.get("origin_id")
+    if origin_id and origin_id not in ids:
+        # The day starts at the traveller's base: its first drive is a leg like any
+        # other, charged by `_profile_edges` (legacy) or T9 (objective v1) and read by
+        # the order search and gate B3.
+        legs = matrix_svc.legs_from(cells, origin_id, ids)
+        travel.update(legs)
+        edges.update({pair: 0.0 for pair in legs})
+    q = _profile_edges(prof, edges, travel) if spec is None else edges
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no
     # profile keeps the plain planning, except in the rain: a forecast that calls
@@ -1077,7 +1098,8 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         acts, by_id, travel, to_min(trip.get("start_time", "07:00")), deadline(trip),
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
-        late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred)
+        late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred,
+        origin=trip.get("origin_id"))
     if better is None:
         return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}

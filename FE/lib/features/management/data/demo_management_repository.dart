@@ -194,18 +194,27 @@ class DemoManagementRepository implements ManagementRepository {
           .toList();
   @override
   Future<Trip> createTrip(Map<String, dynamic> data) async {
-    final item = _trip(
+    final draft = _trip(
       'trip-${trips.length + 1}',
       data['profile_id'] as String,
       data['title'] as String,
     );
+    final item = Trip.fromJson({...draft.toJson(), ...data});
     trips.add(item);
     return item;
   }
 
   @override
-  Future<Trip> updateTrip(String id, Map<String, dynamic> data) async =>
-      trips.firstWhere((item) => item.id == id);
+  Future<Trip> updateTrip(String id, Map<String, dynamic> data) async {
+    final index = trips.indexWhere((trip) => trip.id == id);
+    final current = trips[index];
+    return trips[index] = Trip.fromJson({
+      ...current.toJson(),
+      ...data,
+      'version': current.version + 1,
+    });
+  }
+
   @override
   Future<void> deleteTrip(Trip trip) async => trips.remove(trip);
   @override
@@ -391,7 +400,7 @@ class DemoManagementRepository implements ManagementRepository {
   }
 
   @override
-  Future<List<PoiItem>> searchPois(String query) async =>
+  Future<List<PoiItem>> searchPois(String query, {String? category}) async =>
       [
             _demoPoi(
               'demo-dragon-bridge',
@@ -411,8 +420,9 @@ class DemoManagementRepository implements ManagementRepository {
           ]
           .where(
             (item) =>
-                item.name.toLowerCase().contains(query.toLowerCase()) ||
-                item.type.toLowerCase().contains(query.toLowerCase()),
+                (category == null || item.type == category) &&
+                (item.name.toLowerCase().contains(query.toLowerCase()) ||
+                    item.type.toLowerCase().contains(query.toLowerCase())),
           )
           .toList();
 

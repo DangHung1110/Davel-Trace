@@ -56,7 +56,9 @@ class TestProfileFilterHelpers(unittest.TestCase):
 
     def test_cuisine_terms(self):
         self.assertEqual(profile_filter.cuisine_terms("ăn hải sản"), ["hải sản"])
-        self.assertEqual(profile_filter.cuisine_terms("đồ chay thuần"), ["chay"])
+        # "đồ chay" is a dish phrase (BE.common.DISHES) since 24/11: the whole
+        # phrase is the pref, not its "chay"
+        self.assertEqual(profile_filter.cuisine_terms("đồ chay thuần"), ["đồ chay"])
         self.assertEqual(profile_filter.cuisine_terms("tắm biển"), [])
 
 

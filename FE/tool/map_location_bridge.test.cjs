@@ -29,7 +29,7 @@ function fixture() {
     addEventListener: (event, handler) => { listeners[event] = handler; } };
   const context = vm.createContext({ window, document: {
     baseURI: 'http://localhost:5501/map_embed.html',
-    getElementById: () => ({ style: {}, hidden: false }), createElement: () => ({ style: {} }),
+    getElementById: () => ({ style: {}, hidden: false }), createElement: () => ({ style: {}, append() {} }),
   }, maplibregl: { Map, Marker, addProtocol() {}, NavigationControl: class {}, FullscreenControl: class {} },
   pmtiles: { Protocol: class { tile() {} } }, basemaps: { layers: () => [], namedFlavor: () => ({}) },
   URL, URLSearchParams, performance: { now: () => 0 }, cancelAnimationFrame() {}, requestAnimationFrame() {},
@@ -87,4 +87,27 @@ test('wrong origin/source and invalid coordinates cannot create or move a marker
   f.send({ ...data, latitude: 91 }); f.send({ ...data, longitude: null });
   assert.equal(f.markers.length, 0);
   f.send(data); assert.equal(f.markers.length, 1);
+});
+
+test('GPS outside the local archive does not move the camera to a blank region', () => {
+  const f = fixture(); f.map.emit('load');
+  f.send({ type: 'setUserLocation', latitude: 21.03, longitude: 105.85, follow: true, recenter: true });
+  assert.equal(f.map.cameras.length, 0);
+  assert.equal(f.messages.at(-1).type, 'mapCoverage');
+  assert.equal(f.messages.at(-1).inside, false);
+  f.send({ type: 'setUserLocation', latitude: 16.06, longitude: 108.22, follow: true });
+  assert.equal(f.messages.at(-1).inside, true);
+  assert.equal(f.map.cameras.length, 1);
+});
+
+test('frame reports actual map readiness and load failure separately from GPS', () => {
+  const f = fixture();
+  assert.equal(f.messages.length, 0);
+  f.map.emit('error', { error: new Error('tile source unavailable') });
+  assert.equal(f.messages.at(-1).type, 'mapError');
+  f.map.emit('load');
+  assert.equal(f.messages.at(-1).type, 'mapError');
+  const healthy = fixture();
+  healthy.map.emit('load');
+  assert.equal(healthy.messages.at(-1).type, 'mapReady');
 });

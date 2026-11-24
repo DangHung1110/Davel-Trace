@@ -109,6 +109,11 @@
 ### WP11 — Gold v2 + chuyển mặc định · CC
 - Dựng lại 30 truy vấn gold trên v2.1 (gold cũ dựng trên v1); so sánh v1 ↔ v2.1.
 - Đổi `SNAPSHOT_DIR` mặc định sang `danang-v2` **chỉ khi** G5 xanh. Hỏi BẠN trước khi đổi.
+- **Kết quả 24/11:** đã đổi mặc định sang `danang-v2` theo yêu cầu (nhánh `feat/default-snapshot-v2`). Gold chạy lại
+  (n=30, seed 7, `cach_ly`): v1 29/30, v2 29/30 qua cổng → G5 vẫn xanh. `mean_activities` của v2 nay là 3,38 chứ không
+  phải 3,86 như `gold_v2.json` ghi (13/30 lịch gold v2 khác; `main` @ `9e5843a` cũng ra 3,38), file chưa dựng lại.
+  `bench_latency` trên v2: p95 7,21 s < 8 s nhưng FAIL vì plan `experience` của yêu cầu cặp đôi + chùa + 600k trượt
+  BCS/HCS (trên v1 qua, 440k).
 
 ### WP12 — Exports + báo cáo chốt · CC
 - Dựng lại `BE/data/exports/danang-v2/` theo v2.1 (thêm `price_tier`, `hours_kind`, `prize_prior`).

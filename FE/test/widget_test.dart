@@ -40,9 +40,35 @@ void main() {
       scrollable: find.byType(Scrollable).first,
     );
     await tester.enterText(profileName, 'Hùng');
-    await tapKey(tester, 'create-first-profile-button');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+
+    final fitness = find.byKey(const Key('profile-fitness-slider'));
+    final scrollable = find.byType(Scrollable).first;
+    await tester.scrollUntilVisible(
+      fitness.hitTestable(),
+      120,
+      scrollable: scrollable,
+    );
+    await tester.pumpAndSettle();
+    await tester.tapAt(
+      tester.getRect(fitness).centerRight - const Offset(24, 0),
+    );
+    await tester.pumpAndSettle();
+    expect(tester.widget<Slider>(fitness).value, 3);
+
+    final save = find.byKey(const Key('create-first-profile-button'));
+    await tester.scrollUntilVisible(
+      save.hitTestable(),
+      120,
+      scrollable: scrollable,
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(save.hitTestable());
+    await tester.pumpAndSettle();
 
     expect(repository.profiles.single.displayName, 'Hùng');
+    expect(repository.profiles.single.fitness, 3);
     await tester.pageBack();
     await tester.pumpAndSettle();
     await tapKey(tester, 'itinerary-tab');

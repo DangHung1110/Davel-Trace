@@ -327,6 +327,18 @@ class AppState extends ChangeNotifier {
     await _loadTripDetail(updated.id);
   });
 
+  Future<void> setPlanningHotel(String? poiId) async {
+    final trip = activeTrip;
+    if (trip == null || trip.basePoiId == poiId) return;
+    final preferences = {...trip.preferenceOverrides};
+    if (poiId == null) {
+      preferences.remove('base_poi_id');
+    } else {
+      preferences['base_poi_id'] = poiId;
+    }
+    await updateActiveTrip({'preference_overrides': preferences});
+  }
+
   Future<void> selectTrip(Trip trip) => _mutate(() async {
     if (repository is LiveManagementRepository) {
       await (repository as LiveManagementRepository).setActiveTrip(trip);
@@ -618,6 +630,10 @@ class AppState extends ChangeNotifier {
     final trip = activeTrip;
     final profile = activeProfile;
     if (trip == null || profile == null) return;
+    final overrides = {
+      ..._confirmedPlanningOverrides,
+      'base_poi_id': ?trip.basePoiId,
+    };
     final revision = _planningRevision;
     isPlanning = true;
     errorMessage = null;
@@ -649,9 +665,9 @@ class AppState extends ChangeNotifier {
           'transport': [trip.transport],
         },
         'target_count': 5,
-        'constraint_overrides': _confirmedPlanningOverrides,
+        'constraint_overrides': overrides,
         '_idempotency_key': _planningKeys.putIfAbsent(
-          '${trip.id}:${trip.version}:${_confirmedPlanningOverrides.toString()}',
+          '${trip.id}:${trip.version}:$overrides',
           () => 'plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}',
         ),
       });
@@ -919,8 +935,8 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     try {
       final key = _replanKeys.putIfAbsent(
-        source.id,
-        () => 'replan-${trip.id}-${source.id}',
+        '${source.id}:${trip.version}',
+        () => 'replan-${trip.id}-${source.id}-${trip.version}',
       );
       final result = await lifecycle.replan(trip.id, source.id, key);
       if (_disposed || revision != _planningRevision) return;

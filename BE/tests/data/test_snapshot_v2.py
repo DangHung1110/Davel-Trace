@@ -274,6 +274,32 @@ class TestSnapshotV21(unittest.TestCase):
             self.assertTrue(set(t["good_times"]) <= {"sunrise", "morning", "sunset", "night"})
             self.assertTrue(set(t["party"]) <= {"family", "couple", "solo", "group"})
 
+    # 18. tags.dishes: known dish ids, one per POI, food places only, every value
+    #     sourced (web/osm carry a URL; source=name means the name states it)
+    def test_18_dishes_sourced(self):
+        from BE.common import DISH_CATEGORIES, DISH_SOURCES, DISHES, dishes_from_name
+        bad = []
+        for p in self.pois:
+            rows = p["tags"]["dishes"]
+            ids = [r["dish"] for r in rows]
+            if rows and p["category"] not in DISH_CATEGORIES:
+                bad.append((p["name"], "not a food place"))
+            if len(ids) != len(set(ids)):
+                bad.append((p["name"], "duplicate dish"))
+            for r in rows:
+                if set(r) != {"dish", "source", "url"} or r["dish"] not in DISHES \
+                        or r["source"] not in DISH_SOURCES:
+                    bad.append((p["name"], r))
+                elif r["source"] == "name" and r["dish"] not in dishes_from_name(p["name"]):
+                    bad.append((p["name"], r["dish"], "name does not say it"))
+                elif r["source"] != "name" and not str(r["url"] or "").startswith("http"):
+                    bad.append((p["name"], r["dish"], "no URL"))
+        self.assertEqual(bad, [])
+        feats = {r["poi_id"]: r["dishes"] for r in _rows("poi_features.csv")}
+        for p in self.pois:
+            self.assertEqual(feats[p["poi_id"]], "|".join(r["dish"] for r in p["tags"]["dishes"]),
+                             p["name"])
+
     # 14. no active POI with unknown hours (lodging = 24h rule)
     def test_14_no_unknown_hours_active(self):
         bad = [p["name"] for p in self.pois if p["status"] == "active" and p["hours"]["kind"] == "unknown"]

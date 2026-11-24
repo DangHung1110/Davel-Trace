@@ -10,11 +10,21 @@ food_prefs[], allergy[], activities[], outdoor_bias(-1..1), accessibility[],
 must_avoid[], transport[].
 
 Neutral defaults: spending/pace/fitness = 2, outdoor_bias = 0.0, lists empty.
+
+`TripRequest.areas` names the planning zones the traveller wants to stay in (the
+`zone` of every danang-v2 POI). Empty means anywhere: the plan is unchanged.
 """
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field, field_validator
+from typing import Literal, get_args
+
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+# The planning zones of danang-v2 (`zone` of a POI, BE/ml/data/v2_rules.ZONES).
+Area = Literal["trung_tam", "son_tra_my_khe", "ngu_hanh_son", "hoi_an",
+               "hai_van_lien_chieu", "ba_na_tay"]
+AREA_CODES: tuple[str, ...] = get_args(Area)
 
 
 class TripProfile(BaseModel):
@@ -35,15 +45,44 @@ class TripProfile(BaseModel):
 
 
 class Origin(BaseModel):
-    lat: float
-    lon: float
+    """Where each day starts: the traveller's base or the stop they are at.
+
+    `poi_id` names a place of the snapshot (a lodging, or the last stop on a replan);
+    only a place with a matrix row moves the plan, because every leg must come from
+    the matrix (gate B3, no haversine). `lat`/`lon` alone are kept for display.
+    """
+
+    lat: float | None = None
+    lon: float | None = None
     label: str = ""
+    poi_id: str | None = None
+
+    @model_validator(mode="after")
+    def _anchored(self) -> "Origin":
+        if self.poi_id is None and (self.lat is None or self.lon is None):
+            raise ValueError("origin can poi_id hoac ca lat va lon")
+        return self
+
+
+class Resume(BaseModel):
+    """A replan in the middle of the first day of a longer trip.
+
+    That day starts at `start_time` from `origin` (where the traveller is now; None is
+    the trip's `origin`). The days after it start at the trip's `start_time` from the
+    trip's `origin`, as every day of a plan does. On a one-day trip it simply is the
+    day's `start_time` and `origin`.
+    """
+
+    start_time: str
+    origin: Origin | None = None
 
 
 class TripRequest(BaseModel):
     trip_id: str = "t1"
     user_id: str = "u1"
     origin: Origin | None = None
+    # A replan in the middle of the first day (see Resume); None: every day alike.
+    resume: Resume | None = None
     city: str = "da-nang"
     date: str = ""
     start_time: str = "07:00"
@@ -57,10 +96,32 @@ class TripRequest(BaseModel):
     activities: list[str] = Field(default_factory=list)
     food_prefs: list[str] = Field(default_factory=list)
     order_prefs: list[list[str]] = Field(default_factory=list)
+    # Zones the plan stays in (AREA_CODES); a must_visit outside them is still kept.
+    areas: list[Area] = Field(default_factory=list)
     # Catalog-freeze onboarding profile; plain dict on the wire, validated here.
     # The default is the neutral profile (levels 2, bias 0, empty lists), so a
     # client that omits `profile` still sees the exact same key set it can send.
     profile: dict = Field(default_factory=lambda: TripProfile().model_dump())
+
+    @model_validator(mode="after")
+    def _one_day_resumes_at_its_start(self) -> "TripRequest":
+        """A one-day trip has no later day: `resume` is its start and its origin."""
+        if self.resume is not None and self.days == 1:
+            self.start_time = self.resume.start_time
+            self.origin = self.resume.origin or self.origin
+            self.resume = None
+        return self
+
+    @field_validator("areas", mode="before")
+    @classmethod
+    def _coerce_areas(cls, value):
+        """`null` is no area, like omitting the field."""
+        return [] if value is None else value
+
+    @field_validator("areas", mode="after")
+    @classmethod
+    def _unique_areas(cls, value: list[str]) -> list[str]:
+        return list(dict.fromkeys(value))
 
     @field_validator("profile", mode="before")
     @classmethod

@@ -132,7 +132,8 @@ def kept_dry(stub, wet: list[tuple[int, int]]):
 
 
 def timing_cost(rows: list[dict], legs: list[int], start_min: int, roles: dict,
-                rest_minutes: int | None, preferred: dict | None = None) -> float:
+                rest_minutes: int | None, preferred: dict | None = None,
+                first_leg: int = 0) -> float:
     """What a finished day costs beyond its driving, in minutes of driving.
 
     `rows` are the day's stops with their final clock times, `legs` the minutes
@@ -141,10 +142,11 @@ def timing_cost(rows: list[dict], legs: list[int], start_min: int, roles: dict,
     past HOLE_FREE (after lunch: past the rest and REST_EXTRA_FREE). Time left after
     the last stop is free: the evening is the traveller's. `preferred[poi_id]` are the
     windows a named place should sit inside; outside all of them it is misplaced.
+    `first_leg`: the drive from the day's base to the first stop, which is not dead time.
     """
     starts = [to_min(row["start"]) for row in rows]
     ends = [to_min(row["end"]) for row in rows]
-    dead = max(0, starts[0] - start_min - LATE_START_FREE)
+    dead = max(0, starts[0] - start_min - first_leg - LATE_START_FREE)
     for i, leg in enumerate(legs):
         free = HOLE_FREE
         if roles.get(rows[i]["poi_id"]) == "lunch" and rest_minutes:
@@ -160,12 +162,16 @@ def timing_cost(rows: list[dict], legs: list[int], start_min: int, roles: dict,
 
 def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_min: int,
                overhead: int, rest_minutes: int | None = None, late_end_min: int | None = None,
-               precedence: list | None = None, preferred: dict | None = None) -> list[dict] | None:
+               precedence: list | None = None, preferred: dict | None = None,
+               origin: str | None = None) -> list[dict] | None:
     """The stops in their best legal order with new clock times, None when the search
     cannot even rebuild the solver's own day (the caller keeps that one).
 
     Best = least driving plus `timing_cost` of the day the order gives. `preferred`:
     {poi_id: windows} a named place should sit inside when some order allows it.
+    `origin`: the place the day starts from (a lodging, or where a replan resumes).
+    Its leg to the first stop is driving like any other (`travel[(origin, poi)]`, no
+    breathing room, as in the model), and a stop it cannot reach cannot open the day.
     """
     ids = [a["poi_id"] for a in acts]
     if len(ids) < 2 or any(pid not in stubs for pid in ids):
@@ -200,7 +206,9 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
                 rows = _close_gaps(order, stubs, roles, travel, overhead, rest_minutes)
                 legs = [travel.get((order[i][0], order[i + 1][0]), 0) + overhead
                         for i in range(len(order) - 1)]
-                cost = spent + timing_cost(rows, legs, start_min, roles, rest_minutes, preferred)
+                first_leg = travel.get((origin, order[0][0]), 0) if origin else 0
+                cost = spent + timing_cost(rows, legs, start_min, roles, rest_minutes, preferred,
+                                           first_leg=first_leg)
                 if best["cost"] is None or cost < best["cost"]:
                     best["cost"], best["rows"] = cost, rows
             return
@@ -217,6 +225,11 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
                 if stub.restaurant and stubs[prev].restaurant:
                     continue
                 need = travel.get((prev, pid))
+                if need is None:
+                    continue
+                leg = need
+            elif origin:
+                need = travel.get((origin, pid))
                 if need is None:
                     continue
                 leg = need
