@@ -218,12 +218,12 @@ class ItineraryScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         SurfaceCard(
-                          color: AppColors.primary,
+                          color: AppColors.sand,
                           child: Row(
                             children: [
                               const Icon(
                                 Icons.calendar_month_outlined,
-                                color: Colors.white,
+                                color: AppColors.primary,
                               ),
                               const SizedBox(width: 11),
                               Expanded(
@@ -233,14 +233,14 @@ class ItineraryScreen extends StatelessWidget {
                                     Text(
                                       '${_shortDate(trip.startDate)} đến ${_shortDate(trip.endDate)}',
                                       style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.ink,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     ),
                                     Text(
                                       '${trip.dayStart.substring(0, 5)}–${trip.dayEnd.substring(0, 5)} · ${trip.travelers} người · ${moneyVnd(trip.budgetVnd)}',
                                       style: const TextStyle(
-                                        color: Color(0xFFDDE9E4),
+                                        color: AppColors.muted,
                                         fontSize: 12,
                                       ),
                                     ),
@@ -253,7 +253,7 @@ class ItineraryScreen extends StatelessWidget {
                                 onPressed: onOpenMap,
                                 icon: const Icon(
                                   Icons.map_outlined,
-                                  color: Colors.white,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ],
@@ -413,7 +413,7 @@ class PlanningScreen extends StatelessWidget {
             'Tạo phương án, xem các điểm dừng rồi chọn lịch phù hợp. Lịch hiện tại chỉ thay đổi khi bạn xác nhận chọn.',
           ),
           const SizedBox(height: 16),
-          OutlinedButton.icon(
+          TextButton.icon(
             key: const Key('planning-preferences-button'),
             onPressed: state.isPlanning
                 ? null
@@ -588,7 +588,13 @@ class _PlanningPanelState extends State<_PlanningPanel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(
-                live ? Icons.cloud_done_outlined : Icons.cloud_off_outlined,
+                live
+                    ? Icons.cloud_done_outlined
+                    : stale
+                    ? Icons.cloud_off_outlined
+                    : state.isDemoManagement
+                    ? Icons.science_outlined
+                    : Icons.alt_route_outlined,
                 color: live ? AppColors.primary : AppColors.warning,
                 size: 20,
               ),
@@ -622,10 +628,14 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         if (state.errorMessage != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: Text(
-              state.errorMessage!,
-              key: const Key('planning-action-error'),
-              style: const TextStyle(color: AppColors.error),
+            child: SurfaceCard(
+              color: const Color(0xFFFBEEEE),
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                state.errorMessage!,
+                key: const Key('planning-action-error'),
+                style: const TextStyle(color: AppColors.error, fontSize: 13),
+              ),
             ),
           ),
         FilledButton.icon(
@@ -646,7 +656,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
         ),
         const SizedBox(height: 12),
-        OutlinedButton.icon(
+        TextButton.icon(
           key: const Key('request-ai-interpretation'),
           onPressed:
               state.isInterpreting || state.isPlanning || state.isDemoManagement
@@ -784,27 +794,34 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         if (state.itineraryVersions.isNotEmpty ||
             (live && state.acceptance != null)) ...[
           const SizedBox(height: 2),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
+          ExpansionTile(
+            key: const Key('planning-more-options'),
+            tilePadding: EdgeInsets.zero,
+            title: const Text('Lịch sử & điều chỉnh'),
             children: [
-              OutlinedButton.icon(
-                key: const Key('open-version-history'),
-                onPressed: state.isPlanning
-                    ? null
-                    : () => _showHistory(context),
-                icon: const Icon(Icons.history_rounded),
-                label: const Text('Lịch sử'),
-              ),
-              FilledButton.tonalIcon(
-                key: const Key('request-replan-button'),
-                onPressed:
-                    state.isPlanning ||
-                        !state.itineraryVersions.any((item) => item.active)
-                    ? null
-                    : state.requestReplan,
-                icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Lập lại phần còn lại'),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  OutlinedButton.icon(
+                    key: const Key('open-version-history'),
+                    onPressed: state.isPlanning
+                        ? null
+                        : () => _showHistory(context),
+                    icon: const Icon(Icons.history_rounded),
+                    label: const Text('Lịch sử'),
+                  ),
+                  FilledButton.tonalIcon(
+                    key: const Key('request-replan-button'),
+                    onPressed:
+                        state.isPlanning ||
+                            !state.itineraryVersions.any((item) => item.active)
+                        ? null
+                        : state.requestReplan,
+                    icon: const Icon(Icons.refresh_rounded),
+                    label: const Text('Lập lại phần còn lại'),
+                  ),
+                ],
               ),
             ],
           ),

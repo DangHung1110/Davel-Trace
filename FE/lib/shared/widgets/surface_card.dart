@@ -20,7 +20,16 @@ class SurfaceCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: color == AppColors.surface
+            ? const [
+                BoxShadow(
+                  color: Color(0x06263D3A),
+                  blurRadius: 18,
+                  offset: Offset(0, 5),
+                ),
+              ]
+            : const [],
         border: Border.all(
           color: color == AppColors.surface
               ? AppColors.outline

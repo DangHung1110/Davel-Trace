@@ -99,6 +99,12 @@ void main() {
     await tester.drag(find.byType(ListView), const Offset(0, -700));
     await tester.pumpAndSettle();
     expect(find.text('Quên mật khẩu?'), findsOneWidget);
+    await tester.ensureVisible(
+      find.byKey(const Key('account-recovery-options')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('account-recovery-options')));
+    await tester.pumpAndSettle();
     expect(find.text('Khôi phục tài khoản đang chờ xóa'), findsOneWidget);
     expect(find.text('Tiếp tục với dữ liệu demo'), findsOneWidget);
     expect(tester.takeException(), isNull);

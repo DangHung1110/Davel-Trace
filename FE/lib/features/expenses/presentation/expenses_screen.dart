@@ -112,7 +112,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     final progress = summary.budgetVnd == 0
         ? 0.0
         : (summary.spentVnd / summary.budgetVnd).clamp(0.0, 1.0);
-    return ColoredBox(
+    return Material(
       color: AppColors.canvas,
       child: Column(
         children: [
@@ -160,17 +160,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 7,
-                        runSpacing: 7,
-                        children: [
-                          Chip(
-                            avatar: const Icon(Icons.route_outlined, size: 15),
-                            label: Text(trip.title),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
                       Text(
                         'Ngân sách chuyến đi',
                         style: Theme.of(context).textTheme.headlineMedium,
@@ -179,6 +168,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       Text(trip.title),
                       const SizedBox(height: 14),
                       SurfaceCard(
+                        color: AppColors.sand,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -239,7 +229,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               backgroundColor: AppColors.surfaceHigh,
                               color: summary.alert == '100'
                                   ? AppColors.error
-                                  : AppColors.secondary,
+                                  : AppColors.primary,
                             ),
                           ],
                         ),
@@ -272,60 +262,73 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         ),
                       ],
                       const SizedBox(height: 16),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 7),
-                              child: ChoiceChip(
-                                label: const Text('Mọi ngày'),
-                                selected: _date == 'all',
-                                onSelected: (_) =>
-                                    setState(() => _date = 'all'),
-                              ),
-                            ),
-                            ...state.tripDates.map((date) {
-                              final key =
-                                  '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 7),
-                                child: ChoiceChip(
-                                  label: Text('${date.day}/${date.month}'),
-                                  selected: _date == key,
-                                  onSelected: (_) =>
-                                      setState(() => _date = key),
-                                ),
-                              );
-                            }),
-                          ],
+                      ExpansionTile(
+                        key: const Key('expense-filters'),
+                        tilePadding: EdgeInsets.zero,
+                        title: const Text('Lọc khoản chi'),
+                        subtitle: Text(
+                          _date == 'all' && _category == 'all'
+                              ? 'Tất cả ngày · mọi nhóm'
+                              : 'Đang áp dụng bộ lọc',
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children:
-                              {
-                                'all': 'Tất cả',
-                                'food': 'Ăn uống',
-                                'ticket': 'Vé',
-                                'transport': 'Di chuyển',
-                                'accommodation': 'Lưu trú',
-                                'shopping': 'Mua sắm',
-                                'other': 'Khác',
-                              }.entries.map((entry) {
-                                return Padding(
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Padding(
                                   padding: const EdgeInsets.only(right: 7),
                                   child: ChoiceChip(
-                                    label: Text(entry.value),
-                                    selected: _category == entry.key,
+                                    label: const Text('Mọi ngày'),
+                                    selected: _date == 'all',
                                     onSelected: (_) =>
-                                        setState(() => _category = entry.key),
+                                        setState(() => _date = 'all'),
                                   ),
-                                );
-                              }).toList(),
-                        ),
+                                ),
+                                ...state.tripDates.map((date) {
+                                  final key =
+                                      '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 7),
+                                    child: ChoiceChip(
+                                      label: Text('${date.day}/${date.month}'),
+                                      selected: _date == key,
+                                      onSelected: (_) =>
+                                          setState(() => _date = key),
+                                    ),
+                                  );
+                                }),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children:
+                                  {
+                                    'all': 'Tất cả',
+                                    'food': 'Ăn uống',
+                                    'ticket': 'Vé',
+                                    'transport': 'Di chuyển',
+                                    'accommodation': 'Lưu trú',
+                                    'shopping': 'Mua sắm',
+                                    'other': 'Khác',
+                                  }.entries.map((entry) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 7),
+                                      child: ChoiceChip(
+                                        label: Text(entry.value),
+                                        selected: _category == entry.key,
+                                        onSelected: (_) => setState(
+                                          () => _category = entry.key,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       Row(
@@ -408,32 +411,25 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                           fontWeight: FontWeight.w800,
                                         ),
                                       ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          IconButton(
-                                            visualDensity:
-                                                VisualDensity.compact,
-                                            tooltip: 'Sửa',
-                                            onPressed: state.isMutating
-                                                ? null
-                                                : () => _edit(expense: expense),
-                                            icon: const Icon(
-                                              Icons.edit_outlined,
-                                              size: 17,
-                                            ),
+                                      PopupMenuButton<String>(
+                                        tooltip: 'Tùy chọn khoản chi',
+                                        enabled: !state.isMutating,
+                                        onSelected: (action) {
+                                          if (action == 'edit') {
+                                            _edit(expense: expense);
+                                          }
+                                          if (action == 'delete') {
+                                            _delete(expense);
+                                          }
+                                        },
+                                        itemBuilder: (_) => const [
+                                          PopupMenuItem(
+                                            value: 'edit',
+                                            child: Text('Sửa khoản chi'),
                                           ),
-                                          IconButton(
-                                            visualDensity:
-                                                VisualDensity.compact,
-                                            tooltip: 'Xóa',
-                                            onPressed: state.isMutating
-                                                ? null
-                                                : () => _delete(expense),
-                                            icon: const Icon(
-                                              Icons.delete_outline,
-                                              size: 17,
-                                            ),
+                                          PopupMenuItem(
+                                            value: 'delete',
+                                            child: Text('Xóa khoản chi'),
                                           ),
                                         ],
                                       ),

@@ -32,6 +32,7 @@ class AccountScreen extends StatelessWidget {
               const SizedBox(height: 20),
               SurfaceCard(
                 key: const Key('account-identity'),
+                color: AppColors.sand,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -98,7 +99,7 @@ class AccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 28),
               if (controller != null)
-                OutlinedButton.icon(
+                TextButton.icon(
                   key: const Key('account-logout-button'),
                   onPressed: controller!.busy
                       ? null

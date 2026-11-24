@@ -39,6 +39,9 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   int _pauseRequest = 0;
   int _resetRequest = 0;
   int _locateRequest = 0;
+  int _reloadMapRequest = 0;
+  String? _mapError;
+  bool _outsideMapCoverage = false;
   bool _isPlaying = false;
   MapLocation? _userLocation;
   String? _locationMessage;
@@ -146,6 +149,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
       _followUser = false;
       _userLocation = null;
       _locationMessage = message;
+      _outsideMapCoverage = false;
     });
   }
 
@@ -241,6 +245,22 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             routePreview: widget.routePreview,
             followUser: _followUser,
             onUserPan: _releaseCamera,
+            reloadRequest: _reloadMapRequest,
+            onMapError: (message) {
+              if (mounted && _mapError != message) {
+                setState(() => _mapError = message);
+              }
+            },
+            onMapReady: () {
+              if (mounted && _mapError != null) {
+                setState(() => _mapError = null);
+              }
+            },
+            onCoverageChanged: (inside) {
+              if (mounted && _outsideMapCoverage == inside) {
+                setState(() => _outsideMapCoverage = !inside);
+              }
+            },
           ),
         ),
         Positioned(
@@ -384,6 +404,39 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             ),
           ),
         ),
+        if (_mapError != null || _outsideMapCoverage)
+          Positioned(
+            top: 174,
+            left: 12,
+            right: 12,
+            child: PointerInterceptor(
+              child: Material(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(18),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _mapError ?? 'Vị trí GPS nằm ngoài vùng bản đồ Đà Nẵng. Bản đồ vẫn giữ ở chuyến đi của bạn.',
+                      ),
+                      if (_mapError != null)
+                        TextButton.icon(
+                          key: const Key('retry-map-button'),
+                          onPressed: () => setState(() {
+                            _mapError = null;
+                            _reloadMapRequest++;
+                          }),
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Tải lại bản đồ'),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         Positioned(
           left: 8,
           right: 8,
@@ -573,38 +626,28 @@ class _ActiveTripCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: FilledButton.icon(
-                    key: const Key('play-car-button'),
-                    onPressed: onPlay,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.secondary,
-                      foregroundColor: Colors.white,
+                  child: Tooltip(
+                    message: isPlaying ? 'Tạm dừng' : 'Mô phỏng tuyến',
+                    child: FilledButton.icon(
+                      key: const Key('play-car-button'),
+                      onPressed: isPlaying ? onPause : onPlay,
+                      icon: Icon(
+                        isPlaying
+                            ? Icons.pause_rounded
+                            : Icons.play_arrow_rounded,
+                        size: 18,
+                      ),
+                      label: Text(
+                        isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến',
+                      ),
                     ),
-                    icon: Icon(
-                      isPlaying
-                          ? Icons.directions_car_filled_rounded
-                          : Icons.play_arrow_rounded,
-                      size: 18,
-                    ),
-                    label: Text(isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến'),
                   ),
                 ),
                 const SizedBox(width: 7),
                 IconButton.filledTonal(
-                  tooltip: 'Tạm dừng',
-                  onPressed: onPause,
-                  icon: const Icon(Icons.pause_rounded),
-                ),
-                IconButton.filledTonal(
                   tooltip: 'Đặt lại mô phỏng',
                   onPressed: onReset,
                   icon: const Icon(Icons.restart_alt_rounded),
-                ),
-                const SizedBox(width: 5),
-                IconButton.filledTonal(
-                  tooltip: 'Xem chuyến đi',
-                  onPressed: onOpenPoi,
-                  icon: const Icon(Icons.info_outline_rounded),
                 ),
               ],
             ),

@@ -1,5 +1,22 @@
 # Flutter mobile — Davel Trace
 
+UI uses the coastal reference from Stitch project `11832778903374325952`, adapted
+to a softer mint/slate palette and the app's four real destinations. Rare account
+recovery and expense filters are disclosed on demand; expense edit/delete share a
+menu and route playback uses one play/pause control. Existing flows stay available.
+
+For the web debug demo keep FastAPI running on the configured `API_BASE_URL`. The
+map iframe prefers `/v1/maps/danang.pmtiles`, which supports byte-range responses;
+Flutter's debug asset server serves the full file and cannot supply suitable ranges.
+The packaged asset remains a fallback for range-capable static hosting. The map
+keeps one iframe across GPS fixes, reports retryable load errors, and explains fixes
+outside the local Da Nang coverage instead of following them into an empty region.
+Native Flutter continues using its existing OSM tile provider.
+
+Map checks: `node --test tool/map_location_bridge.test.cjs`; with app/backend running,
+`node tool/map_browser_smoke.cjs` runs a separate headless Chromium with synthetic
+GPS fixes and writes `build/ui-review/map-browser-390.png`. No device GPS is read.
+
 Live foreground GPS, camera following and device test instructions:
 [`live GPS quickstart`](../specs/014-live-gps/quickstart.md).
 
