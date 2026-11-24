@@ -31,6 +31,7 @@ Errors: `{ "error": "<code>", "message": "<vi>" }`.
 - Rule: `constraint_status` có thêm cổng cứng `PROFILE_SAFE` (dị ứng / must_avoid / khả năng đi lại của hồ sơ, kiểm lại trên plan cuối).
 
 - Rule (FR-020): `trip.days = 2` trả một plan cho cả chuyến. Mỗi phần tử `activities` và `segments` có `day` (1, 2); `days = [{day, date, stops, total_cost, total_km, total_min, travel_min, cost_estimated, passed, violations, template, soft_penalties}]`. Không điểm nào lặp giữa các ngày; `total_cost` và `passed` tính cho cả chuyến. Không xếp đủ số ngày → `passed: false` kèm cảnh báo. `days = 1` giữ nguyên dạng cũ (không có `day`, `days`).
+- Rule: `trip.resume = {start_time, origin?}` (mặc định `null`) dùng cho replan giữa ngày đầu của chuyến 2 ngày. Ngày 1 bắt đầu lúc `resume.start_time`, từ `resume.origin` (nơi khách đang ở; không gửi thì dùng `trip.origin`). Các ngày sau vẫn bắt đầu lúc `trip.start_time` từ `trip.origin`. Gate chấm ngày 1 theo giờ và điểm đó: ngày bắt đầu sau 12:30 (không còn đủ 60 phút của khung trưa 11:30–13:30) không phải có bữa trưa, chặng đầu B3 tính từ `resume.origin`. Điểm không có hàng trong ma trận thì ngày 1 không có điểm xuất phát và `warnings` nói rõ. Với `days = 1`, `resume` chỉ là `start_time` và `origin` của ngày đó.
 
 ## POST /itinerary/select — chốt plan
 - In: `{ "itinerary_id": "..." }` → Out: `{ "active_id": "..." }`
@@ -44,6 +45,14 @@ accepted-plan evidence. Xem `specs/003-stable-planning-roadmap/contracts/api.md`
 - Out: `{ "itinerary": {Itinerary v+1}, "mode": "plan|clarify|no_solution", "changes": [...], "day": 2 }`
 - Rule: completed activities preserved; version++.
 - Rule (FR-020): plan nhiều ngày chỉ xếp lại một ngày: `day`, mặc định là ngày đầu tiên còn điểm chưa đi. Các ngày khác trả về nguyên vẹn. Ngày không có trong plan → 404 `UNKNOWN_DAY`.
+
+## POST /trips/{trip_id}/replans — app lập lại phần còn lại (cần đăng nhập)
+- In: `{ "source_version_id": "...", "remaining_from": "2026-11-24T14:05:00+07:00", "completed_activity_ids": [...], "skipped_activity_ids": [...], "unavailable_poi_ids": [...], "changed_constraints": {...}, "target_count": 5 }`, header `Idempotency-Key` (mới cho mỗi lần bấm). Chỉ `source_version_id` là bắt buộc.
+- Out: planning request như `POST /trips/{id}/planning-requests`, `request_kind: "replan"`, có thêm `remaining_context.window = {day, date, days, start_time}` và `plan.window` trong từng phương án.
+- Rule: `remaining_from` là giờ thiết bị (ISO 8601; có múi giờ thì đổi sang giờ Đà Nẵng, không có thì coi là giờ Đà Nẵng; chỉ `HH:MM` thì là hôm nay). Không gửi thì server lấy giờ hiện tại theo Asia/Ho_Chi_Minh. Giờ rơi vào một ngày của chuyến: lập ngày đó từ giờ ấy (không sớm hơn `day_start`) và các ngày sau. Còn dưới 60 phút trước `day_end` thì chuyển sang ngày sau từ `day_start`; ngày cuối thì 409 `REPLAN_WINDOW_CLOSED`. Trước hoặc sau chuyến: lập cả chuyến từ `day_start`. `remaining_from` không đọc được → 422 `VALIDATION_ERROR`.
+- Rule: ngày bắt đầu lại từ điểm vừa đi xong trong chính ngày đó; điểm của hôm trước không tính, ngày đó bắt đầu từ khách sạn (`base_poi_id`). Giữa ngày 1 của chuyến 2 ngày, planner nhận `trip.resume` (ngày 2 vẫn từ `day_start` và khách sạn).
+- Rule: `changed_constraints` ghi đè từng khóa lên `constraint_overrides` của request đã tạo phiên bản nguồn: khóa có gửi thay hẳn giá trị cũ (`[]` làm rỗng danh sách, `null` bỏ ràng buộc có thể bỏ), khóa không gửi giữ nguyên. Không gửi gì thì dùng lại toàn bộ ràng buộc cũ. Điểm đã đi, bỏ qua hoặc đóng cửa vào `avoid` và ra khỏi `must_visit`; ngân sách trừ chi tiêu đã ghi.
+- Rule: thử lại đúng khóa và body cũ trả lại request đã lưu, kể cả khi đã qua giờ; giờ server không nằm trong fingerprint. Cùng khóa mà khác body → 409 `IDEMPOTENCY_CONFLICT`. Chi tiết và việc phía app: `specs/023-replan-remaining/spec.md`.
 
 ## GET /itinerary/{id} — đọc lịch (offline cache key)
 
