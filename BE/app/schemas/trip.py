@@ -10,11 +10,21 @@ food_prefs[], allergy[], activities[], outdoor_bias(-1..1), accessibility[],
 must_avoid[], transport[].
 
 Neutral defaults: spending/pace/fitness = 2, outdoor_bias = 0.0, lists empty.
+
+`TripRequest.areas` names the planning zones the traveller wants to stay in (the
+`zone` of every danang-v2 POI). Empty means anywhere: the plan is unchanged.
 """
 
 from __future__ import annotations
 
+from typing import Literal, get_args
+
 from pydantic import BaseModel, Field, field_validator, model_validator
+
+# The planning zones of danang-v2 (`zone` of a POI, BE/ml/data/v2_rules.ZONES).
+Area = Literal["trung_tam", "son_tra_my_khe", "ngu_hanh_son", "hoi_an",
+               "hai_van_lien_chieu", "ba_na_tay"]
+AREA_CODES: tuple[str, ...] = get_args(Area)
 
 
 class TripProfile(BaseModel):
@@ -71,10 +81,23 @@ class TripRequest(BaseModel):
     activities: list[str] = Field(default_factory=list)
     food_prefs: list[str] = Field(default_factory=list)
     order_prefs: list[list[str]] = Field(default_factory=list)
+    # Zones the plan stays in (AREA_CODES); a must_visit outside them is still kept.
+    areas: list[Area] = Field(default_factory=list)
     # Catalog-freeze onboarding profile; plain dict on the wire, validated here.
     # The default is the neutral profile (levels 2, bias 0, empty lists), so a
     # client that omits `profile` still sees the exact same key set it can send.
     profile: dict = Field(default_factory=lambda: TripProfile().model_dump())
+
+    @field_validator("areas", mode="before")
+    @classmethod
+    def _coerce_areas(cls, value):
+        """`null` is no area, like omitting the field."""
+        return [] if value is None else value
+
+    @field_validator("areas", mode="after")
+    @classmethod
+    def _unique_areas(cls, value: list[str]) -> list[str]:
+        return list(dict.fromkeys(value))
 
     @field_validator("profile", mode="before")
     @classmethod

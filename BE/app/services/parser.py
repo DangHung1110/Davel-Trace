@@ -9,10 +9,17 @@ Contract (spec FR-001..006):
   default assumption (07:00-18:00, 1 day) recorded in `assumptions`, never
   silent.
 
+`areas` (the zones the plan stays in) is read from the text itself, not from the
+LLM (`areas_in_text`): every request names "Đà Nẵng", and a model that reads it as
+"the centre" would lock every plan to one zone.
+
 `llm_fn` (default llm.complete_json) is injectable for mock tests.
 """
 
 from __future__ import annotations
+
+import re
+import unicodedata
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -20,6 +27,64 @@ from BE.app.schemas.trip import TripRequest
 from BE.app.services import llm as llm_gateway
 
 DEFAULT_START, DEFAULT_END, DEFAULT_DAYS = "07:00", "18:00", 1
+
+# How a traveller names a planning zone (`TripRequest.areas`). Matched on whole
+# words, longest phrase first; a matched phrase is consumed, so "trung tâm Hội An"
+# is Hội An and not also the centre. An empty list only blocks its words: a
+# "trung tâm thương mại" is a mall, not the centre.
+AREA_PHRASES = {
+    "trung tâm": ["trung_tam"], "hải châu": ["trung_tam"],
+    "trung tâm thương mại": [], "trung tâm mua sắm": [], "trung tâm hội nghị": [],
+    "trung tâm vui chơi": [], "trung tâm triển lãm": [],
+    "sơn trà": ["son_tra_my_khe"], "mỹ khê": ["son_tra_my_khe"],
+    "ngũ hành sơn": ["ngu_hanh_son"], "non nước": ["ngu_hanh_son"],
+    "hội an": ["hoi_an"], "phố cổ": ["hoi_an"],
+    "trung tâm hội an": ["hoi_an"], "trung tâm phố cổ": ["hoi_an"],
+    "hải vân": ["hai_van_lien_chieu"], "liên chiểu": ["hai_van_lien_chieu"],
+    "bà nà": ["ba_na_tay"],
+}
+# A zone named right after one of these (up to 3 words, same clause) is one the
+# traveller does NOT want: "không đi Hội An", "tránh Sơn Trà". Accented on purpose:
+# folded, "tranh" is a painting and "bo" a walk ("đi bộ").
+AREA_NEGATIONS = {"không", "khong", "tránh", "trừ", "khỏi", "đừng", "chẳng", "bỏ"}
+_NEGATION_WINDOW = 3
+
+
+def _fold(word: str) -> str:
+    plain = "".join(c for c in unicodedata.normalize("NFD", word)
+                    if unicodedata.category(c) != "Mn")
+    return unicodedata.normalize("NFC", plain).replace("đ", "d")
+
+
+# (words, the same words without accents, zones), longest phrase first.
+_AREA_RULES = sorted(
+    ((tuple(phrase.split()), tuple(_fold(word) for word in phrase.split()), codes)
+     for phrase, codes in AREA_PHRASES.items()),
+    key=lambda rule: len(rule[0]), reverse=True)
+
+
+def areas_in_text(text: str) -> list[str]:
+    """The zones a request names, in the order it names them.
+
+    A phrase matches with its accents, or typed entirely without them ("hoi an");
+    a word with other accents is another word ("hai vạn" is not Hải Vân).
+    """
+    found: list[str] = []
+    lowered = unicodedata.normalize("NFC", str(text or "")).lower()
+    for clause in re.split(r"[,.;:!?\n]+", lowered):
+        words = re.findall(r"\w+", clause)
+        i = 0
+        while i < len(words):
+            rule = next((r for r in _AREA_RULES
+                         if tuple(words[i:i + len(r[0])]) in (r[0], r[1])), None)
+            if rule is None:
+                i += 1
+                continue
+            phrase, _plain, codes = rule
+            if not AREA_NEGATIONS.intersection(words[max(0, i - _NEGATION_WINDOW):i]):
+                found += [code for code in codes if code not in found]
+            i += len(phrase)
+    return found
 
 
 class TripSlots(BaseModel):
@@ -146,7 +211,7 @@ def parse(text: str, user_id: str = "u1", llm_fn=None) -> dict:
         transport=slots.transport or ["motorbike"],
         must_visit=slots.must_visit, avoid=slots.avoid,
         activities=slots.activities, food_prefs=slots.food_prefs,
-        order_prefs=slots.order_prefs)
+        order_prefs=slots.order_prefs, areas=areas_in_text(text))
     return {"trip": trip, "assumptions": assumptions,
             "soft_prefs": slots.soft_prefs,
             "hard_constraints": slots.hard_constraints,

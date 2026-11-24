@@ -196,6 +196,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     if origin_warning:
         retired_warnings.append(origin_warning)
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
+    if trip.get("areas") and not any(p.get("zone") for p in pois):
+        # danang-v1 has no zones: say the choice did nothing instead of ignoring it.
+        retired_warnings.append("khong loc theo khu vuc: du lieu nay chua chia khu vuc")
     # An unverified must_visit is reported under `needs_verification` (FR-013) and
     # never planned: left in the list it is a stop the solver must make and cannot,
     # and the traveller gets no plan at all.

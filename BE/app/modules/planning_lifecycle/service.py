@@ -188,6 +188,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         avoid=avoid,
         activities=list(snapshot.get("activities") or []),
         food_prefs=list(snapshot.get("food_preferences") or []),
+        areas=list(snapshot.get("areas") or []),
         profile=_profile(_effective_profile(snapshot)),
     ).model_dump()
 
@@ -262,7 +263,7 @@ class PlanningLifecycleService:
                 "indicative_budget", "preferred_transport", "day_start",
                 "day_end", "traveler_count", "preference_overrides",
                 "must_visit", "avoid", "activities", "food_preferences",
-                "base_poi_id",
+                "base_poi_id", "areas",
             ):
                 if field in overrides:
                     effective_snapshot[field] = overrides[field]
