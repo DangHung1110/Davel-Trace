@@ -20,6 +20,7 @@ One row per account. Collections are bounded and de-duplicated. Hard values cann
 - lifecycle `available|archived|deleted|purged`; review `current|needs_review`
 - optional `indicative_budget`, `currency=VND`, transport, daily bounds, notes
 - `profile_version`, immutable `profile_snapshot`, soft `preference_overrides`
+  (planning keys: `base_poi_id`, `outdoor_bias`, `areas` as zone codes; see specs 021, 022)
 - `version`, timestamps, `archived_at`, `deleted_at`, `purge_after`
 
 Owner/lifecycle/date/update/title indexes support listing. Deleted/archived records are excluded by default.

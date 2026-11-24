@@ -11,6 +11,7 @@ from BE.app.core.config import Settings, get_settings
 from BE.app.modules.ai_assistance.domain import ExplanationDraft, InterpretationDraft, ShadowDraft
 from BE.app.modules.catalog.application import normalize_place_name, resolve_name_candidates
 from BE.app.services.llm import LLMError, complete_json, provider_metadata
+from BE.app.services.parser import areas_in_text
 
 
 Completer = Callable[[str, type, Settings], dict]
@@ -160,6 +161,10 @@ class AiAssistanceService:
                 "must_visit": resolve(draft.must_visit, "must_visit"),
                 "avoid": resolve(draft.avoid, "avoid"),
                 "accessibility": draft.accessibility,
+                # Zones read from the text by a fixed phrase table, never by the
+                # model: every request says "Đà Nẵng", which a model may take for
+                # the centre. [] leaves the trip's saved zones in force.
+                "areas": areas_in_text(clean),
             },
             "soft_preferences": {
                 "activities": draft.activities,
