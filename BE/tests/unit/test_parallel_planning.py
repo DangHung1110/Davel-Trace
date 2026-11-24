@@ -210,6 +210,7 @@ class TestCandidateCap(unittest.TestCase):
         self.assertEqual({p["poi_id"] for p in kept},
                          {"cafe9", "restaurant9", "beach9"})
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_build_plan_solves_on_the_capped_pool(self):
         seen, real_cap, real_opt = {}, profiles_mod._cap_candidates, profiles_mod.optimize
 

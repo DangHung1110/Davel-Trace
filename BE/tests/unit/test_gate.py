@@ -5,6 +5,7 @@ Both remain local boolean stubs until the T061 evaluator wiring PR.
 
 Run from repo root: python BE/tests/unit/test_gate.py -v
 """
+from unittest import mock
 
 import os
 import sys
@@ -224,6 +225,7 @@ class TestGate(unittest.TestCase):
 
     # --- A1: one restaurant per meal slot (hard, data-quality pass) -------
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_a1_two_restaurants_same_lunch_slot_fails(self):
         itin = {"activities": [
             {"poi_id": "lunch-a", "start": "11:10", "end": "12:10"},
@@ -493,6 +495,7 @@ class TestRuleFreeze(unittest.TestCase):
                 self.assertFalse(
                     check_no_consecutive(itin, trip, pois, matrix)["passed"])
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_report_surfaces_deprecated_failures_additively(self):
         itin = {"activities": [
             {"poi_id": "lunch-a", "start": "11:30", "end": "12:30"},

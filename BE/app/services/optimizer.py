@@ -50,6 +50,7 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.common import effective_fee, hhmm, poi_open_windows, to_min, trusted_rating
+from BE.app.services import objective as objective_mod
 
 TIMEOUT_S = 5.0
 
@@ -65,6 +66,11 @@ DIVERSITY_WEIGHT = 1.0
 DIVERSITY_PRESENCE_RATIO = 0.25   # per distinct category in the day
 DIVERSITY_EXCESS_RATIO = 0.75     # per visit beyond CATEGORY_SOFT_CAP
 CATEGORY_SOFT_CAP = 2
+# Soft taste rules (exp/soft-rules-v2), in units of the top POI score like the
+# diversity terms: a stop beyond the per-category daily cap costs half a top POI,
+# a same-category arc a third of one. Design priors, to calibrate on gold/human review.
+SOFT_CATEGORY_CAP_RATIO = 0.5
+SOFT_CONSECUTIVE_RATIO = 0.3
 # The seed walk (_greedy_hint): what is owed goes first once it is at most this many
 # minutes away, and a leg is assumed to take at least this long.
 HINT_READY_MIN = 30
@@ -142,6 +148,8 @@ class StubPOI:
     visit_max: int = 0        # p75: how long a visit may run when the day has room
     # hours.kind == "by_booking": bookable sessions (cooking class); <= 1/day
     booking: bool = False
+    group: str = ""           # objective v1 T3/T4 diversity group ("" = meal / unknown)
+    zone: str = ""            # objective v1 T9 zone (a change of zone costs)
 
 
 def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
@@ -225,7 +233,9 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    intensity=int(poi.get("intensity") or 2),
                    windows=tuple(wins) if len(wins) > 1 else (),
                    fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi),
-                   booking=(poi.get("hours") or {}).get("kind") == "by_booking")
+                   booking=(poi.get("hours") or {}).get("kind") == "by_booking",
+                   group=objective_mod.diversity_group(poi),
+                   zone=str(poi.get("zone") or ""))
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -752,6 +762,106 @@ def _overlap_hits(m, t, dur, visit, i, lo: int, hi: int, tag: str):
     return hit
 
 
+def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: dict,
+                        trip: StubTrip, t: dict, visit: dict, arc: dict, unit: float,
+                        slot_hits: dict, a1_hard: bool, rest_taken, tmax: int):
+    """Objective v1 terms T3-T9 (BE/app/services/objective.py), as one linear expression.
+
+    Every coefficient is a weight in U times `unit * 1000`, the scale of the value
+    term (`sco * 1000`), rounded to an integer like the rest of the model.
+    """
+    n = len(ids)
+    scale = unit * 1000.0
+
+    def k(weight: float) -> int:
+        return int(round(scale * weight))
+
+    expr = 0
+    # T3: repeats inside a diversity group. y2, y3 then e (4th stop on) cost rho in
+    # increasing order, so the solver always pays the cheapest one first.
+    rho = list(spec.w.get("rho") or [0.35, 0.7, 1.0])
+    groups: dict[str, list[int]] = {}
+    for i in range(1, n + 1):
+        if pois[i - 1].group:
+            groups.setdefault(pois[i - 1].group, []).append(i)
+    rep = spec.coef("repeat_scale")
+    for g, nodes in groups.items():
+        if len(nodes) < 2 or rep <= 0:
+            continue
+        beta = spec.beta(g) * rep
+        y2 = m.NewBoolVar(f"rep2_{g}")
+        parts = [(y2, rho[0])]
+        if len(nodes) >= 3:
+            y3 = m.NewBoolVar(f"rep3_{g}")
+            parts.append((y3, rho[min(1, len(rho) - 1)]))
+        if len(nodes) >= 4:
+            e = m.NewIntVar(0, len(nodes), f"rep4_{g}")
+            parts.append((e, rho[min(2, len(rho) - 1)]))
+        m.Add(sum(v for v, _r in parts) >= sum(visit[i] for i in nodes) - 1)
+        for v, r in parts:
+            expr -= k(beta * r) * v
+    # T4 + T9 on the arcs: a constant cost per used leg.
+    gamma = spec.coef("gamma")
+    origin = trip.origin_id or None
+    for i in range(n + 1):
+        for j in range(n + 1):
+            if i == j or (i == 0 and j == 0):
+                continue
+            if (i == 0 or j == 0) and not origin:
+                continue  # open tour: the depot legs are not modelled
+            a = origin if i == 0 else ids[i - 1]
+            b = origin if j == 0 else ids[j - 1]
+            minutes = travel.get((a, b))
+            cost = 0.0
+            if minutes is not None:
+                za = "" if i == 0 else pois[i - 1].zone
+                zb = "" if j == 0 else pois[j - 1].zone
+                cost += objective_mod.arc_cost(spec, int(minutes), za, zb)
+            if i and j and pois[i - 1].group and pois[i - 1].group == pois[j - 1].group:
+                cost += gamma * spec.beta(pois[i - 1].group)
+            if cost:
+                expr -= k(cost) * arc[(i, j)]
+    # T5: a meal in each meal window the day spans.
+    bonus = spec.w.get("meal_bonus") or {}
+    meal_scale = spec.coef("meal_scale")
+    food = [i for i in range(1, n + 1) if pois[i - 1].restaurant and not pois[i - 1].booking]
+    for meal, lo, hi in objective_mod.meal_windows(spec, trip.start_min, tmax):
+        weight = float(bonus.get(meal, 0.0)) * meal_scale
+        if weight <= 0 or not food:
+            continue
+        hits = [_window_hits(m, t, visit, i, lo, hi, f"t5{meal}") for i in food]
+        z = m.NewBoolVar(f"meal_{meal}")
+        m.Add(z <= sum(hits))
+        expr += k(weight) * z
+    # T6: a second restaurant in one meal slot (A1 when it is soft).
+    crowd = spec.meal_crowd()
+    if not a1_hard and crowd > 0:
+        for idx, hits in slot_hits.items():
+            if len(hits) > 1:
+                extra = m.NewIntVar(0, len(hits), f"crowd_{idx}")
+                m.Add(extra >= sum(hits) - 1)
+                expr -= k(crowd) * extra
+    # T7: the siesta right after lunch.
+    if rest_taken is not None:
+        expr += k(spec.rest_bonus()) * rest_taken
+    # T8: stops beyond the comfortable count K0.
+    if spec.k0 is not None and spec.coef("pace_scale") > 0 and n > spec.k0:
+        kappa = list(spec.w.get("kappa") or [0.3, 0.6, 1.0])
+        pace = spec.coef("pace_scale")
+        s1 = m.NewBoolVar("pace_1")
+        parts = [(s1, kappa[0])]
+        if n > spec.k0 + 1:
+            s2 = m.NewBoolVar("pace_2")
+            parts.append((s2, kappa[min(1, len(kappa) - 1)]))
+        if n > spec.k0 + 2:
+            s3 = m.NewIntVar(0, n, "pace_3")
+            parts.append((s3, kappa[min(2, len(kappa) - 1)]))
+        m.Add(sum(v for v, _k in parts) >= sum(visit[i] for i in range(1, n + 1)) - int(spec.k0))
+        for v, kk in parts:
+            expr -= k(pace * kk) * v
+    return expr
+
+
 def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              trip: StubTrip, timeout_s: float = TIMEOUT_S,
              edge_scores: dict[tuple[str, str], float] | None = None,
@@ -773,6 +883,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              state_score: dict[tuple[str, int], float] | None = None,
              state_cost: dict[tuple[str, int], float] | None = None,
              category_cap: int | None = None,
+             soft_category_cap: int | None = None,
+             soft_no_consecutive: bool = False,
              diversity_weight: float | None = None,
              solution_pool: int = 1,
              pool_band: float = POOL_DEFAULT_BAND,
@@ -782,7 +894,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
              distinct_ceiling: float = 0.6,
              deterministic_time: float | None = None,
              not_first: set[str] | None = None,
-             max_fee: int | None = None) -> dict:
+             max_fee: int | None = None,
+             objective: "objective_mod.Spec | None" = None) -> dict:
     """The best day over `pois` (see the module docstring for the model).
 
     edge_scores[(a, b)]: bonus when transition a->b is used.
@@ -835,6 +948,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     unless a hard rule (must_visit, a wish group, the pace floor) needs it.
     diversity_weight: overrides `DIVERSITY_WEIGHT` for this solve (the experience profile
     passes a dominant value, so a new category beats another stop of the same one).
+    objective: objective v1 (`objective.Spec`). The taste rules become terms of the
+    objective (T3-T9, see BE/app/services/objective.py): A1 and the siesta turn into
+    penalties/bonuses unless `objective.strict` names them, the legacy diversity terms
+    are replaced, and riding minutes, long legs and zone changes cost. None = legacy.
 
     solution_pool/pool_band/pool_timeout_s: enumerate up to `solution_pool` DISTINCT POI
     sets with objective >= `pool_band` * best, inside the enumeration budget. The result
@@ -868,10 +985,13 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         state_bands=state_bands, state_score=state_score,
                         state_cost=state_cost,
                         category_cap=category_cap,
+                        soft_category_cap=soft_category_cap,
+                        soft_no_consecutive=soft_no_consecutive,
                         diversity_weight=diversity_weight,
                         distinct_from=distinct_from,
                         distinct_ceiling=distinct_ceiling, max_fee=max_fee,
-                        deterministic_time=deterministic_time, not_first=not_first))
+                        deterministic_time=deterministic_time, not_first=not_first,
+                        objective=objective))
 
     ids = [p.poi_id for p in pois]
     n = len(ids)
@@ -941,8 +1061,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         for idx, (lo, hi) in enumerate(MEAL_SLOTS):
             slot_hits.setdefault(idx, []).append(
                 _window_hits(m, t, visit, i, lo, hi, f"a1_{idx}"))
+    a1_hard = objective is None or "A1" in objective.strict
     for hits in slot_hits.values():
-        if len(hits) > 1:
+        if len(hits) > 1 and a1_hard:
             m.Add(sum(hits) <= 1)
     # by_booking (HARD): at most one session-based experience per day
     booked = [visit[i] for i in range(1, n + 1) if pois[i - 1].booking]
@@ -954,6 +1075,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # "exactly one lunch". The same hits drive the rest window (below), which
     # is tied to the chosen lunch's END, not to a fixed 13:00 anchor.
     lunch_hits: list[tuple[int, object]] = []
+    rest_hard = rest_after_lunch is not None and (
+        objective is None or "REST_FOLLOWS_LUNCH" in objective.strict)
+    rest_soft = rest_after_lunch is not None and not rest_hard
     if lunch_required or rest_after_lunch is not None:
         lunch_hits = [
             (i, _window_hits(m, t, visit, i, LUNCH_REQUIRED[0],
@@ -971,11 +1095,12 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(t[i] <= LUNCH_REQUIRED[0]).OnlyEnforceIf(through)
             m.Add(t[i] + dur[i] >= LUNCH_REQUIRED[1]).OnlyEnforceIf(through)
             on_site.append(through)
-        if not lunch_hits and not on_site:
-            return {"status": "infeasible",
-                    "reason": "khong co nha hang cho bua trua",
-                    "elapsed_s": 0.0, "itinerary": None}
-        m.Add(sum(hit for _i, hit in lunch_hits) + sum(on_site) >= 1)
+        if lunch_required or rest_hard:
+            if not lunch_hits and not on_site:
+                return {"status": "infeasible",
+                        "reason": "khong co nha hang cho bua trua",
+                        "elapsed_s": 0.0, "itinerary": None}
+            m.Add(sum(hit for _i, hit in lunch_hits) + sum(on_site) >= 1)
     if dinner_required:
         dinner_hits = [_window_hits(m, t, visit, i, DINNER_REQUIRED[0],
                                     DINNER_REQUIRED[1], "dinner")
@@ -991,16 +1116,27 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # The window may run past trip.end_min for a late lunch; then no stop can
     # start after it, which is exactly the horizon trim (report/validator
     # shrink the length, floor 20 min, and say so).
+    # Objective v1 (rest_soft): the same window, but only when `rest_taken`, which
+    # earns T7; a soft siesta needs a restaurant lunch to follow.
+    rest_taken = None
     if rest_after_lunch is not None:
+        cond = []
+        if rest_soft:
+            rest_taken = m.NewBoolVar("rest_taken")
+            cond = [rest_taken]
+            if lunch_hits:
+                m.Add(sum(hit for _i, hit in lunch_hits) >= 1).OnlyEnforceIf(rest_taken)
+            else:
+                m.Add(rest_taken == 0)
         rest_start = m.NewIntVar(trip.start_min, tmax, "rest_start")
         for i, hit in lunch_hits:
-            m.Add(rest_start == t[i] + dur[i]).OnlyEnforceIf(hit)
+            m.Add(rest_start == t[i] + dur[i]).OnlyEnforceIf([hit] + cond)
         rest_end = rest_start + int(rest_after_lunch)
         for i in range(1, n + 1):
             before = m.NewBoolVar(f"rest_b_{i}")
             m.Add(t[i] + dur[i] <= rest_start).OnlyEnforceIf(
-                [visit[i], before])
-            m.Add(t[i] >= rest_end).OnlyEnforceIf([visit[i], before.Not()])
+                [visit[i], before] + cond)
+            m.Add(t[i] >= rest_end).OnlyEnforceIf([visit[i], before.Not()] + cond)
 
     # gate CAFE_CAP (HARD): 1 cafe/day; a 2nd only across dayparts (morning
     # < 11:00 + afternoon > 13:00). The gate also requires the profile cafe
@@ -1152,7 +1288,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     for (a, b), q in (edge_scores or {}).items():
         ia, ib = node.get(a), node.get(b)
         if ia is not None and ib is not None and ia != ib:
-            obj += int(float(q) * 100) * arc[(ia, ib)]
+            w_edge = 1.0 if objective is None else objective.coef("w_edge")
+            obj += int(float(q) * 100 * w_edge) * arc[(ia, ib)]
 
     # TASK-1: category diversity. Terms are scaled by the top POI score so
     # one knob means the same thing for savings (~0.5) and balanced (~5).
@@ -1161,7 +1298,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         unit = 1.0
     div_weight = (DIVERSITY_WEIGHT if diversity_weight is None
                   else float(diversity_weight))
-    if div_weight > 0:
+    if div_weight > 0 and objective is None:
         presence_bonus = int(unit * DIVERSITY_PRESENCE_RATIO
                              * div_weight * 1000)
         excess_penalty = int(unit * DIVERSITY_EXCESS_RATIO
@@ -1182,6 +1319,31 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 m.Add(excess >= count - CATEGORY_SOFT_CAP)
                 obj -= excess_penalty * excess
 
+    # Soft taste rules: the per-category daily cap and the no-consecutive rule as
+    # penalties instead of constraints (soft_rules.solver_taste_args). A second
+    # beach or two temples in a row stay possible when they are worth the cost.
+    if soft_category_cap is not None:
+        cap_penalty = int(unit * SOFT_CATEGORY_CAP_RATIO * 1000)
+        groups: dict[str, list[int]] = {}
+        for i in range(1, n + 1):
+            cat = pois[i - 1].category
+            if cat in NON_FOOD_CAPPED:
+                groups.setdefault(cat, []).append(i)
+        for cat, nodes in groups.items():
+            if len(nodes) > int(soft_category_cap):
+                over = m.NewIntVar(0, len(nodes), f"soft_cap_{cat}")
+                m.Add(over >= sum(visit[i] for i in nodes) - int(soft_category_cap))
+                obj -= cap_penalty * over
+    if soft_no_consecutive:
+        consec_penalty = int(unit * SOFT_CONSECUTIVE_RATIO * 1000)
+        for i in range(1, n + 1):
+            left = pois[i - 1].category
+            if not left:
+                continue
+            for j in range(1, n + 1):
+                if i != j and pois[j - 1].category == left:
+                    obj -= consec_penalty * arc[(i, j)]
+
     # TASK-3: A2 by TIME DISTANCE, not slot label. Any two visited
     # restaurants whose STARTs are < RESTAURANT_PAIR_MAX_GAP apart cost a
     # full stop's worth of objective (scaled by `unit`), so a 10:49 lunch
@@ -1189,7 +1351,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # though gate A1 (slot membership) sees only one restaurant.
     restaurants = [i for i in range(1, n + 1) if pois[i - 1].restaurant]
     if len(restaurants) > 1:
-        pair_penalty = int(unit * A2_PAIR_WEIGHT * 1000)
+        pair_penalty = int(unit * (A2_PAIR_WEIGHT if objective is None
+                                   else objective.meal_crowd()) * 1000)
         for pos, i in enumerate(restaurants):
             for j in restaurants[pos + 1:]:
                 both = m.NewBoolVar(f"a2b_{i}_{j}")
@@ -1224,7 +1387,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     # the band boundary with its midpoint. No band means no term (the
     # legacy/eval paths are unchanged).
     if state_bands and (state_score or state_cost):
-        band_unit = int(unit * STATE_WEIGHT * 1000)
+        band_unit = int(unit * (STATE_WEIGHT if objective is None
+                                else objective.coef("w_state")) * 1000)
         probes = []
         for k, frac in enumerate(((1, 4), (3, 4))):
             probe = {}
@@ -1248,6 +1412,9 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     hit = _window_hits(m, probe, visit, i, int(lo), int(hi),
                                        f"state_{k}")
                     obj += delta * hit
+    if objective is not None:
+        obj += _objective_v1_terms(m, objective, pois, ids, travel, trip, t, visit, arc,
+                                   unit, slot_hits, a1_hard, rest_taken, tmax)
     m.Maximize(obj)
 
     # Deterministic initial solution (see _greedy_hint): keeps the harness's
@@ -1258,10 +1425,13 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  - must_set)
     hint = _greedy_hint(pois, travel, trip, must_set,
                         blocked_window=blocked_window, max_stops=max_stops,
-                        cafe_cap=cafe_cap, no_consecutive=no_consecutive,
+                        cafe_cap=cafe_cap,
+                        no_consecutive=no_consecutive or soft_no_consecutive,
                         no_adjacent_food=no_adjacent_food,
                         rest_after_lunch=rest_after_lunch,
-                        category_cap=category_cap, avoid_ids=avoid_ids,
+                        category_cap=(category_cap if category_cap is not None
+                                      else soft_category_cap),
+                        avoid_ids=avoid_ids,
                         precedence=precedence, max_fee=max_fee, required_any=required_any,
                         lunch_required=lunch_required, dinner_required=dinner_required,
                         state_bands=state_bands, state_cost=state_cost,
@@ -1334,7 +1504,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         return order, acts
 
     order, acts = _take()
-    objective = solver.ObjectiveValue()
+    obj_value = solver.ObjectiveValue()
     return {"status": "optimal" if status == cp_model.OPTIMAL else "feasible-timeout",
             "from_hint": from_hint, "rescued": rescued,
             "elapsed_s": round(elapsed, 3),
@@ -1342,13 +1512,15 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                           "total_score": round(sum(sco[i] for i in order), 3),
                           "total_min": (int(solver.Value(t[order[-1]]))
                                         + dur[order[-1]] - trip.start_min) if order else 0},
-            "objective": objective,
-            "pool": [{"activities": acts, "objective": round(objective, 3),
+            "objective": obj_value,
+            "unit": unit,
+            "rest_taken": (None if rest_taken is None else bool(solver.Value(rest_taken))),
+            "pool": [{"activities": acts, "objective": round(obj_value, 3),
                       "poi_ids": [a["poi_id"] for a in acts]}],
             "pool_stats": {"requested": max(1, int(solution_pool)), "found": 1,
                            "band": float(pool_band),
-                           "best_objective": round(objective, 3),
-                           "floor_objective": round(objective, 3),
+                           "best_objective": round(obj_value, 3),
+                           "floor_objective": round(obj_value, 3),
                            "best_status": ("optimal" if status == cp_model.OPTIMAL
                                            else "feasible-timeout"),
                            "elapsed_s": 0.0}}

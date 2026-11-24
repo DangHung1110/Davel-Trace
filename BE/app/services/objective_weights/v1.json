@@ -1,0 +1,62 @@
+{
+  "version": "v1",
+  "note": "Hand-set v1 weights (doc: Davel - Ham muc tieu v1). Every weight is in units of U = the top candidate score of the pool. 24/11 after the first held-out run: beta.market 1.0 -> 2.0 (Cho Han + Cho Con in 17/120 plans) and kappa 0.3/0.6/1.0 -> 0.6/1.2/2.0 (28/120 plans over the template pace ceiling). To be replaced by learned weights (same keys, new file).",
+  "w_state": 0.5,
+  "rho": [
+    0.35,
+    0.7,
+    1.0
+  ],
+  "repeat_scale": 1.0,
+  "beta": {
+    "beach": 1.5,
+    "nature": 1.0,
+    "viewpoint": 0.8,
+    "religious": 1.2,
+    "history": 1.0,
+    "urban": 0.5,
+    "market": 2.0,
+    "experience": 1.0,
+    "big_park": 3.0,
+    "cafe": 0.8,
+    "nightlife": 1.0,
+    "wellness": 1.5
+  },
+  "gamma": 0.15,
+  "meal_bonus": {
+    "breakfast": 0.2,
+    "lunch": 1.0,
+    "dinner": 0.8
+  },
+  "meal_scale": 1.0,
+  "breakfast_window": [
+    390,
+    540
+  ],
+  "breakfast_if_start_before": 480,
+  "meal_crowd": 1.0,
+  "meal_crowd_food_tour": 0.1,
+  "rest_bonus": {
+    "1": 0.5,
+    "2": 0.25,
+    "3": 0.1
+  },
+  "rest_scale": 1.0,
+  "kappa": [
+    0.6,
+    1.2,
+    2.0
+  ],
+  "pace_scale": 1.0,
+  "stops_per_hour": {
+    "1": 0.55,
+    "2": 0.65,
+    "3": 0.8
+  },
+  "tau": 0.008333,
+  "tau_long": 0.008333,
+  "long_leg_min": 45,
+  "zeta": 0.08,
+  "w_edge": 1.0,
+  "solver_candidates": 40
+}

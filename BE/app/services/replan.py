@@ -16,6 +16,7 @@ still preserved).
 
 from __future__ import annotations
 
+from BE.app.services import objective as objective_mod
 from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.gate import check_profile_safe
@@ -23,7 +24,7 @@ from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
 from BE.app.services.profiles import _gate_view
 from BE.app.services.soft_rules import (
-    CATEGORY_DAILY_CAP, MEAL_SLOTS, cafe_cap, clip_to_time_fit, lunch_activity, poi_category,
+    CATEGORY_DAILY_CAP, MEAL_SLOTS, cafe_cap, solver_taste_args, clip_to_time_fit, lunch_activity, poi_category,
     rest_span, time_fit_windows)
 from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
@@ -158,18 +159,31 @@ def replan(state: dict, event: dict, pois: list[dict],
     # The gate reads the whole day: what comes next must not repeat what was just done.
     last_done = max(done, key=lambda a: a["start"]) if done else None
     last_cat = poi_category(by_id.get(last_done["poi_id"])) if last_done else ""
+    taste = solver_taste_args(trip)
+    # Hard NO_CONSECUTIVE across the done/next boundary only when it is strict.
     not_first = {pid for pid in cand_ids if pid in by_id and last_cat
-                 and poi_category(by_id[pid]) == last_cat}
+                 and poi_category(by_id[pid]) == last_cat} if taste["no_consecutive"] else set()
+    # Objective v1: the same terms as the first plan (T3-T9) over the remaining day;
+    # a taste rule stays a constraint only when the trip names it in `strict_rules`.
+    spec = objective_mod.build_spec(trip, limits) if objective_mod.active() else None
+    day_cafe_cap = None if not trip.get("profile") else cafe_cap(trip.get("profile"))
+    adjacent_food = True
+    if spec is not None:
+        day_cafe_cap = day_cafe_cap if "CAFE_CAP" in spec.strict else None
+        taste = {**taste, "soft_category_cap": None, "soft_no_consecutive": False}
+        adjacent_food = bool({"NO_ADJACENT_FOOD", "NO_CONSECUTIVE"} & spec.strict)
     out = optimize(stub, travel2, StubTrip(start, deadline(trip), origin_id),
                    edge_scores=q, workers=REPLAN_WORKERS,
                    deterministic_time=REPLAN_DETERMINISTIC_TIME, not_first=not_first,
                    # Universal HARD caps the gate checks: a replanned day must
                    # not end up with two markets / two cafes just because the
                    # rolling horizon re-optimised from scratch.
-                   category_cap=CATEGORY_DAILY_CAP,
-                   cafe_cap=None if not trip.get("profile")
-                   else cafe_cap(trip.get("profile")),
-                   no_consecutive=True, no_adjacent_food=True,
+                   category_cap=taste["category_cap"],
+                   soft_category_cap=taste["soft_category_cap"],
+                   soft_no_consecutive=taste["soft_no_consecutive"],
+                   cafe_cap=day_cafe_cap,
+                   no_consecutive=taste["no_consecutive"], no_adjacent_food=adjacent_food,
+                   objective=spec,
                    must_visit=[m for m in trip.get("must_visit", []) if m in cand_ids],
                    lunch_required=plan_lunch,
                    rest_after_lunch=limits["rest_minutes"] if plan_lunch else None,

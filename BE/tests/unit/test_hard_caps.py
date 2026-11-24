@@ -7,6 +7,7 @@ Covered at all three layers so the solver and the gate can never disagree:
 
 Run: python -m pytest BE/tests/unit/test_hard_caps.py -q
 """
+from unittest import mock
 
 import os
 import sys
@@ -96,6 +97,7 @@ class TestCafeCapGate(unittest.TestCase):
         self.assertFalse(result["passed"])
         self.assertAlmostEqual(result["score"], 1 / 3, places=6)
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_fail_closes_hcs_and_lists_offenders(self):
         trip = dict(TRIP, profile={"food_prefs": ["cafe"]})
         # Non-adjacent (museum between) but both cafes are in the morning.
@@ -136,6 +138,7 @@ class TestNoConsecutiveGate(unittest.TestCase):
         self.assertTrue(check_no_consecutive(itin, TRIP, pois,
                                              {"x->y": {"minutes": 10}})["passed"])
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_validator_reports_the_offending_edge(self):
         pois = {**CAFE_POIS, "b2": _poi("beach")}
         matrix = {**MATRIX, "b1->b2": {"minutes": 10}}
