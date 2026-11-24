@@ -130,11 +130,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 : ListView(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                     children: [
+                      Text(
+                        'Ngân sách chuyến đi',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(trip.title),
+                      const SizedBox(height: 12),
                       SurfaceCard(
                         key: const Key('expense-source-status'),
                         color: !state.isDemoManagement
-                            ? const Color(0xFFE6F6F2)
-                            : const Color(0xFFF2F5F4),
+                            ? AppColors.sand
+                            : AppColors.surfaceLow,
                         padding: const EdgeInsets.all(11),
                         child: Row(
                           children: [
@@ -153,32 +160,15 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                     : state.isDemoManagement
                                     ? 'Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.'
                                     : 'Đang xem chi tiêu trên thiết bị. Đồng bộ để lưu thay đổi vào tài khoản.',
-                                style: const TextStyle(fontSize: 11),
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 7,
-                        runSpacing: 7,
-                        children: [
-                          Chip(
-                            avatar: const Icon(Icons.route_outlined, size: 15),
-                            label: Text(trip.title),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      Text(
-                        'Ngân sách chuyến đi',
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(trip.title),
                       const SizedBox(height: 14),
                       SurfaceCard(
+                        color: AppColors.sand,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -189,9 +179,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                     'Tổng ngân sách',
                                     style: TextStyle(
                                       color: AppColors.muted,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w800,
-                                      letterSpacing: .8,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
@@ -208,7 +197,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                     '${(progress * 100).round()}%',
                                     style: const TextStyle(
                                       color: AppColors.secondary,
-                                      fontSize: 10,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
@@ -228,7 +217,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               'Đã chi ${moneyVnd(summary.spentVnd)}',
                               style: const TextStyle(
                                 color: AppColors.muted,
-                                fontSize: 11,
+                                fontSize: 13,
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -239,7 +228,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               backgroundColor: AppColors.surfaceHigh,
                               color: summary.alert == '100'
                                   ? AppColors.error
-                                  : AppColors.secondary,
+                                  : AppColors.primary,
                             ),
                           ],
                         ),

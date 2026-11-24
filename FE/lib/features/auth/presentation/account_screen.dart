@@ -20,83 +20,99 @@ class AccountScreen extends StatelessWidget {
         controller?.status == AuthStatus.authenticated && account != null;
     return Column(
       children: [
-        const AppHeader(section: 'Davel Trace'),
+        const AppHeader(section: 'Tài khoản', compact: true),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Text(
-                'Tài khoản',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 20),
               SurfaceCard(
                 key: const Key('account-identity'),
-                child: Column(
+                color: AppColors.sand,
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CircleAvatar(
-                      radius: 26,
-                      backgroundColor: AppColors.sand,
+                      radius: 23,
+                      backgroundColor: AppColors.surface,
                       child: Icon(
                         Icons.person_outline,
                         color: AppColors.primary,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      signedIn
-                          ? 'Tài khoản đã đăng nhập'
-                          : 'Bạn đang dùng bản demo',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 6),
-                    if (signedIn)
-                      SelectableText(
-                        account.email,
-                        key: const Key('account-email'),
-                      )
-                    else
-                      const Text(
-                        'Đăng nhập để lưu chuyến đi và chi tiêu vào tài khoản.',
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            signedIn
+                                ? 'Tài khoản đã đăng nhập'
+                                : 'Bạn đang dùng bản demo',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 6),
+                          if (signedIn)
+                            SelectableText(
+                              account.email,
+                              key: const Key('account-email'),
+                            )
+                          else
+                            const Text(
+                              'Đăng nhập để lưu chuyến đi và chi tiêu vào tài khoản.',
+                            ),
+                        ],
                       ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-              if (signedIn) ...[
-                _AccountLink(
-                  key: const Key('account-security-button'),
-                  icon: Icons.shield_outlined,
-                  title: 'Bảo mật và dữ liệu',
-                  subtitle: 'Thiết bị đăng nhập, xuất dữ liệu, xóa tài khoản',
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => SecurityScreen(controller: controller!),
-                    ),
-                  ),
-                ),
-                const Divider(height: 24),
-              ],
-              _AccountLink(
-                key: const Key('travel-preferences-button'),
-                icon: Icons.tune_rounded,
-                title: 'Sở thích du lịch',
-                subtitle: 'Tùy chọn gợi ý cho chuyến đi mới',
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => Scaffold(
-                      appBar: AppBar(title: const Text('Sở thích du lịch')),
-                      body: AnimatedBuilder(
-                        animation: state,
-                        builder: (_, _) =>
-                            ProfileScreen(state: state, showHeader: false),
+              const SizedBox(height: 16),
+              SurfaceCard(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  children: [
+                    if (signedIn) ...[
+                      _AccountLink(
+                        key: const Key('account-security-button'),
+                        icon: Icons.shield_outlined,
+                        title: 'Bảo mật và dữ liệu',
+                        subtitle:
+                            'Thiết bị đăng nhập, xuất dữ liệu, xóa tài khoản',
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) =>
+                                SecurityScreen(controller: controller!),
+                          ),
+                        ),
+                      ),
+                      const Divider(height: 1),
+                    ],
+                    _AccountLink(
+                      key: const Key('travel-preferences-button'),
+                      icon: Icons.tune_rounded,
+                      title: 'Sở thích du lịch',
+                      subtitle: 'Tùy chọn gợi ý cho chuyến đi mới',
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => Scaffold(
+                            appBar: AppBar(
+                              title: const Text('Sở thích du lịch'),
+                            ),
+                            body: AnimatedBuilder(
+                              animation: state,
+                              builder: (_, _) => ProfileScreen(
+                                state: state,
+                                showHeader: false,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 16),
               if (controller != null)
                 OutlinedButton.icon(
                   key: const Key('account-logout-button'),
@@ -112,11 +128,6 @@ class AccountScreen extends StatelessWidget {
                     signedIn ? 'Đăng xuất' : 'Đăng nhập / Tạo tài khoản',
                   ),
                 ),
-              const SizedBox(height: 16),
-              const Text(
-                'Davel Trace · Đồng hành cùng chuyến đi Đà Nẵng',
-                style: TextStyle(fontSize: 12, color: AppColors.muted),
-              ),
             ],
           ),
         ),
