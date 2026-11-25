@@ -621,6 +621,112 @@
    "note": "Quán kem/cà phê: một ly/viên kem = chi tiêu/người. Bài 2023, giá có thể đã đổi → confidence 0.55.",
    "typical_vnd": 55000,
    "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
+   "category": "restaurant",
+   "name": "Quán Mì Quảng Bà Bích",
+   "unit": "per_bowl",
+   "min_vnd": 20000,
+   "max_vnd": 25000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "2.1. Mì Quảng Bích Đà Nẵng | Địa chỉ: quận Liên Chiểu, TP Đà Nẵng; | Giá tham khảo: 20.000 - 25.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên đường Đặng Dung, Liên Chiểu; VinWonders (đọc 24/11) ghi Mì Quảng Bích '1 – 3 – 5 Đặng Dung, phường Liên Chiểu'.",
+   "note": "VinWonders ghi 25.000 – 60.000 VNĐ/món cho cùng quán; lấy Vinpearl (mới cập nhật, ghi /tô).",
+   "typical_vnd": 22500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 55000,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/mi-quang-da-nang.html",
+   "quote": "Mỳ quảng Bà Mua | Địa chỉ: 95A Nguyễn Tri Phương, TP. Đà Nẵng (gần sân bay quốc tế) | Giá tham khảo: 30.000đ – 55.000đ",
+   "page_date": "2026-04-02, cập nhật 2026-05-08",
+   "match": "Tên POI ghi đúng địa chỉ 95A Nguyễn Tri Phương; OSM reverse: đường Nguyễn Tri Phương, tên OSM \"My Quang Ba Mua\".",
+   "note": "Vinpearl (06/11/2026) ghi chuỗi 30.000–70.000 VNĐ/tô; lấy nguồn nêu đúng cơ sở 95A.",
+   "typical_vnd": 42500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+   "category": "restaurant",
+   "name": "Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 70000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "1.1. Mì Quảng Bà Mua | Địa chỉ: Có 9 cơ sở tại Đà Nẵng: 40 Ngũ Hành Sơn và 95A Nguyễn Tri Phương;... | Giá tham khảo: 30.000 - 70.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "Tên POI ghi 58 Ông Ích Đường (OSM reverse ~54 Ông Ích Đường); VinWonders (đọc 24/11) liệt kê \"58 Ông Ích Đường\" trong các cơ sở Bà Mua.",
+   "note": "Giá chung chuỗi 9 cơ sở theo nguồn.",
+   "typical_vnd": 50000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Hương Quê",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 45000,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/mi-quang-da-nang.html",
+   "quote": "Mì quảng Hương Quê Đà Nẵng | Địa chỉ: 78 Phan Thanh, Q. Thanh Khê. | Giá tham khảo: 30.000đ – 45.000đ.",
+   "page_date": "2026-04-02, cập nhật 2026-05-08",
+   "match": "OSM reverse: POI trên đường Phan Thanh, Thanh Khê; trùng địa chỉ nguồn 78 Phan Thanh.",
+   "note": "Vinpearl (06/11/2026) ghi 20.000 - 30.000 VNĐ/tô; hai nguồn đều mức rẻ.",
+   "typical_vnd": 37500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/11423812931",
+   "category": "restaurant",
+   "name": "Lotteria",
+   "unit": "per_serving",
+   "min_vnd": 54000,
+   "max_vnd": 90000,
+   "evidence_url": "https://hoiandaytrip.com/lotteria-restaurant-ba-na-hills/",
+   "quote": "Location/address: French Village, Ba Na Hills | At Lotteria Ba Na Hills, visitors will see these dishes: fried chicken (45,000 VND for 1 piece and 120,000 VND for 3 pieces), sauce chicken (48,000 VND for piece and 130,000 VND for 3 pieces), shrimp burger (59,000 VND), chicken burger (66,000 VND), bulgogi burger (56,000 VND), cheese burger (54,000 VND), mozzarella burger (90,000 VND), double burger (82,000 VND) ... soft drink (20,000 VND)",
+   "page_date": "2025-05-24, cập nhật 2025-06-07",
+   "match": "POI 'Lotteria' trong Làng Pháp, Bà Nà Hills (OSM reverse: khu Wine Cellar, xã Bà Nà).",
+   "note": "Quán đồ ăn nhanh: một burger = một suất/người → min/max = dải giá burger 54–90k, typical 72k (mức rẻ; mặc định cũ 'nhà hàng' 225k). Chưa cộng nước 20–25k.",
+   "typical_vnd": 72000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337971573",
+   "category": "restaurant",
+   "name": "Bharata",
+   "unit": "per_person",
+   "min_vnd": 240000,
+   "max_vnd": 380000,
+   "typical_vnd": 380000,
+   "evidence_url": "https://hoiandaytrip.com/bharata-restaurant-ba-na-hills/",
+   "quote": "The buffet price of Bharata Restaurant at Ba Na Hills currently is 380,000 VND per adult and child above 139cm. It’s 240,000 VND per child from 100 to 139cm, and free of charge for kids under 100cm.",
+   "page_date": "2025-05-19, cập nhật 2026-11-16",
+   "match": "Nhà hàng Ấn/Halal Bharata trong Bà Nà Hills (POI vùng ba_na_tay).",
+   "note": "Buffet/người: typical = người lớn 380k, min = trẻ em 240k; khớp giá buffet chung Bà Nà của Sun Group (28/08/2026). Nguồn ghi quán đã dời gần máng trượt số 3.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4225643190",
+   "category": "restaurant",
+   "name": "Phố Xưa",
+   "unit": "per_serving",
+   "min_vnd": 30000,
+   "max_vnd": 55000,
+   "confidence": 0.5,
+   "evidence_url": "https://www.foody.vn/quang-nam/pho-xua-dac-san-hoi-an",
+   "quote": "Phố Xưa - Đặc Sản Hội An | 35 Phan Châu Trinh, P. Minh An, Thành Phố Hội An, Quảng Nam | Đang mở cửa 08:00 - 20:00 | 30.000đ - 55.000đ",
+   "page_date": "Foody không ghi ngày cập nhật khoảng giá",
+   "match": "OSM reverse: POI tại 35 Phan Châu Trinh, Hội An (tên OSM 'Phố Xưa'); trùng địa chỉ Foody.",
+   "note": "Quán đặc sản Hội An (cao lầu/mì Quảng/cơm gà — mỗi món là một suất): khoảng giá Foody = giá một suất/người. Foody có thể cũ → confidence 0.5.",
+   "typical_vnd": 42500,
+   "accessed": "2026-11-25"
   }
  ],
  "not_found": [
@@ -987,6 +1093,126 @@
    "why": "Không tìm được giá có nguồn cho nhà hàng chay Hoa Sen (Hà Xuân 1, Thanh Khê).",
    "tried": [
     "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11422706022",
+   "category": "restaurant",
+   "name": "El Fresco",
+   "found": false,
+   "why": "Nguồn coi El Fresco là quán đồ uống ('Places to Drink'): thực đơn hoiandaytrip 31/08/2025 cà phê 60.000–80.000 VND/ly. POI đang là restaurant (bữa ăn) → không gán giá đồ uống cho bữa; loại POI có thể sai, cần người kiểm.",
+   "tried": [
+    "https://hoiandaytrip.com/el-fresco-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
+   "category": "restaurant",
+   "name": "Nhà Hàng La Luna",
+   "found": false,
+   "why": "Không tra lại hôm nay; Codex 20/11 đã tra: tên trùng nhiều nơi, không có menu giá khớp cơ sở Ngũ Hành Sơn (187 Huyền Trân Công Chúa).",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
+   "category": "restaurant",
+   "name": "Quán Ngũ Hành",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: Foody 'Ngũ Hành Quán' 65–150k không rõ đơn vị, chưa khớp chắc POI.",
+   "tried": [
+    "https://www.foody.vn/da-nang/ngu-hanh-quan-nhau-binh-dan"
+   ]
+  },
+  {
+   "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
+   "category": "restaurant",
+   "name": "Hải sản tươi sống Bà Rô",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: chỉ có giá một món (rucrobeer), không có chi tiêu/người.",
+   "tried": [
+    "https://rucrobeer.com.vn/hai-san-ba-ro-da-nang/"
+   ]
+  },
+  {
+   "poi_id": "ChIJeTslKdkXQjERPFZeN_Ta-Ek",
+   "category": "restaurant",
+   "name": "Quán Hải Sản Bé Nữ",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: nguồn có dấu hiệu chép từ Google, không có giá độc lập.",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
+   "category": "restaurant",
+   "name": "Madame Son",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: menu PDF Marriott không ghép chắc cặp món–giá; nhà hàng nhiều món, không có chi tiêu/người.",
+   "tried": [
+    "https://www.marriott.com/content/dam/marriott-digital/mc/apec/hws/d/dadmr/en_us/document/assets/mc-dadmr-madame-son-menu-32929.pdf"
+   ]
+  },
+  {
+   "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
+   "category": "restaurant",
+   "name": "Nhà hàng Hai Cử",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: bài đúng quán không có giá suất, menu Heyzine không đọc được.",
+   "tried": [
+    "https://tanitour.vn/nha-hang-hai-cu/"
+   ]
+  },
+  {
+   "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
+   "category": "restaurant",
+   "name": "Trà Sơn Quán",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: chỉ có giá thỏ/gà nguyên con, không có phần/người.",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "osm:node/3093689363",
+   "category": "restaurant",
+   "name": "Café 43",
+   "found": false,
+   "why": "Foody '43 Cafe, 43 Trần Cao Vân' ghi 3.000đ - 150.000đ (từ ly bia 3k tới món 150k) — khoảng thực đơn quán nhậu/ăn nhiều món, không phải chi tiêu/người.",
+   "tried": [
+    "https://www.foody.vn/quang-nam/43-cafe"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5444693768",
+   "category": "restaurant",
+   "name": "Quán Phở Tiến",
+   "found": false,
+   "why": "Vinpearl 'Pho in Hoi An' (cập nhật 10/06/2026) chỉ ghi địa chỉ 133 Trần Hưng Đạo và giờ 6:00–20:15, không có giá tô.",
+   "tried": [
+    "https://vinpearl.com/en/pho-in-hoi-an"
+   ]
+  },
+  {
+   "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
+   "category": "restaurant",
+   "name": "Koko House - Nhà Hàng Thịt Nướng Hàn Quốc",
+   "found": false,
+   "why": "Không tìm thấy trang nào có giá của quán.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
+   "category": "restaurant",
+   "name": "Golden Meat House",
+   "found": false,
+   "why": "VinWonders/Wanderlog chỉ có địa chỉ 100 Trần Bạch Đằng và nhận xét 'giá phải chăng', không có số tiền.",
+   "tried": [
+    "https://wanderlog.com/place/details/3050787/golden-meat-house"
    ]
   }
  ]
