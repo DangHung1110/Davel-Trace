@@ -132,7 +132,7 @@ class TestViews(unittest.TestCase):
                       "price": {"tier": "cheap"}, "provenance": {"price": {"verified_by": "inferred"}},
                       "dishes": ["mì Quảng"]}
         p = plan(["a", "b", "c"], leg=10)
-        p["activities"][2]["start"] = "10:40"      # b ends 10:10, 10 min drive, 20 min left over
+        p["activities"][2]["start"] = "10:52"      # b ends 10:10: 10 min drive, 12 reserve, 20 free
         p["activities"][2]["end"] = "11:40"
         view = mpp.plan_view(p, by_id)
         a, b, c = view["stops"]
@@ -143,23 +143,58 @@ class TestViews(unittest.TestCase):
         self.assertEqual(b["kind"], "Nhà hàng · mì Quảng")
         self.assertEqual((a["fee"], a["fee_estimated"], a["kind"]), (0, False, "Công viên"))
         self.assertEqual((view["start"], view["end"], view["total_cost"]), ("08:00", "11:40", 100_000))
-        self.assertIn("query=Qu%C3%A1n%20M%C3%AC", b["maps"])
+        self.assertEqual(b["place_id"], "")                  # Maps searches the name
+        by_id["a"]["ext_ids"] = {"google_place_id": "ChIJabc"}
+        self.assertEqual(mpp.plan_view(p, by_id)["stops"][0]["place_id"], "ChIJabc")
 
-    def test_a_new_day_has_no_leg(self):
+    def test_each_day_starts_from_the_base(self):
         p = plan(["a", "b"], day=1)
         p2 = plan(["c", "d"], day=2)
         p["activities"] += p2["activities"]
         p["segments"] += p2["segments"]
-        stops = mpp.plan_view(p, pois("a", "b", "c", "d"))["stops"]
-        self.assertEqual([s["leg_min"] for s in stops], [None, 10, None, 10])
+        by_id = pois("a", "b", "c", "d")
+        stops = mpp.plan_view(p, by_id)["stops"]
+        self.assertEqual([s["leg_min"] for s in stops], [None, 10, None, 10])   # open tour
         self.assertEqual([s["day"] for s in stops], [1, 1, 2, 2])
+        p["segments"] += [{"from_id": "h", "to_id": "a", "minutes": 25, "day": 1},
+                          {"from_id": "h", "to_id": "c", "minutes": 40, "day": 2}]
+        stops = mpp.plan_view(p, by_id, origin_id="h")["stops"]
+        self.assertEqual([s["leg_min"] for s in stops], [25, 10, 40, 10])
+        self.assertEqual([s["idle_min"] for s in stops], [None, 0, None, 0])
 
-    def test_hidden_warnings(self):
+    def test_leg_reserve_is_the_optimizers(self):
+        from BE.app.services.optimizer import STOP_OVERHEAD_MIN
+        self.assertEqual(mpp.LEG_RESERVE_MIN, STOP_OVERHEAD_MIN)
+
+    def test_planner_warnings_stay_hidden(self):
         p = plan(["a", "b"])
-        p["warnings"] = ["khong lay duoc du bao thoi tiet, dung nhiet do gia dinh 30.0C",
-                         "chi phi la uoc tinh theo muc gia, chua phai gia that",
-                         "ngay 2: chi phi la uoc tinh theo muc gia", "khong dua vao lich 'X': khong co trong du lieu"]
-        self.assertEqual(mpp.plan_view(p, pois("a", "b"))["notes"], ["khong dua vao lich 'X': khong co trong du lieu"])
+        p["warnings"] = ["template couple-calm: khong du diem theo khung, da noi long bo dem (buoc 1)",
+                         "Nhà thờ Chính tòa Đà Nẵng nghi vao chu nhat: chon ngay di de kiem tra"]
+        self.assertNotIn("nghi vao chu nhat", json.dumps(mpp.plan_view(p, pois("a", "b")), ensure_ascii=False))
+
+    def test_v1_names_become_v2_names(self):
+        trip = {"must_visit": ["Ngũ Hành Sơn", "Cầu Rồng"], "order_prefs": [["Cầu Rồng", "Ngũ Hành Sơn"]]}
+        v2 = {"x": {"name": "Ngũ Hành Sơn (Thủy Sơn)"}, "y": {"name": "Cầu Rồng"}}
+        self.assertEqual(mpp.renamed(trip, v2), {"must_visit": ["Ngũ Hành Sơn (Thủy Sơn)", "Cầu Rồng"],
+                                                 "order_prefs": [["Cầu Rồng", "Ngũ Hành Sơn (Thủy Sơn)"]]})
+        v1 = {"x": {"name": "Ngũ Hành Sơn"}, "z": {"name": "Ngũ Hành Sơn (Thủy Sơn)"}}
+        self.assertIs(mpp.renamed(trip, v1), trip)              # the old name still exists: keep it
+        self.assertEqual(trip["must_visit"][0], "Ngũ Hành Sơn")  # the scenario itself is untouched
+
+    def test_collect_requests(self):
+        by_id = {"x": {"name": "Ngũ Hành Sơn (Thủy Sơn)"}, "y": {"name": "Chùa Linh Ứng Sơn Trà"},
+                 mpp.BASE_ID: {"name": "Moonlight Hotel"}}
+        rows = mpp.collect_requests(by_id, gold_path=ROOT / "no-such-gold.json")
+        ids = [r["request_id"] for r in rows]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(len({mpp._canonical(r["trip"]) for r in rows}), len(rows))
+        self.assertIn("R-pagoda-low", ids)                       # the review asks what the audit does not
+        self.assertNotIn("R-monday", ids)                         # D01 with another date
+        m01 = next(r for r in rows if r["request_id"] == "M01-ngu-hanh-son")
+        self.assertEqual(m01["trip"]["must_visit"], ["Ngũ Hành Sơn (Thủy Sơn)"])
+        self.assertTrue(all(r["trip"]["origin"] == {"poi_id": mpp.BASE_ID, "label": "Moonlight Hotel"} for r in rows))
+        bare = mpp.collect_requests({}, gold_path=ROOT / "no-such-gold.json")
+        self.assertFalse(any("origin" in r["trip"] for r in bare))   # a snapshot without the hotel
 
     def test_request_view(self):
         by_id = pois("m1", "m2", "v1")
@@ -176,7 +211,9 @@ class TestViews(unittest.TestCase):
         self.assertEqual(view["order"], ["Điểm m1 trước Điểm m2"])
         self.assertEqual(view["notes"], ["Nhịp đi vừa", "Thể lực trung bình", "Dị ứng hải sản",
                                          "Có người đi xe lăn", "Không muốn: chơi đêm, quán bar"])
+        self.assertEqual(view["base"], "")
         self.assertEqual(mpp.request_view({"budget": 1}, by_id)["party"], "Chưa rõ nhóm khách")
+        self.assertEqual(mpp.request_view({"origin": {"poi_id": "m2"}}, by_id)["base"], "Điểm m2")
 
     def test_gold_trip_fits_the_party(self):
         by_id = pois("m1", "v1")

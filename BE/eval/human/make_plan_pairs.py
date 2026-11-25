@@ -45,7 +45,6 @@ import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
-from urllib.parse import quote
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
@@ -84,10 +83,21 @@ AVOID_VI = {"nightlife": "chơi đêm, quán bar", "alcohol": "rượu bia"}
 ACCESS_VI = {"wheelchair": "Có người đi xe lăn"}
 WEEKDAY_VI = ("Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật")
 
-# Planner warnings that say nothing about this plan to a traveller: the offline run has
-# no forecast, and the page marks estimated prices itself.
-HIDDEN_WARNINGS = ("khong lay duoc du bao thoi tiet", "chi phi la uoc tinh")
-HIDDEN_WARNING_PARTS = ("ngay 1: chi phi la uoc tinh", "ngay 2: chi phi la uoc tinh")
+# The audit scenarios name two places by their danang-v1 names, and the planner matches
+# a must_visit name exactly: on danang-v2 six requests would get two plans that both
+# miss the one place the traveller asked for. Used only when the snapshot has the new name.
+V2_NAMES = {"Ngũ Hành Sơn": "Ngũ Hành Sơn (Thủy Sơn)",
+            "Chùa Linh Ứng - Bãi Bụt Sơn Trà": "Chùa Linh Ứng Sơn Trà"}
+# The planner's warning when a must_visit could not go into the plan (any day).
+MUST_DROPPED = "khong dua vao lich '"
+# Where every day starts, like the app once a traveller picks a hotel (trip.origin).
+# Without one the planner makes an open tour: a day in Hội An starts there and shows
+# a few minutes of driving, and a rater cannot judge the travel. Moonlight Hotel is the
+# lodging of the central zone nearest the Dragon Bridge (0.9 km); it has a matrix row.
+BASE_ID = "ChIJISuvVcsZQjERhnOk-O_w9pI"
+# The optimizer keeps this many minutes between two stops on top of the drive (parking,
+# walking in): BE/app/services/optimizer.py STOP_OVERHEAD_MIN, checked by a test.
+LEG_RESERVE_MIN = 12
 
 
 # --------------------------------------------------------------------------
@@ -115,6 +125,30 @@ def gold_trip(query: dict, by_id: dict) -> dict:
     return trip
 
 
+def renamed(trip: dict, by_id: dict) -> dict:
+    """The trip with V2_NAMES applied to must_visit / order_prefs, where the snapshot
+    has the new name and not the old one."""
+    names = {(p.get("name") or "").strip().lower() for p in by_id.values()}
+    swap = {old: new for old, new in V2_NAMES.items()
+            if old.lower() not in names and new.lower() in names}
+    if not swap:
+        return trip
+    out = dict(trip)
+    if "must_visit" in trip:
+        out["must_visit"] = [swap.get(m, m) for m in trip["must_visit"]]
+    if "order_prefs" in trip:
+        out["order_prefs"] = [[swap.get(m, m) for m in o] for o in trip["order_prefs"]]
+    return out
+
+
+def prepared(trip: dict, by_id: dict) -> dict:
+    """A request as it is planned: danang-v2 names, and the hotel every day starts from."""
+    trip = renamed(trip, by_id)
+    if BASE_ID in by_id and not trip.get("origin"):
+        trip = {**trip, "origin": {"poi_id": BASE_ID, "label": by_id[BASE_ID].get("name") or ""}}
+    return trip
+
+
 def collect_requests(by_id: dict, gold_path: Path = GOLD_PATH) -> list[dict]:
     """Every request once: audit scenarios, the review's extra ones, the gold queries."""
     from BE.tools import audit_plans, build_plan_review
@@ -129,10 +163,10 @@ def collect_requests(by_id: dict, gold_path: Path = GOLD_PATH) -> list[dict]:
         rows.append({"request_id": request_id, "source": source, "trip": trip})
 
     for key, extra in audit_plans.SCENARIOS:
-        add(key, "audit", {**audit_plans.DAY, **extra})
+        add(key, "audit", prepared({**audit_plans.DAY, **extra}, by_id))
     audit_trips = [r["trip"] for r in rows]
     for key, _profile, extra in build_plan_review.REQUESTS:
-        trip = {**build_plan_review.DAY, **extra}
+        trip = prepared({**build_plan_review.DAY, **extra}, by_id)
         # The review's "monday" / "night-market" differ from an audit scenario only by
         # the date or the end time: near-copies would give near-copies of pairs.
         if any(_same_but_time(trip, other) for other in audit_trips):
@@ -141,7 +175,7 @@ def collect_requests(by_id: dict, gold_path: Path = GOLD_PATH) -> list[dict]:
     if gold_path.exists():
         gold = json.loads(gold_path.read_text(encoding="utf-8"))
         for query in gold.get("suite_v2") or []:
-            add(f"G-{query['query_id']}", "gold", gold_trip(query, by_id))
+            add(f"G-{query['query_id']}", "gold", prepared(gold_trip(query, by_id), by_id))
     return rows
 
 
@@ -254,7 +288,9 @@ def request_view(trip: dict, by_id: dict) -> dict:
         notes += [ACCESS_VI.get(x, f"Cần hỗ trợ: {x}") for x in profile.get("accessibility") or []]
         notes += [f"Không muốn: {AVOID_VI.get(x, x)}" for x in profile.get("must_avoid") or []]
     notes += [f"Thích ăn: {x}" for x in trip.get("food_prefs") or []]
+    origin = trip.get("origin") or {}
     return {
+        "base": _name(origin["poi_id"], by_id) if origin.get("poi_id") else (origin.get("label") or ""),
         "party": PARTY_VI.get((profile or {}).get("party_type"), "Chưa rõ nhóm khách"),
         "travelers": trip.get("travelers"), "budget": trip.get("budget"),
         "days": trip.get("days") or 1, "date": _when(trip.get("date") or ""),
@@ -267,12 +303,12 @@ def request_view(trip: dict, by_id: dict) -> dict:
     }
 
 
-def _maps_url(poi: dict) -> str:
+def _place_id(poi: dict) -> str:
+    """The Google place id the page opens Maps with ("" = Maps searches the name)."""
     place = (poi.get("ext_ids") or {}).get("google_place_id") or ""
     if not place and str(poi.get("poi_id", "")).startswith("ChIJ"):
         place = poi["poi_id"]
-    url = f"https://www.google.com/maps/search/?api=1&query={quote(str(poi.get('name')) + ' Đà Nẵng')}"
-    return url + (f"&query_place_id={quote(place)}" if place else "")
+    return place
 
 
 def _kind(poi: dict) -> str:
@@ -297,38 +333,38 @@ def _minutes(hhmm: str) -> int:
     return int(h) * 60 + int(m)
 
 
-def _shown_warning(text: str) -> bool:
-    low = text.lower()
-    return not low.startswith(HIDDEN_WARNINGS) and not any(p in low for p in HIDDEN_WARNING_PARTS)
-
-
-def plan_view(plan: dict, by_id: dict) -> dict:
+def plan_view(plan: dict, by_id: dict, origin_id: str | None = None) -> dict:
     """One plan as the rater reads it: stops with time, kind, drive and price, and totals.
 
-    `leg_min` is the drive from the stop before (same day; None for a day's first stop),
-    `idle_min` the time left over after that drive. Prices are per person, the totals
-    for the whole party, as the app shows them.
+    `leg_min` is the drive from the stop before, or for a day's first stop from
+    `origin_id` (None on an open tour). `idle_min` is the time left over after that drive
+    and the optimizer's reserve on every leg (LEG_RESERVE_MIN). Prices are per person,
+    the totals for the whole party, as the app shows them. The planner's warnings are left out:
+    they are developer messages (template steps, filter drops, a closing day when no
+    date was given) that differ between plans in ways that would steer a rater, and
+    whatever they say about a traveller's day (a wish not met, no dinner) shows in the
+    stops themselves.
     """
     legs = {(s.get("day"), s.get("from_id"), s.get("to_id")): s.get("minutes") for s in plan.get("segments") or []}
     stops, previous = [], None
     for act in plan.get("activities") or []:
         poi = by_id.get(act["poi_id"]) or {"poi_id": act["poi_id"], "name": act["poi_id"]}
         same_day = previous is not None and previous.get("day") == act.get("day")
-        leg = legs.get((act.get("day"), previous["poi_id"], act["poi_id"])) if same_day else None
+        leg = legs.get((act.get("day"), origin_id, act["poi_id"])) if origin_id else None
         idle = None
         if same_day:
-            idle = max(0, _minutes(act["start"]) - _minutes(previous["end"]) - (leg or 0))
+            leg = legs.get((act.get("day"), previous["poi_id"], act["poi_id"]))
+            idle = max(0, _minutes(act["start"]) - _minutes(previous["end"]) - (leg or 0) - LEG_RESERVE_MIN)
         fee = effective_fee(poi)
         stops.append({
             "day": act.get("day"), "start": act["start"], "end": act["end"],
             "name": poi.get("name") or act["poi_id"], "kind": _kind(poi), "poi_id": act["poi_id"],
             "leg_min": leg, "idle_min": idle, "fee": fee, "fee_estimated": _fee_estimated(poi, fee),
-            "maps": _maps_url(poi)})
+            "place_id": _place_id(poi)})
         previous = act
     return {
         "stops": stops, "total_cost": plan.get("total_cost"), "travel_min": plan.get("travel_min"),
         "start": stops[0]["start"] if stops else None, "end": stops[-1]["end"] if stops else None,
-        "notes": [w for w in plan.get("warnings") or [] if _shown_warning(w)],
     }
 
 
@@ -475,8 +511,9 @@ def build_dataset(rows: list[dict], by_id: dict, n: int = 150, per_request: int 
         row = by_request[cand["request_id"]]
         a, b = (cand["first"], cand["second"]) if first_is_a else (cand["second"], cand["first"])
         pair_id = f"P{i:03d}"
+        base = (row["trip"].get("origin") or {}).get("poi_id")
         pairs.append({"pair_id": pair_id, "request": request_view(row["trip"], by_id),
-                      "A": plan_view(row["plans"][a], by_id), "B": plan_view(row["plans"][b], by_id)})
+                      "A": plan_view(row["plans"][a], by_id, base), "B": plan_view(row["plans"][b], by_id, base)})
         rid = cand["request_id"]
         key_pairs[pair_id] = {
             "request_id": rid,
@@ -520,6 +557,11 @@ def stats(rows: list[dict], candidates: list[dict], dropped: list[dict], picked:
         "picked_by_source": dict(sorted(Counter(by_request[c["request_id"]]["source"] for c in picked).items())),
         "picked_requests": len({c["request_id"] for c in picked}),
         "median_edit_share": sorted(c["edit_share"] for c in picked)[len(picked) // 2] if picked else None,
+        # A rater reads "phải đến X" on top and finds X in neither plan: fix such a request.
+        "must_visit_dropped": sorted(r["request_id"] for r in rows
+                                     if any(w.startswith(MUST_DROPPED) or f": {MUST_DROPPED}" in w
+                                            for p in (r.get("plans") or {}).values()
+                                            for w in p.get("warnings") or [])),
     }
 
 
