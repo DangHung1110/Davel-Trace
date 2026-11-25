@@ -20,7 +20,7 @@ python BE/ml/data/migrate_v2.py          # đọc danang-v1 (không sửa) + BE/
 | Trường | Giá trị |
 |---|---|
 | `hours` | `{open, kind, closed_days, access_window, archetype}`. `kind` (POI active): fixed 338 (có nguồn) · safe_window 599 (khung an toàn theo nhóm, nhãn "nên kiểm tra giờ"; gồm 76 lưu trú 24h theo quy ước) · by_booking 7 (lớp học theo suất). Không POI active nào `unknown`. `access_window` = khung đường Sơn Trà 07:30–17:30. |
-| `price` | `{tier, note}`. `tier` ∈ free / cheap (<100k) / medium (100–500k) / expensive (500k–1,2tr) / included (trong vé điểm cha `requires_ticket_of`) / `null` (lưu trú). Số VND gốc + URL ở `provenance.price.note`. |
+| `price` | `{tier, note}`. `tier` ∈ free / cheap (<100k) / medium (100–500k) / expensive (500k–1,2tr) / included (trong vé điểm cha `requires_ticket_of`) / `null` (lưu trú). Số VND gốc + URL ở `provenance.price.note`. Build 25/11/2026: 164/842 điểm dừng active có giá có nguồn (`provenance.price.verified_by` = agent_web / human / user); còn lại là mặc định theo loại (`category_default:*`), luật "nơi công cộng vào tự do" (`rule_free_public`) hoặc vé điểm cha (`cluster_rule`). |
 | `dwell` | `{p25, p50, p75}` phút. |
 | `tags` | `space`, `indoor` (= space == indoor), `effort`, `kid_friendly`, `party`, `good_times`, `time_budget`, `weather_sensitive`, `outdoor_exposure`, `sun_exposure`, `wind_exposure`, `rain_cover`, `exposure_source` (explicit / category_prior), `dishes`. |
 | `tags.dishes` | Món chính của nơi ăn uống: `[{dish, source, url}]`, `dish` = id trong `BE.common.DISHES` (27 món). `source`: `name` (tên quán nói món, bằng chứng là `name`), `osm` (thẻ `cuisine` của phần tử OSM, `url` = trang OSM), `web` (thực đơn / trang quán / cẩm nang, `url` bắt buộc, file `dishes_*`). Build 24/11: 123 POI có món (86 theo tên, 25 OSM, 27 web); 95/218 quán ăn active. App đọc qua `poi_view` → `dishes` (tên) và `cuisine` (mọi cách gọi món) — chấm gu ăn, dị ứng, gate PROFILE_SAFE và ý muốn món (`retrieval.poi_fits_wish`) cùng đọc. |
@@ -52,7 +52,7 @@ Tất cả là file JSON có trích nguồn; với cùng một tiền tố, file
 |---|---|
 | `decisions_*` | Quyết định của người dùng: tên, trạng thái, loại |
 | `human_verify_v2_*` | Giờ/giá người dùng kiểm (xuất từ `reports/p0/11_verify_queue.html`; `human` cần URL) |
-| `agent_web_*` | Giờ/giá tra web có URL (bằng chứng gốc ở `reports/p0/links/*_codex.json`) |
+| `agent_web_*` | Giờ/giá tra web có URL (bằng chứng gốc ở `reports/p0/links/*_codex.json`; `agent_web_2026-11-25`: 59 giá cho điểm hay vào lịch, bằng chứng + 90 điểm chưa có nguồn ở `reports/p0/links/prices_claude_20261125.json`). File sau thay CẢ dòng cùng POI, nên dòng mới phải chép lại giờ của dòng cũ. |
 | `new_pois_*` | POI mới từ OSM / nhập tay (`new_pois_food_2026-11-24`: 20 quán đặc sản trung tâm + Sơn Trà, toạ độ OSM, Google Maps chỉ để giữ/bỏ) |
 | `dishes_*` | Món chính đọc trên trang có URL (cẩm nang, thực đơn của quán) → `tags.dishes` source=web |
 | `access_route_*` | Điểm nằm trên tuyến đường có kiểm soát (Sơn Trà) |
