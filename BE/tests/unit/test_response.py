@@ -51,6 +51,17 @@ class TestResponse(unittest.TestCase):
                           "REST_FOLLOWS_LUNCH": 1, "TCS": 1, "HCS": 1})
         self.assertEqual(plan["violations"], [])
 
+    def test_cost_is_estimated_only_by_a_guessed_price(self):
+        def v21(tier, by, source):
+            return {"price": {"tier": tier}, "provenance": {"price": {"verified_by": by, "source": source}}}
+        sourced = {"musu": v21("cheap", "human", "human_verify"),
+                   "beach": v21("free", "inferred", "rule_free_public")}
+        plan = build_plan(OPT, {}, TRIP, sourced, MATRIX)
+        self.assertEqual(plan["total_cost"], 50000)
+        self.assertFalse(plan["cost_estimated"])
+        guessed = {**sourced, "musu": v21("cheap", "inferred", "category_default:bao_tang")}
+        self.assertTrue(build_plan(OPT, {}, TRIP, guessed, MATRIX)["cost_estimated"])
+
     def test_failed_status_mirrors(self):
         bad = {"status": "optimal", "itinerary": {"activities": [
             {"poi_id": "musu", "start": "16:30", "end": "17:30"}]}}

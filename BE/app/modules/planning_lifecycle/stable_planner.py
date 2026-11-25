@@ -37,8 +37,12 @@ GATE_FAMILIES = (
 def family_report(detailed: dict) -> dict:
     """A `gate.report` result plus its checks grouped into the five families."""
     families = {}
+    # A soft taste rule (soft_rules.soft_checks) is reported on its row but does
+    # not fail its family: gate.report already left it out of `failed`.
+    soft = set(detailed.get("soft_failed") or [])
     for family, names in GATE_FAMILIES:
-        checks = [{"check": name, "passed": detailed["checks"][name],
+        checks = [{"check": name, "passed": detailed["checks"][name] or name in soft,
+                   "soft_failed": name in soft,
                    "score": detailed["scores"][name]} for name in names]
         families[family] = {
             "passed": all(item["passed"] for item in checks),

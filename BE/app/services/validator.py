@@ -21,6 +21,7 @@ from BE.app.services.gate import (
 )
 from BE.app.services.profile_filter import drop_reason
 from BE.app.services.soft_rules import (
+    soft_checks,
     CATEGORY_DAILY_CAP,
     NON_FOOD_CAPPED,
     is_food,
@@ -132,6 +133,7 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
         return list(dict.fromkeys(
             offender
             for source in mirrors[gate]
+            if source not in soft_checks(SOFT_CHECKS, trip)
             for offender in _offenders(source, itinerary, trip, pois, matrix)
         ))
     return []
@@ -141,8 +143,9 @@ def validate(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     checks = {name: fn(itinerary, trip, pois, matrix)["passed"]
               for name, fn in CHECKS}
     failed = [name for name, ok in checks.items() if not ok]
-    violations = [name for name in failed if name not in SOFT_CHECKS]
-    soft_violations = [name for name in failed if name in SOFT_CHECKS]
+    soft = soft_checks(SOFT_CHECKS, trip)
+    violations = [name for name in failed if name not in soft]
+    soft_violations = [name for name in failed if name in soft]
     return {"passed": not violations, "checks": checks,
             "violations": violations, "soft_violations": soft_violations,
             "details": {name: _offenders(name, itinerary, trip, pois, matrix)

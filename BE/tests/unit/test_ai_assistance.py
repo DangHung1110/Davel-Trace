@@ -154,3 +154,30 @@ def test_readiness_is_secret_free() -> None:
     assert readiness["configured"] is True
     assert readiness["provider"] == "gemini"
     assert secret not in repr(readiness)
+
+
+def test_interpretation_reads_areas_from_the_text_never_from_the_model() -> None:
+    # The draft schema has no areas: a model's "areas" key is dropped, the text decides.
+    service = AiAssistanceService(
+        Settings(llm_provider="local", _env_file=None),
+        completer=lambda *args: {"activities": ["check-in"], "areas": ["hoi_an"]},
+    )
+    result = service.interpret("ưu tiên check-in trung tâm", catalog=[], trip_context={})
+    assert result["hard_constraints"]["areas"] == ["trung_tam"]
+    # What the app's confirm step sends: the proposal flattened into the overrides.
+    from BE.app.modules.planning_lifecycle.api import ConstraintOverrides
+    overrides = ConstraintOverrides.model_validate({
+        **result["fields"], **result["hard_constraints"], **result["soft_preferences"],
+    })
+    assert overrides.areas == ["trung_tam"]
+
+
+def test_interpretation_without_a_zone_proposes_no_area() -> None:
+    service = AiAssistanceService(
+        Settings(llm_provider="local", _env_file=None),
+        completer=lambda *args: {"activities": ["biển"]},
+    )
+    for text in ("Đi Đà Nẵng 2 người, thích biển", "đi trung tâm thương mại",
+                 "không đi Hội An"):
+        result = service.interpret(text, catalog=[], trip_context={})
+        assert result["hard_constraints"]["areas"] == [], text

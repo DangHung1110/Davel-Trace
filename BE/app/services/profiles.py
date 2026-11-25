@@ -25,9 +25,11 @@ preference = mean rating) + profile reason + T032s `scores`
 from __future__ import annotations
 
 import math
+import os
 from collections import Counter
 from dataclasses import replace
 
+from BE.app.services import objective as objective_mod
 from BE.app.services import (
     matrix as matrix_svc,
     pool as pool_svc,
@@ -442,6 +444,18 @@ def _limits(tpl_name: str | None, trip: dict, busy_min: int = 0) -> dict:
             else templates.universal_constraints(trip, busy_min))
 
 
+def _v1_limits(limits: dict) -> dict:
+    """Objective v1: what of a day's limits stays a constraint.
+
+    The archetype bans, the intensity ceiling, the lunch of a day that spans it and the
+    siesta window (soft unless strict, in the optimizer) stay. The pace band, the
+    template's required categories, the late end and the dinner move into the
+    objective (T8, T1/T3, T5); the user's own wishes still ride along in `_ladder`.
+    """
+    return {**limits, "min_stops": None, "max_stops": None, "required_any": [],
+            "late_end_min": None, "dinner_required": False}
+
+
 def _ladder(limits: dict, act_groups: list[dict], must: list[str] | None = None,
             wished_limits: dict | None = None) -> list[tuple[int, dict, str, bool]]:
     """Template ladder with the trip's activity groups riding along.
@@ -534,8 +548,15 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # What the gate registry reads off a POI: FAR/BCS/VROH, the category for
 # A1/caps, and the PROFILE_SAFE haystack (tags/cuisine/ambience/smart_tags/
 # intensity, the same fields profile_filter.hard_filter matched).
-_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "ticket_vnd",
-               "subcat", "plan_tier", "closed_today")
+# BCS prices a stop with `effective_fee`, like the solver and the plan's total_cost,
+# so the view carries every field it reads: `price` (v2.1 tier) wins over
+# ticket_vnd/fee/smart_tags. Without it the gate fell back to the smart_tags band
+# (medium restaurant 300k where the solver paid 250k).
+# `hours` is how a cooking class (kind by_booking) is a meal: A1 counts it in every
+# meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
+# class over lunch failed the gate as "khong co bua trua".
+_GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours")
 
 
 def _gate_view(p: dict) -> dict:
@@ -651,6 +672,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # lock; a request with no profile at all stays fully legacy. A named all-day
     # place (Bà Nà) leaves only the evening for the other stops.
     limits = _limits(tpl_name, trip, _all_day_minutes(trip.get("must_visit"), pois_by_id))
+    # Objective v1 (DAVEL_OBJECTIVE): the template's taste limits (pace band, required
+    # categories, late end, dinner) become terms of the objective; K0 keeps its pace top.
+    spec = (objective_mod.build_spec(trip, limits, profile=prof)
+            if objective_mod.active() else None)
+    if spec is not None:
+        limits = _v1_limits(limits)
 
     # Fail closed: the pool is exactly the ranked (verified, hard-filtered)
     # candidates. An empty pool is an honest empty plan, never "every POI"
@@ -736,9 +763,14 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
                 + unit * leans[poi["poi_id"]][0])
 
+    # The cap: DAVEL_SOLVER_CANDIDATES, else the objective's (v1: 40), else the default.
+    cap_limit = (os.environ.get("DAVEL_SOLVER_CANDIDATES")
+                 or (spec.w.get("solver_candidates") if spec else None))
+    cap_extra = {"limit": int(cap_limit)} if cap_limit else {}
     capped = _cap_candidates(candidates, _score_with_taste,
                              list(trip.get("must_visit") or []), wish_groups=act_groups,
-                             cheap_meals=CANDIDATE_CHEAP_MEALS if ceiling is not None else 0)
+                             cheap_meals=CANDIDATE_CHEAP_MEALS if ceiling is not None else 0,
+                             **cap_extra)
     if len(capped) < len(candidates):
         candidates = capped
         ids = [p["poi_id"] for p in candidates]
@@ -749,19 +781,25 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # also use that freedom when nothing else fits it (`_ladder`).
     must_ids = set(trip.get("must_visit") or [])
     stubs = stubs_from_pois(candidates, trip, _score_with_taste,
-                            deadline=deadline(trip), any_hour_ids=must_ids)
+                            deadline=deadline(trip), any_hour_ids=must_ids,
+                            pois_by_id=pois_by_id)
     wish_ids = {pid for group in act_groups for pid in group.get("poi_ids") or []}
     wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=deadline(trip),
-                                  any_hour_ids=must_ids | wish_ids) if wish_ids else stubs)
-    edges = scorer.edge_scores(ids, pois_by_id, ctx=ctx)
+                                  any_hour_ids=must_ids | wish_ids, pois_by_id=pois_by_id)
+                  if wish_ids else stubs)
+    # One place per rule (rules.py): under objective v1 the edges carry the PATM
+    # transition score only; riding minutes (T9), A2 (T6) and B1 (T4) live in the
+    # objective, so the legacy edge penalties and EDGE_TRAVEL_WEIGHT are not added.
+    edges = scorer.edge_scores(ids, pois_by_id, ctx=ctx, rule_penalties=spec is None)
     origin_id = trip.get("origin_id")
     if origin_id and origin_id not in ids:
         # The day starts at the traveller's base: its first drive is a leg like any
-        # other, charged by `_profile_edges` and read by the order search and gate B3.
+        # other, charged by `_profile_edges` (legacy) or T9 (objective v1) and read by
+        # the order search and gate B3.
         legs = matrix_svc.legs_from(cells, origin_id, ids)
         travel.update(legs)
         edges.update({pair: 0.0 for pair in legs})
-    q = _profile_edges(prof, edges, travel)
+    q = _profile_edges(prof, edges, travel) if spec is None else edges
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no
     # profile keeps the plain planning, except in the rain: a forecast that calls
@@ -776,10 +814,19 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # HARD cafe quota mirrored into the solver (gate CAFE_CAP): the profile's
     # cafe need decides between 1 and 2 cafes; NO_CONSECUTIVE is always on.
     cafe_cap = soft_rules.cafe_cap(profile_data)
-    # HARD per-category daily cap mirrored into the solver (gate CATEGORY_CAP):
-    # one market/landmark/beach/attraction/... per day, universal, meals
-    # exempt. Never relaxed by the ladder (attempts() does not carry it).
-    category_cap = soft_rules.CATEGORY_DAILY_CAP
+    # Taste rules (CATEGORY_CAP: one market/landmark/beach/... per day;
+    # NO_CONSECUTIVE): soft penalties unless the trip asks for them
+    # (soft_rules.solver_taste_args). Never relaxed by the ladder.
+    taste = soft_rules.solver_taste_args(trip)
+    adjacent_food = True
+    if spec is not None:
+        # Objective v1: T3/T4 replace the soft cap and the soft adjacency penalty; a
+        # rule stays a constraint only when the trip names it in `strict_rules`.
+        cafe_cap = cafe_cap if "CAFE_CAP" in spec.strict else None
+        taste = {"category_cap": taste["category_cap"], "soft_category_cap": None,
+                 "no_consecutive": taste["no_consecutive"], "soft_no_consecutive": False}
+        adjacent_food = bool({"NO_ADJACENT_FOOD", "NO_CONSECUTIVE"} & spec.strict)
+    category_cap = taste["category_cap"]
 
     # Ladder: full template -> drop pace/required counts -> drop max too.
     out: dict = {"itinerary": None, "reason": "khong co ung vien"}
@@ -789,7 +836,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     if timeout_s is not None:
         solver_opts["timeout_s"] = float(timeout_s)
     if deterministic_time is not None:
-        solver_opts["deterministic_time"] = float(deterministic_time)
+        solver_opts["deterministic_time"] = objective_mod.search_budget(deterministic_time, spec)
     if distinct_from:
         solver_opts["distinct_from"] = list(distinct_from)
         solver_opts["distinct_ceiling"] = pool_svc.MAX_PAIRWISE_JACCARD
@@ -797,8 +844,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # floor of the evening that is left, the rungs without the wish of the whole day.
     wish_busy = max((min((_all_day_minutes([pid], pois_by_id) for pid in group["poi_ids"]), default=0)
                      for group in act_groups if group.get("poi_ids")), default=0)
-    rungs = _ladder(limits, act_groups, must,
-                    _limits(tpl_name, trip, wish_busy) if wish_busy else None)
+    wished_limits = _limits(tpl_name, trip, wish_busy) if wish_busy else None
+    if spec is not None and wished_limits is not None:
+        wished_limits = _v1_limits(wished_limits)
+    rungs = _ladder(limits, act_groups, must, wished_limits)
     short_stubs = [replace(stub, visit_min=poi_visit_short(pois_by_id[stub.poi_id]))
                    if stub.poi_id in must_ids else stub for stub in stubs]
     stubs_by_kind = {"plain": stubs, "any_hour": wish_stubs, "short": short_stubs}
@@ -823,17 +872,20 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                                          if limits_try.get(
                                              "rest_after_lunch") else None),
                        late_end_min=limits_try["late_end_min"],
-                       cafe_cap=cafe_cap, no_consecutive=True,
-                       no_adjacent_food=True,
+                       cafe_cap=cafe_cap, no_consecutive=taste["no_consecutive"],
+                       no_adjacent_food=adjacent_food,
                        lunch_required=bool(limits_try.get("lunch_required")),
                        dinner_required=bool(limits_try.get("dinner_required")),
                        state_bands=state_bands,
                        state_score=state_scores,
                        state_cost=state_costs,
                        category_cap=category_cap,
+                       soft_category_cap=taste["soft_category_cap"],
+                       soft_no_consecutive=taste["soft_no_consecutive"],
                        diversity_weight=DIVERSITY_WEIGHT_BY_PROFILE.get(prof),
                        max_fee=_max_fee(trip),
                        solution_pool=pool_size,
+                       objective=spec,
                        **solver_opts)
         if out.get("itinerary") is not None:
             relaxed_step = step
@@ -895,13 +947,16 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                     if base_limits.get("rest_after_lunch") else None),
                 late_end_min=base_limits["late_end_min"],
                 cafe_cap=override.pop("cafe_cap", cafe_cap),
-                no_consecutive=override.pop("no_consecutive", True),
-                no_adjacent_food=override.pop("no_adjacent_food", True),
+                no_consecutive=override.pop("no_consecutive", taste["no_consecutive"]),
+                no_adjacent_food=override.pop("no_adjacent_food", adjacent_food),
                 lunch_required=override.pop(
                     "lunch_required", bool(base_limits.get("lunch_required"))),
                 state_bands=state_bands, state_score=state_scores, state_cost=state_costs,
                 category_cap=override.pop("category_cap", category_cap),
-                max_fee=override.pop("max_fee", _max_fee(trip)))
+                soft_category_cap=taste["soft_category_cap"],
+                soft_no_consecutive=taste["soft_no_consecutive"],
+                max_fee=override.pop("max_fee", _max_fee(trip)),
+                objective=spec)
             if probe.get("itinerary") is not None:
                 if name == "BUDGET" and _within_budget(probe, stubs, trip):
                     continue  # it fits the budget: the solver only ran out of time
@@ -924,7 +979,13 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
 
     acts = (out.get("itinerary") or {}).get("activities", [])
     # The solver chose the stops; find their shortest legal order and honest times.
-    acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs, pois_by_id, cells, ctx)
+    # Objective v1 prices riding minutes, long legs and zone changes inside the solve
+    # (T9), so the solver's ORDER is kept ("khong xep lai"): every consecutive pair is
+    # passed as a precedence, and the pass only re-times the day (no dead holes).
+    keep_order = ([(a["poi_id"], b["poi_id"]) for a, b in zip(acts, acts[1:])]
+                  if spec is not None else [])
+    acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs + keep_order,
+                     pois_by_id, cells, ctx)
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)

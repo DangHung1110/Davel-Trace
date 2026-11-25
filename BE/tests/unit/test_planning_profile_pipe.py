@@ -21,7 +21,7 @@ from pydantic import ValidationError  # noqa: E402
 
 from BE.app.modules.planning_lifecycle.api import ConstraintOverrides  # noqa: E402
 from BE.app.modules.planning_lifecycle.service import (  # noqa: E402
-    _current_poi,
+    _current_stop,
     _effective_profile,
     _profile,
     _trip_request,
@@ -121,15 +121,18 @@ class TestCurrentPoi(unittest.TestCase):
         "b1": {"poi_id": "beach", "order": (1, 0)},
     }
 
+    def place(self, completed):
+        return (_current_stop(completed, self.KNOWN) or {}).get("poi_id")
+
     def test_the_latest_finished_stop(self):
-        self.assertEqual(_current_poi(["a2", "a1"], self.KNOWN), "cafe")
-        self.assertEqual(_current_poi(["a1", "b1", "a2"], self.KNOWN), "beach")
+        self.assertEqual(self.place(["a2", "a1"]), "cafe")
+        self.assertEqual(self.place(["a1", "b1", "a2"]), "beach")
 
     def test_a_custom_activity_has_no_place(self):
-        self.assertEqual(_current_poi(["a1", "a3"], self.KNOWN), "market")
+        self.assertEqual(self.place(["a1", "a3"]), "market")
 
     def test_nothing_done_yet(self):
-        self.assertIsNone(_current_poi([], self.KNOWN))
+        self.assertIsNone(_current_stop([], self.KNOWN))
 
 
 class TestOverridesContract(unittest.TestCase):

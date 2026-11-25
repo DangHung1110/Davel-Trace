@@ -101,8 +101,8 @@
   "user": 2
  },
  "price_verified_by": {
-  "agent_web": 90,
-  "inferred": 931,
+  "agent_web": 149,
+  "inferred": 872,
   "user": 8
  },
  "dwell_verified_by": {
@@ -111,8 +111,8 @@
  },
  "legacy_hours_nonempty": 931,
  "v1_hours_nonempty": 523,
- "legacy_price_band": 73,
- "legacy_free_entry": 195,
+ "legacy_price_band": 116,
+ "legacy_free_entry": 191,
  "hours_conflict": 3,
  "quarantined_pois": 662,
  "category_changes": 180,

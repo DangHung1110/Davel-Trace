@@ -8,6 +8,8 @@ Request: `{ "text": "Cuối tuần đi Đà Nẵng 2 người, 3 triệu, phải
 
 Response contains `proposal_id`, `trip_id`, `status`, proposed `fields`, `hard_constraints`, `soft_preferences`, `assumptions`, `unresolved`, and non-secret provider/model labels. It is a proposal only; the client reviews it before submitting confirmed overrides.
 
+`hard_constraints.areas` (always present, possibly `[]`) lists the planning zones the text names, read by a fixed phrase table (`parser.areas_in_text`), never by the model; `[]` keeps the zones saved on the trip. See `specs/022-trip-areas/spec.md`.
+
 Errors: ownership errors before provider invocation; `422 VALIDATION_ERROR`; normalized `503 LLM_DISABLED|LLM_CONFIG|LLM_AUTH|LLM_QUOTA|LLM_SAFETY|LLM_TIMEOUT|LLM_TRANSPORT|LLM_BAD_JSON|LLM_SCHEMA`.
 
 ## POST `/v1/itinerary-alternatives/{alternative_id}/ai/explanation`
