@@ -894,6 +894,22 @@
    "note": "VinWonders ghi 25.000 – 60.000 VNĐ/món cho cùng quán; lấy Vinpearl (mới cập nhật, ghi /tô).",
    "typical_vnd": 22500,
    "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
+   "category": "outdoor_landmark",
+   "name": "Hồ Hòa Trung",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://vinpearl.com/vi/ho-hoa-trung-da-nang-diem-cam-trai-teambuilding-dinh-cua-chop",
+   "quote": "Địa chỉ: thuộc địa phận của xã Bà Nà và phường Liên Chiểu, TP. Đà Nẵng | Giá vé hồ Hòa Trung: Miễn phí | Hồ Hòa Trung Đà Nẵng không thu vé vào cửa, nhưng ... khoảng 20.000 VNĐ/người cho dịch vụ chèo thuyền",
+   "page_date": "2024-01-13, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI tên OSM 'Hồ Hoà Trung', phường Liên Chiểu.",
+   "note": "Vào hồ miễn phí; chèo thuyền 20–30k và cắm trại 200k/lều là tuỳ chọn.",
+   "accessed": "2026-11-25"
   }
  ],
  "not_found": [
@@ -1663,6 +1679,156 @@
    "why": "mia.vn (09/11/2025) không nêu vé; các nguồn 'miễn phí' khác nói về làng bích họa Tam Thanh (Quảng Phú), không phải POI ở Nguyễn Văn Linh. Giữ luật 'vào tự do'.",
    "tried": [
     "https://mia.vn/cam-nang-du-lich/lang-bich-hoa-da-nang-19588"
+   ]
+  },
+  {
+   "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
+   "category": "cafe",
+   "name": "43 Coffee & Milk Tea",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Nguyễn Văn Nguyễn, Ngũ Hành Sơn) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
+   "category": "cafe",
+   "name": "ChuAn cafe",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Sơn Thủy Đông 4) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
+   "category": "cafe",
+   "name": "The South Coffee",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Đoàn Khuê) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJYZuMDnEZQjERrftd297ekRM",
+   "category": "nightlife",
+   "name": "Tê Bar",
+   "found": false,
+   "why": "toplist.vn chỉ có giờ 19:00–01:30 và nhận xét, không có giá cocktail.",
+   "tried": [
+    "https://toplist.vn/top-list/quan-cocktail-bar-dang-cap-nhat-tai-da-nang-57706.htm"
+   ]
+  },
+  {
+   "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+   "category": "nightlife",
+   "name": "Writer's Bar",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (7 Trường Sa) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
+   "category": "outdoor_landmark",
+   "name": "Cầu vượt đi bộ Mikazuki",
+   "found": false,
+   "why": "Không có trang riêng về cầu đi bộ; vé 350–400k của Mikazuki 365 Water Park là điểm khác (đúng như ghi chú cũ). Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites"
+   ]
+  },
+  {
+   "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
+   "category": "outdoor_landmark",
+   "name": "Quảng trường Liên Chiểu",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quảng trường có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/7276380289",
+   "category": "outdoor_landmark",
+   "name": "Cầu Sông Hàn",
+   "found": false,
+   "why": "Các bài chỉ nói giờ quay cầu, không nêu vé/giá đi bộ (cầu đường bộ công cộng). Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/trai-nghiem-cau-quay-song-han-ve-dep-doc-dao-khong-the-bo-qua-13367"
+   ]
+  },
+  {
+   "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
+   "category": "outdoor_landmark",
+   "name": "Công viên Sao Biển",
+   "found": false,
+   "why": "Không tìm thấy trang nào về công viên có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
+   "category": "outdoor_landmark",
+   "name": "Công Viên Trung Tâm Hành Chính Liên Chiểu",
+   "found": false,
+   "why": "Không tìm thấy trang nào về công viên có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
+   "category": "wellness",
+   "name": "Spa & Massage Đà Nẵng",
+   "found": false,
+   "why": "POI ở 5 Trường Sa (khu Hyatt Regency); trang chính thức VIE Spa không ghi giá, không có bảng giá đọc được.",
+   "tried": [
+    "https://www.hyatt.com/hyatt-regency/en-US/danhr-hyatt-regency-danang-resort-and-spa/vie-spa"
+   ]
+  },
+  {
+   "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+   "category": "wellness",
+   "name": "Elsa Spa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Nguyễn Thái Học, Hải Châu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
+   "category": "wellness",
+   "name": "Trạm spa- nặn mụn",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (106 Dũng Sĩ Thanh Khê) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM",
+   "category": "wellness",
+   "name": "An Mộc Spa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Liên Chiểu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
+   "category": "wellness",
+   "name": "Massage Therapy Spa The Yen",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Bàu Mạc 6) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
    ]
   }
  ]
