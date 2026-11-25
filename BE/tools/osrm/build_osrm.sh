@@ -16,7 +16,9 @@ set -euo pipefail
 DATA="${1:?usage: build_osrm.sh <data_dir> [bbox]}"
 BBOX="${2:-107.80,15.65,108.65,16.35}"
 IMAGE="ghcr.io/project-osrm/osrm-backend:v5.27.1"
-PBF_URL="https://download.geofabrik.de/asia/vietnam-latest.osm.pbf"
+# Geofabrik moved country extracts into per-country folders (the old
+# asia/vietnam-latest.osm.pbf now answers 301); both curls follow redirects.
+PBF_URL="https://download.geofabrik.de/asia/vietnam/vietnam-latest.osm.pbf"
 PROFILE="$(cd "$(dirname "$0")" && pwd)/motorbike.lua"
 
 mkdir -p "$DATA"
@@ -30,7 +32,7 @@ print(h.hexdigest())' "$1"; }
 if [ ! -f vietnam-latest.osm.pbf ]; then
   curl -fL -o vietnam-latest.osm.pbf "$PBF_URL"
 fi
-EXPECTED="$(curl -fsS "$PBF_URL.md5" | cut -d' ' -f1)"
+EXPECTED="$(curl -fsSL "$PBF_URL.md5" | cut -d' ' -f1)"
 ACTUAL="$(md5_of vietnam-latest.osm.pbf)"
 if [ "$EXPECTED" != "$ACTUAL" ]; then
   echo "md5 mismatch: local $ACTUAL != Geofabrik $EXPECTED (stale or corrupt;" \
