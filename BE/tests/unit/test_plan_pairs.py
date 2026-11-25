@@ -223,6 +223,16 @@ class TestDataset(unittest.TestCase):
         self.assertEqual(one["dataset"], again["dataset"])     # the build date is not content
         self.assertNotEqual(one["dataset"], other["dataset"])
 
+    def test_cache_is_reused_only_for_its_snapshot(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp, "plans.json")
+            self.assertEqual(mpp.cached_rows(cache, "danang-v2"), {})
+            mpp.write_json(cache, {"snapshot": "danang-v2", "rows": [
+                {**self.rows[0], "status": 200}, {**self.rows[1], "status": 500}]})
+            self.assertEqual(list(mpp.cached_rows(cache, "danang-v2")), ["r0"])   # a failed request is planned again
+            self.assertEqual(mpp.cached_rows(cache, "danang-v1"), {})
+
     def test_embed(self):
         page = '<p>x</p><script type="application/json" id="pairs-data">{"pairs":[]}</script><script>go()</script>'
         doc = {"dataset": "d", "pairs": [{"name": "Bar </script><b>"}]}

@@ -169,8 +169,22 @@ def slim_plan(plan: dict) -> dict:
     }
 
 
-def run_planner(requests: list[dict], snapshot: Path = SNAPSHOT) -> list[dict]:
-    """Plan every request (3 profiles each), weather offline. Rows keep the request."""
+def cached_rows(cache: Path | None, snapshot: str) -> dict[str, dict]:
+    """Rows a previous run saved for this snapshot, by request id."""
+    if not cache or not cache.exists():
+        return {}
+    doc = json.loads(cache.read_text(encoding="utf-8"))
+    if doc.get("snapshot") != snapshot:
+        return {}
+    return {r["request_id"]: r for r in doc.get("rows") or [] if r.get("status") == 200}
+
+
+def run_planner(requests: list[dict], snapshot: Path = SNAPSHOT, cache: Path | None = None) -> list[dict]:
+    """Plan every request (3 profiles each), weather offline. Rows keep the request.
+
+    With `cache`, a request already planned there (same snapshot, same trip) is not
+    planned again, and the file is rewritten after every request: an interrupted run
+    picks up where it stopped. The planner is deterministic, so this changes nothing."""
     from unittest import mock
 
     from fastapi.testclient import TestClient
@@ -183,10 +197,17 @@ def run_planner(requests: list[dict], snapshot: Path = SNAPSHOT) -> list[dict]:
     os.chdir(REPO_ROOT)  # the PATM model path is relative to the repo root
     settings = Settings(snapshot_dir=str(snapshot), snapshot_name=snapshot.name)
     client = TestClient(main_mod.app)
+    saved = cached_rows(cache, snapshot.name)
+    asked = {req["request_id"] for req in requests}
+    others = [r for rid, r in saved.items() if rid not in asked]   # an --only run keeps the rest
     rows = []
     with mock.patch.object(itinerary_mod, "get_settings", lambda: settings), \
             mock.patch.object(trip_ctx.weather_svc, "fetch_forecast", side_effect=RuntimeError("offline")):
         for i, req in enumerate(requests, 1):
+            old = saved.get(req["request_id"])
+            if old and _canonical(old["trip"]) == _canonical(req["trip"]):
+                rows.append(old)
+                continue
             t0 = time.perf_counter()
             resp = client.post("/v1/itinerary", json={"trip": req["trip"]})
             body = resp.json() if resp.status_code == 200 else {}
@@ -196,6 +217,8 @@ def run_planner(requests: list[dict], snapshot: Path = SNAPSHOT) -> list[dict]:
                   f"{time.perf_counter() - t0:4.1f}s | "
                   + " | ".join(f"{k}:{len(v['activities'])}{'' if v['passed'] else '!'}"
                                for k, v in plans.items()), flush=True)
+            if cache:
+                write_json(cache, {"snapshot": snapshot.name, "rows": rows + others})
     return rows
 
 
@@ -528,7 +551,8 @@ def main(argv=None) -> int:
     ap.add_argument("--min-edit-stops", type=int, default=MIN_EDIT_STOPS)
     ap.add_argument("--min-edit-share", type=float, default=MIN_EDIT_SHARE)
     ap.add_argument("--snapshot", type=Path, default=SNAPSHOT)
-    ap.add_argument("--plans-cache", type=Path, default=None, help="save the planner output here")
+    ap.add_argument("--plans-cache", type=Path, default=None,
+                    help="keep the planner output here, and resume from it after an interruption")
     ap.add_argument("--reuse", type=Path, default=None, help="read the planner output instead of planning")
     ap.add_argument("--only", default="", help="comma-separated request id prefixes (a quick trial)")
     ap.add_argument("--out-dir", type=Path, default=HERE)
@@ -542,9 +566,7 @@ def main(argv=None) -> int:
         if args.only:
             requests = [r for r in requests if r["request_id"].startswith(tuple(args.only.split(",")))]
         print(f"{len(requests)} requests", flush=True)
-        rows = run_planner(requests, args.snapshot)
-        if args.plans_cache:
-            write_json(args.plans_cache, {"snapshot": args.snapshot.name, "rows": rows})
+        rows = run_planner(requests, args.snapshot, args.plans_cache)
     pairs_doc, key_doc = build_dataset(rows, by_id, args.n, args.per_request, args.seed,
                                        args.min_edit_stops, args.min_edit_share, args.snapshot.name)
     args.out_dir.mkdir(parents=True, exist_ok=True)
