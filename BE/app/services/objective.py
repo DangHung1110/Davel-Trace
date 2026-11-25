@@ -16,13 +16,15 @@ term of one objective, so a plan may break it when that is worth the cost:
        - sum_{k>K0} kappa_k s_k                 T8 stops beyond the comfortable count
        - sum c_ij a_ij                          T9 riding minutes, long legs, zone changes
        + w_edge * sum q_ij a_ij                 T10 PATM transition bonus
+       - sum_k sigma_k d_k                      T11 near-duplicates: same site, area +
+                                                stop inside it, 2nd market, same dish
 
 T3 is submodular: the first stop of a group is free, every further one costs
 more than the one before. All weights are in units of U, the top candidate score
 of the pool (the `unit` the optimizer already scales by), so one number means
 the same trade-off for every profile.
 
-Mode: DAVEL_OBJECTIVE = "legacy" (default: the old hard taste rules) | "v1" |
+Mode: DAVEL_OBJECTIVE = "v1" (default) | "legacy" (the old hard taste rules) |
 a path to a weights JSON with the same keys (learned weights drop in as a file).
 """
 
@@ -37,6 +39,9 @@ from BE.app.services import rules
 
 WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), "objective_weights")
 LEGACY = "legacy"
+# The default objective: v1 since 25/11/2026 (user decision after step 1).
+# DAVEL_OBJECTIVE=legacy brings back the old hard taste rules for A/B runs.
+DEFAULT = "v1"
 
 # dwell_kind (BE/ml/data/v2_rules.DWELL, 31 kinds) -> diversity group of T3/T4.
 # "" = a meal: T5/T6 own restaurants, they never count as a repeat.
@@ -72,11 +77,12 @@ FOOD_TOUR_WORDS = ("food tour", "an uong", "am thuc", "an vat", "an het", "tour 
 
 # Order of the learned coefficients (`features` keys = weight names in the JSON).
 FEATURES = ("value", "state", "repeat", "adjacent", "meal", "meal_crowd", "rest",
-            "pace", "ride", "long_leg", "zone", "edge")
+            "pace", "ride", "long_leg", "zone", "edge",
+            "same_site", "umbrella", "market", "dish")
 
 
 def mode() -> str:
-    return (os.environ.get("DAVEL_OBJECTIVE") or LEGACY).strip()
+    return (os.environ.get("DAVEL_OBJECTIVE") or DEFAULT).strip()
 
 
 def active() -> bool:
@@ -98,6 +104,22 @@ def weights(version: str | None = None) -> dict:
     return json.loads(_load(path))
 
 
+def dwell_kind_of(poi: dict | None) -> str:
+    """The v2.1 dwell kind of a POI (31 kinds), "" for a legacy record."""
+    from BE.common import is_v21
+
+    poi = poi or {}
+    if not is_v21(poi):
+        return ""
+    source = ((poi.get("provenance") or {}).get("dwell") or {}).get("source") or ""
+    kind = source.split(":", 1)[1] if source.startswith("dwell_table_v2:") else ""
+    if not kind:
+        from BE.ml.data.v2_rules import dwell_kind
+        kind = dwell_kind(poi.get("category") or "", poi.get("name") or "",
+                          (poi.get("hours") or {}).get("archetype") or "")
+    return kind
+
+
 def diversity_group(poi: dict | None) -> str:
     """T3/T4 group of a POI: its dwell kind folded into 12 groups ("" = a meal)."""
     from BE.common import is_v21
@@ -105,14 +127,111 @@ def diversity_group(poi: dict | None) -> str:
 
     poi = poi or {}
     if is_v21(poi):
-        source = ((poi.get("provenance") or {}).get("dwell") or {}).get("source") or ""
-        kind = source.split(":", 1)[1] if source.startswith("dwell_table_v2:") else ""
-        if not kind:
-            from BE.ml.data.v2_rules import dwell_kind
-            kind = dwell_kind(poi.get("category") or "", poi.get("name") or "",
-                              (poi.get("hours") or {}).get("archetype") or "")
-        return GROUP_OF_KIND.get(kind, "experience")
+        return GROUP_OF_KIND.get(dwell_kind_of(poi), "experience")
     return GROUP_OF_LEGACY_CAT.get(poi_category(poi), "")
+
+
+# --- T11: near-duplicates -----------------------------------------------------
+# A plan that rides less packs stops that sit close together, and the closest are
+# often one place under two names. Four kinds, all read from the data:
+#   same_site   two stops of one `alt_group` (Đèo Hải Vân / Hải Vân Quan)
+#   umbrella    a whole-area stop and a stop inside it: `requires_ticket_of` points
+#               at the area (Phố cổ Hội An), or at a POI of the area's alt_group
+#               (Phố đi bộ phố cổ walks the same old town). Several stops inside the
+#               area stay free (three assembly halls on one walk).
+#   market      two daytime markets in a day (Chợ Hàn + Chợ Cồn are one
+#               experience 1 km apart); a food tour pays `market_food_tour`.
+#   dish        two meals of one main dish in a day (mì Quảng twice): the sourced
+#               `tags.dishes` label (BE.common.DISHES), else the dish the name states.
+# Counted on the day, not on adjacent legs: a stop slipped in between does not
+# escape them (T4 only sees neighbours).
+SUBSTITUTE_KINDS = {"market": "day_market"}
+# Labels of `BE.common.DISHES` that are a diet, not a dish: a vegetarian eats "món
+# chay" at every meal, which is no repeat.
+NOT_A_DISH = frozenset({"mon_chay"})
+DUPLICATE_RULES = {"same_site": "SAME_SITE", "umbrella": "SAME_SITE",
+                   "market": "MARKET_REPEAT", "dish": "SAME_DISH"}
+
+
+def dish_of(poi: dict | None) -> str:
+    """A restaurant's main dish id (`BE.common.DISHES`), "" when none or not a meal.
+
+    The sourced label first (`tags.dishes` of the record; the runtime view carries
+    their display names in `dishes`), else the dish its name states."""
+    from BE.common import DISHES, dish_ids, dishes_from_name
+    from BE.app.services.soft_rules import poi_category
+
+    poi = poi or {}
+    # the runtime view carries `cat`, a raw v2.1 record `category` / `role`
+    if "restaurant" not in (poi_category(poi), poi.get("category")) and poi.get("role") != "meal":
+        return ""
+    ids = dish_ids(poi)
+    if not ids:
+        by_vi = {d["vi"]: key for key, d in DISHES.items()}
+        ids = [by_vi[v] for v in poi.get("dishes") or [] if v in by_vi]
+    if not ids:
+        ids = dishes_from_name(poi.get("name") or poi.get("name_vi") or "")
+    ids = [d for d in ids if d not in NOT_A_DISH]
+    return ids[0] if ids else ""
+
+
+def stub_keys(poi: dict, parent: dict | None = None) -> dict:
+    """StubPOI fields of the objective: T3/T4 group, T9 zone, T11 keys.
+
+    `parent`: the POI `requires_ticket_of` points to, when the caller has it; its
+    alt_group then names the whole area, so any record of the area is an umbrella.
+    """
+    kind = dwell_kind_of(poi)
+    inside = str(poi.get("requires_ticket_of") or "")
+    if parent and parent.get("alt_group"):
+        inside = f"alt:{parent['alt_group']}"
+    return {"group": diversity_group(poi), "zone": str(poi.get("zone") or ""),
+            "site": f"alt:{poi['alt_group']}" if poi.get("alt_group") else "",
+            "inside": inside, "substitute": SUBSTITUTE_KINDS.get(kind, ""),
+            "dish": dish_of(poi)}
+
+
+def parent_of(poi: dict, pois_by_id: dict | None) -> dict | None:
+    """The record `requires_ticket_of` points to: a poi_id, or an OSM ref."""
+    ref = poi.get("requires_ticket_of")
+    if not ref or not pois_by_id:
+        return None
+    if ref in pois_by_id:
+        return pois_by_id[ref]
+    plain = ref[4:] if ref.startswith("osm:") else ref
+    for p in pois_by_id.values():
+        if (p.get("ext_ids") or {}).get("osm") in (ref, plain):
+            return p
+    return None
+
+
+def umbrella_pairs(stubs: list) -> list[tuple[int, int]]:
+    """(area, inside) index pairs: stub b sits inside the area stub a stands for."""
+    pairs = []
+    for b, child in enumerate(stubs):
+        key = getattr(child, "inside", "")
+        if not key:
+            continue
+        for a, area in enumerate(stubs):
+            if a != b and (area.poi_id == key or (area.site and area.site == key)):
+                pairs.append((a, b))
+    return pairs
+
+
+def duplicate_counts(stubs: list) -> dict:
+    """T11 on a finished day, in counts (before weights): repeats beyond the first
+    of each key, and 1 per inside stop whose area is also in the day."""
+    def extra(attr):
+        seen: dict[str, int] = {}
+        for s in stubs:
+            key = getattr(s, attr, "")
+            if key:
+                seen[key] = seen.get(key, 0) + 1
+        return float(sum(c - 1 for c in seen.values()))
+
+    inside = {b for _a, b in umbrella_pairs(stubs)}
+    return {"same_site": extra("site"), "umbrella": float(len(inside)),
+            "market": extra("substitute"), "dish": extra("dish")}
 
 
 def _fold(text: str) -> str:
@@ -133,6 +252,12 @@ class Spec:
     def coef(self, name: str) -> float:
         return float(self.w.get(name, 0.0))
 
+    def duplicate(self, kind: str) -> float:
+        """T11 weight of one extra stop of `kind` (same_site / umbrella / market / dish)."""
+        if kind == "market" and self.food_tour:
+            return self.coef("dup_market_food_tour")
+        return self.coef(f"dup_{kind}")
+
     def meal_crowd(self) -> float:
         return self.coef("meal_crowd_food_tour" if self.food_tour else "meal_crowd")
 
@@ -142,6 +267,15 @@ class Spec:
 
     def beta(self, group: str) -> float:
         return float((self.w.get("beta") or {}).get(group, 1.0)) if group else 0.0
+
+
+def search_budget(deterministic_time: float, spec: "Spec | None") -> float:
+    """The CP-SAT work budget of a solve under this objective. v1 has more terms than
+    legacy: at the legacy 5 units a thrifty day ended 32% below its optimum (three
+    restaurants, two back to back); 8 units reached 93% (`search_scale`, 25/11)."""
+    if spec is None:
+        return float(deterministic_time)
+    return float(deterministic_time) * float(spec.w.get("search_scale", 1.0))
 
 
 def strict_rules(trip: dict | None) -> frozenset:
@@ -216,12 +350,44 @@ def repeat_cost(spec: Spec, group: str, count: int, scaled: bool = True) -> floa
     return spec.beta(group) * total * (spec.coef("repeat_scale") if scaled else 1.0)
 
 
-def pace_cost(spec: Spec, stops: int, scaled: bool = True) -> float:
-    """T8 for `stops` visits, in U."""
-    if spec.k0 is None or stops <= spec.k0:
+def sight_k0(spec: Spec, start_min: int, end_min: int) -> int | None:
+    """T8's comfortable number of SIGHTS: K0 less one per meal window the day spans.
+
+    K0 (`comfortable_stops`) counts every stop of a day with its meals. T8 counts the
+    sights plus the meals beyond one per window (`paced_stops`): the day's meals never
+    pay the pace (before 25/11 a day at K0 dropped its dinner, the 9th stop cost 0.6U,
+    savings 1.2U, of a 1.2U dinner bonus), a third restaurant does (left free, a day
+    stacked three mì Quảng shops as quick stops).
+    """
+    if spec.k0 is None:
+        return None
+    return max(1, int(spec.k0) - main_meals(spec, start_min, end_min))
+
+
+def main_meals(spec: Spec, start_min: int, end_min: int) -> int:
+    """Lunch and dinner windows the day spans: the meals that never pay T8. A
+    breakfast stop is short and optional; it counts like a sight (a 07:00 day let a
+    third mì Quảng shop in at 14:00 as its "breakfast")."""
+    # A window counts when a meal can start in it and still end the day: a day to
+    # 18:00 has no real dinner (window 17:30-20:30), and charging one sight for it
+    # left the afternoon empty (test_profile_objectives, 25/11).
+    room = 90
+    return sum(1 for name, lo, hi in meal_windows(spec, start_min, end_min)
+               if name != "breakfast" and max(lo, start_min) <= min(hi, end_min - room))
+
+
+def paced_stops(sights: int, meals: int, spec: Spec, start_min: int, end_min: int) -> int:
+    """What T8 counts: every sight, and the meals beyond lunch and dinner."""
+    return sights + max(0, meals - main_meals(spec, start_min, end_min))
+
+
+def pace_cost(spec: Spec, stops: int, scaled: bool = True, k0: int | None = None) -> float:
+    """T8 for `stops` sights (meals excluded), in U, beyond `k0` (default spec.k0)."""
+    k0 = spec.k0 if k0 is None else k0
+    if k0 is None or stops <= k0:
         return 0.0
     kappa = list(spec.w.get("kappa") or [0.3, 0.6, 1.0])
-    total = sum(kappa[min(k, len(kappa) - 1)] for k in range(stops - spec.k0))
+    total = sum(kappa[min(k, len(kappa) - 1)] for k in range(stops - k0))
     return total * (spec.coef("pace_scale") if scaled else 1.0)
 
 
@@ -273,7 +439,9 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     if rest_taken:
         f["rest"] = spec.rest_bonus(scaled=False)
     # T8
-    f["pace"] = pace_cost(spec, len(order), scaled=False)
+    meals = sum(1 for p in order if stubs[p].restaurant)
+    counted = paced_stops(len(order) - meals, meals, spec, start_min, end_min)
+    f["pace"] = pace_cost(spec, counted, scaled=False, k0=sight_k0(spec, start_min, end_min))
     # T9
     legs = list(zip(order, order[1:]))
     if origin_id and order:
@@ -290,6 +458,8 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     for a, b in zip(order, order[1:]):
         f["edge"] += float((edge_scores or {}).get((a, b), 0.0)) / 10.0 / unit
     f["state"] = float((state or {}).get("value", 0.0))
+    # T11
+    f.update(duplicate_counts([stubs[p] for p in order]))
     return f
 
 
@@ -300,4 +470,6 @@ def objective_value(f: dict, spec: Spec) -> float:
             - spec.meal_crowd() * f["meal_crowd"] + f["rest"] * spec.coef("rest_scale")
             - f["pace"] * spec.coef("pace_scale") - spec.coef("tau") * f["ride"]
             - spec.coef("tau_long") * f["long_leg"] - spec.coef("zeta") * f["zone"]
-            + spec.coef("w_edge") * f["edge"])
+            + spec.coef("w_edge") * f["edge"]
+            - sum(spec.duplicate(kind) * f[kind] for kind in ("same_site", "umbrella",
+                                                               "market", "dish")))

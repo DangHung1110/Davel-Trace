@@ -50,7 +50,7 @@ from BE.app.services import profile_filter
 from BE.app.services import gate as gate_svc
 from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
-from BE.common import effective_fee
+from BE.common import effective_fee, merged_into
 from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
@@ -172,9 +172,16 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     name_to_id = {(p.get("name") or "").strip().lower(): pid
                   for pid, p in by_id.items()}
     kept_must, dropped_must = [], []
+    retired_warnings_merged: list[str] = []
     for m in trip.get("must_visit", []):
         key = (m or "").strip()
         pid = key if key in by_id else name_to_id.get(key.lower())
+        target = merged_into(by_id.get(pid)) if pid else None
+        if target and target in by_id:
+            # a record folded into another one (decisions "gộp vào"): the kept one
+            retired_warnings_merged.append(
+                f"'{by_id[pid].get('name') or m}' da gop vao '{by_id[target].get('name')}'")
+            pid = target
         if pid is None:
             dropped_must.append((m, "khong co trong du lieu"))
         elif pid in dropped_ids:
@@ -185,7 +192,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             kept_must.append(pid)
     trip["must_visit"] = kept_must
     retired_warnings = [
-        f"khong dua vao lich '{m}': {why}" for m, why in dropped_must]
+        f"khong dua vao lich '{m}': {why}" for m, why in dropped_must] + retired_warnings_merged
 
     cells = matrix_svc.load_cells(settings.snapshot_dir)
     # A day that starts at the traveller's base (or where a replan resumes) charges

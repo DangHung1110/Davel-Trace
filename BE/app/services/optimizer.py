@@ -152,6 +152,11 @@ class StubPOI:
     booking: bool = False
     group: str = ""           # objective v1 T3/T4 diversity group ("" = meal / unknown)
     zone: str = ""            # objective v1 T9 zone (a change of zone costs)
+    # objective v1 T11 (objective.stub_keys): "" = none
+    site: str = ""            # alt_group: one place under two records
+    inside: str = ""          # the whole-area stop this one sits inside
+    substitute: str = ""      # "day_market": a second one in the day costs
+    dish: str = ""            # a restaurant's dish (mì Quảng twice costs)
 
 
 def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
@@ -223,8 +228,10 @@ def poi_windows(poi: dict, trip: dict | None = None,
 
 
 def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
-                deadline: int | None = None, any_hour: bool = False) -> StubPOI:
-    """T061a adapter: POI dict (snapshot or fixture) -> optimizer input."""
+                deadline: int | None = None, any_hour: bool = False,
+                parent: dict | None = None) -> StubPOI:
+    """T061a adapter: POI dict (snapshot or fixture) -> optimizer input.
+    `parent`: the record its `requires_ticket_of` points to (objective v1 T11)."""
     wins = poi_windows(poi, trip, deadline, any_hour)
     bonus = MUST_GO_BONUS if poi.get("must_go") else 0.0
     category = poi_category(poi)
@@ -236,21 +243,24 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    windows=tuple(wins) if len(wins) > 1 else (),
                    fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi),
                    booking=(poi.get("hours") or {}).get("kind") == "by_booking",
-                   group=objective_mod.diversity_group(poi),
-                   zone=str(poi.get("zone") or ""))
+                   **objective_mod.stub_keys(poi, parent))
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
                     score_fn=None, deadline: int | None = None,
-                    any_hour_ids: set[str] | None = None) -> list[StubPOI]:
-    """T061a adapter: adapt a POI list with one score function (or rating)."""
+                    any_hour_ids: set[str] | None = None,
+                    pois_by_id: dict | None = None) -> list[StubPOI]:
+    """T061a adapter: adapt a POI list with one score function (or rating).
+    `pois_by_id`: where a stop's whole-area parent is looked up (default: `pois`)."""
     def _score(p: dict) -> float:
         if score_fn is not None:
             return float(score_fn(p))
         return trusted_rating(p) or 1.0
 
     named = any_hour_ids or set()
-    return [poi_to_stub(p, trip, _score(p), deadline, p["poi_id"] in named) for p in pois]
+    lookup = pois_by_id or {p["poi_id"]: p for p in pois}
+    return [poi_to_stub(p, trip, _score(p), deadline, p["poi_id"] in named,
+                        objective_mod.parent_of(p, lookup)) for p in pois]
 
 
 def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
@@ -308,6 +318,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  state_bands: list[tuple[int, int]] | None = None,
                  state_cost: dict[tuple[str, int], float] | None = None,
                  late_end_min: int | None = None,
+                 dup_free: frozenset = frozenset(),
                  _closer: int | None = None) -> list[tuple[int, int]]:
     """Deterministic feasible-ish tour used as a CP-SAT solution hint.
 
@@ -363,6 +374,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     restaurant_starts: list[int] = []
     cafe_starts: list[int] = []
     placed: set[int] = set()
+    dup_keys: set[tuple[str, str]] = set()   # objective v1 T11 keys already in the seed
     previous: str | None = None
     previous_cat: str = ""
     previous_food = False
@@ -376,6 +388,25 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             return start + poi.visit_min + int(rest_after_lunch)
         return start + poi.visit_min + STOP_OVERHEAD_MIN
 
+    def _duplicates(poi: StubPOI) -> bool:
+        """Objective v1 T11 for the seed: a stop the objective charges as a near-duplicate
+        of one already seated. Left to CP-SAT, a 5-unit search often kept such a seed
+        (Chợ Hàn + Chợ Cồn, mì Quảng twice) instead of moving off it."""
+        keys = _dup_keys(poi)
+        if keys & dup_keys:
+            return True
+        if "umbrella" in dup_free:
+            for j in placed:
+                other = pois[j - 1]
+                if (poi.inside and poi.inside in (other.poi_id, other.site)) or (
+                        other.inside and other.inside in (poi.poi_id, poi.site)):
+                    return True
+        return False
+
+    def _dup_keys(poi: StubPOI) -> set[tuple[str, str]]:
+        return {(attr, getattr(poi, attr)) for attr in ("site", "substitute", "dish")
+                if attr in dup_free and getattr(poi, attr)}
+
     def _blocked_by_cat(poi: StubPOI, start: int) -> bool:
         """CAFE_CAP / CATEGORY_CAP / NO_CONSECUTIVE / NO_ADJACENT_FOOD.
 
@@ -388,6 +419,8 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         if no_consecutive and poi.category and poi.category == previous_cat:
             return True
         if no_adjacent_food and poi.restaurant and previous_food:
+            return True
+        if dup_free and poi.poi_id not in must_set and _duplicates(poi):
             return True
         if cafe_cap is not None and poi.category == "cafe":
             if len(cafe_starts) >= int(cafe_cap):
@@ -569,6 +602,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         hint.append((i, start))
         spent += poi.fee
         placed.add(i)
+        dup_keys.update(_dup_keys(poi))
         must_left.discard(i)
         if i == _closer:
             closer_left = False
@@ -615,6 +649,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     precedence=precedence, max_fee=max_fee, required_any=required_any,
                     lunch_required=lunch_required, dinner_required=dinner_required,
                     state_bands=state_bands, state_cost=state_cost, late_end_min=late_end_min,
+                    dup_free=dup_free,
                     _closer=node)
                 if again and _ends_late(again):
                     return again
@@ -764,6 +799,15 @@ def _overlap_hits(m, t, dur, visit, i, lo: int, hi: int, tag: str):
     return hit
 
 
+def _hint_dup_kinds(spec) -> frozenset:
+    """T11 kinds the greedy seed keeps out (objective v1 only; a food tour keeps markets)."""
+    if spec is None:
+        return frozenset()
+    kinds = {"site": "same_site", "umbrella": "umbrella", "substitute": "market",
+             "dish": "dish"}
+    return frozenset(attr for attr, kind in kinds.items() if spec.duplicate(kind) >= 1.0)
+
+
 def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: dict,
                         trip: StubTrip, t: dict, visit: dict, arc: dict, unit: float,
                         slot_hits: dict, a1_hard: bool, rest_taken, tmax: int):
@@ -846,19 +890,72 @@ def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: di
     # T7: the siesta right after lunch.
     if rest_taken is not None:
         expr += k(spec.rest_bonus()) * rest_taken
-    # T8: stops beyond the comfortable count K0.
-    if spec.k0 is not None and spec.coef("pace_scale") > 0 and n > spec.k0:
+    # T11: near-duplicates, counted on the day (objective.duplicate_counts). A rule
+    # the traveller made strict (`strict_rules`) is a constraint instead.
+    def _extra(attr: str, kind: str, nodes_ok=lambda i: True):
+        keyed: dict[str, list[int]] = {}
+        for i in range(1, n + 1):
+            key = getattr(pois[i - 1], attr, "")
+            if key and nodes_ok(i):
+                keyed.setdefault(key, []).append(i)
+        rule = objective_mod.DUPLICATE_RULES[kind]
+        weight = spec.duplicate(kind)
+        out = 0
+        for key, nodes in keyed.items():
+            if len(nodes) < 2:
+                continue
+            if rule in spec.strict:
+                m.Add(sum(visit[i] for i in nodes) <= 1)
+                continue
+            if weight <= 0:
+                continue
+            e = m.NewIntVar(0, len(nodes) - 1, f"dup_{kind}_{key}")
+            m.Add(e >= sum(visit[i] for i in nodes) - 1)
+            out -= k(weight) * e
+        return out
+
+    expr += _extra("site", "same_site")
+    expr += _extra("substitute", "market")
+    expr += _extra("dish", "dish", lambda i: not pois[i - 1].booking)
+    inside: dict[int, list[int]] = {}
+    for a, b in objective_mod.umbrella_pairs(pois):
+        inside.setdefault(b + 1, []).append(a + 1)
+    w_umb = spec.duplicate("umbrella")
+    for b, areas in inside.items():
+        if "SAME_SITE" in spec.strict:
+            for a in areas:
+                m.Add(visit[a] + visit[b] <= 1)
+            continue
+        if w_umb <= 0:
+            continue
+        u = m.NewBoolVar(f"dup_umbrella_{b}")
+        for a in areas:
+            m.Add(u >= visit[a] + visit[b] - 1)
+        expr -= k(w_umb) * u
+    # T8: stops beyond the comfortable count (objective.sight_k0 / paced_stops): the
+    # sights, and the restaurants beyond one per meal window the day spans.
+    sights = [i for i in range(1, n + 1) if not pois[i - 1].restaurant]
+    meals = [i for i in range(1, n + 1) if pois[i - 1].restaurant]
+    windows = objective_mod.main_meals(spec, trip.start_min, tmax)
+    k0s = objective_mod.sight_k0(spec, trip.start_min, tmax)
+    most = len(sights) + max(0, len(meals) - windows)
+    if k0s is not None and spec.coef("pace_scale") > 0 and most > k0s:
+        counted = sum(visit[i] for i in sights)
+        if len(meals) > windows:
+            extra_meals = m.NewIntVar(0, len(meals), "pace_meals")
+            m.Add(extra_meals >= sum(visit[i] for i in meals) - windows)
+            counted = counted + extra_meals
         kappa = list(spec.w.get("kappa") or [0.3, 0.6, 1.0])
         pace = spec.coef("pace_scale")
         s1 = m.NewBoolVar("pace_1")
         parts = [(s1, kappa[0])]
-        if n > spec.k0 + 1:
+        if most > k0s + 1:
             s2 = m.NewBoolVar("pace_2")
             parts.append((s2, kappa[min(1, len(kappa) - 1)]))
-        if n > spec.k0 + 2:
+        if most > k0s + 2:
             s3 = m.NewIntVar(0, n, "pace_3")
             parts.append((s3, kappa[min(2, len(kappa) - 1)]))
-        m.Add(sum(v for v, _k in parts) >= sum(visit[i] for i in range(1, n + 1)) - int(spec.k0))
+        m.Add(sum(v for v, _k in parts) >= counted - int(k0s))
         for v, kk in parts:
             expr -= k(pace * kk) * v
     return expr
@@ -1441,7 +1538,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         precedence=precedence, max_fee=max_fee, required_any=required_any,
                         lunch_required=lunch_required, dinner_required=dinner_required,
                         state_bands=state_bands, state_cost=state_cost,
-                        late_end_min=late_end_min)
+                        late_end_min=late_end_min,
+                        dup_free=_hint_dup_kinds(objective))
     hint_solver = None
     if hint:
         previous = 0

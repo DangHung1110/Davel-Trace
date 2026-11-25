@@ -778,10 +778,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # also use that freedom when nothing else fits it (`_ladder`).
     must_ids = set(trip.get("must_visit") or [])
     stubs = stubs_from_pois(candidates, trip, _score_with_taste,
-                            deadline=deadline(trip), any_hour_ids=must_ids)
+                            deadline=deadline(trip), any_hour_ids=must_ids,
+                            pois_by_id=pois_by_id)
     wish_ids = {pid for group in act_groups for pid in group.get("poi_ids") or []}
     wish_stubs = (stubs_from_pois(candidates, trip, _score_with_taste, deadline=deadline(trip),
-                                  any_hour_ids=must_ids | wish_ids) if wish_ids else stubs)
+                                  any_hour_ids=must_ids | wish_ids, pois_by_id=pois_by_id)
+                  if wish_ids else stubs)
     # One place per rule (rules.py): under objective v1 the edges carry the PATM
     # transition score only; riding minutes (T9), A2 (T6) and B1 (T4) live in the
     # objective, so the legacy edge penalties and EDGE_TRAVEL_WEIGHT are not added.
@@ -831,7 +833,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     if timeout_s is not None:
         solver_opts["timeout_s"] = float(timeout_s)
     if deterministic_time is not None:
-        solver_opts["deterministic_time"] = float(deterministic_time)
+        solver_opts["deterministic_time"] = objective_mod.search_budget(deterministic_time, spec)
     if distinct_from:
         solver_opts["distinct_from"] = list(distinct_from)
         solver_opts["distinct_ceiling"] = pool_svc.MAX_PAIRWISE_JACCARD

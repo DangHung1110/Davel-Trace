@@ -342,6 +342,21 @@ def load_json(path: str) -> Any:
         return json.load(f)
 
 
+def merged_into(poi: dict | None) -> str | None:
+    """The poi_id an excluded record was merged into, else None.
+
+    A user decision that folds a duplicate record into another one writes
+    `status_reason = "gộp vào <name> (<poi_id>): <why>"` (decisions_*.json). A trip
+    that still names the old id (a saved trip, an old request) means the kept one.
+    """
+    import re
+    poi = poi or {}
+    if poi.get("status") != "excluded":
+        return None
+    hit = re.search(r"gộp vào[^(]*\(([^)\s]+)\)", str(poi.get("status_reason") or ""))
+    return hit.group(1) if hit else None
+
+
 def load_pois(snapshot_dir: str, by_id: bool = False):
     """Read <snapshot_dir>/pois.json -> list of POI views, or {poi_id: view}.
 

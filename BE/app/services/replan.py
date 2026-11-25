@@ -150,7 +150,7 @@ def replan(state: dict, event: dict, pois: list[dict],
     named = set(trip.get("must_visit", []))
     stub = [_stub(by_id[pid], trip, state,
                   trusted_rating(by_id[pid]) / 5 if pid in substitutes else 1.0,
-                  named=pid in named, lunch_done=lunch_done)
+                  named=pid in named, lunch_done=lunch_done, pois_by_id=by_id)
             for pid in cand_ids if pid in by_id]
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
@@ -177,7 +177,8 @@ def replan(state: dict, event: dict, pois: list[dict],
         adjacent_food = bool({"NO_ADJACENT_FOOD", "NO_CONSECUTIVE"} & spec.strict)
     out = optimize(stub, travel2, StubTrip(start, deadline(trip), origin_id),
                    edge_scores=q, workers=REPLAN_WORKERS,
-                   deterministic_time=REPLAN_DETERMINISTIC_TIME, not_first=not_first,
+                   deterministic_time=objective_mod.search_budget(REPLAN_DETERMINISTIC_TIME, spec),
+                   not_first=not_first,
                    # Universal HARD caps the gate checks: a replanned day must
                    # not end up with two markets / two cafes just because the
                    # rolling horizon re-optimised from scratch.
@@ -244,7 +245,7 @@ def replan(state: dict, event: dict, pois: list[dict],
 
 
 def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
-          lunch_done: bool = False) -> StubPOI:
+          lunch_done: bool = False, pois_by_id: dict | None = None) -> StubPOI:
     """A stop keeps the hours it makes sense at, as the plan did, unless the traveller
     named it. With lunch behind us a restaurant left in the day is dinner: moved up
     next to lunch it would fail the gate and cost the whole replan."""
@@ -262,4 +263,6 @@ def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
     return StubPOI(p["poi_id"], poi_visit_min(p), *span, score,
                    restaurant=category == "restaurant", category=category,
                    fee=effective_fee(p) or 0,
-                   windows=tuple(wins) if wins and len(wins) > 1 else ())
+                   windows=tuple(wins) if wins and len(wins) > 1 else (),
+                   # objective v1: the same group / zone / T11 keys as the first plan
+                   **objective_mod.stub_keys(p, objective_mod.parent_of(p, pois_by_id)))

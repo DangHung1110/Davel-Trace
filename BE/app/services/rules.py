@@ -35,6 +35,12 @@ RULES: dict[str, dict] = {
     "NO_CONSECUTIVE": {"layer": "taste", "term": "T4", "legacy_soft": True},
     "NO_ADJACENT_FOOD": {"layer": "taste", "term": "T6"},
     "REST_FOLLOWS_LUNCH": {"layer": "taste", "term": "T7"},
+    # T11 near-duplicates (objective.duplicate_counts). No gate check of their own:
+    # a new CHECKS key would change the API's constraint_status keys; the eval
+    # report counts them (reports/objective_v1/scripts/analyze_objective.py).
+    "SAME_SITE": {"layer": "taste", "term": "T11"},
+    "MARKET_REPEAT": {"layer": "taste", "term": "T11"},
+    "SAME_DISH": {"layer": "taste", "term": "T11"},
     "F1": {"layer": "quality", "term": "T5"},
     "TIME_FIT": {"layer": "quality", "term": "T2"},
     "DINNER": {"layer": "quality", "term": "T5"},
