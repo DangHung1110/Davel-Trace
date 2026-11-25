@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chấm cặp lịch</title>
+<!--
+  Rating page for BE/eval/human/plan_pairs_v1.json (written by make_plan_pairs.py, which
+  embeds the pairs in the data block at the end). One static file: no framework, no
+  build, nothing loaded from the network, so it opens straight from disk. Answers stay
+  in this browser (localStorage, per rater id) until the rater presses "Xuất JSON".
+  The export goes to ingest_plan_pairs.py. How raters use it: HUONG_DAN_CHAM.md.
+-->
+<style>
+:root {
+  --bg: #eef2f3; --panel: #ffffff; --ink: #15262c; --muted: #56686f; --line: #d3dee1;
+  --accent: #0b6874; --accent-ink: #ffffff; --accent-soft: #d8ecee;
+  --good: #1d6f49; --good-soft: #dcf0e5; --bad: #8a5206; --bad-soft: #f8ecd6;
+  --shared: #eef1f2; --focus: #0b6874;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1b1f; --panel: #17262b; --ink: #e3edef; --muted: #9cb0b6; --line: #2c4148;
+  --accent: #4cbcc7; --accent-ink: #06252a; --accent-soft: #163a41;
+  --good: #66c99a; --good-soft: #173628; --bad: #e5b467; --bad-soft: #3a2c15;
+  --shared: #1d2f35; --focus: #4cbcc7; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1b1f; --panel: #17262b; --ink: #e3edef; --muted: #9cb0b6; --line: #2c4148;
+  --accent: #4cbcc7; --accent-ink: #06252a; --accent-soft: #163a41;
+  --good: #66c99a; --good-soft: #173628; --bad: #e5b467; --bad-soft: #3a2c15;
+  --shared: #1d2f35; --focus: #4cbcc7; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1240px; margin: 0 auto; padding: 16px 16px 120px; display: grid; gap: 14px; }
+h1 { font-size: 1.35rem; margin: 0; line-height: 1.25; }
+h2 { font-size: 1.05rem; margin: 0; }
+h3 { font-size: .78rem; margin: 0; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.small { font-size: .85rem; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+
+/* top bar */
+.top { display: grid; gap: 10px; }
+.toprow { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.who { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.who input { width: 180px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { padding: 7px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); white-space: nowrap; }
+.btn.go { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn:disabled { opacity: .45; cursor: default; }
+.progress { display: grid; gap: 4px; }
+.track { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--accent); }
+.status { font-size: .88rem; color: var(--muted); }
+.status.warn { color: var(--bad); }
+.status.ok { color: var(--good); }
+details.help summary, details.list summary { cursor: pointer; font-weight: 600; }
+details.help ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 4px; max-width: 80ch; }
+kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--panel); }
+.rail { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.rail button { min-width: 38px; padding: 3px 0; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); font-family: var(--mono); font-size: .8rem; }
+.rail button.done { background: var(--accent-soft); border-color: var(--accent); }
+.rail button.now { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* start screen */
+.start { display: grid; gap: 10px; max-width: 560px; }
+.start input { padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); width: 100%; }
+
+/* the request */
+.pairhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.request { display: grid; gap: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 2px 14px; list-style: none; margin: 0; padding: 0; }
+.facts li { white-space: nowrap; }
+.line { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.line > b { font-weight: 600; margin-right: 2px; }
+.chip { background: var(--accent-soft); border-radius: 12px; padding: 1px 9px; font-size: .9rem; }
+
+/* the two plans */
+.plans { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.plan { display: grid; gap: 10px; min-width: 0; }
+.planhead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.planhead h2 { font-size: 1.25rem; }
+.sum { display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--muted); font-size: .9rem; }
+.sum b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.stops { display: grid; gap: 0; }
+.dayhead { font-weight: 700; padding: 10px 0 4px; border-bottom: 2px solid var(--line); margin-bottom: 2px; }
+.stop { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 2px 10px; padding: 7px 4px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.stop.shared { background: var(--shared); }
+.time { font-family: var(--mono); font-size: .86rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.place { min-width: 0; overflow-wrap: anywhere; }
+.place small { display: block; color: var(--muted); font-size: .82rem; }
+.fee { font-family: var(--mono); font-size: .86rem; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.both { font-size: .72rem; border: 1px solid var(--line); border-radius: 9px; padding: 0 6px; color: var(--muted); margin-left: 6px; white-space: nowrap; }
+.leg { padding: 2px 4px 2px 102px; font-size: .8rem; color: var(--muted); font-family: var(--mono); }
+.leg .idle { color: var(--bad); }
+.notes { background: var(--bad-soft); border-radius: 6px; padding: 8px 10px; font-size: .88rem; }
+.notes ul { margin: 4px 0 0; padding-left: 18px; }
+.tags { display: grid; gap: 6px; border-top: 1px dashed var(--line); padding-top: 10px; }
+.taglist { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { padding: 3px 10px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); font-size: .86rem; }
+.tag.neg[aria-pressed="true"] { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); font-weight: 600; }
+.tag.pos[aria-pressed="true"] { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
+
+/* the verdict */
+.verdict { display: grid; gap: 10px; }
+.verdict textarea { width: 100%; min-height: 64px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); resize: vertical; }
+.dock { position: fixed; left: 0; right: 0; bottom: 0; background: var(--panel); border-top: 1px solid var(--line); box-shadow: 0 -2px 10px rgba(0,0,0,.06); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 5; }
+.dockin { max-width: 1240px; margin: 0 auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; flex: 1 1 420px; }
+.choice { padding: 10px 8px; border: 2px solid var(--line); border-radius: 8px; background: var(--panel); font-weight: 600; }
+.choice[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.choice kbd { margin-left: 6px; font-weight: 400; }
+.choice[aria-pressed="true"] kbd { background: transparent; color: inherit; border-color: currentColor; }
+.navs { display: flex; gap: 8px; }
+.exportbox { display: grid; gap: 8px; }
+.exportbox textarea { width: 100%; min-height: 120px; font-family: var(--mono); font-size: .78rem; padding: 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.done-banner { background: var(--good-soft); color: var(--good); border-radius: 8px; padding: 10px 14px; font-weight: 600; }
+@media (max-width: 880px) {
+  .plans { grid-template-columns: minmax(0, 1fr); }
+  .stop { grid-template-columns: 78px minmax(0, 1fr) auto; gap: 2px 8px; }
+  .leg { padding-left: 86px; }
+  .choice { padding: 9px 4px; font-size: .92rem; }
+  .choice kbd { display: none; }
+}
+@media (max-width: 480px) {
+  .stop { grid-template-columns: minmax(0, 1fr) auto; }
+  .stop .time { grid-column: 1 / -1; }
+  .leg { padding-left: 4px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="toprow">
+      <div>
+        <h1>Chấm cặp lịch du lịch Đà Nẵng</h1>
+        <p class="muted small" id="dataset-line"></p>
+      </div>
+      <div class="tools">
+        <button class="btn go" type="button" id="export-btn">Xuất JSON</button>
+        <label class="btn" for="import-file">Nhập lại file đã xuất</label>
+        <input type="file" id="import-file" accept="application/json,.json" hidden>
+        <span class="status" id="import-state" role="status"></span>
+      </div>
+    </div>
+    <div class="toprow">
+      <div class="who">
+        <label for="rater-id">Mã người chấm</label>
+        <input id="rater-id" autocomplete="off" spellcheck="false" placeholder="ví dụ: an">
+        <span class="status" id="rater-state"></span>
+      </div>
+      <span class="status" id="save-state" role="status"></span>
+    </div>
+    <div class="progress">
+      <span class="status" id="progress-label"></span>
+      <div class="track"><div class="fill" id="progress-fill"></div></div>
+    </div>
+    <details class="help panel">
+      <summary>Hướng dẫn nhanh</summary>
+      <ul>
+        <li>Đọc yêu cầu của khách ở trên cùng, rồi đọc hai lịch như thể <b>bạn là vị khách đó</b> và sắp đi theo lịch.</li>
+        <li>Chọn <b>A tốt hơn</b>, <b>B tốt hơn</b> hoặc <b>Ngang nhau</b> (khi thật sự không chọn được). Không có đáp án đúng: hãy chọn theo cảm nhận của bạn.</li>
+        <li>Nếu muốn, bấm vài nhãn dưới mỗi lịch (đi lại nhiều, thiếu bữa, đúng ý khách...) và ghi chú thêm. Không bắt buộc.</li>
+        <li>Điểm có nền xám và chữ “cả 2” là điểm có trong cả hai lịch, để bạn tập trung vào chỗ khác nhau. Giá là cho mỗi người; tổng là cho cả nhóm; thời gian đi xe tính bằng xe máy.</li>
+        <li>Phím tắt: <kbd>A</kbd> chọn A, <kbd>B</kbd> chọn B, <kbd>N</kbd> ngang nhau, <kbd>→</kbd> hoặc <kbd>Enter</kbd> sang cặp sau, <kbd>←</kbd> cặp trước.</li>
+        <li>Câu trả lời tự lưu trong trình duyệt này theo mã của bạn. Cuối mỗi buổi, bấm <b>Xuất JSON</b> và gửi file cho người phụ trách.</li>
+      </ul>
+    </details>
+  </header>
+
+  <section class="panel start" id="start" hidden>
+    <h2>Bắt đầu</h2>
+    <p>Nhập mã người chấm của bạn (tên ngắn hoặc biệt danh, ví dụ <b>an</b>). Mỗi mã có tiến độ riêng trên máy này; lần sau mở lại, nhập đúng mã cũ để chấm tiếp.</p>
+    <input id="start-id" autocomplete="off" spellcheck="false" placeholder="Mã người chấm" aria-label="Mã người chấm">
+    <div><button class="btn go" type="button" id="start-btn">Bắt đầu chấm</button></div>
+  </section>
+
+  <main id="sheet" hidden></main>
+
+  <details class="list panel" id="list-box" hidden>
+    <summary>Danh sách cặp (bấm số để nhảy tới)</summary>
+    <nav class="rail" id="rail" aria-label="Chọn cặp"></nav>
+  </details>
+
+  <section class="panel exportbox" id="export-box" hidden>
+    <h2>Kết quả đã xuất</h2>
+    <p class="small muted" id="export-note"></p>
+    <textarea id="export-text" readonly aria-label="Kết quả dạng JSON"></textarea>
+    <div><button class="btn" type="button" id="copy-btn">Sao chép</button> <span class="status" id="copy-state" role="status"></span></div>
+  </section>
+</div>
+
+<div class="dock" id="dock" hidden>
+  <div class="dockin">
+    <div class="choices" role="group" aria-label="Lịch nào tốt hơn">
+      <button class="choice" type="button" data-choice="A" aria-pressed="false">A tốt hơn<kbd>A</kbd></button>
+      <button class="choice" type="button" data-choice="tie" aria-pressed="false">Ngang nhau<kbd>N</kbd></button>
+      <button class="choice" type="button" data-choice="B" aria-pressed="false">B tốt hơn<kbd>B</kbd></button>
+    </div>
+    <div class="navs">
+      <button class="btn" type="button" id="prev-btn" aria-label="Cặp trước">←</button>
+      <button class="btn go" type="button" id="next-btn">Cặp sau →</button>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="pairs-data">{"schema":"plan-pairs-v1","dataset":"","n_pairs":0,"pairs":[]}</script>
+<script>
+"use strict";
+const EXPORT_SCHEMA = "plan-pairs-ratings-v1";
+// Per-plan notes. Keys go to the export; ingest_plan_pairs.py maps them to first/second.
+const TAGS = [
+  ["travel", "Đi lại nhiều", "neg"], ["tiring", "Quá dày, mệt", "neg"], ["idle", "Nhiều giờ trống", "neg"],
+  ["meal", "Thiếu bữa / ăn lệch giờ", "neg"], ["cost", "Tốn kém, vượt ngân sách", "neg"],
+  ["timing", "Giờ giấc, thứ tự lạ", "neg"], ["party", "Không hợp nhóm khách", "neg"],
+  ["wish", "Đúng ý khách", "pos"], ["places", "Điểm đến hấp dẫn", "pos"],
+];
+const CHOICE_TEXT = { A: "A tốt hơn", B: "B tốt hơn", tie: "Ngang nhau" };
+
+const $ = (id) => document.getElementById(id);
+const DATA = (() => {
+  try { return JSON.parse($("pairs-data").textContent); } catch (e) { return { pairs: [] }; }
+})();
+const PAIRS = Array.isArray(DATA.pairs) ? DATA.pairs : [];
+const NS = `plan-pairs:${DATA.dataset || "none"}`;
+
+let storageOk = true;
+function readStore(key) {
+  try { return localStorage.getItem(key); } catch (e) { storageOk = false; return null; }
+}
+function writeStore(key, value) {
+  try { localStorage.setItem(key, value); return true; } catch (e) { storageOk = false; return false; }
+}
+
+let rater = "";
+let answers = {};
+let pos = 0;
+let lastExport = "";
+let shownAt = Date.now();
+
+function normId(text) {
+  return String(text || "").trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/đ/g, "d").replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
+}
+function isRated(pairId) { return Boolean(answers[pairId] && answers[pairId].choice); }
+function ratedCount() { return PAIRS.filter((p) => isRated(p.pair_id)).length; }
+function firstUnrated(from = 0) {
+  for (let k = 0; k < PAIRS.length; k++) {
+    const i = (from + k) % PAIRS.length;
+    if (!isRated(PAIRS[i].pair_id)) return i;
+  }
+  return -1;
+}
+
+function loadRater(id) {
+  rater = id;
+  let saved = {};
+  try { saved = JSON.parse(readStore(`${NS}:r:${id}`) || "{}") || {}; } catch (e) { saved = {}; }
+  answers = saved.answers && typeof saved.answers === "object" ? saved.answers : {};
+  lastExport = saved.last_export || "";
+  const next = firstUnrated();
+  pos = Number.isInteger(saved.pos) && saved.pos >= 0 && saved.pos < PAIRS.length ? saved.pos : Math.max(0, next);
+  writeStore(`${NS}:rater`, id);
+}
+function save() {
+  if (!rater) return;
+  const ok = writeStore(`${NS}:r:${rater}`, JSON.stringify({ answers, pos, last_export: lastExport }));
+  const el = $("save-state");
+  if (ok) {
+    el.className = "status ok";
+    el.textContent = lastExport ? `Đã lưu trên máy này · xuất lần cuối ${lastExport}` : "Đã lưu trên máy này · chưa xuất lần nào";
+  } else {
+    el.className = "status warn";
+    el.textContent = "Trình duyệt không cho lưu (cửa sổ ẩn danh?). Hãy Xuất JSON trước khi đóng trang.";
+  }
+}
+
+function el(tag, attrs = {}, ...kids) {
+  const node = document.createElement(tag);
+  for (const [key, value] of Object.entries(attrs)) {
+    if (value === undefined || value === null || value === false) continue;
+    if (key === "text") node.textContent = value;
+    else if (key === "class") node.className = value;
+    else node.setAttribute(key, value === true ? "" : value);
+  }
+  node.append(...kids.filter((k) => k !== null && k !== undefined));
+  return node;
+}
+function money(n) {
+  if (n === null || n === undefined) return "chưa rõ";
+  return n === 0 ? "miễn phí" : `${Number(n).toLocaleString("vi-VN")}đ`;
+}
+
+function answerOf(pairId) {
+  if (!answers[pairId]) answers[pairId] = { choice: null, tags: { A: [], B: [] }, comment: "" };
+  const a = answers[pairId];
+  a.tags = a.tags || { A: [], B: [] };
+  a.tags.A = a.tags.A || [];
+  a.tags.B = a.tags.B || [];
+  return a;
+}
+function touch(a) { a.at = new Date().toISOString(); save(); renderProgress(); }
+
+function renderProgress() {
+  const done = ratedCount();
+  $("progress-label").textContent = PAIRS.length
+    ? `Đã chấm ${done} / ${PAIRS.length} cặp${done === PAIRS.length ? " · xong hết, nhớ Xuất JSON" : ""}`
+    : "Chưa có cặp nào để chấm.";
+  $("progress-fill").style.width = PAIRS.length ? `${Math.round(100 * done / PAIRS.length)}%` : "0";
+  [...$("rail").children].forEach((button, i) => {
+    button.classList.toggle("done", isRated(PAIRS[i].pair_id));
+    button.classList.toggle("now", i === pos);
+  });
+}
+
+function renderRequest(req, index) {
+  const facts = el("ul", { class: "facts" });
+  const add = (text) => { if (text) facts.append(el("li", { text })); };
+  add(req.party);
+  add(req.travelers ? `${req.travelers} người` : "");
+  add(`Ngân sách ${money(req.budget)} cho cả nhóm`);
+  add(`${req.start_time}–${req.end_time}${req.days > 1 ? ` · ${req.days} ngày` : ""}`);
+  add(req.date);
+  const box = el("section", { class: "panel request", "aria-label": "Yêu cầu của khách" },
+    el("div", { class: "pairhead" }, el("h2", { text: "Yêu cầu của khách" }),
+      el("span", { class: "muted small", text: `Cặp ${index + 1} / ${PAIRS.length}${isRated(PAIRS[index].pair_id) ? " · đã chấm" : ""}` })),
+    facts);
+  const line = (label, items, chips) => {
+    if (!items || !items.length) return;
+    const row = el("div", { class: "line" }, el("b", { text: `${label}:` }));
+    items.forEach((x) => row.append(chips ? el("span", { class: "chip", text: x }) : el("span", { text: x })));
+    box.append(row);
+  };
+  line("Khách muốn", req.wishes, true);
+  line("Phải đến", req.must_visit, true);
+  line("Không muốn đến", req.avoid, true);
+  line("Thứ tự mong muốn", req.order, false);
+  if (req.notes && req.notes.length) line("Lưu ý", [req.notes.join(" · ")], false);
+  if (!(req.wishes || []).length && !(req.must_visit || []).length) {
+    box.append(el("p", { class: "muted small", text: "Khách không nêu điểm hay hoạt động cụ thể nào." }));
+  }
+  return box;
+}
+
+function renderPlan(side, plan, otherIds, pairId) {
+  const card = el("article", { class: "panel plan", "aria-label": `Lịch ${side}` });
+  card.append(el("div", { class: "planhead" }, el("h2", { text: `Lịch ${side}` })));
+  const sum = el("div", { class: "sum" });
+  const fact = (label, value) => sum.append(el("span", {}, `${label} `, el("b", { text: value })));
+  fact("Số điểm", String(plan.stops.length));
+  if (plan.start) fact("Giờ", `${plan.start}–${plan.end}`);
+  fact("Đi xe", `${plan.travel_min ?? "?"} phút`);
+  fact("Tổng cả nhóm", money(plan.total_cost));
+  card.append(sum);
+
+  const list = el("div", { class: "stops" });
+  let day = null;
+  let estimated = false;
+  plan.stops.forEach((stop, i) => {
+    if (stop.day && stop.day !== day) {
+      day = stop.day;
+      list.append(el("div", { class: "dayhead", text: `Ngày ${day}` }));
+    } else if (i > 0 && (stop.leg_min !== null || stop.idle_min)) {
+      const leg = el("div", { class: "leg" }, `↓ ${stop.leg_min ?? "?"} phút đi xe`);
+      if (stop.idle_min >= 15) leg.append(el("span", { class: "idle", text: ` · rảnh ${stop.idle_min} phút` }));
+      list.append(leg);
+    }
+    const shared = otherIds.has(stop.poi_id);
+    const name = el("a", { href: stop.maps, target: "_blank", rel: "noopener", text: stop.name });
+    const place = el("div", { class: "place" }, name, shared ? el("span", { class: "both", text: "cả 2" }) : null,
+      el("small", { text: stop.kind }));
+    estimated = estimated || Boolean(stop.fee_estimated);
+    list.append(el("div", { class: `stop${shared ? " shared" : ""}` },
+      el("span", { class: "time", text: `${stop.start}–${stop.end}` }), place,
+      el("span", { class: "fee", text: money(stop.fee) + (stop.fee_estimated ? "*" : ""), title: "Giá cho mỗi người" })));
+  });
+  card.append(list);
+  if (estimated) card.append(el("p", { class: "muted small", text: "* giá ước tính theo loại điểm, chưa phải giá thật" }));
+  if (plan.notes && plan.notes.length) {
+    const ul = el("ul");
+    plan.notes.forEach((n) => ul.append(el("li", { text: n })));
+    card.append(el("div", { class: "notes" }, el("b", { text: "Lịch này ghi chú:" }), ul));
+  }
+
+  const answer = answers[pairId] || {};
+  const chosen = new Set(((answer.tags || {})[side]) || []);
+  const tags = el("div", { class: "taglist" });
+  TAGS.forEach(([key, label, kind]) => {
+    const button = el("button", { class: `tag ${kind}`, type: "button", "aria-pressed": String(chosen.has(key)), text: label });
+    button.addEventListener("click", () => {
+      const a = answerOf(pairId);
+      const now = new Set(a.tags[side]);
+      if (now.has(key)) now.delete(key); else now.add(key);
+      a.tags[side] = TAGS.map((t) => t[0]).filter((k) => now.has(k));
+      button.setAttribute("aria-pressed", String(now.has(key)));
+      touch(a);
+    });
+    tags.append(button);
+  });
+  card.append(el("div", { class: "tags" }, el("h3", { text: `Nhận xét về lịch ${side} (không bắt buộc)` }), tags));
+  return card;
+}
+
+function renderSheet() {
+  const sheet = $("sheet");
+  sheet.replaceChildren();
+  if (!PAIRS.length) {
+    sheet.append(el("section", { class: "panel" }, el("p", { text: "File này chưa có cặp lịch nào. Người phụ trách cần chạy BE/eval/human/make_plan_pairs.py." })));
+    return;
+  }
+  const pair = PAIRS[pos];
+  const idsA = new Set(pair.A.stops.map((s) => s.poi_id));
+  const idsB = new Set(pair.B.stops.map((s) => s.poi_id));
+  if (ratedCount() === PAIRS.length) {
+    sheet.append(el("div", { class: "done-banner", text: "Bạn đã chấm hết các cặp. Cảm ơn! Hãy bấm “Xuất JSON” ở trên và gửi file cho người phụ trách." }));
+  }
+  sheet.append(renderRequest(pair.request, pos));
+  sheet.append(el("div", { class: "plans" }, renderPlan("A", pair.A, idsB, pair.pair_id), renderPlan("B", pair.B, idsA, pair.pair_id)));
+
+  const answer = answers[pair.pair_id] || {};
+  const note = el("textarea", { id: "comment", placeholder: "Vì sao bạn chọn như vậy, hay điểm nào sai... (không bắt buộc)" });
+  note.value = answer.comment || "";
+  note.addEventListener("input", () => { const a = answerOf(pair.pair_id); a.comment = note.value; touch(a); });
+  sheet.append(el("section", { class: "panel verdict" }, el("label", { for: "comment", text: "Ghi chú cho cặp này" }), note,
+    el("p", { class: "muted small", text: "Chọn A tốt hơn / Ngang nhau / B tốt hơn ở thanh dưới cùng màn hình." })));
+  renderChoices();
+  renderProgress();
+  shownAt = Date.now();
+}
+
+function renderChoices() {
+  const pair = PAIRS[pos];
+  const choice = pair && answers[pair.pair_id] ? answers[pair.pair_id].choice : null;
+  document.querySelectorAll(".choice").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.choice === choice));
+  });
+  $("prev-btn").disabled = pos === 0;
+  const last = pos === PAIRS.length - 1;
+  $("next-btn").textContent = last ? "Về cặp chưa chấm" : "Cặp sau →";
+}
+
+function choose(choice) {
+  const pair = PAIRS[pos];
+  if (!pair) return;
+  const a = answerOf(pair.pair_id);
+  a.choice = a.choice === choice ? null : choice;      // pressing the chosen one again clears it
+  if (a.choice && a.secs === undefined) a.secs = Math.min(3600, Math.round((Date.now() - shownAt) / 1000));
+  touch(a);
+  renderChoices();
+  const head = document.querySelector(".pairhead .muted");
+  if (head) head.textContent = `Cặp ${pos + 1} / ${PAIRS.length}${isRated(pair.pair_id) ? " · đã chấm" : ""}`;
+}
+
+function go(index) {
+  if (!PAIRS.length) return;
+  pos = Math.max(0, Math.min(PAIRS.length - 1, index));
+  save();
+  renderSheet();
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+function next() {
+  if (pos < PAIRS.length - 1) { go(pos + 1); return; }
+  const open = firstUnrated(0);
+  go(open === -1 ? pos : open);
+}
+
+function cleanAnswers() {
+  const out = {};
+  PAIRS.forEach(({ pair_id: id }) => {
+    const a = answers[id];
+    if (!a) return;
+    const tags = { A: (a.tags && a.tags.A) || [], B: (a.tags && a.tags.B) || [] };
+    if (!a.choice && !tags.A.length && !tags.B.length && !(a.comment || "").trim()) return;
+    out[id] = { choice: a.choice || null, tags, comment: (a.comment || "").trim(), secs: a.secs ?? null, at: a.at || null };
+  });
+  return out;
+}
+function buildExport() {
+  return { schema: EXPORT_SCHEMA, dataset: DATA.dataset || "", rater, exported_at: new Date().toISOString(),
+           n_pairs: PAIRS.length, n_rated: ratedCount(), answers: cleanAnswers() };
+}
+function exportJson() {
+  if (!rater) { $("start-id").focus(); return; }
+  const text = JSON.stringify(buildExport(), null, 1);
+  const stamp = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const name = `cham_${rater}_${stamp.getFullYear()}${pad(stamp.getMonth() + 1)}${pad(stamp.getDate())}-${pad(stamp.getHours())}${pad(stamp.getMinutes())}.json`;
+  try {
+    const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    const link = el("a", { href: url, download: name });
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  } catch (e) { /* the text box below still has it */ }
+  lastExport = `${pad(stamp.getHours())}:${pad(stamp.getMinutes())} ${pad(stamp.getDate())}/${pad(stamp.getMonth() + 1)}`;
+  save();
+  $("export-box").hidden = false;
+  $("export-note").textContent = `Đã tải file ${name} (${ratedCount()} cặp đã chấm). Nếu trình duyệt không tải được, hãy sao chép đoạn dưới đây, dán vào một file .json và gửi đi.`;
+  $("export-text").value = text;
+}
+
+function importNote(text, ok) {
+  const node = $("import-state");
+  node.className = ok ? "status ok" : "status warn";
+  node.textContent = text;
+}
+function importFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    let doc;
+    try { doc = JSON.parse(reader.result); } catch (e) { importNote("File này không phải JSON hợp lệ."); return; }
+    if (!doc || doc.schema !== EXPORT_SCHEMA || typeof doc.answers !== "object") { importNote("Đây không phải file xuất từ trang chấm cặp lịch."); return; }
+    if ((doc.dataset || "") !== (DATA.dataset || "")) {
+      importNote(`File này thuộc bộ cặp khác (${doc.dataset || "không rõ"}), không nhập được vào bộ này.`);
+      return;
+    }
+    const id = normId(doc.rater) || rater;
+    if (!id) { importNote("File không có mã người chấm."); return; }
+    if (id !== rater) loadRater(id);
+    let added = 0;
+    Object.entries(doc.answers).forEach(([pairId, a]) => {
+      if (!PAIRS.some((p) => p.pair_id === pairId) || !a) return;
+      const mine = answers[pairId];
+      if (!mine || !mine.at || (a.at && a.at > mine.at)) { answers[pairId] = a; added += 1; }
+    });
+    $("rater-id").value = rater;
+    save();
+    showSheet();
+    importNote(`Đã nhập ${added} câu trả lời cho mã “${rater}”.`, true);
+  };
+  reader.readAsText(file);
+}
+
+function showSheet() {
+  const has = Boolean(rater);
+  $("start").hidden = has;
+  $("sheet").hidden = !has;
+  $("dock").hidden = !has || !PAIRS.length;
+  $("list-box").hidden = !has || !PAIRS.length;
+  if (has) renderSheet();
+  renderProgress();
+  const n = Object.values(answers).filter((a) => a && a.choice).length;
+  $("rater-state").textContent = has ? (n ? `đã có ${n} câu trả lời` : "mã mới, chưa chấm cặp nào") : "";
+}
+
+function setRater(text) {
+  const id = normId(text);
+  if (!id) return false;
+  if (rater) save();
+  loadRater(id);
+  $("rater-id").value = id;
+  $("start-id").value = id;
+  save();
+  showSheet();
+  return true;
+}
+
+function renderRail() {
+  PAIRS.forEach((pair, i) => {
+    const button = el("button", { type: "button", text: String(i + 1), "aria-label": `Cặp ${i + 1}` });
+    button.addEventListener("click", () => go(i));
+    $("rail").append(button);
+  });
+}
+
+$("dataset-line").textContent = PAIRS.length
+  ? `${PAIRS.length} cặp · bộ ${DATA.dataset} · dữ liệu ${DATA.snapshot || "?"} · tạo ngày ${DATA.built_at || "?"}`
+  : "Chưa có dữ liệu cặp";
+$("start-btn").addEventListener("click", () => { if (!setRater($("start-id").value)) $("start-id").focus(); });
+$("start-id").addEventListener("keydown", (e) => { if (e.key === "Enter") $("start-btn").click(); });
+$("rater-id").addEventListener("change", (e) => { if (!setRater(e.target.value)) e.target.value = rater; });
+$("export-btn").addEventListener("click", exportJson);
+$("import-file").addEventListener("change", (e) => { if (e.target.files[0]) importFile(e.target.files[0]); e.target.value = ""; });
+$("copy-btn").addEventListener("click", async () => {
+  const area = $("export-text");
+  try { await navigator.clipboard.writeText(area.value); $("copy-state").textContent = "Đã sao chép."; }
+  catch (e) { area.focus(); area.select(); $("copy-state").textContent = "Hãy bấm Ctrl+C (hoặc Cmd+C) để sao chép đoạn đã chọn."; }
+});
+document.querySelectorAll(".choice").forEach((button) => button.addEventListener("click", () => choose(button.dataset.choice)));
+$("prev-btn").addEventListener("click", () => go(pos - 1));
+$("next-btn").addEventListener("click", next);
+document.addEventListener("keydown", (e) => {
+  if (!rater || !PAIRS.length || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.tagName === "TEXTAREA" || t.tagName === "INPUT" || t.isContentEditable)) return;
+  const key = e.key.toLowerCase();
+  if (key === "a") choose("A");
+  else if (key === "b") choose("B");
+  else if (key === "n") choose("tie");
+  else if (e.key === "ArrowRight" || e.key === "Enter") {
+    if (e.key === "Enter" && t && t.closest && t.closest("button, a, summary, label")) return;   // let it click
+    next();
+  }
+  else if (e.key === "ArrowLeft") go(pos - 1);
+  else return;
+  e.preventDefault();
+});
+window.addEventListener("beforeunload", (e) => {
+  if (!storageOk && ratedCount()) { e.preventDefault(); e.returnValue = ""; }
+});
+
+renderRail();
+const remembered = normId(readStore(`${NS}:rater`) || "");
+if (remembered) { loadRater(remembered); $("rater-id").value = remembered; save(); }
+showSheet();
+if (!storageOk) save();
+</script>
+</body>
+</html>
