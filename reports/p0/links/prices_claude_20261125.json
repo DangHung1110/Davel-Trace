@@ -623,21 +623,6 @@
    "accessed": "2026-11-25"
   },
   {
-   "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
-   "category": "restaurant",
-   "name": "Quán Mì Quảng Bà Bích",
-   "unit": "per_bowl",
-   "min_vnd": 20000,
-   "max_vnd": 25000,
-   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
-   "quote": "2.1. Mì Quảng Bích Đà Nẵng | Địa chỉ: quận Liên Chiểu, TP Đà Nẵng; | Giá tham khảo: 20.000 - 25.000 VNĐ/tô.",
-   "page_date": "2024-06-01, cập nhật 2026-11-06",
-   "match": "OSM reverse: POI trên đường Đặng Dung, Liên Chiểu; VinWonders (đọc 24/11) ghi Mì Quảng Bích '1 – 3 – 5 Đặng Dung, phường Liên Chiểu'.",
-   "note": "VinWonders ghi 25.000 – 60.000 VNĐ/món cho cùng quán; lấy Vinpearl (mới cập nhật, ghi /tô).",
-   "typical_vnd": 22500,
-   "accessed": "2026-11-25"
-  },
-  {
    "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
    "category": "restaurant",
    "name": "Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương",
@@ -848,6 +833,66 @@
    "page_date": "2026-01-22 (cổng thông tin du lịch TP Đà Nẵng)",
    "match": "OSM reverse: POI tên OSM 'Làng nước mắm Nam Ô', phường Hải Vân.",
    "note": "Danh sách điểm miễn phí vào cửa của cổng du lịch TP.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337971574",
+   "category": "cafe",
+   "name": "Highlands Coffee (Bà Nà)",
+   "unit": "per_drink",
+   "min_vnd": 49000,
+   "max_vnd": 95000,
+   "evidence_url": "https://hoiandaytrip.com/highlands-coffee-ba-na-hills/",
+   "quote": "Location/address: near Solar Castle, French Village in Ba Na Hills | Vietnamese black coffee with more condensed milk (49,000-55,000 VND), Espresso, Americano, Cappuccino, Latte, Caramel Macchiato, Mocha (55,000 to 95,000 VND) ... lotus seed tea ... (65,000 to 80,000 VND)",
+   "page_date": "2025-07-23, cập nhật 2026-01-01",
+   "match": "POI 'Highlands Coffee (Bà Nà)' trong Làng Pháp, Bà Nà Hills.",
+   "note": "Giá đồ uống ở cơ sở Bà Nà (cao hơn giá chuỗi ngoài phố); một lượt = một ly; typical = giữa khoảng 72k.",
+   "typical_vnd": 72000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/11423769989",
+   "category": "cafe",
+   "name": "Postal Cafe",
+   "unit": "per_drink",
+   "min_vnd": 69000,
+   "max_vnd": 120000,
+   "evidence_url": "https://hoiandaytrip.com/cafe-postal-ba-na-hills/",
+   "quote": "Location/address: the ground floor of Mercure hotel, French Village, Ba Na Hills | Vietnamese coffee: black coffee, black coffee with condensed milk, Saigon style coffee (69,000 VND) | premium coffee: espresso/americano (79,000 VND), latte/cappuccino (99,000 VND) ... | Blended coffee ... (120,000 VND)",
+   "page_date": "2025-06-26, cập nhật 2026-01-02",
+   "match": "POI 'Postal Cafe' trong Làng Pháp, Bà Nà Hills (Cafe Postal, tầng trệt Mercure).",
+   "note": "Một lượt = một ly; typical = giữa khoảng 94.5k (vẫn mức rẻ, sát ngưỡng 100k).",
+   "typical_vnd": 94500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337980312",
+   "category": "cafe",
+   "name": "Soul Cafe",
+   "unit": "per_drink",
+   "min_vnd": 70000,
+   "max_vnd": 90000,
+   "evidence_url": "https://hoiandaytrip.com/soul-specialty-coffee-ba-na-hills",
+   "quote": "Location/address: Floor 2, Kavkaz Building, French Village in Ba Na Hills | PHIN-BASED COFFEE DRINKS | 70,000 | Vietnamese Black Phin | 80,000 | Black Lemon | 90,000 | SIGNATURE | Hue Salt Coffee | 70,000 | Vietnamese Milk Coffee",
+   "page_date": "2025-08-23, cập nhật 2026-01-02",
+   "match": "POI 'Soul Cafe' trong Làng Pháp, Bà Nà Hills (Soul Specialty Coffee, tầng 2 toà Kavkaz).",
+   "note": "Thực đơn đồ uống phin 70.000–90.000 VND; một lượt = một ly.",
+   "typical_vnd": 80000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
+   "category": "restaurant",
+   "name": "Quán Mì Quảng Bà Bích",
+   "unit": "per_bowl",
+   "min_vnd": 20000,
+   "max_vnd": 25000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "2.1. Mì Quảng Bích Đà Nẵng | Địa chỉ: quận Liên Chiểu, TP Đà Nẵng; | Giá tham khảo: 20.000 - 25.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên đường Đặng Dung, Liên Chiểu; VinWonders (đọc 24/11) ghi Mì Quảng Bích '1 – 3 – 5 Đặng Dung, phường Liên Chiểu'.",
+   "note": "VinWonders ghi 25.000 – 60.000 VNĐ/món cho cùng quán; lấy Vinpearl (mới cập nhật, ghi /tô).",
+   "typical_vnd": 22500,
    "accessed": "2026-11-25"
   }
  ],
@@ -1486,6 +1531,138 @@
    "why": "Tìm web không có trang nào về xe bánh mì (10/14 Bạch Đằng, Hội An) có giá.",
    "tried": [
     "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11423808688",
+   "category": "restaurant",
+   "name": "Le Table",
+   "found": false,
+   "why": "hoiandaytrip chỉ nêu tên L'Etable trong danh sách 'Other Restaurants', không có giá; không có thực đơn đọc được.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11423819121",
+   "category": "restaurant",
+   "name": "Brasserie",
+   "found": false,
+   "why": "hoiandaytrip chỉ có vị trí (sau nhà thờ Saint Denis) và giờ, không có giá.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/12959087697",
+   "category": "restaurant",
+   "name": "Rosa",
+   "found": false,
+   "why": "'Rosa' ở Bà Nà là tên khu ẩm thực có nhiều quán (Rosa Fried Chicken, Rosa Sushi Bar 'from 380,000 VND', Rosa Hotpot buffet, Rosa Sky Coffee) — không xác định được POI là quán nào.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/",
+    "https://hoiandaytrip.com/ba-na-hills-coffee/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/14337631970",
+   "category": "restaurant",
+   "name": "Nhà Hàng Chay Ngọc Chi",
+   "found": false,
+   "why": "Không có trang nào về nhà hàng chay Ngọc Chi trong Bà Nà có giá (Vinpearl chỉ có quán Ngọc Chi 202 Hoàng Diệu — cơ sở khác).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4844888422",
+   "category": "cafe",
+   "name": "Phin Coffee Restaurant",
+   "found": false,
+   "why": "Chỉ có giá trong nhận xét cũ (HappyCow: dừa matcha/cà phê 35k/33k), không có thực đơn hiện tại.",
+   "tried": [
+    "https://www.happycow.net/reviews/phin-coffee-hoi-an-173922"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5110691326",
+   "category": "nightlife",
+   "name": "Mr. Bean Bar",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (61 Nguyễn Phúc Chu, Hội An) có giá đồ uống.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
+   "category": "cafe",
+   "name": "The Cups Coffee Roastery",
+   "found": false,
+   "why": "Foody 'The Cups Coffee - Nguyễn Văn Thoại' ghi 20.000đ - 40.000đ nhưng không chắc cùng cơ sở (Roastery 192 NVT, mia ghi 233 NVT); không nhận.",
+   "tried": [
+    "https://www.foody.vn/da-nang/the-cups-coffee-nguyen-van-thoai",
+    "https://mia.vn/cam-nang-du-lich/the-cups-coffee-da-nang-tu-hao-la-chuoi-ca-phe-dau-tien-cua-nguoi-da-thanh-1803"
+   ]
+  },
+  {
+   "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
+   "category": "cafe",
+   "name": "The 59 cafe",
+   "found": false,
+   "why": "Giá 27.000–49.000 VND tìm được thuộc The 59 ở 59 Hải Phòng; POI ở 78 Lê Duẩn — khác cơ sở.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/the-59-cafe-quan-cafe-nup-hem-voi-ve-dep-hoai-co-dac-biet-1996"
+   ]
+  },
+  {
+   "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
+   "category": "cafe",
+   "name": "Ikigai Garden Cafe",
+   "found": false,
+   "why": "Chỉ có một bài đăng người dùng trên Trip.com Moments ('40,000–90,000 VND per glass', ghi 60 Nguyễn Chí Thanh) — nguồn người dùng, không nhận.",
+   "tried": [
+    "https://nz.trip.com/moments/detail/da-nang-669-136915550"
+   ]
+  },
+  {
+   "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
+   "category": "cafe",
+   "name": "Acacia by CaySi cafe",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
+   "category": "cafe",
+   "name": "Voọc Souvenir Coffee",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
+   "category": "cafe",
+   "name": "Moss Coffee Shop 2",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+   "category": "outdoor_landmark",
+   "name": "Làng Bích họa Đà Nẵng",
+   "found": false,
+   "why": "mia.vn (09/11/2025) không nêu vé; các nguồn 'miễn phí' khác nói về làng bích họa Tam Thanh (Quảng Phú), không phải POI ở Nguyễn Văn Linh. Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/lang-bich-hoa-da-nang-19588"
    ]
   }
  ]
