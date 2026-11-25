@@ -30,8 +30,10 @@ from __future__ import annotations
 import re
 from collections import Counter
 
+from BE.app.services import objective as objective_mod
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
+from BE.app.services import value as value_svc
 from BE.app.services.response import plan_totals
 from BE.app.services.gate import SOFT_CHECKS, check_f1
 from BE.app.services.soft_rules import (
@@ -64,6 +66,19 @@ def _trip_user(trip: dict) -> dict:
         if trip.get(key) is not None:
             user[key] = trip[key]
     return user
+
+
+def _values(plan: dict, trip: dict, pool: list[dict]) -> dict | None:
+    """Objective v1: T1 of the plan's own profile (value.py), the score its stops were
+    chosen by: the values the planner stored with the plan (`_context.values`), the rest
+    of the pool scored by the same function. None under DAVEL_OBJECTIVE=legacy, which
+    ranks by rank.py at each slot's hour."""
+    if not objective_mod.active():
+        return None
+    weights = objective_mod.value_weights(profile=plan.get("profile") or "balanced")
+    scored = value_svc.score([p for p in pool if p.get("poi_id")], trip, weights)
+    stored = (plan.get("_context") or {}).get("values") or {}
+    return {**scored.values, **stored}
 
 
 def _rank_scores(pool: list[dict], trip: dict) -> dict:
@@ -165,7 +180,7 @@ def _fallback_target(acts: list[dict], pois: dict, ranks: dict) -> dict | None:
 
 def _alternatives(target: dict, want: str | None, pool: list[dict],
                   trip: dict, pois: dict, acts: list[dict],
-                  index: int, matrix: dict) -> list[dict]:
+                  index: int, matrix: dict, values: dict | None = None) -> list[dict]:
     """Verified, different-category, same-slot, matrix-connected candidates.
 
     Pre-filtering mirrors the hard gates so the repair log's "N candidates"
@@ -173,7 +188,8 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
     - opening hours must cover the target's exact [start, end];
     - the matrix must connect the previous/next activity (B3);
     - the fee must keep the plan inside budget (BCS).
-    Gate validation still has the final say.
+    Gate validation still has the final say. Best first by `values` (objective v1,
+    `_values`), else by the ranker at the slot's hour.
     """
     target_cat = poi_category(pois.get(target.get("poi_id"), {}))
     start, end = to_min(target["start"]), to_min(target["end"])
@@ -205,8 +221,9 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
             continue
         if budget and other_fee + (effective_fee(poi) or 0) * party > budget:
             continue
-        out.append({"score": rank_svc.score_poi(poi, user, ctx)["score"],
-                    "poi": poi})
+        score = (values.get(pid, 0.0) if values is not None
+                 else rank_svc.score_poi(poi, user, ctx)["score"])
+        out.append({"score": score, "poi": poi})
     out.sort(key=lambda item: item["score"], reverse=True)
     return out
 
@@ -294,7 +311,7 @@ def repair_plan(plan: dict, trip: dict, pois: dict, matrix: dict,
         if index is None or index in replaced:
             return False
         alternatives = _alternatives(target, want, pool, trip, gate_pois,
-                                     acts, index, matrix)
+                                     acts, index, matrix, values)
         for alt in alternatives:
             new_poi = alt["poi"]
             trial = _trial(acts, index, new_poi, issue)
@@ -319,9 +336,12 @@ def repair_plan(plan: dict, trip: dict, pois: dict, matrix: dict,
         })
         return False
 
+    # Objective v1: which stop to swap and which place replaces it, by the value the
+    # planner chose the stops by (None = legacy: rank.py).
+    values = _values(plan, trip, pool)
     # Hard cap: never more than MAX_ROUNDS, whatever the caller asks for.
     for _ in range(min(max(0, max_rounds), MAX_ROUNDS)):
-        ranks = _rank_scores(pool, trip)
+        ranks = values if values is not None else _rank_scores(pool, trip)
         t0 = time.monotonic()
         try:
             issues = list(review_fn({**working, "activities": acts}) or [])
