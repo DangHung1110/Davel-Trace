@@ -225,3 +225,35 @@ snapshot `danang-v2` (869 POI); exports sạch cho ML; 11 giá vé có URL; 127 
 Việc tiếp: **`DATA_FIX_PLAN.md`**, theo thứ tự WP0 → WP12. Ba việc chặn lịch nặng nhất:
 WP7 (ma trận 300 POI), WP4 (bỏ cờ `verified` cũ), WP6 (`prize_prior` — 205 POI không có rating đang luôn bị xếp cuối).
 
+
+---
+
+## 12. Cập nhật 24/11/2026: kiến trúc mới và hàm mục tiêu v1
+
+Bản trong repo: `ARCHITECTURE.md` (toàn luồng, model, data, lộ trình) và `OBJECTIVE_V1.md` (hàm mục tiêu). Doc gốc có sơ đồ trên claude.ai: "Davel — Kiến trúc mới (toàn luồng)", "Davel — Hàm mục tiêu v1".
+
+**Luồng một request (10 bước):** app → parser (LLM) → lọc cứng → điểm từng POI (gu chung + gu riêng) → thời gian ở và đi → cắt còn 40 ứng viên → gợi ý lời giải → CP-SAT tối đa J → pool + gate → app hiển thị, replan, ghi log.
+
+**Hai vòng học:**
+
+| Vòng | Model | Học từ | Trạng thái 24/11 |
+|---|---|---|---|
+| Offline | trọng số hàm mục tiêu (logistic theo cặp + perceptron) | cặp LLM chấm, lịch mẫu đã công bố, cặp người chấm | v1 đặt tay, đã vào code |
+| Offline | bộ lọc ứng viên (LightGBM) | lời giải CP-SAT | có bản thử (recall@40 0,964); bật khi thắng top-40 |
+| Offline | pointer (Transformer) | thứ tự trong lời giải CP-SAT | để sau; dùng greedy hint |
+| Online | bandit sở thích (w_user) | sửa / chọn / bỏ lịch | cần log |
+| Online | thời gian ở (Bayes log-normal) | check-in / check-out | prior 31 loại |
+| Online | hệ số giờ đi lại | thời gian đi thật | prior thiết kế; chỉ dùng để kiểm (A4) |
+
+**Bổ sung bảng quyết định (§4):**
+
+| Chủ đề | Chốt 24/11 |
+|---|---|
+| Luật gu (CATEGORY_CAP, NO_CONSECUTIVE, CAFE_CAP, A1, nghỉ trưa, pace, nhóm bắt buộc của template, late_end, bữa tối) | thành số hạng của J (`DAVEL_OBJECTIVE=v1`); cứng lại khi user ghi trong `strict_rules` |
+| Sổ luật | `BE/app/services/rules.py` là chỗ duy nhất ghi lớp của mỗi luật; v1 không cộng phạt A2/B1/phút chạy xe trên cạnh nữa (T6/T4/T9 lo) |
+| Ba lịch | một hàm mục tiêu, ba bộ trọng số theo profile (`profiles` trong file trọng số) |
+| Bữa trưa | giữ cứng khi ngày đi qua giờ trưa (gate kiểm trong HCS) |
+| Di chuyển | T9 tính phút chạy xe, phần vượt 45 phút/chặng, đổi zone ngay trong CP-SAT (thay `EDGE_TRAVEL_WEIGHT` trên cạnh); không xếp lại thứ tự sau khi giải, chỉ chỉnh giờ |
+| Cap ứng viên | 40 (v1) |
+| Model sở thích | trọng số chung học offline trên đặc trưng của J, cá nhân hoá bằng bandit trên cùng đặc trưng |
+| Thu data (Bách) | ưu tiên giờ mở và giá của POI hay vào lịch (100 POI = 96% lượt), rồi 30–50 lịch mẫu, bộ câu kiểm parser, từ khoá món ăn; mọi giá trị có link nguồn |

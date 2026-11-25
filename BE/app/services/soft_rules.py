@@ -22,8 +22,10 @@ only reported on the plan (`soft_penalties`).
 
 from __future__ import annotations
 
+import os
 from collections import Counter
 
+from BE.app.services import rules
 from BE.app.services.profile_filter import fold, has_word
 from BE.common import to_min
 
@@ -115,7 +117,51 @@ NON_FOOD_CAPPED = frozenset({
     "market", "shop", "landmark", "beach", "attraction", "temple", "museum", "park",
     "viewpoint",
 })
-CATEGORY_DAILY_CAP = 1          # >1 of a capped category in one day = HARD
+CATEGORY_DAILY_CAP = 1          # >1 of a capped category in one day (hard only when strict)
+
+# --- taste rules: SOFT by default (exp/soft-rules-v2) ----------------------
+# CATEGORY_CAP and NO_CONSECUTIVE are product choices, not constraints of the
+# trip problem. By default they are penalties in the solver objective and the
+# gate only REPORTS them (`soft_checks`). They are HARD again when the traveller
+# asks for them (`trip["strict_rules"]`, e.g. ["CATEGORY_CAP"]) or when the
+# environment sets DAVEL_TASTE_RULES=hard (the old behaviour, for A/B runs).
+# Both sets come from the one book of rules (BE/app/services/rules.py): under the
+# legacy objective only CATEGORY_CAP and NO_CONSECUTIVE are soft; objective v1
+# (DAVEL_OBJECTIVE) makes every taste rule a term of the objective. The lunch itself
+# stays hard (gate.check_lunch inside HCS).
+TASTE_RULES = rules.LEGACY_SOFT_TASTE
+V1_TASTE_RULES = rules.TASTE
+
+
+def taste_rules() -> frozenset[str]:
+    """The rules that are taste (soft unless asked) under the active objective."""
+    from BE.app.services import objective
+    return V1_TASTE_RULES if objective.active() else TASTE_RULES
+
+
+def taste_rules_hard(trip: dict | None = None) -> frozenset[str]:
+    """Which taste rules are HARD for this trip (empty = all soft)."""
+    rules = taste_rules()
+    if os.environ.get("DAVEL_TASTE_RULES", "soft").strip().lower() == "hard":
+        return rules
+    asked = (trip or {}).get("strict_rules") or []
+    return frozenset(str(rule).upper() for rule in asked) & rules
+
+
+def soft_checks(base, trip: dict | None = None) -> frozenset[str]:
+    """Gate checks that report without failing a plan: `base` + the soft taste rules."""
+    return frozenset(base) | (taste_rules() - taste_rules_hard(trip))
+
+
+def solver_taste_args(trip: dict | None = None) -> dict:
+    """Optimizer kwargs for the taste rules: hard flags or their soft penalties."""
+    hard = taste_rules_hard(trip)
+    cap_hard = "CATEGORY_CAP" in hard
+    consec_hard = "NO_CONSECUTIVE" in hard
+    return {"category_cap": CATEGORY_DAILY_CAP if cap_hard else None,
+            "soft_category_cap": None if cap_hard else CATEGORY_DAILY_CAP,
+            "no_consecutive": consec_hard,
+            "soft_no_consecutive": not consec_hard}
 
 # --- universal cafe quota (HARD CAFE_CAP) ----------------------------------
 CAFE_DEFAULT_CAP = 1            # one cafe per day unless the profile allows 2

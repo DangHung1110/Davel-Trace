@@ -14,18 +14,18 @@
  ],
  "count": 1029,
  "count_by_status": {
-  "active": 918,
-  "excluded": 91,
+  "active": 916,
+  "excluded": 93,
   "review": 20
  },
  "count_by_category": {
-  "restaurant": 247,
+  "restaurant": 248,
   "nightlife": 102,
   "cafe": 165,
-  "day_market": 49,
+  "day_market": 48,
   "viewpoint": 23,
-  "religious": 104,
-  "outdoor_landmark": 67,
+  "religious": 105,
+  "outdoor_landmark": 66,
   "museum_indoor": 24,
   "paid_attraction": 50,
   "lodging": 76,
@@ -41,7 +41,7 @@
   "ba_na_tay": 40,
   "hoi_an": 249
  },
- "applied_decisions": 163,
+ "applied_decisions": 167,
  "applied_human_verify": 34,
  "matrix": "matrix.json (dense-v1, BE.app.services.matrix; every active POI incl. lodging)",
  "count_new_pois": 279,
@@ -34138,8 +34138,8 @@
    "lon": 108.1946026,
    "category": "beach",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "gộp vào Bãi Tắm Thanh Khê (ChIJSZabUwAZQjERqs6A8ECVnWY): cùng một bãi, cách 105 m (người dùng duyệt 24/11)",
    "zone": "trung_tam",
    "cluster_id": null,
    "alt_group": null,
@@ -38000,8 +38000,8 @@
    "lon": 108.273776,
    "category": "beach",
    "role": "attraction",
-   "status": "active",
-   "status_reason": null,
+   "status": "excluded",
+   "status_reason": "gộp vào Bãi biển Non Nước (ChIJX_osydwQQjERB-Y6MvLfJmQ): cùng một bãi, cách 80 m (người dùng duyệt 24/11)",
    "zone": "ngu_hanh_son",
    "cluster_id": null,
    "alt_group": null,
@@ -38989,8 +38989,8 @@
    "name_en": null,
    "lat": 16.0678356,
    "lon": 108.21490759999999,
-   "category": "day_market",
-   "role": "attraction",
+   "category": "restaurant",
+   "role": "meal",
    "status": "active",
    "status_reason": null,
    "zone": "trung_tam",
@@ -39011,7 +39011,7 @@
     "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời | Giá (Codex t15 20/11/2026): \"Bún mắm nêm thịt quay | 25.000đ – 35.000đ / tô\". VND; không quy đổi ngoại tệ. Trích tên món và ô giá cùng dòng bảng. Chọn một tô bún mắm ở khu ẩm thực trong nhà làm phạm vi min/max cho một món chính; không tính tổng ăn nhiều món/người hoặc cộng các phần chia nhóm. typical=null;"
    },
    "dwell": {
-    "p25": 30,
+    "p25": 40,
     "p50": 60,
     "p75": 90
    },
@@ -39049,7 +39049,7 @@
      }
     ]
    },
-   "time_profile": "morning_market",
+   "time_profile": "meal_windows",
    "popularity": {
     "signature": false,
     "prize_prior": 0.618,
@@ -39070,7 +39070,7 @@
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "decisions_review_20261119.json; tên gốc trong name_raw"
+     "note": "decisions_zfinal_20261124_dedup.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -39081,12 +39081,12 @@
      "note": "toạ độ gốc Google — cần đối chiếu OSM"
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "name:chợ;type:Trung tâm mua sắm"
+     "note": "decisions_zfinal_20261124_dedup.json"
     },
     "hours": {
      "source": "web",
@@ -39105,7 +39105,7 @@
      "note": "Giờ (web, Codex t15 20/11/2026): \"Khu ẩm thực trong nhà | 07:00 – 15:00\". Trích ô bảng. Khung chung hẹp hơn cho khu TRONG NHÀ: Tixgo 07–15; https://suntraveldanang.com/vi/cam-nang-xe-da-nang-hoi-an/thien-duong-an-vat-cho-con-da-nang/ ghi “Khu ẩm thực trong nhà mở từ 07h00 - 18h00;”. Không áp giờ chợ tổng hợp/khu ngoài trời | Giá (Codex t15 20/11/2026): \"Bún mắm nêm thịt quay | 25.000đ – 35.000đ / tô\". VND; không quy đổi ngoại tệ. Trích tên món và ô giá cùng dòng bảng. Chọn một tô bún mắm ở khu ẩm thực trong nhà làm phạm vi min/max cho một món chính; không tính tổng ăn nhiều món/người hoặc cộng các phần chia nhóm. typical=null;; VND ticket_vnd=30000, min_vnd=25000, max_vnd=35000, typical_vnd=30000"
     },
     "dwell": {
-     "source": "dwell_table_v2:market",
+     "source": "dwell_table_v2:restaurant",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
@@ -44780,7 +44780,7 @@
    "name_en": "Tam Thai Pagoda",
    "lat": 16.003842499999998,
    "lon": 108.2624426,
-   "category": "outdoor_landmark",
+   "category": "religious",
    "role": "attraction",
    "status": "active",
    "status_reason": null,
@@ -44802,9 +44802,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 10,
-    "p50": 20,
-    "p75": 40
+    "p25": 30,
+    "p50": 60,
+    "p75": 90
    },
    "tags": {
     "space": "both",
@@ -44831,7 +44831,7 @@
     "weather_sensitive": true,
     "dishes": []
    },
-   "time_profile": "outdoor_heat_sensitive",
+   "time_profile": "morning_cool",
    "popularity": {
     "signature": false,
     "prize_prior": 0.618,
@@ -44863,12 +44863,12 @@
      "note": "toạ độ gốc Google — cần đối chiếu OSM"
     },
     "category": {
-     "source": "rules_v2",
-     "verified_by": "inferred",
-     "confidence": 0.6,
+     "source": "user_decision",
+     "verified_by": "user",
+     "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "v1_cat:temple"
+     "note": "decisions_zfinal_20261124_dedup.json"
     },
     "hours": {
      "source": "web",
@@ -44887,7 +44887,7 @@
      "note": "vé tính ở Ngũ Hành Sơn"
     },
     "dwell": {
-     "source": "dwell_table_v2:outdoor_urban",
+     "source": "dwell_table_v2:religious_major",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
@@ -45494,7 +45494,7 @@
    "status_reason": null,
    "zone": "hai_van_lien_chieu",
    "cluster_id": "hai_van",
-   "alt_group": null,
+   "alt_group": "hai_van",
    "requires_ticket_of": null,
    "hours": {
     "open": [
@@ -46650,9 +46650,9 @@
     "note": null
    },
    "dwell": {
-    "p25": 45,
-    "p50": 90,
-    "p75": 150
+    "p25": 15,
+    "p50": 30,
+    "p75": 50
    },
    "tags": {
     "space": "outdoor",
@@ -46680,7 +46680,7 @@
     "weather_sensitive": true,
     "dishes": []
    },
-   "time_profile": "outdoor_heat_sensitive",
+   "time_profile": "sun_anchored_view",
    "popularity": {
     "signature": false,
     "prize_prior": 0.5,
@@ -46736,7 +46736,7 @@
      "note": "nơi công cộng (biển/chùa/công viên/điểm ngắm) — vào cửa tự do; VND min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
-     "source": "dwell_table_v2:nature",
+     "source": "dwell_table_v2:viewpoint",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
@@ -50220,9 +50220,9 @@
     "note": "8h30-17h30; NL 490.000đ, TE 1-1,4m 245.000đ (bảng 2026, danangfantasticity 22/01/2026; Traveloka cùng giờ). nangtrip trước đó ghi 480.000đ. Tắm bùn +100.000đ tuỳ chọn."
    },
    "dwell": {
-    "p25": 45,
-    "p50": 90,
-    "p75": 150
+    "p25": 120,
+    "p50": 180,
+    "p75": 240
    },
    "tags": {
     "space": "outdoor",
@@ -50249,7 +50249,7 @@
     "weather_sensitive": true,
     "dishes": []
    },
-   "time_profile": "outdoor_heat_sensitive",
+   "time_profile": "open_hours_flat",
    "popularity": {
     "signature": false,
     "prize_prior": 0.69,
@@ -50305,7 +50305,7 @@
      "note": "8h30-17h30; NL 490.000đ, TE 1-1,4m 245.000đ (bảng 2026, danangfantasticity 22/01/2026; Traveloka cùng giờ). nangtrip trước đó ghi 480.000đ. Tắm bùn +100.000đ tuỳ chọn.; VND ticket_vnd=490000, min_vnd=490000, max_vnd=490000, typical_vnd=490000"
     },
     "dwell": {
-     "source": "dwell_table_v2:nature",
+     "source": "dwell_table_v2:eco_park",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
@@ -51499,9 +51499,9 @@
     "note": "OSM shop=gift (cửa hàng quà lưu niệm), không phải quán cà phê dù tên có 'coffee'."
    },
    "dwell": {
-    "p25": 30,
-    "p50": 50,
-    "p75": 80
+    "p25": 15,
+    "p50": 30,
+    "p75": 45
    },
    "tags": {
     "space": "indoor",
@@ -51526,7 +51526,7 @@
     "weather_sensitive": false,
     "dishes": []
    },
-   "time_profile": "flat_rest",
+   "time_profile": "morning_market",
    "popularity": {
     "signature": false,
     "prize_prior": 0.4,
@@ -51582,7 +51582,7 @@
      "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=25000, max_vnd=70000, typical_vnd=47500"
     },
     "dwell": {
-     "source": "dwell_table_v2:cafe",
+     "source": "dwell_table_v2:shop",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
@@ -68060,7 +68060,7 @@
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "decisions_user_notes_20261119.json; tên gốc trong name_raw"
+     "note": "decisions_zfinal_20261124_dedup.json; tên gốc trong name_raw"
     },
     "location": {
      "source": "google_maps",
@@ -68076,7 +68076,7 @@
      "confidence": 0.7,
      "evidence_url": null,
      "verified_at": null,
-     "note": "decisions_user_notes_20261119.json"
+     "note": "decisions_zfinal_20261124_dedup.json"
     },
     "hours": {
      "source": "web",
@@ -68095,12 +68095,12 @@
      "note": "Bờ tây sông Hàn, từ cầu Rồng tới cầu Trần Thị Lý (~1,2 km), 15:00-0:00 hằng ngày, đẹp nhất 18:30-21:30, đông thứ Sáu-Chủ nhật. Không phải chợ đêm (chợ đêm gần đó: Chợ Đêm Sơn Trà bên kia cầu Rồng; Chợ đêm An Thượng ở Ngũ Hành Sơn).; VND ticket_vnd=0, min_vnd=0, max_vnd=0, typical_vnd=0"
     },
     "dwell": {
-     "source": "dwell_table_v2:night_market",
+     "source": "dwell_table_v2:outdoor_urban",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,
      "verified_at": null,
-     "note": "ƯỚC LƯỢNG theo loại điểm (thay rule v1); hiệu chỉnh lại từ log pilot"
+     "note": "decisions_zfinal_20261124_dedup.json; giữ thời gian ở đang có (bảng ước lượng chợ đêm) cho phố đi bộ ~1,2 km; bảng phố-công trình (20 phút) dành cho cầu/tượng đài, làm điểm này thành điểm ghé nhanh ở 43/120 lịch v1"
     },
     "tags": {
      "source": "rule_v1",
@@ -104436,7 +104436,7 @@
    "status_reason": null,
    "zone": "hai_van_lien_chieu",
    "cluster_id": "hai_van",
-   "alt_group": null,
+   "alt_group": "hai_van",
    "requires_ticket_of": null,
    "hours": {
     "open": [
@@ -109266,7 +109266,7 @@
    "status_reason": null,
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
-   "alt_group": null,
+   "alt_group": "hoi_an_old_town_walk",
    "requires_ticket_of": null,
    "hours": {
     "open": [
@@ -116096,7 +116096,7 @@
    "status_reason": null,
    "zone": "hoi_an",
    "cluster_id": "hoi_an_old_town",
-   "alt_group": null,
+   "alt_group": "hoi_an_old_town_walk",
    "requires_ticket_of": null,
    "hours": {
     "open": [
@@ -137841,9 +137841,9 @@
     "note": "quán ăn bình dân giá rẻ (Foody, Wanderlog); OSM amenity=restaurant"
    },
    "dwell": {
-    "p25": 30,
-    "p50": 50,
-    "p75": 80
+    "p25": 40,
+    "p50": 60,
+    "p75": 90
    },
    "tags": {
     "space": "indoor",
@@ -137870,7 +137870,7 @@
     "exposure_source": "category_prior",
     "dishes": []
    },
-   "time_profile": "flat_rest",
+   "time_profile": "meal_windows",
    "popularity": {
     "signature": false,
     "prize_prior": 0.4,
@@ -137926,7 +137926,7 @@
      "note": "ƯỚC LƯỢNG theo thể loại; VND min_vnd=25000, max_vnd=70000, typical_vnd=47500"
     },
     "dwell": {
-     "source": "dwell_table_v2:cafe",
+     "source": "dwell_table_v2:restaurant",
      "verified_by": "inferred",
      "confidence": 0.4,
      "evidence_url": null,

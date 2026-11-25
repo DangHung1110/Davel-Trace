@@ -9,8 +9,9 @@ accessibility, re-checked on the final plan), VROH (opening hours), B3 (gaps fit
 matrix; a missing cell is infeasible), BCS (budget), ETB (deadline = min(end_time,
 return_time)), A1 (one restaurant per meal slot), CAFE_CAP, CATEGORY_CAP,
 NO_CONSECUTIVE, NO_ADJACENT_FOOD (deprecated view of NO_CONSECUTIVE),
-REST_FOLLOWS_LUNCH, and the mirrors TCS (time) and HCS (every hard gate + must_visit
-and avoid).
+REST_FOLLOWS_LUNCH, and the mirrors TCS (time) and HCS (every hard gate + the lunch
+of a day that spans it + must_visit and avoid). The taste rules (`soft_rules.taste_rules`) are soft unless the
+trip names them in `strict_rules`; objective v1 widens that set.
 SOFT (reported, never fail-closes, `SOFT_CHECKS`): F1 (food and sightseeing in a day),
 TIME_FIT (each stop at an hour it makes sense), DINNER.
 
@@ -24,7 +25,12 @@ from __future__ import annotations
 
 import functools
 
+from BE.app.services import rules
+
 from BE.app.services.soft_rules import (
+    soft_checks,
+    taste_rules,
+    taste_rules_hard,
     CAFE_DEFAULT_CAP,
     CAFE_MAX_CAP,
     CATEGORY_DAILY_CAP,
@@ -372,6 +378,29 @@ def check_rest_follows_lunch(itinerary: dict, trip: dict, pois: dict,
 
 
 @_per_day
+def check_lunch(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """HARD, inside the HCS mirror: a day that spans lunch has one (a restaurant starting
+    11:00-13:00, or an all-day stop running through the window that feeds its visitors
+    on site). Not a row of `CHECKS`, so the API's `constraint_status` keeps its keys.
+
+    Vacuous for a request with neither an onboarding profile nor planned `meals`, and
+    for a day that cannot hold the lunch window (`meal_window_present`), exactly as the
+    solver's `lunch_required`. REST_FOLLOWS_LUNCH also fails a missing lunch; this
+    check keeps the lunch hard when objective v1 makes the siesta soft.
+    """
+    if not ((trip.get("profile") or {}) or trip.get("meals")):
+        return _result(True, 1.0)
+    if not meal_window_present(trip, "lunch"):
+        return _result(True, 1.0)
+    acts = _ordered(itinerary)
+    if not acts:
+        return _result(True, 1.0)
+    if lunch_activity(acts, pois) is not None or lunch_on_site(acts, pois) is not None:
+        return _result(True, 1.0)
+    return _result(False, 0.0)
+
+
+@_per_day
 def check_f1(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     """SOFT category quota: >=1 food AND >=1 sightseeing per day.
 
@@ -430,13 +459,18 @@ def check_tcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 
 def check_hcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Hard mirror: concrete gates (incl. A1/CAFE_CAP/sequence/rest) + HCS."""
-    if not all(check(itinerary, trip, pois, matrix)["passed"]
-               for check in (check_far, check_profile_safe, check_vroh, check_b3,
-                             check_bcs, check_etb, check_a1,
-                             check_cafe_cap, check_category_cap,
-                             check_no_consecutive,
-                             check_no_adjacent_food, check_rest_follows_lunch)):
+    """Hard mirror: concrete gates (incl. A1/CAFE_CAP/sequence/rest) + HCS.
+
+    The taste rules (`soft_rules.taste_rules`: CATEGORY_CAP, NO_CONSECUTIVE, and under
+    objective v1 also A1, CAFE_CAP, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH) are mirrored
+    only when they are hard for this trip (`soft_rules.taste_rules_hard`); soft, they
+    are reported on their own row and must not fail the plan through this mirror.
+    """
+    soft_taste = taste_rules() - taste_rules_hard(trip)
+    by_name = {name: fn for name, fn in CHECKS if rules.layer(name) != "mirror"}
+    by_name["LUNCH"] = check_lunch
+    mirrored = [by_name[name] for name in rules.HCS_MIRROR if name not in soft_taste]
+    if not all(check(itinerary, trip, pois, matrix)["passed"] for check in mirrored):
         return _result(False)
     ids = [a.get("poi_id") for a in itinerary.get("activities", [])]
     if any(m in ids for m in trip.get("avoid", [])) or len(ids) != len(set(ids)):
@@ -463,7 +497,7 @@ CHECKS = (("FAR", check_far), ("PROFILE_SAFE", check_profile_safe),
 
 # F1, TIME_FIT and DINNER are quality, not feasibility: they are reported but never
 # fail-closes a plan. Everything else is hard.
-SOFT_CHECKS = frozenset({"F1", "TIME_FIT", "DINNER"})
+SOFT_CHECKS = rules.QUALITY  # F1, TIME_FIT, DINNER (rules.py, layer "quality")
 HARD_CHECKS = tuple((name, fn) for name, fn in CHECKS
                     if name not in SOFT_CHECKS)
 
@@ -660,10 +694,13 @@ def report(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     canonical score over ALL checks.
     """
     results = {name: fn(itinerary, trip, pois, matrix) for name, fn in CHECKS}
+    # Taste rules (CATEGORY_CAP, NO_CONSECUTIVE) are soft unless the trip asks
+    # for them: reported in `soft_failed`, never fail-closing (soft_rules).
+    soft = soft_checks(SOFT_CHECKS, trip)
     failed = [name for name, res in results.items()
-              if not res["passed"] and name not in SOFT_CHECKS]
+              if not res["passed"] and name not in soft]
     soft_failed = [name for name, res in results.items()
-                   if not res["passed"] and name in SOFT_CHECKS]
+                   if not res["passed"] and name in soft]
     deprecated_failed = [name for name in failed if is_deprecated(name)]
     return {
         "passed": not failed,
