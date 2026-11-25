@@ -707,6 +707,28 @@ def apply_decision(rec, d):
     if d.get("category") in R.ALL_CATEGORIES:
         rec["category"], rec["role"] = d["category"], R.ROLE_OF[d["category"]]
         pv["category"] = prov("user_decision", "user", note=d["_file"])
+        # Everything derived from the category follows it. The dwell kind (and so
+        # the objective's diversity group) was computed from the source category
+        # before this decision: Phố đi bộ Bạch Đằng kept "night_market" after the
+        # user made it an outdoor_landmark. A table dwell is re-read for the new
+        # kind; a sourced or user-checked dwell is kept.
+        rec["time_profile"] = R.TIME_PROFILE[d["category"]]
+        if str(pv["dwell"].get("source") or "").startswith("dwell_table_v2:"):
+            kind = R.dwell_kind(rec["category"], rec["name"], rec["hours"]["archetype"])
+            q25, q50, q75 = R.DWELL[kind]
+            rec["dwell"] = {"p25": q25, "p50": q50, "p75": q75}
+            pv["dwell"] = {**pv["dwell"], "source": f"dwell_table_v2:{kind}"}
+    if d.get("dwell"):
+        # a place whose stay is not its kind's table row (kept as an estimate)
+        rec["dwell"] = {k: int(d["dwell"][k]) for k in ("p25", "p50", "p75")}
+        pv["dwell"] = {**pv["dwell"], "note": f"{d['_file']}; {d.get('dwell_note') or 'ước lượng'}"}
+    if d.get("time_profile"):
+        # a place whose best hours differ from its category's curve
+        rec["time_profile"] = d["time_profile"]
+    if "alt_group" in d:
+        # same place, two records (Đèo Hải Vân / Hải Vân Quan): the objective
+        # charges a second stop of one alt_group in a day (objective v1, T11)
+        rec["alt_group"] = d["alt_group"]
     if d.get("price_note"):
         rec["price"]["note"] = d["price_note"]
     if d.get("hours_reset"):

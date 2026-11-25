@@ -238,7 +238,7 @@ ChIJZSAyL0YfQjERMP2R9yBDRwY,KDL Sinh thái Nam Ô,paid_attraction,paid_attractio
 ChIJVVmn6uMjQjERwv0F2ZV9pJw,Bãi Sủng Cỏ,beach,beach,True,False,0.6,active
 ChIJUcvhoSgfQjERsU0uoSUtsto,Cami Riverside Resort,lodging,lodging,True,False,0.8,active
 ChIJEaxZWQAXQjERUp3M2TesuM8,Bãi tắm hàng dừa Mỹ Khê,beach,beach,True,False,0.6,active
-ChIJz4Y1XCcZQjERzg9AZYfOGH8,Bãi Biển Thiên Đường,beach,beach,True,False,0.6,active
+ChIJz4Y1XCcZQjERzg9AZYfOGH8,Bãi Biển Thiên Đường,beach,beach,True,False,0.6,excluded
 ChIJNUwPk-cZQjERgxIYcjgmCyU,Công viên biển Hà Khê,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJ4w7694IXQjERrFXucqKL--o,Bãi biển Mỹ Khê,beach,beach,True,False,0.8,active
 ChIJFYLgeggZQjERgwxGcK7JcpQ,Tượng đài Mẹ Nhu,outdoor_landmark,outdoor_landmark,True,False,0.8,active
@@ -265,14 +265,14 @@ ChIJX_osydwQQjERB-Y6MvLfJmQ,Bãi biển Non Nước,beach,beach,True,False,0.8,a
 ChIJrcJ8wVwRQjERJF58LAQEO-I,Quán Hải sản Tân Trà Beach,restaurant,restaurant,True,False,0.6,excluded
 ChIJtWWhh9wRQjERxmJ_DNJy62o,Bãi Biển Tân Trà,beach,beach,True,False,0.8,active
 ChIJIaxebnoXQjERNETM7bT3ewg,Bãi tắm T20,beach,beach,True,False,0.8,active
-ChIJOQ-obAARQjERQ4kQhqErSkw,Bãi tắm Nguyễn Thần Hiến,beach,beach,True,False,0.6,active
+ChIJOQ-obAARQjERQ4kQhqErSkw,Bãi tắm Nguyễn Thần Hiến,beach,beach,True,False,0.6,excluded
 ChIJEzuDsG8XQjERz7a51RnJnvU,Công viên Sao Biển,outdoor_landmark,outdoor_landmark,True,False,0.8,active
 ChIJOyXC4H0XQjERpm2T2xpZcwU,Chợ An Hải Đông,day_market,day_market,True,False,0.6,active
 ChIJXcxl0UcYQjERVfYu-bKtvPU,Chợ Thanh Bình,day_market,day_market,True,False,0.6,active
 ChIJDcx-OTIYQjERP4eyjItPspA,Chợ Hàn,day_market,day_market,True,False,0.8,active
 ChIJBcr6kegZQjER2nCllYpT_Qc,Chợ đêm Helio - B. Night Market,night_market,night_market,True,False,0.8,active
 ChIJJZ47gFgZQjERvHYpZqPp0lU,Chợ hải sản tươi sống biển Thanh Khê,day_market,day_market,True,False,0.6,active
-ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu ẩm thực Chợ Cồn,day_market,day_market,True,False,0.8,active
+ChIJeaPwiDUYQjERt4yUm81Oqi8,Khu ẩm thực Chợ Cồn,restaurant,day_market,False,False,0.9,active
 ChIJAdChYQAZQjERdBTX1_66Q_8,Chợ Đêm Sơn Trà,night_market,night_market,True,False,0.6,active
 ChIJ2zJrN_EXQjERFRsnRcZaDjI,Chợ Chiều,day_market,day_market,True,False,0.6,active
 ChIJb-kmpPQXQjERKc6w6X8CFKc,Chợ Mân Thái,day_market,day_market,True,False,0.6,active
@@ -313,7 +313,7 @@ ChIJOxVypBYRQjERMmK2P6JbzF0,Động Âm Phủ,religious,,False,True,0.5,active
 ChIJO0IiWR0RQjERtGkQtqESJ1Y,Động Vân Thông,outdoor_landmark,,False,True,0.5,active
 ChIJWZUpXf0RQjER6uu8gU2gIhI,Mai Vang (Yellow Blossom) Bonsai Garden,outdoor_landmark,outdoor_landmark,True,False,0.9,active
 ChIJiXlEK7IRQjERvpdL4vcW86w,Tượng Phật Đá Phan Sơn,religious,religious,True,False,0.9,active
-ChIJ9_dffMQQQjERuJbqVGdSysY,Quốc Tự Tam Thai,outdoor_landmark,,False,False,0.3,active
+ChIJ9_dffMQQQjERuJbqVGdSysY,Quốc Tự Tam Thai,religious,,False,False,0.9,active
 ChIJg-cynKIXQjERyE7ZIaTaCO8,Public Beach Access,beach,beach,True,False,0.9,excluded
 ChIJHwgddQAXQjERs5sNrVutheI,Bãi tắm Sao Biển,beach,beach,True,False,0.8,active
 ChIJO61z6OMZQjERxyCrO6bO28I,Chợ Trời (Flea Market),day_market,day_market,True,False,0.6,active
