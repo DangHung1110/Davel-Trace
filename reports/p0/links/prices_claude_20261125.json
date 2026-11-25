@@ -559,6 +559,68 @@
    "match": "Trùng tên Sơn Trà Tịnh Viên (Thọ Quang, Sơn Trà).",
    "note": "Vào cổng miễn phí.",
    "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4945171421",
+   "category": "restaurant",
+   "name": "Hai (Mì Quang - Cao Lâu)",
+   "unit": "per_bowl",
+   "min_vnd": 25000,
+   "max_vnd": 30000,
+   "evidence_url": "https://momo.vn/blog/top-mon-ngon-hoi-an-c101dt294",
+   "quote": "Địa chỉ nên thử: | Mì Quảng Hát - 04 Phan Châu Trinh, Hội An | Mì Quảng bà Minh - Cẩm Hà, Hội An | Mì Quảng Cô Sinh: 170/5, Lý Thường Kiệt, Hội An | Mì Quảng Ông Hai: 6A Trương Minh Lượng, Cẩm Châu, Hội An | Giá từ: 25.000-30.000 VND/ tô",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 6a Trương Minh Lượng, Hội An (tên OSM 'Hai'); trùng địa chỉ Mì Quảng Ông Hai trong nguồn.",
+   "note": "Giá một tô ghi chung cho nhóm quán mì Quảng được liệt kê (gồm Ông Hai). Quán một món: một tô = chi tiêu/người.",
+   "typical_vnd": 27500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/7118673485",
+   "category": "restaurant",
+   "name": "Lê Hội Bánh Mí Chay",
+   "unit": "per_serving",
+   "min_vnd": 20000,
+   "max_vnd": 20000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/vi/plan-book/travel/travel-guide/banh-mi-hoi-an",
+   "quote": "5. Bánh Mì Chay Lê Hới Hội An | Địa chỉ 1: 3 Nguyễn Huệ, phường Cẩm Châu, Hội An | Địa chỉ 2: 136 Trần Phú, phường Minh An, Hội An | Giá: 20.000 VND",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Nguyễn Huệ, Hội An (tên OSM 'Lê Hội Bánh Mí Chay'); nguồn ghi cơ sở 3 Nguyễn Huệ.",
+   "note": "Xe bánh mì chay: một ổ = chi tiêu/người.",
+   "typical_vnd": 20000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
+   "category": "beach",
+   "name": "Bãi biển Sơn Trà",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/attractions/son-tra-peninsula-beaches",
+   "quote": "Phường Thọ Quang, quận Sơn Trà, Đà Nẵng (cách trung tâm thành phố khoảng 10 km về phía đông bắc) | Vào cửa bán đảo và các bãi biển hoàn toàn miễn phí",
+   "page_date": "2026-07-24",
+   "match": "OSM reverse: POI trên đường Hoàng Sa, phường Sơn Trà (bãi trên bán đảo Sơn Trà).",
+   "note": "Vào bãi miễn phí; riêng bãi Tiên Sa có nguồn ghi vé 10.000đ — POI này không phải Tiên Sa.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
+   "category": "cafe",
+   "name": "Boulevard",
+   "unit": "per_drink",
+   "min_vnd": 35000,
+   "max_vnd": 75000,
+   "confidence": 0.55,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/boulevard-gelato-and-coffee-chat-luong-kem-y-hang-dau-tai-da-nang-1857",
+   "quote": "Địa chỉ: quán nằm tại số 77 đường Trần Quốc Toản, phường Phước Ninh, quận Hải Châu | Giá bán giao động : 35.000 VNĐ đến 75.000 VNĐ. | Cà phê Ý như Latte Hot/Ice, Cappuccino Hot/Ice, Americano ... có mức giá từ 40.000 VNĐ đến 55.000 VNĐ",
+   "page_date": "2023-09-21",
+   "match": "OSM reverse: POI ở 75 Trần Quốc Toản, Hải Châu (số nội suy); nguồn: Boulevard Gelato & Coffee 77 Trần Quốc Toản.",
+   "note": "Quán kem/cà phê: một ly/viên kem = chi tiêu/người. Bài 2023, giá có thể đã đổi → confidence 0.55.",
+   "typical_vnd": 55000,
+   "accessed": "2026-11-25"
   }
  ],
  "not_found": [
@@ -771,6 +833,160 @@
    "why": "Chợ vải/may đo: không có giá ăn uống hay vé; Codex 20/11 cũng không tìm được. Loại day_market với giá mặc định ăn vặt không hợp — cần người xem lại loại POI.",
    "tried": [
     "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11890992769",
+   "category": "restaurant",
+   "name": "Hoa Sen Bánh Mì Chay",
+   "found": false,
+   "why": "Chỉ có một nhận xét HappyCow '30k for a tasty and warm vegan bánh mì' ở trang có thể của quán khác (Tâm Hoa Sen); PlantsPack chỉ có địa chỉ/giờ.",
+   "tried": [
+    "https://www.plantspack.com/place/hoa-sen-banh-mi-chay",
+    "https://www.happycow.net/reviews/tam-hoa-sen-hoi-an-309388"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11840976337",
+   "category": "restaurant",
+   "name": "V vegan cafe & restaurant",
+   "found": false,
+   "why": "hoiandaytrip chỉ ghi 'from 100,000 VND (2026)' (giá món thấp nhất) cho nhà hàng chay nhiều món; không có chi tiêu/người.",
+   "tried": [
+    "https://hoiandaytrip.com/v-vegan-restaurant-hoi-an/",
+    "https://spinach.guide/venues/v-vegan-190950/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4347237636",
+   "category": "restaurant",
+   "name": "Quan Chay Sen Trang",
+   "found": false,
+   "why": "Không tìm thấy trang nào có giá của quán chay Sen Trắng (Hai Bà Trưng, Hội An).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5273998823",
+   "category": "outdoor_landmark",
+   "name": "Cầu Trần Thị Lý",
+   "found": false,
+   "why": "Cầu đường bộ công cộng; không tìm thấy trang nào nói về vé/giá đi bộ ngắm cầu. Giữ luật 'vào tự do' (0đ, chưa có nguồn).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
+   "category": "viewpoint",
+   "name": "Nhà Vọng Cảnh",
+   "found": false,
+   "why": "Không tìm thấy trang nào về điểm 'Nhà Vọng Cảnh' (đường Yết Kiêu, Sơn Trà) có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
+   "category": "restaurant",
+   "name": "Bé Ni 2",
+   "found": false,
+   "why": "Michelin Bib Gourmand chỉ ghi ký hiệu ₫₫; En Primeur Club (trang tổng hợp thứ cấp) ghi '$10–20'; Foody 50–200k không rõ đơn vị (Codex 20/11). Không có chi tiêu/người VND đáng tin.",
+   "tried": [
+    "https://guide.michelin.com/vn/en/da-nang-region/da-nang_2984390/restaurant/be-ni-2",
+    "https://www.enprimeurclub.com/restaurants/be-ni-2-da-nang-restaurant"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4343966693",
+   "category": "restaurant",
+   "name": "An Bang beach village",
+   "found": false,
+   "why": "Chỉ có ký hiệu $$-$$$ trên Trip.com, không có số VND.",
+   "tried": [
+    "https://au.trip.com/restaurant/vietnam/hoi%20an/detail/An%20Bang%20Beach%20Village%20Restaurant-23805914"
+   ]
+  },
+  {
+   "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
+   "category": "cafe",
+   "name": "HI4 Coffee & Workspace",
+   "found": false,
+   "why": "Chỉ có 'average coffee price: $1.35USD' trên travelness.com (bị Cloudflare chặn, không mở đọc được để kiểm); freakingnomads/laptopfriendlycafe không ghi giá; Foody không có quán.",
+   "tried": [
+    "https://freakingnomads.com/workspace/hi4-coffee-and-workspace",
+    "https://travelness.com/best-cafes-in-da-nang"
+   ]
+  },
+  {
+   "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
+   "category": "cafe",
+   "name": "The Sense Coffee",
+   "found": false,
+   "why": "Không có trang nào có giá; Foody tìm '0 kết quả' ở Đà Nẵng.",
+   "tried": [
+    "https://www.foody.vn/da-nang/dia-diem?q=The%20Sense%20Coffee"
+   ]
+  },
+  {
+   "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
+   "category": "cafe",
+   "name": "Venus Coffee",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (Ngô Thì Sĩ, Ngũ Hành Sơn) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
+   "category": "cafe",
+   "name": "J Cafe",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (6 An Thượng 18) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11795856089",
+   "category": "cafe",
+   "name": "Nghé Coffee Hội An",
+   "found": false,
+   "why": "vietnamspot.ru chỉ ghi giờ mở cửa (8:00–17:30), không có giá.",
+   "tried": [
+    "https://vietnamspot.ru/en/blog/hoi-an-cafes"
+   ]
+  },
+  {
+   "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+   "category": "religious",
+   "name": "Chùa Không Tên",
+   "found": false,
+   "why": "Các bài (vietnambooking 08/2026, vinwonders, mia) không nêu vé hay miễn phí vào cửa; chỉ nói nhang đèn miễn phí. Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://www.vietnambooking.com/du-lich/blog-du-lich/chua-khong-ten-da-nang.html"
+   ]
+  },
+  {
+   "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+   "category": "religious",
+   "name": "Chùa Bà Đa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về chùa Bà Đa (đường Hoài Thanh, Ngũ Hành Sơn). Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
+   "category": "restaurant",
+   "name": "Nhà hàng chay Hoa Sen",
+   "found": false,
+   "why": "Không tìm được giá có nguồn cho nhà hàng chay Hoa Sen (Hà Xuân 1, Thanh Khê).",
+   "tried": [
+    "websearch 25/11/2026"
    ]
   }
  ]
