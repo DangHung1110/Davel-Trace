@@ -1,0 +1,4646 @@
+{
+ "schema": "plan-pairs-v1-key",
+ "dataset": "plan-pairs-v1-fd593b3f3f",
+ "built_at": "2026-11-25",
+ "snapshot": "danang-v2",
+ "label_convention": "+1 = first plan better, 0 = tie, -1 = second plan better (first/second as in this key)",
+ "variant_order": [
+  "savings",
+  "balanced",
+  "experience"
+ ],
+ "settings": {
+  "n": 150,
+  "per_request": 2,
+  "seed": 7,
+  "min_edit_stops": 2,
+  "min_edit_share": 0.2
+ },
+ "stats": {
+  "requests": 99,
+  "requests_with_a_pair": 97,
+  "plans": 297,
+  "plans_shown": 291,
+  "candidate_pairs": 289,
+  "dropped": {
+   "plan not shown": 6,
+   "near-identical": 2
+  },
+  "picked": 150,
+  "picked_by_combo": {
+   "balanced|experience": 50,
+   "savings|balanced": 50,
+   "savings|experience": 50
+  },
+  "first_shown_as_a": 75,
+  "picked_by_source": {
+   "audit": 102,
+   "gold": 45,
+   "review": 3
+  },
+  "picked_requests": 97,
+  "median_edit_share": 1.0,
+  "must_visit_dropped": []
+ },
+ "pairs": {
+  "P001": {
+   "request_id": "T12-couple-600k",
+   "first": "T12-couple-600k/savings",
+   "second": "T12-couple-600k/balanced",
+   "A": "T12-couple-600k/savings",
+   "B": "T12-couple-600k/balanced",
+   "variants": {
+    "T12-couple-600k/savings": "savings",
+    "T12-couple-600k/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P002": {
+   "request_id": "W13-park",
+   "first": "W13-park/savings",
+   "second": "W13-park/experience",
+   "A": "W13-park/experience",
+   "B": "W13-park/savings",
+   "variants": {
+    "W13-park/savings": "savings",
+    "W13-park/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P003": {
+   "request_id": "T11-neutral-0915",
+   "first": "T11-neutral-0915/balanced",
+   "second": "T11-neutral-0915/experience",
+   "A": "T11-neutral-0915/experience",
+   "B": "T11-neutral-0915/balanced",
+   "variants": {
+    "T11-neutral-0915/balanced": "balanced",
+    "T11-neutral-0915/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P004": {
+   "request_id": "G-q01",
+   "first": "G-q01/balanced",
+   "second": "G-q01/experience",
+   "A": "G-q01/balanced",
+   "B": "G-q01/experience",
+   "variants": {
+    "G-q01/balanced": "balanced",
+    "G-q01/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.4,
+   "shared": 2
+  },
+  "P005": {
+   "request_id": "W21-banh-xeo",
+   "first": "W21-banh-xeo/savings",
+   "second": "W21-banh-xeo/balanced",
+   "A": "W21-banh-xeo/savings",
+   "B": "W21-banh-xeo/balanced",
+   "variants": {
+    "W21-banh-xeo/savings": "savings",
+    "W21-banh-xeo/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P006": {
+   "request_id": "T03-family",
+   "first": "T03-family/savings",
+   "second": "T03-family/experience",
+   "A": "T03-family/savings",
+   "B": "T03-family/experience",
+   "variants": {
+    "T03-family/savings": "savings",
+    "T03-family/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P007": {
+   "request_id": "E02-wheelchair",
+   "first": "E02-wheelchair/savings",
+   "second": "E02-wheelchair/balanced",
+   "A": "E02-wheelchair/savings",
+   "B": "E02-wheelchair/balanced",
+   "variants": {
+    "E02-wheelchair/savings": "savings",
+    "E02-wheelchair/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P008": {
+   "request_id": "G-q02",
+   "first": "G-q02/balanced",
+   "second": "G-q02/experience",
+   "A": "G-q02/balanced",
+   "B": "G-q02/experience",
+   "variants": {
+    "G-q02/balanced": "balanced",
+    "G-q02/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P009": {
+   "request_id": "X03-two-beach-museum",
+   "first": "X03-two-beach-museum/savings",
+   "second": "X03-two-beach-museum/experience",
+   "A": "X03-two-beach-museum/experience",
+   "B": "X03-two-beach-museum/savings",
+   "variants": {
+    "X03-two-beach-museum/savings": "savings",
+    "X03-two-beach-museum/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.037,
+   "shared": 1
+  },
+  "P010": {
+   "request_id": "T10-friends-evening",
+   "first": "T10-friends-evening/savings",
+   "second": "T10-friends-evening/experience",
+   "A": "T10-friends-evening/experience",
+   "B": "T10-friends-evening/savings",
+   "variants": {
+    "T10-friends-evening/savings": "savings",
+    "T10-friends-evening/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P011": {
+   "request_id": "G-q29",
+   "first": "G-q29/savings",
+   "second": "G-q29/balanced",
+   "A": "G-q29/balanced",
+   "B": "G-q29/savings",
+   "variants": {
+    "G-q29/savings": "savings",
+    "G-q29/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.2,
+   "shared": 2
+  },
+  "P012": {
+   "request_id": "T08-couple-afternoon",
+   "first": "T08-couple-afternoon/balanced",
+   "second": "T08-couple-afternoon/experience",
+   "A": "T08-couple-afternoon/balanced",
+   "B": "T08-couple-afternoon/experience",
+   "variants": {
+    "T08-couple-afternoon/balanced": "balanced",
+    "T08-couple-afternoon/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P013": {
+   "request_id": "G-q20",
+   "first": "G-q20/balanced",
+   "second": "G-q20/experience",
+   "A": "G-q20/experience",
+   "B": "G-q20/balanced",
+   "variants": {
+    "G-q20/balanced": "balanced",
+    "G-q20/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P014": {
+   "request_id": "W26-shopping",
+   "first": "W26-shopping/savings",
+   "second": "W26-shopping/balanced",
+   "A": "W26-shopping/savings",
+   "B": "W26-shopping/balanced",
+   "variants": {
+    "W26-shopping/savings": "savings",
+    "W26-shopping/balanced": "balanced"
+   },
+   "edits": 9,
+   "edit_share": 1.0,
+   "jaccard": 0.133,
+   "shared": 2
+  },
+  "P015": {
+   "request_id": "W18-museum-pagoda-market",
+   "first": "W18-museum-pagoda-market/savings",
+   "second": "W18-museum-pagoda-market/experience",
+   "A": "W18-museum-pagoda-market/savings",
+   "B": "W18-museum-pagoda-market/experience",
+   "variants": {
+    "W18-museum-pagoda-market/savings": "savings",
+    "W18-museum-pagoda-market/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P016": {
+   "request_id": "G-q12",
+   "first": "G-q12/savings",
+   "second": "G-q12/experience",
+   "A": "G-q12/experience",
+   "B": "G-q12/savings",
+   "variants": {
+    "G-q12/savings": "savings",
+    "G-q12/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P017": {
+   "request_id": "W23-sunrise",
+   "first": "W23-sunrise/savings",
+   "second": "W23-sunrise/balanced",
+   "A": "W23-sunrise/savings",
+   "B": "W23-sunrise/balanced",
+   "variants": {
+    "W23-sunrise/savings": "savings",
+    "W23-sunrise/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P018": {
+   "request_id": "M05-ba-na",
+   "first": "M05-ba-na/balanced",
+   "second": "M05-ba-na/experience",
+   "A": "M05-ba-na/balanced",
+   "B": "M05-ba-na/experience",
+   "variants": {
+    "M05-ba-na/balanced": "balanced",
+    "M05-ba-na/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.143,
+   "shared": 1
+  },
+  "P019": {
+   "request_id": "G-q28",
+   "first": "G-q28/savings",
+   "second": "G-q28/balanced",
+   "A": "G-q28/balanced",
+   "B": "G-q28/savings",
+   "variants": {
+    "G-q28/savings": "savings",
+    "G-q28/balanced": "balanced"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P020": {
+   "request_id": "X02-two-family",
+   "first": "X02-two-family/balanced",
+   "second": "X02-two-family/experience",
+   "A": "X02-two-family/experience",
+   "B": "X02-two-family/balanced",
+   "variants": {
+    "X02-two-family/balanced": "balanced",
+    "X02-two-family/experience": "experience"
+   },
+   "edits": 13,
+   "edit_share": 0.929,
+   "jaccard": 0.12,
+   "shared": 3
+  },
+  "P021": {
+   "request_id": "G-q03",
+   "first": "G-q03/savings",
+   "second": "G-q03/experience",
+   "A": "G-q03/savings",
+   "B": "G-q03/experience",
+   "variants": {
+    "G-q03/savings": "savings",
+    "G-q03/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.6,
+   "shared": 3
+  },
+  "P022": {
+   "request_id": "X01-two-couple",
+   "first": "X01-two-couple/savings",
+   "second": "X01-two-couple/experience",
+   "A": "X01-two-couple/experience",
+   "B": "X01-two-couple/savings",
+   "variants": {
+    "X01-two-couple/savings": "savings",
+    "X01-two-couple/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.038,
+   "shared": 1
+  },
+  "P023": {
+   "request_id": "M01-ngu-hanh-son",
+   "first": "M01-ngu-hanh-son/savings",
+   "second": "M01-ngu-hanh-son/balanced",
+   "A": "M01-ngu-hanh-son/balanced",
+   "B": "M01-ngu-hanh-son/savings",
+   "variants": {
+    "M01-ngu-hanh-son/savings": "savings",
+    "M01-ngu-hanh-son/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P024": {
+   "request_id": "G-q26",
+   "first": "G-q26/balanced",
+   "second": "G-q26/experience",
+   "A": "G-q26/experience",
+   "B": "G-q26/balanced",
+   "variants": {
+    "G-q26/balanced": "balanced",
+    "G-q26/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P025": {
+   "request_id": "G-q08",
+   "first": "G-q08/savings",
+   "second": "G-q08/balanced",
+   "A": "G-q08/balanced",
+   "B": "G-q08/savings",
+   "variants": {
+    "G-q08/savings": "savings",
+    "G-q08/balanced": "balanced"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P026": {
+   "request_id": "W10-gift",
+   "first": "W10-gift/savings",
+   "second": "W10-gift/experience",
+   "A": "W10-gift/experience",
+   "B": "W10-gift/savings",
+   "variants": {
+    "W10-gift/savings": "savings",
+    "W10-gift/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P027": {
+   "request_id": "W20-vegan",
+   "first": "W20-vegan/balanced",
+   "second": "W20-vegan/experience",
+   "A": "W20-vegan/balanced",
+   "B": "W20-vegan/experience",
+   "variants": {
+    "W20-vegan/balanced": "balanced",
+    "W20-vegan/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P028": {
+   "request_id": "W01-beach",
+   "first": "W01-beach/savings",
+   "second": "W01-beach/balanced",
+   "A": "W01-beach/balanced",
+   "B": "W01-beach/savings",
+   "variants": {
+    "W01-beach/savings": "savings",
+    "W01-beach/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.4,
+   "shared": 4
+  },
+  "P029": {
+   "request_id": "W02-seafood",
+   "first": "W02-seafood/savings",
+   "second": "W02-seafood/experience",
+   "A": "W02-seafood/experience",
+   "B": "W02-seafood/savings",
+   "variants": {
+    "W02-seafood/savings": "savings",
+    "W02-seafood/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P030": {
+   "request_id": "M03-three",
+   "first": "M03-three/balanced",
+   "second": "M03-three/experience",
+   "A": "M03-three/balanced",
+   "B": "M03-three/experience",
+   "variants": {
+    "M03-three/balanced": "balanced",
+    "M03-three/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P031": {
+   "request_id": "W09-mi-quang",
+   "first": "W09-mi-quang/savings",
+   "second": "W09-mi-quang/balanced",
+   "A": "W09-mi-quang/savings",
+   "B": "W09-mi-quang/balanced",
+   "variants": {
+    "W09-mi-quang/savings": "savings",
+    "W09-mi-quang/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P032": {
+   "request_id": "E05-solo-200k",
+   "first": "E05-solo-200k/savings",
+   "second": "E05-solo-200k/experience",
+   "A": "E05-solo-200k/savings",
+   "B": "E05-solo-200k/experience",
+   "variants": {
+    "E05-solo-200k/savings": "savings",
+    "E05-solo-200k/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P033": {
+   "request_id": "W04-pagoda",
+   "first": "W04-pagoda/balanced",
+   "second": "W04-pagoda/experience",
+   "A": "W04-pagoda/balanced",
+   "B": "W04-pagoda/experience",
+   "variants": {
+    "W04-pagoda/balanced": "balanced",
+    "W04-pagoda/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P034": {
+   "request_id": "T02-couple",
+   "first": "T02-couple/balanced",
+   "second": "T02-couple/experience",
+   "A": "T02-couple/balanced",
+   "B": "T02-couple/experience",
+   "variants": {
+    "T02-couple/balanced": "balanced",
+    "T02-couple/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P035": {
+   "request_id": "G-q30",
+   "first": "G-q30/savings",
+   "second": "G-q30/experience",
+   "A": "G-q30/savings",
+   "B": "G-q30/experience",
+   "variants": {
+    "G-q30/savings": "savings",
+    "G-q30/experience": "experience"
+   },
+   "edits": 5,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P036": {
+   "request_id": "D01-monday",
+   "first": "D01-monday/savings",
+   "second": "D01-monday/balanced",
+   "A": "D01-monday/balanced",
+   "B": "D01-monday/savings",
+   "variants": {
+    "D01-monday/savings": "savings",
+    "D01-monday/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P037": {
+   "request_id": "M04-order",
+   "first": "M04-order/savings",
+   "second": "M04-order/balanced",
+   "A": "M04-order/savings",
+   "B": "M04-order/balanced",
+   "variants": {
+    "M04-order/savings": "savings",
+    "M04-order/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P038": {
+   "request_id": "X07-two-musts",
+   "first": "X07-two-musts/savings",
+   "second": "X07-two-musts/experience",
+   "A": "X07-two-musts/experience",
+   "B": "X07-two-musts/savings",
+   "variants": {
+    "X07-two-musts/savings": "savings",
+    "X07-two-musts/experience": "experience"
+   },
+   "edits": 13,
+   "edit_share": 0.929,
+   "jaccard": 0.125,
+   "shared": 3
+  },
+  "P039": {
+   "request_id": "W14-bridge",
+   "first": "W14-bridge/balanced",
+   "second": "W14-bridge/experience",
+   "A": "W14-bridge/experience",
+   "B": "W14-bridge/balanced",
+   "variants": {
+    "W14-bridge/balanced": "balanced",
+    "W14-bridge/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P040": {
+   "request_id": "T07-couple-morning",
+   "first": "T07-couple-morning/savings",
+   "second": "T07-couple-morning/balanced",
+   "A": "T07-couple-morning/balanced",
+   "B": "T07-couple-morning/savings",
+   "variants": {
+    "T07-couple-morning/savings": "savings",
+    "T07-couple-morning/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P041": {
+   "request_id": "T09-family-0917-1.5m",
+   "first": "T09-family-0917-1.5m/balanced",
+   "second": "T09-family-0917-1.5m/experience",
+   "A": "T09-family-0917-1.5m/balanced",
+   "B": "T09-family-0917-1.5m/experience",
+   "variants": {
+    "T09-family-0917-1.5m/balanced": "balanced",
+    "T09-family-0917-1.5m/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P042": {
+   "request_id": "X05-two-neutral",
+   "first": "X05-two-neutral/savings",
+   "second": "X05-two-neutral/experience",
+   "A": "X05-two-neutral/experience",
+   "B": "X05-two-neutral/savings",
+   "variants": {
+    "X05-two-neutral/savings": "savings",
+    "X05-two-neutral/experience": "experience"
+   },
+   "edits": 16,
+   "edit_share": 1.0,
+   "jaccard": 0.143,
+   "shared": 4
+  },
+  "P043": {
+   "request_id": "E04-six-people-2m",
+   "first": "E04-six-people-2m/savings",
+   "second": "E04-six-people-2m/experience",
+   "A": "E04-six-people-2m/experience",
+   "B": "E04-six-people-2m/savings",
+   "variants": {
+    "E04-six-people-2m/savings": "savings",
+    "E04-six-people-2m/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.067,
+   "shared": 1
+  },
+  "P044": {
+   "request_id": "G-q07",
+   "first": "G-q07/savings",
+   "second": "G-q07/balanced",
+   "A": "G-q07/balanced",
+   "B": "G-q07/savings",
+   "variants": {
+    "G-q07/savings": "savings",
+    "G-q07/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P045": {
+   "request_id": "E03-avoid-nightlife",
+   "first": "E03-avoid-nightlife/balanced",
+   "second": "E03-avoid-nightlife/experience",
+   "A": "E03-avoid-nightlife/experience",
+   "B": "E03-avoid-nightlife/balanced",
+   "variants": {
+    "E03-avoid-nightlife/balanced": "balanced",
+    "E03-avoid-nightlife/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.071,
+   "shared": 1
+  },
+  "P046": {
+   "request_id": "G-q16",
+   "first": "G-q16/savings",
+   "second": "G-q16/experience",
+   "A": "G-q16/savings",
+   "B": "G-q16/experience",
+   "variants": {
+    "G-q16/savings": "savings",
+    "G-q16/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P047": {
+   "request_id": "T04-friends-late",
+   "first": "T04-friends-late/balanced",
+   "second": "T04-friends-late/experience",
+   "A": "T04-friends-late/balanced",
+   "B": "T04-friends-late/experience",
+   "variants": {
+    "T04-friends-late/balanced": "balanced",
+    "T04-friends-late/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 0.889,
+   "jaccard": 0.125,
+   "shared": 2
+  },
+  "P048": {
+   "request_id": "T14-solo-300k",
+   "first": "T14-solo-300k/savings",
+   "second": "T14-solo-300k/balanced",
+   "A": "T14-solo-300k/savings",
+   "B": "T14-solo-300k/balanced",
+   "variants": {
+    "T14-solo-300k/savings": "savings",
+    "T14-solo-300k/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P049": {
+   "request_id": "W11-bar",
+   "first": "W11-bar/savings",
+   "second": "W11-bar/balanced",
+   "A": "W11-bar/balanced",
+   "B": "W11-bar/savings",
+   "variants": {
+    "W11-bar/savings": "savings",
+    "W11-bar/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P050": {
+   "request_id": "T15-family-2m",
+   "first": "T15-family-2m/balanced",
+   "second": "T15-family-2m/experience",
+   "A": "T15-family-2m/balanced",
+   "B": "T15-family-2m/experience",
+   "variants": {
+    "T15-family-2m/balanced": "balanced",
+    "T15-family-2m/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P051": {
+   "request_id": "W19-bun",
+   "first": "W19-bun/savings",
+   "second": "W19-bun/experience",
+   "A": "W19-bun/savings",
+   "B": "W19-bun/experience",
+   "variants": {
+    "W19-bun/savings": "savings",
+    "W19-bun/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P052": {
+   "request_id": "R-pagoda-low",
+   "first": "R-pagoda-low/savings",
+   "second": "R-pagoda-low/experience",
+   "A": "R-pagoda-low/experience",
+   "B": "R-pagoda-low/savings",
+   "variants": {
+    "R-pagoda-low/savings": "savings",
+    "R-pagoda-low/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P053": {
+   "request_id": "G-q05",
+   "first": "G-q05/savings",
+   "second": "G-q05/balanced",
+   "A": "G-q05/balanced",
+   "B": "G-q05/savings",
+   "variants": {
+    "G-q05/savings": "savings",
+    "G-q05/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P054": {
+   "request_id": "G-q09",
+   "first": "G-q09/savings",
+   "second": "G-q09/balanced",
+   "A": "G-q09/savings",
+   "B": "G-q09/balanced",
+   "variants": {
+    "G-q09/savings": "savings",
+    "G-q09/balanced": "balanced"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.4,
+   "shared": 2
+  },
+  "P055": {
+   "request_id": "W16-cave",
+   "first": "W16-cave/balanced",
+   "second": "W16-cave/experience",
+   "A": "W16-cave/experience",
+   "B": "W16-cave/balanced",
+   "variants": {
+    "W16-cave/balanced": "balanced",
+    "W16-cave/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P056": {
+   "request_id": "G-q10",
+   "first": "G-q10/balanced",
+   "second": "G-q10/experience",
+   "A": "G-q10/experience",
+   "B": "G-q10/balanced",
+   "variants": {
+    "G-q10/balanced": "balanced",
+    "G-q10/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P057": {
+   "request_id": "T05-solo-1m",
+   "first": "T05-solo-1m/savings",
+   "second": "T05-solo-1m/experience",
+   "A": "T05-solo-1m/savings",
+   "B": "T05-solo-1m/experience",
+   "variants": {
+    "T05-solo-1m/savings": "savings",
+    "T05-solo-1m/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P058": {
+   "request_id": "T13-neutral-0718",
+   "first": "T13-neutral-0718/savings",
+   "second": "T13-neutral-0718/experience",
+   "A": "T13-neutral-0718/experience",
+   "B": "T13-neutral-0718/savings",
+   "variants": {
+    "T13-neutral-0718/savings": "savings",
+    "T13-neutral-0718/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P059": {
+   "request_id": "D02-sunday-museum",
+   "first": "D02-sunday-museum/balanced",
+   "second": "D02-sunday-museum/experience",
+   "A": "D02-sunday-museum/experience",
+   "B": "D02-sunday-museum/balanced",
+   "variants": {
+    "D02-sunday-museum/balanced": "balanced",
+    "D02-sunday-museum/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P060": {
+   "request_id": "W15-church",
+   "first": "W15-church/savings",
+   "second": "W15-church/balanced",
+   "A": "W15-church/balanced",
+   "B": "W15-church/savings",
+   "variants": {
+    "W15-church/savings": "savings",
+    "W15-church/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.625,
+   "jaccard": 0.231,
+   "shared": 3
+  },
+  "P061": {
+   "request_id": "G-q15",
+   "first": "G-q15/balanced",
+   "second": "G-q15/experience",
+   "A": "G-q15/balanced",
+   "B": "G-q15/experience",
+   "variants": {
+    "G-q15/balanced": "balanced",
+    "G-q15/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 0.75,
+   "jaccard": 0.6,
+   "shared": 3
+  },
+  "P062": {
+   "request_id": "G-q25",
+   "first": "G-q25/savings",
+   "second": "G-q25/balanced",
+   "A": "G-q25/savings",
+   "B": "G-q25/balanced",
+   "variants": {
+    "G-q25/savings": "savings",
+    "G-q25/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P063": {
+   "request_id": "W17-beach-seafood-coffee",
+   "first": "W17-beach-seafood-coffee/savings",
+   "second": "W17-beach-seafood-coffee/experience",
+   "A": "W17-beach-seafood-coffee/experience",
+   "B": "W17-beach-seafood-coffee/savings",
+   "variants": {
+    "W17-beach-seafood-coffee/savings": "savings",
+    "W17-beach-seafood-coffee/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P064": {
+   "request_id": "G-q18",
+   "first": "G-q18/savings",
+   "second": "G-q18/experience",
+   "A": "G-q18/experience",
+   "B": "G-q18/savings",
+   "variants": {
+    "G-q18/savings": "savings",
+    "G-q18/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P065": {
+   "request_id": "G-q23",
+   "first": "G-q23/savings",
+   "second": "G-q23/balanced",
+   "A": "G-q23/savings",
+   "B": "G-q23/balanced",
+   "variants": {
+    "G-q23/savings": "savings",
+    "G-q23/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.3,
+   "shared": 3
+  },
+  "P066": {
+   "request_id": "T06-couple-0718",
+   "first": "T06-couple-0718/balanced",
+   "second": "T06-couple-0718/experience",
+   "A": "T06-couple-0718/experience",
+   "B": "T06-couple-0718/balanced",
+   "variants": {
+    "T06-couple-0718/balanced": "balanced",
+    "T06-couple-0718/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P067": {
+   "request_id": "G-q24",
+   "first": "G-q24/balanced",
+   "second": "G-q24/experience",
+   "A": "G-q24/balanced",
+   "B": "G-q24/experience",
+   "variants": {
+    "G-q24/balanced": "balanced",
+    "G-q24/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P068": {
+   "request_id": "G-q17",
+   "first": "G-q17/savings",
+   "second": "G-q17/experience",
+   "A": "G-q17/savings",
+   "B": "G-q17/experience",
+   "variants": {
+    "G-q17/savings": "savings",
+    "G-q17/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 0.75,
+   "jaccard": 0.6,
+   "shared": 3
+  },
+  "P069": {
+   "request_id": "W12-spa",
+   "first": "W12-spa/savings",
+   "second": "W12-spa/balanced",
+   "A": "W12-spa/savings",
+   "B": "W12-spa/balanced",
+   "variants": {
+    "W12-spa/savings": "savings",
+    "W12-spa/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P070": {
+   "request_id": "M06-family-musts",
+   "first": "M06-family-musts/balanced",
+   "second": "M06-family-musts/experience",
+   "A": "M06-family-musts/balanced",
+   "B": "M06-family-musts/experience",
+   "variants": {
+    "M06-family-musts/balanced": "balanced",
+    "M06-family-musts/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P071": {
+   "request_id": "W03-museum",
+   "first": "W03-museum/savings",
+   "second": "W03-museum/experience",
+   "A": "W03-museum/experience",
+   "B": "W03-museum/savings",
+   "variants": {
+    "W03-museum/savings": "savings",
+    "W03-museum/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P072": {
+   "request_id": "W22-cable-car",
+   "first": "W22-cable-car/savings",
+   "second": "W22-cable-car/balanced",
+   "A": "W22-cable-car/savings",
+   "B": "W22-cable-car/balanced",
+   "variants": {
+    "W22-cable-car/savings": "savings",
+    "W22-cable-car/balanced": "balanced"
+   },
+   "edits": 3,
+   "edit_share": 0.6,
+   "jaccard": 0.286,
+   "shared": 2
+  },
+  "P073": {
+   "request_id": "W07-sunset",
+   "first": "W07-sunset/savings",
+   "second": "W07-sunset/experience",
+   "A": "W07-sunset/experience",
+   "B": "W07-sunset/savings",
+   "variants": {
+    "W07-sunset/savings": "savings",
+    "W07-sunset/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P074": {
+   "request_id": "G-q22",
+   "first": "G-q22/balanced",
+   "second": "G-q22/experience",
+   "A": "G-q22/experience",
+   "B": "G-q22/balanced",
+   "variants": {
+    "G-q22/balanced": "balanced",
+    "G-q22/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 1.0,
+   "jaccard": 0.2,
+   "shared": 1
+  },
+  "P075": {
+   "request_id": "R-two-beach",
+   "first": "R-two-beach/savings",
+   "second": "R-two-beach/balanced",
+   "A": "R-two-beach/balanced",
+   "B": "R-two-beach/savings",
+   "variants": {
+    "R-two-beach/savings": "savings",
+    "R-two-beach/balanced": "balanced"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.174,
+   "shared": 4
+  },
+  "P076": {
+   "request_id": "G-q14",
+   "first": "G-q14/balanced",
+   "second": "G-q14/experience",
+   "A": "G-q14/balanced",
+   "B": "G-q14/experience",
+   "variants": {
+    "G-q14/balanced": "balanced",
+    "G-q14/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P077": {
+   "request_id": "W24-beach-seafood-noprofile",
+   "first": "W24-beach-seafood-noprofile/savings",
+   "second": "W24-beach-seafood-noprofile/balanced",
+   "A": "W24-beach-seafood-noprofile/balanced",
+   "B": "W24-beach-seafood-noprofile/savings",
+   "variants": {
+    "W24-beach-seafood-noprofile/savings": "savings",
+    "W24-beach-seafood-noprofile/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.143,
+   "shared": 2
+  },
+  "P078": {
+   "request_id": "W28-foodprefs-seafood",
+   "first": "W28-foodprefs-seafood/savings",
+   "second": "W28-foodprefs-seafood/experience",
+   "A": "W28-foodprefs-seafood/savings",
+   "B": "W28-foodprefs-seafood/experience",
+   "variants": {
+    "W28-foodprefs-seafood/savings": "savings",
+    "W28-foodprefs-seafood/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P079": {
+   "request_id": "X04-two-friends",
+   "first": "X04-two-friends/balanced",
+   "second": "X04-two-friends/experience",
+   "A": "X04-two-friends/experience",
+   "B": "X04-two-friends/balanced",
+   "variants": {
+    "X04-two-friends/balanced": "balanced",
+    "X04-two-friends/experience": "experience"
+   },
+   "edits": 15,
+   "edit_share": 1.0,
+   "jaccard": 0.071,
+   "shared": 2
+  },
+  "P080": {
+   "request_id": "G-q04",
+   "first": "G-q04/savings",
+   "second": "G-q04/balanced",
+   "A": "G-q04/balanced",
+   "B": "G-q04/savings",
+   "variants": {
+    "G-q04/savings": "savings",
+    "G-q04/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P081": {
+   "request_id": "M02-cau-rong+linh-ung",
+   "first": "M02-cau-rong+linh-ung/savings",
+   "second": "M02-cau-rong+linh-ung/experience",
+   "A": "M02-cau-rong+linh-ung/experience",
+   "B": "M02-cau-rong+linh-ung/savings",
+   "variants": {
+    "M02-cau-rong+linh-ung/savings": "savings",
+    "M02-cau-rong+linh-ung/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P082": {
+   "request_id": "W25-seafood-evening",
+   "first": "W25-seafood-evening/savings",
+   "second": "W25-seafood-evening/balanced",
+   "A": "W25-seafood-evening/savings",
+   "B": "W25-seafood-evening/balanced",
+   "variants": {
+    "W25-seafood-evening/savings": "savings",
+    "W25-seafood-evening/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P083": {
+   "request_id": "E01-allergy-seafood",
+   "first": "E01-allergy-seafood/savings",
+   "second": "E01-allergy-seafood/experience",
+   "A": "E01-allergy-seafood/savings",
+   "B": "E01-allergy-seafood/experience",
+   "variants": {
+    "E01-allergy-seafood/savings": "savings",
+    "E01-allergy-seafood/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P084": {
+   "request_id": "W08-hike",
+   "first": "W08-hike/balanced",
+   "second": "W08-hike/experience",
+   "A": "W08-hike/experience",
+   "B": "W08-hike/balanced",
+   "variants": {
+    "W08-hike/balanced": "balanced",
+    "W08-hike/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P085": {
+   "request_id": "G-q11",
+   "first": "G-q11/savings",
+   "second": "G-q11/balanced",
+   "A": "G-q11/savings",
+   "B": "G-q11/balanced",
+   "variants": {
+    "G-q11/savings": "savings",
+    "G-q11/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.4,
+   "shared": 4
+  },
+  "P086": {
+   "request_id": "T01-neutral",
+   "first": "T01-neutral/balanced",
+   "second": "T01-neutral/experience",
+   "A": "T01-neutral/experience",
+   "B": "T01-neutral/balanced",
+   "variants": {
+    "T01-neutral/balanced": "balanced",
+    "T01-neutral/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P087": {
+   "request_id": "W06-night-market",
+   "first": "W06-night-market/savings",
+   "second": "W06-night-market/experience",
+   "A": "W06-night-market/savings",
+   "B": "W06-night-market/experience",
+   "variants": {
+    "W06-night-market/savings": "savings",
+    "W06-night-market/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P088": {
+   "request_id": "G-q19",
+   "first": "G-q19/savings",
+   "second": "G-q19/experience",
+   "A": "G-q19/savings",
+   "B": "G-q19/experience",
+   "variants": {
+    "G-q19/savings": "savings",
+    "G-q19/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.6,
+   "shared": 3
+  },
+  "P089": {
+   "request_id": "D03-saturday-beach",
+   "first": "D03-saturday-beach/balanced",
+   "second": "D03-saturday-beach/experience",
+   "A": "D03-saturday-beach/experience",
+   "B": "D03-saturday-beach/balanced",
+   "variants": {
+    "D03-saturday-beach/balanced": "balanced",
+    "D03-saturday-beach/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P090": {
+   "request_id": "W05-coffee",
+   "first": "W05-coffee/savings",
+   "second": "W05-coffee/balanced",
+   "A": "W05-coffee/savings",
+   "B": "W05-coffee/balanced",
+   "variants": {
+    "W05-coffee/savings": "savings",
+    "W05-coffee/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P091": {
+   "request_id": "G-q13",
+   "first": "G-q13/savings",
+   "second": "G-q13/experience",
+   "A": "G-q13/experience",
+   "B": "G-q13/savings",
+   "variants": {
+    "G-q13/savings": "savings",
+    "G-q13/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.4,
+   "shared": 2
+  },
+  "P092": {
+   "request_id": "W27-history",
+   "first": "W27-history/balanced",
+   "second": "W27-history/experience",
+   "A": "W27-history/experience",
+   "B": "W27-history/balanced",
+   "variants": {
+    "W27-history/balanced": "balanced",
+    "W27-history/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P093": {
+   "request_id": "T16-couple-long",
+   "first": "T16-couple-long/savings",
+   "second": "T16-couple-long/balanced",
+   "A": "T16-couple-long/savings",
+   "B": "T16-couple-long/balanced",
+   "variants": {
+    "T16-couple-long/savings": "savings",
+    "T16-couple-long/balanced": "balanced"
+   },
+   "edits": 9,
+   "edit_share": 1.0,
+   "jaccard": 0.062,
+   "shared": 1
+  },
+  "P094": {
+   "request_id": "G-q27",
+   "first": "G-q27/balanced",
+   "second": "G-q27/experience",
+   "A": "G-q27/experience",
+   "B": "G-q27/balanced",
+   "variants": {
+    "G-q27/balanced": "balanced",
+    "G-q27/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.4,
+   "jaccard": 0.429,
+   "shared": 3
+  },
+  "P095": {
+   "request_id": "M07-noprofile-musts",
+   "first": "M07-noprofile-musts/savings",
+   "second": "M07-noprofile-musts/balanced",
+   "A": "M07-noprofile-musts/savings",
+   "B": "M07-noprofile-musts/balanced",
+   "variants": {
+    "M07-noprofile-musts/savings": "savings",
+    "M07-noprofile-musts/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.231,
+   "shared": 3
+  },
+  "P096": {
+   "request_id": "X06-two-low-budget",
+   "first": "X06-two-low-budget/savings",
+   "second": "X06-two-low-budget/experience",
+   "A": "X06-two-low-budget/savings",
+   "B": "X06-two-low-budget/experience",
+   "variants": {
+    "X06-two-low-budget/savings": "savings",
+    "X06-two-low-budget/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.125,
+   "shared": 3
+  },
+  "P097": {
+   "request_id": "G-q06",
+   "first": "G-q06/savings",
+   "second": "G-q06/experience",
+   "A": "G-q06/experience",
+   "B": "G-q06/savings",
+   "variants": {
+    "G-q06/savings": "savings",
+    "G-q06/experience": "experience"
+   },
+   "edits": 5,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P098": {
+   "request_id": "T03-family",
+   "first": "T03-family/balanced",
+   "second": "T03-family/experience",
+   "A": "T03-family/experience",
+   "B": "T03-family/balanced",
+   "variants": {
+    "T03-family/balanced": "balanced",
+    "T03-family/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P099": {
+   "request_id": "E04-six-people-2m",
+   "first": "E04-six-people-2m/savings",
+   "second": "E04-six-people-2m/balanced",
+   "A": "E04-six-people-2m/savings",
+   "B": "E04-six-people-2m/balanced",
+   "variants": {
+    "E04-six-people-2m/savings": "savings",
+    "E04-six-people-2m/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.143,
+   "shared": 2
+  },
+  "P100": {
+   "request_id": "T13-neutral-0718",
+   "first": "T13-neutral-0718/balanced",
+   "second": "T13-neutral-0718/experience",
+   "A": "T13-neutral-0718/experience",
+   "B": "T13-neutral-0718/balanced",
+   "variants": {
+    "T13-neutral-0718/balanced": "balanced",
+    "T13-neutral-0718/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P101": {
+   "request_id": "M07-noprofile-musts",
+   "first": "M07-noprofile-musts/savings",
+   "second": "M07-noprofile-musts/experience",
+   "A": "M07-noprofile-musts/savings",
+   "B": "M07-noprofile-musts/experience",
+   "variants": {
+    "M07-noprofile-musts/savings": "savings",
+    "M07-noprofile-musts/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 0.875,
+   "jaccard": 0.231,
+   "shared": 3
+  },
+  "P102": {
+   "request_id": "G-q25",
+   "first": "G-q25/balanced",
+   "second": "G-q25/experience",
+   "A": "G-q25/experience",
+   "B": "G-q25/balanced",
+   "variants": {
+    "G-q25/balanced": "balanced",
+    "G-q25/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P103": {
+   "request_id": "E03-avoid-nightlife",
+   "first": "E03-avoid-nightlife/savings",
+   "second": "E03-avoid-nightlife/balanced",
+   "A": "E03-avoid-nightlife/balanced",
+   "B": "E03-avoid-nightlife/savings",
+   "variants": {
+    "E03-avoid-nightlife/savings": "savings",
+    "E03-avoid-nightlife/balanced": "balanced"
+   },
+   "edits": 9,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P104": {
+   "request_id": "W16-cave",
+   "first": "W16-cave/savings",
+   "second": "W16-cave/balanced",
+   "A": "W16-cave/savings",
+   "B": "W16-cave/balanced",
+   "variants": {
+    "W16-cave/savings": "savings",
+    "W16-cave/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P105": {
+   "request_id": "W28-foodprefs-seafood",
+   "first": "W28-foodprefs-seafood/savings",
+   "second": "W28-foodprefs-seafood/balanced",
+   "A": "W28-foodprefs-seafood/balanced",
+   "B": "W28-foodprefs-seafood/savings",
+   "variants": {
+    "W28-foodprefs-seafood/savings": "savings",
+    "W28-foodprefs-seafood/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P106": {
+   "request_id": "W03-museum",
+   "first": "W03-museum/balanced",
+   "second": "W03-museum/experience",
+   "A": "W03-museum/experience",
+   "B": "W03-museum/balanced",
+   "variants": {
+    "W03-museum/balanced": "balanced",
+    "W03-museum/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P107": {
+   "request_id": "W10-gift",
+   "first": "W10-gift/savings",
+   "second": "W10-gift/balanced",
+   "A": "W10-gift/savings",
+   "B": "W10-gift/balanced",
+   "variants": {
+    "W10-gift/savings": "savings",
+    "W10-gift/balanced": "balanced"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.067,
+   "shared": 1
+  },
+  "P108": {
+   "request_id": "G-q27",
+   "first": "G-q27/savings",
+   "second": "G-q27/experience",
+   "A": "G-q27/experience",
+   "B": "G-q27/savings",
+   "variants": {
+    "G-q27/savings": "savings",
+    "G-q27/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 0.6,
+   "jaccard": 0.25,
+   "shared": 2
+  },
+  "P109": {
+   "request_id": "G-q15",
+   "first": "G-q15/savings",
+   "second": "G-q15/experience",
+   "A": "G-q15/experience",
+   "B": "G-q15/savings",
+   "variants": {
+    "G-q15/savings": "savings",
+    "G-q15/experience": "experience"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.333,
+   "shared": 2
+  },
+  "P110": {
+   "request_id": "G-q04",
+   "first": "G-q04/balanced",
+   "second": "G-q04/experience",
+   "A": "G-q04/experience",
+   "B": "G-q04/balanced",
+   "variants": {
+    "G-q04/balanced": "balanced",
+    "G-q04/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P111": {
+   "request_id": "G-q11",
+   "first": "G-q11/savings",
+   "second": "G-q11/experience",
+   "A": "G-q11/experience",
+   "B": "G-q11/savings",
+   "variants": {
+    "G-q11/savings": "savings",
+    "G-q11/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P112": {
+   "request_id": "D03-saturday-beach",
+   "first": "D03-saturday-beach/savings",
+   "second": "D03-saturday-beach/experience",
+   "A": "D03-saturday-beach/savings",
+   "B": "D03-saturday-beach/experience",
+   "variants": {
+    "D03-saturday-beach/savings": "savings",
+    "D03-saturday-beach/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P113": {
+   "request_id": "G-q18",
+   "first": "G-q18/savings",
+   "second": "G-q18/balanced",
+   "A": "G-q18/balanced",
+   "B": "G-q18/savings",
+   "variants": {
+    "G-q18/savings": "savings",
+    "G-q18/balanced": "balanced"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P114": {
+   "request_id": "G-q28",
+   "first": "G-q28/balanced",
+   "second": "G-q28/experience",
+   "A": "G-q28/balanced",
+   "B": "G-q28/experience",
+   "variants": {
+    "G-q28/balanced": "balanced",
+    "G-q28/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P115": {
+   "request_id": "G-q05",
+   "first": "G-q05/savings",
+   "second": "G-q05/experience",
+   "A": "G-q05/savings",
+   "B": "G-q05/experience",
+   "variants": {
+    "G-q05/savings": "savings",
+    "G-q05/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P116": {
+   "request_id": "X01-two-couple",
+   "first": "X01-two-couple/balanced",
+   "second": "X01-two-couple/experience",
+   "A": "X01-two-couple/experience",
+   "B": "X01-two-couple/balanced",
+   "variants": {
+    "X01-two-couple/balanced": "balanced",
+    "X01-two-couple/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.037,
+   "shared": 1
+  },
+  "P117": {
+   "request_id": "T09-family-0917-1.5m",
+   "first": "T09-family-0917-1.5m/savings",
+   "second": "T09-family-0917-1.5m/balanced",
+   "A": "T09-family-0917-1.5m/balanced",
+   "B": "T09-family-0917-1.5m/savings",
+   "variants": {
+    "T09-family-0917-1.5m/savings": "savings",
+    "T09-family-0917-1.5m/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 1.0,
+   "jaccard": 0.091,
+   "shared": 1
+  },
+  "P118": {
+   "request_id": "W17-beach-seafood-coffee",
+   "first": "W17-beach-seafood-coffee/balanced",
+   "second": "W17-beach-seafood-coffee/experience",
+   "A": "W17-beach-seafood-coffee/balanced",
+   "B": "W17-beach-seafood-coffee/experience",
+   "variants": {
+    "W17-beach-seafood-coffee/balanced": "balanced",
+    "W17-beach-seafood-coffee/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P119": {
+   "request_id": "W20-vegan",
+   "first": "W20-vegan/savings",
+   "second": "W20-vegan/experience",
+   "A": "W20-vegan/savings",
+   "B": "W20-vegan/experience",
+   "variants": {
+    "W20-vegan/savings": "savings",
+    "W20-vegan/experience": "experience"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P120": {
+   "request_id": "W18-museum-pagoda-market",
+   "first": "W18-museum-pagoda-market/savings",
+   "second": "W18-museum-pagoda-market/balanced",
+   "A": "W18-museum-pagoda-market/balanced",
+   "B": "W18-museum-pagoda-market/savings",
+   "variants": {
+    "W18-museum-pagoda-market/savings": "savings",
+    "W18-museum-pagoda-market/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P121": {
+   "request_id": "X03-two-beach-museum",
+   "first": "X03-two-beach-museum/balanced",
+   "second": "X03-two-beach-museum/experience",
+   "A": "X03-two-beach-museum/experience",
+   "B": "X03-two-beach-museum/balanced",
+   "variants": {
+    "X03-two-beach-museum/balanced": "balanced",
+    "X03-two-beach-museum/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.037,
+   "shared": 1
+  },
+  "P122": {
+   "request_id": "M01-ngu-hanh-son",
+   "first": "M01-ngu-hanh-son/savings",
+   "second": "M01-ngu-hanh-son/experience",
+   "A": "M01-ngu-hanh-son/savings",
+   "B": "M01-ngu-hanh-son/experience",
+   "variants": {
+    "M01-ngu-hanh-son/savings": "savings",
+    "M01-ngu-hanh-son/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P123": {
+   "request_id": "M04-order",
+   "first": "M04-order/balanced",
+   "second": "M04-order/experience",
+   "A": "M04-order/balanced",
+   "B": "M04-order/experience",
+   "variants": {
+    "M04-order/balanced": "balanced",
+    "M04-order/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P124": {
+   "request_id": "E05-solo-200k",
+   "first": "E05-solo-200k/savings",
+   "second": "E05-solo-200k/balanced",
+   "A": "E05-solo-200k/balanced",
+   "B": "E05-solo-200k/savings",
+   "variants": {
+    "E05-solo-200k/savings": "savings",
+    "E05-solo-200k/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 0.714,
+   "jaccard": 0.4,
+   "shared": 4
+  },
+  "P125": {
+   "request_id": "M03-three",
+   "first": "M03-three/savings",
+   "second": "M03-three/balanced",
+   "A": "M03-three/balanced",
+   "B": "M03-three/savings",
+   "variants": {
+    "M03-three/savings": "savings",
+    "M03-three/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P126": {
+   "request_id": "W12-spa",
+   "first": "W12-spa/savings",
+   "second": "W12-spa/experience",
+   "A": "W12-spa/experience",
+   "B": "W12-spa/savings",
+   "variants": {
+    "W12-spa/savings": "savings",
+    "W12-spa/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P127": {
+   "request_id": "W27-history",
+   "first": "W27-history/savings",
+   "second": "W27-history/experience",
+   "A": "W27-history/savings",
+   "B": "W27-history/experience",
+   "variants": {
+    "W27-history/savings": "savings",
+    "W27-history/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P128": {
+   "request_id": "G-q29",
+   "first": "G-q29/balanced",
+   "second": "G-q29/experience",
+   "A": "G-q29/experience",
+   "B": "G-q29/balanced",
+   "variants": {
+    "G-q29/balanced": "balanced",
+    "G-q29/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P129": {
+   "request_id": "G-q30",
+   "first": "G-q30/savings",
+   "second": "G-q30/balanced",
+   "A": "G-q30/savings",
+   "B": "G-q30/balanced",
+   "variants": {
+    "G-q30/savings": "savings",
+    "G-q30/balanced": "balanced"
+   },
+   "edits": 5,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P130": {
+   "request_id": "W21-banh-xeo",
+   "first": "W21-banh-xeo/balanced",
+   "second": "W21-banh-xeo/experience",
+   "A": "W21-banh-xeo/balanced",
+   "B": "W21-banh-xeo/experience",
+   "variants": {
+    "W21-banh-xeo/balanced": "balanced",
+    "W21-banh-xeo/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.167,
+   "shared": 2
+  },
+  "P131": {
+   "request_id": "X06-two-low-budget",
+   "first": "X06-two-low-budget/savings",
+   "second": "X06-two-low-budget/balanced",
+   "A": "X06-two-low-budget/balanced",
+   "B": "X06-two-low-budget/savings",
+   "variants": {
+    "X06-two-low-budget/savings": "savings",
+    "X06-two-low-budget/balanced": "balanced"
+   },
+   "edits": 13,
+   "edit_share": 0.929,
+   "jaccard": 0.227,
+   "shared": 5
+  },
+  "P132": {
+   "request_id": "W02-seafood",
+   "first": "W02-seafood/savings",
+   "second": "W02-seafood/balanced",
+   "A": "W02-seafood/savings",
+   "B": "W02-seafood/balanced",
+   "variants": {
+    "W02-seafood/savings": "savings",
+    "W02-seafood/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P133": {
+   "request_id": "T01-neutral",
+   "first": "T01-neutral/savings",
+   "second": "T01-neutral/experience",
+   "A": "T01-neutral/experience",
+   "B": "T01-neutral/savings",
+   "variants": {
+    "T01-neutral/savings": "savings",
+    "T01-neutral/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P134": {
+   "request_id": "W11-bar",
+   "first": "W11-bar/balanced",
+   "second": "W11-bar/experience",
+   "A": "W11-bar/balanced",
+   "B": "W11-bar/experience",
+   "variants": {
+    "W11-bar/balanced": "balanced",
+    "W11-bar/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P135": {
+   "request_id": "W22-cable-car",
+   "first": "W22-cable-car/savings",
+   "second": "W22-cable-car/experience",
+   "A": "W22-cable-car/savings",
+   "B": "W22-cable-car/experience",
+   "variants": {
+    "W22-cable-car/savings": "savings",
+    "W22-cable-car/experience": "experience"
+   },
+   "edits": 4,
+   "edit_share": 0.8,
+   "jaccard": 0.125,
+   "shared": 1
+  },
+  "P136": {
+   "request_id": "G-q13",
+   "first": "G-q13/balanced",
+   "second": "G-q13/experience",
+   "A": "G-q13/balanced",
+   "B": "G-q13/experience",
+   "variants": {
+    "G-q13/balanced": "balanced",
+    "G-q13/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 0.75,
+   "jaccard": 0.333,
+   "shared": 2
+  },
+  "P137": {
+   "request_id": "G-q20",
+   "first": "G-q20/savings",
+   "second": "G-q20/balanced",
+   "A": "G-q20/balanced",
+   "B": "G-q20/savings",
+   "variants": {
+    "G-q20/savings": "savings",
+    "G-q20/balanced": "balanced"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P138": {
+   "request_id": "G-q12",
+   "first": "G-q12/balanced",
+   "second": "G-q12/experience",
+   "A": "G-q12/balanced",
+   "B": "G-q12/experience",
+   "variants": {
+    "G-q12/balanced": "balanced",
+    "G-q12/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P139": {
+   "request_id": "W19-bun",
+   "first": "W19-bun/savings",
+   "second": "W19-bun/balanced",
+   "A": "W19-bun/savings",
+   "B": "W19-bun/balanced",
+   "variants": {
+    "W19-bun/savings": "savings",
+    "W19-bun/balanced": "balanced"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P140": {
+   "request_id": "G-q22",
+   "first": "G-q22/savings",
+   "second": "G-q22/experience",
+   "A": "G-q22/savings",
+   "B": "G-q22/experience",
+   "variants": {
+    "G-q22/savings": "savings",
+    "G-q22/experience": "experience"
+   },
+   "edits": 3,
+   "edit_share": 1.0,
+   "jaccard": 0.2,
+   "shared": 1
+  },
+  "P141": {
+   "request_id": "E02-wheelchair",
+   "first": "E02-wheelchair/savings",
+   "second": "E02-wheelchair/experience",
+   "A": "E02-wheelchair/savings",
+   "B": "E02-wheelchair/experience",
+   "variants": {
+    "E02-wheelchair/savings": "savings",
+    "E02-wheelchair/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P142": {
+   "request_id": "W05-coffee",
+   "first": "W05-coffee/savings",
+   "second": "W05-coffee/experience",
+   "A": "W05-coffee/experience",
+   "B": "W05-coffee/savings",
+   "variants": {
+    "W05-coffee/savings": "savings",
+    "W05-coffee/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P143": {
+   "request_id": "W15-church",
+   "first": "W15-church/balanced",
+   "second": "W15-church/experience",
+   "A": "W15-church/balanced",
+   "B": "W15-church/experience",
+   "variants": {
+    "W15-church/balanced": "balanced",
+    "W15-church/experience": "experience"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.0,
+   "shared": 0
+  },
+  "P144": {
+   "request_id": "T14-solo-300k",
+   "first": "T14-solo-300k/savings",
+   "second": "T14-solo-300k/experience",
+   "A": "T14-solo-300k/savings",
+   "B": "T14-solo-300k/experience",
+   "variants": {
+    "T14-solo-300k/savings": "savings",
+    "T14-solo-300k/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P145": {
+   "request_id": "X04-two-friends",
+   "first": "X04-two-friends/savings",
+   "second": "X04-two-friends/balanced",
+   "A": "X04-two-friends/balanced",
+   "B": "X04-two-friends/savings",
+   "variants": {
+    "X04-two-friends/savings": "savings",
+    "X04-two-friends/balanced": "balanced"
+   },
+   "edits": 16,
+   "edit_share": 0.941,
+   "jaccard": 0.103,
+   "shared": 3
+  },
+  "P146": {
+   "request_id": "G-q07",
+   "first": "G-q07/balanced",
+   "second": "G-q07/experience",
+   "A": "G-q07/balanced",
+   "B": "G-q07/experience",
+   "variants": {
+    "G-q07/balanced": "balanced",
+    "G-q07/experience": "experience"
+   },
+   "edits": 6,
+   "edit_share": 0.857,
+   "jaccard": 0.273,
+   "shared": 3
+  },
+  "P147": {
+   "request_id": "G-q03",
+   "first": "G-q03/savings",
+   "second": "G-q03/balanced",
+   "A": "G-q03/savings",
+   "B": "G-q03/balanced",
+   "variants": {
+    "G-q03/savings": "savings",
+    "G-q03/balanced": "balanced"
+   },
+   "edits": 2,
+   "edit_share": 0.5,
+   "jaccard": 0.333,
+   "shared": 2
+  },
+  "P148": {
+   "request_id": "W06-night-market",
+   "first": "W06-night-market/savings",
+   "second": "W06-night-market/balanced",
+   "A": "W06-night-market/balanced",
+   "B": "W06-night-market/savings",
+   "variants": {
+    "W06-night-market/savings": "savings",
+    "W06-night-market/balanced": "balanced"
+   },
+   "edits": 8,
+   "edit_share": 1.0,
+   "jaccard": 0.067,
+   "shared": 1
+  },
+  "P149": {
+   "request_id": "D01-monday",
+   "first": "D01-monday/savings",
+   "second": "D01-monday/experience",
+   "A": "D01-monday/savings",
+   "B": "D01-monday/experience",
+   "variants": {
+    "D01-monday/savings": "savings",
+    "D01-monday/experience": "experience"
+   },
+   "edits": 7,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 1
+  },
+  "P150": {
+   "request_id": "R-two-beach",
+   "first": "R-two-beach/balanced",
+   "second": "R-two-beach/experience",
+   "A": "R-two-beach/balanced",
+   "B": "R-two-beach/experience",
+   "variants": {
+    "R-two-beach/balanced": "balanced",
+    "R-two-beach/experience": "experience"
+   },
+   "edits": 14,
+   "edit_share": 1.0,
+   "jaccard": 0.077,
+   "shared": 2
+  }
+ },
+ "requests": {
+  "T01-neutral": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T02-couple": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T03-family": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T04-friends-late": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "22:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T05-solo-1m": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 1000000,
+    "days": 1,
+    "travelers": 1,
+    "profile": {
+     "party_type": "solo",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T06-couple-0718": {
+   "source": "audit",
+   "trip": {
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T07-couple-morning": {
+   "source": "audit",
+   "trip": {
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T08-couple-afternoon": {
+   "source": "audit",
+   "trip": {
+    "start_time": "13:00",
+    "end_time": "21:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T09-family-0917-1.5m": {
+   "source": "audit",
+   "trip": {
+    "start_time": "09:00",
+    "end_time": "17:00",
+    "budget": 1500000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T10-friends-evening": {
+   "source": "audit",
+   "trip": {
+    "start_time": "16:00",
+    "end_time": "23:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T11-neutral-0915": {
+   "source": "audit",
+   "trip": {
+    "start_time": "09:00",
+    "end_time": "15:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T12-couple-600k": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 600000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T13-neutral-0718": {
+   "source": "audit",
+   "trip": {
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T14-solo-300k": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 300000,
+    "days": 1,
+    "travelers": 1,
+    "profile": {
+     "party_type": "solo",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T15-family-2m": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 2000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "T16-couple-long": {
+   "source": "audit",
+   "trip": {
+    "start_time": "06:00",
+    "end_time": "22:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W01-beach": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "tắm biển"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W02-seafood": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "hải sản"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W03-museum": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "activities": [
+     "bảo tàng"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W04-pagoda": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "chùa"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W05-coffee": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "cà phê"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W06-night-market": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "21:30",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "chợ đêm"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W07-sunset": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "ngắm hoàng hôn"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W08-hike": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "leo núi"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W09-mi-quang": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "activities": [
+     "mì quảng"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W10-gift": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "activities": [
+     "mua quà"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W11-bar": {
+   "source": "audit",
+   "trip": {
+    "start_time": "14:00",
+    "end_time": "23:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "activities": [
+     "quán bar"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W12-spa": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "massage"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W13-park": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "activities": [
+     "công viên"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W14-bridge": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "cầu"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W15-church": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "activities": [
+     "nhà thờ"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W16-cave": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "hang động"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W17-beach-seafood-coffee": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "tắm biển",
+     "hải sản",
+     "cà phê"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W18-museum-pagoda-market": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "bảo tàng",
+     "chùa",
+     "chợ"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W19-bun": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "bún"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W20-vegan": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "ăn chay"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W21-banh-xeo": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "bánh xèo"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W22-cable-car": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "cáp treo"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W23-sunrise": {
+   "source": "audit",
+   "trip": {
+    "start_time": "05:00",
+    "end_time": "17:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "ngắm bình minh"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W24-beach-seafood-noprofile": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W25-seafood-evening": {
+   "source": "audit",
+   "trip": {
+    "start_time": "15:00",
+    "end_time": "21:30",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "hải sản"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W26-shopping": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "activities": [
+     "mua sắm"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W27-history": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "lịch sử"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "W28-foodprefs-seafood": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2,
+     "food_prefs": [
+      "hải sản"
+     ]
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M01-ngu-hanh-son": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Ngũ Hành Sơn (Thủy Sơn)"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M02-cau-rong+linh-ung": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Cầu Rồng",
+     "Chùa Linh Ứng Sơn Trà"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M03-three": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Ngũ Hành Sơn (Thủy Sơn)",
+     "Bãi biển Mỹ Khê",
+     "Chợ Hàn"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M04-order": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Bảo tàng Điêu khắc Chăm Đà Nẵng",
+     "Chợ Cồn"
+    ],
+    "order_prefs": [
+     [
+      "Chợ Cồn",
+      "Bảo tàng Điêu khắc Chăm Đà Nẵng"
+     ]
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M05-ba-na": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Sun World Bà Nà Hills"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M06-family-musts": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "must_visit": [
+     "Bảo Tàng Đà Nẵng",
+     "Công Viên APEC"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "M07-noprofile-musts": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "must_visit": [
+     "Ngũ Hành Sơn (Thủy Sơn)",
+     "Bãi biển Mỹ Khê"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "D01-monday": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "date": "2026-11-16",
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "D02-sunday-museum": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "activities": [
+     "bảo tàng"
+    ],
+    "date": "2026-11-15",
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "D03-saturday-beach": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "tắm biển"
+    ],
+    "date": "2026-11-14",
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X01-two-couple": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X02-two-family": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X03-two-beach-museum": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "tắm biển",
+     "bảo tàng"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X04-two-friends": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X05-two-neutral": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 2,
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X06-two-low-budget": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 800000,
+    "days": 2,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "X07-two-musts": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "must_visit": [
+     "Ngũ Hành Sơn (Thủy Sơn)",
+     "Chùa Linh Ứng Sơn Trà",
+     "Chợ Hàn"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "E01-allergy-seafood": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2,
+     "allergy": [
+      "seafood"
+     ]
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "E02-wheelchair": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1,
+     "accessibility": [
+      "wheelchair"
+     ]
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "E03-avoid-nightlife": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 1,
+    "travelers": 4,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3,
+     "must_avoid": [
+      "nightlife"
+     ]
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "E04-six-people-2m": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 2000000,
+    "days": 1,
+    "travelers": 6,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "E05-solo-200k": {
+   "source": "audit",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 200000,
+    "days": 1,
+    "travelers": 1,
+    "profile": {
+     "party_type": "solo",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "R-pagoda-low": {
+   "source": "review",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 600000,
+    "days": 1,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "chùa"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "R-two-beach": {
+   "source": "review",
+   "trip": {
+    "start_time": "08:00",
+    "end_time": "20:00",
+    "budget": 3000000,
+    "days": 2,
+    "travelers": 2,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "activities": [
+     "tắm biển"
+    ],
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q01": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "osm:node/11423808688",
+     "osm:way/631070197"
+    ],
+    "avoid": [
+     "ChIJ7fA2ROsZQjERuQWylV-XvDg"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/11423808688",
+      "osm:way/631070197"
+     ]
+    ],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q02": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJ55nxA9MZQjERNOaUcyvyXxg"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q03": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "manual:cau-tinh-yeu",
+     "ChIJA0bFwKoZQjER--pX5_3_cD0"
+    ],
+    "avoid": [
+     "ChIJTQuJbKYZQjERAE9fPrQroZw"
+    ],
+    "order_prefs": [
+     [
+      "manual:cau-tinh-yeu",
+      "ChIJA0bFwKoZQjER--pX5_3_cD0"
+     ]
+    ],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q04": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJrcgyp-wZQjERNqpo6xe5Ogw"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q05": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJNdWwUgARQjERansIEJQleAU",
+     "ChIJedpeSI4ZQjERYqZQdHBbz5E"
+    ],
+    "avoid": [
+     "osm:node/1623183649"
+    ],
+    "order_prefs": [
+     [
+      "ChIJNdWwUgARQjERansIEJQleAU",
+      "ChIJedpeSI4ZQjERYqZQdHBbz5E"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q06": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJ864pbQA9QjER--PIUcxqd48"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q07": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/12404434601",
+     "ChIJlZA7YgEZQjERwBfzBwsUo18"
+    ],
+    "avoid": [
+     "ChIJ5ySJbAAZQjEROESCTb3NJsw"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/12404434601",
+      "ChIJlZA7YgEZQjERwBfzBwsUo18"
+     ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q08": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJYahwiHIXQjER0CIGd09pgcg"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q09": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/6483231385",
+     "ChIJLX9s7EUbQjERdsy67X5-NrE"
+    ],
+    "avoid": [
+     "osm:node/11919603867"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/6483231385",
+      "ChIJLX9s7EUbQjERdsy67X5-NrE"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q10": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:way/630377259"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q11": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJJexJsaUXQjERb9rmSRBkLf0",
+     "ChIJbbs1ZTQYQjERi3OdfmnRk2g"
+    ],
+    "avoid": [
+     "ChIJka0rSjkYQjERCmramEII0n4"
+    ],
+    "order_prefs": [
+     [
+      "ChIJJexJsaUXQjERb9rmSRBkLf0",
+      "ChIJbbs1ZTQYQjERi3OdfmnRk2g"
+     ]
+    ],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q12": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/4965493634"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q13": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "ChIJCQlahDsZQjER9ON_UbUNqiQ",
+     "ChIJu6FQjzUYQjER39TMpgQVRUs"
+    ],
+    "avoid": [
+     "osm:node/4401168602"
+    ],
+    "order_prefs": [
+     [
+      "ChIJCQlahDsZQjER9ON_UbUNqiQ",
+      "ChIJu6FQjzUYQjER39TMpgQVRUs"
+     ]
+    ],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q14": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/7208591085"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q15": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:way/565592419",
+     "osm:node/11890992769"
+    ],
+    "avoid": [
+     "ChIJ_QZY3EMXQjERjA5RvSnV9AM"
+    ],
+    "order_prefs": [
+     [
+      "osm:way/565592419",
+      "osm:node/11890992769"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q16": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/4721435589"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q17": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/12647213526",
+     "manual:cau-tinh-yeu"
+    ],
+    "avoid": [
+     "ChIJyVQ3iwoXQjERNILX5sPCUKA"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/12647213526",
+      "manual:cau-tinh-yeu"
+     ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q18": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJu6FQjzUYQjER39TMpgQVRUs"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q19": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [
+     "ChIJEymIkTYYQjERWO-pgjkKGMk",
+     "ChIJN84BNSQXQjERyy7N3rDXisc"
+    ],
+    "avoid": [
+     "manual:ca-chep-hoa-rong"
+    ],
+    "order_prefs": [
+     [
+      "ChIJEymIkTYYQjERWO-pgjkKGMk",
+      "ChIJN84BNSQXQjERyy7N3rDXisc"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q20": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/6224346486"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q22": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/6483231385"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q23": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+     "osm:node/1335374858"
+    ],
+    "avoid": [
+     "osm:node/13164991521"
+    ],
+    "order_prefs": [
+     [
+      "ChIJw4WrdmsZQjERRCJKWvRJHtI",
+      "osm:node/1335374858"
+     ]
+    ],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q24": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:way/210966819"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q25": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJIRqUZWgZQjERwaNywpofxfk",
+     "ChIJo8N_zUw9QjERgutJ9u3-n7Y"
+    ],
+    "avoid": [
+     "ChIJwdZa4eQ7JQwRYcRRBR0ZE24"
+    ],
+    "order_prefs": [
+     [
+      "ChIJIRqUZWgZQjERwaNywpofxfk",
+      "ChIJo8N_zUw9QjERgutJ9u3-n7Y"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q26": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJ8VqGDeYRQjERVEkumiIa714"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "tắm biển",
+     "hải sản"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q27": {
+   "source": "gold",
+   "trip": {
+    "budget": 3000000,
+    "travelers": 4,
+    "start_time": "13:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "ChIJxdBK6SsYQjERYojL_cVEkbs",
+     "osm:node/5674096859"
+    ],
+    "avoid": [
+     "ChIJYQkmfagfQjER0iIRsKZ0Rcc"
+    ],
+    "order_prefs": [
+     [
+      "ChIJxdBK6SsYQjERYojL_cVEkbs",
+      "osm:node/5674096859"
+     ]
+    ],
+    "activities": [
+     "leo núi",
+     "tắm biển"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q28": {
+   "source": "gold",
+   "trip": {
+    "budget": 1000000,
+    "travelers": 2,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "osm:node/4254168216"
+    ],
+    "order_prefs": [],
+    "activities": [
+     "bảo tàng"
+    ],
+    "days": 1,
+    "profile": {
+     "party_type": "couple",
+     "pace": 2,
+     "fitness": 2
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q29": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "18:00",
+    "must_visit": [
+     "osm:node/3760247201",
+     "osm:node/10154412491"
+    ],
+    "avoid": [
+     "ChIJKdW4YgAfQjERF1TVangBTwY"
+    ],
+    "order_prefs": [
+     [
+      "osm:node/3760247201",
+      "osm:node/10154412491"
+     ]
+    ],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "family",
+     "pace": 1,
+     "fitness": 1
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  },
+  "G-q30": {
+   "source": "gold",
+   "trip": {
+    "budget": 5000000,
+    "travelers": 4,
+    "start_time": "07:00",
+    "end_time": "12:00",
+    "must_visit": [],
+    "avoid": [
+     "ChIJyUfZ9fAZQjERIMtiBaxkTko"
+    ],
+    "order_prefs": [],
+    "activities": [],
+    "days": 1,
+    "profile": {
+     "party_type": "friends",
+     "pace": 3,
+     "fitness": 3
+    },
+    "origin": {
+     "poi_id": "ChIJISuvVcsZQjERhnOk-O_w9pI",
+     "label": "Moonlight Hotel"
+    }
+   }
+  }
+ },
+ "dropped": [
+  {
+   "request_id": "M08-two-temples",
+   "first": "savings",
+   "second": "balanced",
+   "reason": "plan not shown by the app: savings, balanced"
+  },
+  {
+   "request_id": "M08-two-temples",
+   "first": "savings",
+   "second": "experience",
+   "reason": "plan not shown by the app: savings, experience"
+  },
+  {
+   "request_id": "M08-two-temples",
+   "first": "balanced",
+   "second": "experience",
+   "reason": "plan not shown by the app: balanced, experience"
+  },
+  {
+   "request_id": "G-q01",
+   "first": "savings",
+   "second": "balanced",
+   "reason": "near-identical",
+   "edits": 1,
+   "edit_share": 0.333,
+   "jaccard": 0.5,
+   "shared": 2
+  },
+  {
+   "request_id": "G-q09",
+   "first": "balanced",
+   "second": "experience",
+   "reason": "near-identical",
+   "edits": 1,
+   "edit_share": 0.333,
+   "jaccard": 0.5,
+   "shared": 2
+  },
+  {
+   "request_id": "G-q21",
+   "first": "savings",
+   "second": "balanced",
+   "reason": "plan not shown by the app: savings, balanced"
+  },
+  {
+   "request_id": "G-q21",
+   "first": "savings",
+   "second": "experience",
+   "reason": "plan not shown by the app: savings, experience"
+  },
+  {
+   "request_id": "G-q21",
+   "first": "balanced",
+   "second": "experience",
+   "reason": "plan not shown by the app: balanced, experience"
+  }
+ ]
+}
