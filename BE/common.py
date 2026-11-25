@@ -89,6 +89,16 @@ def day_spans(spec: str) -> list[tuple[int, int]]:
     return merged
 
 
+def day_sessions(spec: str) -> list[tuple[int, int]]:
+    """The spans of one hours element on the `day_spans` clock, sorted, NOT merged.
+
+    A class sold in sessions lists them in one element, and two may overlap
+    ("09:00-13:30, 12:00-16:30"). Each session is booked whole, so merged into one
+    09:00-16:30 span a 4.5 h class could start at 10:23, between two sessions.
+    """
+    return sorted({(o, c if c > o else c + DAY_MIN) for o, c in _intervals(spec)})
+
+
 
 def parse_windows(hours: list | None) -> list[tuple[int, int]]:
     """Every 'HH:MM-HH:MM' window of `hours` as same-day minutes, sorted.
@@ -125,6 +135,28 @@ def open_windows(hours: list | None) -> list[tuple[int, int]] | None:
     return sorted(common)
 
 
+def is_by_booking(poi: dict | None) -> bool:
+    """hours.kind == "by_booking": sold as fixed sessions (a cooking class)."""
+    return ((poi or {}).get("hours") or {}).get("kind") == "by_booking"
+
+
+def session_windows(hours: list | None) -> list[tuple[int, int]] | None:
+    """The sessions of a by_booking stop that every listed variant sells.
+
+    Like `open_windows`, but a session is a whole unit (`day_sessions`): only one
+    listed on every variant is safe to book, and sessions are never merged. The
+    solver then fits a visit inside one session, as gate VROH checks each span on
+    its own; with the dwell set to the session length (`migrate_v2.apply_booking`)
+    that visit is exactly the session.
+    None = no parsable hours; [] = no session sold on every variant.
+    """
+    variants = [set(day_sessions(h)) for h in hours or []]
+    variants = [v for v in variants if v]
+    if not variants:
+        return None
+    return sorted(set.intersection(*variants))
+
+
 # Hours assumed for a POI that has none, so a missing value never reads as
 # "open all trip" (a pagoda at 23:05). Each entry is the 15-minute slots in
 # which >= SAFE_HOURS_SHARE of that group's POIs with sourced hours are open,
@@ -158,13 +190,15 @@ def hours_group(cat: str) -> str:
 def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     """`open_windows` of the POI's hours, else of its group's SAFE_HOURS.
 
+    A by_booking stop takes its `session_windows` instead: its sessions stay apart.
     None = neither (the caller keeps its default, e.g. the trip window for a
     legacy fixture without `cat`); [] = no time is safe to schedule, which is
     also a POI closed on the trip's date (`poi_on_date`).
     """
     if poi.get("closed_today"):
         return []
-    wins = open_windows(poi.get("opening_hours"))
+    hours = poi.get("opening_hours")
+    wins = session_windows(hours) if is_by_booking(poi) else open_windows(hours)
     if wins is not None:
         return wins
     safe = SAFE_HOURS.get(hours_group(poi.get("cat") or ""))
