@@ -57,6 +57,32 @@ Savings lặp nhiều hơn: 13/15 lịch lặp là nhóm phố–công trình (C
 
 `compare_heldout_trial.json`: bản thử trước khi gom luật (cạnh vẫn trừ phút chạy xe, τ 0,0083). Vẫn là chỉnh tay; bước sau là học trọng số (`docs/travelagent/OBJECTIVE_V1.md`).
 
+## Bước 1: T11 điểm trùng, bữa tối, nhịp, ngân sách giải (24–25/11, `compare_dedup_*.json`)
+
+Từ 25/11 v1 là mặc định (`DAVEL_OBJECTIVE=legacy` để so). Đo trên `main` sau PR #29–#37 (snapshot 1.029 POI, nhãn món `tags.dishes`), legacy và v1 cùng data.
+
+Phát hiện sau lần đo đầu: v1 phạt chạy xe mạnh hơn nên gom điểm sát nhau và chọn nhiều cặp "một chỗ hai tên" hơn legacy (Hải Vân Quan + Đèo Hải Vân 2 → 9 lịch, Chợ Hàn + Chợ Cồn 0 → 5, mì Quảng hai lần 2 → 6). Đọc từng lịch còn thấy ngày qua buổi tối thiếu bữa tối và CP-SAT dừng ở lời giải kém. Đã sửa:
+
+- **T11** (`objective.duplicate_counts`, `dup_*` trong `v1.json`): 2,0U điểm thứ hai của một `alt_group`; 2,0U điểm "dạo cả khu" + điểm trong khu (`requires_ticket_of`); 1,5U chợ ban ngày thứ hai (food tour 0,1U); 0,5U bữa thứ hai cùng món (nhãn `tags.dishes`, không có thì suy từ tên; "món chay" không tính). Đếm trên cả ngày. Mềm; cứng khi ở `strict_rules`.
+- **Greedy hint** bỏ qua điểm trùng (`_hint_dup_kinds`).
+- **Bữa tối** 0,8 → 1,2U. **T8 đếm điểm tham quan**: bữa trưa và tối không tính nhịp, quán thứ ba trở đi và bữa sáng có tính (`objective.paced_stops`); một khung bữa chỉ giữ chỗ khi ngày còn ~90 phút để ăn.
+- **Ngân sách CP-SAT của v1 × 1,6** (`search_scale`, 5 → 8 đơn vị): ở 5 đơn vị một ngày khách tiết kiệm kém tối ưu 32% (3 quán ăn).
+- **Data** (`decisions_zfinal_20261124_dedup.json`): `alt_group` Hải Vân, Phố cổ + Phố đi bộ phố cổ; gộp Bãi tắm Nguyễn Thần Hiến → Bãi biển Non Nước, Bãi Biển Thiên Đường → Bãi Tắm Thanh Khê; Quốc Tự Tam Thai là chùa; Khu ẩm thực Chợ Cồn là chỗ ăn. `migrate_v2` tính lại loại điểm khi quyết định đổi category. `must_visit` trỏ tới bản ghi đã gộp được chuyển sang bản ghi giữ lại (`BE.common.merged_into`, router và eval).
+- **Replan** gán nhóm / zone / khoá T11 như lần lập đầu.
+
+| Bộ | Legacy → v1 | Có lịch / gate / bữa trưa | Chạy xe trung vị (phút) | Trùng: món / chợ / cùng chỗ / khu (số lịch) | Lặp nhóm | Thời gian giải trung vị (s) |
+|---|---|---|---|---|---|---|
+| Held-out 120 | | 120 / 120 / 49 → giữ nguyên | 55,5 → 26 | 5/1/2/1 → 2/0/0/0 | 36 → 37 | 17,7 → 18,1 |
+| Gold 30 | | 29 / 29 / 10 → giữ nguyên | 59 → 24 | 0/0/1/1 → 0/0/0/0 | 9 → 10 | 9,8 → 11,7 |
+| Savings 30 | | 30 / 30 / 14 → giữ nguyên | 32,5 → 27 | 2/0/1/0 → 0/0/0/0 | 9 → 14 | 18,9 → 19,9 |
+| Experience 30 | | 30 / 30 / 14 → giữ nguyên | 53,5 → 41,5 | 3/0/1/14 → 2/0/0/0 | 4 → 4 | 14,9 → 26,5 |
+
+Ngày đi qua buổi tối có ăn tối (legacy → v1): held-out 26/26 → 24/26, savings 8/8 → 6/8, experience 7/8 → 6/8. Các ngày thiếu đều có lý do: 6 khách với ngân sách 500 nghìn, `must_visit` Phố cổ Hội An tới 19:51, ngày kết thúc ở chợ đêm (ăn ở chợ). Hai bữa cách nhau dưới 2,5 giờ: held-out 0 → 3, gold 0 → 1.
+
+`pytest` đầy đủ: ở cả hai chế độ chỉ lỗi 28 test có sẵn trên `main` + 4 test ngoài phạm vi (`test_groq`: máy đặt `GROQ_API_KEY`; 2 `test_migrations`: cần Postgres local; `test_replan_window`: lỗi trên `origin/main`).
+
+Còn mở: experience giải chậm hơn 78% (ngân sách × 1,6); savings lặp nhóm 9 → 14 (cầu + phố du lịch, β phố 0,5); vài ngày đặt quán thứ hai lệch giờ khi khách ghi thích món đó (điểm gu cao) — để bước học trọng số; CP-SAT vẫn có thể dừng ở lời giải kém ở ngân sách giới hạn — gợi ý lời giải tốt hơn (pointer, bước 5).
+
 ## Chạy lại
 
 ```bash
@@ -66,4 +92,5 @@ python reports/objective_v1/scripts/eval_objective.py <repo> <data> <ids> out_v1
 python reports/objective_v1/scripts/eval_objective.py <repo> <data> <ids> out_v1_savings.jsonl v1:savings 2 30
 python reports/objective_v1/scripts/analyze_objective.py <repo> out_legacy.jsonl out_v1.jsonl
 python reports/objective_v1/scripts/eval_gold.py <repo> gold_v1.jsonl v1 2
+# đếm điểm trùng có sẵn trong analyze_objective.py (plans_with_duplicates)
 ```

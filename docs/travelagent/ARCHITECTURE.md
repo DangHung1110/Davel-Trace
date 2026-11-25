@@ -15,7 +15,7 @@ Hệ thống gồm **một đường đi của request (10 bước)** và **hai 
 | 5 | thời gian ở + `matrix.py` | POI → d_i (p50, p75); ma trận OSRM → m_ij | thời lượng sát thực tế; tính cả chặng từ khách sạn | model online + ma trận | prior 31 loại; hệ số giờ chỉ để kiểm (A4) |
 | 6 | `_cap_candidates` (sau này bộ lọc học) | 590 → 40 ứng viên + sàn must_visit, hoạt động đã nêu, quán ăn | thu nhỏ bài toán | luật → model offline | top-40 ở v1; LightGBM khi thắng top-40 |
 | 7 | gợi ý lời giải | 40 ứng viên → thứ tự gợi ý (`AddHint`) | CP-SAT tìm lời giải nhanh hơn | greedy → model offline | greedy hint có; pointer để sau |
-| 8 | `optimizer.py`, `profiles.py` | ứng viên, d_i, m_ij, ràng buộc, trọng số w → lịch | chọn và xếp điểm tối đa J | solver | v1 sau cờ `DAVEL_OBJECTIVE=v1` |
+| 8 | `optimizer.py`, `profiles.py` | ứng viên, d_i, m_ij, ràng buộc, trọng số w → lịch | chọn và xếp điểm tối đa J | solver | v1 mặc định từ 25/11 (`DAVEL_OBJECTIVE=legacy` để so) |
 | 9 | `pool.py`, `gate.py` | 3 lịch (3 bộ trọng số theo profile) → lịch đã kiểm | gate chốt bữa trưa và luật cứng; luật gu chỉ ghi số liệu | luật | có |
 | 10 | `response.py` + app | lịch → hiển thị, chạy chuyến, replan, ghi log | | giao diện | thiếu log giờ đến/rời, lý do bỏ, đánh giá |
 
@@ -39,6 +39,7 @@ Chuyến 2 ngày: `multiday.py` chạy bước 6–9 cho từng ngày. Replan (`
 ```
 J = Σ v_i x_i + w_state·S − T3 lặp nhóm − T4 liền kề cùng nhóm + T5 bữa đúng giờ
     − T6 bữa dồn + T7 nghỉ trưa − T8 vượt nhịp − T9 chạy xe/đổi vùng + T10 PATM
+    − T11 điểm trùng
 ```
 
 Chi tiết từng số hạng, trọng số và cách mã hoá: `OBJECTIVE_V1.md`.
@@ -49,7 +50,7 @@ Chi tiết từng số hạng, trọng số và cách mã hoá: `OBJECTIVE_V1.md
 |---|---|---|
 | physical | FAR, VROH, B3 | ràng buộc CP-SAT + gate cứng |
 | user | PROFILE_SAFE, BCS, ETB, LUNCH, must_visit / avoid | ràng buộc CP-SAT + gate cứng (LUNCH nằm trong HCS) |
-| taste | A1, CAFE_CAP, CATEGORY_CAP, NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH | v1: số hạng T3–T7, gate chỉ báo cáo; cứng lại khi có trong `strict_rules` |
+| taste | A1, CAFE_CAP, CATEGORY_CAP, NO_CONSECUTIVE, NO_ADJACENT_FOOD, REST_FOLLOWS_LUNCH; SAME_SITE, MARKET_REPEAT, SAME_DISH | v1: số hạng T3–T7 và T11 (điểm trùng), gate chỉ báo cáo (T11 không có check gate riêng để khoá `constraint_status` không đổi; báo cáo eval tự đếm); cứng lại khi có trong `strict_rules` |
 | quality | F1, TIME_FIT, DINNER | chỉ báo cáo |
 | edge | A2, B1, B2, E2 | legacy: phạt trên cạnh q_ij; v1: T6, T4, T3, T2 lo, cạnh chỉ còn điểm PATM |
 

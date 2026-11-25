@@ -37,6 +37,11 @@ def init(repo: str, config: str, model_dir: str):
 def solve(rec: dict) -> dict:
     t0 = time.time()
     trip = {**rec["trip"], "profile": rec["profile"], "meals": True}
+    # an old request may name a record merged into another one ("gộp vào"): the
+    # kept one, as the API does (routers/itinerary)
+    from BE.common import merged_into
+    by_id = _G["by_id"]
+    trip["must_visit"] = [merged_into(by_id.get(m)) or m for m in trip.get("must_visit") or []]
     found = _G["retrieval"].retrieve(trip, _G["pois"])
     cids = [c["poi_id"] for c in found["candidates"]]
     ranked = _G["rank"].rank([_G["by_id"][i] for i in cids], {"budget": trip["budget"]},

@@ -35,6 +35,12 @@ def main():
     by_id = {p["poi_id"]: p for p in pois}
     cells = load_matrix_cells(snap)
     group = {pid: objective.diversity_group(p) for pid, p in by_id.items()}
+    # T11 keys as the solver sees them (objective.stub_keys on the runtime view)
+    from BE.eval import baselines
+    from BE.app.services.optimizer import poi_to_stub
+    view = {p["poi_id"]: p for p in baselines.load_pois(snap)}
+    stub = {pid: poi_to_stub(p, None, 1.0, parent=objective.parent_of(p, view))
+            for pid, p in view.items()}
 
     runs = {"legacy": load(legacy_path), "v1": load(v1_path)}
     common = sorted(set(runs["legacy"]) & set(runs["v1"]))
@@ -66,6 +72,12 @@ def main():
             m["two_beaches"].append(1 if cnt.get("beach", 0) >= 2 else 0)
             m["adjacent_same"].append(sum(1 for a, b in zip(ids, ids[1:])
                                           if group[a] and group[a] == group[b]))
+            # near-duplicates (T11): plans with at least one of each kind
+            dup = objective.duplicate_counts([stub[p] for p in ids])
+            for kind, count in dup.items():
+                m["dup_" + kind].append(1 if count else 0)
+            mk = [k for k, p in enumerate(ids) if stub[p].substitute]
+            m["dup_market_sandwich"].append(1 if any(b - a == 2 for a, b in zip(mk, mk[1:])) else 0)
             trip = r["trip"]
             if (trip.get("profile") or {}) and meal_window_present(trip, "lunch"):
                 lunch = any(group[p] == "" and by_id[p]["category"] == "restaurant"
@@ -96,6 +108,8 @@ def main():
             "plans_with_repeat_group": f"{sum(m['repeat_plan'])}/{solved}",
             "plans_with_two_beaches": f"{sum(m['two_beaches'])}/{solved}",
             "adjacent_same_group_mean": mean("adjacent_same"),
+            "plans_with_duplicates": {k[4:]: f"{sum(v)}/{solved}" for k, v in sorted(m.items())
+                                      if k.startswith("dup_")},
             "lunch_in_window": f"{sum(m['lunch_ok'])}/{len(m['lunch_ok'])}",
             "stops_by_pace": {k: round(st.mean(v), 2) for k, v in sorted(pace_stops.items())},
             "top20_share": round(top20, 3),

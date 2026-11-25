@@ -1,6 +1,6 @@
 # Hàm mục tiêu v1 — luật gu chuyển vào hàm mục tiêu (24/11/2026)
 
-Bản này thay các luật cứng kiểu "gu" bằng số hạng trong hàm mục tiêu của CP-SAT. Ràng buộc cứng chỉ còn những gì vật lý không cho phép và những gì user tự nói. Bật bằng `DAVEL_OBJECTIVE=v1`; mặc định vẫn là `legacy` cho tới khi được duyệt.
+Bản này thay các luật cứng kiểu "gu" bằng số hạng trong hàm mục tiêu của CP-SAT. Ràng buộc cứng chỉ còn những gì vật lý không cho phép và những gì user tự nói. Mặc định từ 25/11/2026 (sau bước 1, người dùng duyệt); `DAVEL_OBJECTIVE=legacy` quay về luật cứng cũ để chạy A/B.
 
 Liên quan: `TRAVELAGENT_CONTEXT.md` §3 (hàm mục tiêu đã chốt: Σ prize · ū − w·Σc_ij − phạt), `ARCHITECTURE_BACKLOG.md` A1, A2, A4.
 
@@ -27,6 +27,7 @@ J =  Σ v_i x_i                         T1 giá trị: điểm ranker (như cũ)
    − Σ_{k>K0} κ_k s_k                  T8 số điểm vượt mức thoải mái
    − Σ c_ij a_ij                       T9 phút chạy xe + phần vượt 45 phút + đổi zone
    + w_edge · Σ q_ij a_ij              T10 thưởng chuyển tiếp PATM
+   − Σ_k σ_k d_k                       T11 điểm trùng: cùng chỗ, khu + điểm trong khu, chợ thứ hai, trùng món
 c_ij = τ·m_ij + τ_L·max(0, m_ij − 45) + ζ·[zone_i ≠ zone_j]
 ```
 
@@ -36,7 +37,7 @@ Mọi trọng số tính theo **U = điểm ranker cao nhất trong pool** (bi�
 |---|---|---|
 | ρ₂ / ρ₃ / ρ₄₊ × β nhóm | 0,35 / 0,7 / 1,0 | bãi biển thứ hai (β = 1,5) phải hơn phương án khác 0,53U |
 | γ × β nhóm | 0,15 | hai chùa liền nhau trừ 0,18U |
-| B sáng / trưa / tối | 0,2 / 1,0 / 0,8U | bữa trưa đáng bằng điểm tốt nhất ngày |
+| B sáng / trưa / tối | 0,2 / 1,0 / 1,2U | bữa trưa đáng bằng điểm tốt nhất ngày; bữa tối chỉnh 24/11 (0,8 → 1,2): ngày đi qua buổi tối thiếu bữa tối ở 6/26 lịch held-out vì điểm cuối ngày (du thuyền, Cầu Rồng) đáng hơn 0,8U |
 | A (T6) | 1,0U; food tour 0,1U | như A2 cũ |
 | R theo pace 1 / 2 / 3 | 0,5 / 0,25 / 0,1U | |
 | κ cho điểm vượt thứ 1 / 2 / 3+ | 0,6 / 1,2 / 2,0U | chỉnh 24/11: bản 0,3 / 0,6 / 1,0 để 28/120 lịch vượt trần nhịp của template |
@@ -44,12 +45,27 @@ Mọi trọng số tính theo **U = điểm ranker cao nhất trong pool** (bi�
 | τ_L | thêm 1/120 U mỗi phút vượt 45 | chặng 75 phút tính như khoảng 93 phút |
 | ζ | 0,08U mỗi lần đổi zone | ≈ 10 phút chạy xe |
 | w_state, w_edge | 0,5; 1,0 | giữ như cũ |
+| σ cùng chỗ / khu + điểm trong khu | 2,0 / 2,0U | điểm thứ hai của một chỗ gần như không bao giờ đáng |
+| ngân sách CP-SAT (`search_scale`) | × 1,6 (5 → 8 đơn vị) | v1 nhiều số hạng hơn: ở 5 đơn vị một ngày kém tối ưu 32%; 8 đơn vị đạt ~93% (chốt 25/11) |
+| σ chợ ban ngày thứ hai | 1,5U; food tour 0,1U | cộng thêm T3 của nhóm chợ |
+| σ trùng món | 0,5U | dưới thưởng bữa tối (1,2U): không bỏ bữa để né trùng; khách tiết kiệm có thể ăn đắt hơn một mức thay vì ăn một món hai lần (chốt 24/11) |
 
 **12 nhóm đa dạng** (T3, T4) gộp từ 31 `dwell_kind`: biển, thiên nhiên, điểm ngắm, tâm linh, lịch sử–văn hoá, phố–công trình, chợ–mua sắm, trải nghiệm có vé, khu vui chơi lớn, cafe, nightlife, wellness. Nhà hàng không thuộc nhóm nào (T5, T6 lo).
 
 β theo nhóm: biển 1,5; thiên nhiên 1,0; điểm ngắm 0,8; tâm linh 1,2; lịch sử–văn hoá 1,5 (chỉnh 24/11: hai bảo tàng cùng ngày ở 9/120 lịch); phố–công trình 0,5; chợ–mua sắm 2,0 (chỉnh 24/11: bản 1,0 để Chợ Hàn + Chợ Cồn cùng ngày ở 17/120 lịch); trải nghiệm 1,0; khu vui chơi lớn 3,0; cafe 0,8; nightlife 1,0; wellness 1,5.
 
-**K0 (T8)** = `max_stops` của template hoặc của ngày có `meals` (đếm mọi điểm); thiếu thì giờ trong ngày × 0,55 / 0,65 / 0,8 theo pace.
+**T11 điểm trùng** (thêm 24/11, bước 1). Phạt chạy xe mạnh hơn làm solver gom điểm sát nhau, mà điểm sát nhau nhất thường là một chỗ dưới hai tên. T11 đếm trên cả ngày, không theo cặp liền kề, nên chèn một điểm vào giữa không né được (T4 chỉ thấy hai điểm đứng cạnh nhau). Mọi khoá đọc từ data (`objective.stub_keys`):
+
+| Loại | Khoá | Ví dụ |
+|---|---|---|
+| cùng chỗ (`SAME_SITE`) | `alt_group` | Đèo Hải Vân / Hải Vân Quan (69 m); Ba Na Hills / Sun World Bà Nà Hills; các bến thuyền thúng Bảy Mẫu |
+| khu + điểm trong khu (`SAME_SITE`) | `requires_ticket_of` trỏ tới điểm ô, hoặc tới một POI cùng `alt_group` với điểm ô | Phố cổ Hội An hoặc Phố đi bộ phố cổ + Chùa Cầu. Nhiều điểm trong khu mà không có điểm ô thì không phạt (dạo phố ghé 3 hội quán) |
+| chợ thứ hai (`MARKET_REPEAT`) | `dwell_kind = market` (chợ ban ngày; chợ đêm và shop không tính) | Chợ Hàn + Chợ Cồn |
+| trùng món (`SAME_DISH`) | món suy từ tên quán (`objective.DISHES`) | hai quán mì Quảng trong ngày |
+
+Ghi trong `strict_rules` thì thành ràng buộc cứng. Greedy hint của CP-SAT cũng bỏ qua điểm trùng (`_hint_dup_kinds`): với ngân sách 5 đơn vị, solver hay giữ lời giải gợi ý dù nó bị phạt. Nhãn `alt_group` mới nằm ở `BE/data/sources/decisions_zfinal_20261124_dedup.json` (chạy lại `migrate_v2` để vào snapshot).
+
+**K0 (T8)** = `max_stops` của template hoặc của ngày có `meals` (đếm mọi điểm); thiếu thì giờ trong ngày × 0,55 / 0,65 / 0,8 theo pace. T8 chỉ đếm **điểm tham quan**, không đếm bữa ăn: ngưỡng là K0 trừ số khung bữa ngày đi qua (`objective.sight_k0`). Chỉnh 25/11: trước đó ngày đã đủ K0 bỏ bữa tối, vì điểm thứ 9 (quán ăn) bị trừ 0,6U (savings 1,2U), gần hết thưởng bữa tối.
 
 ## 3. Mỗi luật một chỗ, ba bộ trọng số
 
@@ -69,7 +85,7 @@ Mọi trọng số tính theo **U = điểm ranker cao nhất trong pool** (bi�
 | `rules.py` | mới: sổ luật duy nhất |
 | `soft_rules.py`, `gate.py` | đọc tập luật từ `rules.py`; `taste_rules()` mở rộng ở v1; gương HCS bỏ luật gu đang mềm; `check_lunch` giữ bữa trưa cứng trong HCS (khoá `constraint_status` của API không đổi) |
 | `scorer.py` | `edge_scores(rule_penalties=False)` cho v1 |
-| `BE/tests/unit/test_objective_v1.py`, `test_rules_registry.py` | khớp công thức, kịch bản, đơn điệu, gate; sổ luật và cạnh không đếm trùng |
+| `BE/tests/unit/test_objective_v1.py`, `test_objective_dedup.py` (T11), `test_rules_registry.py` | khớp công thức, kịch bản, đơn điệu, gate; sổ luật và cạnh không đếm trùng |
 
 ## 5. Chưa làm ở v1
 
@@ -77,7 +93,7 @@ Mọi trọng số tính theo **U = điểm ranker cao nhất trong pool** (bi�
 - T9 ở replan chưa tính các điểm đã đi trong ngày khi đếm lặp nhóm.
 - Đèo ban đêm, tối ưu chung nhiều ngày.
 - Thời gian giải tăng 15–35% so với legacy (balanced 8,5 → 9,9 giây trung vị). Hướng giảm: pointer hint, gộp biến T5 với biến bữa trưa có sẵn.
-- Dữ liệu: vài POI xếp nhóm chưa đúng (Quốc Tự Tam Thai đang ở nhóm phố–công trình).
+- Trùng món mới suy từ tên quán; về lâu dài cần nhãn món chính khi thu data.
 
 ## 6. Kết quả đo
 
