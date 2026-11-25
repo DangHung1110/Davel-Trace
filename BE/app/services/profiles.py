@@ -552,8 +552,11 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # so the view carries every field it reads: `price` (v2.1 tier) wins over
 # ticket_vnd/fee/smart_tags. Without it the gate fell back to the smart_tags band
 # (medium restaurant 300k where the solver paid 250k).
+# `hours` is how a cooking class (kind by_booking) is a meal: A1 counts it in every
+# meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
+# class over lunch failed the gate as "khong co bua trua".
 _GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
-               "ticket_vnd", "subcat", "plan_tier", "closed_today")
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours")
 
 
 def _gate_view(p: dict) -> dict:
