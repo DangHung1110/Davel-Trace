@@ -50,7 +50,7 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 49,ChIJg2m14V0ZQjERt4DjGOdJDiE,Jolie Cooking Class,paid_attraction,son_tra_my_khe,0.45,giá agent_web 0.55,"09:00-13:00, 15:00-19:00 [by_booking]",agent_web,expensive,agent_web,https://www.google.com/maps/search/Jolie+Cooking+Class+Đà+Nẵng
 50,ChIJo8N_zUw9QjERgutJ9u3-n7Y,View Ngắm Bình Minh Sơn Trà,viewpoint,son_tra_my_khe,0.44,giờ inferred 0.45,06:00-17:30 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/View+Ngắm+Bình+Minh+Sơn+Trà+Đà+Nẵng
 51,ChIJqaaYAdIiQjERGuZHElpvurA,Bãi Cát Vàng,beach,trung_tam,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+Cát+Vàng+Đà+Nẵng
-52,ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,beach,ngu_hanh_son,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+Tắm+Non+Nước+Đà+Nẵng
+52,ChIJu59e1rsRQjERB-49hSxMnXo,Bãi Tắm Non Nước,beach,ngu_hanh_son,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,agent_web,https://www.google.com/maps/search/Bãi+Tắm+Non+Nước+Đà+Nẵng
 53,ChIJgdHMn8gYQjERmEdW2JHUGTw,Bãi tắm Liên Chiểu,beach,hai_van_lien_chieu,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+Liên+Chiểu+Đà+Nẵng
 54,ChIJVVmn6uMjQjERwv0F2ZV9pJw,Bãi Sủng Cỏ,beach,hai_van_lien_chieu,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+Sủng+Cỏ+Đà+Nẵng
 55,ChIJEaxZWQAXQjERUp3M2TesuM8,Bãi tắm hàng dừa Mỹ Khê,beach,son_tra_my_khe,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+hàng+dừa+Mỹ+Khê+Đà+Nẵng
@@ -63,10 +63,10 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 62,ChIJxU52AgAZQjERUmuAje5_L5Q,Bãi biển Nguyễn Tất Thành,beach,hai_van_lien_chieu,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+biển+Nguyễn+Tất+Thành+Đà+Nẵng
 63,ChIJHwgddQAXQjERs5sNrVutheI,Bãi tắm Sao Biển,beach,son_tra_my_khe,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+Sao+Biển+Đà+Nẵng
 64,osm:node/1623183649,Núi Sơn Trà,viewpoint,son_tra_my_khe,0.44,giờ inferred 0.45,07:30-17:30 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Núi+Sơn+Trà+Đà+Nẵng
-65,osm:node/4172034499,Non Nuoc Beach,beach,ngu_hanh_son,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Non+Nuoc+Beach+Đà+Nẵng
+65,osm:node/4172034499,Non Nuoc Beach,beach,ngu_hanh_son,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,agent_web,https://www.google.com/maps/search/Non+Nuoc+Beach+Đà+Nẵng
 66,ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,ba_na_tay,0.44,giờ inferred 0.45,06:00-17:30 [safe_window],inferred,included,inferred,https://www.google.com/maps/search/Đỉnh+Bà+Nà+Đà+Nẵng
 67,manual:bai-tam-pham-van-dong,Bãi tắm Phạm Văn Đồng,beach,son_tra_my_khe,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+Phạm+Văn+Đồng+Đà+Nẵng
-68,osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+biển+Cửa+Đại+Đà+Nẵng
+68,osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,agent_web,https://www.google.com/maps/search/Bãi+biển+Cửa+Đại+Đà+Nẵng
 69,ChIJt1wLHjEYQjEREA1YGZU2yOc,Trà Quán Góc Nhà Tụi Mình,day_market,trung_tam,0.42,giờ inferred 0.45; giá inferred 0.4,09:00-19:00 [safe_window],inferred,cheap,inferred,https://www.google.com/maps/search/Trà+Quán+Góc+Nhà+Tụi+Mình+Đà+Nẵng
 70,ChIJOyXC4H0XQjERpm2T2xpZcwU,Chợ An Hải Đông,day_market,son_tra_my_khe,0.42,giờ inferred 0.45; giá inferred 0.4,08:00-11:00 [safe_window],inferred,cheap,inferred,https://www.google.com/maps/search/Chợ+An+Hải+Đông+Đà+Nẵng
 71,ChIJXcxl0UcYQjERVfYu-bKtvPU,Chợ Thanh Bình,day_market,trung_tam,0.42,giờ inferred 0.45; giá inferred 0.4,08:00-11:00 [safe_window],inferred,cheap,inferred,https://www.google.com/maps/search/Chợ+Thanh+Bình+Đà+Nẵng
