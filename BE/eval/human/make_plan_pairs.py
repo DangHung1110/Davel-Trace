@@ -12,9 +12,10 @@ really differ; identical or near-identical pairs are dropped.
 Requests (`collect_requests`): the 67 audit scenarios (BE/tools/audit_plans.py), the
 requests of the one-plan review (BE/tools/build_plan_review.py) the audit lacks, and the
 30 gold queries (BE/eval/gold/gold_v2.json; party size set to fit the party type, POI
-ids the snapshot lacks dropped). Every one is planned through POST /v1/itinerary on
-danang-v2 with the weather offline, like audit_plans.py; only plans the app would show
-(gate passed, two stops or more) can be paired.
+ids the snapshot lacks dropped). Every day starts at one central hotel (BASE_ID), as in
+the app once a traveller picks one, and every request is planned through POST
+/v1/itinerary on danang-v2 with the weather offline, like audit_plans.py; only plans the
+app would show (gate passed, two stops or more) can be paired.
 
 Writes, next to this file:
 - plan_pairs_v1.json      what raters see: the request, plan A and plan B, nothing else
