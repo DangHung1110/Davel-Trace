@@ -74,6 +74,37 @@ class TestEffectiveFee(unittest.TestCase):
         self.assertFalse(fee_is_estimate(poi("museum", "cheap", ticket_vnd=60000)))
 
 
+def v21(tier="medium", by="inferred", source="category_default:nha_hang"):
+    """A danang-v2 (v2.1) stop: its price tier and who checked it."""
+    return {"poi_id": "p", "data_version": "v2.1", "price": {"tier": tier, "note": None},
+            "provenance": {"price": {"source": source, "verified_by": by}}}
+
+
+class TestEstimateFlagReadsThePriceSource(unittest.TestCase):
+    """v2.1 stops all cost their tier's midpoint; only a tier no source checked (a
+    per-type default) makes that money a guess. Every v2.1 stop was a guess before."""
+
+    def test_a_per_type_default_is_an_estimate(self):
+        self.assertTrue(fee_is_estimate(v21("medium")))
+        self.assertTrue(fee_is_estimate(v21("cheap", source="category_default:com_trua")))
+
+    def test_a_sourced_price_is_not(self):
+        for by, source in (("agent_web", "web"), ("human", "human_verify"), ("user", "user_review")):
+            self.assertFalse(fee_is_estimate(v21("medium", by, source)), by)
+
+    def test_a_0_vnd_stop_has_nothing_to_guess(self):
+        self.assertFalse(fee_is_estimate(v21("free", source="rule_free_public")))
+        self.assertFalse(fee_is_estimate(v21("included", source="cluster_rule")))
+
+    def test_a_tier_with_no_source_stays_an_estimate(self):
+        self.assertTrue(fee_is_estimate({"poi_id": "p", "price": {"tier": "medium"}}))
+
+    def test_v1_reads_its_ticket_not_a_price_source(self):
+        sourced = {"price": {"verified_by": "human"}}
+        self.assertTrue(fee_is_estimate(poi(provenance=sourced)))
+        self.assertFalse(fee_is_estimate(poi("museum", "cheap", fee=60000)))
+
+
 class TestPlanCost(unittest.TestCase):
     pois = {"a": poi(), "b": poi("beach", "cheap"), "c": poi("cafe", "cheap")}
     acts = [{"poi_id": "a"}, {"poi_id": "b"}, {"poi_id": "c"}]
@@ -145,6 +176,17 @@ class TestRealSnapshot(unittest.TestCase):
         pois = load_pois(str(SNAPSHOT_V2))
         self.assertGreater(len(pois), 1000)
         self.assertEqual([p["name"] for p in pois if effective_fee(_gate_view(p)) != effective_fee(p)], [])
+
+    def test_danang_v2_tells_sourced_prices_from_guesses(self):
+        # The app's loader keeps `provenance`: before, all 201 audit plans said
+        # `cost_estimated`, every stop's source unread.
+        pois = [p for p in load_pois(str(SNAPSHOT_V2)) if p.get("status") == "active" and effective_fee(p)]
+        source = {p["poi_id"]: (p.get("provenance") or {}).get("price") or {} for p in pois}
+        sourced = [p for p in pois if source[p["poi_id"]].get("verified_by") in ("agent_web", "human", "user")]
+        guessed = [p for p in pois if str(source[p["poi_id"]].get("source")).startswith("category_default:")]
+        self.assertTrue(sourced and guessed)
+        self.assertEqual([p["name"] for p in sourced if fee_is_estimate(p)], [])
+        self.assertEqual([p["name"] for p in guessed if not fee_is_estimate(p)], [])
 
 
 if __name__ == "__main__":

@@ -89,6 +89,13 @@ class TestRepairLoop(unittest.TestCase):
         self.assertEqual(result["plan"]["travel_min"], 10)
         self.assertEqual(result["plan"]["total_cost"], 0)
 
+    def test_the_estimate_flag_is_recomputed_too(self):
+        # It was set once in build_plan: a repaired plan kept the old stops' flag.
+        stale = {**PLAN, "cost_estimated": True}
+        result = repair_plan(stale, TRIP, {p["poi_id"]: p for p in POIS},
+                             MATRIX, POIS, food_only_review)
+        self.assertFalse(result["plan"]["cost_estimated"])
+
     def test_no_alternative_is_reported_honestly(self):
         food = [p for p in POIS if p["poi_id"].startswith("food")]
         matrix = {f"{a['poi_id']}->{b['poi_id']}": {"minutes": 10}
