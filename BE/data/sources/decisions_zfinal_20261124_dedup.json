@@ -1,0 +1,43 @@
+{
+ "note": "24/11/2026, objective v1 bước 1 (chọn điểm trùng): người dùng duyệt sửa thẳng data qua file quyết định. alt_group = cùng một chỗ, hai bản ghi (objective v1 phạt điểm thứ hai trong ngày, T11). Khoảng cách đo trên toạ độ snapshot danang-v2. Hai cặp bãi biển (quét cặp < 150 m): người dùng chọn giữ Bãi biển Non Nước và Bãi Tắm Thanh Khê, gộp bản ghi còn lại.",
+ "items": {
+  "osm:node/1036552571": {
+   "alt_group": "hai_van",
+   "note": "Đèo Hải Vân: Hải Vân Quan nằm trên đỉnh đèo, cách 69 m; lên đèo là tới cửa ải"
+  },
+  "manual:hai-van-quan": {
+   "alt_group": "hai_van",
+   "note": "Hải Vân Quan: trên đỉnh Đèo Hải Vân, cách 69 m"
+  },
+  "osm:node/4601279489": {
+   "alt_group": "hoi_an_old_town_walk",
+   "note": "Phố cổ Hội An (dạo cả khu) và Phố đi bộ phố cổ Hội An (dạo phố, tường vàng, hoa đăng) là cùng một lượt dạo phố cổ"
+  },
+  "manual:hoi-an-pho-di-bo-hoa-dang": {
+   "alt_group": "hoi_an_old_town_walk",
+   "note": "cùng lượt dạo với Phố cổ Hội An; vì cùng alt_group với điểm ô nên cũng là điểm ô của các điểm con trong phố cổ"
+  },
+  "ChIJOQ-obAARQjERQ4kQhqErSkw": {
+   "status": "excluded",
+   "status_reason": "gộp vào Bãi biển Non Nước (ChIJX_osydwQQjERB-Y6MvLfJmQ): cùng một bãi, cách 80 m (người dùng duyệt 24/11)"
+  },
+  "ChIJz4Y1XCcZQjERzg9AZYfOGH8": {
+   "status": "excluded",
+   "status_reason": "gộp vào Bãi Tắm Thanh Khê (ChIJSZabUwAZQjERqs6A8ECVnWY): cùng một bãi, cách 105 m (người dùng duyệt 24/11)"
+  },
+  "ChIJ9_dffMQQQjERuJbqVGdSysY": {
+   "category": "religious",
+   "note": "Quốc Tự Tam Thai là chùa (đang là outdoor_landmark, nhóm phố–công trình)"
+  },
+  "ChIJ6UAZeAAZQjERzK3T81riZmo": {
+   "time_profile": "evening_peak",
+   "dwell": {"p25": 45, "p50": 75, "p75": 110},
+   "dwell_note": "giữ thời gian ở đang có (bảng ước lượng chợ đêm) cho phố đi bộ ~1,2 km; bảng phố-công trình (20 phút) dành cho cầu/tượng đài, làm điểm này thành điểm ghé nhanh ở 43/120 lịch v1",
+   "note": "Phố đi bộ Bạch Đằng: loại outdoor_landmark (quyết định 19/11) nay kéo theo loại điểm phố (không còn là chợ đêm, nhóm phố–công trình); giữ đường cong buổi tối vì ghi chú nguồn của điểm: đẹp nhất 18:30-21:30"
+  },
+  "ChIJeaPwiDUYQjERt4yUm81Oqi8": {
+   "category": "restaurant",
+   "note": "Khu ẩm thực Chợ Cồn là khu ăn uống (bún mắm, ăn vặt), không phải chợ thứ hai cạnh Chợ Cồn (cách 46 m)"
+  }
+ }
+}

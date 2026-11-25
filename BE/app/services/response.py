@@ -45,6 +45,9 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
     ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
     return {"segments": segments,
             "total_cost": total_fee(acts, pois, party_size(trip)),
+            # FR-026: part of total_cost is a guess (a price no source checked).
+            # Here, not in build_plan, so a repaired plan says it of its new stops.
+            "cost_estimated": any(fee_is_estimate(pois.get(a["poi_id"]) or {}) for a in acts),
             "total_km": round(total_km, 2),
             "total_min": visit_min + travel_min,
             "travel_min": travel_min,
@@ -61,8 +64,6 @@ def build_plan(optimizer_out: dict, validation: dict, trip: dict,
         "trip_id": trip.get("trip_id", "t1"),
         "version": version,
         "activities": acts,
-        # FR-026: part of total_cost comes from price bands, not real prices.
-        "cost_estimated": any(fee_is_estimate(pois.get(a["poi_id"]) or {}) for a in acts),
         **plan_totals(acts, trip, pois, matrix),
         "constraint_status": status_map(_hard_checks(validation)),
         "violations": validation.get("violations", []),

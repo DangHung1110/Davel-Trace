@@ -10,6 +10,7 @@ Meals are exempt: restaurants keep A1, cafes keep CAFE_CAP.
 
 Run: python -m pytest BE/tests/unit/test_daily_category_cap.py -q
 """
+from unittest import mock
 
 import os
 import sys
@@ -96,6 +97,7 @@ class TestCategoryCapGate(unittest.TestCase):
         itin = _itin(("x", "08:00", "09:00"), ("y", "09:30", "10:30"))
         self.assertTrue(check_category_cap(itin, TRIP, pois, {})["passed"])
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_fail_closes_hcs_and_lists_every_offender(self):
         pois = {"m1": {"verified": True, "cat": "market", "fee": 0,
                        "opening_hours": ["00:00-23:59"]},
@@ -183,6 +185,7 @@ class TestBuildPlanMirrorsTheCap(unittest.TestCase):
         ranked = [{"poi_id": pid} for pid in by_id]
         return pois, by_id, cells, ranked
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_two_markets_never_both_scheduled(self):
         pois, by_id, cells, ranked = self._fixture()
         trip = {"trip_id": "t", "budget": 3000000, "start_time": "08:00",
@@ -194,6 +197,7 @@ class TestBuildPlanMirrorsTheCap(unittest.TestCase):
         self.assertLessEqual(len(markets), 1, markets)
         self.assertEqual(plan["constraint_status"]["CATEGORY_CAP"], 1)
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_warning_names_the_cap_and_never_relaxes_it(self):
         """A pool with only bad options cannot satisfy the cap: the plan is
         empty, the warning names CATEGORY_CAP, and the cap stays enforced."""
