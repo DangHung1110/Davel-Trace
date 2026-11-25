@@ -144,7 +144,11 @@ void main() {
       expect(find.byKey(const Key('request-plan-button')), findsNothing);
       await _capture(tester, 'itinerary-390');
       await _tap(tester, 'open-planning-button');
-      expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+      expect(find.byKey(const Key('request-plan-button')), findsNothing);
+      expect(
+        find.byKey(const Key('preview-plan-seeded-balanced')),
+        findsOneWidget,
+      );
       expect(find.text('28°C'), findsNothing);
       await _capture(tester, 'planning-390');
       await tester.pageBack();
@@ -272,21 +276,14 @@ void main() {
     },
   );
 
-  testWidgets(
-    'expense persistence label follows management storage before planning runs',
-    (tester) async {
-      _viewport(tester, const Size(390, 844));
-      await tester.pumpWidget(DavelTraceApp(repository: _LiveManagement()));
-      await tester.pumpAndSettle();
-      await _tap(tester, 'expenses-tab');
-      expect(find.text('Chi tiêu đã được lưu vào tài khoản.'), findsOneWidget);
-      expect(
-        find.text('Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.'),
-        findsNothing,
-      );
-      await _capture(tester, 'expenses-390');
-    },
-  );
+  testWidgets('connected expenses skip the storage notice', (tester) async {
+    _viewport(tester, const Size(390, 844));
+    await tester.pumpWidget(DavelTraceApp(repository: _LiveManagement()));
+    await tester.pumpAndSettle();
+    await _tap(tester, 'expenses-tab');
+    expect(find.byKey(const Key('expense-source-status')), findsNothing);
+    await _capture(tester, 'expenses-390');
+  });
 
   testWidgets(
     'AI confirmation shows place names, keeps IDs in data and validates fields',

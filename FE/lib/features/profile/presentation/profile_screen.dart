@@ -6,6 +6,10 @@ import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 
+const _paceLabels = ['Thư thả', 'Vừa phải', 'Năng động'];
+const _fitnessLabels = ['Đi nhẹ nhàng', 'Đi bộ vừa phải', 'Đi bộ nhiều'];
+const _spendingLabels = ['Tiết kiệm', 'Vừa phải', 'Thoải mái'];
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     super.key,
@@ -102,14 +106,9 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 24),
               children: [
                 Text(
-                  'Phong cách chuyến đi',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 4),
-                Text(
                   state.isDemoManagement
-                      ? 'Tùy chọn của bản demo trên thiết bị.'
-                      : 'Dùng làm mặc định cho chuyến mới. Chuyến đã tạo giữ bản tùy chọn riêng; thay đổi ở đây không tự sửa chuyến cũ.',
+                      ? 'Sở thích trong chuyến đi mẫu.'
+                      : 'Sở thích này dùng cho các chuyến đi mới.',
                 ),
                 const SizedBox(height: 18),
                 if (state.profiles.length > 1) ...[
@@ -167,10 +166,19 @@ class ProfileScreen extends StatelessWidget {
                         label: 'Mục đích',
                         value: _purpose(profile.tripPurpose),
                       ),
-                      _ProfileRow(label: 'Nhịp đi', value: '${profile.pace}/3'),
+                      _ProfileRow(
+                        label: 'Nhịp đi',
+                        value: _paceLabels[profile.pace.clamp(1, 3) - 1],
+                      ),
+                      _ProfileRow(
+                        label: 'Thể lực',
+                        value: _fitnessLabels[profile.fitness.clamp(1, 3) - 1],
+                      ),
                       _ProfileRow(
                         label: 'Mức chi',
-                        value: '${profile.spendingLevel}/3',
+                        value:
+                            _spendingLabels[profile.spendingLevel.clamp(1, 3) -
+                                1],
                       ),
                       _ProfileRow(
                         label: 'Ẩm thực',
@@ -200,7 +208,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
-                OutlinedButton.icon(
+                FilledButton.icon(
                   key: const Key('edit-profile-button'),
                   onPressed: state.isMutating
                       ? null
@@ -209,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
                   label: const Text('Chỉnh sở thích du lịch'),
                 ),
                 const SizedBox(height: 8),
-                OutlinedButton.icon(
+                TextButton.icon(
                   key: const Key('offline-reset-action'),
                   onPressed: state.isMutating
                       ? null
@@ -255,7 +263,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileOnboarding extends StatelessWidget {
+class ProfileOnboarding extends StatefulWidget {
   const ProfileOnboarding({
     super.key,
     required this.onSubmit,
@@ -265,36 +273,43 @@ class ProfileOnboarding extends StatelessWidget {
   final bool busy;
 
   @override
+  State<ProfileOnboarding> createState() => _ProfileOnboardingState();
+}
+
+class _ProfileOnboardingState extends State<ProfileOnboarding> {
+  final _editor = GlobalKey<ProfileEditorState>();
+
+  @override
   Widget build(BuildContext context) => ListView(
     padding: const EdgeInsets.all(16),
     children: [
       Text(
-        'Sở thích du lịch',
+        'Tạo hồ sơ du lịch',
         style: Theme.of(context).textTheme.headlineMedium,
       ),
       const SizedBox(height: 8),
       const Text(
-        'Giúp gợi ý lịch phù hợp cho những chuyến đi mới. Đây là tùy chọn du lịch, không phải thông tin đăng nhập.',
+        'Cho Davel Trace biết nên gọi bạn là gì. Bạn có thể thêm sở thích bất cứ lúc nào.',
       ),
       const SizedBox(height: 24),
-      ProfileEditor(key: ProfileEditor.inlineKey, inline: true),
+      ProfileEditor(key: _editor, inline: true),
       const SizedBox(height: 16),
       FilledButton(
         key: const Key('create-first-profile-button'),
-        onPressed: busy
+        onPressed: widget.busy
             ? null
             : () async {
-                final data = ProfileEditor.inlineKey.currentState?.submit();
+                final data = _editor.currentState?.submit();
                 if (data == null) return;
                 try {
-                  await onSubmit(data);
+                  await widget.onSubmit(data);
                 } catch (_) {
                   if (context.mounted) {
                     _showError(context, 'Không thể lưu sở thích. Hãy thử lại.');
                   }
                 }
               },
-        child: Text(busy ? 'Đang lưu…' : 'Lưu sở thích'),
+        child: Text(widget.busy ? 'Đang lưu…' : 'Lưu hồ sơ'),
       ),
     ],
   );
@@ -302,8 +317,6 @@ class ProfileOnboarding extends StatelessWidget {
 
 class ProfileEditor extends StatefulWidget {
   const ProfileEditor({super.key, this.profile, this.inline = false});
-
-  static final inlineKey = GlobalKey<ProfileEditorState>();
 
   final UserProfile? profile;
   final bool inline;
@@ -401,7 +414,7 @@ class ProfileEditorState extends State<ProfileEditor> {
           if (!widget.inline) ...[
             Text(
               widget.profile == null
-                  ? 'Sở thích du lịch của bạn'
+                  ? 'Tạo hồ sơ du lịch'
                   : 'Chỉnh sở thích du lịch',
               style: Theme.of(context).textTheme.titleLarge,
             ),
@@ -411,125 +424,145 @@ class ProfileEditorState extends State<ProfileEditor> {
             key: const Key('profile-name-field'),
             controller: _name,
             decoration: const InputDecoration(
-              labelText: 'Tên gọi trong hồ sơ du lịch',
+              labelText: 'Tên bạn muốn được gọi',
             ),
             validator: (value) => value == null || value.trim().isEmpty
                 ? 'Nhập tên hiển thị'
                 : null,
           ),
           const SizedBox(height: 10),
-          DropdownButtonFormField<String>(
-            isExpanded: true,
-            initialValue: _party,
-            decoration: const InputDecoration(labelText: 'Bạn thường đi'),
-            items: const [
-              DropdownMenuItem(value: 'solo', child: Text('Một mình')),
-              DropdownMenuItem(value: 'couple', child: Text('Cặp đôi')),
-              DropdownMenuItem(value: 'family', child: Text('Gia đình')),
-              DropdownMenuItem(value: 'friends', child: Text('Nhóm bạn')),
+          ExpansionTile(
+            key: const Key('profile-more-options'),
+            maintainState: true,
+            initiallyExpanded: widget.profile != null,
+            tilePadding: EdgeInsets.zero,
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            title: Text(
+              widget.profile == null
+                  ? 'Thêm sở thích (tùy chọn)'
+                  : 'Sở thích và nhu cầu',
+            ),
+            children: [
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _party,
+                decoration: const InputDecoration(labelText: 'Bạn thường đi'),
+                items: const [
+                  DropdownMenuItem(value: 'solo', child: Text('Một mình')),
+                  DropdownMenuItem(value: 'couple', child: Text('Cặp đôi')),
+                  DropdownMenuItem(value: 'family', child: Text('Gia đình')),
+                  DropdownMenuItem(value: 'friends', child: Text('Nhóm bạn')),
+                ],
+                onChanged: (value) => setState(() => _party = value!),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _purpose,
+                decoration: const InputDecoration(labelText: 'Mục đích chính'),
+                items: const [
+                  DropdownMenuItem(value: 'leisure', child: Text('Nghỉ dưỡng')),
+                  DropdownMenuItem(value: 'discovery', child: Text('Khám phá')),
+                  DropdownMenuItem(value: 'food', child: Text('Ẩm thực')),
+                  DropdownMenuItem(value: 'business', child: Text('Công tác')),
+                ],
+                onChanged: (value) => setState(() => _purpose = value!),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: _food,
+                decoration: const InputDecoration(
+                  labelText: 'Món yêu thích',
+                  hintText: 'mì Quảng, hải sản',
+                ),
+              ),
+              ...[
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _activities,
+                  decoration: const InputDecoration(
+                    labelText: 'Hoạt động yêu thích',
+                    hintText: 'biển, bảo tàng, ẩm thực',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _transport,
+                  decoration: const InputDecoration(
+                    labelText: 'Phương tiện thường dùng',
+                    hintText: 'xe máy, taxi, đi bộ',
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  'Điều cần lưu ý khi đi',
+                  style: TextStyle(
+                    color: AppColors.ink,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: _avoid,
+                  decoration: const InputDecoration(
+                    labelText: 'Những điều cần tránh',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _allergies,
+                  decoration: const InputDecoration(labelText: 'Dị ứng'),
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _accessibility,
+                  decoration: const InputDecoration(
+                    labelText: 'Nhu cầu hỗ trợ tiếp cận',
+                  ),
+                ),
+              ],
+              const SizedBox(height: 10),
+              Text(
+                'Nhịp đi · ${_paceLabels[_pace.round() - 1]}',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              Slider(
+                value: _pace,
+                min: 1,
+                max: 3,
+                divisions: 2,
+                semanticFormatterCallback: (value) =>
+                    _paceLabels[value.round() - 1],
+                onChanged: (value) => setState(() => _pace = value),
+              ),
+              Text(
+                'Thể lực · ${_fitnessLabels[_fitness.round() - 1]}',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              Slider(
+                key: const Key('profile-fitness-slider'),
+                value: _fitness,
+                min: 1,
+                max: 3,
+                divisions: 2,
+                semanticFormatterCallback: (value) =>
+                    _fitnessLabels[value.round() - 1],
+                onChanged: (value) => setState(() => _fitness = value),
+              ),
+              Text(
+                'Mức chi · ${_spendingLabels[_spending.round() - 1]}',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              Slider(
+                value: _spending,
+                min: 1,
+                max: 3,
+                divisions: 2,
+                semanticFormatterCallback: (value) =>
+                    _spendingLabels[value.round() - 1],
+                onChanged: (value) => setState(() => _spending = value),
+              ),
             ],
-            onChanged: (value) => setState(() => _party = value!),
-          ),
-          const SizedBox(height: 10),
-          DropdownButtonFormField<String>(
-            isExpanded: true,
-            initialValue: _purpose,
-            decoration: const InputDecoration(labelText: 'Mục đích chính'),
-            items: const [
-              DropdownMenuItem(value: 'leisure', child: Text('Nghỉ dưỡng')),
-              DropdownMenuItem(value: 'discovery', child: Text('Khám phá')),
-              DropdownMenuItem(value: 'food', child: Text('Ẩm thực')),
-              DropdownMenuItem(value: 'business', child: Text('Công tác')),
-            ],
-            onChanged: (value) => setState(() => _purpose = value!),
-          ),
-          const SizedBox(height: 10),
-          TextFormField(
-            controller: _food,
-            decoration: const InputDecoration(
-              labelText: 'Món yêu thích',
-              hintText: 'mì Quảng, hải sản',
-            ),
-          ),
-          if (!widget.inline) ...[
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _activities,
-              decoration: const InputDecoration(
-                labelText: 'Hoạt động yêu thích',
-                hintText: 'biển, bảo tàng, ẩm thực',
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _transport,
-              decoration: const InputDecoration(
-                labelText: 'Phương tiện thường dùng',
-                hintText: 'xe máy, taxi, đi bộ',
-              ),
-            ),
-            const SizedBox(height: 14),
-            const Text(
-              'Ràng buộc bắt buộc',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextFormField(
-              controller: _avoid,
-              decoration: const InputDecoration(
-                labelText: 'Những điều cần tránh',
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _allergies,
-              decoration: const InputDecoration(labelText: 'Dị ứng'),
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: _accessibility,
-              decoration: const InputDecoration(
-                labelText: 'Nhu cầu hỗ trợ tiếp cận',
-              ),
-            ),
-          ],
-          const SizedBox(height: 10),
-          Text(
-            'Nhịp đi · ${_pace.round()}/3',
-            style: const TextStyle(fontWeight: FontWeight.w700),
-          ),
-          Slider(
-            value: _pace,
-            min: 1,
-            max: 3,
-            divisions: 2,
-            onChanged: (value) => setState(() => _pace = value),
-          ),
-          Text(
-            'Thể lực · ${_fitness.round()}/3',
-            style: const TextStyle(fontWeight: FontWeight.w700),
-          ),
-          Slider(
-            key: const Key('profile-fitness-slider'),
-            value: _fitness,
-            min: 1,
-            max: 3,
-            divisions: 2,
-            onChanged: (value) => setState(() => _fitness = value),
-          ),
-          Text(
-            'Mức chi · ${_spending.round()}/3',
-            style: const TextStyle(fontWeight: FontWeight.w700),
-          ),
-          Slider(
-            value: _spending,
-            min: 1,
-            max: 3,
-            divisions: 2,
-            onChanged: (value) => setState(() => _spending = value),
           ),
         ],
       ),
@@ -558,7 +591,9 @@ class ProfileEditorState extends State<ProfileEditor> {
                   final data = submit();
                   if (data != null) Navigator.pop(context, data);
                 },
-                child: const Text('Lưu sở thích'),
+                child: Text(
+                  widget.profile == null ? 'Lưu hồ sơ' : 'Lưu sở thích',
+                ),
               ),
             ),
           ],

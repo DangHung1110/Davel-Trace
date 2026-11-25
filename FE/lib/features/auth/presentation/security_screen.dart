@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../application/auth_controller.dart';
 import '../domain/models.dart';
+import '../../../shared/widgets/surface_card.dart';
 
 class SecurityScreen extends StatefulWidget {
   const SecurityScreen({super.key, required this.controller});
@@ -27,7 +28,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   Widget build(BuildContext context) => AnimatedBuilder(
     animation: widget.controller,
     builder: (context, _) => Scaffold(
-      appBar: AppBar(title: const Text('Tài khoản & bảo mật')),
+      appBar: AppBar(title: const Text('Bảo mật và dữ liệu')),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -40,17 +41,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ),
-          ListTile(
-            leading: const CircleAvatar(child: Icon(Icons.person_outline)),
-            title: Text(
-              widget.controller.account?.email ?? '',
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: const Text('Thông tin tài khoản đăng nhập'),
-          ),
-          const Divider(),
           Text(
-            'Phiên đăng nhập',
+            'Thiết bị đang đăng nhập',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           FutureBuilder<List<IdentitySession>>(
@@ -74,53 +66,65 @@ class _SecurityScreenState extends State<SecurityScreen> {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
-              return Column(
-                children: [
-                  for (final item in snapshot.data!)
-                    ListTile(
-                      leading: Icon(
-                        item.current ? Icons.phone_android : Icons.devices,
-                      ),
-                      title: Text(item.deviceLabel),
-                      subtitle: Text(
-                        item.current ? 'Thiết bị hiện tại' : 'Đang hoạt động',
-                      ),
-                      trailing: item.current
-                          ? null
-                          : IconButton(
-                              icon: const Icon(Icons.logout),
-                              onPressed: () async {
-                                try {
-                                  await widget.controller.repository
-                                      .revokeSession(item.id);
-                                  if (mounted) {
-                                    setState(
-                                      () => sessions = widget
-                                          .controller
-                                          .repository
-                                          .sessions(),
-                                    );
+              if (snapshot.data!.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text('Chưa thấy thiết bị đăng nhập.'),
+                );
+              }
+              return SurfaceCard(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  children: [
+                    for (final item in snapshot.data!)
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          item.current ? Icons.phone_android : Icons.devices,
+                        ),
+                        title: Text(item.deviceLabel),
+                        subtitle: item.current
+                            ? const Text('Thiết bị này')
+                            : null,
+                        trailing: item.current
+                            ? null
+                            : IconButton(
+                                icon: const Icon(Icons.logout),
+                                tooltip: 'Đăng xuất thiết bị này',
+                                onPressed: () async {
+                                  try {
+                                    await widget.controller.repository
+                                        .revokeSession(item.id);
+                                    if (mounted) {
+                                      setState(
+                                        () => sessions = widget
+                                            .controller
+                                            .repository
+                                            .sessions(),
+                                      );
+                                    }
+                                  } catch (_) {
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Không thể đăng xuất thiết bị này. Hãy thử lại.',
+                                              ),
+                                            ),
+                                          );
+                                    }
                                   }
-                                } catch (_) {
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          'Không thể đăng xuất thiết bị này. Hãy thử lại.',
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                }
-                              },
-                            ),
-                    ),
-                ],
+                                },
+                              ),
+                      ),
+                  ],
+                ),
               );
             },
           ),
           const SizedBox(height: 20),
-          OutlinedButton.icon(
+          TextButton.icon(
             key: const Key('security-logout-button'),
             onPressed: widget.controller.busy
                 ? null
@@ -133,15 +137,17 @@ class _SecurityScreenState extends State<SecurityScreen> {
             icon: const Icon(Icons.logout),
             label: const Text('Đăng xuất'),
           ),
-          const SizedBox(height: 12),
-          OutlinedButton.icon(
-            onPressed: widget.controller.busy
-                ? null
-                : () => _createExport(context),
-            icon: const Icon(Icons.download_outlined),
-            label: const Text('Tạo bản xuất dữ liệu'),
+          const SizedBox(height: 18),
+          Text(
+            'Dữ liệu cá nhân',
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          const SizedBox(height: 12),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            onTap: widget.controller.busy ? null : () => _createExport(context),
+            leading: const Icon(Icons.download_outlined),
+            title: const Text('Xuất dữ liệu của tôi'),
+          ),
           TextButton.icon(
             style: TextButton.styleFrom(
               foregroundColor: Theme.of(context).colorScheme.error,
@@ -158,79 +164,76 @@ class _SecurityScreenState extends State<SecurityScreen> {
   );
 
   Future<void> _confirmDeletion(BuildContext context) async {
-    final password = TextEditingController();
-    final confirmed = await showDialog<bool>(
+    final password = await _confirmWithPassword(
+      context,
+      title: 'Xóa tài khoản?',
+      action: 'Xóa tài khoản',
+      explanation: 'Bạn sẽ đăng xuất ngay. Có thể khôi phục trong 30 ngày.',
+    );
+    if (password != null && context.mounted) {
+      await widget.controller.deleteAccount(password);
+      if (context.mounted && widget.controller.errorMessage == null) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    }
+  }
+
+  Future<String?> _confirmWithPassword(
+    BuildContext context, {
+    required String title,
+    required String action,
+    String? explanation,
+  }) {
+    var password = '';
+    return showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Xóa tài khoản?'),
+        scrollable: true,
+        title: Text(title),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Bạn sẽ đăng xuất ngay. Có thể khôi phục trong 30 ngày.',
-            ),
-            const SizedBox(height: 12),
+            if (explanation != null) ...[
+              Text(explanation),
+              const SizedBox(height: 12),
+            ],
             TextField(
-              controller: password,
+              onChanged: (value) => password = value,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Nhập mật khẩu để xác nhận',
               ),
             ),
+            const SizedBox(height: 8),
+            const Text(
+              'Nếu bạn dùng Google và chưa có mật khẩu Davel Trace, chọn Quên mật khẩu ở màn hình đăng nhập để đặt mật khẩu.',
+            ),
           ],
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () => Navigator.pop(context),
             child: const Text('Hủy'),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Xóa tài khoản'),
+            onPressed: () {
+              if (password.isNotEmpty) Navigator.pop(context, password);
+            },
+            child: Text(action),
           ),
         ],
       ),
     );
-    if (confirmed == true) {
-      await widget.controller.deleteAccount(password.text);
-      if (context.mounted && widget.controller.errorMessage == null) {
-        Navigator.pop(context);
-      }
-    }
-    password.dispose();
   }
 
   Future<void> _createExport(BuildContext context) async {
-    final password = TextEditingController();
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Xuất dữ liệu tài khoản'),
-        content: TextField(
-          controller: password,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Nhập mật khẩu để xác nhận',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Hủy'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Tạo bản xuất'),
-          ),
-        ],
-      ),
+    final password = await _confirmWithPassword(
+      context,
+      title: 'Xuất dữ liệu tài khoản',
+      action: 'Chuẩn bị dữ liệu',
     );
-    if (confirmed != true) {
-      password.dispose();
-      return;
-    }
-    final result = await widget.controller.createExport(password.text);
-    password.dispose();
+    if (password == null || !context.mounted) return;
+    final result = await widget.controller.createExport(password);
     if (!context.mounted || result == null) return;
     final portableJson = const JsonEncoder.withIndent('  ')
         .convert(result['payload']);
@@ -238,17 +241,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Bản xuất đã sẵn sàng'),
-        content: SizedBox(
-          width: 420,
-          child: SingleChildScrollView(child: SelectableText(portableJson)),
-        ),
+        content: const Text('Sao chép bản dữ liệu để lưu vào nơi bạn chọn.'),
         actions: [
           TextButton(
             onPressed: () async {
               await Clipboard.setData(ClipboardData(text: portableJson));
               if (context.mounted) Navigator.pop(context);
             },
-            child: const Text('Sao chép JSON'),
+            child: const Text('Sao chép dữ liệu'),
           ),
         ],
       ),

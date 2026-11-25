@@ -175,16 +175,11 @@ class OfflineSyncBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final sync = state.syncStatus!;
     final hasConflict = sync.conflictCount > 0 || sync.failedCount > 0;
-    final last = sync.lastSuccessAt?.toLocal();
-    final timestamp = last == null
-        ? 'chưa có lần đồng bộ thành công'
-        : '${last.hour.toString().padLeft(2, '0')}:${last.minute.toString().padLeft(2, '0')} '
-              '${last.day.toString().padLeft(2, '0')}/${last.month.toString().padLeft(2, '0')}';
     final title = hasConflict
         ? '${sync.conflictCount + sync.failedCount} thay đổi cần xử lý'
         : sync.pendingCount > 0
-        ? '${sync.pendingCount} thay đổi đang chờ đồng bộ'
-        : 'Đang xem dữ liệu ngoại tuyến';
+        ? '${sync.pendingCount} thay đổi đang chờ lưu'
+        : 'Đang xem bản lưu trên thiết bị';
     return Material(
       key: const Key('offline-sync-banner'),
       color: hasConflict ? const Color(0xFFFFE4E6) : const Color(0xFFE6FFFB),
@@ -201,35 +196,38 @@ class OfflineSyncBanner extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: AppColors.ink,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    'Lần gần nhất: $timestamp',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 10),
-                  ),
-                ],
-              ),
+              child: Text(title, style: Theme.of(context).textTheme.bodySmall),
             ),
             if (hasConflict)
               TextButton(
                 key: const Key('discard-offline-conflicts-button'),
                 onPressed: state.isMutating
                     ? null
-                    : () => unawaited(state.discardOfflineConflicts()),
-                child: const Text('Dùng máy chủ'),
+                    : () async {
+                        final discard = await showDialog<bool>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Dùng bản đã lưu?'),
+                            content: const Text(
+                              'Các thay đổi chưa lưu cần xử lý sẽ bị bỏ.',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: const Text('Quay lại'),
+                              ),
+                              FilledButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text('Dùng bản đã lưu'),
+                              ),
+                            ],
+                          ),
+                        );
+                        if (discard == true && context.mounted) {
+                          await state.discardOfflineConflicts();
+                        }
+                      },
+                child: const Text('Xem lựa chọn'),
               )
             else
               TextButton(

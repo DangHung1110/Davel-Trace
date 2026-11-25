@@ -613,7 +613,7 @@ class AppState extends ChangeNotifier {
           geometry: result.geometry,
           warning: [
             result.warning,
-            '$customCount hoạt động riêng không có POI nên được bỏ qua.',
+            '$customCount hoạt động chưa có điểm đến trên bản đồ.',
           ].whereType<String>().where((value) => value.isNotEmpty).join(' '),
         );
       }
@@ -708,7 +708,7 @@ class AppState extends ChangeNotifier {
       if (result.items.isEmpty) {
         throw const ApiException(
           'NO_FEASIBLE_PLAN',
-          'Backend chưa tìm được phương án khả thi.',
+          'Chưa tìm được lịch phù hợp. Hãy điều chỉnh thời gian hoặc ngân sách rồi thử lại.',
         );
       }
       planAlternatives = result.items;
@@ -808,7 +808,7 @@ class AppState extends ChangeNotifier {
     }
     _confirmedPlanningOverrides = confirmed;
     aiProposal = null;
-    aiMessage = 'Đã xác nhận đề xuất; planner deterministic đang xử lý.';
+    aiMessage = null;
     notifyListeners();
     await requestPlan();
   }
@@ -957,7 +957,7 @@ class AppState extends ChangeNotifier {
       final tripId = activeTrip?.id;
       if (tripId != null) await _loadTripDetail(tripId);
       if (isDemoManagement) await loadItineraryHistory();
-      plannerMessage = 'Đã kích hoạt lại phiên bản ${version.ordinal}.';
+      plannerMessage = 'Đã dùng lại lịch ${version.ordinal}.';
     } catch (error) {
       if (_disposed || revision != _planningRevision) return;
       errorMessage = _message(error);

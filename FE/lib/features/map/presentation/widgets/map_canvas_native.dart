@@ -246,43 +246,6 @@ class _MapCanvasState extends State<MapCanvas> {
             ),
           ],
         ),
-        Positioned(
-          left: 10,
-          top: 10,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            decoration: BoxDecoration(
-              color: AppColors.surface.withValues(alpha: .92),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 290),
-              child: Text(
-                {
-                  switch (widget.routePreview?.quality) {
-                    'road_route' => 'OSRM · tuyến đường bộ',
-                    'matrix_estimate' =>
-                      'Ước tính ma trận · đường nối minh họa',
-                    'interpolated' =>
-                      'Đường nối nội suy · không phải tuyến thật',
-                    _ =>
-                      widget.routePreview?.warning ?? 'Chưa có tuyến khả dụng',
-                  },
-                  if (widget.routePreview?.warning case final warning?
-                      when warning.isNotEmpty)
-                    warning,
-                }.join(' · '),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }

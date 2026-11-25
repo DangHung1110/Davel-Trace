@@ -382,7 +382,11 @@ void main() {
     await tester.tap(find.byKey(const Key('open-planning-button')));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('source-status-banner')), findsOneWidget);
-    expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+    expect(find.byKey(const Key('request-plan-button')), findsNothing);
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
     await tester.pageBack();
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('map-tab')), findsOneWidget);
@@ -411,9 +415,7 @@ void main() {
     expect(state.currentPlanningRequestId, 'replan-request-010');
   });
 
-  testWidgets('primary planning actions fit a 390x844 viewport', (
-    tester,
-  ) async {
+  testWidgets('demo route preview fits a 390x844 viewport', (tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -428,7 +430,11 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('open-planning-button')));
     await tester.pumpAndSettle();
-    expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+    expect(find.byKey(const Key('request-plan-button')), findsNothing);
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 }

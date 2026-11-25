@@ -18,7 +18,7 @@ void main() {
     await tester.pumpWidget(DavelTraceApp(repository: repository));
     await tester.pumpAndSettle();
 
-    expect(find.text('Backend chưa sẵn sàng'), findsOneWidget);
+    expect(find.text('Chưa tải được chuyến đi'), findsOneWidget);
     repository.failListProfiles = false;
     await tester.tap(find.byKey(const Key('retry-api-button')));
     await tester.pumpAndSettle();

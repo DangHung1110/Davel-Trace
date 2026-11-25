@@ -123,7 +123,9 @@ class AuthController extends ChangeNotifier {
     final delivery = await repository.register(email, password);
     pendingEmail = email.trim().toLowerCase();
     status = AuthStatus.verificationRequired;
-    message = delivery == 'sent'
+    message = developmentInboxEnabled && delivery == 'sent'
+        ? 'Tài khoản đã tạo. Bạn có thể dùng mã thử bên dưới.'
+        : delivery == 'sent'
         ? 'Tài khoản đã tạo. Hãy kiểm tra email để lấy mã xác thực.'
         : 'Tài khoản đã tạo nhưng chưa gửi được email. Hãy thử gửi lại mã.';
   });

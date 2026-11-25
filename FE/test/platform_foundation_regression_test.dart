@@ -48,7 +48,7 @@ void main() {
     expect(find.byKey(const Key('trip-demo-notice')), findsOneWidget);
   });
 
-  testWidgets('live and stale planning states stay visibly distinct', (
+  testWidgets('sample and stale planning states stay visibly distinct', (
     tester,
   ) async {
     final state = AppState(FakeManagementRepository(seeded: true));
@@ -56,11 +56,17 @@ void main() {
     state.demoSource = DemoSource.live;
     await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
     await tester.pumpAndSettle();
-    expect(find.text('Phương án từ hệ thống'), findsOneWidget);
+    expect(
+      find.text('Bạn đang xem lịch mẫu. Đăng nhập để lập và lưu lịch riêng.'),
+      findsOneWidget,
+    );
 
     state.demoSource = DemoSource.stale;
     await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
     await tester.pumpAndSettle();
-    expect(find.text('Dữ liệu gần nhất · mất kết nối'), findsOneWidget);
+    expect(
+      find.text('Mất kết nối. Bạn vẫn có thể xem các lịch gợi ý trước đó.'),
+      findsOneWidget,
+    );
   });
 }

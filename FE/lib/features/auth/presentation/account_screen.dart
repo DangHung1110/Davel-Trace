@@ -45,9 +45,7 @@ class AccountScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            signedIn
-                                ? 'Tài khoản đã đăng nhập'
-                                : 'Bạn đang dùng bản demo',
+                            signedIn ? 'Email tài khoản' : 'Bạn đang xem thử',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(height: 6),
@@ -58,7 +56,7 @@ class AccountScreen extends StatelessWidget {
                             )
                           else
                             const Text(
-                              'Đăng nhập để lưu chuyến đi và chi tiêu vào tài khoản.',
+                              'Đăng nhập để lưu chuyến đi và chi tiêu của bạn.',
                             ),
                         ],
                       ),
@@ -67,6 +65,14 @@ class AccountScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              if (!signedIn && controller != null) ...[
+                FilledButton(
+                  key: const Key('account-logout-button'),
+                  onPressed: controller!.busy ? null : controller!.leaveDemo,
+                  child: const Text('Đăng nhập'),
+                ),
+                const SizedBox(height: 16),
+              ],
               SurfaceCard(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
@@ -76,8 +82,7 @@ class AccountScreen extends StatelessWidget {
                         key: const Key('account-security-button'),
                         icon: Icons.shield_outlined,
                         title: 'Bảo mật và dữ liệu',
-                        subtitle:
-                            'Thiết bị đăng nhập, xuất dữ liệu, xóa tài khoản',
+                        subtitle: 'Thiết bị đăng nhập và quyền riêng tư',
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute<void>(
                             builder: (_) =>
@@ -91,7 +96,7 @@ class AccountScreen extends StatelessWidget {
                       key: const Key('travel-preferences-button'),
                       icon: Icons.tune_rounded,
                       title: 'Sở thích du lịch',
-                      subtitle: 'Tùy chọn gợi ý cho chuyến đi mới',
+                      subtitle: 'Nhịp đi, thể lực và sở thích của bạn',
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute<void>(
                           builder: (_) => Scaffold(
@@ -113,20 +118,12 @@ class AccountScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              if (controller != null)
-                OutlinedButton.icon(
+              if (signedIn && controller != null)
+                TextButton.icon(
                   key: const Key('account-logout-button'),
-                  onPressed: controller!.busy
-                      ? null
-                      : signedIn
-                      ? controller!.logout
-                      : controller!.leaveDemo,
-                  icon: Icon(
-                    signedIn ? Icons.logout_rounded : Icons.login_rounded,
-                  ),
-                  label: Text(
-                    signedIn ? 'Đăng xuất' : 'Đăng nhập / Tạo tài khoản',
-                  ),
+                  onPressed: controller!.busy ? null : controller!.logout,
+                  icon: const Icon(Icons.logout_rounded),
+                  label: const Text('Đăng xuất'),
                 ),
             ],
           ),

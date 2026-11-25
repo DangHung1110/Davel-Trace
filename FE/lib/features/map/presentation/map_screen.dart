@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../../theme/app_theme.dart';
@@ -387,9 +387,9 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                             },
                             label: switch (_displayRoute?.quality) {
                               'road_route' =>
-                                'OSRM ${(_displayRoute!.distanceM / 1000).toStringAsFixed(1)} km',
-                              'matrix_estimate' => 'Ước tính ma trận',
-                              'interpolated' => 'Nội suy minh họa',
+                                'Tuyến đường · ${(_displayRoute!.distanceM / 1000).toStringAsFixed(1)} km',
+                              'matrix_estimate' ||
+                              'interpolated' => 'Đường nối minh họa',
                               _ => 'Chưa có tuyến',
                             },
                           ),
@@ -495,13 +495,6 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
               onPlay: (_displayRoute?.geometry.length ?? 0) >= 2 ? _play : null,
               onPause: _isPlaying ? _pause : null,
               onReset: _reset,
-              routeSource: switch (_displayRoute?.quality) {
-                'road_route' => 'OSRM',
-                'matrix_estimate' => 'Ma trận',
-                'interpolated' => 'Nội suy',
-                _ => 'Không có',
-              },
-              mapSource: kIsWeb ? 'PMTiles' : 'OSM',
               onOpenPoi: widget.onOpenItinerary,
               isDraft: widget.isDraft,
             ),
@@ -520,8 +513,6 @@ class _ActiveTripCard extends StatelessWidget {
     required this.onPlay,
     required this.onPause,
     required this.onReset,
-    required this.routeSource,
-    required this.mapSource,
     required this.onOpenPoi,
     required this.isDraft,
   });
@@ -532,8 +523,6 @@ class _ActiveTripCard extends StatelessWidget {
   final VoidCallback? onPlay;
   final VoidCallback? onPause;
   final VoidCallback onReset;
-  final String routeSource;
-  final String mapSource;
   final VoidCallback onOpenPoi;
   final bool isDraft;
 
@@ -547,13 +536,6 @@ class _ActiveTripCard extends StatelessWidget {
       color: AppColors.surface,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(color: AppColors.outline),
-      boxShadow: const [
-        BoxShadow(
-          color: Color(0x18193F33),
-          blurRadius: 14,
-          offset: Offset(0, 4),
-        ),
-      ],
     ),
     child: SingleChildScrollView(
       child: Column(
@@ -605,13 +587,8 @@ class _ActiveTripCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isDraft
-                            ? 'Điểm xuất phát trong phương án'
-                            : 'Điểm đầu tiên',
-                        style: const TextStyle(
-                          fontSize: 10,
-                          color: AppColors.muted,
-                        ),
+                        '$stopCount điểm dừng · Điểm đầu tiên',
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
                         nextStop?.title ?? 'Chưa có điểm dừng trên bản đồ',
@@ -627,7 +604,7 @@ class _ActiveTripCard extends StatelessWidget {
                         nextStop == null
                             ? '$stopCount điểm dừng trong lịch trình'
                             : '${nextStop!.time} · dừng ${nextStop!.durationMinutes} phút',
-                        style: const TextStyle(fontSize: 11),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
@@ -639,56 +616,40 @@ class _ActiveTripCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 9),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
-              decoration: BoxDecoration(
-                color: AppColors.softSurface,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
+            if (onPlay != null || isPlaying) ...[
+              const SizedBox(height: 9),
+              Row(
                 children: [
-                  _TripMetric(value: '$stopCount điểm', label: 'lịch trình'),
-                  const _Divider(),
-                  _TripMetric(value: routeSource, label: 'tuyến'),
-                  const _Divider(),
-                  _TripMetric(value: mapSource, label: 'bản đồ'),
+                  Expanded(
+                    child: FilledButton.icon(
+                      key: const Key('play-car-button'),
+                      onPressed: onPlay,
+                      icon: Icon(
+                        isPlaying
+                            ? Icons.directions_car_filled_rounded
+                            : Icons.play_arrow_rounded,
+                        size: 18,
+                      ),
+                      label: Text(
+                        isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 7),
+                  if (isPlaying)
+                    IconButton.filledTonal(
+                      tooltip: 'Tạm dừng',
+                      onPressed: onPause,
+                      icon: const Icon(Icons.pause_rounded),
+                    ),
+                  IconButton.filledTonal(
+                    tooltip: 'Đặt lại mô phỏng',
+                    onPressed: onReset,
+                    icon: const Icon(Icons.restart_alt_rounded),
+                  ),
                 ],
               ),
-            ),
-            const SizedBox(height: 9),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton.icon(
-                    key: const Key('play-car-button'),
-                    onPressed: onPlay,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.secondary,
-                      foregroundColor: Colors.white,
-                    ),
-                    icon: Icon(
-                      isPlaying
-                          ? Icons.directions_car_filled_rounded
-                          : Icons.play_arrow_rounded,
-                      size: 18,
-                    ),
-                    label: Text(isPlaying ? 'Đang mô phỏng' : 'Mô phỏng tuyến'),
-                  ),
-                ),
-                const SizedBox(width: 7),
-                IconButton.filledTonal(
-                  tooltip: 'Tạm dừng',
-                  onPressed: onPause,
-                  icon: const Icon(Icons.pause_rounded),
-                ),
-                IconButton.filledTonal(
-                  tooltip: 'Đặt lại mô phỏng',
-                  onPressed: onReset,
-                  icon: const Icon(Icons.restart_alt_rounded),
-                ),
-              ],
-            ),
+            ],
           ],
         ],
       ),
@@ -752,33 +713,4 @@ class _RoundMapButton extends StatelessWidget {
     ),
     icon: Icon(icon, size: 19),
   );
-}
-
-class _TripMetric extends StatelessWidget {
-  const _TripMetric({required this.value, required this.label});
-  final String value;
-  final String label;
-  @override
-  Widget build(BuildContext context) => Expanded(
-    child: Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            color: AppColors.ink,
-            fontSize: 11,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        Text(label, style: const TextStyle(fontSize: 9)),
-      ],
-    ),
-  );
-}
-
-class _Divider extends StatelessWidget {
-  const _Divider();
-  @override
-  Widget build(BuildContext context) =>
-      Container(width: 1, height: 24, color: AppColors.outline);
 }

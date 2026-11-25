@@ -65,19 +65,9 @@ class MapStop {
   }) => MapStop(
     id: activity.id,
     title: activity.title,
-    subtitle: [
-      activity.notes.isEmpty
-          ? categoryLabel(activity.category)
-          : activity.notes,
-      if (activity.poiId == null)
-        'Hoạt động riêng'
-      else if (place == null)
-        'POI chưa khả dụng · trạng thái chưa xác minh'
-      else if (place.verified)
-        'POI đã xác minh'
-      else
-        'POI chưa xác minh',
-    ].join(' · '),
+    subtitle: activity.notes.isEmpty
+        ? categoryLabel(activity.category)
+        : activity.notes,
     time:
         '${activity.startAt.hour.toString().padLeft(2, '0')}:${activity.startAt.minute.toString().padLeft(2, '0')}',
     durationMinutes: activity.endAt.difference(activity.startAt).inMinutes,

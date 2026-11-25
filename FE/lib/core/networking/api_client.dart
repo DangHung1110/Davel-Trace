@@ -96,7 +96,7 @@ class ApiClient {
     } on http.ClientException {
       throw ApiException(
         'NETWORK_ERROR',
-        'Không kết nối được API. Hãy chạy backend tại http://127.0.0.1:8000.',
+        'Không thể kết nối. Kiểm tra mạng rồi thử lại.',
         correlationId: correlationId,
       );
     }

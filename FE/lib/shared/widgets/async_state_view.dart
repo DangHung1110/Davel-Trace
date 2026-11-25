@@ -19,7 +19,13 @@ class AsyncStateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            semanticsLabel: 'Đang tải chuyến đi',
+          ),
+        ),
+      );
     }
     if (error == null) return child;
     return Scaffold(
@@ -38,7 +44,7 @@ class AsyncStateView extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Backend chưa sẵn sàng',
+                  'Chưa tải được chuyến đi',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 8),

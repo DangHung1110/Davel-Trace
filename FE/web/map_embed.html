@@ -503,12 +503,12 @@
         if (!followUserLocation) {
           fitRoute([...routeCoordinates, ...stops.map((stop) => [stop.longitude, stop.latitude])]);
         }
-        if (quality === "road_route") statusElement.textContent = "OSRM · tuyến đường bộ";
-        else if (quality === "matrix_estimate") statusElement.textContent = "Ước tính ma trận · đường nối minh họa";
-        else if (quality === "interpolated") statusElement.textContent = "Đường nối nội suy · không phải tuyến thật";
-        else statusElement.textContent = route?.warning || "Chưa có tuyến khả dụng";
-        if (route?.warning) statusElement.textContent = route.warning;
-        statusElement.hidden = stops.length < 2 || (quality === "road_route" && !route?.warning);
+        statusElement.textContent =
+          quality === "matrix_estimate" || quality === "interpolated"
+            ? "Đường nối minh họa"
+            : "Chưa có tuyến";
+        statusElement.hidden =
+          window.parent !== window || stops.length < 2 || quality === "road_route";
         if (autoPlay) setTimeout(playRoute, 1300);
       }
 
