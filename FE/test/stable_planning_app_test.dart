@@ -90,9 +90,6 @@ class _LifecyclePlanningRepository
 
   @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {}
-
-  @override
-  Future<Map<String, dynamic>> readiness() async => {'status': 'ready'};
 }
 
 class _HotelManagement extends FakeManagementRepository

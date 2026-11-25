@@ -102,6 +102,11 @@ PLAN_WORKERS = 1
 PLAN_DETERMINISTIC_TIME = 5.0
 # Only a last guard for an overloaded machine; it should never be what stops a solve.
 PLAN_WALL_LIMIT_S = 60.0
+# The app needs actionable options while the user is waiting. It uses the same
+# objectives and hard gate with a smaller search allowance per solve.
+APP_PLAN_DETERMINISTIC_TIME = 0.85
+APP_DISTINCT_DETERMINISTIC_TIME = 0.45
+APP_PLAN_WALL_LIMIT_S = 7.0
 
 
 def _origin_id(origin: dict | None, by_id: dict, cells) -> tuple[str | None, str | None]:
@@ -133,6 +138,10 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     pairwise-different plans by (quality - POI-set Jaccard); the enumeration
     stats travel in each plan's `solution_pool`.
     """
+    return plan_itinerary(body, diverse)
+
+
+def plan_itinerary(body: ItineraryIn, diverse: bool = False, *, interactive: bool = False):
     settings = get_settings()
     try:
         pois = retrieval_svc.load_pois_json(
@@ -279,6 +288,12 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         plan["itinerary_id"] = str(uuid4())
         plan["trip_id"] = body.trip.trip_id
         plan["profile"] = profile_name
+        activities = []
+        for activity in plan.get("activities") or []:
+            place = by_id.get(activity.get("poi_id")) or {}
+            name = activity.get("name") or activity.get("title") or place.get("name")
+            activities.append({**activity, "name": name} if name else activity)
+        plan["activities"] = activities
         plan["profile_filter"] = {"dropped": len(verified_drops),
                                   "dropped_all": len(profile_drops),
                                   "rules": drop_counts}
@@ -302,8 +317,11 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             day_contexts[key] = trip_ctx.build(day_trip, profile if profile_provided else {})
         return day_contexts[key]
 
+    search_time = APP_PLAN_DETERMINISTIC_TIME if interactive else PLAN_DETERMINISTIC_TIME
+    wall_limit_s = APP_PLAN_WALL_LIMIT_S if interactive else PLAN_WALL_LIMIT_S
+
     def build_one(profile_name: str, pool_size: int = 1,
-                  deterministic_time: float = PLAN_DETERMINISTIC_TIME, **extra) -> dict:
+                  deterministic_time: float = search_time, **extra) -> dict:
         def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
             # A solution pool is one day's alternatives: a longer trip plans argmax days.
             several = day_trip is not trip
@@ -312,9 +330,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                 ranked=[r for r in ranked if r.get("poi_id") not in used],
                 pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=day_ctx(day_trip),
                 pool_size=1 if several else pool_size,
-                timeout_s=PLAN_WALL_LIMIT_S, workers=PLAN_WORKERS,
+                timeout_s=wall_limit_s, workers=PLAN_WORKERS,
                 deterministic_time=deterministic_time,
-                **({"diagnose": diagnose} if several else {}), **extra))
+                diagnose=diagnose and not interactive, **extra))
 
         plan = dict(multiday.build_trip(
             solve, trip,
@@ -340,7 +358,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         if profile_name not in body.profiles or plan.get("_rung") is None:
             return []
         fresh = build_one(
-            profile_name, deterministic_time=DISTINCT_DETERMINISTIC_TIME,
+            profile_name, deterministic_time=(
+                APP_DISTINCT_DETERMINISTIC_TIME if interactive else DISTINCT_DETERMINISTIC_TIME),
             distinct_from=[frozenset(pool_svc.poi_set(o)) for o in others],
             max_rung=plan["_rung"])
         if not fresh.get("activities") or not fresh.get("passed"):

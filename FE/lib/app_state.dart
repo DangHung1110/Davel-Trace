@@ -56,7 +56,6 @@ class AppState extends ChangeNotifier {
   String? currentPlanningRequestId;
   List<ItineraryVersionSummary> itineraryVersions = [];
   SavedItineraryPlan? _savedItineraryPlan;
-  Map<String, dynamic>? planningReadiness;
   Map<String, dynamic>? aiReadiness;
   AiInterpretationProposal? aiProposal;
   PlanExplanation? planExplanation;
@@ -193,7 +192,6 @@ class AppState extends ChangeNotifier {
     currentPlanningRequestId = null;
     itineraryVersions = [];
     _savedItineraryPlan = null;
-    planningReadiness = null;
     demoSource = DemoSource.seeded;
   }
 
@@ -722,16 +720,6 @@ class AppState extends ChangeNotifier {
           ? 'FastAPI đã trả ${result.items.length} phương án qua cổng cứng.'
           : 'FastAPI trả ${result.items.length} phương án; không thêm phương án kém chỉ để đủ số lượng.';
       _confirmedPlanningOverrides = const {};
-      try {
-        final readiness = await planningRepository.readiness();
-        if (!_disposed && revision == _planningRevision) {
-          planningReadiness = readiness;
-        }
-      } catch (_) {
-        if (!_disposed && revision == _planningRevision) {
-          planningReadiness = null;
-        }
-      }
     } catch (error) {
       if (_disposed || revision != _planningRevision) return;
       demoSource = planAlternatives.isEmpty
@@ -1039,7 +1027,6 @@ class AppState extends ChangeNotifier {
     acceptance = null;
     currentPlanningRequestId = null;
     itineraryVersions = [];
-    planningReadiness = null;
     aiReadiness = null;
     aiProposal = null;
     planExplanation = null;

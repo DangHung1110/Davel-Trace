@@ -49,7 +49,7 @@ from BE.app.modules.planning_lifecycle.infrastructure import (
 )
 from BE.app.modules.planning_lifecycle.stable_planner import with_product_evidence
 from BE.app.modules.trips.service import trip_public
-from BE.app.routers.itinerary import ItineraryIn, itinerary as legacy_itinerary
+from BE.app.routers.itinerary import ItineraryIn, plan_itinerary as legacy_itinerary
 from BE.app.schemas.trip import AREA_CODES, TripRequest
 
 
@@ -362,14 +362,15 @@ class PlanningLifecycleService:
         self._clock = clock or _now
 
     def _run_legacy_planner(self, trip_input: dict, target: int, kind: str) -> dict:
-        # Preserve the measured source solver budget; the product timeout is a
-        # final guard, not a tuning knob that silently changes feasible output.
+        # The interactive search still goes through validation and the hard gate.
+        # The request timeout is a final guard for pathological inputs.
         timeout = 90
         executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="planner")
         future = executor.submit(
             legacy_itinerary,
             ItineraryIn(trip=TripRequest(**trip_input)),
             False,
+            interactive=(kind == "plan"),
         )
         try:
             result = future.result(timeout=timeout)
