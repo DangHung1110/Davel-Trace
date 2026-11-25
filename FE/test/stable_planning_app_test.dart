@@ -1,6 +1,8 @@
 import 'package:davel_trace/app.dart';
 import 'package:davel_trace/app_state.dart';
+import 'package:davel_trace/core/errors/api_exception.dart';
 import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
+import 'package:davel_trace/features/itinerary/presentation/planning_request_review.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/features/map/presentation/widgets/map_canvas.dart';
@@ -122,6 +124,40 @@ class _HotelManagement extends FakeManagementRepository
   }
 }
 
+class _PromptPlanningRepository extends _LifecyclePlanningRepository
+    implements AiPlanningRepository {
+  final prompts = <String>[];
+
+  @override
+  Future<Map<String, dynamic>> aiReadiness() async => {
+    'available': true,
+    'capabilities': {'interpretation': true},
+  };
+
+  @override
+  Future<AiInterpretationProposal> interpret(String tripId, String text) async {
+    prompts.add(text);
+    if (prompts.length == 1) {
+      throw const ApiException('LLM_UNAVAILABLE', 'AI tạm thời chưa phản hồi.');
+    }
+    return const AiInterpretationProposal(
+      id: 'prompt-proposal',
+      fields: {'traveler_count': 2, 'indicative_budget': 1500000},
+      hardConstraints: {},
+      softPreferences: {},
+      assumptions: [],
+      unresolved: [],
+      provider: 'fixture',
+      model: 'fixture',
+      externalProcessing: false,
+    );
+  }
+
+  @override
+  Future<PlanExplanation> explain(String alternativeId) =>
+      throw UnimplementedError();
+}
+
 class _SavedMapManagement extends _HotelManagement
     implements DraftRouteRepository {
   List<String>? routedIds;
@@ -151,6 +187,72 @@ class _SavedMapManagement extends _HotelManagement
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets(
+    'the focused prompt closes safely and opens review after a retry',
+    (tester) async {
+      tester.view.physicalSize = const Size(390, 844);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final planning = _PromptPlanningRepository();
+      final state = AppState(_HotelManagement(), planningRepository: planning);
+      addTearDown(state.dispose);
+      await state.initialize();
+      await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
+      await tester.pumpAndSettle();
+
+      Future<void> submitPrompt() async {
+        final open = find.byKey(const Key('request-ai-interpretation'));
+        await tester.ensureVisible(open);
+        await tester.tap(open);
+        await tester.pumpAndSettle();
+        final dialog = find.byType(AlertDialog);
+        final confirm = find.descendant(
+          of: dialog,
+          matching: find.byType(FilledButton),
+        );
+        expect(confirm, findsOneWidget);
+        expect(
+          find.descendant(of: dialog, matching: find.byType(TextButton)),
+          findsNothing,
+        );
+        expect(tester.widget<FilledButton>(confirm).onPressed, isNull);
+        await tester.enterText(
+          find.byKey(const Key('planning-ai-prompt')),
+          '  Hai người đi với tổng ngân sách một triệu rưỡi.  ',
+        );
+        await tester.pump();
+        await tester.tap(confirm);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      }
+
+      await submitPrompt();
+      expect(find.text('AI tạm thời chưa phản hồi.'), findsOneWidget);
+      expect(find.byType(PlanningRequestReview), findsNothing);
+      await submitPrompt();
+      expect(find.byType(PlanningRequestReview), findsOneWidget);
+      expect(
+        planning.prompts,
+        List.filled(2, 'Hai người đi với tổng ngân sách một triệu rưỡi.'),
+      );
+      expect(planning.planningKeys, isEmpty);
+
+      final save = find.byKey(const Key('save-planning-review'));
+      await tester.scrollUntilVisible(
+        save,
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(save.hitTestable());
+      await tester.pumpAndSettle();
+      expect(planning.overrides.single['traveler_count'], 2);
+      expect(planning.overrides.single['indicative_budget'], 1500000);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('reopens a saved planner route even when no manual stops exist', (
     tester,

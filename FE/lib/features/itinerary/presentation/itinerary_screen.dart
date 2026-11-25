@@ -52,7 +52,9 @@ class ItineraryScreen extends StatelessWidget {
         ),
       ),
     );
-    if (corrections != null && context.mounted) {
+    if (corrections != null &&
+        context.mounted &&
+        identical(state.aiProposal, proposal)) {
       await state.confirmAiProposalAndPlan(corrections: corrections);
     }
   }
@@ -535,13 +537,16 @@ class _PlanningPanelState extends State<_PlanningPanel> {
   }
 
   Future<void> _interpret(BuildContext context) async {
-    final controller = TextEditingController();
+    final tripId = state.activeTrip?.id;
+    if (tripId == null) return;
+    var draft = '';
     final text = await showDialog<String>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Diễn giải mong muốn với AI'),
-        content: SingleChildScrollView(
-          child: Column(
+      builder: (_) => StatefulBuilder(
+        builder: (dialogContext, setDialogState) => AlertDialog(
+          scrollable: true,
+          title: const Text('Nhập mong muốn cho chuyến đi'),
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -552,34 +557,40 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               const SizedBox(height: 10),
               TextField(
                 key: const Key('planning-ai-prompt'),
-                controller: controller,
+                onChanged: (value) =>
+                    setDialogState(() => draft = value.trim()),
                 minLines: 3,
                 maxLines: 6,
                 maxLength: 4000,
                 decoration: const InputDecoration(
-                  labelText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                  labelText: 'Mong muốn của bạn',
+                  hintText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
                   alignLabelWithHint: true,
                 ),
               ),
             ],
           ),
+          actions: [
+            FilledButton(
+              key: const Key('submit-planning-ai-prompt'),
+              onPressed: draft.length < 3
+                  ? null
+                  : () {
+                      FocusScope.of(dialogContext).unfocus();
+                      Navigator.pop(dialogContext, draft);
+                    },
+              child: const Text('Xác nhận'),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Dùng form thường'),
-          ),
-          FilledButton(
-            onPressed: () =>
-                Navigator.pop(dialogContext, controller.text.trim()),
-            child: const Text('Diễn giải'),
-          ),
-        ],
       ),
     );
-    controller.dispose();
-    if (text != null && text.length >= 3) {
-      await state.interpretPlanningRequest(text);
+    if (text == null || !context.mounted || state.activeTrip?.id != tripId) {
+      return;
+    }
+    await state.interpretPlanningRequest(text);
+    if (context.mounted && state.activeTrip?.id == tripId) {
+      await ItineraryScreen._reviewProposal(context, state);
     }
   }
 
