@@ -100,8 +100,6 @@ kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line)
 .both { font-size: .72rem; border: 1px solid var(--line); border-radius: 9px; padding: 0 6px; color: var(--muted); margin-left: 6px; white-space: nowrap; }
 .leg { padding: 2px 4px 2px 102px; font-size: .8rem; color: var(--muted); font-family: var(--mono); }
 .leg .idle { color: var(--bad); }
-.notes { background: var(--bad-soft); border-radius: 6px; padding: 8px 10px; font-size: .88rem; }
-.notes ul { margin: 4px 0 0; padding-left: 18px; }
 .tags { display: grid; gap: 6px; border-top: 1px dashed var(--line); padding-top: 10px; }
 .taglist { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { padding: 3px 10px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); font-size: .86rem; }
@@ -169,7 +167,8 @@ kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line)
         <li>Đọc yêu cầu của khách ở trên cùng, rồi đọc hai lịch như thể <b>bạn là vị khách đó</b> và sắp đi theo lịch.</li>
         <li>Chọn <b>A tốt hơn</b>, <b>B tốt hơn</b> hoặc <b>Ngang nhau</b> (khi thật sự không chọn được). Không có đáp án đúng: hãy chọn theo cảm nhận của bạn.</li>
         <li>Nếu muốn, bấm vài nhãn dưới mỗi lịch (đi lại nhiều, thiếu bữa, đúng ý khách...) và ghi chú thêm. Không bắt buộc.</li>
-        <li>Điểm có nền xám và chữ “cả 2” là điểm có trong cả hai lịch, để bạn tập trung vào chỗ khác nhau. Giá là cho mỗi người; tổng là cho cả nhóm; thời gian đi xe tính bằng xe máy.</li>
+        <li>Điểm có nền xám và chữ “cả 2” là điểm có trong cả hai lịch, để bạn tập trung vào chỗ khác nhau. Giá là cho mỗi người; tổng là cho cả nhóm.</li>
+        <li>Thời gian đi xe tính bằng xe máy, kể cả chặng từ nơi ở đến điểm đầu tiên (chưa tính đường về). Giữa hai điểm, lịch luôn chừa thêm khoảng 12 phút để gửi xe, đi bộ vào; “rảnh” là thời gian trống ngoài khoảng đó.</li>
         <li>Phím tắt: <kbd>A</kbd> chọn A, <kbd>B</kbd> chọn B, <kbd>N</kbd> ngang nhau, <kbd>→</kbd> hoặc <kbd>Enter</kbd> sang cặp sau, <kbd>←</kbd> cặp trước.</li>
         <li>Câu trả lời tự lưu trong trình duyệt này theo mã của bạn. Cuối mỗi buổi, bấm <b>Xuất JSON</b> và gửi file cho người phụ trách.</li>
       </ul>
@@ -294,6 +293,10 @@ function el(tag, attrs = {}, ...kids) {
   node.append(...kids.filter((k) => k !== null && k !== undefined));
   return node;
 }
+function mapsUrl(stop) {
+  const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${stop.name} Đà Nẵng`)}`;
+  return stop.place_id ? `${url}&query_place_id=${encodeURIComponent(stop.place_id)}` : url;
+}
 function money(n) {
   if (n === null || n === undefined) return "chưa rõ";
   return n === 0 ? "miễn phí" : `${Number(n).toLocaleString("vi-VN")}đ`;
@@ -339,6 +342,7 @@ function renderRequest(req, index) {
     items.forEach((x) => row.append(chips ? el("span", { class: "chip", text: x }) : el("span", { text: x })));
     box.append(row);
   };
+  if (req.base) line("Nơi ở", [`${req.base} · mỗi ngày đi từ đây (chưa tính đường về)`], false);
   line("Khách muốn", req.wishes, true);
   line("Phải đến", req.must_visit, true);
   line("Không muốn đến", req.avoid, true);
@@ -365,16 +369,21 @@ function renderPlan(side, plan, otherIds, pairId) {
   let day = null;
   let estimated = false;
   plan.stops.forEach((stop, i) => {
-    if (stop.day && stop.day !== day) {
+    const newDay = Boolean(stop.day) && stop.day !== day;
+    if (newDay) {
       day = stop.day;
       list.append(el("div", { class: "dayhead", text: `Ngày ${day}` }));
-    } else if (i > 0 && (stop.leg_min !== null || stop.idle_min)) {
-      const leg = el("div", { class: "leg" }, `↓ ${stop.leg_min ?? "?"} phút đi xe`);
-      if (stop.idle_min >= 15) leg.append(el("span", { class: "idle", text: ` · rảnh ${stop.idle_min} phút` }));
+    }
+    const hasLeg = stop.leg_min !== null && stop.leg_min !== undefined;
+    if (i === 0 || newDay) {
+      if (hasLeg) list.append(el("div", { class: "leg" }, `↓ ${stop.leg_min} phút đi xe từ nơi ở`));
+    } else if (hasLeg || stop.idle_min) {
+      const leg = el("div", { class: "leg" }, `↓ ${hasLeg ? stop.leg_min : "?"} phút đi xe`);
+      if (stop.idle_min >= 10) leg.append(el("span", { class: "idle", text: ` · rảnh ${stop.idle_min} phút` }));
       list.append(leg);
     }
     const shared = otherIds.has(stop.poi_id);
-    const name = el("a", { href: stop.maps, target: "_blank", rel: "noopener", text: stop.name });
+    const name = el("a", { href: mapsUrl(stop), target: "_blank", rel: "noopener", text: stop.name });
     const place = el("div", { class: "place" }, name, shared ? el("span", { class: "both", text: "cả 2" }) : null,
       el("small", { text: stop.kind }));
     estimated = estimated || Boolean(stop.fee_estimated);
@@ -384,11 +393,6 @@ function renderPlan(side, plan, otherIds, pairId) {
   });
   card.append(list);
   if (estimated) card.append(el("p", { class: "muted small", text: "* giá ước tính theo loại điểm, chưa phải giá thật" }));
-  if (plan.notes && plan.notes.length) {
-    const ul = el("ul");
-    plan.notes.forEach((n) => ul.append(el("li", { text: n })));
-    card.append(el("div", { class: "notes" }, el("b", { text: "Lịch này ghi chú:" }), ul));
-  }
 
   const answer = answers[pairId] || {};
   const chosen = new Set(((answer.tags || {})[side]) || []);
