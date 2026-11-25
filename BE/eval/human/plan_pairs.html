@@ -91,14 +91,14 @@ kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line)
 .sum b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 .stops { display: grid; gap: 0; }
 .dayhead { font-weight: 700; padding: 10px 0 4px; border-bottom: 2px solid var(--line); margin-bottom: 2px; }
-.stop { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 2px 10px; padding: 7px 4px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.stop { display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; gap: 2px 10px; padding: 7px 4px; border-bottom: 1px solid var(--line); align-items: baseline; }
 .stop.shared { background: var(--shared); }
 .time { font-family: var(--mono); font-size: .86rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .place { min-width: 0; overflow-wrap: anywhere; }
 .place small { display: block; color: var(--muted); font-size: .82rem; }
 .fee { font-family: var(--mono); font-size: .86rem; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .both { font-size: .72rem; border: 1px solid var(--line); border-radius: 9px; padding: 0 6px; color: var(--muted); margin-left: 6px; white-space: nowrap; }
-.leg { padding: 2px 4px 2px 102px; font-size: .8rem; color: var(--muted); font-family: var(--mono); }
+.leg { padding: 2px 4px 2px 114px; font-size: .8rem; color: var(--muted); font-family: var(--mono); }
 .leg .idle { color: var(--bad); }
 .tags { display: grid; gap: 6px; border-top: 1px dashed var(--line); padding-top: 10px; }
 .taglist { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -122,8 +122,9 @@ kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line)
 .done-banner { background: var(--good-soft); color: var(--good); border-radius: 8px; padding: 10px 14px; font-weight: 600; }
 @media (max-width: 880px) {
   .plans { grid-template-columns: minmax(0, 1fr); }
-  .stop { grid-template-columns: 78px minmax(0, 1fr) auto; gap: 2px 8px; }
-  .leg { padding-left: 86px; }
+  .stop { grid-template-columns: 92px minmax(0, 1fr) auto; gap: 2px 8px; }
+  .stop .time { font-size: .8rem; }
+  .leg { padding-left: 104px; }
   .choice { padding: 9px 4px; font-size: .92rem; }
   .choice kbd { display: none; }
 }
@@ -169,7 +170,7 @@ kbd { font-family: var(--mono); font-size: .82rem; border: 1px solid var(--line)
         <li>Nếu muốn, bấm vài nhãn dưới mỗi lịch (đi lại nhiều, thiếu bữa, đúng ý khách...) và ghi chú thêm. Không bắt buộc.</li>
         <li>Điểm có nền xám và chữ “cả 2” là điểm có trong cả hai lịch, để bạn tập trung vào chỗ khác nhau. Giá là cho mỗi người; tổng là cho cả nhóm.</li>
         <li>Thời gian đi xe tính bằng xe máy, kể cả chặng từ nơi ở đến điểm đầu tiên (chưa tính đường về). Giữa hai điểm, lịch luôn chừa thêm khoảng 12 phút để gửi xe, đi bộ vào; “rảnh” là thời gian trống ngoài khoảng đó.</li>
-        <li>Phím tắt: <kbd>A</kbd> chọn A, <kbd>B</kbd> chọn B, <kbd>N</kbd> ngang nhau, <kbd>→</kbd> hoặc <kbd>Enter</kbd> sang cặp sau, <kbd>←</kbd> cặp trước.</li>
+        <li>Phím tắt: <kbd>A</kbd> chọn A, <kbd>B</kbd> chọn B, <kbd>N</kbd> ngang nhau, <kbd>→</kbd> hoặc <kbd>Enter</kbd> sang cặp sau, <kbd>←</kbd> cặp trước. Muốn đổi ý thì chọn lại; muốn bỏ trống cặp này thì bấm “Bỏ chọn ở cặp này”.</li>
         <li>Câu trả lời tự lưu trong trình duyệt này theo mã của bạn. Cuối mỗi buổi, bấm <b>Xuất JSON</b> và gửi file cho người phụ trách.</li>
       </ul>
     </details>
@@ -433,8 +434,11 @@ function renderSheet() {
   const note = el("textarea", { id: "comment", placeholder: "Vì sao bạn chọn như vậy, hay điểm nào sai... (không bắt buộc)" });
   note.value = answer.comment || "";
   note.addEventListener("input", () => { const a = answerOf(pair.pair_id); a.comment = note.value; touch(a); });
+  const clear = el("button", { class: "btn", type: "button", id: "clear-btn", text: "Bỏ chọn ở cặp này" });
+  clear.addEventListener("click", clearChoice);
   sheet.append(el("section", { class: "panel verdict" }, el("label", { for: "comment", text: "Ghi chú cho cặp này" }), note,
-    el("p", { class: "muted small", text: "Chọn A tốt hơn / Ngang nhau / B tốt hơn ở thanh dưới cùng màn hình." })));
+    el("p", { class: "muted small", text: "Chọn A tốt hơn / Ngang nhau / B tốt hơn ở thanh dưới cùng màn hình." }),
+    el("div", {}, clear)));
   renderChoices();
   renderProgress();
   shownAt = Date.now();
@@ -449,19 +453,23 @@ function renderChoices() {
   $("prev-btn").disabled = pos === 0;
   const last = pos === PAIRS.length - 1;
   $("next-btn").textContent = last ? "Về cặp chưa chấm" : "Cặp sau →";
+  if ($("clear-btn")) $("clear-btn").disabled = !choice;
 }
 
-function choose(choice) {
+function setChoice(choice) {
   const pair = PAIRS[pos];
   if (!pair) return;
   const a = answerOf(pair.pair_id);
-  a.choice = a.choice === choice ? null : choice;      // pressing the chosen one again clears it
+  // Setting the same choice again keeps it: a click and then Enter must never clear it.
+  a.choice = choice;
   if (a.choice && a.secs === undefined) a.secs = Math.min(3600, Math.round((Date.now() - shownAt) / 1000));
   touch(a);
   renderChoices();
   const head = document.querySelector(".pairhead .muted");
   if (head) head.textContent = `Cặp ${pos + 1} / ${PAIRS.length}${isRated(pair.pair_id) ? " · đã chấm" : ""}`;
 }
+function choose(choice) { setChoice(choice); }
+function clearChoice() { setChoice(null); }
 
 function go(index) {
   if (!PAIRS.length) return;
@@ -601,7 +609,10 @@ document.addEventListener("keydown", (e) => {
   else if (key === "b") choose("B");
   else if (key === "n") choose("tie");
   else if (e.key === "ArrowRight" || e.key === "Enter") {
-    if (e.key === "Enter" && t && t.closest && t.closest("button, a, summary, label")) return;   // let it click
+    if (e.key === "Enter" && t && t.closest) {
+      // Enter on a choice just clicked means "next", not "click it again".
+      if (!t.closest(".choice") && t.closest("button, a, summary, label")) return;   // let it click
+    }
     next();
   }
   else if (e.key === "ArrowLeft") go(pos - 1);
