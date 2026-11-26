@@ -1,0 +1,77 @@
+{
+ "n": 30,
+ "legacy": {
+  "solved": "29/30",
+  "elapsed_median_s": 2.94,
+  "stops_mean": 5.414,
+  "ride_min_median": 16,
+  "ride_min_mean": 33.793,
+  "longest_leg_mean": 19.276,
+  "zone_changes_mean": 1.414,
+  "distinct_groups_mean": 4.207,
+  "plans_with_repeat_group": "13/29",
+  "plans_with_two_beaches": "0/29",
+  "adjacent_same_group_mean": 0.069,
+  "plans_with_duplicates": {
+   "dish": "0/29",
+   "market": "0/29",
+   "market_sandwich": "0/29",
+   "same_site": "0/29",
+   "umbrella": "0/29"
+  },
+  "lunch_in_window": "10/10",
+  "stops_by_pace": {
+   "1": 6.4,
+   "2": 5.3,
+   "3": 4.44
+  },
+  "top20_share": 0.796,
+  "distinct_pois": 52,
+  "gate_pass": "29/29",
+  "soft_failed": {
+   "A1": 1,
+   "CATEGORY_CAP": 24,
+   "F1": 7,
+   "NO_ADJACENT_FOOD": 1,
+   "NO_CONSECUTIVE": 20,
+   "REST_FOLLOWS_LUNCH": 2
+  }
+ },
+ "v1": {
+  "solved": "29/30",
+  "elapsed_median_s": 5.01,
+  "stops_mean": 5.586,
+  "ride_min_median": 19,
+  "ride_min_mean": 34.448,
+  "longest_leg_mean": 20.724,
+  "zone_changes_mean": 1.379,
+  "distinct_groups_mean": 4.345,
+  "plans_with_repeat_group": "13/29",
+  "plans_with_two_beaches": "0/29",
+  "adjacent_same_group_mean": 0.069,
+  "plans_with_duplicates": {
+   "dish": "0/29",
+   "market": "0/29",
+   "market_sandwich": "0/29",
+   "same_site": "0/29",
+   "umbrella": "0/29"
+  },
+  "lunch_in_window": "10/10",
+  "stops_by_pace": {
+   "1": 6.5,
+   "2": 5.3,
+   "3": 4.89
+  },
+  "top20_share": 0.753,
+  "distinct_pois": 58,
+  "gate_pass": "29/29",
+  "soft_failed": {
+   "A1": 1,
+   "CATEGORY_CAP": 25,
+   "F1": 5,
+   "NO_ADJACENT_FOOD": 1,
+   "NO_CONSECUTIVE": 20,
+   "REST_FOLLOWS_LUNCH": 2
+  }
+ }
+}

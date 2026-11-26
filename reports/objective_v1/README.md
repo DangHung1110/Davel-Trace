@@ -83,6 +83,40 @@ Ngày đi qua buổi tối có ăn tối (legacy → v1): held-out 26/26 → 24/
 
 Còn mở: experience giải chậm hơn 78% (ngân sách × 1,6); savings lặp nhóm 9 → 14 (cầu + phố du lịch, β phố 0,5); vài ngày đặt quán thứ hai lệch giờ khi khách ghi thích món đó (điểm gu cao) — để bước học trọng số; CP-SAT vẫn có thể dừng ở lời giải kém ở ngân sách giới hạn — gợi ý lời giải tốt hơn (pointer, bước 5).
 
+## Bước 4: một hàm điểm POI cho T1 (26/11, `compare_value_*.json`)
+
+T1 nay là một hàm (`BE/app/services/value.py`) cho cả ba profile; ba profile chỉ khác ở khối `value` của `v1.json` (`OBJECTIVE_V1.md` §5 "T1"). Trọng số là các số cũ trong code, nên balanced và experience cho ra v_i y hệt. Savings đổi hai chỗ: `avg_leg` ra khỏi v_i (T9 đã tính chạy xe; `avg_leg` chỉ còn xếp hạng ở bước cắt 40) và gu ăn / lean nhân với giá trị cao nhất thay vì trị tuyệt đối lớn nhất (quán đắt nhất). Đo từ `git archive` của `main` 707f084 và của nhánh `feat/single-poi-value`, cùng máy 12 nhân; bench chạy xen kẽ, 2 lượt mỗi bên. Trong `compare_value_gold_*.json` (viết bởi `analyze_objective.py`) khoá `legacy` là `main`, `v1` là nhánh; `compare_value_audit.json` ghi `before` / `after`.
+
+| Bộ đo | Chỉ số | Trước | Sau |
+|---|---|---|---|
+| Audit 67 request × 3 lịch | lịch rỗng / trượt gate / đi được | 0 / 0 / 201 | 0 / 0 / 201 |
+| | lịch y hệt: savings / balanced / experience | — | 5 / 67 / 67 (savings: 39 chỉ dời giờ hoặc đổi thứ tự, 23 đổi điểm) |
+| | Jaccard 3 lịch một request: trung bình / lớn nhất / cặp > 0,6 / router phải thay | 0,085 / 0,455 / 0 / 0 | 0,087 / 0,455 / 0 / 0 |
+| | savings: chạy xe mỗi ngày / chi phí mỗi lịch / lịch thiếu bữa tối | 19,6 phút / 394k / 11 | 20,2 phút / 413k / 7 |
+| Gold 30 | có lịch / qua gate (cả 3 profile) | 29 / 29 | 29 / 29 |
+| | lịch y hệt: savings / balanced / experience | — | 5 / 30 / 30 (savings: 15 đổi điểm) |
+| | savings: chạy xe trung vị / POI khác nhau / tỉ trọng top-20 | 16 phút / 52 / 0,796 | 19 phút / 58 / 0,753 |
+| | tổng thời gian giải: savings / balanced / experience | 136 / 106 / 146 s | 144 / 101 / 143 s |
+| Bench (`bench_latency.py`, 21 request) | trung vị / p95 | 4,15 và 4,14 / 9,29 và 8,93 s | 4,13 và 4,12 / 8,16 và 8,30 s |
+
+Ví dụ (audit T12, cặp đôi 08:00–20:00, ngân sách 600 nghìn): savings trước có 6 điểm, xong lúc 16:40, không ăn tối; sau có 7 điểm, ăn tối Mỳ Quảng Cô Sáu 50k/người lúc 18:23, tổng 200k. Ngân sách dưới 1 triệu tính tiền gấp đôi, nên với `avg_leg` bị trừ thêm, quán 50k có giá trị âm và bữa tối không đáng đi. Lịch savings thiếu bữa tối: 11 → 7.
+
+Savings giải chậm hơn chút: ở audit có J, 2/60 ngày thêm chạy hết ngân sách tìm kiếm (giá trị các điểm miễn phí phẳng hơn khi bỏ `avg_leg`); tổng thời gian giải gold +6%; bench không chậm đi: trung vị bằng, p95 giảm 0,6–1,1 giây (có thể vì gu ăn nay tính một lần mỗi POI thay vì mỗi lần xếp hạng; chưa đo riêng). Lời giải thích của từng điểm nay nói đúng lý do solver chọn, ví dụ "re (50k/nguoi), bua trua" thay cho "gio an, trong nha, do nang" của `rank.py`.
+
+**Đã thử và bỏ: xếp ứng viên theo v_i.** Nếu `build_plan` sắp ứng viên theo v_i thay vì giữ thứ tự router đưa vào, mô hình CP-SAT không đổi, chỉ đổi thứ tự nút. Đo trên cùng 60 request 1 ngày có ghi J (`scripts/audit_capture.py`):
+
+| | Giữ thứ tự cũ (bản commit) | Xếp theo v_i |
+|---|---|---|
+| Lịch balanced / experience khác `main` (audit 67) | 0 / 0 | 26 / 40 (24 / 39 đổi điểm) |
+| J so với `main`: balanced cao hơn / thấp hơn | bằng | 3 / 10 (trung bình −0,14%) |
+| J so với `main`: experience cao hơn / thấp hơn | bằng | 7 / 3 (Bà Nà +291%, M07 −24%) |
+| Ngày experience chạy hết ngân sách | 20 | 23 |
+| Tổng thời gian audit / bench trung vị | 355 s / 4,1 s | 378 s / 5,6 s |
+
+Thứ tự nút chỉ đổi đường tìm kiếm của CP-SAT (ở 60 request này, 49/180 lần giải của `main` dừng vì hết ngân sách), nên được và mất may rủi, kèm chậm hơn. Giữ thứ tự cũ; `rank.py` vì vậy vẫn quyết thứ tự nút (không vào J). Ca Bà Nà +291% cho thấy CP-SAT đôi khi kẹt ở lời giải kém với thứ tự cũ: việc của gợi ý lời giải (pointer, bước 7), không của T1.
+
+`pytest` đầy đủ: 1528 qua; 19 lỗi + 11 error đều có sẵn do môi trường (Google OAuth, `DATABASE_URL`/Postgres, 2 test ranh giới Flutter).
+
 ## Chạy lại
 
 ```bash
@@ -93,4 +127,14 @@ python reports/objective_v1/scripts/eval_objective.py <repo> <data> <ids> out_v1
 python reports/objective_v1/scripts/analyze_objective.py <repo> out_legacy.jsonl out_v1.jsonl
 python reports/objective_v1/scripts/eval_gold.py <repo> gold_v1.jsonl v1 2
 # đếm điểm trùng có sẵn trong analyze_objective.py (plans_with_duplicates)
+```
+
+Bước 4 (mỗi lệnh chạy trong một bản `git archive`, `<before>` và `<after>`):
+
+```bash
+python BE/tools/audit_plans.py --out audit.json --flags audit_flags.json
+python reports/objective_v1/scripts/compare_audit.py <before>/audit.json <before>/audit_flags.json <after>/audit.json <after>/audit_flags.json compare_value_audit.json
+python reports/objective_v1/scripts/eval_gold.py <repo> gold_savings.jsonl v1:savings 2
+python reports/objective_v1/scripts/audit_capture.py <repo> --only T,W,M,D,E --out cap.json --flags cap_flags.json
+python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v2 --rounds 3
 ```
