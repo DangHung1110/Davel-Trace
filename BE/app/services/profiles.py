@@ -757,11 +757,15 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     liked = retrieval.liked_wishes(profile_data.get("activities"))
     price_ref = price_reference(candidates)
     leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+    soft_poi_weights = trip.get("soft_poi_weights") or {}
+    max_priority = max(soft_poi_weights.values(), default=1)
 
     def _score_with_taste(poi: dict) -> float:
+        poi_id = poi["poi_id"]
         unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
-        return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
-                + unit * leans[poi["poi_id"]][0])
+        group_bonus = 0.3 * unit * soft_poi_weights.get(poi_id, 0) / max_priority
+        return (base_scores[poi_id] + TASTE_WEIGHT * unit * unit_delta
+                + unit * leans[poi_id][0] + group_bonus)
 
     # The cap: DAVEL_SOLVER_CANDIDATES, else the objective's (v1: 40), else the default.
     cap_limit = (os.environ.get("DAVEL_SOLVER_CANDIDATES")
@@ -799,6 +803,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         legs = matrix_svc.legs_from(cells, origin_id, ids)
         travel.update(legs)
         edges.update({pair: 0.0 for pair in legs})
+    elif origin_id:
+        # The first activity can be at the confirmed start itself. There is no drive.
+        travel[(origin_id, origin_id)] = 0
     q = _profile_edges(prof, edges, travel) if spec is None else edges
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no

@@ -157,7 +157,7 @@ def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     acts = _ordered(itinerary)
     origin = trip.get("origin_id")
     legs = [(x["poi_id"], to_min(x["end"]), y) for x, y in zip(acts, acts[1:])]
-    if origin and acts:
+    if origin and acts and origin != acts[0]["poi_id"]:
         legs.insert(0, (origin, to_min(trip.get("start_time", "07:00")), acts[0]))
     if not legs:
         return _result(True, 1.0)

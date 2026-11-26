@@ -93,6 +93,7 @@ class TripRequest(BaseModel):
     transport: list[str] = Field(default_factory=lambda: ["motorbike"])
     must_visit: list[str] = Field(default_factory=list)
     avoid: list[str] = Field(default_factory=list)
+    soft_poi_weights: dict[str, int] = Field(default_factory=dict, max_length=40)
     activities: list[str] = Field(default_factory=list)
     food_prefs: list[str] = Field(default_factory=list)
     order_prefs: list[list[str]] = Field(default_factory=list)
@@ -102,6 +103,14 @@ class TripRequest(BaseModel):
     # The default is the neutral profile (levels 2, bias 0, empty lists), so a
     # client that omits `profile` still sees the exact same key set it can send.
     profile: dict = Field(default_factory=lambda: TripProfile().model_dump())
+
+    @field_validator("soft_poi_weights")
+    @classmethod
+    def _validate_soft_poi_weights(cls, value: dict[str, int]) -> dict[str, int]:
+        if any(not 1 <= weight <= 100 or not 1 <= len(key) <= 128
+               for key, weight in value.items()):
+            raise ValueError("Ưu tiên địa điểm phải từ 1 đến 100.")
+        return value
 
     @model_validator(mode="after")
     def _one_day_resumes_at_its_start(self) -> "TripRequest":

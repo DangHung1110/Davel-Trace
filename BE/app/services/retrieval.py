@@ -409,6 +409,7 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
     party = party_size(trip)
     must = set(trip.get("must_visit", []))
     avoid = set(trip.get("avoid", []))
+    soft_priority = trip.get("soft_poi_weights") or {}
     areas = set(trip.get("areas") or [])
     activities = trip.get("activities", []) or []
     types = wanted_types(activities)
@@ -475,7 +476,8 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
             excluded.append({"poi_id": pid, "reason": p.get("plan_tier_reason") or "khong xep vao lich"})
             continue
         opened_by = short_of_main if tier == "local" else activities
-        if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in opened_by):
+        if (tier in _WISH_TIERS and pid not in soft_priority
+                and not any(poi_fits_wish(p, a) for a in opened_by)):
             excluded.append({"poi_id": pid, "reason": "chi xep khi duoc yeu cau"})
             continue
         if (effective_fee(p) or 0) * party > budget:
@@ -485,6 +487,8 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
             excluded.append({"poi_id": pid, "reason": "dong cua trong khung gio"})
             continue
         reasons.append(f"khop hoat dong {cat}" if cat in types else f"loai {cat}")
+        if pid in soft_priority:
+            reasons.append("địa điểm được nhóm đề xuất")
         candidates.append({"poi_id": pid, "reasons": reasons,
                            "uncertainty": uncertainty(p)})
     return {"candidates": candidates, "needs_verification": needs_verification,

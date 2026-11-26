@@ -24,16 +24,25 @@ from BE.app.db.models import (
     ItineraryVersionModel,
     ItineraryVersionTransitionModel,
     PlanningRequestModel,
-    TripActivityModel,
-    TripDayModel,
-    TripModel,
 )
 from BE.app.db.session import session_scope
+from BE.app.modules.catalog.application import resolve_place
+from BE.app.modules.catalog.domain import CatalogUnavailable
+from BE.app.modules.catalog.infrastructure import load_catalog
 from BE.app.modules.identity.service import IdentityError
 from BE.app.modules.planning_lifecycle.application import (
     alternative_fingerprint,
     canonical_fingerprint,
     internal_acceptance_key,
+)
+from BE.app.modules.planning_lifecycle.group_plans import (
+    apply_group_inputs,
+    group_conditions_match,
+    group_hard_inputs,
+    latest_group_round,
+    ranked_group_plans,
+    stop_order,
+    trip_stops,
 )
 from BE.app.modules.planning_lifecycle.infrastructure import (
     acceptance_public,
@@ -49,8 +58,15 @@ from BE.app.modules.planning_lifecycle.infrastructure import (
 )
 from BE.app.modules.planning_lifecycle.stable_planner import with_product_evidence
 from BE.app.modules.trips.service import trip_public
+from BE.app.modules.trip_groups.service import (
+    group_actual_spend,
+    group_exists,
+    group_planning_inputs,
+    post_plan_event,
+)
 from BE.app.routers.itinerary import ItineraryIn, plan_itinerary as legacy_itinerary
 from BE.app.schemas.trip import AREA_CODES, TripRequest
+from BE.app.services import matrix
 
 
 Planner = Callable[[dict, int, str], dict]
@@ -161,6 +177,47 @@ def _current_stop(completed: list[str], known: dict) -> dict | None:
         return None
     latest = max(done, key=lambda item: item["order"])
     return {"poi_id": latest["poi_id"], "date": latest.get("date")}
+
+
+def _actual_spend(session, trip_id, grouped=False):
+    if grouped:
+        return float(group_actual_spend(session, trip_id))
+    personal = session.scalar(select(func.coalesce(func.sum(
+        ExpenseEntryModel.amount
+    ), Decimal("0"))).where(ExpenseEntryModel.trip_id == trip_id))
+    return float(personal or 0)
+
+
+def _require_routable_start(poi_id, snapshot_dir):
+    try:
+        point = resolve_place(load_catalog(), poi_id)
+        routable = point is not None and matrix.has_row(matrix.load_cells(snapshot_dir), poi_id)
+    except (OSError, CatalogUnavailable, ValueError):
+        raise IdentityError("STARTING_PLACE_UNAVAILABLE", "Chưa thể kiểm tra điểm xuất phát.", 503) from None
+    if not routable:
+        raise IdentityError(
+            "STARTING_PLACE_UNAVAILABLE",
+            "Chưa có đường đi từ địa điểm này. Hãy chọn điểm xuất phát khác.",
+            422,
+        )
+
+
+def _check_group_acceptance(session, trip, request, data_version):
+    latest = latest_group_round(session, trip, data_version)
+    if latest is None or latest.request_id != request.request_id:
+        raise IdentityError(
+            "ALTERNATIVE_STALE", "Các phương án đã thay đổi. Hãy mở lại lịch của nhóm.", 409,
+        )
+    if not group_conditions_match(request, group_planning_inputs(session, trip.trip_id)):
+        raise IdentityError(
+            "GROUP_INPUTS_CHANGED", "Điều kiện của nhóm đã đổi. Hãy tạo phương án mới.", 409,
+        )
+    if request.request_kind == "replan" and _actual_spend(
+        session, trip.trip_id, grouped=True
+    ) != request.remaining_context.get("actual_spend"):
+        raise IdentityError(
+            "GROUP_EXPENSES_CHANGED", "Chi phí đã đổi. Hãy tạo phương án mới.", 409,
+        )
 
 
 def _minutes(value: time) -> int:
@@ -312,6 +369,15 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
     ]))
     avoid = list(dict.fromkeys([*(snapshot.get("avoid") or []), *gone]))
     must_visit = [poi for poi in snapshot.get("must_visit") or [] if poi not in gone]
+    if remaining.get("include_current_stop") and remaining.get("current_poi_id") not in gone:
+        point = remaining["current_poi_id"]
+        if point in avoid:
+            raise IdentityError(
+                "GROUP_CONSTRAINT_CONFLICT",
+                "Điểm xuất phát đang nằm trong danh sách cần tránh.",
+                422,
+            )
+        must_visit = [point, *(poi for poi in must_visit if poi != point)]
     # A day starts at the base the traveller chose. A replan resumes its first day where
     # they last finished a stop that day; a stop of an earlier day is behind a night at
     # the base. The planner uses a place only when the matrix can route it.
@@ -327,7 +393,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         resume = {"start_time": start_time,
                   "origin": {"poi_id": first_origin} if first_origin else None}
         start_time, origin = day_start, base
-    return TripRequest(
+    data = TripRequest(
         trip_id=snapshot["id"],
         user_id=snapshot.get("account_id", "owned-user"),
         origin={"poi_id": origin} if origin else None,
@@ -342,11 +408,15 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         transport=[snapshot.get("preferred_transport") or "mixed"],
         must_visit=must_visit,
         avoid=avoid,
+        soft_poi_weights=snapshot.get("soft_poi_weights") or {},
         activities=list(snapshot.get("activities") or []),
         food_prefs=list(snapshot.get("food_preferences") or []),
         areas=_areas(snapshot),
         profile=_profile(_effective_profile(snapshot)),
     ).model_dump()
+    if not data["soft_poi_weights"]:
+        data.pop("soft_poi_weights")
+    return data
 
 
 class PlanningLifecycleService:
@@ -410,6 +480,8 @@ class PlanningLifecycleService:
 
         with session_scope(self.settings.database_url) as session:
             trip = owned_trip(session, principal.account_id, trip_id, lock=True)
+            grouped = group_exists(session, trip_id)
+            group_inputs = group_planning_inputs(session, trip_id) if grouped else {}
             snapshot = trip_public(session, trip)
             snapshot["account_id"] = str(principal.account_id)
             if len(snapshot.get("days") or []) > 2:
@@ -431,11 +503,16 @@ class PlanningLifecycleService:
                 profile_snapshot = dict(effective_snapshot.get("profile_snapshot") or {})
                 profile_snapshot["accessibility_needs"] = overrides["accessibility"]
                 effective_snapshot["profile_snapshot"] = profile_snapshot
+            if grouped:
+                apply_group_inputs(effective_snapshot, group_inputs)
             input_payload = {
                 "trip": effective_snapshot,
                 "constraint_overrides": overrides,
                 "request_kind": request_kind,
             }
+            if grouped:
+                input_payload["group_collaboration"] = True
+                input_payload["group_hard_inputs"] = group_hard_inputs(group_inputs)
             fingerprint = canonical_fingerprint({
                 "trip_id": str(trip_id),
                 "trip_version": trip.version,
@@ -443,6 +520,7 @@ class PlanningLifecycleService:
                 "overrides": overrides,
                 "source_version_id": str(source_version_id) if source_version_id else None,
                 "remaining_context": remaining,
+                **({"group_inputs": group_inputs} if grouped else {}),
             })
             existing = session.scalar(select(PlanningRequestModel).where(
                 PlanningRequestModel.account_id == principal.account_id,
@@ -458,6 +536,11 @@ class PlanningLifecycleService:
                     )
                 return request_public(session, existing)
             if request_kind == "replan":
+                active = active_for_trip(session, trip_id)
+                if source_version_id and (active is None or active.version_id != source_version_id):
+                    raise IdentityError(
+                        "SOURCE_VERSION_STALE", "Lịch đang dùng đã thay đổi. Hãy mở lại lịch.", 409,
+                    )
                 # Which part of the trip is left: resolved once, after the replay check
                 # (a retry gets the plan it asked for even when that time has passed),
                 # outside the fingerprint (the clock is not part of what was sent),
@@ -465,6 +548,17 @@ class PlanningLifecycleService:
                 remaining["window"] = _window(
                     effective_snapshot, remaining.get("remaining_from"), self._clock()
                 )
+                if (
+                    remaining.get("include_current_stop")
+                    and remaining.get("current_poi_date") not in (
+                        None, remaining["window"]["date"]
+                    )
+                ):
+                    raise IdentityError(
+                        "REPLAN_WINDOW_CLOSED",
+                        "Ngày đã chọn không còn đủ thời gian để thêm điểm dừng.",
+                        409,
+                    )
             row = PlanningRequestModel(
                 account_id=principal.account_id,
                 trip_id=trip.trip_id,
@@ -504,6 +598,8 @@ class PlanningLifecycleService:
         try:
             planned = self._planner(planner_input, target_count, request_kind)
             plans = list(planned.get("plans") or [])[:target_count]
+            if grouped:
+                plans = ranked_group_plans(plans, group_inputs)
         except IdentityError as exc:
             with session_scope(self.settings.database_url) as session:
                 row = session.get(PlanningRequestModel, request_id, with_for_update=True)
@@ -522,7 +618,17 @@ class PlanningLifecycleService:
                 return request_public(session, row)
 
         with session_scope(self.settings.database_url) as session:
+            # Serialize publication with voting and leader acceptance for this trip.
+            trip = owned_trip(session, principal.account_id, trip_id, lock=True) if grouped else None
             row = session.get(PlanningRequestModel, request_id, with_for_update=True)
+            if grouped and not group_conditions_match(
+                row, group_planning_inputs(session, trip_id)
+            ):
+                row.status = "failed"
+                row.failure_code = "GROUP_INPUTS_CHANGED"
+                row.completed_at = _now()
+                session.flush()
+                return request_public(session, row)
             seen: set[str] = set()
             rank = 0
             for plan in plans:
@@ -553,6 +659,22 @@ class PlanningLifecycleService:
                 if remaining.get("window"):
                     # The trip day, date and time this replan starts at.
                     public_plan["window"] = remaining["window"]
+                if remaining.get("group_retained_stops"):
+                    public_plan["group_retained_stops"] = remaining["group_retained_stops"]
+                if grouped:
+                    suggested = group_inputs.get("priority_poi_ids") or []
+                    public_plan["group_priority_matches"] = [pid for pid in suggested if pid in poi_ids]
+                    public_plan["group_priority_unmatched"] = [pid for pid in suggested if pid not in poi_ids]
+                    public_plan["group_plan_date"] = planner_input["date"]
+                    window = remaining.get("window")
+                    resume = planner_input.get("resume") or {}
+                    origin = resume.get("origin") if resume else planner_input.get("origin")
+                    if window and origin and origin.get("poi_id"):
+                        public_plan["group_departure"] = {
+                            "poi_id": origin["poi_id"],
+                            "day": window["day"],
+                            "time": window["start_time"],
+                        }
                 session.add(ItineraryAlternativeModel(
                     request_id=row.request_id,
                     trip_id=row.trip_id,
@@ -573,6 +695,14 @@ class PlanningLifecycleService:
             row.status = "completed"
             row.completed_at = _now()
             session.flush()
+            if rank and trip is not None:
+                latest = latest_group_round(session, trip, row.data_version)
+                if latest is not None and latest.request_id == row.request_id:
+                    label = "lịch mới cho phần còn lại" if request_kind == "replan" else "lịch cho chuyến đi"
+                    post_plan_event(
+                        session, trip_id, f"Có {rank} phương án {label}. Mở Lịch nhóm để cùng xem và bình chọn.",
+                        f"plans-ready:{request_id}",
+                    )
             return request_public(session, row)
 
     def get_request(self, principal, request_id: UUID) -> dict:
@@ -617,6 +747,9 @@ class PlanningLifecycleService:
                 alternative.selectability_state = "invalidated"
                 trip.review_state = "needs_review"
                 raise IdentityError("ALTERNATIVE_STALE", "Dữ liệu chuyến đi đã thay đổi.", 409)
+            grouped = group_exists(session, trip.trip_id)
+            if grouped:
+                _check_group_acceptance(session, trip, request, self.settings.snapshot_name)
             families = alternative.gate_payload.get("families") or {}
             if (
                 not alternative.gate_payload.get("passed")
@@ -673,6 +806,7 @@ class PlanningLifecycleService:
             )
             session.add(acceptance)
             transition = ItineraryVersionTransitionModel(
+                transition_id=uuid4(),
                 account_id=principal.account_id,
                 trip_id=trip.trip_id,
                 from_version_id=active.version_id if active else None,
@@ -700,6 +834,11 @@ class PlanningLifecycleService:
                 ItineraryAlternativeModel.selectability_state == "current",
             ).values(selectability_state="superseded"))
             trip.review_state = "current"
+            if grouped:
+                post_plan_event(
+                    session, trip.trip_id, "Trưởng nhóm đã chốt lịch. Mở Lịch nhóm để xem.",
+                    f"plan-published:{version.version_id}",
+                )
             session.flush()
             return {
                 "acceptance": acceptance_public(acceptance),
@@ -768,6 +907,7 @@ class PlanningLifecycleService:
                 from_version_id=active.version_id,
                 to_version_id=version.version_id,
                 reason="reactivate",
+                transition_id=uuid4(),
                 idempotency_key=key,
                 correlation_id=get_correlation_id(),
             )
@@ -776,6 +916,11 @@ class PlanningLifecycleService:
             active.revision += 1
             active.updated_at = _now()
             trip.review_state = "current"
+            if group_exists(session, trip.trip_id):
+                post_plan_event(
+                    session, trip.trip_id, "Trưởng nhóm đã dùng lại một lịch đã lưu.",
+                    f"plan-published:{transition.transition_id}",
+                )
             session.flush()
             return {"version": version_detail(version, version.version_id),
                     "transition": transition_public(transition)}
@@ -797,48 +942,49 @@ class PlanningLifecycleService:
         """
         source_id = UUID(str(payload.get("source_version_id")))
         with session_scope(self.settings.database_url) as session:
+            trip = owned_trip(session, principal.account_id, trip_id, lock=True)
             source = owned_version(session, principal.account_id, source_id)
             if source.trip_id != trip_id:
                 raise IdentityError("NOT_FOUND", "Không tìm thấy phiên bản lịch trình.", 404)
             active = active_for_trip(session, trip_id)
             if active is None or active.version_id != source.version_id:
                 raise IdentityError("SOURCE_VERSION_STALE", "Phiên bản nguồn không còn đang dùng.", 409)
-            activity_rows = list(session.execute(
-                select(
-                    TripActivityModel.activity_id,
-                    TripActivityModel.progress_state,
-                    TripActivityModel.poi_id,
-                    TripActivityModel.position,
-                    TripDayModel.local_date.label("day_date"),
-                )
-                .join(TripDayModel, TripDayModel.day_id == TripActivityModel.day_id)
-                .where(TripDayModel.trip_id == trip_id)
-            ))
+            grouped = group_exists(session, trip_id)
+            shared_stops = trip_stops(session, trip, source if grouped else None)
             known = {
-                str(item.activity_id): {
-                    "state": item.progress_state,
-                    "poi_id": item.poi_id,
-                    "date": item.day_date.isoformat(),
-                    # By date, not by the day's position: a trip moved to earlier
-                    # dates appends its new first day after the days it kept.
-                    "order": (item.day_date.isoformat(), item.position),
-                }
-                for item in activity_rows
+                item["id"]: {**item, "order": (
+                    stop_order(item) if grouped else (item["date"], item["position"])
+                )}
+                for item in shared_stops
             }
             changes = dict(payload.get("changed_constraints") or {})
             overrides = _replan_overrides(source.request_payload, changes)
-            completed = list(dict.fromkeys(payload.get("completed_activity_ids") or [
-                key for key, item in known.items() if item["state"] == "completed"
+            completed = list(dict.fromkeys([
+                *(key for key, item in known.items() if item["status"] == "completed"),
+                *(payload.get("completed_activity_ids") or []),
             ]))
-            skipped = list(dict.fromkeys(payload.get("skipped_activity_ids") or [
-                key for key, item in known.items() if item["state"] == "skipped"
+            skipped = list(dict.fromkeys([
+                *(key for key, item in known.items() if item["status"] == "skipped"),
+                *(payload.get("skipped_activity_ids") or []),
             ]))
             if any(item not in known for item in completed + skipped):
-                raise IdentityError("VALIDATION_ERROR", "Hoạt động replan không thuộc chuyến đi.", 422)
-            actual_spend = session.scalar(select(func.coalesce(func.sum(
-                ExpenseEntryModel.amount
-            ), Decimal("0"))).where(ExpenseEntryModel.trip_id == trip_id))
+                raise IdentityError("VALIDATION_ERROR", "Hoạt động không thuộc lịch của chuyến đi.", 422)
+            if set(completed) & set(skipped):
+                raise IdentityError(
+                    "VALIDATION_ERROR", "Mỗi điểm chỉ có thể đánh dấu đã đi hoặc bỏ qua.", 422,
+                )
             here = _current_stop(completed, known) or {}
+            current_poi = payload.get("current_poi_id")
+            include_current_stop = bool(payload.get("include_current_stop"))
+            if include_current_stop and not current_poi:
+                raise IdentityError(
+                    "VALIDATION_ERROR", "Hãy chọn địa điểm để thêm vào lịch.", 422,
+                )
+            if current_poi:
+                _require_routable_start(current_poi, self.settings.snapshot_dir)
+                current_date, _ = _moment(payload.get("remaining_from"))
+                here = {"poi_id": current_poi,
+                        "date": current_date.isoformat() if current_date else None}
             remaining = {
                 "completed_activity_ids": completed,
                 "skipped_activity_ids": skipped,
@@ -853,10 +999,28 @@ class PlanningLifecycleService:
                 "remaining_from": payload.get("remaining_from"),
                 "unavailable_poi_ids": list(payload.get("unavailable_poi_ids") or []),
                 "changed_constraints": changes,
-                "actual_spend": float(actual_spend or 0),
+                "actual_spend": _actual_spend(session, trip_id, grouped=grouped),
                 "current_poi_id": here.get("poi_id"),
                 "current_poi_date": here.get("date"),
             }
+            if include_current_stop:
+                gone = (remaining["completed_poi_ids"] + remaining["skipped_poi_ids"]
+                        + remaining["unavailable_poi_ids"])
+                if current_poi in gone:
+                    raise IdentityError(
+                        "VALIDATION_ERROR",
+                        "Điểm này đã đi, đã bỏ qua hoặc đang đóng. Bạn vẫn có thể chọn làm điểm xuất phát.",
+                        422,
+                    )
+                remaining["include_current_stop"] = True
+            if grouped:
+                retained = [
+                    {key: value for key, value in known[item].items() if key != "order"}
+                    | {"status": status}
+                    for items, status in ((completed, "completed"), (skipped, "skipped"))
+                    for item in items
+                ]
+                remaining["group_retained_stops"] = sorted(retained, key=stop_order)
         return self.create_planning_request(
             principal,
             trip_id,
