@@ -81,7 +81,7 @@ Ngày đi qua buổi tối có ăn tối (legacy → v1): held-out 26/26 → 24/
 
 `pytest` đầy đủ: ở cả hai chế độ chỉ lỗi 28 test có sẵn trên `main` + 4 test ngoài phạm vi (`test_groq`: máy đặt `GROQ_API_KEY`; 2 `test_migrations`: cần Postgres local; `test_replan_window`: lỗi trên `origin/main`).
 
-Còn mở: experience giải chậm hơn 78% (ngân sách × 1,6); savings lặp nhóm 9 → 14 (cầu + phố du lịch, β phố 0,5); vài ngày đặt quán thứ hai lệch giờ khi khách ghi thích món đó (điểm gu cao) — để bước học trọng số; CP-SAT vẫn có thể dừng ở lời giải kém ở ngân sách giới hạn — gợi ý lời giải tốt hơn (pointer, bước 5).
+Còn mở: experience giải chậm hơn 78% (ngân sách × 1,6; 26/11 hạ về × 1,2 sau khi sửa mô hình và lời giải mồi, xem `latency_p95.md`); savings lặp nhóm 9 → 14 (cầu + phố du lịch, β phố 0,5); vài ngày đặt quán thứ hai lệch giờ khi khách ghi thích món đó (điểm gu cao) — để bước học trọng số; CP-SAT vẫn có thể dừng ở lời giải kém ở ngân sách giới hạn — gợi ý lời giải tốt hơn (pointer, bước 5).
 
 ## Chạy lại
 
