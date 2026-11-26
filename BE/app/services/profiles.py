@@ -13,6 +13,12 @@ every option, so every profile stays a plan a human can actually do):
               category/tag, high fit) + a dominant category-spread term, so
               the day is composed of POIs the rating-first plan skips.
 
+Under objective v1 (the default) the three node scores are ONE function, `value.py`,
+under three weight sets (objective_weights/v1.json `value` + `profiles.<name>.value`):
+the numbers above, except that savings' average leg only ranks its candidate cap
+(riding minutes are T9's). The formulas below (`_score`, `soft_lean`, TASTE_WEIGHT) are
+the DAVEL_OBJECTIVE=legacy path.
+
 `/v1/itinerary` now returns all three by default; the router additionally
 enforces a pairwise POI-set Jaccard ceiling (see `pool.enforce_pairwise`) so
 the three options are genuinely different days, not three reorderings.
@@ -219,12 +225,6 @@ def _avg_leg(travel: dict[tuple[str, str], int], pid: str,
         if leg is not None:
             legs.append(float(leg))
     return sum(legs) / len(legs) if legs else 0.0
-
-
-def _in_value_order(candidates: list[dict], values: dict[str, float]) -> list[dict]:
-    """Objective v1: the candidates by value, best first (ties by poi_id), so the cap and
-    the solver's node order follow T1 and not the ranker's order of the pool."""
-    return sorted(candidates, key=lambda p: (-values[p["poi_id"]], p["poi_id"]))
 
 
 def _profile_edges(profile: str, q: dict[tuple[str, str], float],
@@ -679,14 +679,16 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         # weights (v1.json `value` + `profiles.<name>.value`), and the explanations read
         # it too. Riding minutes are T9's alone: the mean matrix leg only ranks the
         # candidate cap, for a profile that weighs it (`cap_avg_leg`, savings).
+        # The candidates keep the order they came in: it is only the solver's node
+        # order. Sorting them by value (tried 26/11, audit of 67 requests) gave 63 of
+        # 134 balanced and experience days other stops by search path alone, lowered
+        # J on 13 days against 10 raised and slowed the bench median by 1.5 s.
         scored = value_svc.score(candidates, trip, spec.value)
         node_value = scored.values
         leg_weight = float(spec.value.get("cap_avg_leg") or 0.0)
         cap_rank = (node_value if not leg_weight else
                     {pid: node_value[pid] - leg_weight * _avg_leg(travel, pid, ids)
                      for pid in ids})
-        candidates = _in_value_order(candidates, node_value)
-        ids = [p["poi_id"] for p in candidates]
 
         def _score_with_taste(poi: dict) -> float:
             return node_value[poi["poi_id"]]

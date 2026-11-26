@@ -156,11 +156,6 @@ class TestOneFunction(unittest.TestCase):
         self.assertTrue(novel)
         self.assertTrue(all(nov[pid] >= value_svc.NOVEL_REASON for pid in novel))
 
-    def test_value_order(self):
-        pois = [{"poi_id": "b"}, {"poi_id": "a"}, {"poi_id": "c"}]
-        order = profiles._in_value_order(pois, {"a": 1.0, "b": 2.0, "c": 2.0})
-        self.assertEqual([p["poi_id"] for p in order], ["b", "c", "a"])
-
 
 # Six free beaches alike in all but where they are: three close together, three far out.
 BEACHES = [_poi(pid, "beach", 4.4, opening_hours=["00:00-23:59"], visit_min=60)
@@ -190,6 +185,15 @@ class TestTheCapAndThePlan(unittest.TestCase):
         self.assertEqual(len(set(values.values())), 1, values)
         self.assertEqual(values, {pid: scored("savings", BEACHES, PLAIN_TRIP).values[pid]
                                   for pid in values})
+
+    def test_the_candidates_keep_the_order_they_came_in(self):
+        # Only the solver's node order: sorting by value changed days by search path alone
+        # and slowed requests (measured 26/11), so the value only decides the cap.
+        by_id = {p["poi_id"]: p for p in BEACHES}
+        order = ["z3", "a1", "z1", "a3", "z2", "a2"]
+        plan = profiles.build_plan("balanced", PLAIN_TRIP, [{"poi_id": pid} for pid in order],
+                                   by_id, CELLS, template="")
+        self.assertEqual([p["poi_id"] for p in plan["_context"]["pois"]], order)
 
     def test_legacy_keeps_the_old_scores_and_the_ranker_evidence(self):
         plan = self.plan("balanced", {"DAVEL_OBJECTIVE": "legacy"})
