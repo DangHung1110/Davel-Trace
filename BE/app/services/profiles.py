@@ -941,8 +941,15 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # passed as a precedence, and the pass only re-times the day (no dead holes).
     keep_order = ([(a["poi_id"], b["poi_id"]) for a, b in zip(acts, acts[1:])]
                   if spec is not None else [])
+
+    def _day_j(day: list[dict]) -> float:
+        return _day_features(day, stubs_used, travel, trip, spec, q, state_bands,
+                             state_scores, state_costs, limits_used)[1]
+
     acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs + keep_order,
-                     pois_by_id, cells, ctx)
+                     pois_by_id, cells, ctx,
+                     j_of=_day_j if spec is not None and out.get("itinerary") is not None
+                     else None)
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel, scored=scored)
@@ -1023,6 +1030,21 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     return plan
 
 
+def _day_features(activities: list[dict], stubs: list, travel: dict, trip: dict, spec,
+                  edges: dict | None, bands: list | None, scores: dict | None,
+                  costs: dict | None, limits: dict) -> tuple[dict, float]:
+    """J's terms (`objective.features`) of one day at the times `activities` show, and
+    J itself in U, unrounded."""
+    by_id = {stub.poi_id: stub for stub in stubs}
+    clock = _to_trip(trip)
+    rest = limits.get("rest_minutes") if limits.get("rest_after_lunch") else None
+    acts = [a for a in objective_mod.shown_acts(activities) if a["poi_id"] in by_id]
+    f = objective_mod.features(acts, by_id, travel, spec, clock.start_min, clock.end_min,
+                               origin_id=clock.origin_id, edge_scores=edges, bands=bands,
+                               state_scores=scores, state_costs=costs, rest_minutes=rest)
+    return f, objective_mod.objective_value(f, spec)
+
+
 def _plan_features(out: dict, shown: list[dict], stubs: list, travel: dict, trip: dict,
                    spec, edges: dict | None, bands: list | None, scores: dict | None,
                    costs: dict | None, limits: dict) -> dict:
@@ -1031,25 +1053,28 @@ def _plan_features(out: dict, shown: list[dict], stubs: list, travel: dict, trip
     `shown` is read at the times the plan shows, after `_polished` re-timed the day:
     what a traveller or a judge sees. `raw` is the solver's own times; its `j` must
     match `solver_j`, the value CP-SAT reported (up to rounding), so a gap between
-    `raw` and `shown` is what re-timing changed, not a bug of the features.
+    `raw` and `shown` is what re-timing changed, not a bug of the features. Re-timing
+    is kept only when it does not lower J (`_polished`), so `shown.j >= raw.j`;
+    `retimed` says whether the shown times differ from the solver's, and `same_stops`
+    that the shown day visits the solver's stops in the solver's order.
     """
-    by_id = {stub.poi_id: stub for stub in stubs}
-    clock = _to_trip(trip)
-    rest = limits.get("rest_minutes") if limits.get("rest_after_lunch") else None
     unit = float(out.get("unit") or 1.0)
+    raw_acts = (out.get("itinerary") or {}).get("activities") or []
 
     def _read(activities: list[dict]) -> dict:
-        acts = [a for a in objective_mod.shown_acts(activities) if a["poi_id"] in by_id]
-        f = objective_mod.features(acts, by_id, travel, spec, clock.start_min, clock.end_min,
-                                   origin_id=clock.origin_id, edge_scores=edges, bands=bands,
-                                   state_scores=scores, state_costs=costs, rest_minutes=rest)
+        f, j = _day_features(activities, stubs, travel, trip, spec, edges, bands, scores,
+                             costs, limits)
         return {"features": {name: round(value, 4) for name, value in f.items()},
-                "j": round(objective_mod.objective_value(f, spec), 4)}
+                "j": round(j, 4)}
 
+    raw_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(raw_acts)]
+    shown_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(shown)]
     return {"weights": spec.w.get("version"), "unit": round(unit, 4),
             "solver_j": round(float(out.get("objective") or 0.0) / (1000.0 * unit), 4),
             "status": out.get("status"), "rest_taken": out.get("rest_taken"),
-            "raw": _read((out.get("itinerary") or {}).get("activities") or []),
+            "retimed": raw_seq != shown_seq,
+            "same_stops": [p for p, _ in raw_seq] == [p for p, _ in shown_seq],
+            "raw": _read(raw_acts),
             "shown": _read(shown)}
 
 
@@ -1062,10 +1087,20 @@ def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) ->
     return {"start": hhmm(span["start"]), "end": hhmm(span["end"])} if span else None
 
 
+# J may only stay or rise when `_polished` re-times a day (floating point slack, U).
+J_TOLERANCE = 1e-6
+
+
 def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: dict,
-              order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None) -> list[dict]:
+              order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None,
+              j_of=None) -> list[dict]:
     """`route_order.best_order` (least driving and dead time), kept only when the gate
-    still passes it: the solver's own plan is the fallback for any doubt."""
+    still passes it: the solver's own plan is the fallback for any doubt.
+
+    `j_of(day) -> J` (objective v1): the re-timed day is also kept only when its J is
+    not below the solver's day. Re-timing saves idle minutes, which J does not price,
+    and could move a stop into a worse hour or into the rain, which J does: on the
+    audit + gold requests it lowered J on about half the days (features_step2.md)."""
     if len(acts) < 2:
         return acts
     by_id = {stub.poi_id: stub for stub in stubs}
@@ -1075,13 +1110,17 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         for act in acts if span else []:
             if act["poi_id"] in group["poi_ids"] and span[0] <= to_min(act["start"]) < span[1]:
                 by_id[act["poi_id"]] = route_order.held_to(by_id[act["poi_id"]], span)
-    # An exposed stop the solver seated in a dry hour stays out of the rain.
+    # An exposed stop the solver seated in a dry hour stays out of the rain, "dry" read
+    # like the solver does: neither quarter probe of the visit in a wet hour.
     wet = trip_ctx.wet_spans(ctx)
     for act in acts if wet else []:
-        start, end = to_min(act["start"]), to_min(act["end"])
+        stub = by_id.get(act["poi_id"])
+        if stub is None:
+            continue
+        probes = route_order.quarter_probes(to_min(act["start"]), stub.visit_min)
         if (trip_ctx.rain_exposure(pois_by_id.get(act["poi_id"])) > 0
-                and all(end <= lo or start >= hi for lo, hi in wet)):
-            by_id[act["poi_id"]] = route_order.kept_dry(by_id[act["poi_id"]], wet)
+                and not any(lo <= p < hi for p in probes for lo, hi in wet)):
+            by_id[act["poi_id"]] = route_order.kept_dry(stub, wet)
     # A place the traveller named is held to its opening hours only, but belongs in
     # the hours it makes sense whenever some order of the day allows that.
     preferred = {}
@@ -1097,6 +1136,8 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred,
         origin=trip.get("origin_id"))
     if better is None:
+        return acts
+    if j_of is not None and j_of(better) < j_of(acts) - J_TOLERANCE:
         return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}
     checked = {"activities": better}

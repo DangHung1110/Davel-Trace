@@ -66,6 +66,17 @@ class TestPlanFeatures(unittest.TestCase):
             self.assertAlmostEqual(feats["raw"]["j"], feats["solver_j"], delta=0.01,
                                    msg=pub.get("profile"))
 
+    def test_the_shown_day_never_scores_below_the_solver_day(self):
+        # Step 2b: a re-timing that lowers J is dropped; the stops and their order stay.
+        public, plans = self._plans(DAY)
+        for pub, plan in zip(public, plans):
+            feats = plan["_features"]
+            self.assertTrue(feats["same_stops"], pub.get("profile"))
+            self.assertGreaterEqual(feats["shown"]["j"], feats["raw"]["j"] - 1e-3,
+                                    pub.get("profile"))
+            if not feats["retimed"]:
+                self.assertEqual(feats["shown"], feats["raw"], pub.get("profile"))
+
     def test_a_two_day_trip_keeps_one_entry_per_day(self):
         _public, plans = self._plans({**DAY, "days": 2, "budget": 5_000_000})
         for plan in plans:
@@ -74,6 +85,7 @@ class TestPlanFeatures(unittest.TestCase):
             self.assertEqual(len(days), 2)
             for feats in days:
                 self.assertAlmostEqual(feats["raw"]["j"], feats["solver_j"], delta=0.01)
+                self.assertGreaterEqual(feats["shown"]["j"], feats["raw"]["j"] - 1e-3)
 
 
 if __name__ == "__main__":
