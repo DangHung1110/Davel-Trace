@@ -9,7 +9,7 @@ Bản này đồng bộ với doc "Davel — Hàm mục tiêu v1 (bản chốt)"
 ## 1. Công thức
 
 ```
-J =  Σ v_i x_i                         T1 giá trị: điểm ranker
+J =  Σ v_i x_i                         T1 giá trị: một hàm điểm POI (value.py)
    + w_state · S                       T2 trạng thái theo giờ (trip_ctx)
    − Σ_g β_g Σ_{k≥2} ρ_k y_gk          T3 lặp nhóm (submodular: điểm đầu miễn phí)
    − γ Σ β_g a_ij [cùng nhóm]          T4 hai điểm cùng nhóm liền nhau
@@ -23,7 +23,7 @@ J =  Σ v_i x_i                         T1 giá trị: điểm ranker
 c_ij = τ·m_ij + τ_L·max(0, m_ij − 45) + ζ·[zone_i ≠ zone_j]
 ```
 
-Ký hiệu: x_i = có đi điểm i; a_ij = đi thẳng từ i sang j; m_ij = phút chạy xe i → j. Mọi trọng số tính theo **U = điểm ranker cao nhất trong pool** (biến `unit` của optimizer), nên một con số có cùng nghĩa với mọi profile. Trọng số ở `BE/app/services/objective_weights/v1.json`; trọng số học được sau này chỉ là một file mới cùng khoá (`DAVEL_OBJECTIVE=<đường dẫn file>`).
+Ký hiệu: x_i = có đi điểm i; a_ij = đi thẳng từ i sang j; m_ij = phút chạy xe i → j. Mọi trọng số tính theo **U = giá trị v_i cao nhất trong pool** (biến `unit` của optimizer), nên một con số có cùng nghĩa với mọi profile. v_i là một hàm duy nhất cho cả ba profile (mục 5, "T1"). Trọng số ở `BE/app/services/objective_weights/v1.json`; trọng số học được sau này chỉ là một file mới cùng khoá (`DAVEL_OBJECTIVE=<đường dẫn file>`).
 
 ## 2. Ba lớp
 
@@ -74,7 +74,7 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 
 | # | Số hạng | Đo gì | Hình dạng | Thay cho |
 |---|---|---|---|---|
-| T1 | Giá trị | tổng điểm ranker của các điểm được đi | tuyến tính | giữ như cũ |
+| T1 | Giá trị | tổng v_i của các điểm được đi; v_i là một hàm (`value.py`) với trọng số theo profile | tuyến tính | ba công thức theo profile + `rank.py` (bước 4, 26/11) |
 | T2 | Trạng thái theo giờ | no, mệt, nóng, buồn ngủ, buổi tối tại giờ ghé | hệ số theo khung giờ | TIME_FIT, E2 |
 | T3 | Lặp nhóm | điểm thứ 2, 3, 4… cùng một nhóm | phạt tăng dần (submodular) | CATEGORY_CAP, CAFE_CAP |
 | T4 | Liền kề cùng nhóm | hai điểm cùng nhóm đi liền nhau | phạt mỗi cung | NO_CONSECUTIVE |
@@ -119,7 +119,32 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 | σ trùng món (T11) | 0,5U | dưới thưởng bữa tối: không bỏ bữa để né trùng; khách tiết kiệm có thể ăn đắt hơn một mức thay vì một món hai lần (chốt 24/11) |
 | Ngân sách CP-SAT (`search_scale`) | × 1,2 (5 → 6 đơn vị) | 25/11 chốt × 1,6 vì ở 5 đơn vị một ngày kém tối ưu 32% (3 quán ăn). Nguyên nhân là mô hình hội tụ chậm (cặp quán A2 và các phép thử khung giờ là ràng buộc thời gian LP không thấy; greedy hint chưa biết v1). Sửa xong (26/11) thì × 1,2 cho lịch tốt hơn × 1,6 cũ trung bình +3,0% trên 222 lời giải của audit, và request chậm nhất của `bench_latency` dưới 8 s (`reports/objective_v1/latency_p95.md`) |
 
-**Ba lịch = ba bộ trọng số.** Khoá `profiles` ghi đè theo profile: experience `repeat_scale` 2,5 (đúng hệ số đa dạng 2,5 của legacy); savings τ 0,045 (mức cạnh cũ của nó), `pace_scale` 2,0, `repeat_scale` 1,5 (điểm miễn phí của savings đều gần U). Phần khác nhau còn lại của profile nằm ở điểm từng POI (T1).
+**Ba lịch = ba bộ trọng số.** Khoá `profiles` ghi đè theo profile: experience `repeat_scale` 2,5 (đúng hệ số đa dạng 2,5 của legacy); savings τ 0,045 (mức cạnh cũ của nó), `pace_scale` 2,0, `repeat_scale` 1,5 (điểm miễn phí của savings đều gần U). Phần khác nhau còn lại của profile là các khoá `value` của T1 (dưới đây); ngoài trọng số, tên profile không đổi gì trong J.
+
+**T1: một hàm điểm POI** (bước 4, 26/11; `BE/app/services/value.py`). Trước 26/11 ba profile chấm v_i bằng ba công thức khác nhau (`profiles._score`: savings = chi phí, balanced = rating, experience = độ lạ), còn lời giải thích và repair đọc một bộ chấm thứ hai (`rank.py`). Nay:
+
+```
+v_i = Σ_k w_k · φ_k(i)  +  U0 · Σ_m w_m · ψ_m(i)
+```
+
+- φ (nơi chốn, giống nhau với mọi khách): `base` (1 mỗi điểm), `fee` (mỗi 100k/người, ×2 khi ngân sách chuyến dưới 1 triệu; chi phí, trừ đi), `rating` (số sao tin cậy), `fame` (log10(1 + số review); bằng 0 trên danang-v2 vì không có số review), `novelty` (0–1, theo pool), `free` (vé 0đ), `free_outdoor` (0đ và thiên nhiên / chợ / công viên / biển).
+- ψ (khách trả lời ở onboarding), tính theo U0 = giá trị φ cao nhất của pool: `taste` (−1..1), `spending` (−1 / 0 / 1), `outdoor` (−1..1), `liked` (0 / 1).
+- Trọng số: khối `value` của `v1.json` là balanced; savings và experience chỉ ghi đè vài khoá trong `profiles.<tên>.value`. Một file trọng số không có khối `value` (chỉ có hệ số của J) dùng của v1.
+
+| Khoá | balanced (mặc định) | savings | experience |
+|---|---|---|---|
+| rating / fame | 1,0 / 0,4 | 0,05 / 0,05 | 0,1 / 0,3 |
+| novelty | 0 | 0 | 10 |
+| base / fee | 0 / 0 | 1,0 / 1,0 | 0 / 0 |
+| free / free_outdoor | 0 / 0 | 0,15 / 0,10 | 0 / 0 |
+| taste / spending / outdoor / liked | 0,20 / 0,15 / 0,15 / 0,20 | như mặc định | như mặc định |
+| `cap_avg_leg` (chỉ bước 6) | 0 | 1/60 mỗi phút | 0 |
+
+Đây là các số cũ trong code: balanced và experience cho ra v_i y hệt trước (test `test_value_function` ghim từng bit). Savings đổi hai chỗ. Một: phút chạy xe trung bình (`avg_leg`) ra khỏi v_i vì T9 đã tính chạy xe, nhưng vẫn xếp hạng ở bước cắt còn 40 (`cap_avg_leg`); bỏ hẳn thì mọi điểm miễn phí gần bằng điểm nhau và top-40 đổi 71%. Hai: gu ăn và lean nhân với U0 = giá trị cao nhất, không phải trị tuyệt đối lớn nhất (quán đắt nhất, −8,7): trước đó một món hợp gu của khách tiết kiệm đáng khoảng 1,6U thay vì 0,2U. Ba (26/11): bỏ `price_level` (0,15 mỗi bậc trên mức rẻ). Trên danang-v2 mức giá suy ra một-một từ hạng giá, đúng nguồn của `fee` (371/371 quán "medium" ở mức 2, 16/16 quán "expensive" ở mức 3), nên nó chỉ phạt tiền thêm khoảng 6%, và hai cột trùng nhau thì khi học không tách được trọng số; bỏ đi, 52/60 ngày savings giữ nguyên điểm. Thang điểm giữ như cũ ("sao") vì T10 (q × 100) và `must_go` (+0,5) còn tính tuyệt đối.
+
+Hai khoá savings giữ lại vì số đo (60 request 1 ngày của audit, cùng hàm mục tiêu nên J so thẳng): bỏ `cap_avg_leg` thì J thấp hơn ở 53/60 ngày (trung bình −13,6%), số lần hết ngân sách tìm kiếm 12 → 24, chạy xe 20,6 → 25 phút/ngày, ngày có bữa tối 54 → 44; bỏ `free_outdoor` thì số điểm biển / thiên nhiên / chợ của savings giảm 60 → 38, đúng phần "ưu tiên điểm miễn phí/thiên nhiên/chợ" của profile. `free_outdoor` là gu của khách tiết kiệm, không phải chi phí.
+
+Lời giải thích mỗi điểm (`explanation.evidence`, `source: "value"`) là các thành phần đã nâng v_i theo trọng số của profile ("rating cao 4.9", "mien phi", "doc dao, it nguoi biet", "dung gu an: …") cộng bữa mà điểm đó là ("bua trua", "bua toi"). `/v1/repair` chọn điểm cần đổi và điểm thay theo giá trị planner lưu cùng lịch (`_context.values`). Điểm của `rank.py` không còn vào lịch v1; nó chỉ còn quyết thứ tự ứng viên đưa vào solver (thứ tự nút, không đổi J) và là điểm của legacy. Đã thử xếp ứng viên theo v_i (26/11): 63/134 ngày balanced/experience đổi điểm chỉ vì đường tìm kiếm khác, J thấp hơn ở 13 ngày và cao hơn ở 10, bench trung vị chậm thêm 1,5 giây, nên giữ thứ tự cũ.
 
 **12 nhóm đa dạng và hệ số "ngán" β** (số POI trên danang-v2, không tính nơi ở; nhà hàng và bữa sáng không nằm trong T3 vì T5, T6 đã lo):
 
@@ -192,6 +217,8 @@ w ← w + η ( f(D) − f(P) )
 
 **Hai quy tắc khi học:** giữ đúng dấu (hệ số phạt τ, ζ, A, κ, γ, σ không âm); kéo về v1 bằng λ‖w − w_v1‖² trong loss, để w chỉ lệch khi data đủ mạnh. Học các hệ số tổng (w_state, một hệ số chung cho β·ρ, γ, B, A, R, κ, τ, τ_L, ζ, w_edge, σ); ghi ra file mới cùng khoá với `v1.json`.
 
+**Không học một bộ T1 chung cho ba profile** (đo 26/11). Cho savings và experience dùng khối `value` của balanced trên 60 request 1 ngày: experience ra đúng bộ điểm của balanced ở 36/60 request (Jaccard với balanced 0,03 → 0,85; 52/60 vượt trần 0,6 nên router phải thay lịch), savings tốn 1,05 triệu một lịch thay vì 402 nghìn. Ba lịch khác nhau gần như chỉ nhờ trọng số T1. Vì vậy: hệ số chung của J (T2–T11) học từ cặp chấm trung tính; trọng số T1 riêng của savings, experience học từ cặp chấm có nói rõ khách (ví dụ "khách muốn tiết kiệm"); `features()` cần thêm tổng từng thành phần của T1 (rating, fame, novelty, fee, free, free_outdoor, taste, spending, outdoor, liked trên các điểm được đi) thì mới học được chúng; `fame` luôn bằng 0 trên danang-v2 nên giữ số v1.
+
 **Khi nào học lại:** khi đổi data đủ để lịch đổi (POI mới, giờ mở / giá mới, ma trận mới) thì chạy lại eval; trọng số chỉ cần học lại khi chỉ số tụt hoặc có thêm nhãn (cặp chấm, lịch mẫu). Bộ lọc và pointer bắt chước solver chạy dưới **đúng bộ trọng số đó**, nên đổi trọng số (hoặc đổi data làm lời giải đổi nhiều) là sinh lại data thầy và train lại hai model này (`ARCHITECTURE.md` §4).
 
 **Giới hạn ghi trong báo cáo:** không có người kiểm thì chỉ viết "trọng số học từ LLM và lịch mẫu"; muốn viết "khớp với người" cần thêm khoảng 30 cặp người chấm.
@@ -216,7 +243,7 @@ Năm lớp, chạy bằng `pytest` và script eval, không cần người:
 | Chia điểm giữa 2 ngày | số hạng tính theo từng ngày; data mới có chuyến 1 ngày | sau khi có data chuyến 2 ngày |
 | Thời tiết | đã nằm trong điểm ranker và T2 | không cần thêm |
 | Học hình dạng (β từng nhóm, ρ, K₀) | cần nhiều cặp hơn các hệ số tổng | khi có trên 2.000 cặp |
-| 8 trọng số của ranker | điểm ranker là một đặc trưng (T1) | giai đoạn 2: tách rating, fame, mức khớp gu |
+| Trọng số bên trong T1 (khối `value`) | ở giai đoạn 1, T1 là một đặc trưng (`features()["value"]`); các hệ số bên trong giữ số cũ | giai đoạn 2: tách "value" thành tổng từng φ_k, ψ_m của các điểm được đi (rating, fame, novelty, fee, taste…) để học cùng các hệ số của J |
 | w riêng từng user | là bandit, cần log sửa lịch | sau khi app ghi log |
 | T3 ở replan tính cả điểm đã đi trong ngày | replan giải phần còn lại | khi làm replan v2 |
 | Dị ứng | đã bỏ khỏi phạm vi | không làm |
@@ -226,15 +253,18 @@ Năm lớp, chạy bằng `pytest` và script eval, không cần người:
 | File | Vai trò |
 |---|---|
 | `BE/app/services/objective.py` | chế độ (`DEFAULT = "v1"`), trọng số, nhóm đa dạng, khoá T11 (`stub_keys`, `dish_of`, `duplicate_counts`), `Spec`, `sight_k0` / `paced_stops`, `search_budget`, `features()` + `objective_value()` |
-| `BE/app/services/objective_weights/v1.json` | trọng số v1 và ghi chú vì sao từng số đổi |
+| `BE/app/services/objective_weights/v1.json` | trọng số v1 và ghi chú vì sao từng số đổi; khối `value` (T1) và `profiles.<tên>.value` |
+| `BE/app/services/value.py` | T1: một hàm điểm POI cho cả ba profile (`score`, `place_features`, `lean_parts`, `novelty_scores`, `price_reference`); lý do cho lời giải thích (`explain`) |
 | `BE/app/services/optimizer.py` | `StubPOI` (group, zone, site, inside, substitute, dish); `_objective_v1_terms` (T3–T11); A1 và nghỉ trưa mềm khi không strict; hint bỏ điểm trùng |
-| `BE/app/services/profiles.py` | dựng `Spec`; `_v1_limits` bỏ luật gu của template; cap 40; ngân sách × `search_scale`; giữ thứ tự của solver (chỉ chỉnh giờ) |
+| `BE/app/services/profiles.py` | dựng `Spec`; `_v1_limits` bỏ luật gu của template; v_i từ `value.score`; cap 40 (savings trừ thêm `cap_avg_leg`); ngân sách × `search_scale`; giữ thứ tự của solver (chỉ chỉnh giờ); lời giải thích đọc v_i |
+| `BE/app/services/repair.py` | ở v1, chọn điểm cần đổi và điểm thay theo `_context.values` của lịch |
 | `BE/app/services/replan.py` | cùng hàm mục tiêu, cùng khoá của stub, cùng ngân sách cho phần còn lại của ngày |
 | `BE/app/services/rules.py` | sổ luật duy nhất |
 | `soft_rules.py`, `gate.py`, `scorer.py` | đọc tập luật từ `rules.py`; `check_lunch` trong HCS; `edge_scores(rule_penalties=False)` ở v1 |
 | `BE/common.py` | `merged_into` (bản ghi đã gộp); `DISHES`, `dish_ids` (nhãn món của data) |
 | `BE/ml/data/migrate_v2.py`, `BE/data/sources/decisions_*.json` | quyết định data: `alt_group`, gộp bản ghi, đổi category kéo theo loại điểm |
 | `BE/tests/unit/test_objective_v1.py`, `test_objective_dedup.py`, `test_rules_registry.py`, `test_soft_taste_rules.py` | khớp công thức, kịch bản, đơn điệu, gate, sổ luật |
+| `BE/tests/unit/test_value_function.py` | T1: cùng một hàm cho ba profile, balanced/experience y hệt số cũ, savings bỏ `avg_leg`, đơn vị gu ăn, cap savings, giải thích và repair đọc cùng v_i, legacy không đổi |
 | `reports/objective_v1/` | script eval và kết quả đo (`README.md`, `compare_*.json`) |
 
 ## Nguồn
