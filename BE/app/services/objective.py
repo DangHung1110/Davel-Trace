@@ -20,6 +20,8 @@ term of one objective, so a plan may break it when that is worth the cost:
        + w_edge * sum q_ij a_ij                 T10 PATM transition bonus
        - sum_k sigma_k d_k                      T11 near-duplicates: same site, area +
                                                 stop inside it, 2nd market, same dish
+       - w_wait * idle minutes                  measured only: w_wait is 0 in v1 and the
+                                                solver has no such term (`features`)
 
 T3 is submodular: the first stop of a group is free, every further one costs
 more than the one before. All weights are in units of U, the top candidate score
@@ -83,7 +85,7 @@ FOOD_TOUR_WORDS = ("food tour", "an uong", "am thuc", "an vat", "an het", "tour 
 # `state` and `meal_crowd`.
 FEATURES = ("value", "state", "rain", "repeat", "adjacent", "meal", "meal_crowd",
             "meal_far", "rest", "pace", "ride", "long_leg", "zone", "edge",
-            "same_site", "umbrella", "market", "dish")
+            "same_site", "umbrella", "market", "dish", "wait")
 
 
 def mode() -> str:
@@ -463,21 +465,45 @@ def state_terms(acts: list[dict], stubs: dict, bands: list | None,
     return state, rain
 
 
+def is_lunch(stub, start: int) -> bool:
+    """The day's lunch as the solver's siesta sees it: a restaurant starting 11:00-13:00,
+    or a booked class over the lunch slot."""
+    from BE.app.services.soft_rules import LUNCH_REQUIRED, MEAL_SLOTS
+
+    if stub.booking:
+        return start < MEAL_SLOTS[0][1] and start + int(stub.visit_min) > MEAL_SLOTS[0][0]
+    return bool(stub.restaurant) and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1]
+
+
+def idle_minutes(acts: list[dict], stubs: dict, travel: dict,
+                 rest_minutes: int | None = None) -> float:
+    """Minutes a finished day stands idle between two stops: the gap beyond the ride
+    and the `STOP_OVERHEAD_MIN` the solver reserves after each stop. After lunch on a
+    day with a siesta the rest is not idle (the gap may run to `rest_minutes`). The
+    time before the first stop and after the last is the traveller's, not idle."""
+    from BE.app.services.optimizer import STOP_OVERHEAD_MIN
+
+    idle = 0.0
+    for a, b in zip(acts, acts[1:]):
+        stub = stubs[a["poi_id"]]
+        start = int(a["start"])
+        allowed = int(travel.get((a["poi_id"], b["poi_id"]), 0)) + STOP_OVERHEAD_MIN
+        if rest_minutes and is_lunch(stub, start):
+            allowed = max(allowed, int(rest_minutes))
+        idle += max(0, int(b["start"]) - (start + int(stub.visit_min)) - allowed)
+    return idle
+
+
 def rest_taken(acts: list[dict], stubs: dict, spec: Spec, rest_minutes: int | None) -> bool:
     """T7 of a finished day, read from its times like the solver's soft siesta: one
     lunch (a restaurant starting 11:00-13:00, or a booked class over the lunch slot)
     and no stop inside the `rest_minutes` after it ends. A siesta the traveller made
     strict is a constraint, not a bonus, so it earns nothing here."""
-    from BE.app.services.soft_rules import LUNCH_REQUIRED, MEAL_SLOTS
-
     if rest_minutes is None or "REST_FOLLOWS_LUNCH" in spec.strict:
         return False
     spans = [(int(a["start"]), int(a["start"]) + int(stubs[a["poi_id"]].visit_min),
               stubs[a["poi_id"]]) for a in acts]
-    ends = {end for start, end, stub in spans
-            if (stub.booking and start < MEAL_SLOTS[0][1] and end > MEAL_SLOTS[0][0])
-            or (not stub.booking and stub.restaurant
-                and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1])}
+    ends = {end for start, end, stub in spans if is_lunch(stub, start)}
     if len(ends) != 1:
         return False
     rest_start = ends.pop()
@@ -569,6 +595,9 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     f["state"], f["rain"] = state_terms(acts, stubs, bands, state_scores, state_costs)
     # T11
     f.update(duplicate_counts([stubs[p] for p in order]))
+    # Idle minutes between stops: measured, not optimised (w_wait 0 in v1), so a pilot
+    # can tell whether a judge minds the wait before J charges it.
+    f["wait"] = idle_minutes(acts, stubs, travel, rest_minutes)
     return f
 
 
@@ -583,4 +612,5 @@ def objective_value(f: dict, spec: Spec) -> float:
             - spec.coef("tau_long") * f["long_leg"] - spec.coef("zeta") * f["zone"]
             + spec.coef("w_edge") * f["edge"]
             - sum(spec.duplicate(kind) * f[kind] for kind in ("same_site", "umbrella",
-                                                               "market", "dish")))
+                                                               "market", "dish"))
+            - spec.coef("w_wait") * f.get("wait", 0.0))

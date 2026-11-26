@@ -201,5 +201,39 @@ class TestShownTimes(unittest.TestCase):
         self.assertEqual(set(f), set(objective.FEATURES))
 
 
+class TestIdleMinutes(unittest.TestCase):
+    """`wait` (step 2b): idle minutes between stops, measured for the pilot only."""
+
+    def _day(self):
+        pois = [_poi("museum", "history", "trung_tam", 4.0),
+                _poi("lunch", "", "trung_tam", 3.5, restaurant=True, windows=MEALS),
+                _poi("temple", "religious", "trung_tam", 3.0)]
+        return {p.poi_id: p for p in pois}, _travel(pois)  # 10-minute legs, one zone
+
+    def test_a_hole_before_lunch_is_idle_the_ride_and_the_overhead_are_not(self):
+        stubs, travel = self._day()
+        # museum 09:00-10:00, then 10 minutes of riding + the 12-minute stop overhead
+        acts = [{"poi_id": "museum", "start": 9 * 60}, {"poi_id": "lunch", "start": 11 * 60}]
+        self.assertEqual(objective.idle_minutes(acts, stubs, travel), 38)
+        tight = [acts[0], {"poi_id": "lunch", "start": 10 * 60 + 22}]
+        self.assertEqual(objective.idle_minutes(tight, stubs, travel), 0)
+
+    def test_the_siesta_after_lunch_is_not_idle(self):
+        stubs, travel = self._day()
+        acts = [{"poi_id": "lunch", "start": 12 * 60}, {"poi_id": "temple", "start": 14 * 60 + 10}]
+        self.assertEqual(objective.idle_minutes(acts, stubs, travel, rest_minutes=60), 10)
+        self.assertEqual(objective.idle_minutes(acts, stubs, travel), 48)
+
+    def test_waiting_is_measured_not_charged(self):
+        stubs, travel = self._day()
+        spec = _spec()
+        acts = [{"poi_id": "museum", "start": 9 * 60}, {"poi_id": "lunch", "start": 11 * 60}]
+        f = objective.features(acts, stubs, travel, spec, 8 * 60, 18 * 60)
+        self.assertEqual(f["wait"], 38)
+        self.assertEqual(spec.coef("w_wait"), 0.0)
+        self.assertEqual(objective.objective_value(f, spec),
+                         objective.objective_value({**f, "wait": 0.0}, spec))
+
+
 if __name__ == "__main__":
     unittest.main()
