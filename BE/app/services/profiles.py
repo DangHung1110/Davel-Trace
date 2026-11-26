@@ -16,7 +16,8 @@ every option, so every profile stays a plan a human can actually do):
 Under objective v1 (the default) the three node scores are ONE function, `value.py`,
 under three weight sets (objective_weights/v1.json `value` + `profiles.<name>.value`):
 the numbers above, except that savings' average leg only ranks its candidate cap
-(riding minutes are T9's). The formulas below (`_score`, `soft_lean`, TASTE_WEIGHT) are
+(riding minutes are T9's) and savings has no price-level term (on danang-v2 a copy of
+the fee). The formulas below (`_score`, `soft_lean`, TASTE_WEIGHT) are
 the DAVEL_OBJECTIVE=legacy path.
 
 `/v1/itinerary` now returns all three by default; the router additionally
@@ -246,7 +247,8 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
            avg_leg: float = 0.0, budget: float | None = None) -> float:
     """Node score for one profile under DAVEL_OBJECTIVE=legacy (see module docstring).
     Objective v1 scores with `value.score` instead: one function, these numbers as the
-    profiles' weights in objective_weights/v1.json, savings without `avg_leg`.
+    profiles' weights in objective_weights/v1.json, savings without `avg_leg` and without
+    the price-level penalty.
 
     savings: absolute cost minimisation (fee + travel), not a tie-break.
     balanced: trusted rating + fame, constraints respected.

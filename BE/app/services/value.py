@@ -6,7 +6,6 @@ phi, what the place is (the same for every traveller), summed in this order:
     base          1 for every stop
     fee           what one person spends there, per 100k VND, counted double when the
                   whole trip has under 1M; a cost: its weight is subtracted
-    price_level   price levels above the cheapest band; a cost
     rating        trusted rating (`BE.common.trusted_rating`), in stars
     fame          log10(1 + review count); 0 on danang-v2, which has no review counts
     novelty       Vargas novelty inside the pool (`novelty_scores`), 0..1
@@ -25,7 +24,11 @@ single keys in `profiles.<name>.value` (`objective.value_weights`), so savings, 
 and experience are this one function under three weight sets. Nothing here reads a
 profile name. With the pre-v1 node-score constants as weights the values are
 bit-identical to `profiles._score` + taste + lean (pinned in test_value_function), except
-savings, which no longer charges its mean matrix leg here: riding minutes are T9's.
+savings, which no longer charges its mean matrix leg here (riding minutes are T9's) nor a
+price level: on danang-v2 the level is the price tier again, the very source of `fee`
+(medium = level 2 in 371/371, expensive = level 3 in 16/16), so it only charged a priced
+place ~6% more and two collinear columns cannot be told apart when the weights are learned
+(dropped 26/11: 52 of 60 savings days kept their stops).
 `cap_avg_leg` is not part of v_i: the candidate cap (step 6) ranks by
 v_i - cap_avg_leg * the POI's mean leg, the savings prior that keeps a compact cluster
 among its 40 candidates.
@@ -42,9 +45,9 @@ from BE.common import (
     FEW_REVIEWS, clamp01, effective_fee, price_level_of, to_float, to_int, trusted_rating)
 
 # phi in summing order (the order keeps the float sums equal to the pre-v1 formulas).
-PLACE = ("base", "fee", "price_level", "rating", "fame", "novelty", "free", "free_outdoor")
+PLACE = ("base", "fee", "rating", "fame", "novelty", "free", "free_outdoor")
 PERSON = ("taste", "spending", "outdoor", "liked")
-COSTS = frozenset({"fee", "price_level"})
+COSTS = frozenset({"fee"})
 # Not a term of v_i: the cap's weight on the mean matrix leg (step 6).
 CAP_KEYS = ("cap_avg_leg",)
 
@@ -198,7 +201,6 @@ def place_features(poi: dict, pool: Pool) -> dict[str, float]:
     return {
         "base": 1.0,
         "fee": (known_fee or 0) / fee_unit,
-        "price_level": float(max(0, price_level_of(poi) - 1)),  # null = unknown -> middle band
         "rating": trusted_rating(poi),
         "fame": math.log10(1 + int(poi.get("review_count") or 0)),
         "novelty": float(pool.novelty.get(poi.get("poi_id"), 0.0)),

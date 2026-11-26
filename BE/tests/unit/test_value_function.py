@@ -4,8 +4,9 @@ Pinned here:
 - with the pre-v1 constants as weights (objective_weights/v1.json `value`), balanced and
   experience values are bit-identical to `profiles._score` + taste + lean, so the step
   changes the structure, not those two plans' scores;
-- savings is the same formula without its mean matrix leg (riding is T9's alone), and
-  its taste / lean unit is the pool's top value, not the most expensive place's |score|;
+- savings is the same formula without its mean matrix leg (riding is T9's alone) and
+  without the price-level penalty (on danang-v2 a copy of the fee), and its taste / lean
+  unit is the pool's top value, not the most expensive place's |score|;
 - the mean leg still ranks the savings candidate cap (`cap_avg_leg`), and only there;
 - nothing in value.py reads a profile name: the profiles differ only by weights;
 - the explanations and /v1/repair read the same values the solver planned with;
@@ -90,14 +91,31 @@ class TestOneFunction(unittest.TestCase):
                 self.assertEqual(scored(profile, trip=trip).values,
                                  legacy_values(profile, POOL, trip), (profile, trip))
 
-    def test_savings_is_the_old_formula_without_the_mean_leg(self):
+    def test_savings_is_the_old_formula_without_the_mean_leg_and_the_price_level(self):
         for trip in (TRIP, {**TRIP, "budget": 800_000}):
             got = scored("savings", trip=trip)
             nov = profiles.novelty_scores(POOL)
             top = max(profiles._score("savings", p, novelty=nov, avg_leg=0.0,
                                       budget=trip["budget"]) for p in POOL)
             self.assertEqual(got.unit, top)
-            self.assertEqual(got.values, legacy_values("savings", POOL, trip, unit=top))
+            old = legacy_values("savings", POOL, trip, unit=top)
+            for p in POOL:
+                pid = p["poi_id"]
+                penalty = profiles.SAVINGS_PRICE_LEVEL_PENALTY * max(0, p["price_level"] - 1)
+                if not penalty:
+                    self.assertEqual(got.values[pid], old[pid], pid)
+                else:  # the old 0.15 a level above the cheapest band is gone, nothing else
+                    self.assertAlmostEqual(got.values[pid] - old[pid], penalty, delta=2e-4,
+                                           msg=pid)
+
+    def test_the_price_level_is_no_term_of_the_value(self):
+        # danang-v2: the level is the price tier again, the very source of the fee
+        self.assertNotIn("price_level", value_svc.PLACE)
+        weights = objective.value_weights(profile="savings")
+        self.assertNotIn("price_level", weights)
+        stale = {**weights, "price_level": 5.0}     # an old weights file still naming it
+        self.assertEqual(value_svc.score(POOL, TRIP, stale).values,
+                         value_svc.score(POOL, TRIP, weights).values)
 
     def test_a_taste_hit_is_a_fifth_of_the_top_value_in_every_profile(self):
         plain = {**TRIP, "profile": {**PROFILE, "food_prefs": [], "spending_level": 2,
