@@ -55,3 +55,12 @@ def test_catalog_answers_on_the_v21_snapshot(monkeypatch):
     assert payload["snapshot_version"] == "danang-v2"
     assert payload["items"] and payload["items"][0]["cat"] == "beach"
     assert payload["items"][0]["verified"] is True
+
+
+@pytest.mark.skipif(not (V2_SNAPSHOT / "pois.json").is_file(), reason="danang-v2 snapshot missing")
+def test_catalog_finds_abbreviated_cham_museum(monkeypatch):
+    monkeypatch.setenv("SNAPSHOT_DIR", str(V2_SNAPSHOT))
+    monkeypatch.setenv("SNAPSHOT_NAME", "danang-v2")
+    response = request(app, "GET", "/v1/pois", params={"q": "Bảo tàng Chăm", "limit": 5})
+    assert response.status_code == 200
+    assert "Điêu khắc Chăm" in response.json()["items"][0]["name"]

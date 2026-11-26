@@ -44,6 +44,48 @@ void main() {
       expect(find.text('Signed in'), findsOneWidget);
     },
   );
+
+  testWidgets('Google on the registration route returns to the app', (
+    tester,
+  ) async {
+    final repository = FakeAuthRepository();
+    var googleCalls = 0;
+    final controller = AuthController(
+      repository: repository,
+      sessionStore: MemoryAuthSessionStore(),
+      googleSignIn: () async {
+        googleCalls++;
+        return repository.login('demo@example.com', 'TravelDemo123');
+      },
+    );
+    await controller.initialize();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AuthGate(controller: controller, child: const Text('Trips')),
+      ),
+    );
+    final register = find.text('Tạo tài khoản');
+    await tester.ensureVisible(register);
+    await tester.tap(register);
+    await tester.pumpAndSettle();
+
+    final google = find.widgetWithText(OutlinedButton, 'Tiếp tục bằng Google');
+    expect(google, findsOneWidget);
+    await tester.tap(google);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Quay lại'));
+    await tester.pumpAndSettle();
+    expect(googleCalls, 0);
+
+    await tester.tap(google);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Đồng ý và tiếp tục'));
+    await tester.pumpAndSettle();
+    expect(googleCalls, 1);
+    expect(find.text('Trips'), findsOneWidget);
+    expect(find.text('Tạo tài khoản bằng email'), findsNothing);
+  });
+
   testWidgets('mobile auth screen fits and labels demo honestly', (
     tester,
   ) async {

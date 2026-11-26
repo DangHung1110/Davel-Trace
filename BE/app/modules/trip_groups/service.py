@@ -10,7 +10,7 @@ from uuid import UUID
 
 from sqlalchemy import delete, func, select, tuple_
 
-from BE.app.core.config import get_settings
+from BE.app.core.config import AppMode, get_settings
 from BE.app.core.mutations import receipt, request_fingerprint, save_receipt
 from BE.app.db.models import (
     PlanningRequestModel,
@@ -270,10 +270,36 @@ def _costs(session, trip_id: UUID) -> list[GroupExpenseModel]:
 def _balance(expenses: list[GroupExpenseModel]) -> dict[str, int]:
     result: dict[str, int] = defaultdict(int)
     for row in expenses:
+        if row.source == "fund":
+            continue
         result[str(row.payer_id)] += row.amount_vnd
         for member_id, share in row.split.items():
             result[member_id] -= share
     return dict(result)
+
+
+def _fund_amounts(expenses: list[GroupExpenseModel]) -> tuple[int, int]:
+    contributed = sum(row.amount_vnd for row in expenses if row.kind == "contribution")
+    spent = sum(
+        row.amount_vnd for row in expenses if row.kind == "expense" and row.source == "fund"
+    )
+    return contributed, spent
+
+
+def _check_fund(session, trip_id: UUID, amount: int, exclude: GroupExpenseModel | None) -> None:
+    contributed, spent = _fund_amounts(
+        [row for row in _costs(session, trip_id) if row is not exclude]
+    )
+    if contributed - spent < amount:
+        raise IdentityError(
+            "GROUP_FUND_INSUFFICIENT",
+            "Số dư quỹ chung không đủ. Hãy đóng thêm quỹ hoặc dùng tiền ứng trước.",
+            409,
+        )
+
+
+def _demo_fund_payment_available() -> bool:
+    return get_settings().app_mode in {AppMode.demo, AppMode.test}
 
 
 def group_actual_spend(session, trip_id: UUID) -> int:
@@ -296,11 +322,26 @@ def _expense_public(row: GroupExpenseModel) -> dict:
         "member_ids": list(row.split),
         "kind": row.kind,
         "label": row.label,
+        "source": row.source,
+        "note": row.note,
+        "method": row.method,
         "amount_vnd": row.amount_vnd,
         "split": row.split,
         "version": row.version,
         "created_at": _iso(row.created_at),
     }
+
+
+def _log_expense_change(session, row, actor_id, before):
+    session.add(
+        GroupExpenseChangeModel(
+            expense_id=row.id,
+            actor_id=actor_id,
+            action="create" if before is None else "update",
+            before=before,
+            after=_expense_public(row),
+        )
+    )
 
 
 def _message_public(
@@ -348,6 +389,7 @@ def _detail(session, trip: TripModel, actor: GroupMemberModel) -> dict:
     suggestions = _suggestions(session, trip.trip_id)
     votes = _votes(session, trip.trip_id)
     expenses = _costs(session, trip.trip_id)
+    contributed, fund_spent = _fund_amounts(expenses)
     group = session.get(TripGroupModel, trip.trip_id)
     pinned = (
         session.get(GroupMessageModel, group.pinned_message_id)
@@ -393,7 +435,16 @@ def _detail(session, trip: TripModel, actor: GroupMemberModel) -> dict:
             }
             for item in suggestions
         ],
-        "expenses": [_expense_public(row) for row in expenses],
+        "expenses": [_expense_public(row) for row in expenses if row.kind != "contribution"],
+        "fund": {
+            "contributed_vnd": contributed,
+            "spent_vnd": fund_spent,
+            "balance_vnd": contributed - fund_spent,
+            "demo_payment_available": _demo_fund_payment_available(),
+            "contributions": [
+                _expense_public(row) for row in expenses if row.kind == "contribution"
+            ],
+        },
         "spent_vnd": sum(row.amount_vnd for row in expenses if row.kind == "expense"),
         "balance": _balance(expenses),
     }
@@ -846,6 +897,56 @@ class TripGroupService:
             group.pinned_message_id = message_id
             return {"pinned_meeting": _message_public(message, None) if message else None}
 
+    def save_contribution(
+        self, account_id: UUID, trip_id: UUID, values: dict, key: str
+    ) -> dict:
+        with session_scope(self.database_url) as session:
+            trip = _trip(session, trip_id, lock=True)
+            actor = _require_actor(session, account_id, trip)
+            _require_writable(trip)
+            member_id = values.get("member_id") or actor.id
+            method = values.get("method", "manual")
+            if method == "demo" and not _demo_fund_payment_available():
+                raise IdentityError(
+                    "GROUP_DEMO_PAYMENT_UNAVAILABLE",
+                    "Thanh toán mô phỏng chỉ có trong bản demo.",
+                    403,
+                )
+            if member_id != actor.id and (trip.account_id != account_id or method == "demo"):
+                raise IdentityError(
+                    "GROUP_CONTRIBUTION_FORBIDDEN", "Bạn chỉ có thể ghi tiền đóng của mình.", 403
+                )
+            normalized = {**values, "member_id": member_id, "method": method}
+            fingerprint = request_fingerprint(normalized)
+            operation = "create_group_contribution"
+            prior, key_hash = receipt(
+                session, account_id, operation, str(trip_id), key, fingerprint
+            )
+            if prior:
+                return _detail(session, trip, actor)
+            member = session.get(GroupMemberModel, member_id)
+            if member is None or member.trip_id != trip_id or not member.active:
+                raise _invalid("Chỉ ghi tiền đóng của thành viên đang tham gia chuyến đi.")
+            row = GroupExpenseModel(
+                trip_id=trip_id,
+                author_id=actor.id,
+                payer_id=member_id,
+                kind="contribution",
+                source="fund",
+                method=method,
+                label="Đóng quỹ",
+                amount_vnd=values["amount_vnd"],
+                note=values.get("note", ""),
+                split={},
+            )
+            session.add(row)
+            session.flush()
+            _log_expense_change(session, row, actor.id, None)
+            save_receipt(
+                session, account_id, operation, str(trip_id), key_hash, fingerprint, row.id, 201
+            )
+            return _detail(session, trip, actor)
+
     def save_expense(
         self,
         account_id: UUID,
@@ -859,8 +960,14 @@ class TripGroupService:
             trip = _trip(session, trip_id, lock=True)
             actor = _require_actor(session, account_id, trip)
             _require_writable(trip)
+            source = values.get("source", "personal")
+            note = values.get("note", "")
             if key is not None:
-                fingerprint = request_fingerprint(values)
+                # Preserve fingerprints from before fund and note fields existed.
+                fingerprint = request_fingerprint({
+                    name: value for name, value in values.items()
+                    if (name, value) not in (("source", "personal"), ("note", ""))
+                })
                 prior, key_hash = receipt(
                     session,
                     account_id,
@@ -884,6 +991,8 @@ class TripGroupService:
                 )
             if row and row.kind != kind:
                 raise _invalid("Không thể đổi loại khoản đã ghi.")
+            if row and row.source != source:
+                raise _invalid("Không thể đổi nguồn tiền của khoản đã ghi.")
             payer_id, recipients = values["payer_id"], values["member_ids"]
             if len(set(recipients)) != len(recipients):
                 raise _invalid("Mỗi người chỉ được chọn một lần.")
@@ -895,6 +1004,14 @@ class TripGroupService:
                 {UUID(key) for key in row.split} | {row.payer_id} if row else set()
             )
             amount = values["amount_vnd"]
+            if source == "fund":
+                if kind != "expense":
+                    raise _invalid("Chỉ khoản chi mới dùng được tiền từ quỹ chung.")
+                if trip.account_id != account_id or payer_id != actor.id:
+                    raise IdentityError(
+                        "GROUP_FUND_SPEND_FORBIDDEN", "Chỉ nhóm trưởng được ghi chi từ quỹ.", 403
+                    )
+                _check_fund(session, trip_id, amount, row)
             if kind == "settlement":
                 if len(recipients) != 1 or payer_id == recipients[0]:
                     raise _invalid("Chọn một người nhận khác người chuyển tiền.")
@@ -929,22 +1046,16 @@ class TripGroupService:
                 session.add(row)
             else:
                 row.version += 1
-            row.payer_id, row.label, row.amount_vnd, row.split = (
+            row.payer_id, row.label, row.amount_vnd, row.split, row.source, row.note = (
                 payer_id,
                 values["label"],
                 amount,
                 split,
+                source,
+                note,
             )
             session.flush()
-            session.add(
-                GroupExpenseChangeModel(
-                    expense_id=row.id,
-                    actor_id=actor.id,
-                    action="create" if before is None else "update",
-                    before=before,
-                    after=_expense_public(row),
-                )
-            )
+            _log_expense_change(session, row, actor.id, before)
             if key is not None:
                 save_receipt(
                     session,
@@ -977,6 +1088,8 @@ class TripGroupService:
             actor = _require_actor(session, account_id, trip)
             _require_writable(trip)
             row = self._editable_expense(session, trip, actor, expense_id)
+            if row.kind == "contribution":
+                _check_fund(session, trip_id, 0, row)
             session.add(
                 GroupExpenseChangeModel(
                     expense_id=row.id,

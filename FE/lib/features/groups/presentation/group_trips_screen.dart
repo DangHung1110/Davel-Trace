@@ -21,6 +21,7 @@ class GroupTripsScreen extends StatefulWidget {
     required this.openPlanning,
     this.createTrip,
     this.editTrip,
+    this.openExpensesOnSelection = false,
   });
 
   final ApiClient api;
@@ -28,6 +29,7 @@ class GroupTripsScreen extends StatefulWidget {
   final Future<void> Function(String tripId) openPlanning;
   final Future<Trip?> Function()? createTrip;
   final Future<void> Function(String tripId)? editTrip;
+  final bool openExpensesOnSelection;
 
   @override
   State<GroupTripsScreen> createState() => _GroupTripsScreenState();
@@ -55,6 +57,7 @@ class _GroupTripsScreenState extends State<GroupTripsScreen> {
           repository: _repository,
           tripId: tripId,
           initial: initial,
+          openExpensesOnStart: widget.openExpensesOnSelection,
           onOpenPlanning: () => widget.openPlanning(tripId),
           onEditTrip: widget.editTrip == null
               ? null
@@ -358,6 +361,7 @@ class GroupTripScreen extends StatefulWidget {
     required this.onOpenPlanning,
     this.onEditTrip,
     this.initial,
+    this.openExpensesOnStart = false,
   });
 
   final GroupRepository repository;
@@ -365,6 +369,7 @@ class GroupTripScreen extends StatefulWidget {
   final Future<void> Function() onOpenPlanning;
   final Future<void> Function()? onEditTrip;
   final Json? initial;
+  final bool openExpensesOnStart;
 
   @override
   State<GroupTripScreen> createState() => _GroupTripScreenState();
@@ -383,6 +388,11 @@ class _GroupTripScreenState extends State<GroupTripScreen> {
   void initState() {
     super.initState();
     unawaited(_refresh());
+    if (widget.openExpensesOnStart) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) unawaited(_open(GroupExpensesScreen(group: _group)));
+      });
+    }
   }
 
   Future<void> _refresh() async {
@@ -559,8 +569,9 @@ class _GroupTripScreenState extends State<GroupTripScreen> {
                           _GroupDestination(
                             destinationKey: 'open-group-expenses',
                             icon: Icons.account_balance_wallet_outlined,
-                            title: 'Chi tiêu chung',
-                            caption: 'Ghi khoản chi, chia tiền và xem dư nợ',
+                            title: 'Quỹ và chi tiêu nhóm',
+                            caption:
+                                'Góp quỹ, ghi khoản chi và xem tiền ứng trước',
                             onTap: () =>
                                 _open(GroupExpensesScreen(group: _group)),
                           ),

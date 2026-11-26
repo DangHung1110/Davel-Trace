@@ -31,6 +31,7 @@ class AuthController extends ChangeNotifier {
   final AuthSessionStore sessionStore;
   final Future<AuthTokens> Function()? _googleSignIn;
   final bool _googlePlatformAvailable;
+  bool get googlePlatformAvailable => _googlePlatformAvailable;
   bool googleAvailable = false;
   bool developmentInboxEnabled = false;
   String? googleAuthorizationOrigin;

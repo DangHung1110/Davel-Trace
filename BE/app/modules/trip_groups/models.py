@@ -138,7 +138,14 @@ class GroupMessageModel(Base):
 class GroupExpenseModel(Base):
     __tablename__ = "trip_group_expenses"
     __table_args__ = (
-        CheckConstraint("kind IN ('expense','settlement')", name="kind_valid"),
+        CheckConstraint("kind IN ('expense','settlement','contribution')", name="kind_valid"),
+        CheckConstraint(
+            "(kind = 'contribution' AND source = 'fund' AND method IS NOT NULL "
+            "AND method IN ('manual','demo')) OR "
+            "(kind = 'expense' AND source IN ('personal','fund') AND method IS NULL) OR "
+            "(kind = 'settlement' AND source = 'personal' AND method IS NULL)",
+            name="fund_fields_valid",
+        ),
         CheckConstraint("amount_vnd > 0", name="amount_positive"),
         CheckConstraint("version > 0", name="version_positive"),
         Index("ix_group_expenses_ledger", "trip_id", "created_at", "id"),
@@ -152,6 +159,9 @@ class GroupExpenseModel(Base):
     payer_id: Mapped[UUID] = mapped_column(ForeignKey("trip_group_members.id"))
     kind: Mapped[str] = mapped_column(String(20))
     label: Mapped[str] = mapped_column(String(200))
+    source: Mapped[str] = mapped_column(String(12), server_default="personal")
+    note: Mapped[str] = mapped_column(String(500), server_default="")
+    method: Mapped[str | None] = mapped_column(String(12))
     amount_vnd: Mapped[int] = mapped_column(BigInteger)
     split: Mapped[dict] = mapped_column(JSON_VALUE)
     version: Mapped[int] = mapped_column(default=1)

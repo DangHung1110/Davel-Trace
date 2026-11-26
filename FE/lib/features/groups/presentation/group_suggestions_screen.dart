@@ -98,21 +98,10 @@ class _GroupSuggestionsScreenState extends State<GroupSuggestionsScreen> {
             title: const Text('Góp ý chuyến đi'),
             actions: [
               if (group.canEdit)
-                PopupMenuButton<String>(
-                  tooltip: 'Thêm cách góp ý',
-                  enabled: !_busy,
-                  onSelected: (value) =>
-                      value == 'text' ? _addByText() : _import(),
-                  itemBuilder: (_) => const [
-                    PopupMenuItem(
-                      value: 'text',
-                      child: Text('Nhập bằng lời với AI'),
-                    ),
-                    PopupMenuItem(
-                      value: 'profile',
-                      child: Text('Dùng sở thích từ hồ sơ'),
-                    ),
-                  ],
+                IconButton(
+                  tooltip: 'Dùng sở thích từ hồ sơ',
+                  onPressed: _busy ? null : _import,
+                  icon: const Icon(Icons.person_add_alt_outlined),
                 ),
             ],
           ),
@@ -144,6 +133,15 @@ class _GroupSuggestionsScreenState extends State<GroupSuggestionsScreen> {
                           const Text(
                             'Chọn một điểm bạn muốn ghé nhất. Cả nhóm có thể ủng hộ đề xuất trước khi nhóm trưởng tạo lịch.',
                           ),
+                          if (group.canEdit) ...[
+                            const SizedBox(height: 12),
+                            OutlinedButton.icon(
+                              key: const Key('open-group-text-idea'),
+                              onPressed: _busy ? null : _addByText,
+                              icon: const Icon(Icons.chat_bubble_outline),
+                              label: const Text('Nhập góp ý với AI'),
+                            ),
+                          ],
                           if (suggestions.isEmpty && group.detail != null) ...[
                             const SizedBox(height: 18),
                             const GroupStatus(

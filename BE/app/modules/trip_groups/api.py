@@ -73,7 +73,16 @@ class ExpenseBody(Body):
     kind: Literal["expense", "settlement"] = "expense"
     label: str = Field(min_length=1, max_length=200)
     amount_vnd: int = Field(gt=0, le=10**12, strict=True)
+    source: Literal["personal", "fund"] = "personal"
+    note: str = Field(default="", max_length=500)
     version: int | None = Field(default=None, ge=1)
+
+
+class ContributionBody(Body):
+    member_id: UUID | None = None
+    amount_vnd: int = Field(gt=0, le=10**12, strict=True)
+    note: str = Field(default="", max_length=500)
+    method: Literal["manual", "demo"] = "manual"
 
 
 @router.get("")
@@ -231,6 +240,18 @@ def send_message(trip_id: UUID, body: MessageBody, current: Actor):
 @router.put("/{trip_id}/chat/pinned-meeting")
 def pin_meeting(trip_id: UUID, body: PinBody, current: Actor):
     return TripGroupService().pin_meeting(current.account_id, trip_id, body.message_id)
+
+
+@router.post("/{trip_id}/fund/contributions", status_code=201)
+def contribute(
+    trip_id: UUID,
+    body: ContributionBody,
+    current: Actor,
+    key: str = Header(alias="Idempotency-Key", min_length=1, max_length=128),
+):
+    return TripGroupService().save_contribution(
+        current.account_id, trip_id, body.model_dump(), key
+    )
 
 
 @router.post("/{trip_id}/expenses", status_code=201)

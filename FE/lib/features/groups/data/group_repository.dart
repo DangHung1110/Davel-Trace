@@ -60,6 +60,18 @@ class GroupRepository {
         ),
       );
 
+  Future<Json> createFundContribution(
+    String trip,
+    Json body,
+    String key,
+  ) async => jsonObject(
+    await api.post(
+      '$_base/$trip/fund/contributions',
+      body: body,
+      headers: {'Idempotency-Key': key},
+    ),
+  );
+
   Future<Json> delete(String trip, String path) async =>
       jsonObject(await api.delete('$_base/$trip$path'));
 

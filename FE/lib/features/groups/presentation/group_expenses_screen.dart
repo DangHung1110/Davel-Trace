@@ -5,6 +5,7 @@ import '../../../core/observability/correlation_id.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 import '../data/group_repository.dart';
+import 'group_fund.dart';
 import 'group_shared.dart';
 
 class GroupExpensesScreen extends StatefulWidget {
@@ -33,12 +34,18 @@ class _GroupExpensesScreenState extends State<GroupExpensesScreen> {
   }
 
   Future<void> _delete(Json item) async {
+    final contribution = item['kind'] == 'contribution';
+    final fundExpense = item['source'] == 'fund';
     final agreed = await confirmGroupAction(
       context,
-      title: item['kind'] == 'settlement'
+      title: contribution
+          ? 'Hủy ghi nhận đóng quỹ?'
+          : item['kind'] == 'settlement'
           ? 'Bỏ ghi nhận hoàn tiền?'
           : 'Xóa khoản chi?',
-      description: 'Số tiền cần hoàn giữa các thành viên sẽ được tính lại.',
+      description: contribution || fundExpense
+          ? 'Số dư quỹ và lịch sử giao dịch sẽ được cập nhật.'
+          : 'Số tiền cần hoàn giữa các thành viên sẽ được tính lại.',
       action: 'Xác nhận xóa',
     );
     if (!agreed || !mounted || _busy) return;
@@ -65,6 +72,86 @@ class _GroupExpensesScreenState extends State<GroupExpensesScreen> {
     );
   }
 
+  Future<void> _contribute() async {
+    final response = await Navigator.of(context).push<Json>(
+      MaterialPageRoute(builder: (_) => GroupContributionEditor(group: group)),
+    );
+    if (response != null && mounted) group.update(response);
+  }
+
+  void _viewContributions() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => GroupContributionsScreen(
+          group: group,
+          onDetails: _history,
+          onRemove: _delete,
+        ),
+      ),
+    );
+  }
+
+  Widget _expenseTile(Json item) {
+    final id = textField(item, 'id');
+    final repayment = item['kind'] == 'settlement';
+    final fromFund = item['source'] == 'fund' && !repayment;
+    final payer = group.name(textField(item, 'payer_id'));
+    final attendees = item['member_ids'] as List? ?? const [];
+    final note = textField(item, 'note');
+    final canChange = group.canEdit && item['author_id'] == group.memberId;
+    final description = repayment && attendees.isNotEmpty
+        ? '$payer hoàn cho ${group.name(attendees.first.toString())}'
+        : fromFund
+        ? '${attendees.length} người cùng dùng'
+        : '$payer ứng trước · ${attendees.length} người chia';
+    return Column(
+      key: ValueKey('group-expense-$id'),
+      children: [
+        const Divider(height: 1),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: Icon(
+            repayment
+                ? Icons.currency_exchange_outlined
+                : Icons.receipt_long_outlined,
+          ),
+          title: Text(textField(item, 'label')),
+          subtitle: Text(
+            '${moneyVnd(integerField(item, 'amount_vnd'))} · $description'
+            '${note.isEmpty ? '' : '\n$note'}',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+          ),
+          onTap: () => _history(item),
+          trailing: canChange
+              ? PopupMenuButton<String>(
+                  tooltip: 'Tùy chọn khoản chi',
+                  enabled: !_busy,
+                  onSelected: (action) async {
+                    if (action == 'edit') {
+                      await _edit(existing: item);
+                    } else {
+                      await _delete(item);
+                    }
+                  },
+                  itemBuilder: (_) => [
+                    if (!repayment)
+                      const PopupMenuItem(
+                        value: 'edit',
+                        child: Text('Sửa khoản chi'),
+                      ),
+                    const PopupMenuItem(
+                      value: 'delete',
+                      child: Text('Xóa khoản đã ghi'),
+                    ),
+                  ],
+                )
+              : const Icon(Icons.chevron_right),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) => GroupPolling(
     onRefresh: group.refresh,
@@ -73,6 +160,13 @@ class _GroupExpensesScreenState extends State<GroupExpensesScreen> {
       builder: (context, _) {
         final detail = group.detail ?? {};
         final entries = jsonObjects(detail['expenses']);
+        final fund = jsonObject(detail['fund']);
+        final fundExpenses = entries
+            .where((entry) => entry['source'] == 'fund')
+            .toList();
+        final personalEntries = entries
+            .where((entry) => entry['source'] != 'fund')
+            .toList();
         final balance = jsonObject(detail['balance']);
         final spent = integerField(detail, 'spent_vnd');
         final budget = integerField(detail, 'budget_vnd');
@@ -98,125 +192,100 @@ class _GroupExpensesScreenState extends State<GroupExpensesScreen> {
             bottom: false,
             child: RefreshIndicator(
               onRefresh: group.refresh,
-              child: ListView.builder(
+              child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-                itemCount: entries.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (group.failure case String failure)
-                          GroupProblem(
-                            message: failure,
-                            onRetry: group.refresh,
-                          ),
-                        if (group.detail != null) ...[
-                          Text(
-                            'Cả nhóm đã chi',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            moneyVnd(spent),
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          if (budget > 0) ...[
+                slivers: [
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+                    sliver: SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (group.failure case String failure)
+                            GroupProblem(
+                              message: failure,
+                              onRetry: group.refresh,
+                            ),
+                          if (group.detail != null) ...[
+                            GroupFundSummary(
+                              fund: fund,
+                              onView: _viewContributions,
+                            ),
+                            const SizedBox(height: 14),
+                            Wrap(
+                              spacing: 16,
+                              runSpacing: 4,
+                              children: [
+                                Text('Cả nhóm đã chi ${moneyVnd(spent)}'),
+                                if (budget > 0)
+                                  Text('Ngân sách ${moneyVnd(budget)}'),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              'Khoản chi từ quỹ',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
                             const SizedBox(height: 6),
-                            Text('Ngân sách chuyến: ${moneyVnd(budget)}'),
+                            if (fundExpenses.isEmpty)
+                              const Text('Chưa có khoản chi từ quỹ.'),
                           ],
-                          const SizedBox(height: 20),
-                          Text(
-                            'Còn phải hoàn',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 6),
-                          if (balance.values.every((value) => value == 0))
-                            const Text('Không còn khoản phải hoàn.')
-                          else
-                            for (final person in group.allMembers.where(
-                              (person) =>
-                                  integerField(
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    sliver: SliverList.builder(
+                      itemCount: fundExpenses.length,
+                      itemBuilder: (_, index) =>
+                          _expenseTile(fundExpenses[index]),
+                    ),
+                  ),
+                  if (group.detail != null)
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 6),
+                      sliver: SliverToBoxAdapter(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ứng trước và hoàn tiền',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 6),
+                            if (balance.values.every((value) => value == 0))
+                              const Text('Không còn khoản ứng trước phải hoàn.')
+                            else
+                              for (final person in group.allMembers.where(
+                                (person) =>
+                                    integerField(
+                                      balance,
+                                      textField(person, 'id'),
+                                    ) !=
+                                    0,
+                              ))
+                                _BalanceRow(
+                                  group: group,
+                                  person: person,
+                                  amount: integerField(
                                     balance,
                                     textField(person, 'id'),
-                                  ) !=
-                                  0,
-                            ))
-                              _BalanceRow(
-                                group: group,
-                                person: person,
-                                amount: integerField(
-                                  balance,
-                                  textField(person, 'id'),
-                                ),
-                              ),
-                          const SizedBox(height: 18),
-                          Text(
-                            'Khoản đã ghi',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 6),
-                          if (entries.isEmpty)
-                            const GroupStatus(
-                              icon: Icons.receipt_long_outlined,
-                              text: 'Chưa có khoản chi chung. Thêm khoản chi và chọn người cùng chia.',
-                            ),
-                        ],
-                      ],
-                    );
-                  }
-                  final item = entries[index - 1];
-                  final id = textField(item, 'id');
-                  final repayment = item['kind'] == 'settlement';
-                  final payer = group.name(textField(item, 'payer_id'));
-                  final attendees = item['member_ids'] as List? ?? const [];
-                  final canChange =
-                      group.canEdit && item['author_id'] == group.memberId;
-                  return Column(
-                    key: ValueKey('group-expense-$id'),
-                    children: [
-                      const Divider(height: 1),
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          repayment
-                              ? Icons.currency_exchange_outlined
-                              : Icons.receipt_long_outlined,
-                        ),
-                        title: Text(textField(item, 'label')),
-                        subtitle: Text(
-                          '${moneyVnd(integerField(item, 'amount_vnd'))} · ${repayment && attendees.isNotEmpty ? '$payer hoàn cho ${group.name(attendees.first.toString())}' : '$payer đã trả · ${attendees.length} người chia'}',
-                        ),
-                        onTap: () => _history(item),
-                        trailing: canChange
-                            ? PopupMenuButton<String>(
-                                tooltip: 'Tùy chọn khoản chi',
-                                enabled: !_busy,
-                                onSelected: (action) async {
-                                  if (action == 'edit') {
-                                    await _edit(existing: item);
-                                  } else {
-                                    await _delete(item);
-                                  }
-                                },
-                                itemBuilder: (_) => [
-                                  if (!repayment)
-                                    const PopupMenuItem(
-                                      value: 'edit',
-                                      child: Text('Sửa khoản chi'),
-                                    ),
-                                  const PopupMenuItem(
-                                    value: 'delete',
-                                    child: Text('Xóa khoản đã ghi'),
                                   ),
-                                ],
-                              )
-                            : const Icon(Icons.chevron_right),
+                                ),
+                          ],
+                        ),
                       ),
-                    ],
-                  );
-                },
+                    ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+                    sliver: SliverList.builder(
+                      itemCount: personalEntries.length,
+                      itemBuilder: (_, index) =>
+                          _expenseTile(personalEntries[index]),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -228,7 +297,14 @@ class _GroupExpensesScreenState extends State<GroupExpensesScreen> {
                       key: const Key('add-group-expense'),
                       onPressed: _busy ? null : () => _edit(),
                       icon: const Icon(Icons.add),
-                      label: const Text('Thêm khoản chi chung'),
+                      label: const Text('Ghi khoản chi'),
+                    ),
+                    const SizedBox(height: 8),
+                    OutlinedButton.icon(
+                      key: const Key('add-group-contribution'),
+                      onPressed: _busy ? null : _contribute,
+                      icon: const Icon(Icons.savings_outlined),
+                      label: const Text('Đóng quỹ'),
                     ),
                   ],
                 ),
@@ -294,7 +370,17 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
   late final _amount = TextEditingController(
     text: widget.existing?['amount_vnd']?.toString() ?? '',
   );
+  late final _note = TextEditingController(
+    text: textField(widget.existing ?? {}, 'note'),
+  );
   late final _balance = jsonObject(group.detail?['balance']);
+  late final _fund = jsonObject(group.detail?['fund']);
+  late bool _fromFund =
+      !widget.repayment &&
+      (widget.existing?['source'] == 'fund' ||
+          (widget.existing == null &&
+              group.isLeader &&
+              integerField(_fund, 'balance_vnd') > 0));
   late final _included = <String>{
     if (!widget.repayment)
       ...((widget.existing?['member_ids'] as List?)?.map(
@@ -307,6 +393,12 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
   String? _recipient;
   String? _failure;
   bool _busy = false;
+
+  int get _availableFund =>
+      integerField(_fund, 'balance_vnd') +
+      (widget.existing?['source'] == 'fund'
+          ? integerField(widget.existing!, 'amount_vnd')
+          : 0);
 
   List<Json> get _eligible => widget.repayment
       ? group.allMembers
@@ -325,7 +417,7 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
 
   Future<void> _submit() async {
     if (_busy || !(_form.currentState?.validate() ?? false)) return;
-    if (_payer.isEmpty ||
+    if ((!_fromFund && _payer.isEmpty) ||
         (!widget.repayment && _included.isEmpty) ||
         (widget.repayment && (_recipient == null || _payer == _recipient))) {
       setState(
@@ -352,9 +444,11 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
     final body = {
       'kind': widget.repayment ? 'settlement' : 'expense',
       'label': _label.text.trim(),
-      'payer_id': _payer,
+      'payer_id': _fromFund ? group.memberId : _payer,
       'member_ids': widget.repayment ? [_recipient!] : _included.toList(),
       'amount_vnd': int.parse(_amount.text),
+      if (_fromFund) 'source': 'fund',
+      if (!widget.repayment) 'note': _note.text.trim(),
       if (widget.existing?['version'] != null)
         'version': widget.existing!['version'],
     };
@@ -378,6 +472,7 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
   void dispose() {
     _label.dispose();
     _amount.dispose();
+    _note.dispose();
     super.dispose();
   }
 
@@ -400,7 +495,7 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
     final title = widget.repayment
         ? 'Ghi đã hoàn tiền'
         : widget.existing == null
-        ? 'Thêm khoản chi chung'
+        ? 'Ghi khoản chi'
         : 'Sửa khoản chi';
     return Scaffold(
       appBar: AppBar(title: Text(title)),
@@ -418,6 +513,31 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
                   ),
                   const SizedBox(height: 16),
                 ] else ...[
+                  if (widget.existing == null && group.isLeader) ...[
+                    DropdownButtonFormField<String>(
+                      key: const Key('group-expense-source'),
+                      initialValue: _fromFund ? 'fund' : 'personal',
+                      isExpanded: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Nguồn tiền',
+                      ),
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'fund',
+                          child: Text('Quỹ chung'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'personal',
+                          child: Text('Thành viên ứng trước'),
+                        ),
+                      ],
+                      onChanged: _busy
+                          ? null
+                          : (value) =>
+                                setState(() => _fromFund = value == 'fund'),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                   TextFormField(
                     key: const Key('group-expense-name'),
                     controller: _label,
@@ -436,7 +556,7 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
                 TextFormField(
                   key: const Key('group-expense-amount'),
                   controller: _amount,
-                  maxLength: 11,
+                  maxLength: 13,
                   enabled: !_busy,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -444,39 +564,68 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
                     labelText: 'Số tiền',
                     suffixText: '₫',
                   ),
-                  validator: (value) => (int.tryParse(value ?? '') ?? 0) <= 0
-                      ? 'Nhập số tiền lớn hơn 0.'
-                      : null,
+                  validator: (value) {
+                    final amount = int.tryParse(value ?? '') ?? 0;
+                    if (amount <= 0) return 'Nhập số tiền lớn hơn 0.';
+                    if (amount > 1_000_000_000_000) {
+                      return 'Số tiền tối đa là ${moneyVnd(1_000_000_000_000)}.';
+                    }
+                    if (_fromFund && amount > _availableFund) {
+                      return 'Số dư khả dụng là ${moneyVnd(_availableFund)}.';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  initialValue: payers.any((person) => person['id'] == _payer)
-                      ? _payer
-                      : null,
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    labelText: widget.repayment
-                        ? 'Người đã hoàn'
-                        : 'Người đã trả',
-                  ),
-                  items: [
-                    for (final person in payers)
-                      DropdownMenuItem(
-                        value: textField(person, 'id'),
-                        child: Text(
-                          textField(person, 'display_name'),
-                          overflow: TextOverflow.ellipsis,
+                if (_fromFund)
+                  Text(
+                    'Quỹ có thể dùng ${moneyVnd(_availableFund)}. '
+                    'Số dư quỹ sẽ giảm khi lưu khoản chi.',
+                  )
+                else
+                  DropdownButtonFormField<String>(
+                    initialValue: payers.any((person) => person['id'] == _payer)
+                        ? _payer
+                        : null,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      labelText: widget.repayment
+                          ? 'Người đã hoàn'
+                          : 'Người đã trả',
+                    ),
+                    items: [
+                      for (final person in payers)
+                        DropdownMenuItem(
+                          value: textField(person, 'id'),
+                          child: Text(
+                            textField(person, 'display_name'),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                  ],
-                  validator: (value) =>
-                      value == null ? 'Chọn người đã trả.' : null,
-                  onChanged: _busy
-                      ? null
-                      : (value) {
-                          if (value != null) setState(() => _payer = value);
-                        },
-                ),
+                    ],
+                    validator: (value) =>
+                        value == null ? 'Chọn người đã trả.' : null,
+                    onChanged: _busy
+                        ? null
+                        : (value) {
+                            if (value != null) setState(() => _payer = value);
+                          },
+                  ),
+                if (!widget.repayment) ...[
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    key: const Key('group-expense-note'),
+                    controller: _note,
+                    maxLength: 500,
+                    minLines: 1,
+                    maxLines: 3,
+                    enabled: !_busy,
+                    decoration: const InputDecoration(
+                      labelText: 'Ghi chú (tùy chọn)',
+                      hintText: 'Ví dụ: Lượt taxi chiều về',
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 16),
                 if (widget.repayment)
                   DropdownButtonFormField<String>(
@@ -501,7 +650,7 @@ class _GroupExpenseEditorState extends State<_GroupExpenseEditor> {
                   )
                 else ...[
                   Text(
-                    'Chia đều cho',
+                    _fromFund ? 'Chia khoản chi cho' : 'Chia đều cho',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
@@ -573,6 +722,10 @@ class _GroupExpenseDetailsState extends State<_GroupExpenseDetails> {
     final expense = widget.item;
     final group = widget.group;
     final portions = jsonObject(expense['split']);
+    final contribution = expense['kind'] == 'contribution';
+    final fromFund = expense['source'] == 'fund' && !contribution;
+    final payer = group.name(textField(expense, 'payer_id'));
+    final note = textField(expense, 'note');
     return Scaffold(
       appBar: AppBar(title: Text(textField(expense, 'label'))),
       body: SafeArea(
@@ -584,9 +737,16 @@ class _GroupExpenseDetailsState extends State<_GroupExpenseDetails> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 4),
-            Text('${group.name(textField(expense, 'payer_id'))} đã trả'),
+            Text(
+              contribution
+                  ? '${expense['method'] == 'demo' ? 'Mô phỏng đóng quỹ của' : 'Người đóng'} $payer'
+                  : fromFund
+                  ? 'Đã trả từ quỹ chung'
+                  : '$payer đã trả',
+            ),
+            if (note.isNotEmpty) ...[const SizedBox(height: 8), Text(note)],
             const SizedBox(height: 16),
-            if (expense['kind'] != 'settlement') ...[
+            if (!contribution && expense['kind'] != 'settlement') ...[
               Text(
                 'Phần của từng người',
                 style: Theme.of(context).textTheme.titleLarge,

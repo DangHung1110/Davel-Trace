@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:davel_trace/core/networking/api_client.dart';
 import 'package:davel_trace/features/groups/data/group_repository.dart';
 import 'package:davel_trace/features/groups/presentation/group_trips_screen.dart';
+import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +25,8 @@ class _GroupFixture {
   String? postedText;
   String? expenseKey;
   Json? expense;
+  Json? contribution;
+  String? contributionKey;
   Json? joinRequest;
 
   Json get info => {
@@ -63,6 +66,29 @@ class _GroupFixture {
           ],
     'spent_vnd': expense?['amount_vnd'] ?? 0,
     'balance': {},
+    'fund': {
+      'balance_vnd':
+          integerField(contribution ?? {}, 'amount_vnd') -
+          (expense?['source'] == 'fund'
+              ? integerField(expense!, 'amount_vnd')
+              : 0),
+      'contributed_vnd': integerField(contribution ?? {}, 'amount_vnd'),
+      'spent_vnd': expense?['source'] == 'fund'
+          ? integerField(expense!, 'amount_vnd')
+          : 0,
+      'demo_payment_available': true,
+      'contributions': [
+        if (contribution case final contribution?)
+          {
+            ...contribution,
+            'id': 'fund-entry',
+            'payer_id': contribution['member_id'],
+            'author_id': contribution['member_id'],
+            'kind': 'contribution',
+            'label': 'Đóng quỹ',
+          },
+      ],
+    },
   };
 
   Json get alternative => {
@@ -150,6 +176,11 @@ class _GroupFixture {
         expenseKey = request.headers['idempotency-key'];
         expense = jsonObject(jsonDecode(request.body));
         return _response(detail);
+      }
+      if (path == '/v1/trip-groups/$_trip/fund/contributions') {
+        contributionKey = request.headers['idempotency-key'];
+        contribution = jsonObject(jsonDecode(request.body));
+        return _response(detail, 201);
       }
       return _response({'error': 'UNEXPECTED_TEST_REQUEST'}, 500);
     }),
@@ -317,6 +348,7 @@ void main() {
     await _start(tester, fixture);
     await _tap(tester, 'open-group-expenses');
     await _tap(tester, 'add-group-expense');
+    expect(find.byKey(const Key('group-expense-source')), findsNothing);
     await tester.enterText(find.byKey(const Key('group-expense-name')), 'Taxi');
     await tester.enterText(
       find.byKey(const Key('group-expense-amount')),
@@ -331,6 +363,80 @@ void main() {
     expect(fixture.expense?['amount_vnd'], 120000);
     expect(fixture.expenseKey, isNotEmpty);
     expect(find.text('Taxi'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  testWidgets('leader records a demo contribution and spends from the fund', (
+    tester,
+  ) async {
+    _viewport(tester, const Size(390, 844));
+    final fixture = _GroupFixture(role: 'leader');
+    await _start(tester, fixture);
+    await _tap(tester, 'open-group-expenses');
+    await _tap(tester, 'add-group-contribution');
+    await tester.enterText(
+      find.byKey(const Key('group-contribution-amount')),
+      '300000',
+    );
+    await tester.enterText(
+      find.byKey(const Key('group-contribution-note')),
+      'Đợt đầu',
+    );
+    await _tap(tester, 'group-contribution-demo');
+    await _tap(tester, 'save-group-contribution');
+    expect(fixture.contribution, isNull);
+    await tester.tap(find.text('Xác nhận mô phỏng'));
+    await tester.pumpAndSettle();
+    expect(fixture.contribution, {
+      'member_id': 'leader',
+      'amount_vnd': 300000,
+      'note': 'Đợt đầu',
+      'method': 'demo',
+    });
+    expect(fixture.contributionKey, isNotEmpty);
+    expect(
+      tester.widget<Text>(find.byKey(const Key('group-fund-balance'))).data,
+      moneyVnd(300000),
+    );
+
+    await _tap(tester, 'view-group-contributions');
+    expect(find.text('Đã góp theo từng người'), findsOneWidget);
+    expect(find.textContaining('Mô phỏng · Đợt đầu'), findsOneWidget);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+
+    await _tap(tester, 'add-group-expense');
+    await tester.enterText(
+      find.byKey(const Key('group-expense-name')),
+      'Vé tham quan',
+    );
+    await tester.enterText(
+      find.byKey(const Key('group-expense-amount')),
+      '120000',
+    );
+    await tester.enterText(
+      find.byKey(const Key('group-expense-note')),
+      'Vé đã mua trực tiếp',
+    );
+    final exclude = find.widgetWithText(CheckboxListTile, 'An');
+    await tester.ensureVisible(exclude);
+    await tester.tap(exclude);
+    await tester.pumpAndSettle();
+    await _tap(tester, 'save-group-expense');
+    expect(fixture.expense?['source'], 'fund');
+    expect(fixture.expense?['note'], 'Vé đã mua trực tiếp');
+    expect(fixture.expense?['member_ids'], ['leader']);
+    expect(
+      tester.widget<Text>(find.byKey(const Key('group-fund-balance'))).data,
+      moneyVnd(180000),
+    );
+    expect(find.text('Vé tham quan'), findsOneWidget);
+    if (_captureUi) {
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('../build/ui-review/group-fund-390.png'),
+      );
+    }
     await tester.pumpWidget(const SizedBox.shrink());
   });
 }

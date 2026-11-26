@@ -10,9 +10,15 @@ import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
 
 class ExpensesScreen extends StatefulWidget {
-  const ExpensesScreen({super.key, required this.state, this.onOpenTrips});
+  const ExpensesScreen({
+    super.key,
+    required this.state,
+    this.onOpenTrips,
+    this.onOpenGroupExpenses,
+  });
   final AppState state;
   final VoidCallback? onOpenTrips;
+  final VoidCallback? onOpenGroupExpenses;
 
   @override
   State<ExpensesScreen> createState() => _ExpensesScreenState();
@@ -112,18 +118,31 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     final progress = summary.budgetVnd == 0
         ? 0.0
         : (summary.spentVnd / summary.budgetVnd).clamp(0.0, 1.0);
-    return ColoredBox(
+    return Material(
       color: AppColors.canvas,
       child: Column(
         children: [
           AppHeader(
             compact: true,
-            section: 'Chi tiêu',
+            section: widget.onOpenGroupExpenses == null
+                ? 'Chi tiêu'
+                : 'Chi tiêu cá nhân',
             trailing: TextButton(
               onPressed: widget.onOpenTrips,
               child: const Text('Đổi chuyến'),
             ),
           ),
+          if (widget.onOpenGroupExpenses != null)
+            ListTile(
+              key: const Key('open-group-expenses-from-tab'),
+              leading: const Icon(
+                Icons.groups_outlined,
+                color: AppColors.primary,
+              ),
+              title: const Text('Quỹ và chi tiêu nhóm'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: widget.onOpenGroupExpenses,
+            ),
           Expanded(
             child: trip == null
                 ? _NoTripExpense(onOpenTrips: widget.onOpenTrips)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../application/auth_controller.dart';
+import 'google_continue_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key, required this.controller});
@@ -52,8 +53,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text('Dùng email để lưu và mở lại chuyến đi của bạn.'),
-                  const SizedBox(height: 18),
+                  if (widget.controller.googleAvailable) ...[
+                    GoogleContinueButton(
+                      controller: widget.controller,
+                      onAuthenticated: () {
+                        if (ModalRoute.of(context)?.isCurrent == true) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 14),
+                  ],
+                  const Text('Tạo tài khoản bằng email'),
+                  const SizedBox(height: 12),
                   TextFormField(
                     controller: email,
                     keyboardType: TextInputType.emailAddress,

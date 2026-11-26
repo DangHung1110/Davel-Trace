@@ -53,6 +53,8 @@ class ItineraryScreen extends StatelessWidget {
           values: proposal.confirmedOverrides,
           repository: state.repository,
           placeResolutions: proposal.placeResolutions,
+          trip: state.activeTrip,
+          useGroupDetails: group,
         ),
       ),
     );
@@ -283,6 +285,25 @@ class ItineraryScreen extends StatelessWidget {
                           icon: const Icon(Icons.calendar_month_outlined),
                           label: const Text('Lập lịch cho chuyến đi'),
                         ),
+                        if (!state.isDemoManagement)
+                          OutlinedButton.icon(
+                            key: const Key('open-plan-with-ai-button'),
+                            onPressed:
+                                state.isMutating ||
+                                    state.isPlanning ||
+                                    state.isInterpreting
+                                ? null
+                                : () => Navigator.of(context).push<void>(
+                                    MaterialPageRoute(
+                                      builder: (_) => PlanningScreen(
+                                        state: state,
+                                        startWithPrompt: true,
+                                      ),
+                                    ),
+                                  ),
+                            icon: const Icon(Icons.chat_bubble_outline),
+                            label: const Text('Nhập mong muốn với AI'),
+                          ),
                         if (itinerary != null &&
                             itinerary.warnings.isNotEmpty) ...[
                           const SizedBox(height: 12),
@@ -437,9 +458,15 @@ class ItineraryScreen extends StatelessWidget {
 }
 
 class PlanningScreen extends StatelessWidget {
-  const PlanningScreen({super.key, required this.state, this.groupApi});
+  const PlanningScreen({
+    super.key,
+    required this.state,
+    this.groupApi,
+    this.startWithPrompt = false,
+  });
   final AppState state;
   final ApiClient? groupApi;
+  final bool startWithPrompt;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -494,7 +521,11 @@ class PlanningScreen extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 8),
-          _PlanningPanel(state: state, groupApi: groupApi),
+          _PlanningPanel(
+            state: state,
+            groupApi: groupApi,
+            startWithPrompt: startWithPrompt,
+          ),
         ],
       ),
     ),
@@ -502,9 +533,14 @@ class PlanningScreen extends StatelessWidget {
 }
 
 class _PlanningPanel extends StatefulWidget {
-  const _PlanningPanel({required this.state, this.groupApi});
+  const _PlanningPanel({
+    required this.state,
+    this.groupApi,
+    required this.startWithPrompt,
+  });
   final AppState state;
   final ApiClient? groupApi;
+  final bool startWithPrompt;
 
   @override
   State<_PlanningPanel> createState() => _PlanningPanelState();
@@ -513,6 +549,16 @@ class _PlanningPanel extends StatefulWidget {
 class _PlanningPanelState extends State<_PlanningPanel> {
   AppState get state => widget.state;
   final _placeNames = <String, Future<PoiItem?>>{};
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.startWithPrompt) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _interpret(context);
+      });
+    }
+  }
 
   Future<PoiItem?> _resolvePlace(String id) =>
       _placeNames.putIfAbsent(id, () async {
@@ -578,7 +624,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Nội dung sẽ được gửi tới nhà cung cấp AI bên ngoài. Không nhập mật khẩu, token hoặc thông tin riêng tư không cần thiết.',
+                'App đã có thông tin chuyến đi. Hãy thêm nơi muốn ghé, nơi cần tránh hoặc sở thích. Đoạn bạn nhập được gửi cho nhà cung cấp AI để đọc yêu cầu.',
                 style: TextStyle(fontSize: 12, color: AppColors.muted),
               ),
               const SizedBox(height: 10),
@@ -591,7 +637,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                 maxLength: 4000,
                 decoration: const InputDecoration(
                   labelText: 'Mong muốn của bạn',
-                  hintText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                  hintText: 'Ví dụ: Muốn ghé Bảo tàng Chăm, tránh Chợ Hàn và ưu tiên ăn mì Quảng.',
                   alignLabelWithHint: true,
                 ),
               ),
@@ -761,20 +807,20 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               state.isPlanning
                   ? 'Đang lập phương án…'
                   : widget.groupApi == null
-                  ? 'Tạo phương án lịch trình'
+                  ? 'Lập từ thông tin đã lưu'
                   : 'Tạo phương án để nhóm xem',
             ),
           ),
         if (!state.isDemoManagement) const SizedBox(height: 4),
         if (!state.isDemoManagement)
-          TextButton.icon(
+          OutlinedButton.icon(
             key: const Key('request-ai-interpretation'),
             onPressed: busy ? null : () => _interpret(context),
             icon: const Icon(Icons.chat_bubble_outline),
             label: Text(
               state.isInterpreting
                   ? 'AI đang diễn giải…'
-                  : 'Nhập mong muốn bằng lời với AI',
+                  : 'Nhập mong muốn với AI',
             ),
           ),
         if (state.aiMessage != null) ...[

@@ -11,10 +11,14 @@ class PlanningRequestReview extends StatefulWidget {
     required this.values,
     required this.repository,
     this.placeResolutions = const [],
+    this.trip,
+    this.useGroupDetails = false,
   });
   final Map<String, dynamic> values;
   final ManagementRepository repository;
   final List<PlaceNameResolution> placeResolutions;
+  final Trip? trip;
+  final bool useGroupDetails;
 
   @override
   State<PlanningRequestReview> createState() => _PlanningRequestReviewState();
@@ -37,6 +41,26 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
   final _choices = <int, String>{};
   final _removedResolutions = <int>{};
   String? _placeError;
+
+  Map<String, String> get _savedDetails {
+    final trip = widget.trip;
+    return trip == null
+        ? const {}
+        : {
+            'indicative_budget': '${trip.budgetVnd}',
+            'traveler_count': '${trip.travelers}',
+            'day_start': trip.dayStart.substring(0, 5),
+            'day_end': trip.dayEnd.substring(0, 5),
+          };
+  }
+
+  bool _showField(String key) {
+    if (widget.trip == null) return true;
+    final proposed = widget.values[key];
+    if (proposed == null || proposed is List && proposed.isEmpty) return false;
+    final saved = _savedDetails[key];
+    return saved == null || !widget.useGroupDetails && '$proposed' != saved;
+  }
 
   @override
   void initState() {
@@ -87,9 +111,17 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
       if (!RegExp(r'^([01]\d|2[0-3]):[0-5]\d$').hasMatch(text)) {
         return 'Nhập giờ theo HH:MM';
       }
-      if (key == 'day_end' &&
-          _fields['day_start']!.text.isNotEmpty &&
-          text.compareTo(_fields['day_start']!.text.trim()) <= 0) {
+      String counterpart(String other) {
+        final entered = _fields[other]!.text.trim();
+        return _showField(other) && entered.isNotEmpty
+            ? entered
+            : _savedDetails[other] ?? '';
+      }
+
+      final other = counterpart(key == 'day_start' ? 'day_end' : 'day_start');
+      final start = key == 'day_start' ? text : other;
+      final end = key == 'day_end' ? text : other;
+      if (start.isNotEmpty && end.isNotEmpty && end.compareTo(start) <= 0) {
         return 'Giờ kết thúc phải sau giờ bắt đầu';
       }
     }
@@ -124,8 +156,8 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
     };
     for (final entry in _fields.entries) {
       final text = entry.value.text.trim();
-      if (text.isEmpty) {
-        result.remove(entry.key);
+      if (!_showField(entry.key) || text.isEmpty) {
+        if (widget.values.containsKey(entry.key)) result[entry.key] = null;
         continue;
       }
       result[entry.key] = switch (entry.key) {
@@ -261,11 +293,21 @@ class _PlanningRequestReviewState extends State<PlanningRequestReview> {
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            'Chỉnh lại thông tin trợ lý AI đã hiểu. Địa điểm được giữ theo lựa chọn bên dưới; bạn có thể bỏ địa điểm không đúng.',
+          if (widget.trip case final trip?)
+            Text(
+              '${trip.travelers} người · ${moneyVnd(trip.budgetVnd)} · '
+              '${_savedDetails['day_start']}–${_savedDetails['day_end']} đã lưu trong chuyến',
+            ),
+          const SizedBox(height: 8),
+          Text(
+            widget.useGroupDetails
+                ? 'Kiểm tra các mong muốn bên dưới. Đổi số người, ngân sách hoặc giờ đi trong Cài đặt chuyến.'
+                : 'Kiểm tra mong muốn AI vừa đọc. Bạn chỉ cần sửa những mục muốn thay đổi cho lần lập lịch này.',
           ),
           const SizedBox(height: 20),
-          for (final entry in _labels.entries) ...[
+          for (final entry in _labels.entries.where(
+            (entry) => _showField(entry.key),
+          )) ...[
             TextFormField(
               key: Key('review-${entry.key}'),
               controller: _fields[entry.key],

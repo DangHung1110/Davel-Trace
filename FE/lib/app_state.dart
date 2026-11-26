@@ -802,7 +802,25 @@ class AppState extends ChangeNotifier {
       return;
     }
     final confirmed = Map<String, dynamic>.from(proposal.confirmedOverrides);
-    if (corrections != null) confirmed.addAll(corrections);
+    if (corrections != null) {
+      for (final entry in corrections.entries) {
+        if (entry.value == null) {
+          confirmed.remove(entry.key);
+        } else {
+          confirmed[entry.key] = entry.value;
+        }
+      }
+    }
+    if (group) {
+      for (final key in [
+        'traveler_count',
+        'indicative_budget',
+        'day_start',
+        'day_end',
+      ]) {
+        confirmed.remove(key);
+      }
+    }
     final mustVisit = List<String>.from(confirmed['must_visit'] as List? ?? []);
     final avoid = List<String>.from(confirmed['avoid'] as List? ?? []);
     if (mustVisit.toSet().intersection(avoid.toSet()).isNotEmpty) {

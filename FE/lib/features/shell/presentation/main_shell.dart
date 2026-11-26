@@ -48,7 +48,7 @@ class _MainShellState extends State<MainShell> {
     _select(0);
   }
 
-  Future<void> _openGroups() async {
+  Future<void> _openGroups({bool expenses = false}) async {
     final api = widget.api;
     if (api == null) {
       final auth = widget.auth;
@@ -83,6 +83,7 @@ class _MainShellState extends State<MainShell> {
           builder: (context, _) => GroupTripsScreen(
             api: api,
             ownedTrips: state.trips,
+            openExpensesOnSelection: expenses,
             createTrip: () => TripsScreen.createTrip(context, state),
             editTrip: (id) async {
               final (trip, _, _) = await state.repository.getTrip(id);
@@ -189,6 +190,9 @@ class _MainShellState extends State<MainShell> {
                     const SizedBox.shrink(),
                   ExpensesScreen(
                     state: state,
+                    onOpenGroupExpenses: widget.auth == null
+                        ? null
+                        : () => _openGroups(expenses: true),
                     onOpenTrips: () {
                       _tripCollectionRequest++;
                       _select(0);

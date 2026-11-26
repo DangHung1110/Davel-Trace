@@ -183,6 +183,104 @@ def test_shared_expense_exact_split_payment_audit_and_removed_member_balance(gro
     assert [item["action"] for item in history["items"]] == ["delete", "create"]
 
 
+def test_group_fund_blocks_overdraft_and_keeps_personal_balance_separate(group):
+    service, trip, leader, member, outsider = group
+    owner_id = UUID(service.detail(leader, trip)["member_id"])
+    member_id = UUID(
+        service.join(member, service.create_invite(leader, trip)["code"], None)["member_id"]
+    )
+    contribution = {"amount_vnd": 30_001, "note": "Chuyển khoản ngoài app"}
+    first = service.save_contribution(member, trip, contribution, "fund-contribution-1")
+    assert first["fund"]["contributed_vnd"] == 30_001
+    assert first["fund"]["balance_vnd"] == 30_001
+    assert first["spent_vnd"] == 0
+    assert first["expenses"] == []
+    assert first["balance"] == {}
+    assert first["fund"]["contributions"][0]["payer_id"] == str(member_id)
+    assert first["fund"]["contributions"][0]["note"] == contribution["note"]
+    retried = service.save_contribution(member, trip, contribution, "fund-contribution-1")
+    assert retried["fund"]["contributions"] == first["fund"]["contributions"]
+    with pytest.raises(IdentityError) as reused:
+        service.save_contribution(
+            member, trip, {"amount_vnd": 50_000}, "fund-contribution-1"
+        )
+    assert reused.value.code == "IDEMPOTENCY_CONFLICT"
+    with pytest.raises(IdentityError) as forbidden:
+        service.save_contribution(
+            member, trip, {"amount_vnd": 1_000, "member_id": owner_id}, "fund-on-behalf-1"
+        )
+    assert forbidden.value.status == 403
+    with pytest.raises(IdentityError) as not_member:
+        service.save_contribution(outsider, trip, contribution, "fund-outsider-1")
+    assert not_member.value.status == 404
+    entry = {
+        "kind": "expense",
+        "source": "fund",
+        "payer_id": owner_id,
+        "member_ids": [owner_id, member_id],
+        "amount_vnd": 20_001,
+        "label": "Vé gửi xe",
+        "note": "Xe ghé Bảo tàng Chăm",
+    }
+    with pytest.raises(IdentityError) as member_spend:
+        service.save_expense(member, trip, {**entry, "payer_id": member_id})
+    assert member_spend.value.status == 403
+    with pytest.raises(IdentityError) as overdraft:
+        service.save_expense(leader, trip, {**entry, "amount_vnd": 30_002})
+    assert overdraft.value.code == "GROUP_FUND_INSUFFICIENT"
+    paid = service.save_expense(leader, trip, entry, key="fund-expense-1")
+    row = paid["expenses"][0]
+    expense_id = UUID(row["id"])
+    assert row["source"] == "fund"
+    assert row["note"] == entry["note"]
+    assert sorted(row["split"].values()) == [10_000, 10_001]
+    assert paid["fund"]["balance_vnd"] == 10_000
+    assert paid["fund"]["spent_vnd"] == paid["spent_vnd"] == 20_001
+    assert paid["balance"] == {}
+    contribution_id = UUID(first["fund"]["contributions"][0]["id"])
+    with pytest.raises(IdentityError) as spent_contribution:
+        service.delete_expense(member, trip, contribution_id)
+    assert spent_contribution.value.code == "GROUP_FUND_INSUFFICIENT"
+    with pytest.raises(IdentityError):
+        service.save_expense(leader, trip, {**entry, "source": "personal"}, expense_id)
+    updated = service.save_expense(
+        leader, trip, {**entry, "amount_vnd": 25_001, "version": 1}, expense_id
+    )
+    assert updated["fund"]["balance_vnd"] == 5_000
+    personal = service.save_expense(leader, trip, {**entry, "source": "personal"})
+    assert personal["fund"]["balance_vnd"] == 5_000
+    assert personal["balance"] != {}
+    with session_scope(service.database_url) as session:
+        assert group_actual_spend(session, trip) == 45_002
+    assert service.delete_expense(leader, trip, expense_id)["fund"]["balance_vnd"] == 30_001
+    assert service.delete_expense(member, trip, contribution_id)["fund"]["balance_vnd"] == 0
+    history = service.expense_history(member, trip, contribution_id)["items"]
+    assert [revision["action"] for revision in history] == ["delete", "create"]
+
+
+def test_group_demo_contribution_is_explicit_and_self_only(group, monkeypatch):
+    service, trip, leader, member, _ = group
+    member_id = UUID(
+        service.join(member, service.create_invite(leader, trip)["code"], None)["member_id"]
+    )
+    enabled = "BE.app.modules.trip_groups.service._demo_fund_payment_available"
+    contribution = {"amount_vnd": 1_000, "method": "demo"}
+    monkeypatch.setattr(enabled, lambda: False)
+    assert service.detail(member, trip)["fund"]["demo_payment_available"] is False
+    with pytest.raises(IdentityError) as disabled:
+        service.save_contribution(member, trip, contribution, "fund-demo-1")
+    assert disabled.value.code == "GROUP_DEMO_PAYMENT_UNAVAILABLE"
+    monkeypatch.setattr(enabled, lambda: True)
+    with pytest.raises(IdentityError):
+        service.save_contribution(
+            leader, trip, {**contribution, "member_id": member_id}, "fund-demo-2"
+        )
+    simulated = service.save_contribution(member, trip, contribution, "fund-demo-3")
+    assert simulated["fund"]["demo_payment_available"] is True
+    assert simulated["fund"]["contributions"][0]["method"] == "demo"
+    assert simulated["fund"]["balance_vnd"] == 1_000
+
+
 def test_chat_cursor_is_scoped_and_system_event_is_idempotent(group):
     service, trip, leader, member, outsider = group
     service.join(member, service.create_invite(leader, trip)["code"], None)

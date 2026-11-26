@@ -202,14 +202,18 @@ void main() {
       final state = AppState(_HotelManagement(), planningRepository: planning);
       addTearDown(state.dispose);
       await state.initialize();
-      await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
+      await tester.pumpWidget(
+        MaterialApp(home: PlanningScreen(state: state, startWithPrompt: true)),
+      );
       await tester.pumpAndSettle();
 
-      Future<void> submitPrompt() async {
-        final open = find.byKey(const Key('request-ai-interpretation'));
-        await tester.ensureVisible(open);
-        await tester.tap(open);
-        await tester.pumpAndSettle();
+      Future<void> submitPrompt({bool reopen = false}) async {
+        if (reopen) {
+          final open = find.byKey(const Key('request-ai-interpretation'));
+          await tester.ensureVisible(open);
+          await tester.tap(open);
+          await tester.pumpAndSettle();
+        }
         final dialog = find.byType(AlertDialog);
         final confirm = find.descendant(
           of: dialog,
@@ -234,8 +238,9 @@ void main() {
       await submitPrompt();
       expect(find.text('AI tạm thời chưa phản hồi.'), findsOneWidget);
       expect(find.byType(PlanningRequestReview), findsNothing);
-      await submitPrompt();
+      await submitPrompt(reopen: true);
       expect(find.byType(PlanningRequestReview), findsOneWidget);
+      expect(find.byKey(const Key('review-traveler_count')), findsNothing);
       expect(
         planning.prompts,
         List.filled(2, 'Hai người đi với tổng ngân sách một triệu rưỡi.'),
@@ -251,7 +256,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(save.hitTestable());
       await tester.pumpAndSettle();
-      expect(planning.overrides.single['traveler_count'], 2);
+      expect(planning.overrides.single['traveler_count'], isNull);
       expect(planning.overrides.single['indicative_budget'], 1500000);
       expect(tester.takeException(), isNull);
     },

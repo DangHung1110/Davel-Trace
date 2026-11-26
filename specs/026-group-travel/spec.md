@@ -27,6 +27,15 @@ without sharing private profiles or GPS histories.
 5. A shared expense records a payer and an explicit set of participants. Shares
    sum to the cost in whole đồng. Reimbursements change balances independently
    of spending. People outside the group cannot read its finances.
+6. Group members can record contributions to a common fund. Group leaders can
+   spend from funds already contributed and record the amount, purpose and
+   beneficiaries. Personal advances and reimbursements keep their own balances.
+   Demo payments are marked as simulated and do not move real money.
+
+Trip creation saves dates, headcount and estimated budget. Planning reuses those
+values. The AI entry accepts additional wishes and opens a review of what the
+text changes. A group leader changes shared trip details in group settings.
+Offer the group fund from the expense tab and the group workspace.
 
 ## Verification
 
