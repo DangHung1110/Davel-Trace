@@ -154,7 +154,7 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 | T3 | mỗi nhóm g: bool y₂, y₃ và nguyên e_g, với y₂ + y₃ + e_g ≥ n_g − 1; phạt β_g(ρ₂y₂ + ρ₃y₃ + ρ₄e_g); ρ tăng dần nên solver tự bật biến rẻ nhất trước |
 | T4, T9, T10 | hằng số trên mỗi cung, cộng vào hệ số của a_ij; không thêm biến |
 | T5 | `_window_hits` cho mỗi quán ăn và mỗi khung bữa → h_is; bool z_s ≤ Σ_i h_is. Khung giờ bắt đầu: trưa 11:00–13:00, tối 17:30–20:30, sáng 6:30–9:00 |
-| T6 | nguyên e_s ≥ Σ_i h_is − 1 mỗi khung; cặp cách dưới 150 phút |
+| T6 | nguyên e_s ≥ Σ_i h_is − 1 mỗi khung (lớp nấu ăn đặt chỗ là bữa của mọi khung nó chồng lên); cặp quán ăn: thiết kế là cặp cách dưới 150 phút, nhưng phép thử "gần" trong code (`earlier OR later`) luôn đúng nên **mọi cặp quán trong ngày đều bị phạt A** (đo 26/11, xem mục 7) |
 | T7 | logic `rest_after_lunch` với `OnlyEnforceIf(rest_taken)`; thưởng R·r |
 | T8 | như T3 trên số đếm của `paced_stops` (điểm tham quan + nguyên `pace_meals` ≥ số quán − số bữa trưa/tối) với ngưỡng `sight_k0` |
 | T11 | mỗi khoá (alt_group, chợ ban ngày, món): nguyên e ≥ Σ visit − 1; khu + điểm trong khu: bool u_b ≥ visit_a + visit_b − 1. Ở `strict_rules`: Σ visit ≤ 1 |
@@ -167,7 +167,9 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 
 ## 7. Học trọng số không cần người chấm
 
-`objective.features(...)` tính từng thành phần J trên một lịch đã xong (16 đặc trưng: value, state, repeat, adjacent, meal, meal_crowd, rest, pace, ride, long_leg, zone, edge, same_site, umbrella, market, dish), có tính chặng về điểm xuất phát; `objective_value` ráp lại J. Đây là đầu vào cho việc học. Chạy cả hai nguồn nhãn dưới đây, rồi chọn bộ thắng trên test tự động (mục 8).
+`objective.features(...)` tính từng thành phần J trên một lịch đã xong (18 đặc trưng: value, state, rain, repeat, adjacent, meal, meal_crowd, meal_far, rest, pace, ride, long_leg, zone, edge, same_site, umbrella, market, dish), có tính chặng về điểm xuất phát; `objective_value` ráp lại J. Đây là đầu vào cho việc học. Chạy cả hai nguồn nhãn dưới đây, rồi chọn bộ thắng trên test tự động (mục 8).
+
+**Đặc trưng đọc từ chính lịch (26/11).** Mọi số hạng tính từ các điểm và giờ của lịch, không lấy gì từ lần giải: T2 dò mỗi điểm ở 1/4 và 3/4 thời gian ở như solver (`state` = hệ số trạng thái, `rain` = phạt mưa, trọng số riêng `w_rain` = 1,0 như cũ); T7 có khi có đúng một bữa trưa và không điểm nào nằm trong giờ nghỉ sau nó; `meal_far` là cặp quán cách nhau từ 2,5 giờ, solver phạt cùng trọng số A với `meal_crowd` (xem T6 ở mục 6). Mỗi lịch v1 mang `_features` (không ra API công khai; lịch nhiều ngày: `_features_by_day`): `raw` ở giờ của solver, khớp `solver_j`; `shown` ở giờ lịch hiển thị sau khi `_polished` tính lại giờ. Cặp lịch đưa judge phải dùng `shown`. Đo trên audit + gold: `reports/objective_v1/features_step2.md`.
 
 **Cách A: LLM chấm cặp lịch**
 1. Sinh cặp: với mỗi request, giải hai lần bằng hai vector w lệch nhau 1–2 hệ số (cộng 459 cặp có sẵn); hai lịch khác nhau đúng ở điểm cần hỏi.
@@ -200,7 +202,7 @@ w ← w + η ( f(D) − f(P) )
 
 Năm lớp, chạy bằng `pytest` và script eval, không cần người:
 
-1. **Khớp công thức.** Σ w·features(plan) bằng giá trị mục tiêu CP-SAT trả về (sai số làm tròn): bắt lỗi sai dấu, sai thang, quên số hạng (`test_objective_v1`, `test_objective_dedup`).
+1. **Khớp công thức.** Σ w·features(plan) bằng giá trị mục tiêu CP-SAT trả về (sai số làm tròn): bắt lỗi sai dấu, sai thang, quên số hạng (`test_objective_v1`, `test_objective_dedup`, `test_objective_features` có trạng thái, mưa, nghỉ trưa, cặp bữa xa, lớp nấu ăn; `test_plan_features` trên danang-v2; `reports/objective_v1/scripts/features_check.py` trên mọi lịch audit + gold).
 2. **Gate.** 100% lịch qua lớp 1 và lớp 2.
 3. **Test kịch bản**, mỗi cái là một unit test: khu nhiều bãi biển không quá 2 bãi; cửa sổ 8:00–18:00 có quán ăn bắt đầu trong khung trưa; pace 1 ít điểm hơn pace 3; food tour được 3 quán trở lên; `strict_rules: ["CATEGORY_CAP"]` giống luật cứng cũ; hai điểm cùng giá trị thì chọn điểm gần; cùng chỗ / hai chợ / trùng món chỉ giữ một; ngày đủ K₀ vẫn ăn tối.
 4. **Đơn điệu.** Gấp đôi một hệ số phạt thì đại lượng bị phạt không tăng.

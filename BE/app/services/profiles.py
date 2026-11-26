@@ -989,6 +989,10 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
+    if spec is not None and out.get("itinerary") is not None:
+        plan["_features"] = _plan_features(
+            out, plan.get("activities") or [], stubs_used, travel, trip, spec, q,
+            state_bands, state_scores, state_costs, limits_used)
     _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used
@@ -1060,6 +1064,36 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                     for item in (out["pool"][:1] if built else [])],
             len(built))
     return plan
+
+
+def _plan_features(out: dict, shown: list[dict], stubs: list, travel: dict, trip: dict,
+                   spec, edges: dict | None, bands: list | None, scores: dict | None,
+                   costs: dict | None, limits: dict) -> dict:
+    """J's terms of this day (`objective.features`), for learning J's weights.
+
+    `shown` is read at the times the plan shows, after `_polished` re-timed the day:
+    what a traveller or a judge sees. `raw` is the solver's own times; its `j` must
+    match `solver_j`, the value CP-SAT reported (up to rounding), so a gap between
+    `raw` and `shown` is what re-timing changed, not a bug of the features.
+    """
+    by_id = {stub.poi_id: stub for stub in stubs}
+    clock = _to_trip(trip)
+    rest = limits.get("rest_minutes") if limits.get("rest_after_lunch") else None
+    unit = float(out.get("unit") or 1.0)
+
+    def _read(activities: list[dict]) -> dict:
+        acts = [a for a in objective_mod.shown_acts(activities) if a["poi_id"] in by_id]
+        f = objective_mod.features(acts, by_id, travel, spec, clock.start_min, clock.end_min,
+                                   origin_id=clock.origin_id, edge_scores=edges, bands=bands,
+                                   state_scores=scores, state_costs=costs, rest_minutes=rest)
+        return {"features": {name: round(value, 4) for name, value in f.items()},
+                "j": round(objective_mod.objective_value(f, spec), 4)}
+
+    return {"weights": spec.w.get("version"), "unit": round(unit, 4),
+            "solver_j": round(float(out.get("objective") or 0.0) / (1000.0 * unit), 4),
+            "status": out.get("status"), "rest_taken": out.get("rest_taken"),
+            "raw": _read((out.get("itinerary") or {}).get("activities") or []),
+            "shown": _read(shown)}
 
 
 def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) -> dict | None:
