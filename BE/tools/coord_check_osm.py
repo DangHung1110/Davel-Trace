@@ -24,8 +24,10 @@ Also, independent of OSM objects (most cafes, spas and bars are not in OSM):
 the distance to the street in the POI's own name ("- 58 Ông Ích Đường") or in
 its evidence notes ("54-56 Quang Trung" on a price page), which also breaks
 ties between the pin and a far OSM namesake; the distance to the nearest road
-the motorbike profile routes on (OSRM snaps the pin there); several POIs on
-one point; a point on an OSM place node (a centroid); "Hội An" / "Bà Nà" in a
+the motorbike profile routes on (OSRM snaps the pin there); the POI's row in
+matrix.json, where a road shorter than the straight line means OSRM snapped
+the pin somewhere else (Cù Lao Chàm onto the mainland); several POIs on one
+point; a point on an OSM place node (a centroid); "Hội An" / "Bà Nà" in a
 name outside that zone.
 
 Read-only: never touches pois.json or matrix.json. Writes one CSV row per
@@ -78,6 +80,9 @@ CLUSTER_M = 75.0      # OSM objects this close are one place (node + building)
 CHAIN_MIN = 3         # this many same-name places in the extract: a chain
 ROAD_FAR_M = 200.0    # OSRM snaps a pin to the nearest road; this far, minutes drift
 ROAD_CELL_DEG = 0.002
+MATRIX_SHORT = 0.85   # road km below this share of the straight line is impossible...
+MATRIX_MIN_KM = 2.0   # ...for pairs at least this far apart
+MATRIX_BAD_SHARE = 0.05
 SAME_POINT_M = 3.0
 PLACE_NODE_M = 30.0
 CELL_DEG = 0.01       # ~1.1 km: the 3x3 block around a point covers >= 1 km
@@ -827,7 +832,33 @@ def describe(f: dict) -> str:
     return f"'{f['names'][0]}' ({main_tag(f['tags']) or 'không có thẻ loại'})"
 
 
-def check_poi(poi: dict, osm: dict, all_pois: list) -> dict:
+def matrix_short_share(pois: list, matrix: dict, wanted: set) -> dict:
+    """{poi_id: share of its matrix pairs >= MATRIX_MIN_KM apart whose road km
+    is under MATRIX_SHORT x the straight line}. A road cannot beat the straight
+    line, so a high share means the matrix row is for another point."""
+    by_id = {p["poi_id"]: p for p in pois}
+    ids, km = matrix["ids"], matrix["km"]
+    pts = [(math.radians(by_id[i]["lat"]), math.radians(by_id[i]["lon"])) if i in by_id else None
+           for i in ids]
+    out = {}
+    for a, pid in enumerate(ids):
+        if pid not in wanted or pts[a] is None:
+            continue
+        (la, lo), short, total = pts[a], 0, 0
+        for b, q in enumerate(pts):
+            if b == a or q is None:
+                continue
+            h = math.sin((q[0] - la) / 2) ** 2 + \
+                math.cos(la) * math.cos(q[0]) * math.sin((q[1] - lo) / 2) ** 2
+            straight = 2 * 6371.0088 * math.asin(math.sqrt(h))
+            if straight >= MATRIX_MIN_KM and km[a][b] is not None:
+                total += 1
+                short += km[a][b] < MATRIX_SHORT * straight
+        out[pid] = short / total if total else 0.0
+    return out
+
+
+def check_poi(poi: dict, osm: dict, all_pois: list, matrix_share: dict | None = None) -> dict:
     lat, lon = poi["lat"], poi["lon"]
     texts = poi_texts(poi)
     confirm = confirm_candidates(poi, variants(texts), osm)
@@ -946,6 +977,12 @@ def check_poi(poi: dict, osm: dict, all_pois: list) -> dict:
     if pn:
         flags.append("on_place_node")
         why.append(f"nằm ngay tâm địa danh OSM '{row['near_place_node']}'")
+    share = (matrix_share or {}).get(poi["poi_id"])
+    row["matrix_short_pct"] = round(100 * share, 1) if share is not None else ""
+    if share is not None and share > MATRIX_BAD_SHARE:
+        flags.append("matrix_snapped_elsewhere")
+        why.append(f"ma trận: {100 * share:.0f}% chặng tới điểm cách >= 2 km lại ngắn hơn "
+                   "đường chim bay — OSRM đã gắn ghim vào chỗ khác")
     named_zone = next((z for w, z in AREA_WORDS.items()
                        if re.search(rf"\b{w}\b", norm(poi["name"]))), None)
     if named_zone and named_zone != poi["zone"]:
@@ -962,6 +999,8 @@ def review_priority(poi: dict, row: dict) -> str:
         return ""
     v, flags = row["verdict"], row["flags"].split()
     sd = max(row["street_dist_m"] or 0, row["note_street_dist_m"] or 0)
+    if "matrix_snapped_elsewhere" in flags:
+        return "P1"   # the minutes are wrong whatever OSM says about the pin
     if v == "ok":
         # OSM already confirms the place (a citadel 191 m deep behind "24 Trần Phú"):
         # only a clear street conflict is worth a look
@@ -1004,7 +1043,7 @@ COLUMNS = ["poi_id", "name", "status", "category", "zone", "role", "loc_source",
            "verdict", "review", "flags", "why", "tier", "osm_ref", "osm_name", "osm_kind",
            "name_match", "shared_words", "kind_check", "dist_m", "osm_lat", "osm_lon", "places_1km",
            "same_name_places", "street", "street_dist_m", "note_street", "note_street_dist_m",
-           "road_dist_m", "same_point_as", "near_place_node",
+           "road_dist_m", "matrix_short_pct", "same_point_as", "near_place_node",
            "prev_osm_link", "prev_link_same", "map_point", "map_osm", "map_google", "map_both"]
 
 
@@ -1021,13 +1060,15 @@ def load_pois(path: str) -> list:
         return json.load(fh)["pois"]
 
 
-def run(pois: list, osm: dict) -> list:
+def run(pois: list, osm: dict, matrix: dict | None = None) -> list:
+    wanted = {p["poi_id"] for p in pois if p["provenance"]["location"]["source"] in CHECK_SOURCES}
+    share = matrix_short_share(pois, matrix, wanted) if matrix else None
     rows = []
     for poi in pois:
         src = poi["provenance"]["location"]["source"]
         if src not in CHECK_SOURCES:
             continue
-        row = check_poi(poi, osm, pois)
+        row = check_poi(poi, osm, pois, share)
         prev = (poi.get("ext_ids") or {}).get("osm") or ""
         fid = row.pop("_fid", "")
         row["prev_osm_link"] = prev
@@ -1096,6 +1137,8 @@ def main(argv=None) -> int:
     ap.add_argument("--pois", default=DEFAULT_POIS)
     ap.add_argument("--pbf", required=True, help="OSM extract (.osm.pbf) covering the snapshot")
     ap.add_argument("--keep-osm", help="keep the osmium exports in this folder")
+    ap.add_argument("--matrix", help="matrix.json to test (default: next to --pois; "
+                                     "skipped when missing)")
     ap.add_argument("--out", default=DEFAULT_CSV)
     ap.add_argument("--validate", action="store_true",
                     help="also match OSM-sourced POIs and report how often the own object wins")
@@ -1110,7 +1153,13 @@ def main(argv=None) -> int:
     print(f"OSM: {len(osm['places'])} named places, {len(osm['streets'])} named streets, "
           f"{len(osm['location'])} street/area names, {len(osm['place_nodes'])} place nodes")
     pois = load_pois(a.pois)
-    rows = run(pois, osm)
+    matrix_path = a.matrix or os.path.join(os.path.dirname(a.pois), "matrix.json")
+    matrix = None
+    if os.path.exists(matrix_path):
+        with open(matrix_path, encoding="utf-8") as fh:
+            matrix = json.load(fh)
+    print(f"matrix: {matrix_path if matrix else 'none (skipped)'}")
+    rows = run(pois, osm, matrix)
     write_csv(rows, a.out)
     act = [r for r in rows if r["status"] == "active"]
     print(f"checked {len(rows)} POIs ({len(act)} active) -> {a.out}")

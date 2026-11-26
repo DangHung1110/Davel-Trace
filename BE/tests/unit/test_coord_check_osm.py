@@ -169,6 +169,17 @@ class CheckPoi(unittest.TestCase):
         self.assertIn("same_point_same_kind", row["flags"])
         self.assertEqual(row["review"], "P2")
 
+    def test_matrix_row_for_another_point(self):
+        pois = [poi(k, k, "cafe", self.lat0 + dy, self.lon0) for k, dy in
+                (("a", 0.0), ("b", 0.05), ("c", 0.10))]
+        # a-b and b-c are 5.5 km apart; the "road" a->b is 1 km: a was snapped elsewhere
+        matrix = {"ids": ["a", "b", "c"], "km": [[0, 1.0, 12.0], [6.0, 0, 6.0], [12.0, 6.0, 0]]}
+        share = cc.matrix_short_share(pois, matrix, {"a", "b"})
+        self.assertEqual(share, {"a": 0.5, "b": 0.0})
+        row = cc.check_poi(pois[0], self.osm, pois, share)
+        self.assertIn("matrix_snapped_elsewhere", row["flags"])
+        self.assertEqual(row["review"], "P1")
+
     def test_road_distance(self):
         d = cc.road_distance(self.lat0 + 0.002, self.lon0, self.osm["roads"])
         self.assertAlmostEqual(d, 0.0019 * 110540.0, delta=5)
