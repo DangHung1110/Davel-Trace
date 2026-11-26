@@ -85,23 +85,23 @@ Còn mở: experience giải chậm hơn 78% (ngân sách × 1,6); savings lặp
 
 ## Bước 4: một hàm điểm POI cho T1 (26/11, `compare_value_*.json`)
 
-T1 nay là một hàm (`BE/app/services/value.py`) cho cả ba profile; ba profile chỉ khác ở khối `value` của `v1.json` (`OBJECTIVE_V1.md` §5 "T1"). Trọng số là các số cũ trong code, nên balanced và experience cho ra v_i y hệt. Savings đổi hai chỗ: `avg_leg` ra khỏi v_i (T9 đã tính chạy xe; `avg_leg` chỉ còn xếp hạng ở bước cắt 40) và gu ăn / lean nhân với giá trị cao nhất thay vì trị tuyệt đối lớn nhất (quán đắt nhất). Đo từ `git archive` của `main` 707f084 và của nhánh `feat/single-poi-value`, cùng máy 12 nhân; bench chạy xen kẽ, 2 lượt mỗi bên. Trong `compare_value_gold_*.json` (viết bởi `analyze_objective.py`) khoá `legacy` là `main`, `v1` là nhánh; `compare_value_audit.json` ghi `before` / `after`.
+T1 nay là một hàm (`BE/app/services/value.py`) cho cả ba profile; ba profile chỉ khác ở khối `value` của `v1.json` (`OBJECTIVE_V1.md` §5 "T1"). Trọng số là các số cũ trong code, nên balanced và experience cho ra v_i y hệt. Savings đổi ba chỗ: `avg_leg` ra khỏi v_i (T9 đã tính chạy xe; `avg_leg` chỉ còn xếp hạng ở bước cắt 40), gu ăn / lean nhân với giá trị cao nhất thay vì trị tuyệt đối lớn nhất (quán đắt nhất), và bỏ `price_level` (bản sao của `fee` trên danang-v2, mục dưới). Đo từ `git archive` của `main` 707f084 và của nhánh `feat/single-poi-value` (df161c9; bench đo ở f4923c3, trước khi bỏ `price_level`), cùng máy 12 nhân; bench chạy xen kẽ, 2 lượt mỗi bên. Trong `compare_value_gold_*.json` (viết bởi `analyze_objective.py`) khoá `legacy` là `main`, `v1` là nhánh; `compare_value_audit.json` ghi `before` / `after`.
 
 | Bộ đo | Chỉ số | Trước | Sau |
 |---|---|---|---|
 | Audit 67 request × 3 lịch | lịch rỗng / trượt gate / đi được | 0 / 0 / 201 | 0 / 0 / 201 |
-| | lịch y hệt: savings / balanced / experience | — | 5 / 67 / 67 (savings: 39 chỉ dời giờ hoặc đổi thứ tự, 23 đổi điểm) |
-| | Jaccard 3 lịch một request: trung bình / lớn nhất / cặp > 0,6 / router phải thay | 0,085 / 0,455 / 0 / 0 | 0,087 / 0,455 / 0 / 0 |
-| | savings: chạy xe mỗi ngày / chi phí mỗi lịch / lịch thiếu bữa tối | 19,6 phút / 394k / 11 | 20,2 phút / 413k / 7 |
+| | lịch y hệt: savings / balanced / experience | — | 3 / 67 / 67 (savings: 39 chỉ dời giờ hoặc đổi thứ tự, 25 đổi điểm) |
+| | Jaccard 3 lịch một request: trung bình / lớn nhất / cặp > 0,6 / router phải thay | 0,085 / 0,455 / 0 / 0 | 0,085 / 0,455 / 0 / 0 |
+| | savings: chạy xe mỗi ngày / chi phí mỗi lịch / lịch thiếu bữa tối | 19,6 phút / 394k / 11 | 20,9 phút / 407k / 8 |
 | Gold 30 | có lịch / qua gate (cả 3 profile) | 29 / 29 | 29 / 29 |
-| | lịch y hệt: savings / balanced / experience | — | 5 / 30 / 30 (savings: 15 đổi điểm) |
-| | savings: chạy xe trung vị / POI khác nhau / tỉ trọng top-20 | 16 phút / 52 / 0,796 | 19 phút / 58 / 0,753 |
-| | tổng thời gian giải: savings / balanced / experience | 136 / 106 / 146 s | 144 / 101 / 143 s |
-| Bench (`bench_latency.py`, 21 request) | trung vị / p95 | 4,15 và 4,14 / 9,29 và 8,93 s | 4,13 và 4,12 / 8,16 và 8,30 s |
+| | lịch y hệt: savings / balanced / experience | — | 5 / 30 / 30 (savings: 14 đổi điểm) |
+| | savings: chạy xe trung vị / POI khác nhau / tỉ trọng top-20 | 16 phút / 52 / 0,796 | 18 phút / 58 / 0,756 |
+| | tổng thời gian giải: savings / balanced / experience | 136 / 106 / 146 s | 139 / 101 / 143 s |
+| Bench (`bench_latency.py`, 21 request, ở f4923c3) | trung vị / p95 | 4,15 và 4,14 / 9,29 và 8,93 s | 4,13 và 4,12 / 8,16 và 8,30 s |
 
-Ví dụ (audit T12, cặp đôi 08:00–20:00, ngân sách 600 nghìn): savings trước có 6 điểm, xong lúc 16:40, không ăn tối; sau có 7 điểm, ăn tối Mỳ Quảng Cô Sáu 50k/người lúc 18:23, tổng 200k. Ngân sách dưới 1 triệu tính tiền gấp đôi, nên với `avg_leg` bị trừ thêm, quán 50k có giá trị âm và bữa tối không đáng đi. Lịch savings thiếu bữa tối: 11 → 7.
+Ví dụ (audit T12, cặp đôi 08:00–20:00, ngân sách 600 nghìn): savings trước có 6 điểm, xong lúc 16:40, không ăn tối; sau có 7 điểm, ăn tối Mỳ Quảng Cô Sáu 50k/người lúc 18:23, tổng 200k. Ngân sách dưới 1 triệu tính tiền gấp đôi, nên với `avg_leg` bị trừ thêm, quán 50k có giá trị âm và bữa tối không đáng đi. Lịch savings thiếu bữa tối: 11 → 8.
 
-Savings giải chậm hơn chút: ở audit có J, 2/60 ngày thêm chạy hết ngân sách tìm kiếm (giá trị các điểm miễn phí phẳng hơn khi bỏ `avg_leg`); tổng thời gian giải gold +6%; bench không chậm đi: trung vị bằng, p95 giảm 0,6–1,1 giây (có thể vì gu ăn nay tính một lần mỗi POI thay vì mỗi lần xếp hạng; chưa đo riêng). Lời giải thích của từng điểm nay nói đúng lý do solver chọn, ví dụ "re (50k/nguoi), bua trua" thay cho "gio an, trong nha, do nang" của `rank.py`.
+Savings giải chậm hơn chút: ở audit có J, 2/60 ngày thêm chạy hết ngân sách tìm kiếm (giá trị các điểm miễn phí phẳng hơn khi bỏ `avg_leg`); tổng thời gian giải gold +2%; bench không chậm đi: trung vị bằng, p95 giảm 0,6–1,1 giây (có thể vì gu ăn nay tính một lần mỗi POI thay vì mỗi lần xếp hạng; chưa đo riêng). Lời giải thích của từng điểm nay nói đúng lý do solver chọn, ví dụ "re (50k/nguoi), bua trua" thay cho "gio an, trong nha, do nang" của `rank.py`.
 
 **Đã thử và bỏ: xếp ứng viên theo v_i.** Nếu `build_plan` sắp ứng viên theo v_i thay vì giữ thứ tự router đưa vào, mô hình CP-SAT không đổi, chỉ đổi thứ tự nút. Đo trên cùng 60 request 1 ngày có ghi J (`scripts/audit_capture.py`):
 
@@ -116,6 +116,17 @@ Savings giải chậm hơn chút: ở audit có J, 2/60 ngày thêm chạy hết
 Thứ tự nút chỉ đổi đường tìm kiếm của CP-SAT (ở 60 request này, 49/180 lần giải của `main` dừng vì hết ngân sách), nên được và mất may rủi, kèm chậm hơn. Giữ thứ tự cũ; `rank.py` vì vậy vẫn quyết thứ tự nút (không vào J). Ca Bà Nà +291% cho thấy CP-SAT đôi khi kẹt ở lời giải kém với thứ tự cũ: việc của gợi ý lời giải (pointer, bước 7), không của T1.
 
 `pytest` đầy đủ: 1528 qua; 19 lỗi + 11 error đều có sẵn do môi trường (Google OAuth, `DATABASE_URL`/Postgres, 2 test ranh giới Flutter).
+
+### Ba câu hỏi về trọng số T1, chốt theo số đo (26/11)
+
+60 request 1 ngày của audit, mỗi request chỉ chạy một profile (`scripts/audit_profile.py`), có ghi J. Bỏ `cap_avg_leg` không đổi hàm mục tiêu và U bằng nhau ở cả 60 ngày, nên J so thẳng được; các thử khác đổi hàm mục tiêu nên so bằng lịch.
+
+| Thử | Kết quả | Chốt |
+|---|---|---|
+| Savings bỏ `cap_avg_leg` (bước cắt 40) | 60/60 ngày đổi điểm; J thấp hơn ở 53/60 (trung bình −13,6%); hết ngân sách tìm kiếm 12 → 24; chạy xe 20,6 → 25 phút/ngày; ngày có bữa tối 54 → 44 | giữ |
+| Savings bỏ `price_level` | 42 y hệt, 10 chỉ dời giờ, 8 đổi điểm; chi phí −1%; chạy xe +0,8 phút/ngày | bỏ (df161c9; code thật trùng 60/60 lịch với phép thử): trên danang-v2 mức giá suy ra một-một từ hạng giá, đúng nguồn của `fee` |
+| Savings bỏ `free_outdoor` | 40/60 đổi điểm; điểm biển / thiên nhiên / chợ 60 → 38 | giữ: đó là gu "thiên nhiên/chợ" của savings, không phải chi phí |
+| Savings và experience dùng khối `value` của balanced | experience ra đúng bộ điểm của balanced ở 36/60 (Jaccard với balanced 0,03 → 0,85, 52/60 vượt trần 0,6); savings 402 nghìn → 1,05 triệu một lịch | không học một T1 chung; trọng số T1 riêng học từ cặp chấm có nói rõ khách (`OBJECTIVE_V1.md` §7) |
 
 ## Chạy lại
 
@@ -137,4 +148,6 @@ python reports/objective_v1/scripts/compare_audit.py <before>/audit.json <before
 python reports/objective_v1/scripts/eval_gold.py <repo> gold_savings.jsonl v1:savings 2
 python reports/objective_v1/scripts/audit_capture.py <repo> --only T,W,M,D,E --out cap.json --flags cap_flags.json
 python BE/tools/bench_latency.py --snapshot BE/data/snapshots/danang-v2 --rounds 3
+# một profile với một biến thể trọng số (bản sao v1.json đã sửa), J ghi trên từng lịch
+python reports/objective_v1/scripts/audit_profile.py <repo> savings v1_variant.json savings_variant.json
 ```

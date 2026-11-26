@@ -77,23 +77,24 @@
   "followable": 201,
   "per_profile": {
    "savings": {
-    "stops_per_day": 7.2,
-    "travel_per_day_mean": 20.2,
-    "max_leg_mean": 9.3,
-    "idle_per_day_mean": 225.1,
-    "cost_per_plan_mean": 413433,
+    "stops_per_day": 7.18,
+    "travel_per_day_mean": 20.9,
+    "max_leg_mean": 9.7,
+    "idle_per_day_mean": 222.3,
+    "cost_per_plan_mean": 407463,
     "flags": {
-     "SOFT_CATEGORY_CAP": 65,
-     "SOFT_NO_CONSECUTIVE": 60,
-     "Q_MAY_BE_CLOSED": 40,
-     "Q_HOLE": 81,
-     "Q_EARLY_END": 7,
+     "SOFT_CATEGORY_CAP": 63,
+     "SOFT_NO_CONSECUTIVE": 59,
+     "Q_MAY_BE_CLOSED": 38,
+     "Q_HOLE": 79,
+     "Q_EARLY_END": 6,
      "Q_LATE_START": 7,
      "Q_WISH_NO_VERIFIED_POI": 4,
      "Q_LOW_RATING": 1,
-     "Q_LONG_LEG": 3,
-     "SOFT_DINNER": 7,
-     "Q_NO_DINNER": 7
+     "Q_LONG_LEG": 2,
+     "Q_DETOUR": 1,
+     "SOFT_DINNER": 8,
+     "Q_NO_DINNER": 8
     }
    },
    "balanced": {
@@ -136,7 +137,7 @@
     }
    }
   },
-  "pair_jaccard_mean": 0.087,
+  "pair_jaccard_mean": 0.085,
   "pair_jaccard_max": 0.455,
   "pairs_over_0_6": 0,
   "pairs": 201,
@@ -144,10 +145,10 @@
  },
  "change": {
   "savings": {
-   "identical": 5,
+   "identical": 3,
    "retimed": 38,
    "reordered": 1,
-   "other_pois": 23
+   "other_pois": 25
   },
   "balanced": {
    "identical": 67,
@@ -176,11 +177,11 @@
   "E03-avoid-nightlife/savings": {
    "travel_min": [
     25,
-    30
+    29
    ],
    "total_cost": [
     600000,
-    600000
+    400000
    ]
   },
   "E04-six-people-2m/savings": {
@@ -216,7 +217,7 @@
   "M07-noprofile-musts/savings": {
    "travel_min": [
     18,
-    17
+    46
    ],
    "total_cost": [
     200000,
@@ -226,7 +227,7 @@
   "T04-friends-late/savings": {
    "travel_min": [
     32,
-    32
+    30
    ],
    "total_cost": [
     800000,
@@ -336,7 +337,7 @@
   "W17-beach-seafood-coffee/savings": {
    "travel_min": [
     17,
-    21
+    23
    ],
    "total_cost": [
     700000,
@@ -356,11 +357,11 @@
   "W20-vegan/savings": {
    "travel_min": [
     13,
-    60
+    48
    ],
    "total_cost": [
     300000,
-    200000
+    300000
    ]
   },
   "W21-banh-xeo/savings": {
@@ -373,14 +374,34 @@
     200000
    ]
   },
+  "W24-beach-seafood-noprofile/savings": {
+   "travel_min": [
+    16,
+    28
+   ],
+   "total_cost": [
+    800000,
+    700000
+   ]
+  },
+  "W26-shopping/savings": {
+   "travel_min": [
+    27,
+    48
+   ],
+   "total_cost": [
+    800000,
+    800000
+   ]
+  },
   "X04-two-friends/savings": {
    "travel_min": [
     55,
-    53
+    54
    ],
    "total_cost": [
     1000000,
-    1400000
+    1200000
    ]
   },
   "X06-two-low-budget/savings": {

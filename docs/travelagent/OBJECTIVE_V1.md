@@ -127,7 +127,7 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 v_i = Σ_k w_k · φ_k(i)  +  U0 · Σ_m w_m · ψ_m(i)
 ```
 
-- φ (nơi chốn, giống nhau với mọi khách): `base` (1 mỗi điểm), `fee` (mỗi 100k/người, ×2 khi ngân sách chuyến dưới 1 triệu; chi phí, trừ đi), `price_level` (số bậc trên mức rẻ; chi phí), `rating` (số sao tin cậy), `fame` (log10(1 + số review); bằng 0 trên danang-v2 vì không có số review), `novelty` (0–1, theo pool), `free` (vé 0đ), `free_outdoor` (0đ và thiên nhiên / chợ / công viên / biển).
+- φ (nơi chốn, giống nhau với mọi khách): `base` (1 mỗi điểm), `fee` (mỗi 100k/người, ×2 khi ngân sách chuyến dưới 1 triệu; chi phí, trừ đi), `rating` (số sao tin cậy), `fame` (log10(1 + số review); bằng 0 trên danang-v2 vì không có số review), `novelty` (0–1, theo pool), `free` (vé 0đ), `free_outdoor` (0đ và thiên nhiên / chợ / công viên / biển).
 - ψ (khách trả lời ở onboarding), tính theo U0 = giá trị φ cao nhất của pool: `taste` (−1..1), `spending` (−1 / 0 / 1), `outdoor` (−1..1), `liked` (0 / 1).
 - Trọng số: khối `value` của `v1.json` là balanced; savings và experience chỉ ghi đè vài khoá trong `profiles.<tên>.value`. Một file trọng số không có khối `value` (chỉ có hệ số của J) dùng của v1.
 
@@ -135,12 +135,14 @@ v_i = Σ_k w_k · φ_k(i)  +  U0 · Σ_m w_m · ψ_m(i)
 |---|---|---|---|
 | rating / fame | 1,0 / 0,4 | 0,05 / 0,05 | 0,1 / 0,3 |
 | novelty | 0 | 0 | 10 |
-| base / fee / price_level | 0 / 0 / 0 | 1,0 / 1,0 / 0,15 | 0 / 0 / 0 |
+| base / fee | 0 / 0 | 1,0 / 1,0 | 0 / 0 |
 | free / free_outdoor | 0 / 0 | 0,15 / 0,10 | 0 / 0 |
 | taste / spending / outdoor / liked | 0,20 / 0,15 / 0,15 / 0,20 | như mặc định | như mặc định |
 | `cap_avg_leg` (chỉ bước 6) | 0 | 1/60 mỗi phút | 0 |
 
-Đây là các số cũ trong code: balanced và experience cho ra v_i y hệt trước (test `test_value_function` ghim từng bit). Savings đổi hai chỗ. Một: phút chạy xe trung bình (`avg_leg`) ra khỏi v_i vì T9 đã tính chạy xe, nhưng vẫn xếp hạng ở bước cắt còn 40 (`cap_avg_leg`); bỏ hẳn thì mọi điểm miễn phí gần bằng điểm nhau và top-40 đổi 71%. Hai: gu ăn và lean nhân với U0 = giá trị cao nhất, không phải trị tuyệt đối lớn nhất (quán đắt nhất, −8,7): trước đó một món hợp gu của khách tiết kiệm đáng khoảng 1,6U thay vì 0,2U. Thang điểm giữ như cũ ("sao") vì T10 (q × 100) và `must_go` (+0,5) còn tính tuyệt đối.
+Đây là các số cũ trong code: balanced và experience cho ra v_i y hệt trước (test `test_value_function` ghim từng bit). Savings đổi hai chỗ. Một: phút chạy xe trung bình (`avg_leg`) ra khỏi v_i vì T9 đã tính chạy xe, nhưng vẫn xếp hạng ở bước cắt còn 40 (`cap_avg_leg`); bỏ hẳn thì mọi điểm miễn phí gần bằng điểm nhau và top-40 đổi 71%. Hai: gu ăn và lean nhân với U0 = giá trị cao nhất, không phải trị tuyệt đối lớn nhất (quán đắt nhất, −8,7): trước đó một món hợp gu của khách tiết kiệm đáng khoảng 1,6U thay vì 0,2U. Ba (26/11): bỏ `price_level` (0,15 mỗi bậc trên mức rẻ). Trên danang-v2 mức giá suy ra một-một từ hạng giá, đúng nguồn của `fee` (371/371 quán "medium" ở mức 2, 16/16 quán "expensive" ở mức 3), nên nó chỉ phạt tiền thêm khoảng 6%, và hai cột trùng nhau thì khi học không tách được trọng số; bỏ đi, 52/60 ngày savings giữ nguyên điểm. Thang điểm giữ như cũ ("sao") vì T10 (q × 100) và `must_go` (+0,5) còn tính tuyệt đối.
+
+Hai khoá savings giữ lại vì số đo (60 request 1 ngày của audit, cùng hàm mục tiêu nên J so thẳng): bỏ `cap_avg_leg` thì J thấp hơn ở 53/60 ngày (trung bình −13,6%), số lần hết ngân sách tìm kiếm 12 → 24, chạy xe 20,6 → 25 phút/ngày, ngày có bữa tối 54 → 44; bỏ `free_outdoor` thì số điểm biển / thiên nhiên / chợ của savings giảm 60 → 38, đúng phần "ưu tiên điểm miễn phí/thiên nhiên/chợ" của profile. `free_outdoor` là gu của khách tiết kiệm, không phải chi phí.
 
 Lời giải thích mỗi điểm (`explanation.evidence`, `source: "value"`) là các thành phần đã nâng v_i theo trọng số của profile ("rating cao 4.9", "mien phi", "doc dao, it nguoi biet", "dung gu an: …") cộng bữa mà điểm đó là ("bua trua", "bua toi"). `/v1/repair` chọn điểm cần đổi và điểm thay theo giá trị planner lưu cùng lịch (`_context.values`). Điểm của `rank.py` không còn vào lịch v1; nó chỉ còn quyết thứ tự ứng viên đưa vào solver (thứ tự nút, không đổi J) và là điểm của legacy. Đã thử xếp ứng viên theo v_i (26/11): 63/134 ngày balanced/experience đổi điểm chỉ vì đường tìm kiếm khác, J thấp hơn ở 13 ngày và cao hơn ở 10, bench trung vị chậm thêm 1,5 giây, nên giữ thứ tự cũ.
 
@@ -214,6 +216,8 @@ w ← w + η ( f(D) − f(P) )
 Ưu: nhãn là lịch người thật viết. Nhược: lịch blog thường dày và thiên về điểm nổi tiếng, có thể kéo T8 và T1 lệch.
 
 **Hai quy tắc khi học:** giữ đúng dấu (hệ số phạt τ, ζ, A, κ, γ, σ không âm); kéo về v1 bằng λ‖w − w_v1‖² trong loss, để w chỉ lệch khi data đủ mạnh. Học các hệ số tổng (w_state, một hệ số chung cho β·ρ, γ, B, A, R, κ, τ, τ_L, ζ, w_edge, σ); ghi ra file mới cùng khoá với `v1.json`.
+
+**Không học một bộ T1 chung cho ba profile** (đo 26/11). Cho savings và experience dùng khối `value` của balanced trên 60 request 1 ngày: experience ra đúng bộ điểm của balanced ở 36/60 request (Jaccard với balanced 0,03 → 0,85; 52/60 vượt trần 0,6 nên router phải thay lịch), savings tốn 1,05 triệu một lịch thay vì 402 nghìn. Ba lịch khác nhau gần như chỉ nhờ trọng số T1. Vì vậy: hệ số chung của J (T2–T11) học từ cặp chấm trung tính; trọng số T1 riêng của savings, experience học từ cặp chấm có nói rõ khách (ví dụ "khách muốn tiết kiệm"); `features()` cần thêm tổng từng thành phần của T1 (rating, fame, novelty, fee, free, free_outdoor, taste, spending, outdoor, liked trên các điểm được đi) thì mới học được chúng; `fame` luôn bằng 0 trên danang-v2 nên giữ số v1.
 
 **Khi nào học lại:** khi đổi data đủ để lịch đổi (POI mới, giờ mở / giá mới, ma trận mới) thì chạy lại eval; trọng số chỉ cần học lại khi chỉ số tụt hoặc có thêm nhãn (cặp chấm, lịch mẫu). Bộ lọc và pointer bắt chước solver chạy dưới **đúng bộ trọng số đó**, nên đổi trọng số (hoặc đổi data làm lời giải đổi nhiều) là sinh lại data thầy và train lại hai model này (`ARCHITECTURE.md` §4).
 
