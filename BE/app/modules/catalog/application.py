@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import re
-
-from BE.app.modules.catalog.domain import normalize_text, place_id, public_place, search_places
+from BE.app.modules.catalog.domain import name_words, named_terms_in_order, place_id, public_place, search_places
 
 
 class CatalogNotFound(LookupError):
@@ -39,7 +37,7 @@ def resolve_place(catalog: dict, identifier: str) -> dict | None:
 
 
 def normalize_place_name(value: str) -> str:
-    return " ".join(re.findall(r"\w+", normalize_text(value).replace("đ", "d")))
+    return " ".join(name_words(value))
 
 
 def resolve_name_candidates(places: list[dict], name: str) -> list[dict]:
@@ -47,7 +45,8 @@ def resolve_name_candidates(places: list[dict], name: str) -> list[dict]:
     needle = normalize_place_name(name)
     if not needle:
         return []
-    exact, partial = {}, {}
+    terms = needle.split()
+    exact, partial, abbreviated = {}, {}, {}
     for place in places:
         identifier = place_id(place)
         if place.get("verified") is not True or not identifier:
@@ -61,7 +60,9 @@ def resolve_name_candidates(places: list[dict], name: str) -> list[dict]:
             exact[identifier] = place
         elif any(f" {needle} " in f" {value} " for value in names):
             partial[identifier] = place
-    return sorted((exact or partial).values(), key=lambda row: (
+        elif len(terms) >= 3 and any(named_terms_in_order(terms, value) for value in names):
+            abbreviated[identifier] = place
+    return sorted((exact or partial or abbreviated).values(), key=lambda row: (
         normalize_place_name(str(row.get("name") or "")), place_id(row),
     ))
 

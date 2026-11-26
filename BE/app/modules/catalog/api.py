@@ -24,6 +24,23 @@ def list_pois(request: Request, q: str = Query(default="", max_length=120),
     return payload
 
 
+@router.get("/v1/pois/location-index")
+def place_location_index(request: Request):
+    """Give clients enough public data to find nearby places on-device."""
+    try:
+        catalog = request.app.state.catalog_reader()
+    except CatalogUnavailable as exc:
+        raise HTTPException(status_code=503, detail="Catalog is temporarily unavailable.") from exc
+    return {
+        "snapshot_version": catalog["snapshot"],
+        "items": [
+            {"poi_id": row["poi_id"], "name": row["name"], "lat": row["lat"], "lon": row["lon"]}
+            for row in catalog["pois"]
+            if row.get("status") != "excluded"
+        ],
+    }
+
+
 @router.get("/v1/pois/{poi_id}")
 def poi_detail(request: Request, poi_id: str):
     try:

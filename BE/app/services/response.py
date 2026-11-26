@@ -24,7 +24,8 @@ def _legs(acts: list[dict], origin: str | None) -> list[tuple[str, str]]:
     for i, act in enumerate(acts):
         new_day = i == 0 or act.get("day") != acts[i - 1].get("day")
         if new_day and origin:
-            legs.append((origin, act["poi_id"]))
+            if origin != act["poi_id"]:
+                legs.append((origin, act["poi_id"]))
         elif i > 0:
             legs.append((acts[i - 1]["poi_id"], act["poi_id"]))
     return legs

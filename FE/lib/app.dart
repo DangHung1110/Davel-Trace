@@ -127,7 +127,7 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
               controller: _auth!,
               authenticatedChild: _liveState == null
                   ? _Root(state: _state, auth: _auth)
-                  : _Root(state: _liveState!, auth: _auth),
+                  : _Root(state: _liveState!, auth: _auth, api: _liveApi),
               child: _Root(state: _state, auth: _auth),
             ),
     ),
@@ -135,13 +135,14 @@ class _DavelTraceAppState extends State<DavelTraceApp> {
 }
 
 class _Root extends StatelessWidget {
-  const _Root({required this.state, this.auth});
+  const _Root({required this.state, this.auth, this.api});
   final AppState state;
   final AuthController? auth;
+  final ApiClient? api;
 
   @override
   Widget build(BuildContext context) {
-    final content = MainShell(state: state, auth: auth);
+    final content = MainShell(state: state, auth: auth, api: api);
     return AsyncStateView(
       loading: state.isLoading,
       error: state.profiles.isEmpty && auth?.status != AuthStatus.authenticated

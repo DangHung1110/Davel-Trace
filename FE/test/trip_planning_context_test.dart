@@ -65,6 +65,9 @@ class _Planning implements PlanningRepository, ItineraryLifecycleRepository {
     String key, {
     List<String> completedActivityIds = const [],
     List<String> skippedActivityIds = const [],
+    String? currentPoiId,
+    String? remainingFrom,
+    bool includeCurrentStop = false,
   }) => requestPlan({});
 }
 

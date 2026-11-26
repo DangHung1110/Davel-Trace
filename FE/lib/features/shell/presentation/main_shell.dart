@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
+import '../../../core/networking/api_client.dart';
 import '../../../theme/app_theme.dart';
 import '../../expenses/expenses.dart';
+import '../../groups/presentation/group_trips_screen.dart';
+import '../../itinerary/presentation/itinerary_screen.dart';
 import '../../itinerary/presentation/trips_screen.dart';
 import '../../map/map.dart';
 import '../../map/presentation/planned_route_map.dart';
@@ -12,9 +15,10 @@ import '../../auth/application/auth_controller.dart';
 import '../../auth/presentation/account_screen.dart';
 
 class MainShell extends StatefulWidget {
-  const MainShell({super.key, required this.state, this.auth});
+  const MainShell({super.key, required this.state, this.auth, this.api});
   final AppState state;
   final AuthController? auth;
+  final ApiClient? api;
 
   @override
   State<MainShell> createState() => _MainShellState();
@@ -42,6 +46,77 @@ class _MainShellState extends State<MainShell> {
   void _openItineraryFromMap() {
     _tripDetailRequest++;
     _select(0);
+  }
+
+  Future<void> _openGroups({bool expenses = false}) async {
+    final api = widget.api;
+    if (api == null) {
+      final auth = widget.auth;
+      if (auth?.status != AuthStatus.demo) return;
+      final signIn = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Đi cùng gia đình và bạn bè'),
+          content: const Text(
+            'Đăng nhập để tạo chuyến nhóm hoặc tham gia bằng mã mời.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Quay lại'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Đăng nhập'),
+            ),
+          ],
+        ),
+      );
+      if (mounted && signIn == true) auth!.leaveDemo();
+      return;
+    }
+    final state = widget.state;
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        builder: (routeContext) => AnimatedBuilder(
+          animation: state,
+          builder: (context, _) => GroupTripsScreen(
+            api: api,
+            ownedTrips: state.trips,
+            openExpensesOnSelection: expenses,
+            createTrip: () => TripsScreen.createTrip(context, state),
+            editTrip: (id) async {
+              final (trip, _, _) = await state.repository.getTrip(id);
+              if (!routeContext.mounted) return;
+              await state.selectTrip(trip);
+              if (!routeContext.mounted || state.activeTrip?.id != id) return;
+              await ItineraryScreen(
+                state: state,
+                onOpenMap: () => _select(1),
+              ).openTripEditor(routeContext, trip: trip);
+            },
+            openPlanning: (id) async {
+              final trip =
+                  state.trips.where((trip) => trip.id == id).firstOrNull ??
+                  (await state.repository.getTrip(id)).$1;
+              if (!routeContext.mounted) return;
+              await state.selectTrip(trip);
+              if (!routeContext.mounted || state.activeTrip?.id != id) return;
+              await Navigator.of(routeContext).push<void>(
+                MaterialPageRoute(
+                  builder: (_) => PlanningScreen(state: state, groupApi: api),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+    if (mounted &&
+        identical(state, widget.state) &&
+        widget.auth?.status == AuthStatus.authenticated) {
+      await state.refresh();
+    }
   }
 
   @override
@@ -81,6 +156,7 @@ class _MainShellState extends State<MainShell> {
                 children: [
                   TripsScreen(
                     state: state,
+                    onOpenGroups: widget.auth == null ? null : _openGroups,
                     onOpenMap: () => _select(1),
                     onOpenManualMap: () => _select(1, manualRoute: true),
                     detailRequest: _tripDetailRequest,
@@ -114,6 +190,9 @@ class _MainShellState extends State<MainShell> {
                     const SizedBox.shrink(),
                   ExpensesScreen(
                     state: state,
+                    onOpenGroupExpenses: widget.auth == null
+                        ? null
+                        : () => _openGroups(expenses: true),
                     onOpenTrips: () {
                       _tripCollectionRequest++;
                       _select(0);

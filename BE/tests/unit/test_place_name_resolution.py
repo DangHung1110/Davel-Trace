@@ -1,6 +1,14 @@
 from BE.app.modules.catalog.application import resolve_name_candidates
 
 
+def test_resolves_abbreviated_names_without_treating_all_museums_as_candidates():
+    places = [
+        {"poi_id": "cham", "name": "Bảo tàng Điêu khắc Chăm Đà Nẵng", "verified": True},
+        {"poi_id": "museum", "name": "Bảo tàng Đà Nẵng", "verified": True},
+    ]
+    assert [row["poi_id"] for row in resolve_name_candidates(places, "Bảo tàng Chăm")] == ["cham"]
+
+
 def test_exact_name_beats_partial_names_with_case_accents_and_punctuation():
     places = [
         {"poi_id": "museum", "name": "Bảo tàng Đà Nẵng", "verified": True},

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
 import '../../../core/errors/api_exception.dart';
+import '../../../core/networking/api_client.dart';
 import '../../../shared/widgets/app_header.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
+import '../../groups/presentation/group_replan_screen.dart';
 import '../../map/presentation/planned_route_map.dart';
 import '../../planning/domain/models.dart';
 import '../../profile/presentation/profile_screen.dart';
@@ -24,7 +26,8 @@ class ItineraryScreen extends StatelessWidget {
   final AppState state;
   final VoidCallback? onBack;
 
-  Future<void> openTripEditor(BuildContext context) => _tripEditor(context);
+  Future<void> openTripEditor(BuildContext context, {Trip? trip}) =>
+      _tripEditor(context, trip: trip);
 
   Future<void> _runAction(
     BuildContext context,
@@ -39,8 +42,9 @@ class ItineraryScreen extends StatelessWidget {
 
   static Future<void> _reviewProposal(
     BuildContext context,
-    AppState state,
-  ) async {
+    AppState state, {
+    bool group = false,
+  }) async {
     final proposal = state.aiProposal;
     if (proposal == null) return;
     final corrections = await Navigator.of(context).push<Map<String, dynamic>>(
@@ -49,13 +53,18 @@ class ItineraryScreen extends StatelessWidget {
           values: proposal.confirmedOverrides,
           repository: state.repository,
           placeResolutions: proposal.placeResolutions,
+          trip: state.activeTrip,
+          useGroupDetails: group,
         ),
       ),
     );
     if (corrections != null &&
         context.mounted &&
         identical(state.aiProposal, proposal)) {
-      await state.confirmAiProposalAndPlan(corrections: corrections);
+      await state.confirmAiProposalAndPlan(
+        corrections: corrections,
+        group: group,
+      );
     }
   }
 
@@ -276,6 +285,25 @@ class ItineraryScreen extends StatelessWidget {
                           icon: const Icon(Icons.calendar_month_outlined),
                           label: const Text('Lập lịch cho chuyến đi'),
                         ),
+                        if (!state.isDemoManagement)
+                          OutlinedButton.icon(
+                            key: const Key('open-plan-with-ai-button'),
+                            onPressed:
+                                state.isMutating ||
+                                    state.isPlanning ||
+                                    state.isInterpreting
+                                ? null
+                                : () => Navigator.of(context).push<void>(
+                                    MaterialPageRoute(
+                                      builder: (_) => PlanningScreen(
+                                        state: state,
+                                        startWithPrompt: true,
+                                      ),
+                                    ),
+                                  ),
+                            icon: const Icon(Icons.chat_bubble_outline),
+                            label: const Text('Nhập mong muốn với AI'),
+                          ),
                         if (itinerary != null &&
                             itinerary.warnings.isNotEmpty) ...[
                           const SizedBox(height: 12),
@@ -328,21 +356,27 @@ class ItineraryScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 9),
                         if (savedPlan != null)
-                          SurfaceCard(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                for (final (index, activity)
-                                    in savedPlan.plan.activities.indexed)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      '${index + 1}. ${activity['start'] ?? activity['start_time'] ?? ''} '
-                                      '${activity['name'] ?? activity['title'] ?? state.mapPlaces[activity['poi_id']]?.name ?? 'Điểm dừng chưa tải tên'}',
-                                    ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              for (final activity
+                                  in savedPlan.plan.activities) ...[
+                                ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  leading: const Icon(
+                                    Icons.place_outlined,
+                                    color: AppColors.primary,
                                   ),
+                                  title: Text(
+                                    '${activity['name'] ?? activity['title'] ?? state.mapPlaces[activity['poi_id']]?.name ?? 'Điểm dừng chưa tải tên'}',
+                                  ),
+                                  subtitle: Text(
+                                    '${activity['start'] ?? activity['start_time'] ?? ''}',
+                                  ),
+                                ),
+                                const Divider(height: 1),
                               ],
-                            ),
+                            ],
                           ),
                         if (savedPlan == null && dayActivities.isEmpty)
                           const _EmptyActivities(),
@@ -424,12 +458,23 @@ class ItineraryScreen extends StatelessWidget {
 }
 
 class PlanningScreen extends StatelessWidget {
-  const PlanningScreen({super.key, required this.state});
+  const PlanningScreen({
+    super.key,
+    required this.state,
+    this.groupApi,
+    this.startWithPrompt = false,
+  });
   final AppState state;
+  final ApiClient? groupApi;
+  final bool startWithPrompt;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Lập lịch chuyến đi')),
+    appBar: AppBar(
+      title: Text(
+        groupApi == null ? 'Lập lịch chuyến đi' : 'Lập lịch cho nhóm',
+      ),
+    ),
     body: AnimatedBuilder(
       animation: state,
       builder: (context, _) => ListView(
@@ -440,34 +485,47 @@ class PlanningScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 8),
-          const Text('Lịch trình chỉ thay đổi khi bạn xác nhận một phương án.'),
+          Text(
+            groupApi == null
+                ? 'Lịch trình chỉ thay đổi khi bạn xác nhận một phương án.'
+                : 'Cả nhóm sẽ nhận được phương án để xem và bình chọn. Bạn chốt lịch khi đã sẵn sàng.',
+          ),
           const SizedBox(height: 16),
-          SurfaceCard(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: ListTile(
-              key: const Key('planning-preferences-button'),
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.tune, color: AppColors.primary),
-              trailing: const Icon(Icons.chevron_right_rounded),
-              title: const Text('Sở thích du lịch'),
-              onTap: state.isPlanning
-                  ? null
-                  : () => Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => Scaffold(
-                          appBar: AppBar(title: const Text('Sở thích du lịch')),
-                          body: AnimatedBuilder(
-                            animation: state,
-                            builder: (_, _) =>
-                                ProfileScreen(state: state, showHeader: false),
+          if (groupApi == null)
+            SurfaceCard(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListTile(
+                key: const Key('planning-preferences-button'),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.tune, color: AppColors.primary),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                title: const Text('Sở thích du lịch'),
+                onTap: state.isPlanning
+                    ? null
+                    : () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => Scaffold(
+                            appBar: AppBar(
+                              title: const Text('Sở thích du lịch'),
+                            ),
+                            body: AnimatedBuilder(
+                              animation: state,
+                              builder: (_, _) => ProfileScreen(
+                                state: state,
+                                showHeader: false,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+              ),
             ),
-          ),
           const SizedBox(height: 8),
-          _PlanningPanel(state: state),
+          _PlanningPanel(
+            state: state,
+            groupApi: groupApi,
+            startWithPrompt: startWithPrompt,
+          ),
         ],
       ),
     ),
@@ -475,8 +533,14 @@ class PlanningScreen extends StatelessWidget {
 }
 
 class _PlanningPanel extends StatefulWidget {
-  const _PlanningPanel({required this.state});
+  const _PlanningPanel({
+    required this.state,
+    this.groupApi,
+    required this.startWithPrompt,
+  });
   final AppState state;
+  final ApiClient? groupApi;
+  final bool startWithPrompt;
 
   @override
   State<_PlanningPanel> createState() => _PlanningPanelState();
@@ -485,6 +549,16 @@ class _PlanningPanel extends StatefulWidget {
 class _PlanningPanelState extends State<_PlanningPanel> {
   AppState get state => widget.state;
   final _placeNames = <String, Future<PoiItem?>>{};
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.startWithPrompt) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _interpret(context);
+      });
+    }
+  }
 
   Future<PoiItem?> _resolvePlace(String id) =>
       _placeNames.putIfAbsent(id, () async {
@@ -550,7 +624,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Nội dung sẽ được gửi tới nhà cung cấp AI bên ngoài. Không nhập mật khẩu, token hoặc thông tin riêng tư không cần thiết.',
+                'App đã có thông tin chuyến đi. Hãy thêm nơi muốn ghé, nơi cần tránh hoặc sở thích. Đoạn bạn nhập được gửi cho nhà cung cấp AI để đọc yêu cầu.',
                 style: TextStyle(fontSize: 12, color: AppColors.muted),
               ),
               const SizedBox(height: 10),
@@ -563,7 +637,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                 maxLength: 4000,
                 decoration: const InputDecoration(
                   labelText: 'Mong muốn của bạn',
-                  hintText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                  hintText: 'Ví dụ: Muốn ghé Bảo tàng Chăm, tránh Chợ Hàn và ưu tiên ăn mì Quảng.',
                   alignLabelWithHint: true,
                 ),
               ),
@@ -589,7 +663,11 @@ class _PlanningPanelState extends State<_PlanningPanel> {
     }
     await state.interpretPlanningRequest(text);
     if (context.mounted && state.activeTrip?.id == tripId) {
-      await ItineraryScreen._reviewProposal(context, state);
+      await ItineraryScreen._reviewProposal(
+        context,
+        state,
+        group: widget.groupApi != null,
+      );
     }
   }
 
@@ -722,23 +800,27 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         if (!state.isDemoManagement)
           FilledButton(
             key: const Key('request-plan-button'),
-            onPressed: busy ? null : state.requestPlan,
+            onPressed: busy
+                ? null
+                : () => state.requestPlan(group: widget.groupApi != null),
             child: Text(
               state.isPlanning
                   ? 'Đang lập phương án…'
-                  : 'Tạo phương án lịch trình',
+                  : widget.groupApi == null
+                  ? 'Lập từ thông tin đã lưu'
+                  : 'Tạo phương án để nhóm xem',
             ),
           ),
         if (!state.isDemoManagement) const SizedBox(height: 4),
         if (!state.isDemoManagement)
-          TextButton.icon(
+          OutlinedButton.icon(
             key: const Key('request-ai-interpretation'),
             onPressed: busy ? null : () => _interpret(context),
             icon: const Icon(Icons.chat_bubble_outline),
             label: Text(
               state.isInterpreting
                   ? 'AI đang diễn giải…'
-                  : 'Nhập mong muốn bằng lời với AI',
+                  : 'Nhập mong muốn với AI',
             ),
           ),
         if (state.aiMessage != null) ...[
@@ -787,8 +869,11 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                       key: const Key('confirm-ai-proposal'),
                       onPressed: busy
                           ? null
-                          : () =>
-                                ItineraryScreen._reviewProposal(context, state),
+                          : () => ItineraryScreen._reviewProposal(
+                              context,
+                              state,
+                              group: widget.groupApi != null,
+                            ),
                       child: const Text('Rà soát yêu cầu'),
                     ),
                   ],
@@ -884,9 +969,29 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                 onPressed:
                     busy || !state.itineraryVersions.any((item) => item.active)
                     ? null
-                    : state.requestReplan,
+                    : () async {
+                        final api = widget.groupApi;
+                        final trip = state.activeTrip;
+                        if (api != null && trip != null) {
+                          await Navigator.of(context).push<void>(
+                            MaterialPageRoute(
+                              builder: (_) => GroupReplanScreen(
+                                state: state,
+                                api: api,
+                                trip: trip,
+                              ),
+                            ),
+                          );
+                        } else {
+                          await state.requestReplan();
+                        }
+                      },
                 icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Lập lại phần còn lại'),
+                label: Text(
+                  widget.groupApi == null
+                      ? 'Lập lại phần còn lại'
+                      : 'Đổi kế hoạch',
+                ),
               ),
             ],
           ),

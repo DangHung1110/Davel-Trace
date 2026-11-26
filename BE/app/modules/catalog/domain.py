@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import unicodedata
 from typing import Any
 
@@ -11,8 +12,17 @@ class CatalogUnavailable(RuntimeError):
 
 
 def normalize_text(value: str) -> str:
-    normalized = unicodedata.normalize("NFD", value.casefold().strip())
+    normalized = unicodedata.normalize("NFD", value.casefold().strip().replace("đ", "d"))
     return "".join(char for char in normalized if unicodedata.category(char) != "Mn")
+
+
+def name_words(value: str) -> list[str]:
+    return re.findall(r"\w+", normalize_text(value))
+
+
+def named_terms_in_order(terms: list[str], name: str) -> bool:
+    available = iter(name_words(name))
+    return bool(terms) and all(any(term == word for word in available) for term in terms)
 
 
 def place_id(place: dict[str, Any]) -> str:
@@ -35,7 +45,8 @@ def category(place: dict[str, Any]) -> str:
 
 def search_places(places: list[dict[str, Any]], query: str, kind: str | None,
                   limit: int, offset: int) -> tuple[list[dict[str, Any]], int]:
-    needle = normalize_text(query)
+    terms = name_words(query)
+    needle = " ".join(terms)
     requested_kind = normalize_text(kind or "")
     matches = []
     for place in places:
@@ -44,23 +55,37 @@ def search_places(places: list[dict[str, Any]], query: str, kind: str | None,
         # so an older trip that holds one keeps its route.
         if place.get("status") == "excluded":
             continue
-        haystack = " ".join([
-            str(place.get("name", "")), str(place.get("type", "")),
-            str(place.get("cat", "")), " ".join(map(str, place.get("tags", []))),
-        ])
-        if needle and needle not in normalize_text(haystack):
-            continue
         if requested_kind and requested_kind not in {
             normalize_text(str(place.get("cat", ""))),
             normalize_text(str(place.get("type", ""))),
         }:
             continue
-        matches.append(place)
+        name = str(place.get("name", ""))
+        aliases = place.get("aliases")
+        names = [name, *(alias for alias in aliases if isinstance(alias, str))] if isinstance(aliases, list) else [name]
+        normalized = [" ".join(name_words(label)) for label in names]
+        if not needle:
+            rank = 0
+        elif needle in normalized:
+            rank = 0
+        elif any(needle in label for label in normalized):
+            rank = 1
+        elif any(named_terms_in_order(terms, label) for label in names):
+            rank = 2
+        elif needle in " ".join(name_words(" ".join([
+            name, str(place.get("type", "")), str(place.get("cat", "")),
+            " ".join(map(str, place.get("tags", []))),
+        ]))):
+            rank = 3
+        else:
+            continue
+        matches.append((rank, place))
     matches.sort(key=lambda item: (
-        not item.get("verified", False),
-        normalize_text(str(item.get("name", ""))), place_id(item),
+        item[0],
+        not item[1].get("verified", False),
+        normalize_text(str(item[1].get("name", ""))), place_id(item[1]),
     ))
-    return matches[offset:offset + limit], len(matches)
+    return [place for _, place in matches[offset:offset + limit]], len(matches)
 
 
 def public_place(place: dict[str, Any], version: str, *, detail: bool = False) -> dict[str, Any]:

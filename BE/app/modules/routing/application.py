@@ -31,6 +31,11 @@ def preview(principal, trip_id: str, activity_ids: list[str], catalog: dict,
 def preview_places(principal, trip_id: str, poi_ids: list[str], catalog: dict,
                    matrix: dict, trip_reader, route_provider, estimate_provider) -> dict:
     trip_reader.get(principal, UUID(trip_id))
+    return route_for_places(poi_ids, catalog, matrix, route_provider, estimate_provider)
+
+
+def route_for_places(poi_ids, catalog, matrix, route_provider, estimate_provider):
+    """Route catalog stops a capability has already authorized."""
     candidates = [(str(index), poi_id, None) for index, poi_id in enumerate(poi_ids)]
     return _route(candidates, catalog, matrix, route_provider, estimate_provider)
 

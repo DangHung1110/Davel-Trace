@@ -13,15 +13,41 @@ class TripsScreen extends StatefulWidget {
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onOpenGroups,
     this.onOpenManualMap,
     this.detailRequest = 0,
     this.collectionRequest = 0,
   });
   final AppState state;
   final VoidCallback onOpenMap;
+  final VoidCallback? onOpenGroups;
   final VoidCallback? onOpenManualMap;
   final int detailRequest;
   final int collectionRequest;
+
+  static Future<Trip?> createTrip(BuildContext context, AppState state) async {
+    if (state.isMutating || state.isPlanning) return null;
+    if (state.activeProfile == null) {
+      final profile = await showModalBottomSheet<Map<String, dynamic>>(
+        context: context,
+        isScrollControlled: true,
+        useSafeArea: true,
+        showDragHandle: true,
+        builder: (_) => const ProfileEditor(),
+      );
+      if (profile == null || !context.mounted) return null;
+      await state.createProfile(profile);
+    }
+    if (!context.mounted) return null;
+    final data = await Navigator.of(context).push<Map<String, dynamic>>(
+      MaterialPageRoute(builder: (_) => const TripEditor()),
+    );
+    if (data == null || !context.mounted) return null;
+    final previous = state.activeTrip?.id;
+    await state.createTrip(data);
+    final created = state.activeTrip;
+    return created?.id == previous ? null : created;
+  }
 
   @override
   State<TripsScreen> createState() => _TripsScreenState();
@@ -40,33 +66,11 @@ class _TripsScreenState extends State<TripsScreen> {
   }
 
   Future<void> _create() async {
-    final state = widget.state;
-    if (state.activeProfile == null) {
-      final data = await showModalBottomSheet<Map<String, dynamic>>(
-        context: context,
-        isScrollControlled: true,
-        useSafeArea: true,
-        showDragHandle: true,
-        builder: (_) => const ProfileEditor(),
-      );
-      if (data == null || !mounted) return;
-      try {
-        await state.createProfile(data);
-      } catch (_) {
-        _error();
-        return;
-      }
-    }
-    if (!mounted) return;
-    final previous = state.activeTrip?.id;
-    await ItineraryScreen(
-      state: state,
-      onOpenMap: widget.onOpenMap,
-    ).openTripEditor(context);
-    if (mounted &&
-        state.activeTrip != null &&
-        state.activeTrip!.id != previous) {
-      setState(() => _detail = true);
+    try {
+      final created = await TripsScreen.createTrip(context, widget.state);
+      if (mounted && created != null) setState(() => _detail = true);
+    } catch (_) {
+      _error();
     }
   }
 
@@ -109,7 +113,7 @@ class _TripsScreenState extends State<TripsScreen> {
     }
     return Column(
       children: [
-        const AppHeader(section: 'Chuyến đi'),
+        const AppHeader(section: 'Davel Trace'),
         Expanded(
           child: RefreshIndicator(
             onRefresh: state.refresh,
@@ -124,13 +128,26 @@ class _TripsScreenState extends State<TripsScreen> {
                       children: [
                         Text(
                           'Chuyến đi của bạn',
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                         if (state.isDemoManagement) ...[
                           const SizedBox(height: 10),
                           const Text(
                             'Bạn đang xem thử. Thay đổi chỉ lưu trên thiết bị này.',
                             key: Key('trip-demo-notice'),
+                          ),
+                        ],
+                        if (widget.onOpenGroups != null) ...[
+                          const SizedBox(height: 16),
+                          _GroupEntry(onTap: widget.onOpenGroups!),
+                        ],
+                        if (state.trips.isNotEmpty) ...[
+                          const SizedBox(height: 20),
+                          Text(
+                            widget.onOpenGroups == null
+                                ? 'Chuyến đã lưu'
+                                : 'Chuyến do bạn tạo',
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
                       ],
@@ -146,7 +163,9 @@ class _TripsScreenState extends State<TripsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Chưa có chuyến đi',
+                              widget.onOpenGroups == null
+                                  ? 'Chưa có chuyến đi'
+                                  : 'Bạn chưa tạo chuyến nào',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 6),
@@ -209,6 +228,33 @@ class _TripsScreenState extends State<TripsScreen> {
       ],
     );
   }
+}
+
+class _GroupEntry extends StatelessWidget {
+  const _GroupEntry({required this.onTap});
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) => Material(
+    color: AppColors.sand,
+    borderRadius: BorderRadius.circular(16),
+    clipBehavior: Clip.antiAlias,
+    child: ListTile(
+      key: const Key('open-group-trips'),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      leading: const Icon(Icons.group_outlined, color: AppColors.primary),
+      title: Text(
+        'Chuyến đi nhóm',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      subtitle: const Text('Cùng chọn lịch, trò chuyện và chia chi phí'),
+      trailing: const Icon(
+        Icons.arrow_forward_rounded,
+        color: AppColors.primary,
+      ),
+      onTap: onTap,
+    ),
+  );
 }
 
 class _TripCard extends StatelessWidget {

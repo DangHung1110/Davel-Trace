@@ -46,6 +46,8 @@ from BE.app.modules.catalog.infrastructure import load_catalog
 from BE.app.modules.routing import api as routing_api
 from BE.app.modules.planning_lifecycle import api as planning_lifecycle_api
 from BE.app.modules.ai_assistance import api as ai_assistance_api
+from BE.app.modules.trip_groups import api as trip_groups_api
+from BE.app.modules.trip_groups import planning_api as group_planning_api
 from BE.app.modules.routing.infrastructure import load_matrix, matrix_estimate, osrm_route
 from BE.app.modules.identity.service import IdentityError
 
@@ -61,7 +63,7 @@ LOCAL_ROUTERS = (review_router, repair_router, accept_router)
 PRODUCT_ROUTERS = (planning_evidence_router, identity_api, google_api,
                    profiles_api, trips_api, persistent_expenses_api,
                    catalog_api, routing_api, planning_lifecycle_api,
-                   ai_assistance_api)
+                   ai_assistance_api, trip_groups_api, group_planning_api)
 log = logging.getLogger("davel.api")
 
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/field_cover.dart';
 import '../application/auth_controller.dart';
+import 'google_continue_button.dart';
 import 'recovery_screen.dart';
 import 'register_screen.dart';
 
@@ -33,32 +34,6 @@ class _SignInScreenState extends State<SignInScreen> {
     if (widget.controller.busy || !_form.currentState!.validate()) return;
     FocusScope.of(context).unfocus();
     unawaited(widget.controller.login(email.text.trim(), password.text));
-  }
-
-  void _googleConsent() {
-    showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        scrollable: true,
-        title: const Text('Tiếp tục bằng Google'),
-        content: const Text(
-          'Bằng cách tiếp tục, bạn đồng ý với điều khoản sử dụng Davel Trace và dùng tài khoản Google để đăng nhập.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Quay lại'),
-          ),
-          FilledButton(
-            onPressed: () {
-              Navigator.pop(dialogContext);
-              unawaited(widget.controller.loginWithGoogle());
-            },
-            child: const Text('Đồng ý và tiếp tục'),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -149,13 +124,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              if (widget.controller.googleAvailable) ...[
-                OutlinedButton.icon(
-                  onPressed: widget.controller.busy ? null : _googleConsent,
-                  icon: const Icon(Icons.account_circle_outlined),
-                  label: const Text('Tiếp tục bằng Google'),
-                ),
-              ],
+              if (widget.controller.googlePlatformAvailable)
+                GoogleContinueButton(controller: widget.controller),
               OverflowBar(
                 alignment: MainAxisAlignment.spaceBetween,
                 overflowAlignment: OverflowBarAlignment.start,

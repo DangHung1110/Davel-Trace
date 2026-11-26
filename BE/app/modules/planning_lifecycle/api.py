@@ -56,9 +56,11 @@ class PlanningRequestBody(BaseModel):
 
 class ReplanBody(BaseModel):
     source_version_id: UUID
-    completed_activity_ids: list[str] = Field(default_factory=list)
-    skipped_activity_ids: list[str] = Field(default_factory=list)
+    completed_activity_ids: list[str] = Field(default_factory=list, max_length=100)
+    skipped_activity_ids: list[str] = Field(default_factory=list, max_length=100)
     remaining_from: str | None = None
+    current_poi_id: str | None = Field(default=None, min_length=1, max_length=128)
+    include_current_stop: bool = False
     unavailable_poi_ids: list[str] = Field(default_factory=list)
     changed_constraints: dict = Field(default_factory=dict)
     target_count: int = Field(default=5, ge=1, le=5)
