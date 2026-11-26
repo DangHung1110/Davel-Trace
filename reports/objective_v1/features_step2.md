@@ -5,7 +5,8 @@ Nhánh `feat/plan-features`, cắt từ `main` 707f084. Đây là bước 2 củ
 **Kết luận.**
 - Sau khi sửa, J tính từ đặc trưng khớp J mà CP-SAT báo trên 309/309 ngày, cả trời khô lẫn trời mưa. Sai lệch lớn nhất là 0,009U, chỉ do làm tròn.
 - Lịch không đổi: 201/201 lịch audit giống hệt `main`, từng điểm và từng giờ.
-- Phép đo lộ ra một chỗ hở nằm ngoài phần đặc trưng: bước `_polished` tính lại giờ sau khi solver giải. Bước này làm 46% số ngày (trời khô) và 50% số ngày (trời mưa) mất J. Ngày tệ nhất mất 2,36U, có điểm ngoài trời bị dời vào giữa cơn mưa. Cần quyết cách xử lý trước pilot 40 request (bước 3).
+- Phép đo lộ ra một chỗ hở nằm ngoài phần đặc trưng: bước `_polished` tính lại giờ sau khi solver giải. Bước này làm 46% số ngày (trời khô) và 50% số ngày (trời mưa) mất J. Ngày tệ nhất mất 2,36U, có điểm ngoài trời bị dời vào giữa cơn mưa.
+- **Đã xử lý ở bước 2b** (mục cuối): không ngày nào còn mất J, số ngày dính mưa về đúng con số của solver. Cái giá là phút chờ, đã thành một cột đặc trưng để pilot đo.
 
 U là điểm của POI tốt nhất trong pool của ngày đó. J trung vị của một ngày khoảng 5–8U.
 
@@ -75,7 +76,7 @@ Cái giá của giờ solver là lỗ trống. Khách rời nhà thờ lúc 10:3
 
 ## Còn mở, cần quyết trước pilot
 
-1. **Tính lại giờ.**
+1. **Tính lại giờ.** Đã làm theo cách ở bước 2b (mục cuối). Các phương án đã cân nhắc:
    - Đề xuất: ở v1 hiển thị đúng giờ của solver, và đưa phút chờ vào J (một số hạng phạt thời gian rảnh). Khi đó solver tự cân giữa chờ và trạng thái, và lịch user thấy chính là lịch J chọn.
    - Cách nhẹ hơn: vẫn tính lại giờ, nhưng giữ mỗi điểm trong khung trạng thái và tình trạng mưa của nó, dùng cùng phép dò 1/4 và 3/4 như solver.
    - Nếu không sửa, cặp lịch sinh bằng hai bộ trọng số có thể bị bước tính lại giờ xóa mất chỗ khác nhau, nhất là trạng thái và mưa.
@@ -101,3 +102,50 @@ python reports/objective_v1/scripts/features_check.py report out_dry.json out_we
 ```
 
 Mỗi lượt khoảng 10 phút trên máy 12 nhân. Thời tiết được mock, nên kết quả không phụ thuộc dự báo thật.
+
+## Bước 2b: chỉ nhận lịch tính lại giờ khi J không giảm (26/11, tối)
+
+Làm trên `feat/plan-features`, sau khi nhánh này nhận `fix/v1-latency-p95` và `feat/single-poi-value`. Mọi số dưới đây đo trên code đã gộp cả ba nhánh, cộng 2b.
+
+**Ba thay đổi:**
+1. `_polished` chỉ giữ lịch đã tính lại giờ khi J không giảm. Nếu giảm, lịch hiển thị đúng giờ của solver. Đường lùi về giờ solver đã có sẵn, trước đây chỉ dùng khi gate trượt.
+2. Luật giữ khô đọc mưa như solver. Một điểm ngoài trời được giữ khi cả hai điểm dò (1/4 và 3/4 lượt ghé) đều khô, và chỉ được dời sang giờ mà hai điểm dò vẫn khô (`route_order.quarter_probes`, `kept_dry`).
+3. Thêm đặc trưng `wait`: phút đứng chờ giữa hai điểm, ngoài thời gian chạy xe và 12 phút solver chừa cho mỗi điểm. Không tính là chờ: giờ nghỉ sau bữa trưa, thời gian trước điểm đầu và sau điểm cuối. `w_wait` = 0 trong `v1.json` và solver không có số hạng này, nên lịch không đổi.
+
+`_features` có thêm hai cờ: `retimed` (giờ hiển thị khác giờ solver) và `same_stops` (cùng điểm, cùng thứ tự với solver).
+
+**Kết quả trên 97 request × 3 profile.** Cột "trước" là cùng code đã gộp nhưng chưa có 2b.
+
+| | Khô: trước → sau | Mưa: trước → sau |
+|---|---|---|
+| J đặc trưng khớp J CP-SAT | 309 → 309 | 309 → 309 |
+| Ngày J ở giờ hiển thị thấp hơn J solver | 150 → **0** | 145 → **0** |
+| Ngày vẫn giữ giờ đã tính lại (J bằng nhau) | — → 46 | — → 59 |
+| Ngày có điểm ngoài trời dính mưa (giờ hiển thị) | 0 → 0 | 61 → **19** (bằng giờ solver) |
+| Lịch giữ đúng điểm và thứ tự của solver | — → 309 | — → 309 |
+| Lịch trượt gate | 3 → 3 | 3 → 3 |
+
+- Ba lịch trượt gate đều là G-q21, request không có lịch nào khả thi (đã biết từ trước).
+- So với lịch hiển thị trước 2b, J cao hơn ở 154 ngày khô (trung bình +0,30U, tối đa +0,97U) và 156 ngày mưa (trung bình +0,63U, tối đa +2,54U).
+- Có 7 ngày khô và 13 ngày mưa mà lịch của solver khác giữa hai lần đo. Tất cả đều là lần giải hết ngân sách thời gian (`feasible-timeout`), và lần đo sau tìm được J cao hơn: máy bận khác nhau giữa hai lần đo. 2b không đụng tới solver.
+
+**Ví dụ W09** (gia đình, muốn ăn mì Quảng, chiều mưa, lịch balanced): Cầu Rồng ở lại 16:55–17:15, sau cơn mưa. J giữ 8,04U, thay vì tụt còn 5,69U như trước 2b.
+
+**Cái giá: phút chờ.**
+- Sau 2b, ở giờ hiển thị, một ngày chờ trung bình 85 phút (trời khô) và 99 phút (trời mưa). Ở giờ solver là 86 và 100 phút.
+- 214/309 ngày khô có từ 30 phút chờ trở lên.
+- Theo profile (trời khô): savings 106 phút, balanced 60 phút, experience 89 phút.
+- W09 balanced chờ 171 phút. Khoảng 112 phút trong đó là chờ tạnh mưa, từ lúc rời bảo tàng (14:46) tới Cầu Rồng (16:55).
+
+Trước 2b, bước tính lại giờ xóa bớt phần chờ này ở khoảng 150 ngày, nhưng đổi lại J giảm. Pilot sẽ đo xem judge có chê phút chờ không. Nếu có, BT cho `wait` một hệ số âm, và khi đó mới đưa phạt chờ vào solver: solver sẽ tự cân giữa chờ và giờ đẹp.
+
+**Kiểm tra:**
+- 7 test mới:
+  - `test_polish_keeps_j`: bỏ lịch tính lại giờ khi J giảm.
+  - `test_order_timing`: giữ khô theo điểm dò, có ca W09.
+  - `test_objective_features`: phút chờ, và nghỉ trưa không tính là chờ.
+  - `test_plan_features`: giờ hiển thị không bao giờ có J thấp hơn giờ solver, và giữ đúng các điểm.
+- Toàn bộ suite: 1.554 qua. 30 test lỗi đúng là 30 lỗi môi trường đã biết (Google OAuth, PostgreSQL, Flutter).
+- `bench_latency --rounds 3`: median 4,65 s, p95 6,68 s, qua ngưỡng 8 s (trước 2b: 4,65 / 6,74).
+
+`features_check.py report` nay in thêm: `kept_retiming`, `same_stops`, mưa ở giờ solver, phút chờ ở cả hai giờ, và số lịch trượt gate.

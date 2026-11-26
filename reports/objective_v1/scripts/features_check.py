@@ -107,7 +107,8 @@ def report(paths: list[str]) -> dict:
         changed, terms, lost = 0, Counter(), []
         for r in rows:
             raw, shown = r["features"]["raw"], r["features"]["shown"]
-            moved = [k for k in FEATURES if abs(raw["features"][k] - shown["features"][k]) > 1e-9]
+            moved = [k for k in FEATURES if k in raw["features"]  # files from before `wait`
+                     and abs(raw["features"][k] - shown["features"][k]) > 1e-9]
             if moved:
                 changed += 1
                 terms.update(moved)
@@ -126,6 +127,20 @@ def report(paths: list[str]) -> dict:
                                          if r["features"]["shown"]["features"]["meal_far"] > 0),
                "days_with_rest": sum(1 for r in rows
                                      if r["features"]["shown"]["features"]["rest"] > 0)}
+        # Step 2b: the shown day keeps the solver's stops; re-timing kept or dropped;
+        # idle minutes at both times; plans the gate failed.
+        shown_rows = [r for r in rows if "retimed" in r["features"]]
+        out["kept_retiming"] = sum(1 for r in shown_rows if r["features"]["retimed"])
+        out["same_stops"] = sum(1 for r in shown_rows if r["features"]["same_stops"])
+        out["days_with_rain_raw"] = sum(1 for r in rows
+                                        if r["features"]["raw"]["features"]["rain"] > 0)
+        for side in ("raw", "shown"):
+            waits = sorted(r["features"][side]["features"].get("wait", 0.0) for r in rows)
+            if waits:
+                out[f"wait_{side}"] = {"mean": round(sum(waits) / len(waits), 1),
+                                       "p90": waits[int(len(waits) * 0.9)], "max": waits[-1],
+                                       "days_30plus": sum(1 for w in waits if w >= 30)}
+        out["gate_failed_plans"] = sum(1 for r in data["rows"] if r.get("passed") is False)
         summary[os.path.basename(path)] = out
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     return summary
