@@ -82,6 +82,9 @@ class _LifecyclePlanningRepository
     String key, {
     List<String> completedActivityIds = const [],
     List<String> skippedActivityIds = const [],
+    String? currentPoiId,
+    String? remainingFrom,
+    bool includeCurrentStop = false,
   }) async {
     replanKeys.add(key);
     return const PlanningResult(

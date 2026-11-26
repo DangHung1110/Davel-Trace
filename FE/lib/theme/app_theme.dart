@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  static const primary = Color(0xFF245644);
-  static const primaryDark = Color(0xFF193F33);
-  static const secondary = Color(0xFF865116);
+  static const primary = Color(0xFF155DB0);
+  static const primaryDark = Color(0xFF102E4C);
+  static const secondary = Color(0xFF8C481B);
   static const accent = secondary;
-  static const tertiary = Color(0xFF2E606C);
-  static const canvas = Color(0xFFF7F5ED);
-  static const surface = Color(0xFFFFFEF9);
-  static const surfaceLow = Color(0xFFF0EDE2);
-  static const surfaceHigh = Color(0xFFE3E7DC);
-  static const sand = Color(0xFFDDEBDC);
-  static const ink = Color(0xFF1D2821);
-  static const muted = Color(0xFF4D5B50);
-  static const outline = Color(0xFFD4DBCF);
-  static const success = primary;
+  static const tertiary = Color(0xFF296473);
+  static const canvas = Color(0xFFF3F7FB);
+  static const surface = Color(0xFFFFFFFF);
+  static const surfaceLow = Color(0xFFE9F1F9);
+  static const surfaceHigh = Color(0xFFDDE8F2);
+  static const sand = Color(0xFFDCEBFD);
+  static const ink = Color(0xFF102741);
+  static const muted = Color(0xFF425B74);
+  static const outline = Color(0xFFCDDEED);
+  static const success = Color(0xFF17654D);
   static const warning = secondary;
-  static const error = Color(0xFFBA1A1A);
+  static const error = Color(0xFFAA2730);
 
   // Compatibility aliases used by the existing map and demo data.
   static const navy = ink;
@@ -65,14 +65,14 @@ abstract final class AppTheme {
       textTheme: const TextTheme(
         displaySmall: TextStyle(
           color: AppColors.ink,
-          fontSize: 34,
+          fontSize: 36,
           height: 1.14,
           fontWeight: FontWeight.w600,
           letterSpacing: -.9,
         ),
         headlineMedium: TextStyle(
           color: AppColors.ink,
-          fontSize: 26,
+          fontSize: 28,
           height: 1.24,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.6,
@@ -131,9 +131,7 @@ abstract final class AppTheme {
         elevation: 0,
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.sand,
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        indicatorShape: const StadiumBorder(),
         iconTheme: WidgetStateProperty.resolveWith(
           (states) => IconThemeData(
             color: states.contains(WidgetState.selected)

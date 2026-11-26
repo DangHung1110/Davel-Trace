@@ -16,6 +16,9 @@ abstract interface class ItineraryLifecycleRepository {
     String key, {
     List<String> completedActivityIds,
     List<String> skippedActivityIds,
+    String? currentPoiId,
+    String? remainingFrom,
+    bool includeCurrentStop,
   });
 }
 
@@ -154,6 +157,9 @@ class HttpPlanningRepository
     String key, {
     List<String> completedActivityIds = const [],
     List<String> skippedActivityIds = const [],
+    String? currentPoiId,
+    String? remainingFrom,
+    bool includeCurrentStop = false,
   }) async {
     final json = Map<String, dynamic>.from(
       await _api.post(
@@ -163,6 +169,9 @@ class HttpPlanningRepository
           'source_version_id': sourceVersionId,
           'completed_activity_ids': completedActivityIds,
           'skipped_activity_ids': skippedActivityIds,
+          'current_poi_id': ?currentPoiId,
+          'remaining_from': ?remainingFrom,
+          if (includeCurrentStop) 'include_current_stop': true,
           'target_count': 5,
         },
       ) as Map,

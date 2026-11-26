@@ -131,7 +131,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                     children: [
                       Text(
-                        'Ngân sách chuyến đi',
+                        'Ngân sách của bạn',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 4),

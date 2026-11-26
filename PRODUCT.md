@@ -8,7 +8,7 @@ adaptive
 
 ## Product Purpose
 
-Davel Trace helps Vietnamese travelers plan and manage a trip around Đà Nẵng. Users can create and edit day plans, generate and accept an itinerary, see the map or their live location, monitor spending, and manage their trip preferences and account.
+Davel Trace helps Vietnamese travelers plan trips around Đà Nẵng on their own or with family and friends. A group has one confirmed itinerary. Members contribute suggestions, discuss alternatives and split shared expenses, and their leader confirms the schedule.
 
 ## Operating Context
 
@@ -17,6 +17,10 @@ The product is a Flutter mobile app. The laptop demo runs Flutter debug in a pho
 ## Capabilities and Constraints
 
 Keep the four destinations and the existing trip, map, expense, profile and account flows. The optional AI interpretation step extracts the request and the backend resolves places. Hotels and areas come from the catalog. Distinguish saved, offline and demo data. Never hide route quality, map errors, GPS state or authentication recovery.
+
+Group suggestions preserve who submitted them. Joining a group does not share
+the person's profile or location. A confirmed catalog location can be used as
+the shared starting point when the leader replans.
 
 ## Brand Commitments
 

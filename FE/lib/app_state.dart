@@ -653,7 +653,7 @@ class AppState extends ChangeNotifier {
     mapPlaces.addEntries(places.where((entry) => entry.value != null));
   }
 
-  Future<void> requestPlan() async {
+  Future<void> requestPlan({bool group = false}) async {
     final trip = activeTrip;
     final profile = activeProfile;
     if (trip == null || profile == null) return;
@@ -693,10 +693,13 @@ class AppState extends ChangeNotifier {
         },
         'target_count': 5,
         'constraint_overrides': overrides,
-        '_idempotency_key': _planningKeys.putIfAbsent(
-          '${trip.id}:${trip.version}:$overrides',
-          () => 'plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}',
-        ),
+        '_idempotency_key': group
+            ? 'group-plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}'
+            : _planningKeys.putIfAbsent(
+                '${trip.id}:${trip.version}:$overrides',
+                () =>
+                    'plan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}',
+              ),
       });
       if (_disposed || revision != _planningRevision) return;
       if (result.status == 'failed') {
@@ -716,9 +719,9 @@ class AppState extends ChangeNotifier {
       acceptance = null;
       currentPlanningRequestId = result.requestId;
       demoSource = DemoSource.live;
-      plannerMessage = result.shortageReason == null
-          ? 'FastAPI đã trả ${result.items.length} phương án qua cổng cứng.'
-          : 'FastAPI trả ${result.items.length} phương án; không thêm phương án kém chỉ để đủ số lượng.';
+      plannerMessage = group
+          ? 'Đã gửi ${result.items.length} phương án để cả nhóm xem và góp ý.'
+          : 'Đã tìm được ${result.items.length} lịch gợi ý.';
       _confirmedPlanningOverrides = const {};
     } catch (error) {
       if (_disposed || revision != _planningRevision) return;
@@ -728,7 +731,7 @@ class AppState extends ChangeNotifier {
       if (planAlternatives.isEmpty) {
         if (isDemoManagement) planAlternatives = PlanAlternative.seeded();
       }
-      plannerMessage = 'Không nối được planner; giữ dữ liệu demo và không giả lập lưu server.';
+      plannerMessage = 'Chưa tải được lịch gợi ý. Bạn có thể thử lại.';
       errorMessage = _message(error);
     } finally {
       if (!_disposed && revision == _planningRevision) {
@@ -785,6 +788,7 @@ class AppState extends ChangeNotifier {
 
   Future<void> confirmAiProposalAndPlan({
     Map<String, dynamic>? corrections,
+    bool group = false,
   }) async {
     final proposal = aiProposal;
     if (proposal == null) return;
@@ -810,7 +814,7 @@ class AppState extends ChangeNotifier {
     aiProposal = null;
     aiMessage = null;
     notifyListeners();
-    await requestPlan();
+    await requestPlan(group: group);
   }
 
   void skipAiProposal() {
@@ -969,9 +973,18 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  Future<void> requestReplan() async {
+  Future<void> requestReplan({
+    String? sourceVersionId,
+    List<String> completedActivityIds = const [],
+    List<String> skippedActivityIds = const [],
+    String? currentPoiId,
+    String? remainingFrom,
+    bool includeCurrentStop = false,
+  }) async {
     final trip = activeTrip;
-    final source = itineraryVersions.where((item) => item.active).firstOrNull;
+    final source =
+        sourceVersionId ??
+        itineraryVersions.where((item) => item.active).firstOrNull?.id;
     if (trip == null ||
         planningRepository is! ItineraryLifecycleRepository ||
         source == null) {
@@ -983,11 +996,22 @@ class AppState extends ChangeNotifier {
     errorMessage = null;
     notifyListeners();
     try {
-      final key = _replanKeys.putIfAbsent(
-        '${source.id}:${trip.version}',
-        () => 'replan-${trip.id}-${source.id}-${trip.version}',
+      final key = sourceVersionId != null
+          ? 'group-replan-${trip.id}-${DateTime.now().microsecondsSinceEpoch}'
+          : _replanKeys.putIfAbsent(
+              '$source:${trip.version}',
+              () => 'replan-${trip.id}-$source-${trip.version}',
+            );
+      final result = await lifecycle.replan(
+        trip.id,
+        source,
+        key,
+        completedActivityIds: completedActivityIds,
+        skippedActivityIds: skippedActivityIds,
+        currentPoiId: currentPoiId,
+        remainingFrom: remainingFrom,
+        includeCurrentStop: includeCurrentStop,
       );
-      final result = await lifecycle.replan(trip.id, source.id, key);
       if (_disposed || revision != _planningRevision) return;
       if (result.status == 'failed') {
         throw ApiException(
