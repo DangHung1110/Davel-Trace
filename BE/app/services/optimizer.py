@@ -21,8 +21,8 @@ Objective terms besides the score sum and the q_ij edge bonuses (T030):
 - Category diversity: a distinct-category bonus plus a penalty on every visit beyond
   `CATEGORY_SOFT_CAP` of one category. Both scale with the TOP POI SCORE, so the term
   means the same for every profile (savings ~0.5, balanced ~5).
-- A2: every pair of restaurants closer than `RESTAURANT_PAIR_MAX_GAP` minutes (START
-  to START) is penalized regardless of meal slots, so 10:49 / 11:00 is caught here.
+- A2: every pair of visited restaurants is penalized, whatever their hours (see the
+  term: the time-distance version was never what the model charged).
 - Dynamic state (trip_ctx): a per-band multiplier decides which hours suit a stop.
 `STOP_OVERHEAD_MIN` minutes are reserved between stops in the MODEL only, so a day
 cannot be crammed; reported visit end stays `start + visit_min`.
@@ -319,6 +319,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                  state_cost: dict[tuple[str, int], float] | None = None,
                  late_end_min: int | None = None,
                  dup_free: frozenset = frozenset(),
+                 objective: "objective_mod.Spec | None" = None,
                  _closer: int | None = None) -> list[tuple[int, int]]:
     """Deterministic feasible-ish tour used as a CP-SAT solution hint.
 
@@ -491,6 +492,54 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 return unit * float(state_cost.get((poi.poi_id, k), 0.0))
         return 0.0
 
+    # Objective v1: a stop is worth what the objective pays for it there (T3-T9: its leg,
+    # a repeat of its group, the meal it serves, one more pair of restaurants, the pace),
+    # not the legacy first-of-category bonus the walk was written for. Blind to the
+    # riding minutes, the walk gave savings days a seed below zero (legs cost 0.045U a
+    # minute there) and the search spent its budget climbing out of it.
+    used_groups: dict[str, int] = {}
+    eaten: set[str] = set()
+    sights = 0
+    v1_meals = (objective_mod.meal_windows(objective, trip.start_min, trip.end_min)
+                if objective is not None else [])
+
+    def _v1_gain(poi: StubPOI, start: int, leg: int, wait: int) -> float:
+        """T3-T9 of seating `poi` at `start` after the last stop, in U."""
+        spec = objective
+        gain = 0.0
+        last = pois[node_of[previous] - 1] if previous is not None else None
+        if last is not None or trip.origin_id:
+            gain -= objective_mod.arc_cost(spec, leg, last.zone if last else "", poi.zone)
+            if last is not None and poi.group and poi.group == last.group:
+                gain -= spec.coef("gamma") * spec.beta(poi.group)
+        seen = used_groups.get(poi.group, 0) if poi.group else 0
+        if seen:
+            rho = list(spec.w.get("rho") or [0.35, 0.7, 1.0])
+            gain -= spec.beta(poi.group) * rho[min(seen - 1, len(rho) - 1)] * spec.coef("repeat_scale")
+        if poi.restaurant:
+            bonus = spec.w.get("meal_bonus") or {}
+            if not poi.booking and wait <= HINT_READY_MIN:
+                # The meal bonus only for a table ready now: counted after hours of
+                # waiting, it made the walk skip a whole afternoon to sit at dinner.
+                gain += spec.coef("meal_scale") * sum(
+                    float(bonus.get(meal, 0.0)) for meal, lo, hi in v1_meals
+                    if meal not in eaten and lo <= start < hi)
+            gain -= len(restaurant_starts) * spec.meal_crowd()  # A2: one pair per earlier meal
+        for attr, kind in (("site", "same_site"), ("substitute", "market"), ("dish", "dish")):
+            if getattr(poi, attr) and (attr, getattr(poi, attr)) in seated_keys:
+                gain -= spec.duplicate(kind)
+        k0s = objective_mod.sight_k0(spec, trip.start_min, trip.end_min)
+        if k0s is not None:
+            windows = objective_mod.main_meals(spec, trip.start_min, trip.end_min)
+            counted = sights + max(0, len(restaurant_starts) - windows)
+            after = counted + (1 if not poi.restaurant or len(restaurant_starts) >= windows else 0)
+            if after > k0s and after > counted:
+                kappa = list(spec.w.get("kappa") or [0.3, 0.6, 1.0])
+                gain -= kappa[min(after - k0s - 1, len(kappa) - 1)] * spec.coef("pace_scale")
+        return gain
+
+    seated_keys: set[tuple[str, str]] = set()
+
     while True:
         if max_stops is not None and len(hint) >= int(max_stops):
             break
@@ -565,7 +614,9 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 continue
             wait = start - clock
             value = poi.score - _band_cost(poi, start)
-            if poi.category and used_cats.get(poi.category, 0) == 0:
+            if objective is not None:
+                value += unit * _v1_gain(poi, start, leg, wait)
+            elif poi.category and used_cats.get(poi.category, 0) == 0:
                 value += presence_value  # reward a new category (TASK-1)
             if value <= 0 and not required:
                 # Worth nothing to the objective: an open-air stop in the rain, or a
@@ -603,6 +654,8 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         spent += poi.fee
         placed.add(i)
         dup_keys.update(_dup_keys(poi))
+        seated_keys.update((attr, getattr(poi, attr)) for attr in ("site", "substitute", "dish")
+                           if getattr(poi, attr))
         must_left.discard(i)
         if i == _closer:
             closer_left = False
@@ -620,6 +673,11 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             used_slots.add(slot)
         if poi.restaurant:
             restaurant_starts.append(start)
+            eaten.update(meal for meal, lo, hi in v1_meals if lo <= start < hi)
+        else:
+            sights += 1
+        if poi.group:
+            used_groups[poi.group] = used_groups.get(poi.group, 0) + 1
         if poi.category == "cafe":
             cafe_starts.append(start)
         if poi.category:
@@ -649,7 +707,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     precedence=precedence, max_fee=max_fee, required_any=required_any,
                     lunch_required=lunch_required, dinner_required=dinner_required,
                     state_bands=state_bands, state_cost=state_cost, late_end_min=late_end_min,
-                    dup_free=dup_free,
+                    dup_free=dup_free, objective=objective,
                     _closer=node)
                 if again and _ends_late(again):
                     return again
@@ -721,8 +779,47 @@ def _ending_late(poi: StubPOI, start: int, late_end_min: int, trip: StubTrip,
     return None
 
 
-def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
-    """Boolvar: node i is visited AND its start lies in [lo, hi)."""
+def _start_spans(windows, dur: int, first: int, last_end: int, literals) -> list:
+    """[(earliest, latest, literal)]: the starts a visit can take inside each opening
+    window, with the literal that puts it there (`visit` for one window, the window's
+    pick for several). Reads the same bounds the model puts on t[i]: the window, the
+    visit length and the day [first, last_end]. An empty span is a window too short
+    for the visit: its literal can never hold."""
+    return [(max(int(lo), first), min(int(hi), last_end) - dur, literal)
+            for (lo, hi), literal in zip(windows, literals)]
+
+
+def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str, spans=None,
+                 offset: int = 0):
+    """Boolvar: node i is visited AND its start (t[i], or a probe `offset` minutes
+    later) lies in [lo, hi).
+
+    `spans` (`_start_spans`): when every opening window of the node starts its visits
+    wholly inside or wholly outside [lo, hi), the hit IS the choice of a window, and
+    no constraint on t[i] is needed. A restaurant open for lunch and for dinner is the
+    usual case: its lunch hit is its lunch window. Reified on t[i], the hit is a pair
+    of time disjunctions the search LP does not see; it then counts every meal bonus
+    and meal-slot limit as free, and on a pool of many restaurants the search could
+    not close that gap inside its budget (the 9 s request of
+    `BE/tools/bench_latency.py`). A window that straddles a border is reified as before.
+    """
+    if spans is not None:
+        inside, straddles = [], False
+        for earliest, latest, literal in spans:
+            first, last = earliest + offset, latest + offset
+            if earliest > latest or last < lo or first >= hi:
+                continue
+            if lo <= first and last < hi:
+                inside.append(literal)
+            else:
+                straddles = True
+                break
+        if not straddles:
+            if len(inside) == 1:
+                return inside[0]
+            hit = m.NewBoolVar(f"{tag}_h_{i}")
+            m.Add(hit == sum(inside))  # windows are exclusive: sum(picks) == visit
+            return hit
     after, before = m.NewBoolVar(f"{tag}_a_{i}"), m.NewBoolVar(f"{tag}_b_{i}")
     hit = m.NewBoolVar(f"{tag}_h_{i}")
     m.Add(t[i] >= lo).OnlyEnforceIf(after)
@@ -810,7 +907,8 @@ def _hint_dup_kinds(spec) -> frozenset:
 
 def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: dict,
                         trip: StubTrip, t: dict, visit: dict, arc: dict, unit: float,
-                        slot_hits: dict, a1_hard: bool, rest_taken, tmax: int):
+                        slot_hits: dict, a1_hard: bool, rest_taken, tmax: int,
+                        spans: dict | None = None):
     """Objective v1 terms T3-T9 (BE/app/services/objective.py), as one linear expression.
 
     Every coefficient is a weight in U times `unit * 1000`, the scale of the value
@@ -875,7 +973,8 @@ def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: di
         weight = float(bonus.get(meal, 0.0)) * meal_scale
         if weight <= 0 or not food:
             continue
-        hits = [_window_hits(m, t, visit, i, lo, hi, f"t5{meal}") for i in food]
+        hits = [_window_hits(m, t, visit, i, lo, hi, f"t5{meal}", (spans or {}).get(i))
+                for i in food]
         z = m.NewBoolVar(f"meal_{meal}")
         m.Add(z <= sum(hits))
         expr += k(weight) * z
@@ -1119,6 +1218,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     t = {i: m.NewIntVar(trip.start_min, tmax, f"t_{i}") for i in range(n + 1)}
     m.Add(t[0] == trip.start_min)
     visit = {}
+    spans = {}  # node -> where its start can lie, per opening window (_window_hits)
     for i in range(1, n + 1):
         visit[i] = m.NewBoolVar(f"visit_{i}")
         m.Add(arc[(i, i)] == 0).OnlyEnforceIf(visit[i])
@@ -1130,6 +1230,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         if len(wins) == 1:
             m.Add(opn[i] <= t[i]).OnlyEnforceIf(visit[i])
             m.Add(t[i] <= cls[i] - dur[i]).OnlyEnforceIf(visit[i])
+            picks = [visit[i]]
         else:
             # Lunch + dinner service: a visit sits inside exactly one window.
             picks = []
@@ -1140,6 +1241,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 picks.append(pick)
             m.Add(sum(picks) == visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
+        spans[i] = _start_spans(wins, dur[i], trip.start_min, tmax, picks)
     if max_fee is not None:
         m.Add(sum(pois[i - 1].fee * visit[i] for i in range(1, n + 1)) <= int(max_fee))
 
@@ -1159,7 +1261,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             continue
         for idx, (lo, hi) in enumerate(MEAL_SLOTS):
             slot_hits.setdefault(idx, []).append(
-                _window_hits(m, t, visit, i, lo, hi, f"a1_{idx}"))
+                _window_hits(m, t, visit, i, lo, hi, f"a1_{idx}", spans[i]))
     a1_hard = objective is None or "A1" in objective.strict
     for hits in slot_hits.values():
         if len(hits) > 1 and a1_hard:
@@ -1180,7 +1282,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     if lunch_required or rest_after_lunch is not None:
         lunch_hits = [
             (i, _window_hits(m, t, visit, i, LUNCH_REQUIRED[0],
-                             LUNCH_REQUIRED[1], "lunch"))
+                             LUNCH_REQUIRED[1], "lunch", spans[i]))
             for i in range(1, n + 1) if pois[i - 1].restaurant and not pois[i - 1].booking
         ] + list(booking_meal.get(0, {}).items())   # a class over lunch is the lunch
         # An all-day place feeds its visitors (soft_rules.ALL_DAY_MIN): a stay that
@@ -1202,7 +1304,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(sum(hit for _i, hit in lunch_hits) + sum(on_site) >= 1)
     if dinner_required:
         dinner_hits = [_window_hits(m, t, visit, i, DINNER_REQUIRED[0],
-                                    DINNER_REQUIRED[1], "dinner")
+                                    DINNER_REQUIRED[1], "dinner", spans[i])
                        for i in range(1, n + 1) if pois[i - 1].restaurant]
         if not dinner_hits:
             return {"status": "infeasible",
@@ -1247,10 +1349,10 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         if len(cafes) > cap:
             m.Add(sum(visit[i] for i in cafes) <= cap)
         if cap == CAFE_MAX_CAP and len(cafes) > 1:
-            morning = [_window_hits(m, t, visit, i, 0, CAFE_MORNING_END, "cam")
+            morning = [_window_hits(m, t, visit, i, 0, CAFE_MORNING_END, "cam", spans[i])
                        for i in cafes]
             afternoon = [_window_hits(m, t, visit, i,
-                                      CAFE_AFTERNOON_START + 1, 24 * 60, "caf")
+                                      CAFE_AFTERNOON_START + 1, 24 * 60, "caf", spans[i])
                          for i in cafes]
             m.Add(sum(morning) <= 1)
             m.Add(sum(afternoon) <= 1)
@@ -1333,7 +1435,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     "reason": f"thieu loai {sorted(cats)} trong candidate",
                     "elapsed_s": 0.0, "itinerary": None}
         span = req.get("start_between")
-        m.Add(sum(_window_hits(m, t, visit, i, int(span[0]), int(span[1]), f"wish{position}")
+        m.Add(sum(_window_hits(m, t, visit, i, int(span[0]), int(span[1]), f"wish{position}",
+                               spans[i])
                   if span else visit[i] for i in nodes) >= need)
     # Locked rest window: a visited stop ends before it or starts after it.
     if blocked_window:
@@ -1447,39 +1550,27 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 if i != j and pois[j - 1].category == left:
                     obj -= consec_penalty * arc[(i, j)]
 
-    # TASK-3: A2 by TIME DISTANCE, not slot label. Any two visited
-    # restaurants whose STARTs are < RESTAURANT_PAIR_MAX_GAP apart cost a
-    # full stop's worth of objective (scaled by `unit`), so a 10:49 lunch
-    # and an 11:00 lunch cannot both be paid for by their ratings even
-    # though gate A1 (slot membership) sees only one restaurant.
+    # TASK-3 (A2): what this term has charged since its first version is every PAIR
+    # of visited restaurants, whatever their hours. Its "near" was `earlier OR later`
+    # (t[j] - t[i] < GAP or t[i] - t[j] < GAP), true for any two starts, so a pair was
+    # "close" as soon as both were visited, and a 12:00 lunch + 18:30 dinner paid it
+    # too. The weights of objective v1 (meal_bonus.dinner 1.2 = 0.2 net of this pair)
+    # were set on that behaviour, so it is kept here, written as what it is: the R
+    # restaurants of a day cost R(R-1)/2 pairs. The time-distance rule the docs name
+    # (`objective.features`, `soft_rules.plan_penalties` A2) is a separate decision.
+    # As 5 booleans and 4 time disjunctions per pair (45 pairs on a pool of 10
+    # restaurants) the search LP saw none of it: it priced every pair at zero and
+    # could not close the gap inside its budget. A staircase over the count is exact
+    # and in the LP (the k-th extra restaurant costs k pairs, cheapest first).
     restaurants = [i for i in range(1, n + 1) if pois[i - 1].restaurant]
     if len(restaurants) > 1:
         pair_penalty = int(unit * (A2_PAIR_WEIGHT if objective is None
                                    else objective.meal_crowd()) * 1000)
-        for pos, i in enumerate(restaurants):
-            for j in restaurants[pos + 1:]:
-                both = m.NewBoolVar(f"a2b_{i}_{j}")
-                m.AddBoolAnd([visit[i], visit[j]]).OnlyEnforceIf(both)
-                m.AddBoolOr([visit[i].Not(), visit[j].Not()]).OnlyEnforceIf(
-                    both.Not())
-                earlier = m.NewBoolVar(f"a2l_{i}_{j}")   # t[j] - t[i] < GAP
-                m.Add(t[j] - t[i] <= RESTAURANT_PAIR_MAX_GAP - 1).OnlyEnforceIf(
-                    earlier)
-                m.Add(t[j] - t[i] >= RESTAURANT_PAIR_MAX_GAP).OnlyEnforceIf(
-                    earlier.Not())
-                later = m.NewBoolVar(f"a2g_{i}_{j}")     # t[i] - t[j] < GAP
-                m.Add(t[i] - t[j] <= RESTAURANT_PAIR_MAX_GAP - 1).OnlyEnforceIf(
-                    later)
-                m.Add(t[i] - t[j] >= RESTAURANT_PAIR_MAX_GAP).OnlyEnforceIf(
-                    later.Not())
-                near = m.NewBoolVar(f"a2n_{i}_{j}")
-                m.AddBoolOr([earlier, later]).OnlyEnforceIf(near)
-                m.AddBoolAnd([earlier.Not(), later.Not()]).OnlyEnforceIf(
-                    near.Not())
-                close = m.NewBoolVar(f"a2c_{i}_{j}")
-                m.AddBoolAnd([both, near]).OnlyEnforceIf(close)
-                m.AddBoolOr([both.Not(), near.Not()]).OnlyEnforceIf(close.Not())
-                obj -= pair_penalty * close
+        if pair_penalty:
+            extra = [m.NewBoolVar(f"a2_{k}") for k in range(1, len(restaurants))]
+            m.Add(sum(extra) >= sum(visit[i] for i in restaurants) - 1)
+            for k, step in enumerate(extra, start=1):
+                obj -= pair_penalty * k * step
     # DYNAMIC STATE (trip_ctx): soft, time-banded preference. A stop's state
     # multiplier (satiety / fatigue / heat / dip / evening) is evaluated at
     # the midpoint of each disjoint band; the model then decides WHICH band
@@ -1493,7 +1584,8 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         band_unit = int(unit * (STATE_WEIGHT if objective is None
                                 else objective.coef("w_state")) * 1000)
         probes = []
-        for k, frac in enumerate(((1, 4), (3, 4))):
+        fractions = ((1, 4), (3, 4))
+        for k, frac in enumerate(fractions):
             probe = {}
             for i in range(1, n + 1):
                 probe[i] = m.NewIntVar(trip.start_min, tmax + 24 * 60,
@@ -1515,13 +1607,14 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                              * float(cost or 0.0) / len(probes))
                 if not delta:
                     continue
-                for probe in probes:
+                for probe, frac in zip(probes, fractions):
                     hit = _window_hits(m, probe, visit, i, int(lo), int(hi),
-                                       f"state_{k}")
+                                       f"state_{k}", spans[i],
+                                       offset=dur[i] * frac[0] // frac[1])
                     obj += delta * hit
     if objective is not None:
         obj += _objective_v1_terms(m, objective, pois, ids, travel, trip, t, visit, arc,
-                                   unit, slot_hits, a1_hard, rest_taken, tmax)
+                                   unit, slot_hits, a1_hard, rest_taken, tmax, spans)
     m.Maximize(obj)
 
     # Deterministic initial solution (see _greedy_hint): keeps the harness's
@@ -1543,7 +1636,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                         lunch_required=lunch_required, dinner_required=dinner_required,
                         state_bands=state_bands, state_cost=state_cost,
                         late_end_min=late_end_min,
-                        dup_free=_hint_dup_kinds(objective))
+                        dup_free=_hint_dup_kinds(objective), objective=objective)
     hint_solver = None
     if hint:
         previous = 0

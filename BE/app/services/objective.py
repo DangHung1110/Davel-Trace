@@ -6,7 +6,7 @@ traveller said (must_visit, avoid, budget, return time, named activities, the
 lunch of a day that spans it, `strict_rules`). Every other rule of thumb is a
 term of one objective, so a plan may break it when that is worth the cost:
 
-    J =  sum_i v_i x_i                          T1 value: the ranker score
+    J =  sum_i v_i x_i                          T1 value: one function (value.py)
        + w_state * S - w_rain * W               T2 time-of-day state and rain (trip_ctx bands)
        - sum_g beta_g sum_{k>=2} rho_k y_gk     T3 repeats inside a diversity group
        - gamma sum beta_g a_ij [same group]     T4 two stops of one group back to back
@@ -257,6 +257,11 @@ class Spec:
     def coef(self, name: str) -> float:
         return float(self.w.get(name, 0.0))
 
+    @property
+    def value(self) -> dict:
+        """T1's weights for `value.score` (this profile's, `build_spec`)."""
+        return self.w.get("value") or {}
+
     def duplicate(self, kind: str) -> float:
         """T11 weight of one extra stop of `kind` (same_site / umbrella / market / dish)."""
         if kind == "market" and self.food_tour:
@@ -279,9 +284,16 @@ class Spec:
 
 
 def search_budget(deterministic_time: float, spec: "Spec | None") -> float:
-    """The CP-SAT work budget of a solve under this objective. v1 has more terms than
-    legacy: at the legacy 5 units a thrifty day ended 32% below its optimum (three
-    restaurants, two back to back); 8 units reached 93% (`search_scale`, 25/11)."""
+    """The CP-SAT work budget of a solve under this objective (`search_scale`).
+
+    25/11: at the legacy 5 units a thrifty day ended 32% below its optimum (three
+    restaurants, two back to back) and 8 units reached 93%, so v1 got 1.6. The search
+    was slow for reasons of the model, not of the objective: the A2 restaurant pairs
+    and the meal/slot window tests were time disjunctions its LP did not see, and the
+    greedy seed did not know v1. With those fixed (26/11, optimizer.py) 1.2 gives a
+    better plan than 1.6 did before on average (222 audit solves: +3.0%, 26 better,
+    19 worse) and every one-day bench_latency request ends under 8 s; about a third
+    of the days never prove optimal, so they always spend the whole budget."""
     if spec is None:
         return float(deterministic_time)
     return float(deterministic_time) * float(spec.w.get("search_scale", 1.0))
@@ -311,17 +323,30 @@ def comfortable_stops(trip: dict, limits: dict | None, w: dict, pace: int) -> in
     return max(1, round(templates._day_hours(trip) * rate))
 
 
+def value_weights(w: dict | None = None, profile: str | None = None) -> dict:
+    """T1 weights (`value.py`) of `profile`: the shared `value` block with the profile's
+    `value` keys over it. A weights file with no `value` block (one that carries only the
+    J coefficients) keeps v1's, so it never plans with every POI worth zero."""
+    w = w if w is not None else weights()
+    src = w if "value" in w else weights("v1")
+    over = ((src.get("profiles") or {}).get(profile or "") or {}).get("value") or {}
+    return {**(src.get("value") or {}), **over}
+
+
 def build_spec(trip: dict | None, limits: dict | None = None,
                w: dict | None = None, profile: str | None = None) -> Spec:
     """The solve's spec. `profile` (savings / balanced / experience) applies that
     profile's overrides from the weights file: the three plans of a request are
-    the same objective under three weight sets."""
+    the same objective under three weight sets, T1's value weights (`w["value"]`,
+    `value_weights`) included."""
     from BE.app.services import templates
     from BE.common import to_min
 
     trip = trip or {}
     w = dict(w or weights())
+    value = value_weights(w, profile)
     w.update((w.get("profiles") or {}).get(profile or "", {}))
+    w["value"] = value
     pace = templates._profile_pace(trip) or 2
     start = to_min(trip.get("start_time", "07:00"))
     return Spec(w=w, k0=comfortable_stops(trip, limits, w, pace), pace=pace,
