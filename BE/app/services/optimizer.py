@@ -1508,7 +1508,11 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 if mult is None and cost is None:
                     continue
                 delta = int(band_unit * (float(1.0 if mult is None else mult) - 1.0) / len(probes))
-                delta -= int(unit * 1000 * float(cost or 0.0) / len(probes))
+                # The rain cost has a weight of its own (objective `w_rain`, 1.0 = as
+                # before), so a learned weights file can set it; the greedy seed keeps
+                # charging the full cost (a seed only has to point the search).
+                delta -= int(unit * 1000 * (1.0 if objective is None else objective.rain_weight())
+                             * float(cost or 0.0) / len(probes))
                 if not delta:
                     continue
                 for probe in probes:

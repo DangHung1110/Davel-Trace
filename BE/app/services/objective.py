@@ -7,11 +7,13 @@ lunch of a day that spans it, `strict_rules`). Every other rule of thumb is a
 term of one objective, so a plan may break it when that is worth the cost:
 
     J =  sum_i v_i x_i                          T1 value: the ranker score
-       + w_state * S                            T2 time-of-day state (trip_ctx bands)
+       + w_state * S - w_rain * W               T2 time-of-day state and rain (trip_ctx bands)
        - sum_g beta_g sum_{k>=2} rho_k y_gk     T3 repeats inside a diversity group
        - gamma sum beta_g a_ij [same group]     T4 two stops of one group back to back
        + sum_s B_s z_s                          T5 a meal in each meal window of the day
-       - A * (extra meals in a slot + meal pairs under 2.5 h)          T6
+       - A * (extra meals in a slot + every pair of restaurants)       T6 (A2: the
+                                                solver's "under 2.5 h" test is always
+                                                true, so pairs further apart pay too)
        + R(pace) * r                            T7 the siesta right after lunch
        - sum_{k>K0} kappa_k s_k                 T8 stops beyond the comfortable count
        - sum c_ij a_ij                          T9 riding minutes, long legs, zone changes
@@ -75,9 +77,12 @@ STRICTABLE = rules.TASTE
 
 FOOD_TOUR_WORDS = ("food tour", "an uong", "am thuc", "an vat", "an het", "tour an")
 
-# Order of the learned coefficients (`features` keys = weight names in the JSON).
-FEATURES = ("value", "state", "repeat", "adjacent", "meal", "meal_crowd", "rest",
-            "pace", "ride", "long_leg", "zone", "edge",
+# The terms of J that `features` reads off a finished day (the learner's columns).
+# `rain` (T2's rain cost) and `meal_far` (restaurant pairs 2.5 h or more apart, which
+# the solver's A2 also charges) are their own columns so a learner can tell them from
+# `state` and `meal_crowd`.
+FEATURES = ("value", "state", "rain", "repeat", "adjacent", "meal", "meal_crowd",
+            "meal_far", "rest", "pace", "ride", "long_leg", "zone", "edge",
             "same_site", "umbrella", "market", "dish")
 
 
@@ -261,6 +266,10 @@ class Spec:
     def meal_crowd(self) -> float:
         return self.coef("meal_crowd_food_tour" if self.food_tour else "meal_crowd")
 
+    def rain_weight(self) -> float:
+        """T2's rain cost weight; 1.0 (the solver before 26/11) when a file has none."""
+        return float(self.w.get("w_rain", 1.0))
+
     def rest_bonus(self, scaled: bool = True) -> float:
         base = float((self.w.get("rest_bonus") or {}).get(str(self.pace), 0.0))
         return base * (self.coef("rest_scale") if scaled else 1.0)
@@ -391,21 +400,89 @@ def pace_cost(spec: Spec, stops: int, scaled: bool = True, k0: int | None = None
     return total * (spec.coef("pace_scale") if scaled else 1.0)
 
 
+def shown_acts(activities: list[dict]) -> list[dict]:
+    """A plan's activities -> the input of `features`: [{poi_id, start (min)}] in
+    visiting order, at the times the plan shows (HH:MM strings or minutes)."""
+    from BE.common import to_min
+
+    out = []
+    for act in activities or []:
+        if not act.get("poi_id"):
+            continue
+        start = act.get("start")
+        out.append({"poi_id": act["poi_id"],
+                    "start": int(start) if isinstance(start, (int, float)) else to_min(start)})
+    return out
+
+
+def state_terms(acts: list[dict], stubs: dict, bands: list | None,
+                scores: dict | None = None, costs: dict | None = None) -> tuple[float, float]:
+    """T2 of a finished day, read from its times the way CP-SAT scores it: a stop is
+    probed at its visit quartiles (start + d//4 and start + 3d//4, d = the stop's
+    visit minutes), and a probe inside band k adds half of (multiplier - 1) to the
+    state and half of the band's rain cost to the rain (`optimizer.optimize`,
+    DYNAMIC STATE). Returns (state, rain) in U, before w_state and w_rain."""
+    state = rain = 0.0
+    for act in acts:
+        pid = act["poi_id"]
+        dur = int(stubs[pid].visit_min)
+        for num, den in ((1, 4), (3, 4)):
+            probe = int(act["start"]) + dur * num // den
+            for k, (lo, hi) in enumerate(bands or []):
+                if not lo <= probe < hi:
+                    continue
+                mult = (scores or {}).get((pid, k))
+                if mult is not None:
+                    state += (float(mult) - 1.0) / 2
+                rain += float((costs or {}).get((pid, k)) or 0.0) / 2
+    return state, rain
+
+
+def rest_taken(acts: list[dict], stubs: dict, spec: Spec, rest_minutes: int | None) -> bool:
+    """T7 of a finished day, read from its times like the solver's soft siesta: one
+    lunch (a restaurant starting 11:00-13:00, or a booked class over the lunch slot)
+    and no stop inside the `rest_minutes` after it ends. A siesta the traveller made
+    strict is a constraint, not a bonus, so it earns nothing here."""
+    from BE.app.services.soft_rules import LUNCH_REQUIRED, MEAL_SLOTS
+
+    if rest_minutes is None or "REST_FOLLOWS_LUNCH" in spec.strict:
+        return False
+    spans = [(int(a["start"]), int(a["start"]) + int(stubs[a["poi_id"]].visit_min),
+              stubs[a["poi_id"]]) for a in acts]
+    ends = {end for start, end, stub in spans
+            if (stub.booking and start < MEAL_SLOTS[0][1] and end > MEAL_SLOTS[0][0])
+            or (not stub.booking and stub.restaurant
+                and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1])}
+    if len(ends) != 1:
+        return False
+    rest_start = ends.pop()
+    rest_end = rest_start + int(rest_minutes)
+    return all(end <= rest_start or start >= rest_end for start, end, _stub in spans)
+
+
 def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
              start_min: int, end_min: int, origin_id: str | None = None,
-             edge_scores: dict | None = None, state: dict | None = None,
-             rest_taken: bool | None = None) -> dict:
-    """The terms of J for a finished day, in U (before the 11 top-level weights).
+             edge_scores: dict | None = None, bands: list | None = None,
+             state_scores: dict | None = None, state_costs: dict | None = None,
+             rest_minutes: int | None = None) -> dict:
+    """The terms of J for a finished day, in U (before the top-level weights), read
+    off the day itself: its stops in order and the times it shows. Nothing is taken
+    from the solve that made it, so the same call describes the solver's raw day and
+    the day a traveller (or a judge) sees after `profiles._polished` re-timed it.
 
-    `acts`: ordered [{poi_id, start (min)}]; `stubs`: poi_id -> StubPOI (score, group,
-    zone, restaurant, visit_min); `travel`: (a, b) -> minutes. J in U is
-    value + w_state*state - repeat - gamma*adjacent + meal_scale*meal
-    - A*meal_crowd + rest - pace - tau*ride - tau_long*long_leg - zeta*zone
-    + w_edge*edge, which is what `objective_value` returns.
+    `acts`: ordered [{poi_id, start (min)}] (`shown_acts` reads a plan); `stubs`:
+    poi_id -> StubPOI of the solve's pool (score, group, zone, restaurant, booking,
+    visit_min); `travel`: (a, b) -> minutes; `bands`, `state_scores`, `state_costs`:
+    the solve's time bands with their per-(poi, band) multipliers and rain costs
+    (trip_ctx); `rest_minutes`: the siesta of the day's limits (None = no T7).
+    `objective_value` turns the result into J in U: on the solver's own times it is
+    the value CP-SAT maximised, up to rounding (test_objective_features).
     """
     from BE.app.services.soft_rules import MEAL_SLOTS, RESTAURANT_PAIR_MAX_GAP
 
-    unit = max((s.score for s in stubs.values()), default=1.0) or 1.0
+    unit = max((s.score for s in stubs.values()), default=1.0)
+    if unit <= 0:
+        unit = 1.0
     order = [a["poi_id"] for a in acts]
     starts = {a["poi_id"]: int(a["start"]) for a in acts}
     f = {name: 0.0 for name in FEATURES}
@@ -420,23 +497,29 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     f["adjacent"] = sum(spec.beta(stubs[a].group) for a, b in zip(order, order[1:])
                         if stubs[a].group and stubs[a].group == stubs[b].group)
     # T5, T6
-    rest_ids = [p for p in order if stubs[p].restaurant and not stubs[p].booking]
+    food = [p for p in order if stubs[p].restaurant and not stubs[p].booking]
     bonus = spec.w.get("meal_bonus") or {}
     for meal, lo, hi in meal_windows(spec, start_min, end_min):
-        if any(lo <= starts[p] < hi for p in rest_ids):
+        if any(lo <= starts[p] < hi for p in food):
             f["meal"] += float(bonus.get(meal, 0.0))
-    crowd = 0
     if "A1" not in spec.strict:
+        # A booked class is the meal of every slot it overlaps (optimizer `booking_meal`).
         for lo, hi in MEAL_SLOTS:
-            hits = sum(1 for p in rest_ids if lo <= starts[p] < hi)
-            crowd += max(0, hits - 1)
-    for k, a in enumerate(rest_ids):
-        for b in rest_ids[k + 1:]:
-            if abs(starts[a] - starts[b]) < RESTAURANT_PAIR_MAX_GAP:
-                crowd += 1
-    f["meal_crowd"] = float(crowd)
+            hits = sum(1 for p in food if lo <= starts[p] < hi)
+            hits += sum(1 for p in order if stubs[p].booking
+                        and starts[p] < hi and starts[p] + stubs[p].visit_min > lo)
+            f["meal_crowd"] += max(0, hits - 1)
+    # The solver's A2 charges EVERY pair of restaurants: its "starts under 2.5 h
+    # apart" test is `earlier OR later`, true for any two times. Pairs under 2.5 h
+    # stay in `meal_crowd` (the doc's T6), the others go to `meal_far` at the same
+    # weight, so J matches the solver and a learner sees the two kinds apart.
+    eaten = [p for p in order if stubs[p].restaurant]
+    for k, a in enumerate(eaten):
+        for b in eaten[k + 1:]:
+            near = abs(starts[a] - starts[b]) < RESTAURANT_PAIR_MAX_GAP
+            f["meal_crowd" if near else "meal_far"] += 1.0
     # T7
-    if rest_taken:
+    if rest_taken(acts, stubs, spec, rest_minutes):
         f["rest"] = spec.rest_bonus(scaled=False)
     # T8
     meals = sum(1 for p in order if stubs[p].restaurant)
@@ -457,7 +540,8 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     # T10 (q * 100 in the model, the value at sco * 1000)
     for a, b in zip(order, order[1:]):
         f["edge"] += float((edge_scores or {}).get((a, b), 0.0)) / 10.0 / unit
-    f["state"] = float((state or {}).get("value", 0.0))
+    # T2
+    f["state"], f["rain"] = state_terms(acts, stubs, bands, state_scores, state_costs)
     # T11
     f.update(duplicate_counts([stubs[p] for p in order]))
     return f
@@ -465,9 +549,11 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
 
 def objective_value(f: dict, spec: Spec) -> float:
     """J in U from `features` and the spec's weights."""
-    return (f["value"] + spec.coef("w_state") * f["state"] - f["repeat"] * spec.coef("repeat_scale")
+    return (f["value"] + spec.coef("w_state") * f["state"] - spec.rain_weight() * f["rain"]
+            - f["repeat"] * spec.coef("repeat_scale")
             - spec.coef("gamma") * f["adjacent"] + spec.coef("meal_scale") * f["meal"]
-            - spec.meal_crowd() * f["meal_crowd"] + f["rest"] * spec.coef("rest_scale")
+            - spec.meal_crowd() * (f["meal_crowd"] + f["meal_far"])
+            + f["rest"] * spec.coef("rest_scale")
             - f["pace"] * spec.coef("pace_scale") - spec.coef("tau") * f["ride"]
             - spec.coef("tau_long") * f["long_leg"] - spec.coef("zeta") * f["zone"]
             + spec.coef("w_edge") * f["edge"]
