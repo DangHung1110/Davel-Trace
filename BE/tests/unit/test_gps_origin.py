@@ -76,6 +76,18 @@ class TestLocate(unittest.TestCase):
         self.assertEqual([a.poi_id for a in start.anchors], ["market", "cafe", "hotel"])
         self.assertEqual(len(start.anchors), gps_origin.ANCHORS)
 
+    def test_a_fix_cannot_borrow_an_anchor_on_the_other_side_of_a_gateway(self):
+        summit = {**BY_ID["market"], "transfer": {"gateway": "cable", "board_min": 10}}
+        places = {**BY_ID, "market": summit}
+        on_top, _ = gps_origin.locate(*north_of(MARKET, 600), places, DENSE)
+        self.assertEqual([a.poi_id for a in on_top.anchors], ["market"])
+        info = gps_origin.origin_view(on_top, places)["transfer"]
+        self.assertEqual(info["board_min"], 10 + int(on_top.nearest.access_min + 0.5))
+        self.assertEqual(summit["transfer"]["board_min"], 10)
+
+        on_road, _ = gps_origin.locate(*north_of(CAFE, 600), places, DENSE)
+        self.assertEqual([a.poi_id for a in on_road.anchors], ["cafe", "hotel"])
+
     def test_the_ride_is_road_km_at_motorbike_speed(self):
         start, _ = self.locate(north_of(MARKET, 600))
         nearest = start.nearest

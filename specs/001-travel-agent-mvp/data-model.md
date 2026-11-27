@@ -26,7 +26,7 @@ All entities Pydantic-validated (see `contracts/api.md`).
 
 ### RouteSegment
 - Fields: `from_id`, `to_id`, `mode`, `km`, `minutes`, `source` (osrm|cache), `confidence`, `at`, `transfers[]?`.
-- `mode`: `motorbike`, or the parts of a leg that leaves or enters a place a motorbike cannot reach, in travel order, joined by `+` (`motorbike+boat`, `cable_car`, `cable_car+motorbike`, `motorbike+walk`, `walk` between two Bà Nà summit stops). Then `transfers[] = {gateway, name, mode (boat|cable_car|walk), minutes, km}`, already counted in `minutes`/`km` (`specs/025-non-road-legs/spec.md`).
+- `mode`: `motorbike`, or the parts of a leg that leaves or enters a place a motorbike cannot reach, in travel order, joined by `+` (`motorbike+boat`, `cable_car`, `cable_car+motorbike`, `motorbike+walk`, `walk` between two Bà Nà summit stops). Then `transfers[] = {gateway, name, mode (boat|cable_car|walk), minutes, km, runs?}`, already counted in `minutes`/`km`; `runs` = first-last departure of that boat or cable car in the leg's direction ("08:00-16:30" up, "13:00-14:30" back from the island) (`specs/025-non-road-legs/spec.md`).
 - Validation: `minutes` MUST come from matrix cache, never haversine-only for feasibility.
 
 ### Activity

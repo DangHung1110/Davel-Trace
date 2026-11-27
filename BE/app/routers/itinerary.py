@@ -262,6 +262,10 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         gps_report = _gps_report(resume.get("origin"), resume_id, resume_warning,
                                  gps_starts, by_id) or gps_report
     cells = matrix_svc.with_starts(cells, {sid: s.row() for sid, s in gps_starts.items()})
+    # A GPS start borrows its anchor's timetable for the solver and B3. Only
+    # the origin lookup gets these entries; retrieval still sees snapshot stops.
+    for sid, start in gps_starts.items():
+        allowed_by_id[sid] = gps_origin.origin_view(start, by_id)
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
     if trip.get("areas") and not any(p.get("zone") for p in pois):
         # danang-v1 has no zones: say the choice did nothing instead of ignoring it.

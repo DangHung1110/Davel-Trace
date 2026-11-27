@@ -9,7 +9,9 @@ candidate cap for a single day.
   eat the whole trip. A day that cannot be planned on its share retries with all
   that is left (a dear must_visit).
 - must_visit: spread evenly over the days, because a day holds one POI per
-  category; if that fails, all on the first day.
+  category; if that fails, all on the first day. One that no boat or cable car
+  reaches on any day it was tried is left out with the day's warning, and the
+  trip is judged without it (`_dropped_must`).
 - Activities: a day only has to meet the wishes the days before it did not.
 - Tickets: a ticket bought on one day (Sun World, for a summit stop) is not bought
   again on a later day (`paid_access`); a transfer fare (the cano) is paid every day
@@ -176,7 +178,17 @@ def merge_days(plans: list[dict], trip: dict, days: int, check) -> dict:
         "penalty": round(sum((p.get("soft_penalties") or {}).get("penalty") or 0.0 for p in plans), 4),
         "issues": [issue for p in plans for issue in (p.get("soft_penalties") or {}).get("issues") or []]}
 
-    report = check({"activities": acts, "total_cost": merged["total_cost"]}, trip)
+    # A named place a day left out with its reason (no boat or cable car reaches it,
+    # `profiles._gateway_miss`) and no later day visited is not owed by the trip either:
+    # the warning says why, as on a one-day plan.
+    visited = {a["poi_id"] for a in acts}
+    dropped = sorted({m for p in plans for m in p.get("_dropped_must") or []} - visited)
+    judged = trip if not dropped else {
+        **trip, "must_visit": [m for m in trip.get("must_visit") or [] if m not in dropped]}
+    merged.pop("_dropped_must", None)
+    if dropped:
+        merged["_dropped_must"] = dropped
+    report = check({"activities": acts, "total_cost": merged["total_cost"]}, judged)
     complete = len(plans) == days and all(stops)
     merged["passed"] = bool(report["passed"]) and complete
     merged["violations"] = list(report["failed"])

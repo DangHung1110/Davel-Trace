@@ -16,8 +16,11 @@ from BE.common import deadline, in_range, paid_access, party_size, plan_cost, to
 from BE.app.services.gate import (
     CHECKS,
     SOFT_CHECKS,
+    b3_legs,
     check_cafe_cap,
+    day_trip,
     rest_rule_violation,
+    split_days,
 )
 from BE.app.services.profile_filter import drop_reason
 from BE.app.services.soft_rules import (
@@ -50,14 +53,9 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
                 out.append(a.get("poi_id"))
         return out
     if gate == "B3":
-        out = []
-        ordered = sorted(acts, key=lambda a: a["start"])
-        for x, y in zip(ordered, ordered[1:]):
-            gap = to_min(y["start"]) - to_min(x["end"])
-            need = (matrix.get(f"{x['poi_id']}->{y['poi_id']}", {}) or {}).get("minutes")
-            if need is None or gap < need:
-                out.append(f"{x['poi_id']}->{y['poi_id']}")
-        return out
+        # The legs the gate scores, day by day (each day its own clock and start).
+        return [key for day in split_days(itinerary)
+                for key, fits in b3_legs(day, day_trip(day, trip), pois, matrix) if not fits]
     if gate == "BCS":
         # One cost formula for both sides: `plan_cost` (explicit total_cost
         # wins over the POI fee sum), exactly what check_bcs scores.

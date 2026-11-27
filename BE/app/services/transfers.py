@@ -21,6 +21,23 @@ best of a few rows plus a short ride (`via`: the Cửa Đại pier has no POI).
 A stale file never breaks loading: a gateway whose ids are not in the matrix is
 skipped and named in the summary (the data test keeps the committed one clean).
 
+TIMETABLES. A cable car or a boat runs only between its first and last departure
+(`service.go`: from the road end toward the places, `service.back`: from the places
+back), the island boats only in some months (`service.months`). A walk has none.
+The places behind such a gateway inherit three clock times (`place_service`, carried
+by the POI view as `transfer`):
+
+    arrive_from = go.first + ride      no visit before the first car or boat arrives
+    arrive_by   = go.last + ride       the last one up / out arrives then
+    leave_by    = back.last - board    a visit ends in time for the last one back
+
+`arrive_from`..`leave_by` is also the place's `hours.access_window`, written into
+`pois.json` by `BE/ml/data/migrate_v2.py` like the Sơn Trà road window. `arrive_by`
+binds the leg, not the place: once on the summit a traveller may stay after the
+last car up. `leg_bounds` / `leg_arrival` turn a leg's departure into its arrival
+(waiting for the first boat back, or None after the last car up), the same formula
+for the solver, the order search and gate B3.
+
 A gateway may also cost money (`fare`, per person): `vnd` is paid on every visit to
 a place behind it (the Cửa Đại cano, a round trip in the day), `ticket_of` says the
 ride is inside a POI's ticket (the Bà Nà cable car is the Sun World ticket, charged
@@ -33,11 +50,15 @@ from __future__ import annotations
 import json
 import math
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 TRANSFERS_FILE = "transfers.json"
 FORMAT = "transfers-v1"
 MODES = ("boat", "cable_car", "walk")
+# A timetable's two directions: `go` from the road end toward the places behind the
+# gateway, `back` from them to the road end. Each is {"first", "last"} departure.
+SERVICE_KEYS = ("go", "back")
+DAY_MIN = 24 * 60
 
 
 @dataclass(frozen=True)
@@ -52,11 +73,168 @@ class Gate:
     places: tuple                 # rows of the places behind it
     coords: dict                  # row -> (lat, lon), for walks inside
     inside: str | None            # "walk": legs between two of its places are walked
+    runs: dict = field(default_factory=dict)   # {"go"|"back": "HH:MM-HH:MM"} departures
 
     def info(self) -> dict:
         """What a cell says about this gateway's part of a leg."""
         return {"gateway": self.id, "name": self.name, "mode": self.mode,
-                "minutes": self.minutes, "km": self.km, "inside": self.inside}
+                "minutes": self.minutes, "km": self.km, "inside": self.inside, **self.runs}
+
+
+@dataclass(frozen=True)
+class Service:
+    """A gateway's timetable in minutes, as one leg rides it (from a POI's `transfer`)."""
+    gateway: str
+    ride: int                     # minutes on the car or boat
+    board: int                    # minutes from the road end (or the place) onto it
+    go: tuple                     # (first, last) departure toward the places
+    back: tuple                   # (first, last) departure back to the road end
+
+
+def _clock(text) -> int:
+    hours, minutes = str(text).strip().split(":")
+    value = int(hours) * 60 + int(minutes)
+    if not 0 <= value < DAY_MIN:
+        raise ValueError(f"not a clock time: {text!r}")
+    return value
+
+
+def _hhmm(minutes: int) -> str:
+    return f"{minutes // 60:02d}:{minutes % 60:02d}"
+
+
+def _window(text: str) -> tuple[int, int]:
+    first, last = str(text).split("-")
+    return _clock(first), _clock(last)
+
+
+def timetable(g: dict) -> dict | None:
+    """A gateway's `service` in minutes: {"go": (first, last), "back": (first, last),
+    "months": (3, ..., 8) | None}. None: it runs whenever (a walk). ValueError says
+    what is wrong with it."""
+    service = g.get("service")
+    if not service:
+        return None
+    gid = g.get("id") or "?"
+    out: dict = {}
+    for key in SERVICE_KEYS:
+        window = service.get(key) or {}
+        first, last = _clock(window.get("first")), _clock(window.get("last"))
+        if last < first:
+            raise ValueError(f"{gid}: service.{key} ends before it starts")
+        out[key] = (first, last)
+    months = service.get("months")
+    if months is not None:
+        months = tuple(sorted({int(m) for m in months}))
+        if not months or not all(1 <= m <= 12 for m in months):
+            raise ValueError(f"{gid}: service.months must list months 1-12")
+    out["months"] = months
+    return out
+
+
+def place_service(spec: dict) -> dict[str, dict]:
+    """{poi_id: what a place behind a gateway with a timetable inherits from it}.
+
+    The POI view carries it as `transfer` (`BE.common.view_pois`), so the solver's
+    stubs, the order search, gate B3, a replan and the audit read one record:
+    gateway, mode, ride/board minutes, both departure windows, `arrive_from`,
+    `arrive_by`, `leave_by` (module docstring) and the months it runs. A gateway
+    whose timetable cannot be read gives none (the data test names it); its
+    minutes still load.
+    """
+    out: dict[str, dict] = {}
+    for g in spec.get("gateways") or []:
+        try:
+            times = timetable(g)
+            if times is None:
+                continue
+            ride, board = int(g["ride_min"]), int(g.get("board_min") or 0)
+            (go_first, go_last), (back_first, back_last) = times["go"], times["back"]
+            if go_last + ride >= DAY_MIN or back_last - board < go_first + ride:
+                raise ValueError("no visit fits between the first arrival and the last return")
+            info = {"gateway": g["id"], "name": g.get("name") or g["id"], "mode": g["mode"],
+                    "ride_min": ride, "board_min": board,
+                    "go": f"{_hhmm(go_first)}-{_hhmm(go_last)}",
+                    "back": f"{_hhmm(back_first)}-{_hhmm(back_last)}",
+                    "arrive_from": _hhmm(go_first + ride), "arrive_by": _hhmm(go_last + ride),
+                    "leave_by": _hhmm(back_last - board),
+                    "months": list(times["months"]) if times["months"] else None}
+            ids = [place["poi_id"] for place in g.get("places") or []]
+        except (ValueError, KeyError, TypeError, AttributeError):
+            continue
+        for pid in ids:
+            out.setdefault(pid, info)   # behind two gateways: `resolve` keeps the first
+    return out
+
+
+def season_label(months: list[int] | None) -> str:
+    """'thang 3-8' for the months a boat runs (one span, else the list)."""
+    months = sorted(months or [])
+    if months and months == list(range(months[0], months[-1] + 1)):
+        return f"thang {months[0]}-{months[-1]}"
+    return "thang " + ", ".join(str(m) for m in months)
+
+
+def service(info: dict | None) -> Service | None:
+    """A POI's `transfer` (`place_service`) -> Service; None: no timetable binds it."""
+    if not info:
+        return None
+    return Service(info["gateway"], int(info["ride_min"]), int(info["board_min"]),
+                   _window(info["go"]), _window(info["back"]))
+
+
+def crossing(src: Service | None, dst: Service | None) -> tuple[Service | None, Service | None]:
+    """(left, entered): the timetables a leg from `src`'s place to `dst`'s rides.
+    Two places behind one gateway are walked between: no car, no boat."""
+    if src is not None and dst is not None and src.gateway == dst.gateway:
+        return None, None
+    return src, dst
+
+
+def leg_bounds(minutes: int, left: Service | None,
+               entered: Service | None) -> tuple[int | None, int | None, bool]:
+    """(latest departure, earliest arrival, possible) of a leg of `minutes` door to door.
+
+    It leaves the places behind `left` (board, then its car or boat back) and/or enters
+    those behind `entered` (its car or boat is the leg's last part). Before the first
+    departure one waits; after the last there is none:
+
+        latest   = min(left.back.last - left.board,  entered.go.last - (minutes - entered.ride))
+        earliest = max(left.back.first + minutes - left.board,  entered.go.first + entered.ride)
+
+    `possible` is False when even the first boat back reaches the road end after the
+    last car up. Both bounds are linear in the departure, so the solver states them as
+    two constraints and `leg_arrival` as a max.
+    """
+    latest = earliest = None
+    possible = True
+    if left is not None:
+        latest = left.back[1] - left.board
+        earliest = left.back[0] + minutes - left.board
+    if entered is not None:
+        cut = entered.go[1] - (minutes - entered.ride)
+        latest = cut if latest is None else min(latest, cut)
+        first = entered.go[0] + entered.ride
+        earliest = first if earliest is None else max(earliest, first)
+        if left is not None:
+            possible = left.back[0] + minutes - left.board - entered.ride <= entered.go[1]
+    return latest, earliest, possible
+
+
+def leg_arrival(depart: int, minutes: int, left: Service | None,
+                entered: Service | None) -> int | None:
+    """When a leg that leaves at `depart` arrives; None when a car or boat it needs has
+    already made its last run. With no timetable it is `depart + minutes`."""
+    latest, earliest, possible = leg_bounds(minutes, left, entered)
+    if not possible or (latest is not None and depart > latest):
+        return None
+    return depart + minutes if earliest is None else max(depart + minutes, earliest)
+
+
+def open_start(entered: Service) -> tuple[int, int]:
+    """Start window of a place that opens an open tour (no base, no first leg): the
+    day begins there, so it is where the traveller gets off a car or boat that runs."""
+    return entered.go[0] + entered.ride, entered.go[1] + entered.ride
 
 
 def read(path: str) -> dict:
@@ -96,7 +274,19 @@ def _gate(g: dict, index: dict) -> Gate:
                 places=tuple(index[pid] for pid in places),
                 coords={index[p["poi_id"]]: (float(p["lat"]), float(p["lon"]))
                         for p in g["places"] if p.get("lat") is not None and p.get("lon") is not None},
-                inside=g.get("inside"))
+                inside=g.get("inside"), runs=_runs(g))
+
+
+def _runs(g: dict) -> dict:
+    """{"go"|"back": "HH:MM-HH:MM"}: the departures a cell names; {} without a readable
+    timetable (a walk, or a malformed one: its minutes still load)."""
+    try:
+        times = timetable(g)
+    except (ValueError, KeyError, TypeError, AttributeError):
+        return {}
+    if not times:
+        return {}
+    return {key: f"{_hhmm(times[key][0])}-{_hhmm(times[key][1])}" for key in SERVICE_KEYS}
 
 
 def resolve(spec: dict, index: dict) -> tuple[list[Gate], list[str]]:
@@ -211,16 +401,19 @@ def describe(a: dict | None, b: dict | None, minutes: int) -> dict:
     """`mode` (+ `transfers`) of a leg that leaves gateway info `a` or enters `b`.
 
     "motorbike+boat", "cable_car" (from the road end itself), "walk" (inside one
-    gateway); the road part is named only when it takes a minute or more.
+    gateway); the road part is named only when it takes a minute or more. A transfer
+    with a timetable also says `runs`: its first and last departure in the direction
+    this leg rides it ("16:30" is the last car up, "14:30" the last boat back).
     """
     if a and b and a["gateway"] == b["gateway"]:
         return {"mode": "walk"} if a.get("inside") == "walk" else {}
-    legs = [t for t in (a, b) if t]
-    road = minutes - sum(t["minutes"] for t in legs)
+    legs = [(t, way) for t, way in ((a, "back"), (b, "go")) if t]
+    road = minutes - sum(t["minutes"] for t, _way in legs)
     modes = ([a["mode"]] if a else []) + (["motorbike"] if road > 0 else []) + ([b["mode"]] if b else [])
     return {"mode": "+".join(modes),
-            "transfers": [{k: t[k] for k in ("gateway", "name", "mode", "minutes", "km")}
-                          for t in legs]}
+            "transfers": [{**{k: t[k] for k in ("gateway", "name", "mode", "minutes", "km")},
+                           **({"runs": t[way]} if t.get(way) else {})}
+                          for t, way in legs]}
 
 
 def side_file(matrix_path: str) -> str:

@@ -4,6 +4,8 @@ Model (OR-Tools CP-SAT):
 - circuit over depot + POIs; self-arc[i][i] == "skip i".
 - t[i] visit start; open[i] <= t[i] <= close[i]-dur[i] iff visited.
 - arc[i][j] => t[j] >= t[i]+dur[i]+travel[i][j]; depot t[0]=trip start.
+- An arc that rides a boat or cable car with a timetable also leaves in time for its
+  last run and arrives no earlier than its first (`_transfer_rules`, transfers.py).
 - Tmax: every visit finishes by trip end. Objective: max total score of visited.
 Returns {"status": optimal|feasible-timeout|infeasible|unknown, "itinerary" | "reason", ...}.
 Best-found is returned even on timeout. `unknown` = the search budget ran out before
@@ -57,6 +59,7 @@ from BE.app.services.soft_rules import (
 from BE.common import (
     access_charges, hhmm, own_fee, paid_access, poi_open_windows, to_min, trusted_rating)
 from BE.app.services import objective as objective_mod
+from BE.app.services import transfers as transfers_mod
 
 TIMEOUT_S = 5.0
 
@@ -161,6 +164,9 @@ class StubPOI:
     inside: str = ""          # the whole-area stop this one sits inside
     substitute: str = ""      # "day_market": a second one in the day costs
     dish: str = ""            # a restaurant's dish (mì Quảng twice costs)
+    # Behind a boat or cable car with a timetable (POI `transfer`): a leg into or out
+    # of it must catch a run (`transfers.leg_bounds`). None = reached by road / on foot.
+    transfer: transfers_mod.Service | None = None
     # What reaching it costs besides `fee`, VND per person, each charge paid once a day
     # whoever needs it (BE.common.access_fees): ((key, vnd), ...). A key that is a stop's
     # poi_id is that stop's ticket: Cầu Vàng's Sun World ticket is not paid again when
@@ -194,6 +200,9 @@ class StubTrip:
     start_min: int = 7 * 60
     end_min: int = 18 * 60
     origin_id: str = "depot"
+    # The base itself sits behind a timetabled gateway (the Bà Nà summit hotel): its
+    # first leg down rides the cable car, and a stop up there is a walk from it.
+    origin_transfer: transfers_mod.Service | None = None
 
 
 def poi_visit_min(poi: dict) -> int:
@@ -270,6 +279,7 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    fee=own_fee(poi, poi["poi_id"], paid_access(trip)) or 0,
                    visit_max=poi_visit_max(poi),
                    booking=(poi.get("hours") or {}).get("kind") == "by_booking",
+                   transfer=transfers_mod.service(poi.get("transfer")),
                    access=stub_access(poi, paid_access(trip)),
                    **objective_mod.stub_keys(poi, parent))
 
@@ -300,19 +310,35 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
                 trip: StubTrip, travel: dict[tuple[str, str], int],
                 used_slots: set[int],
                 blocked_window: tuple[int, int] | None = None,
+                prev_transfer: transfers_mod.Service | None = None,
                 ) -> tuple[int, int, int | None] | None:
     """(start, travel_min, meal_slot) for placing `poi`, or None if it cannot
-    fit the matrix leg, opening window, free meal slot or locked rest window."""
+    fit the matrix leg, opening window, free meal slot or locked rest window.
+    A leg that rides a boat or cable car arrives when its timetable lets it
+    (`prev_transfer`: the previous stop's, None after the base or a road stop)."""
+    latest_start = None
     if prev_id is None and not trip.origin_id:
         leg = 0  # open tour: the origin leg is not modelled
+        ready = clock
+        if poi.transfer is not None:   # the day begins where the car or boat arrives
+            lo, latest_start = transfers_mod.open_start(poi.transfer)
+            ready = max(ready, lo)
     else:
         need = travel.get((prev_id or trip.origin_id, poi.poi_id))
         if need is None:
             return None  # B3: no matrix leg -> cannot be visited
         leg = need
+        ready = clock + leg
+        src = prev_transfer if prev_id is not None else trip.origin_transfer
+        left, entered = transfers_mod.crossing(src, poi.transfer)
+        if left is not None or entered is not None:
+            arrive = transfers_mod.leg_arrival(clock, leg, left, entered)
+            if arrive is None:
+                return None  # the last car or boat of the leg has gone
+            ready = arrive
     for open_min, close_min in _windows(poi):  # earliest window that fits
         close = min(close_min, trip.end_min)
-        start = max(clock + leg, open_min)
+        start = max(ready, open_min)
         # Locked rest window (day templates): the stop must finish before it or
         # start after it: never overlap.
         if blocked_window:
@@ -327,6 +353,8 @@ def _hint_place(poi: StubPOI, prev_id: str | None, clock: int,
                 slot = meal_slot_at(start)
         if slot is not None and slot in used_slots:
             continue  # A1: another restaurant already owns this meal slot
+        if latest_start is not None and start > latest_start:
+            continue
         if start + poi.visit_min <= close:
             return start, leg, slot
     return None
@@ -501,6 +529,11 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         """Latest start of each must_visit left, so that those after it still fit."""
         own = {i: min(pois[i - 1].close_min, trip.end_min) - pois[i - 1].visit_min for i in must_left}
         for i in must_left:
+            ride = pois[i - 1].transfer
+            if ride is not None and transfers_mod.crossing(trip.origin_transfer, ride)[1]:
+                # Its car or boat stops arriving then (a walk from another stop up
+                # there could start later; the seed does not count on it).
+                own[i] = min(own[i], ride.go[1] + ride.ride)
             if _feeds_lunch(pois[i - 1]):
                 # Started later it no longer runs through lunch, and no restaurant
                 # can be reached from inside it.
@@ -640,7 +673,8 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             if closing:
                 floor = max(floor, closer_span[0])
             spot = _hint_place(poi, previous, floor, trip, travel, used_slots,
-                               blocked_window)
+                               blocked_window,
+                               prev_transfer=pois[node_of[previous] - 1].transfer if previous else None)
             if spot is None:
                 continue
             start, leg, slot = spot
@@ -1544,6 +1578,7 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                 # origin leg has none.
                 gap = w + (STOP_OVERHEAD_MIN if i > 0 else 0)
                 m.Add(t[j] >= t[i] + dur[i] + gap).OnlyEnforceIf(arc[(i, j)])
+    _transfer_rules(m, t, dur, arc, ids, travel, trip, pois)
     for pid in not_first or ():
         if pid in node:
             m.Add(arc[(0, node[pid])] == 0)
@@ -1868,3 +1903,53 @@ def _pool_search(pois: list[StubPOI], travel: dict, trip: StubTrip,
     }
     return first
 
+
+def _transfer_rules(m, t, dur, arc, ids: list[str], travel: dict, trip: StubTrip,
+                    pois: list[StubPOI]) -> None:
+    """Boat and cable-car timetables (transfers.py) on the arcs that ride them.
+
+    An arc into the places behind a gateway, or out of them, is a leg with a car or a
+    boat in it. It must leave by `latest` and arrives no earlier than the first run
+    allows (`transfers.leg_bounds`); an arc no run can serve is dropped. The open tour
+    has no first leg, so a stop behind a gateway that opens it starts while cars or
+    boats arrive (`open_start`). The day's last stop up there still needs a run back
+    unless the base is up there too: its window already ends at `leave_by`
+    (hours.access_window), and the arc to the depot states it again.
+    """
+    n = len(ids)
+    svc = {i: pois[i - 1].transfer for i in range(1, n + 1) if pois[i - 1].transfer is not None}
+    base = trip.origin_transfer if trip.origin_id else None
+    if not svc and base is None:
+        return
+    for i in range(n + 1):
+        src = svc.get(i) if i else base
+        for j in range(n + 1):
+            if i == j:
+                continue
+            dst = svc.get(j) if j else None
+            if src is None and dst is None:
+                continue
+            if j == 0:
+                left = transfers_mod.crossing(src, base)[0]
+                if i > 0 and left is not None:
+                    m.Add(t[i] + dur[i] <= left.back[1] - left.board).OnlyEnforceIf(arc[(i, 0)])
+                continue
+            if i == 0 and not trip.origin_id:
+                lo, hi = transfers_mod.open_start(dst)
+                m.Add(t[j] >= lo).OnlyEnforceIf(arc[(0, j)])
+                m.Add(t[j] <= hi).OnlyEnforceIf(arc[(0, j)])
+                continue
+            w = travel.get((trip.origin_id if i == 0 else ids[i - 1], ids[j - 1]))
+            if w is None:
+                continue  # no matrix leg: the arc is already forbidden (B3)
+            left, entered = transfers_mod.crossing(src, dst)
+            if left is None and entered is None:
+                continue  # a walk between two places behind one gateway
+            latest, earliest, possible = transfers_mod.leg_bounds(w, left, entered)
+            if not possible or (i == 0 and latest is not None and trip.start_min > latest):
+                m.Add(arc[(i, j)] == 0)
+                continue
+            if i > 0 and latest is not None:
+                m.Add(t[i] + dur[i] <= latest).OnlyEnforceIf(arc[(i, j)])
+            if earliest is not None:
+                m.Add(t[j] >= earliest).OnlyEnforceIf(arc[(i, j)])

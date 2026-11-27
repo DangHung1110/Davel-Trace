@@ -51,7 +51,7 @@ import unicodedata
 from functools import lru_cache
 
 from BE.app.services.profile_filter import _match_terms, fold
-from BE.common import DISHES, load_json, paid_access, party_size, to_min, view_pois, visit_fee
+from BE.common import DISHES, load_json, paid_access, party_size, to_min, transfers_version, view_pois, visit_fee
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -203,17 +203,12 @@ def load_pois_json(path: str) -> list[dict]:
     2 MB snapshot was re-parsed on every plan request. The list is SHARED
     between requests; nothing downstream mutates a POI (they are projected
     with `poi_on_date` / `_gate_view`), so callers must keep it that way.
-    The `transfers.json` next to it is part of the version: its fares are on the
-    views (`access_fees`).
+    The version of the snapshot's transfers.json is part of the key: the views
+    carry its timetables and access fares.
     """
     path = os.path.abspath(path)
     stat = os.stat(path)
-    try:
-        side = os.stat(os.path.join(os.path.dirname(path), "transfers.json"))
-        side_key = (side.st_mtime_ns, side.st_size)
-    except FileNotFoundError:
-        side_key = None
-    key = (stat.st_mtime_ns, stat.st_size, side_key)
+    key = (stat.st_mtime_ns, stat.st_size, transfers_version(os.path.dirname(path)))
     with _POIS_LOCK:
         hit = _POIS_CACHE.get(path)
     if hit is not None and hit[0] == key:

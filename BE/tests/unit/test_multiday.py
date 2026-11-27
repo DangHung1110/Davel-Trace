@@ -70,6 +70,28 @@ TRIP = {"days": 2, "budget": 1000000, "travelers": 1, "date": "2026-11-14",
 POOL = ["a", "b", "c", "d", "e", "f"]
 
 
+class DroppingSolver(FakeSolver):
+    """Leaves the `dropped` named places out on `on_days` (all by default), with the
+    reason, as build_plan does with a place no boat or cable car reaches that day."""
+
+    def __init__(self, pool, dropped, on_days=None, **kw):
+        super().__init__(pool, **kw)
+        self.dropped, self.on_days = set(dropped), on_days
+
+    def __call__(self, trip, used, diagnose):
+        must = list(trip.get("must_visit") or [])
+        today = trip.get("day_offset", 0)
+        drop = [m for m in must if m in self.dropped
+                and (self.on_days is None or today in self.on_days)]
+        plan = super().__call__({**trip, "must_visit": [m for m in must if m not in drop]},
+                                used, diagnose)
+        if drop and plan["activities"]:
+            plan["_dropped_must"] = drop
+            plan["warnings"] = list(plan.get("warnings") or []) + [
+                f"khong dua vao lich '{m}': lo chuyen cano cuoi" for m in drop]
+        return plan
+
+
 class TestOneDay(unittest.TestCase):
     def test_goes_straight_to_the_solver_untouched(self):
         trip = {**TRIP, "days": 1}
@@ -154,6 +176,28 @@ class TestTwoDays(unittest.TestCase):
         plan, _ = self.plan(Solver(POOL), must_visit=["e", "f"])
         self.assertTrue(plan["passed"], plan.get("warnings"))
         self.assertEqual({a["poi_id"] for a in plan["activities"] if a["day"] == 1}, {"e", "f"})
+
+    def test_a_named_place_no_day_reaches_leaves_the_trip_with_the_reason(self):
+        # Each day leaves the island out (its last boat cannot be caught) and says why:
+        # the trip is judged without it, like a one-day plan.
+        plan, solver = self.plan(DroppingSolver(POOL, ["isle"]), must_visit=["isle", "a"])
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        self.assertNotIn("isle", {a["poi_id"] for a in plan["activities"]})
+        self.assertEqual(plan["_dropped_must"], ["isle"])
+        self.assertTrue(any("isle" in w for w in plan["warnings"]))
+
+    def test_a_place_left_out_one_day_and_visited_the_next_is_owed(self):
+        plan, _ = self.plan(DroppingSolver(POOL, ["isle"], on_days={0}), must_visit=["isle", "a"])
+        self.assertTrue(plan["passed"])
+        self.assertIn(("isle", 2), [(a["poi_id"], a["day"]) for a in plan["activities"]])
+        self.assertNotIn("_dropped_must", plan)
+
+    def test_a_named_place_missing_without_a_reason_still_fails(self):
+        class Forgetful(FakeSolver):
+            def __call__(self, trip, used, diagnose):
+                return super().__call__({**trip, "must_visit": []}, used, diagnose)
+        plan, _ = self.plan(Forgetful(POOL), must_visit=["isle"])
+        self.assertFalse(plan["passed"])
 
     def test_a_wish_met_once_is_not_asked_again(self):
         plan, solver = self.plan(FakeSolver(POOL, meets={"tam bien"}),

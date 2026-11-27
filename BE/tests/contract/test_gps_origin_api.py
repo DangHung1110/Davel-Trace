@@ -21,6 +21,7 @@ from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
 from BE.app.services import trip_ctx  # noqa: E402
 from BE.tests import conftest  # noqa: E402
+from BE.tools.audit_plans import audit_day  # noqa: E402
 
 
 def _poi(pid, name, kind, lat, lon, hours, visit, fee, rating):
@@ -90,6 +91,33 @@ class TestGpsOriginApi(unittest.TestCase):
                          [(a["poi_id"], a["start"]) for a in hotel["activities"]])
         self.assertEqual([s["minutes"] for s in at_hotel["segments"]],
                          [s["minutes"] for s in hotel["segments"]])
+
+    def test_a_fix_at_a_summit_hotel_can_walk_after_the_last_ascent(self):
+        timetable = {"gateway": "summit", "mode": "cable_car", "name": "Cable car",
+                     "ride_min": 5, "board_min": 3, "go": "08:00-09:00", "back": "08:00-18:00",
+                     "arrive_from": "08:05", "arrive_by": "09:05", "leave_by": "17:57"}
+        places = [{**p, "transfer": timetable} if p["poi_id"] in ("hotel", "museum") else p
+                  for p in POIS]
+        legs = {**CELLS, "hotel->museum": {**CELLS["hotel->museum"], "mode": "walk"}}
+        trip = {**TRIP, "origin": {"lat": 16.06900, "lon": 108.24500},
+                "must_visit": ["museum"], "start_time": "09:30", "end_time": "10:55"}
+        with tempfile.TemporaryDirectory() as tmp:
+            conftest.write_snapshot(tmp, places, legs)
+            with mock.patch.object(itinerary_mod, "get_settings",
+                                   return_value=Settings(snapshot_dir=tmp, snapshot_name="test")):
+                r = client.post("/v1/itinerary", json={"trip": trip, "profiles": ["balanced"]})
+        self.assertEqual(r.status_code, 200, r.text)
+        plan = r.json()["plans"][0]
+        self.assertTrue(plan["passed"], plan.get("violations"))
+        self.assertEqual([a["poi_id"] for a in plan["activities"]], ["museum"])
+        self.assertEqual((plan["segments"][0]["mode"], plan["segments"][0]["source"]),
+                         ("walk", "gps_estimate"))
+        by_id = {p["poi_id"]: p for p in places}
+        flags, _ = audit_day(plan["activities"], trip, by_id, legs, "", {"museum"}, None)
+        self.assertFalse([f for f in flags if f.startswith("ERR_")], flags)
+        from_road = {**trip, "origin": {"lat": POIS[1]["lat"], "lon": POIS[1]["lon"]}}
+        flags, _ = audit_day(plan["activities"], from_road, by_id, legs, "", {"museum"}, None)
+        self.assertTrue(any(f.startswith("ERR_TRANSFER") for f in flags), flags)
 
     def test_a_fix_far_away_falls_back_to_the_hotel(self):
         plan = self.plan({"lat": 21.0285, "lon": 105.8542, "fallback_poi_id": "hotel"})

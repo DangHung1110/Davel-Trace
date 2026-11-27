@@ -14,7 +14,11 @@ poi_id, so a rebuilt snapshot can drift from it; these checks make the drift lou
   (`requires_ticket_of`), so the planner charges it (`BE.common.access_fees`);
 - on the loaded matrix no leg of Cù Lao Chàm beats the straight line any more
   (26.5% did: OSRM had snapped the island onto the mainland), and no summit leg
-  is the old shared-snap minute.
+  is the old shared-snap minute;
+- the boats and cable cars keep a cited timetable, and `pois.json` holds what it
+  implies: every place behind them (but a lodging) has `hours.access_window` =
+  first arrival - last return and opening hours inside it (BE/ml/data/migrate_v2.py
+  writes them: rerun it after editing a timetable), and the POI views carry it.
 
 Run from the repo root:  python -m pytest BE/tests/data/test_transfers_v2.py -q
 """
@@ -30,7 +34,7 @@ sys.path.insert(0, ROOT)
 
 from BE.app.services import transfers  # noqa: E402
 from BE.app.services.matrix import load_matrix_doc  # noqa: E402
-from BE.common import effective_fee, load_pois, visit_fee  # noqa: E402
+from BE.common import effective_fee, load_pois, to_min, visit_fee  # noqa: E402
 
 SNAP = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
 SPEC = os.path.join(SNAP, transfers.TRANSFERS_FILE)
@@ -159,6 +163,59 @@ class TestTransfersV2(unittest.TestCase):
             up = self.cells[f"{base}->{place['poi_id']}"]
             self.assertEqual((up["minutes"], up["mode"]),
                              (gate["ride_min"] + gate["board_min"], "cable_car"), place["name"])
+
+    def test_boats_and_cable_cars_keep_a_cited_timetable(self):
+        for gate in self.spec["gateways"]:
+            times = transfers.timetable(gate)          # raises when it cannot be read
+            if gate["mode"] == "walk":
+                self.assertIsNone(times, gate["id"])
+                continue
+            self.assertIsNotNone(times, f"{gate['id']}: a {gate['mode']} runs by a timetable")
+            service = gate["service"]
+            self.assertTrue(service.get("basis"), gate["id"])
+            web = [s for s in service["sources"] if "openstreetmap.org" not in s["url"]]
+            self.assertTrue(web and all(s.get("says") for s in web), gate["id"])
+        self.assertEqual(transfers.timetable(self.gates["cu_lao_cham_boat"])["months"],
+                         (3, 4, 5, 6, 7, 8))
+
+    def test_the_hours_of_the_places_behind_follow_the_timetable(self):
+        behind = transfers.place_service(self.spec)
+        timed = [g for g in self.spec["gateways"] if g.get("service")]
+        self.assertEqual(sorted(behind), sorted(p["poi_id"] for g in timed for p in g["places"]))
+        for pid, info in behind.items():
+            hours = self.pois[pid]["hours"]
+            if self.pois[pid]["category"] == "lodging":     # its guests sleep up there
+                self.assertIsNone(hours["access_window"], pid)
+                continue
+            window = f"{info['arrive_from']}-{info['leave_by']}"
+            self.assertEqual(hours["access_window"], [window], self.pois[pid]["name"])
+            lo, hi = to_min(info["arrive_from"]), to_min(info["leave_by"])
+            for span in hours["open"]:
+                start, end = (to_min(x) for x in span.split("-"))
+                self.assertTrue(lo <= start < end <= hi, (self.pois[pid]["name"], span, window))
+
+    def test_the_island_stay_fits_its_boats(self):
+        # Whoever takes the last boat out still has the shortest usual stay before the
+        # last boat back; the usual one (p50) fits from the first boat.
+        island = self.pois["manual:cu-lao-cham"]
+        info = transfers.place_service(self.spec)["manual:cu-lao-cham"]
+        arrive_from, arrive_by, leave_by = (to_min(info[k]) for k in ("arrive_from", "arrive_by", "leave_by"))
+        self.assertLessEqual(arrive_by + island["dwell"]["p25"], leave_by)
+        self.assertLessEqual(arrive_from + island["dwell"]["p50"], leave_by)
+
+    def test_views_carry_the_timetable(self):
+        views = load_pois(SNAP, by_id=True)
+        island = views["manual:cu-lao-cham"]["transfer"]
+        self.assertEqual((island["arrive_from"], island["arrive_by"], island["leave_by"]),
+                         ("07:50", "09:20", "14:20"))
+        self.assertEqual(views["manual:cu-lao-cham"]["opening_hours"], ["07:50-14:20"])
+        cau_vang = views["osm:way/683416736"]["transfer"]
+        self.assertEqual((cau_vang["arrive_by"], cau_vang["leave_by"]), ("16:50", "21:50"))
+        mercure = views["ChIJqXp39lv2QTERR9U4pFNMD2o"]
+        self.assertEqual(mercure["transfer"]["gateway"], "ba_na_cable_car")
+        self.assertEqual(mercure["opening_hours"], ["00:00-23:59"])
+        base = self.gates["ba_na_cable_car"]["road_end"]["poi_id"]
+        self.assertNotIn("transfer", views[base])          # the base station is reached by road
 
 
 if __name__ == "__main__":

@@ -110,6 +110,18 @@ class GpsStart:
         return tuple((a.poi_id, a.access_min, a.access_km) for a in self.anchors)
 
 
+def origin_view(start: GpsStart, by_id: Mapping) -> dict:
+    """Origin fields for scheduling and B3. A fix is never a lodging or a candidate."""
+    anchor = by_id[start.nearest.poi_id]
+    view = {"poi_id": start.start_id, "name": anchor.get("name") or start.start_id}
+    info = anchor.get("transfer")
+    if info:
+        # Leaving the gateway must allow for reaching the anchor before boarding.
+        access = int(start.nearest.access_min + 0.5)
+        view["transfer"] = {**info, "board_min": info["board_min"] + access}
+    return view
+
+
 def _anchors(by_id: Mapping, cells: Mapping) -> list[tuple[str, float, float]]:
     """(poi_id, lat, lon) of every place that owns a matrix row and has coordinates."""
     rows = getattr(cells, "row_ids", None)
@@ -140,12 +152,18 @@ def locate(lat: float, lon: float, by_id: Mapping, cells: Mapping,
                   for pid, a_lat, a_lon in _anchors(by_id, cells))
     if not near:
         return None, "khong dung vi tri GPS: chua co dia diem nao co toa do va ma tran"
-    km, _pid = near[0]
+    km, nearest_id = near[0]
     if km > MAX_KM:
         where = "ngoai vung Da Nang, " if km > 20 else ""
         return None, (f"khong dung vi tri GPS: {where}cach dia diem co du lieu gan nhat "
                       f"{km:.1f} km (toi da {MAX_KM:.0f} km)")
-    picked = near[:1] if km <= AT_PLACE_KM else near[:ANCHORS]
+    # A fix cannot borrow a cheaper road row across the water or below a cable
+    # car. Behind a timed gateway its nearest place is the access point: every
+    # departure then uses the same time to get to its boarding point.
+    if km <= AT_PLACE_KM or by_id[nearest_id].get("transfer"):
+        picked = near[:1]
+    else:
+        picked = [(d, pid) for d, pid in near[:ANCHORS] if not by_id[pid].get("transfer")]
     anchors = tuple(Anchor(pid, d, *ride(d)) for d, pid in picked)
     return GpsStart(start_id=start_id(lat, lon), lat=lat, lon=lon, anchors=anchors), None
 

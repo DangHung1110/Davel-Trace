@@ -4,7 +4,7 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 3,ChIJL1GKWJYZQjERLrEGqlK2kwQ,Cầu Rồng,outdoor_landmark,trung_tam,0.7,giờ agent_web 0.5,00:00-23:59 [fixed],agent_web,free,agent_web,https://www.google.com/maps/search/Cầu+Rồng+Đà+Nẵng
 4,ChIJEymIkTYYQjERWO-pgjkKGMk,Bảo Tàng Đà Nẵng,museum_indoor,trung_tam,0.68,,08:00-17:00 [fixed],open_data,cheap,agent_web,https://www.google.com/maps/search/Bảo+Tàng+Đà+Nẵng+Đà+Nẵng
 5,ChIJ6UAZeAAZQjERzK3T81riZmo,Phố đi bộ Bạch Đằng,night_market,trung_tam,0.68,,15:00-23:59 [fixed],agent_web,free,agent_web,https://www.google.com/maps/search/Phố+đi+bộ+Bạch+Đằng+Đà+Nẵng
-6,osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,0.64,,08:00-18:30 [fixed],human,included,inferred,https://www.google.com/maps/search/Cầu+Vàng+Đà+Nẵng
+6,osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,0.64,,08:20-18:30 [fixed],human,included,inferred,https://www.google.com/maps/search/Cầu+Vàng+Đà+Nẵng
 7,ChIJyUQ4aw72QTERCXl5YV-4U1w,Sun World Bà Nà Hills,paid_attraction,ba_na_tay,0.63,,08:00-22:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/Sun+World+Bà+Nà+Hills+Đà+Nẵng
 8,manual:vinwonders-nam-hoi-an,VinWonders Nam Hội An,paid_attraction,hoi_an,0.63,,09:00-18:00 [fixed],agent_web,expensive,agent_web,https://www.google.com/maps/search/VinWonders+Nam+Hội+An+Đà+Nẵng
 9,osm:way/39268284,Chùa Cầu,outdoor_landmark,hoi_an,0.56,,00:00-23:59 [fixed],human,included,inferred,https://www.google.com/maps/search/Chùa+Cầu+Đà+Nẵng
@@ -47,7 +47,7 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 46,ChIJHwgddQAXQjERs5sNrVutheI,Bãi tắm Sao Biển,beach,son_tra_my_khe,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+Sao+Biển+Đà+Nẵng
 47,osm:node/1623183649,Núi Sơn Trà,viewpoint,son_tra_my_khe,0.44,giờ inferred 0.45,07:30-17:30 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Núi+Sơn+Trà+Đà+Nẵng
 48,osm:node/4172034499,Non Nuoc Beach,beach,ngu_hanh_son,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,agent_web,https://www.google.com/maps/search/Non+Nuoc+Beach+Đà+Nẵng
-49,ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,ba_na_tay,0.44,giờ inferred 0.45,06:00-17:30 [safe_window],inferred,included,inferred,https://www.google.com/maps/search/Đỉnh+Bà+Nà+Đà+Nẵng
+49,ChIJH38kxPn2QTERee_Ccs86ccE,Đỉnh Bà Nà,viewpoint,ba_na_tay,0.44,giờ inferred 0.45,08:20-17:30 [safe_window],inferred,included,inferred,https://www.google.com/maps/search/Đỉnh+Bà+Nà+Đà+Nẵng
 50,manual:bai-tam-pham-van-dong,Bãi tắm Phạm Văn Đồng,beach,son_tra_my_khe,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,inferred,https://www.google.com/maps/search/Bãi+tắm+Phạm+Văn+Đồng+Đà+Nẵng
 51,osm:node/5403993021,Bãi biển Cửa Đại,beach,hoi_an,0.44,giờ inferred 0.45,05:00-22:00 [safe_window],inferred,free,agent_web,https://www.google.com/maps/search/Bãi+biển+Cửa+Đại+Đà+Nẵng
 52,ChIJt1wLHjEYQjEREA1YGZU2yOc,Trà Quán Góc Nhà Tụi Mình,day_market,trung_tam,0.42,giờ inferred 0.45; giá inferred 0.4,09:00-19:00 [safe_window],inferred,cheap,inferred,https://www.google.com/maps/search/Trà+Quán+Góc+Nhà+Tụi+Mình+Đà+Nẵng
@@ -91,7 +91,7 @@ rank,poi_id,name,category,zone,priority,why,hours_now,hours_by,price_now,price_b
 90,ChIJddXz2K8PQjER4enhapQvvo8,Cooking With Jolie In Hoi An – Vietnamese Cooking Class,paid_attraction,hoi_an,0.4,,"09:00-13:00, 15:00-19:00 [by_booking]",agent_web,expensive,agent_web,https://www.google.com/maps/search/Cooking+With+Jolie+In+Hoi+An+–+Vietnamese+Cooking+Class+Đà+Nẵng
 91,ChIJmU3hl9WrNTERBUbnSp3g5vs,Thuan Tinh Island Cooking Tour,paid_attraction,hoi_an,0.4,,"08:30-13:30, 11:30-16:30 [by_booking]",agent_web,expensive,agent_web,https://www.google.com/maps/search/Thuan+Tinh+Island+Cooking+Tour+Đà+Nẵng
 92,osm:node/5513474821,Công viên Đất nung Thanh Hà,paid_attraction,hoi_an,0.4,,08:30-17:30 [fixed],open_data,cheap,agent_web,https://www.google.com/maps/search/Công+viên+Đất+nung+Thanh+Hà+Đà+Nẵng
-93,osm:node/11427582964,Thai Market,day_market,ba_na_tay,0.385,giờ inferred 0.45,08:00-11:00 [safe_window],inferred,included,inferred,https://www.google.com/maps/search/Thai+Market+Đà+Nẵng
+93,osm:node/11427582964,Thai Market,day_market,ba_na_tay,0.385,giờ inferred 0.45,08:20-11:00 [safe_window],inferred,included,inferred,https://www.google.com/maps/search/Thai+Market+Đà+Nẵng
 94,ChIJmQmygLwXQjERcZVy8--sIcE,Hải Sản Đà Nẵng Bé Biển,restaurant,son_tra_my_khe,0.36,giờ inferred 0.45; giá inferred 0.4,"11:00-13:30, 17:30-20:30 [safe_window]",inferred,medium,inferred,https://www.google.com/maps/search/Hải+Sản+Đà+Nẵng+Bé+Biển+Đà+Nẵng
 95,ChIJP1Uz6i0ZQjERfy-rpM1cGWc,Nhà hàng NHÀ BẾP CHỢ HÀN,restaurant,trung_tam,0.36,giờ inferred 0.45; giá inferred 0.4,"11:00-13:30, 17:30-20:30 [safe_window]",inferred,medium,inferred,https://www.google.com/maps/search/Nhà+hàng+NHÀ+BẾP+CHỢ+HÀN+Đà+Nẵng
 96,ChIJdyMboI8ZQjERY5aq4y19Nfg,Hải Sản Xóm Chài,restaurant,son_tra_my_khe,0.36,giờ inferred 0.45; giá inferred 0.4,"11:00-13:30, 17:30-20:30 [safe_window]",inferred,medium,inferred,https://www.google.com/maps/search/Hải+Sản+Xóm+Chài+Đà+Nẵng
