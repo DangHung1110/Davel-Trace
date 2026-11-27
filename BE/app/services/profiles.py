@@ -726,8 +726,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # make the whole day infeasible: it leaves the plan with the reason instead.
     missed = [(m, why) for m in trip.get("must_visit") or []
               for why in [_gateway_miss(m, trip, pois_by_id, cells)] if why]
+    gone = sorted({m for m, _why in missed})
     if missed:
-        gone = {m for m, _why in missed}
         trip = {**trip, "must_visit": [m for m in trip["must_visit"] if m not in gone]}
         date_warnings += [why for _m, why in missed]
     # A boat that runs only some months (Cù Lao Chàm): out of season a named place
@@ -814,6 +814,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         plan["activity_match"] = _activity_match([], act_report, pois_by_id)
         plan["warnings"] = (date_warnings + list(plan.get("warnings") or [])
                             + _activity_warnings(act_report))
+        if gone:
+            plan["_dropped_must"] = gone
         return plan
 
     travel = _travel_from_cells(cells, ids)
@@ -1068,6 +1070,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
+    if gone:   # named places no boat or cable car reaches today (warned): a trip of
+        plan["_dropped_must"] = gone   # several days is judged without them (multiday)
     _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used

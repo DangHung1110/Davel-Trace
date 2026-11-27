@@ -298,6 +298,8 @@ class TestPlanner(unittest.TestCase):
         plan = self.plan(["town", "top1"], must_visit=["top1"], origin_id="hotel", start_time="08:40")
         self.assertNotIn("top1", self.ids(plan))
         self.assertTrue(any("lo chuyen cap treo cuoi (09:00)" in w for w in plan["warnings"]))
+        self.assertTrue(plan["passed"])
+        self.assertEqual(plan["_dropped_must"], ["top1"])     # a longer trip is judged without it
         open_tour = self.plan(["town", "top1"], must_visit=["top1"], start_time="09:30")
         self.assertTrue(any("sau chuyen cap treo cuoi (09:00)" in w for w in open_tour["warnings"]))
         in_time = self.plan(["town", "top1"], must_visit=["top1"], origin_id="hotel", start_time="08:00")

@@ -180,7 +180,7 @@ def b3_legs(day: dict, trip: dict, pois: dict, matrix: dict) -> list[tuple[str, 
         left, entered = transfers.crossing(_transfer(pois, source), _transfer(pois, y["poi_id"]))
         arrive = transfers.leg_arrival(ready, int(need), left, entered)
         out.append((key, arrive is not None and to_min(y["start"]) >= arrive))
-    first = _transfer(pois, acts[0]["poi_id"]) if acts and not origin else None
+    first = _transfer(pois, acts[0].get("poi_id")) if acts and not origin else None
     if first is not None:
         lo, hi = transfers.open_start(first)
         out.append((f"->{acts[0]['poi_id']}", lo <= to_min(acts[0]["start"]) <= hi))
