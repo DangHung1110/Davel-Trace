@@ -160,7 +160,7 @@ Cấu trúc (luôn bật):
 17. Tên hiển thị (POI active) không viết hoa toàn bộ, không dấu câu thừa; tên gốc ở `name_raw`. Quyết định `hours_reset` (file `decisions_*`) đưa giờ về khung an toàn theo nhóm khi nguồn giờ bị gán nhầm điểm (`danang-v1/hours_web.json` khoá theo tên).
 
 18. `tags.dishes`: id món hợp lệ, không trùng, chỉ ở nơi ăn uống; `source=name` thì tên quán khớp luật món; `web`/`osm` có `url`; cột `dishes` của `poi_features.csv` khớp.
-19. `transfers.json` khớp snapshot (`BE/tests/data/test_transfers_v2.py`): mọi cửa ngõ nạp được (không bị bỏ qua), tên và toạ độ từng nơi khớp `pois.json`, mọi POI active của cụm `ba_na` nằm sau cáp treo; cano và cáp treo có nguồn web, đường mòn ghi cách đo; sau khi nạp, không chặng nào của Cù Lao Chàm ngắn hơn 0,85 lần đường chim bay.
+19. `transfers.json` khớp snapshot (`BE/tests/data/test_transfers_v2.py`): mọi cửa ngõ nạp được (không bị bỏ qua), tên và toạ độ từng nơi khớp `pois.json`, mọi POI active của cụm `ba_na` nằm sau cáp treo; cano và cáp treo có nguồn web, đường mòn ghi cách đo; cano và cáp treo ghi `fare`: giá có nguồn (`vnd`, `per`, `verified_by`, `sources`) hoặc vé của POI ở đầu đường bộ (`ticket_of`, khi đó mọi điểm active sau nó có `requires_ticket_of` = POI đó), đi bộ không có giá; sau khi nạp, không chặng nào của Cù Lao Chàm ngắn hơn 0,85 lần đường chim bay.
 
 Cổng chốt dữ liệu (`P0_GATE=1`):
 - G1. Mọi POI active không phải base có hàng ma trận.

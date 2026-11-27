@@ -59,6 +59,52 @@ Sau khi sửa, vẫn 201/201 kế hoạch qua gate và đi được; không kế
 - Kế hoạch sau khi sửa: **33/33 qua gate và đi được**. Chặng dài (`Q_LONG_LEG`, trên 35 phút) tăng 31 → 42 vì giờ đã tính đúng cano và cáp treo; đi lại trung bình 69 → 81 phút một ngày.
 - Ví dụ (gia đình, phải ghé Cầu Vàng và Fantasy Park): trước đây đi xe máy thẳng từ quán mì Quảng lên Cầu Vàng 61 phút, rồi sang Fantasy Park 1 phút. Giờ là quán mì Quảng → Fantasy Park 81 phút (xe máy 51 + cáp treo 30), Fantasy Park → Cầu Vàng 17 phút đi bộ.
 
+## Tiền vé của điểm cha và tiền chặng (làm ngày 27/11, nhánh `fix/transfer-fares`)
+
+Có những điểm phải trả tiền **ngoài giá của chính nó** mới tới được:
+
+- **Vé của điểm cha.** 24 điểm trên đỉnh Bà Nà (Cầu Vàng, Fantasy Park, quán ăn, cà phê) nằm trong vé Sun World Bà Nà Hills, vé này gồm cả cáp treo. Tương tự, 23 nhà cổ, hội quán, bảo tàng nằm trong vé phố cổ Hội An, và 5 động, chùa nằm trong vé Ngũ Hành Sơn (Thủy Sơn). Dữ liệu ghi quan hệ này bằng `requires_ticket_of`; các điểm tham quan con có giá `included`, tức 0đ.
+- **Tiền chặng.** Ra Cù Lao Chàm phải đi cano từ bến Cửa Đại.
+
+Trước đây planner chỉ cộng giá của từng điểm. Kế hoạch có Cầu Vàng mà không có điểm "Sun World Bà Nà Hills" vì thế không trả vé nào, và Cù Lao Chàm chỉ tốn 50.000đ.
+
+**Cách tính bây giờ.** Một công thức (`BE.common.fee_breakdown`) dùng chung cho bộ giải, cổng `BCS` và `total_cost`:
+
+1. Mỗi điểm trả giá của chính nó, như trước.
+2. Vé của điểm cha trả **một lần cho cả chuyến**, dù có mấy điểm con. Không trả nếu chính điểm cha có trong lịch, vì giá của nó đã là vé đó. Nguồn giá của Sun World ghi vé dùng được 3 ngày liên tiếp.
+3. Tiền chặng trả **mỗi ngày có ghé**: một lượt cano khứ hồi trong ngày.
+
+Ví dụ thật (audit nhắm thẳng): gia đình 4 người, xuất phát từ khách sạn Sala, phải ghé Cầu Vàng và Fantasy Park, ngân sách 3 triệu. Lịch "tiết kiệm" có 6 điểm: Làng Bích họa, Công viên APEC, Cầu Rồng, mì Quảng Cô Sáu, Fantasy Park, Cầu Vàng.
+
+- Trước: báo **200.000đ**, tức chỉ tiền mì Quảng của 4 người.
+- Tiền thật: 4 × (850.000đ vé Sun World + 50.000đ mì Quảng) = **3.600.000đ**, vượt ngân sách.
+- Sau: với 3 triệu, planner trả lịch rỗng kèm cảnh báo "ngan sach khong du cho cac diem bat buoc" (riêng tiền vé đã 3,4 triệu). Với 6 triệu, planner xếp đúng 6 điểm đó, báo 3.600.000đ và ghi rõ khoản "Sun World Bà Nà Hills: 850.000đ/người × 4 (cho Fantasy Park, Cầu Vàng)".
+
+| Khoản | Giá một người planner dùng | Nguồn |
+|---|---|---|
+| Vé Sun World (24 điểm trên đỉnh Bà Nà) | 850.000đ, giá của POI Sun World (mức `expensive`) | nguồn giá của POI: 1.000.000đ khách ngoại tỉnh, 650.000đ khách Đà Nẵng, 500.000đ tuổi 18–25 |
+| Vé phố cổ Hội An (23 điểm) | 250.000đ (mức `medium`) | 120.000đ khách nước ngoài, 80.000đ khách Việt |
+| Vé Ngũ Hành Sơn (5 điểm) | 50.000đ (mức `cheap`) | 40.000đ |
+| Cano Cửa Đại – Cù Lao Chàm | 260.000đ, khứ hồi trong ngày | VnExpress cập nhật 14/7/2026: vé ở bến 350.000đ = 260.000đ tiền cano + 70.000đ phí tham quan + 20.000đ phí môi trường, an ninh; phí tham quan đã nằm trong giá của chính Cù Lao Chàm. Vietnambooking (29/8/2026) ghi cano "khứ hồi trong ngày". Nắng Trip ghi 150.000đ, không ngày, không rõ một chiều hay khứ hồi. |
+
+Vé của ba điểm cha tính theo giá của chính điểm cha khi nó là một điểm trong lịch (giữa mức giá), để hai cách đi cùng một chỗ tốn cùng một tiền. Vì vậy vé phố cổ Hội An đang tính cao gấp đôi giá thật (xem "Chưa làm").
+
+**Code.**
+
+- `transfers.json`: mỗi cửa ngõ có `fare`. Cano: `{"vnd": 260000, "per": "visit", "verified_by": "agent_web", "sources": [...]}`. Cáp treo: `{"ticket_of": "<Sun World>"}`, nghĩa là tiền cáp treo là vé Sun World và được tính qua `requires_ticket_of`. Đi bộ không có `fare`.
+- Lúc nạp POI (`view_pois`), mỗi điểm nhận `access_fees`: vé của điểm cha (`kind: "ticket"`, `per: "trip"`) và tiền chặng (`kind: "transfer"`, `per: "visit"`). 53 điểm của danang-v2 có khoản này. Gate đọc nó qua `_gate_view`.
+- Bộ giải: `StubPOI.access`. Ràng buộc ngân sách thêm một biến "phải trả" cho mỗi khoản: có điểm cần khoản đó mà điểm cha không nằm trong ngày thì phải trả. Lời giải mồi (`_greedy_hint`) giữ tiền vé cho điểm bắt buộc.
+- Chuyến nhiều ngày: vé mua ở ngày trước không tính lại ở ngày sau (`paid_access`); cano tính lại mỗi ngày. Ngày 1 có Cầu Vàng (đã mua vé Sun World) thì điểm "Sun World Bà Nà Hills" ở ngày 2 tốn 0đ: chỉ điểm bán vé cho điểm khác (`sells_ticket`) được miễn, một quán ăn quay lại vẫn tính tiền.
+- Replan `/v1/replan`: vé và cano mà điểm đã đi mua rồi thì phần còn lại của ngày không trả lại. Repair, bộ lọc ngân sách của retrieval, điểm xếp hạng giá (`rank`) và điểm của hồ sơ tiết kiệm đọc `visit_fee`: giá của điểm cộng tiền để tới được nó. Cầu Vàng không còn được gọi là "miễn phí".
+- Audit (`BE/tools/audit_plans.py`) tự tính tiền từ dữ liệu thô (`requires_ticket_of` và `transfers.json`), không gọi code của app, nên một lỗi chung của bộ giải và gate vẫn lộ ra.
+
+**Đo.** Kế hoạch cũ chấm bằng luật tiền mới (cùng bộ chấm, `--report-only`):
+
+- Audit nhắm thẳng (15 yêu cầu, 45 kế hoạch; 11 yêu cầu ở trên thêm 4: gia đình 6 triệu, Chùa Cầu, động Huyền Không, Cù Lao Chàm một người 300k): trước **34/45** kế hoạch báo thiếu tiền, **8** thật ra vượt ngân sách; trung bình báo 713.000đ trong khi tiền thật 1.756.000đ. Vé bị bỏ sót: phố cổ Hội An 24 lần, Sun World 20, Ngũ Hành Sơn 3, cộng cano của mọi kế hoạch có đảo. Sau: 0 báo thiếu, 0 vượt ngân sách. 6 lịch rỗng là hai yêu cầu không đủ tiền thật: gia đình 4 người 3 triệu cho Bà Nà, và một người 300k cho Cù Lao Chàm (riêng cano và vé đảo đã 310.000đ).
+- Audit chuẩn (`BE/tools/audit_plans.py`, 67 yêu cầu, 201 kế hoạch): trước **70/201** kế hoạch báo thiếu tiền và **16** thật ra vượt ngân sách. Gần như toàn bộ là vé phố cổ Hội An (132 lượt điểm con không trả vé, cộng 2 lượt Ngũ Hành Sơn), nhiều nhất ở hồ sơ trải nghiệm vì nó hay chọn hội quán, nhà cổ; không kế hoạch chuẩn nào có điểm trên đỉnh Bà Nà hay đảo. Ví dụ T04 (4 bạn, tối muộn, 3 triệu): báo 2.800.000đ, tiền thật 3.800.000đ. Sau: 0 báo thiếu, 0 vượt ngân sách, 201/201 qua gate và đi được, ý muốn đạt giữ nguyên 96/108. 52 kế hoạch trả vé phố cổ, 1 kế hoạch trả vé Ngũ Hành Sơn. Chi phí trung bình một kế hoạch: báo 1.004.000đ, tiền thật 1.216.000đ, sau 1.146.000đ (planner chọn lại điểm khi đã thấy vé).
+- Lịch đổi: 64/201 kế hoạch giống hệt, 103/201 cùng tập điểm, 76/201 đổi tổng tiền. Mô hình CP-SAT đổi ở mọi yêu cầu có điểm con trong danh sách ứng viên (thêm biến "phải trả"), và điểm xếp hạng giá của các điểm con đổi, nên solver dừng ở lịch khác. Các cờ chất lượng đổi theo cả hai chiều: sạch 27 → 25 (chấm bằng bộ chấm cũ ở lần trước), khoảng trống dài 100 → 90, chặng dài 31 → 27, đến muộn 11 → 14, về sớm 9 → 12; đi lại trung bình 31,0 → 30,1 phút một ngày.
+- Thời gian trả lời (mỗi bên một lần chạy, không xen kẽ, nên chỉ để biết không chậm đi rõ rệt): một ngày trung vị 6,0 → 5,4 giây, p95 9,3 → 8,3; hai ngày trung vị 10,8 → 11,0.
+
 ## Hợp đồng cho app
 
 `segments[]` của kế hoạch (`BE/app/services/response.py`):
@@ -66,6 +112,17 @@ Sau khi sửa, vẫn 201/201 kế hoạch qua gate và đi được; không kế
 - `mode` vẫn là `"motorbike"` cho chặng thường. Chặng vào hoặc ra một nơi sau cửa ngõ ghi các phần theo thứ tự đi, nối bằng `+`: `"motorbike+boat"`, `"boat+motorbike"`, `"cable_car"` (từ chính ga chân núi lên đỉnh), `"cable_car+motorbike"`, `"motorbike+walk"`, và `"walk"` giữa hai điểm trên đỉnh Bà Nà.
 - Có thêm `transfers: [{gateway, name, mode, minutes, km}]`, ví dụ `{"gateway": "cu_lao_cham_boat", "name": "Cano Cửa Đại - Cù Lao Chàm", "mode": "boat", "minutes": 30, "km": 16.5}`. `minutes` và `km` của segment đã gồm phần này.
 - App hiện chưa đọc `segments`. Khi hiện chặng đi, nên ghi "xe máy 18 phút + cano 30 phút" thay vì "xe máy 48 phút".
+
+Tiền (`plan_totals`):
+
+- `total_cost` đã gồm vé của điểm cha và tiền chặng.
+- Khi có khoản như vậy, plan có thêm `access_fees: [{key, kind, per, name, vnd_per_person, travelers, vnd, for, estimate, day?}]`, ví dụ `{"key": "ChIJyUQ4aw72QTERCXl5YV-4U1w", "kind": "ticket", "per": "trip", "name": "Sun World Bà Nà Hills", "vnd_per_person": 850000, "travelers": 4, "vnd": 3400000, "for": [<Fantasy Park>, <Cầu Vàng>], "estimate": false}`. `kind` là `"ticket"` (vé điểm cha) hoặc `"transfer"` (tiền chặng); `for` là các điểm cần khoản đó; `day` có ở chuyến nhiều ngày. Không có khoản nào thì không có trường này.
+- App hiện chỉ đọc `total_cost`. Khi hiện chi phí, nên ghi thêm một dòng cho mỗi khoản, ví dụ "Vé Sun World Bà Nà Hills 850.000đ × 4 (cho Cầu Vàng, Fantasy Park)", để khách hiểu vì sao tổng cao hơn giá các điểm cộng lại.
+
+## Gộp với nhánh khác
+
+- `fix/transfer-fares` nằm trên `fix/non-road-legs`, nên gộp sau nhánh đó.
+- `feat/single-poi-value` (chưa gộp) xung đột ở `BE/app/services/profiles.py` (import, `_score`, phần tính điểm nút). Khi giải: giữ cấu trúc `value_svc.score` của nhánh kia, giữ `paid=paid` cho `_score` (đường legacy), và trong `BE/app/services/value.py` đổi `effective_fee(poi)` ở `place_features` và `explain` thành `visit_fee(poi, paid_access(trip))`. Nếu không, dưới objective v1 hồ sơ tiết kiệm lại coi Cầu Vàng, nhà cổ Hội An là "miễn phí" và cộng điểm thưởng miễn phí, dù tiền vé vẫn bị tính.
 
 ## Thêm hoặc sửa một cửa ngõ
 
@@ -76,7 +133,12 @@ Sau khi sửa, vẫn 201/201 kế hoạch qua gate và đi được; không kế
 ## Chưa làm
 
 - **Giờ chạy của tàu và cáp treo.** Tàu du lịch ra Cù Lao Chàm phần lớn nghỉ ngoài tháng 3–8 (VnExpress), và chạy theo lịch cố định. Cáp treo Bà Nà mở 08:00, vé ngày lên lần cuối 16:30–17:00. Hiện `hours` của Cù Lao Chàm là `00:00-23:59`, nên planner vẫn có thể xếp đảo tới 20:00. Nên làm tiếp bằng `hours.access_window` như khung đường Sơn Trà.
-- **Tiền vé của chặng.** Điểm trên đỉnh Bà Nà có giá `included` (nằm trong vé Sun World) nên tính 0đ. Vì vậy kế hoạch có Cầu Vàng và Fantasy Park mà không có điểm "Sun World Bà Nà Hills" thì không bị tính vé cáp treo (mức `expensive`, 850.000đ một người). Ví dụ: kế hoạch gia đình 4 người phải ghé Cầu Vàng và Fantasy Park báo tổng 200.000đ, chỉ là tiền bữa trưa. Cù Lao Chàm (mức `cheap`, 50.000đ) cũng chưa gồm tiền cano bắt buộc, khoảng 150.000đ mỗi lượt theo ghi chú giá.
+- **Giá vé theo mức, không theo số tiền có nguồn.** `effective_fee` lấy giữa mức giá, nên vé phố cổ Hội An tính 250.000đ (nguồn: 120.000đ khách nước ngoài, 80.000đ khách Việt) và vé Sun World 850.000đ (nguồn: 1.000.000đ khách ngoại tỉnh). Sửa ở `effective_fee` sẽ đổi giá của mọi điểm, nên để việc riêng.
+- **Vé trẻ em** (Sun World, nửa giá cano cho trẻ 1–8 tuổi) chưa mô hình hoá: mọi giá là giá người lớn.
+- **Replan của app** (`planning_lifecycle`) lập lại phần còn lại mà không có các điểm đã đi. Nếu sáng đã lên Bà Nà (vé đã mua, khách tự ghi chi tiêu) và phần còn lại vẫn có một điểm trên đỉnh, vé bị tính lần nữa. Chỉ `/v1/replan` (`services/replan.py`) biết vé đã mua.
+- **Khách sạn Mercure trên đỉnh làm điểm xuất phát:** lượt cáp treo xuống và lên lại không bị tính tiền (khoản gắn với điểm, không gắn với chặng).
+- **Chuyến 2 ngày rải `must_visit`** (Cầu Vàng ngày 1, Fantasy Park ngày 2) vẫn có thể xảy ra: vé chỉ tính một lần (đúng với vé 3 ngày), nhưng khách phải lên núi hai lần.
+- Mức giá (`price_level`) của điểm con vẫn là 1 (rẻ) khi chấm hợp mức chi tiêu; chỉ số tiền đã đúng.
 - **Chuyến không có khách sạn (open tour):** ngày bắt đầu ở điểm đầu tiên, nên nếu đảo là điểm đầu thì chặng cano chiều đi không được tính. Trên `main`, chặng về khách sạn cuối ngày cũng chưa được tính. Nhánh `fix/return-leg-to-base` (chưa gộp) thêm chặng này; nó đọc cùng ma trận, nên khi gộp cả hai, chặng về từ đảo sẽ tự gồm cano.
 - **Hàng của bến Cửa Đại là ước lượng** qua một quán gần bến (lệch vài phút). Dựng hàng OSRM thật cho bến cần Docker và OSRM.
 - **Xếp hàng giờ cao điểm** ở cáp treo (vài phút tới vài chục phút) chưa tính.
