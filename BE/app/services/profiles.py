@@ -353,6 +353,16 @@ def _to_trip(trip: dict) -> StubTrip:
                     trip.get("origin_id") or None)
 
 
+def sleeps_at(place_id: str | None, pois_by_id: dict) -> bool:
+    """Does the traveller sleep where the day starts (a lodging, role "base")?
+
+    Only then does the day end there and pay the ride back. A replan that resumes at
+    the stop just finished, a GPS fix (its `@gps:` id is never a place) or a sight
+    named as the start is not where the day ends: no ride back to it is charged.
+    """
+    return bool(place_id) and (pois_by_id.get(place_id) or {}).get("role") == "base"
+
+
 def _max_fee(trip: dict) -> int | None:
     """Gate BCS as a per-person fee ceiling for the solver (no budget -> none)."""
     budget = trip.get("budget")
@@ -756,6 +766,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         legs = matrix_svc.legs_from(cells, origin_id, ids)
         travel.update(legs)
         edges.update({pair: 0.0 for pair in legs})
+        if sleeps_at(origin_id, pois_by_id):
+            # ... and a day that starts where the traveller sleeps ends there: T9 prices
+            # the ride back on the last arc (stop -> depot), and `objective.features`
+            # reads the same leg. A cost only: the model keeps no time for it (the day
+            # may end at `end_time` and ride home after it) and gate B3 does not check it.
+            travel.update(matrix_svc.legs_to(cells, ids, origin_id))
     q = _profile_edges(prof, edges, travel) if spec is None else edges
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no

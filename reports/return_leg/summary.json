@@ -1,0 +1,280 @@
+{
+ "date": "2026-11-27",
+ "base": {
+  "poi_id": "ChIJMeyhoXgXQjERqCs6CuNR5yI",
+  "name": "Sala Danang Beach Hotel"
+ },
+ "before": "origin/main 707f084 (git archive)",
+ "after": "fix/return-leg-to-base",
+ "audit": "BE/tools/audit_plans.py --origin <base> (feat/gps-origin), 67 scenarios x 3 profiles",
+ "all": {
+  "before": {
+   "plans": 201,
+   "days": 222,
+   "passed": 201,
+   "stops_per_day": 7.26,
+   "travel_min_per_day_reported": 44.4,
+   "back_min_median": 10.0,
+   "back_min_mean": 22.2,
+   "back_min_p90": 50.0,
+   "back_km_median": 4.66,
+   "back_over_30": 78,
+   "ride_per_day_with_back": 66.6,
+   "home_after_end_days": 124,
+   "home_after_end_mean_min": 27.0,
+   "wishes_met": 96,
+   "wishes": 108
+  },
+  "after": {
+   "plans": 201,
+   "days": 222,
+   "passed": 201,
+   "stops_per_day": 7.29,
+   "travel_min_per_day_reported": 45.1,
+   "back_min_median": 6.0,
+   "back_min_mean": 19.0,
+   "back_min_p90": 50.0,
+   "back_km_median": 2.73,
+   "back_over_30": 69,
+   "ride_per_day_with_back": 64.1,
+   "home_after_end_days": 125,
+   "home_after_end_mean_min": 25.1,
+   "wishes_met": 96,
+   "wishes": 108
+  }
+ },
+ "by_profile": {
+  "balanced": {
+   "before": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7.72,
+    "travel_min_per_day_reported": 37.3,
+    "back_min_median": 9.0,
+    "back_min_mean": 10.9,
+    "back_min_p90": 10.0,
+    "back_km_median": 3.64,
+    "back_over_30": 5,
+    "ride_per_day_with_back": 48.3,
+    "home_after_end_days": 48,
+    "home_after_end_mean_min": 12.1,
+    "wishes_met": 32,
+    "wishes": 36
+   },
+   "after": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7.76,
+    "travel_min_per_day_reported": 39.3,
+    "back_min_median": 6.0,
+    "back_min_mean": 7.8,
+    "back_min_p90": 10.0,
+    "back_km_median": 2.73,
+    "back_over_30": 2,
+    "ride_per_day_with_back": 47.1,
+    "home_after_end_days": 48,
+    "home_after_end_mean_min": 9.4,
+    "wishes_met": 32,
+    "wishes": 36
+   }
+  },
+  "experience": {
+   "before": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7.04,
+    "travel_min_per_day_reported": 71.6,
+    "back_min_median": 50.0,
+    "back_min_mean": 47.2,
+    "back_min_p90": 50.0,
+    "back_km_median": 25.11,
+    "back_over_30": 70,
+    "ride_per_day_with_back": 118.9,
+    "home_after_end_days": 68,
+    "home_after_end_mean_min": 38.6,
+    "wishes_met": 32,
+    "wishes": 36
+   },
+   "after": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7,
+    "travel_min_per_day_reported": 70.1,
+    "back_min_median": 49.0,
+    "back_min_mean": 43.4,
+    "back_min_p90": 50.0,
+    "back_km_median": 24.31,
+    "back_over_30": 65,
+    "ride_per_day_with_back": 113.5,
+    "home_after_end_days": 66,
+    "home_after_end_mean_min": 39.4,
+    "wishes_met": 32,
+    "wishes": 36
+   }
+  },
+  "savings": {
+   "before": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7.03,
+    "travel_min_per_day_reported": 24.3,
+    "back_min_median": 5.0,
+    "back_min_mean": 8.6,
+    "back_min_p90": 17.0,
+    "back_km_median": 2.33,
+    "back_over_30": 3,
+    "ride_per_day_with_back": 32.8,
+    "home_after_end_days": 8,
+    "home_after_end_mean_min": 17,
+    "wishes_met": 32,
+    "wishes": 36
+   },
+   "after": {
+    "plans": 67,
+    "days": 74,
+    "passed": 67,
+    "stops_per_day": 7.12,
+    "travel_min_per_day_reported": 26.0,
+    "back_min_median": 5.0,
+    "back_min_mean": 5.7,
+    "back_min_p90": 5.0,
+    "back_km_median": 2.33,
+    "back_over_30": 2,
+    "ride_per_day_with_back": 31.7,
+    "home_after_end_days": 11,
+    "home_after_end_mean_min": 8.3,
+    "wishes_met": 32,
+    "wishes": 36
+   }
+  }
+ },
+ "plan_pairs": {
+  "pairs": 201,
+  "identical": 44,
+  "same_order": 80,
+  "same_set": 93,
+  "mean_jaccard": 0.789,
+  "travel_delta_mean_min": 0.8,
+  "passed_a": 201,
+  "passed_b": 201
+ },
+ "open_tours_subset": {
+  "pairs": 21,
+  "identical": 21,
+  "passed_a": 21,
+  "passed_b": 21
+ },
+ "latency": [
+  {
+   "tree": "before from-base",
+   "requests": 21,
+   "median_s": 4.4,
+   "p95_s": 9.42,
+   "max_s": 9.44,
+   "gate_p95_lt_8s": false
+  },
+  {
+   "tree": "after from-base",
+   "requests": 21,
+   "median_s": 6.97,
+   "p95_s": 9.7,
+   "max_s": 9.73,
+   "gate_p95_lt_8s": false
+  },
+  {
+   "tree": "before from-base",
+   "requests": 21,
+   "median_s": 4.38,
+   "p95_s": 9.4,
+   "max_s": 9.47,
+   "gate_p95_lt_8s": false
+  },
+  {
+   "tree": "after from-base",
+   "requests": 21,
+   "median_s": 7.09,
+   "p95_s": 9.92,
+   "max_s": 9.97,
+   "gate_p95_lt_8s": false
+  },
+  {
+   "tree": "lat_before from-base",
+   "requests": 21,
+   "median_s": 3.6,
+   "p95_s": 6.45,
+   "max_s": 6.47,
+   "gate_p95_lt_8s": true
+  },
+  {
+   "tree": "lat_after from-base",
+   "requests": 21,
+   "median_s": 5.0,
+   "p95_s": 5.51,
+   "max_s": 6.47,
+   "gate_p95_lt_8s": true
+  },
+  {
+   "tree": "lat_before from-base",
+   "requests": 21,
+   "median_s": 3.34,
+   "p95_s": 6.31,
+   "max_s": 6.43,
+   "gate_p95_lt_8s": true
+  },
+  {
+   "tree": "lat_after from-base",
+   "requests": 21,
+   "median_s": 5.03,
+   "p95_s": 5.68,
+   "max_s": 6.19,
+   "gate_p95_lt_8s": true
+  },
+  {
+   "tree": "before open-tour",
+   "requests": 14,
+   "median_s": 4.12,
+   "p95_s": 8.92,
+   "max_s": 9.0,
+   "gate_p95_lt_8s": false
+  },
+  {
+   "tree": "after open-tour",
+   "requests": 14,
+   "median_s": 4.07,
+   "p95_s": 8.84,
+   "max_s": 9.05,
+   "gate_p95_lt_8s": false
+  }
+ ],
+ "solves_from_base_main_vs_branch": {
+  "optimal": [
+   19,
+   14
+  ],
+  "feasible_timeout": [
+   2,
+   7
+  ],
+  "gap_at_timeout_pct_after": [
+   24.6,
+   38.6
+  ]
+ },
+ "suite": {
+  "passed": 1531,
+  "skipped": 9,
+  "failed": 19,
+  "errors": 11,
+  "same_failures_as_main": true,
+  "causes": [
+   "DATABASE_URL / PostgreSQL",
+   "Google OAuth",
+   "2 Flutter boundary tests"
+  ]
+ }
+}
