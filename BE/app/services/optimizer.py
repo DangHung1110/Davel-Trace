@@ -755,57 +755,6 @@ def _ending_late(poi: StubPOI, start: int, late_end_min: int, trip: StubTrip,
     return None
 
 
-def _transfer_rules(m, t, dur, arc, ids: list[str], travel: dict, trip: StubTrip,
-                    pois: list[StubPOI]) -> None:
-    """Boat and cable-car timetables (transfers.py) on the arcs that ride them.
-
-    An arc into the places behind a gateway, or out of them, is a leg with a car or a
-    boat in it. It must leave by `latest` and arrives no earlier than the first run
-    allows (`transfers.leg_bounds`); an arc no run can serve is dropped. The open tour
-    has no first leg, so a stop behind a gateway that opens it starts while cars or
-    boats arrive (`open_start`). The day's last stop up there still needs a run back
-    unless the base is up there too: its window already ends at `leave_by`
-    (hours.access_window), and the arc to the depot states it again.
-    """
-    n = len(ids)
-    svc = {i: pois[i - 1].transfer for i in range(1, n + 1) if pois[i - 1].transfer is not None}
-    base = trip.origin_transfer if trip.origin_id else None
-    if not svc and base is None:
-        return
-    for i in range(n + 1):
-        src = svc.get(i) if i else base
-        for j in range(n + 1):
-            if i == j:
-                continue
-            dst = svc.get(j) if j else None
-            if src is None and dst is None:
-                continue
-            if j == 0:
-                left = transfers_mod.crossing(src, base)[0]
-                if i > 0 and left is not None:
-                    m.Add(t[i] + dur[i] <= left.back[1] - left.board).OnlyEnforceIf(arc[(i, 0)])
-                continue
-            if i == 0 and not trip.origin_id:
-                lo, hi = transfers_mod.open_start(dst)
-                m.Add(t[j] >= lo).OnlyEnforceIf(arc[(0, j)])
-                m.Add(t[j] <= hi).OnlyEnforceIf(arc[(0, j)])
-                continue
-            w = travel.get((trip.origin_id if i == 0 else ids[i - 1], ids[j - 1]))
-            if w is None:
-                continue  # no matrix leg: the arc is already forbidden (B3)
-            left, entered = transfers_mod.crossing(src, dst)
-            if left is None and entered is None:
-                continue  # a walk between two places behind one gateway
-            latest, earliest, possible = transfers_mod.leg_bounds(w, left, entered)
-            if not possible or (i == 0 and latest is not None and trip.start_min > latest):
-                m.Add(arc[(i, j)] == 0)
-                continue
-            if i > 0 and latest is not None:
-                m.Add(t[i] + dur[i] <= latest).OnlyEnforceIf(arc[(i, j)])
-            if earliest is not None:
-                m.Add(t[j] >= earliest).OnlyEnforceIf(arc[(i, j)])
-
-
 def _window_hits(m, t, visit, i, lo: int, hi: int, tag: str):
     """Boolvar: node i is visited AND its start lies in [lo, hi)."""
     after, before = m.NewBoolVar(f"{tag}_a_{i}"), m.NewBoolVar(f"{tag}_b_{i}")
@@ -1791,3 +1740,53 @@ def _pool_search(pois: list[StubPOI], travel: dict, trip: StubTrip,
     }
     return first
 
+
+def _transfer_rules(m, t, dur, arc, ids: list[str], travel: dict, trip: StubTrip,
+                    pois: list[StubPOI]) -> None:
+    """Boat and cable-car timetables (transfers.py) on the arcs that ride them.
+
+    An arc into the places behind a gateway, or out of them, is a leg with a car or a
+    boat in it. It must leave by `latest` and arrives no earlier than the first run
+    allows (`transfers.leg_bounds`); an arc no run can serve is dropped. The open tour
+    has no first leg, so a stop behind a gateway that opens it starts while cars or
+    boats arrive (`open_start`). The day's last stop up there still needs a run back
+    unless the base is up there too: its window already ends at `leave_by`
+    (hours.access_window), and the arc to the depot states it again.
+    """
+    n = len(ids)
+    svc = {i: pois[i - 1].transfer for i in range(1, n + 1) if pois[i - 1].transfer is not None}
+    base = trip.origin_transfer if trip.origin_id else None
+    if not svc and base is None:
+        return
+    for i in range(n + 1):
+        src = svc.get(i) if i else base
+        for j in range(n + 1):
+            if i == j:
+                continue
+            dst = svc.get(j) if j else None
+            if src is None and dst is None:
+                continue
+            if j == 0:
+                left = transfers_mod.crossing(src, base)[0]
+                if i > 0 and left is not None:
+                    m.Add(t[i] + dur[i] <= left.back[1] - left.board).OnlyEnforceIf(arc[(i, 0)])
+                continue
+            if i == 0 and not trip.origin_id:
+                lo, hi = transfers_mod.open_start(dst)
+                m.Add(t[j] >= lo).OnlyEnforceIf(arc[(0, j)])
+                m.Add(t[j] <= hi).OnlyEnforceIf(arc[(0, j)])
+                continue
+            w = travel.get((trip.origin_id if i == 0 else ids[i - 1], ids[j - 1]))
+            if w is None:
+                continue  # no matrix leg: the arc is already forbidden (B3)
+            left, entered = transfers_mod.crossing(src, dst)
+            if left is None and entered is None:
+                continue  # a walk between two places behind one gateway
+            latest, earliest, possible = transfers_mod.leg_bounds(w, left, entered)
+            if not possible or (i == 0 and latest is not None and trip.start_min > latest):
+                m.Add(arc[(i, j)] == 0)
+                continue
+            if i > 0 and latest is not None:
+                m.Add(t[i] + dur[i] <= latest).OnlyEnforceIf(arc[(i, j)])
+            if earliest is not None:
+                m.Add(t[j] >= earliest).OnlyEnforceIf(arc[(i, j)])

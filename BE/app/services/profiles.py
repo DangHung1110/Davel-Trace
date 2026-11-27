@@ -49,7 +49,7 @@ from BE.app.services.optimizer import (
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
-    price_level_of, season_label, to_float, to_int, to_min, trusted_rating, weekday_of)
+    price_level_of, to_float, to_int, to_min, trusted_rating, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -737,8 +737,9 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         poi = pois_by_id.get(m) or {}
         if poi.get("off_season"):
             info = poi.get("transfer") or {}
+            season = transfers_mod.season_label(info.get("months"))
             date_warnings.append(
-                f"{poi.get('name')}: {info.get('name')} chi chay deu {season_label(info.get('months'))}; "
+                f"{poi.get('name')}: {info.get('name')} chi chay deu {season}; "
                 f"ngay {trip.get('date')} phan lon tau nghi (bien dong), hoi lich tau truoc khi di")
     tpl_name = template
     if tpl_name is None:  # direct callers: derive only from an explicit profile
@@ -1070,8 +1071,6 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel)
-    if gone:   # named places no boat or cable car reaches today (warned): a trip of
-        plan["_dropped_must"] = gone   # several days is judged without them (multiday)
     _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used
@@ -1115,6 +1114,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     warnings = _activity_warnings(plan["activity_match"])
     if warnings:
         plan["warnings"] = list(plan.get("warnings") or []) + warnings
+    if gone:   # named places no boat or cable car reaches today (warned): a trip of
+        plan["_dropped_must"] = gone   # several days is judged without them (multiday)
     # Solution pool: every member is a full plan (costs/gate/explanations), so
     # the router can return one directly. A member that fails validation is
     # dropped (defensive: model constraints and gate should agree).
@@ -1256,7 +1257,7 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
             months = (poi.get("transfer") or {}).get("months")
             if months:
                 warnings.append(f"{poi.get('name')}: {poi['transfer'].get('name')} chi chay deu "
-                                f"{season_label(months)} (bien dong cac thang khac): chon ngay di de kiem tra")
+                                f"{transfers_mod.season_label(months)} (bien dong cac thang khac): chon ngay di de kiem tra")
     # FR-026: the forecast is part of what the plan assumes. Wet hours are named, with
     # the stops left in the open in them (a wish, a named place, a day with no roof to
     # move under); so is a date the forecast does not reach (each day of a trip its own).

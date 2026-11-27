@@ -161,6 +161,14 @@ def place_service(spec: dict) -> dict[str, dict]:
     return out
 
 
+def season_label(months: list[int] | None) -> str:
+    """'thang 3-8' for the months a boat runs (one span, else the list)."""
+    months = sorted(months or [])
+    if months and months == list(range(months[0], months[-1] + 1)):
+        return f"thang {months[0]}-{months[-1]}"
+    return "thang " + ", ".join(str(m) for m in months)
+
+
 def service(info: dict | None) -> Service | None:
     """A POI's `transfer` (`place_service`) -> Service; None: no timetable binds it."""
     if not info:

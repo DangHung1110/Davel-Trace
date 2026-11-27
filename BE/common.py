@@ -210,13 +210,6 @@ def poi_on_date(poi: dict, date: str | None) -> dict:
     return {**poi, "opening_hours": [today] if today else [], "closed_today": not today}
 
 
-def season_label(months: list[int] | None) -> str:
-    """'thang 3-8' for a run of months (one span or a list)."""
-    months = sorted(months or [])
-    if months and months == list(range(months[0], months[-1] + 1)):
-        return f"thang {months[0]}-{months[-1]}"
-    return "thang " + ", ".join(str(m) for m in months)
-
 
 def closed_weekdays(poi: dict) -> list[int]:
     """Weekdays (Monday = 0) the weekly table says the POI is closed."""

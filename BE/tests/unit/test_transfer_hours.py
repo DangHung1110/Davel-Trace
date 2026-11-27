@@ -29,8 +29,7 @@ from BE.app.services.optimizer import StubPOI, StubTrip, _hint_place, optimize  
 from BE.app.services.profiles import build_plan  # noqa: E402
 from BE.app.services.route_order import best_order, rides_in_time  # noqa: E402
 from BE.app.services.validator import validate  # noqa: E402
-from BE.common import (load_transfer_places, poi_on_date, season_label, to_min,  # noqa: E402
-                       view_pois)
+from BE.common import load_transfer_places, poi_on_date, to_min, view_pois  # noqa: E402
 
 SPEC = {
     "format": transfers.FORMAT,
@@ -347,8 +346,8 @@ class TestPoiView(unittest.TestCase):
             self.assertEqual(load_transfer_places(os.path.join(snap, "missing")), {})
 
     def test_season_label(self):
-        self.assertEqual(season_label([3, 4, 5, 6, 7, 8]), "thang 3-8")
-        self.assertEqual(season_label([12, 1]), "thang 1, 12")
+        self.assertEqual(transfers.season_label([3, 4, 5, 6, 7, 8]), "thang 3-8")
+        self.assertEqual(transfers.season_label([12, 1]), "thang 1, 12")
 
 
 class TestMigrate(unittest.TestCase):
