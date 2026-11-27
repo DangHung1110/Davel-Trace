@@ -271,6 +271,26 @@ def _window(snapshot: dict, remaining_from=None, now: datetime | None = None) ->
             "days": count - index, "start_time": _hhmm(start)}
 
 
+def _moment_date(remaining_from=None, now: datetime | None = None) -> str | None:
+    """The Đà Nẵng date of a replan's moment: that of `remaining_from`, else of `now`."""
+    on_day, _at = _moment(remaining_from)
+    if on_day is None and now is not None:
+        on_day = now.astimezone(LOCAL_TZ).date()
+    return on_day.isoformat() if on_day else None
+
+
+def _device_fix(value) -> dict | None:
+    """The device position of a replan (`current_location`), rounded to 4 decimals
+    (~11 m): as good as a fix to route from, and no finer than that in the stored
+    request. None when the app sent none."""
+    if not isinstance(value, dict) or value.get("lat") is None or value.get("lon") is None:
+        return None
+    fix = {"lat": round(float(value["lat"]), 4), "lon": round(float(value["lon"]), 4)}
+    if value.get("accuracy_m") is not None:
+        fix["accuracy_m"] = int(round(float(value["accuracy_m"])))
+    return fix
+
+
 def _replan_overrides(source_request: dict | None, changes: dict) -> dict:
     """The constraints a replan plans with: those of the planning request that made the
     source version (copied onto the version when it was accepted), with the client's
@@ -341,23 +361,34 @@ def _trip_request(snapshot: dict, remaining: dict, paid=(), paid_today=()) -> di
     here = remaining.get("current_poi_id")
     if here and remaining.get("current_poi_date") not in (None, window["date"]):
         here = None
-    first_origin = here or base
+    base_origin = {"poi_id": base} if base else None
+    first_origin = {"poi_id": here or base} if here or base else None
+    # Where the device is (one GPS fix sent with the replan) beats the last finished
+    # stop: the first day starts there, and at that stop or the base when the planner
+    # cannot use the fix. A window on another day than the fix starts at the base.
+    fix = remaining.get("current_location")
+    if fix and remaining.get("current_location_date") not in (None, window["date"]):
+        fix = None
+    if fix:
+        first_origin = {"lat": fix["lat"], "lon": fix["lon"], "label": "Vị trí hiện tại",
+                        "accuracy_m": fix.get("accuracy_m"),
+                        "fallback_poi_id": here or base}
     start_time, origin, resume = window["start_time"], first_origin, None
     paid, paid_today = sorted(set(paid)), sorted(set(paid_today) - set(paid))
     if window["days"] == 1:
         # The first day is the only one: what that morning paid, the trip paid.
         paid = sorted({*paid, *paid_today})
-    elif start_time != day_start or first_origin != base or paid_today:
+    elif start_time != day_start or first_origin != base_origin or paid_today:
         # Only the first day resumes; the days after it start at the base at day_start
         # and pay the cano again.
         resume = {"start_time": start_time,
-                  "origin": {"poi_id": first_origin} if first_origin else None,
+                  "origin": first_origin,
                   "paid_access": paid_today}
-        start_time, origin = day_start, base
+        start_time, origin = day_start, base_origin
     return InternalTripRequest(
         trip_id=snapshot["id"],
         user_id=snapshot.get("account_id", "owned-user"),
-        origin={"poi_id": origin} if origin else None,
+        origin=origin,
         resume=resume,
         city="da-nang",
         date=window["date"],
@@ -508,9 +539,15 @@ class PlanningLifecycleService:
                 # (a retry gets the plan it asked for even when that time has passed),
                 # outside the fingerprint (the clock is not part of what was sent),
                 # and kept with the request so its answer says what it planned.
+                now = self._clock()
                 remaining["window"] = _window(
-                    effective_snapshot, remaining.get("remaining_from"), self._clock()
+                    effective_snapshot, remaining.get("remaining_from"), now
                 )
+                if remaining.get("current_location"):
+                    # The day the GPS fix was taken: only a window on it starts there.
+                    remaining["current_location_date"] = _moment_date(
+                        remaining.get("remaining_from"), now
+                    )
             row = PlanningRequestModel(
                 account_id=principal.account_id,
                 trip_id=trip.trip_id,
@@ -912,6 +949,10 @@ class PlanningLifecycleService:
             # cano only for that day.
             done = [{"poi_id": known[item]["poi_id"], "date": known[item]["date"]}
                     for item in completed if known[item]["poi_id"]]
+            fix = _device_fix(payload.get("current_location"))
+            if fix:
+                # Only when sent: a replan without it keeps the fingerprint it had before.
+                remaining["current_location"] = fix
         return self.create_planning_request(
             principal,
             trip_id,

@@ -21,15 +21,20 @@ import os
 import sys
 import unittest
 from datetime import date, datetime, time, timedelta, timezone
+from uuid import uuid4
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
+from pydantic import ValidationError  # noqa: E402
+
 from BE.app.modules.identity.service import IdentityError  # noqa: E402
-from BE.app.modules.planning_lifecycle.api import ConstraintOverrides  # noqa: E402
+from BE.app.modules.planning_lifecycle.api import ConstraintOverrides, ReplanBody  # noqa: E402
 from BE.app.modules.planning_lifecycle.service import (  # noqa: E402
     MIN_DAY_LEFT_MIN,
     _current_stop,
+    _device_fix,
     _moment,
+    _moment_date,
     _paid_by,
     _replan_overrides,
     _trip_request,
@@ -218,6 +223,81 @@ class TestTripRequest(unittest.TestCase):
         # The service always resolves one; a call without it reads remaining_from alone.
         trip = self.plan(ONE_DAY, remaining_from="14:10", current_poi_id="cafe")
         self.assertEqual((trip["start_time"], trip["origin"]["poi_id"]), ("14:10", "cafe"))
+
+
+class TestDevicePosition(unittest.TestCase):
+    """`current_location`: the replan's first day starts where the device is (one GPS
+    fix, specs/024-gps-origin), the last finished stop or the base being where it starts
+    when the planner cannot use the fix."""
+
+    FIX = {"lat": 16.0744, "lon": 108.245, "accuracy_m": 12}
+
+    def plan(self, snapshot=TWO_DAYS, **remaining):
+        return _trip_request(snapshot, remaining)
+
+    def test_the_position_beats_the_last_finished_stop(self):
+        trip = self.plan({**TWO_DAYS, "base_poi_id": "hotel"},
+                         window=_window(TWO_DAYS, None, at(24, 14, 5)),
+                         current_poi_id="cafe", current_poi_date="2026-11-24",
+                         current_location=self.FIX, current_location_date="2026-11-24")
+        first = trip["resume"]["origin"]
+        self.assertEqual((first["lat"], first["lon"], first["accuracy_m"]), (16.0744, 108.245, 12))
+        self.assertIsNone(first["poi_id"])
+        self.assertEqual(first["fallback_poi_id"], "cafe")
+        self.assertEqual(trip["resume"]["start_time"], "14:05")
+        self.assertEqual(trip["origin"]["poi_id"], "hotel")  # day 2 starts at the base
+
+    def test_a_one_day_replan_starts_at_the_position(self):
+        trip = self.plan({**ONE_DAY, "base_poi_id": "hotel"},
+                         window=_window(ONE_DAY, None, at(24, 14, 5)),
+                         current_location=self.FIX, current_location_date="2026-11-24")
+        self.assertEqual((trip["start_time"], trip["origin"]["lat"]), ("14:05", 16.0744))
+        self.assertEqual(trip["origin"]["fallback_poi_id"], "hotel")
+        self.assertIsNone(trip["resume"])
+
+    def test_a_window_on_another_day_starts_at_the_base(self):
+        # 30 minutes before day_end: the replan is tomorrow's, from the hotel.
+        trip = self.plan({**TWO_DAYS, "base_poi_id": "hotel"},
+                         window=_window(TWO_DAYS, None, at(24, 19, 30)),
+                         current_location=self.FIX, current_location_date="2026-11-24")
+        self.assertEqual((trip["date"], trip["origin"]["poi_id"]), ("2026-11-25", "hotel"))
+        self.assertIsNone(trip["resume"])
+
+    def test_without_the_day_of_the_fix_it_is_used(self):
+        trip = self.plan(ONE_DAY, remaining_from="14:10", current_location=self.FIX)
+        self.assertEqual((trip["start_time"], trip["origin"]["lat"]), ("14:10", 16.0744))
+        self.assertIsNone(trip["origin"]["fallback_poi_id"])
+
+    def test_no_position_changes_nothing(self):
+        trip = self.plan({**TWO_DAYS, "base_poi_id": "hotel"},
+                         window=_window(TWO_DAYS, None, at(24, 14, 5)),
+                         current_poi_id="cafe", current_poi_date="2026-11-24")
+        self.assertEqual(trip["resume"]["origin"]["poi_id"], "cafe")
+        self.assertIsNone(trip["resume"]["origin"]["lat"])
+
+    def test_the_stored_position_is_rounded_to_11_metres(self):
+        self.assertEqual(_device_fix({"lat": 16.07441234, "lon": 108.24498765, "accuracy_m": 12.6}),
+                         {"lat": 16.0744, "lon": 108.245, "accuracy_m": 13})
+        self.assertEqual(_device_fix({"lat": 16.07, "lon": 108.24, "accuracy_m": None}),
+                         {"lat": 16.07, "lon": 108.24})
+        self.assertIsNone(_device_fix(None))
+        self.assertIsNone(_device_fix({"lat": 16.07}))
+
+    def test_the_day_of_the_fix_is_da_nang_s(self):
+        self.assertEqual(_moment_date("2026-11-24T23:30:00Z", None), "2026-11-25")
+        self.assertEqual(_moment_date("14:05", at(24, 9)), "2026-11-24")
+        self.assertEqual(_moment_date(None, at(25, 1)), "2026-11-25")
+        self.assertIsNone(_moment_date(None, None))
+
+    def test_the_api_takes_one_fix(self):
+        body = ReplanBody(source_version_id=uuid4(),
+                          current_location={"lat": 16.07, "lon": 108.24, "accuracy_m": 8})
+        self.assertEqual(body.current_location.accuracy_m, 8)
+        self.assertIsNone(ReplanBody(source_version_id=uuid4()).current_location)
+        for bad in ({"lat": 96, "lon": 108}, {"lat": 16, "lon": 108, "speed": 3}, {"lat": 16},
+                    {"lat": 16, "lon": 108, "accuracy_m": -5}):
+            with self.assertRaises(ValidationError):
+                ReplanBody(source_version_id=uuid4(), current_location=bad)
 
 
 class TestReplanOverrides(unittest.TestCase):
@@ -426,6 +506,18 @@ class TestPaidInTheRequest(unittest.TestCase):
         self.assertEqual(trip["paid_access"], ["island", SUN_WORLD])
         self.assertEqual(trip["resume"]["paid_access"], [CANO])
         self.assertEqual(trip["resume"]["start_time"], "14:05")
+
+    def test_device_replan_keeps_todays_fare_and_tomorrows_hotel(self):
+        snapshot = {**TWO_DAYS, "base_poi_id": "hotel"}
+        remaining = {"window": _window(snapshot, None, at(24, 14, 5)),
+                     "current_poi_id": "island", "current_location": TestDevicePosition.FIX}
+        trip = _trip_request(snapshot, remaining, [SUN_WORLD], [CANO])
+        resume = trip["resume"]
+        self.assertEqual(resume["paid_access"], [CANO])
+        self.assertEqual(resume["origin"]["fallback_poi_id"], "island")
+        self.assertEqual(resume["origin"]["lat"], TestDevicePosition.FIX["lat"])
+        self.assertEqual(trip["origin"]["poi_id"], "hotel")
+        self.assertEqual(trip["paid_access"], [SUN_WORLD])
 
     def test_a_paid_cano_keeps_its_day_apart(self):
         # Before day_start at the base: no resume is needed for the clock or the

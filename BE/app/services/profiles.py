@@ -13,6 +13,13 @@ every option, so every profile stays a plan a human can actually do):
               category/tag, high fit) + a dominant category-spread term, so
               the day is composed of POIs the rating-first plan skips.
 
+Under objective v1 (the default) the three node scores are ONE function, `value.py`,
+under three weight sets (objective_weights/v1.json `value` + `profiles.<name>.value`):
+the numbers above, except that savings' average leg only ranks its candidate cap
+(riding minutes are T9's) and savings has no price-level term (on danang-v2 a copy of
+the fee). The formulas below (`_score`, `soft_lean`, TASTE_WEIGHT) are
+the DAVEL_OBJECTIVE=legacy path.
+
 `/v1/itinerary` now returns all three by default; the router additionally
 enforces a pairwise POI-set Jaccard ceiling (see `pool.enforce_pairwise`) so
 the three options are genuinely different days, not three reorderings.
@@ -40,15 +47,19 @@ from BE.app.services import (
     scorer,
     soft_rules,
     templates,
+    transfers as transfers_mod,
     trip_ctx,
 )
+from BE.app.services import value as value_svc
+# Pool features shared by the legacy node scores and objective v1's value.py.
+from BE.app.services.value import novelty_scores, price_reference  # noqa: F401
 from BE.app.services.optimizer import (
     STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, poi_windows,
     stubs_fee, stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
-    clamp01, closed_weekdays, deadline, hhmm, paid_access, party_size, poi_on_date,
-    price_level_of, to_float, to_int, to_min, trusted_rating, visit_fee, weekday_of)
+    closed_weekdays, deadline, hhmm, paid_access, party_size, poi_on_date,
+    price_level_of, to_min, trusted_rating, visit_fee, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -106,8 +117,8 @@ BALANCED_FAME_WEIGHT = 0.4
 # experience back towards the rating-first composition.
 EXPERIENCE_RATING_WEIGHT = 0.10
 EXPERIENCE_NOVELTY_WEIGHT = 10.0
-EXPERIENCE_FIT_FLOOR = 3.0        # below this a POI is not "high-fit"
-EXPERIENCE_FIT_SPAN = 1.9         # 3.0 -> 0.0, 4.9 -> 1.0
+EXPERIENCE_FIT_FLOOR = value_svc.NOVELTY_FIT_FLOOR  # below this a POI is not "high-fit"
+EXPERIENCE_FIT_SPAN = value_svc.NOVELTY_FIT_SPAN    # 3.0 -> 0.0, 4.9 -> 1.0
 EXPERIENCE_FAME_WEIGHT = 0.3      # novelty leads, but among known places
 
 # Minutes of driving as an objective cost, per profile (`_profile_edges`). The
@@ -198,60 +209,6 @@ AGAINST_REASONS = frozenset({
 })
 
 
-def novelty_scores(pois: list[dict]) -> dict[str, float]:
-    """Vargas-style novelty in [0, 1] for every POI in a candidate pool.
-
-    novelty = fit * (0.55 * (1 - popularity) + 0.30 * category-rarity
-                     + 0.15 * tag-rarity)
-
-    - fit: rating above EXPERIENCE_FIT_FLOOR, normalised (3.0 -> 0, 4.9 -> 1).
-      A poorly-rated POI is not "novel", it is just bad; the fit factor keeps
-      the novelty term from rewarding junk.
-    - popularity: where the POI's rating sits in the pool (a 4.9 place is
-      mainstream) plus a must_go bump. Inverse = novelty.
-    - category-rarity: 1 - sqrt(share of the category in the pool), so a
-      beach/attraction beats a restaurant in a restaurant-heavy pool.
-    - tag-rarity: mean inverse document frequency of the POI's tags, which
-      separates a one-off seafood shack from a generic "Nhà hàng" listing.
-    """
-    pool = list(pois)
-    if not pool:
-        return {}
-    n = len(pool)
-    cats = Counter(soft_rules.poi_category(p) for p in pool)
-    tag_freq: Counter[str] = Counter()
-    for p in pool:
-        for tag in {str(t).strip().lower() for t in (p.get("tags") or [])
-                    if str(t).strip()}:
-            tag_freq[tag] += 1
-    ratings = [trusted_rating(p) for p in pool]
-    lo, hi = min(ratings), max(ratings)
-
-    def _tag_rarity(p: dict) -> float:
-        tags = [str(t).strip().lower() for t in (p.get("tags") or [])
-                if str(t).strip()]
-        if not tags:
-            return 0.0
-        # Smoothed IDF, normalised into [0, 1] by log(n + 1).
-        return sum(math.log((1.0 + n) / (1.0 + tag_freq[t])) / math.log(1.0 + n)
-                   for t in set(tags)) / len(set(tags))
-
-    out: dict[str, float] = {}
-    for p in pool:
-        cat = soft_rules.poi_category(p)
-        rating = trusted_rating(p)
-        fit = clamp01((rating - EXPERIENCE_FIT_FLOOR) / EXPERIENCE_FIT_SPAN)
-        popularity = ((rating - lo) / (hi - lo)) if hi > lo else 0.5
-        if p.get("must_go"):
-            popularity = min(1.0, popularity + 0.25)
-        cat_rarity = (1.0 - math.sqrt(cats[cat] / n)) if cat else 0.0
-        novelty = fit * (0.55 * (1.0 - popularity)
-                         + 0.30 * cat_rarity
-                         + 0.15 * _tag_rarity(p))
-        out[p["poi_id"]] = round(clamp01(novelty), 4)
-    return out
-
-
 def _avg_leg(travel: dict[tuple[str, str], int], pid: str,
              ids: list[str]) -> float:
     """Mean matrix minutes from `pid` to every other candidate (bidirectional).
@@ -289,7 +246,10 @@ def _profile_edges(profile: str, q: dict[tuple[str, str], float],
 
 def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
            avg_leg: float = 0.0, budget: float | None = None, paid=()) -> float:
-    """Node score for one profile (see module docstring).
+    """Node score for one profile under DAVEL_OBJECTIVE=legacy (see module docstring).
+    Objective v1 scores with `value.score` instead: one function, these numbers as the
+    profiles' weights in objective_weights/v1.json, savings without `avg_leg` and without
+    the price-level penalty.
 
     savings: absolute cost minimisation (fee + travel), not a tie-break.
     balanced: trusted rating + fame, constraints respected.
@@ -327,21 +287,10 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     return round(rating + BALANCED_FAME_WEIGHT * fame, 4)
 
 
-def price_reference(pois: list[dict]) -> dict[str, int]:
-    """What a priced place usually costs in this pool: the median price level of
-    each priced category (restaurants 2, cafes 1 on danang-v1). `soft_lean` reads a
-    place against it, so "cheap" means cheap for a restaurant, not cheaper than a park."""
-    levels: dict[str, list[int]] = {}
-    for poi in pois:
-        cat = soft_rules.poi_category(poi)
-        if cat in retrieval.PAID_CATS:
-            levels.setdefault(cat, []).append(price_level_of(poi))
-    return {cat: sorted(values)[len(values) // 2] for cat, values in levels.items()}
-
-
 def soft_lean(poi: dict, profile: dict | None, liked: list[str] | None = None,
               price_ref: dict[str, int] | None = None) -> tuple[float, list[str]]:
-    """(lean, reasons) of the onboarding's soft answers for one POI.
+    """(lean, reasons) of the onboarding's soft answers for one POI (legacy objective;
+    v1 weighs the same parts, `value.lean_parts`, with its `value` weights).
 
     `lean` is signed, in units of the top POI score (see SPENDING_WEIGHT); the
     reasons are those that speak FOR the stop, for its explanation. A neutral
@@ -349,23 +298,11 @@ def soft_lean(poi: dict, profile: dict | None, liked: list[str] | None = None,
     `liked`: `retrieval.liked_wishes(profile["activities"])`; `price_ref`:
     `price_reference(pool)`.
     """
-    profile = profile or {}
-    lean, reasons = 0.0, []
-    cat = soft_rules.poi_category(poi)
-    wants = to_int(profile.get("spending_level"), 2) - 2          # -1 thrifty .. +1 premium
-    if wants and cat in retrieval.PAID_CATS:
-        dearer = max(-1, min(1, price_level_of(poi) - (price_ref or {}).get(cat, 2)))
-        lean += SPENDING_WEIGHT * wants * dearer
-        if wants * dearer > 0:
-            reasons.append("hop muc chi tieu")
-    bias = max(-1.0, min(1.0, to_float(profile.get("outdoor_bias"))))
-    if bias and soft_rules.is_outdoor(poi):
-        lean += OUTDOOR_WEIGHT * bias
-        if bias > 0:
-            reasons.append("hop gu ngoai troi")
-    if liked and retrieval.poi_is_liked(poi, liked):
-        lean += LIKED_WEIGHT
-        reasons.append("hop hoat dong ban thich")
+    parts, reasons = value_svc.lean_parts(poi, profile, liked, price_ref)
+    lean = 0.0
+    for key, weight in (("spending", SPENDING_WEIGHT), ("outdoor", OUTDOOR_WEIGHT),
+                        ("liked", LIKED_WEIGHT)):
+        lean += weight * parts[key]
     return round(lean, 4), reasons
 
 
@@ -412,11 +349,77 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
-def _to_trip(trip: dict) -> StubTrip:
+def _to_trip(trip: dict, pois_by_id: dict | None = None) -> StubTrip:
     """The day's clock and its start: the base the router resolved (`origin_id`, a
-    place with a matrix row), else the open tour (optimizer T061a)."""
-    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip),
-                    trip.get("origin_id") or None)
+    place with a matrix row), else the open tour (optimizer T061a). A base behind a
+    boat or cable car (the Bà Nà summit hotel) brings its timetable along."""
+    origin = trip.get("origin_id") or None
+    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip), origin,
+                    origin_transfer=_base_transfer(trip, pois_by_id))
+
+
+def _base_transfer(trip: dict, pois_by_id: dict | None) -> "transfers_mod.Service | None":
+    origin = trip.get("origin_id")
+    return transfers_mod.service(((pois_by_id or {}).get(origin) or {}).get("transfer")
+                                 if origin else None)
+
+
+# How a warning names a car or a boat.
+TRANSFER_LABELS = {"boat": "cano", "cable_car": "cap treo"}
+
+
+def _gateway_miss(pid: str, trip: dict, pois_by_id: dict, cells) -> str | None:
+    """Why a place the traveller named, behind a boat or cable car, cannot be in this
+    day at all (None when it can, or when nothing here can tell).
+
+    From where the day starts (the base at `start_time`, or the place itself in an
+    open tour) the last run must still be caught, and the shortest usual stay (p25)
+    must end in time for the last run back and the day's end. Such a place left in
+    the day makes the whole plan infeasible ("must_visit"), so the planner leaves it
+    out and says why, like a place closed that day.
+    """
+    poi = pois_by_id.get(pid) or {}
+    info = poi.get("transfer")
+    ride = transfers_mod.service(info)
+    if ride is None:
+        return None
+    name, mode = poi.get("name") or pid, TRANSFER_LABELS.get(info.get("mode"), info.get("mode"))
+    start = to_min(trip.get("start_time", "07:00"))
+    origin = trip.get("origin_id")
+    base = _base_transfer(trip, pois_by_id)
+    if origin:
+        left, entered = transfers_mod.crossing(base, ride)
+        cell = cells.get(f"{origin}->{pid}")
+        if entered is None or cell is None:
+            return None   # the day starts up there, or B3 says the rest
+        arrive = transfers_mod.leg_arrival(start, int(cell["minutes"]), left, entered)
+        if arrive is None:
+            origin_name = (pois_by_id.get(origin) or {}).get("name") or origin
+            return (f"khong dua vao lich '{name}': di tu {origin_name} luc {hhmm(start)} thi lo "
+                    f"chuyen {mode} cuoi ({hhmm(ride.go[1])}), can xuat phat som hon")
+    else:
+        first, last = transfers_mod.open_start(ride)
+        if start > last:
+            return (f"khong dua vao lich '{name}': ngay bat dau {hhmm(start)}, sau chuyen "
+                    f"{mode} cuoi ({hhmm(ride.go[1])})")
+        arrive = max(start, first)
+    stay = poi_visit_short(poi)
+    leave_by = min(to_min(info["leave_by"]), deadline(trip))
+    if max(arrive, to_min(info["arrive_from"])) + stay > leave_by:
+        room = max(0, leave_by - max(arrive, to_min(info["arrive_from"])))
+        return (f"khong dua vao lich '{name}': toi noi luc {hhmm(arrive)}, chuyen {mode} ve cuoi "
+                f"luc {hhmm(ride.back[1])} nen chi o duoc {room} phut (it nhat {stay})")
+    return None
+
+
+def sleeps_at(place_id: str | None, pois_by_id: dict) -> bool:
+    """Does the traveller sleep where the day starts (a lodging, role "base")?
+
+    Only then does the day end there and pay the ride back. A replan that resumes at
+    the stop just finished, a GPS fix (its `@gps:` id is never a place) or a sight
+    named as the start is not where the day ends: no ride back to it is charged.
+    """
+    return bool(place_id) and (pois_by_id.get(place_id) or {}).get("role") == "base"
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -559,9 +562,11 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # `hours` is how a cooking class (kind by_booking) is a meal: A1 counts it in every
 # meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
 # class over lunch failed the gate as "khong co bua trua".
+# `transfer`: the timetable of the boat or cable car behind which the place sits,
+# so gate B3 can tell a leg that misses the last run.
 _GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
-               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "access_fees",
-               "sells_ticket")
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "transfer",
+               "access_fees", "sells_ticket")
 
 
 def _gate_view(p: dict) -> dict:
@@ -667,6 +672,26 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
             trip = {**trip, "must_visit": [m for m in trip["must_visit"] if m not in closed_must]}
             date_warnings = [f"khong dua vao lich '{pois_by_id[m].get('name')}': nghi vao "
                              f"ngay {trip['date']}" for m in closed_must]
+    # A named place behind a boat or cable car that the last run cannot reach from
+    # where the day starts, or whose shortest stay ends after the last run back, would
+    # make the whole day infeasible: it leaves the plan with the reason instead.
+    missed = [(m, why) for m in trip.get("must_visit") or []
+              for why in [_gateway_miss(m, trip, pois_by_id, cells)] if why]
+    gone = sorted({m for m, _why in missed})
+    if missed:
+        trip = {**trip, "must_visit": [m for m in trip["must_visit"] if m not in gone]}
+        date_warnings += [why for _m, why in missed]
+    # A boat that runs only some months (Cù Lao Chàm): out of season a named place
+    # keeps its stop with a warning, and the planner does not pick it on its own.
+    named_now = set(trip.get("must_visit") or [])
+    for m in sorted(named_now):
+        poi = pois_by_id.get(m) or {}
+        if poi.get("off_season"):
+            info = poi.get("transfer") or {}
+            season = transfers_mod.season_label(info.get("months"))
+            date_warnings.append(
+                f"{poi.get('name')}: {info.get('name')} chi chay deu {season}; "
+                f"ngay {trip.get('date')} phan lon tau nghi (bien dong), hoi lich tau truoc khi di")
     tpl_name = template
     if tpl_name is None:  # direct callers: derive only from an explicit profile
         tpl_name = (templates.select_template(trip["profile"])
@@ -689,7 +714,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # (that fallback re-admitted unverified and allergy-dropped POIs).
     ranked_ids = [r.get("poi_id") for r in ranked]
     candidates = [pois_by_id[pid] for pid in ranked_ids if pid in pois_by_id
-                  and not pois_by_id[pid].get("closed_today")]
+                  and not pois_by_id[pid].get("closed_today")
+                  and not (pois_by_id[pid].get("off_season") and pid not in named_now)]
 
     # Template hard bans: nightlife/spa for a family day, trek for a calm one. A
     # wish the traveller typed lifts the taste part of a ban (`allows_wished`).
@@ -741,39 +767,62 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         plan["activity_match"] = _activity_match([], act_report, pois_by_id)
         plan["warnings"] = (date_warnings + list(plan.get("warnings") or [])
                             + _activity_warnings(act_report))
+        if gone:
+            plan["_dropped_must"] = gone
         return plan
 
     travel = _travel_from_cells(cells, ids)
-    nov = novelty_scores(candidates)
-    budget = trip.get("budget")
-    avg_legs = {pid: _avg_leg(travel, pid, ids) for pid in ids}
-    base_scores = {pid: _score(prof, pois_by_id[pid], novelty=nov,
-                               avg_leg=avg_legs[pid], budget=budget, paid=paid)
-                   for pid in ids}
-    unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
-    prefs = list(profile_data.get("food_prefs") or []) or list(
-        trip.get("food_prefs") or [])
-    # A food wish phrased as an activity ("ăn hải sản") is a taste pref too.
-    for activity in trip.get("activities") or []:
-        prefs += [t for t in profile_filter.cuisine_terms(activity)
-                  if t not in prefs]
+    scored: value_svc.Scored | None = None
+    leans: dict[str, tuple[float, list[str]]] = {}
+    if spec is not None:
+        # Objective v1: T1 is ONE function of the POI (value.py) under this profile's
+        # weights (v1.json `value` + `profiles.<name>.value`), and the explanations read
+        # it too. Riding minutes are T9's alone: the mean matrix leg only ranks the
+        # candidate cap, for a profile that weighs it (`cap_avg_leg`, savings).
+        # The candidates keep the order they came in: it is only the solver's node
+        # order. Sorting them by value (tried 26/11, audit of 67 requests) gave 63 of
+        # 134 balanced and experience days other stops by search path alone, lowered
+        # J on 13 days against 10 raised and slowed the bench median by 1.5 s.
+        scored = value_svc.score(candidates, trip, spec.value)
+        node_value = scored.values
+        leg_weight = float(spec.value.get("cap_avg_leg") or 0.0)
+        cap_rank = (node_value if not leg_weight else
+                    {pid: node_value[pid] - leg_weight * _avg_leg(travel, pid, ids)
+                     for pid in ids})
 
-    # The profile's other soft answers, once per POI of the pool (before the cap,
-    # so what the traveller leans to survives it).
-    liked = retrieval.liked_wishes(profile_data.get("activities"))
-    price_ref = price_reference(candidates)
-    leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+        def _score_with_taste(poi: dict) -> float:
+            return node_value[poi["poi_id"]]
 
-    def _score_with_taste(poi: dict) -> float:
-        unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
-        return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
-                + unit * leans[poi["poi_id"]][0])
+        def _cap_score(poi: dict) -> float:
+            return cap_rank[poi["poi_id"]]
+    else:
+        nov = novelty_scores(candidates)
+        budget = trip.get("budget")
+        avg_legs = {pid: _avg_leg(travel, pid, ids) for pid in ids}
+        base_scores = {pid: _score(prof, pois_by_id[pid], novelty=nov,
+                                   avg_leg=avg_legs[pid], budget=budget, paid=paid)
+                       for pid in ids}
+        unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
+        prefs = value_svc.taste_prefs(trip)
+
+        # The profile's other soft answers, once per POI of the pool (before the cap,
+        # so what the traveller leans to survives it).
+        liked = retrieval.liked_wishes(profile_data.get("activities"))
+        price_ref = price_reference(candidates)
+        leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+
+        def _score_with_taste(poi: dict) -> float:
+            unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
+            return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
+                    + unit * leans[poi["poi_id"]][0])
+
+        _cap_score = _score_with_taste
 
     # The cap: DAVEL_SOLVER_CANDIDATES, else the objective's (v1: 40), else the default.
     cap_limit = (os.environ.get("DAVEL_SOLVER_CANDIDATES")
                  or (spec.w.get("solver_candidates") if spec else None))
     cap_extra = {"limit": int(cap_limit)} if cap_limit else {}
-    capped = _cap_candidates(candidates, _score_with_taste,
+    capped = _cap_candidates(candidates, _cap_score,
                              list(trip.get("must_visit") or []), wish_groups=act_groups,
                              cheap_meals=CANDIDATE_CHEAP_MEALS if ceiling is not None else 0,
                              paid=paid, **cap_extra)
@@ -805,6 +854,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         legs = matrix_svc.legs_from(cells, origin_id, ids)
         travel.update(legs)
         edges.update({pair: 0.0 for pair in legs})
+        if sleeps_at(origin_id, pois_by_id):
+            # ... and a day that starts where the traveller sleeps ends there: T9 prices
+            # the ride back on the last arc (stop -> depot), and `objective.features`
+            # reads the same leg. A cost only: the model keeps no time for it (the day
+            # may end at `end_time` and ride home after it) and gate B3 does not check it.
+            travel.update(matrix_svc.legs_to(cells, ids, origin_id))
     q = _profile_edges(prof, edges, travel) if spec is None else edges
     # Dynamic state: same per-band multipliers the ranker scores against,
     # but here the solver chooses the band the stop lands in. A request with no
@@ -868,7 +923,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         if with_wishes and wishes_given_up:
             continue
         stubs_try = stubs_by_kind[kind]
-        out = optimize(stubs_try, travel, _to_trip(trip),
+        out = optimize(stubs_try, travel, _to_trip(trip, pois_by_id),
                        edge_scores=q, workers=workers, must_visit=must,
                        precedence=order_prefs,
                        min_stops=limits_try["min_stops"],
@@ -936,7 +991,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         )
         for name, label, override in trials:
             probe = optimize(
-                stubs, travel, _to_trip(trip), edge_scores=q,
+                stubs, travel, _to_trip(trip, pois_by_id), edge_scores=q,
                 workers=workers,
                 timeout_s=(DIAGNOSE_TIMEOUT_S if deterministic_time is None
                            else DIAGNOSE_WALL_GUARD_S),
@@ -990,11 +1045,22 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # passed as a precedence, and the pass only re-times the day (no dead holes).
     keep_order = ([(a["poi_id"], b["poi_id"]) for a, b in zip(acts, acts[1:])]
                   if spec is not None else [])
+
+    def _day_j(day: list[dict]) -> float:
+        return _day_features(day, stubs_used, travel, trip, spec, q, state_bands,
+                             state_scores, state_costs, limits_used)[1]
+
     acts = _polished(acts, stubs_used, travel, trip, limits_used, order_prefs + keep_order,
-                     pois_by_id, cells, ctx)
+                     pois_by_id, cells, ctx,
+                     j_of=_day_j if spec is not None and out.get("itinerary") is not None
+                     else None)
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
-                     candidates, travel)
+                     candidates, travel, scored=scored)
+    if spec is not None and out.get("itinerary") is not None:
+        plan["_features"] = _plan_features(
+            out, plan.get("activities") or [], stubs_used, travel, trip, spec, q,
+            state_bands, state_scores, state_costs, limits_used)
     _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used
@@ -1038,6 +1104,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     warnings = _activity_warnings(plan["activity_match"])
     if warnings:
         plan["warnings"] = list(plan.get("warnings") or []) + warnings
+    if gone:   # named places no boat or cable car reaches today (warned): a trip of
+        plan["_dropped_must"] = gone   # several days is judged without them (multiday)
     # Solution pool: every member is a full plan (costs/gate/explanations), so
     # the router can return one directly. A member that fails validation is
     # dropped (defensive: model constraints and gate should agree).
@@ -1046,7 +1114,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         for item in out["pool"]:
             member = _assemble(item["activities"], out, trip, pois_by_id,
                                cells, ranked, tpl_name, limits, relaxed_step,
-                               cafe_cap, ctx, prof, candidates, travel)
+                               cafe_cap, ctx, prof, candidates, travel, scored=scored)
             if not member.get("passed"):
                 dropped += 1
                 continue
@@ -1068,6 +1136,54 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     return plan
 
 
+def _day_features(activities: list[dict], stubs: list, travel: dict, trip: dict, spec,
+                  edges: dict | None, bands: list | None, scores: dict | None,
+                  costs: dict | None, limits: dict) -> tuple[dict, float]:
+    """J's terms (`objective.features`) of one day at the times `activities` show, and
+    J itself in U, unrounded."""
+    by_id = {stub.poi_id: stub for stub in stubs}
+    clock = _to_trip(trip)
+    rest = limits.get("rest_minutes") if limits.get("rest_after_lunch") else None
+    acts = [a for a in objective_mod.shown_acts(activities) if a["poi_id"] in by_id]
+    f = objective_mod.features(acts, by_id, travel, spec, clock.start_min, clock.end_min,
+                               origin_id=clock.origin_id, edge_scores=edges, bands=bands,
+                               state_scores=scores, state_costs=costs, rest_minutes=rest)
+    return f, objective_mod.objective_value(f, spec)
+
+
+def _plan_features(out: dict, shown: list[dict], stubs: list, travel: dict, trip: dict,
+                   spec, edges: dict | None, bands: list | None, scores: dict | None,
+                   costs: dict | None, limits: dict) -> dict:
+    """J's terms of this day (`objective.features`), for learning J's weights.
+
+    `shown` is read at the times the plan shows, after `_polished` re-timed the day:
+    what a traveller or a judge sees. `raw` is the solver's own times; its `j` must
+    match `solver_j`, the value CP-SAT reported (up to rounding), so a gap between
+    `raw` and `shown` is what re-timing changed, not a bug of the features. Re-timing
+    is kept only when it does not lower J (`_polished`), so `shown.j >= raw.j`;
+    `retimed` says whether the shown times differ from the solver's, and `same_stops`
+    that the shown day visits the solver's stops in the solver's order.
+    """
+    unit = float(out.get("unit") or 1.0)
+    raw_acts = (out.get("itinerary") or {}).get("activities") or []
+
+    def _read(activities: list[dict]) -> dict:
+        f, j = _day_features(activities, stubs, travel, trip, spec, edges, bands, scores,
+                             costs, limits)
+        return {"features": {name: round(value, 4) for name, value in f.items()},
+                "j": round(j, 4)}
+
+    raw_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(raw_acts)]
+    shown_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(shown)]
+    return {"weights": spec.w.get("version"), "unit": round(unit, 4),
+            "solver_j": round(float(out.get("objective") or 0.0) / (1000.0 * unit), 4),
+            "status": out.get("status"), "rest_taken": out.get("rest_taken"),
+            "retimed": raw_seq != shown_seq,
+            "same_stops": [p for p, _ in raw_seq] == [p for p, _ in shown_seq],
+            "raw": _read(raw_acts),
+            "shown": _read(shown)}
+
+
 def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) -> dict | None:
     """The plan's rest window, as the gate must see it (None without a rest lock)."""
     profile_data = trip.get("profile") or {}
@@ -1077,10 +1193,20 @@ def _rest_proof(acts: list[dict], trip: dict, pois_by_id: dict, limits: dict) ->
     return {"start": hhmm(span["start"]), "end": hhmm(span["end"])} if span else None
 
 
+# J may only stay or rise when `_polished` re-times a day (floating point slack, U).
+J_TOLERANCE = 1e-6
+
+
 def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: dict,
-              order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None) -> list[dict]:
+              order_prefs: list, pois_by_id: dict, cells: dict, ctx: dict | None = None,
+              j_of=None) -> list[dict]:
     """`route_order.best_order` (least driving and dead time), kept only when the gate
-    still passes it: the solver's own plan is the fallback for any doubt."""
+    still passes it: the solver's own plan is the fallback for any doubt.
+
+    `j_of(day) -> J` (objective v1): the re-timed day is also kept only when its J is
+    not below the solver's day. Re-timing saves idle minutes, which J does not price,
+    and could move a stop into a worse hour or into the rain, which J does: on the
+    audit + gold requests it lowered J on about half the days (features_step2.md)."""
     if len(acts) < 2:
         return acts
     by_id = {stub.poi_id: stub for stub in stubs}
@@ -1090,13 +1216,17 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         for act in acts if span else []:
             if act["poi_id"] in group["poi_ids"] and span[0] <= to_min(act["start"]) < span[1]:
                 by_id[act["poi_id"]] = route_order.held_to(by_id[act["poi_id"]], span)
-    # An exposed stop the solver seated in a dry hour stays out of the rain.
+    # An exposed stop the solver seated in a dry hour stays out of the rain, "dry" read
+    # like the solver does: neither quarter probe of the visit in a wet hour.
     wet = trip_ctx.wet_spans(ctx)
     for act in acts if wet else []:
-        start, end = to_min(act["start"]), to_min(act["end"])
+        stub = by_id.get(act["poi_id"])
+        if stub is None:
+            continue
+        probes = route_order.quarter_probes(to_min(act["start"]), stub.visit_min)
         if (trip_ctx.rain_exposure(pois_by_id.get(act["poi_id"])) > 0
-                and all(end <= lo or start >= hi for lo, hi in wet)):
-            by_id[act["poi_id"]] = route_order.kept_dry(by_id[act["poi_id"]], wet)
+                and not any(lo <= p < hi for p in probes for lo, hi in wet)):
+            by_id[act["poi_id"]] = route_order.kept_dry(stub, wet)
     # A place the traveller named is held to its opening hours only, but belongs in
     # the hours it makes sense whenever some order of the day allows that.
     preferred = {}
@@ -1110,10 +1240,15 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
         late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred,
-        origin=trip.get("origin_id"))
+        origin=trip.get("origin_id"), origin_transfer=_base_transfer(trip, pois_by_id))
     if better is None:
         return acts
+    if j_of is not None and j_of(better) < j_of(acts) - J_TOLERANCE:
+        return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}
+    origin = trip.get("origin_id")
+    if origin in pois_by_id:   # B3 reads the base's timetable for the first leg
+        pois_gate[origin] = _gate_view(pois_by_id[origin])
     checked = {"activities": better}
     rest = _rest_proof(better, trip, pois_by_id, limits)
     if rest:
@@ -1125,11 +1260,13 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
               cells: dict, ranked: list[dict], tpl_name: str | None,
               limits: dict, relaxed_step: int, cafe_cap: int,
               ctx: dict | None, prof: str, candidates: list[dict],
-              travel: dict) -> dict:
+              travel: dict, scored: value_svc.Scored | None = None) -> dict:
     """One activity list -> the full public plan (gate + report + warnings).
 
     Shared by the argmax plan and every solution-pool member, so a diverse
     response can never show a plan that was not validated the same way.
+    `scored`: objective v1's values of the pool (value.py): the explanations read them,
+    and `_context.values` keeps them for /v1/repair.
     """
     # Dynamic state evidence: per-activity state at its planned START, so a
     # client/reviewer can see WHY a stop sits at that hour (satiety, heat,
@@ -1156,7 +1293,7 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     # TASK-2 soft layer: sequence-level A2/B1/B2/E2 report (the edge part of
     # A2/B1 already reached the optimizer through scorer.edge_scores).
     plan["soft_penalties"] = soft_rules.plan_penalties(acts, pois_by_id, trip)
-    _attach_explanations(plan, ranked, pois_by_id)
+    _attach_explanations(plan, ranked, pois_by_id, scored)
     plan["template"] = _template_report(tpl_name, limits, acts, relaxed_step,
                                        pois_by_id, cafe_cap, trip)
     warnings = []
@@ -1173,6 +1310,10 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
             if days:
                 warnings.append(f"{poi.get('name')} nghi vao "
                                 f"{', '.join(WEEKDAY_LABELS[d] for d in days)}: chon ngay di de kiem tra")
+            months = (poi.get("transfer") or {}).get("months")
+            if months:
+                warnings.append(f"{poi.get('name')}: {poi['transfer'].get('name')} chi chay deu "
+                                f"{transfers_mod.season_label(months)} (bien dong cac thang khac): chon ngay di de kiem tra")
     # FR-026: the forecast is part of what the plan assumes. Wet hours are named, with
     # the stops left in the open in them (a wish, a named place, a day with no roof to
     # move under); so is a date the forecast does not reach (each day of a trip its own).
@@ -1213,6 +1354,9 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     # so POST /replan can rebuild the rolling state; the itinerary router
     # strips leading-underscore keys from the public response.
     plan["_context"] = {"trip": trip, "pois": candidates, "travel": travel}
+    if scored is not None:
+        plan["_context"]["values"] = {p["poi_id"]: scored.values[p["poi_id"]]
+                                      for p in candidates if p["poi_id"] in scored.values}
     return plan
 
 
@@ -1290,12 +1434,41 @@ def _add_lean_evidence(plan: dict, leans: dict[str, tuple[float, list[str]]]) ->
                 evidence.append(reason)
 
 
-def _attach_explanations(plan: dict, ranked: list[dict], pois_by_id: dict | None = None) -> None:
+def _meal_reason(act: dict, poi: dict) -> str | None:
+    """The meal a restaurant stop is, from its real start (the windows of T5)."""
+    if soft_rules.poi_category(poi) != "restaurant":
+        return None
+    start = to_min(act["start"])
+    if soft_rules.LUNCH_REQUIRED[0] <= start < soft_rules.LUNCH_REQUIRED[1]:
+        return "bua trua"
+    if soft_rules.DINNER_REQUIRED[0] <= start < soft_rules.DINNER_REQUIRED[1]:
+        return "bua toi"
+    return None
+
+
+def _attach_explanations(plan: dict, ranked: list[dict], pois_by_id: dict | None = None,
+                         scored: value_svc.Scored | None = None) -> None:
     """FR-023: every activity carries a grounded explanation (evidence).
 
-    Evidence argues FOR the stop: what the ranker held against it at some hour of
-    the day ("nong, tranh ngoai troi" on a beach) is not a reason it was chosen.
+    Objective v1 (`scored`): the evidence is what raised the stop's value v_i under this
+    profile's weights (`value.explain`), plus the meal it is (T5): the score the solver
+    chose it by. Legacy: the ranker's reasons. Evidence argues FOR the stop: what the
+    ranker held against it at some hour of the day ("nong, tranh ngoai troi" on a beach)
+    is not a reason it was chosen.
     """
+    if scored is not None:
+        for act in plan.get("activities", []):
+            pid = act.get("poi_id")
+            poi = (pois_by_id or {}).get(pid) or {}
+            evidence = list(scored.reasons.get(pid) or [])
+            meal = _meal_reason(act, poi)
+            if meal:
+                evidence.append(meal)
+            if not evidence:
+                evidence = [f"gia tri {scored.values.get(pid, 0.0) / scored.unit:.2f}U"]
+            act["explanation"] = {"claim": f"chon {poi.get('name') or pid}",
+                                  "evidence": evidence, "inference": "", "source": "value"}
+        return
     reasons = {r.get("poi_id"): (r.get("reasons") or []) for r in ranked}
     for act in plan.get("activities", []):
         pid = act.get("poi_id")

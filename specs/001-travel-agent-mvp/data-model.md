@@ -12,7 +12,7 @@ All entities Pydantic-validated (see `contracts/api.md`).
 - Relations: 1 User → N TripRequests, N Expenses, N EvaluationRecords.
 
 ### TripRequest
-- Fields: `trip_id`, `user_id`, `origin{lat,lon,label}`, `city` (=`da-nang` MVP), `date`, `start_time`, `end_time`, `days` 1–2, `travelers`, `budget`, `transport[]`, `must_visit[]`, `avoid[]`, `activities[]`, `food_prefs`, `order_prefs[]`, `areas[]` (mã `zone` của danang-v2; rỗng = mọi khu), `resume{start_time, origin?}` (replan giữa ngày đầu: ngày 1 bắt đầu lúc đó, từ điểm đó; các ngày sau như `start_time`/`origin`; mặc định `null`).
+- Fields: `trip_id`, `user_id`, `origin{lat,lon,label,poi_id?,accuracy_m?,fallback_poi_id?}` (`poi_id` = địa điểm; chỉ `lat`/`lon` = vị trí GPS, xem `specs/024-gps-origin`), `city` (=`da-nang` MVP), `date`, `start_time`, `end_time`, `days` 1–2, `travelers`, `budget`, `transport[]`, `must_visit[]`, `avoid[]`, `activities[]`, `food_prefs`, `order_prefs[]`, `areas[]` (mã `zone` của danang-v2; rỗng = mọi khu), `resume{start_time, origin?}` (replan giữa ngày đầu: ngày 1 bắt đầu lúc đó, từ điểm đó; các ngày sau như `start_time`/`origin`; mặc định `null`).
 - Validation: city/time present or clarification (FR-005); budget ≥0; days ≤2; `areas` chỉ nhận 6 mã khu vực.
 - State: `draft → confirmed → planned → active → done`; `active` + delta → `replanning`.
 
@@ -26,7 +26,7 @@ All entities Pydantic-validated (see `contracts/api.md`).
 
 ### RouteSegment
 - Fields: `from_id`, `to_id`, `mode`, `km`, `minutes`, `source` (osrm|cache), `confidence`, `at`, `transfers[]?`.
-- `mode`: `motorbike`, or the parts of a leg that leaves or enters a place a motorbike cannot reach, in travel order, joined by `+` (`motorbike+boat`, `cable_car`, `cable_car+motorbike`, `motorbike+walk`, `walk` between two Bà Nà summit stops). Then `transfers[] = {gateway, name, mode (boat|cable_car|walk), minutes, km}`, already counted in `minutes`/`km` (`specs/025-non-road-legs/spec.md`).
+- `mode`: `motorbike`, or the parts of a leg that leaves or enters a place a motorbike cannot reach, in travel order, joined by `+` (`motorbike+boat`, `cable_car`, `cable_car+motorbike`, `motorbike+walk`, `walk` between two Bà Nà summit stops). Then `transfers[] = {gateway, name, mode (boat|cable_car|walk), minutes, km, runs?}`, already counted in `minutes`/`km`; `runs` = first-last departure of that boat or cable car in the leg's direction ("08:00-16:30" up, "13:00-14:30" back from the island) (`specs/025-non-road-legs/spec.md`).
 - Validation: `minutes` MUST come from matrix cache, never haversine-only for feasibility.
 
 ### Activity

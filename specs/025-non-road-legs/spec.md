@@ -122,12 +122,84 @@ Ví dụ thật (solver thật, danang-v2, test `BE/tests/integration/test_stabl
 - Sau: **3 phương án**, đều có Fantasy Park, báo 100.000–200.000đ, không có khoản vé.
 - Cùng ca với ngân sách 4.200.000đ (đủ mua vé lần hai): trước vẫn ra 3 phương án nhưng báo 1.800.000–1.900.000đ, trong đó 1.700.000đ là vé đã mua; sau báo 100.000–200.000đ với cùng các điểm (lịch tiết kiệm đổi một điểm).
 
+## Giờ chạy của cano và cáp treo
+
+Nhánh `fix/transfer-service-hours` (tách từ `fix/non-road-legs`). Cáp treo và cano chỉ chạy trong một khung giờ, và cano Cù Lao Chàm chỉ chạy đều vào một số tháng. Mỗi cửa ngõ có thêm `service` trong `transfers.json`: chuyến đầu và chuyến cuối của mỗi chiều (`go`: từ đầu đường bộ ra nơi đó, `back`: chiều về), cùng tháng chạy. Đường mòn không có giờ chạy.
+
+| Cửa ngõ | Chiều đi | Chiều về | Tháng | Nguồn |
+|---|---|---|---|---|
+| Cáp treo Bà Nà | 08:00–16:30 (vé ngày) | 08:00–22:00 (tuyến chính) | cả năm | Vietnam Booking 10/08/2026; bảng giờ tháng 11/2026 của hoiandaytrip; Sun Paradise Land 26/08/2026 |
+| Cano Cửa Đại – Cù Lao Chàm | 07:30–09:00 | 13:00–14:30 | 3–8 | Vietnam Tourism 11/10/2026; Sun Paradise Land 15/08/2026; tour 1 ngày của Vietnam Booking; VnExpress 14/7/2026 |
+
+Khi nguồn cho một khoảng, lấy số chặt hơn, như khung đường Sơn Trà:
+- Cáp lên lần cuối "16:30–17:00": lấy 16:30.
+- Cano về "13:00–15:00", các giờ có tên là 13:00, 14:00, 14:30: lấy 14:30.
+- Tuyến cáp phụ dừng khoảng 17:30, nhưng tuyến chính (ga L'Indochine) chạy xuống tới 22:00, nên chiều về lấy 22:00.
+
+**Ví dụ: đi từ khách sạn Sala ra Cù Lao Chàm.**
+
+1. Sala → bến Cửa Đại 55 phút xe máy. Thêm 10 phút mua vé, mặc áo phao, lên tàu, rồi cano 20 phút. Tổng 85 phút.
+2. Chuyến cano ra cuối rời bến lúc 09:00. Muốn kịp phải rời Sala trước 07:55; rời lúc 08:00 là lỡ chuyến.
+3. Chuyến về cuối rời đảo lúc 14:30, cần 10 phút ra bến, nên phải rời điểm trên đảo trước 14:20.
+4. Nếu đi lúc 07:00: kế hoạch cũ ở đảo 10:25–17:46, tức ra đảo sau chuyến cuối và về khi đã hết tàu. Kế hoạch mới ra đảo lúc 09:06–09:09 và rời đảo lúc 14:06–14:20.
+
+Mỗi nơi sau cửa ngõ nhận ba mốc giờ (`transfers.place_service`):
+
+- `arrive_from` = chuyến đi đầu + thời gian đi: sớm nhất bắt đầu ghé được. Đỉnh Bà Nà 08:20, đảo 07:50.
+- `arrive_by` = chuyến đi cuối + thời gian đi: chặng từ bên ngoài vào phải tới trước giờ này. Đỉnh Bà Nà 16:50, đảo 09:20. Đây là luật của **chặng đi**, không phải của nơi đến: người đã ở trên đỉnh thì đi bộ sang điểm khác sau 16:50 vẫn được.
+- `leave_by` = chuyến về cuối − thời gian ra ga, ra bến: phải rời nơi đó trước giờ này. Đỉnh Bà Nà 21:50, đảo 14:20.
+
+Áp ở đâu:
+
+- **Dữ liệu.** `migrate_v2` ghi khung `arrive_from–leave_by` vào `hours.access_window` của 25 nơi: 24 điểm trên đỉnh Bà Nà (kể cả 2 điểm excluded) và Cù Lao Chàm. Khách sạn Mercure trên đỉnh giữ 24 giờ vì khách ngủ trên đó. Sau đó `migrate_v2` cắt `hours.open` vào khung. Cù Lao Chàm `00:00-23:59` thành `07:50-14:20`; các điểm trên đỉnh mở từ 08:20 (ví dụ Đỉnh Bà Nà 06:00 → 08:20). Sửa giờ chạy thì chạy lại `migrate_v2`; test dữ liệu báo nếu hai file lệch nhau.
+- **Chặng đi.** Mọi chỗ dùng chung một công thức (`transfers.leg_bounds` / `leg_arrival`): chặng phải rời đủ sớm để kịp chuyến cuối, và tới không sớm hơn chuyến đầu (đến sớm thì chờ tàu). Chỗ dùng: ràng buộc trên từng cung của solver, hint, `best_order` (cả lúc dàn giờ cuối cùng), gate B3 và replan cũ (`/v1/replan`). POI view mang giờ chạy trong trường `transfer`.
+- **Chuyến không có khách sạn (open tour).** Ngày bắt đầu ở điểm đầu tiên. Nếu điểm đó nằm sau cửa ngõ, nó phải bắt đầu trong khung `arrive_from`–`arrive_by`.
+- **Điểm khách đặt tên mà không kịp chuyến** bị bỏ khỏi ngày, kèm lý do, giống điểm đóng cửa ngày đó. Trước đây cả kế hoạch sẽ vô nghiệm. Ví dụ: `khong dua vao lich 'Cù Lao Chàm': di tu Sala Danang Beach Hotel luc 08:00 thi lo chuyen cano cuoi (09:00), can xuat phat som hon`. Chuyến nhiều ngày được chấm mà không tính điểm này, nếu không ngày nào ghé được nó.
+- **Mùa tàu.** Ngày đi ngoài tháng 3–8 thì planner không tự chọn Cù Lao Chàm. Khách đặt tên thì vẫn xếp, kèm cảnh báo `... chi chay deu thang 3-8; ngay 2026-12-09 phan lon tau nghi (bien dong), hoi lich tau truoc khi di`. Nếu không có ngày đi, kế hoạch có đảo ghi thêm "chon ngay di de kiem tra".
+- **Thời gian ghé đảo** (commit riêng 2821fa4, bỏ được nếu không đồng ý). Dwell ước lượng 6/7/8 giờ là một chuyến đi trong ngày tính cả hai lượt cano, nay trừ hai lượt cano thành 5/6/7 giờ. Lý do: 5 giờ là khoảng từ lúc chuyến ra cuối tới đảo (09:20) tới lúc phải rời đảo (14:20), và các tour ở đảo 5–6 giờ. Nếu giữ số cũ, khách từ Sala đi lúc 07:00 thiếu 5 phút cho 6 giờ ngắn nhất nên bị bỏ đảo, và đảo không bao giờ được chọn tự do (7 giờ không vừa khung nào).
+
+**Audit nhắm thẳng** (19 yêu cầu, 57 kế hoạch, `targeted.py` trong scratchpad, cùng bộ chấm `audit_plans.py`): 11 yêu cầu của phiên trước, cộng 8 yêu cầu mới:
+- Cù Lao Chàm từ Sala và từ Nam Hải lúc 08:00;
+- Cù Lao Chàm không khách sạn vào tháng 5 và tháng 12;
+- Cầu Vàng chỉ buổi chiều 13:00–21:00 (không khách sạn, từ Sala, kèm Fantasy Park);
+- Cầu Vàng 16:00–21:00 từ Sala.
+
+- Kế hoạch của `fix/non-road-legs`, chấm bằng dữ liệu và bộ chấm mới: **28/57 đi được**. Có 42 lần lỡ chuyến (`ERR_TRANSFER`, ví dụ "Chùa Bát Nhã -> Cầu Vàng: lo chuyen cuoi 16:30") và 24 lần quá giờ (`ERR_HOURS`, đảo tới 17:45).
+- Sau khi sửa: **57/57 qua gate và đi được**.
+  - Đảo luôn nằm trong 07:52–14:20, và chặng từ ngoài lên đỉnh luôn kịp chuyến cáp lên cuối.
+  - Không khách sạn: đảo 08:00–14:00.
+  - Nam Hải đi lúc 07:00: 07:52–13:52. Nam Hải đi lúc 08:00: 08:52–13:52 (một kế hoạch tới 14:07).
+  - Sala đi lúc 07:00: 09:06–14:20, vì ghé một điểm trước rồi mới ra bến kịp chuyến 09:00.
+  - Sala đi lúc 08:00: bỏ đảo kèm lý do (lỡ cano cuối). Cầu Vàng 16:00–21:00 từ Sala cũng bỏ kèm lý do (cáp lên cuối 16:30).
+  - Tháng 12: vẫn xếp đảo vì khách đặt tên, kèm cảnh báo mùa. Tháng 5: không cảnh báo.
+  - Chuyến 2 ngày từ Sala lúc 08:00 có đảo và Cầu Vàng: đảo bị bỏ kèm lý do, cả chuyến vẫn qua gate.
+  - 5 yêu cầu không có nơi sau cửa ngõ trong lịch (Sun World, ý muốn "cáp treo", Mercure, hai bãi biển) vẫn không ghé đỉnh hay đảo. 9/15 kế hoạch giữ nguyên; 6 kế hoạch đổi vài điểm vì mô hình CP-SAT đổi, như ở audit chuẩn.
+- Nếu giữ dwell cũ (7890419) thì vẫn đi được, nhưng thêm 6 kế hoạch mất đảo (từ Sala lúc 07:00 và từ Nam Hải lúc 08:00 đều thiếu thời gian trên đảo).
+
+**Audit chuẩn** (`BE/tools/audit_plans.py`, 67 yêu cầu, 201 kế hoạch): không kế hoạch nào, trước hay sau, có nơi sau cửa ngõ. Kết quả:
+- 201/201 đi được ở cả hai bên; ý muốn đạt 96/108 ở cả hai bên.
+- 135/201 kế hoạch giống hệt, 144/201 cùng điểm dừng. Lý do: có ràng buộc mới trên các nơi sau cửa ngõ nằm trong danh sách ứng viên, nên mô hình CP-SAT đổi.
+- Sạch 27 → 25, chặng dài 31 → 26, đi lại 31,0 → 30,3 phút một ngày.
+- Thời gian trả lời không chậm đi đáng kể. Code mới chạy hai lần, xen kẽ với code cũ:
+  - trung vị ngày đơn: 5,4 s (cũ) so với 5,9 s và 5,7 s (mới);
+  - trung bình: 5,53 s so với 5,69 s và 5,51 s;
+  - so từng yêu cầu, chênh lệch trung vị +0,02 s và −0,03 s;
+  - tổng CPU: 829 s so với 829 s và 817 s.
+
+  Hai lần chạy code mới cho kế hoạch giống hệt nhau 201/201.
+
+**Test**:
+- Mới: `BE/tests/unit/test_transfer_hours.py` (28 test). Phủ đọc giờ chạy, công thức chặng, solver, hint, gate B3, `best_order`, mùa và lý do bỏ điểm trong `build_plan`, POI view, `migrate_v2`.
+- Thêm vào `BE/tests/data/test_transfers_v2.py`: giờ chạy có nguồn; `hours.access_window` khớp giờ chạy; đảo đủ thời gian sau chuyến ra cuối; view mang `transfer`.
+- Thêm 3 test nhiều ngày vào `BE/tests/unit/test_multiday.py`.
+- Cả bộ test: 1577 passed. 19 failed và 11 errors đều là lỗi môi trường đã biết (Google OAuth, PostgreSQL, 2 test kiến trúc Flutter), giống `main`.
+
 ## Hợp đồng cho app
 
 `segments[]` của kế hoạch (`BE/app/services/response.py`):
 
 - `mode` vẫn là `"motorbike"` cho chặng thường. Chặng vào hoặc ra một nơi sau cửa ngõ ghi các phần theo thứ tự đi, nối bằng `+`: `"motorbike+boat"`, `"boat+motorbike"`, `"cable_car"` (từ chính ga chân núi lên đỉnh), `"cable_car+motorbike"`, `"motorbike+walk"`, và `"walk"` giữa hai điểm trên đỉnh Bà Nà.
-- Có thêm `transfers: [{gateway, name, mode, minutes, km}]`, ví dụ `{"gateway": "cu_lao_cham_boat", "name": "Cano Cửa Đại - Cù Lao Chàm", "mode": "boat", "minutes": 30, "km": 16.5}`. `minutes` và `km` của segment đã gồm phần này.
+- Có thêm `transfers: [{gateway, name, mode, minutes, km, runs}]`, ví dụ `{"gateway": "cu_lao_cham_boat", "name": "Cano Cửa Đại - Cù Lao Chàm", "mode": "boat", "minutes": 30, "km": 16.5, "runs": "07:30-09:00"}`. `minutes` và `km` của segment đã gồm phần này. `runs` là chuyến đầu và chuyến cuối theo chiều của chặng (ra đảo `07:30-09:00`, về `13:00-14:30`; cáp lên `08:00-16:30`, xuống `08:00-22:00`); đường mòn không có `runs`.
 - App hiện chưa đọc `segments`. Khi hiện chặng đi, nên ghi "xe máy 18 phút + cano 30 phút" thay vì "xe máy 48 phút".
 
 Tiền (`plan_totals`):
@@ -138,11 +210,9 @@ Tiền (`plan_totals`):
 
 Replan: app không phải gửi gì thêm. Server biết vé đã mua từ các hoạt động đã xong (`completed_activity_ids`, hoặc `progress_state = completed`), nên app chỉ cần đánh dấu đúng điểm đã đi. Ngân sách của phần còn lại trừ chi tiêu khách đã ghi; khách chưa ghi tiền vé thì planner coi số tiền đó vẫn còn.
 
-## Gộp với nhánh khác
+## Tích hợp với GPS và chặng về khách sạn
 
-- `fix/transfer-fares` nằm trên `fix/non-road-legs`, nên gộp sau nhánh đó.
-- `fix/app-replan-paid-access` nằm trên `fix/transfer-fares`, nên gộp sau nhánh đó. So với `main` hiện tại (đã có `feat/gps-origin`), ngoài các xung đột của `fix/transfer-fares` còn 3 file. Trong `BE/app/modules/planning_lifecycle/service.py`, khối `resume` của `_trip_request` lấy điểm xuất phát dạng dict của `main` (`first_origin != base_origin`, `"origin": first_origin`, `origin = base_origin`) cộng phần `paid`/`paid_today` của nhánh này, và trả `InternalTripRequest`; cuối `replan()` giữ cả `_device_fix` lẫn danh sách `done`. Hai file test (`BE/tests/unit/test_replan_window.py`, `BE/tests/integration/test_stable_planner_lifecycle.py`) chỉ là hai phía cùng thêm import hoặc test: giữ cả hai.
-- `feat/single-poi-value` (chưa gộp) xung đột ở `BE/app/services/profiles.py` (import, `_score`, phần tính điểm nút). Khi giải: giữ cấu trúc `value_svc.score` của nhánh kia, giữ `paid=paid` cho `_score` (đường legacy), và trong `BE/app/services/value.py` đổi `effective_fee(poi)` ở `place_features` và `explain` thành `visit_fee(poi, paid_access(trip))`. Nếu không, dưới objective v1 hồ sơ tiết kiệm lại coi Cầu Vàng, nhà cổ Hội An là "miễn phí" và cộng điểm thưởng miễn phí, dù tiền vé vẫn bị tính.
+Khi replan, ngày đầu dùng vị trí GPS nếu máy gửi vị trí hợp lệ. Các ngày sau xuất phát ở khách sạn. Vé điểm cha đã trả có hiệu lực suốt chuyến. Vé cano khứ hồi đã trả chỉ áp dụng trong ngày đã mua. Solver, gate và phần giải thích chi phí dùng cùng thông tin vé.
 
 ## Thêm hoặc sửa một cửa ngõ
 
@@ -152,14 +222,20 @@ Replan: app không phải gửi gì thêm. Server biết vé đã mua từ các 
 
 ## Chưa làm
 
-- **Giờ chạy của tàu và cáp treo.** Tàu du lịch ra Cù Lao Chàm phần lớn nghỉ ngoài tháng 3–8 (VnExpress), và chạy theo lịch cố định. Cáp treo Bà Nà mở 08:00, vé ngày lên lần cuối 16:30–17:00. Hiện `hours` của Cù Lao Chàm là `00:00-23:59`, nên planner vẫn có thể xếp đảo tới 20:00. Nên làm tiếp bằng `hours.access_window` như khung đường Sơn Trà.
 - **Giá vé theo mức, không theo số tiền có nguồn.** `effective_fee` lấy giữa mức giá, nên vé phố cổ Hội An tính 250.000đ (nguồn: 120.000đ khách nước ngoài, 80.000đ khách Việt) và vé Sun World 850.000đ (nguồn: 1.000.000đ khách ngoại tỉnh). Sửa ở `effective_fee` sẽ đổi giá của mọi điểm, nên để việc riêng.
 - **Vé trẻ em** (Sun World, nửa giá cano cho trẻ 1–8 tuổi) chưa mô hình hoá: mọi giá là giá người lớn.
 - **Replan đứng trên đỉnh Bà Nà xuống núi ăn trưa rồi lên lại.** Trong ví dụ replan của app ở trên (đứng ở Cầu Vàng lúc 10:30), cả 3 phương án đều xuống thành phố ăn trưa (khoảng 80 phút mỗi chiều) rồi lên lại Fantasy Park lúc 16:05–16:30, sát giờ lên cáp treo cuối. Nhánh gốc với ngân sách đủ mua vé lần hai cũng xếp y như vậy, nên không do tiền vé; chưa tìm nguyên nhân. Đã thử cho điểm xếp hạng giá (`rank`, vẫn đọc `visit_fee` không biết vé đã trả) tính vé đã trả: lịch không đổi.
 - **Khách sạn Mercure trên đỉnh làm điểm xuất phát:** lượt cáp treo xuống và lên lại không bị tính tiền (khoản gắn với điểm, không gắn với chặng).
 - **Chuyến 2 ngày rải `must_visit`** (Cầu Vàng ngày 1, Fantasy Park ngày 2) vẫn có thể xảy ra: vé chỉ tính một lần (đúng với vé 3 ngày), nhưng khách phải lên núi hai lần.
 - Mức giá (`price_level`) của điểm con vẫn là 1 (rẻ) khi chấm hợp mức chi tiêu; chỉ số tiền đã đúng.
-- **Chuyến không có khách sạn (open tour):** ngày bắt đầu ở điểm đầu tiên, nên nếu đảo là điểm đầu thì chặng cano chiều đi không được tính. Trên `main`, chặng về khách sạn cuối ngày cũng chưa được tính. Nhánh `fix/return-leg-to-base` (chưa gộp) thêm chặng này; nó đọc cùng ma trận, nên khi gộp cả hai, chặng về từ đảo sẽ tự gồm cano.
+- **Chuyến không có khách sạn (open tour):** ngày bắt đầu ở điểm đầu tiên, nên nếu đảo là điểm đầu thì chặng cano chiều đi không được tính. Khi ngày xuất phát ở khách sạn, T9 tính cả chặng về qua cùng ma trận, kể cả phần cano hoặc cáp treo.
 - **Hàng của bến Cửa Đại là ước lượng** qua một quán gần bến (lệch vài phút). Dựng hàng OSRM thật cho bến cần Docker và OSRM.
 - **Xếp hàng giờ cao điểm** ở cáp treo (vài phút tới vài chục phút) chưa tính.
+- **Giờ chạy, phần còn thiếu:**
+  - Chỉ mô hình chuyến đầu và chuyến cuối, không mô hình từng chuyến cano (8:00, 8:30...).
+  - Không mô hình vé đêm Bà Nà (lên từ 15:00, có thể lên muộn hơn vé ngày), cũng không mô hình ngày biển động trong mùa.
+  - "Sun World Bà Nà Hills" là đầu đường bộ nên không bị luật cáp lên cuối. Giờ 08:00–22:00 cùng dwell 5–8 giờ vẫn giữ nó bắt đầu trước 17:00.
+  - Khách nghỉ ở Mercure trên đỉnh vẫn bị cắt giờ từ 08:20.
+  - Replan cũ chấm cả chặng đã đi theo giờ ghi trên lịch.
+  - Trong chuyến nhiều ngày, điểm đặt tên bị **đóng cửa** (`closed_today`) vẫn làm HCS trượt như trước. Chỉ điểm không kịp chuyến mới được chấm bỏ qua.
 - `BE/tools/coord_check_osm.py` (nhánh `feat/p0-coord-check-osm`) đọc `matrix.json` thô, nên vẫn báo hàng của Cù Lao Chàm sai. Đúng với hàng OSRM, nhưng planner đã đọc qua `transfers.json`.

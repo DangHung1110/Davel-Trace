@@ -92,3 +92,41 @@ def test_a_real_replan_does_not_buy_the_sun_world_ticket_twice(lifecycle, monkey
     assert FANTASY_PARK in {activity["poi_id"] for activity in plan["activities"]}
     assert not plan.get("access_fees")
     assert plan["total_cost"] <= 800_000
+
+
+def test_a_real_replan_starts_at_the_device_position(lifecycle, monkeypatch):
+    """The device position reaches the solver and the product gate (specs/024)."""
+    fixture_service, owner, _other, trip_id, _url = lifecycle
+    monkeypatch.setattr(itinerary, "get_settings", lambda: fixture_service.settings)
+    monkeypatch.setattr(
+        trip_ctx.weather_svc, "fetch_forecast",
+        lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("offline test")),
+    )
+
+    def calculate(trip, target, kind):
+        return with_product_evidence(itinerary.itinerary(itinerary.ItineraryIn(
+            trip=TripRequest(**trip), profiles=["balanced"]
+        )), fixture_service.settings.snapshot_name)
+
+    # 07:05 UTC is 14:05 in Da Nang, on the day of the fixture trip.
+    service = PlanningLifecycleService(
+        fixture_service.settings, planner=calculate,
+        clock=lambda: datetime(2026, 11, 10, 7, 5, tzinfo=timezone.utc))
+    planned = service.create_planning_request(owner, trip_id, "gps-real-plan", target_count=1)
+    version = service.accept(owner, planned["alternatives"][0]["alternative_id"],
+                             "gps-real-accept")["version"]["version_id"]
+    # A fix by the Dragon Bridge, 10 m accurate.
+    replanned = service.replan(owner, trip_id, "gps-real-replan", {
+        "source_version_id": version, "target_count": 1,
+        "current_location": {"lat": 16.0612, "lon": 108.2270, "accuracy_m": 10}})
+
+    assert replanned["returned_count"] == 1
+    alternative = replanned["alternatives"][0]
+    plan = alternative["plan"]
+    assert plan["gps_origin"]["used"] is True
+    assert plan["segments"][0]["from_id"] == plan["gps_origin"]["origin_id"]
+    assert plan["segments"][0]["source"] == "gps_estimate"
+    first_leg = plan["segments"][0]["minutes"]
+    start = plan["activities"][0]["start"]
+    assert int(start[:2]) * 60 + int(start[3:5]) >= 14 * 60 + 5 + first_leg
+    assert all(family["passed"] for family in alternative["gate"]["families"].values())

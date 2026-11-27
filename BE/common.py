@@ -89,6 +89,16 @@ def day_spans(spec: str) -> list[tuple[int, int]]:
     return merged
 
 
+def day_sessions(spec: str) -> list[tuple[int, int]]:
+    """The spans of one hours element on the `day_spans` clock, sorted, NOT merged.
+
+    A class sold in sessions lists them in one element, and two may overlap
+    ("09:00-13:30, 12:00-16:30"). Each session is booked whole, so merged into one
+    09:00-16:30 span a 4.5 h class could start at 10:23, between two sessions.
+    """
+    return sorted({(o, c if c > o else c + DAY_MIN) for o, c in _intervals(spec)})
+
+
 
 def parse_windows(hours: list | None) -> list[tuple[int, int]]:
     """Every 'HH:MM-HH:MM' window of `hours` as same-day minutes, sorted.
@@ -125,6 +135,28 @@ def open_windows(hours: list | None) -> list[tuple[int, int]] | None:
     return sorted(common)
 
 
+def is_by_booking(poi: dict | None) -> bool:
+    """hours.kind == "by_booking": sold as fixed sessions (a cooking class)."""
+    return ((poi or {}).get("hours") or {}).get("kind") == "by_booking"
+
+
+def session_windows(hours: list | None) -> list[tuple[int, int]] | None:
+    """The sessions of a by_booking stop that every listed variant sells.
+
+    Like `open_windows`, but a session is a whole unit (`day_sessions`): only one
+    listed on every variant is safe to book, and sessions are never merged. The
+    solver then fits a visit inside one session, as gate VROH checks each span on
+    its own; with the dwell set to the session length (`migrate_v2.apply_booking`)
+    that visit is exactly the session.
+    None = no parsable hours; [] = no session sold on every variant.
+    """
+    variants = [set(day_sessions(h)) for h in hours or []]
+    variants = [v for v in variants if v]
+    if not variants:
+        return None
+    return sorted(set.intersection(*variants))
+
+
 # Hours assumed for a POI that has none, so a missing value never reads as
 # "open all trip" (a pagoda at 23:05). Each entry is the 15-minute slots in
 # which >= SAFE_HOURS_SHARE of that group's POIs with sourced hours are open,
@@ -158,13 +190,15 @@ def hours_group(cat: str) -> str:
 def poi_open_windows(poi: dict) -> list[tuple[int, int]] | None:
     """`open_windows` of the POI's hours, else of its group's SAFE_HOURS.
 
+    A by_booking stop takes its `session_windows` instead: its sessions stay apart.
     None = neither (the caller keeps its default, e.g. the trip window for a
     legacy fixture without `cat`); [] = no time is safe to schedule, which is
     also a POI closed on the trip's date (`poi_on_date`).
     """
     if poi.get("closed_today"):
         return []
-    wins = open_windows(poi.get("opening_hours"))
+    hours = poi.get("opening_hours")
+    wins = session_windows(hours) if is_by_booking(poi) else open_windows(hours)
     if wins is not None:
         return wins
     safe = SAFE_HOURS.get(hours_group(poi.get("cat") or ""))
@@ -194,13 +228,21 @@ def poi_on_date(poi: dict, date: str | None) -> dict:
     Everything downstream reads `opening_hours`, so this one projection is the
     whole weekday logic. No date or no weekly table leaves the POI as it is
     (`open_windows` then takes what every variant of the week agrees on).
+    A place reached by a boat that runs only some months (`transfer.months`,
+    BE/app/services/transfers.py) is `off_season` on a date outside them: the
+    planner does not pick it on its own then, and warns when the traveller named it.
     """
+    months = (poi.get("transfer") or {}).get("months")
+    iso = iso_date(date)
+    if months and iso and int(iso[5:7]) not in months:
+        poi = {**poi, "off_season": True}
     day = weekday_of(date)
     week = poi.get("hours_by_day")
     if day is None or not week:
         return poi
     today = week[day]
     return {**poi, "opening_hours": [today] if today else [], "closed_today": not today}
+
 
 
 def closed_weekdays(poi: dict) -> list[int]:
@@ -873,12 +915,55 @@ def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = Non
 
 def view_pois(pois: list[dict], snapshot_dir: str | None = None,
               policy: str | None = None) -> list[dict]:
-    """Apply `poi_view` to a POI list (quarantine read from the snapshot), then put on
-    each view what reaching it costs (`attach_access_fees`)."""
+    """Apply `poi_view` to a POI list (quarantine read from the snapshot).
+
+    A place behind a boat or cable car with a timetable also carries `transfer`
+    (`load_transfer_places`): the solver, the order search, gate B3, a replan and the
+    audit read its departures from the POI they already hold.
+    """
     if not any(is_v21(p) for p in pois):
         return pois
     q = load_quarantine(snapshot_dir)
-    return attach_access_fees([poi_view(p, policy, q) for p in pois], snapshot_dir)
+    behind = load_transfer_places(snapshot_dir)
+    out = [poi_view(p, policy, q) for p in pois]
+    if behind:
+        out = [{**v, "transfer": behind[v["poi_id"]]} if v.get("poi_id") in behind else v
+               for v in out]
+    return attach_access_fees(out, snapshot_dir)
+
+
+_TRANSFER_PLACES_CACHE: dict[str, tuple[tuple[int, int], dict]] = {}
+
+
+def transfers_version(snapshot_dir: str | None) -> tuple[int, int] | None:
+    """(mtime, size) of <snapshot_dir>/transfers.json, None without one (cache keys)."""
+    if not snapshot_dir:
+        return None
+    try:
+        stat = os.stat(os.path.join(snapshot_dir, "transfers.json"))
+    except (FileNotFoundError, NotADirectoryError):
+        return None
+    return stat.st_mtime_ns, stat.st_size
+
+
+def load_transfer_places(snapshot_dir: str | None) -> dict:
+    """{poi_id: transfer} from <snapshot_dir>/transfers.json: the places behind a boat
+    or cable car with a timetable (`transfers.place_service`). {} without the file;
+    a malformed one never breaks loading (the data test names it)."""
+    version = transfers_version(snapshot_dir)
+    if version is None:
+        return {}
+    from BE.app.services import transfers  # stdlib-only module; imported late like the matrix
+    path = os.path.abspath(os.path.join(snapshot_dir, transfers.TRANSFERS_FILE))
+    hit = _TRANSFER_PLACES_CACHE.get(path)
+    if hit is not None and hit[0] == version:
+        return hit[1]
+    try:
+        places = transfers.place_service(transfers.read(path))
+    except (ValueError, KeyError, TypeError, AttributeError):
+        places = {}
+    _TRANSFER_PLACES_CACHE[path] = (version, places)
+    return places
 
 
 def load_matrix_cells(snapshot_dir: str):

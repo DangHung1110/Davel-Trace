@@ -814,7 +814,12 @@ DWELL = {
     "wellness": (60, 90, 120),
     "theme_park_big": (300, 360, 480),      # Bà Nà, VinWonders
     "water_park": (150, 210, 270),
-    "island_day_trip": (360, 420, 480),     # Cù Lao Chàm
+    # Cù Lao Chàm: the stay ON the island. The crossing is a leg of its own now (cano
+    # 20 + 10 min each way, danang-v2/transfers.json), so the old day trip (6/7/8 h)
+    # less the two crossings. 5 h is what a traveller on the last boat out (09:00,
+    # on the island 09:20) has until the last one back (14:30, off by 14:20); tours
+    # spend 09:00-14:00 (Vietnam Booking) to 09:00-15:00 (MIA) there.
+    "island_day_trip": (300, 360, 420),
     "cooking_class": (180, 210, 240),
     "boat_short": (40, 60, 90),             # thuyền thúng, du thuyền
     "eco_park": (120, 180, 240),

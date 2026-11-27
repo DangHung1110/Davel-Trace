@@ -64,8 +64,8 @@ osm:way/35952574,Cầu An Hội,outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-2
 osm:node/12344125229,Precious Heritage Art Gallery Museum,museum_indoor,hoi_an,,,08:00-20:00,agent_web
 osm:node/7127464285,Bảo tàng Y học Cổ truyền Hội An,museum_indoor,hoi_an,hoi_an_old_town,,07:00-11:00,open_data
 osm:way/209492808,Nhà thờ Công giáo Hội An,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
-osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,ba_na,Sun World Bà Nà Hills,06:00-17:30,inferred
-osm:way/1109970009,Nhà thờ Saint Denis,outdoor_landmark,ba_na_tay,ba_na,Sun World Bà Nà Hills,05:00-22:00,inferred
+osm:way/683416736,Cầu Vàng,viewpoint,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-17:30,inferred
+osm:way/1109970009,Nhà thờ Saint Denis,outdoor_landmark,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-21:50,inferred
 osm:way/198804483,Thánh địa Mỹ Sơn,paid_attraction,hoi_an,,,06:00-18:00,open_data
 osm:node/4601279489,Phố cổ Hội An,paid_attraction,hoi_an,hoi_an_old_town,,07:30-21:00,agent_web
 osm:way/251397637,Làng rau Trà Quế,outdoor_landmark,hoi_an,,,05:00-22:00,inferred
@@ -139,7 +139,7 @@ osm:node/10180856817,Tiger Tiger Bar,nightlife,hoi_an,,,19:30-23:00,inferred
 osm:node/10297955384,Lamonta Pub & Restaurant,nightlife,hoi_an,,,19:30-23:00,inferred
 osm:node/10154412491,Kungfu Noodle,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,09:00-21:00,open_data
 osm:node/11422706022,El Fresco,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,09:00-21:00,open_data
-osm:node/11423808688,Le Table,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,06:30-21:00,open_data
+osm:node/11423808688,Le Table,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-21:00,open_data
 osm:node/12959087697,Rosa,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
 osm:node/14337631970,Nhà Hàng Chay Ngọc Chi,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
 osm:node/14337971573,Bharata,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,"11:00-13:30, 17:30-20:30",inferred
@@ -151,9 +151,9 @@ osm:node/14337971575,Arapang,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,
 osm:node/4401168602,Nha Hang Com Nieu Hong Phuc 3,restaurant,ba_na_tay,,,11:00-13:00,inferred
 osm:way/1109970036,Beer Plaza,restaurant,ba_na_tay,ba_na,Sun World Bà Nà Hills,17:30-21:30,inferred
 osm:node/13890168980,Cafe Cô Bốn,cafe,ba_na_tay,,,00:00-23:59,open_data
-osm:node/14337971574,Highlands Coffee (Bà Nà),cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
-osm:node/11423769989,Postal Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
-osm:node/14337980312,Soul Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:00-20:30,inferred
+osm:node/14337971574,Highlands Coffee (Bà Nà),cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-20:30,inferred
+osm:node/11423769989,Postal Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-20:30,inferred
+osm:node/14337980312,Soul Cafe,cafe,ba_na_tay,ba_na,Sun World Bà Nà Hills,08:20-20:30,inferred
 osm:node/2617007574,Tượng đài Kazik (Kazimierz Kwiatkowski),outdoor_landmark,hoi_an,hoi_an_old_town,,05:00-22:00,inferred
 osm:way/210933183,Di tích Đình Thanh Tẩy,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
 osm:node/10171278941,Chùa Kim Bửu,religious,hoi_an,,,"08:00-11:00, 14:00-16:00",inferred
