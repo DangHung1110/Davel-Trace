@@ -20,6 +20,12 @@ A road end is a matrix row: a POI standing there (`poi_id`), the place's own row
 best of a few rows plus a short ride (`via`: the Cửa Đại pier has no POI).
 A stale file never breaks loading: a gateway whose ids are not in the matrix is
 skipped and named in the summary (the data test keeps the committed one clean).
+
+A gateway may also cost money (`fare`, per person): `vnd` is paid on every visit to
+a place behind it (the Cửa Đại cano, a round trip in the day), `ticket_of` says the
+ride is inside a POI's ticket (the Bà Nà cable car is the Sun World ticket, charged
+through `requires_ticket_of`). `fares` reads them for `BE.common.attach_access_fees`,
+which puts them on the POIs, so the solver, the gate and `total_cost` price them alike.
 """
 
 from __future__ import annotations
@@ -220,3 +226,48 @@ def describe(a: dict | None, b: dict | None, minutes: int) -> dict:
 def side_file(matrix_path: str) -> str:
     """The transfers file that goes with a matrix file."""
     return os.path.join(os.path.dirname(matrix_path), TRANSFERS_FILE)
+
+
+FARE_PER = ("visit", "trip")
+
+
+def fares(spec: dict) -> dict[str, dict]:
+    """{poi_id: charge} for every place behind a gateway whose `fare` names a price.
+
+    A charge is what one person pays for the transfer on top of the place's own price:
+    `{"key": "fare:<gateway>", "vnd", "name", "mode", "per", "verified_by"}`. `per`
+    "visit" (the default) is one round trip each day the place is visited. A fare that
+    is a POI's ticket (`ticket_of`) or a walk has no price here, and a malformed fare
+    is skipped like a malformed gateway: reading it never breaks a load.
+    """
+    out: dict[str, dict] = {}
+    for gate in spec.get("gateways") or []:
+        fare = gate.get("fare") if isinstance(gate, dict) else None
+        if not isinstance(fare, dict) or fare.get("vnd") is None:
+            continue
+        try:
+            vnd = int(fare["vnd"])
+        except (TypeError, ValueError):
+            continue
+        if vnd <= 0 or not gate.get("id"):
+            continue
+        charge = {"key": f"fare:{gate['id']}", "vnd": vnd, "name": gate.get("name") or gate["id"],
+                  "mode": gate.get("mode"),
+                  "per": fare.get("per") if fare.get("per") in FARE_PER else "visit",
+                  "verified_by": fare.get("verified_by")}
+        for place in gate.get("places") or []:
+            pid = place.get("poi_id") if isinstance(place, dict) else None
+            if pid:
+                out.setdefault(pid, charge)
+    return out
+
+
+def read_fares(snapshot_dir: str | None) -> dict[str, dict]:
+    """`fares` of `<snapshot_dir>/transfers.json`; {} without the file or with a bad one."""
+    path = os.path.join(snapshot_dir, TRANSFERS_FILE) if snapshot_dir else None
+    if not path or not os.path.exists(path):
+        return {}
+    try:
+        return fares(read(path))
+    except (OSError, ValueError):
+        return {}

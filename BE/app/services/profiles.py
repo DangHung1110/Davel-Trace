@@ -54,11 +54,11 @@ from BE.app.services import value as value_svc
 from BE.app.services.value import novelty_scores, price_reference  # noqa: F401
 from BE.app.services.optimizer import (
     STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, poi_windows,
-    stubs_from_pois)
+    stubs_fee, stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
-    closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
-    price_level_of, to_min, trusted_rating, weekday_of)
+    closed_weekdays, deadline, hhmm, paid_access, party_size, poi_on_date,
+    price_level_of, to_min, trusted_rating, visit_fee, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -244,7 +244,7 @@ def _profile_edges(profile: str, q: dict[tuple[str, str], float],
 
 
 def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
-           avg_leg: float = 0.0, budget: float | None = None) -> float:
+           avg_leg: float = 0.0, budget: float | None = None, paid=()) -> float:
     """Node score for one profile under DAVEL_OBJECTIVE=legacy (see module docstring).
     Objective v1 scores with `value.score` instead: one function, these numbers as the
     profiles' weights in objective_weights/v1.json, savings without `avg_leg` and without
@@ -255,8 +255,10 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     experience: novelty-first with a dominant category-spread term in the
     optimizer (`DIVERSITY_WEIGHT_BY_PROFILE`); the node score itself is
     novelty + a small rating/fit term.
+    `paid`: charges the trip already paid; what the visit costs is its own price plus
+    reaching it (`visit_fee`: Cầu Vàng is not free, it needs the Sun World ticket).
     """
-    rating, known_fee = trusted_rating(p), effective_fee(p)
+    rating, known_fee = trusted_rating(p), visit_fee(p, paid)
     fee = known_fee or 0
     if profile == "savings":
         cat = soft_rules.poi_category(p)
@@ -370,11 +372,12 @@ def _max_fee(trip: dict) -> int | None:
 
 
 def _within_budget(out: dict, stubs: list, trip: dict) -> bool:
-    """Does this optimizer result respect the trip's fee ceiling?"""
-    fees = {stub.poi_id: stub.fee for stub in stubs}
+    """Does this optimizer result respect the trip's fee ceiling (its stops' fees and
+    their access charges once, like the solver's max_fee)?"""
+    by_id = {stub.poi_id: stub for stub in stubs}
     ceiling = _max_fee(trip)
-    return ceiling is None or sum(fees.get(a["poi_id"], 0)
-                                  for a in out["itinerary"]["activities"]) <= ceiling
+    return ceiling is None or stubs_fee(
+        [by_id[a["poi_id"]] for a in out["itinerary"]["activities"] if a["poi_id"] in by_id]) <= ceiling
 
 
 def _all_day_minutes(ids, pois_by_id: dict) -> int:
@@ -497,12 +500,14 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # BCS prices a stop with `effective_fee`, like the solver and the plan's total_cost,
 # so the view carries every field it reads: `price` (v2.1 tier) wins over
 # ticket_vnd/fee/smart_tags. Without it the gate fell back to the smart_tags band
-# (medium restaurant 300k where the solver paid 250k).
+# (medium restaurant 300k where the solver paid 250k). `access_fees` (a parent's
+# ticket, a cano) is the rest of what a stop costs (`BE.common.fee_breakdown`).
 # `hours` is how a cooking class (kind by_booking) is a meal: A1 counts it in every
 # meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
 # class over lunch failed the gate as "khong co bua trua".
 _GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
-               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours")
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "access_fees",
+               "sells_ticket")
 
 
 def _gate_view(p: dict) -> dict:
@@ -517,7 +522,7 @@ def _cap_candidates(candidates: list[dict], score, must: list[str],
                     limit: int = MAX_SOLVER_CANDIDATES,
                     floor: int = CANDIDATE_FLOOR_PER_CATEGORY,
                     wish_groups: list[dict] | None = None,
-                    cheap_meals: int = 0) -> list[dict]:
+                    cheap_meals: int = 0, paid=()) -> list[dict]:
     """Stratified top-K for the solver, in the incoming (rank) order.
 
     Kept: every must_visit, the best POIs of every wish, the `floor` best of every
@@ -534,7 +539,7 @@ def _cap_candidates(candidates: list[dict], score, must: list[str],
         wanted = set(group.get("poi_ids") or [])
         kept.update([p["poi_id"] for p in best if p["poi_id"] in wanted][:CANDIDATE_FLOOR_PER_WISH])
     meals = sorted((p for p in best if soft_rules.poi_category(p) == "restaurant"),
-                   key=lambda p: effective_fee(p) or 0)
+                   key=lambda p: visit_fee(p, paid) or 0)
     kept.update(p["poi_id"] for p in meals[:cheap_meals])
     per_cat: Counter = Counter()
     for poi in best:
@@ -650,10 +655,11 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # What the budget can never pay for must not take a place from what it can:
     # the candidate cap keeps the best of each category, whatever they cost.
     ceiling = _max_fee(trip)
+    paid = paid_access(trip)
     # Retrieval has already dropped most of these: the wish report still needs them.
     unaffordable: list[dict] = []
     if ceiling is not None:
-        unaffordable = [p for p in pois_by_id.values() if (effective_fee(p) or 0) > ceiling
+        unaffordable = [p for p in pois_by_id.values() if (visit_fee(p, paid) or 0) > ceiling
                         and p["poi_id"] not in (trip.get("must_visit") or [])]
         out_of_reach = {p["poi_id"] for p in unaffordable}
         candidates = [p for p in candidates if p["poi_id"] not in out_of_reach]
@@ -712,7 +718,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         budget = trip.get("budget")
         avg_legs = {pid: _avg_leg(travel, pid, ids) for pid in ids}
         base_scores = {pid: _score(prof, pois_by_id[pid], novelty=nov,
-                                   avg_leg=avg_legs[pid], budget=budget)
+                                   avg_leg=avg_legs[pid], budget=budget, paid=paid)
                        for pid in ids}
         unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
         prefs = value_svc.taste_prefs(trip)
@@ -737,7 +743,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     capped = _cap_candidates(candidates, _cap_score,
                              list(trip.get("must_visit") or []), wish_groups=act_groups,
                              cheap_meals=CANDIDATE_CHEAP_MEALS if ceiling is not None else 0,
-                             **cap_extra)
+                             paid=paid, **cap_extra)
     if len(capped) < len(candidates):
         candidates = capped
         ids = [p["poi_id"] for p in candidates]

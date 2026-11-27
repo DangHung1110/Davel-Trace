@@ -357,17 +357,162 @@ def party_size(trip: dict) -> int:
     return max(1, int(trip.get("travelers") or 1))
 
 
-def total_fee(acts: list[dict], pois: dict, travelers: int = 1) -> int:
-    """What the party spends at these stops (unknown POI or price counts 0)."""
-    return travelers * sum(effective_fee(pois.get(a.get("poi_id"), {}) or {}) or 0
-                           for a in acts)
+# --------------------------------------------------------------------------
+# What reaching a stop costs besides its own price (`access_fees`)
+# --------------------------------------------------------------------------
+# A summit stop of Bà Nà is priced `included` (0 VND): the Sun World ticket pays for
+# it and for the cable car up. A plan that visits Cầu Vàng without the Sun World stop
+# still buys that ticket, and Cù Lao Chàm still needs the cano from Cửa Đại. The POI
+# loader puts such charges on every view (`attach_access_fees`):
+#   ticket    the parent's price (`requires_ticket_of`), once per trip (two summit
+#             stops buy one ticket; the Sun World ticket is good for 3 days)
+#   transfer  a gateway's `fare` (transfers.json), once per day the place is visited
+#             (one cano round trip per island visit)
+# Nothing is charged when the parent itself is a stop (its own price is that ticket).
+# The solver (StubPOI.access), the gate (BCS) and the plan's total_cost all read them
+# through `fee_breakdown`, so all three charge the same money.
+ACCESS_FEES = "access_fees"
+# Trip key: charges already paid (a ticket bought on an earlier day, by a stop already
+# done). `multiday` and `replan` set it; `paid_access` reads it.
+PAID_ACCESS = "paid_access"
+# On the view of a parent: its own price is a ticket other stops need (Sun World).
+SELLS_TICKET = "sells_ticket"
 
 
-def plan_cost(itinerary: dict, pois: dict, travelers: int = 1) -> int:
+def ticket_parent(poi: dict, by_id: dict, by_osm: dict | None = None) -> dict | None:
+    """The POI whose ticket `requires_ticket_of` names: a poi_id, else an OSM ref."""
+    ref = str(poi.get("requires_ticket_of") or "")
+    if not ref:
+        return None
+    parent = by_id.get(ref)
+    if parent is None and by_osm:
+        parent = by_osm.get(ref[4:] if ref.startswith("osm:") else ref)
+    return None if parent is None or parent.get("poi_id") == poi.get("poi_id") else parent
+
+
+def attach_access_fees(views: list[dict], snapshot_dir: str | None = None) -> list[dict]:
+    """Put on every v2.1 view what a visit pays besides its own price (`access_fees`):
+    its parent's ticket (`requires_ticket_of`, priced like the parent as a stop) and
+    the fare of the gateway it sits behind (`<snapshot_dir>/transfers.json`).
+    Views are fresh copies (`poi_view`); a POI with nothing to add gets no key."""
+    from BE.app.services.transfers import read_fares
+
+    by_id = {p.get("poi_id"): p for p in views}
+    by_osm: dict = {}
+    for p in views:
+        osm = str((p.get("ext_ids") or {}).get("osm") or "")
+        if osm:
+            by_osm.setdefault(osm[4:] if osm.startswith("osm:") else osm, p)
+    fares = read_fares(snapshot_dir)
+    for view in views:
+        if not is_v21(view):
+            continue
+        charges = []
+        parent = ticket_parent(view, by_id, by_osm)
+        vnd = effective_fee(parent) if parent is not None else None
+        if vnd:
+            charges.append({"key": parent["poi_id"], "vnd": int(vnd), "name": parent.get("name"),
+                            "kind": "ticket", "per": "trip", "estimate": fee_is_estimate(parent)})
+        fare = fares.get(view.get("poi_id"))
+        if fare:
+            charges.append({"key": fare["key"], "vnd": int(fare["vnd"]), "name": fare["name"],
+                            "kind": "transfer", "per": fare["per"],
+                            "estimate": fare.get("verified_by") not in SOURCED_PRICE_BY})
+        if charges:
+            view[ACCESS_FEES] = charges
+            for charge in charges:
+                if charge["kind"] == "ticket" and is_v21(by_id[charge["key"]]):
+                    by_id[charge["key"]][SELLS_TICKET] = True
+    return views
+
+
+def access_charges(poi: dict | None, paid=()) -> list[dict]:
+    """What reaching this stop costs, per person, less what is already `paid`."""
+    return [c for c in (poi or {}).get(ACCESS_FEES) or () if c.get("key") not in paid]
+
+
+def own_fee(poi: dict | None, pid: str | None, paid=()) -> int | None:
+    """A stop's own price, 0 for a parent whose ticket the trip already bought: Sun World
+    after a summit stop of an earlier day (the ticket is good for 3 days). `pid` is the
+    stop's id (a gate view carries no poi_id)."""
+    if paid and pid in paid and (poi or {}).get(SELLS_TICKET):
+        return 0
+    return effective_fee(poi or {})
+
+
+def visit_fee(poi: dict | None, paid=()) -> int | None:
+    """VND one person pays to visit this stop by itself: its own price plus every
+    access charge not yet `paid` (Cầu Vàng: 0 + the Sun World ticket). What a filter
+    or a price score must read; a plan's cost is `fee_breakdown` (a shared ticket is
+    paid once). None only when its price is unknown and reaching it costs nothing."""
+    own = own_fee(poi, (poi or {}).get("poi_id"), paid)
+    extra = sum(int(c["vnd"]) for c in access_charges(poi, paid))
+    if own is None:
+        return extra or None
+    return own + extra
+
+
+def paid_access(trip: dict | None) -> frozenset:
+    """Charges this trip has already paid (`trip["paid_access"]`)."""
+    return frozenset((trip or {}).get(PAID_ACCESS) or ())
+
+
+def fee_breakdown(acts: list[dict], pois: dict, paid=()) -> tuple[int, list[dict]]:
+    """(VND one person pays for these stops, the access charges in that sum).
+
+    Each stop pays its own price (`effective_fee`; an unknown POI or price counts 0),
+    none when it was `paid` (a parent whose ticket an earlier day bought). A charge of
+    `access_fees` is added once: a ticket once for the whole list, a transfer once per
+    `day` of the activities (one cano round trip per island visit). It is not added
+    when its parent is itself one of the stops, or when it was `paid`. Each charge says
+    which stops it is `for`.
+    """
+    paid = frozenset(paid or ())
+    stops = {a.get("poi_id") for a in acts}
+    own = 0
+    charges: dict = {}
+    for a in acts:
+        poi = pois.get(a.get("poi_id")) or {}
+        own += own_fee(poi, a.get("poi_id"), paid) or 0
+        for charge in access_charges(poi, paid):
+            if charge["key"] in stops:
+                continue
+            per_trip = charge.get("per") == "trip"
+            slot = (charge["key"], None if per_trip else a.get("day"))
+            if slot not in charges:
+                charges[slot] = {**charge, "for": []}
+                if not per_trip and a.get("day") is not None:
+                    charges[slot]["day"] = a["day"]
+            charges[slot]["for"].append(a.get("poi_id"))
+    return own + sum(int(c["vnd"]) for c in charges.values()), list(charges.values())
+
+
+def paid_after(acts: list[dict], pois: dict, paid=(), same_day: bool = False) -> frozenset:
+    """`paid` plus what these stops pay for the stops after them: the tickets they
+    bought (with `same_day`, also their transfer fares: a replan of the same day) and
+    their own ids (a parent that is a stop is its own ticket)."""
+    _cost, charges = fee_breakdown(acts, pois, paid)
+    keys = {c["key"] for c in charges if same_day or c.get("per") == "trip"}
+    return frozenset(paid or ()) | keys | {a["poi_id"] for a in acts if a.get("poi_id")}
+
+
+def cost_is_estimate(acts: list[dict], pois: dict, paid=()) -> bool:
+    """FR-026: part of the plan's money is a guess, a stop's price or a charge it adds."""
+    if any(fee_is_estimate(pois.get(a.get("poi_id")) or {}) for a in acts):
+        return True
+    return any(c.get("estimate") for c in fee_breakdown(acts, pois, paid)[1])
+
+
+def total_fee(acts: list[dict], pois: dict, travelers: int = 1, paid=()) -> int:
+    """What the party spends at these stops, reaching them included (`fee_breakdown`)."""
+    return travelers * fee_breakdown(acts, pois, paid)[0]
+
+
+def plan_cost(itinerary: dict, pois: dict, travelers: int = 1, paid=()) -> int:
     """Itinerary cost: explicit `total_cost` wins, else what the party spends."""
     if "total_cost" in itinerary:
         return int(itinerary["total_cost"])
-    return total_fee(itinerary.get("activities", []), pois, travelers)
+    return total_fee(itinerary.get("activities", []), pois, travelers, paid)
 
 
 def deadline(trip: dict, default: str = "18:00") -> int:
@@ -761,11 +906,12 @@ def poi_view(poi: dict, policy: str | None = None, quarantine: dict | None = Non
 
 def view_pois(pois: list[dict], snapshot_dir: str | None = None,
               policy: str | None = None) -> list[dict]:
-    """Apply `poi_view` to a POI list (quarantine read from the snapshot)."""
+    """Apply `poi_view` to a POI list (quarantine read from the snapshot), then put on
+    each view what reaching it costs (`attach_access_fees`)."""
     if not any(is_v21(p) for p in pois):
         return pois
     q = load_quarantine(snapshot_dir)
-    return [poi_view(p, policy, q) for p in pois]
+    return attach_access_fees([poi_view(p, policy, q) for p in pois], snapshot_dir)
 
 
 def load_matrix_cells(snapshot_dir: str):

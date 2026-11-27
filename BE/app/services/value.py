@@ -42,7 +42,7 @@ from dataclasses import dataclass
 
 from BE.app.services import profile_filter, retrieval, soft_rules
 from BE.common import (
-    FEW_REVIEWS, clamp01, effective_fee, price_level_of, to_float, to_int, trusted_rating)
+    FEW_REVIEWS, clamp01, paid_access, price_level_of, to_float, to_int, trusted_rating, visit_fee)
 
 # phi in summing order (the order keeps the float sums equal to the pre-v1 formulas).
 PLACE = ("base", "fee", "rating", "fame", "novelty", "free", "free_outdoor")
@@ -181,6 +181,7 @@ class Pool:
     liked: tuple
     profile: dict
     budget: float | None
+    paid: frozenset = frozenset()
 
 
 def pool_of(pois: list[dict], trip: dict) -> Pool:
@@ -188,12 +189,12 @@ def pool_of(pois: list[dict], trip: dict) -> Pool:
     return Pool(novelty=novelty_scores(pois), price_ref=price_reference(pois),
                 prefs=tuple(taste_prefs(trip)),
                 liked=tuple(retrieval.liked_wishes(profile.get("activities"))),
-                profile=profile, budget=trip.get("budget"))
+                profile=profile, budget=trip.get("budget"), paid=paid_access(trip))
 
 
 def place_features(poi: dict, pool: Pool) -> dict[str, float]:
     """phi of one POI (module docstring); the same for every profile."""
-    known_fee = effective_fee(poi)
+    known_fee = visit_fee(poi, pool.paid)
     fee_unit = FEE_UNIT_VND
     if pool.budget is not None and 0 < float(pool.budget) < TIGHT_BUDGET_VND:
         fee_unit = fee_unit / TIGHT_FEE_MULTIPLIER
@@ -248,12 +249,12 @@ def score(pois: list[dict], trip: dict, w: dict) -> Scored:
         for key in ("spending", "outdoor", "liked"):
             lean += float(w.get(key, 0.0)) * parts[key]
         values[pid] = places[pid] + w_taste * unit * taste + unit * round(lean, 4)
-        reasons[pid] = explain(p, phis[pid], w, taste, hits, parts)
+        reasons[pid] = explain(p, phis[pid], w, taste, hits, parts, pool.paid)
     return Scored(values=values, unit=unit, reasons=reasons)
 
 
 def explain(poi: dict, phi: dict, w: dict, taste: float, hits: list[str],
-            parts: dict) -> list[str]:
+            parts: dict, paid=()) -> list[str]:
     """The components that raised v_i under these weights, in words (FR-023 evidence).
 
     A component counts only when its weight is on: savings says "mien phi", balanced
@@ -269,7 +270,7 @@ def explain(poi: dict, phi: dict, w: dict, taste: float, hits: list[str],
         out.append(f"nhieu nguoi biet ({int(reviews)} danh gia)")
     if on["novelty"] and phi["novelty"] >= NOVEL_REASON:
         out.append("doc dao, it nguoi biet")
-    fee = effective_fee(poi)
+    fee = visit_fee(poi, paid)
     if on["free"] or on["fee"]:
         if phi["free"]:
             out.append("mien phi")

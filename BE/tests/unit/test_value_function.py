@@ -84,6 +84,30 @@ def scored(profile, pois=POOL, trip=TRIP):
 
 
 class TestOneFunction(unittest.TestCase):
+    def test_savings_counts_access_charges_until_the_trip_has_paid_them(self):
+        summit = _poi("summit", "park", 4.4, price={"tier": "included"},
+                      access_fees=[{"key": "cable", "vnd": 850_000}])
+        island = _poi("island", "nature", 4.4, fee=50_000,
+                      access_fees=[{"key": "boat", "vnd": 260_000}])
+        pool = [summit, island]
+        paid = {**TRIP, "paid_access": ["cable", "boat"]}
+
+        def features(poi, trip):
+            return value_svc.place_features(poi, value_svc.pool_of(pool, trip))
+
+        self.assertEqual(features(summit, TRIP)["fee"], 8.5)
+        self.assertEqual(features(summit, TRIP)["free_outdoor"], 0)
+        self.assertEqual(features(island, TRIP)["fee"], 3.1)
+        self.assertEqual(features(summit, paid)["free_outdoor"], 1)
+        self.assertEqual(features(island, paid)["fee"], 0.5)
+        before = scored("savings", pool, TRIP)
+        after = scored("savings", pool, paid)
+        self.assertGreater(after.values["summit"], before.values["summit"])
+        self.assertNotIn("mien phi", before.reasons["summit"])
+        self.assertIn("mien phi", after.reasons["summit"])
+        self.assertNotIn("re (50k/nguoi)", before.reasons["island"])
+        self.assertIn("re (50k/nguoi)", after.reasons["island"])
+
     def test_balanced_and_experience_are_the_pre_v1_scores_exactly(self):
         for profile in ("balanced", "experience"):
             for trip in (TRIP, {**TRIP, "budget": 800_000},
