@@ -8,7 +8,11 @@ as a read-only Mapping for both, so every consumer keeps reading
 `cells.get("a->b")`; a null cell is ABSENT (B3: infeasible, never 0 or an
 estimate, research R4). Parsed files are cached per (path, mtime, size).
 
-The one estimate: a day that starts at a GPS fix (`gps_origin.py`) gets a row of its
+Places a motorbike cannot reach (an island, a cable-car summit, a beach down a
+trail) are reached through a boat, cable car or walk from a road end: the
+snapshot's `transfers.json`, applied here at load (`BE.app.services.transfers`).
+
+For GPS origins, a day that starts at a GPS fix (`gps_origin.py`) gets a row of its
 own from `with_starts`, built from the rows of the places nearest to the fix plus the
 short ride to them. Those cells say `source: gps_estimate`; every other cell is still
 the matrix's own.
@@ -21,6 +25,8 @@ import os
 import threading
 from collections.abc import Mapping
 
+from BE.app.services import transfers as transfers_mod
+
 ROW_SEP = "->"
 DENSE_FORMAT = "dense-v1"
 
@@ -30,14 +36,18 @@ class DenseCells(Mapping):
 
     `minutes[i][j]` None means OSRM could not route i->j: the key is absent
     (B3 infeasible), never a 0. Values are built on read; do not mutate.
+    `via` ({row: gateway info}, `transfers.apply_dense`): a leg into or out of
+    such a row also says its `mode` ("motorbike+boat") and its `transfers`.
     """
 
-    def __init__(self, ids: list[str], minutes: list[list], km: list[list]):
+    def __init__(self, ids: list[str], minutes: list[list], km: list[list],
+                 via: dict[int, dict] | None = None):
         if len(minutes) != len(ids) or len(km) != len(ids):
             raise ValueError("dense matrix rows != len(ids)")
         self._index = {pid: i for i, pid in enumerate(ids)}
         self._minutes = minutes
         self._km = km
+        self._via = via or {}
         self._len: int | None = None
 
     @property
@@ -53,7 +63,10 @@ class DenseCells(Mapping):
         minutes = self._minutes[i][j]
         if minutes is None:
             return None
-        return {"km": self._km[i][j], "minutes": minutes}
+        cell = {"km": self._km[i][j], "minutes": minutes}
+        if self._via and i != j and (i in self._via or j in self._via):
+            cell.update(transfers_mod.describe(self._via.get(i), self._via.get(j), minutes))
+        return cell
 
     def __getitem__(self, key: str) -> dict:
         cell = self._cell(key)
@@ -137,8 +150,11 @@ class StartCells(Mapping):
         if b in self.starts:
             return None
         best: tuple[float, float] | None = None
+        best_cell = {}
+        best_access = 0.0
         for anchor, access_min, access_km in anchors:
             if b == anchor:
+                cell = {}
                 way = (access_min, access_km)
             else:
                 cell = self.base.get(f"{anchor}{ROW_SEP}{b}")
@@ -147,10 +163,16 @@ class StartCells(Mapping):
                 way = (access_min + int(cell["minutes"]), access_km + float(cell["km"]))
             if best is None or way[0] < best[0]:
                 best = way
+                best_cell = cell
+                best_access = access_min
         if best is None:
             return None
-        return {"km": round(best[1], 2), "minutes": max(1, int(best[0] + 0.5)),
-                "source": GPS_ESTIMATE}
+        result = {**best_cell, "km": round(best[1], 2),
+                  "minutes": max(1, int(best[0] + 0.5)), "source": GPS_ESTIMATE}
+        mode = best_cell.get("mode")
+        if best_access >= 0.5 and mode and not mode.startswith("motorbike"):
+            result["mode"] = f"motorbike+{mode}"
+        return result
 
     def __getitem__(self, key: str) -> dict:
         cell = self._cell(key)
@@ -228,31 +250,50 @@ def dense_document(ids: list[str], cells: Mapping, meta: dict) -> dict:
             "minutes": minutes, "km": km}
 
 
-_DOC_CACHE: dict[str, tuple[tuple[int, int], dict]] = {}
+_DOC_CACHE: dict[tuple[str, bool], tuple[tuple, dict]] = {}
 _DOC_LOCK = threading.Lock()
 
 
-def load_matrix_doc(path: str) -> dict:
+def _version(path: str | None) -> tuple[int, int] | None:
+    try:
+        stat = os.stat(path) if path else None
+    except FileNotFoundError:
+        return None
+    return None if stat is None else (stat.st_mtime_ns, stat.st_size)
+
+
+def load_matrix_doc(path: str, transfers: bool = True) -> dict:
     """Parsed matrix.json with `cells` as a Mapping (legacy dict or dense).
 
-    Cached per (mtime, size), so a request does not re-parse the file. The
-    returned document is SHARED: callers must treat it as read-only.
+    `transfers`: apply the `transfers.json` next to it (places reached by boat,
+    cable car or on foot, `BE.app.services.transfers`); the document then says
+    what changed under `transfers`. False reads the raw OSRM rows (calibration).
+    Cached per (mtime, size) of both files, so a request does not re-parse them.
+    The returned document is SHARED: callers must treat it as read-only.
     """
-    stat = os.stat(path)
-    key = (stat.st_mtime_ns, stat.st_size)
+    stat = os.stat(path)          # FileNotFoundError: load_cells' "no matrix yet"
+    side = transfers_mod.side_file(path) if transfers else None
+    key = ((stat.st_mtime_ns, stat.st_size), _version(side))
     with _DOC_LOCK:
-        hit = _DOC_CACHE.get(path)
+        hit = _DOC_CACHE.get((path, transfers))
     if hit is not None and hit[0] == key:
         return hit[1]
     with open(path, encoding="utf-8") as f:
         doc = json.load(f)
+    spec = transfers_mod.read(side) if key[1] is not None else None
     if doc.get("format") == DENSE_FORMAT:
-        doc["cells"] = DenseCells(doc["ids"], doc.pop("minutes"), doc.pop("km"))
+        minutes, km = doc.pop("minutes"), doc.pop("km")
+        via = None
+        if spec is not None:
+            via, doc["transfers"] = transfers_mod.apply_dense(doc["ids"], minutes, km, spec)
+        doc["cells"] = DenseCells(doc["ids"], minutes, km, via)
     elif doc.get("format") not in (None, ""):
         raise ValueError(f"unknown matrix format {doc.get('format')!r} in {path}")
+    elif spec is not None:
+        raise ValueError(f"{transfers_mod.TRANSFERS_FILE} needs a {DENSE_FORMAT} matrix: {path}")
     doc.setdefault("cells", {})
     with _DOC_LOCK:
-        _DOC_CACHE[path] = (key, doc)
+        _DOC_CACHE[(path, transfers)] = (key, doc)
     return doc
 
 

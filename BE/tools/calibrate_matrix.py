@@ -273,7 +273,7 @@ def parse_args(argv=None) -> argparse.Namespace:
 def main(argv=None, transport=_http_get_json, wait=time.sleep) -> int:
     args = parse_args(argv)
     matrix_path = os.path.join(args.snapshot_dir, "matrix.json")
-    matrix = load_matrix_doc(matrix_path)
+    matrix = load_matrix_doc(matrix_path, transfers=False)  # the OSRM rows, not boat/cable legs
     with open(os.path.join(args.snapshot_dir, "pois.json"), encoding="utf-8") as f:
         pois = {p["poi_id"]: p for p in json.load(f)["pois"]}
     pairs = sample_pairs(matrix["ids"], matrix["cells"], args.pairs, args.seed)
