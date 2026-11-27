@@ -135,6 +135,7 @@ Ngân sách: so **tổng trung điểm** với ngân sách; **tổng cận trên
 | `quarantine_google.json` | mọi giá trị gốc Google, theo `poi_id` |
 | `archive_fields.json` | trường cũ không còn dùng, theo `poi_id` (để truy vết, không ai đọc lúc chạy) |
 | `matrix.json` (dense-v1, xe máy) | ma trận di chuyển phủ **mọi** POI active |
+| `transfers.json` (transfers-v1) | chặng không đi bằng xe máy (cáp treo, cano, đường mòn) cho những nơi OSRM gắn sai đường; áp lên ma trận lúc nạp (`BE.app.services.transfers`, `specs/025-non-road-legs/spec.md`) |
 | `README.md` | đặc tả rút gọn + cách build lại |
 
 ## 5. Luật kiểm tra (pytest `BE/tests/data/`)
@@ -159,6 +160,7 @@ Cấu trúc (luôn bật):
 17. Tên hiển thị (POI active) không viết hoa toàn bộ, không dấu câu thừa; tên gốc ở `name_raw`. Quyết định `hours_reset` (file `decisions_*`) đưa giờ về khung an toàn theo nhóm khi nguồn giờ bị gán nhầm điểm (`danang-v1/hours_web.json` khoá theo tên).
 
 18. `tags.dishes`: id món hợp lệ, không trùng, chỉ ở nơi ăn uống; `source=name` thì tên quán khớp luật món; `web`/`osm` có `url`; cột `dishes` của `poi_features.csv` khớp.
+19. `transfers.json` khớp snapshot (`BE/tests/data/test_transfers_v2.py`): mọi cửa ngõ nạp được (không bị bỏ qua), tên và toạ độ từng nơi khớp `pois.json`, mọi POI active của cụm `ba_na` nằm sau cáp treo; cano và cáp treo có nguồn web, đường mòn ghi cách đo; sau khi nạp, không chặng nào của Cù Lao Chàm ngắn hơn 0,85 lần đường chim bay.
 
 Cổng chốt dữ liệu (`P0_GATE=1`):
 - G1. Mọi POI active không phải base có hàng ma trận.
