@@ -35,9 +35,6 @@ class _FailingAcceptanceRepository implements PlanningRepository {
 
   @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {}
-
-  @override
-  Future<Map<String, dynamic>> readiness() async => {'status': 'ready'};
 }
 
 void main() {

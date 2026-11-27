@@ -48,13 +48,14 @@ class AppState extends ChangeNotifier {
   RoutePreviewData? routePreview;
   final Map<String, PoiItem?> mapPlaces = {};
   int _mapPlacesRevision = 0;
+  int _routePreviewRevision = 0;
   DemoSource demoSource = DemoSource.seeded;
   List<PlanAlternative> planAlternatives = PlanAlternative.seeded();
   PlanAlternative? activeAlternative;
   AcceptanceSummary? acceptance;
   String? currentPlanningRequestId;
   List<ItineraryVersionSummary> itineraryVersions = [];
-  Map<String, dynamic>? planningReadiness;
+  SavedItineraryPlan? _savedItineraryPlan;
   Map<String, dynamic>? aiReadiness;
   AiInterpretationProposal? aiProposal;
   PlanExplanation? planExplanation;
@@ -167,10 +168,7 @@ class AppState extends ChangeNotifier {
     if (!isDemoManagement &&
         planningRepository is ItineraryLifecycleRepository) {
       try {
-        itineraryVersions =
-            await (planningRepository as ItineraryLifecycleRepository).history(
-              id,
-            );
+        await _loadItineraryVersions(id);
       } catch (_) {
         itineraryVersions = [];
       }
@@ -193,7 +191,7 @@ class AppState extends ChangeNotifier {
     acceptance = null;
     currentPlanningRequestId = null;
     itineraryVersions = [];
-    planningReadiness = null;
+    _savedItineraryPlan = null;
     demoSource = DemoSource.seeded;
   }
 
@@ -449,6 +447,24 @@ class AppState extends ChangeNotifier {
         .toList();
   }
 
+  SavedItineraryPlan? get savedPlanForSelectedDay {
+    final saved = _savedItineraryPlan;
+    final selected = selectedTripDate;
+    final planned = saved?.date ?? activeTrip?.startDate;
+    if (saved == null ||
+        saved.tripId != activeTrip?.id ||
+        saved.plan.activities.isEmpty) {
+      return null;
+    }
+    return selected == null ||
+            (planned != null &&
+                selected.year == planned.year &&
+                selected.month == planned.month &&
+                selected.day == planned.day)
+        ? saved
+        : null;
+  }
+
   List<DateTime> get tripDates {
     final trip = activeTrip;
     if (trip == null) return const [];
@@ -459,7 +475,9 @@ class AppState extends ChangeNotifier {
   }
 
   void selectTripDate(DateTime date) {
+    if (selectedTripDate == date) return;
     selectedTripDate = date;
+    routePreview = null;
     notifyListeners();
   }
 
@@ -546,14 +564,19 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> loadRoutePreview() async {
-    final allActivities = itinerary?.activities ?? const <ActivityItem>[];
+    final revision = ++_routePreviewRevision;
+    final tripId = activeTrip?.id;
+    final itinerarySnapshot = itinerary;
+    final date = selectedTripDate;
+    final allActivities = activitiesForSelectedDay;
     final activities = allActivities
         .where((item) => item.poiId != null)
         .toList();
     final customCount = allActivities.length - activities.length;
-    final placeLookup = _loadMapPlaces(activities);
-    if (activeTrip == null || activities.length < 2) {
-      routePreview = RoutePreviewData(
+    final placeLookup = _loadMapPlaces(activities.map((item) => item.poiId!));
+    RoutePreviewData result;
+    if (tripId == null || activities.length < 2) {
+      result = RoutePreviewData(
         source: 'none',
         isRealRoute: false,
         distanceM: 0,
@@ -564,47 +587,51 @@ class AppState extends ChangeNotifier {
             : 'Cần ít nhất hai hoạt động có liên kết địa điểm. '
                   '$customCount hoạt động riêng được bỏ qua.',
       );
-      await placeLookup;
-      notifyListeners();
-      return;
-    }
-    try {
-      routePreview = await repository.previewRoute(
-        activeTrip!.id,
-        activities.map((item) => item.id).toList(),
-      );
-    } catch (_) {
-      routePreview = const RoutePreviewData(
-        source: 'none',
-        isRealRoute: false,
-        distanceM: 0,
-        durationS: 0,
-        quality: 'unavailable',
-        warning: 'Không thể tải thông tin tuyến lúc này.',
-      );
-    }
-    if (customCount > 0) {
-      final current = routePreview!;
-      routePreview = RoutePreviewData(
-        source: current.source,
-        isRealRoute: current.isRealRoute,
-        distanceM: current.distanceM,
-        durationS: current.durationS,
-        quality: current.quality,
-        geometry: current.geometry,
-        warning: [
-          current.warning,
-          '$customCount hoạt động riêng không có POI nên được bỏ qua.',
-        ].whereType<String>().where((value) => value.isNotEmpty).join(' '),
-      );
+    } else {
+      try {
+        result = await repository.previewRoute(
+          tripId,
+          activities.map((item) => item.id).toList(),
+        );
+      } catch (_) {
+        result = const RoutePreviewData(
+          source: 'none',
+          isRealRoute: false,
+          distanceM: 0,
+          durationS: 0,
+          quality: 'unavailable',
+          warning: 'Không thể tải thông tin tuyến lúc này.',
+        );
+      }
+      if (customCount > 0) {
+        result = RoutePreviewData(
+          source: result.source,
+          isRealRoute: result.isRealRoute,
+          distanceM: result.distanceM,
+          durationS: result.durationS,
+          quality: result.quality,
+          geometry: result.geometry,
+          warning: [
+            result.warning,
+            '$customCount hoạt động chưa có điểm đến trên bản đồ.',
+          ].whereType<String>().where((value) => value.isNotEmpty).join(' '),
+        );
+      }
     }
     await placeLookup;
+    if (_disposed ||
+        revision != _routePreviewRevision ||
+        activeTrip?.id != tripId ||
+        selectedTripDate != date ||
+        !identical(itinerarySnapshot, itinerary)) {
+      return;
+    }
+    routePreview = result;
     notifyListeners();
   }
 
-  Future<void> _loadMapPlaces(List<ActivityItem> activities) async {
-    final ids = activities
-        .map((item) => item.poiId!)
+  Future<void> _loadMapPlaces(Iterable<String> poiIds) async {
+    final ids = poiIds
         .toSet()
         .where((id) => !mapPlaces.containsKey(id))
         .toList();
@@ -681,7 +708,7 @@ class AppState extends ChangeNotifier {
       if (result.items.isEmpty) {
         throw const ApiException(
           'NO_FEASIBLE_PLAN',
-          'Backend chưa tìm được phương án khả thi.',
+          'Chưa tìm được lịch phù hợp. Hãy điều chỉnh thời gian hoặc ngân sách rồi thử lại.',
         );
       }
       planAlternatives = result.items;
@@ -693,16 +720,6 @@ class AppState extends ChangeNotifier {
           ? 'FastAPI đã trả ${result.items.length} phương án qua cổng cứng.'
           : 'FastAPI trả ${result.items.length} phương án; không thêm phương án kém chỉ để đủ số lượng.';
       _confirmedPlanningOverrides = const {};
-      try {
-        final readiness = await planningRepository.readiness();
-        if (!_disposed && revision == _planningRevision) {
-          planningReadiness = readiness;
-        }
-      } catch (_) {
-        if (!_disposed && revision == _planningRevision) {
-          planningReadiness = null;
-        }
-      }
     } catch (error) {
       if (_disposed || revision != _planningRevision) return;
       demoSource = planAlternatives.isEmpty
@@ -791,7 +808,7 @@ class AppState extends ChangeNotifier {
     }
     _confirmedPlanningOverrides = confirmed;
     aiProposal = null;
-    aiMessage = 'Đã xác nhận đề xuất; planner deterministic đang xử lý.';
+    aiMessage = null;
     notifyListeners();
     await requestPlan();
   }
@@ -856,7 +873,9 @@ class AppState extends ChangeNotifier {
         } catch (error) {
           errorMessage = 'Đã lưu lịch trình, nhưng chưa tải lại được. Hãy làm mới chuyến đi.';
         }
-        await loadItineraryHistory();
+        if (isDemoManagement) await loadItineraryHistory();
+        final planDate = _savedItineraryPlan?.date ?? activeTrip?.startDate;
+        if (tripDates.contains(planDate)) selectedTripDate = planDate;
         plannerMessage =
             'Đã chốt và lưu acceptance ${acceptance!.id.substring(0, 8)}.';
       } else {
@@ -881,12 +900,42 @@ class AppState extends ChangeNotifier {
     if (trip == null || planningRepository is! ItineraryLifecycleRepository) {
       return;
     }
+    await _loadItineraryVersions(trip.id);
+    if (!_disposed) notifyListeners();
+  }
+
+  Future<void> _loadItineraryVersions(String tripId) async {
     final lifecycle = planningRepository as ItineraryLifecycleRepository;
     final revision = _planningRevision;
-    final versions = await lifecycle.history(trip.id);
+    final versions = await lifecycle.history(tripId);
     if (_disposed || revision != _planningRevision) return;
     itineraryVersions = versions;
-    notifyListeners();
+    final version = versions.where((item) => item.active).firstOrNull;
+    final reader = planningRepository;
+    if (version == null || reader is! ItineraryPlanReader) {
+      _savedItineraryPlan = null;
+      return;
+    }
+    if (_savedItineraryPlan?.versionId == version.id) return;
+    _savedItineraryPlan = null;
+    try {
+      final saved = await (reader as ItineraryPlanReader).readVersion(
+        version.id,
+      );
+      await _loadMapPlaces(
+        saved.plan.activities.map((item) => item['poi_id']).whereType<String>(),
+      );
+      if (!_disposed &&
+          revision == _planningRevision &&
+          activeTrip?.id == tripId &&
+          itineraryVersions.any(
+            (item) => item.active && item.id == saved.versionId,
+          )) {
+        _savedItineraryPlan = saved;
+      }
+    } catch (_) {
+      // Manual activities remain available when the saved snapshot cannot load.
+    }
   }
 
   Future<void> activateItineraryVersion(ItineraryVersionSummary version) async {
@@ -907,8 +956,8 @@ class AppState extends ChangeNotifier {
       if (_disposed || revision != _planningRevision) return;
       final tripId = activeTrip?.id;
       if (tripId != null) await _loadTripDetail(tripId);
-      await loadItineraryHistory();
-      plannerMessage = 'Đã kích hoạt lại phiên bản ${version.ordinal}.';
+      if (isDemoManagement) await loadItineraryHistory();
+      plannerMessage = 'Đã dùng lại lịch ${version.ordinal}.';
     } catch (error) {
       if (_disposed || revision != _planningRevision) return;
       errorMessage = _message(error);
@@ -978,7 +1027,6 @@ class AppState extends ChangeNotifier {
     acceptance = null;
     currentPlanningRequestId = null;
     itineraryVersions = [];
-    planningReadiness = null;
     aiReadiness = null;
     aiProposal = null;
     planExplanation = null;

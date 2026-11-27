@@ -4,7 +4,9 @@ import 'package:davel_trace/features/auth/application/auth_controller.dart';
 import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
+import 'package:davel_trace/features/management/data/demo_management_repository.dart';
 import 'package:davel_trace/features/itinerary/presentation/planning_request_review.dart';
+import 'package:davel_trace/features/map/presentation/widgets/map_canvas.dart';
 import 'package:davel_trace/shared/widgets/mobile_frame.dart';
 import 'package:davel_trace/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +144,11 @@ void main() {
       expect(find.byKey(const Key('request-plan-button')), findsNothing);
       await _capture(tester, 'itinerary-390');
       await _tap(tester, 'open-planning-button');
-      expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+      expect(find.byKey(const Key('request-plan-button')), findsNothing);
+      expect(
+        find.byKey(const Key('preview-plan-seeded-balanced')),
+        findsOneWidget,
+      );
       expect(find.text('28°C'), findsNothing);
       await _capture(tester, 'planning-390');
       await tester.pageBack();
@@ -151,6 +157,39 @@ void main() {
       expect(find.text('Chuyến đi của bạn'), findsOneWidget);
     },
   );
+
+  testWidgets('previews ordered demo stops before saving any itinerary', (
+    tester,
+  ) async {
+    _viewport(tester, const Size(390, 844));
+    final repo = DemoManagementRepository()..activities.clear();
+    await tester.pumpWidget(DavelTraceApp(repository: repo));
+    await tester.pumpAndSettle();
+    await _tap(tester, 'open-trip-trip-demo');
+    await _tap(tester, 'open-trip-map-button');
+    expect(find.byKey(const Key('empty-map-message')), findsOneWidget);
+    await _tap(tester, 'empty-map-open-itinerary');
+    await _tap(tester, 'open-planning-button');
+    await _tap(tester, 'preview-plan-seeded-balanced');
+
+    final map = tester.widget<MapCanvas>(find.byType(MapCanvas));
+    expect(map.stops.map((stop) => stop.title), [
+      'Bán đảo Sơn Trà',
+      'Ăn trưa với mì Quảng',
+      'Bảo tàng Điêu khắc Chăm',
+      'Biển Mỹ Khê',
+    ]);
+    expect(map.routePreview?.quality, 'interpolated');
+    expect(map.routePreview?.geometry, hasLength(4));
+    expect(find.byKey(const Key('locate-user-button')), findsNothing);
+    expect(repo.activities, isEmpty);
+    await _tap(tester, 'open-map-replan-button');
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
+  });
 
   for (final width in [320.0, 390.0]) {
     testWidgets('core journeys fit ${width.toInt()}px with enlarged text', (
@@ -237,21 +276,14 @@ void main() {
     },
   );
 
-  testWidgets(
-    'expense persistence label follows management storage before planning runs',
-    (tester) async {
-      _viewport(tester, const Size(390, 844));
-      await tester.pumpWidget(DavelTraceApp(repository: _LiveManagement()));
-      await tester.pumpAndSettle();
-      await _tap(tester, 'expenses-tab');
-      expect(find.text('Chi tiêu đã được lưu vào tài khoản.'), findsOneWidget);
-      expect(
-        find.text('Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.'),
-        findsNothing,
-      );
-      await _capture(tester, 'expenses-390');
-    },
-  );
+  testWidgets('connected expenses skip the storage notice', (tester) async {
+    _viewport(tester, const Size(390, 844));
+    await tester.pumpWidget(DavelTraceApp(repository: _LiveManagement()));
+    await tester.pumpAndSettle();
+    await _tap(tester, 'expenses-tab');
+    expect(find.byKey(const Key('expense-source-status')), findsNothing);
+    await _capture(tester, 'expenses-390');
+  });
 
   testWidgets(
     'AI confirmation shows place names, keeps IDs in data and validates fields',

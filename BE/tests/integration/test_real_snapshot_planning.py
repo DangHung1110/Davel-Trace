@@ -30,7 +30,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 from BE.app import main as main_mod  # noqa: E402
 from BE.app.config import Settings  # noqa: E402
 from BE.app.routers import itinerary as itinerary_mod  # noqa: E402
-from BE.app.services import profile_filter, trip_ctx  # noqa: E402
+from BE.app.services import objective, profile_filter, trip_ctx  # noqa: E402
 from BE.app.services.retrieval import load_pois_json  # noqa: E402
 from BE.app.services.soft_rules import poi_category  # noqa: E402
 from BE.common import FEW_REVIEWS  # noqa: E402
@@ -222,16 +222,26 @@ class TestRealSnapshotPlanning(unittest.TestCase):
         # The same restaurants came back at spending 1, 2 and 3: the answer only fed
         # the rank list. A thrifty couple now eats at the cheap tables, a premium one
         # does not, and each is still a full passing day.
-        def meal_levels(level):
+        def meals(level):
             _, plan = self.plan(profile=dict(COUPLE, spending_level=level), budget=3000000, travelers=2)
             self.assertTrue(plan["passed"], plan.get("violations"))
-            levels = [p.get("price_level") or 2 for p in self.stops(plan) if poi_category(p) == "restaurant"]
-            self.assertGreaterEqual(len(levels), 2)             # lunch and dinner
-            return levels
+            meals = [p for p in self.stops(plan) if poi_category(p) == "restaurant"]
+            self.assertGreaterEqual(len(meals), 2)              # lunch and dinner
+            return meals
 
-        thrifty, premium = meal_levels(1), meal_levels(3)
-        self.assertEqual(set(thrifty), {1}, thrifty)
-        self.assertGreater(sum(premium) / len(premium), sum(thrifty) / len(thrifty))
+        thrifty, premium = meals(1), meals(3)
+        cheap = [p.get("price_level") or 2 for p in thrifty]
+        dear = [p.get("price_level") or 2 for p in premium]
+        self.assertGreater(sum(dear) / len(dear), sum(cheap) / len(cheap))
+        if not objective.active():
+            self.assertEqual(set(cheap), {1}, cheap)
+            return
+        # Objective v1 (T11): the two cheapest tables here both serve mì Quảng. A
+        # day of travel should not eat one dish twice (user decision 24/11/2026), so
+        # one meal may cost a level more; the thrifty day still eats cheap.
+        self.assertIn(1, cheap, cheap)
+        dishes = [objective.dish_of(p) for p in thrifty if objective.dish_of(p)]
+        self.assertEqual(len(dishes), len(set(dishes)), dishes)
 
     def test_beach_wish_without_profile(self):
         _, plan = self.plan(activities=["tắm biển"])

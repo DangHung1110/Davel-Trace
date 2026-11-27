@@ -25,20 +25,6 @@ class AppHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: AppColors.sand,
-              borderRadius: BorderRadius.circular(9),
-            ),
-            child: const Icon(
-              Icons.route_rounded,
-              color: AppColors.primaryDark,
-              size: 19,
-            ),
-          ),
-          const SizedBox(width: 10),
           Expanded(
             child: Text(
               section,

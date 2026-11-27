@@ -72,6 +72,7 @@ def _mins(hhmm):
 
 
 class TestBuildPlanTemplates(unittest.TestCase):
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_family_slow(self):
         plan = build_plan("balanced", _trip(), RANKED, BY_ID, CELLS,
                           template="family-slow")
@@ -99,6 +100,7 @@ class TestBuildPlanTemplates(unittest.TestCase):
         self.assertIsNotNone(info["lunch_restaurant"], acts)
         self.assertEqual(plan["constraint_status"]["HCS"], 1)
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_friends_fast_late_end(self):
         plan = build_plan("balanced", _trip("08:00", "22:00"), RANKED, BY_ID,
                           CELLS, template="friends-fast")
@@ -115,6 +117,7 @@ class TestBuildPlanTemplates(unittest.TestCase):
         self.assertIs(info["rest_ok"], True)
         self.assertEqual(plan["constraint_status"]["HCS"], 1)
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_couple_calm_six_stops(self):
         plan = build_plan("balanced", _trip("09:00", "18:00"), RANKED, BY_ID,
                           CELLS, template="couple-calm")
@@ -147,6 +150,7 @@ class TestBuildPlanTemplates(unittest.TestCase):
                           only_outdoor, CELLS)
         self.assertGreaterEqual(len(plan["activities"]), 1)
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_custom_profile_without_archetype_still_gets_lunch_and_rest(self):
         """template="" (no archetype) but a profile -> universal human needs."""
         plan = build_plan("balanced", _trip(), RANKED, BY_ID, CELLS,
@@ -183,6 +187,7 @@ class TestBuildPlanTemplates(unittest.TestCase):
         self.assertNotIn("bar", cats)
         self.assertNotIn("nature", cats)
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_cafe_need_raises_the_reported_cap(self):
         """A cafe/coffee profile answer raises the HARD cap to 2 (never >2)."""
         trip = _trip("08:00", "18:00",

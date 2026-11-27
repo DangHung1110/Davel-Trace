@@ -21,11 +21,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Xác thực email')),
+    appBar: AppBar(title: const Text('Xác nhận email')),
     body: SafeArea(
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          if (widget.controller.pendingEmail case final address?)
+            Text(address, style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 6),
           Text(
             widget.controller.message ??
                 'Kiểm tra email ${widget.controller.pendingEmail ?? 'của bạn'} để lấy mã xác thực.',
@@ -33,24 +36,19 @@ class _VerifyScreenState extends State<VerifyScreen> {
           const SizedBox(height: 16),
           TextField(
             controller: token,
+            autofillHints: const [AutofillHints.oneTimeCode],
             decoration: const InputDecoration(labelText: 'Mã xác thực'),
           ),
           if (widget.controller.developmentInboxEnabled) ...[
             const SizedBox(height: 12),
-            OutlinedButton.icon(
+            TextButton(
               onPressed: () async {
                 final value = await widget.controller.loadDevelopmentToken(
                   'verify_email',
                 );
-                if (value != null) token.text = value;
+                if (mounted && value != null) token.text = value;
               },
-              icon: const Icon(Icons.developer_mode),
-              label: const Text('Lấy mã từ hộp thư phát triển'),
-            ),
-            const Text(
-              'Chỉ có trong chế độ demo/test.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12),
+              child: const Text('Dùng mã thử'),
             ),
           ],
           if (widget.controller.errorMessage != null)

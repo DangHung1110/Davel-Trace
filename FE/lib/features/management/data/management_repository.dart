@@ -53,7 +53,15 @@ abstract interface class LiveManagementRepository
   Future<void> setActiveTrip(Trip? trip);
 }
 
-class HttpManagementRepository implements LiveManagementRepository {
+abstract interface class DraftRouteRepository {
+  Future<RoutePreviewData> previewDraftRoute(
+    String tripId,
+    List<String> poiIds,
+  );
+}
+
+class HttpManagementRepository
+    implements LiveManagementRepository, DraftRouteRepository {
   HttpManagementRepository(this._api);
 
   final ApiClient _api;
@@ -245,8 +253,8 @@ class HttpManagementRepository implements LiveManagementRepository {
             ? 'custom'
             : 'external_reference';
         item['category'] = item['kind'];
-        item['latitude'] = 16.0544;
-        item['longitude'] = 108.2022;
+        item['latitude'] ??= 0.0;
+        item['longitude'] ??= 0.0;
         _tripByActivity[item['id'] as String] = id;
         _dayByActivity[item['id'] as String] = dayId;
         activities.add(item);
@@ -441,6 +449,17 @@ class HttpManagementRepository implements LiveManagementRepository {
     await _api.post(
       '/v1/routes/preview',
       body: {'trip_id': tripId, 'activity_ids': ids, 'mode': 'driving'},
+    ) as Map<String, dynamic>,
+  );
+
+  @override
+  Future<RoutePreviewData> previewDraftRoute(
+    String tripId,
+    List<String> poiIds,
+  ) async => RoutePreviewData.fromJson(
+    await _api.post(
+      '/v1/routes/preview',
+      body: {'trip_id': tripId, 'poi_ids': poiIds, 'mode': 'driving'},
     ) as Map<String, dynamic>,
   );
 }

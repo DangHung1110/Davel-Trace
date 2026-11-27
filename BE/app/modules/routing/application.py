@@ -19,19 +19,32 @@ def preview(principal, trip_id: str, activity_ids: list[str], catalog: dict,
         for day in trip.get("days", [])
         for activity in day.get("activities", [])
     }
+    if any(activity_id not in activity_map for activity_id in activity_ids):
+        raise LookupError("Activity not found in trip.")
+    candidates = [
+        (activity_id, activity_map[activity_id].get("poi_id"), activity_map[activity_id]["title"])
+        for activity_id in activity_ids
+    ]
+    return _route(candidates, catalog, matrix, route_provider, estimate_provider)
+
+
+def preview_places(principal, trip_id: str, poi_ids: list[str], catalog: dict,
+                   matrix: dict, trip_reader, route_provider, estimate_provider) -> dict:
+    trip_reader.get(principal, UUID(trip_id))
+    candidates = [(str(index), poi_id, None) for index, poi_id in enumerate(poi_ids)]
+    return _route(candidates, catalog, matrix, route_provider, estimate_provider)
+
+
+def _route(candidates, catalog, matrix, route_provider, estimate_provider) -> dict:
     stops: list[Stop] = []
     unresolved = 0
-    for activity_id in activity_ids:
-        activity = activity_map.get(activity_id)
-        if activity is None:
-            raise LookupError("Activity not found in trip.")
-        poi_id = activity.get("poi_id")
+    for activity_id, poi_id, title in candidates:
         place = resolve_place(catalog, poi_id) if poi_id else None
         if place is None:
             unresolved += 1
             continue
         stops.append(Stop(
-            activity_id=activity_id, title=activity["title"], poi_id=poi_id,
+            activity_id=activity_id, title=title or place.get("name", poi_id), poi_id=poi_id,
             latitude=place["lat"], longitude=place["lon"],
         ))
     if len(stops) < 2:

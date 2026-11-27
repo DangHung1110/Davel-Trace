@@ -195,6 +195,35 @@ class ItineraryVersionSummary {
       );
 }
 
+class SavedItineraryPlan {
+  const SavedItineraryPlan({
+    required this.versionId,
+    required this.tripId,
+    required this.plan,
+    this.date,
+  });
+
+  final String versionId;
+  final String tripId;
+  final PlanAlternative plan;
+  final DateTime? date;
+
+  factory SavedItineraryPlan.fromJson(Map<String, dynamic> json) {
+    final request = json['request'] as Map?;
+    final trip = request?['trip'] as Map?;
+    final date = trip?['start_date'] as String?;
+    return SavedItineraryPlan(
+      versionId: json['version_id'] as String,
+      tripId: json['trip_id'] as String,
+      plan: PlanAlternative.fromJson({
+        ...json,
+        'alternative_id': json['version_id'],
+      }),
+      date: date == null ? null : DateTime.tryParse(date),
+    );
+  }
+}
+
 class PlaceNameCandidate {
   const PlaceNameCandidate({
     required this.id,

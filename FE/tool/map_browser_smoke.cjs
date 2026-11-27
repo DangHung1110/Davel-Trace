@@ -133,13 +133,33 @@ class CDP {
       setTimeout(() => resolve({before, after:map.getCenter().toArray()}), 800);
     })`, sessionId);
     assert.deepEqual(outside.after, outside.before);
+    const routePreview = await cdp.evaluate(`(async () => {
+      clearUserLocation();
+      const stops = [
+        { title: "Cầu Rồng", longitude: 108.2274, latitude: 16.0611 },
+        { title: "Bảo tàng Chăm", longitude: 108.2235, latitude: 16.0602 },
+      ];
+      const geometry = { type: "LineString", coordinates: stops.map(
+        stop => [stop.longitude, stop.latitude]
+      ) };
+      await renderTrip(stops, { quality: "interpolated", geometry });
+      const approximate = map.getPaintProperty("demo-route-line", "line-dasharray");
+      await renderTrip(stops, { quality: "road_route", geometry });
+      const road = map.getPaintProperty("demo-route-line", "line-dasharray");
+      await renderTrip(stops, { quality: "interpolated", geometry });
+      return { approximate, solidRoad: road == null,
+        labels: stopMarkers.map(marker => marker.getElement().textContent) };
+    })()`, sessionId);
+    assert.deepEqual(routePreview.approximate, [2, 1.25]);
+    assert.equal(routePreview.solidRoad, true);
+    assert.deepEqual(routePreview.labels, ['1', '2']);
     assert.deepEqual(cdp.errors, [], 'PMTiles must actually load without console errors');
     const image = await cdp.call('Page.captureScreenshot', { format: 'png' }, sessionId);
     const screenshot = path.join(root, 'build/ui-review/map-browser-390.png');
     await fs.mkdir(path.dirname(screenshot), { recursive: true });
     await fs.writeFile(screenshot, Buffer.from(image.data, 'base64'));
     console.log(JSON.stringify({ ...result, ...apiCheck, gpsRestarted: true,
-      outsideCameraStable: true, errors: cdp.errors, screenshot }));
+      outsideCameraStable: true, routePreview, errors: cdp.errors, screenshot }));
   } finally {
     if (cdp) cdp.socket.close();
     if (chrome.pid) spawnSync('taskkill', ['/PID', String(chrome.pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' });

@@ -18,6 +18,8 @@ class ExpensesScreen extends StatefulWidget {
   State<ExpensesScreen> createState() => _ExpensesScreenState();
 }
 
+enum _ExpenseAction { edit, delete }
+
 class _ExpensesScreenState extends State<ExpensesScreen> {
   String _category = 'all';
   String _date = 'all';
@@ -81,9 +83,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Đã sao chép bản xuất chi tiêu dạng JSON.'),
-          ),
+          const SnackBar(content: Text('Đã sao chép dữ liệu chi tiêu.')),
         );
       }
     } catch (_) {
@@ -137,72 +137,24 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       const SizedBox(height: 4),
                       Text(trip.title),
                       const SizedBox(height: 12),
-                      SurfaceCard(
-                        key: const Key('expense-source-status'),
-                        color: !state.isDemoManagement
-                            ? AppColors.sand
-                            : AppColors.surfaceLow,
-                        padding: const EdgeInsets.all(11),
-                        child: Row(
-                          children: [
-                            Icon(
-                              !state.isDemoManagement
-                                  ? Icons.cloud_done_outlined
-                                  : Icons.phone_android_outlined,
-                              color: AppColors.primary,
-                              size: 18,
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                !state.isDemoManagement && !pendingSync
-                                    ? 'Chi tiêu đã được lưu vào tài khoản.'
-                                    : state.isDemoManagement
-                                    ? 'Chế độ demo: khoản chi chỉ lưu trong phiên trên thiết bị.'
-                                    : 'Đang xem chi tiêu trên thiết bị. Đồng bộ để lưu thay đổi vào tài khoản.',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ],
+                      if (state.isDemoManagement || pendingSync) ...[
+                        Text(
+                          state.isDemoManagement
+                              ? 'Khoản chi thử chỉ được lưu trên thiết bị trong phiên này.'
+                              : 'Thay đổi chi tiêu sẽ được lưu vào tài khoản khi kết nối lại.',
+                          key: const Key('expense-source-status'),
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
-                      ),
-                      const SizedBox(height: 14),
+                        const SizedBox(height: 12),
+                      ],
                       SurfaceCard(
                         color: AppColors.sand,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                const Expanded(
-                                  child: Text(
-                                    'Tổng ngân sách',
-                                    style: TextStyle(
-                                      color: AppColors.muted,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.surfaceLow,
-                                    borderRadius: BorderRadius.circular(99),
-                                  ),
-                                  child: Text(
-                                    '${(progress * 100).round()}%',
-                                    style: const TextStyle(
-                                      color: AppColors.secondary,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Tổng ngân sách',
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const SizedBox(height: 5),
                             Text(
@@ -223,6 +175,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             const SizedBox(height: 12),
                             LinearProgressIndicator(
                               value: progress,
+                              semanticsLabel: 'Ngân sách đã sử dụng',
                               minHeight: 7,
                               borderRadius: BorderRadius.circular(8),
                               backgroundColor: AppColors.surfaceHigh,
@@ -332,7 +285,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                           const SizedBox(width: 6),
                           IconButton(
                             key: const Key('export-expenses-button'),
-                            tooltip: 'Sao chép bản xuất',
+                            tooltip: 'Sao chép dữ liệu chi tiêu',
                             onPressed: state.isMutating ? null : _export,
                             icon: const Icon(
                               Icons.ios_share_outlined,
@@ -387,44 +340,35 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                       ],
                                     ),
                                   ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        moneyVnd(expense.amountVnd),
-                                        style: const TextStyle(
-                                          color: AppColors.ink,
-                                          fontWeight: FontWeight.w800,
-                                        ),
+                                  Flexible(
+                                    child: Text(
+                                      moneyVnd(expense.amountVnd),
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                        color: AppColors.ink,
+                                        fontWeight: FontWeight.w800,
                                       ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          IconButton(
-                                            visualDensity:
-                                                VisualDensity.compact,
-                                            tooltip: 'Sửa',
-                                            onPressed: state.isMutating
-                                                ? null
-                                                : () => _edit(expense: expense),
-                                            icon: const Icon(
-                                              Icons.edit_outlined,
-                                              size: 17,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            visualDensity:
-                                                VisualDensity.compact,
-                                            tooltip: 'Xóa',
-                                            onPressed: state.isMutating
-                                                ? null
-                                                : () => _delete(expense),
-                                            icon: const Icon(
-                                              Icons.delete_outline,
-                                              size: 17,
-                                            ),
-                                          ),
-                                        ],
+                                    ),
+                                  ),
+                                  PopupMenuButton<_ExpenseAction>(
+                                    tooltip: 'Tùy chọn khoản chi',
+                                    enabled: !state.isMutating,
+                                    onSelected: (action) async {
+                                      switch (action) {
+                                        case _ExpenseAction.edit:
+                                          await _edit(expense: expense);
+                                        case _ExpenseAction.delete:
+                                          await _delete(expense);
+                                      }
+                                    },
+                                    itemBuilder: (context) => const [
+                                      PopupMenuItem(
+                                        value: _ExpenseAction.edit,
+                                        child: Text('Sửa khoản chi'),
+                                      ),
+                                      PopupMenuItem(
+                                        value: _ExpenseAction.delete,
+                                        child: Text('Xóa khoản chi'),
                                       ),
                                     ],
                                   ),

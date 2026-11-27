@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+import pytest
+
 from BE.app.main import app
 from BE.app.modules.identity.dependencies import current_principal
 from BE.app.modules.identity.domain import Principal
@@ -14,7 +16,11 @@ def test_route_preview_requires_authentication():
     assert response.status_code == 401
 
 
-def test_route_preview_uses_owned_trip_and_returns_quality(monkeypatch):
+@pytest.mark.parametrize(("field", "ordered_ids"), [
+    ("activity_ids", ["b", "a"]),
+    ("poi_ids", ["poi-b", "poi-a"]),
+])
+def test_route_preview_uses_owned_trip_and_returns_quality(field, ordered_ids):
     trip_id = str(uuid4())
     original_catalog, original_matrix, original_trip = app.state.catalog_reader, app.state.matrix_reader, app.state.trip_reader
     original_route, original_estimator = app.state.route_provider, app.state.matrix_estimator
@@ -26,28 +32,36 @@ def test_route_preview_uses_owned_trip_and_returns_quality(monkeypatch):
     ]}
     app.state.matrix_reader = lambda: {"cells": {}}
     app.state.trip_reader = _TripReader(trip_id)
-    app.state.route_provider = lambda _stops: RouteResult(
+    route_calls = []
+
+    def road_route(stops):
+        route_calls.append([stop.poi_id for stop in stops])
+        return RouteResult(
         "road_route", "osrm", True,
         {"type": "LineString", "coordinates": [[108.0, 16.0], [108.1, 16.1]]},
         1000, 300,
-    )
+        )
+
+    app.state.route_provider = road_route
     app.dependency_overrides[current_principal] = lambda: Principal(
         uuid4(), uuid4(), frozenset({"traveler"}), "test-correlation",
     )
     try:
         response = request(app, "POST", "/v1/routes/preview", json={
-            "trip_id": trip_id, "activity_ids": ["a", "b"], "mode": "driving",
+            "trip_id": trip_id, field: ordered_ids, "mode": "driving",
         })
         assert response.status_code == 200, response.text
         assert response.json()["quality"] == "road_route"
         assert response.json()["is_real_route"] is True
+        assert route_calls == [["poi-b", "poi-a"]]
     finally:
         app.state.catalog_reader, app.state.matrix_reader, app.state.trip_reader = original_catalog, original_matrix, original_trip
         app.state.route_provider, app.state.matrix_estimator = original_route, original_estimator
         app.dependency_overrides.pop(current_principal, None)
 
 
-def test_foreign_activity_is_not_disclosed(monkeypatch):
+@pytest.mark.parametrize("field", ["activity_ids", "poi_ids"])
+def test_foreign_trip_is_not_disclosed(field):
     trip_id = str(uuid4())
     original, original_trip = app.state.catalog_reader, app.state.trip_reader
     app.state.catalog_reader = lambda: {"snapshot": "fixture-v1", "pois": []}
@@ -57,7 +71,7 @@ def test_foreign_activity_is_not_disclosed(monkeypatch):
     )
     try:
         response = request(app, "POST", "/v1/routes/preview", json={
-            "trip_id": trip_id, "activity_ids": ["a", "b"],
+            "trip_id": trip_id, field: ["a", "b"],
         })
         assert response.status_code == 404
         assert "another" not in response.text.lower()

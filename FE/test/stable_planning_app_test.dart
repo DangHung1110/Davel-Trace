@@ -1,10 +1,14 @@
 import 'package:davel_trace/app.dart';
 import 'package:davel_trace/app_state.dart';
+import 'package:davel_trace/core/errors/api_exception.dart';
 import 'package:davel_trace/features/itinerary/presentation/itinerary_screen.dart';
+import 'package:davel_trace/features/itinerary/presentation/planning_request_review.dart';
 import 'package:davel_trace/features/management/data/management_repository.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
+import 'package:davel_trace/features/map/presentation/widgets/map_canvas.dart';
 import 'package:davel_trace/features/planning/data/planning_repository.dart';
 import 'package:davel_trace/features/planning/domain/models.dart';
+import 'package:davel_trace/features/shell/presentation/main_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,11 +16,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'support/fake_management_repository.dart';
 
 class _LifecyclePlanningRepository
-    implements PlanningRepository, ItineraryLifecycleRepository {
+    implements
+        PlanningRepository,
+        ItineraryLifecycleRepository,
+        ItineraryPlanReader {
   final planningKeys = <String>[];
   final acceptanceKeys = <String>[];
   final replanKeys = <String>[];
   final overrides = <Map<String, dynamic>>[];
+  SavedItineraryPlan? savedPlan;
 
   static const alternative = PlanAlternative(
     id: 'alternative-010',
@@ -65,6 +73,9 @@ class _LifecyclePlanningRepository
   Future<void> activateVersion(String versionId, String key) async {}
 
   @override
+  Future<SavedItineraryPlan> readVersion(String versionId) async => savedPlan!;
+
+  @override
   Future<PlanningResult> replan(
     String tripId,
     String sourceVersionId,
@@ -81,9 +92,6 @@ class _LifecyclePlanningRepository
 
   @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {}
-
-  @override
-  Future<Map<String, dynamic>> readiness() async => {'status': 'ready'};
 }
 
 class _HotelManagement extends FakeManagementRepository
@@ -116,8 +124,175 @@ class _HotelManagement extends FakeManagementRepository
   }
 }
 
+class _PromptPlanningRepository extends _LifecyclePlanningRepository
+    implements AiPlanningRepository {
+  final prompts = <String>[];
+
+  @override
+  Future<Map<String, dynamic>> aiReadiness() async => {
+    'available': true,
+    'capabilities': {'interpretation': true},
+  };
+
+  @override
+  Future<AiInterpretationProposal> interpret(String tripId, String text) async {
+    prompts.add(text);
+    if (prompts.length == 1) {
+      throw const ApiException('LLM_UNAVAILABLE', 'AI tạm thời chưa phản hồi.');
+    }
+    return const AiInterpretationProposal(
+      id: 'prompt-proposal',
+      fields: {'traveler_count': 2, 'indicative_budget': 1500000},
+      hardConstraints: {},
+      softPreferences: {},
+      assumptions: [],
+      unresolved: [],
+      provider: 'fixture',
+      model: 'fixture',
+      externalProcessing: false,
+    );
+  }
+
+  @override
+  Future<PlanExplanation> explain(String alternativeId) =>
+      throw UnimplementedError();
+}
+
+class _SavedMapManagement extends _HotelManagement
+    implements DraftRouteRepository {
+  List<String>? routedIds;
+
+  @override
+  Future<PoiItem> getPoiDetails(String id) async =>
+      id == _HotelManagement.hotel.id
+      ? _HotelManagement.hotel
+      : const PoiItem(
+          id: 'bridge',
+          name: 'Cầu Rồng',
+          type: 'landmark',
+          latitude: 16.0611,
+          longitude: 108.2274,
+          verified: true,
+        );
+
+  @override
+  Future<RoutePreviewData> previewDraftRoute(
+    String tripId,
+    List<String> poiIds,
+  ) {
+    routedIds = poiIds;
+    return previewRoute(tripId, const []);
+  }
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets(
+    'the focused prompt closes safely and opens review after a retry',
+    (tester) async {
+      tester.view.physicalSize = const Size(390, 844);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final planning = _PromptPlanningRepository();
+      final state = AppState(_HotelManagement(), planningRepository: planning);
+      addTearDown(state.dispose);
+      await state.initialize();
+      await tester.pumpWidget(MaterialApp(home: PlanningScreen(state: state)));
+      await tester.pumpAndSettle();
+
+      Future<void> submitPrompt() async {
+        final open = find.byKey(const Key('request-ai-interpretation'));
+        await tester.ensureVisible(open);
+        await tester.tap(open);
+        await tester.pumpAndSettle();
+        final dialog = find.byType(AlertDialog);
+        final confirm = find.descendant(
+          of: dialog,
+          matching: find.byType(FilledButton),
+        );
+        expect(confirm, findsOneWidget);
+        expect(
+          find.descendant(of: dialog, matching: find.byType(TextButton)),
+          findsNothing,
+        );
+        expect(tester.widget<FilledButton>(confirm).onPressed, isNull);
+        await tester.enterText(
+          find.byKey(const Key('planning-ai-prompt')),
+          '  Hai người đi với tổng ngân sách một triệu rưỡi.  ',
+        );
+        await tester.pump();
+        await tester.tap(confirm);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      }
+
+      await submitPrompt();
+      expect(find.text('AI tạm thời chưa phản hồi.'), findsOneWidget);
+      expect(find.byType(PlanningRequestReview), findsNothing);
+      await submitPrompt();
+      expect(find.byType(PlanningRequestReview), findsOneWidget);
+      expect(
+        planning.prompts,
+        List.filled(2, 'Hai người đi với tổng ngân sách một triệu rưỡi.'),
+      );
+      expect(planning.planningKeys, isEmpty);
+
+      final save = find.byKey(const Key('save-planning-review'));
+      await tester.scrollUntilVisible(
+        save,
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(save.hitTestable());
+      await tester.pumpAndSettle();
+      expect(planning.overrides.single['traveler_count'], 2);
+      expect(planning.overrides.single['indicative_budget'], 1500000);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('reopens a saved planner route even when no manual stops exist', (
+    tester,
+  ) async {
+    final management = _SavedMapManagement();
+    final planning = _LifecyclePlanningRepository()
+      ..savedPlan = SavedItineraryPlan.fromJson({
+        'version_id': 'version-010',
+        'trip_id': 'trip-1',
+        'request': {
+          'trip': {'start_date': '2026-10-17'},
+        },
+        'plan': {
+          'activities': [
+            {'poi_id': 'bridge', 'start': '08:00', 'end': '09:00'},
+            {'poi_id': 'hotel-1', 'start': '09:30', 'end': '10:30'},
+          ],
+        },
+      });
+    final state = AppState(management, planningRepository: planning);
+    addTearDown(state.dispose);
+    await state.initialize();
+    expect(state.itinerary?.activities, isEmpty);
+    expect(state.savedPlanForSelectedDay?.versionId, 'version-010');
+    state.selectTripDate(DateTime(2026, 10, 18));
+    expect(state.savedPlanForSelectedDay, isNull);
+    state.selectTripDate(DateTime(2026, 10, 17));
+    await tester.pumpWidget(MaterialApp(home: MainShell(state: state)));
+    await tester.tap(find.byKey(const Key('map-tab')));
+    await tester.pumpAndSettle();
+
+    final canvas = tester.widget<MapCanvas>(find.byType(MapCanvas));
+    expect(canvas.stops.map((stop) => stop.title), [
+      'Cầu Rồng',
+      'Khách sạn Biển',
+    ]);
+    expect(management.routedIds, ['bridge', 'hotel-1']);
+    expect(canvas.routePreview?.quality, 'road_route');
+    expect(find.byKey(const Key('locate-user-button')), findsOneWidget);
+  });
 
   testWidgets(
     'selecting, reopening and clearing a hotel changes each planning request',
@@ -207,7 +382,11 @@ void main() {
     await tester.tap(find.byKey(const Key('open-planning-button')));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('source-status-banner')), findsOneWidget);
-    expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+    expect(find.byKey(const Key('request-plan-button')), findsNothing);
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
     await tester.pageBack();
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('map-tab')), findsOneWidget);
@@ -236,9 +415,7 @@ void main() {
     expect(state.currentPlanningRequestId, 'replan-request-010');
   });
 
-  testWidgets('primary planning actions fit a 390x844 viewport', (
-    tester,
-  ) async {
+  testWidgets('demo route preview fits a 390x844 viewport', (tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -253,7 +430,11 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('open-planning-button')));
     await tester.pumpAndSettle();
-    expect(find.byKey(const Key('request-plan-button')), findsOneWidget);
+    expect(find.byKey(const Key('request-plan-button')), findsNothing);
+    expect(
+      find.byKey(const Key('preview-plan-seeded-balanced')),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 }

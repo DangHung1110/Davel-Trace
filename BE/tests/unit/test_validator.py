@@ -4,6 +4,7 @@ Valid plan passes; each tamper fails its named gate with offenders listed.
 
 Run from repo root: python BE/tests/unit/test_validator.py -v
 """
+from unittest import mock
 
 import os
 import sys
@@ -115,6 +116,7 @@ class TestValidator(unittest.TestCase):
         rep = validate(out["itinerary"], TRIP, full_pois, MATRIX)
         self.assertTrue(rep["passed"], rep)
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_a1_offenders_list_every_restaurant_in_the_slot(self):
         """Two restaurants at lunch -> both A1 offenders; HCS mirrors both."""
         restaurant = {"verified": True, "fee": 0,
@@ -169,6 +171,7 @@ class TestValidator(unittest.TestCase):
         self.assertTrue(rep["checks"]["F1"])
 
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_rest_gate_reports_the_poi_inside_the_siesta(self):
         """REST_FOLLOWS_LUNCH offender = the activity inside lunch+rest."""
         pois = {

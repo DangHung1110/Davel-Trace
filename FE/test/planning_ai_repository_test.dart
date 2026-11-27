@@ -78,9 +78,6 @@ class _AiRepository implements PlanningRepository, AiPlanningRepository {
 
   @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {}
-
-  @override
-  Future<Map<String, dynamic>> readiness() async => {'status': 'ready'};
 }
 
 class _FailedAiRepository extends _AiRepository {

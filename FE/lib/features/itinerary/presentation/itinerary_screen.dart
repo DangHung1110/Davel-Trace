@@ -6,6 +6,7 @@ import '../../../shared/widgets/app_header.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
+import '../../map/presentation/planned_route_map.dart';
 import '../../planning/domain/models.dart';
 import '../../profile/presentation/profile_screen.dart';
 import 'hotel_picker.dart';
@@ -16,6 +17,7 @@ class ItineraryScreen extends StatelessWidget {
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onOpenManualMap,
     this.onBack,
   });
 
@@ -50,12 +52,15 @@ class ItineraryScreen extends StatelessWidget {
         ),
       ),
     );
-    if (corrections != null && context.mounted) {
+    if (corrections != null &&
+        context.mounted &&
+        identical(state.aiProposal, proposal)) {
       await state.confirmAiProposalAndPlan(corrections: corrections);
     }
   }
 
   final VoidCallback onOpenMap;
+  final VoidCallback? onOpenManualMap;
 
   Future<void> _tripEditor(BuildContext context, {Trip? trip}) async {
     final data = await Navigator.of(context).push<Map<String, dynamic>>(
@@ -140,6 +145,7 @@ class ItineraryScreen extends StatelessWidget {
     final trip = state.activeTrip;
     final itinerary = state.itinerary;
     final dayActivities = state.activitiesForSelectedDay;
+    final savedPlan = state.savedPlanForSelectedDay;
     return ColoredBox(
       color: AppColors.canvas,
       child: Column(
@@ -246,7 +252,7 @@ class ItineraryScreen extends StatelessWidget {
                               ),
                               IconButton(
                                 key: const Key('open-trip-map-button'),
-                                tooltip: 'Mở bản đồ',
+                                tooltip: 'Mở bản đồ lịch đã lưu',
                                 onPressed: onOpenMap,
                                 icon: const Icon(
                                   Icons.map_outlined,
@@ -267,7 +273,7 @@ class ItineraryScreen extends StatelessWidget {
                                         PlanningScreen(state: state),
                                   ),
                                 ),
-                          icon: const Icon(Icons.auto_awesome_outlined),
+                          icon: const Icon(Icons.calendar_month_outlined),
                           label: const Text('Lập lịch cho chuyến đi'),
                         ),
                         if (itinerary != null &&
@@ -310,19 +316,47 @@ class ItineraryScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
-                            Text(
-                              'Bản ${itinerary?.version ?? 1}',
-                              style: const TextStyle(
-                                color: AppColors.muted,
-                                fontSize: 11,
+                            if (savedPlan != null)
+                              const Text(
+                                'Đã lưu',
+                                style: TextStyle(
+                                  color: AppColors.muted,
+                                  fontSize: 11,
+                                ),
                               ),
-                            ),
                           ],
                         ),
                         const SizedBox(height: 9),
-                        if (itinerary == null || dayActivities.isEmpty)
-                          const _EmptyActivities()
-                        else
+                        if (savedPlan != null)
+                          SurfaceCard(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (final (index, activity)
+                                    in savedPlan.plan.activities.indexed)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 6),
+                                    child: Text(
+                                      '${index + 1}. ${activity['start'] ?? activity['start_time'] ?? ''} '
+                                      '${activity['name'] ?? activity['title'] ?? state.mapPlaces[activity['poi_id']]?.name ?? 'Điểm dừng chưa tải tên'}',
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        if (savedPlan == null && dayActivities.isEmpty)
+                          const _EmptyActivities(),
+                        if (savedPlan != null &&
+                            onOpenManualMap != null &&
+                            dayActivities.any(
+                              (activity) => activity.poiId != null,
+                            ))
+                          TextButton.icon(
+                            onPressed: onOpenManualMap,
+                            icon: const Icon(Icons.map_outlined),
+                            label: const Text('Bản đồ các điểm thêm thủ công'),
+                          ),
+                        if (dayActivities.isNotEmpty)
                           ...dayActivities.indexed.map(
                             (entry) => _ActivityTile(
                               activity: entry.$2,
@@ -461,6 +495,24 @@ class _PlanningPanelState extends State<_PlanningPanel> {
         }
       });
 
+  void _previewPlan(PlanAlternative plan) {
+    final trip = state.activeTrip;
+    if (trip == null) return;
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) => PlannedRouteMap(
+          plan: plan,
+          tripId: trip.id,
+          repository: state.repository,
+          resolvePlace: _resolvePlace,
+          title: 'Dự kiến · Phương án ${plan.rank}',
+          isDraft: true,
+          onBack: () => Navigator.of(context).pop(),
+        ),
+      ),
+    );
+  }
+
   Future<void> _pickHotel() async {
     final tripId = state.activeTrip?.id;
     final hotel = await showModalBottomSheet<PoiItem>(
@@ -484,13 +536,16 @@ class _PlanningPanelState extends State<_PlanningPanel> {
   }
 
   Future<void> _interpret(BuildContext context) async {
-    final controller = TextEditingController();
+    final tripId = state.activeTrip?.id;
+    if (tripId == null) return;
+    var draft = '';
     final text = await showDialog<String>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Diễn giải mong muốn với AI'),
-        content: SingleChildScrollView(
-          child: Column(
+      builder: (_) => StatefulBuilder(
+        builder: (dialogContext, setDialogState) => AlertDialog(
+          scrollable: true,
+          title: const Text('Nhập mong muốn cho chuyến đi'),
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -501,34 +556,40 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               const SizedBox(height: 10),
               TextField(
                 key: const Key('planning-ai-prompt'),
-                controller: controller,
+                onChanged: (value) =>
+                    setDialogState(() => draft = value.trim()),
                 minLines: 3,
                 maxLines: 6,
                 maxLength: 4000,
                 decoration: const InputDecoration(
-                  labelText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
+                  labelText: 'Mong muốn của bạn',
+                  hintText: 'Ví dụ: Đi 2 người, 3 triệu, phải ghé Cầu Rồng…',
                   alignLabelWithHint: true,
                 ),
               ),
             ],
           ),
+          actions: [
+            FilledButton(
+              key: const Key('submit-planning-ai-prompt'),
+              onPressed: draft.length < 3
+                  ? null
+                  : () {
+                      FocusScope.of(dialogContext).unfocus();
+                      Navigator.pop(dialogContext, draft);
+                    },
+              child: const Text('Xác nhận'),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Dùng form thường'),
-          ),
-          FilledButton(
-            onPressed: () =>
-                Navigator.pop(dialogContext, controller.text.trim()),
-            child: const Text('Diễn giải'),
-          ),
-        ],
       ),
     );
-    controller.dispose();
-    if (text != null && text.length >= 3) {
-      await state.interpretPlanningRequest(text);
+    if (text == null || !context.mounted || state.activeTrip?.id != tripId) {
+      return;
+    }
+    await state.interpretPlanningRequest(text);
+    if (context.mounted && state.activeTrip?.id == tripId) {
+      await ItineraryScreen._reviewProposal(context, state);
     }
   }
 
@@ -547,19 +608,19 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
           children: [
             Text(
-              'Lịch sử phiên bản',
+              'Lịch đã lưu',
               style: Theme.of(sheetContext).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
             if (state.itineraryVersions.isEmpty)
-              const Text('Chưa có phiên bản đã chốt.'),
+              const Text('Chưa có lịch đã lưu.'),
             ...state.itineraryVersions.map(
               (version) => Card(
                 child: ListTile(
-                  title: Text('Phiên bản ${version.ordinal}'),
+                  title: Text('Lịch ${version.ordinal}'),
                   subtitle: Text(
-                    '${version.reason} · ${version.dataVersion}'
-                    '${version.parentId == null ? '' : ' · có phiên bản cha'}',
+                    MaterialLocalizations.of(sheetContext)
+                        .formatShortDate(version.createdAt.toLocal()),
                   ),
                   trailing: version.active
                       ? const Chip(label: Text('Đang dùng'))
@@ -572,7 +633,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                                     Navigator.pop(sheetContext);
                                   }
                                 },
-                          child: const Text('Kích hoạt'),
+                          child: const Text('Dùng lại'),
                         ),
                 ),
               ),
@@ -589,18 +650,6 @@ class _PlanningPanelState extends State<_PlanningPanel> {
     final busy = state.isPlanning || state.isInterpreting || state.isMutating;
     final live = state.demoSource == DemoSource.live;
     final stale = state.demoSource == DemoSource.stale;
-    final color = live
-        ? AppColors.sand
-        : stale
-        ? const Color(0xFFFFF1E3)
-        : AppColors.surfaceLow;
-    final title = live
-        ? 'Phương án từ hệ thống'
-        : stale
-        ? 'Dữ liệu gần nhất · mất kết nối'
-        : state.isDemoManagement
-        ? 'Phương án mẫu để tham khảo'
-        : 'Chưa có phương án cho chuyến này';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -636,44 +685,30 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           ),
           const SizedBox(height: 8),
         ],
-        SurfaceCard(
-          key: const Key('source-status-banner'),
-          color: color,
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                live ? Icons.cloud_done_outlined : Icons.cloud_off_outlined,
-                color: live ? AppColors.primary : AppColors.warning,
-                size: 20,
-              ),
-              const SizedBox(width: 9),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontWeight: FontWeight.w800),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      live
-                          ? 'Chọn một phương án để lưu vào lịch trình.'
-                          : stale
-                          ? 'Không tải được phương án mới. Bạn đang xem dữ liệu gần nhất.'
-                          : state.isDemoManagement
-                          ? 'Các phương án mẫu chưa được lưu vào chuyến đi.'
-                          : 'Tạo phương án để bắt đầu, sau đó xem và chọn lịch phù hợp.',
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ],
+        if (stale || state.isDemoManagement)
+          SurfaceCard(
+            key: const Key('source-status-banner'),
+            color: stale ? const Color(0xFFFFF1E3) : AppColors.surfaceLow,
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  stale ? Icons.cloud_off_outlined : Icons.info_outline,
+                  color: stale ? AppColors.warning : AppColors.primary,
+                  size: 20,
                 ),
-              ),
-            ],
+                const SizedBox(width: 9),
+                Expanded(
+                  child: Text(
+                    stale
+                        ? 'Mất kết nối. Bạn vẫn có thể xem các lịch gợi ý trước đó.'
+                        : 'Bạn đang xem lịch mẫu. Đăng nhập để lập và lưu lịch riêng.',
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
         const SizedBox(height: 9),
         if (state.errorMessage != null)
           Padding(
@@ -684,35 +719,28 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               style: const TextStyle(color: AppColors.error),
             ),
           ),
-        FilledButton.icon(
-          key: const Key('request-plan-button'),
-          onPressed: busy || state.isDemoManagement ? null : state.requestPlan,
-          icon: Icon(
-            state.isPlanning ? Icons.hourglass_top : Icons.alt_route_rounded,
+        if (!state.isDemoManagement)
+          FilledButton(
+            key: const Key('request-plan-button'),
+            onPressed: busy ? null : state.requestPlan,
+            child: Text(
+              state.isPlanning
+                  ? 'Đang lập phương án…'
+                  : 'Tạo phương án lịch trình',
+            ),
           ),
-          label: Text(
-            state.isPlanning
-                ? 'Đang lập phương án…'
-                : state.isDemoManagement
-                ? 'Đăng nhập để lập lịch'
-                : 'Tạo phương án lịch trình',
+        if (!state.isDemoManagement) const SizedBox(height: 4),
+        if (!state.isDemoManagement)
+          TextButton.icon(
+            key: const Key('request-ai-interpretation'),
+            onPressed: busy ? null : () => _interpret(context),
+            icon: const Icon(Icons.chat_bubble_outline),
+            label: Text(
+              state.isInterpreting
+                  ? 'AI đang diễn giải…'
+                  : 'Nhập mong muốn bằng lời với AI',
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        TextButton.icon(
-          key: const Key('request-ai-interpretation'),
-          onPressed: busy || state.isDemoManagement
-              ? null
-              : () => _interpret(context),
-          icon: Icon(
-            state.isInterpreting ? Icons.hourglass_top : Icons.auto_awesome,
-          ),
-          label: Text(
-            state.isInterpreting
-                ? 'AI đang diễn giải…'
-                : 'Nhập mong muốn bằng lời với AI',
-          ),
-        ),
         if (state.aiMessage != null) ...[
           const SizedBox(height: 6),
           Text(
@@ -731,18 +759,16 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Yêu cầu đã được diễn giải',
+                  'Yêu cầu của bạn',
                   style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 5),
                 const Text(
                   'Kiểm tra ngân sách, thời gian và địa điểm trước khi dùng để lập lịch.',
                 ),
-                if (proposal.assumptions.isNotEmpty)
-                  Text('Giả định: ${proposal.assumptions.join('; ')}'),
                 if (proposal.unresolved.isNotEmpty)
                   Text(
-                    'Chưa xác minh (không dùng): ${proposal.unresolved.join('; ')}',
+                    'Cần kiểm tra: ${proposal.unresolved.join(', ')}',
                     style: const TextStyle(color: AppColors.warning),
                   ),
                 if (proposal.placeResolutions.isNotEmpty)
@@ -755,7 +781,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                   children: [
                     TextButton(
                       onPressed: state.skipAiProposal,
-                      child: const Text('Bỏ qua AI'),
+                      child: const Text('Bỏ yêu cầu'),
                     ),
                     FilledButton(
                       key: const Key('confirm-ai-proposal'),
@@ -763,7 +789,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
                           ? null
                           : () =>
                                 ItineraryScreen._reviewProposal(context, state),
-                      child: const Text('Xác nhận và lập lịch'),
+                      child: const Text('Rà soát yêu cầu'),
                     ),
                   ],
                 ),
@@ -782,7 +808,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
           const SizedBox(height: 12),
         ],
         if (state.planAlternatives.isNotEmpty) ...[
-          Text('Phương án', style: Theme.of(context).textTheme.titleMedium),
+          Text('Lịch gợi ý', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 6),
         ],
         ...state.planAlternatives.map(
@@ -799,6 +825,9 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               previewOnly: state.isDemoManagement,
               resolvePlace: _resolvePlace,
               onSelect: () => state.acceptAlternative(plan),
+              onPreview: state.activeTrip == null
+                  ? null
+                  : () => _previewPlan(plan),
             ),
           ),
         ),
@@ -812,7 +841,7 @@ class _PlanningPanelState extends State<_PlanningPanel> {
             label: Text(
               state.isExplaining
                   ? 'Đang giải thích…'
-                  : 'Vì sao gợi ý lịch này? (có dùng AI bên ngoài)',
+                  : 'Giải thích lịch bằng AI',
             ),
           ),
           if (state.planExplanation case final explanation?)
@@ -822,15 +851,14 @@ class _PlanningPanelState extends State<_PlanningPanel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    explanation.source == 'ai_grounded'
-                        ? 'Giải thích AI có dẫn chứng'
-                        : 'Giải thích từ dữ liệu lịch trình',
-                    style: const TextStyle(fontWeight: FontWeight.w800),
-                  ),
-                  Text(explanation.summary),
+                  Text(explanation.summary.replaceAll('**', '')),
                   ...explanation.reasons.map(
-                    (reason) => Text('• ${reason['text'] ?? ''}'),
+                    (reason) => Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        (reason['text']?.toString() ?? '').replaceAll('**', ''),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -878,6 +906,7 @@ class _AlternativeCard extends StatelessWidget {
     required this.busy,
     required this.onSelect,
     required this.resolvePlace,
+    this.onPreview,
     this.previewOnly = false,
   });
 
@@ -888,6 +917,7 @@ class _AlternativeCard extends StatelessWidget {
   final bool busy;
   final VoidCallback onSelect;
   final Future<PoiItem?> Function(String) resolvePlace;
+  final VoidCallback? onPreview;
   final bool previewOnly;
 
   @override
@@ -898,34 +928,16 @@ class _AlternativeCard extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 14,
-              backgroundColor: AppColors.primary,
-              child: Text(
-                '${plan.rank}',
-                style: const TextStyle(color: Colors.white, fontSize: 11),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                plan.profile,
-                style: const TextStyle(fontWeight: FontWeight.w800),
-              ),
-            ),
-            Icon(
-              Icons.verified_user_outlined,
-              size: 18,
-              color: plan.gatePassed ? AppColors.primary : AppColors.error,
-            ),
-          ],
-        ),
+        Text(switch (plan.profile) {
+          'savings' => 'Tiết kiệm',
+          'balanced' => 'Cân bằng',
+          'experience' => 'Khám phá',
+          _ => plan.profile,
+        }, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 7),
         Text(
-          '${plan.activities.length} điểm · ${plan.totalKm.toStringAsFixed(1)} km · ${moneyVnd(plan.totalCost)}',
-          style: const TextStyle(fontSize: 11, color: AppColors.muted),
+          '${plan.activities.length} điểm · ${plan.totalKm.toStringAsFixed(1)} km · Dự kiến ${moneyVnd(plan.totalCost)}',
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(height: 8),
         for (final activity in plan.activities)
@@ -940,24 +952,24 @@ class _AlternativeCard extends StatelessWidget {
               ),
             ),
           ),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            key: Key('accept-plan-${plan.id}'),
-            onPressed: busy || accepted || !plan.gatePassed ? null : onSelect,
-            child: Text(
-              previewOnly
-                  ? 'Đăng nhập để lưu lịch'
-                  : accepted
-                  ? 'Đã lưu lựa chọn'
-                  : selected && !isLive
-                  ? 'Đã chọn cục bộ'
-                  : !isLive
-                  ? 'Kết nối lại để lưu lịch'
-                  : 'Dùng lịch trình này',
+        if (onPreview != null && plan.activities.isNotEmpty)
+          TextButton.icon(
+            key: Key('preview-plan-${plan.id}'),
+            onPressed: onPreview,
+            icon: const Icon(Icons.route_outlined),
+            label: const Text('Xem lộ trình dự kiến'),
+          ),
+        if (accepted)
+          const Text('Đã lưu vào lịch trình')
+        else if (isLive && !previewOnly && plan.gatePassed)
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              key: Key('accept-plan-${plan.id}'),
+              onPressed: busy ? null : onSelect,
+              child: const Text('Chọn lịch này'),
             ),
           ),
-        ),
       ],
     ),
   );
@@ -1666,20 +1678,6 @@ class _ActivityEditorState extends State<ActivityEditor> {
                 Text(place.type),
                 const SizedBox(height: 12),
                 _PoiEvidenceRow(
-                  label: 'Xác minh',
-                  value: place.verified
-                      ? 'Đã xác minh'
-                      : 'Chưa xác minh · cần kiểm tra',
-                ),
-                _PoiEvidenceRow(
-                  label: 'Nguồn',
-                  value: place.source ?? 'Không rõ nguồn',
-                ),
-                _PoiEvidenceRow(
-                  label: 'Phiên bản',
-                  value: place.snapshotVersion ?? 'Không rõ phiên bản',
-                ),
-                _PoiEvidenceRow(
                   label: 'Giờ mở cửa',
                   value: place.openingHours.isEmpty
                       ? 'Chưa có dữ liệu'
@@ -1696,10 +1694,9 @@ class _ActivityEditorState extends State<ActivityEditor> {
                                       : 'Mức giá ${place.priceLevel}')
                                 : '${place.fee} ₫')),
                 ),
-                if (place.fetchedAt != null)
-                  _PoiEvidenceRow(
-                    label: 'Cập nhật nguồn',
-                    value: place.fetchedAt!,
+                if (!place.verified)
+                  const Text(
+                    'Bạn nên kiểm tra lại giờ mở cửa và giá trước khi đi.',
                   ),
                 const SizedBox(height: 12),
                 SizedBox(
@@ -1821,7 +1818,7 @@ class _ActivityEditorState extends State<ActivityEditor> {
                         overflow: TextOverflow.ellipsis,
                       ),
                       trailing: IconButton(
-                        tooltip: 'Chi tiết và nguồn dữ liệu',
+                        tooltip: 'Giờ mở cửa và giá',
                         icon: Icon(
                           poi.verified
                               ? Icons.verified_outlined

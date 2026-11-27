@@ -9,10 +9,15 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 
 from migrate_v2 import apply_booking  # noqa: E402
+from BE.app.services.gate import check_a1, check_rest_follows_lunch, rest_rule_violation  # noqa: E402
 from BE.app.services.optimizer import StubPOI, StubTrip, optimize, poi_to_stub  # noqa: E402
+from BE.app.services.profiles import _gate_view  # noqa: E402
 from BE.app.services.retrieval import retrieve, uncertainty, wants_booking  # noqa: E402
+from BE.app.services.soft_rules import is_meal_experience  # noqa: E402
+from BE.common import load_pois  # noqa: E402
 
 H = 60
+SNAPSHOT_V2 = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
 
 
 def _rec():
@@ -126,3 +131,45 @@ class TestMealExperience(unittest.TestCase):
         self.assertFalse(check_a1({"activities": acts}, {}, pois, {})["passed"])
         self.assertTrue(check_a1({"activities": acts[:1]}, {}, pois, {})["passed"])
         self.assertEqual(lunch_activity(acts[:1], pois)["poi_id"], "c1")
+
+
+class TestGateSeesTheClassAsAMeal(unittest.TestCase):
+    """The gate judges a plan on `_gate_view` copies, and a cooking class is a meal
+    only through `hours.kind`. Without `hours` in the view a class over lunch read
+    as a day with no lunch (REST_FOLLOWS_LUNCH failed the plan the solver made) and
+    A1 missed the restaurant that doubled the lunch."""
+
+    CLASS = _poi("c1", "by_booking")
+    LUNCH = {"poi_id": "r1", "verified": True, "status": "active", "category": "restaurant",
+             "cat": "restaurant", "type": "restaurant", "opening_hours": ["10:00-21:00"]}
+    TRIP = {"start_time": "08:00", "end_time": "18:00",
+            "profile": {"party_type": "couple", "pace": 2}}
+
+    @staticmethod
+    def views(*pois):
+        return {p["poi_id"]: p for p in pois}, {p["poi_id"]: _gate_view(p) for p in pois}
+
+    def test_the_view_keeps_the_class_a_meal(self):
+        self.assertTrue(is_meal_experience(self.CLASS))
+        self.assertTrue(is_meal_experience(_gate_view(self.CLASS)))
+
+    def test_a_class_over_lunch_is_the_lunch_at_the_gate(self):
+        plan = {"activities": [{"poi_id": "c1", "start": "09:30", "end": "12:30"}]}
+        full, gate = self.views(self.CLASS)
+        self.assertIsNone(rest_rule_violation(plan, self.TRIP, full))
+        self.assertIsNone(rest_rule_violation(plan, self.TRIP, gate))
+        self.assertTrue(check_rest_follows_lunch(plan, self.TRIP, gate, {})["passed"])
+
+    def test_a_restaurant_on_top_of_the_class_is_a_second_lunch(self):
+        plan = {"activities": [{"poi_id": "c1", "start": "09:30", "end": "12:30"},
+                               {"poi_id": "r1", "start": "12:45", "end": "13:45"}]}
+        full, gate = self.views(self.CLASS, self.LUNCH)
+        self.assertFalse(check_a1(plan, self.TRIP, full, {})["passed"])
+        self.assertFalse(check_a1(plan, self.TRIP, gate, {})["passed"])
+
+    @unittest.skipUnless(os.path.exists(os.path.join(SNAPSHOT_V2, "pois.json")), "danang-v2 missing")
+    def test_every_danang_v2_class_is_a_meal_at_the_gate(self):
+        pois = load_pois(SNAPSHOT_V2)
+        self.assertTrue([p["name"] for p in pois if is_meal_experience(p)])  # 7 on 2026-11-24
+        self.assertEqual([p["name"] for p in pois
+                          if is_meal_experience(_gate_view(p)) != is_meal_experience(p)], [])

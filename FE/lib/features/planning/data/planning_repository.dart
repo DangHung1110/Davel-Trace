@@ -4,7 +4,6 @@ import '../domain/models.dart';
 abstract interface class PlanningRepository {
   Future<PlanningResult> requestPlan(Map<String, dynamic> request);
   Future<AcceptanceSummary> accept(String itineraryId, String key);
-  Future<Map<String, dynamic>> readiness();
   Future<void> logExpense(String tripId, Map<String, dynamic> expense);
 }
 
@@ -20,6 +19,10 @@ abstract interface class ItineraryLifecycleRepository {
   });
 }
 
+abstract interface class ItineraryPlanReader {
+  Future<SavedItineraryPlan> readVersion(String versionId);
+}
+
 abstract interface class AiPlanningRepository {
   Future<Map<String, dynamic>> aiReadiness();
   Future<AiInterpretationProposal> interpret(String tripId, String text);
@@ -30,6 +33,7 @@ class HttpPlanningRepository
     implements
         PlanningRepository,
         ItineraryLifecycleRepository,
+        ItineraryPlanReader,
         AiPlanningRepository {
   HttpPlanningRepository(this._api);
   final ApiClient _api;
@@ -72,11 +76,6 @@ class HttpPlanningRepository
       Map<String, dynamic>.from(json['acceptance'] as Map),
     );
   }
-
-  @override
-  Future<Map<String, dynamic>> readiness() async => Map<String, dynamic>.from(
-    await _api.get('/v1/planning/readiness') as Map,
-  );
 
   @override
   Future<Map<String, dynamic>> aiReadiness() async =>
@@ -132,6 +131,13 @@ class HttpPlanningRepository
         )
         .toList();
   }
+
+  @override
+  Future<SavedItineraryPlan> readVersion(String versionId) async =>
+      SavedItineraryPlan.fromJson(
+        await _api.get('/v1/itinerary-versions/$versionId')
+            as Map<String, dynamic>,
+      );
 
   @override
   Future<void> activateVersion(String versionId, String key) async {

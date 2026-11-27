@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/field_cover.dart';
@@ -16,16 +18,45 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final email = TextEditingController();
   final password = TextEditingController();
+  final _form = GlobalKey<FormState>();
   bool obscure = true;
-  bool googleTermsAccepted = false;
 
-  void _openRecovery({bool cancelDeletion = false}) {
+  void _openRecovery() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => RecoveryScreen(
-          controller: widget.controller,
-          cancelDeletion: cancelDeletion,
+        builder: (_) => RecoveryScreen(controller: widget.controller),
+      ),
+    );
+  }
+
+  void _login() {
+    if (widget.controller.busy || !_form.currentState!.validate()) return;
+    FocusScope.of(context).unfocus();
+    unawaited(widget.controller.login(email.text.trim(), password.text));
+  }
+
+  void _googleConsent() {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        scrollable: true,
+        title: const Text('Tiếp tục bằng Google'),
+        content: const Text(
+          'Bằng cách tiếp tục, bạn đồng ý với điều khoản sử dụng Davel Trace và dùng tài khoản Google để đăng nhập.',
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Quay lại'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              unawaited(widget.controller.loginWithGoogle());
+            },
+            child: const Text('Đồng ý và tiếp tục'),
+          ),
+        ],
       ),
     );
   }
@@ -52,32 +83,50 @@ class _SignInScreenState extends State<SignInScreen> {
                 description: 'Lập lịch và khám phá Đà Nẵng.',
               ),
               const SizedBox(height: 20),
-              TextField(
-                controller: email,
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [AutofillHints.email],
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.mail_outline),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: password,
-                obscureText: obscure,
-                autofillHints: const [AutofillHints.password],
-                decoration: InputDecoration(
-                  labelText: 'Mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: IconButton(
-                    tooltip: obscure ? 'Hiện mật khẩu' : 'Ẩn mật khẩu',
-                    onPressed: () => setState(() => obscure = !obscure),
-                    icon: Icon(
-                      obscure
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                    ),
+              AutofillGroup(
+                child: Form(
+                  key: _form,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextFormField(
+                        controller: email,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        autofillHints: const [AutofillHints.email],
+                        validator: (value) => (value ?? '').trim().isEmpty
+                            ? 'Nhập email của bạn.'
+                            : null,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          prefixIcon: Icon(Icons.mail_outline),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: password,
+                        obscureText: obscure,
+                        autofillHints: const [AutofillHints.password],
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) => _login(),
+                        validator: (value) => (value ?? '').isEmpty
+                            ? 'Nhập mật khẩu của bạn.'
+                            : null,
+                        decoration: InputDecoration(
+                          labelText: 'Mật khẩu',
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: IconButton(
+                            tooltip: obscure ? 'Hiện mật khẩu' : 'Ẩn mật khẩu',
+                            onPressed: () => setState(() => obscure = !obscure),
+                            icon: Icon(
+                              obscure
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -94,33 +143,16 @@ class _SignInScreenState extends State<SignInScreen> {
               ],
               const SizedBox(height: 20),
               FilledButton(
-                onPressed: widget.controller.busy
-                    ? null
-                    : () => widget.controller.login(email.text, password.text),
+                onPressed: widget.controller.busy ? null : _login,
                 child: Text(
                   widget.controller.busy ? 'Đang xử lý…' : 'Đăng nhập',
                 ),
               ),
               const SizedBox(height: 8),
               if (widget.controller.googleAvailable) ...[
-                CheckboxListTile(
-                  value: googleTermsAccepted,
-                  onChanged: widget.controller.busy
-                      ? null
-                      : (value) => setState(
-                          () => googleTermsAccepted = value ?? false,
-                        ),
-                  contentPadding: EdgeInsets.zero,
-                  controlAffinity: ListTileControlAffinity.leading,
-                  title: const Text(
-                    'Tôi đồng ý điều khoản sử dụng khi tiếp tục bằng Google.',
-                  ),
-                ),
                 OutlinedButton.icon(
-                  onPressed: widget.controller.busy || !googleTermsAccepted
-                      ? null
-                      : widget.controller.loginWithGoogle,
-                  icon: const Icon(Icons.login),
+                  onPressed: widget.controller.busy ? null : _googleConsent,
+                  icon: const Icon(Icons.account_circle_outlined),
                   label: const Text('Tiếp tục bằng Google'),
                 ),
               ],
@@ -143,25 +175,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ],
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () => _openRecovery(cancelDeletion: true),
-                  child: const Text(
-                    'Khôi phục tài khoản đang chờ xóa',
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ),
               const Divider(height: 32),
-              OutlinedButton.icon(
+              TextButton(
                 onPressed: widget.controller.continueDemo,
-                icon: const Icon(Icons.science_outlined),
-                label: const Text('Tiếp tục với dữ liệu demo'),
+                child: const Text('Xem thử chuyến đi mẫu'),
               ),
               const SizedBox(height: 8),
               const Text(
-                'Dữ liệu demo chỉ lưu trên thiết bị này.',
+                'Thay đổi khi xem thử chỉ lưu trên thiết bị này.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12),
               ),

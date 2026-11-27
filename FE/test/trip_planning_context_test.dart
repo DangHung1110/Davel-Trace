@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:davel_trace/app_state.dart';
+import 'package:davel_trace/core/networking/api_client.dart';
 import 'package:davel_trace/features/management/domain/models.dart';
 import 'package:davel_trace/features/planning/data/planning_repository.dart';
 import 'package:davel_trace/features/planning/domain/models.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/fake_management_repository.dart';
@@ -49,8 +53,6 @@ class _Planning implements PlanningRepository, ItineraryLifecycleRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> readiness() async => {};
-  @override
   Future<void> logExpense(String tripId, Map<String, dynamic> expense) async {}
   @override
   Future<List<ItineraryVersionSummary>> history(String tripId) async => [];
@@ -79,6 +81,48 @@ const _tripB = {
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  test(
+    'planning publishes the response without a diagnostic API request',
+    () async {
+      final paths = <String>[];
+      final client = MockClient((request) async {
+        paths.add(request.url.path);
+        return http.Response(
+          jsonEncode({
+            'request_id': 'request-1',
+            'status': 'completed',
+            'alternatives': [
+              {
+                'alternative_id': 'alternative-1',
+                'plan': {
+                  'activities': [
+                    {'poi_id': 'bridge', 'name': 'Cầu Rồng'},
+                  ],
+                },
+              },
+            ],
+          }),
+          201,
+          headers: {'content-type': 'application/json; charset=utf-8'},
+        );
+      });
+      final state = AppState(
+        _CountingManagement(),
+        planningRepository: HttpPlanningRepository(ApiClient(client: client)),
+      );
+      addTearDown(state.dispose);
+      await state.initialize();
+      await state.requestPlan();
+
+      expect(paths, ['/v1/trips/trip-1/planning-requests']);
+      expect(state.isPlanning, isFalse);
+      expect(
+        state.planAlternatives.single.activities.single['name'],
+        'Cầu Rồng',
+      );
+    },
+  );
 
   test(
     'changing trips clears alternatives and cannot accept a previous trip plan',

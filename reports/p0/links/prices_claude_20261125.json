@@ -1,0 +1,1835 @@
+{
+ "about": "Bằng chứng giá có nguồn cho BE/data/sources/agent_web_2026-11-25.json (Claude, đọc trang bằng trình duyệt trong app, 25/11/2026). Mỗi dòng: URL, câu trích nguyên văn, đơn vị, ngày trang, cách khớp POI (đường phố từ OSM Nominatim reverse theo toạ độ POI). Quy ước như agent_web_2026-11-20d/-24: nhà hàng nhiều món chỉ nhận chi tiêu/người; quán một món: giá một tô/suất = chi tiêu/người; cà phê: giá một đồ uống; spa: một liệu trình massage/người; bar: một đồ uống; typical = giữa min-max khi nguồn không nêu. Không dùng Google Maps (pois.json phải sạch Google, DATA_SPEC_v2_1 luật 4).",
+ "accessed": "2026-11-25",
+ "items": [
+  {
+   "poi_id": "ChIJgRyzBl8ZQjERJF9sFGvE4R8",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Cô Sáu",
+   "unit": "per_bowl",
+   "min_vnd": 20000,
+   "max_vnd": 65000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "Mì Quảng Cô Sáu - Phạm Quảng Ảnh | Địa chỉ: số 397 Trần Hưng Đạo, TP Đà Nẵng; | Giá tham khảo: 20.000 - 65.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên đường Trần Hưng Đạo, phường An Hải; nguồn ghi 397 Trần Hưng Đạo.",
+   "note": "Vietnambooking (cập nhật 08/05/2026) ghi 35.000–65.000đ cho cùng quán; lấy Vinpearl vì mới hơn và ghi rõ /tô.",
+   "typical_vnd": 42500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJX-Pc1zYYQjEROyhEA-ZYJ5g",
+   "category": "restaurant",
+   "name": "Mì Quảng 1A",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 50000,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/mi-quang-da-nang.html",
+   "quote": "Mì quảng 1a Hải Phòng Hải Châu Đà Nẵng | Địa chỉ: 1A Hải Phòng, Q. Hải Châu. | Giá tham khảo: 30.000đ – 50.000đ.",
+   "page_date": "2026-04-02, cập nhật 2026-05-08",
+   "match": "OSM reverse: POI trên đường Hải Phòng, phường Hải Châu, tên OSM 'Mi Quang 1A'.",
+   "note": "Quán một món: giá một tô = chi tiêu/người.",
+   "typical_vnd": 40000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJHRmt7soZQjERhuei1xWj9Xs",
+   "category": "restaurant",
+   "name": "Mì Quảng Ếch bếp Trang",
+   "unit": "per_bowl",
+   "min_vnd": 60000,
+   "max_vnd": 139000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "Mì Quảng ếch Bếp Trang | Địa chỉ: Gồm 4 cơ sở ở Đà Nẵng: số 441 Ông Ích Khiêm, số 177 Hồ Nghinh, số 212 Bạch Đằng, số 216 Bạch Đằng | Giá tham khảo: 60.000 - 139.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên Ông Ích Khiêm (số nội suy 415), một trong 4 cơ sở nguồn nêu.",
+   "note": "Vietnambooking (08/05/2026) ghi 45.000–70.000đ cho cơ sở 441 Ông Ích Khiêm; lấy nguồn mới hơn. Hai nguồn đều ra mức rẻ (<100k).",
+   "typical_vnd": 99500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/11645353169",
+   "category": "restaurant",
+   "name": "7 Bridges Hoi An Craft Beer Tap Room",
+   "unit": "per_person",
+   "min_vnd": 75000,
+   "max_vnd": 490000,
+   "typical_vnd": 297500,
+   "evidence_url": "https://hoiandaytrip.com/7-bridges-hoi-an-taproom/",
+   "quote": "Address: 36 Trần Phú, Hội An Old Town. | 1. Set Menu (Minimum 8 Pax) Price: 490K per person | 2. Combo 2: Beer & Bites Price: 1,190K (recommended for sharing among 4 people). | Draft Beer (Per Glass): Regular: Small (75K) | Standard (110K) | Stein (160K)",
+   "page_date": "2026-10-07, cập nhật 2026-10-08",
+   "match": "OSM reverse: POI tại 36 Trần Phú, Hội An; trùng địa chỉ nguồn.",
+   "note": "typical = combo bia + đồ ăn chia 4 người: 1.190.000 ÷ 4 = 297.500/người (như cách chia set của Trà House 20/11). min = một ly bia nhỏ 75k, max = set menu 490k/người (nhóm ≥ 8). Giá gồm VAT, chưa gồm phụ thu lễ/cuối tuần. Bazar Garden Restaurant (POI khác) cũng toạ độ 36 Trần Phú — có thể cùng toà nhà, cần người kiểm.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4252334691",
+   "category": "cafe",
+   "name": "CocoBox",
+   "unit": "per_drink",
+   "min_vnd": 45000,
+   "max_vnd": 80000,
+   "evidence_url": "https://hoiandaytrip.com/cocobox-cafe-hoi-an/",
+   "quote": "Location/address: 94 Le Loi Street, Hoi An Old Town | ESPRESSO SINGLE — 45.000 VND | CAFÉ LATTE — 59.000 VND | COCONUT ICED COFFEE — 69.000 VND | ICY HIGHLAND — 80.000 VND",
+   "page_date": "2026-10-06, cập nhật 2026-10-15",
+   "match": "OSM reverse: POI tại 94 Lê Lợi, Hội An; trùng địa chỉ nguồn.",
+   "note": "Thực đơn đồ uống trên trang: cà phê/sô-cô-la/nước 45.000–80.000đ một ly; một lượt ghé = một đồ uống/người. Bánh mì kẹp 115–135k không tính.",
+   "typical_vnd": 62500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:way/632030501",
+   "category": "cafe",
+   "name": "Reaching out Teahouse",
+   "unit": "per_drink",
+   "min_vnd": 45000,
+   "max_vnd": 150000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-hoi-an",
+   "quote": "2.5. Reaching Out Teahouse | Address: 131 Tran Phu Street, Hoi An City | Opening hours: 8:00 AM - 8:00 PM | Price range: VND 45,000 - VND 150,000 (USD 1.72 - USD 5.73)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 131 Trần Phú, Hội An; trùng địa chỉ nguồn.",
+   "note": "Khoảng giá thực đơn quán trà (một ấm/đồ uống); một lượt ghé = một đồ uống/người; typical = giữa khoảng. Trang không ghi ngày đăng.",
+   "typical_vnd": 97500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/1726781610",
+   "category": "cafe",
+   "name": "Cargo Club Cafe & Restaurant",
+   "unit": "per_drink",
+   "min_vnd": 35000,
+   "max_vnd": 225000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-hoi-an",
+   "quote": "2.10. Cargo Club Cafe & Restaurant | Address: 109 Nguyen Thai Hoc Street, Minh An Ward, Hoi An City | Opening hours: 9:00 AM - 10:00 PM | Price range: VND 35,000 - VND 225,000 (USD 1.34 - USD 8.60)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 107-109 Nguyễn Thái Học, Hội An; trùng địa chỉ nguồn.",
+   "note": "Khoảng giá trong cẩm nang quán cà phê (đồ uống tới món ăn); typical = giữa khoảng 130k. Thực đơn 2026 trên hoiandaytrip.com/cargo-club-hoi-an/ (03/10/2026): bánh ngọt 55.000–115.000đ, món chính 95.000–425.000đ.",
+   "typical_vnd": 130000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJC0W3bjoYQjERVBMskQcoQck",
+   "category": "outdoor_landmark",
+   "name": "Di tích Thành Điện Hải",
+   "unit": "per_ticket",
+   "min_vnd": 20000,
+   "max_vnd": 20000,
+   "ticket_vnd": 20000,
+   "free_entry": false,
+   "evidence_url": "https://vinpearl.com/vi/thanh-dien-hai-kien-truc-quan-su-tram-tuoi-o-da-nang-co-gi-dac-biet",
+   "quote": "Địa chỉ: số 24 đường Trần Phú, phường Hải Châu, thành phố Đà Nẵng | Giờ mở cửa tham khảo: 7h30 - 16h30 hằng ngày | Giá vé tham khảo: 20.000 VNĐ/người (miễn phí cho người cao tuổi, trẻ em, học sinh, sinh viên, người khuyết tật và công dân thường trú tại thành phố Đà Nẵng).",
+   "page_date": "2024-01-19, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên đường Thành Điện Hải, Hải Châu (tên OSM 'Thành Điện Hải'); khác POI Bảo Tàng Đà Nẵng (~300 m, đã có vé 50k).",
+   "note": "Luật 'nơi công cộng vào tự do' đang cho 0đ là SAI: có vé 20.000đ/người lớn ngoài diện miễn. Giờ nguồn 7:30–16:30 chưa áp (chỉ sửa giá).",
+   "typical_vnd": 20000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ86LzsaUhQjERGxE6itCeBCY",
+   "category": "outdoor_landmark",
+   "name": "Suối Lương - Hai Van Park",
+   "unit": "per_ticket",
+   "min_vnd": 80000,
+   "max_vnd": 80000,
+   "ticket_vnd": 80000,
+   "free_entry": false,
+   "evidence_url": "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites",
+   "quote": "Suoi Luong Ecotourism Area | Hai Van Ward | 08:00 – 17:00 | VND 80,000",
+   "page_date": "2026-01-22 (cổng thông tin du lịch TP Đà Nẵng, bảng 'Reference Ticket Prices 2026')",
+   "match": "OSM reverse: POI trên đường Suối Lương, phường Hải Vân; trùng tên khu du lịch.",
+   "note": "Luật 'vào tự do' đang cho 0đ là SAI: vé 80.000đ. Trang ghi giá tham khảo, chưa gồm dịch vụ.",
+   "typical_vnd": 80000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4171964390",
+   "category": "outdoor_landmark",
+   "name": "Làng gốm Thanh Hà",
+   "unit": "per_ticket",
+   "min_vnd": 35000,
+   "max_vnd": 35000,
+   "ticket_vnd": 35000,
+   "free_entry": false,
+   "evidence_url": "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites",
+   "quote": "Thanh Ha Pottery Village | Hoi An Tay Ward | 08:00 – 17:30 | VND 35,000",
+   "page_date": "2026-01-22 (cổng thông tin du lịch TP Đà Nẵng)",
+   "match": "OSM reverse: POI tên OSM 'Thanh Ha Pottery Village', phường Hội An Tây.",
+   "note": "Luật 'vào tự do' đang cho 0đ là SAI: vé 35.000đ. Đã có dòng giờ ở agent_web_2026-11-20c — giữ nguyên giờ khi gộp.",
+   "typical_vnd": 35000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/10709738006",
+   "category": "outdoor_landmark",
+   "name": "Làng mộc Kim Bồng",
+   "unit": "per_ticket",
+   "min_vnd": 35000,
+   "max_vnd": 35000,
+   "ticket_vnd": 35000,
+   "free_entry": false,
+   "evidence_url": "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites",
+   "quote": "Kim Bong Carpentry Village | Hoi An Ward | 08:00 – 17:30 | VND 35,000",
+   "page_date": "2026-01-22 (cổng thông tin du lịch TP Đà Nẵng)",
+   "match": "Trùng tên làng nghề (Kim Bồng, Cẩm Kim, Hội An).",
+   "note": "Luật 'vào tự do' đang cho 0đ là SAI: vé 35.000đ. Không có trong 201 kế hoạch hiện tại, sửa vì cùng nguồn chính thức.",
+   "typical_vnd": 35000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4172034499",
+   "category": "beach",
+   "name": "Non Nuoc Beach",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/guides/da-nang-beaches-guide",
+   "quote": "Tất cả bãi biển công cộng chính của Đà Nẵng (Mỹ Khê, Bắc Mỹ An, Mỹ An, Non Nước) đều miễn phí vào. Chỉ các đoạn biển thuộc resort ở Non Nước và một số vịnh nhỏ trên bán đảo Sơn Trà mới thu phí khách ngoài.",
+   "page_date": "2026-07-24",
+   "match": "OSM reverse: POI trên đường Võ Nguyên Giáp, phường Ngũ Hành Sơn (bãi công cộng Non Nước).",
+   "note": "Vào bãi công cộng miễn phí; ghế/dù 20.000–50.000đ/ngày là tuỳ chọn (cùng trang), không tính vào giá vào cửa.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJu59e1rsRQjERB-49hSxMnXo",
+   "category": "beach",
+   "name": "Bãi Tắm Non Nước",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/guides/da-nang-beaches-guide",
+   "quote": "Tất cả bãi biển công cộng chính của Đà Nẵng (Mỹ Khê, Bắc Mỹ An, Mỹ An, Non Nước) đều miễn phí vào. Chỉ các đoạn biển thuộc resort ở Non Nước và một số vịnh nhỏ trên bán đảo Sơn Trà mới thu phí khách ngoài.",
+   "page_date": "2026-07-24",
+   "match": "OSM reverse: POI trên đường Trường Sa, Ngũ Hành Sơn, sát resort Meliá — bãi tắm công cộng Non Nước.",
+   "note": "Miễn phí ở bãi công cộng; đoạn sát resort có thể thu phí khách ngoài (cùng trang) — nên chỉ đường vào lối công cộng.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4347089780",
+   "category": "beach",
+   "name": "My An Beach",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/guides/da-nang-beaches-guide",
+   "quote": "Tất cả bãi biển công cộng chính của Đà Nẵng (Mỹ Khê, Bắc Mỹ An, Mỹ An, Non Nước) đều miễn phí vào.",
+   "page_date": "2026-07-24",
+   "match": "Trùng tên bãi Mỹ An (Ngũ Hành Sơn).",
+   "note": "Vào bãi công cộng miễn phí.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ7xtm7rMXQjER7ye2fxPfbFE",
+   "category": "cafe",
+   "name": "XLIII Specialty Coffee",
+   "unit": "per_drink",
+   "min_vnd": 50000,
+   "max_vnd": 200000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-in-danang",
+   "quote": "1. XLIII Specialty Coffee | Address: 422 Nguyen Thi Si Street, Bac My An Ward, Ngu Hanh Son District, Da Nang | Opening hours: 6:30 AM - 10:30 PM | Price range: VND 50,000 - VND 200,000 (USD 2 - USD 8)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 422 Ngô Thì Sĩ, Ngũ Hành Sơn (tên OSM 'XLIII Specialty Coffee'); trùng địa chỉ nguồn.",
+   "note": "Khoảng giá thực đơn cà phê đặc sản (một ly tới set thử); typical = giữa khoảng 125k.",
+   "typical_vnd": 125000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ2eFWbrcXQjERkMR0z_5VhM0",
+   "category": "cafe",
+   "name": "Trình cà phê",
+   "unit": "per_drink",
+   "min_vnd": 40000,
+   "max_vnd": 100000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-in-danang",
+   "quote": "2. Trinh Cafe | Address: 25 Pham Hong Thai Street, Hai Chau District, Da Nang | Opening hours: 6:30 AM - 1:30 AM | Price range: VND 40,000 - VND 100,000 (USD 1.6 - USD 4)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Phạm Hồng Thái, Hải Châu; nguồn ghi 25 Phạm Hồng Thái.",
+   "note": "Khoảng giá đồ uống; một lượt = một ly.",
+   "typical_vnd": 70000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJQRIRJDIYQjER4JvYKu_Qnak",
+   "category": "cafe",
+   "name": "WONDERLUST - Coffee & Souvenir",
+   "unit": "per_drink",
+   "min_vnd": 29000,
+   "max_vnd": 75000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-in-danang",
+   "quote": "8. Wonderlust Da Nang | Address: 96 Tran Phu Street, Hai Chau District, Da Nang | Opening hours: 8:00 AM - 9:00 PM | Price range: VND 29,000 - VND 75,000 (USD 1.2 - USD 3)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Trần Phú, Hải Châu (số nội suy 112); nguồn ghi 96 Trần Phú.",
+   "note": "Khoảng giá đồ uống; một lượt = một ly.",
+   "typical_vnd": 52000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJX8a3GJEZQjERe6n-Xtcds1w",
+   "category": "wellness",
+   "name": "le vénin spa",
+   "unit": "per_massage",
+   "min_vnd": 320000,
+   "max_vnd": 750000,
+   "typical_vnd": 400000,
+   "evidence_url": "https://leveninspa.com/",
+   "quote": "Levenin Signature | 90 min | 750.000 VND | Aromatherapy Massage | 60 min | 400.000 VND | Bamboo Massage | 60 min | 450.000 VND | Traditional Thai Massage | 60 min | 420.000 VND | Face Massage | 60 min | 320.000 VND | Address: 231 Dương Đình Nghệ, Đà Nẵng",
+   "page_date": "trang chính thức, không ghi ngày",
+   "match": "OSM reverse: POI trên Dương Đình Nghệ, An Hải (tên OSM 'Levenin Spa'); trang ghi 231 Dương Đình Nghệ.",
+   "note": "Website chính chủ. typical = Aromatherapy Massage 60 phút/người (như quy ước spa 20/11); min/max = dải liệu trình lẻ 60–90 phút. Combo 500k–850k (giá giảm) không tính. Đã có dòng giờ ở agent_web_2026-11-20c — giữ giờ khi gộp.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:way/1109970036",
+   "category": "restaurant",
+   "name": "Beer Plaza",
+   "unit": "per_person",
+   "min_vnd": 240000,
+   "max_vnd": 380000,
+   "typical_vnd": 380000,
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/buffet-ba-na-hills-bao-nhieu-tien-kinh-nghiem-an-ngon-tiet-kiem-27009",
+   "quote": "Hiện nay, giá buffet lẻ được áp dụng ở mức 380.000 đồng/người lớn và 240.000 đồng/trẻ em, phục vụ trong khung giờ từ 10:30 đến 15:00. | 2.1. Beer Plaza – Buffet trong không gian lễ hội châu Âu",
+   "page_date": "2026-08-28",
+   "match": "Nhà hàng buffet Beer Plaza trong Sun World Bà Nà Hills (POI vùng ba_na_tay).",
+   "note": "Giá buffet lẻ chung các nhà hàng buffet Bà Nà (Beer Plaza, Arapang, Rosa Hotpot, Four Seasons); typical = người lớn 380k, min = trẻ em 240k. Không gồm vé cáp treo. Trang thuộc Sun Group (chủ khu du lịch).",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337971575",
+   "category": "restaurant",
+   "name": "Arapang",
+   "unit": "per_person",
+   "min_vnd": 240000,
+   "max_vnd": 380000,
+   "typical_vnd": 380000,
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/buffet-ba-na-hills-bao-nhieu-tien-kinh-nghiem-an-ngon-tiet-kiem-27009",
+   "quote": "Hiện nay, giá buffet lẻ được áp dụng ở mức 380.000 đồng/người lớn và 240.000 đồng/trẻ em, phục vụ trong khung giờ từ 10:30 đến 15:00. | 2.2. Arapang – Buffet Á – Âu đa dạng",
+   "page_date": "2026-08-28",
+   "match": "Nhà hàng buffet Arapang trong Sun World Bà Nà Hills.",
+   "note": "Giá buffet lẻ chung các nhà hàng buffet Bà Nà; typical = người lớn 380k, min = trẻ em 240k. Không gồm vé cáp treo.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/13587488508",
+   "category": "restaurant",
+   "name": "Nhà hàng Four Seasons (Bà Nà)",
+   "unit": "per_person",
+   "min_vnd": 240000,
+   "max_vnd": 380000,
+   "typical_vnd": 380000,
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/buffet-ba-na-hills-bao-nhieu-tien-kinh-nghiem-an-ngon-tiet-kiem-27009",
+   "quote": "Hiện nay, giá buffet lẻ được áp dụng ở mức 380.000 đồng/người lớn và 240.000 đồng/trẻ em, phục vụ trong khung giờ từ 10:30 đến 15:00. | 2.4. Four Seasons – Trải nghiệm buffet theo chủ đề bốn mùa",
+   "page_date": "2026-08-28",
+   "match": "Nhà hàng buffet Four Seasons trong Sun World Bà Nà Hills.",
+   "note": "Giá buffet lẻ chung các nhà hàng buffet Bà Nà; typical = người lớn 380k, min = trẻ em 240k.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/10154412491",
+   "category": "restaurant",
+   "name": "Kungfu Noodle",
+   "unit": "per_bowl",
+   "min_vnd": 140000,
+   "max_vnd": null,
+   "typical_vnd": 140000,
+   "evidence_url": "https://hoiandaytrip.com/kungfu-noodle-restaurant-ba-na-hills/",
+   "quote": "Location/address: French Village, Ba Na Hills | Opening hours: 9 am to 9 pm daily | Price: from 140,000 VND (2025) | Drink menu ... The price is from 65,000 VND.",
+   "page_date": "2025-05-26",
+   "match": "Quán mì Kungfu Noodle trong Làng Pháp, Bà Nà Hills.",
+   "note": "Nguồn chỉ ghi giá 'từ' 140.000đ một món mì (quán một món: một tô = chi tiêu/người); typical = 140k, không có giá trần.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "manual:banh-xeo-ba-duong",
+   "category": "restaurant",
+   "name": "Bánh Xèo Bà Dưỡng",
+   "unit": "per_serving",
+   "min_vnd": 10000,
+   "max_vnd": 80000,
+   "evidence_url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/top-15-quan-banh-xeo-da-nang-gion-rum-an-la-me-2025-3162",
+   "quote": "2.1. Bánh xèo Bà Dưỡng - Cái tên \"kinh điển\" với 40 năm lịch sử | Địa chỉ và giờ mở cửa: Quán nằm tại K280/23 Hoàng Diệu, quận Hải Châu, | Trải nghiệm thực tế và giá cả: Mỗi phần bánh xèo tại đây có giá khoảng 10.000 - 80.000 đồng/xuất",
+   "page_date": "tiêu đề 2026 (ngày trên trang 06/01/2026)",
+   "accessed": "2026-11-24",
+   "match": "OSM reverse: POI tại 23 Kiệt 280 Hoàng Diệu, Hải Châu (tên OSM 'Bà Dưỡng'); trùng địa chỉ nguồn.",
+   "note": "Quán một món: một suất = chi tiêu/người; typical = giữa khoảng 45k. Ghi chú cũ trong dữ liệu '100-200k/nguoi' không có nguồn.",
+   "typical_vnd": 45000
+  },
+  {
+   "poi_id": "ChIJ14kOf8kZQjERrdrrQPpiZKA",
+   "category": "restaurant",
+   "name": "Mì Quảng Thi",
+   "unit": "per_bowl",
+   "min_vnd": 25000,
+   "max_vnd": 65000,
+   "evidence_url": "https://vinwonders.com/vi/wonderpedia/news/mi-quang-da-nang-review-cac-loai-mi-goi-y-quan-an-ngon-noi-tieng-nhat/",
+   "quote": "2.5. Mì Quảng Thi Đà Nẵng | Địa chỉ: 251 Hoàng Diệu, phường Hải Châu, Đà Nẵng | Giờ mở cửa tham khảo: 6h30 – 14h00, 17h00 – 21h00 | Giá tham khảo: 25.000 – 65.000 VNĐ/món",
+   "page_date": "ngày trên trang 14/07/2023–14/07/2025",
+   "accessed": "2026-11-24",
+   "match": "OSM reverse: POI tại 251 Hoàng Diệu, Hải Châu; trùng địa chỉ nguồn.",
+   "note": "Quán mì Quảng (một món): một tô = chi tiêu/người. Trang đọc ngày 24/11; ngày 25/11 VinWonders không hiện nội dung trong trình duyệt.",
+   "typical_vnd": 45000
+  },
+  {
+   "poi_id": "osm:node/10304609242",
+   "category": "restaurant",
+   "name": "Bánh Xèo, Thịt Nướng, Nem Lụi Bà 9",
+   "unit": "per_serving",
+   "min_vnd": 20000,
+   "max_vnd": 50000,
+   "evidence_url": "https://www.greensm.com/vn-vi/news/banh-xeo-hoi-an",
+   "quote": "Bánh xèo Hội An Bà 9 | Địa chỉ cụ thể: Kiệt 92 Đ. Phan Chu Trinh, Phường Minh An, Hội An | Giá tham khảo: 20.000- 50.000 VNĐ/phần | Giờ mở cửa: 15:00 – 21:30",
+   "page_date": "2025-02-22 (ngày đầu trang)",
+   "match": "Trùng tên quán Bà 9 ở Hội An (POI phường Hội An); nguồn nêu Kiệt 92 Phan Chu Trinh.",
+   "note": "Quán bánh xèo/nem lụi: một phần = chi tiêu/người; typical = giữa khoảng 35k. Trang của Xanh SM (GSM).",
+   "typical_vnd": 35000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/13426342201",
+   "category": "restaurant",
+   "name": "Banh Xeo Khue",
+   "unit": "per_serving",
+   "min_vnd": 45000,
+   "max_vnd": 45000,
+   "evidence_url": "https://www.greensm.com/vn-vi/news/banh-xeo-hoi-an",
+   "quote": "Bánh xèo Khuê – Đặc sản Hội An | Địa chỉ cụ thể: Kiệt 83/5 Nguyễn Duy Hiệu, Cẩm Châu, Hội An | Giá tham khảo: 45.000 VNĐ | Giờ mở cửa: 10:00 – 21:00",
+   "page_date": "2025-02-22 (ngày đầu trang)",
+   "match": "OSM reverse: POI tại 83/5 Nguyễn Duy Hiệu, Hội An Đông (tên OSM 'Banh Xeo Khue'); trùng địa chỉ nguồn.",
+   "note": "Quán một món, nguồn ghi một mức 45.000 VNĐ (một phần) → chi tiêu/người.",
+   "typical_vnd": 45000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4717672963",
+   "category": "cafe",
+   "name": "Hoi An Roastery",
+   "unit": "per_drink",
+   "min_vnd": 40000,
+   "max_vnd": 65000,
+   "evidence_url": "https://goodmorning-hoian.com/en/best-cafes-hoi-an/",
+   "quote": "Hoi An Roastery is kind of the local coffee chain you’ll see all over the Old Town. They’ve got several locations, all with the same vibe ... Expect to pay between 40,000 and 65,000 VND, depending on the drink.",
+   "page_date": "2025-05-11, cập nhật 2025-05-12",
+   "match": "POI là một cơ sở của chuỗi Hoi An Roastery (OSM reverse: đường Hai Bà Trưng, tên OSM 'Hoi An Roastery'); nguồn nói giá chung cả chuỗi.",
+   "note": "Giá đồ uống chung chuỗi (nhiều cơ sở cùng thực đơn); cùng mục ghi 'Price range: 50,000 – 80,000 VND' cho cơ sở 89 Trần Phú. Một lượt = một ly.",
+   "typical_vnd": 52500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJKbpWc6IXQjERMZMSscftz9I",
+   "category": "cafe",
+   "name": "The Hideout café",
+   "unit": "per_drink",
+   "min_vnd": 20000,
+   "max_vnd": 40000,
+   "confidence": 0.5,
+   "evidence_url": "https://www.foody.vn/da-nang/the-hideout-cafe",
+   "quote": "The Hideout Cafe | Café/Dessert | 95 Đỗ Bá, P. Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng | Đang mở cửa 07:00 - 21:00 | 20.000đ - 40.000đ",
+   "page_date": "Foody không ghi ngày cập nhật khoảng giá",
+   "match": "Trang Foody tên 'The Hideout Cafe - Nguyễn Văn Thoại'; OSM reverse: POI ở kiệt 72 Nguyễn Văn Thoại (nối ra Đỗ Bá, Mỹ An); freakingnomads ghi 72/24 Nguyễn Văn Thoại.",
+   "note": "Khoảng giá thực đơn quán cà phê trên Foody (= giá một ly). Có thể cũ: bình luận trên cùng trang nhắc đá xay 50k/ly → confidence 0.5.",
+   "typical_vnd": 30000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJzX1dFjAZQjERswowf61V1fk",
+   "category": "outdoor_landmark",
+   "name": "Công Viên APEC",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/cong-vien-apec-13254",
+   "quote": "Địa chỉ: Đường 2 Tháng 9, phường Bình Hiên, quận Hải Châu, Thành phố Đà Nẵng | Giờ mở cửa: 24/24 | Giá vé: Miễn phí",
+   "page_date": "2023-11-03",
+   "match": "OSM reverse: POI trên đường 2 Tháng 9, Hải Châu; trùng địa chỉ nguồn.",
+   "note": "Vào công viên miễn phí (đúng với luật cũ, nay có nguồn).",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/5403993021",
+   "category": "beach",
+   "name": "Bãi biển Cửa Đại",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.budgetyourtrip.com/vietnam/hoi-an/cua-dai-beach-worth-visiting/1758",
+   "quote": "Cua Dai Beach is free. It is free to access and enjoy the beach, with no admission charges.",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tên OSM 'Cua Dai Beach', đường Võ Nguyên Giáp, Hội An Tây.",
+   "note": "Vào bãi miễn phí; gửi xe ~10.000đ (nguồn khác) không tính. forevervacation.com ghi 'entrance fee VND 5,000' — lệch, đa số nguồn ghi miễn phí.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ244paMwXQjERGVtPeitX4mA",
+   "category": "outdoor_landmark",
+   "name": "Khu phố du lịch An Thượng",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/attractions/an-thuong-tourist-street",
+   "quote": "An Thượng là khu phố công cộng, không phải điểm tham quan bán vé. Không có cổng, không phí vào, cũng không quy định giờ mở cửa cố định.",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Hoàng Kế Viêm, Ngũ Hành Sơn (lõi khu phố An Thượng).",
+   "note": "Vào phố miễn phí; ăn uống tự chọn không tính vào giá điểm.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJQwork9IXQjERVcF8a6VWq5I",
+   "category": "nightlife",
+   "name": "Maia Beach Bar",
+   "unit": "per_drink",
+   "min_vnd": 60000,
+   "max_vnd": 350000,
+   "evidence_url": "https://www.pullman-danang.com/discovery/travel-tips/beach-bar-da-nang/",
+   "quote": "3. MAIA BEACH BAR | Address: 284 Vo Nguyen Giap, Bac My Phu, Ngu Hanh Son, Da Nang | Opening hours: 8:00 – 1:00 | Signature drinks: Margaritas, Daiquiris, mocktails | Reference cost: 60,000 – 350,000 VND",
+   "page_date": "cập nhật 2026-04-21",
+   "match": "OSM reverse: POI tại ~294 Võ Nguyên Giáp, Ngũ Hành Sơn (tên OSM 'Maia'); nguồn ghi 284 Võ Nguyên Giáp.",
+   "note": "Blog của Pullman Danang. Chi phí tham khảo một lượt đồ uống; typical = giữa khoảng 205k. Đã có dòng giờ ở agent_web_2026-11-20c — giữ giờ khi gộp.",
+   "typical_vnd": 205000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJd8h2AyoRQjERNWCSTs1L1jU",
+   "category": "nightlife",
+   "name": "Vive Océane - Beach Club & Restaurant",
+   "unit": "per_person",
+   "min_vnd": 300000,
+   "max_vnd": 1000000,
+   "evidence_url": "https://www.pullman-danang.com/discovery/travel-tips/beach-bar-da-nang/",
+   "quote": "7. VIVE OCÉANE – BEACH CLUB & RESTAURANT | Address: 5 Truong Sa Road, Ngu Hanh Son, Da Nang | Opening hours: 11:00 – 23:00 | Reference cost: 300,000 – 1,000,000 VND",
+   "page_date": "cập nhật 2026-04-21",
+   "match": "Trùng tên beach club (Trường Sa, Ngũ Hành Sơn).",
+   "note": "Chi phí tham khảo một lượt; typical = giữa khoảng 650k → mức đắt (khác mặc định 'nightlife' 190k).",
+   "typical_vnd": 650000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/3763846156",
+   "category": "religious",
+   "name": "Chùa Pháp Lâm",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/chua-phap-lam-da-nang.html",
+   "quote": "Địa chỉ: Số 574 đường Ông Ích Khiêm, phường Nam Dương, quận Hải Châu, thành phố Đà Nẵng. | Giờ mở cửa: Từ 05:00 sáng đến 21:00 tối hàng ngày. | Giá vé: Miễn phí hoàn toàn (Du khách có thể tùy tâm công đức).",
+   "page_date": "2026-01-13, cập nhật 2026-08-10",
+   "match": "OSM reverse: POI tên OSM 'Chùa Pháp Lâm', kiệt Ông Ích Khiêm, Hải Châu.",
+   "note": "Vào chùa miễn phí, công đức tuỳ tâm. Đã có dòng giờ ở agent_web_2026-11-20b — giữ giờ khi gộp.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJEf1GVMoZQjERQxbPWFvFiKI",
+   "category": "religious",
+   "name": "Chùa Bát Nhã",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/chua-bat-nha-da-nang.html",
+   "quote": "Địa chỉ chính xác: Số 176 đường Triệu Nữ Vương, phường Nam Dương, quận Hải Châu | Chùa Bát Nhã có thu vé tham quan không? => Không. Chùa mở cửa miễn phí cho tất cả du khách và Phật tử đến chiêm bái.",
+   "page_date": "2026-01-13, cập nhật 2026-08-07",
+   "match": "Tên chùa duy nhất ở Đà Nẵng; OSM reverse cho POI số 59 Ông Ích Khiêm (Hải Châu, cạnh khu Triệu Nữ Vương) — cùng khu chùa.",
+   "note": "Vào chùa miễn phí, công đức tuỳ tâm. Đã có dòng giờ ở agent_web_2026-11-20b — giữ giờ khi gộp.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJFzkgXmA9QjERbjn2eoPqMn8",
+   "category": "religious",
+   "name": "Sơn Trà Tịnh Viên",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/son-tra-tinh-vien-da-nang.html",
+   "quote": "Địa chỉ: Đường Lương Hữu Khánh, Phường Thọ Quang, Quận Sơn Trà | Giá vé vào cổng | Hoàn toàn miễn phí (Du khách có thể tùy tâm công đức để hỗ trợ chăm sóc vườn tre)",
+   "page_date": "2026-01-31, cập nhật 2026-02-24",
+   "match": "Trùng tên Sơn Trà Tịnh Viên (Thọ Quang, Sơn Trà).",
+   "note": "Vào cổng miễn phí.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4945171421",
+   "category": "restaurant",
+   "name": "Hai (Mì Quang - Cao Lâu)",
+   "unit": "per_bowl",
+   "min_vnd": 25000,
+   "max_vnd": 30000,
+   "evidence_url": "https://momo.vn/blog/top-mon-ngon-hoi-an-c101dt294",
+   "quote": "Địa chỉ nên thử: | Mì Quảng Hát - 04 Phan Châu Trinh, Hội An | Mì Quảng bà Minh - Cẩm Hà, Hội An | Mì Quảng Cô Sinh: 170/5, Lý Thường Kiệt, Hội An | Mì Quảng Ông Hai: 6A Trương Minh Lượng, Cẩm Châu, Hội An | Giá từ: 25.000-30.000 VND/ tô",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 6a Trương Minh Lượng, Hội An (tên OSM 'Hai'); trùng địa chỉ Mì Quảng Ông Hai trong nguồn.",
+   "note": "Giá một tô ghi chung cho nhóm quán mì Quảng được liệt kê (gồm Ông Hai). Quán một món: một tô = chi tiêu/người.",
+   "typical_vnd": 27500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/7118673485",
+   "category": "restaurant",
+   "name": "Lê Hội Bánh Mí Chay",
+   "unit": "per_serving",
+   "min_vnd": 20000,
+   "max_vnd": 20000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/vi/plan-book/travel/travel-guide/banh-mi-hoi-an",
+   "quote": "5. Bánh Mì Chay Lê Hới Hội An | Địa chỉ 1: 3 Nguyễn Huệ, phường Cẩm Châu, Hội An | Địa chỉ 2: 136 Trần Phú, phường Minh An, Hội An | Giá: 20.000 VND",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Nguyễn Huệ, Hội An (tên OSM 'Lê Hội Bánh Mí Chay'); nguồn ghi cơ sở 3 Nguyễn Huệ.",
+   "note": "Xe bánh mì chay: một ổ = chi tiêu/người.",
+   "typical_vnd": 20000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJrVOLzgUXQjERRuyvUi8WxkQ",
+   "category": "beach",
+   "name": "Bãi biển Sơn Trà",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.nomadotravel.app/vi/attractions/son-tra-peninsula-beaches",
+   "quote": "Phường Thọ Quang, quận Sơn Trà, Đà Nẵng (cách trung tâm thành phố khoảng 10 km về phía đông bắc) | Vào cửa bán đảo và các bãi biển hoàn toàn miễn phí",
+   "page_date": "2026-07-24",
+   "match": "OSM reverse: POI trên đường Hoàng Sa, phường Sơn Trà (bãi trên bán đảo Sơn Trà).",
+   "note": "Vào bãi miễn phí; riêng bãi Tiên Sa có nguồn ghi vé 10.000đ — POI này không phải Tiên Sa.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJq8DocTMYQjERrIcBZUiEnSM",
+   "category": "cafe",
+   "name": "Boulevard",
+   "unit": "per_drink",
+   "min_vnd": 35000,
+   "max_vnd": 75000,
+   "confidence": 0.55,
+   "evidence_url": "https://mia.vn/cam-nang-du-lich/boulevard-gelato-and-coffee-chat-luong-kem-y-hang-dau-tai-da-nang-1857",
+   "quote": "Địa chỉ: quán nằm tại số 77 đường Trần Quốc Toản, phường Phước Ninh, quận Hải Châu | Giá bán giao động : 35.000 VNĐ đến 75.000 VNĐ. | Cà phê Ý như Latte Hot/Ice, Cappuccino Hot/Ice, Americano ... có mức giá từ 40.000 VNĐ đến 55.000 VNĐ",
+   "page_date": "2023-09-21",
+   "match": "OSM reverse: POI ở 75 Trần Quốc Toản, Hải Châu (số nội suy); nguồn: Boulevard Gelato & Coffee 77 Trần Quốc Toản.",
+   "note": "Quán kem/cà phê: một ly/viên kem = chi tiêu/người. Bài 2023, giá có thể đã đổi → confidence 0.55.",
+   "typical_vnd": 55000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJ2eEwIrEZQjERmUcku_xN6pw",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Bà Mua - 95A Nguyễn Tri Phương",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 55000,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/mi-quang-da-nang.html",
+   "quote": "Mỳ quảng Bà Mua | Địa chỉ: 95A Nguyễn Tri Phương, TP. Đà Nẵng (gần sân bay quốc tế) | Giá tham khảo: 30.000đ – 55.000đ",
+   "page_date": "2026-04-02, cập nhật 2026-05-08",
+   "match": "Tên POI ghi đúng địa chỉ 95A Nguyễn Tri Phương; OSM reverse: đường Nguyễn Tri Phương, tên OSM \"My Quang Ba Mua\".",
+   "note": "Vinpearl (06/11/2026) ghi chuỗi 30.000–70.000 VNĐ/tô; lấy nguồn nêu đúng cơ sở 95A.",
+   "typical_vnd": 42500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJzYloKSQaQjERN9-d8WZyCQo",
+   "category": "restaurant",
+   "name": "Quán Mỳ Quảng Bà Mua - 58 Ông Ích Đường",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 70000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "1.1. Mì Quảng Bà Mua | Địa chỉ: Có 9 cơ sở tại Đà Nẵng: 40 Ngũ Hành Sơn và 95A Nguyễn Tri Phương;... | Giá tham khảo: 30.000 - 70.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "Tên POI ghi 58 Ông Ích Đường (OSM reverse ~54 Ông Ích Đường); VinWonders (đọc 24/11) liệt kê \"58 Ông Ích Đường\" trong các cơ sở Bà Mua.",
+   "note": "Giá chung chuỗi 9 cơ sở theo nguồn.",
+   "typical_vnd": 50000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJHz8ambQZQjERjEFJ-wJ-9EE",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Hương Quê",
+   "unit": "per_bowl",
+   "min_vnd": 30000,
+   "max_vnd": 45000,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/mi-quang-da-nang.html",
+   "quote": "Mì quảng Hương Quê Đà Nẵng | Địa chỉ: 78 Phan Thanh, Q. Thanh Khê. | Giá tham khảo: 30.000đ – 45.000đ.",
+   "page_date": "2026-04-02, cập nhật 2026-05-08",
+   "match": "OSM reverse: POI trên đường Phan Thanh, Thanh Khê; trùng địa chỉ nguồn 78 Phan Thanh.",
+   "note": "Vinpearl (06/11/2026) ghi 20.000 - 30.000 VNĐ/tô; hai nguồn đều mức rẻ.",
+   "typical_vnd": 37500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/11423812931",
+   "category": "restaurant",
+   "name": "Lotteria",
+   "unit": "per_serving",
+   "min_vnd": 54000,
+   "max_vnd": 90000,
+   "evidence_url": "https://hoiandaytrip.com/lotteria-restaurant-ba-na-hills/",
+   "quote": "Location/address: French Village, Ba Na Hills | At Lotteria Ba Na Hills, visitors will see these dishes: fried chicken (45,000 VND for 1 piece and 120,000 VND for 3 pieces), sauce chicken (48,000 VND for piece and 130,000 VND for 3 pieces), shrimp burger (59,000 VND), chicken burger (66,000 VND), bulgogi burger (56,000 VND), cheese burger (54,000 VND), mozzarella burger (90,000 VND), double burger (82,000 VND) ... soft drink (20,000 VND)",
+   "page_date": "2025-05-24, cập nhật 2025-06-07",
+   "match": "POI 'Lotteria' trong Làng Pháp, Bà Nà Hills (OSM reverse: khu Wine Cellar, xã Bà Nà).",
+   "note": "Quán đồ ăn nhanh: một burger = một suất/người → min/max = dải giá burger 54–90k, typical 72k (mức rẻ; mặc định cũ 'nhà hàng' 225k). Chưa cộng nước 20–25k.",
+   "typical_vnd": 72000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337971573",
+   "category": "restaurant",
+   "name": "Bharata",
+   "unit": "per_person",
+   "min_vnd": 240000,
+   "max_vnd": 380000,
+   "typical_vnd": 380000,
+   "evidence_url": "https://hoiandaytrip.com/bharata-restaurant-ba-na-hills/",
+   "quote": "The buffet price of Bharata Restaurant at Ba Na Hills currently is 380,000 VND per adult and child above 139cm. It’s 240,000 VND per child from 100 to 139cm, and free of charge for kids under 100cm.",
+   "page_date": "2025-05-19, cập nhật 2026-11-16",
+   "match": "Nhà hàng Ấn/Halal Bharata trong Bà Nà Hills (POI vùng ba_na_tay).",
+   "note": "Buffet/người: typical = người lớn 380k, min = trẻ em 240k; khớp giá buffet chung Bà Nà của Sun Group (28/08/2026). Nguồn ghi quán đã dời gần máng trượt số 3.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4225643190",
+   "category": "restaurant",
+   "name": "Phố Xưa",
+   "unit": "per_serving",
+   "min_vnd": 30000,
+   "max_vnd": 55000,
+   "confidence": 0.5,
+   "evidence_url": "https://www.foody.vn/quang-nam/pho-xua-dac-san-hoi-an",
+   "quote": "Phố Xưa - Đặc Sản Hội An | 35 Phan Châu Trinh, P. Minh An, Thành Phố Hội An, Quảng Nam | Đang mở cửa 08:00 - 20:00 | 30.000đ - 55.000đ",
+   "page_date": "Foody không ghi ngày cập nhật khoảng giá",
+   "match": "OSM reverse: POI tại 35 Phan Châu Trinh, Hội An (tên OSM 'Phố Xưa'); trùng địa chỉ Foody.",
+   "note": "Quán đặc sản Hội An (cao lầu/mì Quảng/cơm gà — mỗi món là một suất): khoảng giá Foody = giá một suất/người. Foody có thể cũ → confidence 0.5.",
+   "typical_vnd": 42500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJyd-t1B0ZQjERVSYFtVbYms8",
+   "category": "religious",
+   "name": "Thiền Viện Bồ Đề",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://www.vietnambooking.com/du-lich/blog-du-lich/thien-vien-bo-de-da-nang.html",
+   "quote": "Địa chỉ: Đường Hoàng Thị Loan, Phường Hòa Minh, Quận Liên Chiểu, Thành phố Đà Nẵng. | Giờ mở cửa: 6:00 – 21:00 hằng ngày. | Giá vé: Miễn phí tham quan.",
+   "page_date": "2026-01-14, cập nhật 2026-08-07",
+   "match": "OSM reverse: POI trên đường Hoàng Thị Loan (tên OSM 'Giant Lady Buddha'); trùng địa chỉ nguồn.",
+   "note": "Vào miễn phí.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJTahQxcwZQjERrNKa5emQFC4",
+   "category": "cafe",
+   "name": "NAM house Cafe (Egg Coffee)",
+   "unit": "per_drink",
+   "min_vnd": 25000,
+   "max_vnd": 40000,
+   "evidence_url": "https://www.nomadotravel.app/vi/guides/da-nang-coffee-guide",
+   "quote": "Nam House (15/1 Lê Hồng Phong) là ví dụ nổi bật — dạng nhà xưa khá retro, mở cửa 6h sáng đến 11h tối hàng ngày. Cà phê khoảng 25.000–40.000 đồng mỗi ly.",
+   "page_date": "2026-07-24",
+   "match": "OSM reverse: POI ở kiệt 15 Lê Hồng Phong, Hải Châu (tên OSM 'Nam House'); trùng địa chỉ nguồn.",
+   "note": "Giá một ly; một lượt = một ly/người.",
+   "typical_vnd": 32500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJi0bpGjIYQjERRodYRF89PH8",
+   "category": "cafe",
+   "name": "Cộng Cà Phê",
+   "unit": "per_drink",
+   "min_vnd": 30000,
+   "max_vnd": 100000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-in-danang",
+   "quote": "6. Cong Coffee Da Nang | Address: 98-96 Bach Dang Ward, Hai Chau District, Da Nang | Opening hours: 7:00 AM - 11:30 PM | Price range: VND 30,000 - VND 100,000 (USD 1.2 - USD 4)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Bạch Đằng, Hải Châu (tên OSM 'Cộng Cà Phê'); nguồn ghi 96-98 Bạch Đằng.",
+   "note": "Khoảng giá đồ uống; một lượt = một ly.",
+   "typical_vnd": 65000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJlZdRA3AZQjERGSBb-UXUMZw",
+   "category": "cafe",
+   "name": "Cherish Coffee & Desserts",
+   "unit": "per_drink",
+   "min_vnd": 17000,
+   "max_vnd": 49000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-in-danang",
+   "quote": "10. Cherish Coffee & Desserts | Address: 238 Kinh Duong Vuong Street, Thanh Khe Tay Ward, Lien Chieu District, Da Nang | Opening hours: 6:00 AM - 10:30 PM | Price range: VND 17,000 - VND 49,000 (USD 0.7 - USD 2)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI trên đường Kinh Dương Vương; nguồn ghi 238 Kinh Dương Vương.",
+   "note": "Khoảng giá đồ uống/bánh; một lượt = một ly.",
+   "typical_vnd": 33000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/4253896690",
+   "category": "cafe",
+   "name": "The Espresso Station",
+   "unit": "per_drink",
+   "min_vnd": 45000,
+   "max_vnd": 85000,
+   "evidence_url": "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-hoi-an",
+   "quote": "2.3. The Espresso Station | Address: 28/2 Tran Hung Dao Street, Son Phong Ward, Hoi An City | Opening hours: 7:30 AM - 5:15 PM | Price range: VND 45,000 - VND 85,000 (USD 1.72 - USD 3.25)",
+   "page_date": "không ghi ngày",
+   "match": "OSM reverse: POI tại 28/2 Trần Hưng Đạo, Hội An (tên OSM 'The Espresso Station'); trùng địa chỉ nguồn.",
+   "note": "Khoảng giá đồ uống; một lượt = một ly.",
+   "typical_vnd": 65000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJP0--pEAXQjERoheJMf24gHA",
+   "category": "nightlife",
+   "name": "Lounge Beach bar & Restaurant",
+   "unit": "per_person",
+   "min_vnd": 150000,
+   "max_vnd": null,
+   "typical_vnd": 150000,
+   "evidence_url": "https://www.pullman-danang.com/discovery/travel-tips/beach-bar-da-nang/",
+   "quote": "6. LOUNGE BEACH BAR – RESTAURANT | Address: 1c Vo Nguyen Giap, An Hai, Son Trà, Da Nang | Opening hours: 7:30 – 1:00 | Reference cost: From 150,000 VND",
+   "page_date": "cập nhật 2026-04-21",
+   "match": "OSM reverse: POI trên Võ Nguyên Giáp, An Hải; nguồn ghi 1c Võ Nguyên Giáp.",
+   "note": "Nguồn chỉ ghi 'từ 150.000 VND' → typical = 150k (mức trung bình như mặc định), không có trần.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/13397525601",
+   "category": "restaurant",
+   "name": "Cô Anh - Sông Hoāi",
+   "unit": "per_serving",
+   "min_vnd": 20000,
+   "max_vnd": 50000,
+   "evidence_url": "https://www.greensm.com/vn-vi/news/banh-xeo-hoi-an",
+   "quote": "Bánh xèo cô Anh sông Hoài | Địa chỉ cụ thể: 09 Thoại Ngọc Hầu, Phường Minh An, Hội An | Giá tham khảo: 20.000 – 50.000 VNĐ | Giờ mở cửa: 9:00 – 22:00",
+   "page_date": "2025-02-22 (ngày đầu trang)",
+   "match": "OSM reverse: POI trên Thoại Ngọc Hầu, Hội An (tên OSM 'Cô Anh - Sông Hoāi'); trùng địa chỉ nguồn.",
+   "note": "Quán bánh xèo/ram cuốn/nem lụi: một phần = chi tiêu/người (mia.vn 06/06/2025 ghi cùng quán '20.000 - 50.000 VNĐ/ cái'). Mặc định cũ 'nhà hàng' 225k → nay mức rẻ.",
+   "typical_vnd": 35000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/10709738105",
+   "category": "outdoor_landmark",
+   "name": "Làng nước mắm Nam Ô",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites",
+   "quote": "DESTINATIONS WITH FREE ADMISSION (OPENING HOURS SUBJECT TO INDIVIDUAL REGULATIONS) | ... | Nam O Fish Sauce Village | Hai Van Ward",
+   "page_date": "2026-01-22 (cổng thông tin du lịch TP Đà Nẵng)",
+   "match": "OSM reverse: POI tên OSM 'Làng nước mắm Nam Ô', phường Hải Vân.",
+   "note": "Danh sách điểm miễn phí vào cửa của cổng du lịch TP.",
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337971574",
+   "category": "cafe",
+   "name": "Highlands Coffee (Bà Nà)",
+   "unit": "per_drink",
+   "min_vnd": 49000,
+   "max_vnd": 95000,
+   "evidence_url": "https://hoiandaytrip.com/highlands-coffee-ba-na-hills/",
+   "quote": "Location/address: near Solar Castle, French Village in Ba Na Hills | Vietnamese black coffee with more condensed milk (49,000-55,000 VND), Espresso, Americano, Cappuccino, Latte, Caramel Macchiato, Mocha (55,000 to 95,000 VND) ... lotus seed tea ... (65,000 to 80,000 VND)",
+   "page_date": "2025-07-23, cập nhật 2026-01-01",
+   "match": "POI 'Highlands Coffee (Bà Nà)' trong Làng Pháp, Bà Nà Hills.",
+   "note": "Giá đồ uống ở cơ sở Bà Nà (cao hơn giá chuỗi ngoài phố); một lượt = một ly; typical = giữa khoảng 72k.",
+   "typical_vnd": 72000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/11423769989",
+   "category": "cafe",
+   "name": "Postal Cafe",
+   "unit": "per_drink",
+   "min_vnd": 69000,
+   "max_vnd": 120000,
+   "evidence_url": "https://hoiandaytrip.com/cafe-postal-ba-na-hills/",
+   "quote": "Location/address: the ground floor of Mercure hotel, French Village, Ba Na Hills | Vietnamese coffee: black coffee, black coffee with condensed milk, Saigon style coffee (69,000 VND) | premium coffee: espresso/americano (79,000 VND), latte/cappuccino (99,000 VND) ... | Blended coffee ... (120,000 VND)",
+   "page_date": "2025-06-26, cập nhật 2026-01-02",
+   "match": "POI 'Postal Cafe' trong Làng Pháp, Bà Nà Hills (Cafe Postal, tầng trệt Mercure).",
+   "note": "Một lượt = một ly; typical = giữa khoảng 94.5k (vẫn mức rẻ, sát ngưỡng 100k).",
+   "typical_vnd": 94500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "osm:node/14337980312",
+   "category": "cafe",
+   "name": "Soul Cafe",
+   "unit": "per_drink",
+   "min_vnd": 70000,
+   "max_vnd": 90000,
+   "evidence_url": "https://hoiandaytrip.com/soul-specialty-coffee-ba-na-hills",
+   "quote": "Location/address: Floor 2, Kavkaz Building, French Village in Ba Na Hills | PHIN-BASED COFFEE DRINKS | 70,000 | Vietnamese Black Phin | 80,000 | Black Lemon | 90,000 | SIGNATURE | Hue Salt Coffee | 70,000 | Vietnamese Milk Coffee",
+   "page_date": "2025-08-23, cập nhật 2026-01-02",
+   "match": "POI 'Soul Cafe' trong Làng Pháp, Bà Nà Hills (Soul Specialty Coffee, tầng 2 toà Kavkaz).",
+   "note": "Thực đơn đồ uống phin 70.000–90.000 VND; một lượt = một ly.",
+   "typical_vnd": 80000,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJYzRCE9YYQjER-BWS4JP_erM",
+   "category": "restaurant",
+   "name": "Quán Mì Quảng Bà Bích",
+   "unit": "per_bowl",
+   "min_vnd": 20000,
+   "max_vnd": 25000,
+   "evidence_url": "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+   "quote": "2.1. Mì Quảng Bích Đà Nẵng | Địa chỉ: quận Liên Chiểu, TP Đà Nẵng; | Giá tham khảo: 20.000 - 25.000 VNĐ/tô.",
+   "page_date": "2024-06-01, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI trên đường Đặng Dung, Liên Chiểu; VinWonders (đọc 24/11) ghi Mì Quảng Bích '1 – 3 – 5 Đặng Dung, phường Liên Chiểu'.",
+   "note": "VinWonders ghi 25.000 – 60.000 VNĐ/món cho cùng quán; lấy Vinpearl (mới cập nhật, ghi /tô).",
+   "typical_vnd": 22500,
+   "accessed": "2026-11-25"
+  },
+  {
+   "poi_id": "ChIJaQNtm9IfQjERhfrVRYqgA1M",
+   "category": "outdoor_landmark",
+   "name": "Hồ Hòa Trung",
+   "unit": "entry",
+   "free_entry": true,
+   "min_vnd": 0,
+   "max_vnd": 0,
+   "ticket_vnd": 0,
+   "evidence_url": "https://vinpearl.com/vi/ho-hoa-trung-da-nang-diem-cam-trai-teambuilding-dinh-cua-chop",
+   "quote": "Địa chỉ: thuộc địa phận của xã Bà Nà và phường Liên Chiểu, TP. Đà Nẵng | Giá vé hồ Hòa Trung: Miễn phí | Hồ Hòa Trung Đà Nẵng không thu vé vào cửa, nhưng ... khoảng 20.000 VNĐ/người cho dịch vụ chèo thuyền",
+   "page_date": "2024-01-13, cập nhật 2026-11-06",
+   "match": "OSM reverse: POI tên OSM 'Hồ Hoà Trung', phường Liên Chiểu.",
+   "note": "Vào hồ miễn phí; chèo thuyền 20–30k và cắm trại 200k/lều là tuỳ chọn.",
+   "accessed": "2026-11-25"
+  }
+ ],
+ "not_found": [
+  {
+   "poi_id": "osm:node/10304029313",
+   "category": "restaurant",
+   "name": "Roving Chillhouse",
+   "found": false,
+   "why": "POI loại restaurant nhưng nguồn chỉ coi là quán cà phê: Vietnam Airlines 'Price range: VND 40,000 - VND 120,000' (khoảng giá thực đơn, không phải chi tiêu bữa/người). Không có thực đơn món ăn có giá. Loại POI có thể sai (cà phê, không phải nhà hàng) — cần người kiểm.",
+   "tried": [
+    "https://www.vietnamairlines.com/vn/en/plan-book/travel/travel-guide/coffee-hoi-an",
+    "wanderlog.com/place/details/3817866"
+   ]
+  },
+  {
+   "poi_id": "osm:node/2461400753",
+   "category": "restaurant",
+   "name": "Bazar Garden Restaurant",
+   "found": false,
+   "why": "Chỉ có Rusty Compass 2015 ('Mains around 120,000VND', giá một món, quá cũ). POI cùng toạ độ 36 Trần Phú với 7 Bridges Hoi An Taproom (hoiandaytrip 10/2026 ghi taproom ở 36 Trần Phú có khu vườn) — có thể Bazar đã đổi thành 7 Bridges; cần người kiểm.",
+   "tried": [
+    "https://rustycompass.com/vietnam-travel-guide-233/hoi-an-28/eating-16/bazar-cafe-hoi-an-287",
+    "https://hoiandaytrip.com/7-bridges-hoi-an-taproom/"
+   ]
+  },
+  {
+   "poi_id": "ChIJJ7sPzc4ZQjERLXHWKHCIglQ",
+   "category": "restaurant",
+   "name": "Mì Quảng Bà Vị",
+   "found": false,
+   "why": "POI ở An Thượng 18 (OSM reverse). Nguồn chỉ có cơ sở khác: Vinpearl '166 Lê Đình Dương ... 30.000 - 55.000 VNĐ/tô', Foody 'Mì Quảng Bà Vị - Ngũ Hành Sơn, 60 Ngũ Hành Sơn, 22.000đ - 30.000đ'. Chưa xác minh chi nhánh An Thượng thuộc chuỗi/cùng giá.",
+   "tried": [
+    "https://vinpearl.com/vi/10-quan-mi-quang-da-nang-noi-tieng-nhat-dinh-nen-an-thu",
+    "https://www.foody.vn/thuong-hieu/mi-quang-ba-vi?c=da-nang"
+   ]
+  },
+  {
+   "poi_id": "ChIJJexJsaUXQjERb9rmSRBkLf0",
+   "category": "restaurant",
+   "name": "Nhà Hàng Cơm Niêu Nồi Đất",
+   "found": false,
+   "why": "Vinpearl (cập nhật 06/11/2026) ghi '168 Trần Bạch Đằng ... Giá tham khảo: 50.000 - 150.000 VNĐ' không có đơn vị; cùng bài các quán khác ghi 17.000 - 230.000 VNĐ (rõ là giá món). Nhà hàng nhiều món → không nhận giá món.",
+   "tried": [
+    "https://vinpearl.com/vi/top-10-quan-com-nieu-da-nang-ngon-nuom-nuop-khach"
+   ]
+  },
+  {
+   "poi_id": "osm:node/7055486785",
+   "category": "restaurant",
+   "name": "Mango Rooms",
+   "found": false,
+   "why": "Chỉ có giá món lẻ trong bài review Vietnam News 13/04/2025 (Mango tiradito 260.000, Cocoduck 800.000); không có chi tiêu/người. Địa chỉ mới 37 Phan Bội Châu khớp POI.",
+   "tried": [
+    "https://vietnamnews.vn/sunday/restaurant-review/1695608/mango-rooms-a-culinary-gem-in-hoi-an.html"
+   ]
+  },
+  {
+   "poi_id": "ChIJR1aq9sMZQjERm5CGfBs-Qi4",
+   "category": "restaurant",
+   "name": "Mỳ Quảng Quê Xưa",
+   "found": false,
+   "why": "Michelin Bib Gourmand (165-167 Núi Thành) chỉ ghi ký hiệu giá, không có số VND; không tìm được giá tô.",
+   "tried": [
+    "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/que-xua"
+   ]
+  },
+  {
+   "poi_id": "ChIJ8VYU_wQRQjER1lJ6MdGSHjg",
+   "category": "restaurant",
+   "name": "Quán mỳ quảng Bà Minh",
+   "found": false,
+   "why": "Trang Foody 'Mì Quảng Bà Minh' (25.000đ - 50.000đ) thuộc Quảng Nam, cạnh sông Thu Bồn — không phải POI ở đường Hải Triều, Ngũ Hành Sơn.",
+   "tried": [
+    "https://www.foody.vn/quang-nam/mi-quang-ba-minh"
+   ]
+  },
+  {
+   "poi_id": "ChIJudsANu4XQjERbLKxjXDLHtU",
+   "category": "restaurant",
+   "name": "Hải sản My Hanh Seafood",
+   "found": false,
+   "why": "VinWonders 11/12/2025 ghi 'Giá trung bình: 150.000 VNĐ' không đơn vị; cùng bài Thời Cổ 'Giá trung bình: 69.000 VNĐ' mà mia.vn ghi rõ '69.000 VNĐ/món' → đây là giá/món, không phải chi tiêu/người. Menu PDF chính chủ quá lớn (như 20/11).",
+   "tried": [
+    "https://vinwonders.com/vi/wonderpedia/news/note-ngay-top-nha-hang-hai-san-da-nang-ngon-nuc-tieng-ai-cung-nen-thu/",
+    "https://myhanhseafood.vn/"
+   ]
+  },
+  {
+   "poi_id": "ChIJ1Xr5dnkXQjERSYpx3HJqSj0",
+   "category": "restaurant",
+   "name": "Quán Hải Sản Thời Cổ Đà Nẵng - Seafood Restaurant",
+   "found": false,
+   "why": "Chỉ có giá trung bình MỘT MÓN: mia.vn 'giá trung bình chỉ khoảng 69.000 VNĐ/món'; VinWonders 'Giá trung bình: 69.000 VNĐ'.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/quan-hai-san-da-nang-ngon-19525",
+    "https://vinwonders.com/vi/wonderpedia/news/note-ngay-top-nha-hang-hai-san-da-nang-ngon-nuc-tieng-ai-cung-nen-thu/"
+   ]
+  },
+  {
+   "poi_id": "ChIJkYkOmOMXQjEREz4KLKpwAOE",
+   "category": "restaurant",
+   "name": "Hải sản Năm Đảnh",
+   "found": false,
+   "why": "VinWonders 'Giá trung bình: 60.000 VNĐ – 100.000 VNĐ' (giá món, cùng kiểu với Thời Cổ); Michelin chỉ ký hiệu ₫₫.",
+   "tried": [
+    "https://vinwonders.com/vi/wonderpedia/news/note-ngay-top-nha-hang-hai-san-da-nang-ngon-nuc-tieng-ai-cung-nen-thu/",
+    "https://guide.michelin.com/lu/fr/da-nang-region/da-nang_2984390/restaurant/nam-%C4%91anh"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4221031594",
+   "category": "restaurant",
+   "name": "The H`mong Sisters",
+   "found": false,
+   "why": "Không có thực đơn giá; trang Airbnb Experiences ghi quán ĐÃ ĐÓNG CỬA VĨNH VIỄN — cần người kiểm, nếu đúng thì nên loại POI (đang vào 8 kế hoạch).",
+   "tried": [
+    "https://www.airbnb.dk/things-to-do/places/84801c00-3c4e-499b-a88e-37387ebf4c6e"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11618601226",
+   "category": "restaurant",
+   "name": "Dingo Deli",
+   "found": false,
+   "why": "Chỉ có nhận xét chung ('không rẻ', 'giá hợp lý'), không có số tiền.",
+   "tried": [
+    "https://wanderlog.com/place/details/1183549"
+   ]
+  },
+  {
+   "poi_id": "ChIJvWxNwnsXQjERKAEy50FwlnI",
+   "category": "restaurant",
+   "name": "Cơm Nhà Linh - Vietnamese restaurant",
+   "found": false,
+   "why": "Chỉ có giá trong bình luận lẻ (combo 49k sau giảm, mâm 200k nhiều món) và header Foody 25.000đ - 70.000đ không rõ đơn vị; nhà hàng nhiều món. Codex 20/11 cũng không nhận.",
+   "tried": [
+    "https://foody.vn/da-nang/com-nha-linh",
+    "https://comnhalinh.com/restaurant-menu"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4389441895",
+   "category": "restaurant",
+   "name": "Bale Well",
+   "found": false,
+   "why": "mia.vn 06/06/2025 'Bánh Xèo Quán Giếng Bá Lễ, 45/51 Trần Hưng Đạo ... Giá bán: 10.000 VNĐ/ cái' — giá MỘT CHIẾC bánh, không phải suất/người; quán bán theo set nhưng không tìm được giá set có nguồn.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/diem-danh-10-tiem-banh-xeo-hoi-an-ngon-so-dzach-ma-ban-khong-the-bo-qua-305",
+    "https://booked.ai/restaurants/bale-well"
+   ]
+  },
+  {
+   "poi_id": "ChIJfQNjLMYQQjERo1m_A0X8aLE",
+   "category": "religious",
+   "name": "Chùa Non Nước",
+   "found": false,
+   "why": "Nguồn lệch: Vinpearl (cập nhật 06/11/2026) ghi 'Giá vé tham quan tham khảo: 15.000 đồng/ vé' và đi thang máy Ngũ Hành Sơn (tức trên núi Thủy Sơn, có thể đã nằm trong vé Thủy Sơn 40k); mia.vn/Vietnam Airlines ghi chùa Linh Ứng Ngũ Hành Sơn miễn phí. Cần người kiểm POI này là chùa nào và có thuộc vé Thủy Sơn không.",
+   "tried": [
+    "https://vinpearl.com/vi/kham-pha-lich-su-lau-doi-va-kien-truc-doc-dao-o-chua-non-nuoc-da-nang"
+   ]
+  },
+  {
+   "poi_id": "osm:node/10180856817",
+   "category": "nightlife",
+   "name": "Tiger Tiger Bar",
+   "found": false,
+   "why": "Không có thực đơn/giá của chính quán (35 Nguyễn Phúc Chu); giá bia tìm được là của quán khác cùng phố (Shamrock 70–90k) — không chuyển sang.",
+   "tried": [
+    "https://wanderlog.com/place/details/800358",
+    "https://vietnamcoracle.com/hoi-an-bars-drinking-guide"
+   ]
+  },
+  {
+   "poi_id": "ChIJoyYaBewXQjEROdwfQaOB610",
+   "category": "wellness",
+   "name": "Babylon Spa Massage Da Nang",
+   "found": false,
+   "why": "Không có bảng giá chính chủ; Pelago/Klook tải giá bằng script (trang hiện 'Từ VND 0'); chỉ đọc được combo 250 phút 1.950.000đ trong kết quả tìm kiếm, không phải một liệu trình/người.",
+   "tried": [
+    "https://www.pelago.com/vi/activity/pbuxar8mj-babylon-spa-experience-da-nang-da-nang",
+    "https://vinpearl.com/en/best-massage-in-da-nang"
+   ]
+  },
+  {
+   "poi_id": "ChIJHzP474MXQjERHjpAS3HY_AY",
+   "category": "wellness",
+   "name": "Babylon Spa - Massage Da Nang",
+   "found": false,
+   "why": "Như cơ sở Hoàng Kế Viêm: không có bảng giá đọc được (cơ sở 30 Hà Bổng).",
+   "tried": [
+    "https://www.pelago.com/vi/activity/pbuxar8mj-babylon-spa-experience-da-nang-da-nang"
+   ]
+  },
+  {
+   "poi_id": "ChIJXcc22ZcZQjERT47ZqHMl13c",
+   "category": "wellness",
+   "name": "Charm Spa - Massage Da Nang",
+   "found": false,
+   "why": "Chỉ có số liệu tổng hợp bên thứ ba lệch nhau (400k 'từ', 500–850k, 600k–1,5tr) và địa chỉ các cơ sở không khớp nhau; không có bảng giá chính chủ đọc được.",
+   "tried": [
+    "https://www.klook.com/activity/82868-charm-spa-da-nang/",
+    "https://mytour.vn/en/blog/bai-viet/12-affordable-and-reliable-spas-in-da-nang-you-should-know-about.html"
+   ]
+  },
+  {
+   "poi_id": "osm:way/35952591",
+   "category": "day_market",
+   "name": "Chợ vải Hội An",
+   "found": false,
+   "why": "Chợ vải/may đo: không có giá ăn uống hay vé; Codex 20/11 cũng không tìm được. Loại day_market với giá mặc định ăn vặt không hợp — cần người xem lại loại POI.",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11890992769",
+   "category": "restaurant",
+   "name": "Hoa Sen Bánh Mì Chay",
+   "found": false,
+   "why": "Chỉ có một nhận xét HappyCow '30k for a tasty and warm vegan bánh mì' ở trang có thể của quán khác (Tâm Hoa Sen); PlantsPack chỉ có địa chỉ/giờ.",
+   "tried": [
+    "https://www.plantspack.com/place/hoa-sen-banh-mi-chay",
+    "https://www.happycow.net/reviews/tam-hoa-sen-hoi-an-309388"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11840976337",
+   "category": "restaurant",
+   "name": "V vegan cafe & restaurant",
+   "found": false,
+   "why": "hoiandaytrip chỉ ghi 'from 100,000 VND (2026)' (giá món thấp nhất) cho nhà hàng chay nhiều món; không có chi tiêu/người.",
+   "tried": [
+    "https://hoiandaytrip.com/v-vegan-restaurant-hoi-an/",
+    "https://spinach.guide/venues/v-vegan-190950/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4347237636",
+   "category": "restaurant",
+   "name": "Quan Chay Sen Trang",
+   "found": false,
+   "why": "Không tìm thấy trang nào có giá của quán chay Sen Trắng (Hai Bà Trưng, Hội An).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5273998823",
+   "category": "outdoor_landmark",
+   "name": "Cầu Trần Thị Lý",
+   "found": false,
+   "why": "Cầu đường bộ công cộng; không tìm thấy trang nào nói về vé/giá đi bộ ngắm cầu. Giữ luật 'vào tự do' (0đ, chưa có nguồn).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ08DIzjY9QjER4ldy4JXZBLA",
+   "category": "viewpoint",
+   "name": "Nhà Vọng Cảnh",
+   "found": false,
+   "why": "Không tìm thấy trang nào về điểm 'Nhà Vọng Cảnh' (đường Yết Kiêu, Sơn Trà) có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJySI1VxkXQjERUSItJZQgxBE",
+   "category": "restaurant",
+   "name": "Bé Ni 2",
+   "found": false,
+   "why": "Michelin Bib Gourmand chỉ ghi ký hiệu ₫₫; En Primeur Club (trang tổng hợp thứ cấp) ghi '$10–20'; Foody 50–200k không rõ đơn vị (Codex 20/11). Không có chi tiêu/người VND đáng tin.",
+   "tried": [
+    "https://guide.michelin.com/vn/en/da-nang-region/da-nang_2984390/restaurant/be-ni-2",
+    "https://www.enprimeurclub.com/restaurants/be-ni-2-da-nang-restaurant"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4343966693",
+   "category": "restaurant",
+   "name": "An Bang beach village",
+   "found": false,
+   "why": "Chỉ có ký hiệu $$-$$$ trên Trip.com, không có số VND.",
+   "tried": [
+    "https://au.trip.com/restaurant/vietnam/hoi%20an/detail/An%20Bang%20Beach%20Village%20Restaurant-23805914"
+   ]
+  },
+  {
+   "poi_id": "ChIJe6VC-zUXQjERyh7x6tTJHX4",
+   "category": "cafe",
+   "name": "HI4 Coffee & Workspace",
+   "found": false,
+   "why": "Chỉ có 'average coffee price: $1.35USD' trên travelness.com (bị Cloudflare chặn, không mở đọc được để kiểm); freakingnomads/laptopfriendlycafe không ghi giá; Foody không có quán.",
+   "tried": [
+    "https://freakingnomads.com/workspace/hi4-coffee-and-workspace",
+    "https://travelness.com/best-cafes-in-da-nang"
+   ]
+  },
+  {
+   "poi_id": "ChIJA-NYRUwXQjER4pvBUQyoo8U",
+   "category": "cafe",
+   "name": "The Sense Coffee",
+   "found": false,
+   "why": "Không có trang nào có giá; Foody tìm '0 kết quả' ở Đà Nẵng.",
+   "tried": [
+    "https://www.foody.vn/da-nang/dia-diem?q=The%20Sense%20Coffee"
+   ]
+  },
+  {
+   "poi_id": "ChIJzTsg_GQXQjERpsLoJSWJHmU",
+   "category": "cafe",
+   "name": "Venus Coffee",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (Ngô Thì Sĩ, Ngũ Hành Sơn) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJh_2eI0gZQjERROaoM-QEtXY",
+   "category": "cafe",
+   "name": "J Cafe",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (6 An Thượng 18) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11795856089",
+   "category": "cafe",
+   "name": "Nghé Coffee Hội An",
+   "found": false,
+   "why": "vietnamspot.ru chỉ ghi giờ mở cửa (8:00–17:30), không có giá.",
+   "tried": [
+    "https://vietnamspot.ru/en/blog/hoi-an-cafes"
+   ]
+  },
+  {
+   "poi_id": "ChIJCeQZ-jkZQjERaXJSI0ZDWXw",
+   "category": "religious",
+   "name": "Chùa Không Tên",
+   "found": false,
+   "why": "Các bài (vietnambooking 08/2026, vinwonders, mia) không nêu vé hay miễn phí vào cửa; chỉ nói nhang đèn miễn phí. Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://www.vietnambooking.com/du-lich/blog-du-lich/chua-khong-ten-da-nang.html"
+   ]
+  },
+  {
+   "poi_id": "ChIJsdeOrV8XQjER8weQ8Az-w5c",
+   "category": "religious",
+   "name": "Chùa Bà Đa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về chùa Bà Đa (đường Hoài Thanh, Ngũ Hành Sơn). Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJK5AaRBYZQjER9AALhERmND8",
+   "category": "restaurant",
+   "name": "Nhà hàng chay Hoa Sen",
+   "found": false,
+   "why": "Không tìm được giá có nguồn cho nhà hàng chay Hoa Sen (Hà Xuân 1, Thanh Khê).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11422706022",
+   "category": "restaurant",
+   "name": "El Fresco",
+   "found": false,
+   "why": "Nguồn coi El Fresco là quán đồ uống ('Places to Drink'): thực đơn hoiandaytrip 31/08/2025 cà phê 60.000–80.000 VND/ly. POI đang là restaurant (bữa ăn) → không gán giá đồ uống cho bữa; loại POI có thể sai, cần người kiểm.",
+   "tried": [
+    "https://hoiandaytrip.com/el-fresco-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "ChIJ97eYL8YQQjER8HxFGKLiQec",
+   "category": "restaurant",
+   "name": "Nhà Hàng La Luna",
+   "found": false,
+   "why": "Không tra lại hôm nay; Codex 20/11 đã tra: tên trùng nhiều nơi, không có menu giá khớp cơ sở Ngũ Hành Sơn (187 Huyền Trân Công Chúa).",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "ChIJd47MOrUQQjERkE6lCjR2874",
+   "category": "restaurant",
+   "name": "Quán Ngũ Hành",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: Foody 'Ngũ Hành Quán' 65–150k không rõ đơn vị, chưa khớp chắc POI.",
+   "tried": [
+    "https://www.foody.vn/da-nang/ngu-hanh-quan-nhau-binh-dan"
+   ]
+  },
+  {
+   "poi_id": "ChIJye8yM0M9QjERwtla0qUFoOs",
+   "category": "restaurant",
+   "name": "Hải sản tươi sống Bà Rô",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: chỉ có giá một món (rucrobeer), không có chi tiêu/người.",
+   "tried": [
+    "https://rucrobeer.com.vn/hai-san-ba-ro-da-nang/"
+   ]
+  },
+  {
+   "poi_id": "ChIJeTslKdkXQjERPFZeN_Ta-Ek",
+   "category": "restaurant",
+   "name": "Quán Hải Sản Bé Nữ",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: nguồn có dấu hiệu chép từ Google, không có giá độc lập.",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "ChIJz_cDrLoRQjERy7ZIG8Mj5-E",
+   "category": "restaurant",
+   "name": "Madame Son",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: menu PDF Marriott không ghép chắc cặp món–giá; nhà hàng nhiều món, không có chi tiêu/người.",
+   "tried": [
+    "https://www.marriott.com/content/dam/marriott-digital/mc/apec/hws/d/dadmr/en_us/document/assets/mc-dadmr-madame-son-menu-32929.pdf"
+   ]
+  },
+  {
+   "poi_id": "ChIJ8cqHGTMYQjERU0gT5dridKc",
+   "category": "restaurant",
+   "name": "Nhà hàng Hai Cử",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: bài đúng quán không có giá suất, menu Heyzine không đọc được.",
+   "tried": [
+    "https://tanitour.vn/nha-hang-hai-cu/"
+   ]
+  },
+  {
+   "poi_id": "ChIJyy6atVM9QjER3q1j566SMPg",
+   "category": "restaurant",
+   "name": "Trà Sơn Quán",
+   "found": false,
+   "why": "Không tra lại; Codex 20/11: chỉ có giá thỏ/gà nguyên con, không có phần/người.",
+   "tried": [
+    "reports/p0/links/prices_codex.json"
+   ]
+  },
+  {
+   "poi_id": "osm:node/3093689363",
+   "category": "restaurant",
+   "name": "Café 43",
+   "found": false,
+   "why": "Foody '43 Cafe, 43 Trần Cao Vân' ghi 3.000đ - 150.000đ (từ ly bia 3k tới món 150k) — khoảng thực đơn quán nhậu/ăn nhiều món, không phải chi tiêu/người.",
+   "tried": [
+    "https://www.foody.vn/quang-nam/43-cafe"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5444693768",
+   "category": "restaurant",
+   "name": "Quán Phở Tiến",
+   "found": false,
+   "why": "Vinpearl 'Pho in Hoi An' (cập nhật 10/06/2026) chỉ ghi địa chỉ 133 Trần Hưng Đạo và giờ 6:00–20:15, không có giá tô.",
+   "tried": [
+    "https://vinpearl.com/en/pho-in-hoi-an"
+   ]
+  },
+  {
+   "poi_id": "ChIJ4UuIQXgXQjERz192UgYuxMU",
+   "category": "restaurant",
+   "name": "Koko House - Nhà Hàng Thịt Nướng Hàn Quốc",
+   "found": false,
+   "why": "Không tìm thấy trang nào có giá của quán.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJEyohTbcXQjERpvkbGecn3ow",
+   "category": "restaurant",
+   "name": "Golden Meat House",
+   "found": false,
+   "why": "VinWonders/Wanderlog chỉ có địa chỉ 100 Trần Bạch Đằng và nhận xét 'giá phải chăng', không có số tiền.",
+   "tried": [
+    "https://wanderlog.com/place/details/3050787/golden-meat-house"
+   ]
+  },
+  {
+   "poi_id": "ChIJjSsrUvMZQjERM248I6ifNB8",
+   "category": "restaurant",
+   "name": "Hoàng Vy Quán",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Hoàng Thị Loan, Hòa Khánh) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJM5BHkDAZQjERYlaJyu15KFg",
+   "category": "restaurant",
+   "name": "Quán Tuấn Núi (Heo bản - Gà đen)",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (275 Hồ Tùng Mậu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJgUt949cYQjERTHdMcEeiF2o",
+   "category": "restaurant",
+   "name": "3 Cây Lộc Restaurant",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Ngô Thì Nhậm, Liên Chiểu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJgYDeDs0YQjER0bb1Zj0mVWw",
+   "category": "restaurant",
+   "name": "Nhà hàng Thanh Mai",
+   "found": false,
+   "why": "Tìm web không có trang nào về nhà hàng (Nguyễn Lương Bằng) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ2fSHNwAfQjERtjvxUmal-YY",
+   "category": "restaurant",
+   "name": "Ba Nở Quán",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Hưởng Phước, Liên Chiểu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJgySoNs8YQjERfMLXuOeJ940",
+   "category": "restaurant",
+   "name": "Quán Cờ Lê",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Nguyễn Chánh) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJnbmM8vMZQjERuPNJSfZqqfM",
+   "category": "restaurant",
+   "name": "Quán thanh vân",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Yên Khê 2) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJqWGIf00ZQjER4BkCiBYX8mU",
+   "category": "restaurant",
+   "name": "Cơm Gà Gia Vĩnh - Cơm Chiên Giòn Ngon - Âu Cơ, Liên Chiểu",
+   "found": false,
+   "why": "Foody có trang đúng cơ sở 37 Âu Cơ nhưng không ghi khoảng giá; giá 25–50k chỉ có ở cơ sở khác của chuỗi (không chuyển sang).",
+   "tried": [
+    "https://www.foody.vn/da-nang/com-ga-gia-vinh-au-co",
+    "https://www.foody.vn/thuong-hieu/com-ga-gia-vinh"
+   ]
+  },
+  {
+   "poi_id": "ChIJ-7JfLigZQjERZm4r5uDmk5o",
+   "category": "restaurant",
+   "name": "Quán lẩu 70",
+   "found": false,
+   "why": "Foody 'Lẩu 70 - Ngô Thì Nhậm, 16 Ngô Thì Nhậm' ghi 35.000đ - 150.000đ (khoảng thực đơn quán lẩu, không phải chi tiêu/người); bình luận nói nồi lẩu nhỏ 2 người 70k — một nhận xét lẻ.",
+   "tried": [
+    "https://www.foody.vn/da-nang/lau-70-ngo-thi-nham"
+   ]
+  },
+  {
+   "poi_id": "ChIJBVHLh_gXQjER0MFnoSFsh4A",
+   "category": "restaurant",
+   "name": "Quán Hải Sản ÔNG MINH",
+   "found": false,
+   "why": "Kết quả 'Ông Minh' có giá là quán ở Quy Nhơn; không có trang của quán 92 Võ Nguyên Giáp Đà Nẵng có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJO_gU03QZQjERdvtWlsIeyOM",
+   "category": "restaurant",
+   "name": "Hải Sản Kim Seafood",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Lý Nam Đế, An Hải) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJQ8VFVdgZQjERM6OjWmgGH5A",
+   "category": "restaurant",
+   "name": "Hải sản Châu Sơn 1 (Châu Nga)",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (14 Nại Tú 2) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4580499791",
+   "category": "restaurant",
+   "name": "Cabanon Café",
+   "found": false,
+   "why": "Bistro Pháp nhiều món (13 Công Nữ Ngọc Hoa): chỉ có giá món trên trang hướng dẫn, không có chi tiêu/người.",
+   "tried": [
+    "https://hoiandaytrip.com/?p=178220"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11890609669",
+   "category": "restaurant",
+   "name": "Cơm chay Thiện Tâm - Vegan Food",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (84 Huyền Trân Công Chúa, Hội An) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4883744921",
+   "category": "restaurant",
+   "name": "dau bep banh mi",
+   "found": false,
+   "why": "Tìm web không có trang nào về xe bánh mì (10/14 Bạch Đằng, Hội An) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11423808688",
+   "category": "restaurant",
+   "name": "Le Table",
+   "found": false,
+   "why": "hoiandaytrip chỉ nêu tên L'Etable trong danh sách 'Other Restaurants', không có giá; không có thực đơn đọc được.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/11423819121",
+   "category": "restaurant",
+   "name": "Brasserie",
+   "found": false,
+   "why": "hoiandaytrip chỉ có vị trí (sau nhà thờ Saint Denis) và giờ, không có giá.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/12959087697",
+   "category": "restaurant",
+   "name": "Rosa",
+   "found": false,
+   "why": "'Rosa' ở Bà Nà là tên khu ẩm thực có nhiều quán (Rosa Fried Chicken, Rosa Sushi Bar 'from 380,000 VND', Rosa Hotpot buffet, Rosa Sky Coffee) — không xác định được POI là quán nào.",
+   "tried": [
+    "https://hoiandaytrip.com/best-restaurants-in-ba-na-hills/",
+    "https://hoiandaytrip.com/ba-na-hills-coffee/"
+   ]
+  },
+  {
+   "poi_id": "osm:node/14337631970",
+   "category": "restaurant",
+   "name": "Nhà Hàng Chay Ngọc Chi",
+   "found": false,
+   "why": "Không có trang nào về nhà hàng chay Ngọc Chi trong Bà Nà có giá (Vinpearl chỉ có quán Ngọc Chi 202 Hoàng Diệu — cơ sở khác).",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/4844888422",
+   "category": "cafe",
+   "name": "Phin Coffee Restaurant",
+   "found": false,
+   "why": "Chỉ có giá trong nhận xét cũ (HappyCow: dừa matcha/cà phê 35k/33k), không có thực đơn hiện tại.",
+   "tried": [
+    "https://www.happycow.net/reviews/phin-coffee-hoi-an-173922"
+   ]
+  },
+  {
+   "poi_id": "osm:node/5110691326",
+   "category": "nightlife",
+   "name": "Mr. Bean Bar",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (61 Nguyễn Phúc Chu, Hội An) có giá đồ uống.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJhRHxyd4XQjERPVL2Kw_eqdw",
+   "category": "cafe",
+   "name": "The Cups Coffee Roastery",
+   "found": false,
+   "why": "Foody 'The Cups Coffee - Nguyễn Văn Thoại' ghi 20.000đ - 40.000đ nhưng không chắc cùng cơ sở (Roastery 192 NVT, mia ghi 233 NVT); không nhận.",
+   "tried": [
+    "https://www.foody.vn/da-nang/the-cups-coffee-nguyen-van-thoai",
+    "https://mia.vn/cam-nang-du-lich/the-cups-coffee-da-nang-tu-hao-la-chuoi-ca-phe-dau-tien-cua-nguoi-da-thanh-1803"
+   ]
+  },
+  {
+   "poi_id": "ChIJgxcYKLsZQjERlmvsGGeXidw",
+   "category": "cafe",
+   "name": "The 59 cafe",
+   "found": false,
+   "why": "Giá 27.000–49.000 VND tìm được thuộc The 59 ở 59 Hải Phòng; POI ở 78 Lê Duẩn — khác cơ sở.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/the-59-cafe-quan-cafe-nup-hem-voi-ve-dep-hoai-co-dac-biet-1996"
+   ]
+  },
+  {
+   "poi_id": "ChIJedpeSI4ZQjERYqZQdHBbz5E",
+   "category": "cafe",
+   "name": "Ikigai Garden Cafe",
+   "found": false,
+   "why": "Chỉ có một bài đăng người dùng trên Trip.com Moments ('40,000–90,000 VND per glass', ghi 60 Nguyễn Chí Thanh) — nguồn người dùng, không nhận.",
+   "tried": [
+    "https://nz.trip.com/moments/detail/da-nang-669-136915550"
+   ]
+  },
+  {
+   "poi_id": "ChIJEcPC-tEXQjERrwFtFCPExZQ",
+   "category": "cafe",
+   "name": "Acacia by CaySi cafe",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJf8tFWf0XQjERNR0V2Xki5zQ",
+   "category": "cafe",
+   "name": "Voọc Souvenir Coffee",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ2_OVwmIZQjERrNNkMMg-gk4",
+   "category": "cafe",
+   "name": "Moss Coffee Shop 2",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJkatEeMwZQjERnAUKgmrbNgQ",
+   "category": "outdoor_landmark",
+   "name": "Làng Bích họa Đà Nẵng",
+   "found": false,
+   "why": "mia.vn (09/11/2025) không nêu vé; các nguồn 'miễn phí' khác nói về làng bích họa Tam Thanh (Quảng Phú), không phải POI ở Nguyễn Văn Linh. Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://mia.vn/cam-nang-du-lich/lang-bich-hoa-da-nang-19588"
+   ]
+  },
+  {
+   "poi_id": "ChIJWSoH1BQRQjERRUsvBDeBGvo",
+   "category": "cafe",
+   "name": "43 Coffee & Milk Tea",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Nguyễn Văn Nguyễn, Ngũ Hành Sơn) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJrfU0w0MRQjERC4PjgT9h3LQ",
+   "category": "cafe",
+   "name": "ChuAn cafe",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Sơn Thủy Đông 4) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJbyos3sAXQjER6Eajh3ljHYE",
+   "category": "cafe",
+   "name": "The South Coffee",
+   "found": false,
+   "why": "Tìm web không có trang nào về quán (Đoàn Khuê) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJYZuMDnEZQjERrftd297ekRM",
+   "category": "nightlife",
+   "name": "Tê Bar",
+   "found": false,
+   "why": "toplist.vn chỉ có giờ 19:00–01:30 và nhận xét, không có giá cocktail.",
+   "tried": [
+    "https://toplist.vn/top-list/quan-cocktail-bar-dang-cap-nhat-tai-da-nang-57706.htm"
+   ]
+  },
+  {
+   "poi_id": "ChIJl7zcVgARQjERTJASEbCGeuc",
+   "category": "nightlife",
+   "name": "Writer's Bar",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quán (7 Trường Sa) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJuzvMeE4ZQjERE-pQycR-Mjo",
+   "category": "outdoor_landmark",
+   "name": "Cầu vượt đi bộ Mikazuki",
+   "found": false,
+   "why": "Không có trang riêng về cầu đi bộ; vé 350–400k của Mikazuki 365 Water Park là điểm khác (đúng như ghi chú cũ). Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://danangfantasticity.com/en/discovery/plan-your-da-nang-journey-2026-updated-admission-prices-for-attractions-and-tourist-sites"
+   ]
+  },
+  {
+   "poi_id": "ChIJqdKPDDIZQjERC2tfiDtFLXE",
+   "category": "outdoor_landmark",
+   "name": "Quảng trường Liên Chiểu",
+   "found": false,
+   "why": "Không tìm thấy trang nào về quảng trường có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "osm:node/7276380289",
+   "category": "outdoor_landmark",
+   "name": "Cầu Sông Hàn",
+   "found": false,
+   "why": "Các bài chỉ nói giờ quay cầu, không nêu vé/giá đi bộ (cầu đường bộ công cộng). Giữ luật 'vào tự do'.",
+   "tried": [
+    "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/trai-nghiem-cau-quay-song-han-ve-dep-doc-dao-khong-the-bo-qua-13367"
+   ]
+  },
+  {
+   "poi_id": "ChIJEzuDsG8XQjERz7a51RnJnvU",
+   "category": "outdoor_landmark",
+   "name": "Công viên Sao Biển",
+   "found": false,
+   "why": "Không tìm thấy trang nào về công viên có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJD4Ge5WQZQjERW-0GhLbS310",
+   "category": "outdoor_landmark",
+   "name": "Công Viên Trung Tâm Hành Chính Liên Chiểu",
+   "found": false,
+   "why": "Không tìm thấy trang nào về công viên có nêu vé. Giữ luật 'vào tự do'.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJD_KLo4cZQjERpAAtPY2TsIM",
+   "category": "wellness",
+   "name": "Spa & Massage Đà Nẵng",
+   "found": false,
+   "why": "POI ở 5 Trường Sa (khu Hyatt Regency); trang chính thức VIE Spa không ghi giá, không có bảng giá đọc được.",
+   "tried": [
+    "https://www.hyatt.com/hyatt-regency/en-US/danhr-hyatt-regency-danang-resort-and-spa/vie-spa"
+   ]
+  },
+  {
+   "poi_id": "ChIJ8e-HnOoZQjER1tLf4hD65xI",
+   "category": "wellness",
+   "name": "Elsa Spa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Nguyễn Thái Học, Hải Châu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJ95sVZAAZQjERaWAzQF3vSiQ",
+   "category": "wellness",
+   "name": "Trạm spa- nặn mụn",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (106 Dũng Sĩ Thanh Khê) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJacuaCgAfQjERmRXLEMbkPJM",
+   "category": "wellness",
+   "name": "An Mộc Spa",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Liên Chiểu) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  },
+  {
+   "poi_id": "ChIJrXev5SsZQjERFgTaHcdCtjY",
+   "category": "wellness",
+   "name": "Massage Therapy Spa The Yen",
+   "found": false,
+   "why": "Không tìm thấy trang nào về spa (Bàu Mạc 6) có giá.",
+   "tried": [
+    "websearch 25/11/2026"
+   ]
+  }
+ ]
+}

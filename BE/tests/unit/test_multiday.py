@@ -5,6 +5,8 @@ Run from repo root: python -m pytest BE/tests/unit/test_multiday.py -q
 
 from __future__ import annotations
 
+from unittest import mock
+
 import os
 import sys
 import unittest
@@ -191,6 +193,7 @@ class TestGateOverDays(unittest.TestCase):
         report = self.checks([self.act("b1", 1), self.act("b2", 2)])
         self.assertTrue(report["passed"], report["failed"])
 
+    @mock.patch.dict(os.environ, {"DAVEL_TASTE_RULES": "hard"})  # legacy/strict taste rules
     def test_the_cap_applies_to_each_day(self):
         report = self.checks([self.act("b1", 1), self.act("m1", 1, "10:00", "11:00"),
                               self.act("b2", 1, "12:00", "13:00"), self.act("m2", 2)])

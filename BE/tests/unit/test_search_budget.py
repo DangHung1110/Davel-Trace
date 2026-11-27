@@ -84,6 +84,7 @@ class TestSearchSettings(unittest.TestCase):
 
 
 class TestLadderStopsOnBudget(unittest.TestCase):
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_ladder_stops_and_names_the_budget(self):
         calls = []
 
@@ -127,6 +128,7 @@ class TestLadderStopsOnBudget(unittest.TestCase):
         # The day no longer has to hold the wish; it is reported either way.
         self.assertIn(plan["activity_match"][0]["status"], ("met", "unmet"))
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_a_proven_infeasible_rung_keeps_climbing(self):
         calls = []
         real = optimizer_mod.optimize

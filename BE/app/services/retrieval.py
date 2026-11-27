@@ -92,6 +92,12 @@ ACTIVITY_TYPE_MAP = {
     "hoàng hôn": ["viewpoint", "beach"], "ngắm bình minh": ["beach", "viewpoint"],
     "bình minh": ["beach", "viewpoint"], "đài quan sát": ["viewpoint"],
     "di tích": ["landmark", "temple"], "tâm linh": ["temple"],
+    # Hội An old town: its stops are landmarks, assembly halls, old houses,
+    # museums and markets, narrowed by the words below (ACTIVITY_WORDS).
+    "phố cổ": ["landmark", "temple", "museum", "market", "attraction"],
+    "phố cổ hội an": ["landmark", "temple", "museum", "market", "attraction"],
+    "hội an": ["landmark", "temple", "museum", "market", "attraction"],
+    "khu phố cổ": ["landmark", "temple", "museum", "market", "attraction"],
     "vui chơi": ["attraction"], "công viên giải trí": ["attraction"],
     "công viên nước": ["attraction"], "thủy cung": ["attraction"],
     "cáp treo": ["attraction"], "du thuyền": ["attraction"],
@@ -128,7 +134,12 @@ ACTIVITY_WORDS = {
     "du thuyền": ("du thuyền", "cruise"), "đi thuyền": ("thuyền",),
     "thuyền thúng": ("thúng",), "thủy cung": ("thủy cung", "aquarium"),
     "nấu ăn": ("nấu ăn", "cooking"), "lặn": ("lặn", "san hô", "diving"),
+    "hội an": ("hội an", "hoi an"),
 }
+# A wish that names a place cluster, not a category: "phố cổ" is the Hội An old
+# town (snapshot `cluster_id`), whatever the stop's category.
+CLUSTER_WISH = {"phố cổ": "hoi_an_old_town", "phố cổ hội an": "hoi_an_old_town",
+                "khu phố cổ": "hoi_an_old_town"}
 # Every way to name a dish of `BE.common.DISHES` is a wish too ("ăn bún chả cá",
 # "bánh tráng thịt heo"): its category, narrowed to the shops whose name or
 # `tags.dishes` (`cuisine`, poi_view) says it. Hand-written entries above win.
@@ -311,8 +322,19 @@ def _has_word(word: str, accented: str, folded: str) -> bool:
     return f" {word} " in accented
 
 
+def _wish_cluster(text: str) -> str | None:
+    rest = " ".join(unicodedata.normalize("NFC", text).lower().split())
+    for phrase in sorted(CLUSTER_WISH, key=len, reverse=True):
+        if _consume(rest, phrase)[0]:
+            return CLUSTER_WISH[phrase]
+    return None
+
+
 def poi_fits_wish(poi: dict, text: str) -> bool:
     """Is this POI really what the activity asks for, not just the same category?"""
+    cluster = _wish_cluster(text)
+    if cluster:
+        return poi.get("cluster_id") == cluster and poi_category(poi) not in NON_ACTIVITY_CATS
     cats, words = _wish_rule(text)
     if poi_category(poi) not in cats - NON_ACTIVITY_CATS:
         return False

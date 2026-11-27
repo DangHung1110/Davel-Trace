@@ -96,9 +96,22 @@ class _MapCanvasState extends State<MapCanvas> {
       _carPosition = route.isEmpty ? null : route.first;
       _animationIndex = 0;
     });
-    if (route.isNotEmpty &&
-        (!widget.followUser || widget.userLocation == null)) {
-      _controller.move(route.first, 13.2);
+    if (!widget.followUser || widget.userLocation == null) {
+      final points = [
+        ...route,
+        for (final stop in widget.stops) LatLng(stop.latitude, stop.longitude),
+      ];
+      if (points.length > 1) {
+        _controller.fitCamera(
+          CameraFit.coordinates(
+            coordinates: points,
+            padding: const EdgeInsets.fromLTRB(28, 100, 28, 145),
+            maxZoom: 15.8,
+          ),
+        );
+      } else if (points.isNotEmpty) {
+        _controller.move(points.first, 13.2);
+      }
     }
     if (autoPlay) _playRoute();
   }
@@ -186,23 +199,29 @@ class _MapCanvasState extends State<MapCanvas> {
                 polylines: [
                   Polyline(
                     points: displayRoute,
-                    color: widget.routePreview?.quality == 'interpolated'
-                        ? AppColors.warning
-                        : AppColors.primary,
+                    color: widget.routePreview?.isRealRoute == true
+                        ? AppColors.primary
+                        : AppColors.warning,
+                    pattern: widget.routePreview?.isRealRoute == true
+                        ? const StrokePattern.solid()
+                        : StrokePattern.dashed(segments: const [10, 6]),
                     strokeWidth: 5,
                   ),
                 ],
               ),
             MarkerLayer(
               markers: [
-                ...widget.stops.map(
-                  (stop) => Marker(
+                for (final (index, stop) in widget.stops.indexed)
+                  Marker(
                     point: LatLng(stop.latitude, stop.longitude),
                     width: 42,
                     height: 42,
-                    child: _PlaceMarker(icon: stop.icon, color: stop.color),
+                    child: _PlaceMarker(
+                      number: index + 1,
+                      title: stop.title,
+                      color: stop.color,
+                    ),
                   ),
-                ),
                 if (_userPosition != null)
                   Marker(
                     point: _userPosition!,
@@ -227,51 +246,19 @@ class _MapCanvasState extends State<MapCanvas> {
             ),
           ],
         ),
-        Positioned(
-          left: 10,
-          top: 10,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            decoration: BoxDecoration(
-              color: AppColors.surface.withValues(alpha: .92),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 290),
-              child: Text(
-                {
-                  switch (widget.routePreview?.quality) {
-                    'road_route' => 'OSRM · tuyến đường bộ',
-                    'matrix_estimate' =>
-                      'Ước tính ma trận · không có hình học tuyến',
-                    'interpolated' =>
-                      'Đường nối nội suy · không phải tuyến thật',
-                    _ =>
-                      widget.routePreview?.warning ?? 'Chưa có tuyến khả dụng',
-                  },
-                  if (widget.routePreview?.warning case final warning?
-                      when warning.isNotEmpty)
-                    warning,
-                }.join(' · '),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
 }
 
 class _PlaceMarker extends StatelessWidget {
-  const _PlaceMarker({required this.icon, required this.color});
-  final IconData icon;
+  const _PlaceMarker({
+    required this.number,
+    required this.title,
+    required this.color,
+  });
+  final int number;
+  final String title;
   final Color color;
   @override
   Widget build(BuildContext context) => Container(
@@ -287,7 +274,18 @@ class _PlaceMarker extends StatelessWidget {
         ),
       ],
     ),
-    child: Icon(icon, color: Colors.white, size: 19),
+    child: Tooltip(
+      message: '$number. $title',
+      child: Center(
+        child: Text(
+          '$number',
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ),
   );
 }
 

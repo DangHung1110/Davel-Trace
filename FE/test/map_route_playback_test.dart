@@ -57,7 +57,7 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(find.text('OSRM 1.2 km'), findsOneWidget);
+    expect(find.text('Tuyến đường · 1.2 km'), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('play-car-button')));
     await tester.pump(const Duration(milliseconds: 80));

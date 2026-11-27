@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../app_state.dart';
 import '../../../shared/widgets/app_header.dart';
-import '../../../shared/widgets/field_cover.dart';
 import '../../../shared/widgets/surface_card.dart';
 import '../../../theme/app_theme.dart';
 import '../../management/domain/models.dart';
@@ -14,11 +13,13 @@ class TripsScreen extends StatefulWidget {
     super.key,
     required this.state,
     required this.onOpenMap,
+    this.onOpenManualMap,
     this.detailRequest = 0,
     this.collectionRequest = 0,
   });
   final AppState state;
   final VoidCallback onOpenMap;
+  final VoidCallback? onOpenManualMap;
   final int detailRequest;
   final int collectionRequest;
 
@@ -101,13 +102,14 @@ class _TripsScreenState extends State<TripsScreen> {
         child: ItineraryScreen(
           state: state,
           onOpenMap: widget.onOpenMap,
+          onOpenManualMap: widget.onOpenManualMap,
           onBack: () => setState(() => _detail = false),
         ),
       );
     }
     return Column(
       children: [
-        const AppHeader(section: 'Davel Trace'),
+        const AppHeader(section: 'Chuyến đi'),
         Expanded(
           child: RefreshIndicator(
             onRefresh: state.refresh,
@@ -120,23 +122,17 @@ class _TripsScreenState extends State<TripsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const FieldCover(
-                          title: 'Chuyến đi của bạn',
-                          description:
-                              'Lịch trình, bản đồ và chi tiêu ở cùng một nơi.',
+                        Text(
+                          'Chuyến đi của bạn',
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         if (state.isDemoManagement) ...[
                           const SizedBox(height: 10),
                           const Text(
-                            'Bản demo · Thay đổi chưa được lưu vào tài khoản.',
+                            'Bạn đang xem thử. Thay đổi chỉ lưu trên thiết bị này.',
                             key: Key('trip-demo-notice'),
                           ),
                         ],
-                        const SizedBox(height: 20),
-                        Text(
-                          'Chuyến đã lưu',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
                       ],
                     ),
                   ),

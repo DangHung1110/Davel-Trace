@@ -293,10 +293,29 @@ def effective_fee(poi: dict) -> int | None:
     return BAND_FEE_BY_CAT.get(cat, {}).get(band) or BAND_FEE_VND.get(band)
 
 
+# Who checked a v2.1 price (DATA_SPEC_v2_1 `verified_by`): a person (human), the
+# user, a quoted web page (agent_web) or matched open data. `inferred` is a rule,
+# not a source: a per-type default (`category_default:*`), the free-public rule
+# or a parent's ticket (`cluster_rule`).
+SOURCED_PRICE_BY = frozenset({"human", "user", "agent_web", "open_data"})
+
+
 def fee_is_estimate(poi: dict) -> bool:
-    """True when `effective_fee` comes from the price band, not from a real price."""
-    return bool(effective_fee(poi)) and not isinstance(poi.get("ticket_vnd"), int) \
-        and not int(poi.get("fee") or 0)
+    """True when the money this stop adds to the cost is a guess, not a known price.
+
+    v1: the price band stands in for a ticket (no `ticket_vnd`, no `fee`).
+    v2.1: the stop costs its tier's midpoint either way; it is a guess when no source
+    checked the tier (`provenance.price.verified_by` is `inferred` or missing), i.e.
+    a per-type default. A 0 VND stop adds nothing to guess: free by the free-public
+    rule (`rule_free_public`) or paid with its parent's ticket (`cluster_rule`).
+    """
+    if not effective_fee(poi):
+        return False
+    price = poi.get("price")
+    if isinstance(price, dict) and "tier" in price:
+        checked = ((poi.get("provenance") or {}).get("price") or {}).get("verified_by")
+        return checked not in SOURCED_PRICE_BY
+    return not isinstance(poi.get("ticket_vnd"), int) and not int(poi.get("fee") or 0)
 
 
 def party_size(trip: dict) -> int:
@@ -340,6 +359,21 @@ def fee_upper(poi: dict | None) -> int | None:
 def load_json(path: str) -> Any:
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def merged_into(poi: dict | None) -> str | None:
+    """The poi_id an excluded record was merged into, else None.
+
+    A user decision that folds a duplicate record into another one writes
+    `status_reason = "gộp vào <name> (<poi_id>): <why>"` (decisions_*.json). A trip
+    that still names the old id (a saved trip, an old request) means the kept one.
+    """
+    import re
+    poi = poi or {}
+    if poi.get("status") != "excluded":
+        return None
+    hit = re.search(r"gộp vào[^(]*\(([^)\s]+)\)", str(poi.get("status_reason") or ""))
+    return hit.group(1) if hit else None
 
 
 def load_pois(snapshot_dir: str, by_id: bool = False):

@@ -43,6 +43,7 @@ void main() {
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
 
+    await tapKey(tester, 'profile-more-options');
     final fitness = find.byKey(const Key('profile-fitness-slider'));
     final scrollable = find.byType(Scrollable).first;
     await tester.scrollUntilVisible(

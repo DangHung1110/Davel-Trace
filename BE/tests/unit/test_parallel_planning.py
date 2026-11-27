@@ -167,6 +167,20 @@ class TestRouterParallelRefill(unittest.TestCase):
             self.assertEqual(call["timeout_s"], itinerary_mod.PLAN_WALL_LIMIT_S)
         self.assertEqual(len(r.json()["solution_pool"]["replaced"]), 2)
 
+    def test_interactive_search_uses_shorter_budgets_for_plans_and_refills(self):
+        with mock.patch.object(itinerary_mod, "build_plan", self._builder):
+            result = itinerary_mod.plan_itinerary(
+                itinerary_mod.ItineraryIn(trip=self.TRIP), interactive=True,
+            )
+        self.assertEqual(len(result["plans"]), 3)
+        self.assertEqual({call["timeout_s"] for call in self.calls},
+                         {itinerary_mod.APP_PLAN_WALL_LIMIT_S})
+        for call in self.calls:
+            expected = (itinerary_mod.APP_DISTINCT_DETERMINISTIC_TIME
+                        if call.get("distinct_from") else itinerary_mod.APP_PLAN_DETERMINISTIC_TIME)
+            self.assertEqual(call["deterministic_time"], expected)
+            self.assertFalse(call["diagnose"])
+
 
 class TestBatchedEdgeScores(unittest.TestCase):
     def test_batched_equals_per_pair(self):
@@ -210,6 +224,7 @@ class TestCandidateCap(unittest.TestCase):
         self.assertEqual({p["poi_id"] for p in kept},
                          {"cafe9", "restaurant9", "beach9"})
 
+    @mock.patch.dict(os.environ, {"DAVEL_OBJECTIVE": "legacy"})  # legacy hard-rule behaviour
     def test_build_plan_solves_on_the_capped_pool(self):
         seen, real_cap, real_opt = {}, profiles_mod._cap_candidates, profiles_mod.optimize
 

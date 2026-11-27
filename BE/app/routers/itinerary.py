@@ -50,7 +50,7 @@ from BE.app.services import profile_filter
 from BE.app.services import gate as gate_svc
 from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
-from BE.common import effective_fee
+from BE.common import effective_fee, merged_into
 from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
@@ -102,6 +102,11 @@ PLAN_WORKERS = 1
 PLAN_DETERMINISTIC_TIME = 5.0
 # Only a last guard for an overloaded machine; it should never be what stops a solve.
 PLAN_WALL_LIMIT_S = 60.0
+# The app needs actionable options while the user is waiting. It uses the same
+# objectives and hard gate with a smaller search allowance per solve.
+APP_PLAN_DETERMINISTIC_TIME = 0.85
+APP_DISTINCT_DETERMINISTIC_TIME = 0.45
+APP_PLAN_WALL_LIMIT_S = 7.0
 
 
 def _origin_id(origin: dict | None, by_id: dict, cells) -> tuple[str | None, str | None]:
@@ -133,6 +138,10 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     pairwise-different plans by (quality - POI-set Jaccard); the enumeration
     stats travel in each plan's `solution_pool`.
     """
+    return plan_itinerary(body, diverse)
+
+
+def plan_itinerary(body: ItineraryIn, diverse: bool = False, *, interactive: bool = False):
     settings = get_settings()
     try:
         pois = retrieval_svc.load_pois_json(
@@ -172,9 +181,16 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
     name_to_id = {(p.get("name") or "").strip().lower(): pid
                   for pid, p in by_id.items()}
     kept_must, dropped_must = [], []
+    retired_warnings_merged: list[str] = []
     for m in trip.get("must_visit", []):
         key = (m or "").strip()
         pid = key if key in by_id else name_to_id.get(key.lower())
+        target = merged_into(by_id.get(pid)) if pid else None
+        if target and target in by_id:
+            # a record folded into another one (decisions "gộp vào"): the kept one
+            retired_warnings_merged.append(
+                f"'{by_id[pid].get('name') or m}' da gop vao '{by_id[target].get('name')}'")
+            pid = target
         if pid is None:
             dropped_must.append((m, "khong co trong du lieu"))
         elif pid in dropped_ids:
@@ -185,7 +201,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             kept_must.append(pid)
     trip["must_visit"] = kept_must
     retired_warnings = [
-        f"khong dua vao lich '{m}': {why}" for m, why in dropped_must]
+        f"khong dua vao lich '{m}': {why}" for m, why in dropped_must] + retired_warnings_merged
 
     cells = matrix_svc.load_cells(settings.snapshot_dir)
     # A day that starts at the traveller's base (or where a replan resumes) charges
@@ -195,6 +211,16 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         trip["origin_id"] = origin_id
     if origin_warning:
         retired_warnings.append(origin_warning)
+    if trip.get("resume"):
+        # A replan in the middle of the first day: that day starts later, from where the
+        # traveller is (multiday applies it to the first day only). A place the matrix
+        # cannot route leaves that day an open tour, not the base they are not at.
+        resume = trip["resume"]
+        resume_id, resume_warning = (_origin_id(resume["origin"], by_id, cells)
+                                     if resume.get("origin") else (origin_id, None))
+        trip["resume"] = {"start_time": resume["start_time"], "origin_id": resume_id}
+        if resume_warning:
+            retired_warnings.append(resume_warning)
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
     if trip.get("areas") and not any(p.get("zone") for p in pois):
         # danang-v1 has no zones: say the choice did nothing instead of ignoring it.
@@ -262,6 +288,12 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         plan["itinerary_id"] = str(uuid4())
         plan["trip_id"] = body.trip.trip_id
         plan["profile"] = profile_name
+        activities = []
+        for activity in plan.get("activities") or []:
+            place = by_id.get(activity.get("poi_id")) or {}
+            name = activity.get("name") or activity.get("title") or place.get("name")
+            activities.append({**activity, "name": name} if name else activity)
+        plan["activities"] = activities
         plan["profile_filter"] = {"dropped": len(verified_drops),
                                   "dropped_all": len(profile_drops),
                                   "rules": drop_counts}
@@ -272,19 +304,24 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
             plan.pop("warnings", None)
         return plan
 
-    day_contexts = {(trip.get("date") or "", 0): ctx}
+    day_contexts = {(trip.get("date") or "", 0, trip.get("start_time")): ctx}
 
     def day_ctx(day_trip: dict) -> dict:
         """The context of one day of the trip: day 2 has the forecast of ITS date, or
-        of the day after the first when the trip has no date (the fetch is memoized,
-        so this costs a dictionary and no network)."""
-        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0))
+        of the day after the first when the trip has no date, and a first day that
+        resumes later (`resume`) the hours it has left (the fetch is memoized, so this
+        costs a dictionary and no network)."""
+        key = (day_trip.get("date") or "", int(day_trip.get("day_offset") or 0),
+               day_trip.get("start_time"))
         if key not in day_contexts:
             day_contexts[key] = trip_ctx.build(day_trip, profile if profile_provided else {})
         return day_contexts[key]
 
+    search_time = APP_PLAN_DETERMINISTIC_TIME if interactive else PLAN_DETERMINISTIC_TIME
+    wall_limit_s = APP_PLAN_WALL_LIMIT_S if interactive else PLAN_WALL_LIMIT_S
+
     def build_one(profile_name: str, pool_size: int = 1,
-                  deterministic_time: float = PLAN_DETERMINISTIC_TIME, **extra) -> dict:
+                  deterministic_time: float = search_time, **extra) -> dict:
         def solve(day_trip: dict, used: frozenset, diagnose: bool) -> dict:
             # A solution pool is one day's alternatives: a longer trip plans argmax days.
             several = day_trip is not trip
@@ -293,9 +330,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
                 ranked=[r for r in ranked if r.get("poi_id") not in used],
                 pois_by_id=allowed_by_id, cells=cells, template=tpl_name, ctx=day_ctx(day_trip),
                 pool_size=1 if several else pool_size,
-                timeout_s=PLAN_WALL_LIMIT_S, workers=PLAN_WORKERS,
+                timeout_s=wall_limit_s, workers=PLAN_WORKERS,
                 deterministic_time=deterministic_time,
-                **({"diagnose": diagnose} if several else {}), **extra))
+                diagnose=diagnose and not interactive, **extra))
 
         plan = dict(multiday.build_trip(
             solve, trip,
@@ -321,7 +358,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         if profile_name not in body.profiles or plan.get("_rung") is None:
             return []
         fresh = build_one(
-            profile_name, deterministic_time=DISTINCT_DETERMINISTIC_TIME,
+            profile_name, deterministic_time=(
+                APP_DISTINCT_DETERMINISTIC_TIME if interactive else DISTINCT_DETERMINISTIC_TIME),
             distinct_from=[frozenset(pool_svc.poi_set(o)) for o in others],
             max_rung=plan["_rung"])
         if not fresh.get("activities") or not fresh.get("passed"):

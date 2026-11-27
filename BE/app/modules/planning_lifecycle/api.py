@@ -32,9 +32,10 @@ class ConstraintOverrides(BaseModel):
     accessibility: list[str] = Field(default_factory=list, max_length=20)
     # Where each day starts: a lodging of the catalog (its `poi_id`).
     base_poi_id: str | None = Field(default=None, min_length=1, max_length=128)
-    # Zones the plan stays in (TripRequest.areas); None or [] = anywhere. None, not
-    # [], by default: a request without areas keeps the overrides (and so the
-    # idempotency fingerprint) it had before the field existed.
+    # Zones the plan stays in (TripRequest.areas) for this request only; None or []
+    # = the zones saved on the trip (`preference_overrides.areas`), else anywhere.
+    # None, not [], by default: a request without areas keeps the overrides (and
+    # so the idempotency fingerprint) it had before the field existed.
     areas: list[Area] | None = Field(default=None, max_length=len(AREA_CODES))
 
     @model_validator(mode="after")
