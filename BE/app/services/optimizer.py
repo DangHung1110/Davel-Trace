@@ -14,7 +14,10 @@ A falsy `StubTrip.origin_id` selects the OPEN TOUR ("drop depot legs"): the orig
 is not modelled, so the first activity may start at trip.start_min. A truthy one is
 the place the day starts from (a lodging with a matrix row, or the stop a replan
 resumes from): `travel[(origin_id, poi)]` is the first leg and an edge score keyed on
-it prices arc 0 -> poi. Haversine is banned for feasibility (R4/B3): every leg,
+it prices arc 0 -> poi. `travel[(poi, origin_id)]`, when present (a day that starts at
+the traveller's lodging, `profiles.build_plan`), is the ride back: objective v1 T9
+prices it on arc poi -> 0, and no time is kept for it (the last visit only has to end
+by the trip's end). Haversine is banned for feasibility (R4/B3): every leg,
 the first one included, comes from the matrix.
 
 Objective terms besides the score sum and the q_ij edge bonuses (T030):
@@ -846,7 +849,9 @@ def _objective_v1_terms(m, spec, pois: list[StubPOI], ids: list[str], travel: di
         m.Add(sum(v for v, _r in parts) >= sum(visit[i] for i in nodes) - 1)
         for v, r in parts:
             expr -= k(beta * r) * v
-    # T4 + T9 on the arcs: a constant cost per used leg.
+    # T4 + T9 on the arcs: a constant cost per used leg. With an origin the first leg
+    # (0 -> j) and the ride back (i -> 0) cost what `travel` says; a ride back that is
+    # not in it (a day that does not end at its start) costs nothing.
     gamma = spec.coef("gamma")
     origin = trip.origin_id or None
     for i in range(n + 1):

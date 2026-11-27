@@ -442,7 +442,9 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     meals = sum(1 for p in order if stubs[p].restaurant)
     counted = paced_stops(len(order) - meals, meals, spec, start_min, end_min)
     f["pace"] = pace_cost(spec, counted, scaled=False, k0=sight_k0(spec, start_min, end_min))
-    # T9
+    # T9. With an origin, the leg from it and the ride back to it as `travel` has them
+    # (absent = 0, as in the model): the ride back is only there for a day that starts
+    # at the traveller's lodging (profiles.build_plan).
     legs = list(zip(order, order[1:]))
     if origin_id and order:
         legs = [(origin_id, order[0])] + legs + [(order[-1], origin_id)]

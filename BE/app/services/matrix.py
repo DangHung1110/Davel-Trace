@@ -189,6 +189,22 @@ def legs_from(cells: Mapping, origin: str, ids: list[str]) -> dict[tuple[str, st
     return legs
 
 
+def legs_to(cells: Mapping, ids: list[str], base: str) -> dict[tuple[str, str], int]:
+    """{(a, base): minutes} for every `a` of `ids` that reaches the base: its column.
+
+    The ride back at the end of a day that ends at the traveller's lodging. A missing
+    cell stays absent, never 0 (B3); nothing in the matrix leads to a GPS start.
+    """
+    legs: dict[tuple[str, str], int] = {}
+    for a in ids:
+        if a == base:
+            continue
+        cell = cells.get(f"{a}{ROW_SEP}{base}")
+        if cell is not None:
+            legs[(a, base)] = int(cell["minutes"])
+    return legs
+
+
 def load_cells(snapshot_dir: str) -> Mapping:
     """`<snapshot_dir>/matrix.json` cells; {} when the snapshot has none."""
     try:
