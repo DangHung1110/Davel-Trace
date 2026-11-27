@@ -81802,9 +81802,9 @@
    "fetched_at": "2026-10-13",
    "verified": true,
    "visit_min": {
-    "p25": 360,
-    "p50": 420,
-    "p75": 480
+    "p25": 300,
+    "p50": 360,
+    "p75": 420
    },
    "dur_source": "curated",
    "dur_confidence": "low",

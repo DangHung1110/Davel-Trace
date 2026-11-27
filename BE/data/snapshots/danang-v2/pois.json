@@ -104895,9 +104895,9 @@
     "note": "Vé tham quan 70.000đ; PHÍ BẮT BUỘC đi lại từ Cửa Đại: cano ~150.000đ (15 phút) hoặc tàu gỗ ~50.000đ (1 giờ); tour lặn 700.000đ. Biển lặng tháng 3-8 (nangtrip)."
    },
    "dwell": {
-    "p25": 360,
-    "p50": 420,
-    "p75": 480
+    "p25": 300,
+    "p50": 360,
+    "p75": 420
    },
    "tags": {
     "space": "outdoor",

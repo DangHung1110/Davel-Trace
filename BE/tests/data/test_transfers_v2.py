@@ -159,6 +159,15 @@ class TestTransfersV2(unittest.TestCase):
                 start, end = (to_min(x) for x in span.split("-"))
                 self.assertTrue(lo <= start < end <= hi, (self.pois[pid]["name"], span, window))
 
+    def test_the_island_stay_fits_its_boats(self):
+        # Whoever takes the last boat out still has the shortest usual stay before the
+        # last boat back; the usual one (p50) fits from the first boat.
+        island = self.pois["manual:cu-lao-cham"]
+        info = transfers.place_service(self.spec)["manual:cu-lao-cham"]
+        arrive_from, arrive_by, leave_by = (to_min(info[k]) for k in ("arrive_from", "arrive_by", "leave_by"))
+        self.assertLessEqual(arrive_by + island["dwell"]["p25"], leave_by)
+        self.assertLessEqual(arrive_from + island["dwell"]["p50"], leave_by)
+
     def test_views_carry_the_timetable(self):
         views = load_pois(SNAP, by_id=True)
         island = views["manual:cu-lao-cham"]["transfer"]
