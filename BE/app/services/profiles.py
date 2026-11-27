@@ -13,6 +13,13 @@ every option, so every profile stays a plan a human can actually do):
               category/tag, high fit) + a dominant category-spread term, so
               the day is composed of POIs the rating-first plan skips.
 
+Under objective v1 (the default) the three node scores are ONE function, `value.py`,
+under three weight sets (objective_weights/v1.json `value` + `profiles.<name>.value`):
+the numbers above, except that savings' average leg only ranks its candidate cap
+(riding minutes are T9's) and savings has no price-level term (on danang-v2 a copy of
+the fee). The formulas below (`_score`, `soft_lean`, TASTE_WEIGHT) are
+the DAVEL_OBJECTIVE=legacy path.
+
 `/v1/itinerary` now returns all three by default; the router additionally
 enforces a pairwise POI-set Jaccard ceiling (see `pool.enforce_pairwise`) so
 the three options are genuinely different days, not three reorderings.
@@ -42,13 +49,16 @@ from BE.app.services import (
     templates,
     trip_ctx,
 )
+from BE.app.services import value as value_svc
+# Pool features shared by the legacy node scores and objective v1's value.py.
+from BE.app.services.value import novelty_scores, price_reference  # noqa: F401
 from BE.app.services.optimizer import (
     STOP_OVERHEAD_MIN, StubTrip, optimize, poi_visit_min, poi_visit_short, poi_windows,
     stubs_from_pois)
 from BE.app.services.validator import validate
 from BE.common import (
-    clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
-    price_level_of, to_float, to_int, to_min, trusted_rating, weekday_of)
+    closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
+    price_level_of, to_min, trusted_rating, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -106,8 +116,8 @@ BALANCED_FAME_WEIGHT = 0.4
 # experience back towards the rating-first composition.
 EXPERIENCE_RATING_WEIGHT = 0.10
 EXPERIENCE_NOVELTY_WEIGHT = 10.0
-EXPERIENCE_FIT_FLOOR = 3.0        # below this a POI is not "high-fit"
-EXPERIENCE_FIT_SPAN = 1.9         # 3.0 -> 0.0, 4.9 -> 1.0
+EXPERIENCE_FIT_FLOOR = value_svc.NOVELTY_FIT_FLOOR  # below this a POI is not "high-fit"
+EXPERIENCE_FIT_SPAN = value_svc.NOVELTY_FIT_SPAN    # 3.0 -> 0.0, 4.9 -> 1.0
 EXPERIENCE_FAME_WEIGHT = 0.3      # novelty leads, but among known places
 
 # Minutes of driving as an objective cost, per profile (`_profile_edges`). The
@@ -198,60 +208,6 @@ AGAINST_REASONS = frozenset({
 })
 
 
-def novelty_scores(pois: list[dict]) -> dict[str, float]:
-    """Vargas-style novelty in [0, 1] for every POI in a candidate pool.
-
-    novelty = fit * (0.55 * (1 - popularity) + 0.30 * category-rarity
-                     + 0.15 * tag-rarity)
-
-    - fit: rating above EXPERIENCE_FIT_FLOOR, normalised (3.0 -> 0, 4.9 -> 1).
-      A poorly-rated POI is not "novel", it is just bad; the fit factor keeps
-      the novelty term from rewarding junk.
-    - popularity: where the POI's rating sits in the pool (a 4.9 place is
-      mainstream) plus a must_go bump. Inverse = novelty.
-    - category-rarity: 1 - sqrt(share of the category in the pool), so a
-      beach/attraction beats a restaurant in a restaurant-heavy pool.
-    - tag-rarity: mean inverse document frequency of the POI's tags, which
-      separates a one-off seafood shack from a generic "Nhà hàng" listing.
-    """
-    pool = list(pois)
-    if not pool:
-        return {}
-    n = len(pool)
-    cats = Counter(soft_rules.poi_category(p) for p in pool)
-    tag_freq: Counter[str] = Counter()
-    for p in pool:
-        for tag in {str(t).strip().lower() for t in (p.get("tags") or [])
-                    if str(t).strip()}:
-            tag_freq[tag] += 1
-    ratings = [trusted_rating(p) for p in pool]
-    lo, hi = min(ratings), max(ratings)
-
-    def _tag_rarity(p: dict) -> float:
-        tags = [str(t).strip().lower() for t in (p.get("tags") or [])
-                if str(t).strip()]
-        if not tags:
-            return 0.0
-        # Smoothed IDF, normalised into [0, 1] by log(n + 1).
-        return sum(math.log((1.0 + n) / (1.0 + tag_freq[t])) / math.log(1.0 + n)
-                   for t in set(tags)) / len(set(tags))
-
-    out: dict[str, float] = {}
-    for p in pool:
-        cat = soft_rules.poi_category(p)
-        rating = trusted_rating(p)
-        fit = clamp01((rating - EXPERIENCE_FIT_FLOOR) / EXPERIENCE_FIT_SPAN)
-        popularity = ((rating - lo) / (hi - lo)) if hi > lo else 0.5
-        if p.get("must_go"):
-            popularity = min(1.0, popularity + 0.25)
-        cat_rarity = (1.0 - math.sqrt(cats[cat] / n)) if cat else 0.0
-        novelty = fit * (0.55 * (1.0 - popularity)
-                         + 0.30 * cat_rarity
-                         + 0.15 * _tag_rarity(p))
-        out[p["poi_id"]] = round(clamp01(novelty), 4)
-    return out
-
-
 def _avg_leg(travel: dict[tuple[str, str], int], pid: str,
              ids: list[str]) -> float:
     """Mean matrix minutes from `pid` to every other candidate (bidirectional).
@@ -289,7 +245,10 @@ def _profile_edges(profile: str, q: dict[tuple[str, str], float],
 
 def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
            avg_leg: float = 0.0, budget: float | None = None) -> float:
-    """Node score for one profile (see module docstring).
+    """Node score for one profile under DAVEL_OBJECTIVE=legacy (see module docstring).
+    Objective v1 scores with `value.score` instead: one function, these numbers as the
+    profiles' weights in objective_weights/v1.json, savings without `avg_leg` and without
+    the price-level penalty.
 
     savings: absolute cost minimisation (fee + travel), not a tie-break.
     balanced: trusted rating + fame, constraints respected.
@@ -325,21 +284,10 @@ def _score(profile: str, p: dict, novelty: dict[str, float] | None = None,
     return round(rating + BALANCED_FAME_WEIGHT * fame, 4)
 
 
-def price_reference(pois: list[dict]) -> dict[str, int]:
-    """What a priced place usually costs in this pool: the median price level of
-    each priced category (restaurants 2, cafes 1 on danang-v1). `soft_lean` reads a
-    place against it, so "cheap" means cheap for a restaurant, not cheaper than a park."""
-    levels: dict[str, list[int]] = {}
-    for poi in pois:
-        cat = soft_rules.poi_category(poi)
-        if cat in retrieval.PAID_CATS:
-            levels.setdefault(cat, []).append(price_level_of(poi))
-    return {cat: sorted(values)[len(values) // 2] for cat, values in levels.items()}
-
-
 def soft_lean(poi: dict, profile: dict | None, liked: list[str] | None = None,
               price_ref: dict[str, int] | None = None) -> tuple[float, list[str]]:
-    """(lean, reasons) of the onboarding's soft answers for one POI.
+    """(lean, reasons) of the onboarding's soft answers for one POI (legacy objective;
+    v1 weighs the same parts, `value.lean_parts`, with its `value` weights).
 
     `lean` is signed, in units of the top POI score (see SPENDING_WEIGHT); the
     reasons are those that speak FOR the stop, for its explanation. A neutral
@@ -347,23 +295,11 @@ def soft_lean(poi: dict, profile: dict | None, liked: list[str] | None = None,
     `liked`: `retrieval.liked_wishes(profile["activities"])`; `price_ref`:
     `price_reference(pool)`.
     """
-    profile = profile or {}
-    lean, reasons = 0.0, []
-    cat = soft_rules.poi_category(poi)
-    wants = to_int(profile.get("spending_level"), 2) - 2          # -1 thrifty .. +1 premium
-    if wants and cat in retrieval.PAID_CATS:
-        dearer = max(-1, min(1, price_level_of(poi) - (price_ref or {}).get(cat, 2)))
-        lean += SPENDING_WEIGHT * wants * dearer
-        if wants * dearer > 0:
-            reasons.append("hop muc chi tieu")
-    bias = max(-1.0, min(1.0, to_float(profile.get("outdoor_bias"))))
-    if bias and soft_rules.is_outdoor(poi):
-        lean += OUTDOOR_WEIGHT * bias
-        if bias > 0:
-            reasons.append("hop gu ngoai troi")
-    if liked and retrieval.poi_is_liked(poi, liked):
-        lean += LIKED_WEIGHT
-        reasons.append("hop hoat dong ban thich")
+    parts, reasons = value_svc.lean_parts(poi, profile, liked, price_ref)
+    lean = 0.0
+    for key, weight in (("spending", SPENDING_WEIGHT), ("outdoor", OUTDOOR_WEIGHT),
+                        ("liked", LIKED_WEIGHT)):
+        lean += weight * parts[key]
     return round(lean, 4), reasons
 
 
@@ -738,36 +674,57 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         return plan
 
     travel = _travel_from_cells(cells, ids)
-    nov = novelty_scores(candidates)
-    budget = trip.get("budget")
-    avg_legs = {pid: _avg_leg(travel, pid, ids) for pid in ids}
-    base_scores = {pid: _score(prof, pois_by_id[pid], novelty=nov,
-                               avg_leg=avg_legs[pid], budget=budget)
-                   for pid in ids}
-    unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
-    prefs = list(profile_data.get("food_prefs") or []) or list(
-        trip.get("food_prefs") or [])
-    # A food wish phrased as an activity ("ăn hải sản") is a taste pref too.
-    for activity in trip.get("activities") or []:
-        prefs += [t for t in profile_filter.cuisine_terms(activity)
-                  if t not in prefs]
+    scored: value_svc.Scored | None = None
+    leans: dict[str, tuple[float, list[str]]] = {}
+    if spec is not None:
+        # Objective v1: T1 is ONE function of the POI (value.py) under this profile's
+        # weights (v1.json `value` + `profiles.<name>.value`), and the explanations read
+        # it too. Riding minutes are T9's alone: the mean matrix leg only ranks the
+        # candidate cap, for a profile that weighs it (`cap_avg_leg`, savings).
+        # The candidates keep the order they came in: it is only the solver's node
+        # order. Sorting them by value (tried 26/11, audit of 67 requests) gave 63 of
+        # 134 balanced and experience days other stops by search path alone, lowered
+        # J on 13 days against 10 raised and slowed the bench median by 1.5 s.
+        scored = value_svc.score(candidates, trip, spec.value)
+        node_value = scored.values
+        leg_weight = float(spec.value.get("cap_avg_leg") or 0.0)
+        cap_rank = (node_value if not leg_weight else
+                    {pid: node_value[pid] - leg_weight * _avg_leg(travel, pid, ids)
+                     for pid in ids})
 
-    # The profile's other soft answers, once per POI of the pool (before the cap,
-    # so what the traveller leans to survives it).
-    liked = retrieval.liked_wishes(profile_data.get("activities"))
-    price_ref = price_reference(candidates)
-    leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+        def _score_with_taste(poi: dict) -> float:
+            return node_value[poi["poi_id"]]
 
-    def _score_with_taste(poi: dict) -> float:
-        unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
-        return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
-                + unit * leans[poi["poi_id"]][0])
+        def _cap_score(poi: dict) -> float:
+            return cap_rank[poi["poi_id"]]
+    else:
+        nov = novelty_scores(candidates)
+        budget = trip.get("budget")
+        avg_legs = {pid: _avg_leg(travel, pid, ids) for pid in ids}
+        base_scores = {pid: _score(prof, pois_by_id[pid], novelty=nov,
+                                   avg_leg=avg_legs[pid], budget=budget)
+                       for pid in ids}
+        unit = max((abs(v) for v in base_scores.values()), default=1.0) or 1.0
+        prefs = value_svc.taste_prefs(trip)
+
+        # The profile's other soft answers, once per POI of the pool (before the cap,
+        # so what the traveller leans to survives it).
+        liked = retrieval.liked_wishes(profile_data.get("activities"))
+        price_ref = price_reference(candidates)
+        leans = {p["poi_id"]: soft_lean(p, profile_data, liked, price_ref) for p in candidates}
+
+        def _score_with_taste(poi: dict) -> float:
+            unit_delta, _hits, _clashes = profile_filter.taste_score(poi, prefs)
+            return (base_scores[poi["poi_id"]] + TASTE_WEIGHT * unit * unit_delta
+                    + unit * leans[poi["poi_id"]][0])
+
+        _cap_score = _score_with_taste
 
     # The cap: DAVEL_SOLVER_CANDIDATES, else the objective's (v1: 40), else the default.
     cap_limit = (os.environ.get("DAVEL_SOLVER_CANDIDATES")
                  or (spec.w.get("solver_candidates") if spec else None))
     cap_extra = {"limit": int(cap_limit)} if cap_limit else {}
-    capped = _cap_candidates(candidates, _score_with_taste,
+    capped = _cap_candidates(candidates, _cap_score,
                              list(trip.get("must_visit") or []), wish_groups=act_groups,
                              cheap_meals=CANDIDATE_CHEAP_MEALS if ceiling is not None else 0,
                              **cap_extra)
@@ -988,7 +945,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                      pois_by_id, cells, ctx)
     plan = _assemble(acts, out, trip, pois_by_id, cells, ranked, tpl_name,
                      limits, relaxed_step, cafe_cap, ctx, prof,
-                     candidates, travel)
+                     candidates, travel, scored=scored)
     _add_lean_evidence(plan, leans)
     if rung_used is not None:
         plan["_rung"] = rung_used
@@ -1040,7 +997,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         for item in out["pool"]:
             member = _assemble(item["activities"], out, trip, pois_by_id,
                                cells, ranked, tpl_name, limits, relaxed_step,
-                               cafe_cap, ctx, prof, candidates, travel)
+                               cafe_cap, ctx, prof, candidates, travel, scored=scored)
             if not member.get("passed"):
                 dropped += 1
                 continue
@@ -1119,11 +1076,13 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
               cells: dict, ranked: list[dict], tpl_name: str | None,
               limits: dict, relaxed_step: int, cafe_cap: int,
               ctx: dict | None, prof: str, candidates: list[dict],
-              travel: dict) -> dict:
+              travel: dict, scored: value_svc.Scored | None = None) -> dict:
     """One activity list -> the full public plan (gate + report + warnings).
 
     Shared by the argmax plan and every solution-pool member, so a diverse
     response can never show a plan that was not validated the same way.
+    `scored`: objective v1's values of the pool (value.py): the explanations read them,
+    and `_context.values` keeps them for /v1/repair.
     """
     # Dynamic state evidence: per-activity state at its planned START, so a
     # client/reviewer can see WHY a stop sits at that hour (satiety, heat,
@@ -1150,7 +1109,7 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     # TASK-2 soft layer: sequence-level A2/B1/B2/E2 report (the edge part of
     # A2/B1 already reached the optimizer through scorer.edge_scores).
     plan["soft_penalties"] = soft_rules.plan_penalties(acts, pois_by_id, trip)
-    _attach_explanations(plan, ranked, pois_by_id)
+    _attach_explanations(plan, ranked, pois_by_id, scored)
     plan["template"] = _template_report(tpl_name, limits, acts, relaxed_step,
                                        pois_by_id, cafe_cap, trip)
     warnings = []
@@ -1207,6 +1166,9 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
     # so POST /replan can rebuild the rolling state; the itinerary router
     # strips leading-underscore keys from the public response.
     plan["_context"] = {"trip": trip, "pois": candidates, "travel": travel}
+    if scored is not None:
+        plan["_context"]["values"] = {p["poi_id"]: scored.values[p["poi_id"]]
+                                      for p in candidates if p["poi_id"] in scored.values}
     return plan
 
 
@@ -1284,12 +1246,41 @@ def _add_lean_evidence(plan: dict, leans: dict[str, tuple[float, list[str]]]) ->
                 evidence.append(reason)
 
 
-def _attach_explanations(plan: dict, ranked: list[dict], pois_by_id: dict | None = None) -> None:
+def _meal_reason(act: dict, poi: dict) -> str | None:
+    """The meal a restaurant stop is, from its real start (the windows of T5)."""
+    if soft_rules.poi_category(poi) != "restaurant":
+        return None
+    start = to_min(act["start"])
+    if soft_rules.LUNCH_REQUIRED[0] <= start < soft_rules.LUNCH_REQUIRED[1]:
+        return "bua trua"
+    if soft_rules.DINNER_REQUIRED[0] <= start < soft_rules.DINNER_REQUIRED[1]:
+        return "bua toi"
+    return None
+
+
+def _attach_explanations(plan: dict, ranked: list[dict], pois_by_id: dict | None = None,
+                         scored: value_svc.Scored | None = None) -> None:
     """FR-023: every activity carries a grounded explanation (evidence).
 
-    Evidence argues FOR the stop: what the ranker held against it at some hour of
-    the day ("nong, tranh ngoai troi" on a beach) is not a reason it was chosen.
+    Objective v1 (`scored`): the evidence is what raised the stop's value v_i under this
+    profile's weights (`value.explain`), plus the meal it is (T5): the score the solver
+    chose it by. Legacy: the ranker's reasons. Evidence argues FOR the stop: what the
+    ranker held against it at some hour of the day ("nong, tranh ngoai troi" on a beach)
+    is not a reason it was chosen.
     """
+    if scored is not None:
+        for act in plan.get("activities", []):
+            pid = act.get("poi_id")
+            poi = (pois_by_id or {}).get(pid) or {}
+            evidence = list(scored.reasons.get(pid) or [])
+            meal = _meal_reason(act, poi)
+            if meal:
+                evidence.append(meal)
+            if not evidence:
+                evidence = [f"gia tri {scored.values.get(pid, 0.0) / scored.unit:.2f}U"]
+            act["explanation"] = {"claim": f"chon {poi.get('name') or pid}",
+                                  "evidence": evidence, "inference": "", "source": "value"}
+        return
     reasons = {r.get("poi_id"): (r.get("reasons") or []) for r in ranked}
     for act in plan.get("activities", []):
         pid = act.get("poi_id")
