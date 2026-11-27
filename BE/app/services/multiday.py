@@ -201,6 +201,9 @@ def merge_days(plans: list[dict], trip: dict, days: int, check) -> dict:
         merged.pop("_rung", None)
     else:
         merged["_rung"] = max(rungs)
+    # J's terms are per day (each day is its own solve): one entry per day, not day 1's.
+    merged.pop("_features", None)
+    merged["_features_by_day"] = [p.get("_features") for p in plans]
     candidates = {poi["poi_id"]: poi for p in plans
                   for poi in (p.get("_context") or {}).get("pois") or []}
     travel: dict = {}

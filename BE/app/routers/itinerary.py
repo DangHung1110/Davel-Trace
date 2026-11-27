@@ -48,6 +48,7 @@ from BE.app.services import matrix as matrix_svc
 from BE.app.services import pool as pool_svc
 from BE.app.services import profile_filter
 from BE.app.services import gate as gate_svc
+from BE.app.services import gps_origin
 from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
 from BE.common import merged_into, visit_fee
@@ -104,21 +105,63 @@ PLAN_DETERMINISTIC_TIME = 5.0
 PLAN_WALL_LIMIT_S = 60.0
 
 
-def _origin_id(origin: dict | None, by_id: dict, cells) -> tuple[str | None, str | None]:
-    """`trip.origin` -> (the place each day starts from, why it was not usable).
-
-    Only a snapshot place with a matrix row can anchor a day (every leg comes from
-    the matrix); a bare lat/lon is not routed, so it keeps the open tour silently.
-    """
-    pid = (origin or {}).get("poi_id")
-    if not pid:
-        return None, None
+def _place_id(pid: str, by_id: dict, cells) -> tuple[str | None, str | None]:
+    """A snapshot place -> (it, None) when the matrix routes it, else (None, why)."""
     if pid not in by_id:
         return None, f"khong dung diem xuat phat '{pid}': khong co trong du lieu"
     if not matrix_svc.has_row(cells, pid):
         name = by_id[pid].get("name") or pid
         return None, f"khong dung diem xuat phat '{name}': chua co ma tran di chuyen"
     return pid, None
+
+
+def is_gps(origin: dict | None) -> bool:
+    """A device position (lat/lon, no place named) rather than a snapshot place."""
+    origin = origin or {}
+    return (not origin.get("poi_id") and origin.get("lat") is not None
+            and origin.get("lon") is not None)
+
+
+def _origin_id(origin: dict | None, by_id: dict, cells,
+               starts: dict | None = None) -> tuple[str | None, str | None]:
+    """`trip.origin` -> (where each day starts, the warning about it or None).
+
+    A snapshot place starts a day only with a matrix row (every leg comes from the
+    matrix). A bare lat/lon is a GPS fix (services/gps_origin.py): a usable one is put
+    in `starts` (its id -> GpsStart, which gives it a matrix row) and the day starts
+    there, with a warning when its legs are only a rough guess; an unusable one starts
+    the day at `fallback_poi_id` (a place, as above), else leaves an open tour, and
+    the warning says why.
+    """
+    origin = origin or {}
+    if origin.get("poi_id"):
+        return _place_id(origin["poi_id"], by_id, cells)
+    if not is_gps(origin):
+        return None, None
+    start, why = gps_origin.locate(float(origin["lat"]), float(origin["lon"]), by_id, cells,
+                                   origin.get("accuracy_m"))
+    if start is not None:
+        if starts is not None:
+            starts[start.start_id] = start
+        return start.start_id, (gps_origin.far_warning(start, by_id) if start.far else None)
+    fallback = origin.get("fallback_poi_id")
+    if not fallback:
+        return None, why
+    place, place_why = _place_id(fallback, by_id, cells)
+    if place is None:
+        return None, f"{why}; {place_why}"
+    return place, f"{why}; bat dau tu '{by_id[place].get('name') or place}'"
+
+
+def _gps_report(origin: dict | None, resolved: str | None, warning: str | None,
+                starts: dict, by_id: dict) -> dict | None:
+    """`plan["gps_origin"]` for a GPS origin: the start it became, or why it did not."""
+    if not is_gps(origin):
+        return None
+    if resolved in starts:
+        return gps_origin.report(starts[resolved], by_id)
+    return {"used": False, "lat": round(float(origin["lat"]), 5),
+            "lon": round(float(origin["lon"]), 5), "origin_id": resolved, "reason": warning}
 
 
 @router.post("/itinerary")
@@ -196,8 +239,11 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
 
     cells = matrix_svc.load_cells(settings.snapshot_dir)
     # A day that starts at the traveller's base (or where a replan resumes) charges
-    # its first drive; a base the matrix cannot route from keeps the open tour.
-    origin_id, origin_warning = _origin_id(trip.get("origin"), by_id, cells)
+    # its first drive; a base the matrix cannot route from keeps the open tour. A GPS
+    # fix starts the day too, from a row of its own (`gps_starts`, gps_origin.py).
+    gps_starts: dict = {}
+    origin_id, origin_warning = _origin_id(trip.get("origin"), by_id, cells, gps_starts)
+    gps_report = _gps_report(trip.get("origin"), origin_id, origin_warning, gps_starts, by_id)
     if origin_id:
         trip["origin_id"] = origin_id
     if origin_warning:
@@ -207,11 +253,15 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         # traveller is (multiday applies it to the first day only). A place the matrix
         # cannot route leaves that day an open tour, not the base they are not at.
         resume = trip["resume"]
-        resume_id, resume_warning = (_origin_id(resume["origin"], by_id, cells)
+        resume_id, resume_warning = (_origin_id(resume["origin"], by_id, cells, gps_starts)
                                      if resume.get("origin") else (origin_id, None))
         trip["resume"] = {"start_time": resume["start_time"], "origin_id": resume_id}
         if resume_warning:
             retired_warnings.append(resume_warning)
+        # `gps_origin` describes the fix the first day starts from.
+        gps_report = _gps_report(resume.get("origin"), resume_id, resume_warning,
+                                 gps_starts, by_id) or gps_report
+    cells = matrix_svc.with_starts(cells, {sid: s.row() for sid, s in gps_starts.items()})
     retrieval = retrieval_svc.retrieve(trip, pois, cells)
     if trip.get("areas") and not any(p.get("zone") for p in pois):
         # danang-v1 has no zones: say the choice did nothing instead of ignoring it.
@@ -282,6 +332,8 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         plan["profile_filter"] = {"dropped": len(verified_drops),
                                   "dropped_all": len(profile_drops),
                                   "rules": drop_counts}
+        if gps_report is not None:
+            plan["gps_origin"] = gps_report
         warnings = base_warnings + list(plan.get("warnings") or [])
         if warnings:
             plan["warnings"] = warnings

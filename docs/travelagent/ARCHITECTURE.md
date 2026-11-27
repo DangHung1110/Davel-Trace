@@ -7,7 +7,7 @@ Hệ thống gồm **một đường đi của request (10 bước)** và **hai 
 ```mermaid
 flowchart TB
   subgraph REQ["Đường đi của một request"]
-    A1["1 App"] --> A2["2 Parser (LLM)"] --> A3["3 Lọc cứng"] --> A4["4 Điểm POI: ranker + bandit"]
+    A1["1 App"] --> A2["2 Parser (LLM)"] --> A3["3 Lọc cứng"] --> A4["4 Điểm POI: value.py + bandit"]
     A4 --> A5["5 Thời gian ở + ma trận"] --> A6["6 Cắt còn 40"] --> A7["7 Gợi ý lời giải"]
     A7 --> A8["8 CP-SAT tối đa J"] --> A9["9 Pool + gate"] --> A10["10 App hiển thị, replan, log"]
   end
@@ -31,7 +31,7 @@ flowchart TB
 | 1 | App (Flutter) | câu nói + onboarding (pace, food_prefs, outdoor_bias, spending, nơi ở, khu vực) → text + profile | thu yêu cầu | giao diện | có; profile và điểm xuất phát đã truyền đúng (PR #29, #35) |
 | 2 | `parser.py` | câu tiếng Việt → trip JSON (hard / soft / assumptions / uncertainties); thiếu thì hỏi | tách điều bắt buộc khỏi điều thích | LLM có sẵn | có |
 | 3 | `retrieval.py` | trip + POI danang-v2 → khoảng 590 ứng viên (trung vị) + nhóm hoạt động | bỏ điểm không thể đi: sai khu vực, đóng cửa, avoid, chưa xác minh | luật cứng | có; lọc theo khu vực (PR #30, #35), món ăn là wish (PR #31) |
-| 4 | `rank.py` + bandit | ứng viên, profile, thời tiết, w_user → điểm v_i | gu chung + gu riêng | luật + model online | ranker có; bandit chưa |
+| 4 | `value.py` + bandit | ứng viên, profile, trọng số `value` của profile, w_user → điểm v_i | gu chung + gu riêng | hàm tuyến tính + model online | một hàm cho cả 3 profile (26/11, `OBJECTIVE_V1.md` §5 "T1"); lời giải thích và repair đọc cùng v_i; `rank.py` chỉ còn quyết thứ tự ứng viên (không đổi J) và là điểm của legacy; bandit chưa |
 | 5 | thời gian ở + `matrix.py`, `travel_time.py` | POI, giờ → d_i (p50, p75); ma trận OSRM → m_ij | thời lượng sát thực tế; tính cả chặng từ nơi ở | model online + ma trận | prior 31 loại; hệ số giờ chỉ để kiểm (A4) |
 | 6 | `_cap_candidates` (sau này bộ lọc học) | 590 → 40 ứng viên + sàn: must_visit, hoạt động đã nêu, quán ăn, cafe | thu nhỏ bài toán | luật → model offline | top-40 ở v1; LightGBM khi thắng top-40 |
 | 7 | gợi ý lời giải | 40 ứng viên → thứ tự gợi ý (`AddHint`) | CP-SAT tìm lời giải nhanh hơn | greedy → model offline | greedy hint (bỏ điểm trùng); pointer để sau |
@@ -146,8 +146,8 @@ Thêm bảng sự kiện đụng API và migration DB, nên cần duyệt thiế
 
 | Data | Quy mô | Nguồn | Dùng cho | Trạng thái 25/11 |
 |---|---|---|---|---|
-| POI danang-v2 | 1.029 POI: 916 active (840 điểm dừng + 76 nơi ở), 93 excluded, 20 review | crawl, OSM, người xác minh; trường Google bị cách ly | mọi bước | mặc định (PR #32); nhãn món `tags.dishes` (PR #31); nhãn cùng chỗ / gộp bản ghi (PR #38) |
-| Ma trận đi lại | 1.009 × 1.009, phút và km | OSRM xe máy | ràng buộc đi kịp, T9 | có, gồm nơi ở; 20 quán mới chờ dựng lại |
+| POI danang-v2 | 1.029 POI: 936 active (860 điểm dừng + 76 nơi ở), 93 excluded, 0 review | crawl, OSM, người xác minh; trường Google bị cách ly | mọi bước | mặc định (PR #32); nhãn món `tags.dishes` (PR #31); nhãn cùng chỗ / gộp bản ghi (PR #38) |
+| Ma trận đi lại | 1.029 × 1.029, phút và km | OSRM xe máy | ràng buộc đi kịp, T9 | có, gồm nơi ở; 20 quán mới có hàng từ 25/11 (ô cũ giữ nguyên) |
 | Prior thời gian ở | 31 loại; 45 POI đã xác nhận | `v2_rules.py` | model thời gian ở | có; phần lớn độ tin 0,4 |
 | Prior hệ số giờ | zone × khung giờ | `travel_time_factors.json` | hệ số giờ đi lại | có, chưa hiệu chỉnh |
 | Câu gold | 30 câu | `BE/eval/gold/gold_v2.json` | kiểm parser, đo trước/sau | có |
@@ -165,9 +165,9 @@ Giới hạn: không dùng trường Google để train hay chạy production kh
 |---|---|---|---|---|
 | 1 App | profile, điểm xuất phát, khu vực | — | — | — |
 | 2 Parser | LLM | — | bộ câu kiểm parser | — |
-| 3 Lọc cứng | POI danang-v2 | giờ mở: 342 có nguồn, 498 ước lượng; giá ~11% có nguồn | — | — |
+| 3 Lọc cứng | POI danang-v2 | giờ mở: 350 có nguồn, 505 ước lượng (không tính nơi ở); giá 167/860 điểm dừng (19%) có nguồn | — | — |
 | 4 Điểm POI | nhãn POI; nhãn món (PR #31) | độ nổi tiếng 33 mức | w_user (cần log) | — |
-| 5 Thời gian | ma trận 1.009 × 1.009 | bảng thời gian ở 31 loại; hệ số giờ | hàng ma trận cho 20 quán mới | — |
+| 5 Thời gian | ma trận 1.029 × 1.029 | bảng thời gian ở 31 loại; hệ số giờ | — | — |
 | 6 Cắt 40 | poi_features 42 cột | — | — | data thầy |
 | 7 Gợi ý | greedy hint | — | — | data thầy (pointer) |
 | 8 CP-SAT | PATM 1.770 cặp; khí hậu, dự báo | trọng số v1 (tay); u(t) 12 đường | — | — |

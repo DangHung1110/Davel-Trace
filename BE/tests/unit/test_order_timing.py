@@ -155,9 +155,26 @@ class TestNamedPlaceKeepsSensibleHours(unittest.TestCase):
 
 class TestKeptDry(unittest.TestCase):
     def test_wet_hours_leave_the_windows(self):
+        # Rain is read at the visit's quarter probes like the solver (start + 22 and
+        # start + 67 for 90 minutes), so the visit may brush the rain by 22 minutes.
         beach = StubPOI("beach", visit_min=90, open_min=6 * H, close_min=19 * H, category="beach")
         dry = route_order.kept_dry(beach, [(13 * H, 17 * H)])
-        self.assertEqual(dry.windows, ((6 * H, 13 * H), (17 * H, 19 * H)))
+        self.assertEqual(dry.windows, ((6 * H, 13 * H + 22), (17 * H - 22, 19 * H)))
+
+    def test_a_stop_after_the_rain_keeps_the_hour_the_solver_gave_it(self):
+        # W09 (features_step2.md): Cau Rong 16:55-17:15 after a 12:00-17:00 shower is dry
+        # for the solver (probes 17:00 and 17:10); the old whole-visit test saw five wet
+        # minutes, did not protect it, and the re-timing moved it to 15:04, in the rain.
+        bridge = StubPOI("bridge", visit_min=20, open_min=6 * H, close_min=23 * H,
+                         category="outdoor_landmark")
+        self.assertEqual(route_order.quarter_probes(mins("16:55"), 20), (17 * H, 17 * H + 10))
+        dry = route_order.kept_dry(bridge, [(12 * H, 17 * H)])
+        self.assertEqual(dry.windows, ((6 * H, 12 * H + 4), (mins("16:55"), 23 * H)))
+        starts_allowed = [s for s in range(6 * H, 23 * H - 20)
+                          if any(lo <= s and s + 20 <= hi for lo, hi in dry.windows)]
+        for start in starts_allowed:
+            probes = route_order.quarter_probes(start, 20)
+            self.assertFalse(any(12 * H <= p < 17 * H for p in probes), start)
 
     def test_a_stop_seated_in_the_dry_morning_is_not_moved_into_the_rain(self):
         beach = route_order.kept_dry(
