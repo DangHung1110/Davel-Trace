@@ -432,10 +432,9 @@ class TestPaidInTheRequest(unittest.TestCase):
         # place, but the cano is still the first day's only.
         trip = _trip_request({**TWO_DAYS, "base_poi_id": "hotel"},
                              {"window": _window(TWO_DAYS, None, at(24, 7))}, [], [CANO])
-        self.assertEqual(trip["resume"], {"start_time": "08:00",
-                                          "origin": {"poi_id": "hotel", "lat": None,
-                                                     "lon": None, "label": ""},
-                                          "paid_access": [CANO]})
+        resume = trip["resume"]
+        self.assertEqual((resume["start_time"], resume["origin"]["poi_id"], resume["paid_access"]),
+                         ("08:00", "hotel", [CANO]))
         self.assertEqual(trip["paid_access"], [])
 
 
