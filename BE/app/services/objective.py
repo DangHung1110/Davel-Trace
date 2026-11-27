@@ -275,9 +275,16 @@ class Spec:
 
 
 def search_budget(deterministic_time: float, spec: "Spec | None") -> float:
-    """The CP-SAT work budget of a solve under this objective. v1 has more terms than
-    legacy: at the legacy 5 units a thrifty day ended 32% below its optimum (three
-    restaurants, two back to back); 8 units reached 93% (`search_scale`, 25/11)."""
+    """The CP-SAT work budget of a solve under this objective (`search_scale`).
+
+    25/11: at the legacy 5 units a thrifty day ended 32% below its optimum (three
+    restaurants, two back to back) and 8 units reached 93%, so v1 got 1.6. The search
+    was slow for reasons of the model, not of the objective: the A2 restaurant pairs
+    and the meal/slot window tests were time disjunctions its LP did not see, and the
+    greedy seed did not know v1. With those fixed (26/11, optimizer.py) 1.2 gives a
+    better plan than 1.6 did before on average (222 audit solves: +3.0%, 26 better,
+    19 worse) and every one-day bench_latency request ends under 8 s; about a third
+    of the days never prove optimal, so they always spend the whole budget."""
     if spec is None:
         return float(deterministic_time)
     return float(deterministic_time) * float(spec.w.get("search_scale", 1.0))

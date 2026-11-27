@@ -117,7 +117,7 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 | σ cùng chỗ / khu + điểm trong khu (T11) | 2,0 / 2,0U | điểm thứ hai của một chỗ gần như không bao giờ đáng |
 | σ chợ ban ngày thứ hai (T11) | 1,5U; food tour 0,1U | cộng thêm T3 của nhóm chợ |
 | σ trùng món (T11) | 0,5U | dưới thưởng bữa tối: không bỏ bữa để né trùng; khách tiết kiệm có thể ăn đắt hơn một mức thay vì một món hai lần (chốt 24/11) |
-| Ngân sách CP-SAT (`search_scale`) | × 1,6 (5 → 8 đơn vị) | v1 nhiều số hạng hơn: ở 5 đơn vị một ngày kém tối ưu 32% (3 quán ăn); 8 đơn vị đạt khoảng 93% (chốt 25/11) |
+| Ngân sách CP-SAT (`search_scale`) | × 1,2 (5 → 6 đơn vị) | 25/11 chốt × 1,6 vì ở 5 đơn vị một ngày kém tối ưu 32% (3 quán ăn). Nguyên nhân là mô hình hội tụ chậm (cặp quán A2 và các phép thử khung giờ là ràng buộc thời gian LP không thấy; greedy hint chưa biết v1). Sửa xong (26/11) thì × 1,2 cho lịch tốt hơn × 1,6 cũ trung bình +3,0% trên 222 lời giải của audit, và request chậm nhất của `bench_latency` dưới 8 s (`reports/objective_v1/latency_p95.md`) |
 
 **Ba lịch = ba bộ trọng số.** Khoá `profiles` ghi đè theo profile: experience `repeat_scale` 2,5 (đúng hệ số đa dạng 2,5 của legacy); savings τ 0,045 (mức cạnh cũ của nó), `pace_scale` 2,0, `repeat_scale` 1,5 (điểm miễn phí của savings đều gần U). Phần khác nhau còn lại của profile là các khoá `value` của T1 (dưới đây); ngoài trọng số, tên profile không đổi gì trong J.
 
@@ -178,15 +178,15 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 | T1, T2 | giữ code hiện có (điểm × visit; probe STATE theo khung giờ) |
 | T3 | mỗi nhóm g: bool y₂, y₃ và nguyên e_g, với y₂ + y₃ + e_g ≥ n_g − 1; phạt β_g(ρ₂y₂ + ρ₃y₃ + ρ₄e_g); ρ tăng dần nên solver tự bật biến rẻ nhất trước |
 | T4, T9, T10 | hằng số trên mỗi cung, cộng vào hệ số của a_ij; không thêm biến |
-| T5 | `_window_hits` cho mỗi quán ăn và mỗi khung bữa → h_is; bool z_s ≤ Σ_i h_is. Khung giờ bắt đầu: trưa 11:00–13:00, tối 17:30–20:30, sáng 6:30–9:00 |
-| T6 | nguyên e_s ≥ Σ_i h_is − 1 mỗi khung; cặp cách dưới 150 phút |
+| T5 | `_window_hits` cho mỗi quán ăn và mỗi khung bữa → h_is; bool z_s ≤ Σ_i h_is. Khung giờ bắt đầu: trưa 11:00–13:00, tối 17:30–20:30, sáng 6:30–9:00. Từ 26/11, quán có mọi khung mở cửa nằm gọn trong hoặc ngoài khung bữa thì h_is chính là biến chọn khung mở cửa (không ràng buộc thời gian) |
+| T6 | nguyên e_s ≥ Σ_i h_is − 1 mỗi khung; cặp cách dưới 150 phút. **Thực tế trong code** (từ commit đầu tới nay): phần cặp phạt MỌI cặp quán đã ghé, bất kể giờ (điều kiện "gần" luôn đúng), tức R quán tốn R(R−1)/2 cặp; 26/11 viết lại thành bậc thang trên số quán, giữ nguyên giá trị. Đổi sang đúng 150 phút là quyết định riêng: thưởng bữa tối 1,2 đã chỉnh trên hành vi này |
 | T7 | logic `rest_after_lunch` với `OnlyEnforceIf(rest_taken)`; thưởng R·r |
 | T8 | như T3 trên số đếm của `paced_stops` (điểm tham quan + nguyên `pace_meals` ≥ số quán − số bữa trưa/tối) với ngưỡng `sight_k0` |
 | T11 | mỗi khoá (alt_group, chợ ban ngày, món): nguyên e ≥ Σ visit − 1; khu + điểm trong khu: bool u_b ≥ visit_a + visit_b − 1. Ở `strict_rules`: Σ visit ≤ 1 |
 
 **Bỏ khỏi ràng buộc cứng** (trừ khi ở `strict_rules`): bắt buộc bữa tối, A1, giới hạn cafe, nghỉ trưa, late_end, pace min/max và nhóm bắt buộc của template.
 
-**Greedy hint** (`_greedy_hint`) bỏ qua điểm trùng của T11 (`_hint_dup_kinds`): ở ngân sách giới hạn CP-SAT hay giữ lời giải gợi ý dù nó bị phạt. **Ngân sách** nhân `search_scale` (`objective.search_budget`) ở mọi đường gọi qua `build_plan` và replan.
+**Greedy hint** (`_greedy_hint`) bỏ qua điểm trùng của T11 (`_hint_dup_kinds`): ở ngân sách giới hạn CP-SAT hay giữ lời giải gợi ý dù nó bị phạt. Từ 26/11 nó tính giá trị một điểm như hàm mục tiêu (`objective=`): chặng chạy xe T9/T4, lặp nhóm T3, bữa T5 khi bàn sẵn ngay (chờ ≤ 30 phút), cặp quán A2, nhịp T8, trùng món T11. **Ngân sách** nhân `search_scale` (`objective.search_budget`) ở mọi đường gọi qua `build_plan` và replan.
 
 **Biến thêm vào:** khoảng 40 biến cho T3, T8, T11, cộng vài chục h_is cho T5; nhỏ so với 1.560 biến cung ở cap 40.
 
