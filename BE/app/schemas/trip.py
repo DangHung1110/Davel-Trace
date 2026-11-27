@@ -45,17 +45,27 @@ class TripProfile(BaseModel):
 
 
 class Origin(BaseModel):
-    """Where each day starts: the traveller's base or the stop they are at.
+    """Where each day starts: the traveller's base, the stop they are at, or a GPS fix.
 
     `poi_id` names a place of the snapshot (a lodging, or the last stop on a replan);
     only a place with a matrix row moves the plan, because every leg must come from
-    the matrix (gate B3, no haversine). `lat`/`lon` alone are kept for display.
+    the matrix (gate B3). With a `poi_id`, `lat`/`lon` are only for display.
+
+    `lat`/`lon` WITHOUT a `poi_id` are a device position (GPS fix): the day starts
+    there, its legs borrowed from the places with a matrix row nearest to it plus the
+    ride to them (services/gps_origin.py). A fix that cannot be used (more than 3 km
+    from every place, outside Da Nang, `accuracy_m` over 1 km) starts the day at
+    `fallback_poi_id` instead, or leaves it an open tour; the plan warns either way.
     """
 
-    lat: float | None = None
-    lon: float | None = None
+    lat: float | None = Field(default=None, ge=-90, le=90)
+    lon: float | None = Field(default=None, ge=-180, le=180)
     label: str = ""
     poi_id: str | None = None
+    # The device's own uncertainty radius of the fix, in metres (GPS only).
+    accuracy_m: float | None = Field(default=None, ge=0)
+    # Where the day starts when the fix cannot be used (GPS only).
+    fallback_poi_id: str | None = None
 
     @model_validator(mode="after")
     def _anchored(self) -> "Origin":

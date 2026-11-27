@@ -36,9 +36,11 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
     for a, b in _legs(acts, trip.get("origin_id")):
         cell = (matrix.get(f"{a}->{b}", {}) or {})
         km, minutes = float(cell.get("km", 0.0)), int(cell.get("minutes", 0))
+        # "cache": the matrix's own leg; "gps_estimate": the first leg of a day that
+        # starts at a GPS fix (matrix.with_starts).
         segments.append({"from_id": a, "to_id": b,
                          "mode": "motorbike", "km": km, "minutes": minutes,
-                         "source": "cache"})
+                         "source": cell.get("source") or "cache"})
         total_km += km
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)

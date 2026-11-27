@@ -54,6 +54,18 @@ class PlanningRequestBody(BaseModel):
     constraint_overrides: ConstraintOverrides = Field(default_factory=ConstraintOverrides)
 
 
+class DevicePosition(BaseModel):
+    """One GPS fix of the device, taken when the traveller asks for the replan (never a
+    stream). The first day of the replan starts there (specs/024-gps-origin)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    lat: float = Field(ge=-90, le=90)
+    lon: float = Field(ge=-180, le=180)
+    # The fix's uncertainty radius the device reports, in metres.
+    accuracy_m: float | None = Field(default=None, ge=0)
+
+
 class ReplanBody(BaseModel):
     source_version_id: UUID
     completed_activity_ids: list[str] = Field(default_factory=list)
@@ -62,6 +74,8 @@ class ReplanBody(BaseModel):
     unavailable_poi_ids: list[str] = Field(default_factory=list)
     changed_constraints: dict = Field(default_factory=dict)
     target_count: int = Field(default=5, ge=1, le=5)
+    # Where the traveller is now; None: the latest finished stop of the day, else the base.
+    current_location: DevicePosition | None = None
 
 
 def _key(value: str | None) -> str:

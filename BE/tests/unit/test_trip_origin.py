@@ -92,9 +92,12 @@ class TestRouterResolvesTheOrigin(unittest.TestCase):
         self.assertIsNone(pid)
         self.assertIn("chua co ma tran", why)
 
-    def test_a_bare_position_keeps_the_open_tour(self):
-        self.assertEqual(_origin_id({"lat": 16.0, "lon": 108.2}, self.BY_ID, self.CELLS),
-                         (None, None))
+    def test_a_bare_position_is_a_gps_fix(self):
+        # It borrows the row of a place near it (test_gps_origin.py); here no place has
+        # coordinates, so the day stays an open tour and the plan says why.
+        pid, why = _origin_id({"lat": 16.0, "lon": 108.2}, self.BY_ID, self.CELLS)
+        self.assertIsNone(pid)
+        self.assertIn("khong dung vi tri GPS", why)
 
 
 class TestOrderSearchStartsAtTheBase(unittest.TestCase):
