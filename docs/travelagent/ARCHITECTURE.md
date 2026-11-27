@@ -146,8 +146,8 @@ Thêm bảng sự kiện đụng API và migration DB, nên cần duyệt thiế
 
 | Data | Quy mô | Nguồn | Dùng cho | Trạng thái 25/11 |
 |---|---|---|---|---|
-| POI danang-v2 | 1.029 POI: 916 active (840 điểm dừng + 76 nơi ở), 93 excluded, 20 review | crawl, OSM, người xác minh; trường Google bị cách ly | mọi bước | mặc định (PR #32); nhãn món `tags.dishes` (PR #31); nhãn cùng chỗ / gộp bản ghi (PR #38) |
-| Ma trận đi lại | 1.009 × 1.009, phút và km | OSRM xe máy | ràng buộc đi kịp, T9 | có, gồm nơi ở; 20 quán mới chờ dựng lại |
+| POI danang-v2 | 1.029 POI: 936 active (860 điểm dừng + 76 nơi ở), 93 excluded, 0 review | crawl, OSM, người xác minh; trường Google bị cách ly | mọi bước | mặc định (PR #32); nhãn món `tags.dishes` (PR #31); nhãn cùng chỗ / gộp bản ghi (PR #38) |
+| Ma trận đi lại | 1.029 × 1.029, phút và km | OSRM xe máy | ràng buộc đi kịp, T9 | có, gồm nơi ở; 20 quán mới có hàng từ 25/11 (ô cũ giữ nguyên) |
 | Prior thời gian ở | 31 loại; 45 POI đã xác nhận | `v2_rules.py` | model thời gian ở | có; phần lớn độ tin 0,4 |
 | Prior hệ số giờ | zone × khung giờ | `travel_time_factors.json` | hệ số giờ đi lại | có, chưa hiệu chỉnh |
 | Câu gold | 30 câu | `BE/eval/gold/gold_v2.json` | kiểm parser, đo trước/sau | có |
@@ -165,9 +165,9 @@ Giới hạn: không dùng trường Google để train hay chạy production kh
 |---|---|---|---|---|
 | 1 App | profile, điểm xuất phát, khu vực | — | — | — |
 | 2 Parser | LLM | — | bộ câu kiểm parser | — |
-| 3 Lọc cứng | POI danang-v2 | giờ mở: 342 có nguồn, 498 ước lượng; giá ~11% có nguồn | — | — |
+| 3 Lọc cứng | POI danang-v2 | giờ mở: 350 có nguồn, 505 ước lượng (không tính nơi ở); giá 167/860 điểm dừng (19%) có nguồn | — | — |
 | 4 Điểm POI | nhãn POI; nhãn món (PR #31) | độ nổi tiếng 33 mức | w_user (cần log) | — |
-| 5 Thời gian | ma trận 1.009 × 1.009 | bảng thời gian ở 31 loại; hệ số giờ | hàng ma trận cho 20 quán mới | — |
+| 5 Thời gian | ma trận 1.029 × 1.029 | bảng thời gian ở 31 loại; hệ số giờ | — | — |
 | 6 Cắt 40 | poi_features 42 cột | — | — | data thầy |
 | 7 Gợi ý | greedy hint | — | — | data thầy (pointer) |
 | 8 CP-SAT | PATM 1.770 cặp; khí hậu, dự báo | trọng số v1 (tay); u(t) 12 đường | — | — |

@@ -749,26 +749,26 @@ manual:be-man,Hải Sản Bé Mặn,restaurant,restaurant,True,False,0.8,active
 manual:banh-xeo-ba-duong,Bánh Xèo Bà Dưỡng,restaurant,restaurant,True,False,0.8,active
 manual:golden-pine,New Golden Pine Club,nightlife,nightlife,True,False,0.8,active
 manual:sky36,Sky36,nightlife,,False,True,0.5,active
-osm:node/4948013624,Bún chả cá 109,restaurant,restaurant,True,False,0.6,review
-osm:node/12350543701,Bún chả cá Hờn,restaurant,restaurant,True,False,0.6,review
-osm:node/12372824403,Bún chả cá Bà Hoa,restaurant,restaurant,True,False,0.6,review
-osm:node/6152679485,Quán Mậu - Bánh tráng thịt heo,restaurant,restaurant,True,False,0.6,review
-osm:node/14064309337,Đặc sản Trần,restaurant,day_market,False,False,0.3,review
-osm:node/12612220045,Quán Đại Lộc,restaurant,restaurant,True,False,0.6,review
-osm:node/6152685685,Bún Mắm Vân,restaurant,restaurant,True,False,0.6,review
-osm:node/4118223691,Bê thui số 3 Tuệ Tĩnh,restaurant,,False,False,0.3,review
-osm:node/13288511161,Nhà hàng chay Ngọc Chi (Hải Châu),restaurant,restaurant,True,False,0.6,review
-osm:node/5947469393,Bảo An Macrobiotic,restaurant,,False,False,0.3,review
-osm:node/10777150405,Quán chay Tỉnh Quán,restaurant,restaurant,True,False,0.6,review
-osm:way/1208690134,Loving Vegan,restaurant,,False,False,0.3,review
-osm:node/12905689342,Chay Corner,restaurant,,False,False,0.3,review
-osm:node/11198985391,iVegan,restaurant,,False,False,0.3,review
-osm:node/12174005655,Bánh canh cá nục Nhi,restaurant,restaurant,True,False,0.6,review
-osm:node/14269716101,Nem lụi - bò lá lốt Được (chợ Hàn),restaurant,day_market,False,False,0.3,review
-osm:node/2988814633,Bánh bèo 291 Nguyễn Chí Thanh,restaurant,restaurant,True,False,0.6,review
-osm:node/6469566385,Bánh xèo Cô Ba,restaurant,restaurant,True,False,0.6,review
-osm:node/12833350535,Hải Sản Ốc 68,restaurant,restaurant,True,False,0.6,review
-osm:node/13022818102,Bánh canh cá lóc Bé Huế,restaurant,restaurant,True,False,0.6,review
+osm:node/4948013624,Bún chả cá 109,restaurant,restaurant,True,False,0.6,active
+osm:node/12350543701,Bún chả cá Hờn,restaurant,restaurant,True,False,0.6,active
+osm:node/12372824403,Bún chả cá Bà Hoa,restaurant,restaurant,True,False,0.6,active
+osm:node/6152679485,Quán Mậu - Bánh tráng thịt heo,restaurant,restaurant,True,False,0.6,active
+osm:node/14064309337,Đặc sản Trần,restaurant,day_market,False,False,0.3,active
+osm:node/12612220045,Quán Đại Lộc,restaurant,restaurant,True,False,0.6,active
+osm:node/6152685685,Bún Mắm Vân,restaurant,restaurant,True,False,0.6,active
+osm:node/4118223691,Bê thui số 3 Tuệ Tĩnh,restaurant,,False,False,0.3,active
+osm:node/13288511161,Nhà hàng chay Ngọc Chi (Hải Châu),restaurant,restaurant,True,False,0.6,active
+osm:node/5947469393,Bảo An Macrobiotic,restaurant,,False,False,0.3,active
+osm:node/10777150405,Quán chay Tỉnh Quán,restaurant,restaurant,True,False,0.6,active
+osm:way/1208690134,Loving Vegan,restaurant,,False,False,0.3,active
+osm:node/12905689342,Chay Corner,restaurant,,False,False,0.3,active
+osm:node/11198985391,iVegan,restaurant,,False,False,0.3,active
+osm:node/12174005655,Bánh canh cá nục Nhi,restaurant,restaurant,True,False,0.6,active
+osm:node/14269716101,Nem lụi - bò lá lốt Được (chợ Hàn),restaurant,day_market,False,False,0.3,active
+osm:node/2988814633,Bánh bèo 291 Nguyễn Chí Thanh,restaurant,restaurant,True,False,0.6,active
+osm:node/6469566385,Bánh xèo Cô Ba,restaurant,restaurant,True,False,0.6,active
+osm:node/12833350535,Hải Sản Ốc 68,restaurant,restaurant,True,False,0.6,active
+osm:node/13022818102,Bánh canh cá lóc Bé Huế,restaurant,restaurant,True,False,0.6,active
 manual:hoi-an-pho-di-bo-hoa-dang,"Phố đi bộ phố cổ Hội An (tường vàng, thả hoa đăng sông Hoài)",outdoor_landmark,outdoor_landmark,True,False,0.6,active
 manual:hoi-an-bai-choi,Hát Bài Chòi ven sông Hoài (Vườn tượng An Hội),outdoor_landmark,outdoor_landmark,True,False,0.6,active
 osm:way/630377259,Bãi biển Tiên Sa,beach,beach,True,False,0.6,active
