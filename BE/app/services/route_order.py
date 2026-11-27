@@ -121,13 +121,29 @@ def held_to(stub, span: list[int]):
         for lo, hi in windows if max(lo, span[0]) < min(hi, span[1] + stub.visit_min)))
 
 
+def quarter_probes(start: int, visit_min: int) -> tuple[int, int]:
+    """Where the solver reads a visit's hour (T2 state and rain): start + d//4 and
+    start + 3d//4, d = the visit minutes (`optimizer` DYNAMIC STATE,
+    `objective.state_terms`)."""
+    return start + int(visit_min) // 4, start + int(visit_min) * 3 // 4
+
+
 def kept_dry(stub, wet: list[tuple[int, int]]):
-    """The stub with the wet hours cut out of its windows: a stop the solver seated
-    in a dry hour is not moved into the rain for a shorter drive."""
-    windows = list(stub.windows or ((stub.open_min, stub.close_min),))
-    for a, b in wet:
-        windows = [piece for lo, hi in windows
-                   for piece in ((lo, min(hi, a)), (max(lo, b), hi)) if piece[0] < piece[1]]
+    """The stub cut to the starts whose quarter probes (`quarter_probes`) stay out of
+    the wet hours: a stop the solver seated in a dry hour is not moved into the rain
+    for a shorter drive. "In the rain" is the solver's own reading, so a visit may
+    brush a wet hour by less than a quarter of its length, as the solver allowed."""
+    visit = int(stub.visit_min)
+    first, third = quarter_probes(0, visit)
+    windows = []
+    for lo, hi in (stub.windows or ((stub.open_min, stub.close_min),)):
+        starts = [(lo, hi - visit + 1)]  # half-open range of the starts this window holds
+        for a, b in wet:
+            for offset in (first, third):  # a probe at start + offset inside [a, b)
+                starts = [piece for s, e in starts
+                          for piece in ((s, min(e, a - offset)), (max(s, b - offset), e))
+                          if piece[0] < piece[1]]
+        windows += [(s, e - 1 + visit) for s, e in starts]
     return replace(stub, windows=tuple(windows)) if windows else stub
 
 
