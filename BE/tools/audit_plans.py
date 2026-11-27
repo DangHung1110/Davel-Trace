@@ -13,6 +13,8 @@ Usage (repo root):
   python BE/tools/audit_plans.py --out audit.json                 # plan, then report
   python BE/tools/audit_plans.py --out audit.json --report-only   # report saved plans
   python BE/tools/audit_plans.py --out audit.json --only T,W --plans plans.txt
+  python BE/tools/audit_plans.py --out audit.json --origin <poi_id>      # every day from a place
+  python BE/tools/audit_plans.py --out audit.json --origin 16.0623,108.2452   # ... from a GPS fix
 
  writes every plan in readable form with its flags, for reading by eye. The
 thresholds are this file's own (a hole is 75 idle minutes, a detour 1.5 times the
@@ -142,8 +144,24 @@ SCENARIOS: list[tuple[str, dict]] = [
 ]
 
 
-def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int = 1) -> None:
-    """Plan every scenario and save the responses with their wall and CPU seconds."""
+def parse_origin(text: str | None) -> dict | None:
+    """`--origin`: "<lat>,<lon>" is a GPS fix, anything else a place's poi_id."""
+    if not text:
+        return None
+    parts = text.split(",")
+    if len(parts) == 2:
+        try:
+            return {"lat": float(parts[0]), "lon": float(parts[1])}
+        except ValueError:
+            pass
+    return {"poi_id": text}
+
+
+def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int = 1,
+        origin: dict | None = None) -> None:
+    """Plan every scenario and save the responses with their wall and CPU seconds.
+
+    `origin`: where every day starts (TripRequest.origin); None plans open tours."""
     from fastapi.testclient import TestClient
 
     from BE.app import main as main_mod
@@ -163,7 +181,7 @@ def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int
             for key, extra in SCENARIOS:
                 if only and not any(key.startswith(p) for p in only):
                     continue
-                trip = {**DAY, **extra}
+                trip = {**DAY, **extra, **({"origin": origin} if origin else {})}
                 cpu0 = time.process_time()
                 t0 = time.perf_counter()
                 resp = client.post("/v1/itinerary", json={"trip": trip})
@@ -560,9 +578,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--report-only", action="store_true", help="judge the plans already in --out")
     parser.add_argument("--plans", default=None, help="write every plan with its flags to this text file")
     parser.add_argument("--flags", default=None, help="write the flags and day statistics to this JSON file")
+    parser.add_argument("--origin", default=None,
+                        help='where every day starts: a poi_id, or "lat,lon" for a GPS fix')
     args = parser.parse_args(argv)
     if not args.report_only:
-        run(args.out, os.path.abspath(args.snapshot), [p for p in args.only.split(",") if p], args.repeat)
+        run(args.out, os.path.abspath(args.snapshot), [p for p in args.only.split(",") if p], args.repeat,
+            parse_origin(args.origin))
     report(args.out, args.plans, args.flags)
     return 0
 
