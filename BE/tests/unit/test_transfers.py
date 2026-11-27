@@ -226,6 +226,18 @@ class TestPlanSegments(unittest.TestCase):
         self.assertEqual((second["mode"], second["minutes"]), ("boat+motorbike", 24))
         self.assertEqual(totals["travel_min"], 51)
 
+    def test_gps_segment_keeps_the_chosen_anchors_transfer(self):
+        base, _ = _applied()
+        acts = [{"poi_id": "top1", "start": "09:00", "end": "10:00"}]
+        for access, mode in [(0, "cable_car"), (2, "motorbike+cable_car")]:
+            cells = matrix_mod.with_starts(base, {"@gps": (("a", 1, 0.5), ("base", access, 0))})
+            totals = plan_totals(acts, {"origin_id": "@gps"}, {}, cells)
+            segment, = totals["segments"]
+            self.assertEqual((segment["source"], segment["mode"]), ("gps_estimate", mode))
+            self.assertEqual(segment["minutes"], 8 + access)
+            self.assertEqual(segment["transfers"], base["base->top1"]["transfers"])
+        self.assertEqual(matrix_mod.legs_to(base, ["top1"], "base"), {("top1", "base"): 8})
+
     def test_road_legs_keep_the_old_shape(self):
         cells, _ = _applied()
         acts = [{"poi_id": "a", "start": "08:00", "end": "09:00"},

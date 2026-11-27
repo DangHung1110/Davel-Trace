@@ -378,6 +378,55 @@ def test_a_replan_on_the_second_day_plans_that_day_alone(lifecycle):
     assert replan["origin"]["poi_id"] == "hotel-1"
 
 
+def test_the_device_position_starts_the_replan(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    _second_day(database_url, trip_id)
+    planning, seen = _capturing(service, lambda: _utc(10, 7, 5))  # 14:05 on day 1
+    source = _accepted(planning, owner, trip_id, "gps", base_poi_id="hotel-1")
+    _finish_first_stop(database_url, trip_id, "cafe-1")
+
+    replanned = planning.replan(owner, trip_id, "gps-replan", {
+        "source_version_id": source, "target_count": 1,
+        "current_location": {"lat": 16.07441234, "lon": 108.24498765, "accuracy_m": 12.4}})
+
+    replan = seen[-1]
+    # Today from where the device is (the cafe if the planner cannot use the fix),
+    # tomorrow from the hotel.
+    first = replan["resume"]["origin"]
+    assert (first["lat"], first["lon"], first["accuracy_m"]) == (16.0744, 108.245, 12)
+    assert (first["poi_id"], first["fallback_poi_id"]) == (None, "cafe-1")
+    assert replan["origin"]["poi_id"] == "hotel-1"
+    stored = replanned["remaining_context"]
+    assert stored["current_location"] == {"lat": 16.0744, "lon": 108.245, "accuracy_m": 12}
+    assert stored["current_location_date"] == "2026-11-10"
+
+
+def test_a_position_sent_for_tomorrow_is_not_where_tomorrow_starts(lifecycle):
+    service, owner, _other, trip_id, database_url = lifecycle
+    _second_day(database_url, trip_id)
+    planning, seen = _capturing(service, lambda: _utc(10, 10, 30))  # 17:30, day_end 18:00
+    source = _accepted(planning, owner, trip_id, "gps-late", base_poi_id="hotel-1")
+
+    planning.replan(owner, trip_id, "gps-late-replan", {
+        "source_version_id": source, "current_location": {"lat": 16.0744, "lon": 108.245}})
+
+    replan = seen[-1]
+    assert (replan["date"], replan["start_time"]) == ("2026-11-11", "07:00")
+    assert replan["origin"]["poi_id"] == "hotel-1"
+    assert replan["resume"] is None
+
+
+def test_a_replan_without_a_position_stores_none(lifecycle):
+    service, owner, _other, trip_id, _database_url = lifecycle
+    planning, _seen = _capturing(service, lambda: _utc(10, 7, 5))
+    source = _accepted(planning, owner, trip_id, "no-gps")
+
+    replanned = planning.replan(owner, trip_id, "no-gps-replan", {"source_version_id": source})
+
+    assert "current_location" not in replanned["remaining_context"]
+    assert "current_location_date" not in replanned["remaining_context"]
+
+
 def test_the_device_time_wins_over_the_server_clock(lifecycle):
     service, owner, _other, trip_id, _database_url = lifecycle
     planning, seen = _capturing(service, lambda: _utc(10, 7, 5))

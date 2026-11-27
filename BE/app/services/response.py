@@ -38,7 +38,7 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
         km, minutes = float(cell.get("km", 0.0)), int(cell.get("minutes", 0))
         segment = {"from_id": a, "to_id": b,
                    "mode": cell.get("mode", "motorbike"), "km": km, "minutes": minutes,
-                   "source": "cache"}
+                   "source": cell.get("source") or "cache"}
         if cell.get("transfers"):   # boat / cable car / walk legs (services/transfers.py)
             segment["transfers"] = cell["transfers"]
         segments.append(segment)

@@ -9,12 +9,16 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "BE", "ml", "data"))
 
 from migrate_v2 import apply_booking  # noqa: E402
-from BE.app.services.gate import check_a1, check_rest_follows_lunch, rest_rule_violation  # noqa: E402
-from BE.app.services.optimizer import StubPOI, StubTrip, optimize, poi_to_stub  # noqa: E402
+from BE.app.services.gate import (  # noqa: E402
+    check_a1, check_rest_follows_lunch, check_vroh, rest_rule_violation)
+from BE.app.services.optimizer import (  # noqa: E402
+    StubPOI, StubTrip, optimize, poi_to_stub, poi_visit_min)
 from BE.app.services.profiles import _gate_view  # noqa: E402
 from BE.app.services.retrieval import retrieve, uncertainty, wants_booking  # noqa: E402
 from BE.app.services.soft_rules import is_meal_experience  # noqa: E402
-from BE.common import load_pois  # noqa: E402
+from BE.common import (  # noqa: E402
+    day_sessions, day_spans, hhmm, is_by_booking, load_pois, poi_open_windows, session_windows,
+    to_min)
 
 H = 60
 SNAPSHOT_V2 = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
@@ -173,3 +177,104 @@ class TestGateSeesTheClassAsAMeal(unittest.TestCase):
         self.assertTrue([p["name"] for p in pois if is_meal_experience(p)])  # 7 on 2026-11-24
         self.assertEqual([p["name"] for p in pois
                           if is_meal_experience(_gate_view(p)) != is_meal_experience(p)], [])
+
+
+class TestClassSessionsStayApart(unittest.TestCase):
+    """A class sold in overlapping sessions is booked one whole session at a time.
+
+    `opening_hours` holds every session in one element, and `day_spans` merges the
+    overlapping ones (right for a shop open 09:00-13:30 and 12:00-16:30). For Apron Up
+    that made one 09:00-20:30 window: the solver started the 4.5 h class at 10:23,
+    across two sessions, and gate VROH (each session on its own) rejected the plan.
+    """
+
+    SPEC = "09:00-13:30, 12:00-16:30, 16:00-20:30"   # Apron Up on danang-v2
+    SESSIONS = [(9 * H, 13 * H + 30), (12 * H, 16 * H + 30), (16 * H, 20 * H + 30)]
+
+    def _class(self, kind="by_booking"):
+        return {"poi_id": "c1", "verified": True, "status": "active", "category": "paid_attraction",
+                "cat": "attraction", "type": "trải nghiệm", "plan_tier": "main",
+                "opening_hours": [self.SPEC],
+                "hours": {"kind": kind, "open": self.SPEC.split(", ")},
+                "visit_min": {"p25": 270, "p50": 270, "p75": 270}}
+
+    def _solve(self, leg: int, end: str):
+        trip = {"start_time": "08:00", "end_time": end}
+        stub = poi_to_stub(self._class(), trip)
+        return optimize([stub], {("depot", "c1"): leg}, StubTrip(8 * H, to_min(end), "depot"),
+                        must_visit=["c1"], timeout_s=5)
+
+    def test_the_solver_sees_every_session_apart(self):
+        self.assertEqual(poi_open_windows(self._class()), self.SESSIONS)
+        stub = poi_to_stub(self._class(), {"start_time": "08:00", "end_time": "21:00"})
+        self.assertEqual(stub.windows, tuple(self.SESSIONS))
+        self.assertTrue(stub.booking)
+
+    def test_ordinary_hours_still_merge(self):
+        whole_day = [(9 * H, 20 * H + 30)]
+        self.assertEqual(day_spans(self.SPEC), whole_day)
+        self.assertEqual(day_sessions(self.SPEC), self.SESSIONS)
+        self.assertEqual(poi_open_windows(self._class(kind="fixed")), whole_day)
+        self.assertEqual(poi_open_windows({**self._class(), "hours": {}}), whole_day)
+
+    def test_only_a_session_sold_on_every_variant(self):
+        self.assertEqual(session_windows(["09:00-13:00, 15:00-19:00", "15:00-19:00"]),
+                         [(15 * H, 19 * H)])
+        self.assertEqual(session_windows(["09:00-13:00", "09:30-13:00"]), [])
+        self.assertIsNone(session_windows([]))
+        self.assertIsNone(session_windows(None))
+        self.assertEqual(poi_open_windows({**self._class(), "closed_today": True}), [])
+
+    def test_the_solver_books_one_whole_session(self):
+        gate = {"c1": _gate_view(self._class())}
+        for leg, end, want in ((0, "21:00", None), (120, "21:00", None),
+                               (120, "17:00", ("12:00", "16:30"))):
+            out = self._solve(leg, end)
+            (act,) = out["itinerary"]["activities"]
+            got = (act["start"], act["end"])
+            self.assertIn(got, [(hhmm(o), hhmm(c)) for o, c in self.SESSIONS], (leg, end))
+            if want:
+                self.assertEqual(got, want)
+            self.assertTrue(check_vroh(out["itinerary"], {}, gate, {})["passed"], got)
+
+    def test_no_session_fits_means_no_class(self):
+        # at 09:40 the 09:00 class has begun, and the 12:00 one ends after a 15:00 day
+        out = self._solve(100, "15:00")
+        self.assertEqual(out["status"], "infeasible")
+        self.assertIsNone(out["itinerary"])
+
+    def test_the_gate_rejects_a_class_between_sessions(self):
+        gate = {"c1": _gate_view(self._class())}
+        between = {"activities": [{"poi_id": "c1", "start": "10:23", "end": "14:53"}]}
+        self.assertFalse(check_vroh(between, {}, gate, {})["passed"])
+
+    def test_repair_and_replan_read_the_same_sessions(self):
+        from BE.app.services.repair import _fits_slot
+        from BE.app.services.replan import _stub
+        self.assertTrue(_fits_slot(self._class(), 12 * H, 16 * H + 30))
+        self.assertFalse(_fits_slot(self._class(), 10 * H + 23, 14 * H + 53))
+        stub = _stub(self._class(), {"start_time": "08:00", "end_time": "21:00"}, {}, 1.0)
+        self.assertEqual(stub.windows, tuple(self.SESSIONS))
+
+    @unittest.skipUnless(os.path.exists(os.path.join(SNAPSHOT_V2, "pois.json")), "danang-v2 missing")
+    def test_every_danang_v2_class_fits_only_on_its_sessions(self):
+        classes = [p for p in load_pois(SNAPSHOT_V2) if is_by_booking(p)]
+        self.assertTrue(classes)  # 7 on 2026-11-25, 2 of them with overlapping sessions
+        for poi in classes:
+            sessions = sorted(tuple(to_min(x) for x in s.split("-")) for s in poi["hours"]["open"])
+            self.assertEqual(poi_open_windows(poi), sessions, poi["name"])
+            dwell = poi_visit_min(poi)
+            gate = {poi["poi_id"]: _gate_view(poi)}
+
+            def plan(start):
+                return {"activities": [{"poi_id": poi["poi_id"], "start": hhmm(start),
+                                        "end": hhmm(start + dwell)}]}
+
+            for o, c in sessions:
+                # the dwell is the session: a visit fits a session only from its start
+                self.assertEqual(c - o, dwell, poi["name"])
+                self.assertTrue(check_vroh(plan(o), {}, gate, {})["passed"], (poi["name"], o))
+            for (o1, c1), (o2, _c2) in zip(sessions, sessions[1:]):
+                if o2 < c1:  # overlapping sessions: a visit between them is in neither
+                    self.assertFalse(check_vroh(plan((o1 + o2) // 2), {}, gate, {})["passed"],
+                                     poi["name"])
