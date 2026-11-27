@@ -141,7 +141,7 @@ Replan: app không phải gửi gì thêm. Server biết vé đã mua từ các 
 ## Gộp với nhánh khác
 
 - `fix/transfer-fares` nằm trên `fix/non-road-legs`, nên gộp sau nhánh đó.
-- `fix/app-replan-paid-access` nằm trên `fix/transfer-fares`, nên gộp sau nhánh đó.
+- `fix/app-replan-paid-access` nằm trên `fix/transfer-fares`, nên gộp sau nhánh đó. So với `main` hiện tại (đã có `feat/gps-origin`), ngoài các xung đột của `fix/transfer-fares` còn 3 file. Trong `BE/app/modules/planning_lifecycle/service.py`, khối `resume` của `_trip_request` lấy điểm xuất phát dạng dict của `main` (`first_origin != base_origin`, `"origin": first_origin`, `origin = base_origin`) cộng phần `paid`/`paid_today` của nhánh này, và trả `InternalTripRequest`; cuối `replan()` giữ cả `_device_fix` lẫn danh sách `done`. Hai file test (`BE/tests/unit/test_replan_window.py`, `BE/tests/integration/test_stable_planner_lifecycle.py`) chỉ là hai phía cùng thêm import hoặc test: giữ cả hai.
 - `feat/single-poi-value` (chưa gộp) xung đột ở `BE/app/services/profiles.py` (import, `_score`, phần tính điểm nút). Khi giải: giữ cấu trúc `value_svc.score` của nhánh kia, giữ `paid=paid` cho `_score` (đường legacy), và trong `BE/app/services/value.py` đổi `effective_fee(poi)` ở `place_features` và `explain` thành `visit_fee(poi, paid_access(trip))`. Nếu không, dưới objective v1 hồ sơ tiết kiệm lại coi Cầu Vàng, nhà cổ Hội An là "miễn phí" và cộng điểm thưởng miễn phí, dù tiền vé vẫn bị tính.
 
 ## Thêm hoặc sửa một cửa ngõ
