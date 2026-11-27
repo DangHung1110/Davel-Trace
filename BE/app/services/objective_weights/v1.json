@@ -1,7 +1,9 @@
 {
   "version": "v1",
-  "note": "Hand-set v1 weights (doc: Davel - Ham muc tieu v1). Units of U = the top candidate score of the pool. 24/11 after the held-out runs: beta.market 2.0 (Cho Han + Cho Con on one day in 17/120 plans), beta.history 1.5 (two museums in 9/120), kappa 0.6/1.2/2.0 (28/120 plans over the template pace ceiling). tau 0.014 = the legacy edge travel weight of balanced/experience (~0.006 U/min) folded into T9, now the only place riding minutes cost. profiles: the three plans of a request are this objective under three weight sets. experience keeps the legacy 2.5x diversity; savings keeps its legacy edge travel weight (~0.038 U/min, tau 0.045) and doubles the pace penalty (its free stops all score near U). 24/11 step 1: dup_* = T11 near-duplicates (same alt_group, a whole-area stop + a stop inside it, a second daytime market, two meals of one dish; 0.5 stays below the dinner bonus so a day never drops a meal to avoid a repeat). meal_bonus.dinner 0.8 -> 1.2: a day that spans the evening ate no dinner in 6/26 held-out plans (legacy 0/25), its last sight (river cruise, Cầu Rồng) was worth more than 0.8U (1.5 also fixed it but left a beach on a rainy day of a 2-day trip under the 5-unit search), counted on the day so a stop slipped in between does not escape. To be replaced by learned weights (same keys, new file).",
+  "note": "Hand-set v1 weights (doc: Davel - Ham muc tieu v1). Units of U = the top candidate score of the pool. 24/11 after the held-out runs: beta.market 2.0 (Cho Han + Cho Con on one day in 17/120 plans), beta.history 1.5 (two museums in 9/120), kappa 0.6/1.2/2.0 (28/120 plans over the template pace ceiling). tau 0.014 = the legacy edge travel weight of balanced/experience (~0.006 U/min) folded into T9, now the only place riding minutes cost. profiles: the three plans of a request are this objective under three weight sets. experience keeps the legacy 2.5x diversity; savings keeps its legacy edge travel weight (~0.038 U/min, tau 0.045) and doubles the pace penalty (its free stops all score near U). 24/11 step 1: dup_* = T11 near-duplicates (same alt_group, a whole-area stop + a stop inside it, a second daytime market, two meals of one dish; 0.5 stays below the dinner bonus so a day never drops a meal to avoid a repeat). meal_bonus.dinner 0.8 -> 1.2: a day that spans the evening ate no dinner in 6/26 held-out plans (legacy 0/25), its last sight (river cruise, Cầu Rồng) was worth more than 0.8U (1.5 also fixed it but left a beach on a rainy day of a 2-day trip under the 5-unit search), counted on the day so a stop slipped in between does not escape. 25/11 step 4: `value` = the weights of T1, one function for every profile (value.py): v_i = sum of place features (base, fee, rating, fame, novelty, free, free_outdoor; fee is a cost) + U0 x the traveller's (taste, spending, outdoor, liked), U0 = the pool's top place value. The shared block is balanced; savings and experience override single keys in profiles.<name>.value. The numbers are the pre-v1 node scores, except that savings no longer charges its mean matrix leg in v_i (T9 charges riding): cap_avg_leg (1/60 per minute) only ranks its candidate cap. 26/11: price_level dropped from T1 (on danang-v2 it is the price tier again, the source of fee: two collinear columns cannot be learned apart; 52/60 savings days kept their stops). Kept on evidence: cap_avg_leg (without it savings J is lower on 53/60 days) and free_outdoor (it brings the beaches, nature and markets of savings: 60 -> 38 such stops without it). 26/11 search_scale 1.6 -> 1.2: the 1.6 paid for a search that converged slowly (the A2 restaurant pairs and the meal/slot window tests were time disjunctions the search LP did not see, and the greedy seed did not know v1: below zero on 61/74 savings solves of BE/tools/audit_plans.py). With both fixed (optimizer.py) 6 units give a better objective than main's 8 on 26 of 222 audit solves, a worse one on 19, +3.0% on average, and the slowest bench_latency request fits the 8 s gate. 26/11: w_rain 1.0 = the rain cost of trip_ctx.rain_costs, given a weight of its own so a learned file can set it (1.0 is the solver before). 26/11 step 2b: w_wait 0.0 = the idle minutes between stops (`wait`, objective.idle_minutes), measured for the pilot only; the solver has no such term, so plans do not change. To be replaced by learned weights (same keys, new file).",
   "w_state": 0.5,
+  "w_rain": 1.0,
+  "w_wait": 0.0,
   "rho": [
     0.35,
     0.7,
@@ -64,16 +66,44 @@
   "dup_market_food_tour": 0.1,
   "dup_dish": 0.5,
   "solver_candidates": 40,
-  "search_scale": 1.6,
+  "search_scale": 1.2,
+  "value": {
+    "base": 0.0,
+    "fee": 0.0,
+    "rating": 1.0,
+    "fame": 0.4,
+    "novelty": 0.0,
+    "free": 0.0,
+    "free_outdoor": 0.0,
+    "taste": 0.2,
+    "spending": 0.15,
+    "outdoor": 0.15,
+    "liked": 0.2,
+    "cap_avg_leg": 0.0
+  },
   "profiles": {
     "savings": {
       "tau": 0.045,
       "pace_scale": 2.0,
-      "repeat_scale": 1.5
+      "repeat_scale": 1.5,
+      "value": {
+        "base": 1.0,
+        "fee": 1.0,
+        "rating": 0.05,
+        "fame": 0.05,
+        "free": 0.15,
+        "free_outdoor": 0.1,
+        "cap_avg_leg": 0.016666666666666666
+      }
     },
     "balanced": {},
     "experience": {
-      "repeat_scale": 2.5
+      "repeat_scale": 2.5,
+      "value": {
+        "rating": 0.1,
+        "fame": 0.3,
+        "novelty": 10.0
+      }
     }
   }
 }

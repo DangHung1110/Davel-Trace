@@ -2,7 +2,7 @@
  "format": "transfers-v1",
  "snapshot": "danang-v2",
  "built_at": "2026-11-27",
- "about": "Chặng không đi bằng xe máy. OSRM gắn mỗi ghim vào con đường xe máy gần nhất; với các nơi dưới đây con đường đó sai (đảo bị gắn vào đất liền, đỉnh Bà Nà gắn vào đường công vụ). Mỗi cửa ngõ: một đầu đường bộ (hàng có sẵn trong matrix.json) + một chặng cố định (cano, cáp treo, đi bộ) tính cả hai chiều. Áp lúc nạp ma trận (BE/app/services/transfers.py); matrix.json không đổi. Giữa hai nơi sau cùng một cửa ngõ có `inside: walk`: đi bộ theo đường chim bay x hệ số vòng.",
+ "about": "Chặng không đi bằng xe máy. OSRM gắn mỗi ghim vào con đường xe máy gần nhất; với các nơi dưới đây con đường đó sai (đảo bị gắn vào đất liền, đỉnh Bà Nà gắn vào đường công vụ). Mỗi cửa ngõ: một đầu đường bộ (hàng có sẵn trong matrix.json) + một chặng cố định (cano, cáp treo, đi bộ) tính cả hai chiều. Áp lúc nạp ma trận (BE/app/services/transfers.py); matrix.json không đổi. Giữa hai nơi sau cùng một cửa ngõ có `inside: walk`: đi bộ theo đường chim bay x hệ số vòng. `fare`: tiền của chặng, mỗi người (BE.common.access_fees): `vnd` cộng vào mỗi lần ghé (`per: visit`, một lượt khứ hồi trong ngày), hoặc `ticket_of` khi chặng nằm trong vé của một POI (cáp treo Bà Nà = vé Sun World, tính qua `requires_ticket_of`). Đi bộ không có `fare`.",
  "walk": {
   "kmh": 4.0,
   "detour": 1.3,
@@ -254,7 +254,11 @@
      "url": "https://www.openstreetmap.org/way/683416738",
      "says": "OSM: 4 tuyến gondola từ chân núi lên đỉnh (way 60807667, 683416738, 683416739, 1107381521); ga Suối Mơ way 359114074"
     }
-   ]
+   ],
+   "fare": {
+    "ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
+    "basis": "vé cáp treo khứ hồi chính là vé Sun World Bà Nà Hills (giá ở POI đó: mức expensive, 850.000đ một người; nguồn của nó ghi 1.000.000đ khách ngoại tỉnh, 650.000đ khách Đà Nẵng, vé dùng 3 ngày liên tiếp). Mọi điểm active trên đỉnh có requires_ticket_of = Sun World, nên kế hoạch có điểm trên đỉnh mà không có chính Sun World trả vé này một lần cho cả chuyến."
+   }
   },
   {
    "id": "cu_lao_cham_boat",
@@ -339,7 +343,31 @@
      "url": "https://www.openstreetmap.org/node/133589858",
      "says": "OSM: bến Cửa Đại (amenity=ferry_terminal); tuyến phà way 1581749899 + 1581749801 tới bến đảo node 7057143273"
     }
-   ]
+   ],
+   "fare": {
+    "vnd": 260000,
+    "per": "visit",
+    "unit": "một người lớn, khứ hồi trong ngày",
+    "verified_by": "agent_web",
+    "verified_at": "2026-11-27",
+    "basis": "vé cano ở bến Cửa Đại 350.000đ một người gồm 260.000đ tiền cano, 70.000đ phí tham quan và 20.000đ phí môi trường, an ninh (VnExpress). Phí tham quan đã nằm trong giá của chính Cù Lao Chàm (mức cheap), nên chặng chỉ tính phần cano. Vé cano bán khứ hồi trong ngày (Vietnambooking: 350.000-450.000đ một khách, chưa rõ đã gồm phí đảo hay chưa); Nắng Trip ghi 150.000đ, không ngày, không nói một chiều hay khứ hồi. Trẻ 1 đến dưới 8 tuổi trả nửa giá: chưa mô hình hoá (giá trong dữ liệu là giá người lớn).",
+    "sources": [
+     {
+      "url": "https://vnexpress.net/cam-nang-du-lich-cu-lao-cham-4751193.html",
+      "date": "2026-07-14",
+      "says": "vé cano 350.000đ: 260.000đ tiền cano, 70.000đ phí tham quan, 20.000đ phí môi trường và an ninh; trẻ dưới 12 tháng miễn, 1 đến dưới 8 tuổi nửa giá"
+     },
+     {
+      "url": "https://www.vietnambooking.com/du-lich/blog-du-lich/cu-lao-cham-da-nang.html",
+      "date": "2026-08-29",
+      "says": "cano cao tốc khứ hồi trong ngày 350.000-450.000đ một khách; phí tham quan đảo 70.000đ, phí sinh thái 20.000đ ghi riêng"
+     },
+     {
+      "url": "https://nangtrip.com/activities/cu-lao-cham-quang-nam",
+      "says": "cano 15 phút 150.000đ hoặc tàu gỗ 1 giờ 50.000đ từ Cửa Đại; trang không ghi ngày"
+     }
+    ]
+   }
   },
   {
    "id": "bai_sung_co_trail",

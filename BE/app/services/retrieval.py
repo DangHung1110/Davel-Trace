@@ -51,8 +51,7 @@ import unicodedata
 from functools import lru_cache
 
 from BE.app.services.profile_filter import _match_terms, fold
-from BE.common import (DISHES, effective_fee, load_json, party_size, to_min, transfers_version,
-                       view_pois)
+from BE.common import DISHES, load_json, paid_access, party_size, to_min, transfers_version, view_pois, visit_fee
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -178,7 +177,7 @@ _WISH_TIERS = {"local", "wish_only"}
 WISH_ENOUGH_MAIN = 3
 
 
-_POIS_CACHE: dict[str, tuple[tuple[int, int], list[dict]]] = {}
+_POIS_CACHE: dict[str, tuple[tuple, list[dict]]] = {}
 _POIS_LOCK = threading.Lock()
 
 
@@ -205,7 +204,7 @@ def load_pois_json(path: str) -> list[dict]:
     between requests; nothing downstream mutates a POI (they are projected
     with `poi_on_date` / `_gate_view`), so callers must keep it that way.
     The version of the snapshot's transfers.json is part of the key: the views
-    carry its timetables (`BE.common.load_transfer_places`).
+    carry its timetables and access fares.
     """
     path = os.path.abspath(path)
     stat = os.stat(path)
@@ -421,8 +420,10 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
                    else {k.split("->", 1)[0] for k in cells}) if cells else None)
     candidates, needs_verification, excluded = [], [], []
 
+    paid = paid_access(trip)
+
     def within_trip(p: dict) -> bool:
-        return (effective_fee(p) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
+        return (visit_fee(p, paid) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
 
     # The local tier opens for a wish the chosen zones cannot serve with main POIs.
     usable_main = [p for p in pois if p.get("verified") and p.get("plan_tier") == "main"
@@ -481,7 +482,9 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
         if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in opened_by):
             excluded.append({"poi_id": pid, "reason": "chi xep khi duoc yeu cau"})
             continue
-        if (effective_fee(p) or 0) * party > budget:
+        # What the visit costs on its own: a summit stop of Bà Nà buys the Sun World
+        # ticket, Cù Lao Chàm the cano (BE.common.visit_fee).
+        if (visit_fee(p, paid) or 0) * party > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
         if not _overlaps(p.get("opening_hours", []), ws, we):

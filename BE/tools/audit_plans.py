@@ -14,6 +14,8 @@ Usage (repo root):
   python BE/tools/audit_plans.py --out audit.json                 # plan, then report
   python BE/tools/audit_plans.py --out audit.json --report-only   # report saved plans
   python BE/tools/audit_plans.py --out audit.json --only T,W --plans plans.txt
+  python BE/tools/audit_plans.py --out audit.json --origin <poi_id>      # every day from a place
+  python BE/tools/audit_plans.py --out audit.json --origin 16.0623,108.2452   # ... from a GPS fix
 
  writes every plan in readable form with its flags, for reading by eye. The
 thresholds are this file's own (a hole is 75 idle minutes, a detour 1.5 times the
@@ -37,6 +39,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from BE.app.services import gps_origin, matrix as matrix_svc  # noqa: E402
 from BE.common import effective_fee, is_v21, load_matrix_cells, load_pois  # noqa: E402
 
 DEFAULT_SNAPSHOT = str(REPO_ROOT / "BE" / "data" / "snapshots" / "danang-v2")
@@ -143,8 +146,24 @@ SCENARIOS: list[tuple[str, dict]] = [
 ]
 
 
-def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int = 1) -> None:
-    """Plan every scenario and save the responses with their wall and CPU seconds."""
+def parse_origin(text: str | None) -> dict | None:
+    """`--origin`: "<lat>,<lon>" is a GPS fix, anything else a place's poi_id."""
+    if not text:
+        return None
+    parts = text.split(",")
+    if len(parts) == 2:
+        try:
+            return {"lat": float(parts[0]), "lon": float(parts[1])}
+        except ValueError:
+            pass
+    return {"poi_id": text}
+
+
+def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int = 1,
+        origin: dict | None = None) -> None:
+    """Plan every scenario and save the responses with their wall and CPU seconds.
+
+    `origin`: where every day starts (TripRequest.origin); None plans open tours."""
     from fastapi.testclient import TestClient
 
     from BE.app import main as main_mod
@@ -164,7 +183,7 @@ def run(out_path: str, snapshot: str, only: list[str] | None = None, repeat: int
             for key, extra in SCENARIOS:
                 if only and not any(key.startswith(p) for p in only):
                     continue
-                trip = {**DAY, **extra}
+                trip = {**DAY, **extra, **({"origin": origin} if origin else {})}
                 cpu0 = time.process_time()
                 t0 = time.perf_counter()
                 resp = client.post("/v1/itinerary", json={"trip": trip})
@@ -292,7 +311,8 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
               rest_minutes: int | None) -> tuple[list[str], dict]:
     flags: list[str] = []
     acts = sorted(acts, key=lambda a: a["start"])
-    ws, we = to_min(trip["start_time"]), to_min(trip["end_time"])
+    resume = (trip.get("resume") or {}) if acts and acts[0].get("day", 1) == 1 else {}
+    ws, we = to_min(resume.get("start_time") or trip["start_time"]), to_min(trip["end_time"])
     weekday = None
     try:
         weekday = datetime.date.fromisoformat(date).weekday() if date else None
@@ -304,8 +324,18 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
     previous = None
     lunch = dinner = None
     restaurant_starts = []
-    origin = trip.get("origin_id") or (trip.get("origin") or {}).get("poi_id")
-    base = pois.get(origin) if origin else None
+    position = resume.get("origin") or trip.get("origin") or {}
+    origin = resume.get("origin_id", trip.get("origin_id")) or position.get("poi_id")
+    base = pois.get(origin)
+    if not position.get("poi_id") and position.get("lat") is not None and position.get("lon") is not None:
+        fix, _ = gps_origin.locate(position["lat"], position["lon"], pois, cells,
+                                   position.get("accuracy_m"))
+        if fix:
+            origin, base = fix.start_id, gps_origin.origin_view(fix, pois)
+            cells = matrix_svc.with_starts(cells, {origin: fix.row()})
+        else:
+            origin = position.get("fallback_poi_id")
+            base = pois.get(origin) if origin and matrix_svc.has_row(cells, origin) else None
     for k, a in enumerate(acts):
         poi = pois[a["poi_id"]]
         s, e = to_min(a["start"]), to_min(a["end"])
@@ -315,7 +345,9 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
         if k == 0 and base is not None:
             # The leg from the base: the day starts there at start_time.
             cell = cells.get(f"{origin}->{a['poi_id']}")
-            if cell is not None and s - ws < cell["minutes"]:
+            if cell is None:
+                flags.append(f"ERR_NO_ROUTE {base['name']} -> {poi['name']}")
+            elif s - ws < cell["minutes"]:
                 flags.append(f"ERR_TRAVEL {base['name']} -> {poi['name']} can {cell['minutes']}p "
                              f"co {s - ws}p")
             miss = cell and ride_miss(base, poi, ws, cell["minutes"], s)
@@ -444,6 +476,34 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
     return flags, stats
 
 
+def transfer_fares(snapshot: str) -> dict[str, tuple[str, int]]:
+    """{poi_id: (gateway id, VND per person)} read straight off `transfers.json`
+    (`fare.vnd`): the cano a visit to Cù Lao Chàm pays, a round trip in the day."""
+    path = Path(snapshot) / "transfers.json"
+    if not path.exists():
+        return {}
+    spec = json.loads(path.read_text(encoding="utf-8"))
+    out = {}
+    for gate in spec.get("gateways") or []:
+        vnd = (gate.get("fare") or {}).get("vnd")
+        for place in gate.get("places") or [] if vnd else []:
+            out[place["poi_id"]] = (gate["id"], int(vnd))
+    return out
+
+
+def audit_fee(acts: list[dict], pois: dict, fares: dict) -> int:
+    """VND one person pays for a plan, judged on the raw fields (not the app's
+    `access_fees`): every stop's own price; the ticket of a `requires_ticket_of` parent
+    once for the trip, unless the parent is itself a stop; a gateway fare once per day
+    a place behind it is visited."""
+    stops = {a["poi_id"] for a in acts}
+    fee = sum(effective_fee(pois[a["poi_id"]]) or 0 for a in acts)
+    parents = {pois[a["poi_id"]].get("requires_ticket_of") for a in acts} - {None, ""} - stops
+    fee += sum(effective_fee(pois[pid]) or 0 for pid in parents if pid in pois)
+    rides = {(fares[a["poi_id"]], a.get("day") or 1) for a in acts if a["poi_id"] in fares}
+    return fee + sum(vnd for (_gate, vnd), _day in rides)
+
+
 def report(path: str, plans_out: str | None = None, json_out: str | None = None) -> dict:
     """Judge the saved plans; prints the summary and returns {"summary", "counts", ...}."""
     doc = json.load(open(path, encoding="utf-8"))
@@ -452,6 +512,7 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
     # v2.1 record only through BE.common.poi_view; v1 records pass through unchanged.
     pois = load_pois(snapshot, by_id=True)
     cells = load_matrix_cells(snapshot)
+    fares = transfer_fares(snapshot)
     name_to_id = {p["name"].strip().lower(): pid for pid, p in pois.items()}
 
     lines: list[str] = []
@@ -504,7 +565,6 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                     flags.append(f"ERR_DUPLICATE {pois[dup]['name']}")
             if acts and len(by_day) < days:
                 flags.append(f"ERR_MISSING_DAY {len(by_day)}/{days}")
-            total_fee = 0
             for number in sorted(by_day):
                 date = ""
                 if trip.get("date"):
@@ -518,8 +578,7 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                 flags += [f"{f} [ngay {number}]" if days > 1 else f for f in day_flags]
                 stats.update({"plan": pid, "day": number, "profile": plan.get("profile")})
                 day_stats.append(stats)
-                total_fee += sum(effective_fee(pois[a["poi_id"]]) or 0 for a in by_day[number])
-            cost = total_fee * max(1, int(trip.get("travelers") or 1))
+            cost = audit_fee(acts, pois, fares) * max(1, int(trip.get("travelers") or 1))
             if cost > int(trip.get("budget") or 0):
                 flags.append(f"ERR_BUDGET {cost} > {trip.get('budget')}")
             if acts and cost != plan.get("total_cost"):
@@ -559,6 +618,11 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                              f"{poi['name'][:44]} ({poi.get('rating')}*, {poi.get('review_count')}) "
                              f"{(effective_fee(poi) or 0) // 1000}k {leg}")
                 previous = a
+            for fee in plan.get("access_fees") or []:
+                names = ", ".join(pois[pid]["name"][:24] for pid in fee.get("for") or [] if pid in pois)
+                day = f"D{fee['day']} " if fee.get("day") else ""
+                lines.append(f"     $ {day}{fee.get('name')}: {fee.get('vnd_per_person', 0) // 1000}k/nguoi "
+                             f"x {fee.get('travelers')} (cho {names})")
             for f in flags:
                 lines.append(f"     ! {f}")
             for w in plan.get("warnings") or []:
@@ -620,9 +684,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--report-only", action="store_true", help="judge the plans already in --out")
     parser.add_argument("--plans", default=None, help="write every plan with its flags to this text file")
     parser.add_argument("--flags", default=None, help="write the flags and day statistics to this JSON file")
+    parser.add_argument("--origin", default=None,
+                        help='where every day starts: a poi_id, or "lat,lon" for a GPS fix')
     args = parser.parse_args(argv)
     if not args.report_only:
-        run(args.out, os.path.abspath(args.snapshot), [p for p in args.only.split(",") if p], args.repeat)
+        run(args.out, os.path.abspath(args.snapshot), [p for p in args.only.split(",") if p], args.repeat,
+            parse_origin(args.origin))
     report(args.out, args.plans, args.flags)
     return 0
 

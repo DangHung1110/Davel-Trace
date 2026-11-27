@@ -40,7 +40,7 @@ from BE.app.services import retrieval  # noqa: E402
 from BE.app.services.gate import (  # noqa: E402
     check_a1, check_cafe_cap, check_category_cap, check_no_adjacent_food, check_no_consecutive)
 from BE.common import (  # noqa: E402
-    effective_fee, hhmm as _hh, party_size, poi_open_windows, to_min as _to_min)
+    hhmm as _hh, party_size, poi_open_windows, to_min as _to_min, total_fee)
 
 DEFAULT_ORIGIN = "dragon-bridge"
 # A day holds 6-8 stops, and the day rules below skip some of the nearest stops.
@@ -131,7 +131,7 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
     """
     ws, we = _to_min(trip["start_time"]), _to_min(trip["end_time"])
     must = set(trip.get("must_visit", []))
-    budget, party, spent = int(trip.get("budget", 0)), party_size(trip), 0
+    budget, party = int(trip.get("budget", 0)), party_size(trip)
     acts, cur, prev = [], ws, None
     for pid in order:
         gap = 0 if prev is None else _edge_minutes(matrix, prev, pid)
@@ -144,8 +144,9 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
             if pid in must:
                 return None, f"must_visit {pid} exceeds hours/window"
             continue
-        fee = (effective_fee(pois[pid]) or 0) * party
-        if spent + fee > budget:
+        # The plan so far with this stop: a ticket or a cano it needs is paid once.
+        after = total_fee([*acts, {"poi_id": pid}], pois, party)
+        if after > budget:
             if pid in must:
                 return None, f"must_visit {pid} exceeds budget"
             continue
@@ -157,7 +158,7 @@ def chain_order(order: list[str], trip: dict, pois: dict, matrix: dict,
                 return None, f"must_visit {pid} breaks a day rule"
             continue
         acts.append(stop)
-        prev, cur, spent = pid, start + dur, spent + fee
+        prev, cur = pid, start + dur
     if not acts:
         return None, "empty"
     if any(m not in [a["poi_id"] for a in acts] for m in must):

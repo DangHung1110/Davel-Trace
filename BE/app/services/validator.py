@@ -12,7 +12,7 @@ scores (`soft_rules.same_category_edges`, `plan_cost`, `deadline`,
 
 from __future__ import annotations
 
-from BE.common import deadline, in_range, party_size, plan_cost, to_min
+from BE.common import deadline, in_range, paid_access, party_size, plan_cost, to_min
 from BE.app.services.gate import (
     CHECKS,
     SOFT_CHECKS,
@@ -59,7 +59,7 @@ def _offenders(gate: str, itinerary: dict, trip: dict, pois: dict,
     if gate == "BCS":
         # One cost formula for both sides: `plan_cost` (explicit total_cost
         # wins over the POI fee sum), exactly what check_bcs scores.
-        cost = plan_cost(itinerary, pois, party_size(trip))
+        cost = plan_cost(itinerary, pois, party_size(trip), paid_access(trip))
         return [] if cost <= int(trip.get("budget", 0)) else [f"cost {cost}"]
     if (gate == "ETB" and acts
             and (trip.get("end_time") or trip.get("return_time"))):

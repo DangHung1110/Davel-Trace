@@ -58,7 +58,7 @@ from BE.app.services.soft_rules import (
     same_category_edges,
 )
 from BE.app.services.profile_filter import drop_reason
-from BE.common import deadline, in_range, party_size, plan_cost, to_min
+from BE.common import deadline, in_range, paid_access, party_size, plan_cost, to_min
 
 
 def _result(passed: bool, score: float | None = None) -> dict:
@@ -199,8 +199,10 @@ def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
 
 
 def check_bcs(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Pass iff total cost is within budget (one formula, both sides)."""
-    cost = plan_cost(itinerary, pois, party_size(trip))
+    """Pass iff total cost is within budget (one formula, both sides): the stops'
+    prices and what reaching them costs (a parent's ticket, the cano), less what the
+    trip already paid (`BE.common.fee_breakdown`)."""
+    cost = plan_cost(itinerary, pois, party_size(trip), paid_access(trip))
     return _result(cost <= int(trip.get("budget", 0)))
 
 

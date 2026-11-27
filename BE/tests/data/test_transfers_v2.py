@@ -9,6 +9,9 @@ poi_id, so a rebuilt snapshot can drift from it; these checks make the drift lou
 - every active POI of cluster `ba_na` is behind the cable car (a new summit
   restaurant must not be driven to on the service road);
 - boats and cable cars cite a web source, walks say how they were measured;
+- a boat or cable car says what it costs (`fare`): a sourced price per visit, or the
+  ticket of the POI at its road end, which every active place behind it then needs
+  (`requires_ticket_of`), so the planner charges it (`BE.common.access_fees`);
 - on the loaded matrix no leg of Cù Lao Chàm beats the straight line any more
   (26.5% did: OSRM had snapped the island onto the mainland), and no summit leg
   is the old shared-snap minute;
@@ -31,7 +34,7 @@ sys.path.insert(0, ROOT)
 
 from BE.app.services import transfers  # noqa: E402
 from BE.app.services.matrix import load_matrix_doc  # noqa: E402
-from BE.common import load_pois, to_min  # noqa: E402
+from BE.common import effective_fee, load_pois, to_min, visit_fee  # noqa: E402
 
 SNAP = os.path.join(ROOT, "BE", "data", "snapshots", "danang-v2")
 SPEC = os.path.join(SNAP, transfers.TRANSFERS_FILE)
@@ -93,6 +96,38 @@ class TestTransfersV2(unittest.TestCase):
                 walk = self.spec["walk"]
                 self.assertEqual(int(gate["ride_min"]),
                                  round(float(gate["km"]) / walk["kmh"] * 60), gate["id"])
+
+    def test_a_paid_ride_says_what_it_costs(self):
+        for gate in self.spec["gateways"]:
+            fare = gate.get("fare") or {}
+            if gate["mode"] == "walk":
+                self.assertFalse(fare.get("vnd"), gate["id"])
+                continue
+            self.assertTrue(fare.get("basis"), gate["id"])
+            if fare.get("ticket_of"):
+                self.assertEqual(fare["ticket_of"], gate["road_end"].get("poi_id"), gate["id"])
+                for place in gate["places"]:
+                    poi = self.pois[place["poi_id"]]
+                    if poi["status"] == "active" and poi.get("role") != "base":
+                        self.assertEqual(poi.get("requires_ticket_of"), fare["ticket_of"], place["name"])
+                continue
+            self.assertGreater(int(fare["vnd"]), 0, gate["id"])
+            self.assertIn(fare.get("per"), transfers.FARE_PER, gate["id"])
+            self.assertTrue(fare.get("verified_by"), gate["id"])
+            sources = fare.get("sources") or []
+            self.assertTrue(sources and all(s.get("url") and s.get("says") for s in sources), gate["id"])
+
+    def test_the_planner_charges_the_ticket_and_the_cano(self):
+        pois = load_pois(SNAP, by_id=True)
+        cable = self.gates["ba_na_cable_car"]
+        sun = pois[cable["fare"]["ticket_of"]]
+        for place in cable["places"]:
+            poi = pois[place["poi_id"]]
+            if poi["status"] == "active" and poi.get("role") != "base":
+                self.assertEqual(visit_fee(poi), effective_fee(poi) + effective_fee(sun), place["name"])
+        island = pois["manual:cu-lao-cham"]
+        self.assertEqual(visit_fee(island),
+                         effective_fee(island) + self.gates["cu_lao_cham_boat"]["fare"]["vnd"])
 
     def test_island_legs_no_longer_beat_the_straight_line(self):
         island = self.pois["manual:cu-lao-cham"]

@@ -34,7 +34,7 @@ import math
 from BE.app.services import profile_filter, trip_ctx
 from BE.app.services.soft_rules import NIGHT_START, NIGHT_TYPES, is_outdoor, poi_category
 from BE.common import (
-    BAND_FEE_VND, FEW_REVIEWS, clamp01, effective_fee, price_level_of, to_float, to_int, to_min,
+    BAND_FEE_VND, FEW_REVIEWS, clamp01, price_level_of, to_float, to_int, to_min, visit_fee,
     trusted_rating)
 
 WEIGHTS = {
@@ -102,7 +102,9 @@ def score_poi(poi: dict, user: dict | None = None, ctx: dict | None = None) -> d
         reasons.append(f"rating cao {rating}")
 
     budget = int(user.get("budget", (ctx.get("trip") or {}).get("budget", 3000000)))
-    known_fee = effective_fee(poi)
+    # What the visit costs on its own: Cầu Vàng is not free, it needs the Sun World
+    # ticket; Cù Lao Chàm needs the cano (BE.common.visit_fee).
+    known_fee = visit_fee(poi)
     # Unknown price counts as the middle band, like `price_level_of` below.
     fee = BAND_FEE_VND["medium"] if known_fee is None else known_fee
     parts["price"] = clamp01(1.0 - fee / budget) if budget > 0 else 0.0

@@ -8,7 +8,8 @@ from __future__ import annotations
 import time
 
 from BE.app.services.gate import SOFT_CHECKS
-from BE.common import fee_is_estimate, party_size, status_map, to_min, total_fee, trusted_rating
+from BE.common import (
+    cost_is_estimate, fee_breakdown, paid_access, party_size, status_map, to_min, trusted_rating)
 
 
 def _hard_checks(validation: dict) -> dict:
@@ -38,7 +39,7 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
         km, minutes = float(cell.get("km", 0.0)), int(cell.get("minutes", 0))
         segment = {"from_id": a, "to_id": b,
                    "mode": cell.get("mode", "motorbike"), "km": km, "minutes": minutes,
-                   "source": "cache"}
+                   "source": cell.get("source") or "cache"}
         if cell.get("transfers"):   # boat / cable car / walk legs (services/transfers.py)
             segment["transfers"] = cell["transfers"]
         segments.append(segment)
@@ -46,15 +47,27 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
     ratings = [trusted_rating(pois.get(a["poi_id"]) or {}) for a in acts]
-    return {"segments": segments,
-            "total_cost": total_fee(acts, pois, party_size(trip)),
-            # FR-026: part of total_cost is a guess (a price no source checked).
-            # Here, not in build_plan, so a repaired plan says it of its new stops.
-            "cost_estimated": any(fee_is_estimate(pois.get(a["poi_id"]) or {}) for a in acts),
-            "total_km": round(total_km, 2),
-            "total_min": visit_min + travel_min,
-            "travel_min": travel_min,
-            "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0}
+    party, paid = party_size(trip), paid_access(trip)
+    per_person, charges = fee_breakdown(acts, pois, paid)
+    totals = {"segments": segments,
+              "total_cost": party * per_person,
+              # FR-026: part of total_cost is a guess (a price no source checked).
+              # Here, not in build_plan, so a repaired plan says it of its new stops.
+              "cost_estimated": cost_is_estimate(acts, pois, paid),
+              "total_km": round(total_km, 2),
+              "total_min": visit_min + travel_min,
+              "travel_min": travel_min,
+              "preference": round(sum(ratings) / len(ratings), 3) if ratings else 0.0}
+    if charges:
+        # What total_cost pays besides the stops' own prices: a parent's ticket (Cầu Vàng
+        # without the Sun World stop), a transfer (the Cù Lao Chàm cano).
+        totals["access_fees"] = [
+            {"key": c["key"], "kind": c["kind"], "per": c.get("per", "visit"), "name": c["name"],
+             "vnd_per_person": c["vnd"], "travelers": party, "vnd": c["vnd"] * party,
+             "for": c["for"], "estimate": bool(c.get("estimate")),
+             **({"day": c["day"]} if "day" in c else {})}
+            for c in charges]
+    return totals
 
 
 def build_plan(optimizer_out: dict, validation: dict, trip: dict,
