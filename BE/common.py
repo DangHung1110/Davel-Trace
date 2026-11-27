@@ -381,7 +381,8 @@ def party_size(trip: dict) -> int:
 # through `fee_breakdown`, so all three charge the same money.
 ACCESS_FEES = "access_fees"
 # Trip key: charges already paid (a ticket bought on an earlier day, by a stop already
-# done). `multiday` and `replan` set it; `paid_access` reads it.
+# done). `multiday` and `replan` set it, the app's replan through InternalTripRequest
+# (planning_lifecycle); `paid_access` reads it.
 PAID_ACCESS = "paid_access"
 # On the view of a parent: its own price is a ticket other stops need (Sun World).
 SELLS_TICKET = "sells_ticket"

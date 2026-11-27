@@ -51,7 +51,7 @@ from BE.app.services import gate as gate_svc
 from BE.app.services import gps_origin
 from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
-from BE.common import merged_into, visit_fee
+from BE.common import PAID_ACCESS, merged_into, visit_fee
 from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
@@ -184,6 +184,7 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         return error("SNAPSHOT_MISSING",
                      f"snapshot dir {settings.snapshot_dir} chua co (doi lane A T003b)", 503)
 
+    # The server's own InternalTripRequest (the app's replan) also carries `paid_access`.
     trip = body.trip.model_dump()
     trip["meals"] = True  # a planned day eats: lunch and dinner when it covers them
     profile = trip.get("profile") or {}
@@ -256,6 +257,9 @@ def itinerary(body: ItineraryIn, diverse: bool = False):
         resume_id, resume_warning = (_origin_id(resume["origin"], by_id, cells, gps_starts)
                                      if resume.get("origin") else (origin_id, None))
         trip["resume"] = {"start_time": resume["start_time"], "origin_id": resume_id}
+        if resume.get(PAID_ACCESS):
+            # InternalResume (the app's replan): what that morning already paid.
+            trip["resume"][PAID_ACCESS] = list(resume[PAID_ACCESS])
         if resume_warning:
             retired_warnings.append(resume_warning)
         # `gps_origin` describes the fix the first day starts from.

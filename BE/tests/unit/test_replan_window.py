@@ -7,13 +7,16 @@ Three leaks closed here, all on POST /v1/trips/{id}/replans:
   planned day 1 again; now only the days left are planned, and when the first of them
   is already under way it resumes (`TripRequest.resume`) while the next starts as usual;
 - the constraints: the app sends no `changed_constraints`, so must_visit, avoid,
-  areas and the budget confirmed for the source version were lost; now they are reused.
+  areas and the budget confirmed for the source version were lost; now they are reused;
+- the money: what the done stops bought was charged again (the Sun World ticket of a
+  morning at Cầu Vàng, 850,000 VND a person); now it is `paid_access` of the request.
 
 Run: python -m pytest BE/tests/unit/test_replan_window.py -q
 """
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 import unittest
@@ -32,11 +35,13 @@ from BE.app.modules.planning_lifecycle.service import (  # noqa: E402
     _device_fix,
     _moment,
     _moment_date,
+    _paid_by,
     _replan_overrides,
     _trip_request,
     _window,
 )
-from BE.app.schemas.trip import TripRequest  # noqa: E402
+from BE.app.routers.itinerary import ItineraryIn  # noqa: E402
+from BE.app.schemas.trip import InternalTripRequest, TripRequest  # noqa: E402
 from BE.app.services import gate, multiday  # noqa: E402
 
 VN = timezone(timedelta(hours=7))
@@ -430,6 +435,147 @@ class TestGateFirstDay(unittest.TestCase):
         self.assertTrue(gate.check_b3(self.DAY_1, trip, {}, matrix)["passed"])
         # 14:30 + 20 minutes from the cafe is after the 14:40 start.
         self.assertFalse(gate.check_b3(self.DAY_1, self.TRIP, {}, matrix)["passed"])
+
+
+# --- what the stops done already paid ------------------------------------------------
+# The charges as the POI views carry them (BE.common.attach_access_fees): Cầu Vàng needs
+# the Sun World ticket (once a trip), Cù Lao Chàm the cano (once a day).
+SUN_WORLD = "sun-world"
+CANO = "fare:cu_lao_cham_boat"
+POIS = {
+    "cau-vang": {"poi_id": "cau-vang", "access_fees": [
+        {"key": SUN_WORLD, "vnd": 850000, "kind": "ticket", "per": "trip"}]},
+    "island": {"poi_id": "island", "access_fees": [
+        {"key": CANO, "vnd": 260000, "kind": "transfer", "per": "visit"}]},
+    SUN_WORLD: {"poi_id": SUN_WORLD, "sells_ticket": True},
+    "cafe": {"poi_id": "cafe"},
+}
+
+
+class TestPaidBy(unittest.TestCase):
+    def test_a_ticket_holds_for_the_trip_the_cano_for_its_day(self):
+        trip, today = _paid_by([{"poi_id": "cau-vang", "date": "2026-11-24"},
+                                {"poi_id": "island", "date": "2026-11-24"}],
+                               POIS, "2026-11-24")
+        self.assertIn(SUN_WORLD, trip)
+        self.assertNotIn(CANO, trip)
+        self.assertEqual(today, [CANO])
+
+    def test_yesterday_s_ticket_still_holds(self):
+        trip, today = _paid_by([{"poi_id": "cau-vang", "date": "2026-11-24"}],
+                               POIS, "2026-11-25")
+        self.assertIn(SUN_WORLD, trip)
+        self.assertEqual(today, [])
+
+    def test_yesterday_s_boat_is_not_today_s(self):
+        trip, today = _paid_by([{"poi_id": "island", "date": "2026-11-24"}],
+                               POIS, "2026-11-25")
+        self.assertNotIn(CANO, trip)
+        self.assertEqual(today, [])
+
+    def test_a_parent_visited_is_its_own_ticket(self):
+        trip, _today = _paid_by([{"poi_id": SUN_WORLD, "date": "2026-11-24"}],
+                                POIS, "2026-11-25")
+        self.assertIn(SUN_WORLD, trip)
+
+    def test_nothing_done_nothing_paid(self):
+        self.assertEqual(_paid_by([], POIS, "2026-11-24"), ([], []))
+        trip, today = _paid_by([{"poi_id": "cafe", "date": "2026-11-24"}], POIS, "2026-11-24")
+        self.assertEqual((trip, today), (["cafe"], []))
+
+
+class TestPaidInTheRequest(unittest.TestCase):
+    """`_trip_request` puts what was paid where the planner reads it."""
+
+    def test_a_fresh_plan_has_paid_nothing(self):
+        trip = _trip_request(TWO_DAYS, {})
+        self.assertEqual(trip["paid_access"], [])
+        self.assertIsNone(trip["resume"])
+
+    def test_one_day_left_the_morning_s_cano_is_the_trip_s(self):
+        trip = _trip_request(ONE_DAY, {"window": _window(ONE_DAY, None, at(24, 14, 5))},
+                             [SUN_WORLD, "cau-vang"], [CANO])
+        self.assertEqual(trip["paid_access"], ["cau-vang", CANO, SUN_WORLD])
+        self.assertIsNone(trip["resume"])
+
+    def test_two_days_left_the_cano_is_the_first_day_s_alone(self):
+        trip = _trip_request({**TWO_DAYS, "base_poi_id": "hotel"},
+                             {"window": _window(TWO_DAYS, None, at(24, 14, 5)),
+                              "current_poi_id": "island", "current_poi_date": "2026-11-24"},
+                             [SUN_WORLD, "island"], [CANO])
+        self.assertEqual(trip["paid_access"], ["island", SUN_WORLD])
+        self.assertEqual(trip["resume"]["paid_access"], [CANO])
+        self.assertEqual(trip["resume"]["start_time"], "14:05")
+
+    def test_device_replan_keeps_todays_fare_and_tomorrows_hotel(self):
+        snapshot = {**TWO_DAYS, "base_poi_id": "hotel"}
+        remaining = {"window": _window(snapshot, None, at(24, 14, 5)),
+                     "current_poi_id": "island", "current_location": TestDevicePosition.FIX}
+        trip = _trip_request(snapshot, remaining, [SUN_WORLD], [CANO])
+        resume = trip["resume"]
+        self.assertEqual(resume["paid_access"], [CANO])
+        self.assertEqual(resume["origin"]["fallback_poi_id"], "island")
+        self.assertEqual(resume["origin"]["lat"], TestDevicePosition.FIX["lat"])
+        self.assertEqual(trip["origin"]["poi_id"], "hotel")
+        self.assertEqual(trip["paid_access"], [SUN_WORLD])
+
+    def test_a_paid_cano_keeps_its_day_apart(self):
+        # Before day_start at the base: no resume is needed for the clock or the
+        # place, but the cano is still the first day's only.
+        trip = _trip_request({**TWO_DAYS, "base_poi_id": "hotel"},
+                             {"window": _window(TWO_DAYS, None, at(24, 7))}, [], [CANO])
+        resume = trip["resume"]
+        self.assertEqual((resume["start_time"], resume["origin"]["poi_id"], resume["paid_access"]),
+                         ("08:00", "hotel", [CANO]))
+        self.assertEqual(trip["paid_access"], [])
+
+
+class TestInternalRequestContract(unittest.TestCase):
+    """`paid_access` is the server's: POST /v1/itinerary neither shows nor reads it."""
+
+    BODY = {"trip": {"days": 2, "paid_access": [SUN_WORLD],
+                     "resume": {"start_time": "14:05", "paid_access": [CANO]}}}
+
+    def test_a_client_cannot_say_what_was_paid(self):
+        trip = ItineraryIn.model_validate(self.BODY).trip.model_dump()
+        self.assertNotIn("paid_access", trip)
+        self.assertNotIn("paid_access", trip["resume"])
+
+    def test_the_public_schema_does_not_show_it(self):
+        self.assertNotIn("paid_access", json.dumps(ItineraryIn.model_json_schema()))
+
+    def test_the_server_s_request_reaches_the_planner_whole(self):
+        body = ItineraryIn(trip=InternalTripRequest(**self.BODY["trip"]))
+        trip = body.trip.model_dump()
+        self.assertEqual(trip["paid_access"], [SUN_WORLD])
+        self.assertEqual(trip["resume"]["paid_access"], [CANO])
+
+    def test_one_day_folds_the_morning_into_the_trip(self):
+        trip = InternalTripRequest(days=1, paid_access=[SUN_WORLD],
+                                   resume={"start_time": "14:05", "paid_access": [CANO]})
+        self.assertEqual((trip.start_time, trip.resume, trip.paid_access),
+                         ("14:05", None, [CANO, SUN_WORLD]))
+
+
+class TestMultidayPaid(unittest.TestCase):
+    def test_the_morning_s_cano_is_paid_on_the_first_day_only(self):
+        seen = []
+
+        def solve(day_trip, used, diagnose):
+            seen.append(day_trip)
+            return {"activities": [{"poi_id": f"p{len(seen)}", "start": "15:00", "end": "16:00"}],
+                    "passed": True, "total_cost": 0, "activity_match": [],
+                    "_context": {"trip": day_trip, "pois": [], "travel": {}}}
+
+        trip = {"days": 2, "date": "2026-11-24", "start_time": "08:00", "origin_id": "hotel",
+                "budget": None, "paid_access": [SUN_WORLD],
+                "resume": {"start_time": "14:05", "origin_id": "island", "paid_access": [CANO]}}
+        multiday.build_trip(solve, trip, lambda itinerary, whole: {
+            "passed": True, "failed": [], "soft_failed": [], "checks": {}})
+        first, second = seen
+        self.assertEqual(first["paid_access"], [CANO, SUN_WORLD])
+        self.assertIn(SUN_WORLD, second["paid_access"])
+        self.assertNotIn(CANO, second["paid_access"])
 
 
 if __name__ == "__main__":

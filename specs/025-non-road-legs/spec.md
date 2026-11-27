@@ -105,6 +105,23 @@ Vé của ba điểm cha tính theo giá của chính điểm cha khi nó là m�
 - Lịch đổi: 64/201 kế hoạch giống hệt, 103/201 cùng tập điểm, 76/201 đổi tổng tiền. Mô hình CP-SAT đổi ở mọi yêu cầu có điểm con trong danh sách ứng viên (thêm biến "phải trả"), và điểm xếp hạng giá của các điểm con đổi, nên solver dừng ở lịch khác. Các cờ chất lượng đổi theo cả hai chiều: sạch 27 → 25 (chấm bằng bộ chấm cũ ở lần trước), khoảng trống dài 100 → 90, chặng dài 31 → 27, đến muộn 11 → 14, về sớm 9 → 12; đi lại trung bình 31,0 → 30,1 phút một ngày.
 - Thời gian trả lời (mỗi bên một lần chạy, không xen kẽ, nên chỉ để biết không chậm đi rõ rệt): một ngày trung vị 6,0 → 5,4 giây, p95 9,3 → 8,3; hai ngày trung vị 10,8 → 11,0.
 
+### Replan của app không mua lại vé (làm ngày 27/11, nhánh `fix/app-replan-paid-access`)
+
+Replan của app (`POST /v1/trips/{id}/replans`, `planning_lifecycle`) lập lại phần còn lại của chuyến, bỏ các điểm đã đi, với ngân sách = ngân sách dự kiến trừ chi tiêu đã ghi. Trước đây planner không biết các điểm đã đi đã mua gì, nên sáng lên Cầu Vàng rồi replan thì Fantasy Park bị tính thêm một vé Sun World (850.000đ một người).
+
+Bây giờ server đọc các điểm đã đi xong và ngày đi của chúng, rồi tính bằng cùng hàm của `/v1/replan` (`BE.common.paid_after`):
+
+- **Vé** (của điểm cha, hoặc chính điểm cha đã ghé) không tính lại ở mọi ngày còn lại. Vé Sun World dùng được 3 ngày, chuyến dài nhất 2 ngày.
+- **Cano** chỉ được miễn trong phần còn lại của chính ngày đã đi (khứ hồi trong ngày); hôm sau đi đảo thì trả lại. Hiện điều này chưa đổi kế hoạch nào: sau cano chỉ có một điểm (Cù Lao Chàm), và điểm đã đi thì không được xếp lại.
+
+Planner nhận các khoản đã trả qua `InternalTripRequest.paid_access` (cả chuyến) và `resume.paid_access` (riêng ngày đầu khi còn 2 ngày; `multiday` không chuyển nó sang ngày sau). Đây là trường nội bộ: `POST /v1/itinerary` đọc body bằng `TripRequest`, nên bỏ qua chúng, và schema API không có. Chúng cũng không nằm trong `remaining_context` hay dấu idempotency, vì được đọc từ chuyến, không phải do app gửi.
+
+Ví dụ thật (solver thật, danang-v2, test `BE/tests/integration/test_stable_planner_lifecycle.py`): 2 người, ngân sách 2.500.000đ, sáng đã đi Cầu Vàng và ghi chi tiêu 1.700.000đ tiền vé. Replan lúc 10:30, Fantasy Park vẫn là điểm bắt buộc, còn 800.000đ.
+
+- Trước: **0 phương án** (vé bị tính lần nữa: 1.700.000đ > 800.000đ).
+- Sau: **3 phương án**, đều có Fantasy Park, báo 100.000–200.000đ, không có khoản vé.
+- Cùng ca với ngân sách 4.200.000đ (đủ mua vé lần hai): trước vẫn ra 3 phương án nhưng báo 1.800.000–1.900.000đ, trong đó 1.700.000đ là vé đã mua; sau báo 100.000–200.000đ với cùng các điểm (lịch tiết kiệm đổi một điểm).
+
 ## Giờ chạy của cano và cáp treo
 
 Nhánh `fix/transfer-service-hours` (tách từ `fix/non-road-legs`). Cáp treo và cano chỉ chạy trong một khung giờ, và cano Cù Lao Chàm chỉ chạy đều vào một số tháng. Mỗi cửa ngõ có thêm `service` trong `transfers.json`: chuyến đầu và chuyến cuối của mỗi chiều (`go`: từ đầu đường bộ ra nơi đó, `back`: chiều về), cùng tháng chạy. Đường mòn không có giờ chạy.
@@ -191,10 +208,11 @@ Tiền (`plan_totals`):
 - Khi có khoản như vậy, plan có thêm `access_fees: [{key, kind, per, name, vnd_per_person, travelers, vnd, for, estimate, day?}]`, ví dụ `{"key": "ChIJyUQ4aw72QTERCXl5YV-4U1w", "kind": "ticket", "per": "trip", "name": "Sun World Bà Nà Hills", "vnd_per_person": 850000, "travelers": 4, "vnd": 3400000, "for": [<Fantasy Park>, <Cầu Vàng>], "estimate": false}`. `kind` là `"ticket"` (vé điểm cha) hoặc `"transfer"` (tiền chặng); `for` là các điểm cần khoản đó; `day` có ở chuyến nhiều ngày. Không có khoản nào thì không có trường này.
 - App hiện chỉ đọc `total_cost`. Khi hiện chi phí, nên ghi thêm một dòng cho mỗi khoản, ví dụ "Vé Sun World Bà Nà Hills 850.000đ × 4 (cho Cầu Vàng, Fantasy Park)", để khách hiểu vì sao tổng cao hơn giá các điểm cộng lại.
 
-## Gộp với nhánh khác
+Replan: app không phải gửi gì thêm. Server biết vé đã mua từ các hoạt động đã xong (`completed_activity_ids`, hoặc `progress_state = completed`), nên app chỉ cần đánh dấu đúng điểm đã đi. Ngân sách của phần còn lại trừ chi tiêu khách đã ghi; khách chưa ghi tiền vé thì planner coi số tiền đó vẫn còn.
 
-- `fix/transfer-fares` nằm trên `fix/non-road-legs`, nên gộp sau nhánh đó.
-- `feat/single-poi-value` (chưa gộp) xung đột ở `BE/app/services/profiles.py` (import, `_score`, phần tính điểm nút). Khi giải: giữ cấu trúc `value_svc.score` của nhánh kia, giữ `paid=paid` cho `_score` (đường legacy), và trong `BE/app/services/value.py` đổi `effective_fee(poi)` ở `place_features` và `explain` thành `visit_fee(poi, paid_access(trip))`. Nếu không, dưới objective v1 hồ sơ tiết kiệm lại coi Cầu Vàng, nhà cổ Hội An là "miễn phí" và cộng điểm thưởng miễn phí, dù tiền vé vẫn bị tính.
+## Tích hợp với GPS và chặng về khách sạn
+
+Khi replan, ngày đầu dùng vị trí GPS nếu máy gửi vị trí hợp lệ. Các ngày sau xuất phát ở khách sạn. Vé điểm cha đã trả có hiệu lực suốt chuyến. Vé cano khứ hồi đã trả chỉ áp dụng trong ngày đã mua. Solver, gate và phần giải thích chi phí dùng cùng thông tin vé.
 
 ## Thêm hoặc sửa một cửa ngõ
 
@@ -206,7 +224,7 @@ Tiền (`plan_totals`):
 
 - **Giá vé theo mức, không theo số tiền có nguồn.** `effective_fee` lấy giữa mức giá, nên vé phố cổ Hội An tính 250.000đ (nguồn: 120.000đ khách nước ngoài, 80.000đ khách Việt) và vé Sun World 850.000đ (nguồn: 1.000.000đ khách ngoại tỉnh). Sửa ở `effective_fee` sẽ đổi giá của mọi điểm, nên để việc riêng.
 - **Vé trẻ em** (Sun World, nửa giá cano cho trẻ 1–8 tuổi) chưa mô hình hoá: mọi giá là giá người lớn.
-- **Replan của app** (`planning_lifecycle`) lập lại phần còn lại mà không có các điểm đã đi. Nếu sáng đã lên Bà Nà (vé đã mua, khách tự ghi chi tiêu) và phần còn lại vẫn có một điểm trên đỉnh, vé bị tính lần nữa. Chỉ `/v1/replan` (`services/replan.py`) biết vé đã mua.
+- **Replan đứng trên đỉnh Bà Nà xuống núi ăn trưa rồi lên lại.** Trong ví dụ replan của app ở trên (đứng ở Cầu Vàng lúc 10:30), cả 3 phương án đều xuống thành phố ăn trưa (khoảng 80 phút mỗi chiều) rồi lên lại Fantasy Park lúc 16:05–16:30, sát giờ lên cáp treo cuối. Nhánh gốc với ngân sách đủ mua vé lần hai cũng xếp y như vậy, nên không do tiền vé; chưa tìm nguyên nhân. Đã thử cho điểm xếp hạng giá (`rank`, vẫn đọc `visit_fee` không biết vé đã trả) tính vé đã trả: lịch không đổi.
 - **Khách sạn Mercure trên đỉnh làm điểm xuất phát:** lượt cáp treo xuống và lên lại không bị tính tiền (khoản gắn với điểm, không gắn với chặng).
 - **Chuyến 2 ngày rải `must_visit`** (Cầu Vàng ngày 1, Fantasy Park ngày 2) vẫn có thể xảy ra: vé chỉ tính một lần (đúng với vé 3 ngày), nhưng khách phải lên núi hai lần.
 - Mức giá (`price_level`) của điểm con vẫn là 1 (rẻ) khi chấm hợp mức chi tiêu; chỉ số tiền đã đúng.

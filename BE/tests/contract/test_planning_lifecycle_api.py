@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime, time, timezone
+import json
 from pathlib import Path
 from uuid import UUID, uuid4
 
@@ -35,6 +36,12 @@ from BE.app.modules.trips.service import TripService
 # the snapshot is pinned to the 750-POI danang-v1 it was written against instead of
 # following the app default (danang-v2).
 V1_SNAPSHOT = Path(__file__).resolve().parents[2] / "data" / "snapshots" / "danang-v1"
+V2_SNAPSHOT = V1_SNAPSHOT.parent / "danang-v2"
+# danang-v2: a summit stop needs the Sun World ticket, the island the Cửa Đại cano.
+SUN_WORLD = "ChIJyUQ4aw72QTERCXl5YV-4U1w"
+CAU_VANG = "osm:way/683416736"
+CU_LAO_CHAM = "manual:cu-lao-cham"
+CANO = "fare:cu_lao_cham_boat"
 
 
 def _planner(_trip: dict, target: int, _kind: str) -> dict:
@@ -482,6 +489,41 @@ def test_nothing_is_left_after_the_last_day(lifecycle):
     with session_scope(database_url) as session:
         assert session.scalar(select(func.count()).select_from(PlanningRequestModel).where(
             PlanningRequestModel.request_kind == "replan")) == 0
+
+
+def test_a_replan_does_not_pay_again_what_the_done_stops_bought(lifecycle):
+    """A morning at Cầu Vàng bought the Sun World ticket (good for 3 days), one on Cù
+    Lao Chàm the cano (a round trip in the day): the rest of the trip owes no ticket,
+    and only the rest of that day owes no cano."""
+    service, owner, _other, trip_id, database_url = lifecycle
+    _second_day(database_url, trip_id)
+    # The planner is the fake one; what is paid is read from danang-v2's own charges.
+    v2 = PlanningLifecycleService(service.settings.model_copy(
+        update={"snapshot_dir": str(V2_SNAPSHOT)}))
+    today, seen = _capturing(v2, lambda: _utc(10, 7, 5))  # 14:05 on the first day
+    source = _accepted(today, owner, trip_id, "paid", base_poi_id="hotel-1")
+    with session_scope(database_url) as session:
+        day = session.scalar(select(TripDayModel).where(
+            TripDayModel.trip_id == trip_id, TripDayModel.position == 0))
+        for position, poi_id in enumerate((CAU_VANG, CU_LAO_CHAM)):
+            session.add(TripActivityModel(day_id=day.day_id, title=poi_id, poi_id=poi_id,
+                                          progress_state="completed", position=position))
+
+    today.replan(owner, trip_id, "paid-today", {"source_version_id": source})
+    tomorrow, later = _capturing(v2, lambda: _utc(11, 2, 15))  # 09:15 on the second day
+    tomorrow.replan(owner, trip_id, "paid-tomorrow", {"source_version_id": source})
+
+    fresh, same_day, next_day = seen[0], seen[-1], later[-1]
+    assert fresh["paid_access"] == []
+    assert SUN_WORLD in same_day["paid_access"] and CANO not in same_day["paid_access"]
+    assert same_day["resume"]["paid_access"] == [CANO]
+    assert SUN_WORLD in next_day["paid_access"] and CANO not in next_day["paid_access"]
+    assert next_day["resume"] is None
+    with session_scope(database_url) as session:
+        # Read from the trip, not sent: neither stored nor in the fingerprint.
+        row = session.scalar(select(PlanningRequestModel).where(
+            PlanningRequestModel.idempotency_key == "paid-today"))
+        assert "paid_access" not in json.dumps(row.remaining_context)
 
 
 def test_a_retried_replan_gets_the_plan_it_asked_for(lifecycle):
