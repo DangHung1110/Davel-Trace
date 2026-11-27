@@ -12,10 +12,11 @@ Run: python -m pytest BE/tests/unit/test_polish_keeps_j.py -q
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from BE.app.services import profiles, route_order  # noqa: E402
+from BE.app.services import objective, profiles, route_order  # noqa: E402
 from BE.app.services.optimizer import STOP_OVERHEAD_MIN, StubPOI  # noqa: E402
 
 H = 60
@@ -35,6 +36,20 @@ def _starts(day):
 
 
 class TestPolishKeepsJ(unittest.TestCase):
+    def test_stretch_into_a_bad_band_is_rejected_using_actual_end(self):
+        spec = objective.build_spec(TRIP)
+        def j_of(day):
+            return profiles._day_features(day, [MUSEUM, LUNCH], TRAVEL, TRIP, spec,
+                                          None, [(9 * H, 10 * H)],
+                                          {('museum', 0): 0}, {('museum', 0): .8}, {})[1]
+
+        stretched = [{**ACTS[0], 'end': '10:00'}, dict(ACTS[1])]
+        self.assertLess(j_of(stretched), j_of(ACTS))
+        with mock.patch.object(route_order, 'best_order', return_value=stretched):
+            out = profiles._polished(ACTS, [MUSEUM, LUNCH], TRAVEL, TRIP, {},
+                                     KEEP_ORDER, {}, {}, None, j_of=j_of)
+        self.assertEqual(out, ACTS)
+
     def test_the_re_timing_would_move_this_day(self):
         rows = route_order.best_order(ACTS, {"museum": MUSEUM, "lunch": LUNCH}, TRAVEL,
                                       8 * H, 20 * H, STOP_OVERHEAD_MIN, precedence=KEEP_ORDER)

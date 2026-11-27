@@ -4,7 +4,7 @@ Hàm mục tiêu v1 có 11 số hạng và là **mặc định** của planner t
 
 Bản này đồng bộ với doc "Davel — Hàm mục tiêu v1 (bản chốt)" trên claude.ai. Liên quan: `ARCHITECTURE.md` (toàn luồng), `TRAVELAGENT_CONTEXT.md` §3 và §12, `ARCHITECTURE_BACKLOG.md` A1, A2, A4. Kết quả đo: `reports/objective_v1/README.md`.
 
-**Có cần người chấm không:** không bắt buộc. v1 chạy được ngay; trọng số học sau từ LLM chấm cặp và lịch mẫu đã công bố, cả hai tự động (mục 7). Verify thì vẫn cần nhưng tự động hoàn toàn (mục 8). Người chỉ cần khi muốn khẳng định "lịch khớp ý người": khoảng 30 cặp, chừng 1 giờ.
+**Có cần người chấm không:** không bắt buộc. v1 chạy được ngay; trọng số học sau từ cặp Claude chấm; lịch mẫu đã công bố chỉ dùng kiểm tra độc lập (mục 7). Verify thì vẫn cần nhưng tự động hoàn toàn (mục 8). Người chỉ cần khi muốn khẳng định "lịch khớp ý người": khoảng 30 cặp, chừng 1 giờ.
 
 ## 1. Công thức
 
@@ -14,7 +14,7 @@ J =  Σ v_i x_i                         T1 giá trị: một hàm điểm POI (v
    − Σ_g β_g Σ_{k≥2} ρ_k y_gk          T3 lặp nhóm (submodular: điểm đầu miễn phí)
    − γ Σ β_g a_ij [cùng nhóm]          T4 hai điểm cùng nhóm liền nhau
    + Σ_s B_s z_s                       T5 có bữa trong khung sáng / trưa / tối
-   − A · (bữa thừa trong 1 khung + cặp bữa cách < 2,5 giờ)   T6
+   − A · (bữa thừa trong 1 khung + mọi cặp quán trong ngày)   T6
    + R(pace) · r                       T7 nghỉ ngay sau bữa trưa
    − Σ_{k>K0'} κ_k s_k                 T8 điểm vượt mức thoải mái (đếm điểm tham quan)
    − Σ c_ij a_ij                       T9 phút chạy xe + phần vượt 45 phút + đổi zone
@@ -62,7 +62,7 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 | REST_FOLLOWS_LUNCH | cứng | gu | T7 |
 | Bắt buộc bữa tối | cứng, ladder nới dần | gu | T5 (thưởng 1,2U) |
 | late_end, pace min/max, nhóm bắt buộc của template | cứng | gu | T1 + T8 quyết độ dài ngày |
-| A2 (hai bữa cách dưới 2,5 giờ) | phạt cạnh | gu | T6 |
+| A2 (mọi cặp quán trong ngày) | phạt cạnh | gu | T6 |
 | SAME_SITE, MARKET_REPEAT, SAME_DISH | chưa có | gu | T11 (thêm 24/11) |
 | F1, TIME_FIT, DINNER | báo cáo | quality | chỉ báo cáo (T5, T2 + chỉ số) |
 | E2 (nightlife trước 17:00) | phạt trong ranker | gu | T2 |
@@ -79,7 +79,7 @@ User muốn giữ một luật gu cứng thì ghi vào `trip["strict_rules"]`: `
 | T3 | Lặp nhóm | điểm thứ 2, 3, 4… cùng một nhóm | phạt tăng dần (submodular) | CATEGORY_CAP, CAFE_CAP |
 | T4 | Liền kề cùng nhóm | hai điểm cùng nhóm đi liền nhau | phạt mỗi cung | NO_CONSECUTIVE |
 | T5 | Bữa đúng giờ | có quán ăn bắt đầu trong khung bữa | thưởng một lần mỗi bữa | bắt buộc bữa tối, F1, DINNER |
-| T6 | Bữa dồn | hai quán trong cùng bữa, hoặc cách nhau dưới 2,5 giờ | phạt mỗi cặp | A1, A2 |
+| T6 | Bữa dồn | A1 dư trong slot + A2 mọi cặp quán trong ngày | R(R−1)/2 cặp A2 | A1, A2 |
 | T7 | Nghỉ trưa | có điểm nghỉ ngay sau bữa trưa | thưởng theo pace | REST_FOLLOWS_LUNCH |
 | T8 | Nhịp | điểm tham quan + quán ăn ngoài bữa trưa/tối, vượt mức thoải mái | phạt tăng dần | late_end, pace min/max |
 | T9 | Chạy xe và đổi vùng | phút chạy xe, phần vượt 45 phút/chặng, số lần đổi zone; cả chặng từ/về nơi ở khi có `origin_id` | chi phí cố định trên mỗi cung | `EDGE_TRAVEL_WEIGHT` |
@@ -179,7 +179,7 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 | T3 | mỗi nhóm g: bool y₂, y₃ và nguyên e_g, với y₂ + y₃ + e_g ≥ n_g − 1; phạt β_g(ρ₂y₂ + ρ₃y₃ + ρ₄e_g); ρ tăng dần nên solver tự bật biến rẻ nhất trước |
 | T4, T9, T10 | hằng số trên mỗi cung, cộng vào hệ số của a_ij; không thêm biến |
 | T5 | `_window_hits` cho mỗi quán ăn và mỗi khung bữa → h_is; bool z_s ≤ Σ_i h_is. Khung giờ bắt đầu: trưa 11:00–13:00, tối 17:30–20:30, sáng 6:30–9:00. Từ 26/11, quán có mọi khung mở cửa nằm gọn trong hoặc ngoài khung bữa thì h_is chính là biến chọn khung mở cửa (không ràng buộc thời gian) |
-| T6 | nguyên e_s ≥ Σ_i h_is − 1 mỗi khung (lớp nấu ăn đặt chỗ là bữa của mọi khung nó chồng lên); cặp quán ăn: thiết kế là cặp cách dưới 150 phút, nhưng phép thử "gần" trong code (`earlier OR later`) luôn đúng nên **mọi cặp quán trong ngày đều bị phạt A**, tức R quán tốn R(R−1)/2 cặp (đo 26/11, xem mục 7); 26/11 viết lại thành bậc thang trên số quán, giữ nguyên giá trị. Đổi sang đúng 150 phút là quyết định riêng: thưởng bữa tối 1,2 đã chỉnh trên hành vi này |
+| T6 | A1: e_s ≥ Σ h_is − 1 mỗi slot khi soft; A2: R quán chịu R(R−1)/2 cặp, encoding count staircase đúng main 7cb6d73. Greedy trừ len(restaurant_starts) × A. Thử <150 bị bác bỏ sau A/B 27/11 (A2_AB_20261127.md). |
 | T7 | logic `rest_after_lunch` với `OnlyEnforceIf(rest_taken)`; thưởng R·r |
 | T8 | như T3 trên số đếm của `paced_stops` (điểm tham quan + nguyên `pace_meals` ≥ số quán − số bữa trưa/tối) với ngưỡng `sight_k0` |
 | T11 | mỗi khoá (alt_group, chợ ban ngày, món): nguyên e ≥ Σ visit − 1; khu + điểm trong khu: bool u_b ≥ visit_a + visit_b − 1. Ở `strict_rules`: Σ visit ≤ 1 |
@@ -192,14 +192,14 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 
 ## 7. Học trọng số không cần người chấm
 
-`objective.features(...)` tính từng thành phần J trên một lịch đã xong (19 đặc trưng: value, state, rain, repeat, adjacent, meal, meal_crowd, meal_far, rest, pace, ride, long_leg, zone, edge, same_site, umbrella, market, dish, wait), có tính chặng về điểm xuất phát; `objective_value` ráp lại J. Đây là đầu vào cho việc học. Chạy cả hai nguồn nhãn dưới đây, rồi chọn bộ thắng trên test tự động (mục 8).
+`objective.features(...)` tính từng thành phần J trên một lịch đã xong (19 đặc trưng: value, state, rain, repeat, adjacent, meal, meal_crowd, meal_far, rest, pace, ride, long_leg, zone, edge, same_site, umbrella, market, dish, wait), có tính chặng về điểm xuất phát; `objective_value` ráp lại J. Phương pháp chính là Bradley–Terry regularized trên cặp Claude chấm; lịch công bố và cặp người giữ riêng để kiểm độc lập. Giao thức: `OBJECTIVE_LEARNING_PROTOCOL.md`.
 
-**Đặc trưng đọc từ chính lịch (26/11).** Mọi số hạng tính từ các điểm và giờ của lịch, không lấy gì từ lần giải: T2 dò mỗi điểm ở 1/4 và 3/4 thời gian ở như solver (`state` = hệ số trạng thái, `rain` = phạt mưa, trọng số riêng `w_rain` = 1,0 như cũ); T7 có khi có đúng một bữa trưa và không điểm nào nằm trong giờ nghỉ sau nó; `meal_far` là cặp quán cách nhau từ 2,5 giờ, solver phạt cùng trọng số A với `meal_crowd` (xem T6 ở mục 6). Mỗi lịch v1 mang `_features` (không ra API công khai; lịch nhiều ngày: `_features_by_day`): `raw` ở giờ của solver, khớp `solver_j`; `shown` ở giờ lịch hiển thị sau khi `_polished` tính lại giờ. Cặp lịch đưa judge phải dùng `shown`. Đo trên audit + gold: `reports/objective_v1/features_step2.md`.
+**Đặc trưng đọc từ chính lịch (tích hợp 27/11).** T2 dò mỗi điểm ở 1/4 và 3/4 thời lượng thực tế `end-start`; khi chỉ có `start` thì dùng thời lượng stub. Nghỉ trưa, phút chờ và giao meal slot của lớp đặt trước cũng đọc giờ kết thúc thật. `rain` có trọng số riêng `w_rain=1`, giữ cố định trong pilot BT. `meal_crowd` đếm mọi cặp restaurant A2 cộng A1 slot extra; `meal_far` là diagnostic subset, không phạt thêm. Khoảng cách thời gian không miễn phạt A2. Mỗi lịch v1 mang `_features` (không ra API công khai; lịch nhiều ngày: `_features_by_day`): `raw` ở giờ solver, khớp `solver_j`; `shown` ở giờ lịch hiển thị sau `_polished`. Cặp judge/train đọc `shown`; `objective.plan_features` chỉ đọc bản snapshot này, không có công thức riêng. `retimed` tính cả thay đổi giờ kết thúc. Các phép đo trước sửa: `reports/objective_v1/features_step2.md`.
 
 **Bước 2b (26/11).** `_polished` chỉ giữ lịch đã tính lại giờ khi J không giảm; nếu giảm thì lịch hiển thị đúng giờ của solver (đường lùi này trước chỉ dùng khi gate trượt). Luật giữ khô đọc mưa như solver: một điểm ngoài trời được giữ khi cả hai điểm dò 1/4 và 3/4 đều khô, và chỉ được dời sang giờ mà hai điểm dò vẫn khô (`route_order.quarter_probes`, `kept_dry`). Đặc trưng `wait` = phút đứng chờ giữa hai điểm, ngoài thời gian chạy xe và 12 phút mỗi điểm solver chừa sẵn; giờ nghỉ sau bữa trưa không tính là chờ, trước điểm đầu và sau điểm cuối cũng không. `w_wait` = 0 trong `v1.json` và solver không có số hạng này, nên lịch không đổi: cột này để pilot đo xem judge có chê khoảng chờ không. `_features` có thêm `retimed` (giờ hiển thị khác giờ solver) và `same_stops` (cùng điểm, cùng thứ tự).
 
 **Cách A: LLM chấm cặp lịch**
-1. Sinh cặp: với mỗi request, giải hai lần bằng hai vector w lệch nhau 1–2 hệ số (cộng 459 cặp có sẵn); hai lịch khác nhau đúng ở điểm cần hỏi.
+1. Sinh cặp: với mỗi request, giải hai lần bằng hai vector w lệch nhau 1–2 hệ số (chỉ tái dùng cặp cũ không thuộc held-out và đã kiểm phiên bản/feature); hai lịch khác nhau đúng ở điểm cần hỏi.
 2. LLM chấm mỗi cặp hai lần, đổi thứ tự A/B; bỏ cặp tự mâu thuẫn (ở PATM v4 là 28%). Judge chạy bằng Claude trong phiên (chốt 25/11), không dùng API trả phí.
 3. Học hồi quy logistic theo cặp (Bradley–Terry) trên hiệu đặc trưng của hai lịch; cần khoảng 1.000–2.000 cặp.
 
@@ -207,17 +207,15 @@ Mọi số hạng tuyến tính theo biến bool hoặc nguyên; hệ số nào 
 P(A ≻ B) = σ( w · (f(A) − f(B)) )
 ```
 
-**Cách B: học từ lịch mẫu đã công bố (inverse optimization)**
-1. Thu 30–50 lịch 1 ngày ở Đà Nẵng / Hội An đã đăng công khai, giữ link nguồn; không tự viết lịch mẫu.
-2. Khớp từng điểm sang `poi_id`; bỏ lịch có điểm không khớp hoặc vi phạm ràng buộc cứng theo data của mình.
-3. Dựng request tương ứng (giờ đi, khu vực).
-4. Lặp: giải bằng w hiện tại được lịch P; nếu P khác lịch mẫu D thì kéo w về phía D (structured perceptron).
+**Kiểm tra độc lập bằng lịch mẫu đã công bố**
+1. Thu 30–50 lịch 1 ngày ở Đà Nẵng / Hội An công khai, giữ URL; không tự viết lịch mẫu.
+2. Khớp `poi_id`, kiểm khả thi và dựng request tương ứng; thiếu thông tin phải ghi rõ.
+3. So lịch v1 và learned theo cùng request: mức trùng POI, nhịp/số điểm, phân bố khu vực.
+4. Không dùng lịch mẫu để train BT hoặc chọn lambda. Đây là proxy gần thực tế, không phải đo hài lòng user.
 
-```
-w ← w + η ( f(D) − f(P) )
-```
-
-Ưu: nhãn là lịch người thật viết. Nhược: lịch blog thường dày và thiên về điểm nổi tiếng, có thể kéo T8 và T1 lệch.
+**Perceptron dự phòng:** chỉ xét khi BT đã ổn nhưng vẫn lệch rõ so với lịch mẫu.
+Chạy vài vòng nhỏ trên phần tinh chỉnh riêng; phần lịch đã dùng tinh chỉnh không còn
+là kiểm tra độc lập, cần giữ hoặc thu thêm một tập test cuối chưa sử dụng.
 
 **Hai quy tắc khi học:** giữ đúng dấu (hệ số phạt τ, ζ, A, κ, γ, σ không âm); kéo về v1 bằng λ‖w − w_v1‖² trong loss, để w chỉ lệch khi data đủ mạnh. Học các hệ số tổng (w_state, một hệ số chung cho β·ρ, γ, B, A, R, κ, τ, τ_L, ζ, w_edge, σ); ghi ra file mới cùng khoá với `v1.json`.
 
@@ -225,7 +223,7 @@ w ← w + η ( f(D) − f(P) )
 
 **Khi nào học lại:** khi đổi data đủ để lịch đổi (POI mới, giờ mở / giá mới, ma trận mới) thì chạy lại eval; trọng số chỉ cần học lại khi chỉ số tụt hoặc có thêm nhãn (cặp chấm, lịch mẫu). Bộ lọc và pointer bắt chước solver chạy dưới **đúng bộ trọng số đó**, nên đổi trọng số (hoặc đổi data làm lời giải đổi nhiều) là sinh lại data thầy và train lại hai model này (`ARCHITECTURE.md` §4).
 
-**Giới hạn ghi trong báo cáo:** không có người kiểm thì chỉ viết "trọng số học từ LLM và lịch mẫu"; muốn viết "khớp với người" cần thêm khoảng 30 cặp người chấm.
+**Giới hạn ghi trong báo cáo:** không có người kiểm thì chỉ viết "trọng số học từ cặp Claude chấm, kiểm tra bằng lịch mẫu công bố"; muốn viết "khớp với người" cần thêm khoảng 30 cặp người chấm.
 
 ## 8. Kiểm tra tự động
 
@@ -275,3 +273,13 @@ Năm lớp, chạy bằng `pytest` và script eval, không cần người:
 
 - Sáu nhóm ràng buộc để đối chiếu độ phủ: ChinaTravel (Shao và cộng sự).
 - Số liệu luật, hệ số và POI: repo Davel-Trace (`gate.py`, `optimizer.py`, `soft_rules.py`, snapshot danang-v2) và data thử nghiệm v2 ngày 23/11/2026; kết quả đo 24–25/11 ở `reports/objective_v1/`.
+
+Pilot 26/11 là dữ liệu lịch sử với `fixed_cost` cho mưa. Sau tích hợp main `7cb6d73`, dùng `rain`, 19 feature và dataset schema 4 (`objective-shown-v4-a2-pairs`); `meal_far`/`wait` chỉ đo, không học/phạt trong pilot. Trainer kiểm hash code/data/weights, cặp và hidden key; báo cáo kiểm thêm hash và request ID/count của audit. Không trộn pilot cũ hoặc cặp human/gold khác schema vào train; sinh lại trên baseline hiện tại.
+
+### Quyết định A2 sau A/B ngày 27/11/2026
+
+Giữ staircase đúng main: mọi cặp quán trong ngày chịu A, độc lập khoảng cách giờ.
+Thử nghiệm <150 ngày 26–27/11 đã bị bác bỏ: tăng quán/bữa ngoài slot, trùng trải
+nghiệm và thời gian giải quá 10%. Số liệu: `reports/objective_v1/A2_AB_20261127.md`.
+Giữ sửa thời lượng thật, raw/shown và guard polish. Dataset <150/schema 3 là
+lịch sử; trainer/analyzer chỉ nhận schema 4 và baseline/code hash tương ứng.

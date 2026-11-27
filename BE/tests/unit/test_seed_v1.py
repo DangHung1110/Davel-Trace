@@ -39,6 +39,14 @@ def _seed(pois, travel, trip, **kw):
 
 
 class TestSeedV1(unittest.TestCase):
+    def test_distant_dinner_pays_for_the_lunch_pair(self):
+        pois = [_poi("lunch", "", 11, 12, visit=30, restaurant=True),
+                _poi("dinner", "", 18, 19, visit=30, restaurant=True)]
+        travel = {("lunch", "dinner"): 5, ("dinner", "lunch"): 5}
+        seeded = _seed(pois, travel, StubTrip(11 * H, 20 * H, None),
+                       objective=_spec(meal_crowd=10, meal_scale=0))
+        self.assertEqual(seeded, ["lunch"])
+
     def test_a_drive_worth_more_than_the_stop_is_not_seeded(self):
         """At the savings rate a 60-minute leg costs 2.7U: more than a stop worth 1U."""
         pois = [_poi("a", "history", 7, 20), _poi("b", "nature", 7, 20),

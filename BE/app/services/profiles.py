@@ -970,6 +970,12 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
                      limits, relaxed_step, cafe_cap, ctx, prof,
                      candidates, travel, scored=scored)
     if spec is not None and out.get("itinerary") is not None:
+        clock = _to_trip(trip)
+        plan["_context"].update(stubs={s.poi_id: s for s in stubs_used}, spec=spec,
+                                start_min=clock.start_min, end_min=clock.end_min,
+                                origin_id=clock.origin_id or None,
+                                rest_minutes=(limits_used.get("rest_minutes")
+                                              if limits_used.get("rest_after_lunch") else None))
         plan["_features"] = _plan_features(
             out, plan.get("activities") or [], stubs_used, travel, trip, spec, q,
             state_bands, state_scores, state_costs, limits_used)
@@ -1080,16 +1086,16 @@ def _plan_features(out: dict, shown: list[dict], stubs: list, travel: dict, trip
     def _read(activities: list[dict]) -> dict:
         f, j = _day_features(activities, stubs, travel, trip, spec, edges, bands, scores,
                              costs, limits)
-        return {"features": {name: round(value, 4) for name, value in f.items()},
-                "j": round(j, 4)}
+        return {"features": f, "j": j}
 
-    raw_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(raw_acts)]
-    shown_seq = [(a["poi_id"], a["start"]) for a in objective_mod.shown_acts(shown)]
-    return {"weights": spec.w.get("version"), "unit": round(unit, 4),
-            "solver_j": round(float(out.get("objective") or 0.0) / (1000.0 * unit), 4),
+    raw_seq = objective_mod.shown_acts(raw_acts)
+    shown_seq = objective_mod.shown_acts(shown)
+    return {"weights": spec.w.get("version"), "unit": unit,
+            "feature_schema": objective_mod.FEATURE_SCHEMA, "a2_rule": objective_mod.A2_RULE,
+            "solver_j": float(out.get("objective") or 0.0) / (1000.0 * unit),
             "status": out.get("status"), "rest_taken": out.get("rest_taken"),
             "retimed": raw_seq != shown_seq,
-            "same_stops": [p for p, _ in raw_seq] == [p for p, _ in shown_seq],
+            "same_stops": [a["poi_id"] for a in raw_seq] == [a["poi_id"] for a in shown_seq],
             "raw": _read(raw_acts),
             "shown": _read(shown)}
 

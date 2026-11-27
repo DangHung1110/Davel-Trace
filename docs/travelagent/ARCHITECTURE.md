@@ -47,7 +47,7 @@ Sáu model tự train (3 offline, 3 online) và 2 LLM dùng sẵn. Trọng số 
 
 | Model | Loại | Học từ | Khi nào | Đầu vào → đầu ra | Đánh giá | Trạng thái |
 |---|---|---|---|---|---|---|
-| Trọng số hàm mục tiêu | logistic theo cặp + perceptron, các hệ số tổng của J | cặp lịch LLM chấm, lịch mẫu công bố, cặp người chấm | offline, khi có nhãn mới | hiệu đặc trưng của hai lịch (`objective.features`) → w | test tự động; khớp cặp người giữ riêng | v1 đặt tay, mặc định; chưa học |
+| Trọng số hàm mục tiêu | Bradley–Terry regularized, các hệ số tổng của J | cặp lịch Claude chấm; lịch công bố và cặp người để kiểm độc lập | offline, khi có nhãn mới | hiệu đặc trưng của hai lịch (`objective.features`) → w | test tự động; khớp cặp người giữ riêng | v1 đặt tay, mặc định; chưa học |
 | Bộ lọc ứng viên | LightGBM phân loại | lời giải CP-SAT thầy | offline | đặc trưng mỗi ứng viên → xác suất được chọn | recall@40, điểm lịch so với thầy, thời gian | bản thử recall@40 0,964 (chưa vào nhánh); train lại sau khi chốt w |
 | Pointer | Transformer + pointer attention | thứ tự ghé của thầy | offline | trip + 40 ứng viên → thứ tự ghé | top-1 / top-3; tốc độ so với greedy hint | chưa |
 | Bandit sở thích | Bayesian logistic + Thompson | sửa / chọn / bỏ lịch, đánh giá | online | cặp lịch của user → w_user | regret trên user giả lập; pilot | chưa |
@@ -92,9 +92,10 @@ Vòng offline tạo ba file mà đường request đọc: trọng số w, model 
 
 1. **Chốt hàm mục tiêu** — xong: v1 + bước 1 (T11, bữa tối, nhịp, ngân sách), PR #38.
 2. **Học trọng số w** (`OBJECTIVE_V1.md` §7):
-    - sinh cặp lịch bằng hai vector w lệch nhau, cộng 459 cặp có sẵn;
+    - sinh cặp lịch bằng hai vector w lệch nhau, chỉ tái dùng cặp cũ không thuộc held-out và đã kiểm phiên bản/feature;
     - Claude trong phiên chấm mỗi cặp hai chiều theo giao thức của `ranker.py`, bỏ cặp tự mâu thuẫn;
-    - thu 30–50 lịch mẫu đã công bố, học bằng perceptron;
+    - thu 30–50 lịch mẫu đã công bố để kiểm tra độc lập, không dùng học/chọn lambda;
+    - perceptron chỉ là bước dự phòng khi BT ổn nhưng còn lệch rõ; phải giữ một tập kiểm tra chưa dùng;
     - chọn bộ w thắng trên test tự động, ghi ra file mới cùng khoá với `v1.json`.
 3. **Sinh data thầy** (`gen_teacher_data.py`): 40% biến thể của 30 câu gold, 60% ngẫu nhiên theo 8 khung giờ, ngân sách 0,5–5 triệu, 1–6 người. Thầy mạnh hơn production: cap 40 và ngân sách CP-SAT lớn hơn (ở v2, 82% bài dừng vì hết giờ). 10.000–20.000 bài, khoảng 300 bài mỗi luồng mỗi giờ.
 4. **Train bộ lọc** (`BE/ml/filter/train.py`, chia train/test 80/20 theo request) và **pointer** (mỗi bước đoán điểm kế tiếp; chạy thử trên 1.841 bài v2 trước để bắt lỗi pipeline).
@@ -152,9 +153,9 @@ Thêm bảng sự kiện đụng API và migration DB, nên cần duyệt thiế
 | Prior hệ số giờ | zone × khung giờ | `travel_time_factors.json` | hệ số giờ đi lại | có, chưa hiệu chỉnh |
 | Câu gold | 30 câu | `BE/eval/gold/gold_v2.json` | kiểm parser, đo trước/sau | có |
 | Data thầy | v1: 2.124 bài; v2: 1.841 bài | `gen_teacher_data.py` | bộ lọc, pointer | có; phải sinh lại sau khi chốt w |
-| Cặp lịch | 459 cặp | `eval_learned40.jsonl`, `compare_v1_vs_v2.jsonl` | học w | có, chưa chấm |
+| Cặp lịch | 459 cặp | `eval_learned40.jsonl`, `compare_v1_vs_v2.jsonl` | học/kiểm w | 259 cặp chỉ để eval; 200 cặp cần kiểm lại trước khi tái dùng |
 | Cặp người chấm PATM | 150 cặp (108 có lựa chọn) | người chấm | PATM | so 2 POI, không dùng thẳng cho w |
-| Lịch mẫu đã công bố | cần 30–50 lịch | trang du lịch, blog (giữ link) | học w | chưa thu |
+| Lịch mẫu đã công bố | cần 30–50 lịch | trang du lịch, blog (giữ link) | kiểm tra w độc lập | chưa thu |
 | Log user | — | app | 3 model online | chưa có; chỉ có lịch được chấp nhận |
 
 Giới hạn: không dùng trường Google để train hay chạy production khi chính sách chưa cho phép; không dùng API trả phí; không bịa data (thiếu thì ghi KHÔNG XÁC ĐỊNH).
@@ -195,7 +196,7 @@ Mỗi bước chỉ qua khi đạt điều kiện ghi kèm.
 
 1. **Hàm mục tiêu v1 trong code** — xong (PR #38): v1 + bước 1, mặc định. Qua: test cả hai chế độ, điểm trùng ≤ legacy, đo trước/sau (`reports/objective_v1/`).
 2. **Chấm cặp legacy vs v1 bằng Claude trong phiên.** Qua: tỉ lệ thắng, data cặp cho bước 3. Song song: module thời gian ở + thiết kế log (qua khi sai số trên 45 POI không tệ hơn bảng; thiết kế log được duyệt).
-3. **Học trọng số w**, 1–2 tuần, phần lớn là thu và khớp lịch mẫu. Qua: w học được thắng v1 trên test và chỉ số.
+3. **Học trọng số w** bằng Bradley–Terry trên cặp Claude chấm; lịch mẫu kiểm độc lập. Qua: w học được thắng v1 trên test và chỉ số.
 4. **Sinh data thầy lớn, train bộ lọc, train pointer**, khoảng 9 giờ máy cho 20.000 bài. Qua: recall@40 từ 0,95; pointer nhanh hơn greedy hint; gate 100%.
 5. **Bandit và log trong app**, kiểm bằng user giả lập. Qua: regret giảm; log ghi đủ propensity.
 6. **Pilot 10–20 chuyến thật.** Qua: ba model online cập nhật đúng; số lần sửa lịch giảm.
@@ -214,3 +215,5 @@ Ngoài phạm vi: đèo Hải Vân / Sơn Trà ban đêm (cần gắn cờ cung 
 | Data thầy cũ sau khi đổi w | bộ lọc, pointer học theo hàm mục tiêu cũ | chốt w trước, sinh lại data, giữ code |
 | Bandit học lệch do chỉ thấy lịch mình hiện | user chỉ chọn trong vài lịch | ghi propensity, Thompson sampling |
 | Không có user thật cho phần online | không có log | user giả lập + pilot; trình bày là phần mở rộng |
+
+Giao thức pilot cập nhật 26/11/2026: `OBJECTIVE_LEARNING_PROTOCOL.md` (rubric, hai lượt độc lập, split, tiêu chí và provenance).

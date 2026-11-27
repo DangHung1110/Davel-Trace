@@ -1,3 +1,5 @@
+> Quyết định mới nhất 27/11: giữ A2 main sau A/B, schema 4. Xem [A2_AB_20261127.md](A2_AB_20261127.md). Các pilot near-a2 cũ không dùng train.
+
 # Hàm mục tiêu v1 so với legacy (24/11/2026)
 
 Với trọng số cuối của nhánh `feat/planner-objective-v1`, v1 giữ nguyên tỉ lệ có lịch, gate và bữa trưa ở mọi bộ đo, chạy xe ít hơn và đa dạng hơn ở profile balanced; cái giá là thời gian giải tăng 15–35%.
@@ -139,6 +141,17 @@ python reports/objective_v1/scripts/analyze_objective.py <repo> out_legacy.jsonl
 python reports/objective_v1/scripts/eval_gold.py <repo> gold_v1.jsonl v1 2
 # đếm điểm trùng có sẵn trong analyze_objective.py (plans_with_duplicates)
 ```
+
+## Pilot học trọng số 26/11
+
+Đợt tích hợp main mới và pilot schema 3: [MAIN_INTEGRATION_20261127.md](MAIN_INTEGRATION_20261127.md).
+Hai pilot 26/11 bên dưới là lịch sử, không trộn vào train trên baseline mới.
+
+Xem `PILOT_WEIGHTS_20261126.md`: T1/T2 đã triển khai; pilot 40 request giữ 17 cặp, chưa có nhãn Claude do quota tuần. Chưa train/chốt trọng số learned thật, chưa thay mặc định v1.
+
+## Sửa A2 sau pilot
+
+Người dùng đã duyệt sửa OR/AND. Xem `A2_FIX_PILOT_20261126.md`: 124 tests + 20 subtests qua; chạy lại 40 request giữ 21 cặp, gate 80/80. Trên base A, di chuyển trung vị tăng 31→39,5 phút, nghỉ trưa 17→20 lịch. Đây là sửa đúng công thức, chưa chứng minh gu tốt hơn. Dữ liệu trước sửa chỉ để audit, không trộn train.
 
 Bước 4 (mỗi lệnh chạy trong một bản `git archive`, `<before>` và `<after>`):
 

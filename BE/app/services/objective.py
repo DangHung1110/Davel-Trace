@@ -11,9 +11,7 @@ term of one objective, so a plan may break it when that is worth the cost:
        - sum_g beta_g sum_{k>=2} rho_k y_gk     T3 repeats inside a diversity group
        - gamma sum beta_g a_ij [same group]     T4 two stops of one group back to back
        + sum_s B_s z_s                          T5 a meal in each meal window of the day
-       - A * (extra meals in a slot + every pair of restaurants)       T6 (A2: the
-                                                solver's "under 2.5 h" test is always
-                                                true, so pairs further apart pay too)
+       - A * (extra meals in a slot + every restaurant pair)   T6
        + R(pace) * r                            T7 the siesta right after lunch
        - sum_{k>K0} kappa_k s_k                 T8 stops beyond the comfortable count
        - sum c_ij a_ij                          T9 riding minutes, long legs, zone changes
@@ -80,9 +78,9 @@ STRICTABLE = rules.TASTE
 FOOD_TOUR_WORDS = ("food tour", "an uong", "am thuc", "an vat", "an het", "tour an")
 
 # The terms of J that `features` reads off a finished day (the learner's columns).
-# `rain` (T2's rain cost) and `meal_far` (restaurant pairs 2.5 h or more apart, which
-# the solver's A2 also charges) are their own columns so a learner can tell them from
-# `state` and `meal_crowd`.
+# Rain has its own weight; meal_far and waiting are diagnostics only.
+FEATURE_SCHEMA = "objective-shown-v4-a2-pairs"
+A2_RULE = "all_restaurant_pairs"
 FEATURES = ("value", "state", "rain", "repeat", "adjacent", "meal", "meal_crowd",
             "meal_far", "rest", "pace", "ride", "long_leg", "zone", "edge",
             "same_site", "umbrella", "market", "dish", "wait")
@@ -428,7 +426,7 @@ def pace_cost(spec: Spec, stops: int, scaled: bool = True, k0: int | None = None
 
 
 def shown_acts(activities: list[dict]) -> list[dict]:
-    """A plan's activities -> the input of `features`: [{poi_id, start (min)}] in
+    """A plan's activities -> the input of `features`: clocks in minutes, in
     visiting order, at the times the plan shows (HH:MM strings or minutes)."""
     from BE.common import to_min
 
@@ -436,10 +434,18 @@ def shown_acts(activities: list[dict]) -> list[dict]:
     for act in activities or []:
         if not act.get("poi_id"):
             continue
-        start = act.get("start")
-        out.append({"poi_id": act["poi_id"],
-                    "start": int(start) if isinstance(start, (int, float)) else to_min(start)})
+        row = {"poi_id": act["poi_id"]}
+        for key in ("start", "end"):
+            if key == "start" or act.get(key) is not None:
+                value = act.get(key)
+                row[key] = int(value) if isinstance(value, (int, float)) else to_min(value)
+        out.append(row)
     return out
+
+
+def visit_minutes(act: dict, stub) -> int:
+    """Polish may stretch a visit; raw/minimal activities fall back to the stub."""
+    return int(act["end"]) - int(act["start"]) if "end" in act else int(stub.visit_min)
 
 
 def state_terms(acts: list[dict], stubs: dict, bands: list | None,
@@ -452,7 +458,7 @@ def state_terms(acts: list[dict], stubs: dict, bands: list | None,
     state = rain = 0.0
     for act in acts:
         pid = act["poi_id"]
-        dur = int(stubs[pid].visit_min)
+        dur = visit_minutes(act, stubs[pid])
         for num, den in ((1, 4), (3, 4)):
             probe = int(act["start"]) + dur * num // den
             for k, (lo, hi) in enumerate(bands or []):
@@ -465,13 +471,14 @@ def state_terms(acts: list[dict], stubs: dict, bands: list | None,
     return state, rain
 
 
-def is_lunch(stub, start: int) -> bool:
+def is_lunch(stub, start: int, duration: int | None = None) -> bool:
     """The day's lunch as the solver's siesta sees it: a restaurant starting 11:00-13:00,
     or a booked class over the lunch slot."""
     from BE.app.services.soft_rules import LUNCH_REQUIRED, MEAL_SLOTS
 
     if stub.booking:
-        return start < MEAL_SLOTS[0][1] and start + int(stub.visit_min) > MEAL_SLOTS[0][0]
+        return start < MEAL_SLOTS[0][1] and start + (int(stub.visit_min) if duration is None
+                                                    else duration) > MEAL_SLOTS[0][0]
     return bool(stub.restaurant) and LUNCH_REQUIRED[0] <= start < LUNCH_REQUIRED[1]
 
 
@@ -487,10 +494,11 @@ def idle_minutes(acts: list[dict], stubs: dict, travel: dict,
     for a, b in zip(acts, acts[1:]):
         stub = stubs[a["poi_id"]]
         start = int(a["start"])
+        duration = visit_minutes(a, stub)
         allowed = int(travel.get((a["poi_id"], b["poi_id"]), 0)) + STOP_OVERHEAD_MIN
-        if rest_minutes and is_lunch(stub, start):
+        if rest_minutes and is_lunch(stub, start, duration):
             allowed = max(allowed, int(rest_minutes))
-        idle += max(0, int(b["start"]) - (start + int(stub.visit_min)) - allowed)
+        idle += max(0, int(b["start"]) - (start + duration) - allowed)
     return idle
 
 
@@ -501,9 +509,9 @@ def rest_taken(acts: list[dict], stubs: dict, spec: Spec, rest_minutes: int | No
     strict is a constraint, not a bonus, so it earns nothing here."""
     if rest_minutes is None or "REST_FOLLOWS_LUNCH" in spec.strict:
         return False
-    spans = [(int(a["start"]), int(a["start"]) + int(stubs[a["poi_id"]].visit_min),
+    spans = [(int(a["start"]), int(a["start"]) + visit_minutes(a, stubs[a["poi_id"]]),
               stubs[a["poi_id"]]) for a in acts]
-    ends = {end for start, end, stub in spans if is_lunch(stub, start)}
+    ends = {end for start, end, stub in spans if is_lunch(stub, start, end - start)}
     if len(ends) != 1:
         return False
     rest_start = ends.pop()
@@ -521,7 +529,7 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
     from the solve that made it, so the same call describes the solver's raw day and
     the day a traveller (or a judge) sees after `profiles._polished` re-timed it.
 
-    `acts`: ordered [{poi_id, start (min)}] (`shown_acts` reads a plan); `stubs`:
+    `acts`: ordered [{poi_id, start (min), end (optional)}]; `stubs`:
     poi_id -> StubPOI of the solve's pool (score, group, zone, restaurant, booking,
     visit_min); `travel`: (a, b) -> minutes; `bands`, `state_scores`, `state_costs`:
     the solve's time bands with their per-(poi, band) multipliers and rain costs
@@ -536,6 +544,7 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
         unit = 1.0
     order = [a["poi_id"] for a in acts]
     starts = {a["poi_id"]: int(a["start"]) for a in acts}
+    ends = {a["poi_id"]: int(a["start"]) + visit_minutes(a, stubs[a["poi_id"]]) for a in acts}
     f = {name: 0.0 for name in FEATURES}
     f["value"] = sum(stubs[p].score for p in order) / unit
     # T3, T4
@@ -558,17 +567,17 @@ def features(acts: list[dict], stubs: dict, travel: dict, spec: Spec,
         for lo, hi in MEAL_SLOTS:
             hits = sum(1 for p in food if lo <= starts[p] < hi)
             hits += sum(1 for p in order if stubs[p].booking
-                        and starts[p] < hi and starts[p] + stubs[p].visit_min > lo)
+                        and starts[p] < hi and ends[p] > lo)
             f["meal_crowd"] += max(0, hits - 1)
-    # The solver's A2 charges EVERY pair of restaurants: its "starts under 2.5 h
-    # apart" test is `earlier OR later`, true for any two times. Pairs under 2.5 h
-    # stay in `meal_crowd` (the doc's T6), the others go to `meal_far` at the same
-    # weight, so J matches the solver and a learner sees the two kinds apart.
+    # A2 charges every restaurant pair, as the solver staircase does.
+    # meal_far remains a diagnostic subset, not an additional charge.
     eaten = [p for p in order if stubs[p].restaurant]
     for k, a in enumerate(eaten):
         for b in eaten[k + 1:]:
             near = abs(starts[a] - starts[b]) < RESTAURANT_PAIR_MAX_GAP
-            f["meal_crowd" if near else "meal_far"] += 1.0
+            f["meal_crowd"] += 1.0
+            if not near:
+                f["meal_far"] += 1.0
     # T7
     if rest_taken(acts, stubs, spec, rest_minutes):
         f["rest"] = spec.rest_bonus(scaled=False)
@@ -608,7 +617,7 @@ def objective_value(f: dict, spec: Spec) -> float:
     return (f["value"] + spec.coef("w_state") * f["state"] - spec.rain_weight() * f["rain"]
             - f["repeat"] * spec.coef("repeat_scale")
             - spec.coef("gamma") * f["adjacent"] + spec.coef("meal_scale") * f["meal"]
-            - spec.meal_crowd() * (f["meal_crowd"] + f["meal_far"])
+            - spec.meal_crowd() * f["meal_crowd"]
             + f["rest"] * spec.coef("rest_scale")
             - f["pace"] * spec.coef("pace_scale") - spec.coef("tau") * f["ride"]
             - spec.coef("tau_long") * f["long_leg"] - spec.coef("zeta") * f["zone"]
@@ -616,3 +625,11 @@ def objective_value(f: dict, spec: Spec) -> float:
             - sum(spec.duplicate(kind) * f[kind] for kind in ("same_site", "umbrella",
                                                                "market", "dish"))
             - spec.coef("w_wait") * f.get("wait", 0.0))
+
+
+def plan_features(plan: dict, *, raw: bool = False) -> dict | None:
+    """Read the canonical private snapshot produced by profiles._plan_features."""
+    snapshot = plan.get("_features")
+    if snapshot is None:
+        return None
+    return dict(snapshot["raw" if raw else "shown"]["features"])

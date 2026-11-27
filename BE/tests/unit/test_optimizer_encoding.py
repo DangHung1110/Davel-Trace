@@ -134,6 +134,19 @@ class TestA2EveryPair(unittest.TestCase):
         assert out["status"] == "optimal", out
         return out["objective"]
 
+    def test_lunch_at_noon_and_dinner_at_1830_cost_one_pair(self):
+        pois = [StubPOI('lunch', 30, 12 * H, 12 * H + 30, 5, restaurant=True),
+                StubPOI('dinner', 30, 18 * H + 30, 19 * H, 5, restaurant=True)]
+        values = []
+        for weight in (0., 1.):
+            with mock.patch.object(opt, 'A2_PAIR_WEIGHT', weight):
+                out = optimize(pois, {('lunch', 'dinner'): 5, ('dinner', 'lunch'): 5},
+                               StubTrip(8 * H, 21 * H, ''), workers=1,
+                               must_visit=['lunch', 'dinner'])
+            self.assertEqual(out['status'], 'optimal')
+            values.append(out['objective'])
+        self.assertEqual(values[0] - values[1], 5000)
+
     def test_pairs_are_counted_whatever_the_hours(self):
         pair = 5.0 * 1000  # unit (top score) * A2_PAIR_WEIGHT * 1000
         for count, pairs in ((1, 0), (2, 1), (3, 3)):

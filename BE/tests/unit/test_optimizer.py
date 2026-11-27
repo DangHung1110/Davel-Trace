@@ -285,6 +285,38 @@ class TestPacing(unittest.TestCase):
 class TestA2InterMealDistance(unittest.TestCase):
     """TASK-3: two restaurants <2.5h apart are penalized by time distance."""
 
+    def test_a2_objective_all_distances_in_both_directions_and_modes(self):
+        from BE.app.services import objective
+
+        # Isolate A2: both stops mandatory, exact starts, outside shared meal slots.
+        weights = objective.weights('v1')
+        for name in ('w_state', 'repeat_scale', 'gamma', 'meal_scale', 'rest_scale',
+                     'pace_scale', 'tau', 'tau_long', 'zeta', 'w_edge',
+                     'dup_same_site', 'dup_umbrella', 'dup_market', 'dup_dish'):
+            weights[name] = 0.0
+        weights['meal_crowd'] = 1.0
+        spec = objective.Spec(weights, None, 2, False, frozenset(), False)
+        for gap in (90, 149, 150, 151, 420):
+            for reverse in (False, True):
+                for mode in ('legacy', 'v1'):
+                    with self.subTest(gap=gap, reverse=reverse, mode=mode):
+                        early = 8 * H if gap != 420 else 11 * H
+                        late = early + gap
+                        pois = [StubPOI('early', 10, early, early + 10, 4,
+                                        restaurant=True, category='restaurant'),
+                                StubPOI('late', 10, late, late + 10, 4,
+                                        restaurant=True, category='restaurant')]
+                        if reverse:
+                            pois.reverse()
+                        out = optimize(pois, {('early', 'late'): 1, ('late', 'early'): 1},
+                                       StubTrip(early, late + 10, origin_id=None), workers=1,
+                                       must_visit=['early', 'late'], diversity_weight=0,
+                                       objective=spec if mode == 'v1' else None)
+                        self.assertEqual(out['status'], 'optimal')
+                        expected_u = 1.0  # Every pair pays, independent of time distance.
+                        self.assertAlmostEqual(out['objective'] / (1000 * out['unit']),
+                                               expected_u, delta=.001)
+
     @staticmethod
     def _fixture():
         # 10:49 (outside the 11:00 lunch slot) vs 11:05 (inside it): gate A1

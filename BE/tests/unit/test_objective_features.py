@@ -1,8 +1,8 @@
 """J's features read off a finished day (`objective.features`): the gaps of the review.
 
 Until 26/11 `features` took T2 (time-of-day state and rain) and T7 (the siesta) from
-its caller, which no caller had for a finished plan, and counted only restaurant
-pairs under 2.5 h while the solver's A2 charges every pair. So its J was not what
+its caller, which no caller had for a finished plan. A2 now charges only restaurant
+pairs at every distance, consistently in the solver and features. Its J must be what
 CP-SAT maximised, and it could not describe the day a judge sees (`profiles._polished`
 re-times the solver's day). Every solver-parity test below fails on that version.
 Small synthetic days solved to optimality on one worker, like test_objective_v1.
@@ -191,7 +191,8 @@ class TestShownTimes(unittest.TestCase):
     def test_shown_acts_reads_a_plan(self):
         acts = objective.shown_acts([{"poi_id": "a", "start": "09:15", "end": "10:00"},
                                      {"kind": "note"}, {"poi_id": "b", "start": 600}])
-        self.assertEqual(acts, [{"poi_id": "a", "start": 555}, {"poi_id": "b", "start": 600}])
+        self.assertEqual(acts, [{"poi_id": "a", "start": 555, "end": 600},
+                                {"poi_id": "b", "start": 600}])
 
     def test_features_name_every_term_once(self):
         self.assertEqual(len(objective.FEATURES), len(set(objective.FEATURES)))
@@ -233,6 +234,44 @@ class TestIdleMinutes(unittest.TestCase):
         self.assertEqual(spec.coef("w_wait"), 0.0)
         self.assertEqual(objective.objective_value(f, spec),
                          objective.objective_value({**f, "wait": 0.0}, spec))
+
+
+class TestDisplayedDurations(unittest.TestCase):
+    def test_stretched_visit_reads_state_and_rain_at_displayed_quartiles(self):
+        stub = _poi("museum", "history", "center", 4, visit=60)
+        acts = objective.shown_acts([{"poi_id": "museum", "start": "08:00", "end": "10:00"}])
+        f = objective.features(acts, {"museum": stub}, {}, _spec(), 480, 1080,
+                               bands=[(540, 600)], state_scores={("museum", 0): 0},
+                               state_costs={("museum", 0): .8})
+        self.assertEqual(f["state"], -.5)
+        self.assertEqual(f["rain"], .4)
+
+    def test_stretched_lunch_delays_the_siesta(self):
+        stubs = {"lunch": _poi("lunch", "", "center", 3, restaurant=True, visit=30),
+                 "museum": _poi("museum", "history", "center", 4)}
+        acts = objective.shown_acts([
+            {"poi_id": "lunch", "start": "12:00", "end": "13:00"},
+            {"poi_id": "museum", "start": "13:45", "end": "14:45"}])
+        self.assertFalse(objective.rest_taken(acts, stubs, _spec(), 60))
+        acts[1].update(start=14 * 60, end=15 * 60)
+        self.assertTrue(objective.rest_taken(acts, stubs, _spec(), 60))
+
+    def test_stretched_visit_is_not_waiting(self):
+        stubs = {"museum": _poi("museum", "history", "center", 4, visit=60),
+                 "lunch": _poi("lunch", "", "center", 3, restaurant=True)}
+        acts = objective.shown_acts([
+            {"poi_id": "museum", "start": "09:00", "end": "10:30"},
+            {"poi_id": "lunch", "start": "11:00", "end": "12:00"}])
+        self.assertEqual(objective.idle_minutes(acts, stubs, {("museum", "lunch"): 10}), 8)
+
+    def test_distant_pairs_are_measured_without_changing_j(self):
+        stubs = {p: _poi(p, "", "center", 4, restaurant=True) for p in ("lunch", "dinner")}
+        f = objective.features([{"poi_id": "lunch", "start": 720},
+                                {"poi_id": "dinner", "start": 1080}],
+                               stubs, {}, _spec(), 480, 1260)
+        self.assertEqual(f["meal_far"], 1)
+        self.assertEqual(objective.objective_value(f, _spec()),
+                         objective.objective_value({**f, "meal_far": 0}, _spec()))
 
 
 if __name__ == "__main__":
