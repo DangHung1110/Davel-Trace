@@ -29,7 +29,7 @@ from BE.app.services.soft_rules import (
 from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
 from BE.common import (
-    deadline, effective_fee, paid_access, paid_after, party_size, poi_open_windows, to_min,
+    deadline, own_fee, paid_access, paid_after, party_size, poi_open_windows, to_min,
     total_fee, trusted_rating, visit_fee)
 
 
@@ -267,7 +267,7 @@ def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
         span = (wins[0][0], wins[-1][1]) if wins else (0, 0)
     return StubPOI(p["poi_id"], poi_visit_min(p), *span, score,
                    restaurant=category == "restaurant", category=category,
-                   fee=effective_fee(p) or 0, access=stub_access(p, paid),
+                   fee=own_fee(p, p["poi_id"], paid) or 0, access=stub_access(p, paid),
                    windows=tuple(wins) if wins and len(wins) > 1 else (),
                    # objective v1: the same group / zone / T11 keys as the first plan
                    **objective_mod.stub_keys(p, objective_mod.parent_of(p, pois_by_id)))

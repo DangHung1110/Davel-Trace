@@ -341,6 +341,8 @@ ACCESS_FEES = "access_fees"
 # Trip key: charges already paid (a ticket bought on an earlier day, by a stop already
 # done). `multiday` and `replan` set it; `paid_access` reads it.
 PAID_ACCESS = "paid_access"
+# On the view of a parent: its own price is a ticket other stops need (Sun World).
+SELLS_TICKET = "sells_ticket"
 
 
 def ticket_parent(poi: dict, by_id: dict, by_osm: dict | None = None) -> dict | None:
@@ -384,6 +386,9 @@ def attach_access_fees(views: list[dict], snapshot_dir: str | None = None) -> li
                             "estimate": fare.get("verified_by") not in SOURCED_PRICE_BY})
         if charges:
             view[ACCESS_FEES] = charges
+            for charge in charges:
+                if charge["kind"] == "ticket" and is_v21(by_id[charge["key"]]):
+                    by_id[charge["key"]][SELLS_TICKET] = True
     return views
 
 
@@ -392,12 +397,21 @@ def access_charges(poi: dict | None, paid=()) -> list[dict]:
     return [c for c in (poi or {}).get(ACCESS_FEES) or () if c.get("key") not in paid]
 
 
+def own_fee(poi: dict | None, pid: str | None, paid=()) -> int | None:
+    """A stop's own price, 0 for a parent whose ticket the trip already bought: Sun World
+    after a summit stop of an earlier day (the ticket is good for 3 days). `pid` is the
+    stop's id (a gate view carries no poi_id)."""
+    if paid and pid in paid and (poi or {}).get(SELLS_TICKET):
+        return 0
+    return effective_fee(poi or {})
+
+
 def visit_fee(poi: dict | None, paid=()) -> int | None:
     """VND one person pays to visit this stop by itself: its own price plus every
     access charge not yet `paid` (Cầu Vàng: 0 + the Sun World ticket). What a filter
     or a price score must read; a plan's cost is `fee_breakdown` (a shared ticket is
     paid once). None only when its price is unknown and reaching it costs nothing."""
-    own = effective_fee(poi or {})
+    own = own_fee(poi, (poi or {}).get("poi_id"), paid)
     extra = sum(int(c["vnd"]) for c in access_charges(poi, paid))
     if own is None:
         return extra or None
@@ -412,11 +426,12 @@ def paid_access(trip: dict | None) -> frozenset:
 def fee_breakdown(acts: list[dict], pois: dict, paid=()) -> tuple[int, list[dict]]:
     """(VND one person pays for these stops, the access charges in that sum).
 
-    Each stop pays its own price (`effective_fee`; an unknown POI or price counts 0).
-    A charge of `access_fees` is added once: a ticket once for the whole list, a
-    transfer once per `day` of the activities (one cano round trip per island visit).
-    It is not added when its parent is itself one of the stops, or when it was `paid`.
-    Each charge says which stops it is `for`.
+    Each stop pays its own price (`effective_fee`; an unknown POI or price counts 0),
+    none when it was `paid` (a parent whose ticket an earlier day bought). A charge of
+    `access_fees` is added once: a ticket once for the whole list, a transfer once per
+    `day` of the activities (one cano round trip per island visit). It is not added
+    when its parent is itself one of the stops, or when it was `paid`. Each charge says
+    which stops it is `for`.
     """
     paid = frozenset(paid or ())
     stops = {a.get("poi_id") for a in acts}
@@ -424,7 +439,7 @@ def fee_breakdown(acts: list[dict], pois: dict, paid=()) -> tuple[int, list[dict
     charges: dict = {}
     for a in acts:
         poi = pois.get(a.get("poi_id")) or {}
-        own += effective_fee(poi) or 0
+        own += own_fee(poi, a.get("poi_id"), paid) or 0
         for charge in access_charges(poi, paid):
             if charge["key"] in stops:
                 continue

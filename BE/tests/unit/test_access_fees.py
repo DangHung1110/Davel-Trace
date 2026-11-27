@@ -104,6 +104,8 @@ class TestAttach(unittest.TestCase):
     def test_the_parent_and_a_plain_stop_carry_nothing(self):
         self.assertNotIn("access_fees", POIS[SUN])
         self.assertNotIn("access_fees", POIS[TOWN])
+        self.assertTrue(POIS[SUN]["sells_ticket"] and POIS[TOWN]["sells_ticket"])
+        self.assertNotIn("sells_ticket", POIS[CAFE])
 
     def test_an_osm_ref_finds_its_parent(self):
         self.assertEqual([(c["key"], c["vnd"]) for c in POIS[HALL]["access_fees"]], [(TOWN, 250000)])
@@ -158,6 +160,14 @@ class TestFeeBreakdown(unittest.TestCase):
 
     def test_what_is_paid_costs_nothing(self):
         self.assertEqual(fee_breakdown(acts(BRIDGE, PARK), POIS, paid={SUN}), (0, []))
+        # Sun World on day 2 after a summit stop of day 1 bought its ticket
+        self.assertEqual(fee_breakdown(acts(SUN), POIS, paid={SUN}), (0, []))
+        self.assertEqual(visit_fee(POIS[SUN], {SUN}), 0)
+        self.assertEqual(poi_to_stub(POIS[SUN], {PAID_ACCESS: [SUN]}).fee, 0)
+        # a meal already had is no ticket: a second one still costs
+        self.assertEqual(fee_breakdown(acts(CAFE), POIS, paid={CAFE})[0], 50000)
+        gate = {pid: _gate_view(p) for pid, p in POIS.items()}
+        self.assertEqual(fee_breakdown(acts(SUN), gate, paid={SUN})[0], 0)
 
     def test_the_party_pays_per_person(self):
         self.assertEqual(total_fee(acts(BRIDGE, PARK), POIS, 4), 3400000)
@@ -303,6 +313,13 @@ class TestDays(unittest.TestCase):
         self.assertEqual([(f["key"], f["day"]) for f in merged["access_fees"]],
                          [(SUN, 1), ("fare:boat", 2)])
         self.assertEqual(merged["total_cost"], 1160000)
+
+    def test_two_days_pay_one_ticket_whichever_day_comes_first(self):
+        # day 1 a summit stop buys the ticket, day 2 the Sun World stop is that ticket
+        day1 = fee_breakdown(acts(BRIDGE, day=1), POIS)[0]
+        day2 = fee_breakdown(acts(SUN, day=2), POIS, paid_after(acts(BRIDGE, day=1), POIS))[0]
+        self.assertEqual(day1 + day2, fee_breakdown(acts(BRIDGE, day=1) + acts(SUN, day=2), POIS)[0])
+        self.assertEqual(day1 + day2, 850000)
 
     def test_a_replanned_day_knows_the_other_days_tickets(self):
         others = acts(BRIDGE, day=1)

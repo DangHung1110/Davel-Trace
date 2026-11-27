@@ -560,7 +560,8 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
 # class over lunch failed the gate as "khong co bua trua".
 _GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
-               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "access_fees")
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "access_fees",
+               "sells_ticket")
 
 
 def _gate_view(p: dict) -> dict:

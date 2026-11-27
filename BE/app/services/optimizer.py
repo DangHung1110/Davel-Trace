@@ -52,7 +52,7 @@ from BE.app.services.soft_rules import (
     poi_category,
 )
 from BE.common import (
-    access_charges, effective_fee, hhmm, paid_access, poi_open_windows, to_min, trusted_rating)
+    access_charges, hhmm, own_fee, paid_access, poi_open_windows, to_min, trusted_rating)
 from BE.app.services import objective as objective_mod
 
 TIMEOUT_S = 5.0
@@ -264,7 +264,8 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    category=category,
                    intensity=int(poi.get("intensity") or 2),
                    windows=tuple(wins) if len(wins) > 1 else (),
-                   fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi),
+                   fee=own_fee(poi, poi["poi_id"], paid_access(trip)) or 0,
+                   visit_max=poi_visit_max(poi),
                    booking=(poi.get("hours") or {}).get("kind") == "by_booking",
                    access=stub_access(poi, paid_access(trip)),
                    **objective_mod.stub_keys(poi, parent))
