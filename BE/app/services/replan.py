@@ -19,6 +19,7 @@ from __future__ import annotations
 from BE.app.services import objective as objective_mod
 from BE.app.services import scorer
 from BE.app.services import state as store
+from BE.app.services import transfers as transfers_mod
 from BE.app.services.gate import check_profile_safe
 from BE.app.services.optimizer import (
     StubPOI, StubTrip, optimize, poi_visit_min)
@@ -155,6 +156,9 @@ def replan(state: dict, event: dict, pois: list[dict],
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
     origin_id = "depot" if completed_ids else (trip.get("origin_id") or None)
+    # Where the day resumes may sit behind a boat or cable car (a summit stop just done).
+    anchor = completed_ids[-1] if completed_ids else trip.get("origin_id")
+    origin_transfer = transfers_mod.service((by_id.get(anchor) or {}).get("transfer")) if anchor else None
     # Objective v1: the same terms as the first plan (T3-T9); the edges then carry
     # the transition score only (A2/B1 are objective terms, rules.py).
     spec = objective_mod.build_spec(trip, limits) if objective_mod.active() else None
@@ -175,7 +179,8 @@ def replan(state: dict, event: dict, pois: list[dict],
         day_cafe_cap = day_cafe_cap if "CAFE_CAP" in spec.strict else None
         taste = {**taste, "soft_category_cap": None, "soft_no_consecutive": False}
         adjacent_food = bool({"NO_ADJACENT_FOOD", "NO_CONSECUTIVE"} & spec.strict)
-    out = optimize(stub, travel2, StubTrip(start, deadline(trip), origin_id),
+    out = optimize(stub, travel2, StubTrip(start, deadline(trip), origin_id,
+                                           origin_transfer=origin_transfer),
                    edge_scores=q, workers=REPLAN_WORKERS,
                    deterministic_time=objective_mod.search_budget(REPLAN_DETERMINISTIC_TIME, spec),
                    not_first=not_first,
@@ -264,5 +269,6 @@ def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
                    restaurant=category == "restaurant", category=category,
                    fee=effective_fee(p) or 0,
                    windows=tuple(wins) if wins and len(wins) > 1 else (),
+                   transfer=transfers_mod.service(p.get("transfer")),
                    # objective v1: the same group / zone / T11 keys as the first plan
                    **objective_mod.stub_keys(p, objective_mod.parent_of(p, pois_by_id)))

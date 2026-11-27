@@ -6,7 +6,8 @@ matrix) and returns ``{"passed": bool, "score": float}`` with a score in [0, 1].
 
 HARD (fail-closed): FAR (verified POIs), PROFILE_SAFE (allergy / must_avoid /
 accessibility, re-checked on the final plan), VROH (opening hours), B3 (gaps fit the
-matrix; a missing cell is infeasible), BCS (budget), ETB (deadline = min(end_time,
+matrix, a missing cell is infeasible; a leg that rides a boat or cable car catches a
+run of its timetable), BCS (budget), ETB (deadline = min(end_time,
 return_time)), A1 (one restaurant per meal slot), CAFE_CAP, CATEGORY_CAP,
 NO_CONSECUTIVE, NO_ADJACENT_FOOD (deprecated view of NO_CONSECUTIVE),
 REST_FOLLOWS_LUNCH, and the mirrors TCS (time) and HCS (every hard gate + the lunch
@@ -26,6 +27,7 @@ from __future__ import annotations
 import functools
 
 from BE.app.services import rules
+from BE.app.services import transfers
 
 from BE.app.services.soft_rules import (
     soft_checks,
@@ -147,26 +149,52 @@ def check_vroh(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
     return _result(bad == 0, 1.0 - bad / len(acts))
 
 
-@_per_day
-def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
-    """Pass iff each gap fits matrix travel time; score = compliant ratio.
+def _transfer(pois: dict, pid: str | None) -> "transfers.Service | None":
+    return transfers.service((pois.get(pid) or {}).get("transfer")) if pid else None
 
-    A day that starts at a base (`trip["origin_id"]`: the lodging, or where a replan
-    resumes) also needs the drive from it before the first stop.
+
+def b3_legs(day: dict, trip: dict, pois: dict, matrix: dict) -> list[tuple[str, bool]]:
+    """("a->b", fits) for every leg of ONE day, the rule B3 scores and lists.
+
+    A leg fits when the gap holds its matrix minutes and, when it rides a boat or
+    cable car with a timetable (POI `transfer`), when the run it needs still goes:
+    `transfers.leg_arrival` from the end of the stop before (waiting for the first
+    boat back, None after the last car up). A day that starts at a base
+    (`trip["origin_id"]`: the lodging, or where a replan resumes) also has the leg
+    from it, leaving at the day's start. An open tour has no first leg; when its
+    first stop is behind such a gateway the day begins where the car or boat
+    arrives, so that stop starts inside `transfers.open_start` ("->b").
     """
-    acts = _ordered(itinerary)
+    acts = _ordered(day)
     origin = trip.get("origin_id")
     legs = [(x["poi_id"], to_min(x["end"]), y) for x, y in zip(acts, acts[1:])]
     if origin and acts:
         legs.insert(0, (origin, to_min(trip.get("start_time", "07:00")), acts[0]))
+    out = []
+    for source, ready, y in legs:
+        key = f"{source}->{y['poi_id']}"
+        need = (matrix.get(key, {}) or {}).get("minutes")
+        if need is None:
+            out.append((key, False))
+            continue
+        left, entered = transfers.crossing(_transfer(pois, source), _transfer(pois, y["poi_id"]))
+        arrive = transfers.leg_arrival(ready, int(need), left, entered)
+        out.append((key, arrive is not None and to_min(y["start"]) >= arrive))
+    first = _transfer(pois, acts[0]["poi_id"]) if acts and not origin else None
+    if first is not None:
+        lo, hi = transfers.open_start(first)
+        out.append((f"->{acts[0]['poi_id']}", lo <= to_min(acts[0]["start"]) <= hi))
+    return out
+
+
+@_per_day
+def check_b3(itinerary: dict, trip: dict, pois: dict, matrix: dict) -> dict:
+    """Pass iff each leg fits (`b3_legs`: the matrix minutes, and the timetable of a
+    boat or cable car it rides); score = compliant ratio."""
+    legs = b3_legs(itinerary, trip, pois, matrix)
     if not legs:
         return _result(True, 1.0)
-    bad = 0
-    for source, ready, y in legs:
-        gap = to_min(y["start"]) - ready
-        need = (matrix.get(f"{source}->{y['poi_id']}", {}) or {}).get("minutes")
-        if need is None or gap < need:
-            bad += 1
+    bad = sum(1 for _key, fits in legs if not fits)
     return _result(bad == 0, 1.0 - bad / len(legs))
 
 

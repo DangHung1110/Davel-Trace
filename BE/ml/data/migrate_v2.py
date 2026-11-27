@@ -653,6 +653,20 @@ def build_dishes(rec, rows, osm_cuisine=None):
     return out
 
 
+def transfer_access(out_dir):
+    """{poi_id: spans} for the places behind a boat or cable car with a timetable
+    (`<out_dir>/transfers.json`, BE/app/services/transfers.py): from the first
+    arrival to the last return (`arrive_from`-`leave_by`). Like the Sơn Trà road
+    window it bounds the place's hours: Cù Lao Chàm is open all day, but the last
+    boat back leaves at 14:30. A lodging keeps its 24 h (its guests sleep there)."""
+    path = os.path.join(out_dir, "transfers.json")
+    if not os.path.exists(path):
+        return {}
+    from BE.app.services import transfers as T
+    return {pid: R.parse_element(f"{info['arrive_from']}-{info['leave_by']}")
+            for pid, info in T.place_service(T.read(path)).items()}
+
+
 def matrix_ids(out_dir):
     """ids of `<out_dir>/matrix.json`, or None when there is no matrix yet."""
     path = os.path.join(out_dir, "matrix.json")
@@ -1038,6 +1052,7 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
     guides = load_guides(sources_dir)           # travel-guide mentions (popularity)
     dish_rows = load_dish_sources(sources_dir)  # main dishes read on the place's pages
     routed = matrix_ids(out_dir)                # POIs the travel matrix can route
+    gate_access = transfer_access(out_dir)      # boat / cable-car timetables
     for p in pois_v1:
         pid = p["poi_id"]
         v = copy.deepcopy(p)
@@ -1055,6 +1070,9 @@ def migrate(v1_dir, out_dir, exports_dir, reports_dir, policy, sources_dir):
             # Sơn Trà peninsula road window; Oct-Feb is 07:30-17:30. Use the
             # stricter one all year (conservative; source in access_note).
             access = R.parse_element("07:30-17:30")
+        if pid in gate_access and cat != "lodging":
+            # Reached by a boat or cable car: from its first arrival to the last return.
+            access = R.intersect(access, gate_access[pid]) if access else gate_access[pid]
         parent = parent_of.get(pid)
         v["requires_ticket_of"] = parent["poi_id"] if parent else None
         v["requires_ticket_of_name"] = parent["name"] if parent else None

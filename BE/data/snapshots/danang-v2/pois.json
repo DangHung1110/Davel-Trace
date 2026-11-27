@@ -47642,11 +47642,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "06:00-17:30"
+     "08:20-17:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -52053,7 +52055,9 @@
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "co_ve"
    },
    "price": {
@@ -53185,11 +53189,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-11:00"
+     "08:20-11:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "cho_ngay"
    },
    "price": {
@@ -55309,12 +55315,14 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-11:00",
+     "08:20-11:00",
      "14:00-16:00"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "chua"
    },
    "price": {
@@ -60030,11 +60038,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-17:30"
+     "08:20-17:30"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "chua"
    },
    "price": {
@@ -60607,7 +60617,9 @@
     "open": [],
     "kind": "unknown",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "co_ve"
    },
    "price": {
@@ -60889,11 +60901,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "06:00-17:30"
+     "08:20-17:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -104867,11 +104881,13 @@
    "requires_ticket_of": null,
    "hours": {
     "open": [
-     "00:00-23:59"
+     "07:50-14:20"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "07:50-14:20"
+    ],
     "archetype": "co_ve"
    },
    "price": {
@@ -115674,11 +115690,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-18:30"
+     "08:20-18:30"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "ngoai_troi_tu_nhien"
    },
    "price": {
@@ -115816,11 +115834,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "05:00-22:00"
+     "08:20-21:50"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "ngoai_troi_do_thi"
    },
    "price": {
@@ -126137,7 +126157,9 @@
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -126279,7 +126301,9 @@
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -126414,11 +126438,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "06:30-21:00"
+     "08:20-21:00"
     ],
     "kind": "fixed",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -126561,7 +126587,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -126710,7 +126738,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -126859,7 +126889,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127002,7 +127034,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127145,7 +127179,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127285,7 +127321,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127428,7 +127466,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127571,7 +127611,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "nha_hang"
    },
    "price": {
@@ -127861,7 +127903,9 @@
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "an_toi"
    },
    "price": {
@@ -128139,11 +128183,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-20:30"
+     "08:20-20:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "cafe"
    },
    "price": {
@@ -128279,11 +128325,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-20:30"
+     "08:20-20:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "cafe"
    },
    "price": {
@@ -128419,11 +128467,13 @@
    "requires_ticket_of": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
    "hours": {
     "open": [
-     "08:00-20:30"
+     "08:20-20:30"
     ],
     "kind": "safe_window",
     "closed_days": [],
-    "access_window": null,
+    "access_window": [
+     "08:20-21:50"
+    ],
     "archetype": "cafe"
    },
    "price": {

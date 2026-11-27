@@ -27,6 +27,7 @@ from __future__ import annotations
 from dataclasses import replace
 
 from BE.common import hhmm, to_min
+from BE.app.services import transfers
 from BE.app.services.soft_rules import (
     CAFE_AFTERNOON_START,
     CAFE_MORNING_END,
@@ -163,7 +164,8 @@ def timing_cost(rows: list[dict], legs: list[int], start_min: int, roles: dict,
 def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_min: int,
                overhead: int, rest_minutes: int | None = None, late_end_min: int | None = None,
                precedence: list | None = None, preferred: dict | None = None,
-               origin: str | None = None) -> list[dict] | None:
+               origin: str | None = None,
+               origin_transfer: "transfers.Service | None" = None) -> list[dict] | None:
     """The stops in their best legal order with new clock times, None when the search
     cannot even rebuild the solver's own day (the caller keeps that one).
 
@@ -172,6 +174,8 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
     `origin`: the place the day starts from (a lodging, or where a replan resumes).
     Its leg to the first stop is driving like any other (`travel[(origin, poi)]`, no
     breathing room, as in the model), and a stop it cannot reach cannot open the day.
+    A leg that rides a boat or cable car keeps to its timetable (`stub.transfer`,
+    `origin_transfer` for a base behind one), in the walk and again on the final times.
     """
     ids = [a["poi_id"] for a in acts]
     if len(ids) < 2 or any(pid not in stubs for pid in ids):
@@ -204,6 +208,8 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
             if late_end_min is None or last_end >= late_end_min:
                 orders += 1
                 rows = _close_gaps(order, stubs, roles, travel, overhead, rest_minutes)
+                if not rides_in_time(rows, stubs, travel, start_min, origin, origin_transfer):
+                    return  # longer stays moved a leg past its last car or boat
                 legs = [travel.get((order[i][0], order[i + 1][0]), 0) + overhead
                         for i in range(len(order) - 1)]
                 first_leg = travel.get((origin, order[0][0]), 0) if origin else 0
@@ -219,6 +225,7 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
             nodes += 1
             stub = stubs[pid]
             leg = 0
+            src = origin_transfer
             if prev is not None:
                 if stub.category and stub.category == stubs[prev].category:
                     continue
@@ -228,12 +235,23 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
                 if need is None:
                     continue
                 leg = need
+                src = stubs[prev].transfer
             elif origin:
                 need = travel.get((origin, pid))
                 if need is None:
                     continue
                 leg = need
-            earliest = _earliest(roles[pid], max(clock + leg + (overhead if prev else 0), rest_until))
+            ready = clock + leg + (overhead if prev else 0)
+            if prev is not None or origin:
+                left, entered = transfers.crossing(src, stub.transfer)
+                if left is not None or entered is not None:
+                    arrive = transfers.leg_arrival(clock, leg, left, entered)
+                    if arrive is None:
+                        continue
+                    ready = max(ready, arrive)
+            elif stub.transfer is not None:
+                ready = max(ready, transfers.open_start(stub.transfer)[0])
+            earliest = _earliest(roles[pid], max(ready, rest_until))
             if earliest is None:
                 continue
             if roles[pid] == "lunch_on_site":
@@ -243,6 +261,9 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
             if placed is None or (roles[pid] and placed[0] > _last_start(roles[pid], placed[1], stub.visit_min)):
                 continue
             start = placed[0]
+            if prev is None and not origin and stub.transfer is not None \
+                    and start > transfers.open_start(stub.transfer)[1]:
+                continue  # an open tour cannot begin up there after the last run arrives
             slot = meal_slot_at(start) if stub.restaurant else None
             if slot is not None and slot in slots:
                 continue
@@ -253,6 +274,33 @@ def best_order(acts: list[dict], stubs: dict, travel: dict, start_min: int, end_
 
     walk([], start_min, frozenset(), 0, 0, frozenset())
     return best["rows"]
+
+
+def rides_in_time(rows: list[dict], stubs: dict, travel: dict, start_min: int,
+                  origin: str | None, origin_transfer=None) -> bool:
+    """Does every leg of these final times catch the cars and boats it rides?
+
+    The leg out of a stop leaves when the stop ends (the first leg at `start_min`);
+    a stop that opens an open tour behind a gateway starts while runs arrive there.
+    The same rule as the model (`transfers.leg_bounds`) and gate B3."""
+    depart, src, prev = start_min, origin_transfer, origin
+    for k, row in enumerate(rows):
+        stub = stubs[row["poi_id"]]
+        start = to_min(row["start"])
+        if k == 0 and not origin:
+            if stub.transfer is not None:
+                lo, hi = transfers.open_start(stub.transfer)
+                if not lo <= start <= hi:
+                    return False
+        else:
+            left, entered = transfers.crossing(src, stub.transfer)
+            if left is not None or entered is not None:
+                arrive = transfers.leg_arrival(depart, travel.get((prev, row["poi_id"]), 0),
+                                               left, entered)
+                if arrive is None or arrive > start:
+                    return False
+        depart, src, prev = to_min(row["end"]), stub.transfer, row["poi_id"]
+    return True
 
 
 def _close_gaps(order: list, stubs: dict, roles: dict, travel: dict, overhead: int,

@@ -5,7 +5,8 @@ request, weather mocked offline like bench_latency.py) and judges every plan wit
 written on their own: nothing here calls the app's gate, so a bug the gate shares with
 the solver still shows up. Two kinds of flags:
 
-  ERR_*  the plan cannot be followed as written (hours, travel, budget, overlap);
+  ERR_*  the plan cannot be followed as written (hours, travel, budget, overlap, a boat
+         or cable car that has made its last run: ERR_TRANSFER);
   Q_*    it can be followed but a traveller would call it poor (a hole of hours, a
          late start, a detour, a meal missing, a wish not met, a wrong hour).
 
@@ -231,6 +232,37 @@ def best_path(ids: list[str], cells) -> int | None:
     return None if best >= INF else best
 
 
+def ride_miss(src: dict | None, dst: dict | None, depart: int, need: int, start: int) -> str | None:
+    """What goes wrong on a leg that rides a boat or cable car (POI `transfer`), or None.
+
+    Simulated step by step from the timetables on the POIs, apart from the app's
+    closed form (BE/app/services/transfers.py): leave at `depart`, board, wait for
+    the first run, miss the last one; `need` minutes door to door, at the stop by
+    `start`. Two places behind one gateway are a walk.
+    """
+    a, b = (src or {}).get("transfer"), (dst or {}).get("transfer")
+    if a and b and a["gateway"] == b["gateway"]:
+        return None
+    clock, used = depart, 0
+    if a:
+        clock, used = clock + a["board_min"], a["board_min"]
+        first, last = (to_min(x) for x in a["back"].split("-"))
+        if clock > last:
+            return f"lo chuyen ve cuoi {a['back'][-5:]} ({a['mode']})"
+        clock = max(clock, first)
+    if b:
+        clock += need - used - b["ride_min"]
+        first, last = (to_min(x) for x in b["go"].split("-"))
+        if clock > last:
+            return f"lo chuyen cuoi {b['go'][-5:]} ({b['mode']})"
+        clock = max(clock, first) + b["ride_min"]
+    else:
+        clock += need - used
+    if clock > start:
+        return f"toi {hhmm(clock)} (cho chuyen dau) sau gio bat dau {hhmm(start)}"
+    return None
+
+
 # What a traveller would call the wrong hour, written independently of soft_rules.
 def wrong_hour(poi: dict, start: int, end: int) -> str | None:
     cat, sub = poi.get("cat"), poi.get("subcat")
@@ -272,11 +304,36 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
     previous = None
     lunch = dinner = None
     restaurant_starts = []
-    for a in acts:
+    origin = trip.get("origin_id") or (trip.get("origin") or {}).get("poi_id")
+    base = pois.get(origin) if origin else None
+    for k, a in enumerate(acts):
         poi = pois[a["poi_id"]]
         s, e = to_min(a["start"]), to_min(a["end"])
         if s < ws or e > we or e <= s:
             flags.append(f"ERR_WINDOW {poi['name']} {a['start']}-{a['end']}")
+        ride = poi.get("transfer")
+        if k == 0 and base is not None:
+            # The leg from the base: the day starts there at start_time.
+            cell = cells.get(f"{origin}->{a['poi_id']}")
+            if cell is not None and s - ws < cell["minutes"]:
+                flags.append(f"ERR_TRAVEL {base['name']} -> {poi['name']} can {cell['minutes']}p "
+                             f"co {s - ws}p")
+            miss = cell and ride_miss(base, poi, ws, cell["minutes"], s)
+            if miss:
+                flags.append(f"ERR_TRANSFER {base['name']} -> {poi['name']}: {miss}")
+        elif k == 0 and ride:
+            # An open tour begins up there: someone must have arrived on a running car/boat.
+            first, last = (to_min(x) for x in ride["go"].split("-"))
+            if not first + ride["ride_min"] <= s <= last + ride["ride_min"]:
+                flags.append(f"ERR_TRANSFER bat dau o {poi['name']} luc {a['start']}, "
+                             f"chuyen toi {hhmm(first + ride['ride_min'])}-{hhmm(last + ride['ride_min'])}")
+        if ride and k == len(acts) - 1 and not (base and (base.get("transfer") or {}).get("gateway")
+                                                == ride["gateway"]):
+            back = to_min(ride["back"].split("-")[1])
+            if e + ride["board_min"] > back:
+                flags.append(f"ERR_TRANSFER {poi['name']} xong {a['end']}, chuyen ve cuoi {hhmm(back)}")
+        if ride and ride.get("months") and date and int(date[5:7]) not in ride["months"]:
+            flags.append(f"Q_OFF_SEASON {poi['name']} thang {int(date[5:7])}")
         # opening hours
         week = poi.get("hours_by_day")
         if weekday is not None and week:
@@ -307,6 +364,9 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
             elif s - pe < need:
                 flags.append(f"ERR_TRAVEL {pois[previous['poi_id']]['name']} -> {poi['name']} "
                              f"can {need}p co {s - pe}p")
+            miss = cell and ride_miss(pois[previous["poi_id"]], poi, pe, need, s)
+            if miss and s >= pe:
+                flags.append(f"ERR_TRANSFER {pois[previous['poi_id']]['name']} -> {poi['name']}: {miss}")
             travel += need
             legs.append(need)
             idle = s - pe - need

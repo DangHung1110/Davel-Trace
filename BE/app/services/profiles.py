@@ -40,6 +40,7 @@ from BE.app.services import (
     scorer,
     soft_rules,
     templates,
+    transfers as transfers_mod,
     trip_ctx,
 )
 from BE.app.services.optimizer import (
@@ -48,7 +49,7 @@ from BE.app.services.optimizer import (
 from BE.app.services.validator import validate
 from BE.common import (
     clamp01, closed_weekdays, deadline, effective_fee, hhmm, party_size, poi_on_date,
-    price_level_of, to_float, to_int, to_min, trusted_rating, weekday_of)
+    price_level_of, season_label, to_float, to_int, to_min, trusted_rating, weekday_of)
 
 PROFILE_REASONS = {
     "savings": "tiết kiệm: chi phí + di chuyển thấp nhất, ưu tiên điểm "
@@ -410,11 +411,67 @@ def score_plan(plan: dict) -> dict:
             "gate": True, "excluded": False}
 
 
-def _to_trip(trip: dict) -> StubTrip:
+def _to_trip(trip: dict, pois_by_id: dict | None = None) -> StubTrip:
     """The day's clock and its start: the base the router resolved (`origin_id`, a
-    place with a matrix row), else the open tour (optimizer T061a)."""
-    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip),
-                    trip.get("origin_id") or None)
+    place with a matrix row), else the open tour (optimizer T061a). A base behind a
+    boat or cable car (the Bà Nà summit hotel) brings its timetable along."""
+    origin = trip.get("origin_id") or None
+    return StubTrip(to_min(trip.get("start_time", "07:00")), deadline(trip), origin,
+                    origin_transfer=_base_transfer(trip, pois_by_id))
+
+
+def _base_transfer(trip: dict, pois_by_id: dict | None) -> "transfers_mod.Service | None":
+    origin = trip.get("origin_id")
+    return transfers_mod.service(((pois_by_id or {}).get(origin) or {}).get("transfer")
+                                 if origin else None)
+
+
+# How a warning names a car or a boat.
+TRANSFER_LABELS = {"boat": "cano", "cable_car": "cap treo"}
+
+
+def _gateway_miss(pid: str, trip: dict, pois_by_id: dict, cells) -> str | None:
+    """Why a place the traveller named, behind a boat or cable car, cannot be in this
+    day at all (None when it can, or when nothing here can tell).
+
+    From where the day starts (the base at `start_time`, or the place itself in an
+    open tour) the last run must still be caught, and the shortest usual stay (p25)
+    must end in time for the last run back and the day's end. Such a place left in
+    the day makes the whole plan infeasible ("must_visit"), so the planner leaves it
+    out and says why, like a place closed that day.
+    """
+    poi = pois_by_id.get(pid) or {}
+    info = poi.get("transfer")
+    ride = transfers_mod.service(info)
+    if ride is None:
+        return None
+    name, mode = poi.get("name") or pid, TRANSFER_LABELS.get(info.get("mode"), info.get("mode"))
+    start = to_min(trip.get("start_time", "07:00"))
+    origin = trip.get("origin_id")
+    base = _base_transfer(trip, pois_by_id)
+    if origin:
+        left, entered = transfers_mod.crossing(base, ride)
+        cell = cells.get(f"{origin}->{pid}")
+        if entered is None or cell is None:
+            return None   # the day starts up there, or B3 says the rest
+        arrive = transfers_mod.leg_arrival(start, int(cell["minutes"]), left, entered)
+        if arrive is None:
+            origin_name = (pois_by_id.get(origin) or {}).get("name") or origin
+            return (f"khong dua vao lich '{name}': di tu {origin_name} luc {hhmm(start)} thi lo "
+                    f"chuyen {mode} cuoi ({hhmm(ride.go[1])}), can xuat phat som hon")
+    else:
+        first, last = transfers_mod.open_start(ride)
+        if start > last:
+            return (f"khong dua vao lich '{name}': ngay bat dau {hhmm(start)}, sau chuyen "
+                    f"{mode} cuoi ({hhmm(ride.go[1])})")
+        arrive = max(start, first)
+    stay = poi_visit_short(poi)
+    leave_by = min(to_min(info["leave_by"]), deadline(trip))
+    if max(arrive, to_min(info["arrive_from"])) + stay > leave_by:
+        room = max(0, leave_by - max(arrive, to_min(info["arrive_from"])))
+        return (f"khong dua vao lich '{name}': toi noi luc {hhmm(arrive)}, chuyen {mode} ve cuoi "
+                f"luc {hhmm(ride.back[1])} nen chi o duoc {room} phut (it nhat {stay})")
+    return None
 
 
 def _max_fee(trip: dict) -> int | None:
@@ -555,8 +612,10 @@ def _activity_warnings(match: list[dict]) -> list[str]:
 # `hours` is how a cooking class (kind by_booking) is a meal: A1 counts it in every
 # meal slot it overlaps and REST_FOLLOWS_LUNCH takes it as the lunch. Without it a
 # class over lunch failed the gate as "khong co bua trua".
+# `transfer`: the timetable of the boat or cable car behind which the place sits,
+# so gate B3 can tell a leg that misses the last run.
 _GATE_EXTRA = ("tags", "cuisine", "ambience", "smart_tags", "intensity", "price",
-               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours")
+               "ticket_vnd", "subcat", "plan_tier", "closed_today", "hours", "transfer")
 
 
 def _gate_view(p: dict) -> dict:
@@ -662,6 +721,25 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
             trip = {**trip, "must_visit": [m for m in trip["must_visit"] if m not in closed_must]}
             date_warnings = [f"khong dua vao lich '{pois_by_id[m].get('name')}': nghi vao "
                              f"ngay {trip['date']}" for m in closed_must]
+    # A named place behind a boat or cable car that the last run cannot reach from
+    # where the day starts, or whose shortest stay ends after the last run back, would
+    # make the whole day infeasible: it leaves the plan with the reason instead.
+    missed = [(m, why) for m in trip.get("must_visit") or []
+              for why in [_gateway_miss(m, trip, pois_by_id, cells)] if why]
+    if missed:
+        gone = {m for m, _why in missed}
+        trip = {**trip, "must_visit": [m for m in trip["must_visit"] if m not in gone]}
+        date_warnings += [why for _m, why in missed]
+    # A boat that runs only some months (Cù Lao Chàm): out of season a named place
+    # keeps its stop with a warning, and the planner does not pick it on its own.
+    named_now = set(trip.get("must_visit") or [])
+    for m in sorted(named_now):
+        poi = pois_by_id.get(m) or {}
+        if poi.get("off_season"):
+            info = poi.get("transfer") or {}
+            date_warnings.append(
+                f"{poi.get('name')}: {info.get('name')} chi chay deu {season_label(info.get('months'))}; "
+                f"ngay {trip.get('date')} phan lon tau nghi (bien dong), hoi lich tau truoc khi di")
     tpl_name = template
     if tpl_name is None:  # direct callers: derive only from an explicit profile
         tpl_name = (templates.select_template(trip["profile"])
@@ -684,7 +762,8 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
     # (that fallback re-admitted unverified and allergy-dropped POIs).
     ranked_ids = [r.get("poi_id") for r in ranked]
     candidates = [pois_by_id[pid] for pid in ranked_ids if pid in pois_by_id
-                  and not pois_by_id[pid].get("closed_today")]
+                  and not pois_by_id[pid].get("closed_today")
+                  and not (pois_by_id[pid].get("off_season") and pid not in named_now)]
 
     # Template hard bans: nightlife/spa for a family day, trek for a calm one. A
     # wish the traveller typed lifts the taste part of a ban (`allows_wished`).
@@ -862,7 +941,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         if with_wishes and wishes_given_up:
             continue
         stubs_try = stubs_by_kind[kind]
-        out = optimize(stubs_try, travel, _to_trip(trip),
+        out = optimize(stubs_try, travel, _to_trip(trip, pois_by_id),
                        edge_scores=q, workers=workers, must_visit=must,
                        precedence=order_prefs,
                        min_stops=limits_try["min_stops"],
@@ -930,7 +1009,7 @@ def build_plan(profile: str, trip: dict, ranked: list[dict],
         )
         for name, label, override in trials:
             probe = optimize(
-                stubs, travel, _to_trip(trip), edge_scores=q,
+                stubs, travel, _to_trip(trip, pois_by_id), edge_scores=q,
                 workers=workers,
                 timeout_s=(DIAGNOSE_TIMEOUT_S if deterministic_time is None
                            else DIAGNOSE_WALL_GUARD_S),
@@ -1104,10 +1183,13 @@ def _polished(acts: list[dict], stubs: list, travel: dict, trip: dict, limits: d
         STOP_OVERHEAD_MIN,
         rest_minutes=limits.get("rest_minutes") if limits.get("rest_after_lunch") else None,
         late_end_min=limits.get("late_end_min"), precedence=order_prefs, preferred=preferred,
-        origin=trip.get("origin_id"))
+        origin=trip.get("origin_id"), origin_transfer=_base_transfer(trip, pois_by_id))
     if better is None:
         return acts
     pois_gate = {a["poi_id"]: _gate_view(pois_by_id[a["poi_id"]]) for a in better}
+    origin = trip.get("origin_id")
+    if origin in pois_by_id:   # B3 reads the base's timetable for the first leg
+        pois_gate[origin] = _gate_view(pois_by_id[origin])
     checked = {"activities": better}
     rest = _rest_proof(better, trip, pois_by_id, limits)
     if rest:
@@ -1167,6 +1249,10 @@ def _assemble(acts: list[dict], out: dict, trip: dict, pois_by_id: dict,
             if days:
                 warnings.append(f"{poi.get('name')} nghi vao "
                                 f"{', '.join(WEEKDAY_LABELS[d] for d in days)}: chon ngay di de kiem tra")
+            months = (poi.get("transfer") or {}).get("months")
+            if months:
+                warnings.append(f"{poi.get('name')}: {poi['transfer'].get('name')} chi chay deu "
+                                f"{season_label(months)} (bien dong cac thang khac): chon ngay di de kiem tra")
     # FR-026: the forecast is part of what the plan assumes. Wet hours are named, with
     # the stops left in the open in them (a wish, a named place, a day with no roof to
     # move under); so is a date the forecast does not reach (each day of a trip its own).

@@ -9,8 +9,9 @@
   "basis": "thiết kế: đi bộ 4 km/h; đường đi bộ dài hơn đường chim bay 1,3 lần"
  },
  "not_modelled": [
-  "Lịch tàu Cù Lao Chàm theo giờ cố định, và mùa biển động: ngoài tháng 3-8 phần lớn tàu du lịch không chạy (VnExpress 14/7/2026).",
-  "Giờ cáp treo Bà Nà: mở 08:00, vé ngày lên lần cuối 16:30-17:00 (Vietnam Booking 2026).",
+  "Lịch tàu Cù Lao Chàm theo từng chuyến (8:00, 8:30...): chỉ mô hình chuyến đầu và chuyến cuối mỗi chiều; giữa hai chuyến coi như lúc nào cũng có tàu.",
+  "Vé đêm / combo đêm Bà Nà (lên từ 15:00, có thể lên muộn hơn vé ngày): chỉ mô hình vé ngày.",
+  "Thời tiết từng ngày: tàu Cù Lao Chàm có thể nghỉ cả trong mùa khi biển động; ngoài mùa chỉ cảnh báo, không đoán ngày nào chạy.",
   "Thời gian xếp hàng giờ cao điểm (vài phút tới vài chục phút, Sun Paradise Land 07/08/2026)."
  ],
  "gateways": [
@@ -27,6 +28,35 @@
    "board_min": 10,
    "km": 5.3,
    "basis": "ride: mỗi lượt chân núi - đỉnh 15-20 phút, lấy 20. board: từ cổng vào tới ga thêm 10-20 phút (soát vé, đi bộ), lấy 10. km: trung vị 4 tuyến lên đỉnh trên OSM (4,84 / 5,08 / 5,56 / 5,65 km).",
+   "service": {
+    "go": {
+     "first": "08:00",
+     "last": "16:30"
+    },
+    "back": {
+     "first": "08:00",
+     "last": "22:00"
+    },
+    "months": null,
+    "basis": "go: mở 08:00; vé ngày lên lần cuối 16:30-17:00, lấy 16:30 (chặt hơn, như khung đường Sơn Trà lấy giờ đóng sớm hơn). back: tuyến chính ga L'Indochine (Tóc Tiên) chạy xuống tới 22:00, các tuyến phụ dừng khoảng 17:30; lấy 22:00 vì Sun World mở tới 22:00 và quán trên đỉnh mở tối. Tới đỉnh sớm nhất 08:20, chậm nhất 16:50 (+ 20 phút cáp); rời điểm trên đỉnh muộn nhất 21:50 (- 10 phút ra ga).",
+    "sources": [
+     {
+      "url": "https://www.vietnambooking.com/du-lich/blog-du-lich/cap-treo-ba-na-hills.html",
+      "date": "2026-08-10",
+      "says": "mở 08:00; chuyến cáp lên cuối cùng 16:30-17:00 với vé ngày; các tuyến phụ dừng khoảng 17:30; tuyến chính (ga L'Indochine) chạy tới 22:00 cho khách combo đêm"
+     },
+     {
+      "url": "https://hoiandaytrip.com/ba-na-hills-cable-car-today/",
+      "date": "2026-11",
+      "says": "bảng giờ tháng 11/2026: tuyến Hội An - Marseille 07:30-18:10; tuyến Tóc Tiên - L'Indochine chạy muộn nhất, khối giờ cuối 22:15-22:30"
+     },
+     {
+      "url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/lich-trinh-combo-dem-ba-na-trai-nghiem-tron-ven-26760",
+      "date": "2026-08-26",
+      "says": "combo đêm: cáp bắt đầu từ 15:00, chuyến cáp cuối cùng xuống núi 22:00"
+     }
+    ]
+   },
    "inside": "walk",
    "places": [
     {
@@ -250,6 +280,46 @@
    "board_min": 10,
    "km": 16.5,
    "basis": "ride: cano 15-20 phút, lấy 20. board: thiết kế (mua vé, áo phao, lên tàu; nguồn không ghi), lấy mức thấp 10 phút như ở cáp treo Bà Nà. km: tuyến phà trên OSM 15,90 + 0,55 km (nguồn báo đảo cách bờ Cửa Đại 18 km).",
+   "service": {
+    "go": {
+     "first": "07:30",
+     "last": "09:00"
+    },
+    "back": {
+     "first": "13:00",
+     "last": "14:30"
+    },
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "basis": "go: cano cao tốc rời Cửa Đại khoảng 7:30-9:00 (tour 8:15-8:30). back: chuyến về 13:00-15:00, các giờ có tên 13:00, 14:00, 14:30; lấy 14:30 (chuyến muộn nhất có tên; tàu trong ngày rời đảo trước 15:00, lỡ chuyến phải ở lại tới sáng hôm sau). Tới đảo sớm nhất 07:50, chậm nhất 09:20; rời điểm trên đảo muộn nhất 14:20 (- 10 phút lên tàu). months: tháng 3-8 (VnExpress); tháng 10-2 hủy chuyến thường xuyên, tháng 9 là cuối mùa.",
+    "sources": [
+     {
+      "url": "https://www.vietnamtourism.com/vi/cu-lao-cham-tu-hoi-an-tau-thuyen-lan-ong-tho-va-o-lai-qua-em",
+      "date": "2026-10-11",
+      "says": "tàu cao tốc chạy khoảng 7:30-9:00, chuyến về thường 13:00-15:00; tàu trong ngày rời đảo trước 15:00; giờ về cố định, lỡ chuyến phải ở lại đảo tới sáng hôm sau; vượt biển khoảng tháng 3-9, tháng 10-2 hủy chuyến thường xuyên"
+     },
+     {
+      "url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/huong-dan-di-cu-lao-cham-tu-hoi-an-lo-trinh-va-trai-nghiem-25266",
+      "date": "2026-08-15",
+      "says": "cano cao tốc khởi hành khoảng 8:30; chuyến cano về đất liền 13:00, 14:00, 14:30; chạy theo khung giờ cố định, không đợi khách trễ; tháng 10 - tháng 2 biển động, tàu và cano có thể tạm dừng"
+     },
+     {
+      "url": "https://www.vietnambooking.com/du-lich/tour-cu-lao-cham-1-ngay.html",
+      "says": "tour 1 ngày: tàu rời cảng Cửa Đại 8:15-8:30, lên tàu về 14:00, về tới Cửa Đại 15:00"
+     },
+     {
+      "url": "https://vnexpress.net/cam-nang-du-lich-cu-lao-cham-4751193.html",
+      "date": "2026-07-14",
+      "says": "tháng 3-8 là thời điểm đẹp nhất; các tháng khác phần lớn tàu du lịch không chạy"
+     }
+    ]
+   },
    "places": [
     {
      "poi_id": "manual:cu-lao-cham",
