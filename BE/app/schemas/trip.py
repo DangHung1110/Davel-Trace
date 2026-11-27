@@ -13,6 +13,10 @@ Neutral defaults: spending/pace/fitness = 2, outdoor_bias = 0.0, lists empty.
 
 `TripRequest.areas` names the planning zones the traveller wants to stay in (the
 `zone` of every danang-v2 POI). Empty means anywhere: the plan is unchanged.
+
+`InternalTripRequest` is the request the server builds for the app's replan: a
+TripRequest plus what the stops already done paid (`paid_access`). A client cannot
+send it (see the section at the end).
 """
 
 from __future__ import annotations
@@ -136,3 +140,39 @@ class TripRequest(BaseModel):
         if not isinstance(value, dict):
             raise ValueError("profile phai la object")
         return TripProfile(**value).model_dump()
+
+
+# --------------------------------------------------------------------------
+# What only the server puts in a plan request
+# --------------------------------------------------------------------------
+# The app's replan (planning_lifecycle) knows which stops are done, so it knows what
+# they already paid: a summit stop bought the Sun World ticket (good for 3 days), the
+# island the cano of that day. These fields carry it to the planner as
+# `paid_access` (BE.common.PAID_ACCESS), which multiday and /v1/replan already use.
+# They are not part of the public contract: POST /v1/itinerary reads its body as
+# TripRequest, which ignores them, and the API schema does not show them. The
+# planner reads them from `model_dump()` of the request it is handed.
+
+
+class InternalResume(Resume):
+    """`Resume` plus what the stops done earlier that day paid for the rest of it
+    (`paid_access`: the cano of the island the traveller is on). The days after
+    the first pay it again."""
+
+    paid_access: list[str] = Field(default_factory=list)
+
+
+class InternalTripRequest(TripRequest):
+    """A TripRequest built by the server: `paid_access` is what the trip already paid
+    (a ticket bought by a stop done, a parent visited), not charged again on any day."""
+
+    resume: InternalResume | None = None
+    paid_access: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _one_day_resumes_at_its_start(self) -> "InternalTripRequest":
+        """A one-day trip has no later day: what its first day already paid is the
+        trip's, then `resume` folds into its start and origin (TripRequest)."""
+        if self.resume is not None and self.days == 1:
+            self.paid_access = sorted({*self.paid_access, *self.resume.paid_access})
+        return TripRequest._one_day_resumes_at_its_start(self)

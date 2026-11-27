@@ -13,7 +13,8 @@ candidate cap for a single day.
 - Activities: a day only has to meet the wishes the days before it did not.
 - Tickets: a ticket bought on one day (Sun World, for a summit stop) is not bought
   again on a later day (`paid_access`); a transfer fare (the cano) is paid every day
-  it is used.
+  it is used. A replan's first day also has what was done earlier that day paid
+  (`resume["paid_access"]`, the app's replan), and only that day.
 
 A one-day trip goes straight to the solver and its plan is untouched. A longer
 one is one plan: `activities` and `segments` carry `day`, `days` holds the summary
@@ -83,6 +84,10 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
                 # The days after it start at the trip's start_time from its origin.
                 day_trip["start_time"] = resume["start_time"]
                 day_trip["origin_id"] = resume.get("origin_id")
+                if resume.get(PAID_ACCESS):
+                    # What that morning paid for the rest of the day (the cano);
+                    # never added to `paid`, so the next day pays it again.
+                    day_trip[PAID_ACCESS] = sorted(paid | set(resume[PAID_ACCESS]))
             if budget is not None:
                 day_trip["budget"] = budget
             # Only the last attempt explains itself: the diagnosis costs extra solves.

@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
 import json
+import os
 from typing import Callable
 from uuid import UUID, uuid4
 from zoneinfo import ZoneInfo
@@ -50,7 +51,9 @@ from BE.app.modules.planning_lifecycle.infrastructure import (
 from BE.app.modules.planning_lifecycle.stable_planner import with_product_evidence
 from BE.app.modules.trips.service import trip_public
 from BE.app.routers.itinerary import ItineraryIn, itinerary as legacy_itinerary
-from BE.app.schemas.trip import AREA_CODES, TripRequest
+from BE.app.schemas.trip import AREA_CODES, InternalTripRequest
+from BE.app.services import retrieval as retrieval_svc
+from BE.common import paid_after
 
 
 Planner = Callable[[dict, int, str], dict]
@@ -292,12 +295,30 @@ def _areas(snapshot: dict) -> list[str]:
     return [code for code in saved if code in AREA_CODES]
 
 
-def _trip_request(snapshot: dict, remaining: dict) -> dict:
+def _paid_by(done: list[dict], pois: dict, first_date: str | None) -> tuple[list[str], list[str]]:
+    """What the stops already done paid (`BE.common.paid_after`, as /v1/replan reads
+    it): (for the rest of the trip, for the rest of the first planned day only).
+
+    `done` is [{"poi_id", "date"}]. A ticket a stop bought counts for the whole trip
+    (the Sun World ticket is good for 3 days, the Hội An one once a trip), and so does
+    a parent the traveller visited. A transfer fare (`fare:<gateway>`, the cano: a round
+    trip in the day) counts only when the stop was done on `first_date`, the day the
+    plan starts; a stop of an earlier day did not pay today's boat.
+    """
+    trip = paid_after(done, pois)
+    today = paid_after([stop for stop in done if stop.get("date") == first_date],
+                       pois, trip, same_day=True)
+    return sorted(trip), sorted(today - trip)
+
+
+def _trip_request(snapshot: dict, remaining: dict, paid=(), paid_today=()) -> dict:
     """The planner's TripRequest: the trip with its confirmed overrides (`snapshot`)
     and, on a replan, what is already behind the traveller (`remaining`).
 
     `remaining["window"]` is the part of the trip still to plan, resolved by the
     service on its clock (`_window`); without it the window is read without a clock.
+    `paid` and `paid_today` are what the stops done paid (`_paid_by`): the first for
+    every day planned, the second for the window's first day only.
     """
     window = remaining.get("window") or _window(snapshot, remaining.get("remaining_from"))
     day_start = _hhmm(_clock(snapshot.get("day_start"), "07:00"))
@@ -322,12 +343,18 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         here = None
     first_origin = here or base
     start_time, origin, resume = window["start_time"], first_origin, None
-    if window["days"] > 1 and (start_time != day_start or first_origin != base):
-        # Only the first day resumes; the days after it start at the base at day_start.
+    paid, paid_today = sorted(set(paid)), sorted(set(paid_today) - set(paid))
+    if window["days"] == 1:
+        # The first day is the only one: what that morning paid, the trip paid.
+        paid = sorted({*paid, *paid_today})
+    elif start_time != day_start or first_origin != base or paid_today:
+        # Only the first day resumes; the days after it start at the base at day_start
+        # and pay the cano again.
         resume = {"start_time": start_time,
-                  "origin": {"poi_id": first_origin} if first_origin else None}
+                  "origin": {"poi_id": first_origin} if first_origin else None,
+                  "paid_access": paid_today}
         start_time, origin = day_start, base
-    return TripRequest(
+    return InternalTripRequest(
         trip_id=snapshot["id"],
         user_id=snapshot.get("account_id", "owned-user"),
         origin={"poi_id": origin} if origin else None,
@@ -346,6 +373,7 @@ def _trip_request(snapshot: dict, remaining: dict) -> dict:
         food_prefs=list(snapshot.get("food_preferences") or []),
         areas=_areas(snapshot),
         profile=_profile(_effective_profile(snapshot)),
+        paid_access=paid,
     ).model_dump()
 
 
@@ -368,7 +396,8 @@ class PlanningLifecycleService:
         executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="planner")
         future = executor.submit(
             legacy_itinerary,
-            ItineraryIn(trip=TripRequest(**trip_input)),
+            # Internal: it keeps `paid_access`, which the public TripRequest ignores.
+            ItineraryIn(trip=InternalTripRequest(**trip_input)),
             False,
         )
         try:
@@ -385,6 +414,20 @@ class PlanningLifecycleService:
         return with_product_evidence(_legacy_payload(result),
                                      self.settings.snapshot_name)
 
+    def _paid_access(self, done: list[dict] | None, window: dict | None):
+        """`_paid_by` over the snapshot the planner reads (its POI views carry what
+        reaching each place costs, `access_fees`). A snapshot that cannot be read
+        knows no charge: the planner then answers SNAPSHOT_MISSING itself."""
+        if not done:
+            return [], []
+        try:
+            pois = retrieval_svc.load_pois_json(
+                os.path.join(self.settings.snapshot_dir, "pois.json"))
+        except (FileNotFoundError, NotADirectoryError):
+            pois = []
+        return _paid_by(done, {poi["poi_id"]: poi for poi in pois},
+                        (window or {}).get("date"))
+
     def create_planning_request(
         self,
         principal,
@@ -396,7 +439,11 @@ class PlanningLifecycleService:
         request_kind: str = "plan",
         source_version_id: UUID | None = None,
         remaining_context: dict | None = None,
+        done_stops: list[dict] | None = None,
     ) -> dict:
+        """`done_stops` ([{"poi_id", "date"}], a replan's completed stops) say what the
+        trip already paid (`_paid_by`). Like the window, that is read from the trip,
+        not sent, so it stays out of the fingerprint and of `remaining_context`."""
         key = _require_key(idempotency_key)
         if not 1 <= target_count <= 5:
             raise IdentityError("VALIDATION_ERROR", "Số phương án phải từ 1 đến 5.", 422)
@@ -498,7 +545,10 @@ class PlanningLifecycleService:
                     )
                 return request_public(session, existing)
             request_id = row.request_id
-            planner_input = _trip_request(effective_snapshot, remaining)
+            # What the stops done bought is not charged again (a summit stop's Sun
+            # World ticket, the cano of the island the traveller is on).
+            paid, paid_today = self._paid_access(done_stops, remaining.get("window"))
+            planner_input = _trip_request(effective_snapshot, remaining, paid, paid_today)
 
         try:
             planned = self._planner(planner_input, target_count, request_kind)
@@ -791,6 +841,8 @@ class PlanningLifecycleService:
         What is done, skipped or unavailable is excluded, the budget is what is left
         after the expenses, the first day resumes where the traveller last finished a
         stop that day, and the window starts at `remaining_from` or now (`_window`).
+        What the done stops bought is not charged again (`_paid_by`): their tickets
+        on every day left, the cano of a stop done that day for the rest of that day.
         The constraints are those the source version was planned with, with
         `changed_constraints` on top (`_replan_overrides`).
         """
@@ -856,6 +908,10 @@ class PlanningLifecycleService:
                 "current_poi_id": here.get("poi_id"),
                 "current_poi_date": here.get("date"),
             }
+            # On which day each stop was done: its ticket counts for the trip, its
+            # cano only for that day.
+            done = [{"poi_id": known[item]["poi_id"], "date": known[item]["date"]}
+                    for item in completed if known[item]["poi_id"]]
         return self.create_planning_request(
             principal,
             trip_id,
@@ -865,4 +921,5 @@ class PlanningLifecycleService:
             request_kind="replan",
             source_version_id=source_id,
             remaining_context=remaining,
+            done_stops=done,
         )
