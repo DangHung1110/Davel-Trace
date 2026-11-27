@@ -61,42 +61,54 @@ def read(path: str) -> dict:
     return spec
 
 
-def resolve(spec: dict, index: dict) -> tuple[list[Gate], list[str]]:
-    """(usable gateways, why each other one was skipped)."""
-    gates, skipped, taken = [], [], set()
-    for g in spec.get("gateways") or []:
-        gid = g.get("id") or "?"
-        places = [p["poi_id"] for p in g.get("places") or []]
-        end = g.get("road_end") or {}
-        if end.get("own_row"):
-            if len(places) != 1:
-                skipped.append(f"{gid}: own_row needs exactly one place")
-                continue
-            end_ids = [(places[0], 0, 0.0)]
-        elif end.get("poi_id"):
-            end_ids = [(end["poi_id"], 0, 0.0)]
-        else:
-            end_ids = [(v["poi_id"], int(v["minutes"]), float(v["km"])) for v in end.get("via") or []]
-        missing = [pid for pid in places + [e[0] for e in end_ids] if pid not in index]
-        if g.get("mode") not in MODES:
-            skipped.append(f"{gid}: unknown mode {g.get('mode')!r}")
-        elif not places or not end_ids:
-            skipped.append(f"{gid}: no place or no road end")
-        elif missing:
-            skipped.append(f"{gid}: not in the matrix: {', '.join(missing)}")
-        elif taken & set(places):
-            skipped.append(f"{gid}: a place is already behind another gateway")
-        else:
-            taken |= set(places)
-            gates.append(Gate(
-                id=gid, name=g.get("name") or gid, mode=g["mode"],
-                minutes=int(g["ride_min"]) + int(g.get("board_min") or 0),
+def _gate(g: dict, index: dict) -> Gate:
+    """One gateway of the file on this matrix; ValueError says why it cannot be used."""
+    gid = g.get("id") or "?"
+    places = [p["poi_id"] for p in g.get("places") or []]
+    end = g.get("road_end") or {}
+    if end.get("own_row"):
+        if len(places) != 1:
+            raise ValueError(f"{gid}: own_row needs exactly one place")
+        end_ids = [(places[0], 0, 0.0)]
+    elif end.get("poi_id"):
+        end_ids = [(end["poi_id"], 0, 0.0)]
+    else:
+        end_ids = [(v["poi_id"], int(v["minutes"]), float(v["km"])) for v in end.get("via") or []]
+    missing = [pid for pid in places + [e[0] for e in end_ids] if pid not in index]
+    if g.get("mode") not in MODES:
+        raise ValueError(f"{gid}: unknown mode {g.get('mode')!r}")
+    if not places or not end_ids:
+        raise ValueError(f"{gid}: no place or no road end")
+    if missing:
+        raise ValueError(f"{gid}: not in the matrix: {', '.join(missing)}")
+    minutes = int(g["ride_min"]) + int(g.get("board_min") or 0)
+    if minutes < 1:
+        raise ValueError(f"{gid}: a transfer takes at least a minute")
+    return Gate(id=gid, name=g.get("name") or gid, mode=g["mode"], minutes=minutes,
                 km=round(float(g.get("km") or 0.0), 2),
                 ends=tuple((index[pid], m, k) for pid, m, k in end_ids),
                 places=tuple(index[pid] for pid in places),
                 coords={index[p["poi_id"]]: (float(p["lat"]), float(p["lon"]))
                         for p in g["places"] if p.get("lat") is not None and p.get("lon") is not None},
-                inside=g.get("inside")))
+                inside=g.get("inside"))
+
+
+def resolve(spec: dict, index: dict) -> tuple[list[Gate], list[str]]:
+    """(usable gateways, why each other one was skipped)."""
+    gates, skipped, taken = [], [], set()
+    for g in spec.get("gateways") or []:
+        gid = (g.get("id") if isinstance(g, dict) else None) or "?"
+        try:
+            gate = _gate(g, index)
+        except (ValueError, KeyError, TypeError, AttributeError) as exc:   # stale or malformed
+            why = str(exc) if isinstance(exc, ValueError) else f"bad entry ({exc!r})"
+            skipped.append(why if why.startswith(f"{gid}:") else f"{gid}: {why}")
+            continue
+        if taken & set(gate.places):
+            skipped.append(f"{gate.id}: a place is already behind another gateway")
+            continue
+        taken |= set(gate.places)
+        gates.append(gate)
     # A road end must be a real road point, not a place behind some gateway.
     behind = {row for gate in gates for row in gate.places}
     usable = []

@@ -141,6 +141,15 @@ class TestApplyDense(unittest.TestCase):
         self.assertEqual(cells["a->top1"], {"km": 15.0, "minutes": 30})   # raw matrix
         self.assertEqual(cells["a->beach"]["minutes"], 22)
 
+    def test_a_malformed_entry_is_skipped_with_its_reason(self):
+        spec = copy.deepcopy(SPEC)
+        del spec["gateways"][0]["ride_min"]
+        spec["gateways"][1]["road_end"]["via"][0]["minutes"] = "five"
+        spec["gateways"].append("not a gateway")
+        _cells, summary = _applied(spec)
+        self.assertEqual([g["id"] for g in summary["gateways"]], ["trail"])
+        self.assertEqual([why.split(":")[0] for why in summary["skipped"]], ["cable", "boat", "?"])
+
     def test_a_road_end_or_place_behind_another_gateway_is_refused(self):
         spec = copy.deepcopy(SPEC)
         spec["gateways"][2]["road_end"] = {"poi_id": "top1"}
