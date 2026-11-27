@@ -1,0 +1,331 @@
+{
+ "format": "transfers-v1",
+ "snapshot": "danang-v2",
+ "built_at": "2026-11-27",
+ "about": "Chặng không đi bằng xe máy. OSRM gắn mỗi ghim vào con đường xe máy gần nhất; với các nơi dưới đây con đường đó sai (đảo bị gắn vào đất liền, đỉnh Bà Nà gắn vào đường công vụ). Mỗi cửa ngõ: một đầu đường bộ (hàng có sẵn trong matrix.json) + một chặng cố định (cano, cáp treo, đi bộ) tính cả hai chiều. Áp lúc nạp ma trận (BE/app/services/transfers.py); matrix.json không đổi. Giữa hai nơi sau cùng một cửa ngõ có `inside: walk`: đi bộ theo đường chim bay x hệ số vòng.",
+ "walk": {
+  "kmh": 4.0,
+  "detour": 1.3,
+  "basis": "thiết kế: đi bộ 4 km/h; đường đi bộ dài hơn đường chim bay 1,3 lần"
+ },
+ "not_modelled": [
+  "Lịch tàu Cù Lao Chàm theo giờ cố định, và mùa biển động: ngoài tháng 3-8 phần lớn tàu du lịch không chạy (VnExpress 14/7/2026).",
+  "Giờ cáp treo Bà Nà: mở 08:00, vé ngày lên lần cuối 16:30-17:00 (Vietnam Booking 2026).",
+  "Thời gian xếp hàng giờ cao điểm (vài phút tới vài chục phút, Sun Paradise Land 07/08/2026)."
+ ],
+ "gateways": [
+  {
+   "id": "ba_na_cable_car",
+   "name": "Cáp treo Bà Nà (ga chân núi - đỉnh)",
+   "mode": "cable_car",
+   "road_end": {
+    "poi_id": "ChIJyUQ4aw72QTERCXl5YV-4U1w",
+    "name": "Sun World Bà Nà Hills",
+    "note": "ghim Google của Sun World nằm ở khu ga cáp treo chân núi: cách ga tuyến Hội An - Marseille 170 m, ga Suối Mơ 308 m (OSM)"
+   },
+   "ride_min": 20,
+   "board_min": 10,
+   "km": 5.3,
+   "basis": "ride: mỗi lượt chân núi - đỉnh 15-20 phút, lấy 20. board: từ cổng vào tới ga thêm 10-20 phút (soát vé, đi bộ), lấy 10. km: trung vị 4 tuyến lên đỉnh trên OSM (4,84 / 5,08 / 5,56 / 5,65 km).",
+   "inside": "walk",
+   "places": [
+    {
+     "poi_id": "osm:node/4122433690",
+     "name": "Núi Bà Nà",
+     "status": "excluded",
+     "lat": 15.9982174,
+     "lon": 107.9856335
+    },
+    {
+     "poi_id": "osm:node/10154412164",
+     "name": "Fantasy Park",
+     "status": "active",
+     "lat": 15.9968339,
+     "lon": 107.9888036
+    },
+    {
+     "poi_id": "osm:node/11427582964",
+     "name": "Thai Market",
+     "status": "active",
+     "lat": 15.9963119,
+     "lon": 107.9889349
+    },
+    {
+     "poi_id": "osm:node/13687068650",
+     "name": "Linh Phong Bảo Tháp",
+     "status": "active",
+     "lat": 15.9980969,
+     "lon": 107.985969
+    },
+    {
+     "poi_id": "ChIJCRy3iv_2QTERfZxGJkIMHHQ",
+     "name": "Chùa Linh Ứng - Bà Nà",
+     "status": "active",
+     "lat": 15.9971357,
+     "lon": 107.99404419999999
+    },
+    {
+     "poi_id": "ChIJyWFmArX3QTERon6tUT6re4Q",
+     "name": "Ba Na Hills",
+     "status": "excluded",
+     "lat": 15.9951364,
+     "lon": 107.9961392
+    },
+    {
+     "poi_id": "ChIJH38kxPn2QTERee_Ccs86ccE",
+     "name": "Đỉnh Bà Nà",
+     "status": "active",
+     "lat": 16.0014815,
+     "lon": 107.99763
+    },
+    {
+     "poi_id": "osm:way/683416736",
+     "name": "Cầu Vàng",
+     "status": "active",
+     "lat": 15.994924,
+     "lon": 107.99623
+    },
+    {
+     "poi_id": "osm:way/1109970009",
+     "name": "Nhà thờ Saint Denis",
+     "status": "active",
+     "lat": 15.997358,
+     "lon": 107.987799
+    },
+    {
+     "poi_id": "osm:node/10154412491",
+     "name": "Kungfu Noodle",
+     "status": "active",
+     "lat": 15.99752,
+     "lon": 107.987641
+    },
+    {
+     "poi_id": "osm:node/11422706022",
+     "name": "El Fresco",
+     "status": "active",
+     "lat": 15.997386,
+     "lon": 107.988034
+    },
+    {
+     "poi_id": "osm:node/11423808688",
+     "name": "Le Table",
+     "status": "active",
+     "lat": 15.996871,
+     "lon": 107.987956
+    },
+    {
+     "poi_id": "osm:node/12959087697",
+     "name": "Rosa",
+     "status": "active",
+     "lat": 15.997639,
+     "lon": 107.988205
+    },
+    {
+     "poi_id": "osm:node/14337631970",
+     "name": "Nhà Hàng Chay Ngọc Chi",
+     "status": "active",
+     "lat": 15.996254,
+     "lon": 107.994888
+    },
+    {
+     "poi_id": "osm:node/14337971573",
+     "name": "Bharata",
+     "status": "active",
+     "lat": 15.99625,
+     "lon": 107.989113
+    },
+    {
+     "poi_id": "osm:node/11422697875",
+     "name": "La Crique",
+     "status": "active",
+     "lat": 15.997782,
+     "lon": 107.987667
+    },
+    {
+     "poi_id": "osm:node/11423812931",
+     "name": "Lotteria",
+     "status": "active",
+     "lat": 15.997541,
+     "lon": 107.987376
+    },
+    {
+     "poi_id": "osm:node/11423819121",
+     "name": "Brasserie",
+     "status": "active",
+     "lat": 15.997375,
+     "lon": 107.987475
+    },
+    {
+     "poi_id": "osm:node/13587488508",
+     "name": "Nhà hàng Four Seasons (Bà Nà)",
+     "status": "active",
+     "lat": 15.995429,
+     "lon": 107.990003
+    },
+    {
+     "poi_id": "osm:node/14337971575",
+     "name": "Arapang",
+     "status": "active",
+     "lat": 15.996035,
+     "lon": 107.988349
+    },
+    {
+     "poi_id": "osm:way/1109970036",
+     "name": "Beer Plaza",
+     "status": "active",
+     "lat": 15.998338,
+     "lon": 107.987743
+    },
+    {
+     "poi_id": "osm:node/14337971574",
+     "name": "Highlands Coffee (Bà Nà)",
+     "status": "active",
+     "lat": 15.995903,
+     "lon": 107.989443
+    },
+    {
+     "poi_id": "osm:node/11423769989",
+     "name": "Postal Cafe",
+     "status": "active",
+     "lat": 15.997668,
+     "lon": 107.987759
+    },
+    {
+     "poi_id": "osm:node/14337980312",
+     "name": "Soul Cafe",
+     "status": "active",
+     "lat": 15.996629,
+     "lon": 107.988328
+    },
+    {
+     "poi_id": "ChIJqXp39lv2QTERR9U4pFNMD2o",
+     "name": "Mercure Danang French Village Bana Hills",
+     "status": "active",
+     "lat": 15.997428,
+     "lon": 107.988292
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://www.vietnambooking.com/du-lich/blog-du-lich/cap-treo-ba-na-hills.html",
+     "date": "2026-08-10",
+     "says": "mỗi lượt từ chân núi lên đỉnh khoảng 15-20 phút; mở 08:00, vé ngày lên lần cuối 16:30-17:00"
+    },
+    {
+     "url": "https://sunparadiseland.com/SunParadiseLandDaNang/tin-tuc/review-di-ba-na-hills-mat-bao-lau-khi-du-lich-da-nang-thuc-te-nhat-23901",
+     "date": "2026-08-07",
+     "says": "mỗi lượt cáp 15-20 phút; từ cổng tới ga thêm 10-20 phút (soát vé, đi bộ)"
+    },
+    {
+     "url": "https://hoiandaytrip.com/golden-hands-bridge-cable-car/",
+     "says": "tuyến Hội An - Marseille 5.261 m, 15-20 phút tuỳ thời tiết; Bordeaux - Louvre 672 m, 5 phút"
+    },
+    {
+     "url": "https://www.openstreetmap.org/way/683416738",
+     "says": "OSM: 4 tuyến gondola từ chân núi lên đỉnh (way 60807667, 683416738, 683416739, 1107381521); ga Suối Mơ way 359114074"
+    }
+   ]
+  },
+  {
+   "id": "cu_lao_cham_boat",
+   "name": "Cano Cửa Đại - Cù Lao Chàm",
+   "mode": "boat",
+   "road_end": {
+    "name": "Bến Cửa Đại",
+    "lat": 15.8784005,
+    "lon": 108.3876726,
+    "osm": "node/133589858",
+    "note": "không có POI nào ở bến: đi qua điểm gần nhất nối đường bộ thẳng tới bến",
+    "via": [
+     {
+      "poi_id": "osm:node/7094679785",
+      "name": "Mate Restaurant and Coffee Hoi An",
+      "minutes": 5,
+      "km": 2.1,
+      "basis": "đường xe máy ngắn nhất trên OSM (bản 24/11/2026) từ bến tới quán: 2,08 km; 27,5 km/h = trung vị tốc độ của ma trận cho chặng 1,5-2,5 km. Các quán thuyền thúng Bảy Mẫu gần hơn theo đường chim bay (1,3 km) nhưng bên kia sông: 6,5-7,5 km đường bộ."
+     }
+    ]
+   },
+   "ride_min": 20,
+   "board_min": 10,
+   "km": 16.5,
+   "basis": "ride: cano 15-20 phút, lấy 20. board: thiết kế (mua vé, áo phao, lên tàu; nguồn không ghi), lấy mức thấp 10 phút như ở cáp treo Bà Nà. km: tuyến phà trên OSM 15,90 + 0,55 km (nguồn báo đảo cách bờ Cửa Đại 18 km).",
+   "places": [
+    {
+     "poi_id": "manual:cu-lao-cham",
+     "name": "Cù Lao Chàm",
+     "status": "active",
+     "lat": 15.9508587,
+     "lon": 108.5227203
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://vnexpress.net/cam-nang-du-lich-cu-lao-cham-4751193.html",
+     "date": "2026-07-14",
+     "says": "cano khoảng 15-20 phút; đảo cách bờ biển Cửa Đại 18 km; tàu gỗ (1,5 giờ) nay chỉ chở hàng và người dân; tháng 3-8 là mùa đẹp, các tháng khác phần lớn tàu du lịch không chạy"
+    },
+    {
+     "url": "https://www.openstreetmap.org/node/133589858",
+     "says": "OSM: bến Cửa Đại (amenity=ferry_terminal); tuyến phà way 1581749899 + 1581749801 tới bến đảo node 7057143273"
+    }
+   ]
+  },
+  {
+   "id": "bai_sung_co_trail",
+   "name": "Đường mòn xuống Bãi Sủng Cỏ",
+   "mode": "walk",
+   "road_end": {
+    "own_row": true,
+    "note": "hàng của bãi trong ma trận là điểm OSRM gắn vào đường xe máy gần nhất (cách ghim 1,26 km)"
+   },
+   "ride_min": 25,
+   "board_min": 0,
+   "km": 1.67,
+   "basis": "đường đi bộ ngắn nhất trên OSM (bản 24/11/2026, track + path) từ ghim tới đường xe máy: 1,67 km (379 m ngoài đường mòn + 1,29 km đường mòn); 4 km/h -> 25 phút",
+   "places": [
+    {
+     "poi_id": "ChIJVVmn6uMjQjERwv0F2ZV9pJw",
+     "name": "Bãi Sủng Cỏ",
+     "status": "active",
+     "lat": 16.1904352,
+     "lon": 108.1556301
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://www.openstreetmap.org/?mlat=16.190435&mlon=108.15563#map=16/16.190435/108.15563",
+     "says": "OSM: chỉ có track/path xuống bãi; đường xe máy gần nhất cách 1,26 km (reports/p0/coord_check.csv)"
+    }
+   ]
+  },
+  {
+   "id": "bai_cat_vang_steps",
+   "name": "Lối bộ và bậc thang xuống Bãi Cát Vàng",
+   "mode": "walk",
+   "road_end": {
+    "own_row": true,
+    "note": "hàng của bãi trong ma trận là điểm OSRM gắn vào đường xe máy gần nhất (cách ghim 401 m)"
+   },
+   "ride_min": 9,
+   "board_min": 0,
+   "km": 0.58,
+   "basis": "đường đi bộ ngắn nhất trên OSM (bản 24/11/2026, path + steps + footway) từ ghim tới đường xe máy: 0,58 km; 4 km/h -> 9 phút",
+   "places": [
+    {
+     "poi_id": "ChIJqaaYAdIiQjERGuZHElpvurA",
+     "name": "Bãi Cát Vàng",
+     "status": "active",
+     "lat": 16.1425136,
+     "lon": 108.23197789999999
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://www.openstreetmap.org/?mlat=16.142514&mlon=108.231978#map=17/16.142514/108.231978",
+     "says": "OSM: lối bộ + bậc thang xuống bãi; đường xe máy gần nhất cách 401 m (reports/p0/coord_check.csv)"
+    }
+   ]
+  }
+ ]
+}

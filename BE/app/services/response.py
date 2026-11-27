@@ -36,9 +36,12 @@ def plan_totals(acts: list[dict], trip: dict, pois: dict, matrix: dict) -> dict:
     for a, b in _legs(acts, trip.get("origin_id")):
         cell = (matrix.get(f"{a}->{b}", {}) or {})
         km, minutes = float(cell.get("km", 0.0)), int(cell.get("minutes", 0))
-        segments.append({"from_id": a, "to_id": b,
-                         "mode": "motorbike", "km": km, "minutes": minutes,
-                         "source": "cache"})
+        segment = {"from_id": a, "to_id": b,
+                   "mode": cell.get("mode", "motorbike"), "km": km, "minutes": minutes,
+                   "source": "cache"}
+        if cell.get("transfers"):   # boat / cable car / walk legs (services/transfers.py)
+            segment["transfers"] = cell["transfers"]
+        segments.append(segment)
         total_km += km
         travel_min += minutes
     visit_min = sum(to_min(a["end"]) - to_min(a["start"]) for a in acts)
