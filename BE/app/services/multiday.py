@@ -11,6 +11,9 @@ candidate cap for a single day.
 - must_visit: spread evenly over the days, because a day holds one POI per
   category; if that fails, all on the first day.
 - Activities: a day only has to meet the wishes the days before it did not.
+- Tickets: a ticket bought on one day (Sun World, for a summit stop) is not bought
+  again on a later day (`paid_access`); a transfer fare (the cano) is paid every day
+  it is used.
 
 A one-day trip goes straight to the solver and its plan is untouched. A longer
 one is one plan: `activities` and `segments` carry `day`, `days` holds the summary
@@ -20,7 +23,8 @@ per day, and the totals and gate verdict cover the whole trip.
 from __future__ import annotations
 
 from BE.app.services import profiles
-from BE.common import BAND_FEE_VND, effective_fee, iso_date, party_size
+from BE.common import (
+    BAND_FEE_VND, PAID_ACCESS, fee_breakdown, iso_date, paid_access, paid_after, party_size)
 
 DAY_FIELDS = ("total_cost", "total_km", "total_min", "travel_min")
 DAY_FLOOR_PER_PERSON = 2 * BAND_FEE_VND["cheap"]  # lunch and dinner at the cheapest band
@@ -35,6 +39,13 @@ def _usable(plan: dict) -> bool:
     return bool(plan.get("activities")) and bool(plan.get("passed"))
 
 
+def paid_by(plan: dict) -> set[str]:
+    """What a day plan bought for the days after it: its tickets (`access_fees` per
+    trip) and its stops (a parent that is a stop is its own ticket)."""
+    return ({fee["key"] for fee in plan.get("access_fees") or [] if fee.get("per") == "trip"}
+            | {a["poi_id"] for a in plan.get("activities") or []})
+
+
 def _open_wishes(wishes: list[str], plan: dict) -> list[str]:
     met = {m.get("activity") for m in plan.get("activity_match") or []
            if m.get("status") == "met"}
@@ -47,6 +58,7 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
     must = list(trip.get("must_visit") or [])
     wishes = list(trip.get("activities") or [])
     used: set[str] = set()
+    paid = paid_access(trip)
     plans = []
     for index in range(days):
         left = days - index
@@ -62,6 +74,8 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
             # but an undated trip cannot (the forecast of its second day).
             day_trip = {**trip, "days": 1, "date": day_date(trip.get("date"), index),
                         "day_offset": index, "must_visit": today, "activities": wishes}
+            if paid:
+                day_trip[PAID_ACCESS] = sorted(paid)
             resume = day_trip.pop("resume", None)
             if index == 0 and resume:
                 # A replan in the middle of the first day: it starts later, from where
@@ -80,6 +94,7 @@ def _solve_days(solve, trip: dict, days: int, pack_first: bool) -> list[dict]:
             break
         ids = {a["poi_id"] for a in plan["activities"]}
         used |= ids
+        paid = paid | paid_by(plan)
         must = [m for m in must if m not in ids]
         wishes = _open_wishes(wishes, plan)
         if remaining is not None:
@@ -142,6 +157,8 @@ def merge_days(plans: list[dict], trip: dict, days: int, check) -> dict:
         })
     stops = [len(p.get("activities") or []) for p in plans]
     match = _merge_matches(plans)
+    fees = [{**fee, "day": number} for number, plan in enumerate(plans, start=1)
+            for fee in plan.get("access_fees") or []]
     merged = {**plans[0], "activities": acts, "segments": segments, "days": summary,
               "cost_estimated": any(p.get("cost_estimated") for p in plans),
               "preference": round(sum(float(p.get("preference") or 0.0) * n
@@ -151,6 +168,10 @@ def merge_days(plans: list[dict], trip: dict, days: int, check) -> dict:
     for field in DAY_FIELDS:
         merged[field] = sum(p.get(field) or 0 for p in plans)
     merged["total_km"] = round(merged["total_km"], 2)
+    if fees:
+        merged["access_fees"] = fees
+    else:
+        merged.pop("access_fees", None)
     merged["soft_penalties"] = {
         "penalty": round(sum((p.get("soft_penalties") or {}).get("penalty") or 0.0 for p in plans), 4),
         "issues": [issue for p in plans for issue in (p.get("soft_penalties") or {}).get("issues") or []]}
@@ -219,11 +240,15 @@ def active_day(acts: list[dict], done: set[str]) -> int:
 
 def day_scope(trip: dict, others: list[dict], today: list[dict], pois: dict) -> dict:
     """The trip one day of a replan works on: what the other days cost is gone
-    from the budget, and only this day's must_visit bind."""
+    from the budget, the tickets they bought are paid, and only this day's
+    must_visit bind."""
     scope = {**trip, "days": 1}
+    paid = paid_access(trip)
     if trip.get("budget") is not None:
-        spent = sum(effective_fee(pois.get(a["poi_id"]) or {}) or 0 for a in others)
+        spent = fee_breakdown(others, pois, paid)[0]
         scope["budget"] = max(0, int(trip["budget"]) - spent * party_size(trip))
+    if others:
+        scope[PAID_ACCESS] = sorted(paid_after(others, pois, paid))
     ids = {a["poi_id"] for a in today}
     scope["must_visit"] = [m for m in trip.get("must_visit") or [] if m in ids]
     return scope

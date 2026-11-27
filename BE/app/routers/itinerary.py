@@ -50,7 +50,7 @@ from BE.app.services import profile_filter
 from BE.app.services import gate as gate_svc
 from BE.app.services import multiday
 from BE.app.services import rank as rank_svc
-from BE.common import effective_fee, merged_into
+from BE.common import merged_into, visit_fee
 from BE.app.services import ranker as ranker_svc
 from BE.app.services import retrieval as retrieval_svc
 from BE.app.services import templates
@@ -508,7 +508,7 @@ def _shadow_reference(plans: list[dict], by_id: dict) -> list[dict]:
             pois.append({"poi_id": act.get("poi_id"),
                          "type": poi.get("type"),
                          "price_level": poi.get("price_level"),
-                         "fee": effective_fee(poi),
+                         "fee": visit_fee(poi),
                          "rating": poi.get("rating"),
                          "intensity": poi.get("intensity")})
         refs.append({

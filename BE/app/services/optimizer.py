@@ -51,7 +51,8 @@ from BE.app.services.soft_rules import (
     meal_slot_at,
     poi_category,
 )
-from BE.common import effective_fee, hhmm, poi_open_windows, to_min, trusted_rating
+from BE.common import (
+    access_charges, effective_fee, hhmm, paid_access, poi_open_windows, to_min, trusted_rating)
 from BE.app.services import objective as objective_mod
 
 TIMEOUT_S = 5.0
@@ -157,10 +158,32 @@ class StubPOI:
     inside: str = ""          # the whole-area stop this one sits inside
     substitute: str = ""      # "day_market": a second one in the day costs
     dish: str = ""            # a restaurant's dish (mì Quảng twice costs)
+    # What reaching it costs besides `fee`, VND per person, each charge paid once a day
+    # whoever needs it (BE.common.access_fees): ((key, vnd), ...). A key that is a stop's
+    # poi_id is that stop's ticket: Cầu Vàng's Sun World ticket is not paid again when
+    # the Sun World stop is in the day.
+    access: tuple[tuple[str, int], ...] = ()
 
 
 def _windows(poi: StubPOI) -> tuple[tuple[int, int], ...]:
     return poi.windows or ((poi.open_min, poi.close_min),)
+
+
+def alone_fee(poi: StubPOI) -> int:
+    """VND per person this stop costs when nothing else in the day shares its charges."""
+    return poi.fee + sum(vnd for _key, vnd in poi.access)
+
+
+def stubs_fee(stops) -> int:
+    """VND per person of these stops: their fees and each access charge once, none for a
+    charge whose key is one of the stops (the max_fee constraint, `BE.common.fee_breakdown`)."""
+    ids = {stop.poi_id for stop in stops}
+    extra: dict[str, int] = {}
+    for stop in stops:
+        for key, vnd in stop.access:
+            if key not in ids:
+                extra.setdefault(key, int(vnd))
+    return sum(stop.fee for stop in stops) + sum(extra.values())
 
 
 @dataclass
@@ -243,7 +266,13 @@ def poi_to_stub(poi: dict, trip: dict | None = None, score: float = 1.0,
                    windows=tuple(wins) if len(wins) > 1 else (),
                    fee=effective_fee(poi) or 0, visit_max=poi_visit_max(poi),
                    booking=(poi.get("hours") or {}).get("kind") == "by_booking",
+                   access=stub_access(poi, paid_access(trip)),
                    **objective_mod.stub_keys(poi, parent))
+
+
+def stub_access(poi: dict, paid=()) -> tuple[tuple[str, int], ...]:
+    """`StubPOI.access` of a POI: its access charges the trip has not paid yet."""
+    return tuple((c["key"], int(c["vnd"])) for c in access_charges(poi, paid))
 
 
 def stubs_from_pois(pois: list[dict], trip: dict | None = None,
@@ -358,7 +387,7 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     node_of = {poi.poi_id: i for i, poi in enumerate(pois, 1)}
     must_left = {node_of[pid] for pid in must_set if pid in node_of}
     restaurants = {i for i, poi in enumerate(pois, 1) if poi.restaurant}
-    cheapest_meal = min((pois[i - 1].fee for i in restaurants), default=0)
+    cheapest_meal = min((alone_fee(pois[i - 1]) for i in restaurants), default=0)
     groups = []
     for req in required_any or []:
         named = req.get("poi_ids")
@@ -380,6 +409,19 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
     previous_food = False
     clock = trip.start_min
     spent = 0
+    # Access charges already in `spent`, and the stops seated (a parent seated is its
+    # own ticket): what a further stop's charges cost the seed (`_charges`).
+    bought: set[str] = set()
+
+    def _charges(nodes, covered: set[str]) -> int:
+        """VND the access charges of these nodes add, each once, beside `covered`."""
+        covered = covered | {pois[j - 1].poi_id for j in nodes}
+        extra: dict[str, int] = {}
+        for j in nodes:
+            for key, vnd in pois[j - 1].access:
+                if key not in covered:
+                    extra.setdefault(key, int(vnd))
+        return sum(extra.values())
 
     def _clock_after(poi: StubPOI, start: int) -> int:
         """Advance the seed clock; lunch is followed by the rest window."""
@@ -535,9 +577,10 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
                     continue
             if max_fee is not None and not mandatory:
                 meals_after = int(need_lunch) + int(need_dinner) - (1 if meal else 0)
-                held = sum(pois[j - 1].fee for j in must_left) + meals_after * cheapest_meal
-                if closer_left and not closing:
-                    held += pois[_closer - 1].fee
+                owed_nodes = list(must_left) + ([_closer] if closer_left and not closing else [])
+                held = sum(pois[j - 1].fee for j in owed_nodes) + meals_after * cheapest_meal
+                # Its tickets / cano and those of what is owed, each once.
+                held += _charges([i, *owed_nodes], bought)
                 if spent + poi.fee + held > int(max_fee):
                     continue
             floor = max(clock, (meal or span or (clock,))[0])
@@ -600,7 +643,9 @@ def _greedy_hint(pois: list[StubPOI], travel: dict[tuple[str, str], int],
         _key, i, start, slot = best
         poi = pois[i - 1]
         hint.append((i, start))
-        spent += poi.fee
+        spent += poi.fee + _charges([i], bought)
+        bought.update(key for key, _vnd in poi.access)
+        bought.add(poi.poi_id)
         placed.add(i)
         dup_keys.update(_dup_keys(poi))
         must_left.discard(i)
@@ -686,7 +731,7 @@ def _closers(pois: list[StubPOI], late_end: int, trip: StubTrip, avoid: set[str]
                 or poi.poi_id in must_set or poi.poi_id in ordered):
             continue
         span = _late_span(poi, late_end, trip)
-        if span is None or (max_fee is not None and poi.fee + meals_fee > int(max_fee)):
+        if span is None or (max_fee is not None and alone_fee(poi) + meals_fee > int(max_fee)):
             continue
         rows.append((-(poi.score - band_cost(poi, span[0])), poi.poi_id, i))
     return [i for _value, _pid, i in sorted(rows)]
@@ -1141,7 +1186,22 @@ def optimize(pois: list[StubPOI], travel: dict[tuple[str, str], int],
             m.Add(sum(picks) == visit[i])
         m.Add(t[i] + dur[i] <= tmax).OnlyEnforceIf(visit[i])
     if max_fee is not None:
-        m.Add(sum(pois[i - 1].fee * visit[i] for i in range(1, n + 1)) <= int(max_fee))
+        spend = [pois[i - 1].fee * visit[i] for i in range(1, n + 1)]
+        # What reaching a stop costs, once a day (BE.common.fee_breakdown): Cầu Vàng buys
+        # the Sun World ticket unless the Sun World stop is in the day; Cù Lao Chàm the cano.
+        needs: dict[str, list[int]] = {}
+        amount: dict[str, int] = {}
+        for i in range(1, n + 1):
+            for key, vnd in pois[i - 1].access:
+                needs.setdefault(key, []).append(i)
+                amount.setdefault(key, int(vnd))
+        for k, key in enumerate(sorted(needs)):
+            pay = m.NewBoolVar(f"pay_{k}")
+            covered = [visit[node[key]]] if key in node else []
+            for i in needs[key]:
+                m.AddBoolOr([visit[i].Not(), pay, *covered])   # visit and not covered -> pay
+            spend.append(amount[key] * pay)
+        m.Add(sum(spend) <= int(max_fee))
 
     # gate A1 (HARD): at most one restaurant per meal slot. The gate reads the
     # activity START, so membership is a function of t[i].

@@ -21,7 +21,7 @@ from BE.app.services import scorer
 from BE.app.services import state as store
 from BE.app.services.gate import check_profile_safe
 from BE.app.services.optimizer import (
-    StubPOI, StubTrip, optimize, poi_visit_min)
+    StubPOI, StubTrip, alone_fee, optimize, poi_visit_min, stub_access)
 from BE.app.services.profiles import _gate_view
 from BE.app.services.soft_rules import (
     CATEGORY_DAILY_CAP, MEAL_SLOTS, cafe_cap, solver_taste_args, clip_to_time_fit, lunch_activity, poi_category,
@@ -29,7 +29,8 @@ from BE.app.services.soft_rules import (
 from BE.app.services.templates import universal_constraints
 from BE.app.services.validator import validate
 from BE.common import (
-    deadline, effective_fee, party_size, poi_open_windows, to_min, total_fee, trusted_rating)
+    deadline, effective_fee, paid_access, paid_after, party_size, poi_open_windows, to_min,
+    total_fee, trusted_rating, visit_fee)
 
 
 # Lunch has to start by then (gate REST_FOLLOWS_LUNCH).
@@ -97,7 +98,10 @@ def replan(state: dict, event: dict, pois: list[dict],
     # already be behind us. What is done is paid, so only the rest is budgeted.
     done = list(state.get("completed", []))
     party = party_size(trip)
-    done_cost = total_fee(done, by_id, party)
+    paid = paid_access(trip)
+    done_cost = total_fee(done, by_id, party, paid)
+    # What is done bought its tickets and its cano for the rest of the day.
+    paid_today = paid_after(done, by_id, paid, same_day=True)
     allowed = None if trip.get("budget") is None else max(0, int(trip["budget"]) - done_cost)
     if budget_state is not None:  # what is really left; overspent means nothing is
         allowed = max(0, int(budget_state.get("left", 0)))
@@ -127,7 +131,7 @@ def replan(state: dict, event: dict, pois: list[dict],
         dry = sorted((p for p in pois
                       if p["poi_id"] not in taken and p.get("verified")
                       and poi_category(p) == "restaurant" and not p.get("weather_sensitive")
-                      and (max_fee is None or (effective_fee(p) or 0) <= max_fee)),
+                      and (max_fee is None or (visit_fee(p, paid_today) or 0) <= max_fee)),
                      key=lambda p: -trusted_rating(p))
         substitutes = [p["poi_id"] for p in dry[:LUNCH_SUBSTITUTES]]
         if not substitutes:
@@ -150,7 +154,7 @@ def replan(state: dict, event: dict, pois: list[dict],
     named = set(trip.get("must_visit", []))
     stub = [_stub(by_id[pid], trip, state,
                   trusted_rating(by_id[pid]) / 5 if pid in substitutes else 1.0,
-                  named=pid in named, lunch_done=lunch_done, pois_by_id=by_id)
+                  named=pid in named, lunch_done=lunch_done, pois_by_id=by_id, paid=paid_today)
             for pid in cand_ids if pid in by_id]
     # T061a: no completed -> open tour (origin_id None) when the plan has no
     # depot cell; with completed the rolling horizon anchors on the last one.
@@ -200,7 +204,7 @@ def replan(state: dict, event: dict, pois: list[dict],
                 "changes": [], "version": state["version"]}
     acts = out["itinerary"]["activities"] if out["itinerary"] else []
     if not acts and cand_ids:
-        over_budget = max_fee is not None and any(s.fee > max_fee for s in stub)
+        over_budget = max_fee is not None and any(alone_fee(s) > max_fee for s in stub)
         return {"itinerary": None, "mode": "no_solution",
                 "reason": ("khong xep duoc remaining nao trong ngan sach con lai (BCS)"
                            if over_budget else "khong xep duoc remaining nao"),
@@ -245,10 +249,11 @@ def replan(state: dict, event: dict, pois: list[dict],
 
 
 def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
-          lunch_done: bool = False, pois_by_id: dict | None = None) -> StubPOI:
+          lunch_done: bool = False, pois_by_id: dict | None = None, paid=()) -> StubPOI:
     """A stop keeps the hours it makes sense at, as the plan did, unless the traveller
     named it. With lunch behind us a restaurant left in the day is dinner: moved up
-    next to lunch it would fail the gate and cost the whole replan."""
+    next to lunch it would fail the gate and cost the whole replan. `paid`: tickets
+    and fares what is done already bought (its `access` leaves them out)."""
     wins = poi_open_windows(p)  # real hours, else the category's safe hours
     category = poi_category(p)
     if wins and not named:
@@ -262,7 +267,7 @@ def _stub(p: dict, trip: dict, state: dict, score: float, named: bool = False,
         span = (wins[0][0], wins[-1][1]) if wins else (0, 0)
     return StubPOI(p["poi_id"], poi_visit_min(p), *span, score,
                    restaurant=category == "restaurant", category=category,
-                   fee=effective_fee(p) or 0,
+                   fee=effective_fee(p) or 0, access=stub_access(p, paid),
                    windows=tuple(wins) if wins and len(wins) > 1 else (),
                    # objective v1: the same group / zone / T11 keys as the first plan
                    **objective_mod.stub_keys(p, objective_mod.parent_of(p, pois_by_id)))

@@ -384,6 +384,34 @@ def audit_day(acts: list[dict], trip: dict, pois: dict, cells, date: str, must: 
     return flags, stats
 
 
+def transfer_fares(snapshot: str) -> dict[str, tuple[str, int]]:
+    """{poi_id: (gateway id, VND per person)} read straight off `transfers.json`
+    (`fare.vnd`): the cano a visit to Cù Lao Chàm pays, a round trip in the day."""
+    path = Path(snapshot) / "transfers.json"
+    if not path.exists():
+        return {}
+    spec = json.loads(path.read_text(encoding="utf-8"))
+    out = {}
+    for gate in spec.get("gateways") or []:
+        vnd = (gate.get("fare") or {}).get("vnd")
+        for place in gate.get("places") or [] if vnd else []:
+            out[place["poi_id"]] = (gate["id"], int(vnd))
+    return out
+
+
+def audit_fee(acts: list[dict], pois: dict, fares: dict) -> int:
+    """VND one person pays for a plan, judged on the raw fields (not the app's
+    `access_fees`): every stop's own price; the ticket of a `requires_ticket_of` parent
+    once for the trip, unless the parent is itself a stop; a gateway fare once per day
+    a place behind it is visited."""
+    stops = {a["poi_id"] for a in acts}
+    fee = sum(effective_fee(pois[a["poi_id"]]) or 0 for a in acts)
+    parents = {pois[a["poi_id"]].get("requires_ticket_of") for a in acts} - {None, ""} - stops
+    fee += sum(effective_fee(pois[pid]) or 0 for pid in parents if pid in pois)
+    rides = {(fares[a["poi_id"]], a.get("day") or 1) for a in acts if a["poi_id"] in fares}
+    return fee + sum(vnd for (_gate, vnd), _day in rides)
+
+
 def report(path: str, plans_out: str | None = None, json_out: str | None = None) -> dict:
     """Judge the saved plans; prints the summary and returns {"summary", "counts", ...}."""
     doc = json.load(open(path, encoding="utf-8"))
@@ -392,6 +420,7 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
     # v2.1 record only through BE.common.poi_view; v1 records pass through unchanged.
     pois = load_pois(snapshot, by_id=True)
     cells = load_matrix_cells(snapshot)
+    fares = transfer_fares(snapshot)
     name_to_id = {p["name"].strip().lower(): pid for pid, p in pois.items()}
 
     lines: list[str] = []
@@ -444,7 +473,6 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                     flags.append(f"ERR_DUPLICATE {pois[dup]['name']}")
             if acts and len(by_day) < days:
                 flags.append(f"ERR_MISSING_DAY {len(by_day)}/{days}")
-            total_fee = 0
             for number in sorted(by_day):
                 date = ""
                 if trip.get("date"):
@@ -458,8 +486,7 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                 flags += [f"{f} [ngay {number}]" if days > 1 else f for f in day_flags]
                 stats.update({"plan": pid, "day": number, "profile": plan.get("profile")})
                 day_stats.append(stats)
-                total_fee += sum(effective_fee(pois[a["poi_id"]]) or 0 for a in by_day[number])
-            cost = total_fee * max(1, int(trip.get("travelers") or 1))
+            cost = audit_fee(acts, pois, fares) * max(1, int(trip.get("travelers") or 1))
             if cost > int(trip.get("budget") or 0):
                 flags.append(f"ERR_BUDGET {cost} > {trip.get('budget')}")
             if acts and cost != plan.get("total_cost"):
@@ -499,6 +526,11 @@ def report(path: str, plans_out: str | None = None, json_out: str | None = None)
                              f"{poi['name'][:44]} ({poi.get('rating')}*, {poi.get('review_count')}) "
                              f"{(effective_fee(poi) or 0) // 1000}k {leg}")
                 previous = a
+            for fee in plan.get("access_fees") or []:
+                names = ", ".join(pois[pid]["name"][:24] for pid in fee.get("for") or [] if pid in pois)
+                day = f"D{fee['day']} " if fee.get("day") else ""
+                lines.append(f"     $ {day}{fee.get('name')}: {fee.get('vnd_per_person', 0) // 1000}k/nguoi "
+                             f"x {fee.get('travelers')} (cho {names})")
             for f in flags:
                 lines.append(f"     ! {f}")
             for w in plan.get("warnings") or []:

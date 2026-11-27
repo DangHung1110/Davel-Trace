@@ -28,7 +28,7 @@ plan with a note (never raises to the HTTP layer).
 from __future__ import annotations
 
 import re
-from collections import Counter
+from collections import ChainMap, Counter
 
 from BE.app.services import rank as rank_svc
 from BE.app.services import soft_rules
@@ -42,7 +42,7 @@ from BE.app.services.soft_rules import (
 )
 from BE.app.services.validator import validate
 from BE.common import (
-    effective_fee, party_size, poi_open_windows, status_map, to_min, total_fee)
+    paid_access, party_size, poi_open_windows, status_map, to_min, total_fee)
 
 MAX_ROUNDS = 2
 ACTIONABLE = ("high", "medium")
@@ -184,7 +184,8 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
     nxt = acts[index + 1]["poi_id"] if index + 1 < len(acts) else None
     budget = int(trip.get("budget", 0))
     party = party_size(trip)
-    other_fee = total_fee([a for i, a in enumerate(acts) if i != index], pois, party)
+    paid = paid_access(trip)
+    others = [a for i, a in enumerate(acts) if i != index]
     out = []
     for poi in pool:
         pid = poi.get("poi_id")
@@ -203,7 +204,9 @@ def _alternatives(target: dict, want: str | None, pool: list[dict],
             continue
         if nxt and not matrix.get(f"{pid}->{nxt}"):
             continue
-        if budget and other_fee + (effective_fee(poi) or 0) * party > budget:
+        # The plan with this stop in the target's place, its tickets and cano once.
+        swapped = [*others, {**target, "poi_id": pid}]
+        if budget and total_fee(swapped, ChainMap({pid: poi}, pois), party, paid) > budget:
             continue
         out.append({"score": rank_svc.score_poi(poi, user, ctx)["score"],
                     "poi": poi})

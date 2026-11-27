@@ -42,7 +42,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from BE.app.services.gate import CHECKS as GATE_CHECKS  # noqa: E402
-from BE.common import effective_fee, load_json, load_matrix_cells, load_pois, trusted_rating  # noqa: E402
+from BE.common import load_json, load_matrix_cells, load_pois, trusted_rating, visit_fee  # noqa: E402
 from BE.eval.gold.approach_b import chain_order, filter_pois  # noqa: E402
 from BE.eval.gold.build import coverage_summary, eligible_ids  # noqa: E402
 from BE.eval.metrics import evaluate  # noqa: E402
@@ -351,7 +351,7 @@ def run(suite_path: str = DEFAULT_SUITE, snapshot_dir: str = DEFAULT_SNAPSHOT,
         preserved_all = preserved_all and probe["preserved"]
     recovery = {"probed": probed, "ok": ok, "preserved_all": preserved_all}
 
-    zero_fee = all(not effective_fee(by_id[pid]) for pid in eligible)
+    zero_fee = all(not visit_fee(by_id[pid]) for pid in eligible)
     wishes = [m["status"] for h in hyb_plans for m in h.get("activity_match", [])]
     ratings = {by_id[pid].get("rating") for pid in eligible}
     uniform_ratings = len(ratings) == 1

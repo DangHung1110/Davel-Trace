@@ -51,7 +51,7 @@ import unicodedata
 from functools import lru_cache
 
 from BE.app.services.profile_filter import _match_terms, fold
-from BE.common import DISHES, effective_fee, load_json, party_size, to_min, view_pois
+from BE.common import DISHES, load_json, paid_access, party_size, to_min, view_pois, visit_fee
 from BE.ml.patm.estimate_duration import canonical_category
 
 # Phrase -> canonical groups. An empty list marks a phrase that only
@@ -177,7 +177,7 @@ _WISH_TIERS = {"local", "wish_only"}
 WISH_ENOUGH_MAIN = 3
 
 
-_POIS_CACHE: dict[str, tuple[tuple[int, int], list[dict]]] = {}
+_POIS_CACHE: dict[str, tuple[tuple, list[dict]]] = {}
 _POIS_LOCK = threading.Lock()
 
 
@@ -203,10 +203,17 @@ def load_pois_json(path: str) -> list[dict]:
     2 MB snapshot was re-parsed on every plan request. The list is SHARED
     between requests; nothing downstream mutates a POI (they are projected
     with `poi_on_date` / `_gate_view`), so callers must keep it that way.
+    The `transfers.json` next to it is part of the version: its fares are on the
+    views (`access_fees`).
     """
     path = os.path.abspath(path)
     stat = os.stat(path)
-    key = (stat.st_mtime_ns, stat.st_size)
+    try:
+        side = os.stat(os.path.join(os.path.dirname(path), "transfers.json"))
+        side_key = (side.st_mtime_ns, side.st_size)
+    except FileNotFoundError:
+        side_key = None
+    key = (stat.st_mtime_ns, stat.st_size, side_key)
     with _POIS_LOCK:
         hit = _POIS_CACHE.get(path)
     if hit is not None and hit[0] == key:
@@ -418,8 +425,10 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
                    else {k.split("->", 1)[0] for k in cells}) if cells else None)
     candidates, needs_verification, excluded = [], [], []
 
+    paid = paid_access(trip)
+
     def within_trip(p: dict) -> bool:
-        return (effective_fee(p) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
+        return (visit_fee(p, paid) or 0) * party <= budget and _overlaps(p.get("opening_hours", []), ws, we)
 
     # The local tier opens for a wish the chosen zones cannot serve with main POIs.
     usable_main = [p for p in pois if p.get("verified") and p.get("plan_tier") == "main"
@@ -478,7 +487,9 @@ def retrieve(trip: dict, pois: list[dict], cells: dict | None = None) -> dict:
         if tier in _WISH_TIERS and not any(poi_fits_wish(p, a) for a in opened_by):
             excluded.append({"poi_id": pid, "reason": "chi xep khi duoc yeu cau"})
             continue
-        if (effective_fee(p) or 0) * party > budget:
+        # What the visit costs on its own: a summit stop of Bà Nà buys the Sun World
+        # ticket, Cù Lao Chàm the cano (BE.common.visit_fee).
+        if (visit_fee(p, paid) or 0) * party > budget:
             excluded.append({"poi_id": pid, "reason": "vuot ngan sach"})
             continue
         if not _overlaps(p.get("opening_hours", []), ws, we):
